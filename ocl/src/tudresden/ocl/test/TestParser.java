@@ -194,13 +194,19 @@ public class TestParser extends TestCase {
       ),
       new tudresden.ocl.check.types.testfacade.TestModelFacade()
     ) );
+    String[] reflectpackages=new String[1];
+    reflectpackages[0]="tudresden.ocl.test.royloy";
     suite.addTest( new TestParser(
       "testFromFile",
       getTestFileFromProperty(
         "tudresden.ocl.reflectionExpressionFile",
         "reflectoclexpressions"
       ),
-      new tudresden.ocl.check.types.testfacade.TestModelFacade()
+      new tudresden.ocl.check.types.ReflectionFacade(
+        reflectpackages,
+        new tudresden.ocl.check.types.DefaultReflectionAdapter(),
+        new tudresden.ocl.lib.ArgoNameAdapter()
+      )
     ) );
     suite.addTest( new TestParser(
       "testFromFile",

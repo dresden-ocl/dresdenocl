@@ -162,4 +162,27 @@ public class ReflectionFacade implements ModelFacade {
     return ret;
   }
 
+  public String toString()
+  {
+    StringBuffer buf=new StringBuffer();
+    buf.append(getClass().getName());
+    buf.append('(');
+    buf.append('[');
+    for(int i=0; i<packageNames.length; i++)
+    {
+      if(i>0) 
+        buf.append(',');
+      buf.append(packageNames[i]);
+    }
+    buf.append(']');
+    buf.append(',');
+    buf.append(reflAdapter.toString());
+    buf.append(',');
+    buf.append(nameAdapter.toString());
+    buf.append(',');
+    buf.append(extender);
+    buf.append(')');
+    return buf.toString();
+  }
+
 }

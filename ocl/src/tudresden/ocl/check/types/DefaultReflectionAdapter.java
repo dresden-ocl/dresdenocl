@@ -57,4 +57,10 @@ public class DefaultReflectionAdapter implements ReflectionAdapter {
     }
     return null;
   }
+
+  public String toString()
+  {
+    return getClass().getName();
+  }
+
 }

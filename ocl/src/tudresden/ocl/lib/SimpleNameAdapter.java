@@ -35,4 +35,9 @@ public class SimpleNameAdapter implements NameAdapter
     return result;
   }
   
+  public String toString()
+  {
+    return getClass().getName();
+  }
+
 }

@@ -72,5 +72,10 @@ public class ArgoNameAdapter implements NameAdapter {
     return ret;
   }
 
+  public String toString()
+  {
+    return getClass().getName();
+  }
+
 } /* end class ArgoNameAdapter */
 

@@ -12,6 +12,8 @@ public class LoyaltyProgram extends RLObject {
 
     public Vector  myMembership=new Vector();
 
+  public HashSet partners=new HashSet();
+
   public void enroll(Customer c) {
   }
 
