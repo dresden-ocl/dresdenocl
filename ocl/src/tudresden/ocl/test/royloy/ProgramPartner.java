@@ -10,7 +10,10 @@ public class ProgramPartner extends RLObject {
 
     public Vector  myLoyaltyProgram=new Vector();
 
-    public Vector  deliveredServices=new Vector();
+  /**
+     @element-type Service
+  */
+  public Vector  deliveredServices=new Vector();
 
   // Operations
   public boolean assert() {

@@ -1,5 +1,5 @@
 System property tudresden.ocl.expressionFile not specified, using default (file:/home/wiera/oclcvs/src/tudresden/ocl/test/oclexpressions)
-System property tudresden.ocl.reflectionExpressionFile not specified, using default (file:/home/wiera/oclcvs/src/tudresden/ocl/test/reflectoclexpressions)
+System property tudresden.ocl.reflectionExpressionFile not specified, using default (file:/home/wiera/oclcvs/src/tudresden/ocl/test/oclexpressions.argo)
 System property tudresden.ocl.expressionFile not specified, using default (file:/home/wiera/oclcvs/src/tudresden/ocl/test/oclexpressions.xmi)
 creating royloy test model (tudresden.ocl.check.types.xmifacade.Royloy)
 classifier Account --> royloy::Account
@@ -512,7 +512,15 @@ classifier royloy::Service --> royloy::Service
 classifier royloy::ServiceLevel --> royloy::ServiceLevel
 classifier royloy::Transaction --> royloy::Transaction
 starting testFromFile, using tudresden.ocl.check.types.testfacade.TestModelFacade
-starting testFromFile, using tudresden.ocl.check.types.ReflectionFacade([tudresden.ocl.test.royloy],tudresden.ocl.check.types.DefaultReflectionAdapter,tudresden.ocl.lib.ArgoNameAdapter,null)
+starting testFromFile, using tudresden.ocl.check.types.ReflectionFacade([tudresden.ocl.test.royloy],tudresden.ocl.check.types.DefaultReflectionAdapter,tudresden.ocl.lib.ArgoNameAdapter,tudresden.ocl.injection.SourceReflectionExtender)
+dirty hack in reflectionfacade: royloy :: Person
+dirty hack in reflectionfacade: Person
+dirty hack in reflectionfacade: royloy :: Person
+dirty hack in reflectionfacade: Person
+dirty hack in reflectionfacade: royloy :: Person
+dirty hack in reflectionfacade: Person
+dirty hack in reflectionfacade: royloy :: Person
+dirty hack in reflectionfacade: Person
 starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(BUILT-IN_ROYLOY_TEST)
 starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(/home/wiera/oclcvs/src/tudresden/ocl/test/xmi/argo07/royloy.xmi)
 starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(/home/wiera/oclcvs/src/tudresden/ocl/test/xmi/rose/royloy.xml)

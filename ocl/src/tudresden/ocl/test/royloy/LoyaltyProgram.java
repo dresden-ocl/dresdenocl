@@ -6,7 +6,10 @@ import tudresden.ocl.lib.*;
 
 public class LoyaltyProgram extends RLObject {
 
-    public Vector  myCustomer=new Vector();
+  /**
+     @element-type Customer
+  */
+  public Vector  myCustomer=new Vector();
 
     public Vector  myServiceLevel=new Vector();
 

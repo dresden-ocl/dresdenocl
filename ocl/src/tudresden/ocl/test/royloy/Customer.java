@@ -18,7 +18,10 @@ public class Customer extends RLObject {
 
     public Vector  program=new Vector();
 
-    public Vector  cards=new Vector();
+  /**
+     @element-type CustomerCard
+  */
+  public Vector  cards=new Vector();
 
     public Vector  myMembership=new Vector();
 

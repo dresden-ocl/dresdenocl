@@ -200,12 +200,13 @@ public class TestParser extends TestCase {
       "testFromFile",
       getTestFileFromProperty(
         "tudresden.ocl.reflectionExpressionFile",
-        "reflectoclexpressions"
+        "oclexpressions.argo"
       ),
       new tudresden.ocl.check.types.ReflectionFacade(
         reflectpackages,
         new tudresden.ocl.check.types.DefaultReflectionAdapter(),
-        new tudresden.ocl.lib.ArgoNameAdapter()
+        new tudresden.ocl.lib.ArgoNameAdapter(),
+        new tudresden.ocl.injection.SourceReflectionExtender()
       )
     ) );
     suite.addTest( new TestParser(

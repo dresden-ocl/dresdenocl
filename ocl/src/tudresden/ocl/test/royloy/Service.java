@@ -25,10 +25,11 @@ public class Service extends RLObject {
  *
  */
     public ServiceLevel myServiceLevel;
+
   /**
- *
- */
-    public Vector  transactions=new Vector();
+     @element-type Transaction
+  */
+  public Vector  transactions=new Vector();
 
   // Operations
   public boolean assert() {

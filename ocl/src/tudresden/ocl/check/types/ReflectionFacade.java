@@ -124,6 +124,13 @@ public class ReflectionFacade implements ModelFacade {
 
   public Any getClassifier(String name) {
     ClassAny ret=null;
+    int doublecolonindex=name.indexOf("::");
+    if(doublecolonindex>=0)
+    {
+      System.out.println("dirty hack in reflectionfacade: "+name);
+      name=name.substring(doublecolonindex+2, name.length()).trim();
+      System.out.println("dirty hack in reflectionfacade: "+name);
+    }
     for (int i=0; i<packageNames.length && ret==null; i++) {
       try {
         String className;

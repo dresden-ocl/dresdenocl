@@ -83,6 +83,11 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 
     return (Class)elementtypes.get(field);
   }
+
+  public String toString()
+  {
+    return getClass().getName();
+  }
   
   public static String extractClassName(String fullclassname)
   {
