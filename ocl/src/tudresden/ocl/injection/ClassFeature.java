@@ -175,6 +175,16 @@ public class ClassFeature
     
   public static final String OCL_AUTHOR="ocl injector";
 
+  public final void writeWrapperInvariant(Writer o) throws IOException
+  {
+    if(!java.lang.reflect.Modifier.isStatic(modifiers))
+    {
+      o.write("    ");
+      o.write(Injector.INV_METHOD);
+      o.write("();\n");
+    }
+  }
+
   public final void writeWrapper(Writer o, Hashtable codefragments) throws IOException
   {
     o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n      @author ");
@@ -224,9 +234,7 @@ public class ClassFeature
     o.write("\n  {\n");
     if(!isConstructor())
     {
-      o.write("    ");
-      o.write(Injector.INV_METHOD);
-      o.write("();\n");
+      writeWrapperInvariant(o);
       if(codefragments!=null)
       {
         SortedFragments sf=(SortedFragments)codefragments.get(classname);
@@ -241,7 +249,9 @@ public class ClassFeature
               o.write(cf.getCode());
               o.write("      if(!");
               o.write(cf.getResultVariable());
-              o.write(".isTrue())\n        throw new RuntimeException(\"ocl precondition ");
+              o.write(".isTrue())\n        ");
+              o.write(Injector.violationMakro);
+              o.write("(\"ocl precondition ");
               o.write(cf.getName());
               o.write(" violated\");\n    }\n");
             }
@@ -279,9 +289,7 @@ public class ClassFeature
       if(i.hasNext()) o.write(", ");
     }
     o.write(");\n");
-    o.write("    ");
-    o.write(Injector.INV_METHOD);
-    o.write("();\n");
+    writeWrapperInvariant(o);
     if(codefragments!=null)
     {
       SortedFragments sf=(SortedFragments)codefragments.get(classname);
@@ -295,7 +303,9 @@ public class ClassFeature
             o.write(cf.getCode());
             o.write("      if(!");
             o.write(cf.getResultVariable());
-            o.write(".isTrue())\n        throw new RuntimeException(\"ocl postcondition ");
+            o.write(".isTrue())\n        ");
+            o.write(Injector.violationMakro);
+            o.write("(\"ocl postcondition ");
             o.write(cf.getName());
             o.write(" violated\");\n    }\n");
           }
@@ -314,7 +324,9 @@ public class ClassFeature
     o.write(name);
     o.write(".elementAt(i) instanceof ");
     o.write(element_type);
-    o.write("))\n        throw new RuntimeException();\n");
+    o.write("))\n        ");
+    o.write(Injector.violationMakro);
+    o.write("(\"element checker failed.\");\n");
   }
 
   public final void print(PrintStream o)

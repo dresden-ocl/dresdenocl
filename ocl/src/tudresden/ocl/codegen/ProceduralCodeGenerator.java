@@ -65,7 +65,7 @@ public abstract class ProceduralCodeGenerator extends DepthFirstAdapter implemen
    */
   protected StringBuffer code;
   /** Java code that is nessacary to evaluate @pre time expressions; will
-   *  often be <code>null</code> (iff the OCL expression contains no @pre)
+   *  often be <code>null</code> (if the OCL expression contains no @pre)
    */
   protected StringBuffer preCode;
   boolean writeToPreCode=true;
@@ -121,8 +121,6 @@ public abstract class ProceduralCodeGenerator extends DepthFirstAdapter implemen
       while (iter.hasNext()) {
         String key=(String) iter.next();
         String val=(String) preVarTypes.get(key);
-        prepend.append( importPreVariable(key, val) );
-        preCode.append( exportPreVariable(key, val) );
         transCode.append( getTransferCode(key, val) );
       }
       code.insert(0, prepend);
@@ -269,10 +267,6 @@ public abstract class ProceduralCodeGenerator extends DepthFirstAdapter implemen
   }
 
   // to be adapted in subclasses:
-
-  protected abstract String importPreVariable(String var, String type);
-
-  protected abstract String exportPreVariable(String var, String type);
 
   protected abstract String getTransferCode(String var, String type);
 

@@ -99,21 +99,9 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
 
   // ---- abstract methods from ProceduralCodeGenerator: ----
 
-  protected String importPreVariable(String var, String type) {
-    StringBuffer ret=new StringBuffer();
-    ret.append("final "+oclLibPackage+type);
-    ret.append(" "+var);
-    ret.append("=this."+var+";\n");
-    return ret.toString();
-  }
-
-  protected String exportPreVariable(String var, String type) {
-    return "this."+var+"="+var+";\n";
-  }
-
   protected String getTransferCode(String var, String type) {
     StringBuffer ret=new StringBuffer();
-    ret.append(oclLibPackage+type+" "+var+";\n");
+    ret.append("    "+oclLibPackage+type+" "+var+";\n");
     return ret.toString();
   }
 
@@ -153,20 +141,36 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
     );
   }
 
+  /**
+     This method generates the declaration prefix of a node.
+     Is looks like this:
+     <pre>
+        final tudresden.ocl.lib.&lt;type&gt; &lt;variable&gt; =
+     </pre>
+     The type is ommited, if the variable is one of the transfer variables.
+  */
+  private String createDecl(String type, String variable)
+  {
+    if(preVarTypes.containsKey(variable))
+      return "      "+variable+'=';
+    else
+      return "      final "+oclLibPackage+type+' '+variable+'=';
+  }
+  
   // ---------- tree traversal: -----------------------------
 
   /** the variable for the AConstraintBody node is the variable for &quot;self&quot;
    */
   public void inAConstraintBody(AConstraintBody cb) {
     varMap.clear();
-    appendCode("final "+oclLibPackage+"OclAnyImpl "+getVariable(cb)+"="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor("+instanceName+") );\n" );
+    appendCode(createDecl("OclAnyImpl",getVariable(cb))+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor("+instanceName+") );\n" );
     varMap.put("self", getVariable(cb));
     if (parameters!=null) {
       for (int i=0; i<parameters.length; i++) {
         Type oclParamType=tree.getTypeFor(parameters[i][0], cb);
         String javaParamType=getJavaType(oclParamType);
         String javaParamName=tree.getNameCreator().getUniqueName("OpPar");
-        appendCode("final "+oclLibPackage+javaParamType+" "+javaParamName+"="+
+        appendCode(createDecl(javaParamType,javaParamName)+
           oclLibPackage+"Ocl.to"+javaParamType+"( "+oclLibPackage+"Ocl.getFor("+parameters[i][0]+") );\n");
         varMap.put(parameters[i][0], javaParamName);
       }
@@ -181,9 +185,9 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
         String result=tree.getNameCreator().getUniqueName("Result");
         varMap.put("result", result);
         writeToStandardCodeOnly();
-        appendCode("final "+oclLibPackage+javaType+" "+result+"="+oclLibPackage+"Ocl.to"+javaType+"( "+oclLibPackage+"Ocl.getFor("+javaResult+") );\n");
+        appendCode(createDecl(javaType,result)+oclLibPackage+"Ocl.to"+javaType+"( "+oclLibPackage+"Ocl.getFor("+javaResult+") );\n");
         writeToPreCodeOnly();
-        appendCode("final "+oclLibPackage+javaType+" "+result+"="+oclLibPackage+javaType+".UNDEFINED;\n");
+        appendCode(createDecl(javaType,result)+oclLibPackage+javaType+".UNDEFINED;\n");
         writeToBothCodes();
       }
     }
@@ -200,7 +204,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
    */
   public void outAIfExpression(AIfExpression ie) {
     String javaType=getJavaType(tree.getNodeType(ie));
-    appendCode("final "+oclLibPackage+javaType+" "+getVariable(ie)+"=("+getVariable(ie.getIfBranch())+".isTrue()) ? (");
+    appendCode(createDecl(javaType,getVariable(ie))+'('+getVariable(ie.getIfBranch())+".isTrue()) ? (");
     appendCode(getVariable(ie.getThenBranch())+") : ("+getVariable(ie.getElseBranch())+");\n");
   }
 
@@ -234,7 +238,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
         relExprs[index]=let.getRelationalExpression();
       }
 
-      appendCode("final "+oclLibPackage+"OclBoolean "+getVariable(le)+"=");
+      appendCode(createDecl("OclBoolean",getVariable(le)));
       int lastNonImplies=0; // index of operand after last implies
       boolean foundImplies=false;
       for (int i=0; i<tailElements; i++) {
@@ -299,7 +303,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
           relOp instanceof ANEqualRelationalOperator) {
         comparison=false;
       }
-      appendCode( "final "+oclLibPackage+"OclBoolean "+getVariable(re)+"=" );
+      appendCode(createDecl("OclBoolean",getVariable(re)));
       //if (comparison) appendCode("Ocl.toOclComparable(");
       appendCode( getVariable(re.getAdditiveExpression()) );
       //if (comparison) appendCode(")");
@@ -323,7 +327,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
     } else {
       Type nodeType=tree.getNodeType(ae);
       String javaType=getJavaType(nodeType);
-      appendCode("final "+oclLibPackage+javaType+" "+getVariable(ae)+"=");
+      appendCode(createDecl(javaType,getVariable(ae)));
       appendCode( getVariable(ae.getMultiplicativeExpression()) );
       Iterator iter=ae.getAdditiveExpressionTail().iterator();
       while (iter.hasNext()) {
@@ -347,7 +351,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
       reachThrough(me, me.getUnaryExpression());
     } else {
       String javaType=getJavaType( tree.getNodeType(me) );
-      appendCode("final "+oclLibPackage+javaType+" "+getVariable(me)+"=");
+      appendCode(createDecl(javaType,getVariable(me)));
       appendCode(oclLibPackage+"Ocl.to"+getJavaType( tree.getNodeType(me.getUnaryExpression()) )+"(");
       appendCode( getVariable(me.getUnaryExpression()) );
       appendCode(")");
@@ -370,7 +374,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
   public void outAUnaryUnaryExpression(AUnaryUnaryExpression uue) {
     Type oclType=tree.getNodeType(uue);
     String javaType=getJavaType( oclType );
-    appendCode("final "+oclLibPackage+javaType+" "+getVariable(uue)+"=");
+    appendCode(createDecl(javaType,getVariable(uue)));
     if (oclType==Basic.INTEGER) appendCode(oclLibPackage+"Ocl.toOclInteger(");
     appendCode(getVariable(uue.getPostfixExpression())+"."+
       operatorCode.get( uue.getUnaryOperator() )+"()");
@@ -396,7 +400,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
     Type oclType=tree.getNodeType(pe);
     if (oclType instanceof OclType) {
       // type name
-      appendCode("final "+oclLibPackage+"OclType "+getVariable(pe)+"="+oclLibPackage+"OclType.getOclTypeFor("+
+      appendCode(createDecl("OclType",getVariable(pe))+oclLibPackage+"OclType.getOclTypeFor("+
         instanceName+", \""+pe.toString().trim()+"\");\n");
     } else {
       setVariable(pe, varMap.get( pe.toString().trim() ));
@@ -409,7 +413,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
    */
   public void inALitColPrimaryExpression(ALitColPrimaryExpression lcpe) {
     String javaType=getJavaType( tree.getNodeType(lcpe) );
-    appendCode("final "+oclLibPackage+javaType+" "+getVariable(lcpe)+"="+oclLibPackage+javaType+".getEmpty"+javaType+"();\n");
+    appendCode(createDecl(javaType,getVariable(lcpe))+oclLibPackage+javaType+".getEmpty"+javaType+"();\n");
   }
 
   public void outALiteralPrimaryExpression(ALiteralPrimaryExpression lpe) {
@@ -454,6 +458,9 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
     Type appliedType=tree.getNodeType(appliedTo);
     AFeatureCall fc=(AFeatureCall)pet.getFeatureCall();
     if (fc.getTimeExpression()!=null) {
+      // moved here from method bottom 
+      addPreVariable( getVariable(pet), getJavaType( tree.getNodeType(pet) ) );
+      // moved here from method bottom end.
       assurePreCode();
       writeToPreCodeOnly();
     }
@@ -472,7 +479,6 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
       }
     }
     if (fc.getTimeExpression()!=null) {
-      addPreVariable( getVariable(pet), getJavaType( tree.getNodeType(pet) ) );
       writeToBothCodes();
     }
   }
@@ -488,7 +494,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
         "JavaCodeGenerator does not support the OclAny property \"oclIsNew\""
       );
     }
-    appendCode("final "+oclLibPackage+javaType+" "+getVariable(pet)+"=");
+    appendCode(createDecl(javaType,getVariable(pet)));
     boolean insertCastToInteger=featureName.equals("abs") && (oclType==Basic.INTEGER);
     boolean insertCastToOclAnyImpl=featureName.equals("oclAsType") && (javaType.equals("OclAnyImpl"));
     if (insertCastToInteger) appendCode(oclLibPackage+"Ocl.toOclInteger(");
@@ -543,9 +549,9 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
 
       decl.getExpression().apply(this); // insert code for accumulator initialization
 
-      appendCode("final "+oclLibPackage+"OclIterator "+javaIter+"="+getVariable(appliedTo)+".getIterator();\n");
-      appendCode("final "+oclLibPackage+"OclContainer "+javaCont+"=new "+oclLibPackage+"OclContainer("+getVariable(decl.getExpression())+");\n");
-      appendCode("final "+oclLibPackage+"OclRootEvaluatable "+javaEvalName+"=new "+oclLibPackage+"OclRootEvaluatable() {\n");
+      appendCode(createDecl("OclIterator",javaIter)+getVariable(appliedTo)+".getIterator();\n");
+      appendCode(createDecl("OclContainer",javaCont)+"new "+oclLibPackage+"OclContainer("+getVariable(decl.getExpression())+");\n");
+      appendCode(createDecl("OclRootEvaluatable",javaEvalName)+"new "+oclLibPackage+"OclRootEvaluatable() {\n");
       appendCode("  public "+oclLibPackage+"OclRoot evaluate() {\n");
       increaseIndent(4);
       apl.apply(this);
@@ -553,7 +559,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
       appendCode("    return "+getVariable(apl.getExpression())+";\n");
       appendCode("  }\n");
       appendCode("};\n");
-      appendCode("final "+oclLibPackage+javaType+" "+getVariable(pet)+"=");
+      appendCode(createDecl(javaType,getVariable(pet)));
       appendCode(oclLibPackage+"Ocl.to"+javaType+"(");
       appendCode(appliedToVariable+".iterate("+javaIter+", "+javaCont+", "+javaEvalName+"));\n");
 
@@ -579,8 +585,8 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
       String javaEvalType=types[0];
       String javaEvalReturn=types[1];
       String javaIterReturn=types[2];
-      appendCode("final "+oclLibPackage+"OclIterator "+javaIter+"="+getVariable(appliedTo)+".getIterator();\n");
-      appendCode("final "+oclLibPackage+javaEvalType+" "+javaEvalName+"=new "+oclLibPackage+javaEvalType+"() {\n");
+      appendCode(createDecl("OclIterator",javaIter)+getVariable(appliedTo)+".getIterator();\n");
+      appendCode(createDecl(javaEvalType,javaEvalName)+"new "+oclLibPackage+javaEvalType+"() {\n");
       appendCode("  public "+oclLibPackage+javaEvalReturn+" evaluate() {\n");
       varMap.put(oclIter, oclLibPackage+"Ocl.to"+javaIterType+"("+javaIter+".getValue())");
       increaseIndent(4);
@@ -589,7 +595,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
       appendCode("    return "+getVariable(apl.getExpression())+";\n");
       appendCode("  }\n");
       appendCode("};\n");
-      appendCode("final "+oclLibPackage+javaType+" "+getVariable(pet)+"=");
+      appendCode(createDecl(javaType,getVariable(pet)));
       if (javaType!=javaIterReturn) {
         appendCode(oclLibPackage+"Ocl.to"+javaType+"(");
       }
@@ -613,7 +619,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
           featureName.equals("including") ) {
         insertCast=true;
       }
-      appendCode("final "+oclLibPackage+javaType+" "+getVariable(pet)+"=");
+      appendCode(createDecl(javaType,getVariable(pet)));
       if (insertCast) appendCode(oclLibPackage+"Ocl.to"+javaType+"(");
       appendCode(appliedVariable+"."+featureName+"(");
       appendActualParameterList(apl);
@@ -624,7 +630,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
 
   protected String convertToCollection(Node appliedTo) {
     String name=tree.getNameCreator().getUniqueName("Set");
-    appendCode( "final "+oclLibPackage+"OclSet "+name+"="+oclLibPackage+"OclSet.getEmptyOclSet();\n" );
+    appendCode(createDecl("OclSet",name)+oclLibPackage+"OclSet.getEmptyOclSet();\n" );
     appendCode( name+".setToInclude("+getVariable(appliedTo)+");\n" );
     return name;
   }
@@ -709,7 +715,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
         }
       }
     }
-    appendCode("final "+oclLibPackage+javaType+" "+getVariable(pet)+"="+
+    appendCode(createDecl(javaType,getVariable(pet))+
       oclLibPackage+"Ocl.to"+javaType+"("+
       appliedVar+".getFeature(\""+
       fc.getPathName().toString().trim()+
@@ -748,17 +754,17 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
   public void outAStringLiteral(AStringLiteral sl) {
     String lit=sl.toString().trim();
     lit=lit.substring(1, lit.length()-1); // remove "'"
-    appendCode("final "+oclLibPackage+"OclString "+getVariable(sl)+"=new "+oclLibPackage+"OclString(\""+lit+"\");\n");
+    appendCode(createDecl("OclString",getVariable(sl))+"new "+oclLibPackage+"OclString(\""+lit+"\");\n");
   }
 
   public void outARealLiteral(ARealLiteral rl) {
     String lit=rl.toString().trim();
-    appendCode("final "+oclLibPackage+"OclReal "+getVariable(rl)+"=new "+oclLibPackage+"OclReal("+lit+");\n");
+    appendCode(createDecl("OclReal",getVariable(rl))+"new "+oclLibPackage+"OclReal("+lit+");\n");
   }
 
   public void outAIntegerLiteral(AIntegerLiteral il) {
     String lit=il.toString().trim();
-    appendCode("final "+oclLibPackage+"OclInteger "+getVariable(il)+"=new "+oclLibPackage+"OclInteger("+lit+");\n");
+    appendCode(createDecl("OclInteger",getVariable(il))+"new "+oclLibPackage+"OclInteger("+lit+");\n");
   }
 
   public void outABooleanLiteral(ABooleanLiteral bl) {
@@ -768,7 +774,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
     } else {
       jc=oclLibPackage+"OclBoolean.FALSE";
     }
-    appendCode("final "+oclLibPackage+"OclBoolean "+getVariable(bl)+"="+jc+";\n");
+    appendCode(createDecl("OclBoolean",getVariable(bl))+jc+";\n");
   }
 
   public void outAEnumLiteral(AEnumLiteral el) {

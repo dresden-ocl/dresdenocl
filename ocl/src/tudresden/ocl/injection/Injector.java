@@ -533,6 +533,7 @@ public class Injector
   }
 
   public static final String INV_METHOD="checkOclInvariants";
+  public static final String violationMakro="System.out.println";
 
   public final void writeInvariants(Writer o, Vector ets, String classname) throws IOException
   {
@@ -551,12 +552,15 @@ public class Injector
       for(Enumeration e=v.elements(); e.hasMoreElements(); )
       {
         CodeFragment cf=(CodeFragment)(e.nextElement());
+        o.write("    {\n");
         o.write(cf.getCode());
-        o.write("    if(!");
+        o.write("      if(!");
         o.write(cf.getResultVariable());
-        o.write(".isTrue())\n      throw new RuntimeException(\"ocl invariant ");
+        o.write(".isTrue())\n        ");
+        o.write(violationMakro);
+        o.write("(\"ocl invariant ");
         o.write(cf.getName());
-        o.write(" violated\");\n");
+        o.write(" violated\");\n    }\n");
       }
     }
     o.write("}");
