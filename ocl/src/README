@@ -25,6 +25,10 @@ JUnit 3.7 (junit.jar)
   http://junit.org/
   maintained in CVS
 
+NOTES:
+* Ant 1.2 fails with strange errors when running the tests. 
+* Xerces 1.2.0 will fail with some SAXUnsupportedFeatureException.
+
 
 2. CHECK IN POLICY
 ------------------
