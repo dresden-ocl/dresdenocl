@@ -9,6 +9,11 @@ public class Earning extends Transaction
 	
 	// Associations
 	
+	public Earning(final String description)
+	{
+		super(description);
+	}
+	
 	// Operations
 	public boolean assertTrue()
 	{

@@ -31,6 +31,11 @@ public class Membership extends RLObject
 	 */
 	public Customer customer;
 	
+	public Membership(final String description)
+	{
+		super(description);
+	}
+	
 	// Operations
 	public boolean assertTrue()
 	{

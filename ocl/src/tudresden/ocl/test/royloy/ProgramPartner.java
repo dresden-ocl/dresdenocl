@@ -28,6 +28,11 @@ public class ProgramPartner extends RLObject
 	 */
 	public Vector  deliveredServices=new Vector();
 	
+	public ProgramPartner(final String description)
+	{
+		super(description);
+	}
+	
 	// Operations
 	public boolean assertTrue()
 	{

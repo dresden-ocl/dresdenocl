@@ -52,7 +52,7 @@ public class TestInjectionRoyloy extends TestInjection
 		p4.age=4; b1.addCustomer(3, p4);
 		p5.age=1;
 		
-		LoyaltyProgram lp=new LoyaltyProgram(); add(lp);
+		LoyaltyProgram lp=new LoyaltyProgram("LoyaltyProgram1"); add(lp);
 		Customer cm1=new Customer("Customer1", true);  add(cm1);
 		Customer cm2=new Customer("Customer2", false); add(cm2);
 		Customer cm3=new Customer("Customer3", true);  add(cm3);
@@ -64,8 +64,8 @@ public class TestInjectionRoyloy extends TestInjection
 			String x2=p2.name;
 			p1.name=x1.toLowerCase();
 			p2.name=x2.toLowerCase();
-			expectViolation("violated ocl invariant 'nameUpperCase' on object 'tudresden.ocl.test.royloy.Person[person1]'.");
-			expectViolation("violated ocl invariant 'nameUpperCase' on object 'tudresden.ocl.test.royloy.Person[person2]'.");
+			expectViolation("violated ocl invariant 'nameUpperCase' on object 'tudresden.ocl.test.royloy.Person[Person1]'.");
+			expectViolation("violated ocl invariant 'nameUpperCase' on object 'tudresden.ocl.test.royloy.Person[Person2]'.");
 			assertAll();
 			p1.name=x1;
 			p2.name=x2;

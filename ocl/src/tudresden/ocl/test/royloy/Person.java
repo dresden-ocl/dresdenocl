@@ -60,6 +60,7 @@ public class Person extends RLObject implements Comparable
 	
 	public Person(String name)
 	{
+		super(name);
 		this.name=name;
 	}
 	
@@ -81,11 +82,6 @@ public class Person extends RLObject implements Comparable
 		isMarried=true;
 		wife.husband=this;
 		wife.isMarried=true;
-	}
-	
-	public String toString()
-	{
-		return super.toString()+'['+name+']';
 	}
 	
 	public int compareTo(Object o)

@@ -45,21 +45,14 @@ public class Bank extends RLObject
 	 */
 	public HashMap customer=new HashMap();
 	
-	String description;
-	
-	public Bank(String description)
+	public Bank(final String description)
 	{
-		this.description=description;
+		super(description);
 	}
 	
 	public boolean addCustomer(int index, Person p)
 	{
 		return customer.put(new Integer(index), p) != null;
-	}
-	
-	public String toString()
-	{
-		return super.toString()+'['+description+']';
 	}
 	
 	public boolean assertTrue()

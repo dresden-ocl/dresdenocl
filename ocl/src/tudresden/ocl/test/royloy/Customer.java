@@ -30,6 +30,7 @@ public class Customer extends RLObject
 	
 	public Customer(String name, boolean isMale)
 	{
+		super(name);
 		this.name=name;
 		this.title=isMale?"Mr":"Ms";
 		this.isMale=isMale;
@@ -45,11 +46,6 @@ public class Customer extends RLObject
 		if(index==42)
 			title=title+" hoppla";
 		return resultat;
-	}
-	
-	public String toString()
-	{
-		return super.toString()+'['+name+']';
 	}
 	
 	public boolean assertTrue()

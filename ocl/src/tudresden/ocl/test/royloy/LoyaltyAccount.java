@@ -13,6 +13,11 @@ public class LoyaltyAccount extends RLObject
 	
 	public Vector  transactions=new Vector();
 	
+	public LoyaltyAccount(final String description)
+	{
+		super(description);
+	}
+	
 	// Operations
 	public void earn(int i)
 	{

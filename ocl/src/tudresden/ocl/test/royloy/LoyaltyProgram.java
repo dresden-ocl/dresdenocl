@@ -21,6 +21,11 @@ public class LoyaltyProgram extends RLObject
 	
 	public HashSet partners=new HashSet();
 	
+	public LoyaltyProgram(final String description)
+	{
+		super(description);
+	}
+	
 	public void enroll(Customer c)
 	{
 	}

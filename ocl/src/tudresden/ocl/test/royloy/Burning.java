@@ -10,6 +10,11 @@ public class Burning extends Transaction
 	
 	// Associations
 	
+	public Burning(final String description)
+	{
+		super(description);
+	}
+	
 	// Operations
 	
 	public boolean assertTrue()

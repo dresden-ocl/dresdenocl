@@ -15,10 +15,18 @@ public abstract class RLObject implements Serializable
 	
 	int id;
 	
-	public RLObject()
+	final String description;
+	
+	public RLObject(final String description)
 	{
+		this.description = description;
 		allObjects.add(this);
 		id=idCounter++;
+	}
+	
+	public final String toString()
+	{
+		return getClass().getName()+'['+description+']';
 	}
 	
 	public String toXString()

@@ -29,6 +29,11 @@ public class Service extends RLObject
 	 */
 	public Vector  transactions=new Vector();
 	
+	public Service(final String description)
+	{
+		super(description);
+	}
+	
 	// Operations
 	public boolean assertTrue()
 	{

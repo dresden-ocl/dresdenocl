@@ -108,11 +108,9 @@ abstract class TestInjection
 	private HashSet ev2=new HashSet();
 	private HashSet ev=null;
 	
-	public void onViolation(String message)
+	public void onViolation(final String m)
 	{
 		if(!strict) throw new RuntimeException();
-		
-		String m=stripId(message);
 		
 		//System.out.println("violation :"+m);
 		
@@ -215,19 +213,10 @@ abstract class TestInjection
 	
 	private void error(String m)
 	{
-		System.out.println(m);
-		//throw new RuntimeException();
-	}
-	
-	private final String stripId(String s)
-	{
-		int from=s.indexOf('@');
-		if(from<0)
-			throw new RuntimeException();
-		int to=s.indexOf('[', from);;
-		if(to<0)
-			throw new RuntimeException();
-		return s.substring(0, from)+s.substring(to, s.length());
+		if(strict)
+			throw new RuntimeException(m);
+		else
+			System.out.println(m);
 	}
 	
 }

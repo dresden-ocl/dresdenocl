@@ -30,6 +30,11 @@ public class CustomerCard extends RLObject
 	
 	public Vector  transactions=new Vector();
 	
+	public CustomerCard(final String description)
+	{
+		super(description);
+	}
+	
 	// Operations
 	public boolean assertTrue()
 	{

@@ -24,6 +24,11 @@ public class ServiceLevel extends RLObject
 	
 	public Service service;
 	
+	public ServiceLevel(final String description)
+	{
+		super(description);
+	}
+	
 	// Operations
 	public boolean assertTrue()
 	{

@@ -6,9 +6,14 @@ public class Date extends RLObject
 {
 	
 	// Attributes
-	public static Date now=new Date();
+	public static Date now=new Date("now");
 	
 	public int iTime;
+	
+	public Date(final String description)
+	{
+		super(description);
+	}
 	
 	public int difference(Date d)
 	{
@@ -29,6 +34,7 @@ public class Date extends RLObject
 	{
 		return iTime==d.iTime;
 	}
+	
 	public boolean assertTrue()
 	{
 		return true;

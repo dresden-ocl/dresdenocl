@@ -20,6 +20,11 @@ public class Transaction extends RLObject
 	
 	public LoyaltyAccount loyaltyAccount;
 	
+	public Transaction(final String description)
+	{
+		super(description);
+	}
+	
 	// Operations
 	
 	/**

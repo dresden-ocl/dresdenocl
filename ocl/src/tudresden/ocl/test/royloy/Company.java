@@ -5,8 +5,6 @@ import java.util.*;
 public class Company extends RLObject
 {
 	
-	public String description;
-	
 	/**
 	 * @invariant numberOfEmployees: self.numberOfEmployees=employees->size
 	 */
@@ -46,7 +44,7 @@ public class Company extends RLObject
 	
 	public Company(String description, Person manager)
 	{
-		this.description=description;
+		super(description);
 		this.manager=manager;
 		employees.add(manager);
 		manager.employers.add(this);
@@ -70,11 +68,6 @@ public class Company extends RLObject
 		employees.add(p);
 		p.employers.add(this);
 		numberOfEmployees=employees.size();
-	}
-	
-	public String toString()
-	{
-		return super.toString()+'['+description+']';
 	}
 	
 	public boolean assertTrue()
