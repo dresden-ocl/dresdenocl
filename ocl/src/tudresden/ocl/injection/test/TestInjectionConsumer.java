@@ -24,62 +24,63 @@ import java.io.*;
 public class TestInjectionConsumer implements InjectionConsumer
 {
   private Writer output;
-  
-  public TestInjectionConsumer(Writer output) 
+
+  public TestInjectionConsumer(Writer output)
   {
     this.output=output;
   }
 
-  public void onPackage(JavaFile javafile) 
-    throws InjectorParseException 
+  public void onPackage(JavaFile javafile)
+    throws InjectorParseException
   {
     try
     {
-      output.write("[onPackage]");
+      output.write("[onPackage("+javafile.getPackageName()+")]");
     }
     catch(IOException e) { System.out.println(e); };
   }
 
-  public void onImport(String importname) 
+  public void onImport(String importname)
   {
     try
     {
-      output.write("[onImport]");
+      output.write("[onImport("+importname+")]");
     }
     catch(IOException e) { System.out.println(e); };
   }
 
-  public void onClass(JavaClass cc) 
+  public void onClass(JavaClass cc)
   {
     try
     {
-      output.write("[onClass]");
+      output.write("[onClass("+cc.getName()+")]");
     }
     catch(IOException e) { System.out.println(e); };
   }
 
-  public void onClassEnd(JavaClass cc) 
-    throws java.io.IOException, InjectorParseException 
+  public void onClassEnd(JavaClass cc)
+    throws java.io.IOException, InjectorParseException
   {
     try
     {
-      output.write("[onClassEnd]");
+      output.write("[onClassEnd("+cc.getName()+")]");
     }
     catch(IOException e) { System.out.println(e); };
   }
 
-  public void onBehaviourHeader(JavaBehaviour jb) 
-    throws java.io.IOException 
+  public void onBehaviourHeader(JavaBehaviour jb)
+    throws java.io.IOException
   {
     try
     {
       output.write("[onBehaviourHeader]");
       output.write(jb.getLiteral());
+      output.write("[/onBehaviourHeader]");
     }
     catch(IOException e) { System.out.println(e); };
   }
 
-  public void onAttributeHeader(JavaAttribute ja) 
+  public void onAttributeHeader(JavaAttribute ja)
     throws java.io.IOException
   {
     try
@@ -89,29 +90,30 @@ public class TestInjectionConsumer implements InjectionConsumer
     catch(IOException e) { System.out.println(e); };
   }
 
-  public void onClassFeature(JavaFeature cf,String doccomment) 
-    throws java.io.IOException, InjectorParseException 
+  public void onClassFeature(JavaFeature cf,String doccomment)
+    throws java.io.IOException, InjectorParseException
   {
     try
     {
-      output.write("[onClassFeature]");
+      output.write("[onClassFeature("+cf.getName()+")]");
     }
     catch(IOException e) { System.out.println(e); };
   }
 
-  public boolean onDocComment(String doccomment) 
-    throws java.io.IOException 
+  public boolean onDocComment(String doccomment)
+    throws java.io.IOException
   {
     try
     {
       output.write("[onDocComment]");
       output.write(doccomment);
+      output.write("[/onDocComment]");
     }
     catch(IOException e) { System.out.println(e); };
     return true;
   }
-  
-  public void onFileEnd() 
+
+  public void onFileEnd()
   {
     try
     {
@@ -119,7 +121,7 @@ public class TestInjectionConsumer implements InjectionConsumer
     }
     catch(IOException e) { System.out.println(e); };
   }
-  
+
   public static void main(String[] args)
   {
     String  inputfile=TestInjectionConsumer.class.getResource("Example.java").getFile();
