@@ -32,6 +32,8 @@ package tudresden.ocl.gui;
 
 import tudresden.ocl.gui.events.*;
 
+import javax.swing.*;
+
 /** 
   * An editor for a list of OCL Constraints. The editor allows editing
   * of a list of {@link ConstraintRepresentation constraint representations}
@@ -139,13 +141,29 @@ public class OCLEditor extends javax.swing.JPanel
     /**
       * Set the edited constraint name.
       */
-    public void setValueAt (int row, int column, Object value) {
+    public void setValueAt (Object value, int row, int column) {
       if (column == 0) {
         if (m_oclemModel != null) {
           ConstraintRepresentation cr = m_oclemModel.getConstraintAt (row);
 
           if (cr != null) {
-            cr.setName (value.toString());
+            try {
+              cr.setName (value.toString());
+            }
+            catch (IllegalArgumentException iae) {
+              JOptionPane.showMessageDialog (null,
+                                               "Invalid name: " +
+                                                   iae.getMessage(),
+                                               "Error",
+                                               JOptionPane.ERROR_MESSAGE);
+            }
+            catch (IllegalStateException ise) {
+              JOptionPane.showMessageDialog (null,
+                                               "Couldn't set name: " +
+                                                   ise.getMessage(),
+                                               "Error",
+                                               JOptionPane.ERROR_MESSAGE);
+            }
           }
         }
       }
@@ -200,9 +218,10 @@ public class OCLEditor extends javax.swing.JPanel
   public OCLEditor() {
     initComponents ();
     
-    m_jspMainPane.setDividerLocation (50);
-    
-    m_jtConstraintList.getSelectionModel().addListSelectionListener (this);
+    m_jtConstraintList.getSelectionModel()
+        .setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    m_jtConstraintList.getSelectionModel()
+        .addListSelectionListener (this);
   }
 
   /**
@@ -370,7 +389,24 @@ public class OCLEditor extends javax.swing.JPanel
       int nIdx = m_jtConstraintList.getSelectedRow();
 
       if (nIdx != -1) {
-        m_oclemModel.getConstraintAt (nIdx).setData (m_jtaConstraintEditor.getText());
+        try {
+          m_oclemModel.getConstraintAt (nIdx)
+              .setData (m_jtaConstraintEditor.getText());
+        }
+        catch (IllegalArgumentException iae) {
+          JOptionPane.showMessageDialog (null,
+                                           "Invalid constraint: " +
+                                                iae.getMessage(),
+                                           "Error",
+                                           JOptionPane.ERROR_MESSAGE);
+        }
+        catch (IllegalStateException ise) {
+          JOptionPane.showMessageDialog (null,
+                                           "Couldn't set constraint: " +
+                                               ise.getMessage(),
+                                           "Error",
+                                           JOptionPane.ERROR_MESSAGE);
+        }
       }
     }
   }//GEN-LAST:event_onSubmitConstraintButton
