@@ -422,6 +422,7 @@ public final class Injector
     {
       JavaMethod cf=
         new JavaMethod(parent, modifiers, featuretype, featurename, position_name_end);
+      cf.setLastParameterStart(collector.length()+1);
       parseMethod(cf);
       return cf;
     }
@@ -443,7 +444,10 @@ public final class Injector
     {
       String parametertype;
       if(c==')')
+      {
+        cf.setLastParameterEnd(collector.length());
         break;
+      }
       else if(c=='\0')
         parametertype=buf.toString();
       else
@@ -455,11 +459,15 @@ public final class Injector
       c=readToken();
       if(c==',')
       {
+        cf.setLastParameterStart(collector.length());
         c=readToken();
         continue;
       }
       else if(c==')')
+      {
+        cf.setLastParameterEnd(collector.length());
         break;
+      }
       else
         throw new InjectorParseException("')' expected.");
     }

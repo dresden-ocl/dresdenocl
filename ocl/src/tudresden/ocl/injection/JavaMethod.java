@@ -31,19 +31,47 @@ public class JavaMethod extends JavaFeature
   
   /**
      The index of the end of the feature name in literal.
-     Needed for getWrappedLiteral() and getNotWrappedLiteral().
+     Needed for getWrappedLiteral() and getNotWrappedLiteral(),
+     if this is not a constructor.
        @see #getWrappedLiteral()
        @see #getNotWrappedLiteral()
        @see #literal
   */
   private int name_end;
+  
+  /**
+     The index of the start of the last parameter of the 
+     parameter list in {@see #literal}.
+     Is the index of the last comma, if there is more than one
+     parameter or otherwise the index after the opening parent.
+  
+     Needed for {@see #getWrappedLiteral()} and 
+     {@see #getNotWrappedLiteral()}, if this IS a constructor.
 
+     Is initialized to -1.
+  */
+  private int last_param_start=-1;
+     
+  /**
+     The index of the end of the last parameter of the 
+     parameter list in {@see #literal}.
+     Is the index of the closing bracket of the parameter list.
+  
+     Needed for {@see #getWrappedLiteral()} and 
+     {@see #getNotWrappedLiteral()}, if this IS a constructor.
+
+     Is initialized to -1.
+  */
+  private int last_param_end=-1;
+     
   /**
      The method header of this method, 
      exactly as in the input stream, 
      including all typographic extra's (line breaks, comments).
   */
   private String literal;
+  
+  private boolean is_wrapped=false;
 
   /**
      Contains subsequently parameter names and types.
@@ -66,10 +94,20 @@ public class JavaMethod extends JavaFeature
     // parent must not be null
     super(parent.getFile(), parent, modifiers, type, name);
     this.name_end=name_end;
+    if(isConstructor())
+      parent.onConstructorAdded();
   }
 
   public final void addParameter(String paramtype, String paramname)
   {
+    if(isConstructor())
+    {
+      if(tudresden.ocl.injection.lib.WrapperDummy.class.getName().equals(paramtype))
+      {
+        is_wrapped=true;
+        return;
+      }
+    }
     parameters.add(paramtype);
     parameters.add(paramname);
   }
@@ -112,6 +150,34 @@ public class JavaMethod extends JavaFeature
   
   public final String getWrappedLiteral()
   {
+    if(isConstructor())
+    {
+    String dummytype=tudresden.ocl.injection.lib.WrapperDummy.class.getName();
+    int ps=parameters.size();
+    int last_param=
+      is_wrapped ?
+      last_param_start :
+      last_param_end;
+    if(ps>0)
+    {
+      return
+        literal.substring(0, last_param)+
+        ", "+
+        dummytype+
+        " dummy"+ // parameter name to be removed
+        literal.substring(last_param, literal.length());
+    }
+    else
+    {
+      return
+        literal.substring(0, last_param_start)+
+        dummytype+
+        " dummy"+ // parameter name to be removed
+        literal.substring(last_param, literal.length());
+    }
+    }
+    else
+    {
     if(name.endsWith(WRAPPER_SUFFIX))
       return literal;
     else
@@ -119,6 +185,7 @@ public class JavaMethod extends JavaFeature
         literal.substring(0, name_end)+
         WRAPPER_SUFFIX+
         literal.substring(name_end, literal.length());
+    }
   }
 
   public final String getNotWrappedLiteral()
@@ -135,12 +202,43 @@ public class JavaMethod extends JavaFeature
   {
     if(this.literal!=null)
       throw new IllegalArgumentException();
+    if(is_wrapped)
+    {
+      literal=
+        literal.substring(0, last_param_start)+
+        literal.substring(last_param_end, literal.length());
+    }
     this.literal=literal;
   }
 
   public final String getLiteral()
   {
     return literal;
+  }
+  
+  /**
+     Sets {@see #last_param_start} to the given value.
+     @throws RuntimeException if pos is negative.
+  */
+  public final void setLastParameterStart(int pos)
+  {
+    if(pos<0)
+      throw new RuntimeException();
+    last_param_start=pos;
+  }
+
+  /**
+     Sets {@see #last_param_end} to the given value.
+     @throws RuntimeException if pos is negative.
+     @throws RuntimeException if called more than once.
+  */
+  public final void setLastParameterEnd(int pos)
+  {
+    if(pos<0)
+      throw new RuntimeException();
+    if(last_param_end>=0)
+      throw new RuntimeException();
+    last_param_end=pos;
   }
 
   /**
@@ -149,6 +247,11 @@ public class JavaMethod extends JavaFeature
   */
   private String signature;
 
+  /**
+     Returns the signature of this method.
+     Is compatible to 
+     {@see tudresden.ocl.codegen.CodeFragment#getConstrainedOperation()}.
+  */
   public String getSignature()
   {
     if(signature!=null)
@@ -185,7 +288,7 @@ public class JavaMethod extends JavaFeature
       o.println("    parameter >"+i.next()+"< >"+i.next()+"<");
     for(Iterator i=throwables.iterator(); i.hasNext(); )
       o.println("    throwable >"+i.next()+"<");
-    System.out.println("    signatr: >"+getSignature()+"<"+name_end);
+    System.out.println("    signatr: >"+getSignature()+"<("+name_end+'|'+last_param_start+'|'+last_param_end+')');
     System.out.println("    literal: >"+literal+"<");
     System.out.println("    wrapped: >"+getWrappedLiteral()+"<");
     System.out.println("    notwrap: >"+getNotWrappedLiteral()+"<");

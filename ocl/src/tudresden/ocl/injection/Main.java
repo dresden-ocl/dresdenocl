@@ -143,7 +143,7 @@ final class OclInjector implements InjectionConsumer
   public void onMethodHeader(JavaMethod cf) 
     throws java.io.IOException
   {
-    if(clean || cf.isConstructor() || cf.isStatic())
+    if(clean || cf.isStatic())
       output.write(cf.getNotWrappedLiteral());
     else
       output.write(cf.getWrappedLiteral());
@@ -163,7 +163,6 @@ final class OclInjector implements InjectionConsumer
         observedFeatures.add(cf);
       
       if( cf instanceof JavaMethod && 
-          !((JavaMethod)cf).isConstructor() && 
           !cf.isStatic() && 
           !discardnextfeature)
       {
@@ -525,6 +524,30 @@ final class OclInjector implements InjectionConsumer
       o.write(cf.getType());
       o.write(" result;\n");
     }
+    if(cf.isConstructor())
+    {
+      o.write("    this(");
+      for(Iterator i=cf.getParameters(); i.hasNext(); )
+      {
+        i.next();
+        o.write((String)i.next());
+        o.write(", ");
+      }
+      o.write('(');
+      o.write(tudresden.ocl.injection.lib.WrapperDummy.class.getName());
+      o.write(")null);\n");
+      o.write("    ");
+      o.write(Invariant.CHECKING_FLAG);
+      o.write("=true;\n");
+      if(hasInvariantScope(cf))
+        writeWrapperInvariant();
+      o.write("    ");
+      o.write(Invariant.CHECKING_FLAG);
+      o.write("=false;\n");
+    }
+    else
+    {
+    // TODO identation
     o.write("    if(");
     o.write(Invariant.CHECKING_FLAG);
     o.write(")\n");
@@ -617,6 +640,7 @@ final class OclInjector implements InjectionConsumer
     o.write("=false;\n    }\n");
     if(!cf.isConstructor() && !"void".equals(cf.getType()))
       o.write("    return result;\n");
+    }
     o.write("  }");
   }
 

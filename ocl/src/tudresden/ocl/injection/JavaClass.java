@@ -28,6 +28,13 @@ public class JavaClass extends JavaFeature
 {
 
   /**
+     Tells, whether this class has any constructors.
+     Is initialized to false, and set to true by 
+     {@see onConstructorAdded()}.
+  */
+  private boolean has_constructors=false;
+  
+  /**
      @parameter parent may be null for non-inner classes
      @parameter packagename may be null for root package
   */
@@ -38,6 +45,14 @@ public class JavaClass extends JavaFeature
     throws InjectorParseException
   {
     super(file, parent, modifiers, null, name);
+  }
+
+  /**
+     Sets {@see has_constructors} to true.
+  */
+  void onConstructorAdded()
+  {
+    has_constructors=true;
   }
 
   /**

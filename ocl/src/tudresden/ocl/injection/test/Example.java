@@ -100,11 +100,17 @@ public abstract class Example implements Runnable
     }
   }  
 
-    
+
+  private Example()
+  {
+    namedIntegers.put("5", new Integer(5));
+  }
+  
   public Example(String name, Integer type)
   {
     super();
     qualifiers=new Integer[6];
+    namedIntegers.put("5", new Integer(5));
   }
 
   public void set(String name, Integer type,// what a cool parameter
@@ -243,7 +249,6 @@ public abstract class Example implements Runnable
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
     tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
     SecondExample e2=new SecondExample();
-    e2.namedIntegers.put("5", new Integer(5));
     e2.getQualifiers();
     e2.i=10;
     e2.anInteger=new Integer(8);
