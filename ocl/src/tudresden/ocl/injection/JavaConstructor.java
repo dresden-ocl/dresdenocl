@@ -69,15 +69,10 @@ public class JavaConstructor extends JavaBehaviour
 
   public final void addParameter(String paramtype, String paramname)
   {
-    if(isConstructor())
-    {
-      if(tudresden.ocl.injection.lib.WrapperDummy.class.getName().equals(paramtype))
-      {
-        is_wrapped=true;
-        return;
-      }
-    }
-    super.addParameter(paramtype, paramname);
+    if(tudresden.ocl.injection.lib.WrapperDummy.class.getName().equals(paramtype))
+      is_wrapped=true;
+    else
+      super.addParameter(paramtype, paramname);
   }
 
   public final String getWrappedLiteral()
