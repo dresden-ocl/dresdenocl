@@ -105,7 +105,7 @@ class SQLTestApp extends ConstraintEvaluation {
 	doNormalize();
 
         if (sql92.isSelected()) {
-          sqlRulesUrl = (SQLTestApp.class.getResource("codegen/decl/OCL2SQL4Oracle.xml")).toString();
+          sqlRulesUrl = (SQLTestApp.class.getResource("codegen/decl/OCL2SQL4SQL92.xml")).toString();
         } else if (sqlOracle.isSelected()) {
           sqlRulesUrl = (SQLTestApp.class.getResource("codegen/decl/OCL2SQL4Oracle.xml")).toString();
         } else {

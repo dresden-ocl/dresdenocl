@@ -89,7 +89,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
     private String fileNameTrigger = "trigger.sql";
     
     // some other parameters
-    private String sqlCodeGenPatternCatalogue = (OCL2SQL.class.getResource("../codegen/decl/OCL2SQL4Oracle.xml")).toString();
+    private String sqlCodeGenPatternCatalogue = (OclTree.class.getResource("codegen/decl/OCL2SQL4Oracle.xml")).toString();
         
     // gui
     protected JTabbedPane tabs;
@@ -355,8 +355,8 @@ public class OCL2SQL extends JPanel implements ActionListener {
         JPanel smallLogos=new JPanel();
         JPanel center=new JPanel(new GridLayout(0, 1));
 
-        smallLogos.add(new JLabel( getImage("../images/tulogo.gif") ));
-        smallLogos.add(new JLabel( getImage("../images/st.gif") ));
+        smallLogos.add(new JLabel( getImage("images/tulogo.gif") ));
+        smallLogos.add(new JLabel( getImage("images/st.gif") ));
         allLogos.add(smallLogos);
 
         center.add(new JLabel("OCL2SQL", SwingConstants.CENTER));
@@ -616,7 +616,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
      *  Code originally from ConstraintEvaluation.   
      */
     protected Icon getImage(String name) {
-        java.net.URL url=OCL2SQL.class.getResource(name);
+        java.net.URL url= OclTree.class.getResource(name);
         ImageIcon ii=null;
         
         try {
