@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.9 2001/05/01 20:52:40 rw7 Exp $
+$Id: build.xml,v 1.10 2001/05/05 17:53:07 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -203,6 +203,7 @@ New version by Ralf Wiebicke.
         <include name="tudresden/ocl/check/types/testfacade/*.java" />
         <include name="tudresden/ocl/injection/*.java" />
         <include name="tudresden/ocl/codegen/decl/*.java" />
+        <include name="tudresden/ocl/sql/*.java" />
         <include name="COPYING" />
       </fileset>
     </copy>
