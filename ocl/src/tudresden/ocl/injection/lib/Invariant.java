@@ -198,6 +198,22 @@ public final class Invariant implements FeatureListener
   */
   public static final int identityHashCode(Map map)
   {
+    /*
+      Implementation note:
+
+      This method promises to be equal to Map.hashCode()
+      except of the call to identityHashCode.
+    
+      For this implementation this is only fulfilled,
+      if map.keySet().iterator() and map.values().iterator()
+      enumerate the maps elements in the same order.
+    
+      As far as I understand the specification of java.util.Map,
+      this is guaranteed. If not, a RuntimeException is thrown.
+    
+      If you are desperatly looking for runtime efficiency, you
+      may disable the checks below.
+    */
     int hashCode=0;
     Iterator ikey=map.keySet().iterator();
     Iterator ival=map.values().iterator();
