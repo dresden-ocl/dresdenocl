@@ -54,7 +54,7 @@ public class TestAll extends TestCase {
     suite.addTest( tudresden.ocl.injection.reverseeng.test.RevengTestSuite.suite() );
 
     // Test SQL stuff
-    suite.addTest( tudresden.ocl.test.sql.TestTable.suite() );
+    suite.addTest( tudresden.ocl.test.sql.TestSQLClasses.suite() );
 
     return suite;
   }
