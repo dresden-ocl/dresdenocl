@@ -141,6 +141,15 @@ public final class OclInstrumentor implements TaskInstrumentor
     for(Iterator i = jm.getParameters().iterator(); i.hasNext(); )
     {
       String type = (String)i.next();
+      
+      // transform arrays to sequences
+      int nIdx;
+      while ((nIdx = type.indexOf ("[]")) != -1) {
+        type = "Sequence(" + type.substring (0, nIdx) + type.substring (nIdx + 2) + ")";
+      }
+      
+      //System.err.println ("Transforming type: \"" + type + "\"");
+      
       if("java.lang.String".equals(type))
         type="String";
       else if("byte".equals(type) || "short".equals(type) || "int".equals(type) || "long".equals(type))

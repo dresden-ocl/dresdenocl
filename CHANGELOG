@@ -6,6 +6,8 @@ Changes to current CVS
 Changes that could break older environments
 -------------------------------------------
 
+* [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types to sequence types
+
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
   [OCL Library]  to also include methods defined by java.lang.Object if the original
                  classifier is an interface.
@@ -38,6 +40,8 @@ Other changes
 
 Fixed bugs
 ----------
+* [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types to sequence types
+
 * [Java Code Generator]
                  Fixed generation of "->excluding", so that a cast is generated, too.
 
