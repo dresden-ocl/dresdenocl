@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<Form version="1.0" type="com.netbeans.developer.modules.loaders.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="title" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="OCL Editor QuickBar"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="(No Menu)"/>
+    <SyntheticProperty name="formSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,44,0,0,2,-118"/>
+    <SyntheticProperty name="formPosition" type="java.awt.Point" value="-84,-19,0,5,115,114,0,14,106,97,118,97,46,97,119,116,46,80,111,105,110,116,-74,-60,-118,114,52,126,-56,38,2,0,2,73,0,1,120,73,0,1,121,120,112,0,0,0,0,0,0,0,0"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="0"/>
+    <SyntheticProperty name="generatePosition" type="boolean" value="true"/>
+    <SyntheticProperty name="generateSize" type="boolean" value="true"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+    <SyntheticProperty name="encoding" type="java.lang.String" value="ISO-8859-1"/>
+  </SyntheticProperties>
+
+  <AuxValues>
+  </AuxValues>
+
+  <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+  <SubComponents>
+    <Container class="javax.swing.JTabbedPane" name="m_jtpMain">
+      <Constraints>
+        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+          <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="m_jpGeneral">
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="General" toolTip=""/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="m_jbInv">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="inv"/>
+              </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onStereotypeButton"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbPre">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="pre"/>
+              </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onStereotypeButton"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbPost">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="post"/>
+              </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onStereotypeButton"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbSelf">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="self"/>
+              </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSelf"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbAtPre">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="@pre"/>
+              </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onAtPre"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbResult">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="result"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Container class="javax.swing.JPanel" name="pad1">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pad2">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="m_jpBasics">
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Basic Operators" toolTip=""/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="m_jbEquals">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="="/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbNEquals">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&lt;&gt;"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbLess">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&lt;"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbGreater">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&gt;"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbLessE">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&lt;="/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbGreaterE">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&gt;="/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Container class="javax.swing.JPanel" name="pad3">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pad4">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="m_jpNumbers">
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Numbers" toolTip=""/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="m_jbPlus">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="+"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbMinus">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="-"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbMultiply">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="*"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbDivide">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="/"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Container class="javax.swing.JPanel" name="pad5">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="5" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+            <Component class="javax.swing.JButton" name="m_jbModulus">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="mod"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbIntDiv">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="div"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbAbs">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="abs"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbMax">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="max"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbMin">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="min"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbRound">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="round"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbFloor">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="floor"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Container class="javax.swing.JPanel" name="pad6">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="5" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pad7">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="5" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="m_jpStrings">
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Strings" toolTip=""/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="m_jbConcat">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="concat"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbStrSize">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="size"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbToLower">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="toLower"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbToUpper">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="toUpper"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbSubstring">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="substring"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Container class="javax.swing.JPanel" name="pad8">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pad9">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="m_jpBooleans">
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Booleans" toolTip=""/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="m_jbOr">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="or"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbAnd">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="and"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbXor">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="xor"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbNot">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="not"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbImplies">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="implies"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbIfThenElse">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="if then else"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Container class="javax.swing.JPanel" name="pad10">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pad11">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="m_jpCollections">
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Collections" toolTip=""/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JTabbedPane" name="m_jtbCollections">
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                </Constraint>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout"/>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="m_jpCollectionsGeneral">
+                  <Constraints>
+                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="General" toolTip=""/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JButton" name="m_jbConstrColl">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Collection{}"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="2" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbConstrSet">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Set{}"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbConstrBag">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Bag{}"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbConstrSeq">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Sequence{}"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="2" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                      </Constraints>
+                    </Component>
+                    <Container class="javax.swing.JPanel" name="pad12">
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
+                        </Constraint>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                      </Constraints>
+
+                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+                    </Container>
+                    <Component class="javax.swing.JButton" name="m_jbCollSize">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="size"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbColCount">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="count"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbIsEmpty">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="isEmpty"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbNotEmpty">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="notEmpty"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbIncludes">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="includes"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbIncludesAll">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="includesAll"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Container class="javax.swing.JPanel" name="pad13">
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+                    </Container>
+                    <Component class="javax.swing.JButton" name="m_jbIterate">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="iterate"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbExists">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="exists"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbForAll">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="forAll"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbCollect">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="collect"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbSelect">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="select"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbReject">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="reject"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Container class="javax.swing.JPanel" name="pad14">
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+                    </Container>
+                    <Component class="javax.swing.JButton" name="m_jbUnion">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="union"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbIntersection">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="intersection"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="2" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbIncluding">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="including"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbExcluding">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="excluding"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbSum">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="sum"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Container class="javax.swing.JPanel" name="pad15">
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pad16">
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+                    </Container>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="m_jpCollectionsSet">
+                  <Constraints>
+                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="Sets" toolTip=""/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JButton" name="m_jbSetMinus">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="-"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbSymmetricDiff">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="symmetricDifference"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                      </Constraints>
+                    </Component>
+                    <Container class="javax.swing.JPanel" name="jPanel27">
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
+                        </Constraint>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                      </Constraints>
+
+                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="jPanel28">
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                        </Constraint>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                      </Constraints>
+
+                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+                    </Container>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="m_jpCollectionsSequence">
+                  <Constraints>
+                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="Sequences" toolTip=""/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JButton" name="m_jbSeqFirst">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="first"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbSeqLast">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="last"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbSeqAt">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="at"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbSeqAppend">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="append"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbSeqPrepend">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="prepend"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Container class="javax.swing.JPanel" name="jPanel29">
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="jPanel30">
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+                    </Container>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

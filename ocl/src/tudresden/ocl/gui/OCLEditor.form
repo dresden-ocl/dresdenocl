@@ -177,6 +177,19 @@
                         <Property name="alignment" type="int" value="2"/>
                       </Layout>
                       <SubComponents>
+                        <Component class="javax.swing.JButton" name="m_jbShowQuickBarButton">
+                          <Properties>
+                            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to show a QuickBar with OCL expression elements."/>
+                            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="QuickBar"/>
+                          </Properties>
+
+                          <Events>
+                            <EventHandler event="actionPerformed" handler="onQuickBarButton"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                          </Constraints>
+                        </Component>
                         <Component class="javax.swing.JButton" name="m_jbSubmitConstraintButton">
                           <Properties>
                             <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to submit your constraint."/>

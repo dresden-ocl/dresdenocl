@@ -24,7 +24,9 @@ export ARGOFILES="\
 	tudresden/ocl/parser/lexer/*.class \
 	tudresden/ocl/parser/lexer/lexer.dat \
 	tudresden/ocl/parser/parser/*.class \
-	tudresden/ocl/parser/parser/parser.dat"
+	tudresden/ocl/parser/parser/parser.dat \
+        tudresden/ocl/gui/*.class \
+        tudresden/ocl/gui/events/*.class"
 
 jar -cf ocl-argo.jar $ARGOFILES
 

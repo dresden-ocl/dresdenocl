@@ -237,6 +237,8 @@ public class OCLEditor extends javax.swing.JPanel
 
   public static final int OPTIONMASK_TYPECHECK = 1;
   public static final int OPTIONMASK_AUTOSPLIT = 2;
+
+  private OCLToolbar m_ocltQuickBar;
   
   /** Creates new form OCLEditor */
   public OCLEditor() {
@@ -416,6 +418,47 @@ public class OCLEditor extends javax.swing.JPanel
     
     return lResult;
   }
+
+  void addConstraintText (String[] saBefore,
+                             String sText,
+                             String[] saAfter) {
+    if (m_crCurrent != null) {
+      int nSelStart = -1;
+      int nSelEnd = -1;
+      
+      if (saBefore != null) {
+        for (int i = 0; i < saBefore.length; i++) {
+          if (i == 0) {
+            nSelStart = m_jtaConstraintEditor.getSelectionStart();
+            nSelEnd = nSelStart + saBefore[i].length() + 2;
+          }
+          
+          m_jtaConstraintEditor.replaceSelection ("<" + saBefore[i] + ">");
+        }
+      }
+      
+      m_jtaConstraintEditor.replaceSelection (sText);
+      
+      if (saAfter != null) {
+        for (int i = 0; i < saAfter.length; i++) {
+          if ((i == 0) &&
+               (nSelStart == -1)) {
+            nSelStart = m_jtaConstraintEditor.getSelectionStart();
+            nSelEnd = nSelStart + saAfter[i].length() + 2;
+          }
+          
+          m_jtaConstraintEditor.replaceSelection ("<" + saAfter[i] + ">");
+        }
+      }
+      
+      if (nSelStart != -1) {
+        m_jtaConstraintEditor.setSelectionStart (nSelStart);
+        m_jtaConstraintEditor.setSelectionEnd (nSelEnd);        
+      }
+      
+      m_jtaConstraintEditor.requestFocus();
+    }
+  }
   
   /** This method is called from within the constructor to
    * initialize the form.
@@ -436,6 +479,7 @@ public class OCLEditor extends javax.swing.JPanel
     m_jspConstraintEditorScroller = new javax.swing.JScrollPane ();
     m_jtaConstraintEditor = new javax.swing.JTextArea ();
     m_jpEditorButtonsGroup = new javax.swing.JPanel ();
+    m_jbShowQuickBarButton = new javax.swing.JButton ();
     m_jbSubmitConstraintButton = new javax.swing.JButton ();
     m_jpOptionsGroup = new javax.swing.JPanel ();
     m_jcbTypeChecking = new javax.swing.JCheckBox ();
@@ -524,6 +568,17 @@ public class OCLEditor extends javax.swing.JPanel
         
             m_jpEditorButtonsGroup.setLayout (new java.awt.FlowLayout (2, 5, 5));
         
+              m_jbShowQuickBarButton.setToolTipText ("Click to show a QuickBar with OCL expression elements.");
+              m_jbShowQuickBarButton.setText ("QuickBar");
+              m_jbShowQuickBarButton.addActionListener (new java.awt.event.ActionListener () {
+                public void actionPerformed (java.awt.event.ActionEvent evt) {
+                  onQuickBarButton (evt);
+                }
+              }
+              );
+          
+              m_jpEditorButtonsGroup.add (m_jbShowQuickBarButton);
+          
               m_jbSubmitConstraintButton.setToolTipText ("Click to submit your constraint.");
               m_jbSubmitConstraintButton.setText ("Submit");
               m_jbSubmitConstraintButton.addActionListener (new java.awt.event.ActionListener () {
@@ -590,6 +645,15 @@ public class OCLEditor extends javax.swing.JPanel
     add (m_jspTopLevelPane, java.awt.BorderLayout.CENTER);
 
   }//GEN-END:initComponents
+
+  private void onQuickBarButton (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onQuickBarButton
+    if (m_ocltQuickBar == null) {
+      m_ocltQuickBar = new OCLToolbar (this);
+    }
+    
+    m_ocltQuickBar.setVisible (true);
+    m_ocltQuickBar.toFront();
+  }//GEN-LAST:event_onQuickBarButton
 
   private void onAutoSplitStateChanged (java.awt.event.ItemEvent evt) {//GEN-FIRST:event_onAutoSplitStateChanged
     m_fDoAutoSplit = m_jcbAutoSplit.isSelected();
@@ -673,6 +737,7 @@ public class OCLEditor extends javax.swing.JPanel
   private javax.swing.JScrollPane m_jspConstraintEditorScroller;
   private javax.swing.JTextArea m_jtaConstraintEditor;
   private javax.swing.JPanel m_jpEditorButtonsGroup;
+  private javax.swing.JButton m_jbShowQuickBarButton;
   private javax.swing.JButton m_jbSubmitConstraintButton;
   private javax.swing.JPanel m_jpOptionsGroup;
   private javax.swing.JCheckBox m_jcbTypeChecking;
