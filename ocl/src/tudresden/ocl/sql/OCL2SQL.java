@@ -247,21 +247,25 @@ public class OCL2SQL extends JPanel implements ActionListener {
         tpResult.setTabPlacement(SwingConstants.BOTTOM);
         
         taResultTables = new JTextArea("");
+        taResultTables.setEditable(false);
         taResultTables.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane sp1 = new JScrollPane(taResultTables);
         tpResult.addTab("Table Schema", sp1);
         
         taResultObjectViews = new JTextArea("");
+        taResultObjectViews.setEditable(false);
         taResultObjectViews.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane sp2 = new JScrollPane(taResultObjectViews);
         tpResult.addTab("Object Views", sp2);
         
         taResultIntegrityViews = new JTextArea("");
+        taResultIntegrityViews.setEditable(false);
         taResultIntegrityViews.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane sp3 = new JScrollPane(taResultIntegrityViews);
         tpResult.addTab("Integrity Views", sp3);
         
         taResultTrigger = new JTextArea("");
+        taResultTrigger.setEditable(false);
         taResultTrigger.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane sp4 = new JScrollPane(taResultTrigger);
         tpResult.addTab("Trigger", sp4);
@@ -342,6 +346,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         }
         
         // do object relational mapping
+        if (!synchronizeObjectState()) return false;
         theSQLBuilder = new OracleSQLBuilder();
         theORMapping = new ORMappingImp(theRoughModel,
                                         ormClassToTableMode, 
@@ -366,6 +371,37 @@ public class OCL2SQL extends JPanel implements ActionListener {
     private void increaseProgressInfo() {
     }
     
+    private boolean synchronizeObjectState() {
+        if (rbInheritance0.isSelected()) {
+            ormClassToTableMode = 2;
+        } else if (rbInheritance1.isSelected()) {
+            ormClassToTableMode = 0;
+        } else if (rbInheritance2.isSelected()) {
+            ormClassToTableMode = 1;
+        }
+        
+        if (rbAssociations0.isSelected()) {
+            ormOneTablePerAss = false;
+        } else if (rbAssociations1.isSelected()) {
+            ormOneTablePerAss = true;
+        }
+        
+        try {
+            ormNumOfPKColumns = (Integer.valueOf(tfPKNoCol.getText())).intValue();
+        } catch(Exception e) {
+            showMessage("Error", "Number of primary key columns is no valid number: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if (cbPKType.getSelectedItem().equals("VARCHAR")) {
+            ormPKColType = "String";
+        } else if (cbPKType.getSelectedItem().equals("NUMBER")) {
+            ormPKColType = "int";
+        }       
+        
+        return true;
+    }
+        
     private void updateOutputPane() {
         taResultTables.setText(resultTableSchema);
         taResultObjectViews.setText(resultObjectViews);
@@ -469,14 +505,17 @@ public class OCL2SQL extends JPanel implements ActionListener {
         File theFile = null;
         FileInputStream fis;
         ObjectInputStream ois;
+        String ext[] = {"ocl"};
+        int dlgRetVal;
             
         // show open dialog
+        fileChooser.setFileFilter(new SimpleFileFilter("OCL constraint files (*.ocl)", ext));
         fileChooser.setDialogTitle("Open Constraint List");
-        fileChooser.showOpenDialog(this);
+        dlgRetVal = fileChooser.showOpenDialog(this);
             
         // check for selected file
         theFile = fileChooser.getSelectedFile();
-        if (theFile == null) return;
+        if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
         System.err.println(theFile.getAbsolutePath());
           
         // load the constraints from the specified file
@@ -531,14 +570,17 @@ public class OCL2SQL extends JPanel implements ActionListener {
         File theFile = null;
         FileInputStream fis;
         ObjectInputStream ois;
+        String ext[] = {"xmi"};
+        int dlgRetVal;
             
         // show open dialog
+        fileChooser.setFileFilter(new SimpleFileFilter("XMI files (*.xmi)", ext));
         fileChooser.setDialogTitle("Choose XMI Source");
-        fileChooser.showOpenDialog(this);
+        dlgRetVal = fileChooser.showOpenDialog(this);
             
         // check for selected file
         theFile = fileChooser.getSelectedFile();
-        if (theFile == null) return;
+        if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
         System.err.println(theFile.getAbsolutePath());
             
         // load the constraints from the specified file
