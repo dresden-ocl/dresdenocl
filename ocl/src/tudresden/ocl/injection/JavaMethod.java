@@ -50,6 +50,8 @@ public class JavaMethod extends JavaBehaviour
     // parent must not be null
     super(parent, modifiers, type, name);
     this.name_end=name_end;
+    if(type==null)
+      throw new RuntimeException();
   }
 
   public final boolean isConstructor()
