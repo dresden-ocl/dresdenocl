@@ -56,6 +56,8 @@ public class Sort
 		final File inFile = new File(args[0]);
 		final File outFile = new File(args[0]+".tempsorting");
 		sort(new BufferedReader(new FileReader(inFile)), new FileWriter(outFile));
+		if(!inFile.delete())
+			throw new IOException("deleting "+inFile+" failed.");
 		if(!outFile.renameTo(inFile))
 			throw new IOException("renaming from "+outFile+" to "+inFile+" failed.");
 	}
