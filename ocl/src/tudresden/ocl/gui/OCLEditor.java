@@ -22,6 +22,11 @@
 
 // OCLEditor.java -- new version of the ocl editor intented for practical use
 //
+// 10/16/2001  [sz9 ]  Added support for editor instances that whish to prevent
+//                     a constraint's context from being edited.
+// 10/16/2001  [sz9 ]  Added support for replacing the table model in subclasses.
+// 10/16/2001  [sz9 ]  Added support for deleting unedited, freshly created
+//                     constraints.
 // 03/12/2001  [sz9 ]  Added handling of line and column numbers in parser error
 //                     messages.
 // 02/23/2001  [sz9 ]  Added helper function to syntax check constraints.
@@ -64,9 +69,17 @@ public class OCLEditor extends javax.swing.JPanel
     */
   private static SimpleAttributeSet s_sasNormalText
       = new SimpleAttributeSet();
+
+  /**
+    * Attributes used to denote uneditable text.
+    */
+  private static SimpleAttributeSet s_sasNoEditText
+      = new SimpleAttributeSet();
+  
   static {
     if (StyleConstants.Alignment != null) {
       // Just a dummy to properly initialize StyleConstants...
+      // for some reason this seems to be necessary...
     }
     
     s_sasField.addAttribute (
@@ -75,8 +88,127 @@ public class OCLEditor extends javax.swing.JPanel
     s_sasField.addAttribute (
         "isField",
         Boolean.TRUE);
+
+    s_sasNoEditText.addAttribute (
+        StyleConstants.CharacterConstants.Italic,
+        Boolean.TRUE);
+    s_sasNoEditText.addAttribute (
+        "allowEdit",
+        Boolean.FALSE);
+    // provoke automatic selection of the whole un-editable text
+    // when the cursor enters it
+    s_sasNoEditText.addAttribute (
+        "isField",
+        Boolean.TRUE);
   }
 
+  /**
+   * A specialized styled document that will prevent editing of portions of text
+   * which have been specially marked "allowEdit"==FALSE.
+   */
+  protected static class OCLEditorDocument extends DefaultStyledDocument {
+    
+    /**
+     * If >= 0, {@link #checkEditLocation} will throw a
+     * {@link BadLocationException} on attempts to remove or modify elements
+     * which are marked "allowEdit"==FALSE.
+     */
+    private int m_nDoCheckUneditable = 0;
+    
+    public void insertString (final int offset,
+                              final String str,
+                              final AttributeSet a)
+        throws BadLocationException {
+      checkEditLocation (offset, 0);
+      
+      super.insertString (offset, str, a);
+    }
+    
+    public void remove (int offset,
+                        int length)
+        throws BadLocationException {
+      checkEditLocation (offset, length);
+      
+      super.remove (offset, length);
+    }
+    
+    /**
+     * Stop checking for uneditable elements. Must be paired with calls to 
+     * {@link #restartChecking}.
+     */
+    public void stopChecking() {
+      m_nDoCheckUneditable --;
+    }
+    
+    /**
+     * Restart checking for uneditable elements. Must be paired with calls to 
+     * {@link #stopChecking}.
+     */
+    public void restartChecking() {
+      m_nDoCheckUneditable ++;
+    }
+    
+    /**
+     * Check the edit range for intersection with any elements that are marked
+     * uneditable.
+     */
+    protected void checkEditLocation (int offset,
+                                      int length)
+        throws BadLocationException {
+      if (m_nDoCheckUneditable < 0) {
+        return;
+      }
+       
+      //System.out.println ("OCLEditor$OCLEditorDocument.checkEditLocation: invoked for (" + offset + ", " + length + ")");
+      // Get first affected element    
+      Element eAffected = getDefaultRootElement();
+      while (! eAffected.isLeaf()) {
+        eAffected = eAffected.getElement (
+            eAffected.getElementIndex (offset));
+      }
+
+      // check all affected elements
+      while (
+             (eAffected != null) &&
+             (
+              (eAffected.getStartOffset() <= offset) ||
+              (eAffected.getEndOffset() >= offset + length)
+             )
+            ) {
+        if (eAffected.getAttributes().getAttribute ("allowEdit") == Boolean.FALSE) {
+          // do not allow edit
+          //System.out.println ("OCLEditor$OCLEditorDocument.checkEditLocation: denying edit for (" + offset + ", " + length + ")");
+          throw new BadLocationException (
+              "Editing not allowed.",
+              Math.max (offset, eAffected.getStartOffset())
+            );
+        }
+        else {
+          eAffected = getNeighbouringElement (eAffected);
+        }
+      }
+    }
+    
+    protected Element getNeighbouringElement (Element e) {
+      Element eTemp = e.getParentElement();
+      
+      // move up in the tree
+      while ((eTemp != null) &&
+             (eTemp.getEndOffset() <= e.getEndOffset())) {
+        e = eTemp;
+        eTemp = eTemp.getParentElement();
+      }
+      
+      // and down again
+      while ((eTemp != null) &&
+             (! eTemp.isLeaf())) {
+        eTemp = eTemp.getElement (eTemp.getElementIndex (e.getEndOffset()));
+      }
+      
+      return eTemp;
+    }
+  }
+  
   /**
     * Table model for the table of constraints.
     *
@@ -264,11 +396,18 @@ public class OCLEditor extends javax.swing.JPanel
    */
   private boolean m_fDoAutoSplit = true;
 
+  /**
+   * Should the constraints context (everything up to the first 'inv', 'pre',
+   * or 'post') be un-editable?
+   */
+  private boolean m_fNoContextEdit = false;
+  
   public static final int OPTIONMASK_TYPECHECK = 1;
   public static final int OPTIONMASK_AUTOSPLIT = 2;
 
   /**
-    * The options supported by this instance of the editor.
+    * The options supported by this instance of the editor. I.e., the options
+    * which will show up in the options dialog.
     */
   private int m_nOptionMask = OPTIONMASK_TYPECHECK | OPTIONMASK_AUTOSPLIT;
 
@@ -396,7 +535,7 @@ public class OCLEditor extends javax.swing.JPanel
 
       m_jbSaveEditResult.setEnabled (true);
       
-      m_jtpConstraintEditor.requestFocus();
+      m_jtpConstraintEditor.requestFocus();      
       
       m_ocltbQuickBar.setVisible (m_jcbQuickBar.isSelected());
       m_jcbQuickBar.setEnabled (true);
@@ -420,10 +559,7 @@ public class OCLEditor extends javax.swing.JPanel
       m_jpToolbarWrapper.remove (m_jpEditorPanel);
       m_jpToolbarWrapper.add (m_jspMainPane, java.awt.BorderLayout.CENTER);
 
-      if (m_crCurrent != null) {
-        // Reset editor panel contents
-        m_jtpConstraintEditor.setText (m_crCurrent.getData());
-      }
+      setEditorText (m_crCurrent);
       
       m_jbNew.setEnabled (true);
       m_jbRemove.setEnabled (true);
@@ -477,6 +613,20 @@ public class OCLEditor extends javax.swing.JPanel
 
   public int getOptionMask() {
     return m_nOptionMask;
+  }
+  
+  /**
+   * Specify whether or not to allow editing the context of a constraint.
+   */
+  public void setNoContextEdit (boolean fNoContextEdit) {
+    m_fNoContextEdit = fNoContextEdit;
+  }
+  
+  /**
+   * Return whether context editing is currently prohibited.
+   */
+  public boolean getNoContextEdit() {
+    return m_fNoContextEdit;
   }
   
   /**
@@ -690,6 +840,59 @@ public class OCLEditor extends javax.swing.JPanel
     }
   }
 
+  /**
+   * Replace the contents of the edior by the data of the specified constraint.
+   */
+  protected void setEditorText (ConstraintRepresentation cr) {
+    m_jtpConstraintEditor.setCharacterAttributes (s_sasNormalText, true);
+    
+    if (cr != null) {
+      if (m_fNoContextEdit) {
+        ((OCLEditorDocument) m_jtpConstraintEditor.getDocument()).stopChecking();
+        m_jtpConstraintEditor.setText ("");
+        ((OCLEditorDocument) m_jtpConstraintEditor.getDocument()).restartChecking();
+        
+        String s = cr.getData();
+        
+        int nInvPos = s.indexOf ("inv"); if (nInvPos == -1) { nInvPos = s.length(); }
+        int nPrePos = s.indexOf ("pre"); if (nPrePos == -1) { nPrePos = s.length(); }
+        int nPostPos = s.indexOf ("post"); if (nPostPos == -1) { nPostPos = s.length(); }
+        
+        int nContextEnd =
+            Math.min (
+              Math.min (
+                nInvPos,
+                nPrePos
+              ),
+              nPostPos
+            );
+        
+        m_jtpConstraintEditor.setCharacterAttributes (
+            s_sasNoEditText,
+            true
+          );
+        m_jtpConstraintEditor.replaceSelection (s.substring (0, nContextEnd));
+
+        m_jtpConstraintEditor.setCharacterAttributes (
+            s_sasNormalText,
+            true
+          );
+        m_jtpConstraintEditor.replaceSelection (s.substring (nContextEnd));
+      }
+      else {
+        // TODO: Deal with fields.
+        ((OCLEditorDocument) m_jtpConstraintEditor.getDocument()).stopChecking();
+        m_jtpConstraintEditor.setText (cr.getData());
+        ((OCLEditorDocument) m_jtpConstraintEditor.getDocument()).restartChecking();
+      }
+    }
+    else {
+      ((OCLEditorDocument) m_jtpConstraintEditor.getDocument()).stopChecking();
+      m_jtpConstraintEditor.setText ("");
+      ((OCLEditorDocument) m_jtpConstraintEditor.getDocument()).restartChecking();
+    }
+  }
+  
   /** This method is called from within the constructor to
    * initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is
@@ -820,6 +1023,7 @@ public class OCLEditor extends javax.swing.JPanel
       
       
         m_jtpConstraintEditor.setToolTipText ("Edit the constraint expression");
+          m_jtpConstraintEditor.setDocument (new OCLEditorDocument ());
           m_jtpConstraintEditor.addCaretListener (new javax.swing.event.CaretListener () {
             public void caretUpdate (javax.swing.event.CaretEvent evt) {
               onCaretUpdate (evt);
@@ -1189,20 +1393,17 @@ public class OCLEditor extends javax.swing.JPanel
     else {
       m_crCurrent = null;
     }
-    
-    m_jtpConstraintEditor.setCharacterAttributes (s_sasNormalText, true);
+
+    setEditorText (m_crCurrent);
     if (m_crCurrent != null) {
       // TODO: Deal with fields.
-      m_jtpConstraintEditor.setText (m_crCurrent.getData());
       m_jtpConstraintPreview.setText (m_crCurrent.getData());
-      //m_jtpConstraintEditor.requestFocus(); --> Not visible, as this cannot happen in edit mode!
     }
     else {
-      m_jtpConstraintEditor.setText ("");
       m_jtpConstraintPreview.setText ("");
     }
   }
- 
+
   // ConstraintChangeListener interface methods
   
   /**
