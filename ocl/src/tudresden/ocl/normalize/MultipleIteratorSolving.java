@@ -245,7 +245,7 @@ public class MultipleIteratorSolving extends DepthFirstAdapter implements TreeNo
         nextPoExTail.addFirst(
           create
         ); // end nextPoExTail.addFirst
-        prevPoEx.setPostfixExpressionTail( nextPoExTail );
+        prevPoEx.getPostfixExpressionTail().addAll( nextPoExTail );
       }
       tree.changeNotify();
     } // end if
