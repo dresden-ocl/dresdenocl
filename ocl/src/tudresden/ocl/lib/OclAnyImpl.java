@@ -178,6 +178,12 @@ public class OclAnyImpl extends OclAny {
     // if you find a bug here, it it probably there as well.
     HashSet hsVisited = new HashSet();
     LinkedList llToVisit = new LinkedList();
+    if (myclass.isInterface()) {
+      // as we're dealing with actual instances, it can be assumed that Object is
+      // a superclass
+      llToVisit.add (java.lang.Object.class);
+    }
+    
     for(Class iclass=myclass; iclass!=null; ) //iclass=iclass.getSuperclass()
     {
       Method[] methods=iclass.getDeclaredMethods();

@@ -7,6 +7,10 @@ Changes that could break older environments
 -------------------------------------------
 
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
+  [OCL Library]  to also include methods defined by java.lang.Object if the original
+                 classifier is an interface.
+
+* [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
   [OCL Library]  to also include methods defined by interfaces extended by other
                  interfaces.
 
@@ -29,6 +33,10 @@ Other changes
 
 Fixed bugs
 ----------
+* [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
+  [OCL Library]  to also include methods defined by java.lang.Object if the original
+                 classifier is an interface.
+
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
   [OCL Library]  to also include methods defined by interfaces extended by other
                  interfaces.

@@ -133,7 +133,13 @@ public class ClassAny implements Any {
     // interface. Therefore, we need to check out getInterfaces() if iclass is
     // an interface
     HashSet hsVisited = new HashSet();
-    LinkedList llToVisit = new LinkedList();
+    LinkedList llToVisit = new LinkedList(); 
+    if (c.isInterface()) {
+      // as we're dealing with actual instances, it can be assumed that Object is
+      // a superclass
+      llToVisit.add (java.lang.Object.class);
+    }
+    
     classloop: for(Class iclass=c; iclass!=null; )   //iclass=iclass.getSuperclass())
     {
       Method[] methods=iclass.getDeclaredMethods();
@@ -144,9 +150,22 @@ public class ClassAny implements Any {
         Class[] methodparams=methods[i].getParameterTypes();
         if(params.length!=methodparams.length)
           continue methodloop;
+        
+        System.err.print ("Checking method " + name + " (");
+        for (int j=0; j<methodparams.length; j++) {
+          if (j!=0) {
+            System.err.print (", ");
+          }
+          
+          System.err.print (methodparams[j]);
+        }
+        System.err.println (")");
+
         for(int j=0; j<params.length; j++)
-          if(!params[j].conformsTo(getTypeForClass(methodparams[j])))
+          if(!params[j].conformsTo(getTypeForClass(methodparams[j]))) {
+            System.err.println ("No conformance for paramter # " + j);
             continue methodloop;
+          }
         if(foundmethod==null)
           foundmethod=methods[i];
         else
