@@ -68,8 +68,7 @@ public class OracleSQLBuilder implements SQLBuilder {
     datatypes.put(TypeManager.TIMESTAMP, "DATE");
     reserved = new HashSet();
     try{
-        BufferedReader r = new BufferedReader(new InputStreamReader(
-          new FileInputStream("tudresden/ocl/sql/oracleReserved.txt")));
+        BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("oracleReserved.txt")));
         if(r != null)
             try{
               String line="";
@@ -79,9 +78,8 @@ public class OracleSQLBuilder implements SQLBuilder {
                 r.close();
             }
     }
-    catch (Exception e){
-        System.err.println("OracleSQLBuilder: Exception while reading reserved words.");
-        e.printStackTrace();
+    catch (IOException e){
+        throw new RuntimeException(e.getMessage());
     }
 	}
 
