@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.25 2001/09/06 21:03:31 rw7 Exp $
+$Id: build.xml,v 1.26 2001/09/06 21:36:11 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -142,7 +142,7 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="dresden-ocl-lib.jar"
+  <target name="jar.dresden-ocl-lib"
           description="Compiles and jars the OCL Runtime Library."
           depends="build.dir">
     <mkdir dir="${build.dir}/dresden-ocl-lib" />
@@ -171,7 +171,7 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="ocl-argo.jar"
+  <target name="jar.ocl-argo"
           description="Compiles and jars the OCL for Argo/UML package."
           depends="sablecc,build.dir">
 
@@ -224,7 +224,7 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="dresden-ocl-injector.jar"
+  <target name="jar.dresden-ocl-injector"
           description="Compiles and jars the OCL for Java package."
           depends="sablecc,build.dir">
     <mkdir dir="${build.dir}/dresden-ocl-injector" />
@@ -276,7 +276,7 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="dresden-injector.jar"
+  <target name="jar.dresden-injector"
           depends="build.dir">
     <echo message="EXPERIMENTAL: Compiles and jars the Java Injection package. This is without OCL." />
 
@@ -308,7 +308,7 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="dresden-ocl-demo.jar"
+  <target name="jar.dresden-ocl-demo"
           description="Compiles and jars the OCL Demo Applet."
           depends="sablecc,build.dir">
 
@@ -371,9 +371,9 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="royloy.jar"
+  <target name="jar.royloy"
           description="Compiles and jars the example code for dresden-ocl-injector.jar."
-          depends="build.dir,dresden-ocl-lib.jar">
+          depends="build.dir,jar.dresden-ocl-lib">
 
     <mkdir dir="${build.dir}/royloy" />
 
@@ -403,7 +403,7 @@ New version by Ralf Wiebicke.
     />
   </target>
 
-  <target name="dresden-ocl-sql.jar"
+  <target name="jar.dresden-ocl-sql"
           description="Compiles and jars the OCL2SQL application."
           depends="sablecc,build.dir">
 
@@ -468,15 +468,15 @@ New version by Ralf Wiebicke.
     </jar>
   </target>
 
-  <target name="jars"
+  <target name="jar"
           description="Builds all jar files."
-          depends="dresden-ocl-lib.jar,
-                   ocl-argo.jar,
-                   dresden-ocl-injector.jar,
-                   dresden-ocl-demo.jar,
-                   dresden-ocl-sql.jar,
-                   royloy.jar,
-                   dresden-injector.jar"
+          depends="jar.dresden-ocl-lib,
+                   jar.ocl-argo,
+                   jar.dresden-ocl-injector,
+                   jar.dresden-ocl-demo,
+                   jar.dresden-ocl-sql,
+                   jar.royloy,
+                   jar.dresden-injector"
   />
 
 
@@ -563,7 +563,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
   <target name="test.dresden-ocl-injector"
           description="Runs a test suite for dresden-ocl-injector.jar and royloy.jar."
-          depends="dresden-ocl-injector.jar,royloy.jar">
+          depends="jar.dresden-ocl-injector,jar.royloy">
     <mkdir  dir="${build.dir}/testweb" />
     <copy file="${build.dir}/dresden-ocl-injector.jar" todir="${build.dir}/testweb" />
     <delete dir="${build.dir}/testweb/tudresden" />
@@ -620,7 +620,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
 
   <target name="test.example.inject"
-          depends="build.dir,dresden-ocl-lib.jar,dresden-ocl-injector.jar"
+          depends="build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector"
   >
     <delete dir="${example.dir}"/>
     <copy todir="${example.dir}">
@@ -660,7 +660,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
   </target>
 
   <target name="test.example.run"
-          depends="test.example.inject,dresden-ocl-lib.jar"
+          depends="test.example.inject,jar.dresden-ocl-lib"
   >
     <echo taskname="run" message="Running ${example.dir}/tudresden/ocl/injection/test/Example.java" />
     <echo taskname="run" message="ocl constraint violations must occur now." />
@@ -682,7 +682,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
   </target>
 
   <target name="test.example.clean"
-          depends="test.example.run,dresden-ocl-injector.jar"
+          depends="test.example.run,jar.dresden-ocl-injector"
   >
     <echo taskname="clean" message="Cleaning ${example.dir}/tudresden/ocl/injection/test/Example.java" />
     <java classname="tudresden.ocl.injection.ocl.Main" failonerror="yes">
@@ -710,7 +710,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
 
   <target name="test.royloy.inject"
-          depends="build.dir,dresden-ocl-lib.jar,dresden-ocl-injector.jar"
+          depends="build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector"
   >
     <delete dir="${royloy.dir}"/>
     <copy todir="${royloy.dir}">
@@ -746,7 +746,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
   </target>
 
   <target name="test.royloy.run"
-          depends="test.royloy.inject,dresden-ocl-lib.jar"
+          depends="test.royloy.inject,jar.dresden-ocl-lib"
   >
     <echo taskname="run" message="Running ${royloy.dir}/tudresden/ocl/test/TestInjectionRoyloy.java" />
     <java classname="tudresden.ocl.test.TestInjectionRoyloy" failonerror="yes">
@@ -766,7 +766,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
   </target>
 
   <target name="test.royloy.clean"
-          depends="test.royloy.run,dresden-ocl-injector.jar"
+          depends="test.royloy.run,jar.dresden-ocl-injector"
   >
     <echo taskname="clean" message="Cleaning ${royloy.dir}/tudresden/ocl/test/royloy/*.java" />
     <java classname="tudresden.ocl.injection.ocl.Main" failonerror="yes">
@@ -866,8 +866,8 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
 
   <target name="all"
-          description="Does everything: compile, test, jars and docs."
-          depends="compile, test, jars, docs"
+          description="Does everything: compile, test, jar and docs."
+          depends="compile, test, jar, docs"
   />
 
 </project>
