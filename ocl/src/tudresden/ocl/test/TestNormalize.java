@@ -220,7 +220,7 @@ public class TestNormalize extends TestCase {
    *      - OclExpression after is normalized to OclExpression after
    */
   protected boolean convertsTo(String before, String after) throws Exception {
-    System.out.println("converting "+before);
+    //System.out.println("converting "+before);
     OclTree tree=DocCheck.createTree(before);
     tree.applyDefaultNormalizations();
     OclTree otherTree=DocCheck.createTree(after);

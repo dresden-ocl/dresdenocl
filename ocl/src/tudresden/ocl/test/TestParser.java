@@ -36,6 +36,7 @@ import tudresden.ocl.*;
 import tudresden.ocl.parser.*;
 import tudresden.ocl.check.OclTypeException;
 import tudresden.ocl.check.types.*;
+import tudresden.ocl.check.types.xmifacade.*;
 import java.io.*;
 import java.util.*;
 import java.util.StringTokenizer;
@@ -48,16 +49,17 @@ public class TestParser extends TestCase {
   boolean[] typesOK;
 
   URL testFileName;
+  ModelFacadeFactory facadeFactory;
   ModelFacade facade;
 
-  public TestParser(String s, URL testFile, ModelFacade facade) {
+  public TestParser(final String s, final URL testFile, final ModelFacadeFactory facadeFactory) {
     super(s);
     this.testFileName=testFile;
-    this.facade=facade;
+    this.facadeFactory=facadeFactory;
   }
 
-  public void testFromFile() {
-    System.out.println("starting testFromFile, using "+facade);
+  public void testFromFile() throws Exception{
+    facade=facadeFactory.makeModelFacade();
     try {
       String testfile=readTestFile();
       getExpression(testfile);
@@ -65,39 +67,22 @@ public class TestParser extends TestCase {
       for (int i=0; i<size; i++) {
         try {
           OclTree ot=getTree(oclExpressions[i]);
-          if (!syntaxOK[i])
-            System.out.println("incorrectly parsed successfully:\n"+oclExpressions[i]);
+          assertTrue( "incorrectly parsed successfully:\n"+oclExpressions[i], syntaxOK[i] );
           ot.assureTypes();
           ot.applyGeneratedTests();
-          if (!typesOK[i])
-            System.out.println("incorrectly type-checked successfully:\n"+oclExpressions[i]);
-          assertTrue( syntaxOK[i] && typesOK[i] );
+          assertTrue( "incorrectly type-checked successfully:\n"+oclExpressions[i], typesOK[i] );
         }
         catch (OclTypeException e) {
-          if (typesOK[i])
-          {
-            System.out.println("failed to type-check:\n"+oclExpressions[i]);
-            throw new RuntimeException(e.toString()+oclExpressions[i]);
-            //assertTrue( !typesOK[i] );
-          }
+          assertTrue("failed to type-check:\n"+oclExpressions[i], !typesOK[i] );
         }
         catch (OclParserException e) {
-          if (syntaxOK[i])
-            System.out.println("failed to parse:\n"+oclExpressions[i]);
-          assertTrue( !syntaxOK[i] );
+          assertTrue("failed to parse:\n"+oclExpressions[i], !syntaxOK[i] );
         }
         catch (IOException e) {
-          if (syntaxOK[i])
-            System.out.println("failed to parse:\n"+oclExpressions[i]);
-          assertTrue( !syntaxOK[i] );
+          assertTrue("failed to parse:\n"+oclExpressions[i], !syntaxOK[i] );
         }
         catch (tudresden.ocl.OclException e) {
-          if (typesOK[i])
-          {
-            System.out.println("generated tests failed:\n"+oclExpressions[i]);
-            throw new RuntimeException(e.toString()+oclExpressions[i]);
-            //assertTrue( !typesOK[i] );
-          }
+          assertTrue("generated tests failed:\n"+oclExpressions[i], !typesOK[i] );
         }
       }
     }
@@ -171,54 +156,83 @@ public class TestParser extends TestCase {
 
   public static Test suite() {
     TestSuite suite=new TestSuite();
+
     suite.addTest( new TestParser(
       "testFromFile",
       TestParser.class.getResource("oclexpressions"),
-      new tudresden.ocl.check.types.testfacade.TestModelFacade()
-    ) );
-    String[] reflectpackages=new String[1];
-    reflectpackages[0]="tudresden.ocl.test.royloy";
+      new ModelFacadeFactory()
+      {
+        public ModelFacade makeModelFacade()
+        {
+          return new tudresden.ocl.check.types.testfacade.TestModelFacade();
+        }
+      }
+    ));
     suite.addTest( new TestParser(
       "testFromFile",
       TestParser.class.getResource("oclexpressions.xmi"),
-      new tudresden.ocl.check.types.ReflectionFacade(
-        reflectpackages,
-        new tudresden.ocl.check.types.DefaultReflectionAdapter(),
-        new tudresden.ocl.lib.ArgoNameAdapter(),
-        new tudresden.ocl.injection.ocl.SourceReflectionExtender()
-      )
-    ) );
+      new ModelFacadeFactory()
+      {
+        public ModelFacade makeModelFacade()
+        {
+          return new tudresden.ocl.check.types.ReflectionFacade(
+            new String[] {"tudresden.ocl.test.royloy"},
+            new tudresden.ocl.check.types.DefaultReflectionAdapter(),
+            new tudresden.ocl.lib.ArgoNameAdapter(),
+            new tudresden.ocl.injection.ocl.SourceReflectionExtender());
+        }
+      }
+    ));
     suite.addTest( new TestParser(
       "testFromFile",
       TestParser.class.getResource("oclexpressions.xmi"),
-      tudresden.ocl.check.types.xmifacade.stress.Royloy.getModel()
-    ) );
-    try {
-      String description="xmi/argo07/royloy.xmi";
-      String file=TestParser.class.getResource(description).getFile();
-      suite.addTest( new TestParser(
-        "testFromFile",
-        TestParser.class.getResource("oclexpressions.argo"),
-        tudresden.ocl.check.types.xmifacade.XmiParser.getModel(file, description)
-      ) );
-    }
-    catch (Exception e) {
-      System.out.println("error while creating XMI model facade for argo:");
-      e.printStackTrace(System.out);
-    }
-    try {
-      String description="xmi/rose/royloy.xml";
-      String file=TestParser.class.getResource(description).getFile();
-      suite.addTest( new TestParser(
-        "testFromFile",
-        TestParser.class.getResource("oclexpressions.xmi"),
-        tudresden.ocl.check.types.xmifacade.XmiParser.getModel(file,description,true)
-      ) );
-    }
-    catch (Exception e) {
-      System.out.println("error while creating XMI model facade:");
-      e.printStackTrace(System.out);
-    }
+      new ModelFacadeFactory()
+      {
+        public ModelFacade makeModelFacade() throws Exception
+        {
+          return tudresden.ocl.check.types.xmifacade.stress.Royloy.getModel();
+        }
+      }
+    ));
+    suite.addTest( new TestParser(
+      "testFromFile",
+      TestParser.class.getResource("oclexpressions.argo"),
+      new ModelFacadeFactory()
+      {
+        public ModelFacade makeModelFacade() throws Exception
+        {
+          final File actual = new File("argo07_royloy.debug.bak");
+          final String resource = "xmi/argo07/royloy.xmi";
+          Model result = XmiParser.getModel(
+            getClass().getResource(resource).getFile(),
+            resource
+          );
+          result.printData(new PrintStream(new FileOutputStream(actual)));
+          Diff.diff(new DiffSource(getClass().getResource(resource+".debug")), new DiffSource(actual));
+          return result;
+        }
+      }
+    ));
+    suite.addTest( new TestParser(
+      "testFromFile",
+      TestParser.class.getResource("oclexpressions.xmi"),
+      new ModelFacadeFactory()
+      {
+        public ModelFacade makeModelFacade() throws Exception
+        {
+          final File actual = new File("rose_royloy.debug.bak");
+          final String resource = "xmi/rose/royloy.xml";
+          Model result = tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
+            getClass().getResource("xmi/rose/royloy.xml").getFile(),
+            resource,
+            true
+            );
+          result.printData(new PrintStream(new FileOutputStream(actual)));
+          Diff.diff(new DiffSource(getClass().getResource(resource+".debug")), new DiffSource(actual));
+          return result;
+        }
+      }
+    ));
     return suite;
   }
 }

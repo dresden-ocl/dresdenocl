@@ -21,10 +21,9 @@ package tudresden.ocl.check.types.xmifacade.stress;
 import tudresden.ocl.check.types.*;
 import tudresden.ocl.check.OclTypeException;
 import tudresden.ocl.check.types.xmifacade.*;
+import tudresden.ocl.test.*;
 
-import java.io.PrintStream;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import junit.framework.*;
 
 public class Test extends TestCase
@@ -39,13 +38,7 @@ public class Test extends TestCase
     super(s);
   }
 
-  public static void main(String[] args)
-  {
-    (new Test()).doTest();
-  }
-
   private Model m;
-  private int errors=0;
 
   private void assertQualified(Any classifier, String name, Type type)
   {
@@ -54,43 +47,56 @@ public class Test extends TestCase
 
   private void assertQualified(Any classifier, String name, Type[] qualifiers, Type type)
   {
+    assertQualified(classifier, name, qualifiers, type, null);
+  }
+
+  private void assertQualified(Any classifier, String name, Type[] qualifiers, Type type, String exceptionMessage)
+  {
     Type restype=null;
     try
     {
       restype=classifier.navigateQualified(name, qualifiers);
+      assertNull(exceptionMessage);
     }
-    catch(OclTypeException e) {System.out.println(e.getMessage());};
+    catch(OclTypeException e)
+    {
+      assertEquals(exceptionMessage, e.getMessage());
+    };
 
     if(type==null&&restype!=null || type!=null&&!type.equals(restype))
     {
-      errors++;
-      System.out.println(
-        "ERROR: For classifier\""+classifier+
+      fail(
+        "For classifier\""+classifier+
         "\" feature \""+Basic.qualifierString(name, qualifiers)+
         "\": expected type \""+((type!=null)?Basic.typeString(type):"NULL")+
         "\", found \""+((restype!=null)?Basic.typeString(restype):"NULL")+"\".");
-      assertTrue(false);
     }
   }
 
   private void assertParameterized(Any classifier, String name, Type[] params, Type type)
+  {
+    assertParameterized(classifier, name, params, type, null);
+  }
+
+  private void assertParameterized(Any classifier, String name, Type[] params, Type type, String exceptionMessage)
   {
     Type restype=null;
     try
     {
       restype=classifier.navigateParameterized(name, params);
     }
-    catch(OclTypeException e) {System.out.println(e.getMessage());};
+    catch(OclTypeException e)
+    {
+      assertEquals(exceptionMessage, e.getMessage());
+    };
 
     if(type==null&&restype!=null || type!=null&&!type.equals(restype))
     {
-      errors++;
-      System.out.println(
-        "ERROR: For classifier\""+classifier+
+      fail(
+        "For classifier\""+classifier+
         "\" feature \""+Basic.signatureString(name,params)+
         "\": expected type \""+((type!=null)?Basic.typeString(type):"NULL")+
         "\", found \""+((restype!=null)?Basic.typeString(restype):"NULL")+"\".");
-      assertTrue(false);
     }
   }
 
@@ -105,24 +111,24 @@ public class Test extends TestCase
 
     if(a1!=a2)
     {
-      errors++;
-      System.out.println(
-        "ERROR: classifier \""+a1+
+      fail(
+        "classifier \""+a1+
         "\" found, but \""+a2+
         "\", expected.");
-      assertTrue(false);
     }
   }
 
-  public void doTest()
+  public void doTest() throws Exception
   {
     String filename="xmistress.xmi";
-    String xmiurl=(getClass().getResource(filename)).getFile();
+    String xmiurl=getClass().getResource(filename).getFile();
     m=tudresden.ocl.check.types.xmifacade.XmiParser.getModelCatch(
       xmiurl,
       getClass().toString()+".getResource("+filename+')'
     );
-    m.printData(System.out);
+    assertNotNull(m);
+    m.printData(new PrintStream(new FileOutputStream(filename+".debug.bak")));
+    Diff.diff(new DiffSource(getClass().getResource(filename+".debug")), new DiffSource(new File(filename+".debug.bak")));
 
     Any alpha=m.getClassifier("Alpha");
     Any beta =m.getClassifier("Beta");
@@ -167,7 +173,7 @@ public class Test extends TestCase
     assertParameterized(beta, "alpha1", paramsEmpty, eins);
     assertParameterized(beta, "beta1", paramsEmpty, eins);
     assertParameterized(beta, "alpha1", paramsString, zwei);
-    assertQualified(beta, "beta", null);
+    assertQualified(beta, "beta", null, null, "Expected attribute \"beta\" in classifier \"packageAleph::Beta\" cannot be used in OCL due to ambiguity. See OCL spec 5.4.1.");
     assertQualified(beta, "gamma", gamma);
 
     //inherited from alpha
@@ -185,7 +191,8 @@ public class Test extends TestCase
     assertParameterized(gamma, "alpha1", paramsString, zwei);
 
     //gammas own
-    assertQualified(gamma, "drei", null); // ambiguity beetween attribute and automatic rolename
+    // ambiguity beetween attribute and automatic rolename
+    assertQualified(gamma, "drei", null, null, "Expected attribute \"drei\" in classifier \"packageAleph::Gamma\" cannot be used in OCL due to ambiguity. See OCL spec 5.4.1.");
     assertQualified(gamma, "beta", beta); // feature overrides inherited ambiguious feature
 
     assertQualified(eins, "alpha", alphaSet);
@@ -193,21 +200,25 @@ public class Test extends TestCase
 
     //inherited from eins
     assertQualified(zwei, "alpha", alphaSet);
-    assertParameterized(zwei, "hoppel", paramsBeta,  null); // matching more than one operation, thus not available for OCL
+    // matching more than one operation, thus not available for OCL
+    assertParameterized(zwei, "hoppel", paramsBeta,  null, "Expected operation \"hoppel(Beta)\" in classifier \"packageAleph::Zwei\" not found.");
 
     //zweis own
     assertQualified(zwei, "beta", beta);
     assertParameterized(zwei, "hoppel", paramsAlpha, alpha);
-    assertParameterized(zwei, "hoppel", paramsGamma, null); // matching more than one operation, thus not available for OCL
+    // matching more than one operation, thus not available for OCL
+    assertParameterized(zwei, "hoppel", paramsGamma, null, "Expected operation \"hoppel(Gamma)\" in classifier \"packageAleph::Zwei\" not found.");
 
     //inherited from eins
     assertQualified(drei, "alpha", alphaSet);
-    assertParameterized(drei, "hoppel", paramsBeta, null); // matching more than one operation, thus not available for OCL
+    // matching more than one operation, thus not available for OCL
+    assertParameterized(drei, "hoppel", paramsBeta, null, "Expected operation \"hoppel(Beta)\" in classifier \"packageAleph::Drei\" not found.");
 
     //inherited from zwei
     assertQualified(drei, "beta", beta);
     assertParameterized(drei, "hoppel", paramsAlpha, alpha);
-    assertParameterized(drei, "hoppel", paramsGamma, null); // matching more than one operation, thus not available for OCL
+    // matching more than one operation, thus not available for OCL
+    assertParameterized(drei, "hoppel", paramsGamma, null, "Expected operation \"hoppel(Gamma)\" in classifier \"packageAleph::Drei\" not found.");
 
     //dreis own
     assertQualified(drei, "gamma", gamma);
@@ -229,13 +240,6 @@ public class Test extends TestCase
     assertTrue(" packageAleph :: Drei ",  drei);
     assertTrue(" packageBeleph :: classBeleph ", beleph);
 
-    if(errors>0)
-    {
-      System.out.println(
-        "ATTENTION: tudresden.ocl.check.types.xmifacade.Test detected " +
-        String.valueOf(errors) +
-        " errors.");
-    }
   }
 
   public static junit.framework.Test suite()

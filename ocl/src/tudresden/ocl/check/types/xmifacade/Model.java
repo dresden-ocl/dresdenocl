@@ -101,24 +101,6 @@ public final class Model implements ModelFacade
   /**
      Useful for debugging.
   */
-  public void printData()
-  {
-    String log;
-    try
-    {
-      log=System.getProperty("tudresden.ocl.check.types.xmifacade.log");
-    }
-    catch(SecurityException e) {log=null;};
-
-    if(log!=null)
-    {
-      printData(System.out);
-    }
-  }
-
-  /**
-     Useful for debugging.
-  */
   public void printData(java.io.PrintStream o)
   {
     HashSet done=new HashSet();

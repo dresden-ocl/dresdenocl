@@ -1,0 +1,187 @@
+classifier Account --> royloy::Account
+class royloy::Account Account
+  Bank bank
+  Date created
+  Person customer
+classifier Bank --> royloy::Bank
+class royloy::Bank Bank
+  Set(Account) account
+  Set(Person) customer
+classifier Boolean --> Boolean
+class Boolean Boolean
+classifier Burning --> royloy::Burning
+class royloy::Burning Burning
+  implements royloy::Transaction
+  CustomerCard card
+  Date date
+  LoyaltyAccount loyaltyAccount
+  integer points
+  Service service
+  LoyaltyProgram program()
+classifier Byte --> Byte
+class Byte Byte
+classifier Character --> Character
+class Character Character
+classifier Color --> Color
+class Color Color
+classifier Company --> royloy::Company
+class royloy::Company Company
+  Set(Person) employees
+  Person manager
+  integer numberOfEmployees
+  Person getOldestEmployee()
+  integer getOldestEmployeeAge()
+classifier Customer --> royloy::Customer
+class royloy::Customer Customer
+  Set(CustomerCard) cards
+  Date dateOfBirth
+  boolean isMale
+  Set(Membership) membership
+  string name
+  Set(LoyaltyProgram) program
+  string title
+classifier CustomerCard --> royloy::CustomerCard
+class royloy::CustomerCard CustomerCard
+  integer COLOR_SILVER
+  integer color
+  integer color_gold
+  Membership membership
+  Customer owner
+  string printedName
+  Set(Transaction) transactions
+  boolean valid
+  Date validFrom
+  Date validThru
+classifier Date --> royloy::Date
+class royloy::Date Date
+  Date now
+  boolean equals(Date)
+  boolean isAfter(Date)
+  boolean isBefore(Date)
+classifier Day --> royloy::Day
+class royloy::Day Day
+  boolean isWeekend
+  DayType type
+  void setType(DayType)
+classifier DayType --> royloy::DayType
+class royloy::DayType DayType
+  DayType friday
+  DayType monday
+  DayType saturday
+  DayType sunday
+  DayType thursday
+  DayType tuesday
+  DayType wednesday
+  DayType getFollowingDay(DayType)
+classifier Double --> Double
+class Double Double
+classifier Earning --> royloy::Earning
+class royloy::Earning Earning
+  implements royloy::Transaction
+  CustomerCard card
+  Date date
+  LoyaltyAccount loyaltyAccount
+  integer points
+  Service service
+  LoyaltyProgram program()
+classifier Float --> Float
+class Float Float
+classifier Hashtable --> Hashtable
+class Hashtable Hashtable
+classifier Integer --> Integer
+class Integer Integer
+classifier Long --> Long
+class Long Long
+classifier LoyaltyAccount --> royloy::LoyaltyAccount
+class royloy::LoyaltyAccount LoyaltyAccount
+  Membership membership
+  integer points
+  Set(Transaction) transactions
+  void burn(integer)
+  void earn(integer)
+  boolean isEmpty()
+classifier LoyaltyProgram --> royloy::LoyaltyProgram
+class royloy::LoyaltyProgram LoyaltyProgram
+  Set(Customer) customer
+  Set(Membership) membership
+  Set(ProgramPartner) partners
+  Set(ServiceLevel) serviceLevel
+  void enroll(Customer)
+classifier Membership --> royloy::Membership
+class royloy::Membership Membership
+  ServiceLevel actualLevel
+  CustomerCard card
+  Customer customer
+  LoyaltyAccount loyaltyAccount
+  LoyaltyProgram program
+classifier Person --> royloy::Person
+class royloy::Person Person
+  Account account
+  integer age
+  Bank bank
+  Set(Company) employers
+  Person husband
+  boolean isMarried
+  boolean isUnemployed
+  Set(Company) managedCompanies
+  string name
+  Person wife
+  real getIncomeAfterTax(real)
+classifier Point --> Point
+class Point Point
+classifier ProgramPartner --> royloy::ProgramPartner
+class royloy::ProgramPartner ProgramPartner
+  Set(Service) deliveredServices
+  Set(LoyaltyProgram) loyaltyProgram
+  integer numberOfCustomers
+classifier Rectangle --> Rectangle
+class Rectangle Rectangle
+classifier Service --> royloy::Service
+class royloy::Service Service
+  boolean condition
+  string description
+  integer pointsBurned
+  integer pointsEarned
+  ProgramPartner programPartner
+  ServiceLevel serviceLevel
+  Set(Transaction) transactions
+classifier ServiceLevel --> royloy::ServiceLevel
+class royloy::ServiceLevel ServiceLevel
+  LoyaltyProgram loyaltyProgram
+  Set(Membership) membership
+  string name
+  Service service
+classifier Stack --> Stack
+class Stack Stack
+classifier Transaction --> royloy::Transaction
+class royloy::Transaction Transaction
+  CustomerCard card
+  Date date
+  LoyaltyAccount loyaltyAccount
+  integer points
+  Service service
+  LoyaltyProgram program()
+classifier Vector --> Vector
+class Vector Vector
+classifier char --> char
+class char char
+classifier royloy::Account --> royloy::Account
+classifier royloy::Bank --> royloy::Bank
+classifier royloy::Burning --> royloy::Burning
+classifier royloy::Company --> royloy::Company
+classifier royloy::Customer --> royloy::Customer
+classifier royloy::CustomerCard --> royloy::CustomerCard
+classifier royloy::Date --> royloy::Date
+classifier royloy::Day --> royloy::Day
+classifier royloy::DayType --> royloy::DayType
+classifier royloy::Earning --> royloy::Earning
+classifier royloy::LoyaltyAccount --> royloy::LoyaltyAccount
+classifier royloy::LoyaltyProgram --> royloy::LoyaltyProgram
+classifier royloy::Membership --> royloy::Membership
+classifier royloy::Person --> royloy::Person
+classifier royloy::ProgramPartner --> royloy::ProgramPartner
+classifier royloy::Service --> royloy::Service
+classifier royloy::ServiceLevel --> royloy::ServiceLevel
+classifier royloy::Transaction --> royloy::Transaction
+classifier void?? --> void??
+class void?? void??

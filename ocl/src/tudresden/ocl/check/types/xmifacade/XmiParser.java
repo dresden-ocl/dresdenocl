@@ -215,7 +215,7 @@ public final class XmiParser
     DOMParser parser = new DOMParser();
     parser.parse(url);
     Document doc = parser.getDocument();
-    System.out.println("xmifacade: parsed "+description+(this.qualifiersOnTarget?"[qualifiersOnTarget]":""));
+    //System.out.println("xmifacade: parsed "+description+(this.qualifiersOnTarget?"[qualifiersOnTarget]":""));
     Element documentEl=doc.getDocumentElement();
 
     //for(Element x=traverse(docel); x!=null; x=traverse(docel, x)) System.out.println(x.getTagName());
@@ -223,7 +223,7 @@ public final class XmiParser
     Element contentEl=demandChildElement(documentEl, "XMI.content");
 
     adapter=Adapter.getAdapter(documentEl);
-    System.out.println(adapter.getMessage());
+    //System.out.println(adapter.getMessage());
 
     parsePackage(contentEl);
 
@@ -253,7 +253,6 @@ public final class XmiParser
     	 model.determineAllSupertypes();
     }
     	
-    model.printData();
 
     url=null;
   }
@@ -532,7 +531,7 @@ public final class XmiParser
       try
       {
         Model m=XmiParser.getModel(args[i], args[i]);
-        m.printData();
+        m.printData(System.out);
       }
       catch(java.io.IOException e) {e.printStackTrace(System.out);}
       catch(org.xml.sax.SAXException e) {e.printStackTrace(System.out);}

@@ -22,11 +22,13 @@ import tudresden.ocl.check.types.Basic;
 import tudresden.ocl.check.types.Type;
 import tudresden.ocl.check.types.Any;
 import tudresden.ocl.check.types.xmifacade.*;
+import tudresden.ocl.test.*;
 import java.util.*;
+import java.io.*;
 
 public class Royloy
 {
-  public static Model getModel()
+  public static Model getModel() throws Exception
   {
     return (new Royloy()).model;
   }
@@ -88,9 +90,9 @@ public class Royloy
   ModelAssociation asso;
   List pP=new LinkedList();
 
-  private Royloy()
+  private Royloy() throws Exception
   {
-    System.out.println("creating royloy test model (tudresden.ocl.check.types.xmifacade.Royloy)");
+    //System.out.println("creating royloy test model (tudresden.ocl.check.types.xmifacade.Royloy)");
 
     model=new Model("created by "+getClass());
 
@@ -287,6 +289,8 @@ public class Royloy
 
     model.flatten();
 
-    model.printData();
+    final String filename = "royloy";
+    model.printData(new PrintStream(new FileOutputStream(filename+".debug.bak")));
+    Diff.diff(new DiffSource(getClass().getResource(filename+".debug")), new DiffSource(new File(filename+".debug.bak")));
   }
 }
