@@ -46,6 +46,10 @@
             <Property name="alignmentX" type="float" editor="sun.beans.editors.FloatEditor" value="0.5"/>
             <Property name="defaultCapable" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
           </Properties>
+
+          <Events>
+            <EventHandler event="actionPerformed" handler="onSaveButton"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
           </Constraints>
@@ -143,6 +147,10 @@
                     </Property>
                     <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="New"/>
                   </Properties>
+
+                  <Events>
+                    <EventHandler event="actionPerformed" handler="onNewErrorMessage"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
                   </Constraints>
@@ -154,6 +162,10 @@
                     </Property>
                     <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Remove"/>
                   </Properties>
+
+                  <Events>
+                    <EventHandler event="actionPerformed" handler="onRemoveErrorMessage"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
                   </Constraints>

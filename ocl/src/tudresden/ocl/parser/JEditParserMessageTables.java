@@ -22,6 +22,9 @@ import javax.swing.table.*;
 
 import java.io.*;
 
+import java.net.URL;
+import java.net.URLConnection;
+
 /** 
  * GUI to edit the parser error messages in parser/parser.dat.
  *
@@ -107,7 +110,7 @@ public class JEditParserMessageTables extends javax.swing.JFrame {
         errorMessages[row] = oValue.toString();
         
         fireTableCellUpdated (row, col);
-        m_emlm.fireContentsChanged (m_emlm, row, row);
+        m_emlm.fireContentsChanged (row, row);
       }
       
       public boolean isCellEditable (int row, int col) {
@@ -143,10 +146,19 @@ public class JEditParserMessageTables extends javax.swing.JFrame {
         return errorMessages[row];
       }
       
-      public void fireContentsChanged(Object source,
-                                   int index0,
-                                   int index1) {
-        super.fireContentsChanged (source, index0, index1);
+      public void fireContentsChanged (int index0,
+                                           int index1) {
+        super.fireContentsChanged (this, index0, index1);
+      }
+      
+      public void fireIntervalAdded (int index0,
+                                         int index1) {
+        super.fireIntervalAdded (this, index0, index1);
+      }
+      
+      public void fireIntervalRemoved (int index0,
+                                           int index1) {
+        super.fireIntervalRemoved (this, index0, index1);
       }
     }
     
@@ -208,7 +220,72 @@ public class JEditParserMessageTables extends javax.swing.JFrame {
         s.close();
       }
       catch(Exception e) {
+        e.printStackTrace();
         throw new RuntimeException("Unable to read parser.dat.");
+      }
+    }
+
+    public void save() {
+      try {
+        OutputStream os = null;
+        URL urlParserDat = getClass().getResource ("parser/parser.dat");
+        if (urlParserDat.getProtocol().equals ("file")) {
+          os = new FileOutputStream (urlParserDat.getFile());
+        }
+        else {
+          URLConnection urlcParserDat = urlParserDat.openConnection();
+          urlcParserDat.setDoInput (false);
+          urlcParserDat.setDoOutput (true);
+          urlcParserDat.setUseCaches (false);
+          urlcParserDat.connect();
+          os = urlcParserDat.getOutputStream();
+        }
+        
+        DataOutputStream s = new DataOutputStream (
+          new BufferedOutputStream (os));
+
+        // Store actionTable
+        s.writeInt (actionTable.length);
+        for (int i = 0; i < actionTable.length; i++) {
+          s.writeInt (actionTable[i].length);
+          for(int j = 0; j < actionTable[i].length; j++) {
+            for(int k = 0; k < 3; k++) {
+              s.writeInt (actionTable[i][j][k]);
+            }
+          }
+        }
+
+        // write gotoTable
+        s.writeInt (gotoTable.length);
+        for(int i = 0; i < gotoTable.length; i++) {
+          s.writeInt (gotoTable[i].length);
+          for(int j = 0; j < gotoTable[i].length; j++) {
+            for(int k = 0; k < 2; k++) {
+              s.writeInt (gotoTable[i][j][k]);
+            }
+          }
+        }
+
+        // write errorMessages
+        s.writeInt (errorMessages.length);
+        for(int i = 0; i < errorMessages.length; i++) {
+          s.writeInt (errorMessages[i].length());
+          for(int j = 0; j < errorMessages[i].length(); j++) {
+            s.writeChar(errorMessages[i].charAt (j));
+          }
+        }
+
+        // write errors
+        s.writeInt (errors.length);
+        for(int i = 0; i < errors.length; i++) {
+          s.writeInt (errors[i]);
+        }
+
+        s.close();
+      }
+      catch(Exception e) {
+        e.printStackTrace();
+        throw new RuntimeException("Unable to save parser.dat. File may now be corrupted!");
       }
     }
     
@@ -239,6 +316,44 @@ public class JEditParserMessageTables extends javax.swing.JFrame {
           return jcb;
         }
       };
+    }
+    
+    public void addErrorMessage() {
+      String[] newEM = new String[errorMessages.length + 1];
+      System.arraycopy (errorMessages, 0, newEM, 0, errorMessages.length);
+      newEM[errorMessages.length] = "<new message>";
+      errorMessages = newEM;
+      
+      m_emlm.fireIntervalAdded (errorMessages.length - 1, errorMessages.length - 1);
+      m_emmErrMsg.fireTableDataChanged();
+    }
+    
+    public void removeErrorMessage (int nIdx) {
+      for (int i = 0; i < errors.length; i++) {
+        if (errors[i] == nIdx) {
+          JOptionPane.showMessageDialog (null,
+                                           "This error message is mapped for error number " + i +
+                                           ".\nPlease change the mapping for that error number first.",
+                                           "Error",
+                                           JOptionPane.ERROR_MESSAGE);
+          return;
+        }
+      }
+      
+      String[] newEM = new String[errorMessages.length - 1];
+      System.arraycopy (errorMessages, 0, newEM, 0, nIdx);
+      System.arraycopy (errorMessages, nIdx + 1, newEM, nIdx, errorMessages.length - nIdx - 1);
+      errorMessages = newEM;
+      
+      // Adjust error mappings
+      for (int i = 0; i < errors.length; i++) {
+        if (errors[i] > nIdx) {
+          errors[i]--;
+        }
+      }
+      
+      m_emlm.fireIntervalRemoved (nIdx, nIdx);
+      m_emmErrMsg.fireTableDataChanged();
     }
   }
   
@@ -290,6 +405,12 @@ public class JEditParserMessageTables extends javax.swing.JFrame {
       m_jbSaveButton.setAlignmentY (0.5F);
       m_jbSaveButton.setAlignmentX (0.5F);
       m_jbSaveButton.setDefaultCapable (false);
+      m_jbSaveButton.addActionListener (new java.awt.event.ActionListener () {
+        public void actionPerformed (java.awt.event.ActionEvent evt) {
+          onSaveButton (evt);
+        }
+      }
+      );
   
       m_jtbToolBar.add (m_jbSaveButton);
   
@@ -375,11 +496,23 @@ public class JEditParserMessageTables extends javax.swing.JFrame {
     
           m_jbAddMessage.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/RowInsertAfter24.gif")));
           m_jbAddMessage.setText ("New");
+          m_jbAddMessage.addActionListener (new java.awt.event.ActionListener () {
+            public void actionPerformed (java.awt.event.ActionEvent evt) {
+              onNewErrorMessage (evt);
+            }
+          }
+          );
       
           m_jpErrMsgButtons.add (m_jbAddMessage);
       
           m_jbRemoveMessage.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/RowDelete24.gif")));
           m_jbRemoveMessage.setText ("Remove");
+          m_jbRemoveMessage.addActionListener (new java.awt.event.ActionListener () {
+            public void actionPerformed (java.awt.event.ActionEvent evt) {
+              onRemoveErrorMessage (evt);
+            }
+          }
+          );
       
           m_jpErrMsgButtons.add (m_jbRemoveMessage);
       
@@ -403,6 +536,29 @@ public class JEditParserMessageTables extends javax.swing.JFrame {
     setSize (new java.awt.Dimension (300, 200));
     setLocation((screenSize.width-300)/2, (screenSize.height-200)/2);
   }//GEN-END:initComponents
+
+  private void onSaveButton (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSaveButton
+    if (JOptionPane.showConfirmDialog (this,
+                                           "Saving may corrupt your parser.dat file.\n"+
+                                           "Save anyway?",
+                                           "Warning",
+                                           JOptionPane.YES_NO_OPTION,
+                                           JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+      m_pdParserData.save();
+    }
+  }//GEN-LAST:event_onSaveButton
+
+  private void onRemoveErrorMessage (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onRemoveErrorMessage
+    int nIdx = m_jtErrorMessages.getSelectedRow();
+    
+    if (nIdx != -1) {
+      m_pdParserData.removeErrorMessage (nIdx);
+    }
+  }//GEN-LAST:event_onRemoveErrorMessage
+
+  private void onNewErrorMessage (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onNewErrorMessage
+    m_pdParserData.addErrorMessage();
+  }//GEN-LAST:event_onNewErrorMessage
 
   /** Exit the Application */
   private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
