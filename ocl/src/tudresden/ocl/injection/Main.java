@@ -74,8 +74,6 @@ final class OclInjector implements InjectionConsumer
   
   public void onPackage(String packagename) throws InjectorParseException
   {
-    if(this.packagename!=null)
-      throw new InjectorParseException("more than one package statement.");
     this.packagename=packagename;
   }
   

@@ -20,7 +20,12 @@ package tudresden.ocl.injection;
 
 public interface InjectionConsumer 
 {
+  /**
+     Encountered a package statement.
+     This method is guaranteed to be called at most once.
+  */
   public void onPackage(String packagename) throws InjectorParseException;
+
   public void onImport(String importname);
   public void onClass(ClassClass cc);
   public void onClassEnd(ClassClass cc) throws java.io.IOException;
