@@ -202,6 +202,11 @@ public class TestModelFacade implements ModelFacade {
       throw new OclTypeException("can not find classifier \""+name+"\"");
     }
   }
+
+  public String toString()
+  {
+    return getClass().getName();
+  }
 }
 
 class TestClassifier implements Any {

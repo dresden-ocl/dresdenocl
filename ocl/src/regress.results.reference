@@ -511,8 +511,8 @@ classifier royloy::ProgramPartner --> royloy::ProgramPartner
 classifier royloy::Service --> royloy::Service
 classifier royloy::ServiceLevel --> royloy::ServiceLevel
 classifier royloy::Transaction --> royloy::Transaction
-starting testFromFile, using tudresden.ocl.check.types.testfacade.TestModelFacade@8e8d31e5
-starting testFromFile, using tudresden.ocl.check.types.testfacade.TestModelFacade@af9531e4
+starting testFromFile, using tudresden.ocl.check.types.testfacade.TestModelFacade
+starting testFromFile, using tudresden.ocl.check.types.testfacade.TestModelFacade
 starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(BUILT-IN_ROYLOY_TEST)
 starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(/home/wiera/oclcvs/src/tudresden/ocl/test/xmi/argo07/royloy.xmi)
 starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(/home/wiera/oclcvs/src/tudresden/ocl/test/xmi/rose/royloy.xml)
