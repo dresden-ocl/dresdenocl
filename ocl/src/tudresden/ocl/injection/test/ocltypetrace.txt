@@ -2,3 +2,8 @@
 +tudresden.ocl.injection.test.Example#namedIntegers	element-type	java.lang.Integer
 *tudresden.ocl.injection.test.Example#namedIntegers	key-type	java.lang.String
 +tudresden.ocl.injection.test.Example#namedIntegers	key-type	java.lang.String
+*tudresden.ocl.injection.test.Example#testTypeTrace	element-type	tudresden.ocl.injection.test.ThirdExample
++tudresden.ocl.injection.test.Example#testTypeTrace	element-type	tudresden.ocl.injection.test.ThirdExample
+*tudresden.ocl.injection.test.Example#testTypeTrace	element-type	tudresden.ocl.injection.test.SecondExample
+-tudresden.ocl.injection.test.Example#testTypeTrace	element-type	tudresden.ocl.injection.test.ThirdExample
++tudresden.ocl.injection.test.Example#testTypeTrace	element-type	tudresden.ocl.injection.test.SecondExample

@@ -390,6 +390,12 @@ public abstract class Example implements Runnable
   void test_super_wrappedbyocl_tudresden_ocl_injection_test_Example()
   {
   }
+  
+  Collection testTypeTrace=new HashSet();
+  public void addTestTypeTrace_wrappedbyocl_tudresden_ocl_injection_test_Example(Object o)
+  {
+    testTypeTrace.add(o);
+  }
 
   static public void main(String[] args)
   {
@@ -401,6 +407,8 @@ public abstract class Example implements Runnable
     e2.anInteger=new Integer(8);
     e2.getQualifiers();
     e2.test_super();
+    e2.addTestTypeTrace(new ThirdExample());
+    e2.addTestTypeTrace(new SecondExample());
   }
 
 /**
@@ -827,6 +835,27 @@ public abstract class Example implements Runnable
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
   }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #addTestTypeTrace_wrappedbyocl_tudresden_ocl_injection_test_Example(Object)
+  */public void addTestTypeTrace(Object o)
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      addTestTypeTrace_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      addTestTypeTrace_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1167,6 +1196,16 @@ public abstract class Example implements Runnable
     @author ocl_injector
     @see #parent
   */public final java.util.HashSet parent_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #testTypeTrace
+  */private int testTypeTrace_oclbackup812374=0;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #testTypeTrace
+  */public final java.util.HashSet testTypeTrace_oclobservinginvariants812374=new java.util.HashSet();/**
     Checks object features, whether they have changed.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1356,6 +1395,12 @@ public abstract class Example implements Runnable
     {
       parent_oclbackup812374=parent;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(parent_oclobservinginvariants812374);
+    }
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(testTypeTrace)!=testTypeTrace_oclbackup812374)
+    {
+      testTypeTrace_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(testTypeTrace);
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#testTypeTrace", testTypeTrace);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(testTypeTrace_oclobservinginvariants812374);
     }
   }/**
     An object representing ocl invariant hallo on this object.

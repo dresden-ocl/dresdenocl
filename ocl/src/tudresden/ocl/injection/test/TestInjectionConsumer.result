@@ -286,6 +286,12 @@ public abstract class Example[onClass] implements Runnable
   [onBehaviourHeader]void test_super()
   {
   }[onClassFeature]
+  
+  [onAttributeHeader]Collection testTypeTrace=new HashSet();[onClassFeature]
+  [onBehaviourHeader]public void addTestTypeTrace(Object o)
+  {
+    testTypeTrace.add(o);
+  }[onClassFeature]
 
   [onBehaviourHeader]static public void main(String[] args)
   {
@@ -297,6 +303,8 @@ public abstract class Example[onClass] implements Runnable
     e2.anInteger=new Integer(8);
     e2.getQualifiers();
     e2.test_super();
+    e2.addTestTypeTrace(new ThirdExample());
+    e2.addTestTypeTrace(new SecondExample());
   }[onClassFeature]
 
 [onClassEnd]}
