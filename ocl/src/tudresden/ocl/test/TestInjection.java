@@ -33,6 +33,7 @@ public class TestInjection
     Person p2=new Person("Person2"); add(p2);
     Person p3=new Person("Person3"); add(p3);
     Person p4=new Person("Person4"); add(p4);
+    Person p5=new Person("Person5"); add(p5);
     p1.marry(p2);
 
     Company c1=new Company("Company1", p3); add(c1);
@@ -46,6 +47,7 @@ public class TestInjection
     p2.age=2; b1.addCustomer(1, p2);
     p3.age=3; b1.addCustomer(2, p3);
     p4.age=4; b1.addCustomer(3, p4);
+    p5.age=1;
     
     LoyaltyProgram lp=new LoyaltyProgram(); add(lp);
     Customer cm1=new Customer("Customer1", true);  add(cm1);
@@ -78,12 +80,6 @@ public class TestInjection
     {
       c2.employees.remove(c2.manager);
       c2.manager.employers.remove(c2);
-      // This is a hack, because lazy constraint
-      // evaluation does not care about modifications 
-      // in collections yet.
-      c2.employees=new HashSet(c2.employees);
-      c2.manager.employers=new HashSet(c2.manager.employers);
-      // end of hack.
       expectViolation("violated ocl invariant 'numberOfEmployees' on object 'tudresden.ocl.test.royloy.Company[Company2]'.");
       expectViolation("violated ocl invariant 'manager_is_employee' on object 'tudresden.ocl.test.royloy.Company[Company2]'.");
       expectViolation("violated ocl invariant 'manager_is_employee2' on object 'tudresden.ocl.test.royloy.Company[Company2]'.");
@@ -104,6 +100,13 @@ public class TestInjection
       expectViolation("violated ocl invariant 'bank_customer2_age' on object 'tudresden.ocl.test.royloy.Bank[Bank1]'.");
       assertAll();
       p3.age=age;
+    }
+    assertAll();
+    {
+      b1.customer.put(new Integer(4), p5);
+      expectViolation("violated ocl invariant 'customers_ordered_by_age' on object 'tudresden.ocl.test.royloy.Bank[Bank1]'.");
+      assertAll();
+      b1.customer.remove(new Integer(4));
     }
     assertAll();
     {
@@ -229,6 +232,7 @@ public class TestInjection
   private void error(String m)
   {
     System.out.println(m);
+    //throw new RuntimeException();
   }
   
   private final String stripId(String s)

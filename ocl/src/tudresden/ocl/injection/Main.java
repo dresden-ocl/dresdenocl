@@ -316,10 +316,29 @@ final class OclInjector implements InjectionConsumer
     o.write(");\n");
   }
 
-
+  /**
+     Returns, whether the type of the given java feature
+     is a collection or not.
+     May cause problems, as described in findType's 
+     documentation.
+     @see JavaFile#findType(String)
+  */
+  private final boolean isCollection(JavaFeature jf)
+  {
+    Class jftype=jf.getFile().findType(jf.getType());
+    return 
+      jftype!=null &&
+      (
+        java.util.Collection.class.isAssignableFrom(jftype) ||
+        java.util.Map.class.isAssignableFrom(jftype)
+      );
+  }
+  
+  
   public final void writeObserver(JavaFeature cf) throws IOException
   {
     Writer o=output;
+    boolean is_collection=isCollection(cf);
     o.write("/**\n    A backup for detecting modifications.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n    @see #");
@@ -328,12 +347,18 @@ final class OclInjector implements InjectionConsumer
     o.write(Modifier.toString(
         (cf.getModifiers()&Modifier.STATIC)|Modifier.PRIVATE));
     o.write(' ');
-    o.write(cf.getType());
+    if(is_collection)
+      o.write("int");
+    else
+      o.write(cf.getType());
     o.write(' ');
     o.write(cf.getNotWrappedName());
     o.write(Invariant.BACKUP_SUFFIX);
     o.write('=');
-    o.write(cf.getNotWrappedName());
+    if(is_collection)
+      o.write('0');
+    else
+      o.write(cf.getNotWrappedName());
     o.write(";/**\n    Contains observers for modifications of this feature.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n    @see #");
@@ -369,8 +394,17 @@ final class OclInjector implements InjectionConsumer
     for(Iterator i=observedFeatures.iterator(); i.hasNext(); )
     {
       JavaFeature jf=(JavaFeature)i.next();
+      boolean is_collection=isCollection(jf);
       o.write("    if(");
-      o.write(jf.getNotWrappedName());
+      if(is_collection)
+      {
+        o.write(Invariant.IDENTITY_HASH_CODE);
+        o.write('(');
+        o.write(jf.getNotWrappedName());
+        o.write(')');
+      }
+      else
+        o.write(jf.getNotWrappedName());
       o.write("!=");
       o.write(jf.getNotWrappedName());
       o.write(Invariant.BACKUP_SUFFIX);
@@ -378,7 +412,15 @@ final class OclInjector implements InjectionConsumer
       o.write(jf.getNotWrappedName());
       o.write(Invariant.BACKUP_SUFFIX);
       o.write('=');
-      o.write(jf.getNotWrappedName());
+      if(is_collection)
+      {
+        o.write(Invariant.IDENTITY_HASH_CODE);
+        o.write('(');
+        o.write(jf.getNotWrappedName());
+        o.write(')');
+      }
+      else
+        o.write(jf.getNotWrappedName());
       o.write(";\n");
       
       //o.write("      System.out.println(\"notify invariants for attribute '");
@@ -566,7 +608,9 @@ final class OclInjector implements InjectionConsumer
       o.write(type);
       o.write(".class)) ");
       o.write(violationmakro);
-      o.write("(\"type checker failed.\");\n");
+      o.write("(\"type checker failed at feature '");
+      o.write(jf.getName());
+      o.write("' on object \"+this+\".\");\n");
     }
   }
 

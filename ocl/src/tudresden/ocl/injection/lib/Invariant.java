@@ -128,6 +128,74 @@ public final class Invariant implements FeatureListener
   }
       
 
+  // hash codes for collections
+
+  public static final String IDENTITY_HASH_CODE=
+    "tudresden.ocl.injection.lib.Invariant.identityHashCode";
+  
+  /**
+     Calculates the hash code as defined in 
+     java.util.List.hashCode(), but calls identityHashCode
+     for each contained object.
+     @see List#hashCode()
+     @see System#identityHashCode(Object)
+  */
+  public static final int identityHashCode(List list)
+  {
+    int hashCode=1;
+    for(Iterator i=list.iterator(); i.hasNext(); ) 
+    {
+      Object obj=i.next();
+      hashCode=31*hashCode+(obj==null ? 0 : System.identityHashCode(obj));
+    }
+    return hashCode;
+  }
+
+  /**
+     Calculates the hash code as defined in 
+     java.util.Set.hashCode(), but calls identityHashCode
+     for each contained object.
+     @see Set#hashCode()
+     @see System#identityHashCode(Object)
+  */
+  public static final int identityHashCode(Set set)
+  {
+    int hashCode=0;
+    for(Iterator i=set.iterator(); i.hasNext(); ) 
+    {
+      Object obj=i.next();
+      hashCode+=(obj==null ? 0 : System.identityHashCode(obj));
+    }
+    return hashCode;
+  }
+
+  /**
+     Calculates the hash code as defined in 
+     java.util.Map.hashCode(), but calls identityHashCode
+     for each contained object.
+     @see Map#hashCode()
+     @see Map.Entry#hashCode()
+     @see System#identityHashCode(Object)
+  */
+  public static final int identityHashCode(Map map)
+  {
+    int hashCode=0;
+    Iterator ikey=map.keySet().iterator();
+    Iterator ival=map.values().iterator();
+    while(ikey.hasNext()) 
+    {
+      Object key=ikey.next();
+      Object val=ival.next();
+      hashCode+=
+        (key==null ? 0 : System.identityHashCode(key)) ^
+        (val==null ? 0 : System.identityHashCode(val));
+      if(map.get(key)!=val) throw new RuntimeException();
+    }
+    if(ival.hasNext()) throw new RuntimeException();
+    return hashCode;
+  }
+  
+  
   // checking element types
   
   public static final String CHECK_ELEMENT_TYPES="tudresden.ocl.injection.lib.Invariant.checkElementTypes";
@@ -146,6 +214,13 @@ public final class Invariant implements FeatureListener
     for(Iterator i=m.values().iterator(); i.hasNext(); )
       if(!elementtype.isAssignableFrom(i.next().getClass()))
         return false;
+    // in UML association features are sets (no duplicates).
+    // since maps are used to represent qualified associations,
+    // and java.util.Map does not enforce unique values,
+    // I added an appropriate check here.
+    // quick and dirty, TODO
+    if(m.size()!=(new HashSet(m.values()).size()))
+      System.out.println("warning: map values are not unique.");
     return true;
   }
   
