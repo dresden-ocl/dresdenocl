@@ -131,4 +131,19 @@ public abstract class RevengTreeNode extends DefaultMutableTreeNode {
   public String getToolTip() {
     return toString();
   }
+  
+  /**
+    * Return true, if the node is part of a file that needs to be saved. As a default returns
+    * the result of sending isDirty to this node's parent, if a parent exists. Otherwise returns
+    * false.
+    */
+  public boolean isDirty() {
+    if (getParent() != null) {
+      return ((RevengTreeNode) getParent()).isDirty();
+    }
+    else {
+      return false;
+    }
+  }
+  
 }

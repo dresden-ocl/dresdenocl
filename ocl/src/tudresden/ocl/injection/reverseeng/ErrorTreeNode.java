@@ -41,7 +41,7 @@ public class ErrorTreeNode extends RevengTreeNode {
     */
   static Icon s_iIcon;
   static {
-    s_iIcon = new javax.swing.ImageIcon (ErrorTreeNode.class.getResource ("error.gif"));
+    s_iIcon = new javax.swing.ImageIcon (ErrorTreeNode.class.getResource ("resources/error.gif"));
   }
  
   /**

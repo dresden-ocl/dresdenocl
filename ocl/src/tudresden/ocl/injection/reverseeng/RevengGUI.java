@@ -86,7 +86,7 @@ public class RevengGUI extends javax.swing.JDialog {
   
         m_jtbTreeBar.setFloatable (false);
     
-          m_jbUpOneLevel.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/injection/reverseeng/upOneLevel.gif")));
+          m_jbUpOneLevel.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/injection/reverseeng/resources/upOneLevel.gif")));
           m_jbUpOneLevel.setPreferredSize (new java.awt.Dimension(25, 25));
           m_jbUpOneLevel.setMaximumSize (new java.awt.Dimension(25, 25));
           m_jbUpOneLevel.setMinimumSize (new java.awt.Dimension(25, 25));

@@ -35,8 +35,8 @@ import javax.swing.tree.*;
  */
 public class CollectionTreeNode extends RevengTreeNode {
   
-  static Icon s_iOK = new javax.swing.ImageIcon (CollectionTreeNode.class.getResource ("collection.gif"));
-  static Icon s_iInCompl = new javax.swing.ImageIcon (CollectionTreeNode.class.getResource ("collectionInCompl.gif"));
+  static Icon s_iOK = new javax.swing.ImageIcon (CollectionTreeNode.class.getResource ("resources/collection.gif"));
+  static Icon s_iInCompl = new javax.swing.ImageIcon (CollectionTreeNode.class.getResource ("resources/collectionInCompl.gif"));
   
   public CollectionTreeNode (DefaultTreeModel dtmModel, CollectionDescriptor cd) {
     super (dtmModel);

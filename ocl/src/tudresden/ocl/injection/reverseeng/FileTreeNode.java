@@ -50,39 +50,39 @@ public class FileTreeNode extends RevengTreeNode {
   /**
     * Icon associated with normal file without any maps or collections.
     */
-  static Icon s_iNormalFile = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("normalFile.gif"));
+  static Icon s_iNormalFile = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/normalFile.gif"));
   /**
     * Icon associated with file until the correct icon has been computed.
     */
-  static Icon s_iFileWait = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWait.gif"));
+  static Icon s_iFileWait = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/fileWait.gif"));
   /**
     * Icon associated with file that could not be parsed.
     */
-  static Icon s_iFileError = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileError.gif"));
+  static Icon s_iFileError = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/fileError.gif"));
   /**
     * Icon associated with file that contains completely documented collections only.
     */
-  static Icon s_iFileWithCollections = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithCollections.gif"));
+  static Icon s_iFileWithCollections = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/fileWithCollections.gif"));
   /**
     * Icon associated with file that contains collections only, which may be incompletely documented.
     */
-  static Icon s_iFileWithCollectionsInComplete = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithCollectionsInComplete.gif"));
+  static Icon s_iFileWithCollectionsInComplete = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/fileWithCollectionsInComplete.gif"));
   /**
     * Icon associated with file that contains completely documented collections and maps.
     */
-  static Icon s_iFileWithCollectionsAndMaps = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithCollectionsAndMaps.gif"));
+  static Icon s_iFileWithCollectionsAndMaps = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/fileWithCollectionsAndMaps.gif"));
   /**
     * Icon associated with file that contains collections and maps, which may be incompletely documented.
     */
-  static Icon s_iFileWithCollectionsAndMapsInComplete = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithCollectionsAndMapsInComplete.gif"));
+  static Icon s_iFileWithCollectionsAndMapsInComplete = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/fileWithCollectionsAndMapsInComplete.gif"));
   /**
     * Icon associated with file that contains completely documented maps only.
     */
-  static Icon s_iFileWithMaps = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithMaps.gif"));
+  static Icon s_iFileWithMaps = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/fileWithMaps.gif"));
   /**
     * Icon associated with file that contains maps only, which may be incompletely documented.
     */
-  static Icon s_iFileWithMapsInComplete = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithMapsInComplete.gif"));
+  static Icon s_iFileWithMapsInComplete = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/fileWithMapsInComplete.gif"));
 
   /**
     * If true, use s_iFileWait.
@@ -104,6 +104,11 @@ public class FileTreeNode extends RevengTreeNode {
     * Results of parsing.
     */
   private AnalysisConsumer m_acAnalysisResults = null;  
+  
+  /**
+    * Flag indicating whether the file needs to be saved.
+    */
+  private boolean m_fDirty = false;
   
   public FileTreeNode (DefaultTreeModel dtmModel) {
     super(dtmModel);
@@ -254,12 +259,14 @@ public class FileTreeNode extends RevengTreeNode {
   /**
     * Notification that underlying file was modified.
     *
-    * Checks the icon.
+    * Checks the icon and remembers dirty state.
     */
   public void setModified() {
     super.setModified();
 
     updateIcon();
+    
+    m_fDirty = true;
   }
   
   private void updateIcon() {
@@ -285,5 +292,12 @@ public class FileTreeNode extends RevengTreeNode {
 
       nodeChanged();
     }
+  }
+  
+  /**
+    * Return true if this file has been modified since it has last been saved.
+    */
+  public boolean isDirty() {
+    return m_fDirty;
   }
 }

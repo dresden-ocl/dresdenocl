@@ -47,27 +47,27 @@ public class FolderTreeNode extends RevengTreeNode {
   /**
     * Icon associated with normal folder without any files that contain incomplete maps or collections.
     */
-  static Icon s_iFolderOK = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("folderOK.gif"));
+  static Icon s_iFolderOK = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/folderOK.gif"));
   /**
     * Icon associated with open folder without any files that contain incomplete maps or collections.
     */
-  static Icon s_iFolderOpenOK = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("folderOpenOK.gif"));
+  static Icon s_iFolderOpenOK = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/folderOpenOK.gif"));
   /**
     * Icon associated with normal folder while checking for files with incomplete maps/collections.
     */
-  static Icon s_iFolderWait = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("folderWait.gif"));
+  static Icon s_iFolderWait = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/folderWait.gif"));
   /**
     * Icon associated with open folder while checking for files with incomplete maps/collections.
     */
-  static Icon s_iFolderOpenWait = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("folderOpenWait.gif"));
+  static Icon s_iFolderOpenWait = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/folderOpenWait.gif"));
   /**
     * Icon associated with normal folder containing files with incomplete maps/collections.
     */
-  static Icon s_iFolderInCompl = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("folderInCompl.gif"));
+  static Icon s_iFolderInCompl = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/folderInCompl.gif"));
   /**
     * Icon associated with open folder containing files with incomplete maps/collections.
     */
-  static Icon s_iFolderOpenInCompl = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("folderOpenInCompl.gif"));
+  static Icon s_iFolderOpenInCompl = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("resources/folderOpenInCompl.gif"));
 
   /**
     * If true, use s_iFolderWait.

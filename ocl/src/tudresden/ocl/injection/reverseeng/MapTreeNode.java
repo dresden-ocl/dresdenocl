@@ -36,8 +36,8 @@ import javax.swing.tree.*;
   */
 public class MapTreeNode extends RevengTreeNode {
   
-  static Icon s_iOK = new javax.swing.ImageIcon (MapTreeNode.class.getResource ("map.gif"));
-  static Icon s_iInCompl = new javax.swing.ImageIcon (MapTreeNode.class.getResource ("mapInCompl.gif"));
+  static Icon s_iOK = new javax.swing.ImageIcon (MapTreeNode.class.getResource ("resources/map.gif"));
+  static Icon s_iInCompl = new javax.swing.ImageIcon (MapTreeNode.class.getResource ("resources/mapInCompl.gif"));
   
   public MapTreeNode (DefaultTreeModel dtmModel, MapDescriptor md) {
     super(dtmModel);

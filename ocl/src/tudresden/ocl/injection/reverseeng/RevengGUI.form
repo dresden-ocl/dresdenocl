@@ -61,7 +61,7 @@
                 <Component class="javax.swing.JButton" name="m_jbUpOneLevel">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-                      <Image iconType="3" name="/tudresden/ocl/injection/reverseeng/upOneLevel.gif"/>
+                      <Image iconType="3" name="/tudresden/ocl/injection/reverseeng/resources/upOneLevel.gif"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
                       <Dimension value="[25, 25]"/>
