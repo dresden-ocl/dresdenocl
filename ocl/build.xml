@@ -25,7 +25,6 @@ Enhancements by Steffen Zschaler.
   <property name="nsuml.jar"  value="${src.dir}/lib/nsuml.jar" />
   <property name="jdom.jar"   value="${src.dir}/lib/jdom.jar" />
   <property name="junit.jar"  value="${src.dir}/junit.jar"  />
-  <property name="nsuml.jar"  value="${src.dir}/nsuml.jar"  />
 
   <property file="local.properties" />
 
