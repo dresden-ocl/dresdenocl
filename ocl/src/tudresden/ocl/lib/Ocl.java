@@ -48,8 +48,8 @@ import java.util.*;
  *  installed in the Ocl class using the <CODE>setFactory</CODE> method.
  *  Adaptation to name changes by code generators is possible through
  *  <code>NameAdapter</code>. A standard implementation of this interface is
- *  contained in the library with <code>ArgoNameAdapter</code>, but that is not
- *  set by default.
+ *  contained in the library with <code>SimpleNameAdapter</code> and 
+ *  <code>ArgoNameAdapter</code>, but that is not set by default.
  *
  *  <p>Also, an implementation of <CODE>OclStateAdapter</CODE>
  *  might become necessary if
@@ -68,6 +68,7 @@ import java.util.*;
  *  @see DefaultOclFactory
  *  @see NameAdapter
  *  @see ArgoNameAdapter
+ *  @see SimpleNameAdapter
  *  @see OclStateAdapter
  *  @see AllInstancesAdapter
  *  @see #setFactory(OclFactory of)
@@ -158,9 +159,13 @@ public final class Ocl {
    */
   protected static AllInstancesAdapter allInstancesAdapter;
 
-  /** this object transforms diagram names to possible implementation names
+  /** 
+     This object transforms diagram names to possible implementation names.
+     Default value is null, which causes the ocl library to throw 
+     NullPointerExceptions, unless a NameAdapter has been set.
+     @see #setNameAdapter
    */
-  protected static NameAdapter nameAdapter;
+  protected static NameAdapter nameAdapter=null;
 
   public static OclRoot getFor(Object o) {
     return getOclRepresentationFor(o);
@@ -281,40 +286,35 @@ public final class Ocl {
 
   /** makes the methods <CODE>getName</CODE> and
    *  <CODE>getPossibleAssociationNames</CODE> use the given name adapter
+   *  The ocl library will not work until a NameAdapter is provided.
    *
    *  @see #getNames(String n)
    *  @see #getPossibleAssociationNames(String n)
    */
-  public static void setNameAdapter(NameAdapter na) {
+  public static void setNameAdapter(NameAdapter na) 
+  {
     nameAdapter=na;
   }
 
-  /** use the name adapter to find possible implementation names; if no
-   *  name adapter is set, return an array containing only the parameter
-   */
-  public static String[] getNames(String n) {
-    String[] ret;
-    if (nameAdapter==null) {
-      ret=new String[1];
-      ret[0]=n;
-    } else {
-      ret=nameAdapter.getNames(n);
-    }
-    return ret;
+  /** 
+     Use the NameAdapter to find possible implementation names.
+     Throws NullPointerException, if no NameAdapter is set.
+     @see #setNameAdapter
+  */
+  public static String[] getNames(String n) 
+  {
+    return nameAdapter.getNames(n);
   }
 
-  /** use the name adapter to find association names that might have been
-   *  converted into the given implementation name
-   */
-  public static String[] getPossibleAssociationNames(String n) {
-    String[] ret;
-    if (nameAdapter==null) {
-      ret=new String[1];
-      ret[0]=n;
-    } else {
-      ret=nameAdapter.getPossibleAssociationNames(n);
-    }
-    return ret;
+  /** 
+     Use the NameAdapter to find association names that might have been
+     converted into the given implementation name.
+     Throws NullPointerException, if no NameAdapter is set.
+     @see #setNameAdapter
+  */
+  public static String[] getPossibleAssociationNames(String n) 
+  {
+    return nameAdapter.getPossibleAssociationNames(n);
   }
 
 

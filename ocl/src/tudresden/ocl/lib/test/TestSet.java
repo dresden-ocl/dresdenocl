@@ -18,6 +18,7 @@ public class TestSet extends TestCase {
   }
 
   protected void setUp() {
+    Ocl.setNameAdapter(new SimpleNameAdapter());
     sa=(OclString)Ocl.getOclRepresentationFor("a");
     sb=(OclString)Ocl.getOclRepresentationFor("b");
     sc=(OclString)Ocl.getOclRepresentationFor("c");
