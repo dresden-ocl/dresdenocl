@@ -354,8 +354,8 @@ public class ConstraintEvaluation extends JPanel
 
     center.add(new JLabel("OCL Compiler", SwingConstants.CENTER));
     center.add(new JLabel("written 1999/2000 by Frank Finger (ff3@inf.tu-dresden.de)", SwingConstants.CENTER));
-    center.add(new JLabel("XMI support 2000 by Ralf Wiebicke (rw7@inf.tu-dresden.de)", SwingConstants.CENTER));
-    center.add(new JLabel("visit http://www-st.inf.tu-dresden.de/ocl", SwingConstants.CENTER));
+    center.add(new JLabel("XMI support 2000 by Ralf Wiebicke (ralf@rw7.de)", SwingConstants.CENTER));
+    center.add(new JLabel("visit http://dresden-ocl.sourceforge.net/", SwingConstants.CENTER));
     center.add(new JLabel("Chair for Software Technology, Dresden University of Technology", SwingConstants.CENTER));
 
     result.add(allLogos, BorderLayout.NORTH);
