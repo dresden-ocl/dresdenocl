@@ -82,12 +82,12 @@ public class ObjectViewSchema implements ORMappingScheme {
         
         /**
          *  @return a String array that contains the names of all tables the view queries
+         *          or a String array that contains just the viewName itself, if the view does not exist
          *  @param viewName the name of a view
-         *  @exception IllegalArgumentException if no view with the specified named exists
          */
-        public String[] getQueriedTables(String viewName) 
-        throws IllegalArgumentException {
+        public String[] getQueriedTables(String viewName) {
             String result[] = {};
+            String defaultResult[] = {viewName};
             String cn;
             View v;
             boolean exception = true;
@@ -103,7 +103,7 @@ public class ObjectViewSchema implements ORMappingScheme {
             }
             
             if (exception) {
-                throw new IllegalArgumentException("View " + viewName + " does not exist !");
+                return defaultResult;
             } else {
                 return result;
             }

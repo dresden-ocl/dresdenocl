@@ -760,7 +760,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
    			// features that need to be mapped using the MODEL TYPE QUERY                        
                        	if (pathName.equals("allInstances")) {                       
    				ca.setArgument("object", pkName);
-        			ca.setArgument("tables", pkTable);
+        			ca.setArgument("tables", (getOclTypeTable(node)).getTableName());
                                 codeForPathName = true;
                         } else if (pathName.equals("name")) {
                                 ca.setArgument("name", pkClassType);
@@ -804,14 +804,26 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                         } 
                         
                         // features on OclAny --> need to be mapped using the CLASS AND ATTRIBUTE pattern
-                        if (pathName.equals("oclIsKindOf")) {
+                        if (pathName.equals("oclIsKindOf")) {                                
                                 ca.setArgument("object", pkName); 
-                                ca.setArgument("ov_type", task); 
+                                ca.setArgument("table", getOclTypeTable(node).getTableName()); 
+                                ca.setArgument("context_object", task);
                                 codeForPathName = true;
                         } else if (pathName.equals("oclIsTypeOf")) {
-                            // --> todo
+                                ca.setArgument("object", pkName); 
+                                ca.setArgument("table", getOclTypeTable(node).getTableName()); 
+                                ca.setArgument("context_object", task);
+                                
+                                if (getOclSupertypeTable(node) == null) {
+                                    ca.setArgument("table2", "foo"); 
+                                } else {
+                                    ca.enableConnector();
+                                    ca.setArgument("table2", getOclSupertypeTable(node).getTableName()); 
+                                }
+                                
+                                codeForPathName = true;
                         } else if (pathName.equals("oclAsType")) {
-                            // --> todo
+                                throw new IllegalStateException("Operation oclAsType not supported yet !");
                         }
                         
                         // features that need to be mapped using the BASIC TYPE pattern from UML'99
@@ -894,35 +906,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                                         }
   				    }
   			        }
-                                
-                                // features that need to be mapped using the SEQUENCE pattern
-                                if (pathName.equals("sequence_union")) {
-                                    ca.reset();
-                                    ca.setArgument("sequence", task);
-                                    ca.setArgument("sequence2", taskAp);
-                                    ca.setArgument("seqNo", SEQNO);
-                                    ca.setArgument("seqNo2", SEQNO);
-                                    ca.setArgument("element", pkName);
-                                    codeForPathName = true;
-                                } else if (pathName.equals("sequence_including")) {
-                                    System.err.println("-->");
-                                    ca.reset();
-                                    ca.setArgument("sequence", task);
-                                    ca.setArgument("object", taskAp);
-                                    ca.setArgument("seqNo", SEQNO);
-                                    ca.setArgument("seqNo2", SEQNO);
-                                    codeForPathName = true;
-                                } else if (pathName.equals("sequence_excluding")) {
-                                    System.err.println("-->");
-                                    ca.reset();
-                                    ca.setArgument("sequence", task);
-                                    ca.setArgument("object", taskAp);
-                                    ca.setArgument("element", pkName);
-                                    ca.setArgument("seqNo", SEQNO);
-                                    ca.setArgument("seqNo2", SEQNO);
-                                    codeForPathName = true;
-                                } // --> todo
-                                
+                                                               
                                 if ((pathName.equals("select")) || (pathName.equals("reject"))) {
                                     ca.reset();
                                     ca.setArgument("collection", task);
@@ -958,6 +942,32 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                                     // todo
   			        }
                                 
+                                // features that need to be mapped using the SEQUENCE pattern
+                                if (pathName.equals("sequence_union")) {
+                                    ca.reset();
+                                    ca.setArgument("sequence", task);
+                                    ca.setArgument("sequence2", taskAp);
+                                    ca.setArgument("seqNo", SEQNO);
+                                    ca.setArgument("seqNo2", SEQNO);
+                                    ca.setArgument("element", pkName);
+                                    codeForPathName = true;
+                                } else if (pathName.equals("sequence_including")) {
+                                    ca.reset();
+                                    ca.setArgument("sequence", task);
+                                    ca.setArgument("object", taskAp);
+                                    ca.setArgument("seqNo", SEQNO);
+                                    ca.setArgument("seqNo2", SEQNO);
+                                    codeForPathName = true;
+                                } else if (pathName.equals("sequence_excluding")) {
+                                    ca.reset();
+                                    ca.setArgument("sequence", task);
+                                    ca.setArgument("object", taskAp);
+                                    ca.setArgument("element", pkName);
+                                    ca.setArgument("seqNo", SEQNO);
+                                    ca.setArgument("seqNo2", SEQNO);
+                                    codeForPathName = true;
+                                } // --> todo
+                                
                                 // features that need to be mapped using the BASIC VALUE pattern from UML'99
                                 if (pathName.equals("size")) {
                                     ca.reset();
@@ -978,17 +988,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                                     ca.setArgument("element", pkName);
                                     ca.setArgument("collection", task);
                                     codeForPathName = true;
-   			        }
-			  
-			  	if (codeForPathName) {
-                          		try {
-                                               thisCode = ca.getCodeFor("feature_call", pathName);
-                                        } catch (Exception e) {
-        			      		System.err.println(e.toString());
-        			    	}
-                          	}
-                                
-                                codeForPathName = false;
+   			        }			  
                         }
    		}
                 
@@ -1165,5 +1165,47 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         		System.err.println(e.toString());
         	}
 	}
+        
+        // some helper functions
+        
+        /**
+         *  @return the table/view that belongs to the type for expression:
+         *          FeatureCall->FeatureCallParameters->ActualParameterList->Expression
+         */
+        private Table getOclTypeTable(AFeatureCall node) 
+        throws IllegalStateException {
+            String typeName;
+            AExpression aexp;
+            MappedClass mc;
+            
+            aexp = (AExpression)((AActualParameterList)((AFeatureCallParameters)node.getFeatureCallParameters()).getActualParameterList()).getExpression();
+            typeName = ((OclType)theTree.getNodeType(aexp)).getType().toString();
+            mc = map.getMappedClass(typeName);
+            if (mc.getTables().size() != 1) throw new IllegalStateException("Illegal number of class tables for type: " + typeName + " !");
+                                    
+            return ((Table)mc.getTables().get(0));
+        }
+        
+        /**
+         *  Note: If the type for expression does not have a supertype, a null value will be returned.
+         *  @return the table/view that belongs to the supertype for expression:
+         *          FeatureCall->FeatureCallParameters->ActualParameterList->Expression
+         */
+        private Table getOclSupertypeTable(AFeatureCall node) 
+        throws IllegalStateException {
+            String typeName;
+            AExpression aexp;
+            MappedClass mc;            
+            
+            aexp = (AExpression)((AActualParameterList)((AFeatureCallParameters)node.getFeatureCallParameters()).getActualParameterList()).getExpression();
+            typeName = ((OclType)theTree.getNodeType(aexp)).getType().toString();
+            mc = map.getMappedClass(typeName);
+            
+            if (mc.supertypes().size() == 0) return null; 
+            if (mc.supertypes().size() > 1) throw new IllegalStateException("Illegal number of supertypes for type: " + typeName + " !");
+            if (mc.getTables().size() != 1) throw new IllegalStateException("Illegal number of class tables for supertype of: " + typeName + " !");
+                                    
+            return ((Table)mc.getTables().get(0));
+        }
 
 }

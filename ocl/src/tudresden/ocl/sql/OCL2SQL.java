@@ -494,6 +494,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         increaseProgressInfo("create triggers ...");
         tg = new TriggerGenerator(theSQLBuilder);
         tmp = new StringBuffer();
+        
         for (int i=0; i<lIntegrityViews.size(); i++) {
             dcf = (DeclarativeCodeFragment)lIntegrityViews.get(i);
             triggers = new String[0];
