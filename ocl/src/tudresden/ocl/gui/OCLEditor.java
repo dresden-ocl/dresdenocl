@@ -342,9 +342,9 @@ public class OCLEditor extends javax.swing.JPanel
       m_jbNew.setEnabled (false);
       m_jbRemove.setEnabled (false);
 
-      m_jbEdit.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Stop16.gif")));
-      m_jbEdit.setToolTipText ("Click to stop editing");
-      m_jbEdit.setText ("Stop Edit");
+      m_jbEdit.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Cancel16.gif")));
+      m_jbEdit.setToolTipText ("Click to cancel editing without saving changes");
+      //m_jbEdit.setText ("Stop Edit");
 
       m_jbSaveEditResult.setEnabled (true);
       
@@ -367,7 +367,7 @@ public class OCLEditor extends javax.swing.JPanel
 
       m_jbEdit.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Edit16.gif")));
       m_jbEdit.setToolTipText ("Click to edit the currently selected constraint");
-      m_jbEdit.setText ("Edit");
+      //m_jbEdit.setText ("Edit");
 
       m_jbSaveEditResult.setEnabled (false);
     }
@@ -380,11 +380,8 @@ public class OCLEditor extends javax.swing.JPanel
     m_nOptionMask = nOptionMask;
     
     if (m_nOptionMask == 0) {
-      //m_jpOptionsGroup.setVisible (false);
       return;
     }
-
-    //m_jpOptionsGroup.setVisible (true);
   }
 
   public int getOptionMask() {
@@ -644,7 +641,6 @@ public class OCLEditor extends javax.swing.JPanel
       m_jbNew.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/New16.gif")));
       m_jbNew.setToolTipText ("Click to create a new constraint");
       m_jbNew.setMargin (new java.awt.Insets(2, 20, 2, 20));
-      m_jbNew.setText ("New");
       m_jbNew.addActionListener (new java.awt.event.ActionListener () {
         public void actionPerformed (java.awt.event.ActionEvent evt) {
           onNewConstraintButton (evt);
@@ -657,7 +653,6 @@ public class OCLEditor extends javax.swing.JPanel
       m_jbRemove.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Delete16.gif")));
       m_jbRemove.setToolTipText ("Click to remove the currently selected constraint");
       m_jbRemove.setMargin (new java.awt.Insets(2, 20, 2, 20));
-      m_jbRemove.setText ("Remove");
       m_jbRemove.addActionListener (new java.awt.event.ActionListener () {
         public void actionPerformed (java.awt.event.ActionEvent evt) {
           onRemoveConstraintButton (evt);
@@ -670,7 +665,6 @@ public class OCLEditor extends javax.swing.JPanel
       m_jbEdit.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Edit16.gif")));
       m_jbEdit.setToolTipText ("Click to edit the currently selected constraint");
       m_jbEdit.setMargin (new java.awt.Insets(2, 20, 2, 20));
-      m_jbEdit.setText ("Edit");
       m_jbEdit.addActionListener (new java.awt.event.ActionListener () {
         public void actionPerformed (java.awt.event.ActionEvent evt) {
           onEditButton (evt);
@@ -680,9 +674,8 @@ public class OCLEditor extends javax.swing.JPanel
   
       m_jtbTools.add (m_jbEdit);
   
-      m_jbSaveEditResult.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/save_icon.gif")));
+      m_jbSaveEditResult.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Ok16.gif")));
       m_jbSaveEditResult.setToolTipText ("Check OCL syntax and save constraint into model");
-      m_jbSaveEditResult.setText ("Save");
       m_jbSaveEditResult.setEnabled (false);
       m_jbSaveEditResult.addActionListener (new java.awt.event.ActionListener () {
         public void actionPerformed (java.awt.event.ActionEvent evt) {
@@ -825,7 +818,14 @@ public class OCLEditor extends javax.swing.JPanel
 
   private void onNewConstraintButton (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onNewConstraintButton
     if (m_oclemModel != null) {
+      int nOldCount = m_oclemModel.getConstraintCount();
       m_oclemModel.addConstraint();
+      
+      if (m_oclemModel.getConstraintCount() > nOldCount) {
+        // New constraint was added, it should now also be selected because of
+        // our reaction to the constraintAdded event.
+        setEditMode (true);
+      }
     }
   }//GEN-LAST:event_onNewConstraintButton
 
@@ -966,6 +966,9 @@ public class OCLEditor extends javax.swing.JPanel
         try {
           m_oclemModel.getConstraintAt (nIdx)
               .setData (m_jtpConstraintEditor.getText());
+          
+          // Stop editing if successful
+          setEditMode (false);
         }
         catch (OclParserException ope) {
           int nCaretPos = getCaretPositionFromLineAndColumn (

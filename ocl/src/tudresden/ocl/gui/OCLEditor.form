@@ -39,7 +39,6 @@
             <Property name="margin" type="java.awt.Insets" editor="com.netbeans.developer.editors.InsetsEditor">
               <Insets value="[2, 20, 2, 20]"/>
             </Property>
-            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="New"/>
           </Properties>
 
           <Events>
@@ -58,7 +57,6 @@
             <Property name="margin" type="java.awt.Insets" editor="com.netbeans.developer.editors.InsetsEditor">
               <Insets value="[2, 20, 2, 20]"/>
             </Property>
-            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Remove"/>
           </Properties>
 
           <Events>
@@ -77,7 +75,6 @@
             <Property name="margin" type="java.awt.Insets" editor="com.netbeans.developer.editors.InsetsEditor">
               <Insets value="[2, 20, 2, 20]"/>
             </Property>
-            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Edit"/>
           </Properties>
 
           <Events>
@@ -90,10 +87,9 @@
         <Component class="javax.swing.JButton" name="m_jbSaveEditResult">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-              <Image iconType="3" name="/tudresden/ocl/images/save_icon.gif"/>
+              <Image iconType="3" name="/tudresden/ocl/images/Ok16.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Check OCL syntax and save constraint into model"/>
-            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Save"/>
             <Property name="enabled" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
           </Properties>
 
@@ -295,8 +291,6 @@
       <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
       <SubComponents>
         <Container class="javax.swing.JScrollPane" name="m_jspConstraintEditorScroller">
-          <Properties>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints anchor="18" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
