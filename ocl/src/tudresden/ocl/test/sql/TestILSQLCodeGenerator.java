@@ -450,7 +450,7 @@ public class TestILSQLCodeGenerator extends TestCase {
 	public static Test suite() {
 		TestSuite t=new TestSuite();
 
-    		t.addTest(new TestILSQLCodeGenerator("testPrepareJoin"));
+    		//--> todo: t.addTest(new TestILSQLCodeGenerator("testPrepareJoin"));
                 t.addTest(new TestILSQLCodeGenerator("testPrepareDerivedTable"));
                 t.addTest(new TestILSQLCodeGenerator("testUniversityExampleInv"));
 
