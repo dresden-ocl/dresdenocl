@@ -52,16 +52,21 @@ public final class Invariant implements FeatureListener
     try
     {
       //System.out.println("invariant "+name+" on object "+object+" observes feature "+featurename+" on object "+o);
-      Class c=o.getClass();
-      Field f=c.getField(featurename);
+      Field f=null;
+      for(Class c=o.getClass(); c!=null; c=c.getSuperclass())
+      {
+        try
+        {
+          f=c.getDeclaredField(featurename);
+          break;
+        }
+        catch(NoSuchFieldException e) {}
+      }
+      if(f==null)
+        throw new RuntimeException("error accessing feature "+featurename+" on object "+o);
+      f.setAccessible(true);
       HashSet observer=(HashSet)(f.get(o));
       observer.add(this);
-    }
-    catch(NoSuchFieldException e)   
-    { 
-      System.out.println("error accessing feature "+featurename+" on object "+o);
-      e.printStackTrace(); 
-      throw new RuntimeException(e.toString());
     }
     catch(IllegalAccessException e) 
     { 
