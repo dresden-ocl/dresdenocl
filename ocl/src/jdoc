@@ -3,6 +3,9 @@
 -private 
 -windowtitle "Dresden OCL Toolkit"
 -doctitle "Dresden OCL Toolkit"
+-header "<b>Dresden OCL Toolkit</b>"
+-footer "<b>Dresden OCL Toolkit</b>"
+-bottom "<small><a\ href=\"http://sourceforge.net/bugs/?group_id=5840\">Submit\ a\ bug</a><br>Developed\ at\ the\ <a\ href=\"http://www.inf.tu-dresden.de/welcome.html\">Dresden\ University\ of Technology</a>.<br>This\ software\ is published\ under\ the\ <a\ href=\"http://www.gnu.org/copyleft/lesser.html\">GNU\ Lesser\ General\ Public\ License</a>.</small>"
 -link http://java.sun.com/products/jdk/1.2/docs/api/
 -splitindex
 tudresden.ocl
