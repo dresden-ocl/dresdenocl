@@ -21,11 +21,14 @@ package tudresden.ocl.injection;
 /**
    Implementors of this interface get the results of the
    {@link Injector java parser}.
-
+   <p>
    An implementation may write to the ouput stream of the
    java parser. Therefore, the interface of each method
    specifies the position of the output stream, when 
    the method is called.
+
+   To test these positions, use
+   <code>tudresden.ocl.injection.test.TestInjectionConsumer</code>.
 */
 public interface InjectionConsumer 
 {
