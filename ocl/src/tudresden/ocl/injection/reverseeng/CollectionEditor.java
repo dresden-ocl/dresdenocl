@@ -93,7 +93,7 @@ public class CollectionEditor extends javax.swing.JPanel {
       public void setSelectedItem (Object oSelectedItem) {
         super.setSelectedItem (oSelectedItem);
 
-        m_cdModel.setElementType ((String) oSelectedItem);
+        m_cdModel.setElementType ((String) getSelectedItem());
       }
     };
     m_jcbElementType.setModel (m_tcmElementTypeModel);

@@ -124,4 +124,11 @@ public abstract class RevengTreeNode extends DefaultMutableTreeNode {
       }
     });
   }
+  
+  /**
+    * Return the tool tip to be associated with this node. Defaults to toString().
+    */
+  public String getToolTip() {
+    return toString();
+  }
 }

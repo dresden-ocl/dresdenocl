@@ -70,7 +70,7 @@ public class RevengGUI extends javax.swing.JDialog {
     m_dtmFileModel.setRoot (ftnRoot);
     ftnRoot.fill();
     m_jspProperties = new javax.swing.JScrollPane ();
-    m_jtPropertiesTable = new javax.swing.JTable ();
+    m_jlDefaultComponent = new javax.swing.JLabel ();
     getContentPane ().setLayout (new java.awt.GridBagLayout ());
     java.awt.GridBagConstraints gridBagConstraints1;
     setDefaultCloseOperation (javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -98,6 +98,10 @@ public class RevengGUI extends javax.swing.JDialog {
     
           m_jtFiles.setModel (m_dtmFileModel);
           m_jtFiles.setCellRenderer (new FileTreeNodeRenderer());
+      
+          //Enable tool tips.
+          ToolTipManager.sharedInstance().registerComponent (m_jtFiles);
+      
           m_jtFiles.addTreeExpansionListener (new javax.swing.event.TreeExpansionListener () {
             public void treeCollapsed (javax.swing.event.TreeExpansionEvent evt) {
               m_jtFilesTreeCollapsed (evt);
@@ -132,25 +136,9 @@ public class RevengGUI extends javax.swing.JDialog {
       m_jspSplitter.setLeftComponent (m_jpLeft);
   
   
-        m_jtPropertiesTable.setModel (new javax.swing.table.DefaultTableModel (
-        new Object [][] {
-        {"Key type", null},
-        {"Element type", null}
-        },
-        new String [] {
-          "", ""
-        }
-        ) {
-          boolean[] canEdit = new boolean [] {
-            false, true
-          };
+        m_jlDefaultComponent.setText ("No properties for current selection!");
     
-          public boolean isCellEditable (int rowIndex, int columnIndex) {
-            return canEdit [columnIndex];
-          }
-        });
-    
-        m_jspProperties.setViewportView (m_jtPropertiesTable);
+        m_jspProperties.setViewportView (m_jlDefaultComponent);
     
       m_jspSplitter.setRightComponent (m_jspProperties);
   
@@ -219,6 +207,8 @@ public class RevengGUI extends javax.swing.JDialog {
       
       RevengTreeNode rtn = (RevengTreeNode) value;
       
+      setToolTipText (rtn.getToolTip());
+      
       setIcon (rtn.getIcon (expanded));
       
       return this;
@@ -241,7 +231,7 @@ public class RevengGUI extends javax.swing.JDialog {
   private javax.swing.JScrollPane m_jspTreeScroller;
   private javax.swing.JTree m_jtFiles;
   private javax.swing.JScrollPane m_jspProperties;
-  private javax.swing.JTable m_jtPropertiesTable;
+  private javax.swing.JLabel m_jlDefaultComponent;
   // End of variables declaration//GEN-END:variables
 
 }

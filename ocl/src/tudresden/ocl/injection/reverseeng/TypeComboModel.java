@@ -41,6 +41,8 @@ public class TypeComboModel extends AbstractListModel implements ComboBoxModel {
   private String m_sSelection;
   private List m_lsTypes;
   
+  private static String s_sUnspecified = ">>Unspecified<<";
+  
   /** 
     * Creates new TypeComboModel.
     */
@@ -53,17 +55,29 @@ public class TypeComboModel extends AbstractListModel implements ComboBoxModel {
   }
   
   protected void fillInStandardTypes() {
-    m_lsTypes.add ("boolean");
-    m_lsTypes.add ("char");
-    m_lsTypes.add ("int");
-    m_lsTypes.add ("float");
-    m_lsTypes.add ("double");
-    m_lsTypes.add ("java.lang.String");
+    m_lsTypes.add (s_sUnspecified);
+    m_lsTypes.add ("java.lang.Boolean");
+    m_lsTypes.add ("java.lang.Byte");
+    m_lsTypes.add ("java.lang.Character");
+    m_lsTypes.add ("java.lang.Double");
+    m_lsTypes.add ("java.lang.Float");
+    m_lsTypes.add ("java.lang.Integer");
+    m_lsTypes.add ("java.lang.Long");
+    m_lsTypes.add ("java.lang.Number");
     m_lsTypes.add ("java.lang.Object");
+    m_lsTypes.add ("java.lang.Short");
+    m_lsTypes.add ("java.lang.String");
+    m_lsTypes.add ("java.lang.StringBuffer");
   }
   
   public void setSelectedItem (Object oSelectedItem) {
-    m_sSelection = (String) oSelectedItem;
+    
+    if (((String) oSelectedItem) != s_sUnspecified) {
+      m_sSelection = (String) oSelectedItem;
+    }
+    else {
+      m_sSelection = null;
+    }
     
     fireContentsChanged (this, 0, 0);
   }

@@ -80,7 +80,7 @@ public class MapEditor extends javax.swing.JPanel {
       public void setSelectedItem (Object oSelectedItem) {
         super.setSelectedItem (oSelectedItem);
 
-        m_mdModel.setKeyType ((String) oSelectedItem);
+        m_mdModel.setKeyType ((String) getSelectedItem());
       }
     };
     m_jcbKeyType.setModel (m_tcmKeyTypeModel);
@@ -108,7 +108,7 @@ public class MapEditor extends javax.swing.JPanel {
       public void setSelectedItem (Object oSelectedItem) {
         super.setSelectedItem (oSelectedItem);
 
-        m_mdModel.setElementType ((String) oSelectedItem);
+        m_mdModel.setElementType ((String) getSelectedItem());
       }
     };
     m_jcbElementType.setModel (m_tcmElementTypeModel);

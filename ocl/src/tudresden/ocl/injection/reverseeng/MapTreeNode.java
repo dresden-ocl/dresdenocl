@@ -82,7 +82,10 @@ public class MapTreeNode extends RevengTreeNode {
 
     return md.getName()
             + "[" + ((md.getKeyType() != null)?(md.getKeyType()):("")) + "]"
-            + " : "
-            + ((md.getElementType() != null)?(md.getElementType()):(""));
+            + ((md.getElementType() != null)?(" : " + md.getElementType()):(""));
+  }
+  
+  public String getToolTip() {
+    return "Map: " + super.getToolTip();
   }
 }
