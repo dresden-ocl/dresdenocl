@@ -115,7 +115,7 @@ public class TestTable extends TestCase {
 		assertTrue(t.getForeignColumn("a3").equals("c1"));
 
 		try {
-			t.setForeignKey(null, null, null);
+			t.setForeignKey((String)null, (Table)null, null);
 			fail("Missing Exception !");
 		} catch(NullPointerException e) {
 		}
