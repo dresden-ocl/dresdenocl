@@ -83,7 +83,7 @@ import java.util.*;
  *  );<br>
  *
  *  <h3>Class Diagram</h3>
- *  <img src="collections.gif">
+ *  <img src="doc-files/collections.gif">
  *
  *  @see OclBooleanEvaluatable
  *  @see OclRootEvaluatable

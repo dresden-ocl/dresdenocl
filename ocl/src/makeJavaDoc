@@ -1,3 +1,2 @@
 rm -rf ./api/*
 javadoc -J-mx50m -d ./api @jdoc
-cp tudresden/ocl/lib/*.gif api/tudresden/ocl/lib/
