@@ -329,6 +329,12 @@ final class OclInjector implements InjectionConsumer
     o.write(Invariant.INVARIANT_METHOD);
     o.write(cf.getName());
     o.write("()\n  {\n");
+    if(config.tracechecking)
+    {
+      o.write("    System.out.println(\"checking ocl invariant '");
+      o.write(cf.getName());
+      o.write("' on object '\"+this+\"'.\");\n");
+    }
     o.write("    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(");
     o.write(Invariant.INVARIANT_OBJECT);
     o.write(cf.getName());
@@ -867,6 +873,7 @@ final class OclInjectorConfig
   NameCreator namecreator=new NameCreator();
 
   boolean insertimmediately=false;
+  boolean tracechecking=false;
   boolean clean=false;
   String violationmacro=null;
   boolean tracetypes=false;
@@ -1162,6 +1169,8 @@ public class Main
           conf.clean=true;
         else if("--insert-immediately".equals(args[i]))
           conf.insertimmediately=true;
+        else if("--trace-checking".equals(args[i]))
+          conf.tracechecking=true;
         else if(args[i].startsWith("-"))
         {
           System.out.println("unknown option: "+args[i]);
