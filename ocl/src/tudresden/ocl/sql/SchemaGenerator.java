@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2001  Sten Loecher
+Copyright (C) 2002 Andrea Kling
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -14,203 +14,107 @@ Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 */
 
 package tudresden.ocl.sql;
 
-import tudresden.ocl.codegen.decl.*;
-import tudresden.ocl.check.types.xmifacade.*;
-
-import java.util.*;
-import java.io.*;
-import java.net.URL;
+import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import tudresden.ocl.codegen.decl.Table;
+//import tudresden.ocl.sql.SQLDirector;
+//import tudresden.ocl.sql.SQLBuilder;
+//import tudresden.ocl.sql.ORMapping;
 
 /**
- * A DDL (Data Definition Language) generator. The generator takes a ORMapping implementation
- * as input and generates a script that contains a number of table definitions
- * including primary and foreign key references.
- * Which tables are going to be created is determined by the implementation of
- * ORMapping, which does the actual object relational mapping.
- * The SchemaGenerator just queries the information produced by the implementation of
- * ORMapping and generates the appropriate DDL script.
+ * Implementation of SQLDirector
+ * uses the data provided by an Implementation of the ORMapping
+ * interface to generate SQL-scripts for creating database tables
+ * according to the SQL DDL provided
  * The actual SQL code depends on the SQLBuilder that must be provided to the SchemaGenerator.
- * @author Sten Loecher
- * @see ORMapping
+ *
  * @see SQLBuilder
- */
-class SchemaGenerator implements SQLDirector {
-  private String theScript;
-  private int constraintCount = 0;
-  private boolean scriptGenerated = false;
-  private SQLBuilder theSQLBuilder = null;
-  private ORMapping theORMapping = null;
-  
-  private static String CONSTRAINT_NAME = "CON_";
+ * @see tudresden.ocl.codegen.decl.Table
+ *
+ * @author Andrea Kling
+ * @version 2.0 (reimplemented a non-startable version, using new features of Tables)
+ * */
+
+
+public class SchemaGenerator implements SQLDirector{
+
+  private ORMapping mapping;
+  private SQLBuilder builder;
+  //private StringBuffer theCode;
 
   /**
-   * For command line and debugging operations only.
-   * Generates a SQL DDL script from a xmi source and stores it to
-   * the specified destination.
-   * @param arg[0] url of a xmi source file
-   * @param arg[1] the destination and name of the target file
+   * @param mapping the object relational mapping information
+   * @param builder an SQLBuilder providing information on the SQL DDL
+   * for construction of SQL scripts
    */
-  public static void main(String[] arg) {
-    URL src;
-		String dest;
-    SchemaGenerator theSchemaGenerator = new SchemaGenerator();
+  public SchemaGenerator(ORMapping mapping, SQLBuilder builder){
+    this.mapping = mapping;
+    this.builder = builder;
+    //theCode = new StringBuffer();
+    builder.reset();
+  }
 
-    if ((arg.length > 1) && (arg[0] != null) && (arg[1] != null)) {
-    	// command line operation
-			try
-			{
-    	  src = new URL(arg[0]);
-			}
-			catch(java.net.MalformedURLException e)
-			{
-    	  System.err.println(e.toString());
-				return;
-			}
-    	dest = arg[1];
-    } else {
-    	// use default files for debbuging run
-    	src = SchemaGenerator.class.getResource("test_diagramm_argo07.xmi");
-    	dest = "sql.ddl";
+   /**
+   * @param builder an SQLBuilder providing information on the SQL DDL
+   * for construction of SQL scripts
+   */
+  public void setBuilder(SQLBuilder builder){
+    this.builder = builder;
+    builder.reset();
+  }
 
-        System.err.println("Source file is: " + src);
+   /**
+    * initiates the construction of the SQL script
+    */
+  public void construct(){
+    //theCode = new StringBuffer();
+    builder.reset();
+    List tables = mapping.tables();
+    for(int i=0; i<tables.size(); i++){
+      Table t = (Table) tables.get(i);
+      builder.beginTable(t.getTableName());
+      String[] columns = t.getColumns();
+      for ( int c=0; c<columns.length; c++ ) {
+        if(c>0) builder.addColumnSeparator();
+        if (t.isPrimaryKeyColumn(columns[c])){
+         builder.addColumn(columns[c], t.getColumnType(columns[c]), true);
+        }else{
+          builder.addColumn(columns[c], t.isOptional(columns[c]),
+          t.getColumnType(columns[c]));
+        }
+      }
+      builder.endTable();
+      builder.endStatement();
     }
-
-    System.err.println("DDL is determined for target system: Oracle 8i");
-    System.err.println("DDL Generator running ...");
-
-    try {
-    	theSchemaGenerator.createDDL(new ORMappingImp(XmiParser.createRoughModel(src, src.toString())), new OracleSQLBuilder());
-    } catch (Exception e) {
-    	System.err.println("Cannot create DDL script:"  + e.toString());
+    for(int i=0; i<tables.size(); i++){
+      Table t = (Table) tables.get(i);
+      String[] columns = t.getForeignKeyColumns();
+      Set doneColumns = new HashSet();
+      for(int c = 0; c<columns.length; c++){
+        if( !doneColumns.contains(columns[c])){
+          builder.addFKConstraint("FK_"+t.getTableName()+c,
+          t.getTableName(), t.getAllForeignKeyColumns(columns[c]),
+          t.getReferredTable(columns[c]).getTableName(),
+          t.getReferredTable(columns[c]).getPrimaryKeyColumns());
+          builder.endStatement();
+          String[] fullFK = t.getAllForeignKeyColumns(columns[c]);
+          for(int a = 0; a<fullFK.length; a++)
+            doneColumns.add(fullFK[a]);
+        }
+      }
     }
-
-    try {
-    	FileWriter fw = new FileWriter(dest);
-        fw.write(theSchemaGenerator.getDDLScript());
-        fw.close();
-    } catch (Exception e) {
-    	System.err.println("Cannot write sql.ddl:" + e.toString());
-    }
-
-    System.err.println("\n...done.");
   }
 
-  /**
-   * @return the DDL script
-   * @exception IllegalStateException if no script was generated before calling this methode
-   */
-  public String getDDLScript()
-  throws IllegalStateException {
-  	if (!scriptGenerated) throw new IllegalStateException();
-  	return theScript.toString();
+   /**
+    * returns the SQL script
+    */
+  public String getCode(){
+    return builder.getCode();
   }
- 
-  /**
-   * Creates the DDL script.
-   * @exception IllegalStateException if no SQLBuilder nor ORMapping was set
-   */
-  public void createDDL() 
-  throws IllegalStateException {
-        if ((theSQLBuilder == null) || (theORMapping == null)) 
-            throw new IllegalStateException("Missing SQLBuilder and/or ORMapping.");
-              
-  	Iterator i = theORMapping.tables().iterator();
-        theSQLBuilder.reset();
-
-  	while (i.hasNext()) {
-  		createTable((Table)i.next());
-  	}
-
-  	i = theORMapping.tables().iterator();
-  	while (i.hasNext()) {
-  		setForeignKeys((Table)i.next());
-  	}
-
-        theScript = theSQLBuilder.getCode();
-  	scriptGenerated = true;
-  }
-  
-  /**
-   * Creates the DDL script.
-   * @param orm a table schema
-   * @param sqlb a SQLBuilder
-   */
-  public void createDDL(ORMapping orm, SQLBuilder sqlb) {
-        theORMapping = orm;
-  	theSQLBuilder = sqlb;
-        createDDL();
-  }
-
-  /**
-   * Generates the table definition including the primary key constraints for a table.
-   * @param t the table for which the definitions should be created
-   */
-  private void createTable(Table t) {
-  	String cols[] = t.getColumns();
-  	String colAttType, indentStr;
-  	int indent;
-
-  	theSQLBuilder.beginTable(t.getTableName());
-  	for (int i=0; i<cols.length; i++) {
-  		// column 
-  		theSQLBuilder.addColumn(cols[i], t.getColumnType(cols[i]), t.isPrimaryKeyColumn(cols[i]));
-
-  		// column separator
-  		if (i < (cols.length-1)) {
-  			theSQLBuilder.addColumnSeparator();
-  		}
-  	}
-  	theSQLBuilder.endTable();
-  }
-
-  /**
-   * Generates alter table statements to create foreign key references.
-   * @param t the table for which the alter table statements should be created
-   */
-  private void setForeignKeys(Table t) {
-  	String cols[] = t.getColumns();
-
-  	for (int i=0; i<cols.length; i++) {
-  		if (t.isForeignKeyColumn(cols[i])) {
-  			constraintCount++;
-                        theSQLBuilder.addFKConstraint(CONSTRAINT_NAME + constraintCount,
-                                                      t.getTableName(),
-                                                      cols[i], 
-                                                      t.getForeignTable(cols[i]), 
-                                                      t.getForeignColumn(cols[i]));  			
- 		}
-	}
-  }
-  
-  /**
-   * @param orm an implementation of the ORMapping Interface that provides a table schema
-   */
-  public void setORMapping(ORMapping orm) {
-      theORMapping = orm;
-  }
-  
-  /**
-   * @param sqlb a builder used by the director to build database specific code
-   */
-  public void setBuilder(SQLBuilder sqlb) {
-      theSQLBuilder = sqlb;
-  }
-  
-  /**
-   * Does the construction of the SQL code.
-   */
-  public void construct() {
-      createDDL();
-  }
-  
-  /**
-   * @return the resulting SQL code from the construction process
-   */ 
-  public String getCode() {
-      return getDDLScript();
-  }  
 }
