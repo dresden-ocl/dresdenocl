@@ -705,6 +705,7 @@ public class OCLEditor extends javax.swing.JPanel
         }
       }
       catch (Exception e) {
+        e.printStackTrace();
         throw new OclTypeException (e.getMessage());
       }
     }
@@ -1288,6 +1289,8 @@ public class OCLEditor extends javax.swing.JPanel
 
           m_jtpConstraintEditor.select (nCaretPos, nCaretPos);
           m_jtpConstraintEditor.requestFocus();
+          
+          ope.printStackTrace();
         }
         catch (OclTypeException ote) {
           JOptionPane.showMessageDialog (null,
@@ -1295,6 +1298,7 @@ public class OCLEditor extends javax.swing.JPanel
                                                 ote.getMessage(),
                                            "Error",
                                            JOptionPane.ERROR_MESSAGE);
+          ote.printStackTrace();
         }
         catch (IllegalStateException ise) {
           JOptionPane.showMessageDialog (null,
@@ -1302,6 +1306,7 @@ public class OCLEditor extends javax.swing.JPanel
                                                ise.getMessage(),
                                            "Error",
                                            JOptionPane.ERROR_MESSAGE);
+          ise.printStackTrace();
         }
       }
     }

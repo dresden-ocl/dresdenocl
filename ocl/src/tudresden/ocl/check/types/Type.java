@@ -45,13 +45,16 @@ import tudresden.ocl.check.OclTypeException;
  *  no association end or property with the given <I>name</I>, a
  *  <CODE>OclTypeException</CODE> is thrown.
  *
- *  Classes implementing this interface should also overwrite <CODE>equals</CODE>,
+ *  <p>Classes implementing this interface should also overwrite <CODE>equals</CODE>,
  *  <CODE>toString</CODE> and
  *  <CODE>hashCode</CODE> appropriately. The <CODE>toString</CODE> method should
  *  return the type name as it would be expected in an OCL expression (e.g.
  *  &quot;Person&quot; and not things like &quot;application defined type:
- *  Person&quot;).
+ *  Person&quot;).</p>
  *
+ *  <p><strong>Note</strong>: This interface has been augmented by a new version
+ *  {@link Type2}. Implementing <code>Type2</code> is strongly recommended,
+ *  though not mandatory.</p>
  *
  *  @see Basic
  *  @see Collection
@@ -72,9 +75,13 @@ public interface Type {
    */
   public Type navigateQualified(String name, Type[] qualifiers) throws OclTypeException;
 
-  /** navigate to the result type of the operation <i>name</i>
+  /** 
+   * Navigate to the result type of the operation <i>name</i>. This must return
+   * a valid type whether the specified operation is a query or not.
    *
-   *  @param params the actual argument types
+   * <p>Implement {@link Type2} to check for query operations.</p>
+   *
+   * @param params the actual argument types
    */
   public Type navigateParameterized(String name, Type[] params) throws OclTypeException;
 

@@ -407,10 +407,17 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
           } else if (pathName.equals("iterate")) {
             navigation=ntm.get(fcall);
           } else {
-            navigation=navigation.navigateParameterized(
-              pathName,
-              (Type[]) paramTypes.toArray( new Type[paramTypes.size()] )
-            );
+            navigation = (navigation instanceof Type2)?
+                         (((Type2) navigation).navigateParameterizedQuery (
+                             pathName,
+                             (Type[]) paramTypes.toArray (new Type[paramTypes.size()])
+                           )
+                         ):
+                         (navigation.navigateParameterized (
+                             pathName,
+                             (Type[]) paramTypes.toArray (new Type[paramTypes.size()])
+                           )
+                         );
           }
         } else {
           // begin instanceof ADotPostfixExpressionTailBegin
@@ -439,10 +446,17 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
               }
             } else {
               // perfectly normal navigation
-              navigation=navigation.navigateParameterized(
-                pathName,
-                (Type[]) paramTypes.toArray( new Type[paramTypes.size()] )
-              );
+              navigation = (navigation instanceof Type2)?
+                           (((Type2) navigation).navigateParameterizedQuery (
+                               pathName,
+                               (Type[]) paramTypes.toArray (new Type[paramTypes.size()])
+                             )
+                           ):
+                           (navigation.navigateParameterized (
+                               pathName,
+                               (Type[]) paramTypes.toArray (new Type[paramTypes.size()])
+                             )
+                           );
             }
           }
         }
@@ -693,7 +707,20 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
               throw new OclTypeException(""+start+" has no state \""+stateName+"\"");
             }
           } else {
-            ntm.put( fpe, start.navigateParameterized(text, (Type[]) list.toArray(new Type[list.size()])) );
+            ntm.put (
+                fpe,
+                (start instanceof Type2)?
+                (((Type2) start).navigateParameterizedQuery (
+                    text,
+                    (Type[]) list.toArray (new Type[list.size()])
+                  )
+                ):
+                (start.navigateParameterized (
+                    text,
+                    (Type[]) list.toArray (new Type[list.size()])
+                  )
+                )
+              );
           }
         }
       }
@@ -737,7 +764,17 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
           if (params.getActualParameterList()!=null) {
             addParamTypesToList( (AActualParameterList)params.getActualParameterList(), list, false );
           }
-          result=type.navigateParameterized(memberName, (Type[]) list.toArray(new Type[list.size()]));
+          result = (type instanceof Type2)?
+                   (((Type2) type).navigateParameterizedQuery (
+                       memberName,
+                       (Type[]) list.toArray (new Type[list.size()])
+                     )
+                   ):
+                   (type.navigateParameterized (
+                       memberName,
+                       (Type[]) list.toArray (new Type[list.size()])
+                     )
+                   );
         }
         return result;
       }

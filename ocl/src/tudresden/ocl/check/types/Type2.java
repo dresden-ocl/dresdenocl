@@ -25,63 +25,32 @@
  * See CREDITS file for further details.                             *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-// ConstraintRepresentation.java -- Representation of an event.
-//
-// 02/15/2001  [sz9 ]   Created.
-//
-package tudresden.ocl.gui;
+package tudresden.ocl.check.types;
 
 import tudresden.ocl.check.OclTypeException;
-import tudresden.ocl.parser.OclParserException;
 
-/** 
-  * A representation of an individual constraint with name and data.
-  *
-  * @author  sz9
-  */
-public interface ConstraintRepresentation {
+/**
+ * This interface is version two of the {@link Type} interface. It provides an
+ * additional method for more fine-grained type-checking. Implementing this
+ * interface is recommended, but not mandatory. The method documentation
+ * explains which Type - method will be invoked instead, if only Type is
+ * implemented.
+ *
+ *  @see Basic
+ *  @see Collection
+ *  @see OclTypeException
+ *
+ *  @author Steffen Zschaler
+ */
+public interface Type2 extends Type {
 
   /**
-    * Get the constraint's name.
-    */
-  public String getName();
-  
-  /**
-   * Set the constraint's name. For the exceptions the detailed message must
-   * be human readable.
+   * Navigate to the result type of the query operation <i>name</i>. This may
+   * throw an exception, if the specified operation is not a query. If only
+   * {@link Type} is implemented, {@link Type#navigateParameterized} is called
+   * instead.
    *
-   * @param sName the new name of the constraint
-   * @param euHelper utility that can be used to check for syntactical
-   * correctness etc.
-   *
-   * @exception IllegalStateException if the constraint is not in a state to
-   *     accept name changes.
-   * @exception IllegalArgumentException if the specified name is not a legal
-   *     name for the constraint.
+   * @param params the actual argument types
    */
-  public void setName (String sName, EditingUtilities euHelper)
-      throws IllegalStateException, IllegalArgumentException;
-  
-  /**
-    * Get the constraint's body text.
-    */
-  public String getData();
-  
-  /**
-   * Set the constraint's body text. For the exceptions the detailed message must
-   * be human readable.
-   *
-   * @param sData the new body of the constraint
-   * @param euHelper utility that can be used to check for syntactical
-   * correctness etc.
-   *
-   * @exception IllegalStateException if the constraint is not in a state to
-   *     accept body changes.
-   * @exception OclParserException if the specified constraint is not
-   *     syntactically correct.
-   * @exception OclTypeException if the specified constraint does not adhere by
-   *     OCL type rules.
-   */
-  public void setData (String sData, EditingUtilities euHelper)
-      throws IllegalStateException, OclParserException, OclTypeException;
+  public Type navigateParameterizedQuery (String name, Type[] params) throws OclTypeException;
 }
