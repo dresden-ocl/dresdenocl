@@ -611,8 +611,8 @@ public final class Injector
   }
 
   /**
-     parameter tagname the tag name without the '@' prefix
-     return the first word following the tag
+     @parameter tagname the tag name without the '@' prefix
+     @return the first word following the tag
   */
   public final static String findDocTag(String doccomment, String tagname)
   {
