@@ -25,6 +25,7 @@ public abstract class Example implements Runnable
   public Example(String name, Integer type)
   {
     super();
+    qualifiers=new Integer[6];
   }
 
   public void set_wrappedbyocl(String name, Integer type,// what a cool parameter
@@ -43,71 +44,41 @@ public abstract class Example implements Runnable
     if(qualifiers!=null&&qualifiers.length==0)
       throw new IllegalArgumentException();
     this.qualifiers=qualifiers;
-  }/**
-    A wrapper for checking ocl constraints.
-    Generated automatically, DO NOT CHANGE!
-    @author ocl_injector
-    @see #set_wrappedbyocl(String, Integer, Integer[])
-  */public void set(String name, Integer type, Integer[] qualifiers)
-  {
-    checkOclInvariants();
-    set_wrappedbyocl(name, type, qualifiers);
-    checkOclInvariants();
   }
 
-  abstract void abstractMethod_wrappedbyocl();/**
-    A wrapper for checking ocl constraints.
-    Generated automatically, DO NOT CHANGE!
-    @author ocl_injector
-    @see #abstractMethod_wrappedbyocl()
-  */void abstractMethod()
-  {
-    checkOclInvariants();
-    abstractMethod_wrappedbyocl();
-    checkOclInvariants();
-  }
+  abstract void abstractMethod_wrappedbyocl();
 
   /**
      Some example doc-comment.
   */
   public void run_wrappedbyocl()
-  {}/**
-    A wrapper for checking ocl constraints.
-    Generated automatically, DO NOT CHANGE!
-    @author ocl_injector
-    @see #run_wrappedbyocl()
-  */public void run()
-  {
-    checkOclInvariants();
-    run_wrappedbyocl();
-    checkOclInvariants();
-  }
+  {}
 
   /**
      A collection of Strings.
      @element-type java.lang.String
      @see java.lang.String
   */
-  Vector strings=new Vector();
+  Set strings=new HashSet();
   
   /**
      @element-type Integer
   */
-  Vector integers=new Vector();
+  Set integers=new HashSet();
   
   Integer anInteger=new Integer(5);
   
   /**
      @element-type Date
   */
-  Vector dates=new Vector();
+  List dates=new ArrayList();
   
   Date aDate=new Date();
   
   /**
      @element-type SourceReflectionExtender
   */
-  Vector extenders=new Vector();
+  Set extenders=new HashSet();
   
   SourceReflectionExtender anExtender=new SourceReflectionExtender();
   
@@ -121,6 +92,93 @@ public abstract class Example implements Runnable
   public String getName_wrappedbyocl()
   {
     return name;
+  }
+
+  public Integer getType_wrappedbyocl()
+  {
+    return type;
+  }
+
+  public Integer[] getQualifiers_wrappedbyocl()
+  {
+    return qualifiers;
+  }
+
+  public Integer unqualifiedType=null;
+
+  public Integer getUnqualifiedType_wrappedbyocl() throws IllegalArgumentException
+  {
+    if(unqualifiedType!=null)
+      return unqualifiedType;
+
+    if(qualifiers==null)
+      throw new IllegalArgumentException();
+
+    unqualifiedType=
+      (type instanceof Integer) ? type : type;
+    return unqualifiedType;
+  }
+
+  private Object parent;
+
+  public void setParent_wrappedbyocl  (Object parent)
+    throws
+      IllegalArgumentException,
+      NullPointerException
+  {
+    if(this.parent==null)
+      this.parent=parent;
+    else
+      throw new IllegalArgumentException("An attributes parent cannot be set twice.");
+  }
+
+  public Object getParent_wrappedbyocl()
+  {
+    return parent;
+  }
+
+  public void printData_wrappedbyocl
+    (java.io.PrintStream o)
+  {
+  }
+  
+  static public void main_wrappedbyocl(String[] args)
+  {
+    tudresden.ocl.lib.Ocl.STRICT_CHECKING=true;
+    tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
+    (new SecondExample()).getQualifiers();
+  }
+
+/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #set_wrappedbyocl(String, Integer, Integer[])
+  */public void set(String name, Integer type, Integer[] qualifiers)
+  {
+    checkOclInvariants();
+    set_wrappedbyocl(name, type, qualifiers);
+    checkOclInvariants();
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #abstractMethod_wrappedbyocl()
+  */void abstractMethod()
+  {
+    checkOclInvariants();
+    abstractMethod_wrappedbyocl();
+    checkOclInvariants();
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #run_wrappedbyocl()
+  */public void run()
+  {
+    checkOclInvariants();
+    run_wrappedbyocl();
+    checkOclInvariants();
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -132,11 +190,6 @@ public abstract class Example implements Runnable
     String result=getName_wrappedbyocl();
     checkOclInvariants();
     return result;
-  }
-
-  public Integer getType_wrappedbyocl()
-  {
-    return type;
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -148,11 +201,6 @@ public abstract class Example implements Runnable
     Integer result=getType_wrappedbyocl();
     checkOclInvariants();
     return result;
-  }
-
-  public Integer[] getQualifiers_wrappedbyocl()
-  {
-    return qualifiers;
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -197,21 +245,6 @@ public abstract class Example implements Runnable
         System.out.println("ocl postcondition tudOclPost1 violated");
     }
     return result;
-  }
-
-  public Integer unqualifiedType=null;
-
-  public Integer getUnqualifiedType_wrappedbyocl() throws IllegalArgumentException
-  {
-    if(unqualifiedType!=null)
-      return unqualifiedType;
-
-    if(qualifiers==null)
-      throw new IllegalArgumentException();
-
-    unqualifiedType=
-      (type instanceof Integer) ? type : type;
-    return unqualifiedType;
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -223,19 +256,6 @@ public abstract class Example implements Runnable
     Integer result=getUnqualifiedType_wrappedbyocl();
     checkOclInvariants();
     return result;
-  }
-
-  private Object parent;
-
-  public void setParent_wrappedbyocl  (Object parent)
-    throws
-      IllegalArgumentException,
-      NullPointerException
-  {
-    if(this.parent==null)
-      this.parent=parent;
-    else
-      throw new IllegalArgumentException("An attributes parent cannot be set twice.");
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -246,11 +266,6 @@ public abstract class Example implements Runnable
     checkOclInvariants();
     setParent_wrappedbyocl(parent);
     checkOclInvariants();
-  }
-
-  public Object getParent_wrappedbyocl()
-  {
-    return parent;
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -262,11 +277,6 @@ public abstract class Example implements Runnable
     Object result=getParent_wrappedbyocl();
     checkOclInvariants();
     return result;
-  }
-
-  public void printData_wrappedbyocl
-    (java.io.PrintStream o)
-  {
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -277,13 +287,6 @@ public abstract class Example implements Runnable
     checkOclInvariants();
     printData_wrappedbyocl(o);
     checkOclInvariants();
-  }
-  
-  static public void main_wrappedbyocl(String[] args)
-  {
-    tudresden.ocl.lib.Ocl.STRICT_CHECKING=true;
-    tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
-    (new SecondExample()).getQualifiers();
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -292,11 +295,9 @@ public abstract class Example implements Runnable
   */public static void main(String[] args)
   {
     main_wrappedbyocl(args);
-  }
-
-/**
+  }/**
     A method for checking ocl invariants.
-    Generated automatically on Mon Jun 19 17:55:01 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Tue Jun 20 11:34:13 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
@@ -325,7 +326,7 @@ public abstract class Example implements Runnable
     }
     {
       final tudresden.ocl.lib.OclAnyImpl tudOclNode4=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclSequence tudOclNode5=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode4.getFeature("strings"));
+      final tudresden.ocl.lib.OclSet tudOclNode5=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode4.getFeature("strings"));
       final tudresden.ocl.lib.OclString tudOclNode6=new tudresden.ocl.lib.OclString("hallo");
       final tudresden.ocl.lib.OclBoolean tudOclNode7=tudOclNode5.includes(tudOclNode6);
       if(!tudOclNode7.isTrue())
@@ -333,7 +334,7 @@ public abstract class Example implements Runnable
     }
     {
       final tudresden.ocl.lib.OclAnyImpl tudOclNode8=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclSequence tudOclNode9=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode8.getFeature("integers"));
+      final tudresden.ocl.lib.OclSet tudOclNode9=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode8.getFeature("integers"));
       final tudresden.ocl.lib.OclInteger tudOclNode10=tudresden.ocl.lib.Ocl.toOclInteger(tudOclNode8.getFeature("anInteger"));
       final tudresden.ocl.lib.OclBoolean tudOclNode11=tudOclNode9.includes(tudOclNode10);
       if(!tudOclNode11.isTrue())
@@ -349,7 +350,7 @@ public abstract class Example implements Runnable
     }
     {
       final tudresden.ocl.lib.OclAnyImpl tudOclNode16=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclSequence tudOclNode17=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode16.getFeature("extenders"));
+      final tudresden.ocl.lib.OclSet tudOclNode17=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode16.getFeature("extenders"));
       final tudresden.ocl.lib.OclAnyImpl tudOclNode18=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode16.getFeature("anExtender"));
       final tudresden.ocl.lib.OclBoolean tudOclNode19=tudOclNode17.includes(tudOclNode18);
       if(!tudOclNode19.isTrue())
@@ -373,7 +374,9 @@ class SecondExample extends Example{
     super("somename", new Integer(5));
   }
 
-  void abstractMethod_wrappedbyocl()  {}/**
+  void abstractMethod_wrappedbyocl()  {}
+  
+/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -383,11 +386,9 @@ class SecondExample extends Example{
     checkOclInvariants();
     abstractMethod_wrappedbyocl();
     checkOclInvariants();
-  }
-  
-/**
+  }/**
     A method for checking ocl invariants.
-    Generated automatically on Mon Jun 19 17:55:02 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Tue Jun 20 11:34:14 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {

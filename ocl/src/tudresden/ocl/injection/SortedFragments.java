@@ -29,6 +29,31 @@ public class SortedFragments
   ArrayList pre=new ArrayList();
   ArrayList transfer=new ArrayList();
   ArrayList preparation=new ArrayList();
+  
+  private String constrainedType;
+  
+  SortedFragments(CodeFragment firstFragment)
+  {
+    constrainedType=firstFragment.getConstrainedType();
+    addFragment(firstFragment);
+  }
+  
+  public void addFragment(CodeFragment fragment)
+  {
+    if(!constrainedType.equals(fragment.getConstrainedType()))
+      throw new IllegalArgumentException();
+
+    switch(fragment.getKind())
+    {
+    case CodeFragment.INV:         inv.add(fragment);         break;
+    case CodeFragment.POST:        post.add(fragment);        break;
+    case CodeFragment.PRE:         pre.add(fragment);         break;
+    case CodeFragment.TRANSFER:    transfer.add(fragment);    break;
+    case CodeFragment.PREPARATION: preparation.add(fragment); break;
+    default: 
+      throw new RuntimeException();
+    }
+  }
 
   public void print(java.io.PrintStream o)
   {

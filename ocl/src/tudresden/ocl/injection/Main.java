@@ -339,10 +339,14 @@ class OclInjector implements InjectionConsumer
   
 public class Main
 {
-  public static String[] loadConstraints(File f) throws IOException
+  public static HashMap makeCode(File constraintfile,  ModelFacade modelfacade)
+    throws OclParserException, OclTypeException, IOException
   {
-    Vector constraintList=new Vector();
-    BufferedReader br=new BufferedReader(new FileReader(f));
+    BufferedReader br=new BufferedReader(new FileReader(constraintfile));
+    NameCreator namecreator=new NameCreator();
+    JavaCodeGenerator jcg=new JavaCodeGenerator("this", "result");
+    HashMap constrainedTypes=new HashMap(); // type names are keys, SortedFragments values
+
     String nextLine;
     String nextConstraint="";
     do
@@ -351,71 +355,35 @@ public class Main
       if(nextLine==null || nextLine.trim().equals(""))
       {
         if(!nextConstraint.equals(""))
-          constraintList.addElement(nextConstraint);
+        {
+          String constraintString=nextConstraint;
+          System.out.println("Loaded constraint:");
+          System.out.println(constraintString);
+          System.out.println("Parsing constraint.");
+          OclTree constraintTree=OclTree.createTree(constraintString, modelfacade);
+          constraintTree.setNameCreator(namecreator);
+          System.out.println("Type checking constraint.");
+          constraintTree.assureTypes();
+          System.out.println("Normalizing.");
+          constraintTree.applyDefaultNormalizations();
+          System.out.println("Generating Code.");
+          CodeFragment[] frags=jcg.getCode(constraintTree);
+          for (int j=0; j<frags.length; j++)
+          {
+            String ct=frags[j].getConstrainedType();
+            SortedFragments sf=(SortedFragments)(constrainedTypes.get(ct));
+            if(sf==null)
+              constrainedTypes.put(ct, new SortedFragments(frags[j]));
+            else
+              sf.addFragment(frags[j]);
+          }
+        }
         nextConstraint="";
       }
       else
         nextConstraint=nextConstraint+"\n"+nextLine;
     }
     while (nextLine!=null);
-    String[] result=new String[constraintList.size()];
-    for(int i=0; i<constraintList.size(); i++)
-    {
-      result[i]=(String)(constraintList.elementAt(i));
-      //System.out.println("loading constraint");
-      //System.out.println((String)(constraintList.elementAt(i)));
-    }
-    return result;
-  }
-
-  public static OclTree[] checkConstraints(String[] constraints, ModelFacade modelfacade)
-    throws OclParserException, OclTypeException, IOException
-  {
-    OclTree[] trees=new OclTree[constraints.length];
-
-    int i=0;
-    NameCreator namecreator=new NameCreator();
-    for (i=0; i<constraints.length; i++)
-    {
-      //System.out.println("checking constraint:");
-      //System.out.println(constraints[i]);
-      OclTree nextTree=OclTree.createTree(constraints[i], modelfacade);
-      nextTree.setNameCreator(namecreator);
-      nextTree.assureTypes();
-      trees[i]=nextTree;
-    }
-    return trees;
-  }
-
-  public static HashMap generateCode(OclTree[] trees)
-  {
-    JavaCodeGenerator jcg=new JavaCodeGenerator("this", "result");
-    HashMap constrainedTypes=new HashMap(); // type names are keys, SortedFragments values
-    for (int i=0; i<trees.length; i++)
-    {
-      //System.out.println("Normalizing "+i);
-      trees[i].applyDefaultNormalizations();
-      CodeFragment[] frags=jcg.getCode(trees[i]);
-      for (int j=0; j<frags.length; j++)
-      {
-        String ct=frags[j].getConstrainedType();
-        if ( ! constrainedTypes.containsKey(ct) )
-        {
-          constrainedTypes.put(ct, new SortedFragments());
-        }
-        SortedFragments sf=(SortedFragments)constrainedTypes.get(ct);
-        switch (frags[j].getKind())
-        {
-          case CodeFragment.INV:         sf.inv.add(frags[j]);         break;
-          case CodeFragment.POST:        sf.post.add(frags[j]);        break;
-          case CodeFragment.PRE:         sf.pre.add(frags[j]);         break;
-          case CodeFragment.TRANSFER:    sf.transfer.add(frags[j]);    break;
-          case CodeFragment.PREPARATION: sf.preparation.add(frags[j]); break;
-          default: 
-            throw new RuntimeException();
-        }
-      }
-    }
     
     /*
     for(Iterator iter=constrainedTypes.keySet().iterator(); iter.hasNext(); )
@@ -425,7 +393,7 @@ public class Main
       ((SortedFragments)(constrainedTypes.get(nexttype))).print(System.out);
     }
     */
-    
+
     return constrainedTypes;
   }
 
@@ -562,7 +530,6 @@ public class Main
               System.out.println(usage);
               return;
             }
-            String[] constraints=loadConstraints(new File(constraintfile));
             ModelFacade modelfacade;
             if(xmimodel!=null)
               modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel);
@@ -574,8 +541,7 @@ public class Main
                 new tudresden.ocl.lib.SimpleNameAdapter(),
                 new SourceReflectionExtender()
               );
-            OclTree[] ocltrees=checkConstraints(constraints, modelfacade);
-            codefragments=generateCode(ocltrees);
+            codefragments=makeCode(new File(constraintfile), modelfacade);
           }
           else
             System.out.println("no constraints given, generating code for @element-type only.");
