@@ -1,0 +1,1566 @@
+/*
+Copyright (C) 2000  Ralf Wiebicke
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+package// hallo
+  tudresden.ocl.injection.test;
+
+import java.util.*;
+import java.io.BufferedReader;
+import java.text.Format;
+
+/**
+   Represents an attribute or association partner of a class.
+   Note: type==Model.AMIGOUS means, the attribute cannot be used in OCL due to attribute ambiguities.
+   See OCL spec 5.4.1. for details.
+*/
+public abstract class Example implements Runnable
+{
+  private String name;
+  private Integer type=new Integer(5);
+  private volatile Integer[] qualifiers;
+  String hallo="hallo";
+  
+  int commaSeparated1,commaSeparated2=0,commaSeparated3; 
+  int commaSeparated4=80,commaSeparated5,commaSeparated6=200; 
+
+  // these attributes test the ability of the parser
+  // to skip more complex (ugly) attribute initializers
+  String   uglyAttribute1="some'Thing{some\"Thing;Else";
+  char     uglyAttribute2=';';
+  char     uglyAttribute3='{';
+  char     uglyAttribute4='"';
+  char     uglyAttribute5='\'';
+  String[] uglyAttribute6=
+  {
+    "some'Thing{some\"Thing;Else", // ugly ; { " ' comment
+    "some'Thing{some\"Thing;Else"
+  };
+  char[]   uglyAttribute7={';','{','"','\''};
+  Runnable uglyAttribute8=new Runnable()
+  {
+    // ugly ; { " ' comment
+    String   uglyInnerAttribute1="some'Thing{some\"Thing;Else";
+    char     uglyInnerAttribute2=';';
+    char     uglyInnerAttribute3='{';
+    char     uglyInnerAttribute4='"';
+    char     uglyInnerAttribute5='\'';
+    String[] uglyInnerAttribute6=
+    {
+      "some'Thing{some\"Thing;Else", // ugly ; { " ' comment
+      "some'Thing{some\"Thing;Else"
+    };
+    char[]   uglyInnerAttribute7={';','{','"','\''};
+    public void run()
+    {
+      // ugly ; { " ' comment
+      String   uglyVariable1="some'Thing{some\"Thing;Else";
+      char     uglyVariable2=';';
+      char     uglyVariable3='{';
+      char     uglyVariable4='"';
+      char     uglyVariable5='\'';
+      String[] uglyVariable6=
+      {
+        "some'Thing{some\"Thing;Else", // ugly ; { " ' comment
+        "some'Thing{some\"Thing;Else"
+      };
+      char[]   uglyAttribute7={';','{','"','\''};
+    }
+    // ugly ; { " ' comment
+  };
+  // end of ugly attributes
+  
+
+  class Inner implements Runnable
+  {
+    class Drinner implements Runnable
+    {
+      boolean someDrinnerBoolean=true;
+    
+      public void run_wrappedbyocl()
+      {
+      }
+    /**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #run_wrappedbyocl()
+  */public void run()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      run_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      run_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A default constructor for checking ocl constraints,
+    replacing the automatically generated constructor.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */Drinner()
+  {
+    tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+    tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+  }/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #someDrinnerBoolean
+  */private boolean someDrinnerBoolean_oclbackup812374=someDrinnerBoolean;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #someDrinnerBoolean
+  */public final java.util.HashSet someDrinnerBoolean_oclobservinginvariants812374=new java.util.HashSet();/**
+    Checks object features, whether they have changed.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private void checkForChangedFeatures()
+  {
+    if(someDrinnerBoolean!=someDrinnerBoolean_oclbackup812374)
+    {
+      someDrinnerBoolean_oclbackup812374=someDrinnerBoolean;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(someDrinnerBoolean_oclobservinginvariants812374);
+    }
+  }}
+
+    boolean someInnerBoolean=true;
+    
+    public void run_wrappedbyocl()
+    {
+    }
+  /**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #run_wrappedbyocl()
+  */public void run()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      run_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      run_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A default constructor for checking ocl constraints,
+    replacing the automatically generated constructor.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */Inner()
+  {
+    tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+    tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+  }/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #someInnerBoolean
+  */private boolean someInnerBoolean_oclbackup812374=someInnerBoolean;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #someInnerBoolean
+  */public final java.util.HashSet someInnerBoolean_oclobservinginvariants812374=new java.util.HashSet();/**
+    Checks object features, whether they have changed.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private void checkForChangedFeatures()
+  {
+    if(someInnerBoolean!=someInnerBoolean_oclbackup812374)
+    {
+      someInnerBoolean_oclbackup812374=someInnerBoolean;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(someInnerBoolean_oclobservinginvariants812374);
+    }
+  }}  
+
+
+  private Example(tudresden.ocl.injection.lib.WrapperDummy dummy)
+  {
+    namedIntegers.put("5", new Integer(5));
+  }
+  
+  public Example(String name, Integer type, tudresden.ocl.injection.lib.WrapperDummy dummy)
+  {
+    super();
+    qualifiers=new Integer[6];
+    namedIntegers.put("5", new Integer(5));
+  }
+
+  public void set_wrappedbyocl(String name, Integer type,// what a cool parameter
+    final Integer[] qualifiers)
+  {
+    if(name==null)
+      throw new IllegalArgumentException(); // ugly comment : { {
+    this.name=name;
+    String x="ugly { string \" { literal";
+    char c='{';
+
+    if(type==null)
+      throw new IllegalArgumentException(); // some other comment
+    this.type=type;
+
+    if(qualifiers!=null&&qualifiers.length==0)
+      throw new IllegalArgumentException();
+    this.qualifiers=qualifiers;
+  }
+
+  abstract void abstractMethod_wrappedbyocl();
+
+  /**
+     Some example doc-comment.
+  */
+  public void run_wrappedbyocl()
+  {}
+
+  /**
+     A collection of Strings.
+     @element-type java.lang.String
+     @see java.lang.String
+  */
+  Set strings=new HashSet();
+  
+  /**
+     @element-type Integer
+  */
+  Set integers=new HashSet();
+  
+  Integer anInteger=new Integer(5);
+  
+  /**
+     @element-type Date
+  */
+  List dates=new ArrayList();
+  
+  Date aDate=new Date();
+  
+  /**
+     @element-type AbstractImplementation
+  */
+  Set interfaces=new HashSet();
+  
+  AbstractImplementation anInterface=new Implementation();
+  
+  /**
+     @element-type Format
+  */
+  Vector formats=new Vector();
+  
+  Format aFormat=new java.text.DecimalFormat();
+
+  /**
+     @element-type Integer
+     @key-type String
+  */
+  HashMap namedIntegers=new HashMap();
+  
+  public boolean poly1_wrappedbyocl(Interface someInterface)
+  {
+    return true;
+  }
+
+  public String getName_wrappedbyocl()
+  {
+    return name;
+  }
+
+  public Integer getType_wrappedbyocl()
+  {
+    return type;
+  }
+
+  public Integer[] getQualifiers_wrappedbyocl()
+  {
+    namedIntegers.put("10", new Integer(10));
+    return qualifiers;
+  }
+
+  public Integer unqualifiedType=null;
+
+  public Integer getUnqualifiedType_wrappedbyocl() throws IllegalArgumentException
+  {
+    if(unqualifiedType!=null)
+      return unqualifiedType;
+
+    if(qualifiers==null)
+      throw new IllegalArgumentException();
+
+    unqualifiedType=
+      (type instanceof Integer) ? type : type;
+    return unqualifiedType;
+  }
+
+  private Object parent;
+
+  public void setParent_wrappedbyocl  (Object parent)
+    throws
+      IllegalArgumentException,
+      NullPointerException
+  {
+    if(this.parent==null)
+      this.parent=parent;
+    else
+      throw new IllegalArgumentException("An attributes parent cannot be set twice.");
+  }
+
+  public Object getParent_wrappedbyocl()
+  {
+    return parent;
+  }
+
+  public void printData_wrappedbyocl
+    (java.io.PrintStream o)
+  {
+  }
+  
+  private   void accessifierPrivate_wrappedbyocl() {}
+  protected void accessifierProtected_wrappedbyocl() {}
+            void accessifierPackage_wrappedbyocl() {}
+  public    void accessifierPublic_wrappedbyocl() {}
+  
+  static public void main(String[] args)
+  {
+    tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
+    tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
+    SecondExample e2=new SecondExample();
+    e2.getQualifiers();
+    e2.i=10;
+    e2.anInteger=new Integer(8);
+    e2.getQualifiers();
+  }
+
+/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #Example(tudresden.ocl.injection.lib.WrapperDummy)
+  */private Example()
+  {
+    this((tudresden.ocl.injection.lib.WrapperDummy)null);
+    tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+    tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #Example(String, Integer, tudresden.ocl.injection.lib.WrapperDummy)
+  */public Example(String name, Integer type)
+  {
+    this(name, type, (tudresden.ocl.injection.lib.WrapperDummy)null);
+    tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+    tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #set_wrappedbyocl(String, Integer, Integer[])
+  */public void set(String name, Integer type, Integer[] qualifiers)
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      set_wrappedbyocl(name, type, qualifiers);
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      set_wrappedbyocl(name, type, qualifiers);
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #abstractMethod_wrappedbyocl()
+  */void abstractMethod()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      abstractMethod_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      abstractMethod_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #run_wrappedbyocl()
+  */public void run()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      run_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      run_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #poly1_wrappedbyocl(Interface)
+  */public boolean poly1(Interface someInterface)
+  {
+    boolean result;
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      result=poly1_wrappedbyocl(someInterface);
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      result=poly1_wrappedbyocl(someInterface);
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+    return result;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #getName_wrappedbyocl()
+  */public String getName()
+  {
+    String result;
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      result=getName_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      result=getName_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+    return result;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #getType_wrappedbyocl()
+  */public Integer getType()
+  {
+    Integer result;
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      result=getType_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      result=getType_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+    return result;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #getQualifiers_wrappedbyocl()
+  */public Integer[] getQualifiers()
+  {
+    Integer[] result;
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      result=getQualifiers_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+        tudresden.ocl.lib.OclString tudOclNode70;
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode56=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclString tudOclNode57=tudresden.ocl.lib.Ocl.toOclString(tudOclNode56.getFeature("hallo"));
+        final tudresden.ocl.lib.OclString tudOclNode58=new tudresden.ocl.lib.OclString("bello");
+        final tudresden.ocl.lib.OclBoolean tudOclNode59=tudOclNode57.isEqualTo(tudOclNode58);
+        if(!tudOclNode59.isTrue())
+          System.out.println("violated ocl precondition 'getQ_pre_bello' on object '"+this+"' operation 'getQualifiers()'.");
+      }
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode68=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclResult2=new tudresden.ocl.lib.OclAnyImpl(0,"created by JavaCodeGenerator");
+        final tudresden.ocl.lib.OclString tudOclNode69=tudresden.ocl.lib.Ocl.toOclString(tudOclNode68.getFeature("hallo"));
+        tudOclNode70=tudresden.ocl.lib.Ocl.toOclString(tudOclNode68.getFeature("hallo"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode71=tudOclNode69.isEqualTo(tudOclNode70);
+      }
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      result=getQualifiers_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode60=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclResult0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+        final tudresden.ocl.lib.OclString tudOclNode61=tudresden.ocl.lib.Ocl.toOclString(tudOclNode60.getFeature("hallo"));
+        final tudresden.ocl.lib.OclString tudOclNode62=new tudresden.ocl.lib.OclString("bello");
+        final tudresden.ocl.lib.OclBoolean tudOclNode63=tudOclNode61.isEqualTo(tudOclNode62);
+        if(!tudOclNode63.isTrue())
+          System.out.println("violated ocl postcondition 'getQ_post_bello' on object '"+this+"' operation 'getQualifiers()'.");
+      }
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode64=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclResult1=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+        final tudresden.ocl.lib.OclString tudOclNode65=tudresden.ocl.lib.Ocl.toOclString(tudOclNode64.getFeature("hallo"));
+        final tudresden.ocl.lib.OclString tudOclNode66=new tudresden.ocl.lib.OclString("hallo");
+        final tudresden.ocl.lib.OclBoolean tudOclNode67=tudOclNode65.isEqualTo(tudOclNode66);
+        if(!tudOclNode67.isTrue())
+          System.out.println("violated ocl postcondition 'getQ_post_hallo' on object '"+this+"' operation 'getQualifiers()'.");
+      }
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode68=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclResult2=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+        final tudresden.ocl.lib.OclString tudOclNode69=tudresden.ocl.lib.Ocl.toOclString(tudOclNode68.getFeature("hallo"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode71=tudOclNode69.isEqualTo(tudOclNode70);
+        if(!tudOclNode71.isTrue())
+          System.out.println("violated ocl postcondition 'getQ_timepre' on object '"+this+"' operation 'getQualifiers()'.");
+      }
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+    return result;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #getUnqualifiedType_wrappedbyocl()
+  */public Integer getUnqualifiedType() throws IllegalArgumentException
+  {
+    Integer result;
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      result=getUnqualifiedType_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      result=getUnqualifiedType_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+    return result;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #setParent_wrappedbyocl(Object)
+  */public void setParent(Object parent) throws IllegalArgumentException, NullPointerException
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      setParent_wrappedbyocl(parent);
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      setParent_wrappedbyocl(parent);
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #getParent_wrappedbyocl()
+  */public Object getParent()
+  {
+    Object result;
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      result=getParent_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      result=getParent_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+    return result;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #printData_wrappedbyocl(java.io.PrintStream)
+  */public void printData(java.io.PrintStream o)
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      printData_wrappedbyocl(o);
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      printData_wrappedbyocl(o);
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #accessifierPrivate_wrappedbyocl()
+  */private void accessifierPrivate()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      accessifierPrivate_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      accessifierPrivate_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #accessifierProtected_wrappedbyocl()
+  */protected void accessifierProtected()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      accessifierProtected_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      accessifierProtected_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #accessifierPackage_wrappedbyocl()
+  */void accessifierPackage()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      accessifierPackage_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      accessifierPackage_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #accessifierPublic_wrappedbyocl()
+  */public void accessifierPublic()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      accessifierPublic_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      accessifierPublic_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #name
+  */private String name_oclbackup812374=name;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #name
+  */public final java.util.HashSet name_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #type
+  */private Integer type_oclbackup812374=type;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #type
+  */public final java.util.HashSet type_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #qualifiers
+  */private Integer[] qualifiers_oclbackup812374=qualifiers;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #qualifiers
+  */public final java.util.HashSet qualifiers_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #hallo
+  */private String hallo_oclbackup812374=hallo;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #hallo
+  */public final java.util.HashSet hallo_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated1
+  */private int commaSeparated1_oclbackup812374=commaSeparated1;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated1
+  */public final java.util.HashSet commaSeparated1_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated2
+  */private int commaSeparated2_oclbackup812374=commaSeparated2;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated2
+  */public final java.util.HashSet commaSeparated2_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated3
+  */private int commaSeparated3_oclbackup812374=commaSeparated3;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated3
+  */public final java.util.HashSet commaSeparated3_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated4
+  */private int commaSeparated4_oclbackup812374=commaSeparated4;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated4
+  */public final java.util.HashSet commaSeparated4_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated5
+  */private int commaSeparated5_oclbackup812374=commaSeparated5;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated5
+  */public final java.util.HashSet commaSeparated5_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated6
+  */private int commaSeparated6_oclbackup812374=commaSeparated6;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #commaSeparated6
+  */public final java.util.HashSet commaSeparated6_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute1
+  */private String uglyAttribute1_oclbackup812374=uglyAttribute1;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute1
+  */public final java.util.HashSet uglyAttribute1_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute2
+  */private char uglyAttribute2_oclbackup812374=uglyAttribute2;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute2
+  */public final java.util.HashSet uglyAttribute2_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute3
+  */private char uglyAttribute3_oclbackup812374=uglyAttribute3;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute3
+  */public final java.util.HashSet uglyAttribute3_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute4
+  */private char uglyAttribute4_oclbackup812374=uglyAttribute4;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute4
+  */public final java.util.HashSet uglyAttribute4_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute5
+  */private char uglyAttribute5_oclbackup812374=uglyAttribute5;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute5
+  */public final java.util.HashSet uglyAttribute5_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute6
+  */private String[] uglyAttribute6_oclbackup812374=uglyAttribute6;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute6
+  */public final java.util.HashSet uglyAttribute6_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute7
+  */private char[] uglyAttribute7_oclbackup812374=uglyAttribute7;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute7
+  */public final java.util.HashSet uglyAttribute7_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute8
+  */private Runnable uglyAttribute8_oclbackup812374=uglyAttribute8;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #uglyAttribute8
+  */public final java.util.HashSet uglyAttribute8_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #strings
+  */private int strings_oclbackup812374=0;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #strings
+  */public final java.util.HashSet strings_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #integers
+  */private int integers_oclbackup812374=0;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #integers
+  */public final java.util.HashSet integers_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #anInteger
+  */private Integer anInteger_oclbackup812374=anInteger;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #anInteger
+  */public final java.util.HashSet anInteger_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #dates
+  */private int dates_oclbackup812374=0;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #dates
+  */public final java.util.HashSet dates_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #aDate
+  */private Date aDate_oclbackup812374=aDate;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #aDate
+  */public final java.util.HashSet aDate_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #interfaces
+  */private int interfaces_oclbackup812374=0;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #interfaces
+  */public final java.util.HashSet interfaces_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #anInterface
+  */private AbstractImplementation anInterface_oclbackup812374=anInterface;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #anInterface
+  */public final java.util.HashSet anInterface_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #formats
+  */private int formats_oclbackup812374=0;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #formats
+  */public final java.util.HashSet formats_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #aFormat
+  */private Format aFormat_oclbackup812374=aFormat;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #aFormat
+  */public final java.util.HashSet aFormat_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #namedIntegers
+  */private int namedIntegers_oclbackup812374=0;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #namedIntegers
+  */public final java.util.HashSet namedIntegers_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #unqualifiedType
+  */private Integer unqualifiedType_oclbackup812374=unqualifiedType;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #unqualifiedType
+  */public final java.util.HashSet unqualifiedType_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #parent
+  */private Object parent_oclbackup812374=parent;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #parent
+  */public final java.util.HashSet parent_oclobservinginvariants812374=new java.util.HashSet();/**
+    Checks object features, whether they have changed.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private void checkForChangedFeatures()
+  {
+    if(name!=name_oclbackup812374)
+    {
+      name_oclbackup812374=name;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(name_oclobservinginvariants812374);
+    }
+    if(type!=type_oclbackup812374)
+    {
+      type_oclbackup812374=type;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(type_oclobservinginvariants812374);
+    }
+    if(qualifiers!=qualifiers_oclbackup812374)
+    {
+      qualifiers_oclbackup812374=qualifiers;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(qualifiers_oclobservinginvariants812374);
+    }
+    if(hallo!=hallo_oclbackup812374)
+    {
+      hallo_oclbackup812374=hallo;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(hallo_oclobservinginvariants812374);
+    }
+    if(commaSeparated1!=commaSeparated1_oclbackup812374)
+    {
+      commaSeparated1_oclbackup812374=commaSeparated1;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(commaSeparated1_oclobservinginvariants812374);
+    }
+    if(commaSeparated2!=commaSeparated2_oclbackup812374)
+    {
+      commaSeparated2_oclbackup812374=commaSeparated2;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(commaSeparated2_oclobservinginvariants812374);
+    }
+    if(commaSeparated3!=commaSeparated3_oclbackup812374)
+    {
+      commaSeparated3_oclbackup812374=commaSeparated3;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(commaSeparated3_oclobservinginvariants812374);
+    }
+    if(commaSeparated4!=commaSeparated4_oclbackup812374)
+    {
+      commaSeparated4_oclbackup812374=commaSeparated4;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(commaSeparated4_oclobservinginvariants812374);
+    }
+    if(commaSeparated5!=commaSeparated5_oclbackup812374)
+    {
+      commaSeparated5_oclbackup812374=commaSeparated5;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(commaSeparated5_oclobservinginvariants812374);
+    }
+    if(commaSeparated6!=commaSeparated6_oclbackup812374)
+    {
+      commaSeparated6_oclbackup812374=commaSeparated6;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(commaSeparated6_oclobservinginvariants812374);
+    }
+    if(uglyAttribute1!=uglyAttribute1_oclbackup812374)
+    {
+      uglyAttribute1_oclbackup812374=uglyAttribute1;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute1_oclobservinginvariants812374);
+    }
+    if(uglyAttribute2!=uglyAttribute2_oclbackup812374)
+    {
+      uglyAttribute2_oclbackup812374=uglyAttribute2;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute2_oclobservinginvariants812374);
+    }
+    if(uglyAttribute3!=uglyAttribute3_oclbackup812374)
+    {
+      uglyAttribute3_oclbackup812374=uglyAttribute3;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute3_oclobservinginvariants812374);
+    }
+    if(uglyAttribute4!=uglyAttribute4_oclbackup812374)
+    {
+      uglyAttribute4_oclbackup812374=uglyAttribute4;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute4_oclobservinginvariants812374);
+    }
+    if(uglyAttribute5!=uglyAttribute5_oclbackup812374)
+    {
+      uglyAttribute5_oclbackup812374=uglyAttribute5;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute5_oclobservinginvariants812374);
+    }
+    if(uglyAttribute6!=uglyAttribute6_oclbackup812374)
+    {
+      uglyAttribute6_oclbackup812374=uglyAttribute6;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute6_oclobservinginvariants812374);
+    }
+    if(uglyAttribute7!=uglyAttribute7_oclbackup812374)
+    {
+      uglyAttribute7_oclbackup812374=uglyAttribute7;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute7_oclobservinginvariants812374);
+    }
+    if(uglyAttribute8!=uglyAttribute8_oclbackup812374)
+    {
+      uglyAttribute8_oclbackup812374=uglyAttribute8;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute8_oclobservinginvariants812374);
+    }
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(strings)!=strings_oclbackup812374)
+    {
+      strings_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(strings);
+      if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(strings,java.lang.String.class)) System.out.println("element type checker failed at feature 'strings' of object "+this+".");
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#strings", strings);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(strings_oclobservinginvariants812374);
+    }
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(integers)!=integers_oclbackup812374)
+    {
+      integers_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(integers);
+      if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(integers,Integer.class)) System.out.println("element type checker failed at feature 'integers' of object "+this+".");
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#integers", integers);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(integers_oclobservinginvariants812374);
+    }
+    if(anInteger!=anInteger_oclbackup812374)
+    {
+      anInteger_oclbackup812374=anInteger;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(anInteger_oclobservinginvariants812374);
+    }
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(dates)!=dates_oclbackup812374)
+    {
+      dates_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(dates);
+      if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(dates,Date.class)) System.out.println("element type checker failed at feature 'dates' of object "+this+".");
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#dates", dates);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(dates_oclobservinginvariants812374);
+    }
+    if(aDate!=aDate_oclbackup812374)
+    {
+      aDate_oclbackup812374=aDate;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(aDate_oclobservinginvariants812374);
+    }
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(interfaces)!=interfaces_oclbackup812374)
+    {
+      interfaces_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(interfaces);
+      if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(interfaces,AbstractImplementation.class)) System.out.println("element type checker failed at feature 'interfaces' of object "+this+".");
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#interfaces", interfaces);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(interfaces_oclobservinginvariants812374);
+    }
+    if(anInterface!=anInterface_oclbackup812374)
+    {
+      anInterface_oclbackup812374=anInterface;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(anInterface_oclobservinginvariants812374);
+    }
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(formats)!=formats_oclbackup812374)
+    {
+      formats_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(formats);
+      if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(formats,Format.class)) System.out.println("element type checker failed at feature 'formats' of object "+this+".");
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#formats", formats);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(formats_oclobservinginvariants812374);
+    }
+    if(aFormat!=aFormat_oclbackup812374)
+    {
+      aFormat_oclbackup812374=aFormat;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(aFormat_oclobservinginvariants812374);
+    }
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(namedIntegers)!=namedIntegers_oclbackup812374)
+    {
+      namedIntegers_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(namedIntegers);
+      if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(namedIntegers,Integer.class)) System.out.println("element type checker failed at feature 'namedIntegers' of object "+this+".");
+      if(!tudresden.ocl.injection.lib.Invariant.checkKeyTypes(namedIntegers,String.class)) System.out.println("key type checker failed at feature 'namedIntegers' of object "+this+".");
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#namedIntegers", namedIntegers);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(namedIntegers_oclobservinginvariants812374);
+    }
+    if(unqualifiedType!=unqualifiedType_oclbackup812374)
+    {
+      unqualifiedType_oclbackup812374=unqualifiedType;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(unqualifiedType_oclobservinginvariants812374);
+    }
+    if(parent!=parent_oclbackup812374)
+    {
+      parent_oclbackup812374=parent;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(parent_oclobservinginvariants812374);
+    }
+  }/**
+    An object representing ocl invariant hallo on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_hallo=new tudresden.ocl.injection.lib.Invariant("hallo", this);/**
+    Checks ocl invariant hallo on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_hallo()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_hallo);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclString tudOclNode1=tudresden.ocl.lib.Ocl.toOclString(tudOclNode0.getFeature("hallo"));
+        final tudresden.ocl.lib.OclString tudOclNode2=new tudresden.ocl.lib.OclString("hallo");
+        final tudresden.ocl.lib.OclBoolean tudOclNode3=tudOclNode1.isEqualTo(tudOclNode2);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode3.isTrue()) System.out.println("violated ocl invariant 'hallo' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant strings on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_strings=new tudresden.ocl.injection.lib.Invariant("strings", this);/**
+    Checks ocl invariant strings on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_strings()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_strings);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode4=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode5=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode4.getFeature("strings"));
+        final tudresden.ocl.lib.OclString tudOclNode6=new tudresden.ocl.lib.OclString("hallo");
+        final tudresden.ocl.lib.OclBoolean tudOclNode7=tudOclNode5.includes(tudOclNode6);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode7.isTrue()) System.out.println("violated ocl invariant 'strings' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant integers on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_integers=new tudresden.ocl.injection.lib.Invariant("integers", this);/**
+    Checks ocl invariant integers on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_integers()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_integers);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode8=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode9=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode8.getFeature("integers"));
+        final tudresden.ocl.lib.OclInteger tudOclNode10=tudresden.ocl.lib.Ocl.toOclInteger(tudOclNode8.getFeature("anInteger"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode11=tudOclNode9.includes(tudOclNode10);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode11.isTrue()) System.out.println("violated ocl invariant 'integers' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant dates on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_dates=new tudresden.ocl.injection.lib.Invariant("dates", this);/**
+    Checks ocl invariant dates on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_dates()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_dates);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode12=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSequence tudOclNode13=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode12.getFeature("dates"));
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode14=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode12.getFeature("aDate"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode15=tudOclNode13.includes(tudOclNode14);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode15.isTrue()) System.out.println("violated ocl invariant 'dates' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant interfaces on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_interfaces=new tudresden.ocl.injection.lib.Invariant("interfaces", this);/**
+    Checks ocl invariant interfaces on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_interfaces()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_interfaces);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode16=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode17=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode16.getFeature("interfaces"));
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode18=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode16.getFeature("anInterface"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode19=tudOclNode17.includes(tudOclNode18);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode19.isTrue()) System.out.println("violated ocl invariant 'interfaces' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant anInterface on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_anInterface=new tudresden.ocl.injection.lib.Invariant("anInterface", this);/**
+    Checks ocl invariant anInterface on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_anInterface()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_anInterface);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode20=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode21=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode20.getFeature("anInterface"));
+        final tudresden.ocl.lib.OclSet tudOclSet0=tudresden.ocl.lib.OclSet.getEmptyOclSet();
+        tudOclSet0.setToInclude(tudOclNode21);
+        final tudresden.ocl.lib.OclBoolean tudOclNode22=tudOclSet0.isEmpty();
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode22.isTrue()) System.out.println("violated ocl invariant 'anInterface' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant formats on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_formats=new tudresden.ocl.injection.lib.Invariant("formats", this);/**
+    Checks ocl invariant formats on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_formats()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_formats);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode23=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSequence tudOclNode24=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode23.getFeature("formats"));
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode25=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode23.getFeature("aFormat"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode26=tudOclNode24.includes(tudOclNode25);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode26.isTrue()) System.out.println("violated ocl invariant 'formats' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant poly on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_poly=new tudresden.ocl.injection.lib.Invariant("poly", this);/**
+    Checks ocl invariant poly on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_poly()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_poly);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode27=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode28=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode27.getFeature("anInterface"));
+        Object[] tudOclParam0=new Object[1];
+        tudOclParam0[0]=tudresden.ocl.lib.Ocl.reconvert(null, tudOclNode28);
+        final tudresden.ocl.lib.OclBoolean tudOclNode29=tudresden.ocl.lib.Ocl.toOclBoolean(tudOclNode27.getFeature("poly1", tudOclParam0));
+        final tudresden.ocl.lib.OclBoolean tudOclNode30=tudresden.ocl.lib.OclBoolean.TRUE;
+        final tudresden.ocl.lib.OclBoolean tudOclNode31=tudOclNode29.isEqualTo(tudOclNode30);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode31.isTrue()) System.out.println("violated ocl invariant 'poly' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant someMethod on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_someMethod=new tudresden.ocl.injection.lib.Invariant("someMethod", this);/**
+    Checks ocl invariant someMethod on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_someMethod()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_someMethod);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode32=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode33=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode32.getFeature("anInterface"));
+        final tudresden.ocl.lib.OclInteger tudOclNode34=new tudresden.ocl.lib.OclInteger(10);
+        Object[] tudOclParam1=new Object[1];
+        tudOclParam1[0]=tudresden.ocl.lib.Ocl.reconvert(null, tudOclNode34);
+        final tudresden.ocl.lib.OclInteger tudOclNode35=tudresden.ocl.lib.Ocl.toOclInteger(tudOclNode33.getFeature("someMethod", tudOclParam1));
+        final tudresden.ocl.lib.OclInteger tudOclNode36=new tudresden.ocl.lib.OclInteger(0);
+        final tudresden.ocl.lib.OclBoolean tudOclNode37=tudOclNode35.isEqualTo(tudOclNode36);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode37.isTrue()) System.out.println("violated ocl invariant 'someMethod' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant mapuq on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapuq=new tudresden.ocl.injection.lib.Invariant("mapuq", this);/**
+    Checks ocl invariant mapuq on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_mapuq()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_mapuq);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode38=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode39=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode38.getFeature("namedIntegers"));
+        final tudresden.ocl.lib.OclInteger tudOclNode40=new tudresden.ocl.lib.OclInteger(10);
+        final tudresden.ocl.lib.OclBoolean tudOclNode41=tudOclNode39.includes(tudOclNode40);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode41.isTrue()) System.out.println("violated ocl invariant 'mapuq' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant mapq on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq=new tudresden.ocl.injection.lib.Invariant("mapq", this);/**
+    Checks ocl invariant mapq on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_mapq()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_mapq);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode42=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclString tudOclNode43=new tudresden.ocl.lib.OclString("5");
+        Object tudOclQualif0=tudresden.ocl.lib.Ocl.reconvert(null, tudOclNode43);
+        final tudresden.ocl.lib.OclInteger tudOclNode44=tudresden.ocl.lib.Ocl.toOclInteger(tudOclNode42.getFeatureQualified("namedIntegers", tudOclQualif0));
+        final tudresden.ocl.lib.OclInteger tudOclNode45=new tudresden.ocl.lib.OclInteger(5);
+        final tudresden.ocl.lib.OclBoolean tudOclNode46=tudOclNode44.isEqualTo(tudOclNode45);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode46.isTrue()) System.out.println("violated ocl invariant 'mapq' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant mapq2 on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq2=new tudresden.ocl.injection.lib.Invariant("mapq2", this);/**
+    Checks ocl invariant mapq2 on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_mapq2()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_mapq2);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode47=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclString tudOclNode48=new tudresden.ocl.lib.OclString("10");
+        Object tudOclQualif1=tudresden.ocl.lib.Ocl.reconvert(null, tudOclNode48);
+        final tudresden.ocl.lib.OclInteger tudOclNode49=tudresden.ocl.lib.Ocl.toOclInteger(tudOclNode47.getFeatureQualified("namedIntegers", tudOclQualif1));
+        final tudresden.ocl.lib.OclSet tudOclSet1=tudresden.ocl.lib.OclSet.getEmptyOclSet();
+        tudOclSet1.setToInclude(tudOclNode49);
+        final tudresden.ocl.lib.OclBoolean tudOclNode50=tudOclSet1.isEmpty();
+        final tudresden.ocl.lib.OclString tudOclNode51=new tudresden.ocl.lib.OclString("10");
+        Object tudOclQualif2=tudresden.ocl.lib.Ocl.reconvert(null, tudOclNode51);
+        final tudresden.ocl.lib.OclInteger tudOclNode52=tudresden.ocl.lib.Ocl.toOclInteger(tudOclNode47.getFeatureQualified("namedIntegers", tudOclQualif2));
+        final tudresden.ocl.lib.OclInteger tudOclNode53=new tudresden.ocl.lib.OclInteger(10);
+        final tudresden.ocl.lib.OclBoolean tudOclNode54=tudOclNode52.isEqualTo(tudOclNode53);
+        final tudresden.ocl.lib.OclBoolean tudOclNode55=tudOclNode50.or(tudOclNode54);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode55.isTrue()) System.out.println("violated ocl invariant 'mapq2' on object '"+this+"'.");
+  }}
+
+class SecondExample extends Example{
+  int i;
+  
+  SecondExample(tudresden.ocl.injection.lib.WrapperDummy dummy)
+  {
+    super("somename", new Integer(5));
+  }
+  
+  {
+    // Object initializer as defined in Java Language Spec D.1.3
+    i=10;
+  }
+
+  void abstractMethod_wrappedbyocl()  {}
+  
+  static
+  {
+    // this has to be tested too.
+  }
+  
+/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #SecondExample(tudresden.ocl.injection.lib.WrapperDummy)
+  */SecondExample()
+  {
+    this((tudresden.ocl.injection.lib.WrapperDummy)null);
+    tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+    tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #abstractMethod_wrappedbyocl()
+  */void abstractMethod()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      abstractMethod_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      abstractMethod_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #i
+  */private int i_oclbackup812374=i;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #i
+  */public final java.util.HashSet i_oclobservinginvariants812374=new java.util.HashSet();/**
+    Checks object features, whether they have changed.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private void checkForChangedFeatures()
+  {
+    if(i!=i_oclbackup812374)
+    {
+      i_oclbackup812374=i;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(i_oclobservinginvariants812374);
+    }
+  }}
+
+class ThirdExample extends SecondExample
+{
+  // this class has no explicit constructor
+  void abstractMethod_wrappedbyocl()  {}
+/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #abstractMethod_wrappedbyocl()
+  */void abstractMethod()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      abstractMethod_wrappedbyocl();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      abstractMethod_wrappedbyocl();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A default constructor for checking ocl constraints,
+    replacing the automatically generated constructor.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */ThirdExample()
+  {
+    tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+    tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+  }/**
+    Checks object features, whether they have changed.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private void checkForChangedFeatures()
+  {
+  }}

@@ -1,13 +1,14 @@
 ./compileAll
+cp tudresden/ocl/injection/test/Example.java tudresden/ocl/injection/test/Example.java.bak
 ./runinjection
 ./compileAll
 ./runinjection
 ./compileAll
-diff -c Example.java.injected tudresden/ocl/injection/test/Example.java
+diff -c tudresden/ocl/injection/test/Example.java tudresden/ocl/injection/test/Example.java.injected
 ./testinjection
 ./cleaninjection
 ./compileAll
-diff -c Example.java.original tudresden/ocl/injection/test/Example.java
+diff -c tudresden/ocl/injection/test/Example.java tudresden/ocl/injection/test/Example.java.bak
 ./royloy-inject
 ./compileAll
 ./royloy-inject
