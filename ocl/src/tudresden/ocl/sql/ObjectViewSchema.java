@@ -27,7 +27,7 @@ import tudresden.ocl.codegen.decl.*;
  * queries all tables which belong to the class and thus enables to query 
  * all tupels respectivly objects related to a class via one virtual table. 
  */
-public class ObjectViewSchema implements ORMappingScheme {
+public class ObjectViewSchema implements ORMappingScheme, SQLDirector {
 
 	ORMapping theORM;
 	SQLBuilder theSQLBuilder;
@@ -107,6 +107,29 @@ public class ObjectViewSchema implements ORMappingScheme {
             } else {
                 return result;
             }
+        }
+        
+        /**
+         * @param sqlb a builder used by the director to build database specific code
+         */
+        public void setBuilder(SQLBuilder sqlb) {
+            theSQLBuilder = sqlb;
+        }
+        
+        /**
+         * Does the construction of the SQL code.
+         * This is also done during the creation of this object.
+         */
+        public void construct() {
+            classifiersToViews = new HashMap();
+            createObjectViews();            
+        }
+        
+        /**
+         * @return the resulting SQL code from the construction process
+         */
+        public String getCode() {
+            return getViewDefinitions();
         }
         
 	// ---------------------------------------------------------------------------------	
@@ -346,5 +369,5 @@ public class ObjectViewSchema implements ORMappingScheme {
 				mc.addQuery((String)k.next());
   			}
   		}
-  	}		
+  	}		                
 }

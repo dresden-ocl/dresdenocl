@@ -32,17 +32,16 @@ import java.io.*;
  * ORMapping, which does the actual object relational mapping.
  * The SchemaGenerator just queries the information produced by the implementation of
  * ORMapping and generates the appropriate DDL script.
- * The generated DDL script is executable on Oracle 8i. To adapt the Generator for
- * other database systems, just subclass SchemaGenerator and replace the String
- * variables that contain the DDL tokens.
+ * The actual SQL code depends on the SQLBuilder that must be provided to the SchemaGenerator.
  * @author Sten Loecher
  * @see ORMapping
  */
-class SchemaGenerator {
+class SchemaGenerator implements SQLDirector {
   private String theScript;
   private int constraintCount = 0;
   private boolean scriptGenerated = false;
-  private SQLBuilder theSQLBuilder;
+  private SQLBuilder theSQLBuilder = null;
+  private ORMapping theORMapping = null;
   
   private static String CONSTRAINT_NAME = "CON_6";
 
@@ -98,27 +97,41 @@ class SchemaGenerator {
   	if (!scriptGenerated) throw new IllegalStateException();
   	return theScript.toString();
   }
-
+ 
   /**
    * Creates the DDL script.
-   * @param xmiSourceURL the url of the xmi source file
+   * @exception IllegalStateException if no SQLBuilder nor ORMapping was set
    */
-  public void createDDL(ORMapping orm, SQLBuilder sqlb) {
-  	Iterator i = orm.tables().iterator();
-        theSQLBuilder = sqlb;
-        sqlb.reset();
+  public void createDDL() 
+  throws IllegalStateException {
+        if ((theSQLBuilder == null) || (theORMapping == null)) 
+            throw new IllegalStateException("Missing SQLBuilder and/or ORMapping.");
+              
+  	Iterator i = theORMapping.tables().iterator();
+        theSQLBuilder.reset();
 
   	while (i.hasNext()) {
   		createTable((Table)i.next());
   	}
 
-  	i = orm.tables().iterator();
+  	i = theORMapping.tables().iterator();
   	while (i.hasNext()) {
   		setForeignKeys((Table)i.next());
   	}
 
         theScript = theSQLBuilder.getCode();
   	scriptGenerated = true;
+  }
+  
+  /**
+   * Creates the DDL script.
+   * @param orm a table schema
+   * @param sqlb a SQLBuilder
+   */
+  public void createDDL(ORMapping orm, SQLBuilder sqlb) {
+        theORMapping = orm;
+  	theSQLBuilder = sqlb;
+        createDDL();
   }
 
   /**
@@ -161,4 +174,32 @@ class SchemaGenerator {
  		}
 	}
   }
+  
+  /**
+   * @param orm an implementation of the ORMapping Interface that provides a table schema
+   */
+  public void setORMapping(ORMapping orm) {
+      theORMapping = orm;
+  }
+  
+  /**
+   * @param sqlb a builder used by the director to build database specific code
+   */
+  public void setBuilder(SQLBuilder sqlb) {
+      theSQLBuilder = sqlb;
+  }
+  
+  /**
+   * Does the construction of the SQL code.
+   */
+  public void construct() {
+      createDDL();
+  }
+  
+  /**
+   * @return the resulting SQL code from the construction process
+   */ 
+  public String getCode() {
+      return getDDLScript();
+  }  
 }

@@ -30,9 +30,18 @@ import java.util.*;
  *  provided to the generator. The generator then generates one trigger per involved table.
  *  @author  Sten Loecher
  */
-public class TriggerGenerator extends java.lang.Object {
+public class TriggerGenerator extends java.lang.Object implements SQLDirector {
     
-    SQLBuilder theSQLBuilder;
+    String theTriggerName;
+    String theViewName;
+    String theErrorMessage;
+    String theInvolvedTables[];
+    String theResult[];
+    SQLBuilder theSQLBuilder;      
+    int kindOfTrigger = 0;
+    
+    public static int ASSERTION_REPLACEMENT = 0;
+    public static int ECA_TRIGGER_TEMPLATE = 1;
 
     /** 
      *  Creates a new TriggerGenerator
@@ -40,6 +49,30 @@ public class TriggerGenerator extends java.lang.Object {
      */
     public TriggerGenerator(SQLBuilder sqlBuilder) {
         theSQLBuilder = sqlBuilder;
+    }
+    
+    private String[] getAssertionReplacement() {
+         String result[] = new String[theInvolvedTables.length];
+        
+        for (int i=0; i<theInvolvedTables.length; i++) {    
+            theSQLBuilder.reset();
+            theSQLBuilder.createAssertionReplacement(theTriggerName + theViewName + "_on_" + theInvolvedTables[i], theInvolvedTables[i], theViewName, theErrorMessage);
+            result[i] = theSQLBuilder.getCode();
+        }
+        
+        return result;
+    }
+    
+    private String[] getECATriggerTemplate() {
+        String result[] = new String[theInvolvedTables.length];
+        
+        for (int i=0; i<theInvolvedTables.length; i++) {    
+            theSQLBuilder.reset();
+            theSQLBuilder.createECATriggerTemplate(theTriggerName + theViewName + "_on_" + theInvolvedTables[i], theInvolvedTables[i], theViewName);
+            result[i] = theSQLBuilder.getCode();
+        }
+        
+        return result;
     }
     
     /**
@@ -51,15 +84,11 @@ public class TriggerGenerator extends java.lang.Object {
      *  @param involvedTables a list of involved tables
      */
     public String[] getAssertionReplacement(String triggerName, String errorMsg, String viewName, String[] involvedTables) {
-        String result[] = new String[involvedTables.length];
-        
-        for (int i=0; i<involvedTables.length; i++) {    
-            theSQLBuilder.reset();
-            theSQLBuilder.createAssertionReplacement(triggerName + viewName + "_on_" + involvedTables[i], involvedTables[i], viewName, errorMsg);
-            result[i] = theSQLBuilder.getCode();
-        }
-        
-        return result;
+        theTriggerName = triggerName;
+        theViewName = viewName;
+        theErrorMessage = errorMsg;
+        theInvolvedTables = involvedTables;      
+        return getAssertionReplacement();
     }
     
     /**
@@ -70,15 +99,78 @@ public class TriggerGenerator extends java.lang.Object {
      *  @param involvedTables a list of involved tables
      */
     public String[] getECATriggerTemplate(String triggerName, String viewName, String[] involvedTables) {
-        String result[] = new String[involvedTables.length];
+        theTriggerName = triggerName;
+        theViewName = viewName;
+        theInvolvedTables = involvedTables;      
+        return getECATriggerTemplate();        
+    }
+    
+    /**
+     * The prefix of all trigger names.
+     */
+    public void setTriggerName(String name) {
+        theTriggerName = name;
+    }
+    
+    /**
+     * The name of the integrity view.
+     */
+    public void setViewName(String name) {
+        theViewName = name;
+    }
+    
+    /**
+     * An error message that will be thrown from assertion replacement triggers.
+     */
+    public void setErrorMsg(String msg) {
+        theErrorMessage = msg;
+    }
         
-        for (int i=0; i<involvedTables.length; i++) {    
-            theSQLBuilder.reset();
-            theSQLBuilder.createECATriggerTemplate(triggerName + viewName + "_on_" + involvedTables[i], involvedTables[i], viewName);
-            result[i] = theSQLBuilder.getCode();
+    /**
+     * An array of table names that are involved in evaluating the related integrity view.
+     */
+    public void setInvolvedTables(String[] tables) {
+        theInvolvedTables = tables;
+    }
+    
+    /**
+     * @param the kind of trigger that should be created 
+     */
+    public void setKindOfTrigger(int kot) {
+        kindOfTrigger = kot;
+    }
+
+    /**
+     * @param sqlb a builder used by the director to build database specific code
+     */
+    public void setBuilder(SQLBuilder sqlb) {
+        theSQLBuilder = sqlb;
+    }
+       
+    /**
+     * Does the construction of the SQL code.
+     */
+    public void construct() 
+    throws IllegalStateException {
+        switch (kindOfTrigger) {
+            case 0: theResult = getAssertionReplacement(); 
+                    break;
+            case 1: theResult = getECATriggerTemplate(); 
+                    break;
+            default: throw new IllegalStateException("Specified kind of Trigger not supported !");
+        }
+    }
+    
+    /**
+     * @return the resulting SQL code from the construction process
+     */
+    public String getCode() {
+        String result = "";
+        
+        for (int i=0; i<theResult.length; i++) {
+            result += theResult[i] + "\n";
         }
         
         return result;
-    }
-
+    }    
 }
