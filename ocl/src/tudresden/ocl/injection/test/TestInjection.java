@@ -25,9 +25,12 @@ import tudresden.ocl.test.*;
 
 public class TestInjection extends TestCase
 {
+	
+	public static final String TEMP_DIR = "tudresden.ocl.test.tempdir";
+	
   Reader input=null;
   Writer output=null;
-  String outputfile="TestInjectionConsumer.result";
+  File outputfile;
 
   TestInjection(String name)
   {
@@ -38,7 +41,7 @@ public class TestInjection extends TestCase
   {
     super.setUp();
     String  inputfile=TestInjection.class.getResource("Example.java").getFile();
-    String outputfile="TestInjectionConsumer.result";
+		outputfile = new File(new File(System.getProperty(TEMP_DIR)), "TestInjectionConsumer.result");
     input =new InputStreamReader (new  FileInputStream(inputfile));
     output=new OutputStreamWriter(new FileOutputStream(outputfile));
   }
@@ -58,8 +61,7 @@ public class TestInjection extends TestCase
     output.close(); output=null;
 
     String expected=TestInjection.class.getResource("TestInjectionConsumer.result").getFile();
-    String actual=outputfile;
-    Diff.diff(new DiffSource(new File(expected)), new DiffSource(new File(actual)));
+    Diff.diff(new DiffSource(new File(expected)), new DiffSource(outputfile));
   }
 
   public static Test suite()

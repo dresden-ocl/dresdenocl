@@ -201,7 +201,7 @@ public class TestParser extends TestCase {
       {
         public ModelFacade makeModelFacade() throws Exception
         {
-          final File actual = new File("argo07_royloy.debug.bak");
+          final File actual = new File(new File(System.getProperty(tudresden.ocl.injection.test.TestInjection.TEMP_DIR)), "argo07_royloy.debug");
           final String resource = "xmi/argo07/royloy.xmi";
           Model result = XmiParser.getModel(
             getClass().getResource(resource),
@@ -220,7 +220,7 @@ public class TestParser extends TestCase {
       {
         public ModelFacade makeModelFacade() throws Exception
         {
-          final File actual = new File("rose_royloy.debug.bak");
+          final File actual = new File(new File(System.getProperty(tudresden.ocl.injection.test.TestInjection.TEMP_DIR)), "rose_royloy.debug");
           final String resource = "xmi/rose/royloy.xml";
           Model result = tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
             getClass().getResource("xmi/rose/royloy.xml"),

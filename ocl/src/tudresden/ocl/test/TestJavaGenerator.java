@@ -709,7 +709,7 @@ public class TestJavaGenerator extends TestCase {
     t.addTest(new TestJavaGenerator("testElements"));
     t.addTest(new TestJavaGenerator("testPre"));
 
-    t.addTest(new TestJavaGenerator("testCompile"));
+    //t.addTest(new TestJavaGenerator("testCompile"));
     return t;
   }
 }

@@ -91,7 +91,7 @@ Enhancements by Steffen Zschaler.
 
   <target name="test.junit"
           description="Runs JUnit tests."
-          depends="compile">
+          depends="compile,build.dir">
     <java classname="junit.textui.TestRunner"
           taskname="junit"
           fork="yes"
@@ -104,6 +104,7 @@ Enhancements by Steffen Zschaler.
         <pathelement location="${junit.jar}" />
       </classpath>
       <arg value="tudresden.ocl.test.TestAll" />
+      <sysproperty key="tudresden.ocl.test.tempdir" value="${build.dir}"/>
     </java>
   </target>
 

@@ -100,13 +100,14 @@ public class RevengTestSuite extends TestCase {
     cdNoComments.setElementType ("NoCommentCollectionElementType");
     
     // Now test saving...
-    IndentAwareWriter iaw = new IndentAwareWriter (new FileWriter("ShortExample.java.bak"));
+		final File outputfile = new File(new File(System.getProperty(tudresden.ocl.injection.test.TestInjection.TEMP_DIR)), "ShortExample.java");
+    IndentAwareWriter iaw = new IndentAwareWriter (new FileWriter(outputfile));
     new Injector (m_rSource2, iaw, new FileSaveConsumer (iaw, ac)).parseFile();
     iaw.close();
     iaw = null;
 			
     // For comparison in testSave
-		Diff.diff(new DiffSource(getClass().getResource("ShortExample.testmodified")), new DiffSource(new File("ShortExample.java.bak")));
+		Diff.diff(new DiffSource(getClass().getResource("ShortExample.testmodified")), new DiffSource(outputfile));
     
   }
   

@@ -290,7 +290,8 @@ public class Royloy
     model.flatten();
 
     final String filename = "royloy";
-    model.printData(new PrintStream(new FileOutputStream(filename+".debug.bak")));
-    Diff.diff(new DiffSource(getClass().getResource(filename+".debug")), new DiffSource(new File(filename+".debug.bak")));
+		final File outputfile = new File(new File(System.getProperty(tudresden.ocl.injection.test.TestInjection.TEMP_DIR)), filename+".debug");
+    model.printData(new PrintStream(new FileOutputStream(outputfile)));
+    Diff.diff(new DiffSource(getClass().getResource(filename+".debug")), new DiffSource(outputfile));
   }
 }

@@ -49,7 +49,7 @@ public class TestILSQLCodeGenerator extends TestCase {
                 theCG = new ILSQLCodeGenerator(ruleSrc);
                 theCG.setORMappingScheme(orm);
                 Model model = XmiParser.createModel(xmiSrc, "university example in classic mode");
-                final File actual = new File("university_example.xmi.debug.bak");
+                final File actual = new File(new File(System.getProperty(tudresden.ocl.injection.test.TestInjection.TEMP_DIR)), "university_example.xmi.debug");
                 model.printData(new PrintStream(new FileOutputStream(actual)));
                 Diff.diff(new DiffSource(getClass().getResource("university_example.xmi.debug")), new DiffSource(actual));
                 mf = model;

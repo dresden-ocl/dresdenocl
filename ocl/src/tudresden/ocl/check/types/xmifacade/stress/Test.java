@@ -128,8 +128,9 @@ public class Test extends TestCase
       getClass().toString()+".getResource("+filename+')'
     );
     assertNotNull(m);
-    m.printData(new PrintStream(new FileOutputStream(filename+".debug.bak")));
-    Diff.diff(new DiffSource(getClass().getResource(filename+".debug")), new DiffSource(new File(filename+".debug.bak")));
+		final File outputfile = new File(new File(System.getProperty(tudresden.ocl.injection.test.TestInjection.TEMP_DIR)), filename+".debug");
+    m.printData(new PrintStream(new FileOutputStream(outputfile)));
+    Diff.diff(new DiffSource(getClass().getResource(filename+".debug")), new DiffSource(outputfile));
 
     Any alpha=m.getClassifier("Alpha");
     Any beta =m.getClassifier("Beta");
