@@ -25,6 +25,8 @@ public class TestInjection
 {
   /**
      All objects.
+     Has to be a List, so that assertAll() always tests objects
+     in the same order.
   */
   private ArrayList ao=new ArrayList();
   
@@ -52,6 +54,32 @@ public class TestInjection
     p4.age=4; b1.addCustomer(3, p4);
     
     assertAll();
+    
+    {
+      String x1=p1.name;
+      String x2=p2.name;
+      p1.name=x1.toLowerCase();
+      p2.name=x2.toLowerCase();
+      expectViolation("violated ocl invariant 'nameUpperCase' on object 'tudresden.ocl.test.royloy.Person[person2]'.");
+      expectViolation("violated ocl invariant 'nameUpperCase' on object 'tudresden.ocl.test.royloy.Person[person1]'.");
+      assertAll();
+      p1.name=x1;
+      p2.name=x2;
+    }
+    {
+      Person p=c2.manager;
+      c2.manager=p1;
+      expectViolation("violated ocl invariant 'manager_is_employee2' on object 'tudresden.ocl.test.royloy.Company[Company2]'.");
+      expectViolation("violated ocl invariant 'manager_is_employee' on object 'tudresden.ocl.test.royloy.Company[Company2]'.");
+      assertAll();
+      c2.manager=p;
+    }
+    assertAll();
+    
+    if(!ev.isEmpty())
+      error("expected violations >"+ev+"< not encountered.");
+    if(!evPost.isEmpty())
+      error("expected violations post >"+evPost+"< not encountered.");
   }
   
   private void assertAll()
@@ -60,10 +88,56 @@ public class TestInjection
       ((RLObject)i.next()).assert();
   }
   
-  public void onViolation(String message)
+  private ArrayList ev=new ArrayList();
+  private HashSet evPost=new HashSet();
+  
+  public void onViolation(String mid)
   {
-    System.out.println(message);
+    String m=stripId(mid);
+    
+    //System.out.println("violation :"+m);
+    
+    String em= ev.isEmpty() ? null : (String)(ev.get(ev.size()-1));
+      
+    if(m.equals(em))
+    {
+      ev.remove(ev.size()-1);
+      evPost.add(mid);
+    }
+    else if(evPost.contains(mid))
+      evPost.remove(mid);
+    else
+    {
+      error(
+        "unexpected violation:\n  expected:    "+
+        (em==null?"none":'>'+em+'<')+
+        "\n  encountered: >"+m+'<'
+      );
+    }
   }
+  
+  private void expectViolation(String m)
+  {
+    //System.out.println("expection :"+m);
+    ev.add(m);
+  }
+  
+  private void error(String m)
+  {
+    System.out.println(m);
+  }
+  
+  private final String stripId(String s)
+  {
+    int from=s.indexOf('@');
+    if(from<0) 
+      throw new RuntimeException();
+    int to=s.indexOf('[', from);;
+    if(to<0) 
+      throw new RuntimeException();
+    return s.substring(0, from)+s.substring(to, s.length());
+  }
+    
   
   static public TestInjection theInstance;
   
