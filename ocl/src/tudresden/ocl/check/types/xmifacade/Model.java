@@ -122,7 +122,7 @@ public final class Model implements ModelFacade
 
     if(!shortname.equals(fullname))
       if(classifiers.put(shortname, modelclass)!=null)
-        throw new ModelException("ambigous classifier name: "+shortname);
+        throw new ModelException("ambigous classifier short name (THIS IS A BUG/TODO): "+shortname+" at fullname "+fullname);
 
     modelclass.setModel(this);
   }
