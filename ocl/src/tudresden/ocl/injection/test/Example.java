@@ -84,6 +84,46 @@ public abstract class Example implements Runnable
 
   class Inner implements Runnable
   {
+    class Drinner implements Runnable
+    {
+      boolean someDrinnerBoolean=true;
+    
+      public void run_wrappedbyocl()
+      {
+      }
+    /**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #run_wrappedbyocl()
+  */public void run()
+  {
+    if(currently_checking_ocl)
+      run_wrappedbyocl();
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      run_wrappedbyocl();
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
+  }/**
+    A flag, that currently ocl constraints are checked on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private boolean currently_checking_ocl=false;/**
+    A method for checking ocl invariants.
+    Generated automatically on Thu Jun 29 14:58:37 GMT+02:00 2000, DO NOT CHANGE!
+    @author ocl_injector
+  */private final void checkOclInvariants()
+  {
+}}
+
+    boolean someInnerBoolean=true;
+    
     public void run_wrappedbyocl()
     {
     }
@@ -112,7 +152,7 @@ public abstract class Example implements Runnable
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Thu Jun 29 14:48:21 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Thu Jun 29 14:58:37 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
@@ -512,7 +552,7 @@ public abstract class Example implements Runnable
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Thu Jun 29 14:48:21 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Thu Jun 29 14:58:37 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
@@ -639,7 +679,7 @@ class SecondExample extends Example{
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Thu Jun 29 14:48:21 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Thu Jun 29 14:58:37 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
