@@ -4,7 +4,7 @@
 
 JDK 1.3
   Sun Microsystems, Inc.
-  
+
 Ant 1.3
   Build Tool
   by The Jakarta Project
@@ -31,7 +31,7 @@ JUnit 3.7 (junit.jar)
 
 NOTES:
 * JDK 1.2 will fail with field java.util.Collections.EMPTY_MAP missing.
-* Ant 1.2 fails with strange errors when running the tests. 
+* Ant 1.2 fails with strange errors when running the tests.
 * Xerces 1.2.0 will fail with some SAXUnsupportedFeatureException.
 
 
@@ -49,24 +49,13 @@ myself). You'll get a friendly email.
 -----------
 Every .java file in the repository must compile with
 
+  javac of the SUN JDK java version "1.3" and later
+  AND
   jikes Version 1.06 (17 Sep 99)
-  AND
-  javac of the SUN JDK java version "1.2.2"
-  AND
-  any later version of the above.
 
-EXCEPTION:
-jikes 1.11, 1.12 and 1.14 terminate with a failing assertion,
-the rule above does not apply to these versions of jikes.
-For version 1.14 the exact error message is:
+For how to enable jikes, and which versions to use, see file
+jikes.properties in this directory.
 
-  Assertion failed: end >= start, file ../../jikes/src/class.h,
-  line 1119
-
-The bug has been submitted to the authors of jikes (bugid # 658)
-on June 28, 2001.
-
-Version 1.06 is known to work.
 
 NOTE:
 It may be the case that the javac compiler produces out of memory exceptions.

@@ -4,9 +4,7 @@
 dresden-ocl build file
 
 Process this file with ant (http://jakarta.apache.org).
-Tested with Ant 1.3.
 
-$Id: build.xml,v 1.29 2001/09/15 10:38:37 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -22,8 +20,6 @@ New version by Ralf Wiebicke.
   <property name="xerces.jar" value="${src.dir}/xerces.jar" />
   <property name="junit.jar"  value="${src.dir}/junit.jar"  />
 
-  <property name="build.depend" value="off" />
-
   <property file="local.properties" />
 
   <property name="example.dir" value="${build.dir}/example.test" />
@@ -34,9 +30,17 @@ New version by Ralf Wiebicke.
     <echo message="Target info is obsolete, use ant -projecthelp instead." />
   </target>
 
+  <target name="prepare">
+    <echo message="JDK ${java.version} found, make sure, it is at least 1.3." />
+    <echo message="Ant ${ant.java.version} found, make sure it is at least 1.3." />
+    <echo message="Compiler is ${build.compiler}, dependency check is ${build.depend}" />
+  </target>
+
 
   <target name="sablecc"
-          description="Generates the OCL parser using SableCC.">
+          description="Generates the OCL parser using SableCC."
+          depends="prepare"
+  >
     <uptodate property="sablecc.notRequired"
               targetfile="${src.dir}/tudresden/ocl/parser/parser/parser.dat" >
       <srcfiles dir="${src.dir}" includes="sablecc.jar"/>
@@ -139,7 +143,7 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="build.dir">
+  <target name="build.dir" depends="prepare">
     <mkdir dir="${build.dir}"/>
   </target>
 
