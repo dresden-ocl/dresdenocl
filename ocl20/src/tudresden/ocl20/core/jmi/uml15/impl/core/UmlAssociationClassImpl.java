@@ -41,7 +41,7 @@ import org.netbeans.mdr.storagemodel.*;
  *
  * @author  Administrator
  */
-public abstract class UmlAssociationClassImpl extends ModelElementImpl implements UmlAssociationClass{
+public abstract class UmlAssociationClassImpl extends ClassifierImpl implements UmlAssociationClass{
     
     /** Creates a new instance of AssociationClassImpl */
     protected UmlAssociationClassImpl(StorableObject storable) {

@@ -63,11 +63,11 @@ public abstract class AssociationEndImpl extends ModelElementImpl implements Ass
         Iterator it = getMultiplicity().getRange().iterator();
         while(it.hasNext()){
             MultiplicityRange mr = (MultiplicityRange) it.next();
-            if(mr.getUpper()>result){
-                result  = mr.getUpper();
+            if(mr.getUpper()>1 || mr.getUpper()==-1){
+                return true;
             }
         }
-        return (result>1 || result == -1);
+        return false;
     }
     
     public boolean isUniqueA() {
