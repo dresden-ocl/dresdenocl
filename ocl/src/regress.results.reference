@@ -578,8 +578,8 @@ xmifacade: parsed class tudresden.ocl.check.types.xmifacade.stress.Test.getResou
 xmifacade: using XMI adapter for IBM (tested with Argo 0.7).
 xmifacade: warning: ambigous attribute/role name "beta" in class "packageAleph::Beta", disabled for use in OCL.
 xmifacade: warning: ambigous attribute/role name "drei" in class "packageAleph::Gamma", disabled for use in OCL.
-xmifacade: warning: class "packageAleph::Beta" overrides attribute "alpha2" inherited from class "packageAleph::Alpha".
 xmifacade: warning: class "packageAleph::Beta" overrides attribute "alpha1" inherited from class "packageAleph::Alpha".
+xmifacade: warning: class "packageAleph::Beta" overrides attribute "alpha2" inherited from class "packageAleph::Alpha".
 xmifacade: warning: class "packageAleph::Gamma" overrides attribute "beta" inherited from class "packageAleph::Beta".
 classifier A --> A
 class A A
