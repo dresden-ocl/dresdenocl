@@ -299,11 +299,11 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     *
     */
   public void onFileEnd() {}
-  
+
   public boolean hasIncompleteElements() {
     return ((getStatus() & STATUS_MASK_INCOMPL) != 0);
   }
-  
+
   public synchronized int getStatus() {
     return m_nStatus;
   }
@@ -311,19 +311,19 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
   /**
     * Update the status of the file.
     */
-  public void updateStatus() {    
+  public void updateStatus() {
     int nStatus = STATUS_MASK_NONE;
-    
+
     if (m_lcdCollections.size() > 0) {
       nStatus |= STATUS_MASK_COLLECTIONS;
-      
+
       for (Iterator i = m_lcdCollections.iterator(); i.hasNext() && ((nStatus & STATUS_MASK_INCOMPL) == 0);) {
         if (((CollectionDescriptor) i.next()).isIncomplete()) {
           nStatus |= STATUS_MASK_INCOMPL;
         }
       }
     }
-    
+
     if (m_lmdMaps.size() > 0) {
       nStatus |= STATUS_MASK_MAPS;
 
@@ -333,7 +333,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
         }
       }
     }
-    
+
     synchronized (this) {
       m_nStatus = nStatus;
     }
@@ -341,27 +341,27 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
 
   public List getCollections() {
     return m_lcdCollections;
-  }  
-  
+  }
+
   public List getMaps() {
     return m_lmdMaps;
   }
-  
+
   public List getAllFeatures() {
     return m_ladFeatures;
   }
-  
+
   public String getFileName() {
     return m_sFileName;
   }
-  
+
   public static void main (String args[]) {
     try {
       Reader r = new InputStreamReader (AnalysisConsumer.class.getResourceAsStream ("../test/Example.java"));
       AnalysisConsumer ac = new AnalysisConsumer ("Example.java");
-      
+
       new Injector (r, null, ac).parseFile ();
-      
+
       System.out.println (ac.m_lcdCollections);
       System.out.println (ac.m_lmdMaps);
     }
@@ -369,14 +369,13 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
       t.printStackTrace();
     }
   }
- 
+
   public static AnalysisConsumer analyse(File fToAnalyse) throws IOException, InjectorParseException {
     Reader r = new FileReader (fToAnalyse);
     AnalysisConsumer ac = new AnalysisConsumer (fToAnalyse.getName());
-    
+
     new Injector (r, null, ac).parseFile ();
-    
+
     return ac;
   }
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
