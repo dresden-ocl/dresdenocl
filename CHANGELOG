@@ -6,6 +6,10 @@ Changes to current CVS
 Changes that could break older environments
 -------------------------------------------
 
+* [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
+  [OCL Library]  to also include methods defined by interfaces extended by other
+                 interfaces.
+
 * [Injector]     Added onFileDocComment to TaskInstrumentor.java .
 
 Other changes
@@ -25,6 +29,13 @@ Other changes
 
 Fixed bugs
 ----------
+* [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
+  [OCL Library]  to also include methods defined by interfaces extended by other
+                 interfaces.
+
+* [Injector]     fixed small problem when only an @postcondition tag was defined
+                 for a method.
+
 * [Injector]     fixed NullPointerException in tudresden.ocl.injection.lib.Check
 
 * [Injector]     #223583 OCL constraints at class level
