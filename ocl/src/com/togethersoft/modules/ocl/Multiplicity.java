@@ -3,7 +3,6 @@
 package com.togethersoft.modules.ocl;
 
 import java.util.*;
-import com.togethersoft.modules.ocl.Multiplicity;
 
 /*
 *  Parses an UML multiplicity. An empty String is interpreted as default multiplicity which is 0..1
