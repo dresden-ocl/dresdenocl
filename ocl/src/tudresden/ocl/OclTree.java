@@ -30,6 +30,10 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+// HISTORY
+//
+// 02/27/2001   [sz9 ] Adjusted public constructor to also find constraint name.
+
 package tudresden.ocl;
 
 import tudresden.ocl.parser.*;
@@ -71,6 +75,11 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
   public OclTree(Start ast) {
     this();
     this.ast=ast;
+    
+    // Find constraint name. Added 02/27/2001, sz9.
+    ConstraintNameFinder nameFinder = new ConstraintNameFinder();
+    ast.apply (nameFinder);
+    name = nameFinder.getName();
   }
 
   protected OclTree() {
