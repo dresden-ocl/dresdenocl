@@ -81,9 +81,9 @@ public interface TypeFactory {
    */
   public Type getOclType(Type ofWhichType);
 
-  public Type get(String name);
+  public Type getOclAny();
 
-  public Any getClassifier(String name);
+  public Type get(String name);
 
   public boolean conforms(Type found, Type expected);
 

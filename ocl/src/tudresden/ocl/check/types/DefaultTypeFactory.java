@@ -52,6 +52,7 @@ public class DefaultTypeFactory implements TypeFactory {
     predefinedTypeNames.add("Sequence");
     predefinedTypeNames.add("Collection");
     predefinedTypeNames.add("Enumeration");
+    predefinedTypeNames.add("OclAny");
   }
 
   protected ModelFacade myModelFacade;
@@ -116,6 +117,10 @@ public class DefaultTypeFactory implements TypeFactory {
     return new OclType(t);
   }
 
+  public Type getOclAny() {
+    return Basic.OCLANY;
+  }
+
   public Type get(String name) {
     if (predefinedTypeNames.contains(name)) {
       if (name.equals("Boolean")) return getBoolean();
@@ -127,16 +132,12 @@ public class DefaultTypeFactory implements TypeFactory {
       else if (name.equals("Bag")) return getBag();
       else if (name.equals("Sequence")) return getSequence();
       else if (name.equals("Enumeration")) return getEnumerationElement();
+      else if (name.equals("OclAny")) return getOclAny();
       else return null;
     } else {
       return myModelFacade.getClassifier(name);
     }
   }
-
-  public Any getClassifier(String name) {
-    return myModelFacade.getClassifier(name);
-  }
-
 
   public boolean conforms(Type found, Type expected) {
     return found.conformsTo(expected);

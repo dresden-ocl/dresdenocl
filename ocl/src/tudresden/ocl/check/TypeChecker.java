@@ -88,12 +88,12 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
     TypeEnvironment env=getEnvironmentCopy(c);
     PContextBody cb=((AContextDeclaration) c.getContextDeclaration()).getContextBody();
     String constrainedTypeName;
-    Any constrainedType;
+    Type constrainedType;
     if (cb instanceof AClassifierContextBody) {
       constrainedTypeName=
         ((AClassifierContext)((AClassifierContextBody)cb).getClassifierContext())
         .getTypeName().toString().trim();
-      constrainedType=types.getClassifier(constrainedTypeName);
+      constrainedType=types.get(constrainedTypeName);
     } else {
       AOperationContext oc=((AOperationContext)((AOperationContextBody)cb).getOperationContext());
       constrainedTypeName=oc.getTypeName().toString().trim();
@@ -123,7 +123,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
       } else {
         operationParameters=new Type[0];
       }
-      constrainedType=types.getClassifier(constrainedTypeName);
+      constrainedType=types.get(constrainedTypeName);
       Type constrainedOperationType=constrainedType.navigateParameterized(
         constrainedOperationName,
         operationParameters
@@ -716,7 +716,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
       if (lastTailElem instanceof ATypeNamePathNameEnd) {
         // simple package and type name
         return new OclType(
-          types.getClassifier( pn.toString().trim() )
+          types.get( pn.toString().trim() )
         );
       } else {
         // lastTailElem instanceof ANamePathNameEnd
@@ -726,7 +726,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
         String typeName=complete.substring(0, divide).trim();
         String memberName=complete.substring(divide+2).trim();
 
-        Type type=types.getClassifier(typeName);
+        Type type=types.get(typeName);
         Type result;
         if (fpe.getFeatureCallParameters()==null) {
           result=type.navigateQualified(memberName, getQualifierTypes(fpe.getQualifiers()));

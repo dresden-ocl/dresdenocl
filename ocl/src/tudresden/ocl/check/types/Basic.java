@@ -40,11 +40,12 @@ import tudresden.ocl.check.OclTypeException;
  */
 public class Basic implements Any {
 
-  public static Basic INTEGER=new Basic("Integer");
-  public static Basic REAL=new Basic("Real");
-  public static Basic BOOLEAN=new Basic("Boolean");
-  public static Basic STRING=new Basic("String");
-  public static Basic ENUMERATION=new Basic("Enumeration");
+  public static final Basic INTEGER=new Basic("Integer");
+  public static final Basic REAL=new Basic("Real");
+  public static final Basic BOOLEAN=new Basic("Boolean");
+  public static final Basic STRING=new Basic("String");
+  public static final Basic ENUMERATION=new Basic("Enumeration");
+  public static final Basic OCLANY=new Basic("OclAny");
   protected String name;
   private Basic(String name) {
     this.name=name;
