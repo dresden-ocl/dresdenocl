@@ -34,6 +34,47 @@ import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.codegen.JavaCodeGenerator;
 import tudresden.ocl.injection.lib.Invariant;
 
+
+final class ClassState
+{
+  
+  JavaClass javaclass;
+  
+  /**
+     Collects all behavioral features of the current class, 
+     except automatically generated features.
+     Is used only, if delayinsertions is true. Otherwise it is null.
+     @see OclInjector#delayinsertions
+     @see JavaBehaviour
+     @element-type JavaBehaviour
+  */
+  ArrayList behaviours=null;
+
+  /**
+     Collects all attributes of the current class, 
+     which have element-type or key-type set.
+     @see JavaAttribute
+     @element-type JavaAttribute
+  */
+  ArrayList typedAttributes=new ArrayList();
+
+  /**
+     Collects all features of the current class, which should be observed.
+     @see JavaFeature
+     @element-type JavaFeature
+  */
+  ArrayList observedFeatures=new ArrayList();
+    
+
+  ClassState(JavaClass javaclass, boolean delayinsertions)
+  {
+    this.javaclass=javaclass;
+    if(delayinsertions)
+      behaviours=new ArrayList();
+  }
+  
+}
+
 final class OclInjector implements InjectionConsumer
 {
   private Writer output;
@@ -43,50 +84,22 @@ final class OclInjector implements InjectionConsumer
   private String violationmakro;
   private OclInjectorConfig config;
 
-  /**
-     Collects all behavioral features of the current class, 
-     except automatically generated features.
-     Is used only, if delayinsertions is true. Otherwise it is null.
-     @see #delayinsertions
-     @see JavaBehaviour
-     @element-type JavaBehaviour
-  */
-  private ArrayList methods=null;
 
   /**
-     Collects the method attributes of outer classes,
-     when operating on a inner class.
-     @see #methods
+     Holds several properties of the class currently
+     worked on.
   */
-  private ArrayList methods_stack=new ArrayList();
+  private ClassState class_state=null;
   
   /**
-     Collects all attributes of the current class, which have element-type set.
-     @see JavaAttribute
-  */
-  private ArrayList typedAttributes=null;
-
-  /**
-     Collects the typedAttribute attributes of outer classes,
+     Collects the class states of outer classes,
      when operating on a inner class.
-     @see #typedAttributes
+     @see #class_state
+     @element-type ClassState
   */
-  private ArrayList typedAttributes_stack=new ArrayList();
-
-  /**
-     Collects all features of the current class, which should be observed.
-     @see JavaFeature
-  */
-  private ArrayList observedFeatures=null;
-
-  /**
-     Collects the observedFeature attributes of outer classes,
-     when operating on a inner class.
-     @see #observedFeatures
-  */
-  private ArrayList observedFeatures_stack=new ArrayList();
-
+  private ArrayList class_state_stack=new ArrayList();
   
+
   OclInjector(Writer output, OclInjectorConfig config)
   {
     this.output=output;
@@ -114,12 +127,8 @@ final class OclInjector implements InjectionConsumer
 
     if(clean) return;
     
-    methods_stack.add(methods);
-    methods=(delayinsertions ? new ArrayList() : null);
-    typedAttributes_stack.add(typedAttributes);
-    typedAttributes=new ArrayList();
-    observedFeatures_stack.add(observedFeatures);
-    observedFeatures=new ArrayList();
+    class_state_stack.add(class_state);
+    class_state=new ClassState(jc, delayinsertions);
   }
 
   public void onClassEnd(JavaClass jc) 
@@ -128,21 +137,19 @@ final class OclInjector implements InjectionConsumer
     if(clean) return;
 
     if(delayinsertions)
-      for(Iterator i=methods.iterator(); i.hasNext(); )
+      for(Iterator i=class_state.behaviours.iterator(); i.hasNext(); )
         writeWrapper((JavaBehaviour)i.next());
     if(!jc.hasConstructors())
       writeDefaultConstructor(jc);
-    for(Iterator i=observedFeatures.iterator(); i.hasNext(); )
+    for(Iterator i=class_state.observedFeatures.iterator(); i.hasNext(); )
       writeObserver((JavaFeature)i.next());
     writeChangedChecker();
     writeInvariants(jc.getName());
 
-    methods=(ArrayList)
-      (methods_stack.remove(methods_stack.size()-1));
-    typedAttributes=(ArrayList)
-      (typedAttributes_stack.remove(typedAttributes_stack.size()-1));
-    observedFeatures=(ArrayList)
-      (observedFeatures_stack.remove(observedFeatures_stack.size()-1));
+    if(class_state.javaclass!=jc)
+      throw new RuntimeException();
+    class_state=(ClassState)
+      (class_state_stack.remove(class_state_stack.size()-1));
   }
   
   public void onBehaviourHeader(JavaBehaviour jb) 
@@ -165,14 +172,14 @@ final class OclInjector implements InjectionConsumer
       if(jf instanceof JavaAttribute &&
          !Modifier.isFinal(jf.getModifiers()) &&
          !discardnextfeature)
-        observedFeatures.add(jf);
+        class_state.observedFeatures.add(jf);
       
       if(jf instanceof JavaBehaviour && 
          !jf.isStatic() && 
          !discardnextfeature)
       {
         if(delayinsertions)
-          methods.add(jf);
+          class_state.behaviours.add(jf);
         else
           writeWrapper((JavaBehaviour)jf);
         
@@ -185,7 +192,7 @@ final class OclInjector implements InjectionConsumer
         if(jf instanceof JavaAttribute)
         {
           ((JavaAttribute)jf).setElementType(last_element_type);
-          typedAttributes.add(jf);
+          class_state.typedAttributes.add(jf);
           notYetAddedToTypedAttributes=false;
         }
         else 
@@ -198,7 +205,7 @@ final class OclInjector implements InjectionConsumer
         {
           ((JavaAttribute)jf).setKeyType(last_key_type);
           if(notYetAddedToTypedAttributes)
-            typedAttributes.add(jf);
+            class_state.typedAttributes.add(jf);
         }
         else 
           throw new InjectorParseException("encountered @key-type tag on non-attribute");
@@ -235,9 +242,7 @@ final class OclInjector implements InjectionConsumer
 
   public void onFileEnd()
   {
-    if(!methods_stack.isEmpty() || 
-       !typedAttributes_stack.isEmpty() ||
-       !observedFeatures_stack.isEmpty())
+    if(!class_state_stack.isEmpty())
       throw new RuntimeException();
   }
 
@@ -410,7 +415,7 @@ final class OclInjector implements InjectionConsumer
     o.write("\n  */private void ");
     o.write(CHANGED_CHECKER);
     o.write("()\n  {\n");
-    for(Iterator i=observedFeatures.iterator(); i.hasNext(); )
+    for(Iterator i=class_state.observedFeatures.iterator(); i.hasNext(); )
     {
       JavaFeature jf=(JavaFeature)i.next();
       boolean is_collection=isCollection(jf);
