@@ -3,11 +3,11 @@ package tudresden.ocl.injection.test;
 
 class ContractImplementation
 {
-	private void assert(boolean condition)
+	private void assertContract(boolean condition)
 	{
 	}
 	
-	private void assert(boolean condition, String message)
+	private void assertContract(boolean condition, String message)
 	{
 	}
 	
@@ -67,14 +67,14 @@ class ContractImplementation
 		try
 		{
 			result=compare_wrapped_tudresden_ocl_injection_test_ContractImplementation(x, y);
-			assert(ensureThrow0, "should have thrown IllegalArgumentException, since state=0");
-			assert(ensureThrow1, "should have thrown NullPointerException, since x==null");
-			assert(ensureThrow2, "should have thrown NullPointerException, since y==null");
-			assert(result>=0, "ensure violated: result>=0");
+			assertContract(ensureThrow0, "should have thrown IllegalArgumentException, since state=0");
+			assertContract(ensureThrow1, "should have thrown NullPointerException, since x==null");
+			assertContract(ensureThrow2, "should have thrown NullPointerException, since y==null");
+			assertContract(result>=0, "ensure violated: result>=0");
 		}
 		catch(ClassCastException e)
 		{
-			assert(assumeThrow1||assumeThrow2, "should not");
+			assertContract(assumeThrow1||assumeThrow2, "should not");
 			throw e;
 		}
 		return result;
