@@ -43,7 +43,7 @@ public class TestJavaGenerator extends TestCase {
   static StringBuffer javaFile=new StringBuffer();
   static int index=0;
 
-  static String oclLibPackage=">oclLibPackage<";
+  static String oclLibPackage="tudresden.ocl.lib.";
 
   public TestJavaGenerator(String n) {
     super(n);
