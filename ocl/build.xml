@@ -14,7 +14,7 @@ Enhancements by Steffen Zschaler.
 
 <project name="dresden-ocl" default="all" basedir=".">
 
-  <property name="src.dir"   value="${basedir}" />
+  <property name="src.dir"   value="${basedir}/src" />
   <property name="build.dir" value="${basedir}/build" />
   <property name="docs.dir"  value="${basedir}/api"   />
 
@@ -58,7 +58,7 @@ Enhancements by Steffen Zschaler.
           failonerror="yes"
     >
       <classpath>
-        <pathelement location="sablecc.jar" />
+        <pathelement location="${src.dir}/sablecc.jar" />
       </classpath>
       <arg value="-d" />
       <arg value="${src.dir}" />
@@ -493,8 +493,6 @@ Enhancements by Steffen Zschaler.
 
   <target name="clean"
           description="Deletes all generated files except API documentation.">
-    <delete file="TestOclCompile.java"/>
-    <delete file="TestOclCompile*.class"/>
     <delete dir="${build.dir}"/>
     <delete>
       <fileset dir="${src.dir}/tudresden" includes="**/*.class" />
