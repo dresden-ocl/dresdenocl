@@ -1451,9 +1451,9 @@ public class OCLEditor
 		// of the selected row of the JTable has to be inserted
 		// (http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4700643)
 		// Christian Nill
-		if (m_jtConstraintList.getSelectedRow() == 1
-			&& m_jtConstraintList.getRowCount() == 1)
-			m_jtConstraintList.setRowSelectionInterval(0, 0);
+		int tableRowCount = m_jtConstraintList.getRowCount(); 
+		if (m_jtConstraintList.getSelectedRow() == tableRowCount)
+			m_jtConstraintList.setRowSelectionInterval(tableRowCount-1, tableRowCount-1);
 
 		// Selected row changed in table.
 		int newIndex = m_jtConstraintList.getSelectedRow();
