@@ -101,7 +101,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
 
   protected String getTransferCode(String var, String type) {
     StringBuffer ret=new StringBuffer();
-    ret.append("    "+oclLibPackage+type+" "+var+";\n");
+    ret.append("      "+oclLibPackage+type+" "+var+";\n");
     return ret.toString();
   }
 
@@ -152,9 +152,9 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
   private String createDecl(String type, String variable)
   {
     if(preVarTypes.containsKey(variable))
-      return "      "+variable+'=';
+      return "        "+variable+'=';
     else
-      return "      final "+oclLibPackage+type+' '+variable+'=';
+      return "        final "+oclLibPackage+type+' '+variable+'=';
   }
   
   // ---------- tree traversal: -----------------------------
