@@ -63,6 +63,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
                       <Image iconType="3" name="/tudresden/ocl/injection/reverseeng/resources/upOneLevel.gif"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Up One Level"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
                       <Dimension value="[25, 25]"/>
                     </Property>
@@ -73,6 +74,34 @@
                       <Dimension value="[25, 25]"/>
                     </Property>
                   </Properties>
+
+                  <Events>
+                    <EventHandler event="actionPerformed" handler="onUpOneLevel"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JButton" name="m_jbExploreFromHere">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
+                      <Image iconType="3" name="/tudresden/ocl/injection/reverseeng/resources/exploreFromHere.gif"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Explore From Here"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+                      <Dimension value="[25, 25]"/>
+                    </Property>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+                      <Dimension value="[25, 25]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+                      <Dimension value="[25, 25]"/>
+                    </Property>
+                  </Properties>
+
+                  <Events>
+                    <EventHandler event="actionPerformed" handler="onExploreFromHere"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
                   </Constraints>
@@ -90,6 +119,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
                       <Image iconType="3" name="/tudresden/ocl/injection/reverseeng/resources/save.gif"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Save"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
                       <Dimension value="[25, 25]"/>
                     </Property>
@@ -103,7 +133,7 @@
                   </Properties>
 
                   <Events>
-                    <EventHandler event="actionPerformed" handler="m_jbSaveActionPerformed"/>
+                    <EventHandler event="actionPerformed" handler="onSaveButton"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
@@ -114,6 +144,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
                       <Image iconType="3" name="/tudresden/ocl/injection/reverseeng/resources/saveAll.gif"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Save All"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
                       <Dimension value="[25, 25]"/>
                     </Property>
@@ -127,7 +158,7 @@
                   </Properties>
 
                   <Events>
-                    <EventHandler event="actionPerformed" handler="m_jbSaveAllActionPerformed"/>
+                    <EventHandler event="actionPerformed" handler="onSaveAllButton"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
@@ -155,14 +186,14 @@
                   </Properties>
 
                   <Events>
-                    <EventHandler event="treeWillExpand" handler="m_jtFilesTreeWillExpand"/>
-                    <EventHandler event="valueChanged" handler="m_jtFilesValueChanged"/>
-                    <EventHandler event="treeCollapsed" handler="m_jtFilesTreeCollapsed"/>
+                    <EventHandler event="treeWillExpand" handler="onExplorerNodeWillExpand"/>
+                    <EventHandler event="valueChanged" handler="onExplorerSelectionChanged"/>
+                    <EventHandler event="treeCollapsed" handler="onExplorerNodeCollapsed"/>
                   </Events>
 
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="&#xa;// Enable tool tips.&#xa;ToolTipManager.sharedInstance().registerComponent (m_jtFiles);&#xa;&#xa;// Specify lines to be drawn between nodes.&#xa;m_jtFiles.putClientProperty(&quot;JTree.lineStyle&quot;, &quot;Angled&quot;);&#xa;"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="m_dtmFileModel = new DefaultTreeModel (new DefaultMutableTreeNode(), true); // just use a fake root&#xa;FolderTreeNode ftnRoot = new FolderTreeNode(m_dtmFileModel, new File (&quot;.&quot;));&#xa;m_dtmFileModel.setRoot (ftnRoot);&#xa;ftnRoot.fill();"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="m_dtmFileModel = new DefaultTreeModel (new DefaultMutableTreeNode(), true); // just use a fake root&#xa;&#xa;File fRoot = new File (&quot;.&quot;).getAbsoluteFile();&#xa;try {&#xa;  fRoot = fRoot.getCanonicalFile();&#xa;}&#xa;catch (IOException ioex) {&#xa;  System.err.println (&quot;Couldn&apos;t retrieve canonical file name for root directory.&quot;);&#xa;  ioex.printStackTrace();&#xa;}&#xa;&#xa;FolderTreeNode ftnRoot = new FolderTreeNode(m_dtmFileModel, fRoot);&#xa;m_dtmFileModel.setRoot (ftnRoot);&#xa;ftnRoot.fill();"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout$JScrollPaneConstraintsDescription"/>

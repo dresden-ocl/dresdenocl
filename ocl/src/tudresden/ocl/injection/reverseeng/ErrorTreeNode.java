@@ -24,8 +24,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
 package tudresden.ocl.injection.reverseeng;
 
-import javax.swing.*;
+import tudresden.ocl.injection.reverseeng.propertypages.*;
 
+import java.util.*;
+
+import javax.swing.*;
 import javax.swing.tree.*;
 
 /** 
@@ -68,4 +71,18 @@ public class ErrorTreeNode extends RevengTreeNode {
     * Ignored.
     */
   public void fill() { }
+  
+  public List getPropertyPages() {
+    List lppPages = super.getPropertyPages();
+    
+    JTextArea jta = new JTextArea ((String) getUserObject());
+    jta.setEditable (false);
+    jta.setBackground (java.awt.Color.lightGray);
+    
+    JScrollPane jsp = new JScrollPane (jta);
+    
+    lppPages.add (new DefaultPropertyPage ("Error", jsp));
+    
+    return lppPages;
+  }
 }

@@ -70,13 +70,24 @@ public class RevengGUI extends javax.swing.JDialog {
     m_jpLeft = new javax.swing.JPanel ();
     m_jtbTreeBar = new javax.swing.JToolBar ();
     m_jbUpOneLevel = new javax.swing.JButton ();
+    m_jbExploreFromHere = new javax.swing.JButton ();
     m_jlSpace = new javax.swing.JLabel ();
     m_jbSave = new javax.swing.JButton ();
     m_jbSaveAll = new javax.swing.JButton ();
     m_jspTreeScroller = new javax.swing.JScrollPane ();
     m_jtFiles = new javax.swing.JTree ();
     m_dtmFileModel = new DefaultTreeModel (new DefaultMutableTreeNode(), true); // just use a fake root
-    FolderTreeNode ftnRoot = new FolderTreeNode(m_dtmFileModel, new File ("."));
+
+    File fRoot = new File (".").getAbsoluteFile();
+    try {
+      fRoot = fRoot.getCanonicalFile();
+    }
+    catch (IOException ioex) {
+      System.err.println ("Couldn't retrieve canonical file name for root directory.");
+      ioex.printStackTrace();
+    }
+
+    FolderTreeNode ftnRoot = new FolderTreeNode(m_dtmFileModel, fRoot);
     m_dtmFileModel.setRoot (ftnRoot);
     ftnRoot.fill();
     m_ppcProperties = new tudresden.ocl.injection.reverseeng.propertypages.PropertyPageContainer ();
@@ -96,24 +107,46 @@ public class RevengGUI extends javax.swing.JDialog {
         m_jtbTreeBar.setFloatable (false);
     
           m_jbUpOneLevel.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/injection/reverseeng/resources/upOneLevel.gif")));
+          m_jbUpOneLevel.setToolTipText ("Up One Level");
           m_jbUpOneLevel.setPreferredSize (new java.awt.Dimension(25, 25));
           m_jbUpOneLevel.setMaximumSize (new java.awt.Dimension(25, 25));
           m_jbUpOneLevel.setMinimumSize (new java.awt.Dimension(25, 25));
+          m_jbUpOneLevel.addActionListener (new java.awt.event.ActionListener () {
+            public void actionPerformed (java.awt.event.ActionEvent evt) {
+              onUpOneLevel (evt);
+            }
+          }
+          );
       
           m_jtbTreeBar.add (m_jbUpOneLevel);
+      
+          m_jbExploreFromHere.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/injection/reverseeng/resources/exploreFromHere.gif")));
+          m_jbExploreFromHere.setToolTipText ("Explore From Here");
+          m_jbExploreFromHere.setPreferredSize (new java.awt.Dimension(25, 25));
+          m_jbExploreFromHere.setMaximumSize (new java.awt.Dimension(25, 25));
+          m_jbExploreFromHere.setMinimumSize (new java.awt.Dimension(25, 25));
+          m_jbExploreFromHere.addActionListener (new java.awt.event.ActionListener () {
+            public void actionPerformed (java.awt.event.ActionEvent evt) {
+              onExploreFromHere (evt);
+            }
+          }
+          );
+      
+          m_jtbTreeBar.add (m_jbExploreFromHere);
       
           m_jlSpace.setText (" ");
       
           m_jtbTreeBar.add (m_jlSpace);
       
           m_jbSave.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/injection/reverseeng/resources/save.gif")));
+          m_jbSave.setToolTipText ("Save");
           m_jbSave.setPreferredSize (new java.awt.Dimension(25, 25));
           m_jbSave.setMaximumSize (new java.awt.Dimension(25, 25));
           m_jbSave.setMinimumSize (new java.awt.Dimension(25, 25));
           m_jbSave.setEnabled (false);
           m_jbSave.addActionListener (new java.awt.event.ActionListener () {
             public void actionPerformed (java.awt.event.ActionEvent evt) {
-              m_jbSaveActionPerformed (evt);
+              onSaveButton (evt);
             }
           }
           );
@@ -121,13 +154,14 @@ public class RevengGUI extends javax.swing.JDialog {
           m_jtbTreeBar.add (m_jbSave);
       
           m_jbSaveAll.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/injection/reverseeng/resources/saveAll.gif")));
+          m_jbSaveAll.setToolTipText ("Save All");
           m_jbSaveAll.setPreferredSize (new java.awt.Dimension(25, 25));
           m_jbSaveAll.setMaximumSize (new java.awt.Dimension(25, 25));
           m_jbSaveAll.setMinimumSize (new java.awt.Dimension(25, 25));
           m_jbSaveAll.setEnabled (false);
           m_jbSaveAll.addActionListener (new java.awt.event.ActionListener () {
             public void actionPerformed (java.awt.event.ActionEvent evt) {
-              m_jbSaveAllActionPerformed (evt);
+              onSaveAllButton (evt);
             }
           }
           );
@@ -148,7 +182,7 @@ public class RevengGUI extends javax.swing.JDialog {
       
           m_jtFiles.addTreeExpansionListener (new javax.swing.event.TreeExpansionListener () {
             public void treeCollapsed (javax.swing.event.TreeExpansionEvent evt) {
-              m_jtFilesTreeCollapsed (evt);
+              onExplorerNodeCollapsed (evt);
             }
             public void treeExpanded (javax.swing.event.TreeExpansionEvent evt) {
       
@@ -157,7 +191,7 @@ public class RevengGUI extends javax.swing.JDialog {
           );
           m_jtFiles.addTreeSelectionListener (new javax.swing.event.TreeSelectionListener () {
             public void valueChanged (javax.swing.event.TreeSelectionEvent evt) {
-              m_jtFilesValueChanged (evt);
+              onExplorerSelectionChanged (evt);
             }
           }
           );
@@ -168,7 +202,7 @@ public class RevengGUI extends javax.swing.JDialog {
             }
             public void treeWillExpand (javax.swing.event.TreeExpansionEvent evt)
             throws javax.swing.tree.ExpandVetoException {
-              m_jtFilesTreeWillExpand (evt);
+              onExplorerNodeWillExpand (evt);
             }
           }
           );
@@ -197,7 +231,26 @@ public class RevengGUI extends javax.swing.JDialog {
 
   }//GEN-END:initComponents
 
-  private void m_jbSaveAllActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jbSaveAllActionPerformed
+  private void onUpOneLevel (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onUpOneLevel
+    RevengTreeNode rtnNewRoot = m_rtnCurrent.createLogicalParent();
+    
+    if (rtnNewRoot != null) {
+      m_dtmFileModel.setRoot (rtnNewRoot);
+      m_jtFiles.setSelectionRow (0);
+    }
+  }//GEN-LAST:event_onUpOneLevel
+
+  private void onExploreFromHere (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onExploreFromHere
+    RevengTreeNode rtnParent = (RevengTreeNode) m_rtnCurrent.getParent();
+    
+    rtnParent.remove (m_rtnCurrent);
+    
+    m_dtmFileModel.setRoot (m_rtnCurrent);
+    
+    m_jtFiles.setSelectionRow (0);
+  }//GEN-LAST:event_onExploreFromHere
+
+  private void onSaveAllButton (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSaveAllButton
     try {
       m_fInSaveAll = true;
       
@@ -214,13 +267,13 @@ public class RevengGUI extends javax.swing.JDialog {
     finally {
       m_fInSaveAll = false;
     }
-  }//GEN-LAST:event_m_jbSaveAllActionPerformed
+  }//GEN-LAST:event_onSaveAllButton
 
-  private void m_jbSaveActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jbSaveActionPerformed
+  private void onSaveButton (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSaveButton
     if (m_rtnCurrent != null) {
       save (m_rtnCurrent);
     }
-  }//GEN-LAST:event_m_jbSaveActionPerformed
+  }//GEN-LAST:event_onSaveButton
 
   private boolean save (RevengTreeNode rtn) {
     try {
@@ -236,7 +289,7 @@ public class RevengGUI extends javax.swing.JDialog {
     }
   }
   
-  private void m_jtFilesValueChanged (javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_m_jtFilesValueChanged
+  private void onExplorerSelectionChanged (javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_onExplorerSelectionChanged
     if (evt.isAddedPath()) {
       // Stop notifications of dirty changes from previous selection
       if (m_rtnCurrent != null) {
@@ -254,28 +307,34 @@ public class RevengGUI extends javax.swing.JDialog {
       // Start receiving notifications of changes to current selection's dirty state
       if (m_rtnCurrent != null) {
         m_rtnCurrent.startDirtyChangeNotification (this);
-      }      
+      }
+      
+      // En-/Disable explore from here button
+      m_jbExploreFromHere.setEnabled (m_rtnCurrent.canRootExplorer());
+      
+      // En-/Disable UpOneLevel button
+      m_jbUpOneLevel.setEnabled (m_rtnCurrent.getParent() == null);
     }
     else {
       m_jbSave.setEnabled (false);
       m_jbSaveAll.setEnabled(false);
     }
-  }//GEN-LAST:event_m_jtFilesValueChanged
+  }//GEN-LAST:event_onExplorerSelectionChanged
 
-  private void m_jtFilesTreeCollapsed (javax.swing.event.TreeExpansionEvent evt) {//GEN-FIRST:event_m_jtFilesTreeCollapsed
+  private void onExplorerNodeCollapsed (javax.swing.event.TreeExpansionEvent evt) {//GEN-FIRST:event_onExplorerNodeCollapsed
     RevengTreeNode rtn = (RevengTreeNode) evt.getPath().getLastPathComponent();
     
     rtn.collapsed();
-  }//GEN-LAST:event_m_jtFilesTreeCollapsed
+  }//GEN-LAST:event_onExplorerNodeCollapsed
 
-  private void m_jtFilesTreeWillExpand (javax.swing.event.TreeExpansionEvent evt) throws ExpandVetoException {//GEN-FIRST:event_m_jtFilesTreeWillExpand
+  private void onExplorerNodeWillExpand (javax.swing.event.TreeExpansionEvent evt) throws ExpandVetoException {//GEN-FIRST:event_onExplorerNodeWillExpand
     RevengTreeNode rtn = (RevengTreeNode) evt.getPath ().getLastPathComponent ();
 
     rtn.fill();
     if (! rtn.getAllowsChildren ()) {
       throw new ExpandVetoException (evt);
     }
-  }//GEN-LAST:event_m_jtFilesTreeWillExpand
+  }//GEN-LAST:event_onExplorerNodeWillExpand
 
   /** Closes the dialog */
   private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
@@ -347,6 +406,7 @@ public class RevengGUI extends javax.swing.JDialog {
   private javax.swing.JPanel m_jpLeft;
   private javax.swing.JToolBar m_jtbTreeBar;
   private javax.swing.JButton m_jbUpOneLevel;
+  private javax.swing.JButton m_jbExploreFromHere;
   private javax.swing.JLabel m_jlSpace;
   private javax.swing.JButton m_jbSave;
   private javax.swing.JButton m_jbSaveAll;

@@ -177,4 +177,18 @@ public abstract class RevengTreeNode extends DefaultMutableTreeNode implements A
   public void onDescriptorModified (AbstractDescriptor.AbstractDescriptorEvent ade) {
     setModified();
   }
+  
+  /**
+    * True, if RevengGUI can root its explorer in this node.
+    */
+  public boolean canRootExplorer() {
+    return false;
+  }
+  
+  /**
+    * Return a RevengTreeNode that represents the logical parent layer to this node.
+    */
+  public RevengTreeNode createLogicalParent() {
+    return null;
+  }
 }

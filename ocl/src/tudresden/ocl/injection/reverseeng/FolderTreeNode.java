@@ -316,5 +316,26 @@ public class FolderTreeNode extends RevengTreeNode {
              (getFolder().getName()):
              ("<>"));
   }
+ 
+  /**
+    * True, if RevengGUI can root its explorer in this node.
+    */
+  public boolean canRootExplorer() {
+    return ((getParent() != null) &&
+             (getFolder().getParentFile() != null));
+  }
   
+  /**
+    * Return a RevengTreeNode that represents the logical parent layer to this node.
+    */
+  public RevengTreeNode createLogicalParent() {
+    File fParent = getFolder().getParentFile();
+    
+    if (fParent != null) {
+      return new FolderTreeNode (getModel(), fParent);
+    }
+    else {
+      return null;
+    }
+  }
 }
