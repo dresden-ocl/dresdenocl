@@ -77,7 +77,7 @@ public interface Type {
    *  @param params the actual argument types
    */
   public Type navigateParameterized(String name, Type[] params) throws OclTypeException;
-
+
   /** @return true if this type has a state with the given name
    */
   public boolean hasState(String name);
