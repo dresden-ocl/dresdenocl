@@ -404,10 +404,7 @@ public final class Injector
         if(collect_when_blocking)
         {
           cf.setLiteral(getCollector());
-          if(cf.isConstructor() || cf.isStatic())
-            write(cf.getNotWrappedLiteral());
-          else
-            write(cf.getWrappedLiteral());
+          consumer.onMethodHeader(cf);
         }
         parseBody(false);
         flushOutbuf();
@@ -416,10 +413,7 @@ public final class Injector
         if(collect_when_blocking)
         {
           cf.setLiteral(getCollector());
-          if(cf.isConstructor())
-            write(cf.getNotWrappedLiteral());
-          else
-            write(cf.getWrappedLiteral());
+          consumer.onMethodHeader(cf);
         }
         flushOutbuf();
         break ti;
@@ -524,20 +518,15 @@ public final class Injector
         break ml;
       case 'c':
         //System.out.println("comment: "+comment);
-        if(consumer.onComment(comment))
-        {
-          write(comment);
-          scheduleBlock(true);
-        }
-        else
-          scheduleBlock(false);
-
+        scheduleBlock(consumer.onComment(comment));
         break;
       case '\0':
         consumer.onClassFeature(parseFeature(classname));
         scheduleBlock(true);
         break;
-      case ';': // javac (but not jikes) accepts semicolons on class level, so do we.
+      case ';': 
+        // javac (but not jikes) accepts semicolons on class level, 
+        // so do we.
         getCollector();
         break;
       default:

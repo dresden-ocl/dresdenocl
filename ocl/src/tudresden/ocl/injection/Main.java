@@ -93,6 +93,15 @@ class OclInjector implements InjectionConsumer
     typedAttributes.clear();
   }
   
+  public void onMethodHeader(ClassMethod cf) 
+    throws java.io.IOException
+  {
+    if(cf.isConstructor() || cf.isStatic())
+      output.write(cf.getNotWrappedLiteral());
+    else
+      output.write(cf.getWrappedLiteral());
+  }
+
   private String last_element_type=null;
 
   public void onClassFeature(ClassFeature cf) 
@@ -122,7 +131,7 @@ class OclInjector implements InjectionConsumer
     discardnextfeature=false;
   }
 
-  public boolean onComment(String comment)
+  public boolean onComment(String comment) throws IOException
   {
     if(comment.startsWith("/**"))
     {
@@ -134,11 +143,15 @@ class OclInjector implements InjectionConsumer
       else
       {
         last_element_type=Injector.findDocTag(comment, "element-type");
+        output.write(comment);
         return true;
       }
     }
     else
+    {
+      output.write(comment);
       return true;
+    }
   }
 
   public static final String INV_METHOD="checkOclInvariants";
