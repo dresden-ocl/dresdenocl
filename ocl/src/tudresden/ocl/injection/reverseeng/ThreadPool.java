@@ -81,7 +81,7 @@ public class ThreadPool extends ThreadGroup {
   
   /** 
     * Creates new ThreadPool with a default number of threads in the current 
-    * thread group. The initial number of threads is 10.
+    * thread group. The initial number of threads is 20.
     */
   public ThreadPool (String sName) {
     this (sName, 20);
@@ -208,7 +208,7 @@ public class ThreadPool extends ThreadGroup {
     synchronized (getThreadCountLock()) {
       m_cThreadsToAdd += cThreadsToAdd;
       
-      for (; m_cThreadsToAdd > 0; m_cThreadsToAdd --); {
+      for (; m_cThreadsToAdd > 0; m_cThreadsToAdd --) {
         new PooledThread(this, m_nNextID ++).start ();
         m_cThreads ++;
       }

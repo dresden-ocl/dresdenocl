@@ -41,8 +41,8 @@ public class CollectionDescriptor extends AbstractDescriptor {
     * @param sComment the associated doc comment
     * @param nCommentID the comment number of the associated doc comment
     */
-  public CollectionDescriptor (String sName, String sComment, int nCommentID) {
-    super (sName, sComment, nCommentID);
+  public CollectionDescriptor (AnalysisConsumer acOwner, String sName, String sComment, int nCommentID) {
+    super (acOwner, sName, sComment, nCommentID);
   }
   
   public String toString () {

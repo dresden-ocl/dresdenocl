@@ -15,13 +15,24 @@ public class MapEditor extends javax.swing.JPanel {
 
   private MapDescriptor m_mdModel;
   
+  private TypeComboModel m_tcmKeyTypeModel;
+  private TypeComboModel m_tcmElementTypeModel;
+  
   /** Creates new form MapEditor */
   public MapEditor (MapDescriptor mdModel) {
-    initComponents ();
+    super();
     
     m_mdModel = mdModel;
+
+    String sKeyType = m_mdModel.getKeyType();
+    String sElementType = m_mdModel.getElementType();
+    
+    initComponents ();
     
     m_jtaDocComment.setText (m_mdModel.getCleanedComment());
+    
+    m_jcbElementType.setSelectedItem (sElementType);
+    m_jcbKeyType.setSelectedItem (sKeyType);
   }
 
   /** This method is called from within the constructor to
@@ -65,6 +76,14 @@ public class MapEditor extends javax.swing.JPanel {
     add (m_jlKeyType, gridBagConstraints1);
 
     m_jcbKeyType.setToolTipText ("Enter type of collection elements.\nThe dropdown box contains suggestions and standard types.");
+    m_tcmKeyTypeModel = new TypeComboModel() {
+      public void setSelectedItem (Object oSelectedItem) {
+        super.setSelectedItem (oSelectedItem);
+
+        m_mdModel.setKeyType ((String) oSelectedItem);
+      }
+    };
+    m_jcbKeyType.setModel (m_tcmKeyTypeModel);
     m_jcbKeyType.setEditable (true);
 
 
@@ -85,6 +104,14 @@ public class MapEditor extends javax.swing.JPanel {
     add (m_jlElementType, gridBagConstraints1);
 
     m_jcbElementType.setToolTipText ("Enter type of collection elements.\nThe dropdown box contains suggestions and standard types.");
+    m_tcmElementTypeModel = new TypeComboModel() {
+      public void setSelectedItem (Object oSelectedItem) {
+        super.setSelectedItem (oSelectedItem);
+
+        m_mdModel.setElementType ((String) oSelectedItem);
+      }
+    };
+    m_jcbElementType.setModel (m_tcmElementTypeModel);
     m_jcbElementType.setEditable (true);
 
 

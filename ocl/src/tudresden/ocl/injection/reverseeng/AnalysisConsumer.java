@@ -50,40 +50,45 @@ import java.io.*;
   */
 public class AnalysisConsumer extends Object implements InjectionConsumer {
 
+  private static final int STATUS_MASK_NONE = 0;
+  private static final int STATUS_MASK_COLLECTIONS = 1;
+  private static final int STATUS_MASK_MAPS = 2;
+  private static final int STATUS_MASK_INCOMPL = 4;
+  
   /**
     * Normal Java file: no collections, no maps.
     */
-  public static final int STATUS_NORMALFILE = 0;
+  public static final int STATUS_NORMALFILE = STATUS_MASK_NONE;
   
   /**
     * File contains only collections which are complete.
     */
-  public static final int STATUS_COLLECTIONSONLY = 1;
+  public static final int STATUS_COLLECTIONSONLY = STATUS_MASK_COLLECTIONS;
   
   /**
     * File contains only collections, some of which are incomplete.
     */
-  public static final int STATUS_COLLECTIONSONLY_INCOMPL = 2;
+  public static final int STATUS_COLLECTIONSONLY_INCOMPL = STATUS_MASK_COLLECTIONS | STATUS_MASK_INCOMPL;
 
   /**
     * File contains only maps which are complete.
     */
-  public static final int STATUS_MAPSONLY = 3;
+  public static final int STATUS_MAPSONLY = STATUS_MASK_MAPS;
   
   /**
     * File contains only maps, some of which are incomplete.
     */
-  public static final int STATUS_MAPSONLY_INCOMPL = 4;
+  public static final int STATUS_MAPSONLY_INCOMPL = STATUS_MASK_MAPS | STATUS_MASK_INCOMPL;
   
   /**
     * File contains collections and maps which are complete.
     */
-  public static final int STATUS_COLLECTIONSANDMAPS = 5;
+  public static final int STATUS_COLLECTIONSANDMAPS = STATUS_MASK_COLLECTIONS | STATUS_MASK_MAPS;
   
   /**
     * File contains collections and maps, some of which are incomplete.
     */
-  public static final int STATUS_COLLECTIONSANDMAPS_INCOMPL = 6;
+  public static final int STATUS_COLLECTIONSANDMAPS_INCOMPL = STATUS_MASK_COLLECTIONS | STATUS_MASK_MAPS | STATUS_MASK_INCOMPL;
   
   /**
     * Optimization: Cache for Collection class object.
@@ -210,77 +215,30 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
           // Not a simple type --> check whether collection
           if (s_clCollection.isAssignableFrom (clClass)) {
             // A collection
-            CollectionDescriptor cd = new CollectionDescriptor (cf.getName (), 
+            CollectionDescriptor cd = new CollectionDescriptor (this, 
+                                                                   cf.getName (), 
                                                                    m_sCurrentComment,
                                                                    m_cComments);
             m_lcdCollections.add (cd);
             
-            switch (m_nStatus) {
-              case STATUS_COLLECTIONSANDMAPS:
-                if (cd.isIncomplete()) {
-                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
-                }
-                break;
-                
-              case STATUS_MAPSONLY:
-                if (cd.isIncomplete()) {
-                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
-                }
-                else {
-                  m_nStatus = STATUS_COLLECTIONSANDMAPS;
-                }
-                break;
-
-              case STATUS_MAPSONLY_INCOMPL:
-                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
-                  break;
-
-              case STATUS_NORMALFILE:                
-              case STATUS_COLLECTIONSONLY:
-                if (cd.isIncomplete()) {
-                  m_nStatus = STATUS_COLLECTIONSONLY_INCOMPL;
-                }
-                else {
-                  m_nStatus = STATUS_COLLECTIONSONLY;
-                }
+            m_nStatus |= STATUS_MASK_COLLECTIONS;
+            
+            if (cd.isIncomplete()) {
+              m_nStatus |= STATUS_MASK_INCOMPL;
             }
           }
           else if (s_clMap.isAssignableFrom (clClass)) {
             // A map
-            MapDescriptor md = new MapDescriptor (cf.getName (), 
+            MapDescriptor md = new MapDescriptor (this, 
+                                                    cf.getName (), 
                                                     m_sCurrentComment,
                                                     m_cComments);
             m_lmdMaps.add (md);
 
-            switch (m_nStatus) {
-              case STATUS_COLLECTIONSANDMAPS:
-                if (md.isIncomplete()) {
-                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
-                }
-                break;
-                
-              case STATUS_COLLECTIONSONLY:
-                if (md.isIncomplete()) {
-                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
-                }
-                else {
-                  m_nStatus = STATUS_COLLECTIONSANDMAPS;
-                }
-                break;
-
-              case STATUS_COLLECTIONSONLY_INCOMPL:
-                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
-                  break;
-                  
-              case STATUS_NORMALFILE:
-              case STATUS_MAPSONLY:
-                if (md.isIncomplete()) {
-                  m_nStatus = STATUS_MAPSONLY_INCOMPL;
-                }
-                else {
-                  m_nStatus = STATUS_MAPSONLY;
-                }
-            }
+            m_nStatus |= STATUS_MASK_MAPS;
+            if (md.isIncomplete()) {
+              m_nStatus |= STATUS_MASK_INCOMPL;
+            }            
           }
         }
       }
@@ -316,10 +274,45 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     */
   public void onFileEnd() {}
   
-  public int getStatus() {
-    return m_nStatus;
+  public boolean hasIncompleteElements() {
+    return ((getStatus() & STATUS_MASK_INCOMPL) != 0);
   }
   
+  public synchronized int getStatus() {
+    return m_nStatus;
+  }
+
+  /**
+    * Update the status of the file.
+    */
+  public void updateStatus() {    
+    int nStatus = STATUS_MASK_NONE;
+    
+    if (m_lcdCollections.size() > 0) {
+      nStatus |= STATUS_MASK_COLLECTIONS;
+      
+      for (Iterator i = m_lcdCollections.iterator(); i.hasNext() && ((nStatus & STATUS_MASK_INCOMPL) == 0);) {
+        if (((CollectionDescriptor) i.next()).isIncomplete()) {
+          nStatus |= STATUS_MASK_INCOMPL;
+        }
+      }
+    }
+    
+    if (m_lmdMaps.size() > 0) {
+      nStatus |= STATUS_MASK_MAPS;
+
+      for (Iterator i = m_lmdMaps.iterator(); i.hasNext() && ((nStatus & STATUS_MASK_INCOMPL) == 0);) {
+        if (((MapDescriptor) i.next()).isIncomplete()) {
+          nStatus |= STATUS_MASK_INCOMPL;
+        }
+      }
+    }
+    
+    synchronized (this) {
+      m_nStatus = nStatus;
+    }
+  }
+
   public List getCollections() {
     return m_lcdCollections;
   }  

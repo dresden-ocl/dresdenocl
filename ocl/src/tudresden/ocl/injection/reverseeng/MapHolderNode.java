@@ -17,40 +17,46 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 /*
- * MapDescriptor.java
+ * MapHolderNode.java
  *
- * Created on 7. August 2000, 17:49
+ * Created on 16. August 2000, 15:39
  */
  
 package tudresden.ocl.injection.reverseeng;
 
+import java.util.*;
+
+import javax.swing.tree.*;
+
 /** 
-  * Descriptor for a class attribute of map type.
-  *
-  * <p>These descriptors are maintained by {@link AnalysisConsumer} in its m_lcdMaps member.</p>
+  * A node holding MapTreeNodes.
   *
   * @author  sz9 (Steffen Zschaler)
   * @version 0.1
   */
-public class MapDescriptor extends AbstractDescriptor {
+public class MapHolderNode extends HolderTreeNode {
 
-  /** 
-    * Creates new MapDescriptor 
+  /**
+    * Creates a new map holder node.
     */
-  public MapDescriptor(AnalysisConsumer acOwner, String sName, String sComment, int nCommentID) {
-    super (acOwner, sName, sComment, nCommentID);
+  public MapHolderNode (DefaultTreeModel dtmModel, List lmdMaps) {
+    super (dtmModel, "Maps", lmdMaps);
   }
-  
-  public void setKeyType (String sKeyType) {
-    super.setKeyType (sKeyType);
-  }
- 
-  public String toString () {
-    return "Map<" + getKeyType () + " -> " + getElementType () + "> " + getName () + " at comment ID " + getCommentID ();
-  }
-      
-  public boolean isIncomplete() {
-    return ((super.isIncomplete()) ||
-             (getKeyType() == null));
+
+  public void fill() {
+    List lmdMaps = (List) getUserObject ();
+
+    if (lmdMaps.size() == 0) {
+      setAllowsChildren (false);
+
+      nodeChanged();
+    }
+    else {
+      for (Iterator i = lmdMaps.iterator(); i.hasNext();) {
+        add (new MapTreeNode (getModel(), (MapDescriptor) i.next ()));
+      }
+
+      nodeStructureChanged();
+    }
   }
 }

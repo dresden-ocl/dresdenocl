@@ -17,40 +17,43 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 /*
- * MapDescriptor.java
+ * CollectionHolderNode.java
  *
- * Created on 7. August 2000, 17:49
+ * Created on 16. August 2000, 15:45
  */
  
 package tudresden.ocl.injection.reverseeng;
 
+import java.util.*;
+
+import javax.swing.tree.*;
+
 /** 
-  * Descriptor for a class attribute of map type.
-  *
-  * <p>These descriptors are maintained by {@link AnalysisConsumer} in its m_lcdMaps member.</p>
+  * A node holding collection descriptions.
   *
   * @author  sz9 (Steffen Zschaler)
   * @version 0.1
   */
-public class MapDescriptor extends AbstractDescriptor {
-
-  /** 
-    * Creates new MapDescriptor 
-    */
-  public MapDescriptor(AnalysisConsumer acOwner, String sName, String sComment, int nCommentID) {
-    super (acOwner, sName, sComment, nCommentID);
-  }
+public class CollectionHolderNode extends HolderTreeNode {
   
-  public void setKeyType (String sKeyType) {
-    super.setKeyType (sKeyType);
+  public CollectionHolderNode (DefaultTreeModel dtmModel, List lcdCollections) {
+    super (dtmModel, "Collections", lcdCollections);
   }
- 
-  public String toString () {
-    return "Map<" + getKeyType () + " -> " + getElementType () + "> " + getName () + " at comment ID " + getCommentID ();
-  }
-      
-  public boolean isIncomplete() {
-    return ((super.isIncomplete()) ||
-             (getKeyType() == null));
+
+  public void fill() {
+    List lcdCollections = (List) getUserObject ();
+
+    if (lcdCollections.size() == 0) {
+      setAllowsChildren (false);
+
+      nodeChanged();
+    }
+    else {
+      for (Iterator i = lcdCollections.iterator(); i.hasNext();) {
+        add (new CollectionTreeNode (getModel(), (CollectionDescriptor) i.next ()));
+      }
+
+      nodeStructureChanged();
+    }
   }
 }

@@ -26,6 +26,8 @@ package tudresden.ocl.injection.reverseeng;
 
 import tudresden.ocl.injection.*;
 
+import javax.swing.tree.*;
+
 /** 
   * Abstract super class of MapDescriptor and CollectionDescriptor.
   *
@@ -34,11 +36,14 @@ import tudresden.ocl.injection.*;
   */
 public abstract class AbstractDescriptor extends Object {
 
+  private AnalysisConsumer m_acOwner;
   private String m_sName;
   private String m_sDocComment;
   private int m_nCommentID;
   private String m_sElementType;
   private String m_sKeyType;
+  
+  private RevengTreeNode m_rtnAssociatedNode = null;
   
   private String m_sCleanedComment = null;
   
@@ -50,9 +55,10 @@ public abstract class AbstractDescriptor extends Object {
     * @param nCommentID a number uniquely identifying the comment for the feature. (Number of comments from
     * beginning of source file.
     */
-  public AbstractDescriptor (String sName, String sComment, int nCommentID) {
+  public AbstractDescriptor (AnalysisConsumer acOwner, String sName, String sComment, int nCommentID) {
     super();
     
+    m_acOwner = acOwner;
     m_sName = sName;
     m_sDocComment = sComment;
     m_nCommentID = nCommentID;
@@ -103,6 +109,10 @@ public abstract class AbstractDescriptor extends Object {
   
   public void setElementType (String sElementType) {
     m_sElementType = sElementType;
+    
+    if (m_rtnAssociatedNode != null) {
+      m_rtnAssociatedNode.setModified();
+    }
   }  
   
   public String getKeyType() {
@@ -111,7 +121,15 @@ public abstract class AbstractDescriptor extends Object {
 
   protected void setKeyType (String sKeyType) {
     m_sKeyType = sKeyType;
+    
+    if (m_rtnAssociatedNode != null) {
+      m_rtnAssociatedNode.setModified();
+    }
   }  
+
+  public void setAssociatedTreeNode (RevengTreeNode rtn) {
+    m_rtnAssociatedNode = rtn;
+  }
   
   public int getCommentID () {
     return m_nCommentID;

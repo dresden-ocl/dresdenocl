@@ -33,14 +33,21 @@ package tudresden.ocl.injection.reverseeng;
 public class CollectionEditor extends javax.swing.JPanel {
 
   private CollectionDescriptor m_cdModel;
+  private TypeComboModel m_tcmElementTypeModel;
+  
   
   /** Creates new form CollectionEditor */
   public CollectionEditor (CollectionDescriptor cdModel) {
+    super();
+    
+    m_cdModel = cdModel;    
+    
+    String sElementType = m_cdModel.getElementType();
+    
     initComponents ();
-    
-    m_cdModel = cdModel;
-    
+        
     m_jtaDocComment.setText (m_cdModel.getCleanedComment());
+    m_jcbElementType.setSelectedItem (sElementType);
   }
 
   /** This method is called from within the constructor to
@@ -82,6 +89,14 @@ public class CollectionEditor extends javax.swing.JPanel {
     add (m_jlElementTypePrompt, gridBagConstraints1);
 
     m_jcbElementType.setToolTipText ("Enter type of collection elements.\nThe dropdown box contains suggestions and standard types.");
+    m_tcmElementTypeModel = new TypeComboModel() {
+      public void setSelectedItem (Object oSelectedItem) {
+        super.setSelectedItem (oSelectedItem);
+
+        m_cdModel.setElementType ((String) oSelectedItem);
+      }
+    };
+    m_jcbElementType.setModel (m_tcmElementTypeModel);
     m_jcbElementType.setEditable (true);
 
 

@@ -105,7 +105,7 @@
                   </Events>
 
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="m_dtmFileModel = new DefaultTreeModel (new DefaultMutableTreeNode(), true); // just use a fake root&#xa;FileTreeNode ftnRoot = new FileTreeNode(m_dtmFileModel, new File (&quot;.&quot;));&#xa;m_dtmFileModel.setRoot (ftnRoot);&#xa;ftnRoot.fill (m_dtmFileModel);"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="m_dtmFileModel = new DefaultTreeModel (new DefaultMutableTreeNode(), true); // just use a fake root&#xa;FolderTreeNode ftnRoot = new FolderTreeNode(m_dtmFileModel, new File (&quot;.&quot;));&#xa;m_dtmFileModel.setRoot (ftnRoot);&#xa;ftnRoot.fill();"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout$JScrollPaneConstraintsDescription"/>
