@@ -65,6 +65,12 @@ final class ClassState
   */
   ArrayList observedFeatures=new ArrayList();
     
+  /**
+     Whether this class has at least one constructor or not.
+     Is used to decide, whether the default constructor has
+     to be replaced by {@see #writeDefaultConstructor}.
+  */
+  boolean has_constructors=false;
 
   ClassState(JavaClass javaclass, boolean delayinsertions)
   {
@@ -139,7 +145,7 @@ final class OclInjector implements InjectionConsumer
     if(delayinsertions)
       for(Iterator i=class_state.behaviours.iterator(); i.hasNext(); )
         writeWrapper((JavaBehaviour)i.next());
-    if(!jc.hasConstructors())
+    if(!class_state.has_constructors)
       writeDefaultConstructor(jc);
     for(Iterator i=class_state.observedFeatures.iterator(); i.hasNext(); )
       writeObserver((JavaFeature)i.next());
@@ -159,6 +165,12 @@ final class OclInjector implements InjectionConsumer
       output.write(jb.getLiteral());
     else
       output.write(jb.getWrappedLiteral());
+
+    if(!clean)
+    {
+      if(jb instanceof JavaConstructor)
+        class_state.has_constructors=true;
+    }
   }
 
   private String last_element_type=null;
