@@ -1,10 +1,12 @@
 jar -cf ocl-argo.jar \
 	tudresden/ocl/*.class \
+	tudresden/ocl/*.gif \
 	tudresden/ocl/normalize/*.class \
 	tudresden/ocl/check/*.class \
 	tudresden/ocl/check/bootstrap/*.class \
 	tudresden/ocl/check/bootstrap/constraints.txt \
 	tudresden/ocl/check/types/*.class \
+	tudresden/ocl/codegen/*.class \
 	tudresden/ocl/lib/*.class \
 	tudresden/ocl/parser/*.class \
 	tudresden/ocl/parser/analysis/*.class \
