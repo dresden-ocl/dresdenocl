@@ -32,7 +32,7 @@ import java.io.*;
   * @author  sz9 (Steffen Zschaler)
   * @version 0.1
   */
-class IndentAwareWriter extends FilterWriter {
+public class IndentAwareWriter extends FilterWriter {
 
   /**
     * Current indent level.

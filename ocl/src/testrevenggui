@@ -1,0 +1,3 @@
+echo Testing RevengGUI
+
+java -classpath .:junit.jar:xerces.jar tudresden.ocl.injection.reverseeng.test.RevengTestSuite
