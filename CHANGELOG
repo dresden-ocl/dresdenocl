@@ -20,6 +20,7 @@ Changes that could break older environments
 
 Other changes
 -------------
+* [OCL Editor]   Exchanged icons to apply with licencing requirements of an opensource system.
 * [Java Code Generator]
                  Fixed generation of "->excluding", so that a cast is generated, too.
 
