@@ -32,10 +32,10 @@ import javax.swing.tree.*;
 import tudresden.ocl.injection.reverseeng.propertypages.*;
 
 /** 
- *
- * @author  sz9
- * @version 
- */
+  *
+  * @author  sz9 (Steffen Zschaler)
+  * @version 0.1
+  */
 public class CollectionTreeNode extends AbstractFeatureTreeNode {
   
   static Icon s_iOK = new javax.swing.ImageIcon (CollectionTreeNode.class.getResource ("resources/collection.gif"));

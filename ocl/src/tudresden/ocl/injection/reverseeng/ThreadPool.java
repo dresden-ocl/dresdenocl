@@ -51,8 +51,8 @@ public class ThreadPool extends ThreadGroup {
   /**
     * The number of threads that need to be added (or removed if negative!).
     *
-    * @see addThreads
-    * @see removeThreads
+    * @see #addThreads
+    * @see #removeThreads
     */
   private int m_cThreadsToAdd = 0;
   
@@ -216,11 +216,11 @@ public class ThreadPool extends ThreadGroup {
   }
   
   /**
-    * Mark the specified number of threads to be needing to be removed.
+    * Mark the specified number of threads as needing to be removed.
     * 
     * <p>Note that the threads will be killed only after they completed the current task.</p>
     */
-  public void removedThreads (int cThreadsToRemove) {
+  public void removeThreads (int cThreadsToRemove) {
     synchronized (getThreadCountLock()) {
       m_cThreadsToAdd -= cThreadsToRemove;
     }

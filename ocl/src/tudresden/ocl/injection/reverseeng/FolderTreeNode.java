@@ -99,7 +99,7 @@ public class FolderTreeNode extends RevengTreeNode {
   private File m_fMissOnFill = null;
   
   /**
-    * Node associated with file indicated by {@link m_fMissOnFill}.
+    * Node associated with file indicated by {@link #m_fMissOnFill}.
     */
   private FolderTreeNode m_ftnMissOnFill = null;
   
