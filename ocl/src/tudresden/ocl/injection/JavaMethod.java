@@ -25,7 +25,7 @@ import java.io.PrintStream;
    Represents a method of a class parsed by the java parser.
    @see Injector
 */
-public class JavaMethod extends JavaBehaviour
+public final class JavaMethod extends JavaBehaviour
 {
   public static final String WRAPPER_SUFFIX="_wrappedbyocl";
   
@@ -60,11 +60,6 @@ public class JavaMethod extends JavaBehaviour
     this.name_end=name_end;
   }
 
-  public final boolean isConstructor()
-  {
-    return false;
-  }
-  
   public final void setLiteral(String literal)
   {
     int wsl=WRAPPER_SUFFIX.length();
@@ -83,22 +78,12 @@ public class JavaMethod extends JavaBehaviour
     return name+WRAPPER_SUFFIX;
   }
 
-  public final String getNotWrappedName()
-  {
-    return name;
-  }
-  
   public final String getWrappedLiteral()
   {
     return
         literal.substring(0, name_end)+
         WRAPPER_SUFFIX+
         literal.substring(name_end, literal.length());
-  }
-
-  public final String getNotWrappedLiteral()
-  {
-    return literal;
   }
 
   /**

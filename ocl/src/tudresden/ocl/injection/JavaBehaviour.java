@@ -77,11 +77,9 @@ public abstract class JavaBehaviour extends JavaFeature
     return throwables.iterator();
   }
 
-  public abstract boolean isConstructor();
-
   public void setLiteral(String literal)
   {
-    if(this.literal!=null)
+    if( this.literal!=null || literal==null )
       throw new IllegalArgumentException();
     this.literal=literal;
   }
@@ -92,8 +90,6 @@ public abstract class JavaBehaviour extends JavaFeature
   }
   
   public abstract String getWrappedLiteral();
-
-  public abstract String getNotWrappedLiteral();
 
   /**
      Ignores this information.
@@ -117,7 +113,6 @@ public abstract class JavaBehaviour extends JavaFeature
       o.println("    throwable >"+i.next()+"<");
     System.out.println("    literal: >"+literal+"<");
     System.out.println("    wrapped: >"+getWrappedLiteral()+"<");
-    System.out.println("    notwrap: >"+getNotWrappedLiteral()+"<");
   }
 
 }

@@ -146,7 +146,7 @@ final class OclInjector implements InjectionConsumer
     throws java.io.IOException
   {
     if(clean || cf.isStatic())
-      output.write(cf.getNotWrappedLiteral());
+      output.write(cf.getLiteral());
     else
       output.write(cf.getWrappedLiteral());
   }
@@ -307,7 +307,7 @@ final class OclInjector implements InjectionConsumer
   {
     Writer o=output;
     o.write("      ");
-    if(!cf.isConstructor() && !"void".equals(cf.getType()))
+    if(!"void".equals(cf.getType()))
       o.write("result=");
     o.write(cf.getWrappedName());
     o.write('(');
@@ -529,13 +529,13 @@ final class OclInjector implements InjectionConsumer
       }
     }
     o.write("\n  {\n");
-    if(!cf.isConstructor() && !"void".equals(cf.getType()))
+    if((cf instanceof JavaMethod) && !"void".equals(cf.getType()))
     {
       o.write("    ");
       o.write(cf.getType());
       o.write(" result;\n");
     }
-    if(cf.isConstructor())
+    if(cf instanceof JavaConstructor)
     {
       o.write("    this(");
       for(Iterator i=cf.getParameters(); i.hasNext(); )
@@ -650,7 +650,7 @@ final class OclInjector implements InjectionConsumer
     o.write("      ");
     o.write(Invariant.CHECKING_FLAG);
     o.write("=false;\n    }\n");
-    if(!cf.isConstructor() && !"void".equals(cf.getType()))
+    if(!"void".equals(cf.getType()))
       o.write("    return result;\n");
     }
     o.write("  }");

@@ -24,7 +24,7 @@ import java.io.PrintStream;
    Represents a constructor of a class parsed by the java parser.
    @see Injector
 */
-public class JavaConstructor extends JavaBehaviour
+public final class JavaConstructor extends JavaBehaviour
 {
   /**
      The index of the start of the last parameter of the 
@@ -62,11 +62,6 @@ public class JavaConstructor extends JavaBehaviour
     parent.onConstructorAdded();
   }
 
-  public final boolean isConstructor()
-  {
-    return true;
-  }
-
   public final void addParameter(String paramtype, String paramname)
   {
     if(tudresden.ocl.injection.lib.WrapperDummy.class.getName().equals(paramtype))
@@ -100,11 +95,6 @@ public class JavaConstructor extends JavaBehaviour
         " dummy"+ // parameter name to be removed
         literal.substring(last_param, literal.length());
     }
-  }
-
-  public final String getNotWrappedLiteral()
-  {
-    return literal;
   }
 
   public final void setLiteral(String literal)
