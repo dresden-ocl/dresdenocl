@@ -29,6 +29,7 @@ import java.util.*;
 /**
   * Test file for checking save operations in RevengGUI.
   * @author  sz9
+  * @version
   */
 public class ShortExample extends Object {
 

@@ -158,13 +158,25 @@ public class RevengTestSuite extends TestCase {
       
       // Compare stream written to stream previously written...
       class ComparisonWriter extends Writer {
+        int m_nLine = 1;
+        int m_nColumn = 1;
+        
         public void write (char[] cbuf, int off, int len) {
           try {
             // Compare and conditionally throw exception
             for (int i = 0; i < len; i++) {
               int nChar = m_rModificationTemplate.read();
-              assert ("Attempt to write wrong character.\nGot \'" + cbuf[off + i] + "\' expected \'" + nChar + "\'.",
+              assert ("Attempt to write wrong character.\nGot \'" + cbuf[off + i] + "\' expected \'" + (char)nChar + "\' at " +
+                      "(" + m_nLine + ", " + m_nColumn + ").",
                        (cbuf[off + i] == nChar));
+              
+              if (cbuf[off + i] != '\n') {
+                m_nColumn ++;
+              }
+              else {
+                m_nColumn = 1;
+                m_nLine++;
+              }
             }
           }
           catch (AssertionFailedError afe) {
