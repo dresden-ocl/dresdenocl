@@ -404,6 +404,8 @@ public final class Injector
       {
         featurename=featuretype;
         featuretype=null;
+        if(!parent.getName().equals(featurename))
+          throw new InjectorParseException("constructor '"+featurename+" must have the classes name '"+parent.getName()+'\'');
       }
       else
         throw new InjectorParseException("'(' expected.");
