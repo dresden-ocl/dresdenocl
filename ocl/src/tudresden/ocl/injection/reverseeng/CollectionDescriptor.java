@@ -48,9 +48,10 @@ public class CollectionDescriptor extends AbstractDescriptor {
   public CollectionDescriptor (AnalysisConsumer acOwner,
                                   JavaClass jcParent,
                                   String sName,
+                                  String sType,
                                   String sComment,
                                   int nCommentID) {
-    super (acOwner, jcParent, sName, sComment, nCommentID);
+    super (acOwner, jcParent, sName, sType, sComment, nCommentID);
   }
   
   public String toString () {

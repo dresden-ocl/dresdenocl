@@ -44,9 +44,10 @@ public class MapDescriptor extends AbstractDescriptor {
   public MapDescriptor (AnalysisConsumer acOwner,
                           JavaClass jcParent,
                           String sName,
+                          String sType,
                           String sComment,
                           int nCommentID) {
-    super (acOwner, jcParent, sName, sComment, nCommentID);
+    super (acOwner, jcParent, sName, sType, sComment, nCommentID);
   }
   
   public void setKeyType (String sKeyType) {

@@ -225,7 +225,8 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
             // A collection
             CollectionDescriptor cd = new CollectionDescriptor (this, 
                                                                    cf.getParent(),
-                                                                   cf.getName(), 
+                                                                   cf.getName(),
+                                                                   cf.getType(),
                                                                    m_sCurrentComment,
                                                                    m_cComments);
             
@@ -250,6 +251,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
             MapDescriptor md = new MapDescriptor (this, 
                                                     cf.getParent(),
                                                     cf.getName (), 
+                                                    cf.getType(),
                                                     m_sCurrentComment,
                                                     m_cComments);
             

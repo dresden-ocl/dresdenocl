@@ -40,6 +40,7 @@ public abstract class AbstractDescriptor extends Object {
   private JavaClass m_jcParent;
   private String m_sContainingClass;
   private String m_sName;
+  private String m_sType;
   private String m_sDocComment;
   private int m_nCommentID;
   private String m_sElementType;
@@ -60,6 +61,7 @@ public abstract class AbstractDescriptor extends Object {
   public AbstractDescriptor (AnalysisConsumer acOwner,
                                 JavaClass jcParent,
                                 String sName,
+                                String sType,
                                 String sComment,
                                 int nCommentID) {
     super();
@@ -67,6 +69,7 @@ public abstract class AbstractDescriptor extends Object {
     m_acOwner = acOwner;
     m_jcParent = jcParent;    
     m_sName = sName;
+    m_sType = sType;
     m_sDocComment = sComment;
     m_nCommentID = nCommentID;
 
@@ -223,6 +226,10 @@ public abstract class AbstractDescriptor extends Object {
   public void setAssociatedTreeNode (RevengTreeNode rtn) {
     m_rtnAssociatedNode = rtn;
   }  
+  
+  public String getType() {
+    return m_sType;
+  }
   
   public String getContainingClass() {
     return m_sContainingClass;
