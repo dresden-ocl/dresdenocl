@@ -34,6 +34,11 @@ import javax.swing.event.*;
 public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.ocl.gui.OCLEditorModel, java.io.Serializable {
     
     /**
+     *  To control serialization.
+     */
+    static final long serialVersionUID = -3597215846362973565l;    
+    
+    /**
      *  List of all constraints.
      *  @element-type ConstraintRepresentation
      */
@@ -58,18 +63,11 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
     }
     
     /**
-     *  A ModelFacade for the OCL compiler. If no ModelFacade will be specified,
-     *  no typechecking will be done.
-     */
-    public void setOCLCompilerModelFacade(ModelFacade mf) {
-        theModelFacade = mf;
-    }
-        
-    /**
      *  Add a fresh constraint to the model.
      */
     public void addConstraint() {
-        theConstraints.add(new SimpleConstraintRepresentation("unnamedConstraint", "context "));
+        int pos = theConstraints.size();
+        theConstraints.add(new SimpleConstraintRepresentation("unnamedConstraint", "context ", pos));
         fireConstraintAdded();
     }
     
@@ -219,13 +217,14 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
         theEventListeners = new EventListenerList();
     }
     
-    /**
-     *
-     */
+   /**
+    *  A ModelFacade for the OCL compiler. If no ModelFacade will be specified,
+    *  no typechecking will be done.
+    */
     public void setModelFacade(ModelFacade mf) {
         theModelFacade = mf;
     }
-       
+    
     /**
      * A simple implementation of the ConstraintRepresentation interface.
      * @author  Sten Loecher
@@ -256,9 +255,10 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
         /**
          *  Creates new SimpleConstraintRepresentation. 
          */
-        public SimpleConstraintRepresentation(String sName, String sData) {
+        public SimpleConstraintRepresentation(String sName, String sData, int posInModel) {
             constraintName = sName;
             constraintData = sData;
+            this.posInModel = posInModel;
         }
     
         /**
@@ -269,7 +269,7 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
             constraintData = new String(cr.getData());
             this.posInModel = posInModel;
         }
-
+        
         /**
          * Get the constraint's body text.
          */
@@ -293,7 +293,14 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
         }
     
  
-        public void setData(String sData,EditingUtilities euHelper) throws IllegalStateException, OclParserException, OclTypeException { 
+        public void setData(String sData, EditingUtilities euHelper) 
+        throws IllegalStateException, OclParserException, OclTypeException { 
+            try {
+                euHelper.parseAndCheckConstraint(sData, theModelFacade);
+            } catch(IOException e) {
+                System.err.println(e.toString());
+            }
+            
             ConstraintRepresentation crOld = new SimpleConstraintRepresentation((ConstraintRepresentation)this, posInModel);
             constraintData = sData;
             fireConstraintDataChanged(posInModel, crOld, (ConstraintRepresentation)this);
@@ -301,7 +308,7 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
           
         public void setName (String sName,
                              EditingUtilities euHelper)
-          throws IllegalStateException, IllegalArgumentException {
+        throws IllegalStateException, IllegalArgumentException {
 
             if (!euHelper.isValidConstraintName (sName)) {
               throw new IllegalArgumentException ("Please specify a valid name.");
