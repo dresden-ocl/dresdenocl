@@ -63,7 +63,7 @@ public class Main extends tudresden.ocl.injection.Main
 				nextConstraint=nextConstraint+"\n"+nextLine;
 		}
 		while (nextLine!=null);
-		
+
 		/*
 		for(Iterator iter=constrainedTypes.keySet().iterator(); iter.hasNext(); )
 		{
@@ -73,14 +73,14 @@ public class Main extends tudresden.ocl.injection.Main
 		}
 		 */
 	}
-	
+
 	public static void main(final String[] args)
 	{
 		(new Main()).run(args);
 	}
-	
+
 	private Main() {}
-	
+
 	protected void printUsage(PrintStream o)
 	{
 		super.printUsage(o);
@@ -88,7 +88,7 @@ public class Main extends tudresden.ocl.injection.Main
 		o.println("  -r  --reflection-model modelpackage");
 		o.println("      the model given by reflection");
 		o.println("  -n  --name-adapter [none|argo]");
-		o.println("      the nameadapter\n");
+		o.println("      the nameadapter");
 		o.println("  -is --invariant-scope [all|private|protected|package|public|explicit]");
 		o.println("      the scope of invariants");
 	}
@@ -103,38 +103,38 @@ public class Main extends tudresden.ocl.injection.Main
 		if("--constraint-file".equals(args[i])||"-f".equals(args[i]))
 		{
 			if(constraintfile!=null)
-				throw new IllegalArgumentException("can use only one constraint file.");
+				throw new IllegalParameterException("can use only one constraint file.");
 			i++;
 			if(i>=args.length)
-				throw new IllegalArgumentException("constraint file not given.");
+				throw new IllegalParameterException("constraint file not given.");
 			constraintfile=args[i];
 		}
 		else if("--reflection-model".equals(args[i])||"-r".equals(args[i]))
 		{
 			i++;
 			if(i>=args.length)
-				throw new IllegalArgumentException("reflection package not given.");
+				throw new IllegalParameterException("reflection package not given.");
 			reflectionmodel.add(args[i]);
 		}
 		else if("--name-adapter".equals(args[i])||"-n".equals(args[i]))
 		{
 			if(nameadapter!=null)
-				throw new IllegalArgumentException("can use only one name adapter.");
+				throw new IllegalParameterException("can use only one name adapter.");
 			i++;
 			if(i>=args.length)
-				throw new IllegalArgumentException("name adapter not given.");
+				throw new IllegalParameterException("name adapter not given.");
 			if("none".equals(args[i]))
 				nameadapter=new SimpleNameAdapter();
 			else if("argo".equals(args[i]))
 				nameadapter=new ArgoNameAdapter();
 			else
-				throw new IllegalArgumentException("name adapter must be 'none' or 'argo'.");
+				throw new IllegalParameterException("name adapter must be 'none' or 'argo'.");
 		}
 		else if("--invariant-scope".equals(args[i])||"-is".equals(args[i]))
 		{
 			i++;
 			if(i>=args.length)
-				throw new IllegalArgumentException("invariant scope not given.");
+				throw new IllegalParameterException("invariant scope not given.");
 			if("private".equals(args[i])||"all".equals(args[i]))
 				oclconf.invariantScope=oclconf.INVARIANT_SCOPE_PRIVATE;
 			else if("protected".equals(args[i]))
@@ -146,7 +146,7 @@ public class Main extends tudresden.ocl.injection.Main
 			else if("explicit".equals(args[i]))
 				oclconf.invariantScope=oclconf.INVARIANT_SCOPE_EXPLICIT;
 			else
-				throw new IllegalArgumentException("invariant scope must be 'all', 'private', 'protected', 'package', 'public' or 'explicit'.");
+				throw new IllegalParameterException("invariant scope must be 'all', 'private', 'protected', 'package', 'public' or 'explicit'.");
 		}
 		else if("--trace-checking".equals(args[i]))
 			oclconf.tracechecking=true;

@@ -96,7 +96,7 @@ public class Main
 		if(!outputfile.renameTo(tobemodifiedfile))
 			System.out.println("warning: renaming "+outputfile+" to "+tobemodifiedfile+" failed.");
 	}
-	
+
 	public static void expand(Collection files, String pattern)
 	throws IOException
 	{
@@ -123,14 +123,14 @@ public class Main
 		else
 			files.add(pattern);
 	}
-	
+
 	public static void main(final String[] args)
 	{
 		(new Main()).run(args);
 	}
-	
+
 	protected Main() {}
-	
+
 	protected void printUsage(PrintStream o)
 	{
 		o.println("usage:");
@@ -141,16 +141,16 @@ public class Main
 		o.println("      modify files");
 		o.println("  -c  --clean");
 		o.println("      clean files");
-		o.println("  -vm --violation-macro macro\n");
+		o.println("  -vm --violation-macro macro");
 		o.println("      what to to, if a constraint fails.");
 		o.println("  -tt --trace-types");
 		o.println("      trace types of collection elements.");
 	}
-	
+
 	protected int i;
 	protected String[] args;
 	protected final ArrayList taskConfigs = new ArrayList();
-	
+
 	private boolean modify=false;
 	private InstrumentorConfig conf=new InstrumentorConfig();
 	private String violationmacro = null;
@@ -162,10 +162,10 @@ public class Main
 		if("--violation-macro".equals(args[i])||"-vm".equals(args[i]))
 		{
 			if(violationmacro!=null)
-				throw new IllegalArgumentException("can use only one violation macro.");
+				throw new IllegalParameterException("can use only one violation macro.");
 			i++;
 			if(i>=args.length)
-				throw new IllegalArgumentException("violation macro not given.");
+				throw new IllegalParameterException("violation macro not given.");
 			violationmacro=args[i];
 		}
 		else if("--trace-types".equals(args[i])||"-tt".equals(args[i]))
@@ -184,7 +184,7 @@ public class Main
 		else if("--modcount-hash".equals(args[i]))
 			conf.hashmode=HashModCount.class;
 		else if(args[i].startsWith("-"))
-			throw new IllegalArgumentException("unknown option: "+args[i]);
+			throw new IllegalParameterException("unknown option: "+args[i]);
 		else
 		{
 			for(; i<args.length; i++)
@@ -223,7 +223,7 @@ public class Main
 				conf.taskConfigs[i] = (TaskConfig)taskConfigs.get(i);
 			
 			if(sourcefiles.isEmpty())
-				throw new IllegalArgumentException("nothing to do.");
+				throw new IllegalParameterException("nothing to do.");
 			
 			for(Iterator i=sourcefiles.iterator(); i.hasNext(); )
 			{
