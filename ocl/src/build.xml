@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.8 2001/05/01 07:01:29 rw7 Exp $
+$Id: build.xml,v 1.9 2001/05/01 20:52:40 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -54,6 +54,7 @@ New version by Ralf Wiebicke.
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/lib/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
+        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -86,6 +87,7 @@ New version by Ralf Wiebicke.
         <exclude name="tudresden/ocl/ASTViewer.java" />
         <exclude name="tudresden/ocl/ASTApplet.java" />
         <include name="tudresden/ocl/images/*.gif" />
+        <include name="tudresden/ocl/images/SUNIMAGELICENSE" />
         <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
         <include name="tudresden/ocl/parser/lexer/lexer.dat" />
         <include name="tudresden/ocl/parser/parser/parser.dat" />
@@ -103,6 +105,7 @@ New version by Ralf Wiebicke.
         <include name="tudresden/ocl/parser/parser/*.java" />
         <include name="tudresden/ocl/gui/*.java" />
         <include name="tudresden/ocl/gui/events/*.java" />
+        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -149,6 +152,7 @@ New version by Ralf Wiebicke.
         <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
         <include name="tudresden/ocl/codegen/*.java" />
         <include name="tudresden/ocl/injection/*.java" />
+        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -175,6 +179,7 @@ New version by Ralf Wiebicke.
     <copy todir="${build.dir}/dresden-ocl-demo" >
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/images/*.gif" />
+        <include name="tudresden/ocl/images/SUNIMAGELICENSE" />
         <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
         <include name="tudresden/ocl/parser/lexer/lexer.dat" />
         <include name="tudresden/ocl/parser/parser/parser.dat" />
@@ -198,6 +203,7 @@ New version by Ralf Wiebicke.
         <include name="tudresden/ocl/check/types/testfacade/*.java" />
         <include name="tudresden/ocl/injection/*.java" />
         <include name="tudresden/ocl/codegen/decl/*.java" />
+        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -234,6 +240,7 @@ New version by Ralf Wiebicke.
         <include name="tudresden/ocl/test/royloy/oclexpressions" />
         <include name="tudresden/ocl/test/TestInjection.java" />
         <include name="tudresden/ocl/test/TestInjectionRoyloy.java" />
+        <include name="COPYING" />
       </fileset>
     </copy>
 
