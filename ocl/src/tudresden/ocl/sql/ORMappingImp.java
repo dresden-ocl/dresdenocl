@@ -45,14 +45,14 @@ import java.security.*;
  * for each association regardless the multiplicity or as follows:
  * <ul>
  * <li>many-to-many: one association table</li>
- * <li>one-to-many: the primary key of the one-side is going to be inserted to the many-side's table</li>
- * <li>one-to-one: then primary keys of both sides are going to be inserted at the opposite sides's tables</li>
+ * <li>one-to-many: the primary key of the one-side will be buried to the many-side's table</li>
+ * <li>one-to-one: then primary keys of both sides will be buried at the opposite sides's tables</li>
  * </ul>
  * </li>
  * <li>
  * Attributes map to columns according to the class to table strategy. 
  * Complex attributes are going to be mapped to a table. The table's primary
- * key is going to be referenced if the attribute is member of a class. That is,
+ * key then is referenced if the attribute is member of a class. That is,
  * complex attributes are treated as if they were objects with an directed one-to-one 
  * association to them. 
  * </li>
@@ -69,19 +69,34 @@ public class ORMappingImp implements ORMapping {
   
   /**
    * An array that contains all the tables from the object relational mapping.
+   * @element-type Table
    */
   private ArrayList tables;
   
   /**
-   * Maps class names to a list of table names. 
+   * Maps class names to a List of table names (the element type of the List is String). 
+   * @key-type String
+   * @element-type List 
    */
   private HashMap classesToTables;
   
   /**
-   * Maps class names to a map of navigation guides. The map of
-   * navigation guides maps role names to the actual guides.
+   * Maps class names to a Map of navigation guides. The map of
+   * navigation guides maps role names to the actual guides
+   * (key-type String, element-type Guide).
+   * @key-type String
+   * @element-type Map
    */
   private HashMap navGuides;
+  
+  /**
+   * Maps class names to a Map (key-type String, element-type String)
+   * of association ends that result from
+   * the treatment of complex attributes.
+   * @key-type String
+   * @element-type Map
+   */
+  private HashMap addAssEnds;
   
   /**
    * Mapping mode for classes to tables. Possible values are:<br>
@@ -89,17 +104,17 @@ public class ORMappingImp implements ORMapping {
    * 1 - use one table per leaf class<br>
    * 2 - use one table per class (which is the default)
    */
-  private int classToTableMode;
+  private int classToTableMode = 2;
   
   /**
    * The number of desired primary key columns (default is 1).
    */
-  private int numOfPKCols; 
+  private int numOfPKCols = 1; 
   
   /**
    * The type name of the primary key columns (default is int).
    */
-  private String pKColTypeName;
+  private String pKColTypeName = "int";
   
   /**
    * The flag to determine whether each association is mapped to a 
@@ -107,15 +122,11 @@ public class ORMappingImp implements ORMapping {
    */
   private boolean oneTablePerAssociation;
   
-  /**
-   * Helper Set.
-   */
-  private Set fks;
-   
   public static String JAVATYPES = "Vector void?? Rectangle Byte Character Float Integer Double Stack Hashtable char Point Long Color Boolean Date";
-  public static String PRIMKEYNAME = "PK_";
-  public static String ASSTABNAME = "ASSTAB_";
+  public static String PRIMKEYNAME = "PK";
+  public static String ASSTABNAME = "ASSTAB";
   public static String PACKID = "::";
+  public static String SEPARATOR = "_";
   
   /**
    * A constructor to create the object relational mapping informations. This constructor
@@ -170,6 +181,7 @@ public class ORMappingImp implements ORMapping {
 	tables = new ArrayList();
 	classesToTables = new HashMap();
 	navGuides = new HashMap();
+	addAssEnds = new HashMap();
     	
 	// run through the mapping
 	createClassTables();
@@ -220,6 +232,38 @@ public class ORMappingImp implements ORMapping {
   	}
   	
   	return Collections.unmodifiableSet(retSet);
+  }
+  
+  public Map associationEnds(String classifier) {
+  	Map result = new HashMap();
+  	ModelClass mc = (ModelClass)theModel.getClassifier(classifier), endClass, assEndClass;
+  	ModelAssociation ma;
+  	ModelAssociationEnd end, assEnd;
+  	
+  	for (Iterator i=theModel.associations().iterator(); i.hasNext(); ) {
+  		ma = (ModelAssociation)i.next();
+  		// first search for membership of the classifier in current association
+  		for (Iterator k=ma.getEnds().iterator(); k.hasNext(); ) {
+  			end = (ModelAssociationEnd)k.next();
+  			endClass = end.getModelClass();
+  			if (getClassName(endClass).equals(classifier)) {
+  				// if classifier is association end, determine all other ends
+  				for (Iterator l=ma.getEnds().iterator(); l.hasNext(); ) {
+  					assEnd = (ModelAssociationEnd)l.next();
+  					assEndClass = assEnd.getModelClass();
+  					if (!end.getName().equals(assEnd.getName())) {
+  						result.put(assEnd.getName(), getClassName(assEndClass));	  				
+  						//System.err.println("classifier:" + classifier + " to " + assEnd.getName() + " on " + getClassName(assEndClass));
+  					}
+  				}  				
+  			}
+  		}  		  		
+  	}
+  	
+  	// association ends that result from complex attributes
+  	result.putAll((Map)addAssEnds.get(classifier));
+  	
+  	return result;
   }
   
   public Map guidesToAssociationEnds(String classifier) {
@@ -275,7 +319,6 @@ public class ORMappingImp implements ORMapping {
   }
    
   //----------------------------------- mapping methodes ------------------------------------
-    				
   /**
    * Creates all the class tables with respect to the mapping mode.
    */
@@ -331,7 +374,7 @@ public class ORMappingImp implements ORMapping {
  			className = c.generalizationRoot();
  			allTableNames = (ArrayList)classesToTables.get(className);
   			classesToTables.put(getClassName(c), allTableNames);
-  			System.err.println("straggler is:" + c.getShortName());
+  			//System.err.println("straggler is:" + c.getShortName());
  		}
  	}
   	
@@ -351,7 +394,7 @@ public class ORMappingImp implements ORMapping {
   				if (c1.isSupertype(c)) {
   					allTableNames = (ArrayList)straggler.get(getClassName(c));
   					if (allTableNames == null) {
-  						allTableNames = (ArrayList)classesToTables.get(className);
+  						allTableNames = new ArrayList((List)classesToTables.get(className));
   					} else {
   						allTableNames.addAll((List)classesToTables.get(className));
   					}
@@ -360,7 +403,7 @@ public class ORMappingImp implements ORMapping {
   			}
 		}
 	
-		System.err.println("stragglers are:" + straggler.toString());	
+		//System.err.println("stragglers are:" + straggler.toString());
 		classesToTables.putAll(straggler);
  	}
   }
@@ -448,36 +491,49 @@ public class ORMappingImp implements ORMapping {
    */
   private void mapClassAttributes(ModelClass mc) {
   	Iterator j;
-  	String attName;
+  	String attName, typeName;
   	ModelAttribute ma;
   	Table t, t1;
-  	List tableNames;
-  	Map attributes;
+  	List tableNames, cat, pkTables, fkTables;
+  	Map attributes, assEndNameToGuidesList, assEnds = new HashMap();
+  	Set fkSet;
   	
   	attributes = mc.attributes();
   	j = attributes.keySet().iterator();  		  	
   	tableNames = (List)classesToTables.get(getClassName(mc));	
 	while (j.hasNext()) {
   		attName = (String)j.next();
-  		ma = (ModelAttribute)attributes.get(attName);
-  		  			
-  		for (int k=0; k<tableNames.size(); k++) {
-  			t = getTable((String)tableNames.get(k));
-  			
-  			if (!classesToTables.containsKey(ma.getType().toString())) {
-  				// basic types
+  		ma = (ModelAttribute)attributes.get(attName);  		
+
+		if (!classesToTables.containsKey(ma.getType().toString())) {
+			// basic types
+			for (int k=0; k<tableNames.size(); k++) { 				
+				t = getTable((String)tableNames.get(k));
   				t.addColumn(attName, ma.getType().toString(), getColumnName(attName, t), false);   							
-  			} else {
-  				// complex types --> use primary key in attribute owner class
-  				t1 = getTable((String)((ArrayList)classesToTables.get(ma.getType().toString())).get(0));
-  				insertKeysIntoAllClassTables(attName, t1, getClassName(mc));
  			}
- 		}
+		} else {
+			// complex types --> use primary key in attribute owner class
+			typeName = ma.getType().toString();
+			pkTables = getTableList((ArrayList)classesToTables.get(typeName));
+			fkTables = getTableList(tableNames);
+			
+			fkSet = buryForeignKeys(pkTables, fkTables ,attName ,new HashSet());
+						
+			// guides --> directed one-to-one association 
+			assEndNameToGuidesList = getAssEndMap(mc);
+			assEndNameToGuidesList.put(attName, createGuideList(mc, (ModelClass)theModel.getClassifier(typeName), null, false, fkSet));
+			navGuides.put(getClassName(mc), assEndNameToGuidesList);  
+			
+			// keep new association end in mind
+			assEnds.put(attName, typeName);								
+		}  		
   	}
+  	
+  	addAssEnds.put(getClassName(mc), assEnds);
   }
   
   /**
-   * Mapping of all attributes.
+   * Mapping of the attributes for all classes.
    */
   private void mapAttributes() {
   	Iterator i = classesToTables.keySet().iterator();
@@ -492,7 +548,7 @@ public class ORMappingImp implements ORMapping {
    */
   private void mapAssociations() { 
   	Iterator i = theModel.associations().iterator();
-  	ModelAssociationEnd mae1, mae2, mae3;
+  	ModelAssociationEnd mae, mae1, mae2, mae3;
   	ModelAssociation ma;
   	ModelClass ac, aec, startClass, endClass;
   	Table assTab, tempTab;
@@ -501,49 +557,41 @@ public class ORMappingImp implements ORMapping {
   	String className, pkc[];
   	Guide guide;
   	Map assEndNameToGuidesList;
-  	List tempList;
+  	List tempList, tabList, pkTables, fkTables;
+  	Set fkSet;
   	
   	while (i.hasNext()) {
   		ma = (ModelAssociation)i.next();
+  		assEnds = ma.getEnds();
   		  		  		
   		if ((ma.allEndsAreMultiple()) || (oneTablePerAssociation)) {
   			// tables for all associations with multiplicity * on all ends
   			// or for each association if oneTablePerAssociation == true
-  			fks = new HashSet();
   			ac = ma.getAttribute();
   			
   			// create the association table
   			assTabCount++;
+  			fkTables = new ArrayList();
   			if (ac == null) {
   				// create standard table
   				assTab = new Table(ASSTABNAME + assTabCount);
+  				fkTables.add(assTab.getTableName());
   			} else {
   				// create table from association class
-  				assTab = new Table(getTableName(getClassName(ac)));
-  				tempList = new ArrayList();
-  				tempList.add(assTab);
-  				classesToTables.put(getClassName(ac), tempList);
-  				mapClassAttributes(ac);
-  				
+  				assTab = new Table(getTableName(ac));
+  				fkTables.add(assTab.getTableName());
+  				classesToTables.put(getClassName(ac), fkTables);
+  				mapClassAttributes(ac);  				
   			}
   			tables.add(assTab);
   			
-  			// add all necessary foreign keys
-  			assEnds = ma.getEnds();
+  			// bury all necessary foreign keys
+  			fkSet = new HashSet();
   			for (int k=0; k<assEnds.size(); k++) {
-  				className = getClassName(((ModelAssociationEnd)assEnds.get(k)).getModelClass());
-  				tempTab = getTable((String)((List)classesToTables.get(className)).get(0));
-  				pkc = tempTab.getPrimaryKeyColumns();
-  				
-  				for (int l=0; l<pkc.length; l++) {
-  					try {
-  						assTab.addColumn("", pKColTypeName, pkc[l], false);
-  						assTab.setForeignKey(pkc[l], tempTab.getTableName(), pkc[l]);
-  						fks.add(pkc[l]);
-  					} catch(IllegalArgumentException e) {
-  			 			// key still exists
-  			 		}
-  				}
+  				mae = (ModelAssociationEnd)assEnds.get(k);
+  				className = getClassName(mae.getModelClass());
+  				pkTables = getTables((List)classesToTables.get(className));
+  				fkSet = buryForeignKeys(pkTables, getTableList(fkTables), mae.getName(), fkSet); 				
   			}
   			
   			// create guides to association ends
@@ -553,22 +601,19 @@ public class ORMappingImp implements ORMapping {
   				for (int l=0; l<assEnds.size(); l++) {
   					if (l != k) {
   						endClass = ((ModelAssociationEnd)assEnds.get(l)).getModelClass();
-  						assEndNameToGuidesList.put(((ModelAssociationEnd)assEnds.get(l)).getName(), createGuideList(startClass, endClass, assTab, false));
+  						assEndNameToGuidesList.put(((ModelAssociationEnd)assEnds.get(l)).getName(), createGuideList(startClass, endClass, assTab, false, fkSet));
   					}  						
   				}
   				navGuides.put(getClassName(startClass), assEndNameToGuidesList);
   			}  			
   		} else {
   			// only foreign key references for the other associations
-  			assEnds = ma.getEnds();
-  			  			
   			for (int k=1; k<assEnds.size(); k++) {
   				mae1 = (ModelAssociationEnd)assEnds.get(0);
   				mae2 = (ModelAssociationEnd)assEnds.get(k);
   				
   				if (mae1.isMultiple() || mae2.isMultiple()) {
   					// 1:* association
-  					fks = new HashSet();
   					if (mae1.isMultiple()) {
   						mae3 = mae1;
   						mae1 = mae2;
@@ -576,39 +621,39 @@ public class ORMappingImp implements ORMapping {
   					}
   					
   					// get primary keys from mae1 class
-  					tempTab = getTable((String)((List)classesToTables.get(getClassName(mae1.getModelClass()))).get(0));
+  					pkTables = getTableList((List)classesToTables.get(getClassName(mae1.getModelClass())));
+  					fkTables = getTableList((List)classesToTables.get(getClassName(mae2.getModelClass())));
   					  					
   					// insert the primary keys into mae2 class
-  					insertKeysIntoAllClassTables(mae1.getName(), tempTab, getClassName(mae2.getModelClass()));
-  					
+  					fkSet = buryForeignKeys(pkTables, fkTables, mae1.getName(), new HashSet());
+  					  					
   					// guides
   					assEndNameToGuidesList = getAssEndMap(mae1.getModelClass());
-  					assEndNameToGuidesList.put(mae2.getName(), createGuideList(mae1.getModelClass(), mae2.getModelClass(), null, true));
+  					assEndNameToGuidesList.put(mae2.getName(), createGuideList(mae1.getModelClass(), mae2.getModelClass(), null, true, fkSet));
   					navGuides.put(getClassName(mae1.getModelClass()), assEndNameToGuidesList);
   					
   					assEndNameToGuidesList = getAssEndMap(mae2.getModelClass());
-  					assEndNameToGuidesList.put(mae1.getName(), createGuideList(mae2.getModelClass(), mae1.getModelClass(), null, false));
+  					assEndNameToGuidesList.put(mae1.getName(), createGuideList(mae2.getModelClass(), mae1.getModelClass(), null, false, fkSet));
   					navGuides.put(getClassName(mae2.getModelClass()), assEndNameToGuidesList);
   				} else {
   					// 1:1 association
-  					fks = new HashSet();
+  					pkTables = getTableList((List)classesToTables.get(getClassName(mae1.getModelClass())));
+  					fkTables = getTableList((List)classesToTables.get(getClassName(mae2.getModelClass())));
+  					
   					// primary keys from mae1 into mae2 class
-  					tempTab = getTable((String)((List)classesToTables.get(getClassName(mae1.getModelClass()))).get(0));
-  					insertKeysIntoAllClassTables(mae1.getName(), tempTab, getClassName(mae2.getModelClass()));
+  					fkSet = buryForeignKeys(pkTables, fkTables, mae1.getName(), new HashSet());
   					
   					// guide
   					assEndNameToGuidesList = getAssEndMap(mae1.getModelClass());
-  					assEndNameToGuidesList.put(mae2.getName(), createGuideList(mae1.getModelClass(), mae2.getModelClass(), null, false));
+  					assEndNameToGuidesList.put(mae2.getName(), createGuideList(mae1.getModelClass(), mae2.getModelClass(), null, false, fkSet));
   					navGuides.put(getClassName(mae1.getModelClass()), assEndNameToGuidesList);
   					
-  					fks = new HashSet();
   					// primary keys from mae2 into mae1 class
-  					tempTab = getTable((String)((List)classesToTables.get(getClassName(mae2.getModelClass()))).get(0));
-  					insertKeysIntoAllClassTables(mae2.getName(), tempTab, getClassName(mae1.getModelClass()));
+  					fkSet = buryForeignKeys(fkTables, pkTables, mae2.getName(), new HashSet());
   					 					
   					// guide
   					assEndNameToGuidesList = getAssEndMap(mae2.getModelClass());
-  					assEndNameToGuidesList.put(mae1.getName(), createGuideList(mae2.getModelClass(), mae1.getModelClass(), null, false));
+  					assEndNameToGuidesList.put(mae1.getName(), createGuideList(mae2.getModelClass(), mae1.getModelClass(), null, false, fkSet));
   					navGuides.put(getClassName(mae2.getModelClass()), assEndNameToGuidesList);
   				}
   			}
@@ -663,27 +708,18 @@ public class ORMappingImp implements ORMapping {
   }
   
   /**
+   * Mapping of class names to table names.
+   */
+  private String getTableName(ModelClass mc) {
+  	return new String(getClassName(mc).toUpperCase());
+  }
+    
+  /**
    * Important: does not care about package names yet !
    * @return the Name of the class to work with
    */
   private String getClassName(ModelClass mc) {
   	return new String(mc.getShortName());
-  }
-  
-  /**
-   * @param the name of a table
-   * @return the related table object
-   */
-  private Table getTable(String tabName) {
-  	Table t;
-  	
-  	for (int i=0; i<tables.size(); i++) {
-  		t = (Table)tables.get(i);
-  		if (t.getTableName().equals(tabName))
-  			return t;
-  	}
-  	
-  	return null;
   }
   
   /**
@@ -702,37 +738,63 @@ public class ORMappingImp implements ORMapping {
   } 
   
   /**
-   * Helper Method. Copies all primary keys from fkTable to the tables of
-   * the given class.
-   * @param fkTable the table that contains the primary keys.
-   * @param className the class name of the target class.  
-   * @param assName the name of the according association end
+   * @param the name of a table
+   * @return the related table object
    */
-  private void insertKeysIntoAllClassTables(String assEnd, Table fkTabel, String className) {
-  	List tableNames = (List)classesToTables.get(className);
-  	Table table;
-  	String pkc[] = fkTabel.getPrimaryKeyColumns(), colName;
+  public Table getTable(String tabName)
+  throws NoSuchElementException {
+  	Table t;
   	
-  	for (int i=0; i<tableNames.size(); i++) {
-  		table = getTable((String)tableNames.get(i));
-  		
-  		for (int k=0; k<pkc.length; k++) {
-  			try {
-  				colName = getColumnName(assEnd + "_" + pkc[k], table);
-  				if (fks != null) fks.add(colName);
-  				table.addColumn("", pKColTypeName, colName, false);
-  				table.setForeignKey(colName, fkTabel.getTableName(), pkc[k]);
-  			} catch(IllegalArgumentException e) {
-  				// key still exists
-  			}
-  		}
+  	for (int i=0; i<tables.size(); i++) {
+  		t = (Table)tables.get(i);
+  		if (t.getTableName().equals(tabName))
+  			return t;
   	}
+  	
+  	throw new NoSuchElementException();
   }
   
   /**
-   * Guide generation for one association mapped to an association table.
+   * @param tableNames a List with table names
+   * @return a List that contains the actual tables related to the table names
+   * @exception NoSuchElementException if a table to a given name does not exist
    */
-  private List createGuideList(ModelClass startClass, ModelClass endClass, Table assTab, boolean nTo1) {
+  private List getTableList(List tableNames)
+  throws NoSuchElementException {
+  	List result = new ArrayList();
+  	
+  	for (Iterator i=tableNames.iterator(); i.hasNext(); ) {
+  		result.add(getTable((String)i.next()));
+  	}
+  	
+  	return result;
+  }
+  
+  /**
+   * @param a List with the names of all tables
+   * @return a List with all related table object
+   * @exception NoSuchElementException if one of the tables does not exist
+   */
+  public List getTables(List tabNames) {
+  	List result = new ArrayList();
+  	Table t;
+  	
+  	for (int i=0; i<tabNames.size(); i++) {
+  		result.add(getTable((String)tabNames.get(i)));
+  	}
+  	
+  	return Collections.unmodifiableList(result);
+  }
+  
+  /**
+   * @result a List of Guides that lead from startClass to endClass over assTab
+   * @param startClass the class to start from
+   * @param endClass the class to lead to
+   * @param assTab a possible association Table or null, if such a table does not exist
+   * @param nTo1 a flag that indicates whether the association is a many-to-one association or not
+   * @param fkSet a Set of foreign key names that belong to the association
+   */
+  private List createGuideList(ModelClass startClass, ModelClass endClass, Table assTab, boolean nTo1, Set fkSet) {
   	List result = new ArrayList(), startClassTables, endClassTables;
   	Guide guide, guide2;
   	Table t1, t2;
@@ -747,16 +809,16 @@ public class ORMappingImp implements ORMapping {
 
 				guide = new Guide(true);  				
   				if (assTab != null) {
-  					guide.add(getTableKeyString(t2), t2.getTableName(), getTableKeyString(t2));
-  					guide.add(getForeignKeyString(assTab, t2), assTab.getTableName(), getForeignKeyString(assTab, t1));
-  					guide.add(getTableKeyString(t1), t1.getTableName(), getTableKeyString(t1));
+  					guide.add(getPrimaryKeyString(t2), t2.getTableName(), getPrimaryKeyString(t2));
+  					guide.add(getForeignKeyString(assTab, t2, fkSet), assTab.getTableName(), getForeignKeyString(assTab, t1, fkSet));
+  					guide.add(getPrimaryKeyString(t1), t1.getTableName(), getPrimaryKeyString(t1));
   				} else {
   					if (nTo1) {
-  						guide.add(getTableKeyString(t2), t2.getTableName(), getForeignKeyString(t2, t1));
-	  					guide.add(getTableKeyString(t1), t1.getTableName(), getTableKeyString(t1));
+  						guide.add(getPrimaryKeyString(t2), t2.getTableName(), getForeignKeyString(t2, t1, fkSet));
+	  					guide.add(getPrimaryKeyString(t1), t1.getTableName(), getPrimaryKeyString(t1));
   					} else {
-  						guide.add(getTableKeyString(t2), t2.getTableName(), getTableKeyString(t2));
-	  					guide.add(getForeignKeyString(t1, t2), t1.getTableName(), getTableKeyString(t1));
+  						guide.add(getPrimaryKeyString(t2), t2.getTableName(), getPrimaryKeyString(t2));
+	  					guide.add(getForeignKeyString(t1, t2, fkSet), t1.getTableName(), getPrimaryKeyString(t1));
 	  				}
 	  			}
 	  			result.add(guide);
@@ -769,7 +831,7 @@ public class ORMappingImp implements ORMapping {
   /**
    * Helper methode.
    */
-  private String getTableKeyString(Table t) {
+  private String getPrimaryKeyString(Table t) {
   	String pkc[] = t.getPrimaryKeyColumns(), result;
   	
   	if (pkc.length == 1) {
@@ -789,14 +851,13 @@ public class ORMappingImp implements ORMapping {
   /**
    * Helper methode.
    */
-  private String getForeignKeyString(Table fkTable, Table pkTable) {
+  private String getForeignKeyString(Table fkTable, Table pkTable, Set fkSet) {
   	String fkc[] = fkTable.getForeignKeyColumns(), result = "?";
   	List theFK = new ArrayList();
   	
   	for (int i=0; i<fkc.length; i++) {
   		if ((fkTable.getForeignTable(fkc[i]).equals(pkTable.getTableName()))
-  		    && (fks.contains(fkc[i]))) {
-  		    	System.err.println(fks.toString());
+  		    && (fkSet.contains(fkc[i]))) {
   			theFK.add(fkc[i]);  			
   		}
   	}
@@ -812,7 +873,8 @@ public class ORMappingImp implements ORMapping {
   		}
   		result += ")";
   	}
-  	return result;
+  	
+    	return result;
   } 
   
   /**
@@ -840,5 +902,113 @@ public class ORMappingImp implements ORMapping {
   	
   	return result;
   }
-
+  
+  /**
+   * Buries the primary keys of the pkTables to all fkTables as foreign keys. 
+   * If pkTables size is greater than one, the number of the according buried foreign
+   * keys is related to the actual number of pkTables. That is, for each pkTable
+   * a foreign key will be added to the foreign key Tables. 
+   * @return a List of Strings that contains the names of all buried keys
+   * @param pkTables a List of tables which contain the primary keys
+   * @param fkTables a List of tables to which the foreign keys are going to be buried
+   * @param assEndName the name of the association end which belongs to the pkTables
+   * @param fkSet a Set as initialization for the result Set
+   */
+  private Set buryForeignKeys(List pkTables, List fkTables, String assEndName, Set fkSet) {
+  	Set result;
+  	Table fkTable, pkTable;
+  	String buriedKeyName, pkNames[];
+  	
+  	if (fkSet == null) {
+  		result = new HashSet();
+  	} else {
+  		result = fkSet;
+  	}
+  	  	
+  	for (Iterator i=fkTables.iterator(); i.hasNext(); ) {
+  		fkTable = (Table)i.next();
+  		
+  		for (Iterator k=pkTables.iterator(); k.hasNext(); ) {
+  			pkTable = (Table)k.next();
+  			pkNames = pkTable.getPrimaryKeyColumns();
+  			
+  			for (int l=0; l<pkNames.length; l++) {
+  				buriedKeyName = getColumnName(assEndName + SEPARATOR + pkNames[l], fkTable);
+  				fkTable.addColumn("", pkTable.getColumnType(pkNames[l]), buriedKeyName, false);
+  				fkTable.setForeignKey(buriedKeyName, pkTable.getTableName(), pkNames[l] );
+  				result.add(buriedKeyName);
+  			}
+  		}
+  	}
+  	
+  	return result;
+  }
+  
+  //-------------------------------- private methode tests --------------------------------
+  public void testBuryForeignKeys(boolean verbose) 
+  throws RuntimeException {
+  	List pkTables, fkTables;
+  	Set result;
+  	Table t, fk1, fk2;
+  	
+  	if (verbose) System.err.println("testBuryForeignKeys is running ...");
+  	if (verbose) System.err.print("initializing test objects ...");
+  	pkTables = new ArrayList();
+  	fkTables = new ArrayList();
+  	
+  	t = new Table("pkTable1");
+  	t.addColumn("", "int", "PK11", true);
+  	t.addColumn("", "int", "PK12", true);
+  	pkTables.add(t);
+  	
+  	t = new Table("pkTable2");
+  	t.addColumn("", "int", "PK21", true);
+  	t.addColumn("", "int", "PK22", true);
+  	pkTables.add(t);
+  	  	
+  	fk1 = new Table("fkTable1");
+  	fkTables.add(fk1);
+  	
+  	fk2 = new Table("fkTable2");
+  	fkTables.add(fk2);
+  	if (verbose) System.err.print("done\n");
+  	
+  	if (verbose) System.err.print("calling methode ... ");
+  	result = buryForeignKeys(pkTables, fkTables, "test", null);
+  	if (verbose) System.err.print("done\n");
+  	
+  	if (verbose) System.err.print("check result ... ");
+  	t = new Table("temp");
+  	if (result.size() != 4) {
+  		throw new RuntimeException("Wrong number of List entries:" + result.toString());
+  	}
+  	if ((!result.contains(getColumnName("TEST" + SEPARATOR + "PK11", t))) ||
+  	    (!result.contains(getColumnName("TEST" + SEPARATOR + "PK12", t))) ||
+  	    (!result.contains(getColumnName("TEST" + SEPARATOR + "PK21", t))) ||
+  	    (!result.contains(getColumnName("TEST" + SEPARATOR + "PK22", t)))) {
+  	   	throw new RuntimeException("List entries do not match excpected values:"  + result.toString());
+  	}
+  	if (verbose) System.err.print("done\n");
+  	   	
+  	if (verbose) System.err.print("check buried keys ... ");
+  	if ((!fk1.isForeignKeyColumn(getColumnName("TEST" + SEPARATOR + "PK11", t))) ||
+  	    (!fk1.isForeignKeyColumn(getColumnName("TEST" + SEPARATOR + "PK12", t))) ||
+  	    (!fk1.isForeignKeyColumn(getColumnName("TEST" + SEPARATOR + "PK21", t))) ||
+  	    (!fk1.isForeignKeyColumn(getColumnName("TEST" + SEPARATOR + "PK22", t)))) {
+  	   	throw new RuntimeException("Table entries of fk1 do not match excpected values !");
+  	}
+  	if ((!fk2.isForeignKeyColumn(getColumnName("TEST" + SEPARATOR + "PK11", t))) ||
+  	    (!fk2.isForeignKeyColumn(getColumnName("TEST" + SEPARATOR + "PK12", t))) ||
+  	    (!fk2.isForeignKeyColumn(getColumnName("TEST" + SEPARATOR + "PK21", t))) ||
+  	    (!fk2.isForeignKeyColumn(getColumnName("TEST" + SEPARATOR + "PK22", t)))) {
+  	   	throw new RuntimeException("Table entries of fk2 do not match excpected values !");
+  	}
+  	if ((!fk2.getForeignTable(getColumnName("TEST" + SEPARATOR + "PK11", t)).equals("pkTable1")) ||
+  	    (!fk2.getForeignColumn(getColumnName("TEST" + SEPARATOR + "PK11", t)).equals("PK11")) ||
+  	    (!fk2.getForeignTable(getColumnName("TEST" + SEPARATOR + "PK21", t)).equals("pkTable2")) ||
+  	    (!fk2.getForeignColumn(getColumnName("TEST" + SEPARATOR + "PK21", t)).equals("PK21"))) {
+  	    	throw new RuntimeException("Foreign references not properly set in fk2 !");
+  	}
+  	if (verbose) System.err.print("done\n");
+  }
 }

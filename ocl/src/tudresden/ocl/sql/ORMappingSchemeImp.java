@@ -31,13 +31,18 @@ import java.io.*;
  * @author Sten Loecher
  * @see tudresden.ocl.codegen.decl.ORMappingScheme
  * @see tudresden.ocl.codegen.decl.SQLCodeGenerator
+ * @see tudresden.ocl.codegen.decl.MappedClass
  * @see ORMapping
  */
 public class ORMappingSchemeImp implements ORMappingScheme {
 
   ORMapping theORM;
 
-  /** Maps classifiers to MappedClass objects. */
+  /**
+   * Maps classifiers to MappedClass objects.
+   * @key-type String
+   * @element-type MappedClass
+   */
   Map classifiersToMappedClasses;
 
   /**
@@ -78,7 +83,6 @@ public class ORMappingSchemeImp implements ORMappingScheme {
 
   	for (Iterator i=theORM.classifiers().iterator(); i.hasNext(); ) {
   		classifier = (String)i.next();
-  		System.err.println(classifier);
 
   		mc = new MappedClass(classifier);
   		for (Iterator k=theORM.getClassTables(classifier).iterator(); k.hasNext(); ) {
@@ -91,12 +95,14 @@ public class ORMappingSchemeImp implements ORMappingScheme {
   /**
    * Creates all necessary links between MappedClass objects. These links
    * result from association ends and generalization relationships.
+   * Futhermore, the according guides will be inserted.
    */
   private void createMappedClassLinks() {
   	Set dstn;
-  	Map gtae;
-  	String classifier, temp;
+  	Map gtae, assEnds;
+  	String classifier, temp, assEndName, assEndClassifier;
   	MappedClass mc;
+  	List guides;
 
  	for (Iterator i=classifiersToMappedClasses.keySet().iterator(); i.hasNext(); ) {
   		classifier = (String)i.next();
@@ -109,11 +115,18 @@ public class ORMappingSchemeImp implements ORMappingScheme {
   		}
 
   		// links resulting from association ends
-  		/*gtae = theORM.guidesToAssociationEnds(classifier);
-  		for (Iterator k=gtae.keySet().iterator(); k.hasNext(); ) {
-  			temp = (String)k.next();
-  			mc.addJoinGuide(temp, (Guide)gtae.get(temp));
-  		}*/
+  		assEnds = theORM.associationEnds(classifier);
+  		for (Iterator k=assEnds.keySet().iterator(); k.hasNext(); ) {
+  			assEndName = (String)k.next();
+  			assEndClassifier = (String)assEnds.get(assEndName);
+  			mc.addAssociationEnd(assEndName, (MappedClass)classifiersToMappedClasses.get(assEndClassifier));
+  			
+  			// add according guides
+  			guides = theORM.guidesToAssociationEnds(classifier, assEndName);
+  			for (Iterator l=guides.iterator(); l.hasNext(); ) {
+  				mc.addJoinGuide(assEndName, (Guide)l.next());
+  			}  			
+  		}
  	}
    }
 

@@ -56,9 +56,16 @@ public interface ORMapping {
    */
   public Set directSupertypeNames(String classifier);
   
+  /**
+   * @param classifier a classifier
+   * @return a Map that maps the names of all association ends to the
+   *         according class name
+   */
+  public Map associationEnds(String classifier);
+  
   /** 
    * @param classifier a classifier
-   * @param assEnd the nmae of the association end
+   * @param assEnd the name of the association end
    * @return a List that contains guides to to the specified association end from the classifier
    * @see tudresden.ocl.codegen.decl.Guide
    */
