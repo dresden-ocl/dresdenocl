@@ -71,15 +71,6 @@ public class TestString extends TestCase {
     assert( shallo.getFeature("bla").isUndefined() );
   }
   
-  public void testNull() {
-    assert( Ocl.getFor(null).isEqualTo(Ocl.getFor(null)).isTrue() );
-    assert( Ocl.getFor(null).isNotEqualTo(Ocl.getFor("")).isTrue() );
-    assert(! ((OclString)Ocl.getFor(null)).isUndefined() );
-    assert( ((OclString)Ocl.getFor(null)).substring(
-      (OclInteger)Ocl.getFor(1), (OclInteger)Ocl.getFor(2)).isUndefined() );
-    assert( ((OclSizable)Ocl.getFor(null)).size().isEqualTo(Ocl.getFor(0)).isTrue() );
-  }
-
   public static Test suite() {
     TestSuite suite=new TestSuite();
     suite.addTest( new TestString("testEqual") );
@@ -89,8 +80,7 @@ public class TestString extends TestCase {
     suite.addTest( new TestString("testLower") );
     suite.addTest( new TestString("testSubstring") );
     suite.addTest( new TestString("testFeature") );
-    suite.addTest( new TestString("testNull") );
-    
+
     return suite;
   }
 

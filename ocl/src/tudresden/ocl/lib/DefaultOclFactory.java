@@ -45,8 +45,9 @@ import java.util.Enumeration;
 public class DefaultOclFactory implements OclFactory {
 
   public OclRoot getOclRepresentationFor(Object o) {
-    if (o==null) return new OclString(null);
-    if (o instanceof String)
+    if (o==null)
+      return new OclAnyImpl(null);
+    else if (o instanceof String)
       return new OclString( (String)o );
     else if (o instanceof java.util.Collection) {
       java.util.Collection oc=(java.util.Collection)o;
@@ -116,7 +117,7 @@ public class DefaultOclFactory implements OclFactory {
 	{
 		if(java.lang.String.class==c)
 		{
-			return new OclString(null);
+			return new OclString("");
 		}
 		else if(Collection.class.isAssignableFrom(c))
 		{

@@ -40,17 +40,18 @@ import java.util.*;
  */
 public class OclString extends OclAny implements OclSizable {
 
-  /** The value of this OclString, stored as a java.lang.String. It may contain
-   *  a <code>null</code> reference.
+  /** The value of this OclString, stored as a java.lang.String. 
+   *  Must not be null.
    */
   private String sValue;
 
   /** package-visible constructor for OclString
    *
-   *  @param str the String to be represented; may be <code>null</code>
+   *  @param str the String to be represented; must not be <code>null</code>.
    */
   public OclString(String str) {
     sValue=str;
+    str.length();
   }
 
   /** constructor for undefined OclString */
@@ -74,14 +75,10 @@ public class OclString extends OclAny implements OclSizable {
         return new OclBoolean(0,getUndefinedReason());
       if(os.isUndefined())
         return new OclBoolean(0,os.getUndefinedReason());
-      if ( sValue==null ) {
-        return Ocl.getOclRepresentationFor(os.sValue==null);
+      if ( os.sValue.equals(this.sValue) ) {
+        return OclBoolean.TRUE;
       } else {
-        if ( os.sValue.equals(this.sValue) ) {
-          return OclBoolean.TRUE;
-        } else {
-          return OclBoolean.FALSE;
-        }
+        return OclBoolean.FALSE;
       }
     }
   }
@@ -105,42 +102,31 @@ public class OclString extends OclAny implements OclSizable {
     return isEqualTo(o).not();
   }
 
-  /** @return the number of characters of this OclString, or 0 if the
-   *          OclStrings value is <code>null</code>, or an undefined
+  /** @return the number of characters of this OclString, or an undefined
    *          Integer value if this string is undefined
    */
   public OclInteger size() {
     if (isUndefined())
       return new OclInteger(0,getUndefinedReason());
     else {
-      int i=(sValue==null) ? 0 : sValue.length();
-      return new OclInteger(i);
+      return new OclInteger(sValue.length());
     }
   }
 
-  /** @return the concatenation of this OclString and the operations parameter,
-   *          or the OclString with the value <code>null</code> if at least
-   *          one of both has the value <code>null</code>
+  /** @return the concatenation of this OclString and the operations parameter.
    */
   public OclString concat(OclString s) {
     if(isUndefined())
       return this;
     if(s.isUndefined())
       return s;
-    if (sValue==null || s.sValue==null)
-      return new OclString(null);
-    else {
-      String concat=sValue.concat(s.sValue);
-      return new OclString(concat);
-    }
+    return new OclString(sValue.concat(s.sValue));
   }
 
   /** @return an OclString like this with all characters converted to upper case
    */
   public OclString toUpper() {
     if (isUndefined()) {
-      return this;
-    } else if (sValue==null) {
       return this;
     } else {
       String upper=sValue.toUpperCase();
@@ -152,8 +138,6 @@ public class OclString extends OclAny implements OclSizable {
    */
   public OclString toLower() {
     if (isUndefined()) {
-      return this;
-    } else if (sValue==null) {
       return this;
     } else {
       String lower=sValue.toLowerCase();
@@ -170,17 +154,16 @@ public class OclString extends OclAny implements OclSizable {
   public OclString substring(OclInteger lower, OclInteger upper) {
     if(isUndefined())
       return this;
-    if(sValue==null) {
-      return new OclString(0,"called substring() on null-String");
-    } else {
-      try {
+    try 
+    {
         int start=lower.getInt();
         int end=upper.getInt();
         String sub=sValue.substring(start-1, end);
         return new OclString(sub);
-      } catch (IndexOutOfBoundsException ex) {
-        return new OclString(0,ex.toString());
-      }
+    } 
+    catch (IndexOutOfBoundsException ex) 
+    {
+      return new OclString(0,ex.toString());
     }
   }
 
