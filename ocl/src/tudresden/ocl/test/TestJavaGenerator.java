@@ -34,6 +34,7 @@ package tudresden.ocl.test;
 import junit.framework.*;
 import tudresden.ocl.codegen.*;
 import tudresden.ocl.OclTree;
+import tudresden.ocl.DocCheck;
 import tudresden.ocl.NameCreator;
 import java.io.*;
 import java.util.StringTokenizer;
@@ -634,7 +635,7 @@ public class TestJavaGenerator extends TestCase {
     boolean allIsFine=true;
     OclTree tree=null;
     try {
-      tree=OclTree.createTree(ocl);
+      tree=DocCheck.createTree(ocl);
       tree.applyDefaultNormalizations();
       CodeFragment[] frags=tree.getCode(new JavaCodeGenerator("this", "result", oclLibPackage));
       if (java.length!=frags.length) System.out.println("wrong number of fragments");

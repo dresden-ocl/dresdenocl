@@ -61,7 +61,7 @@ public class TestNameCreator extends TestCase {
 
   public void testReserveAllNames() {
     try {
-      OclTree tree=OclTree.createTree("context Test inv: let var0=4 in var1->forAll(var2, var3 | expression)");
+      OclTree tree=DocCheck.createTree("context Test inv: let var0=4 in var1->forAll(var2, var3 | expression)");
       NameCreator nc=new NameCreator();
       nc.reserveAllNames(tree);
       assert( ! nc.reserveName("self") );
@@ -71,7 +71,7 @@ public class TestNameCreator extends TestCase {
       assert( ! nc.reserveName("var2") );
       assert( ! nc.reserveName("var3") );
       nc.clear();
-      tree=OclTree.createTree("context Test::method() post: test->iterate(iter:Integer ; acc:Integer=0 | iter+acc) = 5");
+      tree=DocCheck.createTree("context Test::method() post: test->iterate(iter:Integer ; acc:Integer=0 | iter+acc) = 5");
       nc.reserveAllNames(tree);
       assert( ! nc.reserveName("self") );
       assert( ! nc.reserveName("result") );

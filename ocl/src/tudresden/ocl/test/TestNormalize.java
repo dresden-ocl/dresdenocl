@@ -221,10 +221,10 @@ public class TestNormalize extends TestCase {
    */
   protected boolean convertsTo(String before, String after) throws Exception {
     System.out.println("converting "+before);
-    OclTree tree=OclTree.createTree(before);
+    OclTree tree=DocCheck.createTree(before);
     tree.applyDefaultNormalizations();
-    OclTree otherTree=OclTree.createTree(after);
-    OclTree thirdTree=OclTree.createTree(after);
+    OclTree otherTree=DocCheck.createTree(after);
+    OclTree thirdTree=DocCheck.createTree(after);
     thirdTree.applyDefaultNormalizations();
 
     boolean norm = otherTree.equalsExpression( tree );

@@ -66,9 +66,9 @@ public class Test extends TestCase
       errors++;
       System.out.println(
         "ERROR: For classifier\""+classifier+
-        "\" feature \""+Model.qualifierString(name, qualifiers)+
-        "\": expected type \""+((type!=null)?Model.typeString(type):"NULL")+
-        "\", found \""+((restype!=null)?Model.typeString(restype):"NULL")+"\".");
+        "\" feature \""+Basic.qualifierString(name, qualifiers)+
+        "\": expected type \""+((type!=null)?Basic.typeString(type):"NULL")+
+        "\", found \""+((restype!=null)?Basic.typeString(restype):"NULL")+"\".");
       assert(false);
     }
   }
@@ -87,9 +87,9 @@ public class Test extends TestCase
       errors++;
       System.out.println(
         "ERROR: For classifier\""+classifier+
-        "\" feature \""+Model.signatureString(name,params)+
-        "\": expected type \""+((type!=null)?Model.typeString(type):"NULL")+
-        "\", found \""+((restype!=null)?Model.typeString(restype):"NULL")+"\".");
+        "\" feature \""+Basic.signatureString(name,params)+
+        "\": expected type \""+((type!=null)?Basic.typeString(type):"NULL")+
+        "\", found \""+((restype!=null)?Basic.typeString(restype):"NULL")+"\".");
       assert(false);
     }
   }
