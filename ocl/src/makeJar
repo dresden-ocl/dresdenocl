@@ -1,4 +1,9 @@
+export LIBFILES="\
+	tudresden/ocl/lib/*.class"
+jar -cf dresden-ocl-lib.jar $LIBFILES
+
 export ARGOFILES="\
+	$LIBFILES \
 	tudresden/ocl/*.class \
 	tudresden/ocl/*.gif \
 	tudresden/ocl/normalize/*.class \
@@ -7,7 +12,6 @@ export ARGOFILES="\
 	tudresden/ocl/check/bootstrap/constraints.txt \
 	tudresden/ocl/check/types/*.class \
 	tudresden/ocl/codegen/*.class \
-	tudresden/ocl/lib/*.class \
 	tudresden/ocl/parser/*.class \
 	tudresden/ocl/parser/analysis/*.class \
 	tudresden/ocl/parser/node/*.class \
@@ -17,6 +21,7 @@ export ARGOFILES="\
 	tudresden/ocl/parser/parser/parser.dat"
 #echo $ARGOFILES
 jar -cf ocl-argo.jar $ARGOFILES
+
 jar -cf dresden-ocl.jar $ARGOFILES \
 	tudresden/ocl/check/types/xmifacade/*.class \
 	tudresden/ocl/check/types/testfacade/*.class \
