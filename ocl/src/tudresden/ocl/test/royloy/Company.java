@@ -8,7 +8,7 @@ public class Company extends RLObject
   
   public String description;
   
-  public int numberOfEmployees;
+  public int numberOfEmployees=0;
 
   // Associations
 
@@ -31,6 +31,12 @@ public class Company extends RLObject
 
   public int getOldestEmployeeAge() {
   return 0;
+  }
+  
+  public void employ(Person p)
+  {
+    employees.add(p);
+    p.employers.add(this);
   }
   
   public String toString()
