@@ -19,11 +19,18 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.check.types.xmifacade;
 
 import java.util.*;
+import java.lang.*;
 import tudresden.ocl.check.types.*;
 import tudresden.ocl.check.OclTypeException;
 
 /**
    Implements ModelFacade using model information of a xmi file.
+   The actual Model object can be in one of two modes. In the first mode, called
+   "not rough", the Model has flattened generalization relationships and
+   dissolved associations. In the second mode, called "rough", the Model's
+   generalizations relationships are not flattened and the associations are not
+   dissolved. This mode enables the user of the Model to query the object oriented
+   information from a more structural point of view.
 
    Additional notes:
 
@@ -63,7 +70,20 @@ public final class Model implements ModelFacade
      so that regression tests have always the same description.
   */
   private String description;
-  
+
+  /**
+   * Flag for the distinction of rough and ordinary models.
+   * @author Sten Loecher
+   */
+  private boolean roughMode = false;
+
+  /**
+   * Set of associations in the model. If the model is in not rough mode,
+   * this variable must be set to null.
+   * @author Sten Loecher
+   */
+  private HashSet associations = null;
+
   public Model(String description)
   {
     this.description=description;
@@ -236,4 +256,101 @@ public final class Model implements ModelFacade
      t.toString();
   }
 
+  // ---------------------------------------------------------------------
+  /**
+   * @param roughMode true if the model is flattend and dissolved, false otherwise
+   * @author Sten Loecher
+   */
+  public void setRoughMode(boolean roughMode) {
+  	this.roughMode = roughMode;
+
+  	if (!roughMode) {
+  		associations = null;
+  	} else {
+  		associations = new HashSet();
+  	}
+  }
+
+  /**
+   * @return true if the model is in rough mode, false otherwise
+   * @author Sten Loecher
+   */
+  public boolean isRough() {
+  	return roughMode;
+  }
+
+  /**
+   * @param association an association
+   * @exception IllegalStateException if the model is not in rough mode
+   * @author Sten Loecher
+   */
+  public void putAssociation(ModelAssociation association)
+  throws IllegalStateException {
+  	if ((associations != null) && (roughMode == true)) {
+  		associations.add(association);
+  	} else {
+  		throw new IllegalStateException("Model must be in rough mode to use method putAssociation(...) !");
+  	}
+  }
+
+  /**
+   * @return a map containing all classifiers of the model
+   * @author Sten Loecher
+   */
+  public Map classifiers() {
+  	return Collections.unmodifiableMap(classifiers);
+  }
+
+  /**
+   * @return a set of all associations of the model
+   * @exception IllegalStateException if the model is not in rough mode
+   * @author Sten Loecher
+   */
+  public Set associations()
+  throws IllegalStateException {
+  	if ((associations != null) && (roughMode == true)) {
+  		return Collections.unmodifiableSet(associations);
+  	} else {
+  		throw new IllegalStateException("Model must be in rough mode to use method associations() !");
+  	}
+  }
+
+  /**
+   * This methode will be called instead of flatten if the model is rough.
+   * It determines all generalization relationships but does no flattening.
+   * @exception IllegalStateException if the model is not in rough mode
+   * @author Sten Loecher
+   */
+  public void determineAllSupertypes()
+  throws IllegalStateException {
+  	if (!roughMode) throw new IllegalStateException("Model must be in rough mode to use method determineAllSupertypes() !");
+
+  	for(Iterator i=classifiers.values().iterator(); i.hasNext(); )
+		((ModelClass)(i.next())).determineAllSupertypes();
+  }
+
+  /**
+   * This methode determines all direct subtypes of a given class in the model.
+   * @param mc the class
+   * @return a set that contains all subtypes of the given class
+   * @exception IllegalArgumentException if the class is not contained within this model
+   * @author Sten Loecher
+   */
+  public Set getDirectClassSubtypes(ModelClass mc)
+  throws IllegalArgumentException {
+  	if (!classifiers.containsValue(mc)) throw new IllegalArgumentException("No valid ModelClass !");
+
+  	Iterator i = classifiers.values().iterator();
+  	HashSet retSet = new HashSet();
+  	ModelClass c;
+
+  	while (i.hasNext()) {
+  		c = (ModelClass)i.next();
+  		if (c.isDirectSupertype(mc)) {
+  			retSet.add(c);
+  		}
+  	}
+
+  	return retSet;
+  }
 }

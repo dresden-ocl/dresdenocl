@@ -42,6 +42,12 @@ public final class XmiParser
   private boolean qualifiersOnTarget=false;
 
   private String url;
+  
+  /**
+   * Flag for distinction of work modes.
+   * @author Sten Loecher
+   */
+  private boolean roughMode = false;
 
   public static Model createModel(String url, String description) 
     throws org.xml.sax.SAXException, java.io.IOException
@@ -182,17 +188,29 @@ public final class XmiParser
     for(int i=0; i<nodelistlength; i++)
       association.addEnd(parseAssociationEnd((Element)(nodelist.item(i))));
 
-    association.dissolve(model, qualifiersOnTarget);
+    // edited by sl13
+    if (!roughMode) {
+    	association.dissolve(model, qualifiersOnTarget);
+    } else {
+    	model.putAssociation(association);
+    }
   }
 
   private LinkedList generalizations=new LinkedList();
   private HashMap associations=new HashMap();
 
-  public XmiParser(String url, String description, boolean qualifiersOnTarget) 
+  /**
+   * Note: Core method to create a model from a XMI file. That work was formerly done 
+   * by the only constructor of XmiParser.
+   */
+  private void parse(String url, String description, boolean qualifiersOnTarget) 
     throws org.xml.sax.SAXException, java.io.IOException
   {
     this.qualifiersOnTarget=qualifiersOnTarget;
     model=new Model(description);
+    
+    // edited by sl13
+    if (roughMode) model.setRoughMode(true);
 
     DOMParser parser = new DOMParser();
     parser.parse(url);
@@ -228,8 +246,13 @@ public final class XmiParser
       elaborate((ModelClass)(i.next()));
     classElements=null;
     
-
-    model.flatten();
+    // edited by sl13
+    if (!roughMode) {
+    	 model.flatten();
+    	} else {
+    	 model.determineAllSupertypes();
+    }
+    	
     model.printData();
 
     url=null;
@@ -515,7 +538,49 @@ public final class XmiParser
       catch(org.xml.sax.SAXException e) {e.printStackTrace(System.out);}
     }
   }
-
+  
+  // ---------------------------------------------------------------------------
+  /**
+   * @param url xmi source file url
+   * @param description a description of the model
+   * @return a model with unflattened model classes and undissolved associations
+   * @author Sten Loecher
+   */
+  public static Model createRoughModel(String url, String description) 
+    throws org.xml.sax.SAXException, java.io.IOException {
+  	return (new XmiParser(url, description, false, true)).model;
+  }
+  
+  /**
+   * A constructor that supports the creations of rough models. That is, no flattening of 
+   * generalization relationships and dissolving of associations will be done. One can 
+   * determine the quality of the model with the method isRough() in class Model.
+   * @param url xmi source file url
+   * @param description a description of the model
+   * @param qualifiersOnTarget see field description of qualifiersOnTarget
+   * @param roughMode true if the model should be created without flattening and dissolving, 
+   *                  false otherwise
+   * @author Sten Loecher
+   */
+  public XmiParser(String url, String description, boolean qualifiersOnTarget, boolean roughMode)
+    throws org.xml.sax.SAXException, java.io.IOException {
+    	this.roughMode = roughMode;
+    	parse(url, description, qualifiersOnTarget);
+  }
+  
+  /**
+   * The classic constructor. Calling this constructor creates a model with flattend 
+   * generalization relationships and dissolved associations.
+   * @param url xmi source file url
+   * @param description a description of the model
+   * @param qualifiersOnTarget see field description of qualifiersOnTarget
+   */
+  public XmiParser(String url, String description, boolean qualifiersOnTarget) 
+    throws org.xml.sax.SAXException, java.io.IOException {
+    	roughMode = false;
+    	parse(url, description, qualifiersOnTarget);
+  }
+  
 }
 
 
