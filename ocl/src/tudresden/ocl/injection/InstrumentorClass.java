@@ -29,7 +29,7 @@ final class InstrumentorClass
      Collects all behavioral features of the current class, 
      except automatically generated features.
      Is used only, if delayinsertions is true. Otherwise it is null.
-     @see OclInjector#delayinsertions
+     @see Instrumentor#delayinsertions
      @see JavaBehaviour
      @element-type JavaBehaviour
   */
@@ -53,7 +53,7 @@ final class InstrumentorClass
   /**
      Whether this class has at least one constructor or not.
      Is used to decide, whether the default constructor has
-     to be replaced by {@link OclInjector#writeDefaultConstructor}.
+     to be replaced by {@link Instrumentor#writeDefaultConstructor}.
   */
   boolean has_constructors=false;
 	
