@@ -218,7 +218,7 @@ public class OCLInjectorBuilder implements IdeActivatable, IdeInspectorBuilder {
             ),
             commandListener
         );
-        popupMenuItemInstrumentClass.setText("Instrument class file(s)");
+        popupMenuItemInstrumentClass.setText("Instrument class(es)");
         // popup menu's entry "Clean class file"
         popupMenuItemCleanClass = icm.createItem(
             "_popupMenuItemCleanClass",
@@ -228,7 +228,7 @@ public class OCLInjectorBuilder implements IdeActivatable, IdeInspectorBuilder {
             ),
             commandListener
         );
-        popupMenuItemCleanClass.setText("Clean class file(s)");
+        popupMenuItemCleanClass.setText("Clean class(es)");
     }
 
 
