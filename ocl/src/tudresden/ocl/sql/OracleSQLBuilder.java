@@ -68,7 +68,10 @@ public class OracleSQLBuilder implements SQLBuilder {
     datatypes.put(TypeManager.TIMESTAMP, "DATE");
     reserved = new HashSet();
     try{
-        BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("oracleReserved.txt")));
+        BufferedReader r = new BufferedReader(new InputStreamReader(
+          //getClass().getResourceAsStream("oracleReserved.txt")
+          OracleSQLBuilder.class.getResourceAsStream("oracleReserved.txt")
+        ));
         if(r != null)
             try{
               String line="";

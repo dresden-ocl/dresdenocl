@@ -22,6 +22,7 @@
 
 // OCLEditor.java -- new version of the ocl editor intented for practical use
 //
+// 02/12/2003  [sz9 ]  Provided access to the toolbars. Also gave them names.
 // 08/08/2002  [sz9 ]  Fixed issue #511143 by hardcoding line breaking at column 50.
 // 10/16/2001  [sz9 ]  Added support for editor instances that whish to prevent
 //                     a constraint's context from being edited.
@@ -451,6 +452,20 @@ public class OCLEditor extends javax.swing.JPanel
     m_ocltbQuickBar.setVisible (false);
   }
 
+  /**
+   * Provides access to the toolbar.
+   */
+  protected JToolBar getToolbar() {
+    return m_jtbTools;
+  }
+  
+  /**
+   * Provides access to the syntax assistant toolbar.
+   */
+  protected OCLToolbar getSyntaxAssistantToolbar() {
+    return m_ocltbQuickBar;
+  }
+  
   /**
    * Create and return an instance of ConstraintTableModel that will be used
    * to represent the list of constraints currently being edited.
@@ -938,6 +953,7 @@ public class OCLEditor extends javax.swing.JPanel
     
     setPreferredSize (new java.awt.Dimension (500, 300));
     setMinimumSize (new java.awt.Dimension (500, 300));
+    m_jtbTools.setName ("OCL Editor Tools");
     m_jbNew.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/New16.gif")));
     m_jbNew.setToolTipText ("Click to create a new constraint");
     m_jbNew.setMargin (new java.awt.Insets (0, 0, 0, 0));
