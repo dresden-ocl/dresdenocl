@@ -9,4 +9,3 @@ public class ParserException extends Exception
         super(message);
     }
 }
-

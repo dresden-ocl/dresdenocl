@@ -33,4 +33,3 @@ public final class TDiv extends Token
         throw new RuntimeException("Cannot change TDiv text.");
     }
 }
-

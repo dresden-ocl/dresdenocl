@@ -33,4 +33,3 @@ public final class TComma extends Token
         throw new RuntimeException("Cannot change TComma text.");
     }
 }
-

@@ -33,4 +33,3 @@ public final class TRBracket extends Token
         throw new RuntimeException("Cannot change TRBracket text.");
     }
 }
-

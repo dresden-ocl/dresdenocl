@@ -71,4 +71,3 @@ public final class X2PPostfixExpressionTail extends XPPostfixExpressionTail
             toString(_pPostfixExpressionTail_);
     }
 }
-

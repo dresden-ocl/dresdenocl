@@ -105,4 +105,3 @@ public final class X1PDeclaratorTail extends XPDeclaratorTail
             toString(_pDeclaratorTail_);
     }
 }
-

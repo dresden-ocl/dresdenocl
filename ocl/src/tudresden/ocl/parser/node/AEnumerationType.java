@@ -353,4 +353,3 @@ public final class AEnumerationType extends PEnumerationType
         }
     }
 }
-

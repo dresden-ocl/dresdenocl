@@ -33,4 +33,3 @@ public final class TEqual extends Token
         throw new RuntimeException("Cannot change TEqual text.");
     }
 }
-

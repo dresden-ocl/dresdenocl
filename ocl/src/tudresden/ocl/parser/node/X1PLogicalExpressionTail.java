@@ -105,4 +105,3 @@ public final class X1PLogicalExpressionTail extends XPLogicalExpressionTail
             toString(_pLogicalExpressionTail_);
     }
 }
-

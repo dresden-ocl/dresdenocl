@@ -33,4 +33,3 @@ public final class TEndif extends Token
         throw new RuntimeException("Cannot change TEndif text.");
     }
 }
-

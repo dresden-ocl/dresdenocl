@@ -33,4 +33,3 @@ public final class TRPar extends Token
         throw new RuntimeException("Cannot change TRPar text.");
     }
 }
-

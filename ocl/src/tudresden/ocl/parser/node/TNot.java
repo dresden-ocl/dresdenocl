@@ -33,4 +33,3 @@ public final class TNot extends Token
         throw new RuntimeException("Cannot change TNot text.");
     }
 }
-

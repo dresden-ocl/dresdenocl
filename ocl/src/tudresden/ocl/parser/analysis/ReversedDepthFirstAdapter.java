@@ -2526,4 +2526,3 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outANotUnaryOperator(node);
     }
 }
-

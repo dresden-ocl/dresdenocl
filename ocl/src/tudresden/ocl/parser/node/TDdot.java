@@ -33,4 +33,3 @@ public final class TDdot extends Token
         throw new RuntimeException("Cannot change TDdot text.");
     }
 }
-

@@ -33,4 +33,3 @@ public final class TMult extends Token
         throw new RuntimeException("Cannot change TMult text.");
     }
 }
-

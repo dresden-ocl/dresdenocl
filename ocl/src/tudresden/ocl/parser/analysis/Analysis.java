@@ -174,4 +174,3 @@ public interface Analysis extends Switch
     void caseTStringLit(TStringLit node);
     void caseEOF(EOF node);
 }
-

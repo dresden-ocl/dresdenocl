@@ -33,4 +33,3 @@ public final class TEnum extends Token
         throw new RuntimeException("Cannot change TEnum text.");
     }
 }
-

@@ -2527,4 +2527,3 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outANotUnaryOperator(node);
     }
 }
-

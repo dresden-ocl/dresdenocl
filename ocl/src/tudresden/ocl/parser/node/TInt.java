@@ -28,4 +28,3 @@ public final class TInt extends Token
         ((Analysis) sw).caseTInt(this);
     }
 }
-

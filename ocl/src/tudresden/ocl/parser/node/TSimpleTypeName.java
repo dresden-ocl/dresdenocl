@@ -28,4 +28,3 @@ public final class TSimpleTypeName extends Token
         ((Analysis) sw).caseTSimpleTypeName(this);
     }
 }
-

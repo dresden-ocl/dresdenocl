@@ -33,4 +33,3 @@ public final class TChannel extends Token
         throw new RuntimeException("Cannot change TChannel text.");
     }
 }
-

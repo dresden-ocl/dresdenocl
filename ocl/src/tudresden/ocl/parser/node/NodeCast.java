@@ -16,4 +16,3 @@ public class NodeCast implements Cast
         return (Node) o;
     }
 }
-

@@ -6,4 +6,3 @@ public interface Cast
 {
     Object cast(Object o);
 }
-

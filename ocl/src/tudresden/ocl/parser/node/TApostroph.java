@@ -33,4 +33,3 @@ public final class TApostroph extends Token
         throw new RuntimeException("Cannot change TApostroph text.");
     }
 }
-

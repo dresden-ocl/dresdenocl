@@ -81,4 +81,3 @@ public final class ATypeNamePathNameBegin extends PPathNameBegin
 
     }
 }
-

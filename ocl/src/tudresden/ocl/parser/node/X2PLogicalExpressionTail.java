@@ -71,4 +71,3 @@ public final class X2PLogicalExpressionTail extends XPLogicalExpressionTail
             toString(_pLogicalExpressionTail_);
     }
 }
-

@@ -33,4 +33,3 @@ public final class TPlus extends Token
         throw new RuntimeException("Cannot change TPlus text.");
     }
 }
-

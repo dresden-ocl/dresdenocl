@@ -169,4 +169,3 @@ public final class APathTypeName extends PPathTypeName
         }
     }
 }
-

@@ -28,4 +28,3 @@ public final class TName extends Token
         ((Analysis) sw).caseTName(this);
     }
 }
-

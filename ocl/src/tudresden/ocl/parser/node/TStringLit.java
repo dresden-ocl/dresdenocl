@@ -28,4 +28,3 @@ public final class TStringLit extends Token
         ((Analysis) sw).caseTStringLit(this);
     }
 }
-

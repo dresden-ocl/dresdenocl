@@ -28,4 +28,3 @@ public final class TTSequence extends Token
         ((Analysis) sw).caseTTSequence(this);
     }
 }
-

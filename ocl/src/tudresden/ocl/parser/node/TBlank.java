@@ -28,4 +28,3 @@ public final class TBlank extends Token
         ((Analysis) sw).caseTBlank(this);
     }
 }
-

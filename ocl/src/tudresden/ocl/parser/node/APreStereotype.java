@@ -81,4 +81,3 @@ public final class APreStereotype extends PStereotype
 
     }
 }
-

@@ -33,4 +33,3 @@ public final class TContext extends Token
         throw new RuntimeException("Cannot change TContext text.");
     }
 }
-

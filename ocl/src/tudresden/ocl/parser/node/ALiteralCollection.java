@@ -210,4 +210,3 @@ public final class ALiteralCollection extends PLiteralCollection
 
     }
 }
-

@@ -33,4 +33,3 @@ public final class TTIf extends Token
         throw new RuntimeException("Cannot change TTIf text.");
     }
 }
-

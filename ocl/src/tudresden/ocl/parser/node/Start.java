@@ -120,4 +120,3 @@ public final class Start extends Node
             toString(_eof_);
     }
 }
-

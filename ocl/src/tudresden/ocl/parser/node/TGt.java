@@ -33,4 +33,3 @@ public final class TGt extends Token
         throw new RuntimeException("Cannot change TGt text.");
     }
 }
-

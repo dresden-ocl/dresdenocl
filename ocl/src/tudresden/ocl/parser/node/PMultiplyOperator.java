@@ -5,4 +5,3 @@ package tudresden.ocl.parser.node;
 public abstract class PMultiplyOperator extends Node
 {
 }
-

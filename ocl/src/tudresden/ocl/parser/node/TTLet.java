@@ -33,4 +33,3 @@ public final class TTLet extends Token
         throw new RuntimeException("Cannot change TTLet text.");
     }
 }
-

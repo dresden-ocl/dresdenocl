@@ -28,4 +28,3 @@ public final class TTCollection extends Token
         ((Analysis) sw).caseTTCollection(this);
     }
 }
-

@@ -71,4 +71,3 @@ public final class X2PPathNameTail extends XPPathNameTail
             toString(_pPathNameTail_);
     }
 }
-

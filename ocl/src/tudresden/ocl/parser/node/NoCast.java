@@ -15,4 +15,3 @@ public class NoCast implements Cast
         return o;
     }
 }
-

@@ -33,4 +33,3 @@ public final class TDcolon extends Token
         throw new RuntimeException("Cannot change TDcolon text.");
     }
 }
-

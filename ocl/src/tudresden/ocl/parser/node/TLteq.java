@@ -33,4 +33,3 @@ public final class TLteq extends Token
         throw new RuntimeException("Cannot change TLteq text.");
     }
 }
-

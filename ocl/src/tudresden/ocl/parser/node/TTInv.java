@@ -33,4 +33,3 @@ public final class TTInv extends Token
         throw new RuntimeException("Cannot change TTInv text.");
     }
 }
-

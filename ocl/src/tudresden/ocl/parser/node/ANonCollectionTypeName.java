@@ -81,4 +81,3 @@ public final class ANonCollectionTypeName extends PTypeName
 
     }
 }
-

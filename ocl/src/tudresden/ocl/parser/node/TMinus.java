@@ -33,4 +33,3 @@ public final class TMinus extends Token
         throw new RuntimeException("Cannot change TMinus text.");
     }
 }
-

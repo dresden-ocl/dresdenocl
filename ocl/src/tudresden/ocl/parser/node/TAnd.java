@@ -33,4 +33,3 @@ public final class TAnd extends Token
         throw new RuntimeException("Cannot change TAnd text.");
     }
 }
-

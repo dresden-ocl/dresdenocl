@@ -33,4 +33,3 @@ public final class TImplies extends Token
         throw new RuntimeException("Cannot change TImplies text.");
     }
 }
-

@@ -33,4 +33,3 @@ public final class TRBrace extends Token
         throw new RuntimeException("Cannot change TRBrace text.");
     }
 }
-

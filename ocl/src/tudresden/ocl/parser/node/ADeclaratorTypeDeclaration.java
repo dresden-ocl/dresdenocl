@@ -124,4 +124,3 @@ public final class ADeclaratorTypeDeclaration extends PDeclaratorTypeDeclaration
 
     }
 }
-

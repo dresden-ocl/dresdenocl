@@ -210,4 +210,3 @@ public final class ACollectionTypeName extends PTypeName
 
     }
 }
-

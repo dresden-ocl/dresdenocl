@@ -33,4 +33,3 @@ public final class TLt extends Token
         throw new RuntimeException("Cannot change TLt text.");
     }
 }
-

@@ -28,4 +28,3 @@ public final class EOF extends Token
         ((Analysis) sw).caseEOF(this);
     }
 }
-

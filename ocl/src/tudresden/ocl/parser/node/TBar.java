@@ -33,4 +33,3 @@ public final class TBar extends Token
         throw new RuntimeException("Cannot change TBar text.");
     }
 }
-

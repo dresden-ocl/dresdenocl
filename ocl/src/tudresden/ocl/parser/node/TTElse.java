@@ -33,4 +33,3 @@ public final class TTElse extends Token
         throw new RuntimeException("Cannot change TTElse text.");
     }
 }
-

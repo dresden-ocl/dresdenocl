@@ -81,4 +81,3 @@ public final class APathSimpleTypeSpecifier extends PSimpleTypeSpecifier
 
     }
 }
-

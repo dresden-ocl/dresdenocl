@@ -33,4 +33,3 @@ public final class TColon extends Token
         throw new RuntimeException("Cannot change TColon text.");
     }
 }
-

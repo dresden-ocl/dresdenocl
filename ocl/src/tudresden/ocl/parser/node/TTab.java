@@ -28,4 +28,3 @@ public final class TTab extends Token
         ((Analysis) sw).caseTTab(this);
     }
 }
-

@@ -279,4 +279,3 @@ class TokenIndex extends AnalysisAdapter
         index = 53;
     }
 }
-

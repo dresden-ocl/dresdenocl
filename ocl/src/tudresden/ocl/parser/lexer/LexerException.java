@@ -9,4 +9,3 @@ public class LexerException extends Exception
         super(message);
     }
 }
-

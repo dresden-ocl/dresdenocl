@@ -33,4 +33,3 @@ public final class TSemicolon extends Token
         throw new RuntimeException("Cannot change TSemicolon text.");
     }
 }
-

@@ -33,4 +33,3 @@ public final class TAt extends Token
         throw new RuntimeException("Cannot change TAt text.");
     }
 }
-

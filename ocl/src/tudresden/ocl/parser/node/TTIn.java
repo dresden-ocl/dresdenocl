@@ -33,4 +33,3 @@ public final class TTIn extends Token
         throw new RuntimeException("Cannot change TTIn text.");
     }
 }
-

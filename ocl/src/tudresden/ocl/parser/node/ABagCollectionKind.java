@@ -81,4 +81,3 @@ public final class ABagCollectionKind extends PCollectionKind
 
     }
 }
-

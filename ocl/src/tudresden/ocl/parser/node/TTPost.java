@@ -33,4 +33,3 @@ public final class TTPost extends Token
         throw new RuntimeException("Cannot change TTPost text.");
     }
 }
-

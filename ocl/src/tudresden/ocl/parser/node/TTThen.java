@@ -33,4 +33,3 @@ public final class TTThen extends Token
         throw new RuntimeException("Cannot change TTThen text.");
     }
 }
-

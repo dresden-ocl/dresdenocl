@@ -71,4 +71,3 @@ public final class X2PFormalParameterListTail extends XPFormalParameterListTail
             toString(_pFormalParameterListTail_);
     }
 }
-

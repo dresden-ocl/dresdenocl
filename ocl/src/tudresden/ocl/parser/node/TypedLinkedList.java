@@ -140,4 +140,3 @@ public class TypedLinkedList extends LinkedList
         }
     }
 }
-

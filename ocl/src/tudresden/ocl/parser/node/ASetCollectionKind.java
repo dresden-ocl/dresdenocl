@@ -81,4 +81,3 @@ public final class ASetCollectionKind extends PCollectionKind
 
     }
 }
-

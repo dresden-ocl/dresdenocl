@@ -81,4 +81,3 @@ public final class AArrowPostfixExpressionTailBegin extends PPostfixExpressionTa
 
     }
 }
-

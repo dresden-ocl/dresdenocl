@@ -33,4 +33,3 @@ public final class TGteq extends Token
         throw new RuntimeException("Cannot change TGteq text.");
     }
 }
-

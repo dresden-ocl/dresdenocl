@@ -33,4 +33,3 @@ public final class TTPre extends Token
         throw new RuntimeException("Cannot change TTPre text.");
     }
 }
-

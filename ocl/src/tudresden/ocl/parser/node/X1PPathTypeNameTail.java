@@ -105,4 +105,3 @@ public final class X1PPathTypeNameTail extends XPPathTypeNameTail
             toString(_pPathTypeNameTail_);
     }
 }
-

@@ -13,4 +13,3 @@ final class State
         this.node = node;
     }
 }
-

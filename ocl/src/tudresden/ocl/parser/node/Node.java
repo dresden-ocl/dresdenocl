@@ -2,7 +2,6 @@
 
 package tudresden.ocl.parser.node;
 
-//import java.util.*;
 import java.util.*;
 import tudresden.ocl.parser.analysis.*;
 
@@ -77,4 +76,3 @@ public abstract class Node implements Switchable, Cloneable
         return clone;
     }
 }
-

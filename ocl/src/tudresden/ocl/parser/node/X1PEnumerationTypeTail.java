@@ -105,4 +105,3 @@ public final class X1PEnumerationTypeTail extends XPEnumerationTypeTail
             toString(_pEnumerationTypeTail_);
     }
 }
-

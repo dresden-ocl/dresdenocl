@@ -33,4 +33,3 @@ public final class TLPar extends Token
         throw new RuntimeException("Cannot change TLPar text.");
     }
 }
-

@@ -261,4 +261,3 @@ public final class AStandardDeclarator extends PDeclarator
         }
     }
 }
-

@@ -51,4 +51,3 @@ public abstract class Token extends Node
     {
     }
 }
-

@@ -28,4 +28,3 @@ public final class TTBag extends Token
         ((Analysis) sw).caseTTBag(this);
     }
 }
-

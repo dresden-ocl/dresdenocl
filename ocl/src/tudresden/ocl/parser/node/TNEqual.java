@@ -33,4 +33,3 @@ public final class TNEqual extends Token
         throw new RuntimeException("Cannot change TNEqual text.");
     }
 }
-

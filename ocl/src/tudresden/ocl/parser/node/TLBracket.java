@@ -33,4 +33,3 @@ public final class TLBracket extends Token
         throw new RuntimeException("Cannot change TLBracket text.");
     }
 }
-

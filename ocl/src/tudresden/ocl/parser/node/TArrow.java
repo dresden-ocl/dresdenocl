@@ -33,4 +33,3 @@ public final class TArrow extends Token
         throw new RuntimeException("Cannot change TArrow text.");
     }
 }
-

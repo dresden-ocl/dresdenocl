@@ -167,4 +167,3 @@ public final class AEnumerationTypeTail extends PEnumerationTypeTail
 
     }
 }
-

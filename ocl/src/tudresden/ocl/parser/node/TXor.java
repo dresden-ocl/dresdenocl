@@ -33,4 +33,3 @@ public final class TXor extends Token
         throw new RuntimeException("Cannot change TXor text.");
     }
 }
-

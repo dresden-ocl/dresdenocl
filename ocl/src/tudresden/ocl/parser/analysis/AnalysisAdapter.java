@@ -872,4 +872,3 @@ public class AnalysisAdapter implements Analysis
     {
     }
 }
-

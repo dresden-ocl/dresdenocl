@@ -71,4 +71,3 @@ public final class X2PEnumerationTypeTail extends XPEnumerationTypeTail
             toString(_pEnumerationTypeTail_);
     }
 }
-

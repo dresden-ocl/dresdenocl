@@ -81,4 +81,3 @@ public final class ANotUnaryOperator extends PUnaryOperator
 
     }
 }
-

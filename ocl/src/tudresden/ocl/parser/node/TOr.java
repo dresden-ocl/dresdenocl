@@ -33,4 +33,3 @@ public final class TOr extends Token
         throw new RuntimeException("Cannot change TOr text.");
     }
 }
-

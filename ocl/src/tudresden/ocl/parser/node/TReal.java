@@ -28,4 +28,3 @@ public final class TReal extends Token
         ((Analysis) sw).caseTReal(this);
     }
 }
-

@@ -28,4 +28,3 @@ public final class TBool extends Token
         ((Analysis) sw).caseTBool(this);
     }
 }
-

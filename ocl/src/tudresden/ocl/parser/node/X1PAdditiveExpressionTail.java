@@ -105,4 +105,3 @@ public final class X1PAdditiveExpressionTail extends XPAdditiveExpressionTail
             toString(_pAdditiveExpressionTail_);
     }
 }
-

@@ -105,4 +105,3 @@ public final class X1PMultiplicativeExpressionTail extends XPMultiplicativeExpre
             toString(_pMultiplicativeExpressionTail_);
     }
 }
-

@@ -28,4 +28,3 @@ public final class TComment extends Token
         ((Analysis) sw).caseTComment(this);
     }
 }
-
