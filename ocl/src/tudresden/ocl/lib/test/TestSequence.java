@@ -2,7 +2,7 @@ package tudresden.ocl.lib.test;
 
 import tudresden.ocl.lib.*;
 import java.util.*;
-import test.framework.*;
+import junit.framework.*;
 
 public class TestSequence extends TestCase {
 

@@ -25,7 +25,7 @@ import tudresden.ocl.check.types.xmifacade.*;
 import java.io.PrintStream;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
-import test.framework.*;
+import junit.framework.*;
 
 public class Test extends TestCase
 {
@@ -238,7 +238,7 @@ public class Test extends TestCase
     }
   }
 
-  public static test.framework.Test suite()
+  public static junit.framework.Test suite()
   {
     TestSuite suite=new TestSuite();
     suite.addTest(new Test("doTest"));

@@ -31,7 +31,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package tudresden.ocl.test;
 
-import test.framework.*;
+import junit.framework.*;
 import tudresden.ocl.*;
 import tudresden.ocl.parser.*;
 import tudresden.ocl.check.OclTypeException;

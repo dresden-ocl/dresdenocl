@@ -1,7 +1,7 @@
 package tudresden.ocl.lib.test;
 
 import tudresden.ocl.lib.*;
-import test.framework.*;
+import junit.framework.*;
 import java.util.*;
 
 public class TestArgoNameAdapter extends TestCase {

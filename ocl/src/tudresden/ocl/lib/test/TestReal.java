@@ -1,7 +1,7 @@
 package tudresden.ocl.lib.test;
 
 import tudresden.ocl.lib.*;
-import test.framework.*;
+import junit.framework.*;
 
 public class TestReal extends TestCase {
 

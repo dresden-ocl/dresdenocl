@@ -31,7 +31,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package tudresden.ocl.test;
 
-import test.framework.*;
+import junit.framework.*;
 import java.util.*;
 
 public class TestAll extends TestCase {
