@@ -28,7 +28,7 @@ public class JavaClass extends JavaFeature
 {
 
   /**
-     Tells, whether this class has any constructors.
+     Tells, whether this class has any explicit constructors.
      Is initialized to false, and set to true by 
      {@see onConstructorAdded()}.
   */
@@ -53,6 +53,14 @@ public class JavaClass extends JavaFeature
   void onConstructorAdded()
   {
     has_constructors=true;
+  }
+  
+  /**
+     Returns, whether this class has any explicit constructors.
+  */
+  public boolean hasConstructors()
+  {
+    return has_constructors;
   }
 
   /**

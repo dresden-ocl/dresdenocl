@@ -59,7 +59,6 @@ public final class JavaConstructor extends JavaBehaviour
     throws InjectorParseException
   {
     super(parent, modifiers, null, name);
-    parent.onConstructorAdded();
   }
 
   public final void addParameter(String paramtype, String paramname)
@@ -133,14 +132,16 @@ public final class JavaConstructor extends JavaBehaviour
     last_param_end=pos;
   }
 
+  /**
+     See Java Language Specification 8.6.3 
+     &quot;Constructor Modifiers&quot;
+  */
   public final int getAllowedModifiers()
   {
     return
       java.lang.reflect.Modifier.PUBLIC |
       java.lang.reflect.Modifier.PROTECTED |
-      java.lang.reflect.Modifier.PRIVATE |
-      java.lang.reflect.Modifier.NATIVE |
-      java.lang.reflect.Modifier.SYNCHRONIZED;
+      java.lang.reflect.Modifier.PRIVATE;
   }
 
   public final void printMore(PrintStream o)

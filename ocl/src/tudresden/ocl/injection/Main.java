@@ -130,6 +130,8 @@ final class OclInjector implements InjectionConsumer
     if(delayinsertions)
       for(Iterator i=methods.iterator(); i.hasNext(); )
         writeWrapper((JavaBehaviour)i.next());
+    if(!jc.hasConstructors())
+      writeDefaultConstructor(jc);
     for(Iterator i=observedFeatures.iterator(); i.hasNext(); )
       writeObserver((JavaFeature)i.next());
     writeChangedChecker();
@@ -476,10 +478,10 @@ final class OclInjector implements InjectionConsumer
     }
   }
   
-  private final boolean hasInvariantScope(JavaBehaviour jb)
+  private final boolean hasInvariantScope(JavaFeature jf)
   {
     return
-      (getInvariantScope(jb.getModifiers()) >= config.invariantScope);
+      (getInvariantScope(jf.getModifiers()) >= config.invariantScope);
   }
   
   private final void writeWrapperHeader(JavaBehaviour jb)
@@ -690,6 +692,36 @@ final class OclInjector implements InjectionConsumer
     o.write("  }");
   }
 
+  /**
+     See Java Language Specification 8.6.7
+     &quot;Default Constructor&quot
+  */
+  private final void writeDefaultConstructor(JavaClass jc) 
+    throws IOException
+  {
+    Writer o=output;
+    
+    o.write("/**\n    A default constructor for checking ocl constraints,\n    replacing the automatically generated constructor.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+    o.write(OCL_AUTHOR);
+    o.write("\n  */");
+    if(Modifier.isPublic(jc.getModifiers()))
+      o.write("public ");
+    o.write(jc.getName());
+    o.write("()\n  {\n");
+    o.write("    ");
+    o.write(Invariant.CHECKING_FLAG);
+    o.write("=true;\n");
+    if(hasInvariantScope(jc))
+      writeInvariantCall();
+    o.write("    ");
+    o.write(Invariant.CHECKING_FLAG);
+    o.write("=false;\n");
+    o.write("  }");
+  }
+  
+  
+  // type checking  
+  
   private final void writeTypeChecker(JavaAttribute ja) 
     throws IOException
   {

@@ -494,6 +494,8 @@ public final class Injector
         if(collect_when_blocking)
         {
           jb.setLiteral(getCollector());
+          if(jb instanceof JavaConstructor)
+            jb.getParent().onConstructorAdded();
           consumer.onBehaviourHeader(jb);
         }
         parseBody(false);
@@ -503,6 +505,8 @@ public final class Injector
         if(collect_when_blocking)
         {
           jb.setLiteral(getCollector());
+          if(jb instanceof JavaConstructor)
+            jb.getParent().onConstructorAdded();
           consumer.onBehaviourHeader(jb);
         }
         flushOutbuf();
