@@ -850,7 +850,7 @@ final class OclInjector implements InjectionConsumer
     throws IOException
   {
     Writer o=output;
-    
+
     o.write("      ");
     o.write(TypeTracer.TRACE_TYPES);
     o.write("(\"");
@@ -998,6 +998,20 @@ public class Main
       output.close();
       outputfile.delete();
       throw new InjectorParseException(inputfile+": "+e.getMessage());
+    }
+    catch(tudresden.ocl.check.OclTypeException e)
+    {
+      input.close();
+      output.close();
+      outputfile.delete();
+      throw new tudresden.ocl.check.OclTypeException(inputfile+": "+e.getMessage());
+    }
+    catch(tudresden.ocl.parser.OclParserException e)
+    {
+      input.close();
+      output.close();
+      outputfile.delete();
+      throw new tudresden.ocl.parser.OclParserException(inputfile+": "+e.getMessage());
     }
     catch(IOException e)
     {
