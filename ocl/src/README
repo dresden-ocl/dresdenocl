@@ -30,9 +30,14 @@ Every .java file in the repository must compile with
   any later version of the above.
 
 EXCEPTION:
-jikes 1.12 terminates with a failing assertion, the rule above
-does not apply to this version of jikes. Version 1.06 is known
-to work.
+jikes 1.11, 1.12 and 1.14 terminate with a failing assertion,
+the rule above does not apply to these versions of jikes.
+For version 1.14 the exact error message is:
+
+  Assertion failed: end >= start, file ../../jikes/src/class.h, 
+  line 1119 
+
+Version 1.06 is known to work.
 
 2.2 Jars
 --------
