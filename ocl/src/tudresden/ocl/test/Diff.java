@@ -15,7 +15,7 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
- 
+
 package tudresden.ocl.test;
 
 import junit.framework.Assert;
@@ -28,20 +28,41 @@ public class Diff extends Assert
 	public static void diff(final DiffSource expected, final DiffSource actual)
 	throws IOException
 	{
-		final BufferedReader expectedReader = expected.getBufferedReader();
-		final BufferedReader actualReader = actual.getBufferedReader();
-		final String message = 
-			"difference comparing \""+expected.getName()+
-			"\" and \""+actual.getName()+"\" in line ";
-		String expectedLine;
-		String actualLine;
-		for(int line=1; ; line++)
+		try
 		{
-			expectedLine = expectedReader.readLine();
-			actualLine = actualReader.readLine();
-			assertEquals(message+line, expectedLine, actualLine);
-			if(expectedLine==null)
-				break;
+			final BufferedReader expectedReader = expected.getBufferedReader();
+			final BufferedReader actualReader = actual.getBufferedReader();
+			final String message =
+				"difference comparing \""+expected.getName()+
+				"\" and \""+actual.getName()+"\" in line ";
+			String expectedLine;
+			String actualLine;
+			for(int line=1; ; line++)
+			{
+				expectedLine = expectedReader.readLine();
+				actualLine = actualReader.readLine();
+				assertEquals(message+line, expectedLine, actualLine);
+				if(expectedLine==null)
+					break;
+			}
+		}
+		finally
+		{
+			expected.close();
+			actual.close();
 		}
 	}
+
+	public static void main(String[] args)
+	{
+		try
+		{
+			diff(new DiffSource(new File(args[0])), new DiffSource(new File(args[0])));
+		}
+		catch(IOException e)
+		{
+			System.out.println(e);
+		}
+	}
+
 }

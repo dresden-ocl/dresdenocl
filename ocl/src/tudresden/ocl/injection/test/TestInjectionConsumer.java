@@ -134,36 +134,4 @@ public class TestInjectionConsumer implements InjectionConsumer
     catch(IOException e) { System.out.println(e); };
   }
 
-  public static void main(String[] args)
-  {
-    String  inputfile=TestInjectionConsumer.class.getResource("Example.java").getFile();
-    String outputfile="TestInjectionConsumer.result";
-    Reader input=null;
-    Writer output=null;
-    try
-    {
-      try
-      {
-        input =new InputStreamReader (new  FileInputStream(inputfile));
-        output=new OutputStreamWriter(new FileOutputStream(outputfile));
-        (new Injector(input, output, new TestInjectionConsumer(output))).parseFile();
-        input.close();
-        output.close();
-      }
-      catch(InjectorParseException e)
-      {
-        input.close();
-        output.close();
-        System.out.println(e);
-      }
-      catch(IOException e)
-      {
-        if(input!=null)  input.close();
-        if(output!=null) output.close();
-        System.out.println(e);
-      }
-    }
-    catch(IOException e) { System.out.println(e); }
-  }
-
 }

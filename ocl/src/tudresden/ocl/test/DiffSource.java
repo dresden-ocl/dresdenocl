@@ -15,7 +15,7 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
- 
+
 package tudresden.ocl.test;
 
 import java.io.*;
@@ -43,6 +43,11 @@ public final class DiffSource
 	   return name;
 	}
 
+	public void close() throws IOException
+	{
+		bufferedReader.close();
+	}
+
 	public DiffSource(final Reader reader, final String name)
 	throws IOException
 	{
@@ -54,7 +59,7 @@ public final class DiffSource
 	{
 		this(new InputStreamReader(stream), name);
 	}
-	
+
 	public DiffSource(final File file)
 	throws IOException
 	{
