@@ -6,14 +6,14 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.20 2001/09/01 10:43:15 rw7 Exp $
+$Id: build.xml,v 1.21 2001/09/01 13:23:24 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
 New version by Ralf Wiebicke.
 -->
 
-<project name="dresden-ocl" default="default" basedir=".">
+<project name="dresden-ocl" default="compile" basedir=".">
 
   <property name="xerces.jar" value="./xerces.jar" />
   <property name="junit.jar"  value="./junit.jar"  />
@@ -26,19 +26,7 @@ New version by Ralf Wiebicke.
 
 
   <target name="info">
-    <echo message="Available targets:" />
-    <echo message="" />
-    <echo message="  dresden-ocl-lib.jar       the package containing the ocl runtime library" />
-    <echo message="  ocl-argo.jar              the package needed for Argo/UML" />
-    <echo message="  dresden-ocl-demo.jar      the OCL demo applet" />
-    <echo message="  dresden-ocl-injector.jar  the OCL for Java package" />
-    <echo message="  royloy.jar                the example code for dresden-ocl-injector.jar" />
-    <echo message="  dresden-ocl-injector.test a test suite for dresden-ocl-injector.jar and royloy.jar" />
-    <echo message="  dresden-ocl-sql.jar       the OCL2SQL application" />
-    <echo message="  docs                      api docs" />
-    <echo message="  jars                      all jar files" />
-    <echo message="  test                      run junit tests" />
-    <echo message="  clean                     delete all generated file except api docs" />
+    <echo message="Target info is obsolete, use ant -projecthelp instead." />
   </target>
 
 
@@ -110,7 +98,8 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="compile">
+  <target name="compile"
+          description="Compiles all java files into the source directory.">
     <javac srcdir= "${src.dir}"
            destdir="${src.dir}"
            deprecation="on"
@@ -125,8 +114,12 @@ New version by Ralf Wiebicke.
     </javac>
   </target>
 
-  <target name="test" depends="compile">
+  <target name="test"
+          description="Runs all tests."
+          depends="compile">
     <echo message="Does not work. I don't know why, use testj instead." />
+    <taskdef name="junit"
+             classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" />
     <junit fork="yes" haltonerror="yes" haltonfailure="yes">
       <test name="tudresden.ocl.test.TestAll"/>
       <classpath>
@@ -136,7 +129,8 @@ New version by Ralf Wiebicke.
     <ant antfile="injectionsuite.xml" />
   </target>
 
-  <target name="testj" depends="compile">
+  <target name="testj"
+          depends="compile">
     <java classname="junit.textui.TestRunner"
           taskname="junit"
           fork="yes">
@@ -157,7 +151,9 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="dresden-ocl-lib.jar" depends="build.dir">
+  <target name="dresden-ocl-lib.jar"
+          description="Compiles and jars the OCL Runtime Library."
+          depends="build.dir">
     <mkdir dir="${build.dir}/dresden-ocl-lib" />
 
     <copy todir="${build.dir}/dresden-ocl-lib" >
@@ -184,7 +180,9 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="ocl-argo.jar" depends="build.dir">
+  <target name="ocl-argo.jar"
+          description="Compiles and jars the OCL for Argo/UML package."
+          depends="build.dir">
 
     <mkdir dir="${build.dir}/ocl-argo" />
 
@@ -235,7 +233,9 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="dresden-ocl-injector.jar" depends="build.dir">
+  <target name="dresden-ocl-injector.jar"
+          description="Compiles and jars the OCL for Java package."
+          depends="build.dir">
     <mkdir dir="${build.dir}/dresden-ocl-injector" />
 
     <copy todir="${build.dir}/dresden-ocl-injector" >
@@ -285,7 +285,9 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="dresden-injector.jar" depends="build.dir">
+  <target name="dresden-injector.jar"
+          depends="build.dir">
+    <echo message="EXPERIMENTAL: Compiles and jars the Java Injection package. This is without OCL." />
 
     <mkdir dir="${build.dir}/dresden-injector" />
 
@@ -315,7 +317,9 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="dresden-ocl-demo.jar" depends="build.dir">
+  <target name="dresden-ocl-demo.jar"
+          description="Compiles and jars the OCL Demo Applet."
+          depends="build.dir">
 
     <mkdir dir="${build.dir}/dresden-ocl-demo" />
 
@@ -376,7 +380,9 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="royloy.jar" depends="build.dir,dresden-ocl-lib.jar">
+  <target name="royloy.jar"
+          description="Compiles and jars the example code for dresden-ocl-injector.jar."
+          depends="build.dir,dresden-ocl-lib.jar">
 
     <mkdir dir="${build.dir}/royloy" />
 
@@ -406,7 +412,9 @@ New version by Ralf Wiebicke.
     />
   </target>
 
-  <target name="dresden-ocl-sql.jar" depends="build.dir">
+  <target name="dresden-ocl-sql.jar"
+          description="Compiles and jars the OCL2SQL application."
+          depends="build.dir">
 
     <mkdir dir="${build.dir}/dresden-ocl-sql" />
 
@@ -469,7 +477,19 @@ New version by Ralf Wiebicke.
     </jar>
   </target>
 
-  <target name="clean">
+  <target name="jars"
+          description="Builds all jar files."
+          depends="dresden-ocl-lib.jar,
+                   ocl-argo.jar,
+                   dresden-ocl-injector.jar,
+                   dresden-ocl-demo.jar,
+                   dresden-ocl-sql.jar,
+                   royloy.jar,
+                   dresden-injector.jar"
+  />
+
+  <target name="clean"
+          description="Deletes all generated files except API documentation.">
     <delete file="TestOclCompile.java"/>
     <delete file="TestOclCompile*.class"/>
     <delete dir="${build.dir}"/>
@@ -479,7 +499,8 @@ New version by Ralf Wiebicke.
   </target>
 
 
-  <target name="docs" >
+  <target name="docs"
+          description="Builds Javadoc API documentation.">
     <echo message="BEWARE: Requires JDK 1.2.2 or higher, since previous versions do not allow multiple -link or -linkoffline arguments!" />
 
     <delete dir="${docs.dir}" />
@@ -543,7 +564,9 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
   </target>
 
 
-  <target name="dresden-ocl-injector.test" depends="dresden-ocl-injector.jar,royloy.jar">
+  <target name="dresden-ocl-injector.test"
+          description="Runs a test suite for dresden-ocl-injector.jar and royloy.jar."
+          depends="dresden-ocl-injector.jar,royloy.jar">
     <mkdir  dir="${build.dir}/testweb" />
     <copy file="${build.dir}/dresden-ocl-injector.jar" todir="${build.dir}/testweb" />
     <delete dir="${build.dir}/testweb/tudresden" />
@@ -577,10 +600,10 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
     <javac classpath="${build.dir}/dresden-ocl-injector.jar" srcdir= "${build.dir}/testweb" destdir="${build.dir}/testweb" />
   </target>
 
-  <target name="jars" depends="dresden-ocl-lib.jar,ocl-argo.jar,dresden-ocl-injector.jar,dresden-ocl-demo.jar,royloy.jar,dresden-injector.jar"/>
-  <target name="all" depends="compile, testj, jars, dresden-ocl-injector.test, docs" />
 
-  <target name="default" depends="info" />
-
+  <target name="all"
+          description="Does everything: compile, test, jars, dresden-ocl-injector.test and docs."
+          depends="compile, testj, jars, dresden-ocl-injector.test, docs"
+  />
 
 </project>
