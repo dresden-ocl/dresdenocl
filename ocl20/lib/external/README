@@ -6,25 +6,14 @@ external dependecies. This software is required to build or run parts of
 the Dresden OCL2.0 Toolkit.
 
 
-ANTLR 2.7.3             Required to build the specification analysis
-                        utility. ANTLR is an "Extended LL(k)" class parser
-			generator (see http://www.antlr.org for details).
-			
-  antlr-2.7.3.tar.gz    Archived distribution file of ANTLR
-  antlr.jar		ANTLR java archive containing runnable version
-                        of the plain ANTLR parser generator
-			License: see inside tar.gz archive.
-  
-  
 SableCC	2.18.1          required to build the extended SableCC, which is
                         in turn required to build the SableCC-based OCL2.0
 			parser. SableCC is an LALR(1) class parser generator
 			(see http://www.sablecc.org for details).
 
-  sablecc-2.18.1.tar.gz Archived distribution file of SableCC
   sablecc.jar		SableCC java archive containing runnable version
                         of the plain SableCC parser generator.
-			License: see inside tar.gz archive.
+			License: LICENSE-SABLECC
 
 
 
@@ -35,10 +24,5 @@ Binary libraries
     mof.jar
     openide.jar
 
-  JGraph 5.0		JGraph, used to display graphs (License: LGPL)
-  JGraph-Addons		TreeLayout for JGraph (License: see inside corresponding
-			tar.gz archive).
-			
-
-  Apache ORO 2.0.8	Regular expression matching by Apache Jakarta Project.
-                        Governed by LICENSE-APACHE
+  JGraph 5.0		JGraph, used to display graphs (License: LICENSE-JGRAPH)
+  JGraph-Addons	0.1.0.0 TreeLayout for JGraph (License: LICENSE-JGRAPH-ADDONS)

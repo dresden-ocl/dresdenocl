@@ -31,7 +31,7 @@
         <property name="jar.libs.jgraph" value="${dir.software}/jgraph.jar" />
         <property name="jar.libs.jgraphaddons" value="${dir.software}/jgraphaddons.jar" />
         <property name="dir.libs.basic" value="${dir.software}/lib" />        
-        <property name="dir.libs.mdr" value="${basedir}/libs" />        
+        <property name="dir.libs.mdr" value="${basedir}/software/mdr" />        
         <property name="jar.sablecc.plain" value="${dir.software}/sablecc.jar" />
         <property name="jar.sablecc.anttask" value="${dir.software}/sablecc-anttask.jar" />
         <taskdef name="sablecc" classname="org.sablecc.ant.taskdef.Sablecc">
@@ -215,7 +215,10 @@
     
     
     <!-- create JAR archives for all required MDR subpackages (API, impl, utils) -->
-    <target name="jar.mdrlibs" depends="init,jar.mdrlib.api,jar.mdrlib.impl,jar.mdrlib.utils" />
+    <target name="jar.mdrlibs" depends="init" />
+    
+    <!-- mdr libs are pre-build now -->
+    <!-- <target name="jar.mdrlibs" depends="init,jar.mdrlib.api,jar.mdrlib.impl,jar.mdrlib.utils" /> -->
 
     
 
@@ -840,7 +843,7 @@
 
     <target name="clean" depends="init"
         description="Clean all build products." >
-        <delete>
+        <delete failonerror="false">
             <fileset dir="${objdir.generic}" includes="**/*" />
             <fileset dir="${objdir.jmi.if}" includes="**/*" />
             <fileset dir="${objdir.mdrlib.api}" includes="**/*" />
