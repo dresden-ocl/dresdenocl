@@ -1,0 +1,127 @@
+
+context Person inv: age>=0
+
+context Person
+inv: age.div(7)<7
+inv: age.mod(7)<7
+inv: age.max(7)<7
+inv: age.min(7)<7
+
+context Company inv:
+  employees->iterate(
+    p:Person ; b:Bag(Person)=Bag{} |
+    b->including(p)
+  )->includes(manager)
+
+context Company inv: self.numberOfEmployees=employees->size
+
+context Company inv:
+manager.employers->includes(self)
+
+context Person inv:
+managedCompanies->forAll(employees->includes(self))
+
+context Person inv:
+employers.employees->forAll(age>0)
+
+context Person inv:
+if isMarried then 
+  wife->isEmpty xor husband->isEmpty
+else
+  wife->isEmpty and husband->isEmpty
+endif
+
+context Customer
+inv: title=(if isMale=true then 'Mr' else 'Ms' endif)
+
+context LoyaltyProgram
+inv: self.customer->forAll(
+  c1, c2 | c1<>c2 implies c1.name<>c2.name
+)
+inv: self.customer->isUnique(name)
+
+context Membership
+inv: customer.cards.membership->includes(self)
+
+context Membership
+inv: program.serviceLevel->includes(actualLevel)
+
+context Membership
+inv: loyaltyAccount.points>=0 or loyaltyAccount->isEmpty
+
+context Service
+inv: self.pointsEarned>0 implies not (self.pointsBurned=0)
+
+context ServiceLevel
+inv: loyaltyProgram.partners->includes(service.programPartner)
+
+context Transaction
+inv: self.program()=card.membership.program
+
+context Transaction::program()
+post: result=self.card.membership.program
+
+context ProgramPartner
+inv: self.deliveredServices.transactions->iterate(
+      t:Transaction;
+      result:Integer = 0 |
+      if t.oclIsTypeOf(Burning) then result+t.points else result endif
+    )
+    <=
+    self.deliveredServices.transactions->iterate(
+      t:Transaction;
+      result:Integer = 0 |
+      if t.oclIsTypeOf(Earning) then result+t.points else result endif
+    )
+-- to do: 't.points' was 'points' -> default context in iterate
+
+context Person inv:
+Set{ 0 .. 199 }->includes(age)
+
+context Person inv substring:
+let firstLetter:String=name.substring(1,1) in
+firstLetter = firstLetter.toUpper
+
+context Person inv:
+getIncomeAfterTax(0.3)>0
+
+context Person inv:
+getIncomeAfterTax(1)=0.0
+
+context Person inv:
+self.oclIsKindOf(Person)
+
+context Person inv:
+age.oclIsTypeOf(Integer)
+
+context Company inv:
+manager.oclIsKindOf(Person)
+
+context Person inv:
+1 . oclIsKindOf(Real)
+
+--customers are ordered by age
+context Bank inv:
+Set{1 .. customer->size-1}->forAll(
+  i:Integer | self.customer[i].age > self.customer[i+1].age
+)
+
+context Bank inv:
+customer->size>100
+
+--nonsense, but types are ok; element customer[0] can be treated as collection
+context Bank inv:
+customer[0]->size>10
+
+context Bank inv:
+customer[42].age>0
+
+context Person inv:
+let a=0 in
+let b=a+1 in
+let c=a + self.employers->size in
+let d=b*2 in
+a<b and self.employers->size<c and d>0
+
+context OclAny inv:
+oclIsKindOf(Bank)=oclIsTypeOf(Person)

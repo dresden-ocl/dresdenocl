@@ -1,0 +1,1 @@
+java -cp .:xml4j.jar tudresden.ocl.injection.Main --clean --modify tudresden/ocl/injection/test/Example.java

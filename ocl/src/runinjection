@@ -1,0 +1,1 @@
+java -cp .:xml4j.jar tudresden.ocl.injection.Main --constraint-file tudresden/ocl/injection/test/Example.ocl --reflection-model tudresden.ocl.injection.test -m tudresden/ocl/injection/test/Example.java
