@@ -1,4 +1,0 @@
-# tested with jikes Version 1.06 (17 Sep 99)
-# works not with jikes 1.12 (8 Jan 2000)
-# you need a $CLASSPATH including <jdk1.2.2-dir>/jre/lib/rt.jar
-jikes -classpath ${CLASSPATH}:.:xerces.jar:junit.jar -d . -g `find tudresden -name "*.java"`

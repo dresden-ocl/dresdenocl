@@ -1,4 +1,0 @@
-java -cp .:xerces.jar tudresden.ocl.injection.ocl.Main \
-  --clean \
-  --modify \
-  tudresden/ocl/injection/test/Example.java

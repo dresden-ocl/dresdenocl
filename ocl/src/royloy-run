@@ -1,4 +1,0 @@
-# runs the royloy example application
-java -cp .:xerces.jar \
-  -Dtudresden.ocl.injection.lib.TypeTracer.log=tudresden/ocl/test/royloy/royloy.ocltypetrace \
-  tudresden.ocl.test.TestInjectionRoyloy strict

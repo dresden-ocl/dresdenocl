@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+
+<project name="dresden-ocl" default="default" basedir=".">
+
+  <property name="build.compiler" value="jikes" />
+  <property name="src.dir"   value="${basedir}/." />
+
+  <target name="default">
+    <ant antfile="build.xml" target="compile" />
+    <antcall target="test" />
+  </target>
+
+  <target name="test" depends="example, royloy" />
+
+
+
+  <!-- Tests with Example.java -->
+
+  <target name="example">
+    <copy file  ="tudresden/ocl/injection/test/Example.java"
+          tofile="tudresden/ocl/injection/test/Example.java.bak" />
+    <antcall target="example.inject" />
+    <antcall target="diff">
+      <param name="expected" value="tudresden/ocl/injection/test/Example.java.injected" />
+      <param name="actual"   value="tudresden/ocl/injection/test/Example.java" />
+    </antcall>
+    <antcall target="compile" />
+    <antcall target="example.inject" />
+    <antcall target="diff">
+      <param name="expected" value="tudresden/ocl/injection/test/Example.java.injected" />
+      <param name="actual"   value="tudresden/ocl/injection/test/Example.java" />
+    </antcall>
+    <antcall target="example.run" />
+    <antcall target="example.clean" />
+    <antcall target="diff">
+      <param name="expected" value="tudresden/ocl/injection/test/Example.java.bak" />
+      <param name="actual"   value="tudresden/ocl/injection/test/Example.java" />
+    </antcall>
+    <antcall target="compile" />
+  </target>
+
+  <target name="example.inject">
+    <java classname="tudresden.ocl.injection.ocl.Main">
+      <classpath>
+        <pathelement location="${src.dir}/" />
+      </classpath>
+      <arg value="--constraint-file" />
+      <arg value="tudresden/ocl/injection/test/Example.ocl" />
+      <arg value="--reflection-model" />
+      <arg value="tudresden.ocl.injection.test" />
+      <arg value="--name-adapter" />
+      <arg value="argo" />
+      <arg value="--trace-types" />
+      <arg value="--modify" />
+      <arg value="tudresden/ocl/injection/test/Example.java" />
+    </java>
+  </target>
+
+  <target name="example.clean">
+    <java classname="tudresden.ocl.injection.ocl.Main">
+      <classpath>
+        <pathelement location="${src.dir}/" />
+      </classpath>
+      <arg value="--clean" />
+      <arg value="--modify" />
+      <arg value="tudresden/ocl/injection/test/Example.java" />
+    </java>
+  </target>
+
+  <target name="example.run">
+    <echo message="ocl constraint violations must occur now." />
+    <java classname="tudresden.ocl.injection.test.Example">
+      <classpath>
+        <pathelement location="${src.dir}/" />
+      </classpath>
+      <sysproperty
+        key="tudresden.ocl.injection.lib.TypeTracer.log"
+        value="tudresden/ocl/injection/test/Example.ocltypetrace.bak" />
+    </java>
+    <echo message="ocl constraint violations must have occured above." />
+    <antcall target="diff">
+      <param name="expected" value="tudresden/ocl/injection/test/Example.ocltypetrace" />
+      <param name="actual"   value="tudresden/ocl/injection/test/Example.ocltypetrace.bak" />
+    </antcall>
+  </target>
+
+
+
+  <!-- Tests with royloy package -->
+
+  <target name="royloy">
+    <antcall target="royloy.inject" />
+    <antcall target="compile" />
+    <antcall target="royloy.inject" />
+    <antcall target="compile" />
+    <antcall target="royloy.run" />
+    <antcall target="royloy.clean" />
+    <antcall target="compile" />
+  </target>
+
+  <!--modifies royloy example code to check it's constraints -->
+  <target name="royloy.inject">
+    <java classname="tudresden.ocl.injection.ocl.Main">
+      <classpath>
+        <pathelement location="${src.dir}/" />
+      </classpath>
+      <arg value="--constraint-file" />
+      <arg value="tudresden/ocl/test/royloy/oclexpressions" />
+      <arg value="--reflection-model" />
+      <arg value="tudresden.ocl.test.royloy" />
+      <arg value="--violation-macro" />
+      <arg value="tudresden.ocl.test.TestInjectionRoyloy.theInstance.onViolation" />
+      <arg value="--trace-types" />
+      <arg value="--modcount-hash" />
+      <arg value="--modify" />
+      <arg value="tudresden/ocl/test/royloy/*.java" />
+    </java>
+  </target>
+
+  <!-- cleans the royloy code from the modifications made by royloy.inject -->
+  <target name="royloy.clean">
+    <java classname="tudresden.ocl.injection.ocl.Main">
+      <classpath>
+        <pathelement location="${src.dir}/" />
+      </classpath>
+      <arg value="--clean" />
+      <arg value="--modify" />
+      <arg value="tudresden/ocl/test/royloy/*.java" />
+    </java>
+  </target>
+
+  <!-- runs the royloy example application -->
+  <target name="royloy.run">
+    <java classname="tudresden.ocl.test.TestInjectionRoyloy">
+      <classpath>
+        <pathelement location="${src.dir}/" />
+      </classpath>
+      <arg value="strict" />
+      <sysproperty
+        key="tudresden.ocl.injection.lib.TypeTracer.log"
+        value="tudresden/ocl/test/royloy/royloy.ocltypetrace.bak" />
+    </java>
+    <antcall target="diff">
+      <param name="expected" value="tudresden/ocl/test/royloy/royloy.ocltypetrace" />
+      <param name="actual"   value="tudresden/ocl/test/royloy/royloy.ocltypetrace.bak" />
+    </antcall>
+  </target>
+
+
+
+  <!-- Utility tasks -->
+
+  <target name="diff">
+    <echo taskname="expected" message="${expected}" />
+    <echo taskname="actual" message="${actual}" />
+    <java classname="tudresden.ocl.test.Diff" taskname="diff">
+      <classpath>
+        <pathelement location="${src.dir}/" />
+        <pathelement location="${src.dir}/junit.jar" />
+      </classpath>
+      <arg value="${expected}" />
+      <arg value="${actual}" />
+    </java>
+  </target>
+
+  <target name="compile">
+    <javac srcdir= "${src.dir}"
+           destdir="${src.dir}"
+           deprecation="on"
+           debug="on"
+           depend="on"
+           optimize="off">
+      <include name="tudresden/**" />
+    </javac>
+  </target>
+
+</project>

@@ -35,9 +35,9 @@ jikes 1.11, 1.12 and 1.14 terminate with a failing assertion,
 the rule above does not apply to these versions of jikes.
 For version 1.14 the exact error message is:
 
-  Assertion failed: end >= start, file ../../jikes/src/class.h, 
-  line 1119 
-  
+  Assertion failed: end >= start, file ../../jikes/src/class.h,
+  line 1119
+
 The bug has been submitted to the authors of jikes (bugid # 658)
 on June 28, 2001.
 
@@ -67,9 +67,8 @@ This must not produce any warnings, when using
 2.4 Test Suites
 ---------------
 
-Skripts regress.sh and injectionsuite in this directory
-must run through without exceptions. These skripts require
-GNU diff and a UNIX compatible shell.
+"ant test" and "ant -buildfile injectionsuite" in this directory
+must run through without exceptions.
 
 2.5 Tabs
 --------
