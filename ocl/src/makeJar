@@ -1,4 +1,4 @@
-jar -cf ocl-argo.jar \
+export ARGOFILES="\
 	tudresden/ocl/*.class \
 	tudresden/ocl/*.gif \
 	tudresden/ocl/normalize/*.class \
@@ -14,4 +14,10 @@ jar -cf ocl-argo.jar \
 	tudresden/ocl/parser/lexer/*.class \
 	tudresden/ocl/parser/lexer/lexer.dat \
 	tudresden/ocl/parser/parser/*.class \
-	tudresden/ocl/parser/parser/parser.dat
+	tudresden/ocl/parser/parser/parser.dat"
+#echo $ARGOFILES
+jar -cf ocl-argo.jar $ARGOFILES
+jar -cf dresden-ocl.jar $ARGOFILES \
+	tudresden/ocl/check/types/xmifacade/*.class \
+	tudresden/ocl/check/types/testfacade/*.class \
+	tudresden/ocl/test/royloy/*.class
