@@ -110,6 +110,8 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
 
   protected String getTransferCode(String var, String type) {
     StringBuffer ret=new StringBuffer();
+    for(int i=0; i<indent; i++)
+      ret.append(' ');
     ret.append(oclLibPackage+type+' '+var+";\n");
     return ret.toString();
   }

@@ -287,7 +287,7 @@ public abstract class Example implements Runnable
     {
       currently_checking_ocl=true;
       checkOclInvariants();
-      tudresden.ocl.lib.OclString tudOclNode39;
+        tudresden.ocl.lib.OclString tudOclNode39;
       {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode29=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
         final tudresden.ocl.lib.OclString tudOclNode30=tudresden.ocl.lib.Ocl.toOclString(tudOclNode29.getFeature("hallo"));
@@ -413,7 +413,7 @@ public abstract class Example implements Runnable
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Thu Jun 22 16:25:03 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Tue Jun 27 12:27:15 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
@@ -483,8 +483,8 @@ public abstract class Example implements Runnable
     {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode24=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
         final tudresden.ocl.lib.OclAnyImpl tudOclNode25=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode24.getFeature("anExtender"));
-Object[] tudOclParam0=new Object[1];
-tudOclParam0[0]=tudresden.ocl.lib.Ocl.reconvert(null, tudOclNode25);
+        Object[] tudOclParam0=new Object[1];
+        tudOclParam0[0]=tudresden.ocl.lib.Ocl.reconvert(null, tudOclNode25);
         final tudresden.ocl.lib.OclBoolean tudOclNode26=tudresden.ocl.lib.Ocl.toOclBoolean(tudOclNode24.getFeature("poly1", tudOclParam0));
         final tudresden.ocl.lib.OclBoolean tudOclNode27=tudresden.ocl.lib.OclBoolean.TRUE;
         final tudresden.ocl.lib.OclBoolean tudOclNode28=tudOclNode26.isEqualTo(tudOclNode27);
@@ -528,7 +528,7 @@ class SecondExample extends Example{
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Thu Jun 22 16:25:04 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Tue Jun 27 12:27:15 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {

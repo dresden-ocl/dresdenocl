@@ -376,6 +376,7 @@ public class Main
     BufferedReader br=new BufferedReader(new FileReader(constraintfile));
     NameCreator namecreator=new NameCreator();
     JavaCodeGenerator jcg=new JavaCodeGenerator("this", "result");
+    jcg.setInitialIndent(8);
     HashMap constrainedTypes=new HashMap(); // type names are keys, SortedFragments values
 
     String nextLine;

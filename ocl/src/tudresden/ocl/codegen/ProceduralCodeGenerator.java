@@ -201,7 +201,7 @@ public abstract class ProceduralCodeGenerator extends DepthFirstAdapter implemen
     newLine=s.endsWith("\n");
   }
 
-  public void setInitialIndent(int initialIdent)
+  public void setInitialIndent(int initialIndent)
   {
     if(this.initialIndent!=indent || initialIndent<0)
       throw new RuntimeException();
