@@ -269,8 +269,8 @@ public abstract class Example implements Runnable
       @author ocl injector
   */private final void checkOclInvariants()
   {
-    for(int i=0; i<strings.size(); i++)
-      if(!(strings.elementAt(i) instanceof java.lang.String))
+    for(Iterator i=strings.iterator(); i.hasNext(); )
+      if(!(i.next() instanceof java.lang.String))
         System.out.println("element checker failed.");
     {
       final tudresden.ocl.lib.OclAnyImpl tudOclNode0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );

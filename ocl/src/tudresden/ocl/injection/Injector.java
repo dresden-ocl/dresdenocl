@@ -26,7 +26,7 @@ public class Injector
 {
   private Reader input;
   private Writer output;
-  private Hashtable codefragments;
+  private InjectionConsumer consumer;
 
   private StringBuffer buf=new StringBuffer();
 
@@ -35,11 +35,11 @@ public class Injector
   private boolean collect_when_blocking=false;
   private StringBuffer collector=new StringBuffer();
 
-  public Injector(Reader input, Writer output, Hashtable codefragments)
+  public Injector(Reader input, Writer output, InjectionConsumer consumer)
   {
     this.input=input;
     this.output=output;
-    this.codefragments=codefragments;
+    this.consumer=consumer;
   }
 
   private char outbuf;
@@ -419,13 +419,9 @@ public class Injector
     }
   }
 
-  private String last_element_type=null;
-
   private void parseClass(String bufs)
     throws IOException, EndException, InjectorParseException
   {
-    boolean insertWrappers=true;
-
     int modifiers=0;
     while(true)
     {
@@ -461,13 +457,12 @@ public class Injector
     String classname=buf.toString();
     //System.out.println("class ("+java.lang.reflect.Modifier.toString(modifiers)+") >"+classname+"<");
 
+    consumer.onClass(classname);
+    
     while(readToken()!='{')
       ;
 
-    Vector cfs=(insertWrappers ? null : new Vector());
-    Vector ets=new Vector();
     scheduleBlock(true);
-    boolean discardnextfeature=false;
     ml: while(true)
     {
       switch(readToken())
@@ -477,99 +472,29 @@ public class Injector
         break ml;
       case 'c':
         //System.out.println("comment: "+comment);
-        if(comment.startsWith("/**"))
-        {
-          if(ClassFeature.OCL_AUTHOR.equals(findDocTag(comment, "author")))
-          {
-            discardnextfeature=true;
-            scheduleBlock(false);
-          }
-          else
-          {
-            last_element_type=findDocTag(comment, "element-type");
-            write(comment);
-            scheduleBlock(true);
-          }
-        }
-        else
+        if(consumer.onComment(comment))
         {
           write(comment);
           scheduleBlock(true);
         }
+        else
+          scheduleBlock(false);
+
         break;
       case '\0':
-        ClassFeature cf=parseFeature(classname);
-        if(cf.isMethod()&&!cf.isConstructor()&&!discardnextfeature)
-        {
-          if(insertWrappers)
-          {
-            cf.writeWrapper(output, codefragments);
-          }
-          else
-            cfs.addElement(cf);
-        }
-        if(last_element_type!=null)
-        {
-          if(!cf.isMethod())
-          {
-            cf.setElementType(last_element_type);
-            ets.addElement(cf);
-          }
-          last_element_type=null;
-        }
-        discardnextfeature=false;
+        consumer.onClassFeature(parseFeature(classname));
         scheduleBlock(true);
         break;
       default:
         throw new InjectorParseException("class member expected.");
       }
     }
-
-    if(!insertWrappers)
-      for(int i=0; i<cfs.size(); i++)
-        ((ClassFeature)cfs.elementAt(i)).writeWrapper(output, codefragments);
-
-    writeInvariants(output, ets, classname);
-  }
-
-  public static final String INV_METHOD="checkOclInvariants";
-  public static final String violationMakro="System.out.println";
-
-  public final void writeInvariants(Writer o, Vector ets, String classname) throws IOException
-  {
-    o.write("/**\n    A method for checking ocl invariants.\n    Generated automatically, DO NOT CHANGE!\n      @author ");
-    o.write(ClassFeature.OCL_AUTHOR);
-    o.write("\n  */private final void ");
-    o.write(INV_METHOD);
-    o.write("()\n  {\n");
-    for(int i=0; i<ets.size(); i++)
-      ((ClassFeature)(ets.elementAt(i))).writeElementChecker(o);
-    SortedFragments sf=
-      codefragments!=null ? (SortedFragments)(codefragments.get(classname)) : null;
-    if(sf!=null)
-    {
-      Vector v=sf.inv;
-      for(Enumeration e=v.elements(); e.hasMoreElements(); )
-      {
-        CodeFragment cf=(CodeFragment)(e.nextElement());
-        o.write("    {\n");
-        o.write(cf.getCode());
-        o.write("      if(!");
-        o.write(cf.getResultVariable());
-        o.write(".isTrue())\n        ");
-        o.write(violationMakro);
-        o.write("(\"ocl invariant ");
-        o.write(cf.getName());
-        o.write(" violated\");\n    }\n");
-      }
-    }
-    o.write("}");
+    
+    consumer.onClassEnd(classname);
   }
 
   public void parseFile() throws IOException, InjectorParseException
   {
-    String packageString=null;
-
     try
     {
       char c;
@@ -581,12 +506,10 @@ public class Injector
           String bufs=buf.toString();
           if("package".equals(bufs))
           {
-            if(packageString!=null)
-              throw new InjectorParseException("more than one package statement.");
             c=readToken();
             if(c!='\0')
               throw new InjectorParseException("package name expected.");
-            packageString=buf.toString();
+            consumer.onPackage(buf.toString());
             //System.out.println("package >"+packageString+"<");
             c=readToken();
             if(c!=';')
@@ -612,58 +535,6 @@ public class Injector
       }
     }
     catch(EndException e) {};
-  }
-
-  public static void inject(File inputfile, File outputfile, Hashtable codefragments)
-    throws IOException, InjectorParseException
-  {
-    //System.out.println("injecting from "+inputfile+" to "+outputfile);
-
-    if(outputfile.exists())
-    {
-      if(inputfile.getCanonicalPath().equals(outputfile.getCanonicalPath()))
-        throw new RuntimeException("error: input file and output file are the same.");
-      if(!outputfile.isFile())
-        throw new RuntimeException("error: output file is not a regular file.");
-    }
-
-    Reader input=null;
-    Writer output=null;
-    try
-    {
-      input =new InputStreamReader (new FileInputStream (inputfile));
-      output=new OutputStreamWriter(new FileOutputStream(outputfile));
-      (new Injector(input, output, codefragments)).parseFile();
-      input.close();
-      output.close();
-    }
-    catch(InjectorParseException e)
-    {
-      input.close();
-      output.close();
-      outputfile.delete();
-      throw e;
-    }
-    catch(IOException e)
-    {
-      if(input!=null)  input.close();
-      if(output!=null) output.close();
-      outputfile.delete();
-      throw e;
-    }
-  }
-
-  public static final String TEMPFILE_SUFFIX=".temp_oclinjection";
-
-  public static void inject(File tobemodifiedfile, Hashtable codefragments)
-    throws IOException, InjectorParseException
-  {
-    File outputfile=new File(tobemodifiedfile.getPath()+TEMPFILE_SUFFIX);
-    inject(tobemodifiedfile, outputfile, codefragments);
-    if(!tobemodifiedfile.delete())
-      System.out.println("warning: deleting "+tobemodifiedfile+" failed.");
-    if(!outputfile.renameTo(tobemodifiedfile))
-      System.out.println("warning: renaming "+outputfile+" to "+tobemodifiedfile+" failed.");
   }
 
   class EndException extends Exception
