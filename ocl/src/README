@@ -34,17 +34,22 @@ jikes 1.12 terminates with a failing assertion, the rule above
 does not apply to this version of jikes. Version 1.06 is known
 to work.
 
-2.2 Ant
--------
-Ant must build successfully with the build.xml in this directory.
+2.2 Jars
+--------
+Jarfiles must be created correctly. Run
+
+  ant clean jars
+
 Besides compiling jar-files are created and checked for static
-closure.
-Note, that the build.xml does not compile all classes.
+closure. Note, that the ant jars does not compile all classes.
 
 2.3 Javadoc
 -----------
-javadoc run with the file "jdoc" in this directory must
-not produce any warnings, when using
+Run
+
+  ant docs
+
+This must not produce any warnings, when using
 
   java version "1.2.2"
   AND
