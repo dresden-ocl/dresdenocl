@@ -29,7 +29,7 @@ import tudresden.ocl.check.types.xmifacade.XmiParser;
 import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.codegen.JavaCodeGenerator;
 
-class OclInjector implements InjectionConsumer
+final class OclInjector implements InjectionConsumer
 {
   private Writer output;
   private HashMap codefragments;
@@ -41,20 +41,22 @@ class OclInjector implements InjectionConsumer
      @see #delayinsertions
      @see ClassFeature
   */
-  private ArrayList methods;
+  private ArrayList methods=null;
+
+  private ArrayList methods_stack=new ArrayList();
   
   /**
      Collects all attributes (ClassFeature) of the current class, which have element-type set.
   */
-  private ArrayList typedAttributes;
+  private ArrayList typedAttributes=null;
+
+  private ArrayList typedAttributes_stack=new ArrayList();
 
   OclInjector(Writer output, HashMap codefragments, boolean insertimmediatly)
   {
     this.output=output;
     this.codefragments=codefragments;
     this.delayinsertions=!insertimmediatly;
-    methods=(delayinsertions ? new ArrayList() : null);
-    typedAttributes=new ArrayList();
   }
   
   private String packagename;
@@ -72,25 +74,27 @@ class OclInjector implements InjectionConsumer
     
   private boolean discardnextfeature=false;
 
-  public void onClass(String classname)
+  public void onClass(ClassClass cc)
   {
     discardnextfeature=false;
-    if(delayinsertions)
-      methods.clear();
-    typedAttributes.clear();
+
+    methods_stack.add(methods);
+    methods=(delayinsertions ? new ArrayList() : null);
+    typedAttributes_stack.add(typedAttributes);
+    typedAttributes=new ArrayList();
   }
 
-  public void onClassEnd(String classname) throws IOException
+  public void onClassEnd(ClassClass cc) throws IOException
   {
     if(delayinsertions)
-    {
       for(Iterator i=methods.iterator(); i.hasNext(); )
         writeWrapper((ClassMethod)i.next());
-      methods.clear();
-    }
+    writeInvariants(cc.getName());
 
-    writeInvariants(classname);
-    typedAttributes.clear();
+    methods=(ArrayList)
+      (methods_stack.remove(methods_stack.size()-1));
+    typedAttributes=(ArrayList)
+      (typedAttributes_stack.remove(typedAttributes_stack.size()-1));
   }
   
   public void onMethodHeader(ClassMethod cf) 
@@ -152,6 +156,12 @@ class OclInjector implements InjectionConsumer
       output.write(comment);
       return true;
     }
+  }
+
+  public void onFileEnd()
+  {
+    if(!methods_stack.isEmpty() || !typedAttributes_stack.isEmpty())
+      throw new RuntimeException();
   }
 
   public static final String INV_METHOD="checkOclInvariants";
@@ -298,7 +308,7 @@ class OclInjector implements InjectionConsumer
       writeWrapperInvariant(cf);
       if(codefragments!=null)
       {
-        SortedFragments sf=(SortedFragments)codefragments.get(cf.getClassName());
+        SortedFragments sf=(SortedFragments)codefragments.get(cf.getParent().getName());
         if(sf!=null)
         {
           for(Iterator i=sf.transfer.iterator(); i.hasNext(); )
@@ -346,7 +356,7 @@ class OclInjector implements InjectionConsumer
     writeWrapperInvariant(cf);
     if(codefragments!=null)
     {
-      SortedFragments sf=(SortedFragments)codefragments.get(cf.getClassName());
+      SortedFragments sf=(SortedFragments)codefragments.get(cf.getParent().getName());
       if(sf!=null)
         for(Iterator i=sf.post.iterator(); i.hasNext(); )
         {

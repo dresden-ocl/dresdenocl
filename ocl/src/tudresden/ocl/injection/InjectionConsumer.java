@@ -22,8 +22,8 @@ public interface InjectionConsumer
 {
   public void onPackage(String packagename) throws InjectorParseException;
   public void onImport(String importname);
-  public void onClass(String classname);
-  public void onClassEnd(String classname) throws java.io.IOException;
+  public void onClass(ClassClass cc);
+  public void onClassEnd(ClassClass cc) throws java.io.IOException;
   public void onMethodHeader(ClassMethod cf) throws java.io.IOException;
   public void onClassFeature(ClassFeature cf) throws java.io.IOException, InjectorParseException;
   
@@ -31,4 +31,6 @@ public interface InjectionConsumer
      @return false: if the comment should be discarded and the next classfeature to be blocked.
   */
   public boolean onComment(String comment) throws java.io.IOException;
+
+  public void onFileEnd();
 }

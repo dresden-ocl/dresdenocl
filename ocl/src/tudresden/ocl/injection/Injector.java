@@ -35,6 +35,8 @@ public final class Injector
   private boolean collect_when_blocking=false;
   private StringBuffer collector=new StringBuffer();
 
+  private String packagename=null;
+
   public Injector(Reader input, Writer output, InjectionConsumer consumer)
   {
     this.input=input;
@@ -78,6 +80,7 @@ public final class Injector
     start_block=false;
     String s=collector.toString();
     collector.setLength(0);
+    //System.out.println("  collector: >"+s+"<");
     return s;
   }
 
@@ -230,7 +233,7 @@ public final class Injector
   }
 
   /**
-     Parses a method body or a attribute initializer, 
+     Parses a method body or an attribute initializer, 
      depending on the parameter.
      For method bodys, the input stream must be directly behind 
      the first opening curly bracket of the body.
@@ -291,14 +294,33 @@ public final class Injector
     }
   }
 
-  private ClassFeature parseFeature(String classname)
+  /**
+     Parses a class feature. May be an attribute, a method or a inner
+     class. May even be a normal class, in this case parent==null.
+     @parameter parent the class that contains the class feature
+                       if null, there is no containing class, and 
+                       the feature must be a class itself.
+  */
+  private ClassFeature parseFeature(ClassClass parent)
+    throws IOException, EndException, InjectorParseException
+  {
+    return parseFeature(parent, buf.toString());
+  }
+
+  /**
+     The same as parseFeature(ClassClass) but the first token has
+     already been fetched from the input stream.
+     @parameter bufs the first token of the class feature.
+     @see #parseFeature(ClassClass)
+  */
+  private ClassFeature parseFeature(ClassClass parent, String bufs)
     throws IOException, EndException, InjectorParseException
   {
     int modifiers=0;
 
     while(true)
     {
-      String bufs=buf.toString();
+      //System.out.println("bufs >"+bufs+"<");
       if("public".equals(bufs))
         modifiers|=java.lang.reflect.Modifier.PUBLIC;
       else if("protected".equals(bufs))
@@ -319,10 +341,30 @@ public final class Injector
         modifiers|=java.lang.reflect.Modifier.NATIVE;
       else if("abstract".equals(bufs))
         modifiers|=java.lang.reflect.Modifier.ABSTRACT;
+      else if("interface".equals(bufs))
+      {
+        modifiers|=java.lang.reflect.Modifier.INTERFACE;
+        return parseClass(parent, modifiers);
+      }
+      else if("class".equals(bufs))
+      {
+        return parseClass(parent, modifiers);
+      }
       else
+      {
+        if(parent==null)
+          throw new InjectorParseException("'class' or 'interface' expected.");
         break;
+      }
+    
       if(readToken()!='\0')
-        throw new InjectorParseException("modifier expected.");
+      {
+        if(parent==null)
+          throw new InjectorParseException("'class' or 'interface' expected.");
+        else
+          throw new InjectorParseException("modifier expected.");
+      }
+      bufs=buf.toString();
     }
     String featuretype=buf.toString();
     String featurename;
@@ -352,14 +394,14 @@ public final class Injector
     if(c=='(') // it's a method/constructor
     {
       ClassMethod cf=
-        new ClassMethod(classname, modifiers, featuretype, featurename, position_name_end);
+        new ClassMethod(parent, modifiers, featuretype, featurename, position_name_end);
       parseMethod(cf);
       return cf;
     }
     else // it's an attribute
     {
       ClassAttribute cf=
-        new ClassAttribute(classname, modifiers, featuretype, featurename);
+        new ClassAttribute(parent, modifiers, featuretype, featurename);
       parseAttribute(cf, c);
       return cf;
     }
@@ -473,46 +515,25 @@ public final class Injector
     }
   }
 
-  private void parseClass(String bufs)
+  private ClassClass parseClass(ClassClass parent, int modifiers)
     throws IOException, EndException, InjectorParseException
   {
-    int modifiers=0;
-    while(true)
-    {
-      //System.out.println("bufs >"+bufs+"<");
-      if("public".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.PUBLIC;
-      else if("protected".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.PROTECTED;
-      else if("private".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.PRIVATE;
-      else if("static".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.STATIC;
-      else if("final".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.FINAL;
-      else if("abstract".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.ABSTRACT;
-      else if("interface".equals(bufs))
-      {
-        modifiers|=java.lang.reflect.Modifier.INTERFACE;
-        break;
-      }
-      else if("class".equals(bufs))
-        break;
-      else
-        throw new InjectorParseException("'class' expected.");
-
-      if(readToken()!='\0')
-        throw new InjectorParseException("'class' expected.");
-      bufs=buf.toString();
-    }
     if(readToken()!='\0')
       throw new InjectorParseException("class name expected.");
     String classname=buf.toString();
     //System.out.println("class ("+java.lang.reflect.Modifier.toString(modifiers)+") >"+classname+"<");
 
-    consumer.onClass(classname);
+    ClassClass cc=
+      new ClassClass(parent, packagename, modifiers, classname);
+    //cc.print(System.out);
+
+    consumer.onClass(cc);
     
+    if(collect_when_blocking)
+      write(getCollector());
+    if(do_block)
+      getCollector();
+
     while(readToken()!='{')
       ;
 
@@ -529,7 +550,7 @@ public final class Injector
         scheduleBlock(consumer.onComment(comment));
         break;
       case '\0':
-        consumer.onClassFeature(parseFeature(classname));
+        consumer.onClassFeature(parseFeature(cc));
         scheduleBlock(true);
         break;
       case ';': 
@@ -542,7 +563,8 @@ public final class Injector
       }
     }
     
-    consumer.onClassEnd(classname);
+    consumer.onClassEnd(cc);
+    return cc;
   }
 
   public void parseFile() throws IOException, InjectorParseException
@@ -566,10 +588,13 @@ public final class Injector
           String bufs=buf.toString();
           if("package".equals(bufs))
           {
+            if(packagename!=null)
+              throw new InjectorParseException("only one package statement allowed.");
             c=readToken();
             if(c!='\0')
               throw new InjectorParseException("package name expected.");
-            consumer.onPackage(buf.toString());
+            packagename=buf.toString();
+            consumer.onPackage(packagename);
             //System.out.println("package >"+buf.toString()+"<");
             c=readToken();
             if(c!=';')
@@ -587,7 +612,7 @@ public final class Injector
               throw new InjectorParseException("';' expected.");
           }
           else
-            parseClass(bufs);
+            parseFeature(null, bufs); // null says, its a top-level class
         }
         else
         {

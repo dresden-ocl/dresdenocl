@@ -115,14 +115,13 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     */
     private ArrayList imports=new ArrayList();
   
-    private String classname;
+    private ClassClass current_class=null;
     
-    private Class classobject;
+    private Class current_classobject=null;
     
     ReflectionConsumer(String packagename)
     {
       this.packagename=packagename;
-      this.classname=null;
     }
 
     public void onPackage(String packagename) throws InjectorParseException
@@ -138,24 +137,28 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       imports.add(importname);
     }
   
-    public void onClass(String classname)
+    public void onClass(ClassClass cc)
     {
       try
       {
-        String fullclassname= (packagename!=null) ? packagename+'.'+classname : classname;
-        classobject=Class.forName(fullclassname);
-        parsedclasses.add(classobject);
-        this.classname=classname;
+        String fullclassname=cc.getFullName();
+        current_classobject=Class.forName(fullclassname);
+        parsedclasses.add(current_classobject);
+        current_class=cc;
       }
       catch(ClassNotFoundException e) { throw new RuntimeException(e.toString()); }
     }
  
-    public void onClassEnd(String classname) throws java.io.IOException
+    public void onClassEnd(ClassClass cc) throws java.io.IOException
     {
-      if(this.classname!=classname)
+      if(current_class!=cc)
         throw new RuntimeException();
-      this.classname=null;
-      classobject=null;
+      current_class=current_class.getParent();
+      current_classobject=current_classobject.getDeclaringClass();
+    }
+    
+    public void onFileEnd()
+    {
     }
   
     private String last_element_type=null;
@@ -227,7 +230,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
           try
           {
             //System.out.println("getField: >"+classobject+"< >"+cf.getName()+"<");
-            Field f=classobject.getDeclaredField(cf.getName());
+            Field f=current_classobject.getDeclaredField(cf.getName());
             elementtypes.put(f,c);
             //System.out.println("SourceReflectionFacade: put("+f+","+c+")");
           }

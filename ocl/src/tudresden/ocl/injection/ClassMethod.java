@@ -47,15 +47,17 @@ public class ClassMethod extends ClassFeature
   private ArrayList throwables=new ArrayList();
     
 
-  public ClassMethod(String classname, 
+  public ClassMethod(ClassClass parent, 
                      int modifiers, 
                      String type, 
                      String name, 
                      int name_end)
     throws InjectorParseException
   {
-    super(classname, modifiers, type, name);
+    super(parent, modifiers, type, name);
     this.name_end=name_end;
+    if(parent==null)
+      throw new RuntimeException();
   }
 
   public final void addParameter(String paramtype, String paramname)

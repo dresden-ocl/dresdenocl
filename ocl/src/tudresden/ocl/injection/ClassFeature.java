@@ -24,25 +24,29 @@ import tudresden.ocl.codegen.CodeFragment;
 
 public abstract class ClassFeature
 {
-  private String classname;
+  /**
+     The class, which contains this feature.
+     May be null for top-level classes.
+  */
+  private ClassClass parent;
 
   private int modifiers;
 
   /**
      The return type of the method.
-     Is null, if is is a constructor.
+     Is null, if is is a constructor, or a class
   */
   protected String type;
 
   protected String name;
   
-  public ClassFeature(String classname, 
+  public ClassFeature(ClassClass parent, 
                       int modifiers, 
                       String type, 
                       String name)
     throws InjectorParseException
   {
-    this.classname=classname;
+    this.parent=parent;
     this.modifiers=modifiers;
     this.type=type;
     this.name=name;
@@ -55,9 +59,9 @@ public abstract class ClassFeature
         " of type "+getClass().getName()+'.');
   }
   
-  public final String getClassName()
+  public final ClassClass getParent()
   {
-    return classname;
+    return parent;
   }
   
   public final int getModifiers()
@@ -84,9 +88,11 @@ public abstract class ClassFeature
 
   public final void print(PrintStream o)
   {
-    o.println("  "+SourceReflectionExtender.extractClassName(getClass().getName())+" ("+java.lang.reflect.Modifier.toString(modifiers)+
+    o.println("  "+SourceReflectionExtender.extractClassName(getClass().getName())+
+              " ("+java.lang.reflect.Modifier.toString(modifiers)+
               ") >"+type+
-              "< >"+name+"<");
+              "< >"+name+
+              "< in >"+(parent==null?"none":parent.getName())+"<");
     printMore(o);
   }
 
