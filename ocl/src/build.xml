@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- $Id: build.xml,v 1.2 2001/02/06 01:02:35 vg103 Exp $ -->
+<!-- $Id: build.xml,v 1.3 2001/02/09 21:05:22 vg103 Exp $ -->
 <!-- Authored by Dan Shields <daniel@pointrelease.com>                     -->
 <!-- Derived from the starting point build.xml, but heavily reworked       -->
 
@@ -14,13 +14,19 @@
 
   <!-- <property name="build.compiler" value="classic" /> -->
   <!-- external packages -->
-  <property name="xerces.jar" value="${basedir}/xerces.jar" />
+  <property name="ext.dir" value="${basedir}/../ext" />
+  <property name="xerces.jar" value="${ext.dir}/xerces.jar" />
+  <property name="junit.jar"  value="${ext.dir}/junit.jar"  />
   <property name="test.jar"  value="${basedir}/test.jar"  />
+
+  <property name="local.class.path" 
+    value="${java.class.path}:${basedir}:${xerces.jar}:${junit.jar}" 
+    />
   <!-- directory structure -->
-  <property name="build.dir" value="${basedir}/build" />
+  <property name="src.dir" value="${basedir}/." />
+  <property name="build.dir" value="${basedir}/." />
   <property name="jars.dir"  value="${basedir}/jars"  />
   <property name="api.dir"   value="${basedir}/api"   />
-  <property name="local.class.path" value="${java.class.path}:${basedir}:${xerces.jar}" />
 
   <!-- various file pattern lists for the jars -->
   <property name="prefix"            value="tudresden/ocl"/>
@@ -38,7 +44,7 @@
   <!-- INITIALIZATION:                                                     -->
 
   <target name="init">
-    <available file="${test.jar}" property="test.present"/>
+    <!-- <available file="${test.jar}" property="test.present"/> -->
   </target>
 
   <!-- ******************************************************************* -->
@@ -55,17 +61,16 @@
     <echo message="                    and create the jar archives"/>
     <echo message="  - buildTest     : to build (as above) and run the tests"/>
     <echo message="  - check         : to compile and run the tests"/>
-    <echo message="  - clean         : to remove the files that were generated during building"/>
+    <echo message="  - clean         : to clean up the .class and .jar files"/>
+    <echo message="  - cleanall      : to clean up all files generated during building"/>
     <echo message="  - help          : to display this message"/>
     <echo message=""/>
     <echo message="You can also change the values of some properties using the ant -D flag"/>
     <echo message="For example if you want to use the jikes compiler, you should run :"/>
-    <echo message=""/>
     <echo message="         ant -Dbuild.compiler=jikes compile"/>
     <echo message=""/>
-    <echo message="If you don't like typing -Dxxx=yyy each time you compile, you can save" />
-    <echo message="your properties in a &#x22;ant.properties&#x22; file, this file should have the" />
-    <echo message="format specified by the java.util.Properties class" />
+    <echo message="local.class.path=${local.class.path}"/>
+    <echo message=""/>
     <echo message=""/>
   </target>
 
@@ -104,15 +109,13 @@
     <delete >
       <fileset dir="${jars.dir}" includes="**/*.jar" />
     </delete>
-    <delete >
-      <fileset dir="${api.dir}" includes="**/*.html" />
-    </delete>
   </target>
   <target name="_compile" depends="prepare">
-    <javac srcdir="${basedir}"
+    <javac srcdir="${src.dir}"
            destdir="${build.dir}"
-           classpath="${local.class.path}:${test.jar}"
+           classpath="${local.class.path}"
            deprecation="on"
+           debug="on"
            optimize="on" />
   </target>
   <target name="jar" depends="_compile">
@@ -135,17 +138,24 @@
   <!-- ******************************************************************* -->
   <!-- TESTS:                                                              -->
 
-  <target name="check" if="test.present">
-    <java classname="test.textui.TestRunner"
-          fork="yes"
-          classpath="${local.class.path}:${test.jar}"
-          args="tudresden.ocl.test.TestAll" />
+  <!-- 1. testinjection -->
+  <target name="_test1">
+    <!-- TODO -->
   </target>
+
+  <!-- check: runs all 'must have' tests -->
+  <target name="check" depends="_test1" />
 
   <!-- ******************************************************************* -->
   <!-- DOCUMENTATION:                                                      -->
 
-  <target name="documentation" depends="prepare">
+  <target name="cleandocs" >
+    <delete >
+      <fileset dir="${api.dir}" includes="**/*.html" />
+    </delete>
+  </target>
+
+  <target name="documentation" depends="cleandocs,prepare">
     <javadoc classpath="${local.class.path}"
              author="true"
              private="true"
@@ -166,6 +176,7 @@
   <target name="compile" depends="compileAll"/>
   <target name="build" depends="buildStarted,compileAll,documentation,buildCompleted"/>
   <target name="buildTest" depends="build,check"/>
+  <target name="cleanall" depends="clean,cleandocs"/>
 
 </project>
 
