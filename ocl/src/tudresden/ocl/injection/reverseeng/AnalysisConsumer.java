@@ -163,7 +163,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     * <p><strong>This method relies on the compiled versions of all classes of the system to be analysed
     * to be available in the classpath.</strong></p>
     */
-  public void onClassFeature(JavaFeature cf) throws java.io.IOException {
+  public void onClassFeature(JavaFeature cf) throws InjectorParseException, java.io.IOException {
     if (cf instanceof JavaAttribute) {
       // Attribute. Also a collection?
       if (cf.getType () != null) {

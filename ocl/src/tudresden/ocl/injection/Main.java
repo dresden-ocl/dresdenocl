@@ -119,7 +119,8 @@ final class OclInjector implements InjectionConsumer
     observedFeatures=new ArrayList();
   }
 
-  public void onClassEnd(JavaClass cc) throws IOException
+  public void onClassEnd(JavaClass cc) 
+    throws IOException, InjectorParseException
   {
     if(clean) return;
 
@@ -326,6 +327,7 @@ final class OclInjector implements InjectionConsumer
      @see JavaFile#findType(String)
   */
   private final boolean isCollection(JavaFeature jf)
+    throws InjectorParseException
   {
     Class jftype=jf.getFile().findType(jf.getType());
     return 
@@ -337,7 +339,8 @@ final class OclInjector implements InjectionConsumer
   }
   
   
-  public final void writeObserver(JavaFeature cf) throws IOException
+  public final void writeObserver(JavaFeature cf) 
+    throws IOException, InjectorParseException
   {
     Writer o=output;
     boolean is_collection=isCollection(cf);
@@ -385,7 +388,8 @@ final class OclInjector implements InjectionConsumer
     o.write("();\n");
   }
 
-  public final void writeChangedChecker() throws IOException
+  public final void writeChangedChecker() 
+    throws IOException, InjectorParseException
   {
     Writer o=output;
     o.write("/**\n    Checks object features, whether they have changed.\n    Generated automatically, DO NOT CHANGE!\n    @author ");

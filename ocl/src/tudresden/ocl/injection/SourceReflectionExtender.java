@@ -166,7 +166,8 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     {
     }
     
-    public void onClassFeature(JavaFeature cf) throws java.io.IOException
+    public void onClassFeature(JavaFeature cf) 
+      throws java.io.IOException, InjectorParseException
     {
       if(cf instanceof JavaAttribute)
       {

@@ -52,7 +52,8 @@ public interface InjectionConsumer
         the same object as in the corresponding call to onClass
      @see #onClass(JavaClass)
   */
-  public void onClassEnd(JavaClass cc) throws java.io.IOException;
+  public void onClassEnd(JavaClass cc) 
+    throws java.io.IOException, InjectorParseException;
   
   /**
      Encountered the header of a java method.
