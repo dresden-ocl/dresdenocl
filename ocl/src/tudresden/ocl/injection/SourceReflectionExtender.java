@@ -169,7 +169,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
         {
           return Class.forName(last_element_type);
         }
-        catch(ClassNotFoundException e) { throw new RuntimeException(e.toString()); };
+        catch(ClassNotFoundException e) { throw new RuntimeException(e.toString()); }
       }
 
       try
