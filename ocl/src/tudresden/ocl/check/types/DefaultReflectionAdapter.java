@@ -61,11 +61,17 @@ public class DefaultReflectionAdapter implements ReflectionAdapter {
       return tudresden.ocl.check.types.Basic.REAL;
     } else if (c==Boolean.class || c==Boolean.TYPE) {
       return tudresden.ocl.check.types.Basic.BOOLEAN;
-    } else if (c==java.util.Vector.class || c==java.util.LinkedList.class) {
-      return new tudresden.ocl.check.types.Collection(
-        tudresden.ocl.check.types.Collection.SEQUENCE,
-        null
-      );
+    } else if(java.util.Collection.class.isAssignableFrom(c)) 
+    {
+      int collectionKind;
+      if(java.util.Set.class.isAssignableFrom(c) || (tudresden.ocl.lib.Ocl.TAKE_VECTORS_AS_SET && java.util.Vector.class.isAssignableFrom(c)))
+        collectionKind=tudresden.ocl.check.types.Collection.SET;
+      else if(java.util.List.class.isAssignableFrom(c))
+        collectionKind=tudresden.ocl.check.types.Collection.SEQUENCE;
+      else
+        throw new RuntimeException("encountered a java.util.Collection, which is neither Set or List.");
+
+      return new tudresden.ocl.check.types.Collection(collectionKind, null);
     }
     return null;
   }

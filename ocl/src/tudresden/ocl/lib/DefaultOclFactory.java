@@ -48,14 +48,23 @@ public class DefaultOclFactory implements OclFactory {
     if (o==null) return new OclString(null);
     if (o instanceof String)
       return new OclString( (String)o );
-    else if (o instanceof Vector) {
-      // add distinction between Set and Sequence here
-      HashSet set=new HashSet();
-      Enumeration enum=((Vector)o).elements();
-      while (enum.hasMoreElements()) {
-        set.add(getOclRepresentationFor(enum.nextElement()));
+    else if (o instanceof java.util.Collection) {
+      java.util.Collection oc=(java.util.Collection)o;
+      if(o instanceof java.util.Set || (Ocl.TAKE_VECTORS_AS_SET && (o instanceof java.util.Vector)))
+      {
+        HashSet set=new HashSet();
+        for(Iterator i=oc.iterator(); i.hasNext(); ) 
+          set.add(getOclRepresentationFor(i.next()));
+        return new OclSet(set);
       }
-      return new OclSet(set);
+      else if(o instanceof java.util.List)
+      {
+        ArrayList list=new ArrayList();
+        for(Iterator i=oc.iterator(); i.hasNext(); ) 
+          list.add(getOclRepresentationFor(i.next()));
+        return new OclSequence(list);
+      }
+      throw new OclException("encountered a java.util.Collection, which is neither Set or List.");
     } else if (o instanceof Boolean)
       return getOclRepresentationFor( ((Boolean)o).booleanValue() );
     else if (o instanceof Integer)

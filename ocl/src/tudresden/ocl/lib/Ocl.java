@@ -126,6 +126,16 @@ public final class Ocl {
    *  necessary usually.
    */
   public static boolean STRICT_FLATTENING = false;
+  
+  /** Determines, whether attributes of type java.util.Vector are treated
+   * as Sequences or Sets.
+   * Default is Sequence (false).
+   * The other way is needed for older CASE-Tools and their code generators.
+   * This effects both the ocl library and the reflection facade.
+   * @see DefaultOclFactory#getRepresentationFor(Object)
+   * @see tudresden.ocl.check.types.DefaultReflectionAdapter#getTypeForClass
+   */
+  public static boolean TAKE_VECTORS_AS_SET = false;
 
   /** this objects contains factory methods to generate OCL representations
    *  for application objects and values
