@@ -18,6 +18,7 @@ Xerces 1.4.3 (xerces.jar)
   XML Parser
   by The Apache XML Project
   http://xml.apache.org/xerces-j/
+  maintained in CVS
 
 JUnit 3.7 (junit.jar)
   Test Framework
