@@ -597,6 +597,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
   <target name="task.test" depends="compile">
     <taskdef name="diff" classname="tudresden.ocl.test.DiffTask" classpath="${src.dir}" />
     <taskdef name="sort" classname="tudresden.ocl.test.SortTask" classpath="${src.dir}" />
+    <taskdef name="isempty" classname="tudresden.ocl.test.IsEmptyTask" classpath="${src.dir}" />
   </target>
 
   <target name="test.dresden-ocl-injector"
@@ -616,10 +617,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
         <pathelement location="${build.dir}/dresden-ocl-injector.jar" />
       </classpath>
     </java>
-    <java classname="tudresden.ocl.test.Empty" taskname="isempty" failonerror="yes">
-      <classpath><pathelement location="${src.dir}/" /></classpath>
-      <arg value="${build.dir}/dresden-ocl-injector.jar.emptytestoutput" />
-    </java>
+    <isempty file="${build.dir}/dresden-ocl-injector.jar.emptytestoutput" />
     <exec executable="java"
         dir="${build.dir}/testweb/"
         failonerror="true"

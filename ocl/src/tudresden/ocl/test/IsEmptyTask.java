@@ -21,16 +21,37 @@ package tudresden.ocl.test;
 import java.io.*;
 import java.util.*;
 
-public class Empty
+// IMPORTANT! You may need to mount ant.jar before this class will
+// compile. So mount the JAR modules/ext/ant.jar (NOT modules/ant.jar)
+// from your IDE installation directory in your Filesystems before
+// continuing to ensure that it is in your classpath.
+
+import org.apache.tools.ant.*;
+import org.apache.tools.ant.types.*;
+
+public class IsEmptyTask extends Task
 {
 
-	public static void main(String[] args) throws IOException
+
+	private File file;
+
+	public void setFile(final File file)
 	{
-		final File file = new File(args[0]);
+		this.file = file;
+	}
+
+
+	public void execute() throws BuildException
+	{
 		if(!file.exists())
-			throw new RuntimeException("File "+file+" does not exist.");
+			throw new BuildException("File does not exist: "+file, location);
+		if(!file.canRead())
+			throw new BuildException("Cannot read file: "+file, location);
+
+		log("Checking "+file);
+
 		if(file.length()!=0l)
-			throw new RuntimeException("File "+file+" is not empty.");
+			throw new BuildException("File is not empty: "+file, location);
 	}
 
 }
