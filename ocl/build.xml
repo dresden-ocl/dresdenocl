@@ -95,6 +95,7 @@ Enhancements by Steffen Zschaler.
     </javac>
   </target>
 
+
   <target name="test"
           description="Runs all tests."
           depends="test.junit, test.example, test.royloy, test.dresden-ocl-injector"
@@ -514,7 +515,8 @@ Enhancements by Steffen Zschaler.
 
 
   <target name="clean"
-          description="Deletes all generated files except API documentation.">
+          description="Deletes all generated files except API documentation and distributions."
+  >
     <delete dir="${build.dir}"/>
     <delete>
       <fileset dir="${src.dir}/tudresden" includes="**/*.class" />
@@ -881,9 +883,8 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
   <!-- Creating Distributions -->
 
-  <target name="dist.bin" depends="build.dir"
+  <target name="dist.bin" depends="test, jar"
   >
-<!--          depends="all" -->
     <tar tarfile="${build.dir}/dresden-ocl.tar">
       <tarfileset dir="${basedir}">
         <include name="README" />
@@ -909,21 +910,59 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
     />
   </target>
 
-  <target name="dist.version" unless="dist.version">
-    <fail message="No release version set. Use ant dist -Ddist.version=major.minor.revsion" />
+  <target name="dist.src" depends="build.dir"
+  >
+    <tar tarfile="${build.dir}/dresden-ocl-src.tar">
+      <tarfileset dir="${basedir}">
+        <include name="README" />
+        <include name="CHANGELOG" />
+        <include name="COPYING" />
+        <include name="CREDITS" />
+        <include name="build.xml" />
+        <include name="jikes.properties" />
+        <include name="www/*.html" />
+        <include name="src/**" />
+        <exclude name="src/tudresden/**/*.class" />
+        <exclude name="src/tudresden/ocl/parser/analysis/*.java" />
+        <exclude name="src/tudresden/ocl/parser/lexer/*.java" />
+        <exclude name="src/tudresden/ocl/parser/lexer/lexer.dat" />
+        <exclude name="src/tudresden/ocl/parser/parser/*.java" />
+        <exclude name="src/tudresden/ocl/parser/parser/parser.dat" />
+        <exclude name="src/tudresden/ocl/parser/node/*.java" />
+      </tarfileset>
+    </tar>
+
+    <echo message="--- testing source distribution for completeness ..." />
+    <delete dir="${build.dir}/dresden-ocl-src.tar.test" />
+    <mkdir  dir="${build.dir}/dresden-ocl-src.tar.test" />
+    <untar  src="${build.dir}/dresden-ocl-src.tar"
+           dest="${build.dir}/dresden-ocl-src.tar.test"
+    />
+    <ant   dir="${build.dir}/dresden-ocl-src.tar.test"
+           inheritAll="false"
+    />
+    <echo message="--- testing source distribution for completeness: done." />
+
+    <gzip     src="${build.dir}/dresden-ocl-src.tar"
+          zipfile="${build.dir}/dresden-ocl-src.tar.gz"
+    />
   </target>
 
-  <target name="dist.dir" depends="prepare">
-    <mkdir dir="${dist.dir}" />
+  <target name="dist.version" unless="dist.version">
+    <fail message="No release version set. Use ant dist -Ddist.version=major.minor.revision" />
   </target>
 
   <target name="dist"
           description="Build a release. Needs the release version in property dist.version."
-          depends="dist.version,dist.bin"
+          depends="dist.version,dist.bin,dist.src"
   >
     <echo message="Building release &gt;${dist.version}&lt;" />
+    <mkdir dir="${dist.dir}" />
     <copy   file="${build.dir}/dresden-ocl.tar.gz"
           tofile="${dist.dir}/dresden-ocl-${dist.version}.tar.gz"
+    />
+    <copy   file="${build.dir}/dresden-ocl-src.tar.gz"
+          tofile="${dist.dir}/dresden-ocl-src-${dist.version}.tar.gz"
     />
   </target>
 
