@@ -44,8 +44,6 @@ public final class Invariant implements FeatureListener
   public static final String OBSERVER_SUFFIX="_oclobservinginvariants812374";
   public static final String BACKUP_SUFFIX="_oclbackup812374";
   
-  private HashSet observedfeatures=new HashSet();
-  
   private final void addObserver(String featurename, Object o)
   {
     try
@@ -55,7 +53,6 @@ public final class Invariant implements FeatureListener
       Field f=c.getField(featurename);
       HashSet observer=(HashSet)(f.get(o));
       observer.add(this);
-      observedfeatures.add(observer);
     }
     catch(NoSuchFieldException e)   { e.printStackTrace(); throw new RuntimeException(e.toString());}
     catch(IllegalAccessException e) { e.printStackTrace(); throw new RuntimeException(e.toString());}
@@ -121,10 +118,32 @@ public final class Invariant implements FeatureListener
     vakantInvariants=new HashSet();
   }
 
+  
+  // notify invariants
+  
   public static final String NOTIFY_OBSERVING_INVARIANTS="tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants";
+
+  /**
+     Notifies the invariants observing an attribute, that 
+     the attribute has changed.
+     There is no notify method in class Invariant, 
+     instead the observing invariants are included into a set
+     of vakant invariants.
+
+     After notifying, the observer set is cleared. 
+     Next time, the invariant runs, the observers are registered again.
+  
+     @parameter observers 
+        the attribute changed, 
+        represented by its observers set.
+  */
   public static final void notifyObservingInvariants(HashSet observers)
   {
-    vakantInvariants.addAll(observers);
+    if(!observers.isEmpty())
+    {
+      vakantInvariants.addAll(observers);
+      observers.clear();
+    }
   }
       
 
@@ -218,7 +237,7 @@ public final class Invariant implements FeatureListener
     // since maps are used to represent qualified associations,
     // and java.util.Map does not enforce unique values,
     // I added an appropriate check here.
-    // quick and dirty, TODO
+    // quick and dirty, TODO, needs a better place
     if(m.size()!=(new HashSet(m.values()).size()))
       System.out.println("warning: map values are not unique.");
     return true;
