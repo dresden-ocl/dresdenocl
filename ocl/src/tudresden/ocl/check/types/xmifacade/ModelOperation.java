@@ -27,7 +27,7 @@ import tudresden.ocl.check.OclTypeException;
    Operations value identity is determined by name and parameter types only.
    Return type and isquery flag are not significant for value identity.
    Method equals and hashCode are implemented accordingly.
-   @see #equals()
+   @see #equals(Object)
    @see #hashCode()
 */
 public final class ModelOperation implements Comparable
@@ -102,7 +102,7 @@ public final class ModelOperation implements Comparable
      For each class there shouldn't be two operations beeing equal.
      This method cannot be used for navigate, since it does not care
      about polymorphism of parameter types.
-     @see XmiModelFacade.XmiClass#navigate(String, Type[])
+     @see ModelClass#navigateParameterized(String, Type[])
   */
   public boolean equals(Object o)
   {

@@ -46,7 +46,7 @@ import tudresden.ocl.check.OclTypeException;
    and issues a warning to standard out.
 
    If you dont like the warnings, edit ModelClass.flatten for your needs.
-   @see #ModelClass.flatten()
+   @see #flatten()
 */
 public final class Model implements ModelFacade
 {
