@@ -161,7 +161,7 @@ public class MappedClass {
 
 				while (e.hasMoreElements()) {
 					Table t = (Table)e.nextElement();
-					String[] keys = t.getKeyColumns();
+					String[] keys = t.getPrimaryKeyColumns();
 					String key = "";
 
 					for (int i=0; i<keys.length; i++) {
@@ -218,7 +218,7 @@ public class MappedClass {
                     while (e.hasMoreElements()) {
 				t = (Table)e.nextElement();
 				col = t.getAttributeColumn(name);
-				temp = t.getKeyColumns();
+				temp = t.getPrimaryKeyColumns();
 				where = "";
 
 				for (int i=0; i<temp.length; i++) {
