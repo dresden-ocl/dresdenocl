@@ -160,8 +160,12 @@ public final class Invariant implements FeatureListener
 
      For null arguments it returns the same value as for
      empty lists.
+     <p>
+     Is also responsible for <code>java.util.Collection</code>.
+     There it's not known, whether order and duplicates
+     matter, so we are on the save side, if we assume so.
   */
-  public static final int identityHashCode(List list)
+  public static final int identityHashCode(Collection list)
   {
     int hashCode=1;
 
