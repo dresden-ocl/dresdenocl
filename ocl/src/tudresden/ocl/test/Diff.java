@@ -57,7 +57,7 @@ public class Diff extends Assert
 	{
 		try
 		{
-			diff(new DiffSource(new File(args[0])), new DiffSource(new File(args[0])));
+			diff(new DiffSource(new File(args[0])), new DiffSource(new File(args[1])));
 		}
 		catch(IOException e)
 		{
