@@ -317,8 +317,6 @@ final class OclInjector implements InjectionConsumer
   }
 
 
-  public final String BACKUP_SUFFIX="_oclbackup";
-  
   public final void writeObserver(JavaFeature cf) throws IOException
   {
     Writer o=output;
@@ -333,7 +331,7 @@ final class OclInjector implements InjectionConsumer
     o.write(cf.getType());
     o.write(' ');
     o.write(cf.getNotWrappedName());
-    o.write(BACKUP_SUFFIX);
+    o.write(Invariant.BACKUP_SUFFIX);
     o.write('=');
     o.write(cf.getNotWrappedName());
     o.write(";/**\n    Contains observers for modifications of this feature.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
@@ -375,10 +373,10 @@ final class OclInjector implements InjectionConsumer
       o.write(jf.getNotWrappedName());
       o.write("!=");
       o.write(jf.getNotWrappedName());
-      o.write(BACKUP_SUFFIX);
+      o.write(Invariant.BACKUP_SUFFIX);
       o.write(")\n    {\n      ");
       o.write(jf.getNotWrappedName());
-      o.write(BACKUP_SUFFIX);
+      o.write(Invariant.BACKUP_SUFFIX);
       o.write('=');
       o.write(jf.getNotWrappedName());
       o.write(";\n");

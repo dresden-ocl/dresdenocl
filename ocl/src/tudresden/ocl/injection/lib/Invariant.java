@@ -42,6 +42,7 @@ public final class Invariant implements FeatureListener
   
 
   public static final String OBSERVER_SUFFIX="_oclobservinginvariants812374";
+  public static final String BACKUP_SUFFIX="_oclbackup812374";
   
   private HashSet observedfeatures=new HashSet();
   
