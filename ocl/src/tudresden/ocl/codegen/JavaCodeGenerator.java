@@ -195,7 +195,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
     }
     if ( topOfStack.getKind()==CodeFragment.POST ) {
       Type oclReturnType=tree.getTypeFor("result", cb.getExpression());
-      if (oclReturnType!=null) {
+      if (oclReturnType!=null && ! oclReturnType.equals(Basic.VOID)) {
         if (javaResult==null) {
           throw new OclException("tried to generate code for post condition without setting Java code for result");
         }
