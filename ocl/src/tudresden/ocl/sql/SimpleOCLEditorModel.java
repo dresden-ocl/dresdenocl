@@ -19,6 +19,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.sql;
 
 import java.util.*;
+import java.io.*;
 import tudresden.ocl.gui.*;
 import tudresden.ocl.parser.*;
 import tudresden.ocl.check.*;
@@ -30,7 +31,7 @@ import javax.swing.event.*;
  * A simple implementation of the OCLEditorModel interface to serve the requirements of the OCL2SQL tool.
  * @author  Sten Loecher
  */
-public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.ocl.gui.OCLEditorModel {
+public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.ocl.gui.OCLEditorModel, java.io.Serializable {
     
     /**
      *  List of all constraints.
@@ -68,7 +69,7 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
      *  Add a fresh constraint to the model.
      */
     public void addConstraint() {
-        theConstraints.add(new SimpleConstraintRepresentation("unnamedConstrained", "context "));
+        theConstraints.add(new SimpleConstraintRepresentation("unnamedConstraint", "context "));
         fireConstraintAdded();
     }
     
@@ -201,12 +202,35 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
         }
     }
     
+    /**
+     *  Implementation of the Serialization interface to avoid the serialization of the event listeners.
+     */
+    private void writeObject(java.io.ObjectOutputStream out) 
+    throws java.io.IOException {
+        out.writeObject(theConstraints);
+    }
     
+    /**
+     *  Implementation of the Serialization interface to avoid the serialization of the event listeners.
+     */
+    private void readObject(java.io.ObjectInputStream in)
+    throws java.io.IOException, java.lang.ClassNotFoundException {
+        theConstraints = (List)in.readObject();
+        theEventListeners = new EventListenerList();
+    }
+    
+    /**
+     *
+     */
+    public void setModelFacade(ModelFacade mf) {
+        theModelFacade = mf;
+    }
+       
     /**
      * A simple implementation of the ConstraintRepresentation interface.
      * @author  Sten Loecher
      */
-    public class SimpleConstraintRepresentation extends java.lang.Object implements tudresden.ocl.gui.ConstraintRepresentation {
+    public class SimpleConstraintRepresentation extends java.lang.Object implements tudresden.ocl.gui.ConstraintRepresentation, java.io.Serializable {
     
         /**
          *  The actual constraint will be stored directly into String objects.

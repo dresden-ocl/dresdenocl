@@ -64,7 +64,51 @@ public class ObjectViewSchema implements ORMappingScheme {
 	public String getViewDefinition(String classifier) {
 		return ((View)classifiersToViews.get(classifier)).getStatement();
 	}
-
+        
+        /**
+         *  @return a String that contains the view definitions of all classifiers
+         */
+        public String getViewDefinitions() {
+            Set classifiers = classifiersToViews.keySet();
+            StringBuffer result = new StringBuffer();
+            
+            for (Iterator i=classifiers.iterator(); i.hasNext(); ) {
+                result.append(((View)classifiersToViews.get(i.next())).getStatement());
+                result.append("\n\n");
+            }
+            
+            return result.toString();
+        }
+        
+        /**
+         *  @return a String array that contains the names of all tables the view queries
+         *  @param viewName the name of a view
+         *  @exception IllegalArgumentException if no view with the specified named exists
+         */
+        public String[] getQueriedTables(String viewName) 
+        throws IllegalArgumentException {
+            String result[] = {};
+            String cn;
+            View v;
+            boolean exception = true;
+            
+            for (Iterator i=classifiersToViews.keySet().iterator(); i.hasNext(); ) {
+                cn = (String)i.next();
+                v = (View)classifiersToViews.get(cn);
+                if (v.getTableName().equals(viewName)) {
+                    exception = false;
+                    result = (String[])v.getTableNames().toArray(new String[v.getTableNames().size()]);
+                    break;
+                }
+            }
+            
+            if (exception) {
+                throw new IllegalArgumentException("View " + viewName + " does not exist !");
+            } else {
+                return result;
+            }
+        }
+        
 	// ---------------------------------------------------------------------------------	
 	/**
 	 * Basic mapping of class tables to one view including attributes. 
