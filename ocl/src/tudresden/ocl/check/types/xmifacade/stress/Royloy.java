@@ -20,6 +20,7 @@ package tudresden.ocl.check.types.xmifacade.stress;
 
 import tudresden.ocl.check.types.Basic;
 import tudresden.ocl.check.types.Type;
+import tudresden.ocl.check.types.Any;
 import tudresden.ocl.check.types.xmifacade.*;
 import java.util.*;
 
@@ -156,7 +157,7 @@ public class Royloy
     oper(dayType, "getFollowingDay", dayType, paramsDayType);
     attr(day, "type", dayType);
     attr(day, "isWeekend", Basic.BOOLEAN);
-    oper(day, "setType", Model.VOID, paramsDayType);
+    oper(day, "setType", Any.VOID, paramsDayType);
 
     // Royals and Loyals
 
@@ -176,7 +177,7 @@ public class Royloy
     burning.addDirectSupertype(transaction);
     earning.addDirectSupertype(transaction);
 
-    oper(loyaltyProgram, "enroll", Model.VOID, paramsCustomer);
+    oper(loyaltyProgram, "enroll", Any.VOID, paramsCustomer);
 
     attr(programPartner, "numberOfCustomers", Basic.INTEGER);
 
@@ -196,8 +197,8 @@ public class Royloy
     attr(customerCard, "printedName", Basic.STRING);
 
     attr(loyaltyAccount, "points", Basic.INTEGER);
-    oper(loyaltyAccount, "earn", Model.VOID, paramsInteger);
-    oper(loyaltyAccount, "burn", Model.VOID, paramsInteger);
+    oper(loyaltyAccount, "earn", Any.VOID, paramsInteger);
+    oper(loyaltyAccount, "burn", Any.VOID, paramsInteger);
     oper(loyaltyAccount, "isEmpty", Basic.BOOLEAN);
 
     attr(transaction, "points", Basic.INTEGER);

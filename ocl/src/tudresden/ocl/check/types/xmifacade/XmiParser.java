@@ -303,7 +303,7 @@ public final class XmiParser
             "long".equals(name))    any=Basic.INTEGER;
     else if("float".equals(name) ||
             "double".equals(name))  any=Basic.REAL;
-    else if("void".equals(name))    any=Model.VOID;
+    else if("void".equals(name))    any=Any.VOID;
     else if("char".equals(name))    any=new ModelClass(packagePath, name);
 
     if(basictype)
@@ -404,7 +404,7 @@ public final class XmiParser
     if(returntype==null)
     {
       System.out.println("xmifacade: warning: operation \""+name+"\" has no return type defined, assuming void.");
-      returntype=Model.VOID;
+      returntype=Any.VOID;
     }
 
     Type[] params=new Type[paramslist.size()];

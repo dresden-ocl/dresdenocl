@@ -99,7 +99,7 @@ public class TestModelFacade implements ModelFacade {
     earning=new TestClassifier("Earning");
     date=new TestClassifier("Date");
 
-    loyaltyProgram.features.put("enroll", new TestBFeature("enroll", null));
+    loyaltyProgram.features.put("enroll", new TestBFeature("enroll", Any.VOID, customer));
     programPartner.features.put("numberOfCustomers", new TestSFeature("numberOfCustomers", Basic.INTEGER));
     serviceLevel.features.put("name", new TestSFeature("name", Basic.STRING));
     customer.features.put("name", new TestSFeature("name", Basic.STRING));

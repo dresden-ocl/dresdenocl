@@ -154,39 +154,6 @@ public final class Model implements ModelFacade
   }
 
   /**
-     A dummy type for Void, since Basic does not provide one.
-     Used for internal structure only. Is never returned to users of XmiModelFacade.
-     @see tudresden.ocl.check.types.Basic
-  */
-  public static final Any VOID=new Any()
-  {
-    public Type navigateQualified(String name, Type[] qualifiers) throws OclTypeException
-    {
-      throw new IllegalArgumentException("called Model.VOID.navigateQualified(\""+qualifierString(name,qualifiers)+"\"), this should never happen.");
-    }
-
-    public Type navigateParameterized(String name, Type[] params) throws OclTypeException
-    {
-      throw new IllegalArgumentException("called Model.VOID.navigateParameterized(\""+signatureString(name,params)+"\"), this should never happen.");
-    }
-
-    public boolean hasState(String name)
-    {
-      return false;
-    }
-
-    public boolean conformsTo(Type type)
-    {
-      return (this==type);
-    }
-
-    public String toString()
-    {
-      return "void";
-    }
-  };
-
-  /**
      Indicates, that a ModelAttribute is ambiguiuos, thus cannot be used in OCL.
      @see ModelAttribute
   */
@@ -256,12 +223,10 @@ public final class Model implements ModelFacade
     return new String(b);
   }
 
-
   /**
-     Basic.toString returns "Integer" instead of "int", which can't
-     be distiguished from class Integer.
+     {@link Basic#toString} returns "Integer" instead of "int",
+     which can't be distiguished from class Integer.
      Used for debugging output only.
-     @see tudresden.ocl.check.types.Basic#toString()
   */
   public static String typeString(Type t)
   {
@@ -270,4 +235,5 @@ public final class Model implements ModelFacade
      t.toString().toLowerCase() :
      t.toString();
   }
+
 }

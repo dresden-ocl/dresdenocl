@@ -98,6 +98,5 @@ public interface Type {
 
   public String toString();
 
-
 } /* end interface Type */
 

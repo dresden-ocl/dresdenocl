@@ -337,10 +337,6 @@ public final class ModelClass implements Any, Comparable
           "Expected attribute \""+Model.qualifierString(name,qualifiers)+
           "\" in classifier \""+fullName+
           "\" cannot be used in OCL due to ambiguity. See OCL spec 5.4.1.");
-      if(type==Model.VOID)
-        throw new OclTypeException(
-          "Expected attribute \""+Model.qualifierString(name,qualifiers)+
-          "\" in classifier \""+fullName+"\" has type void.");
 
       Type[] attrqualifiers=attr.getQualifiers();
 
@@ -389,20 +385,12 @@ public final class ModelClass implements Any, Comparable
   */
   public Type navigateParameterized(String name, Type[] params) throws OclTypeException
   {
-    Type type;
 
     ModelOperation oper=getMatchingOperation(name, params);
     if(oper!=null)
-    {
-      type=oper.getType();
-      if(type!=Model.VOID)
-        return type;
-      throw new OclTypeException(
-        "Expected operation \""+Model.signatureString(name,params)+
-        "\" in classifier \""+fullName+"\" has return type void.");
-    }
+      return oper.getType();
 
-    type=Basic.navigateAnyParameterized(name, params);
+    Type type=Basic.navigateAnyParameterized(name, params);
     if(type!=null)
       return type;
 

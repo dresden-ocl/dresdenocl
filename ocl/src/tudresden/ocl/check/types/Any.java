@@ -32,6 +32,9 @@
 // FILE: d:/projekte/diplom/classes/tudresden/ocl/check/Any.java
 
 package tudresden.ocl.check.types;
+
+import tudresden.ocl.check.OclTypeException;
+import tudresden.ocl.check.types.xmifacade.Model;
 import java.util.*;
 
 /** This interface corresponds to the OCL type OclAny. It does not define
@@ -40,6 +43,61 @@ import java.util.*;
  *  @author Frank Finger
  */
 public interface Any extends Type {
+
+  /**
+     A dummy type for Void.
+
+     To be returned by {@link Type#navigateParameterized},
+     if the return type of the requested method is void.
+     This is ok for the type checker, if the method is in the
+     context clause of the ocl constraint. However, in the ocl
+     expression itself this is an error.
+
+     This dummy is a don't-touch-me object,
+     most methods throw an {@link IllegalArgumentException}.
+  */
+  public static final Any VOID=new VoidAny();
+
+  class VoidAny implements Any
+  {
+    /**
+       @throws IllegalArgumentException always
+    */
+    public Type navigateQualified(String name, Type[] qualifiers) throws OclTypeException
+    {
+      throw new IllegalArgumentException("called Any.VOID.navigateQualified(\""+Model.qualifierString(name,qualifiers)+"\"), this should never happen.");
+    }
+
+    /**
+       @throws IllegalArgumentException always
+    */
+    public Type navigateParameterized(String name, Type[] params) throws OclTypeException
+    {
+      throw new IllegalArgumentException("called Any.VOID.navigateParameterized(\""+Model.signatureString(name,params)+"\"), this should never happen.");
+    }
+
+    /**
+       @throws IllegalArgumentException always
+    */
+    public boolean hasState(String name)
+    {
+      throw new IllegalArgumentException("called Any.VOID.hasState(\""+name+"\"), this should never happen.");
+    }
+
+
+    /**
+       Returns true, if and only if the argument is this.
+    */
+    public boolean conformsTo(Type type)
+    {
+      return (this==type);
+    }
+
+    public String toString()
+    {
+      return "void";
+    }
+  };
 
 
 
