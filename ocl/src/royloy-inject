@@ -1,3 +1,4 @@
+# modifies royloy example code to check it's constraints
 java -cp .:xerces.jar \
   tudresden.ocl.injection.Main \
   --constraint-file tudresden/ocl/test/royloy/oclexpressions \
