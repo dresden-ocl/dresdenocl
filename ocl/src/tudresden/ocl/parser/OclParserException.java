@@ -29,11 +29,77 @@
  * http://www-st.inf.tu-dresden.de/ (Chair home page) or             *
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+// HISTORY
+//
+// 03/12/2001  [sz9 ]  Added extraction of error position.
+
 package tudresden.ocl.parser;
+
+import java.util.StringTokenizer;
 
 public class OclParserException extends RuntimeException {
 
+  private String m_sDetailMessage;
+  private int m_nErrorLine;
+  private int m_nErrorCol;
+  
   public OclParserException(String s) {
-    super(s);
+    super();
+    
+    extractErrorPosition (s);
+  }
+  
+  public String getMessage() {
+    return m_sDetailMessage;
+  }
+  
+  public int getErrorLine() {
+    return m_nErrorLine;
+  }
+  
+  public int getErrorCol() {
+    return m_nErrorCol;
+  }
+  
+  /**
+   * Extract error position from detail message, if possible. Assumes SableCC
+   * detail message
+   * format: "[" <line> "," <col> "]" <error message>
+   *
+   * <p>Error line and column are stored in {@link #m_nErrorLine} and
+   * {@link #m_nErrorCol} so that they can be retrieved using
+   * {@link #getErrorLine} and {@link #getErrorCol}. The detail message without
+   * the position information is stored in {@link #m_sDetailMessage}</p>
+   *
+   * @author Steffen Zschaler (sz9)
+   * @since  03/12/2001
+   */
+  private void extractErrorPosition (String sDetailMessage) {
+    if (sDetailMessage.charAt (0) == '[') {
+      // Positional data seems to be available
+      StringTokenizer st = new StringTokenizer (sDetailMessage.substring(1),
+                                                   ",]");
+      
+      try {
+        m_nErrorLine = Integer.parseInt (st.nextToken());
+        m_nErrorCol  = Integer.parseInt (st.nextToken());
+        
+        m_sDetailMessage = st.nextToken ("").substring (2); // skip "] "
+      }
+      catch (NumberFormatException nfe) {
+        nfe.printStackTrace();
+        // No positional data available
+        m_sDetailMessage = sDetailMessage;
+        m_nErrorLine = -1;
+        m_nErrorCol = -1;
+      }
+    }
+    else {
+      // No positional data available
+      m_sDetailMessage = sDetailMessage;
+      m_nErrorLine = -1;
+      m_nErrorCol = -1;
+    }
   }
 }

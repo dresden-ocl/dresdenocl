@@ -157,8 +157,6 @@
                       <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
                         <Component class="javax.swing.JTextPane" name="m_jtpConstraintEditor">
-                          <Properties>
-                          </Properties>
 
                           <Events>
                             <EventHandler event="caretUpdate" handler="onCaretUpdate"/>

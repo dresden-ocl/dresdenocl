@@ -26,6 +26,8 @@
 
 // OCLEditor.java -- new version of the ocl editor intented for practical use
 //
+// 03/12/2001  [sz9 ]  Added handling of line and column numbers in parser error
+//                     messages.
 // 02/23/2001  [sz9 ]  Added helper function to syntax check constraints.
 // 02/15/2001  [sz9 ]  Created.
 //
@@ -831,11 +833,20 @@ public class OCLEditor extends javax.swing.JPanel
               .setData (m_jtpConstraintEditor.getText());
         }
         catch (OclParserException ope) {
+          int nCaretPos = getCaretPositionFromLineAndColumn (
+              ope.getErrorLine(),
+              ope.getErrorCol());
+          
           JOptionPane.showMessageDialog (null,
                                            "Syntax error: " +
-                                                ope.getMessage(),
+                                                ope.getMessage()/* +
+                                                " at (" + ope.getErrorLine() +
+                                                ", " + ope.getErrorCol() + ")"*/,
                                            "Error",
                                            JOptionPane.ERROR_MESSAGE);
+          
+          m_jtpConstraintEditor.select (nCaretPos, nCaretPos);
+          m_jtpConstraintEditor.requestFocus();
         }
         catch (OclTypeException ote) {
           JOptionPane.showMessageDialog (null,
@@ -855,6 +866,34 @@ public class OCLEditor extends javax.swing.JPanel
     }
   }//GEN-LAST:event_onSubmitConstraintButton
 
+  /**
+   * Compute caret position for the given line and column in the editor pane's
+   * text.
+   */
+  protected int getCaretPositionFromLineAndColumn (int nLine, int nCol) {
+    int nCurLine = 1; int nCurCol = 1;
+    String sText = m_jtpConstraintEditor.getText();
+    int nCaret = 0;
+    while ((nCurLine != nLine) || (nCurCol != nCol)) {
+      if (nCaret >= sText.length()) {
+        return 0;
+      }
+      
+      if (sText.charAt (nCaret) == '\n') {
+        // new line
+        nCurLine++;
+        nCurCol = 1;
+      }
+      else {
+        nCurCol++;
+      }
+      
+      nCaret++;
+    }
+    
+    return nCaret;
+  }
+  
   /**
     * React to the remove button.
     */
