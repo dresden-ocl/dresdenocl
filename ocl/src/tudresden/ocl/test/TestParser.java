@@ -194,19 +194,25 @@ public class TestParser extends TestCase {
       tudresden.ocl.check.types.xmifacade.stress.Royloy.getModel()
     ) );
     try {
-      String argoXmi=
-        TestParser.class.getResource("xmi/argo07/royloy.xmi").getFile();
-      String roseXmi=
-        TestParser.class.getResource("xmi/rose/royloy.xml").getFile();
+      String description="xmi/argo07/royloy.xmi";
+      String file=TestParser.class.getResource(description).getFile();
       suite.addTest( new TestParser(
         "testFromFile",
         TestParser.class.getResource("oclexpressions.argo"),
-        tudresden.ocl.check.types.xmifacade.XmiParser.getModel(argoXmi)
+        tudresden.ocl.check.types.xmifacade.XmiParser.getModel(file, description)
       ) );
+    }
+    catch (Exception e) {
+      System.out.println("error while creating XMI model facade for argo:");
+      e.printStackTrace(System.out);
+    }
+    try {
+      String description="xmi/rose/royloy.xml";
+      String file=TestParser.class.getResource(description).getFile();
       suite.addTest( new TestParser(
         "testFromFile",
         TestParser.class.getResource("oclexpressions.xmi"),
-        tudresden.ocl.check.types.xmifacade.XmiParser.getModel(roseXmi,true)
+        tudresden.ocl.check.types.xmifacade.XmiParser.getModel(file,description,true)
       ) );
     }
     catch (Exception e) {

@@ -56,11 +56,17 @@ public final class Model implements ModelFacade
   */
   private HashMap classifiers=new HashMap();
 
-  private String url;
+  /**
+     A description of the source of this model.
+     Usually the xmi file.
+     Should be independent from system environment,
+     so that regression tests have always the same description.
+  */
+  private String description;
   
-  public Model(String url)
+  public Model(String description)
   {
-    this.url=url;
+    this.description=description;
   }
 
   /**
@@ -143,7 +149,7 @@ public final class Model implements ModelFacade
 
     Any a=((Any)classifiers.get(strip(name)));
     if(a==null)
-      throw new OclTypeException("Classifier \""+name+"\" in xmifacade \""+url+"\" not found.");
+      throw new OclTypeException("Classifier \""+name+"\" in xmifacade["+description+"] not found.");
     return a;
   }
 
@@ -217,7 +223,7 @@ public final class Model implements ModelFacade
 
   public String toString()
   {
-    return getClass().toString()+"("+url+")";
+    return getClass().toString()+"("+description+")";
   }
 
   /**

@@ -43,23 +43,25 @@ public final class XmiParser
   
   private String url;
 
-  public static Model createModel(String url) throws org.xml.sax.SAXException, java.io.IOException
+  public static Model createModel(String url, String description) 
+    throws org.xml.sax.SAXException, java.io.IOException
   {
-    return createModel(url, false);
+    return createModel(url, description, false);
   }
 
-  public static Model createModel(String url, boolean qualifiersOnTarget) throws org.xml.sax.SAXException, java.io.IOException
+  public static Model createModel(String url, String description, boolean qualifiersOnTarget) 
+    throws org.xml.sax.SAXException, java.io.IOException
   {
-    return (new XmiParser(url,qualifiersOnTarget)).model;
+    return (new XmiParser(url, description, qualifiersOnTarget)).model;
   }
 
   private static HashMap models=null;
 
-  public static Model getModelCatch(String url)
+  public static Model getModelCatch(String url, String description)
   {
     try
     {
-      return getModel(url);
+      return getModel(url, description);
     }
     catch(org.xml.sax.SAXException e) {e.printStackTrace(System.out);}
     catch(java.io.IOException e) {e.printStackTrace(System.out);};
@@ -67,21 +69,23 @@ public final class XmiParser
   }
 
   /**
-     Does caching, so that there is only one Instance for each xmi file.
+     Does caching, so that there is only one instance for each xmi file.
   */
-  public static Model getModel(String url) throws org.xml.sax.SAXException, java.io.IOException
+  public static Model getModel(String url, String description) 
+    throws org.xml.sax.SAXException, java.io.IOException
   {
-    return getModel(url, false);
+    return getModel(url, description,  false);
   }
 
-  public static Model getModel(String url, boolean qualifiersOnTarget) throws org.xml.sax.SAXException, java.io.IOException
+  public static Model getModel(String url, String description, boolean qualifiersOnTarget) 
+    throws org.xml.sax.SAXException, java.io.IOException
   {
     if(models==null)
       models=new HashMap();
 
     Model m=(Model)(models.get(url));
     if(m==null)
-      models.put(url, m=(new XmiParser(url, qualifiersOnTarget)).model);
+      models.put(url, m=(new XmiParser(url, description, qualifiersOnTarget)).model);
 
     return m;
   }
@@ -147,7 +151,6 @@ public final class XmiParser
     int nli=nl.getLength();
     for(int i=0; i<nli; i++)
     {
-      System.out.println("QUALIFIER");
       Element parel=(Element)nl.item(i);
       String typeid=demandSubElRef(parel, adapt("Foundation.Core.StructuralFeature.type"));
       Type qualifiertype=(Type)(ids.get(typeid));
@@ -185,15 +188,16 @@ public final class XmiParser
   private LinkedList generalizations=new LinkedList();
   private HashMap associations=new HashMap();
 
-  public XmiParser(String url, boolean qualifiersOnTarget) throws org.xml.sax.SAXException, java.io.IOException
+  public XmiParser(String url, String description, boolean qualifiersOnTarget) 
+    throws org.xml.sax.SAXException, java.io.IOException
   {
     this.qualifiersOnTarget=qualifiersOnTarget;
-    model=new Model(url);
+    model=new Model(description);
 
     DOMParser parser = new DOMParser();
     parser.parse(url);
     Document doc = parser.getDocument();
-    System.out.println("xmifacade: parsed "+url);
+    System.out.println("xmifacade: parsed "+description+(this.qualifiersOnTarget?"[qualifiersOnTarget]":""));
     Element documentEl=doc.getDocumentElement();
 
     //for(Element x=traverse(docel); x!=null; x=traverse(docel, x)) System.out.println(x.getTagName());
@@ -502,7 +506,7 @@ public final class XmiParser
     {
       try
       {
-        Model m=XmiParser.getModel(args[i]);
+        Model m=XmiParser.getModel(args[i], args[i]);
         m.printData();
       }
       catch(java.io.IOException e) {e.printStackTrace(System.out);}

@@ -125,7 +125,8 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
     if (System.getProperty("xmi_file")!=null) {
       try {
         return tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
-          System.getProperty("xmi_file")
+          System.getProperty("xmi_file"),
+          "System.getProperty(\"xmi_file\")"
         );
       }
       catch (org.xml.sax.SAXException e) {}

@@ -116,8 +116,12 @@ public class Test extends TestCase
 
   public void doTest()
   {
-    String xmiurl=(getClass().getResource("xmistress.xmi")).getFile();
-    m=tudresden.ocl.check.types.xmifacade.XmiParser.getModelCatch(xmiurl);
+    String filename="xmistress.xmi";
+    String xmiurl=(getClass().getResource(filename)).getFile();
+    m=tudresden.ocl.check.types.xmifacade.XmiParser.getModelCatch(
+      xmiurl,
+      getClass().toString()+".getResource("+filename+')'
+    );
     m.printData(System.out);
 
     Any alpha=m.getClassifier("Alpha");

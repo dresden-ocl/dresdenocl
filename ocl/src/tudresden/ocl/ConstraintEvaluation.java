@@ -550,6 +550,7 @@ public class ConstraintEvaluation extends JPanel
       return new tudresden.ocl.check.types.testfacade.TestModelFacade();
     } else if (mXmi.isSelected()) {
       return tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
+        mXmiUrl.getText().trim(), 
         mXmiUrl.getText().trim()
       );
     } else if (mReflection.isSelected()) {

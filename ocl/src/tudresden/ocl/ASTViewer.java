@@ -182,13 +182,8 @@ public class ASTViewer extends JPanel
           new tudresden.ocl.lib.ArgoNameAdapter()
         );
       } else if (rbXmi!=null && rbXmi.isSelected()) {
-        String xmifile=System.getProperty("xmi_file");
-        if (xmifile==null) {
-          xmifile="d:\\projekte\\diplom\\classes\\tudresden\\ocl\\test\\xmi\\royloy.xmi";
-          System.out.println("System property expression_file not specified, using default (");
-          System.out.println(xmifile+")");
-        }
-        mf=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmifile);
+        String xmifile=getClass().getResource("test/xmi/royloy.xmi").getFile();
+        mf=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmifile, xmifile);
       } else if (rbSable!=null && rbSable.isSelected()) {
         String[] packages={"tudresden.ocl.parser.node", "tudresden.ocl.test.royloy"};
         mf=new tudresden.ocl.check.bootstrap.SableReflectionFacade(

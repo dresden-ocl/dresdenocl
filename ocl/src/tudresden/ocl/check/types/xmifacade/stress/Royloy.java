@@ -91,7 +91,7 @@ public class Royloy
   {
     System.out.println("creating royloy test model (tudresden.ocl.check.types.xmifacade.Royloy)");
 
-    model=new Model("BUILT-IN_ROYLOY_TEST");
+    model=new Model("created by "+getClass());
 
     Type[] paramsString =new Type[] { Basic.STRING };
     Type[] paramsInteger=new Type[] { Basic.INTEGER };

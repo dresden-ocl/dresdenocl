@@ -720,7 +720,7 @@ public class Main
         }
         ModelFacade modelfacade;
         if(xmimodel!=null)
-          modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel);
+          modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel,xmimodel);
         else
         {
           if(nameadapter==null)

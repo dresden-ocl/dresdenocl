@@ -1,6 +1,3 @@
-System property tudresden.ocl.expressionFile not specified, using default (file:/home/rw7/oclcvs/src/tudresden/ocl/test/oclexpressions)
-System property tudresden.ocl.reflectionExpressionFile not specified, using default (file:/home/rw7/oclcvs/src/tudresden/ocl/test/oclexpressions.argo)
-System property tudresden.ocl.expressionFile not specified, using default (file:/home/rw7/oclcvs/src/tudresden/ocl/test/oclexpressions.xmi)
 creating royloy test model (tudresden.ocl.check.types.xmifacade.Royloy)
 classifier Account --> royloy::Account
 class royloy::Account Account
@@ -159,8 +156,7 @@ classifier royloy::ProgramPartner --> royloy::ProgramPartner
 classifier royloy::Service --> royloy::Service
 classifier royloy::ServiceLevel --> royloy::ServiceLevel
 classifier royloy::Transaction --> royloy::Transaction
-System property tudresden.ocl.expressionFile not specified, using default (file:/home/rw7/oclcvs/src/tudresden/ocl/test/oclexpressions.argo)
-xmifacade: parsed /home/rw7/oclcvs/src/tudresden/ocl/test/xmi/argo07/royloy.xmi
+xmifacade: parsed xmi/argo07/royloy.xmi
 xmifacade: using XMI adapter for IBM (tested with Argo 0.7).
 classifier Account --> royloy::Account
 class royloy::Account Account
@@ -349,10 +345,8 @@ classifier royloy::ServiceLevel --> royloy::ServiceLevel
 classifier royloy::Transaction --> royloy::Transaction
 classifier void?? --> void??
 class void?? void??
-System property tudresden.ocl.expressionFile not specified, using default (file:/home/rw7/oclcvs/src/tudresden/ocl/test/oclexpressions.xmi)
-xmifacade: parsed /home/rw7/oclcvs/src/tudresden/ocl/test/xmi/rose/royloy.xml
+xmifacade: parsed xmi/rose/royloy.xml[qualifiersOnTarget]
 xmifacade: using XMI adapter for OMG (tested with Rational Rose 98 sp1 with Unisys Plugin).
-QUALIFIER
 classifier Account --> royloy::Account
 class royloy::Account Account
   Bank bank
@@ -511,6 +505,32 @@ classifier royloy::ProgramPartner --> royloy::ProgramPartner
 classifier royloy::Service --> royloy::Service
 classifier royloy::ServiceLevel --> royloy::ServiceLevel
 classifier royloy::Transaction --> royloy::Transaction
+OclBag isEqualTo() is called with a non-OclBag parameter
+OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter
+OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter
+OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter
+OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter
+OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclBag isEqualTo() is called with a non-OclBag parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter
+OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter
+OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
+OclString.isEqualTo() called with non-OclString parameter
 starting testFromFile, using tudresden.ocl.check.types.testfacade.TestModelFacade
 starting testFromFile, using tudresden.ocl.check.types.ReflectionFacade([tudresden.ocl.test.royloy],tudresden.ocl.check.types.DefaultReflectionAdapter,tudresden.ocl.lib.ArgoNameAdapter,tudresden.ocl.injection.SourceReflectionExtender)
 dirty hack in reflectionfacade: royloy :: Person
@@ -521,9 +541,9 @@ dirty hack in reflectionfacade: royloy :: Person
 dirty hack in reflectionfacade: Person
 dirty hack in reflectionfacade: royloy :: Person
 dirty hack in reflectionfacade: Person
-starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(BUILT-IN_ROYLOY_TEST)
-starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(/home/rw7/oclcvs/src/tudresden/ocl/test/xmi/argo07/royloy.xmi)
-starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(/home/rw7/oclcvs/src/tudresden/ocl/test/xmi/rose/royloy.xml)
+starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(created by class tudresden.ocl.check.types.xmifacade.stress.Royloy)
+starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(xmi/argo07/royloy.xmi)
+starting testFromFile, using class tudresden.ocl.check.types.xmifacade.Model(xmi/rose/royloy.xml)
 converting context Person inv: self.age>15
 converting context Person inv inv1: self.age>15
 converting context Person inv: age>=0
@@ -554,7 +574,7 @@ converting context Company inv i0: let x=manager in employees->forAll(x|x.age<=x
 converting context Company inv i0: employees->forAll(e1|self.employees->forAll(e1|e1<>e1 implies e1.name<>e1.name))
 converting context Person inv i: let a=age in employers->iterate(i:Company; a:Integer=0|a+i.employees->size)>10
 converting context Person inv a: let a=1 in let a=a+1 in let a=a+1 in a=3
-xmifacade: parsed /home/rw7/oclcvs/src/tudresden/ocl/check/types/xmifacade/stress/xmistress.xmi
+xmifacade: parsed class tudresden.ocl.check.types.xmifacade.stress.Test.getResource(xmistress.xmi)
 xmifacade: using XMI adapter for IBM (tested with Argo 0.7).
 xmifacade: warning: ambigous attribute/role name "beta" in class "packageAleph::Beta", disabled for use in OCL.
 xmifacade: warning: ambigous attribute/role name "drei" in class "packageAleph::Gamma", disabled for use in OCL.
