@@ -101,7 +101,7 @@ public class TestInjection
       expectViolation("violated ocl invariant 'age_greater_zero' on object 'tudresden.ocl.test.royloy.Person[Person1]'.");
       expectViolation("violated ocl invariant 'age_greater_zero' on object 'tudresden.ocl.test.royloy.Person[Person2]'.");
       expectViolation("violated ocl invariant 'age_greater_zero' on object 'tudresden.ocl.test.royloy.Person[Person3]'.");
-      expectViolation("violated ocl invariant 'age_positive' on object 'tudresden.ocl.test.royloy.Person[Person3]'.");
+      expectViolation("violated ocl invariant 'ageGreaterEqual0' on object 'tudresden.ocl.test.royloy.Person[Person3]'.");
       expectViolation("violated ocl invariant 'age0to199' on object 'tudresden.ocl.test.royloy.Person[Person3]'.");
       expectViolation("violated ocl invariant 'customers_ordered_by_age' on object 'tudresden.ocl.test.royloy.Bank[Bank1]'.");
       expectViolation("violated ocl invariant 'bank_customer2_age' on object 'tudresden.ocl.test.royloy.Bank[Bank1]'.");

@@ -8,7 +8,12 @@ public class Person extends RLObject
 
   // Attributes
   public String name;
+  
+  /**
+     @invariant age>=0
+  */
   public int age=18;
+
   public boolean isMarried=false;
   public boolean isUnemployed=false;
 

@@ -1,8 +1,4 @@
 
-context Person
-inv age_positive:
-age>=0
-
 context Company
 inv manager_is_employee:
   employees->iterate(

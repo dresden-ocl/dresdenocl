@@ -264,13 +264,50 @@ final class OclInjector implements InjectionConsumer
       throw new RuntimeException();
   }
   
+  private final String makeName(String text)
+  {
+    StringBuffer buf=new StringBuffer();
+    for(int i=0; i<text.length(); i++)
+    {
+      char c=text.charAt(i);
+      switch(c)
+      {
+        case ' ':   
+        case '\t':
+        case '\r':
+        case '\n':
+        case '\'':
+        case '"':
+        case '.':
+        case ':':
+          buf.append('_'); 
+          break;
+
+        case '=': buf.append("Equal");   break;
+        case '+': buf.append("Plus");    break;
+        case '-': buf.append("Minus");   break;
+        case '<': buf.append("Less");    break;
+        case '>': buf.append("Greater"); break;
+        case '(': case ')': break;
+        case '{': case '}': break;
+        case '[': case ']': break;
+
+        default:
+          buf.append(c);
+          break;
+      }
+    }
+    return new String(buf);
+  }
+  
   private final void addInvariant(String[] text)
   {
     if(text==null) return;
     
     for(int i=0; i<text.length; i++)
     {
-      String s="context "+class_state.javaclass.getName()+" inv: "+text[i].trim();
+      text[i]=text[i].trim();
+      String s="context "+class_state.javaclass.getName()+" inv "+makeName(text[i])+": "+text[i];
       //System.out.println("found inline invariant: >"+s+"<");
       try
       {
@@ -286,7 +323,8 @@ final class OclInjector implements InjectionConsumer
     
     for(int i=0; i<text.length; i++)
     {
-      String s="context "+class_state.javaclass.getName()+" pre: "+text[i].trim();
+      text[i]=text[i].trim();
+      String s="context "+class_state.javaclass.getName()+" pre "+makeName(text[i])+": "+text[i];
       //System.out.println("found inline precondition: >"+s+"<");
       try
       {
@@ -302,7 +340,8 @@ final class OclInjector implements InjectionConsumer
     
     for(int i=0; i<text.length; i++)
     {
-      String s="context "+class_state.javaclass.getName()+" post: "+text[i].trim();
+      text[i]=text[i].trim();
+      String s="context "+class_state.javaclass.getName()+" post "+makeName(text[i])+": "+text[i];
       //System.out.println("found inline postcondition: >"+s+"<");
       try
       {
