@@ -108,6 +108,7 @@ public final class Injector
         collector.append(outbuf);
       outbuf=(char)c;
       outbufvalid=true;
+      //System.out.print((char)c);
       return(char)c;
     }
     else
@@ -156,9 +157,18 @@ public final class Injector
       output.write(s);
   }
 
-  private boolean readComment() throws IOException, EndException
+  /**
+     Reads a comment.
+     Is started after the initial '/' character.
+     If the next character is either '/' or '*',
+     the rest of the comment is read, and a value of -1 is returned.
+     If not, there is no comment, 
+     and this next character is returned, casted to int.
+  */
+  private int readComment() throws IOException, EndException
   {
-    switch(read())
+    char x;
+    switch(x=read())
     {
     case '*':
       if(read()=='*')
@@ -185,9 +195,9 @@ public final class Injector
       while(read()!='\n');
       break;
     default:
-      return false;
+      return (int)x;
     }
-    return true;
+    return -1;
   }
 
   private char tokenBuf='\0';
@@ -302,20 +312,31 @@ public final class Injector
     //System.out.println("    body("+(attribute?"attribute":"method")+")");
 
     int bracketdepth=( attribute ? 0 : 1 );
+    char c=read();
     while(true)
     {
-      switch(read())
+      switch(c)
       {
-      case '/': readComment(); break;
+      case '/': 
+        int i=readComment();
+        if(i>=0)
+          c=(char)i;
+        else
+          c=read();
+        break;
       case '{': case '(':
         bracketdepth++; 
+        //System.out.print("<("+bracketdepth+")>");
+        c=read();
         break;
       case '}': case ')':
         bracketdepth--;
+        //System.out.print("<("+bracketdepth+")>");
         if(bracketdepth==0 && !attribute)
           return '}';
         if(bracketdepth<0)
           throw new ParseException("';' expected.");
+        c=read();
         break;
       case ';': 
         // dont have to test for "attribute" here
@@ -323,10 +344,12 @@ public final class Injector
         // already terminated the loop
         if(bracketdepth==0)
           return ';';
+        c=read();
         break;
       case ',':
         if(bracketdepth==0)
           return ',';
+        c=read();
         break;
       // ignore brackets inside of literal String's
       case '"':
@@ -338,6 +361,7 @@ public final class Injector
           case '\\': read(); break; // ignore escaped characters
           }
         }
+        c=read();
         break;
       // ignore brackets inside of literal characters
       case '\'':
@@ -349,6 +373,10 @@ public final class Injector
           case '\\': read(); break; // ignore escaped characters
           }
         }
+        c=read();
+        break;
+      default:
+        c=read();
         break;
       }
     }

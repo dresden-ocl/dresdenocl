@@ -252,6 +252,9 @@ public abstract class Example implements Runnable
     if(qualifiers!=null&&qualifiers.length==0)
       throw new IllegalArgumentException();
     this.qualifiers=qualifiers;
+    
+    int a=20;
+    a=a/(a+b); // ugly expression
   }
 
   abstract void abstractMethod_wrappedbyocl();
