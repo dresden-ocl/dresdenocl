@@ -348,9 +348,11 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/injection/*.java" />
         <include name="tudresden/ocl/injection/ocl/*.java" />
         <include name="tudresden/ocl/codegen/decl/*.java" />
+	<include name="tudresden/ocl/codegen/decl/treegen/*.java" />
+	<include name="tudresden/ocl/codegen/decl/treegen/analysis/*.java" />
+	<include name="tudresden/ocl/codegen/decl/treegen/node/*.java" />
+	<include name="tudresden/ocl/codegen/decl/treegen/normalize/*.java" />
         <include name="tudresden/ocl/sql/*.java" />
-        <include name="tudresden/ocl/sql/orstrategy/*.java" />
-        <include name="tudresden/ocl/sql/gui/*.java" />
       </fileset>
     </copy>
 
@@ -428,6 +430,10 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/codegen/decl/OCL2SQL4SQL92.xml" />
         <include name="tudresden/ocl/codegen/decl/OCL2SQL4Oracle.xml" />
         <include name="tudresden/ocl/codegen/decl/MappingRules.dtd" />
+	<include name="tudresden/ocl/codegen/decl/treegen/*.java" />
+	<include name="tudresden/ocl/codegen/decl/treegen/analysis/*.java" />
+	<include name="tudresden/ocl/codegen/decl/treegen/node/*.java" />
+	<include name="tudresden/ocl/codegen/decl/treegen/normalize/*.java" />
         <include name="tudresden/ocl/*.java" />
         <include name="tudresden/ocl/lib/*.java" />
         <include name="tudresden/ocl/normalize/*.java" />
@@ -447,8 +453,6 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/gui/events/*.java" />
         <include name="tudresden/ocl/sql/*.java" />
         <include name="tudresden/ocl/sql/*.txt" />
-        <include name="tudresden/ocl/sql/orstrategy/*.java" />
-        <include name="tudresden/ocl/sql/gui/*.java" />
         <include name="tudresden/ocl/injection/*.java" />
         <include name="tudresden/ocl/injection/ocl/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
@@ -476,8 +480,6 @@ Enhancements by Steffen Zschaler.
       <include name="**/*.gif" />
       <include name="**/*.xml" />
       <include name="**/*.dtd" />
-      <include name="tudresden/ocl/sql/oracleReserved.txt" />
-      <include name="tudresden/ocl/sql/sybaseReserved.txt" />
       <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
       <include name="COPYING" />
     </jar>
