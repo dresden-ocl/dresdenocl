@@ -215,6 +215,24 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         /**
          *
          */
+        private void updateInvolvedTables(List guides) {
+            Guide guide;
+            String tn;
+            
+            for (Iterator i=guides.iterator(); i.hasNext(); ) {
+                guide = (Guide)i.next();
+                guide.reset();
+                while (guide.hasMoreSteps()) {
+                    guide.next();
+                    tn = guide.getFrom().trim();
+                    if (tn.length() > 0) involvedTables.add(tn);
+                }
+            }
+        }
+        
+        /**
+         *
+         */
         public void setJoinMode(boolean b) {
             joinMode = b;
         }
@@ -222,12 +240,12 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         /**
 	 * @pre guides.size() > 1
 	 */
-        public void prepareNavigation(List guides) {
+        public void prepareNavigation(List guides) {                    
             if (joinMode == true) {
                 prepareClassicJoin(guides);
             } else {
                 prepareDerivedTable(guides);
-            }            
+            }           
         }
 		
 	/**
@@ -418,7 +436,9 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 			}
 
 		 	if (formatCode) formatSQLCode();
-		 	System.err.println("--> " + constrainedType + ":" + constraintName + "\n" + code.toString());                        
+		 	//System.err.println("--> " + constrainedType + ":" + constraintName + "\n" + code.toString());       
+                        System.err.println("--> " + constrainedType + ":" + constraintName);
+                        System.err.println("--> involved Tables:" + involvedTables.toString());
 			fragments.add(new DeclarativeCodeFragment(constraintName, constrainedType, code.toString(), (String[])involvedTables.toArray(new String[involvedTables.size()])));
 		} else {
 			// Error !!!
@@ -722,6 +742,8 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                             if (guides.size() == 0) guides.add(guide);
                             navigation.put(pex, guides);
                         }
+                        
+                        updateInvolvedTables(guides);
 	  	}
 
 	}
@@ -780,12 +802,12 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                 Set metaInfo = null;
     	
     		List guides = (List)navigation.get(node.parent());
-                System.err.println("current pathName: " + pathName);
-                if (guides == null) {
-                    System.err.println("No guides available !");
-                } else {
-                    if (guides.size() == 0) System.err.println("Empty guide list !");
-                }
+                //System.err.println("current pathName: " + pathName);
+                //if (guides == null) {
+                //    System.err.println("No guides available !");
+                //} else {
+                //    if (guides.size() == 0) System.err.println("Empty guide list !");
+                //}
 
     		if (modelTypeFeatures.contains(node.parent())) {
                         modelTypeFeatures.remove(node.parent());

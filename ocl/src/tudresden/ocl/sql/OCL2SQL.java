@@ -77,7 +77,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
     protected JLabel progressLabel;
     
     // tokens
-    public static String TRIGGER = "tudocltrigg";
+    public static String TRIGGER = "tr_";
     public static String INTERR = "integrity violation at ";
     
     public OCL2SQL(JFrame theMainFrame) {
@@ -250,7 +250,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         result.setBorder(BorderFactory.createEtchedBorder());
         
         JTabbedPane tpResult = new JTabbedPane();
-        tpResult.setTabPlacement(SwingConstants.BOTTOM);
+        tpResult.setTabPlacement(SwingConstants.TOP);
         
         taResultTables = new JTextArea("");
         taResultTables.setEditable(false);
@@ -449,12 +449,13 @@ public class OCL2SQL extends JPanel implements ActionListener {
         
     public void executeProject() {
         StringBuffer tmp;
-        String constraint, triggers[];
+        String constraint, triggers[], involvedViews[], baseTables[];
         OclTree theTree;
         CodeFragment cf[];
         DeclarativeCodeFragment dcf;
         TriggerGenerator tg;
         NameCreator nameCreator = new NameCreator();
+        Set involvedTables;
         
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         prepareProgressInfo();
@@ -495,25 +496,35 @@ public class OCL2SQL extends JPanel implements ActionListener {
         // create trigger definitions
         increaseProgressInfo("create triggers ...");
         tg = new TriggerGenerator(theSQLBuilder);
-        tmp = new StringBuffer();
+        tmp = new StringBuffer();               
         
         for (int i=0; i<lIntegrityViews.size(); i++) {
+            // get involved views and determine all base tables
             dcf = (DeclarativeCodeFragment)lIntegrityViews.get(i);
+            involvedViews = dcf.getAdditionalInfo();
+            involvedTables = new HashSet();
             triggers = new String[0];
             
+            for (int k=0; k<involvedViews.length; k++) {
+                baseTables = theObjectViewSchema.getQueriedTables(involvedViews[k]);
+                for (int l=0; l<baseTables.length; l++) {
+                    involvedTables.add(baseTables[l]);
+                }
+            }
+
             if (rbTriggerAssertion.isSelected()) {
                 triggers = tg.getAssertionReplacement(TRIGGER, 
                                                       INTERR + dcf.getName(),
-                                                      (dcf.getAdditionalInfo())[0],
-                                                      theObjectViewSchema.getQueriedTables((dcf.getAdditionalInfo())[0]));
+                                                      dcf.getName(),
+                                                      (String[])involvedTables.toArray(new String[involvedTables.size()]));
             } else if (rbTriggerECA.isSelected()) {
                 triggers = tg.getECATriggerTemplate(TRIGGER, 
-                                                    (dcf.getAdditionalInfo())[0],
-                                                    theObjectViewSchema.getQueriedTables((dcf.getAdditionalInfo())[0]));
+                                                    dcf.getName(),
+                                                    (String[])involvedTables.toArray(new String[involvedTables.size()]));
             }
             for (int k=0; k<triggers.length; k++) {
                 tmp.append(triggers[k]);
-                tmp.append("\n");
+                tmp.append("/\n");
             }
         }
         

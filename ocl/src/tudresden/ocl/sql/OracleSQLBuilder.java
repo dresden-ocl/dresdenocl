@@ -120,9 +120,11 @@ public class OracleSQLBuilder implements SQLBuilder {
         public void createAssertionReplacement(String triggerName,String tableName,String viewName,String errMsg) {
                 append("create or replace trigger " + triggerName + "\n");
                 append("after insert or update or delete on " + tableName + "\n");
-                append("begin");
-                append("  if ((select NVL(COUNT(*),0) from " + viewName + ") > 0) then\n");  
-                append("     raise_application_error(-20000,\"" + errMsg +"\");\n");
+                append("declare tmp number;\n");
+                append("begin\n");
+                append("  select NVL(COUNT(*),0) into tmp from " + viewName + ";\n");
+                append("  if (tmp > 0) then\n"); 
+                append("     raise_application_error(-20000,'" + errMsg +"');\n");
                 append("  end if;\n");
                 append("end;\n");
         }
@@ -130,9 +132,11 @@ public class OracleSQLBuilder implements SQLBuilder {
         public void createECATriggerTemplate(String triggerName,String tableName,String viewName) {
                 append("create or replace trigger " + triggerName + "\n");
                 append("after insert or update or delete on " + tableName + "\n");
-                append("begin");
-                append("  if ((select NVL(COUNT(*),0) from " + viewName + ") > 0) then\n");  
-                append("     // todo: add action code here\n");
+                append("declare tmp number;\n");
+                append("begin\n");
+                append("  select NVL(COUNT(*),0) into tmp from " + viewName + ";\n");
+                append("  if (tmp > 0) then\n");  
+                append("     -- todo: add action code here\n");
                 append("  end if;\n");
                 append("end;\n");
         }        
