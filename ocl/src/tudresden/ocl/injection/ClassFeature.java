@@ -36,8 +36,6 @@ public abstract class ClassFeature
 
   protected String name;
   
-  protected String literal;
-
   public ClassFeature(String classname, 
                       int modifiers, 
                       String type, 
@@ -84,22 +82,11 @@ public abstract class ClassFeature
     return name;
   }
 
-  public final void setLiteral(String literal)
-  {
-    if(this.literal!=null)
-      throw new IllegalArgumentException();
-    this.literal=literal;
-  }
-
-  public final String getLiteral()
-  {
-    return literal;
-  }
-
   public final void print(PrintStream o)
   {
-    o.println("  "+getClass().getName()+" ("+java.lang.reflect.Modifier.toString(modifiers)+") >"+type+"< >"+name+"<");
-    System.out.println("    literal: >"+literal+"<");
+    o.println("  "+SourceReflectionExtender.extractClassName(getClass().getName())+" ("+java.lang.reflect.Modifier.toString(modifiers)+
+              ") >"+type+
+              "< >"+name+"<");
     printMore(o);
   }
 

@@ -452,17 +452,25 @@ public final class Injector
     switch(c)
     {
     case ';': 
+      if(collect_when_blocking)
+        write(getCollector());
+      flushOutbuf();
       break;
     case '=':
+      if(collect_when_blocking)
+        write(getCollector());
       parseBody(true);
+      flushOutbuf();
       break;
     default:
       throw new InjectorParseException("';' or '=' expected.");
     }
-    flushOutbuf();
-    cf.setLiteral(getCollector());
-    write(cf.getLiteral());
-    //cf.print(System.out);
+    if(do_block)
+      getCollector();
+    else
+    {
+      //cf.print(System.out);
+    }
   }
 
   private void parseClass(String bufs)

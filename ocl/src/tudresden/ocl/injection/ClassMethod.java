@@ -34,6 +34,8 @@ public class ClassMethod extends ClassFeature
   */
   private int name_end;
 
+  private String literal;
+
   /**
      Contains parameter names and types.
   */
@@ -119,6 +121,22 @@ public class ClassMethod extends ClassFeature
       return literal;
   }
 
+  public final void setLiteral(String literal)
+  {
+    if(this.literal!=null)
+      throw new IllegalArgumentException();
+    this.literal=literal;
+  }
+
+  public final String getLiteral()
+  {
+    return literal;
+  }
+
+  /**
+     A cache for getSignature.
+     @see #getSignature
+  */
   private String signature;
 
   public String getSignature()
@@ -158,6 +176,7 @@ public class ClassMethod extends ClassFeature
     for(Iterator i=throwables.iterator(); i.hasNext(); )
       o.println("    throwable >"+i.next()+"<");
     System.out.println("    signatr: >"+getSignature()+"<"+name_end);
+    System.out.println("    literal: >"+literal+"<");
     System.out.println("    wrapped: >"+getWrappedLiteral()+"<");
     System.out.println("    notwrap: >"+getNotWrappedLiteral()+"<");
   }
