@@ -264,91 +264,25 @@ final class OclInjector implements InjectionConsumer
       throw new RuntimeException();
   }
   
-  private final String makeName(String text)
-  {
-    StringBuffer buf=new StringBuffer();
-    for(int i=0; i<text.length(); i++)
-    {
-      char c=text.charAt(i);
-      switch(c)
-      {
-        case ' ':   
-        case '\t':
-        case '\r':
-        case '\n':
-        case '\'':
-        case '"':
-        case '.':
-        case ':':
-          buf.append('_'); 
-          break;
-
-        case '=': buf.append("Equal");   break;
-        case '+': buf.append("Plus");    break;
-        case '-': buf.append("Minus");   break;
-        case '<': buf.append("Less");    break;
-        case '>': buf.append("Greater"); break;
-        case '(': case ')': break;
-        case '{': case '}': break;
-        case '[': case ']': break;
-
-        default:
-          buf.append(c);
-          break;
-      }
-    }
-    return new String(buf);
-  }
-  
   private final void addInvariant(String[] text)
   {
     if(text==null) return;
-    
     for(int i=0; i<text.length; i++)
-    {
-      text[i]=text[i].trim();
-      String s="context "+class_state.javaclass.getName()+" inv "+makeName(text[i])+": "+text[i];
-      //System.out.println("found inline invariant: >"+s+"<");
-      try
-      {
-        Main.makeConstraint(s, config);
-      }
-      catch(IOException e) { throw new RuntimeException(e.toString()); }
-    }
+      Main.makeConstraint(text[i], "inv", class_state.javaclass.getName(), config);
   }
 
   private final void addPrecondition(String[] text)
   {
     if(text==null) return;
-    
     for(int i=0; i<text.length; i++)
-    {
-      text[i]=text[i].trim();
-      String s="context "+class_state.javaclass.getName()+" pre "+makeName(text[i])+": "+text[i];
-      //System.out.println("found inline precondition: >"+s+"<");
-      try
-      {
-        Main.makeConstraint(s, config);
-      }
-      catch(IOException e) { throw new RuntimeException(e.toString()); }
-    }
+      Main.makeConstraint(text[i], "pre", class_state.javaclass.getName(), config);
   }
 
   private final void addPostcondition(String[] text)
   {
     if(text==null) return;
-    
     for(int i=0; i<text.length; i++)
-    {
-      text[i]=text[i].trim();
-      String s="context "+class_state.javaclass.getName()+" post "+makeName(text[i])+": "+text[i];
-      //System.out.println("found inline postcondition: >"+s+"<");
-      try
-      {
-        Main.makeConstraint(s, config);
-      }
-      catch(IOException e) { throw new RuntimeException(e.toString()); }
-    }
+      Main.makeConstraint(text[i], "post", class_state.javaclass.getName(), config);
   }
 
   private final void writeInvariants(String classname) 
@@ -942,6 +876,21 @@ final class OclInjectorConfig
 public class Main
 {
   
+  public static void makeConstraint(String text,  
+                                    String kind, 
+                                    String context, 
+                                    OclInjectorConfig conf)
+    throws OclParserException, OclTypeException
+  {
+    String constraintString="context "+context+' '+kind+' '+text;
+    //System.out.println("found inline constraint: >"+constraintString+"<");
+    try
+    {
+      makeConstraint(constraintString, conf);
+    }
+    catch(IOException e) { throw new RuntimeException(e.toString()); }
+  }
+
   public static void makeConstraint(String constraintString, OclInjectorConfig conf)
     throws OclParserException, OclTypeException, IOException
   {

@@ -7,7 +7,10 @@ public class Company extends RLObject
 {
   
   public String description;
-  
+
+  /**
+     @invariant numberOfEmployees: self.numberOfEmployees=employees->size
+  */
   public int numberOfEmployees=0;
 
   // Associations

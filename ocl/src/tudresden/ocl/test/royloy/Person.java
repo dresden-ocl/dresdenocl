@@ -10,7 +10,7 @@ public class Person extends RLObject
   public String name;
   
   /**
-     @invariant age>=0
+     @invariant ageGreaterEqual0: age>=0
   */
   public int age=18;
 

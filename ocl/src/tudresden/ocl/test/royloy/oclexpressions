@@ -7,9 +7,6 @@ inv manager_is_employee:
   )->includes(manager)
 
 context Company
-inv numberOfEmployees: self.numberOfEmployees=employees->size
-
-context Company
 inv manager_is_employee2:
 manager.employers->includes(self)
 
