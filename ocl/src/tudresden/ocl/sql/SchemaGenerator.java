@@ -23,6 +23,7 @@ import tudresden.ocl.check.types.xmifacade.*;
 
 import java.util.*;
 import java.io.*;
+import java.net.URL;
 
 /**
  * A DDL (Data Definition Language) generator. The generator takes a ORMapping implementation
@@ -73,7 +74,7 @@ class SchemaGenerator implements SQLDirector {
     System.err.println("DDL Generator running ...");
 
     try {
-    	theSchemaGenerator.createDDL(new ORMappingImp(XmiParser.createRoughModel(src, src)), new OracleSQLBuilder());
+    	theSchemaGenerator.createDDL(new ORMappingImp(XmiParser.createRoughModel(new URL(src), src)), new OracleSQLBuilder());
     } catch (Exception e) {
     	System.err.println("Cannot create DDL script:"  + e.toString());
     }

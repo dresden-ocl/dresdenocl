@@ -8,9 +8,6 @@ import tudresden.ocl.codegen.decl.*;
 import tudresden.ocl.codegen.decl.treegen.*;
 import tudresden.ocl.codegen.decl.treegen.normalize.*;
 
-import EDF.Entre2Mers.*;
-import EDF.Entre2Mers.test.*;
-
 import java.io.FileWriter;
 import java.awt.*;
 import java.awt.event.*;
@@ -42,15 +39,15 @@ class SQLTestApp extends ConstraintEvaluation {
 	tabs.addTab("About", getAboutPane());
 	tabs.addTab("SQL", getSQLCodePane());
 	tabs.addTab("SQL tree", getSQLTree());
-	
+
 	setLayout(new BorderLayout());
 	add(message, BorderLayout.SOUTH);
 	add(tabs);
     }
-    
+
     protected JPanel getSQLTree() {
     	JPanel result = new JPanel(new BorderLayout());
-    	
+
     	bCreateTree = new JButton("create tree");
     	bCreateTree.addActionListener(this);
     	bNormalizeSql = new JButton(" normalize ");
@@ -60,22 +57,22 @@ class SQLTestApp extends ConstraintEvaluation {
     	bp.add(bCreateTree);
     	bp.add(bNormalizeSql);
     	result.add(BorderLayout.WEST, bp);
-    	
-    	
+
+
     	sqlTree = new JTree(new DefaultMutableTreeNode());
     	sqlTree.setFont(new Font("Monospaced", Font.PLAIN, 12));
     	JPanel p1 = new JPanel(new BorderLayout());
     	p1.add(BorderLayout.CENTER, new JScrollPane(sqlTree));
-    	
+
     	treeCode = new JEditorPane();
     	JPanel p2 = new JPanel(new BorderLayout());
     	p2.add(BorderLayout.CENTER, new JScrollPane(treeCode));
-    	    	
+
     	JTabbedPane stp = new JTabbedPane();
     	stp.add(" tree ", p1);
     	stp.add(" code ", p2);
     	result.add(BorderLayout.CENTER, stp);
-    	
+
     	return result;
     }
 
@@ -132,7 +129,7 @@ class SQLTestApp extends ConstraintEvaluation {
 
     public void actionPerformed(ActionEvent event) {
 		Object source=event.getSource();
-	
+
 		if (source==sqlGenerate) {
 			try {
 				doGenerateSQL();
@@ -147,20 +144,22 @@ class SQLTestApp extends ConstraintEvaluation {
 	    	super.actionPerformed(event);
 		}
     }
-    
+
     /*
     protected ModelFacade getModelFacade() throws Exception {
     	return mf;
     }
     */
-    
+
     protected void createSQLTree() {
     	SQLCodeGenerator stg = null;
-    	String xmiFile = "C:/users/loecher/pt2test/base.xmi";
-    	String xmlFile = "C:/users/loecher/pt2test/base.xml";
+    	/*
+	String xmiFile = "";
+    	String xmlFile = "";
     	Model rm;
-    	E2MORM orm;
-    	
+    	... orm;
+	*/
+
     	try {
 	    	/* read the XMI source
 			System.out.println("read XMI sources ...");
@@ -168,53 +167,53 @@ class SQLTestApp extends ConstraintEvaluation {
 			xmiFile = "file://" + xmiFile;
 			mf = XmiParser.createModel(xmiFile, "model in classic mode");
 			rm = XmiParser.createRoughModel(xmiFile, "model in rough mode");
-				
+
 			// get the object relational map
 			System.out.println("create object relational map ...");
 			if (xmlFile.charAt(0) != '/') xmlFile = "/" + xmlFile;
 			xmlFile = "file://" + xmlFile;
-			orm = new E2MORM(rm, xmlFile);
-			
-	    	
-	    	stg.setORMappingScheme(orm);
+			orm = ...;
+
+
+	 	   	stg.setORMappingScheme(orm);
 	    	*/
 	    	stg = new SQLCodeGenerator();
 	    	stg.setORMappingScheme(new ORTestScheme());
-	    	
-	    	
+
+
 	    	doParse(false);
-			doNormalize();
-    	
-    		
+		doNormalize();
+
+
     		theSqlTree = stg.getSQLTree(tree);
     	} catch(Exception ex) {
     		updateError(ex);
     		showTab(getIndexOfErrorPane());
-    		theSqlTree = stg.getUnfinishedTree();    		
+    		theSqlTree = stg.getUnfinishedTree();
     	}
-    	
+
     	tudresden.ocl.codegen.decl.treegen.Visualizer visu = new tudresden.ocl.codegen.decl.treegen.Visualizer();
     	theSqlTree.apply(visu);
-    	sqlTree.setModel( new DefaultTreeModel(visu.getRootNode()) );    	
-    	
+    	sqlTree.setModel( new DefaultTreeModel(visu.getRootNode()) );
+
     	Printer p = new Oracle8iPrinter();
     	theSqlTree.apply(p);
     	treeCode.setText(p.getCode());
     }
-    
+
     protected void normalizeSQL() {
     	theSqlTree.apply(new SelectElimination());
     	theSqlTree.apply(new RedNavElimination());
     	theSqlTree.apply(new ContNavElimination());
     	theSqlTree.apply(new WhereSelectElimination());
-    	    	    	
+
     	tudresden.ocl.codegen.decl.treegen.Visualizer visu = new tudresden.ocl.codegen.decl.treegen.Visualizer();
     	theSqlTree.apply(visu);
-    	sqlTree.setModel( new DefaultTreeModel(visu.getRootNode()) );   
-    	
+    	sqlTree.setModel( new DefaultTreeModel(visu.getRootNode()) );
+
     	Printer p = new Oracle8iPrinter();
     	theSqlTree.apply(p);
-    	treeCode.setText(p.getCode());   	
+    	treeCode.setText(p.getCode());
     }
 
     protected void doGenerateSQL() {

@@ -340,7 +340,7 @@ public class SQLCodeGenerator extends ReversedDepthFirstAdapter implements CodeG
 		
 		// get constrained type
 		AClassifierContext acc = (AClassifierContext)((AClassifierContextBody)((AContextDeclaration)node.getContextDeclaration()).getContextBody()).getClassifierContext();
-		constrainedType = acc.getTypeName().toString().trim();
+		constrainedType = acc.getPathTypeName().toString().trim();
 	}
 	
 	public void inAConstraintBody(AConstraintBody node) {

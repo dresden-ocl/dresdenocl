@@ -458,7 +458,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 		AClassifierContextBody node3 = (AClassifierContextBody)node2.getContextBody();
 		AClassifierContext node4 = (AClassifierContext)node3.getClassifierContext();
 
-		constrainedType = node4.getTypeName().toString().trim();		
+		constrainedType = node4.getPathTypeName().toString().trim();		
         }
 
     public void inAConstraintBody(AConstraintBody node) {

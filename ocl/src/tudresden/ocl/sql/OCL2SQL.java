@@ -26,6 +26,7 @@ import tudresden.ocl.check.types.xmifacade.*;
 import tudresden.ocl.gui.*;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 import javax.swing.*;
 
@@ -34,7 +35,7 @@ import java.awt.event.*;
 
 /**
  *  OCL2SQL is the main class of the OCL2SQL tool. It manages all the different
- *  components and the flow of information between them which generate some 
+ *  components and the flow of information between them which generate some
  *  kind of SQL code. These components are:
  *  <ul>
  *      <li>ORMappingImp - for the object relational mapping</li>
@@ -56,30 +57,30 @@ import java.awt.event.*;
  *  @author Sten Loecher
  */
 public class OCL2SQL extends JPanel implements ActionListener {
-    
+
     // Step 1
     private String xmiFileLocation;
     private String rulesFileLocation;
     private String theProjectDirectory;
-        
+
     // Step 2
     private ModelFacade theModelFacade;
     private Model theRoughModel;
     private SimpleOCLEditorModel theOCLEditorModel;
     private OCLEditor theOCLEditor;
-    
+
     // Step 3
     private ORMapping theORMapping;
-    private ObjectViewSchema theObjectViewSchema;    
+    private ObjectViewSchema theObjectViewSchema;
     private SQLBuilder theSQLBuilder = new OracleSQLBuilder();
     private ILSQLCodeGenerator theSQLCodeGenerator;
-    
+
     // default object relational mapping parameters
     private int ormClassToTableMode = 2;
     private int ormNumOfPKColumns = 1;
     private String ormPKColType = "int";
     private boolean ormOneTablePerAss = false;
-    
+
     // result
     private java.util.List lIntegrityViews;
     private String resultTableSchema, resultObjectViews, resultIntegrityViews, resultTrigger;
@@ -87,10 +88,10 @@ public class OCL2SQL extends JPanel implements ActionListener {
     private String fileNameObjectViews = "object_views.sql";
     private String fileNameIntegrityViews = "integrity_views.sql";
     private String fileNameTrigger = "trigger.sql";
-    
+
     // some other parameters
     private String sqlCodeGenPatternCatalogue = (OclTree.class.getResource("codegen/decl/OCL2SQL4Oracle.xml")).toString();
-        
+
     // gui
     protected JTabbedPane tabs;
     protected JButton bLoadConstraints, bSaveConstraints, bXmiSource, bLoadXmi, bProjectDirectory, bExecute;
@@ -101,42 +102,42 @@ public class OCL2SQL extends JPanel implements ActionListener {
     protected JDialog dlgProgress;
     protected JFrame theMainFrame;
     protected JLabel progressLabel;
-    
+
     // tokens
     public static String TRIGGER = "tr_";
     public static String INTERR = "integrity violation at ";
-    
+
     /**
      *  The constructor.
-     *  @param theMainFrame a main frame for the gui 
+     *  @param theMainFrame a main frame for the gui
      */
     public OCL2SQL(JFrame theMainFrame) {
         if (theMainFrame != null) buildGUI();
         this.theMainFrame = theMainFrame;
     }
-    
+
     /**
      *  Main methode to start the gui of the OCL2SQL tool.
      */
     public static void main(String[] args) {
         JFrame theMainFrame = new JFrame("OCL2SQL");
         OCL2SQL ce = new OCL2SQL(theMainFrame);
-        
+
         theMainFrame.addWindowListener( new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
-        
+
         theMainFrame.getContentPane().add(ce);
         theMainFrame.setSize(600, 400);
-        theMainFrame.setVisible(true);        
-    }    
-    
+        theMainFrame.setVisible(true);
+    }
+
     // -------------------------------------------------------------------------
     //                            methodes for gui
-    // -------------------------------------------------------------------------    
-    
+    // -------------------------------------------------------------------------
+
     /**
      *  Builds the gui.
      */
@@ -149,22 +150,22 @@ public class OCL2SQL extends JPanel implements ActionListener {
         setLayout(new BorderLayout());
         add(tabs);
     }
-    
+
     /**
      *  @return the input panel
      */
     protected JPanel getInputPane() {
         JPanel result = new JPanel(new BorderLayout());
-                      
+
         // constraints
         JPanel c = new JPanel(new BorderLayout());
         c.setBorder(BorderFactory.createTitledBorder(" Constraints "));
-                 
+
         theOCLEditor = new OCLEditor();
         theOCLEditorModel = new SimpleOCLEditorModel();
         theOCLEditor.setModel(theOCLEditorModel);
         c.add(theOCLEditor);
-        
+
         JPanel buttons = new JPanel(new GridLayout(0,4));
         bLoadConstraints = new JButton("Load");
         bLoadConstraints.addActionListener(this);
@@ -174,16 +175,16 @@ public class OCL2SQL extends JPanel implements ActionListener {
         buttons.add(new JPanel());
         buttons.add(bLoadConstraints);
         buttons.add(bSaveConstraints);
-        c.add(BorderLayout.SOUTH, buttons);       
-            
+        c.add(BorderLayout.SOUTH, buttons);
+
         result.add(c);
-        
+
         // object oriented Model from XMI file
         JPanel oom = new JPanel(new BorderLayout());
         oom.setBorder(BorderFactory.createTitledBorder(" URL of XMI file "));
         tfXmiSource = new JTextField("");
         oom.add(BorderLayout.CENTER, tfXmiSource);
-        
+
         JPanel oomb = new JPanel(new GridLayout(1,2));
         bXmiSource = new JButton(". . .");
         bXmiSource.addActionListener(this);
@@ -191,35 +192,35 @@ public class OCL2SQL extends JPanel implements ActionListener {
         bLoadXmi = new JButton("Parse");
         bLoadXmi.addActionListener(this);
         oomb.add(bLoadXmi);
-        
+
         oom.add(BorderLayout.EAST, oomb);
-        
+
         result.add(BorderLayout.SOUTH, oom);
-        
+
         return result;
     }
-    
+
     /**
      *  @return the project panel
      */
     protected JPanel getProjectPane() {
         JPanel result = new JPanel(new BorderLayout());
-                
+
         // project directory
         JPanel prdir = new JPanel(new BorderLayout());
         prdir.setBorder(BorderFactory.createTitledBorder(" project directory "));
-        
+
         tfProjectDirectory = new JTextField("");
         prdir.add(BorderLayout.CENTER, tfProjectDirectory);
-        
+
         bProjectDirectory = new JButton(". . .");
         bProjectDirectory.addActionListener(this);
         prdir.add(BorderLayout.EAST, bProjectDirectory);
 
-        // object relational mapping    
+        // object relational mapping
         JPanel orm = new JPanel(new BorderLayout());
         orm.setBorder(BorderFactory.createTitledBorder(" object relational mapping "));
-        
+
         JPanel pInheritance = new JPanel();
         pInheritance.setLayout(new BoxLayout(pInheritance, BoxLayout.Y_AXIS));
         pInheritance.setBorder(BorderFactory.createTitledBorder(" classes to tables "));
@@ -234,8 +235,8 @@ public class OCL2SQL extends JPanel implements ActionListener {
         pInheritance.add(rbInheritance0);
         pInheritance.add(rbInheritance1);
         pInheritance.add(rbInheritance2);
-        orm.add(BorderLayout.WEST, pInheritance);      
-      
+        orm.add(BorderLayout.WEST, pInheritance);
+
         JPanel pAssociations = new JPanel();
         pAssociations.setLayout(new BoxLayout(pAssociations, BoxLayout.Y_AXIS));
         pAssociations.setBorder(BorderFactory.createTitledBorder(" associations "));
@@ -248,10 +249,10 @@ public class OCL2SQL extends JPanel implements ActionListener {
         pAssociations.add(rbAssociations0);
         pAssociations.add(rbAssociations1);
         orm.add(BorderLayout.CENTER, pAssociations);
-        
+
         JPanel pPK = new JPanel(new BorderLayout());
         pPK.setBorder(BorderFactory.createTitledBorder(" primary keys "));
-        
+
         JPanel pType = new JPanel(new BorderLayout());
         JLabel lType = new JLabel(" type:  ");
         lType.setOpaque(false);
@@ -261,7 +262,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         pType.add(BorderLayout.WEST, lType);
         pType.add(BorderLayout.CENTER, cbPKType);
         pPK.add(BorderLayout.WEST, pType);
-        
+
         JPanel pNoCol = new JPanel(new BorderLayout());
         JLabel lNoCol = new JLabel("   number of columns:  ");
         lNoCol.setOpaque(false);
@@ -270,9 +271,9 @@ public class OCL2SQL extends JPanel implements ActionListener {
         pNoCol.add(BorderLayout.WEST, lNoCol);
         pNoCol.add(BorderLayout.CENTER, tfPKNoCol);
         pPK.add(BorderLayout.CENTER, pNoCol);
-        
+
         orm.add(BorderLayout.SOUTH, pPK);
-        
+
         // trigger
         JPanel tp = new JPanel();
         tp.setLayout(new BoxLayout(tp, BoxLayout.Y_AXIS));
@@ -288,7 +289,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         tp.add(rbTriggerAssertion);
         tp.add(rbTriggerECA);
         tp.add(rbTriggerNone);
-               
+
         // execute
         JPanel ep = new JPanel(new GridLayout(0,4));
         bExecute = new JButton("Execute Project");
@@ -297,60 +298,60 @@ public class OCL2SQL extends JPanel implements ActionListener {
         ep.add(new JPanel());
         ep.add(new JPanel());
         ep.add(bExecute);
-           
+
         result.add(BorderLayout.NORTH, prdir);
         result.add(BorderLayout.CENTER, orm);
         result.add(BorderLayout.SOUTH, ep);
         result.add(BorderLayout.EAST, tp);
-        
+
         return result;
     }
-    
+
     /**
      *  @return the output panel
      */
     protected JPanel getOutputPane() {
         JPanel result = new JPanel(new BorderLayout());
         result.setBorder(BorderFactory.createEtchedBorder());
-        
+
         JTabbedPane tpResult = new JTabbedPane();
         tpResult.setTabPlacement(SwingConstants.TOP);
-        
+
         taResultTables = new JTextArea("");
         taResultTables.setEditable(false);
         taResultTables.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane sp1 = new JScrollPane(taResultTables);
         tpResult.addTab("Table Schema", sp1);
-        
+
         taResultObjectViews = new JTextArea("");
         taResultObjectViews.setEditable(false);
         taResultObjectViews.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane sp2 = new JScrollPane(taResultObjectViews);
         tpResult.addTab("Object Views", sp2);
-        
+
         taResultIntegrityViews = new JTextArea("");
         taResultIntegrityViews.setEditable(false);
         taResultIntegrityViews.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane sp3 = new JScrollPane(taResultIntegrityViews);
         tpResult.addTab("Integrity Views", sp3);
-        
+
         taResultTrigger = new JTextArea("");
         taResultTrigger.setEditable(false);
         taResultTrigger.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane sp4 = new JScrollPane(taResultTrigger);
         tpResult.addTab("Trigger", sp4);
-        
+
         result.add(tpResult);
-        
+
         return result;
     }
-    
+
     /**
      *  @return the about panel
      */
     protected JPanel getAboutPane() {
         JPanel result = new JPanel(new BorderLayout());
-        
+
         JPanel allLogos=new JPanel(new BorderLayout());
         JPanel smallLogos=new JPanel();
         JPanel center=new JPanel(new GridLayout(0, 1));
@@ -370,10 +371,10 @@ public class OCL2SQL extends JPanel implements ActionListener {
         result.add(allLogos, BorderLayout.NORTH);
         result.add(center);
         result.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-        
+
         return result;
     }
-    
+
     /**
      *  Reads the input data from the gui and updates the class parameters accordingly.
      */
@@ -384,7 +385,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
             showMessage("Error", "You must specify a XMI source file !", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        
+
         // object relational mapping
         if (rbInheritance0.isSelected()) {
             ormClassToTableMode = 2;
@@ -393,26 +394,26 @@ public class OCL2SQL extends JPanel implements ActionListener {
         } else if (rbInheritance2.isSelected()) {
             ormClassToTableMode = 1;
         }
-        
+
         if (rbAssociations0.isSelected()) {
             ormOneTablePerAss = false;
         } else if (rbAssociations1.isSelected()) {
             ormOneTablePerAss = true;
         }
-        
+
         try {
             ormNumOfPKColumns = (Integer.valueOf(tfPKNoCol.getText())).intValue();
         } catch(Exception e) {
             showMessage("Error", "Number of primary key columns is no valid number: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        
+
         if (cbPKType.getSelectedItem().equals("VARCHAR")) {
             ormPKColType = "String";
         } else if (cbPKType.getSelectedItem().equals("NUMBER")) {
             ormPKColType = "int";
-        }       
-        
+        }
+
         // project path
         theProjectDirectory = tfProjectDirectory.getText();
         if (theProjectDirectory.trim().length() == 0) {
@@ -424,10 +425,10 @@ public class OCL2SQL extends JPanel implements ActionListener {
                 theProjectDirectory += temp.separatorChar;
             }
         }
-        
+
         return true;
     }
-    
+
     /**
      *  Updates the output pane after project execution.
      */
@@ -437,13 +438,13 @@ public class OCL2SQL extends JPanel implements ActionListener {
         taResultIntegrityViews.setText(resultIntegrityViews);
         taResultTrigger.setText(resultTrigger);
     }
-    
+
     /**
      *  Manages the user input from the gui.
      */
     public void actionPerformed(java.awt.event.ActionEvent event) {
         Object source=event.getSource();
-   
+
         if (source == bLoadConstraints) {
             loadConstraints();
         } else if (source == bSaveConstraints) {
@@ -458,7 +459,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
             executeProject();
         }
     }
-    
+
     /**
      *  Loads some OCL constraints from a source file.
      *  Offers a dialog box to specify the location of the file.
@@ -470,33 +471,33 @@ public class OCL2SQL extends JPanel implements ActionListener {
         ObjectInputStream ois;
         String ext[] = {"ocl"};
         int dlgRetVal;
-            
+
         // show open dialog
         fileChooser.setFileFilter(new SimpleFileFilter("OCL constraint files (*.ocl)", ext));
         fileChooser.setDialogTitle("Open Constraint List");
         dlgRetVal = fileChooser.showOpenDialog(this);
-            
+
         // check for selected file
         theFile = fileChooser.getSelectedFile();
         if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
         System.err.println(theFile.getAbsolutePath());
-          
+
         // load the constraints from the specified file
         try {
             fis = new FileInputStream(theFile.getAbsolutePath());
             ois = new ObjectInputStream(fis);
-              
+
             theOCLEditorModel = (SimpleOCLEditorModel)ois.readObject();
             theOCLEditorModel.setModelFacade(theModelFacade);
-                
-            ois.close();                
+
+            ois.close();
         } catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Could not load constraint list.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-              
-        theOCLEditor.setModel(theOCLEditorModel);  
+
+        theOCLEditor.setModel(theOCLEditorModel);
     }
-    
+
     /**
      *  Saves the specified OCL constraints to a file.
      *  Offers a dialog box to specify the location of the file.
@@ -508,30 +509,30 @@ public class OCL2SQL extends JPanel implements ActionListener {
         ObjectOutputStream oos;
         String ext[] = {"ocl"};
         int dlgRetVal;
-                                 
+
         // show save dialog
         fileChooser.setFileFilter(new SimpleFileFilter("OCL constraint files (*.ocl)", ext));
         fileChooser.setDialogTitle("Save Constraint List");
-        dlgRetVal = fileChooser.showSaveDialog(this);  
-            
+        dlgRetVal = fileChooser.showSaveDialog(this);
+
         // check for selected file
         theFile = fileChooser.getSelectedFile();
         if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
-                      
+
         // save constraints to the specified file
         try {
             fos = new FileOutputStream(theFile.getAbsolutePath());
             oos = new ObjectOutputStream(fos);
-            
+
             oos.writeObject(theOCLEditorModel);
-            
+
             oos.flush();
-            oos.close();            
+            oos.close();
         } catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Could not save constraint list.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             System.err.println(e.toString());
         }
-            
+
         // show success Message
         JOptionPane.showMessageDialog(this, "Constraint list successfully stored.", "", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -546,34 +547,34 @@ public class OCL2SQL extends JPanel implements ActionListener {
         ObjectInputStream ois;
         String ext[] = {"xmi"};
         int dlgRetVal;
-            
+
         // show open dialog
         fileChooser.setFileFilter(new SimpleFileFilter("XMI files (*.xmi)", ext));
         fileChooser.setDialogTitle("Choose XMI Source");
         dlgRetVal = fileChooser.showOpenDialog(this);
-            
+
         // check for selected file
         theFile = fileChooser.getSelectedFile();
         if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
         System.err.println(theFile.getAbsolutePath());
-            
+
         // update class parameter
         try {
             tfXmiSource.setText(theFile.toURL().toString());
         } catch(Exception e) {
         }
     }
-    
+
     /**
      * Loads the class model from the specified XMI file.
      */
     private void loadXmiSource() {
         if (JOptionPane.showConfirmDialog(this, "This will delete all OCL constraints ?\nContinue anyway ?", "", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) return;
-        
+
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        
+
         try {
-            theModelFacade = XmiParser.createModel(tfXmiSource.getText(), "model in classic mode");
+            theModelFacade = XmiParser.createModel(new URL(tfXmiSource.getText()), "model in classic mode");
             theOCLEditorModel.setModelFacade(theModelFacade);
         } catch(Exception e) {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -581,44 +582,44 @@ public class OCL2SQL extends JPanel implements ActionListener {
             System.err.println(e.toString());
             return;
         }
-        
+
         theOCLEditorModel = new SimpleOCLEditorModel();
         theOCLEditorModel.setModelFacade(theModelFacade);
         theOCLEditor.setModel(theOCLEditorModel);
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        JOptionPane.showMessageDialog(this, "XMI source has been parsed successfully.", "", JOptionPane.INFORMATION_MESSAGE);        
+        JOptionPane.showMessageDialog(this, "XMI source has been parsed successfully.", "", JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
     /**
      *  Offers a dialog box to specify the project path.
      *  The resulting scripts are going to be stored to this location.
-     */    
+     */
     private void loadProjectPath() {
         JFileChooser fileChooser = new JFileChooser();
         File theFile = null;
         FileInputStream fis;
         ObjectInputStream ois;
-            
+
         // show open dialog
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.setDialogTitle("Choose Project Directory");
         fileChooser.showOpenDialog(this);
-            
+
         // check for selected file
         theFile = fileChooser.getSelectedFile();
         if (theFile == null) return;
-            
+
         // load the constraints from the specified file
         tfProjectDirectory.setText(theFile.getAbsolutePath());
     }
-    
+
     /**
-     *  Code originally from ConstraintEvaluation.   
+     *  Code originally from ConstraintEvaluation.
      */
     protected Icon getImage(String name) {
         java.net.URL url= OclTree.class.getResource(name);
         ImageIcon ii=null;
-        
+
         try {
             ii=new ImageIcon(url);
         }
@@ -628,38 +629,38 @@ public class OCL2SQL extends JPanel implements ActionListener {
             System.out.println(e.getMessage());
         }
         return ii;
-    }    
-    
+    }
+
     /**
      *  Helper methode. Shows a message.
      */
     private void showMessage(String title, String message, int type) {
         JOptionPane.showMessageDialog(this, message, title, type);
-    }    
-    
+    }
+
     /**
      *  Helper methode. Prepares a progress info dialog.
      */
     private void prepareProgressInfo() {
     }
-    
+
     /**
      *  Helper methode. Shows a message in the progress info dialog.
      */
     private void increaseProgressInfo(String msg) {
         System.err.println(msg);
     }
-    
+
     /**
      *  Helper methode. Closes the progress info dialog.
      */
     private void closeProgressWindows() {
     }
-    
+
     // -------------------------------------------------------------------------
     //                     methodes for project execution
     // -------------------------------------------------------------------------
-    
+
     /**
      *  Prepares the project execution. The following steps will be done:
      *  <ul>
@@ -669,39 +670,39 @@ public class OCL2SQL extends JPanel implements ActionListener {
      *      <li>initializes the integrity view generator</li>
      *  </ul>
      */
-    public boolean prepareProjectExecution() { 
+    public boolean prepareProjectExecution() {
         if (!synchronizeObjectState()) return false;
-        
+
         // check XMI source
         try {
-            theRoughModel = XmiParser.createRoughModel(xmiFileLocation, "model in rough mode");
-            theModelFacade = XmiParser.createModel(xmiFileLocation, "model in classic mode");               
+            theRoughModel = XmiParser.createRoughModel(new URL(xmiFileLocation), "model in rough mode");
+            theModelFacade = XmiParser.createModel(new URL(xmiFileLocation), "model in classic mode");
         } catch(Exception e) {
             showMessage("Error", "Could not process XMI source file !\n" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
             return false;
         }
-         
+
         // do object relational mapping
         theORMapping = new ORMappingImp(theRoughModel,
-                                        ormClassToTableMode, 
-                                        ormNumOfPKColumns, 
-                                        ormPKColType, 
-                                        ormOneTablePerAss); 
-        
+                                        ormClassToTableMode,
+                                        ormNumOfPKColumns,
+                                        ormPKColType,
+                                        ormOneTablePerAss);
+
         // initialize object view shema
         theObjectViewSchema = new ObjectViewSchema(theORMapping, theSQLBuilder);
-        
+
         // initialize SQL code generator
-        theSQLCodeGenerator = new ILSQLCodeGenerator(sqlCodeGenPatternCatalogue);        
+        theSQLCodeGenerator = new ILSQLCodeGenerator(sqlCodeGenPatternCatalogue);
         theSQLCodeGenerator.setORMappingScheme(theObjectViewSchema);
-        lIntegrityViews = new ArrayList();        
-                
+        lIntegrityViews = new ArrayList();
+
         return true;
     }
-    
+
     /**
      *  Executes the project with the specified parameters.
-     */    
+     */
     public void executeProject() {
         StringBuffer tmp;
         String constraint, triggers[], involvedViews[], baseTables[];
@@ -711,25 +712,25 @@ public class OCL2SQL extends JPanel implements ActionListener {
         TriggerGenerator tg;
         NameCreator nameCreator = new NameCreator();
         Set involvedTables;
-        
+
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         prepareProgressInfo();
         increaseProgressInfo("preparing project execution ...");
-        if (!prepareProjectExecution()) { 
+        if (!prepareProjectExecution()) {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             return;
         }
-                        
+
         // create table schema
         increaseProgressInfo("create table schema ...");
         SchemaGenerator ddlg = new SchemaGenerator();
         ddlg.createDDL(theORMapping, theSQLBuilder);
         resultTableSchema = ddlg.getDDLScript();
-                
+
         // create object views
         increaseProgressInfo("create object views ...");
         resultObjectViews = theObjectViewSchema.getViewDefinitions();
-                
+
         // create integrity views
         increaseProgressInfo("generate integrity views ...");
         tmp = new StringBuffer();
@@ -747,19 +748,19 @@ public class OCL2SQL extends JPanel implements ActionListener {
             showMessage("Error", "Error during Integrity View generation.\n" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
         resultIntegrityViews = tmp.toString();
-                
+
         // create trigger definitions
         increaseProgressInfo("create triggers ...");
         tg = new TriggerGenerator(theSQLBuilder);
-        tmp = new StringBuffer();               
-        
+        tmp = new StringBuffer();
+
         for (int i=0; i<lIntegrityViews.size(); i++) {
             // get involved views and determine all base tables
             dcf = (DeclarativeCodeFragment)lIntegrityViews.get(i);
             involvedViews = dcf.getAdditionalInfo();
             involvedTables = new HashSet();
             triggers = new String[0];
-            
+
             for (int k=0; k<involvedViews.length; k++) {
                 baseTables = theObjectViewSchema.getQueriedTables(involvedViews[k]);
                 for (int l=0; l<baseTables.length; l++) {
@@ -768,12 +769,12 @@ public class OCL2SQL extends JPanel implements ActionListener {
             }
 
             if (rbTriggerAssertion.isSelected()) {
-                triggers = tg.getAssertionReplacement(TRIGGER, 
+                triggers = tg.getAssertionReplacement(TRIGGER,
                                                       INTERR + dcf.getName(),
                                                       dcf.getName(),
                                                       (String[])involvedTables.toArray(new String[involvedTables.size()]));
             } else if (rbTriggerECA.isSelected()) {
-                triggers = tg.getECATriggerTemplate(TRIGGER, 
+                triggers = tg.getECATriggerTemplate(TRIGGER,
                                                     dcf.getName(),
                                                     (String[])involvedTables.toArray(new String[involvedTables.size()]));
             }
@@ -783,42 +784,42 @@ public class OCL2SQL extends JPanel implements ActionListener {
             }
         }
         resultTrigger = tmp.toString();
-     
-        // update gui 
+
+        // update gui
         increaseProgressInfo("update output pane...");
         updateOutputPane();
-        
+
         // save the results to the according files
         increaseProgressInfo("save results ...");
         saveResults();
         closeProgressWindows();
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
-    
+
     /**
      *  Stores the resulting DDL scripts from project execution to according files.
      */
     private void saveResults() {
         FileWriter fw;
-        
+
         try {
             fw = new FileWriter(theProjectDirectory + fileNameTableSchema);
             fw.write(resultTableSchema);
             fw.close();
-            
+
             fw = new FileWriter(theProjectDirectory + fileNameObjectViews);
             fw.write(resultObjectViews);
             fw.close();
-            
+
             fw = new FileWriter(theProjectDirectory + fileNameIntegrityViews);
             fw.write(resultIntegrityViews);
             fw.close();
-            
+
             fw = new FileWriter(theProjectDirectory + fileNameTrigger);
             fw.write(resultTrigger);
-            fw.close();                        
+            fw.close();
         } catch(Exception e) {
             showMessage("Error", "Could not write results !\n" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
-    }    
+    }
 }
