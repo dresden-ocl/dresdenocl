@@ -14,6 +14,7 @@ Other changes
                  These are now made invisible as opposed to just greying
                  them out. This was asked for by issue #647 as filed
                  against ArgoUML.
+
 * [Type Checker] Improved error reports in Collection.navigateParameterized()
 
 * [Build System] Added this file together with a release policy.
@@ -24,6 +25,8 @@ Other changes
 
 Fixed bugs
 ----------
+* [Injector]     fixed NullPointerException in tudresden.ocl.injection.lib.Check
+
 * [Injector]     #223583 OCL constraints at class level
                  Added onFileDocComment to TaskInstrumentor to allow for handling
                  of file level javadoc comments.
