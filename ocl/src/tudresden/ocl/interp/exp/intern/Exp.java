@@ -141,7 +141,7 @@ public abstract class Exp {
    * In this method the Exp-Objects are asked for their return-classes and this
    * classes are used to get the result calling the ReflectionUtil.
    * 
-   * @see ReflectionUtil.findMethod
+   * @see ReflectionUtil#findMethod(Class, String, Class[])
    */
   protected static Method findMethod(Exp exp, String methodName, 
                                      Object[] params) {

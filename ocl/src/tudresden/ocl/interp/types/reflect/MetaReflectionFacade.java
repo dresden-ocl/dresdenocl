@@ -54,7 +54,7 @@ import tudresden.ocl.lib.SimpleNameAdapter;
  * on normal types and is therefor able to answer reflective questions that
  * are done with OclType in the interpreter.
  * 
- * @see MetaAny
+ * @see tudresden.ocl.interp.types.MetaAny
  * @see ModelFacade
  * @see ReflectionFacade
  */
@@ -130,7 +130,7 @@ public class MetaReflectionFacade extends ReflectionFacade
    * Overwrites the source wrapper for class information with MetaAny that does
    * know more about the class than Any.
    * 
-   * @see MetaAny
+   * @see tudresden.ocl.interp.types.MetaAny
    * @see Any
    */
   protected ClassAny getClassAny(Class c) {

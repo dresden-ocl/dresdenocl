@@ -736,8 +736,8 @@ public class InterpreterVisitor extends DepthFirstAdapter {
   /**
    * Give the from node the value of the to node.
    * 
-   * @see getVar
-   * @see setVar
+   * @see #getVar(Node)
+   * @see #setVar(Node, Exp)
    */
   protected void reachThrough(Node from, Node to) {
     setVar(from, getVar(to));

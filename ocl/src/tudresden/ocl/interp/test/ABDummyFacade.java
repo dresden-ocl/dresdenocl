@@ -137,7 +137,7 @@ public class ABDummyFacade implements ModelFacade, InstanceFacade {
   }
 
   /**
-   * @see ModelFacade#getClassifier(String)
+   * @see tudresden.ocl.check.types.ModelFacade#getClassifier(String)
    */
   public Any getClassifier(String name) throws OclTypeException {
     return (Any)classifiers.get(name);

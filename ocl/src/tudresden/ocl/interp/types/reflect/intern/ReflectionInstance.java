@@ -136,7 +136,7 @@ public class ReflectionInstance implements Instance {
    * This method is relativly complicated but has the advantage that it does 
    * reflect non-public attributes as well.
    * 
-   * @see Instance#navigateQualified(String, Type[])
+   * @see tudresden.ocl.interp.types.Instance#navigateQualified(String, Object[])
    */
   public Instance navigateQualified(String attributeName, Object[] qualifier)
                              throws IllegalAccessException {
@@ -176,7 +176,7 @@ public class ReflectionInstance implements Instance {
   /**
    * This does work with public methods only (can be changed)
    * 
-   * @see Instance#navigateParameterized(String, Type[])
+   * @see tudresden.ocl.interp.types.Instance#navigateParameterized(String, Object[])
    */
   public Instance navigateParameterized(String name, Object[] params)
                                  throws IllegalAccessException {

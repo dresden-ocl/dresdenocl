@@ -50,7 +50,7 @@ public interface InstanceFacade {
    *         requested type
    * @throws NullPointerException if typeName == null
    * @throws OclTypeException if typeName does not exist as a type
-   * @see ModelFacade#getClassifier(String)
+   * @see tudresden.ocl.check.types.ModelFacade#getClassifier(String)
    */
   public Iterator getRelevantOf(String typeName) throws OclTypeException;
 }

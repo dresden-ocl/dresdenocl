@@ -85,7 +85,7 @@ public class InstanceOclFactory extends DefaultOclFactory {
   /**
    * Get the OclType from a class-name and the modelFacade that knows about
    * the class-structure.
-   * @see InstanceOclType.getOclTypeFor
+   * @see InstanceOclType#getOclTypeFor(String)
    */
   public static OclType getOclTypeFor(String name, ModelFacade modelFacade) {
     return InstanceOclType.getOclTypeFor(name, modelFacade);
