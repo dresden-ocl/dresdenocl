@@ -166,11 +166,10 @@ public final class OclInstrumentor implements TaskInstrumentor
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed)
 	throws IOException
 	{
-		//o.write("      System.out.println(\"notify invariants for attribute '");
+		//o.write("System.out.println(\"notify invariants for attribute '");
 		//o.write(ja.getName());
 		//o.write("' on object '\"+this+'\\'');");
 		//o.write(lineSeparator);
-		o.write("      ");
 		o.write(Invariant.NOTIFY_OBSERVING_INVARIANTS);
 		o.write('(');
 		o.write(ja.getName());
@@ -187,13 +186,11 @@ public final class OclInstrumentor implements TaskInstrumentor
 	public void onWrapperConstructor(Writer o, JavaConstructor jc)
 	throws IOException
 	{
-		o.write("    ");
 		o.write(Invariant.CHECKING_FLAG);
 		o.write("=true;");
 		o.write(lineSeparator);
 		if(hasInvariantScope(jc))
 			writeInvariantCall(o);
-		o.write("    ");
 		o.write(Invariant.CHECKING_FLAG);
 		o.write("=false;");
 		o.write(lineSeparator);
@@ -202,13 +199,11 @@ public final class OclInstrumentor implements TaskInstrumentor
 	public void onWrapperDefaultConstructor(Writer o, JavaClass jc)
 	throws IOException
 	{
-		o.write("    ");
 		o.write(Invariant.CHECKING_FLAG);
 		o.write("=true;");
 		o.write(lineSeparator);
 		if(hasInvariantScope(jc))
 			writeInvariantCall(o);
-		o.write("    ");
 		o.write(Invariant.CHECKING_FLAG);
 		o.write("=false;");
 		o.write(lineSeparator);
@@ -217,7 +212,6 @@ public final class OclInstrumentor implements TaskInstrumentor
 	public void	onWrapperPre(Writer o, JavaMethod jm)
 	throws IOException
 	{
-		o.write("      ");
 		o.write(Invariant.CHECKING_FLAG);
 		o.write("=true;");
 		o.write(lineSeparator);
@@ -243,22 +237,17 @@ public final class OclInstrumentor implements TaskInstrumentor
 					//System.out.println("p "+frag.getConstrainedOperation());
 					if(signature.equals(frag.getConstrainedOperation()))
 					{
-						o.write("      {");
-						o.write(lineSeparator);
+						o.write('{');
 						o.write(frag.getCode());
-						o.write("        if(!");
+						o.write("if(!");
 						o.write(frag.getResultVariable());
 						o.write(".isTrue())");
-						o.write(lineSeparator);
-						o.write("          ");
 						o.write(violationmacro);
 						o.write("(\"violated ocl precondition '");
 						o.write(frag.getName());
 						o.write("' on object '\"+this+\"' operation '");
 						o.write(frag.getConstrainedOperation());
-						o.write("'.\");");
-						o.write(lineSeparator);
-						o.write("      }");
+						o.write("'.\");}");
 						o.write(lineSeparator);
 					}
 				}
@@ -268,16 +257,14 @@ public final class OclInstrumentor implements TaskInstrumentor
 					//System.out.println("r "+frag.getConstrainedOperation());
 					if(signature.equals(frag.getConstrainedOperation()))
 					{
-						o.write("      {");
-						o.write(lineSeparator);
+						o.write('{');
 						o.write(frag.getCode());
-						o.write("      }");
+						o.write('}');
 						o.write(lineSeparator);
 					}
 				}
 			}
 		}
-		o.write("      ");
 		o.write(Invariant.CHECKING_FLAG);
 		o.write("=false;");
 		o.write(lineSeparator);
@@ -286,7 +273,6 @@ public final class OclInstrumentor implements TaskInstrumentor
 	public void	onWrapperPost(Writer o, JavaMethod jm)
 	throws IOException
 	{
-		o.write("      ");
 		o.write(Invariant.CHECKING_FLAG);
 		o.write("=true;");
 		o.write(lineSeparator);
@@ -305,28 +291,23 @@ public final class OclInstrumentor implements TaskInstrumentor
 					//System.out.println("o "+frag.getConstrainedOperation());
 					if(signature.equals(frag.getConstrainedOperation()))
 					{
-						o.write("      {");
+						o.write('{');
 						o.write(lineSeparator);
 						o.write(frag.getCode());
-						o.write("        if(!");
+						o.write("if(!");
 						o.write(frag.getResultVariable());
 						o.write(".isTrue())");
-						o.write(lineSeparator);
-						o.write("          ");
 						o.write(violationmacro);
 						o.write("(\"violated ocl postcondition '");
 						o.write(frag.getName());
 						o.write("' on object '\"+this+\"' operation '");
 						o.write(frag.getConstrainedOperation());
-						o.write("'.\");");
-						o.write(lineSeparator);
-						o.write("      }");
+						o.write("'.\");}");
 						o.write(lineSeparator);
 					}
 				}
 			}
 		}
-		o.write("      ");
 		o.write(Invariant.CHECKING_FLAG);
 		o.write("=false;");
 		o.write(lineSeparator);
@@ -361,18 +342,16 @@ public final class OclInstrumentor implements TaskInstrumentor
 	{
 		o.write("/**");
 		o.write(lineSeparator);
-		o.write("    An object representing ocl invariant ");
+		o.write("An object representing ocl invariant ");
 		o.write(cf.getName());
-		o.write(" on this object.");
+		o.write(" on this object. Generated automatically, DO NOT CHANGE!");
 		o.write(lineSeparator);
-		o.write("    Generated automatically, DO NOT CHANGE!");
-		o.write(lineSeparator);
-		o.write("    @author ");
+		o.write("@author ");
 		o.write(Instrumentor.OCL_AUTHOR);
 		o.write(lineSeparator);
-		o.write("  */private final ");
+		o.write("*/private final ");
 		o.write(Invariant.class.getName());
-		o.write(" ");
+		o.write(' ');
 		o.write(Invariant.INVARIANT_OBJECT);
 		o.write(cf.getName());
 		o.write("=new ");
@@ -382,40 +361,36 @@ public final class OclInstrumentor implements TaskInstrumentor
 		o.write("\", this);");
 		o.write("/**");
 		o.write(lineSeparator);
-		o.write("    Checks ocl invariant ");
+		o.write("Checks ocl invariant ");
 		o.write(cf.getName());
-		o.write(" on this object.");
+		o.write(" on this object. Generated automatically, DO NOT CHANGE!");
 		o.write(lineSeparator);
-		o.write("    Generated automatically, DO NOT CHANGE!");
-		o.write(lineSeparator);
-		o.write("    @author ");
+		o.write("@author ");
 		o.write(Instrumentor.OCL_AUTHOR);
 		o.write(lineSeparator);
-		o.write("  */public final void ");
+		o.write("*/public final void ");
 		o.write(Invariant.INVARIANT_METHOD);
 		o.write(cf.getName());
-		o.write("()");
-		o.write(lineSeparator);
-		o.write("  {");
+		o.write("(){");
 		o.write(lineSeparator);
 		if(tracechecking)
 		{
-			o.write("    System.out.println(\"checking ocl invariant '");
+			o.write("System.out.println(\"checking ocl invariant '");
 			o.write(cf.getName());
 			o.write("' on object '\"+this+\"'.\");");
 			o.write(lineSeparator);
 		}
-		o.write("    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(");
+		o.write("tudresden.ocl.lib.OclAnyImpl.setFeatureListener(");
 		o.write(Invariant.INVARIANT_OBJECT);
 		o.write(cf.getName());
 		o.write(");");
 		o.write(lineSeparator);
 		o.write(cf.getCode());
-		o.write("    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();");
+		o.write("tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();");
 		o.write(lineSeparator);
-		o.write("    if(!");
+		o.write("if(!");
 		o.write(cf.getResultVariable());
-		o.write(".isTrue()) ");
+		o.write(".isTrue())");
 		o.write(violationmacro);
 		o.write("(\"violated ocl invariant '");
 		o.write(cf.getName());
@@ -424,13 +399,12 @@ public final class OclInstrumentor implements TaskInstrumentor
 			o.write(" of class '\"+getClass().getName()+\"'");
 		o.write(".\");");
 		o.write(lineSeparator);
-		o.write("  }");
+		o.write('}');
 	}
 	
 	private final void writeInvariantCall(Writer o)
 	throws IOException
 	{
-		o.write("      ");
 		o.write(Invariant.CHECKING_OPERATION);
 		o.write("();");
 		o.write(lineSeparator);
@@ -441,17 +415,15 @@ public final class OclInstrumentor implements TaskInstrumentor
 	{
 		o.write("/**");
 		o.write(lineSeparator);
-		o.write("    Contains observers for modifications of this feature.");
+		o.write("Contains observers for modifications of this feature. Generated automatically, DO NOT CHANGE!");
 		o.write(lineSeparator);
-		o.write("    Generated automatically, DO NOT CHANGE!");
-		o.write(lineSeparator);
-		o.write("    @author ");
+		o.write("@author ");
 		o.write(Instrumentor.OCL_AUTHOR);
 		o.write(lineSeparator);
-		o.write("    @see #");
+		o.write("@see #");
 		o.write(jf.getName());
 		o.write(lineSeparator);
-		o.write("  */");
+		o.write("*/");
 		o.write(Modifier.toString(
 		(jf.getModifiers()&Modifier.STATIC)|Modifier.PUBLIC|Modifier.FINAL));
 		o.write(" java.util.HashSet ");

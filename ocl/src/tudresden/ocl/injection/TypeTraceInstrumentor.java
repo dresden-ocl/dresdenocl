@@ -35,11 +35,10 @@ public final class TypeTraceInstrumentor implements TaskInstrumentor
 	{
 		if(is_weakly_typed)
 		{
-			o.write("      ");
 			o.write(TypeTracer.TRACE_TYPES);
 			o.write("(\"");
 			o.write(ja.getFullDocName());
-			o.write("\", ");
+			o.write("\",");
 			o.write(ja.getName());
 			o.write(");");
 			o.write(lineSeparator);

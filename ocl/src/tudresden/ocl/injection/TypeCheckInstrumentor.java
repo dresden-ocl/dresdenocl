@@ -49,7 +49,7 @@ public final class TypeCheckInstrumentor implements TaskInstrumentor
 	{
 		if(type!=null)
 		{
-			o.write("      if(!");
+			o.write("if(!");
 			o.write(kind);
 			o.write('(');
 			o.write(ja.getName());

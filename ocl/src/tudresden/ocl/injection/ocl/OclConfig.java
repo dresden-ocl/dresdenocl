@@ -53,7 +53,7 @@ public final class OclConfig implements TaskConfig
 	
 	public JavaCodeGenerator jcg=new JavaCodeGenerator("this", "result");
 	{
-		jcg.setInitialIndent(8);
+		jcg.setInitialIndent(0);
 	}
 	
 	public ModelFacade modelfacade;
