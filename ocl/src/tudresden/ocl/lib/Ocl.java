@@ -274,6 +274,23 @@ public final class Ocl {
 
   // -------------------- name adapter methods --------------------------------
 
+  static
+  {
+    String na=System.getProperty("tudresden.ocl.lib.nameadapter");
+    if(na==null)
+      nameAdapter=new SimpleNameAdapter();
+    else
+    {
+      try
+      {
+        nameAdapter=(NameAdapter)(Class.forName(na).newInstance());
+      }
+      catch(ClassNotFoundException e) { throw new RuntimeException(e.toString()); }
+      catch(InstantiationException e) { throw new RuntimeException(e.toString()); }
+      catch(IllegalAccessException e) { throw new RuntimeException(e.toString()); }
+    }
+  }
+  
   /** makes the methods <CODE>getName</CODE> and
    *  <CODE>getPossibleAssociationNames</CODE> use the given name adapter
    *  The ocl library will not work until a NameAdapter is provided.
