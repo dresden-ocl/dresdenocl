@@ -157,9 +157,6 @@ public final class JavaFile
     
     buildStage=false;
 
-    if(packagename==null)
-      throw new RuntimeException();
-
     // implements Java Language Specification 6.5.4.2 "Qualified Type Names"
     // I dont know, how this should work for inner classes, TODO.
     if(typename.indexOf('.')>=0)
@@ -179,7 +176,10 @@ public final class JavaFile
     // implements items 1 and 2 of 6.5.4.1
     try
     {
-      return Class.forName(packagename+'.'+typename);
+      return Class.forName(
+        packagename!=null ?
+        packagename+'.'+typename :
+        typename);
     }
     catch(ClassNotFoundException e) {};
 
