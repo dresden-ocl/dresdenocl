@@ -92,8 +92,10 @@ abstract class TestInjection
     // must encounter exactly the same violations, 
     // as in phase 1.
     ev=ev2;
+    tudresden.ocl.injection.lib.Invariant.checking_flag=true;
     for(Iterator i=Invariant.allInvariants.iterator(); i.hasNext(); )
       ((Invariant)i.next()).invoke();
+    tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     ensureAllViolations();
     ev=null;
   }
@@ -154,6 +156,7 @@ abstract class TestInjection
     if(!strict) return;
     
     //System.out.println("expection :"+m);
+    if(ev!=null) throw new RuntimeException();
     if(ev1.contains(m)) throw new RuntimeException();
     ev1.add(m);
     if(ev2.contains(m)) throw new RuntimeException();
