@@ -220,7 +220,15 @@ public class TestInjection
     
     //System.out.println("violation :"+m);
     
-    if(ev.contains(m))
+    if(ev==null)
+    {
+      StringBuffer buf=new StringBuffer();
+      buf.append("unexpected violation outside phases :\n    encountered: >");
+      buf.append(m);
+      buf.append("<\n");
+      error(buf.toString());
+    }
+    else if(ev.contains(m))
     {
       ev.remove(m);
     }

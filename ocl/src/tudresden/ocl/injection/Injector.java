@@ -700,8 +700,9 @@ public final class Injector
           return;
         }
         
-        if(c=='\0')
+        switch(c)
         {
+        case '\0':
           String bufs=buf.toString();
           if("package".equals(bufs))
           {
@@ -730,10 +731,15 @@ public final class Injector
           }
           else
             parseFeature(null, bufs); // null says, its a top-level class
-        }
-        else
-        {
-          //System.out.println("bufc >"+c+"<");
+          break;
+          
+        case 'c':
+          System.out.println("comment >"+comment+"<");
+          break;
+          
+        default:
+          System.out.println("bufc >"+c+"<");
+          break;
         }
       }
     }
@@ -800,12 +806,11 @@ public final class Injector
       }
       start+=tagname.length();
       
-      if(doccomment.charAt(start)!=' ')
+      if(Character.isLetterOrDigit(doccomment.charAt(start)))
       {
         start=doccomment.indexOf('@', start);
         continue;
       }
-      start++;
 
       int end=doccomment.indexOf('@', start);
       if(end<0)

@@ -6,6 +6,12 @@ import java.util.*;
 
 /**
    The Person of the Person-Company model.
+*/
+public class Person extends RLObject
+{
+
+  // Attributes
+  /**
    @invariant: self.oclIsKindOf(Person)
    @invariant: age.oclIsTypeOf(Integer)
    @invariant: 1 . oclIsKindOf(Real)
@@ -15,12 +21,6 @@ import java.util.*;
       let c=a + self.employers->size in
       let d=b*2 in
       a<b and self.employers->size<=c and d>0
-*/
-public class Person extends RLObject
-{
-
-  // Attributes
-  /**
      @invariant nameUpperCase:
         let firstLetter:String=name.substring(1,1) in
         firstLetter = firstLetter.toUpper
