@@ -47,7 +47,7 @@ public class RevengGUI extends javax.swing.JDialog {
     initComponents ();
     pack ();
     
-    m_jspSplitter.setDividerLocation (100);
+    m_jspSplitter.setDividerLocation (0.5);
   }
 
   /** This method is called from within the constructor to
@@ -68,7 +68,7 @@ public class RevengGUI extends javax.swing.JDialog {
     m_jspProperties = new javax.swing.JScrollPane ();
     m_jtPropertiesTable = new javax.swing.JTable ();
     getContentPane ().setLayout (new java.awt.GridBagLayout ());
-    java.awt.GridBagConstraints gridBagConstraints2;
+    java.awt.GridBagConstraints gridBagConstraints1;
     setDefaultCloseOperation (javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     addWindowListener (new java.awt.event.WindowAdapter () {
       public void windowClosing (java.awt.event.WindowEvent evt) {
@@ -77,10 +77,6 @@ public class RevengGUI extends javax.swing.JDialog {
     }
     );
 
-    m_jspSplitter.setRightComponent (null);
-    m_jspSplitter.setLeftComponent (null);
-    m_jspSplitter.setBottomComponent (null);
-    m_jspSplitter.setTopComponent (null);
 
       m_jpLeft.setLayout (new java.awt.BorderLayout ());
   
@@ -98,6 +94,21 @@ public class RevengGUI extends javax.swing.JDialog {
     
           m_jtFiles.setModel (m_dtmFileModel);
           m_jtFiles.setCellRenderer (new FileTreeNodeRenderer());
+          m_jtFiles.addTreeExpansionListener (new javax.swing.event.TreeExpansionListener () {
+            public void treeCollapsed (javax.swing.event.TreeExpansionEvent evt) {
+              m_jtFilesTreeCollapsed (evt);
+            }
+            public void treeExpanded (javax.swing.event.TreeExpansionEvent evt) {
+      
+            }
+          }
+          );
+          m_jtFiles.addTreeSelectionListener (new javax.swing.event.TreeSelectionListener () {
+            public void valueChanged (javax.swing.event.TreeSelectionEvent evt) {
+              m_jtFilesValueChanged (evt);
+            }
+          }
+          );
           m_jtFiles.addTreeWillExpandListener (new javax.swing.event.TreeWillExpandListener () {
             public void treeWillCollapse (javax.swing.event.TreeExpansionEvent evt)
             throws javax.swing.tree.ExpandVetoException {
@@ -140,18 +151,34 @@ public class RevengGUI extends javax.swing.JDialog {
       m_jspSplitter.setRightComponent (m_jspProperties);
   
 
-    gridBagConstraints2 = new java.awt.GridBagConstraints ();
-    gridBagConstraints2.gridx = 0;
-    gridBagConstraints2.gridy = 0;
-    gridBagConstraints2.gridwidth = 0;
-    gridBagConstraints2.gridheight = 0;
-    gridBagConstraints2.fill = java.awt.GridBagConstraints.BOTH;
-    gridBagConstraints2.anchor = java.awt.GridBagConstraints.NORTHWEST;
-    gridBagConstraints2.weightx = 1.0;
-    gridBagConstraints2.weighty = 1.0;
-    getContentPane ().add (m_jspSplitter, gridBagConstraints2);
+    gridBagConstraints1 = new java.awt.GridBagConstraints ();
+    gridBagConstraints1.gridx = 0;
+    gridBagConstraints1.gridy = 0;
+    gridBagConstraints1.gridwidth = 0;
+    gridBagConstraints1.gridheight = 0;
+    gridBagConstraints1.fill = java.awt.GridBagConstraints.BOTH;
+    gridBagConstraints1.anchor = java.awt.GridBagConstraints.NORTHWEST;
+    gridBagConstraints1.weightx = 1.0;
+    gridBagConstraints1.weighty = 1.0;
+    getContentPane ().add (m_jspSplitter, gridBagConstraints1);
 
   }//GEN-END:initComponents
+
+  private void m_jtFilesValueChanged (javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_m_jtFilesValueChanged
+    if (evt.isAddedPath()) {
+      RevengTreeNode rtn = (RevengTreeNode) evt.getPath().getLastPathComponent();
+
+      m_jspProperties.setViewportView (rtn.getRightComponent());
+
+      pack(); // Not especially elegant! Does anybody know a better way of getting that JScrollPane to redraw?
+    }
+  }//GEN-LAST:event_m_jtFilesValueChanged
+
+  private void m_jtFilesTreeCollapsed (javax.swing.event.TreeExpansionEvent evt) {//GEN-FIRST:event_m_jtFilesTreeCollapsed
+    RevengTreeNode rtn = (RevengTreeNode) evt.getPath().getLastPathComponent();
+    
+    rtn.collapsed (m_dtmFileModel);
+  }//GEN-LAST:event_m_jtFilesTreeCollapsed
 
   private void m_jtFilesTreeWillExpand (javax.swing.event.TreeExpansionEvent evt) throws ExpandVetoException {//GEN-FIRST:event_m_jtFilesTreeWillExpand
     RevengTreeNode rtn = (RevengTreeNode) evt.getPath ().getLastPathComponent ();
@@ -169,16 +196,163 @@ public class RevengGUI extends javax.swing.JDialog {
     System.exit (0);
   }//GEN-LAST:event_closeDialog
   
-  abstract class RevengTreeNode extends DefaultMutableTreeNode {
+  abstract static class RevengTreeNode extends DefaultMutableTreeNode {
+    
+    static JLabel s_jlNoProperties = new JLabel ("No properties for current selection!");
+    
     public RevengTreeNode() {
       super();
     }
     
     public abstract Icon getIcon (boolean fExpanded);
     public abstract void fill (DefaultTreeModel dtmModel);
+    
+    public void collapsed (DefaultTreeModel dtmModel) {
+      if (! isLeaf()) {
+        removeAllChildren();
+        setAllowsChildren (true);
+        
+        dtmModel.nodeStructureChanged (this);
+      }
+    }
+    
+    public JComponent getRightComponent () {
+      return s_jlNoProperties;
+    }
+  }
+ 
+  static class ErrorTreeNode extends RevengTreeNode {
+
+    static Icon s_iIcon;
+    static {
+      s_iIcon = new javax.swing.ImageIcon (ErrorTreeNode.class.getResource ("error.gif"));
+    }
+    
+    public ErrorTreeNode (String sMessage) {
+      super();
+      
+      setUserObject (sMessage);
+      setAllowsChildren (false);
+    }
+    
+    public Icon getIcon (boolean fExpanded) {
+      return s_iIcon;
+    }
+    
+    public void fill (DefaultTreeModel dtmModel) { }
   }
   
-  class CollectionTreeNode extends RevengTreeNode {
+  static abstract class HolderTreeNode extends RevengTreeNode {
+    
+    private String m_sCaption;
+    
+    public HolderTreeNode (String sCaption, List lData) {
+      super();
+      
+      setUserObject (lData);
+      setAllowsChildren (lData.size() > 0);
+      
+      m_sCaption = sCaption;
+    }
+    
+    public Icon getIcon (boolean fExpanded) {
+      if (fExpanded) {
+        return javax.swing.UIManager.getIcon ("Tree.closedIcon");
+      }
+      else {
+        return javax.swing.UIManager.getIcon ("Tree.openIcon");
+      }
+    }
+    
+    public String toString() {
+      return m_sCaption;
+    }
+  }
+  
+  static class MapHolderNode extends HolderTreeNode {
+    public MapHolderNode (List lmdMaps) {
+      super ("Maps", lmdMaps);
+    }
+        
+    public void fill (DefaultTreeModel dtmModel) {
+      List lmdMaps = (List) getUserObject ();
+      
+      if (lmdMaps.size() == 0) {
+        setAllowsChildren (false);
+        
+        dtmModel.nodeChanged (this);
+      }
+      else {
+        for (Iterator i = lmdMaps.iterator(); i.hasNext();) {
+          add (new MapTreeNode ((MapDescriptor) i.next ()));
+        }
+        
+        dtmModel.nodeStructureChanged (this);
+      }
+    }
+  }
+  
+  static class MapTreeNode extends RevengTreeNode {
+    public MapTreeNode (MapDescriptor md) {
+      super();
+      
+      setUserObject (md);
+      setAllowsChildren(false);
+    }
+    
+    public Icon getIcon (boolean fExpanded) {
+      return javax.swing.UIManager.getIcon ("Tree.leafIcon");
+    }
+    
+    public void fill (DefaultTreeModel dtm) {
+      setAllowsChildren (false);
+      
+      dtm.nodeChanged (this);
+    }
+
+    public JComponent getRightComponent() {
+      return new JLabel ("Map editor!");
+    }
+    
+    public MapDescriptor getDescriptor() {
+      return (MapDescriptor) getUserObject();
+    }
+    
+    public String toString () {      
+      MapDescriptor md = getDescriptor();
+      
+      return "Map<" + ((md.getKeyType() != null)?(md.getKeyType()):("Unknown Type"))
+                     + " -> "
+                     + ((md.getElementType() != null)?(md.getElementType()):("Unknown Type"))
+                     + "> "
+                     + md.getName();
+    }
+  }
+  
+  static class CollectionHolderNode extends HolderTreeNode {
+    public CollectionHolderNode (List lcdCollections) {
+      super ("Collections", lcdCollections);
+    }
+        
+    public void fill (DefaultTreeModel dtmModel) {
+      List lcdCollections = (List) getUserObject ();
+      
+      if (lcdCollections.size() == 0) {
+        setAllowsChildren (false);
+        
+        dtmModel.nodeChanged (this);
+      }
+      else {
+        for (Iterator i = lcdCollections.iterator(); i.hasNext();) {
+          add (new CollectionTreeNode ((CollectionDescriptor) i.next ()));
+        }
+        
+        dtmModel.nodeStructureChanged (this);
+      }
+    }
+  }
+  
+  static class CollectionTreeNode extends RevengTreeNode {
     public CollectionTreeNode (CollectionDescriptor cd) {
       super();
       
@@ -199,6 +373,10 @@ public class RevengGUI extends javax.swing.JDialog {
     public CollectionDescriptor getDescriptor() {
       return (CollectionDescriptor) getUserObject();
     }
+
+    public JComponent getRightComponent() {
+      return new JLabel ("Collection editor!");
+    }
     
     public String toString () {      
       CollectionDescriptor cd = getDescriptor();
@@ -207,7 +385,7 @@ public class RevengGUI extends javax.swing.JDialog {
     }
   }
   
-  class FileTreeNode extends RevengTreeNode {
+  static class FileTreeNode extends RevengTreeNode {
     public FileTreeNode () {
       super();
     }
@@ -298,15 +476,14 @@ public class RevengGUI extends javax.swing.JDialog {
         // Current node is java file
         try {
           AnalysisConsumer ac = AnalysisConsumer.analyse (fLister);
-          
-          for (Iterator i = ac.getCollections().iterator(); i.hasNext();) {
-            add (new CollectionTreeNode ((CollectionDescriptor) i.next()));
-          }
+     
+          add (new CollectionHolderNode (ac.getCollections ()));
+          add (new MapHolderNode (ac.getMaps ()));
         }
         catch (Throwable t) {
           t.printStackTrace ();
           
-          setAllowsChildren(false);
+          add (new ErrorTreeNode ("Not a Java file, or file is corrupted."));
         }
       }
     }
@@ -318,7 +495,7 @@ public class RevengGUI extends javax.swing.JDialog {
     }
   }
 
-  class FileTreeNodeRenderer extends DefaultTreeCellRenderer {
+  static class FileTreeNodeRenderer extends DefaultTreeCellRenderer {
     public FileTreeNodeRenderer () {
       super();
     }
