@@ -20,9 +20,4 @@ package tudresden.ocl.injection.test;
 
 abstract class AbstractImplementation implements Interface
 {
-	
-	public int someMethod(int a) {
-		return 0;
-	}
-
 }
