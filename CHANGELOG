@@ -13,6 +13,7 @@ Other changes
                  toolbars to subclasses of OCLEditor. This was a request from
                  the ArgoUML team who wanted to make the Toolbars look like
                  theirs.
+
 * [OCL Editor]   Modified OclToolbar to accept any UI instance. For instances
                  that no special floating code has been implemented for, the
                  toolbar is set to be unfloatable instead of throwing an
@@ -31,12 +32,11 @@ Changes that could break older environments
 -------------------------------------------
 
 * [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types
-to sequence types
+                 to sequence types
 
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
-  [OCL Library]  to also include methods defined by java.lang.Object if the 
-original
-                 classifier is an interface.
+  [OCL Library]  to also include methods defined by java.lang.Object if the
+                 original classifier is an interface.
 
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
   [OCL Library]  to also include methods defined by interfaces extended by other
@@ -46,14 +46,12 @@ original
 
 Other changes
 -------------
-* [OCL Editor]   Exchanged icons to apply with licencing requirements of an 
-opensource system.
+* [OCL Editor]   Exchanged icons to apply with licencing requirements of an
+                 opensource system.
+
 * [Java Code Generator]
-                 Fixed generation of "->excluding", so that a cast is generated, 
-
-
-
-too.
+                 Fixed generation of "->excluding", so that a cast is generated,
+                 too.
 
 * [Type Checker] Enhanced DefaultTypeFactory to recognize collection types.
 
@@ -74,22 +72,18 @@ Fixed bugs
 ----------
 * [OCL Editor]   Fixed issue #511143, by hardcoding wrapping at column 50.
 
-* [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types 
-to sequence types
+* [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types
+                 to sequence types
 
 * [Java Code Generator]
-                 Fixed generation of "->excluding", so that a cast is generated, 
-
-
-
-too.
+                 Fixed generation of "->excluding", so that a cast is generated,
+                 too.
 
 * [Type Checker] Enhanced DefaultTypeFactory to recognize collection types.
 
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
-  [OCL Library]  to also include methods defined by java.lang.Object if the 
-original
-                 classifier is an interface.
+  [OCL Library]  to also include methods defined by java.lang.Object if the
+                 original classifier is an interface.
 
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
   [OCL Library]  to also include methods defined by interfaces extended by other
@@ -101,9 +95,8 @@ original
 * [Injector]     fixed NullPointerException in tudresden.ocl.injection.lib.Check
 
 * [Injector]     #223583 OCL constraints at class level
-                 Added onFileDocComment to TaskInstrumentor to allow for 
-handling
-                 of file level javadoc comments.
+                 Added onFileDocComment to TaskInstrumentor to allow for
+                 handling of file level javadoc comments.
 
 * [Injector]     The generated code did not reset Invariant.checking_flag if
                  the code checking contraints raised an exception, and in the
