@@ -24,18 +24,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintStream;
 import java.util.*;
-import java.lang.reflect.Modifier;
 import tudresden.ocl.lib.NameAdapter;
 import tudresden.ocl.lib.SimpleNameAdapter;
 import tudresden.ocl.lib.ArgoNameAdapter;
+import tudresden.ocl.lib.TogetherNameAdapter;
 import tudresden.ocl.parser.OclParserException;
-import tudresden.ocl.check.types.ModelFacade;
 import tudresden.ocl.check.types.ReflectionFacade;
 import tudresden.ocl.check.types.DefaultReflectionAdapter;
 import tudresden.ocl.check.OclTypeException;
-import tudresden.ocl.injection.ocl.lib.Invariant;
-import tudresden.ocl.injection.lib.Check;
-import tudresden.ocl.injection.lib.TypeTracer;
 import tudresden.ocl.injection.*;
 
 public class Main extends tudresden.ocl.injection.Main
@@ -127,6 +123,8 @@ public class Main extends tudresden.ocl.injection.Main
 				nameadapter=new SimpleNameAdapter();
 			else if("argo".equals(args[i]))
 				nameadapter=new ArgoNameAdapter();
+			else if("together".equals(args[i]))
+				nameadapter=new TogetherNameAdapter();				
 			else
 				throw new IllegalParameterException("name adapter must be 'none' or 'argo'.");
 		}
