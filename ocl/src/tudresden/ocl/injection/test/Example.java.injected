@@ -221,12 +221,12 @@ public abstract class Example implements Runnable
   
   private Map mapWithoutComment;
 
-  private Example(tudresden.ocl.injection.lib.WrapperDummy dummy)
+  private Example(tudresden.ocl.injection.lib.WrapperDummy wrappedbyocl)
   {
     namedIntegers.put("5", new Integer(5));
   }
   
-  public Example(String name, Integer type, tudresden.ocl.injection.lib.WrapperDummy dummy)
+  public Example(String name, Integer type, tudresden.ocl.injection.lib.WrapperDummy wrappedbyocl)
   {
     super();
     qualifiers=new Integer[6];
@@ -1614,7 +1614,7 @@ public abstract class Example implements Runnable
 class SecondExample extends Example{
   int i;
   
-  SecondExample(tudresden.ocl.injection.lib.WrapperDummy dummy)
+  SecondExample(tudresden.ocl.injection.lib.WrapperDummy wrappedbyocl)
   {
     super("somename", new Integer(5));
   }

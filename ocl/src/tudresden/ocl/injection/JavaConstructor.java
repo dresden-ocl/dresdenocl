@@ -72,6 +72,7 @@ public final class JavaConstructor extends JavaBehaviour
   public final String getWrappedLiteral()
   {
     String dummytype=tudresden.ocl.injection.lib.WrapperDummy.class.getName();
+    String dummyname=" wrappedbyocl";
     int ps=parameters.size();
     int last_param=
       is_wrapped ?
@@ -83,7 +84,7 @@ public final class JavaConstructor extends JavaBehaviour
         literal.substring(0, last_param)+
         ", "+
         dummytype+
-        " dummy"+ // parameter name to be removed
+        dummyname+
         literal.substring(last_param, literal.length());
     }
     else
@@ -91,7 +92,7 @@ public final class JavaConstructor extends JavaBehaviour
       return
         literal.substring(0, last_param_start)+
         dummytype+
-        " dummy"+ // parameter name to be removed
+        dummyname+
         literal.substring(last_param, literal.length());
     }
   }
