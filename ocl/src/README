@@ -1,3 +1,58 @@
-The files xerces.jar and junit.jar needed for compiling are
-available on our website at 
-http://dresden-ocl.sourceforge.net/download.html
+
+1. REQUIREMENTS
+---------------
+
+xerces.jar  Xerces  1.2.0  XML parser      Apache http://xml.apache.org/xerces-j/index.html
+junit.jar   JUnit   3.2    test framework  Kent Beck and Erich Gamma http://www.junit.org/
+
+These files are also available on our website at
+http://dresden-ocl.sourceforge.net/download.html#sources
+
+2. CHECK IN POLICY
+------------------
+
+All the rules below are valid regardless whether a conflict is
+caused by a bug in one of the tools. If a conflict really
+causes pain, I may decide to upgrade the version of the tool.
+
+No one gets hung, when violating the rules (I even did this
+myself). You'll get a friendly email.
+
+2.1 Compile
+-----------
+Every .java file in the repository must compile with
+
+  jikes Version 1.06 (17 Sep 99)
+  AND
+  javac of the SUN JDK java version "1.2.2"
+  AND
+  any later version of the above.
+
+
+2.2 Javadoc
+-----------
+javadoc run with the file "jdoc" in this directory must
+not produce any warnings, when using
+
+  java version "1.2.2"
+  AND
+  any later version of the above.
+
+2.3 Test Suites
+---------------
+
+Skripts regress.sh and injectionsuite in this directory
+must run through without exception. These skripts require
+GNU diff and a UNIX compatible shell.
+
+2.4 Tabs
+--------
+You are free to use tabs for identing or not. If you do, a single
+tab is exactly ONE level of identation.
+You may mix tabs and spaces within a file, but then tab width is 2,
+in words "two".
+
+
+
+
+Ralf.
