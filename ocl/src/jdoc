@@ -1,5 +1,5 @@
 -d ./api 
--classpath .
+-classpath .:xml4j.jar:test.jar
 -author 
 -private 
 -windowtitle "OCL Compiler" 
@@ -9,11 +9,6 @@ tudresden.ocl.parser.node
 tudresden.ocl.parser.analysis 
 tudresden.ocl.parser.lexer 
 tudresden.ocl.parser.parser 
-tudresden.ocl.parser.precompiler 
-tudresden.ocl.parser.precompiler.node 
-tudresden.ocl.parser.precompiler.analysis 
-tudresden.ocl.parser.precompiler.lexer 
-tudresden.ocl.parser.precompiler.parser 
 tudresden.ocl.normalize 
 tudresden.ocl.lib 
 tudresden.ocl.lib.test 
