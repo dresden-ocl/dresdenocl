@@ -608,9 +608,16 @@ final class OclInjector implements InjectionConsumer
       o.write(type);
       o.write(".class)) ");
       o.write(violationmakro);
-      o.write("(\"type checker failed at feature '");
+      o.write("(\"");
+      if(kind==Invariant.CHECK_ELEMENT_TYPES)
+        o.write("element");
+      else if(kind==Invariant.CHECK_KEY_TYPES)
+        o.write("key");
+      else
+        throw new RuntimeException();
+      o.write(" type checker failed at feature '");
       o.write(jf.getName());
-      o.write("' on object \"+this+\".\");\n");
+      o.write("' of object \"+this+\".\");\n");
     }
   }
 
