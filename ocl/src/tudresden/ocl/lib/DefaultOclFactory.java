@@ -54,14 +54,14 @@ public class DefaultOclFactory implements OclFactory {
       if(o instanceof java.util.Set || (Ocl.TAKE_VECTORS_AS_SET && (o instanceof java.util.Vector)))
       {
         HashSet set=new HashSet();
-        for(Iterator i=oc.iterator(); i.hasNext(); ) 
+        for(Iterator i=oc.iterator(); i.hasNext(); )
           set.add(getOclRepresentationFor(i.next()));
         return new OclSet(set);
       }
       else if(o instanceof java.util.List)
       {
         ArrayList list=new ArrayList();
-        for(Iterator i=oc.iterator(); i.hasNext(); ) 
+        for(Iterator i=oc.iterator(); i.hasNext(); )
           list.add(getOclRepresentationFor(i.next()));
         return new OclSequence(list);
       }
@@ -69,7 +69,7 @@ public class DefaultOclFactory implements OclFactory {
     } else if (o instanceof java.util.Map) {
       java.util.Map om=(java.util.Map)o;
       HashSet set=new HashSet();
-      for(Iterator i=om.values().iterator(); i.hasNext(); ) 
+      for(Iterator i=om.values().iterator(); i.hasNext(); )
         set.add(getOclRepresentationFor(i.next()));
 
       // in UML association features are sets (no duplicates).
@@ -78,15 +78,15 @@ public class DefaultOclFactory implements OclFactory {
       // I added an appropriate check here.
       if(om.size()!=set.size())
         throw new OclException("map values in feature "+o+" are not unique.");
-      
+
       return new OclSet(set);
     } else if (o.getClass().isArray()) {
       Object[] oa=(Object[])o;
       ArrayList list=new ArrayList();
-      for(int i=0; i<oa.length; i++) 
+      for(int i=0; i<oa.length; i++)
         list.add(getOclRepresentationFor(oa[i]));
       return new OclSequence(list);
-    } 
+    }
     else if (o instanceof Boolean)
       return getOclRepresentationFor( ((Boolean)o).booleanValue() );
     else if (o instanceof Byte)
@@ -130,6 +130,10 @@ public class DefaultOclFactory implements OclFactory {
 				return new OclSequence(new ArrayList());
 			}
 			throw new OclException("encountered a java.util.Collection, which is neither Set or List.");
+		}
+		else if(c.isArray())
+		{
+			return new OclSequence(new ArrayList());
 		}
 		else
 			return null;
