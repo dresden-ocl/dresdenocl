@@ -1,4 +1,3 @@
--d ./api 
 -classpath .:xml4j.jar:test.jar
 -author 
 -private 
