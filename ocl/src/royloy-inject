@@ -1,0 +1,8 @@
+java -cp .:xml4j.jar \
+  tudresden.ocl.injection.Main \
+  --constraint-file tudresden/ocl/test/royloy/oclexpressions \
+  --reflection-model tudresden.ocl.test.royloy \
+  --name-adapter argo \
+  --violation-makro "tudresden.ocl.test.TestInjection.theInstance.onViolation" \
+  --modify \
+  tudresden/ocl/test/royloy/*.java

@@ -1,0 +1,1 @@
+java -cp .:xml4j.jar tudresden.ocl.test.TestInjection
