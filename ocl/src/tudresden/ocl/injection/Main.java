@@ -349,8 +349,12 @@ public class Main
         return;
       }
 			
+      if(conf.violationmacro==null)
+        conf.violationmacro="System.out.println";
+
 			{
 				ArrayList taskConfigs = new ArrayList();
+				taskConfigs.add(new TypeCheckConfig(conf.violationmacro));
 				if(typeTraceConfig!=null)
      			taskConfigs.add(typeTraceConfig);
 				conf.taskConfigs=new TaskConfig[taskConfigs.size()];
@@ -364,9 +368,6 @@ public class Main
         System.out.println(usage);
         return;
       }
-
-      if(conf.violationmacro==null)
-        conf.violationmacro="System.out.println";
 
       if(nameadapter==null)
         nameadapter=new SimpleNameAdapter();

@@ -33,7 +33,6 @@ import tudresden.ocl.check.OclTypeException;
 import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.codegen.JavaCodeGenerator;
 import tudresden.ocl.injection.lib.Invariant;
-import tudresden.ocl.injection.lib.Check;
 import tudresden.ocl.injection.lib.HashExact;
 import tudresden.ocl.injection.lib.HashSize;
 import tudresden.ocl.injection.lib.HashModCount;
@@ -493,9 +492,6 @@ final class Instrumentor implements InjectionConsumer
       //o.write(jf.getName());
       //o.write("' on object '\"+this+'\\'');\n");
       
-      if(jf instanceof JavaAttribute)
-        writeTypeChecker((JavaAttribute)jf);
-			
 			for(int j=0; j<class_state.taskInstrumentors.length; j++)
 				class_state.taskInstrumentors[j].onAttributeChanged(o, (JavaAttribute)jf, is_weakly_typed);
       
@@ -766,43 +762,6 @@ final class Instrumentor implements InjectionConsumer
     o.write(Invariant.CHECKING_FLAG);
     o.write("=false;\n");
     o.write("  }");
-  }
-  
-  
-  // type checking
-  
-  private final void writeTypeChecker(JavaAttribute ja) 
-    throws IOException
-  {
-    writeTypeChecker(ja, Check.CHECK_ELEMENT_TYPES, ja.getElementType());
-    writeTypeChecker(ja, Check.CHECK_KEY_TYPES,     ja.getKeyType());
-  }
-
-  private final void writeTypeChecker(JavaAttribute ja, String kind, String type) 
-    throws IOException
-  {
-    if(type!=null)
-    {
-      Writer o=output;
-      o.write("      if(!");
-      o.write(kind);
-      o.write('(');
-      o.write(ja.getName());
-      o.write(',');
-      o.write(type);
-      o.write(".class)) ");
-      o.write(violationmacro);
-      o.write("(\"");
-      if(kind==Check.CHECK_ELEMENT_TYPES)
-        o.write("element");
-      else if(kind==Check.CHECK_KEY_TYPES)
-        o.write("key");
-      else
-        throw new RuntimeException();
-      o.write(" type checker failed at feature '");
-      o.write(ja.getName());
-      o.write("' of object \"+this+\".\");\n");
-    }
   }
   
 }

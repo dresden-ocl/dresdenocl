@@ -20,22 +20,48 @@ package tudresden.ocl.injection;
 
 import java.io.IOException;
 import java.io.Writer;
-import tudresden.ocl.injection.lib.TypeTracer;
+import tudresden.ocl.injection.lib.Check;
 
-public final class TypeTraceInstrumentor implements TaskInstrumentor
+public final class TypeCheckInstrumentor implements TaskInstrumentor
 {
+	private String violationmacro;
+	
+	public TypeCheckInstrumentor(final String violationmacro)
+	{
+		this.violationmacro=violationmacro;
+	}
+	
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed) throws IOException
 	{
-		if(is_weakly_typed)
+		write(o, ja, Check.CHECK_ELEMENT_TYPES, ja.getElementType());
+		write(o, ja, Check.CHECK_KEY_TYPES,     ja.getKeyType());
+	}
+	
+	private final void write(Writer o, JavaAttribute ja, String kind, String type)
+	throws IOException
+	{
+		if(type!=null)
 		{
-			o.write("      ");
-			o.write(TypeTracer.TRACE_TYPES);
-			o.write("(\"");
-			o.write(ja.getFullDocName());
-			o.write("\", ");
+			o.write("      if(!");
+			o.write(kind);
+			o.write('(');
 			o.write(ja.getName());
-			o.write(");\n");
+			o.write(',');
+			o.write(type);
+			o.write(".class)) ");
+			o.write(violationmacro);
+			o.write("(\"");
+			if(kind==Check.CHECK_ELEMENT_TYPES)
+				o.write("element");
+			else if(kind==Check.CHECK_KEY_TYPES)
+				o.write("key");
+			else
+				throw new RuntimeException();
+			o.write(" type checker failed at feature '");
+			o.write(ja.getName());
+			o.write("' of object \"+this+\".\");\n");
 		}
 	}
 	
 }
+
