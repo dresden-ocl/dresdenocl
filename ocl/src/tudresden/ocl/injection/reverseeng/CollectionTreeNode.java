@@ -80,7 +80,7 @@ public class CollectionTreeNode extends AbstractFeatureTreeNode {
   public String toString () {      
     CollectionDescriptor cd = getDescriptor();
 
-    return cd.getContainingClass() + "." + cd.getName() + 
+    return cd.getDisplayName (true) + 
             ((cd.getElementType() != null)?(" : " + cd.getElementType()):(""));
   }
   

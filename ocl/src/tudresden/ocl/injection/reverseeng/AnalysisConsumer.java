@@ -156,11 +156,25 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
   
   private int m_nStatus = STATUS_NORMALFILE;
   
+  /**
+    * Name of source file being analysed without trailing extension.
+    */
+  private String m_sFileName;
+  
   /** 
     * Creates new AnalysisConsumer 
+    *
+    * @param sFileName name of source file being analysed.
     */
-  public AnalysisConsumer() {
+  public AnalysisConsumer (String sFileName) {
     super ();
+    
+    if (sFileName.indexOf (".java") > -1) {
+      m_sFileName = sFileName.substring (0, sFileName.indexOf (".java"));
+    }
+    else {
+      m_sFileName = sFileName;
+    }
   }
   
   /** 
@@ -357,10 +371,14 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     return m_ladFeatures;
   }
   
+  public String getFileName() {
+    return m_sFileName;
+  }
+  
   public static void main (String args[]) {
     try {
       Reader r = new InputStreamReader (AnalysisConsumer.class.getResourceAsStream ("../test/Example.java"));
-      AnalysisConsumer ac = new AnalysisConsumer ();
+      AnalysisConsumer ac = new AnalysisConsumer ("Example.java");
       
       new Injector (r, null, ac).parseFile ();
       
@@ -374,7 +392,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
  
   public static AnalysisConsumer analyse(File fToAnalyse) throws IOException, InjectorParseException {
     Reader r = new FileReader (fToAnalyse);
-    AnalysisConsumer ac = new AnalysisConsumer ();
+    AnalysisConsumer ac = new AnalysisConsumer (fToAnalyse.getName());
     
     new Injector (r, null, ac).parseFile ();
     

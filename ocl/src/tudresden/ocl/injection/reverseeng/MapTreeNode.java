@@ -97,7 +97,7 @@ public class MapTreeNode extends AbstractFeatureTreeNode {
   public String toString () {      
     MapDescriptor md = getDescriptor();
 
-    return md.getContainingClass() + "." + md.getName()
+    return md.getDisplayName (true)
             + "[" + ((md.getKeyType() != null)?(md.getKeyType()):("")) + "]"
             + ((md.getElementType() != null)?(" : " + md.getElementType()):(""));
   }

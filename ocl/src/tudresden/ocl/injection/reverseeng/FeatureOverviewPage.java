@@ -167,7 +167,7 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
     
     m_adModel = ad;
     
-    fillInClassTree (ad.getContainingClassJavaClass());
+    fillInClassTree (ad.getContainingClass());
     
     // Add feature
     if (m_dmtnLastNode == null) {
@@ -193,7 +193,7 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
     }
     
     m_clFeature = new ContainingLevel (nAttribute, 
-                                         ad.getName());
+                                         ad.getDisplayName (false));
     m_dmtnLastNode.setUserObject (m_clFeature);
     ad.addModifiedListener (m_clFeature);
 
