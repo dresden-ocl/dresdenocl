@@ -182,13 +182,13 @@ public final class Model implements ModelFacade
     public Type navigateQualified(String name, Type[] qualifiers) throws OclTypeException
     {
       throw new IllegalArgumentException(
-        "called Model.AMBIGOUS.navigateQualified(\""+qualifierString(name,qualifiers)+"\"), this should never happen.");
+        "called Model.AMBIGOUS.navigateQualified(\""+Basic.qualifierString(name,qualifiers)+"\"), this should never happen.");
     }
 
     public Type navigateParameterized(String name, Type[] params) throws OclTypeException
     {
       throw new IllegalArgumentException(
-        "called Model.AMBIGOUS.navigateParameterized(\""+signatureString(name,params)+"\"), this should never happen.");
+        "called Model.AMBIGOUS.navigateParameterized(\""+Basic.signatureString(name,params)+"\"), this should never happen.");
     }
 
     public boolean hasState(String name)
@@ -211,49 +211,6 @@ public final class Model implements ModelFacade
   public String toString()
   {
     return getClass().toString()+"("+description+")";
-  }
-
-  /**
-     Makes a nice string from a method signature or a qualified feature.
-     The result looks like Java source code.
-  */
-  public static String signatureString(String name, Type[] params)
-  {
-    return stringOf(name, params, '(', ')');
-  }
-
-  public static String qualifierString(String name, Type[] qualifiers)
-  {
-    if(qualifiers==null)
-      return name;
-    else
-      return stringOf(name, qualifiers, '[', ']');
-  }
-
-  private static String stringOf(String name, Type[] params, char openBracket, char closeBracket)
-  {
-    StringBuffer b=new StringBuffer(name);
-    b.append(openBracket);
-    for(int i=0; i<params.length; i++)
-    {
-      b.append(typeString(params[i]));
-      if(i<(params.length-1)) b.append(',');
-    }
-    b.append(closeBracket);
-    return new String(b);
-  }
-
-  /**
-     {@link Basic#toString} returns "Integer" instead of "int",
-     which can't be distiguished from class Integer.
-     Used for debugging output only.
-  */
-  public static String typeString(Type t)
-  {
-    return
-     (t instanceof Basic) ?
-     t.toString().toLowerCase() :
-     t.toString();
   }
 
   // ---------------------------------------------------------------------

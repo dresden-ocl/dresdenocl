@@ -100,7 +100,7 @@ public final class ModelAttribute implements Comparable
 
   public void printData(java.io.PrintStream o)
   {
-    o.println("  " + Model.typeString(type) + " " + Model.qualifierString(name, qualifiers));
+    o.println("  " + Basic.typeString(type) + " " + Basic.qualifierString(name, qualifiers));
   }
 
   public int compareTo(Object o)

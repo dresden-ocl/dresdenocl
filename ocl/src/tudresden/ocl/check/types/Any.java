@@ -34,7 +34,6 @@
 package tudresden.ocl.check.types;
 
 import tudresden.ocl.check.OclTypeException;
-import tudresden.ocl.check.types.xmifacade.Model;
 import java.util.*;
 
 /** This interface corresponds to the OCL type OclAny. It does not define
@@ -65,7 +64,7 @@ public interface Any extends Type {
     */
     public Type navigateQualified(String name, Type[] qualifiers) throws OclTypeException
     {
-      throw new IllegalArgumentException("called Any.VOID.navigateQualified(\""+Model.qualifierString(name,qualifiers)+"\"), this should never happen.");
+      throw new IllegalArgumentException("called Any.VOID.navigateQualified(\""+Basic.qualifierString(name,qualifiers)+"\"), this should never happen.");
     }
 
     /**
@@ -73,7 +72,7 @@ public interface Any extends Type {
     */
     public Type navigateParameterized(String name, Type[] params) throws OclTypeException
     {
-      throw new IllegalArgumentException("called Any.VOID.navigateParameterized(\""+Model.signatureString(name,params)+"\"), this should never happen.");
+      throw new IllegalArgumentException("called Any.VOID.navigateParameterized(\""+Basic.signatureString(name,params)+"\"), this should never happen.");
     }
 
     /**

@@ -134,12 +134,12 @@ public final class ModelOperation implements Comparable
 
   public final String toString()
   {
-    return Model.signatureString(name, params);
+    return Basic.signatureString(name, params);
   }
 
   public void printData(java.io.PrintStream o)
   {
-    o.println("  "+Model.typeString(type)+" "+this+(isquery?" QUERY":""));
+    o.println("  "+Basic.typeString(type)+" "+this+(isquery?" QUERY":""));
   }
 
   public int compareTo(Object o)

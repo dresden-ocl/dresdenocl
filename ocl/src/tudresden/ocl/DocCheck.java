@@ -116,12 +116,42 @@ public class DocCheck {
     }
   }
 
+  protected static tudresden.ocl.check.types.ModelFacade getDefaultModelFacade() {
+    if (System.getProperty("xmi_file")!=null) {
+      try {
+        return tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
+          System.getProperty("xmi_file"),
+          "System.getProperty(\"xmi_file\")"
+        );
+      }
+      catch (org.xml.sax.SAXException e) {}
+      catch (java.io.IOException e) {}
+    }
+    return new tudresden.ocl.check.types.testfacade.TestModelFacade();
+  }
+
+  /** consider using the more elaborate version
+   *  <CODE>createTree(String, ModelFacade)</CODE> except for test reasons;
+   *  this method returns
+   *  an <code>OclTree</code> that uses a
+   *  default model facade
+   *  to query type information
+   */
+  public static OclTree createTree(String oclExpression) throws
+               tudresden.ocl.parser.OclParserException,
+               IOException {
+    return OclTree.createTree(
+      oclExpression,
+      getDefaultModelFacade()
+    );
+  }
+
   protected void checkConstraint(String constraint) {
     try {
       if (verbose) {
         report("----  checking: \n"+constraint+"\n----");
       }
-      OclTree tree=OclTree.createTree(constraint);
+      OclTree tree=createTree(constraint);
       if (verbose) {
         report("----  OK  ----");
       }

@@ -206,4 +206,47 @@ public class Basic implements Any {
     return null;
   }
 
-} /* end class Basic */
+  /**
+     Makes a nice string from a method signature or a qualified feature.
+     The result looks like Java source code.
+  */
+  public static String signatureString(String name, Type[] params)
+  {
+    return stringOf(name, params, '(', ')');
+  }
+
+  public static String qualifierString(String name, Type[] qualifiers)
+  {
+    if(qualifiers==null)
+      return name;
+    else
+      return stringOf(name, qualifiers, '[', ']');
+  }
+
+  public static String stringOf(String name, Type[] params, char openBracket, char closeBracket)
+  {
+    StringBuffer b=new StringBuffer(name);
+    b.append(openBracket);
+    for(int i=0; i<params.length; i++)
+    {
+      b.append(typeString(params[i]));
+      if(i<(params.length-1)) b.append(',');
+    }
+    b.append(closeBracket);
+    return new String(b);
+  }
+
+  /**
+     {@link Basic#toString} returns "Integer" instead of "int",
+     which can't be distiguished from class Integer.
+     Used for debugging output only.
+  */
+  public static String typeString(Type t)
+  {
+    return
+     (t instanceof Basic) ?
+     t.toString().toLowerCase() :
+     t.toString();
+  }
+
+}

@@ -192,7 +192,7 @@ public final class ModelClass implements Any, Comparable
         else
         {
           System.out.println(
-            "xmifacade: warning: operation request \"" + Model.signatureString(name, params) +
+            "xmifacade: warning: operation request \"" + Basic.signatureString(name, params) +
             "\" matches at least two operations in class \"" + fullName +
             "\" by polymorphism, thus they are not avialable to OCL.");
           return null;
@@ -334,7 +334,7 @@ public final class ModelClass implements Any, Comparable
       type=attr.getType();
       if(type==Model.AMBIGOUS)
         throw new OclTypeException(
-          "Expected attribute \""+Model.qualifierString(name,qualifiers)+
+          "Expected attribute \""+Basic.qualifierString(name,qualifiers)+
           "\" in classifier \""+fullName+
           "\" cannot be used in OCL due to ambiguity. See OCL spec 5.4.1.");
 
@@ -346,7 +346,7 @@ public final class ModelClass implements Any, Comparable
           return type;
         else
           throw new OclTypeException(
-            "Expected attribute \""+Model.qualifierString(name,qualifiers)+
+            "Expected attribute \""+Basic.qualifierString(name,qualifiers)+
             "\" in classifier \""+fullName+"\" is not qualified in model.");
       }
       else
@@ -357,12 +357,12 @@ public final class ModelClass implements Any, Comparable
         {
           if(attrqualifiers.length!=qualifiers.length)
             throw new OclTypeException(
-              "Expected attribute \""+Model.qualifierString(name,qualifiers)+
+              "Expected attribute \""+Basic.qualifierString(name,qualifiers)+
               "\" in classifier \""+fullName+"\" , not found, number of qualifiers does not match.");
           for(int i=0; i<qualifiers.length; i++)
             if(!qualifiers[i].conformsTo(attrqualifiers[i]))
               throw new OclTypeException(
-                "Expected attribute \""+Model.qualifierString(name,qualifiers)+
+                "Expected attribute \""+Basic.qualifierString(name,qualifiers)+
                 "\" in classifier \""+fullName+
                 "\" , not found, qualifier "+(i+1)+" does not match.");
           return type;
@@ -375,7 +375,7 @@ public final class ModelClass implements Any, Comparable
       return type;
 
     throw new OclTypeException(
-      "Expected attribute \""+Model.qualifierString(name,qualifiers)+
+      "Expected attribute \""+Basic.qualifierString(name,qualifiers)+
       "\" in classifier \""+fullName+"\" not found.");
   }
 
@@ -395,7 +395,7 @@ public final class ModelClass implements Any, Comparable
       return type;
 
     throw new OclTypeException(
-      "Expected operation \""+Model.signatureString(name,params)+
+      "Expected operation \""+Basic.signatureString(name,params)+
       "\" in classifier \""+fullName+"\" not found.");
   }
 

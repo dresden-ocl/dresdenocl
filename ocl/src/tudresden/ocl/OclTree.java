@@ -75,7 +75,7 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
   public OclTree(Start ast) {
     this();
     this.ast=ast;
-    
+
     // Find constraint name. Added 02/27/2001, sz9.
     ConstraintNameFinder nameFinder = new ConstraintNameFinder();
     ast.apply (nameFinder);
@@ -84,22 +84,6 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
 
   protected OclTree() {
     invariants=new HashSet();
-  }
-
-  /** consider using the more elaborate version
-   *  <CODE>createTree(String, ModelFacade)</CODE> except for test reasons;
-   *  this method returns
-   *  an <code>OclTree</code> that uses a
-   *  default model facade
-   *  to query type information
-   */
-  public static OclTree createTree(String oclExpression) throws
-               tudresden.ocl.parser.OclParserException,
-               IOException {
-    return createTree(
-      oclExpression,
-      getDefaultModelFacade()
-    );
   }
 
   /** creates an OclTree that uses a <code>TypeChecker</code> to acquire
@@ -145,20 +129,6 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
     catch (tudresden.ocl.parser.lexer.LexerException e) {
       throw new OclParserException(e.getMessage());
     }
-  }
-
-  protected static ModelFacade getDefaultModelFacade() {
-    if (System.getProperty("xmi_file")!=null) {
-      try {
-        return tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
-          System.getProperty("xmi_file"),
-          "System.getProperty(\"xmi_file\")"
-        );
-      }
-      catch (org.xml.sax.SAXException e) {}
-      catch (java.io.IOException e) {}
-    }
-    return new tudresden.ocl.check.types.testfacade.TestModelFacade();
   }
 
   protected static TypeFactory createTypeFactory(ModelFacade mf) {
