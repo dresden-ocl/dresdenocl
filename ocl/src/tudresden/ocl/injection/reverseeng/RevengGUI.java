@@ -25,14 +25,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.injection.reverseeng;
 
 import java.io.*;
-
 import java.util.*;
 
+import javax.swing.*;
 import javax.swing.tree.*;
 
-import javax.swing.*;
-
 import tudresden.ocl.injection.*;
+import tudresden.ocl.injection.reverseeng.propertypages.*;
 
 /** 
   * GUI for specifying element and key types for collections and maps extracted from Java Source Code.
@@ -46,11 +45,14 @@ public class RevengGUI extends javax.swing.JDialog {
   private RevengTreeNode m_rtnCurrent = null;
   private List m_lrtnUnsavedTreeNodes = new LinkedList();
   private boolean m_fInSaveAll = false;
-  
+    
   /** Creates new form RevengGUI */
   public RevengGUI(java.awt.Frame parent,boolean modal) {
     super (parent, modal);
     initComponents ();
+    
+    FeatureOverviewPage.setupListener (m_ppcProperties, true);
+    
     pack ();
     
     m_jspSplitter.setDividerLocation (0.5);
@@ -77,8 +79,7 @@ public class RevengGUI extends javax.swing.JDialog {
     FolderTreeNode ftnRoot = new FolderTreeNode(m_dtmFileModel, new File ("."));
     m_dtmFileModel.setRoot (ftnRoot);
     ftnRoot.fill();
-    m_jtpProperties = new javax.swing.JTabbedPane ();
-    m_jlNoProperties = new javax.swing.JLabel ();
+    m_ppcProperties = new tudresden.ocl.injection.reverseeng.propertypages.PropertyPageContainer ();
     getContentPane ().setLayout (new java.awt.GridBagLayout ());
     java.awt.GridBagConstraints gridBagConstraints1;
     setDefaultCloseOperation (javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -178,14 +179,9 @@ public class RevengGUI extends javax.swing.JDialog {
     
       m_jspSplitter.setLeftComponent (m_jpLeft);
   
-      m_jtpProperties.setTabPlacement (3);
+      java.awt.GridBagConstraints gridBagConstraints2;
   
-        m_jlNoProperties.setText ("No properties for current selection!");
-        m_jlNoProperties.setEnabled (false);
-    
-        m_jtpProperties.addTab ("No properties...", null, m_jlNoProperties, "No properties...");
-    
-      m_jspSplitter.setRightComponent (m_jtpProperties);
+      m_jspSplitter.setRightComponent (m_ppcProperties);
   
 
     gridBagConstraints1 = new java.awt.GridBagConstraints ();
@@ -250,26 +246,8 @@ public class RevengGUI extends javax.swing.JDialog {
       // Set property pages associated with new selection
       m_rtnCurrent = (RevengTreeNode) evt.getPath().getLastPathComponent();
 
-      // Remember currently selected property page, so that we can restore this after the new property pages
-      // are in place
-      int nSelectedPage = m_jtpProperties.getSelectedIndex();
-      
-      // Remove old property pages
-      m_jtpProperties.removeAll();
-      
-      // Set new property pages
-      int nIdx = 0;
-      for (Iterator i = m_rtnCurrent.getPropertyPages(); i.hasNext(); nIdx++) {
-        PropertyPage pp = (PropertyPage) i.next();
-        m_jtpProperties.addTab (pp.getTitle(), pp.getIcon(), pp.getComponent(), pp.getToolTip());
-        m_jtpProperties.setEnabledAt (nIdx, pp.isEnabled());
-      }
-      
-      // Restore selected property page
-      if (m_jtpProperties.getTabCount() > nSelectedPage) {
-        m_jtpProperties.setSelectedIndex (nSelectedPage);
-      }
-      
+      m_ppcProperties.replacePropertyPages (m_rtnCurrent.getPropertyPages());
+
       // En-/Disable save button based on dirty state of new selection
       m_jbSave.setEnabled (m_rtnCurrent.isDirty());
       
@@ -301,6 +279,8 @@ public class RevengGUI extends javax.swing.JDialog {
 
   /** Closes the dialog */
   private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
+    FeatureOverviewPage.setupListener (m_ppcProperties, false);
+    
     setVisible (false);
     dispose ();
     System.exit (0);
@@ -372,8 +352,7 @@ public class RevengGUI extends javax.swing.JDialog {
   private javax.swing.JButton m_jbSaveAll;
   private javax.swing.JScrollPane m_jspTreeScroller;
   private javax.swing.JTree m_jtFiles;
-  private javax.swing.JTabbedPane m_jtpProperties;
-  private javax.swing.JLabel m_jlNoProperties;
+  private tudresden.ocl.injection.reverseeng.propertypages.PropertyPageContainer m_ppcProperties;
   // End of variables declaration//GEN-END:variables
 
 }

@@ -11,10 +11,6 @@
     <SyntheticProperty name="encoding" type="java.lang.String" value="ISO-8859-1"/>
   </SyntheticProperties>
 
-  <Events>
-    <EventHandler event="ancestorRemoved" handler="formAncestorRemoved"/>
-  </Events>
-
   <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="m_jpTreeBorder">

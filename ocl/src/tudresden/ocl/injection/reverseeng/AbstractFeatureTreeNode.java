@@ -25,8 +25,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.injection.reverseeng;
 
 import java.util.*;
-
 import javax.swing.tree.*;
+
+import tudresden.ocl.injection.reverseeng.propertypages.*;
 
 /** 
   * Abstract super class of CollectionTreeNode and MapTreeNode.
@@ -56,11 +57,11 @@ public abstract class AbstractFeatureTreeNode extends RevengTreeNode {
   /**
     * Return property pages common to both maps and collections...
     */
-  public Iterator getPropertyPages() {
-    List l = new LinkedList();
-    l.add (new PropertyPage ("General", 
-                                new FeatureOverviewPage ((AbstractDescriptor) getUserObject())));
+  public List getPropertyPages() {
+    List lppReturn = new LinkedList();
+    lppReturn.add (new DefaultPropertyPage ("General", 
+                                                new FeatureOverviewPage ((AbstractDescriptor) getUserObject())));
     
-    return l.iterator();
+    return lppReturn;
   }
 }

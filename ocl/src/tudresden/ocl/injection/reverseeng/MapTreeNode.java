@@ -27,8 +27,9 @@ package tudresden.ocl.injection.reverseeng;
 import java.util.*;
 
 import javax.swing.*;
-
 import javax.swing.tree.*;
+
+import tudresden.ocl.injection.reverseeng.propertypages.*;
 
 /** 
   * A node representing an individual map.
@@ -54,10 +55,9 @@ public class MapTreeNode extends AbstractFeatureTreeNode {
     }
   }
 
-  public Iterator getPropertyPages() {
-    List l = new LinkedList();
-    //l.add (new PropertyPage ("Map Properties", new MapEditor (getDescriptor())));
-    l.add (new PropertyPage ("Element type", new TypeEditPage (new TypeEditPage.TypeDescriptor() {
+  public List getPropertyPages() {
+    List lppReturn = super.getPropertyPages();
+    lppReturn.add (new DefaultPropertyPage ("Element type", new TypeEditPage (new TypeEditPage.TypeDescriptor() {
       public void onTypeSelectionChanged (String sNewSelection) {
         getDescriptor().setElementType (sNewSelection);
       }
@@ -70,7 +70,7 @@ public class MapTreeNode extends AbstractFeatureTreeNode {
         return getDescriptor().getElementType();
       }
     })));
-    l.add (new PropertyPage ("Key type", new TypeEditPage (new TypeEditPage.TypeDescriptor() {
+    lppReturn.add (new DefaultPropertyPage ("Key type", new TypeEditPage (new TypeEditPage.TypeDescriptor() {
       public void onTypeSelectionChanged (String sNewSelection) {
         getDescriptor().setKeyType (sNewSelection);
       }
@@ -83,29 +83,8 @@ public class MapTreeNode extends AbstractFeatureTreeNode {
         return getDescriptor().getKeyType();
       }
     })));
-
-    final Iterator iStandardPages = super.getPropertyPages();
-    final Iterator iNewPages = l.iterator();
     
-    return new Iterator() {
-      public boolean hasNext() {
-        return (iStandardPages.hasNext() ||
-                 iNewPages.hasNext());
-      }
-      
-      public Object next() {
-        if (iStandardPages.hasNext()) {
-          return iStandardPages.next();
-        }
-        else {
-          return iNewPages.next();
-        }
-      }
-      
-      public void remove() {
-        throw new UnsupportedOperationException();
-      }
-    };
+    return lppReturn;
   }
 
   /**

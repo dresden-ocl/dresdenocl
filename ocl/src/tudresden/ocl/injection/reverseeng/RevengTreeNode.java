@@ -84,31 +84,10 @@ public abstract class RevengTreeNode extends DefaultMutableTreeNode implements A
   /**
     * Get the property panes to be shown in the right hand panel of the GUI.
     */ 
-  public Iterator getPropertyPages() {
-    return new Iterator() {
-      private boolean m_fHasNext = true;
+  public List getPropertyPages() {
+    List lppReturn = new LinkedList();
 
-      public boolean hasNext() {
-        return m_fHasNext;
-      }
-
-      public Object next() {
-        if (m_fHasNext) {
-          m_fHasNext = false;
-          
-          PropertyPage ppReturn = new PropertyPage ("No properties...", new JLabel ("No properties for current selection!"));
-          ppReturn.setEnabled (false);
-          return ppReturn;
-        }
-        else {
-          throw new NoSuchElementException();
-        }
-      }
-
-      public void remove() {
-        throw new UnsupportedOperationException();
-      }
-    };
+    return lppReturn;
   }
   
   /**

@@ -25,6 +25,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.injection.reverseeng;
 
 import tudresden.ocl.injection.*;
+import tudresden.ocl.injection.reverseeng.propertypages.*;
+import tudresden.ocl.injection.reverseeng.propertypages.events.*;
 
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -299,18 +301,6 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
     m_jlType = new javax.swing.JLabel ();
     setLayout (new java.awt.GridBagLayout ());
     java.awt.GridBagConstraints gridBagConstraints1;
-    addAncestorListener (new javax.swing.event.AncestorListener () {
-      public void ancestorAdded (javax.swing.event.AncestorEvent evt) {
-
-      }
-      public void ancestorMoved (javax.swing.event.AncestorEvent evt) {
-
-      }
-      public void ancestorRemoved (javax.swing.event.AncestorEvent evt) {
-        formAncestorRemoved (evt);
-      }
-    }
-    );
 
     m_jpTreeBorder.setLayout (new java.awt.GridBagLayout ());
     java.awt.GridBagConstraints gridBagConstraints2;
@@ -398,11 +388,10 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
 
   }//GEN-END:initComponents
 
-  private void formAncestorRemoved (javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorRemoved
-    // Remove the listener from the AbstractDescriptor when the panel is removed.
-    //m_adModel.removeModifiedListener (m_clFeature);  // Mustn't do that, as the component also gets removed, when the user selects another page :(
-  }//GEN-LAST:event_formAncestorRemoved
-
+  public void onFinalRemove() {
+    // Remove the listener from the AbstractDescriptor when the page is removed.
+    m_adModel.removeModifiedListener (m_clFeature);
+  }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JPanel m_jpTreeBorder;
@@ -415,4 +404,20 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
   private javax.swing.JLabel m_jlType;
   // End of variables declaration//GEN-END:variables
 
+  private static final PropertyPageContainerListener s_ppcl = new PropertyPageContainerAdapter() {
+    public void onPropertyPageRemoved (PropertyPageContainerEvent ppce) {
+      if (ppce.getAffectedPage().getComponent() instanceof FeatureOverviewPage) {
+        ((FeatureOverviewPage) ppce.getAffectedPage().getComponent()).onFinalRemove();
+      }
+    }
+  };
+  
+  public static void setupListener (PropertyPageContainer ppc, boolean fRegister) {
+    if (fRegister) {
+      ppc.addPropertyPageContainerListener (s_ppcl);
+    }
+    else {
+      ppc.removePropertyPageContainerListener (s_ppcl);
+    }
+  }
 }

@@ -172,30 +172,14 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JTabbedPane" name="m_jtpProperties">
-          <Properties>
-            <Property name="tabPlacement" type="int" editor="sun.beans.editors.IntEditor" value="3"/>
-          </Properties>
+        <Container class="tudresden.ocl.injection.reverseeng.propertypages.PropertyPageContainer" name="m_ppcProperties">
           <Constraints>
             <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="right"/>
             </Constraint>
           </Constraints>
 
-          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="m_jlNoProperties">
-              <Properties>
-                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="No properties for current selection!"/>
-                <Property name="enabled" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="No properties..." toolTip="No properties..."/>
-                </Constraint>
-              </Constraints>
-            </Component>
-          </SubComponents>
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
         </Container>
       </SubComponents>
     </Container>
