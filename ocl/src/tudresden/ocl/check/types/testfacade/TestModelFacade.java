@@ -51,10 +51,11 @@ public class TestModelFacade implements ModelFacade {
     bank = new BankClassifier(person);
 
     person.features.put("age", new TestSFeature("age", Basic.INTEGER));
-    person.features.put("name", new TestSFeature("age", Basic.STRING));
+    person.features.put("name", new TestSFeature("name", Basic.STRING));
     person.features.put("isMarried", new TestSFeature("isMarried", Basic.BOOLEAN));
     person.features.put("isUnemployed", new TestSFeature("isUnemployed", Basic.BOOLEAN));
     person.features.put("getIncomeAfterTax", new TestBFeature("getIncomeAfterTax", Basic.REAL, Basic.REAL));
+	 person.features.put("setAge", new TestBFeature("setAge", Basic.INTEGER, Basic.VOID) );
 
     company.features.put("numberOfEmployees", new TestSFeature("numberOfEmployees", Basic.INTEGER));
     company.features.put("getOldestEmployee", new TestBFeature("getOldestEmployee", person));
