@@ -239,19 +239,20 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
           // Not a simple type --> check whether collection
           if (s_clCollection.isAssignableFrom (clClass)) {
             // A collection
-            CollectionDescriptor cd = new CollectionDescriptor (this, 
-                                                                   cf.getParent(),
-                                                                   cf.getName(),
-                                                                   cf.getType(),
-                                                                   m_sCurrentComment,
-                                                                   m_cComments);
-            
+
             if (m_sCurrentComment == null) {
               // Increase comment counter anyway, even though no comment had been attached.
               // This is done, so that each Descriptor in the list of features has a unique 
               // comment ID.
               m_cComments++;
             }
+            
+            CollectionDescriptor cd = new CollectionDescriptor (this, 
+                                                                   cf.getParent(),
+                                                                   cf.getName(),
+                                                                   cf.getType(),
+                                                                   m_sCurrentComment,
+                                                                   m_cComments);
             
             m_lcdCollections.add (cd);
             m_ladFeatures.add (cd);
@@ -264,19 +265,20 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
           }
           else if (s_clMap.isAssignableFrom (clClass)) {
             // A map
-            MapDescriptor md = new MapDescriptor (this, 
-                                                    cf.getParent(),
-                                                    cf.getName (), 
-                                                    cf.getType(),
-                                                    m_sCurrentComment,
-                                                    m_cComments);
-            
+
             if (m_sCurrentComment == null) {
               // Increase comment counter anyway, even though no comment had been attached.
               // This is done, so that each Descriptor in the list of features has a unique 
               // comment ID.
               m_cComments++;
             }
+            
+            MapDescriptor md = new MapDescriptor (this, 
+                                                    cf.getParent(),
+                                                    cf.getName (), 
+                                                    cf.getType(),
+                                                    m_sCurrentComment,
+                                                    m_cComments);
             
             m_lmdMaps.add (md);
             m_ladFeatures.add (md);

@@ -259,6 +259,8 @@ public class FileTreeNode extends RevengTreeNode {
 
   public void fill () {
     ensureParsed (true);
+        
+    //System.out.println (m_acAnalysisResults.getAllFeatures());
 
     nodeStructureChanged();
   }

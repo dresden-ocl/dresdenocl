@@ -132,7 +132,7 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     if (! m_fWroteDocComment) {
       // Feature without comment
       if ((m_iFeatures.hasNext()) &&
-          (getCurrentFeature().getCommentID() == m_cComments)) {
+          (getCurrentFeature().getCommentID() == m_cComments + 1)) {  // ' + 1 ' because the number in m_cComments refers to the last doccomment that was actually written
         // Might need element-type/key-type spec (i.e., if it is a collection or map)
         if (ja.getType () != null) {
           try {
@@ -147,10 +147,15 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
                   int nIndent = m_iawOutput.getCurrentIndent();
                   
                   getCurrentFeature().indentComment (nIndent);
-                  m_iawOutput.write (getCurrentFeature().getDocComment () + "\n");
                   
-                  for (; nIndent > 0; nIndent --) {
-                    m_iawOutput.write (" ");
+                  String sDocComment = getCurrentFeature().getDocComment();
+                  
+                  if (sDocComment != null) {
+                    m_iawOutput.write (sDocComment + "\n");
+
+                    for (; nIndent > 0; nIndent --) {
+                      m_iawOutput.write (" ");
+                    }
                   }
                 }
 
