@@ -270,3 +270,8 @@ XPMultiplicativeExpressionTail.java
 XPPathNameTail.java
 XPPathTypeNameTail.java
 XPPostfixExpressionTail.java
+APathTail.java
+PPathTail.java
+X1PPathTail.java
+X2PPathTail.java
+XPPathTail.java

@@ -1,13 +1,13 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * OCL Compiler                                                      *
- * Copyright (C) 1999, 2000 Frank Finger (frank@finger.org).         *
+ * OCL Interpreter                                                   *
+ * Copyright (C) 2002 Nikolai Krambrock (nikk@gmx.de)                *
  * All rights reserved.                                              *
  *                                                                   *
  * This work was done as a diploma project at the Chair for Software *
- * Technology, Dresden University Of Technology, Germany             *
- * (http://www-st.inf.tu-dresden.de).  It is understood that any     *
- * modification not identified as such is not covered by the         *
- * preceding statement.                                              *
+ * Construction, University Of Technology Aachen, Germany            *
+ * (http://www-lufgi3.informatik.rwth-aachen.de).                    *
+ * It was done in co-operation with Software & Design and Managment  *
+ * Troisdorf, Germany (http://www.sdm.de)                            *
  *                                                                   *
  * This work is free software; you can redistribute it and/or        *
  * modify it under the terms of the GNU Library General Public       *
@@ -25,43 +25,34 @@
  * Boston, MA  02111-1307, USA.                                      *
  *                                                                   *
  * To submit a bug report, send a comment, or get the latest news on *
- * this project and other projects, please visit the web site:       *
- * http://www-st.inf.tu-dresden.de/ (Chair home page) or             *
- * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
+ * this project, please visit the project home page:                 *
+ * http://dresden-ocl.sourceforge.net                                * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package tudresden.ocl.test;
 
-import junit.framework.*;
-import java.util.*;
+package tudresden.ocl.interp.test;
+
+import junit.awtui.TestRunner;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 
 public class TestAll extends TestCase {
-
   public TestAll(String s) {
     super(s);
   }
 
   public static Test suite() {
-    TestSuite suite=new TestSuite();
-    suite.addTest( tudresden.ocl.lib.test.TestAll.suite() );
-    suite.addTest( TestNameCreator.suite() );
-    suite.addTest( TestParser.suite() );
-    suite.addTest( TestNormalize.suite() );
-    suite.addTest( new TestSuite(TestJavaGenerator.class) );
-    suite.addTest( tudresden.ocl.check.types.xmifacade.stress.Test.suite() );
-    suite.addTest( tudresden.ocl.injection.test.TestInjection.suite() );
-    suite.addTest( new TestSuite(TestTypeCheck.class) );
-
-    // Test Injector Reverseeng GUI
-    // Added 11/24/2000-sz9
-    suite.addTest( tudresden.ocl.injection.reverseeng.test.RevengTestSuite.suite() );
-
-    // Test SQL stuff
-    suite.addTest( tudresden.ocl.test.sql.TestSQLClasses.suite() );
-
-		// Test the interpreter
-    suite.addTest( tudresden.ocl.interp.test.TestAll.suite() );
-
+    TestSuite suite = new TestSuite();
+    suite.addTest(TestAB.suite());
+    suite.addTest(TestBasic.suite());
+    suite.addTest(TestSpecExample.suite());
+    suite.addTest(TestAddition.suite());
     return suite;
   }
-}
 
+  public static void main(String[] args) {
+    TestRunner.run(TestAll.class);
+  }
+}

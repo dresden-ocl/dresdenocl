@@ -1,0 +1,108 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * OCL Interpreter                                                   *
+ * Copyright (C) 2002 Nikolai Krambrock (nikk@gmx.de)                *
+ * All rights reserved.                                              *
+ *                                                                   *
+ * This work was done as a diploma project at the Chair for Software *
+ * Construction, University Of Technology Aachen, Germany            *
+ * (http://www-lufgi3.informatik.rwth-aachen.de).                    *
+ * It was done in co-operation with Software & Design and Managment  *
+ * Troisdorf, Germany (http://www.sdm.de)                            *
+ *                                                                   *
+ * This work is free software; you can redistribute it and/or        *
+ * modify it under the terms of the GNU Library General Public       *
+ * License as published by the Free Software Foundation; either      *
+ * version 2 of the License, or (at your option) any later version.  *
+ *                                                                   *
+ * This work is distributed in the hope that it will be useful,      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of    *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU *
+ * Library General Public License for more details.                  *
+ *                                                                   *
+ * You should have received a copy of the GNU Library General Public *
+ * License along with this library; if not, write to the             *
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,      *
+ * Boston, MA  02111-1307, USA.                                      *
+ *                                                                   *
+ * To submit a bug report, send a comment, or get the latest news on *
+ * this project, please visit the project home page:                 *
+ * http://dresden-ocl.sourceforge.net                                * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+package tudresden.ocl.interp.test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+
+public class Company implements NamedEntety {
+  public String name;
+  public int numberOfEmployees;
+  public Manager manager;
+  public Object nul = null;
+  private String privateField = "private";
+
+  /**
+   * @element-type Person
+   */
+  public Set employees;
+
+  /**
+     * @element-type Manager
+     */
+  public List wrongManagerSet;
+
+  public double stockPrice() {
+    return 0;
+  }
+
+  public Company(String name) {
+    this.name = name;
+    this.numberOfEmployees = 0;
+    this.employees = new HashSet();
+    this.wrongManagerSet = new ArrayList();
+  }
+
+  void employ(Person p) {
+    if (employees.contains(p)) {
+      throw new RuntimeException();
+    }
+
+    if (p.employer.contains(this)) {
+      throw new RuntimeException();
+    }
+
+    employees.add(p);
+    p.employer.add(this);
+
+    p.isUnemployed = false;
+    numberOfEmployees = numberOfEmployees + 1;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public int getEmployeesMinus(int i) {
+    return numberOfEmployees - i;
+  }
+
+  public int throwTestException() throws TestException {
+    throw new TestException();
+  }
+
+  public int throwTestRuntimeException(Object nul) {
+    throw new TestRuntimeException();
+  }
+
+  public Person personReturnNull() {
+    return null;
+  }
+}
+
+class TestException extends Exception{}
+
+
+class TestRuntimeException extends RuntimeException{}

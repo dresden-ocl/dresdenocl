@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 
 public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable, TypeQueryable {
@@ -92,11 +93,11 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
     if (cb instanceof AClassifierContextBody) {
       constrainedTypeName=
         ((AClassifierContext)((AClassifierContextBody)cb).getClassifierContext())
-        .getTypeName().toString().trim();
+        .getPathTypeName().toString().trim();
       constrainedType=types.get(constrainedTypeName);
     } else {
       AOperationContext oc=((AOperationContext)((AOperationContextBody)cb).getOperationContext());
-      constrainedTypeName=oc.getTypeName().toString().trim();
+      constrainedTypeName=oc.getPathTypeName().toString().trim();
       String constrainedOperationName=oc.getName().toString().trim();
       LinkedList formalParams=new LinkedList();
       Type[] operationParameters;
@@ -115,7 +116,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
         while (iter.hasNext()) {
           AFormalParameter nextParam=(AFormalParameter)iter.next();
           String paramName=nextParam.getName().toString().trim();
-          String paramTypeName=nextParam.getTypeName().toString().trim();
+          String paramTypeName=nextParam.getPathTypeName().toString().trim();
           Type paramType=types.get(paramTypeName);
           operationParameters[index]=paramType;
           env.put(paramName, paramType);
@@ -131,7 +132,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
       );
       if (oc.getReturnTypeDeclaration()!=null) {
         AReturnTypeDeclaration rtd=(AReturnTypeDeclaration)oc.getReturnTypeDeclaration();
-        String returnTypeName=rtd.getTypeName().toString().trim();
+        String returnTypeName=rtd.getPathTypeName().toString().trim();
         Type returnType=types.get(returnTypeName);
         types.assertTrue( returnType, constrainedOperationType, c);
       }
@@ -743,8 +744,9 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
       PPathNameEnd lastTailElem=((APathNameTail)tail.getLast()).getPathNameEnd();
       if (lastTailElem instanceof ATypeNamePathNameEnd) {
         // simple package and type name
+        Node pathName = pn;
         return new OclType(
-          types.get( pn.toString().trim() )
+          types.get( getFullPath(pn) )
         );
       } else {
         // lastTailElem instanceof ANamePathNameEnd
@@ -753,7 +755,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
         int divide=complete.lastIndexOf("::");
         String typeName=complete.substring(0, divide).trim();
         String memberName=complete.substring(divide+2).trim();
-
+				
         Type type=types.get(typeName);
         Type result;
         if (fpe.getFeatureCallParameters()==null) {
@@ -890,9 +892,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
   public void inANonCollectionTypeName(ANonCollectionTypeName nctn) {
     ntm.put(
       nctn,
-      types.getOclType(
-        types.get(nctn.toString().trim())
-      )
+      types.getOclType(types.get(getFullPath(nctn)))
     );
   }
 
@@ -1032,6 +1032,35 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
     TypeEnvironment env=getEnvironmentFor(node);
     Type ret=env.get(name);
     return ret;
+  }
+
+	/**
+	 * This returns the full class name of a node that descibes a class name.
+	 * It uses the knowlege that the class-name starts with an upcase letter
+	 * while static references and package declerators start with lowcase
+	 * letters.
+	 */
+  private String getFullPath(Node n) {
+  	while (!(n instanceof APathName) && !(n instanceof APathTypeName)) {
+  		n = n.parent();
+  	}
+
+  	String fullPath = n.toString().trim(); 	
+  	if (fullPath.indexOf("::") != -1) {                 // For efficency 
+	  	String cutPath = "";
+	  	StringTokenizer pathTokenizer = new StringTokenizer(fullPath,":",true);
+	  	
+	  	while (pathTokenizer.hasMoreElements()) {
+	  		String token = pathTokenizer.nextToken().trim();
+	  		cutPath = cutPath + token;
+	  		if (!(token.equals(":")) && 
+	  				token.substring(0,1).toUpperCase().equals(token.substring(0,1))) {
+	  		  break;
+	  		}
+	  	}
+	  	fullPath = cutPath;
+  	}  	
+  	return fullPath;
   }
 
 }

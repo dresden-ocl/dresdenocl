@@ -220,12 +220,12 @@ public abstract class ProceduralCodeGenerator extends DepthFirstAdapter implemen
 
   // methods to separate constraint into fragments for each constraint_body
   public void inAClassifierContext(AClassifierContext cc) {
-    constrainedType=cc.getTypeName().toString().trim();
+    constrainedType=cc.getPathTypeName().toString().trim();
     parameters=null;
   }
 
   public void inAOperationContext(AOperationContext oc) {
-    constrainedType=oc.getTypeName().toString().trim();
+    constrainedType=oc.getPathTypeName().toString().trim();
     constrainedOperation=
       oc.getName().toString().trim() +
       "("+
@@ -258,7 +258,7 @@ public abstract class ProceduralCodeGenerator extends DepthFirstAdapter implemen
   private void addParameter(ArrayList parameterNames, ArrayList parameterTypes,
                             AFormalParameter fp) {
     parameterNames.add(fp.getName().toString().trim());
-    parameterTypes.add(fp.getTypeName().toString().trim());
+    parameterTypes.add(fp.getPathTypeName().toString().trim());
   }
 
   public final void caseAConstraintBody(AConstraintBody cb) {

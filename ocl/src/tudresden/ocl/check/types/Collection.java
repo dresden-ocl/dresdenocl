@@ -376,7 +376,7 @@ public class Collection implements Type {
     } else if (name.equals("append") && params.length==1) {
       Type paramType=getCommonType(params[0], getElementType());
       return new Collection(SEQUENCE, paramType);
-    } else if (name.equals("preprend") && params.length==1) {
+    } else if (name.equals("prepend") && params.length==1) {
       Type paramType=getCommonType(params[0], getElementType());
       return new Collection(SEQUENCE, paramType);
     } else if (name.equals("subSequence") && params.length==2 &&
