@@ -89,7 +89,7 @@ public final class Ocl {
 
   /** If this attribute is set to true, an access to a non-existent attribute or
    *  method is evaluated as UNDEFINED; otherwise, an exception
-   *  is thrown. Default is <code>false</code>.
+   *  is thrown. Default is <code>true</code>.
    */
   public static boolean TOLERATE_NONEXISTENT_FIELDS=true;
 
