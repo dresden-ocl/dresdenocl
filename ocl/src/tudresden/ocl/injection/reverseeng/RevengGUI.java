@@ -121,6 +121,12 @@ public class RevengGUI extends javax.swing.JDialog {
           m_jbSaveAll.setMaximumSize (new java.awt.Dimension(25, 25));
           m_jbSaveAll.setMinimumSize (new java.awt.Dimension(25, 25));
           m_jbSaveAll.setEnabled (false);
+          m_jbSaveAll.addActionListener (new java.awt.event.ActionListener () {
+            public void actionPerformed (java.awt.event.ActionEvent evt) {
+              m_jbSaveAllActionPerformed (evt);
+            }
+          }
+          );
       
           m_jtbTreeBar.add (m_jbSaveAll);
       
@@ -187,20 +193,38 @@ public class RevengGUI extends javax.swing.JDialog {
 
   }//GEN-END:initComponents
 
+  private void m_jbSaveAllActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jbSaveAllActionPerformed
+    synchronized (m_lrtnUnsavedTreeNodes) {
+      for (Iterator i = m_lrtnUnsavedTreeNodes.iterator(); i.hasNext();) {
+        if (save (((RevengTreeNode) i.next()))) {
+          i.remove();
+        }
+      }
+      
+      m_jbSaveAll.setEnabled (m_lrtnUnsavedTreeNodes.size() > 0);      
+    }
+  }//GEN-LAST:event_m_jbSaveAllActionPerformed
+
   private void m_jbSaveActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jbSaveActionPerformed
     if (m_rtnCurrent != null) {
-      try {
-        m_rtnCurrent.save();
-      }
-      catch (IOException ioe) {
-        JOptionPane.showMessageDialog (this, 
-                                         "An error occurred when attempting to save: " + ioe.getLocalizedMessage(), 
-                                         "Error", 
-                                         JOptionPane.ERROR_MESSAGE);
-      }
+      save (m_rtnCurrent);
     }
   }//GEN-LAST:event_m_jbSaveActionPerformed
 
+  private boolean save (RevengTreeNode rtn) {
+    try {
+      rtn.save();
+      return true;
+    }
+    catch (IOException ioe) {
+      JOptionPane.showMessageDialog (this, 
+                                       "An error occurred when attempting to save " + rtn + ": " + ioe.getLocalizedMessage(), 
+                                       "Error", 
+                                       JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
+  }
+  
   private void m_jtFilesValueChanged (javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_m_jtFilesValueChanged
     if (evt.isAddedPath()) {
       if (m_rtnCurrent != null) {
@@ -280,16 +304,19 @@ public class RevengGUI extends javax.swing.JDialog {
   public void onDirtyChanged (RevengTreeNode rtn, boolean fNewValue) {
     if (fNewValue) {
       m_jbSave.setEnabled (true);
-      m_jbSaveAll.setEnabled (true);
       
-      m_lrtnUnsavedTreeNodes.add (rtn);
+      synchronized (m_lrtnUnsavedTreeNodes) {
+        m_jbSaveAll.setEnabled (true);
+        m_lrtnUnsavedTreeNodes.add (rtn);
+      }
     }
     else {
       m_jbSave.setEnabled (false);
 
-      m_lrtnUnsavedTreeNodes.remove (rtn);
-      
-      m_jbSaveAll.setEnabled (m_lrtnUnsavedTreeNodes.size() > 0);
+      synchronized (m_lrtnUnsavedTreeNodes) {
+        m_lrtnUnsavedTreeNodes.remove (rtn);
+        m_jbSaveAll.setEnabled (m_lrtnUnsavedTreeNodes.size() > 0);
+      }
     }
   }
   

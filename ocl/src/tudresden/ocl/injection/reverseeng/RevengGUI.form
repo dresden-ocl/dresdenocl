@@ -125,6 +125,10 @@
                     </Property>
                     <Property name="enabled" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
                   </Properties>
+
+                  <Events>
+                    <EventHandler event="actionPerformed" handler="m_jbSaveAllActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
                   </Constraints>
