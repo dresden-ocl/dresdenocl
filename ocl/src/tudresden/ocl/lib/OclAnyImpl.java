@@ -94,13 +94,18 @@ public class OclAnyImpl extends OclAny {
     return isEqualTo(o).not();
   }
 
+  public OclRoot getFeature(String attributeName) 
+  {
+    return getFeatureQualified(attributeName, null);
+  }
+  
   /** The attributes of application objects can be queried through this method.
    *  Due to restrictions of the Java language, only <CODE>public</CODE> fields
    *  can be queried.
    *
    *  @param attributeName the name of the feature, as a java.lang.String
    */
-  public OclRoot getFeature(String attributeName) {
+  public OclRoot getFeatureQualified(String attributeName, Object qualifier) {
     if (isUndefined()) return OclAnyImpl.UNDEFINED;
     if (applicationObject==null) {
       if (Ocl.STRICT_CHECKING==true) {
@@ -135,6 +140,15 @@ public class OclAnyImpl extends OclAny {
       } else {
         f.setAccessible(true);
         Object feature=f.get(applicationObject);
+
+        if(qualifier!=null)
+        {
+          if(feature instanceof Map)
+            feature=((Map)feature).get(qualifier);
+          else
+            throw new OclException("object "+feature+" cannot be qualified by "+qualifier);
+        }
+           
         if (feature==null) {
           String typeName=f.getType().getName();
           if (typeName.equals("java.lang.String")) {

@@ -5,11 +5,13 @@ inv: self.strings->includes('hallo')
 inv: self.integers->includes(anInteger)
 inv: self.dates->includes(aDate)
 inv: self.interfaces->includes(anInterface)
+inv: anInterface->isEmpty
 inv: self.formats->includes(aFormat)
 inv: self.poly1(anInterface)=true
 inv: self.anInterface.someMethod(10)=0
 inv: self.namedIntegers->includes(10)
-inv: self.namedIntegers['10']=10
+inv: self.namedIntegers['5']=5
+inv: self.namedIntegers['10']->isEmpty or self.namedIntegers['10']=10
 
 context Example::getQualifiers()
 pre:  hallo='bello'

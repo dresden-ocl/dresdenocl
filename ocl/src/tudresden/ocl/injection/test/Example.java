@@ -235,10 +235,15 @@ public abstract class Example implements Runnable
   
   static public void main(String[] args)
   {
-    tudresden.ocl.lib.Ocl.STRICT_CHECKING=true;
+    // enable the following only, if there are type errors
+    // which are difficult to trace
+    //tudresden.ocl.lib.Ocl.STRICT_CHECKING=true;
+
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
     tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
-    (new SecondExample()).getQualifiers();
+    SecondExample e2=new SecondExample();
+    e2.namedIntegers.put("5", new Integer(5));
+    e2.getQualifiers();
   }
 
 }

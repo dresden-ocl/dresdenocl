@@ -482,11 +482,11 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
       assurePreCode();
       writeToPreCodeOnly();
     }
-    if (appliedType instanceof Basic) {
-      appendPostfixBasic(pet, appliedTo, (Basic)appliedType);
-    } else if ( pet.getPostfixExpressionTailBegin() instanceof
+    if ( pet.getPostfixExpressionTailBegin() instanceof
                 AArrowPostfixExpressionTailBegin ) {
       appendPostfixArrowOp(pet, appliedTo, appliedType);
+    } else if (appliedType instanceof Basic) {
+      appendPostfixBasic(pet, appliedTo, (Basic)appliedType);
     } else {
       String featurePathName=fc.getPathName().toString().trim();
       if (oclAnyOperations.contains(featurePathName)) {
@@ -706,6 +706,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
     String appliedVar=getVariable(appliedTo);
     String javaType=getJavaType( tree.getNodeType(pet) );
     String paramVar=null;
+    String qualifVar=null;
     AFeatureCall fc=(AFeatureCall)pet.getFeatureCall();
     if (fc.getFeatureCallParameters()!=null) {
       // access to operation of application type
@@ -733,14 +734,29 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
         }
       }
     }
+    if(fc.getQualifiers()!=null)
+    {
+      AQualifiers aqs=(AQualifiers)fc.getQualifiers();
+      AActualParameterList apl=(AActualParameterList)aqs.getActualParameterList();
+      LinkedList tail=apl.getActualParameterListTail();
+      if(!tail.isEmpty())
+        throw new RuntimeException("Java code generator can handle on qualifier only.");
+      AExpression theQualifier=(AExpression)apl.getExpression();
+      qualifVar=tree.getNameCreator().getUniqueName("Qualif");
+      appendCode("Object "+qualifVar+"="+oclLibPackage+"Ocl.reconvert("+
+        "null, "+getVariable(theQualifier)+");\n");
+    }
     appendCode(createDecl(javaType,getVariable(pet))+
       oclLibPackage+"Ocl.to"+javaType+"("+
-      appliedVar+".getFeature(\""+
+      appliedVar+".getFeature"+(qualifVar!=null?"Qualified":"")+"(\""+
       fc.getPathName().toString().trim()+
       "\""
     );
     if (paramVar!=null) {
       appendCode(", "+paramVar);
+    }
+    if (qualifVar!=null) {
+      appendCode(", "+qualifVar);
     }
     appendCode("));\n");
   }
