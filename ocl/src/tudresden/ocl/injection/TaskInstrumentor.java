@@ -27,6 +27,8 @@ public interface TaskInstrumentor
 	
 	public void onDocComment(JavaClass jc, String doccomment);
 	
+	public void onClassFeature(JavaFeature cf, String doccomment);
+	
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed)
 	throws IOException;
 	

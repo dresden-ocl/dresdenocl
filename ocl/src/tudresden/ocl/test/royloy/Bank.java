@@ -51,10 +51,10 @@ public class Bank extends RLObject
   {
     this.description=description;
   }
-  
-  public void addCustomer(int index, Person p)
+
+  public boolean addCustomer(int index, Person p)
   {
-    customer.put(new Integer(index), p);
+    return customer.put(new Integer(index), p) != null;
   }
   
   public String toString()

@@ -102,10 +102,8 @@ public final class JavaMethod extends JavaBehaviour
 
   /**
      Returns the signature of this method.
-     Is compatible to 
-     {@link tudresden.ocl.codegen.CodeFragment#getConstrainedOperation()}.
   */
-  public String getSignature()
+  private String getSignature()
   {
     if(signature!=null)
       return signature;

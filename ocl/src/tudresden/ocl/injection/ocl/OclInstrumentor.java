@@ -1,16 +1,16 @@
 /*
 Copyright (C) 2000  Ralf Wiebicke
-
+ 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
 version 2.1 of the License, or (at your option) any later version.
-
+ 
 This library is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 Lesser General Public License for more details.
-
+ 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -65,11 +65,19 @@ public final class OclInstrumentor implements TaskInstrumentor
 	
 	public void onDocComment(JavaClass jc, String doccomment)
 	{
-		if(!jc.isInterface())
+	}
+	
+	public void onClassFeature(final JavaFeature jf, final String doccomment)
+	{
+		if(!jf.getParent().isInterface() && doccomment!=null)
 		{
-			addInvariant    (jc, Injector.extractDocParagraphs(doccomment, "invariant"));
-			addPrecondition (jc, Injector.extractDocParagraphs(doccomment, "precondition"));
-			addPostcondition(jc, Injector.extractDocParagraphs(doccomment, "postcondition"));
+			addInvariant(jf.getParent(), Injector.extractDocParagraphs(doccomment, "invariant"));
+			if(jf instanceof JavaMethod)
+			{
+				final JavaMethod jm = (JavaMethod)jf;
+				addPrecondition(jm,  Injector.extractDocParagraphs(doccomment, "precondition"));
+				addPostcondition(jm, Injector.extractDocParagraphs(doccomment, "postcondition"));
+			}
 		}
 	}
 	
@@ -80,18 +88,64 @@ public final class OclInstrumentor implements TaskInstrumentor
 			config.makeConstraint(text[i], "inv", jc.getName());
 	}
 	
-	private final void addPrecondition(JavaClass jc, String[] text)
+	private final void fillInSignature(final StringBuffer buf, final JavaMethod jm)
 	{
-		if(text==null) return;
-		for(int i=0; i<text.length; i++)
-			config.makeConstraint(text[i], "pre", jc.getName());
+		buf.append(jm.getName());
+		buf.append('(');
+		for(Iterator i = jm.getParameters().iterator(); i.hasNext(); )
+		{
+			String type = (String)i.next();
+			if("java.lang.String".equals(type))
+				type="String";
+			else if("byte".equals(type) || "short".equals(type) || "int".equals(type) || "long".equals(type))
+				type="Integer";
+			else if("float".equals(type) || "double".equals(type))
+				type="Real";
+			else if("boolean".equals(type))
+				type="Boolean";
+			
+			buf.append(i.next());
+			buf.append(" : ");
+			buf.append(type);
+			if(i.hasNext())
+				buf.append(" ; ");
+		}
+		buf.append(')');
 	}
 	
-	private final void addPostcondition(JavaClass jc, String[] text)
+	/**
+	 * Returns the signature of this method.
+	 * Is compatible to
+	 * {@link tudresden.ocl.codegen.CodeFragment#getConstrainedOperation()}.
+	 */
+	private final String makeSignature(final JavaMethod jm)
+	{
+		final StringBuffer buf = new StringBuffer();
+		fillInSignature(buf, jm);
+		return buf.toString();
+	}
+	
+	private final String makeContext(final JavaMethod jm)
+	{
+		final StringBuffer buf = new StringBuffer();
+		buf.append(jm.getParent().getName());
+		buf.append("::");
+		fillInSignature(buf, jm);
+		return buf.toString();
+	}
+	
+	private final void addPrecondition(final JavaMethod jm, final String[] text)
 	{
 		if(text==null) return;
 		for(int i=0; i<text.length; i++)
-			config.makeConstraint(text[i], "post", jc.getName());
+			config.makeConstraint(text[i], "pre", makeContext(jm));
+	}
+	
+	private final void addPostcondition(final JavaMethod jm, final String[] text)
+	{
+		if(text==null) return;
+		for(int i=0; i<text.length; i++)
+			config.makeConstraint(text[i], "post", makeContext(jm));
 	}
 	
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed)
@@ -159,16 +213,20 @@ public final class OclInstrumentor implements TaskInstrumentor
 			SortedFragments sf=(SortedFragments)codefragments.get(jm.getParent().getName());
 			if(sf!=null)
 			{
+				final String signature = makeSignature(jm);
+				//System.out.println("X "+signature);
 				for(Iterator i=sf.transfer.iterator(); i.hasNext(); )
 				{
 					CodeFragment frag=(CodeFragment)i.next();
-					if(jm.getSignature().equals(frag.getConstrainedOperation()))
+					//System.out.println("t "+frag.getConstrainedOperation());
+					if(signature.equals(frag.getConstrainedOperation()))
 						o.write(frag.getCode());
 				}
 				for(Iterator i=sf.pre.iterator(); i.hasNext(); )
 				{
 					CodeFragment frag=(CodeFragment)i.next();
-					if(jm.getSignature().equals(frag.getConstrainedOperation()))
+					//System.out.println("p "+frag.getConstrainedOperation());
+					if(signature.equals(frag.getConstrainedOperation()))
 					{
 						o.write("      {");
 						o.write(lineSeparator);
@@ -192,7 +250,8 @@ public final class OclInstrumentor implements TaskInstrumentor
 				for(Iterator i=sf.preparation.iterator(); i.hasNext(); )
 				{
 					CodeFragment frag=(CodeFragment)i.next();
-					if(jm.getSignature().equals(frag.getConstrainedOperation()))
+					//System.out.println("r "+frag.getConstrainedOperation());
+					if(signature.equals(frag.getConstrainedOperation()))
 					{
 						o.write("      {");
 						o.write(lineSeparator);
@@ -222,10 +281,14 @@ public final class OclInstrumentor implements TaskInstrumentor
 		{
 			SortedFragments sf=(SortedFragments)codefragments.get(jm.getParent().getName());
 			if(sf!=null)
+			{
+				final String signature = makeSignature(jm);
+				//System.out.println("Y "+signature);
 				for(Iterator i=sf.post.iterator(); i.hasNext(); )
 				{
 					CodeFragment frag=(CodeFragment)i.next();
-					if(jm.getSignature().equals(frag.getConstrainedOperation()))
+					//System.out.println("o "+frag.getConstrainedOperation());
+					if(signature.equals(frag.getConstrainedOperation()))
 					{
 						o.write("      {");
 						o.write(lineSeparator);
@@ -246,6 +309,7 @@ public final class OclInstrumentor implements TaskInstrumentor
 						o.write(lineSeparator);
 					}
 				}
+			}
 		}
 		o.write("      ");
 		o.write(Invariant.CHECKING_FLAG);

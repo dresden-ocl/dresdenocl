@@ -636,6 +636,7 @@ public abstract class Example implements Runnable
       }
       {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode88=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSequence tudOclResult3=tudresden.ocl.lib.Ocl.toOclSequence( tudresden.ocl.lib.Ocl.getFor(result) );
         final tudresden.ocl.lib.OclSet tudOclNode89=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode88.getFeature("strings"));
         final tudresden.ocl.lib.OclString tudOclNode90=new tudresden.ocl.lib.OclString("inlinehallopost");
         final tudresden.ocl.lib.OclBoolean tudOclNode91=tudOclNode89.includes(tudOclNode90);
@@ -644,6 +645,7 @@ public abstract class Example implements Runnable
       }
       {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode92=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSequence tudOclResult4=tudresden.ocl.lib.Ocl.toOclSequence( tudresden.ocl.lib.Ocl.getFor(result) );
         final tudresden.ocl.lib.OclSet tudOclNode93=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode92.getFeature("strings"));
         final tudresden.ocl.lib.OclString tudOclNode94=new tudresden.ocl.lib.OclString("inline space hallo post");
         final tudresden.ocl.lib.OclBoolean tudOclNode95=tudOclNode93.includes(tudOclNode94);

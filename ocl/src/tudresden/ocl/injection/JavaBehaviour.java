@@ -30,14 +30,16 @@ public abstract class JavaBehaviour extends JavaFeature
 {
 
   /**
-     Contains subsequently parameter names and types.
+     Contains subsequently parameter types and names.
   */
-  protected ArrayList parameters=new ArrayList();
+  protected final ArrayList parameters=new ArrayList();
+	
+  protected final List unmodifiableParameters=Collections.unmodifiableList(parameters);
 
   /**
      Contains all names given in the &quot;throws&quot; clause.
   */
-  private ArrayList throwables=new ArrayList();
+  private final ArrayList throwables=new ArrayList();
     
   /**
      The method header of this method, 
@@ -62,9 +64,9 @@ public abstract class JavaBehaviour extends JavaFeature
     parameters.add(paramname);
   }
   
-  public final Iterator getParameters()
+  public final List getParameters()
   {
-    return parameters.iterator();
+    return unmodifiableParameters;
   }
 
   public final void addThrowable(String throwable)

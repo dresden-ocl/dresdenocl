@@ -41,6 +41,8 @@ public class Person extends RLObject implements Comparable
         else
           wife->isEmpty and husband->isEmpty
         endif
+     @invariant manager_is_employee3:
+        managedCompanies->forAll(employees->includes(self))
   */
   public boolean isMarried=false;
 
@@ -49,8 +51,6 @@ public class Person extends RLObject implements Comparable
   // Associations
   /**
      @element-type Company
-     @invariant manager_is_employee3:
-        managedCompanies->forAll(employees->includes(self))
   */
   // tests comma separated attributes
   public HashSet managedCompanies=new HashSet(), employers=new HashSet();

@@ -35,6 +35,18 @@ public class Customer extends RLObject {
     this.title=isMale?"Mr":"Ms";
     this.isMale=isMale;
   }
+	
+	/**
+	  @precondition index_positive: index>=0
+	  @postcondition result_is_one: result=1
+	  @postcondition title_unchanged: title=title@pre
+	 */
+	public int ignoreCard(int index, CustomerCard c, int resultat)
+	{
+		if(index==42)
+			title=title+" hoppla";
+		return resultat;
+	}
 
   public String toString()
   {

@@ -138,7 +138,7 @@ public final class Instrumentor implements InjectionConsumer
 	{
 	}
 	
-	public void onClassFeature(JavaFeature jf, String doccomment)
+	public void onClassFeature(final JavaFeature jf, final String doccomment)
 	throws IOException, InjectorParseException
 	{
 		if(!clean && !class_state.javaclass.isInterface())
@@ -193,6 +193,8 @@ public final class Instrumentor implements InjectionConsumer
 				else
 					throw new InjectorParseException("encountered @key-type tag on non-attribute");
 			}
+			for(int j=0; j<class_state.taskInstrumentors.length; j++)
+				class_state.taskInstrumentors[j].onClassFeature(jf, doccomment);
 		}
 		discardnextfeature=false;
 	}
@@ -246,7 +248,7 @@ public final class Instrumentor implements InjectionConsumer
 			o.write("result=");
 		o.write(jm.getWrappedName());
 		o.write('(');
-		for(Iterator i=jm.getParameters(); i.hasNext(); )
+		for(Iterator i=jm.getParameters().iterator(); i.hasNext(); )
 		{
 			i.next();
 			o.write((String)i.next());
@@ -437,7 +439,7 @@ public final class Instrumentor implements InjectionConsumer
 		}
 		o.write(jb.getName());
 		o.write('(');
-		for(Iterator i=jb.getParameters(); i.hasNext(); )
+		for(Iterator i=jb.getParameters().iterator(); i.hasNext(); )
 		{
 			o.write((String)i.next());
 			o.write(' ');
@@ -483,13 +485,15 @@ public final class Instrumentor implements InjectionConsumer
 		o.write("    @see #");
 		o.write(jc.getName());
 		o.write('(');
-		for(Iterator i=jc.getParameters(); i.hasNext(); )
+		boolean hasParameters = false;
+		for(Iterator i=jc.getParameters().iterator(); i.hasNext(); )
 		{
+			hasParameters = true;
 			o.write((String)(i.next()));
 			i.next();
 			if(i.hasNext()) o.write(", ");
 		}
-		if(jc.getParameters().hasNext())
+		if(hasParameters)
 			o.write(", ");
 		o.write(WrapperDummy.class.getName());
 		o.write(")");
@@ -500,7 +504,7 @@ public final class Instrumentor implements InjectionConsumer
 		o.write("  {");
 		o.write(lineSeparator);
 		o.write("    this(");
-		for(Iterator i=jc.getParameters(); i.hasNext(); )
+		for(Iterator i=jc.getParameters().iterator(); i.hasNext(); )
 		{
 			i.next();
 			o.write((String)i.next());
@@ -532,7 +536,7 @@ public final class Instrumentor implements InjectionConsumer
 		o.write("    @see #");
 		o.write(jm.getWrappedName());
 		o.write('(');
-		for(Iterator i=jm.getParameters(); i.hasNext(); )
+		for(Iterator i=jm.getParameters().iterator(); i.hasNext(); )
 		{
 			o.write((String)(i.next()));
 			i.next();
