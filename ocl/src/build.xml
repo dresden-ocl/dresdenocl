@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.26 2001/09/06 21:36:11 rw7 Exp $
+$Id: build.xml,v 1.27 2001/09/07 12:37:23 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -620,8 +620,9 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
 
   <target name="test.example.inject"
-          depends="build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector"
+          depends="compile,build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector"
   >
+    <!-- dependency from compile is to have the Diff class compiled only -->
     <delete dir="${example.dir}"/>
     <copy todir="${example.dir}">
       <fileset dir="${src.dir}" >
@@ -710,8 +711,9 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
 
   <target name="test.royloy.inject"
-          depends="build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector"
+          depends="compile,build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector"
   >
+    <!-- dependency from compile is to have the Diff class compiled only -->
     <delete dir="${royloy.dir}"/>
     <copy todir="${royloy.dir}">
       <fileset dir="${src.dir}" >
