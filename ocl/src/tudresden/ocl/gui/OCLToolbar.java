@@ -165,7 +165,14 @@ public class OCLToolbar extends javax.swing.JFrame {
     jPanel30 = new javax.swing.JPanel ();
     getContentPane ().setLayout (new java.awt.GridBagLayout ());
     java.awt.GridBagConstraints gridBagConstraints1;
+    setDefaultCloseOperation (javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setTitle ("OCL Editor QuickBar");
+    addWindowListener (new java.awt.event.WindowAdapter () {
+      public void windowClosing (java.awt.event.WindowEvent evt) {
+        onWindowClosing (evt);
+      }
+    }
+    );
 
 
       m_jpGeneral.setLayout (new java.awt.GridBagLayout ());
@@ -1259,6 +1266,18 @@ public class OCLToolbar extends javax.swing.JFrame {
     setSize (new java.awt.Dimension (650, 300));
     setLocation((screenSize.width-650)/2, (screenSize.height-300)/2);
   }//GEN-END:initComponents
+
+  private void onWindowClosing (java.awt.event.WindowEvent evt) {//GEN-FIRST:event_onWindowClosing
+    OCLEditor ocle = (OCLEditor) m_wrocleEditor.get();
+    
+    if (ocle != null) {
+      ocle.closeQuickBar();
+    }
+    else {
+      setVisible (false);
+      dispose();
+    }
+  }//GEN-LAST:event_onWindowClosing
 
   private void onParens (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onParens
     addText (new String[] {"tmp"}, ")", null);

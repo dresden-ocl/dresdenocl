@@ -21,247 +21,301 @@
 
   <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Container class="javax.swing.JSplitPane" name="m_jspTopLevelPane">
+    <Container class="javax.swing.JToolBar" name="m_jtbTools">
+      <Constraints>
+        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="North"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="m_jbNew">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
+              <Image iconType="3" name="/tudresden/ocl/images/New16.gif"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to create a new constraint"/>
+            <Property name="margin" type="java.awt.Insets" editor="com.netbeans.developer.editors.InsetsEditor">
+              <Insets value="[2, 20, 2, 20]"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="New"/>
+          </Properties>
+
+          <Events>
+            <EventHandler event="actionPerformed" handler="onNewConstraintButton"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="m_jbRemove">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
+              <Image iconType="3" name="/tudresden/ocl/images/Delete16.gif"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to remove the currently selected constraint"/>
+            <Property name="margin" type="java.awt.Insets" editor="com.netbeans.developer.editors.InsetsEditor">
+              <Insets value="[2, 20, 2, 20]"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Remove"/>
+          </Properties>
+
+          <Events>
+            <EventHandler event="actionPerformed" handler="onRemoveConstraintButton"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="m_jbEdit">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
+              <Image iconType="3" name="/tudresden/ocl/images/Edit16.gif"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to edit the currently selected constraint"/>
+            <Property name="margin" type="java.awt.Insets" editor="com.netbeans.developer.editors.InsetsEditor">
+              <Insets value="[2, 20, 2, 20]"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Edit"/>
+          </Properties>
+
+          <Events>
+            <EventHandler event="actionPerformed" handler="onEditButton"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="m_jbSaveEditResult">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
+              <Image iconType="3" name="/tudresden/ocl/images/save_icon.gif"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Check OCL syntax and save constraint into model"/>
+            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Save"/>
+            <Property name="enabled" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
+          </Properties>
+
+          <Events>
+            <EventHandler event="actionPerformed" handler="onSubmitConstraintButton"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+          </Constraints>
+        </Component>
+        <Container class="javax.swing.JPanel" name="pad1">
+          <Properties>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+              <Dimension value="[10, 10]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+          </Constraints>
+
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+        </Container>
+        <Component class="javax.swing.JButton" name="m_jbPreferences">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
+              <Image iconType="3" name="/tudresden/ocl/images/Preferences16.gif"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to inspect and modify OCL editor preferences."/>
+          </Properties>
+
+          <Events>
+            <EventHandler event="actionPerformed" handler="onPreferencesButton"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+          </Constraints>
+        </Component>
+        <Container class="javax.swing.JPanel" name="pad2">
+          <Properties>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+              <Dimension value="[5, 10]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+              <Dimension value="[5, 10]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+              <Dimension value="[5, 10]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+          </Constraints>
+
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
+        </Container>
+        <Component class="javax.swing.JCheckBox" name="m_jcbQuickBar">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Check to see the syntax assistant toolbar"/>
+            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Syntax Assistant"/>
+          </Properties>
+
+          <Events>
+            <EventHandler event="actionPerformed" handler="onQuickBarButton"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JSplitPane" name="m_jspMainPane">
       <Properties>
-        <Property name="orientation" type="int" editor="org.openide.util.SwingEditors$OrientationPropertyEditor" value="0"/>
         <Property name="oneTouchExpandable" type="boolean" editor="sun.beans.editors.BoolEditor" value="true"/>
       </Properties>
       <Constraints>
+        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+          <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+        </Constraint>
         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>
+        </Constraint>
+        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
+          <JSplitPaneConstraints position="top"/>
         </Constraint>
       </Constraints>
 
       <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JSplitPane" name="m_jspMainPane">
+        <Container class="javax.swing.JPanel" name="m_jpConstraintListPane">
           <Properties>
-            <Property name="oneTouchExpandable" type="boolean" editor="sun.beans.editors.BoolEditor" value="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+              <Dimension value="[100, 37]"/>
+            </Property>
           </Properties>
           <Constraints>
-            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="0" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
-              <BorderConstraints direction="Center"/>
-            </Constraint>
             <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
-              <JSplitPaneConstraints position="top"/>
+              <JSplitPaneConstraints position="left"/>
             </Constraint>
           </Constraints>
 
-          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout"/>
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="m_jpConstraintListPane">
+            <Container class="javax.swing.JScrollPane" name="m_jspConstraintListScroller">
               <Constraints>
-                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
-                  <JSplitPaneConstraints position="left"/>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="10" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="m_jtConstraintList">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Lists all constraints. Selecting a constraint, shows its body in the right hand preview pane. Clicking twice on a constraint allows editing the constraint&apos;s name."/>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="com.netbeans.developer.modules.loaders.form.RADConnectionPropertyEditor">
+                      <Connection code="m_ctmTableModel" type="code"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout$JScrollPaneConstraintsDescription"/>
+                  </Constraints>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="m_jpPreviewPane">
+          <Properties>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+              <Dimension value="[100, 80]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
+              <JSplitPaneConstraints position="right"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="m_jpPreviewGroup">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="com.netbeans.developer.explorer.propertysheet.editors.BorderEditor">
+                  <Border info="com.netbeans.developerx.loaders.form.formeditor.border.TitledBorderInfo">
+                    <TitledBorder title="Preview"/>
+                  </Border>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="20" insetsLeft="5" insetsRight="5" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
                 </Constraint>
               </Constraints>
 
               <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="m_jspConstraintListScroller">
+                <Container class="javax.swing.JScrollPane" name="m_jspConstraintPreviewScroller">
                   <Constraints>
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                      <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="10" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                      <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
                     </Constraint>
                   </Constraints>
 
                   <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="m_jtConstraintList">
+                    <Component class="javax.swing.JTextPane" name="m_jtpConstraintPreview">
                       <Properties>
-                        <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Lists all constraints. Selecting a constraint, shows its body in the right hand pane, where it can be edited. Clicking twice on a constraint allows you to edit the constraints name."/>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="com.netbeans.developer.modules.loaders.form.RADConnectionPropertyEditor">
-                          <Connection code="m_ctmTableModel" type="code"/>
-                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Constraint expression preview"/>
+                        <Property name="editable" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
                       </Properties>
                       <Constraints>
-                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout$JScrollPaneConstraintsDescription"/>
-                      </Constraints>
-                    </Component>
-                  </SubComponents>
-                </Container>
-                <Container class="javax.swing.JPanel" name="m_jpConstraintListButtonsGroup">
-                  <Constraints>
-                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                      <GridBagConstraints anchor="18" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="20" insetsLeft="5" insetsRight="5" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
-                    </Constraint>
-                  </Constraints>
-
-                  <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JButton" name="m_jbAddConstraintButton">
-                      <Properties>
-                        <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to add a new constraint."/>
-                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Add"/>
-                      </Properties>
-
-                      <Events>
-                        <EventHandler event="actionPerformed" handler="onAddConstraintButton"/>
-                      </Events>
-                      <Constraints>
-                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
-                      </Constraints>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="m_jbRemoveConstraintButton">
-                      <Properties>
-                        <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to remove the constraint selected above."/>
-                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Remove"/>
-                      </Properties>
-
-                      <Events>
-                        <EventHandler event="actionPerformed" handler="onRemoveConstraintButton"/>
-                      </Events>
-                      <Constraints>
-                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
-                      </Constraints>
-                    </Component>
-                  </SubComponents>
-                </Container>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="m_jpConstraintEditorPane">
-              <Constraints>
-                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
-                  <JSplitPaneConstraints position="right"/>
-                </Constraint>
-              </Constraints>
-
-              <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
-              <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel5">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="com.netbeans.developer.explorer.propertysheet.editors.BorderEditor">
-                      <Border info="com.netbeans.developerx.loaders.form.formeditor.border.TitledBorderInfo">
-                        <TitledBorder title="Edit selected constraint"/>
-                      </Border>
-                    </Property>
-                  </Properties>
-                  <Constraints>
-                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                      <GridBagConstraints anchor="10" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="20" insetsLeft="5" insetsRight="5" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
-                    </Constraint>
-                  </Constraints>
-
-                  <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
-                  <SubComponents>
-                    <Container class="javax.swing.JScrollPane" name="m_jspConstraintEditorScroller">
-                      <Constraints>
-                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                          <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="West"/>
                         </Constraint>
                       </Constraints>
-
-                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout"/>
-                      <SubComponents>
-                        <Component class="javax.swing.JTextPane" name="m_jtpConstraintEditor">
-
-                          <Events>
-                            <EventHandler event="caretUpdate" handler="onCaretUpdate"/>
-                          </Events>
-                          <Constraints>
-                            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                              <BorderConstraints direction="West"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
-                      </SubComponents>
-                    </Container>
-                    <Container class="javax.swing.JPanel" name="m_jpEditorButtonsGroup">
-                      <Constraints>
-                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                          <GridBagConstraints anchor="18" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="1.0" weightY="0.0"/>
-                        </Constraint>
-                      </Constraints>
-
-                      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout">
-                        <Property name="alignment" type="int" value="2"/>
-                      </Layout>
-                      <SubComponents>
-                        <Component class="javax.swing.JButton" name="m_jbShowQuickBarButton">
-                          <Properties>
-                            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to show a QuickBar with OCL expression elements."/>
-                            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="QuickBar"/>
-                          </Properties>
-
-                          <Events>
-                            <EventHandler event="actionPerformed" handler="onQuickBarButton"/>
-                          </Events>
-                          <Constraints>
-                            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
-                          </Constraints>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="m_jbSubmitConstraintButton">
-                          <Properties>
-                            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Click to submit your constraint."/>
-                            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Submit"/>
-                          </Properties>
-
-                          <Events>
-                            <EventHandler event="actionPerformed" handler="onSubmitConstraintButton"/>
-                          </Events>
-                          <Constraints>
-                            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
-                          </Constraints>
-                        </Component>
-                      </SubComponents>
-                    </Container>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="m_jpOptionsGroup">
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="m_jpEditorPanel">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="com.netbeans.developer.explorer.propertysheet.editors.BorderEditor">
+          <Border info="com.netbeans.developerx.loaders.form.formeditor.border.TitledBorderInfo">
+            <TitledBorder title="Edit constraint"/>
+          </Border>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="West"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="m_jspConstraintEditorScroller">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="com.netbeans.developer.explorer.propertysheet.editors.BorderEditor">
-              <Border info="com.netbeans.developerx.loaders.form.formeditor.border.TitledBorderInfo">
-                <TitledBorder title="Options"/>
-              </Border>
-            </Property>
           </Properties>
           <Constraints>
-            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
-              <BorderConstraints direction="West"/>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints anchor="18" fill="1" gridHeight="0" gridWidth="0" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="1.0" weightY="1.0"/>
             </Constraint>
-            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
-              <JSplitPaneConstraints position="bottom"/>
-            </Constraint>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
           </Constraints>
 
-          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout">
-            <Property name="alignment" type="int" value="0"/>
-            <Property name="horizontalGap" type="int" value="10"/>
-          </Layout>
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JCheckBox" name="m_jcbTypeChecking">
+            <Component class="javax.swing.JTextPane" name="m_jtpConstraintEditor">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Check this option to have the editor perform type checks on each constraint you submit."/>
-                <Property name="selected" type="boolean" editor="sun.beans.editors.BoolEditor" value="true"/>
-                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Type Check"/>
+                <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Edit the constraint expression"/>
               </Properties>
 
               <Events>
-                <EventHandler event="itemStateChanged" handler="onTypeCheckingStateChanged"/>
+                <EventHandler event="caretUpdate" handler="onCaretUpdate"/>
               </Events>
               <Constraints>
-                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JCheckBox" name="m_jcbAutoSplit">
-              <Properties>
-                <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Check this option to have the editor automatically split multiple constraints that were entered in one go."/>
-                <Property name="selected" type="boolean" editor="sun.beans.editors.BoolEditor" value="true"/>
-                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="AutoSplit Constraints"/>
-              </Properties>
-
-              <Events>
-                <EventHandler event="itemStateChanged" handler="onAutoSplitStateChanged"/>
-              </Events>
-              <Constraints>
-                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout$JScrollPaneConstraintsDescription"/>
               </Constraints>
             </Component>
           </SubComponents>
