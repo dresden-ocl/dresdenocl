@@ -114,6 +114,9 @@ public final class JavaMethod extends JavaBehaviour
     return buf.toString();
   }
     
+  /**
+     See Java Specification 8.4.3 &quot;Method Modifiers&quot;
+  */
   public final int getAllowedModifiers()
   {
     return

@@ -93,6 +93,9 @@ public final class JavaAttribute extends JavaFeature
     return key_type;
   }
 
+  /**
+     See Java Specification 8.3.1 &quot;Field Modifiers&quot;
+  */
   public final int getAllowedModifiers()
   {
     return
