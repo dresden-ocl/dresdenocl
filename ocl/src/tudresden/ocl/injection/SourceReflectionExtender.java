@@ -116,7 +116,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     
     private Imports imports=new Imports();
   
-    private ClassClass current_class=null;
+    private JavaClass current_class=null;
     
     private Class current_classobject=null;
     
@@ -139,7 +139,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       imports.addImport(importname);
     }
   
-    public void onClass(ClassClass cc)
+    public void onClass(JavaClass cc)
     {
       try
       {
@@ -151,7 +151,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       catch(ClassNotFoundException e) { throw new RuntimeException(e.toString()); }
     }
  
-    public void onClassEnd(ClassClass cc) throws java.io.IOException
+    public void onClassEnd(JavaClass cc) throws java.io.IOException
     {
       if(current_class!=cc)
         throw new RuntimeException();
@@ -166,13 +166,13 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     private String last_element_type=null;
     private String last_key_type=null;
 
-    public void onMethodHeader(ClassMethod cf)
+    public void onMethodHeader(JavaMethod cf)
     {
     }
     
-    public void onClassFeature(ClassFeature cf) throws java.io.IOException
+    public void onClassFeature(JavaFeature cf) throws java.io.IOException
     {
-      if(cf instanceof ClassAttribute)
+      if(cf instanceof JavaAttribute)
       {
         if(last_element_type!=null)
         {

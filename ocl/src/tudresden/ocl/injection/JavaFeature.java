@@ -22,13 +22,13 @@ import java.io.*;
 import java.util.*;
 import tudresden.ocl.codegen.CodeFragment;
 
-public abstract class ClassFeature
+public abstract class JavaFeature
 {
   /**
      The class, which contains this feature.
      May be null for top-level classes.
   */
-  private ClassClass parent;
+  private JavaClass parent;
 
   private int modifiers;
 
@@ -40,10 +40,10 @@ public abstract class ClassFeature
 
   protected String name;
   
-  public ClassFeature(ClassClass parent, 
-                      int modifiers, 
-                      String type, 
-                      String name)
+  public JavaFeature(JavaClass parent, 
+                     int modifiers, 
+                     String type, 
+                     String name)
     throws InjectorParseException
   {
     this.parent=parent;
@@ -59,7 +59,7 @@ public abstract class ClassFeature
         " of type "+getClass().getName()+'.');
   }
   
-  public final ClassClass getParent()
+  public final JavaClass getParent()
   {
     return parent;
   }

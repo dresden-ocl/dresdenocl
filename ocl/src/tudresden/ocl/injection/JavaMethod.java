@@ -21,7 +21,7 @@ package tudresden.ocl.injection;
 import java.io.*;
 import java.util.*;
 
-public class ClassMethod extends ClassFeature
+public class JavaMethod extends JavaFeature
 {
   public static final String WRAPPER_SUFFIX="_wrappedbyocl";
   
@@ -47,11 +47,11 @@ public class ClassMethod extends ClassFeature
   private ArrayList throwables=new ArrayList();
     
 
-  public ClassMethod(ClassClass parent, 
-                     int modifiers, 
-                     String type, 
-                     String name, 
-                     int name_end)
+  public JavaMethod(JavaClass parent, 
+                    int modifiers, 
+                    String type, 
+                    String name, 
+                    int name_end)
     throws InjectorParseException
   {
     super(parent, modifiers, type, name);

@@ -301,7 +301,7 @@ public final class Injector
                        if null, there is no containing class, and 
                        the feature must be a class itself.
   */
-  private ClassFeature parseFeature(ClassClass parent)
+  private JavaFeature parseFeature(JavaClass parent)
     throws IOException, EndException, InjectorParseException
   {
     return parseFeature(parent, buf.toString());
@@ -311,9 +311,9 @@ public final class Injector
      The same as parseFeature(ClassClass) but the first token has
      already been fetched from the input stream.
      @parameter bufs the first token of the class feature.
-     @see #parseFeature(ClassClass)
+     @see #parseFeature(JavaClass)
   */
-  private ClassFeature parseFeature(ClassClass parent, String bufs)
+  private JavaFeature parseFeature(JavaClass parent, String bufs)
     throws IOException, EndException, InjectorParseException
   {
     int modifiers=0;
@@ -393,21 +393,21 @@ public final class Injector
 
     if(c=='(') // it's a method/constructor
     {
-      ClassMethod cf=
-        new ClassMethod(parent, modifiers, featuretype, featurename, position_name_end);
+      JavaMethod cf=
+        new JavaMethod(parent, modifiers, featuretype, featurename, position_name_end);
       parseMethod(cf);
       return cf;
     }
     else // it's an attribute
     {
-      ClassAttribute cf=
-        new ClassAttribute(parent, modifiers, featuretype, featurename);
+      JavaAttribute cf=
+        new JavaAttribute(parent, modifiers, featuretype, featurename);
       parseAttribute(cf, c);
       return cf;
     }
   }
 
-  private void parseMethod(ClassMethod cf)
+  private void parseMethod(JavaMethod cf)
     throws IOException, EndException, InjectorParseException
   {
     char c=readToken();
@@ -488,7 +488,7 @@ public final class Injector
     }
   }
 
-  private void parseAttribute(ClassAttribute cf, char c)
+  private void parseAttribute(JavaAttribute cf, char c)
     throws IOException, EndException, InjectorParseException
   {
     switch(c)
@@ -515,7 +515,7 @@ public final class Injector
     }
   }
 
-  private ClassClass parseClass(ClassClass parent, int modifiers)
+  private JavaClass parseClass(JavaClass parent, int modifiers)
     throws IOException, EndException, InjectorParseException
   {
     if(readToken()!='\0')
@@ -523,8 +523,8 @@ public final class Injector
     String classname=buf.toString();
     //System.out.println("class ("+java.lang.reflect.Modifier.toString(modifiers)+") >"+classname+"<");
 
-    ClassClass cc=
-      new ClassClass(parent, packagename, modifiers, classname);
+    JavaClass cc=
+      new JavaClass(parent, packagename, modifiers, classname);
     //cc.print(System.out);
 
     consumer.onClass(cc);

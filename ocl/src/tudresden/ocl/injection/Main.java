@@ -44,7 +44,7 @@ final class OclInjector implements InjectionConsumer
      Collects all methods (ClassMethod) of the current class, except automatically generated methods.
      Is used only, if delayinsertions is true. Otherwise methods is null.
      @see #delayinsertions
-     @see ClassMethod
+     @see JavaMethod
   */
   private ArrayList methods=null;
 
@@ -57,7 +57,7 @@ final class OclInjector implements InjectionConsumer
   
   /**
      Collects all attributes (ClassAttribute) of the current class, which have element-type set.
-     @see ClassAttribute
+     @see JavaAttribute
   */
   private ArrayList typedAttributes=null;
 
@@ -94,7 +94,7 @@ final class OclInjector implements InjectionConsumer
     
   private boolean discardnextfeature=false;
 
-  public void onClass(ClassClass cc)
+  public void onClass(JavaClass cc)
   {
     discardnextfeature=false;
 
@@ -106,13 +106,13 @@ final class OclInjector implements InjectionConsumer
     typedAttributes=new ArrayList();
   }
 
-  public void onClassEnd(ClassClass cc) throws IOException
+  public void onClassEnd(JavaClass cc) throws IOException
   {
     if(clean) return;
 
     if(delayinsertions)
       for(Iterator i=methods.iterator(); i.hasNext(); )
-        writeWrapper((ClassMethod)i.next());
+        writeWrapper((JavaMethod)i.next());
     writeInvariants(cc.getName());
 
     methods=(ArrayList)
@@ -121,7 +121,7 @@ final class OclInjector implements InjectionConsumer
       (typedAttributes_stack.remove(typedAttributes_stack.size()-1));
   }
   
-  public void onMethodHeader(ClassMethod cf) 
+  public void onMethodHeader(JavaMethod cf) 
     throws java.io.IOException
   {
     if(clean || cf.isConstructor() || cf.isStatic())
@@ -133,27 +133,27 @@ final class OclInjector implements InjectionConsumer
   private String last_element_type=null;
   private String last_key_type=null;
 
-  public void onClassFeature(ClassFeature cf) 
+  public void onClassFeature(JavaFeature cf) 
     throws IOException, InjectorParseException
   {
     if(!clean)
     {
-      if( cf instanceof ClassMethod && 
-          !((ClassMethod)cf).isConstructor() && 
+      if( cf instanceof JavaMethod && 
+          !((JavaMethod)cf).isConstructor() && 
           !cf.isStatic() && 
           !discardnextfeature)
       {
         if(delayinsertions)
           methods.add(cf);
         else
-          writeWrapper((ClassMethod)cf);
+          writeWrapper((JavaMethod)cf);
       }
       boolean notYetAddedToTypedAttributes=true;
       if(last_element_type!=null)
       {
-        if(cf instanceof ClassAttribute)
+        if(cf instanceof JavaAttribute)
         {
-          ((ClassAttribute)cf).setElementType(last_element_type);
+          ((JavaAttribute)cf).setElementType(last_element_type);
           typedAttributes.add(cf);
           notYetAddedToTypedAttributes=false;
         }
@@ -163,9 +163,9 @@ final class OclInjector implements InjectionConsumer
       }
       if(last_key_type!=null)
       {
-        if(cf instanceof ClassAttribute)
+        if(cf instanceof JavaAttribute)
         {
-          ((ClassAttribute)cf).setKeyType(last_key_type);
+          ((JavaAttribute)cf).setKeyType(last_key_type);
           if(notYetAddedToTypedAttributes)
             typedAttributes.add(cf);
         }
@@ -224,7 +224,7 @@ final class OclInjector implements InjectionConsumer
     o.write(INV_METHOD);
     o.write("()\n  {\n");
     for(Iterator i=typedAttributes.iterator(); i.hasNext(); )
-      writeElementChecker((ClassAttribute)i.next());
+      writeElementChecker((JavaAttribute)i.next());
     SortedFragments sf=
       codefragments!=null ? (SortedFragments)(codefragments.get(classname)) : null;
     if(sf!=null)
@@ -254,7 +254,7 @@ final class OclInjector implements InjectionConsumer
   */
   public static final String OCL_AUTHOR="ocl_injector";
 
-  public final void writeWrapperInvariant(ClassFeature cf) throws IOException
+  public final void writeWrapperInvariant(JavaFeature cf) throws IOException
   {
     if(!java.lang.reflect.Modifier.isStatic(cf.getModifiers()))
     {
@@ -264,7 +264,7 @@ final class OclInjector implements InjectionConsumer
     }
   }
 
-  void writeCall(ClassMethod cf) throws IOException
+  void writeCall(JavaMethod cf) throws IOException
   {
     Writer o=output;
     o.write("      ");
@@ -281,7 +281,7 @@ final class OclInjector implements InjectionConsumer
     o.write(");\n");
   }
 
-  public final void writeWrapper(ClassMethod cf) throws IOException
+  public final void writeWrapper(JavaMethod cf) throws IOException
   {
     Writer o=output;
     o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
@@ -427,7 +427,7 @@ final class OclInjector implements InjectionConsumer
     o.write("  }");
   }
 
-  public void writeElementChecker(ClassAttribute cf) throws IOException
+  public void writeElementChecker(JavaAttribute cf) throws IOException
   {
     Class et=imports.findType(cf.getType());
 
@@ -445,7 +445,7 @@ final class OclInjector implements InjectionConsumer
   }
 
   public void writeIteratorChecker(
-      ClassAttribute cf,
+      JavaAttribute cf,
       String contenttype, 
       String createset)
     throws IOException

@@ -27,10 +27,10 @@ public interface InjectionConsumer
   public void onPackage(String packagename) throws InjectorParseException;
 
   public void onImport(String importname);
-  public void onClass(ClassClass cc);
-  public void onClassEnd(ClassClass cc) throws java.io.IOException;
-  public void onMethodHeader(ClassMethod cf) throws java.io.IOException;
-  public void onClassFeature(ClassFeature cf) throws java.io.IOException, InjectorParseException;
+  public void onClass(JavaClass cc);
+  public void onClassEnd(JavaClass cc) throws java.io.IOException;
+  public void onMethodHeader(JavaMethod cf) throws java.io.IOException;
+  public void onClassFeature(JavaFeature cf) throws java.io.IOException, InjectorParseException;
   
   /**
      @return false: if the comment should be discarded and the next classfeature to be blocked.
