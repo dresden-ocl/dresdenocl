@@ -1201,28 +1201,32 @@ public class Main
       if(conf.violationmacro==null)
         conf.violationmacro="System.out.println";
 
+      if((xmimodel==null) == (reflectionmodel==null))
+      {
+        System.out.println("There must be exaxtly one of --xmi-model and --reflect-model");
+        System.out.println(usage);
+        return;
+      }
+
+      if(xmimodel!=null)
+      {
+        conf.modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel,xmimodel);
+      }
+      else
+      {
+        if(nameadapter==null)
+          nameadapter=new SimpleNameAdapter();
+        conf.modelfacade=new ReflectionFacade
+        (
+          (String[])(reflectionmodel.toArray(new String[0])),
+          new DefaultReflectionAdapter(),
+          nameadapter,
+          new SourceReflectionExtender()
+        );
+      }
+
       if(constraintfile!=null)
       {
-        if((xmimodel==null) == (reflectionmodel==null))
-        {
-          System.out.println("There must be exaxtly one of --xmi-model and --reflect-model");
-          System.out.println(usage);
-          return;
-        }
-        if(xmimodel!=null)
-          conf.modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel,xmimodel);
-        else
-        {
-          if(nameadapter==null)
-            nameadapter=new SimpleNameAdapter();
-          conf.modelfacade=new ReflectionFacade
-          (
-            (String[])(reflectionmodel.toArray(new String[0])),
-            new DefaultReflectionAdapter(),
-            nameadapter,
-            new SourceReflectionExtender()
-          );
-        }
         makeCode(new File(constraintfile), conf);
       }
             
