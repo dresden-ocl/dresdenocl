@@ -83,8 +83,9 @@ public class TestILSQLCodeGenerator extends TestCase {
 	}
 		
 	public void testPrepareJoin() {
-		List guides = new ArrayList();
+                List guides = new ArrayList();
 		Guide guide;
+                theCG.setJoinMode(true);
 		
 		// attribute access with navigation
 		guide = new Guide(false);
@@ -98,7 +99,7 @@ public class TestILSQLCodeGenerator extends TestCase {
 		guides.add(guide);
 		
 		theCG.reset();
-		theCG.prepareJoin(guides);
+                theCG.prepareNavigation(guides);
 		
 		//System.err.println(theCG.getTableRepresentation());
 		//System.err.println(theCG.getJoinRepresentation());
@@ -130,7 +131,7 @@ public class TestILSQLCodeGenerator extends TestCase {
 		guides.add(guide);
 		
 		theCG.reset();
-		theCG.prepareJoin(guides);
+		theCG.prepareNavigation(guides);
 		
 		//System.err.println(theCG.getTableRepresentation());
 		//System.err.println(theCG.getJoinRepresentation());
@@ -154,7 +155,7 @@ public class TestILSQLCodeGenerator extends TestCase {
 		guides.add(guide);
 				
 		theCG.reset();
-		theCG.prepareJoin(guides);
+		theCG.prepareNavigation(guides);
 		
 		//System.err.println(theCG.getTableRepresentation());
 		//System.err.println(theCG.getJoinRepresentation());
@@ -162,7 +163,95 @@ public class TestILSQLCodeGenerator extends TestCase {
 		assert(theCG.getTableRepresentation().equals("A TA0,A TA1"));
 		assert(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.RAPK) and " +
 							    "(TA1.APK = SELF.APK)"));				
+                
+                theCG.setJoinMode(false);
 	}
+        
+        public void testPrepareDerivedTable() {
+                List guides = new ArrayList();
+		Guide guide;
+		
+		// attribute access with navigation
+		guide = new Guide(false);
+		guide.add("A1","A","APK");
+		guides.add(guide);
+		
+		guide = new Guide(true);
+		guide.add("APK","A","APK");
+		guide.add("AFK","C","CPK");
+		guide.setAlias("SELF");
+		guides.add(guide);
+		
+		theCG.reset();
+		theCG.prepareNavigation(guides);
+                
+                //System.err.println(theCG.getTableRepresentation());
+		
+        	assert(equal(theCG.getTableRepresentation(), 
+                             "(select A1 from A where APK in" +
+                             "(select AFK from C where CPK = SELF.CPK))"
+                             )
+                );
+		assert(theCG.getJoinRepresentation().equals(""));
+		
+		// pur navigation over several guides
+		guides.clear();
+		
+		guide = new Guide(true);
+		guide.add("APK","A","APK");
+		guide.add("AFK","AB","BFK");
+		guide.add("BPK","B","BPK");
+		guides.add(guide);
+		
+		guide = new Guide(true);
+		guide.add("BPK","B","BPK");
+		guide.add("BFK","BC","CFK");
+		guide.add("CPK","C","CPK");
+		guides.add(guide);
+		
+		guide = new Guide(true);
+		guide.add("CPK","C","CPK");
+		guide.add("CFK","CD","DFK");
+		guide.add("DPK","D","DPK");
+		guide.setAlias("SELF");
+		guides.add(guide);
+		
+		theCG.reset();
+		theCG.prepareNavigation(guides);
+                
+                //System.err.println(theCG.getTableRepresentation());
+		
+		assert(equal(theCG.getTableRepresentation(),
+                             "(select APK from A where APK in\n" +
+                             "(select AFK from AB where BFK in\n" +
+                             "(select BPK from B where BPK in\n" +
+                             "(select BFK from BC where CFK in\n" +
+                             "(select CPK from C where CPK in\n" + 
+                             "(select CFK from CD where DFK in\n" +
+                             "(select DPK from D where DPK = SELF.DPK)))))))"
+                ));
+		assert(theCG.getJoinRepresentation().equals(""));
+		
+		// navigation to same table
+		guides.clear();
+		
+		guide = new Guide(true);
+		guide.add("APK","A","APK");
+		guide.add("RAPK","A","APK");
+		guide.setAlias("SELF");
+		guides.add(guide);
+				
+		theCG.reset();
+		theCG.prepareNavigation(guides);
+                
+                //System.err.println(theCG.getTableRepresentation());
+		
+                assert(equal(theCG.getTableRepresentation(),
+                             "(select APK from A where APK in\n" +
+                             "(select RAPK from A where APK = SELF.APK))"
+                ));
+		assert(theCG.getJoinRepresentation().equals(""));	      
+        }
 		
         public void testUniversityExampleInv() {
             String expres;
@@ -177,19 +266,46 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "create or replace view inv1 as (                                                             ";
             expres += " select * from OV_PERSON SELF                                                                ";
             expres += " where not (                                                                                 ";
-            expres += "     (select VALUE                                                                           ";
-            expres += "      from OV_GRADE TA2,OV_PERSON TA3,OV_PERSON TA4                                          ";
-            expres += "      where (TA2.GID = TA3.GRADE) and (TA3.PID = TA4.SUPERVISOR) and (TA4.PID = SELF.PID))   ";
+            expres += "     (select VALUE from OV_GRADE where GID in                                                ";
+            expres += "     (select GRADE from OV_PERSON where PID in                                               ";
+            expres += "     (select SUPERVISOR from OV_PERSON where PID = SELF.PID)))                               ";            
             expres += "     >                                                                                       ";
-            expres += "     (select VALUE                                                                           ";         
-            expres += "      from OV_GRADE TA0,OV_PERSON TA1                                                        ";
-            expres += "      where (TA0.GID = TA1.GRADE) and (TA1.PID = SELF.PID))                                  ";
+            expres += "     (select VALUE from OV_GRADE where GID in                                                ";         
+            expres += "     (select GRADE from OV_PERSON where PID = SELF.PID))                                     ";
             expres += "))                                                                                           ";
             assert(equal(genres, expres));
             
             // inv2
+            genres = getSQLCode("context Faculty inv inv2: self.subFacility->size >= 2");
+            expres = new String();
+            expres += "create or replace view inv2 as (                                                             ";
+            expres += " select * from OV_FACULTY SELF                                                               ";
+            expres += " where not (select NVL(COUNT(*),0)                                                           ";
+            expres += "            from OV_FACILITY                                                                 ";
+            expres += "            where FID in                                                                     ";
+            expres += "            (select FID from OV_FACILITY where SUPERFACILITY in                              ";        
+            expres += "             (select FID from OV_FACILITY where FID = SELF.FID))                             ";
+            expres += "            >= 2))                                                                           ";
+            assert(equal(genres, expres));
             
-    
+            genres = getSQLCode("context Faculty inv inv3: self.subFacility->forAll(oclIsTypeOf(Institute))");
+            expres = new String();
+            expres += "create or replace view inv3 as (                                                             ";
+            expres += " select * from OV_FACULTY SELF                                                               ";
+            expres += " where not (not exists (                                                                     ";
+            expres += "                        (select FID from OV_FACILITY where SUPERFACILITY in                  ";
+            expres += "                        (select FID from OV_FACILITY where FID = SELF.FID))                  ";
+            expres += "                         minus                                                               ";
+            expres += "                        select FID from OV_FACILITY TUDOCLITER0                              ";
+            expres += "                        where exists (                                                       ";
+            expres += "                                      select FID from OV_INSTITUTE                           ";
+            expres += "                                      where FID = TUDOCLITER0.FID)                           ";
+            expres += "                              and not exist (                                                ";
+            expres += "                                      select FID from OV_FACILITY                            ";
+            expres += "                                      where FID = TUDOCLITER0.FID)                           ";
+            expres += "            )                                                                                ";
+            expres += "))                                                                                           ";
+            assert(equal(genres, expres));
             
             } catch(IOException e) {
                 System.err.println(e.toString());
@@ -200,6 +316,7 @@ public class TestILSQLCodeGenerator extends TestCase {
 		TestSuite t=new TestSuite();
 
     		t.addTest(new TestILSQLCodeGenerator("testPrepareJoin"));
+                t.addTest(new TestILSQLCodeGenerator("testPrepareDerivedTable"));
                 t.addTest(new TestILSQLCodeGenerator("testUniversityExampleInv"));
     		
     		return t;

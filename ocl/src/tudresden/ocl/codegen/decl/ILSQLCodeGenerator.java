@@ -63,6 +63,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         Set involvedTables;
         Hashtable declarators;
 	boolean formatCode = true;
+        boolean joinMode = false; 
 	int aliasCount;
 	int joinAliasCount = 0;
 	String tableRepresentation;
@@ -196,11 +197,29 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 		aliasCount = 0;
 		joinAliasCount = 0;
 	}
+        
+        /**
+         *
+         */
+        public void setJoinMode(boolean b) {
+            joinMode = b;
+        }
+        
+        /**
+	 * @pre guides.size() > 1
+	 */
+        public void prepareNavigation(List guides) {
+            if (joinMode == true) {
+                prepareClassicJoin(guides);
+            } else {
+                prepareDerivedTable(guides);
+            }            
+        }
 		
 	/**
 	 * @pre guides.size() > 1
 	 */
-	public void prepareJoin(List guides) {
+	public void prepareClassicJoin(List guides) {
 		StringBuffer tables = new StringBuffer();
 		StringBuffer joins = new StringBuffer();
 		String select = "", from = "", where = "", tableAlias;
@@ -263,6 +282,68 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 		tableRepresentation = tables.toString();
 		joinRepresentation = joins.toString();
 	}
+        
+        /**
+	 * @pre guides.size() > 1
+	 */
+        public void prepareDerivedTable(List guides) {
+        	String select = "", from = "", where = "", navExpr = "", koc, thisCode = "";
+                String ph = "$$_dt_$$";
+		Guide guide;                           
+                tableRepresentation = "";
+                                                   
+                for (int i=0; i<guides.size(); i++) {
+			guide = (Guide)guides.get(i); 
+			guide.reset();
+						
+			for (int k=0; k<guide.numberOfSteps(); k++) {
+				guide.next();
+				
+				// skip unnecessary joins
+				if ((from.equals(guide.getFrom())) &&
+				    (where.equals(guide.getSelect())) &&
+				    (where.equals(guide.getWhere())))
+					continue;
+                                
+                                // add derived table to table representation
+                                ca.reset();
+                                ca.setArgument("object", guide.getSelect());
+                                ca.setArgument("table1", guide.getFrom());
+                                ca.setArgument("ref_object", guide.getWhere());
+                                
+                                // last step of whole derived table must be treated in a special way
+                                if ((i == (guides.size() - 1))  && (k == (guide.numberOfSteps() - 1))) { 
+                                    ca.setArgument("context_alias", guide.getAlias());
+                                    ca.setArgument("context_object", guide.getWhere());
+                                    koc = "navigation_context";
+                                } else {                                    
+                                    ca.setArgument("table2", ph);
+                                    koc = "navigation";
+                                }				
+                                
+				try {
+        			    thisCode = ca.getCodeFor("feature_call", koc);                                    
+        			} catch (Exception e) {
+        			    throw new RuntimeException("navigation: " + e.toString());
+        			}                                                                
+                                
+                                if (navExpr.length() == 0) {
+                                    navExpr = thisCode;
+                                } else {                                    
+                                    if (thisCode.endsWith("\n")) thisCode = thisCode.substring(0, thisCode.length()-1);
+                                    navExpr = replaceInString(navExpr, ph, thisCode);
+                                }                                                                
+                                
+                                // keep current step in mind to skip unnecessary joins later on
+				select = guide.getSelect();
+				from = guide.getFrom();
+				where = guide.getWhere();
+			}				
+		}		
+                
+                tableRepresentation = navExpr;
+		joinRepresentation = "";          
+        }
 	
 	public String getTableRepresentation() {
 		return tableRepresentation;
@@ -614,7 +695,12 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         			// assign guides list to last postfix expression tail (necessary for type features without successor)
         			if (i == (tail.length-1)) {
         				navigation.put(tail[i], guides);
-        			}        			
+        			}      
+                                
+                                // assign guides list to primary expression, if just one tail exists that is an ocl token
+                                if ((tail.length == 1) && (typeFeatSucc == false)) { 
+                                        navigation.put(pex, guides);
+                                }                                
         		}
 	  	}
 
@@ -624,10 +710,23 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                 String task = (String)getIn(node);
     		if (task == null) return;
                 String thisCode = "";
-                List guides = (List)navigation.get(node.parent());
+                List guides = (List)navigation.get(node);
+                Guide guide;
 
-                if ((guides != null) && (guides.size() > 1)) {
+                if (guides != null) {
+                    guide = (Guide)guides.get(0);
+                    guide.reset();
+                    guide.next();
                     
+                    ca.reset();
+                    ca.setArgument("context_alias", node.getPathName().toString().trim().toUpperCase());
+                    ca.setArgument("column", guide.getSelect());
+                    
+                    try {
+        	        thisCode = ca.getCodeFor("feature_call", "attribute_context");
+        	    } catch (Exception e) {
+        	        throw new RuntimeException("attribute_context at feature primary expression: " + e.toString());
+        	    }
                 }
 
                 // replace task with generated target code
@@ -682,7 +781,9 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     			    			   				
     			if (guide.isNavigation()) {
                                 // navigation only
-                                prepareJoin(guides);
+                                prepareNavigation(guides);
+                                thisCode = tableRepresentation;
+                                /*
                                 ca.reset();
                                 ca.setArgument("object", joinTargetObject);
                                 ca.setArgument("tables", tableRepresentation);
@@ -692,6 +793,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         			} catch (Exception e) {
         			    throw new RuntimeException("navigation: " + e.toString());
         			}
+                                */
 	    		} else {
 	    			if (guides.size() == 1) {
 	    				// attribute access without navigation
@@ -705,7 +807,9 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         				}
 	    			} else {
 	    				// attribute access with navigation
-	    				prepareJoin(guides);
+	    				prepareNavigation(guides);
+                                        thisCode = tableRepresentation;
+                                        /*
     					ca.reset();
     					ca.setArgument("column", guide.getSelect());
     					ca.setArgument("tables", tableRepresentation);
@@ -716,6 +820,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         				} catch (Exception e) {
         					throw new RuntimeException("attribute_navigation: " + e.toString());
         				}
+                                        */
 	    			}	    			    						
     			}
    		} else {
@@ -1195,15 +1300,16 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         throws IllegalStateException {
             String typeName;
             AExpression aexp;
-            MappedClass mc;            
+            MappedClass mc = null;            
             
             aexp = (AExpression)((AActualParameterList)((AFeatureCallParameters)node.getFeatureCallParameters()).getActualParameterList()).getExpression();
             typeName = ((OclType)theTree.getNodeType(aexp)).getType().toString();
-            mc = map.getMappedClass(typeName);
+            mc = map.getMappedClass(typeName);            
             
             if (mc.supertypes().size() == 0) return null; 
             if (mc.supertypes().size() > 1) throw new IllegalStateException("Illegal number of supertypes for type: " + typeName + " !");
-            if (mc.getTables().size() != 1) throw new IllegalStateException("Illegal number of class tables for supertype of: " + typeName + " !");
+            mc = map.getMappedClass((String)mc.supertypes().iterator().next());
+            if (mc.getTables().size() != 1) throw new IllegalStateException("Illegal number of class tables for supertype of: " + typeName + " !");            
                                     
             return ((Table)mc.getTables().get(0));
         }
