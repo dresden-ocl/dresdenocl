@@ -930,7 +930,7 @@ public class Main
       "      the model given as xmi file\n"+
       "  -r  --reflection-model modelpackage\n"+
       "      the model given by reflection\n"+
-      "  -n  --name-adapter [simple|argo]\n"+
+      "  -n  --name-adapter [none|argo]\n"+
       "      the nameadapter\n"+
       "  -is --invariant-scope [all|private|protected|package|public|explicit]\n"+
       "      the scope of invariants\n"+
@@ -1013,13 +1013,13 @@ public class Main
             System.out.println(usage);
             return;
           }
-          if("simple".equals(args[i]))
+          if("none".equals(args[i]))
             nameadapter=new SimpleNameAdapter();
           else if("argo".equals(args[i]))
             nameadapter=new ArgoNameAdapter();
           else
           {
-            System.out.println("name adapter must be 'simple' or 'argo'.");
+            System.out.println("name adapter must be 'none' or 'argo'.");
             System.out.println(usage);
             return;
           }
