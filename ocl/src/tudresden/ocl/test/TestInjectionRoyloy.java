@@ -142,11 +142,7 @@ public class TestInjectionRoyloy extends TestInjection
 			cm1.ignoreCard(0, null, 2);
 			assertNoViolationsNowLeft();
 			expectViolationNow("violated ocl invariant 'title_gender' on object 'tudresden.ocl.test.royloy.Customer[Customer1]'.");
-			// is always true, because Injector.extractDocParagraphs
-			// makes title=title@pre to title=title@pre.
-			// TODO
-			// BUG
-			//expectViolationNow("violated ocl postcondition 'title_unchanged' on object 'tudresden.ocl.test.royloy.Customer[Customer1]' operation 'ignoreCard(index : Integer ; c : CustomerCard ; resultat : Integer)'.");
+			expectViolationNow("violated ocl postcondition 'title_unchanged' on object 'tudresden.ocl.test.royloy.Customer[Customer1]' operation 'ignoreCard(index : Integer ; c : CustomerCard ; resultat : Integer)'.");
 			final String title = cm1.title;
 			cm1.ignoreCard(42, null, 1);
 			cm1.title = title;

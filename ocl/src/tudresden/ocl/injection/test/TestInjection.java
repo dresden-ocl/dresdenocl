@@ -66,6 +66,7 @@ public class TestInjection extends TestCase
   {
     TestSuite suite=new TestSuite();
     suite.addTest(new TestInjection("testInjection"));
+    suite.addTest(new TestExtractDocParagraphs("testIt"));
     return suite;
   }
 

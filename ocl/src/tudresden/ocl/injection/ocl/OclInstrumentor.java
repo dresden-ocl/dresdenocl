@@ -20,6 +20,8 @@ package tudresden.ocl.injection.ocl;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Map;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.lang.reflect.Modifier;
@@ -67,25 +69,52 @@ public final class OclInstrumentor implements TaskInstrumentor
 	{
 	}
 	
+	private final void processConstraint(final Object o, final String type, final String context)
+	{
+		if(o instanceof String)
+			config.makeConstraint((String)o, type, context);
+		else
+		{
+			for(Iterator i = ((List)o).iterator(); i.hasNext(); )
+				config.makeConstraint((String)i.next(), type, context);
+		}
+	}
+	
 	public void onClassFeature(final JavaFeature jf, final String doccomment)
 	{
 		if(!jf.getParent().isInterface() && doccomment!=null)
 		{
-			addInvariant(jf.getParent(), Injector.extractDocParagraphs(doccomment, "invariant"));
+			final Map map = Injector.extractDocParagraphs(doccomment);
+			
+			{
+				final Object o = map.get("invariant");
+				if(o!=null)
+					processConstraint(o, "inv", jf.getParent().getName());
+			}
+			
 			if(jf instanceof JavaMethod)
 			{
 				final JavaMethod jm = (JavaMethod)jf;
-				addPrecondition(jm,  Injector.extractDocParagraphs(doccomment, "precondition"));
-				addPostcondition(jm, Injector.extractDocParagraphs(doccomment, "postcondition"));
+				String context = null;
+				{
+					final Object o = map.get("precondition");
+					if(o!=null)
+					{
+						context = makeContext(jm);
+						processConstraint(o, "pre", context);
+					}
+				}
+				{
+					final Object o = map.get("postcondition");
+					if(o!=null)
+					{
+						if(context!=null)
+							context = makeContext(jm);
+						processConstraint(o, "post", context);
+					}
+				}
 			}
 		}
-	}
-	
-	private final void addInvariant(JavaClass jc, String[] text)
-	{
-		if(text==null) return;
-		for(int i=0; i<text.length; i++)
-			config.makeConstraint(text[i], "inv", jc.getName());
 	}
 	
 	private final void fillInSignature(final StringBuffer buf, final JavaMethod jm)
@@ -132,20 +161,6 @@ public final class OclInstrumentor implements TaskInstrumentor
 		buf.append("::");
 		fillInSignature(buf, jm);
 		return buf.toString();
-	}
-	
-	private final void addPrecondition(final JavaMethod jm, final String[] text)
-	{
-		if(text==null) return;
-		for(int i=0; i<text.length; i++)
-			config.makeConstraint(text[i], "pre", makeContext(jm));
-	}
-	
-	private final void addPostcondition(final JavaMethod jm, final String[] text)
-	{
-		if(text==null) return;
-		for(int i=0; i<text.length; i++)
-			config.makeConstraint(text[i], "post", makeContext(jm));
 	}
 	
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed)
