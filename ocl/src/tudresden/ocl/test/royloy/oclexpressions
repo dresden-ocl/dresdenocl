@@ -1,6 +1,7 @@
 
 context Person
-inv age: age>=0
+inv age_positive:
+age>=0
 
 context Company
 inv manager_is_employee:
@@ -21,7 +22,7 @@ inv manager_is_employee3:
 managedCompanies->forAll(employees->includes(self))
 
 context Person
-inv age2:
+inv age_greater_zero:
 employers.employees->forAll(age>0)
 
 context Person inv husband:
@@ -80,7 +81,8 @@ inv: self.deliveredServices.transactions->iterate(
     )
 -- to do: 't.points' was 'points' -> default context in iterate
 
-context Person inv:
+context Person
+inv age0to199:
 Set{ 0 .. 199 }->includes(age)
 
 context Person inv nameUpperCase:
@@ -118,7 +120,8 @@ or
   )
 )
 
-context Bank inv:
+context Bank
+inv bank_customer0:
 customer->isEmpty
 or
 customer[0]->size=1
