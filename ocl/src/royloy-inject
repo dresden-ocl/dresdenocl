@@ -2,7 +2,7 @@ java -cp .:xerces.jar \
   tudresden.ocl.injection.Main \
   --constraint-file tudresden/ocl/test/royloy/oclexpressions \
   --reflection-model tudresden.ocl.test.royloy \
-  --violation-macro "tudresden.ocl.test.TestInjection.theInstance.onViolation" \
+  --violation-macro "tudresden.ocl.test.TestInjectionRoyloy.theInstance.onViolation" \
   --trace-types \
   --modcount-hash \
   --modify \
