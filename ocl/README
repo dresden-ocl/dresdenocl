@@ -145,9 +145,9 @@ except of the file time stamps.
     This number is represesented by <new release number> below.
 
 4a) Edit CHANGELOG: Replace the title of the first section
-      "Changes from x.y.z to current CVS"
+      "Changes from release x.y.z to current CVS"
     to
-      "Changes from x.y.z to <new release number>"
+      "Changes from release x.y.z to release <new release number>"
 
 4b) cvs commit -m "closed section for <new release number>" CHANGELOG
 
@@ -164,12 +164,55 @@ except of the file time stamps.
       This means: all files maintained in CVS.
 
 7a) Edit CHANGELOG: Add a new section on top:
-      "Changes from <new release number> to current CVS"
+      "Changes from release <new release number> to current CVS"
+
+    Don't forget to add in the appropriate subsections that are also present
+    in the other release sections.
 
 7b) cvs commit -m "opened section for post-<new release number>" CHANGELOG
 
 8)  Upload the files created by 6) to sourceforge into the
     "released files section".
+
+    8a) FTP the files to sourceforge's incoming directory:
+
+      1. cd dist
+      2. ftp upload.sourceforge.net (sourceforge doesn't allow scp or sftp here)
+      3. Login as "anonymous"
+      4. Use your e-mail address as the password for this login
+      5. binary
+      6. cd /incoming
+      7. put dresden-ocl-<new release number>.tar.gz
+      8. put dresden-ocl-<new release number>-src.tar.gz
+      9. bye
+      
+    8b) Login to sourceforge and go to the project page
+    8c) Access the File Release System under 'Admin'->'Edit/Release Files'
+    8d) Click on 'Add Release' next to the line for the 'dresden-ocl' package.
+    8e) enter <new release number> for the name of the release and make sure
+        that the name of the package is indeed 'dresden-ocl'.
+    8f) Provide release notes and the relevant section of the CHANGELOG. 
+        Everything else should normally stay at the defaults.
+        Hit 'Submit/Refresh'
+    8g) Check the files you just uploaded via ftp on the list lower on the 
+        same page and hit the 'Add Files' button.
+    8h) Select the appropriate file types as well as 'Platform independent' for
+        the processor type for both files. Note that there's a difference between
+        'GZ' and 'Source GZ'! Also make sure that all the other info is correct.
+        Then hit the 'Update/Refresh' button. Do so for each file one after the other,
+        Sourceforge will forget whatever you entered for the second file (except the
+        things you already stored :-) ) when you update the first one.
+    8i) If people monitor the package send them an announcement (same text as to 
+        everybody else).
+    8k) Download the files from sourceforge and check that they are identical to the
+        files in dist.
+        
+      1. Go to the project summary page.
+      2. Select the release from the 'Files Released' section.
+      3. Download your released files to a separate directory.
+      4. Use diff to compare the files.
+      5. If any differences occur repeat from 8a) (except you don't need to create the
+         release anymore, instead remove the faulty files and reassign the correct files.)
 
 9)  Make announcement in dresden-ocl-discussion.
     Subject is "released version <new release number>". Put the corresponding
