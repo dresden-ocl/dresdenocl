@@ -103,6 +103,19 @@ public abstract class Example implements Runnable
     }
   }  
 
+  /**
+    * Testcomment
+    */
+  private int a;
+  
+  private List collectionWithoutComment;
+  
+  /**
+    * Testcomment
+    */
+  private int b;
+  
+  private Map mapWithoutComment;
 
   private Example()
   {
@@ -157,6 +170,10 @@ public abstract class Example implements Runnable
   Integer anInteger=new Integer(5);
   
   /**
+    * A collection of dates.
+    *
+    * Here are some lines to test the reveng GUI....
+    *
      @element-type Date
   */
   List dates=new ArrayList();
@@ -178,6 +195,11 @@ public abstract class Example implements Runnable
   Format aFormat=new java.text.DecimalFormat();
 
   /**
+  *
+  * A map from strings to integers.
+  * * * * *  These stars should be removed by the reveng GUI...
+  
+  *
      @element-type Integer
      @key-type String
   */
