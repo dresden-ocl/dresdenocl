@@ -8,6 +8,11 @@ Changes that could break older environments
 Other changes
 -------------
 
+* [OCL Editor]   Modified OclToolbar to accept any UI instance. For instances 
+that no special floating code has been implemented for, the toolbar is set to be 
+unfloatable instead of throwing an exception. This should handle issues with 
+L&Fs like Aqua on Apple.
+
 Fixed bugs
 ----------
 
@@ -19,10 +24,12 @@ Changes to release 1.1
 Changes that could break older environments
 -------------------------------------------
 
-* [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types to sequence types
+* [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types
+to sequence types
 
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
-  [OCL Library]  to also include methods defined by java.lang.Object if the original
+  [OCL Library]  to also include methods defined by java.lang.Object if the 
+original
                  classifier is an interface.
 
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
@@ -33,9 +40,12 @@ Changes that could break older environments
 
 Other changes
 -------------
-* [OCL Editor]   Exchanged icons to apply with licencing requirements of an opensource system.
+* [OCL Editor]   Exchanged icons to apply with licencing requirements of an 
+opensource system.
 * [Java Code Generator]
-                 Fixed generation of "->excluding", so that a cast is generated, too.
+                 Fixed generation of "->excluding", so that a cast is generated, 
+
+too.
 
 * [Type Checker] Enhanced DefaultTypeFactory to recognize collection types.
 
@@ -56,15 +66,19 @@ Fixed bugs
 ----------
 * [OCL Editor]   Fixed issue #511143, by hardcoding wrapping at column 50.
 
-* [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types to sequence types
+* [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types 
+to sequence types
 
 * [Java Code Generator]
-                 Fixed generation of "->excluding", so that a cast is generated, too.
+                 Fixed generation of "->excluding", so that a cast is generated, 
+
+too.
 
 * [Type Checker] Enhanced DefaultTypeFactory to recognize collection types.
 
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
-  [OCL Library]  to also include methods defined by java.lang.Object if the original
+  [OCL Library]  to also include methods defined by java.lang.Object if the 
+original
                  classifier is an interface.
 
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
@@ -77,7 +91,8 @@ Fixed bugs
 * [Injector]     fixed NullPointerException in tudresden.ocl.injection.lib.Check
 
 * [Injector]     #223583 OCL constraints at class level
-                 Added onFileDocComment to TaskInstrumentor to allow for handling
+                 Added onFileDocComment to TaskInstrumentor to allow for 
+handling
                  of file level javadoc comments.
 
 * [Injector]     The generated code did not reset Invariant.checking_flag if

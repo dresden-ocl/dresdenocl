@@ -109,6 +109,9 @@ public class OCLToolbar extends JToolBar implements ActionListener {
           }
         }
       });
+      
+      // for this UI we know how to float
+      setFloatable (true);
     }
     else if (tbui instanceof javax.swing.plaf.basic.BasicToolBarUI) {
       super.setUI (new javax.swing.plaf.basic.BasicToolBarUI() {
@@ -126,14 +129,21 @@ public class OCLToolbar extends JToolBar implements ActionListener {
           }
         }
       });
+      
+      // for this UI we know how to float
+      setFloatable (true);
     }
     else {
-      throw new IllegalArgumentException ("L&F not valid with OCLToolbar: " + tbui);
+      //throw new IllegalArgumentException ("L&F not valid with OCLToolbar: " + tbui);
+      // throwing an exception is not a good idea here, instead just go with the
+      // UI given and set the toolbar to be unfloatable
+      super.setUI (tbui);
+      setFloatable (false);
     }
   }
   
   private void initComponents() {
-    setFloatable (true);
+    //setFloatable (true); now handled by setUI!
     
     JComboBox jcb = new JComboBox (new ActionItem[] {
       new ActionItem ("General", -1),
