@@ -118,7 +118,10 @@ Each release gets a unique number in the form of major.minor.revision.
 
 3.2. CVS Tags
 -------------
-Each release is tagged with "RELEASE_<release number>".
+Each release is tagged with "RELEASE_<release number>". Where dots ('.')
+in <release number> are replaced by underscores ('_'). This is necessary
+because cvs tags may not contain dots.
+
 The following is strictly required: after a
 
    cvs update -r RELEASE_<release number>
@@ -148,7 +151,8 @@ except of the file time stamps.
 
 4b) cvs commit -m "closed section for <new release number>" CHANGELOG
 
-5)  cvs tag RELEASE_<new release number>
+5)  cvs tag RELEASE_<new release number>, where dots ('.')
+    in <release number> are replaced by underscores ('_').
 
 6)  ant dist -Ddist.version=<new release number>
     After that, you will find the following in directory dist
