@@ -315,7 +315,7 @@ final class OclInjector implements InjectionConsumer
     o.write(cf.getName());
     o.write(" on this object.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
-    o.write("\n  */private final tudresden.ocl.injection.lib.Invariant ");
+    o.write("\n  */private final transient tudresden.ocl.injection.lib.Invariant ");
     o.write(Invariant.INVARIANT_OBJECT);
     o.write(cf.getName());
     o.write("=new tudresden.ocl.injection.lib.Invariant(\"");

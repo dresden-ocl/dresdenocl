@@ -1335,7 +1335,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant hallo on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_hallo=new tudresden.ocl.injection.lib.Invariant("hallo", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_hallo=new tudresden.ocl.injection.lib.Invariant("hallo", this);/**
     Checks ocl invariant hallo on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1352,7 +1352,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant strings on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_strings=new tudresden.ocl.injection.lib.Invariant("strings", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_strings=new tudresden.ocl.injection.lib.Invariant("strings", this);/**
     Checks ocl invariant strings on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1369,7 +1369,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant integers on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_integers=new tudresden.ocl.injection.lib.Invariant("integers", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_integers=new tudresden.ocl.injection.lib.Invariant("integers", this);/**
     Checks ocl invariant integers on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1386,7 +1386,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant dates on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_dates=new tudresden.ocl.injection.lib.Invariant("dates", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_dates=new tudresden.ocl.injection.lib.Invariant("dates", this);/**
     Checks ocl invariant dates on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1403,7 +1403,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant interfaces on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_interfaces=new tudresden.ocl.injection.lib.Invariant("interfaces", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_interfaces=new tudresden.ocl.injection.lib.Invariant("interfaces", this);/**
     Checks ocl invariant interfaces on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1420,7 +1420,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant anInterface on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_anInterface=new tudresden.ocl.injection.lib.Invariant("anInterface", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_anInterface=new tudresden.ocl.injection.lib.Invariant("anInterface", this);/**
     Checks ocl invariant anInterface on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1438,7 +1438,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant formats on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_formats=new tudresden.ocl.injection.lib.Invariant("formats", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_formats=new tudresden.ocl.injection.lib.Invariant("formats", this);/**
     Checks ocl invariant formats on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1455,7 +1455,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant poly on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_poly=new tudresden.ocl.injection.lib.Invariant("poly", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_poly=new tudresden.ocl.injection.lib.Invariant("poly", this);/**
     Checks ocl invariant poly on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1475,7 +1475,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant someMethod on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_someMethod=new tudresden.ocl.injection.lib.Invariant("someMethod", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_someMethod=new tudresden.ocl.injection.lib.Invariant("someMethod", this);/**
     Checks ocl invariant someMethod on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1496,7 +1496,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant mapuq on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapuq=new tudresden.ocl.injection.lib.Invariant("mapuq", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapuq=new tudresden.ocl.injection.lib.Invariant("mapuq", this);/**
     Checks ocl invariant mapuq on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1513,7 +1513,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant mapq on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq=new tudresden.ocl.injection.lib.Invariant("mapq", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq=new tudresden.ocl.injection.lib.Invariant("mapq", this);/**
     Checks ocl invariant mapq on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1532,7 +1532,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant mapq2 on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq2=new tudresden.ocl.injection.lib.Invariant("mapq2", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq2=new tudresden.ocl.injection.lib.Invariant("mapq2", this);/**
     Checks ocl invariant mapq2 on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1558,7 +1558,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant stringsMinusGreaterincludes_inlinehallo_ on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_stringsMinusGreaterincludes_inlinehallo_=new tudresden.ocl.injection.lib.Invariant("stringsMinusGreaterincludes_inlinehallo_", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_stringsMinusGreaterincludes_inlinehallo_=new tudresden.ocl.injection.lib.Invariant("stringsMinusGreaterincludes_inlinehallo_", this);/**
     Checks ocl invariant stringsMinusGreaterincludes_inlinehallo_ on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1575,7 +1575,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant stringsMinusGreaterincludes_inline_space_hallo_ on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_stringsMinusGreaterincludes_inline_space_hallo_=new tudresden.ocl.injection.lib.Invariant("stringsMinusGreaterincludes_inline_space_hallo_", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_stringsMinusGreaterincludes_inline_space_hallo_=new tudresden.ocl.injection.lib.Invariant("stringsMinusGreaterincludes_inline_space_hallo_", this);/**
     Checks ocl invariant stringsMinusGreaterincludes_inline_space_hallo_ on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1670,7 +1670,7 @@ class SecondExample extends Example{
     An object representing ocl invariant testingInheritance on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_testingInheritance=new tudresden.ocl.injection.lib.Invariant("testingInheritance", this);/**
+  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_testingInheritance=new tudresden.ocl.injection.lib.Invariant("testingInheritance", this);/**
     Checks ocl invariant testingInheritance on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
