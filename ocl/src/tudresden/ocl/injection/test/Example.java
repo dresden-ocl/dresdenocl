@@ -269,3 +269,8 @@ class SecondExample extends Example{
   
 }
 
+class ThirdExample extends SecondExample
+{
+  // this class has no explicit constructor
+  void abstractMethod()  {}
+}
