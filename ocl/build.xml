@@ -540,7 +540,10 @@ Enhancements by Steffen Zschaler.
   <target name="docs"
           description="Builds Javadoc API documentation."
           depends="sablecc">
-    <echo message="BEWARE: Requires JDK 1.2.2 or higher, since previous versions do not allow multiple -link or -linkoffline arguments!" />
+    <!--
+    Requires JDK 1.2.2 or higher, since previous versions did not
+    allow multiple -link or -linkoffline arguments."
+    -->
 
     <delete dir="${docs.dir}" />
     <mkdir  dir="${docs.dir}" />
