@@ -22,7 +22,7 @@ import java.io.*;
 import java.util.*;
 import tudresden.ocl.codegen.CodeFragment;
 
-public class Injector
+public final class Injector
 {
   private Reader input;
   private Writer output;
@@ -353,110 +353,122 @@ public class Injector
     {
       ClassMethod cf=
         new ClassMethod(classname, modifiers, featuretype, featurename, position_name_end);
-      c=readToken();
-      // parsing parameter list
-      while(true)
-      {
-        String parametertype;
-        if(c==')')
-          break;
-        else if(c=='\0')
-          parametertype=buf.toString();
-        else
-          throw new InjectorParseException("')' expected.");
-        c=readToken();
-        if(c!='\0')
-          throw new InjectorParseException("parameter name expected.");
-        cf.addParameter(parametertype, buf.toString());
-        c=readToken();
-        if(c==',')
-        {
-          c=readToken();
-          continue;
-        }
-        else if(c==')')
-          break;
-        else
-          throw new InjectorParseException("')' expected.");
-      }
-      // parsing throws clauses
-      c=readToken();
-      ti:while(true)
-      {
-        switch(c)
-        {
-        case '{':
-          if(collect_when_blocking)
-          {
-            cf.setLiteral(getCollector());
-            if(cf.isConstructor() || cf.isStatic())
-              write(cf.getNotWrappedLiteral());
-            else
-              write(cf.getWrappedLiteral());
-          }
-          parseBody(false);
-          flushOutbuf();
-          break ti;
-        case ';':
-          if(collect_when_blocking)
-          {
-            cf.setLiteral(getCollector());
-            if(cf.isConstructor())
-              write(cf.getNotWrappedLiteral());
-            else
-              write(cf.getWrappedLiteral());
-          }
-          flushOutbuf();
-          break ti;
-        case '\0':
-          if(buf.toString().equals("throws"))
-          {
-            do
-            {
-              c=readToken();
-              if(c=='\0')
-                cf.addThrowable(buf.toString());
-              else
-                throw new InjectorParseException("class name expected.");
-              c=readToken();
-            }
-            while(c==',');
-          }
-          else
-            throw new InjectorParseException("'throws' expected.");
-          break;
-        default:
-          throw new InjectorParseException("'{' expected.");
-        }
-      }
-      if(do_block)
-        getCollector();
-      else
-      {
-        //cf.print(System.out);
-      }
+      parseMethod(cf);
       return cf;
     }
-    else // it's a attribute
+    else // it's an attribute
     {
       ClassAttribute cf=
         new ClassAttribute(classname, modifiers, featuretype, featurename);
-      switch(c)
-      {
-      case ';': 
-        break;
-      case '=':
-        parseBody(true);
-        break;
-      default:
-        throw new InjectorParseException("';' or '=' expected.");
-      }
-      flushOutbuf();
-      cf.setLiteral(getCollector());
-      write(cf.getLiteral());
-      //cf.print(System.out);
+      parseAttribute(cf, c);
       return cf;
     }
+  }
+
+  private void parseMethod(ClassMethod cf)
+    throws IOException, EndException, InjectorParseException
+  {
+    char c=readToken();
+    // parsing parameter list
+    while(true)
+    {
+      String parametertype;
+      if(c==')')
+        break;
+      else if(c=='\0')
+        parametertype=buf.toString();
+      else
+        throw new InjectorParseException("')' expected.");
+      c=readToken();
+      if(c!='\0')
+        throw new InjectorParseException("parameter name expected.");
+      cf.addParameter(parametertype, buf.toString());
+      c=readToken();
+      if(c==',')
+      {
+        c=readToken();
+        continue;
+      }
+      else if(c==')')
+        break;
+      else
+        throw new InjectorParseException("')' expected.");
+    }
+    // parsing throws clauses
+    c=readToken();
+    ti:while(true)
+    {
+      switch(c)
+      {
+      case '{':
+        if(collect_when_blocking)
+        {
+          cf.setLiteral(getCollector());
+          if(cf.isConstructor() || cf.isStatic())
+            write(cf.getNotWrappedLiteral());
+          else
+            write(cf.getWrappedLiteral());
+        }
+        parseBody(false);
+        flushOutbuf();
+        break ti;
+      case ';':
+        if(collect_when_blocking)
+        {
+          cf.setLiteral(getCollector());
+          if(cf.isConstructor())
+            write(cf.getNotWrappedLiteral());
+          else
+            write(cf.getWrappedLiteral());
+        }
+        flushOutbuf();
+        break ti;
+      case '\0':
+        if(buf.toString().equals("throws"))
+        {
+          do
+          {
+            c=readToken();
+            if(c=='\0')
+              cf.addThrowable(buf.toString());
+            else
+              throw new InjectorParseException("class name expected.");
+            c=readToken();
+          }
+          while(c==',');
+        }
+        else
+          throw new InjectorParseException("'throws' expected.");
+        break;
+      default:
+        throw new InjectorParseException("'{' expected.");
+      }
+    }
+    if(do_block)
+      getCollector();
+    else
+    {
+      //cf.print(System.out);
+    }
+  }
+
+  private void parseAttribute(ClassAttribute cf, char c)
+    throws IOException, EndException, InjectorParseException
+  {
+    switch(c)
+    {
+    case ';': 
+      break;
+    case '=':
+      parseBody(true);
+      break;
+    default:
+      throw new InjectorParseException("';' or '=' expected.");
+    }
+    flushOutbuf();
+    cf.setLiteral(getCollector());
+    write(cf.getLiteral());
+    //cf.print(System.out);
   }
 
   private void parseClass(String bufs)
