@@ -15,31 +15,35 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-To submit a bug report, send a comment, or get the latest news on
-this project, please see the contactReadme.txt file in this package.
 */
 package tudresden.ocl.codegen.decl;
 
-import java.util.Vector;
+import java.util.*;
 
 /**
- *  This class holds information about navigation
- *  in relational schemes as kind of steps of
- *  select-from-where clauses.
+ * This class holds information about navigation in relational schemes as kind of
+ * steps of select-from-where clauses. One guide is dedicated to describe either
+ * navigations over tables or simple attribute access. If a guide is dedicated to
+ * describe a navigation or attribute access can be queried by the according methode.
+ * If a navigation or attribute access requires more than one table access, each
+ * access must be described with a separate Guide object. In that case, MappedClass
+ * objects then return an array of Guide objects. Guides must lead from the target
+ * table to the table from where the navigation or attribute starts. The start table
+ * is called the context table. Since it is possible to start from a table that uses
+ * an alias, the alias in use should be stored within the Guide object too.
  *
- *  @author Sten Loecher
+ * @author Sten Loecher
+ * @see tudresden.codegen.decl.MappedClass
  */
 public class  Guide {
 
-	/** a Vector of Strings that holds all select statements */
-	private Vector select;
-	/** a Vector of Strings that holds all from statements */
-	private Vector from;
-	/** a Vector of Strings that holds all where statements */
-	private Vector where;
+	private static String EX_NO_ALIAS = "No context alias specified !";
+
+	/** a List containing all the steps */
+	private List steps;
 	/** a flag that holds information about the interpretation of the class data */
-	private boolean nested;
-	/** a pointer that points the current statement */
+	private boolean isNavigation;
+	/** a pointer that points the current step */
 	private int pointer;
 	/** the alias for the context table, should be null if it is no final guide */
 	private String contextAlias;
@@ -47,35 +51,43 @@ public class  Guide {
 
 	/**
 	 * Creates a new Guide.
-	 * @param nest should be true if all steps should be interpreted as nested subqueries, false otherwise
+	 * @param navigation true if the guide describes a navigation, false otherwise
+	 * @param contextAlias the context alias of the start table
 	 */
-	public Guide(boolean nest) {
-		select = new Vector();
-		from = new Vector();
-		where = new Vector();
-		nested = nest;
-		pointer = 0;
-		contextAlias = null;
+	public Guide(boolean navigation, String contextAlias) {
+		steps = new ArrayList();
+		isNavigation = navigation;
+		this.contextAlias = contextAlias;
+		pointer = -1;
 	}
 
 	/**
-	 * Add a select-from-where clause. The steps should be added in the order
-	 * they have to be queried.
+	 * Creates a new Guide.
+	 * @param navigation true if the guide describes a navigation, false otherwise
+	 */
+	public Guide(boolean navigation) {
+		this(navigation, null);
+	}
+
+	/**
+	 * Add a select-from-where clause. The steps must be added in the order
+	 * they are going to be queried.
 	 * @param select the select part
 	 * @param from the from part
 	 * @param where the where part
+	 * @exception NullPointerException if one of the parameters is null
 	 */
-	public void add(String select, String from, String where) {
-		if ((select != null) && (from != null) && (where != null)) {
-			this.select.add(new String(select));
-			this.from.add(new String(from));
-			this.where.add(new String(where));
+	public void add(String select, String from, String where)
+	throws NullPointerException {
+		if ((select == null) || (from == null) && (where == null)) {
+			throw new NullPointerException();
+		} else {
+			steps.add(new Step(select, from, where));
 		}
 	}
 
 	/**
-	 * Reset the navigation pointer. To query the first step, next() must be called,
-	 * otherwise null pointers will be returned.
+	 * Resets the navigation pointer. To query the first step, next() must be called first.
 	 */
 	public void reset() {
 		pointer = -1;
@@ -83,10 +95,14 @@ public class  Guide {
 
 	/**
 	 * Set the navigation pointer to next select-from-where clause.
+	 * @exception IllegalStateException if there is no next step
 	 */
-	public void next() {
-		if (pointer < (select.size()-1)) {
+	public void next()
+	throws IllegalStateException {
+		if (pointer < (steps.size()-1)) {
 			pointer++;
+		} else {
+			throw new IllegalStateException();
 		}
 	}
 
@@ -94,7 +110,7 @@ public class  Guide {
 	 * @return true if there is a next step available, false otherwise
 	 */
 	public boolean hasMoreSteps() {
-		if (pointer < (select.size()-1)) {
+		if (pointer < (steps.size()-1)) {
 			return true;
 		} else {
 			return false;
@@ -103,74 +119,110 @@ public class  Guide {
 
 	/**
 	 * @return the select part of the current step
+	 * @exception IllegalStateException if the client failed to call next() after reset() or object creation
 	 */
-	public String getSelect() {
-		if (pointer <0) return null;
-		return (String)select.elementAt(pointer);
+	public String getSelect()
+	throws IllegalStateException {
+		if (pointer < 0) {
+			throw new IllegalStateException();
+		} else {
+			return (String)((Step)steps.get(pointer)).select;
+		}
 	}
 
 	/**
 	 * @return the from part of the current step
+	 * @exception IllegalStateException if the client failed to call next() after reset() or object creation
 	 */
-	public String getFrom() {
-		if (pointer <0) return null;
-		return (String)from.elementAt(pointer);
+	public String getFrom()
+	throws IllegalStateException {
+		if (pointer < 0) {
+			throw new IllegalStateException();
+		} else {
+			return (String)((Step)steps.get(pointer)).from;
+		}
 	}
 
 	/**
 	 * @return the where part of the current step
+	 * @exception IllegalStateException if the client failed to call next() after reset() or object creation
 	 */
-	public String getWhere() {
-		if (pointer <0) return null;
-		return (String)where.elementAt(pointer);
+	public String getWhere()
+	throws IllegalStateException {
+		if (pointer < 0) {
+			throw new IllegalStateException();
+		} else {
+			return (String)((Step)steps.get(pointer)).where;
+		}
 	}
 
 	/**
-	 * @return true if all steps should be interpreted as nested subqueries, false otherwise
+	 * @return true if the guide describes a navigation, false otherwise
 	 */
-	public boolean isNested() {
-		return nested;
+	public boolean isNavigation() {
+		return isNavigation;
 	}
 
 	/**
 	 * @return the number of steps
 	 */
 	 public int numberOfSteps() {
-	 	return select.size();
+	 	return steps.size();
 	 }
 
 	 /**
 	  * @param alias the context table alias
 	  */
-	 public void setAlias(String alias) {
-	 	contextAlias = alias;
+	 public void setAlias(String contextAlias) {
+	 	this.contextAlias = contextAlias;
 	 }
 
 	 /**
-	  * @return the alias of the context table, or null if no alias is set
+	  * @return the alias of the context table
+	  * @exception NullPointerException if no context alias is specified
 	  */
-	 public String getAlias() {
-	 	return contextAlias;
+	 public String getAlias()
+	 throws NullPointerException {
+	 	if (contextAlias == null) {
+	 		throw new NullPointerException(EX_NO_ALIAS);
+	 	} else {
+	 		return contextAlias;
+	 	}
 	 }
 
          /**
           * @return a description of this guide
           */
          public String toString() {
-                String ret = "Guide:\n";
-                if (nested) {
-                  ret += "should be interpreted as nested \n";
+                String result = "Guide:\n";
+                Step s;
+
+                for (Iterator i=steps.iterator(); i.hasNext(); ) {
+                	s = (Step)i.next();
+                	result += "select " + (s).select +
+                	          " from " + (s).from +
+                	          " where " + (s).where +
+                	          "\n";
+                }
+
+                if (isNavigation) {
+                	result += "navigation description";
                 } else {
-                  ret += "should be interpreted as unioned \n";
-                }
-                if (contextAlias != null) {
-                  ret += "context alias is: " + contextAlias + "\n";
+                	result += "attribute access description";
                 }
 
-                for (int i=0; i<select.size(); i++) {
-                  ret += select.elementAt(i) + ", " + from.elementAt(i) + ", " + where.elementAt(i) + "\n";
-                }
-
-                return ret;
+                return result;
          }
+
+        private class Step {
+        	Step(String select, String from, String where) {
+        		this.select = select;
+        		this.from = from;
+        		this.where = where;
+        	}
+
+        	String select;
+        	String from;
+        	String where;
+	}
 }

@@ -15,8 +15,6 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-To submit a bug report, send a comment, or get the latest news on
-this project, please see the contactReadme.txt file in this package.
 */
 package tudresden.ocl.codegen.decl;
 

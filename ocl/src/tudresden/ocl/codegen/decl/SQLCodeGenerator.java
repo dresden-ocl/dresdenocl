@@ -15,8 +15,6 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-To submit a bug report, send a comment, or get the latest news on
-this project, please see the contactReadme.txt file in this package.
 */
 package tudresden.ocl.codegen.decl;
 
@@ -28,6 +26,7 @@ import java.lang.String;
 
 import java.util.Hashtable;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Vector;
 
 /**
@@ -141,11 +140,11 @@ public class SQLCodeGenerator extends DeclarativeCodeGenerator {
 		String task = (String)getIn(node);
 
 		if (mc != null) {
-			Enumeration e = mc.getTables();
+		        Iterator e = mc.getTables().iterator();
 
-			while (e.hasMoreElements()) {
+			while (e.hasNext()) {
 				// code generate a number of code fragments equal to the number of tables !!!
-				String tableName = ((Table)e.nextElement()).getTableName();
+				String tableName = ((Table)e.next()).getTableName();
 				replaceTask(task, tableName);
 			}
 
@@ -436,7 +435,7 @@ public class SQLCodeGenerator extends DeclarativeCodeGenerator {
     			mc = map.getMappedClass(constrainedType);
     			g.reset();
 
-    			if (g.isNested()) {
+    			if (g.isNavigation()) {
     				// navigation with nested subqueries
     				navCode = task;
     				while (g.hasMoreSteps()) {
@@ -527,7 +526,7 @@ public class SQLCodeGenerator extends DeclarativeCodeGenerator {
     			mc = map.getMappedClass(constrainedType);
     			g.reset();
 
-    			if (g.isNested()) {
+    			if (g.isNavigation()) {
                                 // navigation with nested subqueries
     				navCode = task;
     				while (g.hasMoreSteps()) {
@@ -688,11 +687,11 @@ public class SQLCodeGenerator extends DeclarativeCodeGenerator {
    				ca.setArgument("table", task);
                                 codeForPathName = true;
    			  } else if ((pathName.equals("forAll")) || (pathName.equals("exists")) || (pathName.equals("isUnique"))) {
-  				Enumeration en = mc.getTables();
-                                while (en.hasMoreElements()) {
+  				Iterator en = mc.getTables().iterator();
+                                while (en.hasNext()) {
    					ca.reset();
         				ca.setArgument("table1", task);
-        				ca.setArgument("table2", ((Table)en.nextElement()).getTableName() + " " + tableAlias.toUpperCase());
+        				ca.setArgument("table2", ((Table)en.next()).getTableName() + " " + tableAlias.toUpperCase());
         				ca.setArgument("column", g.getSelect());
         				ca.setArgument("expression", taskAp);
 
@@ -732,12 +731,12 @@ public class SQLCodeGenerator extends DeclarativeCodeGenerator {
   			  }
 
   			  if ((pathName.equals("select")) || (pathName.equals("reject"))) {
-  				Enumeration en = mc.getTables();
-   				while (en.hasMoreElements()) {
+  				Iterator en = mc.getTables().iterator();
+   				while (en.hasNext()) {
    					ca.reset();
         				ca.setArgument("key", g.getSelect());
         				ca.setArgument("table1", task);
-        				ca.setArgument("table2", ((Table)en.nextElement()).getTableName() + " " + tableAlias.toUpperCase());
+        				ca.setArgument("table2", ((Table)en.next()).getTableName() + " " + tableAlias.toUpperCase());
         				ca.setArgument("expression", taskAp);
 
         				try {
