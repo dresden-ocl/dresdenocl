@@ -33,7 +33,7 @@ public final class Invariant implements FeatureListener
   {
     this.name=name;
     this.object=object;
-    vakantInvariants.add(this);
+    vacantInvariants.add(this);
     allInvariants.add(this);
   }
   
@@ -100,22 +100,22 @@ public final class Invariant implements FeatureListener
     }
   }    
 
-  private static HashSet vakantInvariants=new HashSet();
+  private static HashSet vacantInvariants=new HashSet();
   
   public static final String CHECKING_FLAG="tudresden.ocl.injection.lib.Invariant.checking_flag";
   public static boolean checking_flag=false;
 
-  public static final String CHECKING_OPERATION="tudresden.ocl.injection.lib.Invariant.checkVakantInvariants";
-  public static final void checkVakantInvariants()
+  public static final String CHECKING_OPERATION="tudresden.ocl.injection.lib.Invariant.checkVacantInvariants";
+  public static final void checkVacantInvariants()
   {
-    if(vakantInvariants.isEmpty())
+    if(vacantInvariants.isEmpty())
       return;
     
-    HashSet todo=vakantInvariants;
-    vakantInvariants=null;
+    HashSet todo=vacantInvariants;
+    vacantInvariants=null;
     for(Iterator i=todo.iterator(); i.hasNext(); )
       ((Invariant)i.next()).invoke();
-    vakantInvariants=new HashSet();
+    vacantInvariants=new HashSet();
   }
 
   
@@ -128,7 +128,7 @@ public final class Invariant implements FeatureListener
      the attribute has changed.
      There is no notify method in class Invariant, 
      instead the observing invariants are included into a set
-     of vakant invariants.
+     of vacant invariants.
 
      After notifying, the observer set is cleared. 
      Next time, the invariant runs, the observers are registered again.
@@ -141,7 +141,7 @@ public final class Invariant implements FeatureListener
   {
     if(!observers.isEmpty())
     {
-      vakantInvariants.addAll(observers);
+      vacantInvariants.addAll(observers);
       observers.clear();
     }
   }
