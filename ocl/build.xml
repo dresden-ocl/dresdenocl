@@ -146,9 +146,8 @@ Enhancements by Steffen Zschaler.
           depends="build.dir">
     <mkdir dir="${build.dir}/dresden-ocl-lib" />
 
-    <copy todir="${build.dir}/dresden-ocl-lib"
-          file="${basedir}/COPYING"
-    >
+    <copy todir="${build.dir}/dresden-ocl-lib">
+      <fileset dir="${basedir}"><include name="COPYING" /></fileset>
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/lib/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
@@ -177,9 +176,8 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/ocl-argo" />
 
-    <copy todir="${build.dir}/ocl-argo"
-          file="${basedir}/COPYING"
-    >
+    <copy todir="${build.dir}/ocl-argo">
+      <fileset dir="${basedir}"><include name="COPYING" /></fileset>
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/*.java" />
         <exclude name="tudresden/ocl/ConstraintEvaluation.java" />
@@ -230,9 +228,8 @@ Enhancements by Steffen Zschaler.
           depends="sablecc,build.dir">
     <mkdir dir="${build.dir}/dresden-ocl-injector" />
 
-    <copy todir="${build.dir}/dresden-ocl-injector"
-          file="${basedir}/COPYING"
-    >
+    <copy todir="${build.dir}/dresden-ocl-injector">
+      <fileset dir="${basedir}"><include name="COPYING" /></fileset>
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/*.java" />
         <exclude name="tudresden/ocl/ConstraintEvaluation.java" />
@@ -284,9 +281,8 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/dresden-injector" />
 
-    <copy todir="${build.dir}/dresden-injector"
-          file="${basedir}/COPYING"
-    >
+    <copy todir="${build.dir}/dresden-injector">
+      <fileset dir="${basedir}"><include name="COPYING" /></fileset>
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/injection/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
@@ -317,9 +313,8 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/dresden-ocl-demo" />
 
-    <copy todir="${build.dir}/dresden-ocl-demo"
-          file="${basedir}/COPYING"
-    >
+    <copy todir="${build.dir}/dresden-ocl-demo">
+      <fileset dir="${basedir}"><include name="COPYING" /></fileset>
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/images/*.gif" />
         <include name="tudresden/ocl/images/SUNIMAGELICENSE" />
@@ -382,9 +377,8 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/royloy" />
 
-    <copy todir="${build.dir}/royloy"
-          file="${basedir}/COPYING"
-    >
+    <copy todir="${build.dir}/royloy">
+      <fileset dir="${basedir}"><include name="COPYING" /></fileset>
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/test/royloy/*.java" />
         <include name="tudresden/ocl/test/royloy/oclexpressions" />
@@ -415,9 +409,8 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/dresden-ocl-sql" />
 
-    <copy todir="${build.dir}/dresden-ocl-sql"
-          file="${basedir}/COPYING"
-    >
+    <copy todir="${build.dir}/dresden-ocl-sql">
+      <fileset dir="${basedir}"><include name="COPYING" /></fileset>
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/images/*.gif" />
         <include name="tudresden/ocl/images/SUNIMAGELICENSE" />
@@ -482,9 +475,8 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/dresden-ocl-reverseeng" />
 
-    <copy todir="${build.dir}/dresden-ocl-reverseeng"
-          file="${basedir}/COPYING"
-    >
+    <copy todir="${build.dir}/dresden-ocl-reverseeng">
+      <fileset dir="${basedir}"><include name="COPYING" /></fileset>
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/check/OclTypeException.java" />
         <include name="tudresden/ocl/OclException.java" />
