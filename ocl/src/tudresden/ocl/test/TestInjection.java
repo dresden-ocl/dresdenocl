@@ -111,6 +111,12 @@ public class TestInjection
     assertAll();
     {
       b1.customer.put(new Integer(4), p5);
+      
+      // use the following statement to test the check for 
+      // unique map values in 
+      // tudresden.ocl.lib.DefaultOclFactory#getRepresentationFor(Object)
+      //b1.customer.put(new Integer(5), p5);
+      
       expectViolation("violated ocl invariant 'customers_ordered_by_age' on object 'tudresden.ocl.test.royloy.Bank[Bank1]'.");
       assertAll();
       b1.customer.remove(new Integer(4));

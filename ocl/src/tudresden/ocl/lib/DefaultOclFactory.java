@@ -70,6 +70,14 @@ public class DefaultOclFactory implements OclFactory {
       HashSet set=new HashSet();
       for(Iterator i=om.values().iterator(); i.hasNext(); ) 
         set.add(getOclRepresentationFor(i.next()));
+
+      // in UML association features are sets (no duplicates).
+      // since maps are used to represent qualified associations,
+      // and java.util.Map does not enforce unique values,
+      // I added an appropriate check here.
+      if(om.size()!=set.size())
+        throw new OclException("map values in feature "+o+" are not unique.");
+      
       return new OclSet(set);
     } else if (o instanceof Boolean)
       return getOclRepresentationFor( ((Boolean)o).booleanValue() );

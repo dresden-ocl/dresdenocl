@@ -249,13 +249,6 @@ public final class Invariant implements FeatureListener
     for(Iterator i=m.values().iterator(); i.hasNext(); )
       if(!elementtype.isAssignableFrom(i.next().getClass()))
         return false;
-    // in UML association features are sets (no duplicates).
-    // since maps are used to represent qualified associations,
-    // and java.util.Map does not enforce unique values,
-    // I added an appropriate check here.
-    // quick and dirty, TODO, needs a better place
-    if(m.size()!=(new HashSet(m.values()).size()))
-      System.out.println("warning: map values are not unique.");
     return true;
   }
   
