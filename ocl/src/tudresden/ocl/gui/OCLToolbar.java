@@ -34,7 +34,7 @@ import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
 
-/** 
+/**
  * The syntax assistant toolbar for the {@link OCLEditor}
  *
  * @author  sz9
@@ -45,9 +45,9 @@ public class OCLToolbar extends JToolBar implements ActionListener {
    * The frame used for floating the tool bar.
    */
   private JFrame m_jfFloatFrame = null;
-  
+
   /**
-   * Was this toolbar requested to float? For some UIs it may not float even 
+   * Was this toolbar requested to float? For some UIs it may not float even
    * though it was requested to, so we need to make the distinction.
    */
   private boolean m_fFloatRequest = false;
@@ -56,22 +56,22 @@ public class OCLToolbar extends JToolBar implements ActionListener {
    * The OCLEditor for which this is the quick bar.
    */
   private WeakReference m_wrocleEditor;
-  
+
   /** Creates new OCLToolbar */
   public OCLToolbar() {
     super();
     setName ("OCL Syntax Assistant");
-    
+
     initComponents();
   }
-  
+
   /**
    * Set the editor owning this tool bar.
    */
   public void setEditor (OCLEditor ocle) {
     m_wrocleEditor = new WeakReference (ocle);
   }
-  
+
   public OCLEditor getEditor() {
     if (m_wrocleEditor == null) {
       return null;
@@ -80,7 +80,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
       return (OCLEditor) m_wrocleEditor.get();
     }
   }
-  
+
   /**
    * Overridden to correctly hide the float frame, if it was open.
    */
@@ -92,10 +92,10 @@ public class OCLToolbar extends JToolBar implements ActionListener {
         }
       }
     }
-    
+
     super.setVisible (fVisible);
   }
-  
+
   /**
    * Set the floating flag to m_fFloatRequest if the UI allows it.
    */
@@ -115,18 +115,18 @@ public class OCLToolbar extends JToolBar implements ActionListener {
       }
     }
   }
-  
+
   /**
    * Overridden to allow correct handling of float frames.
    */
   public void setFloatable (boolean fFloatRequest) {
     if (m_fFloatRequest != fFloatRequest) {
       m_fFloatRequest = fFloatRequest;
-      
+
       updateFloating();
     }
   }
-  
+
   /**
    * Overridden to allow access to the free float frame.
    */
@@ -138,7 +138,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
             if (m_jfFloatFrame == null) {
               m_jfFloatFrame = super.createFloatingFrame (jtb);
             }
-            
+
             return m_jfFloatFrame;
           }
           else {
@@ -154,7 +154,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
             if (m_jfFloatFrame == null) {
               m_jfFloatFrame = super.createFloatingFrame (jtb);
             }
-            
+
             return m_jfFloatFrame;
           }
           else {
@@ -169,14 +169,14 @@ public class OCLToolbar extends JToolBar implements ActionListener {
       // UI given and set the toolbar to be unfloatable
       super.setUI (tbui);
     }
-    
+
     // Make sure the toolbar is floatable in the right situation.
     updateFloating();
   }
-  
+
   private void initComponents() {
     setFloatable (true);
-    
+
     JComboBox jcb = new JComboBox (new ActionItem[] {
       new ActionItem ("General", -1),
       new ActionItem ("inv", 0),
@@ -188,7 +188,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
     });
     jcb.addActionListener (this);
     add (jcb);
-    
+
     ActionItem.addShortCut (new ActionItem.ShortCutAction() { // Inv, Pre, Post
       public void performShortCut (String sOCLText, OCLEditor ocle) {
         ocle.addConstraintText (
@@ -225,7 +225,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
             null);
       }
     });
-    
+
     jcb = new JComboBox (new ActionItem[] {
       new ActionItem ("Basic Operators", -1),
       new ActionItem ("=", 4),
@@ -259,7 +259,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
             new String[] {"expression"});
       }
     });
-    
+
     jcb = new JComboBox (new ActionItem[] {
       new ActionItem ("Numbers", -1),
       new ActionItem ("+", 6),
@@ -305,7 +305,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
             null);
       }
     });
-    
+
     jcb = new JComboBox (new ActionItem[] {
       new ActionItem ("Strings", -1),
       new ActionItem ("concat", 9),
@@ -316,7 +316,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
     });
     jcb.addActionListener (this);
     add (jcb);
-    
+
     ActionItem.addShortCut (new ActionItem.ShortCutAction() { // concat
       public void performShortCut (String sOCLText, OCLEditor ocle) {
         ocle.addConstraintText (
@@ -353,7 +353,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
             new String[] {"integer expression"});
       }
     });
-    
+
     jcb = new JComboBox (new ActionItem[] {
       new ActionItem ("Booleans", -1),
       new ActionItem ("or", 12),
@@ -365,7 +365,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
     });
     jcb.addActionListener (this);
     add (jcb);
-    
+
     ActionItem.addShortCut (new ActionItem.ShortCutAction() { // basic ops
       public void performShortCut (String sOCLText, OCLEditor ocle) {
         ocle.addConstraintText (
@@ -402,7 +402,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
             new String[] {"boolean expression"});
       }
     });
-    
+
     jcb = new JComboBox (new ActionItem[] {
       new ActionItem ("Collections", -1),
       new ActionItem ("-----------", ActionItem.DUMMY_ACTION),
@@ -446,7 +446,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
     });
     jcb.addActionListener (this);
     add (jcb);
-    
+
     ActionItem.addShortCut (new ActionItem.ShortCutAction() { // collection constructors
       public void performShortCut (String sOCLText, OCLEditor ocle) {
         ocle.addConstraintText (
@@ -519,7 +519,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
             null);
       }
     });
-    
+
     ActionItem.addShortCut (new ActionItem.ShortCutAction() { // set minus
       public void performShortCut (String sOCLText, OCLEditor ocle) {
         ocle.addConstraintText (
@@ -540,7 +540,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
             new String[] {"set expression"});
       }
     });
-    
+
     ActionItem.addShortCut (new ActionItem.ShortCutAction() { // first, last
       public void performShortCut (String sOCLText, OCLEditor ocle) {
         ocle.addConstraintText (
@@ -590,11 +590,11 @@ public class OCLToolbar extends JToolBar implements ActionListener {
       }
     });
   }
-  
+
   public void actionPerformed(final ActionEvent e) {
     JComboBox jcb = (JComboBox) e.getSource();
     ActionItem ai = (ActionItem) jcb.getSelectedItem();
-    
+
     if (ai != null) {
       ai.perform (jcb, getEditor());
     }
@@ -602,37 +602,40 @@ public class OCLToolbar extends JToolBar implements ActionListener {
 
   private static final class ActionItem {
     public static final int DUMMY_ACTION = Integer.MAX_VALUE;
-    
+
+    /**
+     * @isElementExists
+     */
     public static interface ShortCutAction {
       public void performShortCut (String sOCLText, OCLEditor ocle);
     }
-    
+
     private static ArrayList s_aalActions = new ArrayList();
-    
+
     private String m_sCaption;
     private String m_sOCLText;
     private int m_nActionIdx;
-    
+
     public ActionItem (String sCaption, String sOCLText, int nActionIdx) {
       super();
-      
+
       m_sCaption = sCaption;
       m_sOCLText = sOCLText;
       m_nActionIdx = nActionIdx;
     }
-    
+
     public ActionItem (String sOCLText, int nActionID) {
       this (sOCLText, sOCLText, nActionID);
     }
-    
+
     public String toString() {
       return getCaption();
     }
-    
+
     public String getCaption() {
       return m_sCaption;
     }
-    
+
     public String getOCLText() {
       return m_sOCLText;
     }
@@ -643,15 +646,15 @@ public class OCLToolbar extends JToolBar implements ActionListener {
         if ((m_nActionIdx != DUMMY_ACTION) &&
              (ocle != null)) {
           ShortCutAction sca = (ShortCutAction) s_aalActions.get (m_nActionIdx);
-          
+
           sca.performShortCut (getOCLText(), ocle);
         }
-        
+
         // Reset combo box, assuming that 0 is the index with no associated action
         jcb.setSelectedIndex (0);
       }
     }
-    
+
     public static void addShortCut (ShortCutAction sca) {
       s_aalActions.add (sca);
     }
