@@ -73,7 +73,7 @@ public class CollectionTreeNode extends RevengTreeNode {
   public String toString () {      
     CollectionDescriptor cd = getDescriptor();
 
-    return cd.getName() + 
+    return cd.getContainingClass() + "." + cd.getName() + 
             ((cd.getElementType() != null)?(" : " + cd.getElementType()):(""));
   }
   

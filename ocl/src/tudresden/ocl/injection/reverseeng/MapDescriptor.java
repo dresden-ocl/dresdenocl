@@ -24,6 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
 package tudresden.ocl.injection.reverseeng;
 
+import tudresden.ocl.injection.*;
+
 import javax.swing.tree.*;
 
 /** 
@@ -39,8 +41,12 @@ public class MapDescriptor extends AbstractDescriptor {
   /** 
     * Creates new MapDescriptor 
     */
-  public MapDescriptor(AnalysisConsumer acOwner, String sName, String sComment, int nCommentID) {
-    super (acOwner, sName, sComment, nCommentID);
+  public MapDescriptor (AnalysisConsumer acOwner,
+                          JavaClass jcParent,
+                          String sName,
+                          String sComment,
+                          int nCommentID) {
+    super (acOwner, jcParent, sName, sComment, nCommentID);
   }
   
   public void setKeyType (String sKeyType) {

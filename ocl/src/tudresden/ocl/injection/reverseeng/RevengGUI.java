@@ -45,6 +45,7 @@ public class RevengGUI extends javax.swing.JDialog {
   private DefaultTreeModel m_dtmFileModel;
   private RevengTreeNode m_rtnCurrent = null;
   private List m_lrtnUnsavedTreeNodes = new LinkedList();
+  private boolean m_fInSaveAll = false;
   
   /** Creates new form RevengGUI */
   public RevengGUI(java.awt.Frame parent,boolean modal) {
@@ -194,14 +195,21 @@ public class RevengGUI extends javax.swing.JDialog {
   }//GEN-END:initComponents
 
   private void m_jbSaveAllActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jbSaveAllActionPerformed
-    synchronized (m_lrtnUnsavedTreeNodes) {
-      for (Iterator i = m_lrtnUnsavedTreeNodes.iterator(); i.hasNext();) {
-        if (save (((RevengTreeNode) i.next()))) {
-          i.remove();
-        }
-      }
+    try {
+      m_fInSaveAll = true;
       
-      m_jbSaveAll.setEnabled (m_lrtnUnsavedTreeNodes.size() > 0);      
+      synchronized (m_lrtnUnsavedTreeNodes) {
+        for (Iterator i = m_lrtnUnsavedTreeNodes.iterator(); i.hasNext();) {
+          if (save (((RevengTreeNode) i.next()))) {
+            i.remove();
+          }
+        }
+
+        m_jbSaveAll.setEnabled (m_lrtnUnsavedTreeNodes.size() > 0);      
+      }
+    }
+    finally {
+      m_fInSaveAll = false;
     }
   }//GEN-LAST:event_m_jbSaveAllActionPerformed
 
@@ -218,7 +226,7 @@ public class RevengGUI extends javax.swing.JDialog {
     }
     catch (IOException ioe) {
       JOptionPane.showMessageDialog (this, 
-                                       "An error occurred when attempting to save " + rtn + ": " + ioe.getLocalizedMessage(), 
+                                       "An error occurred when attempting to save " + rtn + ":\n" + ioe.getLocalizedMessage(), 
                                        "Error", 
                                        JOptionPane.ERROR_MESSAGE);
       return false;
@@ -313,9 +321,11 @@ public class RevengGUI extends javax.swing.JDialog {
     else {
       m_jbSave.setEnabled (false);
 
-      synchronized (m_lrtnUnsavedTreeNodes) {
-        m_lrtnUnsavedTreeNodes.remove (rtn);
-        m_jbSaveAll.setEnabled (m_lrtnUnsavedTreeNodes.size() > 0);
+      if (! m_fInSaveAll) {
+        synchronized (m_lrtnUnsavedTreeNodes) {
+          m_lrtnUnsavedTreeNodes.remove (rtn);
+          m_jbSaveAll.setEnabled (m_lrtnUnsavedTreeNodes.size() > 0);
+        }
       }
     }
   }

@@ -37,6 +37,8 @@ import javax.swing.tree.*;
 public abstract class AbstractDescriptor extends Object {
 
   private AnalysisConsumer m_acOwner;
+  private JavaClass m_jcParent;
+  private String m_sContainingClass;
   private String m_sName;
   private String m_sDocComment;
   private int m_nCommentID;
@@ -55,14 +57,24 @@ public abstract class AbstractDescriptor extends Object {
     * @param nCommentID a number uniquely identifying the comment for the feature. (Number of comments from
     * beginning of source file.
     */
-  public AbstractDescriptor (AnalysisConsumer acOwner, String sName, String sComment, int nCommentID) {
+  public AbstractDescriptor (AnalysisConsumer acOwner,
+                                JavaClass jcParent,
+                                String sName,
+                                String sComment,
+                                int nCommentID) {
     super();
     
     m_acOwner = acOwner;
+    m_jcParent = jcParent;    
     m_sName = sName;
     m_sDocComment = sComment;
     m_nCommentID = nCommentID;
 
+    m_sContainingClass = m_jcParent.getName();
+    for (JavaClass jc = m_jcParent.getParent(); jc != null; jc = jc.getParent()) {
+      m_sContainingClass = jc.getName() + "$" + m_sContainingClass;
+    }
+    
     if (sComment != null) {
       m_sElementType = Injector.findDocTag (sComment, "element-type");
       m_sKeyType = Injector.findDocTag (sComment, "key-type");
@@ -77,6 +89,9 @@ public abstract class AbstractDescriptor extends Object {
     return m_sName;
   }
   
+  /**
+    * Returns just the text of the documentation, without any appended doc tags.
+    */
   public String getCleanedComment() {
     
     if (m_sDocComment == null)
@@ -103,6 +118,74 @@ public abstract class AbstractDescriptor extends Object {
     return m_sCleanedComment;
   }
   
+  /**
+    * Return a version of the doccomment that has been updated based on the values of element-type and
+    * key-type.
+    */
+  public String getUpdatedComment (int nIndent) {
+    String sToReturn;
+    String sIndent = "";
+    for (int i = 0; i < nIndent + 2; i++) {
+      // nIndent + 2 because all lines after the second doc comment line
+      // are indented two more characters!
+      sIndent += " ";
+    }
+
+    if (m_sDocComment == null) {
+      sToReturn = "/**\n" + sIndent + "*\n" + sIndent;
+      
+      // Conditionally add key type      
+      if (getKeyType() != null) {
+        sToReturn += "* @key-type " + getKeyType() + "\n" + sIndent;
+      }
+
+      // Conditionally add element type
+      if (getElementType() != null) {
+        sToReturn += "* @element-type " + getElementType() + "\n" + sIndent;
+      }
+      
+      // Add final delimiter
+      sToReturn += "*/";
+    }
+    else {
+      String sTemp = m_sDocComment;
+
+      // Remove old element-type tag
+      int nTemp = sTemp.indexOf ("@element-type ");
+      
+      if (nTemp != -1) {
+        sTemp = sTemp.substring (0, sTemp.lastIndexOf ('\n', nTemp)) + 
+                sTemp.substring (sTemp.indexOf ('\n', nTemp) + 1);
+      }
+      
+      // Remove old key-type tag
+      nTemp = sTemp.indexOf ("@key-type ");
+      
+      if (nTemp != -1) {
+        sTemp = sTemp.substring (0, sTemp.lastIndexOf ('\n', nTemp)) + 
+                sTemp.substring (sTemp.indexOf ('\n', nTemp) + 1);
+      }
+      
+      // Remove comment delimiter
+      sToReturn = sTemp.substring (0, sTemp.indexOf ("*/"));
+      
+      // Conditionally add key type
+      if (getKeyType() != null) {
+        sToReturn += "* @key-type " + getKeyType() + "\n" + sIndent;
+      }
+
+      // Conditionally add element type
+      if (getElementType() != null) {
+        sToReturn += "* @element-type " + getElementType() + "\n" + sIndent;
+      }
+      
+      // Add final delimiter
+      sToReturn += "*/";
+    }
+    
+    return sToReturn;
+  }
+  
   public String getElementType() {
     return m_sElementType;
   }
@@ -127,10 +210,6 @@ public abstract class AbstractDescriptor extends Object {
     }
   }  
 
-  public void setAssociatedTreeNode (RevengTreeNode rtn) {
-    m_rtnAssociatedNode = rtn;
-  }
-  
   public int getCommentID () {
     return m_nCommentID;
   }
@@ -138,5 +217,14 @@ public abstract class AbstractDescriptor extends Object {
   public boolean isIncomplete() {
     return m_sElementType == null;
   }
+  
   public abstract RevengTreeNode createTreeNode (DefaultTreeModel dtmModel);
+  
+  public void setAssociatedTreeNode (RevengTreeNode rtn) {
+    m_rtnAssociatedNode = rtn;
+  }  
+  
+  public String getContainingClass() {
+    return m_sContainingClass;
+  }
 }

@@ -80,7 +80,7 @@ public class MapTreeNode extends RevengTreeNode {
   public String toString () {      
     MapDescriptor md = getDescriptor();
 
-    return md.getName()
+    return md.getContainingClass() + "." + md.getName()
             + "[" + ((md.getKeyType() != null)?(md.getKeyType()):("")) + "]"
             + ((md.getElementType() != null)?(" : " + md.getElementType()):(""));
   }

@@ -40,7 +40,7 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
   /**
     * The writer used to produce the output file.
     */
-  private Writer m_wOutput = null;
+  private IndentAwareWriter m_iawOutput = null;
   
   /**
     * The AnalysisConsumer that contains the information about the analysed file.
@@ -61,12 +61,12 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     * The next feature that needs a corrected doccomment.
     */
   private AbstractDescriptor m_adCurrentFeature = null;
-  
+    
   /** Creates new FileSaveConsumer */
-  public FileSaveConsumer (Writer wOutput, AnalysisConsumer acAnalysisResults) {
+  public FileSaveConsumer (IndentAwareWriter iawOutput, AnalysisConsumer acAnalysisResults) {
     super();
     
-    m_wOutput = wOutput;
+    m_iawOutput = iawOutput;
     m_acAnalysisResults = acAnalysisResults;
     m_iFeatures = m_acAnalysisResults.getAllFeatures().iterator();
   }
@@ -118,8 +118,8 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     * contains all parsed information about the method
     */
   public void onBehaviourHeader(JavaBehaviour jb) throws java.io.IOException {
-    if (m_wOutput != null) {
-      m_wOutput.write (jb.getLiteral());
+    if (m_iawOutput != null) {
+      m_iawOutput.write (jb.getLiteral());
     }
   }
  
@@ -132,6 +132,30 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     * Is null, if there was none.
     */
   public void onClassFeature(JavaFeature cf,String doccomment) throws java.io.IOException, InjectorParseException {
+    if (doccomment == null) {
+      // Feature without comment
+      if ((m_iFeatures.hasNext()) &&
+          (getCurrentFeature().getCommentID() == m_cComments)) {
+        // Might need element-type/key-type spec (i.e., if it is a collection or map)
+        if (cf.getType () != null) {
+          Class clClass = cf.getFile ().findType (cf.getType ());
+        
+          if (clClass != null) {
+            // Not a simple type --> check whether collection or map
+            if (AnalysisConsumer.s_clCollection.isAssignableFrom (clClass) ||
+                AnalysisConsumer.s_clMap.isAssignableFrom (clClass)) {
+              // Yup! So we have to generate a comment for it!
+              if (m_iawOutput != null) {
+                m_iawOutput.write (getCurrentFeature().getUpdatedComment (m_iawOutput.getCurrentIndent()));
+              }
+
+              m_adCurrentFeature = null; // Mark feature as handled...
+              m_cComments++;
+            }
+          }
+        }
+      }
+    }
   }
   
   /** Encountered a java documentation comment.
@@ -142,9 +166,19 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     * if false is returned, the next class feature is ignored.
     */
   public boolean onDocComment(String doccomment) throws java.io.IOException {
-    if (m_wOutput != null) {
-      m_wOutput.write (doccomment);
+    m_cComments++;
+    
+    if (m_iawOutput != null) {
+      if ((m_iFeatures.hasNext()) &&
+          (getCurrentFeature().getCommentID() == m_cComments)) {
+        m_iawOutput.write (getCurrentFeature().getUpdatedComment (m_iawOutput.getCurrentIndent()));
+        m_adCurrentFeature = null; // Mark feature as handled...
+      }
+      else {
+        m_iawOutput.write (doccomment);
+      }
     }
+    
     return true;
   }
 
@@ -152,4 +186,27 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     */
   public void onFileEnd() {
   }
+  
+  public static void save(File fSource, File fDest, AnalysisConsumer acAnalysisResults) throws IOException {
+    Reader r = new FileReader (fSource);
+    IndentAwareWriter iaw = new IndentAwareWriter (new OutputStreamWriter (new FileOutputStream (fDest)));
+    
+    try {
+      new Injector (r, iaw, new FileSaveConsumer (iaw, acAnalysisResults)).parseFile ();
+      iaw.flush();
+      iaw.close();
+    }
+    catch (InjectorParseException ipe) {
+      ipe.printStackTrace();
+    }
+  }
+  
+/*  public static void main (String args[]) {
+    try {
+      File f = FileSaveConsumer.class.
+    }
+    catch (Throwable t) {
+      t.printStackTrace();
+    }
+  }*/
 }

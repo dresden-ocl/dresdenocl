@@ -148,17 +148,6 @@ public class FileTreeNode extends RevengTreeNode {
       public void run() {
         ensureParsed (false);
 
-        FolderTreeNode ftnParent = (FolderTreeNode) getParent();
-        if (ftnParent != null) {
-          if (m_fHadError ||
-              ! m_acAnalysisResults.hasIncompleteElements()) {
-            ftnParent.notifyUnknownChildTurnedUnCritical();
-          }
-          else {
-            ftnParent.notifyCriticalChild();
-          }
-        }
-        
         nodeChanged();
       }
     });
@@ -182,7 +171,7 @@ public class FileTreeNode extends RevengTreeNode {
       
       try {
         m_acAnalysisResults = AnalysisConsumer.analyse (getFile());
-        m_fHadError = false;
+        m_fHadError = false;        
       }
       catch (IOException ioex) {
         m_acAnalysisResults = null;
@@ -198,6 +187,18 @@ public class FileTreeNode extends RevengTreeNode {
       finally {
         m_fParsed = true;
         m_fUseDefaultIcon = false;
+        
+        // Update parent(s)
+        FolderTreeNode ftnParent = (FolderTreeNode) getParent();
+        if (ftnParent != null) {
+          if (m_fHadError ||
+              ! m_acAnalysisResults.hasIncompleteElements()) {
+            ftnParent.notifyUnknownChildTurnedUnCritical();
+          }
+          else {
+            ftnParent.notifyCriticalChild();
+          }
+        }
       }
     }
 
@@ -336,7 +337,22 @@ public class FileTreeNode extends RevengTreeNode {
   /**
     * Save the associated file.
     */
-  public void save() throws IOException {
-    JOptionPane.showMessageDialog (null, "This would save the file...");
+  public synchronized void save() throws IOException {
+    if (isDirty()) {
+ 
+      File fSource = new File (getFile().getAbsolutePath());
+      File fBak = new File (fSource.getParentFile(), fSource.getName() + ".bak");
+      fSource.renameTo (fBak);
+      fSource = fBak;
+      
+      File fDest = getFile();
+      
+      FileSaveConsumer.save (fSource, fDest, m_acAnalysisResults);
+      
+      m_fDirty = false;
+      if (m_rguiDirtyObserver != null) {
+        m_rguiDirtyObserver.onDirtyChanged (this, false);
+      }
+    }
   }
 }
