@@ -18,7 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.check.types.xmifacade;
 
-import java.util.ArrayList;
+import java.util.*;
 import tudresden.ocl.check.types.Type;
 import tudresden.ocl.check.types.Collection;
 
@@ -90,5 +90,42 @@ public class ModelAssociation
     // this object is not usable any more.
     ends=null;
   }
-
+  
+  //--------------------------------------------------------------------
+  /**
+   * @return true if all association ends are multiple, false otherwise
+   * @author Sten Loecher
+   */
+  public boolean allEndsAreMultiple() {
+  	boolean result = true;
+  	
+  	for (int i=0; i<ends.size(); i++) {
+  		if (!((ModelAssociationEnd)ends.get(i)).isMultiple) result = false;
+  	}
+  	
+  	return result;
+  }
+  
+  /**
+   * @return the association ends that are multiple 
+   * @author Sten Loecher
+   */
+  public List getMultipleEnds() {
+  	List retList = new ArrayList();
+  	
+  	for (int i=0; i<ends.size(); i++) {
+  		if (((ModelAssociationEnd)ends.get(i)).isMultiple) 
+  			retList.add(ends.get(i));
+  	}
+  	
+  	return Collections.unmodifiableList(retList);
+  }
+   
+  /**
+   * @return all association ends
+   * @author Sten Loecher
+   */
+  public List getEnds() {
+  	return Collections.unmodifiableList(ends);
+  }
 }

@@ -73,5 +73,30 @@ public class ModelAssociationEnd
 
     //System.out.println("  AssociationEnd "+type+" "+(name!=null?name:"")+" "+(isOrdered?"ORDERED ":"")+(isMultiple?"MULTIPLE ":"")+(isOptional?"OPTIONAL ":""));
   }
+  
+  //----------------------------------------------------------------
+  /**
+   * @return the model class of the association end.
+   * @author Sten Loecher
+   */
+  public ModelClass getModelClass() {
+  	return modelclass;
+  }
+  
+  /**
+   * @return true if the association end is multiple, false otherwise
+   * @author Sten Loecher
+   */
+  public boolean isMultiple() {
+  	return isMultiple;
+  }
+  
+  /**
+   * @return the name of the association end
+   * @author Sten Loecher   
+   */
+  public String getName() {
+  	return name;
+  }
 }
 
