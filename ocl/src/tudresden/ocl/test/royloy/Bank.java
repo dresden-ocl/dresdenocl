@@ -25,6 +25,23 @@ public class Bank extends RLObject
   /**
      @element-type Person
      @key-type Integer
+     @invariant customers_ordered_by_age:
+        customer->size<=1
+        or
+        (
+          Set{0 .. customer->size-2}->forAll
+          (
+            i:Integer | self.customer[i].age < self.customer[i+1].age
+          )
+        )
+     @invariant bank_customer0:
+        customer->isEmpty
+        or
+        customer[0]->size=1
+     @invariant bank_customer2_age:
+        customer[2]->isEmpty
+        or
+        customer[2].age>0
   */
   public HashMap customer=new HashMap();
   

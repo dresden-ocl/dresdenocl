@@ -1,34 +1,4 @@
 
-context Company
-inv manager_is_employee:
-  employees->iterate(
-    p:Person ; b:Bag(Person)=Bag{} |
-    b->including(p)
-  )->includes(manager)
-
-context Company
-inv manager_is_employee2:
-manager.employers->includes(self)
-
-context Person
-inv manager_is_employee3:
-managedCompanies->forAll(employees->includes(self))
-
-context Person
-inv age_greater_zero:
-employers.employees->forAll(age>0)
-
-context Person inv husband:
-if isMarried then 
-  wife->isEmpty xor husband->isEmpty
-else
-  wife->isEmpty and husband->isEmpty
-endif
-
-context Company
-inv topTenTwenty:
-topTenEmployees->first=topTwentyEmployees->first
-
 context Customer
 inv title_gender:
 title=(if isMale=true then 'Mr' else 'Ms' endif)
@@ -77,65 +47,6 @@ inv: self.deliveredServices.transactions->iterate(
       if t.oclIsTypeOf(Earning) then result+t.points else result endif
     )
 -- to do: 't.points' was 'points' -> default context in iterate
-
-context Person
-inv age0to199:
-Set{ 0 .. 199 }->includes(age)
-
-context Person inv nameUpperCase:
-let firstLetter:String=name.substring(1,1) in
-firstLetter = firstLetter.toUpper
-
-context Person
-inv getIncomeAfterTax1:
-getIncomeAfterTax(0.3)>0
-
-context Person
-inv getIncomeAfterTax2:
-getIncomeAfterTax(1)=1.0
-
-context Person inv:
-self.oclIsKindOf(Person)
-
-context Person inv:
-age.oclIsTypeOf(Integer)
-
-context Company inv:
-manager.oclIsKindOf(Person)
-
-context Person inv:
-1 . oclIsKindOf(Real)
-
-context Bank
-inv customers_ordered_by_age:
-customer->size<=1
-or
-(
-  Set{0 .. customer->size-2}->forAll
-  (
-    i:Integer | self.customer[i].age < self.customer[i+1].age
-  )
-)
-
-context Bank
-inv bank_customer0:
-customer->isEmpty
-or
-customer[0]->size=1
-
-context Bank
-inv bank_customer2_age:
-customer[2]->isEmpty
-or
-customer[2].age>0
-
-context Person
-inv happy_computing:
-let a=0 in
-let b=a+1 in
-let c=a + self.employers->size in
-let d=b*2 in
-a<b and self.employers->size<=c and d>0
 
 context OclAny
 inv metamodel:

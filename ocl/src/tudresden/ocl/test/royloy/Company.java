@@ -15,6 +15,19 @@ public class Company extends RLObject
 
   // Associations
 
+  /**
+     @invariant manager_is_employee:
+        employees->iterate(
+          p:Person ; b:Bag(Person)=Bag{} |
+          b->including(p)
+        )->includes(manager)
+
+     @invariant manager_is_employee2:
+        manager.employers->includes(self)
+  
+     @invariant: 
+        manager.oclIsKindOf(Person)
+  */
   public Person manager;
 
   /**
@@ -24,6 +37,8 @@ public class Company extends RLObject
   
   /**
      @element-type Person
+     @invariant topTenTwenty:
+        topTenEmployees->first=topTwentyEmployees->first
   */
   public List topTenEmployees=new ArrayList();
   
