@@ -1,7 +1,20 @@
+
+./compileAll
+
+rm -rf temp-jar
+
+mkdir -p temp-jar/xerces
+cd temp-jar/xerces
+jar xf ../../xerces.jar
+cd ../..
+
+
 export LIBFILES="\
 	tudresden/ocl/lib/*.class \
 	tudresden/ocl/injection/lib/*.class"
+
 jar -cf dresden-ocl-lib.jar $LIBFILES
+
 
 export ARGOFILES="\
 	$LIBFILES \
@@ -20,17 +33,26 @@ export ARGOFILES="\
 	tudresden/ocl/parser/lexer/lexer.dat \
 	tudresden/ocl/parser/parser/*.class \
 	tudresden/ocl/parser/parser/parser.dat"
-#echo $ARGOFILES
+
 jar -cf ocl-argo.jar $ARGOFILES
 
-jar -cf dresden-ocl.jar $ARGOFILES \
+
+export ALLFILES="\
+	$ARGOFILES \
 	tudresden/ocl/check/types/xmifacade/*.class \
 	tudresden/ocl/check/types/testfacade/*.class \
 	tudresden/ocl/injection/*.class \
 	tudresden/ocl/test/royloy/*.java \
-	tudresden/ocl/test/royloy/*.class
+	tudresden/ocl/test/royloy/*.class"
+
+jar -cfm dresden-ocl-demo.jar     demo.manifest     $ALLFILES -C temp-jar/xerces .
+jar -cfm dresden-ocl-injector.jar injector.manifest $ALLFILES -C temp-jar/xerces .
+
 
 jar -cfM royloy.jar \
-  tudresden/ocl/test/royloy/*.java \
-  tudresden/ocl/test/royloy/oclexpressions \
-  tudresden/ocl/test/TestInjection.*
+	tudresden/ocl/test/royloy/*.java \
+	tudresden/ocl/test/royloy/oclexpressions \
+	tudresden/ocl/test/TestInjection.*
+
+
+rm -rf temp-jar
