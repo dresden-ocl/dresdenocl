@@ -29,16 +29,21 @@ export ARGOFILES="\
 jar -cf ocl-argo.jar $ARGOFILES
 
 
-export ALLFILES="\
+export INJECTORFILES="\
 	$ARGOFILES \
 	tudresden/ocl/check/types/xmifacade/*.class \
+	tudresden/ocl/injection/*.class"
+
+jar -cfm dresden-ocl-injector.jar injector.manifest $INJECTORFILES
+
+
+export ALLFILES="\
+	$INJECTORFILES \
 	tudresden/ocl/check/types/testfacade/*.class \
-	tudresden/ocl/injection/*.class \
 	tudresden/ocl/test/royloy/*.java \
 	tudresden/ocl/test/royloy/*.class"
 
 jar -cfm dresden-ocl-demo.jar     demo.manifest     $ALLFILES
-jar -cfm dresden-ocl-injector.jar injector.manifest $ALLFILES
 
 
 jar -cfM royloy.jar \
