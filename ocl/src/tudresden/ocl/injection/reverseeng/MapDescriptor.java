@@ -27,7 +27,7 @@ package tudresden.ocl.injection.reverseeng;
 /** 
   * Descriptor for a class attribute of map type.
   *
-  * <p>These descriptors are maintained by {@see AnalysisConsumer} in its m_lcdMaps member.</p>
+  * <p>These descriptors are maintained by {@link AnalysisConsumer} in its m_lcdMaps member.</p>
   *
   * @author  sz9 (Steffen Zschaler)
   * @version 0.1

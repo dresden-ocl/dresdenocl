@@ -70,7 +70,7 @@ final class ClassState
   /**
      Whether this class has at least one constructor or not.
      Is used to decide, whether the default constructor has
-     to be replaced by {@see #writeDefaultConstructor}.
+     to be replaced by {@link OclInjector#writeDefaultConstructor}.
   */
   boolean has_constructors=false;
 

@@ -20,6 +20,16 @@ package tudresden.ocl.injection.lib;
 
 import java.util.*;
 
+/**
+   Contains the log of object types found in a collection.
+
+   Additionally provides static methods 
+   {@link #traceTypes(String,Collection)} and
+   {@link #traceTypes(String,Map)} to be called from generated code.
+
+   These logs are continuesly written to a log file,
+   see {@link #log} for the file format.
+*/
 public final class TypeTracer
 {
 
@@ -63,15 +73,34 @@ public final class TypeTracer
   private HashSet types_all=new HashSet();
   
   /**
-     Contains the minimal subset of {@see #types_all},
+     Contains the minimal subset of {@link #types_all},
      whose subtype extension contains all elements
-     of {@see #types_all}.
+     of {@link #types_all}.
   */
   private HashSet types_minima=new HashSet();
   
+  /**
+     A tabulator.
+     Used for the file format written to {@link #log}.
+  */
   public static final char SEPARATOR='\t';
+  
+  /**
+     An askeriks ('*').
+     Used for the file format written to {@link #log}.
+  */
   public static final char ADD_ALL='*';
+  
+  /**
+     The plus character.
+     Used for the file format written to {@link #log}.
+  */
   public static final char ADD_MINIMA='+';
+  
+  /**
+     The minus character.
+     Used for the file format written to {@link #log}.
+  */
   public static final char REMOVE_MINIMA='-';
   
   private void traceTypes(Iterator iterator, String kind)
@@ -134,7 +163,42 @@ public final class TypeTracer
       log.flush();
   }
   
+
+  /**
+     The information gathered by all type tracers is 
+     written to this stream.
+     If this attribute is not set by the user code,
+     it is set to {@link System#out}.
   
+     A description of the file format follows:
+     <ul>
+     <li>
+       A line starts with a single character having 
+       the following meanings:
+       <dl>
+       <dt>{@link #ADD_ALL}<dt>      <dd>a type was added to {@link #types_all}.</dd>
+       <dt>{@link #ADD_MINIMA}<dt>   <dd>a type was added to {@link #types_minima}.</dd>
+       <dt>{@link #REMOVE_MINIMA}<dt><dd>a type was removed from {@link #types_minima}.</dd>
+       </dl>
+     </li>
+     <li>
+       This character is followed by the name of the attribute, as produced 
+       by {@link tudresden.ocl.injection.JavaAttribute#getFullDocName()}.
+       The name is terminated by a {@link #SEPARATOR}.
+     </li>
+     <li>
+       The next item is the kind of types, which is either 
+       &quot;element-type&quot; or &quot;key-type&quot;.
+       The kind of types is terminated by a {@link #SEPARATOR} again.
+     </li>
+     <li>
+       The last item on line is the fully qualified name of the
+       element type encountered, as produced by 
+       {@link java.lang.Class#getName()}.
+       The element type is terminated by the line end.
+     </li>
+     </ul>
+  */
   private static java.io.PrintStream log=null;
   
 }

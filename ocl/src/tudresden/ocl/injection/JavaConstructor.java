@@ -28,12 +28,12 @@ public final class JavaConstructor extends JavaBehaviour
 {
   /**
      The index of the start of the last parameter of the 
-     parameter list in {@see #literal}.
+     parameter list in {@link #literal}.
      Is the index of the last comma, if there is more than one
      parameter or otherwise the index after the opening parent.
   
-     Needed for {@see #getWrappedLiteral()} and 
-     {@see #getNotWrappedLiteral()}, if this IS a constructor.
+     Needed for {@link #getWrappedLiteral()}, 
+     if this IS a constructor.
 
      Is initialized to -1.
   */
@@ -41,11 +41,11 @@ public final class JavaConstructor extends JavaBehaviour
      
   /**
      The index of the end of the last parameter of the 
-     parameter list in {@see #literal}.
+     parameter list in {@link #literal}.
      Is the index of the closing bracket of the parameter list.
   
-     Needed for {@see #getWrappedLiteral()} and 
-     {@see #getNotWrappedLiteral()}, if this IS a constructor.
+     Needed for {@link #getWrappedLiteral()}, 
+     if this IS a constructor.
 
      Is initialized to -1.
   */
@@ -108,7 +108,7 @@ public final class JavaConstructor extends JavaBehaviour
   }
   
   /**
-     Sets {@see #last_param_start} to the given value.
+     Sets {@link #last_param_start} to the given value.
      @throws RuntimeException if pos is negative.
   */
   public final void setLastParameterStart(int pos)
@@ -119,7 +119,7 @@ public final class JavaConstructor extends JavaBehaviour
   }
 
   /**
-     Sets {@see #last_param_end} to the given value.
+     Sets {@link #last_param_end} to the given value.
      @throws RuntimeException if pos is negative.
      @throws RuntimeException if called more than once.
   */

@@ -27,7 +27,7 @@ package tudresden.ocl.injection.reverseeng;
 /** 
   * Descriptor for a class attribute of collection type.
   *
-  * <p>These descriptors are maintained by {@see AnalysisConsumer} in its m_lcdCollections member.</p>
+  * <p>These descriptors are maintained by {@link AnalysisConsumer} in its m_lcdCollections member.</p>
   *
   * @author  sz9 (Steffen Zschaler)
   * @version 0.1

@@ -3,6 +3,8 @@
 -private 
 -windowtitle "Dresden OCL Toolkit"
 -doctitle "Dresden OCL Toolkit"
+-link http://java.sun.com/products/jdk/1.2/docs/api/
+-splitindex
 tudresden.ocl
 tudresden.ocl.parser
 tudresden.ocl.parser.node 
@@ -17,6 +19,7 @@ tudresden.ocl.check.types.xmifacade
 tudresden.ocl.codegen
 tudresden.ocl.injection
 tudresden.ocl.injection.lib
+tudresden.ocl.injection.reverseeng
 tudresden.ocl.lib
 tudresden.ocl.lib.test 
 tudresden.ocl.test 

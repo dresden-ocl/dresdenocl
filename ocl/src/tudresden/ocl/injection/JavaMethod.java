@@ -30,8 +30,8 @@ public final class JavaMethod extends JavaBehaviour
   public static final String WRAPPER_SUFFIX="_wrappedbyocl";
   
   /**
-     The index of the end of the feature name in {@see #literal}.
-     Needed for {@see #getWrappedLiteral()}.
+     The index of the end of the feature name in {@link #literal}.
+     Needed for {@link #getWrappedLiteral()}.
   */
   private int name_end;
   
@@ -91,7 +91,7 @@ public final class JavaMethod extends JavaBehaviour
   /**
      Returns the signature of this method.
      Is compatible to 
-     {@see tudresden.ocl.codegen.CodeFragment#getConstrainedOperation()}.
+     {@link tudresden.ocl.codegen.CodeFragment#getConstrainedOperation()}.
   */
   public String getSignature()
   {

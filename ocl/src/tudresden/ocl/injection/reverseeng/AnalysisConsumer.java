@@ -33,10 +33,10 @@ import java.io.*;
 /** 
   * InjectionConsumer used to check for presence of element-type tags in a JavaFile.
   *
-  * <p>After processing of a Java source file, {@see m_lcdCollections} will contain a list of all collections
+  * <p>After processing of a Java source file, {@link #m_lcdCollections} will contain a list of all collections
   * in the source file, together with their respective element-type tag. In addition, each element of the
   * list stores information that can be used to identifiy the exact comment where to place the element-type
-  * tag when saving the modified file. {@see m_lmdMaps} will contain a list of similar entries for each map 
+  * tag when saving the modified file. {@link #m_lmdMaps} will contain a list of similar entries for each map 
   * in the analysed file.</p>
   *
   * <p>Note that this scheme only work if the Java Source code is not modified externally between analysis
