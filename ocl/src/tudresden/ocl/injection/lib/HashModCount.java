@@ -31,7 +31,7 @@ public class HashModCount
 
   public static final int identityHashCode(Collection collection)
   {
-    return (collection==null || collection.isEmpty()) ? -1 : getModCount(collection);
+    return (collection==null || collection.isEmpty()) ? -1 : getModCountHash(collection);
   }
 
   public static final int identityHashCode(Object[] array)
@@ -41,10 +41,10 @@ public class HashModCount
 
   public static final int identityHashCode(Map map)
   {
-    return (map==null || map.isEmpty()) ? -1 : getModCount(map);
+    return (map==null || map.isEmpty()) ? -1 : getModCountHash(map);
   }
 
-  private static final int getModCount(Object o)
+  private static final int getModCountHash(Object o)
   {
     for(Class c=o.getClass(); c!=java.lang.Object.class; c=c.getSuperclass())
     {
@@ -53,12 +53,12 @@ public class HashModCount
         Field f=c.getDeclaredField("modCount");
         f.setAccessible(true);
         Integer i=(Integer)(f.get(o));
-        return i.intValue();
+        return i.intValue() ^ System.identityHashCode(o);
       }
       catch(NoSuchFieldException e) {}
       catch(IllegalAccessException e) { throw new RuntimeException(e.toString()); };
     }
-    throw new RuntimeException("Fuck!");
+    throw new RuntimeException("No Modification Counter found. Cannot use --modcount-hash.");
   }
 
 }
