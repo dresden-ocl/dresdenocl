@@ -261,6 +261,12 @@ public class TestMappedClass extends TestCase {
 		assert(g.getFrom().equals("TableA1"));
 		assert(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
 		assert(!g.hasMoreSteps());
+                
+                g = mc3.getJoinGuide("C");
+                g.next();
+                assert(g.getSelect().equals("C1"));
+                assert(g.getFrom().equals("TableC"));
+                assert(g.getWhere().equals(""));
 	}
 	
 	// exception handling

@@ -39,13 +39,20 @@ import java.util.ArrayList;
  */
 public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 	String constrainedType;
-        String constraintName;
-	String oclTokens = "sum;count;size;select;forAll;includes;includesAll;excludesAll;isEmpty;notEmpty;exists;isUnique;sortedby;allInstances;intersection;including;excluding;union;symmetricDifference";
-	String oclTokBasic1 = "size;toUpper;toLower;abs;floor;round";
-	String oclTokBasic2 = "max;min;div;mod;concat";
-	String oclTokBasic3 = "substring";
+        String constraintName;	
+
+        String oclNotSupportedFeatures = "oclInState;oclIsNew;iterate";
+        String oclCollectionOperations = "size;includes;excludes;count;includesAll;excludesAll;isEmpty;notEmpty;sum;exists;forAll;isUnique;sortedBy;union;intersection;including;excluding;symmetricDifference;select;reject;collect;count;asSequence;asBag;asSet;subSequence;at;first;last";
+        String oclTypeOperations = "name;attributes;associationEnds;operations;supertypes;allSupertypes;allInstances";
+        String oclAnyOperations = "oclIsKindOf;oclIsTypeOf;oclAsType";
+	String oclTokBasic1 = "size;toUpper;toLower;abs;floor;round;";  // operations with one parameter
+	String oclTokBasic2 = "max;min;div;mod;concat;";                // operations with two parameters
+	String oclTokBasic3 = "substring;";                             // operations with more than two parameters
+        String oclTokens = oclCollectionOperations + oclTokBasic1 + oclTokBasic2 + oclTokBasic3 + oclAnyOperations + oclTypeOperations;
+
 	String dcolon = "::";
 	String ALIAS = "TA";
+        String SEQNO = "seqNo";
         ORMappingScheme map;
         /**
          * @key-type 
@@ -529,7 +536,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                 int dColInd;
                 String inheritedFeature = "";
                 boolean assEndSucc;
-
+                
                 if (pex instanceof AFeaturePrimaryExpression) {
                         startFeature = ((AFeaturePrimaryExpression)pex).getPathName().toString().trim();
                         
@@ -545,15 +552,19 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                                 featureName = startFeature.substring(dColInd+2);
                         } else {
                         	// feature is not inherited
-                        	startType = theTree.getTypeFor(startFeature, pex).toString().trim();
+                                if (theTree.getTypeFor(startFeature, pex) == null) {
+                                    startType = startFeature;
+                                } else {    
+                                    startType = theTree.getTypeFor(startFeature, pex).toString().trim();
+                                }
                         	featureName = null;
                         }
                         
                         // get MappedClass for start type
-                        mc = map.getMappedClass(startType);
-                        
-                        // get guides to the feature starting from startType
                         guides = new ArrayList();
+                        mc = map.getMappedClass(startType);
+                                                
+                        // get guides to the feature starting from startType
                         try {
                         	if (mc.isAttribute(featureName)) {
                         		guides.add(mc.getAttributeGuide(featureName));
@@ -561,7 +572,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                         		guides.add(mc.getJoinGuide(featureName));
                         	}                        	
                         } catch(NullPointerException e) {
-                        	// feature name is given in one of the postfix expression tails                        	
+                        	// feature name is given in one of the postfix expression tails                                
                         }
                         
                         // iterate the postfix expression tail and assign navigation guides
@@ -575,8 +586,8 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         				// next feature is an attribute
         				guide = mc.getAttributeGuide(next);
         				if ((i==0) && (dColInd == -1)) guide.setAlias(startFeature.toUpperCase());
-        				guides.add(0, guide);
-                                        assEndSucc = false;
+                                      	guides.add(0, guide);
+                                        assEndSucc = true;
             			} else if (mc.isAssociationEnd(next)) {
         				// next feature navigates to an association end
         				guide = mc.getJoinGuide(next);
@@ -623,7 +634,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 	public void inAFeatureCall(AFeatureCall node) {
     		String task = (String)getIn(node);
     		if (task == null) return;
-    		String pathName = node.getPathName().toString().trim();
+                String pathName = node.getPathName().toString().trim();
     		Node tailBegin = ((APostfixExpressionTail)node.parent()).getPostfixExpressionTailBegin();
     		String thisCode = "";
     		String navCode;
@@ -641,8 +652,15 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     	
     		List guides = (List)navigation.get(node.parent());
                 System.err.println("current pathName: " + pathName);
+                if (guides == null) {
+                    System.err.println("No guides available !");
+                } else {
+                    if (guides.size() == 0) System.err.println("Empty guide list !");
+                }
 
     		if (oclTokens.indexOf(pathName) == -1) {
+                        System.err.println("no OCL token: " + pathName);
+                    
     			// quit if no guides list is available or complain about empty list
     			if (guides == null) return;
     			if (guides.size() == 0) throw new RuntimeException("empty guides list at " + pathName);
@@ -712,7 +730,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     			    guide.next();
     			    pkName = guide.getSelect();
                             pkTable = guide.getFrom();
-    			    prepareJoin(guides);
+                            prepareJoin(guides);                         
                         } else {
                             pkName = STANDARDKEY;
                             pkTable = STANDARDTABLE;
@@ -720,17 +738,72 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
    			
    			// generate code
    			// features that need to be mapped using the MODEL TYPE QUERY
+                        if (oclTypeOperations.indexOf(pathName) != -1) {
+                            // determine type
+                            Type type = theTree.getNodeType(node.parent());
+                            String tmp = ((Collection)type).getElementType().toString();            
+                            System.err.println(tmp);
+                            guide = map.getMappedClass(tmp).getJoinGuide(tmp);
+                            guide.reset();
+    			    guide.next();
+                            pkName = guide.getSelect();
+                            pkTable = guide.getFrom();
+                        }
+                        
    			if (pathName.equals("allInstances")) {
-   				
+                                                           
    				ca.reset();
-        			ca.setArgument("column", pkName);
-        			ca.setArgument("tables", tableRepresentation);
-    				ca.setArgument("joins", joinRepresentation);
-
+        			ca.setArgument("object", pkName);
+        			ca.setArgument("tables", pkTable);
+    			
         			try {
         				thisCode = ca.getCodeFor("feature_call", "allInstances");
         			} catch (Exception e) {
         				System.err.println(e.toString());
+        			}
+   			}
+                        
+                        // features on OclAny --> CLASS AND ATTRIBUTE
+                        if (pathName.equals("oclIsKindOf")) {
+                            System.err.println(guides.toString());
+                        } else if (pathName.equals("oclIsTypeOf")) {
+                            // --> todo
+                        } else if (pathName.equals("oclAsType")) {
+                            // --> todo
+                        }
+                        
+                        // features that need to be mapped using the BASIC TYPE pattern from UML'99
+   			if ((tailBegin instanceof ADotPostfixExpressionTailBegin) && (!pathName.equals("allInstances"))) {
+   				ca.reset();
+   				if (oclTokBasic1.indexOf(pathName) != -1) {
+   					ca.setArgument("operand", task);
+  				} else if (oclTokBasic2.indexOf(pathName) != -1) {
+  					taskAp = getUniqueTask();
+  					if (fcp != null) setIn(fcp, taskAp);
+  					ca.setArgument("operand1", task);
+  					ca.setArgument("operand2", taskAp);
+  				} else if (oclTokBasic3.indexOf(pathName) != -1) {
+  					String op2, op3;
+
+  					ca.setArgument("operand", task);
+
+  					try {
+  						AActualParameterList apl = (AActualParameterList)((AFeatureCallParameters)node.getFeatureCallParameters()).getActualParameterList();
+  						op2 = apl.getExpression().toString().trim();
+  						op3 = ((AActualParameterListTail)((apl.getActualParameterListTail().toArray())[0])).getExpression().toString().trim();
+
+  						ca.setArgument("start", op2);
+  						ca.setArgument("end", op3);
+  					} catch (Exception e) {
+  						System.err.println("Missing arguments for substring feature!");
+					}
+  				}
+
+   				try {
+   					spec = "basic_" + pathName;
+                                        thisCode += ca.getCodeFor("feature_call", spec);
+        			} catch (Exception e) {
+        				System.err.println("sum: " + e.toString());
         			}
    			}
    			
@@ -773,9 +846,40 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
   				    if (type instanceof Collection) {
   					if (((Collection)type).getCollectionKind() == Collection.SET) spec = "set";
   					if (((Collection)type).getCollectionKind() == Collection.BAG) spec = "bag";
-  					if (((Collection)type).getCollectionKind() == Collection.SEQUENCE) spec = "sequence";
+                                        if (((Collection)type).getCollectionKind() == Collection.SEQUENCE) { 
+                                            spec = "sequence";
+                                            pathName = spec + "_" + pathName;
+                                        }
   				    }
   			        }
+                                
+                                // features that need to be mapped using the SEQUENCE pattern
+                                if (pathName.equals("sequence_union")) {
+                                    ca.reset();
+                                    ca.setArgument("sequence", task);
+                                    ca.setArgument("sequence2", taskAp);
+                                    ca.setArgument("seqNo", SEQNO);
+                                    ca.setArgument("seqNo2", SEQNO);
+                                    ca.setArgument("element", pkName);
+                                    codeForPathName = true;
+                                } else if (pathName.equals("sequence_including")) {
+                                    System.err.println("-->");
+                                    ca.reset();
+                                    ca.setArgument("sequence", task);
+                                    ca.setArgument("object", taskAp);
+                                    ca.setArgument("seqNo", SEQNO);
+                                    ca.setArgument("seqNo2", SEQNO);
+                                    codeForPathName = true;
+                                } else if (pathName.equals("sequence_excluding")) {
+                                    System.err.println("-->");
+                                    ca.reset();
+                                    ca.setArgument("sequence", task);
+                                    ca.setArgument("object", taskAp);
+                                    ca.setArgument("element", pkName);
+                                    ca.setArgument("seqNo", SEQNO);
+                                    ca.setArgument("seqNo2", SEQNO);
+                                    codeForPathName = true;
+                                } // --> todo
                                 
                                 if ((pathName.equals("select")) || (pathName.equals("reject"))) {
                                     ca.reset();
@@ -836,8 +940,8 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 			  
 			  	if (codeForPathName) {
                           		try {
-	        		  		thisCode = ca.getCodeFor("feature_call", pathName);
-        			  	} catch (Exception e) {
+                                               thisCode = ca.getCodeFor("feature_call", pathName);
+                                        } catch (Exception e) {
         			      		System.err.println(e.toString());
         			    	}
                           	}
@@ -938,7 +1042,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 			ca.reset();
 			ca.setArgument("value", exp.elementAt(i).toString());
 			if (collKind instanceof ASequenceCollectionKind) {
-				ca.setArgument("seqnr", i + "");
+				ca.setArgument("seqnr", i + 1 + "");
 			}
 
 			try {

@@ -185,20 +185,37 @@ public class MappedClass {
 
 	/**
 	 * @param name the name of the association end the join guide is supposed to lead to
-         * @return a List with all join guides that lead to the specified association end
+         * @return a List with all join guides that lead to the specified association end;
+         *         if the parameter name equals the class name, join guides to this class will be returned
          * @exception IllegalArgumentException if name is not the name of an association end
 	 */
 	public List getJoinGuides(String name)
 	throws IllegalArgumentException {
 		if (name == null) throw new IllegalArgumentException(EX_PAR_NULL);
-
-		// note: be aware that association ends of superclasses must be
-		//       investigated too, because subclasses inherit the association
-		//       ends of it's superclasses
+		
 		AssociationEnd ae;
 		List scg;
 		int count = 0;
+                Guide guide;
+                Table table;
+                
+                // if the given name equals the class name, a join guides to this class will be returned
+                if (name.equals(className)) {
+                        scg = new ArrayList();
+                        
+                        for (Iterator i=tables.iterator(); i.hasNext(); ) {
+                            table = (Table)i.next();
+                            guide = new Guide(true);
+                            guide.add(table.getPrimaryKeyRepresentation(), table.getTableName(), "");  
+                            scg.add(guide);
+                        }
+                    
+                        return Collections.unmodifiableList(scg);
+                }
 
+                // note: be aware that association ends of superclasses must be
+		//       investigated too, because subclasses inherit the association
+		//       ends of it's superclasses
 		try {
 			ae = getAssEnd(name);
 			return Collections.unmodifiableList(ae.guides);
