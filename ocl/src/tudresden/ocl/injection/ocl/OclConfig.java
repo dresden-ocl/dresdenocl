@@ -19,18 +19,23 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.injection.ocl;
 
 import java.util.HashMap;
+import java.io.IOException;
+import tudresden.ocl.OclTree;
 import tudresden.ocl.injection.TaskConfig;
 import tudresden.ocl.injection.TaskInstrumentor;
 import tudresden.ocl.NameCreator;
 import tudresden.ocl.codegen.JavaCodeGenerator;
+import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.check.types.ModelFacade;
+import tudresden.ocl.check.OclTypeException;
+import tudresden.ocl.parser.OclParserException;
 
 public final class OclConfig implements TaskConfig
 {
 	/**
 	 * Type names are keys, SortedFragments values.
 	 */
-	public HashMap codefragments = new HashMap();
+	public final HashMap codefragments = new HashMap();
 	
 	public boolean tracechecking = false;
 	
@@ -52,11 +57,52 @@ public final class OclConfig implements TaskConfig
 	}
 	
 	public ModelFacade modelfacade;
-	public NameCreator namecreator=new NameCreator();
+	
+	public final NameCreator namecreator = new NameCreator();
 	
 	public TaskInstrumentor createTaskInstrumentor()
 	{
 		return new OclInstrumentor(this);
+	}
+	
+	public void makeConstraint(String text, String kind, String context)
+	throws OclParserException, OclTypeException
+	{
+		String constraintString="context "+context+' '+kind+' '+text;
+		//System.out.println("found inline constraint: >"+constraintString+"<");
+		try
+		{
+			makeConstraint(constraintString);
+		}
+		catch(IOException e)
+		{
+			throw new RuntimeException(e.toString());
+		}
+	}
+	
+	public void makeConstraint(String constraintString)
+	throws OclParserException, OclTypeException, IOException
+	{
+		//System.out.println("Loaded constraint:");
+		//System.out.println(constraintString);
+		//System.out.println("Parsing constraint.");
+		OclTree constraintTree=OclTree.createTree(constraintString, modelfacade);
+		constraintTree.setNameCreator(namecreator);
+		//System.out.println("Type checking constraint.");
+		constraintTree.assureTypes();
+		//System.out.println("Normalizing.");
+		constraintTree.applyDefaultNormalizations();
+		//System.out.println("Generating Code.");
+		CodeFragment[] frags=jcg.getCode(constraintTree);
+		for (int j=0; j<frags.length; j++)
+		{
+			String ct=frags[j].getConstrainedType();
+			SortedFragments sf=(SortedFragments)(codefragments.get(ct));
+			if(sf==null)
+				codefragments.put(ct, new SortedFragments(frags[j]));
+			else
+				sf.addFragment(frags[j]);
+		}
 	}
 	
 }

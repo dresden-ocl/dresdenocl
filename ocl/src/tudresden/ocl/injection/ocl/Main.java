@@ -18,19 +18,20 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.injection.ocl;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.*;
 import java.lang.reflect.Modifier;
-import tudresden.ocl.OclTree;
-import tudresden.ocl.NameCreator;
 import tudresden.ocl.lib.NameAdapter;
 import tudresden.ocl.lib.SimpleNameAdapter;
 import tudresden.ocl.lib.ArgoNameAdapter;
 import tudresden.ocl.parser.OclParserException;
-import tudresden.ocl.check.types.*;
+import tudresden.ocl.check.types.ModelFacade;
+import tudresden.ocl.check.types.ReflectionFacade;
+import tudresden.ocl.check.types.DefaultReflectionAdapter;
 import tudresden.ocl.check.OclTypeException;
-import tudresden.ocl.codegen.CodeFragment;
-import tudresden.ocl.codegen.JavaCodeGenerator;
 import tudresden.ocl.injection.lib.Invariant;
 import tudresden.ocl.injection.lib.Check;
 import tudresden.ocl.injection.lib.HashExact;
@@ -40,50 +41,10 @@ import tudresden.ocl.injection.lib.WrapperDummy;
 import tudresden.ocl.injection.lib.TypeTracer;
 import tudresden.ocl.injection.*;
 
-public class Main
+public class Main extends tudresden.ocl.injection.Main
 {
 
-  public static void makeConstraint(String text,
-                                    String kind,
-                                    String context,
-                                    OclConfig conf)
-    throws OclParserException, OclTypeException
-  {
-    String constraintString="context "+context+' '+kind+' '+text;
-    //System.out.println("found inline constraint: >"+constraintString+"<");
-    try
-    {
-      makeConstraint(constraintString, conf);
-    }
-    catch(IOException e) { throw new RuntimeException(e.toString()); }
-  }
-
-  public static void makeConstraint(String constraintString, OclConfig conf)
-    throws OclParserException, OclTypeException, IOException
-  {
-    //System.out.println("Loaded constraint:");
-    //System.out.println(constraintString);
-    //System.out.println("Parsing constraint.");
-    OclTree constraintTree=OclTree.createTree(constraintString, conf.modelfacade);
-    constraintTree.setNameCreator(conf.namecreator);
-    //System.out.println("Type checking constraint.");
-    constraintTree.assureTypes();
-    //System.out.println("Normalizing.");
-    constraintTree.applyDefaultNormalizations();
-    //System.out.println("Generating Code.");
-    CodeFragment[] frags=conf.jcg.getCode(constraintTree);
-    for (int j=0; j<frags.length; j++)
-    {
-      String ct=frags[j].getConstrainedType();
-      SortedFragments sf=(SortedFragments)(conf.codefragments.get(ct));
-      if(sf==null)
-        conf.codefragments.put(ct, new SortedFragments(frags[j]));
-      else
-        sf.addFragment(frags[j]);
-    }
-  }
-
-  public static void makeCode(File constraintfile, OclConfig conf)
+  private static void makeCode(File constraintfile, OclConfig conf)
     throws OclParserException, OclTypeException, IOException
   {
     BufferedReader br=new BufferedReader(new FileReader(constraintfile));
@@ -97,7 +58,7 @@ public class Main
       {
         if(!nextConstraint.equals(""))
         {
-          makeConstraint(nextConstraint, conf);
+          conf.makeConstraint(nextConstraint);
         }
         nextConstraint="";
       }
@@ -114,72 +75,6 @@ public class Main
       ((SortedFragments)(constrainedTypes.get(nexttype))).print(System.out);
     }
     */
-  }
-
-  public static void inject(File inputfile, File outputfile, InstrumentorConfig conf)
-    throws IOException, InjectorParseException
-  {
-    //System.out.println("injecting from "+inputfile+" to "+outputfile);
-
-    if(outputfile.exists())
-    {
-      if(inputfile.getCanonicalPath().equals(outputfile.getCanonicalPath()))
-        throw new RuntimeException("error: input file and output file are the same.");
-      if(!outputfile.isFile())
-        throw new RuntimeException("error: output file is not a regular file.");
-    }
-
-    Reader input=null;
-    Writer output=null;
-    try
-    {
-      input =new InputStreamReader (new FileInputStream (inputfile));
-      output=new OutputStreamWriter(new FileOutputStream(outputfile));
-      (new Injector(input, output, new Instrumentor(output, conf))).parseFile();
-      input.close();
-      output.close();
-    }
-    catch(InjectorParseException e)
-    {
-      input.close();
-      output.close();
-      outputfile.delete();
-      throw new InjectorParseException(inputfile+": "+e.getMessage());
-    }
-    catch(tudresden.ocl.check.OclTypeException e)
-    {
-      input.close();
-      output.close();
-      outputfile.delete();
-      throw new tudresden.ocl.check.OclTypeException(inputfile+": "+e.getMessage());
-    }
-    catch(tudresden.ocl.parser.OclParserException e)
-    {
-      input.close();
-      output.close();
-      outputfile.delete();
-      throw new tudresden.ocl.parser.OclParserException(inputfile+": "+e.getMessage());
-    }
-    catch(IOException e)
-    {
-      if(input!=null)  input.close();
-      if(output!=null) output.close();
-      outputfile.delete();
-      throw e;
-    }
-  }
-
-  public static final String TEMPFILE_SUFFIX=".temp_oclinjection";
-
-  public static void inject(File tobemodifiedfile, InstrumentorConfig conf)
-    throws IOException, InjectorParseException
-  {
-    File outputfile=new File(tobemodifiedfile.getPath()+TEMPFILE_SUFFIX);
-    inject(tobemodifiedfile, outputfile, conf);
-    if(!tobemodifiedfile.delete())
-      System.out.println("warning: deleting "+tobemodifiedfile+" failed.");
-    if(!outputfile.renameTo(tobemodifiedfile))
-      System.out.println("warning: renaming "+outputfile+" to "+tobemodifiedfile+" failed.");
   }
 
   public static void main (String args[])
@@ -401,33 +296,6 @@ public class Main
     catch(IOException e){System.out.println(e);}
   }
 	
-	public static void expand(java.util.Collection files, String pattern)
-	  throws IOException
-	{
-		if(pattern.endsWith("*.java"))
-		{
-			//System.out.println("expanding "+pattern);
-			String directoryName = pattern.substring(0,pattern.length()-"*.java".length());
-			File directory = new File(directoryName);
-			if(!directory.isDirectory())
-				throw new IOException(directoryName+" should be a directory");
-			File[] expandedFiles = directory.listFiles(new FileFilter()
-			{
-				public boolean accept(File file)
-				{
-					return
-						file.isFile() &&
-						file.getName().endsWith(".java");
-				}
-			});
-			//for(int i=0; i<expandedFiles.length; i++) System.out.println("  into "+expandedFiles[i].getPath());
-			for(int i=0; i<expandedFiles.length; i++)
-			  files.add(expandedFiles[i].getPath());
-		}
-		else
-			files.add(pattern);
-	}
-
 }
 
 

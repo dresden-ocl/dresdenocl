@@ -70,21 +70,21 @@ public final class OclInstrumentor implements TaskInstrumentor
 	{
 		if(text==null) return;
 		for(int i=0; i<text.length; i++)
-			Main.makeConstraint(text[i], "inv", jc.getName(), config);
+			config.makeConstraint(text[i], "inv", jc.getName());
 	}
 	
 	private final void addPrecondition(JavaClass jc, String[] text)
 	{
 		if(text==null) return;
 		for(int i=0; i<text.length; i++)
-			Main.makeConstraint(text[i], "pre", jc.getName(), config);
+			config.makeConstraint(text[i], "pre", jc.getName());
 	}
 	
 	private final void addPostcondition(JavaClass jc, String[] text)
 	{
 		if(text==null) return;
 		for(int i=0; i<text.length; i++)
-			Main.makeConstraint(text[i], "post", jc.getName(), config);
+			config.makeConstraint(text[i], "post", jc.getName());
 	}
 	
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed)
