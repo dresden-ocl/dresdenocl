@@ -224,8 +224,8 @@ public final class ClassFeature
         o.println("    parameter >"+i.next()+"< >"+i.next()+"<");
       for(Iterator i=throwables.iterator(); i.hasNext(); )
         o.println("    throwable >"+i.next()+"<");
+      System.out.println("    signatr: >"+getSignature()+"<");
     }
-    System.out.println("    signatr: >"+getSignature()+"<");
     System.out.println("    literal: >"+literal+"<"+name_end);
     System.out.println("    wrapped: >"+getWrappedLiteral()+"<");
     System.out.println("    notwrap: >"+getNotWrappedLiteral()+"<");

@@ -229,16 +229,42 @@ public class Injector
     }
   }
 
-  private void parseMethodBody() throws IOException, EndException
+  /**
+     Parses a method body or a attribute initializer, 
+     depending on the parameter.
+     For method bodys, the input stream must be directly behind 
+     the first opening curly bracket of the body.
+     For attribute initializers, the input stream must be directly 
+     behind the '='.
+  */
+  private void parseBody(boolean attribute) 
+    throws IOException, EndException, InjectorParseException
   {
-    //System.out.println("    body");
-    for(int bracketdepth=1; bracketdepth>0; )
+    //System.out.println("    body("+(attribute?"attribute":"method")+")");
+
+    int bracketdepth=( attribute ? 0 : 1 );
+    charloop: while(true)
     {
       switch(read())
       {
       case '/': readComment(); break;
-      case '{': bracketdepth++; break;
-      case '}': bracketdepth--; break;
+      case '{': 
+        bracketdepth++; 
+        break;
+      case '}': 
+        bracketdepth--;
+        if(bracketdepth==0 && !attribute)
+          break charloop;
+        if(bracketdepth<0)
+          throw new InjectorParseException("';' expected.");
+        break;
+      case ';':
+        // dont have to test for wait for semicolon here
+        // since then the test in the '}' branch would have
+        // already terminated the loop
+        if(bracketdepth==0)
+          break charloop;
+        break;
       // ignore brackets inside of literal String's
       case '"':
         il: while(true)
@@ -369,7 +395,7 @@ public class Injector
             else
               write(cf.getWrappedLiteral());
           }
-          parseMethodBody();
+          parseBody(false);
           flushOutbuf();
           break ti;
         case ';':
@@ -414,8 +440,16 @@ public class Injector
     }
     else // it's a attribute
     {
-      while(c!=';') // TODO
-        c=readToken();
+      switch(c)
+      {
+      case ';': 
+        break;
+      case '=':
+        parseBody(true);
+        break;
+      default:
+        throw new InjectorParseException("';' or '=' expected.");
+      }
       flushOutbuf();
       cf.setLiteral(getCollector());
       write(cf.getLiteral());

@@ -35,6 +35,53 @@ public abstract class Example implements Runnable
   private volatile Integer[] qualifiers;
   String hallo="hallo";
 
+  // these attributes test the ability of the parser
+  // to skip more complex (ugly) attribute initializers
+  String   uglyAttribute1="some'Thing{some\"Thing;Else";
+  char     uglyAttribute2=';';
+  char     uglyAttribute3='{';
+  char     uglyAttribute4='"';
+  char     uglyAttribute5='\'';
+  String[] uglyAttribute6=
+  {
+    "some'Thing{some\"Thing;Else", // ugly ; { " ' comment
+    "some'Thing{some\"Thing;Else"
+  };
+  char[]   uglyAttribute7={';','{','"','\''};
+  Runnable uglyAttribute8=new Runnable()
+  {
+    // ugly ; { " ' comment
+    String   uglyInnerAttribute1="some'Thing{some\"Thing;Else";
+    char     uglyInnerAttribute2=';';
+    char     uglyInnerAttribute3='{';
+    char     uglyInnerAttribute4='"';
+    char     uglyInnerAttribute5='\'';
+    String[] uglyInnerAttribute6=
+    {
+      "some'Thing{some\"Thing;Else", // ugly ; { " ' comment
+      "some'Thing{some\"Thing;Else"
+    };
+    char[]   uglyInnerAttribute7={';','{','"','\''};
+    public void run()
+    {
+      // ugly ; { " ' comment
+      String   uglyVariable1="some'Thing{some\"Thing;Else";
+      char     uglyVariable2=';';
+      char     uglyVariable3='{';
+      char     uglyVariable4='"';
+      char     uglyVariable5='\'';
+      String[] uglyVariable6=
+      {
+        "some'Thing{some\"Thing;Else", // ugly ; { " ' comment
+        "some'Thing{some\"Thing;Else"
+      };
+      char[]   uglyAttribute7={';','{','"','\''};
+    }
+    // ugly ; { " ' comment
+  };
+  // end of ugly attributes
+  
+
   public Example(String name, Integer type)
   {
     super();
@@ -428,7 +475,7 @@ public abstract class Example implements Runnable
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Wed Jun 28 10:48:17 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Wed Jun 28 12:52:46 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
@@ -555,7 +602,7 @@ class SecondExample extends Example{
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Wed Jun 28 10:48:17 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Wed Jun 28 12:52:46 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
