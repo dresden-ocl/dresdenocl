@@ -3,10 +3,32 @@
 The classes and interfaces in this package are used to access model information
 and represent OCL types. <code>ModelFacade</code> is the interface used by the
 type checker to access model information.
+
+<p>
+The following sequence diagram gives an example of how the type checker uses 
+interfaces of this package to get the necessary model information to check the
+constraint 
+<code>context Person inv: managedCompanies.employees-&gt;includes(self)</code>.
+<br/>
+SomeAny and SomeModelFacade stand for implementions of the respective interfaces.
+<i>setOfCompany</i> and <i>setOfPerson</i> are instances of {@link 
+tudresden.ocl.check.types.Collection}.
+<br/>
+<img src="doc-files/seq_modelfacade.gif"/>
+
+<p>
+An overview of the type interfaces is shown in the following diagram:
+<br>
+<img src="doc-files/types.gif"/>
+
+
+<p>
 <code>ReflectionFacade</code> is an implementation of this interface that
 queries compiled Java classes via reflection to get model information.
 <code>TestModelFacade</code> in the subpackage <code>testfacade</code>
 is a dummy implementation that is
-used for testing and demonstration purposes.
+used for testing and demonstration purposes. Other implementations are backed
+by information from XMI files or Argo/UMLs repository. (The sourcecode of the 
+latter is part of Argo.)
 </body>
 </html>
