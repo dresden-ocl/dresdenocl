@@ -20,6 +20,8 @@ package tudresden.ocl.injection.lib;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.TreeSet;
 import java.lang.reflect.Field;
 
 /**
@@ -46,6 +48,32 @@ public class HashModCount
 
   private static final int getModCountHash(Object o)
   {
+    // Both HashSet and TreeSet are implemented with a backing
+    // map of the corresponding type. So the modification counter
+    // has to be looked up in the backing map.
+    if(o instanceof HashSet)
+    {
+      try
+      {
+        Field f=HashSet.class.getDeclaredField("map");
+        f.setAccessible(true);
+        o=f.get(o);
+      }
+      catch(NoSuchFieldException e)   { throw new RuntimeException(e.toString()); }
+      catch(IllegalAccessException e) { throw new RuntimeException(e.toString()); };
+    }
+    else if(o instanceof TreeSet)
+    {
+      try
+      {
+        Field f=TreeSet.class.getDeclaredField("m");
+        f.setAccessible(true);
+        o=f.get(o);
+      }
+      catch(NoSuchFieldException e)   { throw new RuntimeException(e.toString()); }
+      catch(IllegalAccessException e) { throw new RuntimeException(e.toString()); };
+    }
+
     for(Class c=o.getClass(); c!=java.lang.Object.class; c=c.getSuperclass())
     {
       try
@@ -58,7 +86,7 @@ public class HashModCount
       catch(NoSuchFieldException e) {}
       catch(IllegalAccessException e) { throw new RuntimeException(e.toString()); };
     }
-    throw new RuntimeException("No Modification Counter found. Cannot use --modcount-hash.");
+    throw new RuntimeException("No Modification Counter found in object >"+o+"< of class >"+o.getClass()+"<. Cannot use --modcount-hash.");
   }
 
 }

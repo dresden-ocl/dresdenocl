@@ -4,5 +4,6 @@ java -cp .:xerces.jar \
   --reflection-model tudresden.ocl.test.royloy \
   --violation-macro "tudresden.ocl.test.TestInjection.theInstance.onViolation" \
   --trace-types \
+  --modcount-hash \
   --modify \
   tudresden/ocl/test/royloy/*.java

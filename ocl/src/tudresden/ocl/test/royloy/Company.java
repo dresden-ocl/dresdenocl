@@ -31,9 +31,11 @@ public class Company extends RLObject
   public Person manager;
 
   /**
+     Test TreeSet working with
+     {@link tudresden.ocl.injection.lib.HashModCount}.
      @element-type Person
   */
-  public HashSet employees=new HashSet();
+  public TreeSet employees=new TreeSet();
   
   /**
      @element-type Person

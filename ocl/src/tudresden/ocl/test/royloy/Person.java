@@ -7,7 +7,7 @@ import java.util.*;
 /**
    The Person of the Person-Company model.
 */
-public class Person extends RLObject
+public class Person extends RLObject implements Comparable
 {
 
   // Attributes
@@ -88,7 +88,19 @@ public class Person extends RLObject
   {
     return super.toString()+'['+name+']';
   }
-  
+
+  public int compareTo(Object o)
+  {
+    int a=hashCode();
+    int b=o.hashCode();
+    if(a<b)
+      return -1;
+    else if(a>b)
+      return 1;
+    else
+      return 0;
+  }
+
   public boolean assert()
   {
     return true;
