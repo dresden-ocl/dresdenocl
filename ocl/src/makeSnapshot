@@ -1,0 +1,4 @@
+
+./makeJar
+rm -rf ../www/download/*
+cp -a *.jar *.tar.gz api ../www/download
