@@ -20,6 +20,7 @@ package tudresden.ocl.injection;
 
 import java.io.*;
 import java.util.*;
+import java.lang.reflect.Modifier;
 import tudresden.ocl.codegen.CodeFragment;
 
 /**
@@ -126,9 +127,14 @@ public abstract class JavaFeature
 
   public final boolean isStatic()
   {
-    return java.lang.reflect.Modifier.isStatic(modifiers);
+    return (modifiers & Modifier.STATIC) > 0;
   }
   
+  public final boolean isAbstract()
+  {
+    return (modifiers & Modifier.ABSTRACT) > 0;
+  }
+
   /**
      The return type of the method.
      Is null, if it is a constructor, or a class.
@@ -146,7 +152,7 @@ public abstract class JavaFeature
   public final void print(PrintStream o)
   {
     o.println("  "+JavaFile.extractClassName(getClass().getName())+
-              " ("+java.lang.reflect.Modifier.toString(modifiers)+
+              " ("+Modifier.toString(modifiers)+
               ") >"+type+
               "< >"+name+
               "< in >"+(parent==null?"none":parent.getName())+"<");

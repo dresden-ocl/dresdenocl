@@ -257,7 +257,7 @@ public abstract class Example implements Runnable
     a=a/(a+b); // ugly expression
   }
 
-  abstract void abstractMethod_wrappedbyocl();
+  abstract void abstractMethod();
 
   /**
      Some example doc-comment.
@@ -436,27 +436,6 @@ public abstract class Example implements Runnable
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       set_wrappedbyocl(name, type, qualifiers);
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
-      checkForChangedFeatures();
-      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-    }
-  }/**
-    A wrapper for checking ocl constraints.
-    Generated automatically, DO NOT CHANGE!
-    @author ocl_injector
-    @see #abstractMethod_wrappedbyocl()
-  */void abstractMethod()
-  {
-    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      abstractMethod_wrappedbyocl();
-    else
-    {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
-      checkForChangedFeatures();
-      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      abstractMethod_wrappedbyocl();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();

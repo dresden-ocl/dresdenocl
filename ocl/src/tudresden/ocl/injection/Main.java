@@ -162,10 +162,17 @@ final class OclInjector implements InjectionConsumer
   public void onBehaviourHeader(JavaBehaviour jb) 
     throws java.io.IOException
   {
-    if(clean || jb.isStatic() || class_state.javaclass.isInterface())
+    if(clean || 
+       jb.isStatic() || 
+       jb.isAbstract() || 
+       class_state.javaclass.isInterface())
+    {
       output.write(jb.getLiteral());
+    }
     else
+    {
       output.write(jb.getWrappedLiteral());
+    }
 
     if(!clean)
     {
@@ -190,6 +197,7 @@ final class OclInjector implements InjectionConsumer
       
       if(jf instanceof JavaBehaviour && 
          !jf.isStatic() && 
+         !jf.isAbstract() && 
          !discardnextfeature)
       {
         if(delayinsertions)
@@ -558,8 +566,7 @@ final class OclInjector implements InjectionConsumer
   {
     Writer o=output;
     
-    String modifierString=
-      Modifier.toString(jb.getModifiers()&~Modifier.ABSTRACT);
+    String modifierString=Modifier.toString(jb.getModifiers());
     if(modifierString.length()>0)
     {
       o.write(modifierString);
