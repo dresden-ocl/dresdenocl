@@ -8,12 +8,14 @@ cd temp-jar/xerces
 jar xf ../../xerces.jar
 cd ../..
 
+JARDIR=jars
+mkdir -p ${JARDIR}
 
 export LIBFILES="\
 	tudresden/ocl/lib/*.class \
 	tudresden/ocl/injection/lib/*.class"
 
-jar -cf dresden-ocl-lib.jar $LIBFILES
+jar -cf ${JARDIR}/dresden-ocl-lib.jar $LIBFILES
 
 
 export ARGOFILES="\
@@ -34,7 +36,7 @@ export ARGOFILES="\
 	tudresden/ocl/parser/parser/*.class \
 	tudresden/ocl/parser/parser/parser.dat"
 
-jar -cf ocl-argo.jar $ARGOFILES
+jar -cf ${JARDIR}/ocl-argo.jar $ARGOFILES
 
 
 export ALLFILES="\
@@ -45,11 +47,11 @@ export ALLFILES="\
 	tudresden/ocl/test/royloy/*.java \
 	tudresden/ocl/test/royloy/*.class"
 
-jar -cfm dresden-ocl-demo.jar     demo.manifest     $ALLFILES -C temp-jar/xerces .
-jar -cfm dresden-ocl-injector.jar injector.manifest $ALLFILES -C temp-jar/xerces .
+jar -cfm ${JARDIR}/dresden-ocl-demo.jar     demo.manifest     $ALLFILES -C temp-jar/xerces .
+jar -cfm ${JARDIR}/dresden-ocl-injector.jar injector.manifest $ALLFILES -C temp-jar/xerces .
 
 
-jar -cfM royloy.jar \
+jar -cfM ${JARDIR}/royloy.jar \
 	tudresden/ocl/test/royloy/*.java \
 	tudresden/ocl/test/royloy/oclexpressions \
 	tudresden/ocl/test/TestInjection.*
