@@ -29,3 +29,8 @@ jar -cf dresden-ocl.jar $ARGOFILES \
 	tudresden/ocl/injection/*.class \
 	tudresden/ocl/test/royloy/*.java \
 	tudresden/ocl/test/royloy/*.class
+
+jar -cfM royloy.jar \
+  tudresden/ocl/test/royloy/*.java \
+  tudresden/ocl/test/royloy/oclexpressions \
+  tudresden/ocl/test/TestInjection.*

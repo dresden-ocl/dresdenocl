@@ -24,6 +24,13 @@ import tudresden.ocl.injection.lib.Invariant;
 
 public class TestInjection
 {
+  private boolean strict;
+  
+  private TestInjection(boolean strict)
+  {
+    this.strict=strict;
+  }
+  
   private void doTest() 
   {
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
@@ -136,6 +143,8 @@ public class TestInjection
   
   private void ensureAllViolations()
   {
+    if(!strict) return;
+    
     if(!ev.isEmpty())
     {
       StringBuffer buf=new StringBuffer();
@@ -169,6 +178,8 @@ public class TestInjection
     ensureAllViolations();
     ev=null;
 
+    if(!strict) return;
+    
     // phase 2: checking all invariants.
     // must encounter exactly the same violations, 
     // as in phase 1.
@@ -189,6 +200,8 @@ public class TestInjection
   
   public void onViolation(String message)
   {
+    if(!strict) throw new RuntimeException();
+
     String m=stripId(message);
     
     //System.out.println("violation :"+m);
@@ -222,6 +235,8 @@ public class TestInjection
   
   private void expectViolation(String m)
   {
+    if(!strict) return;
+    
     //System.out.println("expection :"+m);
     if(ev1.contains(m)) throw new RuntimeException();
     ev1.add(m);
@@ -251,7 +266,11 @@ public class TestInjection
   
   static public void main(String[] args)
   {
-    (theInstance=new TestInjection()).doTest();
+    boolean strict=false;
+    if(args.length>0 && args[0].equals("strict"))
+      strict=true;
+    
+    (theInstance=new TestInjection(strict)).doTest();
   }
 
 }
