@@ -53,14 +53,18 @@ public class ExpBody extends Exp implements ExpTree {
   Map varMap;
   Exp exp;
   InstanceFacade instanceFacade;
+  String selfVar;
 
-  public ExpBody(String relevantType, Map varMap, Exp expression) {
+  public ExpBody(String relevantType, Map varMap, Exp expression, 
+                 String selfVar) {
     this.relevantType = relevantType;
     this.varMap = varMap;
     this.exp = expression;
+    this.selfVar = selfVar;
     Assert.assertTrue(relevantType != null);
     Assert.assertTrue(varMap != null);
     Assert.assertTrue(expression != null);
+    Assert.assertTrue(selfVar != null);
   }
 
   public ExpResult check(InstanceFacade instanceFacade) {
@@ -80,7 +84,7 @@ public class ExpBody extends Exp implements ExpTree {
 
       // Set the current instance to be self
       varMap.clear();
-      varMap.put("self", Ocl.getFor(instanceIterator.next()));
+      varMap.put(selfVar, Ocl.getFor(instanceIterator.next()));
 
       OclRoot result = exp.evaluate();
 
@@ -98,7 +102,7 @@ public class ExpBody extends Exp implements ExpTree {
 
   public Object[] children() {
     return new Object[] {
-      new StringBuffer("self = iterates over instances"), exp
+      new StringBuffer(selfVar + " = iterates over instances"), exp
     };
   }
 

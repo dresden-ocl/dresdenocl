@@ -146,8 +146,21 @@ public class InterpreterVisitor extends DepthFirstAdapter {
       throw new OclTypeException(msg);
     }
 
+    // Get the variable that the current element is saved in, usually it is
+    // not given and set to self by default
+    String selfVar;
+    AConstraint c = (AConstraint)node.parent();
+    AContextDeclaration cd = (AContextDeclaration)c.getContextDeclaration();
+    AClassifierContextBody ccb = (AClassifierContextBody)cd.getContextBody();
+    AClassifierContext cc = (AClassifierContext)ccb.getClassifierContext();
+    if (cc.getClassifierHead() == null) {
+      selfVar = "self";
+    } else {
+      selfVar = cc.getClassifierHead().toString().replace(':', ' ').trim();
+    }
+
     globalResult = new ExpBody(relevantType, varMap, 
-                               getVar(node.getExpression()));
+                               getVar(node.getExpression()), selfVar);
     globalResult.setReturnType(OclBoolean.class);
   }
 

@@ -88,13 +88,16 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
   public void inAConstraint(AConstraint c) {
     TypeEnvironment env=getEnvironmentCopy(c);
     PContextBody cb=((AContextDeclaration) c.getContextDeclaration()).getContextBody();
+    String constrainedName=null;
     String constrainedTypeName;
     Type constrainedType;
     if (cb instanceof AClassifierContextBody) {
-      constrainedTypeName=
-        ((AClassifierContext)((AClassifierContextBody)cb).getClassifierContext())
-        .getPathTypeName().toString().trim();
+    	AClassifierContext cc=((AClassifierContext)((AClassifierContextBody)cb).getClassifierContext());
+      constrainedTypeName=cc.getPathTypeName().toString().trim();
       constrainedType=types.get(constrainedTypeName);
+      if (cc.getClassifierHead()!=null) {
+      	constrainedName=cc.getClassifierHead().toString().replace(':',' ').trim();
+      };
     } else {
       AOperationContext oc=((AOperationContext)((AOperationContextBody)cb).getOperationContext());
       constrainedTypeName=oc.getPathTypeName().toString().trim();
@@ -138,9 +141,12 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
       }
       env.put("result", constrainedOperationType);
     }
-    env.put("self", constrainedType);
+    if (constrainedName==null) {
+    	constrainedName = "self";
+    }
+    env.put(constrainedName, constrainedType);
     environs.put(c, env);
-    defaultContexts.put(c, "self");
+    defaultContexts.put(c, constrainedName);
   }
 
   public void outAConstraintBody(AConstraintBody cb) {

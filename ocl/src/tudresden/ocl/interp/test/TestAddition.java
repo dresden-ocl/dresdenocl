@@ -70,6 +70,7 @@ public class TestAddition extends TestEnv {
     //tests for method invokation
     ocl[20] = "context Company inv: name = getName()";
     ocl[21] = "context Company inv: Set{1 .. 10}->forAll(self.getEmployeesMinus(abs)=self.numberOfEmployees - abs)";
+    ocl[22] = "context Company inv: Set{1..10}->forAll(self.getEmployeesMinus(abs)=self.numberOfEmployees - abs)";
     failOcl[20] = "context Company inv: Set{1 .. 10}->forAll(self.getEmployeesMinus(abs)=-6)";
     failOcl[21] = "context Company inv: Set{1 .. 10}->forAll(self.getEmployeesMinus(abs)=3)";
     failOcl[22] = "context Company inv: Set{1 .. 10}->forAll(self.getEmployeesMinus(abs)>-6)";

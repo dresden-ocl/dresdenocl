@@ -110,7 +110,10 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
       tree.tFactory=createTypeFactory(mf);
       Lexer lexer = new Lexer(
         new PushbackReader(
-          new StringReader(oclExpression)
+          // context x inv: Set{1..4} did not work before, you needed to 
+          // write context x inv: Set{1 .. 4}
+          // this is fixed now
+          new StringReader(oclExpression), 2
         )
       );
       OclParser p=new OclParser(lexer);

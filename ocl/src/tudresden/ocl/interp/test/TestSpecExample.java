@@ -64,9 +64,12 @@ public class TestSpecExample extends TestEnv {
     ocl[5] = "context tudresden::ocl::interp::test::Person inv: let collegs : Integer = self.employer.numberOfEmployees->sum in (collegs > 2) and (collegs < 10)";
     ocl[6] = "context tudresden::ocl::interp::test::Company inv: let manager : tudresden::ocl::interp::test::Person = self.manager in manager.oclAsType(tudresden::ocl::interp::test::Manager).managedCompanies-> size > 0";
     ocl[7] = "context tudresden::ocl::interp::test::Company inv: --comment\nself.numberOfEmployees > 2";
+    ocl[8] = "context tudresden::ocl::interp::test::Company inv: Set{1..10}->size = 10";
+    ocl[9] = "context c:tudresden::ocl::interp::test::Company inv: c.numberOfEmployees > 2";
     failOcl[0] = "context tudresden::ocl::interp::test::Company inv: numberOfEmployees > 3";
     failOcl[1] = "context tudresden::ocl::interp::test::Company inv: numberOfEmployees < 4";
     failOcl[2] = "context tudresden::ocl::interp::test::Person inv: let person : tudresden::ocl::interp::test::Person = self in person.employer->forAll(numberOfEmployees > 100)";
+    oclTypeExp[0] = "context c:tudresden::ocl::interp::test::Company inv: self.numberOfEmployees > 2";
 
     // -- Type conformance for Collections
     // is checked in TestBasic
@@ -86,12 +89,12 @@ public class TestSpecExample extends TestEnv {
     ocl[28] = "context tudresden::ocl::interp::test::Company inv: employees->size <= 50";
     ocl[29] = "context tudresden::ocl::interp::test::Person inv: true or wife.lastName='Hallo'";
     ocl[30] = "context tudresden::ocl::interp::test::Person inv: not(wife.lastName='Hallo' and false)";
+    failOcl[20] = "context tudresden::ocl::interp::test::Company inv: manager.isUnemployed = false inv: employees->isEmpty";
 
     // -- Examples page 7-17
     //  State Checks are useles whenever we come form reflection
     //  oclIsNew is not yet supported
     //  allInstances is not supported
-    //  we should insert type conformance for collections
     ocl[40] = "context tudresden::ocl::interp::test::Manager inv: self.oclIsTypeOf(tudresden::ocl::interp::test::Manager)";
     ocl[41] = "context tudresden::ocl::interp::test::Manager inv: not self.oclIsTypeOf(tudresden::ocl::interp::test::Person)";
     ocl[42] = "context tudresden::ocl::interp::test::Manager inv: not self.oclIsTypeOf(tudresden::ocl::interp::test::Company)";
@@ -107,7 +110,7 @@ public class TestSpecExample extends TestEnv {
   }
 
   public void testOne() throws Exception {
-    int i = 5;
+    int i = 3;
     assertEquals("OclConstraint " + i, true, evaluateTest(ocl[i]));
   }
 }
