@@ -1,2 +1,2 @@
 # tested with jikes Version 1.06 (17 Sep 99)
-jikes -classpath /usr/local/jdk1.2.2/jre/lib/rt.jar:.:xml4j.jar:test.jar -d . -g `find tudresden -name "*.java"`
+jikes -classpath $CLASSPATH:.:xml4j.jar:test.jar -d . -g `find tudresden -name "*.java"`
