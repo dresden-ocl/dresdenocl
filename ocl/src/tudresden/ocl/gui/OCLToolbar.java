@@ -59,7 +59,8 @@ public class OCLToolbar extends JToolBar implements ActionListener {
   
   /** Creates new OCLToolbar */
   public OCLToolbar() {
-    super ("OCL Syntax Assistant");
+    super();
+    setName ("OCL Syntax Assistant");
     
     initComponents();
   }
