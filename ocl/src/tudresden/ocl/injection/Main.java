@@ -36,20 +36,31 @@ final class OclInjector implements InjectionConsumer
   private boolean delayinsertions;
 
   /**
-     Collects all methods (ClassFeature) of the current class, except automatically generated methods.
+     Collects all methods (ClassMethod) of the current class, except automatically generated methods.
      Is used only, if delayinsertions is true. Otherwise methods is null.
      @see #delayinsertions
-     @see ClassFeature
+     @see ClassMethod
   */
   private ArrayList methods=null;
 
+  /**
+     Collects the method attributes of outer classes,
+     when operating on a inner class.
+     @see #methods
+  */
   private ArrayList methods_stack=new ArrayList();
   
   /**
-     Collects all attributes (ClassFeature) of the current class, which have element-type set.
+     Collects all attributes (ClassAttribute) of the current class, which have element-type set.
+     @see ClassAttribute
   */
   private ArrayList typedAttributes=null;
 
+  /**
+     Collects the typedAttribute attributes of outer classes,
+     when operating on a inner class.
+     @see #typedAttributes
+  */
   private ArrayList typedAttributes_stack=new ArrayList();
 
   OclInjector(Writer output, HashMap codefragments, boolean insertimmediatly)
