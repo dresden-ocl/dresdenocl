@@ -1,59 +1,62 @@
 <?xml version="1.0"?>
 
-<!-- ant build does not work -->
-<!-- this is a starting point for someone, who wants to get it working -->
+<!-- $Id: build.xml,v 1.2 2001/02/06 01:02:35 vg103 Exp $ -->
+<!-- Authored by Dan Shields <daniel@pointrelease.com>                     -->
+<!-- Derived from the starting point build.xml, but heavily reworked       -->
 
-<!--                 dresden-ocl build file                 -->
-<!-- process this file with ant (http://jakarta.apache.org) -->
-<!-- in order to build dresden-ocl                          -->
+<!--                 dresden-ocl build file                                -->
+<!-- process this file with ant (http://jakarta.apache.org)                -->
 
-<project name="dresden-ocl" default="all" basedir=".">
+<project name="dresden-ocl" default="default" basedir=".">
+
+<!-- ********************************************************************* -->
+<!-- DEFAULT PROJECT PROPERTIES:                                           -->
+
+  <!-- <property name="build.compiler" value="classic" /> -->
+  <!-- external packages -->
+  <property name="xerces.jar" value="${basedir}/xerces.jar" />
+  <property name="test.jar"  value="${basedir}/test.jar"  />
+  <!-- directory structure -->
+  <property name="build.dir" value="${basedir}/build" />
+  <property name="jars.dir"  value="${basedir}/jars"  />
+  <property name="api.dir"   value="${basedir}/api"   />
+  <property name="local.class.path" value="${java.class.path}:${basedir}:${xerces.jar}" />
+
+  <!-- various file pattern lists for the jars -->
+  <property name="prefix"            value="tudresden/ocl"/>
+  <property name="lib.files"         value="${prefix}/lib/*.class,${prefix}/injection/lib/*.class"/>
+  <property name="argo.files"        value="${lib.files},${prefix}/*.class,${prefix}/*.gif,${prefix}/normalize/*.class,${prefix}/check/*.class,${prefix}/check/bootstrap/*.class,${prefix}/check/bootstrap/constraints.txt,${prefix}/check/types/*.class,${prefix}/codegen/*.class,${prefix}/parser/*.class,${prefix}/parser/analysis/*.class,${prefix}/parser/node/*.class,${prefix}/parser/lexer/*.class,${prefix}/parser/lexer/lexer.dat,${prefix}/parser/parser/*.class,${prefix}/parser/parser/parser.dat"/>
+  <property name="dresden-ocl.files" value="${argo.files},${prefix}/check/types/xmifacade/*.class,${prefix}/check/types/testfacade/*.class,${prefix}/injection/*.class,${prefix}/test/royloy/*.java,${prefix}/test/royloy/*.class"/>
+  <property name="royloy.files"      value="${prefix}/test/royloy/*.java,${prefix}/test/royloy/oclexpressions,${prefix}/test/TestInjection.*"/>
+
+
+  <!-- package names for javadoc -->
+  <property name="root.pkg"      value="tudresden.ocl" />
+  <property name="package.names" value="${root.pkg}, ${root.pkg}.parser, ${root.pkg}.parser.node, ${root.pkg}.parser.analysis, ${root.pkg}.parser.lexer, ${root.pkg}.parser.parser, ${root.pkg}.normalize, ${root.pkg}.check, ${root.pkg}.check.types, ${root.pkg}.check.types.testfacade, ${root.pkg}.check.types.xmifacade, ${root.pkg}.codegen, ${root.pkg}.injection, ${root.pkg}.injection.lib, ${root.pkg}.injection.reverseeng, ${root.pkg}.lib, ${root.pkg}.lib.test, ${root.pkg}.test " />
+
+  <!-- ******************************************************************* -->
+  <!-- INITIALIZATION:                                                     -->
 
   <target name="init">
-
-    <!-- external packages -->
-    <property name="xerces.jar" value="${basedir}/xerces.jar" />
-    <property name="test.jar"  value="${basedir}/test.jar"  />
-
-    <!-- directory structure -->
-    <property name="build.dir" value="${basedir}/build" />
-    <property name="jars.dir"  value="${basedir}/jars"  />
-    <property name="api.dir"   value="${basedir}/api"   />
-
-    <property name="local.class.path" value="${java.class.path}:${build.dir}:${basedir}:${xerces.jar}" />
-
-    <!-- package names for javadoc -->
-    <property name="root.pkg"      value="tudresden.ocl" />
-    <property name="package.names" value="${root.pkg} ${root.pkg}.parser ${root.pkg}.parser.node ${root.pkg}.parser.analysis ${root.pkg}.parser.lexer ${root.pkg}.parser.parser ${root.pkg}.normalize ${root.pkg}.check ${root.pkg}.check.types ${root.pkg}.check.types.testfacade ${root.pkg}.check.types.xmifacade ${root.pkg}.codegen ${root.pkg}.injection ${root.pkg}.injection.lib ${root.pkg}.injection.reverseeng ${root.pkg}.lib ${root.pkg}.lib.test ${root.pkg}.test " />
-
-    <!-- various file pattern lists for the jars -->
-    <property name="prefix"            value="tudresden/ocl"/>
-    <property name="lib.files"         value="${prefix}/lib/*.class,${prefix}/injection/lib/*.class"/>
-    <property name="argo.files"        value="${lib.files},${prefix}/*.class,${prefix}/*.gif,${prefix}/normalize/*.class,${prefix}/check/*.class,${prefix}/check/bootstrap/*.class,${prefix}/check/bootstrap/constraints.txt,${prefix}/check/types/*.class,${prefix}/codegen/*.class,${prefix}/parser/*.class,${prefix}/parser/analysis/*.class,${prefix}/parser/node/*.class,${prefix}/parser/lexer/*.class,${prefix}/parser/lexer/lexer.dat,${prefix}/parser/parser/*.class,${prefix}/parser/parser/parser.dat"/>
-    <property name="dresden-ocl.files" value="${argo.files},${prefix}/check/types/xmifacade/*.class,${prefix}/check/types/testfacade/*.class,${prefix}/injection/*.class,${prefix}/test/royloy/*.java,${prefix}/test/royloy/*.class"/>
-    <property name="royloy.files"      value="${prefix}/test/royloy/*.java,${prefix}/test/royloy/oclexpressions,${prefix}/test/TestInjection.*"/>
-
-    <!-- test related properties -->
-    <property name="test.class" value="tudresden.ocl.test.TestAll" />
-    <available file="${test.jar}" property="test.present"          />
-
-    <!-- load user defined preferences if there are some -->
-    <property file="ant.properties" />
-
+    <available file="${test.jar}" property="test.present"/>
   </target>
+
+  <!-- ******************************************************************* -->
+  <!-- CONSOLE MESSAGES:                                                   -->
 
   <target name="help">
     <echo message=""/>
     <echo message="In order to build dresden-ocl, you should run ant with one target"/>
     <echo message=""/>
     <echo message="The available targets are :"/>
-    <echo message="  - compile    : to compile the application files only (no tests)"/>
-    <echo message="  - doc        : to create the documentation with javadoc"/>
-    <echo message="  - all        : to compile the application classes, create the documentation," />
-    <echo message="                 and create the jar archives"/>
-    <echo message="  - check      : to compile and run the tests"/>
-    <echo message="  - clean      : to remove the files that can be generated"/>
-    <echo message="  - help       : to display this message"/>
+    <echo message="  - documentation : to create the documentation with javadoc"/>
+    <echo message="  - compile       : to compile the application classes only"/>
+    <echo message="  - build         : to compile the application classes, create the documentation," />
+    <echo message="                    and create the jar archives"/>
+    <echo message="  - buildTest     : to build (as above) and run the tests"/>
+    <echo message="  - check         : to compile and run the tests"/>
+    <echo message="  - clean         : to remove the files that were generated during building"/>
+    <echo message="  - help          : to display this message"/>
     <echo message=""/>
     <echo message="You can also change the values of some properties using the ant -D flag"/>
     <echo message="For example if you want to use the jikes compiler, you should run :"/>
@@ -66,28 +69,83 @@
     <echo message=""/>
   </target>
 
-  <!-- compilation targets -->
-  <target name="compile" depends="init">
+  <target name="buildStarted">
+  <echo message="VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" />
+  <echo message="              BUILD STARTED             " />
+  <echo message="VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" />
+  </target>
+  <target name="buildCompleted">
+  <echo message="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+  <echo message="             BUILD COMPLETED            " />
+  <echo message="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+  </target>
+  
+  <!-- ******************************************************************* -->
+  <!-- COMPILATION:                                                        -->
+
+  <!-- A complete rebuild consists of 4 phases:
+     - prepare: prepares the workspace for building in a freshly unpacked
+                directory
+     - clean:   removes all object (.class) files which are built in the
+                compile phase (next)
+     - compile: compiles all java classes
+     - jar:     packs all built class files into appropriate jars
+    -->
+  <target name="prepare" depends="init">
     <mkdir dir="${build.dir}"/>
-    <delete file="TestOclCompile.java" />
+    <mkdir dir="${jars.dir}"/>
+    <mkdir dir="${api.dir}"/>
+  </target>
+  <target name="clean" depends="prepare">
+    <delete file="TestOclCompile.java"/>
+    <delete >
+      <fileset dir="${build.dir}" includes="**/*.class" />
+    </delete>
+    <delete >
+      <fileset dir="${jars.dir}" includes="**/*.jar" />
+    </delete>
+    <delete >
+      <fileset dir="${api.dir}" includes="**/*.html" />
+    </delete>
+  </target>
+  <target name="_compile" depends="prepare">
     <javac srcdir="${basedir}"
            destdir="${build.dir}"
            classpath="${local.class.path}:${test.jar}"
            deprecation="on"
            optimize="on" />
   </target>
+  <target name="jar" depends="_compile">
+    <!-- build these jars: dresden-ocl-lib.jar,ocl-argo.jar,dresden-ocl.jar,royloy.jar -->
+    <jar jarfile="${jars.dir}/dresden-ocl-lib.jar" basedir="${build.dir}"
+         includes="${lib.files}" />
 
-  <!-- tests -->
-  <target name="check" depends="compile" if="test.present">
-    <java classname="test.textui.TestRunner"
-          fork="yes"
-          classpath="{local.class.path}:${test.jar}"
-          args="${test.class}" />
+    <jar jarfile="${jars.dir}/ocl-argo.jar" basedir="${build.dir}"
+         includes="${argo.files}" />
+
+    <jar jarfile="${jars.dir}/dresden-ocl.jar" basedir="${build.dir}"
+         includes="${dresden-ocl.files}" />
+
+    <jar jarfile="${jars.dir}/royloy.jar" basedir="${build.dir}"
+         includes="${royloy.files}" />
   </target>
 
-  <!-- documentation -->
-  <target name="doc" depends="init">
-    <mkdir dir="${api.dir}" />
+  <target name="compileAll" depends="clean,prepare,_compile,jar"/>
+
+  <!-- ******************************************************************* -->
+  <!-- TESTS:                                                              -->
+
+  <target name="check" if="test.present">
+    <java classname="test.textui.TestRunner"
+          fork="yes"
+          classpath="${local.class.path}:${test.jar}"
+          args="tudresden.ocl.test.TestAll" />
+  </target>
+
+  <!-- ******************************************************************* -->
+  <!-- DOCUMENTATION:                                                      -->
+
+  <target name="documentation" depends="prepare">
     <javadoc classpath="${local.class.path}"
              author="true"
              private="true"
@@ -100,48 +158,14 @@
              destdir="${api.dir}" />
   </target>
 
-  <!-- jars handling -->
-  <target name="jardir">
-    <mkdir dir="${jars.dir}" />
-  </target>
+  <!-- ******************************************************************* -->
+  <!-- MAIN TARGETS:                                                       -->
 
-  <target name="dresden-ocl-lib.jar" depends="compile,jardir">
-    <jar jarfile="${jars.dir}/dresden-ocl-lib.jar"
-         basedir="${build.dir}"
-         includes="${lib.files}" />
-  </target>
+  <target name="default" depends="help"/>
 
-  <target name="ocl-argo.jar" depends="compile,jardir">
-    <jar jarfile="${jars.dir}/ocl-argo.jar"
-         basedir="${build.dir}"
-         includes="${argo.files}" />
-  </target>
-
-  <target name="dresden-ocl.jar" depends="compile,jardir">
-    <jar jarfile="${jars.dir}/dresden-ocl.jar"
-         basedir="${build.dir}"
-         includes="${dresden-ocl.files}" />
-  </target>
-
-  <target name="royloy.jar" depends="compile,jardir">
-    <jar jarfile="${jars.dir}/royloy.jar"
-         basedir="${build.dir}"
-         includes="${royloy.files}" />
-  </target>
-
-  <!-- build all jar files -->
-  <target name="jars"
-          depends="dresden-ocl-lib.jar,ocl-argo.jar,dresden-ocl.jar,royloy.jar">
-  </target>
-
-  <!-- all: compilation, documentation and jars -->
-  <target name="all" depends="jars,doc">
-  </target>
-
-  <target name="clean" depends="init">
-    <deltree dir="${build.dir}"/>
-    <deltree dir="${jars.dir}"/>
-    <deltree dir="${api.dir}"/>
-  </target>
+  <target name="compile" depends="compileAll"/>
+  <target name="build" depends="buildStarted,compileAll,documentation,buildCompleted"/>
+  <target name="buildTest" depends="build,check"/>
 
 </project>
+
