@@ -157,6 +157,35 @@ public class OclAnyImpl extends OclAny {
     }
   }
 
+  public static Method findMethod(Class myclass, String name, Class[] params)
+  {
+    // this is very similar to tudresden.ocl.check.types.ClassAny.navigateParameterized
+    // if you find a bug here, it it probably there as well.
+    for(Class iclass=myclass; iclass!=null; iclass=iclass.getSuperclass())
+    {
+      Method[] methods=iclass.getDeclaredMethods();
+      Method foundmethod=null;
+      for(int i=0; i<methods.length; i++)
+      {
+        if(!name.equals(methods[i].getName()))
+          continue;
+        Class[] methodparams=methods[i].getParameterTypes();
+        if(params.length!=methodparams.length)
+          continue;
+        for(int j=0; j<methodparams.length; j++)
+          if(!methodparams[j].isAssignableFrom(params[j]))
+            continue;
+        if(foundmethod==null)
+          foundmethod=methods[i];
+        else
+          throw new OclException("ambigious method "+name+" of "+myclass+") queried.");
+      }
+      if(foundmethod!=null)
+        return foundmethod;
+    }
+    return null;
+  }
+
   /** To call side-effect free methods of an object, invoke this method with
    *  the method name as String and the appropriate parameters. This method
    *  does not enforce that only side-effect free methods are called.
@@ -178,27 +207,8 @@ public class OclAnyImpl extends OclAny {
       for(int i=0; i<params.length; i++) 
         paramTypes[i]=params[i].getClass();
 
-      // this is very similar to tudresden.ocl.check.types.ClassAny.navigateParameterized
-      // if you find a bug here, it it probably there as well.
-      Method foundmethod=null;
-      classloop: for(Class iclass=applicationObject.getClass(); iclass!=null; iclass=iclass.getSuperclass())
-      {
-        Method[] methods=iclass.getDeclaredMethods();
-        methodloop: for(int i=0; i<methods.length; i++)
-        {
-          if(!methodName.equals(methods[i].getName()))
-            continue;
-          Class[] parametertypes=methods[i].getParameterTypes();
-          if(paramTypes.length!=parametertypes.length)
-            continue;
-          for(int j=0; j<parametertypes.length; j++)
-            if(!parametertypes[j].isAssignableFrom(paramTypes[j]))
-              continue methodloop;
-          foundmethod=methods[i];
-          break classloop;
-        }
-      }
-      
+      Method foundmethod=findMethod(applicationObject.getClass(), methodName, paramTypes);
+
       if (foundmethod==null) {
         if (! Ocl.TOLERATE_NONEXISTENT_FIELDS) {
           throw new OclException(

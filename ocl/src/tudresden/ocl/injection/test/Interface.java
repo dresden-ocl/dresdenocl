@@ -20,4 +20,5 @@ package tudresden.ocl.injection.test;
 
 public interface Interface 
 {
+  public int someMethod(double x);
 }

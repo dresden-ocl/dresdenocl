@@ -62,8 +62,13 @@ public class ClassAny implements Any {
     
     Method foundmethod=null;
 
-    // this is very similar to tudresden.ocl.lib.OclAnyImpl.getFeature(String,Object[])
+    // this is very similar to tudresden.ocl.lib.OclAnyImpl.findMethod
     // if you find a bug here, its probably there as well.
+    
+    // suprisingly one has not to go after interfaces since methods
+    // inherited from interfaces are automatically included into the 
+    // implementing class. This does not happen for methods inherited
+    // from the superclass, so we have to ascend to all superclasses.
     classloop: for(Class iclass=c; iclass!=null; iclass=iclass.getSuperclass())
     {
       Method[] methods=iclass.getDeclaredMethods();
@@ -71,13 +76,16 @@ public class ClassAny implements Any {
       {
         if(!name.equals(methods[i].getName()))
           continue methodloop;
-        Class[] parametertypes=methods[i].getParameterTypes();
-        if(params.length!=parametertypes.length)
+        Class[] methodparams=methods[i].getParameterTypes();
+        if(params.length!=methodparams.length)
           continue methodloop;
         for(int j=0; j<params.length; j++)
-          if(!params[j].conformsTo(getTypeForClass(parametertypes[j])))
+          if(!params[j].conformsTo(getTypeForClass(methodparams[j])))
             continue methodloop;
-        foundmethod=methods[i];
+        if(foundmethod==null)
+          foundmethod=methods[i];
+        else
+          throw new OclTypeException("ambigious method "+name+" of "+c+") queried.");
         break classloop;
       }
     }

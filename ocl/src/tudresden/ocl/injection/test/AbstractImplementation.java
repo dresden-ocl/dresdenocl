@@ -18,12 +18,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.injection.test;
 
-public class Implementation extends AbstractImplementation
+abstract class AbstractImplementation implements Interface
 {
-  public int someMethod(double x)
-  {
-    return 0;
-  }
-
 }
-
