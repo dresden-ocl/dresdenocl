@@ -1,16 +1,16 @@
 /*
 Copyright (C) 2000  Ralf Wiebicke
- 
+
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
 version 2.1 of the License, or (at your option) any later version.
- 
+
 This library is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 Lesser General Public License for more details.
- 
+
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -33,7 +33,7 @@ import tudresden.ocl.parser.OclParserException;
 import tudresden.ocl.check.OclTypeException;
 import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.codegen.JavaCodeGenerator;
-import tudresden.ocl.injection.lib.Invariant;
+import tudresden.ocl.injection.ocl.lib.Invariant;
 
 public final class OclInstrumentor implements TaskInstrumentor
 {
@@ -253,10 +253,14 @@ public final class OclInstrumentor implements TaskInstrumentor
 		o.write(cf.getName());
 		o.write(" on this object.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
 		o.write(Instrumentor.OCL_AUTHOR);
-		o.write("\n  */private final tudresden.ocl.injection.lib.Invariant ");
+		o.write("\n  */private final ");
+		o.write(Invariant.class.getName());
+		o.write(" ");
 		o.write(Invariant.INVARIANT_OBJECT);
 		o.write(cf.getName());
-		o.write("=new tudresden.ocl.injection.lib.Invariant(\"");
+		o.write("=new ");
+		o.write(Invariant.class.getName());
+		o.write("(\"");
 		o.write(cf.getName());
 		o.write("\", this);");
 		o.write("/**\n    Checks ocl invariant ");

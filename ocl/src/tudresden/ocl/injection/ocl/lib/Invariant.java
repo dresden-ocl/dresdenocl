@@ -16,7 +16,7 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-package tudresden.ocl.injection.lib;
+package tudresden.ocl.injection.ocl.lib;
 
 import tudresden.ocl.lib.FeatureListener;
 import java.lang.reflect.Field;
@@ -30,24 +30,24 @@ public final class Invariant implements FeatureListener, Serializable
 {
   private String name;
   private Object object;
-  
-  public Invariant(String name, Object object) 
+
+  public Invariant(String name, Object object)
   {
     this.name=name;
     this.object=object;
     vacantInvariants.add(this);
-    
+
     // for debugging only
     if(allInvariants!=null)
       allInvariants.add(this);
   }
-  
+
   // for debugging only
   public static HashSet allInvariants=null;
-  
+
 
   public static final String OBSERVER_SUFFIX="_oclobservinginvariants812374";
-  
+
   private final void addObserver(String featurename, Object o)
   {
     try
@@ -69,29 +69,29 @@ public final class Invariant implements FeatureListener, Serializable
       HashSet observer=(HashSet)(f.get(o));
       observer.add(this);
     }
-    catch(IllegalAccessException e) 
-    { 
-      e.printStackTrace(); 
+    catch(IllegalAccessException e)
+    {
+      e.printStackTrace();
       throw new RuntimeException(e.toString());
     }
   }
-  
+
   public final void onField(Field f, Object o)
   {
     addObserver(f.getName()+OBSERVER_SUFFIX, o);
   }
-  
+
   public final void onMethod(Method m, Object o)
   {
     //addObserver(m.getName()+getParameters(m)+OBSERVER_SUFFIX, o);
   }
-  
+
 
   public static final String INVARIANT_METHOD="zzzCheckOclInvariantMethod812374_";
   public static final String INVARIANT_OBJECT="zzzCheckOclInvariantObject812374_";
 
   private transient Method method=null;
-  
+
   public final void invoke()
   {
     try
@@ -104,37 +104,37 @@ public final class Invariant implements FeatureListener, Serializable
       }
       method.invoke(object, null);
     }
-    catch(NoSuchMethodException e) 
+    catch(NoSuchMethodException e)
     {
       System.out.println("NoSuchMethodException invoking >"+name+"< on >"+object+"<");
       e.printStackTrace();
       throw new RuntimeException(e.toString());
     }
-    catch(InvocationTargetException e) 
+    catch(InvocationTargetException e)
     {
       System.out.println("InvocationTargetException invoking >"+name+"< on >"+object+"<");
       e.printStackTrace();
       throw new RuntimeException(e.getTargetException().toString());
     }
-    catch(IllegalAccessException e) 
+    catch(IllegalAccessException e)
     {
       System.out.println("IllegalAccessException invoking >"+method+"< on >"+object+"<");
       e.printStackTrace();
       throw new RuntimeException(e.toString());
     }
-  }    
+  }
 
   private static HashSet vacantInvariants=new HashSet();
-  
-  public static final String CHECKING_FLAG="tudresden.ocl.injection.lib.Invariant.checking_flag";
+
+  public static final String CHECKING_FLAG="tudresden.ocl.injection.ocl.lib.Invariant.checking_flag";
   public static boolean checking_flag=false;
 
-  public static final String CHECKING_OPERATION="tudresden.ocl.injection.lib.Invariant.checkVacantInvariants";
+  public static final String CHECKING_OPERATION="tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants";
   public static final void checkVacantInvariants()
   {
     if(vacantInvariants.isEmpty())
       return;
-    
+
     HashSet todo=vacantInvariants;
     vacantInvariants=null;
     for(Iterator i=todo.iterator(); i.hasNext(); )
@@ -142,23 +142,23 @@ public final class Invariant implements FeatureListener, Serializable
     vacantInvariants=new HashSet();
   }
 
-  
+
   // notify invariants
-  
-  public static final String NOTIFY_OBSERVING_INVARIANTS="tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants";
+
+  public static final String NOTIFY_OBSERVING_INVARIANTS="tudresden.ocl.injection.ocl.lib.Invariant.notifyObservingInvariants";
 
   /**
-     Notifies the invariants observing an attribute, that 
+     Notifies the invariants observing an attribute, that
      the attribute has changed.
-     There is no notify method in class Invariant, 
+     There is no notify method in class Invariant,
      instead the observing invariants are included into a set
      of vacant invariants.
 
-     After notifying, the observer set is cleared. 
+     After notifying, the observer set is cleared.
      Next time, the invariant runs, the observers are registered again.
-  
-     @parameter observers 
-        the attribute changed, 
+
+     @parameter observers
+        the attribute changed,
         represented by its observers set.
   */
   public static final void notifyObservingInvariants(HashSet observers)
@@ -169,6 +169,6 @@ public final class Invariant implements FeatureListener, Serializable
       observers.clear();
     }
   }
-      
+
 
 }

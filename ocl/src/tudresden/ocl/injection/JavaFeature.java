@@ -21,7 +21,6 @@ package tudresden.ocl.injection;
 import java.io.*;
 import java.util.*;
 import java.lang.reflect.Modifier;
-import tudresden.ocl.codegen.CodeFragment;
 
 /**
    Represents a java feature.

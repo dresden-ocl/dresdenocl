@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.12 2001/05/06 13:54:16 rw7 Exp $
+$Id: build.xml,v 1.13 2001/05/06 17:17:47 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -70,6 +70,7 @@ New version by Ralf Wiebicke.
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/lib/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
+        <include name="tudresden/ocl/injection/ocl/lib/*.java" />
         <include name="COPYING" />
       </fileset>
     </copy>
@@ -161,6 +162,7 @@ New version by Ralf Wiebicke.
         <include name="tudresden/ocl/parser/parser/parser.dat" />
         <include name="tudresden/ocl/lib/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
+        <include name="tudresden/ocl/injection/ocl/lib/*.java" />
         <include name="tudresden/ocl/normalize/*.java" />
         <include name="tudresden/ocl/check/*.java" />
         <include name="tudresden/ocl/check/types/*.java" />
@@ -189,6 +191,36 @@ New version by Ralf Wiebicke.
   </target>
 
 
+  <target name="dresden-injector.jar" depends="build.dir">
+
+    <mkdir dir="${build.dir}/dresden-injector" />
+
+    <copy todir="${build.dir}/dresden-injector" >
+      <fileset dir="${src.dir}">
+        <include name="tudresden/ocl/injection/*.java" />
+        <include name="tudresden/ocl/injection/lib/*.java" />
+        <include name="tudresden/ocl/check/OclTypeException.java" />
+        <include name="tudresden/ocl/parser/OclParserException.java" />
+        <include name="tudresden/ocl/OclException.java" />
+        <include name="COPYING" />
+      </fileset>
+    </copy>
+
+    <javac srcdir= "${build.dir}/dresden-injector"
+           destdir="${build.dir}/dresden-injector"
+           deprecation="on"
+           debug="on"
+           depend="on"
+           optimize="on" >
+    </javac>
+
+    <jar jarfile="${build.dir}/dresden-injector.jar"
+         basedir="${build.dir}/dresden-injector"
+         excludes="**/*.java"
+    />
+  </target>
+
+
   <target name="dresden-ocl-demo.jar" depends="build.dir">
 
     <mkdir dir="${build.dir}/dresden-ocl-demo" />
@@ -204,6 +236,7 @@ New version by Ralf Wiebicke.
         <include name="tudresden/ocl/*.java" />
         <include name="tudresden/ocl/lib/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
+        <include name="tudresden/ocl/injection/ocl/lib/*.java" />
         <include name="tudresden/ocl/normalize/*.java" />
         <include name="tudresden/ocl/check/*.java" />
         <include name="tudresden/ocl/check/bootstrap/*.java" />
@@ -384,8 +417,8 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
     <javac classpath="${build.dir}/dresden-ocl-injector.jar" srcdir= "${build.dir}/testweb" destdir="${build.dir}/testweb" />
   </target>
 
-  <target name="jars" depends="dresden-ocl-lib.jar,ocl-argo.jar,dresden-ocl-injector.jar,dresden-ocl-demo.jar,royloy.jar"/>
-  <target name="all" depends="jars, dresden-ocl-injector.test, docs" />
+  <target name="jars" depends="dresden-ocl-lib.jar,ocl-argo.jar,dresden-ocl-injector.jar,dresden-ocl-demo.jar,royloy.jar,dresden-injector.jar"/>
+  <target name="all" depends="compile, jars, dresden-ocl-injector.test, docs" />
 
   <target name="default" depends="info" />
 

@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.test;
 
 import java.util.*;
-import tudresden.ocl.injection.lib.Invariant;
+import tudresden.ocl.injection.ocl.lib.Invariant;
 import tudresden.ocl.test.royloy.RLObject;
 
 abstract class TestInjection
@@ -48,11 +48,11 @@ abstract class TestInjection
       throw new RuntimeException();
     allobjects.add(o);
   }
-  
+
   private void ensureAllViolations()
   {
     if(!strict) return;
-    
+
     if(!ev.isEmpty())
     {
       StringBuffer buf=new StringBuffer();
@@ -61,7 +61,7 @@ abstract class TestInjection
         buf.append('1');
       else if(ev==ev2)
         buf.append('2');
-      else 
+      else
         throw new RuntimeException();
       buf.append(":\n");
       for(Iterator i=ev.iterator(); i.hasNext(); )
@@ -87,19 +87,19 @@ abstract class TestInjection
     ev=null;
 
     if(!strict) return;
-    
+
     // phase 2: checking all invariants.
-    // must encounter exactly the same violations, 
+    // must encounter exactly the same violations,
     // as in phase 1.
     ev=ev2;
-    tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+    Invariant.checking_flag=true;
     for(Iterator i=Invariant.allInvariants.iterator(); i.hasNext(); )
       ((Invariant)i.next()).invoke();
-    tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    Invariant.checking_flag=false;
     ensureAllViolations();
     ev=null;
   }
-  
+
   /**
      Contains all expected constraint violations.
      @element-type String
