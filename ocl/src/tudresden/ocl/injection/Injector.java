@@ -664,6 +664,15 @@ public final class Injector
         // so do we.
         getCollector();
         break;
+      case '{':
+        // this is an object initializer as defined
+        // in Java Language Specification D.1.3
+        if(collect_when_blocking)
+          write(getCollector());
+        flushOutbuf();
+        parseBody(false);
+        scheduleBlock(true);
+        break;
       default:
         throw new InjectorParseException("class member expected.");
       }

@@ -267,6 +267,11 @@ class SecondExample extends Example{
   {
     super("somename", new Integer(5));
   }
+  
+  {
+    // Object initializer as defined in Java Language Spec D.1.3
+    i=10;
+  }
 
   void abstractMethod()  {}
   
