@@ -205,6 +205,8 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     */
   public void onBehaviourHeader(JavaBehaviour jb) throws java.io.IOException {}
   
+  public void onAttributeHeader(JavaAttribute ja) throws java.io.IOException {}
+
   /** 
     * Called for attributes and methods.
     * 

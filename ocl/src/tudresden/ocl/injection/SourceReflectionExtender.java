@@ -163,6 +163,10 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     {
     }
     
+    public void onAttributeHeader(JavaAttribute ja) 
+    {
+    }
+
     public void onClassFeature(JavaFeature cf, String doccomment) 
       throws java.io.IOException, InjectorParseException
     {

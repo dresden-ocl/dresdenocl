@@ -79,6 +79,16 @@ public class TestInjectionConsumer implements InjectionConsumer
     catch(IOException e) { System.out.println(e); };
   }
 
+  public void onAttributeHeader(JavaAttribute ja) 
+    throws java.io.IOException
+  {
+    try
+    {
+      output.write("[onAttributeHeader]");
+    }
+    catch(IOException e) { System.out.println(e); };
+  }
+
   public void onClassFeature(JavaFeature cf,String doccomment) 
     throws java.io.IOException, InjectorParseException 
   {

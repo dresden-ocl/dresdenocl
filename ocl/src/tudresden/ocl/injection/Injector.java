@@ -568,6 +568,8 @@ public final class Injector
   private JavaAttribute[] parseAttribute(JavaAttribute ja, char c)
     throws IOException, EndException, InjectorParseException
   {
+    consumer.onAttributeHeader(ja);
+    
     final ArrayList commaSeparatedAttributes=new ArrayList();
     commaSeparatedAttributes.add(ja);
     //if(!do_block) ja.print(System.out);

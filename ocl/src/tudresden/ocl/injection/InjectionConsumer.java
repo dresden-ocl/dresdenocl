@@ -67,10 +67,21 @@ public interface InjectionConsumer
      Is called additionally to 
      {@link #onClassFeature(JavaFeature, String)}.
 
-     @parameter cf
+     @parameter jb
         contains all parsed information about the method
   */
   public void onBehaviourHeader(JavaBehaviour jb) 
+    throws java.io.IOException;
+  
+  /**
+     Encountered the header of a java attribute.
+     Is called additionally to 
+     {@link #onClassFeature(JavaFeature, String)}.
+
+     @parameter ja
+        contains all parsed information about the attribute
+  */
+  public void onAttributeHeader(JavaAttribute ja) 
     throws java.io.IOException;
   
   /**

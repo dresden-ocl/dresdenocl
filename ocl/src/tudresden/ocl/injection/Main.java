@@ -175,6 +175,10 @@ final class OclInjector implements InjectionConsumer
     }
   }
 
+  public void onAttributeHeader(JavaAttribute ja) 
+  {
+  }
+
   public void onClassFeature(JavaFeature jf, String doccomment) 
     throws IOException, InjectorParseException
   {

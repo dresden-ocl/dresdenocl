@@ -123,6 +123,8 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     }
   }
  
+  public void onAttributeHeader(JavaAttribute ja) throws java.io.IOException {}
+
   /** Called for attributes and methods.
     * Is called additionally to
     * {@link #onBehaviourHeader(JavaBehaviour)}.
