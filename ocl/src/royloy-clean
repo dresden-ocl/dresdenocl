@@ -3,4 +3,4 @@ java -cp .:xerces.jar \
   tudresden.ocl.injection.Main \
   --clean \
   --modify \
-  tudresden/ocl/test/royloy/*.java
+  "tudresden/ocl/test/royloy/*.java"

@@ -29,7 +29,6 @@ import tudresden.ocl.lib.ArgoNameAdapter;
 import tudresden.ocl.parser.OclParserException;
 import tudresden.ocl.check.types.*;
 import tudresden.ocl.check.OclTypeException;
-import tudresden.ocl.check.types.xmifacade.XmiParser;
 import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.codegen.JavaCodeGenerator;
 import tudresden.ocl.injection.lib.Invariant;
@@ -1051,8 +1050,6 @@ public class Main
       "usage:\n"+
       "java tudresden.ocl.injection.Main [options] tobemodified1.java ...\n"+
       "  -f  --constraint-file constraints.txt\n"+
-      "  -x  --xmi-model model.xmi\n"+
-      "      the model given as xmi file\n"+
       "  -r  --reflection-model modelpackage\n"+
       "      the model given by reflection\n"+
       "  -n  --name-adapter [none|argo]\n"+
@@ -1068,7 +1065,6 @@ public class Main
       "  -m  --modify\n"+
       "      modify files";
     String constraintfile=null;
-    String xmimodel=null;
     ArrayList reflectionmodel=new ArrayList();
     NameAdapter nameadapter=null;
     boolean modify=false;
@@ -1094,23 +1090,6 @@ public class Main
             return;
           }
           constraintfile=args[i];
-        }
-        else if("--xmi-model".equals(args[i])||"-x".equals(args[i]))
-        {
-          if(xmimodel!=null)
-          {
-            System.out.println("can use only one xmi model.");
-            System.out.println(usage);
-            return;
-          }
-          i++;
-          if(i>=args.length)
-          {
-            System.out.println("xmi file not given.");
-            System.out.println(usage);
-            return;
-          }
-          xmimodel=args[i];
         }
         else if("--reflection-model".equals(args[i])||"-r".equals(args[i]))
         {
@@ -1217,7 +1196,7 @@ public class Main
         else
         {
           for(; i<args.length; i++)
-            sourcefiles.add(args[i]);
+            expand(sourcefiles, args[i]);
         }
       }
 
@@ -1238,29 +1217,15 @@ public class Main
       if(conf.violationmacro==null)
         conf.violationmacro="System.out.println";
 
-      if((xmimodel==null) == (reflectionmodel==null))
-      {
-        System.out.println("There must be exaxtly one of --xmi-model and --reflect-model");
-        System.out.println(usage);
-        return;
-      }
-
-      if(xmimodel!=null)
-      {
-        conf.modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel,xmimodel);
-      }
-      else
-      {
-        if(nameadapter==null)
-          nameadapter=new SimpleNameAdapter();
-        conf.modelfacade=new ReflectionFacade
-        (
-          (String[])(reflectionmodel.toArray(new String[0])),
-          new DefaultReflectionAdapter(),
-          nameadapter,
-          new SourceReflectionExtender()
-        );
-      }
+      if(nameadapter==null)
+        nameadapter=new SimpleNameAdapter();
+      conf.modelfacade=new ReflectionFacade
+      (
+        (String[])(reflectionmodel.toArray(new String[0])),
+        new DefaultReflectionAdapter(),
+        nameadapter,
+        new SourceReflectionExtender()
+      );
 
       if(constraintfile!=null)
       {
@@ -1277,9 +1242,35 @@ public class Main
       }
     }
     catch(InjectorParseException e){System.out.println(e);}
-    catch(org.xml.sax.SAXException e){System.out.println(e);}
     catch(IOException e){System.out.println(e);}
   }
+	
+	public static void expand(java.util.Collection files, String pattern)
+	  throws IOException
+	{
+		if(pattern.endsWith("*.java"))
+		{
+			//System.out.println("expanding "+pattern);
+			String directoryName = pattern.substring(0,pattern.length()-"*.java".length());
+			File directory = new File(directoryName);
+			if(!directory.isDirectory())
+				throw new IOException(directoryName+" should be a directory");
+			File[] expandedFiles = directory.listFiles(new FileFilter()
+			{
+				public boolean accept(File file)
+				{
+					return
+						file.isFile() &&
+						file.getName().endsWith(".java");
+				}
+			});
+			//for(int i=0; i<expandedFiles.length; i++) System.out.println("  into "+expandedFiles[i].getPath());
+			for(int i=0; i<expandedFiles.length; i++)
+			  files.add(expandedFiles[i].getPath());
+		}
+		else
+			files.add(pattern);
+	}
 
 }
 

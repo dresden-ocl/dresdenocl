@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.6 2001/04/28 09:20:29 rw7 Exp $
+$Id: build.xml,v 1.7 2001/04/28 18:46:46 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -117,25 +117,21 @@ New version by Ralf Wiebicke.
         <exclude name="tudresden/ocl/ConstraintApplet.java" />
         <exclude name="tudresden/ocl/ASTViewer.java" />
         <exclude name="tudresden/ocl/ASTApplet.java" />
-        <include name="tudresden/ocl/images/*.gif" />
-        <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
+        <include name="tudresden/ocl/parser/*.java" />
+        <include name="tudresden/ocl/parser/analysis/*.java" />
+        <include name="tudresden/ocl/parser/node/*.java" />
+        <include name="tudresden/ocl/parser/lexer/*.java" />
         <include name="tudresden/ocl/parser/lexer/lexer.dat" />
+        <include name="tudresden/ocl/parser/parser/*.java" />
         <include name="tudresden/ocl/parser/parser/parser.dat" />
         <include name="tudresden/ocl/lib/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
         <include name="tudresden/ocl/normalize/*.java" />
         <include name="tudresden/ocl/check/*.java" />
-        <include name="tudresden/ocl/check/bootstrap/*.java" />
         <include name="tudresden/ocl/check/types/*.java" />
+        <include name="tudresden/ocl/check/bootstrap/*.java" />
+        <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
         <include name="tudresden/ocl/codegen/*.java" />
-        <include name="tudresden/ocl/parser/*.java" />
-        <include name="tudresden/ocl/parser/analysis/*.java" />
-        <include name="tudresden/ocl/parser/node/*.java" />
-        <include name="tudresden/ocl/parser/lexer/*.java" />
-        <include name="tudresden/ocl/parser/parser/*.java" />
-        <include name="tudresden/ocl/gui/*.java" />
-        <include name="tudresden/ocl/gui/events/*.java" />
-        <include name="tudresden/ocl/check/types/xmifacade/*.java" />
         <include name="tudresden/ocl/injection/*.java" />
       </fileset>
     </copy>
@@ -146,9 +142,6 @@ New version by Ralf Wiebicke.
            debug="on"
            depend="on"
            optimize="on" >
-      <classpath>
-        <pathelement location="${xerces.jar}" />
-      </classpath>
     </javac>
 
     <jar jarfile="${build.dir}/dresden-ocl-injector.jar"
@@ -257,7 +250,8 @@ New version by Ralf Wiebicke.
   <target name="docs" >
     <echo message="BEWARE: Requires JDK 1.2.2 or higher, since previous versions do not allow multiple -link or -linkoffline arguments!" />
 
-    <mkdir dir="${docs.dir}" />
+    <delete dir="${docs.dir}" />
+    <mkdir  dir="${docs.dir}" />
 
     <javadoc
       packagenames="
@@ -305,21 +299,52 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
       <link offline="on" packagelistLoc="package-list/xerces/" href="http://xml.apache.org/apiDocs/"  />
       <link offline="on" packagelistLoc="package-list/junit/"  href="http://www.junit.org/junit/javadoc/" />
       <classpath>
-        <pathelement location="xerces.jar" />
-        <pathelement location="junit.jar" />
+        <pathelement location="${xerces.jar}" />
+        <pathelement location="${junit.jar}" />
       </classpath>
     </javadoc>
 
   </target>
 
 
-  <target name="cleandocs" >
-    <delete dir="${docs.dir}" />
+  <target name="testweb" depends="dresden-ocl-injector.jar,royloy.jar">
+    <mkdir  dir="${build.dir}/testweb" />
+    <copy file="${build.dir}/dresden-ocl-injector.jar" todir="${build.dir}/testweb" />
+    <delete dir="${build.dir}/testweb/tudresden" />
+    <unjar src="${build.dir}/royloy.jar" dest="${build.dir}/testweb" />
+    <javac classpath="${build.dir}/dresden-ocl-injector.jar" srcdir= "${build.dir}/testweb" destdir="${build.dir}/testweb" />
+    <echo message="nothing should happen" />
+    <java classname="tudresden.ocl.test.TestInjectionRoyloy">
+      <classpath>
+        <pathelement location="${build.dir}/testweb" />
+        <pathelement location="${build.dir}/dresden-ocl-injector.jar" />
+      </classpath>
+    </java>
+    <echo message="nothing should have happened" />
+    <exec
+        command="java -jar dresden-ocl-injector.jar -r tudresden.ocl.test.royloy --modify tudresden/ocl/test/royloy/*.java"
+        dir="${build.dir}/testweb/"
+        />
+    <javac classpath="${build.dir}/dresden-ocl-injector.jar" srcdir= "${build.dir}/testweb" destdir="${build.dir}/testweb" />
+    <echo message="--- violations should happen" />
+    <java classname="tudresden.ocl.test.TestInjectionRoyloy">
+      <classpath>
+        <pathelement location="${build.dir}/testweb" />
+        <pathelement location="${build.dir}/dresden-ocl-injector.jar" />
+      </classpath>
+    </java>
+    <echo message="--- violations should have happened" />
+    <exec
+        command="java -jar dresden-ocl-injector.jar --clean --modify tudresden/ocl/test/royloy/*.java"
+        dir="${build.dir}/testweb/"
+        />
+    <javac classpath="${build.dir}/dresden-ocl-injector.jar" srcdir= "${build.dir}/testweb" destdir="${build.dir}/testweb" />
   </target>
 
-
   <target name="jars" depends="dresden-ocl-lib.jar,ocl-argo.jar,dresden-ocl-injector.jar,dresden-ocl-demo.jar,royloy.jar"/>
-  <target name="default" depends="jars"/>
+  <target name="dist" depends="jars, testweb, docs" />
+
+  <target name="default" depends="dist" />
 
 
 </project>
