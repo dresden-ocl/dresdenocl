@@ -299,7 +299,7 @@ final class OclInjector implements InjectionConsumer
   */
   public static final String OCL_AUTHOR="ocl_injector";
 
-  private final void writeWrapperInvariant() 
+  private final void writeInvariantCall() 
     throws IOException
   {
     output.write("      ");
@@ -566,7 +566,7 @@ final class OclInjector implements InjectionConsumer
     o.write(Invariant.CHECKING_FLAG);
     o.write("=true;\n");
     if(hasInvariantScope(jc))
-      writeWrapperInvariant();
+      writeInvariantCall();
     o.write("    ");
     o.write(Invariant.CHECKING_FLAG);
     o.write("=false;\n");
@@ -607,7 +607,7 @@ final class OclInjector implements InjectionConsumer
     o.write("=true;\n");
     writeChangedCheckerCall();
     if(hasInvariantScope(jm))
-      writeWrapperInvariant();
+      writeInvariantCall();
     if(codefragments!=null)
     {
       SortedFragments sf=(SortedFragments)codefragments.get(jm.getParent().getName());
@@ -658,7 +658,7 @@ final class OclInjector implements InjectionConsumer
     o.write("=true;\n");
     writeChangedCheckerCall();
     if(hasInvariantScope(jm))
-      writeWrapperInvariant();
+      writeInvariantCall();
     if(codefragments!=null)
     {
       SortedFragments sf=(SortedFragments)codefragments.get(jm.getParent().getName());
