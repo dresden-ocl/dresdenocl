@@ -41,8 +41,6 @@ import java.util.*;
  */
 public interface OclSubtractable extends OclRoot {
 
-  public static OclSubtractable UNDEFINED=OclInteger.UNDEFINED;
-
   /** An operation that represents the operation <code>-</code>.
    *
    *  @see OclSet#subtract(OclSubtractable)

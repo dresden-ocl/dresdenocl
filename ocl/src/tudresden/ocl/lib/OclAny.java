@@ -39,8 +39,10 @@ import java.util.*;
  */
 public abstract class OclAny implements OclRoot {
 
-  public static OclAny UNDEFINED=OclAnyImpl.UNDEFINED;
-
+  public OclAny()
+  {
+  }
+  
   public abstract OclBoolean isEqualTo(Object o);
 
   /** @return the negated result of isEqualTo
@@ -53,7 +55,10 @@ public abstract class OclAny implements OclRoot {
    *  of the object whose method is called or a supertype of such a type.
    */
   public OclBoolean oclIsKindOf(OclType t) {
-    if (isUndefined() || t.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
+    if(t.isUndefined()) 
+      return new OclBoolean(0,t.getUndefinedReason());
     if (t.equals(oclType())) return OclBoolean.TRUE; // just for performance ...
     return oclType().allSupertypes().includes(t);
   }
@@ -64,7 +69,10 @@ public abstract class OclAny implements OclRoot {
    *  this types supertypes are not types of the object.
    */
   public OclBoolean oclIsTypeOf(OclType t) {
-    if (isUndefined() || t.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
+    if(t.isUndefined()) 
+      return new OclBoolean(0,t.getUndefinedReason());
     if (t.equals(oclType())) {
       return OclBoolean.TRUE;
     } else  {
@@ -77,7 +85,8 @@ public abstract class OclAny implements OclRoot {
    *  do not occur in this Java implementation.
    */
   public OclType oclType() {
-    if (isUndefined()) return OclType.UNDEFINED;
+    if(isUndefined())
+      return new OclType(0,getUndefinedReason());
     return OclType.typeAny;
   }
 
@@ -96,7 +105,8 @@ public abstract class OclAny implements OclRoot {
    *  @see OclRoot#getFeatureAsCollection(String name)
    */
   public OclCollection getFeatureAsCollection(String name) {
-    if (isUndefined()) return OclSet.UNDEFINED;
+    if(isUndefined())
+      return new OclSet(0,getUndefinedReason());
     OclRoot or=getFeature(name);
     if (or instanceof OclCollection) {
       return (OclCollection) or;
@@ -114,6 +124,45 @@ public abstract class OclAny implements OclRoot {
   public OclBoolean oclInState(OclState state) {
     return Ocl.objectInState(this, state);
   }
+
+  // START of section implementing undefined values
+  // this section is duplicated in all classes,
+  // directly implementing the OclRoot interface,
+  // excepting OclContainer.
+
+  /**
+     The reason, why this object represents an undefined value.
+     Additionally, this is the tag, whether this object represents
+     a undefined value.
+     Is null, if and only if it is not undefined.
+  */
+  private String undefinedreason=null;
+  
+  /**
+     Constructs an instance representing an undefined value.
+     @parameter dummy must be 0.
+  */
+  protected OclAny(int dummy, String undefinedreason)
+  {
+    if(dummy!=0)
+      throw new RuntimeException();
+    this.undefinedreason=undefinedreason;
+  }
+  
+  public final boolean isUndefined()
+  {
+    return undefinedreason!=null;
+  }
+  
+  public final String getUndefinedReason()
+  {
+    if(undefinedreason!=null)
+      return undefinedreason;
+    else
+      throw new RuntimeException();
+  }
+
+  // END of section implementing undefined values
 
 } /* end class OclAny */
 

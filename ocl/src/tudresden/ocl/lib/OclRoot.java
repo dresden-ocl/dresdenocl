@@ -102,6 +102,12 @@ public interface OclRoot extends Cloneable {
    *  expression.
    */
   public boolean isUndefined();
+  
+  /**
+     Returns the reason, why this undefined ocl object has been created.
+     @throws RuntimeException if the onject is not undefined
+  */
+  public String getUndefinedReason();
 
 } /* end interface OclRoot */
 

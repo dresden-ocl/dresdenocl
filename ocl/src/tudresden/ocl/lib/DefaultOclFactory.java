@@ -178,7 +178,7 @@ public class DefaultOclFactory implements OclFactory {
     } else if (o instanceof List) {
       return new OclSequence((List)o);
     } else {
-      return OclSequence.UNDEFINED;
+      return new OclSequence(0,"failed cast to OclSequence");
     }
   }
 

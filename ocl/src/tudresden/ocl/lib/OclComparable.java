@@ -41,8 +41,6 @@ import java.util.*;
  */
 public interface OclComparable extends OclRoot {
 
-  public static OclComparable UNDEFINED=OclInteger.UNDEFINED;
-
   /** @return an OclBoolean representing true if the OclComparable whos method
    *          is called is less than the OclComparable given as parameter, an
    *          OclBoolean representing false otherwise

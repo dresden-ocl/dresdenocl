@@ -597,7 +597,7 @@ public class TestJavaGenerator extends TestCase {
     target[1]=
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclReal tudOclOpPar0="+oclLibPackage+"Ocl.toOclReal( "+oclLibPackage+"Ocl.getFor(r) );\n"+
-      "final "+oclLibPackage+"OclReal tudOclResult0="+oclLibPackage+"OclReal.UNDEFINED;\n"+
+      "final "+oclLibPackage+"OclReal tudOclResult0=new "+oclLibPackage+"OclReal(0,\"created by JavaCodeGenerator\");\n"+
       "final "+oclLibPackage+"OclInteger tudOclNode1="+oclLibPackage+"Ocl.toOclInteger(tudOclNode0.getFeature(\"age\"));\n"+
       "tudOclNode2="+oclLibPackage+"Ocl.toOclInteger(tudOclNode0.getFeature(\"age\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode3=tudOclNode1.isEqualTo(tudOclNode2);\n";

@@ -41,8 +41,6 @@ import java.util.*;
  */
 public interface OclAddable extends OclRoot {
 
-  public static OclAddable UNDEFINED=OclInteger.UNDEFINED;
-
   /** This operation implements the <code>+</code> operator that is
    *  currently defined on Real and Integer values only.
    *

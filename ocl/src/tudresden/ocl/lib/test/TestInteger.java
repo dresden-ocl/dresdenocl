@@ -6,7 +6,7 @@ import test.framework.*;
 public class TestInteger extends TestCase {
 
   private OclInteger i0, i1, i2, im1, i10, i5;
-  private OclInteger iUndef=OclInteger.UNDEFINED;
+  private OclInteger iUndef=new OclInteger(0,"undefined OclInteger");
   
   private OclReal r1k5=new OclReal(1.5d);
   
@@ -27,7 +27,7 @@ public class TestInteger extends TestCase {
     assert( i0.isEqualTo(i0).isTrue() );
     assert( i0.isEqualTo(new OclInteger(0)).isTrue());
     assert( i10.isNotEqualTo(i1).isTrue() );
-    assert( iUndef.isEqualTo(iUndef)==OclBoolean.UNDEFINED );
+    assert( iUndef.isEqualTo(iUndef).isUndefined() );
     assert( i5.isEqualTo(new OclReal(5.0d)).isTrue() );
   }
   
@@ -35,7 +35,7 @@ public class TestInteger extends TestCase {
     assert( (i0.add(i10)).isEqualTo(i10).isTrue() );
     assert( i1.add(i1).isEqualTo(i2).isTrue() );
     assert( im1.add(i1).isEqualTo(i0).isTrue() );
-    assert( i0.add(iUndef)==OclInteger.UNDEFINED );
+    assert( i0.add(iUndef).isUndefined() );
     assert( i0.subtract(i10).isEqualTo(new OclInteger(-10)).isTrue() );
     assert( i0.subtract(im1).isEqualTo(i1).isTrue() );
     assert( i0.add(r1k5).isEqualTo(r1k5).isTrue() );

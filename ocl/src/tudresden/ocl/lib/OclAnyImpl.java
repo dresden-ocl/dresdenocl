@@ -46,9 +46,6 @@ public class OclAnyImpl extends OclAny {
   /** the application object that is encapsulated by this instance of OclAnyImpl
    */
   private Object applicationObject;
-  protected boolean bUndefined;
-
-  public static OclAnyImpl UNDEFINED=new OclAnyImpl();
 
   /** A public constructor for OclAnyImpl.
    *  Applications using the OCL class library should use the factory methods
@@ -58,29 +55,24 @@ public class OclAnyImpl extends OclAny {
     applicationObject=o;
   }
 
-  /** private constructor for the undefined OclAnyImpl */
-  private OclAnyImpl() {
-    bUndefined=true;
+  /** constructor for the undefined OclAnyImpl */
+  public OclAnyImpl(int dummy, String reason) {
+    super(dummy, reason);
   }
 
   /** two OclAnyImpl objects are equal if their encapsulated application objects
    *  are identical (NOT equal)
-   *
-   *  @throws OclClassCastException if the parameter o is not of type
-   *          OclAnyImpl and Ocl.STRICT_CHECKING is <CODE>true</CODE>
    */
   public OclBoolean isEqualTo(Object o) {
     if ( !(o instanceof OclAnyImpl) ) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException(
-          "OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter"
-        );
-      } else {
-        return OclBoolean.FALSE;
-      }
+      System.out.println("OclAnyImpl isEqualTo() is called with a non-OclAnyImpl parameter");
+      return OclBoolean.FALSE;
     }
     OclAnyImpl other=(OclAnyImpl)o;
-    if (this.isUndefined() || other.isUndefined()) return OclBoolean.UNDEFINED;
+    if (isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    else if(other.isUndefined())
+      return new OclBoolean(0,other.getUndefinedReason());
     if (this.applicationObject==other.applicationObject) {
       return OclBoolean.TRUE;
     } else {
@@ -106,13 +98,10 @@ public class OclAnyImpl extends OclAny {
    *  @param attributeName the name of the feature, as a java.lang.String
    */
   public OclRoot getFeatureQualified(String attributeName, Object qualifier) {
-    if (isUndefined()) return OclAnyImpl.UNDEFINED;
+    if (isUndefined()) 
+      return this; // no need to create a new one
     if (applicationObject==null) {
-      if (Ocl.STRICT_CHECKING==true) {
-        throw new OclException("feature "+attributeName+" of null-object requested");
-      } else {
-        return OclAnyImpl.UNDEFINED;
-      }
+      return new OclAnyImpl(0,"feature "+attributeName+" of null-object requested");
     }
     try {
       Field f=null;
@@ -129,13 +118,13 @@ public class OclAnyImpl extends OclAny {
         }
       }
       if (f==null) {
+        String message=
+          "non-existent field "+attributeName+" of object \""+applicationObject+
+          "\" ("+applicationObject.getClass()+") queried";
         if (! Ocl.TOLERATE_NONEXISTENT_FIELDS) {
-          throw new OclException(
-            "non-existent field "+attributeName+" of object \""+applicationObject+
-            "\" ("+applicationObject.getClass()+") queried"
-          );
+          throw new OclException(message);
         } else {
-          return UNDEFINED;
+          return new OclAnyImpl(0,message);
         }
       } else {
         f.setAccessible(true);
@@ -154,20 +143,16 @@ public class OclAnyImpl extends OclAny {
           if (typeName.equals("java.lang.String")) {
             return new OclString(null);
           } else {
-            return OclAnyImpl.UNDEFINED;
+            return new OclAnyImpl(0,
+              "field "+attributeName+" of object \""+applicationObject+
+              "\" ("+applicationObject.getClass()+") is null");
           }
         } else {
           return Ocl.getOclRepresentationFor(feature);
         }
       }
     } catch (IllegalAccessException iae) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclException(
-          "tried to query non-public field "+attributeName+" of object "+applicationObject
-        );
-      } else {
-        return UNDEFINED;
-      }
+      return new OclAnyImpl(0,"tried to query non-public field "+attributeName+" of object "+applicationObject);
     }
   }
 
@@ -205,14 +190,14 @@ public class OclAnyImpl extends OclAny {
    *  does not enforce that only side-effect free methods are called.
    *
    *  <p>If an exception occurs in the called method or in
-   *  accessing it, OclAnyImpl.UNDEFINED
-   *  is returned if Ocl.STRICT_CHECKING is false. An OclExcpetion is raised
-   *  if Ocl.STRICT_CHECKING is true.
+   *  accessing it, an undefined value is returned.
    */
   public OclRoot getFeature(String methodName, Object[] params) {
-    if (isUndefined() || applicationObject==null) {
-      return OclAnyImpl.UNDEFINED;
-    }
+    if(isUndefined())
+      return this;
+    if(applicationObject==null)
+      return new OclAnyImpl(0,"OclAnyImpl.getFeature for null-Object called");
+
     try {
       if(params==null)
         params=new Object[0];
@@ -224,13 +209,13 @@ public class OclAnyImpl extends OclAny {
       Method foundmethod=findMethod(applicationObject.getClass(), methodName, paramTypes);
 
       if (foundmethod==null) {
+        String message=
+          "non-existent method "+methodName+" of object \""+applicationObject+
+          "\" ("+applicationObject.getClass()+") queried";
         if (! Ocl.TOLERATE_NONEXISTENT_FIELDS) {
-          throw new OclException(
-            "non-existent method "+methodName+" of object \""+applicationObject+
-            "\" ("+applicationObject.getClass()+") queried"
-          );
+          throw new OclException(message);
         } else {
-          return UNDEFINED;
+          return new OclAnyImpl(0,message);
         }
       } else {
         foundmethod.setAccessible(true);
@@ -239,38 +224,30 @@ public class OclAnyImpl extends OclAny {
       }
     }
     catch (IllegalArgumentException iae) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclException(
-          "tried to invoke method "+methodName+" of object "+applicationObject+
-          "with illegal parameters"
-        );
-      } else {
-        return UNDEFINED;
-      }
+      return new OclAnyImpl(0,
+        "tried to invoke method "+methodName+" of object "+applicationObject+
+        "with illegal parameters"
+      );
     }
     catch (InvocationTargetException ite) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclException(
-          "an exception occured as result of the invokation of the method "
-          +methodName+" of object "+applicationObject
-        );
-      } else {
-        return UNDEFINED;
-      }
+      return new OclAnyImpl(0,
+        "an exception occured as result of the invokation of the method "
+        +methodName+" of object "+applicationObject
+      );
     }
     catch (IllegalAccessException iae) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclException(
-          "tried to invoke non-public method "+methodName+" of object "+applicationObject
-        );
-      } else {
-        return UNDEFINED;
-      }
+      return new OclAnyImpl(0,
+        "tried to invoke non-public method "+methodName+" of object "+applicationObject
+      );
     }
   }
 
   public OclSequence getFeatureAsSequence(String name) {
-    if (isUndefined() || applicationObject==null) return OclSequence.UNDEFINED;
+    if(isUndefined())
+      return new OclSequence(0,getUndefinedReason());
+    if(applicationObject==null)
+      return new OclSequence(0,"OclAnyImpl.getFeatureAsSequence for null-Object called");
+    
     try {
       Field f=null;
       String[] possibleNames=Ocl.getNames(name);
@@ -282,38 +259,25 @@ public class OclAnyImpl extends OclAny {
         }
       }
       if (f==null) {
-        if (Ocl.STRICT_CHECKING) {
-          throw new OclException(
-            "non-existent field "+name+" of object "+applicationObject+
-            " queried"
-          );
-        } else {
-          return OclSequence.UNDEFINED;
-        }
+        return new OclSequence(0,
+          "non-existent field "+name+" of object "+applicationObject+
+          " queried"
+        );
       } else {
         Object feature=f.get(applicationObject);
         if (feature==null) {
-          return OclSequence.UNDEFINED;
+          return new OclSequence(0,"non-existent field "+name+" of object "+applicationObject+
+            " is null"
+        );
         } else {
           return Ocl.getOclSequenceFor(feature);
         }
       }
     } catch (IllegalAccessException iae) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclException(
-          "tried to query non-public field "+name+" of object "+applicationObject
-        );
-      } else {
-        return OclSequence.UNDEFINED;
-      }
+      return new OclSequence(0,
+        "tried to query non-public field "+name+" of object "+applicationObject
+      );
     }
-  }
-
-  /** @return <CODE>true</CODE> if this instance of OclAnyImpl is the result of an undefined
-   *          OCL expression
-   */
-  public boolean isUndefined() {
-    return bUndefined;
   }
 
   public boolean equals(Object o) {
@@ -341,7 +305,8 @@ public class OclAnyImpl extends OclAny {
    *  do not occur in this Java implementation.
    */
   public OclType oclType() {
-    if (isUndefined()) return OclType.UNDEFINED;
+    if(isUndefined()) 
+      return new OclType(0,getUndefinedReason());
     return new OclType(applicationObject.getClass());
   }
 

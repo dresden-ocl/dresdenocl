@@ -62,12 +62,6 @@ public class OclType extends OclAny {
    */
   private String myName;
 
-  private boolean bUndefined;
-
-  /** the OclType object that is the result of an undefined OCL expression
-   */
-  public static OclType UNDEFINED=new OclType();
-
   /** singletons for the predefined types; can also be accessed through
    *  getOclTypeFor(String), which calls getPredefinedTypeFor(String)
    */
@@ -119,27 +113,20 @@ public class OclType extends OclAny {
     myClass=c;
   }
 
-  /** private constructor for the undefined OclType object
+  /** constructor for the undefined OclType object
    */
-  private OclType() {
-    bUndefined=true;
+  public OclType(int dummy, String reason) {
+    super(dummy, reason);
   }
 
   /** factory method for OclTypes that creates OclType objects from its fully
    *  qualified name; if no class with the given name is found, this method
-   *  either raises an exception or returns the undefined OclType object,
-   *  depending on the value of Ocl.STRICT_CHECKING
+   *  returns the undefined OclType object,
    *
    *  @param name the name of the class that will be encapsulated by this
    *         instance of OclType; the name needs to be fully qualified for
    *         application types or be one of the names of the predefined OCL
    *         types, e.g. "String" or "Integer"
-   *
-   *  @throws OclException there is no name with the given class and
-   *          Ocl.STRICT_CHECKING is <CODE>true</CODE>
-   *
-   *  @see Ocl#STRICT_CHECKING
-   *  @see #UNDEFINED
    */
   public static OclType getOclTypeFor(String name) {
     if (predefinedTypes.get(name)!=null) return getPredefinedTypeFor(name);
@@ -147,10 +134,7 @@ public class OclType extends OclAny {
       Class cls=Class.forName(name);
       return new OclType(cls);
     } catch (ClassNotFoundException cfe) {
-      if (Ocl.STRICT_CHECKING)
-        throw new OclException("no class found for name "+name);
-      else
-        return UNDEFINED;
+      return new OclType(0,"no class found for name "+name);
     }
   }
 
@@ -159,8 +143,7 @@ public class OclType extends OclAny {
    *  is extracted from the object given as <CODE>context</CODE>
    *  (should usually be called with <code>this</code> as context parameter);
    *  if no class with the given name is found, this method
-   *  either raises an exception or returns the undefined OclType object,
-   *  depending on the value of Ocl.STRICT_CHECKING
+   *  returns the undefined OclType object.
    *
    *  @param name the name of the class that will be encapsulated by this
    *         instance of OclType; the name needs to be fully qualified for
@@ -170,12 +153,6 @@ public class OclType extends OclAny {
    *  @param context package information is extracted from this object (the
    *         class with the requested name will be assumed to be in the same
    *         package as the <CODE>context</CODE> object)
-   *
-   *  @throws OclException there is no name with the given class and
-   *          Ocl.STRICT_CHECKING is <CODE>true</CODE>
-   *
-   *  @see Ocl#STRICT_CHECKING
-   *  @see #UNDEFINED
    */
   public static OclType getOclTypeFor(Object context, String name) {
     String fullyQualName;
@@ -214,17 +191,14 @@ public class OclType extends OclAny {
 
   public OclBoolean isEqualTo(Object o) {
     if ( !(o instanceof OclType) ) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException(
-          "OclType isEqualTo() is called with a non-OclType parameter"
-        );
-      } else
-      {
-        return OclBoolean.FALSE;
-      }
+      System.out.println("OclType isEqualTo() is called with a non-OclType parameter");
+      return OclBoolean.FALSE;
     }
     OclType other=(OclType)o;
-    if (isUndefined() || other.isUndefined() ) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    if(other.isUndefined())
+      return new OclBoolean(0,other.getUndefinedReason());
     if (this==o || this.myClass.equals(other.myClass))
       return OclBoolean.TRUE;
     else
@@ -245,27 +219,25 @@ public class OclType extends OclAny {
     return "OclType<"+myClass.getName()+">";
   }
 
-  /** This method either throws a runtime exception or returns an undefined
-   *  value, depending on OCL.STRICT_CHECKING.
-   *
-   *  @see Ocl#STRICT_CHECKING
+  /** This method returns an undefined value.
    */
   public OclRoot getFeature(String name) {
-    if (Ocl.STRICT_CHECKING) {
-      throw new OclException("feature "+name+" of OclType requested");
-    }
-    return UNDEFINED;
+    return new OclAnyImpl(0,"feature "+name+" of OclType requested");
   }
 
   /** @see OclAny#oclIsKindOf(OclType type)
    */
   public OclBoolean oclIsKindOf(OclType type) {
-    if (isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
     return oclIsTypeOf(type).or(super.oclIsKindOf(type));
   }
 
   public OclBoolean oclIsTypeOf(OclType type) {
-    if (isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
+    if(type.isUndefined()) 
+      return new OclBoolean(0,type.getUndefinedReason());
     boolean ret;
     if (type.equals(typeType))
       return OclBoolean.TRUE;
@@ -280,7 +252,8 @@ public class OclType extends OclAny {
    *  @see Class#getName()
    */
   public OclString name() {
-    if (isUndefined()) return OclString.UNDEFINED;
+    if(isUndefined())
+      return new OclString(0,getUndefinedReason());
     if (predefinedTypes.containsValue(this)) {
       if (this==typeAny) {
         return (OclString) Ocl.getFor("OclAny");
@@ -311,7 +284,8 @@ public class OclType extends OclAny {
    *          since these are represented by attributes in the Java class
    */
   public OclSet attributes() {
-    if (isUndefined()) return OclSet.UNDEFINED;
+    if(isUndefined())
+      return new OclSet(0,getUndefinedReason());
     Set set=new HashSet();
     Class cls=myClass;
     while (cls!=null) {
@@ -331,7 +305,8 @@ public class OclType extends OclAny {
    *  @see Ocl#getPossibleAssociationNames(String n)
    */
   public OclSet associationEnds() {
-    if (isUndefined()) return OclSet.UNDEFINED;
+    if(isUndefined())
+      return new OclSet(0,getUndefinedReason());
     Set set=new HashSet();
     Class cls=myClass;
     while (cls!=null) {
@@ -352,7 +327,8 @@ public class OclType extends OclAny {
    *          OclStrings
    */
   public OclSet operations() {
-    if (isUndefined()) return OclSet.UNDEFINED;
+    if(isUndefined()) 
+      return new OclSet(0,getUndefinedReason());
     Set set=new HashSet();
     Method[] methods=myClass.getMethods();
     for (int i=0; i<methods.length; i++) {
@@ -365,7 +341,8 @@ public class OclType extends OclAny {
    *          superclass and all interfaces
    */
   public OclSet supertypes() {
-    if (isUndefined()) return OclSet.UNDEFINED;
+    if(isUndefined())
+      return new OclSet(0,getUndefinedReason());
     Set set=new HashSet();
     Class superclass=myClass.getSuperclass();
     if (superclass!=null) set.add(new OclType(superclass));
@@ -380,7 +357,8 @@ public class OclType extends OclAny {
    *          superclasses and all interfaces
    */
   public OclSet allSupertypes() {
-    if (isUndefined()) return OclSet.UNDEFINED;
+    if(isUndefined()) 
+      return new OclSet(0,getUndefinedReason());
     Set set=new HashSet();
     Class superclass=myClass.getSuperclass();
     while (superclass!=null) {
@@ -407,14 +385,10 @@ public class OclType extends OclAny {
    *  @see AllInstancesAdapter
    */
   public OclSet allInstances() {
-    if (isUndefined()) return OclSet.UNDEFINED;
+    if(isUndefined())
+      return new OclSet(0,getUndefinedReason());
     return Ocl.getAllInstances(this);
   }
 
-  /** @return true if this OclType is the result of an undefined OCL expression
-   */
-  public boolean isUndefined() {
-    return bUndefined;
-  }
 } /* end class OclType */
 

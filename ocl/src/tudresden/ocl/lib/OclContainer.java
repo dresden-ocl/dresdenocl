@@ -61,9 +61,6 @@ public class OclContainer implements OclRoot {
 
   /** two OclContainers are equal if their contained values are equal; usually
    *  not the OclContainers themselves should be compared, but their values
-   *
-   *  @throws OclClassCastException if the parameter o is not of type
-   *          OclContainer and Ocl.STRICT_CHECKING is <CODE>true</CODE>
    *  @see #getValue()
    */
   public OclBoolean isEqualTo(Object o) {
@@ -71,12 +68,7 @@ public class OclContainer implements OclRoot {
       OclContainer cont=(OclContainer)o;
       return containedValue.isEqualTo(cont.containedValue);
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING)
-        throw new OclClassCastException(
-          "OclContainer isEqualTo() called with non-OclContainer argument"
-        );
-      else
-        return OclBoolean.UNDEFINED;
+      return new OclBoolean(0,"OclContainer isEqualTo() called with non-OclContainer argument");
     }
   }
 
@@ -133,5 +125,13 @@ public class OclContainer implements OclRoot {
   public boolean isUndefined() {
     return containedValue.isUndefined();
   }
+  
+  /** @return the result of getUndefinedReason() of the contained value; the
+   *          OclContainer itself can not be undefined
+   */
+  public final String getUndefinedReason() {
+    return containedValue.getUndefinedReason();
+  }
+
 } /* end class OclContainer */
 

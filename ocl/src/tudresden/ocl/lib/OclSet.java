@@ -42,8 +42,6 @@ import java.util.*;
  */
 public class OclSet extends OclUnsortedCollection implements OclSubtractable {
 
-  public static OclSet UNDEFINED=new OclSet();
-
   /** public constructor for valid OclSets; usually it is preferrably to use
    *  the methods <CODE>Ocl.getOclRepresentationFor(...)</CODE> to get
    *  instances of library classes */
@@ -59,8 +57,8 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
   }
 
   /** private constructor for undefined OclSet */
-  protected OclSet() {
-    bUndefined=true;
+  public OclSet(int dummy, String reason) {
+    super(dummy, reason);
   }
 
   /** static factory method for OclSet containing no elements
@@ -70,22 +68,19 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
   }
 
   /** two OclSets are equal if they contain the same elements
-   *
-   *  @throws OclClassCastException if the parameter o is not of type
-   *          OclSet and Ocl.STRICT_CHECKING is <CODE>true</CODE>
    */
   public OclBoolean isEqualTo(Object o) {
     if ( !(o instanceof OclSet) ) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException(
-          "OclSet isEqualTo() is called with a non-OclSet parameter"
-        );
-      } else {
-        return OclBoolean.FALSE;
-      }
+      System.out.println(
+        "OclSet isEqualTo() is called with a non-OclSet parameter"
+      );
+      return OclBoolean.FALSE;
     }
     OclSet other=(OclSet)o;
-    if (this.isUndefined() || other.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    if(other.isUndefined()) 
+      return new OclBoolean(0,other.getUndefinedReason());
     if ( this.collection.containsAll( other.collection ) &&
           other.collection.containsAll( this.collection ) ) {
       return OclBoolean.TRUE;
@@ -99,10 +94,11 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
    *  @see OclCollection#selectToList(OclIterator iter, OclBooleanEvaluatable eval)
    */
   public OclCollection select(OclIterator iter, OclBooleanEvaluatable eval) {
-    if (isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
     List list=selectToList(iter, eval);
     if (list==null)
-      return UNDEFINED;
+      return new OclSet(0,"error in selectToList");
     else
       return new OclSet(list);
   }
@@ -112,42 +108,43 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
    *  @see OclCollection#collectToList(OclIterator iter, OclRootEvaluatable eval)
    */
   public OclCollection collect(OclIterator iter, OclRootEvaluatable eval) {
-    if (isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
     List list=collectToList(iter, eval);
     if (list==null)
-      return UNDEFINED;
+      return new OclSet(0,"error in collectToList");
     else
       return new OclBag(list);
   }
 
   /** This method tries to call the appropriate method of the same name (for
    *  OclSet or OclBag parameters) or, if there is no such method, handles this
-   *  error by returning UNDEFINED or throwing an exception (depending on
-   *  Ocl.STRICT_CHECKING).
+   *  error by returning an undefined value.
    *
    *  @see OclCollection#union(OclCollection col)
    *  @see #union(OclBag col)
    *  @see #union(OclSet col)
    */
   public OclCollection union(OclCollection col) {
-    if (isUndefined()||col.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(col.isUndefined())
+      return col;
     if (col instanceof OclSet)
       return union( (OclSet)col );
     else if (col instanceof OclBag)
       return union( (OclBag)col );
     else
-      if (Ocl.STRICT_CHECKING)
-        throw new OclClassCastException(
-          "tried to create union of OclSet and OclSequence"
-        );
-      else
-        return UNDEFINED;
+      return new OclSet(0,"tried to create union of OclSet and OclSequence");
   }
 
   /** The union of two OclSets is itself an OclSet again.
    */
   public OclSet union(OclSet set) {
-    if (isUndefined()||set.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(set.isUndefined()) 
+      return set;
     HashSet hs=new HashSet(collection);
     hs.addAll(set.collection);
     return new OclSet(hs);
@@ -156,7 +153,10 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
   /** The union of an OclSet and an OclBag is an OclBag.
    */
   public OclBag union(OclBag bag) {
-    if (isUndefined()||bag.isUndefined()) return OclBag.UNDEFINED;
+    if(isUndefined())
+      return new OclBag(0,getUndefinedReason());
+    if(bag.isUndefined())
+      return bag;
     ArrayList list=new ArrayList(collection.size()+bag.collection.size());
     list.addAll(collection);
     list.addAll(bag.collection);
@@ -167,13 +167,19 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
    *          in the OclBag given as parameter
    */
   public OclUnsortedCollection intersection(OclBag bag) {
-    if (isUndefined() || bag.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(bag.isUndefined()) 
+      return new OclSet(0,bag.getUndefinedReason());
     Set set=intersection(bag.collection);
     return new OclSet(set);
   }
 
   public OclSet intersection(OclSet set) {
-    if (isUndefined() || set.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(set.isUndefined()) 
+      return set;
     Set ret=intersection(set.collection);
     return new OclSet(ret);
   }
@@ -209,7 +215,10 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
    *  @see OclCollection#STRICT_VALUE_TYPES
    */
   public OclCollection including(OclRoot obj) {
-    if (isUndefined() || obj.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(obj.isUndefined()) 
+      return new OclSet(0,obj.getUndefinedReason());
     if (STRICT_VALUE_TYPES) {
       HashSet hs=new HashSet(collection);
       hs.add(obj);
@@ -227,13 +236,13 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
    *  @return an OclSet containing all elements of this OclSet that are not
    *          present in the argument set
    *
-   *  @param s needs to be an OclSet, otherwise error handling according to
-   *         Ocl.STRICT_CHECKING takes place
-   *
-   *  @see Ocl#STRICT_CHECKING
+   *  @param s needs to be an OclSet, undefined value is returned
    */
   public OclSubtractable subtract(OclSubtractable s) {
-    if (isUndefined() || s.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(s.isUndefined())
+      return s;
     try {
       OclSet set=(OclSet)s;
       if (STRICT_VALUE_TYPES) {
@@ -247,12 +256,7 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
         return this;
       }
     } catch (ClassCastException ex) {
-      if (Ocl.STRICT_CHECKING)
-        throw new OclClassCastException(
-          "OclSet subtract called with non-OclSet argument"
-        );
-      else
-        return UNDEFINED;
+      return new OclSet(0,"OclSet subtract called with non-OclSet argument");
     }
   }
 
@@ -268,7 +272,10 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
    *  @see OclCollection#STRICT_VALUE_TYPES
    */
   public OclSet symmetricDifference(OclSet set) {
-    if (isUndefined() || set.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(set.isUndefined())
+      return set;
     boolean bCreateCopy = STRICT_VALUE_TYPES || ! (collection instanceof HashSet);
     HashSet ret;
     HashSet other=new HashSet(set.collection);
@@ -297,7 +304,10 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
    *  @see OclCollection#STRICT_VALUE_TYPES
    */
   public OclCollection excluding(OclRoot obj) {
-    if (isUndefined() || obj.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(obj.isUndefined())
+      return new OclSet(0,obj.getUndefinedReason());
     boolean bCreateCopy = STRICT_VALUE_TYPES || ! (collection instanceof HashSet);
     HashSet ret;
     if (bCreateCopy)

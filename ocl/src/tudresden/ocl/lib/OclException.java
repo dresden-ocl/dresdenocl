@@ -35,19 +35,15 @@ package tudresden.ocl.lib;
 import java.util.*;
 
 /** A runtime exception thrown to indicate that an error occured during
- *  evaluation of the constraint. The cause of this error can either be
- *  an error in the transformed OCL expression or, if Ocl.STRICT_CHECKING
- *  is set to <code>true</code>, an undefined subexpression. An exception
+ *  evaluation of the constraint. The cause of this error can be
+ *  an error in the transformed OCL expression. An exception
  *  is also thrown if <code>isTrue</code> of an undefined <code>OclBoolean
  *  </code> is called. For type errors, <code>OclClassCastException</code>
  *  is used.
  *
  *  <p><code>OclException</code> extends <code>java.lang.RuntimeException
  *  </code> so application programmers don't have to keep catching these
- *  exceptions that usually result of modelling mistakes and can be turned
- *  of through Ocl.STRICT_CHECKING.
- *
- *  @see Ocl#STRICT_CHECKING
+ *  exceptions that usually result of modelling mistakes.
  *
  *  @author Frank Finger
  */

@@ -14,7 +14,7 @@ public class TestBoolean extends TestCase {
   protected void setUp() {
     bTrue=OclBoolean.TRUE;
     bFalse=OclBoolean.FALSE;
-    bUndef=OclBoolean.UNDEFINED;
+    bUndef=new OclBoolean(0,"undefined OclBoolean");
   }
   
   public void testEqual() {
@@ -64,8 +64,13 @@ public class TestBoolean extends TestCase {
   }
   
   public void testUndefined() {
-    assert( bTrue.getFeature("bla") == bUndef );
+    assert( bTrue.getFeature("bla").isUndefined() );
     // assert( bUndef.isTrue() ); raises Exception
+    
+    // The following works only by accident.
+    // Instead of the "==bUndef" there should be a ".isUndefined()".
+    // The "==bUndef" may not work in future versions
+    // of the ocl library.
     assert( bUndef.isEqualTo(bUndef) == bUndef );
     assert( bTrue.implies(bUndef) == bUndef );
     assert( bFalse.implies(bUndef) == bTrue );

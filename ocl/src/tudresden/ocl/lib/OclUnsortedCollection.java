@@ -42,14 +42,14 @@ import java.util.*;
  */
 public abstract class OclUnsortedCollection extends OclCollection {
 
-  public static OclUnsortedCollection UNDEFINED=OclSet.UNDEFINED;
-
   protected OclUnsortedCollection(Collection c) {
     super(c);
   }
 
-  protected OclUnsortedCollection() {
-    super();
+  /** constructor for undefined OCL collection
+   */
+  protected OclUnsortedCollection(int dummy, String reason) {
+    super(dummy, reason);
   }
 
   /** @return an OclBag according to the shorthand notation for <CODE>collect</CODE>
@@ -57,7 +57,8 @@ public abstract class OclUnsortedCollection extends OclCollection {
    *  @see OclCollection#getFeature(String name)
    */
   public OclRoot getFeature(final String name)  {
-    if (isUndefined()) return UNDEFINED;
+    if(isUndefined()) 
+      return this;
     final OclIterator iter;
     return (OclBag) this.collect(
       iter=this.getIterator(),

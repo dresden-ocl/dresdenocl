@@ -6,7 +6,7 @@ import test.framework.*;
 public class TestString extends TestCase {
 
   private OclString shallo, sHALLO, sHaLlO, sHaL, shalloHALLO;
-  private OclString sUndef=OclString.UNDEFINED;
+  private OclString sUndef=new OclString(0,"undefined OclString");
   
   public TestString(String s) {
     super(s);
@@ -24,8 +24,8 @@ public class TestString extends TestCase {
     assert( shallo.isEqualTo(shallo).isTrue() );
     assert(! sHALLO.isEqualTo(shallo).isTrue() );
     assert( sHALLO.isEqualTo(new OclString("HALLO")).isTrue() );
-    assert( sUndef.isEqualTo(shallo)==OclBoolean.UNDEFINED );
-    assert( sHALLO.isEqualTo(sUndef)==OclBoolean.UNDEFINED );
+    assert( sUndef.isEqualTo(shallo).isUndefined() );
+    assert( sHALLO.isEqualTo(sUndef).isUndefined() );
     assert( sHALLO.isNotEqualTo(shallo).isTrue() );
     assert( sHALLO.equals(sHALLO) );
     assert( shallo.equals( Ocl.getOclRepresentationFor("hallo") ) );
@@ -68,7 +68,7 @@ public class TestString extends TestCase {
   }
   
   public void testFeature() {
-    assert( shallo.getFeature("bla")==sUndef );
+    assert( shallo.getFeature("bla").isUndefined() );
   }
   
   public void testNull() {

@@ -60,9 +60,8 @@ import java.util.*;
  *  interface <code>AllInstancesAdapter</code>. Implemenentations might access
  *  a CASE platforms repository.
  *
- *  <p>Additionally, two switches can be set in this class to determine the
- *  runtime behaviour of the class library. These are the class attributes
- *  <CODE>STRICT_CHECKING</CODE> and <CODE>STRICT_VALUE_TYPES</CODE>.
+ *  <p>Additionally, the switch <CODE>STRICT_VALUE_TYPES</CODE> can be set in
+ *  this class to determine the runtime behaviour of the class library.
  *
  *  @see OclFactory
  *  @see DefaultOclFactory
@@ -74,21 +73,12 @@ import java.util.*;
  *  @see #setFactory(OclFactory of)
  *  @see #setNameAdapter(NameAdapter na)
  *  @see #STRICT_VALUE_TYPES
- *  @see #STRICT_CHECKING
  *  @author Frank Finger
  */
 public final class Ocl {
 
-  /** If this attribute is set to true, an runtime exception is raises whenever
-   *  an operation on defined values results in an undefined value (e.g., requesting a
-   *  non-existent feature of a application class or division by zero).
-   *  If the attribute is set to false (default), the operations result is
-   *  an undefined value as defined in the OCL specification.
-   */
-  public static boolean STRICT_CHECKING = false;
-
   /** If this attribute is set to true, an access to a non-existent attribute or
-   *  method is evaluated as UNDEFINED; otherwise, an exception
+   *  method is evaluated as an undefined value; otherwise, an exception
    *  is thrown. Default is <code>true</code>.
    */
   public static boolean TOLERATE_NONEXISTENT_FIELDS=true;
@@ -322,289 +312,209 @@ public final class Ocl {
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclSizable;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclSizable toOclSizable(OclRoot or) {
     try {
       return (OclSizable) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclSizable");
-      } else {
-        return OclSizable.UNDEFINED;
-      }
+      return new OclSequence(0,"tried to cast "+or+" to OclSizable");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclCollection;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclCollection toOclCollection(OclRoot or) {
     try {
       return (OclCollection) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclCollection");
-      } else {
-        return OclCollection.UNDEFINED;
-      }
+      return new OclSequence(0,"tried to cast "+or+" to OclCollection");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclSubtractable;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclSubtractable toOclSubtractable(OclRoot or) {
     try {
       return (OclSubtractable) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclSubtractable");
-      } else {
-        return OclSubtractable.UNDEFINED;
-      }
+      return new OclReal(0,"tried to cast "+or+" to OclSubtractable");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclUnsortedCollection;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclUnsortedCollection toOclUnsortedCollection(OclRoot or) {
     try {
       return (OclUnsortedCollection) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclUnsortedCollection");
-      } else {
-        return OclUnsortedCollection.UNDEFINED;
-      }
+      return new OclSet(0,"tried to cast "+or+" to OclUnsortedCollection");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclSet;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclSet toOclSet(OclRoot or) {
     try {
       return (OclSet) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclSet");
-      } else {
-        return OclSet.UNDEFINED;
-      }
+      return new OclSet(0,"tried to cast "+or+" to OclSet");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclBag;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclBag toOclBag(OclRoot or) {
     try {
       return (OclBag) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclBag");
-      } else {
-        return OclBag.UNDEFINED;
-      }
+      return new OclBag(0,"tried to cast "+or+" to OclBag");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclSequence;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclSequence toOclSequence(OclRoot or) {
     try {
       return (OclSequence) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclSequence");
-      } else {
-        return OclSequence.UNDEFINED;
-      }
+      return new OclSequence(0,"tried to cast "+or+" to OclSequence");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclString;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclString toOclString(OclRoot or) {
     try {
       return (OclString) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclString");
-      } else {
-        return OclString.UNDEFINED;
-      }
+      return new OclString(0,"tried to cast "+or+" to OclString");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclBoolean;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclBoolean toOclBoolean(OclRoot or) {
     try {
       return (OclBoolean) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclBoolean");
-      } else {
-        return OclBoolean.UNDEFINED;
-      }
+      return new OclBoolean(0,"tried to cast "+or+" to OclBoolean");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclComparable;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclComparable toOclComparable(OclRoot or) {
     try {
       return (OclComparable) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclComparable");
-      } else {
-        return OclComparable.UNDEFINED;
-      }
+      return new OclReal(0,"tried to cast "+or+" to OclComparable");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclAddable;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclAddable toOclAddable(OclRoot or) {
     try {
       return (OclAddable) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclAddable");
-      } else {
-        return OclAddable.UNDEFINED;
-      }
+      return new OclReal(0,"tried to cast "+or+" to OclAddable");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclMultiplyable;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclMultiplyable toOclMultiplyable(OclRoot or) {
     try {
       return (OclMultiplyable) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclMultiplyable");
-      } else {
-        return OclMultiplyable.UNDEFINED;
-      }
+      return new OclReal(0,"tried to cast "+or+" to OclMultiplyable");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclReal;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclReal toOclReal(OclRoot or) {
     try {
       return (OclReal) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclReal");
-      } else {
-        return OclReal.UNDEFINED;
-      }
+      return new OclReal(0,"tried to cast "+or+" to OclReal");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclInteger;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclInteger toOclInteger(OclRoot or) {
     try {
       return (OclInteger) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclInteger");
-      } else {
-        return OclInteger.UNDEFINED;
-      }
+      return new OclInteger(0,"tried to cast "+or+" to OclInteger");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclAny;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclAny toOclAny(OclRoot or) {
     try {
       return (OclAny) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclAny");
-      } else {
-        return OclAny.UNDEFINED;
-      }
+      return new OclAnyImpl(0,"tried to cast "+or+" to OclAny");
     }
   }
 
   /** use this method instead of a Java cast to downcast objects of type
    *  OclRoot to OclAnyImpl;
-   *  if casting fails, this method will either return an appropriate UNDEFINED
-   *  value or throw an OclClassCastException (depending on
-   *  Ocl.STRICT_CHECKING)
+   *  if casting fails, this method will return an appropriate undefined
+   *  value.
    */
   public static OclAnyImpl toOclAnyImpl(OclRoot or) {
     try {
       return (OclAnyImpl) or;
     } catch (ClassCastException e) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException("tried to cast "+or+" to OclAnyImpl");
-      } else {
-        return OclAnyImpl.UNDEFINED;
-      }
+      return new OclAnyImpl(0,"tried to cast "+or+" to OclAnyImpl");
     }
   }
 

@@ -6,7 +6,7 @@ import test.framework.*;
 public class TestReal extends TestCase {
 
   private OclReal r0, r10, r12k5, r2k5, rm10;
-  private OclReal rUndef=OclReal.UNDEFINED;
+  private OclReal rUndef=new OclReal(0,"undefined OclReal");
   
   public TestReal(String s) {
     super(s);
@@ -25,14 +25,14 @@ public class TestReal extends TestCase {
       .isTrue() );
     assert( r0.isEqualTo(new OclReal(0d)).isTrue());
     assert( r10.isNotEqualTo(r12k5).isTrue() );
-    assert( rUndef.isEqualTo(rUndef)==OclBoolean.UNDEFINED );
+    assert( rUndef.isEqualTo(rUndef).isUndefined() );
   }
   
   public void testAdd() {
     assert( (r0.add(r10)).isEqualTo(r10).isTrue() );
     assert( ((OclRoot)r10.add(r2k5)).isEqualTo(r12k5).isTrue() );
     assert( ((OclRoot)rm10.add(r10)).isEqualTo(r0).isTrue() );
-    assert( r0.add(rUndef)==OclReal.UNDEFINED );
+    assert( r0.add(rUndef).isUndefined() );
     assert( r0.subtract(r10).isEqualTo(rm10).isTrue() );
     assert( r0.subtract(rm10).isEqualTo(r10).isTrue() );
   }

@@ -46,11 +46,7 @@ public class OclReal extends OclAny implements
 
   // Attributes
 
-  /** the OclReal that is the result of an undefined OCL expression */
-  public static OclReal UNDEFINED=new OclReal();
-
   private double dValue;
-  private boolean bUndefined;
 
   /** Usually it's preferable to use not this constructor but
    *  the factory methods of the class Ocl.
@@ -59,7 +55,6 @@ public class OclReal extends OclAny implements
    */
   public OclReal(double d) {
     dValue=d;
-    bUndefined=false;
   }
 
   /** Usually it's preferable to use not this constructor but
@@ -71,9 +66,10 @@ public class OclReal extends OclAny implements
     this( (double)f );
   }
 
-  /** protected constructor for undefined OclReal value */
-  protected OclReal() {
-    bUndefined=true;
+  /** constructor for undefined OclReal value */
+  public OclReal(int dummy, String reason) {
+    super(dummy, reason);
+    dValue=Double.NaN; // hopefully makes fail-fast
   }
 
   /** Two OclReals are equal if their <CODE>long</CODE> values are
@@ -81,7 +77,10 @@ public class OclReal extends OclAny implements
    */
   public OclBoolean isEqualTo(Object o) {
     OclReal or=toOclReal(o, "OclReal isEqualTo()");
-    if ( isUndefined() || or.isUndefined() ) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    if(or.isUndefined())
+      return new OclBoolean(0,or.getUndefinedReason());
     return Ocl.getOclRepresentationFor( getDouble()==or.getDouble() );
   }
 
@@ -106,7 +105,10 @@ public class OclReal extends OclAny implements
    *          the parameter
    */
   public OclReal add(OclReal or) {
-    if (this.isUndefined() || or.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(or.isUndefined())
+      return or;
     return new OclReal( getDouble()+or.getDouble() );
   }
 
@@ -124,6 +126,8 @@ public class OclReal extends OclAny implements
    *          OclReal multiplied with -1
    */
   public OclReal negative() {
+    if(isUndefined())
+      return this;
     return new OclReal(-getDouble());
   }
 
@@ -131,7 +135,10 @@ public class OclReal extends OclAny implements
    *          of the parameter from this value
    */
   public OclReal subtract(OclReal or) {
-    if (this.isUndefined() || or.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(or.isUndefined())
+      return or;
     return new OclReal( getDouble()-or.getDouble() );
   }
 
@@ -149,7 +156,10 @@ public class OclReal extends OclAny implements
    *          the parameter
    */
   public OclReal multiply(OclReal or) {
-    if (this.isUndefined() || or.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(or.isUndefined())
+      return or;
     return new OclReal( getDouble()*or.getDouble() );
   }
 
@@ -167,14 +177,18 @@ public class OclReal extends OclAny implements
    *          the parameter
    */
   public OclReal divide(OclReal or) {
-    if (this.isUndefined() || or.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(or.isUndefined())
+      return or;
     return new OclReal( getDouble() / or.getDouble() );
   }
 
   /** @return the absolute value of this value
    */
   public OclReal abs() {
-    if (this.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
     return new OclReal( Math.abs(getDouble()) );
   }
 
@@ -182,14 +196,16 @@ public class OclReal extends OclAny implements
    *          argument
    */
   public OclInteger floor() {
-    if (this.isUndefined()) return OclInteger.UNDEFINED;
+    if(isUndefined())
+      return new OclInteger(0,getUndefinedReason());
     return new OclInteger( (long) Math.floor( getDouble() ) );
   }
 
   /** @return the OclInteger value that is closest to this value
    */
   public OclInteger round() {
-    if (this.isUndefined()) return OclInteger.UNDEFINED;
+    if(isUndefined())
+      return new OclInteger(0,getUndefinedReason());
     return new OclInteger( Math.round(getDouble()) );
   }
 
@@ -197,7 +213,10 @@ public class OclReal extends OclAny implements
    *          this value and the parameter
    */
   public OclReal max(OclReal r) {
-    if (this.isUndefined() || r.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(r.isUndefined())
+      return r;
     return new OclReal( Math.max(getDouble(), r.getDouble()) );
   }
 
@@ -205,7 +224,10 @@ public class OclReal extends OclAny implements
    *          this value and the parameter
    */
   public OclReal min(OclReal r) {
-    if (this.isUndefined() || r.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(r.isUndefined())
+      return r;
     return new OclReal( Math.min(getDouble(), r.getDouble()) );
   }
 
@@ -215,9 +237,10 @@ public class OclReal extends OclAny implements
    */
   public int compareTo(Object o) {
     OclReal or=(OclReal)o;
-    if (this.isUndefined() || or.isUndefined()) {
-      throw new OclException("tried to compare undefined OclReal value");
-    }
+    if(isUndefined())
+      throw new OclException("tried to compare undefined OclReal value: "+getUndefinedReason());
+    if(or.isUndefined())
+      throw new OclException("tried to compare undefined OclReal value: "+or.getUndefinedReason());
     double dThis=getDouble();
     double dOther=or.getDouble();
     if (dThis>dOther)
@@ -230,49 +253,50 @@ public class OclReal extends OclAny implements
 
   public OclBoolean isLessThan(OclComparable c) {
     OclReal or=toOclReal(c, "OclReal isLessThan()");
-    if (this.isUndefined() || or.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    if(or.isUndefined()) 
+      return new OclBoolean(0,or.getUndefinedReason());
     return Ocl.getOclRepresentationFor(getDouble()<or.getDouble());
   }
 
   public OclBoolean isGreaterThan(OclComparable c) {
     OclReal or=toOclReal(c, "OclReal isLessThan()");
-    if (this.isUndefined() || or.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    if(or.isUndefined()) 
+      return new OclBoolean(0,or.getUndefinedReason());
     return Ocl.getOclRepresentationFor(getDouble()>or.getDouble());
   }
 
   public OclBoolean isLessEqual(OclComparable c) {
     OclReal or=toOclReal(c, "OclReal isLessThan()");
-    if (this.isUndefined() || or.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    if(or.isUndefined())
+      return new OclBoolean(0,or.getUndefinedReason());
     return Ocl.getOclRepresentationFor(getDouble()<=or.getDouble());
   }
 
   public OclBoolean isGreaterEqual(OclComparable c) {
     OclReal or=toOclReal(c, "OclReal isLessThan()");
-    if (this.isUndefined() || or.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    if(or.isUndefined())
+      return new OclBoolean(0,or.getUndefinedReason());
     return Ocl.getOclRepresentationFor(getDouble()>=or.getDouble());
   }
 
   public double getDouble() {
-    if (isUndefined()) {
-      throw new OclException("tried to read value of undefined OclReal");
-    }
+    if(isUndefined())
+      throw new OclException("tried to read value of undefined OclReal: "+getUndefinedReason());
     return dValue;
   }
 
-  public boolean isUndefined() {
-    return bUndefined;
-  }
-
-  /** This method either throws a runtime exception or returns an undefined
-   *  value, depending on OCL.STRICT_CHECKING.
-   *
-   *  @see Ocl#STRICT_CHECKING
+  /** This method returns an undefined value.
    */
   public OclRoot getFeature(String name) {
-    if (Ocl.STRICT_CHECKING) {
-      throw new OclException("feature "+name+" of OclBoolean requested");
-    }
-    return UNDEFINED;
+    return new OclReal(0,"feature "+name+" of OclBoolean requested");
   }
 
   private OclReal toOclReal(Object o, String methodname) {
@@ -280,11 +304,7 @@ public class OclReal extends OclAny implements
       OclReal ret=(OclReal) o;
       return ret;
     } catch (Exception cce) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclException(methodname+" called with non-OclReal parameter");
-      } else {
-        return UNDEFINED;
-      }
+      return new OclReal(0,methodname+" called with non-OclReal parameter");
     }
   }
 
@@ -293,7 +313,8 @@ public class OclReal extends OclAny implements
    *  do not occur in this Java implementation.
    */
   public OclType oclType() {
-    if (isUndefined()) return OclType.UNDEFINED;
+    if(isUndefined()) 
+      return new OclType(0,getUndefinedReason());
     return OclType.typeReal;
   }
 

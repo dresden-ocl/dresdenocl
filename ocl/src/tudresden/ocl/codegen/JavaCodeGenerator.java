@@ -205,7 +205,9 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
         writeToStandardCodeOnly();
         appendCode(createDecl(javaType,result)+oclLibPackage+"Ocl.to"+javaType+"( "+oclLibPackage+"Ocl.getFor("+javaResult+") );\n");
         writeToPreCodeOnly();
-        appendCode(createDecl(javaType,result)+oclLibPackage+javaType+".UNDEFINED;\n");
+        // the following works only for instantiable classes
+        // of the ocl library. TODO
+        appendCode(createDecl(javaType,result)+"new "+oclLibPackage+javaType+"(0,\"created by JavaCodeGenerator\");\n");
         writeToBothCodes();
       }
     }

@@ -235,10 +235,6 @@ public abstract class Example implements Runnable
   
   static public void main(String[] args)
   {
-    // enable the following only, if there are type errors
-    // which are difficult to trace
-    //tudresden.ocl.lib.Ocl.STRICT_CHECKING=true;
-
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
     tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
     SecondExample e2=new SecondExample();

@@ -38,16 +38,12 @@ import java.util.*;
  *  stored in a <code>long</code> attribute, thus restricting the possible
  *  values. Please note that OclInteger extends OclReal.
  *
- *  <p>All operations on OclIntegers return OclInteger.UNDEFINED if one or more
- *  of the operands is OclInteger.UNDEFINED.
+ *  <p>All operations on OclIntegers return undefined values if one or more
+ *  of the operands is undefined.
  *
  *  @author Frank Finger
  */
 public class OclInteger extends OclReal {
-
-  /** the OclInteger that is the result of an undefined OCL expression
-   */
-  public static OclInteger UNDEFINED=new OclInteger();
 
   private long lValue;
 
@@ -70,9 +66,10 @@ public class OclInteger extends OclReal {
     lValue=l;
   }
 
-  /** private constructor for undefined OclInteger value */
-  private OclInteger() {
-    super();
+  /** constructor for undefined OclInteger value */
+  public OclInteger(int dummy, String reason) {
+    super(dummy, reason);
+    lValue=Long.MIN_VALUE; // hopefully makes fail-fast
   }
 
   /** This method is only invoked in case of an error: OclInteger's add
@@ -90,7 +87,10 @@ public class OclInteger extends OclReal {
    *          and the parameter
    */
   public OclInteger add(OclInteger i) {
-    if (isUndefined() || i.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this; // no need to create a new one
+    if(i.isUndefined())
+      return i; // no need to create a new one
     return new OclInteger( this.getLong() + i.getLong() );
   }
 
@@ -115,7 +115,10 @@ public class OclInteger extends OclReal {
    *          of the parameter from this value
    */
   public OclInteger subtract(OclInteger oi) {
-    if (isUndefined() || oi.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(oi.isUndefined())
+      return oi;
     return new OclInteger(this.getLong()-oi.getLong());
   }
 
@@ -123,6 +126,8 @@ public class OclInteger extends OclReal {
    *          OclInteger multiplied with -1
    */
   public OclReal negative() {
+    if(isUndefined())
+      return this;
     return new OclInteger(-getLong());
   }
 
@@ -140,7 +145,10 @@ public class OclInteger extends OclReal {
    *          and the parameter
    */
   public OclInteger multiply(OclInteger oi) {
-    if (isUndefined() || oi.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(oi.isUndefined())
+      return oi;
     return new OclInteger(getLong() * oi.getLong());
   }
 
@@ -166,29 +174,38 @@ public class OclInteger extends OclReal {
    */
   public OclReal divide(OclInteger oi) {
     if (oi.lValue==0l) {
-      if (Ocl.STRICT_CHECKING)
-        throw new OclException("division by zero");
-      else
-        return UNDEFINED;
+      return new OclInteger(0,"division by zero");
     }
-    if (this.isUndefined() || oi.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(oi.isUndefined())
+      return oi;
     return new OclReal(getDouble()/oi.getDouble());
   }
 
   /** @return this modulo the parameter
    */
   public OclInteger mod(OclInteger i) {
-    if (isUndefined() || i.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(i.isUndefined()) 
+      return i;
     return new OclInteger(lValue % i.lValue);
   }
 
   public OclInteger max(OclInteger i) {
-    if (isUndefined() || i.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(i.isUndefined()) 
+      return i;
     return new OclInteger( Math.max(lValue, i.lValue) );
   }
 
   public OclInteger min(OclInteger i) {
-    if (isUndefined() || i.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(i.isUndefined()) 
+      return i;
     return new OclInteger( Math.min(lValue, i.lValue) );
   }
 
@@ -198,19 +215,20 @@ public class OclInteger extends OclReal {
    */
   public OclInteger div(OclInteger i) {
     if (i.lValue==0l) {
-      if (Ocl.STRICT_CHECKING)
-        throw new OclException("division by zero");
-      else
-        return UNDEFINED;
+      return new OclInteger(0,"division by zero");
     }
-    if (isUndefined() || i.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(i.isUndefined())
+      return i;
     return new OclInteger( lValue / i.lValue );
   }
 
   /** @return the absolute value of this OclInteger value
    */
   public OclReal abs() {
-    if (isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
     return new OclInteger( Math.abs(lValue) );
   }
 
@@ -219,7 +237,8 @@ public class OclInteger extends OclReal {
    *  @throws OclException if this is an undefined OclInteger value
    */
   public int getInt() {
-    if (isUndefined()) throw new OclException("tried to evaluate undefined OclInteger");
+    if(isUndefined())
+      throw new OclException("tried to evaluate undefined OclInteger: "+getUndefinedReason());
     return (int)lValue;
   }
 
@@ -228,7 +247,8 @@ public class OclInteger extends OclReal {
    *  @throws OclException if this is an undefined OclInteger value
    */
   public long getLong() {
-    if (isUndefined()) throw new OclException("tried to evaluate undefined OclInteger");
+    if(isUndefined()) 
+      throw new OclException("tried to evaluate undefined OclInteger: "+getUndefinedReason());
     return lValue;
   }
 
@@ -237,7 +257,8 @@ public class OclInteger extends OclReal {
    *  @throws OclException if this is an undefined OclInteger value
    */
   public double getDouble() {
-    if (isUndefined()) throw new OclException("tried to evaluate undefined OclInteger");
+    if(isUndefined()) 
+      throw new OclException("tried to evaluate undefined OclInteger: "+getUndefinedReason());
     return (double)lValue;
   }
 
@@ -246,11 +267,7 @@ public class OclInteger extends OclReal {
       OclInteger ret=(OclInteger) o;
       return ret;
     } catch (ClassCastException cce) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException(methodname+" called with non-OclInteger parameter");
-      } else {
-        return UNDEFINED;
-      }
+      return new OclInteger(0,methodname+" called with non-OclInteger parameter");
     }
   }
 
@@ -273,7 +290,10 @@ public class OclInteger extends OclReal {
   /** @see OclAny#oclIsKindOf(OclType type)
    */
   public OclBoolean oclIsKindOf(OclType type) {
-    if (isUndefined() || type.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    if(type.isUndefined()) 
+      return new OclBoolean(0,type.getUndefinedReason());
     if (oclIsTypeOf(type).isTrue())
       return OclBoolean.TRUE;
     else
@@ -285,7 +305,8 @@ public class OclInteger extends OclReal {
    *  do not occur in this Java implementation.
    */
   public OclType oclType() {
-    if (isUndefined()) return OclType.UNDEFINED;
+    if(isUndefined()) 
+      return new OclType(0,getUndefinedReason());
     return OclType.typeInteger;
   }
 

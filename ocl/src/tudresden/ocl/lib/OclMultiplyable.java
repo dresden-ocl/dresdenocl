@@ -42,8 +42,6 @@ import java.util.*;
  */
 public interface OclMultiplyable extends OclRoot {
 
-  public static OclMultiplyable UNDEFINED=OclInteger.UNDEFINED;
-
   /** This operation corresponds to the <code>*</code> operator.
    *
    *  @throws OclClassCastException if the type of the parameter prevents it

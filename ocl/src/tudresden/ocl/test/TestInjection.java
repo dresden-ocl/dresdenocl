@@ -30,10 +30,6 @@ public class TestInjection
   
   private void doTest() 
   {
-    // enable the following only, if there are type errors
-    // which are difficult to trace
-    tudresden.ocl.lib.Ocl.STRICT_CHECKING=true;
-
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
     tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
     

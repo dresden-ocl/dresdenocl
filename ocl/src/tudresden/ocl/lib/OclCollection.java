@@ -93,13 +93,6 @@ import java.util.*;
  */
 public abstract class OclCollection implements OclSizable, OclRoot {
 
-  /** the OclCollection that is the result of an undefined OCL expression;
-   *  this attribute identical to OclSet.UNDEFINED because OclCollection is an
-   *  abstract class, but could be OclBag.UNDEFINED or OclSequence.UNDEFINED
-   *  just as well
-   */
-  public static OclCollection UNDEFINED=new OclSet();
-
   /** copied from Ocl.STRICT_VALUE_TYPES at creation of this collection; can
    *  then be changed as needed
    *
@@ -108,10 +101,6 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public boolean STRICT_VALUE_TYPES=Ocl.STRICT_VALUE_TYPES;
 
   protected Collection collection;
-
-  /** the OclCollection that is the result of an undefined OCL expression
-   */
-  protected boolean bUndefined;
 
   /** package-visible constructor for valid collections
    */
@@ -127,12 +116,6 @@ public abstract class OclCollection implements OclSizable, OclRoot {
         }
       }
     }
-  }
-
-  /** constructor for undefined OCL collection
-   */
-  protected OclCollection() {
-    bUndefined=true;
   }
 
   public abstract OclBoolean isEqualTo(Object o);
@@ -169,11 +152,12 @@ public abstract class OclCollection implements OclSizable, OclRoot {
     }
   }
 
-  /** @return OclBoolean.TRUE iff at least one element of this collection
+  /** @return OclBoolean.TRUE if at least one element of this collection
    *          fulfills the condition given as second parameter
    */
   public OclBoolean exists(OclIterator iter, OclBooleanEvaluatable eval) {
-    if (isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
     boolean ret=false;
     while (iter.hasNext() && !ret) {
       iter.next();
@@ -186,7 +170,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *          fulfill the condition given as second parameter
    */
   public OclBoolean forAll(OclIterator iter, OclBooleanEvaluatable eval) {
-    if (isUndefined()) return OclBoolean.UNDEFINED;
+    if (isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
     try {
       boolean ret=true;
       while (iter.hasNext() && ret) {
@@ -195,7 +180,7 @@ public abstract class OclCollection implements OclSizable, OclRoot {
       }
       return Ocl.getOclRepresentationFor(ret);
     } catch (OclException e) {
-      return OclBoolean.UNDEFINED;
+      return new OclBoolean(0,e.toString());
     }
   }
 
@@ -208,7 +193,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *          returns different results for all members of the set
    */
   public OclBoolean isUnique(OclIterator iter, OclRootEvaluatable eval) {
-    if (isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
     boolean ret=true;
     HashSet hs=new HashSet(collection.size());
     while (iter.hasNext() && ret) {
@@ -223,7 +209,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *  parameter.
    */
   public OclSequence sortedBy(OclIterator iter, OclComparableEvaluatable eval) {
-    if (isUndefined()) return OclSequence.UNDEFINED;
+    if(isUndefined()) 
+      return new OclSequence(0,getUndefinedReason());
 
     /* problem:  a key may occur many times for different value
      * solution: store a mapping key -> set(value)
@@ -235,11 +222,7 @@ public abstract class OclCollection implements OclSizable, OclRoot {
       try {
         key = eval.evaluate();
       } catch (ClassCastException e) {
-        if (Ocl.STRICT_CHECKING) {
-          throw new OclException("ClassCastException in OclComparableEvaluatable.evaluate()");
-        } else {
-          return OclSequence.UNDEFINED;
-        }
+        return new OclSequence(0,"ClassCastException in OclComparableEvaluatable.evaluate()");
       }
       OclRoot obj    = iter.getValue();
       if (tm.keySet().contains(key)) {
@@ -272,7 +255,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *  @see OclContainer
    */
   public OclRoot iterate(OclIterator iter, OclContainer accum, OclRootEvaluatable eval) {
-    if (isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
     while (iter.hasNext()) {
       iter.next();
       OclRoot root=eval.evaluate();
@@ -351,7 +335,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   /** @return the cardinality of this collection
    */
   public OclInteger size() {
-    if (isUndefined()) return OclInteger.UNDEFINED;
+    if(isUndefined()) 
+      return new OclInteger(0,getUndefinedReason());
     return new OclInteger(collection.size());
   }
 
@@ -362,7 +347,10 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *  @see OclRoot#isEqualTo(Object o)
    */
   public OclBoolean includes(OclRoot obj) {
-    if (isUndefined()||obj.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
+    if(obj.isUndefined()) 
+      return new OclBoolean(0,obj.getUndefinedReason());
     boolean ret=false;
     Iterator iter=collection.iterator();
     while (iter.hasNext() && !ret) {
@@ -389,7 +377,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *         this method
    */
   public OclInteger count(Object obj) {
-    if (isUndefined()) return OclInteger.UNDEFINED;
+    if(isUndefined()) 
+      return new OclInteger(0,getUndefinedReason());
     OclRoot or;
     if (obj instanceof OclRoot) {
       or=(OclRoot)obj;
@@ -410,7 +399,10 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   }
 
   public OclBoolean includesAll(OclCollection coll) {
-    if (isUndefined() || coll.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
+    if(coll.isUndefined()) 
+      return new OclBoolean(0,coll.getUndefinedReason());
     return Ocl.getOclRepresentationFor(collection.containsAll(coll.collection));
   }
 
@@ -418,7 +410,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *  collection is not considered empty
    */
   public OclBoolean isEmpty() {
-    if (isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
     return Ocl.getOclRepresentationFor(collection.isEmpty());
   }
 
@@ -429,18 +422,14 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   }
 
   /** This method sums up all elements of the collection. If any element does
-   *  not implement the interface <CODE>OclAddable</CODE>, either an exception
-   *  is thrown or the result is undefined, depending on Ocl.STRICT_CHECKING.
+   *  not implement the interface <CODE>OclAddable</CODE>, the result is undefined.
    *  If the collection is empty, an OclInteger representing 0 is returned.
    *
-   *  @throws OclClassCastException is an element is not "addable" and
-   *          Ocl.STRICT_CHECKING is set to <CODE>true</CODE>
-   *
-   *  @see Ocl#STRICT_CHECKING
    *  @see OclAddable
    */
   public OclAddable sum() {
-    if (isUndefined()) return OclInteger.UNDEFINED;
+    if(isUndefined()) 
+      return new OclInteger(0,getUndefinedReason());
     if (collection.isEmpty()) return new OclInteger(0l);
 
     try {
@@ -453,13 +442,7 @@ public abstract class OclCollection implements OclSizable, OclRoot {
       return sum;
     }
     catch (ClassCastException cce) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException(
-          "sum() of collection with non-OclAddable element requested"
-        );
-      } else {
-        return OclInteger.UNDEFINED;
-      }
+      return new OclInteger(0,"sum() of collection with non-OclAddable element requested");
     }
   }
 
@@ -485,7 +468,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *          duplicates, if there are any)
    */
   public OclSet asSet() {
-    if (isUndefined()) return OclSet.UNDEFINED;
+    if(isUndefined())
+      return new OclSet(0,getUndefinedReason());
     HashSet set=new HashSet(collection);
     return new OclSet(set);
   }
@@ -493,7 +477,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   /** @return an OclBag containing all elements of this collection
    */
   public OclBag asBag() {
-    if (isUndefined()) return OclBag.UNDEFINED;
+    if(isUndefined()) 
+      return new OclBag(0,getUndefinedReason());
     ArrayList list=new ArrayList(collection);
     return new OclBag(list);
   }
@@ -502,16 +487,10 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *          defined order
    */
   public OclSequence asSequence() {
-    if (isUndefined()) return OclSequence.UNDEFINED;
+    if(isUndefined()) 
+      return new OclSequence(0,getUndefinedReason());
     ArrayList list=new ArrayList(collection);
     return new OclSequence(list);
-  }
-
-  /** @return <code>true</code> if this collection is the result of an
-   *          undefined OCL expression
-   */
-  public boolean isUndefined() {
-    return bUndefined;
   }
 
   /** an OclIterator is necessary to invoke the "iterating methods", e.g.
@@ -525,11 +504,7 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   }
 
   private OclCollection error(String msg) {
-    if (Ocl.STRICT_CHECKING) {
-      throw new OclException(msg);
-    } else {
-      return UNDEFINED;
-    }
+    return new OclSet(0,msg);
   }
 
   public boolean equals(Object o) {
@@ -542,7 +517,7 @@ public abstract class OclCollection implements OclSizable, OclRoot {
 
   public String toString() {
     if (isUndefined()) {
-      return "[UNDEFINED]";
+      return "[UNDEFINED:"+getUndefinedReason()+"]";
     } else {
       StringBuffer sb=new StringBuffer();
       Iterator iter=collection.iterator();
@@ -589,6 +564,45 @@ public abstract class OclCollection implements OclSizable, OclRoot {
       collection.add(any);
     }
   }
+
+  // START of section implementing undefined values
+  // this section is duplicated in all classes,
+  // directly implementing the OclRoot interface,
+  // excepting OclContainer.
+
+  /**
+     The reason, why this object represents an undefined value.
+     Additionally, this is the tag, whether this object represents
+     a undefined value.
+     Is null, if and only if it is not undefined.
+  */
+  private String undefinedreason=null;
+  
+  /**
+     Constructs an instance representing an undefined value.
+     @parameter dummy must be 0.
+  */
+  protected OclCollection(int dummy, String undefinedreason)
+  {
+    if(dummy!=0)
+      throw new RuntimeException();
+    this.undefinedreason=undefinedreason;
+  }
+  
+  public final boolean isUndefined()
+  {
+    return undefinedreason!=null;
+  }
+  
+  public final String getUndefinedReason()
+  {
+    if(undefinedreason!=null)
+      return undefinedreason;
+    else
+      throw new RuntimeException();
+  }
+
+  // END of section implementing undefined values
 
 } /* end class OclCollection */
 

@@ -42,10 +42,6 @@ import java.util.*;
  */
 public class OclBag extends OclUnsortedCollection {
 
-  /** the OclBag that is the result of an undefined OCL expression
-   */
-  public static OclBag UNDEFINED=new OclBag();
-
   /** package-visible constructor for OclBag; the ordering of the argument list
    *  is not reflected by OclBag
    */
@@ -53,10 +49,10 @@ public class OclBag extends OclUnsortedCollection {
     super(list);
   }
 
-  /** private constructor for undefined OclBag
+  /** constructor for undefined OclBag
    */
-  private OclBag() {
-    bUndefined=true;
+  public OclBag(int dummy, String reason) {
+    super(dummy, reason);
   }
 
   /** static factory method that returns an OclBag that contains no elements
@@ -68,22 +64,17 @@ public class OclBag extends OclUnsortedCollection {
 
   /** two OclBags are equal if they contain the same elements the same number
    *  of times
-   *
-   *  @throws OclClassCastException if the parameter o is not of type
-   *          OclBag and Ocl.STRICT_CHECKING is <CODE>true</CODE>
    */
   public OclBoolean isEqualTo(Object o) {
     if ( !(o instanceof OclBag) ) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException(
-          "OclBag isEqualTo() is called with a non-OclBag parameter"
-        );
-      } else {
-        return OclBoolean.FALSE;
-      }
+      System.out.println("OclBag isEqualTo() is called with a non-OclBag parameter");
+      return OclBoolean.FALSE;
     }
     OclBag other=(OclBag)o;
-    if (this.isUndefined() || other.isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
+    if(other.isUndefined()) 
+      return new OclBoolean(0,other.getUndefinedReason());
 
     HashMap hmThis=this.getCountMap();
     HashMap hmOther=other.getCountMap();
@@ -100,10 +91,11 @@ public class OclBag extends OclUnsortedCollection {
    *  @see OclCollection#selectToList(OclIterator iter, OclBooleanEvaluatable eval)
    */
   public OclCollection select(OclIterator iter, OclBooleanEvaluatable eval) {
-    if (isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
     List list=selectToList(iter, eval);
     if (list==null)
-      return UNDEFINED;
+      return new OclBag(0,"error in selectToList");
     else
       return new OclBag(list);
   }
@@ -113,36 +105,32 @@ public class OclBag extends OclUnsortedCollection {
    *  @see OclCollection#collectToList(OclIterator iter, OclRootEvaluatable eval)
    */
   public OclCollection collect(OclIterator iter, OclRootEvaluatable eval) {
-    if (isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
     List list=collectToList(iter, eval);
     if (list==null)
-      return UNDEFINED;
+      return new OclBag(0,"error in collectToList");
     else
       return new OclBag(list);
   }
 
   /** This method tries to call the appropriate method of the same name (for
    *  OclSet or OclBag parameters) or, if there is no such method, handles this
-   *  error by returning UNDEFINED or throwing an exception (depending on
-   *  Ocl.STRICT_CHECKING).
+   *  error by returning an undefined value.
    *
    *  @see OclCollection#union(OclCollection col)
    *  @see #union(OclBag col)
    *  @see #union(OclSet col)
    */
   public OclCollection union(OclCollection col) {
-    if (isUndefined()) return UNDEFINED;
+    if(isUndefined()) 
+      return this;
     if (col instanceof OclSet)
       return union( (OclSet)col );
     else if (col instanceof OclBag)
       return union( (OclBag)col );
     else
-      if (Ocl.STRICT_CHECKING)
-        throw new OclClassCastException(
-          "tried to create union of OclBag and OclSequence"
-        );
-      else
-        return UNDEFINED;
+      return new OclBag(0,"tried to create union of OclBag and OclSequence");
   }
 
   /** The union of an OclBag and an OclSet is an OclBag.
@@ -151,14 +139,18 @@ public class OclBag extends OclUnsortedCollection {
    *  @see OclSet#union(OclBag bag)
    */
   public OclBag union(OclSet set) {
-    if (isUndefined()) return UNDEFINED;
+    if(isUndefined()) 
+      return this;
     return set.union(this);
   }
 
   /** The union of two OclBags is again an OclBag.
    */
   public OclBag union(OclBag bag) {
-    if (isUndefined()||bag.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(bag.isUndefined())
+      return bag;
     ArrayList list=new ArrayList(collection.size()+bag.collection.size());
     list.addAll(collection);
     list.addAll(bag.collection);
@@ -169,7 +161,10 @@ public class OclBag extends OclUnsortedCollection {
    *          (regardless of their number) and the set given as argument
    */
   public OclSet intersection(OclSet set) {
-    if (isUndefined() || set.isUndefined()) return OclSet.UNDEFINED;
+    if(isUndefined())
+      return new OclSet(0,getUndefinedReason());
+    if(set.isUndefined()) 
+      return new OclSet(0,set.getUndefinedReason());
     HashSet ret=new HashSet(set.collection.size());
     Iterator iter=set.collection.iterator();
     while (iter.hasNext()) {
@@ -187,7 +182,10 @@ public class OclBag extends OclUnsortedCollection {
    *          it is found in the two source OclBags
    */
   public OclUnsortedCollection intersection(OclBag bag) {
-    if (isUndefined() || bag.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(bag.isUndefined()) 
+      return bag;
     HashMap hsThis=getCountMap();
     HashMap hsOther=bag.getCountMap();
     Iterator iter=hsThis.keySet().iterator();
@@ -218,7 +216,10 @@ public class OclBag extends OclUnsortedCollection {
    *  @see OclCollection#STRICT_VALUE_TYPES
    */
   public OclCollection including(OclRoot obj) {
-    if (isUndefined() || obj.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(obj.isUndefined()) 
+      return new OclBag(0,obj.getUndefinedReason());
     if (STRICT_VALUE_TYPES) {
       ArrayList list=new ArrayList(collection);
       list.add(obj);
@@ -240,7 +241,10 @@ public class OclBag extends OclUnsortedCollection {
    *  @see OclCollection#STRICT_VALUE_TYPES
    */
   public OclCollection excluding(OclRoot obj) {
-    if (isUndefined() || obj.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(obj.isUndefined())
+      return new OclBag(0,obj.getUndefinedReason());
     boolean bCreateCopy=STRICT_VALUE_TYPES || ! (collection instanceof ArrayList);
     ArrayList list;
     if ( bCreateCopy ) {

@@ -45,8 +45,6 @@ import java.util.*;
  */
 public interface OclSizable extends OclRoot {
 
-  public static OclSizable UNDEFINED=OclString.UNDEFINED;
-
   /** An operation representing the <i>size</i> property defined on collections
    *  and strings.
    */

@@ -40,15 +40,10 @@ import java.util.*;
  */
 public class OclString extends OclAny implements OclSizable {
 
-  public static OclString UNDEFINED=new OclString();
-
   /** The value of this OclString, stored as a java.lang.String. It may contain
    *  a <code>null</code> reference.
    */
   private String sValue;
-
-  /** is this OclString the result of an undefined OCL expression? */
-  private boolean bUndefined;
 
   /** package-visible constructor for OclString
    *
@@ -56,12 +51,12 @@ public class OclString extends OclAny implements OclSizable {
    */
   public OclString(String str) {
     sValue=str;
-    bUndefined=false;
   }
 
-  /** private constructor for undefined OclString */
-  private OclString() {
-    bUndefined=true;
+  /** constructor for undefined OclString */
+  public OclString(int dummy, String reason)
+  {
+    super(dummy, reason);
   }
 
   /** Two OclStrings are equal if their java.lang.String values are equal
@@ -69,18 +64,16 @@ public class OclString extends OclAny implements OclSizable {
    */
   public OclBoolean isEqualTo(Object o) {
     if ( !(o instanceof OclString) ) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException(
-          "OclString.isEqualTo() called with non-OclString parameter"
-        );
-      } else {
-        return OclBoolean.FALSE;
-      }
+      System.out.println(
+        "OclString.isEqualTo() called with non-OclString parameter"
+      );
+      return OclBoolean.FALSE;
     } else {
       OclString os=(OclString) o;
-      if (this.isUndefined() || os.isUndefined()) {
-        return OclBoolean.UNDEFINED;
-      }
+      if(isUndefined())
+        return new OclBoolean(0,getUndefinedReason());
+      if(os.isUndefined())
+        return new OclBoolean(0,os.getUndefinedReason());
       if ( sValue==null ) {
         return Ocl.getOclRepresentationFor(os.sValue==null);
       } else {
@@ -118,7 +111,7 @@ public class OclString extends OclAny implements OclSizable {
    */
   public OclInteger size() {
     if (isUndefined())
-      return OclInteger.UNDEFINED;
+      return new OclInteger(0,getUndefinedReason());
     else {
       int i=(sValue==null) ? 0 : sValue.length();
       return new OclInteger(i);
@@ -130,7 +123,10 @@ public class OclString extends OclAny implements OclSizable {
    *          one of both has the value <code>null</code>
    */
   public OclString concat(OclString s) {
-    if (this.isUndefined() || s.isUndefined()) return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(s.isUndefined())
+      return s;
     if (sValue==null || s.sValue==null)
       return new OclString(null);
     else {
@@ -143,7 +139,7 @@ public class OclString extends OclAny implements OclSizable {
    */
   public OclString toUpper() {
     if (isUndefined()) {
-      return UNDEFINED;
+      return this;
     } else if (sValue==null) {
       return this;
     } else {
@@ -156,7 +152,7 @@ public class OclString extends OclAny implements OclSizable {
    */
   public OclString toLower() {
     if (isUndefined()) {
-      return UNDEFINED;
+      return this;
     } else if (sValue==null) {
       return this;
     } else {
@@ -172,8 +168,10 @@ public class OclString extends OclAny implements OclSizable {
    *  @throws OclRuntimeException
    */
   public OclString substring(OclInteger lower, OclInteger upper) {
-    if (isUndefined() || sValue==null) {
-      return UNDEFINED;
+    if(isUndefined())
+      return this;
+    if(sValue==null) {
+      return new OclString(0,"called substring() on null-String");
     } else {
       try {
         int start=lower.getInt();
@@ -181,25 +179,15 @@ public class OclString extends OclAny implements OclSizable {
         String sub=sValue.substring(start-1, end);
         return new OclString(sub);
       } catch (IndexOutOfBoundsException ex) {
-        return UNDEFINED;
+        return new OclString(0,ex.toString());
       }
     }
   }
 
-  /** This method either throws a runtime exception or returns an undefined
-   *  value, depending on OCL.STRICT_CHECKING.
-   *
-   *  @see Ocl#STRICT_CHECKING
+  /** This method returns an undefined value.
    */
   public OclRoot getFeature(String name) {
-    if (Ocl.STRICT_CHECKING) {
-      throw new OclException("feature "+name+" of OclString requested");
-    }
-    return UNDEFINED;
-  }
-
-  public boolean isUndefined() {
-    return bUndefined;
+    return new OclAnyImpl(0,"feature "+name+" of OclString requested");
   }
 
   public String getString() {
@@ -213,7 +201,8 @@ public class OclString extends OclAny implements OclSizable {
   /** @see OclAny#oclIsKindOf(OclType type)
    */
   public OclBoolean oclIsKindOf(OclType type) {
-    if (isUndefined()) return OclBoolean.UNDEFINED;
+    if(isUndefined())
+      return new OclBoolean(0,getUndefinedReason());
     return oclIsTypeOf(type).or(super.oclIsKindOf(type));
   }
 
@@ -222,7 +211,8 @@ public class OclString extends OclAny implements OclSizable {
    *  do not occur in this Java implementation.
    */
   public OclType oclType() {
-    if (isUndefined()) return OclType.UNDEFINED;
+    if(isUndefined())
+      return new OclType(0,getUndefinedReason());
     return OclType.typeString;
   }
 

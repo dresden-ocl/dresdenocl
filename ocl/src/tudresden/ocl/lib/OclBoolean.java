@@ -56,18 +56,13 @@ public class OclBoolean extends OclAny {
    */
   public static final OclBoolean TRUE=new OclBoolean(true);
 
-  /** The instance of this class that represents an undefined value.
-   */
-  public static final OclBoolean UNDEFINED=new OclBoolean();
-
   private boolean bValue;
-  private boolean bUndefined;
 
   // *** constructors ***
 
   /** constructor for undefined value */
-  private OclBoolean() {
-    bUndefined=true;
+  public OclBoolean(int dummy, String undefinedreason) {
+    super(dummy, undefinedreason);
   }
 
   /** constructor for defined values */
@@ -78,23 +73,17 @@ public class OclBoolean extends OclAny {
   // *** methods ***
 
   /** @return TRUE if the called object and the parameter are identical
-   *
-   *  @throws OclClassCastException if the parameter o is not of type
-   *          OclBoolean and Ocl.STRICT_CHECKING is <CODE>true</CODE>
    */
   public OclBoolean isEqualTo(Object o) {
     if ( !(o instanceof OclBoolean) ) {
-      if (Ocl.STRICT_CHECKING) {
-        throw new OclClassCastException(
-          "OclBoolean isEqualTo() is called with a non-OclBoolean parameter"
-        );
-      } else
-      {
-        return FALSE;
-      }
+      System.out.println("OclBoolean isEqualTo() is called with a non-OclBoolean parameter");
+      return FALSE;
     }
     OclBoolean other=(OclBoolean)o;
-    if (isUndefined() || other.isUndefined() ) return UNDEFINED;
+    if(isUndefined()) 
+      return this; // no need to create a new one
+    else if(other.isUndefined()) 
+      return other; // no need to create a new one
     if (this==o)
       return TRUE;
     else
@@ -122,8 +111,10 @@ public class OclBoolean extends OclAny {
       return TRUE;
     else if (b==TRUE)
       return TRUE;
-    else if (this.isUndefined() || b.isUndefined())
-      return UNDEFINED;
+    else if (isUndefined())
+      return this;
+    else if (b.isUndefined())
+      return b;
     else
       return FALSE;
   }
@@ -134,8 +125,10 @@ public class OclBoolean extends OclAny {
   public OclBoolean and(OclBoolean b) {
     if (this==FALSE || b==FALSE)
       return FALSE;
-    else if (this.isUndefined() || b.isUndefined())
-      return UNDEFINED;
+    else if (isUndefined())
+      return this; // there is no need to create a new undefined
+    else if (b.isUndefined())
+      return b;
     else
       return TRUE;
   }
@@ -147,8 +140,10 @@ public class OclBoolean extends OclAny {
       return FALSE;
     else if (this==FALSE)
       return TRUE;
+    else if (isUndefined())
+      return this;
     else
-      return UNDEFINED;
+      throw new RuntimeException();
   }
 
   /** @return FALSE if this object is TRUE and the parameter of the operation
@@ -163,7 +158,8 @@ public class OclBoolean extends OclAny {
    *          since that is type preserving
    */
   public OclRoot ifThenElse(OclRoot param1, OclRoot param2) {
-    if (isUndefined()) return OclAnyImpl.UNDEFINED;
+    if(isUndefined())
+      return new OclAnyImpl(0,getUndefinedReason());
     if (isTrue())
       return param1;
     else
@@ -175,29 +171,15 @@ public class OclBoolean extends OclAny {
    */
   public boolean isTrue() {
     if (isUndefined()) {
-      throw new OclException("tried to evaluate undefined OclBoolean value");
+      throw new OclException("tried to evaluate undefined OclBoolean value: "+getUndefinedReason());
     }
     return bValue;
   }
 
-  /** This method either throws a runtime exception or returns an undefined
-   *  value, depending on OCL.STRICT_CHECKING.
-   *
-   *  @see Ocl#STRICT_CHECKING
+  /** This method returns an undefined value.
    */
   public OclRoot getFeature(String name) {
-    if (Ocl.STRICT_CHECKING) {
-      throw new OclException("feature "+name+" of OclBoolean requested");
-    }
-    return UNDEFINED;
-  }
-
-  /** @return <code>true</code> if this OclBoolean is the result of an
-   *          undefined OCL expression
-   *  @see Ocl#STRICT_CHECKING
-   */
-  public boolean isUndefined() {
-    return bUndefined;
+    return new OclBoolean(0,"feature "+name+" of OclBoolean requested");
   }
 
   /** This property is no longer present in OCL 1.3. In spite of this, the
@@ -205,13 +187,14 @@ public class OclBoolean extends OclAny {
    *  do not occur in this Java implementation.
    */
   public OclType oclType() {
-    if (isUndefined()) return OclType.UNDEFINED;
+    if(isUndefined())
+      return new OclType(0,getUndefinedReason());
     return OclType.typeBoolean;
   }
 
   public String toString() {
     if (isUndefined()) {
-      return "OclBoolean<UNDEFINED>";
+      return "OclBoolean<UNDEFINED:"+getUndefinedReason()+">";
     } else {
       return "OclBoolean<"+ ( bValue ? "TRUE>" : "FALSE>" );
     }
