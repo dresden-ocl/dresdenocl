@@ -148,7 +148,7 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
                 AnalysisConsumer.s_clMap.isAssignableFrom (clClass)) {
               // Yup! So we have to generate a comment for it!
               if (m_iawOutput != null) {
-                m_iawOutput.write (getCurrentFeature().getUpdatedComment (m_iawOutput.getCurrentIndent()));
+                m_iawOutput.write (getCurrentFeature().getDocComment (/*m_iawOutput.getCurrentIndent()*/));
               }
 
               m_adCurrentFeature = null; // Mark feature as handled...
@@ -173,7 +173,7 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     if (m_iawOutput != null) {
       if ((m_iFeatures.hasNext()) &&
           (getCurrentFeature().getCommentID() == m_cComments)) {
-        m_iawOutput.write (getCurrentFeature().getUpdatedComment (m_iawOutput.getCurrentIndent()));
+        m_iawOutput.write (getCurrentFeature().getDocComment (/*m_iawOutput.getCurrentIndent()*/));
         m_adCurrentFeature = null; // Mark feature as handled...
       }
       else {

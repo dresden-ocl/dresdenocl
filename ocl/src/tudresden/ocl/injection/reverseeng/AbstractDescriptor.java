@@ -38,10 +38,8 @@ import javax.swing.tree.*;
   */
 public abstract class AbstractDescriptor extends Object {
 
-  public String getDocComment()
-  {
-    return "";
-  }
+  private static final String ELEMENT = "@element-type";
+  private static final String KEY = "@key-type";
   
   /**
     * The analysis in which this descriptor occurred.
@@ -172,68 +170,64 @@ public abstract class AbstractDescriptor extends Object {
     * @param nIndent indentation level to be used for any new line in the comment
     * @return the updated doccomment
     */
-  public String getUpdatedComment (int nIndent) {
-    String sToReturn;
-    String sIndent = "";
-    for (int i = 0; i < nIndent + 2; i++) {
-      // nIndent + 2 because all lines after the second doc comment line
-      // are indented two more characters!
-      sIndent += " ";
-    }
-
+  public String getDocComment() {    
+    return m_sDocComment;
+  }
+  
+  protected void adjustDocComment (String sData, String sContext) {
     if (m_sDocComment == null) {
-      sToReturn = "/**\n" + sIndent + "*\n" + sIndent;
-      
-      // Conditionally add key type      
-      if (getKeyType() != null) {
-        sToReturn += "* @key-type " + getKeyType() + "\n" + sIndent;
-      }
-
-      // Conditionally add element type
-      if (getElementType() != null) {
-        sToReturn += "* @element-type " + getElementType() + "\n" + sIndent;
-      }
-      
-      // Add final delimiter
-      sToReturn += "*/";
-    }
-    else {
-      String sTemp = m_sDocComment;
-
-      // Remove old element-type tag
-      int nTemp = sTemp.indexOf ("@element-type ");
-      
-      if (nTemp != -1) {
-        sTemp = sTemp.substring (0, sTemp.lastIndexOf ('\n', nTemp)) + 
-                sTemp.substring (sTemp.indexOf ('\n', nTemp) + 1);
-      }
-      
-      // Remove old key-type tag
-      nTemp = sTemp.indexOf ("@key-type ");
-      
-      if (nTemp != -1) {
-        sTemp = sTemp.substring (0, sTemp.lastIndexOf ('\n', nTemp)) + 
-                sTemp.substring (sTemp.indexOf ('\n', nTemp) + 1);
-      }
-      
-      // Remove comment delimiter
-      sToReturn = sTemp.substring (0, sTemp.indexOf ("*/"));
-      
-      // Conditionally add key type
-      if (getKeyType() != null) {
-        sToReturn += "* @key-type " + getKeyType() + "\n" + sIndent;
-      }
-
-      // Conditionally add element type
-      if (getElementType() != null) {
-        sToReturn += "* @element-type " + getElementType() + "\n" + sIndent;
-      }
-      
-      // Add final delimiter
-      sToReturn += "*/";
+      m_sDocComment = "/** */";
     }
     
-    return sToReturn;
+    int nTagPos = m_sDocComment.indexOf (sContext);
+    
+    if (nTagPos == -1) {
+      // Find maximum indentation level
+      int nMaxIndent = 0;
+      int nIndent = 0;
+      int nPos = 0;
+      boolean fHadLineBreak = false;
+      
+      while ((nPos > -1) && (nPos < m_sDocComment.length())) {
+        if (m_sDocComment.charAt (nPos) != ' ') {
+          // Find next \n and start searching from there
+          nPos = m_sDocComment.indexOf ('\n', nPos) + 1;
+          
+          fHadLineBreak |= (nPos > -1);
+        }
+        else {
+          nIndent++;
+          if (nIndent > nMaxIndent) {
+            nMaxIndent = nIndent;
+          }
+        }
+      }
+      
+      if (! fHadLineBreak) {
+        nMaxIndent += 2;
+      }
+      
+      String sIndent = "";
+      for (int i = nMaxIndent; i > 0; i--) {
+        sIndent += " ";
+      }
+      
+      int nInsertPos = m_sDocComment.indexOf ("*/");
+      
+      m_sDocComment = m_sDocComment.substring (0, nInsertPos - 1) + 
+                      "\n" + sIndent + "* " + sContext + " " + sData + 
+                      "\n" + sIndent + "*/";
+      
+    }
+    else {
+      int nEndPos = m_sDocComment.indexOf ('\n', nTagPos);
+      if (nEndPos == -1) {
+        nEndPos = m_sDocComment.indexOf ("*/", nTagPos);
+      }
+      
+      m_sDocComment = m_sDocComment.substring (0, nTagPos + sContext.length()) + " " + sData + " " + 
+                      m_sDocComment.substring (nEndPos);
+    }
   }
   
   /** 
@@ -252,6 +246,8 @@ public abstract class AbstractDescriptor extends Object {
   public void setElementType(String sElementType) {
     m_sElementType = sElementType;
 
+    adjustDocComment (sElementType, ELEMENT);
+    
     fireModified();
   }  
   
@@ -271,6 +267,8 @@ public abstract class AbstractDescriptor extends Object {
   protected void setKeyType(String sKeyType) {
     m_sKeyType = sKeyType;
 
+    adjustDocComment (sKeyType, KEY);
+    
     fireModified();
   }  
 

@@ -812,7 +812,8 @@ public final class Injector
   {
     private ParseException(String message)
     {
-      super("["+linenumber+':'+lineposition+']'+' '+message);
+      //super("["+linenumber+':'+lineposition+']'+' '+message);
+      super (message);
     }
   }
   
