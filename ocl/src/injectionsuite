@@ -6,3 +6,8 @@ diff -c Example.java.injected tudresden/ocl/injection/test/Example.java
 ./cleaninjection
 ./compileAll
 diff -c Example.java.original tudresden/ocl/injection/test/Example.java
+./royloy-inject
+./compileAll
+./royloy-run
+./royloy-clean
+./compileAll
