@@ -20,5 +20,3 @@ diff -c tudresden/ocl/injection/test/Example.java tudresden/ocl/injection/test/E
 ./royloy-run
 ./royloy-clean
 ./compileAll
-
-./testrevenggui

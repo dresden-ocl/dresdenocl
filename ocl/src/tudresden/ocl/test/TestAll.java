@@ -48,6 +48,11 @@ public class TestAll extends TestCase {
     suite.addTest( TestNormalize.suite() );
     suite.addTest( TestJavaGenerator.suite() );
     suite.addTest( tudresden.ocl.check.types.xmifacade.stress.Test.suite() );
+    
+    // Test Injector Reverseeng GUI
+    // Added 11/24/2000-sz9
+    suite.addTest( tudresden.ocl.injection.reverseeng.test.RevengTestSuite.suite() );
+    
     return suite;
   }
 }
