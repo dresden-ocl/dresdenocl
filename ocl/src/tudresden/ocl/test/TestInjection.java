@@ -23,35 +23,34 @@ import tudresden.ocl.test.royloy.*;
 
 public class TestInjection
 {
-  /**
-     All objects.
-     Has to be a List, so that assertAll() always tests objects
-     in the same order.
-  */
-  private ArrayList ao=new ArrayList();
-  
   private void doTest() 
   {
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
-    tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
+    tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.ArgoNameAdapter());
     
-    Person p1=new Person("Person1"); ao.add(p1);
-    Person p2=new Person("Person2"); ao.add(p2);
-    Person p3=new Person("Person3"); ao.add(p3);
-    Person p4=new Person("Person4"); ao.add(p4);
+    Person p1=new Person("Person1"); add(p1);
+    Person p2=new Person("Person2"); add(p2);
+    Person p3=new Person("Person3"); add(p3);
+    Person p4=new Person("Person4"); add(p4);
     p1.marry(p2);
 
-    Company c1=new Company("Company1", p3); ao.add(c1);
-    Company c2=new Company("Company2", p3); ao.add(c2);
+    Company c1=new Company("Company1", p3); add(c1);
+    Company c2=new Company("Company2", p3); add(c2);
     c1.employ(p1);
     c2.employ(p2);
     c2.employ(p3);
 
-    Bank b1=new Bank("Bank1"); ao.add(b1);
+    Bank b1=new Bank("Bank1"); add(b1);
     p1.age=1; b1.addCustomer(0, p1);
     p2.age=2; b1.addCustomer(1, p2);
     p3.age=3; b1.addCustomer(2, p3);
     p4.age=4; b1.addCustomer(3, p4);
+    
+    LoyaltyProgram lp=new LoyaltyProgram(); add(lp);
+    Customer cm1=new Customer("Customer1", true);  add(cm1);
+    Customer cm2=new Customer("Customer2", false); add(cm2);
+    Customer cm3=new Customer("Customer3", true);  add(cm3);
+    Customer cm4=new Customer("Customer4", false); add(cm4);
     
     assertAll();
     {
@@ -89,6 +88,14 @@ public class TestInjection
       p3.age=age;
     }
     assertAll();
+    {
+      boolean x=cm3.isMale;
+      cm3.isMale=false;
+      expectViolation("violated ocl invariant 'title_gender' on object 'tudresden.ocl.test.royloy.Customer[Customer3]'.");
+      assertAll();
+      cm3.isMale=x;
+    }
+    assertAll();
     
     if(!ev.isEmpty())
       error("expected violations >"+ev+"< not encountered.");
@@ -96,9 +103,23 @@ public class TestInjection
       error("expected violations post >"+evPost+"< not encountered.");
   }
   
+  /**
+     All objects.
+     Has to be a List, so that assertAll() always tests objects
+     in the same order.
+  */
+  private ArrayList allobjects=new ArrayList();
+  
+  private void add(Object o)
+  {
+    if(allobjects.contains(o))
+      throw new RuntimeException();
+    allobjects.add(o);
+  }
+  
   private void assertAll()
   {
-    for(Iterator i=ao.iterator(); i.hasNext(); )
+    for(Iterator i=allobjects.iterator(); i.hasNext(); )
       ((RLObject)i.next()).assert();
   }
   
