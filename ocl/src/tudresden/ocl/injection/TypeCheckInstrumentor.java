@@ -72,6 +72,7 @@ public final class TypeCheckInstrumentor implements TaskInstrumentor
 	}
 	
 	public void onDocComment(JavaClass jc, String doccomment) {}
+	public void onFileDocComment(JavaClass jc, String doccomment) {}
 	public void onClassFeature(JavaFeature jf, String doccomment) {}
 	public String getMutex() { return null; }
 	public void onWrapperConstructor(Writer o, JavaConstructor jc) {}

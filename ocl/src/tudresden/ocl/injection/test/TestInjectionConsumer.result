@@ -30,11 +30,7 @@ import java.text.Format[onImport(java.text.Format)];
 */[/onFileDocComment]
 public abstract class Example[onClass(Example)] implements Runnable
 {
-  [onAttributeHeader]private String name;[onClassFeature(name){/**
-   Represents an attribute or association partner of a class.
-   Note: type==Model.AMIGOUS means, the attribute cannot be used in OCL due to attribute ambiguities.
-   See OCL spec 5.4.1. for details.
-*/}]
+  [onAttributeHeader]private String name;[onClassFeature(name)]
   [onAttributeHeader]private Integer type=new Integer(5);[onClassFeature(type)]
   [onAttributeHeader]private volatile Integer[] qualifiers;[onClassFeature(qualifiers)]
   [onAttributeHeader]String hallo="hallo";[onClassFeature(hallo)]

@@ -25,7 +25,15 @@ public interface TaskInstrumentor
 {
 	public void setLineSeparator(String lineSeparator);
 	
+  /**
+   * Called for any non-file-level javadoc comment inside a class jc.
+   */
 	public void onDocComment(JavaClass jc, String doccomment);
+  
+  /**
+   * Called for file-level javadoc comments that can be linked to a class jc.
+   */
+  public void onFileDocComment (JavaClass jc, String doccomment);
 	
 	public void onClassFeature(JavaFeature cf, String doccomment);
 	

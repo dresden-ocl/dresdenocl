@@ -63,6 +63,7 @@ public class Main
 		}
 		catch(OclTypeException e)
 		{
+      e.printStackTrace();
 			input.close();
 			output.close();
 			outputfile.delete();

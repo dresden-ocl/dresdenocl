@@ -65,9 +65,26 @@ public final class OclInstrumentor implements TaskInstrumentor
     this.lineSeparator = lineSeparator;
   }
   
-  public void onDocComment(JavaClass jc, String doccomment)
-  {
+  /**
+   * Called for file-level javadoc comments that can be linked to a class jc.
+   */
+  public void onFileDocComment (JavaClass jc, String doccomment) {
+    if (!jc.isInterface() && doccomment != null)
+    {
+      /*System.out.println ("OclInstrumentor.onFileDocComment called for doccomment \"" +
+          doccomment + "\""
+        );*/
+      
+      Map map = Injector.extractDocParagraphs (doccomment);
+      
+      Object o = map.get ("invariant");
+      if (o != null) {
+        processConstraint (o, "inv", jc.getName());
+      }
+    }
   }
+  
+  public void onDocComment (JavaClass jc, String doccomment) { }
   
   private final void processConstraint(final Object o, final String type, final String context)
   {
@@ -456,6 +473,4 @@ public final class OclInstrumentor implements TaskInstrumentor
     return
     (getInvariantScope(jf.getModifiers()) >= config.invariantScope);
   }
-  
 }
-

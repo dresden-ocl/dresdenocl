@@ -798,8 +798,9 @@ public final class Injector
 						if(comment.startsWith("/**"))
 						{
 							doccomment=comment;
-							//System.out.println("doccomment: "+doccomment);
+							//System.out.println ("file level doccomment: "+doccomment);
 							consumer.onFileDocComment(doccomment);
+                                                        doccomment = null; // Mark doccomment as handled...
 						}
 						else
 						{

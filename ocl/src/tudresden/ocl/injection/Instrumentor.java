@@ -33,8 +33,7 @@ public final class Instrumentor implements InjectionConsumer
 	private final boolean delayinsertions;
 	private final boolean clean;
 	private final InstrumentorConfig config;
-	private final String identityhashcode;
-	
+	private final String identityhashcode;	
 	
 	/**
 	 * Holds several properties of the class currently
@@ -52,6 +51,11 @@ public final class Instrumentor implements InjectionConsumer
 	
 	protected String lineSeparator;
 	
+  /**
+   * The last file level doccomment that was read.
+   */
+  private String m_sFileDocComment = null;
+  
 	public Instrumentor(Writer output, InstrumentorConfig config)
 	{
 		this.output=output;
@@ -85,6 +89,15 @@ public final class Instrumentor implements InjectionConsumer
 		
 		class_state_stack.add(class_state);
 		class_state=new InstrumentorClass(jc, config.taskConfigs, delayinsertions, lineSeparator);
+    
+    if (!clean && (m_sFileDocComment != null)) {
+      // handle file doccomment
+      for (int j = 0; j < class_state.taskInstrumentors.length; j++) {
+        class_state.taskInstrumentors[j].onFileDocComment (jc, m_sFileDocComment);
+      }
+      
+      m_sFileDocComment = null; // mark as handled.
+    }
 	}
 	
 	public void onClassEnd(JavaClass jc)
@@ -225,7 +238,24 @@ public final class Instrumentor implements InjectionConsumer
 	public void onFileDocComment(String doccomment)
 	throws IOException
 	{
-		output.write(doccomment);
+    /*System.out.println ("Instrumentor.onFileDocComment called for \"" + doccomment + "\"");
+    System.out.println ("Current class is: " + class_state);*/
+            
+	  output.write(doccomment);
+            
+    if (!clean) {
+      if (class_state != null) {
+        // handle doccomment immediately
+				for (int j = 0; j < class_state.taskInstrumentors.length; j++) {
+          class_state.taskInstrumentors[j].onFileDocComment (class_state.javaclass,
+                                                             doccomment);
+        }
+      }
+      else {
+        // remember to be handled as soon as we know what class we're talking about
+        m_sFileDocComment = doccomment;
+      }
+    }
 	}
 	
 	public void onFileEnd()
