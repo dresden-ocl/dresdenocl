@@ -53,16 +53,9 @@ public class Diff extends Assert
 		}
 	}
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
-		try
-		{
-			diff(new DiffSource(new File(args[0])), new DiffSource(new File(args[1])));
-		}
-		catch(IOException e)
-		{
-			System.out.println(e);
-		}
+		diff(new DiffSource(new File(args[0])), new DiffSource(new File(args[1])));
 	}
 
 }
