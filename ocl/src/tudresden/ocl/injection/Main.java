@@ -208,6 +208,7 @@ public class Main
     boolean modify=false;
     ArrayList sourcefiles=new ArrayList();
     InstrumentorConfig conf=new InstrumentorConfig();
+		TypeTraceConfig typeTraceConfig = null;
     try
     {
       for(int i=0; i<args.length; i++)
@@ -310,7 +311,10 @@ public class Main
           conf.violationmacro=args[i];
         }
         else if("--trace-types".equals(args[i])||"-tt".equals(args[i]))
-          conf.tracetypes=true;
+				{
+					if(typeTraceConfig==null)
+						typeTraceConfig=new TypeTraceConfig();
+				}
         else if("--modify".equals(args[i])||"-m".equals(args[i]))
           modify=true;
         else if("--clean".equals(args[i])||"-c".equals(args[i]))
@@ -344,6 +348,15 @@ public class Main
         System.out.println(usage);
         return;
       }
+			
+			{
+				ArrayList taskConfigs = new ArrayList();
+				if(typeTraceConfig!=null)
+     			taskConfigs.add(typeTraceConfig);
+				conf.taskConfigs=new TaskConfig[taskConfigs.size()];
+				for(int i=0; i<conf.taskConfigs.length; i++)
+					conf.taskConfigs[i] = (TaskConfig)taskConfigs.get(i);
+			}
 
       if(conf.clean&&constraintfile!=null)
       {

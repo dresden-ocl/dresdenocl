@@ -18,7 +18,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.injection;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.*;
 import java.lang.reflect.Modifier;
 import tudresden.ocl.OclTree;
@@ -37,7 +38,6 @@ import tudresden.ocl.injection.lib.HashExact;
 import tudresden.ocl.injection.lib.HashSize;
 import tudresden.ocl.injection.lib.HashModCount;
 import tudresden.ocl.injection.lib.WrapperDummy;
-import tudresden.ocl.injection.lib.TypeTracer;
 
 final class Instrumentor implements InjectionConsumer
 {
@@ -92,7 +92,7 @@ final class Instrumentor implements InjectionConsumer
     discardnextfeature=false;
 
     class_state_stack.add(class_state);
-    class_state=new InstrumentorClass(jc, delayinsertions);
+    class_state=new InstrumentorClass(jc, config.taskConfigs, delayinsertions);
   }
 
   public void onClassEnd(JavaClass jc)
@@ -495,9 +495,9 @@ final class Instrumentor implements InjectionConsumer
       
       if(jf instanceof JavaAttribute)
         writeTypeChecker((JavaAttribute)jf);
-      
-      if(is_weakly_typed&&config.tracetypes)
-        writeTypeTracer((JavaAttribute)jf);
+			
+			for(int j=0; j<class_state.taskInstrumentors.length; j++)
+				class_state.taskInstrumentors[j].onAttributeChanged(o, (JavaAttribute)jf, is_weakly_typed);
       
       o.write("      ");
       o.write(Invariant.NOTIFY_OBSERVING_INVARIANTS);
@@ -805,23 +805,6 @@ final class Instrumentor implements InjectionConsumer
     }
   }
   
-  
-  // type tracing
-  
-  private final void writeTypeTracer(JavaAttribute ja)
-    throws IOException
-  {
-    Writer o=output;
-
-    o.write("      ");
-    o.write(TypeTracer.TRACE_TYPES);
-    o.write("(\"");
-    o.write(ja.getFullDocName());
-    o.write("\", ");
-    o.write(ja.getName());
-    o.write(");\n");
-  }
-
 }
 
 

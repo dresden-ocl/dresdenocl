@@ -56,12 +56,18 @@ final class InstrumentorClass
      to be replaced by {@link OclInjector#writeDefaultConstructor}.
   */
   boolean has_constructors=false;
+	
+	TaskInstrumentor[] taskInstrumentors;
 
-  InstrumentorClass(JavaClass javaclass, boolean delayinsertions)
+  InstrumentorClass(JavaClass javaclass, TaskConfig[] taskConfigs, boolean delayinsertions)
   {
     this.javaclass=javaclass;
     if(delayinsertions)
       behaviours=new ArrayList();
+		
+		taskInstrumentors=new TaskInstrumentor[taskConfigs.length];
+		for(int i=0; i<taskConfigs.length; i++)
+			taskInstrumentors[i]=taskConfigs[i].createTaskInstrumentor();
   }
   
 }

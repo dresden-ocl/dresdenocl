@@ -44,7 +44,6 @@ final class InstrumentorConfig
   Class hashmode=HashExact.class;
   boolean clean=false;
   String violationmacro=null;
-  boolean tracetypes=false;
   boolean logclass=false;
 
 
@@ -54,6 +53,8 @@ final class InstrumentorConfig
   static final int INVARIANT_SCOPE_PUBLIC   =3;
   static final int INVARIANT_SCOPE_EXPLICIT =4;
   int invariantScope=INVARIANT_SCOPE_PRIVATE;
+	
+	public TaskConfig[] taskConfigs;
 }
 
 
