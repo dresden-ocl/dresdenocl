@@ -702,7 +702,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
     
     /**
      *  Executes the project with the specified parameters.
-     */    
+     */
     public void executeProject() {
         StringBuffer tmp;
         String constraint, triggers[], involvedViews[], baseTables[];
@@ -723,9 +723,9 @@ public class OCL2SQL extends JPanel implements ActionListener {
                         
         // create table schema
         increaseProgressInfo("create table schema ...");
-        SchemaGenerator ddlg = new SchemaGenerator();
-        ddlg.createDDL(theORMapping, theSQLBuilder);
-        resultTableSchema = ddlg.getDDLScript();
+        SchemaGenerator ddlg = new SchemaGenerator(theORMapping, theSQLBuilder);
+        ddlg.construct();
+        resultTableSchema = ddlg.getCode();
                 
         // create object views
         increaseProgressInfo("create object views ...");
