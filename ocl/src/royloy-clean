@@ -1,4 +1,4 @@
-java -cp .:xml4j.jar \
+java -cp .:xerces.jar \
   tudresden.ocl.injection.Main \
   --clean \
   --modify \

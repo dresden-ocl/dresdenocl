@@ -20,7 +20,7 @@ package tudresden.ocl.check.types.xmifacade;
 
 import java.util.*;
 import org.w3c.dom.*;
-import com.ibm.xml.parsers.DOMParser;
+import org.apache.xerces.parsers.DOMParser;
 
 import tudresden.ocl.check.types.Type;
 import tudresden.ocl.check.types.Any;
