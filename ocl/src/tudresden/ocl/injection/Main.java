@@ -112,7 +112,7 @@ final class OclInjector implements InjectionConsumer
   {
     this.output=output;
     this.codefragments=config.codefragments;
-    this.delayinsertions=!config.insertimmediatly;
+    this.delayinsertions=!config.insertimmediately;
     this.clean=config.clean;
     this.violationmacro=config.violationmacro;
     this.config=config;
@@ -794,7 +794,7 @@ final class OclInjector implements InjectionConsumer
 final class OclInjectorConfig
 {
   HashMap codefragments=null;
-  boolean insertimmediatly=false;
+  boolean insertimmediately=false;
   boolean clean=false;
   String violationmacro=null;
   boolean tracetypes=false;
@@ -1073,8 +1073,8 @@ public class Main
           modify=true;
         else if("--clean".equals(args[i])||"-c".equals(args[i]))
           conf.clean=true;
-        else if("--insert-immediatly".equals(args[i]))
-          conf.insertimmediatly=true;
+        else if("--insert-immediately".equals(args[i]))
+          conf.insertimmediately=true;
         else if(args[i].startsWith("-"))
         {
           System.out.println("unknown option: "+args[i]);
