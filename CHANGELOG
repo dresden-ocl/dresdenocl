@@ -1,0 +1,45 @@
+
+
+Changes to current CVS
+======================
+
+Changes that could break older environments
+-------------------------------------------
+
+Other changes
+-------------
+* [Build System] Added this file together with a release policy.
+                 Therefore, this section is by no means complete.
+
+* [Type Checker] Introduced Type2
+
+
+Fixed bugs
+----------
+* [Injector]     #223601 static initializers
+  [OCL Library]  replaced Class.forName(name) by
+  [Type Checker] Class.forName(name, false, getClass().getClassLoader())
+                 This prevents static initializers from being executed
+                 which caused trouble for some people.
+
+
+
+POLICY FOR CHANGELOG
+====================
+
+1) Entries are sorted in reversed temporal order, this means, the lastest
+   entry in on top.
+
+2) No tabulators at all.
+
+3) To identify modules use the list of categories from the project's
+   bugzilla. Up to now, these are:
+
+     Build System
+     Injector
+     Java Code Generator
+     Java OCL Library
+     Normalizers
+     Parser
+     Type Checker
+     Website
