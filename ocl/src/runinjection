@@ -1,3 +1,4 @@
+# instruments the example code
 java -cp .:xerces.jar tudresden.ocl.injection.Main \
   --constraint-file tudresden/ocl/injection/test/Example.ocl \
   --reflection-model tudresden.ocl.injection.test \
