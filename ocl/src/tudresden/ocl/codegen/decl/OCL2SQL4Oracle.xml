@@ -134,6 +134,9 @@
 			<li>from <param name="tables"/></li> 
 			<li>where <param name="joins"/>)</li>
 		</template>
+                <template spec="attribute_boolean" rem="CLASS AND ATTRIBUTE">
+			<li>(<param name="attribute"/> = 1)</li>
+		</template>
                 <template spec="navigation" rem="CLASS AND ATTRIBUTE">
 			<li>(select <param name="object"/> from <param name="table1"/> where <param name="ref_object"/> in </li>
 			<li><param name="table2"/>)</li>
@@ -150,7 +153,7 @@
 			<li>exists (</li>
                         <li>select <param name="object"/> from <param name="table"/></li>
                         <li>where <param name="object"/> = <param name="context_object"/>)</li>
-                        <li connector="true">and not exist (</li>
+                        <li connector="true">and not exists (</li>
                         <li connector="true">select <param name="object"/> from <param name="table2"/></li>
                         <li connector="true">where <param name="object"/> = <param name="context_object"/>)</li>
 		</template>
@@ -165,7 +168,7 @@
 		</template>
                 
                 <template spec="allInstances" rem="MODEL TYPE QUERY">
-			<li>select <param name="object"/> from <param name="tables"/></li>
+			<li>(select <param name="object"/> from <param name="tables"/>)</li>
 		</template>
                 <template spec="name" rem="MODEL TYPE QUERY">
                         <li>select '<param name="name"/>' from DUAL</li>
@@ -202,25 +205,25 @@
 			<li>exists (</li>
                         <li>select <param name="object"/> from DUAL</li>
                         <li>intersect</li>
-                        <li><param name="collection"/>)</li>
+                        <li>(<param name="collection"/>))</li>
 		</template>
 		<template spec="excludes" rem="COMPLEX PREDICATE">
 			<li>not exists (</li>
                         <li>select <param name="object"/> from DUAL</li>
                         <li>intersect</li>
-                        <li><param name="collection"/>)</li>
+                        <li>(<param name="collection"/>))</li>
 		</template>
 		<template spec="includesAll" rem="COMPLEX PREDICATE">
 			<li>not exists (</li>
-                        <li><param name="collection2"/></li>
+                        <li>(<param name="collection2"/>)</li>
                         <li>minus</li>
-                        <li><param name="collection"/>)</li>
+                        <li>(<param name="collection"/>))</li>
 		</template>
 		<template spec="excludesAll" rem="COMPLEX PREDICATE">
 			<li>not exists (</li>
-                        <li><param name="collection2"/></li>
+                        <li>(<param name="collection2"/>)</li>
                         <li>intersect</li>
-                        <li><param name="collection"/>)</li>
+                        <li>(<param name="collection"/>))</li>
 		</template>
 		<template spec="isEmpty" rem="COMPLEX PREDICATE">
 			<li>not exists (<param name="collection"/>)</li>
@@ -230,7 +233,7 @@
 		</template>
 		<template spec="exists" rem="COMPLEX PREDICATE">
 			<li>exists (</li>
-                        <li><param name="collection"/> intersect</li>
+                        <li>(<param name="collection"/>) intersect</li>
                         <li>select <param name="object"/> from <param name="table"/></li>
                         <li>where <param name="expression"/></li>
                         <li>)</li>
@@ -243,21 +246,21 @@
 		</template>
 
 		<template spec="size" rem="BASIC VALUE">
-			<li>select NVL(COUNT(*),0)</li>
+			<li>(select NVL(COUNT(*),0)</li>
                         <li>from <param name="table"/></li>
                         <li>where <param name="element"/> in</li>
-                        <li><param name="collection"/></li>
+                        <li><param name="collection"/>)</li>
 		</template>
 		<template spec="count" rem="BASIC VALUE">
-			<li>select NVL(COUNT(*),0)</li>
+			<li>(select NVL(COUNT(*),0)</li>
                         <li>from <param name="table"/></li>
                         <li>where <param name="element"/> in <param name="collection"/></li>
-                        <li>and <param name="element"/> = <param name="object"/></li>
+                        <li>and <param name="element"/> = <param name="object"/>)</li>
 		</template>
                 <template spec="sum" rem="BASIC VALUE">
-			<li>select NVL(SUM(<param name="element"/>),0)</li>
+			<li>(select NVL(SUM(<param name="element"/>),0)</li>
                         <li>from <param name="table"/></li>
-                        <li>where <param name="element"/> in <param name="collection"/></li>
+                        <li>where <param name="element"/> in <param name="collection"/>)</li>
 		</template>
 
 		<template spec="select" rem="QUERY">

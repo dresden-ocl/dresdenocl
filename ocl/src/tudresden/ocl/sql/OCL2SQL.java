@@ -484,7 +484,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
                 theTree.setNameCreator(nameCreator);
                 theTree.applyDefaultNormalizations();
                 cf = theSQLCodeGenerator.getCode(theTree);
-                tmp.append(cf[0].getCode() + "\n");
+                tmp.append(cf[0].getCode() + ";\n");
                 lIntegrityViews.add(cf[0]);
             }
         } catch(Exception e) {

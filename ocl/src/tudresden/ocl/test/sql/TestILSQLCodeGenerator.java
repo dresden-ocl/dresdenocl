@@ -280,14 +280,15 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres = new String();
             expres += "create or replace view inv2 as (                                                             ";
             expres += " select * from OV_FACULTY SELF                                                               ";
-            expres += " where not (select NVL(COUNT(*),0)                                                           ";
-            expres += "            from OV_FACILITY                                                                 ";
-            expres += "            where FID in                                                                     ";
-            expres += "            (select FID from OV_FACILITY where SUPERFACILITY in                              ";        
-            expres += "             (select FID from OV_FACILITY where FID = SELF.FID))                             ";
+            expres += " where not ((select NVL(COUNT(*),0)                                                          ";
+            expres += "             from OV_FACILITY                                                                ";
+            expres += "             where FID in                                                                    ";
+            expres += "             (select FID from OV_FACILITY where SUPERFACILITY in                             ";        
+            expres += "              (select FID from OV_FACILITY where FID = SELF.FID)))                           ";
             expres += "            >= 2))                                                                           ";
             assert(equal(genres, expres));
             
+            // inv3
             genres = getSQLCode("context Faculty inv inv3: self.subFacility->forAll(oclIsTypeOf(Institute))");
             expres = new String();
             expres += "create or replace view inv3 as (                                                             ";
@@ -300,10 +301,139 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "                        where exists (                                                       ";
             expres += "                                      select FID from OV_INSTITUTE                           ";
             expres += "                                      where FID = TUDOCLITER0.FID)                           ";
-            expres += "                              and not exist (                                                ";
+            expres += "                              and not exists (                                               ";
             expres += "                                      select FID from OV_FACILITY                            ";
             expres += "                                      where FID = TUDOCLITER0.FID)                           ";
             expres += "            )                                                                                ";
+            expres += "))                                                                                           ";
+            assert(equal(genres, expres));
+            
+            // inv4
+            genres = getSQLCode("context Employee inv inv4: ((self.grade.name = 'diploma') implies (self.taxClass = 'tc1'))" +
+                                "                      and  ((self.grade.name = 'doctor') implies (self.taxClass = 'tc2'))" +
+                                "                      and  ((self.grade.name = 'professor') implies (self.taxClass = 'tc3'))"
+            );    
+            expres = new String();
+            expres += "create or replace view inv4 as (                                                             ";
+            expres += " select * from OV_EMPLOYEE SELF                                                              ";
+            expres += " where not ((NOT ((select NAME from OV_GRADE where GID in                                    ";
+            expres += "                  (select GRADE from OV_PERSON where PID = SELF.PID))                        ";
+            expres += "                  = 'diploma')                                                               ";                                                                   
+            expres += "              OR (SELF.TAXCLASS= 'tc1'))                                                     ";    
+            expres += "        AND (NOT ((select NAME from OV_GRADE where GID in                                    ";
+            expres += "                  (select GRADE from OV_PERSON where PID = SELF.PID))                        ";
+            expres += "                  = 'doctor')                                                                ";
+            expres += "              OR (SELF.TAXCLASS = 'tc2'))                                                    ";
+            expres += "        AND (NOT ((select NAME from OV_GRADE where GID in                                    ";
+            expres += "                  (select GRADE from OV_PERSON where PID = SELF.PID))                        ";
+            expres += "                  = 'professor')                                                             ";
+            expres += "              OR (SELF.TAXCLASS = 'tc3'))                                                    ";
+            expres += "))                                                                                           ";            
+            assert(equal(genres, expres));
+            
+            // inv5
+            genres = getSQLCode("context Facility inv inv5: not(self.member->exists(p:Person|p.owner->excludes(self)))");
+            expres = new String();     
+            expres += "create or replace view inv5 as (                                                             ";
+            expres += " select * from OV_FACILITY SELF                                                              ";
+            expres += " where not (NOT ((                                                                           ";    
+            expres += "             exists (                                                                        ";
+            expres += "              ((select PID from OV_PERSON where PID in                                       ";
+            expres += "               (select PID from MEMBERSHIP where FID in                                      ";    
+            expres += "                (select FID from OV_FACILITY where FID = SELF.FID))))                        ";     
+            expres += "              intersect                                                                      ";
+            expres += "              select PID from OV_PERSON P                                                    ";
+            expres += "              where not exists (                                                             ";
+            expres += "                           select SELF.FID from DUAL                                         ";
+            expres += "                           intersect                                                         ";
+            expres += "                           ((select FID from OV_FACILITY where FID in                        ";
+            expres += "                              (select FID from MEMBERSHIP where PID in                       ";
+            expres += "                                (select PID from OV_PERSON where PID = P.PID))))             ";
+            expres += "                        )                                                                    ";            
+            expres += "             )                                                                               ";  
+            expres += "))))                                                                                         ";                  
+            assert(equal(genres, expres));
+            
+            // inv6
+            genres = getSQLCode("context Paper inv inv6: ((purpose = 'Diplom') and (inProgress = true)) implies author->forAll(p:Person|p.oclIsTypeOf(Student))");
+            expres = new String();            
+            expres += "create or replace view inv6 as (                                                                     "; 
+            expres += " select * from OV_PAPER SELF                                                                         "; 
+            expres += " where not (NOT ((SELF.PURPOSE = 'Diplom')                                                           "; 
+            expres += "                 AND                                                                                 "; 
+            expres += "                 ((((SELF.INPROGRESS = 1) AND (1=1)) OR (NOT (SELF.INPROGRESS = 1) AND NOT (1=1))))  "; 
+            expres += "                )                                                                                    "; 
+            expres += "            OR                                                                                       "; 
+            expres += "            not exists (                                                                             "; 
+            expres += "                (select PID from OV_PERSON where PID in                                              ";     
+            expres += "                (select PID from PAPERS where PAID in                                                "; 
+            expres += "                (select PAID from OV_PAPER where PAID = SELF.PAID)))                                 "; 
+            expres += "                minus                                                                                "; 
+            expres += "                select PID from OV_PERSON P                                                          "; 
+            expres += "                where exists (                                                                       "; 
+            expres += "                              select PID from OV_STUDENT                                             ";     
+            expres += "                              where PID = P.PID                                                      "; 
+            expres += "                      )                                                                              "; 
+            expres += "                      and                                                                            "; 
+            expres += "                      not exists (                                                                    "; 
+            expres += "                               select PID from OV_PERSON                                             "; 
+            expres += "                               where PID = P.PID                                                     "; 
+            expres += "                      )                                                                              "; 
+            expres += "            )                                                                                        "; 
+            expres += "))                                                                                                   ";             
+            assert(equal(genres, expres));
+            
+            // inv7
+            genres = getSQLCode("context Faculty inv inv7: self.headOfFacility.grade.name = 'professor'");
+            expres = new String();              
+            expres += "create or replace view inv7 as (                                                             ";
+            expres += " select * from OV_FACULTY SELF                                                               ";
+            expres += " where not ((select NAME from OV_GRADE where GID in                                          ";
+            expres += "            (select GRADE from OV_PERSON where PID in                                        ";
+            expres += "            (select HEADOFFACILITY from OV_FACILITY where FID = SELF.FID)))                  ";
+            expres += "            = 'professor'                                                                    ";
+            expres += "))                                                                                           ";
+            assert(equal(genres, expres));
+            
+            // inv8
+            genres = getSQLCode("context Grade inv inv8: Set{'none','diploma','doctor','professor'}->includes(self.name)");
+            expres = new String();               
+            expres += "create or replace view inv8 as (                                                             ";
+            expres += " select * from OV_GRADE SELF                                                                 ";
+            expres += "where not (exists (                                                                          ";
+            expres += "                select SELF.NAME from DUAL                                                   ";
+            expres += "                intersect (                                                                  ";
+            expres += "                select 'none' as elem from DUAL                                              ";
+            expres += "                union                                                                        ";
+            expres += "                select 'diploma' as elem from DUAL                                           ";
+            expres += "                union                                                                        ";
+            expres += "                select 'doctor' as elem from DUAL                                            ";
+            expres += "                union                                                                        ";
+            expres += "                select 'professor' as elem from DUAL)                                        ";
+            expres += "            )                                                                                ";
+            expres += "))                                                                                           ";
+            assert(equal(genres, expres));
+            
+            //inv9
+            genres = getSQLCode("context Employee inv inv9: (self.grade.name = 'doctor') implies " +
+                                "(Paper.allInstances->count(self.paper->select(purpose = 'Dissertation')) = 1)" 
+            );
+            expres = new String();
+            expres += "create or replace view inv9 as (                                                             ";
+            expres += "select * from OV_EMPLOYEE SELF                                                               ";
+            expres += "where not (NOT ((select NAME from OV_GRADE where GID in                                      ";
+            expres += "                (select GRADE from OV_PERSON where PID = SELF.PID))                          ";
+            expres += "                = 'doctor')                                                                  ";
+            expres += "            OR ((select NVL(COUNT(*),0)                                                      ";
+            expres += "                 from OV_PAPER                                                               ";
+            expres += "                 where PAID in (select PAID from OV_PAPER)                                   ";
+            expres += "                       and PAID = ((select PAID from OV_PAPER where PAID in                  ";
+            expres += "                                   (select PAID from PAPERS where PID in                     ";    
+            expres += "                                   (select PID from OV_PERSON where PID = SELF.PID)))        ";
+            expres += "                                   minus                                                     ";
+            expres += "                                   select PAID from OV_PAPER TUDOCLITER0                     ";
+            expres += "                                   where not (TUDOCLITER0.PURPOSE = 'Dissertation')))        ";
+            expres += "                = 1)                                                                         ";
             expres += "))                                                                                           ";
             assert(equal(genres, expres));
             

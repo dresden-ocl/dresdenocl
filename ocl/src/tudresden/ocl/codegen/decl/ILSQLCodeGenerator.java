@@ -86,6 +86,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                 int count, ind;
 		String indent = "";
 		Vector v = new Vector();
+                boolean flag;
 
 		// replace right paragraphs
 		for (int i=0; i<(code.length()-1); i++) {
@@ -120,6 +121,19 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 				}
 			}
 		}
+                
+                // remove multiple linebreaks with just spaces or nothing between them
+                flag = false;
+                ind = 0;
+                for (int i=0; i<code.length(); i++) {
+                    if (code.charAt(i) == '\n') {
+                        if (flag == true) code.setCharAt(ind,' '); 
+                        flag = true;
+                        ind = i;                        
+                    } else if (code.charAt(i) != ' ') {
+                        flag = false;
+                    }
+                }                
 	}
 
 	private String getPathName(APathName node) {
@@ -645,7 +659,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                         
                         // get MappedClass for start type
                         mc = map.getMappedClass(startType);
-                                                
+                                                                        
                         // get guides to the feature starting from startType
                         guides = new ArrayList();
                         try {
@@ -702,6 +716,12 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                                         navigation.put(pex, guides);
                                 }                                
         		}
+                        
+                        // if no tail exists, assign the guides list to the primary expression
+                        if (tail.length == 0) { 
+                            if (guides.size() == 0) guides.add(guide);
+                            navigation.put(pex, guides);
+                        }
 	  	}
 
 	}
@@ -821,8 +841,18 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         					throw new RuntimeException("attribute_navigation: " + e.toString());
         				}
                                         */
-	    			}	    			    						
-    			}
+	    			}
+                                
+                                // special treatment for boolean values
+                                if (theTree.getNodeType(node.parent()).conformsTo(Basic.BOOLEAN)) {
+                                        ca.reset();
+                                        ca.setArgument("attribute", thisCode);
+                                        try {
+        					thisCode = ca.getCodeFor("feature_call", "attribute_boolean");
+        				} catch (Exception e) {
+        					throw new RuntimeException("attribute_boolean: " + e.toString());
+        				}
+                                }                                                                   			}
    		} else {
    			// maybe a special feature call
    			// get necessary mapping type information of iterators
@@ -865,7 +895,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
    			// features that need to be mapped using the MODEL TYPE QUERY                        
                        	if (pathName.equals("allInstances")) {                       
    				ca.setArgument("object", pkName);
-        			ca.setArgument("tables", (getOclTypeTable(node)).getTableName());
+        			ca.setArgument("tables", pkTable);
                                 codeForPathName = true;
                         } else if (pathName.equals("name")) {
                                 ca.setArgument("name", pkClassType);
