@@ -569,7 +569,7 @@ public class ConstraintEvaluation extends JPanel
       }
       ReflectionExtender extender=
         mReflectionSourceExtender.isSelected() ?
-        extender=new tudresden.ocl.injection.SourceReflectionExtender() :
+        extender=new tudresden.ocl.injection.ocl.SourceReflectionExtender() :
         null;
       return new tudresden.ocl.check.types.ReflectionFacade(
         pNames, new DefaultReflectionAdapter(), new tudresden.ocl.lib.ArgoNameAdapter(),

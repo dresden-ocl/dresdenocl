@@ -16,7 +16,7 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-package tudresden.ocl.injection;
+package tudresden.ocl.injection.ocl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,21 +24,21 @@ import tudresden.ocl.codegen.CodeFragment;
 
 public class SortedFragments
 {
-  public ArrayList inv=new ArrayList();
-  public ArrayList post=new ArrayList();
-  public ArrayList pre=new ArrayList();
-  public ArrayList transfer=new ArrayList();
-  public ArrayList preparation=new ArrayList();
-  
+  ArrayList inv=new ArrayList();
+  ArrayList post=new ArrayList();
+  ArrayList pre=new ArrayList();
+  ArrayList transfer=new ArrayList();
+  ArrayList preparation=new ArrayList();
+
   private String constrainedType;
-  
-  public SortedFragments(CodeFragment firstFragment)
+
+  SortedFragments(CodeFragment firstFragment)
   {
     constrainedType=firstFragment.getConstrainedType();
     addFragment(firstFragment);
   }
-  
-  public void addFragment(CodeFragment fragment)
+
+  void addFragment(CodeFragment fragment)
   {
     if(!constrainedType.equals(fragment.getConstrainedType()))
       throw new IllegalArgumentException();
@@ -50,12 +50,12 @@ public class SortedFragments
     case CodeFragment.PRE:         pre.add(fragment);         break;
     case CodeFragment.TRANSFER:    transfer.add(fragment);    break;
     case CodeFragment.PREPARATION: preparation.add(fragment); break;
-    default: 
+    default:
       throw new RuntimeException();
     }
   }
 
-  public void print(java.io.PrintStream o)
+  void print(java.io.PrintStream o)
   {
     for(Iterator e=inv.iterator(); e.hasNext(); )
     {
@@ -84,7 +84,7 @@ public class SortedFragments
     }
   }
 
-  public static void printFragment(CodeFragment f, java.io.PrintStream o)
+  static void printFragment(CodeFragment f, java.io.PrintStream o)
   {
     o.print("getConstrainedType() ");
     o.println(f.getConstrainedType());

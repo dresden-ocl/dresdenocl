@@ -185,7 +185,7 @@ public class TestParser extends TestCase {
         reflectpackages,
         new tudresden.ocl.check.types.DefaultReflectionAdapter(),
         new tudresden.ocl.lib.ArgoNameAdapter(),
-        new tudresden.ocl.injection.SourceReflectionExtender()
+        new tudresden.ocl.injection.ocl.SourceReflectionExtender()
       )
     ) );
     suite.addTest( new TestParser(

@@ -16,7 +16,7 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-package tudresden.ocl.injection;
+package tudresden.ocl.injection.ocl;
 
 import java.io.*;
 import java.util.*;
@@ -38,8 +38,7 @@ import tudresden.ocl.injection.lib.HashSize;
 import tudresden.ocl.injection.lib.HashModCount;
 import tudresden.ocl.injection.lib.WrapperDummy;
 import tudresden.ocl.injection.lib.TypeTracer;
-import tudresden.ocl.injection.ocl.OclConfig;
-
+import tudresden.ocl.injection.*;
 
 public class Main
 {

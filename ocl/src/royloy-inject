@@ -1,6 +1,6 @@
 # modifies royloy example code to check it's constraints
 java -cp .:xerces.jar \
-  tudresden.ocl.injection.Main \
+  tudresden.ocl.injection.ocl.Main \
   --constraint-file tudresden/ocl/test/royloy/oclexpressions \
   --reflection-model tudresden.ocl.test.royloy \
   --violation-macro "tudresden.ocl.test.TestInjectionRoyloy.theInstance.onViolation" \

@@ -1,5 +1,5 @@
 # instruments the example code
-java -cp .:xerces.jar tudresden.ocl.injection.Main \
+java -cp .:xerces.jar tudresden.ocl.injection.ocl.Main \
   --constraint-file tudresden/ocl/injection/test/Example.ocl \
   --reflection-model tudresden.ocl.injection.test \
   --name-adapter argo \

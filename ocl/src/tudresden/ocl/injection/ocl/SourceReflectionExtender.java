@@ -16,10 +16,11 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-package tudresden.ocl.injection;
+package tudresden.ocl.injection.ocl;
 
 import java.lang.reflect.*;
 import java.util.*;
+import tudresden.ocl.injection.*;
 
 public class SourceReflectionExtender implements tudresden.ocl.check.types.ReflectionExtender
 {
