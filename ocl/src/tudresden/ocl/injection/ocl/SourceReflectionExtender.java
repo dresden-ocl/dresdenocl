@@ -125,7 +125,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 		ReflectionConsumer(String packagename)
 		{
 			this.packagename=packagename;
-			this.classLoader= getClass().getClassLoader();
+			this.classLoader=this.getClass().getClassLoader();
 		}
 
 		public void onPackage(JavaFile javafile) throws InjectorParseException
