@@ -60,7 +60,8 @@ public class MapDescriptor extends AbstractDescriptor {
       
   public boolean isIncomplete() {
     return ((super.isIncomplete()) ||
-             (getKeyType() == null));
+             ((getKeyType() == null)) ||
+              (getKeyType().length() == 0));
   }
   
   public boolean isCollection() {

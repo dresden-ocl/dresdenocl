@@ -202,13 +202,4 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
       ipe.printStackTrace();
     }
   }
-  
-/*  public static void main (String args[]) {
-    try {
-      File f = FileSaveConsumer.class.
-    }
-    catch (Throwable t) {
-      t.printStackTrace();
-    }
-  }*/
 }

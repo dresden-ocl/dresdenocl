@@ -191,15 +191,20 @@ public abstract class AbstractDescriptor extends Object {
       while ((nPos > -1) && (nPos < m_sDocComment.length())) {
         if (m_sDocComment.charAt (nPos) != ' ') {
           // Find next \n and start searching from there
-          nPos = m_sDocComment.indexOf ('\n', nPos) + 1;
+          nPos = m_sDocComment.indexOf ('\n', nPos);
           
           fHadLineBreak |= (nPos > -1);
+          nIndent = 0;
         }
         else {
           nIndent++;
           if (nIndent > nMaxIndent) {
             nMaxIndent = nIndent;
           }
+        }
+        
+        if (nPos > -1) {
+          nPos++;
         }
       }
       
@@ -214,9 +219,30 @@ public abstract class AbstractDescriptor extends Object {
       
       int nInsertPos = m_sDocComment.indexOf ("*/");
       
-      m_sDocComment = m_sDocComment.substring (0, nInsertPos - 1) + 
-                      "\n" + sIndent + "* " + sContext + " " + sData + 
-                      "\n" + sIndent + "*/";
+      // Check whether \n found directly preceding "*/"
+      int nLastLineFeedPos = m_sDocComment.lastIndexOf ('\n', nInsertPos);
+      nPos = nLastLineFeedPos + 1;
+      boolean fLineFeedBeforeEnd = true;
+
+      while ((nPos < nInsertPos) &&
+              fLineFeedBeforeEnd) {
+        if (m_sDocComment.charAt(nPos) != ' ') {
+          fLineFeedBeforeEnd = false;
+        }
+        
+        nPos++;
+      }
+      
+      if (!fLineFeedBeforeEnd) {
+        m_sDocComment = m_sDocComment.substring (0, nInsertPos - 1) + 
+                        "\n" + sIndent + "* " + sContext + " " + sData + 
+                        "\n" + sIndent + "*/";
+      }
+      else {
+        m_sDocComment = m_sDocComment.substring (0, nLastLineFeedPos - 1) + 
+                        "\n" + sIndent + "* " + sContext + " " + sData + 
+                        "\n" + sIndent + "*/";
+      }
       
     }
     else {
@@ -244,6 +270,15 @@ public abstract class AbstractDescriptor extends Object {
     * @param sElementType The new contents of the element-type tag. <CODE>null</CODE> to delete the element-type tag.
     */
   public void setElementType(String sElementType) {
+    
+    // Trim to single word
+    sElementType = sElementType.trim();
+    
+    int nSpacePos = sElementType.lastIndexOf (' ');
+    if (nSpacePos > -1) {
+      sElementType = sElementType.substring (0, nSpacePos);
+    }
+    
     m_sElementType = sElementType;
 
     adjustDocComment (sElementType, ELEMENT);
@@ -265,6 +300,14 @@ public abstract class AbstractDescriptor extends Object {
     * @param sKeyType The new contents of the key-type tag. <CODE>null</CODE> to delete the key-type tag.
     */
   protected void setKeyType(String sKeyType) {
+    // Trim to single word
+    sKeyType = sKeyType.trim();
+    
+    int nSpacePos = sKeyType.lastIndexOf (' ');
+    if (nSpacePos > -1) {
+      sKeyType = sKeyType.substring (0, nSpacePos);
+    }
+    
     m_sKeyType = sKeyType;
 
     adjustDocComment (sKeyType, KEY);
@@ -287,7 +330,8 @@ public abstract class AbstractDescriptor extends Object {
     * (element-type/key-type) is not filled in.
     */
   public boolean isIncomplete() {
-    return (getElementType() == null);
+    return ((getElementType() == null) ||
+             (getElementType().length() == 0));
   }
   
   /** 
