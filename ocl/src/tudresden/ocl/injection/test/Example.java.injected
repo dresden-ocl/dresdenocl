@@ -263,6 +263,8 @@ public abstract class Example implements Runnable
      A collection of Strings.
      @element-type java.lang.String
      @see java.lang.String
+     @invariant strings->includes('inlinehallo')
+     @invariant strings->includes('inline space hallo')
   */
   Set strings=new HashSet();
   
@@ -324,6 +326,12 @@ public abstract class Example implements Runnable
     return type;
   }
 
+  /**
+     @precondition strings->includes('inlinehallopre')
+     @precondition strings->includes('inline space hallo pre')
+     @postcondition strings->includes('inlinehallopost')
+     @postcondition strings->includes('inline space hallo post')
+  */
   public Integer[] getQualifiers_wrappedbyocl()
   {
     namedIntegers.put("10", new Integer(10));
@@ -563,6 +571,22 @@ public abstract class Example implements Runnable
           System.out.println("violated ocl precondition 'getQ_pre_bello' on object '"+this+"' operation 'getQualifiers()'.");
       }
       {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode80=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode81=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode80.getFeature("strings"));
+        final tudresden.ocl.lib.OclString tudOclNode82=new tudresden.ocl.lib.OclString("inlinehallopre");
+        final tudresden.ocl.lib.OclBoolean tudOclNode83=tudOclNode81.includes(tudOclNode82);
+        if(!tudOclNode83.isTrue())
+          System.out.println("violated ocl precondition 'tudOclPre0' on object '"+this+"' operation 'getQualifiers()'.");
+      }
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode84=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode85=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode84.getFeature("strings"));
+        final tudresden.ocl.lib.OclString tudOclNode86=new tudresden.ocl.lib.OclString("inline space hallo pre");
+        final tudresden.ocl.lib.OclBoolean tudOclNode87=tudOclNode85.includes(tudOclNode86);
+        if(!tudOclNode87.isTrue())
+          System.out.println("violated ocl precondition 'tudOclPre1' on object '"+this+"' operation 'getQualifiers()'.");
+      }
+      {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode68=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
         final tudresden.ocl.lib.OclSequence tudOclResult2=new tudresden.ocl.lib.OclSequence(0,"created by JavaCodeGenerator");
         final tudresden.ocl.lib.OclString tudOclNode69=tudresden.ocl.lib.Ocl.toOclString(tudOclNode68.getFeature("hallo"));
@@ -599,6 +623,22 @@ public abstract class Example implements Runnable
         final tudresden.ocl.lib.OclBoolean tudOclNode71=tudOclNode69.isEqualTo(tudOclNode70);
         if(!tudOclNode71.isTrue())
           System.out.println("violated ocl postcondition 'getQ_timepre' on object '"+this+"' operation 'getQualifiers()'.");
+      }
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode88=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode89=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode88.getFeature("strings"));
+        final tudresden.ocl.lib.OclString tudOclNode90=new tudresden.ocl.lib.OclString("inlinehallopost");
+        final tudresden.ocl.lib.OclBoolean tudOclNode91=tudOclNode89.includes(tudOclNode90);
+        if(!tudOclNode91.isTrue())
+          System.out.println("violated ocl postcondition 'tudOclPost0' on object '"+this+"' operation 'getQualifiers()'.");
+      }
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode92=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode93=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode92.getFeature("strings"));
+        final tudresden.ocl.lib.OclString tudOclNode94=new tudresden.ocl.lib.OclString("inline space hallo post");
+        final tudresden.ocl.lib.OclBoolean tudOclNode95=tudOclNode93.includes(tudOclNode94);
+        if(!tudOclNode95.isTrue())
+          System.out.println("violated ocl postcondition 'tudOclPost1' on object '"+this+"' operation 'getQualifiers()'.");
       }
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -1529,6 +1569,40 @@ public abstract class Example implements Runnable
         final tudresden.ocl.lib.OclBoolean tudOclNode55=tudOclNode50.or(tudOclNode54);
     tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
     if(!tudOclNode55.isTrue()) System.out.println("violated ocl invariant 'mapq2' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant tudOclInv0 on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_tudOclInv0=new tudresden.ocl.injection.lib.Invariant("tudOclInv0", this);/**
+    Checks ocl invariant tudOclInv0 on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_tudOclInv0()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_tudOclInv0);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode72=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode73=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode72.getFeature("strings"));
+        final tudresden.ocl.lib.OclString tudOclNode74=new tudresden.ocl.lib.OclString("inlinehallo");
+        final tudresden.ocl.lib.OclBoolean tudOclNode75=tudOclNode73.includes(tudOclNode74);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode75.isTrue()) System.out.println("violated ocl invariant 'tudOclInv0' on object '"+this+"'.");
+  }/**
+    An object representing ocl invariant tudOclInv1 on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_tudOclInv1=new tudresden.ocl.injection.lib.Invariant("tudOclInv1", this);/**
+    Checks ocl invariant tudOclInv1 on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */public final void zzzCheckOclInvariantMethod812374_tudOclInv1()
+  {
+    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_tudOclInv1);
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode76=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode77=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode76.getFeature("strings"));
+        final tudresden.ocl.lib.OclString tudOclNode78=new tudresden.ocl.lib.OclString("inline space hallo");
+        final tudresden.ocl.lib.OclBoolean tudOclNode79=tudOclNode77.includes(tudOclNode78);
+    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+    if(!tudOclNode79.isTrue()) System.out.println("violated ocl invariant 'tudOclInv1' on object '"+this+"'.");
   }}
 
 class SecondExample extends Example{

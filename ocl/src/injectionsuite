@@ -1,7 +1,7 @@
 ./compileAll
 
 java -cp .:xml4j.jar tudresden.ocl.injection.test.TestInjectionConsumer
-diff Example.java.injectiontest Example.java.injectiontest.bak
+diff -c Example.java.injectiontest Example.java.injectiontest.bak
 
 cp tudresden/ocl/injection/test/Example.java tudresden/ocl/injection/test/Example.java.bak
 ./runinjection

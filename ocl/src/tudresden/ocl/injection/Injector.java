@@ -778,4 +778,52 @@ public final class Injector
     return result;
   }
 
+  /**
+     @parameter tagname the tag name without the '@' prefix
+     @return the paragraphs following the tag
+  */
+  public final static String[] extractDocParagraphs(String doccomment, String tagname)
+  {
+    ArrayList result=new ArrayList();
+    
+    int start=doccomment.indexOf('@');
+    while(true)
+    {
+      if(start<0)
+        break;
+      start++;
+      
+      if(!doccomment.regionMatches(start, tagname, 0, tagname.length()))
+      {
+        start=doccomment.indexOf('@', start);
+        continue;
+      }
+      start+=tagname.length();
+      
+      if(doccomment.charAt(start)!=' ')
+      {
+        start=doccomment.indexOf('@', start);
+        continue;
+      }
+      start++;
+
+      int end=doccomment.indexOf('@', start);
+      if(end<0)
+      {
+        result.add(doccomment.substring(start, doccomment.length()-("*/".length())));
+        break;
+      }
+      else
+      {
+        result.add(doccomment.substring(start, end));
+        start=end;
+      }
+    }
+    
+    String[] resultarray=new String[result.size()];
+    resultarray=(String[])(result.toArray(resultarray));
+    //System.out.println("docparagraphs:>"+tagname+"< >"+result+"<");
+    return resultarray;
+  }
+
 }

@@ -248,6 +248,12 @@ final class OclInjector implements InjectionConsumer
     else
     {
       output.write(doccomment);
+      if(!clean)
+      {
+        addInvariant    (Injector.extractDocParagraphs(doccomment, "invariant"));
+        addPrecondition (Injector.extractDocParagraphs(doccomment, "precondition"));
+        addPostcondition(Injector.extractDocParagraphs(doccomment, "postcondition"));
+      }
       return true;
     }
   }
@@ -256,6 +262,54 @@ final class OclInjector implements InjectionConsumer
   {
     if(!class_state_stack.isEmpty())
       throw new RuntimeException();
+  }
+  
+  private final void addInvariant(String[] text)
+  {
+    if(text==null) return;
+    
+    for(int i=0; i<text.length; i++)
+    {
+      String s="context "+class_state.javaclass.getName()+" inv: "+text[i].trim();
+      //System.out.println("found inline invariant: >"+s+"<");
+      try
+      {
+        Main.makeConstraint(s, config);
+      }
+      catch(IOException e) { throw new RuntimeException(e.toString()); }
+    }
+  }
+
+  private final void addPrecondition(String[] text)
+  {
+    if(text==null) return;
+    
+    for(int i=0; i<text.length; i++)
+    {
+      String s="context "+class_state.javaclass.getName()+" pre: "+text[i].trim();
+      //System.out.println("found inline precondition: >"+s+"<");
+      try
+      {
+        Main.makeConstraint(s, config);
+      }
+      catch(IOException e) { throw new RuntimeException(e.toString()); }
+    }
+  }
+
+  private final void addPostcondition(String[] text)
+  {
+    if(text==null) return;
+    
+    for(int i=0; i<text.length; i++)
+    {
+      String s="context "+class_state.javaclass.getName()+" post: "+text[i].trim();
+      //System.out.println("found inline postcondition: >"+s+"<");
+      try
+      {
+        Main.makeConstraint(s, config);
+      }
+      catch(IOException e) { throw new RuntimeException(e.toString()); }
+    }
   }
 
   private final void writeInvariants(String classname) 
@@ -820,7 +874,19 @@ final class OclInjector implements InjectionConsumer
   
 final class OclInjectorConfig
 {
-  HashMap codefragments=null;
+  /**
+     Type names are keys, SortedFragments values.
+  */
+  HashMap codefragments=new HashMap();
+
+  JavaCodeGenerator jcg=new JavaCodeGenerator("this", "result");
+  {
+    jcg.setInitialIndent(8);
+  }
+  
+  ModelFacade modelfacade;
+  NameCreator namecreator=new NameCreator();
+
   boolean insertimmediately=false;
   boolean clean=false;
   String violationmacro=null;
@@ -836,14 +902,36 @@ final class OclInjectorConfig
 
 public class Main
 {
-  public static HashMap makeCode(File constraintfile,  ModelFacade modelfacade)
+  
+  public static void makeConstraint(String constraintString, OclInjectorConfig conf)
+    throws OclParserException, OclTypeException, IOException
+  {
+    //System.out.println("Loaded constraint:");
+    //System.out.println(constraintString);
+    //System.out.println("Parsing constraint.");
+    OclTree constraintTree=OclTree.createTree(constraintString, conf.modelfacade);
+    constraintTree.setNameCreator(conf.namecreator);
+    //System.out.println("Type checking constraint.");
+    constraintTree.assureTypes();
+    //System.out.println("Normalizing.");
+    constraintTree.applyDefaultNormalizations();
+    //System.out.println("Generating Code.");
+    CodeFragment[] frags=conf.jcg.getCode(constraintTree);
+    for (int j=0; j<frags.length; j++)
+    {
+      String ct=frags[j].getConstrainedType();
+      SortedFragments sf=(SortedFragments)(conf.codefragments.get(ct));
+      if(sf==null)
+        conf.codefragments.put(ct, new SortedFragments(frags[j]));
+      else
+        sf.addFragment(frags[j]);
+    }
+  }
+
+  public static void makeCode(File constraintfile, OclInjectorConfig conf)
     throws OclParserException, OclTypeException, IOException
   {
     BufferedReader br=new BufferedReader(new FileReader(constraintfile));
-    NameCreator namecreator=new NameCreator();
-    JavaCodeGenerator jcg=new JavaCodeGenerator("this", "result");
-    jcg.setInitialIndent(8);
-    HashMap constrainedTypes=new HashMap(); // type names are keys, SortedFragments values
 
     String nextLine;
     String nextConstraint="";
@@ -854,27 +942,7 @@ public class Main
       {
         if(!nextConstraint.equals(""))
         {
-          String constraintString=nextConstraint;
-          //System.out.println("Loaded constraint:");
-          //System.out.println(constraintString);
-          //System.out.println("Parsing constraint.");
-          OclTree constraintTree=OclTree.createTree(constraintString, modelfacade);
-          constraintTree.setNameCreator(namecreator);
-          //System.out.println("Type checking constraint.");
-          constraintTree.assureTypes();
-          //System.out.println("Normalizing.");
-          constraintTree.applyDefaultNormalizations();
-          //System.out.println("Generating Code.");
-          CodeFragment[] frags=jcg.getCode(constraintTree);
-          for (int j=0; j<frags.length; j++)
-          {
-            String ct=frags[j].getConstrainedType();
-            SortedFragments sf=(SortedFragments)(constrainedTypes.get(ct));
-            if(sf==null)
-              constrainedTypes.put(ct, new SortedFragments(frags[j]));
-            else
-              sf.addFragment(frags[j]);
-          }
+          makeConstraint(nextConstraint, conf);
         }
         nextConstraint="";
       }
@@ -891,8 +959,6 @@ public class Main
       ((SortedFragments)(constrainedTypes.get(nexttype))).print(System.out);
     }
     */
-
-    return constrainedTypes;
   }
 
   public static void inject(File inputfile, File outputfile, OclInjectorConfig conf)
@@ -1137,14 +1203,13 @@ public class Main
           System.out.println(usage);
           return;
         }
-        ModelFacade modelfacade;
         if(xmimodel!=null)
-          modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel,xmimodel);
+          conf.modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel,xmimodel);
         else
         {
           if(nameadapter==null)
             nameadapter=new SimpleNameAdapter();
-          modelfacade=new ReflectionFacade
+          conf.modelfacade=new ReflectionFacade
           (
             (String[])(reflectionmodel.toArray(new String[0])),
             new DefaultReflectionAdapter(),
@@ -1152,7 +1217,7 @@ public class Main
             new SourceReflectionExtender()
           );
         }
-        conf.codefragments=makeCode(new File(constraintfile), modelfacade);
+        makeCode(new File(constraintfile), conf);
       }
             
       for(Iterator i=sourcefiles.iterator(); i.hasNext(); )

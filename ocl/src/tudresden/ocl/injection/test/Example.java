@@ -159,6 +159,8 @@ public abstract class Example implements Runnable
      A collection of Strings.
      @element-type java.lang.String
      @see java.lang.String
+     @invariant strings->includes('inlinehallo')
+     @invariant strings->includes('inline space hallo')
   */
   Set strings=new HashSet();
   
@@ -220,6 +222,12 @@ public abstract class Example implements Runnable
     return type;
   }
 
+  /**
+     @precondition strings->includes('inlinehallopre')
+     @precondition strings->includes('inline space hallo pre')
+     @postcondition strings->includes('inlinehallopost')
+     @postcondition strings->includes('inline space hallo post')
+  */
   public Integer[] getQualifiers()
   {
     namedIntegers.put("10", new Integer(10));
