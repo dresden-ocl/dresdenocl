@@ -243,7 +243,8 @@ public abstract class ProceduralCodeGenerator extends DepthFirstAdapter implemen
       );
       Iterator paramIter=fpl.getFormalParameterListTail().iterator();
       while (paramIter.hasNext()) {
-        AFormalParameter fp=(AFormalParameter)paramIter.next();
+        AFormalParameter fp = (AFormalParameter)
+            ((AFormalParameterListTail)paramIter.next()).getFormalParameter(); 
         addParameter(parameterNames, parameterTypes, fp);
       }
       parameters=new String[parameterNames.size()][2];
