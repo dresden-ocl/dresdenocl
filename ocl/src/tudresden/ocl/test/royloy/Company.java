@@ -12,10 +12,11 @@ public class Company {
  *
  */
     protected Person manager;
+
   /**
- *
- */
-    protected Vector  employees;
+     @element-type Person
+  */
+  protected HashSet  employees;
 
   public Person getOldestEmployee() {
   return null;

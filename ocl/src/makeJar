@@ -25,4 +25,5 @@ jar -cf ocl-argo.jar $ARGOFILES
 jar -cf dresden-ocl.jar $ARGOFILES \
 	tudresden/ocl/check/types/xmifacade/*.class \
 	tudresden/ocl/check/types/testfacade/*.class \
+	tudresden/ocl/injection/*.class \
 	tudresden/ocl/test/royloy/*.class

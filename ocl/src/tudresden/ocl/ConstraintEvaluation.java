@@ -58,6 +58,7 @@ public class ConstraintEvaluation extends JPanel
 
   protected JRadioButton mTest, mXmi, mReflection, mSable;
   protected JTextField mXmiUrl, mReflectionPackage;
+  protected JCheckBox mReflectionSourceExtender;
 
   protected JTable lTable;
   protected LexerModel lexerModel;
@@ -143,6 +144,7 @@ public class ConstraintEvaluation extends JPanel
 
     mXmiUrl=new JTextField("http://www-st.inf.tu-dresden.de/ocl/royloy.xmi");
     mReflectionPackage=new JTextField("tudresden.ocl.test.royloy");
+    mReflectionSourceExtender=new JCheckBox("Use SourceReflectionExtender", true);
 
     ButtonGroup radios=new ButtonGroup();
     radios.add(mTest);
@@ -172,6 +174,7 @@ public class ConstraintEvaluation extends JPanel
     ));
     reflectionConfig.add(new JLabel("package names (';'-separated) to be queried:"));
     reflectionConfig.add(mReflectionPackage);
+    reflectionConfig.add(mReflectionSourceExtender);
 
     JTextArea explTest=new JTextArea(
       "      contains the \"Person-Company\" model\n"+
@@ -555,8 +558,13 @@ public class ConstraintEvaluation extends JPanel
       for (int i=0; i<pNames.length; i++) {
         pNames[i]=tok.nextToken().trim();
       }
+      ReflectionExtender extender=
+        mReflectionSourceExtender.isSelected() ?
+        extender=new tudresden.ocl.injection.SourceReflectionExtender() :
+        null;
       return new tudresden.ocl.check.types.ReflectionFacade(
-        pNames, new DefaultReflectionAdapter(), new tudresden.ocl.lib.ArgoNameAdapter()
+        pNames, new DefaultReflectionAdapter(), new tudresden.ocl.lib.ArgoNameAdapter(),
+        extender
       );
     } else if (mSable.isSelected()) {
       String[] pNames={"tudresden.ocl.parser.node"};

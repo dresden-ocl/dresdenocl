@@ -13,13 +13,15 @@ public class Person {
 
   // Associations
   /**
- *
- */
-    protected Vector  managedCompanies;
+     @element-type Company
+  */
+  protected HashSet  managedCompanies;
+
   /**
- *
- */
-    protected Vector  employers;
+     @element-type Company
+  */
+  protected HashSet  employers;
+
   /**
  *
  */
