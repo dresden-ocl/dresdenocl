@@ -32,6 +32,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ *  OCL2SQL is the main class of the OCL2SQL tool. It manages all the different
+ *  components and the flow of information between them which generate some 
+ *  kind of SQL code. These components are:
+ *  <ul>
+ *      <li>ORMappingImp - for the object relational mapping</li>
+ *      <li>SchemaGenerator - the generator of table schemas</li>
+ *      <li>ObjectViewSchema - the object view generator and object relational interface for the integrity view generator</li>
+ *      <li>ILSQLCodeGenerator - the integrity view generator</li>
+ *      <li>TriggerGenerator - the generator that creates SQL92-Assertionreplacement triggers and ECA-trigger-templates</li>
+ *  </ul>
+ *  The purpose of the tool is to demonstrate the usability of UML/OCL in database design.
+ *  It therefore takes an arbitrary UML model from an XMI source file and a number of OCL invariants
+ *  and generates DDL (Data Definition Language) scripts that are executable on database systems.
+ *  The following scripts are going to be generated during a project run:
+ *  <ul>
+ *      <li>a table schema to store persistent objects from a class model to a relational database</li>
+ *      <li>object view definitions that serve as a middle tier between the table schema and the integrity evaluation mechanism</li>
+ *      <li>integrity views that select all tupels from the specified objects resp. tables that do not belong to a certain OCL constraint</li>
+ *      <li>trigger defintions for the automatic evaluation of the integrity views during the runtime</li>
+ *  </ul>
+ *  @author Sten Loecher
+ */
 public class OCL2SQL extends JPanel implements ActionListener {
     
     // Step 1
@@ -48,10 +71,10 @@ public class OCL2SQL extends JPanel implements ActionListener {
     // Step 3
     private ORMapping theORMapping;
     private ObjectViewSchema theObjectViewSchema;    
-    private SQLBuilder theSQLBuilder;
+    private SQLBuilder theSQLBuilder = new OracleSQLBuilder();
     private ILSQLCodeGenerator theSQLCodeGenerator;
     
-    // object relational Mapping
+    // default object relational mapping parameters
     private int ormClassToTableMode = 2;
     private int ormNumOfPKColumns = 1;
     private String ormPKColType = "int";
@@ -64,6 +87,9 @@ public class OCL2SQL extends JPanel implements ActionListener {
     private String fileNameObjectViews = "object_views.sql";
     private String fileNameIntegrityViews = "integrity_views.sql";
     private String fileNameTrigger = "trigger.sql";
+    
+    // some other parameters
+    private String sqlCodeGenPatternCatalogue = (OCL2SQL.class.getResource("../codegen/decl/OCL2SQL4Oracle.xml")).toString();
         
     // gui
     protected JTabbedPane tabs;
@@ -80,11 +106,40 @@ public class OCL2SQL extends JPanel implements ActionListener {
     public static String TRIGGER = "tr_";
     public static String INTERR = "integrity violation at ";
     
+    /**
+     *  The constructor.
+     *  @param theMainFrame a main frame for the gui 
+     */
     public OCL2SQL(JFrame theMainFrame) {
         if (theMainFrame != null) buildGUI();
         this.theMainFrame = theMainFrame;
     }
     
+    /**
+     *  Main methode to start the gui of the OCL2SQL tool.
+     */
+    public static void main(String[] args) {
+        JFrame theMainFrame = new JFrame("OCL2SQL");
+        OCL2SQL ce = new OCL2SQL(theMainFrame);
+        
+        theMainFrame.addWindowListener( new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+        
+        theMainFrame.getContentPane().add(ce);
+        theMainFrame.setSize(600, 400);
+        theMainFrame.setVisible(true);        
+    }    
+    
+    // -------------------------------------------------------------------------
+    //                            methodes for gui
+    // -------------------------------------------------------------------------    
+    
+    /**
+     *  Builds the gui.
+     */
     protected void buildGUI() {
         tabs = new JTabbedPane();
         tabs.addTab("Input", getInputPane());
@@ -95,6 +150,9 @@ public class OCL2SQL extends JPanel implements ActionListener {
         add(tabs);
     }
     
+    /**
+     *  @return the input panel
+     */
     protected JPanel getInputPane() {
         JPanel result = new JPanel(new BorderLayout());
                       
@@ -123,7 +181,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         // object oriented Model from XMI file
         JPanel oom = new JPanel(new BorderLayout());
         oom.setBorder(BorderFactory.createTitledBorder(" URL of XMI file "));
-        tfXmiSource = new JTextField("file:/home/sl13/Diplom/abschluszbsp/university_example.xmi");
+        tfXmiSource = new JTextField("");
         oom.add(BorderLayout.CENTER, tfXmiSource);
         
         JPanel oomb = new JPanel(new GridLayout(1,2));
@@ -141,6 +199,9 @@ public class OCL2SQL extends JPanel implements ActionListener {
         return result;
     }
     
+    /**
+     *  @return the project panel
+     */
     protected JPanel getProjectPane() {
         JPanel result = new JPanel(new BorderLayout());
                 
@@ -148,7 +209,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         JPanel prdir = new JPanel(new BorderLayout());
         prdir.setBorder(BorderFactory.createTitledBorder(" project directory "));
         
-        tfProjectDirectory = new JTextField("/home/sl13/Diplom/abschluszbsp");
+        tfProjectDirectory = new JTextField("");
         prdir.add(BorderLayout.CENTER, tfProjectDirectory);
         
         bProjectDirectory = new JButton(". . .");
@@ -245,6 +306,9 @@ public class OCL2SQL extends JPanel implements ActionListener {
         return result;
     }
     
+    /**
+     *  @return the output panel
+     */
     protected JPanel getOutputPane() {
         JPanel result = new JPanel(new BorderLayout());
         result.setBorder(BorderFactory.createEtchedBorder());
@@ -281,6 +345,9 @@ public class OCL2SQL extends JPanel implements ActionListener {
         return result;
     }
     
+    /**
+     *  @return the about panel
+     */
     protected JPanel getAboutPane() {
         JPanel result = new JPanel(new BorderLayout());
         
@@ -306,65 +373,10 @@ public class OCL2SQL extends JPanel implements ActionListener {
         
         return result;
     }
-          
-    public static void main(String[] args) {
-        JFrame theMainFrame = new JFrame("OCL2SQL");
-        OCL2SQL ce = new OCL2SQL(theMainFrame);
-        
-        theMainFrame.addWindowListener( new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
-        
-        theMainFrame.getContentPane().add(ce);
-        theMainFrame.setSize(600, 400);
-        theMainFrame.setVisible(true);        
-    }
     
-
-    
-    public boolean prepareProjectExecution() { 
-        if (!synchronizeObjectState()) return false;
-        
-        // check XMI source
-        try {
-            theRoughModel = XmiParser.createRoughModel(xmiFileLocation, "model in rough mode");
-            theModelFacade = XmiParser.createModel(xmiFileLocation, "model in classic mode");               
-        } catch(Exception e) {
-            showMessage("Error", "Could not process XMI source file !\n" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-         
-        // do object relational mapping
-        theSQLBuilder = new OracleSQLBuilder();
-        theORMapping = new ORMappingImp(theRoughModel,
-                                        ormClassToTableMode, 
-                                        ormNumOfPKColumns, 
-                                        ormPKColType, 
-                                        ormOneTablePerAss); 
-        
-        // initialize object view shema
-        theObjectViewSchema = new ObjectViewSchema(theORMapping, theSQLBuilder);
-        
-        // initialize SQL code generator
-        theSQLCodeGenerator = new ILSQLCodeGenerator((OCL2SQL.class.getResource("../codegen/decl/OCL2SQL4Oracle.xml")).toString());        
-        theSQLCodeGenerator.setORMappingScheme(theObjectViewSchema);
-        lIntegrityViews = new ArrayList();        
-                
-        return true;
-    }
-    
-    private void prepareProgressInfo() {
-    }
-    
-    private void increaseProgressInfo(String msg) {
-        System.err.println(msg);
-    }
-    
-    private void closeProgressWindows() {
-    }
-    
+    /**
+     *  Reads the input data from the gui and updates the class parameters accordingly.
+     */
     private boolean synchronizeObjectState() {
         // xmi source file
         xmiFileLocation = tfXmiSource.getText();
@@ -415,7 +427,10 @@ public class OCL2SQL extends JPanel implements ActionListener {
         
         return true;
     }
-        
+    
+    /**
+     *  Updates the output pane after project execution.
+     */
     private void updateOutputPane() {
         taResultTables.setText(resultTableSchema);
         taResultObjectViews.setText(resultObjectViews);
@@ -423,30 +438,270 @@ public class OCL2SQL extends JPanel implements ActionListener {
         taResultTrigger.setText(resultTrigger);
     }
     
-    private void saveResults() {
-        FileWriter fw;
-        
-        try {
-            fw = new FileWriter(theProjectDirectory + fileNameTableSchema);
-            fw.write(resultTableSchema);
-            fw.close();
-            
-            fw = new FileWriter(theProjectDirectory + fileNameObjectViews);
-            fw.write(resultObjectViews);
-            fw.close();
-            
-            fw = new FileWriter(theProjectDirectory + fileNameIntegrityViews);
-            fw.write(resultIntegrityViews);
-            fw.close();
-            
-            fw = new FileWriter(theProjectDirectory + fileNameTrigger);
-            fw.write(resultTrigger);
-            fw.close();                        
-        } catch(Exception e) {
-            showMessage("Error", "Could not write results !\n" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+    /**
+     *  Manages the user input from the gui.
+     */
+    public void actionPerformed(java.awt.event.ActionEvent event) {
+        Object source=event.getSource();
+   
+        if (source == bLoadConstraints) {
+            loadConstraints();
+        } else if (source == bSaveConstraints) {
+            saveConstraints();
+        } else if (source == bXmiSource) {
+            loadXmiSourceURL();
+        } else if (source == bLoadXmi) {
+            loadXmiSource();
+        } else if (source == bProjectDirectory) {
+            loadProjectPath();
+        } else if (source == bExecute) {
+            executeProject();
         }
     }
+    
+    /**
+     *  Loads some OCL constraints from a source file.
+     *  Offers a dialog box to specify the location of the file.
+     */
+    private void loadConstraints() {
+        JFileChooser fileChooser = new JFileChooser();
+        File theFile = null;
+        FileInputStream fis;
+        ObjectInputStream ois;
+        String ext[] = {"ocl"};
+        int dlgRetVal;
+            
+        // show open dialog
+        fileChooser.setFileFilter(new SimpleFileFilter("OCL constraint files (*.ocl)", ext));
+        fileChooser.setDialogTitle("Open Constraint List");
+        dlgRetVal = fileChooser.showOpenDialog(this);
+            
+        // check for selected file
+        theFile = fileChooser.getSelectedFile();
+        if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
+        System.err.println(theFile.getAbsolutePath());
+          
+        // load the constraints from the specified file
+        try {
+            fis = new FileInputStream(theFile.getAbsolutePath());
+            ois = new ObjectInputStream(fis);
+              
+            theOCLEditorModel = (SimpleOCLEditorModel)ois.readObject();
+            theOCLEditorModel.setModelFacade(theModelFacade);
+                
+            ois.close();                
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Could not load constraint list.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+              
+        theOCLEditor.setModel(theOCLEditorModel);  
+    }
+    
+    /**
+     *  Saves the specified OCL constraints to a file.
+     *  Offers a dialog box to specify the location of the file.
+     */
+    private void saveConstraints() {
+        JFileChooser fileChooser = new JFileChooser();
+        File theFile = null;
+        FileOutputStream fos;
+        ObjectOutputStream oos;
+        String ext[] = {"ocl"};
+        int dlgRetVal;
+                                 
+        // show save dialog
+        fileChooser.setFileFilter(new SimpleFileFilter("OCL constraint files (*.ocl)", ext));
+        fileChooser.setDialogTitle("Save Constraint List");
+        dlgRetVal = fileChooser.showSaveDialog(this);  
+            
+        // check for selected file
+        theFile = fileChooser.getSelectedFile();
+        if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
+                      
+        // save constraints to the specified file
+        try {
+            fos = new FileOutputStream(theFile.getAbsolutePath());
+            oos = new ObjectOutputStream(fos);
+            
+            oos.writeObject(theOCLEditorModel);
+            
+            oos.flush();
+            oos.close();            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Could not save constraint list.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println(e.toString());
+        }
+            
+        // show success Message
+        JOptionPane.showMessageDialog(this, "Constraint list successfully stored.", "", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     *  Offers a dialog box to specify the location of a XMI file.
+     */
+    private void loadXmiSourceURL() {
+        JFileChooser fileChooser = new JFileChooser();
+        File theFile = null;
+        FileInputStream fis;
+        ObjectInputStream ois;
+        String ext[] = {"xmi"};
+        int dlgRetVal;
+            
+        // show open dialog
+        fileChooser.setFileFilter(new SimpleFileFilter("XMI files (*.xmi)", ext));
+        fileChooser.setDialogTitle("Choose XMI Source");
+        dlgRetVal = fileChooser.showOpenDialog(this);
+            
+        // check for selected file
+        theFile = fileChooser.getSelectedFile();
+        if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
+        System.err.println(theFile.getAbsolutePath());
+            
+        // update class parameter
+        try {
+            tfXmiSource.setText(theFile.toURL().toString());
+        } catch(Exception e) {
+        }
+    }
+    
+    /**
+     * Loads the class model from the specified XMI file.
+     */
+    private void loadXmiSource() {
+        if (JOptionPane.showConfirmDialog(this, "This will delete all OCL constraints ?\nContinue anyway ?", "", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) return;
         
+        this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        
+        try {
+            theModelFacade = XmiParser.createModel(tfXmiSource.getText(), "model in classic mode");
+            theOCLEditorModel.setModelFacade(theModelFacade);
+        } catch(Exception e) {
+            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            JOptionPane.showMessageDialog(this, "Could not parse XMI source.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println(e.toString());
+            return;
+        }
+        
+        theOCLEditorModel = new SimpleOCLEditorModel();
+        theOCLEditorModel.setModelFacade(theModelFacade);
+        theOCLEditor.setModel(theOCLEditorModel);
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        JOptionPane.showMessageDialog(this, "XMI source has been parsed successfully.", "", JOptionPane.INFORMATION_MESSAGE);        
+    }
+    
+    /**
+     *  Offers a dialog box to specify the project path.
+     *  The resulting scripts are going to be stored to this location.
+     */    
+    private void loadProjectPath() {
+        JFileChooser fileChooser = new JFileChooser();
+        File theFile = null;
+        FileInputStream fis;
+        ObjectInputStream ois;
+            
+        // show open dialog
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setDialogTitle("Choose Project Directory");
+        fileChooser.showOpenDialog(this);
+            
+        // check for selected file
+        theFile = fileChooser.getSelectedFile();
+        if (theFile == null) return;
+            
+        // load the constraints from the specified file
+        tfProjectDirectory.setText(theFile.getAbsolutePath());
+    }
+    
+    /**
+     *  Code originally from ConstraintEvaluation.   
+     */
+    protected Icon getImage(String name) {
+        java.net.URL url=OCL2SQL.class.getResource(name);
+        ImageIcon ii=null;
+        
+        try {
+            ii=new ImageIcon(url);
+        }
+        catch (RuntimeException e) {
+            // image not found, go on without it...
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return ii;
+    }    
+    
+    /**
+     *  Helper methode. Shows a message.
+     */
+    private void showMessage(String title, String message, int type) {
+        JOptionPane.showMessageDialog(this, message, title, type);
+    }    
+    
+    /**
+     *  Helper methode. Prepares a progress info dialog.
+     */
+    private void prepareProgressInfo() {
+    }
+    
+    /**
+     *  Helper methode. Shows a message in the progress info dialog.
+     */
+    private void increaseProgressInfo(String msg) {
+        System.err.println(msg);
+    }
+    
+    /**
+     *  Helper methode. Closes the progress info dialog.
+     */
+    private void closeProgressWindows() {
+    }
+    
+    // -------------------------------------------------------------------------
+    //                     methodes for project execution
+    // -------------------------------------------------------------------------
+    
+    /**
+     *  Prepares the project execution. The following steps will be done:
+     *  <ul>
+     *      <li>creates the rough and classic model from the XMI Source</li>
+     *      <li>mapps the classes to tables</li>
+     *      <li>prepares the object relational interface for the integrity view generator</li>
+     *      <li>initializes the integrity view generator</li>
+     *  </ul>
+     */
+    public boolean prepareProjectExecution() { 
+        if (!synchronizeObjectState()) return false;
+        
+        // check XMI source
+        try {
+            theRoughModel = XmiParser.createRoughModel(xmiFileLocation, "model in rough mode");
+            theModelFacade = XmiParser.createModel(xmiFileLocation, "model in classic mode");               
+        } catch(Exception e) {
+            showMessage("Error", "Could not process XMI source file !\n" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+         
+        // do object relational mapping
+        theORMapping = new ORMappingImp(theRoughModel,
+                                        ormClassToTableMode, 
+                                        ormNumOfPKColumns, 
+                                        ormPKColType, 
+                                        ormOneTablePerAss); 
+        
+        // initialize object view shema
+        theObjectViewSchema = new ObjectViewSchema(theORMapping, theSQLBuilder);
+        
+        // initialize SQL code generator
+        theSQLCodeGenerator = new ILSQLCodeGenerator(sqlCodeGenPatternCatalogue);        
+        theSQLCodeGenerator.setORMappingScheme(theObjectViewSchema);
+        lIntegrityViews = new ArrayList();        
+                
+        return true;
+    }
+    
+    /**
+     *  Executes the project with the specified parameters.
+     */    
     public void executeProject() {
         StringBuffer tmp;
         String constraint, triggers[], involvedViews[], baseTables[];
@@ -527,189 +782,43 @@ public class OCL2SQL extends JPanel implements ActionListener {
                 tmp.append("/\n");
             }
         }
-        
         resultTrigger = tmp.toString();
-        
+     
+        // update gui 
         increaseProgressInfo("update output pane...");
         updateOutputPane();
+        
+        // save the results to the according files
         increaseProgressInfo("save results ...");
         saveResults();
         closeProgressWindows();
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
     
-    public void actionPerformed(java.awt.event.ActionEvent event) {
-        Object source=event.getSource();
-   
-        if (source == bLoadConstraints) {
-            loadConstraints();
-        } else if (source == bSaveConstraints) {
-            saveConstraints();
-        } else if (source == bXmiSource) {
-            loadXmiSourceURL();
-        } else if (source == bLoadXmi) {
-            loadXmiSource();
-        } else if (source == bProjectDirectory) {
-            loadProjectPath();
-        } else if (source == bExecute) {
-            executeProject();
-        }
-    }
-    
-    private void showMessage(String title, String message, int type) {
-        JOptionPane.showMessageDialog(this, message, title, type);
-    }
-    
-    private void loadConstraints() {
-        JFileChooser fileChooser = new JFileChooser();
-        File theFile = null;
-        FileInputStream fis;
-        ObjectInputStream ois;
-        String ext[] = {"ocl"};
-        int dlgRetVal;
-            
-        // show open dialog
-        fileChooser.setFileFilter(new SimpleFileFilter("OCL constraint files (*.ocl)", ext));
-        fileChooser.setDialogTitle("Open Constraint List");
-        dlgRetVal = fileChooser.showOpenDialog(this);
-            
-        // check for selected file
-        theFile = fileChooser.getSelectedFile();
-        if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
-        System.err.println(theFile.getAbsolutePath());
-          
-        // load the constraints from the specified file
-        try {
-            fis = new FileInputStream(theFile.getAbsolutePath());
-            ois = new ObjectInputStream(fis);
-              
-            theOCLEditorModel = (SimpleOCLEditorModel)ois.readObject();
-            theOCLEditorModel.setModelFacade(theModelFacade);
-                
-            ois.close();                
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(this, "Could not load constraint list.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-              
-        theOCLEditor.setModel(theOCLEditorModel);  
-    }
-    
-    private void saveConstraints() {
-        JFileChooser fileChooser = new JFileChooser();
-        File theFile = null;
-        FileOutputStream fos;
-        ObjectOutputStream oos;
-        String ext[] = {"ocl"};
-        int dlgRetVal;
-                                 
-        // show save dialog
-        fileChooser.setFileFilter(new SimpleFileFilter("OCL constraint files (*.ocl)", ext));
-        fileChooser.setDialogTitle("Save Constraint List");
-        dlgRetVal = fileChooser.showSaveDialog(this);  
-            
-        // check for selected file
-        theFile = fileChooser.getSelectedFile();
-        if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
-                      
-        // save constraints to the specified file
-        try {
-            fos = new FileOutputStream(theFile.getAbsolutePath());
-            oos = new ObjectOutputStream(fos);
-            
-            oos.writeObject(theOCLEditorModel);
-            
-            oos.flush();
-            oos.close();            
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(this, "Could not save constraint list.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            System.err.println(e.toString());
-        }
-            
-        // show success Message
-        JOptionPane.showMessageDialog(this, "Constraint list successfully stored.", "", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-    private void loadXmiSourceURL() {
-        JFileChooser fileChooser = new JFileChooser();
-        File theFile = null;
-        FileInputStream fis;
-        ObjectInputStream ois;
-        String ext[] = {"xmi"};
-        int dlgRetVal;
-            
-        // show open dialog
-        fileChooser.setFileFilter(new SimpleFileFilter("XMI files (*.xmi)", ext));
-        fileChooser.setDialogTitle("Choose XMI Source");
-        dlgRetVal = fileChooser.showOpenDialog(this);
-            
-        // check for selected file
-        theFile = fileChooser.getSelectedFile();
-        if ((theFile == null) || (dlgRetVal == JFileChooser.CANCEL_OPTION)) return;
-        System.err.println(theFile.getAbsolutePath());
-            
-        // load the constraints from the specified file
-        try {
-            tfXmiSource.setText(theFile.toURL().toString());
-        } catch(Exception e) {
-        }
-    }
-    
-    private void loadXmiSource() {
-        if (JOptionPane.showConfirmDialog(this, "This will delete all OCL constraints ?\nContinue anyway ?", "", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) return;
-        
-        this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        
-        try {
-            theModelFacade = XmiParser.createModel(tfXmiSource.getText(), "model in classic mode");
-            theOCLEditorModel.setModelFacade(theModelFacade);
-        } catch(Exception e) {
-            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            JOptionPane.showMessageDialog(this, "Could not parse XMI source.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            System.err.println(e.toString());
-            return;
-        }
-        
-        theOCLEditorModel = new SimpleOCLEditorModel();
-        theOCLEditorModel.setModelFacade(theModelFacade);
-        theOCLEditor.setModel(theOCLEditorModel);
-        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        JOptionPane.showMessageDialog(this, "XMI source has been parsed successfully.", "", JOptionPane.INFORMATION_MESSAGE);        
-    }
-    
-    private void loadProjectPath() {
-        JFileChooser fileChooser = new JFileChooser();
-        File theFile = null;
-        FileInputStream fis;
-        ObjectInputStream ois;
-            
-        // show open dialog
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        fileChooser.setDialogTitle("Choose Project Directory");
-        fileChooser.showOpenDialog(this);
-            
-        // check for selected file
-        theFile = fileChooser.getSelectedFile();
-        if (theFile == null) return;
-            
-        // load the constraints from the specified file
-        tfProjectDirectory.setText(theFile.getAbsolutePath());
-    }
-    
     /**
-     *  Code originally from ConstraintEvaluation.   
+     *  Stores the resulting DDL scripts from project execution to according files.
      */
-    protected Icon getImage(String name) {
-        java.net.URL url=OCL2SQL.class.getResource(name);
-        ImageIcon ii=null;
+    private void saveResults() {
+        FileWriter fw;
         
         try {
-            ii=new ImageIcon(url);
+            fw = new FileWriter(theProjectDirectory + fileNameTableSchema);
+            fw.write(resultTableSchema);
+            fw.close();
+            
+            fw = new FileWriter(theProjectDirectory + fileNameObjectViews);
+            fw.write(resultObjectViews);
+            fw.close();
+            
+            fw = new FileWriter(theProjectDirectory + fileNameIntegrityViews);
+            fw.write(resultIntegrityViews);
+            fw.close();
+            
+            fw = new FileWriter(theProjectDirectory + fileNameTrigger);
+            fw.write(resultTrigger);
+            fw.close();                        
+        } catch(Exception e) {
+            showMessage("Error", "Could not write results !\n" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
-        catch (RuntimeException e) {
-            // image not found, go on without it...
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
-        return ii;
     }    
 }

@@ -34,13 +34,32 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * A class that generates SQL code.
+ * A class that generates SQL code out of a ocl contraint or the 
+ * abstract syntax tree of the ocl contraint respectivly. This is the second 
+ * version of a SQL code generator, formerly implemented as SQLCodeGenerator.
  * @author Sten Loecher
  */
 public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
+    
+        // the name of the variables tells what are they supposed to contain
 	String constrainedType;
         String constraintName;	
+        /**
+         * @key-type Node
+         * @element-type List
+         */
+	Map navigation;
+        ORMappingScheme map;
+        Set modelTypeFeatures;
+        Set involvedTables;
+        Hashtable declarators;
+        int aliasCount;
+        int joinAliasCount = 0;
+        String tableRepresentation;
+	String joinRepresentation;
+        String joinTargetObject;
 
+        // some information needed during the generation process
         String oclNotSupportedFeatures = "oclInState;oclIsNew;iterate";
         String oclCollectionOperations = "size;includes;excludes;count;includesAll;excludesAll;isEmpty;notEmpty;sum;exists;forAll;isUnique;sortedBy;union;intersection;including;excluding;symmetricDifference;select;reject;collect;count;asSequence;asBag;asSet;subSequence;at;first;last";
         String oclTypeOperations = "name;attributes;associationEnds;operations;supertypes;allSupertypes;allInstances";
@@ -49,32 +68,24 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 	String oclTokBasic2 = "max;min;div;mod;concat;";                // operations with two parameters
 	String oclTokBasic3 = "substring;";                             // operations with more than two parameters
         String oclTokens = oclCollectionOperations + oclTokBasic1 + oclTokBasic2 + oclTokBasic3 + oclAnyOperations + oclTypeOperations;
-
-	String dcolon = "::";
-	String ALIAS = "TA";
-        String SEQNO = "seqNo";
-        ORMappingScheme map;
-        /**
-         * @key-type Node
-         * @element-type List
-         */
-	Map navigation;
-        Set modelTypeFeatures;
-        Set involvedTables;
-        Hashtable declarators;
-	boolean formatCode = true;
-        boolean joinMode = false; 
-	int aliasCount;
-	int joinAliasCount = 0;
-	String tableRepresentation;
-	String joinRepresentation;
-        String joinTargetObject;
-
+        
+        final static String dcolon = "::";
+	final static String ALIAS = "TA";
+        final static String SEQNO = "seqNo";
 	final static String STANDARDKEY = "elem";
         final static String STANDARDTABLE = "DUAL";
         final static String COMPLEX_PREDICATE = "inlcudes;excludes;includesAll;excludesAll;isEmpty;notEmpty;exists;forAll;isUnique";
 
-	// constructor
+        /**
+         *  true if the generated code should be formated, false otherwise
+         */
+    	boolean formatCode = true;
+        /**
+         *  true if classic column joins should be generated, false if derived tables are needed
+         */
+        boolean joinMode = false; 
+        
+        // constructor
 	public ILSQLCodeGenerator(String rules) {
 		super(rules);
 
@@ -82,6 +93,9 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 	}
 	
 	// helper methodes
+        /**
+         * Does some formating of the generated SQL code.
+         */
 	public void formatSQLCode() {
                 int count, ind;
 		String indent = "";
@@ -192,13 +206,18 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 			return result;
 		}
 	}
-				
+        
+        /**
+         *  @param map an object relational mapping schema 
+         */
 	public void setORMappingScheme(ORMappingScheme map) {
 		this.map = map;
 	}
 	
 	/**
-	 *
+	 *  Resets the ILSQLCodeGenerator object to initial values.
+         *  Must be used, if multiple invariants will be translated 
+         *  by one code generator object.
 	 */
 	public void reset() {
 		fragments = new Vector();
@@ -213,7 +232,8 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 	}
         
         /**
-         *
+         *  Adds all tables to the involved tables list which are contained within the guides in the specified list.
+         *  @param guides a List object containing Guide objects for the translation of navigation
          */
         private void updateInvolvedTables(List guides) {
             Guide guide;
@@ -231,7 +251,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         }
         
         /**
-         *
+         *  Sets the join mode for the generation process. See variable joinMode for more information.
          */
         public void setJoinMode(boolean b) {
             joinMode = b;
@@ -377,10 +397,16 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 		joinRepresentation = "";          
         }
 	
+        /**
+         *  @return a String that contains all tables for a classic join to put into a from clause
+         */
 	public String getTableRepresentation() {
 		return tableRepresentation;
 	}
 	
+        /**
+         *  @return a String that contains all join definitions to put into a where clause
+         */
 	public String getJoinRepresentation() {
 		return joinRepresentation;
 	}
@@ -437,8 +463,8 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 
 		 	if (formatCode) formatSQLCode();
 		 	//System.err.println("--> " + constrainedType + ":" + constraintName + "\n" + code.toString());       
-                        System.err.println("--> " + constrainedType + ":" + constraintName);
-                        System.err.println("--> involved Tables:" + involvedTables.toString());
+                        //System.err.println("--> " + constrainedType + ":" + constraintName);
+                        //System.err.println("--> involved Tables:" + involvedTables.toString());
 			fragments.add(new DeclarativeCodeFragment(constraintName, constrainedType, code.toString(), (String[])involvedTables.toArray(new String[involvedTables.size()])));
 		} else {
 			// Error !!!
@@ -1096,7 +1122,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                                     pathName = pathName;
                                     codeForPathName = true;
  			        } else if (pathName.equals("collect")) {  
-                                    // todo
+                                    // --> todo
   			        }
                                 
                                 // features that need to be mapped using the SEQUENCE pattern

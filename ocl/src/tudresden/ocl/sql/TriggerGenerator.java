@@ -23,12 +23,13 @@ import java.util.*;
 /**
  *  A trigger generator that can generate trigger definitions, which can be used to
  *  evaluate integrity views. Two kinds of trigger definitions are possible. Trigger 
- *  definitions which serve as SQL92 assertion replacements and ECA trigger templates.
+ *  definitions which serve as SQL92-assertion-replacements and ECA-trigger-templates.
  *  The trigger templates must be further edited by the application developer.
  *  The trigger generator takes care for multiple tables which can be involved in one
  *  integrity view evaluation. Hence, the information about the involved tables must be
  *  provided to the generator. The generator then generates one trigger per involved table.
  *  @author  Sten Loecher
+ *  @see SQLBuilder
  */
 public class TriggerGenerator extends java.lang.Object implements SQLDirector {
     

@@ -278,7 +278,7 @@ public class ObjectViewSchema implements ORMappingScheme, SQLDirector {
 					}
 				}
 											
-				// add view the according map
+				// add view to the according map
                                 theSQLBuilder.endView();
 				view.setStatement(theSQLBuilder.getCode());
 				mc.addTable(view);

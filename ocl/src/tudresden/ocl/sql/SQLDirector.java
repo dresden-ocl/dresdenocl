@@ -20,6 +20,8 @@ package tudresden.ocl.sql;
 
 /**
  *  This interface must be implemented by classes that use SQLBuilders.
+ *  See the SQLBuilder documentation for further details.
+ *  @see SQLBuilder
  */
 public interface SQLDirector {
     /**

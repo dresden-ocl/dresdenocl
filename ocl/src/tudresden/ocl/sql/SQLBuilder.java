@@ -23,11 +23,23 @@ import java.util.*;
 /** 
  * This interface specifies methodes to build SQL code.
  * It should be implemented by classes to build database specific
- * statements.
+ * statements. This interface realizes the builder interface of the
+ * Builder pattern from Gamma. The director part is realized by
+ * implementations of the SQLDirector interface. The product is a 
+ * String. See the OracleSQLBuilder for an example how to implement a SQLBuilder.
+ * Basically, the product should be build by concatenating single parts.
+ * @see SQLDirector
  */
 public interface SQLBuilder {
 	
+        /**
+         *  @return the product that was build (database specific DDL)
+         */
 	public String getCode(); 
+        
+        /**
+         *  Resets the Builder to an empty product.
+         */
 	public void reset(); 
 	
         // tables

@@ -35,6 +35,7 @@ import java.io.*;
  * The actual SQL code depends on the SQLBuilder that must be provided to the SchemaGenerator.
  * @author Sten Loecher
  * @see ORMapping
+ * @see SQLBuilder
  */
 class SchemaGenerator implements SQLDirector {
   private String theScript;
@@ -43,7 +44,7 @@ class SchemaGenerator implements SQLDirector {
   private SQLBuilder theSQLBuilder = null;
   private ORMapping theORMapping = null;
   
-  private static String CONSTRAINT_NAME = "CON_6";
+  private static String CONSTRAINT_NAME = "CON_";
 
   /**
    * For command line and debugging operations only.

@@ -31,6 +31,7 @@ import java.util.Vector;
 
 /**
  * A class that generates SQL code.
+ * !!! Currently, this Generator does not work anymore. Use class ILSQLCodeGenerator instead !!!
  * @author Sten Loecher
  */
 public class SQLCodeGenerator extends DeclarativeCodeGenerator {

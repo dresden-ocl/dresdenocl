@@ -22,6 +22,8 @@ import java.util.*;
 
 /** 
  * Implements the SQLBuilder interface for Oracle specific SQL code.
+ * See the documentation of the SQLBuilder interface for more information.
+ * @see SQLBuilder
  */
 public class OracleSQLBuilder implements SQLBuilder {
         protected String TYPE_FOR_BOOLEAN = " NUMBER(1)";

@@ -23,7 +23,7 @@ import java.util.*;
 /**
  * This interface defines some functions that should return informations
  * about the object relational mapping of classes and their properties to
- * a relational scheme.
+ * a relational schema.
  */
 public interface ORMapping {
   /** 
