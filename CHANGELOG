@@ -8,6 +8,8 @@ Changes that could break older environments
 
 Other changes
 -------------
+* [Type Checker] Improved error reports in Collection.navigateParameterized()
+
 * [Build System] Added this file together with a release policy.
                  Therefore, this section is by no means complete.
 
@@ -43,5 +45,6 @@ POLICY FOR CHANGELOG
      Parser
      Type Checker
      Website
+     OCL Editor
 
    Please send proposals for new categories to dresden-ocl-discussion.
