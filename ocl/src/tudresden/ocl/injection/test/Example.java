@@ -167,6 +167,12 @@ public abstract class Example implements Runnable
   Vector formats=new Vector();
   
   Format aFormat=new java.text.DecimalFormat();
+
+  /**
+     @element-type Integer
+     @key-type String
+  */
+  HashMap namedIntegers=new HashMap();
   
   public boolean poly1(Interface someInterface)
   {

@@ -64,6 +64,8 @@ final class OclInjector implements InjectionConsumer
   */
   private ArrayList typedAttributes_stack=new ArrayList();
 
+  private Imports imports=new Imports();
+
   OclInjector(Writer output, OclInjectorConfig conf)
   {
     this.output=output;
@@ -77,10 +79,12 @@ final class OclInjector implements InjectionConsumer
   public void onPackage(String packagename) throws InjectorParseException
   {
     this.packagename=packagename;
+    imports.setPackage(packagename);
   }
   
   public void onImport(String importname)
   {
+    imports.addImport(importname);
   }
     
   private boolean discardnextfeature=false;
@@ -404,9 +408,16 @@ final class OclInjector implements InjectionConsumer
   public void writeElementChecker(ClassAttribute cf) throws IOException
   {
     Writer o=output;
+    Class et=imports.findType(cf.getType());
     o.write("    for(Iterator i=");
     o.write(cf.getName());
-    o.write(".iterator(); i.hasNext(); )\n      if(!(i.next() instanceof ");
+    if(java.util.Collection.class.isAssignableFrom(et))
+      o.write(".iterator()");
+    else if(java.util.Map.class.isAssignableFrom(et))
+      o.write(".values().iterator()");
+    else
+      throw new RuntimeException();
+    o.write("; i.hasNext(); )\n      if(!(i.next() instanceof ");
     o.write(cf.getElementType());
     o.write("))\n        ");
     o.write(violationMakro);

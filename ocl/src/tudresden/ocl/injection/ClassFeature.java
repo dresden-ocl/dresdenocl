@@ -88,7 +88,7 @@ public abstract class ClassFeature
 
   public final void print(PrintStream o)
   {
-    o.println("  "+SourceReflectionExtender.extractClassName(getClass().getName())+
+    o.println("  "+Imports.extractClassName(getClass().getName())+
               " ("+java.lang.reflect.Modifier.toString(modifiers)+
               ") >"+type+
               "< >"+name+

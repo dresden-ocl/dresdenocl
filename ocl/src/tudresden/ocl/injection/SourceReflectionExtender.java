@@ -55,7 +55,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       declaringclass=fieldclass.getDeclaringClass();
     
     java.io.InputStream inputstream=
-      declaringclass.getResourceAsStream(extractClassName(declaringclass.getName())+".java");
+      declaringclass.getResourceAsStream(Imports.extractClassName(declaringclass.getName())+".java");
     if(inputstream==null)
     {
       System.out.println("SourceReflectionExtender: source file for "+declaringclass.getName()+" not found.");
@@ -68,7 +68,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       try
       {
         (new Injector(reader, null, 
-          new ReflectionConsumer(extractPackageName(declaringclass.getName())))).parseFile();
+          new ReflectionConsumer(Imports.extractPackageName(declaringclass.getName())))).parseFile();
         reader.close();
       }
       catch(InjectorParseException e)
@@ -89,24 +89,6 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     return getClass().getName();
   }
   
-  public static String extractClassName(String fullclassname)
-  {
-    int pos=fullclassname.lastIndexOf('.');
-    if(pos>=0)
-      return fullclassname.substring(pos+1, fullclassname.length());
-    else
-      return fullclassname;
-  }
-  
-  public static String extractPackageName(String fullclassname)
-  {
-    int pos=fullclassname.lastIndexOf('.');
-    if(pos>=0)
-      return fullclassname.substring(0, pos);
-    else
-      return null;
-  }
-  
   class ReflectionConsumer implements InjectionConsumer
   {
     /**
@@ -115,10 +97,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     */
     private String packagename;
     
-    /**
-       Contains all imported packages of this source file in the order of declaration.
-    */
-    private ArrayList imports=new ArrayList();
+    private Imports imports=new Imports();
   
     private ClassClass current_class=null;
     
@@ -135,11 +114,12 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
         throw new InjectorParseException("expected root package, found "+packagename+'.');
       if(!this.packagename.equals(packagename))
         throw new InjectorParseException("expected package "+this.packagename+", found "+packagename+'.');
+      imports.setPackage(packagename);
     }
     
     public void onImport(String importname)
     {
-      imports.add(importname);
+      imports.addImport(importname);
     }
   
     public void onClass(ClassClass cc)
@@ -168,58 +148,6 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
   
     private String last_element_type=null;
 
-    private Class findElementType()
-    {
-      //System.out.println("findelementtype: >"+last_element_type+"<");
-      if(last_element_type.indexOf('.')>=0)
-      {
-        try
-        {
-          return Class.forName(last_element_type);
-        }
-        catch(ClassNotFoundException e) { throw new RuntimeException(e.toString()); }
-      }
-
-      try
-      {
-        return Class.forName(packagename+'.'+last_element_type);
-      }
-      catch(ClassNotFoundException e) {};
-
-      try
-      {
-        // see Java Language Specification 7.5.3.
-        return Class.forName("java.lang."+last_element_type);
-      }
-      catch(ClassNotFoundException e) {};
-      
-      for(Iterator i=imports.iterator(); i.hasNext(); )
-      {
-        String importString=(String)i.next();
-        if(importString.endsWith(".*"))
-        {
-          String full_element_type=
-            importString.substring(0,importString.length()-1)+last_element_type;
-          try
-          {
-            return Class.forName(full_element_type);
-          }
-          catch(ClassNotFoundException e) {};
-        }
-        else
-        {
-          if(extractClassName(importString).equals(last_element_type))
-          try
-          {
-            return Class.forName(importString);
-          }
-          catch(ClassNotFoundException e) { throw new RuntimeException(e.toString()); }
-        }
-      }
-      
-      return null;
-    }
-    
     public void onMethodHeader(ClassMethod cf)
     {
     }
@@ -228,8 +156,8 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     {
       if(cf instanceof ClassAttribute && last_element_type!=null)
       {
-        Class c=findElementType();
-        //System.out.println("findElementType:"+c);
+        Class c=imports.findType(last_element_type);
+        //System.out.println("findType:"+c);
         if(c!=null)
         {
           try
