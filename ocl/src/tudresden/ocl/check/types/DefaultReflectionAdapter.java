@@ -40,7 +40,10 @@ public class DefaultReflectionAdapter implements ReflectionAdapter
     //System.out.println("getClassForType("+c+")");
     if(c==String.class)
       return Basic.STRING;
-    else if(c==Integer.class || c==Integer.TYPE)
+    else if(c==Byte.class    || c==Byte.TYPE ||
+            c==Short.class   || c==Short.TYPE ||
+            c==Integer.class || c==Integer.TYPE ||
+            c==Long.class    || c==Long.TYPE)
       return Basic.INTEGER;
     else if(c==Float.class  || c==Float.TYPE || 
             c==Double.class || c==Double.TYPE)

@@ -96,7 +96,7 @@ public class TestInjection
     }
     assertAll();
     {
-      int age=p3.age;
+      long age=p3.age;
       p3.age=-3;
       expectViolation("violated ocl invariant 'age_greater_zero' on object 'tudresden.ocl.test.royloy.Person[Person1]'.");
       expectViolation("violated ocl invariant 'age_greater_zero' on object 'tudresden.ocl.test.royloy.Person[Person2]'.");

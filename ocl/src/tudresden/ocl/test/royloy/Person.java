@@ -32,7 +32,7 @@ public class Person extends RLObject
      @invariant age_greater_zero: employers.employees->forAll(age>0)
      @invariant age0to199: Set{ 0 .. 199 }->includes(age)
   */
-  public int age=18;
+  public long age=18;
 
   /**
      @invariant husband:

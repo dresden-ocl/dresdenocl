@@ -85,14 +85,23 @@ public class DefaultOclFactory implements OclFactory {
       for(int i=0; i<oa.length; i++) 
         list.add(getOclRepresentationFor(oa[i]));
       return new OclSequence(list);
-    } else if (o instanceof Boolean)
+    } 
+    else if (o instanceof Boolean)
       return getOclRepresentationFor( ((Boolean)o).booleanValue() );
+    else if (o instanceof Byte)
+      return getOclRepresentationFor( ((Byte)o).byteValue() );
+    else if (o instanceof Short)
+      return getOclRepresentationFor( ((Short)o).shortValue() );
     else if (o instanceof Integer)
       return getOclRepresentationFor( ((Integer)o).intValue() );
+    else if (o instanceof Long)
+      return getOclRepresentationFor( ((Long)o).longValue() );
     else if (o instanceof Float)
       return getOclRepresentationFor( ((Float)o).floatValue() );
     else if (o instanceof Double)
       return getOclRepresentationFor( ((Double)o).doubleValue() );
+    else if (o instanceof Character)
+      return getOclRepresentationFor( ((Character)o).charValue() );
     else
       return new OclAnyImpl(o);
   }
