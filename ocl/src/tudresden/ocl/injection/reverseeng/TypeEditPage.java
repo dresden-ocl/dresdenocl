@@ -172,7 +172,7 @@ public class TypeEditPage extends javax.swing.JPanel {
               nStyle &= ~Font.BOLD;
             }
 
-            setFont (getFont().deriveFont (nStyle));
+            //setFont (getFont().deriveFont (nStyle));
           }
         }
       }
