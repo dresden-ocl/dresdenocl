@@ -308,7 +308,7 @@ public final class Injector
   }
 
   /**
-     The same as parseFeature(ClassClass) but the first token has
+     The same as parseFeature(JavaClass) but the first token has
      already been fetched from the input stream.
      @parameter bufs the first token of the class feature.
      @see #parseFeature(JavaClass)

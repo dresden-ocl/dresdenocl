@@ -56,7 +56,7 @@ final class OclInjector implements InjectionConsumer
   private ArrayList methods_stack=new ArrayList();
   
   /**
-     Collects all attributes (ClassAttribute) of the current class, which have element-type set.
+     Collects all attributes of the current class, which have element-type set.
      @see JavaAttribute
   */
   private ArrayList typedAttributes=null;
