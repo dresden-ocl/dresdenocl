@@ -52,7 +52,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
      May be empty, if an appropriate import statement is generated.
      Must not be null.
   */
-  String oclLibPackage="tudresden.ocl.lib.";
+  private String oclLibPackage="tudresden.ocl.lib.";
 
   /** maps Nodes for operators (ALogicalOperator, ARelationalOperator...) to
    *  the String containing their Java representation
@@ -85,6 +85,15 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
     this.javaResult=resultName;
   }
 
+  public JavaCodeGenerator(
+    String instanceName, 
+    String resultName,
+    String oclLibPackage)
+  {
+    this.instanceName=instanceName;
+    this.javaResult=resultName;
+    this.oclLibPackage=oclLibPackage;
+  }
 
   /** @param instanceName a Java expression that will be evaluated to the
    *                      instance that is checked for constraint conformance
@@ -101,7 +110,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
 
   protected String getTransferCode(String var, String type) {
     StringBuffer ret=new StringBuffer();
-    ret.append("      "+oclLibPackage+type+" "+var+";\n");
+    ret.append(oclLibPackage+type+' '+var+";\n");
     return ret.toString();
   }
 
@@ -152,11 +161,18 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
   private String createDecl(String type, String variable)
   {
     if(preVarTypes.containsKey(variable))
-      return "        "+variable+'=';
+      return variable+'=';
+    else if(type.indexOf('.')<0)
+      return "final "+oclLibPackage+type+' '+variable+'=';
     else
-      return "        final "+oclLibPackage+type+' '+variable+'=';
+      return "final "+type+' '+variable+'=';
   }
   
+  private String qualifyType(String type)
+  {
+    return (type.indexOf('.')<0) ? oclLibPackage+type : type;
+  }
+
   // ---------- tree traversal: -----------------------------
 
   /** the variable for the AConstraintBody node is the variable for &quot;self&quot;
@@ -586,8 +602,8 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
       String javaEvalReturn=types[1];
       String javaIterReturn=types[2];
       appendCode(createDecl("OclIterator",javaIter)+getVariable(appliedTo)+".getIterator();\n");
-      appendCode(createDecl(javaEvalType,javaEvalName)+"new "+oclLibPackage+javaEvalType+"() {\n");
-      appendCode("  public "+oclLibPackage+javaEvalReturn+" evaluate() {\n");
+      appendCode(createDecl(javaEvalType,javaEvalName)+"new "+qualifyType(javaEvalType)+"() {\n");
+      appendCode("  public "+qualifyType(javaEvalReturn)+" evaluate() {\n");
       varMap.put(oclIter, oclLibPackage+"Ocl.to"+javaIterType+"("+javaIter+".getValue())");
       increaseIndent(4);
       super.caseAPostfixExpressionTail(pet);  // recursive decent
@@ -655,7 +671,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
       ret[2]="OclBoolean";
     } else if (featureName.equals("sortedBy")) {
       ret[0]="OclComparableEvaluatable";
-      ret[1]="Comparable";
+      ret[1]="java.lang.Comparable";
       ret[2]="OclSequence";
     } else if (featureName.equals("exists")) {
       ret[0]="OclBooleanEvaluatable";

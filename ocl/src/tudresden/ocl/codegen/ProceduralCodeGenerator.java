@@ -81,7 +81,8 @@ public abstract class ProceduralCodeGenerator extends DepthFirstAdapter implemen
    */
   HashMap preVarTypes=new HashMap();
 
-  int indent;
+  int indent=0;
+  int initialIndent=0;
   boolean newLine=true;
   String constrainedType, constrainedOperation;
   /** Formal parameters of the constrainted operation if a operation is
@@ -199,11 +200,22 @@ public abstract class ProceduralCodeGenerator extends DepthFirstAdapter implemen
     }
     newLine=s.endsWith("\n");
   }
+
+  public void setInitialIndent(int initialIdent)
+  {
+    if(this.initialIndent!=indent || initialIndent<0)
+      throw new RuntimeException();
+    this.initialIndent=initialIndent; 
+    this.indent=initialIndent; 
+  }
+
   protected void increaseIndent(int i) {
     indent=indent+i;
   }
   protected void decreaseIndent(int i) {
     indent=indent-i;
+    if(indent<initialIndent)
+      throw new RuntimeException();
   }
 
   // methods to separate constraint into fragments for each constraint_body
