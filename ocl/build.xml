@@ -25,6 +25,7 @@ Enhancements by Steffen Zschaler.
   <property name="nsuml.jar"  value="${src.dir}/lib/nsuml.jar" />
   <property name="jdom.jar"   value="${src.dir}/lib/jdom.jar" />
   <property name="junit.jar"  value="${src.dir}/junit.jar"  />
+  <property name="nsuml.jar"  value="${src.dir}/nsuml.jar"  />
 
   <property file="local.properties" />
 
@@ -103,6 +104,7 @@ Enhancements by Steffen Zschaler.
         <pathelement location="${xerces.jar}" />
         <pathelement location="${nsuml.jar}" />
         <pathelement location="${junit.jar}" />
+        <pathelement location="${nsuml.jar}" />
       </classpath>
     </javac>
   </target>
@@ -132,6 +134,7 @@ Enhancements by Steffen Zschaler.
         <pathelement location="${src.dir}" />
         <pathelement location="${xerces.jar}" />
         <pathelement location="${junit.jar}" />
+        <pathelement location="${nsuml.jar}" />
       </classpath>
       <arg value="tudresden.ocl.test.TestAll" />
       <sysproperty key="tudresden.ocl.test.tempdir" value="${build.dir}"/>
@@ -348,6 +351,7 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/codegen/decl/*.java" />
         <include name="tudresden/ocl/sql/*.java" />
         <include name="tudresden/ocl/sql/orstrategy/*.java" />
+        <include name="tudresden/ocl/sql/gui/*.java" />
       </fileset>
     </copy>
 
@@ -444,6 +448,7 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/gui/events/*.java" />
         <include name="tudresden/ocl/sql/*.java" />
         <include name="tudresden/ocl/sql/orstrategy/*.java" />
+        <include name="tudresden/ocl/sql/gui/*.java" />
         <include name="tudresden/ocl/injection/*.java" />
         <include name="tudresden/ocl/injection/ocl/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
