@@ -132,7 +132,7 @@ public final class Ocl {
    * Default is Sequence (false).
    * The other way is needed for older CASE-Tools and their code generators.
    * This effects both the ocl library and the reflection facade.
-   * @see DefaultOclFactory#getRepresentationFor(Object)
+   * @see DefaultOclFactory#getOclRepresentationFor(Object)
    * @see tudresden.ocl.check.types.DefaultReflectionAdapter#getTypeForClass
    */
   public static boolean TAKE_VECTORS_AS_SET = false;

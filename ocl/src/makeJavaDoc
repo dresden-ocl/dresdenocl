@@ -1,1 +1,1 @@
-javadoc -J-mx40m @jdoc
+javadoc -J-mx50m @jdoc

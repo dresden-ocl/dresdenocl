@@ -41,15 +41,14 @@ public final class ClassFeature
   /**
      The index of the end of the feature name in literal.
      Needed for getWrappedLiteral() and getNotWrappedLiteral().
-       @see getWrappedLiteral()
-       @see getNotWrappedLiteral()
-       @see literal
+       @see #getWrappedLiteral()
+       @see #getNotWrappedLiteral()
+       @see #literal
   */
   private int name_end;
 
   /**
      Contains parameter names and types. Is null for attributes.
-       @see paramnames
   */
   private ArrayList parameters=null;
 
