@@ -96,15 +96,20 @@ public class TestTable extends TestCase {
 		t.addColumn("a4");
 		t.addColumn("a5");
 		t.setForeignKey("a2", "B", "b1");
+		t.setForeignKey("a3", "C", "c1");
 
 		tmp = t.getForeignKeyColumns();
-		assert(tmp.length == 1);
+		assert(tmp.length == 2);
 		assert(tmp[0].equals("a2"));
+		assert(tmp[1].equals("a3"));
 
 		assert(t.isForeignKeyColumn("a2"));
-		assert(!t.isForeignKeyColumn("a3"));
+		assert(t.isForeignKeyColumn("a3"));
+		assert(!t.isForeignKeyColumn("a4"));
 		assert(t.getForeignTable("a2").equals("B"));
 		assert(t.getForeignColumn("a2").equals("b1"));
+		assert(t.getForeignTable("a3").equals("C"));
+		assert(t.getForeignColumn("a3").equals("c1"));
 
 		try {
 			t.setForeignKey(null, null, null);
