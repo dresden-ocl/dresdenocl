@@ -1,0 +1,7 @@
+JARLIB=jars
+java -jar ${JARLIB}/dresden-ocl-injector.jar -r tudresden.ocl.test.royloy --modify tudresden/ocl/test/royloy/*.java
+javac -classpath ${JARLIB}/dresden-ocl-injector.jar tudresden/ocl/test/royloy/*.java
+java -cp .:${JARLIB}/dresden-ocl-injector.jar tudresden.ocl.test.TestInjectionRoyloy
+java -jar ${JARLIB}/dresden-ocl-injector.jar --clean --modify tudresden/ocl/test/royloy/*.java
+javac -classpath ${JARLIB}/dresden-ocl-injector.jar tudresden/ocl/test/royloy/*.java
+java -jar ${JARLIB}/dresden-ocl-demo.jar
