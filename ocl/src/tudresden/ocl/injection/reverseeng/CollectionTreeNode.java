@@ -59,7 +59,20 @@ public class CollectionTreeNode extends AbstractFeatureTreeNode {
 
   public Iterator getPropertyPages() {
     List l = new LinkedList();
-    l.add (new PropertyPage ("Collection Properties", new CollectionEditor (getDescriptor())));
+    //l.add (new PropertyPage ("Collection Properties", new CollectionEditor (getDescriptor())));
+    l.add (new PropertyPage ("Element type", new TypeEditPage (new TypeEditPage.TypeDescriptor() {
+      public void onTypeSelectionChanged (String sNewSelection) {
+        getDescriptor().setElementType (sNewSelection);
+      }
+      
+      public List getProposedTypes() {
+        return new LinkedList();
+      }
+      
+      public String getCurrentType() {
+        return getDescriptor().getElementType();
+      }
+    })));
     
     final Iterator iStandardPages = super.getPropertyPages();
     final Iterator iNewPages = l.iterator();

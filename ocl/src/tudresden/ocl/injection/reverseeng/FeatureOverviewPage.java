@@ -1,4 +1,22 @@
 /*
+Copyright (C) 2000  Steffen Zschaler
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+/*
  * ContainingClassTree.java
  *
  * Created on 11. September 2000, 17:00
@@ -12,17 +30,20 @@ import javax.swing.*;
 import javax.swing.tree.*;
 
 /** 
- *
- * @author  sz9
- * @version 
- */
+  * Property page that displays general information about a feature.
+  *
+  * @author  sz9 (Steffen Zschaler)
+  * @version 0.1
+  */
 public class FeatureOverviewPage extends javax.swing.JPanel {
 
   private DefaultTreeModel m_dtmModel;
   private DefaultMutableTreeNode m_dmtnLastNode = null;
   private TreePath m_tpCompletePath = null; // Complete tree path, so that we can expand it by default...
+  private AbstractDescriptor m_adModel;
+  private ContainingLevel m_clFeature;  
   
-  static class ContainingLevel {
+  private class ContainingLevel implements AbstractDescriptor.AbstractDescriptorListener {
     
     public static final int ATTR_PACKAGE = 1;
     public static final int ATTR_CLASS = 2;
@@ -60,6 +81,21 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
     public boolean isIncomplete() {
       return (m_nAttribute & ATTR_INCOMPL) == ATTR_INCOMPL;
     }
+    
+    public void onDescriptorModified (AbstractDescriptor.AbstractDescriptorEvent ade) {
+      if (((AbstractDescriptor) ade.getSource()).isIncomplete()) {
+        m_nAttribute |= ATTR_INCOMPL;
+      }
+      else {
+        m_nAttribute &= (ATTR_MAP | ATTR_COLLECTION);
+      }
+      
+      SwingUtilities.invokeLater (new Runnable() {
+        public void run() {
+          m_dtmModel.nodeChanged (m_dmtnLastNode);
+        }
+      });
+    }
   }
   
   static class ContainingLevelRenderer extends DefaultTreeCellRenderer {
@@ -87,6 +123,9 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
       
       if (! cl.isPackage()) {
         if (cl.isCollection()) {
+          
+          setToolTipText ("Collection: " + cl);
+          
           if (cl.isIncomplete()) {
             setIcon (s_iCollectionInCompl);
           }
@@ -95,6 +134,9 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
           }
         }
         else if (cl.isMap()) {
+          
+          setToolTipText ("Map: " + cl);
+          
           if (cl.isIncomplete()) {
             setIcon (s_iMapInCompl);
           }
@@ -103,8 +145,14 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
           }
         }
         else {
+          
+          setToolTipText ("Class: " + cl);
+          
           setIcon (s_iClass);
         }
+      }
+      else {
+        setToolTipText ("Package: " + cl);
       }
       
       return this;
@@ -113,6 +161,10 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
   
   /** Creates new form ContainingClassTree */
   public FeatureOverviewPage(AbstractDescriptor ad) {
+    super();
+    
+    m_adModel = ad;
+    
     fillInClassTree (ad.getContainingClassJavaClass());
     
     // Add feature
@@ -138,8 +190,10 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
       nAttribute |= ContainingLevel.ATTR_INCOMPL;
     }
     
-    m_dmtnLastNode.setUserObject (new ContainingLevel (nAttribute, 
-                                                           ad.getName()));
+    m_clFeature = new ContainingLevel (nAttribute, 
+                                         ad.getName());
+    m_dmtnLastNode.setUserObject (m_clFeature);
+    ad.addModifiedListener (m_clFeature);
 
     // Build visual components
     initComponents ();
@@ -245,6 +299,18 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
     m_jlType = new javax.swing.JLabel ();
     setLayout (new java.awt.GridBagLayout ());
     java.awt.GridBagConstraints gridBagConstraints1;
+    addAncestorListener (new javax.swing.event.AncestorListener () {
+      public void ancestorAdded (javax.swing.event.AncestorEvent evt) {
+
+      }
+      public void ancestorMoved (javax.swing.event.AncestorEvent evt) {
+
+      }
+      public void ancestorRemoved (javax.swing.event.AncestorEvent evt) {
+        formAncestorRemoved (evt);
+      }
+    }
+    );
 
     m_jpTreeBorder.setLayout (new java.awt.GridBagLayout ());
     java.awt.GridBagConstraints gridBagConstraints2;
@@ -253,6 +319,10 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
   
         m_jtContainingClassTree.setModel (m_dtmModel);
         m_jtContainingClassTree.setCellRenderer (new ContainingLevelRenderer());
+    
+        // Enable tool tips.
+        ToolTipManager.sharedInstance().registerComponent (m_jtContainingClassTree);
+    
         // Specify lines to be drawn
         m_jtContainingClassTree.putClientProperty ("JTree.lineStyle", "Angled");
     
@@ -327,6 +397,11 @@ public class FeatureOverviewPage extends javax.swing.JPanel {
     add (m_jlType, gridBagConstraints1);
 
   }//GEN-END:initComponents
+
+  private void formAncestorRemoved (javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorRemoved
+    // Remove the listener from the AbstractDescriptor when the panel is removed.
+    //m_adModel.removeModifiedListener (m_clFeature);  // Mustn't do that, as the component also gets removed, when the user selects another page :(
+  }//GEN-LAST:event_formAncestorRemoved
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -56,8 +56,34 @@ public class MapTreeNode extends AbstractFeatureTreeNode {
 
   public Iterator getPropertyPages() {
     List l = new LinkedList();
-    l.add (new PropertyPage ("Map Properties", new MapEditor (getDescriptor())));
-    
+    //l.add (new PropertyPage ("Map Properties", new MapEditor (getDescriptor())));
+    l.add (new PropertyPage ("Element type", new TypeEditPage (new TypeEditPage.TypeDescriptor() {
+      public void onTypeSelectionChanged (String sNewSelection) {
+        getDescriptor().setElementType (sNewSelection);
+      }
+      
+      public List getProposedTypes() {
+        return new LinkedList();
+      }
+      
+      public String getCurrentType() {
+        return getDescriptor().getElementType();
+      }
+    })));
+    l.add (new PropertyPage ("Key type", new TypeEditPage (new TypeEditPage.TypeDescriptor() {
+      public void onTypeSelectionChanged (String sNewSelection) {
+        getDescriptor().setKeyType (sNewSelection);
+      }
+      
+      public List getProposedTypes() {
+        return new LinkedList();
+      }
+      
+      public String getCurrentType() {
+        return getDescriptor().getKeyType();
+      }
+    })));
+
     final Iterator iStandardPages = super.getPropertyPages();
     final Iterator iNewPages = l.iterator();
     

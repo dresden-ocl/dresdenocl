@@ -35,7 +35,7 @@ import javax.swing.tree.*;
   * @author  sz9 (Steffen Zschaler)
   * @version 0.1
   */
-public abstract class RevengTreeNode extends DefaultMutableTreeNode {
+public abstract class RevengTreeNode extends DefaultMutableTreeNode implements AbstractDescriptor.AbstractDescriptorListener {
   
   /**
     * The model which this node is part of.
@@ -193,5 +193,9 @@ public abstract class RevengTreeNode extends DefaultMutableTreeNode {
     if (getParent() != null) {
       ((RevengTreeNode) getParent()).save();
     }
+  }
+ 
+  public void onDescriptorModified (AbstractDescriptor.AbstractDescriptorEvent ade) {
+    setModified();
   }
 }

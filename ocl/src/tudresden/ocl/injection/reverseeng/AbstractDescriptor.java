@@ -26,6 +26,8 @@ package tudresden.ocl.injection.reverseeng;
 
 import tudresden.ocl.injection.*;
 
+import java.util.*;
+
 import javax.swing.tree.*;
 
 /** 
@@ -49,6 +51,24 @@ public abstract class AbstractDescriptor extends Object {
   private RevengTreeNode m_rtnAssociatedNode = null;
   
   private String m_sCleanedComment = null;
+  
+  public static class AbstractDescriptorEvent extends EventObject {
+    public AbstractDescriptorEvent (AbstractDescriptor adSource) {
+      super (adSource);
+    }
+  }
+  
+  public static interface AbstractDescriptorListener extends EventListener {
+    public void onDescriptorModified (AbstractDescriptorEvent ade);
+  }
+  
+  /**
+    * Listeners associated with this descriptor. They will be notified about modifications to the 
+    * descriptor.
+    *
+    * @element-type AbstractDescriptorListener
+    */
+  private List m_ladlListeners = new LinkedList();
   
   /** 
     * Creates new AbstractDescriptor 
@@ -196,9 +216,10 @@ public abstract class AbstractDescriptor extends Object {
   public void setElementType (String sElementType) {
     m_sElementType = sElementType;
     
-    if (m_rtnAssociatedNode != null) {
+    fireModified();
+/*    if (m_rtnAssociatedNode != null) {
       m_rtnAssociatedNode.setModified();
-    }
+    }*/
   }  
   
   public String getKeyType() {
@@ -208,9 +229,10 @@ public abstract class AbstractDescriptor extends Object {
   protected void setKeyType (String sKeyType) {
     m_sKeyType = sKeyType;
     
-    if (m_rtnAssociatedNode != null) {
+    fireModified();
+/*    if (m_rtnAssociatedNode != null) {
       m_rtnAssociatedNode.setModified();
-    }
+    }*/
   }  
 
   public int getCommentID () {
@@ -224,8 +246,16 @@ public abstract class AbstractDescriptor extends Object {
   public abstract RevengTreeNode createTreeNode (DefaultTreeModel dtmModel);
   
   public void setAssociatedTreeNode (RevengTreeNode rtn) {
+    if (m_rtnAssociatedNode != null) {
+      removeModifiedListener (m_rtnAssociatedNode);
+    }
+    
     m_rtnAssociatedNode = rtn;
-  }  
+
+    if (m_rtnAssociatedNode != null) {
+      addModifiedListener (m_rtnAssociatedNode);
+    }
+  }
   
   public String getType() {
     return m_sType;
@@ -239,4 +269,25 @@ public abstract class AbstractDescriptor extends Object {
     return m_jcParent;
   }
   public abstract boolean isCollection();
+  
+  public void addModifiedListener (AbstractDescriptorListener adl) {
+    synchronized (m_ladlListeners) {
+      m_ladlListeners.add (adl);
+    }
+  }
+
+  public void removeModifiedListener (AbstractDescriptorListener adl) {
+    synchronized (m_ladlListeners) {
+      m_ladlListeners.remove (adl);
+    }
+  }
+  
+  protected void fireModified() {
+    synchronized (m_ladlListeners) {
+      AbstractDescriptorEvent ade = new AbstractDescriptorEvent (this);
+      for (Iterator i = m_ladlListeners.iterator(); i.hasNext();) {
+        ((AbstractDescriptorListener) i.next()).onDescriptorModified (ade);
+      }
+    }
+  }
 }
