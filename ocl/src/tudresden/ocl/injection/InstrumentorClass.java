@@ -23,7 +23,7 @@ import java.util.ArrayList;
 final class InstrumentorClass
 {
   
-  JavaClass javaclass;
+  final JavaClass javaclass;
   
   /**
      Collects all behavioral features of the current class, 
@@ -59,7 +59,7 @@ final class InstrumentorClass
 	
 	TaskInstrumentor[] taskInstrumentors;
 
-  InstrumentorClass(JavaClass javaclass, TaskConfig[] taskConfigs, boolean delayinsertions)
+  InstrumentorClass(final JavaClass javaclass, final TaskConfig[] taskConfigs, final boolean delayinsertions, final String lineSeparator)
   {
     this.javaclass=javaclass;
     if(delayinsertions)
@@ -67,7 +67,10 @@ final class InstrumentorClass
 		
 		taskInstrumentors=new TaskInstrumentor[taskConfigs.length];
 		for(int i=0; i<taskConfigs.length; i++)
+		{
 			taskInstrumentors[i]=taskConfigs[i].createTaskInstrumentor();
+			taskInstrumentors[i].setLineSeparator(lineSeparator);
+		}
   }
   
 }

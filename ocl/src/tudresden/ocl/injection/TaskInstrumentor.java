@@ -23,6 +23,8 @@ import java.io.Writer;
 
 public interface TaskInstrumentor
 {
+	public void setLineSeparator(String lineSeparator);
+	
 	public void onDocComment(JavaClass jc, String doccomment);
 	
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed)

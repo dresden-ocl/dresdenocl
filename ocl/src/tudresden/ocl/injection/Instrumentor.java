@@ -29,11 +29,11 @@ import tudresden.ocl.injection.lib.WrapperDummy;
 
 public final class Instrumentor implements InjectionConsumer
 {
-	private Writer output;
-	private boolean delayinsertions;
-	private boolean clean;
-	private InstrumentorConfig config;
-	private String identityhashcode;
+	private final Writer output;
+	private final boolean delayinsertions;
+	private final boolean clean;
+	private final InstrumentorConfig config;
+	private final String identityhashcode;
 	
 	
 	/**
@@ -50,7 +50,8 @@ public final class Instrumentor implements InjectionConsumer
 	 */
 	private ArrayList class_state_stack=new ArrayList();
 	
-
+	protected String lineSeparator;
+	
 	public Instrumentor(Writer output, InstrumentorConfig config)
 	{
 		this.output=output;
@@ -58,6 +59,10 @@ public final class Instrumentor implements InjectionConsumer
 		this.clean=config.clean;
 		this.config=config;
 		this.identityhashcode=config.hashmode.getName()+".identityHashCode";
+
+		lineSeparator = "\n";
+		if(lineSeparator==null)
+			throw new NullPointerException("Property \"line separator\" should not be null.");
 	}
 
 	public void onPackage(JavaFile javafile)
@@ -76,7 +81,7 @@ public final class Instrumentor implements InjectionConsumer
 		discardnextfeature=false;
 		
 		class_state_stack.add(class_state);
-		class_state=new InstrumentorClass(jc, config.taskConfigs, delayinsertions);
+		class_state=new InstrumentorClass(jc, config.taskConfigs, delayinsertions, lineSeparator);
 	}
 	
 	public void onClassEnd(JavaClass jc)
@@ -247,7 +252,8 @@ public final class Instrumentor implements InjectionConsumer
 			o.write((String)i.next());
 			if(i.hasNext()) o.write(", ");
 		}
-		o.write(");\n");
+		o.write(");");
+		o.write(lineSeparator);
 	}
 	
 	/**
@@ -299,11 +305,19 @@ public final class Instrumentor implements InjectionConsumer
 		Writer o=output;
 		
 		boolean is_collection=isCollection(jf);
-		o.write("/**\n    A backup for detecting modifications.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+		o.write("/**");
+		o.write(lineSeparator);
+		o.write("    A backup for detecting modifications.");
+		o.write(lineSeparator);
+		o.write("    Generated automatically, DO NOT CHANGE!");
+		o.write(lineSeparator);
+		o.write("    @author ");
 		o.write(OCL_AUTHOR);
-		o.write("\n    @see #");
+		o.write(lineSeparator);
+		o.write("    @see #");
 		o.write(jf.getName());
-		o.write("\n  */");
+		o.write(lineSeparator);
+		o.write("  */");
 		o.write(Modifier.toString(
 		(jf.getModifiers()&Modifier.STATIC)|Modifier.PRIVATE));
 		o.write(' ');
@@ -331,7 +345,8 @@ public final class Instrumentor implements InjectionConsumer
 		
 		o.write("      ");
 		o.write(CHANGED_CHECKER);
-		o.write("();\n");
+		o.write("();");
+		o.write(lineSeparator);
 	}
 	
 	private final void writeChangedChecker()
@@ -339,11 +354,21 @@ public final class Instrumentor implements InjectionConsumer
 	{
 		Writer o=output;
 		
-		o.write("/**\n    Checks object features, whether they have changed.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+		o.write("/**");
+		o.write(lineSeparator);
+		o.write("    Checks object features, whether they have changed.");
+		o.write(lineSeparator);
+		o.write("    Generated automatically, DO NOT CHANGE!");
+		o.write(lineSeparator);
+		o.write("    @author ");
 		o.write(OCL_AUTHOR);
-		o.write("\n  */private void ");
+		o.write(lineSeparator);
+		o.write("  */private void ");
 		o.write(CHANGED_CHECKER);
-		o.write("()\n  {\n");
+		o.write("()");
+		o.write(lineSeparator);
+		o.write("  {");
+		o.write(lineSeparator);
 		for(Iterator i=class_state.observedFeatures.iterator(); i.hasNext(); )
 		{
 			JavaFeature jf=(JavaFeature)i.next();
@@ -358,11 +383,17 @@ public final class Instrumentor implements InjectionConsumer
 				o.write(')');
 			}
 			else
+			{
 				o.write(jf.getName());
+			}
 			o.write("!=");
 			o.write(jf.getName());
 			o.write(BACKUP_SUFFIX);
-			o.write(")\n    {\n      ");
+			o.write(')');
+			o.write(lineSeparator);
+			o.write("    {");
+			o.write(lineSeparator);
+			o.write("      ");
 			o.write(jf.getName());
 			o.write(BACKUP_SUFFIX);
 			o.write('=');
@@ -375,12 +406,14 @@ public final class Instrumentor implements InjectionConsumer
 			}
 			else
 				o.write(jf.getName());
-			o.write(";\n");
+			o.write(';');
+			o.write(lineSeparator);
 			
 			for(int j=0; j<class_state.taskInstrumentors.length; j++)
 				class_state.taskInstrumentors[j].onAttributeChanged(o, (JavaAttribute)jf, is_weakly_typed);
 			
-			o.write("    }\n");
+			o.write("    }");
+			o.write(lineSeparator);
 		}
 		o.write("  }");
 	}
@@ -438,9 +471,16 @@ public final class Instrumentor implements InjectionConsumer
 	{
 		Writer o=output;
 		
-		o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+		o.write("/**");
+		o.write(lineSeparator);
+		o.write("    A wrapper for checking ocl constraints.");
+		o.write(lineSeparator);
+		o.write("    Generated automatically, DO NOT CHANGE!");
+		o.write(lineSeparator);
+		o.write("    @author ");
 		o.write(OCL_AUTHOR);
-		o.write("\n    @see #");
+		o.write(lineSeparator);
+		o.write("    @see #");
 		o.write(jc.getName());
 		o.write('(');
 		for(Iterator i=jc.getParameters(); i.hasNext(); )
@@ -452,9 +492,13 @@ public final class Instrumentor implements InjectionConsumer
 		if(jc.getParameters().hasNext())
 			o.write(", ");
 		o.write(WrapperDummy.class.getName());
-		o.write(")\n  */");
+		o.write(")");
+		o.write(lineSeparator);
+		o.write("  */");
 		writeWrapperHeader(jc);
-		o.write("\n  {\n");
+		o.write(lineSeparator);
+		o.write("  {");
+		o.write(lineSeparator);
 		o.write("    this(");
 		for(Iterator i=jc.getParameters(); i.hasNext(); )
 		{
@@ -464,7 +508,8 @@ public final class Instrumentor implements InjectionConsumer
 		}
 		o.write('(');
 		o.write(WrapperDummy.class.getName());
-		o.write(")null);\n");
+		o.write(")null);");
+		o.write(lineSeparator);
 		for(int j=0; j<class_state.taskInstrumentors.length; j++)
 			class_state.taskInstrumentors[j].onWrapperConstructor(o, jc);
 		o.write("  }");
@@ -475,9 +520,16 @@ public final class Instrumentor implements InjectionConsumer
 	{
 		Writer o=output;
 		
-		o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+		o.write("/**");
+		o.write(lineSeparator);
+		o.write("    A wrapper for checking ocl constraints.");
+		o.write(lineSeparator);
+		o.write("    Generated automatically, DO NOT CHANGE!");
+		o.write(lineSeparator);
+		o.write("    @author ");
 		o.write(OCL_AUTHOR);
-		o.write("\n    @see #");
+		o.write(lineSeparator);
+		o.write("    @see #");
 		o.write(jm.getWrappedName());
 		o.write('(');
 		for(Iterator i=jm.getParameters(); i.hasNext(); )
@@ -486,14 +538,19 @@ public final class Instrumentor implements InjectionConsumer
 			i.next();
 			if(i.hasNext()) o.write(", ");
 		}
-		o.write(")\n  */");
+		o.write(")");
+		o.write(lineSeparator);
+		o.write("  */");
 		writeWrapperHeader(jm);
-		o.write("\n  {\n");
+		o.write(lineSeparator);
+		o.write("  {");
+		o.write(lineSeparator);
 		if(!"void".equals(jm.getType()))
 		{
 			o.write("    ");
 			o.write(jm.getType());
-			o.write(" result;\n");
+			o.write(" result;");
+			o.write(lineSeparator);
 		}
 		o.write("    if(");
 		boolean moreThanOneMutex = false;
@@ -508,9 +565,13 @@ public final class Instrumentor implements InjectionConsumer
 				moreThanOneMutex = true;
 			}
 		}
-		o.write(")\n");
+		o.write(")");
+		o.write(lineSeparator);
 		writeCall(jm);
-		o.write("    else\n    {\n");
+		o.write("    else");
+		o.write(lineSeparator);
+		o.write("    {");
+		o.write(lineSeparator);
 		writeChangedCheckerCall();
 		for(int j=0; j<class_state.taskInstrumentors.length; j++)
 			class_state.taskInstrumentors[j].onWrapperPre(o, jm);
@@ -518,9 +579,13 @@ public final class Instrumentor implements InjectionConsumer
 		writeChangedCheckerCall();
 		for(int j=0; j<class_state.taskInstrumentors.length; j++)
 			class_state.taskInstrumentors[j].onWrapperPost(o, jm);
-		o.write("    }\n");
+		o.write("    }");
+		o.write(lineSeparator);
 		if(!"void".equals(jm.getType()))
-			o.write("    return result;\n");
+		{
+			o.write("    return result;");
+			o.write(lineSeparator);
+		}
 		o.write("  }");
 	}
 	
@@ -533,13 +598,25 @@ public final class Instrumentor implements InjectionConsumer
 	{
 		Writer o=output;
 		
-		o.write("/**\n    A default constructor for checking ocl constraints,\n    replacing the automatically generated constructor.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+		o.write("/**");
+		o.write(lineSeparator);
+		o.write("    A default constructor for checking ocl constraints,");
+		o.write(lineSeparator);
+		o.write("    replacing the automatically generated constructor.");
+		o.write(lineSeparator);
+		o.write("    Generated automatically, DO NOT CHANGE!");
+		o.write(lineSeparator);
+		o.write("    @author ");
 		o.write(OCL_AUTHOR);
-		o.write("\n  */");
+		o.write(lineSeparator);
+		o.write("  */");
 		if(Modifier.isPublic(jc.getModifiers()))
 			o.write("public ");
 		o.write(jc.getName());
-		o.write("()\n  {\n");
+		o.write("()");
+		o.write(lineSeparator);
+		o.write("  {");
+		o.write(lineSeparator);
 		for(int j=0; j<class_state.taskInstrumentors.length; j++)
 			class_state.taskInstrumentors[j].onWrapperDefaultConstructor(o, jc);
 		o.write("  }");

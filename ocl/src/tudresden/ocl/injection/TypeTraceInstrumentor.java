@@ -24,6 +24,13 @@ import tudresden.ocl.injection.lib.TypeTracer;
 
 public final class TypeTraceInstrumentor implements TaskInstrumentor
 {
+	private String lineSeparator;
+	
+	public void setLineSeparator(final String lineSeparator)
+	{
+		this.lineSeparator = lineSeparator;
+	}
+	
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed) throws IOException
 	{
 		if(is_weakly_typed)
@@ -34,7 +41,8 @@ public final class TypeTraceInstrumentor implements TaskInstrumentor
 			o.write(ja.getFullDocName());
 			o.write("\", ");
 			o.write(ja.getName());
-			o.write(");\n");
+			o.write(");");
+			o.write(lineSeparator);
 		}
 	}
 	

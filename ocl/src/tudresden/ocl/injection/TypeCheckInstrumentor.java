@@ -31,6 +31,13 @@ public final class TypeCheckInstrumentor implements TaskInstrumentor
 		this.violationmacro=violationmacro;
 	}
 	
+	private String lineSeparator;
+	
+	public void setLineSeparator(final String lineSeparator)
+	{
+		this.lineSeparator = lineSeparator;
+	}
+	
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed) throws IOException
 	{
 		write(o, ja, Check.CHECK_ELEMENT_TYPES, ja.getElementType());
@@ -59,7 +66,8 @@ public final class TypeCheckInstrumentor implements TaskInstrumentor
 				throw new RuntimeException();
 			o.write(" type checker failed at feature '");
 			o.write(ja.getName());
-			o.write("' of object \"+this+\".\");\n");
+			o.write("' of object \"+this+\".\");");
+			o.write(lineSeparator);
 		}
 	}
 	

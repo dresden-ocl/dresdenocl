@@ -918,5 +918,5 @@ public final class Injector
     //System.out.println("docparagraphs:>"+tagname+"< >"+result+"<");
     return resultarray;
   }
-
+	
 }
