@@ -5,12 +5,12 @@ This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
 version 2.1 of the License, or (at your option) any later version.
- 
+
 This library is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 Lesser General Public License for more details.
- 
+
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -30,21 +30,21 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 	 * @see #getElementType
 	 */
 	private HashMap elementtypes=new HashMap();
-	
+
 	/**
 	 * Maps from java.lang.reflect.Field to java.lang.Class.
 	 * This is the cache for getKeyType.
 	 * @see #getKeyType
 	 */
 	private HashMap keytypes=new HashMap();
-	
+
 	/**
 	 * Contains all classes, for which the source code has been attempted to parse.
 	 * Serves as negative cache for source code or @elementtype tags not found.
 	 */
 	private HashSet parsedclasses=new HashSet();
-	
-	
+
+
 	public Class getElementType(Field field)
 	{
 		Class result=(Class)elementtypes.get(field);
@@ -53,7 +53,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 		checkField(field);
 		return (Class)elementtypes.get(field);
 	}
-	
+
 	public Class getKeyType(Field field)
 	{
 		Class result=(Class)keytypes.get(field);
@@ -62,19 +62,19 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 		checkField(field);
 		return (Class)keytypes.get(field);
 	}
-	
+
 	private void checkField(Field field)
 	{
 		final Class fieldclass=field.getDeclaringClass();
 		if(parsedclasses.contains(fieldclass))
 			return;
-		
+
 		//System.out.println("checkField("+field+"):");
-		
+
 		Class declaringclass=fieldclass;
 		while(fieldclass.getDeclaringClass()!=null)
 			declaringclass=fieldclass.getDeclaringClass();
-		
+
 		java.io.InputStream inputstream=
 		declaringclass.getResourceAsStream(JavaFile.extractClassName(declaringclass.getName())+".java");
 		if(inputstream==null)
@@ -82,7 +82,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 			System.out.println("SourceReflectionExtender: source file for "+declaringclass.getName()+" not found.");
 			return;
 		}
-		
+
 		try
 		{
 			java.io.Reader reader=new java.io.InputStreamReader(inputstream);
@@ -102,12 +102,12 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 		catch(java.io.IOException e)
 		{ System.out.println(e); return; }
 	}
-	
+
 	public String toString()
 	{
 		return getClass().getName();
 	}
-	
+
 	final class ReflectionConsumer implements InjectionConsumer
 	{
 		/**
@@ -115,16 +115,19 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 		 * Is null for the root package.
 		 */
 		private String packagename;
-		
+
 		private JavaClass current_class=null;
-		
+
 		private Class current_classobject=null;
-		
+
+		private final ClassLoader classLoader;
+
 		ReflectionConsumer(String packagename)
 		{
 			this.packagename=packagename;
+			this.classLoader= getClass().getClassLoader();
 		}
-		
+
 		public void onPackage(JavaFile javafile) throws InjectorParseException
 		{
 			if(this.packagename==null)
@@ -132,24 +135,24 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 			if(!this.packagename.equals(javafile.getPackageName()))
 				throw new InjectorParseException("expected package "+this.packagename+", found "+javafile.getPackageName()+'.');
 		}
-		
+
 		public void onImport(String importname)
 		{
 		}
-		
+
 		public void onClass(JavaClass cc)
 		{
 			try
 			{
 				String fullclassname=cc.getFullName();
-				current_classobject=Class.forName(fullclassname);
+				current_classobject=Class.forName(fullclassname, false, classLoader);
 				parsedclasses.add(current_classobject);
 				current_class=cc;
 			}
 			catch(ClassNotFoundException e)
 			{ throw new RuntimeException(e.toString()); }
 		}
-		
+
 		public void onClassEnd(JavaClass cc) throws java.io.IOException
 		{
 			if(current_class!=cc)
@@ -157,11 +160,11 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 			current_class=current_class.getParent();
 			current_classobject=current_classobject.getDeclaringClass();
 		}
-		
+
 		public void onFileEnd()
 		{
 		}
-		
+
 		public void onBehaviourHeader(JavaBehaviour jb)
 		{
 		}

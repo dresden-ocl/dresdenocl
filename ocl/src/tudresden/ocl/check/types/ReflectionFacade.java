@@ -143,7 +143,7 @@ public class ReflectionFacade implements ModelFacade
         } else {
           className=packageNames[i]+"."+name;
         }
-        Class c=Class.forName(className);
+        Class c=Class.forName(className, false, getClass().getClassLoader());
         ret=getClassAny(c);
       }
       catch (ClassNotFoundException cnf) {

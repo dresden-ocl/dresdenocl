@@ -183,14 +183,16 @@ public final class JavaFile
 			typename=typename.substring(0,typename.length()-"[]".length());
 			//System.out.println("modified typename to "+arrayBefore+typename+arrayAfter);
 		}
-		
+
+		final ClassLoader classLoader = getClass().getClassLoader();
+
 		// implements Java Language Specification 6.5.4.2 "Qualified Type Names"
 		// I dont know, how this should work for inner classes, TODO.
 		if(typename.indexOf('.')>=0)
 		{
 			try
 			{
-				return Class.forName(arrayBefore+typename+arrayAfter);
+				return Class.forName(arrayBefore+typename+arrayAfter, false, classLoader);
 			}
 			catch(ClassNotFoundException e)
 			{
@@ -231,7 +233,8 @@ public final class JavaFile
 			packagename!=null ?
 			packagename+'.'+typename :
 				typename) +
-				arrayAfter);
+				arrayAfter,
+			false, classLoader);
 		}
 		catch(ClassNotFoundException e)
 		{};
@@ -241,7 +244,7 @@ public final class JavaFile
 		{
 			String s=(String)(import_single.get(typename));
 			if(s!=null)
-				return Class.forName(arrayBefore+s+arrayAfter);
+				return Class.forName(arrayBefore+s+arrayAfter, false, classLoader);
 		}
 		catch(ClassNotFoundException e)
 		{
@@ -257,7 +260,7 @@ public final class JavaFile
 			String full_element_type=arrayBefore+importString+typename+arrayAfter;
 			try
 			{
-				final Class x=Class.forName(full_element_type);
+				final Class x=Class.forName(full_element_type, false, classLoader);
 				if(result!=null)
 				{
 					throw new InjectorParseException(

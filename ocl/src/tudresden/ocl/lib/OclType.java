@@ -123,7 +123,7 @@ public class OclType extends OclAny {
   public static OclType getOclTypeFor(String name) {
     if (predefinedTypes.get(name)!=null) return getPredefinedTypeFor(name);
     try {
-      Class cls=Class.forName(name);
+      Class cls=Class.forName(name, false, OclType.class.getClassLoader());
       return new OclType(cls);
     } catch (ClassNotFoundException cfe) {
       return new OclType(0,"no class found for name "+name);
