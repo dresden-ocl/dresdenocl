@@ -38,8 +38,8 @@ public final class JavaAttribute extends JavaFeature
                        String name)
     throws InjectorParseException
   {
-    super(parent, modifiers, type, name);
-    if(parent==null || type==null)
+    super(parent.getFile(), parent, modifiers, type, name);
+    if(type==null)
       throw new RuntimeException();
   }
 

@@ -21,33 +21,23 @@ package tudresden.ocl.injection;
 public class JavaClass extends JavaFeature
 {
 
-  private String packagename;
-
   /**
      @parameter parent may be null for non-inner classes
      @parameter packagename may be null for root package
   */
-  public JavaClass(JavaClass parent, 
-                   String packagename, 
+  public JavaClass(JavaFile file,
+                   JavaClass parent, 
                    int modifiers, 
                    String name)
     throws InjectorParseException
   {
-    super(parent, modifiers, null, name);
-    this.packagename=packagename;
-
-    if(parent!=null && parent.getPackageName()!=packagename)
-      throw new RuntimeException();
-  }
-
-  public String getPackageName()
-  {
-    return packagename;
+    super(file, parent, modifiers, null, name);
   }
 
   public String getFullName()
   {
     StringBuffer buf=new StringBuffer();
+    String packagename=getPackageName();
     if(packagename!=null)
     {
       buf.append(packagename);
@@ -77,7 +67,7 @@ public class JavaClass extends JavaFeature
 
   public final void printMore(java.io.PrintStream o)
   {
-    o.println("    package: >"+packagename+"<");
+    o.println("    package: >"+getPackageName()+"<");
     o.println("    fullnam: >"+getFullName()+"<");
   }
 

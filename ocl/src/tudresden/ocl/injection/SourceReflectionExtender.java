@@ -75,7 +75,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       declaringclass=fieldclass.getDeclaringClass();
     
     java.io.InputStream inputstream=
-      declaringclass.getResourceAsStream(Imports.extractClassName(declaringclass.getName())+".java");
+      declaringclass.getResourceAsStream(JavaFile.extractClassName(declaringclass.getName())+".java");
     if(inputstream==null)
     {
       System.out.println("SourceReflectionExtender: source file for "+declaringclass.getName()+" not found.");
@@ -88,7 +88,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       try
       {
         (new Injector(reader, null, 
-          new ReflectionConsumer(Imports.extractPackageName(declaringclass.getName())))).parseFile();
+          new ReflectionConsumer(JavaFile.extractPackageName(declaringclass.getName())))).parseFile();
         reader.close();
       }
       catch(InjectorParseException e)
@@ -106,7 +106,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     return getClass().getName();
   }
   
-  class ReflectionConsumer implements InjectionConsumer
+  final class ReflectionConsumer implements InjectionConsumer
   {
     /**
        The package the source file is expected to be contained in.
@@ -114,8 +114,6 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     */
     private String packagename;
     
-    private Imports imports=new Imports();
-  
     private JavaClass current_class=null;
     
     private Class current_classobject=null;
@@ -125,18 +123,17 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       this.packagename=packagename;
     }
 
-    public void onPackage(String packagename) throws InjectorParseException
+    public void onPackage(JavaFile javafile) throws InjectorParseException
     {
       if(this.packagename==null)
         throw new InjectorParseException("expected root package, found "+packagename+'.');
+      String packagename=javafile.getPackageName();
       if(!this.packagename.equals(packagename))
         throw new InjectorParseException("expected package "+this.packagename+", found "+packagename+'.');
-      imports.setPackage(packagename);
     }
     
     public void onImport(String importname)
     {
-      imports.addImport(importname);
     }
   
     public void onClass(JavaClass cc)
@@ -176,7 +173,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       {
         if(last_element_type!=null)
         {
-          Class c=imports.findType(last_element_type);
+          Class c=cf.getFile().findType(last_element_type);
           //System.out.println("findType(element):"+c);
           if(c!=null)
           {
@@ -198,7 +195,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
         }
         if(last_key_type!=null)
         {
-          Class c=imports.findType(last_key_type);
+          Class c=cf.getFile().findType(last_key_type);
           //System.out.println("findType(key):"+c);
           if(c!=null)
           {

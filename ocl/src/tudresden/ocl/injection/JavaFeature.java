@@ -25,6 +25,12 @@ import tudresden.ocl.codegen.CodeFragment;
 public abstract class JavaFeature
 {
   /**
+     The java file, which contains this feature.
+     Must not be null.
+  */
+  private JavaFile file;
+  
+  /**
      The class, which contains this feature.
      May be null for top-level classes.
   */
@@ -40,16 +46,24 @@ public abstract class JavaFeature
 
   protected String name;
   
-  public JavaFeature(JavaClass parent, 
+  public JavaFeature(JavaFile file,
+                     JavaClass parent, 
                      int modifiers, 
                      String type, 
                      String name)
     throws InjectorParseException
   {
+    this.file=file;
     this.parent=parent;
     this.modifiers=modifiers;
     this.type=type;
     this.name=name;
+    
+    if(file==null)
+      throw new RuntimeException();
+    
+    if(parent!=null && file!=parent.getFile()) // JavaFile objects are flyweight
+      throw new RuntimeException();
     
     int over=modifiers&~getAllowedModifiers();
     if(over!=0)
@@ -58,7 +72,17 @@ public abstract class JavaFeature
         " not allowed for class feature "+name+
         " of type "+getClass().getName()+'.');
   }
+
+  public final JavaFile getFile()
+  {
+    return file;
+  }
   
+  public final String getPackageName()
+  {
+    return file.getPackageName();
+  }
+
   public final JavaClass getParent()
   {
     return parent;
@@ -88,7 +112,7 @@ public abstract class JavaFeature
 
   public final void print(PrintStream o)
   {
-    o.println("  "+Imports.extractClassName(getClass().getName())+
+    o.println("  "+JavaFile.extractClassName(getClass().getName())+
               " ("+java.lang.reflect.Modifier.toString(modifiers)+
               ") >"+type+
               "< >"+name+

@@ -24,7 +24,7 @@ public interface InjectionConsumer
      Encountered a package statement.
      This method is guaranteed to be called at most once.
   */
-  public void onPackage(String packagename) throws InjectorParseException;
+  public void onPackage(JavaFile javafile) throws InjectorParseException;
 
   public void onImport(String importname);
   public void onClass(JavaClass cc);

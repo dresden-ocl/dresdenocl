@@ -54,10 +54,8 @@ public class JavaMethod extends JavaFeature
                     int name_end)
     throws InjectorParseException
   {
-    super(parent, modifiers, type, name);
+    super(parent.getFile(), parent, modifiers, type, name);
     this.name_end=name_end;
-    if(parent==null)
-      throw new RuntimeException();
   }
 
   public final void addParameter(String paramtype, String paramname)

@@ -21,11 +21,12 @@ package tudresden.ocl.injection;
 import java.util.*;
 
 /**
+   Represents a parsed java file.
    Manages the mapping of type names and types.
    This depends on the current package and all 
    imported packages/classes.
 */
-public class Imports
+public final class JavaFile
 {
   private String packagename;
 
@@ -37,19 +38,28 @@ public class Imports
   */
   private ArrayList imports=new ArrayList();
 
-  public void setPackage(String packagename)
+  /**
+     @throws InjectorParseException if called more than once.
+  */
+  public final void setPackage(String packagename)
+    throws InjectorParseException
   {
     if(this.packagename!=null)
-      throw new RuntimeException();
+      throw new InjectorParseException("only one package statement allowed.");
     this.packagename=packagename;
   }
+  
+  public final String getPackageName()
+  {
+    return packagename;
+  }
 
-  public void addImport(String importname)
+  public final void addImport(String importname)
   {
     imports.add(importname);
   }
 
-  public Class findType(String typename)
+  public final Class findType(String typename)
   {
     //System.out.println("findtype: >"+typename+"<");
 

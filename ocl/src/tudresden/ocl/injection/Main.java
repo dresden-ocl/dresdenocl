@@ -41,7 +41,7 @@ final class OclInjector implements InjectionConsumer
   private String violationmakro;
 
   /**
-     Collects all methods (ClassMethod) of the current class, except automatically generated methods.
+     Collects all methods of the current class, except automatically generated methods.
      Is used only, if delayinsertions is true. Otherwise methods is null.
      @see #delayinsertions
      @see JavaMethod
@@ -68,8 +68,6 @@ final class OclInjector implements InjectionConsumer
   */
   private ArrayList typedAttributes_stack=new ArrayList();
 
-  private Imports imports=new Imports();
-
   OclInjector(Writer output, OclInjectorConfig conf)
   {
     this.output=output;
@@ -79,17 +77,12 @@ final class OclInjector implements InjectionConsumer
     this.violationmakro=conf.violationmakro;
   }
   
-  private String packagename;
-  
-  public void onPackage(String packagename) throws InjectorParseException
+  public void onPackage(JavaFile javafile) throws InjectorParseException
   {
-    this.packagename=packagename;
-    imports.setPackage(packagename);
   }
   
   public void onImport(String importname)
   {
-    imports.addImport(importname);
   }
     
   private boolean discardnextfeature=false;
@@ -429,7 +422,7 @@ final class OclInjector implements InjectionConsumer
 
   public void writeElementChecker(JavaAttribute cf) throws IOException
   {
-    Class et=imports.findType(cf.getType());
+    Class et=cf.getFile().findType(cf.getType());
 
     if(java.util.Collection.class.isAssignableFrom(et))
     {

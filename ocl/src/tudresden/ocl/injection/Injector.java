@@ -35,7 +35,7 @@ public final class Injector
   private boolean collect_when_blocking=false;
   private StringBuffer collector=new StringBuffer();
 
-  private String packagename=null;
+  private JavaFile javafile=new JavaFile();
 
   public Injector(Reader input, Writer output, InjectionConsumer consumer)
   {
@@ -524,7 +524,7 @@ public final class Injector
     //System.out.println("class ("+java.lang.reflect.Modifier.toString(modifiers)+") >"+classname+"<");
 
     JavaClass cc=
-      new JavaClass(parent, packagename, modifiers, classname);
+      new JavaClass(javafile, parent, modifiers, classname);
     //cc.print(System.out);
 
     consumer.onClass(cc);
@@ -588,13 +588,11 @@ public final class Injector
           String bufs=buf.toString();
           if("package".equals(bufs))
           {
-            if(packagename!=null)
-              throw new InjectorParseException("only one package statement allowed.");
             c=readToken();
             if(c!='\0')
               throw new InjectorParseException("package name expected.");
-            packagename=buf.toString();
-            consumer.onPackage(packagename);
+            javafile.setPackage(buf.toString());
+            consumer.onPackage(javafile);
             //System.out.println("package >"+buf.toString()+"<");
             c=readToken();
             if(c!=';')
@@ -605,8 +603,10 @@ public final class Injector
             c=readToken();
             if(c!='\0')
               throw new InjectorParseException("class name expected.");
-            //System.out.println("import >"+buf.toString()+"<");
-            consumer.onImport(buf.toString());
+            String importstring=buf.toString();
+            //System.out.println("import >"+importstring+"<");
+            javafile.addImport(importstring);
+            consumer.onImport(importstring);
             c=readToken();
             if(c!=';')
               throw new InjectorParseException("';' expected.");
