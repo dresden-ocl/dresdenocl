@@ -60,6 +60,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
          */
 	Map navigation;
         Set involvedTables;
+        Set modelTypeFeatures;
 	Hashtable declarators;
 	boolean formatCode = true;
 	int aliasCount;
@@ -189,6 +190,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 		constrainedType = null;
         	constraintName = null;
 		navigation = new HashMap();
+                modelTypeFeatures = new HashSet();
                 involvedTables = new HashSet();
 		declarators = new Hashtable();
 		aliasCount = 0;
@@ -530,13 +532,13 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         	String start, next, startFeature, startType, featureName;
         	Object[] tail;
         	MappedClass mc = null;
-        	Guide g = null, guide;
+        	Guide g = null, guide = null;
         	List guides;
         	Node type;
                 int dColInd;
                 String inheritedFeature = "";
-                boolean assEndSucc;
-                
+                boolean typeFeatSucc = false;
+                                
                 if (pex instanceof AFeaturePrimaryExpression) {
                         startFeature = ((AFeaturePrimaryExpression)pex).getPathName().toString().trim();
                         
@@ -561,48 +563,54 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                         }
                         
                         // get MappedClass for start type
-                        guides = new ArrayList();
                         mc = map.getMappedClass(startType);
                                                 
                         // get guides to the feature starting from startType
+                        guides = new ArrayList();
                         try {
                         	if (mc.isAttribute(featureName)) {
-                        		guides.add(mc.getAttributeGuide(featureName));
+                                        guide = mc.getAttributeGuide(featureName);
+                        		guides.add(guide);
                         	} else if (mc.isAssociationEnd(featureName)) {
-                        		guides.add(mc.getJoinGuide(featureName));
+                                        guide = mc.getJoinGuide(featureName);
+                        		guides.add(guide);
                         	}                        	
                         } catch(NullPointerException e) {
-                        	// feature name is given in one of the postfix expression tails                                
+                        	// feature name is given in one of the postfix expression tails
+                                guide = mc.getJoinGuide(mc.getClassName());
                         }
                         
                         // iterate the postfix expression tail and assign navigation guides
         		tail = node.getPostfixExpressionTail().toArray();
-                        assEndSucc = false;
-
+                        
         		for (int i=0; i<tail.length; i++) {
                                 next = ((AFeatureCall)((APostfixExpressionTail)tail[i]).getFeatureCall()).getPathName().toString().trim();
-
+                                
                                 if (mc.isAttribute(next)) {
         				// next feature is an attribute
         				guide = mc.getAttributeGuide(next);
         				if ((i==0) && (dColInd == -1)) guide.setAlias(startFeature.toUpperCase());
-                                      	guides.add(0, guide);
-                                        assEndSucc = true;
+                                      	guides.add(0, guide);    
+                                        typeFeatSucc = true;
+                                        modelTypeFeatures.add(tail[i]);
             			} else if (mc.isAssociationEnd(next)) {
         				// next feature navigates to an association end
         				guide = mc.getJoinGuide(next);
         				if ((i==0) && (dColInd == -1)) guide.setAlias(startFeature.toUpperCase());
         				guides.add(0, guide);
-	       				mc = mc.getAssociationEnd(next);
-                                        assEndSucc = true;
+	       				mc = mc.getAssociationEnd(next);                                        
+                                        typeFeatSucc = true;
+                                        modelTypeFeatures.add(tail[i]);
         			} else if (oclTokens.indexOf(next) != -1) {
         				// next feature is an ocl feature --> assign guides list to last tail if it was an association end
-                                        if (assEndSucc == true) {
-                                            navigation.put(tail[i-1], guides);
-                                        }                                                          
+                                        if (typeFeatSucc) navigation.put(tail[i-1], guides);
+                                        // each ocl feature gets last determined guide information
+                                        if (guides.size() == 0) guides.add(guide);
+                                        navigation.put(tail[i], guides);
+                                        
         			};
         			
-        			// assign guides list to last postfix expression tail
+        			// assign guides list to last postfix expression tail (necessary for type features without successor)
         			if (i == (tail.length-1)) {
         				navigation.put(tail[i], guides);
         			}        			
@@ -658,10 +666,10 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                     if (guides.size() == 0) System.err.println("Empty guide list !");
                 }
 
-    		if (oclTokens.indexOf(pathName) == -1) {
-                        System.err.println("no OCL token: " + pathName);
-                    
-    			// quit if no guides list is available or complain about empty list
+    		if (modelTypeFeatures.contains(node.parent())) {
+                        modelTypeFeatures.remove(node.parent());
+                        
+                        // quit if no guides list is available or complain about empty list
     			if (guides == null) return;
     			if (guides.size() == 0) throw new RuntimeException("empty guides list at " + pathName);
     			    			    			    			
@@ -730,38 +738,35 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     			    guide.next();
     			    pkName = guide.getSelect();
                             pkTable = guide.getFrom();
-                            prepareJoin(guides);                         
+                            /*
+                            try {
+                                prepareJoin(guides);                      
+                            } catch (Exception e) {
+                                // some guide lists are not supposed to serve joins 
+                                // in that case, the last guide has no context alias specified                                
+                            }
+                            */
                         } else {
                             pkName = STANDARDKEY;
                             pkTable = STANDARDTABLE;
                         }                        
    			
    			// generate code
-   			// features that need to be mapped using the MODEL TYPE QUERY
-                        if (oclTypeOperations.indexOf(pathName) != -1) {
-                            // determine type
-                            Type type = theTree.getNodeType(node.parent());
-                            String tmp = ((Collection)type).getElementType().toString();            
-                            System.err.println(tmp);
-                            guide = map.getMappedClass(tmp).getJoinGuide(tmp);
-                            guide.reset();
-    			    guide.next();
-                            pkName = guide.getSelect();
-                            pkTable = guide.getFrom();
-                        }
+                        ca.reset();
                         
-   			if (pathName.equals("allInstances")) {
-                                                           
-   				ca.reset();
-        			ca.setArgument("object", pkName);
+   			// features that need to be mapped using the MODEL TYPE QUERY
+                       	if (pathName.equals("allInstances")) {                       
+   				ca.setArgument("object", pkName);
         			ca.setArgument("tables", pkTable);
-    			
-        			try {
-        				thisCode = ca.getCodeFor("feature_call", "allInstances");
-        			} catch (Exception e) {
-        				System.err.println(e.toString());
-        			}
-   			}
+                                codeForPathName = true;
+                        } else if (pathName.equals("name")) {
+                                ca.setArgument("name", "");
+                        } else if (pathName.equals("attributes")) {
+                        } else if (pathName.equals("associationEnds")) {
+                        } else if (pathName.equals("operations")) {
+                        } else if (pathName.equals("supertypes")) {
+                        } else if (pathName.equals("allSupertypes")) {
+                        }
                         
                         // features on OclAny --> CLASS AND ATTRIBUTE
                         if (pathName.equals("oclIsKindOf")) {
@@ -945,8 +950,19 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         			      		System.err.println(e.toString());
         			    	}
                           	}
+                                
+                                codeForPathName = false;
                         }
    		}
+                
+                // query code agent for target code
+                if (codeForPathName) {
+                    try {
+                        thisCode = ca.getCodeFor("feature_call", pathName);
+                    } catch (Exception e) {
+        	        System.err.println(e.toString());
+        	    }
+                }
 
    		// replace task with generated target code
     		try {

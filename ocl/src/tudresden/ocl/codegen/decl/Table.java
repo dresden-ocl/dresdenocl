@@ -424,6 +424,21 @@ public class Table {
 			return true;
 		}
 	}
+        
+        /**
+         * @return a set of attribute names that are associated to the table columns
+         */
+        public Set attributes() { 
+            Set result = new HashSet();
+            String att;
+            
+            for (Iterator i=columns.iterator(); i.hasNext(); ) {
+                att = ((Column)i.next()).attName.trim();
+                if ((att != null) && (!att.equals(""))) result.add(att);
+            }
+            
+            return Collections.unmodifiableSet(result);
+        }
 
 	/**
          * @return a string representation of a table object
@@ -482,8 +497,8 @@ public class Table {
 
 		return null;
         }
-
-	private class Column {
+        
+        private class Column {
 		Column(String attName, String type, String colName, boolean pk) {
 			this.colName = colName;
 			this.attName = attName;

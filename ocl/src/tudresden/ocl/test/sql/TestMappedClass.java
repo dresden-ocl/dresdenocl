@@ -314,12 +314,38 @@ public class TestMappedClass extends TestCase {
 		}
 	}
 	
+        public void testMetaInfoAccess() {
+                Set tmp;
+                
+                tmp = mc3.attributes();
+                assert(tmp.size() == 6);
+                assert(tmp.contains("c1"));
+                assert(tmp.contains("c2"));
+                assert(tmp.contains("c3"));
+                assert(tmp.contains("a1"));
+                assert(tmp.contains("a2"));
+                assert(tmp.contains("a3"));
+                
+                tmp = mc3.associationEnds();
+                assert(tmp.size() == 1);
+                assert(tmp.contains("foo"));
+                
+                tmp = mc3.supertypes();
+                assert(tmp.size() == 1);
+                assert(tmp.contains("A"));
+                
+                tmp = mc3.allSupertypes();
+                assert(tmp.size() == 1);
+                assert(tmp.contains("A"));                                     
+        }
+        
 	public static Test suite() {
 		TestSuite t=new TestSuite();
     		
     		t.addTest(new TestMappedClass("testCaseA"));
     		t.addTest(new TestMappedClass("testCaseB"));
     		t.addTest(new TestMappedClass("testCaseC"));
+                t.addTest(new TestMappedClass("testMetaInfoAccess"));
 	  	
     		return t;
 	}

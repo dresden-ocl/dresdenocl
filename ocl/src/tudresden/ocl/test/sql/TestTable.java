@@ -210,6 +210,21 @@ public class TestTable extends TestCase {
 		} catch(NullPointerException e) {
 		}
 	}
+        
+        public void testAttributeAccess() {
+		Table t = new Table("A");
+
+		t.addColumn(" ", "int", "a1", true);
+		t.addColumn("att2", "boolean", "a2", false);
+		t.addColumn("att3", "String", "a3", false);
+		t.addColumn("att3", "String", "a4", false);
+		t.addColumn("att4", "long", "a5");
+                
+                assert(t.attributes().size() == 3);
+                assert(t.attributes().contains("att2"));
+                assert(t.attributes().contains("att3"));
+                assert(t.attributes().contains("att4"));                
+        }
 
 	public static Test suite() {
 		TestSuite t=new TestSuite();
@@ -218,6 +233,7 @@ public class TestTable extends TestCase {
     		t.addTest(new TestTable("testPrimaryKeyAccess"));
     		t.addTest(new TestTable("testForeignKeyAccess"));
     		t.addTest(new TestTable("testPropertyAccess"));
+                t.addTest(new TestTable("testAttributeAccess"));
 
     		return t;
 	}

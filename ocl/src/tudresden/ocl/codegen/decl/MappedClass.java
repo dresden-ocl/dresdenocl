@@ -55,7 +55,7 @@ public class MappedClass {
 	private List tables;
 	/** a Set containing all method names of the class for which isQuery holds */
 	private Set queries;
-	/** a Map of association end names to  AssociationEnd objects */
+	/** a Set of association ends */
 	private Set associationEnds;
         /** a Map of all direct superclass names to the MappedClass objects of the superclasses */
         private Map superclasses;
@@ -454,7 +454,77 @@ public class MappedClass {
 			return false;
 		}
 	}
+        
+        /**
+         *  @return the set of names of the attributes of the mapped class
+         */
+        public Set attributes() {
+            Set result = new HashSet();
+            
+            // search this class
+            for (Iterator i=tables.iterator(); i.hasNext(); ) {
+                result.addAll(((Table)i.next()).attributes());
+	    }
 
+	    // search in superclasses
+	    for (Iterator i=superclasses.values().iterator(); i.hasNext(); ) {
+	        result.addAll(((MappedClass)i.next()).attributes());
+	    }
+
+            return Collections.unmodifiableSet(result);
+        }
+        
+        /**
+         *  @return the set of names of navigatable associationEnds of the mapped class
+         */
+        public Set associationEnds() {
+            Set result = new HashSet();
+            AssociationEnd assEnd;
+            
+            for (Iterator i=associationEnds.iterator(); i.hasNext(); ) {
+                assEnd = (AssociationEnd)i.next();
+                result.add(assEnd.name);
+            }
+            
+            return Collections.unmodifiableSet(result);
+        }
+        
+        /**
+         *  @return the set of names of operations of the mapped class
+         */
+        public Set operations() {
+            throw new IllegalStateException("Methode MappedClass.operations() not supported yet !");
+        }
+        
+        /**
+         *  @return the set of names of direct supertypes of the mapped class
+         */
+        public Set supertypes() {
+            Set result = new HashSet();
+            
+            for (Iterator i=superclasses.values().iterator(); i.hasNext(); ) {
+	        result.add(((MappedClass)i.next()).getClassName());
+	    }
+            
+            return Collections.unmodifiableSet(result);
+        }
+        
+        /**
+         *  @return the set of names of all supertypes of the mapped class
+         */
+        public Set allSupertypes() {
+            Set result = new HashSet();
+            MappedClass mc;
+            
+            for (Iterator i=superclasses.values().iterator(); i.hasNext(); ) {
+                mc = (MappedClass)i.next();
+	        result.add(mc.getClassName());
+                result.addAll(mc.allSupertypes());
+	    }
+            
+            return Collections.unmodifiableSet(result);
+        }
+        
 	// -------------------------------- private stuff ------------------------------------
 	/**
 	 * Note: This methode does not consider superclasses !
