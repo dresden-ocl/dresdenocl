@@ -48,39 +48,49 @@ public class JavaMethod extends JavaBehaviour
     throws InjectorParseException
   {
     // parent must not be null
-    super(parent, modifiers, type, name);
-    this.name_end=name_end;
+    super(parent, modifiers, type, 
+      (name.endsWith(WRAPPER_SUFFIX)) ?
+      name.substring(0, name.length()-WRAPPER_SUFFIX.length()):
+      name
+      );
+
     if(type==null)
       throw new RuntimeException();
+
+    this.name_end=name_end;
   }
 
   public final boolean isConstructor()
   {
     return false;
   }
+  
+  public final void setLiteral(String literal)
+  {
+    int wsl=WRAPPER_SUFFIX.length();
+    if(WRAPPER_SUFFIX.equals(literal.substring(name_end-wsl, name_end)))
+    {
+      literal=
+        literal.substring(0, name_end-wsl)+
+        literal.substring(name_end, literal.length());
+      name_end-=wsl;
+    }
+    super.setLiteral(literal);
+  }
 
   public final String getWrappedName()
   {
-    if(name.endsWith(WRAPPER_SUFFIX))
-      return name;
-    else
-      return name+WRAPPER_SUFFIX;
+    return name+WRAPPER_SUFFIX;
   }
 
   public final String getNotWrappedName()
   {
-    if(name.endsWith(WRAPPER_SUFFIX))
-      return name.substring(0, name.length()-WRAPPER_SUFFIX.length());
-    else
-      return name;
+    return name;
   }
   
   public final String getWrappedLiteral()
   {
-    if(name.endsWith(WRAPPER_SUFFIX))
-      return literal;
-    else
-      return
+    return
         literal.substring(0, name_end)+
         WRAPPER_SUFFIX+
         literal.substring(name_end, literal.length());
@@ -88,12 +98,7 @@ public class JavaMethod extends JavaBehaviour
 
   public final String getNotWrappedLiteral()
   {
-    if(name.endsWith(WRAPPER_SUFFIX))
-      return
-        literal.substring(0, name_end-WRAPPER_SUFFIX.length())+
-        literal.substring(name_end, literal.length());
-    else
-      return literal;
+    return literal;
   }
 
   /**
