@@ -61,7 +61,7 @@ public abstract class TupleTypeImpl extends MofClassImpl implements TupleType{
             Iterator otherIt = c.allAttributes().iterator();
             while(otherIt.hasNext()){
                 Attribute otherAttr = (Attribute) otherIt.next();
-                Attribute matchingAttr =  (Attribute)lookupAttribute(otherAttr.getName());
+                Attribute matchingAttr =  (Attribute)lookupAttribute(otherAttr.getNameA());
                 if(matchingAttr ==  null){return false;}
                
                 Classifier matchingType = matchingAttr.getType();
@@ -89,10 +89,10 @@ public abstract class TupleTypeImpl extends MofClassImpl implements TupleType{
             Iterator otherIt = c.allAttributes().iterator();
             while(otherIt.hasNext()){
                 Attribute otherAttr = (Attribute) otherIt.next();
-                Attribute matchingAttr =  (Attribute)lookupAttribute(otherAttr.getName());
+                Attribute matchingAttr =  (Attribute)lookupAttribute(otherAttr.getNameA());
                 if(matchingAttr !=  null){
 
-                    String name = otherAttr.getName();
+                    String name = otherAttr.getNameA();
                     tudresden.ocl20.jmi.ocl.commonmodel.Classifier type = ((tudresden.ocl20.jmi.ocl.commonmodel.Classifier)matchingAttr.getType()).commonSuperType((tudresden.ocl20.jmi.ocl.commonmodel.Classifier)otherAttr.getType());
                     Attribute a = (Attribute)modelPkg.getAttribute().make(name,type);
                     commonAttributes.add(a);

@@ -50,13 +50,13 @@ public abstract class VariableDeclarationImpl extends tudresden.ocl20.jmi.mof14.
     
     public tudresden.ocl20.jmi.ocl.commonmodel.Parameter asParameter() {
         ModelPackage modelPkg = (ModelPackage)refOutermostPackage();
-        Parameter p = modelPkg.getParameter().createParameter(getName(), getName(), DirectionKindEnum.IN_DIR,modelPkg.createMultiplicityType(1,1, false, false));
+        Parameter p = modelPkg.getParameter().createParameter(getNameA(), getNameA(), DirectionKindEnum.IN_DIR,modelPkg.createMultiplicityType(1,1, false, false));
         p.setType((MofClass)getType());
         return p;
     }
     
     public tudresden.ocl20.jmi.ocl.commonmodel.Attribute asAttribute() {
-        return ((ModelPackage)refOutermostPackage()).getAttribute().make(getName(),getType());
+        return ((ModelPackage)refOutermostPackage()).getAttribute().make(getNameA(),getType());
     }
     
 }

@@ -53,14 +53,14 @@ public abstract class VariableDeclarationImpl extends tudresden.ocl20.jmi.uml15.
     
     public tudresden.ocl20.jmi.ocl.commonmodel.Parameter asParameter() {
         Parameter p = ((Uml15Package)refOutermostPackage()).getCore().getParameter().createParameter();
-        p.setName(getName());
+        p.setNameA(getNameA());
         p.setKind(ParameterDirectionKindEnum.PDK_IN);
         p.setType((Classifier)getType());
         return p;
     }
     
     public tudresden.ocl20.jmi.ocl.commonmodel.Attribute asAttribute() {
-        return ((Uml15Package)refOutermostPackage()).getCore().getAttribute().make(getName(),getType());
+        return ((Uml15Package)refOutermostPackage()).getCore().getAttribute().make(getNameA(),getType());
     }
     
 }

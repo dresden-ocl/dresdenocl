@@ -55,10 +55,10 @@ public abstract class ClassifierImpl extends GeneralizableElementImpl implements
     
     /** get the "::"-separated pathname of this classifier */    
      public java.lang.String getPathNameA() {
-        String result = getName();
+        String result = getNameA();
         Namespace container = this.getContainer();
         while(container!=null){
-            result=container.getName()+"::"+result;
+            result=container.getNameA()+"::"+result;
             container=container.getContainer();
         }
         return result;

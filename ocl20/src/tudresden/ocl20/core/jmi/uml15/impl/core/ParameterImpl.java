@@ -59,7 +59,7 @@ public abstract class ParameterImpl extends ModelElementImpl implements Paramete
         if(getKind().equals(ParameterDirectionKindEnum.PDK_RETURN)){
             name = "result";
         } else {
-            name = getName();
+            name = getNameA();
         }
         tudresden.ocl20.jmi.ocl.commonmodel.Classifier type = this.getTypeA(); 
         

@@ -99,6 +99,7 @@ public class WellFormednessException extends Exception{
     public static final int EC_COLL_RANGE_INT= 49;
     public static final int EC_INVARIANT_MUST_BE_BOOLEAN= 50;
     public static final int EC_ACCU_VAR_NO_TYPE= 51;
+    public static final int EC_OP_BODY_TYPE_MUST_CONFORM= 52;
     
        
         
@@ -154,7 +155,8 @@ public class WellFormednessException extends Exception{
 /*48*/        "Referred association end is missing.",
 /*49*/        "First and last of a collection range must be integers.",
 /*50*/        "The type of an invariant must be boolean.",
-/*51*/        "The type of the accumulator variable is missing."
+/*51*/        "The type of the accumulator variable is missing.",
+/*52*/        "The type of the body expression must conform to result type of the operation."
     };
     
     

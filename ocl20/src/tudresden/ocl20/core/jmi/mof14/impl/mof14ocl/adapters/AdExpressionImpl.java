@@ -72,4 +72,8 @@ public abstract class AdExpressionImpl extends InstanceHandler implements AdExpr
         return this.getConstraint();
     }
     
+    public void setConstraintA(tudresden.ocl20.jmi.ocl.commonmodel.Constraint c) {
+        this.setConstraint((Constraint) c);
+    }
+    
 }

@@ -73,8 +73,10 @@ public class OclModel {
      */
     public OclModel(String metamodelname, String modelxmi) throws OclModelException {
         try{
+            this.beginTrans(true);
             model = mm.loadOclModel(metamodelname, modelxmi);
             init(metamodelname);
+            this.endTrans(false);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -91,9 +93,11 @@ public class OclModel {
      */    
     public OclModel(String metamodelname, String modelxmi, String name) throws OclModelException {
         try{
+            this.beginTrans(true);
             model = mm.loadOclModel(metamodelname, modelxmi, name);
             //models.add(modelPackage);
             init(metamodelname);
+            this.endTrans(false);
         }
         catch (Exception e){
             e.printStackTrace();

@@ -85,7 +85,7 @@ public class JmiTypeMapping{
             }
             
             else if(type instanceof PrimitiveType){
-                String name = type.getName();
+                String name = type.getNameA();
                 //like "JmiType.INTEGER"
                 result.append(getPackagePrefix());
                 result.append("JmiType.");
@@ -141,7 +141,7 @@ public class JmiTypeMapping{
                     types.append(',');
                 }
                 names.append('"');
-                names.append(sf.getName());
+                names.append(sf.getNameA());
                 names.append('"');
                 appendNonOclType(sf.getType(), types);
                 isFirst = false;

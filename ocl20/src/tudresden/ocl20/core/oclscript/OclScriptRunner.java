@@ -178,13 +178,14 @@ public class OclScriptRunner {
                             me=ace;
                             nextToken(st, ';');
                         }
-                        else if(keyword.equals("IteratorVar")){
+                        else if(keyword.equals("IteratorVar") || keyword.equals("ParamVar")){
                             String name = getString(st);
                             ModelElement type = getForId(st);
                             if(!(type instanceof Classifier)){
                                 throw new ParseException(st.lineno(), keyword); //wrong type
                             }
-                            me = mh.createIteratorVar(name, (Classifier)type);
+                            me = mh.createUninitializedVar(name, (Classifier)type);
+                            
                             nextToken(st, ';');
                         }
                         else if(keyword.equals("Var")){
@@ -265,11 +266,29 @@ public class OclScriptRunner {
                             String name = getString(st);
                             OclExpression bodyExp = getExpForId(st);
                             String body = getString(st);
-                            
-                            me = mh.createInvariant(context, name, bodyExp, body);
+                                             
                             nextToken(st, ';');
+                            me = mh.createInvariant(context, name, bodyExp, body);
                         }
-                                              
+                        
+                        else if (keyword.equals("OpDef")){
+                            Classifier context = getClassifierForId(st);
+                            String name = getString(st);
+                            Classifier resultType = getClassifierForId(st);
+                            OclExpression bodyExp = getExpForId(st);
+                            
+                            List paramVarList = new ArrayList();
+                            VariableDeclaration vd = null;
+                            do{
+                                vd = this.getVarDeclForIdOrNull(st);
+                                if(vd!=null){
+                                    paramVarList.add(vd);
+                                }
+                            } while (vd != null);
+                            nextToken(st, ';');
+                            
+                            me = mh.createOperationDef(context, name+"OperationDef", name, resultType, paramVarList, bodyExp, "opBody");
+                        }                     
                         else{
                             throw new ParseException(st.lineno(), keyword); //unknown keyword
                         }
@@ -340,6 +359,19 @@ public class OclScriptRunner {
         }
         return (VariableDeclaration) me;
     }
+    
+    private VariableDeclaration getVarDeclForIdOrNull(StreamTokenizer st)throws IOException, ParseException{
+        try{
+            ModelElement me = getForId(st);
+            return (VariableDeclaration) me;
+        }
+        catch (ParseException pe){
+            st.pushBack();
+            return null;
+        }     
+    }
+    
+    
         
     private OclExpression getExpForIdOrEndOfStmt(StreamTokenizer st)throws IOException, ParseException{
         int token = st.nextToken(); 

@@ -67,24 +67,21 @@ public abstract class ConstraintImpl extends ModelElementImpl implements Constra
         return null;
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.ExpressionInOcl getBodyA() {
+    public tudresden.ocl20.jmi.ocl.commonmodel.Expression getBodyA() {
         Expression exp = this.getBody();
-        if(exp instanceof ExpressionInOcl){
-            return (ExpressionInOcl) exp;
-        }
-        return null;
+        return exp;
     }
     
-    public void setBodyA(tudresden.ocl20.jmi.ocl.expressions.ExpressionInOcl exp) {
+    public void setBodyA(tudresden.ocl20.jmi.ocl.commonmodel.Expression exp) {
         this.setBody((ExpressionInOcl)exp);      
     }
     
-    public void setStereoTypeNameA(java.lang.String name) {
+    public void setStereotypeNameA(java.lang.String name) {
         java.util.Collection c = this.getStereotype();
         Stereotype st;
         if(!c.isEmpty()){
             st = (Stereotype) c.iterator().next();
-            st.setName(name);
+            st.setNameA(name);
         } else {
             st = ((CorePackage) this.refImmediatePackage()).getStereotype().createStereotype(name, VisibilityKindEnum.VK_PUBLIC, false, false, false, false, "",null);
             st.setNamespace(this.getNamespace());
@@ -97,7 +94,7 @@ public abstract class ConstraintImpl extends ModelElementImpl implements Constra
         java.util.Collection c = this.getStereotype();
         if(!c.isEmpty()){
             Stereotype st = (Stereotype) c.iterator().next();
-            return st.getName();
+            return st.getNameA();
         }
         return null;
     }

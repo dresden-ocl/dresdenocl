@@ -61,6 +61,7 @@ public class UmlOclModelLoadTest {
         try{
             
             model = new OclModel(MetaModelConst.UML15, modelXmi);
+            model.beginTrans(true);
             
             tudresden.ocl20.jmi.ocl.commonmodel.Package topPackage = model.getTopPackage();
             
@@ -165,13 +166,17 @@ public class UmlOclModelLoadTest {
             
             OclMessageType omt = oclLib.makeOclMessageType(op);
             System.out.println(omt.commonSuperType(c));
+            
                         
         }
         catch(Exception e){
             e.printStackTrace();
         }
         finally{
-            if(model != null){model.close();}
+            if(model != null){
+                model.endTrans(false);
+                model.close();
+            }
         }
     }
     

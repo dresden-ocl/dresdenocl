@@ -61,7 +61,7 @@ public abstract class TupleTypeImpl extends ClassifierImpl implements TupleType{
             Iterator otherIt = c.allAttributes().iterator();
             while(otherIt.hasNext()){
                 Attribute otherAttr = (Attribute) otherIt.next();
-                Attribute matchingAttr =  (Attribute)lookupAttribute(otherAttr.getName());
+                Attribute matchingAttr =  (Attribute)lookupAttribute(otherAttr.getNameA());
                 if(matchingAttr ==  null){return false;}
                 if(!matchingAttr.getType().conformsTo(otherAttr.getType())){
                     return false;
@@ -83,10 +83,10 @@ public abstract class TupleTypeImpl extends ClassifierImpl implements TupleType{
             Iterator otherIt = c.allAttributes().iterator();
             while(otherIt.hasNext()){
                 Attribute otherAttr = (Attribute) otherIt.next();
-                Attribute matchingAttr =  (Attribute)lookupAttribute(otherAttr.getName());
+                Attribute matchingAttr =  (Attribute)lookupAttribute(otherAttr.getNameA());
                 if(matchingAttr !=  null){
 
-                    String name = otherAttr.getName();
+                    String name = otherAttr.getNameA();
                     Classifier type = (Classifier)matchingAttr.getType().commonSuperType(otherAttr.getType());
                     Attribute a = (Attribute)core.getAttribute().make(name,type);
                     commonAttributes.add(a);

@@ -35,6 +35,8 @@ package tudresden.ocl20;
 import tudresden.ocl20.jmi.ocl.expressions.*;
 import tudresden.ocl20.jmi.ocl.commonmodel.*;
 import tudresden.ocl20.jmi.ocl.types.*;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
@@ -76,6 +78,45 @@ public class OclModelHelper {
         this.model.endTrans(rollback);
     }
     
+    public Constraint createOperationDef(Classifier context, String constrName, String opname, Classifier resultType, List paramVars, OclExpression bodyExp, String body) throws WellFormednessException{
+        //In contradiction to the OCL v1.6 spec we consider the created operation as the constrained element.
+        //OCL v1.6 is quite vague about the operation. But to call an (OclHelper) operation (OperationCallExp) 
+        //it really has to be created in the model somehow and the parameters have to be bound to the according 
+        //VariableDeclarations used in the OclExpression.
+        
+        Classifier bodyType = typeEvl.getType(bodyExp); 
+        
+        if(!bodyType.conformsTo(resultType)){
+            throw new WellFormednessException(bodyExp, WellFormednessException.EC_OP_BODY_TYPE_MUST_CONFORM);
+        }
+        
+        List paramNames = new ArrayList();
+        List paramTypes = new ArrayList();
+        
+        Iterator it = paramVars.iterator();
+        while(it.hasNext()){
+            VariableDeclaration vd = (VariableDeclaration)it.next(); 
+            paramNames.add(vd.getNameA());
+            paramTypes.add(vd.getType());
+        }
+        
+        Operation operation = context.createOperation(opname, resultType, paramNames, paramTypes);
+        
+        ExpressionInOcl result = factory.createExpressionInOcl();
+        result.setBodyExpression(bodyExp);
+        result.setContextualClassifier(context);
+        result.setLanguageA("OCL");
+        result.setBodyA(body);
+        
+        Constraint constraint = factory.createConstraint();
+        constraint.setBodyA(result);
+        constraint.setConstrainedElementA(operation); 
+        constraint.setNameA(constrName);
+        constraint.setStereotypeNameA("definition");
+        
+        return constraint;
+    }
+    
     /** Creates a Constraint with stereotype "invariant" and an ExpressionInOcl as the body.
      * @param context the contextual classifier
      * @param name a name for the invariant
@@ -99,7 +140,7 @@ public class OclModelHelper {
         constraint.setBodyA(result);
         constraint.setConstrainedElementA(context);
         constraint.setNameA(name);
-        constraint.setStereoTypeNameA("invariant");
+        constraint.setStereotypeNameA("invariant");
         
         return constraint;
     }
@@ -400,14 +441,14 @@ public class OclModelHelper {
         return result;
     }
     
-    /** Creates a VariableDeclaration for an iterator variable. 
+    /** Creates a VariableDeclaration for an iterator variable or a parameter. 
      * The type of the variable is determined by the type of the source expression.
      * @param name the name of the variable
      * @param src the source expression
      * @throws WellFormednessException
      * @return the VariableDeclaration
      */
-    public VariableDeclaration createIteratorVar(String name, OclExpression src) throws WellFormednessException{
+    public VariableDeclaration createUninitializedVar(String name, OclExpression src) throws WellFormednessException{
         VariableDeclaration result = factory.createVariableDeclaration();
         result.setNameA(name);
         Classifier type = typeEvl.getType(src);
@@ -419,14 +460,14 @@ public class OclModelHelper {
         return result;
     }
     
-     /** Creates a VariableDeclaration for an iterator variable.
-      * The type of the variable is determined by the type of the source expression.
+     /** Creates a VariableDeclaration for an iterator variable or a parameter.
+      * The type of the variable is explicitely stated.
       * @return the VariableDeclaration
       * @param type the type of the variable
       * @param name the name of the variable
       * @throws WellFormednessException
       */
-    public VariableDeclaration createIteratorVar(String name, Classifier type) throws WellFormednessException{
+    public VariableDeclaration createUninitializedVar(String name, Classifier type) throws WellFormednessException{
         VariableDeclaration result = factory.createVariableDeclaration();
         result.setNameA(name);
         result.setType(type);

@@ -79,23 +79,23 @@ public abstract class OperationImpl extends ModelElementImpl implements Operatio
         return true;
     }
     
-    /** yields the result OCL-type of the operation. */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getReturnType() {
-        Iterator it = getContents().iterator();
-            
-        Parameter returnParam = null;
-
-        while(it.hasNext()){
-            ModelElement me = (ModelElement) it.next();
-            if(me instanceof Parameter){
-                Parameter p = (Parameter) me;
-                if(p.getDirection().equals(DirectionKindEnum.RETURN_DIR)){
-                    returnParam = p;
-                }
-            }
-        }
-        return returnParam.getTypeA();
-    }
+//    /** yields the result OCL-type of the operation. */    
+//    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getReturnType() {
+//        Iterator it = getContents().iterator();
+//            
+//        Parameter returnParam = null;
+//
+//        while(it.hasNext()){
+//            ModelElement me = (ModelElement) it.next();
+//            if(me instanceof Parameter){
+//                Parameter p = (Parameter) me;
+//                if(p.getDirection().equals(DirectionKindEnum.RETURN_DIR)){
+//                    returnParam = p;
+//                }
+//            }
+//        }
+//        return returnParam.getTypeA();
+//    }
     
     
     /** get the out  and inout parameters */    

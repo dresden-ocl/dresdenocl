@@ -68,7 +68,7 @@ public class MofOclModelLoadTest {
      */
     public static void main(String[] args) throws Exception{
         //load MOF14OCL as "instance of itself"...
-        String modelXmi = (ClassLoader.getSystemClassLoader().getResource(MetaModelConst.METAMODELSWITHOCLDIR+"/MOF14WithOCL.xml")).toString();
+        String modelXmi = (ClassLoader.getSystemClassLoader().getResource(MetaModelConst.METAMODELSWITHOCLDIR+"/MOF14_plus_OCLMetamodel.xml")).toString();
         String modelwOclXmi = java.net.URLDecoder.decode(ClassLoader.getSystemClassLoader().getResource("UMLSamples").getPath().toString())+java.io.File.separator+"modelWithOcllib.xml";
         //uml.UmlPackage umlPackage = (uml.UmlPackage) mmManager.loadModel(MetaModelManager.UML13, url.toString());
         
@@ -76,6 +76,7 @@ public class MofOclModelLoadTest {
         try{
             
             model = new OclModel(MetaModelConst.MOF14, modelXmi);
+            model.beginTrans(true);
             
 //            OclcsPackage cs = model.getOclcsPackage();
             
@@ -104,6 +105,32 @@ public class MofOclModelLoadTest {
 //
 //            }
             
+            
+            Classifier type;
+            
+            List pathName = new ArrayList();
+            
+            pathName = new ArrayList();
+            pathName.add("Model");
+            pathName.add("Class");
+            Classifier c = topPackage.findClassifier(pathName);
+              
+            
+            
+            
+            System.out.println("Pathname: "+c.getPathNameA());
+            
+            List paramTypes = new ArrayList();
+            paramTypes.add(c);
+            
+            Operation allInstOp = c.lookupOperation("allInstances",null);
+            OperationCallExp oce1 = factory.createOperationCallExp();
+            oce1.setReferredOperation(allInstOp);
+            //its a classifier level operation ... we have to set the source type
+            oce1.setSrcType(c);
+            type = typeEvl.getType(oce1);
+            System.out.println(type.getNameA());
+            
         BooleanLiteralExp ble = factory.createBooleanLiteralExp();
         ble.setNameA("true");
         ble.setBooleanSymbol(true);
@@ -120,9 +147,9 @@ public class MofOclModelLoadTest {
         boolean result=true;
         while(bleit.hasNext()){
             RefObject ro = (RefObject) bleit.next();
-            List opargs = new ArrayList();
+
             RefObject bletype = (RefObject) ro.refGetValue("type");
-            Object name = bletype.refInvokeOperation("getNameA",opargs);
+            Object name = bletype.refGetValue("nameA");
             result = result & name.equals("boolean");
         }
         
@@ -130,9 +157,7 @@ public class MofOclModelLoadTest {
         
   
             
-            Classifier type;
             
-            List pathName = new ArrayList();
             
             pathName.add("OCL");
             pathName.add("Expressions");
@@ -155,22 +180,6 @@ public class MofOclModelLoadTest {
             CodeGenerator cg = new JmiCodeGenerator(model);
             System.out.println(cg.getCode(ele));
                      
-            pathName = new ArrayList();
-            pathName.add("Model");
-            pathName.add("Class");
-            Classifier c = topPackage.findClassifier(pathName);
-            
-            System.out.println("Pathname: "+c.getPathNameA());
-            
-            Operation allInstOp = c.lookupOperation("allInstances",null);
-            OperationCallExp oce1 = factory.createOperationCallExp();
-            oce1.setReferredOperation(allInstOp);
-            //its a classifier level operation ... we have to set the source type
-            oce1.setSrcType(c);
-            type = typeEvl.getType(oce1);
-            System.out.println(type.getNameA());
-            
-            System.out.println("Is allInstances an ocl lib operation ? "+oclLib.contains(allInstOp));
             
             
             List conformsToParams = new ArrayList();
@@ -265,7 +274,8 @@ public class MofOclModelLoadTest {
         }
         finally{
             if(model != null){
-                model.close();
+                model.endTrans(false);
+                model.delete();
             }
         }
     }

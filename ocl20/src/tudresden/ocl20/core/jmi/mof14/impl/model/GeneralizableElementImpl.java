@@ -99,7 +99,7 @@ public abstract class GeneralizableElementImpl extends ModelElementImpl /*Namesp
 
             for (Iterator it = contents.iterator(); it.hasNext();) {
                 ModelElement el = (ModelElement) it.next();
-                if (el != null && name.equals(el.getName())) {
+                if (el != null && name.equals(el.getNameA())) {
                     return el;
                 }
             }

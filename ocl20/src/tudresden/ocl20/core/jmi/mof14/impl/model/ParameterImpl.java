@@ -61,7 +61,7 @@ public abstract class ParameterImpl extends ModelElementImpl implements Paramete
         if(getDirection().equals(DirectionKindEnum.RETURN_DIR)){
             name = "result";
         } else {
-            name = getName();
+            name = getNameA();
         }
 
         tudresden.ocl20.jmi.ocl.commonmodel.Classifier type = getTypeA(); //consider multiplicity and ordering! MOF->OclTypemapping!

@@ -68,24 +68,21 @@ public abstract class ConstraintImpl extends ModelElementImpl implements Constra
     }
      
      /** get the body expression */     
-    public  tudresden.ocl20.jmi.ocl.expressions.ExpressionInOcl getBodyA() {
-        AdExpression exp = ((ModelPackage)this.refOutermostPackage()).getMof14ocl().getAdapters().getABodyConstraint().getBody(this);
-        if(exp instanceof ExpressionInOcl){
-            return (ExpressionInOcl) exp;
-        }
-        return null;
+    public  tudresden.ocl20.jmi.ocl.commonmodel.Expression getBodyA() {
+        AdExpression exp = ((ModelPackage)this.refOutermostPackage()).getMof14ocl().getAdapters().getABodyConstraint().getBody(this);      
+            return  exp;
     }
     
     /** set the body expression */    
-    public void setBodyA(tudresden.ocl20.jmi.ocl.expressions.ExpressionInOcl exp) {
-        ((ModelPackage)this.refOutermostPackage()).getMof14ocl().getAdapters().getABodyConstraint().add((ExpressionInOcl)exp,this);      
+    public void setBodyA(tudresden.ocl20.jmi.ocl.commonmodel.Expression exp) {
+        ((ModelPackage)this.refOutermostPackage()).getMof14ocl().getAdapters().getABodyConstraint().add((AdExpression)exp,this);      
     }
     
     private static final String STEREOTYPE = "constraintStereotypeName";
     
     //the stereotype name is "simulated" by a tag
     /** set the stereotype of the constraint (in MOF represented as a tag) */    
-    public void setStereoTypeNameA(java.lang.String name) {
+    public void setStereotypeNameA(java.lang.String name) {
         java.util.Collection c =((ModelPackage)this.refOutermostPackage()).getAttachesTo().getTag(this);
         Tag tag=null;
         java.util.Iterator it = c.iterator();

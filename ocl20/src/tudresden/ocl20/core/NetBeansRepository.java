@@ -54,7 +54,8 @@ public class NetBeansRepository implements Repository {
     
     public NetBeansRepository() {
         try{
-        java.net.URL repositoryUrl = ClassLoader.getSystemClassLoader().getResource("repository"+java.io.File.separator);
+        java.net.URL repositoryUrl = NetBeansRepository.class.getResource("/repository/");
+        System.out.println("Repostiory in: "+ repositoryUrl+ " "+java.net.URLDecoder.decode((new java.net.URL(repositoryUrl,"repository").getPath())));
         System.setProperty("org.netbeans.mdr.persistence.Dir", java.net.URLDecoder.decode((new java.net.URL(repositoryUrl,"repository").getPath())));
         System.setProperty("org.netbeans.mdr.storagemodel.StorageFactoryClassName",
         "org.netbeans.mdr.persistence.btreeimpl.btreestorage.BtreeFactory");

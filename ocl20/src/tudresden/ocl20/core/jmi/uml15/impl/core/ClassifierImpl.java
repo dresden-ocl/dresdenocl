@@ -37,6 +37,8 @@ import java.util.*;
 
 import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
 import tudresden.ocl20.jmi.uml15.core.*;
+import tudresden.ocl20.jmi.uml15.datatypes.*;
+import tudresden.ocl20.jmi.uml15.uml15ocl.expressions.*;
 import tudresden.ocl20.jmi.uml15.commonbehavior.Reception;
 import tudresden.ocl20.jmi.uml15.commonbehavior.Signal;
 
@@ -206,7 +208,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
         while(ownEnds.hasNext()){
             AssociationEnd ownEnd = (AssociationEnd) ownEnds.next();
             Association a = ownEnd.getAssociation();
-            if(a instanceof UmlAssociationClass && name.equals(a.getName())){
+            if(a instanceof UmlAssociationClass && name.equals(a.getNameA())){
                 return (UmlAssociationClass) a;
             }
         }
@@ -232,7 +234,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
             Iterator oppositeEnds = a.getConnection().iterator();
             while(oppositeEnds.hasNext()){
                 AssociationEnd oppositeEnd = (AssociationEnd) oppositeEnds.next();
-                if(!oppositeEnd.equals(ownEnd) && name.equals(oppositeEnd.getName())){
+                if(!oppositeEnd.equals(ownEnd) && name.equals(oppositeEnd.getNameA())){
                     return oppositeEnd;
                     //Issue: What about unnamed AssociationEnds?
                 }
@@ -254,7 +256,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
             Iterator ends = ((Association) this).getConnection().iterator();
             while(ends.hasNext()){
                 AssociationEnd ae = (AssociationEnd) ends.next();
-                if(name.equals(ae.getName())){
+                if(name.equals(ae.getNameA())){
                     return ae;
                     //Issue: What about unnamed AssociationEnds?
                 }
@@ -270,7 +272,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
         Iterator featuresIt =  getFeature().iterator();
         while(featuresIt.hasNext()){
             Feature feature  = (Feature) featuresIt.next();
-            if(feature instanceof Attribute && feature.getName().equals(attName)){
+            if(feature instanceof Attribute && feature.getNameA().equals(attName)){
                 return (Attribute) feature;
             }
         }
@@ -294,7 +296,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
         Iterator allOperationsIt =  allOperations().iterator();
         while(allOperationsIt.hasNext()){
             op = (Operation) allOperationsIt.next();               
-            if(name.equals(op.getName()) && op.hasMatchingSignature(paramTypes)){
+            if(name.equals(op.getNameA()) && op.hasMatchingSignature(paramTypes)){
                 return op;
             }           
         }
@@ -309,7 +311,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
             if(feature instanceof Reception){
                 Signal s = ((Reception) feature).getSignal();
                 
-                if(sigName.equals(s.getName()) && s.hasMatchingSignature(paramTypes)){
+                if(sigName.equals(s.getNameA()) && s.hasMatchingSignature(paramTypes)){
                     return s;
                 }
             }
@@ -329,7 +331,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     public tudresden.ocl20.jmi.ocl.commonmodel.Classifier toOclType() {
          //Problem: no predefined types in  OCL -> every CASE Tool does, "whatever it likes"
         if(this instanceof DataType){
-            String name = getName().toLowerCase();
+            String name = getNameA().toLowerCase();
             if(name.equals("int") || name.toLowerCase().equals("integer")||
                name.toLowerCase().equals("long") || name.toLowerCase().equals("byte")
             ){
@@ -357,5 +359,27 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     public java.util.Collection getExpressionInOclA() {
         return ((Uml15Package)this.refOutermostPackage()).getUml15ocl().getOcl().getExpressions().getAContextualClassifierExpressionInOcl().getExpressionInOcl(this);
     } 
+    
+    
+    public tudresden.ocl20.jmi.ocl.commonmodel.Operation createOperation(java.lang.String name, tudresden.ocl20.jmi.ocl.commonmodel.Classifier resultType, java.util.List params){
+        CorePackage corePackage = (CorePackage)this.refImmediatePackage();
+        
+        Operation operation = corePackage.getOperation().createOperation(name, VisibilityKindEnum.VK_PUBLIC, false,ScopeKindEnum.SK_INSTANCE, true, CallConcurrencyKindEnum.CCK_CONCURRENT, false, false, false, "");
+        operation.setOwner(this);
+                   
+        Iterator paramVarsIt = params.iterator();
+        while(paramVarsIt.hasNext()){
+            VariableDeclaration vd = (VariableDeclaration) paramVarsIt.next();
+            Parameter param = corePackage.getParameter().createParameter(vd.getName(), VisibilityKindEnum.VK_PUBLIC, false, null, ParameterDirectionKindEnum.PDK_IN);
+            param.setBehavioralFeature(operation);
+            param.setType((Classifier) vd.getType());
+        }
+        
+        Parameter returnParam = corePackage.getParameter().createParameter(name+".Return", VisibilityKindEnum.VK_PUBLIC, false, null, ParameterDirectionKindEnum.PDK_RETURN);
+        
+        returnParam.setBehavioralFeature(operation);
+        returnParam.setType((Classifier) resultType);
+        return operation;
+    }
     
 }

@@ -59,7 +59,7 @@ public abstract class MofPackageImpl extends GeneralizableElementImpl implements
             String name = (String) pathName.remove(0);
 
             try{
-                if(name.equals(this.getName())){
+                if(name.equals(this.getNameA())){
                     return this.findPackage(pathName);
                 }
                 ModelElement me = (ModelElement) this.lookupElementExtended(name);
@@ -129,7 +129,7 @@ public abstract class MofPackageImpl extends GeneralizableElementImpl implements
         visitedPackages.add(this);
         tudresden.ocl20.jmi.ocl.commonmodel.Classifier candidate = findClassifierHere(name);
         if(candidate != null){
-            System.out.println("Classifier "+name+" found in Package "+this.getName());
+            System.out.println("Classifier "+name+" found in Package "+this.getNameA());
             classifiers.add(candidate);
         }
         Iterator it = findElementsByTypeExtended((javax.jmi.model.MofClass)refMetaObject(), true).iterator();

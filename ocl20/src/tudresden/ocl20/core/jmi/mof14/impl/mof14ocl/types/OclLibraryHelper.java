@@ -171,7 +171,7 @@ public class OclLibraryHelper {
         Iterator it = getCollectionTypes(elementType).iterator();
         while(it.hasNext()){
             tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType ct = (tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType) it.next();
-            if(ct.getName().startsWith(name)){
+            if(ct.getNameA().startsWith(name)){
                 return  ct;
             }
         }
@@ -183,15 +183,18 @@ public class OclLibraryHelper {
     //(Due to nesting there is  an infinite number  of collection types.)
     
     public Collection getCollectionTypes(MofClass elementType){
+        
+        System.out.println("getCollectionTypes for "+elementType.getNameA());
         Collection result = modelPackage.getMof14ocl().getOcl().getTypes().getAElementTypeCollectionTypes().getCollectionTypes(elementType);
         
         if(result.isEmpty()){
+            System.out.println("...not yet initialized. ");
             
-            String elementTypeName = elementType.getName();
+            String elementTypeName = elementType.getNameA();
             
             
-            tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType collectionType = oclTypes.getCollectionType().createCollectionType(
-            "Collection("+elementTypeName+")", "", false, false, false, VisibilityKindEnum.PUBLIC_VIS, false);
+            tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType collectionType = oclTypes.getCollectionType().createCollectionType();
+            collectionType.setName("Collection("+elementTypeName+")");
             collectionType.setContainer(oclLibPackage);
             result.add(collectionType);
             //            addOclType(collectionType);
@@ -593,7 +596,7 @@ public class OclLibraryHelper {
                 }
                 
                 else if(type instanceof PrimitiveType){
-                    String name = type.getName();
+                    String name = type.getNameA();
                     //issue: do we have constants for the built-in primititive types?
                     if("Integer".equals(name) || "Long".equals(name)){
                         oclType = integerPrimitive;
@@ -616,7 +619,7 @@ public class OclLibraryHelper {
                         ModelElement me = (ModelElement) contentIt.next();
                         if(me instanceof StructureField){
                             StructureField field = (StructureField) me;
-                            atts.add(ac.make(field.getName(), mapDataTypeToOcl(field.getType())));
+                            atts.add(ac.make(field.getNameA(), mapDataTypeToOcl(field.getType())));
                         }
                     }
                     oclType = (MofClass)modelPackage.getMof14ocl().getTypes().getTupleType().make(atts);
@@ -624,7 +627,7 @@ public class OclLibraryHelper {
                 else if(type instanceof EnumerationType){
                     EnumerationType et = (EnumerationType)type;
                     AdaptersPackage ap = modelPackage.getMof14ocl().getAdapters();
-                    AdEnumeration ae = ap.getAdEnumeration().createAdEnumeration(type.getName(), type.getName(), false, false, false, VisibilityKindEnum.PUBLIC_VIS, false);
+                    AdEnumeration ae = ap.getAdEnumeration().createAdEnumeration(type.getNameA(), type.getNameA(), false, false, false, VisibilityKindEnum.PUBLIC_VIS, false);
                     ae.setContainer(oclLibPackage);
                     createGeneralization(oclAny, ae);
                     createGeneralization(ae, oclVoid);

@@ -61,7 +61,7 @@ public abstract class PackageImpl extends tudresden.ocl20.jmi.uml15.impl.core.Mo
             Iterator it = getOwnedElement().iterator();
             while(it.hasNext()){
                 ModelElement me = (ModelElement) it.next();
-                if(me instanceof tudresden.ocl20.jmi.uml15.modelmanagement.Package && name.equals(me.getName())){
+                if(me instanceof tudresden.ocl20.jmi.uml15.modelmanagement.Package && name.equals(me.getNameA())){
                     tudresden.ocl20.jmi.uml15.modelmanagement.Package pkg  = (tudresden.ocl20.jmi.uml15.modelmanagement.Package) me;
                     return pkg.findPackage(pathName);
                 }
@@ -128,7 +128,7 @@ public abstract class PackageImpl extends tudresden.ocl20.jmi.uml15.impl.core.Mo
         Iterator it = getOwnedElement().iterator();
         while(it.hasNext()){
             ModelElement me = (ModelElement) it.next();
-            if(me instanceof Classifier && name.equals(me.getName())){
+            if(me instanceof Classifier && name.equals(me.getNameA())){
                 return ((Classifier)  me).toOclType();
             }
         }

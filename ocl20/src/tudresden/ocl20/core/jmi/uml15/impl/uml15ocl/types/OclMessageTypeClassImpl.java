@@ -61,7 +61,7 @@ public abstract class OclMessageTypeClassImpl extends ClassProxyHandler implemen
         Iterator it = sig.allAttributes().iterator();
         while(it.hasNext()){
             Attribute a = (Attribute) it.next();
-            features.add(((AttributeClass)a.refClass()).make(a.getName(), a.getType()));
+            features.add(((AttributeClass)a.refClass()).make(a.getNameA(), a.getType()));
         }
         
         return result;

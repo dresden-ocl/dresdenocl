@@ -55,7 +55,7 @@ public abstract class AttributeClassImpl extends ClassProxyHandler implements At
         
         Attribute a = this.createAttribute();
 
-        a.setName(name);
+        a.setNameA(name);
         a.setType((Classifier)type); 
         Multiplicity m = dataTypes.getMultiplicity().createMultiplicity();
         MultiplicityRange mr = dataTypes.getMultiplicityRange().createMultiplicityRange(1,1);

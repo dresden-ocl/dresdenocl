@@ -70,7 +70,7 @@ public class ModelHelper {
             if(me instanceof MofPackage){      //? this  should  always be the case for MOF-Models
                 modelCount ++;
                 topPackageCandidate = (MofPackage) me;
-                if(topPackageCandidate.getName().equals(GENTOPLEVELPACKAGE)){
+                if(topPackageCandidate.getNameA().equals(GENTOPLEVELPACKAGE)){
                     topPackage = topPackageCandidate;
                     return;
                 }
@@ -79,19 +79,19 @@ public class ModelHelper {
              
         if(modelCount==1){
             topPackage = topPackageCandidate;
-             System.out.println("Found Top Level Pakage: "+topPackage.getName());
+             System.out.println("Found Top Level Pakage: "+topPackage.getNameA());
         } else {
             //if there is not exactly one top level package, create  a package that clusters all top  level packages
             topPackage = modelPackage.getMofPackage().createMofPackage(GENTOPLEVELPACKAGE,"",true,false,false,VisibilityKindEnum.PUBLIC_VIS);
-            System.out.println("Generate Top Level Pakage: "+topPackage.getName());
+            System.out.println("Generate Top Level Pakage: "+topPackage.getNameA());
             
             it = topElements.iterator();
             while(it.hasNext()){
                 ModelElement me = (ModelElement) it.next();
-                System.out.println("   Add TopElement "+me.getName()+" "+me);
+                System.out.println("   Add TopElement "+me.getNameA()+" "+me);
                 if(me instanceof MofPackage){
                     //create a clustering import
-                    Import  imp = modelPackage.getImport().createImport(me.getName(), me.getName(), VisibilityKindEnum.PUBLIC_VIS, true);
+                    Import  imp = modelPackage.getImport().createImport(me.getNameA(), me.getNameA(), VisibilityKindEnum.PUBLIC_VIS, true);
                     imp.setImportedNamespace((MofPackage) me);
                     imp.setContainer(topPackage);
                 }

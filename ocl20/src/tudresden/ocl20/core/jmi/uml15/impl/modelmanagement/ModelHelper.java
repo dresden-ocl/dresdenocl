@@ -79,11 +79,11 @@ public class ModelHelper {
         } else {
             //if there is no Model or more  than one, create a top Model containig all Elements
             model = this.umlPackage.getModelManagement().getModel().createModel();
-            model.setName("generatedTopLevelModel");
+            model.setNameA("generatedTopLevelModel");
             it = topElements.iterator();
             while(it.hasNext()){
                 ModelElement me = (ModelElement) it.next();
-                System.out.println("TopElement "+me.getName()+" "+me);
+                System.out.println("TopElement "+me.getNameA()+" "+me);
                 me.setNamespace(model);
             }
             

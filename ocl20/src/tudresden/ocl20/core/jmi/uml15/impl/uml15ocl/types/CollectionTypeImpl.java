@@ -73,8 +73,8 @@ public abstract class CollectionTypeImpl extends ClassifierImpl implements Colle
     
     public tudresden.ocl20.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c){
         if(c instanceof CollectionType){
-            System.out.println(getName());
-            System.out.println(((Classifier)c).getName());
+            System.out.println(getNameA());
+            System.out.println(((Classifier)c).getNameA());
                     
             CollectionType ct = (CollectionType) c;
             Classifier elementType = (Classifier) getElementType().commonSuperType(ct.getElementType());

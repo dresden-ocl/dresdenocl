@@ -56,6 +56,8 @@ public abstract class ModelElementImpl extends InstanceHandler implements ModelE
         return (ModelPackage)refOutermostPackage();
     }
     
+     
+    
     /** set the name of this model element */    
     public void setNameA(java.lang.String name) {
         setName(name);

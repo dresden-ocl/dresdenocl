@@ -64,9 +64,9 @@ public abstract class TupleTypeClassImpl extends ClassProxyHandler implements Tu
         for(int i=0; i<atts.size(); i++){
             if(i>0){name.append(',');}
             Attribute a = (Attribute) atts.get(i);
-            name.append(a.getName());
+            name.append(a.getNameA());
             name.append(':');
-            name.append(a.getType().getName());
+            name.append(a.getType().getNameA());
         }
         name.append(')');
         
@@ -77,7 +77,7 @@ public abstract class TupleTypeClassImpl extends ClassProxyHandler implements Tu
         if(tt == null){
             System.out.println("Create new TupleType: "+name);
             tt = createTupleType();
-            tt.setName(name.toString());
+            tt.setNameA(name.toString());
             tt.getFeature().addAll(atts);
             OclLibraryHelper.getInstance(this).addClassifier(tt);
         }
@@ -92,7 +92,7 @@ public abstract class TupleTypeClassImpl extends ClassProxyHandler implements Tu
         Iterator it = refAllOfClass().iterator();
         while(it.hasNext()){
             TupleType tt = (TupleType) it.next();
-            lookup.put(tt.getName(),tt);
+            lookup.put(tt.getNameA(),tt);
         }
         return (TupleType) lookup.get(name);
     }

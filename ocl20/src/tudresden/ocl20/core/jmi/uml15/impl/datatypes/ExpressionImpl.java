@@ -77,4 +77,13 @@ public abstract class ExpressionImpl extends InstanceHandler implements Expressi
         }
     }
     
+    public void setConstraintA(tudresden.ocl20.jmi.ocl.commonmodel.Constraint c) {
+        Constraint old = (Constraint) this.refImmediateComposite();
+        if (old != null){
+            old.setBody(null);
+        }
+        ((Constraint) c).setBody((tudresden.ocl20.jmi.uml15.uml15ocl.expressions.ExpressionInOcl) this);
+        
+    }
+    
 }

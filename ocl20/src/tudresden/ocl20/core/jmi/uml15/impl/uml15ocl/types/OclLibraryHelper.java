@@ -172,7 +172,7 @@ public class OclLibraryHelper {
         Iterator it = getCollectionTypes(elementType).iterator();
         while(it.hasNext()){
             CollectionType ct = (CollectionType) it.next();
-            if(ct.getName().startsWith(name)){
+            if(ct.getNameA().startsWith(name)){
                 return  ct;
             }
         }
@@ -188,7 +188,7 @@ public class OclLibraryHelper {
         
         if(result.isEmpty()){
             
-            String elementTypeName = elementType.getName();
+            String elementTypeName = elementType.getNameA();
             //elementType.
             
             CollectionType collectionType = oclTypes.getCollectionType().createCollectionType(
@@ -553,7 +553,7 @@ public class OclLibraryHelper {
         op.setOwner(owner);
         
         Parameter result = core.getParameter().createParameter();
-        result.setName("result");
+        result.setNameA("result");
         result.setKind(ParameterDirectionKindEnum.PDK_RETURN);
         result.setBehavioralFeature(op);
         result.setType(returnType);
@@ -561,7 +561,7 @@ public class OclLibraryHelper {
         if(parameters  != null){
             for(int i=0; i<parameters.length; i++){
                 Parameter param = core.getParameter().createParameter();
-                param.setName((String) parameters [i] [1]);
+                param.setNameA((String) parameters [i] [1]);
                 param.setKind(ParameterDirectionKindEnum.PDK_IN);
                 param.setBehavioralFeature(op);
                 param.setType((Classifier) parameters [i] [0]);

@@ -33,6 +33,8 @@
 package tudresden.ocl20.jmi.mof14.impl.model;
 
 import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.jmi.mof14.mof14ocl.expressions.*;
+
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -100,7 +102,7 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
         Iterator allOperationsIt =  allOperations().iterator();
         while(allOperationsIt.hasNext()){
             Operation op = (Operation) allOperationsIt.next();               
-            if(name.equals(op.getName()) && op.hasMatchingSignature(paramTypes)){
+            if(name.equals(op.getNameA()) && op.hasMatchingSignature(paramTypes)){
                 return op;
             }           
         }
@@ -114,7 +116,7 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
         while(allAttributesIt.hasNext()){
             tudresden.ocl20.jmi.ocl.commonmodel.Attribute a = (tudresden.ocl20.jmi.ocl.commonmodel.Attribute) allAttributesIt.next();               
             //tbd: make UML-MOF-Common
-            if(attName.equals(((Attribute)a).getName())){
+            if(attName.equals(((Attribute)a).getNameA())){
                 return a;
             }           
         }
@@ -129,7 +131,7 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
         Iterator contentsIt = getContents().iterator();
         while(contentsIt.hasNext()){
             ModelElement me  = (ModelElement) contentsIt.next();
-            if(me instanceof Reference && me.getName().equals(name)){
+            if(me instanceof Reference && me.getNameA().equals(name)){
                 return ((Reference) me).getReferencedEnd();
             }
         }
@@ -259,6 +261,27 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
     public java.util.Collection getExpressionInOclA() {
         return ((ModelPackage)this.refImmediatePackage()).getMof14ocl().getOcl().getExpressions().getAContextualClassifierExpressionInOcl().getExpressionInOcl(this);
     }    
+   
+    public tudresden.ocl20.jmi.ocl.commonmodel.Operation createOperation(java.lang.String name, tudresden.ocl20.jmi.ocl.commonmodel.Classifier resultType, java.util.List params){
+        ModelPackage modelPackage = (ModelPackage)this.refImmediatePackage();
+        
+        Operation operation = modelPackage.getOperation().createOperation(name, "", ScopeKindEnum.INSTANCE_LEVEL, VisibilityKindEnum.PUBLIC_VIS, true);
+        operation.setContainer(this);
+        
+        Parameter returnParam = modelPackage.getParameter().createParameter("**result**", "", DirectionKindEnum.RETURN_DIR, modelPackage.createMultiplicityType(1,1,false,false));
+        returnParam.setContainer(operation);
+        returnParam.setType((MofClass) resultType);
+            
+        Iterator paramVarsIt = params.iterator();
+        while(paramVarsIt.hasNext()){
+            VariableDeclaration vd = (VariableDeclaration) paramVarsIt.next();
+            Parameter param = modelPackage.getParameter().createParameter(vd.getName(), "", DirectionKindEnum.IN_DIR, modelPackage.createMultiplicityType(1,1,false,false));
+            param.setContainer(operation);
+            param.setType((MofClass) vd.getType());
+        }
+        
+        return operation;
+    }
    
     
 }

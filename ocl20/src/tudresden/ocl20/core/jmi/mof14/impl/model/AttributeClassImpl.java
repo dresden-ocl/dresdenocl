@@ -53,7 +53,7 @@ public abstract class AttributeClassImpl extends ClassProxyHandler implements At
         
         Attribute a = this.createAttribute();
 
-        a.setName(name);
+        a.setNameA(name);
         a.setType((MofClass)type);
         
         MultiplicityType m = modelPackage.createMultiplicityType(1,1,false,false);
