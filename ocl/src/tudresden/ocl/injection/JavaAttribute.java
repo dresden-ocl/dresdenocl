@@ -45,6 +45,7 @@ public final class JavaAttribute extends JavaFeature
                        String name)
     throws InjectorParseException
   {
+    // parent must not be null
     super(parent.getFile(), parent, modifiers, type, name);
     if(type==null)
       throw new RuntimeException();

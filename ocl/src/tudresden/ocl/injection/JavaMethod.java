@@ -63,6 +63,7 @@ public class JavaMethod extends JavaFeature
                     int name_end)
     throws InjectorParseException
   {
+    // parent must not be null
     super(parent.getFile(), parent, modifiers, type, name);
     this.name_end=name_end;
   }
