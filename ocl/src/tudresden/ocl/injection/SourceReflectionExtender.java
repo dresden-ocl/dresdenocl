@@ -29,20 +29,20 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
      @see #getElementType
   */
   private HashMap elementtypes=new HashMap();
-  
+
   /**
      Maps from java.lang.reflect.Field to java.lang.Class.
      This is the cache for getKeyType.
      @see #getKeyType
   */
   private HashMap keytypes=new HashMap();
-  
+
   /**
      Contains all classes, for which the source code has been attempted to parse.
      Serves as negative cache for source code or @elementtype tags not found.
   */
   private HashSet parsedclasses=new HashSet();
-  
+
 
   public Class getElementType(Field field)
   {
@@ -52,7 +52,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     checkField(field);
     return (Class)elementtypes.get(field);
   }
-    
+
   public Class getKeyType(Field field)
   {
     Class result=(Class)keytypes.get(field);
@@ -162,12 +162,12 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     public void onBehaviourHeader(JavaBehaviour jb)
     {
     }
-    
-    public void onAttributeHeader(JavaAttribute ja) 
+
+    public void onAttributeHeader(JavaAttribute ja)
     {
     }
 
-    public void onClassFeature(JavaFeature cf, String doccomment) 
+    public void onClassFeature(JavaFeature cf, String doccomment)
       throws java.io.IOException, InjectorParseException
     {
       if(cf instanceof JavaAttribute)
@@ -195,9 +195,9 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
                  !java.util.Map.class.isAssignableFrom(f.getType()) )
                 System.out.println("warning: field "+f+" of element-type "+c+" is not a collection/map.");
             }
-            catch(NoSuchFieldException e) 
-            { 
-              throw new RuntimeException(e.toString()); 
+            catch(NoSuchFieldException e)
+            {
+              throw new RuntimeException(e.toString());
             }
           }
         }
@@ -216,19 +216,23 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
               if(!java.util.Map.class.isAssignableFrom(f.getType()) )
                 System.out.println("warning: field "+f+" of key-type "+c+" is not a map.");
             }
-            catch(NoSuchFieldException e) 
-            { 
-              throw new RuntimeException(e.toString()); 
+            catch(NoSuchFieldException e)
+            {
+              throw new RuntimeException(e.toString());
             }
           }
         }
       }
     }
-  
+
     public boolean onDocComment(String doccomment)
     {
       return true;
     }
-  
+
+    public void onFileDocComment(String doccomment)
+    {
+    }
+
   }
-}  
+}

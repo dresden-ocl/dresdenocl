@@ -113,6 +113,18 @@ public class TestInjectionConsumer implements InjectionConsumer
     return true;
   }
 
+  public void onFileDocComment(String doccomment)
+    throws java.io.IOException
+  {
+    try
+    {
+      output.write("[onFileDocComment]");
+      output.write(doccomment);
+      output.write("[/onFileDocComment]");
+    }
+    catch(IOException e) { System.out.println(e); };
+  }
+
   public void onFileEnd()
   {
     try

@@ -248,8 +248,8 @@ final class OclInjector implements InjectionConsumer
     }
     discardnextfeature=false;
   }
-  
-  public boolean onDocComment(String doccomment) 
+
+  public boolean onDocComment(String doccomment)
     throws IOException
   {
     if(OCL_AUTHOR.equals(Injector.findDocTag(doccomment, "author")))
@@ -268,6 +268,12 @@ final class OclInjector implements InjectionConsumer
       }
       return true;
     }
+  }
+
+  public void onFileDocComment(String doccomment)
+    throws IOException
+  {
+    output.write(doccomment);
   }
 
   public void onFileEnd()

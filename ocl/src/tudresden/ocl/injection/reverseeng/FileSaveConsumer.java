@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * Created on 6. September 2000, 17:53
  */
- 
+
 package tudresden.ocl.injection.reverseeng;
 
 import java.io.*;
@@ -29,7 +29,7 @@ import java.util.*;
 
 import tudresden.ocl.injection.*;
 
-/** 
+/**
   * InjectionConsumer used to save changes made via RevengGUI.
   *
   * @author  sz9 (Steffen Zschaler)
@@ -41,58 +41,58 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     * The writer used to produce the output file.
     */
   private IndentAwareWriter m_iawOutput = null;
-  
+
   /**
     * The AnalysisConsumer that contains the information about the analysed file.
     */
   private AnalysisConsumer m_acAnalysisResults = null;
-  
+
   /**
     * The number of doc comments in the current file so far.
     */
   private int m_cComments = 0;
- 
+
   /**
     * The Iterator of features that need a corrected doccomment.
     */
   private Iterator m_iFeatures = null;
-  
+
   /**
     * The next feature that needs a corrected doccomment.
     */
   private AbstractDescriptor m_adCurrentFeature = null;
-    
+
   /**
     * True if a doccomment has been written after the last feature.
     */
   private boolean m_fWroteDocComment = false;
-  
+
   /** Creates new FileSaveConsumer */
   public FileSaveConsumer (IndentAwareWriter iawOutput, AnalysisConsumer acAnalysisResults) {
     super();
-    
+
     m_iawOutput = iawOutput;
     m_acAnalysisResults = acAnalysisResults;
     m_iFeatures = m_acAnalysisResults.getAllFeatures().iterator();
   }
-  
+
   private AbstractDescriptor getCurrentFeature() {
     if (m_adCurrentFeature == null) {
       if (m_iFeatures.hasNext()) {
         m_adCurrentFeature = (AbstractDescriptor) m_iFeatures.next();
       }
     }
-    
-    return m_adCurrentFeature;    
+
+    return m_adCurrentFeature;
   }
-  
+
   /** Encountered a package statement.
     * This method is guaranteed to be called at most once.
     * @see JavaFile#getPackageName()
     */
   public void onPackage(JavaFile javafile) throws InjectorParseException {
   }
-  
+
   /** Encountered an import statement.
     * Imports are also saved in JavaFile.imports.
     * This information may be used for mapping type names to types.
@@ -100,13 +100,13 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     */
   public void onImport(String importname) {
   }
-  
+
   /** Encountered a class header.
     * Is also called for inner classes.
     */
   public void onClass(JavaClass cc) {
   }
-  
+
   /** Encountered the end of a class.
     * @parameter cc
     * the same object as in the corresponding call to onClass
@@ -127,7 +127,7 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
       m_iawOutput.write (jb.getLiteral());
     }
   }
- 
+
   public void onAttributeHeader(JavaAttribute ja) throws java.io.IOException {
     if (! m_fWroteDocComment) {
       // Feature without comment
@@ -145,11 +145,11 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
                 // Yup! So we have to generate a comment for it!
                 if (m_iawOutput != null) {
                   int nIndent = m_iawOutput.getCurrentIndent();
-                  
+
                   getCurrentFeature().indentComment (nIndent);
-                  
+
                   String sDocComment = getCurrentFeature().getDocComment();
-                  
+
                   if (sDocComment != null) {
                     m_iawOutput.write (sDocComment + "\n");
 
@@ -167,7 +167,7 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
           catch (InjectorParseException ipe) {
             System.err.println ("Exception while saving attribute:");
             ipe.printStackTrace();
-            
+
             throw new IOException (ipe.getMessage());
           }
         }
@@ -186,7 +186,7 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
   public void onClassFeature(JavaFeature cf,String doccomment) {
     m_fWroteDocComment = false;
   }
-  
+
   /** Encountered a java documentation comment.
     * Is called for comments on class level only,
     * i.e. inside a class, but outside of methods and attributes.
@@ -196,7 +196,7 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     */
   public boolean onDocComment(String doccomment) throws java.io.IOException {
     m_cComments++;
-    
+
     if (m_iawOutput != null) {
       if ((m_iFeatures.hasNext()) &&
           (getCurrentFeature().getCommentID() == m_cComments)) {
@@ -207,17 +207,22 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
         m_iawOutput.write (doccomment);
       }
     }
-    
+
     m_fWroteDocComment = true;
-    
+
     return true;
+  }
+
+  public void onFileDocComment(String doccomment) throws java.io.IOException {
+
+    m_iawOutput.write (doccomment);
   }
 
   /** Encountered the end of the input stream.
     */
   public void onFileEnd() {
   }
-  
+
   public static void save(File fSource, File fDest, AnalysisConsumer acAnalysisResults) throws IOException {
     Reader r = new FileReader (fSource);
     IndentAwareWriter iaw = new IndentAwareWriter (new OutputStreamWriter (new FileOutputStream (fDest)));

@@ -29,10 +29,10 @@ import tudresden.ocl.codegen.CodeFragment;
    into an output stream, and may be modified before writing.
 
    The parser recognizes java meta information only,
-   which is anything outside method bodies and attribute 
+   which is anything outside method bodies and attribute
    inizializers.
 
-   To use the parser, provide an implemention of the 
+   To use the parser, provide an implemention of the
    InjectionConsumer interface to the constructor.
    @see InjectionConsumer
 */
@@ -48,19 +48,19 @@ public final class Injector
   private boolean start_block=false;
   private boolean collect_when_blocking=false;
   private StringBuffer collector=new StringBuffer();
-  
+
   private String doccomment=null;
 
   private JavaFile javafile=new JavaFile();
 
   /**
      Constructs a new java parser.
-     @parameter input 
+     @parameter input
         the input stream to be parsed.
-     @parameter output 
+     @parameter output
         the target, where the modified input stream is written to.
         May be null, if only reading is desired.
-     @parameter consumer 
+     @parameter consumer
         an implementation of InjectionConsumer,
         listening to parsed elements of the input stream.
      @see InjectionConsumer
@@ -74,7 +74,7 @@ public final class Injector
 
   private char outbuf;
   private boolean outbufvalid=false;
-  
+
   /**
      The line number in the current file.
   */
@@ -103,7 +103,7 @@ public final class Injector
       {
         lineposition++;
       }
-        
+
       if(do_block&&collect_when_blocking)
         collector.append(outbuf);
       outbuf=(char)c;
@@ -162,7 +162,7 @@ public final class Injector
      Is started after the initial '/' character.
      If the next character is either '/' or '*',
      the rest of the comment is read, and a value of -1 is returned.
-     If not, there is no comment, 
+     If not, there is no comment,
      and this next character is returned, casted to int.
   */
   private int readComment() throws IOException, EndException
@@ -317,7 +317,7 @@ public final class Injector
     {
       switch(c)
       {
-      case '/': 
+      case '/':
         int i=readComment();
         if(i>=0)
           c=(char)i;
@@ -338,7 +338,7 @@ public final class Injector
           throw new ParseException("';' expected.");
         c=read();
         break;
-      case ';': 
+      case ';':
         // dont have to test for "attribute" here
         // since then the test in the '}' branch would have
         // already terminated the loop
@@ -386,7 +386,7 @@ public final class Injector
      Parses a class feature. May be an attribute, a method or a inner
      class. May even be a normal class, in this case parent==null.
      @parameter parent the class that contains the class feature
-                       if null, there is no containing class, and 
+                       if null, there is no containing class, and
                        the feature must be a class itself.
   */
   private JavaFeature[] parseFeature(JavaClass parent)
@@ -446,7 +446,7 @@ public final class Injector
           throw new ParseException("'class' or 'interface' expected.");
         break;
       }
-    
+
       char c=readToken();
       if(c!='\0')
       {
@@ -629,7 +629,7 @@ public final class Injector
 
     while(true)
     {
-      
+
       switch(c)
       {
       case ';': 
@@ -676,7 +676,7 @@ public final class Injector
     //cc.print(System.out);
 
     consumer.onClass(jc);
-    
+
     if(collect_when_blocking)
       write(getCollector());
     if(do_block)
@@ -714,8 +714,8 @@ public final class Injector
         doccomment=null;
         scheduleBlock(true);
         break;
-      case ';': 
-        // javac (but not jikes) accepts semicolons on class level, 
+      case ';':
+        // javac (but not jikes) accepts semicolons on class level,
         // so do we.
         getCollector();
         break;
@@ -732,7 +732,7 @@ public final class Injector
         throw new ParseException("class member expected.");
       }
     }
-    
+
     consumer.onClassEnd(jc);
     return jc;
   }
@@ -744,6 +744,7 @@ public final class Injector
       char c;
       while(true)
       {
+        scheduleBlock(true);
         try
         {
           c=readToken();
@@ -752,7 +753,12 @@ public final class Injector
         {
           return;
         }
-        
+
+        if(collect_when_blocking)
+          write(getCollector());
+        if(do_block)
+          getCollector();
+
         switch(c)
         {
         case '\0':
@@ -785,18 +791,28 @@ public final class Injector
           else
             parseFeature(null, bufs); // null says, its a top-level class
           break;
-          
+
         case 'c':
-          System.out.println("comment >"+comment+"<");
+          if(comment.startsWith("/**"))
+          {
+            doccomment=comment;
+            //System.out.println("doccomment: "+doccomment);
+            consumer.onFileDocComment(doccomment);
+          }
+          else
+          {
+            //System.out.println("comment: "+comment);
+            write(comment);
+          }
           break;
-          
+
         default:
           System.out.println("bufc >"+c+"<");
           break;
         }
       }
     }
-    catch(EndException e) 
+    catch(EndException e)
     {
       throw new ParseException("Unexpected End-of-File.");
     }
@@ -812,7 +828,7 @@ public final class Injector
   {
     int ln;
     int lp;
-    
+
     private ParseException(String message)
     {
       //super("["+linenumber+':'+lineposition+']'+' '+message);
@@ -820,14 +836,14 @@ public final class Injector
       ln=linenumber;
       lp=lineposition;
     }
-    
+
     public String getMessage()
     {
       return "["+linenumber+':'+lineposition+']'+' '+super.getMessage();
     }
-    
+
   }
-  
+
   /**
      @parameter tagname the tag name without the '@' prefix
      @return the first word following the tag
@@ -839,7 +855,7 @@ public final class Injector
     if(start<0)
       return null;
     start+=s.length();
-    
+
     int end;
     li: for(end=start; end<doccomment.length(); end++)
     {
@@ -864,21 +880,21 @@ public final class Injector
   public final static String[] extractDocParagraphs(String doccomment, String tagname)
   {
     ArrayList result=new ArrayList();
-    
+
     int start=doccomment.indexOf('@');
     while(true)
     {
       if(start<0)
         break;
       start++;
-      
+
       if(!doccomment.regionMatches(start, tagname, 0, tagname.length()))
       {
         start=doccomment.indexOf('@', start);
         continue;
       }
       start+=tagname.length();
-      
+
       if(Character.isLetterOrDigit(doccomment.charAt(start)))
       {
         start=doccomment.indexOf('@', start);
@@ -897,7 +913,7 @@ public final class Injector
         start=end;
       }
     }
-    
+
     String[] resultarray=new String[result.size()];
     resultarray=(String[])(result.toArray(resultarray));
     //System.out.println("docparagraphs:>"+tagname+"< >"+result+"<");

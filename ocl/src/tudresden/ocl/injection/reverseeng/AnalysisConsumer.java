@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * Created on 7. August 2000, 16:34
  */
- 
+
 package tudresden.ocl.injection.reverseeng;
 
 import tudresden.ocl.injection.*;
@@ -30,13 +30,13 @@ import java.util.*;
 
 import java.io.*;
 
-/** 
+/**
   * InjectionConsumer used to check for presence of element-type tags in a JavaFile.
   *
   * <p>After processing of a Java source file, {@link #m_lcdCollections} will contain a list of all collections
   * in the source file, together with their respective element-type tag. In addition, each element of the
   * list stores information that can be used to identifiy the exact comment where to place the element-type
-  * tag when saving the modified file. {@link #m_lmdMaps} will contain a list of similar entries for each map 
+  * tag when saving the modified file. {@link #m_lmdMaps} will contain a list of similar entries for each map
   * in the analysed file.</p>
   *
   * <p>Note that this scheme only work if the Java Source code is not modified externally between analysis
@@ -54,17 +54,17 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
   private static final int STATUS_MASK_COLLECTIONS = 1;
   private static final int STATUS_MASK_MAPS = 2;
   private static final int STATUS_MASK_INCOMPL = 4;
-  
+
   /**
     * Normal Java file: no collections, no maps.
     */
   public static final int STATUS_NORMALFILE = STATUS_MASK_NONE;
-  
+
   /**
     * File contains only collections which are complete.
     */
   public static final int STATUS_COLLECTIONSONLY = STATUS_MASK_COLLECTIONS;
-  
+
   /**
     * File contains only collections, some of which are incomplete.
     */
@@ -74,22 +74,22 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     * File contains only maps which are complete.
     */
   public static final int STATUS_MAPSONLY = STATUS_MASK_MAPS;
-  
+
   /**
     * File contains only maps, some of which are incomplete.
     */
   public static final int STATUS_MAPSONLY_INCOMPL = STATUS_MASK_MAPS | STATUS_MASK_INCOMPL;
-  
+
   /**
     * File contains collections and maps which are complete.
     */
   public static final int STATUS_COLLECTIONSANDMAPS = STATUS_MASK_COLLECTIONS | STATUS_MASK_MAPS;
-  
+
   /**
     * File contains collections and maps, some of which are incomplete.
     */
   public static final int STATUS_COLLECTIONSANDMAPS_INCOMPL = STATUS_MASK_COLLECTIONS | STATUS_MASK_MAPS | STATUS_MASK_INCOMPL;
-  
+
   /**
     * Optimization: Cache for Collection class object.
     */
@@ -102,7 +102,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
       t.printStackTrace ();
     }
   }
-  
+
   /**
     * Optimization: Cache for Map class object.
     */
@@ -115,17 +115,17 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
       t.printStackTrace ();
     }
   }
-  
+
   /**
     * The number of doc comments in the current file so far.
     */
   private int m_cComments = 0;
-  
+
   /**
     * The last doc comment parsed so far.
     */
   private String m_sCurrentComment = null;
-  
+
   /**
     * Collection attributes found in the current file.
     *
@@ -135,7 +135,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
   {
     m_lcdCollections = new LinkedList();
   }
-  
+
   /**
     * Map attributes found in the current file.
     *
@@ -145,30 +145,30 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
   {
     m_lmdMaps = new LinkedList();
   }
-  
+
   /**
     * All features found in the current file whether collections or maps.
     */
   private List m_ladFeatures;
   {
     m_ladFeatures = new LinkedList();
-  }  
-  
+  }
+
   private int m_nStatus = STATUS_NORMALFILE;
-  
+
   /**
     * Name of source file being analysed without trailing extension.
     */
   private String m_sFileName;
-  
-  /** 
-    * Creates new AnalysisConsumer 
+
+  /**
+    * Creates new AnalysisConsumer
     *
     * @param sFileName name of source file being analysed.
     */
   public AnalysisConsumer (String sFileName) {
     super ();
-    
+
     if (sFileName.indexOf (".java") > -1) {
       m_sFileName = sFileName.substring (0, sFileName.indexOf (".java"));
     }
@@ -176,56 +176,56 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
       m_sFileName = sFileName;
     }
   }
-  
-  /** 
+
+  /**
     * Encountered a package statement.
-    * 
+    *
     * Ignored.
     *
     * @see JavaFile#getPackageName()
     */
   public void onPackage(JavaFile javafile) {}
-  
-  /** 
+
+  /**
     * Encountered an import statement.
-    * 
+    *
     * Ignored.
     *
     * @see JavaFile#findType(String)
     */
   public void onImport(String importname) {}
-  
-  /** 
+
+  /**
     * Encountered a class header.
-    * 
+    *
     * Ignored.
     *
     */
   public void onClass(JavaClass cc) {}
-  
-  /** 
+
+  /**
     * Encountered the end of a class.
-    * 
+    *
     * Ignored.
     *
     */
   public void onClassEnd(JavaClass cc) throws java.io.IOException {}
-  
-  /** 
+
+  /**
     * Encountered the header of a java method.
-    * 
+    *
     * Ignored.
     *
     */
   public void onBehaviourHeader(JavaBehaviour jb) throws java.io.IOException {}
-  
+
   public void onAttributeHeader(JavaAttribute ja) throws java.io.IOException {}
 
-  /** 
+  /**
     * Called for attributes and methods.
-    * 
+    *
     * <p>If an attribute, checks whether a collection. If so, creates a new entry in m_lCollections.</p>
-    * 
+    *
     * <p><strong>This method relies on the compiled versions of all classes of the system to be analysed
     * to be available in the classpath.</strong></p>
     */
@@ -234,7 +234,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
       // Attribute. Also a collection?
       if (cf.getType () != null) {
         Class clClass = cf.getFile ().findType (cf.getType ());
-        
+
         if (clClass != null) {
           // Not a simple type --> check whether collection
           if (s_clCollection.isAssignableFrom (clClass)) {
@@ -242,23 +242,23 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
 
             if (m_sCurrentComment == null) {
               // Increase comment counter anyway, even though no comment had been attached.
-              // This is done, so that each Descriptor in the list of features has a unique 
+              // This is done, so that each Descriptor in the list of features has a unique
               // comment ID.
               m_cComments++;
             }
-            
-            CollectionDescriptor cd = new CollectionDescriptor (this, 
+
+            CollectionDescriptor cd = new CollectionDescriptor (this,
                                                                    cf.getParent(),
                                                                    cf.getName(),
                                                                    cf.getType(),
                                                                    m_sCurrentComment,
                                                                    m_cComments);
-            
+
             m_lcdCollections.add (cd);
             m_ladFeatures.add (cd);
-            
+
             m_nStatus |= STATUS_MASK_COLLECTIONS;
-            
+
             if (cd.isIncomplete()) {
               m_nStatus |= STATUS_MASK_INCOMPL;
             }
@@ -268,34 +268,34 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
 
             if (m_sCurrentComment == null) {
               // Increase comment counter anyway, even though no comment had been attached.
-              // This is done, so that each Descriptor in the list of features has a unique 
+              // This is done, so that each Descriptor in the list of features has a unique
               // comment ID.
               m_cComments++;
             }
-            
-            MapDescriptor md = new MapDescriptor (this, 
+
+            MapDescriptor md = new MapDescriptor (this,
                                                     cf.getParent(),
-                                                    cf.getName (), 
+                                                    cf.getName (),
                                                     cf.getType(),
                                                     m_sCurrentComment,
                                                     m_cComments);
-            
+
             m_lmdMaps.add (md);
             m_ladFeatures.add (md);
 
             m_nStatus |= STATUS_MASK_MAPS;
             if (md.isIncomplete()) {
               m_nStatus |= STATUS_MASK_INCOMPL;
-            }            
+            }
           }
         }
       }
     }
-    
-    m_sCurrentComment = null;    
+
+    m_sCurrentComment = null;
   }
-  
-  /** 
+
+  /**
     * Encountered a java comment.
     *
     * <p>If this is a doc comment, it is saved temporarily in m_sCurrentComment, so that onClassFeature can
@@ -304,19 +304,23 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     * @return Always true, to indicate that the next feature should be parsed.
     */
   public boolean onDocComment(String doccomment) throws java.io.IOException {
-    
+
     if (doccomment.startsWith ("/**")) {
       // JavaDoc comment: Save it!
       m_sCurrentComment = doccomment;
       m_cComments++;
     }
-    
+
     return true;
   }
-  
-  /** 
+
+  public void onFileDocComment(String doccomment) throws java.io.IOException {
+
+  }
+
+  /**
     * Encountered the end of the input stream.
-    * 
+    *
     * Ignored.
     *
     */
