@@ -26,7 +26,7 @@ public class Bank extends RLObject
      @element-type Person
      @key-type Integer
   */
-  HashMap customer=new HashMap();
+  public HashMap customer=new HashMap();
   
   String description;
 
