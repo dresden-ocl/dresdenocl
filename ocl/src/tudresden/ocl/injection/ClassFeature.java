@@ -85,6 +85,11 @@ public final class ClassFeature
     return modifiers;
   }
   
+  public boolean isStatic()
+  {
+    return java.lang.reflect.Modifier.isStatic(modifiers);
+  }
+  
   public String getType()
   {
     return type;
@@ -187,7 +192,7 @@ public final class ClassFeature
   {
     if(name.endsWith(WRAPPER_SUFFIX))
       return
-        literal.substring(0, name_end-name.length())+
+        literal.substring(0, name_end-WRAPPER_SUFFIX.length())+
         literal.substring(name_end, literal.length());
     else
       return literal;

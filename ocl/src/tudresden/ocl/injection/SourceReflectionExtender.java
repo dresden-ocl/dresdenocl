@@ -46,9 +46,9 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     if(parsedclasses.contains(fieldclass))
       return null;
 
-    System.out.println("getElementType(): "+field);
+    //System.out.println("getElementType(): "+field);
     if(!java.util.Collection.class.isAssignableFrom(field.getType()))
-      System.out.println("warning: is field has not a collection type.");
+      System.out.println("warning: "+field+"is field has not a collection type.");
     
     Class declaringclass=fieldclass;
     while(fieldclass.getDeclaringClass()!=null)
@@ -162,7 +162,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 
     private Class findElementType()
     {
-      System.out.println("findelementtype: >"+last_element_type+"<");
+      //System.out.println("findelementtype: >"+last_element_type+"<");
       if(last_element_type.indexOf('.')>=0)
       {
         try
@@ -217,7 +217,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       if(!cf.isMethod() && last_element_type!=null)
       {
         Class c=findElementType();
-        System.out.println("findElementType:"+c);
+        //System.out.println("findElementType:"+c);
         if(c!=null)
         {
           try
@@ -225,7 +225,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
             //System.out.println("getField: >"+classobject+"< >"+cf.getName()+"<");
             Field f=classobject.getDeclaredField(cf.getName());
             elementtypes.put(f,c);
-            System.out.println("SourceReflectionFacade: put("+f+","+c);
+            //System.out.println("SourceReflectionFacade: put("+f+","+c+")");
           }
           catch(NoSuchFieldException e) { throw new RuntimeException(e.toString()); }
         }

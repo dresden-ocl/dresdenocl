@@ -88,6 +88,11 @@ public abstract class Example implements Runnable
   Vector formats=new Vector();
   
   Format aFormat=new java.text.DecimalFormat();
+  
+  public boolean poly1_wrappedbyocl(tudresden.ocl.check.types.ReflectionExtender extender)
+  {
+    return true;
+  }
 
   public String getName_wrappedbyocl()
   {
@@ -142,7 +147,7 @@ public abstract class Example implements Runnable
   {
   }
   
-  static public void main_wrappedbyocl(String[] args)
+  static public void main(String[] args)
   {
     tudresden.ocl.lib.Ocl.STRICT_CHECKING=true;
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
@@ -156,9 +161,18 @@ public abstract class Example implements Runnable
     @see #set_wrappedbyocl(String, Integer, Integer[])
   */public void set(String name, Integer type, Integer[] qualifiers)
   {
-    checkOclInvariants();
-    set_wrappedbyocl(name, type, qualifiers);
-    checkOclInvariants();
+    if(currently_checking_ocl)
+      set_wrappedbyocl(name, type, qualifiers);
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      set_wrappedbyocl(name, type, qualifiers);
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -166,9 +180,18 @@ public abstract class Example implements Runnable
     @see #abstractMethod_wrappedbyocl()
   */void abstractMethod()
   {
-    checkOclInvariants();
-    abstractMethod_wrappedbyocl();
-    checkOclInvariants();
+    if(currently_checking_ocl)
+      abstractMethod_wrappedbyocl();
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      abstractMethod_wrappedbyocl();
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -176,9 +199,39 @@ public abstract class Example implements Runnable
     @see #run_wrappedbyocl()
   */public void run()
   {
-    checkOclInvariants();
-    run_wrappedbyocl();
-    checkOclInvariants();
+    if(currently_checking_ocl)
+      run_wrappedbyocl();
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      run_wrappedbyocl();
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #poly1_wrappedbyocl(tudresden.ocl.check.types.ReflectionExtender)
+  */public boolean poly1(tudresden.ocl.check.types.ReflectionExtender extender)
+  {
+    boolean result;
+    if(currently_checking_ocl)
+      result=poly1_wrappedbyocl(extender);
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      result=poly1_wrappedbyocl(extender);
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
+    return result;
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -186,9 +239,19 @@ public abstract class Example implements Runnable
     @see #getName_wrappedbyocl()
   */public String getName()
   {
-    checkOclInvariants();
-    String result=getName_wrappedbyocl();
-    checkOclInvariants();
+    String result;
+    if(currently_checking_ocl)
+      result=getName_wrappedbyocl();
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      result=getName_wrappedbyocl();
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
     return result;
   }/**
     A wrapper for checking ocl constraints.
@@ -197,9 +260,19 @@ public abstract class Example implements Runnable
     @see #getType_wrappedbyocl()
   */public Integer getType()
   {
-    checkOclInvariants();
-    Integer result=getType_wrappedbyocl();
-    checkOclInvariants();
+    Integer result;
+    if(currently_checking_ocl)
+      result=getType_wrappedbyocl();
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      result=getType_wrappedbyocl();
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
     return result;
   }/**
     A wrapper for checking ocl constraints.
@@ -208,41 +281,51 @@ public abstract class Example implements Runnable
     @see #getQualifiers_wrappedbyocl()
   */public Integer[] getQualifiers()
   {
-    checkOclInvariants();
+    Integer[] result;
+    if(currently_checking_ocl)
+      result=getQualifiers_wrappedbyocl();
+    else
     {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode24=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclString tudOclNode25=tudresden.ocl.lib.Ocl.toOclString(tudOclNode24.getFeature("hallo"));
-      final tudresden.ocl.lib.OclString tudOclNode26=new tudresden.ocl.lib.OclString("bello");
-      final tudresden.ocl.lib.OclBoolean tudOclNode27=tudOclNode25.isEqualTo(tudOclNode26);
-      if(!tudOclNode27.isTrue())
-        System.out.println("ocl precondition tudOclPre0 violated");
-    }
-    tudresden.ocl.lib.OclString tudOclNode34;
-    {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode32=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclAnyImpl tudOclResult1=tudresden.ocl.lib.OclAnyImpl.UNDEFINED;
-      final tudresden.ocl.lib.OclString tudOclNode33=tudresden.ocl.lib.Ocl.toOclString(tudOclNode32.getFeature("hallo"));
-      tudOclNode34=tudresden.ocl.lib.Ocl.toOclString(tudOclNode32.getFeature("hallo"));
-      final tudresden.ocl.lib.OclBoolean tudOclNode35=tudOclNode33.isEqualTo(tudOclNode34);
-    }
-    Integer[] result=getQualifiers_wrappedbyocl();
-    checkOclInvariants();
-    {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode28=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclAnyImpl tudOclResult0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
-      final tudresden.ocl.lib.OclString tudOclNode29=tudresden.ocl.lib.Ocl.toOclString(tudOclNode28.getFeature("hallo"));
-      final tudresden.ocl.lib.OclString tudOclNode30=new tudresden.ocl.lib.OclString("hallo");
-      final tudresden.ocl.lib.OclBoolean tudOclNode31=tudOclNode29.isEqualTo(tudOclNode30);
-      if(!tudOclNode31.isTrue())
-        System.out.println("ocl postcondition tudOclPost0 violated");
-    }
-    {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode32=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclAnyImpl tudOclResult1=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
-      final tudresden.ocl.lib.OclString tudOclNode33=tudresden.ocl.lib.Ocl.toOclString(tudOclNode32.getFeature("hallo"));
-      final tudresden.ocl.lib.OclBoolean tudOclNode35=tudOclNode33.isEqualTo(tudOclNode34);
-      if(!tudOclNode35.isTrue())
-        System.out.println("ocl postcondition tudOclPost1 violated");
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      tudresden.ocl.lib.OclString tudOclNode39;
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode29=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclString tudOclNode30=tudresden.ocl.lib.Ocl.toOclString(tudOclNode29.getFeature("hallo"));
+        final tudresden.ocl.lib.OclString tudOclNode31=new tudresden.ocl.lib.OclString("bello");
+        final tudresden.ocl.lib.OclBoolean tudOclNode32=tudOclNode30.isEqualTo(tudOclNode31);
+        if(!tudOclNode32.isTrue())
+          System.out.println("ocl precondition tudOclPre0 violated");
+      }
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode37=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclResult1=tudresden.ocl.lib.OclAnyImpl.UNDEFINED;
+        final tudresden.ocl.lib.OclString tudOclNode38=tudresden.ocl.lib.Ocl.toOclString(tudOclNode37.getFeature("hallo"));
+        tudOclNode39=tudresden.ocl.lib.Ocl.toOclString(tudOclNode37.getFeature("hallo"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode40=tudOclNode38.isEqualTo(tudOclNode39);
+      }
+      currently_checking_ocl=false;
+      result=getQualifiers_wrappedbyocl();
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode33=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclResult0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+        final tudresden.ocl.lib.OclString tudOclNode34=tudresden.ocl.lib.Ocl.toOclString(tudOclNode33.getFeature("hallo"));
+        final tudresden.ocl.lib.OclString tudOclNode35=new tudresden.ocl.lib.OclString("hallo");
+        final tudresden.ocl.lib.OclBoolean tudOclNode36=tudOclNode34.isEqualTo(tudOclNode35);
+        if(!tudOclNode36.isTrue())
+          System.out.println("ocl postcondition tudOclPost0 violated");
+      }
+      {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode37=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclResult1=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+        final tudresden.ocl.lib.OclString tudOclNode38=tudresden.ocl.lib.Ocl.toOclString(tudOclNode37.getFeature("hallo"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode40=tudOclNode38.isEqualTo(tudOclNode39);
+        if(!tudOclNode40.isTrue())
+          System.out.println("ocl postcondition tudOclPost1 violated");
+      }
+      currently_checking_ocl=false;
     }
     return result;
   }/**
@@ -252,9 +335,19 @@ public abstract class Example implements Runnable
     @see #getUnqualifiedType_wrappedbyocl()
   */public Integer getUnqualifiedType() throws IllegalArgumentException
   {
-    checkOclInvariants();
-    Integer result=getUnqualifiedType_wrappedbyocl();
-    checkOclInvariants();
+    Integer result;
+    if(currently_checking_ocl)
+      result=getUnqualifiedType_wrappedbyocl();
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      result=getUnqualifiedType_wrappedbyocl();
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
     return result;
   }/**
     A wrapper for checking ocl constraints.
@@ -263,9 +356,18 @@ public abstract class Example implements Runnable
     @see #setParent_wrappedbyocl(Object)
   */public void setParent(Object parent) throws IllegalArgumentException, NullPointerException
   {
-    checkOclInvariants();
-    setParent_wrappedbyocl(parent);
-    checkOclInvariants();
+    if(currently_checking_ocl)
+      setParent_wrappedbyocl(parent);
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      setParent_wrappedbyocl(parent);
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
   }/**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -273,9 +375,19 @@ public abstract class Example implements Runnable
     @see #getParent_wrappedbyocl()
   */public Object getParent()
   {
-    checkOclInvariants();
-    Object result=getParent_wrappedbyocl();
-    checkOclInvariants();
+    Object result;
+    if(currently_checking_ocl)
+      result=getParent_wrappedbyocl();
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      result=getParent_wrappedbyocl();
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
     return result;
   }/**
     A wrapper for checking ocl constraints.
@@ -284,20 +396,25 @@ public abstract class Example implements Runnable
     @see #printData_wrappedbyocl(java.io.PrintStream)
   */public void printData(java.io.PrintStream o)
   {
-    checkOclInvariants();
-    printData_wrappedbyocl(o);
-    checkOclInvariants();
+    if(currently_checking_ocl)
+      printData_wrappedbyocl(o);
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      printData_wrappedbyocl(o);
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
   }/**
-    A wrapper for checking ocl constraints.
+    A flag, that currently ocl constraints are checked on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #main_wrappedbyocl(String[])
-  */public static void main(String[] args)
-  {
-    main_wrappedbyocl(args);
-  }/**
+  */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Tue Jun 20 11:34:13 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Thu Jun 22 11:22:49 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
@@ -317,52 +434,63 @@ public abstract class Example implements Runnable
       if(!(i.next() instanceof Format))
         System.out.println("element checker failed.");
     {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclString tudOclNode1=tudresden.ocl.lib.Ocl.toOclString(tudOclNode0.getFeature("hallo"));
-      final tudresden.ocl.lib.OclString tudOclNode2=new tudresden.ocl.lib.OclString("hallo");
-      final tudresden.ocl.lib.OclBoolean tudOclNode3=tudOclNode1.isEqualTo(tudOclNode2);
-      if(!tudOclNode3.isTrue())
-        System.out.println("ocl invariant tudOclInv0 violated");
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclString tudOclNode1=tudresden.ocl.lib.Ocl.toOclString(tudOclNode0.getFeature("hallo"));
+        final tudresden.ocl.lib.OclString tudOclNode2=new tudresden.ocl.lib.OclString("hallo");
+        final tudresden.ocl.lib.OclBoolean tudOclNode3=tudOclNode1.isEqualTo(tudOclNode2);
+        if(!tudOclNode3.isTrue())
+          System.out.println("ocl invariant tudOclInv0 violated");
     }
     {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode4=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclSet tudOclNode5=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode4.getFeature("strings"));
-      final tudresden.ocl.lib.OclString tudOclNode6=new tudresden.ocl.lib.OclString("hallo");
-      final tudresden.ocl.lib.OclBoolean tudOclNode7=tudOclNode5.includes(tudOclNode6);
-      if(!tudOclNode7.isTrue())
-        System.out.println("ocl invariant tudOclInv1 violated");
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode4=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode5=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode4.getFeature("strings"));
+        final tudresden.ocl.lib.OclString tudOclNode6=new tudresden.ocl.lib.OclString("hallo");
+        final tudresden.ocl.lib.OclBoolean tudOclNode7=tudOclNode5.includes(tudOclNode6);
+        if(!tudOclNode7.isTrue())
+          System.out.println("ocl invariant tudOclInv1 violated");
     }
     {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode8=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclSet tudOclNode9=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode8.getFeature("integers"));
-      final tudresden.ocl.lib.OclInteger tudOclNode10=tudresden.ocl.lib.Ocl.toOclInteger(tudOclNode8.getFeature("anInteger"));
-      final tudresden.ocl.lib.OclBoolean tudOclNode11=tudOclNode9.includes(tudOclNode10);
-      if(!tudOclNode11.isTrue())
-        System.out.println("ocl invariant tudOclInv2 violated");
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode8=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode9=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode8.getFeature("integers"));
+        final tudresden.ocl.lib.OclInteger tudOclNode10=tudresden.ocl.lib.Ocl.toOclInteger(tudOclNode8.getFeature("anInteger"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode11=tudOclNode9.includes(tudOclNode10);
+        if(!tudOclNode11.isTrue())
+          System.out.println("ocl invariant tudOclInv2 violated");
     }
     {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode12=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclSequence tudOclNode13=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode12.getFeature("dates"));
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode14=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode12.getFeature("aDate"));
-      final tudresden.ocl.lib.OclBoolean tudOclNode15=tudOclNode13.includes(tudOclNode14);
-      if(!tudOclNode15.isTrue())
-        System.out.println("ocl invariant tudOclInv3 violated");
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode12=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSequence tudOclNode13=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode12.getFeature("dates"));
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode14=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode12.getFeature("aDate"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode15=tudOclNode13.includes(tudOclNode14);
+        if(!tudOclNode15.isTrue())
+          System.out.println("ocl invariant tudOclInv3 violated");
     }
     {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode16=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclSet tudOclNode17=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode16.getFeature("extenders"));
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode18=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode16.getFeature("anExtender"));
-      final tudresden.ocl.lib.OclBoolean tudOclNode19=tudOclNode17.includes(tudOclNode18);
-      if(!tudOclNode19.isTrue())
-        System.out.println("ocl invariant tudOclInv4 violated");
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode16=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSet tudOclNode17=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode16.getFeature("extenders"));
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode18=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode16.getFeature("anExtender"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode19=tudOclNode17.includes(tudOclNode18);
+        if(!tudOclNode19.isTrue())
+          System.out.println("ocl invariant tudOclInv4 violated");
     }
     {
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode20=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-      final tudresden.ocl.lib.OclSequence tudOclNode21=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode20.getFeature("formats"));
-      final tudresden.ocl.lib.OclAnyImpl tudOclNode22=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode20.getFeature("aFormat"));
-      final tudresden.ocl.lib.OclBoolean tudOclNode23=tudOclNode21.includes(tudOclNode22);
-      if(!tudOclNode23.isTrue())
-        System.out.println("ocl invariant tudOclInv5 violated");
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode20=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclSequence tudOclNode21=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode20.getFeature("formats"));
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode22=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode20.getFeature("aFormat"));
+        final tudresden.ocl.lib.OclBoolean tudOclNode23=tudOclNode21.includes(tudOclNode22);
+        if(!tudOclNode23.isTrue())
+          System.out.println("ocl invariant tudOclInv5 violated");
+    }
+    {
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode24=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode25=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode24.getFeature("anExtender"));
+Object[] tudOclParam0=new Object[1];
+tudOclParam0[0]=tudresden.ocl.lib.Ocl.reconvert(null, tudOclNode25);
+        final tudresden.ocl.lib.OclBoolean tudOclNode26=tudresden.ocl.lib.Ocl.toOclBoolean(tudOclNode24.getFeature("poly1", tudOclParam0));
+        final tudresden.ocl.lib.OclBoolean tudOclNode27=tudresden.ocl.lib.OclBoolean.TRUE;
+        final tudresden.ocl.lib.OclBoolean tudOclNode28=tudOclNode26.isEqualTo(tudOclNode27);
+        if(!tudOclNode28.isTrue())
+          System.out.println("ocl invariant tudOclInv6 violated");
     }
 }}
 
@@ -383,12 +511,25 @@ class SecondExample extends Example{
     @see #abstractMethod_wrappedbyocl()
   */void abstractMethod()
   {
-    checkOclInvariants();
-    abstractMethod_wrappedbyocl();
-    checkOclInvariants();
+    if(currently_checking_ocl)
+      abstractMethod_wrappedbyocl();
+    else
+    {
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+      abstractMethod_wrappedbyocl();
+      currently_checking_ocl=true;
+      checkOclInvariants();
+      currently_checking_ocl=false;
+    }
   }/**
+    A flag, that currently ocl constraints are checked on this object.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+  */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Tue Jun 20 11:34:14 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Thu Jun 22 11:22:49 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {

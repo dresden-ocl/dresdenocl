@@ -97,7 +97,7 @@ class OclInjector implements InjectionConsumer
 
   public void onClassFeature(ClassFeature cf) throws IOException
   {
-    if(cf.isMethod()&&!cf.isConstructor()&&!discardnextfeature)
+    if( cf.isMethod()&& !cf.isConstructor() && !cf.isStatic() && !discardnextfeature)
     {
       if(delayinsertions)
         methods.add(cf);
@@ -137,10 +137,16 @@ class OclInjector implements InjectionConsumer
 
   public static final String INV_METHOD="checkOclInvariants";
   public static final String violationMakro="System.out.println";
+  public static final String CHECKING_FLAG="currently_checking_ocl";
 
   public final void writeInvariants(String classname) throws IOException
   {
     Writer o=output;
+    o.write("/**\n    A flag, that currently ocl constraints are checked on this object.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+    o.write(OCL_AUTHOR);
+    o.write("\n  */private boolean ");
+    o.write(CHECKING_FLAG);
+    o.write("=false;");
     o.write("/**\n    A method for checking ocl invariants.\n    Generated automatically on ");
     o.write((new Date()).toString());
     o.write(", DO NOT CHANGE!\n    @author ");
@@ -160,16 +166,16 @@ class OclInjector implements InjectionConsumer
         CodeFragment cf=(CodeFragment)(e.next());
         o.write("    {\n");
         o.write(cf.getCode());
-        o.write("      if(!");
+        o.write("        if(!");
         o.write(cf.getResultVariable());
-        o.write(".isTrue())\n        ");
+        o.write(".isTrue())\n          ");
         o.write(violationMakro);
         o.write("(\"ocl invariant ");
         o.write(cf.getName());
         o.write(" violated\");\n    }\n");
       }
     }
-    o.write("}");
+    o.write('}');
   }
   
   /**
@@ -183,10 +189,27 @@ class OclInjector implements InjectionConsumer
   {
     if(!java.lang.reflect.Modifier.isStatic(cf.getModifiers()))
     {
-      output.write("    ");
+      output.write("      ");
       output.write(INV_METHOD);
       output.write("();\n");
     }
+  }
+
+  void writeCall(ClassFeature cf) throws IOException
+  {
+    Writer o=output;
+    o.write("      ");
+    if(!cf.isConstructor() && !"void".equals(cf.getType()))
+      o.write("result=");
+    o.write(cf.getWrappedName());
+    o.write('(');
+    for(Iterator i=cf.getParameters(); i.hasNext(); )
+    {
+      i.next();
+      o.write((String)i.next());
+      if(i.hasNext()) o.write(", ");
+    }
+    o.write(");\n");
   }
 
   public final void writeWrapper(ClassFeature cf) throws IOException
@@ -238,6 +261,19 @@ class OclInjector implements InjectionConsumer
       }
     }
     o.write("\n  {\n");
+    if(!cf.isConstructor() && !"void".equals(cf.getType()))
+    {
+      o.write("    ");
+      o.write(cf.getType());
+      o.write(" result;\n");
+    }
+    o.write("    if(");
+    o.write(CHECKING_FLAG);
+    o.write(")\n");
+    writeCall(cf);
+    o.write("    else\n    {\n      ");
+    o.write(CHECKING_FLAG);
+    o.write("=true;\n");
     if(!cf.isConstructor())
     {
       writeWrapperInvariant(cf);
@@ -246,56 +282,48 @@ class OclInjector implements InjectionConsumer
         SortedFragments sf=(SortedFragments)codefragments.get(cf.getClassName());
         if(sf!=null)
         {
-          for(Iterator i=sf.pre.iterator(); i.hasNext(); )
-          {
-            CodeFragment frag=(CodeFragment)i.next();
-            if(cf.getSignature().equals(frag.getConstrainedOperation()))
-            {
-              o.write("    {\n");
-              o.write(frag.getCode());
-              o.write("      if(!");
-              o.write(frag.getResultVariable());
-              o.write(".isTrue())\n        ");
-              o.write(violationMakro);
-              o.write("(\"ocl precondition ");
-              o.write(frag.getName());
-              o.write(" violated\");\n    }\n");
-            }
-          }
           for(Iterator i=sf.transfer.iterator(); i.hasNext(); )
           {
             CodeFragment frag=(CodeFragment)i.next();
             if(cf.getSignature().equals(frag.getConstrainedOperation()))
               o.write(frag.getCode());
           }
+          for(Iterator i=sf.pre.iterator(); i.hasNext(); )
+          {
+            CodeFragment frag=(CodeFragment)i.next();
+            if(cf.getSignature().equals(frag.getConstrainedOperation()))
+            {
+              o.write("      {\n");
+              o.write(frag.getCode());
+              o.write("        if(!");
+              o.write(frag.getResultVariable());
+              o.write(".isTrue())\n          ");
+              o.write(violationMakro);
+              o.write("(\"ocl precondition ");
+              o.write(frag.getName());
+              o.write(" violated\");\n      }\n");
+            }
+          }
           for(Iterator i=sf.preparation.iterator(); i.hasNext(); )
           {
             CodeFragment frag=(CodeFragment)i.next();
             if(cf.getSignature().equals(frag.getConstrainedOperation()))
             {
-              o.write("    {\n");
+              o.write("      {\n");
               o.write(frag.getCode());
-              o.write("    }\n");
+              o.write("      }\n");
             }
           }
         }
       }
     }
-    o.write("    ");
-    if(!cf.isConstructor() && !"void".equals(cf.getType()))
-    {
-      o.write(cf.getType());
-      o.write(" result=");
-    }
-    o.write(cf.getWrappedName());
-    o.write('(');
-    for(Iterator i=cf.getParameters(); i.hasNext(); )
-    {
-      i.next();
-      o.write((String)i.next());
-      if(i.hasNext()) o.write(", ");
-    }
-    o.write(");\n");
+    o.write("      ");
+    o.write(CHECKING_FLAG);
+    o.write("=false;\n");
+    writeCall(cf);
+    o.write("      ");
+    o.write(CHECKING_FLAG);
+    o.write("=true;\n");
     writeWrapperInvariant(cf);
     if(codefragments!=null)
     {
@@ -306,18 +334,21 @@ class OclInjector implements InjectionConsumer
           CodeFragment frag=(CodeFragment)i.next();
           if(cf.getSignature().equals(frag.getConstrainedOperation()))
           {
-            o.write("    {\n");
+            o.write("      {\n");
             o.write(frag.getCode());
-            o.write("      if(!");
+            o.write("        if(!");
             o.write(frag.getResultVariable());
-            o.write(".isTrue())\n        ");
+            o.write(".isTrue())\n          ");
             o.write(violationMakro);
             o.write("(\"ocl postcondition ");
             o.write(frag.getName());
-            o.write(" violated\");\n    }\n");
+            o.write(" violated\");\n      }\n");
           }
         }
     }
+    o.write("      ");
+    o.write(CHECKING_FLAG);
+    o.write("=false;\n    }\n");
     if(!cf.isConstructor() && !"void".equals(cf.getType()))
       o.write("    return result;\n");
     o.write("  }");
@@ -357,16 +388,16 @@ public class Main
         if(!nextConstraint.equals(""))
         {
           String constraintString=nextConstraint;
-          System.out.println("Loaded constraint:");
-          System.out.println(constraintString);
-          System.out.println("Parsing constraint.");
+          //System.out.println("Loaded constraint:");
+          //System.out.println(constraintString);
+          //System.out.println("Parsing constraint.");
           OclTree constraintTree=OclTree.createTree(constraintString, modelfacade);
           constraintTree.setNameCreator(namecreator);
-          System.out.println("Type checking constraint.");
+          //System.out.println("Type checking constraint.");
           constraintTree.assureTypes();
-          System.out.println("Normalizing.");
+          //System.out.println("Normalizing.");
           constraintTree.applyDefaultNormalizations();
-          System.out.println("Generating Code.");
+          //System.out.println("Generating Code.");
           CodeFragment[] frags=jcg.getCode(constraintTree);
           for (int j=0; j<frags.length; j++)
           {

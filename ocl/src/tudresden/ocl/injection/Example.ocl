@@ -6,6 +6,7 @@ inv: self.integers->includes(anInteger)
 inv: self.dates->includes(aDate)
 inv: self.extenders->includes(anExtender)
 inv: self.formats->includes(aFormat)
+inv: self.poly1(anExtender)=true
 
 context Example::getQualifiers()
 pre:  hallo='bello'

@@ -364,7 +364,7 @@ public class Injector
           if(collect_when_blocking)
           {
             cf.setLiteral(getCollector());
-            if(cf.isConstructor())
+            if(cf.isConstructor() || cf.isStatic())
               write(cf.getNotWrappedLiteral());
             else
               write(cf.getWrappedLiteral());
@@ -416,6 +416,7 @@ public class Injector
     {
       while(c!=';') // TODO
         c=readToken();
+      flushOutbuf();
       cf.setLiteral(getCollector());
       write(cf.getLiteral());
       //cf.print(System.out);
@@ -488,6 +489,9 @@ public class Injector
       case '\0':
         consumer.onClassFeature(parseFeature(classname));
         scheduleBlock(true);
+        break;
+      case ';': // javac (but not jikes) accepts semicolons on class level, so do we.
+        getCollector();
         break;
       default:
         throw new InjectorParseException("class member expected.");
