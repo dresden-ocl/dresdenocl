@@ -30,6 +30,9 @@
 //
 package tudresden.ocl.gui;
 
+import tudresden.ocl.check.OclTypeException;
+import tudresden.ocl.parser.OclParserException;
+
 /** 
   * A representation of an individual constraint with name and data.
   *
@@ -69,9 +72,11 @@ public interface ConstraintRepresentation {
     *
     * @exception IllegalStateException if the constraint is not in a state to
     *     accept body changes.
-    * @exception IllegalArgumentException if the specified name is not a legal
-    *     body for the constraint.
+    * @exception OclParserException if the specified constraint is not
+    *     syntactically correct.
+    * @exception OclTypeException if the specified constraint does not adhere by
+    *     OCL type rules.
     */
   public void setData (String sData)
-      throws IllegalStateException, IllegalArgumentException;
+      throws IllegalStateException, OclParserException, OclTypeException;
 }

@@ -26,11 +26,18 @@
 
 // OCLEditor.java -- new version of the ocl editor intented for practical use
 //
+// 02/23/2001  [sz9 ]  Added helper function to syntax check constraints.
 // 02/15/2001  [sz9 ]  Created.
 //
 package tudresden.ocl.gui;
 
+import tudresden.ocl.*;
 import tudresden.ocl.gui.events.*;
+import tudresden.ocl.parser.*;
+import tudresden.ocl.parser.analysis.*;
+import tudresden.ocl.parser.node.*;
+import tudresden.ocl.check.*;
+import tudresden.ocl.check.types.ModelFacade;
 
 import javax.swing.*;
 
@@ -213,6 +220,21 @@ public class OCLEditor extends javax.swing.JPanel
     * The table model used by the list of constraints table.
     */
   private ConstraintTableModel m_ctmTableModel = new ConstraintTableModel();
+
+  /**
+   * Does {@link #parseAndCheckConstraint} perform type checking?
+   */
+  private boolean m_fDoTypeCheck = true;
+  
+  /**
+   * Should multi-constraint inputs be automatically split into individual
+   * constraints?
+   * NOT IMPLEMENTED YET!
+   */
+  private boolean m_fDoAutoSplit = false;
+
+  public static final int OPTIONMASK_TYPECHECK = 1;
+  public static final int OPTIONMASK_AUTOSPLIT = 2;
   
   /** Creates new form OCLEditor */
   public OCLEditor() {
@@ -249,6 +271,91 @@ public class OCLEditor extends javax.swing.JPanel
     
     m_jtConstraintList.clearSelection();
   }
+
+  /**
+   * Specify which user option check boxes should be displayed.
+   */
+  public void setOptionMask (int nOptionMask) {
+    if (nOptionMask == 0) {
+      m_jpOptionsGroup.setVisible (false);
+      return;
+    }
+
+    m_jpOptionsGroup.setVisible (true);
+
+    m_jcbTypeChecking.setVisible ((nOptionMask & OPTIONMASK_TYPECHECK) != 0);
+    m_jcbTypeChecking.setSelected (m_fDoTypeCheck);
+    
+    m_jcbAutoSplit.setVisible ((nOptionMask & OPTIONMASK_AUTOSPLIT) != 0);    
+    m_jcbAutoSplit.setSelected (m_fDoAutoSplit);
+  }
+  
+  /**
+   * Check the specified constraint using the specified model facade for model
+   * information. Return the parse tree for the constraint.
+   * 
+   * <p>This is a short-cut helper function for editor models that want to parse
+   * constraints before adding them to the model base.</p>
+   * 
+   * @exception OclParserException if a syntax error occurred.
+   * @exception IOException if an I/O operation failed.
+   * @exception OclTypeException if a type checking error occurred.
+   */
+  public OclTree parseAndCheckConstraint (final String sConstraint,
+                                              final ModelFacade mfFacade)
+    throws OclParserException,
+            java.io.IOException,
+            OclTypeException {
+    // Parse and syntax check
+    final OclTree tree = OclTree.createTree (sConstraint,
+                                               mfFacade);
+    
+    // Type check
+    if ((tree != null) &&
+         (m_fDoTypeCheck)) {
+       DepthFirstAdapter dfaTypeChecker = new DepthFirstAdapter() {
+        private RuntimeException m_rteException = null;
+        
+        public void inStart (Start node) {
+          defaultIn(node);
+        }
+
+        public void outStart(Start s) {
+          if (m_rteException != null) {
+            throw m_rteException;
+          }
+        }
+        
+        public void defaultIn(Node node) {
+          try {
+            Object o = tree.getNodeType(node);
+          }
+          catch (RuntimeException e) {
+            if (m_rteException == null) {
+              m_rteException = e;
+            }
+          }
+        }
+      };
+
+      try {
+        tree.apply (dfaTypeChecker);
+
+        try {
+          tree.applyGeneratedTests();
+        }
+        catch (java.security.AccessControlException ace) {
+          // SecurityManager denies access to non-public fields
+          // Ignore and assume all is correct
+        }
+      }
+      catch (Exception e) {
+        throw new OclTypeException (e.getMessage());
+      }
+    }
+
+    return tree;
+  }
   
   /** This method is called from within the constructor to
    * initialize the form.
@@ -269,6 +376,9 @@ public class OCLEditor extends javax.swing.JPanel
     m_jtaConstraintEditor = new javax.swing.JTextArea ();
     m_jpEditorButtonsGroup = new javax.swing.JPanel ();
     m_jbSubmitConstraintButton = new javax.swing.JButton ();
+    m_jpOptionsGroup = new javax.swing.JPanel ();
+    m_jcbTypeChecking = new javax.swing.JCheckBox ();
+    m_jcbAutoSplit = new javax.swing.JCheckBox ();
     setLayout (new java.awt.BorderLayout ());
     setPreferredSize (new java.awt.Dimension(500, 300));
     setMinimumSize (new java.awt.Dimension(500, 300));
@@ -379,7 +489,43 @@ public class OCLEditor extends javax.swing.JPanel
 
     add (m_jspMainPane, java.awt.BorderLayout.CENTER);
 
+    m_jpOptionsGroup.setLayout (new java.awt.FlowLayout (0, 10, 5));
+    m_jpOptionsGroup.setBorder (new javax.swing.border.TitledBorder("Options"));
+
+      m_jcbTypeChecking.setSelected (true);
+      m_jcbTypeChecking.setText ("Type Check");
+      m_jcbTypeChecking.addItemListener (new java.awt.event.ItemListener () {
+        public void itemStateChanged (java.awt.event.ItemEvent evt) {
+          onTypeCheckingStateChanged (evt);
+        }
+      }
+      );
+  
+      m_jpOptionsGroup.add (m_jcbTypeChecking);
+  
+      m_jcbAutoSplit.setSelected (true);
+      m_jcbAutoSplit.setText ("AutoSplit Constraints");
+      m_jcbAutoSplit.addItemListener (new java.awt.event.ItemListener () {
+        public void itemStateChanged (java.awt.event.ItemEvent evt) {
+          onAutoSplitStateChanged (evt);
+        }
+      }
+      );
+  
+      m_jpOptionsGroup.add (m_jcbAutoSplit);
+  
+
+    add (m_jpOptionsGroup, java.awt.BorderLayout.SOUTH);
+
   }//GEN-END:initComponents
+
+  private void onAutoSplitStateChanged (java.awt.event.ItemEvent evt) {//GEN-FIRST:event_onAutoSplitStateChanged
+    m_fDoAutoSplit = m_jcbAutoSplit.isSelected();
+  }//GEN-LAST:event_onAutoSplitStateChanged
+
+  private void onTypeCheckingStateChanged (java.awt.event.ItemEvent evt) {//GEN-FIRST:event_onTypeCheckingStateChanged
+    m_fDoTypeCheck = m_jcbTypeChecking.isSelected();
+  }//GEN-LAST:event_onTypeCheckingStateChanged
 
   /**
     * React to the submit button.
@@ -393,10 +539,17 @@ public class OCLEditor extends javax.swing.JPanel
           m_oclemModel.getConstraintAt (nIdx)
               .setData (m_jtaConstraintEditor.getText());
         }
-        catch (IllegalArgumentException iae) {
+        catch (OclParserException ope) {
           JOptionPane.showMessageDialog (null,
-                                           "Invalid constraint: " +
-                                                iae.getMessage(),
+                                           "Syntax error: " +
+                                                ope.getMessage(),
+                                           "Error",
+                                           JOptionPane.ERROR_MESSAGE);
+        }
+        catch (OclTypeException ote) {
+          JOptionPane.showMessageDialog (null,
+                                           "Type checking failed: " +
+                                                ote.getMessage(),
                                            "Error",
                                            JOptionPane.ERROR_MESSAGE);
         }
@@ -448,6 +601,9 @@ public class OCLEditor extends javax.swing.JPanel
   private javax.swing.JTextArea m_jtaConstraintEditor;
   private javax.swing.JPanel m_jpEditorButtonsGroup;
   private javax.swing.JButton m_jbSubmitConstraintButton;
+  private javax.swing.JPanel m_jpOptionsGroup;
+  private javax.swing.JCheckBox m_jcbTypeChecking;
+  private javax.swing.JCheckBox m_jcbAutoSplit;
   // End of variables declaration//GEN-END:variables
 
   // ListSelectionListener interface method

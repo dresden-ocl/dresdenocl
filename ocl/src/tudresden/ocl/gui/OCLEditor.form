@@ -175,5 +175,52 @@
         </Container>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JPanel" name="m_jpOptionsGroup">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="com.netbeans.developer.explorer.propertysheet.editors.BorderEditor">
+          <Border info="com.netbeans.developerx.loaders.form.formeditor.border.TitledBorderInfo">
+            <TitledBorder title="Options"/>
+          </Border>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="South"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout">
+        <Property name="alignment" type="int" value="0"/>
+        <Property name="horizontalGap" type="int" value="10"/>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JCheckBox" name="m_jcbTypeChecking">
+          <Properties>
+            <Property name="selected" type="boolean" editor="sun.beans.editors.BoolEditor" value="true"/>
+            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Type Check"/>
+          </Properties>
+
+          <Events>
+            <EventHandler event="itemStateChanged" handler="onTypeCheckingStateChanged"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="m_jcbAutoSplit">
+          <Properties>
+            <Property name="selected" type="boolean" editor="sun.beans.editors.BoolEditor" value="true"/>
+            <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="AutoSplit Constraints"/>
+          </Properties>
+
+          <Events>
+            <EventHandler event="itemStateChanged" handler="onAutoSplitStateChanged"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
