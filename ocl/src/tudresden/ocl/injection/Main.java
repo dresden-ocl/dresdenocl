@@ -44,10 +44,12 @@ final class OclInjector implements InjectionConsumer
   private OclInjectorConfig config;
 
   /**
-     Collects all methods of the current class, except automatically generated methods.
-     Is used only, if delayinsertions is true. Otherwise methods is null.
+     Collects all behavioral features of the current class, 
+     except automatically generated features.
+     Is used only, if delayinsertions is true. Otherwise it is null.
      @see #delayinsertions
-     @see JavaMethod
+     @see JavaBehaviour
+     @element-type JavaBehaviour
   */
   private ArrayList methods=null;
 
@@ -126,7 +128,7 @@ final class OclInjector implements InjectionConsumer
 
     if(delayinsertions)
       for(Iterator i=methods.iterator(); i.hasNext(); )
-        writeWrapper((JavaMethod)i.next());
+        writeWrapper((JavaBehaviour)i.next());
     for(Iterator i=observedFeatures.iterator(); i.hasNext(); )
       writeObserver((JavaFeature)i.next());
     writeChangedChecker();
@@ -140,7 +142,7 @@ final class OclInjector implements InjectionConsumer
       (observedFeatures_stack.remove(observedFeatures_stack.size()-1));
   }
   
-  public void onMethodHeader(JavaMethod cf) 
+  public void onBehaviourHeader(JavaBehaviour cf) 
     throws java.io.IOException
   {
     if(clean || cf.isStatic())
@@ -162,14 +164,14 @@ final class OclInjector implements InjectionConsumer
          !discardnextfeature)
         observedFeatures.add(cf);
       
-      if( cf instanceof JavaMethod && 
+      if( cf instanceof JavaBehaviour && 
           !cf.isStatic() && 
           !discardnextfeature)
       {
         if(delayinsertions)
           methods.add(cf);
         else
-          writeWrapper((JavaMethod)cf);
+          writeWrapper((JavaBehaviour)cf);
         
         //if(!"void".equals(cf.getType()))
           //observedFeatures.add(cf);
@@ -464,25 +466,34 @@ final class OclInjector implements InjectionConsumer
     }
   }
   
-  private final boolean hasInvariantScope(JavaMethod jm)
+  private final boolean hasInvariantScope(JavaBehaviour jb)
   {
     return
-      (getInvariantScope(jm.getModifiers()) >= config.invariantScope);
+      (getInvariantScope(jb.getModifiers()) >= config.invariantScope);
   }
   
-  public final void writeWrapper(JavaMethod cf) throws IOException
+  public final void writeWrapper(JavaBehaviour cf) throws IOException
   {
     Writer o=output;
     o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n    @see #");
-    o.write(cf.getWrappedName());
+    if(cf instanceof JavaConstructor)
+      o.write(cf.getName());
+    else
+      o.write(((JavaMethod)cf).getWrappedName());
     o.write('(');
     for(Iterator i=cf.getParameters(); i.hasNext(); )
     {
       o.write((String)(i.next()));
       i.next();
       if(i.hasNext()) o.write(", ");
+    }
+    if(cf instanceof JavaConstructor)
+    {
+      if(cf.getParameters().hasNext())
+        o.write(", ");
+      o.write(tudresden.ocl.injection.lib.WrapperDummy.class.getName());
     }
     o.write(")\n  */");
     String modifierString=
@@ -548,14 +559,15 @@ final class OclInjector implements InjectionConsumer
     else
     {
     // TODO identation
+    JavaMethod jm=(JavaMethod)cf;
     o.write("    if(");
     o.write(Invariant.CHECKING_FLAG);
     o.write(")\n");
-    writeCall(cf);
+    writeCall(jm);
     o.write("    else\n    {\n      ");
     o.write(Invariant.CHECKING_FLAG);
     o.write("=true;\n");
-    if(!cf.isConstructor())
+    //if(!cf.isConstructor())
     {
       writeChangedCheckerCall();
       if(hasInvariantScope(cf))
@@ -568,13 +580,13 @@ final class OclInjector implements InjectionConsumer
           for(Iterator i=sf.transfer.iterator(); i.hasNext(); )
           {
             CodeFragment frag=(CodeFragment)i.next();
-            if(cf.getSignature().equals(frag.getConstrainedOperation()))
+            if(jm.getSignature().equals(frag.getConstrainedOperation()))
               o.write(frag.getCode());
           }
           for(Iterator i=sf.pre.iterator(); i.hasNext(); )
           {
             CodeFragment frag=(CodeFragment)i.next();
-            if(cf.getSignature().equals(frag.getConstrainedOperation()))
+            if(jm.getSignature().equals(frag.getConstrainedOperation()))
             {
               o.write("      {\n");
               o.write(frag.getCode());
@@ -592,7 +604,7 @@ final class OclInjector implements InjectionConsumer
           for(Iterator i=sf.preparation.iterator(); i.hasNext(); )
           {
             CodeFragment frag=(CodeFragment)i.next();
-            if(cf.getSignature().equals(frag.getConstrainedOperation()))
+            if(jm.getSignature().equals(frag.getConstrainedOperation()))
             {
               o.write("      {\n");
               o.write(frag.getCode());
@@ -605,7 +617,7 @@ final class OclInjector implements InjectionConsumer
     o.write("      ");
     o.write(Invariant.CHECKING_FLAG);
     o.write("=false;\n");
-    writeCall(cf);
+    writeCall(jm);
     o.write("      ");
     o.write(Invariant.CHECKING_FLAG);
     o.write("=true;\n");
@@ -619,7 +631,7 @@ final class OclInjector implements InjectionConsumer
         for(Iterator i=sf.post.iterator(); i.hasNext(); )
         {
           CodeFragment frag=(CodeFragment)i.next();
-          if(cf.getSignature().equals(frag.getConstrainedOperation()))
+          if(jm.getSignature().equals(frag.getConstrainedOperation()))
           {
             o.write("      {\n");
             o.write(frag.getCode());

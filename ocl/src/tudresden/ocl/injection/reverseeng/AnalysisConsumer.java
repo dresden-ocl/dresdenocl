@@ -153,7 +153,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     * Ignored.
     *
     */
-  public void onMethodHeader(JavaMethod cf) throws java.io.IOException {}
+  public void onBehaviourHeader(JavaBehaviour jb) throws java.io.IOException {}
   
   /** 
     * Called for attributes and methods.

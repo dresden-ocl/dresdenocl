@@ -62,12 +62,13 @@ public interface InjectionConsumer
      @parameter cf
         contains all parsed information about the method
   */
-  public void onMethodHeader(JavaMethod cf) throws java.io.IOException;
+  public void onBehaviourHeader(JavaBehaviour jb) 
+    throws java.io.IOException;
   
   /**
      Called for attributes and methods.
-     Is called additionally to onMethodHeader.
-     @see #onMethodHeader(JavaMethod)
+     Is called additionally to onBehaviourHeader.
+     @see #onBehaviourHeader(JavaBehaviour)
   */
   public void onClassFeature(JavaFeature cf) throws java.io.IOException, InjectorParseException;
   

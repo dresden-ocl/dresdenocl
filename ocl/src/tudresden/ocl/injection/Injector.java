@@ -420,11 +420,13 @@ public final class Injector
 
     if(c=='(') // it's a method/constructor
     {
-      JavaMethod cf=
+      JavaBehaviour jb=
+        (featuretype==null) ?
+        (JavaBehaviour)new JavaConstructor(parent, modifiers, featurename) :
         new JavaMethod(parent, modifiers, featuretype, featurename, position_name_end);
-      cf.setLastParameterStart(collector.length()+1);
-      parseMethod(cf);
-      return cf;
+      jb.setLastParameterStart(collector.length()+1);
+      parseMethod(jb);
+      return jb;
     }
     else // it's an attribute
     {
@@ -435,7 +437,7 @@ public final class Injector
     }
   }
 
-  private void parseMethod(JavaMethod cf)
+  private void parseMethod(JavaBehaviour cf)
     throws IOException, EndException, InjectorParseException
   {
     char c=readToken();
@@ -481,7 +483,7 @@ public final class Injector
         if(collect_when_blocking)
         {
           cf.setLiteral(getCollector());
-          consumer.onMethodHeader(cf);
+          consumer.onBehaviourHeader(cf);
         }
         parseBody(false);
         flushOutbuf();
@@ -490,7 +492,7 @@ public final class Injector
         if(collect_when_blocking)
         {
           cf.setLiteral(getCollector());
-          consumer.onMethodHeader(cf);
+          consumer.onBehaviourHeader(cf);
         }
         flushOutbuf();
         break ti;

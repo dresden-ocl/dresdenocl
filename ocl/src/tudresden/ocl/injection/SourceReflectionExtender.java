@@ -162,7 +162,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     private String last_element_type=null;
     private String last_key_type=null;
 
-    public void onMethodHeader(JavaMethod cf)
+    public void onBehaviourHeader(JavaBehaviour jb)
     {
     }
     
