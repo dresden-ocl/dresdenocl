@@ -508,7 +508,15 @@ public class Injector
       char c;
       while(true)
       {
-        c=readToken();
+        try
+        {
+          c=readToken();
+        }
+        catch(EndException e)
+        {
+          return;
+        }
+        
         if(c=='\0')
         {
           String bufs=buf.toString();
@@ -543,7 +551,10 @@ public class Injector
         }
       }
     }
-    catch(EndException e) {};
+    catch(EndException e) 
+    {
+      throw new InjectorParseException("Unexpected End-of-File.");
+    }
   }
 
   class EndException extends Exception

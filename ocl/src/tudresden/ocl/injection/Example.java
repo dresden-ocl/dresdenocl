@@ -413,7 +413,7 @@ public abstract class Example implements Runnable
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Thu Jun 22 11:22:49 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Thu Jun 22 16:25:03 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
@@ -528,7 +528,7 @@ class SecondExample extends Example{
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Thu Jun 22 11:22:49 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Thu Jun 22 16:25:04 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
