@@ -88,6 +88,12 @@ public final class JavaFile
      This mapping depends on the import statements encountered
      in this java file.
      Implements Java Language Specification 7.5.3.
+  
+     Note, that the result depends also on the classes that are
+     available (in the CLASSPATH) when running this method.
+     Using this method in the ocl injector assumes, 
+     that at injection time the same classes are available
+     as at compile time of the modified user code.
   */
   public final Class findType(String typename)
   {
