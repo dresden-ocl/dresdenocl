@@ -1,6 +1,6 @@
-// FILE: d:/java/classes/royloy/Company.java
 
 package tudresden.ocl.test.royloy;
+
 import java.util.*;
 
 public class Company extends RLObject
@@ -23,6 +23,9 @@ public class Company extends RLObject
   {
     this.description=description;
     this.manager=manager;
+    employees.add(manager);
+    manager.employers.add(this);
+    numberOfEmployees=employees.size();
   }
 
   public Person getOldestEmployee() {
@@ -37,6 +40,7 @@ public class Company extends RLObject
   {
     employees.add(p);
     p.employers.add(this);
+    numberOfEmployees=employees.size();
   }
   
   public String toString()

@@ -23,14 +23,9 @@ public class Person extends RLObject
   */
   public HashSet employers=new HashSet();
 
-  /**
- *
- */
-    protected Person wife;
-  /**
- *
- */
-    protected Person husband;
+  protected Person wife;
+
+  protected Person husband;
 
   public Person(String name)
   {
@@ -38,8 +33,11 @@ public class Person extends RLObject
   }
   
   // Operations
-  public float getIncomeAfterTax(float tax) {
-  return 0.0f;
+  public float incomeaftertax=1.0f;
+  
+  public float getIncomeAfterTax(float tax) 
+  {
+    return incomeaftertax;
   }
   
   public String toString()

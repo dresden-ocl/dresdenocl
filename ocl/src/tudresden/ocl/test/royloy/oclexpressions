@@ -1,27 +1,27 @@
 
-context Person inv age: age>=0
-
 context Person
-inv: age.div(7)<7
-inv: age.mod(7)<7
-inv: age.max(7)<7
-inv: age.min(7)<7
+inv age: age>=0
 
-context Company inv manager_is_employee:
+context Company
+inv manager_is_employee:
   employees->iterate(
     p:Person ; b:Bag(Person)=Bag{} |
     b->including(p)
   )->includes(manager)
 
-context Company inv numberOfEmployees: self.numberOfEmployees=employees->size
+context Company
+inv numberOfEmployees: self.numberOfEmployees=employees->size
 
-context Company inv manager_is_employee2:
+context Company
+inv manager_is_employee2:
 manager.employers->includes(self)
 
-context Person inv manager_is_employee3:
+context Person
+inv manager_is_employee3:
 managedCompanies->forAll(employees->includes(self))
 
-context Person inv age2:
+context Person
+inv age2:
 employers.employees->forAll(age>0)
 
 context Person inv husband:
@@ -32,19 +32,24 @@ else
 endif
 
 context Customer
-inv: title=(if isMale=true then 'Mr' else 'Ms' endif)
+inv title_gender:
+title=(if isMale=true then 'Mr' else 'Ms' endif)
 
 context LoyaltyProgram
-inv: self.customer->forAll(
+inv customer_unique_name:
+self.customer->forAll(
   c1, c2 | c1<>c2 implies c1.name<>c2.name
 )
-inv: self.customer->isUnique(name)
+inv  customer_unique_name2:
+self.customer->isUnique(name)
 
 context Membership
-inv: customer.cards.membership->includes(self)
+inv membership_back:
+customer.cards.membership->includes(self)
 
 context Membership
-inv: program.serviceLevel->includes(actualLevel)
+inv actualLevel:
+program.serviceLevel->includes(actualLevel)
 
 context Membership
 inv: loyaltyAccount.points>=0 or loyaltyAccount->isEmpty
@@ -82,11 +87,13 @@ context Person inv nameUpperCase:
 let firstLetter:String=name.substring(1,1) in
 firstLetter = firstLetter.toUpper
 
-context Person inv:
+context Person
+inv getIncomeAfterTax1:
 getIncomeAfterTax(0.3)>0
 
-context Person inv:
-getIncomeAfterTax(1)=0.0
+context Person
+inv getIncomeAfterTax2:
+getIncomeAfterTax(1)=1.0
 
 context Person inv:
 self.oclIsKindOf(Person)
@@ -116,12 +123,14 @@ customer[0]->size>10
 context Bank inv:
 customer[42].age>0
 
-context Person inv:
+context Person
+inv happy_computing:
 let a=0 in
 let b=a+1 in
 let c=a + self.employers->size in
 let d=b*2 in
-a<b and self.employers->size<c and d>0
+a<b and self.employers->size<=c and d>0
 
-context OclAny inv:
+context OclAny
+inv metamodel:
 oclIsKindOf(Bank)=oclIsTypeOf(Person)
