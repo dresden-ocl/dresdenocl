@@ -154,14 +154,20 @@ public final class Invariant implements FeatureListener
   
   /**
      Calculates the hash code as defined in 
-     java.util.List.hashCode(), but calls identityHashCode
+     {@link List#hashCode()}, but calls 
+     <code>System.identityHashCode(Object)</code>
      for each contained object.
-     @see List#hashCode()
-     @see System#identityHashCode(Object)
+
+     For null arguments it returns the same value as for
+     empty lists.
   */
   public static final int identityHashCode(List list)
   {
     int hashCode=1;
+
+    if(list==null)
+      return hashCode;
+    
     for(Iterator i=list.iterator(); i.hasNext(); ) 
     {
       Object obj=i.next();
@@ -174,10 +180,17 @@ public final class Invariant implements FeatureListener
      Calculates the hash code equivalent to
      {@link #identityHashCode(List)}, 
      but for arrays instead of lists.
+
+     For null arguments it returns the same value as for
+     empty arrays.
   */
   public static final int identityHashCode(Object[] array)
   {
     int hashCode=1;
+
+    if(array==null)
+      return hashCode;
+    
     for(int i=0; i<array.length; i++) 
     {
       Object obj=array[i];
@@ -188,14 +201,20 @@ public final class Invariant implements FeatureListener
 
   /**
      Calculates the hash code as defined in 
-     java.util.Set.hashCode(), but calls identityHashCode
+     {@link Set#hashCode()}, but calls 
+     <code>System.identityHashCode(Object)</code>
      for each contained object.
-     @see Set#hashCode()
-     @see System#identityHashCode(Object)
+  
+     For null arguments it returns the same value as for
+     empty sets.
   */
   public static final int identityHashCode(Set set)
   {
     int hashCode=0;
+
+    if(set==null)
+      return hashCode;
+
     for(Iterator i=set.iterator(); i.hasNext(); ) 
     {
       Object obj=i.next();
@@ -206,11 +225,13 @@ public final class Invariant implements FeatureListener
 
   /**
      Calculates the hash code as defined in 
-     java.util.Map.hashCode(), but calls identityHashCode
+     {@link Map#hashCode()}, but calls 
+     <code>System.identityHashCode(Object)</code>
      for each contained object.
-     @see Map#hashCode()
      @see Map.Entry#hashCode()
-     @see System#identityHashCode(Object)
+  
+     For null arguments it returns the same value as for
+     empty maps.
   */
   public static final int identityHashCode(Map map)
   {
@@ -231,6 +252,10 @@ public final class Invariant implements FeatureListener
       may disable the checks below.
     */
     int hashCode=0;
+
+    if(map==null)
+      return hashCode;
+
     Iterator ikey=map.keySet().iterator();
     Iterator ival=map.values().iterator();
     while(ikey.hasNext()) 

@@ -43,13 +43,17 @@ public final class TypeTracer
 
   public static void traceTypes(String attr, Collection c)
   {
-    traceTypes(attr, c.iterator(), element_types, "element-type");
+    if(c!=null)
+      traceTypes(attr, c.iterator(), element_types, "element-type");
   }
 
   public static void traceTypes(String attr, Map m)
   {
-    traceTypes(attr, m.values().iterator(), element_types, "element-type");
-    traceTypes(attr, m.keySet().iterator(), key_types, "key-type");
+    if(m!=null)
+    {
+      traceTypes(attr, m.values().iterator(), element_types, "element-type");
+      traceTypes(attr, m.keySet().iterator(), key_types, "key-type");
+    }
   }
 
   private static void traceTypes(String attr, Iterator i, HashMap types, String kind)
@@ -176,7 +180,7 @@ public final class TypeTracer
      Is set to the file referred by the property 
      tudresden.ocl.injection.lib.TypeTracer.log if this 
      property is defined, otherwise points to
-     {@link System#out}.
+     <code>System.out</code>.
   
      May also be set by the user code.
   

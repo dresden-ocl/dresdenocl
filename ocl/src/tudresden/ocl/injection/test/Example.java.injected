@@ -207,6 +207,19 @@ public abstract class Example implements Runnable
     }
   }}  
 
+  /**
+    * Testcomment
+    */
+  private int a;
+  
+  private List collectionWithoutComment;
+  
+  /**
+    * Testcomment
+    */
+  private int b;
+  
+  private Map mapWithoutComment;
 
   private Example(tudresden.ocl.injection.lib.WrapperDummy dummy)
   {
@@ -261,6 +274,10 @@ public abstract class Example implements Runnable
   Integer anInteger=new Integer(5);
   
   /**
+    * A collection of dates.
+    *
+    * Here are some lines to test the reveng GUI....
+    *
      @element-type Date
   */
   List dates=new ArrayList();
@@ -282,6 +299,11 @@ public abstract class Example implements Runnable
   Format aFormat=new java.text.DecimalFormat();
 
   /**
+  *
+  * A map from strings to integers.
+  * * * * *  These stars should be removed by the reveng GUI...
+  
+  *
      @element-type Integer
      @key-type String
   */
@@ -937,6 +959,46 @@ public abstract class Example implements Runnable
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
+    @see #a
+  */private int a_oclbackup812374=a;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #a
+  */public final java.util.HashSet a_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #collectionWithoutComment
+  */private int collectionWithoutComment_oclbackup812374=0;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #collectionWithoutComment
+  */public final java.util.HashSet collectionWithoutComment_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #b
+  */private int b_oclbackup812374=b;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #b
+  */public final java.util.HashSet b_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #mapWithoutComment
+  */private int mapWithoutComment_oclbackup812374=0;/**
+    Contains observers for modifications of this feature.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #mapWithoutComment
+  */public final java.util.HashSet mapWithoutComment_oclobservinginvariants812374=new java.util.HashSet();/**
+    A backup for detecting modifications.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
     @see #strings
   */private int strings_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
@@ -1148,6 +1210,28 @@ public abstract class Example implements Runnable
     {
       uglyAttribute8_oclbackup812374=uglyAttribute8;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute8_oclobservinginvariants812374);
+    }
+    if(a!=a_oclbackup812374)
+    {
+      a_oclbackup812374=a;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(a_oclobservinginvariants812374);
+    }
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(collectionWithoutComment)!=collectionWithoutComment_oclbackup812374)
+    {
+      collectionWithoutComment_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(collectionWithoutComment);
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#collectionWithoutComment", collectionWithoutComment);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(collectionWithoutComment_oclobservinginvariants812374);
+    }
+    if(b!=b_oclbackup812374)
+    {
+      b_oclbackup812374=b;
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(b_oclobservinginvariants812374);
+    }
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(mapWithoutComment)!=mapWithoutComment_oclbackup812374)
+    {
+      mapWithoutComment_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(mapWithoutComment);
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#mapWithoutComment", mapWithoutComment);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(mapWithoutComment_oclobservinginvariants812374);
     }
     if(tudresden.ocl.injection.lib.Invariant.identityHashCode(strings)!=strings_oclbackup812374)
     {
