@@ -1,0 +1,182 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<XMI xmi.version = '1.2' xmlns:Model = 'org.omg.xmi.namespace.Model' timestamp = 'Fri Jun 13 19:43:02 CEST 2003'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
+      <XMI.exporterVersion>1.0</XMI.exporterVersion>
+    </XMI.documentation>
+  </XMI.header>
+  <XMI.content>
+    <Model:Package xmi.id = 'a1' name = 'mmpkg' isRoot = 'false' isLeaf = 'false'
+      isAbstract = 'false'>
+      <Model:Namespace.contents>
+        <Model:Class xmi.id = 'a2' name = 'TestClass' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Operation xmi.id = 'a3' name = 'testOp' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isQuery = 'true'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a4' name = 'x' annotation = '' direction = 'inout_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>-1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a5'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a6' name = '*return' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:StructureType xmi.idref = 'a7'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a8' name = 'abc' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:EnumerationType xmi.idref = 'a9'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a10' name = 'l' annotation = '' direction = 'out_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a11'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a12' name = 'd' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a13'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a14' name = 'f' annotation = '' direction = 'inout_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a15'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a16' name = 'b' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a17'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a18' name = 's' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a19'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a20' name = 'structure' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:StructureType xmi.idref = 'a7'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+              </Model:Namespace.contents>
+            </Model:Operation>
+            <Model:Attribute xmi.id = 'a21' name = 'y' annotation = 'y' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:StructureType xmi.idref = 'a7'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+          </Model:Namespace.contents>
+        </Model:Class>
+        <Model:PrimitiveType xmi.id = 'a5' name = 'Integer' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a11' name = 'Long' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a13' name = 'Double' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a15' name = 'Float' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a17' name = 'Boolean' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a19' name = 'String' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:StructureType xmi.id = 'a7' name = 'struct' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'>
+          <Model:Namespace.contents>
+            <Model:StructureField xmi.id = 'a22' name = 'field1' annotation = ''>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a5'/>
+              </Model:TypedElement.type>
+            </Model:StructureField>
+            <Model:StructureField xmi.id = 'a23' name = 'field2' annotation = ''>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a11'/>
+              </Model:TypedElement.type>
+            </Model:StructureField>
+          </Model:Namespace.contents>
+        </Model:StructureType>
+        <Model:CollectionType xmi.id = 'a24' name = 'blub' annotation = 'blub' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'>
+          <Model:CollectionType.multiplicity>
+            <XMI.field>1</XMI.field>
+            <XMI.field>1</XMI.field>
+            <XMI.field>true</XMI.field>
+            <XMI.field>true</XMI.field>
+          </Model:CollectionType.multiplicity>
+          <Model:TypedElement.type>
+            <Model:PrimitiveType xmi.idref = 'a5'/>
+          </Model:TypedElement.type>
+        </Model:CollectionType>
+        <Model:EnumerationType xmi.id = 'a9' name = 'ABC' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'>
+          <Model:EnumerationType.labels>a</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>b</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>c</Model:EnumerationType.labels>
+        </Model:EnumerationType>
+      </Model:Namespace.contents>
+    </Model:Package>
+  </XMI.content>
+</XMI>

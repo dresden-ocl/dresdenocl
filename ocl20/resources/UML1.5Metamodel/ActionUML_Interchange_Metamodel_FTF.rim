@@ -1,0 +1,1699 @@
+Importing Category: Common_Behavior
+****LoadObject ignores Import: Data_Types
+****LoadObject ignores Import: Core
+Importing Class: Instance
+Importing Reference(Attribute): classifier
+Importing Reference(Attribute): linkEnd
+Importing Reference(Attribute): slot
+Importing Reference(Attribute): componentInstance
+Importing Reference(Attribute): ownedInstance
+Importing Reference(Attribute): ownedLink
+Importing Class: Signal
+Importing Class: UninterpretedAction
+Importing Class: AttributeLink
+Importing Reference(Attribute): attribute
+Importing Reference(Attribute): value
+Importing Reference(Attribute): instance
+Importing Reference(Attribute): linkEnd
+Importing Class: Object
+Importing Class: Link
+Importing Reference(Attribute): association
+Importing Reference(Attribute): connection
+Importing Class: LinkObject
+Importing Class: DataValue
+Importing Class: Reception
+Importing Attribute: specification
+Importing Attribute: isRoot
+Importing Attribute: isLeaf
+Importing Attribute: isAbstract
+Importing Reference(Attribute): signal
+Importing Class: LinkEnd
+Importing Reference(Attribute): instance
+Importing Reference(Attribute): link
+Importing Reference(Attribute): associationEnd
+Importing Reference(Attribute): qualifiedValue
+Importing Class: TerminateAction
+Importing Class: Stimulus
+Importing Reference(Attribute): argument
+Importing Reference(Attribute): sender
+Importing Reference(Attribute): receiver
+Importing Reference(Attribute): communicationLink
+Importing Reference(Attribute): dispatchAction
+Importing Class: Exception
+Importing Class: ComponentInstance
+Importing Reference(Attribute): nodeInstance
+Importing Reference(Attribute): resident
+Importing Class: NodeInstance
+Importing Reference(Attribute): resident
+Importing Class: SubsystemInstance
+Importing Class: Procedure
+Importing Attribute: language
+Importing Attribute: body
+Importing Attribute: isList
+Importing Reference(Attribute): expression
+Importing Reference(Attribute): method
+Importing Category: Use_Cases
+****LoadObject ignores Import: Data_Types
+****LoadObject ignores Import: Core
+****LoadObject ignores Import: Common_Behavior
+Importing Class: UseCase
+Importing Reference(Attribute): extend
+Importing Reference(Attribute): include
+Importing Reference(Attribute): extensionPoint
+Importing Class: Actor
+Importing Class: UseCaseInstance
+Importing Class: Extend
+Importing Attribute: condition
+Importing Reference(Attribute): base
+Importing Reference(Attribute): extension
+Importing Reference(Attribute): extensionPoint
+Importing Class: Include
+Importing Reference(Attribute): addition
+Importing Reference(Attribute): base
+Importing Class: ExtensionPoint
+Importing Attribute: location
+Importing Reference(Attribute): useCase
+Importing Category: State_Machines
+****LoadObject ignores Import: Data_Types
+****LoadObject ignores Import: Core
+****LoadObject ignores Import: Common_Behavior
+****LoadObject ignores Import: Actions
+Importing Class: StateMachine
+Importing Reference(Attribute): context
+Importing Reference(Attribute): top
+Importing Reference(Attribute): transitions
+Importing Reference(Attribute): submachineState
+Importing Class: Event
+Importing Reference(Attribute): parameter
+Importing Class: StateVertex
+Importing Reference(Attribute): container
+Importing Reference(Attribute): outgoing
+Importing Reference(Attribute): incoming
+Importing Class: State
+Importing Reference(Attribute): entry
+Importing Reference(Attribute): exit
+Importing Reference(Attribute): deferrableEvent
+Importing Reference(Attribute): internalTransition
+Importing Reference(Attribute): doActivity
+Importing Reference(Attribute): stateMachine
+Importing Class: TimeEvent
+Importing Attribute: when
+Importing Class: CallEvent
+Importing Reference(Attribute): operation
+Importing Class: SignalEvent
+Importing Reference(Attribute): signal
+Importing Class: Transition
+Importing Reference(Attribute): guard
+Importing Reference(Attribute): effect
+Importing Reference(Attribute): trigger
+Importing Reference(Attribute): source
+Importing Reference(Attribute): target
+Importing Reference(Attribute): stateMachine
+Importing Class: CompositeState
+Importing Attribute: isConcurrent
+Importing Reference(Attribute): subvertex
+Importing Class: ChangeEvent
+Importing Attribute: changeExpression
+Importing Class: Guard
+Importing Attribute: expression
+Importing Reference(Attribute): transition
+Importing Class: Pseudostate
+Importing Attribute: kind
+Importing Class: SimpleState
+Importing Class: SubmachineState
+Importing Reference(Attribute): submachine
+Importing Class: SynchState
+Importing Attribute: bound
+Importing Class: StubState
+Importing Attribute: referenceState
+Importing Class: FinalState
+Importing Category: Collaborations
+****LoadObject ignores Import: Data_Types
+****LoadObject ignores Import: Core
+****LoadObject ignores Import: Common_Behavior
+Importing Class: Collaboration
+Importing Reference(Attribute): interaction
+Importing Reference(Attribute): representedClassifier
+Importing Reference(Attribute): representedOperation
+Importing Reference(Attribute): constrainingElement
+Importing Reference(Attribute): usedCollaboration
+Importing Class: ClassifierRole
+Importing Attribute: multiplicity
+Importing Reference(Attribute): base
+Importing Reference(Attribute): availableFeature
+Importing Reference(Attribute): availableContents
+Importing Reference(Attribute): conformingInstance
+Importing Class: AssociationRole
+Importing Attribute: multiplicity
+Importing Reference(Attribute): base
+Importing Reference(Attribute): message
+Importing Reference(Attribute): conformingLink
+Importing Class: AssociationEndRole
+Importing Attribute: collaborationMultiplicity
+Importing Reference(Attribute): base
+Importing Reference(Attribute): availableQualifier
+Importing Class: Message
+Importing Reference(Attribute): interaction
+Importing Reference(Attribute): activator
+Importing Reference(Attribute): sender
+Importing Reference(Attribute): receiver
+Importing Reference(Attribute): predecessor
+Importing Reference(Attribute): communicationConnection
+Importing Reference(Attribute): procedure
+Importing Reference(Attribute): conformingStimulus
+Importing Class: Interaction
+Importing Reference(Attribute): message
+Importing Reference(Attribute): context
+Importing Class: InteractionInstanceSet
+Importing Reference(Attribute): context
+Importing Reference(Attribute): interaction
+Importing Reference(Attribute): participatingStimulus
+Importing Class: CollaborationInstanceSet
+Importing Reference(Attribute): interactionInstanceSet
+Importing Reference(Attribute): collaboration
+Importing Reference(Attribute): participatingInstance
+Importing Reference(Attribute): participatingLink
+Importing Reference(Attribute): constrainingElement
+Importing Category: Activity_Graphs
+****LoadObject ignores Import: Data_Types
+****LoadObject ignores Import: Core
+****LoadObject ignores Import: Common_Behavior
+****LoadObject ignores Import: State_Machines
+Importing Class: ActivityGraph
+Importing Reference(Attribute): partition
+Importing Class: Partition
+Importing Reference(Attribute): contents
+Importing Reference(Attribute): activityGraph
+Importing Class: SubactivityState
+Importing Attribute: isDynamic
+Importing Attribute: dynamicArguments
+Importing Attribute: dynamicMultiplicity
+Importing Class: ActionState
+Importing Attribute: isDynamic
+Importing Attribute: dynamicArguments
+Importing Attribute: dynamicMultiplicity
+Importing Class: CallState
+Importing Class: ObjectFlowState
+Importing Attribute: isSynch
+Importing Reference(Attribute): parameter
+Importing Reference(Attribute): type
+Importing Class: ClassifierInState
+Importing Reference(Attribute): type
+Importing Reference(Attribute): inState
+Importing Category: Actions
+****LoadObject ignores Import: Data_Types
+****LoadObject ignores Import: Core
+****LoadObject ignores Import: Common_Behavior
+****LoadObject ignores Import: Action_Foundation
+Importing Class: CollectionAction
+Importing Reference(Attribute): subaction
+Importing Class: FilterAction
+Importing Reference(Attribute): subinput
+Importing Reference(Attribute): subtest
+Importing Reference(Attribute): argument
+Importing Reference(Attribute): result
+Importing Class: IterateAction
+Importing Reference(Attribute): result
+Importing Reference(Attribute): loopVariableInput
+Importing Reference(Attribute): subinput
+Importing Reference(Attribute): loopVariable
+Importing Reference(Attribute): collectionInput
+Importing Reference(Attribute): suboutput
+Importing Attribute: isUnordered
+Importing Class: MapAction
+Importing Reference(Attribute): result
+Importing Reference(Attribute): argument
+Importing Reference(Attribute): subinput
+Importing Reference(Attribute): suboutput
+Importing Class: ReduceAction
+Importing Reference(Attribute): leftSubinput
+Importing Reference(Attribute): suboutput
+Importing Reference(Attribute): rightSubinput
+Importing Reference(Attribute): argument
+Importing Reference(Attribute): result
+Importing Attribute: isUnordered
+Importing Class: Clause
+Importing Reference(Attribute): body
+Importing Reference(Attribute): test
+Importing Reference(Attribute): bodyOutput
+Importing Reference(Attribute): testOutput
+Importing Reference(Attribute): successorClause
+Importing Reference(Attribute): predecessorClause
+Importing Class: ConditionalAction
+Importing Reference(Attribute): clause
+Importing Attribute: isDeterminate
+Importing Class: GroupAction
+Importing Reference(Attribute): subaction
+Importing Reference(Attribute): variable
+Importing Attribute: mustIsolate
+Importing Class: LoopAction
+Importing Reference(Attribute): clause
+Importing Reference(Attribute): loopVariable
+Importing Class: Variable
+Importing Reference(Attribute): type
+Importing Reference(Attribute): scope
+Importing Attribute: multiplicity
+Importing Attribute: ordering
+Importing Class: ApplyFunctionAction
+Importing Reference(Attribute): argument
+Importing Reference(Attribute): function
+Importing Reference(Attribute): result
+Importing Class: ArgumentSpecification
+Importing Reference(Attribute): type
+Importing Attribute: multiplicity
+Importing Attribute: ordering
+Importing Class: CodeAction
+Importing Reference(Attribute): argument
+Importing Reference(Attribute): result
+Importing Attribute: language
+Importing Attribute: encoding
+Importing Class: LiteralValueAction
+Importing Reference(Attribute): value
+Importing Reference(Attribute): result
+Importing Class: MarshalAction
+Importing Reference(Attribute): argument
+Importing Reference(Attribute): result
+Importing Reference(Attribute): marshalType
+Importing Class: NullAction
+Importing Class: PrimitiveFunction
+Importing Reference(Attribute): inputSpec
+Importing Reference(Attribute): outputSpec
+Importing Attribute: language
+Importing Attribute: encoding
+Importing Class: TestIdentityAction
+Importing Reference(Attribute): first
+Importing Reference(Attribute): second
+Importing Reference(Attribute): result
+Importing Class: UnmarshalAction
+Importing Reference(Attribute): argument
+Importing Reference(Attribute): result
+Importing Reference(Attribute): unmarshalType
+Importing Class: JumpHandler
+Importing Reference(Attribute): protectedAction
+Importing Reference(Attribute): jumpType
+Importing Reference(Attribute): body
+Importing Class: HandlerAction
+Importing Reference(Attribute): handlerOutput
+Importing Reference(Attribute): body
+Importing Reference(Attribute): occurrence
+Importing Class: JumpAction
+Importing Reference(Attribute): exception
+Importing Reference(Attribute): jumpOccurence
+Importing Class: AsynchronousInvocationAction
+Importing Attribute: isRepliable
+Importing Class: CallOperationAction
+Importing Reference(Attribute): result
+Importing Reference(Attribute): target
+Importing Reference(Attribute): operation
+Importing Attribute: isAsynchronous
+Importing Class: InvocationAction
+Importing Reference(Attribute): target
+Importing Reference(Attribute): request
+Importing Class: SynchronousInvocationAction
+Importing Reference(Attribute): reply
+Importing Class: ClearAssociationAction
+Importing Reference(Attribute): association
+Importing Reference(Attribute): object
+Importing Class: CreateLinkAction
+Importing Class: CreateLinkObjectAction
+Importing Reference(Attribute): result
+Importing Class: DestroyLinkAction
+Importing Class: LinkAction
+Importing Reference(Attribute): endData
+Importing Class: LinkEndCreationData
+Importing Reference(Attribute): insertAt
+Importing Attribute: isReplaceAll
+Importing Class: LinkEndData
+Importing Reference(Attribute): end
+Importing Reference(Attribute): value
+Importing Reference(Attribute): qualifier
+Importing Class: QualifierValue
+Importing Reference(Attribute): qualifier
+Importing Reference(Attribute): value
+Importing Class: ReadLinkAction
+Importing Reference(Attribute): result
+Importing Class: ReadLinkObjectEndAction
+Importing Reference(Attribute): result
+Importing Reference(Attribute): object
+Importing Reference(Attribute): end
+Importing Class: ReadLinkObjectQualifierAction
+Importing Reference(Attribute): result
+Importing Reference(Attribute): object
+Importing Reference(Attribute): qualifier
+Importing Class: WriteLinkAction
+Importing Class: AddAttributeValueAction
+Importing Reference(Attribute): insertAt
+Importing Attribute: isReplaceAll
+Importing Class: AttributeAction
+Importing Reference(Attribute): object
+Importing Reference(Attribute): attribute
+Importing Class: ClearAttributeAction
+Importing Class: ReadAttributeAction
+Importing Reference(Attribute): result
+Importing Class: RemoveAttributeValueAction
+Importing Class: WriteAttributeAction
+Importing Reference(Attribute): value
+Importing Class: CreateObjectAction
+Importing Reference(Attribute): classifier
+Importing Reference(Attribute): result
+Importing Class: DestroyObjectAction
+Importing Reference(Attribute): input
+Importing Class: ReadIsClassifiedObjectAction
+Importing Reference(Attribute): classifier
+Importing Reference(Attribute): input
+Importing Reference(Attribute): result
+Importing Attribute: isDirect
+Importing Class: ReclassifyObjectAction
+Importing Reference(Attribute): oldClassifier
+Importing Reference(Attribute): newClassifier
+Importing Reference(Attribute): input
+Importing Attribute: isReplaceAll
+Importing Class: ReadExtentAction
+Importing Reference(Attribute): result
+Importing Reference(Attribute): classifier
+Importing Class: ReadSelfAction
+Importing Reference(Attribute): result
+Importing Class: StartObjectStateMachineAction
+Importing Reference(Attribute): input
+Importing Class: AddVariableValueAction
+Importing Reference(Attribute): insertAt
+Importing Attribute: isReplaceAll
+Importing Class: ClearVariableAction
+Importing Class: ReadVariableAction
+Importing Reference(Attribute): result
+Importing Class: RemoveVariableValueAction
+Importing Class: VariableAction
+Importing Reference(Attribute): variable
+Importing Class: WriteVariableAction
+Importing Reference(Attribute): value
+Importing Class: ExplicitInvocationActtion
+Importing Reference(Attribute): argument
+Importing Class: SendSignalAction
+Importing Reference(Attribute): signal
+Importing Reference(Attribute): target
+Importing Class: BroadcastSignalAction
+Importing Reference(Attribute): signal
+Importing Class: CallProcedureAction
+Importing Reference(Attribute): output
+Importing Reference(Attribute): input
+Importing Reference(Attribute): calledProcedure
+Importing Attribute: isSynchronous
+Importing Category: Action_Foundation
+****LoadObject ignores Import: Data_Types
+****LoadObject ignores Import: Core
+****LoadObject ignores Import: Common_Behavior
+Importing Class: ControlFlow
+Importing Reference(Attribute): predecessor
+Importing Reference(Attribute): successor
+Importing Class: Action
+Importing Attribute: isReadOnly
+Importing Reference(Attribute): consequent
+Importing Reference(Attribute): antecedent
+Importing Reference(Attribute): outputPin
+Importing Reference(Attribute): availableOutput
+Importing Reference(Attribute): inputPin
+Importing Reference(Attribute): availableInput
+Importing Reference(Attribute): procedure
+Importing Class: PrimitiveAction
+Importing Class: InputPin
+Importing Reference(Attribute): flow
+Importing Reference(Attribute): procedure
+Importing Reference(Attribute): action
+Importing Class: DataFlow
+Importing Reference(Attribute): source
+Importing Reference(Attribute): destination
+Importing Class: OutputPin
+Importing Reference(Attribute): flow
+Importing Reference(Attribute): procedure
+Importing Reference(Attribute): action
+Importing Class: Pin
+Importing Attribute: multiplicity
+Importing Attribute: ordering
+Importing Reference(Attribute): type
+Importing Category: Data_Types
+Importing DataType: Integer
+Importing DataType: UnlimitedInteger
+Importing DataType: String
+Importing DataType: AggregationKind
+Importing DataType: Boolean
+Importing DataType: CallConcurrencyKind
+Importing DataType: ChangeableKind
+Importing DataType: OrderingKind
+Importing DataType: ParameterDirectionKind
+Importing DataType: ScopeKind
+Importing DataType: VisibilityKind
+Importing DataType: Name
+Importing Class: Multiplicity
+Importing Reference(Attribute): range
+Importing Class: MultiplicityRange
+Importing Attribute: lower
+Importing Attribute: upper
+Importing Reference(Attribute): multiplicity
+Importing Class: Expression
+Importing Attribute: language
+Importing Attribute: body
+Importing Class: BooleanExpression
+Importing Class: TypeExpression
+Importing Class: MappingExpression
+Importing Class: TimeExpression
+Importing Class: ArgListsExpression
+Importing DataType: LocationReference
+Importing DataType: PseudostateKind
+Importing DataType: Geometry
+Importing Class: ProcedureExpression
+Importing Category: Core
+****LoadObject ignores Import: Data_Types
+Importing Class: Element
+Importing Class: ModelElement
+Importing Attribute: name
+Importing Attribute: visibility
+Importing Attribute: isSpecification
+Importing Reference(Attribute): namespace
+Importing Reference(Attribute): clientDependency
+Importing Reference(Attribute): constraint
+Importing Reference(Attribute): targetFlow
+Importing Reference(Attribute): sourceFlow
+Importing Reference(Attribute): comment
+Importing Reference(Attribute): templateParameter
+Importing Reference(Attribute): stereotype
+Importing Reference(Attribute): taggedValue
+Importing Class: GeneralizableElement
+Importing Attribute: isRoot
+Importing Attribute: isLeaf
+Importing Attribute: isAbstract
+Importing Reference(Attribute): generalization
+Importing Class: Namespace
+Importing Reference(Attribute): ownedElement
+Importing Class: Classifier
+Importing Reference(Attribute): feature
+Importing Reference(Attribute): powertypeRange
+Importing Class: Class
+Importing Attribute: isActive
+Importing Class: DataType
+Importing Class: Feature
+Importing Attribute: ownerScope
+Importing Reference(Attribute): owner
+Importing Class: StructuralFeature
+Importing Attribute: multiplicity
+Importing Attribute: changeability
+Importing Attribute: targetScope
+Importing Attribute: ordering
+Importing Reference(Attribute): type
+Importing Class: AssociationEnd
+Importing Attribute: isNavigable
+Importing Attribute: ordering
+Importing Attribute: aggregation
+Importing Attribute: targetScope
+Importing Attribute: multiplicity
+Importing Attribute: changeability
+Importing Reference(Attribute): association
+Importing Reference(Attribute): qualifier
+Importing Reference(Attribute): participant
+Importing Reference(Attribute): specification
+Importing Class: Interface
+Importing Class: Constraint
+Importing Attribute: body
+Importing Reference(Attribute): constrainedElement
+Importing Class: Relationship
+Importing Class: Association
+Importing Reference(Attribute): connection
+Importing Class: Attribute
+Importing Attribute: initialValue
+Importing Reference(Attribute): associationEnd
+Importing Class: BehavioralFeature
+Importing Attribute: isQuery
+Importing Reference(Attribute): parameter
+Importing Class: Operation
+Importing Attribute: concurrency
+Importing Attribute: isRoot
+Importing Attribute: isLeaf
+Importing Attribute: isAbstract
+Importing Attribute: specification
+Importing Class: Parameter
+Importing Attribute: defaultValue
+Importing Attribute: kind
+Importing Reference(Attribute): behavioralFeature
+Importing Reference(Attribute): type
+Importing Class: Method
+Importing Attribute: body
+Importing Reference(Attribute): specification
+Importing Class: Generalization
+Importing Attribute: discriminator
+Importing Reference(Attribute): child
+Importing Reference(Attribute): parent
+Importing Reference(Attribute): powertype
+Importing Class: AssociationClass
+Importing Class: Dependency
+Importing Reference(Attribute): client
+Importing Reference(Attribute): supplier
+Importing Class: Abstraction
+Importing Attribute: mapping
+Importing Class: PresentationElement
+Importing Reference(Attribute): subject
+Importing Class: Usage
+Importing Class: Binding
+Importing Reference(Attribute): argument
+Importing Class: Component
+Importing Reference(Attribute): deploymentLocation
+Importing Reference(Attribute): residentElement
+Importing Reference(Attribute): implementation
+Importing Class: Node
+Importing Reference(Attribute): deployedComponent
+Importing Class: Permission
+Importing Class: Comment
+Importing Attribute: body
+Importing Reference(Attribute): annotatedElement
+Importing Class: Flow
+Importing Reference(Attribute): target
+Importing Reference(Attribute): source
+Importing Class: ElementResidence
+Importing Attribute: visibility
+Importing Reference(Attribute): resident
+Importing Reference(Attribute): container
+Importing Class: TemplateParameter
+Importing Reference(Attribute): template
+Importing Reference(Attribute): parameter
+Importing Reference(Attribute): defaultElement
+Importing Class: Primitive
+Importing Class: Enumeration
+Importing Reference(Attribute): literal
+Importing Class: EnumerationLiteral
+Importing Reference(Attribute): enumeration
+Importing Class: Stereotype
+Importing Attribute: icon
+Importing Attribute: baseClass
+Importing Reference(Attribute): definedTag
+Importing Reference(Attribute): stereotypeConstraint
+Importing Class: TagDefinition
+Importing Attribute: tagType
+Importing Attribute: multiplicity
+Importing Reference(Attribute): owner
+Importing Class: TaggedValue
+Importing Attribute: dataValue
+Importing Reference(Attribute): modelElement
+Importing Reference(Attribute): type
+Importing Reference(Attribute): referenceValue
+Importing Class: ProgrammingLanguageDataType
+Importing Attribute: expression
+Importing Class: Artifact
+Importing Class: TemplateArgument
+Importing Reference(Attribute): modelElement
+Importing Reference(Attribute): binding
+Importing Category: Model_Management
+****LoadObject ignores Import: Data_Types
+****LoadObject ignores Import: Core
+Importing Class: Package
+Importing Reference(Attribute): elementImport
+Importing Class: Model
+Importing Class: Subsystem
+Importing Attribute: isInstantiable
+Importing Class: ElementImport
+Importing Attribute: visibility
+Importing Attribute: alias
+Importing Attribute: isSpecification
+Importing Reference(Attribute): package
+Importing Reference(Attribute): importedElement
+Importing Category: UML
+****LoadObject ignores Import: Data_Types
+****LoadObject ignores Import: Core
+****LoadObject ignores Import: Common_Behavior
+****LoadObject ignores Import: Use_Cases
+****LoadObject ignores Import: Action_Foundation
+****LoadObject ignores Import: Actions
+****LoadObject ignores Import: State_Machines
+****LoadObject ignores Import: Collaborations
+****LoadObject ignores Import: Activity_Graphs
+****LoadObject ignores Import: Model_Management
+Importing supertype refs for: Instance
+Superclass Is: ModelElement
+Importing supertype refs for: Signal
+Superclass Is: Classifier
+Importing supertype refs for: UninterpretedAction
+Importing supertype refs for: AttributeLink
+Superclass Is: ModelElement
+Importing supertype refs for: Object
+Superclass Is: Instance
+Importing supertype refs for: Link
+Superclass Is: ModelElement
+Importing supertype refs for: LinkObject
+Superclass Is: Object
+Superclass Is: Link
+Importing supertype refs for: DataValue
+Superclass Is: Instance
+Importing supertype refs for: Reception
+Superclass Is: BehavioralFeature
+Importing supertype refs for: LinkEnd
+Superclass Is: ModelElement
+Importing supertype refs for: TerminateAction
+Importing supertype refs for: Stimulus
+Superclass Is: ModelElement
+Importing supertype refs for: Exception
+Superclass Is: Signal
+Importing supertype refs for: ComponentInstance
+Superclass Is: Instance
+Importing supertype refs for: NodeInstance
+Superclass Is: Instance
+Importing supertype refs for: SubsystemInstance
+Superclass Is: Instance
+Importing supertype refs for: Procedure
+Superclass Is: ModelElement
+Load Association: A_instance_classifier
+    Role1: classifier
+    Role2: classifier
+Load Association: A_attributeLink_attribute
+    Role1: attribute
+    Role2: attribute
+Load Association: A_attributeLink_value
+    Role1: value
+    Role2: value
+Load Association: A_instance_linkEnd
+    Role1: linkEnd
+    Role2: linkEnd
+Load Association: A_signal_reception
+    Role1: reception
+    Role2: reception
+Load Association: A_slot_instance
+    Role1: instance
+    Role2: instance
+Load Association: A_argument_stimulus
+    Role1: stimulus
+    Role2: stimulus
+Load Association: A_context_raisedSignal
+    Role1: context
+    Role2: context
+Load Association: A_association_link
+    Role1: association
+    Role2: association
+Load Association: A_link_connection
+    Role1: connection
+    Role2: connection
+Load Association: A_associationEnd_linkEnd
+    Role1: associationEnd
+    Role2: associationEnd
+Load Association: A_stimulus_sender
+    Role1: sender
+    Role2: sender
+Load Association: A_resident_nodeInstance
+    Role1: nodeInstance
+    Role2: nodeInstance
+Load Association: A_resident_componentInstance
+    Role1: componentInstance
+    Role2: componentInstance
+Load Association: A_receiver_stimulus
+    Role1: stimulus
+    Role2: stimulus
+Load Association: A_stimulus_communicationLink
+    Role1: communicationLink
+    Role2: communicationLink
+Load Association: A_linkEnd_qualifiedValue
+    Role1: qualifiedValue
+    Role2: qualifiedValue
+Load Association: A_ownedInstance_owner
+    Role1: owner
+    Role2: owner
+Load Association: A_ownedLink_owner
+    Role1: owner
+    Role2: owner
+Load Association: A_expression_procedure
+    Role1: expression
+    Role2: expression
+Load Association: A_dispatchAction_stimulus
+    Role1: stimulus
+    Role2: stimulus
+Load Association: A_procedure_method
+    Role1: method
+    Role2: method
+Importing supertype refs for: UseCase
+Superclass Is: Classifier
+Importing supertype refs for: Actor
+Superclass Is: Classifier
+Importing supertype refs for: UseCaseInstance
+Superclass Is: Instance
+Importing supertype refs for: Extend
+Superclass Is: Relationship
+Importing supertype refs for: Include
+Superclass Is: Relationship
+Importing supertype refs for: ExtensionPoint
+Superclass Is: ModelElement
+Load Association: A_base_extender
+    Role1: extender
+    Role2: extender
+Load Association: A_extension_extend
+    Role1: extend
+    Role2: extend
+Load Association: A_includer_addition
+    Role1: addition
+    Role2: addition
+Load Association: A_include_base
+    Role1: base
+    Role2: base
+Load Association: A_extensionPoint_useCase
+    Role1: useCase
+    Role2: useCase
+Load Association: A_extensionPoint_extend
+    Role1: extend
+    Role2: extend
+Importing supertype refs for: StateMachine
+Superclass Is: ModelElement
+Importing supertype refs for: Event
+Superclass Is: ModelElement
+Importing supertype refs for: StateVertex
+Superclass Is: ModelElement
+Importing supertype refs for: State
+Superclass Is: StateVertex
+Importing supertype refs for: TimeEvent
+Superclass Is: Event
+Importing supertype refs for: CallEvent
+Superclass Is: Event
+Importing supertype refs for: SignalEvent
+Superclass Is: Event
+Importing supertype refs for: Transition
+Superclass Is: ModelElement
+Importing supertype refs for: CompositeState
+Superclass Is: State
+Importing supertype refs for: ChangeEvent
+Superclass Is: Event
+Importing supertype refs for: Guard
+Superclass Is: ModelElement
+Importing supertype refs for: Pseudostate
+Superclass Is: StateVertex
+Importing supertype refs for: SimpleState
+Superclass Is: State
+Importing supertype refs for: SubmachineState
+Superclass Is: CompositeState
+Importing supertype refs for: SynchState
+Superclass Is: StateVertex
+Importing supertype refs for: StubState
+Superclass Is: StateVertex
+Importing supertype refs for: FinalState
+Superclass Is: State
+Load Association: A_event_parameter
+    Role1: parameter
+    Role2: parameter
+Load Association: A_guard_transition
+    Role1: transition
+    Role2: transition
+Load Association: A_signal_occurrence
+    Role1: signal
+    Role2: signal
+Load Association: A_behavior_context
+    Role1: context
+    Role2: context
+Load Association: A_top_stateMachine
+    Role1: stateMachine
+    Role2: stateMachine
+Load Association: A_state_deferrableEvent
+    Role1: deferrableEvent
+    Role2: deferrableEvent
+Load Association: A_occurrence_operation
+    Role1: operation
+    Role2: operation
+Load Association: A_container_subvertex
+    Role1: subvertex
+    Role2: subvertex
+Load Association: A_transition_effect
+    Role1: effect
+    Role2: effect
+Load Association: A_state_internalTransition
+    Role1: internalTransition
+    Role2: internalTransition
+Load Association: A_transition_trigger
+    Role1: trigger
+    Role2: trigger
+Load Association: A_stateMachine_transitions
+    Role1: transitions
+    Role2: transitions
+Load Association: A_outgoing_source
+    Role1: source
+    Role2: source
+Load Association: A_incoming_target
+    Role1: target
+    Role2: target
+Load Association: A_submachineState_submachine
+    Role1: submachine
+    Role2: submachine
+Load Association: A_state_doActivity
+    Role1: doActivity
+    Role2: doActivity
+Load Association: A_entry_state
+    Role1: entry
+    Role2: entry
+Load Association: A_exit_state
+    Role1: exit
+    Role2: exit
+Importing supertype refs for: Collaboration
+Superclass Is: GeneralizableElement
+Superclass Is: Namespace
+Importing supertype refs for: ClassifierRole
+Superclass Is: Classifier
+Importing supertype refs for: AssociationRole
+Superclass Is: Association
+Importing supertype refs for: AssociationEndRole
+Superclass Is: AssociationEnd
+Importing supertype refs for: Message
+Superclass Is: ModelElement
+Importing supertype refs for: Interaction
+Superclass Is: ModelElement
+Importing supertype refs for: InteractionInstanceSet
+Superclass Is: ModelElement
+Importing supertype refs for: CollaborationInstanceSet
+Superclass Is: ModelElement
+Load Association: A_interaction_message
+    Role1: message
+    Role2: message
+Load Association: A_context_interaction
+    Role1: interaction
+    Role2: interaction
+Load Association: A_classifierRole_base
+    Role1: base
+    Role2: base
+Load Association: A_base_associationEndRole
+    Role1: base
+    Role2: base
+Load Association: A_base_associationRole
+    Role1: base
+    Role2: base
+Load Association: A_classifierRole_availableFeature
+    Role1: availableFeature
+    Role2: availableFeature
+Load Association: A_message_activator
+    Role1: activator
+    Role2: activator
+Load Association: A_message_sender
+    Role1: sender
+    Role2: sender
+Load Association: A_receiver_message
+    Role1: message
+    Role2: message
+Load Association: A_predecessor_successor
+    Role1: successor
+    Role2: successor
+Load Association: A_message_communicationConnection
+    Role1: communicationConnection
+    Role2: communicationConnection
+Load Association: A_classifierRole_availableContents
+    Role1: availableContents
+    Role2: availableContents
+Load Association: A_procedure_message
+    Role1: procedure
+    Role2: procedure
+Load Association: A_associationEndRole_availableQualifier
+    Role1: availableQualifier
+    Role2: availableQualifier
+Load Association: A_representedOperation_collaboration
+    Role1: representedOperation
+    Role2: representedOperation
+Load Association: A_collaboration_constrainingElement
+    Role1: constrainingElement
+    Role2: constrainingElement
+Load Association: A_context_interactionInstanceSet
+    Role1: interactionInstanceSet
+    Role2: interactionInstanceSet
+Load Association: A_playedRole_conformingStimulus
+    Role1: conformingStimulus
+    Role2: conformingStimulus
+Load Association: A_interaction_interactionInstanceSet
+    Role1: interactionInstanceSet
+    Role2: interactionInstanceSet
+Load Association: A_collaboration_collaborationInstanceSet
+    Role1: collaborationInstanceSet
+    Role2: collaborationInstanceSet
+Load Association: A_playedRole_conformingInstance
+    Role1: conformingInstance
+    Role2: conformingInstance
+Load Association: A_playedRole_conformingLink
+    Role1: conformingLink
+    Role2: conformingLink
+Load Association: A_interactionInstanceSet_participatingStimulus
+    Role1: participatingStimulus
+    Role2: participatingStimulus
+Load Association: A_collaborationInstanceSet_participatingInstance
+    Role1: participatingInstance
+    Role2: participatingInstance
+Load Association: A_participatingLink_collaborationInstanceSet
+    Role1: participatingLink
+    Role2: participatingLink
+Load Association: A_usedCollaboration_collaboration
+    Role1: collaboration
+    Role2: collaboration
+Load Association: A_representedClassifier_collaboration
+    Role1: representedClassifier
+    Role2: representedClassifier
+Load Association: A_collaborationInstanceSet_constrainingElement
+    Role1: constrainingElement
+    Role2: constrainingElement
+Importing supertype refs for: ActivityGraph
+Superclass Is: StateMachine
+Importing supertype refs for: Partition
+Superclass Is: ModelElement
+Importing supertype refs for: SubactivityState
+Superclass Is: SubmachineState
+Importing supertype refs for: ActionState
+Superclass Is: SimpleState
+Importing supertype refs for: CallState
+Superclass Is: ActionState
+Importing supertype refs for: ObjectFlowState
+Superclass Is: SimpleState
+Importing supertype refs for: ClassifierInState
+Superclass Is: Classifier
+Load Association: A_parameter_state
+    Role1: parameter
+    Role2: parameter
+Load Association: A_type_classifierInState
+    Role1: type
+    Role2: type
+Load Association: A_contents_partition
+    Role1: contents
+    Role2: contents
+Load Association: A_activityGraph_partition
+    Role1: partition
+    Role2: partition
+Load Association: A_type_objectFlowState
+    Role1: type
+    Role2: type
+Load Association: A_classifierInState_inState
+    Role1: inState
+    Role2: inState
+Importing supertype refs for: CollectionAction
+Superclass Is: Action
+Importing supertype refs for: FilterAction
+Superclass Is: CollectionAction
+Importing supertype refs for: IterateAction
+Superclass Is: CollectionAction
+Importing supertype refs for: MapAction
+Superclass Is: CollectionAction
+Importing supertype refs for: ReduceAction
+Superclass Is: CollectionAction
+Importing supertype refs for: Clause
+Superclass Is: Element
+Importing supertype refs for: ConditionalAction
+Superclass Is: Action
+Importing supertype refs for: GroupAction
+Superclass Is: Action
+Importing supertype refs for: LoopAction
+Superclass Is: Action
+Importing supertype refs for: Variable
+Superclass Is: ModelElement
+Importing supertype refs for: ApplyFunctionAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: ArgumentSpecification
+Superclass Is: ModelElement
+Importing supertype refs for: CodeAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: LiteralValueAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: MarshalAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: NullAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: PrimitiveFunction
+Superclass Is: ModelElement
+Importing supertype refs for: TestIdentityAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: UnmarshalAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: JumpHandler
+Importing supertype refs for: HandlerAction
+Superclass Is: Action
+Importing supertype refs for: JumpAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: AsynchronousInvocationAction
+Superclass Is: InvocationAction
+Importing supertype refs for: CallOperationAction
+Superclass Is: ExplicitInvocationActtion
+Importing supertype refs for: InvocationAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: SynchronousInvocationAction
+Superclass Is: InvocationAction
+Importing supertype refs for: ClearAssociationAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: CreateLinkAction
+Superclass Is: WriteLinkAction
+Importing supertype refs for: CreateLinkObjectAction
+Superclass Is: CreateLinkAction
+Importing supertype refs for: DestroyLinkAction
+Superclass Is: WriteLinkAction
+Importing supertype refs for: LinkAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: LinkEndCreationData
+Superclass Is: LinkEndData
+Importing supertype refs for: LinkEndData
+Importing supertype refs for: QualifierValue
+Importing supertype refs for: ReadLinkAction
+Superclass Is: LinkAction
+Importing supertype refs for: ReadLinkObjectEndAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: ReadLinkObjectQualifierAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: WriteLinkAction
+Superclass Is: LinkAction
+Importing supertype refs for: AddAttributeValueAction
+Superclass Is: WriteAttributeAction
+Importing supertype refs for: AttributeAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: ClearAttributeAction
+Superclass Is: AttributeAction
+Importing supertype refs for: ReadAttributeAction
+Superclass Is: AttributeAction
+Importing supertype refs for: RemoveAttributeValueAction
+Superclass Is: WriteAttributeAction
+Importing supertype refs for: WriteAttributeAction
+Superclass Is: AttributeAction
+Importing supertype refs for: CreateObjectAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: DestroyObjectAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: ReadIsClassifiedObjectAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: ReclassifyObjectAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: ReadExtentAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: ReadSelfAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: StartObjectStateMachineAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: AddVariableValueAction
+Superclass Is: WriteVariableAction
+Importing supertype refs for: ClearVariableAction
+Superclass Is: VariableAction
+Importing supertype refs for: ReadVariableAction
+Superclass Is: VariableAction
+Importing supertype refs for: RemoveVariableValueAction
+Superclass Is: WriteVariableAction
+Importing supertype refs for: VariableAction
+Superclass Is: PrimitiveAction
+Importing supertype refs for: WriteVariableAction
+Superclass Is: VariableAction
+Importing supertype refs for: ExplicitInvocationActtion
+Superclass Is: PrimitiveAction
+Importing supertype refs for: SendSignalAction
+Superclass Is: ExplicitInvocationActtion
+Importing supertype refs for: BroadcastSignalAction
+Superclass Is: ExplicitInvocationActtion
+Importing supertype refs for: CallProcedureAction
+Superclass Is: PrimitiveAction
+Load Association: A_type_variable
+    Role1: type
+    Role2: type
+Load Association: A_subinput_filterAction
+    Role1: subinput
+    Role2: subinput
+Load Association: A_subtest_filterAction
+    Role1: subtest
+    Role2: subtest
+Load Association: IterateAction_Result
+    Role1: result
+    Role2: result
+Load Association: InterateAction_LoopVariableInput
+    Role1: loopVariableInput
+    Role2: loopVariableInput
+Load Association: A_subinput_iterateAction
+    Role1: subinput
+    Role2: subinput
+Load Association: A_leftSubinput_reduceAction
+    Role1: leftSubinput
+    Role2: leftSubinput
+Load Association: A_suboutput_reduceAction
+    Role1: suboutput
+    Role2: suboutput
+Load Association: A_rightSubinput_reduceAction
+    Role1: rightSubinput
+    Role2: rightSubinput
+Load Association: A_subaction_collectionAction
+    Role1: subaction
+    Role2: subaction
+Load Association: MapAction_OutputPin
+    Role1: result
+    Role2: result
+Load Association: MapAction_Argument
+    Role1: argument
+    Role2: argument
+Load Association: FilterAction_Argument
+    Role1: argument
+    Role2: argument
+Load Association: FilterAction_Result
+    Role1: result
+    Role2: result
+Load Association: ReduceAction_Argument
+    Role1: argument
+    Role2: argument
+Load Association: ReduceAction_OutputPin
+    Role1: result
+    Role2: result
+Load Association: A_loopVariable_iterateAction
+    Role1: loopVariable
+    Role2: loopVariable
+Load Association: IterateAction_CollectionInput
+    Role1: collectionInput
+    Role2: collectionInput
+Load Association: A_suboutput_iterateAction
+    Role1: suboutput
+    Role2: suboutput
+Load Association: A_subinput_mapAction
+    Role1: subinput
+    Role2: subinput
+Load Association: A_suboutput_mapAction
+    Role1: suboutput
+    Role2: suboutput
+Load Association: A_subaction_group
+    Role1: subaction
+    Role2: subaction
+Load Association: A_body_clause
+    Role1: body
+    Role2: body
+Load Association: A_clause_conditionalAction
+    Role1: conditionalAction
+    Role2: conditionalAction
+Load Association: A_clause_loopAction
+    Role1: loopAction
+    Role2: loopAction
+Load Association: A_test_clause
+    Role1: test
+    Role2: test
+Load Association: A_bodyOutput_clause
+    Role1: bodyOutput
+    Role2: bodyOutput
+Load Association: A_loopVariable_loop
+    Role1: loopVariable
+    Role2: loopVariable
+Load Association: A_testOutput_clause
+    Role1: testOutput
+    Role2: testOutput
+Load Association: A_scope_variable
+    Role1: variable
+    Role2: variable
+Load Association: A_predecessorClause_successorClause
+    Role1: successorClause
+    Role2: successorClause
+Load Association: ApplyFunctionAction_Argument
+    Role1: argument
+    Role2: argument
+Load Association: A_function_applyFunctionAction
+    Role1: applyFunctionAction
+    Role2: applyFunctionAction
+Load Association: A_inputSpec_primitiveFunction
+    Role1: primitiveFunction
+    Role2: primitiveFunction
+Load Association: A_outputSpec_primitiveFunction
+    Role1: primitiveFunction
+    Role2: primitiveFunction
+Load Association: A_value_literalValueAction
+    Role1: value
+    Role2: value
+Load Association: ApplyFunctionAction_Result
+    Role1: result
+    Role2: result
+Load Association: CodeAction_Argument
+    Role1: argument
+    Role2: argument
+Load Association: CodeAction_Result
+    Role1: result
+    Role2: result
+Load Association: LiteralValueAction_Result
+    Role1: result
+    Role2: result
+Load Association: TestIdentityAction_First
+    Role1: first
+    Role2: first
+Load Association: TestIdentityAction_Second
+    Role1: second
+    Role2: second
+Load Association: MarshalAction_Argument
+    Role1: argument
+    Role2: argument
+Load Association: MarshalAction_Result
+    Role1: result
+    Role2: result
+Load Association: UnmarshalAction_Argument
+    Role1: argument
+    Role2: argument
+Load Association: UnmarshalAction_Result
+    Role1: result
+    Role2: result
+Load Association: A_type_argumentSpecification
+    Role1: type
+    Role2: type
+Load Association: A_exception_jumpAction
+    Role1: exception
+    Role2: exception
+Load Association: A_jumpHandler_protectedAction
+    Role1: protectedAction
+    Role2: protectedAction
+Load Association: JumpAction_JumpOccurrence
+    Role1: jumpOccurence
+    Role2: jumpOccurence
+Load Association: A_handlerOutput_handlerAction
+    Role1: handlerOutput
+    Role2: handlerOutput
+Load Association: A_body_handlerAction
+    Role1: body
+    Role2: body
+Load Association: HandlerAction_Occurrence
+    Role1: occurrence
+    Role2: occurrence
+Load Association: A_jumpType_jumpHandler
+    Role1: jumpType
+    Role2: jumpType
+Load Association: A_body_jumpHandler
+    Role1: jumpHandler
+    Role2: jumpHandler
+Load Association: InvocationAction_Target
+    Role1: target
+    Role2: target
+Load Association: InvocationAction_Request
+    Role1: request
+    Role2: request
+Load Association: SynchronousInvocationAction_OutputPin
+    Role1: reply
+    Role2: reply
+Load Association: ExplicitInvocationAction_Argument
+    Role1: argument
+    Role2: argument
+Load Association: CallOperationAction_Result
+    Role1: result
+    Role2: result
+Load Association: CallOperationAction_Target
+    Role1: target
+    Role2: target
+Load Association: A_operation_callOperationAction
+    Role1: operation
+    Role2: operation
+Load Association: ReadLinkAction_Result
+    Role1: result
+    Role2: result
+Load Association: A_result_readLinkObjectEndAction
+    Role1: result
+    Role2: result
+Load Association: A_result_readLinkObjectQualifierAction
+    Role1: result
+    Role2: result
+Load Association: A_insertAt_linkEndCreationData
+    Role1: insertAt
+    Role2: insertAt
+Load Association: A_end_linkEndData
+    Role1: end
+    Role2: end
+Load Association: LinkEndData_Value
+    Role1: value
+    Role2: value
+Load Association: A_qualifier_linkEndData
+    Role1: linkEndData
+    Role2: linkEndData
+Load Association: A_qualifier_qualifierValue
+    Role1: qualifier
+    Role2: qualifier
+Load Association: Qualifier_Value
+    Role1: value
+    Role2: value
+Load Association: A_object_readLinkObjectEndAction
+    Role1: object
+    Role2: object
+Load Association: A_end_readLinkObjectEndAction
+    Role1: end
+    Role2: end
+Load Association: A_object_readLinkObjectQualifierAction
+    Role1: object
+    Role2: object
+Load Association: A_qualifier_readLinkObjectQualifierAction
+    Role1: qualifier
+    Role2: qualifier
+Load Association: A_result_createLinkObjectAction
+    Role1: result
+    Role2: result
+Load Association: A_endData_linkAction
+    Role1: linkAction
+    Role2: linkAction
+Load Association: A_association_clearAssociationAction
+    Role1: association
+    Role2: association
+Load Association: A_object_clearAssociationAction
+    Role1: object
+    Role2: object
+Load Association: ReadAttributeAction_Result
+    Role1: result
+    Role2: result
+Load Association: AddAttributeValueAction_InsertAt
+    Role1: insertAt
+    Role2: insertAt
+Load Association: AttributeAction_Object
+    Role1: object
+    Role2: object
+Load Association: A_attributeAction_attribute
+    Role1: attribute
+    Role2: attribute
+Load Association: WriteAttributeAction_Value
+    Role1: value
+    Role2: value
+Load Association: DestroyObjectAction_Input
+    Role1: input
+    Role2: input
+Load Association: A_classifier_createObjectAction
+    Role1: classifier
+    Role2: classifier
+Load Association: CreateObjectAction_Result
+    Role1: result
+    Role2: result
+Load Association: A_oldClassifier_reclassifyObjectAction
+    Role1: oldClassifier
+    Role2: oldClassifier
+Load Association: A_newClassifier_reclassifyObjectAction
+    Role1: newClassifier
+    Role2: newClassifier
+Load Association: ReclassifyObjectAction_Input
+    Role1: input
+    Role2: input
+Load Association: A_classifier_readIsClassifiedObjectAction
+    Role1: classifier
+    Role2: classifier
+Load Association: ReadClassifiedObjectAction_Input
+    Role1: input
+    Role2: input
+Load Association: ReadIsClassifiedObjectAction_Result
+    Role1: result
+    Role2: result
+Load Association: ReadSelfAction_Result
+    Role1: result
+    Role2: result
+Load Association: ReadExtentAction_Result
+    Role1: result
+    Role2: result
+Load Association: A_classifier_readExtentAction
+    Role1: classifier
+    Role2: classifier
+Load Association: StartStateMachineAction_Input
+    Role1: input
+    Role2: input
+Load Association: A_insertAt_addVariableValueAction
+    Role1: insertAt
+    Role2: insertAt
+Load Association: A_result_readVariableAction
+    Role1: result
+    Role2: result
+Load Association: A_variable_variableAction
+    Role1: variableAction
+    Role2: variableAction
+Load Association: A_value_writeVariableAction
+    Role1: value
+    Role2: value
+Load Association: A_signal_sendSignalAction
+    Role1: signal
+    Role2: signal
+Load Association: A_signal_broadcastSignalAction
+    Role1: signal
+    Role2: signal
+Load Association: SendSignalAction_Target
+    Role1: target
+    Role2: target
+Load Association: TestIdentityAction_Result
+    Role1: result
+    Role2: result
+Load Association: A_unmarshalType_unmarshalAction
+    Role1: unmarshalType
+    Role2: unmarshalType
+Load Association: A_marshalType_marshalAction
+    Role1: marshalType
+    Role2: marshalType
+Load Association: CallProcedureAction_OutputPin
+    Role1: output
+    Role2: output
+Load Association: CallProcedureAction_InputPin
+    Role1: input
+    Role2: input
+Load Association: A_calledProcedure_callProcedureAction
+    Role1: calledProcedure
+    Role2: calledProcedure
+Importing supertype refs for: ControlFlow
+Superclass Is: ModelElement
+Importing supertype refs for: Action
+Superclass Is: ModelElement
+Importing supertype refs for: PrimitiveAction
+Superclass Is: Action
+Importing supertype refs for: InputPin
+Superclass Is: Pin
+Importing supertype refs for: DataFlow
+Superclass Is: ModelElement
+Importing supertype refs for: OutputPin
+Superclass Is: Pin
+Importing supertype refs for: Pin
+Superclass Is: ModelElement
+Load Association: A_consequent_predecessor
+    Role1: predecessor
+    Role2: predecessor
+Load Association: A_successor_antecedent
+    Role1: antecedent
+    Role2: antecedent
+Load Association: A_action_procedure
+    Role1: procedure
+    Role2: procedure
+Load Association: A_argument_procedure
+    Role1: procedure
+    Role2: procedure
+Load Association: A_result_procedure
+    Role1: procedure
+    Role2: procedure
+Load Association: Action_AvailableInput
+    Role1: action
+    Role2: action
+Load Association: A_inputPin_action
+    Role1: action
+    Role2: action
+Load Association: A_source_flow
+    Role1: flow
+    Role2: flow
+Load Association: A_action_outputPin
+    Role1: outputPin
+    Role2: outputPin
+Load Association: Action_AvailableOutput
+    Role1: action
+    Role2: action
+Load Association: A_type_pin
+    Role1: type
+    Role2: type
+Load Association: A_destination_flow
+    Role1: flow
+    Role2: flow
+Importing supertype refs for: Multiplicity
+Importing supertype refs for: MultiplicityRange
+Importing supertype refs for: Expression
+Importing supertype refs for: BooleanExpression
+Superclass Is: Expression
+Importing supertype refs for: TypeExpression
+Superclass Is: Expression
+Importing supertype refs for: MappingExpression
+Superclass Is: Expression
+Importing supertype refs for: TimeExpression
+Superclass Is: Expression
+Importing supertype refs for: ArgListsExpression
+Superclass Is: Expression
+Importing supertype refs for: ProcedureExpression
+Superclass Is: Expression
+Load Association: A_multiplicity_range
+    Role1: range
+    Role2: range
+Importing supertype refs for: Element
+Importing supertype refs for: ModelElement
+Superclass Is: Element
+Importing supertype refs for: GeneralizableElement
+Superclass Is: ModelElement
+Importing supertype refs for: Namespace
+Superclass Is: ModelElement
+Importing supertype refs for: Classifier
+Superclass Is: GeneralizableElement
+Superclass Is: Namespace
+Importing supertype refs for: Class
+Superclass Is: Classifier
+Importing supertype refs for: DataType
+Superclass Is: Classifier
+Importing supertype refs for: Feature
+Superclass Is: ModelElement
+Importing supertype refs for: StructuralFeature
+Superclass Is: Feature
+Importing supertype refs for: AssociationEnd
+Superclass Is: ModelElement
+Importing supertype refs for: Interface
+Superclass Is: Classifier
+Importing supertype refs for: Constraint
+Superclass Is: ModelElement
+Importing supertype refs for: Relationship
+Superclass Is: ModelElement
+Importing supertype refs for: Association
+Superclass Is: GeneralizableElement
+Superclass Is: Relationship
+Importing supertype refs for: Attribute
+Superclass Is: StructuralFeature
+Importing supertype refs for: BehavioralFeature
+Superclass Is: Feature
+Importing supertype refs for: Operation
+Superclass Is: BehavioralFeature
+Importing supertype refs for: Parameter
+Superclass Is: ModelElement
+Importing supertype refs for: Method
+Superclass Is: BehavioralFeature
+Importing supertype refs for: Generalization
+Superclass Is: Relationship
+Importing supertype refs for: AssociationClass
+Superclass Is: Association
+Superclass Is: Class
+Importing supertype refs for: Dependency
+Superclass Is: Relationship
+Importing supertype refs for: Abstraction
+Superclass Is: Dependency
+Importing supertype refs for: PresentationElement
+Superclass Is: Element
+Importing supertype refs for: Usage
+Superclass Is: Dependency
+Importing supertype refs for: Binding
+Superclass Is: Dependency
+Importing supertype refs for: Component
+Superclass Is: Classifier
+Importing supertype refs for: Node
+Superclass Is: Classifier
+Importing supertype refs for: Permission
+Superclass Is: Dependency
+Importing supertype refs for: Comment
+Superclass Is: ModelElement
+Importing supertype refs for: Flow
+Superclass Is: Relationship
+Importing supertype refs for: ElementResidence
+Importing supertype refs for: TemplateParameter
+Importing supertype refs for: Primitive
+Superclass Is: DataType
+Importing supertype refs for: Enumeration
+Superclass Is: DataType
+Importing supertype refs for: EnumerationLiteral
+Superclass Is: ModelElement
+Importing supertype refs for: Stereotype
+Superclass Is: GeneralizableElement
+Importing supertype refs for: TagDefinition
+Superclass Is: ModelElement
+Importing supertype refs for: TaggedValue
+Superclass Is: ModelElement
+Importing supertype refs for: ProgrammingLanguageDataType
+Superclass Is: DataType
+Importing supertype refs for: Artifact
+Superclass Is: Classifier
+Importing supertype refs for: TemplateArgument
+Load Association: A_association_connection
+    Role1: connection
+    Role2: connection
+Load Association: A_owner_feature
+    Role1: feature
+    Role2: feature
+Load Association: A_specification_method
+    Role1: method
+    Role2: method
+Load Association: A_typedFeature_type
+    Role1: type
+    Role2: type
+Load Association: A_namespace_ownedElement
+    Role1: ownedElement
+    Role2: ownedElement
+Load Association: A_behavioralFeature_parameter
+    Role1: parameter
+    Role2: parameter
+Load Association: A_typedParameter_type
+    Role1: type
+    Role2: type
+Load Association: A_child_generalization
+    Role1: generalization
+    Role2: generalization
+Load Association: A_parent_specialization
+    Role1: specialization
+    Role2: specialization
+Load Association: A_qualifier_associationEnd
+    Role1: associationEnd
+    Role2: associationEnd
+Load Association: A_participant_association
+    Role1: association
+    Role2: association
+Load Association: A_specifiedEnd_specification
+    Role1: specification
+    Role2: specification
+Load Association: A_client_clientDependency
+    Role1: clientDependency
+    Role2: clientDependency
+Load Association: A_constrainedElement_constraint
+    Role1: constraint
+    Role2: constraint
+Load Association: A_supplier_supplierDependency
+    Role1: supplierDependency
+    Role2: supplierDependency
+Load Association: A_presentation_subject
+    Role1: subject
+    Role2: subject
+Load Association: A_deploymentLocation_deployedComponent
+    Role1: deployedComponent
+    Role2: deployedComponent
+Load Association: A_targetFlow_target
+    Role1: target
+    Role2: target
+Load Association: A_sourceFlow_source
+    Role1: source
+    Role2: source
+Load Association: A_defaultElement_defaultedParameter
+    Role1: defaultedParameter
+    Role2: defaultedParameter
+Load Association: A_binding_argument
+    Role1: argument
+    Role2: argument
+Load Association: A_powertype_powertypeRange
+    Role1: powertypeRange
+    Role2: powertypeRange
+Load Association: A_comment_annotatedElement
+    Role1: annotatedElement
+    Role2: annotatedElement
+Load Association: A_resident_elementResidence
+    Role1: elementResidence
+    Role2: elementResidence
+Load Association: A_container_residentElement
+    Role1: residentElement
+    Role2: residentElement
+Load Association: A_template_templateParameter
+    Role1: templateParameter
+    Role2: templateParameter
+Load Association: A_parameter_parameterTemplate
+    Role1: parameterTemplate
+    Role2: parameterTemplate
+Load Association: A_enumeration_literal
+    Role1: literal
+    Role2: literal
+Load Association: A_definedTag_owner
+    Role1: owner
+    Role2: owner
+Load Association: A_stereotype_extendedElement
+    Role1: extendedElement
+    Role2: extendedElement
+Load Association: A_constrainedStereotype_stereotypeConstraint
+    Role1: stereotypeConstraint
+    Role2: stereotypeConstraint
+Load Association: A_modelElement_taggedValue
+    Role1: taggedValue
+    Role2: taggedValue
+Load Association: A_type_typedValue
+    Role1: typedValue
+    Role2: typedValue
+Load Association: A_referenceValue_referenceTag
+    Role1: referenceTag
+    Role2: referenceTag
+Load Association: A_implementation_implementationLocation
+    Role1: implementationLocation
+    Role2: implementationLocation
+Load Association: A_modelElement_templateArgument
+    Role1: templateArgument
+    Role2: templateArgument
+Importing supertype refs for: Package
+Superclass Is: GeneralizableElement
+Superclass Is: Namespace
+Importing supertype refs for: Model
+Superclass Is: Package
+Importing supertype refs for: Subsystem
+Superclass Is: Package
+Superclass Is: Classifier
+Importing supertype refs for: ElementImport
+Load Association: A_importedElement_elementImport
+    Role1: importedElement
+    Role2: importedElement
+Load Association: A_package_elementImport
+    Role1: elementImport
+    Role2: elementImport

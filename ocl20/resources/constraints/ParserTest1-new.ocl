@@ -1,0 +1,11 @@
+package de::tudresden::ocl20
+context VendingApp::Customer
+inv: cards->forAll(printedName=self.name)
+inv: cart.maxElements >= cart.elements->iterate(a)
+def isCheckedOut: (timestamp: Integer):Boolean = let a = true in a
+endpackage
+package ocl20
+context calendar::weekend
+inv: true and true and true
+endpackage
+

@@ -1,0 +1,9 @@
+package java::lang
+context int
+inv: true
+endpackage
+package carworld
+context Person
+inv: age >= 16
+endpackage
+
