@@ -174,6 +174,25 @@ public abstract class AbstractDescriptor extends Object {
     return m_sDocComment;
   }
   
+  /**
+    * Indents the doccomment (all but the first line) the specified number of characters.
+    */
+  public void indentComment (int nIndent) {
+    if (m_sDocComment != null) {
+      String sIndent = "";
+      for (; nIndent > 0; nIndent --) {
+        sIndent += " ";
+      }
+      
+      int nPos = m_sDocComment.indexOf ('\n');
+      while (nPos != -1) {
+        m_sDocComment = m_sDocComment.substring (0, nPos + 1) + sIndent + m_sDocComment.substring (nPos + 1);
+        
+        nPos = m_sDocComment.indexOf ('\n', nPos + 1);
+      }      
+    }
+  }
+  
   protected void adjustDocComment (String sData, String sContext) {
     if (m_sDocComment == null) {
       m_sDocComment = "/** */";
@@ -187,9 +206,17 @@ public abstract class AbstractDescriptor extends Object {
       int nIndent = 0;
       int nPos = 0;
       boolean fHadLineBreak = false;
+      boolean fHadStars = true;
       
       while ((nPos > -1) && (nPos < m_sDocComment.length())) {
         if (m_sDocComment.charAt (nPos) != ' ') {
+          
+          if ((m_sDocComment.charAt (nPos) != '*') &&
+               (m_sDocComment.charAt (nPos) != '/')) {
+            // Mark the fact that comment lines do not start with asterisks
+            fHadStars = false;
+          }
+          
           // Find next \n and start searching from there
           nPos = m_sDocComment.indexOf ('\n', nPos);
           
@@ -234,13 +261,13 @@ public abstract class AbstractDescriptor extends Object {
       }
       
       if (!fLineFeedBeforeEnd) {
-        m_sDocComment = m_sDocComment.substring (0, nInsertPos - 1) + 
-                        "\n" + sIndent + "* " + sContext + " " + sData + 
+        m_sDocComment = m_sDocComment.substring (0, nInsertPos) + 
+                        "\n" + sIndent + ((fHadStars)?("* "):("")) + sContext + " " + sData + 
                         "\n" + sIndent + "*/";
       }
       else {
-        m_sDocComment = m_sDocComment.substring (0, nLastLineFeedPos - 1) + 
-                        "\n" + sIndent + "* " + sContext + " " + sData + 
+        m_sDocComment = m_sDocComment.substring (0, nLastLineFeedPos) + 
+                        "\n" + sIndent + ((fHadStars)?("* "):("")) + sContext + " " + sData + 
                         "\n" + sIndent + "*/";
       }
       

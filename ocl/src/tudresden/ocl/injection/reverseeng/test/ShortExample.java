@@ -44,12 +44,16 @@ public class ShortExample extends Object {
   /**
     * This makes our life much easier...
     */
-  private LinkedList m_llCollectionTesterNoComment;
+  private LinkedList m_llCollectionTester;
+  
+  private ArrayList m_alCollectionTesterNoComment;
   
   /**
-    * Dada... blah blubber
+     This comment has no stars in front!
     */
-  private Map m_mMapTesterNoComment;
+  private Map m_mMapTester;
+  
+  private HashMap m_hmMapTesterNoComment;
   
   class Inner {
     /**

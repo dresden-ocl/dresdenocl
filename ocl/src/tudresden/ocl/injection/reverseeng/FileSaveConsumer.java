@@ -62,6 +62,11 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     */
   private AbstractDescriptor m_adCurrentFeature = null;
     
+  /**
+    * True if a doccomment has been written after the last feature.
+    */
+  private boolean m_fWroteDocComment = false;
+  
   /** Creates new FileSaveConsumer */
   public FileSaveConsumer (IndentAwareWriter iawOutput, AnalysisConsumer acAnalysisResults) {
     super();
@@ -123,7 +128,47 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     }
   }
  
-  public void onAttributeHeader(JavaAttribute ja) throws java.io.IOException {}
+  public void onAttributeHeader(JavaAttribute ja) throws java.io.IOException {
+    if (! m_fWroteDocComment) {
+      // Feature without comment
+      if ((m_iFeatures.hasNext()) &&
+          (getCurrentFeature().getCommentID() == m_cComments)) {
+        // Might need element-type/key-type spec (i.e., if it is a collection or map)
+        if (ja.getType () != null) {
+          try {
+            Class clClass = ja.getFile ().findType (ja.getType ());
+
+            if (clClass != null) {
+              // Not a simple type --> check whether collection or map
+              if (AnalysisConsumer.s_clCollection.isAssignableFrom (clClass) ||
+                  AnalysisConsumer.s_clMap.isAssignableFrom (clClass)) {
+                // Yup! So we have to generate a comment for it!
+                if (m_iawOutput != null) {
+                  int nIndent = m_iawOutput.getCurrentIndent();
+                  
+                  getCurrentFeature().indentComment (nIndent);
+                  m_iawOutput.write (getCurrentFeature().getDocComment () + "\n");
+                  
+                  for (; nIndent > 0; nIndent --) {
+                    m_iawOutput.write (" ");
+                  }
+                }
+
+                m_adCurrentFeature = null; // Mark feature as handled...
+                m_cComments++;
+              }
+            }
+          }
+          catch (InjectorParseException ipe) {
+            System.err.println ("Exception while saving attribute:");
+            ipe.printStackTrace();
+            
+            throw new IOException (ipe.getMessage());
+          }
+        }
+      }
+    }
+  }
 
   /** Called for attributes and methods.
     * Is called additionally to
@@ -133,31 +178,8 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
     * the doccomment associated to this feature.
     * Is null, if there was none.
     */
-  public void onClassFeature(JavaFeature cf,String doccomment) throws java.io.IOException, InjectorParseException {
-    if (doccomment == null) {
-      // Feature without comment
-      if ((m_iFeatures.hasNext()) &&
-          (getCurrentFeature().getCommentID() == m_cComments)) {
-        // Might need element-type/key-type spec (i.e., if it is a collection or map)
-        if (cf.getType () != null) {
-          Class clClass = cf.getFile ().findType (cf.getType ());
-        
-          if (clClass != null) {
-            // Not a simple type --> check whether collection or map
-            if (AnalysisConsumer.s_clCollection.isAssignableFrom (clClass) ||
-                AnalysisConsumer.s_clMap.isAssignableFrom (clClass)) {
-              // Yup! So we have to generate a comment for it!
-              if (m_iawOutput != null) {
-                m_iawOutput.write (getCurrentFeature().getDocComment (/*m_iawOutput.getCurrentIndent()*/));
-              }
-
-              m_adCurrentFeature = null; // Mark feature as handled...
-              m_cComments++;
-            }
-          }
-        }
-      }
-    }
+  public void onClassFeature(JavaFeature cf,String doccomment) {
+    m_fWroteDocComment = false;
   }
   
   /** Encountered a java documentation comment.
@@ -180,6 +202,8 @@ public class FileSaveConsumer extends Object implements InjectionConsumer {
         m_iawOutput.write (doccomment);
       }
     }
+    
+    m_fWroteDocComment = true;
     
     return true;
   }
