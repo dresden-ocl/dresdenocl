@@ -2,10 +2,11 @@
 1. REQUIREMENTS
 ---------------
 
-xerces.jar  Xerces  1.2.0  XML parser      Apache http://xml.apache.org/xerces-j/index.html
-junit.jar   JUnit   3.2    test framework  Kent Beck and Erich Gamma http://www.junit.org/
+Ant 1.3                   build tool      Apache (http://jakarta.apache.org/)
+Xerces 1.2.0 (xerces.jar) XML parser      Apache (http://xml.apache.org/xerces-j/index.html)
+JUnit 3.2 (junit.jar)     test framework  Kent Beck and Erich Gamma (http://www.junit.org/)
 
-These files are also available on our website at
+xerces.jar and junit.jar are also available on our website at
 http://dresden-ocl.sourceforge.net/download.html#sources
 
 2. CHECK IN POLICY
@@ -33,8 +34,14 @@ jikes 1.12 terminates with a failing assertion, the rule above
 does not apply to this version of jikes. Version 1.06 is known
 to work.
 
+2.2 Ant
+-------
+Ant must build successfully with the build.xml in this directory.
+Besides compiling jar-files are created and checked for static
+closure.
+Note, that the build.xml does not compile all classes.
 
-2.2 Javadoc
+2.3 Javadoc
 -----------
 javadoc run with the file "jdoc" in this directory must
 not produce any warnings, when using
@@ -43,14 +50,14 @@ not produce any warnings, when using
   AND
   any later version of the above.
 
-2.3 Test Suites
+2.4 Test Suites
 ---------------
 
 Skripts regress.sh and injectionsuite in this directory
-must run through without exception. These skripts require
+must run through without exceptions. These skripts require
 GNU diff and a UNIX compatible shell.
 
-2.4 Tabs
+2.5 Tabs
 --------
 You are free to use tabs for identing or not. If you do, a single
 tab is exactly ONE level of identation.
