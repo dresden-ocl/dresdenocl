@@ -33,9 +33,30 @@ import java.util.*;
   */
 public class ShortExample extends Object {
 
+  /**
+    * This will probably make life a little harder for the tool
+    */
+  int a;
+  
+  // This definitely will!
+  int b;
+  
+  /**
+    * This makes our life much easier...
+    */
   private LinkedList m_llCollectionTesterNoComment;
   
+  /**
+    * Dada... blah blubber
+    */
   private Map m_mMapTesterNoComment;
+  
+  class Inner {
+    /**
+      * Testing indenting...
+      */
+    public Set m_sBag;
+  }
   
   /** Creates new ShortExample */
   public ShortExample() {
