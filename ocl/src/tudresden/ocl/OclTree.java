@@ -269,6 +269,11 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
     return getExpression();
   }
 
+  /**
+  	*	apply a tree traversal to the abstract syntax tree; see the
+  	*	<a href="http://www.sablecc.org/thesis/thesis.html#PAGE52">SableCC documentation</a>
+  	*	for tree traversals
+   */
   public void apply(Switch s) {
     ast.apply(s);
   }
