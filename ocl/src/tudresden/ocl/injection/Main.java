@@ -22,6 +22,9 @@ import java.io.*;
 import java.util.*;
 import tudresden.ocl.OclTree;
 import tudresden.ocl.NameCreator;
+import tudresden.ocl.lib.NameAdapter;
+import tudresden.ocl.lib.SimpleNameAdapter;
+import tudresden.ocl.lib.ArgoNameAdapter;
 import tudresden.ocl.parser.OclParserException;
 import tudresden.ocl.check.types.*;
 import tudresden.ocl.check.OclTypeException;
@@ -579,10 +582,24 @@ public class Main
 
   public static void main (String args[])
   {
-    String usage="usage:\n   java tudresden.ocl.injection.Main [options] tobemodified1.java ...\n      --xmi-model model.xmi\n      --constraint-file constraints.txt\n      --reflection-model modelpackage\n      --clean -c clean files\n      --modify -m: modify files";
+    String usage=
+      "usage:\n"+
+      "java tudresden.ocl.injection.Main [options] tobemodified1.java ...\n"+
+      "  -f --constraint-file constraints.txt\n"+
+      "  -x --xmi-model model.xmi\n"+
+      "      the model given as xmi file\n"+
+      "  -r --reflection-model modelpackage\n"+
+      "      the model given by reflection\n"+
+      "  -n --name-adapter [simple|argo]\n"+
+      "      the nameadapter\n"+
+      "  -c --clean\n"+
+      "      clean files\n"+
+      "  -m --modify\n"+
+      "      modify files";
     String constraintfile=null;
     String xmimodel=null;
     ArrayList reflectionmodel=new ArrayList();
+    NameAdapter nameadapter=null;
     boolean modify=false;
     ArrayList sourcefiles=new ArrayList();
     OclInjectorConfig conf=new OclInjectorConfig();
@@ -590,7 +607,7 @@ public class Main
     {
       for(int i=0; i<args.length; i++)
       {
-        if("--constraint-file".equals(args[i]))
+        if("--constraint-file".equals(args[i])||"-f".equals(args[i]))
         {
           if(constraintfile!=null)
           {
@@ -607,7 +624,7 @@ public class Main
           }
           constraintfile=args[i];
         }
-        else if("--xmi-model".equals(args[i]))
+        else if("--xmi-model".equals(args[i])||"-x".equals(args[i]))
         {
           if(xmimodel!=null)
           {
@@ -624,7 +641,7 @@ public class Main
           }
           xmimodel=args[i];
         }
-        else if("--reflection-model".equals(args[i]))
+        else if("--reflection-model".equals(args[i])||"-r".equals(args[i]))
         {
           i++;
           if(i>=args.length)
@@ -634,6 +651,32 @@ public class Main
             return;
           }
           reflectionmodel.add(args[i]);
+        }
+        else if("--name-adapter".equals(args[i])||"-n".equals(args[i]))
+        {
+          if(nameadapter!=null)
+          {
+            System.out.println("can use only one name adapter.");
+            System.out.println(usage);
+            return;
+          }
+          i++;
+          if(i>=args.length)
+          {
+            System.out.println("name adpater not given.");
+            System.out.println(usage);
+            return;
+          }
+          if("simple".equals(args[i]))
+            nameadapter=new SimpleNameAdapter();
+          else if("argo".equals(args[i]))
+            nameadapter=new ArgoNameAdapter();
+          else
+          {
+            System.out.println("name adapter must be 'simple' or 'argo'.");
+            System.out.println(usage);
+            return;
+          }
         }
         else if("--modify".equals(args[i])||"-m".equals(args[i]))
           modify=true;
@@ -677,13 +720,17 @@ public class Main
         if(xmimodel!=null)
           modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel);
         else
+        {
+          if(nameadapter==null)
+            nameadapter=new SimpleNameAdapter();
           modelfacade=new ReflectionFacade
           (
             (String[])(reflectionmodel.toArray(new String[0])),
             new DefaultReflectionAdapter(),
-            new tudresden.ocl.lib.SimpleNameAdapter(),
+            nameadapter,
             new SourceReflectionExtender()
           );
+        }
         conf.codefragments=makeCode(new File(constraintfile), modelfacade);
       }
             

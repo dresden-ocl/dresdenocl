@@ -24,8 +24,9 @@ public class Bank
 {
   /**
      @element-type Person
+     @key-type Integer
   */
-  HashSet customer=new HashSet();
+  HashMap customer=new HashMap();
 
   public Bank() 
   {
