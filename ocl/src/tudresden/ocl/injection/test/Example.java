@@ -323,3 +323,8 @@ class ThirdExample extends SecondExample
   // this class has no explicit constructor
   void abstractMethod()  {}
 }
+
+interface ExampleFour
+{
+  public int someMethod(double x);
+}

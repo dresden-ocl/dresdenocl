@@ -18,6 +18,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.injection;
 
+import java.lang.reflect.Modifier;
+
 /**
    Represents a class parsed by the java parser.
    Is an inner class, if parent is not null.
@@ -62,17 +64,22 @@ public class JavaClass extends JavaFeature
     }
     return buf.toString();
   }
+  
+  public final boolean isInterface()
+  {
+    return (getModifiers() & Modifier.INTERFACE) > 0;
+  }
 
   public final int getAllowedModifiers()
   {
     return
-      java.lang.reflect.Modifier.INTERFACE |
-      java.lang.reflect.Modifier.PUBLIC |
-      java.lang.reflect.Modifier.PROTECTED |
-      java.lang.reflect.Modifier.PRIVATE |
-      java.lang.reflect.Modifier.FINAL |
-      java.lang.reflect.Modifier.STATIC |
-      java.lang.reflect.Modifier.ABSTRACT;
+      Modifier.INTERFACE |
+      Modifier.PUBLIC |
+      Modifier.PROTECTED |
+      Modifier.PRIVATE |
+      Modifier.FINAL |
+      Modifier.STATIC |
+      Modifier.ABSTRACT;
   }
 
   public final void printMore(java.io.PrintStream o)

@@ -133,8 +133,6 @@ final class OclInjector implements InjectionConsumer
   {
     discardnextfeature=false;
 
-    if(clean) return;
-    
     class_state_stack.add(class_state);
     class_state=new ClassState(jc, delayinsertions);
   }
@@ -142,17 +140,18 @@ final class OclInjector implements InjectionConsumer
   public void onClassEnd(JavaClass jc) 
     throws IOException, InjectorParseException
   {
-    if(clean) return;
-
-    if(delayinsertions)
-      for(Iterator i=class_state.behaviours.iterator(); i.hasNext(); )
-        writeWrapper((JavaBehaviour)i.next());
-    if(!class_state.has_constructors)
-      writeDefaultConstructor(jc);
-    for(Iterator i=class_state.observedFeatures.iterator(); i.hasNext(); )
-      writeObserver((JavaFeature)i.next());
-    writeChangedChecker();
-    writeInvariants(jc.getName());
+    if(!clean && !jc.isInterface())
+    {
+      if(delayinsertions)
+        for(Iterator i=class_state.behaviours.iterator(); i.hasNext(); )
+          writeWrapper((JavaBehaviour)i.next());
+      if(!class_state.has_constructors)
+        writeDefaultConstructor(jc);
+      for(Iterator i=class_state.observedFeatures.iterator(); i.hasNext(); )
+        writeObserver((JavaFeature)i.next());
+      writeChangedChecker();
+      writeInvariants(jc.getName());
+    }
 
     if(class_state.javaclass!=jc)
       throw new RuntimeException();
@@ -163,7 +162,7 @@ final class OclInjector implements InjectionConsumer
   public void onBehaviourHeader(JavaBehaviour jb) 
     throws java.io.IOException
   {
-    if(clean || jb.isStatic())
+    if(clean || jb.isStatic() || class_state.javaclass.isInterface())
       output.write(jb.getLiteral());
     else
       output.write(jb.getWrappedLiteral());
@@ -182,7 +181,7 @@ final class OclInjector implements InjectionConsumer
   public void onClassFeature(JavaFeature jf, String doccomment) 
     throws IOException, InjectorParseException
   {
-    if(!clean)
+    if(!clean && !class_state.javaclass.isInterface())
     {
       if(jf instanceof JavaAttribute &&
          !Modifier.isFinal(jf.getModifiers()) &&
@@ -248,7 +247,7 @@ final class OclInjector implements InjectionConsumer
     else
     {
       output.write(doccomment);
-      if(!clean)
+      if(!clean && !class_state.javaclass.isInterface())
       {
         addInvariant    (Injector.extractDocParagraphs(doccomment, "invariant"));
         addPrecondition (Injector.extractDocParagraphs(doccomment, "precondition"));
@@ -1176,14 +1175,17 @@ public class Main
         return;
       }
 
+      if(conf.clean&&constraintfile!=null)
+      {
+        System.out.println("cannot combine --clean and --constraint-file.");
+        System.out.println(usage);
+        return;
+      }
+
       if(conf.violationmacro==null)
         conf.violationmacro="System.out.println";
 
-      if(conf.clean)
-        System.out.println("cleaning code.");
-      else if(constraintfile==null)
-        System.out.println("no constraints given, generating code for @element-type only.");
-      else
+      if(constraintfile!=null)
       {
         if((xmimodel==null) == (reflectionmodel==null))
         {
