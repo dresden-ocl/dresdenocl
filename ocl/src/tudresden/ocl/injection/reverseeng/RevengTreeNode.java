@@ -79,16 +79,9 @@ public abstract class RevengTreeNode extends DefaultMutableTreeNode {
   public abstract void fill();
         
   /**
-    * Called to indicate that the node was just collapsed. By default removes all children.
+    * Called to indicate that the node was just collapsed. By default does nothing.
     */
-  public void collapsed() {
-    /*if (! isLeaf()) {
-      removeAllChildren();
-      setAllowsChildren (true);
-        
-      nodeStructureChanged();
-    }*/
-  }
+  public void collapsed() { }
     
   /**
     * Get the component to be shown in the right hand panel of the GUI.
@@ -114,17 +107,21 @@ public abstract class RevengTreeNode extends DefaultMutableTreeNode {
     * Thread-safe invocation of getModel().nodeChanged (this);
     */
   protected void nodeChanged() {
-    synchronized (m_dtmModel) {
-      m_dtmModel.nodeChanged (this);
-    }
+    SwingUtilities.invokeLater (new Runnable() {
+      public void run() {
+        m_dtmModel.nodeChanged (RevengTreeNode.this);
+      }
+    });
   }
   
   /**
     * Thread-safe invocation of getModel().nodeStructureChanged (this);
     */
   protected void nodeStructureChanged() {
-    synchronized (m_dtmModel) {
-      m_dtmModel.nodeStructureChanged (this);
-    }
+    SwingUtilities.invokeLater (new Runnable() {
+      public void run() {
+        m_dtmModel.nodeStructureChanged (RevengTreeNode.this);
+      }
+    });
   }
 }

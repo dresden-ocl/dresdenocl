@@ -174,6 +174,8 @@ public class RevengGUI extends javax.swing.JDialog {
 
       m_jspProperties.setViewportView (rtn.getRightComponent());
 
+      /*this.getRootPane().revalidate();
+      this.getRootPane().repaint();*/
       pack(); // Not especially elegant! Does anybody know a better way of getting that JScrollPane to redraw?
     }
   }//GEN-LAST:event_m_jtFilesValueChanged

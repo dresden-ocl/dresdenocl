@@ -24,6 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
 package tudresden.ocl.injection.reverseeng;
 
+import javax.swing.tree.*;
+
 /** 
   * Descriptor for a class attribute of map type.
   *
@@ -52,5 +54,9 @@ public class MapDescriptor extends AbstractDescriptor {
   public boolean isIncomplete() {
     return ((super.isIncomplete()) ||
              (getKeyType() == null));
+  }
+  
+  public RevengTreeNode createTreeNode (DefaultTreeModel dtmModel) {
+    return new MapTreeNode (dtmModel, this);
   }
 }

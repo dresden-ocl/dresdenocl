@@ -24,6 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
 package tudresden.ocl.injection.reverseeng;
 
+import javax.swing.tree.*;
+
 /** 
   * Descriptor for a class attribute of collection type.
   *
@@ -47,5 +49,9 @@ public class CollectionDescriptor extends AbstractDescriptor {
   
   public String toString () {
     return "Collection<" + getElementType () + "> " + getName () + " at comment ID " + getCommentID ();
+  }
+  
+  public RevengTreeNode createTreeNode(DefaultTreeModel dtmModel) {
+    return new CollectionTreeNode (dtmModel, this);
   }
 }

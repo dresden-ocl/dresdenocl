@@ -197,8 +197,9 @@ public class FileTreeNode extends RevengTreeNode {
       removeAllChildren();
 
       if (! m_fHadError) {
-        add (new CollectionHolderNode (getModel(), m_acAnalysisResults.getCollections ()));
-        add (new MapHolderNode (getModel(), m_acAnalysisResults.getMaps ()));
+        for (Iterator i = m_acAnalysisResults.getAllFeatures().iterator(); i.hasNext();) {
+          add (((AbstractDescriptor) i.next()).createTreeNode(getModel ()));
+        }
       }
       else {
         add (new ErrorTreeNode (getModel(), m_sErrorMessage));

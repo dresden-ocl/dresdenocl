@@ -35,6 +35,9 @@ import javax.swing.tree.*;
  */
 public class CollectionTreeNode extends RevengTreeNode {
   
+  static Icon s_iOK = new javax.swing.ImageIcon (CollectionTreeNode.class.getResource ("collection.gif"));
+  static Icon s_iInCompl = new javax.swing.ImageIcon (CollectionTreeNode.class.getResource ("collectionInCompl.gif"));
+  
   public CollectionTreeNode (DefaultTreeModel dtmModel, CollectionDescriptor cd) {
     super (dtmModel);
 
@@ -45,7 +48,12 @@ public class CollectionTreeNode extends RevengTreeNode {
   }
 
   public Icon getIcon (boolean fExpanded) {
-    return javax.swing.UIManager.getIcon ("Tree.leafIcon");
+    if (getDescriptor().isIncomplete()) {
+      return s_iInCompl;
+    }
+    else {
+      return s_iOK;
+    }
   }
 
   public void fill() {
@@ -65,6 +73,7 @@ public class CollectionTreeNode extends RevengTreeNode {
   public String toString () {      
     CollectionDescriptor cd = getDescriptor();
 
-    return "Collection<" + ((cd.getElementType() != null)?(cd.getElementType()):("Unknown Type")) + "> " + cd.getName();
+    return cd.getName() + " : " + 
+            ((cd.getElementType() != null)?(cd.getElementType()):(""));
   }
 }

@@ -138,4 +138,5 @@ public abstract class AbstractDescriptor extends Object {
   public boolean isIncomplete() {
     return m_sElementType == null;
   }
+  public abstract RevengTreeNode createTreeNode (DefaultTreeModel dtmModel);
 }

@@ -36,6 +36,9 @@ import javax.swing.tree.*;
   */
 public class MapTreeNode extends RevengTreeNode {
   
+  static Icon s_iOK = new javax.swing.ImageIcon (MapTreeNode.class.getResource ("map.gif"));
+  static Icon s_iInCompl = new javax.swing.ImageIcon (MapTreeNode.class.getResource ("mapInCompl.gif"));
+  
   public MapTreeNode (DefaultTreeModel dtmModel, MapDescriptor md) {
     super(dtmModel);
 
@@ -46,7 +49,12 @@ public class MapTreeNode extends RevengTreeNode {
   }
 
   public Icon getIcon (boolean fExpanded) {
-    return javax.swing.UIManager.getIcon ("Tree.leafIcon");
+    if (getDescriptor().isIncomplete()) {
+      return s_iInCompl;
+    }
+    else {
+      return s_iOK;
+    }
   }
 
   public void fill() {
@@ -72,10 +80,9 @@ public class MapTreeNode extends RevengTreeNode {
   public String toString () {      
     MapDescriptor md = getDescriptor();
 
-    return "Map<" + ((md.getKeyType() != null)?(md.getKeyType()):("Unknown Type"))
-                   + " -> "
-                   + ((md.getElementType() != null)?(md.getElementType()):("Unknown Type"))
-                   + "> "
-                   + md.getName();
+    return md.getName()
+            + "[" + ((md.getKeyType() != null)?(md.getKeyType()):("")) + "]"
+            + " : "
+            + ((md.getElementType() != null)?(md.getElementType()):(""));
   }
 }

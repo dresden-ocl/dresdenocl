@@ -146,6 +146,14 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     m_lmdMaps = new LinkedList();
   }
   
+  /**
+    * All features found in the current file whether collections or maps.
+    */
+  private List m_ladFeatures;
+  {
+    m_ladFeatures = new LinkedList();
+  }  
+  
   private int m_nStatus = STATUS_NORMALFILE;
   
   /** 
@@ -220,6 +228,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
                                                                    m_sCurrentComment,
                                                                    m_cComments);
             m_lcdCollections.add (cd);
+            m_ladFeatures.add (cd);
             
             m_nStatus |= STATUS_MASK_COLLECTIONS;
             
@@ -234,6 +243,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
                                                     m_sCurrentComment,
                                                     m_cComments);
             m_lmdMaps.add (md);
+            m_ladFeatures.add (md);
 
             m_nStatus |= STATUS_MASK_MAPS;
             if (md.isIncomplete()) {
@@ -319,6 +329,10 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
   
   public List getMaps() {
     return m_lmdMaps;
+  }
+  
+  public List getAllFeatures() {
+    return m_ladFeatures;
   }
   
   public static void main (String args[]) {
