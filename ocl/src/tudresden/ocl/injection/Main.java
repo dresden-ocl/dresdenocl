@@ -34,6 +34,7 @@ final class OclInjector implements InjectionConsumer
   private Writer output;
   private HashMap codefragments;
   private boolean delayinsertions;
+  private boolean clean;
 
   /**
      Collects all methods (ClassMethod) of the current class, except automatically generated methods.
@@ -63,11 +64,12 @@ final class OclInjector implements InjectionConsumer
   */
   private ArrayList typedAttributes_stack=new ArrayList();
 
-  OclInjector(Writer output, HashMap codefragments, boolean insertimmediatly)
+  OclInjector(Writer output, OclInjectorConfig conf)
   {
     this.output=output;
-    this.codefragments=codefragments;
-    this.delayinsertions=!insertimmediatly;
+    this.codefragments=conf.codefragments;
+    this.delayinsertions=!conf.insertimmediatly;
+    this.clean=conf.clean;
   }
   
   private String packagename;
@@ -87,6 +89,8 @@ final class OclInjector implements InjectionConsumer
   {
     discardnextfeature=false;
 
+    if(clean) return;
+    
     methods_stack.add(methods);
     methods=(delayinsertions ? new ArrayList() : null);
     typedAttributes_stack.add(typedAttributes);
@@ -95,6 +99,8 @@ final class OclInjector implements InjectionConsumer
 
   public void onClassEnd(ClassClass cc) throws IOException
   {
+    if(clean) return;
+
     if(delayinsertions)
       for(Iterator i=methods.iterator(); i.hasNext(); )
         writeWrapper((ClassMethod)i.next());
@@ -109,7 +115,7 @@ final class OclInjector implements InjectionConsumer
   public void onMethodHeader(ClassMethod cf) 
     throws java.io.IOException
   {
-    if(cf.isConstructor() || cf.isStatic())
+    if(clean || cf.isConstructor() || cf.isStatic())
       output.write(cf.getNotWrappedLiteral());
     else
       output.write(cf.getWrappedLiteral());
@@ -120,26 +126,29 @@ final class OclInjector implements InjectionConsumer
   public void onClassFeature(ClassFeature cf) 
     throws IOException, InjectorParseException
   {
-    if( cf instanceof ClassMethod && 
-        !((ClassMethod)cf).isConstructor() && 
-        !cf.isStatic() && 
-        !discardnextfeature)
+    if(!clean)
     {
-      if(delayinsertions)
-        methods.add(cf);
-      else
-        writeWrapper((ClassMethod)cf);
-    }
-    if(last_element_type!=null)
-    {
-      if(cf instanceof ClassAttribute)
+      if( cf instanceof ClassMethod && 
+          !((ClassMethod)cf).isConstructor() && 
+          !cf.isStatic() && 
+          !discardnextfeature)
       {
-        ((ClassAttribute)cf).setElementType(last_element_type);
-        typedAttributes.add(cf);
+        if(delayinsertions)
+          methods.add(cf);
+        else
+          writeWrapper((ClassMethod)cf);
       }
-      else 
-        throw new InjectorParseException("encountered @element-type tag on non-attribute");
-      last_element_type=null;
+      if(last_element_type!=null)
+      {
+        if(cf instanceof ClassAttribute)
+        {
+          ((ClassAttribute)cf).setElementType(last_element_type);
+          typedAttributes.add(cf);
+        }
+        else 
+          throw new InjectorParseException("encountered @element-type tag on non-attribute");
+        last_element_type=null;
+      }
     }
     discardnextfeature=false;
   }
@@ -406,6 +415,13 @@ final class OclInjector implements InjectionConsumer
 
 }
   
+final class OclInjectorConfig
+{
+  HashMap codefragments=null;
+  boolean insertimmediatly=false;
+  boolean clean=false;
+}
+
 public class Main
 {
   public static HashMap makeCode(File constraintfile,  ModelFacade modelfacade)
@@ -467,10 +483,7 @@ public class Main
     return constrainedTypes;
   }
 
-  public static void inject(File inputfile, 
-      File outputfile, 
-      HashMap codefragments, 
-      boolean insertimmediatly)
+  public static void inject(File inputfile, File outputfile, OclInjectorConfig conf)
     throws IOException, InjectorParseException
   {
     //System.out.println("injecting from "+inputfile+" to "+outputfile);
@@ -489,7 +502,7 @@ public class Main
     {
       input =new InputStreamReader (new FileInputStream (inputfile));
       output=new OutputStreamWriter(new FileOutputStream(outputfile));
-      (new Injector(input, output, new OclInjector(output, codefragments, insertimmediatly))).parseFile();
+      (new Injector(input, output, new OclInjector(output, conf))).parseFile();
       input.close();
       output.close();
     }
@@ -511,11 +524,11 @@ public class Main
 
   public static final String TEMPFILE_SUFFIX=".temp_oclinjection";
 
-  public static void inject(File tobemodifiedfile, HashMap codefragments, boolean insertimmediatly)
+  public static void inject(File tobemodifiedfile, OclInjectorConfig conf)
     throws IOException, InjectorParseException
   {
     File outputfile=new File(tobemodifiedfile.getPath()+TEMPFILE_SUFFIX);
-    inject(tobemodifiedfile, outputfile, codefragments, insertimmediatly);
+    inject(tobemodifiedfile, outputfile, conf);
     if(!tobemodifiedfile.delete())
       System.out.println("warning: deleting "+tobemodifiedfile+" failed.");
     if(!outputfile.renameTo(tobemodifiedfile))
@@ -524,12 +537,13 @@ public class Main
 
   public static void main (String args[])
   {
-    String usage="usage:\n   java tudresden.ocl.injection.Main [options] tobemodified1.java ...\n      --xmi-model model.xmi\n      --constraint-file constraints.txt\n      --reflection-model modelpackage\n      -m : modify files";
+    String usage="usage:\n   java tudresden.ocl.injection.Main [options] tobemodified1.java ...\n      --xmi-model model.xmi\n      --constraint-file constraints.txt\n      --reflection-model modelpackage\n      --clean -c clean files\n      --modify -m: modify files";
     String constraintfile=null;
     String xmimodel=null;
     ArrayList reflectionmodel=new ArrayList();
     boolean modify=false;
-    boolean insertimmediatly=false;
+    ArrayList sourcefiles=new ArrayList();
+    OclInjectorConfig conf=new OclInjectorConfig();
     try
     {
       for(int i=0; i<args.length; i++)
@@ -579,10 +593,12 @@ public class Main
           }
           reflectionmodel.add(args[i]);
         }
-        else if("-m".equals(args[i]))
+        else if("--modify".equals(args[i])||"-m".equals(args[i]))
           modify=true;
+        else if("--clean".equals(args[i])||"-c".equals(args[i]))
+          conf.clean=true;
         else if("--insert-immediatly".equals(args[i]))
-          insertimmediatly=true;
+          conf.insertimmediatly=true;
         else if(args[i].startsWith("-"))
         {
           System.out.println("unknown option: "+args[i]);
@@ -591,44 +607,52 @@ public class Main
         }
         else
         {
-          HashMap codefragments=null;
-          if(constraintfile!=null)
-          {
-            if((xmimodel==null) == (reflectionmodel==null))
-            {
-              System.out.println("There must be exaxtly one of --xmi-model and --reflect-model");
-              System.out.println(usage);
-              return;
-            }
-            ModelFacade modelfacade;
-            if(xmimodel!=null)
-              modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel);
-            else
-              modelfacade=new ReflectionFacade
-              (
-                (String[])(reflectionmodel.toArray(new String[0])),
-                new DefaultReflectionAdapter(),
-                new tudresden.ocl.lib.SimpleNameAdapter(),
-                new SourceReflectionExtender()
-              );
-            codefragments=makeCode(new File(constraintfile), modelfacade);
-          }
-          else
-            System.out.println("no constraints given, generating code for @element-type only.");
-            
-          for(int j=i; j<args.length; j++)
-          {
-            if(modify)
-              inject(new File(args[j]), codefragments, insertimmediatly);
-            else
-              inject(new File(args[j]), new File(args[j]+".injected"), codefragments, insertimmediatly);
-          }
-          return;
+          for(; i<args.length; i++)
+            sourcefiles.add(args[i]);
         }
       }
-      System.out.println("nothing to do.");
-      System.out.println(usage);
-      return;
+    
+      if(sourcefiles.isEmpty())
+      {
+        System.out.println("nothing to do.");
+        System.out.println(usage);
+        return;
+      }
+  
+      if(conf.clean)
+        System.out.println("cleaning code.");
+      else if(constraintfile==null)
+        System.out.println("no constraints given, generating code for @element-type only.");
+      else
+      {
+        if((xmimodel==null) == (reflectionmodel==null))
+        {
+          System.out.println("There must be exaxtly one of --xmi-model and --reflect-model");
+          System.out.println(usage);
+          return;
+        }
+        ModelFacade modelfacade;
+        if(xmimodel!=null)
+          modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel);
+        else
+          modelfacade=new ReflectionFacade
+          (
+            (String[])(reflectionmodel.toArray(new String[0])),
+            new DefaultReflectionAdapter(),
+            new tudresden.ocl.lib.SimpleNameAdapter(),
+            new SourceReflectionExtender()
+          );
+        conf.codefragments=makeCode(new File(constraintfile), modelfacade);
+      }
+            
+      for(Iterator i=sourcefiles.iterator(); i.hasNext(); )
+      {
+        String s=(String)i.next();
+        if(modify)
+          inject(new File(s), conf);
+        else
+          inject(new File(s), new File(s+".injected"), conf);
+      }
     }
     catch(InjectorParseException e){System.out.println(e);}
     catch(org.xml.sax.SAXException e){System.out.println(e);}
