@@ -316,6 +316,8 @@ public final class Ocl {
    *  value.
    */
   public static OclSizable toOclSizable(OclRoot or) {
+    if(or.isUndefined())
+      return new OclString(0,or.getUndefinedReason());
     try {
       return (OclSizable) or;
     } catch (ClassCastException e) {
@@ -329,6 +331,8 @@ public final class Ocl {
    *  value.
    */
   public static OclCollection toOclCollection(OclRoot or) {
+    if(or.isUndefined())
+      return new OclSet(0,or.getUndefinedReason());
     try {
       return (OclCollection) or;
     } catch (ClassCastException e) {
@@ -342,6 +346,8 @@ public final class Ocl {
    *  value.
    */
   public static OclSubtractable toOclSubtractable(OclRoot or) {
+    if(or.isUndefined())
+      return new OclInteger(0,or.getUndefinedReason());
     try {
       return (OclSubtractable) or;
     } catch (ClassCastException e) {
@@ -355,6 +361,8 @@ public final class Ocl {
    *  value.
    */
   public static OclUnsortedCollection toOclUnsortedCollection(OclRoot or) {
+    if(or.isUndefined())
+      return new OclSet(0,or.getUndefinedReason());
     try {
       return (OclUnsortedCollection) or;
     } catch (ClassCastException e) {
@@ -368,6 +376,8 @@ public final class Ocl {
    *  value.
    */
   public static OclSet toOclSet(OclRoot or) {
+    if(or.isUndefined())
+      return new OclSet(0,or.getUndefinedReason());
     try {
       return (OclSet) or;
     } catch (ClassCastException e) {
@@ -381,6 +391,8 @@ public final class Ocl {
    *  value.
    */
   public static OclBag toOclBag(OclRoot or) {
+    if(or.isUndefined())
+      return new OclBag(0,or.getUndefinedReason());
     try {
       return (OclBag) or;
     } catch (ClassCastException e) {
@@ -394,6 +406,8 @@ public final class Ocl {
    *  value.
    */
   public static OclSequence toOclSequence(OclRoot or) {
+    if(or.isUndefined())
+      return new OclSequence(0,or.getUndefinedReason());
     try {
       return (OclSequence) or;
     } catch (ClassCastException e) {
@@ -407,6 +421,8 @@ public final class Ocl {
    *  value.
    */
   public static OclString toOclString(OclRoot or) {
+    if(or.isUndefined())
+      return new OclString(0,or.getUndefinedReason());
     try {
       return (OclString) or;
     } catch (ClassCastException e) {
@@ -420,6 +436,8 @@ public final class Ocl {
    *  value.
    */
   public static OclBoolean toOclBoolean(OclRoot or) {
+    if(or.isUndefined())
+      return new OclBoolean(0,or.getUndefinedReason());
     try {
       return (OclBoolean) or;
     } catch (ClassCastException e) {
@@ -433,6 +451,8 @@ public final class Ocl {
    *  value.
    */
   public static OclComparable toOclComparable(OclRoot or) {
+    if(or.isUndefined())
+      return new OclInteger(0,or.getUndefinedReason());
     try {
       return (OclComparable) or;
     } catch (ClassCastException e) {
@@ -446,6 +466,8 @@ public final class Ocl {
    *  value.
    */
   public static OclAddable toOclAddable(OclRoot or) {
+    if(or.isUndefined())
+      return new OclInteger(0,or.getUndefinedReason());
     try {
       return (OclAddable) or;
     } catch (ClassCastException e) {
@@ -459,6 +481,8 @@ public final class Ocl {
    *  value.
    */
   public static OclMultiplyable toOclMultiplyable(OclRoot or) {
+    if(or.isUndefined())
+      return new OclInteger(0,or.getUndefinedReason());
     try {
       return (OclMultiplyable) or;
     } catch (ClassCastException e) {
@@ -472,6 +496,8 @@ public final class Ocl {
    *  value.
    */
   public static OclReal toOclReal(OclRoot or) {
+    if(or.isUndefined())
+      return new OclInteger(0,or.getUndefinedReason());
     try {
       return (OclReal) or;
     } catch (ClassCastException e) {
@@ -485,6 +511,8 @@ public final class Ocl {
    *  value.
    */
   public static OclInteger toOclInteger(OclRoot or) {
+    if(or.isUndefined())
+      return new OclInteger(0,or.getUndefinedReason());
     try {
       return (OclInteger) or;
     } catch (ClassCastException e) {
@@ -498,6 +526,8 @@ public final class Ocl {
    *  value.
    */
   public static OclAny toOclAny(OclRoot or) {
+    if(or.isUndefined())
+      return new OclInteger(0,or.getUndefinedReason());
     try {
       return (OclAny) or;
     } catch (ClassCastException e) {
@@ -511,6 +541,8 @@ public final class Ocl {
    *  value.
    */
   public static OclAnyImpl toOclAnyImpl(OclRoot or) {
+    if(or.isUndefined())
+      return new OclAnyImpl(0,or.getUndefinedReason());
     try {
       return (OclAnyImpl) or;
     } catch (ClassCastException e) {

@@ -20,16 +20,34 @@ package tudresden.ocl.test.royloy;
 
 import java.util.*;
 
-public class Bank
+public class Bank extends RLObject
 {
   /**
      @element-type Person
      @key-type Integer
   */
   HashMap customer=new HashMap();
+  
+  String description;
 
-  public Bank() 
+  public Bank(String description) 
   {
+    this.description=description;
+  }
+  
+  public void addCustomer(int index, Person p)
+  {
+    customer.put(new Integer(index), p);
+  }
+  
+  public String toString()
+  {
+    return super.toString()+'['+description+']';
+  }
+  
+  public boolean assert()
+  {
+    return true;
   }
 
 }

@@ -33,18 +33,24 @@ public class TestInjection
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
     tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
     
-    Person p1, p2, p3;
-    Company c1, c2;
-    
-    ao.add(p1=new Person("Person1"));
-    ao.add(p2=new Person("Person2"));
-    ao.add(p3=new Person("Person3"));
-    ao.add(c1=new Company("Company1", p3));
-    ao.add(c2=new Company("Company2", p3));
+    Person p1=new Person("Person1"); ao.add(p1);
+    Person p2=new Person("Person2"); ao.add(p2);
+    Person p3=new Person("Person3"); ao.add(p3);
+    Person p4=new Person("Person4"); ao.add(p4);
+    p1.marry(p2);
+
+    Company c1=new Company("Company1", p3); ao.add(c1);
+    Company c2=new Company("Company2", p3); ao.add(c2);
     c1.employ(p1);
     c2.employ(p2);
     c2.employ(p3);
 
+    Bank b1=new Bank("Bank1"); ao.add(b1);
+    p1.age=1; b1.addCustomer(0, p1);
+    p2.age=2; b1.addCustomer(1, p2);
+    p3.age=3; b1.addCustomer(2, p3);
+    p4.age=4; b1.addCustomer(3, p4);
+    
     assertAll();
   }
   

@@ -107,21 +107,27 @@ manager.oclIsKindOf(Person)
 context Person inv:
 1 . oclIsKindOf(Real)
 
---customers are ordered by age
-context Bank inv:
-Set{1 .. customer->size-1}->forAll(
-  i:Integer | self.customer[i].age > self.customer[i+1].age
+context Bank
+inv customers_ordered_by_age:
+customer->size<=1
+or
+(
+  Set{0 .. customer->size-2}->forAll
+  (
+    i:Integer | self.customer[i].age < self.customer[i+1].age
+  )
 )
 
 context Bank inv:
-customer->size>100
+customer->isEmpty
+or
+customer[0]->size=1
 
---nonsense, but types are ok; element customer[0] can be treated as collection
-context Bank inv:
-customer[0]->size>10
-
-context Bank inv:
-customer[42].age>0
+context Bank
+inv bank_customer2_age:
+customer[2]->isEmpty
+or
+customer[2].age>0
 
 context Person
 inv happy_computing:

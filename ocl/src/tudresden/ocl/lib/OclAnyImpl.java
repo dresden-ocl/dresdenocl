@@ -133,7 +133,15 @@ public class OclAnyImpl extends OclAny {
         if(qualifier!=null)
         {
           if(feature instanceof Map)
+          {
             feature=((Map)feature).get(qualifier);
+            if(feature==null)
+            {
+              return new OclAnyImpl(0,
+                "field "+attributeName+" of object \""+applicationObject+
+                "\" ("+applicationObject.getClass()+") contains no object qualified by \""+qualifier+'"');
+            }
+          }
           else
             throw new OclException("object "+feature+" cannot be qualified by "+qualifier);
         }

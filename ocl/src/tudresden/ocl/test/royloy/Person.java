@@ -40,6 +40,14 @@ public class Person extends RLObject
     return incomeaftertax;
   }
   
+  public void marry(Person wife)
+  {
+    this.wife=wife;
+    isMarried=true;
+    wife.husband=this;
+    wife.isMarried=true;
+  }
+  
   public String toString()
   {
     return super.toString()+'['+name+']';

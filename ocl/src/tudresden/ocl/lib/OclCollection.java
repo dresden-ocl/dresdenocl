@@ -538,13 +538,16 @@ public abstract class OclCollection implements OclSizable, OclRoot {
    *  in the OCL specification but changes the state of the OclCollection
    *  called. Elements that are in the collection prior to the call to this
    *  method remain there.
+   *
+   *  Makes this Collection undefined if begin is greater than end.
    */
   public void setToRange(OclInteger begin, OclInteger end) {
+    if(isUndefined()||begin.isUndefined()||end.isUndefined())
+      return;
     int iBegin = begin.getInt();
     int iEnd =   end.getInt();
     if (iBegin>iEnd) {
-      throw new OclException(
-        "lower range boundary ("+iBegin+") greater than upper range boundary ("+iEnd+")"
+      becomeUndefined("lower range boundary ("+iBegin+") greater than upper range boundary ("+iEnd+") in collection literal."
       );
     }
     for (int i=iBegin; i<=iEnd; i++) {
@@ -555,11 +558,13 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   /** Sets this collection to contain the the object given as parameter.
    *  This method is not specified as operation of the OCL type but is
    *  necessary to convert collection literals to Java. It is not implemented
-   *  side-effect free nut changes the called OclCollection. Elements that
+   *  side-effect free but changes the called OclCollection. Elements that
    *  are in the collection prior to the call to this
    *  method remain there.
    */
   public void setToInclude(OclAny any) {
+    if(isUndefined())
+      return;
     if (any != null && ! any.isUndefined()) {
       collection.add(any);
     }
@@ -604,5 +609,20 @@ public abstract class OclCollection implements OclSizable, OclRoot {
 
   // END of section implementing undefined values
 
+  /**
+     Makes this instance represent an undefined value.
+     This method is needed, since OclCollections are not immutable
+     in this implementation.
+     @see setToInclude
+     @see setToRange
+     @throws RuntimeException if the collection is already undefined
+  */
+  protected void becomeUndefined(String undefinedreason)
+  {
+    if(this.undefinedreason!=null)
+      throw new RuntimeException();
+    this.undefinedreason=undefinedreason;
+  }
+  
 } /* end class OclCollection */
 
