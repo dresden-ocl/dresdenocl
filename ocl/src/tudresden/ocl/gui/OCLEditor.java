@@ -251,7 +251,7 @@ public class OCLEditor extends javax.swing.JPanel
   /**
     * The table model used by the list of constraints table.
     */
-  private ConstraintTableModel m_ctmTableModel = new ConstraintTableModel (this);
+  private ConstraintTableModel m_ctmTableModel;
 
   /**
    * Does {@link #parseAndCheckConstraint} perform type checking?
@@ -293,6 +293,8 @@ public class OCLEditor extends javax.swing.JPanel
   
   /** Creates new form OCLEditor */
   public OCLEditor() {
+    m_ctmTableModel = createConstraintTableModel();
+    
     initComponents ();
     
     /*
@@ -309,6 +311,25 @@ public class OCLEditor extends javax.swing.JPanel
     m_ocltbQuickBar.setVisible (false);
   }
 
+  /**
+   * Create and return an instance of ConstraintTableModel that will be used
+   * to represent the list of constraints currently being edited.
+   *
+   * <p><strong>Attention!</strong> This method is called from the constructor
+   * and should therefore be overridden with great care. When referencing
+   * <code>this</code> from within this method care must be taken to recognize
+   * that <code>this</code> will not have been fully initialized yet. In
+   * particular, any field introduced by subclasses of {@link OCLEditor}
+   * will not have been initialized, and any code specified in constructors of
+   * subclasses of {@link OCLEditor} will not have been executed.
+   *
+   * @return an instance of ConstraintTableModel to be used to display the list
+   *   of constraints being edited
+   */
+  protected ConstraintTableModel createConstraintTableModel() {
+     return new ConstraintTableModel (this);
+  }
+  
   /**
     * Retrieve the underlying model.
     */
