@@ -22,6 +22,7 @@ tudresden.ocl.check.types.xmifacade
 tudresden.ocl.codegen
 tudresden.ocl.injection
 tudresden.ocl.injection.lib
+tudresden.ocl.injection.test
 tudresden.ocl.injection.reverseeng
 tudresden.ocl.lib
 tudresden.ocl.lib.test 

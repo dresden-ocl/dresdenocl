@@ -28,7 +28,7 @@ package tudresden.ocl.injection;
    the method is called.
 
    To test these positions, use
-   <code>tudresden.ocl.injection.test.TestInjectionConsumer</code>.
+   {@link tudresden.ocl.injection.test.TestInjectionConsumer TestInjectionConsumer}.
 */
 public interface InjectionConsumer 
 {
