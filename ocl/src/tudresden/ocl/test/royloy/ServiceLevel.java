@@ -15,7 +15,7 @@ public class ServiceLevel extends RLObject {
  */
     public LoyaltyProgram myLoyaltyProgram;
   /**
- *
+ * @element-type Membership;
  */
     public Vector  myMembership=new Vector();
   /**
