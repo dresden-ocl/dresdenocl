@@ -32,9 +32,11 @@
 package tudresden.ocl.interp.core;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -71,6 +73,12 @@ class ConstraintEvaluation extends tudresden.ocl.ConstraintEvaluation {
   protected JRadioButton expModelReflect;
   protected JRadioButton expModelDummy;
   protected ABDummyFacade dummyFacade;
+  protected JLabel classPicture;
+  protected JLabel objectPicture;
+
+  protected ConstraintEvaluation() {
+  	super();
+  }
 
   public static void main(String[] args) {
     JFrame frame = new JFrame("OCL Constraint Evaluation");
@@ -82,7 +90,7 @@ class ConstraintEvaluation extends tudresden.ocl.ConstraintEvaluation {
     });
 
     frame.getContentPane().add(ce);
-    frame.setSize(600, 400);
+    frame.setSize(800, 400);
     frame.setVisible(true);
   }
 
@@ -200,12 +208,13 @@ class ConstraintEvaluation extends tudresden.ocl.ConstraintEvaluation {
 
   protected JPanel getConstraintPane() {
     JPanel result = super.getConstraintPane();
-    cInput.setText("context Company inv: self.numberOfEmployees > 2");
+    cInput.setText("context Company inv: employees->exists(name = 'johnsen')");
     return result;
   }
 
   protected JPanel getModelPane() {
-    JPanel result = new JPanel(new GridLayout(1, 2));
+    // JPanel result = new JPanel(new GridLayout(1, 2));
+    JPanel result = new JPanel(new BorderLayout());
     ButtonGroup radios = new ButtonGroup();
     JPanel radioPanel = new JPanel();
     radioPanel.setLayout(new BoxLayout(radioPanel, BoxLayout.Y_AXIS));
@@ -234,18 +243,29 @@ class ConstraintEvaluation extends tudresden.ocl.ConstraintEvaluation {
     explDummy.setOpaque(false);
     explDummy.setAlignmentX(0);
 
+	RadioListener rl = new RadioListener();
+	expModelReflect.addActionListener(rl);
+	expModelDummy.addActionListener(rl);
+
     radioPanel.add(expModelReflect);
     radioPanel.add(explReflect);
     radioPanel.add(expModelDummy);
     radioPanel.add(explDummy);
 
+  	classPicture = new JLabel(getImage("interp/core/intern/company_class.gif"));
+  	objectPicture = new JLabel(getImage("interp/core/intern/company_object.gif"));
+	
     JPanel rightSide = new JPanel(new GridLayout(0, 1));
-    rightSide.add(new JLabel());
-    rightSide.add(new JLabel());
-
-    result.add(radioPanel);
-
-    // result.add(rightSide);
+    rightSide.add(classPicture);
+    rightSide.add(objectPicture);
+    rightSide.setBorder(BorderFactory.createTitledBorder(
+                               "The class and object information in UML"));
+	
+	rightSide.setPreferredSize(new Dimension(400,300));
+	
+    result.add(radioPanel,BorderLayout.WEST);
+    result.add(rightSide);
+    
     return panelAround(result);
   }
 
@@ -313,7 +333,7 @@ class ConstraintEvaluation extends tudresden.ocl.ConstraintEvaluation {
 
   protected InstanceFacade getInstanceFacade() {
     if (expModelReflect.isSelected()) {
-      return SpecFacadeFactory.getInstanceFacade();
+      return SpecFacadeFactory.getGUIFacade(getModelFacade());
     } else if (expModelDummy.isSelected()) {
       if (dummyFacade == null) {
         dummyFacade = new ABDummyFacade();
@@ -325,6 +345,20 @@ class ConstraintEvaluation extends tudresden.ocl.ConstraintEvaluation {
 
   // We do not show tokens ...
   protected void updateTokens(){}
+  
+  class RadioListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      Object source=e.getSource();
+
+      if (source==expModelReflect) {
+      	classPicture.setIcon(getImage("interp/core/intern/company_class.gif"));
+      	objectPicture.setIcon(getImage("interp/core/intern/company_object.gif"));
+      } else if (source==expModelDummy) {
+      	classPicture.setIcon(getImage("interp/core/intern/AB_class.gif"));
+      	objectPicture.setIcon(getImage("interp/core/intern/AB_object.gif"));
+      }
+    }
+  }
 }
 
 class ExpNode implements TreeNode {

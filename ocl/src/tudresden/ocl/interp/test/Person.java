@@ -71,6 +71,7 @@ public class Person {
 
     this.firstName = firstName;
     this.lastName = lastName;
+    this.name = lastName;
     this.birthDate = birthDate;
     this.sex = sex;
 

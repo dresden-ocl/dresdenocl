@@ -91,6 +91,23 @@ public class SpecFacadeFactory {
     return new ReflectionInstanceFacade(modelFacade, l);
   }
 
+  static public InstanceFacade getGUIFacade(ModelFacade modelFacade) {
+    Person p1 = new Person("First1", "smith", conDate(1, 1, 1971), false);
+    Person p2 = new Person("First2", "johnsen", conDate(2, 2, 1972), true);
+    Person p3 = new Person("First3", "jones", conDate(3, 3, 1973), false);  	
+
+    Company c1 = new Company("henkel");
+    Company c2 = new Company("siemens");
+    
+    c1.employ(p1);
+    c1.employ(p2);
+    c2.employ(p2);
+    c2.employ(p3);
+    
+    List l = Arrays.asList(new Object[] {c1,c2,p1,p2,p3});
+    return new ReflectionInstanceFacade(modelFacade, l);
+  }
+  
   static private InstanceFacade getFacade(ModelFacade modelFacade) {
     Person p1 = new Person("FirstName1", "LastName1", conDate(1, 1, 1971), 
                            false);

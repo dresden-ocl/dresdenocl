@@ -32,6 +32,7 @@
 package tudresden.ocl.interp.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -95,8 +96,9 @@ import tudresden.ocl.interp.types.InstanceFacade;
 public class ABDummyFacade implements ModelFacade, InstanceFacade {
   Map classifiers = new HashMap();
   TypeFactory tf = new DefaultTypeFactory(this);
-  Instance relInstance;
-
+  List aInstance;
+  List bInstance;
+  
   public ABDummyFacade() {
     DummyAny classA = new DummyAny();
     DummyAny classB = new DummyAny();
@@ -130,7 +132,8 @@ public class ABDummyFacade implements ModelFacade, InstanceFacade {
     b2.register("c", new DummyInstance(tf.getInteger(), new Integer(3)));
     b3.register("c", new DummyInstance(tf.getInteger(), new Integer(4)));
 
-    relInstance = a1;
+    aInstance = Arrays.asList(new Object[]{a1});
+    bInstance = Arrays.asList(new Object[]{b1,b2,b3});
   }
 
   /**
@@ -145,9 +148,9 @@ public class ABDummyFacade implements ModelFacade, InstanceFacade {
    */
   public Iterator getRelevantOf(String typeName) throws OclTypeException {
     if (typeName.equals("A")) {
-      ArrayList al = new ArrayList(1);
-      al.add(relInstance);
-      return al.iterator();
+      return aInstance.iterator();
+    } else if (typeName.equals("B")){
+      return bInstance.iterator();
     } else {
       System.out.println(
             "Warning: You got an empty iterator of the DummyFacade");
