@@ -119,12 +119,13 @@ Enhancements by Steffen Zschaler.
           depends="build.dir">
     <mkdir dir="${build.dir}/dresden-ocl-lib" />
 
-    <copy todir="${build.dir}/dresden-ocl-lib" >
+    <copy todir="${build.dir}/dresden-ocl-lib"
+          file="${basedir}/COPYING"
+    >
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/lib/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
         <include name="tudresden/ocl/injection/ocl/lib/*.java" />
-        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -149,7 +150,9 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/ocl-argo" />
 
-    <copy todir="${build.dir}/ocl-argo" >
+    <copy todir="${build.dir}/ocl-argo"
+          file="${basedir}/COPYING"
+    >
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/*.java" />
         <exclude name="tudresden/ocl/ConstraintEvaluation.java" />
@@ -177,7 +180,6 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/parser/parser/*.java" />
         <include name="tudresden/ocl/gui/*.java" />
         <include name="tudresden/ocl/gui/events/*.java" />
-        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -201,7 +203,9 @@ Enhancements by Steffen Zschaler.
           depends="sablecc,build.dir">
     <mkdir dir="${build.dir}/dresden-ocl-injector" />
 
-    <copy todir="${build.dir}/dresden-ocl-injector" >
+    <copy todir="${build.dir}/dresden-ocl-injector"
+          file="${basedir}/COPYING"
+    >
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/*.java" />
         <exclude name="tudresden/ocl/ConstraintEvaluation.java" />
@@ -228,7 +232,6 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/codegen/*.java" />
         <include name="tudresden/ocl/injection/*.java" />
         <include name="tudresden/ocl/injection/ocl/*.java" />
-        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -254,14 +257,15 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/dresden-injector" />
 
-    <copy todir="${build.dir}/dresden-injector" >
+    <copy todir="${build.dir}/dresden-injector"
+          file="${basedir}/COPYING"
+    >
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/injection/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
         <include name="tudresden/ocl/check/OclTypeException.java" />
         <include name="tudresden/ocl/parser/OclParserException.java" />
         <include name="tudresden/ocl/OclException.java" />
-        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -286,7 +290,9 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/dresden-ocl-demo" />
 
-    <copy todir="${build.dir}/dresden-ocl-demo" >
+    <copy todir="${build.dir}/dresden-ocl-demo"
+          file="${basedir}/COPYING"
+    >
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/images/*.gif" />
         <include name="tudresden/ocl/images/SUNIMAGELICENSE" />
@@ -316,7 +322,6 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/injection/ocl/*.java" />
         <include name="tudresden/ocl/codegen/decl/*.java" />
         <include name="tudresden/ocl/sql/*.java" />
-        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -339,6 +344,7 @@ Enhancements by Steffen Zschaler.
       <include name="**/*.gif" />
       <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
       <include name="tudresden/ocl/test/royloy/*.java" />
+      <include name="COPYING" />
     </jar>
   </target>
 
@@ -349,13 +355,14 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/royloy" />
 
-    <copy todir="${build.dir}/royloy" >
+    <copy todir="${build.dir}/royloy"
+          file="${basedir}/COPYING"
+    >
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/test/royloy/*.java" />
         <include name="tudresden/ocl/test/royloy/oclexpressions" />
         <include name="tudresden/ocl/test/TestInjection.java" />
         <include name="tudresden/ocl/test/TestInjectionRoyloy.java" />
-        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -381,7 +388,9 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/dresden-ocl-sql" />
 
-    <copy todir="${build.dir}/dresden-ocl-sql" >
+    <copy todir="${build.dir}/dresden-ocl-sql"
+          file="${basedir}/COPYING"
+    >
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/images/*.gif" />
         <include name="tudresden/ocl/images/SUNIMAGELICENSE" />
@@ -413,7 +422,6 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/injection/ocl/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
         <include name="tudresden/ocl/injection/ocl/lib/*.java" />
-        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -437,6 +445,7 @@ Enhancements by Steffen Zschaler.
       <include name="**/*.xml" />
       <include name="**/*.dtd" />
       <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
+      <include name="COPYING" />
     </jar>
   </target>
 
@@ -446,7 +455,9 @@ Enhancements by Steffen Zschaler.
 
     <mkdir dir="${build.dir}/dresden-ocl-reverseeng" />
 
-    <copy todir="${build.dir}/dresden-ocl-reverseeng" >
+    <copy todir="${build.dir}/dresden-ocl-reverseeng"
+          file="${basedir}/COPYING"
+    >
       <fileset dir="${src.dir}">
         <include name="tudresden/ocl/check/OclTypeException.java" />
         <include name="tudresden/ocl/OclException.java" />
@@ -458,7 +469,6 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/injection/reverseeng/**/*.gif" />
         <include name="tudresden/ocl/injection/reverseeng/**/*.form" />
         <include name="tudresden/ocl/injection/reverseeng/**/*.testmodified" />
-        <include name="COPYING" />
       </fileset>
     </copy>
 
@@ -475,6 +485,7 @@ Enhancements by Steffen Zschaler.
          manifest="${src.dir}/reveng.manifest">
       <include name="**/*.class" />
       <include name="**/*.gif" />
+      <include name="COPYING" />
     </jar>
   </target>
 
