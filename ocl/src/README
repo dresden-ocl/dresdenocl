@@ -5,7 +5,7 @@
 JDK 1.3
   Sun Microsystems, Inc.
 
-Ant 1.3
+Ant 1.4
   Build Tool
   by The Jakarta Project
      Apache Software Foundation
@@ -31,8 +31,7 @@ JUnit 3.7 (junit.jar)
 
 NOTES:
 * JDK 1.2 will fail with field java.util.Collections.EMPTY_MAP missing.
-* Ant 1.2 fails with strange errors when running the tests.
-* Xerces 1.2.0 will fail with some SAXUnsupportedFeatureException.
+* Ant 1.3 will fail with attribute "output" unknown for task "java" or "exec".
 
 
 2. CHECK IN POLICY
@@ -47,11 +46,11 @@ myself). You'll get a friendly email.
 
 2.1 Compile
 -----------
-Every .java file in the repository must compile with
 
-  javac of the SUN JDK java version "1.3" and later
-  AND
-  jikes Version 1.06 (17 Sep 99)
+"ant clean compile" must succeed with the following compilers:
+
+* javac of the SUN JDK java version "1.3" and later
+* jikes Version 1.06 (17 Sep 99) BUT NOT LATER
 
 For how to enable jikes, and which versions to use, see file
 jikes.properties in this directory.
@@ -72,29 +71,22 @@ parameters.
 
 2.2 Jars
 --------
-Jarfiles must be created correctly. Run
 
-  ant clean jars
+"ant clean jar" must succeed.
 
 Besides compiling jar-files are created and checked for static
-closure. Note, that the ant jars does not compile all classes.
+closure. Note, that "ant jar" does not compile test classes as
+"ant compile" does.
 
 2.3 Javadoc
 -----------
-Run
 
-  ant docs
-
-This must not produce any warnings, when using
-
-  java version "1.2.2"
-  AND
-  any later version of the above.
+"ant docs" must succeed and must not produce any warnings.
 
 2.4 Test Suites
 ---------------
 
-"ant test" in this directory must run through without exceptions.
+"ant test" must succeed.
 
 2.5 Tabs
 --------

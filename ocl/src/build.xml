@@ -33,7 +33,7 @@ Enhancements by Steffen Zschaler.
 
   <target name="prepare">
     <echo message="JDK ${java.version} found, make sure, it is at least 1.3." />
-    <echo message="Ant ${ant.java.version} found, make sure it is at least 1.3." />
+    <echo message="${ant.version} found, make sure it is at least 1.4." />
     <echo message="Compiler is ${build.compiler}, dependency check is ${build.depend}" />
   </target>
 
@@ -467,9 +467,6 @@ Enhancements by Steffen Zschaler.
            debug="off"
            depend="${build.depend}"
            optimize="on" >
-<!--      <classpath>
-        <pathelement location="${xerces.jar}" />
-      </classpath> -->
     </javac>
 
     <jar jarfile="${build.dir}/dresden-ocl-reverseeng.jar"
@@ -576,39 +573,65 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
   <target name="test.dresden-ocl-injector"
           description="Runs a test suite for dresden-ocl-injector.jar and royloy.jar."
-          depends="jar.dresden-ocl-injector,jar.royloy">
+          depends="jar.dresden-ocl-injector,jar.royloy,compile">
+    <!-- dependency from compile is to have the Sort and Diff class compiled only -->
     <mkdir  dir="${build.dir}/testweb" />
     <copy file="${build.dir}/dresden-ocl-injector.jar" todir="${build.dir}/testweb" />
     <delete dir="${build.dir}/testweb/tudresden" />
     <unjar src="${build.dir}/royloy.jar" dest="${build.dir}/testweb" />
     <javac classpath="${build.dir}/dresden-ocl-injector.jar" srcdir= "${build.dir}/testweb" destdir="${build.dir}/testweb" />
-    <echo message="nothing should happen" />
-    <java classname="tudresden.ocl.test.TestInjectionRoyloy" failonerror="yes">
+    <java classname="tudresden.ocl.test.TestInjectionRoyloy"
+          output="${build.dir}/dresden-ocl-injector.jar.emptytestoutput"
+          failonerror="yes"
+    >
       <classpath>
         <pathelement location="${build.dir}/testweb" />
         <pathelement location="${build.dir}/dresden-ocl-injector.jar" />
       </classpath>
     </java>
-    <echo message="nothing should have happened" />
-    <exec
-        command="java -jar dresden-ocl-injector.jar -r tudresden.ocl.test.royloy --modify tudresden/ocl/test/royloy/*.java"
+    <java classname="tudresden.ocl.test.Empty" taskname="isempty" failonerror="yes">
+      <classpath><pathelement location="${src.dir}/" /></classpath>
+      <arg value="${build.dir}/dresden-ocl-injector.jar.emptytestoutput" />
+    </java>
+    <exec executable="java"
         dir="${build.dir}/testweb/"
         failonerror="true"
-        />
+    >
+      <arg value="-jar" />
+      <arg value="dresden-ocl-injector.jar" />
+      <arg value="-r" />
+      <arg value="tudresden.ocl.test.royloy" />
+      <arg value="--modify" />
+      <arg value="tudresden/ocl/test/royloy/*.java" />
+    </exec>
     <javac classpath="${build.dir}/dresden-ocl-injector.jar" srcdir= "${build.dir}/testweb" destdir="${build.dir}/testweb" />
-    <echo message="--- violations should happen" />
-    <java classname="tudresden.ocl.test.TestInjectionRoyloy" failonerror="yes">
+    <java classname="tudresden.ocl.test.TestInjectionRoyloy"
+          output="${build.dir}/dresden-ocl-injector.jar.testoutput"
+          failonerror="yes"
+    >
       <classpath>
         <pathelement location="${build.dir}/testweb" />
         <pathelement location="${build.dir}/dresden-ocl-injector.jar" />
       </classpath>
     </java>
-    <echo message="--- violations should have happened" />
-    <exec
-        command="java -jar dresden-ocl-injector.jar --clean --modify tudresden/ocl/test/royloy/*.java"
+    <java classname="tudresden.ocl.test.Sort" taskname="sort" failonerror="yes">
+      <classpath><pathelement location="${src.dir}/" /></classpath>
+      <arg value="${build.dir}/dresden-ocl-injector.jar.testoutput" />
+    </java>
+    <antcall target="util.diff">
+      <param name="expected" value=  "${src.dir}/dresden-ocl-injector.jar.testoutput" />
+      <param name="actual"   value="${build.dir}/dresden-ocl-injector.jar.testoutput" />
+    </antcall>
+    <exec executable="java"
         dir="${build.dir}/testweb/"
         failonerror="true"
-        />
+    >
+      <arg value="-jar" />
+      <arg value="dresden-ocl-injector.jar" />
+      <arg value="--clean" />
+      <arg value="--modify" />
+      <arg value="tudresden/ocl/test/royloy/*.java" />
+    </exec>
     <javac classpath="${build.dir}/dresden-ocl-injector.jar" srcdir= "${build.dir}/testweb" destdir="${build.dir}/testweb" />
   </target>
 
@@ -679,8 +702,10 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
           depends="test.example.inject,jar.dresden-ocl-lib"
   >
     <echo taskname="run" message="Running ${example.dir}/tudresden/ocl/injection/test/Example.java" />
-    <echo taskname="run" message="ocl constraint violations must occur now." />
-    <java classname="tudresden.ocl.injection.test.Example" failonerror="yes">
+    <java classname="tudresden.ocl.injection.test.Example"
+          output="${example.dir}/example.testoutput"
+          failonerror="yes"
+    >
       <classpath>
         <pathelement location="${example.dir}" />
         <pathelement location="${build.dir}/dresden-ocl-lib.jar" />
@@ -690,7 +715,14 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
         value="${example.dir}/tudresden/ocl/injection/test/Example.ocltypetrace"
       />
     </java>
-    <echo taskname="run" message="ocl constraint violations must have occured above." />
+    <java classname="tudresden.ocl.test.Sort" taskname="sort" failonerror="yes">
+      <classpath><pathelement location="${src.dir}/" /></classpath>
+      <arg value="${example.dir}/example.testoutput" />
+    </java>
+    <antcall target="util.diff">
+      <param name="expected" value=    "${src.dir}/example.testoutput" />
+      <param name="actual"   value="${example.dir}/example.testoutput" />
+    </antcall>
     <antcall target="util.diff">
       <param name="expected" value=    "${src.dir}/tudresden/ocl/injection/test/Example.ocltypetrace" />
       <param name="actual"   value="${example.dir}/tudresden/ocl/injection/test/Example.ocltypetrace" />
