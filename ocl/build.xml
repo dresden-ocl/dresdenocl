@@ -18,6 +18,7 @@ Enhancements by Steffen Zschaler.
 
   <property name="src.dir"   value="${basedir}/src" />
   <property name="build.dir" value="${basedir}/build" />
+  <property name="dist.dir"  value="${basedir}/dist" />
   <property name="docs.dir"  value="${basedir}/api"   />
 
   <property name="xerces.jar" value="${src.dir}/xerces.jar" />
@@ -873,7 +874,58 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
 
   <target name="all"
-          description="Does everything: compile, test, jar and docs."
+          description="Does everything except dist: compile, test, jar and docs."
           depends="compile, test, jar, docs"
   />
+
+
+  <!-- Creating Distributions -->
+
+  <target name="dist.bin" depends="build.dir"
+  >
+<!--          depends="all" -->
+    <tar tarfile="${build.dir}/dresden-ocl.tar">
+      <tarfileset dir="${basedir}">
+        <include name="README" />
+        <include name="CHANGELOG" />
+        <include name="COPYING" />
+        <include name="CREDITS" />
+      </tarfileset>
+      <tarfileset dir="${build.dir}">
+        <include name="dresden-ocl-lib.jar" />
+        <include name="ocl-argo.jar" />
+        <include name="dresden-ocl-injector.jar" />
+        <include name="dresden-ocl-demo.jar" />
+        <include name="dresden-ocl-sql.jar" />
+        <include name="dresden-ocl-royloy.jar" />
+        <include name="dresden-ocl-reverseeng.jar" />
+      </tarfileset>
+      <tarfileset dir="${basedir}/www">
+        <include name="*.html" />
+      </tarfileset>
+    </tar>
+    <gzip     src="${build.dir}/dresden-ocl.tar"
+          zipfile="${build.dir}/dresden-ocl.tar.gz"
+    />
+  </target>
+
+  <target name="dist.version" unless="dist.version">
+    <fail message="No release version set. Use ant dist -Ddist.version=major.minor.revsion" />
+  </target>
+
+  <target name="dist.dir" depends="prepare">
+    <mkdir dir="${dist.dir}" />
+  </target>
+
+  <target name="dist"
+          description="Build a release. Needs the release version in property dist.version."
+          depends="dist.version,dist.bin"
+  >
+    <echo message="Building release &gt;${dist.version}&lt;" />
+    <copy   file="${build.dir}/dresden-ocl.tar.gz"
+          tofile="${dist.dir}/dresden-ocl-${dist.version}.tar.gz"
+    />
+  </target>
+
+
 </project>
