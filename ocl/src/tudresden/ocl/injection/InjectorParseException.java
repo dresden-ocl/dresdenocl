@@ -24,7 +24,7 @@ package tudresden.ocl.injection;
    javac sucessfully (otherwise it's a bug.)
    @Injector
 */
-class InjectorParseException extends Exception
+public class InjectorParseException extends Exception
 {
   public InjectorParseException(String message)
   {
