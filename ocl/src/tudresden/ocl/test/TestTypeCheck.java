@@ -31,34 +31,60 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package tudresden.ocl.test;
 
-import junit.framework.*;
-import java.util.*;
+import java.io.IOException;
+import junit.framework.TestCase;
 
-public class TestAll extends TestCase {
+import tudresden.ocl.OclTree;
+import tudresden.ocl.check.OclTypeException;
+import tudresden.ocl.check.types.testfacade.TestModelFacade;
 
-  public TestAll(String s) {
-    super(s);
-  }
-
-  public static Test suite() {
-    TestSuite suite=new TestSuite();
-    suite.addTest( tudresden.ocl.lib.test.TestAll.suite() );
-    suite.addTest( TestNameCreator.suite() );
-    suite.addTest( TestParser.suite() );
-    suite.addTest( TestNormalize.suite() );
-    suite.addTest( new TestSuite(TestJavaGenerator.class) );
-    suite.addTest( tudresden.ocl.check.types.xmifacade.stress.Test.suite() );
-    suite.addTest( tudresden.ocl.injection.test.TestInjection.suite() );
-    suite.addTest( new TestSuite(TestTypeCheck.class) );
-
-    // Test Injector Reverseeng GUI
-    // Added 11/24/2000-sz9
-    suite.addTest( tudresden.ocl.injection.reverseeng.test.RevengTestSuite.suite() );
-
-    // Test SQL stuff
-    suite.addTest( tudresden.ocl.test.sql.TestSQLClasses.suite() );
-
-    return suite;
-  }
+/**
+ *
+ * @author  frank
+ * @version $Revision: 1.1 $
+ */
+public class TestTypeCheck extends TestCase {
+   
+   OclTree tree;
+   
+   public TestTypeCheck(String name) {
+      super(name);
+   }
+   
+   public void testTestFacade() throws IOException {
+      tree = OclTree.createTree( "context Person inv: true", new TestModelFacade() );
+      tree.assureTypes();
+      
+      try {
+         tree = OclTree.createTree( "context Person inv: 6", new TestModelFacade() );
+         tree.assureTypes();
+         fail();
+      }
+      catch (OclTypeException e) {
+      }
+      
+      tree = OclTree.createTree( "context Company inv: employees->size <= 7", new TestModelFacade() );
+      tree.assureTypes();
+      
+      tree = OclTree.createTree( "context Company inv: employees->oclAsType( Collection(Person) )->size <= 7", new TestModelFacade() );
+      try {
+         tree.assureTypes();
+         fail( "oclAsType not defined for Collections" );
+      }
+      catch (OclTypeException e) {
+      }     
+      
+      // here, oclAsType is the shorthand for collect
+      tree = OclTree.createTree( "context Company inv: employees.oclAsType( Person )->size <= 7", new TestModelFacade() );
+      tree.assureTypes();      
+   }
+   
+   
+   
 }
-
+/**
+ *	$Log: TestTypeCheck.java,v $
+ *	Revision 1.1  2002/05/06 20:47:39  ff3
+ *	tests against result variable in void post fragments, for oclAsType with Collections
+ *
+ */

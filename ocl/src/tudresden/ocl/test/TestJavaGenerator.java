@@ -51,21 +51,21 @@ public class TestJavaGenerator extends TestCase {
   }
 
   public void testLet() {
-    testGenerate(
+    assertGenerate(
       "context Person inv: let a=age in a>0",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclInteger tudOclNode1="+oclLibPackage+"Ocl.toOclInteger(tudOclNode0.getFeature(\"age\"));\n"+
       "final "+oclLibPackage+"OclInteger tudOclNode2=new "+oclLibPackage+"OclInteger(0);\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode3=tudOclNode1.isGreaterThan(tudOclNode2);"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: let a=age in let b=a in b>0",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclInteger tudOclNode1="+oclLibPackage+"Ocl.toOclInteger(tudOclNode0.getFeature(\"age\"));\n"+
       "final "+oclLibPackage+"OclInteger tudOclNode2=new "+oclLibPackage+"OclInteger(0);\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode3=tudOclNode1.isGreaterThan(tudOclNode2);"
     );
-    testGenerate(
+    assertGenerate(
       "context Company inv: let var1=manager.age in let var2=var1+1 in var2>var1",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclAnyImpl tudOclNode1="+oclLibPackage+"Ocl.toOclAnyImpl(tudOclNode0.getFeature(\"manager\"));\n"+
@@ -77,7 +77,7 @@ public class TestJavaGenerator extends TestCase {
   }
 
   public void testColLiteral() {
-    testGenerate(
+    assertGenerate(
       "context Person inv: Set{ 0 }->includes(age)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"OclSet.getEmptyOclSet();\n"+
@@ -86,7 +86,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclInteger tudOclNode3="+oclLibPackage+"Ocl.toOclInteger(tudOclNode0.getFeature(\"age\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode4=tudOclNode1.includes(tudOclNode3);\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: Set{ 0 .. 199 }->includes(age)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"OclSet.getEmptyOclSet();\n"+
@@ -96,7 +96,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclInteger tudOclNode4="+oclLibPackage+"Ocl.toOclInteger(tudOclNode0.getFeature(\"age\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode5=tudOclNode1.includes(tudOclNode4);\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: Set{ 0, 1, 2, 3, 4 }->includes(age)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"OclSet.getEmptyOclSet();\n"+
@@ -117,7 +117,7 @@ public class TestJavaGenerator extends TestCase {
 
   public void testPostfix() {
     // postfix property of basic types
-    testGenerate(
+    assertGenerate(
       "context Person inv: (-1). abs=1",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclInteger tudOclNode1=new "+oclLibPackage+"OclInteger(1);\n"+
@@ -127,7 +127,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode5=tudOclNode3.isEqualTo(tudOclNode4);\n"
     );
     // basic type, with parameters
-    testGenerate(
+    assertGenerate(
       "context Person inv: let firstLetter=self.name.substring(1,1) in "+
       "firstLetter=firstLetter.toUpper",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
@@ -139,7 +139,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode6=tudOclNode4.isEqualTo(tudOclNode5);\n"
     );
     // operation of application type, without parameters
-    testGenerate(
+    assertGenerate(
       "context Company inv: getOldestEmployeeAge()<manager.age+20",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclInteger tudOclNode1="+oclLibPackage+"Ocl.toOclInteger(tudOclNode0.getFeature(\"getOldestEmployeeAge\", null));\n"+
@@ -150,7 +150,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode6=tudOclNode1.isLessThan(tudOclNode5);\n"
     );
     // operation of application type, with parameters
-    testGenerate(
+    assertGenerate(
       "context Person inv: getIncomeAfterTax(0.3)<=getIncomeAfterTax(0)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclReal tudOclNode1=new "+oclLibPackage+"OclReal(0.3);\n"+
@@ -168,7 +168,7 @@ public class TestJavaGenerator extends TestCase {
 
   public void testIterate() {
     // forAll
-    testGenerate(
+    assertGenerate(
       "context Company inv: employees->forAll(not isUnemployed)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"employees\"));\n"+
@@ -183,7 +183,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode4=tudOclNode1.forAll(tudOclIter0, tudOclEval0);\n"
     );
     // exists
-    testGenerate(
+    assertGenerate(
       "context Company inv: employees->exists(p|p=self.manager)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"employees\"));\n"+
@@ -198,7 +198,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode4=tudOclNode1.exists(tudOclIter0, tudOclEval0);\n"
     );
     // Iterator with type Integer
-    testGenerate(
+    assertGenerate(
       "context Person inv: Set{1, 2, 3}->forAll(i|(i+1)>1)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"OclSet.getEmptyOclSet();\n"+
@@ -221,7 +221,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode9=tudOclNode1.forAll(tudOclIter0, tudOclEval0);\n"
     );
     // isUnique
-    testGenerate(
+    assertGenerate(
       "context Company inv: employees->isUnique(name)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"employees\"));\n"+
@@ -235,7 +235,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode3=tudOclNode1.isUnique(tudOclIter0, tudOclEval0);\n"
     );
     // sortedBy
-    testGenerate(
+    assertGenerate(
       "context Person inv: managedCompanies->sortedBy(numberOfEmployees)->first.numberOfEmployees>100",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"managedCompanies\"));\n"+
@@ -253,7 +253,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode7=tudOclNode5.isGreaterThan(tudOclNode6);\n"
     );
     // selected
-    testGenerate(
+    assertGenerate(
       "context Customer inv: cards->select(color=color_gold)->notEmpty implies title<>''",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"cards\"));\n"+
@@ -274,7 +274,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode10=tudOclNode6.implies(tudOclNode9);\n"
     );
     // reject
-    testGenerate(
+    assertGenerate(
       "context Company inv: employees->reject(isUnemployed) = employees",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"employees\"));\n"+
@@ -290,7 +290,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode5=tudOclNode3.isEqualTo(tudOclNode4);\n"
     );
     // collect collection
-    testGenerate(
+    assertGenerate(
       "context Person inv: managedCompanies->collect(employees)->includes(self)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"managedCompanies\"));\n"+
@@ -305,7 +305,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode4=tudOclNode3.includes(tudOclNode0);\n"
     );
     // collect basic value
-    testGenerate(
+    assertGenerate(
       "context Company inv: employees->collect(age)->sum > 30",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"employees\"));\n"+
@@ -322,7 +322,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode6=tudOclNode4.isGreaterThan(tudOclNode5);\n"
     );
     // iterate
-    testGenerate(
+    assertGenerate(
       "context Company inv: employees->iterate(p:Person; i:Integer=0 | i+p.age)>30",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"employees\"));\n"+
@@ -341,7 +341,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode7=tudOclNode5.isGreaterThan(tudOclNode6);\n"
     );
     // twice iterate
-    testGenerate(
+    assertGenerate(
       "context ProgramPartner inv: \n"+
       "self.deliveredServices.transactions->iterate(\n"+
       "  t:Transaction; result:Integer=0 |\n"+
@@ -389,7 +389,7 @@ public class TestJavaGenerator extends TestCase {
     );
 
     // double: forAll, exists
-    testGenerate(
+    assertGenerate(
       "context Person inv: self.employers->forAll(c|c.employees->exists(p|p=self)) or self.isUnemployed",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"employers\"));\n"+
@@ -413,7 +413,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode7=tudOclNode5.or(tudOclNode6);\n"
     );
     // double: select, isUnique
-    testGenerate(
+    assertGenerate(
       "context Company inv: self.employees->select(p:Person|p.age<18)->isUnique(name)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"employees\"));\n"+
@@ -437,7 +437,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode7=tudOclNode5.isUnique(tudOclIter0, tudOclEval1);\n"
     );
     // double: sortedBy, iterate
-    testGenerate(
+    assertGenerate(
       "context Person inv: employers->sortedBy(numberOfEmployees)->iterate(c:Company; s:String=''| s.concat(c.manager.name)) = 'bla'",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"employers\"));\n"+
@@ -465,7 +465,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode10=tudOclNode8.isEqualTo(tudOclNode9);\n"
     );
     // select and collect
-    testGenerate(
+    assertGenerate(
       "context LoyaltyAccount inv: transactions->select( oclIsTypeOf(Earning) )->collect(points)->sum >= 0",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclSet tudOclNode1="+oclLibPackage+"Ocl.toOclSet(tudOclNode0.getFeature(\"transactions\"));\n"+
@@ -493,14 +493,14 @@ public class TestJavaGenerator extends TestCase {
   }
 
   public void testLogExpressions() {
-    testGenerate(
+    assertGenerate(
       "context Person inv: isMarried and isUnemployed",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode2="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isUnemployed\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode3=tudOclNode1.and(tudOclNode2);\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: isMarried and isUnemployed or isMarried",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
@@ -508,14 +508,14 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode3="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode4=tudOclNode1.and(tudOclNode2).or(tudOclNode3);\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: isMarried implies isUnemployed",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode2="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isUnemployed\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode3=tudOclNode1.implies(tudOclNode2);\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: isMarried and isUnemployed implies isMarried",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
@@ -523,7 +523,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode3="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode4=tudOclNode1.and(tudOclNode2).implies(tudOclNode3);\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: isMarried implies isUnemployed and isMarried",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
@@ -531,7 +531,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode3="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode4=tudOclNode1.implies(tudOclNode2.and(tudOclNode3));\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: isMarried implies isUnemployed implies isMarried",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
@@ -539,7 +539,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode3="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode4=tudOclNode1.implies(tudOclNode2).implies(tudOclNode3);\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: isMarried or isUnemployed implies isMarried and isUnemployed",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
@@ -548,7 +548,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode4="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isUnemployed\"));\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode5=tudOclNode1.or(tudOclNode2).implies(tudOclNode3.and(tudOclNode4));\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Person inv: isMarried or isUnemployed implies isMarried and isUnemployed implies isMarried",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
@@ -561,7 +561,7 @@ public class TestJavaGenerator extends TestCase {
   }
 
   public void testElements() {
-    testGenerate(
+    assertGenerate(
       "context Person inv: isMarried = ( wife->notEmpty or husband->notEmpty)",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"Ocl.toOclBoolean(tudOclNode0.getFeature(\"isMarried\"));\n"+
@@ -576,7 +576,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode6=tudOclNode3.or(tudOclNode5);\n"+
       "final "+oclLibPackage+"OclBoolean tudOclNode7=tudOclNode1.isEqualTo(tudOclNode6);\n"
     );
-    testGenerate(
+    assertGenerate(
       "context Company inv: manager->notEmpty",
       "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
       "final "+oclLibPackage+"OclAnyImpl tudOclNode1="+oclLibPackage+"Ocl.toOclAnyImpl(tudOclNode0.getFeature(\"manager\"));\n"+
@@ -604,7 +604,7 @@ public class TestJavaGenerator extends TestCase {
       "final "+oclLibPackage+"OclBoolean tudOclNode3=tudOclNode1.isEqualTo(tudOclNode2);\n";
     target[2]=
       oclLibPackage+"OclInteger tudOclNode2;\n";
-    testGenerate(
+    assertGenerate(
       "context Person::getIncomeAfterTax(r: Real):Real post: age=age@pre",
       target
     );
@@ -624,52 +624,64 @@ public class TestJavaGenerator extends TestCase {
       assertTrue(false);
     }
   }
-
-  protected void testGenerate(String ocl, String java) {
-    String[] array=new String[1];
-    array[0]=java;
-    testGenerate(ocl, array);
+  
+  public void testPostConstraints() {
+    // bug report by Caroline Nyholm: Code to wrap "result" variable is 
+    // generated for post constraints of void-methods
+    assertGenerate(
+      "context Person::setAge(i: Integer) post: true",
+      "final "+oclLibPackage+"OclAnyImpl tudOclNode0="+oclLibPackage+"Ocl.toOclAnyImpl( "+oclLibPackage+"Ocl.getFor(this) );\n"+
+      "final "+oclLibPackage+"OclInteger tudOclOpPar0="+oclLibPackage+"Ocl.toOclInteger( "+oclLibPackage+"Ocl.getFor(i) );\n"+
+      "final "+oclLibPackage+"OclBoolean tudOclNode1="+oclLibPackage+"OclBoolean.TRUE;\n"
+    );      
   }
 
-  protected void testGenerate(String ocl, String[] java) {
+  protected void assertGenerate(String ocl, String java) {
+    String[] array=new String[1];
+    array[0]=java;
+    assertGenerate(ocl, array);
+  }
+
+  protected void assertGenerate(String ocl, String[] java) {
     boolean allIsFine=true;
+    StringBuffer errorMessage = new StringBuffer();
     OclTree tree=null;
     try {
       tree=DocCheck.createTree(ocl);
       tree.applyDefaultNormalizations();
       CodeFragment[] frags=tree.getCode(new JavaCodeGenerator("this", "result", oclLibPackage));
-      if (java.length!=frags.length) System.out.println("wrong number of fragments");
+      if (java.length!=frags.length) errorMessage.append("wrong number of fragments\n");
       assertTrue( java.length == frags.length );
       for (int i=0; i<java.length; i++) {
         boolean ok=java[i].trim().equals( frags[i].getCode().trim() );
         if (!ok) {
-          System.out.println("OCL expression:\n"+ocl);
-          System.out.print("error in fragment "+i);
-          System.out.println("  (name "+frags[i].getName()+", kind "+frags[i].getKind()+")");
+          errorMessage.append("OCL expression:\n"+ocl+"\n");
+          errorMessage.append("error in fragment "+i);
+          errorMessage.append("  (name "+frags[i].getName()+", kind "+frags[i].getKind()+")\n");
           StringTokenizer stTarget=new StringTokenizer(java[i], "\n");
           StringTokenizer stOutput=new StringTokenizer(frags[i].getCode(), "\n");
           if (stTarget.countTokens()!=stOutput.countTokens()) {
-            System.out.println("should be:\n"+java[i]);
-            System.out.println("("+stTarget.countTokens()+" lines)");
-            System.out.println("but is:\n"+frags[i].getCode());
-            System.out.println("("+stOutput.countTokens()+" lines)");
+            errorMessage.append("should be:\n"+java[i]+"\n");
+            errorMessage.append("("+stTarget.countTokens()+" lines)\n");
+            errorMessage.append("but is:\n"+frags[i].getCode()+"\n");
+            errorMessage.append("("+stOutput.countTokens()+" lines)\n");
           } else {
-            System.out.println("(T is target, O is output)");
+            errorMessage.append("(T is target, O is output)\n");
             while (stTarget.hasMoreTokens()) {
               String lineTarget=stTarget.nextToken();
               String lineOutput=stOutput.nextToken();
-              System.out.println("T "+lineTarget);
-              System.out.println("O "+lineOutput);
-              System.out.print("  ");
+              errorMessage.append("T "+lineTarget+"\n");
+              errorMessage.append("O "+lineOutput+"\n");
+              errorMessage.append("  ");
               for (int iLine=0; iLine<lineTarget.length() && iLine<lineOutput.length(); iLine++) {
                 if (lineTarget.charAt(iLine)!=lineOutput.charAt(iLine)) {
-                  System.out.print("x");
+                  errorMessage.append("x");
                 } else {
-                  System.out.print(" ");
+                  errorMessage.append(" ");
                 }
               }
-              if (lineOutput.length()!=lineTarget.length()) System.out.print(" difference in line length");
-              System.out.println();
+              if (lineOutput.length()!=lineTarget.length()) errorMessage.append(" difference in line length");
+              errorMessage.append("\n");
             }
           }
           allIsFine=false;
@@ -687,18 +699,21 @@ public class TestJavaGenerator extends TestCase {
     }
     catch (Exception e) {
       allIsFine=false;
-      System.out.println("exception in TestJavaGenerator: ");
-      System.out.println("generating code for");
-      System.out.println(ocl);
+      errorMessage.append("exception in TestJavaGenerator: \n");
+      errorMessage.append("generating code for\n");
+      errorMessage.append(ocl+"\n");
       if (tree!=null) {
-        System.out.println("normalized:");
-        System.out.println(tree.toString());
+        errorMessage.append("normalized:\n");
+        errorMessage.append(tree.toString()+"\n");
       }
-      e.printStackTrace(System.out);
+      StringWriter strWriter = new StringWriter();
+      e.printStackTrace( new PrintWriter( strWriter ) );
+      errorMessage.append( strWriter );
     }
-    assertTrue(allIsFine);
+    assertTrue(errorMessage.toString(), allIsFine);
   }
 
+  /*
   public static Test suite() {
     TestSuite t=new TestSuite();
     t.addTest(new TestJavaGenerator("testLet"));
@@ -712,4 +727,5 @@ public class TestJavaGenerator extends TestCase {
     //t.addTest(new TestJavaGenerator("testCompile"));
     return t;
   }
+*/
 }
