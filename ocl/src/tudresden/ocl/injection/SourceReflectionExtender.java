@@ -214,7 +214,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 
     public void onClassFeature(ClassFeature cf) throws java.io.IOException
     {
-      if(!cf.isMethod() && last_element_type!=null)
+      if(cf instanceof ClassAttribute && last_element_type!=null)
       {
         Class c=findElementType();
         //System.out.println("findElementType:"+c);

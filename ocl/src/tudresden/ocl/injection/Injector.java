@@ -348,12 +348,11 @@ public class Injector
       c=readToken();
     }
 
-    ClassFeature cf=
-      new ClassFeature(classname, modifiers, featuretype, featurename, position_name_end);
 
     if(c=='(') // it's a method/constructor
     {
-      cf.setMethod();
+      ClassMethod cf=
+        new ClassMethod(classname, modifiers, featuretype, featurename, position_name_end);
       c=readToken();
       // parsing parameter list
       while(true)
@@ -440,6 +439,8 @@ public class Injector
     }
     else // it's a attribute
     {
+      ClassAttribute cf=
+        new ClassAttribute(classname, modifiers, featuretype, featurename);
       switch(c)
       {
       case ';': 

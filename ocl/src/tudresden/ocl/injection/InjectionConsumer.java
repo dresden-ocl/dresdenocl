@@ -24,7 +24,7 @@ public interface InjectionConsumer
   public void onImport(String importname);
   public void onClass(String classname);
   public void onClassEnd(String classname) throws java.io.IOException;
-  public void onClassFeature(ClassFeature cf) throws java.io.IOException;
+  public void onClassFeature(ClassFeature cf) throws java.io.IOException, InjectorParseException;
   
   /**
      @return false: if the comment should be discarded and the next classfeature to be blocked.

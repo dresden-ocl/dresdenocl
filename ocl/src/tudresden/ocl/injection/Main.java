@@ -85,7 +85,7 @@ class OclInjector implements InjectionConsumer
     if(delayinsertions)
     {
       for(Iterator i=methods.iterator(); i.hasNext(); )
-        writeWrapper((ClassFeature)i.next());
+        writeWrapper((ClassMethod)i.next());
       methods.clear();
     }
 
@@ -95,22 +95,28 @@ class OclInjector implements InjectionConsumer
   
   private String last_element_type=null;
 
-  public void onClassFeature(ClassFeature cf) throws IOException
+  public void onClassFeature(ClassFeature cf) 
+    throws IOException, InjectorParseException
   {
-    if( cf.isMethod()&& !cf.isConstructor() && !cf.isStatic() && !discardnextfeature)
+    if( cf instanceof ClassMethod && 
+        !((ClassMethod)cf).isConstructor() && 
+        !cf.isStatic() && 
+        !discardnextfeature)
     {
       if(delayinsertions)
         methods.add(cf);
       else
-        writeWrapper(cf);
+        writeWrapper((ClassMethod)cf);
     }
     if(last_element_type!=null)
     {
-      if(!cf.isMethod())
+      if(cf instanceof ClassAttribute)
       {
-        cf.setElementType(last_element_type);
+        ((ClassAttribute)cf).setElementType(last_element_type);
         typedAttributes.add(cf);
       }
+      else 
+        throw new InjectorParseException("encountered @element-type tag on non-attribute");
       last_element_type=null;
     }
     discardnextfeature=false;
@@ -155,7 +161,7 @@ class OclInjector implements InjectionConsumer
     o.write(INV_METHOD);
     o.write("()\n  {\n");
     for(Iterator i=typedAttributes.iterator(); i.hasNext(); )
-      writeElementChecker((ClassFeature)i.next());
+      writeElementChecker((ClassAttribute)i.next());
     SortedFragments sf=
       codefragments!=null ? (SortedFragments)(codefragments.get(classname)) : null;
     if(sf!=null)
@@ -195,7 +201,7 @@ class OclInjector implements InjectionConsumer
     }
   }
 
-  void writeCall(ClassFeature cf) throws IOException
+  void writeCall(ClassMethod cf) throws IOException
   {
     Writer o=output;
     o.write("      ");
@@ -212,7 +218,7 @@ class OclInjector implements InjectionConsumer
     o.write(");\n");
   }
 
-  public final void writeWrapper(ClassFeature cf) throws IOException
+  public final void writeWrapper(ClassMethod cf) throws IOException
   {
     Writer o=output;
     o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
@@ -354,7 +360,7 @@ class OclInjector implements InjectionConsumer
     o.write("  }");
   }
 
-  public void writeElementChecker(ClassFeature cf) throws IOException
+  public void writeElementChecker(ClassAttribute cf) throws IOException
   {
     Writer o=output;
     o.write("    for(Iterator i=");
