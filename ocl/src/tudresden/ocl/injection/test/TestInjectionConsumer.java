@@ -123,7 +123,7 @@ public class TestInjectionConsumer implements InjectionConsumer
   public static void main(String[] args)
   {
     String  inputfile=TestInjectionConsumer.class.getResource("Example.java").getFile();
-    String outputfile="Example.java.injectiontest";
+    String outputfile="TestInjectionConsumer.result";
     Reader input=null;
     Writer output=null;
     try
