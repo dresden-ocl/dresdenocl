@@ -54,6 +54,8 @@ public class RevengGUI extends javax.swing.JDialog {
     pack ();
     
     m_jspSplitter.setDividerLocation (0.5);
+    
+    m_jtFiles.setSelectionRow (0);
   }
 
   /** This method is called from within the constructor to
@@ -137,8 +139,11 @@ public class RevengGUI extends javax.swing.JDialog {
           m_jtFiles.setModel (m_dtmFileModel);
           m_jtFiles.setCellRenderer (new FileTreeNodeRenderer());
       
-          //Enable tool tips.
+          // Enable tool tips.
           ToolTipManager.sharedInstance().registerComponent (m_jtFiles);
+      
+          // Specify lines to be drawn between nodes.
+          m_jtFiles.putClientProperty("JTree.lineStyle", "Angled");
       
           m_jtFiles.addTreeExpansionListener (new javax.swing.event.TreeExpansionListener () {
             public void treeCollapsed (javax.swing.event.TreeExpansionEvent evt) {
@@ -237,21 +242,38 @@ public class RevengGUI extends javax.swing.JDialog {
   
   private void m_jtFilesValueChanged (javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_m_jtFilesValueChanged
     if (evt.isAddedPath()) {
+      // Stop notifications of dirty changes from previous selection
       if (m_rtnCurrent != null) {
         m_rtnCurrent.stopDirtyChangeNotification();
       }
       
+      // Set property pages associated with new selection
       m_rtnCurrent = (RevengTreeNode) evt.getPath().getLastPathComponent();
 
+      // Remember currently selected property page, so that we can restore this after the new property pages
+      // are in place
+      int nSelectedPage = m_jtpProperties.getSelectedIndex();
+      
+      // Remove old property pages
       m_jtpProperties.removeAll();
       
-      for (Iterator i = m_rtnCurrent.getPropertyPages(); i.hasNext();) {
+      // Set new property pages
+      int nIdx = 0;
+      for (Iterator i = m_rtnCurrent.getPropertyPages(); i.hasNext(); nIdx++) {
         PropertyPage pp = (PropertyPage) i.next();
         m_jtpProperties.addTab (pp.getTitle(), pp.getIcon(), pp.getComponent(), pp.getToolTip());
+        m_jtpProperties.setEnabledAt (nIdx, pp.isEnabled());
       }
       
+      // Restore selected property page
+      if (m_jtpProperties.getTabCount() > nSelectedPage) {
+        m_jtpProperties.setSelectedIndex (nSelectedPage);
+      }
+      
+      // En-/Disable save button based on dirty state of new selection
       m_jbSave.setEnabled (m_rtnCurrent.isDirty());
       
+      // Start receiving notifications of changes to current selection's dirty state
       if (m_rtnCurrent != null) {
         m_rtnCurrent.startDirtyChangeNotification (this);
       }      

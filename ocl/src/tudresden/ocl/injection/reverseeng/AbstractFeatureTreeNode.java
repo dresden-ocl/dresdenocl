@@ -58,8 +58,8 @@ public abstract class AbstractFeatureTreeNode extends RevengTreeNode {
     */
   public Iterator getPropertyPages() {
     List l = new LinkedList();
-    l.add (new PropertyPage ("Containing class", 
-                                new ContainingClassTree ((AbstractDescriptor) getUserObject())));
+    l.add (new PropertyPage ("General", 
+                                new FeatureOverviewPage ((AbstractDescriptor) getUserObject())));
     
     return l.iterator();
   }

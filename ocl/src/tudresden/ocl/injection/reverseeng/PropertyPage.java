@@ -95,4 +95,8 @@ public class PropertyPage {
     m_fEnabled = fEnabled;
     getComponent().setEnabled (m_fEnabled);
   }
+  
+  public boolean isEnabled() {
+    return m_fEnabled;
+  }
 }

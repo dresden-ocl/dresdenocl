@@ -16,20 +16,28 @@ import javax.swing.tree.*;
  * @author  sz9
  * @version 
  */
-public class ContainingClassTree extends javax.swing.JPanel {
+public class FeatureOverviewPage extends javax.swing.JPanel {
 
   private DefaultTreeModel m_dtmModel;
   private DefaultMutableTreeNode m_dmtnLastNode = null;
+  private TreePath m_tpCompletePath = null; // Complete tree path, so that we can expand it by default...
   
   static class ContainingLevel {
-    private boolean m_fIsPackage;
+    
+    public static final int ATTR_PACKAGE = 1;
+    public static final int ATTR_CLASS = 2;
+    public static final int ATTR_COLLECTION = 4;
+    public static final int ATTR_MAP = 8;
+    public static final int ATTR_INCOMPL = 16;  // To be |-combined with ATTR_MAP or ATTR_COLLECTION.
+    
+    private int m_nAttribute;
     private String m_sName;
     
-    public ContainingLevel (boolean fIsPackage,
+    public ContainingLevel (int nAttribute,
                                String sName) {
       super();
       
-      m_fIsPackage = fIsPackage;
+      m_nAttribute = nAttribute;
       m_sName = sName;
     }
     
@@ -38,13 +46,29 @@ public class ContainingClassTree extends javax.swing.JPanel {
     }
     
     public boolean isPackage() {
-      return m_fIsPackage;
+      return m_nAttribute == ATTR_PACKAGE;
+    }
+    
+    public boolean isCollection() {
+      return (m_nAttribute & ATTR_COLLECTION) == ATTR_COLLECTION;
+    }
+
+    public boolean isMap() {
+      return (m_nAttribute & ATTR_MAP) == ATTR_MAP;
+    }
+    
+    public boolean isIncomplete() {
+      return (m_nAttribute & ATTR_INCOMPL) == ATTR_INCOMPL;
     }
   }
   
   static class ContainingLevelRenderer extends DefaultTreeCellRenderer {
 
     static Icon s_iClass = new javax.swing.ImageIcon (ContainingLevelRenderer.class.getResource ("resources/class.gif"));
+    static Icon s_iMapOK = new javax.swing.ImageIcon (ContainingLevelRenderer.class.getResource ("resources/map.gif"));
+    static Icon s_iMapInCompl = new javax.swing.ImageIcon (ContainingLevelRenderer.class.getResource ("resources/mapInCompl.gif"));
+    static Icon s_iCollectionOK = new javax.swing.ImageIcon (ContainingLevelRenderer.class.getResource ("resources/collection.gif"));
+    static Icon s_iCollectionInCompl = new javax.swing.ImageIcon (ContainingLevelRenderer.class.getResource ("resources/collectionInCompl.gif"));
 
     public ContainingLevelRenderer () {
       super();
@@ -62,7 +86,25 @@ public class ContainingClassTree extends javax.swing.JPanel {
       ContainingLevel cl = (ContainingLevel) ((DefaultMutableTreeNode) value).getUserObject();
       
       if (! cl.isPackage()) {
-        setIcon (s_iClass);
+        if (cl.isCollection()) {
+          if (cl.isIncomplete()) {
+            setIcon (s_iCollectionInCompl);
+          }
+          else {
+            setIcon (s_iCollectionOK);
+          }
+        }
+        else if (cl.isMap()) {
+          if (cl.isIncomplete()) {
+            setIcon (s_iMapInCompl);
+          }
+          else {
+            setIcon (s_iMapOK);
+          }
+        }
+        else {
+          setIcon (s_iClass);
+        }
       }
       
       return this;
@@ -70,10 +112,40 @@ public class ContainingClassTree extends javax.swing.JPanel {
   }
   
   /** Creates new form ContainingClassTree */
-  public ContainingClassTree (AbstractDescriptor ad) {
+  public FeatureOverviewPage(AbstractDescriptor ad) {
     fillInClassTree (ad.getContainingClassJavaClass());
+    
+    // Add feature
+    if (m_dmtnLastNode == null) {
+      m_dmtnLastNode = new DefaultMutableTreeNode ();
+      m_dtmModel = new DefaultTreeModel (m_dmtnLastNode);
+      
+      m_tpCompletePath = new TreePath (m_dmtnLastNode);
+    }
+    else {
+      DefaultMutableTreeNode dmtnNext = new DefaultMutableTreeNode();
+      m_dmtnLastNode.add (dmtnNext);
+      m_dmtnLastNode = dmtnNext;
+      
+      m_tpCompletePath = m_tpCompletePath.pathByAddingChild (m_dmtnLastNode);
+    }
 
+    int nAttribute = ((ad.isCollection())?
+                       (ContainingLevel.ATTR_COLLECTION):
+                       (ContainingLevel.ATTR_MAP));
+                      
+    if (ad.isIncomplete()) {
+      nAttribute |= ContainingLevel.ATTR_INCOMPL;
+    }
+    
+    m_dmtnLastNode.setUserObject (new ContainingLevel (nAttribute, 
+                                                           ad.getName()));
+
+    // Build visual components
     initComponents ();
+    
+    // Expand complete tree...
+    m_jtContainingClassTree.makeVisible (m_tpCompletePath);
   }
 
   private void fillInPackageTree (JavaClass jc) {
@@ -88,14 +160,18 @@ public class ContainingClassTree extends javax.swing.JPanel {
         if (m_dmtnLastNode == null) {
           m_dmtnLastNode = new DefaultMutableTreeNode ();
           m_dtmModel = new DefaultTreeModel (m_dmtnLastNode);
+
+          m_tpCompletePath = new TreePath (m_dmtnLastNode);
         }
         else {
           DefaultMutableTreeNode dmtnNext = new DefaultMutableTreeNode();
           m_dmtnLastNode.add (dmtnNext);
           m_dmtnLastNode = dmtnNext;
+
+          m_tpCompletePath = m_tpCompletePath.pathByAddingChild (m_dmtnLastNode);
         }
 
-        m_dmtnLastNode.setUserObject (new ContainingLevel (true, sTopPackage));
+        m_dmtnLastNode.setUserObject (new ContainingLevel (ContainingLevel.ATTR_PACKAGE, sTopPackage));
         
         sPackage = sPackage.substring (nDotPos + 1);
       }
@@ -103,14 +179,18 @@ public class ContainingClassTree extends javax.swing.JPanel {
       if (m_dmtnLastNode == null) {
         m_dmtnLastNode = new DefaultMutableTreeNode ();
         m_dtmModel = new DefaultTreeModel (m_dmtnLastNode);
+    
+        m_tpCompletePath = new TreePath (m_dmtnLastNode);
       }
       else {
         DefaultMutableTreeNode dmtnNext = new DefaultMutableTreeNode();
         m_dmtnLastNode.add (dmtnNext);
         m_dmtnLastNode = dmtnNext;
+
+        m_tpCompletePath = m_tpCompletePath.pathByAddingChild (m_dmtnLastNode);
       }
 
-      m_dmtnLastNode.setUserObject (new ContainingLevel (true, sPackage));
+      m_dmtnLastNode.setUserObject (new ContainingLevel (ContainingLevel.ATTR_PACKAGE, sPackage));
     }
   }
   
@@ -129,14 +209,18 @@ public class ContainingClassTree extends javax.swing.JPanel {
     if (m_dmtnLastNode == null) {
       m_dmtnLastNode = new DefaultMutableTreeNode ();
       m_dtmModel = new DefaultTreeModel (m_dmtnLastNode);
+
+      m_tpCompletePath = new TreePath (m_dmtnLastNode);
     }
     else {
       DefaultMutableTreeNode dmtnNext = new DefaultMutableTreeNode();
       m_dmtnLastNode.add (dmtnNext);
       m_dmtnLastNode = dmtnNext;
+
+      m_tpCompletePath = m_tpCompletePath.pathByAddingChild (m_dmtnLastNode);
     }
 
-    m_dmtnLastNode.setUserObject (new ContainingLevel (false, jcParent.getName()));
+    m_dmtnLastNode.setUserObject (new ContainingLevel (ContainingLevel.ATTR_CLASS, jcParent.getName()));
   }
   
   /** This method is called from within the constructor to
@@ -152,6 +236,8 @@ public class ContainingClassTree extends javax.swing.JPanel {
 
       m_jtContainingClassTree.setModel (m_dtmModel);
       m_jtContainingClassTree.setCellRenderer (new ContainingLevelRenderer());
+      // Specify lines to be drawn
+      m_jtContainingClassTree.putClientProperty ("JTree.lineStyle", "Angled");
   
       m_jspScroller.setViewportView (m_jtContainingClassTree);
   

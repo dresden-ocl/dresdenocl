@@ -14,8 +14,6 @@
   <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout"/>
   <SubComponents>
     <Container class="javax.swing.JScrollPane" name="m_jspScroller">
-      <Properties>
-      </Properties>
       <Constraints>
         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>
@@ -33,6 +31,10 @@
               <Connection code="new ContainingLevelRenderer()" type="code"/>
             </Property>
           </Properties>
+
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Specify lines to be drawn&#xa;m_jtContainingClassTree.putClientProperty (&quot;JTree.lineStyle&quot;, &quot;Angled&quot;);"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout$JScrollPaneConstraintsDescription"/>
           </Constraints>

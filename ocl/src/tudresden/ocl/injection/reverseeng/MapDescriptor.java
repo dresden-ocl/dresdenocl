@@ -62,6 +62,10 @@ public class MapDescriptor extends AbstractDescriptor {
              (getKeyType() == null));
   }
   
+  public boolean isCollection() {
+    return false;
+  }
+  
   public RevengTreeNode createTreeNode (DefaultTreeModel dtmModel) {
     return new MapTreeNode (dtmModel, this);
   }

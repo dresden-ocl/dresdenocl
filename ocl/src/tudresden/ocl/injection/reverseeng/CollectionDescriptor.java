@@ -60,4 +60,7 @@ public class CollectionDescriptor extends AbstractDescriptor {
   public RevengTreeNode createTreeNode(DefaultTreeModel dtmModel) {
     return new CollectionTreeNode (dtmModel, this);
   }
+  public boolean isCollection() {
+    return true;
+  }
 }

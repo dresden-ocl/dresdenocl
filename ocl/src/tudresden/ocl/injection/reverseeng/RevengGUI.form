@@ -161,7 +161,7 @@
                   </Events>
 
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="&#xa;//Enable tool tips.&#xa;ToolTipManager.sharedInstance().registerComponent (m_jtFiles);&#xa;"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="&#xa;// Enable tool tips.&#xa;ToolTipManager.sharedInstance().registerComponent (m_jtFiles);&#xa;&#xa;// Specify lines to be drawn between nodes.&#xa;m_jtFiles.putClientProperty(&quot;JTree.lineStyle&quot;, &quot;Angled&quot;);&#xa;"/>
                     <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="m_dtmFileModel = new DefaultTreeModel (new DefaultMutableTreeNode(), true); // just use a fake root&#xa;FolderTreeNode ftnRoot = new FolderTreeNode(m_dtmFileModel, new File (&quot;.&quot;));&#xa;m_dtmFileModel.setRoot (ftnRoot);&#xa;ftnRoot.fill();"/>
                   </AuxValues>
                   <Constraints>

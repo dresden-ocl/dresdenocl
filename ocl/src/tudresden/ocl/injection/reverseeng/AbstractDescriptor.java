@@ -231,4 +231,5 @@ public abstract class AbstractDescriptor extends Object {
   public JavaClass getContainingClassJavaClass() {
     return m_jcParent;
   }
+  public abstract boolean isCollection();
 }
