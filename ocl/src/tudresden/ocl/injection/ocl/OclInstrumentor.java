@@ -125,7 +125,7 @@ public final class OclInstrumentor implements TaskInstrumentor
           final Object o = map.get("postcondition");
           if(o!=null)
           {
-            if(context!=null)
+            if(context==null)
               context = makeContext(jm);
             processConstraint(o, "post", context);
           }
