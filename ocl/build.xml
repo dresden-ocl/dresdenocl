@@ -572,6 +572,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
       <link offline="on" packagelistLoc="package-list/jdk/"    href="http://java.sun.com/products/jdk/1.2/docs/api/" />
       <link offline="on" packagelistLoc="package-list/xerces/" href="http://xml.apache.org/apiDocs/"  />
       <link offline="on" packagelistLoc="package-list/junit/"  href="http://www.junit.org/junit/javadoc/" />
+      <link offline="on" packagelistLoc="package-list/ant/"    href="http://jakarta.apache.org/ant/manual/api/" />
       <classpath>
         <pathelement location="${xerces.jar}" />
         <pathelement location="${junit.jar}" />
@@ -581,10 +582,14 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
   </target>
 
 
+  <target name="task.test" depends="compile">
+    <taskdef name="diff" classname="tudresden.ocl.test.DiffTask" classpath="${src.dir}" />
+    <taskdef name="sort" classname="tudresden.ocl.test.SortTask" classpath="${src.dir}" />
+  </target>
+
   <target name="test.dresden-ocl-injector"
           description="Runs a test suite for dresden-ocl-injector.jar and royloy.jar."
-          depends="jar.dresden-ocl-injector,jar.royloy,compile">
-    <!-- dependency from compile is to have the Sort and Diff class compiled only -->
+          depends="jar.dresden-ocl-injector,jar.royloy,task.test">
     <mkdir  dir="${build.dir}/testweb" />
     <copy file="${build.dir}/dresden-ocl-injector.jar" todir="${build.dir}/testweb" />
     <delete dir="${build.dir}/testweb/tudresden" />
@@ -624,14 +629,10 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
         <pathelement location="${build.dir}/dresden-ocl-injector.jar" />
       </classpath>
     </java>
-    <java classname="tudresden.ocl.test.Sort" taskname="sort" failonerror="yes">
-      <classpath><pathelement location="${src.dir}/" /></classpath>
-      <arg value="${build.dir}/dresden-ocl-injector.jar.testoutput" />
-    </java>
-    <antcall target="util.diff">
-      <param name="expected" value=  "${src.dir}/dresden-ocl-injector.jar.testoutput" />
-      <param name="actual"   value="${build.dir}/dresden-ocl-injector.jar.testoutput" />
-    </antcall>
+    <sort file="${build.dir}/dresden-ocl-injector.jar.testoutput" />
+    <diff expectedFile=  "${src.dir}/dresden-ocl-injector.jar.testoutput"
+            actualFile="${build.dir}/dresden-ocl-injector.jar.testoutput"
+    />
     <exec executable="java"
         dir="${build.dir}/testweb/"
         failonerror="true"
@@ -648,29 +649,9 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
 
 
-  <target name="util.diff">
-    <echo taskname="diff" message="expect: ${expected}" />
-    <echo taskname="diff" message="actual: ${actual}"   />
-    <java classname="tudresden.ocl.test.Diff"
-          taskname="diff"
-          failonerror="yes"
-    >
-      <classpath>
-        <pathelement location="${src.dir}/" />
-        <pathelement location="${src.dir}/junit.jar" />
-      </classpath>
-      <arg value="${expected}" />
-      <arg value="${actual}" />
-    </java>
-    <echo taskname="diff" message="ok." />
-  </target>
-
-
-
   <target name="test.example.inject"
-          depends="compile,build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector"
+          depends="build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector,task.test"
   >
-    <!-- dependency from compile is to have the Diff class compiled only -->
     <delete dir="${example.dir}"/>
     <copy todir="${example.dir}">
       <fileset dir="${src.dir}" >
@@ -702,14 +683,13 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
     <javac srcdir="${example.dir}" destdir="${example.dir}" deprecation="on" debug="on" optimize="off">
       <classpath><pathelement location="${build.dir}/dresden-ocl-lib.jar" /></classpath>
     </javac>
-    <antcall target="util.diff">
-      <param name="expected" value=    "${src.dir}/tudresden/ocl/injection/test/Example.java.injected" />
-      <param name="actual"   value="${example.dir}/tudresden/ocl/injection/test/Example.java" />
-    </antcall>
+    <diff expectedFile=    "${src.dir}/tudresden/ocl/injection/test/Example.java.injected"
+            actualFile="${example.dir}/tudresden/ocl/injection/test/Example.java"
+    />
   </target>
 
   <target name="test.example.run"
-          depends="test.example.inject,jar.dresden-ocl-lib"
+          depends="test.example.inject,jar.dresden-ocl-lib,task.test"
   >
     <echo taskname="run" message="Running ${example.dir}/tudresden/ocl/injection/test/Example.java" />
     <java classname="tudresden.ocl.injection.test.Example"
@@ -725,22 +705,17 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
         value="${example.dir}/tudresden/ocl/injection/test/Example.ocltypetrace"
       />
     </java>
-    <java classname="tudresden.ocl.test.Sort" taskname="sort" failonerror="yes">
-      <classpath><pathelement location="${src.dir}/" /></classpath>
-      <arg value="${example.dir}/example.testoutput" />
-    </java>
-    <antcall target="util.diff">
-      <param name="expected" value=    "${src.dir}/example.testoutput" />
-      <param name="actual"   value="${example.dir}/example.testoutput" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=    "${src.dir}/tudresden/ocl/injection/test/Example.ocltypetrace" />
-      <param name="actual"   value="${example.dir}/tudresden/ocl/injection/test/Example.ocltypetrace" />
-    </antcall>
+    <sort file="${example.dir}/example.testoutput" />
+    <diff expectedFile=    "${src.dir}/example.testoutput"
+            actualFile="${example.dir}/example.testoutput"
+    />
+    <diff expectedFile=    "${src.dir}/tudresden/ocl/injection/test/Example.ocltypetrace"
+            actualFile="${example.dir}/tudresden/ocl/injection/test/Example.ocltypetrace"
+    />
   </target>
 
   <target name="test.example.clean"
-          depends="test.example.run,jar.dresden-ocl-injector"
+          depends="test.example.run,jar.dresden-ocl-injector,task.test"
   >
     <echo taskname="clean" message="Cleaning ${example.dir}/tudresden/ocl/injection/test/Example.java" />
     <java classname="tudresden.ocl.injection.ocl.Main" failonerror="yes">
@@ -754,10 +729,9 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
     <javac srcdir= "${example.dir}" destdir="${example.dir}" deprecation="on" debug="on" optimize="off">
       <classpath><pathelement location="${build.dir}/dresden-ocl-lib.jar" /></classpath>
     </javac>
-    <antcall target="util.diff">
-      <param name="expected" value=    "${src.dir}/tudresden/ocl/injection/test/Example.java" />
-      <param name="actual"   value="${example.dir}/tudresden/ocl/injection/test/Example.java" />
-    </antcall>
+    <diff expectedFile=    "${src.dir}/tudresden/ocl/injection/test/Example.java"
+            actualFile="${example.dir}/tudresden/ocl/injection/test/Example.java"
+    />
   </target>
 
   <target name="test.example"
@@ -768,9 +742,8 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
 
 
   <target name="test.royloy.inject"
-          depends="compile,build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector"
+          depends="build.dir,jar.dresden-ocl-lib,jar.dresden-ocl-injector"
   >
-    <!-- dependency from compile is to have the Diff class compiled only -->
     <delete dir="${royloy.dir}"/>
     <copy todir="${royloy.dir}">
       <fileset dir="${src.dir}" >
@@ -805,7 +778,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
   </target>
 
   <target name="test.royloy.run"
-          depends="test.royloy.inject,jar.dresden-ocl-lib"
+          depends="test.royloy.inject,jar.dresden-ocl-lib,task.test"
   >
     <echo taskname="run" message="Running ${royloy.dir}/tudresden/ocl/test/TestInjectionRoyloy.java" />
     <java classname="tudresden.ocl.test.TestInjectionRoyloy" failonerror="yes">
@@ -818,14 +791,13 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
         key="tudresden.ocl.injection.lib.TypeTracer.log"
         value="${royloy.dir}/tudresden/ocl/test/royloy/royloy.ocltypetrace" />
     </java>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/royloy.ocltypetrace" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/royloy.ocltypetrace" />
-    </antcall>
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/royloy.ocltypetrace"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/royloy.ocltypetrace"
+    />
   </target>
 
   <target name="test.royloy.clean"
-          depends="test.royloy.run,jar.dresden-ocl-injector"
+          depends="test.royloy.run,jar.dresden-ocl-injector,task.test"
   >
     <echo taskname="clean" message="Cleaning ${royloy.dir}/tudresden/ocl/test/royloy/*.java" />
     <java classname="tudresden.ocl.injection.ocl.Main" failonerror="yes">
@@ -839,82 +811,63 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
     <javac srcdir="${royloy.dir}" destdir="${royloy.dir}" deprecation="on" debug="on" optimize="off">
       <classpath><pathelement location="${build.dir}/dresden-ocl-lib.jar" /></classpath>
     </javac>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Bank.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Bank.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Burning.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Burning.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Company.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Company.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Customer.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Customer.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/CustomerCard.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/CustomerCard.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Date.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Date.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Day.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Day.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/DayType.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/DayType.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Earning.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Earning.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/LoyaltyAccount.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/LoyaltyAccount.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/LoyaltyProgram.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/LoyaltyProgram.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Membership.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Membership.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Person.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Person.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/ProgramPartner.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/ProgramPartner.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/RLFrame.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/RLFrame.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/RLObject.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/RLObject.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Service.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Service.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/ServiceLevel.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/ServiceLevel.java" />
-    </antcall>
-    <antcall target="util.diff">
-      <param name="expected" value=   "${src.dir}/tudresden/ocl/test/royloy/Transaction.java" />
-      <param name="actual"   value="${royloy.dir}/tudresden/ocl/test/royloy/Transaction.java" />
-    </antcall>
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Bank.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Bank.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Burning.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Burning.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Company.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Company.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Customer.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Customer.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/CustomerCard.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/CustomerCard.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Date.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Date.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Day.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Day.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/DayType.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/DayType.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Earning.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Earning.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/LoyaltyAccount.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/LoyaltyAccount.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/LoyaltyProgram.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/LoyaltyProgram.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Membership.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Membership.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Person.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Person.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/ProgramPartner.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/ProgramPartner.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/RLFrame.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/RLFrame.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/RLObject.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/RLObject.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Service.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Service.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/ServiceLevel.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/ServiceLevel.java"
+    />
+    <diff expectedFile=   "${src.dir}/tudresden/ocl/test/royloy/Transaction.java"
+            actualFile="${royloy.dir}/tudresden/ocl/test/royloy/Transaction.java"
+    />
   </target>
 
   <target name="test.royloy"
