@@ -75,6 +75,10 @@ public class DefaultOclFactory implements OclFactory {
       return getOclRepresentationFor( ((Boolean)o).booleanValue() );
     else if (o instanceof Integer)
       return getOclRepresentationFor( ((Integer)o).intValue() );
+    else if (o instanceof Float)
+      return getOclRepresentationFor( ((Float)o).floatValue() );
+    else if (o instanceof Double)
+      return getOclRepresentationFor( ((Double)o).doubleValue() );
     else
       return new OclAnyImpl(o);
   }

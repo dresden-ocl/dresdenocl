@@ -3,24 +3,25 @@
 package tudresden.ocl.test.royloy;
 import java.util.*;
 
-public class Person {
+public class Person extends RLObject
+{
 
   // Attributes
   public String name;
-  public int age;
-  public boolean isMarried;
-  public boolean isUnemployed;
+  public int age=18;
+  public boolean isMarried=false;
+  public boolean isUnemployed=false;
 
   // Associations
   /**
      @element-type Company
   */
-  protected HashSet  managedCompanies;
+  public HashSet managedCompanies=new HashSet();
 
   /**
      @element-type Company
   */
-  protected HashSet  employers;
+  public HashSet employers=new HashSet();
 
   /**
  *
@@ -31,9 +32,20 @@ public class Person {
  */
     protected Person husband;
 
+  public Person(String name)
+  {
+    this.name=name;
+  }
+  
   // Operations
   public float getIncomeAfterTax(float tax) {
   return 0.0f;
   }
+  
+  public boolean assert()
+  {
+    return true;
+  }
+  
 } /* end class Person */
 

@@ -3,20 +3,24 @@
 package tudresden.ocl.test.royloy;
 import java.util.*;
 
-public class Company {
+public class Company extends RLObject
+{
 
   public int numberOfEmployees;
 
   // Associations
-  /**
- *
- */
-    protected Person manager;
+
+  public Person manager;
 
   /**
      @element-type Person
   */
-  protected HashSet  employees;
+  public HashSet employees=new HashSet();
+  
+  public Company(Person manager)
+  {
+    this.manager=manager;
+  }
 
   public Person getOldestEmployee() {
   return null;
@@ -25,5 +29,11 @@ public class Company {
   public int getOldestEmployeeAge() {
   return 0;
   }
+  
+  public boolean assert()
+  {
+    return true;
+  }
+  
 } /* end class Company */
 

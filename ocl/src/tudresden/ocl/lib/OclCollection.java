@@ -567,9 +567,9 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public void setToRange(OclInteger begin, OclInteger end) {
     int iBegin = begin.getInt();
     int iEnd =   end.getInt();
-    if (iBegin<iEnd) {
+    if (iBegin>iEnd) {
       throw new OclException(
-        "lower range boundary ("+iBegin+") smaller than upper range boundary ("+iEnd+")"
+        "lower range boundary ("+iBegin+") greater than upper range boundary ("+iEnd+")"
       );
     }
     for (int i=iBegin; i<=iEnd; i++) {
