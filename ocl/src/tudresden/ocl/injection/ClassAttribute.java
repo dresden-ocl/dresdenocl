@@ -18,13 +18,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.injection;
 
-public class ClassAttribute extends ClassFeature 
+public final class ClassAttribute extends ClassFeature 
 {
   /**
      The content of the @element-type tag in the doccomment 
      connected to this attribute.
   */
   private String element_type=null;
+
+  /**
+     The content of the @key-type tag in the doccomment 
+     connected to this attribute.
+  */
+  private String key_type=null;
 
   public ClassAttribute(ClassClass parent, 
                         int modifiers, 
@@ -47,6 +53,18 @@ public class ClassAttribute extends ClassFeature
   public final String getElementType()
   {
     return element_type;
+  }
+
+  public final void setKeyType(String key_type)
+  {
+    if(this.key_type!=null)
+      throw new IllegalArgumentException();
+    this.key_type=key_type;
+  }
+  
+  public final String getKeyType()
+  {
+    return key_type;
   }
 
   public final int getAllowedModifiers()

@@ -126,6 +126,7 @@ final class OclInjector implements InjectionConsumer
   }
 
   private String last_element_type=null;
+  private String last_key_type=null;
 
   public void onClassFeature(ClassFeature cf) 
     throws IOException, InjectorParseException
@@ -142,16 +143,30 @@ final class OclInjector implements InjectionConsumer
         else
           writeWrapper((ClassMethod)cf);
       }
+      boolean notYetAddedToTypedAttributes=true;
       if(last_element_type!=null)
       {
         if(cf instanceof ClassAttribute)
         {
           ((ClassAttribute)cf).setElementType(last_element_type);
           typedAttributes.add(cf);
+          notYetAddedToTypedAttributes=false;
         }
         else 
           throw new InjectorParseException("encountered @element-type tag on non-attribute");
         last_element_type=null;
+      }
+      if(last_key_type!=null)
+      {
+        if(cf instanceof ClassAttribute)
+        {
+          ((ClassAttribute)cf).setKeyType(last_key_type);
+          if(notYetAddedToTypedAttributes)
+            typedAttributes.add(cf);
+        }
+        else 
+          throw new InjectorParseException("encountered @key-type tag on non-attribute");
+        last_key_type=null;
       }
     }
     discardnextfeature=false;
@@ -169,6 +184,7 @@ final class OclInjector implements InjectionConsumer
       else
       {
         last_element_type=Injector.findDocTag(comment, "element-type");
+        last_key_type=Injector.findDocTag(comment, "key-type");
         output.write(comment);
         return true;
       }
@@ -407,18 +423,33 @@ final class OclInjector implements InjectionConsumer
 
   public void writeElementChecker(ClassAttribute cf) throws IOException
   {
-    Writer o=output;
     Class et=imports.findType(cf.getType());
-    o.write("    for(Iterator i=");
-    o.write(cf.getName());
+
     if(java.util.Collection.class.isAssignableFrom(et))
-      o.write(".iterator()");
+    {
+      writeIteratorChecker(cf, cf.getElementType(), "");
+    }
     else if(java.util.Map.class.isAssignableFrom(et))
-      o.write(".values().iterator()");
+    {
+      writeIteratorChecker(cf, cf.getElementType(), ".values()");
+      writeIteratorChecker(cf, cf.getKeyType(), ".keySet()");
+    }
     else
       throw new RuntimeException();
-    o.write("; i.hasNext(); )\n      if(!(i.next() instanceof ");
-    o.write(cf.getElementType());
+  }
+
+  public void writeIteratorChecker(
+      ClassAttribute cf,
+      String contenttype, 
+      String createiterator) 
+    throws IOException
+  {
+    Writer o=output;
+    o.write("    for(Iterator i=");
+    o.write(cf.getName());
+    o.write(createiterator);
+    o.write(".iterator(); i.hasNext(); )\n      if(!(i.next() instanceof ");
+    o.write(contenttype);
     o.write("))\n        ");
     o.write(violationMakro);
     o.write("(\"element checker failed.\");\n");
