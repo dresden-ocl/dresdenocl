@@ -23,7 +23,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public final class Invariant implements FeatureListener, Serializable
 {
@@ -171,33 +172,4 @@ public final class Invariant implements FeatureListener, Serializable
   }
       
 
-  // checking element types
-  
-  public static final String CHECK_ELEMENT_TYPES="tudresden.ocl.injection.lib.Invariant.checkElementTypes";
-  public static final String CHECK_KEY_TYPES=    "tudresden.ocl.injection.lib.Invariant.checkKeyTypes";
-  
-  public static final boolean checkElementTypes(Collection c, Class elementtype)
-  {
-    for(Iterator i=c.iterator(); i.hasNext(); )
-      if(!elementtype.isAssignableFrom(i.next().getClass()))
-        return false;
-    return true;
-  }
-
-  public static final boolean checkElementTypes(Map m, Class elementtype)
-  {
-    for(Iterator i=m.values().iterator(); i.hasNext(); )
-      if(!elementtype.isAssignableFrom(i.next().getClass()))
-        return false;
-    return true;
-  }
-  
-  public static final boolean checkKeyTypes(Map m, Class keytype)
-  {
-    for(Iterator i=m.keySet().iterator(); i.hasNext(); )
-      if(!keytype.isAssignableFrom(i.next().getClass()))
-        return false;
-    return true;
-  }
-  
 }

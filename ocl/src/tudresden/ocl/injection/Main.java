@@ -32,6 +32,7 @@ import tudresden.ocl.check.OclTypeException;
 import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.codegen.JavaCodeGenerator;
 import tudresden.ocl.injection.lib.Invariant;
+import tudresden.ocl.injection.lib.Check;
 import tudresden.ocl.injection.lib.HashExact;
 import tudresden.ocl.injection.lib.HashSize;
 import tudresden.ocl.injection.lib.HashModCount;
@@ -820,8 +821,8 @@ final class OclInjector implements InjectionConsumer
   private final void writeTypeChecker(JavaAttribute ja) 
     throws IOException
   {
-    writeTypeChecker(ja, Invariant.CHECK_ELEMENT_TYPES, ja.getElementType());
-    writeTypeChecker(ja, Invariant.CHECK_KEY_TYPES,     ja.getKeyType());
+    writeTypeChecker(ja, Check.CHECK_ELEMENT_TYPES, ja.getElementType());
+    writeTypeChecker(ja, Check.CHECK_KEY_TYPES,     ja.getKeyType());
   }
 
   private final void writeTypeChecker(JavaAttribute ja, String kind, String type) 
@@ -839,9 +840,9 @@ final class OclInjector implements InjectionConsumer
       o.write(".class)) ");
       o.write(violationmacro);
       o.write("(\"");
-      if(kind==Invariant.CHECK_ELEMENT_TYPES)
+      if(kind==Check.CHECK_ELEMENT_TYPES)
         o.write("element");
-      else if(kind==Invariant.CHECK_KEY_TYPES)
+      else if(kind==Check.CHECK_KEY_TYPES)
         o.write("key");
       else
         throw new RuntimeException();
