@@ -60,7 +60,7 @@ public class CollectionTreeNode extends AbstractFeatureTreeNode {
 
   public List getPropertyPages() {
     List lppReturn = super.getPropertyPages();
-    lppReturn.add (new DefaultPropertyPage ("Element type", new TypeEditPage (new TypeEditPage.TypeDescriptor() {
+    lppReturn.add (new DefaultPropertyPage ("Element type", new TypeEditPage (getDescriptor(), new TypeEditPage.TypeDescriptor() {
       public void onTypeSelectionChanged (String sNewSelection) {
         getDescriptor().setElementType (sNewSelection);
       }

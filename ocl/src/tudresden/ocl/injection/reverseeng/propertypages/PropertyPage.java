@@ -74,4 +74,9 @@ public interface PropertyPage {
     * @param ppl The property page listener to be removed from the list of evcent receivers.
     */
   public void removePropertyPageListener (PropertyPageListener ppl);
+  
+  /**
+    * Invoked by the property page container to indicate removal of the page from the container.
+    */
+  public void onPropertyPageRemoved(PropertyPageContainer ppcParent);
 }

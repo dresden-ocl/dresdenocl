@@ -123,7 +123,8 @@ public class PropertyPageContainer extends javax.swing.JPanel implements Propert
       // Remove property page
       m_jtpPropertyPages.remove (pp.getComponent());
       m_lppPropertyPages.remove (pp);
-      
+ 
+      pp.onPropertyPageRemoved (this);
       firePropertyPageRemoved (pp);
       
       // If no property pages left, and we did not just remove 

@@ -60,7 +60,11 @@ public abstract class AbstractFeatureTreeNode extends RevengTreeNode {
   public List getPropertyPages() {
     List lppReturn = new LinkedList();
     lppReturn.add (new DefaultPropertyPage ("General", 
-                                                new FeatureOverviewPage ((AbstractDescriptor) getUserObject())));
+                                                new FeatureOverviewPage ((AbstractDescriptor) getUserObject())) {
+      public void onPropertyPageRemoved (PropertyPageContainer ppc) {
+        ((FeatureOverviewPage) getComponent()).onFinalRemove();
+      }
+    });
     
     return lppReturn;
   }

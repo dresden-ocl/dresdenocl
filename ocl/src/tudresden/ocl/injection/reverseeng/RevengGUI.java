@@ -51,8 +51,6 @@ public class RevengGUI extends javax.swing.JDialog {
     super (parent, modal);
     initComponents ();
     
-    FeatureOverviewPage.setupListener (m_ppcProperties, true);
-    
     pack ();
     
     m_jspSplitter.setDividerLocation (0.5);
@@ -338,8 +336,6 @@ public class RevengGUI extends javax.swing.JDialog {
 
   /** Closes the dialog */
   private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-    FeatureOverviewPage.setupListener (m_ppcProperties, false);
-    
     setVisible (false);
     dispose ();
     System.exit (0);

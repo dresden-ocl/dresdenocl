@@ -339,4 +339,8 @@ public class DefaultPropertyPage extends Object implements PropertyPage {
       }
     }
   }
+  /** Invoked by the property page container to indicate removal of the page from the container.
+   */
+  public void onPropertyPageRemoved(PropertyPageContainer ppcParent) {
+  }
 }

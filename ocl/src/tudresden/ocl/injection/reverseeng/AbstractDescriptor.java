@@ -90,11 +90,6 @@ public abstract class AbstractDescriptor extends Object {
   private RevengTreeNode m_rtnAssociatedNode = null;
   
   /**
-    * Cached version of the comment cleaned of all tags and asterisks.
-    */
-  private String m_sCleanedComment = null;
-  
-  /**
     * EventObject fired by descriptors to notify listeners of changes in their state.
     */
   public static class AbstractDescriptorEvent extends EventObject {
@@ -165,36 +160,6 @@ public abstract class AbstractDescriptor extends Object {
     */
   public String getName() {
     return m_sName;
-  }
-  
-  /** 
-    * Returns just the text of the documentation, without any appended doc tags.
-    * @return just the text of the documentation, without any appended doc tags
-    */
-  public String getCleanedComment() {
-    
-    if (m_sDocComment == null)
-      return null;
-    
-    if (m_sCleanedComment == null) {
-      StringBuffer sbCleanedComment = (m_sDocComment.indexOf ('@') != -1)?
-                                      (new StringBuffer (m_sDocComment.substring (3, m_sDocComment.indexOf ('@') - 1))):
-                                      (new StringBuffer (m_sDocComment.substring (3, m_sDocComment.length() - 2)));
-
-      for (int i = sbCleanedComment.toString().indexOf ('\n'); i != -1; i = sbCleanedComment.toString().indexOf ('\n', i)) {
-        i++;
-
-        while ((i < sbCleanedComment.length()) &&
-                ((sbCleanedComment.charAt (i) == ' ') ||
-                 (sbCleanedComment.charAt (i) == '*'))) {
-          sbCleanedComment.deleteCharAt (i);
-        }
-      }
-
-      m_sCleanedComment = sbCleanedComment.toString();
-    }
-    
-    return m_sCleanedComment;
   }
   
   /** Return a version of the doccomment that has been updated based on the values of element-type and
@@ -319,7 +284,7 @@ public abstract class AbstractDescriptor extends Object {
     * (element-type/key-type) is not filled in.
     */
   public boolean isIncomplete() {
-    return m_acOwner.hasIncompleteElements();
+    return (getElementType() == null);
   }
   
   /** 
