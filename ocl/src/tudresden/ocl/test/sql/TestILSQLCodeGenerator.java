@@ -29,13 +29,14 @@ import tudresden.ocl.check.types.xmifacade.*;
 import tudresden.ocl.test.*;
 import java.io.*;
 import java.util.*;
+import java.net.URL;
 
 public class TestILSQLCodeGenerator extends TestCase {
         ORMappingScheme orm;
         OclTree tree;
         ModelFacade mf;
-        String xmiSrc = (TestILSQLCodeGenerator.class.getResource("university_example.xmi")).toString();
-        String ruleSrc = (TestILSQLCodeGenerator.class.getResource("../../codegen/decl/OCL2SQL4Oracle.xml")).toString();
+        final URL xmiSrc = TestILSQLCodeGenerator.class.getResource("university_example.xmi");
+        String ruleSrc = TestILSQLCodeGenerator.class.getResource("../../codegen/decl/OCL2SQL4Oracle.xml").toString();
         ILSQLCodeGenerator theCG;
 
 	public TestILSQLCodeGenerator(String n) {

@@ -120,7 +120,7 @@ public class DocCheck {
     if (System.getProperty("xmi_file")!=null) {
       try {
         return tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
-          System.getProperty("xmi_file"),
+          new File(System.getProperty("xmi_file")).toURL(),
           "System.getProperty(\"xmi_file\")"
         );
       }

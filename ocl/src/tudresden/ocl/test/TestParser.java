@@ -204,7 +204,7 @@ public class TestParser extends TestCase {
           final File actual = new File("argo07_royloy.debug.bak");
           final String resource = "xmi/argo07/royloy.xmi";
           Model result = XmiParser.getModel(
-            getClass().getResource(resource).getFile(),
+            getClass().getResource(resource),
             resource
           );
           result.printData(new PrintStream(new FileOutputStream(actual)));
@@ -223,7 +223,7 @@ public class TestParser extends TestCase {
           final File actual = new File("rose_royloy.debug.bak");
           final String resource = "xmi/rose/royloy.xml";
           Model result = tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
-            getClass().getResource("xmi/rose/royloy.xml").getFile(),
+            getClass().getResource("xmi/rose/royloy.xml"),
             resource,
             true
             );

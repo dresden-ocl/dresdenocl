@@ -23,6 +23,7 @@ import tudresden.ocl.check.types.xmifacade.*;
 
 import java.util.*;
 import java.io.*;
+import java.net.URL;
 
 /**
  * A DDL (Data Definition Language) generator. The generator takes a ORMapping implementation
@@ -54,16 +55,25 @@ class SchemaGenerator implements SQLDirector {
    * @param arg[1] the destination and name of the target file
    */
   public static void main(String[] arg) {
-    String src, dest;
+    URL src;
+		String dest;
     SchemaGenerator theSchemaGenerator = new SchemaGenerator();
 
     if ((arg.length > 1) && (arg[0] != null) && (arg[1] != null)) {
     	// command line operation
-    	src = arg[0];
+			try
+			{
+    	  src = new URL(arg[0]);
+			}
+			catch(java.net.MalformedURLException e)
+			{
+    	  System.err.println(e.toString());
+				return;
+			}
     	dest = arg[1];
     } else {
     	// use default files for debbuging run
-    	src = SchemaGenerator.class.getResource("test_diagramm_argo07.xmi").toString();
+    	src = SchemaGenerator.class.getResource("test_diagramm_argo07.xmi");
     	dest = "sql.ddl";
 
         System.err.println("Source file is: " + src);
@@ -73,7 +83,7 @@ class SchemaGenerator implements SQLDirector {
     System.err.println("DDL Generator running ...");
 
     try {
-    	theSchemaGenerator.createDDL(new ORMappingImp(XmiParser.createRoughModel(src, src)), new OracleSQLBuilder());
+    	theSchemaGenerator.createDDL(new ORMappingImp(XmiParser.createRoughModel(src, src.toString())), new OracleSQLBuilder());
     } catch (Exception e) {
     	System.err.println("Cannot create DDL script:"  + e.toString());
     }

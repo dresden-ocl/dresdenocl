@@ -40,6 +40,7 @@ import tudresden.ocl.check.TypeQueryable;
 import tudresden.ocl.check.OclTypeException;
 import tudresden.ocl.codegen.*;
 import java.io.*;
+import java.net.URL;
 
 import java.awt.*;
 import java.awt.datatransfer.*;
@@ -182,8 +183,8 @@ public class ASTViewer extends JPanel
           new tudresden.ocl.lib.ArgoNameAdapter()
         );
       } else if (rbXmi!=null && rbXmi.isSelected()) {
-        String xmifile=getClass().getResource("test/xmi/royloy.xmi").getFile();
-        mf=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmifile, xmifile);
+        final URL xmi = getClass().getResource("test/xmi/royloy.xmi");
+        mf=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmi, xmi.toString());
       } else if (rbSable!=null && rbSable.isSelected()) {
         String[] packages={"tudresden.ocl.parser.node", "tudresden.ocl.test.royloy"};
         mf=new tudresden.ocl.check.bootstrap.SableReflectionFacade(

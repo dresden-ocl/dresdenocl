@@ -26,6 +26,7 @@ import tudresden.ocl.check.types.xmifacade.*;
 import tudresden.ocl.gui.*;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 import javax.swing.*;
 
@@ -573,7 +574,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         
         try {
-            theModelFacade = XmiParser.createModel(tfXmiSource.getText(), "model in classic mode");
+            theModelFacade = XmiParser.createModel(new URL(tfXmiSource.getText()), "model in classic mode");
             theOCLEditorModel.setModelFacade(theModelFacade);
         } catch(Exception e) {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -674,8 +675,8 @@ public class OCL2SQL extends JPanel implements ActionListener {
         
         // check XMI source
         try {
-            theRoughModel = XmiParser.createRoughModel(xmiFileLocation, "model in rough mode");
-            theModelFacade = XmiParser.createModel(xmiFileLocation, "model in classic mode");               
+            theRoughModel = XmiParser.createRoughModel(new URL(xmiFileLocation), "model in rough mode");
+            theModelFacade = XmiParser.createModel(new URL(xmiFileLocation), "model in classic mode");               
         } catch(Exception e) {
             showMessage("Error", "Could not process XMI source file !\n" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
             return false;

@@ -24,6 +24,7 @@ import tudresden.ocl.check.types.xmifacade.*;
 import tudresden.ocl.test.*;
 
 import java.io.*;
+import java.net.URL;
 import junit.framework.*;
 
 public class Test extends TestCase
@@ -121,8 +122,8 @@ public class Test extends TestCase
   public void doTest() throws Exception
   {
     String filename="xmistress.xmi";
-    String xmiurl=getClass().getResource(filename).getFile();
-    m=tudresden.ocl.check.types.xmifacade.XmiParser.getModelCatch(
+    final URL xmiurl = getClass().getResource(filename);
+    m=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
       xmiurl,
       getClass().toString()+".getResource("+filename+')'
     );
