@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.15 2001/07/08 10:57:01 rw7 Exp $
+$Id: build.xml,v 1.16 2001/08/06 11:30:40 sl13 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -14,8 +14,6 @@ New version by Ralf Wiebicke.
 -->
 
 <project name="dresden-ocl" default="default" basedir=".">
-
-  <property name="build.compiler" value="jikes" />
 
   <property name="xerces.jar" value="./xerces.jar" />
   <property name="junit.jar"  value="./junit.jar"  />
@@ -36,14 +34,15 @@ New version by Ralf Wiebicke.
     <echo message="  dresden-ocl-injector.jar  the OCL for Java package" />
     <echo message="  royloy.jar                the example code for dresden-ocl-injector.jar" />
     <echo message="  dresden-ocl-injector.test a test suite for dresden-ocl-injector.jar and royloy.jar" />
+    <echo message="  dresden-ocl-sql.jar       the OCL2SQL application" />
     <echo message="  docs                      api docs" />
     <echo message="  jars                      all jar files" />
     <echo message="  test                      run junit tests" />
-    <echo message="  clean                     delete all generated file except api docs" />
+    <echo message="  clean                     delete all generated file except api docs" />    
   </target>
 
 
-  <target name="compile">
+  <target name="compile">       
     <javac srcdir= "${src.dir}"
            destdir="${src.dir}"
            deprecation="on"
@@ -54,7 +53,7 @@ New version by Ralf Wiebicke.
       <classpath>
         <pathelement location="${xerces.jar}" />
         <pathelement location="${junit.jar}" />
-      </classpath>
+      </classpath>      
     </javac>
   </target>
 
@@ -337,6 +336,68 @@ New version by Ralf Wiebicke.
     />
   </target>
 
+  <target name="dresden-ocl-sql.jar" depends="build.dir">
+
+    <mkdir dir="${build.dir}/dresden-ocl-sql" />
+
+    <copy todir="${build.dir}/dresden-ocl-sql" >
+      <fileset dir="${src.dir}">
+        <include name="tudresden/ocl/images/*.gif" />
+        <include name="tudresden/ocl/images/SUNIMAGELICENSE" />
+        <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
+        <include name="tudresden/ocl/parser/lexer/lexer.dat" />
+        <include name="tudresden/ocl/parser/parser/parser.dat" />
+        <include name="tudresden/ocl/codegen/decl/OCL2SQL4SQL92.xml" />
+        <include name="tudresden/ocl/codegen/decl/OCL2SQL4Oracle.xml" />
+        <include name="tudresden/ocl/codegen/decl/MappingRules.dtd" />
+        <include name="tudresden/ocl/*.java" />
+        <include name="tudresden/ocl/lib/*.java" />
+        <include name="tudresden/ocl/normalize/*.java" />
+        <include name="tudresden/ocl/check/*.java" />
+        <include name="tudresden/ocl/check/bootstrap/*.java" />
+        <include name="tudresden/ocl/check/types/*.java" />
+        <include name="tudresden/ocl/check/types/xmifacade/*.java" />
+        <include name="tudresden/ocl/check/types/testfacade/*.java" />
+        <include name="tudresden/ocl/codegen/*.java" />
+        <include name="tudresden/ocl/codegen/decl/*.java" />
+        <include name="tudresden/ocl/parser/*.java" />
+        <include name="tudresden/ocl/parser/analysis/*.java" />
+        <include name="tudresden/ocl/parser/node/*.java" />
+        <include name="tudresden/ocl/parser/lexer/*.java" />
+        <include name="tudresden/ocl/parser/parser/*.java" />
+        <include name="tudresden/ocl/gui/*.java" />
+        <include name="tudresden/ocl/gui/events/*.java" />
+        <include name="tudresden/ocl/sql/*.java" />
+        <include name="tudresden/ocl/injection/*.java" />
+        <include name="tudresden/ocl/injection/ocl/*.java" />
+        <include name="tudresden/ocl/injection/lib/*.java" />
+        <include name="tudresden/ocl/injection/ocl/lib/*.java" />
+        <include name="COPYING" />
+      </fileset>
+    </copy>
+
+    <javac srcdir= "${build.dir}/dresden-ocl-sql"
+           destdir="${build.dir}/dresden-ocl-sql"
+           deprecation="on"
+           debug="on"
+           depend="on"
+           optimize="on" >
+      <classpath>
+        <pathelement location="${xerces.jar}" />
+      </classpath>
+    </javac>
+
+    <jar jarfile="${build.dir}/dresden-ocl-sql.jar"
+         basedir="${build.dir}/dresden-ocl-sql"
+         manifest="${src.dir}/sql.manifest">
+      <include name="**/*.class" />
+      <include name="**/*.dat" />
+      <include name="**/*.gif" />
+      <include name="**/*.xml" />
+      <include name="**/*.dtd" />
+      <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
+    </jar>
+  </target>
 
   <target name="clean">
     <delete file="TestOclCompile.java"/>
@@ -377,7 +438,9 @@ New version by Ralf Wiebicke.
              tudresden.ocl.injection.reverseeng.propertypages.events,
              tudresden.ocl.lib,
              tudresden.ocl.lib.test,
-             tudresden.ocl.test
+             tudresden.ocl.test,
+             tudresden.ocl.sql,
+             tudresden.ocl.test.sql
              "
         sourcepath="${src.dir}"
         destdir="${docs.dir}"
