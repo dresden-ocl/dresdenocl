@@ -56,6 +56,7 @@ public class Main
 		}
 		catch(InjectorParseException e)
 		{
+			e.printStackTrace();
 			input.close();
 			output.close();
 			outputfile.delete();
@@ -71,6 +72,7 @@ public class Main
 		}
 		catch(OclParserException e)
 		{
+			e.printStackTrace();
 			input.close();
 			output.close();
 			outputfile.delete();

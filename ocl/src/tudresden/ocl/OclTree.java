@@ -127,10 +127,12 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
 	  return tree;
     }
     catch (tudresden.ocl.parser.parser.ParserException e) {
-      throw new OclParserException(e.getMessage());
+		e.printStackTrace();
+      throw new OclParserException(e.getMessage()+" in string '"+oclExpression+"'");
     }
     catch (tudresden.ocl.parser.lexer.LexerException e) {
-      throw new OclParserException(e.getMessage());
+		e.printStackTrace();
+      throw new OclParserException(e.getMessage()+" in string '"+oclExpression+"'");
     }
   }
 
