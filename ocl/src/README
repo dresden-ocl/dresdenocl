@@ -2,6 +2,9 @@
 1. REQUIREMENTS
 ---------------
 
+JDK 1.3
+  Sun Microsystems, Inc.
+  
 Ant 1.3
   Build Tool
   by The Jakarta Project
@@ -27,6 +30,7 @@ JUnit 3.7 (junit.jar)
   maintained in CVS
 
 NOTES:
+* JDK 1.2 will fail with field java.util.Collections.EMPTY_MAP missing.
 * Ant 1.2 fails with strange errors when running the tests. 
 * Xerces 1.2.0 will fail with some SAXUnsupportedFeatureException.
 
