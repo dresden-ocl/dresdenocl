@@ -1,6 +1,11 @@
 
 context Example
 inv: hallo='hallo'
+inv: self.strings->includes('hallo')
+inv: self.integers->includes(anInteger)
+inv: self.dates->includes(aDate)
+inv: self.extenders->includes(anExtender)
+inv: self.formats->includes(aFormat)
 
 context Example::getQualifiers()
 pre:  hallo='bello'

@@ -32,17 +32,29 @@ import tudresden.ocl.codegen.JavaCodeGenerator;
 class OclInjector implements InjectionConsumer
 {
   private Writer output;
-  private Hashtable codefragments;
+  private HashMap codefragments;
   private boolean delayinsertions;
 
-  private ArrayList cfs;
-  private ArrayList ets;
+  /**
+     Collects all methods (ClassFeature) of the current class, except automatically generated methods.
+     Is used only, if delayinsertions is true. Otherwise methods is null.
+     @see #delayinsertions
+     @see ClassFeature
+  */
+  private ArrayList methods;
+  
+  /**
+     Collects all attributes (ClassFeature) of the current class, which have element-type set.
+  */
+  private ArrayList typedAttributes;
 
-  OclInjector(Writer output, Hashtable codefragments, boolean insertimmediatly)
+  OclInjector(Writer output, HashMap codefragments, boolean insertimmediatly)
   {
     this.output=output;
     this.codefragments=codefragments;
     this.delayinsertions=!insertimmediatly;
+    methods=(delayinsertions ? new ArrayList() : null);
+    typedAttributes=new ArrayList();
   }
   
   private String packagename;
@@ -52,8 +64,10 @@ class OclInjector implements InjectionConsumer
     if(this.packagename!=null)
       throw new InjectorParseException("more than one package statement.");
     this.packagename=packagename;
-    cfs=(delayinsertions ? new ArrayList() : null);
-    ets=new ArrayList();
+  }
+  
+  public void onImport(String importname)
+  {
   }
     
   private boolean discardnextfeature=false;
@@ -62,21 +76,21 @@ class OclInjector implements InjectionConsumer
   {
     discardnextfeature=false;
     if(delayinsertions)
-      cfs.clear();
-    ets.clear();
+      methods.clear();
+    typedAttributes.clear();
   }
 
   public void onClassEnd(String classname) throws IOException
   {
     if(delayinsertions)
     {
-      for(Iterator i=cfs.iterator(); i.hasNext(); )
+      for(Iterator i=methods.iterator(); i.hasNext(); )
         writeWrapper((ClassFeature)i.next());
-      cfs.clear();
+      methods.clear();
     }
 
     writeInvariants(classname);
-    ets.clear();
+    typedAttributes.clear();
   }
   
   private String last_element_type=null;
@@ -86,7 +100,7 @@ class OclInjector implements InjectionConsumer
     if(cf.isMethod()&&!cf.isConstructor()&&!discardnextfeature)
     {
       if(delayinsertions)
-        cfs.add(cf);
+        methods.add(cf);
       else
         writeWrapper(cf);
     }
@@ -95,7 +109,7 @@ class OclInjector implements InjectionConsumer
       if(!cf.isMethod())
       {
         cf.setElementType(last_element_type);
-        ets.add(cf);
+        typedAttributes.add(cf);
       }
       last_element_type=null;
     }
@@ -129,21 +143,21 @@ class OclInjector implements InjectionConsumer
     Writer o=output;
     o.write("/**\n    A method for checking ocl invariants.\n    Generated automatically on ");
     o.write((new Date()).toString());
-    o.write(", DO NOT CHANGE!\n      @author ");
+    o.write(", DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n  */private final void ");
     o.write(INV_METHOD);
     o.write("()\n  {\n");
-    for(Iterator i=ets.iterator(); i.hasNext(); )
+    for(Iterator i=typedAttributes.iterator(); i.hasNext(); )
       writeElementChecker((ClassFeature)i.next());
     SortedFragments sf=
       codefragments!=null ? (SortedFragments)(codefragments.get(classname)) : null;
     if(sf!=null)
     {
-      Vector v=sf.inv;
-      for(Enumeration e=v.elements(); e.hasMoreElements(); )
+      java.util.Collection v=sf.inv;
+      for(Iterator e=v.iterator(); e.hasNext(); )
       {
-        CodeFragment cf=(CodeFragment)(e.nextElement());
+        CodeFragment cf=(CodeFragment)(e.next());
         o.write("    {\n");
         o.write(cf.getCode());
         o.write("      if(!");
@@ -158,7 +172,12 @@ class OclInjector implements InjectionConsumer
     o.write("}");
   }
   
-  public static final String OCL_AUTHOR="ocl injector";
+  /**
+     All generated class features get this string as author.
+     Must not contain spaces, line breaks or askerics.
+     @see Injector#findDocTag
+  */
+  public static final String OCL_AUTHOR="ocl_injector";
 
   public final void writeWrapperInvariant(ClassFeature cf) throws IOException
   {
@@ -173,9 +192,9 @@ class OclInjector implements InjectionConsumer
   public final void writeWrapper(ClassFeature cf) throws IOException
   {
     Writer o=output;
-    o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n      @author ");
+    o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
-    o.write("\n      @see #");
+    o.write("\n    @see #");
     o.write(cf.getWrappedName());
     o.write('(');
     for(Iterator i=cf.getParameters(); i.hasNext(); )
@@ -358,8 +377,8 @@ public class Main
     NameCreator namecreator=new NameCreator();
     for (i=0; i<constraints.length; i++)
     {
-      System.out.println("loading constraint:");
-      System.out.println(constraints[i]);
+      //System.out.println("checking constraint:");
+      //System.out.println(constraints[i]);
       OclTree nextTree=OclTree.createTree(constraints[i], modelfacade);
       nextTree.setNameCreator(namecreator);
       nextTree.assureTypes();
@@ -368,13 +387,13 @@ public class Main
     return trees;
   }
 
-  public static Hashtable generateCode(OclTree[] trees)
+  public static HashMap generateCode(OclTree[] trees)
   {
     JavaCodeGenerator jcg=new JavaCodeGenerator("this", "result");
-    Hashtable constrainedTypes=new Hashtable(); // type names are keys, SortedFragments values
+    HashMap constrainedTypes=new HashMap(); // type names are keys, SortedFragments values
     for (int i=0; i<trees.length; i++)
     {
-      System.out.println("Normalizing "+i);
+      //System.out.println("Normalizing "+i);
       trees[i].applyDefaultNormalizations();
       CodeFragment[] frags=jcg.getCode(trees[i]);
       for (int j=0; j<frags.length; j++)
@@ -387,37 +406,32 @@ public class Main
         SortedFragments sf=(SortedFragments)constrainedTypes.get(ct);
         switch (frags[j].getKind())
         {
-          case CodeFragment.INV:
-            sf.inv.addElement(frags[j]);
-            break;
-          case CodeFragment.POST:
-            sf.post.addElement(frags[j]);
-            break;
-          case CodeFragment.PRE:
-            sf.pre.addElement(frags[j]);
-            break;
-          case CodeFragment.TRANSFER:
-            sf.transfer.addElement(frags[j]);
-            break;
-          case CodeFragment.PREPARATION:
-            sf.preparation.addElement(frags[j]);
-            break;
+          case CodeFragment.INV:         sf.inv.add(frags[j]);         break;
+          case CodeFragment.POST:        sf.post.add(frags[j]);        break;
+          case CodeFragment.PRE:         sf.pre.add(frags[j]);         break;
+          case CodeFragment.TRANSFER:    sf.transfer.add(frags[j]);    break;
+          case CodeFragment.PREPARATION: sf.preparation.add(frags[j]); break;
+          default: 
+            throw new RuntimeException();
         }
       }
     }
-    Enumeration iter=constrainedTypes.keys();
-    while(iter.hasMoreElements())
+    
+    /*
+    for(Iterator iter=constrainedTypes.keySet().iterator(); iter.hasNext(); )
     {
-      String nexttype=(String)iter.nextElement();
+      String nexttype=(String)iter.next();
       System.out.println("generated code for "+nexttype+":");
       ((SortedFragments)(constrainedTypes.get(nexttype))).print(System.out);
     }
+    */
+    
     return constrainedTypes;
   }
 
   public static void inject(File inputfile, 
       File outputfile, 
-      Hashtable codefragments, 
+      HashMap codefragments, 
       boolean insertimmediatly)
     throws IOException, InjectorParseException
   {
@@ -459,7 +473,7 @@ public class Main
 
   public static final String TEMPFILE_SUFFIX=".temp_oclinjection";
 
-  public static void inject(File tobemodifiedfile, Hashtable codefragments, boolean insertimmediatly)
+  public static void inject(File tobemodifiedfile, HashMap codefragments, boolean insertimmediatly)
     throws IOException, InjectorParseException
   {
     File outputfile=new File(tobemodifiedfile.getPath()+TEMPFILE_SUFFIX);
@@ -475,7 +489,7 @@ public class Main
     String usage="usage:\n   java tudresden.ocl.injection.Main [options] tobemodified1.java ...\n      --xmi-model model.xmi\n      --constraint-file constraints.txt\n      --reflection-model modelpackage\n      -m : modify files";
     String constraintfile=null;
     String xmimodel=null;
-    String reflectionmodel=null;
+    ArrayList reflectionmodel=new ArrayList();
     boolean modify=false;
     boolean insertimmediatly=false;
     try
@@ -518,12 +532,6 @@ public class Main
         }
         else if("--reflection-model".equals(args[i]))
         {
-          if(reflectionmodel!=null)
-          {
-            System.out.println("can use only one reflection model.");
-            System.out.println(usage);
-            return;
-          }
           i++;
           if(i>=args.length)
           {
@@ -531,7 +539,7 @@ public class Main
             System.out.println(usage);
             return;
           }
-          reflectionmodel=args[i];
+          reflectionmodel.add(args[i]);
         }
         else if("-m".equals(args[i]))
           modify=true;
@@ -545,7 +553,7 @@ public class Main
         }
         else
         {
-          Hashtable codefragments=null;
+          HashMap codefragments=null;
           if(constraintfile!=null)
           {
             if((xmimodel==null) == (reflectionmodel==null))
@@ -555,14 +563,13 @@ public class Main
               return;
             }
             String[] constraints=loadConstraints(new File(constraintfile));
-            String[] rp={reflectionmodel};
             ModelFacade modelfacade;
             if(xmimodel!=null)
               modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel);
             else
               modelfacade=new ReflectionFacade
               (
-                rp,
+                (String[])(reflectionmodel.toArray(new String[0])),
                 new DefaultReflectionAdapter(),
                 new tudresden.ocl.lib.SimpleNameAdapter(),
                 new SourceReflectionExtender()

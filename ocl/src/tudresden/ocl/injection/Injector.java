@@ -49,7 +49,7 @@ public class Injector
   {
     int c=input.read();
 
-    if(!do_block&&outbufvalid)
+    if(output!=null&&!do_block&&outbufvalid)
       output.write(outbuf);
 
     if(c>=0)
@@ -91,14 +91,18 @@ public class Injector
           collector.append(outbuf);
       }
       else
-        output.write(outbuf);
+      {
+        if(output!=null)
+          output.write(outbuf);
+      }
       outbufvalid=false;
     }
   }
 
   private void write(String s) throws IOException
   {
-    output.write(s);
+    if(output!=null)
+      output.write(s);
   }
 
   private boolean readComment() throws IOException, EndException
@@ -510,7 +514,7 @@ public class Injector
             if(c!='\0')
               throw new InjectorParseException("package name expected.");
             consumer.onPackage(buf.toString());
-            //System.out.println("package >"+packageString+"<");
+            //System.out.println("package >"+buf.toString()+"<");
             c=readToken();
             if(c!=';')
               throw new InjectorParseException("';' expected.");
@@ -521,6 +525,7 @@ public class Injector
             if(c!='\0')
               throw new InjectorParseException("class name expected.");
             //System.out.println("import >"+buf.toString()+"<");
+            consumer.onImport(buf.toString());
             c=readToken();
             if(c!=';')
               throw new InjectorParseException("';' expected.");
@@ -545,6 +550,7 @@ public class Injector
 
   /**
      parameter tagname the tag name without the '@' prefix
+     return the first word following the tag
   */
   public final static String findDocTag(String doccomment, String tagname)
   {
@@ -553,11 +559,22 @@ public class Injector
     if(start<0)
       return null;
     start+=s.length();
-    int end=doccomment.indexOf('\n', start);
-    if(end<0)
-      return null;
+    
+    int end;
+    li: for(end=start; end<doccomment.length(); end++)
+    {
+      switch(doccomment.charAt(end))
+      {
+      case ' ':
+      case '\n':
+      case '\r':
+      case '*':
+        break li;
+      }
+    }
+    String result=doccomment.substring(start, end).trim();
     //System.out.println("doctag:>"+tagname+"< >"+doccomment.substring(start, end)+"<");
-    return doccomment.substring(start, end);
+    return result;
   }
 
 }

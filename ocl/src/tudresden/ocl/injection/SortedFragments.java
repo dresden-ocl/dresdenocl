@@ -18,44 +18,44 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.injection;
 
-import java.util.Vector;
-import java.util.Enumeration;
+import java.util.ArrayList;
+import java.util.Iterator;
 import tudresden.ocl.codegen.CodeFragment;
 
 public class SortedFragments
 {
-  Vector inv=new Vector();
-  Vector post=new Vector();
-  Vector pre=new Vector();
-  Vector transfer=new Vector();
-  Vector preparation=new Vector();
+  ArrayList inv=new ArrayList();
+  ArrayList post=new ArrayList();
+  ArrayList pre=new ArrayList();
+  ArrayList transfer=new ArrayList();
+  ArrayList preparation=new ArrayList();
 
   public void print(java.io.PrintStream o)
   {
-    for(Enumeration e=inv.elements(); e.hasMoreElements(); )
+    for(Iterator e=inv.iterator(); e.hasNext(); )
     {
       System.out.println("inv:");
-      printFragment((CodeFragment)(e.nextElement()), o);
+      printFragment((CodeFragment)(e.next()), o);
     }
-    for(Enumeration e=post.elements(); e.hasMoreElements(); )
+    for(Iterator e=post.iterator(); e.hasNext(); )
     {
       System.out.println("post:");
-      printFragment((CodeFragment)(e.nextElement()), o);
+      printFragment((CodeFragment)(e.next()), o);
     }
-    for(Enumeration e=pre.elements(); e.hasMoreElements(); )
+    for(Iterator e=pre.iterator(); e.hasNext(); )
     {
       System.out.println("pre:");
-      printFragment((CodeFragment)(e.nextElement()), o);
+      printFragment((CodeFragment)(e.next()), o);
     }
-    for(Enumeration e=transfer.elements(); e.hasMoreElements(); )
+    for(Iterator e=transfer.iterator(); e.hasNext(); )
     {
       System.out.println("transfer:");
-      printFragment((CodeFragment)(e.nextElement()), o);
+      printFragment((CodeFragment)(e.next()), o);
     }
-    for(Enumeration e=preparation.elements(); e.hasMoreElements(); )
+    for(Iterator e=preparation.iterator(); e.hasNext(); )
     {
       System.out.println("preparation:");
-      printFragment((CodeFragment)(e.nextElement()), o);
+      printFragment((CodeFragment)(e.next()), o);
     }
   }
 
