@@ -69,29 +69,10 @@ public class DefaultOclFactory implements OclFactory {
       return getOclRepresentationFor( ((Boolean)o).booleanValue() );
     else if (o instanceof Integer)
       return getOclRepresentationFor( ((Integer)o).intValue() );
-    else if (o instanceof Collection)
-      return collectionToOcl( (Collection) o );
     else
       return new OclAnyImpl(o);
   }
 
-  /** This method generates OCL representations for all elements of the
-   *  collection given as argument, and then returns an OclSet containing
-   *  all OCL representations.
-   *
-   *  <p>Note that an OclSet is returned, without ordering and containing
-   *  no duplicates.
-   */
-  protected OclCollection collectionToOcl(Collection col) {
-    Iterator iter=col.iterator();
-    HashSet set=new HashSet(col.size()*2);
-    while (iter.hasNext()) {
-      set.add(
-        getOclRepresentationFor(iter.next())
-      );
-    }
-    return new OclSet(set);
-  }
 
   // factory methods for basic values:
 
