@@ -240,6 +240,9 @@ public abstract class Example implements Runnable
     SecondExample e2=new SecondExample();
     e2.namedIntegers.put("5", new Integer(5));
     e2.getQualifiers();
+    e2.i=10;
+    e2.anInteger=new Integer(8);
+    e2.getQualifiers();
   }
 
 }
