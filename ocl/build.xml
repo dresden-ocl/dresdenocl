@@ -22,6 +22,7 @@ Enhancements by Steffen Zschaler.
   <property name="docs.dir"  value="${basedir}/api"   />
 
   <property name="xerces.jar" value="${src.dir}/xerces.jar" />
+  <property name="nsuml.jar"  value="${src.dir}/lib/nsuml.jar" />
   <property name="junit.jar"  value="${src.dir}/junit.jar"  />
 
   <property file="local.properties" />
@@ -99,6 +100,7 @@ Enhancements by Steffen Zschaler.
       <include name="tudresden/**" />
       <classpath>
         <pathelement location="${xerces.jar}" />
+        <pathelement location="${nsuml.jar}" />
         <pathelement location="${junit.jar}" />
       </classpath>
     </javac>
