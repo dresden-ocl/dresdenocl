@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.11 2001/05/05 21:29:01 rw7 Exp $
+$Id: build.xml,v 1.12 2001/05/06 13:54:16 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -39,6 +39,22 @@ New version by Ralf Wiebicke.
     <echo message="  docs                      api docs" />
     <echo message="  jars                      all jar files" />
     <echo message="  clean                     delete all generated file except api docs" />
+  </target>
+
+
+  <target name="compile">
+    <javac srcdir= "${src.dir}"
+           destdir="${src.dir}"
+           deprecation="on"
+           debug="on"
+           depend="on"
+           optimize="off">
+      <include name="tudresden/**" />
+      <classpath>
+        <pathelement location="${xerces.jar}" />
+        <pathelement location="${junit.jar}" />
+      </classpath>
+    </javac>
   </target>
 
 
@@ -266,6 +282,7 @@ New version by Ralf Wiebicke.
 
   <target name="clean">
     <delete file="TestOclCompile.java"/>
+    <delete file="TestOclCompile*.class"/>
     <delete dir="${build.dir}"/>
     <delete>
       <fileset dir="${src.dir}/tudresden" includes="**/*.class" />
