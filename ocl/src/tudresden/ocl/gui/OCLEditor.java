@@ -526,19 +526,23 @@ public class OCLEditor extends javax.swing.JPanel
       m_jpToolbarWrapper.remove (m_jspMainPane);
       m_jpToolbarWrapper.add (m_jpEditorPanel, java.awt.BorderLayout.CENTER);
 
-      m_jbNew.setEnabled (false);
-      m_jbRemove.setEnabled (false);
+      /*m_jbNew.setEnabled (false);
+      m_jbRemove.setEnabled (false);*/
+      m_jbNew.setVisible (false);
+      m_jbRemove.setVisible (false);
 
       m_jbEdit.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Cancel16.gif")));
       m_jbEdit.setToolTipText ("Click to cancel editing without saving changes");
       //m_jbEdit.setText ("Stop Edit");
 
-      m_jbSaveEditResult.setEnabled (true);
+      /*m_jbSaveEditResult.setEnabled (true);*/
+      m_jbSaveEditResult.setVisible (true);
       
       m_jtpConstraintEditor.requestFocus();      
       
       m_ocltbQuickBar.setVisible (m_jcbQuickBar.isSelected());
-      m_jcbQuickBar.setEnabled (true);
+      /*m_jcbQuickBar.setEnabled (true);*/
+      m_jcbQuickBar.setVisible (true);
     }
     else {
       m_fInEditMode = false;
@@ -561,17 +565,21 @@ public class OCLEditor extends javax.swing.JPanel
 
       setEditorText (m_crCurrent);
       
-      m_jbNew.setEnabled (true);
-      m_jbRemove.setEnabled (true);
+      /*m_jbNew.setEnabled (true);
+      m_jbRemove.setEnabled (true);*/
+      m_jbNew.setVisible (true);
+      m_jbRemove.setVisible (true);
 
       m_jbEdit.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Edit16.gif")));
       m_jbEdit.setToolTipText ("Click to edit the currently selected constraint");
       //m_jbEdit.setText ("Edit");
 
-      m_jbSaveEditResult.setEnabled (false);
+      /*m_jbSaveEditResult.setEnabled (false);*/
+      m_jbSaveEditResult.setVisible (false);
 
       m_ocltbQuickBar.setVisible (false);
-      m_jcbQuickBar.setEnabled (false);
+      /*m_jcbQuickBar.setEnabled (false);*/
+      m_jcbQuickBar.setVisible (false);
     }
     
     m_jpToolbarWrapper.revalidate();
@@ -905,10 +913,12 @@ public class OCLEditor extends javax.swing.JPanel
     m_jbRemove = new javax.swing.JButton ();
     m_jbEdit = new javax.swing.JButton ();
     m_jbSaveEditResult = new javax.swing.JButton ();
+    m_jbSaveEditResult.setVisible (false);
     pad1 = new javax.swing.JPanel ();
     m_jbPreferences = new javax.swing.JButton ();
     pad2 = new javax.swing.JPanel ();
     m_jcbQuickBar = new javax.swing.JCheckBox ();
+    m_jcbQuickBar.setVisible (false);
     m_jpToolbarWrapper = new javax.swing.JPanel ();
     m_ocltbQuickBar = new tudresden.ocl.gui.OCLToolbar ();
     m_jpEditorPanel = new javax.swing.JPanel ();
@@ -922,189 +932,170 @@ public class OCLEditor extends javax.swing.JPanel
     m_jpPreviewGroup = new javax.swing.JPanel ();
     m_jspConstraintPreviewScroller = new javax.swing.JScrollPane ();
     m_jtpConstraintPreview = new javax.swing.JTextPane ();
+    
     setLayout (new java.awt.BorderLayout ());
+    
     setPreferredSize (new java.awt.Dimension (500, 300));
     setMinimumSize (new java.awt.Dimension (500, 300));
-    
-    
     m_jbNew.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/New16.gif")));
-      m_jbNew.setToolTipText ("Click to create a new constraint");
-      m_jbNew.setMargin (new java.awt.Insets (0, 0, 0, 0));
-      m_jbNew.addActionListener (new java.awt.event.ActionListener () {
-        public void actionPerformed (java.awt.event.ActionEvent evt) {
-          onNewConstraintButton (evt);
-        }
+    m_jbNew.setToolTipText ("Click to create a new constraint");
+    m_jbNew.setMargin (new java.awt.Insets (0, 0, 0, 0));
+    m_jbNew.addActionListener (new java.awt.event.ActionListener () {
+      public void actionPerformed (java.awt.event.ActionEvent evt) {
+        onNewConstraintButton (evt);
       }
-      );
-      m_jtbTools.add (m_jbNew);
-      
-      
-    m_jbRemove.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Delete16.gif")));
-      m_jbRemove.setToolTipText ("Click to remove the currently selected constraint");
-      m_jbRemove.setMargin (new java.awt.Insets (0, 0, 0, 0));
-      m_jbRemove.addActionListener (new java.awt.event.ActionListener () {
-        public void actionPerformed (java.awt.event.ActionEvent evt) {
-          onRemoveConstraintButton (evt);
-        }
-      }
-      );
-      m_jtbTools.add (m_jbRemove);
-      
-      
-    m_jbEdit.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Edit16.gif")));
-      m_jbEdit.setToolTipText ("Click to edit the currently selected constraint");
-      m_jbEdit.setMargin (new java.awt.Insets (0, 0, 0, 0));
-      m_jbEdit.addActionListener (new java.awt.event.ActionListener () {
-        public void actionPerformed (java.awt.event.ActionEvent evt) {
-          onEditButton (evt);
-        }
-      }
-      );
-      m_jtbTools.add (m_jbEdit);
-      
-      
-    m_jbSaveEditResult.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Ok16.gif")));
-      m_jbSaveEditResult.setToolTipText ("Check OCL syntax and save constraint into model");
-      m_jbSaveEditResult.setMargin (new java.awt.Insets (0, 0, 0, 0));
-      m_jbSaveEditResult.setEnabled (false);
-      m_jbSaveEditResult.addActionListener (new java.awt.event.ActionListener () {
-        public void actionPerformed (java.awt.event.ActionEvent evt) {
-          onSubmitConstraintButton (evt);
-        }
-      }
-      );
-      m_jtbTools.add (m_jbSaveEditResult);
-      
-      
-    pad1.setMaximumSize (new java.awt.Dimension (10, 10));
-      m_jtbTools.add (pad1);
-      
-      
-    m_jbPreferences.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Preferences16.gif")));
-      m_jbPreferences.setToolTipText ("Click to inspect and modify OCL editor preferences.");
-      m_jbPreferences.addActionListener (new java.awt.event.ActionListener () {
-        public void actionPerformed (java.awt.event.ActionEvent evt) {
-          onPreferencesButton (evt);
-        }
-      }
-      );
-      m_jtbTools.add (m_jbPreferences);
-      
-      
-    pad2.setPreferredSize (new java.awt.Dimension (5, 10));
-      pad2.setMinimumSize (new java.awt.Dimension (5, 10));
-      pad2.setMaximumSize (new java.awt.Dimension (5, 10));
-      m_jtbTools.add (pad2);
-      
-      
-    m_jcbQuickBar.setToolTipText ("Check to see the syntax assistant toolbar");
-      m_jcbQuickBar.setText ("Syntax Assistant");
-      m_jcbQuickBar.setEnabled (false);
-      m_jcbQuickBar.addActionListener (new java.awt.event.ActionListener () {
-        public void actionPerformed (java.awt.event.ActionEvent evt) {
-          onQuickBarButton (evt);
-        }
-      }
-      );
-      m_jtbTools.add (m_jcbQuickBar);
-      
-      
-    add (m_jtbTools, java.awt.BorderLayout.NORTH);
+    });
     
+    m_jtbTools.add (m_jbNew);
+    
+    m_jbRemove.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Delete16.gif")));
+    m_jbRemove.setToolTipText ("Click to remove the currently selected constraint");
+    m_jbRemove.setMargin (new java.awt.Insets (0, 0, 0, 0));
+    m_jbRemove.addActionListener (new java.awt.event.ActionListener () {
+      public void actionPerformed (java.awt.event.ActionEvent evt) {
+        onRemoveConstraintButton (evt);
+      }
+    });
+    
+    m_jtbTools.add (m_jbRemove);
+    
+    m_jbEdit.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Edit16.gif")));
+    m_jbEdit.setToolTipText ("Click to edit the currently selected constraint");
+    m_jbEdit.setMargin (new java.awt.Insets (0, 0, 0, 0));
+    m_jbEdit.addActionListener (new java.awt.event.ActionListener () {
+      public void actionPerformed (java.awt.event.ActionEvent evt) {
+        onEditButton (evt);
+      }
+    });
+    
+    m_jtbTools.add (m_jbEdit);
+    
+    m_jbSaveEditResult.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Ok16.gif")));
+    m_jbSaveEditResult.setToolTipText ("Check OCL syntax and save constraint into model");
+    m_jbSaveEditResult.setMargin (new java.awt.Insets (0, 0, 0, 0));
+    m_jbSaveEditResult.addActionListener (new java.awt.event.ActionListener () {
+      public void actionPerformed (java.awt.event.ActionEvent evt) {
+        onSubmitConstraintButton (evt);
+      }
+    });
+    
+    m_jtbTools.add (m_jbSaveEditResult);
+    
+    pad1.setMaximumSize (new java.awt.Dimension (10, 10));
+    m_jtbTools.add (pad1);
+    
+    m_jbPreferences.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/images/Preferences16.gif")));
+    m_jbPreferences.setToolTipText ("Click to inspect and modify OCL editor preferences.");
+    m_jbPreferences.addActionListener (new java.awt.event.ActionListener () {
+      public void actionPerformed (java.awt.event.ActionEvent evt) {
+        onPreferencesButton (evt);
+      }
+    });
+    
+    m_jtbTools.add (m_jbPreferences);
+    
+    pad2.setPreferredSize (new java.awt.Dimension (5, 10));
+    pad2.setMinimumSize (new java.awt.Dimension (5, 10));
+    pad2.setMaximumSize (new java.awt.Dimension (5, 10));
+    m_jtbTools.add (pad2);
+    
+    m_jcbQuickBar.setToolTipText ("Check to see the syntax assistant toolbar");
+    m_jcbQuickBar.setText ("Syntax Assistant");
+    m_jcbQuickBar.addActionListener (new java.awt.event.ActionListener () {
+      public void actionPerformed (java.awt.event.ActionEvent evt) {
+        onQuickBarButton (evt);
+      }
+    });
+    
+    m_jtbTools.add (m_jcbQuickBar);
+    
+    add (m_jtbTools, java.awt.BorderLayout.NORTH);
     
     m_jpToolbarWrapper.setLayout (new java.awt.BorderLayout ());
     
     m_ocltbQuickBar.setEditor (this);
-      m_jpToolbarWrapper.add (m_ocltbQuickBar, java.awt.BorderLayout.NORTH);
-      
-      
+    m_jpToolbarWrapper.add (m_ocltbQuickBar, java.awt.BorderLayout.NORTH);
+    
     m_jpEditorPanel.setLayout (new java.awt.GridBagLayout ());
-      java.awt.GridBagConstraints gridBagConstraints1;
-      m_jpEditorPanel.setBorder (new javax.swing.border.TitledBorder ("Edit constraint"));
-      
-      
-        m_jtpConstraintEditor.setToolTipText ("Edit the constraint expression");
-          m_jtpConstraintEditor.setDocument (new OCLEditorDocument ());
-          m_jtpConstraintEditor.addCaretListener (new javax.swing.event.CaretListener () {
-            public void caretUpdate (javax.swing.event.CaretEvent evt) {
-              onCaretUpdate (evt);
-            }
-          }
-          );
-          m_jspConstraintEditorScroller.setViewportView (m_jtpConstraintEditor);
-          
-          gridBagConstraints1 = new java.awt.GridBagConstraints ();
-        gridBagConstraints1.gridwidth = 0;
-        gridBagConstraints1.gridheight = 0;
-        gridBagConstraints1.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints1.insets = new java.awt.Insets (5, 5, 10, 5);
-        gridBagConstraints1.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints1.weightx = 1.0;
-        gridBagConstraints1.weighty = 1.0;
-        m_jpEditorPanel.add (m_jspConstraintEditorScroller, gridBagConstraints1);
-        
-        m_jpToolbarWrapper.add (m_jpEditorPanel, java.awt.BorderLayout.CENTER);
-      
-      
+    java.awt.GridBagConstraints gridBagConstraints1;
+    
+    m_jpEditorPanel.setBorder (new javax.swing.border.TitledBorder ("Edit constraint"));
+    m_jtpConstraintEditor.setToolTipText ("Edit the constraint expression");
+    m_jtpConstraintEditor.setDocument (new OCLEditorDocument ());
+    m_jtpConstraintEditor.addCaretListener (new javax.swing.event.CaretListener () {
+      public void caretUpdate (javax.swing.event.CaretEvent evt) {
+        onCaretUpdate (evt);
+      }
+    });
+    
+    m_jspConstraintEditorScroller.setViewportView (m_jtpConstraintEditor);
+    
+    gridBagConstraints1 = new java.awt.GridBagConstraints ();
+    gridBagConstraints1.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+    gridBagConstraints1.gridheight = java.awt.GridBagConstraints.REMAINDER;
+    gridBagConstraints1.fill = java.awt.GridBagConstraints.BOTH;
+    gridBagConstraints1.insets = new java.awt.Insets (5, 5, 10, 5);
+    gridBagConstraints1.anchor = java.awt.GridBagConstraints.NORTHWEST;
+    gridBagConstraints1.weightx = 1.0;
+    gridBagConstraints1.weighty = 1.0;
+    m_jpEditorPanel.add (m_jspConstraintEditorScroller, gridBagConstraints1);
+    
+    m_jpToolbarWrapper.add (m_jpEditorPanel, java.awt.BorderLayout.CENTER);
+    
     m_jspMainPane.setOneTouchExpandable (true);
-      
-      m_jpConstraintListPane.setLayout (new java.awt.GridBagLayout ());
-        java.awt.GridBagConstraints gridBagConstraints2;
-        m_jpConstraintListPane.setPreferredSize (new java.awt.Dimension (100, 37));
-        
-        
-          m_jtConstraintList.setToolTipText ("Lists all constraints. Selecting a constraint, shows its body in the right hand preview pane. Clicking twice on a constraint allows editing the constraint's name.");
-            m_jtConstraintList.setModel (m_ctmTableModel);
-            m_jspConstraintListScroller.setViewportView (m_jtConstraintList);
-            
-            gridBagConstraints2 = new java.awt.GridBagConstraints ();
-          gridBagConstraints2.gridwidth = 0;
-          gridBagConstraints2.fill = java.awt.GridBagConstraints.BOTH;
-          gridBagConstraints2.insets = new java.awt.Insets (10, 5, 5, 5);
-          gridBagConstraints2.anchor = java.awt.GridBagConstraints.NORTHWEST;
-          gridBagConstraints2.weightx = 1.0;
-          gridBagConstraints2.weighty = 1.0;
-          m_jpConstraintListPane.add (m_jspConstraintListScroller, gridBagConstraints2);
-          
-          m_jspMainPane.setLeftComponent (m_jpConstraintListPane);
-        
-        
-      m_jpPreviewPane.setLayout (new java.awt.GridBagLayout ());
-        java.awt.GridBagConstraints gridBagConstraints3;
-        m_jpPreviewPane.setPreferredSize (new java.awt.Dimension (100, 80));
-        
-        m_jpPreviewGroup.setLayout (new java.awt.GridBagLayout ());
-          java.awt.GridBagConstraints gridBagConstraints4;
-          m_jpPreviewGroup.setBorder (new javax.swing.border.TitledBorder ("Preview"));
-          
-          
-            m_jtpConstraintPreview.setToolTipText ("Constraint expression preview");
-              m_jtpConstraintPreview.setEditable (false);
-              m_jspConstraintPreviewScroller.setViewportView (m_jtpConstraintPreview);
-              
-              gridBagConstraints4 = new java.awt.GridBagConstraints ();
-            gridBagConstraints4.gridwidth = 0;
-            gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints4.insets = new java.awt.Insets (5, 5, 5, 5);
-            gridBagConstraints4.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints4.weightx = 1.0;
-            gridBagConstraints4.weighty = 1.0;
-            m_jpPreviewGroup.add (m_jspConstraintPreviewScroller, gridBagConstraints4);
-            
-            gridBagConstraints3 = new java.awt.GridBagConstraints ();
-          gridBagConstraints3.gridwidth = 0;
-          gridBagConstraints3.gridheight = 0;
-          gridBagConstraints3.fill = java.awt.GridBagConstraints.BOTH;
-          gridBagConstraints3.insets = new java.awt.Insets (0, 5, 20, 5);
-          gridBagConstraints3.weightx = 1.0;
-          gridBagConstraints3.weighty = 1.0;
-          m_jpPreviewPane.add (m_jpPreviewGroup, gridBagConstraints3);
-          
-          m_jspMainPane.setRightComponent (m_jpPreviewPane);
-        
-        m_jpToolbarWrapper.add (m_jspMainPane, java.awt.BorderLayout.CENTER);
-      
-      
+    m_jpConstraintListPane.setLayout (new java.awt.GridBagLayout ());
+    java.awt.GridBagConstraints gridBagConstraints2;
+    
+    m_jpConstraintListPane.setPreferredSize (new java.awt.Dimension (100, 37));
+    m_jtConstraintList.setToolTipText ("Lists all constraints. Selecting a constraint, shows its body in the right hand preview pane. Clicking twice on a constraint allows editing the constraint's name.");
+    m_jtConstraintList.setModel (m_ctmTableModel);
+    m_jspConstraintListScroller.setViewportView (m_jtConstraintList);
+    
+    gridBagConstraints2 = new java.awt.GridBagConstraints ();
+    gridBagConstraints2.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+    gridBagConstraints2.fill = java.awt.GridBagConstraints.BOTH;
+    gridBagConstraints2.insets = new java.awt.Insets (10, 5, 5, 5);
+    gridBagConstraints2.anchor = java.awt.GridBagConstraints.NORTHWEST;
+    gridBagConstraints2.weightx = 1.0;
+    gridBagConstraints2.weighty = 1.0;
+    m_jpConstraintListPane.add (m_jspConstraintListScroller, gridBagConstraints2);
+    
+    m_jspMainPane.setLeftComponent (m_jpConstraintListPane);
+    
+    m_jpPreviewPane.setLayout (new java.awt.GridBagLayout ());
+    java.awt.GridBagConstraints gridBagConstraints3;
+    
+    m_jpPreviewPane.setPreferredSize (new java.awt.Dimension (100, 80));
+    m_jpPreviewGroup.setLayout (new java.awt.GridBagLayout ());
+    java.awt.GridBagConstraints gridBagConstraints4;
+    
+    m_jpPreviewGroup.setBorder (new javax.swing.border.TitledBorder ("Preview"));
+    m_jtpConstraintPreview.setToolTipText ("Constraint expression preview");
+    m_jtpConstraintPreview.setEditable (false);
+    m_jspConstraintPreviewScroller.setViewportView (m_jtpConstraintPreview);
+    
+    gridBagConstraints4 = new java.awt.GridBagConstraints ();
+    gridBagConstraints4.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+    gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
+    gridBagConstraints4.insets = new java.awt.Insets (5, 5, 5, 5);
+    gridBagConstraints4.anchor = java.awt.GridBagConstraints.NORTHWEST;
+    gridBagConstraints4.weightx = 1.0;
+    gridBagConstraints4.weighty = 1.0;
+    m_jpPreviewGroup.add (m_jspConstraintPreviewScroller, gridBagConstraints4);
+    
+    gridBagConstraints3 = new java.awt.GridBagConstraints ();
+    gridBagConstraints3.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+    gridBagConstraints3.gridheight = java.awt.GridBagConstraints.REMAINDER;
+    gridBagConstraints3.fill = java.awt.GridBagConstraints.BOTH;
+    gridBagConstraints3.insets = new java.awt.Insets (0, 5, 20, 5);
+    gridBagConstraints3.weightx = 1.0;
+    gridBagConstraints3.weighty = 1.0;
+    m_jpPreviewPane.add (m_jpPreviewGroup, gridBagConstraints3);
+    
+    m_jspMainPane.setRightComponent (m_jpPreviewPane);
+    
+    m_jpToolbarWrapper.add (m_jspMainPane, java.awt.BorderLayout.CENTER);
+    
     add (m_jpToolbarWrapper, java.awt.BorderLayout.CENTER);
     
   }//GEN-END:initComponents

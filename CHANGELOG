@@ -10,6 +10,10 @@ Changes that could break older environments
 
 Other changes
 -------------
+* [OCL Editor]   Improved handling of unusable buttons in the OCL Editor.
+                 These are now made invisible as opposed to just greying
+                 them out. This was asked for by issue #647 as filed
+                 against ArgoUML.
 * [Type Checker] Improved error reports in Collection.navigateParameterized()
 
 * [Build System] Added this file together with a release policy.
