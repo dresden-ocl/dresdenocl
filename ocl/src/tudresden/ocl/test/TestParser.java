@@ -180,7 +180,7 @@ public class TestParser extends TestCase {
     reflectpackages[0]="tudresden.ocl.test.royloy";
     suite.addTest( new TestParser(
       "testFromFile",
-      TestParser.class.getResource("oclexpressions.argo"),
+      TestParser.class.getResource("oclexpressions.xmi"),
       new tudresden.ocl.check.types.ReflectionFacade(
         reflectpackages,
         new tudresden.ocl.check.types.DefaultReflectionAdapter(),
