@@ -29,9 +29,16 @@ public interface SQLBuilder {
 	
 	public String getCode(); 
 	public void reset(); 
-			
+	
+        // tables
+        public void beginTable(String tableName);
+        public void addColumn(String colName, String colType, boolean pk);
+        public void addColumnSeparator();
+        public void endTable();
+        public void addFKConstraint(String conName, String tableName, String colName, String fkTable,String fkColName);
+        
 	// views
-	public void createView(String name, boolean alias); 
+        public void createView(String name, boolean alias); 
 	public void addAlias(String name); 
         
         // trigger

@@ -39,39 +39,12 @@ import java.io.*;
  * @see ORMapping
  */
 class DDLGenerator {
-  private String ddlScript;
-  private StringBuffer theScript;
-  private boolean indentTypes = true;
-  private int indentionWidth = 20;
+  private String theScript;
   private int constraintCount = 0;
   private boolean scriptGenerated = false;
-
-  protected String BEGIN_CREATE_TABLE	= "create table ";
-  protected String BEGIN_TABLE_BODY	= "\n(\t";
-  protected String REL_PROP_SEP		= "\n,\t";
-  protected String END_TABLE_BODY	= "\n)";
-  protected String END_CREATE_TABLE	= ";\n\n";
-
-  protected String TAB_CON_PRIM_KEY	= " primary key";
-  protected String BEGIN_ALTER_TABLE	= "alter table ";
-  protected String ADD_CONSTRAINT	= " add constraint ";
-  protected String CONSTRAINT_NAME	= "CON_";
-  protected String BEGIN_FOREIGN_KEY	= "\nforeign key (";
-  protected String END_FOREIGN_KEY	= ") ";
-  protected String BEGIN_REFERENCES	= " references ";
-  protected String REFERENCES_SEP	= "(";
-  protected String END_REFERENCES	= ")";
-  protected String END_ALTER_TABLE	= ";\n\n";
-
-  protected String TYPE_FOR_BOOLEAN	= " NUMBER(1)";
-  protected String TYPE_FOR_CHAR	= " VARCHAR2(1)";
-  protected String TYPE_FOR_BYTE	= " NUMBER(3)";
-  protected String TYPE_FOR_SHORT	= " NUMBER(5)";
-  protected String TYPE_FOR_INT		= " NUMBER(10)";
-  protected String TYPE_FOR_LONG	= " NUMBER(19)";
-  protected String TYPE_FOR_FLOAT	= " NUMBER";
-  protected String TYPE_FOR_DOUBLE	= " NUMBER";
-  protected String TYPE_FOR_STRING	= " VARCHAR2(255)";
+  private SQLBuilder theSQLBuilder;
+  
+  private static String CONSTRAINT_NAME = "CON_6";
 
   /**
    * For command line and debugging operations only.
@@ -96,10 +69,11 @@ class DDLGenerator {
         System.err.println("Source file is: " + src);
     }
 
+    System.err.println("DDL is determined for target system: Oracle 8i");
     System.err.println("DDL Generator running ...");
 
     try {
-    	theDDLGenerator.createDDL(new ORMappingImp(XmiParser.createRoughModel(src, src)));
+    	theDDLGenerator.createDDL(new ORMappingImp(XmiParser.createRoughModel(src, src)), new OracleSQLBuilder());
     } catch (Exception e) {
     	System.err.println("Cannot create DDL script:"  + e.toString());
     }
@@ -129,9 +103,10 @@ class DDLGenerator {
    * Creates the DDL script.
    * @param xmiSourceURL the url of the xmi source file
    */
-  public void createDDL(ORMapping orm) {
+  public void createDDL(ORMapping orm, SQLBuilder sqlb) {
   	Iterator i = orm.tables().iterator();
-  	theScript = new StringBuffer();
+        theSQLBuilder = sqlb;
+        sqlb.reset();
 
   	while (i.hasNext()) {
   		createTable((Table)i.next());
@@ -142,6 +117,7 @@ class DDLGenerator {
   		setForeignKeys((Table)i.next());
   	}
 
+        theScript = theSQLBuilder.getCode();
   	scriptGenerated = true;
   }
 
@@ -154,73 +130,17 @@ class DDLGenerator {
   	String colAttType, indentStr;
   	int indent;
 
-  	theScript.append(BEGIN_CREATE_TABLE + t.getTableName() + BEGIN_TABLE_BODY);
+  	theSQLBuilder.beginTable(t.getTableName());
   	for (int i=0; i<cols.length; i++) {
-  		// column name
-  		theScript.append(cols[i]);
+  		// column 
+  		theSQLBuilder.addColumn(cols[i], t.getColumnType(cols[i]), t.isPrimaryKeyColumn(cols[i]));
 
-  		// separator spaces for proper indention
-  		if (indentTypes) {
-  			indentStr = new String();
-  			indent = indentionWidth - cols[i].length();
-  			if (indent <= 0) {
-  				indent = 1;
-  			}
-  			for (int j=0; j<indent; j++) {
-  				indentStr += " ";
-  			}
-  			theScript.append(indentStr);
-  		}
-
-  		// column type
-  		colAttType = t.getColumnType(cols[i]);
-  		if (colAttType.equals("boolean")) {
-  			theScript.append(TYPE_FOR_BOOLEAN);
-  		} else if (colAttType.equals("char")) {
-  			theScript.append(TYPE_FOR_CHAR);
-  		} else if (colAttType.equals("byte")) {
-  			theScript.append(TYPE_FOR_BYTE);
-	  	} else if (colAttType.equals("short")) {
-  			theScript.append(TYPE_FOR_SHORT);
-	  	} else if (colAttType.equals("int")) {
-  			theScript.append(TYPE_FOR_INT);
-	  	} else if (colAttType.equals("long")) {
-  			theScript.append(TYPE_FOR_LONG);
-  		} else if (colAttType.equals("float")) {
-  			theScript.append(TYPE_FOR_FLOAT);
-  		} else if (colAttType.equals("double")) {
-  			theScript.append(TYPE_FOR_DOUBLE);
-  		} else if (colAttType.equals("Boolean")) {
-  			theScript.append(TYPE_FOR_BOOLEAN);
-  		} else if (colAttType.equals("Character")) {
-  			theScript.append(TYPE_FOR_CHAR);
-  		} else if (colAttType.equals("Byte")) {
-  			theScript.append(TYPE_FOR_BYTE);
-  		} else if (colAttType.equals("Short")) {
-  			theScript.append(TYPE_FOR_SHORT);
-  		} else if (colAttType.equals("Integer")) {
-  			theScript.append(TYPE_FOR_INT);
-  		} else if (colAttType.equals("Long")) {
-  			theScript.append(TYPE_FOR_LONG);
-  		} else if (colAttType.equals("Float")) {
-  			theScript.append(TYPE_FOR_FLOAT);
-  		} else if (colAttType.equals("Double")) {
-  			theScript.append(TYPE_FOR_DOUBLE);
-  		} else if (colAttType.equals("String")) {
-  			theScript.append(TYPE_FOR_STRING);
-  		}
-
-  		// primary key
-  		if (t.isPrimaryKeyColumn(cols[i])) {
-  			theScript.append(TAB_CON_PRIM_KEY);
-  		}
-
-    		// column separator
+  		// column separator
   		if (i < (cols.length-1)) {
-  			theScript.append(REL_PROP_SEP);
+  			theSQLBuilder.addColumnSeparator();
   		}
   	}
-  	theScript.append(END_TABLE_BODY + END_CREATE_TABLE);
+  	theSQLBuilder.endTable();
   }
 
   /**
@@ -233,11 +153,11 @@ class DDLGenerator {
   	for (int i=0; i<cols.length; i++) {
   		if (t.isForeignKeyColumn(cols[i])) {
   			constraintCount++;
-  			theScript.append(BEGIN_ALTER_TABLE + t.getTableName());
-  			theScript.append(ADD_CONSTRAINT + CONSTRAINT_NAME + constraintCount);
-  			theScript.append(BEGIN_FOREIGN_KEY + cols[i] + END_FOREIGN_KEY);
-  			theScript.append(BEGIN_REFERENCES + t.getForeignTable(cols[i]) + REFERENCES_SEP + t.getForeignColumn(cols[i]) + END_REFERENCES);
-  			theScript.append(END_ALTER_TABLE);
+                        theSQLBuilder.addFKConstraint(CONSTRAINT_NAME + constraintCount,
+                                                      t.getTableName(),
+                                                      cols[i], 
+                                                      t.getForeignTable(cols[i]), 
+                                                      t.getForeignColumn(cols[i]));  			
  		}
 	}
   }

@@ -466,7 +466,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         // create table schema
         increaseProgressInfo("create table schema ...");
         DDLGenerator ddlg = new DDLGenerator();
-        ddlg.createDDL(theORMapping);
+        ddlg.createDDL(theORMapping, theSQLBuilder);
         resultTableSchema = ddlg.getDDLScript();
                 
         // create object views

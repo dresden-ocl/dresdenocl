@@ -24,6 +24,16 @@ import java.util.*;
  * Implements the SQLBuilder interface for Oracle specific SQL code.
  */
 public class OracleSQLBuilder implements SQLBuilder {
+        protected String TYPE_FOR_BOOLEAN = " NUMBER(1)";
+        protected String TYPE_FOR_CHAR = " VARCHAR2(1)";
+        protected String TYPE_FOR_BYTE = " NUMBER(3)";
+        protected String TYPE_FOR_SHORT	= " NUMBER(5)";
+        protected String TYPE_FOR_INT = " NUMBER(10)";
+        protected String TYPE_FOR_LONG = " NUMBER(19)";
+        protected String TYPE_FOR_FLOAT	= " NUMBER";
+        protected String TYPE_FOR_DOUBLE = " NUMBER";
+        protected String TYPE_FOR_STRING = " VARCHAR2(255)";
+    
 	private StringBuffer theCode;
 	private int nextAliasPos;
 	private int aliasCount;
@@ -124,4 +134,77 @@ public class OracleSQLBuilder implements SQLBuilder {
                 append("  end if;\n");
                 append("end;\n");
         }        
+        
+        public void beginTable(String tableName) {
+                append("create table " + tableName + "\n(");
+        }
+        
+        public void addColumn(String colName,String colType,boolean pk) {
+               String indentStr = new String();
+  	       int indent = 20 - colName.length();
+               String oraColType = "";
+  		
+               // indention between name and type
+               if (indent <= 0) {
+  	            indent = 1;
+               } else {
+  		    for (int j=0; j<indent; j++) {
+  			indentStr += " ";
+  		    }
+  	       }
+               
+               // determine corresponding Oracle type to colType
+               	if (colType.equals("boolean")) {
+  			oraColType = TYPE_FOR_BOOLEAN;
+  		} else if (colType.equals("char")) {
+  			oraColType = TYPE_FOR_CHAR;
+  		} else if (colType.equals("byte")) {
+  			oraColType = TYPE_FOR_BYTE;
+	  	} else if (colType.equals("short")) {
+  			oraColType = TYPE_FOR_SHORT;
+	  	} else if (colType.equals("int")) {
+  			oraColType = TYPE_FOR_INT;
+	  	} else if (colType.equals("long")) {
+  			oraColType = TYPE_FOR_LONG;
+  		} else if (colType.equals("float")) {
+  			oraColType = TYPE_FOR_FLOAT;
+  		} else if (colType.equals("double")) {
+  			oraColType = TYPE_FOR_DOUBLE;
+  		} else if (colType.equals("Boolean")) {
+  			oraColType = TYPE_FOR_BOOLEAN;
+  		} else if (colType.equals("Character")) {
+  			oraColType = TYPE_FOR_CHAR;
+  		} else if (colType.equals("Byte")) {
+  			oraColType = TYPE_FOR_BYTE;
+  		} else if (colType.equals("Short")) {
+  			oraColType = TYPE_FOR_SHORT;
+  		} else if (colType.equals("Integer")) {
+  			oraColType = TYPE_FOR_INT;
+  		} else if (colType.equals("Long")) {
+  			oraColType = TYPE_FOR_LONG;
+  		} else if (colType.equals("Float")) {
+  			oraColType = TYPE_FOR_FLOAT;
+  		} else if (colType.equals("Double")) {
+  			oraColType = TYPE_FOR_DOUBLE;
+  		} else if (colType.equals("String")) {
+  			oraColType = TYPE_FOR_STRING;
+  		}
+            
+                append("\t" + colName + indentStr + oraColType);
+                if (pk) append("\t" + "primary key");
+        }
+        
+        public void endTable() {
+                append("\n);\n\n");
+        }
+        
+        public void addColumnSeparator() {
+                append("\n,");
+        }
+        
+        public void addFKConstraint(String conName, String tableName, String colName, String fkTable,String fkColName) {
+                append("alter table " + tableName + " add constraint " + conName + "\n");
+                append("foreign key (" + colName + ") references " + fkTable + "(" + fkColName + ");\n\n");
+        }
+        
 }
