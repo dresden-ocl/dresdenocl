@@ -119,6 +119,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
           Type paramType=types.get(paramTypeName);
           operationParameters[index]=paramType;
           env.put(paramName, paramType);
+					index++;
         }
       } else {
         operationParameters=new Type[0];
