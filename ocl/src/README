@@ -30,7 +30,8 @@ Every .java file in the repository must compile with
 
 EXCEPTION:
 jikes 1.12 terminates with a failing assertion, the rule above
-does not apply to this version of jikes.
+does not apply to this version of jikes. Version 1.06 is known
+to work.
 
 
 2.2 Javadoc
