@@ -178,18 +178,29 @@ public class OclAnyImpl extends OclAny {
           paramTypes[i]=params[i].getClass();
         }
       }
-      Class searchClass=applicationObject.getClass();
-      Method m=null;
-      while (searchClass!=null && m==null) {
-        try {
-          m=searchClass.getDeclaredMethod(methodName, paramTypes);
-        }
-        catch (NoSuchMethodException nsme) {
-          m=null;
-          searchClass=searchClass.getSuperclass();
+      
+      // this is very similar to tudresden.ocl.check.types.ClassAny.navigateParameterized
+      // if you find a bug here, it it probably there as well.
+      Method foundmethod=null;
+      classloop: for(Class iclass=applicationObject.getClass(); iclass!=null; iclass=iclass.getSuperclass())
+      {
+        Method[] methods=iclass.getDeclaredMethods();
+        methodloop: for(int i=0; i<methods.length; i++)
+        {
+          if(!methodName.equals(methods[i].getName()))
+            continue;
+          Class[] parametertypes=methods[i].getParameterTypes();
+          if(paramTypes.length!=parametertypes.length)
+            continue;
+          for(int j=0; j<parametertypes.length; j++)
+            if(!parametertypes[j].isAssignableFrom(paramTypes[j]))
+              continue methodloop;
+          foundmethod=methods[i];
+          break classloop;
         }
       }
-      if (m==null) {
+      
+      if (foundmethod==null) {
         if (! Ocl.TOLERATE_NONEXISTENT_FIELDS) {
           throw new OclException(
             "non-existent method "+methodName+" of object \""+applicationObject+
@@ -199,8 +210,8 @@ public class OclAnyImpl extends OclAny {
           return UNDEFINED;
         }
       } else {
-        m.setAccessible(true);
-        Object feature=m.invoke(applicationObject, params);
+        foundmethod.setAccessible(true);
+        Object feature=foundmethod.invoke(applicationObject, params);
         return Ocl.getOclRepresentationFor(feature);
       }
     }
