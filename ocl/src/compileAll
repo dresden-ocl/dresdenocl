@@ -1,0 +1,1 @@
+javac -classpath .:xml4j.jar:test.jar -d . -g `find . -name "*.java"`
