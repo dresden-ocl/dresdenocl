@@ -37,6 +37,21 @@ Enhancements by Steffen Zschaler.
     <echo message="JDK ${java.version} found, make sure, it is at least 1.3." />
     <echo message="${ant.version} found, make sure it is at least 1.4." />
     <echo message="Compiler is ${build.compiler}, dependency check is ${build.depend}" />
+
+    <!-- find ant.jar, search a few possible locations... -->
+    <condition property="path.jar.ant" value="${env.ANT_HOME}/lib/ant.jar">
+      <available file="${env.ANT_HOME}/lib/ant.jar" type="file" />
+    </condition>
+    <condition property="path.jar.ant" value="/usr/share/java/ant.jar">
+      <and>
+        <not>
+          <available file="${env.ANT_HOME}/lib/ant.jar" type="file" /> <!-- a string comparison might be simpler here... -->
+        </not>
+        <available file="/usr/share/java/ant.jar" type="file" />
+      </and>
+    </condition>
+
+    <echo message="Trying to use ant.jar from ${path.jar.ant}." />
   </target>
 
 
@@ -555,7 +570,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
         <pathelement location="${xerces.jar}" />
         <pathelement location="${junit.jar}" />
         <pathelement location="${src.dir}" />
-        <pathelement location="${env.ANT_HOME}/lib/ant.jar" />
+        <pathelement location="${path.jar.ant}" />
       </classpath>
     </javadoc>
 
