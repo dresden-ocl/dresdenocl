@@ -75,10 +75,10 @@ public class ConstraintEvaluation extends JPanel
 
   protected JTextArea eText;
 
-  protected Icon imageOK=getImage("ok.gif");
-  protected Icon imageFailed=getImage("failed.gif");
-  protected Icon imageQuestion=getImage("question.gif");
-  protected Icon imageEmpty=getImage("empty.gif");
+  protected Icon imageOK=getImage("images/ok.gif");
+  protected Icon imageFailed=getImage("images/failed.gif");
+  protected Icon imageQuestion=getImage("images/question.gif");
+  protected Icon imageEmpty=getImage("images/empty.gif");
 
   protected JLabel message;
   protected JTabbedPane tabs;
@@ -114,8 +114,8 @@ public class ConstraintEvaluation extends JPanel
     cInput.setFont(new Font("Monospaced", Font.PLAIN, 12));
 
     cParse=new JButton("Parse");
-    cToClipboard=new JButton(getImage("right.gif"));
-    cFromClipboard=new JButton(getImage("left.gif"));
+    cToClipboard=new JButton(getImage("images/right.gif"));
+    cFromClipboard=new JButton(getImage("images/left.gif"));
 
     cToClipboard.setToolTipText("copy constraint to clipboard");
     cFromClipboard.setToolTipText("copy constraint from clipboard");
@@ -250,7 +250,7 @@ public class ConstraintEvaluation extends JPanel
     aNormalize=new JButton("Normalize");
     aShowLeaves=new JButton("Show Leaves");
     aToText=new JButton("To Text");
-    aToClipboard=new JButton(getImage("right.gif"));
+    aToClipboard=new JButton(getImage("images/right.gif"));
 
     JLabel txtTypeCheck=new JLabel("Type Check:");
     JLabel txtGeneratedTests=new JLabel("Generated Tests:");
@@ -347,9 +347,9 @@ public class ConstraintEvaluation extends JPanel
     JPanel smallLogos=new JPanel(new BorderLayout());
     JPanel center=new JPanel(new GridLayout(0, 1));
 
-    smallLogos.add(new JLabel( getImage("tulogo.gif") ), BorderLayout.NORTH);
-    smallLogos.add(new JLabel( getImage("st.gif") ), BorderLayout.SOUTH);
-    allLogos.add(new JLabel( getImage("logo.gif") ));
+    smallLogos.add(new JLabel( getImage("images/tulogo.gif") ), BorderLayout.NORTH);
+    smallLogos.add(new JLabel( getImage("images/st.gif") ), BorderLayout.SOUTH);
+    allLogos.add(new JLabel( getImage("images/logo.gif") ));
     allLogos.add(smallLogos, BorderLayout.WEST);
 
     center.add(new JLabel("OCL Compiler", SwingConstants.CENTER));
