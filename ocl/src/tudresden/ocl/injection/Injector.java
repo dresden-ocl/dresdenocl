@@ -22,6 +22,19 @@ import java.io.*;
 import java.util.*;
 import tudresden.ocl.codegen.CodeFragment;
 
+/**
+   Implements a modifying java parser.
+   This means, the input stream is continuesly written
+   into an output stream, and may be modified before writing.
+
+   The parser recognizes java meta information only,
+   which is anything outside method bodies and attribute 
+   inizializers.
+
+   To use the parser, provide an implemention of the 
+   InjectionConsumer interface to the constructor.
+   @see InjectionConsumer
+*/
 public final class Injector
 {
   private Reader input;
@@ -37,6 +50,18 @@ public final class Injector
 
   private JavaFile javafile=new JavaFile();
 
+  /**
+     Constructs a new java parser.
+     @parameter input 
+        the input stream to be parsed.
+     @parameter output 
+        the target, where the modified input stream is written to.
+        May be null, if only reading is desired.
+     @parameter consumer 
+        an implementation of InjectionConsumer,
+        listening to parsed elements of the input stream.
+     @see InjectionConsumer
+  */
   public Injector(Reader input, Writer output, InjectionConsumer consumer)
   {
     this.input=input;

@@ -22,6 +22,11 @@ import java.io.*;
 import java.util.*;
 import tudresden.ocl.codegen.CodeFragment;
 
+/**
+   Represents a java feature.
+   May be a class (even an inner class), an attribute or
+   a method.
+*/
 public abstract class JavaFeature
 {
   /**
@@ -32,15 +37,19 @@ public abstract class JavaFeature
   
   /**
      The class, which contains this feature.
-     May be null for top-level classes.
+     Is null for top-level (not inner) classes.
   */
   private JavaClass parent;
 
+  /**
+     The modifiers of this feature.
+     @see java.lang.reflect.Modifier
+  */
   private int modifiers;
 
   /**
      The return type of the method.
-     Is null, if is is a constructor, or a class
+     Is null, if it is a constructor, or a class.
   */
   protected String type;
 
@@ -73,26 +82,46 @@ public abstract class JavaFeature
         " of type "+getClass().getName()+'.');
   }
 
+  /**
+     Returns the java file, which contains this feature.
+     Is never null.
+  */
   public final JavaFile getFile()
   {
     return file;
   }
-  
+
+  /**
+     Returns the package of the file containing this feature.
+  */
   public final String getPackageName()
   {
     return file.getPackageName();
   }
 
+  /**
+     Returns the class, which contains this feature.
+     Is null for top-level (not inner) classes.
+  */
   public final JavaClass getParent()
   {
     return parent;
   }
   
+  /**
+     Returns the modifiers of this feature.
+     @see java.lang.reflect.Modifier
+  */
   public final int getModifiers()
   {
     return modifiers;
   }
   
+  /**
+     Subclasses use this method to specify,
+     which modifiers are allowed for the specific kind
+     of feature.
+  */
   public abstract int getAllowedModifiers();
 
   public final boolean isStatic()
@@ -100,6 +129,10 @@ public abstract class JavaFeature
     return java.lang.reflect.Modifier.isStatic(modifiers);
   }
   
+  /**
+     The return type of the method.
+     Is null, if it is a constructor, or a class.
+  */
   public final String getType()
   {
     return type;

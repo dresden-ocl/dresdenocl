@@ -21,6 +21,10 @@ package tudresden.ocl.injection;
 import java.io.*;
 import java.util.*;
 
+/**
+   Represents a method of a class parsed by the java parser.
+   @see Injector
+*/
 public class JavaMethod extends JavaFeature
 {
   public static final String WRAPPER_SUFFIX="_wrappedbyocl";
@@ -34,15 +38,20 @@ public class JavaMethod extends JavaFeature
   */
   private int name_end;
 
+  /**
+     The method header of this method, 
+     exactly as in the input stream, 
+     including all typographic extra's (line breaks, comments).
+  */
   private String literal;
 
   /**
-     Contains parameter names and types.
+     Contains subsequently parameter names and types.
   */
   private ArrayList parameters=new ArrayList();
 
   /**
-     Contains all names given in the "throws" clause.
+     Contains all names given in the &quot;throws&quot; clause.
   */
   private ArrayList throwables=new ArrayList();
     

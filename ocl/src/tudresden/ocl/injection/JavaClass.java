@@ -18,6 +18,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.injection;
 
+/**
+   Represents a class parsed by the java parser.
+   Is an inner class, if parent is not null.
+   @see #getParent()
+   @see Injector
+*/
 public class JavaClass extends JavaFeature
 {
 
@@ -34,6 +40,10 @@ public class JavaClass extends JavaFeature
     super(file, parent, modifiers, null, name);
   }
 
+  /**
+     Constructs the fully qualified name of this class,
+     including package path.
+  */
   public String getFullName()
   {
     StringBuffer buf=new StringBuffer();

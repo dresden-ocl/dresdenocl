@@ -18,6 +18,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.injection;
 
+/**
+   Represents an attribute of a class parsed by the
+   java parser.
+   Contains additional information about the element-type 
+   and key-type tags attached to this attribute.
+   @see Injector
+*/
 public final class JavaAttribute extends JavaFeature 
 {
   /**
@@ -43,6 +50,11 @@ public final class JavaAttribute extends JavaFeature
       throw new RuntimeException();
   }
 
+  /**
+     Sets the content of the @element-type tag in the doccomment 
+     connected to this attribute.
+     Must be called at most once.
+  */
   public final void setElementType(String element_type)
   {
     if(this.element_type!=null)
@@ -50,11 +62,20 @@ public final class JavaAttribute extends JavaFeature
     this.element_type=element_type;
   }
   
+  /**
+     Returns the content of the @element-type tag in the doccomment 
+     connected to this attribute.
+  */
   public final String getElementType()
   {
     return element_type;
   }
 
+  /**
+     Sets the content of the @key-type tag in the doccomment 
+     connected to this attribute.
+     Must be called at most once.
+  */
   public final void setKeyType(String key_type)
   {
     if(this.key_type!=null)
@@ -62,6 +83,10 @@ public final class JavaAttribute extends JavaFeature
     this.key_type=key_type;
   }
   
+  /**
+     Returns the content of the @key-type tag in the doccomment 
+     connected to this attribute.
+  */
   public final String getKeyType()
   {
     return key_type;

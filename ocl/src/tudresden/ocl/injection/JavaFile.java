@@ -47,6 +47,8 @@ public final class JavaFile
   private boolean buildStage=true;
 
   /**
+     Sets the package of this file.
+     Necessary, since the package is not known at construction time.
      @throws InjectorParseException if called more than once.
   */
   public final void setPackage(String packagename)
@@ -60,11 +62,19 @@ public final class JavaFile
     this.packagename=packagename;
   }
   
+  /**
+     Gets the value of the package statement encountered
+     in this java file.
+     Is null, if no package statement found.
+  */
   public final String getPackageName()
   {
     return packagename;
   }
 
+  /**
+     Adds the value of an import statement.
+  */
   public final void addImport(String importname)
   {
     if(!buildStage)
@@ -73,6 +83,12 @@ public final class JavaFile
     imports.add(importname);
   }
 
+  /**
+     Maps type names to types.
+     This mapping depends on the import statements encountered
+     in this java file.
+     Implements Java Language Specification 7.5.3.
+  */
   public final Class findType(String typename)
   {
     //System.out.println("findtype: >"+typename+"<");
@@ -139,6 +155,10 @@ public final class JavaFile
     return null;
   }
     
+  /**
+     Extracts the class name from a fully qualified class name
+     (including package path.)
+  */
   public static String extractClassName(String fullclassname)
   {
     int pos=fullclassname.lastIndexOf('.');
@@ -148,6 +168,10 @@ public final class JavaFile
       return fullclassname;
   }
   
+  /**
+     Extracts the package path (without trailing dot)
+     from a fully qualified class name.
+  */
   public static String extractPackageName(String fullclassname)
   {
     int pos=fullclassname.lastIndexOf('.');

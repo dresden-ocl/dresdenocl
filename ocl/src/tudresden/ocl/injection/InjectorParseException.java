@@ -18,6 +18,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package tudresden.ocl.injection;
 
+/**
+   Thrown by the java parser, if the input stream is not valid 
+   java language. Should never be thrown on java code, which passes
+   javac sucessfully (otherwise it's a bug.)
+   @Injector
+*/
 class InjectorParseException extends Exception
 {
   public InjectorParseException(String message)
