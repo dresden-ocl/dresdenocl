@@ -1,0 +1,8 @@
+./compileAll
+./runinjection
+./compileAll
+diff -c Example.java.injected tudresden/ocl/injection/test/Example.java
+./testinjection
+./cleaninjection
+./compileAll
+diff -c Example.java.original tudresden/ocl/injection/test/Example.java
