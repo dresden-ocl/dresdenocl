@@ -38,32 +38,25 @@ Enhancements by Steffen Zschaler.
   </target>
 
 
-  <target name="sablecc"
-          description="Generates the OCL parser using SableCC."
-          depends="prepare"
-  >
+  <target name="sablecc.checkRequired" depends="prepare">
     <uptodate property="sablecc.notRequired"
               targetfile="${src.dir}/tudresden/ocl/parser/parser/parser.dat" >
       <srcfiles dir="${src.dir}" includes="sablecc.jar"/>
       <srcfiles dir="${src.dir}" includes="ocl.grammar" />
     </uptodate>
-    <antcall target="sablecc-internal" />
   </target>
 
-  <target name="sablecc-internal"
+  <target name="sablecc"
+          description="Generates the OCL parser using SableCC."
+          depends="prepare,sablecc.checkRequired"
           unless="sablecc.notRequired">
-    <java classname="org.sablecc.sablecc.SableCC"
-          taskname="sablecc"
-          fork="yes"
-          failonerror="yes"
-    >
-      <classpath>
-        <pathelement location="${src.dir}/sablecc.jar" />
-      </classpath>
-      <arg value="-d" />
-      <arg value="${src.dir}" />
-      <arg value="${src.dir}/ocl.grammar" />
-    </java>
+    <taskdef name="sablecc"
+             classname="org.sablecc.ant.taskdef.Sablecc"
+             classpath="${src.dir}/sablecc.jar"
+    />
+    <sablecc outputdirectory="${src.dir}" src="${src.dir}">
+      <include name="ocl.grammar" />
+    </sablecc>
   </target>
 
 
