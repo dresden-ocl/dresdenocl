@@ -380,7 +380,7 @@ public class ConstraintEvaluation extends JPanel
     if (source==cParse) {
       doParse();
     } else if (source==cToClipboard) {
-      setClipboard(cInput.getText());
+      setClipboard( cInput.getText() );
     } else if (source==cFromClipboard) {
       String clipboard=getClipboard();
       if (clipboard!=null && clipboard.length()>0) cInput.setText(clipboard);
@@ -441,7 +441,7 @@ public class ConstraintEvaluation extends JPanel
   }
 
   protected void doParse(boolean switchTabs) {
-    String constraint=cInput.getText();
+    String constraint=getEnteredConstraint();
     try {
       synAndSemOK=false;
       tree=OclTree.createTree(
@@ -624,7 +624,7 @@ public class ConstraintEvaluation extends JPanel
   }
 
   protected void updateTokens() {
-    String text=cInput.getText();
+    String text=getEnteredConstraint();
     tudresden.ocl.parser.lexer.Lexer lexer=new tudresden.ocl.parser.lexer.Lexer(
       new PushbackReader( new StringReader(text) )
     );
@@ -725,6 +725,11 @@ public class ConstraintEvaluation extends JPanel
 	  return tree.getConstraintName();
     else
 	  return null;
+  }
+
+  protected String getEnteredConstraint()
+  {
+    return cInput.getText();
   }
 
   public static void main(String[] args) {
