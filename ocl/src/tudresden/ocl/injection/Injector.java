@@ -430,14 +430,14 @@ public final class Injector
     }
     else // it's an attribute
     {
-      JavaAttribute cf=
+      JavaAttribute ja=
         new JavaAttribute(parent, modifiers, featuretype, featurename);
-      parseAttribute(cf, c);
-      return cf;
+      parseAttribute(ja, c);
+      return ja;
     }
   }
 
-  private void parseMethod(JavaBehaviour cf)
+  private void parseMethod(JavaBehaviour jb)
     throws IOException, EndException, InjectorParseException
   {
     char c=readToken();
@@ -447,7 +447,7 @@ public final class Injector
       String parametertype;
       if(c==')')
       {
-        cf.setLastParameterEnd(collector.length());
+        jb.setLastParameterEnd(collector.length());
         break;
       }
       else if(c=='\0')
@@ -457,17 +457,17 @@ public final class Injector
       c=readToken();
       if(c!='\0')
         throw new InjectorParseException("parameter name expected.");
-      cf.addParameter(parametertype, buf.toString());
+      jb.addParameter(parametertype, buf.toString());
       c=readToken();
       if(c==',')
       {
-        cf.setLastParameterStart(collector.length());
+        jb.setLastParameterStart(collector.length());
         c=readToken();
         continue;
       }
       else if(c==')')
       {
-        cf.setLastParameterEnd(collector.length());
+        jb.setLastParameterEnd(collector.length());
         break;
       }
       else
@@ -482,8 +482,8 @@ public final class Injector
       case '{':
         if(collect_when_blocking)
         {
-          cf.setLiteral(getCollector());
-          consumer.onBehaviourHeader(cf);
+          jb.setLiteral(getCollector());
+          consumer.onBehaviourHeader(jb);
         }
         parseBody(false);
         flushOutbuf();
@@ -491,8 +491,8 @@ public final class Injector
       case ';':
         if(collect_when_blocking)
         {
-          cf.setLiteral(getCollector());
-          consumer.onBehaviourHeader(cf);
+          jb.setLiteral(getCollector());
+          consumer.onBehaviourHeader(jb);
         }
         flushOutbuf();
         break ti;
@@ -503,7 +503,7 @@ public final class Injector
           {
             c=readToken();
             if(c=='\0')
-              cf.addThrowable(buf.toString());
+              jb.addThrowable(buf.toString());
             else
               throw new InjectorParseException("class name expected.");
             c=readToken();
@@ -521,11 +521,11 @@ public final class Injector
       getCollector();
     else
     {
-      //cf.print(System.out);
+      //jb.print(System.out);
     }
   }
 
-  private void parseAttribute(JavaAttribute cf, char c)
+  private void parseAttribute(JavaAttribute ja, char c)
     throws IOException, EndException, InjectorParseException
   {
     switch(c)
@@ -548,7 +548,7 @@ public final class Injector
       getCollector();
     else
     {
-      //cf.print(System.out);
+      //ja.print(System.out);
     }
   }
 
@@ -560,11 +560,11 @@ public final class Injector
     String classname=buf.toString();
     //System.out.println("class ("+java.lang.reflect.Modifier.toString(modifiers)+") >"+classname+"<");
 
-    JavaClass cc=
+    JavaClass jc=
       new JavaClass(javafile, parent, modifiers, classname);
     //cc.print(System.out);
 
-    consumer.onClass(cc);
+    consumer.onClass(jc);
     
     if(collect_when_blocking)
       write(getCollector());
@@ -587,7 +587,7 @@ public final class Injector
         scheduleBlock(consumer.onComment(comment));
         break;
       case '\0':
-        consumer.onClassFeature(parseFeature(cc));
+        consumer.onClassFeature(parseFeature(jc));
         scheduleBlock(true);
         break;
       case ';': 
@@ -600,8 +600,8 @@ public final class Injector
       }
     }
     
-    consumer.onClassEnd(cc);
-    return cc;
+    consumer.onClassEnd(jc);
+    return jc;
   }
 
   public void parseFile() throws IOException, InjectorParseException
@@ -663,7 +663,7 @@ public final class Injector
     }
   }
 
-  class EndException extends Exception
+  private class EndException extends Exception
   {
     public EndException()
     {}
