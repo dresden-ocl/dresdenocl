@@ -299,6 +299,9 @@ public abstract class Example implements Runnable
 class SecondExample extends Example{
   int i;
   
+  /**
+     @invariant testingInheritance: self.hallo='prollo'
+  */
   SecondExample()
   {
     super("somename", new Integer(5));

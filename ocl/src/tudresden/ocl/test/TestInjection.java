@@ -34,7 +34,7 @@ public class TestInjection
   private void doTest() 
   {
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
-    tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
+    Invariant.allInvariants=new HashSet();
     
     Person p1=new Person("Person1"); add(p1);
     Person p2=new Person("Person2"); add(p2);

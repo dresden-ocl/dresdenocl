@@ -34,11 +34,14 @@ public final class Invariant implements FeatureListener
     this.name=name;
     this.object=object;
     vacantInvariants.add(this);
-    allInvariants.add(this);
+    
+    // for debugging only
+    if(allInvariants!=null)
+      allInvariants.add(this);
   }
   
   // for debugging only
-  public static final HashSet allInvariants=new HashSet();
+  public static HashSet allInvariants=null;
   
 
   public static final String OBSERVER_SUFFIX="_oclobservinginvariants812374";
@@ -80,21 +83,27 @@ public final class Invariant implements FeatureListener
     {
       //System.out.println("invoking "+name+" on "+object);
       if(method==null)
+      {
         method=object.getClass().getMethod(INVARIANT_METHOD+name, null);
+        method.setAccessible(true);
+      }
       method.invoke(object, null);
     }
     catch(NoSuchMethodException e) 
     {
+      System.out.println("NoSuchMethodException invoking >"+name+"< on >"+object+"<");
       e.printStackTrace();
       throw new RuntimeException(e.toString());
     }
     catch(InvocationTargetException e) 
     {
+      System.out.println("InvocationTargetException invoking >"+name+"< on >"+object+"<");
       e.printStackTrace();
       throw new RuntimeException(e.getTargetException().toString());
     }
     catch(IllegalAccessException e) 
     {
+      System.out.println("IllegalAccessException invoking >"+method+"< on >"+object+"<");
       e.printStackTrace();
       throw new RuntimeException(e.toString());
     }
