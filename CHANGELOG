@@ -8,10 +8,16 @@ Changes that could break older environments
 Other changes
 -------------
 
-* [OCL Editor]   Modified OclToolbar to accept any UI instance. For instances 
-that no special floating code has been implemented for, the toolbar is set to be 
-unfloatable instead of throwing an exception. This should handle issues with 
-L&Fs like Aqua on Apple.
+* [OCL Editor]   Modified OCLEditor: Added two methods getToolbar() and
+                 getSyntaxAssistantToolbar, resp. These allow access to the
+                 toolbars to subclasses of OCLEditor. This was a request from
+                 the ArgoUML team who wanted to make the Toolbars look like
+                 theirs.
+* [OCL Editor]   Modified OclToolbar to accept any UI instance. For instances
+                 that no special floating code has been implemented for, the
+                 toolbar is set to be unfloatable instead of throwing an
+                 exception. This should handle issues with L&Fs like Aqua on
+                 Apple.
 
 Fixed bugs
 ----------
@@ -45,6 +51,8 @@ opensource system.
 * [Java Code Generator]
                  Fixed generation of "->excluding", so that a cast is generated, 
 
+
+
 too.
 
 * [Type Checker] Enhanced DefaultTypeFactory to recognize collection types.
@@ -71,6 +79,8 @@ to sequence types
 
 * [Java Code Generator]
                  Fixed generation of "->excluding", so that a cast is generated, 
+
+
 
 too.
 

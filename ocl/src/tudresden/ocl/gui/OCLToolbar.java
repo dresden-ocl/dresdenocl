@@ -35,7 +35,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /** 
- * A quick bar for the {@link OCLEditor}
+ * The syntax assistant toolbar for the {@link OCLEditor}
  *
  * @author  sz9
  */
@@ -44,7 +44,13 @@ public class OCLToolbar extends JToolBar implements ActionListener {
   /**
    * The frame used for floating the tool bar.
    */
-  private JFrame m_jfFloatFrame;
+  private JFrame m_jfFloatFrame = null;
+  
+  /**
+   * Was this toolbar requested to float? For some UIs it may not float even 
+   * though it was requested to, so we need to make the distinction.
+   */
+  private boolean m_fFloatRequest = false;
 
   /**
    * The OCLEditor for which this is the quick bar.
@@ -53,7 +59,7 @@ public class OCLToolbar extends JToolBar implements ActionListener {
   
   /** Creates new OCLToolbar */
   public OCLToolbar() {
-    super();
+    super ("OCL Syntax Assistant");
     
     initComponents();
   }
@@ -90,6 +96,37 @@ public class OCLToolbar extends JToolBar implements ActionListener {
   }
   
   /**
+   * Set the floating flag to m_fFloatRequest if the UI allows it.
+   */
+  protected void updateFloating() {
+    if (!m_fFloatRequest) {
+      // not floating is always OK
+      super.setFloatable (false);
+    }
+    else {
+      // Floating is only ok if the UI allows it
+      if ((getUI() instanceof javax.swing.plaf.metal.MetalToolBarUI) ||
+          (getUI() instanceof javax.swing.plaf.basic.BasicToolBarUI)) {
+        super.setFloatable (true);
+      }
+      else {
+        super.setFloatable (false);
+      }
+    }
+  }
+  
+  /**
+   * Overridden to allow correct handling of float frames.
+   */
+  public void setFloatable (boolean fFloatRequest) {
+    if (m_fFloatRequest != fFloatRequest) {
+      m_fFloatRequest = fFloatRequest;
+      
+      updateFloating();
+    }
+  }
+  
+  /**
    * Overridden to allow access to the free float frame.
    */
   public void setUI (javax.swing.plaf.ToolBarUI tbui) {
@@ -99,7 +136,6 @@ public class OCLToolbar extends JToolBar implements ActionListener {
           if (jtb == OCLToolbar.this) {
             if (m_jfFloatFrame == null) {
               m_jfFloatFrame = super.createFloatingFrame (jtb);
-              m_jfFloatFrame.setTitle ("Syntax Assistant");
             }
             
             return m_jfFloatFrame;
@@ -109,9 +145,6 @@ public class OCLToolbar extends JToolBar implements ActionListener {
           }
         }
       });
-      
-      // for this UI we know how to float
-      setFloatable (true);
     }
     else if (tbui instanceof javax.swing.plaf.basic.BasicToolBarUI) {
       super.setUI (new javax.swing.plaf.basic.BasicToolBarUI() {
@@ -119,7 +152,6 @@ public class OCLToolbar extends JToolBar implements ActionListener {
           if (jtb == OCLToolbar.this) {
             if (m_jfFloatFrame == null) {
               m_jfFloatFrame = super.createFloatingFrame (jtb);
-              m_jfFloatFrame.setTitle ("Syntax Assistant");
             }
             
             return m_jfFloatFrame;
@@ -129,21 +161,20 @@ public class OCLToolbar extends JToolBar implements ActionListener {
           }
         }
       });
-      
-      // for this UI we know how to float
-      setFloatable (true);
     }
     else {
       //throw new IllegalArgumentException ("L&F not valid with OCLToolbar: " + tbui);
       // throwing an exception is not a good idea here, instead just go with the
       // UI given and set the toolbar to be unfloatable
       super.setUI (tbui);
-      setFloatable (false);
     }
+    
+    // Make sure the toolbar is floatable in the right situation.
+    updateFloating();
   }
   
   private void initComponents() {
-    //setFloatable (true); now handled by setUI!
+    setFloatable (true);
     
     JComboBox jcb = new JComboBox (new ActionItem[] {
       new ActionItem ("General", -1),
