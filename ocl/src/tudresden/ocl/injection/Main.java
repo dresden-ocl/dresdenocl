@@ -217,9 +217,7 @@ final class OclInjector implements InjectionConsumer
     o.write("\n  */private boolean ");
     o.write(CHECKING_FLAG);
     o.write("=false;");
-    o.write("/**\n    A method for checking ocl invariants.\n    Generated automatically on ");
-    o.write((new Date()).toString());
-    o.write(", DO NOT CHANGE!\n    @author ");
+    o.write("/**\n    A method for checking ocl invariants.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n  */private final void ");
     o.write(INV_METHOD);
