@@ -343,11 +343,44 @@ public abstract class Example[onClass(Example)] implements Runnable
 
 	[onDocComment]/**
 		Tests null collections to be treated as empty collections.
-		@invariant nullCollection: nullCollection->size=0
+		@element-type String
 	*/[/onDocComment]
-	[onAttributeHeader]HashSet nullCollection=null;[onClassFeature(nullCollection){/**
+	[onAttributeHeader]Collection nullCollection=null;[onClassFeature(nullCollection){/**
 		Tests null collections to be treated as empty collections.
-		@invariant nullCollection: nullCollection->size=0
+		@element-type String
+	*/}]
+
+	[onDocComment]/**
+		Tests null sets to be treated as empty sets.
+		@invariant nullSet: nullSet->size=0
+		@element-type String
+	*/[/onDocComment]
+	[onAttributeHeader]Set nullSet=null;[onClassFeature(nullSet){/**
+		Tests null sets to be treated as empty sets.
+		@invariant nullSet: nullSet->size=0
+		@element-type String
+	*/}]
+
+	[onDocComment]/**
+		Tests null lists to be treated as empty lists.
+		@invariant nullList: nullList->size=0
+		@element-type String
+	*/[/onDocComment]
+	[onAttributeHeader]List nullList=null;[onClassFeature(nullList){/**
+		Tests null lists to be treated as empty lists.
+		@invariant nullList: nullList->size=0
+		@element-type String
+	*/}]
+
+	[onDocComment]/**
+		Tests null maps to be treated as empty maps.
+		@element-type String
+		@key-type String
+	*/[/onDocComment]
+	[onAttributeHeader]Map nullMap=null;[onClassFeature(nullMap){/**
+		Tests null maps to be treated as empty maps.
+		@element-type String
+		@key-type String
 	*/}]
 
 	[onBehaviourHeader]static public void main(String[] args)

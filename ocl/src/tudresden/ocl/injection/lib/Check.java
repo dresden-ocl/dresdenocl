@@ -30,25 +30,34 @@ public class Check
   
   public static final boolean checkElementTypes(Collection c, Class elementtype)
   {
-    for(Iterator i=c.iterator(); i.hasNext(); )
-      if(!elementtype.isAssignableFrom(i.next().getClass()))
-        return false;
+    if(c!=null)
+    {
+      for(Iterator i=c.iterator(); i.hasNext(); )
+        if(!elementtype.isAssignableFrom(i.next().getClass()))
+          return false;
+    }
     return true;
   }
 
   public static final boolean checkElementTypes(Map m, Class elementtype)
   {
-    for(Iterator i=m.values().iterator(); i.hasNext(); )
-      if(!elementtype.isAssignableFrom(i.next().getClass()))
-        return false;
+    if(m!=null)
+    {
+      for(Iterator i=m.values().iterator(); i.hasNext(); )
+        if(!elementtype.isAssignableFrom(i.next().getClass()))
+          return false;
+    }
     return true;
   }
   
   public static final boolean checkKeyTypes(Map m, Class keytype)
   {
-    for(Iterator i=m.keySet().iterator(); i.hasNext(); )
-      if(!keytype.isAssignableFrom(i.next().getClass()))
-        return false;
+    if(m!=null)
+    {
+      for(Iterator i=m.keySet().iterator(); i.hasNext(); )
+        if(!keytype.isAssignableFrom(i.next().getClass()))
+          return false;
+    }
     return true;
   }
   

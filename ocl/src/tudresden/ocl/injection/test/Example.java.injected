@@ -383,9 +383,30 @@ tudresden.ocl.injection.ocl.lib.Invariant.notifyObservingInvariants(someInnerBoo
 
 	/**
 		Tests null collections to be treated as empty collections.
-		@invariant nullCollection: nullCollection->size=0
+		@element-type String
 	*/
-	HashSet nullCollection=null;
+	Collection nullCollection=null;
+
+	/**
+		Tests null sets to be treated as empty sets.
+		@invariant nullSet: nullSet->size=0
+		@element-type String
+	*/
+	Set nullSet=null;
+
+	/**
+		Tests null lists to be treated as empty lists.
+		@invariant nullList: nullList->size=0
+		@element-type String
+	*/
+	List nullList=null;
+
+	/**
+		Tests null maps to be treated as empty maps.
+		@element-type String
+		@key-type String
+	*/
+	Map nullMap=null;
 
 	static public void main(String[] args)
   {
@@ -1072,6 +1093,30 @@ Contains observers for modifications of this feature. Generated automatically, D
 @author ocl_injector
 @see #nullCollection
 */public final java.util.HashSet nullCollection_oclobservinginvariants812374=new java.util.HashSet();/**
+A backup for detecting modifications. Generated automatically, DO NOT CHANGE!
+@author ocl_injector
+@see #nullSet
+*/private int nullSet_oclbackup812374=0;/**
+Contains observers for modifications of this feature. Generated automatically, DO NOT CHANGE!
+@author ocl_injector
+@see #nullSet
+*/public final java.util.HashSet nullSet_oclobservinginvariants812374=new java.util.HashSet();/**
+A backup for detecting modifications. Generated automatically, DO NOT CHANGE!
+@author ocl_injector
+@see #nullList
+*/private int nullList_oclbackup812374=0;/**
+Contains observers for modifications of this feature. Generated automatically, DO NOT CHANGE!
+@author ocl_injector
+@see #nullList
+*/public final java.util.HashSet nullList_oclobservinginvariants812374=new java.util.HashSet();/**
+A backup for detecting modifications. Generated automatically, DO NOT CHANGE!
+@author ocl_injector
+@see #nullMap
+*/private int nullMap_oclbackup812374=0;/**
+Contains observers for modifications of this feature. Generated automatically, DO NOT CHANGE!
+@author ocl_injector
+@see #nullMap
+*/public final java.util.HashSet nullMap_oclobservinginvariants812374=new java.util.HashSet();/**
 Checks object features, whether they have changed. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
 */private void checkForChangedFeatures(){
@@ -1200,8 +1245,25 @@ if(nullString!=nullString_oclbackup812374){nullString_oclbackup812374=nullString
 tudresden.ocl.injection.ocl.lib.Invariant.notifyObservingInvariants(nullString_oclobservinginvariants812374);
 }
 if(tudresden.ocl.injection.lib.HashExact.identityHashCode(nullCollection)!=nullCollection_oclbackup812374){nullCollection_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(nullCollection);
+if(!tudresden.ocl.injection.lib.Check.checkElementTypes(nullCollection,String.class)) System.out.println("element type checker failed at feature 'nullCollection' of object "+this+".");
 tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#nullCollection",nullCollection);
 tudresden.ocl.injection.ocl.lib.Invariant.notifyObservingInvariants(nullCollection_oclobservinginvariants812374);
+}
+if(tudresden.ocl.injection.lib.HashExact.identityHashCode(nullSet)!=nullSet_oclbackup812374){nullSet_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(nullSet);
+if(!tudresden.ocl.injection.lib.Check.checkElementTypes(nullSet,String.class)) System.out.println("element type checker failed at feature 'nullSet' of object "+this+".");
+tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#nullSet",nullSet);
+tudresden.ocl.injection.ocl.lib.Invariant.notifyObservingInvariants(nullSet_oclobservinginvariants812374);
+}
+if(tudresden.ocl.injection.lib.HashExact.identityHashCode(nullList)!=nullList_oclbackup812374){nullList_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(nullList);
+if(!tudresden.ocl.injection.lib.Check.checkElementTypes(nullList,String.class)) System.out.println("element type checker failed at feature 'nullList' of object "+this+".");
+tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#nullList",nullList);
+tudresden.ocl.injection.ocl.lib.Invariant.notifyObservingInvariants(nullList_oclobservinginvariants812374);
+}
+if(tudresden.ocl.injection.lib.HashExact.identityHashCode(nullMap)!=nullMap_oclbackup812374){nullMap_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(nullMap);
+if(!tudresden.ocl.injection.lib.Check.checkElementTypes(nullMap,String.class)) System.out.println("element type checker failed at feature 'nullMap' of object "+this+".");
+if(!tudresden.ocl.injection.lib.Check.checkKeyTypes(nullMap,String.class)) System.out.println("key type checker failed at feature 'nullMap' of object "+this+".");
+tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#nullMap",nullMap);
+tudresden.ocl.injection.ocl.lib.Invariant.notifyObservingInvariants(nullMap_oclobservinginvariants812374);
 }
 }/**
 An object representing ocl invariant hallo on this object. Generated automatically, DO NOT CHANGE!
@@ -1433,20 +1495,35 @@ final tudresden.ocl.lib.OclBoolean tudOclNode99=tudOclNode97.isEqualTo(tudOclNod
 tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
 if(!tudOclNode99.isTrue())System.out.println("violated ocl invariant 'nullString' on object '"+this+"'.");
 }/**
-An object representing ocl invariant nullCollection on this object. Generated automatically, DO NOT CHANGE!
+An object representing ocl invariant nullSet on this object. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
-*/private final tudresden.ocl.injection.ocl.lib.Invariant zzzCheckOclInvariantObject812374_nullCollection=new tudresden.ocl.injection.ocl.lib.Invariant("nullCollection", this);/**
-Checks ocl invariant nullCollection on this object. Generated automatically, DO NOT CHANGE!
+*/private final tudresden.ocl.injection.ocl.lib.Invariant zzzCheckOclInvariantObject812374_nullSet=new tudresden.ocl.injection.ocl.lib.Invariant("nullSet", this);/**
+Checks ocl invariant nullSet on this object. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
-*/public final void zzzCheckOclInvariantMethod812374_nullCollection(){
-tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_nullCollection);
+*/public final void zzzCheckOclInvariantMethod812374_nullSet(){
+tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_nullSet);
 final tudresden.ocl.lib.OclAnyImpl tudOclNode100=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-final tudresden.ocl.lib.OclSet tudOclNode101=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode100.getFeature("nullCollection"));
+final tudresden.ocl.lib.OclSet tudOclNode101=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode100.getFeature("nullSet"));
 final tudresden.ocl.lib.OclInteger tudOclNode102=tudOclNode101.size();
 final tudresden.ocl.lib.OclInteger tudOclNode103=new tudresden.ocl.lib.OclInteger(0);
 final tudresden.ocl.lib.OclBoolean tudOclNode104=tudOclNode102.isEqualTo(tudOclNode103);
 tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
-if(!tudOclNode104.isTrue())System.out.println("violated ocl invariant 'nullCollection' on object '"+this+"'.");
+if(!tudOclNode104.isTrue())System.out.println("violated ocl invariant 'nullSet' on object '"+this+"'.");
+}/**
+An object representing ocl invariant nullList on this object. Generated automatically, DO NOT CHANGE!
+@author ocl_injector
+*/private final tudresden.ocl.injection.ocl.lib.Invariant zzzCheckOclInvariantObject812374_nullList=new tudresden.ocl.injection.ocl.lib.Invariant("nullList", this);/**
+Checks ocl invariant nullList on this object. Generated automatically, DO NOT CHANGE!
+@author ocl_injector
+*/public final void zzzCheckOclInvariantMethod812374_nullList(){
+tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_nullList);
+final tudresden.ocl.lib.OclAnyImpl tudOclNode105=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+final tudresden.ocl.lib.OclSequence tudOclNode106=tudresden.ocl.lib.Ocl.toOclSequence(tudOclNode105.getFeature("nullList"));
+final tudresden.ocl.lib.OclInteger tudOclNode107=tudOclNode106.size();
+final tudresden.ocl.lib.OclInteger tudOclNode108=new tudresden.ocl.lib.OclInteger(0);
+final tudresden.ocl.lib.OclBoolean tudOclNode109=tudOclNode107.isEqualTo(tudOclNode108);
+tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
+if(!tudOclNode109.isTrue())System.out.println("violated ocl invariant 'nullList' on object '"+this+"'.");
 }}
 
 class SecondExample extends Example{
@@ -1574,12 +1651,12 @@ Checks ocl invariant testingInheritance on this object. Generated automatically,
 @author ocl_injector
 */public final void zzzCheckOclInvariantMethod812374_testingInheritance(){
 tudresden.ocl.lib.OclAnyImpl.setFeatureListener(zzzCheckOclInvariantObject812374_testingInheritance);
-final tudresden.ocl.lib.OclAnyImpl tudOclNode105=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-final tudresden.ocl.lib.OclString tudOclNode106=tudresden.ocl.lib.Ocl.toOclString(tudOclNode105.getFeature("hallo"));
-final tudresden.ocl.lib.OclString tudOclNode107=new tudresden.ocl.lib.OclString("prollo");
-final tudresden.ocl.lib.OclBoolean tudOclNode108=tudOclNode106.isEqualTo(tudOclNode107);
+final tudresden.ocl.lib.OclAnyImpl tudOclNode110=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+final tudresden.ocl.lib.OclString tudOclNode111=tudresden.ocl.lib.Ocl.toOclString(tudOclNode110.getFeature("hallo"));
+final tudresden.ocl.lib.OclString tudOclNode112=new tudresden.ocl.lib.OclString("prollo");
+final tudresden.ocl.lib.OclBoolean tudOclNode113=tudOclNode111.isEqualTo(tudOclNode112);
 tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();
-if(!tudOclNode108.isTrue())System.out.println("violated ocl invariant 'testingInheritance' on object '"+this+"'.");
+if(!tudOclNode113.isTrue())System.out.println("violated ocl invariant 'testingInheritance' on object '"+this+"'.");
 }}
 
 class ThirdExample extends SecondExample

@@ -303,9 +303,30 @@ public abstract class Example implements Runnable
 
 	/**
 		Tests null collections to be treated as empty collections.
-		@invariant nullCollection: nullCollection->size=0
+		@element-type String
 	*/
-	HashSet nullCollection=null;
+	Collection nullCollection=null;
+
+	/**
+		Tests null sets to be treated as empty sets.
+		@invariant nullSet: nullSet->size=0
+		@element-type String
+	*/
+	Set nullSet=null;
+
+	/**
+		Tests null lists to be treated as empty lists.
+		@invariant nullList: nullList->size=0
+		@element-type String
+	*/
+	List nullList=null;
+
+	/**
+		Tests null maps to be treated as empty maps.
+		@element-type String
+		@key-type String
+	*/
+	Map nullMap=null;
 
 	static public void main(String[] args)
   {
