@@ -32,33 +32,42 @@
 
 package tudresden.ocl.check.types;
 
-public class DefaultReflectionAdapter implements ReflectionAdapter {
+public class DefaultReflectionAdapter implements ReflectionAdapter 
+{
 
-  public Type getTypeForClass(Class c) {
-    if (c==String.class) {
-      return tudresden.ocl.check.types.Basic.STRING;
-    } else if (c==Integer.class || c==Integer.TYPE) {
-      return tudresden.ocl.check.types.Basic.INTEGER;
-    } else if (c==Float.class || c==Float.TYPE || c==Double.class || c==Double.TYPE) {
-      return tudresden.ocl.check.types.Basic.REAL;
-    } else if (c==Boolean.class || c==Boolean.TYPE) {
-      return tudresden.ocl.check.types.Basic.BOOLEAN;
-    } else if(java.util.Collection.class.isAssignableFrom(c)||
-              java.util.Map.class.isAssignableFrom(c)) 
+  public Type getTypeForClass(Class c) 
+  {
+    if(c==String.class)
+      return Basic.STRING;
+    else if(c==Integer.class || c==Integer.TYPE)
+      return Basic.INTEGER;
+    else if(c==Float.class  || c==Float.TYPE || 
+            c==Double.class || c==Double.TYPE)
+      return Basic.REAL;
+    else if(c==Boolean.class || c==Boolean.TYPE)
+      return Basic.BOOLEAN;
+    else if(java.util.Collection.class.isAssignableFrom(c)) 
     {
       int collectionKind;
       if(java.util.Set.class.isAssignableFrom(c) || 
-         java.util.Map.class.isAssignableFrom(c) || 
          (tudresden.ocl.lib.Ocl.TAKE_VECTORS_AS_SET && java.util.Vector.class.isAssignableFrom(c)))
-        collectionKind=tudresden.ocl.check.types.Collection.SET;
+        collectionKind=Collection.SET;
       else if(java.util.List.class.isAssignableFrom(c))
-        collectionKind=tudresden.ocl.check.types.Collection.SEQUENCE;
+        collectionKind=Collection.SEQUENCE;
       else
         throw new RuntimeException("encountered a java.util.Collection, which is neither Set or List.");
 
-      return new tudresden.ocl.check.types.Collection(collectionKind, null);
-    }
-    return null;
+      return new Collection(collectionKind, null);
+    } 
+    else if(java.util.Map.class.isAssignableFrom(c)) 
+      return new Collection(Collection.SET, null);
+    else  
+      return null;
+  }
+  
+  public boolean isMap(Class c)
+  {
+    return java.util.Map.class.isAssignableFrom(c);
   }
 
   public String toString()

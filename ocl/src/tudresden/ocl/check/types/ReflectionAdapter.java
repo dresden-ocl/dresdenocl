@@ -61,4 +61,10 @@ public interface ReflectionAdapter {
    */
   public Type getTypeForClass(Class c);
 
+  /**
+     Determines, whether the given class is a map.
+     Maps may have a @key-type tag.
+  */
+  public boolean isMap(Class c);
+
 }

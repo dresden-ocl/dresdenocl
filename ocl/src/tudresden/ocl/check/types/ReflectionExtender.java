@@ -19,19 +19,30 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.check.types;
 
 /** 
-   Abstracts an extension of the ReflectionFacade, which makes the element types
-   of container attributes available. This information is not available 
-   through reflection.
+   Abstracts an extension of the ReflectionFacade.
+   Makes additional type information available,
+   which cannot be obtained from the reflection api.
 */
 public interface ReflectionExtender 
 {
   /**
      Returns the element type of the given class attribute.
-     Makes sense for container attributes only, such as java.util.Collections.
+     Makes sense for container attributes only, 
+     such as java.util.Collections.
      The implementer should search for additional information,
      which is not available through the reflection api.
      Returns null, if no additional information is available.
   */
   public Class getElementType(java.lang.reflect.Field f);
+
+  /**
+     Returns the key type of the given class attribute.
+     Makes sense for qualified container attributes only, 
+     such as java.util.Map.
+     The implementer should search for additional information,
+     which is not available through the reflection api.
+     Returns null, if no additional information is available.
+  */
+  public Class getKeyType(java.lang.reflect.Field f);
 
 }

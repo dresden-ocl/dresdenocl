@@ -25,9 +25,17 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
 {
   /**
      Maps from java.lang.reflect.Field to java.lang.Class.
-     This is the cache for the extender query.
+     This is the cache for getElementType.
+     @see #getElementType
   */
   private HashMap elementtypes=new HashMap();
+  
+  /**
+     Maps from java.lang.reflect.Field to java.lang.Class.
+     This is the cache for getKeyType.
+     @see #getKeyType
+  */
+  private HashMap keytypes=new HashMap();
   
   /**
      Contains all classes, for which the source code has been attempted to parse.
@@ -41,12 +49,26 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     Class result=(Class)elementtypes.get(field);
     if(result!=null)
       return result;
+    checkField(field);
+    return (Class)elementtypes.get(field);
+  }
     
+  public Class getKeyType(Field field)
+  {
+    Class result=(Class)keytypes.get(field);
+    if(result!=null)
+      return result;
+    checkField(field);
+    return (Class)keytypes.get(field);
+  }
+    
+  private void checkField(Field field)
+  {
     final Class fieldclass=field.getDeclaringClass();
     if(parsedclasses.contains(fieldclass))
-      return null;
+      return;
 
-    //System.out.println("getElementType(): "+field);
+    //System.out.println("checkField("+field+"):");
 
     Class declaringclass=fieldclass;
     while(fieldclass.getDeclaringClass()!=null)
@@ -57,7 +79,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     if(inputstream==null)
     {
       System.out.println("SourceReflectionExtender: source file for "+declaringclass.getName()+" not found.");
-      return null;
+      return;
     }
     
     try
@@ -73,13 +95,10 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       {
         reader.close();
         System.out.println(e);
-        return null;
+        return;
       }
     }
-    catch(java.io.IOException e) { System.out.println(e); return null; }
-    
-
-    return (Class)elementtypes.get(field);
+    catch(java.io.IOException e) { System.out.println(e); return; }
   }
 
   public String toString()
@@ -145,6 +164,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     }
   
     private String last_element_type=null;
+    private String last_key_type=null;
 
     public void onMethodHeader(ClassMethod cf)
     {
@@ -152,32 +172,63 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     
     public void onClassFeature(ClassFeature cf) throws java.io.IOException
     {
-      if(cf instanceof ClassAttribute && last_element_type!=null)
+      if(cf instanceof ClassAttribute)
       {
-        Class c=imports.findType(last_element_type);
-        //System.out.println("findType:"+c);
-        if(c!=null)
+        if(last_element_type!=null)
         {
-          try
+          Class c=imports.findType(last_element_type);
+          //System.out.println("findType(element):"+c);
+          if(c!=null)
           {
-            //System.out.println("getField: >"+classobject+"< >"+cf.getName()+"<");
-            Field f=current_classobject.getDeclaredField(cf.getName());
-            elementtypes.put(f,c);
-            //System.out.println("SourceReflectionFacade: put("+f+","+c+")");
-            if(!java.util.Collection.class.isAssignableFrom(f.getType()) &&
-               !java.util.Map.class.isAssignableFrom(f.getType()) )
-              System.out.println("warning: field "+f+" of element-type "+c+" is not a collection/map.");
+            try
+            {
+              //System.out.println("getField: >"+classobject+"< >"+cf.getName()+"<");
+              Field f=current_classobject.getDeclaredField(cf.getName());
+              elementtypes.put(f,c);
+              //System.out.println("SourceReflectionFacade: elementtypes.put("+f+","+c+")");
+              if(!java.util.Collection.class.isAssignableFrom(f.getType()) &&
+                 !java.util.Map.class.isAssignableFrom(f.getType()) )
+                System.out.println("warning: field "+f+" of element-type "+c+" is not a collection/map.");
+            }
+            catch(NoSuchFieldException e) 
+            { 
+              throw new RuntimeException(e.toString()); 
+            }
           }
-          catch(NoSuchFieldException e) { throw new RuntimeException(e.toString()); }
+        }
+        if(last_key_type!=null)
+        {
+          Class c=imports.findType(last_key_type);
+          //System.out.println("findType(key):"+c);
+          if(c!=null)
+          {
+            try
+            {
+              //System.out.println("getField: >"+classobject+"< >"+cf.getName()+"<");
+              Field f=current_classobject.getDeclaredField(cf.getName());
+              keytypes.put(f,c);
+              //System.out.println("SourceReflectionFacade: keytypes.put("+f+","+c+")");
+              if(!java.util.Map.class.isAssignableFrom(f.getType()) )
+                System.out.println("warning: field "+f+" of key-type "+c+" is not a map.");
+            }
+            catch(NoSuchFieldException e) 
+            { 
+              throw new RuntimeException(e.toString()); 
+            }
+          }
         }
       }
       last_element_type=null;
+      last_key_type=null;
     }
   
     public boolean onComment(String comment)
     {
       if(comment.startsWith("/**"))
+      {
         last_element_type=Injector.findDocTag(comment, "element-type");
+        last_key_type=Injector.findDocTag(comment, "key-type");
+      }
       return true;
     }
   

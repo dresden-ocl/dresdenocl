@@ -18,9 +18,17 @@ public class ClassAny implements Any {
     this.rf=rf;
   }
 
-  public Type navigateQualified(String name, Type[] qualifiers) throws OclTypeException {
-    if (qualifiers!=null && qualifiers.length!=0) {
-      throw new OclTypeException("ReflectionFacade cannot handle qualifiers");
+  public Type navigateQualified(String name, Type[] qualifiers) 
+    throws OclTypeException 
+  {
+    Type theQualifier=null;
+    
+    if(qualifiers!=null)
+    {
+      if(qualifiers.length==1) 
+        theQualifier=qualifiers[0];
+      else
+        throw new OclTypeException("ReflectionFacade can handle one qualifier only");
     }
     Type ret=Basic.navigateAnyQualified(name, this, qualifiers);
     if (ret!=null) return ret;
@@ -43,15 +51,61 @@ public class ClassAny implements Any {
     }
     Class type=f.getType();
     Type modeltype=getTypeForClass(type);
-    if(modeltype instanceof Collection && rf.extender!=null)
+    
+    if(modeltype instanceof Collection)
     {
       Class elementtype=rf.extender.getElementType(f);
-      if(elementtype!=null)
-      modeltype=new Collection(
-      ((Collection)modeltype).getCollectionKind(),
-      getTypeForClass(elementtype));
+
+      if(rf.reflAdapter.isMap(type))
+      {
+        if(theQualifier==null)
+        {
+          if(elementtype!=null)
+            return new Collection(
+              ((Collection)modeltype).getCollectionKind(),
+              getTypeForClass(elementtype));
+          else
+            return modeltype;
+        }
+        else
+        {
+          Class keytype_class=rf.extender.getKeyType(f);
+          Type keytype=null;
+          if(keytype_class!=null)
+            keytype=getTypeForClass(keytype_class);
+          
+          if(keytype!=null)
+          {
+            if(!theQualifier.equals(keytype))
+              throw new OclTypeException("feature "+name+" in classifier "+c+": expected qualifier type "+keytype+" found "+theQualifier+".");
+            if(elementtype!=null)
+              return getTypeForClass(elementtype);
+            else
+              throw new OclTypeException("feature "+name+"["+keytype+"] in classifier "+c+" has no @element-type tag.");
+          }
+          else
+            throw new OclTypeException("feature "+name+" in classifier "+c+": qualified with type "+theQualifier+", but feature has no @keytype tag.");
+        }
+      }
+      else
+      {
+        if(theQualifier!=null)
+          throw new OclTypeException("feature "+name+" in classifier "+c+" cannot be qualified.");
+
+        if(elementtype!=null)
+          return new Collection(
+            ((Collection)modeltype).getCollectionKind(),
+            getTypeForClass(elementtype));
+        else
+          return modeltype;
+      }
     }
-    return modeltype;
+    else
+    {
+      if(theQualifier!=null)
+        throw new OclTypeException("feature "+name+" in classifier "+c+" cannot be qualified.");
+      return modeltype;
+    }
   }
 
   public Type navigateParameterized(String name, Type[] params) throws OclTypeException 

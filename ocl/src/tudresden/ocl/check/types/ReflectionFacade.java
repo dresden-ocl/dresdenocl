@@ -72,6 +72,9 @@ import tudresden.ocl.lib.NameAdapter;
  *  <p>As the result of these restrictions, the class <code>ReflectionFacade</code> can
  *  only be used if all iterators and their types are declared explicitly.
  *  Additional problems might arise from security restrictions.
+ * 
+ *  Additionally, ReflectionFacade provides a default implementation
+ *  for ReflectionExtender, which simply does nothing.
  *
  *  @see ClassAny#navigateParameterized(String name, Type[] params)
  *  @see ReflectionAdapter
@@ -79,7 +82,8 @@ import tudresden.ocl.lib.NameAdapter;
  *  @author Frank Finger
  *
  */
-public class ReflectionFacade implements ModelFacade {
+public class ReflectionFacade implements ModelFacade, ReflectionExtender
+{
 
   String[] packageNames;
   NameAdapter nameAdapter;
@@ -114,7 +118,10 @@ public class ReflectionFacade implements ModelFacade {
     this.packageNames=packageNames;
     this.reflAdapter=reflAdapter;
     this.nameAdapter=nameAdapter;
-    this.extender=extender;
+
+    // uses the default ReflectionExtender provided by ReflectionFacade
+    // if no extender is provided by the user.
+    this.extender= extender!=null ? extender : this;
   }
 
   public ReflectionFacade(String[] packageNames, ReflectionAdapter reflAdapter, NameAdapter nameAdapter) 
@@ -192,4 +199,20 @@ public class ReflectionFacade implements ModelFacade {
     return buf.toString();
   }
 
+  /**
+     Default implementation. Returns null.
+  */
+  public Class getElementType(Field f) 
+  {
+    return null;
+  }
+
+  /**
+     Default implementation. Returns null.
+  */
+  public Class getKeyType(Field f) 
+  {
+    return null;
+  }
+  
 }
