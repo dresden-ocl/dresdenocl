@@ -17,14 +17,9 @@ public class Service extends RLObject {
   public String description;
 
   // Associations
-  /**
- *
- */
-    public ProgramPartner myProgramPartner;
-  /**
- *
- */
-    public ServiceLevel myServiceLevel;
+  public ProgramPartner programPartner;
+
+  public ServiceLevel serviceLevel;
 
   /**
      @element-type Transaction

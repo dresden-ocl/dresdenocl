@@ -26,7 +26,7 @@ public class CustomerCard extends RLObject {
 
   public Customer owner;
 
-  public Membership myMembership;
+  public Membership membership;
 
   public Vector  transactions=new Vector();
 

@@ -13,23 +13,17 @@ public class Transaction extends RLObject {
   public Date date;
 
   // Associations
-  /**
- *
- */
-    public CustomerCard card;
-  /**
- *
- */
-    public Service myService;
-  /**
- *
- */
-    public LoyaltyAccount myLoyaltyAccount;
+  
+  public CustomerCard card;
+  
+  public Service service;
+
+  public LoyaltyAccount loyaltyAccount;
 
   // Operations
 
   public LoyaltyProgram program() {
-    LoyaltyProgram ret=myLoyaltyAccount.myMembership.program;
+    LoyaltyProgram ret=loyaltyAccount.membership.program;
 
     // post: result=self.card.membership.program
     OclRoot result=Ocl.getFor(ret);

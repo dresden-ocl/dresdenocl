@@ -9,26 +9,15 @@ public class Membership extends RLObject {
   // Attributes
 
   // Associations
-  /**
- *
- */
-    public ServiceLevel actualLevel;
-  /**
- *
- */
-    public CustomerCard card;
-  /**
- *
- */
-    public LoyaltyAccount myLoyaltyAccount;
-  /**
- *
- */
-    public LoyaltyProgram program;
-  /**
- *
- */
-    public Customer myCustomer;
+  public ServiceLevel actualLevel;
+  
+  public CustomerCard card;
+  
+  public LoyaltyAccount loyaltyAccount;
+  
+  public LoyaltyProgram program;
+
+  public Customer customer;
 
   // Operations
   public boolean assert() {

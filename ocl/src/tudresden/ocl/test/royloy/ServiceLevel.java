@@ -10,18 +10,14 @@ public class ServiceLevel extends RLObject {
   public String name;
 
   // Associations
+  public LoyaltyProgram loyaltyProgram;
+
   /**
- *
- */
-    public LoyaltyProgram myLoyaltyProgram;
-  /**
- * @element-type Membership
- */
-    public Vector  myMembership=new Vector();
-  /**
- *
- */
-    public Service myService;
+     @element-type Membership
+  */
+  public Vector  membership=new Vector();
+
+  public Service service;
 
   // Operations
   public boolean assert() {

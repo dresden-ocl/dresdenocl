@@ -9,11 +9,11 @@ public class LoyaltyProgram extends RLObject {
   /**
      @element-type Customer
   */
-  public Vector  myCustomer=new Vector();
+  public Vector  customer=new Vector();
 
-    public Vector  myServiceLevel=new Vector();
+  public Vector  serviceLevel=new Vector();
 
-    public Vector  myMembership=new Vector();
+  public Vector  membership=new Vector();
 
   public HashSet partners=new HashSet();
 

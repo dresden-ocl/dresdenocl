@@ -9,14 +9,9 @@ public class LoyaltyAccount extends RLObject {
   public int points;
 
   // Associations
-  /**
- *
- */
-    public Membership myMembership;
-  /**
- *
- */
-    public Vector  transactions=new Vector();
+  public Membership membership;
+
+  public Vector  transactions=new Vector();
 
   // Operations
   public void earn(int i) {

@@ -23,7 +23,7 @@ public class Customer extends RLObject {
   */
   public Vector  cards=new Vector();
 
-    public Vector  myMembership=new Vector();
+  public Vector  membership=new Vector();
     
   public Customer(String name, boolean isMale)
   {

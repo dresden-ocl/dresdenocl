@@ -8,7 +8,7 @@ public class ProgramPartner extends RLObject {
 
   public int numberOfCustomers;
 
-    public Vector  myLoyaltyProgram=new Vector();
+  public Vector  loyaltyProgram=new Vector();
 
   /**
      @element-type Service
