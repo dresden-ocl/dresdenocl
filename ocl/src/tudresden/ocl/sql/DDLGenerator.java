@@ -90,8 +90,10 @@ class DDLGenerator {
     	dest = arg[1];
     } else {
     	// use default files for debbuging run
-    	src = DDLGenerator.class.getResource("royloy.xmi").toString();
+    	src = DDLGenerator.class.getResource("test_diagramm_argo07.xmi").toString();
     	dest = "sql.ddl";
+
+        System.err.println("Source file is: " + src);
     }
 
     System.err.println("DDL Generator running ...");

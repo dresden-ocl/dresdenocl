@@ -58,8 +58,9 @@ public interface ORMapping {
   
   /** 
    * @param classifier a classifier
-   * @return a Map that contains guides to all association ends starting from the classifier
+   * @param assEnd the nmae of the association end
+   * @return a List that contains guides to to the specified association end from the classifier
    * @see tudresden.ocl.codegen.decl.Guide
    */
-  public Map guidesToAssociationEnds(String classifier);
+  public List guidesToAssociationEnds(String classifier, String assEnd);
 }
