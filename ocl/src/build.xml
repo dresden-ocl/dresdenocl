@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.17 2001/08/08 01:25:25 rw7 Exp $
+$Id: build.xml,v 1.18 2001/08/11 10:06:17 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -434,6 +434,8 @@ New version by Ralf Wiebicke.
              tudresden.ocl.codegen.decl,
              tudresden.ocl.injection,
              tudresden.ocl.injection.lib,
+             tudresden.ocl.injection.ocl,
+             tudresden.ocl.injection.ocl.lib,
              tudresden.ocl.injection.test,
              tudresden.ocl.injection.reverseeng,
              tudresden.ocl.injection.reverseeng.propertypages,
