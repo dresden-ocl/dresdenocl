@@ -67,7 +67,7 @@ public class HashExact
 
   /**
      Calculates the hash code equivalent to
-     {@link #identityHashCode(List)}, 
+     {@link #identityHashCode(Collection)},
      but for arrays instead of lists.
 
      For null arguments it returns the same value as for
@@ -117,7 +117,7 @@ public class HashExact
      {@link Map#hashCode()}, but calls 
      <code>System.identityHashCode(Object)</code>
      for each contained object.
-     @see Map.Entry#hashCode()
+     @see java.util.Map.Entry#hashCode()
   
      For null arguments it returns the same value as for
      empty maps.

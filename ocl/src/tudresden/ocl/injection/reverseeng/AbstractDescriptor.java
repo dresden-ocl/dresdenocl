@@ -423,7 +423,7 @@ public abstract class AbstractDescriptor extends Object {
     * Get the name of the described feature as for displaying it to a user.
     *
     * @param fExpanded if true, add containment hierarchy information to display name. Otherwise just return plain feature name.
-    * @return  
+    * @return TODO
     */
   public String getDisplayName (boolean fExpanded) {
     if (! fExpanded) {

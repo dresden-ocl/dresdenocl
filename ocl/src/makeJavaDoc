@@ -1,2 +1,0 @@
-rm -rf ./api/*
-javadoc -J-mx50m -d ./api @jdoc

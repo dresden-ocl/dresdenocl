@@ -1,4 +1,4 @@
--classpath .:xml4j.jar:test.jar
+-classpath .:xerces.jar:test.jar
 -author 
 -private 
 -windowtitle "Dresden OCL Toolkit"
@@ -6,7 +6,8 @@
 -header "<b>Dresden OCL Toolkit</b>"
 -footer "<b>Dresden OCL Toolkit</b>"
 -bottom "<small><a\ href=\"http://sourceforge.net/bugs/?group_id=5840\"\ target=\"_top\">Submit\ a\ bug</a><br>Developed\ at\ the\ <a\ href=\"http://www.inf.tu-dresden.de/welcome.html\"\ target=\"_top\">Dresden\ University\ of Technology</a>.<br>This\ software\ is published\ under\ the\ <a\ href=\"http://www.gnu.org/copyleft/lesser.html\"\ target=\"_top\">GNU\ Lesser\ General\ Public\ License</a>.</small>"
--link http://java.sun.com/products/jdk/1.2/docs/api/
+-linkoffline http://java.sun.com/products/jdk/1.2/docs/api/ package-list/jdk/
+-linkoffline http://xml.apache.org/apiDocs/ package-list/xerces/
 -splitindex
 tudresden.ocl
 tudresden.ocl.parser
