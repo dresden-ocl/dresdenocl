@@ -57,8 +57,17 @@ public final class Invariant implements FeatureListener
       HashSet observer=(HashSet)(f.get(o));
       observer.add(this);
     }
-    catch(NoSuchFieldException e)   { e.printStackTrace(); throw new RuntimeException(e.toString());}
-    catch(IllegalAccessException e) { e.printStackTrace(); throw new RuntimeException(e.toString());}
+    catch(NoSuchFieldException e)   
+    { 
+      System.out.println("error accessing feature "+featurename+" on object "+o);
+      e.printStackTrace(); 
+      throw new RuntimeException(e.toString());
+    }
+    catch(IllegalAccessException e) 
+    { 
+      e.printStackTrace(); 
+      throw new RuntimeException(e.toString());
+    }
   }
   
   public final void onField(Field f, Object o)
