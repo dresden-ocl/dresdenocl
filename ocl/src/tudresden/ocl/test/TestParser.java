@@ -75,8 +75,11 @@ public class TestParser extends TestCase {
         }
         catch (OclTypeException e) {
           if (typesOK[i])
+          {
             System.out.println("failed to type-check:\n"+oclExpressions[i]);
-          assert( !typesOK[i] );
+            throw new RuntimeException(e.toString()+oclExpressions[i]);
+            //assert( !typesOK[i] );
+          }
         }
         catch (OclParserException e) {
           if (syntaxOK[i])
@@ -90,8 +93,11 @@ public class TestParser extends TestCase {
         }
         catch (tudresden.ocl.OclException e) {
           if (typesOK[i])
+          {
             System.out.println("generated tests failed:\n"+oclExpressions[i]);
-          assert( !typesOK[i] );
+            throw new RuntimeException(e.toString()+oclExpressions[i]);
+            //assert( !typesOK[i] );
+          }
         }
       }
     }

@@ -244,3 +244,7 @@ oclInState(test)
 <ocl types=0>
 context Bank inv:
 self.oclInState(test)
+
+<ocl>
+context OclAny inv:
+oclIsKindOf(Bank)=oclIsTypeOf(Person)
