@@ -21,15 +21,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * Created on 11. September 2000, 13:41
  */
- 
+
 package tudresden.ocl.injection.reverseeng.test;
 
 import java.util.*;
 
-/** 
+/**
   * Test file for checking save operations in RevengGUI.
   * @author  sz9
-  * @version 
   */
 public class ShortExample extends Object {
 

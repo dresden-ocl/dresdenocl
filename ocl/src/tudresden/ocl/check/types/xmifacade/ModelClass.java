@@ -32,7 +32,7 @@ public final class ModelClass implements Any, Comparable
   private String fullName;
 
   /**
-     This name ist unique in the package only.
+     This name is unique in the package only.
   */
   private String shortName;
 
@@ -45,7 +45,7 @@ public final class ModelClass implements Any, Comparable
   private final HashMap attributes=new HashMap();
 
   /**
-     Maps operation names to Collections of operations with this name
+     Maps operation names to collections of operations with this name.
   */
   private final HashMap operations=new HashMap();
 
@@ -79,6 +79,7 @@ public final class ModelClass implements Any, Comparable
   }
 
   private String implicitRoleName=null;
+
   /**
      OCL specification 5.4.1:
      if role name is missing, use class name starting with lowercase letter.
@@ -116,7 +117,7 @@ public final class ModelClass implements Any, Comparable
   }
 
   /**
-     Return true, if and only if this is a (possibly indirect) Generalization of this.
+     Return true, if and only if this is a (possibly indirect) generalization of this.
   */
   public boolean isSupertype(ModelClass s)
   {
@@ -217,7 +218,7 @@ public final class ModelClass implements Any, Comparable
 
   /**
      This operation ist used internally only be method flatten().
-     @see #flatten
+     @see #flatten()
   */
   private void addOperationLesser(ModelOperation oper)
   {
