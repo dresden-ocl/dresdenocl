@@ -31,7 +31,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.beaninfo.editors.StringEditor" value="Click to create a new constraint"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[2, 20, 2, 20]"/>
+              <Insets value="[0, 0, 0, 0]"/>
             </Property>
           </Properties>
 
@@ -49,7 +49,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.beaninfo.editors.StringEditor" value="Click to remove the currently selected constraint"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[2, 20, 2, 20]"/>
+              <Insets value="[0, 0, 0, 0]"/>
             </Property>
           </Properties>
 
@@ -67,7 +67,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.beaninfo.editors.StringEditor" value="Click to edit the currently selected constraint"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[2, 20, 2, 20]"/>
+              <Insets value="[0, 0, 0, 0]"/>
             </Property>
           </Properties>
 
@@ -84,6 +84,9 @@
               <Image iconType="3" name="/tudresden/ocl/images/Ok16.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.beaninfo.editors.StringEditor" value="Check OCL syntax and save constraint into model"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[0, 0, 0, 0]"/>
+            </Property>
             <Property name="enabled" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
           </Properties>
 

@@ -644,7 +644,7 @@ public class OCLEditor extends javax.swing.JPanel
     
     m_jbNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tudresden/ocl/images/New16.gif")));
       m_jbNew.setToolTipText("Click to create a new constraint");
-      m_jbNew.setMargin(new java.awt.Insets(2, 20, 2, 20));
+      m_jbNew.setMargin(new java.awt.Insets(0, 0, 0, 0));
       m_jbNew.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
           onNewConstraintButton(evt);
@@ -656,7 +656,7 @@ public class OCLEditor extends javax.swing.JPanel
       
     m_jbRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tudresden/ocl/images/Delete16.gif")));
       m_jbRemove.setToolTipText("Click to remove the currently selected constraint");
-      m_jbRemove.setMargin(new java.awt.Insets(2, 20, 2, 20));
+      m_jbRemove.setMargin(new java.awt.Insets(0, 0, 0, 0));
       m_jbRemove.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
           onRemoveConstraintButton(evt);
@@ -668,7 +668,7 @@ public class OCLEditor extends javax.swing.JPanel
       
     m_jbEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tudresden/ocl/images/Edit16.gif")));
       m_jbEdit.setToolTipText("Click to edit the currently selected constraint");
-      m_jbEdit.setMargin(new java.awt.Insets(2, 20, 2, 20));
+      m_jbEdit.setMargin(new java.awt.Insets(0, 0, 0, 0));
       m_jbEdit.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
           onEditButton(evt);
@@ -680,6 +680,7 @@ public class OCLEditor extends javax.swing.JPanel
       
     m_jbSaveEditResult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tudresden/ocl/images/Ok16.gif")));
       m_jbSaveEditResult.setToolTipText("Check OCL syntax and save constraint into model");
+      m_jbSaveEditResult.setMargin(new java.awt.Insets(0, 0, 0, 0));
       m_jbSaveEditResult.setEnabled(false);
       m_jbSaveEditResult.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
