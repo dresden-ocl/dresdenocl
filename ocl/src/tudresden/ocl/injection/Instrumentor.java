@@ -1,16 +1,16 @@
 /*
 Copyright (C) 2000  Ralf Wiebicke
-
+ 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
 version 2.1 of the License, or (at your option) any later version.
-
+ 
 This library is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 Lesser General Public License for more details.
-
+ 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -59,7 +59,7 @@ public final class Instrumentor implements InjectionConsumer
 		this.clean=config.clean;
 		this.config=config;
 		this.identityhashcode=config.hashmode.getName()+".identityHashCode";
-
+		
 		lineSeparator = System.getProperty("line.separator");
 		if(lineSeparator==null)
 		{
@@ -67,16 +67,16 @@ public final class Instrumentor implements InjectionConsumer
 			lineSeparator = "\n";
 		}
 	}
-
+	
 	public void onPackage(JavaFile javafile)
 	throws InjectorParseException
 	{
 	}
-
+	
 	public void onImport(String importname)
 	{
 	}
-
+	
 	private boolean discardnextfeature=false;
 	
 	public void onClass(JavaClass jc)
@@ -267,17 +267,14 @@ public final class Instrumentor implements InjectionConsumer
 	 * documentation.
 	 * @see JavaFile#findType(String)
 	 */
-	private final boolean isCollection(JavaFeature jf)
+	private final boolean isCollection(final JavaFeature jf)
 	throws InjectorParseException
 	{
-		Class jftype=jf.getFile().findType(jf.getType());
+		final Class jftype = jf.getFile().findType(jf.getType());
 		return
-		jftype!=null &&
-		(
 		jftype.isArray() ||
 		java.util.Collection.class.isAssignableFrom(jftype) ||
-		java.util.Map.class.isAssignableFrom(jftype)
-		);
+		java.util.Map.class.isAssignableFrom(jftype);
 	}
 	
 	/**
@@ -289,16 +286,13 @@ public final class Instrumentor implements InjectionConsumer
 	 * documentation.
 	 * @see JavaFile#findType(String)
 	 */
-	private final boolean isWeaklyTyped(JavaFeature jf)
+	private final boolean isWeaklyTyped(final JavaFeature jf)
 	throws InjectorParseException
 	{
-		Class jftype=jf.getFile().findType(jf.getType());
+		final Class jftype = jf.getFile().findType(jf.getType());
 		return
-		jftype!=null &&
-		(
 		java.util.Collection.class.isAssignableFrom(jftype) ||
-		java.util.Map.class.isAssignableFrom(jftype)
-		);
+		java.util.Map.class.isAssignableFrom(jftype);
 	}
 	
 	public static final String BACKUP_SUFFIX="_oclbackup812374";

@@ -134,6 +134,8 @@ public final class JavaFile
 		}
 	}
 	
+	private static HashMap nativeTypes;
+	
 	/**
 	 * Maps type names to types.
 	 * This mapping depends on the import statements encountered
@@ -149,6 +151,9 @@ public final class JavaFile
 	 * Using this method in the ocl injector assumes,
 	 * that at injection time the same classes are available
 	 * as at compile time of the modified user code.
+	 *
+	 * @throws InjectorParseException if no type could be found.
+	 *         Never returns null.
 	 */
 	public final Class findType(String typename)
 	throws InjectorParseException
@@ -192,6 +197,29 @@ public final class JavaFile
 				throw new InjectorParseException(e.toString());
 			}
 		}
+		
+		// prepare native types
+		if(nativeTypes==null)
+		{
+			nativeTypes = new HashMap(10);
+			nativeTypes.put("boolean", boolean.class);
+			nativeTypes.put("byte", byte.class);
+			nativeTypes.put("short", short.class);
+			nativeTypes.put("int", int.class);
+			nativeTypes.put("long", long.class);
+			nativeTypes.put("float", float.class);
+			nativeTypes.put("double", double.class);
+			nativeTypes.put("char", char.class);
+			nativeTypes.put("void", void.class);
+		}
+		
+		// native types
+		{
+			final Object nativeType = nativeTypes.get(typename);
+			if(nativeType!=null)
+				return (Class)nativeType;
+		}
+		
 		
 		// implements Java Language Specification 6.5.4.1 "Simple Type Names"
 		
@@ -244,7 +272,10 @@ public final class JavaFile
 			catch(ClassNotFoundException e)
 			{};
 		}
-		return result;
+		if(result!=null)
+			return result;
+		else
+			throw new InjectorParseException("type "+typename+" not found.");
 	}
 	
 	/**
