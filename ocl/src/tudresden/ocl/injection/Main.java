@@ -977,7 +977,7 @@ public class Main
       input.close();
       output.close();
       outputfile.delete();
-      throw e;
+      throw new InjectorParseException(inputfile+": "+e.getMessage());
     }
     catch(IOException e)
     {

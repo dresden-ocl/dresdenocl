@@ -74,6 +74,16 @@ public final class Injector
 
   private char outbuf;
   private boolean outbufvalid=false;
+  
+  /**
+     The line number in the current file.
+  */
+  private int linenumber=0;
+
+  /**
+     The character in the current line.
+  */
+  private int lineposition=0;
 
   public final char read() throws IOException, EndException
   {
@@ -84,6 +94,16 @@ public final class Injector
 
     if(c>=0)
     {
+      if(c=='\n')
+      {
+        linenumber++;
+        lineposition=-1;
+      }
+      else
+      {
+        lineposition++;
+      }
+        
       if(do_block&&collect_when_blocking)
         collector.append(outbuf);
       outbuf=(char)c;
@@ -277,7 +297,7 @@ public final class Injector
         (';' or ',') or '}' for methods.
   */
   private char parseBody(boolean attribute) 
-    throws IOException, EndException, InjectorParseException
+    throws IOException, EndException, ParseException
   {
     //System.out.println("    body("+(attribute?"attribute":"method")+")");
 
@@ -295,7 +315,7 @@ public final class Injector
         if(bracketdepth==0 && !attribute)
           return '}';
         if(bracketdepth<0)
-          throw new InjectorParseException("';' expected.");
+          throw new ParseException("';' expected.");
         break;
       case ';': 
         // dont have to test for "attribute" here
@@ -395,7 +415,7 @@ public final class Injector
       else
       {
         if(parent==null)
-          throw new InjectorParseException("'class' or 'interface' expected.");
+          throw new ParseException("'class' or 'interface' expected.");
         break;
       }
     
@@ -403,7 +423,7 @@ public final class Injector
       if(c!='\0')
       {
         if(parent==null)
-          throw new InjectorParseException("'class' or 'interface' expected.");
+          throw new ParseException("'class' or 'interface' expected.");
         else
         {
           if( c=='{' && modifiers==Modifier.STATIC )
@@ -419,7 +439,7 @@ public final class Injector
           }
           else
           {
-            throw new InjectorParseException("modifier expected.");
+            throw new ParseException("modifier expected.");
           }
         }
       }
@@ -439,10 +459,10 @@ public final class Injector
         featurename=featuretype;
         featuretype=null;
         if(!parent.getName().equals(featurename))
-          throw new InjectorParseException("constructor '"+featurename+" must have the classes name '"+parent.getName()+'\'');
+          throw new ParseException("constructor '"+featurename+" must have the classes name '"+parent.getName()+'\'');
       }
       else
-        throw new InjectorParseException("'(' expected.");
+        throw new ParseException("'(' expected.");
     }
     else
     {
@@ -472,7 +492,7 @@ public final class Injector
   }
 
   private void parseBehaviour(JavaBehaviour jb)
-    throws IOException, EndException, InjectorParseException
+    throws IOException, EndException, ParseException
   {
     char c=readToken();
     // parsing parameter list
@@ -493,14 +513,14 @@ public final class Injector
           if(c=='\0')
             parametertype=buf.toString();
           else
-            throw new InjectorParseException("parameter type expected.");
+            throw new ParseException("parameter type expected.");
         }
       }
       else
-        throw new InjectorParseException("')' expected.");
+        throw new ParseException("')' expected.");
       c=readToken();
       if(c!='\0')
-        throw new InjectorParseException("parameter name expected.");
+        throw new ParseException("parameter name expected.");
       //System.out.println("addParameter("+parametertype+", "+buf.toString()+")");
       jb.addParameter(parametertype, buf.toString());
       c=readToken();
@@ -516,7 +536,7 @@ public final class Injector
         break;
       }
       else
-        throw new InjectorParseException("')' expected.");
+        throw new ParseException("')' expected.");
     }
     // parsing throws clauses
     c=readToken();
@@ -550,16 +570,16 @@ public final class Injector
             if(c=='\0')
               jb.addThrowable(buf.toString());
             else
-              throw new InjectorParseException("class name expected.");
+              throw new ParseException("class name expected.");
             c=readToken();
           }
           while(c==',');
         }
         else
-          throw new InjectorParseException("'throws' expected.");
+          throw new ParseException("'throws' expected.");
         break;
       default:
-        throw new InjectorParseException("'{' expected.");
+        throw new ParseException("'{' expected.");
       }
     }
     if(do_block)
@@ -597,7 +617,7 @@ public final class Injector
       case ',':
         c=readToken();
         if(c!='\0')
-          throw new InjectorParseException("attribute name expected.");
+          throw new ParseException("attribute name expected.");
         ja=new JavaAttribute(ja, buf.toString());
         commaSeparatedAttributes.add(ja);
         //if(!do_block) ja.print(System.out);
@@ -610,7 +630,7 @@ public final class Injector
         flushOutbuf();
         break;
       default:
-        throw new InjectorParseException("';', '=' or ',' expected.");
+        throw new ParseException("';', '=' or ',' expected.");
       }
     }
   }
@@ -619,7 +639,7 @@ public final class Injector
     throws IOException, EndException, InjectorParseException
   {
     if(readToken()!='\0')
-      throw new InjectorParseException("class name expected.");
+      throw new ParseException("class name expected.");
     String classname=buf.toString();
     //System.out.println("class ("+Modifier.toString(modifiers)+") >"+classname+"<");
 
@@ -681,7 +701,7 @@ public final class Injector
         scheduleBlock(true);
         break;
       default:
-        throw new InjectorParseException("class member expected.");
+        throw new ParseException("class member expected.");
       }
     }
     
@@ -713,26 +733,26 @@ public final class Injector
           {
             c=readToken();
             if(c!='\0')
-              throw new InjectorParseException("package name expected.");
+              throw new ParseException("package name expected.");
             javafile.setPackage(buf.toString());
             consumer.onPackage(javafile);
             //System.out.println("package >"+buf.toString()+"<");
             c=readToken();
             if(c!=';')
-              throw new InjectorParseException("';' expected.");
+              throw new ParseException("';' expected.");
           }
           else if("import".equals(bufs))
           {
             c=readToken();
             if(c!='\0')
-              throw new InjectorParseException("class name expected.");
+              throw new ParseException("class name expected.");
             String importstring=buf.toString();
             //System.out.println("import >"+importstring+"<");
             javafile.addImport(importstring);
             consumer.onImport(importstring);
             c=readToken();
             if(c!=';')
-              throw new InjectorParseException("';' expected.");
+              throw new ParseException("';' expected.");
           }
           else
             parseFeature(null, bufs); // null says, its a top-level class
@@ -750,7 +770,7 @@ public final class Injector
     }
     catch(EndException e) 
     {
-      throw new InjectorParseException("Unexpected End-of-File.");
+      throw new ParseException("Unexpected End-of-File.");
     }
   }
 
@@ -760,6 +780,14 @@ public final class Injector
     {}
   }
 
+  private class ParseException extends InjectorParseException
+  {
+    private ParseException(String message)
+    {
+      super("["+linenumber+':'+lineposition+']'+' '+message);
+    }
+  }
+  
   /**
      @parameter tagname the tag name without the '@' prefix
      @return the first word following the tag
