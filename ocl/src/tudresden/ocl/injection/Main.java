@@ -127,7 +127,9 @@ class OclInjector implements InjectionConsumer
   public final void writeInvariants(String classname) throws IOException
   {
     Writer o=output;
-    o.write("/**\n    A method for checking ocl invariants.\n    Generated automatically, DO NOT CHANGE!\n      @author ");
+    o.write("/**\n    A method for checking ocl invariants.\n    Generated automatically on ");
+    o.write((new Date()).toString());
+    o.write(", DO NOT CHANGE!\n      @author ");
     o.write(OCL_AUTHOR);
     o.write("\n  */private final void ");
     o.write(INV_METHOD);
@@ -562,7 +564,8 @@ public class Main
               (
                 rp,
                 new DefaultReflectionAdapter(),
-                new tudresden.ocl.lib.SimpleNameAdapter()
+                new tudresden.ocl.lib.SimpleNameAdapter(),
+                new SourceReflectionExtender()
               );
             OclTree[] ocltrees=checkConstraints(constraints, modelfacade);
             codefragments=generateCode(ocltrees);
