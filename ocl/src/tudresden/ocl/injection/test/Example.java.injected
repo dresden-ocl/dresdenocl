@@ -130,12 +130,12 @@ public abstract class Example implements Runnable
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #someDrinnerBoolean
-  */private transient boolean someDrinnerBoolean_oclbackup812374=someDrinnerBoolean;/**
+  */private boolean someDrinnerBoolean_oclbackup812374=someDrinnerBoolean;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #someDrinnerBoolean
-  */public final transient java.util.HashSet someDrinnerBoolean_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet someDrinnerBoolean_oclobservinginvariants812374=new java.util.HashSet();/**
     Checks object features, whether they have changed.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -189,12 +189,12 @@ public abstract class Example implements Runnable
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #someInnerBoolean
-  */private transient boolean someInnerBoolean_oclbackup812374=someInnerBoolean;/**
+  */private boolean someInnerBoolean_oclbackup812374=someInnerBoolean;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #someInnerBoolean
-  */public final transient java.util.HashSet someInnerBoolean_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet someInnerBoolean_oclobservinginvariants812374=new java.util.HashSet();/**
     Checks object features, whether they have changed.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -805,342 +805,342 @@ public abstract class Example implements Runnable
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #name
-  */private transient String name_oclbackup812374=name;/**
+  */private String name_oclbackup812374=name;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #name
-  */public final transient java.util.HashSet name_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet name_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #type
-  */private transient Integer type_oclbackup812374=type;/**
+  */private Integer type_oclbackup812374=type;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #type
-  */public final transient java.util.HashSet type_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet type_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #qualifiers
-  */private transient int qualifiers_oclbackup812374=0;/**
+  */private int qualifiers_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #qualifiers
-  */public final transient java.util.HashSet qualifiers_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet qualifiers_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #hallo
-  */private transient String hallo_oclbackup812374=hallo;/**
+  */private String hallo_oclbackup812374=hallo;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #hallo
-  */public final transient java.util.HashSet hallo_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet hallo_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated1
-  */private transient int commaSeparated1_oclbackup812374=commaSeparated1;/**
+  */private int commaSeparated1_oclbackup812374=commaSeparated1;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated1
-  */public final transient java.util.HashSet commaSeparated1_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet commaSeparated1_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated2
-  */private transient int commaSeparated2_oclbackup812374=commaSeparated2;/**
+  */private int commaSeparated2_oclbackup812374=commaSeparated2;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated2
-  */public final transient java.util.HashSet commaSeparated2_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet commaSeparated2_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated3
-  */private transient int commaSeparated3_oclbackup812374=commaSeparated3;/**
+  */private int commaSeparated3_oclbackup812374=commaSeparated3;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated3
-  */public final transient java.util.HashSet commaSeparated3_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet commaSeparated3_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated4
-  */private transient int commaSeparated4_oclbackup812374=commaSeparated4;/**
+  */private int commaSeparated4_oclbackup812374=commaSeparated4;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated4
-  */public final transient java.util.HashSet commaSeparated4_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet commaSeparated4_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated5
-  */private transient int commaSeparated5_oclbackup812374=commaSeparated5;/**
+  */private int commaSeparated5_oclbackup812374=commaSeparated5;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated5
-  */public final transient java.util.HashSet commaSeparated5_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet commaSeparated5_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated6
-  */private transient int commaSeparated6_oclbackup812374=commaSeparated6;/**
+  */private int commaSeparated6_oclbackup812374=commaSeparated6;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #commaSeparated6
-  */public final transient java.util.HashSet commaSeparated6_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet commaSeparated6_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute1
-  */private transient String uglyAttribute1_oclbackup812374=uglyAttribute1;/**
+  */private String uglyAttribute1_oclbackup812374=uglyAttribute1;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute1
-  */public final transient java.util.HashSet uglyAttribute1_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet uglyAttribute1_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute2
-  */private transient char uglyAttribute2_oclbackup812374=uglyAttribute2;/**
+  */private char uglyAttribute2_oclbackup812374=uglyAttribute2;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute2
-  */public final transient java.util.HashSet uglyAttribute2_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet uglyAttribute2_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute3
-  */private transient char uglyAttribute3_oclbackup812374=uglyAttribute3;/**
+  */private char uglyAttribute3_oclbackup812374=uglyAttribute3;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute3
-  */public final transient java.util.HashSet uglyAttribute3_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet uglyAttribute3_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute4
-  */private transient char uglyAttribute4_oclbackup812374=uglyAttribute4;/**
+  */private char uglyAttribute4_oclbackup812374=uglyAttribute4;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute4
-  */public final transient java.util.HashSet uglyAttribute4_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet uglyAttribute4_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute5
-  */private transient char uglyAttribute5_oclbackup812374=uglyAttribute5;/**
+  */private char uglyAttribute5_oclbackup812374=uglyAttribute5;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute5
-  */public final transient java.util.HashSet uglyAttribute5_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet uglyAttribute5_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute6
-  */private transient int uglyAttribute6_oclbackup812374=0;/**
+  */private int uglyAttribute6_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute6
-  */public final transient java.util.HashSet uglyAttribute6_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet uglyAttribute6_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute7
-  */private transient char[] uglyAttribute7_oclbackup812374=uglyAttribute7;/**
+  */private char[] uglyAttribute7_oclbackup812374=uglyAttribute7;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute7
-  */public final transient java.util.HashSet uglyAttribute7_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet uglyAttribute7_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute8
-  */private transient Runnable uglyAttribute8_oclbackup812374=uglyAttribute8;/**
+  */private Runnable uglyAttribute8_oclbackup812374=uglyAttribute8;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute8
-  */public final transient java.util.HashSet uglyAttribute8_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet uglyAttribute8_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #a
-  */private transient int a_oclbackup812374=a;/**
+  */private int a_oclbackup812374=a;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #a
-  */public final transient java.util.HashSet a_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet a_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #collectionWithoutComment
-  */private transient int collectionWithoutComment_oclbackup812374=0;/**
+  */private int collectionWithoutComment_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #collectionWithoutComment
-  */public final transient java.util.HashSet collectionWithoutComment_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet collectionWithoutComment_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #b
-  */private transient int b_oclbackup812374=b;/**
+  */private int b_oclbackup812374=b;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #b
-  */public final transient java.util.HashSet b_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet b_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #mapWithoutComment
-  */private transient int mapWithoutComment_oclbackup812374=0;/**
+  */private int mapWithoutComment_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #mapWithoutComment
-  */public final transient java.util.HashSet mapWithoutComment_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet mapWithoutComment_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #myStrings
-  */private transient int myStrings_oclbackup812374=0;/**
+  */private int myStrings_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #myStrings
-  */public final transient java.util.HashSet myStrings_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet myStrings_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #integers
-  */private transient int integers_oclbackup812374=0;/**
+  */private int integers_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #integers
-  */public final transient java.util.HashSet integers_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet integers_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #anInteger
-  */private transient Integer anInteger_oclbackup812374=anInteger;/**
+  */private Integer anInteger_oclbackup812374=anInteger;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #anInteger
-  */public final transient java.util.HashSet anInteger_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet anInteger_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #dates
-  */private transient int dates_oclbackup812374=0;/**
+  */private int dates_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #dates
-  */public final transient java.util.HashSet dates_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet dates_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #aDate
-  */private transient Date aDate_oclbackup812374=aDate;/**
+  */private Date aDate_oclbackup812374=aDate;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #aDate
-  */public final transient java.util.HashSet aDate_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet aDate_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #interfaces
-  */private transient int interfaces_oclbackup812374=0;/**
+  */private int interfaces_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #interfaces
-  */public final transient java.util.HashSet interfaces_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet interfaces_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #anInterface
-  */private transient AbstractImplementation anInterface_oclbackup812374=anInterface;/**
+  */private AbstractImplementation anInterface_oclbackup812374=anInterface;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #anInterface
-  */public final transient java.util.HashSet anInterface_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet anInterface_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #formats
-  */private transient int formats_oclbackup812374=0;/**
+  */private int formats_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #formats
-  */public final transient java.util.HashSet formats_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet formats_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #aFormat
-  */private transient Format aFormat_oclbackup812374=aFormat;/**
+  */private Format aFormat_oclbackup812374=aFormat;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #aFormat
-  */public final transient java.util.HashSet aFormat_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet aFormat_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #namedIntegers
-  */private transient int namedIntegers_oclbackup812374=0;/**
+  */private int namedIntegers_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #namedIntegers
-  */public final transient java.util.HashSet namedIntegers_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet namedIntegers_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #unqualifiedType
-  */private transient Integer unqualifiedType_oclbackup812374=unqualifiedType;/**
+  */private Integer unqualifiedType_oclbackup812374=unqualifiedType;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #unqualifiedType
-  */public final transient java.util.HashSet unqualifiedType_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet unqualifiedType_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #parent
-  */private transient Object parent_oclbackup812374=parent;/**
+  */private Object parent_oclbackup812374=parent;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #parent
-  */public final transient java.util.HashSet parent_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet parent_oclobservinginvariants812374=new java.util.HashSet();/**
     Checks object features, whether they have changed.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1335,7 +1335,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant hallo on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_hallo=new tudresden.ocl.injection.lib.Invariant("hallo", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_hallo=new tudresden.ocl.injection.lib.Invariant("hallo", this);/**
     Checks ocl invariant hallo on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1352,7 +1352,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant strings on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_strings=new tudresden.ocl.injection.lib.Invariant("strings", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_strings=new tudresden.ocl.injection.lib.Invariant("strings", this);/**
     Checks ocl invariant strings on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1369,7 +1369,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant integers on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_integers=new tudresden.ocl.injection.lib.Invariant("integers", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_integers=new tudresden.ocl.injection.lib.Invariant("integers", this);/**
     Checks ocl invariant integers on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1386,7 +1386,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant dates on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_dates=new tudresden.ocl.injection.lib.Invariant("dates", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_dates=new tudresden.ocl.injection.lib.Invariant("dates", this);/**
     Checks ocl invariant dates on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1403,7 +1403,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant interfaces on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_interfaces=new tudresden.ocl.injection.lib.Invariant("interfaces", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_interfaces=new tudresden.ocl.injection.lib.Invariant("interfaces", this);/**
     Checks ocl invariant interfaces on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1420,7 +1420,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant anInterface on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_anInterface=new tudresden.ocl.injection.lib.Invariant("anInterface", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_anInterface=new tudresden.ocl.injection.lib.Invariant("anInterface", this);/**
     Checks ocl invariant anInterface on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1438,7 +1438,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant formats on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_formats=new tudresden.ocl.injection.lib.Invariant("formats", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_formats=new tudresden.ocl.injection.lib.Invariant("formats", this);/**
     Checks ocl invariant formats on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1455,7 +1455,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant poly on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_poly=new tudresden.ocl.injection.lib.Invariant("poly", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_poly=new tudresden.ocl.injection.lib.Invariant("poly", this);/**
     Checks ocl invariant poly on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1475,7 +1475,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant someMethod on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_someMethod=new tudresden.ocl.injection.lib.Invariant("someMethod", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_someMethod=new tudresden.ocl.injection.lib.Invariant("someMethod", this);/**
     Checks ocl invariant someMethod on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1496,7 +1496,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant mapuq on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapuq=new tudresden.ocl.injection.lib.Invariant("mapuq", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapuq=new tudresden.ocl.injection.lib.Invariant("mapuq", this);/**
     Checks ocl invariant mapuq on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1513,7 +1513,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant mapq on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq=new tudresden.ocl.injection.lib.Invariant("mapq", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq=new tudresden.ocl.injection.lib.Invariant("mapq", this);/**
     Checks ocl invariant mapq on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1532,7 +1532,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant mapq2 on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq2=new tudresden.ocl.injection.lib.Invariant("mapq2", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_mapq2=new tudresden.ocl.injection.lib.Invariant("mapq2", this);/**
     Checks ocl invariant mapq2 on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1558,7 +1558,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant stringsMinusGreaterincludes_inlinehallo_ on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_stringsMinusGreaterincludes_inlinehallo_=new tudresden.ocl.injection.lib.Invariant("stringsMinusGreaterincludes_inlinehallo_", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_stringsMinusGreaterincludes_inlinehallo_=new tudresden.ocl.injection.lib.Invariant("stringsMinusGreaterincludes_inlinehallo_", this);/**
     Checks ocl invariant stringsMinusGreaterincludes_inlinehallo_ on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1575,7 +1575,7 @@ public abstract class Example implements Runnable
     An object representing ocl invariant stringsMinusGreaterincludes_inline_space_hallo_ on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_stringsMinusGreaterincludes_inline_space_hallo_=new tudresden.ocl.injection.lib.Invariant("stringsMinusGreaterincludes_inline_space_hallo_", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_stringsMinusGreaterincludes_inline_space_hallo_=new tudresden.ocl.injection.lib.Invariant("stringsMinusGreaterincludes_inline_space_hallo_", this);/**
     Checks ocl invariant stringsMinusGreaterincludes_inline_space_hallo_ on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1650,12 +1650,12 @@ class SecondExample extends Example{
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #i
-  */private transient int i_oclbackup812374=i;/**
+  */private int i_oclbackup812374=i;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #i
-  */public final transient java.util.HashSet i_oclobservinginvariants812374=new java.util.HashSet();/**
+  */public final java.util.HashSet i_oclobservinginvariants812374=new java.util.HashSet();/**
     Checks object features, whether they have changed.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1670,7 +1670,7 @@ class SecondExample extends Example{
     An object representing ocl invariant testingInheritance on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-  */private final transient tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_testingInheritance=new tudresden.ocl.injection.lib.Invariant("testingInheritance", this);/**
+  */private final tudresden.ocl.injection.lib.Invariant zzzCheckOclInvariantObject812374_testingInheritance=new tudresden.ocl.injection.lib.Invariant("testingInheritance", this);/**
     Checks ocl invariant testingInheritance on this object.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector

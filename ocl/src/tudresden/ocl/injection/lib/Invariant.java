@@ -22,9 +22,10 @@ import tudresden.ocl.lib.FeatureListener;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
+import java.io.Serializable;
 import java.util.*;
 
-public final class Invariant implements FeatureListener
+public final class Invariant implements FeatureListener, Serializable
 {
   private String name;
   private Object object;
@@ -89,7 +90,7 @@ public final class Invariant implements FeatureListener
   public static final String INVARIANT_METHOD="zzzCheckOclInvariantMethod812374_";
   public static final String INVARIANT_OBJECT="zzzCheckOclInvariantObject812374_";
 
-  private Method method=null;
+  private transient Method method=null;
   
   public final void invoke()
   {
