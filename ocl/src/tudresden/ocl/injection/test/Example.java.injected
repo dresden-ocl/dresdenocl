@@ -242,6 +242,9 @@ public abstract class Example implements Runnable
     String x="ugly { string \" { literal";
     char c='{';
 
+    /**
+      ugly comment *
+    **/
     if(type==null)
       throw new IllegalArgumentException(); // some other comment
     this.type=type;

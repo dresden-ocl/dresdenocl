@@ -147,11 +147,16 @@ public final class Injector
         //System.out.println("this is a '/** .. */' doc-comment");
       }
       //System.out.println("this is a '/* .. */' comment");
-      do
-        do
+      while(true)
+      {
+        if(read()!='*')
+          continue;
+        char c;
+        while((c=read())=='*')
           ;
-        while(read()!='*');
-      while(read()!='/');
+        if(c=='/')
+          break;
+      }
       break;
     case '/':
       //System.out.println("this is a '//' comment");
