@@ -542,7 +542,7 @@ public abstract class Example implements Runnable
       }
       {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode68=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-        final tudresden.ocl.lib.OclAnyImpl tudOclResult2=new tudresden.ocl.lib.OclAnyImpl(0,"created by JavaCodeGenerator");
+        final tudresden.ocl.lib.OclSequence tudOclResult2=new tudresden.ocl.lib.OclSequence(0,"created by JavaCodeGenerator");
         final tudresden.ocl.lib.OclString tudOclNode69=tudresden.ocl.lib.Ocl.toOclString(tudOclNode68.getFeature("hallo"));
         tudOclNode70=tudresden.ocl.lib.Ocl.toOclString(tudOclNode68.getFeature("hallo"));
         final tudresden.ocl.lib.OclBoolean tudOclNode71=tudOclNode69.isEqualTo(tudOclNode70);
@@ -554,7 +554,7 @@ public abstract class Example implements Runnable
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode60=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-        final tudresden.ocl.lib.OclAnyImpl tudOclResult0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+        final tudresden.ocl.lib.OclSequence tudOclResult0=tudresden.ocl.lib.Ocl.toOclSequence( tudresden.ocl.lib.Ocl.getFor(result) );
         final tudresden.ocl.lib.OclString tudOclNode61=tudresden.ocl.lib.Ocl.toOclString(tudOclNode60.getFeature("hallo"));
         final tudresden.ocl.lib.OclString tudOclNode62=new tudresden.ocl.lib.OclString("bello");
         final tudresden.ocl.lib.OclBoolean tudOclNode63=tudOclNode61.isEqualTo(tudOclNode62);
@@ -563,7 +563,7 @@ public abstract class Example implements Runnable
       }
       {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode64=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-        final tudresden.ocl.lib.OclAnyImpl tudOclResult1=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+        final tudresden.ocl.lib.OclSequence tudOclResult1=tudresden.ocl.lib.Ocl.toOclSequence( tudresden.ocl.lib.Ocl.getFor(result) );
         final tudresden.ocl.lib.OclString tudOclNode65=tudresden.ocl.lib.Ocl.toOclString(tudOclNode64.getFeature("hallo"));
         final tudresden.ocl.lib.OclString tudOclNode66=new tudresden.ocl.lib.OclString("hallo");
         final tudresden.ocl.lib.OclBoolean tudOclNode67=tudOclNode65.isEqualTo(tudOclNode66);
@@ -572,7 +572,7 @@ public abstract class Example implements Runnable
       }
       {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode68=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-        final tudresden.ocl.lib.OclAnyImpl tudOclResult2=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+        final tudresden.ocl.lib.OclSequence tudOclResult2=tudresden.ocl.lib.Ocl.toOclSequence( tudresden.ocl.lib.Ocl.getFor(result) );
         final tudresden.ocl.lib.OclString tudOclNode69=tudresden.ocl.lib.Ocl.toOclString(tudOclNode68.getFeature("hallo"));
         final tudresden.ocl.lib.OclBoolean tudOclNode71=tudOclNode69.isEqualTo(tudOclNode70);
         if(!tudOclNode71.isTrue())
@@ -778,7 +778,7 @@ public abstract class Example implements Runnable
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #qualifiers
-  */private Integer[] qualifiers_oclbackup812374=qualifiers;/**
+  */private int qualifiers_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -908,7 +908,7 @@ public abstract class Example implements Runnable
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
     @see #uglyAttribute6
-  */private String[] uglyAttribute6_oclbackup812374=uglyAttribute6;/**
+  */private int uglyAttribute6_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1069,9 +1069,9 @@ public abstract class Example implements Runnable
       type_oclbackup812374=type;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(type_oclobservinginvariants812374);
     }
-    if(qualifiers!=qualifiers_oclbackup812374)
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(qualifiers)!=qualifiers_oclbackup812374)
     {
-      qualifiers_oclbackup812374=qualifiers;
+      qualifiers_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(qualifiers);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(qualifiers_oclobservinginvariants812374);
     }
     if(hallo!=hallo_oclbackup812374)
@@ -1134,9 +1134,9 @@ public abstract class Example implements Runnable
       uglyAttribute5_oclbackup812374=uglyAttribute5;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute5_oclobservinginvariants812374);
     }
-    if(uglyAttribute6!=uglyAttribute6_oclbackup812374)
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(uglyAttribute6)!=uglyAttribute6_oclbackup812374)
     {
-      uglyAttribute6_oclbackup812374=uglyAttribute6;
+      uglyAttribute6_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(uglyAttribute6);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute6_oclobservinginvariants812374);
     }
     if(uglyAttribute7!=uglyAttribute7_oclbackup812374)

@@ -355,6 +355,28 @@ final class OclInjector implements InjectionConsumer
     return 
       jftype!=null &&
       (
+        jftype.isArray() ||
+        java.util.Collection.class.isAssignableFrom(jftype) ||
+        java.util.Map.class.isAssignableFrom(jftype)
+      );
+  }
+  
+  /**
+     Returns, whether the type of the given java feature
+     can be typed by element-type tags or not.
+     Return the same as {@link #isCollection(JavaFeature)},
+     except for arrays, where it returns false.
+     May cause problems, as described in findType's 
+     documentation.
+     @see JavaFile#findType(String)
+  */
+  private final boolean isWeaklyTyped(JavaFeature jf)
+    throws InjectorParseException
+  {
+    Class jftype=jf.getFile().findType(jf.getType());
+    return 
+      jftype!=null &&
+      (
         java.util.Collection.class.isAssignableFrom(jftype) ||
         java.util.Map.class.isAssignableFrom(jftype)
       );
@@ -427,6 +449,7 @@ final class OclInjector implements InjectionConsumer
     {
       JavaFeature jf=(JavaFeature)i.next();
       boolean is_collection=isCollection(jf);
+      boolean is_weakly_typed=isWeaklyTyped(jf);
       o.write("    if(");
       if(is_collection)
       {
@@ -462,7 +485,7 @@ final class OclInjector implements InjectionConsumer
       if(jf instanceof JavaAttribute)
         writeTypeChecker((JavaAttribute)jf);
       
-      if(is_collection&&config.tracetypes)
+      if(is_weakly_typed&&config.tracetypes)
         writeTypeTracer((JavaAttribute)jf);
       
       o.write("      ");

@@ -19,6 +19,13 @@ public class Company extends RLObject
   */
   public HashSet employees=new HashSet();
   
+  /**
+     @element-type Person
+  */
+  public List topTenEmployees=new ArrayList();
+  
+  public Person[] topTwentyEmployees=new Person[20];
+  
   public Company(String description, Person manager)
   {
     this.description=description;
@@ -26,6 +33,8 @@ public class Company extends RLObject
     employees.add(manager);
     manager.employers.add(this);
     numberOfEmployees=employees.size();
+    topTenEmployees.add(manager);
+    topTwentyEmployees[0]=manager;
   }
 
   public Person getOldestEmployee() {

@@ -74,6 +74,7 @@ public class Collection implements Type {
         "feature \""+name+"\" of type "+this+" cannot be accessed with qualifier"
       );
     }
+    //System.out.println("Collection.navigateQualified:"+this+" "+name);
     Type ret;
     switch (collectionKind) {
       case COLLECTION:
@@ -130,7 +131,8 @@ public class Collection implements Type {
     }
     return ret;
   }
-
+
+
   public boolean hasState(String stateName) {
     return false;
   }

@@ -79,6 +79,12 @@ public class DefaultOclFactory implements OclFactory {
         throw new OclException("map values in feature "+o+" are not unique.");
       
       return new OclSet(set);
+    } else if (o.getClass().isArray()) {
+      Object[] oa=(Object[])o;
+      ArrayList list=new ArrayList();
+      for(int i=0; i<oa.length; i++) 
+        list.add(getOclRepresentationFor(oa[i]));
+      return new OclSequence(list);
     } else if (o instanceof Boolean)
       return getOclRepresentationFor( ((Boolean)o).booleanValue() );
     else if (o instanceof Integer)

@@ -30,6 +30,7 @@ public class ClassAny implements Any {
       else
         throw new OclTypeException("ReflectionFacade can handle one qualifier only");
     }
+    //System.out.println("ClassAny.navigateQualified:"+this+" "+name);
     Type ret=Basic.navigateAnyQualified(name, this, qualifiers);
     if (ret!=null) return ret;
     String [] javaNames=rf.nameAdapter.getNames(name);
@@ -54,7 +55,7 @@ public class ClassAny implements Any {
     
     if(modeltype instanceof Collection)
     {
-      Class elementtype=rf.extender.getElementType(f);
+      Class elementtype=rf.getElementType(f);
 
       if(rf.reflAdapter.isMap(type))
       {
@@ -69,7 +70,7 @@ public class ClassAny implements Any {
         }
         else
         {
-          Class keytype_class=rf.extender.getKeyType(f);
+          Class keytype_class=rf.getKeyType(f);
           Type keytype=null;
           if(keytype_class!=null)
             keytype=getTypeForClass(keytype_class);

@@ -154,16 +154,38 @@ public final class JavaFile
     throws InjectorParseException
   {
     //System.out.println("findtype: >"+typename+"<");
-    
+
     buildStage=false;
 
+    // ATTENTION!
+    // This is a hack!
+    // Assumes, that array types are given as
+    //   String[] x;
+    // and not as
+    //   String x[];
+    // or
+    //   String [] x;
+    // Also does not work for arrays of basic types.
+    // TODO
+    String arrayBefore="";
+    String arrayAfter="";
+    while(typename.endsWith("[]"))
+    {
+      if(arrayBefore=="")
+        arrayBefore="L";
+      arrayBefore="["+arrayBefore;
+      arrayAfter=";";
+      typename=typename.substring(0,typename.length()-"[]".length());
+      //System.out.println("modified typename to "+arrayBefore+typename+arrayAfter);
+    }
+    
     // implements Java Language Specification 6.5.4.2 "Qualified Type Names"
     // I dont know, how this should work for inner classes, TODO.
     if(typename.indexOf('.')>=0)
     {
       try
       {
-        return Class.forName(typename);
+        return Class.forName(arrayBefore+typename+arrayAfter);
       }
       catch(ClassNotFoundException e) 
       { 
@@ -177,9 +199,11 @@ public final class JavaFile
     try
     {
       return Class.forName(
+      arrayBefore + (
         packagename!=null ?
         packagename+'.'+typename :
-        typename);
+        typename) +
+          arrayAfter);
     }
     catch(ClassNotFoundException e) {};
 
@@ -188,7 +212,7 @@ public final class JavaFile
     {
       String s=(String)(import_single.get(typename));
       if(s!=null)
-        return Class.forName(s);
+        return Class.forName(arrayBefore+s+arrayAfter);
     }
     catch(ClassNotFoundException e) 
     {
@@ -201,7 +225,7 @@ public final class JavaFile
     for(Iterator i=import_demand.iterator(); i.hasNext(); )
     {
       String importString=(String)i.next();
-      String full_element_type=importString+typename;
+      String full_element_type=arrayBefore+importString+typename+arrayAfter;
       try
       {
         Class x=Class.forName(full_element_type);

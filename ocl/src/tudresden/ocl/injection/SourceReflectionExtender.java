@@ -43,7 +43,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
   */
   private HashSet parsedclasses=new HashSet();
   
-  
+
   public Class getElementType(Field field)
   {
     Class result=(Class)elementtypes.get(field);

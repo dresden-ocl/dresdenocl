@@ -130,6 +130,14 @@ public class TestInjection
       cm3.isMale=x;
     }
     assertAll();
+    {
+      Person x=c2.topTwentyEmployees[0];
+      c2.topTwentyEmployees[0]=p5;
+      expectViolation("violated ocl invariant 'topTenTwenty' on object 'tudresden.ocl.test.royloy.Company[Company2]'.");
+      assertAll();
+      c2.topTwentyEmployees[0]=x;
+    }
+    assertAll();
     
   }
   

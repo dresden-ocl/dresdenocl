@@ -32,6 +32,10 @@ else
   wife->isEmpty and husband->isEmpty
 endif
 
+context Company
+inv topTenTwenty:
+topTenEmployees->first=topTwentyEmployees->first
+
 context Customer
 inv title_gender:
 title=(if isMale=true then 'Mr' else 'Ms' endif)

@@ -1,5 +1,7 @@
 *tudresden.ocl.test.royloy.Company#employees	element-type	tudresden.ocl.test.royloy.Person
 +tudresden.ocl.test.royloy.Company#employees	element-type	tudresden.ocl.test.royloy.Person
+*tudresden.ocl.test.royloy.Company#topTenEmployees	element-type	tudresden.ocl.test.royloy.Person
++tudresden.ocl.test.royloy.Company#topTenEmployees	element-type	tudresden.ocl.test.royloy.Person
 *tudresden.ocl.test.royloy.Bank#customer	element-type	tudresden.ocl.test.royloy.Person
 +tudresden.ocl.test.royloy.Bank#customer	element-type	tudresden.ocl.test.royloy.Person
 *tudresden.ocl.test.royloy.Bank#customer	key-type	java.lang.Integer

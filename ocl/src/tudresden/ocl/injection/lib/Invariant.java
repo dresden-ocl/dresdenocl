@@ -171,6 +171,22 @@ public final class Invariant implements FeatureListener
   }
 
   /**
+     Calculates the hash code equivalent to
+     {@link #identityHashCode(List)}, 
+     but for arrays instead of lists.
+  */
+  public static final int identityHashCode(Object[] array)
+  {
+    int hashCode=1;
+    for(int i=0; i<array.length; i++) 
+    {
+      Object obj=array[i];
+      hashCode=31*hashCode+(obj==null ? 0 : System.identityHashCode(obj));
+    }
+    return hashCode;
+  }
+
+  /**
      Calculates the hash code as defined in 
      java.util.Set.hashCode(), but calls identityHashCode
      for each contained object.

@@ -82,7 +82,7 @@ import tudresden.ocl.lib.NameAdapter;
  *  @author Frank Finger
  *
  */
-public class ReflectionFacade implements ModelFacade, ReflectionExtender
+public class ReflectionFacade implements ModelFacade
 {
 
   String[] packageNames;
@@ -97,7 +97,7 @@ public class ReflectionFacade implements ModelFacade, ReflectionExtender
    */
   protected HashMap classAnyInstances=new HashMap();
   
-  protected ReflectionExtender extender;
+  private ReflectionExtender extender;
 
   /** @param packageNames the names of the Java packages that contain the
    *              classes that will be queried for model information, without
@@ -118,10 +118,7 @@ public class ReflectionFacade implements ModelFacade, ReflectionExtender
     this.packageNames=packageNames;
     this.reflAdapter=reflAdapter;
     this.nameAdapter=nameAdapter;
-
-    // uses the default ReflectionExtender provided by ReflectionFacade
-    // if no extender is provided by the user.
-    this.extender= extender!=null ? extender : this;
+    this.extender=extender;
   }
 
   public ReflectionFacade(String[] packageNames, ReflectionAdapter reflAdapter, NameAdapter nameAdapter) 
@@ -199,20 +196,24 @@ public class ReflectionFacade implements ModelFacade, ReflectionExtender
     return buf.toString();
   }
 
-  /**
-     Default implementation. Returns null.
-  */
-  public Class getElementType(Field f) 
+  protected Class getElementType(Field f) 
   {
-    return null;
+    Class fieldtype=f.getType();
+    if(fieldtype.isArray())
+      return fieldtype.getComponentType();
+    
+    return 
+      (extender!=null) ? 
+      extender.getElementType(f) : 
+      null;
   }
 
-  /**
-     Default implementation. Returns null.
-  */
-  public Class getKeyType(Field f) 
+  protected Class getKeyType(Field f) 
   {
-    return null;
+    return 
+      (extender!=null) ? 
+      extender.getKeyType(f) : 
+      null;
   }
   
 }

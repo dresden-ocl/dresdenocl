@@ -37,6 +37,7 @@ public class DefaultReflectionAdapter implements ReflectionAdapter
 
   public Type getTypeForClass(Class c) 
   {
+    //System.out.println("getClassForType("+c+")");
     if(c==String.class)
       return Basic.STRING;
     else if(c==Integer.class || c==Integer.TYPE)
@@ -57,10 +58,13 @@ public class DefaultReflectionAdapter implements ReflectionAdapter
       else
         throw new RuntimeException("encountered a java.util.Collection, which is neither Set or List.");
 
+      //System.out.println("   "+new Collection(collectionKind, null));
       return new Collection(collectionKind, null);
     } 
     else if(java.util.Map.class.isAssignableFrom(c)) 
       return new Collection(Collection.SET, null);
+    else if(c.isArray())
+      return new Collection(Collection.SEQUENCE, null);
     else  
       return null;
   }
