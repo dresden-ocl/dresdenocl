@@ -175,6 +175,75 @@ Enhancements by Steffen Zschaler.
   </target>
 
 
+  <target name="jar.ocl-together"
+          description="Compiles and jars the OCL for Together ControlCenter package."
+          depends="sablecc,build.dir"
+  >
+    <mkdir dir="${build.dir}/ocl-together" />
+    
+    <copy todir="${build.dir}/ocl-together">
+      <fileset dir="${basedir}">
+        <include name="COPYING" />
+      </fileset>
+      <fileset dir="${src.dir}">
+        <include name="openapi.jar" />
+        <include name="tudresden/ocl/*.java" />
+        <exclude name="tudresden/ocl/ConstraintEvaluation.java" />
+        <exclude name="tudresden/ocl/SQLTestApp.java" />
+        <exclude name="tudresden/ocl/DocCheck.java" />
+        <exclude name="tudresden/ocl/ConstraintApplet.java" />
+        <exclude name="tudresden/ocl/ASTViewer.java" />
+        <exclude name="tudresden/ocl/ASTApplet.java" />
+        <include name="tudresden/ocl/parser/*.java" />
+        <include name="tudresden/ocl/parser/analysis/*.java" />
+        <include name="tudresden/ocl/parser/node/*.java" />
+        <include name="tudresden/ocl/parser/lexer/*.java" />
+        <include name="tudresden/ocl/parser/lexer/lexer.dat" />
+        <include name="tudresden/ocl/parser/parser/*.java" />
+        <include name="tudresden/ocl/parser/parser/parser.dat" />
+        <include name="tudresden/ocl/lib/*.java" />
+        <include name="tudresden/ocl/injection/lib/*.java" />
+        <include name="tudresden/ocl/injection/ocl/lib/*.java" />
+        <include name="tudresden/ocl/normalize/*.java" />
+        <include name="tudresden/ocl/check/*.java" />
+        <include name="tudresden/ocl/check/types/*.java" />
+        <include name="tudresden/ocl/check/bootstrap/*.java" />
+        <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
+        <include name="tudresden/ocl/codegen/*.java" />
+        <include name="tudresden/ocl/injection/*.java" />
+        <include name="tudresden/ocl/injection/ocl/*.java" />
+        <include name="tudresden/ocl/gui/*.java" />
+        <include name="tudresden/ocl/gui/events/*.java" />
+        <include name="tudresden/ocl/images/*.gif" />
+        <include name="com/togethersoft/modules/ocl/*.java" />
+        <include name="together.manifest" />
+      </fileset>
+    </copy>
+        
+    <javac srcdir= "${build.dir}/ocl-together"
+           destdir="${build.dir}/ocl-together"
+           classpath="${build.dir}/ocl-together/openapi.jar"
+           deprecation="on"
+           debug="on"
+           depend="${build.depend}"
+           optimize="on" >
+    </javac>
+
+    <jar jarfile="${build.dir}/ocl-together.jar"
+         basedir="${build.dir}/ocl-together"
+         manifest="${src.dir}/together.manifest"
+    >
+      <include name="**/*.class" />
+      <include name="**/*.dat" />
+      <include name="**/*.gif" />
+      <include name="**/*.xml" />
+      <include name="**/*.dtd" />
+      <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
+      <include name="COPYING" />
+    </jar>
+  </target>
+
+
   <target name="jar.ocl-argo"
           description="Compiles and jars the OCL for Argo/UML package."
           depends="sablecc,build.dir">
@@ -533,7 +602,8 @@ Enhancements by Steffen Zschaler.
                    jar.dresden-ocl-sql,
                    jar.royloy,
                    jar.dresden-injector,
-                   jar.dresden-ocl-reverseeng"
+                   jar.dresden-ocl-reverseeng,
+                   jar.ocl-together"
   />
 
 
