@@ -636,7 +636,7 @@ public class JavaCodeGenerator extends ProceduralCodeGenerator {
       if (
           featureName.equals("first") || featureName.equals("last") ||
           featureName.equals("sum") || featureName.equals("at") ||
-          featureName.equals("including") ) {
+          featureName.equals("including") || featureName.equals ("excluding")) {
         insertCast=true;
       }
       appendCode(createDecl(javaType,getVariable(pet)));

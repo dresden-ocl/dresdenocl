@@ -135,7 +135,46 @@ public class DefaultTypeFactory implements TypeFactory {
       else if (name.equals("OclAny")) return getOclAny();
       else return null;
     } else {
-      return myModelFacade.getClassifier(name);
+      // check for collection types
+      if (name.startsWith ("Collection")) {
+        return getCollection (
+            get (name.substring (
+                name.indexOf ('(') + 1,
+                name.lastIndexOf (')')
+              ).trim()
+            )
+          );
+      }
+      else if (name.startsWith ("Sequence")) {
+        return getSequence (
+            get (name.substring (
+                name.indexOf ('(') + 1,
+                name.lastIndexOf (')')
+              ).trim()
+            )
+          );
+      }
+      else if (name.startsWith ("Set")) {
+        return getSet (
+            get (name.substring (
+                name.indexOf ('(') + 1,
+                name.lastIndexOf (')')
+              ).trim()
+            )
+          );
+      }
+      else if (name.startsWith ("Bag")) {
+        return getBag (
+            get (name.substring (
+                name.indexOf ('(') + 1,
+                name.lastIndexOf (')')
+              ).trim()
+            )
+          );
+      }
+      else {
+        return myModelFacade.getClassifier(name);
+      }
     }
   }
 

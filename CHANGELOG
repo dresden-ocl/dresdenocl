@@ -18,6 +18,11 @@ Changes that could break older environments
 
 Other changes
 -------------
+* [Java Code Generator]
+                 Fixed generation of "->excluding", so that a cast is generated, too.
+
+* [Type Checker] Enhanced DefaultTypeFactory to recognize collection types.
+
 * [OCL Editor]   Improved handling of unusable buttons in the OCL Editor.
                  These are now made invisible as opposed to just greying
                  them out. This was asked for by issue #647 as filed
@@ -33,6 +38,11 @@ Other changes
 
 Fixed bugs
 ----------
+* [Java Code Generator]
+                 Fixed generation of "->excluding", so that a cast is generated, too.
+
+* [Type Checker] Enhanced DefaultTypeFactory to recognize collection types.
+
 * [Type Checker] fixed ClassAny.navigateParameterized and OclAnyImpl.findMethod
   [OCL Library]  to also include methods defined by java.lang.Object if the original
                  classifier is an interface.
