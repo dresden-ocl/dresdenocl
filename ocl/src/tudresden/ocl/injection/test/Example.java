@@ -1,9 +1,23 @@
 /*
 Copyright (C) 2000  Ralf Wiebicke
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 package// hallo
-  tudresden.ocl.injection;
+  tudresden.ocl.injection.test;
 
 import java.util.*;
 import java.io.BufferedReader;
@@ -75,11 +89,11 @@ public abstract class Example implements Runnable
   Date aDate=new Date();
   
   /**
-     @element-type SourceReflectionExtender
+     @element-type Implementation
   */
-  Set extenders=new HashSet();
+  Set interfaces=new HashSet();
   
-  SourceReflectionExtender anExtender=new SourceReflectionExtender();
+  Interface anInterface=new Implementation();
   
   /**
      @element-type Format
@@ -88,7 +102,7 @@ public abstract class Example implements Runnable
   
   Format aFormat=new java.text.DecimalFormat();
   
-  public boolean poly1_wrappedbyocl(tudresden.ocl.check.types.ReflectionExtender extender)
+  public boolean poly1_wrappedbyocl(Interface someInterface)
   {
     return true;
   }
@@ -214,18 +228,18 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #poly1_wrappedbyocl(tudresden.ocl.check.types.ReflectionExtender)
-  */public boolean poly1(tudresden.ocl.check.types.ReflectionExtender extender)
+    @see #poly1_wrappedbyocl(Interface)
+  */public boolean poly1(Interface someInterface)
   {
     boolean result;
     if(currently_checking_ocl)
-      result=poly1_wrappedbyocl(extender);
+      result=poly1_wrappedbyocl(someInterface);
     else
     {
       currently_checking_ocl=true;
       checkOclInvariants();
       currently_checking_ocl=false;
-      result=poly1_wrappedbyocl(extender);
+      result=poly1_wrappedbyocl(someInterface);
       currently_checking_ocl=true;
       checkOclInvariants();
       currently_checking_ocl=false;
@@ -413,7 +427,7 @@ public abstract class Example implements Runnable
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Tue Jun 27 12:27:15 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Tue Jun 27 12:50:23 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {
@@ -426,8 +440,8 @@ public abstract class Example implements Runnable
     for(Iterator i=dates.iterator(); i.hasNext(); )
       if(!(i.next() instanceof Date))
         System.out.println("element checker failed.");
-    for(Iterator i=extenders.iterator(); i.hasNext(); )
-      if(!(i.next() instanceof SourceReflectionExtender))
+    for(Iterator i=interfaces.iterator(); i.hasNext(); )
+      if(!(i.next() instanceof Implementation))
         System.out.println("element checker failed.");
     for(Iterator i=formats.iterator(); i.hasNext(); )
       if(!(i.next() instanceof Format))
@@ -466,8 +480,8 @@ public abstract class Example implements Runnable
     }
     {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode16=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-        final tudresden.ocl.lib.OclSet tudOclNode17=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode16.getFeature("extenders"));
-        final tudresden.ocl.lib.OclAnyImpl tudOclNode18=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode16.getFeature("anExtender"));
+        final tudresden.ocl.lib.OclSet tudOclNode17=tudresden.ocl.lib.Ocl.toOclSet(tudOclNode16.getFeature("interfaces"));
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode18=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode16.getFeature("anInterface"));
         final tudresden.ocl.lib.OclBoolean tudOclNode19=tudOclNode17.includes(tudOclNode18);
         if(!tudOclNode19.isTrue())
           System.out.println("ocl invariant tudOclInv4 violated");
@@ -482,7 +496,7 @@ public abstract class Example implements Runnable
     }
     {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode24=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
-        final tudresden.ocl.lib.OclAnyImpl tudOclNode25=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode24.getFeature("anExtender"));
+        final tudresden.ocl.lib.OclAnyImpl tudOclNode25=tudresden.ocl.lib.Ocl.toOclAnyImpl(tudOclNode24.getFeature("anInterface"));
         Object[] tudOclParam0=new Object[1];
         tudOclParam0[0]=tudresden.ocl.lib.Ocl.reconvert(null, tudOclNode25);
         final tudresden.ocl.lib.OclBoolean tudOclNode26=tudresden.ocl.lib.Ocl.toOclBoolean(tudOclNode24.getFeature("poly1", tudOclParam0));
@@ -528,7 +542,7 @@ class SecondExample extends Example{
     @author ocl_injector
   */private boolean currently_checking_ocl=false;/**
     A method for checking ocl invariants.
-    Generated automatically on Tue Jun 27 12:27:15 GMT+02:00 2000, DO NOT CHANGE!
+    Generated automatically on Tue Jun 27 12:50:23 GMT+02:00 2000, DO NOT CHANGE!
     @author ocl_injector
   */private final void checkOclInvariants()
   {

@@ -4,9 +4,9 @@ inv: hallo='hallo'
 inv: self.strings->includes('hallo')
 inv: self.integers->includes(anInteger)
 inv: self.dates->includes(aDate)
-inv: self.extenders->includes(anExtender)
+inv: self.interfaces->includes(anInterface)
 inv: self.formats->includes(aFormat)
-inv: self.poly1(anExtender)=true
+inv: self.poly1(anInterface)=true
 
 context Example::getQualifiers()
 pre:  hallo='bello'
