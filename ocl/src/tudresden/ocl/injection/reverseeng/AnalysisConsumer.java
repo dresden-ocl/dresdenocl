@@ -91,32 +91,6 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
   public static final int STATUS_COLLECTIONSANDMAPS_INCOMPL = STATUS_MASK_COLLECTIONS | STATUS_MASK_MAPS | STATUS_MASK_INCOMPL;
 
   /**
-    * Optimization: Cache for Collection class object.
-    */
-  public static Class s_clCollection;
-  static {
-    try {
-      s_clCollection = Class.forName ("java.util.Collection");
-    }
-    catch (Throwable t) {
-      t.printStackTrace ();
-    }
-  }
-
-  /**
-    * Optimization: Cache for Map class object.
-    */
-  public static Class s_clMap;
-  static {
-    try {
-      s_clMap = Class.forName ("java.util.Map");
-    }
-    catch (Throwable t) {
-      t.printStackTrace ();
-    }
-  }
-
-  /**
     * The number of doc comments in the current file so far.
     */
   private int m_cComments = 0;
@@ -237,7 +211,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
 
         if (clClass != null) {
           // Not a simple type --> check whether collection
-          if (s_clCollection.isAssignableFrom (clClass)) {
+          if (java.util.Collection.class.isAssignableFrom (clClass)) {
             // A collection
 
             if (m_sCurrentComment == null) {
@@ -263,7 +237,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
               m_nStatus |= STATUS_MASK_INCOMPL;
             }
           }
-          else if (s_clMap.isAssignableFrom (clClass)) {
+          else if (java.util.Map.class.isAssignableFrom (clClass)) {
             // A map
 
             if (m_sCurrentComment == null) {
@@ -405,3 +379,4 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     return ac;
   }
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               

@@ -48,10 +48,6 @@ import java.lang.reflect.*;
  */
 public class OclType extends OclAny {
 
-  /** the name of this package
-   */
-  private static String oclPackage="tudresden.ocl.lib";
-
   /** the encapsulated Class object of this instance of OclType;
    *  for basic OCL types this is a class of this library,
    *  e.g. OclInteger
@@ -74,30 +70,26 @@ public class OclType extends OclAny {
 
   /** a Set containing all names of predefined OCL types
    */
-  private static Map predefinedTypes;
+  private static final Map predefinedTypes;
 
   static {
-    OclType tInteger, tReal, tString, tBoolean, tAny, tType;
-    try {
-      tInteger = new OclType(Class.forName(oclPackage+".OclInteger"));
-      tReal    = new OclType(Class.forName(oclPackage+".OclReal"));
-      tString  = new OclType(Class.forName(oclPackage+".OclString"));
-      tBoolean = new OclType(Class.forName(oclPackage+".OclBoolean"));
-      tAny     = new OclType(Class.forName(oclPackage+".OclAny"));
-      tType    = new OclType(Class.forName(oclPackage+".OclType"));
-    } catch (ClassNotFoundException cnf) {
-      System.out.println("error in initializer of class OclType");
-      // and now, some assigments to keep the compiler happy
-      tInteger=tReal=tString=tBoolean=tAny=tType=null;
-    }
-    typeInteger=tInteger;
-    typeReal=tReal;
-    typeString=tString;
-    typeBoolean=tBoolean;
-    typeAny=tAny;
-    typeType=tType;
-
-    predefinedTypes=getPredefinedTypes();
+    typeInteger = new OclType(tudresden.ocl.lib.OclInteger.class);
+    typeReal    = new OclType(tudresden.ocl.lib.OclReal.class);
+    typeString  = new OclType(tudresden.ocl.lib.OclString.class);
+    typeBoolean = new OclType(tudresden.ocl.lib.OclBoolean.class);
+    typeAny     = new OclType(tudresden.ocl.lib.OclAny.class);
+    typeType    = new OclType(tudresden.ocl.lib.OclType.class);
+    predefinedTypes=new HashMap();
+    predefinedTypes.put("OclInteger", typeInteger);
+    predefinedTypes.put("OclReal", typeReal);
+    predefinedTypes.put("OclBoolean", typeBoolean);
+    predefinedTypes.put("OclString", typeString);
+    predefinedTypes.put("Integer", typeInteger);
+    predefinedTypes.put("Real", typeReal);
+    predefinedTypes.put("Boolean", typeBoolean);
+    predefinedTypes.put("String", typeString);
+    predefinedTypes.put("OclAny", typeAny);
+    predefinedTypes.put("OclType", typeType);
   }
 
   /** package-visible constructor for defined OclType objects
@@ -172,21 +164,6 @@ public class OclType extends OclAny {
     if (type==null)
       throw new OclException("request for non-existent predefined type");
     return type;
-  }
-
-  private static Map getPredefinedTypes() {
-    Map map=new HashMap();
-    map.put("OclInteger", typeInteger);
-    map.put("OclReal", typeReal);
-    map.put("OclBoolean", typeBoolean);
-    map.put("OclString", typeString);
-    map.put("Integer", typeInteger);
-    map.put("Real", typeReal);
-    map.put("Boolean", typeBoolean);
-    map.put("String", typeString);
-    map.put("OclAny", typeAny);
-    map.put("OclType", typeType);
-    return map;
   }
 
   public OclBoolean isEqualTo(Object o) {
@@ -392,3 +369,4 @@ public class OclType extends OclAny {
 
 } /* end class OclType */
 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
