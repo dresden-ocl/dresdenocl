@@ -232,6 +232,11 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
     public class SimpleConstraintRepresentation extends java.lang.Object implements tudresden.ocl.gui.ConstraintRepresentation, java.io.Serializable {
     
         /**
+         *  To control serialization.
+         */
+        static final long serialVersionUID = 8437477795159630258l;
+        
+        /**
          *  The actual constraint will be stored directly into String objects.
          */
         String constraintName = null;
