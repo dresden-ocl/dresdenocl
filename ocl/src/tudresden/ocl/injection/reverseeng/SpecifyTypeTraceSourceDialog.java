@@ -34,7 +34,6 @@ import javax.swing.filechooser.*;
 /** 
  *
  * @author  sz9
- * @version 
  */
 public class SpecifyTypeTraceSourceDialog extends javax.swing.JDialog {
 

@@ -33,7 +33,6 @@ import tudresden.ocl.injection.lib.TypeTracer;
   * Information gained from an OCL Type Trace log file.
   *
   * @author  sz9
-  * @version 
   */
 public class TypeTraceInfo extends Object {
   
