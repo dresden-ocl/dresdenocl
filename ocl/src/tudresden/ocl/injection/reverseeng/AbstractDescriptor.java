@@ -176,6 +176,7 @@ public abstract class AbstractDescriptor extends Object {
   
   /**
     * Indents the doccomment (all but the first line) the specified number of characters.
+    * Fires modified event.
     */
   public void indentComment (int nIndent) {
     if (m_sDocComment != null) {
@@ -184,15 +185,26 @@ public abstract class AbstractDescriptor extends Object {
         sIndent += " ";
       }
       
+      boolean fModified = false;
+      
       int nPos = m_sDocComment.indexOf ('\n');
       while (nPos != -1) {
         m_sDocComment = m_sDocComment.substring (0, nPos + 1) + sIndent + m_sDocComment.substring (nPos + 1);
+      
+        fModified = true;
         
         nPos = m_sDocComment.indexOf ('\n', nPos + 1);
-      }      
+      }
+      
+      if (fModified) {
+        fireModified();
+      }
     }
   }
   
+  /**
+    * Does not fire modified event as it assumes that the event will be fired by the caller...
+    */
   protected void adjustDocComment (String sData, String sContext) {
     if (m_sDocComment == null) {
       m_sDocComment = "/** */";
