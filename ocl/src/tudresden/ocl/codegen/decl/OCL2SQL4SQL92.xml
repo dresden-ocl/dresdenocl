@@ -1,0 +1,395 @@
+<?xml version="1.0"?>
+<!DOCTYPE catalog SYSTEM "MappingRules.dtd">
+
+<catalog name="OCL2SQL">
+	<description>
+		Describes mapping rules that help to
+		generate SQL code out of OCL constraints for SQL92.
+                This catalogue is a revised edition intended for use with
+		the ILSQLCodeGenerator.
+	</description>
+
+	<pattern rule="constraint_body">
+		<template spec="any" rem="OCL INVARIANT">
+                        <li>create assertion <param name="constraint_name"/></li>
+                        <li>check (not exists</li>
+                        <li>(select * from <param name="context_table"/> <param name="context_alias"/></li>
+                        <li>where not (<param name="expression"/>)))</li>
+		</template>
+	</pattern>
+
+	<pattern rule="literal">
+		<template spec="string" rem="BASIC TYPE">
+			<li><param name="value"/></li>
+		</template>
+		<template spec="boolean_true" rem="BASIC TYPE">
+			<li>(1=1)</li>
+		</template>
+		<template spec="boolean_false" rem="BASIC TYPE">
+			<li>(1=0)</li>
+		</template>
+		<template spec="enum" rem="BASIC TYPE">
+			<li>'<param name="value"/>'</li>
+		</template>
+	</pattern>
+
+	<pattern rule="parentheses_primary_expression">
+		<template spec="any" rem="BASIC TYPE">
+			<li>(<param name="expression"/>)</li>
+		</template>
+	</pattern>
+
+	<pattern rule="if_expression">
+		<template spec="any" rem="BASIC TYPE">
+			<li>case when <param name="if_branch"/> then <param name="then_branch"/> else <param name="else_branch"/> end</li>
+		</template>
+	</pattern>
+
+	<pattern rule="logical_expression_tail">
+		<template spec="and" rem="BASIC TYPE">
+			<li><param name="rel_exp_1"/> and <param name="rel_exp_2"/></li>
+		</template>
+		<template spec="or" rem="BASIC TYPE">
+			<li><param name="rel_exp_1"/> or <param name="rel_exp_2"/></li>
+		</template>
+		<template spec="xor" rem="BASIC TYPE">
+			<li>(<param name="rel_exp_1"/> or <param name="rel_exp_2"/>) and not (<param name="rel_exp_1"/> and <param name="rel_exp_2"/>)</li>
+		</template>
+		<template spec="implies" rem="BASIC TYPE">
+			<li>NOT <param name="rel_exp_1"/> or <param name="rel_exp_2"/></li>
+		</template>
+	</pattern>
+
+	<pattern rule="relational_expression_tail">
+		<template spec="equal_IntRealStringEnum" rem="BASIC TYPE">
+			<li><param name="add_exp_1"/> = <param name="add_exp_2"/></li>
+		</template>
+		<template spec="equal_Bool" rem="BASIC TYPE">
+			<li>((<param name="add_exp_1"/> AND <param name="add_exp_2"/>) OR (NOT <param name="add_exp_1"/> AND NOT <param name="add_exp_2"/>))</li>
+		</template>
+		<template spec="equal_Any" rem="BASIC TYPE">
+			<li><param name="add_exp_1"/> = <param name="add_exp_2"/></li>
+		</template>
+		<template spec="equal_Set" rem="BASIC TYPE">
+			<li>No support for equals_Set !</li>
+		</template>
+		<template spec="equal_Bag" rem="BASIC TYPE">
+			<li>No support for equals_Bag !</li>
+		</template>
+		<template spec="equal_Sequence" rem="BASIC TYPE">
+			<li>No support for equals_Sequence !</li>
+		</template>
+		<template spec="nequal" rem="BASIC TYPE">
+			<li>not (<param name="add_exp_1"/> = <param name="add_exp_2"/>)</li>
+		</template>
+                <template spec="nequal_Any" rem="BASIC TYPE">
+			<li>not (<param name="add_exp_1"/> = <param name="add_exp_2"/>)</li>
+		</template>
+		<template spec="gt" rem="BASIC TYPE">
+			<li><param name="add_exp_1"/> &gt; <param name="add_exp_2"/></li>
+		</template>
+		<template spec="lt" rem="BASIC TYPE">
+			<li><param name="add_exp_1"/> &lt; <param name="add_exp_2"/></li>
+		</template>
+		<template spec="gteq" rem="BASIC TYPE">
+			<li><param name="add_exp_1"/> &gt;= <param name="add_exp_2"/></li>
+		</template>
+		<template spec="lteq" rem="BASIC TYPE">
+			<li><param name="add_exp_1"/> &lt;= <param name="add_exp_2"/></li>
+		</template>
+	</pattern>
+
+	<pattern rule="additive_expression_tail">
+		<template spec="plus" rem="BASIC TYPE">
+			<li><param name="mult_exp_1"/> + <param name="mult_exp_2"/></li>
+		</template>
+		<template spec="minus" rem="BASIC TYPE">
+			<li><param name="mult_exp_1"/> - <param name="mult_exp_2"/></li>
+		</template>
+	</pattern>
+
+	<pattern rule="multiplicative_expression_tail">
+		<template spec="mult" rem="BASIC TYPE">
+			<li><param name="un_exp_1"/> * <param name="un_exp_2"/></li>
+		</template>
+		<template spec="div" rem="BASIC TYPE">
+			<li><param name="un_exp_1"/> / <param name="un_exp_2"/></li>
+		</template>
+	</pattern>
+
+	<pattern rule="unary_expression">
+		<template spec="minus" rem="BASIC TYPE">
+			<li>-<param name="un_exp"/></li>
+		</template>
+		<template spec="not" rem="BASIC TYPE" >
+			<li>NOT (<param name="un_exp"/>)</li>
+		</template>
+	</pattern>
+
+	<pattern rule="feature_call">
+		<template spec="attribute_context" rem="CLASS AND ATTRIBUTE">
+			<li><param name="context_alias"/>.<param name="column"/></li>
+		</template>
+		<template spec="attribute_navigation" rem="CLASS AND ATTRIBUTE">
+			<li>(select <param name="column"/></li>
+			<li>from <param name="tables"/></li> 
+			<li>where <param name="joins"/>)</li>
+		</template>
+                <template spec="attribute_boolean" rem="CLASS AND ATTRIBUTE">
+			<li>(<param name="attribute"/> = 1)</li>
+		</template>
+                <template spec="navigation" rem="CLASS AND ATTRIBUTE">
+			<li>(select <param name="object"/> from <param name="table1"/> where <param name="ref_object"/> in </li>
+			<li><param name="table2"/>)</li>
+		</template>
+                <template spec="navigation_context" rem="CLASS AND ATTRIBUTE">
+			<li>(select <param name="object"/> from <param name="table1"/> where <param name="ref_object"/> = <param name="context_alias"/>.<param name="context_object"/>)</li>
+		</template>
+                <template spec="oclIsKindOf" rem="CLASS AND ATTRIBUTE">
+			<li>exists (</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where <param name="object"/> = <param name="context_object"/>)</li>
+		</template>
+                <template spec="oclIsTypeOf" rem="CLASS AND ATTRIBUTE">
+			<li>exists (</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where <param name="object"/> = <param name="context_object"/>)</li>
+                        <li connector="true">and not exists (</li>
+                        <li connector="true">select <param name="object"/> from <param name="table2"/></li>
+                        <li connector="true">where <param name="object"/> = <param name="context_object"/>)</li>
+		</template>
+                <template spec="oclAsType" rem="CLASS AND ATTRIBUTE">
+		        <li>Not supported yet !</li>
+		</template>
+
+		 <template spec="navigation" rem="NAVIGATION">
+			<li>(select <param name="object"/></li>
+			<li>from <param name="tables"/></li> 
+			<li>where <param name="joins"/>)</li>
+		</template>
+
+                <template spec="allInstances" rem="MODEL TYPE QUERY">
+			<li>(select <param name="object"/> from <param name="tables"/>)</li>
+		</template>
+                <template spec="name" rem="MODEL TYPE QUERY">
+                        <li>values '<param name="name"/>'</li>
+		</template>
+                <template spec="attributes" rem="MODEL TYPE QUERY">
+                        <li connector="true">union</li>
+			<li>values '<param name="name"/>'</li>
+		</template>
+                <template spec="associationEnds" rem="MODEL TYPE QUERY">
+			<li connector="true">union</li>
+			<li>values '<param name="name"/>' </li>
+		</template>
+                <template spec="operations" rem="MODEL TYPE QUERY">
+			<li connector="true">union</li>
+			<li>values '<param name="name"/>'</li>
+		</template>
+                <template spec="supertypes" rem="MODEL TYPE QUERY">
+			<li connector="true">union</li>
+			<li>values '<param name="name"/>'</li>
+		</template>
+                <template spec="allSupertypes" rem="MODEL TYPE QUERY">
+			<li connector="true">union</li>
+			<li>values '<param name="name"/>'</li>
+		</template>
+
+		<template spec="forAll" rem="COMPLEX PREDICATE">
+			<li>not exists (</li>
+                        <li>select <param name="object"/> from <param name="collection"/></li>
+                        <li>where <param name="object"/> in (</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where not <param name="expression"/></li>
+                        <li>))</li>
+                </template>
+		<template spec="includes" rem="COMPLEX PREDICATE">
+			<li><param name="object"/> in (</li>
+                        <li>select <param name="object"/> from <param name="collection"/>)</li>               
+		</template>
+		<template spec="excludes" rem="COMPLEX PREDICATE">
+			<li><param name="object"/> not in (</li>
+                        <li>select <param name="object"/> from <param name="collection"/>)</li>
+		</template>
+		<template spec="includesAll" rem="COMPLEX PREDICATE">
+			<li>not exists (</li>
+                        <li>(<param name="collection2"/>)</li>
+                        <li>minus</li>
+                        <li>(<param name="collection"/>))</li>
+		</template>
+		<template spec="excludesAll" rem="COMPLEX PREDICATE">
+			<li>not exists (</li>
+                        <li>(<param name="collection2"/>)</li>
+                        <li>intersect</li>
+                        <li>(<param name="collection"/>))</li>
+		</template>
+		<template spec="isEmpty" rem="COMPLEX PREDICATE">
+			<li>not exists (<param name="collection"/>)</li>
+		</template>
+		<template spec="notEmpty" rem="COMPLEX PREDICATE">
+			<li>exists (<param name="collection"/>)</li>
+		</template>
+		<template spec="exists" rem="COMPLEX PREDICATE">
+                        <li>not exists (</li>
+                        <li>select <param name="object"/> from <param name="collection"/></li>
+                        <li>where <param name="object"/> in (</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where not <param name="expression"/></li>
+                        <li>))</li>
+		</template>
+		<template spec="isUnique" rem="COMPLEX PREDICATE">
+			<li>Feature isUnique not supported !</li>
+		</template>
+		<template spec="sortedby" rem="COMPLEX PREDICATE">
+			<li>Feature sortedby not supported !</li>
+		</template>
+
+		<template spec="sum" rem="BASIC VALUE">
+			<li connector="true"> + </li>
+			<li>select case when sum(<param name="element"/>) is null then 0 else sum(<param name="element"/>)</li>
+			<li>from (<param name="collection"/>)</li>
+		</template>
+		<template spec="size" rem="BASIC VALUE">
+			<li connector="true"> + </li>
+			<li>select case when count(<param name="element"/>) is null then 0 else count(<param name="element"/>)</li>
+			<li>from (<param name="collection"/>)</li>
+		</template>
+		<template spec="count" rem="BASIC VALUE">
+			<li connector="true"> + </li>
+			<li>select case when count(<param name="element"/>) is null then 0 else count(<param name="element"/>)</li>
+			<li>from (<param name="table"/>)</li>
+			<li>where <param name="element"/> = <param name="object"/></li>
+		</template>
+
+		<template spec="select" rem="QUERY">
+			<li>(select <param name="object"/> from <param name="collection"/></li>
+                        <li>where <param name="object"/> in (</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where (<param name="expression"/>)))</li>
+        	</template>
+		<template spec="reject" rem="QUERY">
+			<li>(select <param name="object"/> from <param name="collection"/></li>
+                        <li>where <param name="object"/> in (</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where not (<param name="expression"/>)))</li>
+		</template>
+		<template spec="set_intersection" rem="QUERY">
+			<li>(<param name="collection"/> intersect</li>
+                        <li><param name="collection2"/>)</li>
+		</template>
+		<template spec="bag_intersection" rem="QUERY">
+			<li>(<param name="collection"/> intersect all</li>
+                        <li><param name="collection2"/>)</li>
+		</template>
+		<template spec="set_including" rem="QUERY">
+			<li>(<param name="collection"/> union</li>
+                        <li>(values <param name="object"/>))</li>
+		</template>
+		<template spec="bag_including" rem="QUERY">
+			<li>(<param name="collection"/> union all</li>
+                        <li>(values <param name="object"/>))</li>
+		</template>
+		<template spec="set_excluding" rem="QUERY">
+			<li>(<param name="collection"/> except</li>
+                        <li>(values <param name="object"/>))</li>
+		</template>
+                <template spec="bag_excluding" rem="QUERY">
+			<li>(<param name="collection"/> except all</li>
+                        <li>(values <param name="object"/>))</li>
+		</template>
+		<template spec="set_union" rem="QUERY">
+			<li>(<param name="collection"/> union</li>
+                        <li><param name="collection2"/>)</li>
+		</template>
+		<template spec="bag_union" rem="QUERY">
+			<li>(<param name="collection"/> union all</li>
+                        <li><param name="collection2"/>)</li>
+		</template>
+		<template spec="symmetricDifference" rem="QUERY">
+			<li>(<param name="collection"/> except <param name="collection2"/></li>
+                        <li><param name="collection2"/> except <param name="collection"/>)</li>
+		</template>
+		<template spec="collect" rem="QUERY">
+			<li>(select <param name="expression"/> from <param name="collection"/>)</li>            
+		</template>
+
+		<template spec="basic_size" rem="BASIC VALUE">
+			<li>length (<param name="operand"/>)</li>
+		</template>
+		<template spec="basic_concat" rem="BASIC VALUE">
+			<li><param name="operand1"/> + <param name="operand2"/></li>
+		</template>
+		<template spec="basic_toUpper" rem="BASIC VALUE">
+			<li>upper (<param name="operand"/>)</li>
+		</template>
+		<template spec="basic_toLower" rem="BASIC VALUE">
+			<li>lower (<param name="operand"/>)</li>
+		</template>
+		<template spec="basic_substring" rem="BASIC VALUE">
+			<li>substring(<param name="operand"/>, <param name="start"/>, <param name="end"/> - <param name="start"/> + 1)</li>
+		</template>
+
+		<template spec="basic_abs" rem="BASIC VALUE">
+			<li>abs (<param name="operand"/>)</li>
+		</template>
+		<template spec="basic_floor" rem="BASIC VALUE">
+			<li>floor (<param name="operand"/>)</li>
+		</template>
+		<template spec="basic_max" rem="BASIC VALUE">
+			<li>case when <param name="operand1"/> &gt; <param name="operand2"/> then <param name="operand1"/> else <param name="operand2"/> end</li>
+		</template>
+		<template spec="basic_min" rem="BASIC VALUE">
+			<li>case when <param name="operand1"/> &lt; <param name="operand2"/> then <param name="operand1"/> else <param name="operand2"/> end</li>
+		</template>
+		<template spec="basic_round" rem="BASIC VALUE">
+			<li>round (<param name="operand"/>)</li>
+		</template>
+		<template spec="basic_div" rem="BASIC VALUE">
+			<li><param name="operand1"/> / <param name="operand2"/></li>
+		</template>
+		<template spec="basic_mod" rem="BASIC VALUE">
+			<li><param name="operand1"/> - ((<param name="operand1"/> / <param name="operand2"/>) * <param name="operand2"/></li>
+		</template>
+
+                <template spec="sequence_union" rem="SEQUENCE">
+			<li>(<param name="sequence"/>)</li>
+                        <li>union</li>
+                        <li>(select <param name="element"/>, (select max(<param name="seqNo"/>) from (<param name="sequence"/>)) + <param name="seqNo2"/></li>
+                        <li>from <param name="sequence2"/>)</li>
+		</template>
+                <template spec="sequence_including" rem="SEQUENCE">
+			<li>(<param name="sequence"/>)</li>
+                        <li>union</li>
+                        <li>(select <param name="object"/>, ((select max(<param name="seqNo"/>) from (<param name="sequence"/>)) + 1) as <param name="seqNo2"/> from DUAL)</li>
+		</template>
+                <template spec="sequence_excluding" rem="SEQUENCE">
+                        <li>select <param name="element"/>,</li>
+                        <li>(select count(*)+1 from (</li>
+                            <li>select <param name="element"/>, <param name="seqNo"/></li>
+                            <li>from <param name="sequence"/></li>
+                            <li>where not (<param name="element"/> = <param name="object"/>)</li>
+                        <li>) where <param name="seqNo"/> &lt; s.<param name="seqNo"/>) as <param name="seqNo"/></li>
+                        <li>from (</li>
+                            <li>select <param name="element"/>, <param name="seqNo"/></li>
+                            <li>from <param name="sequence"/></li>
+                            <li>where not (<param name="element"/> = <param name="object"/>)</li>
+                        <li>) s</li>
+                </template>
+	</pattern>
+
+	<pattern rule="literal_collection">
+		<template spec="set" rem="QUERY">
+			<li connector="true">union</li>
+			<li>(values <param name="value"/>)</li>
+		</template>
+		<template spec="bag" rem="QUERY">
+			<li connector="true">union all</li>
+			<li>(values <param name="value"/>)</li>
+		</template>
+		<template spec="sequence" rem="QUERY">
+			<li connector="true">union</li>
+			<li>select elem, seqNo from (values (<param name="value"/>, <param name="seqnr"/>) as SEQ)(elem, seqNo) </li>
+		</template>
+	</pattern>
+
+</catalog>
