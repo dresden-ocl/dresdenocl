@@ -43,6 +43,19 @@ on June 28, 2001.
 
 Version 1.06 is known to work.
 
+NOTE:
+It may be the case that the javac compiler produces out of memory exceptions.
+When using the javac compiler directly,this problem can be solved by using 
+the -J-mx<number> switch.   
+When using Ant to compile the sources, one must increase the available memory 
+to the compiler by editing the last line of the file ant (or ant.bat respectivly)
+in the bin folder of Ant's installation path in the following way:
+
+$JAVACMD -Xms128m -Xmx128m -classpath "$LOCALCLASSPATH" -Dant.home="${ANT_HOME}" $ANT_OPTS org.apache.tools.ant.Main "$@"
+
+The example shows how to increase the available memory to 128 mb by the first two
+parameters. 
+
 2.2 Jars
 --------
 Jarfiles must be created correctly. Run
