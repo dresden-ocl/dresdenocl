@@ -47,7 +47,7 @@ NOTE:
 It may be the case that the javac compiler produces out of memory exceptions.
 When using the javac compiler directly,this problem can be solved by using 
 the -J-mx<number> switch.   
-When using Ant to compile the sources, one must increase the available memory 
+When using Ant to compile the sources, one must increase the available memory
 to the compiler by editing the last line of the file ant (or ant.bat respectivly)
 in the bin folder of Ant's installation path in the following way:
 
@@ -80,8 +80,7 @@ This must not produce any warnings, when using
 2.4 Test Suites
 ---------------
 
-"ant test" and "ant -buildfile injectionsuite" in this directory
-must run through without exceptions.
+"ant test" in this directory must run through without exceptions.
 
 2.5 Tabs
 --------
