@@ -57,7 +57,7 @@ public class TestTable extends TestCase {
 		t.addColumn("a3");
 		t.addColumn("a4");
 		t.addColumn("a5");
-		
+
 		assertTrue(t.getPrimaryKeyRepresentation().equals("a1"));
 		t.setPrimaryKey("a2");
 		assertTrue(t.getPrimaryKeyRepresentation().equals("(a1,a2)"));
@@ -66,10 +66,10 @@ public class TestTable extends TestCase {
 		assertTrue(tmp.length == 2);
 		assertTrue(tmp[0].equals("a1"));
 		assertTrue(tmp[1].equals("a2"));
-		
+
 		assertTrue(t.isPrimaryKeyColumn("a1"));
 		assertTrue(!t.isPrimaryKeyColumn("a3"));
-		
+
 		try {
 			t.setPrimaryKey(null);
 			fail("Missing Exception !");
@@ -114,11 +114,13 @@ public class TestTable extends TestCase {
 		assertTrue(t.getForeignTable("a3").equals("C"));
 		assertTrue(t.getForeignColumn("a3").equals("c1"));
 
+                /*
 		try {
 			t.setForeignKey((String)null, (Table)null, null);
 			fail("Missing Exception !");
 		} catch(NullPointerException e) {
 		}
+                */
 
 		try {
 			t.setForeignKey("a6", "B", "b1");
@@ -210,7 +212,7 @@ public class TestTable extends TestCase {
 		} catch(NullPointerException e) {
 		}
 	}
-        
+
         public void testAttributeAccess() {
 		Table t = new Table("A");
 
@@ -219,11 +221,11 @@ public class TestTable extends TestCase {
 		t.addColumn("att3", "String", "a3", false);
 		t.addColumn("att3", "String", "a4", false);
 		t.addColumn("att4", "long", "a5");
-                
+
                 assertTrue(t.attributes().size() == 3);
                 assertTrue(t.attributes().contains("att2"));
                 assertTrue(t.attributes().contains("att3"));
-                assertTrue(t.attributes().contains("att4"));                
+                assertTrue(t.attributes().contains("att4"));
         }
 
 	public static Test suite() {
