@@ -224,9 +224,17 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     */
   public void onFileEnd() {}
   
+  public List getCollections() {
+    return m_lcdCollections;
+  }  
+  
+  public List getMaps() {
+    return m_lmdMaps;
+  }
+  
   public static void main (String args[]) {
     try {
-      Reader r = new InputStreamReader (new FileInputStream ("/home/sz9/oclcvs/src/tudresden/ocl/injection/test/Example.java"));
+      Reader r = new InputStreamReader (AnalysisConsumer.class.getResourceAsStream ("../test/Example.java"));
       AnalysisConsumer ac = new AnalysisConsumer ();
       
       new Injector (r, null, ac).parseFile ();
@@ -237,5 +245,14 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     catch (Throwable t) {
       t.printStackTrace();
     }
+  }
+ 
+  public static AnalysisConsumer analyse(File fToAnalyse) throws IOException, InjectorParseException {
+    Reader r = new FileReader (fToAnalyse);
+    AnalysisConsumer ac = new AnalysisConsumer ();
+    
+    new Injector (r, null, ac).parseFile ();
+    
+    return ac;
   }
 }
