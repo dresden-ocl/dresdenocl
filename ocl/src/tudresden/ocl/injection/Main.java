@@ -41,6 +41,7 @@ final class OclInjector implements InjectionConsumer
   private boolean delayinsertions;
   private boolean clean;
   private String violationmakro;
+  private OclInjectorConfig config;
 
   /**
      Collects all methods of the current class, except automatically generated methods.
@@ -84,13 +85,14 @@ final class OclInjector implements InjectionConsumer
   private ArrayList observedFeatures_stack=new ArrayList();
 
   
-  OclInjector(Writer output, OclInjectorConfig conf)
+  OclInjector(Writer output, OclInjectorConfig config)
   {
     this.output=output;
-    this.codefragments=conf.codefragments;
-    this.delayinsertions=!conf.insertimmediatly;
-    this.clean=conf.clean;
-    this.violationmakro=conf.violationmakro;
+    this.codefragments=config.codefragments;
+    this.delayinsertions=!config.insertimmediatly;
+    this.clean=config.clean;
+    this.violationmakro=config.violationmakro;
+    this.config=config;
   }
   
   public void onPackage(JavaFile javafile) throws InjectorParseException
@@ -441,6 +443,30 @@ final class OclInjector implements InjectionConsumer
   }
   
 
+  private final int getInvariantScope(int modifier)
+  {
+    modifier&=
+      Modifier.PRIVATE|
+      Modifier.PROTECTED|
+      Modifier.PUBLIC;
+    
+    switch(modifier)
+    {
+      case Modifier.PRIVATE:   return OclInjectorConfig.INVARIANT_SCOPE_PRIVATE;
+      case Modifier.PROTECTED: return OclInjectorConfig.INVARIANT_SCOPE_PROTECTED;
+      case 0:                  return OclInjectorConfig.INVARIANT_SCOPE_PACKAGE;
+      case Modifier.PUBLIC:    return OclInjectorConfig.INVARIANT_SCOPE_PUBLIC;
+      default:
+        throw new RuntimeException();
+    }
+  }
+  
+  private final boolean hasInvariantScope(JavaMethod jm)
+  {
+    return
+      (getInvariantScope(jm.getModifiers()) >= config.invariantScope);
+  }
+  
   public final void writeWrapper(JavaMethod cf) throws IOException
   {
     Writer o=output;
@@ -505,7 +531,8 @@ final class OclInjector implements InjectionConsumer
     if(!cf.isConstructor())
     {
       writeChangedCheckerCall();
-      writeWrapperInvariant();
+      if(hasInvariantScope(cf))
+        writeWrapperInvariant();
       if(codefragments!=null)
       {
         SortedFragments sf=(SortedFragments)codefragments.get(cf.getParent().getName());
@@ -556,7 +583,8 @@ final class OclInjector implements InjectionConsumer
     o.write(Invariant.CHECKING_FLAG);
     o.write("=true;\n");
     writeChangedCheckerCall();
-    writeWrapperInvariant();
+    if(hasInvariantScope(cf))
+      writeWrapperInvariant();
     if(codefragments!=null)
     {
       SortedFragments sf=(SortedFragments)codefragments.get(cf.getParent().getName());
@@ -629,6 +657,13 @@ final class OclInjectorConfig
   boolean insertimmediatly=false;
   boolean clean=false;
   String violationmakro=null;
+
+  static final int INVARIANT_SCOPE_PRIVATE  =0;
+  static final int INVARIANT_SCOPE_PROTECTED=1;
+  static final int INVARIANT_SCOPE_PACKAGE  =2;
+  static final int INVARIANT_SCOPE_PUBLIC   =3;
+  static final int INVARIANT_SCOPE_EXPLICIT =4;
+  int invariantScope=INVARIANT_SCOPE_PRIVATE;
 }
 
 public class Main
@@ -749,16 +784,20 @@ public class Main
     String usage=
       "usage:\n"+
       "java tudresden.ocl.injection.Main [options] tobemodified1.java ...\n"+
-      "  -f --constraint-file constraints.txt\n"+
-      "  -x --xmi-model model.xmi\n"+
+      "  -f  --constraint-file constraints.txt\n"+
+      "  -x  --xmi-model model.xmi\n"+
       "      the model given as xmi file\n"+
-      "  -r --reflection-model modelpackage\n"+
+      "  -r  --reflection-model modelpackage\n"+
       "      the model given by reflection\n"+
-      "  -n --name-adapter [simple|argo]\n"+
+      "  -n  --name-adapter [simple|argo]\n"+
       "      the nameadapter\n"+
-      "  -c --clean\n"+
+      "  -is --invariant-scope [all|private|protected|package|public|explicit]\n"+
+      "      the scope of invariants\n"+
+      "  -vm --violation-makro makro\n"+
+      "      what to to, if a constraint fails.\n"+
+      "  -c  --clean\n"+
       "      clean files\n"+
-      "  -m --modify\n"+
+      "  -m  --modify\n"+
       "      modify files";
     String constraintfile=null;
     String xmimodel=null;
@@ -827,7 +866,7 @@ public class Main
           i++;
           if(i>=args.length)
           {
-            System.out.println("name adpater not given.");
+            System.out.println("name adapter not given.");
             System.out.println(usage);
             return;
           }
@@ -842,7 +881,33 @@ public class Main
             return;
           }
         }
-        else if("--violation-makro".equals(args[i]))
+        else if("--invariant-scope".equals(args[i])||"-is".equals(args[i]))
+        {
+          i++;
+          if(i>=args.length)
+          {
+            System.out.println("invariant scope not given.");
+            System.out.println(usage);
+            return;
+          }
+          if("private".equals(args[i])||"all".equals(args[i]))
+            conf.invariantScope=conf.INVARIANT_SCOPE_PRIVATE;
+          else if("protected".equals(args[i]))
+            conf.invariantScope=conf.INVARIANT_SCOPE_PROTECTED;
+          else if("package".equals(args[i]))
+            conf.invariantScope=conf.INVARIANT_SCOPE_PACKAGE;
+          else if("public".equals(args[i]))
+            conf.invariantScope=conf.INVARIANT_SCOPE_PUBLIC;
+          else if("explicit".equals(args[i]))
+            conf.invariantScope=conf.INVARIANT_SCOPE_EXPLICIT;
+          else
+          {
+            System.out.println("invariant scope must be 'all', 'private', 'protected', 'package', 'public' or 'explicit'.");
+            System.out.println(usage);
+            return;
+          }
+        }
+        else if("--violation-makro".equals(args[i])||"-vm".equals(args[i]))
         {
           if(conf.violationmakro!=null)
           {
