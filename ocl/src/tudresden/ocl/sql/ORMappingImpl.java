@@ -209,7 +209,7 @@ public class ORMappingImpl implements ORMapping{
    *
    * @return a List of Table
    *
-   * @see tudresden.ocl.codegn.decl.Table
+   * @see tudresden.ocl.codegen.decl.Table
    */
   public List getClassTables(String classifier){
     return (List) classToTables.get(nameToClassifier.get(classifier));
