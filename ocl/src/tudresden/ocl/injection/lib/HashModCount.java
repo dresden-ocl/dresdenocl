@@ -20,23 +20,45 @@ package tudresden.ocl.injection.lib;
 
 import java.util.Collection;
 import java.util.Map;
+import java.lang.reflect.Field;
 
-public class HashSize
+/**
+   Yes, I know, it's a hack.
+*/
+
+public class HashModCount
 {
 
   public static final int identityHashCode(Collection collection)
   {
-    return collection==null ? 0 : collection.size();
+    return (collection==null || collection.isEmpty()) ? -1 : getModCount(collection);
   }
 
   public static final int identityHashCode(Object[] array)
   {
-    return array==null ? 0 : array.length;
+    return array==null ? 0 : HashExact.identityHashCode(array);
   }
 
   public static final int identityHashCode(Map map)
   {
-    return map==null ? 0 : map.size();
+    return (map==null || map.isEmpty()) ? -1 : getModCount(map);
   }
-  
+
+  private static final int getModCount(Object o)
+  {
+    for(Class c=o.getClass(); c!=java.lang.Object.class; c=c.getSuperclass())
+    {
+      try
+      {
+        Field f=c.getDeclaredField("modCount");
+        f.setAccessible(true);
+        Integer i=(Integer)(f.get(o));
+        return i.intValue();
+      }
+      catch(NoSuchFieldException e) {}
+      catch(IllegalAccessException e) { throw new RuntimeException(e.toString()); };
+    }
+    throw new RuntimeException("Fuck!");
+  }
+
 }

@@ -34,12 +34,9 @@ import java.util.Iterator;
 public class HashExact
 {
 
-  public static final String IDENTITY_HASH_CODE=
-    "tudresden.ocl.injection.lib.HashExact.identityHashCode";
-  
   /**
-     Calculates the hash code as defined in 
-     {@link List#hashCode()}, but calls 
+     Calculates the hash code as defined in
+     {@link List#hashCode()}, but calls
      <code>System.identityHashCode(Object)</code>
      for each contained object.
 

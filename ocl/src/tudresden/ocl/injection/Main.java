@@ -35,6 +35,7 @@ import tudresden.ocl.codegen.JavaCodeGenerator;
 import tudresden.ocl.injection.lib.Invariant;
 import tudresden.ocl.injection.lib.HashExact;
 import tudresden.ocl.injection.lib.HashSize;
+import tudresden.ocl.injection.lib.HashModCount;
 import tudresden.ocl.injection.lib.WrapperDummy;
 import tudresden.ocl.injection.lib.TypeTracer;
 
@@ -101,7 +102,7 @@ final class OclInjector implements InjectionConsumer
      worked on.
   */
   private ClassState class_state=null;
-  
+
   /**
      Collects the class states of outer classes,
      when operating on a inner class.
@@ -109,7 +110,7 @@ final class OclInjector implements InjectionConsumer
      @element-type ClassState
   */
   private ArrayList class_state_stack=new ArrayList();
-  
+
 
   OclInjector(Writer output, OclInjectorConfig config)
   {
@@ -119,18 +120,14 @@ final class OclInjector implements InjectionConsumer
     this.clean=config.clean;
     this.violationmacro=config.violationmacro;
     this.config=config;
-    
-    if(config.simplehash)
-      this.identityhashcode=HashSize.IDENTITY_HASH_CODE;
-    else
-      this.identityhashcode=HashExact.IDENTITY_HASH_CODE;
+    this.identityhashcode=config.hashmode.getName()+".identityHashCode";
   }
-  
-  public void onPackage(JavaFile javafile) 
+
+  public void onPackage(JavaFile javafile)
     throws InjectorParseException
   {
   }
-  
+
   public void onImport(String importname)
   {
   }
@@ -145,7 +142,7 @@ final class OclInjector implements InjectionConsumer
     class_state=new ClassState(jc, delayinsertions);
   }
 
-  public void onClassEnd(JavaClass jc) 
+  public void onClassEnd(JavaClass jc)
     throws IOException, InjectorParseException
   {
     if(!clean && !jc.isInterface())
@@ -167,12 +164,12 @@ final class OclInjector implements InjectionConsumer
       (class_state_stack.remove(class_state_stack.size()-1));
   }
   
-  public void onBehaviourHeader(JavaBehaviour jb) 
+  public void onBehaviourHeader(JavaBehaviour jb)
     throws java.io.IOException
   {
     if(clean || 
        jb.isStatic() || 
-       jb.isAbstract() || 
+       jb.isAbstract() ||
        class_state.javaclass.isInterface())
     {
       output.write(jb.getLiteral());
@@ -189,7 +186,7 @@ final class OclInjector implements InjectionConsumer
     }
   }
 
-  public void onAttributeHeader(JavaAttribute ja) 
+  public void onAttributeHeader(JavaAttribute ja)
   {
   }
 
@@ -204,7 +201,7 @@ final class OclInjector implements InjectionConsumer
         class_state.observedFeatures.add(jf);
       
       if(jf instanceof JavaBehaviour && 
-         !jf.isStatic() && 
+         !jf.isStatic() &&
          !jf.isAbstract() && 
          !discardnextfeature)
       {
@@ -314,7 +311,7 @@ final class OclInjector implements InjectionConsumer
   }
   
 
-  
+
   private final void writeInvariant(String classname, CodeFragment cf) throws IOException
   {
     Writer o=output;
@@ -358,7 +355,7 @@ final class OclInjector implements InjectionConsumer
     o.write("' on object '\"+this+\"'.\");\n");
     o.write("  }");
   }
-  
+
   /**
      All generated class features get this string as author.
      Must not contain spaces, line breaks or askerics.
@@ -568,7 +565,7 @@ final class OclInjector implements InjectionConsumer
         throw new RuntimeException();
     }
   }
-  
+
   private final boolean hasInvariantScope(JavaFeature jf)
   {
     return
@@ -622,7 +619,7 @@ final class OclInjector implements InjectionConsumer
       writeWrapper((JavaMethod)jb);
   }
 
-  private final void writeWrapper(JavaConstructor jc) 
+  private final void writeWrapper(JavaConstructor jc)
     throws IOException
   {
     Writer o=output;
@@ -810,7 +807,7 @@ final class OclInjector implements InjectionConsumer
   }
   
   
-  // type checking  
+  // type checking
   
   private final void writeTypeChecker(JavaAttribute ja) 
     throws IOException
@@ -864,7 +861,7 @@ final class OclInjector implements InjectionConsumer
   }
 
 }
-  
+
 final class OclInjectorConfig
 {
   /**
@@ -876,16 +873,17 @@ final class OclInjectorConfig
   {
     jcg.setInitialIndent(8);
   }
-  
+
   ModelFacade modelfacade;
   NameCreator namecreator=new NameCreator();
 
   boolean insertimmediately=false;
   boolean tracechecking=false;
-  boolean simplehash=false;
+  Class hashmode=HashExact.class;
   boolean clean=false;
   String violationmacro=null;
   boolean tracetypes=false;
+
 
   static final int INVARIANT_SCOPE_PRIVATE  =0;
   static final int INVARIANT_SCOPE_PROTECTED=1;
@@ -897,10 +895,10 @@ final class OclInjectorConfig
 
 public class Main
 {
-  
-  public static void makeConstraint(String text,  
-                                    String kind, 
-                                    String context, 
+
+  public static void makeConstraint(String text,
+                                    String kind,
+                                    String context,
                                     OclInjectorConfig conf)
     throws OclParserException, OclTypeException
   {
@@ -1181,7 +1179,9 @@ public class Main
         else if("--trace-checking".equals(args[i]))
           conf.tracechecking=true;
         else if("--simple-hash".equals(args[i]))
-          conf.simplehash=true;
+          conf.hashmode=HashSize.class;
+        else if("--modcount-hash".equals(args[i]))
+          conf.hashmode=HashModCount.class;
         else if(args[i].startsWith("-"))
         {
           System.out.println("unknown option: "+args[i]);
@@ -1194,7 +1194,7 @@ public class Main
             sourcefiles.add(args[i]);
         }
       }
-    
+
       if(sourcefiles.isEmpty())
       {
         System.out.println("nothing to do.");
