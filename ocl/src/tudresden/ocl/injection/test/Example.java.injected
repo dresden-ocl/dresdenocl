@@ -103,22 +103,22 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner_Drinner();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner_Drinner();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A default constructor for injection, replacing the automatically generated constructor. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
 */Drinner(){
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }/**
 A backup for detecting modifications. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
@@ -150,22 +150,22 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A default constructor for injection, replacing the automatically generated constructor. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
 */Inner(){
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }/**
 A backup for detecting modifications. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
@@ -405,18 +405,18 @@ A wrapper for injection. Generated automatically, DO NOT CHANGE!
 @see #Example(tudresden.ocl.injection.lib.WrapperDummy)
 */private Example(){
 this((tudresden.ocl.injection.lib.WrapperDummy)null);
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
 @see #Example(String,Integer,tudresden.ocl.injection.lib.WrapperDummy)
 */public Example(String name,Integer type){
 this(name,type,(tudresden.ocl.injection.lib.WrapperDummy)null);
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
@@ -426,14 +426,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 set_wrappedbyocl_tudresden_ocl_injection_test_Example(name,type,qualifiers);
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 set_wrappedbyocl_tudresden_ocl_injection_test_Example(name,type,qualifiers);
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -444,14 +444,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 run_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 run_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -463,14 +463,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 result=poly1_wrappedbyocl_tudresden_ocl_injection_test_Example(someInterface);
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 result=poly1_wrappedbyocl_tudresden_ocl_injection_test_Example(someInterface);
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 return result;
 }/**
@@ -483,14 +483,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 result=getName_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 result=getName_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 return result;
 }/**
@@ -503,14 +503,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 result=getType_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 result=getType_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 return result;
 }/**
@@ -523,9 +523,9 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 result=getQualifiers_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
-tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
 tudresden.ocl.lib.OclString tudOclNode70;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
 {final tudresden.ocl.lib.OclAnyImpl tudOclNode56=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
 final tudresden.ocl.lib.OclString tudOclNode57=tudresden.ocl.lib.Ocl.toOclString(tudOclNode56.getFeature("hallo"));
 final tudresden.ocl.lib.OclString tudOclNode58=new tudresden.ocl.lib.OclString("bello");
@@ -547,10 +547,10 @@ final tudresden.ocl.lib.OclString tudOclNode69=tudresden.ocl.lib.Ocl.toOclString
 tudOclNode70=tudresden.ocl.lib.Ocl.toOclString(tudOclNode68.getFeature("hallo"));
 final tudresden.ocl.lib.OclBoolean tudOclNode71=tudOclNode69.isEqualTo(tudOclNode70);
 }
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 result=getQualifiers_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
 {
 final tudresden.ocl.lib.OclAnyImpl tudOclNode60=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
@@ -586,7 +586,7 @@ final tudresden.ocl.lib.OclSet tudOclNode93=tudresden.ocl.lib.Ocl.toOclSet(tudOc
 final tudresden.ocl.lib.OclString tudOclNode94=new tudresden.ocl.lib.OclString("inline space hallo post");
 final tudresden.ocl.lib.OclBoolean tudOclNode95=tudOclNode93.includes(tudOclNode94);
 if(!tudOclNode95.isTrue())System.out.println("violated ocl postcondition 'stringsMinusGreaterincludes_inline_space_hallo_post_' on object '"+this+"' operation 'getQualifiers()'.");}
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 return result;
 }/**
@@ -599,14 +599,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 result=getUnqualifiedType_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 result=getUnqualifiedType_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 return result;
 }/**
@@ -618,14 +618,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 setParent_wrappedbyocl_tudresden_ocl_injection_test_Example(parent);
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 setParent_wrappedbyocl_tudresden_ocl_injection_test_Example(parent);
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -637,14 +637,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 result=getParent_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 result=getParent_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 return result;
 }/**
@@ -656,14 +656,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 printData_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 printData_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -674,14 +674,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 accessifierPrivate_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 accessifierPrivate_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -692,14 +692,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 accessifierProtected_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 accessifierProtected_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -710,14 +710,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 accessifierPackage_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 accessifierPackage_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -728,14 +728,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 accessifierPublic_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 accessifierPublic_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -746,14 +746,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 test_super_wrappedbyocl_tudresden_ocl_injection_test_Example();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 test_super_wrappedbyocl_tudresden_ocl_injection_test_Example();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -764,14 +764,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 addTestTypeTrace_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 addTestTypeTrace_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A backup for detecting modifications. Generated automatically, DO NOT CHANGE!
@@ -1490,9 +1490,9 @@ A wrapper for injection. Generated automatically, DO NOT CHANGE!
 @see #SecondExample(tudresden.ocl.injection.lib.WrapperDummy)
 */SecondExample(){
 this((tudresden.ocl.injection.lib.WrapperDummy)null);
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
@@ -1502,14 +1502,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -1520,14 +1520,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 test_super_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 test_super_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A wrapper for injection. Generated automatically, DO NOT CHANGE!
@@ -1539,14 +1539,14 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 result=toString_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 result=toString_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 return result;
 }/**
@@ -1593,22 +1593,22 @@ if(tudresden.ocl.injection.ocl.lib.Invariant.checking_flag)
 abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_ThirdExample();
 else{
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_ThirdExample();
 checkForChangedFeatures();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }
 }/**
 A default constructor for injection, replacing the automatically generated constructor. Generated automatically, DO NOT CHANGE!
 @author ocl_injector
 */ThirdExample(){
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
+try{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=true;
 tudresden.ocl.injection.ocl.lib.Invariant.checkVacantInvariants();
-tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;
+}finally{tudresden.ocl.injection.ocl.lib.Invariant.checking_flag=false;}
 }/**
 Checks object features, whether they have changed. Generated automatically, DO NOT CHANGE!
 @author ocl_injector

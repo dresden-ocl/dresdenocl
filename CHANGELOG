@@ -18,6 +18,11 @@ Other changes
 
 Fixed bugs
 ----------
+* [Injector]     The generated code did not reset Invariant.checking_flag if
+                 the code checking contraints raised an exception, and in the
+                 same situation Invariant.checkVacantVariants did not reset
+                 vacantInvariants.
+
 * [Injector]     #223601 static initializers
   [OCL Library]  replaced Class.forName(name) by
   [Type Checker] Class.forName(name, false, getClass().getClassLoader())
