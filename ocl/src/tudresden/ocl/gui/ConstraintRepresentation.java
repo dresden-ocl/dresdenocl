@@ -46,17 +46,19 @@ public interface ConstraintRepresentation {
   public String getName();
   
   /**
-    * Set the constraint's name. For the exceptions the detailed message must
-    * be human readable.
-    *
-    * @param sName the new name of the constraint
-    *
-    * @exception IllegalStateException if the constraint is not in a state to
-    *     accept name changes.
-    * @exception IllegalArgumentException if the specified name is not a legal
-    *     name for the constraint.
-    */
-  public void setName (String sName)
+   * Set the constraint's name. For the exceptions the detailed message must
+   * be human readable.
+   *
+   * @param sName the new name of the constraint
+   * @param euHelper utility that can be used to check for syntactical
+   * correctness etc.
+   *
+   * @exception IllegalStateException if the constraint is not in a state to
+   *     accept name changes.
+   * @exception IllegalArgumentException if the specified name is not a legal
+   *     name for the constraint.
+   */
+  public void setName (String sName, EditingUtilities euHelper)
       throws IllegalStateException, IllegalArgumentException;
   
   /**
@@ -65,18 +67,20 @@ public interface ConstraintRepresentation {
   public String getData();
   
   /**
-    * Set the constraint's body text. For the exceptions the detailed message must
-    * be human readable.
-    *
-    * @param sData the new body of the constraint
-    *
-    * @exception IllegalStateException if the constraint is not in a state to
-    *     accept body changes.
-    * @exception OclParserException if the specified constraint is not
-    *     syntactically correct.
-    * @exception OclTypeException if the specified constraint does not adhere by
-    *     OCL type rules.
-    */
-  public void setData (String sData)
+   * Set the constraint's body text. For the exceptions the detailed message must
+   * be human readable.
+   *
+   * @param sData the new body of the constraint
+   * @param euHelper utility that can be used to check for syntactical
+   * correctness etc.
+   *
+   * @exception IllegalStateException if the constraint is not in a state to
+   *     accept body changes.
+   * @exception OclParserException if the specified constraint is not
+   *     syntactically correct.
+   * @exception OclTypeException if the specified constraint does not adhere by
+   *     OCL type rules.
+   */
+  public void setData (String sData, EditingUtilities euHelper)
       throws IllegalStateException, OclParserException, OclTypeException;
 }

@@ -52,7 +52,8 @@ import java.util.*;
   */
 public class OCLEditor extends javax.swing.JPanel
                         implements javax.swing.event.ListSelectionListener,
-                                    ConstraintChangeListener {
+                                   ConstraintChangeListener,
+                                   EditingUtilities {
   /**
     * Attributes used to denote fields that need to be replaced.
     */
@@ -88,8 +89,15 @@ public class OCLEditor extends javax.swing.JPanel
       */
     protected OCLEditorModel m_oclemModel;
     
-    public ConstraintTableModel() {
+    /**
+     * The OCLEditor for which this table model is used.
+     */
+    protected java.lang.ref.WeakReference m_wrocle;
+    
+    public ConstraintTableModel (OCLEditor ocle) {
       super();
+      
+      m_wrocle = new java.lang.ref.WeakReference (ocle);
     }
     
     /**
@@ -179,7 +187,7 @@ public class OCLEditor extends javax.swing.JPanel
 
           if (cr != null) {
             try {
-              cr.setName (value.toString());
+              cr.setName (value.toString(), (OCLEditor) m_wrocle.get());
             }
             catch (IllegalArgumentException iae) {
               JOptionPane.showMessageDialog (null,
@@ -243,7 +251,7 @@ public class OCLEditor extends javax.swing.JPanel
   /**
     * The table model used by the list of constraints table.
     */
-  private ConstraintTableModel m_ctmTableModel = new ConstraintTableModel();
+  private ConstraintTableModel m_ctmTableModel = new ConstraintTableModel (this);
 
   /**
    * Does {@link #parseAndCheckConstraint} perform type checking?
@@ -383,6 +391,28 @@ public class OCLEditor extends javax.swing.JPanel
     m_jpToolbarWrapper.repaint();
   }
     
+  /**
+   * Checks the specified name and returns true if it is a valid OCL name.
+   */
+  public boolean isValidConstraintName (String sName) {
+    if ((sName == null) ||
+         (sName.length() == 0)) {
+      return false;
+    }
+    if ((! Character.isLetter (sName.charAt (0))) ||
+         (! Character.isLowerCase (sName.charAt (0)))) {
+      return false;
+    }
+    for (int i = 1; i < sName.length(); i++) {
+      if ((! Character.isLetterOrDigit (sName.charAt (i))) &&
+          (sName.charAt (i) != '_')) {
+        return false;
+      }
+    }
+    
+    return true;
+  }
+  
   /**
    * Specify which user option check boxes should be displayed.
    */
@@ -981,7 +1011,7 @@ public class OCLEditor extends javax.swing.JPanel
       if (nIdx != -1) {
         try {
           m_oclemModel.getConstraintAt (nIdx)
-              .setData (m_jtpConstraintEditor.getText());
+              .setData (m_jtpConstraintEditor.getText(), this);
           
           // Stop editing if successful
           setEditMode (false);
@@ -1153,18 +1183,5 @@ public class OCLEditor extends javax.swing.JPanel
       m_jtpConstraintEditor.setText (cce.getNew().getData());
       m_jtpConstraintPreview.setText (cce.getNew().getData());
     }
-  }
-  
-  public static void main (String[] args) {
-    javax.swing.JDialog jd = new javax.swing.JDialog (new javax.swing.JFrame(), true);
-    OCLEditor ocle = new OCLEditor();
-    
-    jd.getContentPane().add (ocle);
- 
-    jd.pack();
-    
-    jd.setVisible (true);
-    
-    System.exit (0);
   }
 }

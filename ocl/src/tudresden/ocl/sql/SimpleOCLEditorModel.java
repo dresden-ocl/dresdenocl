@@ -293,27 +293,20 @@ public class SimpleOCLEditorModel extends java.lang.Object implements tudresden.
         }
     
  
-        public void setData(String sData) throws IllegalStateException, OclParserException, OclTypeException { 
+        public void setData(String sData,EditingUtilities euHelper) throws IllegalStateException, OclParserException, OclTypeException { 
             ConstraintRepresentation crOld = new SimpleConstraintRepresentation((ConstraintRepresentation)this, posInModel);
             constraintData = sData;
             fireConstraintDataChanged(posInModel, crOld, (ConstraintRepresentation)this);
         }
           
-        public void setName(String sName) throws IllegalStateException, IllegalArgumentException {
-            if ((sName == null) || (sName.length() == 0)) {
-                throw new IllegalArgumentException ("Please specify a name of at least one character length.");
-            }
-          
-            if ((! Character.isLetter (sName.charAt (0))) || (! Character.isLowerCase (sName.charAt (0)))) {
-                throw new IllegalArgumentException ("The first character of the name must be a lower case letter.");
+        public void setName (String sName,
+                             EditingUtilities euHelper)
+          throws IllegalStateException, IllegalArgumentException {
+
+            if (!euHelper.isValidConstraintName (sName)) {
+              throw new IllegalArgumentException ("Please specify a valid name.");
             }
             
-            for (int i = 1; i < sName.length(); i++) {
-                if ((! Character.isLetterOrDigit (sName.charAt (i))) && (sName.charAt (i) != '_')) {
-                    throw new IllegalArgumentException ("Every character of the name, except the first, must be a letter, a digit, or an underscore.");
-                }
-            }
-                        
             ConstraintRepresentation crOld = new SimpleConstraintRepresentation((ConstraintRepresentation)this, posInModel);
             constraintName = sName;
             fireConstraintNameChanged(posInModel, crOld, (ConstraintRepresentation)this);
