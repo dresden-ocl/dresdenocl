@@ -446,6 +446,7 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/gui/*.java" />
         <include name="tudresden/ocl/gui/events/*.java" />
         <include name="tudresden/ocl/sql/*.java" />
+        <include name="tudresden/ocl/sql/*.txt" />
         <include name="tudresden/ocl/sql/orstrategy/*.java" />
         <include name="tudresden/ocl/sql/gui/*.java" />
         <include name="tudresden/ocl/injection/*.java" />
@@ -475,6 +476,8 @@ Enhancements by Steffen Zschaler.
       <include name="**/*.gif" />
       <include name="**/*.xml" />
       <include name="**/*.dtd" />
+      <include name="tudresden/ocl/sql/oracleReserved.txt" />
+      <include name="tudresden/ocl/sql/sybaseReserved.txt" />
       <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
       <include name="COPYING" />
     </jar>
