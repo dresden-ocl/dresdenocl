@@ -451,12 +451,23 @@ public final class Injector
         break;
       }
       else if(c=='\0')
+      {
         parametertype=buf.toString();
+        if("final".equals(parametertype))
+        {
+          c=readToken();
+          if(c=='\0')
+            parametertype=buf.toString();
+          else
+            throw new InjectorParseException("parameter type expected.");
+        }
+      }
       else
         throw new InjectorParseException("')' expected.");
       c=readToken();
       if(c!='\0')
         throw new InjectorParseException("parameter name expected.");
+      //System.out.println("addParameter("+parametertype+", "+buf.toString()+")");
       jb.addParameter(parametertype, buf.toString());
       c=readToken();
       if(c==',')

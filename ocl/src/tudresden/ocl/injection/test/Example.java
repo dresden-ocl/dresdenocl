@@ -114,7 +114,7 @@ public abstract class Example implements Runnable
   }
 
   public void set(String name, Integer type,// what a cool parameter
-    Integer[] qualifiers)
+    final Integer[] qualifiers)
   {
     if(name==null)
       throw new IllegalArgumentException(); // ugly comment : { {
