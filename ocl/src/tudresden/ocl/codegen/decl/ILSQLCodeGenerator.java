@@ -55,13 +55,13 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         String SEQNO = "seqNo";
         ORMappingScheme map;
         /**
-         * @key-type 
+         * @key-type Node
          * @element-type List
          */
 	Map navigation;
-        Set involvedTables;
         Set modelTypeFeatures;
-	Hashtable declarators;
+        Set involvedTables;
+        Hashtable declarators;
 	boolean formatCode = true;
 	int aliasCount;
 	int joinAliasCount = 0;
@@ -405,7 +405,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         				thisCode = ca.getCodeFor("relational_expression_tail", "equal_" + spec);
         			} else {
         				// OclAny
-        				thisCode = ca.getCodeFor("relational_expression_tail", "equal_OclAny");
+        				thisCode = ca.getCodeFor("relational_expression_tail", "equal_Any");
         			}
         		} else if (node.getRelationalOperator() instanceof ANEqualRelationalOperator) {
                                 type = theTree.getNodeType(node.getAdditiveExpression());
@@ -415,7 +415,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                                         thisCode = ca.getCodeFor("relational_expression_tail", "nequal_Basic");
                                 } else {
                                         // OclAny
-                                        thisCode = ca.getCodeFor("relational_expression_tail", "nequal_OclAny");
+                                        thisCode = ca.getCodeFor("relational_expression_tail", "nequal_Any");
                                 }
         		} else if (node.getRelationalOperator() instanceof AGtRelationalOperator) {
         			thisCode = ca.getCodeFor("relational_expression_tail", "gt");
@@ -578,6 +578,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                         } catch(NullPointerException e) {
                         	// feature name is given in one of the postfix expression tails
                                 guide = mc.getJoinGuide(mc.getClassName());
+                                guide.setAlias(startType);
                         }
                         
                         // iterate the postfix expression tail and assign navigation guides
@@ -649,7 +650,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     		String spec = "";
     		MappedClass mc = null;
     		Guide guide;
-    		String pkName = "", pkTable = "";
+    		String pkName = "", pkTable = "", pkClassType = "", tmpStr;
     		boolean codeForPathName = false;
     		AStandardDeclarator asd = null;
    		Node fcp = null;
@@ -657,6 +658,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
    		String className = "";
    		String taskAp = "";
    		Table table = new Table("dummy");
+                Set metaInfo = null;
     	
     		List guides = (List)navigation.get(node.parent());
                 System.err.println("current pathName: " + pathName);
@@ -738,6 +740,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     			    guide.next();
     			    pkName = guide.getSelect();
                             pkTable = guide.getFrom();
+                            pkClassType = guide.getAlias();
                             /*
                             try {
                                 prepareJoin(guides);                      
@@ -754,23 +757,57 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
    			// generate code
                         ca.reset();
                         
-   			// features that need to be mapped using the MODEL TYPE QUERY
+   			// features that need to be mapped using the MODEL TYPE QUERY                        
                        	if (pathName.equals("allInstances")) {                       
    				ca.setArgument("object", pkName);
         			ca.setArgument("tables", pkTable);
                                 codeForPathName = true;
                         } else if (pathName.equals("name")) {
-                                ca.setArgument("name", "");
-                        } else if (pathName.equals("attributes")) {
-                        } else if (pathName.equals("associationEnds")) {
-                        } else if (pathName.equals("operations")) {
-                        } else if (pathName.equals("supertypes")) {
-                        } else if (pathName.equals("allSupertypes")) {
-                        }
+                                ca.setArgument("name", pkClassType);
+                                codeForPathName = true;
+                        } else if ("attributes;associationEnds;operations;supertypes;allSupertypes".indexOf(pathName) != -1) {
+                                // get the meta information 
+                                mc = map.getMappedClass(pkClassType);
+                                                          
+                                if (pathName.equals("associationEnds")) {
+                                    metaInfo = mc.associationEnds();
+                                } else if (pathName.equals("operations")) {
+                                    metaInfo = mc.operations();
+                                } else if (pathName.equals("supertypes")) {
+                                    metaInfo = mc.supertypes();
+                                } else if (pathName.equals("allSupertypes")) {
+                                    metaInfo = mc.allSupertypes();
+                                } else if (pathName.equals("attributes")) {
+                                    metaInfo = mc.attributes();
+                                }
+                                
+                                // treatment of empty meta information sets
+                                if (metaInfo.size() == 0) {
+                                    metaInfo = new HashSet();
+                                    metaInfo.add("");
+                                }
+                                
+                                // build target code
+                                for (Iterator i=metaInfo.iterator(); i.hasNext(); ) {
+                                    tmpStr = (String)i.next();
+                                    ca.setArgument("name", tmpStr); 
+                                                                      
+                                    try {
+                                        thisCode += ca.getCodeFor("feature_call", pathName);
+                                    } catch (Exception e) {
+        	                        System.err.println(e.toString());
+        	                    }
+                                    
+                                    ca.reset();
+                                    ca.enableConnector();
+                                }
+                        } 
                         
-                        // features on OclAny --> CLASS AND ATTRIBUTE
+                        // features on OclAny --> need to be mapped using the CLASS AND ATTRIBUTE pattern
                         if (pathName.equals("oclIsKindOf")) {
-                            System.err.println(guides.toString());
+                                ca.setArgument("object", pkName); 
+                                ca.setArgument("ov_type", task); 
+                                codeForPathName = true;
                         } else if (pathName.equals("oclIsTypeOf")) {
                             // --> todo
                         } else if (pathName.equals("oclAsType")) {
@@ -778,7 +815,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                         }
                         
                         // features that need to be mapped using the BASIC TYPE pattern from UML'99
-   			if ((tailBegin instanceof ADotPostfixExpressionTailBegin) && (!pathName.equals("allInstances"))) {
+   			if ((tailBegin instanceof ADotPostfixExpressionTailBegin) && (!pathName.equals("allInstances")) && (!thisCode.equals(""))) {
    				ca.reset();
    				if (oclTokBasic1.indexOf(pathName) != -1) {
    					ca.setArgument("operand", task);
