@@ -46,7 +46,7 @@ public class TestBag extends TestCase {
     list.add(sc);
     bc = new OclBag(list);
 
-    LinkedList tree=new LinkedList();
+    HashSet tree=new HashSet();
     sempty=(OclSet)Ocl.getOclRepresentationFor(tree);
     tree.add(p1);
     s1=(OclSet)Ocl.getOclRepresentationFor(tree);

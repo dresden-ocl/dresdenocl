@@ -32,7 +32,7 @@ public class TestSet extends TestCase {
     p3.firstName="c";
     p3.someNumber=0;
 
-    ArrayList list=new ArrayList();
+    HashSet list=new HashSet();
     list.add("a");
     a = (OclSet)Ocl.getOclRepresentationFor(list);
     list.add("b");
@@ -50,7 +50,7 @@ public class TestSet extends TestCase {
     set.add("c");
     bc=(OclSet)Ocl.getOclRepresentationFor(set);
 
-    LinkedList tree=new LinkedList();
+    HashSet tree=new HashSet();
     sempty=(OclSet)Ocl.getOclRepresentationFor(tree);
     tree.add(p1);
     s1=(OclSet)Ocl.getOclRepresentationFor(tree);
@@ -62,7 +62,7 @@ public class TestSet extends TestCase {
   }
 
   public void testEqual() {
-    List list=new ArrayList();
+    HashSet list=new HashSet();
     list.add("a");
     list.add("c");
     OclRoot set=Ocl.getOclRepresentationFor(list);

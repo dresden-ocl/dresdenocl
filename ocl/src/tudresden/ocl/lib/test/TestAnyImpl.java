@@ -40,6 +40,4 @@ public class TestAnyImpl extends TestCase {
     return suite;
   }
 }
-  
-
 
