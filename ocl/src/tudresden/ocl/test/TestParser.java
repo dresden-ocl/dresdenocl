@@ -111,21 +111,6 @@ public class TestParser extends TestCase {
     return OclTree.createTree(oclExpr, facade);
   }
 
-  protected static URL getTestFileFromProperty(String propName, String defaultFileName) {
-    URL filename=null;
-    try {
-      filename=new URL(System.getProperty(propName));
-    }
-    catch(java.net.MalformedURLException e) {}
-    if (filename==null) {
-      System.out.print("System property "+propName+" not specified, using default (");
-      Class c=TestParser.class;
-      filename=c.getResource(defaultFileName);
-      System.out.println(filename+")");
-    }
-    return filename;
-  }
-
   protected String readTestFile() throws IOException {
     String filename=testFileName.getFile();
     BufferedReader br=new BufferedReader(new FileReader(filename));
@@ -188,20 +173,14 @@ public class TestParser extends TestCase {
     TestSuite suite=new TestSuite();
     suite.addTest( new TestParser(
       "testFromFile",
-      getTestFileFromProperty(
-        "tudresden.ocl.expressionFile",
-        "oclexpressions"
-      ),
+      TestParser.class.getResource("oclexpressions"),
       new tudresden.ocl.check.types.testfacade.TestModelFacade()
     ) );
     String[] reflectpackages=new String[1];
     reflectpackages[0]="tudresden.ocl.test.royloy";
     suite.addTest( new TestParser(
       "testFromFile",
-      getTestFileFromProperty(
-        "tudresden.ocl.reflectionExpressionFile",
-        "oclexpressions.argo"
-      ),
+      TestParser.class.getResource("oclexpressions.argo"),
       new tudresden.ocl.check.types.ReflectionFacade(
         reflectpackages,
         new tudresden.ocl.check.types.DefaultReflectionAdapter(),
@@ -211,10 +190,7 @@ public class TestParser extends TestCase {
     ) );
     suite.addTest( new TestParser(
       "testFromFile",
-      getTestFileFromProperty(
-        "tudresden.ocl.expressionFile",
-        "oclexpressions.xmi"
-      ),
+      TestParser.class.getResource("oclexpressions.xmi"),
       tudresden.ocl.check.types.xmifacade.stress.Royloy.getModel()
     ) );
     try {
@@ -224,18 +200,12 @@ public class TestParser extends TestCase {
         TestParser.class.getResource("xmi/rose/royloy.xml").getFile();
       suite.addTest( new TestParser(
         "testFromFile",
-        getTestFileFromProperty(
-          "tudresden.ocl.expressionFile",
-          "oclexpressions.argo"
-        ),
+        TestParser.class.getResource("oclexpressions.argo"),
         tudresden.ocl.check.types.xmifacade.XmiParser.getModel(argoXmi)
       ) );
       suite.addTest( new TestParser(
         "testFromFile",
-        getTestFileFromProperty(
-          "tudresden.ocl.expressionFile",
-          "oclexpressions.xmi"
-        ),
+        TestParser.class.getResource("oclexpressions.xmi"),
         tudresden.ocl.check.types.xmifacade.XmiParser.getModel(roseXmi,true)
       ) );
     }
