@@ -1,20 +1,33 @@
 package tudresden.ocl;
 
 import tudresden.ocl.*;
+import tudresden.ocl.check.types.*;
+import tudresden.ocl.check.types.xmifacade.*;
 import tudresden.ocl.sql.*;
 import tudresden.ocl.codegen.decl.*;
+import tudresden.ocl.codegen.decl.treegen.*;
+import tudresden.ocl.codegen.decl.treegen.normalize.*;
+
+import EDF.Entre2Mers.*;
+import EDF.Entre2Mers.test.*;
 
 import java.io.FileWriter;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.tree.*;
 
 class SQLTestApp extends ConstraintEvaluation {
 
+	Model mf;
+
+	JEditorPane treeCode;
     JTextArea sqlCode;
-    JButton sqlGenerate;
+    JButton sqlGenerate, bCreateTree, bNormalizeSql;
     JRadioButton sql92, sqlOracle, sqlOther;
     JTextField sqlOtherUrl;
+    JTree sqlTree;
+    tudresden.ocl.codegen.decl.treegen.node.Node theSqlTree;
 
     public SQLTestApp() {
 	message=new JLabel(" ");
@@ -28,10 +41,42 @@ class SQLTestApp extends ConstraintEvaluation {
 	tabs.addTab("Errors", getErrorPane());
 	tabs.addTab("About", getAboutPane());
 	tabs.addTab("SQL", getSQLCodePane());
-
+	tabs.addTab("SQL tree", getSQLTree());
+	
 	setLayout(new BorderLayout());
 	add(message, BorderLayout.SOUTH);
 	add(tabs);
+    }
+    
+    protected JPanel getSQLTree() {
+    	JPanel result = new JPanel(new BorderLayout());
+    	
+    	bCreateTree = new JButton("create tree");
+    	bCreateTree.addActionListener(this);
+    	bNormalizeSql = new JButton(" normalize ");
+    	bNormalizeSql.addActionListener(this);
+    	JPanel bp = new JPanel();
+    	bp.setLayout(new BoxLayout(bp, BoxLayout.Y_AXIS));
+    	bp.add(bCreateTree);
+    	bp.add(bNormalizeSql);
+    	result.add(BorderLayout.WEST, bp);
+    	
+    	
+    	sqlTree = new JTree(new DefaultMutableTreeNode());
+    	sqlTree.setFont(new Font("Monospaced", Font.PLAIN, 12));
+    	JPanel p1 = new JPanel(new BorderLayout());
+    	p1.add(BorderLayout.CENTER, new JScrollPane(sqlTree));
+    	
+    	treeCode = new JEditorPane();
+    	JPanel p2 = new JPanel(new BorderLayout());
+    	p2.add(BorderLayout.CENTER, new JScrollPane(treeCode));
+    	    	
+    	JTabbedPane stp = new JTabbedPane();
+    	stp.add(" tree ", p1);
+    	stp.add(" code ", p2);
+    	result.add(BorderLayout.CENTER, stp);
+    	
+    	return result;
     }
 
     protected JPanel getSQLCodePane() {
@@ -86,16 +131,90 @@ class SQLTestApp extends ConstraintEvaluation {
     }
 
     public void actionPerformed(ActionEvent event) {
-	Object source=event.getSource();
-	if (source==sqlGenerate) {
-		try {
-			doGenerateSQL();
-		} catch (Exception e) {
-			updateError(e);
+		Object source=event.getSource();
+	
+		if (source==sqlGenerate) {
+			try {
+				doGenerateSQL();
+			} catch (Exception e) {
+				updateError(e);
+			}
+		} else if (source==bCreateTree) {
+			createSQLTree();
+		} else if (source==bNormalizeSql) {
+			normalizeSQL();
+		} else {
+	    	super.actionPerformed(event);
 		}
-	} else {
-	    super.actionPerformed(event);
-	}
+    }
+    
+    /*
+    protected ModelFacade getModelFacade() throws Exception {
+    	return mf;
+    }
+    */
+    
+    protected void createSQLTree() {
+    	SQLCodeGenerator stg = null;
+    	String xmiFile = "C:/users/loecher/pt2test/base.xmi";
+    	String xmlFile = "C:/users/loecher/pt2test/base.xml";
+    	Model rm;
+    	E2MORM orm;
+    	
+    	try {
+	    	/* read the XMI source
+			System.out.println("read XMI sources ...");
+			if (xmiFile.charAt(0) != '/') xmiFile = "/" + xmiFile;
+			xmiFile = "file://" + xmiFile;
+			mf = XmiParser.createModel(xmiFile, "model in classic mode");
+			rm = XmiParser.createRoughModel(xmiFile, "model in rough mode");
+				
+			// get the object relational map
+			System.out.println("create object relational map ...");
+			if (xmlFile.charAt(0) != '/') xmlFile = "/" + xmlFile;
+			xmlFile = "file://" + xmlFile;
+			orm = new E2MORM(rm, xmlFile);
+			
+	    	
+	    	stg.setORMappingScheme(orm);
+	    	*/
+	    	stg = new SQLCodeGenerator();
+	    	stg.setORMappingScheme(new ORTestScheme());
+	    	
+	    	
+	    	doParse(false);
+			doNormalize();
+    	
+    		
+    		theSqlTree = stg.getSQLTree(tree);
+    	} catch(Exception ex) {
+    		updateError(ex);
+    		showTab(getIndexOfErrorPane());
+    		theSqlTree = stg.getUnfinishedTree();    		
+    	}
+    	
+    	tudresden.ocl.codegen.decl.treegen.Visualizer visu = new tudresden.ocl.codegen.decl.treegen.Visualizer();
+    	theSqlTree.apply(visu);
+    	sqlTree.setModel( new DefaultTreeModel(visu.getRootNode()) );    	
+    	
+    	Printer p = new Oracle8iPrinter();
+    	theSqlTree.apply(p);
+    	treeCode.setText(p.getCode());
+    }
+    
+    protected void normalizeSQL() {
+    	theSqlTree.apply(new SelectElimination());
+    	theSqlTree.apply(new RedNavElimination());
+    	theSqlTree.apply(new ContNavElimination());
+    	theSqlTree.apply(new WhereSelectElimination());
+    	    	    	
+    	tudresden.ocl.codegen.decl.treegen.Visualizer visu = new tudresden.ocl.codegen.decl.treegen.Visualizer();
+    	theSqlTree.apply(visu);
+    	sqlTree.setModel( new DefaultTreeModel(visu.getRootNode()) );   
+    	
+    	Printer p = new Oracle8iPrinter();
+    	theSqlTree.apply(p);
+    	treeCode.setText(p.getCode());   	
     }
 
     protected void doGenerateSQL() {
