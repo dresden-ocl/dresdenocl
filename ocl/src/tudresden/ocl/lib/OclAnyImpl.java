@@ -171,14 +171,13 @@ public class OclAnyImpl extends OclAny {
       return OclAnyImpl.UNDEFINED;
     }
     try {
-      Class[] paramTypes=null;
-      if (params!=null) {
-        paramTypes=new Class[params.length];
-        for (int i=0; i<params.length; i++) {
-          paramTypes[i]=params[i].getClass();
-        }
-      }
-      
+      if(params==null)
+        params=new Object[0];
+    
+      Class[] paramTypes=new Class[params.length];
+      for(int i=0; i<params.length; i++) 
+        paramTypes[i]=params[i].getClass();
+
       // this is very similar to tudresden.ocl.check.types.ClassAny.navigateParameterized
       // if you find a bug here, it it probably there as well.
       Method foundmethod=null;
