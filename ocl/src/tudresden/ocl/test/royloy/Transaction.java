@@ -42,7 +42,7 @@ public class Transaction extends RLObject {
     return ret;
   }
 
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 

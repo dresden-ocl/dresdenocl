@@ -30,7 +30,7 @@ public class Service extends RLObject {
   public Vector  transactions=new Vector();
 
   // Operations
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 

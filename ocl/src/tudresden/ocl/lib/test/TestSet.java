@@ -68,30 +68,30 @@ public class TestSet extends TestCase {
     list.add("c");
     OclRoot set=Ocl.getOclRepresentationFor(list);
 
-    assert( set.isEqualTo(ac).isTrue() );
-    assert( ac.isEqualTo(set).isTrue() );
-    assert( abc.isNotEqualTo(ab).isTrue() );
-    assert( abc.isNotEqualTo(s123).isTrue() );
+    assertTrue( set.isEqualTo(ac).isTrue() );
+    assertTrue( ac.isEqualTo(set).isTrue() );
+    assertTrue( abc.isNotEqualTo(ab).isTrue() );
+    assertTrue( abc.isNotEqualTo(s123).isTrue() );
   }
 
   public void testIncludes() {
-    assert( abc.includes( Ocl.getOclRepresentationFor("a") ).isTrue() );
-    assert( ac.includes( Ocl.getOclRepresentationFor("a") ).isTrue() );
-    assert( ac.includes( Ocl.getOclRepresentationFor("c") ).isTrue() );
-    assert( s123.includes( (OclAny)Ocl.getOclRepresentationFor(p2) ).isTrue() );
+    assertTrue( abc.includes( Ocl.getOclRepresentationFor("a") ).isTrue() );
+    assertTrue( ac.includes( Ocl.getOclRepresentationFor("a") ).isTrue() );
+    assertTrue( ac.includes( Ocl.getOclRepresentationFor("c") ).isTrue() );
+    assertTrue( s123.includes( (OclAny)Ocl.getOclRepresentationFor(p2) ).isTrue() );
 
   }
 
   public void testFeature() {
     OclRoot bag=s123.getFeature("firstName");
-    assert( bag.isEqualTo( abc ).not().isTrue() );
-    assert( bag.isEqualTo( abc.asBag() ).isTrue() );
+    assertTrue( bag.isEqualTo( abc ).not().isTrue() );
+    assertTrue( bag.isEqualTo( abc.asBag() ).isTrue() );
   }
 
   public void testExists() {
     // OCL: s123.exists(p|p=p2)
     final OclIterator iter;
-    assert(
+    assertTrue(
       s123.exists(
         iter=s123.getIterator(),
         new OclBooleanEvaluatable() {
@@ -104,7 +104,7 @@ public class TestSet extends TestCase {
 
     // OCL: not s12.exists(p|p=p3)
     final OclIterator iter2;
-    assert(
+    assertTrue(
       s12.exists(
         iter2=s12.getIterator(),
         new OclBooleanEvaluatable() {
@@ -119,7 +119,7 @@ public class TestSet extends TestCase {
   public void testForAll() {
     // OCL: s123->forAll(p|p.firstName<>"d")
     final OclIterator iter1;
-    assert(
+    assertTrue(
       s123.forAll(
         iter1=s123.getIterator(),
         new OclBooleanEvaluatable() {
@@ -132,7 +132,7 @@ public class TestSet extends TestCase {
 
     // OCL: s123->forAll(i2, i3| i1<>i2 -> i2.firstName<>i3.firstName)
     final OclIterator iter2;
-    assert( s123.forAll(
+    assertTrue( s123.forAll(
         iter2=s123.getIterator(),
         new OclBooleanEvaluatable() {
           final OclIterator iter3=s123.getIterator();
@@ -156,7 +156,7 @@ public class TestSet extends TestCase {
   public void testUnique() {
     // OCL: s123->isUnique(p|p.firstName)
     final OclIterator iter1;
-    assert(
+    assertTrue(
       s123.isUnique(
         iter1=s123.getIterator(),
         new OclRootEvaluatable() {
@@ -178,7 +178,7 @@ public class TestSet extends TestCase {
 
     // OCL: set123->sortedBy(i|i)->first = 1
     final OclIterator iter1=set123.getIterator();
-    assert(
+    assertTrue(
       set123.sortedBy(
         iter1,
         new OclComparableEvaluatable() {
@@ -191,7 +191,7 @@ public class TestSet extends TestCase {
 
     // OCL: set123->excluding(1).sortedBy(i|i) = 2
     final OclIterator iter2=set123.excluding(Ocl.getFor(1)).getIterator();
-    assert(
+    assertTrue(
       set123.excluding(Ocl.getFor(1)).sortedBy(
         iter2,
         new OclComparableEvaluatable() {
@@ -204,7 +204,7 @@ public class TestSet extends TestCase {
 
     // OCL: s123->sortedBy(someNumber)->at(1) = p3
     final OclIterator iter3=s123.getIterator();
-    assert(
+    assertTrue(
       s123.sortedBy(
         iter3,
         new OclComparableEvaluatable() {
@@ -217,7 +217,7 @@ public class TestSet extends TestCase {
 
     // OCL: s123->sortedBy(someNumber)->at(2) = p2
     final OclIterator iter4=s123.getIterator();
-    assert(
+    assertTrue(
       s123.sortedBy(
         iter4,
         new OclComparableEvaluatable() {
@@ -230,7 +230,7 @@ public class TestSet extends TestCase {
 
     // OCL: s123->sortedBy(someNumber)->at(3) = p1
     final OclIterator iter5=s123.getIterator();
-    assert(
+    assertTrue(
       s123.sortedBy(
         iter5,
         new OclComparableEvaluatable() {
@@ -247,7 +247,7 @@ public class TestSet extends TestCase {
     // OCL: abc=(s123->iterate(p; set=Set{}| set->including(p.firstName)))
     final OclIterator iter1;
     final OclContainer acc;
-    assert(
+    assertTrue(
       abc.isEqualTo(
         s123.iterate(
           iter1=s123.getIterator(),
@@ -267,7 +267,7 @@ public class TestSet extends TestCase {
   public void testSelect() {
     //OCL: ( s123->select(p|p.firstName<>"c") ) = s12
     final OclIterator iter1;
-    assert(
+    assertTrue(
       s123.select(
         iter1=s123.getIterator(),
         new OclBooleanEvaluatable() {
@@ -284,7 +284,7 @@ public class TestSet extends TestCase {
   public void testReject() {
     // OCL: abc->reject(s|s.size<2)->isEmpty
     final OclIterator iter1;
-    assert(
+    assertTrue(
       abc.reject(
         iter1=abc.getIterator(),
         new OclBooleanEvaluatable() {
@@ -300,16 +300,16 @@ public class TestSet extends TestCase {
 
   public void testMisc() {
     //size, excludes, includes, includesAll, isEmpty, notEmpty
-    assert( s123.size().isEqualTo( Ocl.getOclRepresentationFor(3) ).isTrue() );
-    assert( s123.excludes(sa).isTrue() );
-    assert( abc.includes(sa).isTrue() );
-    assert( s123.includesAll(s12).isTrue() );
-    assert( ab.includesAll(a).isTrue() );
-    assert( s12.includesAll(sempty).isTrue() );
-    assert(! s1.isEmpty().isTrue() );
-    assert( sempty.isEmpty().isTrue() );
-    assert(! sempty.notEmpty().isTrue() );
-    assert( a.notEmpty().isTrue() );
+    assertTrue( s123.size().isEqualTo( Ocl.getOclRepresentationFor(3) ).isTrue() );
+    assertTrue( s123.excludes(sa).isTrue() );
+    assertTrue( abc.includes(sa).isTrue() );
+    assertTrue( s123.includesAll(s12).isTrue() );
+    assertTrue( ab.includesAll(a).isTrue() );
+    assertTrue( s12.includesAll(sempty).isTrue() );
+    assertTrue(! s1.isEmpty().isTrue() );
+    assertTrue( sempty.isEmpty().isTrue() );
+    assertTrue(! sempty.notEmpty().isTrue() );
+    assertTrue( a.notEmpty().isTrue() );
   }
 
 
@@ -323,33 +323,33 @@ public class TestSet extends TestCase {
     OclSet os5785=(OclSet)Ocl.getOclRepresentationFor(s5785);
     OclInteger i1=(OclInteger)Ocl.getOclRepresentationFor(1);
 
-    assert( os5785.count( Ocl.getOclRepresentationFor(5) ).
+    assertTrue( os5785.count( Ocl.getOclRepresentationFor(5) ).
         isEqualTo( i1 ).isTrue() );
-    assert( abc.count(sa).isEqualTo(i1).isTrue() );
-    assert( os5785.sum().isEqualTo(Ocl.getOclRepresentationFor(20)).isTrue() );
+    assertTrue( abc.count(sa).isEqualTo(i1).isTrue() );
+    assertTrue( os5785.sum().isEqualTo(Ocl.getOclRepresentationFor(20)).isTrue() );
   }
 
   public void testUnion() {
     // union, symmetricDifference, subtract, including, excluding, intersection
-    assert( ab.union(ac).isEqualTo(abc).isTrue() );
-    assert( s1.union(s12).isEqualTo(s12).isTrue() );
-    assert( ab.symmetricDifference(bc).isEqualTo(ac).isTrue() );
-    assert( abc.symmetricDifference(bc).isEqualTo(a).isTrue() );
-    assert( s123.subtract(s123).isEqualTo(sempty).isTrue() );
-    assert( abc.subtract(a).isEqualTo(bc).isTrue() );
-    assert( ab.including(sc).isEqualTo(abc).isTrue() );
-    assert( ab.including(sb).isEqualTo(ab).isTrue() );
-    assert( ab.excluding(sb).isEqualTo(a).isTrue() );
-    assert( abc.excluding(sc).isEqualTo(ab).isTrue() );
-    assert( abc.intersection(bc).isEqualTo(bc).isTrue() );
-    assert( ab.intersection(ac).isEqualTo(a).isTrue() );
-    assert( s1.intersection(s12).isEqualTo(s1).isTrue() );
-    assert( sempty.intersection(s123).isEmpty().isTrue() );
-    assert( s123.union(abc).asBag().isEqualTo(
+    assertTrue( ab.union(ac).isEqualTo(abc).isTrue() );
+    assertTrue( s1.union(s12).isEqualTo(s12).isTrue() );
+    assertTrue( ab.symmetricDifference(bc).isEqualTo(ac).isTrue() );
+    assertTrue( abc.symmetricDifference(bc).isEqualTo(a).isTrue() );
+    assertTrue( s123.subtract(s123).isEqualTo(sempty).isTrue() );
+    assertTrue( abc.subtract(a).isEqualTo(bc).isTrue() );
+    assertTrue( ab.including(sc).isEqualTo(abc).isTrue() );
+    assertTrue( ab.including(sb).isEqualTo(ab).isTrue() );
+    assertTrue( ab.excluding(sb).isEqualTo(a).isTrue() );
+    assertTrue( abc.excluding(sc).isEqualTo(ab).isTrue() );
+    assertTrue( abc.intersection(bc).isEqualTo(bc).isTrue() );
+    assertTrue( ab.intersection(ac).isEqualTo(a).isTrue() );
+    assertTrue( s1.intersection(s12).isEqualTo(s1).isTrue() );
+    assertTrue( sempty.intersection(s123).isEmpty().isTrue() );
+    assertTrue( s123.union(abc).asBag().isEqualTo(
       s123.asBag().union(abc.asBag())
     ).isTrue() );
-    assert( s123.union((OclCollection)s123.getFeature("firstName")).includesAll(abc).isTrue() );
-    assert( s123.union((OclCollection)s123.getFeature("firstName")).
+    assertTrue( s123.union((OclCollection)s123.getFeature("firstName")).includesAll(abc).isTrue() );
+    assertTrue( s123.union((OclCollection)s123.getFeature("firstName")).
       isNotEqualTo(s123.union(abc)).isTrue() );
   }
 

@@ -87,6 +87,6 @@ public interface TypeFactory {
 
   public boolean conforms(Type found, Type expected);
 
-  public void assert(Type found, Type expected, Node where);
+  public void assertTrue(Type found, Type expected, Node where);
 } /* end class TypeFactory */
 

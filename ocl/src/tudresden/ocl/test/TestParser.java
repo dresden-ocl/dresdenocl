@@ -71,39 +71,39 @@ public class TestParser extends TestCase {
           ot.applyGeneratedTests();
           if (!typesOK[i])
             System.out.println("incorrectly type-checked successfully:\n"+oclExpressions[i]);
-          assert( syntaxOK[i] && typesOK[i] );
+          assertTrue( syntaxOK[i] && typesOK[i] );
         }
         catch (OclTypeException e) {
           if (typesOK[i])
           {
             System.out.println("failed to type-check:\n"+oclExpressions[i]);
             throw new RuntimeException(e.toString()+oclExpressions[i]);
-            //assert( !typesOK[i] );
+            //assertTrue( !typesOK[i] );
           }
         }
         catch (OclParserException e) {
           if (syntaxOK[i])
             System.out.println("failed to parse:\n"+oclExpressions[i]);
-          assert( !syntaxOK[i] );
+          assertTrue( !syntaxOK[i] );
         }
         catch (IOException e) {
           if (syntaxOK[i])
             System.out.println("failed to parse:\n"+oclExpressions[i]);
-          assert( !syntaxOK[i] );
+          assertTrue( !syntaxOK[i] );
         }
         catch (tudresden.ocl.OclException e) {
           if (typesOK[i])
           {
             System.out.println("generated tests failed:\n"+oclExpressions[i]);
             throw new RuntimeException(e.toString()+oclExpressions[i]);
-            //assert( !typesOK[i] );
+            //assertTrue( !typesOK[i] );
           }
         }
       }
     }
     catch(IOException e) {
       e.printStackTrace(System.out);
-      assert(false);
+      assertTrue(false);
     }
   }
 

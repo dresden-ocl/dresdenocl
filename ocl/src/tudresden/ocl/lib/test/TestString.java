@@ -21,24 +21,24 @@ public class TestString extends TestCase {
   }
   
   public void testEqual() {
-    assert( shallo.isEqualTo(shallo).isTrue() );
-    assert(! sHALLO.isEqualTo(shallo).isTrue() );
-    assert( sHALLO.isEqualTo(new OclString("HALLO")).isTrue() );
-    assert( sUndef.isEqualTo(shallo).isUndefined() );
-    assert( sHALLO.isEqualTo(sUndef).isUndefined() );
-    assert( sHALLO.isNotEqualTo(shallo).isTrue() );
-    assert( sHALLO.equals(sHALLO) );
-    assert( shallo.equals( Ocl.getOclRepresentationFor("hallo") ) );
+    assertTrue( shallo.isEqualTo(shallo).isTrue() );
+    assertTrue(! sHALLO.isEqualTo(shallo).isTrue() );
+    assertTrue( sHALLO.isEqualTo(new OclString("HALLO")).isTrue() );
+    assertTrue( sUndef.isEqualTo(shallo).isUndefined() );
+    assertTrue( sHALLO.isEqualTo(sUndef).isUndefined() );
+    assertTrue( sHALLO.isNotEqualTo(shallo).isTrue() );
+    assertTrue( sHALLO.equals(sHALLO) );
+    assertTrue( shallo.equals( Ocl.getOclRepresentationFor("hallo") ) );
   }
   
   public void testSubstring() {
-    assert( 
+    assertTrue( 
       sHaLlO.substring(
         (OclInteger)Ocl.getOclRepresentationFor(1),
         (OclInteger)Ocl.getOclRepresentationFor(3)
       ).isEqualTo(sHaL).isTrue()
     );
-    assert(
+    assertTrue(
       shalloHALLO.substring(
         (OclInteger)Ocl.getOclRepresentationFor(2),
         (OclInteger)Ocl.getOclRepresentationFor(5)
@@ -49,26 +49,26 @@ public class TestString extends TestCase {
   }
   
   public void testConcat() {
-    assert( shallo.concat(sHALLO).isEqualTo(shalloHALLO).isTrue());
+    assertTrue( shallo.concat(sHALLO).isEqualTo(shalloHALLO).isTrue());
   }
   
   public void testUpper() {
-    assert( shallo.toUpper().isEqualTo(sHALLO).isTrue() );
-    assert( sHaLlO.toUpper().isEqualTo(sHALLO).isTrue() );
+    assertTrue( shallo.toUpper().isEqualTo(sHALLO).isTrue() );
+    assertTrue( sHaLlO.toUpper().isEqualTo(sHALLO).isTrue() );
   }
   
   public void testLower() {
-    assert( shallo.toLower().isEqualTo(shallo).isTrue() );
-    assert( sHaLlO.toLower().isEqualTo(shallo).isTrue() );
+    assertTrue( shallo.toLower().isEqualTo(shallo).isTrue() );
+    assertTrue( sHaLlO.toLower().isEqualTo(shallo).isTrue() );
   }
   
   public void testSize() {
-    assert( shallo.size().isEqualTo(Ocl.getOclRepresentationFor(5)).isTrue());
-    assert( sHaL.size().isEqualTo(Ocl.getOclRepresentationFor(3)).isTrue());
+    assertTrue( shallo.size().isEqualTo(Ocl.getOclRepresentationFor(5)).isTrue());
+    assertTrue( sHaL.size().isEqualTo(Ocl.getOclRepresentationFor(3)).isTrue());
   }
   
   public void testFeature() {
-    assert( shallo.getFeature("bla").isUndefined() );
+    assertTrue( shallo.getFeature("bla").isUndefined() );
   }
   
   public static Test suite() {

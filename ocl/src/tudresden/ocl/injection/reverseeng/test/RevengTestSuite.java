@@ -166,7 +166,7 @@ public class RevengTestSuite extends TestCase {
             // Compare and conditionally throw exception
             for (int i = 0; i < len; i++) {
               int nChar = m_rModificationTemplate.read();
-              assert ("Attempt to write wrong character.\nGot \'" + cbuf[off + i] + "\' expected \'" + (char)nChar + "\' at " +
+              assertTrue ("Attempt to write wrong character.\nGot \'" + cbuf[off + i] + "\' expected \'" + (char)nChar + "\' at " +
                       "(" + m_nLine + ", " + m_nColumn + ").",
                        (cbuf[off + i] == nChar));
               
@@ -191,7 +191,7 @@ public class RevengTestSuite extends TestCase {
         
         public void close() {
           try {
-            assert ("Premature end of stream!",
+            assertTrue ("Premature end of stream!",
                      m_rModificationTemplate.read() == -1);
           }
           catch (AssertionFailedError afe) {

@@ -103,42 +103,42 @@ public class TestMappedClass extends TestCase {
 	
 	// simple case	
 	public void testCaseA() {
-		assert(mc1.getClassName().equals("A"));
+		assertTrue(mc1.getClassName().equals("A"));
 				
-		assert(mc1.isAttribute("a1"));
-		assert(mc1.isAttribute("a2"));
-		assert(mc1.isAttribute("a3"));
+		assertTrue(mc1.isAttribute("a1"));
+		assertTrue(mc1.isAttribute("a2"));
+		assertTrue(mc1.isAttribute("a3"));
 		
-		assert(mc1.isAssociationEnd("b"));
-		assert(!mc1.isAssociationEnd("c"));
+		assertTrue(mc1.isAssociationEnd("b"));
+		assertTrue(!mc1.isAssociationEnd("c"));
 		
-		assert(mc1.isQuery("operationA"));
-		assert(!mc1.isQuery("operationC"));
+		assertTrue(mc1.isQuery("operationA"));
+		assertTrue(!mc1.isQuery("operationC"));
 		
-		assert(mc1.hasTable("TableA1"));
-		assert(mc1.hasTable("TableA2"));
-		assert(!mc1.hasTable("TableA3"));
+		assertTrue(mc1.hasTable("TableA1"));
+		assertTrue(mc1.hasTable("TableA2"));
+		assertTrue(!mc1.hasTable("TableA3"));
 		
-		assert(mc1.getTables().size() == 2);
+		assertTrue(mc1.getTables().size() == 2);
 		
 		Guide g = mc1.getJoinGuide("b");
 		g.next();
-		assert(g.getSelect().equals("B1"));
-		assert(g.getFrom().equals("TableB"));
-		assert(g.getWhere().equals("B1"));
-		assert(g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("B1"));
+		assertTrue(g.getFrom().equals("TableB"));
+		assertTrue(g.getWhere().equals("B1"));
+		assertTrue(g.hasMoreSteps());
 		g.next();
-		assert(g.getSelect().equals("B1"));
-		assert(g.getFrom().equals("AB"));
-		assert(g.getWhere().equals("A1"));
-		assert(g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("B1"));
+		assertTrue(g.getFrom().equals("AB"));
+		assertTrue(g.getWhere().equals("A1"));
+		assertTrue(g.hasMoreSteps());
 		g.next();
-		assert(g.getSelect().equals("A1"));
-		assert(g.getFrom().equals("TableA"));
-		assert(g.getWhere().equals("A1"));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("A1"));
+		assertTrue(g.getFrom().equals("TableA"));
+		assertTrue(g.getWhere().equals("A1"));
+		assertTrue(!g.hasMoreSteps());
 		
-		assert(mc1.getAssociationEnd("b").getClassName().equals("B"));
+		assertTrue(mc1.getAssociationEnd("b").getClassName().equals("B"));
 		
 		try {
 			mc1.getAttributeGuide("a1");
@@ -147,71 +147,71 @@ public class TestMappedClass extends TestCase {
 		}
 	
 		List l = mc1.getAttributeGuides("a1");
-		assert(l.size() == 2);
+		assertTrue(l.size() == 2);
 		g = (Guide)l.get(0);
 		g.next();
-		assert(g.getSelect().equals("A1"));
-		assert(g.getFrom().equals("TableA1"));
-		assert(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("A1"));
+		assertTrue(g.getFrom().equals("TableA1"));
+		assertTrue(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
+		assertTrue(!g.hasMoreSteps());
 		g = (Guide)l.get(1);
 		g.next();
-		assert(g.getSelect().equals("A1"));
-		assert(g.getFrom().equals("TableA2"));
-		assert(g.getWhere().equals(t1b.getPrimaryKeyRepresentation()));
-		assert(!g.hasMoreSteps());						
+		assertTrue(g.getSelect().equals("A1"));
+		assertTrue(g.getFrom().equals("TableA2"));
+		assertTrue(g.getWhere().equals(t1b.getPrimaryKeyRepresentation()));
+		assertTrue(!g.hasMoreSteps());						
 	}
 
 	// inheritance structures
 	public void testCaseB() {
-		assert(mc3.getClassName().equals("C"));
+		assertTrue(mc3.getClassName().equals("C"));
 		
-		assert(mc3.isAttribute("a1"));
-		assert(mc3.isAttribute("a2"));
-		assert(mc3.isAttribute("a3"));
-		assert(mc3.isAttribute("c1"));
-		assert(mc3.isAttribute("c2"));
-		assert(mc3.isAttribute("c3"));
+		assertTrue(mc3.isAttribute("a1"));
+		assertTrue(mc3.isAttribute("a2"));
+		assertTrue(mc3.isAttribute("a3"));
+		assertTrue(mc3.isAttribute("c1"));
+		assertTrue(mc3.isAttribute("c2"));
+		assertTrue(mc3.isAttribute("c3"));
 		
-		assert(mc3.isAssociationEnd("b"));
-		assert(mc3.isAssociationEnd("foo"));
-		assert(!mc3.isAssociationEnd("c"));
+		assertTrue(mc3.isAssociationEnd("b"));
+		assertTrue(mc3.isAssociationEnd("foo"));
+		assertTrue(!mc3.isAssociationEnd("c"));
 		
-		assert(mc3.isQuery("operationA"));
-		assert(mc3.isQuery("operationC"));
-		assert(!mc3.isQuery("operationB"));
+		assertTrue(mc3.isQuery("operationA"));
+		assertTrue(mc3.isQuery("operationC"));
+		assertTrue(!mc3.isQuery("operationB"));
 		
-		assert(mc3.hasTable("TableC"));
-		assert(!mc3.hasTable("TableA1"));
+		assertTrue(mc3.hasTable("TableC"));
+		assertTrue(!mc3.hasTable("TableA1"));
 		
-		assert(mc3.getTables().size() == 1);
+		assertTrue(mc3.getTables().size() == 1);
 		
 		Guide g = mc3.getJoinGuide("b");
 		g.next();
-		assert(g.getSelect().equals("B1"));
-		assert(g.getFrom().equals("TableB"));
-		assert(g.getWhere().equals("B1"));
-		assert(g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("B1"));
+		assertTrue(g.getFrom().equals("TableB"));
+		assertTrue(g.getWhere().equals("B1"));
+		assertTrue(g.hasMoreSteps());
 		g.next();
-		assert(g.getSelect().equals("B1"));
-		assert(g.getFrom().equals("AB"));
-		assert(g.getWhere().equals("A1"));
-		assert(g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("B1"));
+		assertTrue(g.getFrom().equals("AB"));
+		assertTrue(g.getWhere().equals("A1"));
+		assertTrue(g.hasMoreSteps());
 		g.next();
-		assert(g.getSelect().equals("A1"));
-		assert(g.getFrom().equals("TableA"));
-		assert(g.getWhere().equals("A1"));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("A1"));
+		assertTrue(g.getFrom().equals("TableA"));
+		assertTrue(g.getWhere().equals("A1"));
+		assertTrue(!g.hasMoreSteps());
 		
 		g = mc3.getJoinGuide("foo");
 		g.next();
-		assert(g.getSelect().equals("B1"));
-		assert(g.getFrom().equals("TableC"));
-		assert(g.getWhere().equals("C1"));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("B1"));
+		assertTrue(g.getFrom().equals("TableC"));
+		assertTrue(g.getWhere().equals("C1"));
+		assertTrue(!g.hasMoreSteps());
 		
-		assert(mc3.getAssociationEnd("b").getClassName().equals("B"));
-		assert(mc3.getAssociationEnd("foo").getClassName().equals("B"));
+		assertTrue(mc3.getAssociationEnd("b").getClassName().equals("B"));
+		assertTrue(mc3.getAssociationEnd("foo").getClassName().equals("B"));
 		
 		try {
 			mc3.getAttributeGuide("a1");
@@ -220,53 +220,53 @@ public class TestMappedClass extends TestCase {
 		}
 	
 		List l = mc3.getAttributeGuides("a1");
-		assert(l.size() == 2);
+		assertTrue(l.size() == 2);
 		g = (Guide)l.get(0);
 		g.next();
-		assert(g.getSelect().equals("A1"));
-		assert(g.getFrom().equals("TableA1"));
-		assert(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("A1"));
+		assertTrue(g.getFrom().equals("TableA1"));
+		assertTrue(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
+		assertTrue(!g.hasMoreSteps());
 		g = (Guide)l.get(1);
 		g.next();
-		assert(g.getSelect().equals("A1"));
-		assert(g.getFrom().equals("TableA2"));
-		assert(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("A1"));
+		assertTrue(g.getFrom().equals("TableA2"));
+		assertTrue(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
+		assertTrue(!g.hasMoreSteps());
 		
 		g = mc3.getAttributeGuide("c1");
 		g.next();
-		assert(g.getSelect().equals("C1"));
-		assert(g.getFrom().equals("TableC"));
-		assert(g.getWhere().equals(t3.getPrimaryKeyRepresentation()));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("C1"));
+		assertTrue(g.getFrom().equals("TableC"));
+		assertTrue(g.getWhere().equals(t3.getPrimaryKeyRepresentation()));
+		assertTrue(!g.hasMoreSteps());
 		
 		g = mc3.getAttributeGuide("c2");
 		g.next();
-		assert(g.getSelect().equals("C2"));
-		assert(g.getFrom().equals("TableC"));
-		assert(g.getWhere().equals(t3.getPrimaryKeyRepresentation()));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("C2"));
+		assertTrue(g.getFrom().equals("TableC"));
+		assertTrue(g.getWhere().equals(t3.getPrimaryKeyRepresentation()));
+		assertTrue(!g.hasMoreSteps());
 		
 		g = mc3.getAttributeGuide("c3");
 		g.next();
-		assert(g.getSelect().equals("C3"));
-		assert(g.getFrom().equals("TableC"));
-		assert(g.getWhere().equals(t3.getPrimaryKeyRepresentation()));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("C3"));
+		assertTrue(g.getFrom().equals("TableC"));
+		assertTrue(g.getWhere().equals(t3.getPrimaryKeyRepresentation()));
+		assertTrue(!g.hasMoreSteps());
 		
 		g = mc3.getAttributeGuide("a2");
 		g.next();
-		assert(g.getSelect().equals("A2"));
-		assert(g.getFrom().equals("TableA1"));
-		assert(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("A2"));
+		assertTrue(g.getFrom().equals("TableA1"));
+		assertTrue(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
+		assertTrue(!g.hasMoreSteps());
                 
                 g = mc3.getJoinGuide("C");
                 g.next();
-                assert(g.getSelect().equals("C1"));
-                assert(g.getFrom().equals("TableC"));
-                assert(g.getWhere().equals(""));
+                assertTrue(g.getSelect().equals("C1"));
+                assertTrue(g.getFrom().equals("TableC"));
+                assertTrue(g.getWhere().equals(""));
 	}
 	
 	// exception handling
@@ -318,25 +318,25 @@ public class TestMappedClass extends TestCase {
                 Set tmp;
                 
                 tmp = mc3.attributes();
-                assert(tmp.size() == 6);
-                assert(tmp.contains("c1"));
-                assert(tmp.contains("c2"));
-                assert(tmp.contains("c3"));
-                assert(tmp.contains("a1"));
-                assert(tmp.contains("a2"));
-                assert(tmp.contains("a3"));
+                assertTrue(tmp.size() == 6);
+                assertTrue(tmp.contains("c1"));
+                assertTrue(tmp.contains("c2"));
+                assertTrue(tmp.contains("c3"));
+                assertTrue(tmp.contains("a1"));
+                assertTrue(tmp.contains("a2"));
+                assertTrue(tmp.contains("a3"));
                 
                 tmp = mc3.associationEnds();
-                assert(tmp.size() == 1);
-                assert(tmp.contains("foo"));
+                assertTrue(tmp.size() == 1);
+                assertTrue(tmp.contains("foo"));
                 
                 tmp = mc3.supertypes();
-                assert(tmp.size() == 1);
-                assert(tmp.contains("A"));
+                assertTrue(tmp.size() == 1);
+                assertTrue(tmp.contains("A"));
                 
                 tmp = mc3.allSupertypes();
-                assert(tmp.size() == 1);
-                assert(tmp.contains("A"));                                     
+                assertTrue(tmp.size() == 1);
+                assertTrue(tmp.contains("A"));                                     
         }
         
 	public static Test suite() {

@@ -21,15 +21,15 @@ public class TestAnyImpl extends TestCase {
   }
   
   public void testEqual() {
-    assert( aEmpl.isEqualTo(aEmpl2).isTrue() );
-    assert( aEmpl.isEqualTo(aEmpl).isTrue() );
-    assert(! aEmpl.isEqualTo(aUempl).isTrue() );
+    assertTrue( aEmpl.isEqualTo(aEmpl2).isTrue() );
+    assertTrue( aEmpl.isEqualTo(aEmpl).isTrue() );
+    assertTrue(! aEmpl.isEqualTo(aUempl).isTrue() );
   }
   
   public void testFeature() {
-    assert(! ((OclBoolean)aEmpl.getFeature("isUnemployed")).isTrue() );
-    assert( ((OclBoolean)aUempl.getFeature("isUnemployed")).isTrue() );
-    assert( aEmpl.getFeature("getFive", null).isEqualTo( Ocl.getOclRepresentationFor(5) ).isTrue() );
+    assertTrue(! ((OclBoolean)aEmpl.getFeature("isUnemployed")).isTrue() );
+    assertTrue( ((OclBoolean)aUempl.getFeature("isUnemployed")).isTrue() );
+    assertTrue( aEmpl.getFeature("getFive", null).isEqualTo( Ocl.getOclRepresentationFor(5) ).isTrue() );
   }
   
   public static Test suite() {

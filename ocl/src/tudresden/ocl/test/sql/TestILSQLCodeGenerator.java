@@ -104,8 +104,8 @@ public class TestILSQLCodeGenerator extends TestCase {
 		//System.err.println(theCG.getTableRepresentation());
 		//System.err.println(theCG.getJoinRepresentation());
 		
-		assert(theCG.getTableRepresentation().equals("A TA0,C TA1"));
-		assert(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.AFK) and " +
+		assertTrue(theCG.getTableRepresentation().equals("A TA0,C TA1"));
+		assertTrue(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.AFK) and " +
 							    "(TA1.CPK = SELF.CPK)"));
 		
 		// pur navigation over several guides
@@ -136,8 +136,8 @@ public class TestILSQLCodeGenerator extends TestCase {
 		//System.err.println(theCG.getTableRepresentation());
 		//System.err.println(theCG.getJoinRepresentation());
 		
-		assert(theCG.getTableRepresentation().equals("A TA0,AB TA1,B TA2,BC TA3,C TA4,CD TA5,D TA6"));
-		assert(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.AFK) and " +
+		assertTrue(theCG.getTableRepresentation().equals("A TA0,AB TA1,B TA2,BC TA3,C TA4,CD TA5,D TA6"));
+		assertTrue(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.AFK) and " +
 							    "(TA1.BFK = TA2.BPK) and " +
 							    "(TA2.BPK = TA3.BFK) and " +
 							    "(TA3.CFK = TA4.CPK) and " +
@@ -160,8 +160,8 @@ public class TestILSQLCodeGenerator extends TestCase {
 		//System.err.println(theCG.getTableRepresentation());
 		//System.err.println(theCG.getJoinRepresentation());
 		
-		assert(theCG.getTableRepresentation().equals("A TA0,A TA1"));
-		assert(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.RAPK) and " +
+		assertTrue(theCG.getTableRepresentation().equals("A TA0,A TA1"));
+		assertTrue(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.RAPK) and " +
 							    "(TA1.APK = SELF.APK)"));				
                 
                 theCG.setJoinMode(false);
@@ -187,12 +187,12 @@ public class TestILSQLCodeGenerator extends TestCase {
                 
                 //System.err.println(theCG.getTableRepresentation());
 		
-        	assert(equal(theCG.getTableRepresentation(), 
+        	assertTrue(equal(theCG.getTableRepresentation(), 
                              "(select A1 from A where APK in" +
                              "(select AFK from C where CPK = SELF.CPK))"
                              )
                 );
-		assert(theCG.getJoinRepresentation().equals(""));
+		assertTrue(theCG.getJoinRepresentation().equals(""));
 		
 		// pur navigation over several guides
 		guides.clear();
@@ -221,7 +221,7 @@ public class TestILSQLCodeGenerator extends TestCase {
                 
                 //System.err.println(theCG.getTableRepresentation());
 		
-		assert(equal(theCG.getTableRepresentation(),
+		assertTrue(equal(theCG.getTableRepresentation(),
                              "(select APK from A where APK in\n" +
                              "(select AFK from AB where BFK in\n" +
                              "(select BPK from B where BPK in\n" +
@@ -230,7 +230,7 @@ public class TestILSQLCodeGenerator extends TestCase {
                              "(select CFK from CD where DFK in\n" +
                              "(select DPK from D where DPK = SELF.DPK)))))))"
                 ));
-		assert(theCG.getJoinRepresentation().equals(""));
+		assertTrue(theCG.getJoinRepresentation().equals(""));
 		
 		// navigation to same table
 		guides.clear();
@@ -246,11 +246,11 @@ public class TestILSQLCodeGenerator extends TestCase {
                 
                 //System.err.println(theCG.getTableRepresentation());
 		
-                assert(equal(theCG.getTableRepresentation(),
+                assertTrue(equal(theCG.getTableRepresentation(),
                              "(select APK from A where APK in\n" +
                              "(select RAPK from A where APK = SELF.APK))"
                 ));
-		assert(theCG.getJoinRepresentation().equals(""));	      
+		assertTrue(theCG.getJoinRepresentation().equals(""));	      
         }
 		
         public void testUniversityExampleInv() {
@@ -273,7 +273,7 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "     (select VALUE from OV_GRADE where GID in                                                ";         
             expres += "     (select GRADE from OV_PERSON where PID = SELF.PID))                                     ";
             expres += "))                                                                                           ";
-            assert(equal(genres, expres));
+            assertTrue(equal(genres, expres));
             
             // inv2
             genres = getSQLCode("context Faculty inv inv2: self.subFacility->size >= 2");
@@ -286,7 +286,7 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "             (select FID from OV_FACILITY where SUPERFACILITY in                             ";        
             expres += "              (select FID from OV_FACILITY where FID = SELF.FID)))                           ";
             expres += "            >= 2))                                                                           ";
-            assert(equal(genres, expres));
+            assertTrue(equal(genres, expres));
             
             // inv3
             genres = getSQLCode("context Faculty inv inv3: self.subFacility->forAll(oclIsTypeOf(Institute))");
@@ -306,7 +306,7 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "                                      where FID = TUDOCLITER0.FID)                           ";
             expres += "            )                                                                                ";
             expres += "))                                                                                           ";
-            assert(equal(genres, expres));
+            assertTrue(equal(genres, expres));
             
             // inv4
             genres = getSQLCode("context Employee inv inv4: ((self.grade.name = 'diploma') implies (self.taxClass = 'tc1'))" +
@@ -329,7 +329,7 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "                  = 'professor')                                                             ";
             expres += "              OR (SELF.TAXCLASS = 'tc3'))                                                    ";
             expres += "))                                                                                           ";            
-            assert(equal(genres, expres));
+            assertTrue(equal(genres, expres));
             
             // inv5
             genres = getSQLCode("context Facility inv inv5: not(self.member->exists(p:Person|p.owner->excludes(self)))");
@@ -352,7 +352,7 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "                        )                                                                    ";            
             expres += "             )                                                                               ";  
             expres += "))))                                                                                         ";                  
-            assert(equal(genres, expres));
+            assertTrue(equal(genres, expres));
             
             // inv6
             genres = getSQLCode("context Paper inv inv6: ((purpose = 'Diplom') and (inProgress = true)) implies author->forAll(p:Person|p.oclIsTypeOf(Student))");
@@ -381,7 +381,7 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "                      )                                                                              "; 
             expres += "            )                                                                                        "; 
             expres += "))                                                                                                   ";             
-            assert(equal(genres, expres));
+            assertTrue(equal(genres, expres));
             
             // inv7
             genres = getSQLCode("context Faculty inv inv7: self.headOfFacility.grade.name = 'professor'");
@@ -393,7 +393,7 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "            (select HEADOFFACILITY from OV_FACILITY where FID = SELF.FID)))                  ";
             expres += "            = 'professor'                                                                    ";
             expres += "))                                                                                           ";
-            assert(equal(genres, expres));
+            assertTrue(equal(genres, expres));
             
             // inv8
             genres = getSQLCode("context Grade inv inv8: Set{'none','diploma','doctor','professor'}->includes(self.name)");
@@ -412,7 +412,7 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "                select 'professor' as elem from DUAL)                                        ";
             expres += "            )                                                                                ";
             expres += "))                                                                                           ";
-            assert(equal(genres, expres));
+            assertTrue(equal(genres, expres));
             
             //inv9
             genres = getSQLCode("context Employee inv inv9: (self.grade.name = 'doctor') implies " +
@@ -435,7 +435,7 @@ public class TestILSQLCodeGenerator extends TestCase {
             expres += "                                   where not (TUDOCLITER0.PURPOSE = 'Dissertation')))        ";
             expres += "                = 1)                                                                         ";
             expres += "))                                                                                           ";
-            assert(equal(genres, expres));
+            assertTrue(equal(genres, expres));
             
             } catch(IOException e) {
                 System.err.println(e.toString());

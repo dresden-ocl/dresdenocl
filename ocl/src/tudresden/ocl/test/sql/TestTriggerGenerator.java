@@ -39,38 +39,38 @@ public class TestTriggerGenerator extends TestCase {
             String it[] = {"PERSON", "STUDENT", "EMPLOYEE"};
             String tmp[] = triGen.getAssertionReplacement("tudocl_", "Integrity error !", "OV_PERSON", it);   
             
-            assert(tmp.length == 3);
+            assertTrue(tmp.length == 3);
   
             theSQLBuilder.reset();
             theSQLBuilder.createAssertionReplacement("tudocl_OV_PERSON_on_PERSON", "PERSON", "OV_PERSON", "Integrity error !");
-            assert(theSQLBuilder.getCode().equals(tmp[0]));
+            assertTrue(theSQLBuilder.getCode().equals(tmp[0]));
             
             theSQLBuilder.reset();
             theSQLBuilder.createAssertionReplacement("tudocl_OV_PERSON_on_STUDENT", "STUDENT", "OV_PERSON", "Integrity error !");
-            assert(theSQLBuilder.getCode().equals(tmp[1]));
+            assertTrue(theSQLBuilder.getCode().equals(tmp[1]));
             
             theSQLBuilder.reset();
             theSQLBuilder.createAssertionReplacement("tudocl_OV_PERSON_on_EMPLOYEE", "EMPLOYEE", "OV_PERSON", "Integrity error !");
-            assert(theSQLBuilder.getCode().equals(tmp[2]));
+            assertTrue(theSQLBuilder.getCode().equals(tmp[2]));
         }
         
         public void testECATriggerTemplate() {
             String it[] = {"PERSON", "STUDENT", "EMPLOYEE"};
             String tmp[] = triGen.getECATriggerTemplate("tudocl_", "OV_PERSON", it);   
             
-            assert(tmp.length == 3);
+            assertTrue(tmp.length == 3);
   
             theSQLBuilder.reset();
             theSQLBuilder.createECATriggerTemplate("tudocl_OV_PERSON_on_PERSON", "PERSON", "OV_PERSON");
-            assert(theSQLBuilder.getCode().equals(tmp[0]));
+            assertTrue(theSQLBuilder.getCode().equals(tmp[0]));
             
             theSQLBuilder.reset();
             theSQLBuilder.createECATriggerTemplate("tudocl_OV_PERSON_on_STUDENT", "STUDENT", "OV_PERSON");
-            assert(theSQLBuilder.getCode().equals(tmp[1]));
+            assertTrue(theSQLBuilder.getCode().equals(tmp[1]));
             
             theSQLBuilder.reset();
             theSQLBuilder.createECATriggerTemplate("tudocl_OV_PERSON_on_EMPLOYEE", "EMPLOYEE", "OV_PERSON");
-            assert(theSQLBuilder.getCode().equals(tmp[2]));
+            assertTrue(theSQLBuilder.getCode().equals(tmp[2]));
         }
         
         public static Test suite() {

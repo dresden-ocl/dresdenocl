@@ -80,9 +80,9 @@ abstract class TestInjection
     // phase 1: checking invariants lazily.
     ev=ev1;
     for(Iterator i=allobjects.iterator(); i.hasNext(); )
-      ((RLObject)i.next()).assert();
+      ((RLObject)i.next()).assertTrue();
     for(Iterator i=allobjects.iterator(); i.hasNext(); )
-      ((RLObject)i.next()).assert();
+      ((RLObject)i.next()).assertTrue();
     ensureAllViolations();
     ev=null;
 

@@ -29,7 +29,7 @@ public class ProgramPartner extends RLObject {
   public Vector  deliveredServices=new Vector();
 
   // Operations
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 

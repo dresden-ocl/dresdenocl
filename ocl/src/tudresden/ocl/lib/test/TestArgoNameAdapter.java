@@ -18,22 +18,22 @@ public class TestArgoNameAdapter extends TestCase {
 
     String[] resPerson=ana.getNames("person");
     for (int i=0; i<resPerson.length; i++) {
-      assert( resPerson[i].equals(arrayPerson[i]) );
+      assertTrue( resPerson[i].equals(arrayPerson[i]) );
     }
     String[] resX=ana.getNames("X");
     for (int i=0; i<resX.length; i++) {
-      assert( resX[i].equals(arrayX[i]) );
+      assertTrue( resX[i].equals(arrayX[i]) );
     }
 
     Person p=new Person();
     OclRoot person=Ocl.getFor(p);
-    assert( person.getFeatureAsCollection("job").isEmpty().isTrue() );
+    assertTrue( person.getFeatureAsCollection("job").isEmpty().isTrue() );
     Vector v=new Vector();
     v.add(new Object());
     v.add(new Object());
     p.setJob(v);
-    assert( person.getFeatureAsCollection("job").isEmpty().not().isTrue() );
-    assert( person.getFeatureAsCollection("job").size().isEqualTo(Ocl.getFor(2)).isTrue() );
+    assertTrue( person.getFeatureAsCollection("job").isEmpty().not().isTrue() );
+    assertTrue( person.getFeatureAsCollection("job").size().isEqualTo(Ocl.getFor(2)).isTrue() );
   }
 
   public static Test suite() {

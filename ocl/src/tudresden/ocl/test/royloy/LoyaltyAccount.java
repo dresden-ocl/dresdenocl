@@ -24,7 +24,7 @@ public class LoyaltyAccount extends RLObject {
   return false;
   }
 
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 } /* end class LoyaltyAccount */

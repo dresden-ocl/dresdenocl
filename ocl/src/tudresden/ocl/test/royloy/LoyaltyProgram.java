@@ -24,7 +24,7 @@ public class LoyaltyProgram extends RLObject {
   public void enroll(Customer c) {
   }
 
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 

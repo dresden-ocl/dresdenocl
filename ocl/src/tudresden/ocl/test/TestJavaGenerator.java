@@ -621,7 +621,7 @@ public class TestJavaGenerator extends TestCase {
     }
     catch (IOException ioe) {
       ioe.printStackTrace(System.out);
-      assert(false);
+      assertTrue(false);
     }
   }
 
@@ -639,7 +639,7 @@ public class TestJavaGenerator extends TestCase {
       tree.applyDefaultNormalizations();
       CodeFragment[] frags=tree.getCode(new JavaCodeGenerator("this", "result", oclLibPackage));
       if (java.length!=frags.length) System.out.println("wrong number of fragments");
-      assert( java.length == frags.length );
+      assertTrue( java.length == frags.length );
       for (int i=0; i<java.length; i++) {
         boolean ok=java[i].trim().equals( frags[i].getCode().trim() );
         if (!ok) {
@@ -696,7 +696,7 @@ public class TestJavaGenerator extends TestCase {
       }
       e.printStackTrace(System.out);
     }
-    assert(allIsFine);
+    assertTrue(allIsFine);
   }
 
   public static Test suite() {

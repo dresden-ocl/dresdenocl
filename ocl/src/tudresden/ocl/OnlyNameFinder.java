@@ -58,43 +58,43 @@ public class OnlyNameFinder extends DepthFirstAdapter {
 
   public void inAExpression(AExpression e) {
     expr=e;
-    assert(e.getLetExpression().isEmpty());
+    assertTrue(e.getLetExpression().isEmpty());
   }
 
   public void inALogicalExpression(ALogicalExpression le) {
-    assert(le.getLogicalExpressionTail().isEmpty());
+    assertTrue(le.getLogicalExpressionTail().isEmpty());
   }
 
   public void inARelationalExpression(ARelationalExpression re) {
-    assert(re.getRelationalExpressionTail()==null);
+    assertTrue(re.getRelationalExpressionTail()==null);
   }
 
   public void inAAdditiveExpression(AAdditiveExpression ae) {
-    assert(ae.getAdditiveExpressionTail().isEmpty());
+    assertTrue(ae.getAdditiveExpressionTail().isEmpty());
   }
 
   public void inAMultiplicativeExpression(AMultiplicativeExpression me) {
-    assert(me.getMultiplicativeExpressionTail().isEmpty());
+    assertTrue(me.getMultiplicativeExpressionTail().isEmpty());
   }
 
   public void inAUnaryUnaryExpression(AUnaryUnaryExpression uue) {
-    assert(false);
+    assertTrue(false);
   }
 
   public void inAPostfixExpression(APostfixExpression pe) {
-    assert(pe.getPostfixExpressionTail().isEmpty());
-    assert(pe.getPrimaryExpression() instanceof AFeaturePrimaryExpression);
+    assertTrue(pe.getPostfixExpressionTail().isEmpty());
+    assertTrue(pe.getPrimaryExpression() instanceof AFeaturePrimaryExpression);
   }
 
   public void inAFeaturePrimaryExpression(AFeaturePrimaryExpression fpe) {
-    assert(fpe.getTimeExpression()==null);
-    assert(fpe.getQualifiers()==null);
-    assert(fpe.getFeatureCallParameters()==null);
+    assertTrue(fpe.getTimeExpression()==null);
+    assertTrue(fpe.getQualifiers()==null);
+    assertTrue(fpe.getFeatureCallParameters()==null);
   }
 
   public void inAPathName(APathName pn) {
     if (! pathName) {
-      assert(pn.getPathNameTail().isEmpty());
+      assertTrue(pn.getPathNameTail().isEmpty());
     } else {
       resultPathName=pn;
     }
@@ -102,7 +102,7 @@ public class OnlyNameFinder extends DepthFirstAdapter {
 
   public void caseATypeNamePathNameBegin(ATypeNamePathNameBegin tnpnb) {
     if (! pathName) {
-      assert(false);
+      assertTrue(false);
     }
   }
 
@@ -111,16 +111,16 @@ public class OnlyNameFinder extends DepthFirstAdapter {
   }
 
   public TName getName() {
-    assert(resultName!=null);
+    assertTrue(resultName!=null);
     return resultName;
   }
 
   public APathName getPathName() {
-    assert(resultPathName!=null);
+    assertTrue(resultPathName!=null);
     return resultPathName;
   }
 
-  protected void assert(boolean b) {
+  protected void assertTrue(boolean b) {
     if (b==false) {
       if (pathName) {
         throw new OclTypeException(

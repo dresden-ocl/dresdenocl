@@ -69,7 +69,7 @@ public class Test extends TestCase
         "\" feature \""+Basic.qualifierString(name, qualifiers)+
         "\": expected type \""+((type!=null)?Basic.typeString(type):"NULL")+
         "\", found \""+((restype!=null)?Basic.typeString(restype):"NULL")+"\".");
-      assert(false);
+      assertTrue(false);
     }
   }
 
@@ -90,11 +90,11 @@ public class Test extends TestCase
         "\" feature \""+Basic.signatureString(name,params)+
         "\": expected type \""+((type!=null)?Basic.typeString(type):"NULL")+
         "\", found \""+((restype!=null)?Basic.typeString(restype):"NULL")+"\".");
-      assert(false);
+      assertTrue(false);
     }
   }
 
-  private void assert(String a1name, Any a2)
+  private void assertTrue(String a1name, Any a2)
   {
     Any a1=null;
     try
@@ -110,7 +110,7 @@ public class Test extends TestCase
         "ERROR: classifier \""+a1+
         "\" found, but \""+a2+
         "\", expected.");
-      assert(false);
+      assertTrue(false);
     }
   }
 
@@ -214,20 +214,20 @@ public class Test extends TestCase
     assertQualified(drei, "GAMMA", gamma); // no ambiguity due to explicit rolename
 
     Any beleph=m.getClassifier("classBeleph");
-    assert("packageAleph::Alpha", alpha);
-    assert("packageAleph::Beta",  beta);
-    assert("packageAleph::Gamma", gamma);
-    assert("packageAleph::Eins",  eins);
-    assert("packageAleph::Zwei",  zwei);
-    assert("packageAleph::Drei",  drei);
-    assert("packageBeleph::classBeleph", beleph);
-    assert(" packageAleph :: Alpha ", alpha);
-    assert(" packageAleph :: Beta ",  beta);
-    assert(" packageAleph :: Gamma ", gamma);
-    assert(" packageAleph :: Eins ",  eins);
-    assert(" packageAleph :: Zwei ",  zwei);
-    assert(" packageAleph :: Drei ",  drei);
-    assert(" packageBeleph :: classBeleph ", beleph);
+    assertTrue("packageAleph::Alpha", alpha);
+    assertTrue("packageAleph::Beta",  beta);
+    assertTrue("packageAleph::Gamma", gamma);
+    assertTrue("packageAleph::Eins",  eins);
+    assertTrue("packageAleph::Zwei",  zwei);
+    assertTrue("packageAleph::Drei",  drei);
+    assertTrue("packageBeleph::classBeleph", beleph);
+    assertTrue(" packageAleph :: Alpha ", alpha);
+    assertTrue(" packageAleph :: Beta ",  beta);
+    assertTrue(" packageAleph :: Gamma ", gamma);
+    assertTrue(" packageAleph :: Eins ",  eins);
+    assertTrue(" packageAleph :: Zwei ",  zwei);
+    assertTrue(" packageAleph :: Drei ",  drei);
+    assertTrue(" packageBeleph :: classBeleph ", beleph);
 
     if(errors>0)
     {

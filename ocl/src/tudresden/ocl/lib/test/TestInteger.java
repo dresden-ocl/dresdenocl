@@ -24,40 +24,40 @@ public class TestInteger extends TestCase {
   }
   
   public void testEqual() {
-    assert( i0.isEqualTo(i0).isTrue() );
-    assert( i0.isEqualTo(new OclInteger(0)).isTrue());
-    assert( i10.isNotEqualTo(i1).isTrue() );
-    assert( iUndef.isEqualTo(iUndef).isUndefined() );
-    assert( i5.isEqualTo(new OclReal(5.0d)).isTrue() );
+    assertTrue( i0.isEqualTo(i0).isTrue() );
+    assertTrue( i0.isEqualTo(new OclInteger(0)).isTrue());
+    assertTrue( i10.isNotEqualTo(i1).isTrue() );
+    assertTrue( iUndef.isEqualTo(iUndef).isUndefined() );
+    assertTrue( i5.isEqualTo(new OclReal(5.0d)).isTrue() );
   }
   
   public void testAdd() {
-    assert( (i0.add(i10)).isEqualTo(i10).isTrue() );
-    assert( i1.add(i1).isEqualTo(i2).isTrue() );
-    assert( im1.add(i1).isEqualTo(i0).isTrue() );
-    assert( i0.add(iUndef).isUndefined() );
-    assert( i0.subtract(i10).isEqualTo(new OclInteger(-10)).isTrue() );
-    assert( i0.subtract(im1).isEqualTo(i1).isTrue() );
-    assert( i0.add(r1k5).isEqualTo(r1k5).isTrue() );
-    assert( r1k5.add(i1).isEqualTo(new OclReal(2.5d)).isTrue() );
+    assertTrue( (i0.add(i10)).isEqualTo(i10).isTrue() );
+    assertTrue( i1.add(i1).isEqualTo(i2).isTrue() );
+    assertTrue( im1.add(i1).isEqualTo(i0).isTrue() );
+    assertTrue( i0.add(iUndef).isUndefined() );
+    assertTrue( i0.subtract(i10).isEqualTo(new OclInteger(-10)).isTrue() );
+    assertTrue( i0.subtract(im1).isEqualTo(i1).isTrue() );
+    assertTrue( i0.add(r1k5).isEqualTo(r1k5).isTrue() );
+    assertTrue( r1k5.add(i1).isEqualTo(new OclReal(2.5d)).isTrue() );
   }
   
   public void testMul() {
-    assert( i10.multiply( new OclReal(1.25d) ).isEqualTo( new OclReal(12.5d) ).isTrue() );
-    assert( im1.multiply(i10).multiply(im1).isEqualTo(i10).isTrue() );
-    assert( r1k5.multiply(i2).isEqualTo( new OclInteger(3) ).isTrue() );
+    assertTrue( i10.multiply( new OclReal(1.25d) ).isEqualTo( new OclReal(12.5d) ).isTrue() );
+    assertTrue( im1.multiply(i10).multiply(im1).isEqualTo(i10).isTrue() );
+    assertTrue( r1k5.multiply(i2).isEqualTo( new OclInteger(3) ).isTrue() );
   }
   
   public void testMisc() {
-    assert( im1.abs().isEqualTo(i1.abs()).isTrue() );
-    assert( i2.max(i1).getDouble() == 2d );
-    assert( i0.min(im1).getDouble() == -1d );
-    assert( ((Comparable)i1.add(r1k5)).compareTo(i1) == 1);
-    assert( i1.isGreaterThan(i0)==OclBoolean.TRUE );
-    assert( i1.isLessThan(i0)==OclBoolean.FALSE );
-    assert( i1.isGreaterEqual(i0)==OclBoolean.TRUE );
-    assert( i1.isGreaterEqual(i1)==OclBoolean.TRUE );
-    assert( im1.isGreaterEqual(i0)==OclBoolean.FALSE );
+    assertTrue( im1.abs().isEqualTo(i1.abs()).isTrue() );
+    assertTrue( i2.max(i1).getDouble() == 2d );
+    assertTrue( i0.min(im1).getDouble() == -1d );
+    assertTrue( ((Comparable)i1.add(r1k5)).compareTo(i1) == 1);
+    assertTrue( i1.isGreaterThan(i0)==OclBoolean.TRUE );
+    assertTrue( i1.isLessThan(i0)==OclBoolean.FALSE );
+    assertTrue( i1.isGreaterEqual(i0)==OclBoolean.TRUE );
+    assertTrue( i1.isGreaterEqual(i1)==OclBoolean.TRUE );
+    assertTrue( im1.isGreaterEqual(i0)==OclBoolean.FALSE );
   }
   
   public static Test suite() {

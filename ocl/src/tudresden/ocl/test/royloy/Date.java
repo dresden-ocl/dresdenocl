@@ -25,7 +25,7 @@ public class Date extends RLObject {
   public boolean equals(Date d) {
     return iTime==d.iTime;
   }
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 

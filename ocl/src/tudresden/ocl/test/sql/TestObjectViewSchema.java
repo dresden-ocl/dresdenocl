@@ -113,242 +113,242 @@ public class TestObjectViewSchema extends TestCase {
 		Table ta, tb, tc;
 		Guide guide;
 		
-		assert((a = ovs.getMappedClass("A")) != null);	
-		assert((b = ovs.getMappedClass("B")) != null);	
-		assert((c = ovs.getMappedClass("C")) != null);	
-		assert((d = ovs.getMappedClass("D")) != null);	
-		assert((e = ovs.getMappedClass("E")) != null);	
-		assert((f = ovs.getMappedClass("F")) != null);	
+		assertTrue((a = ovs.getMappedClass("A")) != null);	
+		assertTrue((b = ovs.getMappedClass("B")) != null);	
+		assertTrue((c = ovs.getMappedClass("C")) != null);	
+		assertTrue((d = ovs.getMappedClass("D")) != null);	
+		assertTrue((e = ovs.getMappedClass("E")) != null);	
+		assertTrue((f = ovs.getMappedClass("F")) != null);	
 		
-		assert(a.getClassName().equals("A"));
-		assert(b.getClassName().equals("B"));
-		assert(c.getClassName().equals("C"));
-		assert(d.getClassName().equals("D"));
-		assert(e.getClassName().equals("E"));
-		assert(f.getClassName().equals("F"));
+		assertTrue(a.getClassName().equals("A"));
+		assertTrue(b.getClassName().equals("B"));
+		assertTrue(c.getClassName().equals("C"));
+		assertTrue(d.getClassName().equals("D"));
+		assertTrue(e.getClassName().equals("E"));
+		assertTrue(f.getClassName().equals("F"));
 		
-		assert(a.hasTable("OV_A"));
-		assert(b.hasTable("OV_B"));
-		assert(c.hasTable("OV_C"));
-		assert(d.hasTable("OV_D"));
-		assert(e.hasTable("OV_E"));
-		assert(f.hasTable("OV_F"));
+		assertTrue(a.hasTable("OV_A"));
+		assertTrue(b.hasTable("OV_B"));
+		assertTrue(c.hasTable("OV_C"));
+		assertTrue(d.hasTable("OV_D"));
+		assertTrue(e.hasTable("OV_E"));
+		assertTrue(f.hasTable("OV_F"));
 		
 		
-		assert(a.getTables().size() == 1);
-		assert(b.getTables().size() == 1);
-		assert(c.getTables().size() == 1);
-		assert(d.getTables().size() == 1);
-		assert(e.getTables().size() == 1);
-		assert(f.getTables().size() == 1);
+		assertTrue(a.getTables().size() == 1);
+		assertTrue(b.getTables().size() == 1);
+		assertTrue(c.getTables().size() == 1);
+		assertTrue(d.getTables().size() == 1);
+		assertTrue(e.getTables().size() == 1);
+		assertTrue(f.getTables().size() == 1);
 		
-		assert(b.isQuery("operationB"));
-		assert(d.isQuery("operationB"));
-		assert(e.isQuery("operationB"));
-		assert(!a.isQuery("operationB"));
+		assertTrue(b.isQuery("operationB"));
+		assertTrue(d.isQuery("operationB"));
+		assertTrue(e.isQuery("operationB"));
+		assertTrue(!a.isQuery("operationB"));
 		
-		assert(a.isAssociationEnd("ra1"));
-		assert(a.isAssociationEnd("ra2"));
-		assert(a.isAssociationEnd("b1"));
-		assert(a.isAssociationEnd("b2"));
-		assert(a.isAssociationEnd("c"));
-		assert(!a.isAssociationEnd("b"));
+		assertTrue(a.isAssociationEnd("ra1"));
+		assertTrue(a.isAssociationEnd("ra2"));
+		assertTrue(a.isAssociationEnd("b1"));
+		assertTrue(a.isAssociationEnd("b2"));
+		assertTrue(a.isAssociationEnd("c"));
+		assertTrue(!a.isAssociationEnd("b"));
 		
-		assert(b.isAssociationEnd("a1"));
-		assert(b.isAssociationEnd("a2"));
+		assertTrue(b.isAssociationEnd("a1"));
+		assertTrue(b.isAssociationEnd("a2"));
 		
-		assert(c.isAssociationEnd("a"));
-		assert(c.isAssociationEnd("c4"));
-		assert(!c.isAssociationEnd("ra1"));
-		assert(!c.isAssociationEnd("f"));
+		assertTrue(c.isAssociationEnd("a"));
+		assertTrue(c.isAssociationEnd("c4"));
+		assertTrue(!c.isAssociationEnd("ra1"));
+		assertTrue(!c.isAssociationEnd("f"));
 		
-		assert(a.isAttribute("a1"));
-		assert(a.isAttribute("a2"));
-		assert(a.isAttribute("a3"));
-		assert(!a.isAttribute("a4"));
-		assert(!a.isAttribute("b1"));
+		assertTrue(a.isAttribute("a1"));
+		assertTrue(a.isAttribute("a2"));
+		assertTrue(a.isAttribute("a3"));
+		assertTrue(!a.isAttribute("a4"));
+		assertTrue(!a.isAttribute("b1"));
 		
-		assert(b.isAttribute("b1"));
-		assert(b.isAttribute("b2"));
-		assert(b.isAttribute("b3"));
+		assertTrue(b.isAttribute("b1"));
+		assertTrue(b.isAttribute("b2"));
+		assertTrue(b.isAttribute("b3"));
 		
-		assert(c.isAttribute("c1"));
-		assert(c.isAttribute("c2"));
-		assert(c.isAttribute("c3"));
-		assert(!c.isAttribute("c4"));
+		assertTrue(c.isAttribute("c1"));
+		assertTrue(c.isAttribute("c2"));
+		assertTrue(c.isAttribute("c3"));
+		assertTrue(!c.isAttribute("c4"));
 		
-		assert(d.isAttribute("d1"));
-		assert(d.isAttribute("b1"));
-		assert(d.isAttribute("b2"));
-		assert(d.isAttribute("b3"));
+		assertTrue(d.isAttribute("d1"));
+		assertTrue(d.isAttribute("b1"));
+		assertTrue(d.isAttribute("b2"));
+		assertTrue(d.isAttribute("b3"));
 		
-		assert(e.isAttribute("e1"));
-		assert(e.isAttribute("b1"));
-		assert(e.isAttribute("b2"));
-		assert(e.isAttribute("b3"));
+		assertTrue(e.isAttribute("e1"));
+		assertTrue(e.isAttribute("b1"));
+		assertTrue(e.isAttribute("b2"));
+		assertTrue(e.isAttribute("b3"));
 		
-		assert(f.isAttribute("f1"));
-		assert(f.isAttribute("f2"));
-		assert(f.isAttribute("f3"));
+		assertTrue(f.isAttribute("f1"));
+		assertTrue(f.isAttribute("f2"));
+		assertTrue(f.isAttribute("f3"));
 		
-		assert(a.getAssociationEnd("c") == c);
-		assert(a.getAssociationEnd("ra1") == a);
-		assert(a.getAssociationEnd("ra2") == a);
-		assert(a.getAssociationEnd("b1") == b);
-		assert(a.getAssociationEnd("b2") == b);
+		assertTrue(a.getAssociationEnd("c") == c);
+		assertTrue(a.getAssociationEnd("ra1") == a);
+		assertTrue(a.getAssociationEnd("ra2") == a);
+		assertTrue(a.getAssociationEnd("b1") == b);
+		assertTrue(a.getAssociationEnd("b2") == b);
 		
-		assert(b.getAssociationEnd("a1") == a);
-		assert(b.getAssociationEnd("a2") == a);
+		assertTrue(b.getAssociationEnd("a1") == a);
+		assertTrue(b.getAssociationEnd("a2") == a);
 		
-		assert(c.getAssociationEnd("a") == a);
-		assert(c.getAssociationEnd("c4") == f);
+		assertTrue(c.getAssociationEnd("a") == a);
+		assertTrue(c.getAssociationEnd("c4") == f);
 		
-		assert(d.getAssociationEnd("a1") == a);
-		assert(d.getAssociationEnd("a2") == a);
+		assertTrue(d.getAssociationEnd("a1") == a);
+		assertTrue(d.getAssociationEnd("a2") == a);
 		
-		assert(e.getAssociationEnd("a1") == a);
-		assert(e.getAssociationEnd("a2") == a);
+		assertTrue(e.getAssociationEnd("a1") == a);
+		assertTrue(e.getAssociationEnd("a2") == a);
 		
 		
 		guide = a.getAttributeGuide("a1");
 		guide.next();
-		assert(guide.getSelect().equals("A1"));
-		assert(guide.getFrom().equals("OV_A"));
+		assertTrue(guide.getSelect().equals("A1"));
+		assertTrue(guide.getFrom().equals("OV_A"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = a.getAttributeGuide("a2");
 		guide.next();
-		assert(guide.getSelect().equals("A2"));
-		assert(guide.getFrom().equals("OV_A"));
+		assertTrue(guide.getSelect().equals("A2"));
+		assertTrue(guide.getFrom().equals("OV_A"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = a.getAttributeGuide("a3");
 		guide.next();
-		assert(guide.getSelect().equals("A3"));
-		assert(guide.getFrom().equals("OV_A"));
+		assertTrue(guide.getSelect().equals("A3"));
+		assertTrue(guide.getFrom().equals("OV_A"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b1");
 		guide.next();
-		assert(guide.getSelect().equals("B1"));
-		assert(guide.getFrom().equals("OV_B"));
+		assertTrue(guide.getSelect().equals("B1"));
+		assertTrue(guide.getFrom().equals("OV_B"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b2");
 		guide.next();
-		assert(guide.getSelect().equals("B2"));
-		assert(guide.getFrom().equals("OV_B"));
+		assertTrue(guide.getSelect().equals("B2"));
+		assertTrue(guide.getFrom().equals("OV_B"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b3");
 		guide.next();
-		assert(guide.getSelect().equals("B3"));
-		assert(guide.getFrom().equals("OV_B"));
+		assertTrue(guide.getSelect().equals("B3"));
+		assertTrue(guide.getFrom().equals("OV_B"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c1");
 		guide.next();
-		assert(guide.getSelect().equals("C1"));
-		assert(guide.getFrom().equals("OV_C"));
+		assertTrue(guide.getSelect().equals("C1"));
+		assertTrue(guide.getFrom().equals("OV_C"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c2");
 		guide.next();
-		assert(guide.getSelect().equals("C2"));
-		assert(guide.getFrom().equals("OV_C"));
+		assertTrue(guide.getSelect().equals("C2"));
+		assertTrue(guide.getFrom().equals("OV_C"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c3");
 		guide.next();
-		assert(guide.getSelect().equals("C3"));
-		assert(guide.getFrom().equals("OV_C"));
+		assertTrue(guide.getSelect().equals("C3"));
+		assertTrue(guide.getFrom().equals("OV_C"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("d1");
 		guide.next();
-		assert(guide.getSelect().equals("D1"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("D1"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b1");
 		guide.next();
-		assert(guide.getSelect().equals("B1"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("B1"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b2");
 		guide.next();
-		assert(guide.getSelect().equals("B2"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("B2"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b3");
 		guide.next();
-		assert(guide.getSelect().equals("B3"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("B3"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("e1");
 		guide.next();
-		assert(guide.getSelect().equals("E1"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("E1"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b1");
 		guide.next();
-		assert(guide.getSelect().equals("B1"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("B1"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b2");
 		guide.next();
-		assert(guide.getSelect().equals("B2"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("B2"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b3");
 		guide.next();
-		assert(guide.getSelect().equals("B3"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("B3"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f1");
 		guide.next();
-		assert(guide.getSelect().equals("F1"));
-		assert(guide.getFrom().equals("OV_F"));
+		assertTrue(guide.getSelect().equals("F1"));
+		assertTrue(guide.getFrom().equals("OV_F"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f2");
 		guide.next();
-		assert(guide.getSelect().equals("F2"));
-		assert(guide.getFrom().equals("OV_F"));
+		assertTrue(guide.getSelect().equals("F2"));
+		assertTrue(guide.getFrom().equals("OV_F"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f3");
 		guide.next();
-		assert(guide.getSelect().equals("F3"));
-		assert(guide.getFrom().equals("OV_F"));
+		assertTrue(guide.getSelect().equals("F3"));
+		assertTrue(guide.getFrom().equals("OV_F"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		ta = (Table)a.getTables().get(0);
 		tb = (Table)b.getTables().get(0);
@@ -357,50 +357,50 @@ public class TestObjectViewSchema extends TestCase {
 		guide = a.getJoinGuide("c");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(tc.isPrimaryKeyColumn(guide.getSelect()));
-		assert(tc.getTableName().equals(guide.getFrom()));
-		assert(tc.isForeignKeyColumn(guide.getWhere()));
+		assertTrue(tc.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(tc.getTableName().equals(guide.getFrom()));
+		assertTrue(tc.isForeignKeyColumn(guide.getWhere()));
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = a.getJoinGuide("b2");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(tb.isPrimaryKeyColumn(guide.getSelect()));
-		assert(tb.getTableName().equals(guide.getFrom()));
-		assert(tb.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(tb.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(tb.getTableName().equals(guide.getFrom()));
+		assertTrue(tb.isPrimaryKeyColumn(guide.getWhere()));
 		guide.next();
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());	
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());	
 		
 		guide = a.getJoinGuide("ra1");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
 		guide.next();
-		assert(ta.isForeignKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());
+		assertTrue(ta.isForeignKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());
 		
-		assert(a.getJoinGuide("ra2") != null);	
-		assert(a.getJoinGuide("b1") != null);	
+		assertTrue(a.getJoinGuide("ra2") != null);	
+		assertTrue(a.getJoinGuide("b1") != null);	
 		
-		assert(c.getJoinGuide("a") != null);	
-		assert(c.getJoinGuide("c4") != null);	
+		assertTrue(c.getJoinGuide("a") != null);	
+		assertTrue(c.getJoinGuide("c4") != null);	
 		
-		assert(b.getJoinGuide("a1") != null);	
-		assert(b.getJoinGuide("a2") != null);
+		assertTrue(b.getJoinGuide("a1") != null);	
+		assertTrue(b.getJoinGuide("a2") != null);
 		
-		assert(((View)tb).getTableNames().size() == 1);					
+		assertTrue(((View)tb).getTableNames().size() == 1);					
 	}
 	
 	// one table per leaf class
@@ -413,242 +413,242 @@ public class TestObjectViewSchema extends TestCase {
 		
 		//System.err.println(ovs.getViewDefinition("B"));
 		
-		assert((a = ovs.getMappedClass("A")) != null);	
-		assert((b = ovs.getMappedClass("B")) != null);	
-		assert((c = ovs.getMappedClass("C")) != null);	
-		assert((d = ovs.getMappedClass("D")) != null);	
-		assert((e = ovs.getMappedClass("E")) != null);	
-		assert((f = ovs.getMappedClass("F")) != null);	
+		assertTrue((a = ovs.getMappedClass("A")) != null);	
+		assertTrue((b = ovs.getMappedClass("B")) != null);	
+		assertTrue((c = ovs.getMappedClass("C")) != null);	
+		assertTrue((d = ovs.getMappedClass("D")) != null);	
+		assertTrue((e = ovs.getMappedClass("E")) != null);	
+		assertTrue((f = ovs.getMappedClass("F")) != null);	
 		
-		assert(a.getClassName().equals("A"));
-		assert(b.getClassName().equals("B"));
-		assert(c.getClassName().equals("C"));
-		assert(d.getClassName().equals("D"));
-		assert(e.getClassName().equals("E"));
-		assert(f.getClassName().equals("F"));
+		assertTrue(a.getClassName().equals("A"));
+		assertTrue(b.getClassName().equals("B"));
+		assertTrue(c.getClassName().equals("C"));
+		assertTrue(d.getClassName().equals("D"));
+		assertTrue(e.getClassName().equals("E"));
+		assertTrue(f.getClassName().equals("F"));
 		
-		assert(a.hasTable("OV_A"));
-		assert(b.hasTable("OV_B"));
-		assert(c.hasTable("OV_C"));
-		assert(d.hasTable("OV_D"));
-		assert(e.hasTable("OV_E"));
-		assert(f.hasTable("OV_F"));
+		assertTrue(a.hasTable("OV_A"));
+		assertTrue(b.hasTable("OV_B"));
+		assertTrue(c.hasTable("OV_C"));
+		assertTrue(d.hasTable("OV_D"));
+		assertTrue(e.hasTable("OV_E"));
+		assertTrue(f.hasTable("OV_F"));
 		
 		
-		assert(a.getTables().size() == 1);
-		assert(b.getTables().size() == 1);
-		assert(c.getTables().size() == 1);
-		assert(d.getTables().size() == 1);
-		assert(e.getTables().size() == 1);
-		assert(f.getTables().size() == 1);
+		assertTrue(a.getTables().size() == 1);
+		assertTrue(b.getTables().size() == 1);
+		assertTrue(c.getTables().size() == 1);
+		assertTrue(d.getTables().size() == 1);
+		assertTrue(e.getTables().size() == 1);
+		assertTrue(f.getTables().size() == 1);
 		
-		assert(b.isQuery("operationB"));
-		assert(d.isQuery("operationB"));
-		assert(e.isQuery("operationB"));
-		assert(!a.isQuery("operationB"));
+		assertTrue(b.isQuery("operationB"));
+		assertTrue(d.isQuery("operationB"));
+		assertTrue(e.isQuery("operationB"));
+		assertTrue(!a.isQuery("operationB"));
 		
-		assert(a.isAssociationEnd("ra1"));
-		assert(a.isAssociationEnd("ra2"));
-		assert(a.isAssociationEnd("b1"));
-		assert(a.isAssociationEnd("b2"));
-		assert(a.isAssociationEnd("c"));
-		assert(!a.isAssociationEnd("b"));
+		assertTrue(a.isAssociationEnd("ra1"));
+		assertTrue(a.isAssociationEnd("ra2"));
+		assertTrue(a.isAssociationEnd("b1"));
+		assertTrue(a.isAssociationEnd("b2"));
+		assertTrue(a.isAssociationEnd("c"));
+		assertTrue(!a.isAssociationEnd("b"));
 		
-		assert(b.isAssociationEnd("a1"));
-		assert(b.isAssociationEnd("a2"));
+		assertTrue(b.isAssociationEnd("a1"));
+		assertTrue(b.isAssociationEnd("a2"));
 		
-		assert(c.isAssociationEnd("a"));
-		assert(c.isAssociationEnd("c4"));
-		assert(!c.isAssociationEnd("ra1"));
-		assert(!c.isAssociationEnd("f"));
+		assertTrue(c.isAssociationEnd("a"));
+		assertTrue(c.isAssociationEnd("c4"));
+		assertTrue(!c.isAssociationEnd("ra1"));
+		assertTrue(!c.isAssociationEnd("f"));
 		
-		assert(a.isAttribute("a1"));
-		assert(a.isAttribute("a2"));
-		assert(a.isAttribute("a3"));
-		assert(!a.isAttribute("a4"));
-		assert(!a.isAttribute("b1"));
+		assertTrue(a.isAttribute("a1"));
+		assertTrue(a.isAttribute("a2"));
+		assertTrue(a.isAttribute("a3"));
+		assertTrue(!a.isAttribute("a4"));
+		assertTrue(!a.isAttribute("b1"));
 		
-		assert(b.isAttribute("b1"));
-		assert(b.isAttribute("b2"));
-		assert(b.isAttribute("b3"));
+		assertTrue(b.isAttribute("b1"));
+		assertTrue(b.isAttribute("b2"));
+		assertTrue(b.isAttribute("b3"));
 		
-		assert(c.isAttribute("c1"));
-		assert(c.isAttribute("c2"));
-		assert(c.isAttribute("c3"));
-		assert(!c.isAttribute("c4"));
+		assertTrue(c.isAttribute("c1"));
+		assertTrue(c.isAttribute("c2"));
+		assertTrue(c.isAttribute("c3"));
+		assertTrue(!c.isAttribute("c4"));
 		
-		assert(d.isAttribute("d1"));
-		assert(d.isAttribute("b1"));
-		assert(d.isAttribute("b2"));
-		assert(d.isAttribute("b3"));
+		assertTrue(d.isAttribute("d1"));
+		assertTrue(d.isAttribute("b1"));
+		assertTrue(d.isAttribute("b2"));
+		assertTrue(d.isAttribute("b3"));
 		
-		assert(e.isAttribute("e1"));
-		assert(e.isAttribute("b1"));
-		assert(e.isAttribute("b2"));
-		assert(e.isAttribute("b3"));
+		assertTrue(e.isAttribute("e1"));
+		assertTrue(e.isAttribute("b1"));
+		assertTrue(e.isAttribute("b2"));
+		assertTrue(e.isAttribute("b3"));
 		
-		assert(f.isAttribute("f1"));
-		assert(f.isAttribute("f2"));
-		assert(f.isAttribute("f3"));
+		assertTrue(f.isAttribute("f1"));
+		assertTrue(f.isAttribute("f2"));
+		assertTrue(f.isAttribute("f3"));
 		
-		assert(a.getAssociationEnd("c") == c);
-		assert(a.getAssociationEnd("ra1") == a);
-		assert(a.getAssociationEnd("ra2") == a);
-		assert(a.getAssociationEnd("b1") == b);
-		assert(a.getAssociationEnd("b2") == b);
+		assertTrue(a.getAssociationEnd("c") == c);
+		assertTrue(a.getAssociationEnd("ra1") == a);
+		assertTrue(a.getAssociationEnd("ra2") == a);
+		assertTrue(a.getAssociationEnd("b1") == b);
+		assertTrue(a.getAssociationEnd("b2") == b);
 		
-		assert(b.getAssociationEnd("a1") == a);
-		assert(b.getAssociationEnd("a2") == a);
+		assertTrue(b.getAssociationEnd("a1") == a);
+		assertTrue(b.getAssociationEnd("a2") == a);
 		
-		assert(c.getAssociationEnd("a") == a);
-		assert(c.getAssociationEnd("c4") == f);
+		assertTrue(c.getAssociationEnd("a") == a);
+		assertTrue(c.getAssociationEnd("c4") == f);
 		
-		assert(d.getAssociationEnd("a1") == a);
-		assert(d.getAssociationEnd("a2") == a);
+		assertTrue(d.getAssociationEnd("a1") == a);
+		assertTrue(d.getAssociationEnd("a2") == a);
 		
-		assert(e.getAssociationEnd("a1") == a);
-		assert(e.getAssociationEnd("a2") == a);
+		assertTrue(e.getAssociationEnd("a1") == a);
+		assertTrue(e.getAssociationEnd("a2") == a);
 		
 		
 		guide = a.getAttributeGuide("a1");
 		guide.next();
-		assert(guide.getSelect().equals("A1"));
-		assert(guide.getFrom().equals("OV_A"));
+		assertTrue(guide.getSelect().equals("A1"));
+		assertTrue(guide.getFrom().equals("OV_A"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = a.getAttributeGuide("a2");
 		guide.next();
-		assert(guide.getSelect().equals("A2"));
-		assert(guide.getFrom().equals("OV_A"));
+		assertTrue(guide.getSelect().equals("A2"));
+		assertTrue(guide.getFrom().equals("OV_A"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = a.getAttributeGuide("a3");
 		guide.next();
-		assert(guide.getSelect().equals("A3"));
-		assert(guide.getFrom().equals("OV_A"));
+		assertTrue(guide.getSelect().equals("A3"));
+		assertTrue(guide.getFrom().equals("OV_A"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b1");
 		guide.next();
-		assert(guide.getSelect().equals("B1"));
-		assert(guide.getFrom().equals("OV_B"));
+		assertTrue(guide.getSelect().equals("B1"));
+		assertTrue(guide.getFrom().equals("OV_B"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b2");
 		guide.next();
-		assert(guide.getSelect().equals("B2"));
-		assert(guide.getFrom().equals("OV_B"));
+		assertTrue(guide.getSelect().equals("B2"));
+		assertTrue(guide.getFrom().equals("OV_B"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b3");
 		guide.next();
-		assert(guide.getSelect().equals("B3"));
-		assert(guide.getFrom().equals("OV_B"));
+		assertTrue(guide.getSelect().equals("B3"));
+		assertTrue(guide.getFrom().equals("OV_B"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c1");
 		guide.next();
-		assert(guide.getSelect().equals("C1"));
-		assert(guide.getFrom().equals("OV_C"));
+		assertTrue(guide.getSelect().equals("C1"));
+		assertTrue(guide.getFrom().equals("OV_C"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c2");
 		guide.next();
-		assert(guide.getSelect().equals("C2"));
-		assert(guide.getFrom().equals("OV_C"));
+		assertTrue(guide.getSelect().equals("C2"));
+		assertTrue(guide.getFrom().equals("OV_C"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c3");
 		guide.next();
-		assert(guide.getSelect().equals("C3"));
-		assert(guide.getFrom().equals("OV_C"));
+		assertTrue(guide.getSelect().equals("C3"));
+		assertTrue(guide.getFrom().equals("OV_C"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("d1");
 		guide.next();
-		assert(guide.getSelect().equals("D1"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("D1"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b1");
 		guide.next();
-		assert(guide.getSelect().equals("B1"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("B1"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b2");
 		guide.next();
-		assert(guide.getSelect().equals("B2"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("B2"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b3");
 		guide.next();
-		assert(guide.getSelect().equals("B3"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("B3"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("e1");
 		guide.next();
-		assert(guide.getSelect().equals("E1"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("E1"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b1");
 		guide.next();
-		assert(guide.getSelect().equals("B1"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("B1"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b2");
 		guide.next();
-		assert(guide.getSelect().equals("B2"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("B2"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b3");
 		guide.next();
-		assert(guide.getSelect().equals("B3"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("B3"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f1");
 		guide.next();
-		assert(guide.getSelect().equals("F1"));
-		assert(guide.getFrom().equals("OV_F"));
+		assertTrue(guide.getSelect().equals("F1"));
+		assertTrue(guide.getFrom().equals("OV_F"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f2");
 		guide.next();
-		assert(guide.getSelect().equals("F2"));
-		assert(guide.getFrom().equals("OV_F"));
+		assertTrue(guide.getSelect().equals("F2"));
+		assertTrue(guide.getFrom().equals("OV_F"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f3");
 		guide.next();
-		assert(guide.getSelect().equals("F3"));
-		assert(guide.getFrom().equals("OV_F"));
+		assertTrue(guide.getSelect().equals("F3"));
+		assertTrue(guide.getFrom().equals("OV_F"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		ta = (Table)a.getTables().get(0);
 		tb = (Table)b.getTables().get(0);
@@ -657,62 +657,62 @@ public class TestObjectViewSchema extends TestCase {
 		guide = a.getJoinGuide("c");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(tc.isPrimaryKeyColumn(guide.getSelect()));
-		assert(tc.getTableName().equals(guide.getFrom()));
-		assert(tc.isForeignKeyColumn(guide.getWhere()));
+		assertTrue(tc.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(tc.getTableName().equals(guide.getFrom()));
+		assertTrue(tc.isForeignKeyColumn(guide.getWhere()));
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = a.getJoinGuide("b2");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(tb.isPrimaryKeyColumn(guide.getSelect()));
-		assert(tb.getTableName().equals(guide.getFrom()));
-		assert(tb.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(tb.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(tb.getTableName().equals(guide.getFrom()));
+		assertTrue(tb.isPrimaryKeyColumn(guide.getWhere()));
 		guide.next();
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());	
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());	
 		
 		guide = a.getJoinGuide("ra1");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
 		guide.next();
-		assert(ta.isForeignKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());
+		assertTrue(ta.isForeignKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getJoinGuide("a2");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
 		guide.next();
 		guide.next();
-		assert(tb.isPrimaryKeyColumn(guide.getSelect()));
-		assert(tb.getTableName().equals(guide.getFrom()));
-		assert(tb.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());	
+		assertTrue(tb.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(tb.getTableName().equals(guide.getFrom()));
+		assertTrue(tb.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());	
 		
-		assert(a.getJoinGuide("ra2") != null);	
-		assert(a.getJoinGuide("b1") != null);	
+		assertTrue(a.getJoinGuide("ra2") != null);	
+		assertTrue(a.getJoinGuide("b1") != null);	
 		
-		assert(c.getJoinGuide("a") != null);	
-		assert(c.getJoinGuide("c4") != null);	
+		assertTrue(c.getJoinGuide("a") != null);	
+		assertTrue(c.getJoinGuide("c4") != null);	
 		
-		assert(b.getJoinGuide("a1") != null);		
+		assertTrue(b.getJoinGuide("a1") != null);		
 		
-		assert(((View)tb).getTableNames().size() == 2);
+		assertTrue(((View)tb).getTableNames().size() == 2);
 	}
 	
 	// one table for entire hierarchy
@@ -725,242 +725,242 @@ public class TestObjectViewSchema extends TestCase {
 		
 		//System.err.println(ovs.getViewDefinition("B"));
 		
-		assert((a = ovs.getMappedClass("A")) != null);	
-		assert((b = ovs.getMappedClass("B")) != null);	
-		assert((c = ovs.getMappedClass("C")) != null);	
-		assert((d = ovs.getMappedClass("D")) != null);	
-		assert((e = ovs.getMappedClass("E")) != null);	
-		assert((f = ovs.getMappedClass("F")) != null);	
+		assertTrue((a = ovs.getMappedClass("A")) != null);	
+		assertTrue((b = ovs.getMappedClass("B")) != null);	
+		assertTrue((c = ovs.getMappedClass("C")) != null);	
+		assertTrue((d = ovs.getMappedClass("D")) != null);	
+		assertTrue((e = ovs.getMappedClass("E")) != null);	
+		assertTrue((f = ovs.getMappedClass("F")) != null);	
 		
-		assert(a.getClassName().equals("A"));
-		assert(b.getClassName().equals("B"));
-		assert(c.getClassName().equals("C"));
-		assert(d.getClassName().equals("D"));
-		assert(e.getClassName().equals("E"));
-		assert(f.getClassName().equals("F"));
+		assertTrue(a.getClassName().equals("A"));
+		assertTrue(b.getClassName().equals("B"));
+		assertTrue(c.getClassName().equals("C"));
+		assertTrue(d.getClassName().equals("D"));
+		assertTrue(e.getClassName().equals("E"));
+		assertTrue(f.getClassName().equals("F"));
 		
-		assert(a.hasTable("OV_A"));
-		assert(b.hasTable("OV_B"));
-		assert(c.hasTable("OV_C"));
-		assert(d.hasTable("OV_D"));
-		assert(e.hasTable("OV_E"));
-		assert(f.hasTable("OV_F"));
+		assertTrue(a.hasTable("OV_A"));
+		assertTrue(b.hasTable("OV_B"));
+		assertTrue(c.hasTable("OV_C"));
+		assertTrue(d.hasTable("OV_D"));
+		assertTrue(e.hasTable("OV_E"));
+		assertTrue(f.hasTable("OV_F"));
 		
 		
-		assert(a.getTables().size() == 1);
-		assert(b.getTables().size() == 1);
-		assert(c.getTables().size() == 1);
-		assert(d.getTables().size() == 1);
-		assert(e.getTables().size() == 1);
-		assert(f.getTables().size() == 1);
+		assertTrue(a.getTables().size() == 1);
+		assertTrue(b.getTables().size() == 1);
+		assertTrue(c.getTables().size() == 1);
+		assertTrue(d.getTables().size() == 1);
+		assertTrue(e.getTables().size() == 1);
+		assertTrue(f.getTables().size() == 1);
 		
-		assert(b.isQuery("operationB"));
-		assert(d.isQuery("operationB"));
-		assert(e.isQuery("operationB"));
-		assert(!a.isQuery("operationB"));
+		assertTrue(b.isQuery("operationB"));
+		assertTrue(d.isQuery("operationB"));
+		assertTrue(e.isQuery("operationB"));
+		assertTrue(!a.isQuery("operationB"));
 		
-		assert(a.isAssociationEnd("ra1"));
-		assert(a.isAssociationEnd("ra2"));
-		assert(a.isAssociationEnd("b1"));
-		assert(a.isAssociationEnd("b2"));
-		assert(a.isAssociationEnd("c"));
-		assert(!a.isAssociationEnd("b"));
+		assertTrue(a.isAssociationEnd("ra1"));
+		assertTrue(a.isAssociationEnd("ra2"));
+		assertTrue(a.isAssociationEnd("b1"));
+		assertTrue(a.isAssociationEnd("b2"));
+		assertTrue(a.isAssociationEnd("c"));
+		assertTrue(!a.isAssociationEnd("b"));
 		
-		assert(b.isAssociationEnd("a1"));
-		assert(b.isAssociationEnd("a2"));
+		assertTrue(b.isAssociationEnd("a1"));
+		assertTrue(b.isAssociationEnd("a2"));
 		
-		assert(c.isAssociationEnd("a"));
-		assert(c.isAssociationEnd("c4"));
-		assert(!c.isAssociationEnd("ra1"));
-		assert(!c.isAssociationEnd("f"));
+		assertTrue(c.isAssociationEnd("a"));
+		assertTrue(c.isAssociationEnd("c4"));
+		assertTrue(!c.isAssociationEnd("ra1"));
+		assertTrue(!c.isAssociationEnd("f"));
 		
-		assert(a.isAttribute("a1"));
-		assert(a.isAttribute("a2"));
-		assert(a.isAttribute("a3"));
-		assert(!a.isAttribute("a4"));
-		assert(!a.isAttribute("b1"));
+		assertTrue(a.isAttribute("a1"));
+		assertTrue(a.isAttribute("a2"));
+		assertTrue(a.isAttribute("a3"));
+		assertTrue(!a.isAttribute("a4"));
+		assertTrue(!a.isAttribute("b1"));
 		
-		assert(b.isAttribute("b1"));
-		assert(b.isAttribute("b2"));
-		assert(b.isAttribute("b3"));
+		assertTrue(b.isAttribute("b1"));
+		assertTrue(b.isAttribute("b2"));
+		assertTrue(b.isAttribute("b3"));
 		
-		assert(c.isAttribute("c1"));
-		assert(c.isAttribute("c2"));
-		assert(c.isAttribute("c3"));
-		assert(!c.isAttribute("c4"));
+		assertTrue(c.isAttribute("c1"));
+		assertTrue(c.isAttribute("c2"));
+		assertTrue(c.isAttribute("c3"));
+		assertTrue(!c.isAttribute("c4"));
 		
-		assert(d.isAttribute("d1"));
-		assert(d.isAttribute("b1"));
-		assert(d.isAttribute("b2"));
-		assert(d.isAttribute("b3"));
+		assertTrue(d.isAttribute("d1"));
+		assertTrue(d.isAttribute("b1"));
+		assertTrue(d.isAttribute("b2"));
+		assertTrue(d.isAttribute("b3"));
 		
-		assert(e.isAttribute("e1"));
-		assert(e.isAttribute("b1"));
-		assert(e.isAttribute("b2"));
-		assert(e.isAttribute("b3"));
+		assertTrue(e.isAttribute("e1"));
+		assertTrue(e.isAttribute("b1"));
+		assertTrue(e.isAttribute("b2"));
+		assertTrue(e.isAttribute("b3"));
 		
-		assert(f.isAttribute("f1"));
-		assert(f.isAttribute("f2"));
-		assert(f.isAttribute("f3"));
+		assertTrue(f.isAttribute("f1"));
+		assertTrue(f.isAttribute("f2"));
+		assertTrue(f.isAttribute("f3"));
 		
-		assert(a.getAssociationEnd("c") == c);
-		assert(a.getAssociationEnd("ra1") == a);
-		assert(a.getAssociationEnd("ra2") == a);
-		assert(a.getAssociationEnd("b1") == b);
-		assert(a.getAssociationEnd("b2") == b);
+		assertTrue(a.getAssociationEnd("c") == c);
+		assertTrue(a.getAssociationEnd("ra1") == a);
+		assertTrue(a.getAssociationEnd("ra2") == a);
+		assertTrue(a.getAssociationEnd("b1") == b);
+		assertTrue(a.getAssociationEnd("b2") == b);
 		
-		assert(b.getAssociationEnd("a1") == a);
-		assert(b.getAssociationEnd("a2") == a);
+		assertTrue(b.getAssociationEnd("a1") == a);
+		assertTrue(b.getAssociationEnd("a2") == a);
 		
-		assert(c.getAssociationEnd("a") == a);
-		assert(c.getAssociationEnd("c4") == f);
+		assertTrue(c.getAssociationEnd("a") == a);
+		assertTrue(c.getAssociationEnd("c4") == f);
 		
-		assert(d.getAssociationEnd("a1") == a);
-		assert(d.getAssociationEnd("a2") == a);
+		assertTrue(d.getAssociationEnd("a1") == a);
+		assertTrue(d.getAssociationEnd("a2") == a);
 		
-		assert(e.getAssociationEnd("a1") == a);
-		assert(e.getAssociationEnd("a2") == a);
+		assertTrue(e.getAssociationEnd("a1") == a);
+		assertTrue(e.getAssociationEnd("a2") == a);
 		
 		
 		guide = a.getAttributeGuide("a1");
 		guide.next();
-		assert(guide.getSelect().equals("A1"));
-		assert(guide.getFrom().equals("OV_A"));
+		assertTrue(guide.getSelect().equals("A1"));
+		assertTrue(guide.getFrom().equals("OV_A"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = a.getAttributeGuide("a2");
 		guide.next();
-		assert(guide.getSelect().equals("A2"));
-		assert(guide.getFrom().equals("OV_A"));
+		assertTrue(guide.getSelect().equals("A2"));
+		assertTrue(guide.getFrom().equals("OV_A"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = a.getAttributeGuide("a3");
 		guide.next();
-		assert(guide.getSelect().equals("A3"));
-		assert(guide.getFrom().equals("OV_A"));
+		assertTrue(guide.getSelect().equals("A3"));
+		assertTrue(guide.getFrom().equals("OV_A"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b1");
 		guide.next();
-		assert(guide.getSelect().equals("B1"));
-		assert(guide.getFrom().equals("OV_B"));
+		assertTrue(guide.getSelect().equals("B1"));
+		assertTrue(guide.getFrom().equals("OV_B"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b2");
 		guide.next();
-		assert(guide.getSelect().equals("B2"));
-		assert(guide.getFrom().equals("OV_B"));
+		assertTrue(guide.getSelect().equals("B2"));
+		assertTrue(guide.getFrom().equals("OV_B"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b3");
 		guide.next();
-		assert(guide.getSelect().equals("B3"));
-		assert(guide.getFrom().equals("OV_B"));
+		assertTrue(guide.getSelect().equals("B3"));
+		assertTrue(guide.getFrom().equals("OV_B"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c1");
 		guide.next();
-		assert(guide.getSelect().equals("C1"));
-		assert(guide.getFrom().equals("OV_C"));
+		assertTrue(guide.getSelect().equals("C1"));
+		assertTrue(guide.getFrom().equals("OV_C"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c2");
 		guide.next();
-		assert(guide.getSelect().equals("C2"));
-		assert(guide.getFrom().equals("OV_C"));
+		assertTrue(guide.getSelect().equals("C2"));
+		assertTrue(guide.getFrom().equals("OV_C"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c3");
 		guide.next();
-		assert(guide.getSelect().equals("C3"));
-		assert(guide.getFrom().equals("OV_C"));
+		assertTrue(guide.getSelect().equals("C3"));
+		assertTrue(guide.getFrom().equals("OV_C"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("d1");
 		guide.next();
-		assert(guide.getSelect().equals("D1"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("D1"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b1");
 		guide.next();
-		assert(guide.getSelect().equals("B1"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("B1"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b2");
 		guide.next();
-		assert(guide.getSelect().equals("B2"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("B2"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b3");
 		guide.next();
-		assert(guide.getSelect().equals("B3"));
-		assert(guide.getFrom().equals("OV_D"));
+		assertTrue(guide.getSelect().equals("B3"));
+		assertTrue(guide.getFrom().equals("OV_D"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("e1");
 		guide.next();
-		assert(guide.getSelect().equals("E1"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("E1"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b1");
 		guide.next();
-		assert(guide.getSelect().equals("B1"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("B1"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b2");
 		guide.next();
-		assert(guide.getSelect().equals("B2"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("B2"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b3");
 		guide.next();
-		assert(guide.getSelect().equals("B3"));
-		assert(guide.getFrom().equals("OV_E"));
+		assertTrue(guide.getSelect().equals("B3"));
+		assertTrue(guide.getFrom().equals("OV_E"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f1");
 		guide.next();
-		assert(guide.getSelect().equals("F1"));
-		assert(guide.getFrom().equals("OV_F"));
+		assertTrue(guide.getSelect().equals("F1"));
+		assertTrue(guide.getFrom().equals("OV_F"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f2");
 		guide.next();
-		assert(guide.getSelect().equals("F2"));
-		assert(guide.getFrom().equals("OV_F"));
+		assertTrue(guide.getSelect().equals("F2"));
+		assertTrue(guide.getFrom().equals("OV_F"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f3");
 		guide.next();
-		assert(guide.getSelect().equals("F3"));
-		assert(guide.getFrom().equals("OV_F"));
+		assertTrue(guide.getSelect().equals("F3"));
+		assertTrue(guide.getFrom().equals("OV_F"));
 		
-		assert(!guide.hasMoreSteps());
+		assertTrue(!guide.hasMoreSteps());
 		
 		ta = (Table)a.getTables().get(0);
 		tb = (Table)b.getTables().get(0);
@@ -969,62 +969,62 @@ public class TestObjectViewSchema extends TestCase {
 		guide = a.getJoinGuide("c");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(tc.isPrimaryKeyColumn(guide.getSelect()));
-		assert(tc.getTableName().equals(guide.getFrom()));
-		assert(tc.isForeignKeyColumn(guide.getWhere()));
+		assertTrue(tc.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(tc.getTableName().equals(guide.getFrom()));
+		assertTrue(tc.isForeignKeyColumn(guide.getWhere()));
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = a.getJoinGuide("b2");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(tb.isPrimaryKeyColumn(guide.getSelect()));
-		assert(tb.getTableName().equals(guide.getFrom()));
-		assert(tb.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(tb.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(tb.getTableName().equals(guide.getFrom()));
+		assertTrue(tb.isPrimaryKeyColumn(guide.getWhere()));
 		guide.next();
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());	
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());	
 		
 		guide = a.getJoinGuide("ra1");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
 		guide.next();
-		assert(ta.isForeignKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());
+		assertTrue(ta.isForeignKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());
 		
 		guide = b.getJoinGuide("a2");
 		//System.err.println(guide.toString());
 		guide.next();
-		assert(ta.isPrimaryKeyColumn(guide.getSelect()));
-		assert(ta.getTableName().equals(guide.getFrom()));
-		assert(ta.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(ta.getTableName().equals(guide.getFrom()));
+		assertTrue(ta.isPrimaryKeyColumn(guide.getWhere()));
 		guide.next();
 		guide.next();
-		assert(tb.isPrimaryKeyColumn(guide.getSelect()));
-		assert(tb.getTableName().equals(guide.getFrom()));
-		assert(tb.isPrimaryKeyColumn(guide.getWhere()));
-		assert(!guide.hasMoreSteps());	
+		assertTrue(tb.isPrimaryKeyColumn(guide.getSelect()));
+		assertTrue(tb.getTableName().equals(guide.getFrom()));
+		assertTrue(tb.isPrimaryKeyColumn(guide.getWhere()));
+		assertTrue(!guide.hasMoreSteps());	
 		
-		assert(a.getJoinGuide("ra2") != null);	
-		assert(a.getJoinGuide("b1") != null);	
+		assertTrue(a.getJoinGuide("ra2") != null);	
+		assertTrue(a.getJoinGuide("b1") != null);	
 		
-		assert(c.getJoinGuide("a") != null);	
-		assert(c.getJoinGuide("c4") != null);	
+		assertTrue(c.getJoinGuide("a") != null);	
+		assertTrue(c.getJoinGuide("c4") != null);	
 		
-		assert(b.getJoinGuide("a1") != null);		
+		assertTrue(b.getJoinGuide("a1") != null);		
 		
-		assert(((View)tb).getTableNames().size() == 1);
+		assertTrue(((View)tb).getTableNames().size() == 1);
 	}
 
 	public static Test suite() {

@@ -18,66 +18,66 @@ public class TestBoolean extends TestCase {
   }
   
   public void testEqual() {
-    assert(! bTrue.isEqualTo(bFalse).isTrue() );
-    assert(! bFalse.isEqualTo(bTrue).isTrue() );
-    assert( bFalse.isEqualTo(OclBoolean.FALSE).isTrue() );
-    assert( bTrue.isEqualTo(OclBoolean.TRUE).isTrue() );
+    assertTrue(! bTrue.isEqualTo(bFalse).isTrue() );
+    assertTrue(! bFalse.isEqualTo(bTrue).isTrue() );
+    assertTrue( bFalse.isEqualTo(OclBoolean.FALSE).isTrue() );
+    assertTrue( bTrue.isEqualTo(OclBoolean.TRUE).isTrue() );
   }
   
   public void testOr() {
     // tests or, xor
-    assert( bTrue.or(bFalse).isTrue() );
-    assert( bFalse.or(bTrue).isTrue() );
-    assert( bTrue.or(bTrue).isTrue() );
-    assert(! bFalse.or(bFalse).isTrue() );
+    assertTrue( bTrue.or(bFalse).isTrue() );
+    assertTrue( bFalse.or(bTrue).isTrue() );
+    assertTrue( bTrue.or(bTrue).isTrue() );
+    assertTrue(! bFalse.or(bFalse).isTrue() );
     
-    assert( bTrue.xor(bTrue).not().isTrue() );
-    assert( bFalse.xor(Ocl.getFor(true)).isTrue() );
-    assert( bTrue.xor(Ocl.getFor(false)).isTrue() );
-    assert( bFalse.xor(OclBoolean.FALSE).not().isTrue() );
+    assertTrue( bTrue.xor(bTrue).not().isTrue() );
+    assertTrue( bFalse.xor(Ocl.getFor(true)).isTrue() );
+    assertTrue( bTrue.xor(Ocl.getFor(false)).isTrue() );
+    assertTrue( bFalse.xor(OclBoolean.FALSE).not().isTrue() );
     try {
       OclBoolean res=bUndef.xor(bTrue);
-      assert( res.isTrue() ); // must raise exception
-      assert(false);
+      assertTrue( res.isTrue() ); // must raise exception
+      assertTrue(false);
     } catch (OclException e) {
-      assert(true);
+      assertTrue(true);
     }
   }
   
   public void testAnd() {
-    assert( bTrue.and(OclBoolean.TRUE).isTrue() );
-    assert(! bTrue.and(OclBoolean.FALSE).isTrue() );
-    assert(! OclBoolean.FALSE.and(bFalse).isTrue() );
+    assertTrue( bTrue.and(OclBoolean.TRUE).isTrue() );
+    assertTrue(! bTrue.and(OclBoolean.FALSE).isTrue() );
+    assertTrue(! OclBoolean.FALSE.and(bFalse).isTrue() );
   }
   
   public void testNot() {
-    assert( bFalse.not().isTrue() );
-    assert( bTrue.not().not().isTrue() );
-    assert(! bTrue.not().isTrue() );
+    assertTrue( bFalse.not().isTrue() );
+    assertTrue( bTrue.not().not().isTrue() );
+    assertTrue(! bTrue.not().isTrue() );
   }
   
   public void testImplies() {
-    assert( bFalse.implies(bFalse).isTrue() );
-    assert( bTrue.implies(bTrue).isTrue() );
-    assert(! bTrue.implies(bFalse).isTrue() );
-    assert( bFalse.implies(bTrue).isTrue() );
+    assertTrue( bFalse.implies(bFalse).isTrue() );
+    assertTrue( bTrue.implies(bTrue).isTrue() );
+    assertTrue(! bTrue.implies(bFalse).isTrue() );
+    assertTrue( bFalse.implies(bTrue).isTrue() );
   }
   
   public void testUndefined() {
-    assert( bTrue.getFeature("bla").isUndefined() );
-    // assert( bUndef.isTrue() ); raises Exception
+    assertTrue( bTrue.getFeature("bla").isUndefined() );
+    // assertTrue( bUndef.isTrue() ); raises Exception
     
     // The following works only by accident.
     // Instead of the "==bUndef" there should be a ".isUndefined()".
     // The "==bUndef" may not work in future versions
     // of the ocl library.
-    assert( bUndef.isEqualTo(bUndef) == bUndef );
-    assert( bTrue.implies(bUndef) == bUndef );
-    assert( bFalse.implies(bUndef) == bTrue );
-    assert( bUndef.implies(bFalse) == bUndef );
-    assert( bUndef.not() == bUndef );
-    assert( bUndef.or(bTrue) == bTrue );
-    assert(! bFalse.and(bUndef).isTrue() );
+    assertTrue( bUndef.isEqualTo(bUndef) == bUndef );
+    assertTrue( bTrue.implies(bUndef) == bUndef );
+    assertTrue( bFalse.implies(bUndef) == bTrue );
+    assertTrue( bUndef.implies(bFalse) == bUndef );
+    assertTrue( bUndef.not() == bUndef );
+    assertTrue( bUndef.or(bTrue) == bTrue );
+    assertTrue(! bFalse.and(bUndef).isTrue() );
   }
   
   public static Test suite() {

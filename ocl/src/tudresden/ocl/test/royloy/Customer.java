@@ -41,7 +41,7 @@ public class Customer extends RLObject {
     return super.toString()+'['+name+']';
   }
   
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 

@@ -30,44 +30,44 @@ public class TestGuide extends TestCase {
 	public void testRun1() {
 		Guide g = new Guide(true, "someAlias");
 		
-		assert(g.isNavigation());
-		assert(g.numberOfSteps() == 0);
-		assert(!g.hasMoreSteps());
-		assert(g.getAlias().equals("someAlias"));
+		assertTrue(g.isNavigation());
+		assertTrue(g.numberOfSteps() == 0);
+		assertTrue(!g.hasMoreSteps());
+		assertTrue(g.getAlias().equals("someAlias"));
 		
 		g.setAlias("newAlias");
-		assert(g.getAlias().equals("newAlias"));
+		assertTrue(g.getAlias().equals("newAlias"));
 		
 		g.add("PID", "PERSON", "PID");
 		g.add("PID", "EMPLOYMENT", "CID");
 		g.add("CID", "COMPANY", "CID");
 		
-		assert(g.numberOfSteps() == 3);
+		assertTrue(g.numberOfSteps() == 3);
 		
 		g.reset();
-		assert(g.hasMoreSteps());
+		assertTrue(g.hasMoreSteps());
 		g.next();
-		assert(g.getSelect().equals("PID"));
-		assert(g.getFrom().equals("PERSON"));
-		assert(g.getWhere().equals("PID"));
-		assert(g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("PID"));
+		assertTrue(g.getFrom().equals("PERSON"));
+		assertTrue(g.getWhere().equals("PID"));
+		assertTrue(g.hasMoreSteps());
 		g.next();
-		assert(g.getSelect().equals("PID"));
-		assert(g.getFrom().equals("EMPLOYMENT"));
-		assert(g.getWhere().equals("CID"));
-		assert(g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("PID"));
+		assertTrue(g.getFrom().equals("EMPLOYMENT"));
+		assertTrue(g.getWhere().equals("CID"));
+		assertTrue(g.hasMoreSteps());
 		g.next();
-		assert(g.getSelect().equals("CID"));
-		assert(g.getFrom().equals("COMPANY"));
-		assert(g.getWhere().equals("CID"));
-		assert(!g.hasMoreSteps());
+		assertTrue(g.getSelect().equals("CID"));
+		assertTrue(g.getFrom().equals("COMPANY"));
+		assertTrue(g.getWhere().equals("CID"));
+		assertTrue(!g.hasMoreSteps());
 	}
 	
 	public void testRun2() {
 		Guide g = new Guide(false);
 		
-		assert(!g.isNavigation());
-		assert(g.numberOfSteps() == 0);
+		assertTrue(!g.isNavigation());
+		assertTrue(g.numberOfSteps() == 0);
 		
 		try {
 			g.add(null, "something", "something");

@@ -143,7 +143,7 @@ public class DefaultTypeFactory implements TypeFactory {
     return found.conformsTo(expected);
   }
 
-  public void assert(Type found, Type expected, Node where) {
+  public void assertTrue(Type found, Type expected, Node where) {
     if (!conforms (found, expected)) {
       throw new OclTypeException("type error in \""+where+"\" :expected "+expected+", found "+found);
     }

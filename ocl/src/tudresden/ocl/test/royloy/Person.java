@@ -101,7 +101,7 @@ public class Person extends RLObject implements Comparable
       return 0;
   }
 
-  public boolean assert()
+  public boolean assertTrue()
   {
     return true;
   }

@@ -32,7 +32,7 @@ public class Membership extends RLObject {
   public Customer customer;
 
   // Operations
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 

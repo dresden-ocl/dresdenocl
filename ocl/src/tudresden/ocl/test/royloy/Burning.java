@@ -12,7 +12,7 @@ public class Burning extends Transaction {
 
   // Operations
 
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 

@@ -10,8 +10,8 @@ public class Earning extends Transaction {
   // Associations
 
   // Operations
-  public boolean assert() {
-    return super.assert();
+  public boolean assertTrue() {
+    return super.assertTrue();
   }
 
 } /* end class Earning */

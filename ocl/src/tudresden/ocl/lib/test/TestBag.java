@@ -58,14 +58,14 @@ public class TestBag extends TestCase {
   }
 
   public void testEquals() {
-    assert( abc.isEqualTo(abc).isTrue() );
-    assert(! aabc.isEqualTo(abc).isTrue() );
+    assertTrue( abc.isEqualTo(abc).isTrue() );
+    assertTrue(! aabc.isEqualTo(abc).isTrue() );
   }
 
   public void testCollect() {
     // OCL: sempty->collect(i|i.feature)->isEmpty
     final OclIterator iter1;
-    assert(
+    assertTrue(
       sempty.collect(
         iter1=sempty.getIterator(),
         new OclRootEvaluatable() {
@@ -78,7 +78,7 @@ public class TestBag extends TestCase {
 
     // OCL: (s123->collect(p|p.firstName)) = abc
     final OclIterator iter2;
-    assert(
+    assertTrue(
       s123.collect(
         iter2=s123.getIterator(),
         new OclRootEvaluatable() {
@@ -93,7 +93,7 @@ public class TestBag extends TestCase {
   public void testFeature() {
     // OCL: s123.firstName = abc
     final OclIterator iter1;
-    assert(
+    assertTrue(
       s123.getFeature("firstName").isEqualTo(abc).isTrue()
     );
   }
@@ -103,7 +103,7 @@ public class TestBag extends TestCase {
 
     // OCL: abc->forAll(s|s.size > 0)
     final OclIterator iter1;
-    assert(
+    assertTrue(
       abc.forAll(
         iter1=abc.getIterator(),
         new OclBooleanEvaluatable() {
@@ -118,7 +118,7 @@ public class TestBag extends TestCase {
 
     // OCL: aabc->exists(s|s="b")
     final OclIterator iter2;
-    assert(
+    assertTrue(
       aabc.exists(
         iter2=aabc.getIterator(),
         new OclBooleanEvaluatable() {
@@ -136,7 +136,7 @@ public class TestBag extends TestCase {
     // OCL: s123.firstName->isUnique(s|s)
     final OclIterator iter1;
     OclBag bag;
-    assert(
+    assertTrue(
       ( bag=(OclBag)s123.getFeature("firstName") ).isUnique(
         iter1=bag.getIterator(),
         new OclRootEvaluatable() {
@@ -149,7 +149,7 @@ public class TestBag extends TestCase {
 
     // OCL: not (aabc->isUnique(s|s))
     final OclIterator iter2;
-    assert(
+    assertTrue(
       aabc.isUnique(
         iter2=aabc.getIterator(),
         new OclRootEvaluatable() {
@@ -165,7 +165,7 @@ public class TestBag extends TestCase {
     // OCL: ( abc->iterate(p; set=Set{}| set->including(p.size)) ).size = 1
     final OclIterator iter1;
     final OclContainer acc1;
-    assert(
+    assertTrue(
       ((OclSizable)abc.iterate(
         iter1=abc.getIterator(),
         acc1=new OclContainer(OclSet.getEmptyOclSet()),
@@ -185,7 +185,7 @@ public class TestBag extends TestCase {
 
     // OCL: aabc->select(s|s.size<5) = aabc
     final OclIterator iter1;
-    assert(
+    assertTrue(
       aabc.select(
         iter1=aabc.getIterator(),
         new OclBooleanEvaluatable() {
@@ -200,7 +200,7 @@ public class TestBag extends TestCase {
 
     //OCL: aabc->reject(p|aabc->count(p)>1) = bc
     final OclIterator iter2;
-    assert(
+    assertTrue(
       aabc.reject(
         iter2=aabc.getIterator(),
         new OclBooleanEvaluatable() {
@@ -218,21 +218,21 @@ public class TestBag extends TestCase {
     // includes, excludes, includesAll, isEmpty, notEmpty, union
     //    including, excluding, sum
     final OclIterator iter;
-    assert(aabc.includes(sa).isTrue());
-    assert(aabc.includes(sb).isTrue());
-    assert(bc.excludes(sa).isTrue());
-    assert(abc.includesAll(ab).isTrue());
-    assert(aabc.includesAll(abc).isTrue());
-    assert(abc.includesAll(aabc).isTrue()); // !! aber die Ocl Spec will es so
-    assert(OclBag.getEmptyOclBag().isEmpty().isTrue());
-    assert(OclBag.getEmptyOclBag().including(
+    assertTrue(aabc.includes(sa).isTrue());
+    assertTrue(aabc.includes(sb).isTrue());
+    assertTrue(bc.excludes(sa).isTrue());
+    assertTrue(abc.includesAll(ab).isTrue());
+    assertTrue(aabc.includesAll(abc).isTrue());
+    assertTrue(abc.includesAll(aabc).isTrue()); // !! aber die Ocl Spec will es so
+    assertTrue(OclBag.getEmptyOclBag().isEmpty().isTrue());
+    assertTrue(OclBag.getEmptyOclBag().including(
       Ocl.getOclRepresentationFor(p1)
     ).notEmpty().isTrue());
-    assert(abc.union(abc).isNotEqualTo(abc).isTrue());
-    assert(abc.union(a).isEqualTo(aabc).isTrue());
-    assert(abc.union(s123).size().getInt()==6);
-    assert(aabc.excluding(sa).isEqualTo(bc).isTrue());
-    assert(
+    assertTrue(abc.union(abc).isNotEqualTo(abc).isTrue());
+    assertTrue(abc.union(a).isEqualTo(aabc).isTrue());
+    assertTrue(abc.union(s123).size().getInt()==6);
+    assertTrue(aabc.excluding(sa).isEqualTo(bc).isTrue());
+    assertTrue(
       ((OclInteger)aabc.collect(
         iter=aabc.getIterator(),
         new OclRootEvaluatable() {

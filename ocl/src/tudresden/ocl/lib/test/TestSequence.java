@@ -77,20 +77,20 @@ public class TestSequence extends TestCase {
   }
 
   public void testEqual() {
-    assert( s123.isEqualTo(s123).isTrue() );
-    assert( aabc.isNotEqualTo(abca).isTrue() );
-    assert( a.isNotEqualTo(aa).isTrue() );
-    assert( a.isNotEqualTo(s1).isTrue() );
-    assert( ab.isNotEqualTo(abc).isTrue() );
-    assert( abc.isNotEqualTo(ab).isTrue() );
-    assert( abc.isEqualTo(ab.append(sc)).isTrue() );
+    assertTrue( s123.isEqualTo(s123).isTrue() );
+    assertTrue( aabc.isNotEqualTo(abca).isTrue() );
+    assertTrue( a.isNotEqualTo(aa).isTrue() );
+    assertTrue( a.isNotEqualTo(s1).isTrue() );
+    assertTrue( ab.isNotEqualTo(abc).isTrue() );
+    assertTrue( abc.isNotEqualTo(ab).isTrue() );
+    assertTrue( abc.isEqualTo(ab.append(sc)).isTrue() );
   }
 
   public void testFeature() {
     //getFeature, collect
-    assert( s123.getFeature("firstName").isEqualTo(abc).isTrue() );
+    assertTrue( s123.getFeature("firstName").isEqualTo(abc).isTrue() );
     final OclIterator iter;
-    assert(
+    assertTrue(
       s123.collect(
         iter=s123.getIterator(),
         new OclRootEvaluatable() {
@@ -101,7 +101,7 @@ public class TestSequence extends TestCase {
       ).isEqualTo(s123.getFeature("firstName")).isTrue()
     );
 
-    assert( s1231.getFeature("firstName").isEqualTo(abca).isTrue() );
+    assertTrue( s1231.getFeature("firstName").isEqualTo(abca).isTrue() );
   }
 
   public void testExists() {
@@ -109,7 +109,7 @@ public class TestSequence extends TestCase {
 
     // OCL: s1231->exists(p|p.someNumber=1)
     final OclIterator iter1;
-    assert(
+    assertTrue(
       s1231.exists(
         iter1=s1231.getIterator(),
         new OclBooleanEvaluatable() {
@@ -124,7 +124,7 @@ public class TestSequence extends TestCase {
 
     // OCL: abca->forAll(s|s.size=1)
     final OclIterator iter2;
-    assert(
+    assertTrue(
       abca.forAll(
         iter2=abca.getIterator(),
         new OclBooleanEvaluatable() {
@@ -143,7 +143,7 @@ public class TestSequence extends TestCase {
 
     // OCL: s123->isUnique(p|p.firstName)
     final OclIterator iter1;
-    assert(
+    assertTrue(
       s123.isUnique(
         iter1=s123.getIterator(),
         new OclRootEvaluatable() {
@@ -156,7 +156,7 @@ public class TestSequence extends TestCase {
 
     // OCL not s1231->isUnique(p|p.someNumber)
     final OclIterator iter2;
-    assert(
+    assertTrue(
       s1231.isUnique(
         iter2=s1231.getIterator(),
         new OclRootEvaluatable() {
@@ -169,7 +169,7 @@ public class TestSequence extends TestCase {
 
     // OCL: s123->sortedBy(p|p.someNumber) = s123
     final OclIterator iter3;
-    assert(
+    assertTrue(
       s123.sortedBy(
         iter3=s123.getIterator(),
         new OclComparableEvaluatable() {
@@ -182,7 +182,7 @@ public class TestSequence extends TestCase {
 
     // s1231->sortedBy(p|p.someNumber) = ( s123.prepend(p1) )
     final OclIterator iter4;
-    assert(
+    assertTrue(
       s1231.sortedBy(
         iter4=s1231.getIterator(),
         new OclComparableEvaluatable() {
@@ -201,7 +201,7 @@ public class TestSequence extends TestCase {
 
     // OCL: abca->select(s|s=a)=aa
     final OclIterator iter1;
-    assert(
+    assertTrue(
       abca.select(
         iter1=abca.getIterator(),
         new OclBooleanEvaluatable() {
@@ -215,7 +215,7 @@ public class TestSequence extends TestCase {
 
     // OCL: s1231->reject(p|p.someNumber<2) = s123->excluding(p1)
     final OclIterator iter2;
-    assert(
+    assertTrue(
       s1231.reject(
         iter2=s1231.getIterator(),
         new OclBooleanEvaluatable() {
@@ -233,7 +233,7 @@ public class TestSequence extends TestCase {
     // OCL: abca->iterate(s; string=""| string.concat(s)) = "abca"
     final OclIterator iter3;
     final OclContainer acc;
-    assert(
+    assertTrue(
       abca.iterate(
         iter3= abca.getIterator(),
         acc  = new OclContainer(Ocl.getOclRepresentationFor("")),
@@ -257,26 +257,26 @@ public class TestSequence extends TestCase {
     OclInteger i4=(OclInteger)Ocl.getOclRepresentationFor(4);
     OclInteger i7=(OclInteger)Ocl.getOclRepresentationFor(7);
 
-    assert( s123.size().isEqualTo(i3).isTrue() );
-    assert( s1231.size().isEqualTo(i4).isTrue() );
-    assert( abca.size().isEqualTo(i4).isTrue() );
-    assert( s1231.count(p1).isEqualTo(i2).isTrue() );
-    assert( abc.count(sa).isEqualTo(i1).isTrue() );
-    assert( abc.includes(p1).not().isTrue() );
-    assert( aabc.includes(sa).isTrue() );
-    assert( s123.excludes(sa).isTrue() );
-    assert( s12.excludes(p1).not().isTrue() );
-    assert( abca.includesAll(abc).isTrue() );
-    assert( s123.includesAll(set12).isTrue() );
-    assert( aa.excluding(sa).isEmpty().isTrue() );
-    assert( aabc.notEmpty().isTrue() );
-    assert( ((OclCollection)s1231.getFeature("someNumber")).sum().isEqualTo(i7).isTrue() );
-    assert( a.union(abc).isEqualTo(aabc).isTrue() );
-    assert( s123.union(s1).isEqualTo(s1231).isTrue() );
-    assert( s123.including(p1).isEqualTo(s1231).isTrue() );
-    assert( a.including(sa).isEqualTo(aa).isTrue() );
-    assert( s123.excluding(p2).excluding(p3).isEqualTo(s1).isTrue() );
-    assert( aabc.excluding(sa).isEqualTo(abc.excluding(sa)).isTrue() );
+    assertTrue( s123.size().isEqualTo(i3).isTrue() );
+    assertTrue( s1231.size().isEqualTo(i4).isTrue() );
+    assertTrue( abca.size().isEqualTo(i4).isTrue() );
+    assertTrue( s1231.count(p1).isEqualTo(i2).isTrue() );
+    assertTrue( abc.count(sa).isEqualTo(i1).isTrue() );
+    assertTrue( abc.includes(p1).not().isTrue() );
+    assertTrue( aabc.includes(sa).isTrue() );
+    assertTrue( s123.excludes(sa).isTrue() );
+    assertTrue( s12.excludes(p1).not().isTrue() );
+    assertTrue( abca.includesAll(abc).isTrue() );
+    assertTrue( s123.includesAll(set12).isTrue() );
+    assertTrue( aa.excluding(sa).isEmpty().isTrue() );
+    assertTrue( aabc.notEmpty().isTrue() );
+    assertTrue( ((OclCollection)s1231.getFeature("someNumber")).sum().isEqualTo(i7).isTrue() );
+    assertTrue( a.union(abc).isEqualTo(aabc).isTrue() );
+    assertTrue( s123.union(s1).isEqualTo(s1231).isTrue() );
+    assertTrue( s123.including(p1).isEqualTo(s1231).isTrue() );
+    assertTrue( a.including(sa).isEqualTo(aa).isTrue() );
+    assertTrue( s123.excluding(p2).excluding(p3).isEqualTo(s1).isTrue() );
+    assertTrue( aabc.excluding(sa).isEqualTo(abc.excluding(sa)).isTrue() );
   }
 
   public void testSpecial() {
@@ -290,16 +290,16 @@ public class TestSequence extends TestCase {
     OclInteger i5=(OclInteger)Ocl.getOclRepresentationFor(5);
 
 
-    assert( abc.append(sa).isEqualTo(abca).isTrue() );
-    assert( a.prepend(sc).prepend(sb).prepend(sa).isEqualTo(abca).isTrue() );
-    assert( abca.union(abca).subSequence(i4, i5).isEqualTo(aa).isTrue() );
-    assert( abc.subSequence(i1, i1).isEqualTo(a).isTrue() );
-    assert( s1231.subSequence(i4, i4).isEqualTo(s1).isTrue() );
-    assert( s123.at(i2).isEqualTo(p2).isTrue() );
-    assert( abca.at(i1).isEqualTo( abca.at(i4) ).isTrue() );
-    assert( sempty.first().isUndefined() );
-    assert( s123.first().isEqualTo(p1).isTrue() );
-    assert( s123.last().isEqualTo(p3).isTrue() );
+    assertTrue( abc.append(sa).isEqualTo(abca).isTrue() );
+    assertTrue( a.prepend(sc).prepend(sb).prepend(sa).isEqualTo(abca).isTrue() );
+    assertTrue( abca.union(abca).subSequence(i4, i5).isEqualTo(aa).isTrue() );
+    assertTrue( abc.subSequence(i1, i1).isEqualTo(a).isTrue() );
+    assertTrue( s1231.subSequence(i4, i4).isEqualTo(s1).isTrue() );
+    assertTrue( s123.at(i2).isEqualTo(p2).isTrue() );
+    assertTrue( abca.at(i1).isEqualTo( abca.at(i4) ).isTrue() );
+    assertTrue( sempty.first().isUndefined() );
+    assertTrue( s123.first().isEqualTo(p1).isTrue() );
+    assertTrue( s123.last().isEqualTo(p3).isTrue() );
   }
 
   public static Test suite() {

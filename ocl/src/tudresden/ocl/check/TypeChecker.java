@@ -133,7 +133,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
         AReturnTypeDeclaration rtd=(AReturnTypeDeclaration)oc.getReturnTypeDeclaration();
         String returnTypeName=rtd.getTypeName().toString().trim();
         Type returnType=types.get(returnTypeName);
-        types.assert( returnType, constrainedOperationType, c);
+        types.assertTrue( returnType, constrainedOperationType, c);
       }
       env.put("result", constrainedOperationType);
     }
@@ -143,7 +143,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
   }
 
   public void outAConstraintBody(AConstraintBody cb) {
-    types.assert( ntm.get(cb.getExpression()), types.getBoolean(), cb.getExpression() );
+    types.assertTrue( ntm.get(cb.getExpression()), types.getBoolean(), cb.getExpression() );
   }
 
   public void caseAExpression(AExpression e) {
@@ -172,7 +172,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
           formalType=(
             (OclType) ntm.get( letd.getPathTypeName() )
           ).getType();
-          types.assert( exprType, formalType, nextLet );
+          types.assertTrue( exprType, formalType, nextLet );
         } else {
           formalType=exprType;
         }
@@ -191,7 +191,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
     Type typeIf=ntm.get( ie.getIfBranch() );
     Type typeThen=ntm.get( ie.getThenBranch() );
     Type typeElse=ntm.get( ie.getElseBranch() );
-    types.assert( typeIf, types.getBoolean(), ie );
+    types.assertTrue( typeIf, types.getBoolean(), ie );
     if (types.conforms(typeThen, typeElse)) {
       ntm.put( ie, typeElse );
     } else if (types.conforms(typeElse, typeThen)) {
@@ -204,11 +204,11 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
   public void outALogicalExpression(ALogicalExpression le) {
     if (! le.getLogicalExpressionTail().isEmpty() ) {
       // all logical operators require two Boolean operands and result in a Boolean
-      types.assert(ntm.get( le.getRelationalExpression() ), types.getBoolean(), le);
+      types.assertTrue(ntm.get( le.getRelationalExpression() ), types.getBoolean(), le);
       Iterator iter=le.getLogicalExpressionTail().iterator();
       while (iter.hasNext()) {
         ALogicalExpressionTail logTail=(ALogicalExpressionTail)iter.next();
-        types.assert(ntm.get( logTail.getRelationalExpression() ), types.getBoolean(), logTail);
+        types.assertTrue(ntm.get( logTail.getRelationalExpression() ), types.getBoolean(), logTail);
       }
       ntm.put(le, types.getBoolean());
     } else {
@@ -240,8 +240,8 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
                  operator instanceof ALtRelationalOperator ||
                  operator instanceof AGteqRelationalOperator ||
                  operator instanceof ALteqRelationalOperator) {
-        types.assert( ntm.get(leftOperand), types.getReal(), re);
-        types.assert( ntm.get(rightOperand), types.getReal(), re);
+        types.assertTrue( ntm.get(leftOperand), types.getReal(), re);
+        types.assertTrue( ntm.get(rightOperand), types.getReal(), re);
         ntm.put( re, types.getBoolean() );
       }
     }
@@ -260,7 +260,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
       boolean firstOperandIsSet=types.conforms (firstOperandType, types.getSet());
       boolean allOperandsAreInteger=types.conforms (firstOperandType, types.getInteger());
       if ( (! firstOperandIsSet) && (! allOperandsAreInteger) ) {
-        types.assert( firstOperandType, types.getReal(), ae );
+        types.assertTrue( firstOperandType, types.getReal(), ae );
       }
       Iterator iter=tail.iterator();
       while (iter.hasNext()) {
@@ -270,16 +270,16 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
         if ( firstOperandIsSet ) {
           // '-' operator on Sets
           if (next.getAddOperator() instanceof APlusAddOperator) {
-            types.assert( firstOperandType, types.getReal(), ae ); // this will fail
+            types.assertTrue( firstOperandType, types.getReal(), ae ); // this will fail
           }
           nextOperand.apply(this); // type-check subexpression
           // next line will fail in e.g. "Set(Circle)-Set(Shape)"
-          types.assert( ntm.get(nextOperand) , firstOperandType, ae );
+          types.assertTrue( ntm.get(nextOperand) , firstOperandType, ae );
         } else {
           // '-' or '+' on Real / Integer
           nextOperand.apply(this); // type-check subexpression
           Type nextOperandType=ntm.get(nextOperand);
-          types.assert( nextOperandType, types.getReal(), ae);
+          types.assertTrue( nextOperandType, types.getReal(), ae);
           if (allOperandsAreInteger) {
             allOperandsAreInteger=types.conforms(nextOperandType, types.getInteger());
           }
@@ -301,7 +301,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
       ntm.put( me, ntm.get(me.getUnaryExpression()) );
     } else {
       // '*' or '/' on Real, resulting type is Real or Integer
-      types.assert( ntm.get(me.getUnaryExpression()), types.getReal(), me );
+      types.assertTrue( ntm.get(me.getUnaryExpression()), types.getReal(), me );
       boolean resultIsInteger=types.conforms(
         ntm.get(me.getUnaryExpression()),
         types.getInteger()
@@ -309,7 +309,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
       Iterator iter=tail.iterator();
       while(iter.hasNext()) {
         AMultiplicativeExpressionTail next=(AMultiplicativeExpressionTail)iter.next();
-        types.assert( ntm.get(next.getUnaryExpression()), types.getReal(), next );
+        types.assertTrue( ntm.get(next.getUnaryExpression()), types.getReal(), next );
         if (resultIsInteger) {
           resultIsInteger=
             next.getMultiplyOperator() instanceof AMultMultiplyOperator &&
@@ -332,10 +332,10 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
     PUnaryOperator uop=ue.getUnaryOperator();
     Type operandType=ntm.get( ue.getPostfixExpression() );
     if (uop instanceof AMinusUnaryOperator) {
-      types.assert( operandType, types.getReal(), ue );
+      types.assertTrue( operandType, types.getReal(), ue );
     } else {
       // uop instanceof ANotUnaryOperator
-      types.assert( operandType, types.getBoolean(), ue );
+      types.assertTrue( operandType, types.getBoolean(), ue );
     }
     ntm.put(ue, operandType);
   }
@@ -399,7 +399,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
             navigation=new Collection(Collection.SET, navigation);
           }
           if (pathName.equals("collect")) {
-            types.assert(navigation, types.getCollection(), poex);
+            types.assertTrue(navigation, types.getCollection(), poex);
             navigation=navigation.navigateParameterized(
               pathName,
               (Type[]) paramTypes.toArray( new Type[paramTypes.size()] )
@@ -551,7 +551,7 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
     }
     Type toppee=computeTypeOfPreviousPostfixExpressionElement(fc);
 
-    types.assert( toppee, types.getCollection(), fc.parent() );
+    types.assertTrue( toppee, types.getCollection(), fc.parent() );
     Collection coll=(Collection) toppee;
     if (iteratorType==null) {
       iteratorType=coll.getElementType();
@@ -813,13 +813,13 @@ public class TypeChecker extends DepthFirstAdapter implements NameBoundQueryable
         Iterator iter=listTail.getExpressionListTail().iterator();
         while (iter.hasNext()) {
           AExpressionListTail elt=(AExpressionListTail)iter.next();
-          types.assert( ntm.get(elt.getExpression()), firstType, elt );
+          types.assertTrue( ntm.get(elt.getExpression()), firstType, elt );
         }
       } else {
         // tail instanceof ARangeExpressionListOrRangeTail
         ARangeExpressionListOrRangeTail rangeTail=(ARangeExpressionListOrRangeTail)tail;
-        types.assert( firstType, types.getInteger(), rangeTail );
-        types.assert( ntm.get( rangeTail.getExpression() ), types.getInteger(), rangeTail );
+        types.assertTrue( firstType, types.getInteger(), rangeTail );
+        types.assertTrue( ntm.get( rangeTail.getExpression() ), types.getInteger(), rangeTail );
       }
     }
     ntm.put( elor, firstType );

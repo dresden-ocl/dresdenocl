@@ -25,7 +25,7 @@ public class ServiceLevel extends RLObject {
   public Service service;
 
   // Operations
-  public boolean assert() {
+  public boolean assertTrue() {
     return true;
   }
 

@@ -54,7 +54,7 @@ public abstract class RLObject implements Serializable {
     return ret;
   }
 
-  public abstract boolean assert();
+  public abstract boolean assertTrue();
 
   public int getID() {
     return id;
@@ -68,7 +68,7 @@ public abstract class RLObject implements Serializable {
       report("testing "+o.getClass().getName()+" "+o.getID());
       boolean b=false;
       try {
-        b=o.assert();
+        b=o.assertTrue();
       } catch (Exception e) {
         e.printStackTrace();
       }

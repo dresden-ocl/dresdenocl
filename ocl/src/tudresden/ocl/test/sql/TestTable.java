@@ -39,12 +39,12 @@ public class TestTable extends TestCase {
 		t.addColumn("a5");
 
 		tmp = t.getColumns();
-		assert(tmp.length == 5);
-		assert(tmp[0].equals("a1"));
-		assert(tmp[1].equals("a2"));
-		assert(tmp[2].equals("a3"));
-		assert(tmp[3].equals("a4"));
-		assert(tmp[4].equals("a5"));
+		assertTrue(tmp.length == 5);
+		assertTrue(tmp[0].equals("a1"));
+		assertTrue(tmp[1].equals("a2"));
+		assertTrue(tmp[2].equals("a3"));
+		assertTrue(tmp[3].equals("a4"));
+		assertTrue(tmp[4].equals("a5"));
 
 	}
 
@@ -58,17 +58,17 @@ public class TestTable extends TestCase {
 		t.addColumn("a4");
 		t.addColumn("a5");
 		
-		assert(t.getPrimaryKeyRepresentation().equals("a1"));
+		assertTrue(t.getPrimaryKeyRepresentation().equals("a1"));
 		t.setPrimaryKey("a2");
-		assert(t.getPrimaryKeyRepresentation().equals("(a1,a2)"));
+		assertTrue(t.getPrimaryKeyRepresentation().equals("(a1,a2)"));
 
 		tmp = t.getPrimaryKeyColumns();
-		assert(tmp.length == 2);
-		assert(tmp[0].equals("a1"));
-		assert(tmp[1].equals("a2"));
+		assertTrue(tmp.length == 2);
+		assertTrue(tmp[0].equals("a1"));
+		assertTrue(tmp[1].equals("a2"));
 		
-		assert(t.isPrimaryKeyColumn("a1"));
-		assert(!t.isPrimaryKeyColumn("a3"));
+		assertTrue(t.isPrimaryKeyColumn("a1"));
+		assertTrue(!t.isPrimaryKeyColumn("a3"));
 		
 		try {
 			t.setPrimaryKey(null);
@@ -102,17 +102,17 @@ public class TestTable extends TestCase {
 		t.setForeignKey("a3", "C", "c1");
 
 		tmp = t.getForeignKeyColumns();
-		assert(tmp.length == 2);
-		assert(tmp[0].equals("a2"));
-		assert(tmp[1].equals("a3"));
+		assertTrue(tmp.length == 2);
+		assertTrue(tmp[0].equals("a2"));
+		assertTrue(tmp[1].equals("a3"));
 
-		assert(t.isForeignKeyColumn("a2"));
-		assert(t.isForeignKeyColumn("a3"));
-		assert(!t.isForeignKeyColumn("a4"));
-		assert(t.getForeignTable("a2").equals("B"));
-		assert(t.getForeignColumn("a2").equals("b1"));
-		assert(t.getForeignTable("a3").equals("C"));
-		assert(t.getForeignColumn("a3").equals("c1"));
+		assertTrue(t.isForeignKeyColumn("a2"));
+		assertTrue(t.isForeignKeyColumn("a3"));
+		assertTrue(!t.isForeignKeyColumn("a4"));
+		assertTrue(t.getForeignTable("a2").equals("B"));
+		assertTrue(t.getForeignColumn("a2").equals("b1"));
+		assertTrue(t.getForeignTable("a3").equals("C"));
+		assertTrue(t.getForeignColumn("a3").equals("c1"));
 
 		try {
 			t.setForeignKey(null, null, null);
@@ -143,36 +143,36 @@ public class TestTable extends TestCase {
 		t.addColumn("att3", "String", "a4", false);
 		t.addColumn("att4", "long", "a5");
 
-		assert(t.getTableName().equals("A"));
+		assertTrue(t.getTableName().equals("A"));
 
-		assert(t.getAttributeColumn("att2").equals("a2"));
+		assertTrue(t.getAttributeColumn("att2").equals("a2"));
 
 		tmp = t.getAttributeColumns("att3");
-		assert(tmp.length == 2);
-		assert(tmp[0].equals("a3"));
-		assert(tmp[1].equals("a4"));
+		assertTrue(tmp.length == 2);
+		assertTrue(tmp[0].equals("a3"));
+		assertTrue(tmp[1].equals("a4"));
 
 		tmp = t.getAttributeColumns("att1");
-		assert(tmp.length == 1);
-		assert(tmp[0].equals("a1"));
+		assertTrue(tmp.length == 1);
+		assertTrue(tmp[0].equals("a1"));
 
 		tmp = t.getColumns();
-		assert(tmp.length == 5);
-		assert(tmp[0].equals("a1"));
-		assert(tmp[1].equals("a2"));
-		assert(tmp[2].equals("a3"));
-		assert(tmp[3].equals("a4"));
-		assert(tmp[4].equals("a5"));
+		assertTrue(tmp.length == 5);
+		assertTrue(tmp[0].equals("a1"));
+		assertTrue(tmp[1].equals("a2"));
+		assertTrue(tmp[2].equals("a3"));
+		assertTrue(tmp[3].equals("a4"));
+		assertTrue(tmp[4].equals("a5"));
 
-		assert(t.isColumn("a5"));
-		assert(!t.isColumn("a6"));
+		assertTrue(t.isColumn("a5"));
+		assertTrue(!t.isColumn("a6"));
 
-		assert(t.getColumnAttribute("a2").equals("att2"));
+		assertTrue(t.getColumnAttribute("a2").equals("att2"));
 
-		assert(t.getColumnType("a1").equals("int"));
-		assert(t.getColumnType("a2").equals("boolean"));
-		assert(t.getColumnType("a3").equals("String"));
-		assert(t.getColumnType("a4").equals("String"));
+		assertTrue(t.getColumnType("a1").equals("int"));
+		assertTrue(t.getColumnType("a2").equals("boolean"));
+		assertTrue(t.getColumnType("a3").equals("String"));
+		assertTrue(t.getColumnType("a4").equals("String"));
 
 		try {
 			t.getAttributeColumn("att3");
@@ -220,10 +220,10 @@ public class TestTable extends TestCase {
 		t.addColumn("att3", "String", "a4", false);
 		t.addColumn("att4", "long", "a5");
                 
-                assert(t.attributes().size() == 3);
-                assert(t.attributes().contains("att2"));
-                assert(t.attributes().contains("att3"));
-                assert(t.attributes().contains("att4"));                
+                assertTrue(t.attributes().size() == 3);
+                assertTrue(t.attributes().contains("att2"));
+                assertTrue(t.attributes().contains("att3"));
+                assertTrue(t.attributes().contains("att4"));                
         }
 
 	public static Test suite() {

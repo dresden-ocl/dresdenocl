@@ -62,7 +62,7 @@ public class Bank extends RLObject
     return super.toString()+'['+description+']';
   }
   
-  public boolean assert()
+  public boolean assertTrue()
   {
     return true;
   }

@@ -44,18 +44,18 @@ public class TestNameCreator extends TestCase {
   public void testNames() {
     NameCreator na=new NameCreator();
     na.setPrefix("test");
-    assert( na.reserveName("testVar") );
-    assert( na.getUniqueName().equals("test0") );
-    assert( na.getUniqueName().equals("test1") );
-    assert( na.getUniqueName().equals("test2") );
-    assert( ! na.reserveName("test2") );
-    assert( ! na.reserveName("testVar") );
-    assert( na.reserveName("testVar2") );
-    assert( na.getUniqueName("Var").equals("testVar0") );
-    assert( na.getUniqueName("Var").equals("testVar1") );
+    assertTrue( na.reserveName("testVar") );
+    assertTrue( na.getUniqueName().equals("test0") );
+    assertTrue( na.getUniqueName().equals("test1") );
+    assertTrue( na.getUniqueName().equals("test2") );
+    assertTrue( ! na.reserveName("test2") );
+    assertTrue( ! na.reserveName("testVar") );
+    assertTrue( na.reserveName("testVar2") );
+    assertTrue( na.getUniqueName("Var").equals("testVar0") );
+    assertTrue( na.getUniqueName("Var").equals("testVar1") );
     // "testVar2" already reserved
-    assert( na.getUniqueName("Var").equals("testVar3") );
-    assert( na.getUniqueName("Var").equals("testVar4") );
+    assertTrue( na.getUniqueName("Var").equals("testVar3") );
+    assertTrue( na.getUniqueName("Var").equals("testVar4") );
     na.setPrefix(NameCreator.defaultPrefix);
   }
 
@@ -64,23 +64,23 @@ public class TestNameCreator extends TestCase {
       OclTree tree=DocCheck.createTree("context Test inv: let var0=4 in var1->forAll(var2, var3 | expression)");
       NameCreator nc=new NameCreator();
       nc.reserveAllNames(tree);
-      assert( ! nc.reserveName("self") );
-      assert( nc.reserveName("result") );
-      assert( ! nc.reserveName("var0") );
-      assert( nc.reserveName("var1") );
-      assert( ! nc.reserveName("var2") );
-      assert( ! nc.reserveName("var3") );
+      assertTrue( ! nc.reserveName("self") );
+      assertTrue( nc.reserveName("result") );
+      assertTrue( ! nc.reserveName("var0") );
+      assertTrue( nc.reserveName("var1") );
+      assertTrue( ! nc.reserveName("var2") );
+      assertTrue( ! nc.reserveName("var3") );
       nc.clear();
       tree=DocCheck.createTree("context Test::method() post: test->iterate(iter:Integer ; acc:Integer=0 | iter+acc) = 5");
       nc.reserveAllNames(tree);
-      assert( ! nc.reserveName("self") );
-      assert( ! nc.reserveName("result") );
-      assert( ! nc.reserveName("iter") );
-      assert( ! nc.reserveName("acc") );
+      assertTrue( ! nc.reserveName("self") );
+      assertTrue( ! nc.reserveName("result") );
+      assertTrue( ! nc.reserveName("iter") );
+      assertTrue( ! nc.reserveName("acc") );
     }
     catch (Exception e) {
       e.printStackTrace(System.out);
-      assert(false);
+      assertTrue(false);
     }
   }
 
