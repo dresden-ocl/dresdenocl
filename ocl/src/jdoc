@@ -26,6 +26,7 @@ tudresden.ocl.check.types
 tudresden.ocl.check.types.testfacade
 tudresden.ocl.check.types.xmifacade
 tudresden.ocl.codegen
+tudresden.ocl.codegen.decl
 tudresden.ocl.injection
 tudresden.ocl.injection.lib
 tudresden.ocl.injection.test
@@ -34,4 +35,4 @@ tudresden.ocl.injection.reverseeng.propertypages
 tudresden.ocl.injection.reverseeng.propertypages.events
 tudresden.ocl.lib
 tudresden.ocl.lib.test 
-tudresden.ocl.test 
+tudresden.ocl.test
