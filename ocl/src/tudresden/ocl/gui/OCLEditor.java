@@ -1315,20 +1315,30 @@ public class OCLEditor extends javax.swing.JPanel
           //ope.printStackTrace();
         }
         catch (OclTypeException ote) {
+          String sWrappedMessage = wrapMessage (
+              ote.getMessage(),
+              50
+            );
+
           JOptionPane.showMessageDialog (null,
-                                           "Type checking failed: " +
-                                                ote.getMessage(),
-                                           "Error",
-                                           JOptionPane.ERROR_MESSAGE);
-          ote.printStackTrace();
+                                         "Type checking failed:\n" +
+                                            sWrappedMessage,
+                                         "Error",
+                                         JOptionPane.ERROR_MESSAGE);
+          //ote.printStackTrace();
         }
         catch (IllegalStateException ise) {
+          String sWrappedMessage = wrapMessage (
+              ise.getMessage(),
+              50
+            );
+          
           JOptionPane.showMessageDialog (null,
-                                           "Couldn't set constraint: " +
-                                               ise.getMessage(),
+                                         "Couldn't set constraint:\n" +
+                                             sWrappedMessage,
                                            "Error",
                                            JOptionPane.ERROR_MESSAGE);
-          ise.printStackTrace();
+          //ise.printStackTrace();
         }
       }
     }
