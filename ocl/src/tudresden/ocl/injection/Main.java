@@ -352,7 +352,10 @@ final class OclInjector implements InjectionConsumer
     o.write(violationmacro);
     o.write("(\"violated ocl invariant '");
     o.write(cf.getName());
-    o.write("' on object '\"+this+\"'.\");\n");
+    o.write("' on object '\"+this+\"'");
+    if(config.logclass)
+      o.write(" of class '\"+getClass().getName()+\"'");
+    o.write(".\");\n");
     o.write("  }");
   }
 
@@ -883,6 +886,7 @@ final class OclInjectorConfig
   boolean clean=false;
   String violationmacro=null;
   boolean tracetypes=false;
+  boolean logclass=false;
 
 
   static final int INVARIANT_SCOPE_PRIVATE  =0;
@@ -1196,6 +1200,8 @@ public class Main
           conf.hashmode=HashSize.class;
         else if("--modcount-hash".equals(args[i]))
           conf.hashmode=HashModCount.class;
+        else if("--log-class".equals(args[i]))
+          conf.logclass=true;
         else if(args[i].startsWith("-"))
         {
           System.out.println("unknown option: "+args[i]);
