@@ -40,7 +40,7 @@ public final class XmiParser
      @see ModelAssociation#dissolve(Model)
   */
   private boolean qualifiersOnTarget=false;
-  
+
   private String url;
 
   public static Model createModel(String url, String description) 
@@ -266,6 +266,8 @@ public final class XmiParser
     if(adapt("Model_Management.Model").equals(element.getTagName()))
       handlePackage(element);
     if(adapt("Foundation.Core.Class").equals(element.getTagName()))
+      parseClass(element, false);
+    else if(adapt("Foundation.Core.Interface").equals(element.getTagName()))
       parseClass(element, false);
     else if(adapt("Foundation.Core.DataType").equals(element.getTagName()))
       parseClass(element, true);
