@@ -106,7 +106,7 @@ public final class Model implements ModelFacade
     }
   }
 
-  void putClassifier(ModelClass modelclass)
+  public void putClassifier(ModelClass modelclass)
   {
     String fullname =modelclass.getFullName();
     String shortname=modelclass.getShortName();
@@ -257,7 +257,7 @@ public final class Model implements ModelFacade
      Used for debugging output only.
      @see tudresden.ocl.check.types.Basic#toString()
   */
-  static String typeString(Type t)
+  public static String typeString(Type t)
   {
     return
      (t instanceof Basic) ?

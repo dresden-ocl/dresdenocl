@@ -16,10 +16,11 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-package tudresden.ocl.check.types.xmifacade;
+package tudresden.ocl.check.types.xmifacade.stress;
 
 import tudresden.ocl.check.types.*;
 import tudresden.ocl.check.OclTypeException;
+import tudresden.ocl.check.types.xmifacade.*;
 
 import java.io.PrintStream;
 import java.io.FileOutputStream;
@@ -115,7 +116,7 @@ public class Test extends TestCase
 
   public void doTest()
   {
-    String xmiurl=(getClass().getResource("stress/xmistress.xmi")).getFile();
+    String xmiurl=(getClass().getResource("xmistress.xmi")).getFile();
     m=tudresden.ocl.check.types.xmifacade.XmiParser.getModelCatch(xmiurl);
     m.printData(System.out);
 

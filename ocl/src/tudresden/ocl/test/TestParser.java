@@ -208,7 +208,7 @@ public class TestParser extends TestCase {
         "tudresden.ocl.expressionFile",
         "oclexpressions.xmi"
       ),
-      tudresden.ocl.check.types.xmifacade.Royloy.getModel()
+      tudresden.ocl.check.types.xmifacade.stress.Royloy.getModel()
     ) );
     try {
       String argoXmi=

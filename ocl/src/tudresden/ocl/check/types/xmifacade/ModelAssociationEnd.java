@@ -38,11 +38,11 @@ public class ModelAssociationEnd
 
   boolean othersAreMultiple;
 
-  ModelAssociationEnd(String name,
-                      ModelClass modelclass,
-                      String multiplicity,
-                      boolean isOrdered,
-                      Type[] qualifiers)
+  public ModelAssociationEnd(String name,
+                             ModelClass modelclass,
+                             String multiplicity,
+                             boolean isOrdered,
+                             Type[] qualifiers)
   {
     if(name==null||name.length()==0)
       name=modelclass.getImplicitRoleName();

@@ -47,7 +47,7 @@ public class TestAll extends TestCase {
     suite.addTest( TestParser.suite() );
     suite.addTest( TestNormalize.suite() );
     suite.addTest( TestJavaGenerator.suite() );
-    suite.addTest( tudresden.ocl.check.types.xmifacade.Test.suite() );
+    suite.addTest( tudresden.ocl.check.types.xmifacade.stress.Test.suite() );
     return suite;
   }
 }
