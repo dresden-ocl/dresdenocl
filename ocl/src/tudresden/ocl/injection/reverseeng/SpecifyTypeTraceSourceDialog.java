@@ -1,4 +1,22 @@
 /*
+Copyright (C) 2000  Steffen Zschaler
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+/*
  * SpecifyTypeTraceSourceDialog.java
  *
  * Created on October 13, 2000, 7:43 PM
@@ -6,9 +24,12 @@
  
 package tudresden.ocl.injection.reverseeng;
 
+import java.io.File;
+
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.*;
 
 /** 
  *
@@ -33,22 +54,65 @@ public class SpecifyTypeTraceSourceDialog extends javax.swing.JDialog {
     public Object getElementAt (int nIdx) {
       return m_lttiFileList.get (nIdx);
     }
+    
+    public void add (TypeTraceInfo tti) {
+      m_lttiFileList.add (tti);
+      
+      fireIntervalAdded (this, m_lttiFileList.size() - 1, m_lttiFileList.size() - 1);
+    }
+    
+    public void remove (TypeTraceInfo tti) {
+      int nIdx = m_lttiFileList.indexOf (tti);
+      
+      if (nIdx > -1) {
+        m_lttiFileList.remove (nIdx);
+        
+        fireIntervalRemoved (this, nIdx, nIdx);
+      }
+    }
   }
   
   private TTListModel m_ttlmFileList;
+  
+  class TTIListCellRenderer extends DefaultListCellRenderer {
+    public java.awt.Component getListCellRendererComponent (JList list, 
+                                                                 Object value,
+                                                                 int index, 
+                                                                 boolean isSelected, 
+                                                                 boolean cellHasFocus) {
+      super.getListCellRendererComponent (list, value, index, isSelected, cellHasFocus);
+      
+      setText (((TypeTraceInfo) value).getName());
+      
+      return this;
+    }
+  }
   
   /** Creates new form SpecifyTypeTraceSourceDialog */
   public SpecifyTypeTraceSourceDialog (java.awt.Frame parent, 
                                             boolean modal,
                                             List lttiFileList) {
     super (parent, modal);
-    
+
+    init (lttiFileList);
+  }
+
+  /** Creates new form SpecifyTypeTraceSourceDialog */
+  public SpecifyTypeTraceSourceDialog (JDialog parent, 
+                                            boolean modal,
+                                            List lttiFileList) {
+    super (parent, modal);
+
+    init (lttiFileList);
+  }
+
+  private void init (List lttiFileList) {
     m_ttlmFileList = new TTListModel (lttiFileList);
     
     initComponents ();
     pack ();
   }
-
+  
   /** This method is called from within the constructor to
    * initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is
@@ -74,6 +138,7 @@ public class SpecifyTypeTraceSourceDialog extends javax.swing.JDialog {
 
 
       m_jlFiles.setModel (m_ttlmFileList);
+      m_jlFiles.setCellRenderer (new TTIListCellRenderer());
   
       m_jspFiles.setViewportView (m_jlFiles);
   
@@ -114,6 +179,12 @@ public class SpecifyTypeTraceSourceDialog extends javax.swing.JDialog {
     getContentPane ().add (m_jbAddFile, gridBagConstraints1);
 
     m_jbRemoveFile.setText ("Remove File");
+    m_jbRemoveFile.addActionListener (new java.awt.event.ActionListener () {
+      public void actionPerformed (java.awt.event.ActionEvent evt) {
+        onRemoveFileBtn (evt);
+      }
+    }
+    );
 
 
     gridBagConstraints1 = new java.awt.GridBagConstraints ();
@@ -154,10 +225,34 @@ public class SpecifyTypeTraceSourceDialog extends javax.swing.JDialog {
 
   }//GEN-END:initComponents
 
+  private void onRemoveFileBtn (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onRemoveFileBtn
+    m_ttlmFileList.remove ((TypeTraceInfo) m_jlFiles.getSelectedValue());
+  }//GEN-LAST:event_onRemoveFileBtn
+
   private void onAddFileBtn (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAddFileBtn
     JFileChooser jfc = new JFileChooser();
     
-    jfc.showDialog (this, "Select");
+    FileFilter ffOCLTypeTrace = new FileFilter() {
+      public boolean accept (File f) {
+        return (f.isDirectory()) ||
+                (f.getName().indexOf (".ocltypetrace") > -1);
+      }
+      
+      public String getDescription() {
+        return "Runtime Type Trace Log Files";
+      }
+    };
+    
+    jfc.addChoosableFileFilter (ffOCLTypeTrace);
+    jfc.setFileFilter (ffOCLTypeTrace);
+    
+    jfc.setDialogTitle ("Select Runtime Type Trace Log");
+    
+    if (jfc.showDialog (this, "Select") == JFileChooser.APPROVE_OPTION) {
+      // Actually add file to list
+      m_ttlmFileList.add (new TypeTraceInfo (jfc.getSelectedFile()));
+    }
+    
   }//GEN-LAST:event_onAddFileBtn
 
   private void onCloseBtn (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onCloseBtn
@@ -174,7 +269,7 @@ public class SpecifyTypeTraceSourceDialog extends javax.swing.JDialog {
   * @param args the command line arguments
   */
   public static void main (String args[]) {
-    new SpecifyTypeTraceSourceDialog (new javax.swing.JFrame (), true, Arrays.asList(new String[] {"Eins", "Zwei", "Drei"})).show ();
+    new SpecifyTypeTraceSourceDialog (new javax.swing.JFrame (), true, new LinkedList()).show ();
   }
 
 

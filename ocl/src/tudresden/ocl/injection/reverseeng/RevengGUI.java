@@ -45,6 +45,8 @@ public class RevengGUI extends javax.swing.JDialog {
   private RevengTreeNode m_rtnCurrent = null;
   private List m_lrtnUnsavedTreeNodes = new LinkedList();
   private boolean m_fInSaveAll = false;
+  
+  private List m_lttiTypeTraceLogs = new LinkedList();
     
   /** Creates new form RevengGUI */
   public RevengGUI(java.awt.Frame parent,boolean modal) {
@@ -72,6 +74,8 @@ public class RevengGUI extends javax.swing.JDialog {
     m_jlSpace = new javax.swing.JLabel ();
     m_jbSave = new javax.swing.JButton ();
     m_jbSaveAll = new javax.swing.JButton ();
+    m_jlSpace2 = new javax.swing.JLabel ();
+    m_jbTypeTrace = new javax.swing.JButton ();
     m_jspTreeScroller = new javax.swing.JScrollPane ();
     m_jtFiles = new javax.swing.JTree ();
     m_dtmFileModel = new DefaultTreeModel (new DefaultMutableTreeNode(), true); // just use a fake root
@@ -166,6 +170,24 @@ public class RevengGUI extends javax.swing.JDialog {
       
           m_jtbTreeBar.add (m_jbSaveAll);
       
+          m_jlSpace2.setText (" ");
+      
+          m_jtbTreeBar.add (m_jlSpace2);
+      
+          m_jbTypeTrace.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/injection/reverseeng/resources/ocltypetrace.gif")));
+          m_jbTypeTrace.setToolTipText ("Specify Runtime Type Trace Log Files");
+          m_jbTypeTrace.setPreferredSize (new java.awt.Dimension(25, 25));
+          m_jbTypeTrace.setMaximumSize (new java.awt.Dimension(25, 25));
+          m_jbTypeTrace.setMinimumSize (new java.awt.Dimension(25, 25));
+          m_jbTypeTrace.addActionListener (new java.awt.event.ActionListener () {
+            public void actionPerformed (java.awt.event.ActionEvent evt) {
+              onSpecifyTypeTraceLogs (evt);
+            }
+          }
+          );
+      
+          m_jtbTreeBar.add (m_jbTypeTrace);
+      
         m_jpLeft.add (m_jtbTreeBar, java.awt.BorderLayout.NORTH);
     
     
@@ -228,6 +250,10 @@ public class RevengGUI extends javax.swing.JDialog {
     getContentPane ().add (m_jspSplitter, gridBagConstraints1);
 
   }//GEN-END:initComponents
+
+  private void onSpecifyTypeTraceLogs (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSpecifyTypeTraceLogs
+    new SpecifyTypeTraceSourceDialog (this, true, m_lttiTypeTraceLogs).show();
+  }//GEN-LAST:event_onSpecifyTypeTraceLogs
 
   private void onUpOneLevel (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onUpOneLevel
     RevengTreeNode rtnNewRoot = m_rtnCurrent.createLogicalParent();
@@ -406,6 +432,8 @@ public class RevengGUI extends javax.swing.JDialog {
   private javax.swing.JLabel m_jlSpace;
   private javax.swing.JButton m_jbSave;
   private javax.swing.JButton m_jbSaveAll;
+  private javax.swing.JLabel m_jlSpace2;
+  private javax.swing.JButton m_jbTypeTrace;
   private javax.swing.JScrollPane m_jspTreeScroller;
   private javax.swing.JTree m_jtFiles;
   private tudresden.ocl.injection.reverseeng.propertypages.PropertyPageContainer m_ppcProperties;

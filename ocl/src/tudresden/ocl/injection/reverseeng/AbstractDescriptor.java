@@ -419,6 +419,10 @@ public abstract class AbstractDescriptor extends Object {
     */
   public abstract boolean isCollection();
   
+  public String getJavaDocName() {
+    return m_jcParent.getFullName() + "#" + getName();
+  }
+  
   /**
     * Get the name of the described feature as for displaying it to a user.
     *
