@@ -29,16 +29,17 @@ public class TestMappedClass extends TestCase {
 	MappedClass mc1;
 	MappedClass mc2;
 	MappedClass mc3;
+	Table t1a, t1b, t2, t3;
 	
 	public TestMappedClass(String n) {
 		super(n);
 	}
 	
 	protected void setUp() {
-		Table t1a = new Table("TableA1");
-		Table t1b = new Table("TableA2");
-		Table t2 = new Table("TableB");
-		Table t3 = new Table("TableC");
+		t1a = new Table("TableA1");
+		t1b = new Table("TableA2");
+		t2 = new Table("TableB");
+		t3 = new Table("TableC");
 		
 		Guide g;
 		
@@ -151,13 +152,13 @@ public class TestMappedClass extends TestCase {
 		g.next();
 		assert(g.getSelect().equals("A1"));
 		assert(g.getFrom().equals("TableA1"));
-		assert(g.getWhere().equals(""));
+		assert(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
 		assert(!g.hasMoreSteps());
 		g = (Guide)l.get(1);
 		g.next();
 		assert(g.getSelect().equals("A1"));
 		assert(g.getFrom().equals("TableA2"));
-		assert(g.getWhere().equals(""));
+		assert(g.getWhere().equals(t1b.getPrimaryKeyRepresentation()));
 		assert(!g.hasMoreSteps());						
 	}
 
@@ -224,41 +225,41 @@ public class TestMappedClass extends TestCase {
 		g.next();
 		assert(g.getSelect().equals("A1"));
 		assert(g.getFrom().equals("TableA1"));
-		assert(g.getWhere().equals(""));
+		assert(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
 		assert(!g.hasMoreSteps());
 		g = (Guide)l.get(1);
 		g.next();
 		assert(g.getSelect().equals("A1"));
 		assert(g.getFrom().equals("TableA2"));
-		assert(g.getWhere().equals(""));
+		assert(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
 		assert(!g.hasMoreSteps());
 		
 		g = mc3.getAttributeGuide("c1");
 		g.next();
 		assert(g.getSelect().equals("C1"));
 		assert(g.getFrom().equals("TableC"));
-		assert(g.getWhere().equals(""));
+		assert(g.getWhere().equals(t3.getPrimaryKeyRepresentation()));
 		assert(!g.hasMoreSteps());
 		
 		g = mc3.getAttributeGuide("c2");
 		g.next();
 		assert(g.getSelect().equals("C2"));
 		assert(g.getFrom().equals("TableC"));
-		assert(g.getWhere().equals(""));
+		assert(g.getWhere().equals(t3.getPrimaryKeyRepresentation()));
 		assert(!g.hasMoreSteps());
 		
 		g = mc3.getAttributeGuide("c3");
 		g.next();
 		assert(g.getSelect().equals("C3"));
 		assert(g.getFrom().equals("TableC"));
-		assert(g.getWhere().equals(""));
+		assert(g.getWhere().equals(t3.getPrimaryKeyRepresentation()));
 		assert(!g.hasMoreSteps());
 		
 		g = mc3.getAttributeGuide("a2");
 		g.next();
 		assert(g.getSelect().equals("A2"));
 		assert(g.getFrom().equals("TableA1"));
-		assert(g.getWhere().equals(""));
+		assert(g.getWhere().equals(t1a.getPrimaryKeyRepresentation()));
 		assert(!g.hasMoreSteps());
 	}
 	

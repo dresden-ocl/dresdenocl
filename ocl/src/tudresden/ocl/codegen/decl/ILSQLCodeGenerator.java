@@ -53,6 +53,9 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 	Hashtable declarators;
 	boolean formatCode = true;
 	int aliasCount;
+	int joinAliasCount = 0;
+	String tableRepresentation;
+	String joinRepresentation;
 
 	final static String STANDARDKEY = "elem";
         final static String COMPLEX_PREDICATE = "inlcudes;excludes;includesAll;excludesAll;isEmpty;notEmpty;exists;forAll;isUnique";
@@ -63,7 +66,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 
 		map = new ORTestScheme();
 	}
-
+	
 	// helper methodes
 	public void formatSQLCode() {
 		int count, ind;
@@ -164,25 +167,110 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 				
 	public void setORMappingScheme(ORMappingScheme map) {
 		this.map = map;
-	}			
+	}
+	
+	/**
+	 *
+	 */
+	public void reset() {
+		fragments = new Vector();
+		constrainedType = null;
+        	constraintName = null;
+		navigation = new HashMap();
+		declarators = new Hashtable();
+		aliasCount = 0;
+		joinAliasCount = 0;
+	}
+		
+	/**
+	 * @pre guides.size() > 1
+	 */
+	public void prepareJoin(List guides) {
+		StringBuffer tables = new StringBuffer();
+		StringBuffer joins = new StringBuffer();
+		String select = "", from = "", where = "", tableAlias;
+		Guide guide;
+		
+		for (int i=0; i<guides.size(); i++) {
+			guide = (Guide)guides.get(i);
+			guide.reset();
+						
+			for (int k=0; k<guide.numberOfSteps(); k++) {
+				guide.next();
+				
+				// skip unnecessary joins
+				if ((from.equals(guide.getFrom())) &&
+				    (where.equals(guide.getSelect())) &&
+				    (where.equals(guide.getWhere())))
+					continue;
+					
+				// determine next table alias
+				tableAlias = "TA" + joinAliasCount;
+				joinAliasCount++;
+				
+				// close last join
+				if ((i>0) || (k>0)) {
+					joins.append(tableAlias + "." + guide.getSelect());
+					joins.append(")");
+				}
+				
+				// add table to table to from clause list				
+				if (tables.length() == 0) {
+					tables.append(guide.getFrom() + " " + tableAlias);
+				} else {
+					tables.append("," + guide.getFrom() + " " + tableAlias);					
+				}
+			
+				// add logical link to next join
+				if (joins.length() > 0) {
+					joins.append(" and ");
+				} 
+				
+				// open next join
+				joins.append("(");
+				joins.append(tableAlias + "." + guide.getWhere());
+				joins.append(" = ");				
+				
+				select = guide.getSelect();
+				from = guide.getFrom();
+				where = guide.getWhere();
+			}
+			
+			if (i == (guides.size()-1)) {
+				joins.append(guide.getAlias() + "." + guide.getWhere());
+				joins.append(")");
+			}					
+		}		
+		
+		tableRepresentation = tables.toString();
+		joinRepresentation = joins.toString();
+	}
+	
+	public String getTableRepresentation() {
+		return tableRepresentation;
+	}
+	
+	public String getJoinRepresentation() {
+		return joinRepresentation;
+	}
+		
 	// handling of grammar rules
 	public void inAConstraint(AConstraint node) {
+		reset();
+		
         	super.inAConstraint(node);
 
 		AContextDeclaration node2 = (AContextDeclaration)node.getContextDeclaration();
 		AClassifierContextBody node3 = (AClassifierContextBody)node2.getContextBody();
 		AClassifierContext node4 = (AClassifierContext)node3.getClassifierContext();
 
-		constrainedType = node4.getTypeName().toString().trim();
+		constrainedType = node4.getTypeName().toString().trim();		
         }
 
         public void inAConstraintBody(AConstraintBody node) {
         	String expTask = getUniqueTask();
-                constraintName =  node.getName().toString().trim();
-                navigation = new HashMap();
-		declarators = new Hashtable();
-		aliasCount = 0;
-
+                constraintName =  node.getName().toString().trim();                                
+                
         	ca.reset();
         	ca.setArgument("constraint_name", constraintName);
         	ca.setArgument("context_table", (String)getIn(node));
@@ -216,6 +304,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 			}
 
 		 	if (formatCode) formatSQLCode();
+		 	System.err.println("--> " + constrainedType + ":" + constraintName + "\n" + code.toString());
 			fragments.add(new DeclarativeCodeFragment(constraintName, constrainedType, code.toString()));
 		} else {
 			// Error !!!
@@ -424,7 +513,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         	String start, next, startFeature, startType, featureName;
         	Object[] tail;
         	MappedClass mc = null;
-        	Guide g = null;
+        	Guide g = null, guide;
         	List guides;
         	Node type;
                 int dColInd;
@@ -456,17 +545,14 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                         guides = new ArrayList();
                         try {
                         	if (mc.isAttribute(featureName)) {
-                        		guides = mc.getAttributeGuides(featureName);
+                        		guides.add(mc.getAttributeGuide(featureName));
                         	} else if (mc.isAssociationEnd(featureName)) {
-                        		guides = mc.getJoinGuides(featureName);
+                        		guides.add(mc.getJoinGuide(featureName));
                         	}                        	
                         } catch(NullPointerException e) {
                         	// feature name is given in one of the postfix expression tails                        	
                         }
                         
-                        // associate current node with Guide List
-                        navigation.put(pex, guides);
-			   
                         // iterate the postfix expression tail and assign navigation guides
         		tail = node.getPostfixExpressionTail().toArray();
 
@@ -475,21 +561,28 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 
                                 if (mc.isAttribute(next)) {
         				// next feature is an attribute
-        				guides = mc.getAttributeGuides(next);
-        				if ((i==0) && (dColInd == -1)) setContextAlias(guides, "SELF");
-        				navigation.put(tail[i], guides);
+        				guide = mc.getAttributeGuide(next);
+        				if ((i==0) && (dColInd == -1)) guide.setAlias(startFeature.toUpperCase());
+        				guides.add(0, guide);
             			} else if (mc.isAssociationEnd(next)) {
         				// next feature navigates to an association end
-        				guides = mc.getJoinGuides(next);
-        				//if ((i==0) && (dColInd == -1)) g.setAlias(startType);
-        				navigation.put(tail[i], guides);
+        				guide = mc.getJoinGuide(next);
+        				if ((i==0) && (dColInd == -1)) guide.setAlias(startFeature.toUpperCase());
+        				guides.add(0, guide);
 	       				mc = mc.getAssociationEnd(next);
         			} else if (oclTokens.indexOf(next) != -1) {
         				// next feature is an ocl feature that needs information about the preceeding navigation step
-					if (guides != null) {
-						navigation.put(tail[i], guides);
+        				/*
+					if (guide != null) {
+						guides.add(0, guide);
 					}
-        			} else break;
+					*/
+        			};
+        			
+        			// assign guides list to last postfix expression tail
+        			if (i == (tail.length-1)) {
+        				navigation.put(tail[i], guides);
+        			}        			
         		}
 	  	}
 
@@ -525,54 +618,125 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     		String spec = "";
     		MappedClass mc = null;
     		Guide guide;
+    		String pkName = "";
+    		boolean codeForPathName = false;
+    		AStandardDeclarator asd = null;
+   		Node fcp = null;
+   		String tableAlias = "";
+   		String className = "";
+   		String taskAp = "";
+   		Table table = new Table("dummy");
     	
     		List guides = (List)navigation.get(node.parent());
 
 
     		if (oclTokens.indexOf(pathName) == -1) {
-    			// check for valid Guide List
-    			if ((guides == null) || (guides.size() == 0)) {
-    				throw new IllegalStateException("missing guide to feature: " + pathName);
+    			// quit if no guides list is available or complain about empty list
+    			if (guides == null) return;
+    			if (guides.size() == 0) throw new RuntimeException("empty guides list at " + pathName);
+    			    			    			    			
+    			// generate target code from guide
+    			guide = (Guide)guides.get(0);
+    			guide.next();
+    			    			   				
+    			if (guide.isNavigation()) {
+	    		} else {
+	    			if (guides.size() == 1) {
+	    				// attribute access without navigation
+    					ca.reset();
+    					ca.setArgument("context_alias", guide.getAlias());
+    					ca.setArgument("column", guide.getSelect());
+    					try {
+        					thisCode = ca.getCodeFor("feature_call", "attribute_context");
+        				} catch (Exception e) {
+        					throw new RuntimeException("attribute_context: " + e.toString());
+        				}
+	    			} else {
+	    				// attribute access with navigation
+	    				prepareJoin(guides);
+    					ca.reset();
+    					ca.setArgument("column", guide.getSelect());
+    					ca.setArgument("tables", tableRepresentation);
+    					ca.setArgument("joins", joinRepresentation);
+    						    			
+	    				try {
+        					thisCode = ca.getCodeFor("feature_call", "attribute_navigation");
+        				} catch (Exception e) {
+        					throw new RuntimeException("attribute_navigation: " + e.toString());
+        				}
+	    			}	    			    						
     			}
-    			
-    			// iterate all guides and generate adequate target code 
-    			for (Iterator i=guides.iterator(); i.hasNext(); ) {
-    				guide = (Guide)i.next();
-    				guide.next();
-    				System.err.println(guide.toString());
-    				
-    				if (guide.isNavigation()) {
-	    			} else {	
-    					if (guide.getAlias() != null) {
-    						// attribute access without navigation
-    						ca.reset();
-    						ca.setArgument("context_alias", guide.getAlias());
-    						ca.setArgument("column", guide.getSelect());
-    						try {
-        						thisCode = ca.getCodeFor("feature_call", "attribute_context");
-        					} catch (Exception e) {
-        						System.err.println("attribute_context: " + e.toString());
-        					}
-    					} else {
-    						// attribute access with navigation
-    						ca.reset();
-    						ca.setArgument("column1", guide.getSelect());
-    						ca.setArgument("table1", guide.getFrom());
-    						ca.setArgument("column2", guide.getWhere());
-    						ca.setArgument("table2", task);
-	
-    						try {
-        						thisCode = ca.getCodeFor("feature_call", "attribute_navigation");
-        					} catch (Exception e) {
-        						System.err.println("attribute_navigation: " + e.toString());
-        					}
-    					}		
-    				}
-    				
-    			}
-    		    			
    		} else {
+   			// maybe a special feature call
+   			// get necessary mapping type information of iterators
+   			try {
+   				fcp = node.getFeatureCallParameters();
+   				asd = (AStandardDeclarator)((AFeatureCallParameters)node.getFeatureCallParameters()).getDeclarator();
+
+   				tableAlias = asd.getName().toString().trim();
+   				className = theTree.getTypeFor(tableAlias, asd).toString().trim();
+   				mc = map.getMappedClass(className);
+   				table = (Table)mc.getTables().get(0);
+   			} catch (Exception e) {
+   				// just to avoid null pointer exceptions, if there is no StandardDeclarator
+   			}
    			
+   			// prepare navigation data
+   			if ((guides != null) && (guides.size() > 0)) {
+   				guide = (Guide)guides.get(0);
+   				guide.reset();
+    				guide.next();
+    				pkName = guide.getSelect();
+    				prepareJoin(guides);
+    			}
+   			
+   			// generate code
+   			// features that need to be mapped using the MODEL TYPE QUERY
+   			if (pathName.equals("allInstances")) {
+   				
+   				ca.reset();
+        			ca.setArgument("column", pkName);
+        			ca.setArgument("tables", tableRepresentation);
+    				ca.setArgument("joins", joinRepresentation);
+
+        			try {
+        				thisCode = ca.getCodeFor("feature_call", "allInstances");
+        			} catch (Exception e) {
+        				System.err.println(e.toString());
+        			}
+   			}
+   			
+   			// operations over collections
+   			if (tailBegin instanceof AArrowPostfixExpressionTailBegin) {
+                        	ca.reset();
+
+	                        if (fcp != null) {
+        	                	taskAp = getUniqueTask();
+                	        	setIn(fcp, taskAp);
+                        	}	
+   			
+   				// features that need to be mapped using the COMPLEX PREDICATE pattern from UML'99
+                          	if ((pathName.equals("includes")) || (pathName.equals("excludes"))) {
+                          	} else if ((pathName.equals("includesAll")) || (pathName.equals("excludesAll"))) {
+  			  	} else if ((pathName.equals("isEmpty")) || (pathName.equals("notEmpty"))) {
+	         		} else if ((pathName.equals("forAll")) || (pathName.equals("exists")) || (pathName.equals("isUnique"))) {
+  					ca.reset();
+        				ca.setArgument("column", pkName);
+        				ca.setArgument("tables", tableRepresentation);
+    					ca.setArgument("joins", joinRepresentation);
+    					ca.setArgument("table", table.getTableName() + " " + tableAlias.toUpperCase());
+        				ca.setArgument("expression", taskAp);
+        				codeForPathName = true;
+  				}
+			  
+			  	if (codeForPathName) {
+                          		try {
+	        		  		thisCode = ca.getCodeFor("feature_call", pathName);
+        			  	} catch (Exception e) {
+        			      		System.err.println(e.toString());
+        			    	}
+                          	}
+                        }
    		}
 
    		// replace task with generated target code

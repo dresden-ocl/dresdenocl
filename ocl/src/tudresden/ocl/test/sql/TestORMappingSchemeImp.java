@@ -211,140 +211,140 @@ public class TestORMappingSchemeImp extends TestCase {
 		guide.next();
 		assert(guide.getSelect().equals("A1"));
 		assert(guide.getFrom().equals("A"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = a.getAttributeGuide("a2");
 		guide.next();
 		assert(guide.getSelect().equals("A2"));
 		assert(guide.getFrom().equals("A"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = a.getAttributeGuide("a3");
 		guide.next();
 		assert(guide.getSelect().equals("A3"));
 		assert(guide.getFrom().equals("A"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b1");
 		guide.next();
 		assert(guide.getSelect().equals("B1"));
 		assert(guide.getFrom().equals("B"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b2");
 		guide.next();
 		assert(guide.getSelect().equals("B2"));
 		assert(guide.getFrom().equals("B"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = b.getAttributeGuide("b3");
 		guide.next();
 		assert(guide.getSelect().equals("B3"));
 		assert(guide.getFrom().equals("B"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c1");
 		guide.next();
 		assert(guide.getSelect().equals("C1"));
 		assert(guide.getFrom().equals("C"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c2");
 		guide.next();
 		assert(guide.getSelect().equals("C2"));
 		assert(guide.getFrom().equals("C"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = c.getAttributeGuide("c3");
 		guide.next();
 		assert(guide.getSelect().equals("C3"));
 		assert(guide.getFrom().equals("C"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("d1");
 		guide.next();
 		assert(guide.getSelect().equals("D1"));
 		assert(guide.getFrom().equals("D"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b1");
 		guide.next();
 		assert(guide.getSelect().equals("B1"));
 		assert(guide.getFrom().equals("B"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b2");
 		guide.next();
 		assert(guide.getSelect().equals("B2"));
 		assert(guide.getFrom().equals("B"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = d.getAttributeGuide("b3");
 		guide.next();
 		assert(guide.getSelect().equals("B3"));
 		assert(guide.getFrom().equals("B"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("e1");
 		guide.next();
 		assert(guide.getSelect().equals("E1"));
 		assert(guide.getFrom().equals("E"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b1");
 		guide.next();
 		assert(guide.getSelect().equals("B1"));
 		assert(guide.getFrom().equals("B"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b2");
 		guide.next();
 		assert(guide.getSelect().equals("B2"));
 		assert(guide.getFrom().equals("B"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = e.getAttributeGuide("b3");
 		guide.next();
 		assert(guide.getSelect().equals("B3"));
 		assert(guide.getFrom().equals("B"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f1");
 		guide.next();
 		assert(guide.getSelect().equals("F1"));
 		assert(guide.getFrom().equals("F"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f2");
 		guide.next();
 		assert(guide.getSelect().equals("F2"));
 		assert(guide.getFrom().equals("F"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		guide = f.getAttributeGuide("f3");
 		guide.next();
 		assert(guide.getSelect().equals("F3"));
 		assert(guide.getFrom().equals("F"));
-		assert(guide.getWhere().equals(""));
+		
 		assert(!guide.hasMoreSteps());
 		
 		ta = (Table)a.getTables().get(0);

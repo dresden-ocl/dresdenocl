@@ -57,16 +57,19 @@ public class TestTable extends TestCase {
 		t.addColumn("a3");
 		t.addColumn("a4");
 		t.addColumn("a5");
+		
+		assert(t.getPrimaryKeyRepresentation().equals("a1"));
 		t.setPrimaryKey("a2");
+		assert(t.getPrimaryKeyRepresentation().equals("(a1,a2)"));
 
 		tmp = t.getPrimaryKeyColumns();
 		assert(tmp.length == 2);
 		assert(tmp[0].equals("a1"));
 		assert(tmp[1].equals("a2"));
-
+		
 		assert(t.isPrimaryKeyColumn("a1"));
 		assert(!t.isPrimaryKeyColumn("a3"));
-
+		
 		try {
 			t.setPrimaryKey(null);
 			fail("Missing Exception !");

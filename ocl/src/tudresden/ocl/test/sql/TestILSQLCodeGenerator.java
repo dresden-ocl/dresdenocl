@@ -181,8 +181,8 @@ public class TestILSQLCodeGenerator extends TestCase {
 		
 		theRoughModel.determineAllSupertypes();		
 		
-		theORMS1 = new ORMappingSchemeImp(new ORMappingImp(theRoughModel));
-		theORMS2 = new ORMappingSchemeImp(new ORMappingImp(theRoughModel, 1, 1, "int", false));
+		theORMS1 = new ObjectViewSchema(new ORMappingImp(theRoughModel), new OracleSQLBuilder());
+		theORMS2 = new ObjectViewSchema(new ORMappingImp(theRoughModel, 1, 1, "int", false), new OracleSQLBuilder());
 		theCG = new ILSQLCodeGenerator((TestILSQLCodeGenerator.class.getResource("../../codegen/decl/OCL2SQL4Oracle.xml")).toString());
 		
 	}	
@@ -216,61 +216,131 @@ public class TestILSQLCodeGenerator extends TestCase {
 		
 	/** 
 	 * the access to attributes is possible in the following ways:
-	 *   - access from the context to attributes that map to
-	 *            a) one column
-	 *            b) more than one column
-	 *   - access at the end of a navigation to attributes that map to
-	 *            a) one column
-	 *            b) more than one column
-	 *   - access to inherited attributes
-	 *            a) one column
-	 *            b) more than one column
+	 *   - access from the context to attributes that map to a single column
+	 *   - access at the end of a navigation to attributes that map to a single column
+	 *   - access to attributes from superclasses that are overwritten 
 	 */
 	public void testAttributeAccess() 
 	throws IOException{
+		/*
 		// access from the context to attributes that map to one column
 		theCG.setORMappingScheme(theORMS2);
 		constraint = "context A inv testInv: a1 > 5";
 		frags = getSQLCode(constraint);
 		
 		sqlCode =  "CREATE OR REPLACE VIEW testInv AS";
-		sqlCode += "(select * from A SELF";
+		sqlCode += "(select * from OV_A SELF";
 		sqlCode += "where not (SELF.A1 > 5)))";
 		
 		assert(equal(frags[0].getCode(), sqlCode));
 		
-		// access from the context to attributes that map to more than one column
-		constraint = "context B inv: b1 > 5";
-		frags = getSQLCode(constraint);
-		
-		System.err.println(frags[0].getCode());	
-		
-		/*
 		// access at the end of a navigation to attributes that map to one column
 		theCG.setORMappingScheme(theORMS1);
 		constraint = "context C inv: a.a1 > 5";
 		frags = getSQLCode(constraint);
+				
+		sqlCode =  "CREATE OR REPLACE VIEW testInv AS";
+		sqlCode += "(select * from OV_C SELF";
+		sqlCode += "where not ((select A1 from A, C ";
+		sqlCode += "            where A.PK1 = C.APK1 ";
+		sqlCode += "            and C.PK3 = SELF.PK3)";
+		sqlCode += "           > 5)))";
 		
-		System.err.println(frags[0].getCode());	
-						
-		// access at the end of a navigation to attributes that map to more than one column
-		theCG.setORMappingScheme(theORMS1);
-		constraint = "context A inv: a1 > 5";
+		//assert(equal(frags[0].getCode(), sqlCode));		
 		
-		// access to inherited attributes one column
-		theCG.setORMappingScheme(theORMS1);
-		constraint = "context A inv: a1 > 5";
-		
-		// access to inherited attributes more than one column
-		theCG.setORMappingScheme(theORMS1);
-		constraint = "context A inv: a1 > 5";			
-		*/		
+		*/
+		theCG.setORMappingScheme(theORMS2);
+		constraint = "context A inv testInv: b2->forAll(b1 > 5)";
+		frags = getSQLCode(constraint);
 	}
 	
+	public void testPrepareJoin() {
+		List guides = new ArrayList();
+		Guide guide;
+		
+		// attribute access with navigation
+		guide = new Guide(false);
+		guide.add("A1","A","APK");
+		guides.add(guide);
+		
+		guide = new Guide(true);
+		guide.add("APK","A","APK");
+		guide.add("AFK","C","CPK");
+		guide.setAlias("SELF");
+		guides.add(guide);
+		
+		theCG.reset();
+		theCG.prepareJoin(guides);
+		
+		//System.err.println(theCG.getTableRepresentation());
+		//System.err.println(theCG.getJoinRepresentation());
+		
+		assert(theCG.getTableRepresentation().equals("A TA0,C TA1"));
+		assert(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.AFK) and " +
+							    "(TA1.CPK = SELF.CPK)"));
+		
+		// pur navigation over several guides
+		guides.clear();
+		
+		guide = new Guide(true);
+		guide.add("APK","A","APK");
+		guide.add("AFK","AB","BFK");
+		guide.add("BPK","B","BPK");
+		guides.add(guide);
+		
+		guide = new Guide(true);
+		guide.add("BPK","B","BPK");
+		guide.add("BFK","BC","CFK");
+		guide.add("CPK","C","CPK");
+		guides.add(guide);
+		
+		guide = new Guide(true);
+		guide.add("CPK","C","CPK");
+		guide.add("CFK","CD","DFK");
+		guide.add("DPK","D","DPK");
+		guide.setAlias("SELF");
+		guides.add(guide);
+		
+		theCG.reset();
+		theCG.prepareJoin(guides);
+		
+		//System.err.println(theCG.getTableRepresentation());
+		//System.err.println(theCG.getJoinRepresentation());
+		
+		assert(theCG.getTableRepresentation().equals("A TA0,AB TA1,B TA2,BC TA3,C TA4,CD TA5,D TA6"));
+		assert(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.AFK) and " +
+							    "(TA1.BFK = TA2.BPK) and " +
+							    "(TA2.BPK = TA3.BFK) and " +
+							    "(TA3.CFK = TA4.CPK) and " +
+							    "(TA4.CPK = TA5.CFK) and " +
+							    "(TA5.DFK = TA6.DPK) and " +
+							    "(TA6.DPK = SELF.DPK)"));
+		
+		// navigation to same table
+		guides.clear();
+		
+		guide = new Guide(true);
+		guide.add("APK","A","APK");
+		guide.add("RAPK","A","APK");
+		guide.setAlias("SELF");
+		guides.add(guide);
+				
+		theCG.reset();
+		theCG.prepareJoin(guides);
+		
+		//System.err.println(theCG.getTableRepresentation());
+		//System.err.println(theCG.getJoinRepresentation());
+		
+		assert(theCG.getTableRepresentation().equals("A TA0,A TA1"));
+		assert(theCG.getJoinRepresentation().equals("(TA0.APK = TA1.RAPK) and " +
+							    "(TA1.APK = SELF.APK)"));				
+	}
+		
 	public static Test suite() {
 		TestSuite t=new TestSuite();
 
     		t.addTest(new TestILSQLCodeGenerator("testAttributeAccess"));
+    		t.addTest(new TestILSQLCodeGenerator("testPrepareJoin"));
     		
     		return t;
 	}

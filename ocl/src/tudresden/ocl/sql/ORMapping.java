@@ -46,6 +46,12 @@ public interface ORMapping {
   
   /** 
    * @param classifier a classifier
+   * @return a Set containing all names of attributes that are properties of the classifier
+   */
+  public Set attributes(String classifier);  
+  
+  /** 
+   * @param classifier a classifier
    * @return a Set containing all names of operations that are properties of the classifier
    */
   public Set operations(String classifier);

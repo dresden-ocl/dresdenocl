@@ -34,6 +34,7 @@ public class TestSQLClasses extends TestCase {
     		t.addTest(TestMappedClass.suite());
     		t.addTest(TestORMappingImp.suite());
     		t.addTest(TestORMappingSchemeImp.suite());
+    		t.addTest(TestObjectViewSchema.suite());
 
     		return t;
 	}

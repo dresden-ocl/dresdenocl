@@ -297,6 +297,10 @@ public class ORMappingImp implements ORMapping {
   	return Collections.unmodifiableSet(retSet);
   }
   
+  public Set attributes(String classifier) {
+  	return ((ModelClass)theModel.getClassifier(classifier)).attributes().keySet();
+  }
+  
   public List guidesToAssociationEnds(String classifier, String assEnd) {
   	/*
   	String temp, key, assEndName;
@@ -317,7 +321,7 @@ public class ORMappingImp implements ORMapping {
   	  	
   	return (List)((Map)navGuides.get(classifier)).get(assEnd);
   }
-   
+
   //----------------------------------- mapping methodes ------------------------------------
   /**
    * Creates all the class tables with respect to the mapping mode.

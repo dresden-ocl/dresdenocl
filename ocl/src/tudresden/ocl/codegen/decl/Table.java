@@ -333,7 +333,26 @@ public class Table {
 			return new String(c.fkColumn);
 		}
 	}
-
+	
+	/**
+	 * @return a String representation of all primary key columns, 
+	 *         which is the column name in case of single column primary key
+	 *         or "(pk1, pk2, ..., pkn)" in case of a multi column key
+	 */
+	public String getPrimaryKeyRepresentation() {
+		StringBuffer result = new StringBuffer();
+		String pks[] = getPrimaryKeyColumns();
+		
+		if (pks.length > 1) result.append("(");
+		for (int i=0; i<pks.length; i++) {
+			if (i>0) result.append(",");
+			result.append(pks[i]);			
+		}
+		if (pks.length > 1) result.append(")");
+		
+		return result.toString();
+	}
+	
 	/**
          * @return the name of the table
          */

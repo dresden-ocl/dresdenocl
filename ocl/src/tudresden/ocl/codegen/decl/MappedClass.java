@@ -260,7 +260,7 @@ public class MappedClass {
 			if (cols.length > 0) {
 				guide = new Guide(false);
 				for (int k=0; k<cols.length; k++) {
-					guide.add(cols[k], table.getTableName(), "");
+					guide.add(cols[k], table.getTableName(), table.getPrimaryKeyRepresentation());
 				}
 				result.add(guide);
 			}
@@ -439,7 +439,6 @@ public class MappedClass {
 	}
 
 	// -------------------------------- private stuff ------------------------------------
-
 	/**
 	 * Note: This methode does not consider superclasses !
 	 * @param the name of the association end
