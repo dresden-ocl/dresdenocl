@@ -20,6 +20,7 @@ package tudresden.ocl.injection;
 
 import java.io.*;
 import java.util.*;
+import java.lang.reflect.Modifier;
 import tudresden.ocl.codegen.CodeFragment;
 
 /**
@@ -356,28 +357,28 @@ public final class Injector
     {
       //System.out.println("bufs >"+bufs+"<");
       if("public".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.PUBLIC;
+        modifiers|=Modifier.PUBLIC;
       else if("protected".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.PROTECTED;
+        modifiers|=Modifier.PROTECTED;
       else if("private".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.PRIVATE;
+        modifiers|=Modifier.PRIVATE;
       else if("static".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.STATIC;
+        modifiers|=Modifier.STATIC;
       else if("final".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.FINAL;
+        modifiers|=Modifier.FINAL;
       else if("synchronized".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.SYNCHRONIZED;
+        modifiers|=Modifier.SYNCHRONIZED;
       else if("volatile".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.VOLATILE;
+        modifiers|=Modifier.VOLATILE;
       else if("transient".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.TRANSIENT;
+        modifiers|=Modifier.TRANSIENT;
       else if("native".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.NATIVE;
+        modifiers|=Modifier.NATIVE;
       else if("abstract".equals(bufs))
-        modifiers|=java.lang.reflect.Modifier.ABSTRACT;
+        modifiers|=Modifier.ABSTRACT;
       else if("interface".equals(bufs))
       {
-        modifiers|=java.lang.reflect.Modifier.INTERFACE;
+        modifiers|=Modifier.INTERFACE;
         JavaClass[] jcarray={ parseClass(parent, modifiers) };
         return jcarray;
       }
@@ -393,12 +394,29 @@ public final class Injector
         break;
       }
     
-      if(readToken()!='\0')
+      char c=readToken();
+      if(c!='\0')
       {
         if(parent==null)
           throw new InjectorParseException("'class' or 'interface' expected.");
         else
-          throw new InjectorParseException("modifier expected.");
+        {
+          if( c=='{' && modifiers==Modifier.STATIC )
+          {
+            // this is a static initializer
+            if(collect_when_blocking)
+              write(getCollector());
+            flushOutbuf();
+            parseBody(false);
+            scheduleBlock(true);
+            doccomment=null;
+            return new JavaClass[0];
+          }
+          else
+          {
+            throw new InjectorParseException("modifier expected.");
+          }
+        }
       }
       bufs=buf.toString();
     }
@@ -552,7 +570,7 @@ public final class Injector
   {
     final ArrayList commaSeparatedAttributes=new ArrayList();
     commaSeparatedAttributes.add(ja);
-    if(!do_block) ja.print(System.out);
+    //if(!do_block) ja.print(System.out);
 
     while(true)
     {
@@ -596,7 +614,7 @@ public final class Injector
     if(readToken()!='\0')
       throw new InjectorParseException("class name expected.");
     String classname=buf.toString();
-    //System.out.println("class ("+java.lang.reflect.Modifier.toString(modifiers)+") >"+classname+"<");
+    //System.out.println("class ("+Modifier.toString(modifiers)+") >"+classname+"<");
 
     JavaClass jc=
       new JavaClass(javafile, parent, modifiers, classname);

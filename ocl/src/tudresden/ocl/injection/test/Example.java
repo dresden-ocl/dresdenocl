@@ -270,6 +270,11 @@ class SecondExample extends Example{
 
   void abstractMethod()  {}
   
+  static
+  {
+    // this has to be tested too.
+  }
+  
 }
 
 class ThirdExample extends SecondExample
