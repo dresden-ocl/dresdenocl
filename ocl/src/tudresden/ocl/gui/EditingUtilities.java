@@ -37,8 +37,7 @@ import java.util.*;
 /**
  * Utility interface for parsing and splitting raw constraints.
  *
- * @author  sz9
- * @version 
+ * @author sz9
  */
 public interface EditingUtilities {
   

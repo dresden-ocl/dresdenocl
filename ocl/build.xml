@@ -531,6 +531,8 @@ Enhancements by Steffen Zschaler.
              tudresden.ocl.check.types.xmifacade,
              tudresden.ocl.codegen,
              tudresden.ocl.codegen.decl,
+             tudresden.ocl.gui,
+             tudresden.ocl.gui.events,
              tudresden.ocl.injection,
              tudresden.ocl.injection.lib,
              tudresden.ocl.injection.ocl,
