@@ -9,6 +9,7 @@ Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
 New version by Ralf Wiebicke.
+Enhancements by Steffen Zschaler.
 -->
 
 <project name="dresden-ocl" default="all" basedir=".">
@@ -474,6 +475,47 @@ New version by Ralf Wiebicke.
     </jar>
   </target>
 
+  <target name="jar.dresden-ocl-reverseeng"
+          description="Compiles and jars the ReverseEng application."
+          depends="sablecc,build.dir">
+
+    <mkdir dir="${build.dir}/dresden-ocl-reverseeng" />
+
+    <copy todir="${build.dir}/dresden-ocl-reverseeng" >
+      <fileset dir="${src.dir}">
+        <include name="tudresden/ocl/check/OclTypeException.java" />
+        <include name="tudresden/ocl/OclException.java" />
+        <include name="tudresden/ocl/parser/OclParserException.java" />
+        <include name="tudresden/ocl/injection/*.java" />
+        <include name="tudresden/ocl/injection/lib/*.java" />
+        <include name="tudresden/ocl/injection/reverseeng/**/*.java" />
+        <exclude name="tudresden/ocl/injection/reverseeng/test/*" />
+        <include name="tudresden/ocl/injection/reverseeng/**/*.gif" />
+        <include name="tudresden/ocl/injection/reverseeng/**/*.form" />
+        <include name="tudresden/ocl/injection/reverseeng/**/*.testmodified" />
+        <include name="COPYING" />
+      </fileset>
+    </copy>
+
+    <javac srcdir= "${build.dir}/dresden-ocl-reverseeng"
+           destdir="${build.dir}/dresden-ocl-reverseeng"
+           deprecation="on"
+           debug="off"
+           depend="${build.depend}"
+           optimize="on" >
+<!--      <classpath>
+        <pathelement location="${xerces.jar}" />
+      </classpath> -->
+    </javac>
+
+    <jar jarfile="${build.dir}/dresden-ocl-reverseeng.jar"
+         basedir="${build.dir}/dresden-ocl-reverseeng"
+         manifest="${src.dir}/reveng.manifest">
+      <include name="**/*.class" />
+      <include name="**/*.gif" />
+    </jar>
+  </target>
+
   <target name="jar"
           description="Builds all jar files."
           depends="jar.dresden-ocl-lib,
@@ -482,7 +524,8 @@ New version by Ralf Wiebicke.
                    jar.dresden-ocl-demo,
                    jar.dresden-ocl-sql,
                    jar.royloy,
-                   jar.dresden-injector"
+                   jar.dresden-injector,
+                   jar.dresden-ocl-reverseeng"
   />
 
 
@@ -879,5 +922,4 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
           description="Does everything: compile, test, jar and docs."
           depends="compile, test, jar, docs"
   />
-
 </project>
