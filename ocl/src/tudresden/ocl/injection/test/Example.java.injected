@@ -266,7 +266,7 @@ public abstract class Example implements Runnable
      @invariant strings->includes('inlinehallo')
      @invariant strings->includes('inline space hallo')
   */
-  Set strings=new HashSet();
+  Set myStrings=new HashSet();
   
   /**
      @element-type Integer
@@ -384,7 +384,7 @@ public abstract class Example implements Runnable
   static public void main(String[] args)
   {
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
-    tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
+    tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.ArgoNameAdapter());
     SecondExample e2=new SecondExample();
     e2.getQualifiers();
     e2.i=10;
@@ -1039,13 +1039,13 @@ public abstract class Example implements Runnable
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #strings
-  */private int strings_oclbackup812374=0;/**
+    @see #myStrings
+  */private int myStrings_oclbackup812374=0;/**
     Contains observers for modifications of this feature.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #strings
-  */public final java.util.HashSet strings_oclobservinginvariants812374=new java.util.HashSet();/**
+    @see #myStrings
+  */public final java.util.HashSet myStrings_oclobservinginvariants812374=new java.util.HashSet();/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
@@ -1273,12 +1273,12 @@ public abstract class Example implements Runnable
       tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#mapWithoutComment", mapWithoutComment);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(mapWithoutComment_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(strings)!=strings_oclbackup812374)
+    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(myStrings)!=myStrings_oclbackup812374)
     {
-      strings_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(strings);
-      if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(strings,java.lang.String.class)) System.out.println("element type checker failed at feature 'strings' of object "+this+".");
-      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#strings", strings);
-      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(strings_oclobservinginvariants812374);
+      myStrings_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(myStrings);
+      if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(myStrings,java.lang.String.class)) System.out.println("element type checker failed at feature 'myStrings' of object "+this+".");
+      tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#myStrings", myStrings);
+      tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(myStrings_oclobservinginvariants812374);
     }
     if(tudresden.ocl.injection.lib.Invariant.identityHashCode(integers)!=integers_oclbackup812374)
     {

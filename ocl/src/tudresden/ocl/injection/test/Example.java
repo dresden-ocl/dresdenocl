@@ -162,7 +162,7 @@ public abstract class Example implements Runnable
      @invariant strings->includes('inlinehallo')
      @invariant strings->includes('inline space hallo')
   */
-  Set strings=new HashSet();
+  Set myStrings=new HashSet();
   
   /**
      @element-type Integer
@@ -280,7 +280,7 @@ public abstract class Example implements Runnable
   static public void main(String[] args)
   {
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
-    tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.SimpleNameAdapter());
+    tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.ArgoNameAdapter());
     SecondExample e2=new SecondExample();
     e2.getQualifiers();
     e2.i=10;

@@ -1,6 +1,7 @@
 java -cp .:xml4j.jar tudresden.ocl.injection.Main \
   --constraint-file tudresden/ocl/injection/test/Example.ocl \
   --reflection-model tudresden.ocl.injection.test \
+  --name-adapter argo \
   --trace-types \
   --modify \
   tudresden/ocl/injection/test/Example.java
