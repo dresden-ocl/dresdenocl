@@ -156,4 +156,20 @@ public class TypeTraceInfo extends Object {
   public String getName() {
     return m_fSource.getName();
   }
+  
+  public List getAllElementTypes (String sFeatureID) {
+    return (List) m_mpslsAllElementTypes.get (sFeatureID);
+  }
+  
+  public List getElementTypeMinima (String sFeatureID) {
+    return (List) m_mpslsElementTypeMinima.get (sFeatureID);
+  }
+  
+  public List getAllKeyTypes (String sFeatureID) {
+    return (List) m_mpslsAllKeyTypes.get (sFeatureID);
+  }
+  
+  public List getKeyTypeMinima (String sFeatureID) {
+    return (List) m_mpslsKeyTypeMinima.get (sFeatureID);
+  }
 }

@@ -228,19 +228,19 @@ public class TypeEditPage extends javax.swing.JPanel {
     java.awt.GridBagConstraints gridBagConstraints1;
 
     m_jpDocCommentBorder.setLayout (new java.awt.GridBagLayout ());
-    java.awt.GridBagConstraints gridBagConstraints4;
+    java.awt.GridBagConstraints gridBagConstraints2;
     m_jpDocCommentBorder.setBorder (new javax.swing.border.TitledBorder("Documentation Comment"));
 
       java.awt.GridBagConstraints gridBagConstraints3;
   
-      gridBagConstraints4 = new java.awt.GridBagConstraints ();
-      gridBagConstraints4.gridwidth = 0;
-      gridBagConstraints4.gridheight = 0;
-      gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
-      gridBagConstraints4.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints4.weightx = 1.0;
-      gridBagConstraints4.weighty = 1.0;
-      m_jpDocCommentBorder.add (m_dcvDocComment, gridBagConstraints4);
+      gridBagConstraints2 = new java.awt.GridBagConstraints ();
+      gridBagConstraints2.gridwidth = 0;
+      gridBagConstraints2.gridheight = 0;
+      gridBagConstraints2.fill = java.awt.GridBagConstraints.BOTH;
+      gridBagConstraints2.anchor = java.awt.GridBagConstraints.NORTHWEST;
+      gridBagConstraints2.weightx = 1.0;
+      gridBagConstraints2.weighty = 1.0;
+      m_jpDocCommentBorder.add (m_dcvDocComment, gridBagConstraints2);
   
 
     gridBagConstraints1 = new java.awt.GridBagConstraints ();
@@ -262,7 +262,7 @@ public class TypeEditPage extends javax.swing.JPanel {
     add (m_jtfSelection, gridBagConstraints1);
 
     m_jpProposalsBorder.setLayout (new java.awt.GridBagLayout ());
-    java.awt.GridBagConstraints gridBagConstraints2;
+    java.awt.GridBagConstraints gridBagConstraints4;
     m_jpProposalsBorder.setBorder (new javax.swing.border.TitledBorder("Proposals"));
 
   
@@ -285,14 +285,14 @@ public class TypeEditPage extends javax.swing.JPanel {
     
         m_jspProposals.setViewportView (m_jtProposals);
     
-      gridBagConstraints2 = new java.awt.GridBagConstraints ();
-      gridBagConstraints2.gridwidth = 0;
-      gridBagConstraints2.gridheight = 0;
-      gridBagConstraints2.fill = java.awt.GridBagConstraints.BOTH;
-      gridBagConstraints2.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints2.weightx = 1.0;
-      gridBagConstraints2.weighty = 1.0;
-      m_jpProposalsBorder.add (m_jspProposals, gridBagConstraints2);
+      gridBagConstraints4 = new java.awt.GridBagConstraints ();
+      gridBagConstraints4.gridwidth = 0;
+      gridBagConstraints4.gridheight = 0;
+      gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
+      gridBagConstraints4.anchor = java.awt.GridBagConstraints.NORTHWEST;
+      gridBagConstraints4.weightx = 1.0;
+      gridBagConstraints4.weighty = 1.0;
+      m_jpProposalsBorder.add (m_jspProposals, gridBagConstraints4);
   
 
     gridBagConstraints1 = new java.awt.GridBagConstraints ();

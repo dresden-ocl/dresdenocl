@@ -253,6 +253,9 @@ public class RevengGUI extends javax.swing.JDialog {
 
   private void onSpecifyTypeTraceLogs (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSpecifyTypeTraceLogs
     new SpecifyTypeTraceSourceDialog (this, true, m_lttiTypeTraceLogs).show();
+    
+    // Update PropertyPages
+    m_ppcProperties.replacePropertyPages (m_rtnCurrent.getPropertyPages());
   }//GEN-LAST:event_onSpecifyTypeTraceLogs
 
   private void onUpOneLevel (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onUpOneLevel
@@ -417,10 +420,86 @@ public class RevengGUI extends javax.swing.JDialog {
   }
   
   /**
+    * Return all element types of the specified feature.
+    */
+  public Set getAllElementTypes (AbstractDescriptor ad) {
+    Set sReturn = new HashSet();
+    
+    String sFeatureID = ad.getJavaDocName();
+    
+    for (Iterator i = m_lttiTypeTraceLogs.iterator(); i.hasNext();) {
+      TypeTraceInfo ttiCurrent = (TypeTraceInfo ) i.next();
+      
+      List lCurrentSet = ttiCurrent.getAllElementTypes (sFeatureID);
+      
+      sReturn.addAll (lCurrentSet);
+    }
+    
+    return sReturn;
+  }
+  
+  /**
+    * Return minimal element types of the specified feature.
+    */
+  public Set getElementTypeMinima (AbstractDescriptor ad) {
+    Set sReturn = new HashSet();
+    
+    String sFeatureID = ad.getJavaDocName();
+    
+    for (Iterator i = m_lttiTypeTraceLogs.iterator(); i.hasNext();) {
+      TypeTraceInfo ttiCurrent = (TypeTraceInfo ) i.next();
+      
+      List lCurrentSet = ttiCurrent.getElementTypeMinima (sFeatureID);
+      
+      sReturn.addAll (lCurrentSet);
+    }
+    
+    return sReturn;
+  }
+  
+  /**
+    * Return all key types of the specified feature.
+    */
+  public Set getAllKeyTypes (AbstractDescriptor ad) {
+    Set sReturn = new HashSet();
+    
+    String sFeatureID = ad.getJavaDocName();
+    
+    for (Iterator i = m_lttiTypeTraceLogs.iterator(); i.hasNext();) {
+      TypeTraceInfo ttiCurrent = (TypeTraceInfo ) i.next();
+      
+      List lCurrentSet = ttiCurrent.getAllKeyTypes (sFeatureID);
+      
+      sReturn.addAll (lCurrentSet);
+    }
+    
+    return sReturn;
+  }
+  
+  /**
+    * Return minimal key types of the specified feature.
+    */
+  public Set getKeyTypeMinima (AbstractDescriptor ad) {
+    Set sReturn = new HashSet();
+    
+    String sFeatureID = ad.getJavaDocName();
+    
+    for (Iterator i = m_lttiTypeTraceLogs.iterator(); i.hasNext();) {
+      TypeTraceInfo ttiCurrent = (TypeTraceInfo ) i.next();
+      
+      List lCurrentSet = ttiCurrent.getKeyTypeMinima (sFeatureID);
+      
+      sReturn.addAll (lCurrentSet);
+    }
+    
+    return sReturn;
+  }
+  
+  /**
     * @param args the command line arguments
     */
   public static void main (String args[]) {
-    new RevengGUI (new javax.swing.JFrame (), true).show ();
+    (s_rguiTheApp = new RevengGUI (new javax.swing.JFrame(), true)).show ();
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -439,4 +518,11 @@ public class RevengGUI extends javax.swing.JDialog {
   private tudresden.ocl.injection.reverseeng.propertypages.PropertyPageContainer m_ppcProperties;
   // End of variables declaration//GEN-END:variables
 
+  
+  // STATIC PART
+  private static RevengGUI s_rguiTheApp;
+  
+  public static RevengGUI getTheApp() {
+    return s_rguiTheApp;
+  }
 }

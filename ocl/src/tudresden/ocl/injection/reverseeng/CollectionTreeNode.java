@@ -66,7 +66,29 @@ public class CollectionTreeNode extends AbstractFeatureTreeNode {
       }
       
       public List getProposedTypes() {
-        return new LinkedList();
+        List lReturn = new LinkedList();
+        List lMinima = new LinkedList (RevengGUI.getTheApp().getElementTypeMinima (getDescriptor()));
+        
+        for (Iterator i = lMinima.iterator(); i.hasNext();) {
+          lReturn.add (new TypeEditPage.ProposedType ((String) i.next(),
+                                                         new String[] {"Identified as minimal type during runtime type tracing."}));
+        }
+        
+        List lAllTypes = new LinkedList (RevengGUI.getTheApp().getAllElementTypes (getDescriptor()));
+        for (Iterator i = lAllTypes.iterator(); i.hasNext();) {
+          String sCurrent = (String) i.next();
+          int nIdx = lMinima.indexOf (sCurrent);
+          
+          if (nIdx > -1) {
+            ((TypeEditPage.ProposedType) lReturn.get (nIdx)).addReason ("Identified as actual type during runtime type tracing.");
+          }
+          else {
+            lReturn.add (new TypeEditPage.ProposedType (sCurrent,
+                                                           new String[] {"Identified as actual type during runtime type tracing."}));
+          }
+        }
+
+        return lReturn;
       }
       
       public String getCurrentType() {
