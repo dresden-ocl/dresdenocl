@@ -1,3 +1,4 @@
+# cleans the royloy code from the modifications made by royloy-inject
 java -cp .:xerces.jar \
   tudresden.ocl.injection.Main \
   --clean \
