@@ -5,12 +5,15 @@
 	<description>
 		Describes mapping rules that help to
 		generate SQL code out of OCL constraints for Oracle 8i.
+		This catalogue is a revised edition intended for use with
+		the ILSQLCodeGenerator.
 	</description>
 
 	<pattern rule="constraint_body">
 		<template spec="any" rem="OCL INVARIANT">
-			<li>ALTER TABLE <param name="context_table"/> ADD</li>
-			<li>(CONSTRAINT <param name="constraint_name"/> CHECK (<param name="expression"/>))</li>
+			<li>CREATE OR REPLACE VIEW <param name="constraint_name"/> AS</li>
+			<li>(select * from <param name="context_table"/> <param name="context_alias"/></li>
+                        <li>where not (<param name="expression"/>)))</li>
 		</template>
 	</pattern>
 
@@ -121,27 +124,32 @@
 
 	<pattern rule="feature_call">
 		<template spec="attribute_context" rem="CLASS AND ATTRIBUTE">
-			<li><param name="column"/></li>
+			<li><param name="context_alias"/>.<param name="column"/></li>
 		</template>
 		<template spec="attribute_navigation" rem="CLASS AND ATTRIBUTE">
-			<li>Navigation is not allowed !</li>
+			<li>(select <param name="column"/></li>
+			<li>from <param name="tables"/></li> 
+			<li>where <param name="joins"/>)</li>
 		</template>
-                <template spec="attribute_inherited" rem="CLASS AND ATTRIBUTE">
-			<li>Navigation is not allowed !</li>
+                <template spec="navigation" rem="NAVIGATION">
+			<li>(select <param name="object"/></li>
+			<li>from <param name="tables"/></li> 
+			<li>where <param name="joins"/>)</li>
 		</template>
-		<template spec="allInstances" rem="CLASS AND ATTRIBUTE">
-			<li>Feature allInstances not supported !</li>
-		</template>
-
-		<template spec="nested_context" rem="NAVIGATION">
-			<li>Navigation is not allowed !</li>
-		</template>
-		<template spec="nested" rem="NAVIGATION">
-			<li>Navigation is not allowed !</li>
+                
+                <template spec="allInstances" rem="MODEL TYPE QUERY">
+			<li>select <param name="column"/></li>
+			<li>from <param name="tables"/></li> 
+			<li>where <param name="joins"/></li>
 		</template>
 
 		<template spec="forAll" rem="COMPLEX PREDICATE">
-			<li>Feature forAll not supported !</li>
+			<li>not exists (</li>
+                        <li><param name="collection"/></li>
+                        <li>minus</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where <param name="expression"/></li>
+                        <li>)</li>
                 </template>
 		<template spec="includes" rem="COMPLEX PREDICATE">
 			<li>Feature includes not supported !</li>
@@ -172,7 +180,9 @@
 		</template>
 
 		<template spec="sum" rem="BASIC VALUE">
-			<li>Feature sum not supported !</li>
+			<li>select nvl(sum(<param name="column"/>), 0)</li>
+			<li>from <param name="tables"/></li> 
+			<li>where <param name="joins"/></li>
 		</template>
 		<template spec="size" rem="BASIC VALUE">
 			<li>Feature size not supported !</li>

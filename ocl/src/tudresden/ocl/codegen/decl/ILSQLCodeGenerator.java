@@ -56,6 +56,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 	int joinAliasCount = 0;
 	String tableRepresentation;
 	String joinRepresentation;
+        String joinTargetObject;
 
 	final static String STANDARDKEY = "elem";
         final static String COMPLEX_PREDICATE = "inlcudes;excludes;includesAll;excludesAll;isEmpty;notEmpty;exists;forAll;isUnique";
@@ -190,8 +191,8 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 		StringBuffer joins = new StringBuffer();
 		String select = "", from = "", where = "", tableAlias;
 		Guide guide;
-		
-		for (int i=0; i<guides.size(); i++) {
+                
+                for (int i=0; i<guides.size(); i++) {
 			guide = (Guide)guides.get(i);
 			guide.reset();
 						
@@ -229,7 +230,9 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 				// open next join
 				joins.append("(");
 				joins.append(tableAlias + "." + guide.getWhere());
-				joins.append(" = ");				
+				joins.append(" = ");	
+                                
+                                if ((i == 0) && (k == 0)) joinTargetObject = tableAlias + "." + guide.getWhere();
 				
 				select = guide.getSelect();
 				from = guide.getFrom();
@@ -518,6 +521,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         	Node type;
                 int dColInd;
                 String inheritedFeature = "";
+                boolean assEndSucc;
 
                 if (pex instanceof AFeaturePrimaryExpression) {
                         startFeature = ((AFeaturePrimaryExpression)pex).getPathName().toString().trim();
@@ -555,6 +559,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
                         
                         // iterate the postfix expression tail and assign navigation guides
         		tail = node.getPostfixExpressionTail().toArray();
+                        assEndSucc = false;
 
         		for (int i=0; i<tail.length; i++) {
                                 next = ((AFeatureCall)((APostfixExpressionTail)tail[i]).getFeatureCall()).getPathName().toString().trim();
@@ -564,19 +569,19 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         				guide = mc.getAttributeGuide(next);
         				if ((i==0) && (dColInd == -1)) guide.setAlias(startFeature.toUpperCase());
         				guides.add(0, guide);
+                                        assEndSucc = false;
             			} else if (mc.isAssociationEnd(next)) {
         				// next feature navigates to an association end
         				guide = mc.getJoinGuide(next);
         				if ((i==0) && (dColInd == -1)) guide.setAlias(startFeature.toUpperCase());
         				guides.add(0, guide);
 	       				mc = mc.getAssociationEnd(next);
+                                        assEndSucc = true;
         			} else if (oclTokens.indexOf(next) != -1) {
-        				// next feature is an ocl feature that needs information about the preceeding navigation step
-        				/*
-					if (guide != null) {
-						guides.add(0, guide);
-					}
-					*/
+        				// next feature is an ocl feature --> assign guides list to last tail if it was an association end
+                                        if (assEndSucc == true) {
+                                            navigation.put(tail[i-1], guides);
+                                        }                                                          
         			};
         			
         			// assign guides list to last postfix expression tail
@@ -637,9 +642,21 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     			    			    			    			
     			// generate target code from guide
     			guide = (Guide)guides.get(0);
+                        guide.reset();
     			guide.next();
     			    			   				
     			if (guide.isNavigation()) {
+                                // navigation only
+                                prepareJoin(guides);
+                                ca.reset();
+                                ca.setArgument("object", joinTargetObject);
+                                ca.setArgument("tables", tableRepresentation);
+                                ca.setArgument("joins", joinRepresentation);
+                                try {
+        			    thisCode = ca.getCodeFor("feature_call", "navigation");
+        			} catch (Exception e) {
+        			    throw new RuntimeException("navigation: " + e.toString());
+        			}
 	    		} else {
 	    			if (guides.size() == 1) {
 	    				// attribute access without navigation
@@ -688,7 +705,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     				guide.next();
     				pkName = guide.getSelect();
     				prepareJoin(guides);
-    			}
+    			} 
    			
    			// generate code
    			// features that need to be mapped using the MODEL TYPE QUERY
@@ -721,10 +738,9 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
   			  	} else if ((pathName.equals("isEmpty")) || (pathName.equals("notEmpty"))) {
 	         		} else if ((pathName.equals("forAll")) || (pathName.equals("exists")) || (pathName.equals("isUnique"))) {
   					ca.reset();
-        				ca.setArgument("column", pkName);
-        				ca.setArgument("tables", tableRepresentation);
-    					ca.setArgument("joins", joinRepresentation);
-    					ca.setArgument("table", table.getTableName() + " " + tableAlias.toUpperCase());
+                                        ca.setArgument("collection", task);
+        				ca.setArgument("object", pkName);
+        				ca.setArgument("table", table.getTableName() + " " + tableAlias.toUpperCase());
         				ca.setArgument("expression", taskAp);
         				codeForPathName = true;
   				}

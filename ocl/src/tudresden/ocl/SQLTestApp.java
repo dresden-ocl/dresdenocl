@@ -1,7 +1,8 @@
 package tudresden.ocl;
 
 import tudresden.ocl.*;
-import tudresden.ocl.codegen.decl.SQLCodeGenerator;
+import tudresden.ocl.sql.*;
+import tudresden.ocl.codegen.decl.*;
 
 import java.io.FileWriter;
 import java.awt.*;
@@ -104,14 +105,14 @@ class SQLTestApp extends ConstraintEvaluation {
 	doNormalize();
 
         if (sql92.isSelected()) {
-          sqlRulesUrl = (SQLTestApp.class.getResource("codegen/decl/OCL2SQL4SQL92.xml")).toString();
+          sqlRulesUrl = (SQLTestApp.class.getResource("codegen/decl/OCL2SQL4Oracle.xml")).toString();
         } else if (sqlOracle.isSelected()) {
           sqlRulesUrl = (SQLTestApp.class.getResource("codegen/decl/OCL2SQL4Oracle.xml")).toString();
         } else {
           sqlRulesUrl = sqlOtherUrl.getText().trim();
         }
 
-	SQLCodeGenerator generator = new SQLCodeGenerator(sqlRulesUrl);
+	ILSQLCodeGenerator generator = new ILSQLCodeGenerator(sqlRulesUrl);
 
 	frags = generator.getCode(tree);
 
