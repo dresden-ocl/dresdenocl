@@ -84,6 +84,7 @@ public class ConstraintEvaluation extends JPanel
   protected JTabbedPane tabs;
 
   protected OclTree tree;
+  protected String constraintName;
   protected boolean synAndSemOK;
 
   public ConstraintEvaluation() {
@@ -448,14 +449,21 @@ public class ConstraintEvaluation extends JPanel
         getModelFacade()
       );
       if (switchTabs) showTab(getIndexOfASTPane());
+      updateTokens();
+      updateTree();
     }
     catch (Exception e) {
       updateError(e);
       tree=null;
       showTab(getIndexOfErrorPane());
+      try {
+        updateTokens();
+        updateTree();
+      }
+      catch (Exception anotherException) {
+        // ignore this one, we're already in exception handling
+      }
     }
-    updateTokens();
-    updateTree();
   }
 
   protected void doCopyTreeToText() {
@@ -550,7 +558,7 @@ public class ConstraintEvaluation extends JPanel
       return new tudresden.ocl.check.types.testfacade.TestModelFacade();
     } else if (mXmi.isSelected()) {
       return tudresden.ocl.check.types.xmifacade.XmiParser.getModel(
-        mXmiUrl.getText().trim(), 
+        mXmiUrl.getText().trim(),
         mXmiUrl.getText().trim()
       );
     } else if (mReflection.isSelected()) {
@@ -709,6 +717,14 @@ public class ConstraintEvaluation extends JPanel
       }
     }
     return sb.toString();
+  }
+
+  public String getConstraintName()
+  {
+    if (tree!=null)
+	  return tree.getConstraintName();
+    else
+	  return null;
   }
 
   public static void main(String[] args) {

@@ -35,6 +35,8 @@ package tudresden.ocl;
 import tudresden.ocl.parser.*;
 import tudresden.ocl.parser.node.*;
 import tudresden.ocl.parser.parser.*;
+import tudresden.ocl.parser.lexer.Lexer;
+import tudresden.ocl.parser.analysis.DepthFirstAdapter;
 import tudresden.ocl.normalize.*;
 import tudresden.ocl.check.*;
 import tudresden.ocl.check.types.*;
@@ -42,11 +44,21 @@ import tudresden.ocl.codegen.*;
 
 import java.io.*;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.security.AccessControlException;
 
 public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
 
+  /** @see #ast
+   */
+  protected static final String NAME_SEPARATOR = "; ";
+
   protected Start ast;
+  /** the name of the constraint, i.e. the names of the constraint bodies
+   *  concatenated with <code>NAME_SEPARATOR</code> as separator
+   *  @see #NAME_SEPARATOR
+   */
+  protected String name;
   protected HashSet invariants;
   protected NameCreator nameCreator;
 
@@ -103,15 +115,20 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
       OclTree tree=new OclTree();
       if (qf!=null) tree.setQueryableFactory(qf);
       tree.tFactory=createTypeFactory(mf);
-      OclParser p=new OclParser(
-        new tudresden.ocl.parser.lexer.Lexer(
-          new PushbackReader(
-            new StringReader(oclExpression)
-          )
+      Lexer lexer = new Lexer(
+        new PushbackReader(
+          new StringReader(oclExpression)
         )
       );
-      tree.ast = p.parse();
-      return tree;
+      OclParser p=new OclParser(lexer);
+      Start startNode = p.parse();
+	  tree.ast = startNode;
+
+	  // find name of constraint
+	  ConstraintNameFinder nameFinder = new ConstraintNameFinder();
+	  startNode.apply(nameFinder);
+	  tree.name = nameFinder.getName();
+	  return tree;
     }
     catch (tudresden.ocl.parser.parser.ParserException e) {
       throw new OclParserException(e.getMessage());
@@ -182,6 +199,11 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
   public boolean equalsExpression(OclTree tree) {
     return this.getExpression().equals( tree.getExpression() );
   }
+
+  public String getConstraintName() {
+	return name;
+  }
+
 
   public Start getRoot() {
     return ast;
@@ -337,4 +359,46 @@ public class OclTree implements NameBoundQueryable, TypeQueryable, Switchable {
   public void setQueryableFactory(QueryableFactory qf) {
     qFactory=qf;
   }
+}
+
+class ConstraintNameFinder extends DepthFirstAdapter
+{
+	String foundName;
+
+	public void caseAConstraint(AConstraint node)
+	{
+		Iterator iter = node.getConstraintBody().iterator();
+		while (iter.hasNext())
+		{
+			PConstraintBody next = (PConstraintBody) iter.next();
+			next.apply(this);
+		}
+	}
+
+	public void caseAConstraintBody(AConstraintBody node)
+	{
+		String constraintName;
+		if (node.getName()==null)
+		{
+			constraintName = "unnamedConstraint";
+		}
+		else
+		{
+			constraintName = node.getName().toString().trim();
+		}
+
+		if (foundName==null)
+		{
+			foundName = constraintName;
+		}
+		else
+		{
+			foundName = foundName + OclTree.NAME_SEPARATOR + constraintName;
+		}
+	}
+
+	public String getName()
+	{
+		return foundName;
+	}
 }
