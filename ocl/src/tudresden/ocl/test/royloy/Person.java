@@ -16,12 +16,8 @@ public class Person extends RLObject
   /**
      @element-type Company
   */
-  public HashSet managedCompanies=new HashSet();
-
-  /**
-     @element-type Company
-  */
-  public HashSet employers=new HashSet();
+  // tests comma seperated attributes
+  public HashSet managedCompanies=new HashSet(), employers=new HashSet();
 
   protected Person wife;
 
