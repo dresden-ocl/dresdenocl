@@ -2,499 +2,506 @@
 
 package com.togethersoft.modules.ocl;
 
-import com.togethersoft.openapi.ide.IdeContext;
-import java.io.IOException;
-import com.togethersoft.openapi.ide.message.IdeMessageManagerAccess;
-import com.togethersoft.openapi.ide.message.IdeMessageType;
-import com.togethersoft.openapi.ide.window.IdeWindowManagerAccess;
-import com.togethersoft.openapi.ide.window.IdeDialogType;
-import com.togethersoft.openapi.ide.IdeAccess;
-import com.togethersoft.openapi.ide.IdeManager;
-import com.togethersoft.openapi.rwi.RwiElement;
-import com.togethersoft.openapi.rwi.RwiNode;
-import com.togethersoft.openapi.util.RwiElementsUtil;
-import com.togethersoft.openapi.rwi.RwiProperty;
 import java.io.File;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import com.togethersoft.openapi.vfs.VirtualFileManager;
-import com.togethersoft.openapi.vfs.VirtualFileManagerAccess;
-import com.togethersoft.openapi.rwi.RwiVisitorAdapter;
-import com.togethersoft.openapi.rwi.RwiPackage;
-import com.togethersoft.openapi.rwi.enum.RwiNodeEnumeration;
+import java.io.IOException;
 import java.util.ArrayList;
-import com.togethersoft.openapi.rwi.enum.RwiPackageEnumeration;
-import com.togethersoft.openapi.rwi.RwiModel;
-import com.togethersoft.openapi.rwi.RwiModelAccess;
-import com.togethersoft.openapi.sci.SciClass;
-import com.togethersoft.openapi.sci.SciModelAccess;
-import com.togethersoft.openapi.sci.SciLanguage;
-import com.togethersoft.openapi.sci.enum.SciOperationEnumeration;
-import com.togethersoft.openapi.sci.SciOperation;
-import com.togethersoft.openapi.sci.SciProperty;
-import com.togethersoft.openapi.sci.SciTag;
 import java.util.HashSet;
 import java.util.Iterator;
-import com.togethersoft.openapi.sci.SciJavaImportList;
-import com.togethersoft.openapi.sci.SciFile;
-import com.togethersoft.openapi.sci.enum.SciJavaImportEnumeration;
-import com.togethersoft.openapi.sci.SciJavaImport;
-import com.togethersoft.openapi.rwi.enum.RwiMemberEnumeration;
+
+import tudresden.ocl.injection.InjectorParseException;
+import tudresden.ocl.injection.InstrumentorConfig;
+import tudresden.ocl.injection.Main;
+import tudresden.ocl.injection.TaskConfig;
+import tudresden.ocl.injection.TypeCheckConfig;
+import tudresden.ocl.injection.ocl.OclConfig;
+
+import com.togethersoft.openapi.ide.IdeContext;
+import com.togethersoft.openapi.ide.message.IdeMessageManagerAccess;
+import com.togethersoft.openapi.ide.message.IdeMessageType;
+import com.togethersoft.openapi.ide.window.IdeDialogType;
+import com.togethersoft.openapi.ide.window.IdeWindowManagerAccess;
+import com.togethersoft.openapi.rwi.RwiElement;
+import com.togethersoft.openapi.rwi.RwiModel;
+import com.togethersoft.openapi.rwi.RwiModelAccess;
+import com.togethersoft.openapi.rwi.RwiNode;
+import com.togethersoft.openapi.rwi.RwiPackage;
+import com.togethersoft.openapi.rwi.RwiProperty;
 import com.togethersoft.openapi.rwi.RwiShapeType;
+import com.togethersoft.openapi.rwi.RwiVisitorAdapter;
+import com.togethersoft.openapi.rwi.enum.RwiMemberEnumeration;
+import com.togethersoft.openapi.rwi.enum.RwiNodeEnumeration;
+import com.togethersoft.openapi.rwi.enum.RwiPackageEnumeration;
+import com.togethersoft.openapi.sci.SciClass;
+import com.togethersoft.openapi.sci.SciFile;
+import com.togethersoft.openapi.sci.SciJavaImport;
+import com.togethersoft.openapi.sci.SciJavaImportList;
+import com.togethersoft.openapi.sci.SciLanguage;
+import com.togethersoft.openapi.sci.SciModelAccess;
+import com.togethersoft.openapi.sci.SciOperation;
+import com.togethersoft.openapi.sci.SciTag;
+import com.togethersoft.openapi.sci.enum.SciJavaImportEnumeration;
+import com.togethersoft.openapi.sci.enum.SciOperationEnumeration;
+import com.togethersoft.openapi.util.RwiElementsUtil;
 import com.togethersoft.openapi.vfs.VirtualFileEnumeration;
+import com.togethersoft.openapi.vfs.VirtualFileManager;
+import com.togethersoft.openapi.vfs.VirtualFileManagerAccess;
 
 /**
  * Controls the extern tool OCL Injector. Runs it as a separate process using
  * the current application's <code>Runtime</code> instance. Public methods are
  * usually called by {@link OCLInjectorCommandListener OCLInjectorCommandListener}.
- * @author Christian Nill 
+ * @author Christian Nill
  */
 public class OCLInjectorRunner implements Runnable {
 	private RwiElement[] rwiElements;
-    private String execCommand;
+	private IdeContext ideContext;
+	private InstrumentorConfig conf = new InstrumentorConfig();
+	private OclConfig oclconf = new OclConfig();
+	private TypeCheckConfig tcconf = new TypeCheckConfig("System.out.println");
 
-    public OCLInjectorRunner() {
-    	this.execCommand = null;
-        this.rwiElements = null;
+	public OCLInjectorRunner(IdeContext ideContext) {
+		this.rwiElements = null;
+		this.ideContext = ideContext;
 	}
 
-    /**
-     * Runs the injector (Can basically run everything that is specified by the first parameter).
-     * 
-     * After execution, the model is synchronised with changes made to the source files outside of Together.
-     * 
-     * Output is redirected to the Message Pane and additionally, a dialog window
-     * listing all class names from the second argument is displayed)
-     * @param execCommand must be a legal command for the current operating system.
-     * @param rwiElements a list of all elements being modified by the Injector. For feedback purposes only. 
-     */
-    public void run() {
+	/**
+	 * Runs the injector (Can basically run everything that is specified by the first parameter).
+	 * After execution, the model is synchronised with changes made to the source files outside of Together.
+	 * Output is redirected to the Message Pane and additionally, a dialog window
+	 * listing all class names from the second argument is displayed)
+	 */
+	public void run() {
+		String feedback="";
+		
 		// needed for some file writing operations
-        VirtualFileManager vfs;
-        // first, save unchached files to disk...
-        try {
+		VirtualFileManager vfs;
+		
+		// first, save unchached files to disk...
+		try {
 			vfs = VirtualFileManagerAccess.getVirtualFileManager();
 			// DEBUG
-            VirtualFileEnumeration vfe = vfs.unsavedFiles();
-            while (vfe.hasMoreElements()) {
-                IdeMessageManagerAccess.printMessage(IdeMessageType.INFORMATION, "save " + vfe.nextVirtualFile().getFullName());
-            }
+			VirtualFileEnumeration vfe = vfs.unsavedFiles();
+			while (vfe.hasMoreElements()) {
+				IdeMessageManagerAccess.printMessage(
+					IdeMessageType.INFORMATION,
+					"save " + vfe.nextVirtualFile().getFullName());
+			}
 			vfs.saveAllCaches(vfs.getContext());
-        } catch (IOException e) {
-	        IdeWindowManagerAccess.getWindowManager().showMessageDialog(
-    	        null,
-  	    	    "OCL Injector",
-       	    	IdeDialogType.ERROR,
-	            "Writing cached files to disk has been interrupted.\n"+
-    	        "The instrumentation process has been aborted.");
-            return;
-        }
-        // ...then execute command
+		} catch (IOException e) {
+			IdeWindowManagerAccess.getWindowManager().showMessageDialog(
+				null,
+				"OCL Injector",
+				IdeDialogType.ERROR,
+				"Writing cached files to disk has been interrupted.\n"
+					+ "The instrumentation process has been aborted.");
+			return;
+		}
+
+		// prepare configuration
+//		oclconf.modelfacade =
+//			new ReflectionFacade(
+//				getReflectionModelForInstrumentation(rwiElements),
+//				new DefaultReflectionAdapter(),
+//				new TogetherNameAdapter(),
+//				new SourceReflectionExtender());
+		oclconf.modelfacade = new TogetherFacade(rwiElements[0]);
+		oclconf.violationmacro = "System.out.println";
+
+		conf.taskConfigs = new TaskConfig[2];
+		conf.taskConfigs[0] = tcconf;
+		conf.taskConfigs[1] = oclconf;
+		
+		for (int i = 0; i < rwiElements.length; i++) {
+			//result += "\"" + rwiElements[i].getProperty(RwiProperty.FILE) + "\" ";
+			try {
+				Main.inject(
+					new File(rwiElements[i].getProperty(RwiProperty.FILE)),
+					conf);
+			} catch (IOException e) {
+				feedback += rwiElements[i].getProperty(RwiProperty.FILE) + ": " +
+				e.getMessage() + "\n";
+				e.printStackTrace();
+			} catch (InjectorParseException e) {
+				feedback += rwiElements[i].getProperty(RwiProperty.FILE) + ": " +
+				e.getMessage() + "\n";
+				e.printStackTrace();
+			} catch (Exception e) {
+				feedback += rwiElements[i].getProperty(RwiProperty.FILE) + ": " +
+				e.getMessage() + "\n";
+				e.printStackTrace();
+			}
+		}
+
+		// how to correctly read out both buffered readers? Setting the buffer size
+		// to almost 20k is surely not a tidy way...
+		// BufferedReader injectionError = new BufferedReader(new InputStreamReader(injection.getErrorStream()), 20000);
+		// BufferedReader injectionOutput = new BufferedReader(new InputStreamReader(injection.getInputStream()), 20000);
+		// String lineOut = "";
+		// String lineErr = "";
+		/* while (!((lineErr = injectionError.readLine()) == null)) {
+			IdeMessageManagerAccess.printMessage(IdeMessageType.INFORMATION, lineErr);
+		}
+		while (!((lineOut = injectionOutput.readLine()) == null)) {
+			IdeMessageManagerAccess.printMessage(IdeMessageType.INFORMATION, lineOut);
+		}*/
+
+		// synchronize model
 		try {
-	        // DEBUG - left in code to allow controlling of the execution command
-			IdeMessageManagerAccess.printMessage(IdeMessageType.WARNING, execCommand);
-
-			Process injection = Runtime.getRuntime().exec(execCommand);
-
-			// how to correctly read out both buffered readers? Setting the buffer size
-            // to almost 20k is surely not a tidy way...
-            BufferedReader injectionError = new BufferedReader(
-                new InputStreamReader(injection.getErrorStream()), 20000 );
-            BufferedReader injectionOutput = new BufferedReader(
-                new InputStreamReader(injection.getInputStream()), 20000);
-            String lineOut = "";
-            String lineErr = "";
-
-            while (! ((lineErr = injectionError.readLine()) == null)) {
-                IdeMessageManagerAccess.printMessage(IdeMessageType.INFORMATION, lineErr);
-            }
-
-            while (! ((lineOut = injectionOutput.readLine()) == null)) {
-                IdeMessageManagerAccess.printMessage(IdeMessageType.INFORMATION, lineOut);
-            }
-
-        } catch (IOException e) {
-	   		IdeMessageManagerAccess.printMessage(IdeMessageType.ERROR, e.toString());
-            IdeWindowManagerAccess.getWindowManager().showMessageDialog(
-                null,
-                "OCL Injector Error",
-                IdeDialogType.ERROR,
-                "I/O Error:\n"+e.toString() );
-        } catch (NullPointerException e) {
-	   		IdeMessageManagerAccess.printMessage(IdeMessageType.ERROR, e.toString());
-        }
-
-        // synchronise model
-        try {
 			vfs = VirtualFileManagerAccess.getVirtualFileManager();
 			vfs.externalUpdateAll(vfs.getContext());
-        } catch (IOException e) {
-	        IdeWindowManagerAccess.getWindowManager().showMessageDialog(
-    	        null,
-  	    	    "OCL Injector",
-       	    	IdeDialogType.ERROR,
-	            "Synchronisation of the model has been interrupted.\n"+
-    	        "Model might be unsynchronised.");
-        }
+		} catch (IOException e) {
+			IdeWindowManagerAccess.getWindowManager().showMessageDialog(
+				null,
+				"OCL Injector",
+				IdeDialogType.ERROR,
+				"Synchronisation of the model has been interrupted.\n"
+					+ "Model might be unsynchronised.");
+		}
+		// Give feedback
+//		String listOfClasses = "";
+//		for (int i = 0; i < rwiElements.length; i++) {
+//			listOfClasses += rwiElements[i].getProperty(RwiProperty.FULL_NAME)
+//				+ "\n";
+//		}
 
-        // Give feedback
-		String listOfClasses = "";
-        for (int i=0; i<rwiElements.length; i++) {
-            listOfClasses += rwiElements[i].getProperty(RwiProperty.FULL_NAME)+"\n";
-        }
-        IdeWindowManagerAccess.getWindowManager().showMessageDialog(
-            null,
-  	        "OCL Injector",
-       	    IdeDialogType.WARNING,
-            "For information on the injection process, see output in the\n" +
-            "Messages pane.\n\nThe following classes have been affected:\n" +
-        	listOfClasses);
+		if (!feedback.equals("")) {
+			IdeWindowManagerAccess.getWindowManager().showMessageDialog(
+				null,
+				"OCL Injector",
+				IdeDialogType.WARNING,
+				"Problems occured during injection:\n"
+					+ feedback);
+		}
+	}
 
-    }
+	/**
+	 * Cleans elements that are currently selected (not marked) on the diagram pane by running the Injector with the
+	 * <code>--clean</code> command. Calls <code>runInjector()</code>
+	 */
+	public void cleanSelectedRwiElements() {
+		rwiElements = RwiElementsUtil.getRwiElements(ideContext);
+		conf.clean = true;
+		run();
+	}
 
-    /**
-     * Cleans elements that are currently selected (not marked) on the diagram pane by running the Injector with the <code>--clean</code> command.
-     * 
-     * Calls <code>runInjector()</code> 
-     */
-    public void cleanSelectedRwiElements(IdeContext ideContext) {
-        rwiElements = RwiElementsUtil.getRwiElements(ideContext);
-        execCommand = constructExecCommand("--clean --modify", ideContext, rwiElements);
-        if (execCommand != null)
-            // run the command
-            IdeAccess.getIdeManager().addCommandAndWait(this);
-    }
+	/**
+	 * Instruments elements that are currently selected (not marked) on the diagram pane by running the Injector.
+	 * Calls <code>runInjector()</code>
+	 */
+	public void instrumentSelectedRwiElements() {
+		rwiElements = RwiElementsUtil.getRwiElements(ideContext);
+		if (rwiElements.length == 0)
+			return;
+		run();
+	}
 
-    /**
-     * Instruments elements that are currently selected (not marked) on the diagram pane by running the Injector.
-     * 
-     * Calls <code>runInjector()</code> 
-     */
-    public void instrumentSelectedRwiElements(IdeContext ideContext) {
-        rwiElements = RwiElementsUtil.getRwiElements(ideContext);
-        execCommand = constructExecCommand("--modify", ideContext, rwiElements);
-        if (execCommand != null) {
-            for (int i=0; i<rwiElements.length; i++) {
-				addElementTypesToNode((RwiNode)rwiElements[i]);
-            }
-            // run the command
-            IdeAccess.getIdeManager().addCommandAndWait(this);
-            for (int i=0; i<rwiElements.length; i++) {
-				removeElementTypesFromNode((RwiNode)rwiElements[i]);
-            }
-        }
-    }
+	/**
+	 * Instruments elements that are currently marked by running the Injector.
+	 * A call of this operation causes <b>all</b> classes in the project that are marked to be instrumented.
+	 * Calls <code>runInjector()</code>
+	 */
+	public void instrumentMarkedRwiElements() {
+		CollectMarkedElementsVisitor cmev = new CollectMarkedElementsVisitor();
+		rwiElements = cmev.getAllMarkedElements();
+		for (int i = 0; i < rwiElements.length; i++) {
+			addElementTypesToNode((RwiNode) rwiElements[i]);
+		}
+		run();
+		for (int i = 0; i < rwiElements.length; i++) {
+			removeElementTypesFromNode((RwiNode) rwiElements[i]);
+		}
+	}
 
-    /**
-     * Instruments elements that are currently marked by running the Injector.
-     * A call of this operation causes <b>all</b> classes in the project that are marked to be instrumented.
-     * 
-     * Calls <code>runInjector()</code> 
-     */
-    public void instrumentMarkedRwiElements(IdeContext ideContext) {
-        CollectMarkedElementsVisitor cmev = new CollectMarkedElementsVisitor();
-        rwiElements = cmev.getAllMarkedElements();
+	/**
+	 * Cleans all elements that are currently instrumented by running the Injector.
+	 * A call of this operation causes <b>all</b> classes in the project that are marked to be instrumented.
+	 * Calls <code>runInjector()</code>
+	 */
+	public void cleanAllRwiElements() {
+		CollectInstrumentedElementsVisitor ciev =
+			new CollectInstrumentedElementsVisitor();
+		rwiElements = ciev.getAllInstrumentedElements();
+		conf.clean = true;
+		for (int i = 0; i < rwiElements.length; i++) {
+			addElementTypesToNode((RwiNode) rwiElements[i]);
+		}
+		run();
+		for (int i = 0; i < rwiElements.length; i++) {
+			removeElementTypesFromNode((RwiNode) rwiElements[i]);
+		}
+	}
 
-        execCommand = constructExecCommand("--modify", ideContext, rwiElements);
-        if (execCommand != null) {
-            for (int i=0; i<rwiElements.length; i++) {
-				addElementTypesToNode((RwiNode)rwiElements[i]);
-            }
-            // run the command
-            IdeAccess.getIdeManager().addCommandAndWait(this);
-            for (int i=0; i<rwiElements.length; i++) {
-				removeElementTypesFromNode((RwiNode)rwiElements[i]);
-            }
-        }
-    }
+	/**
+	 * Generates the command string to be used with <code>runInjector()</code>.
+	 * @param commands usually <code>"--modify"</code> or <code>"--modify --clean"</code>
+	 * @param ideContext Together's current IdeContext
+	 * @param rwiElements the elements (should be <code>RwiNode</code>s) to be instrumented
+	 */
+	/*    private String constructExecCommand(String commands, IdeContext ideContext, RwiElement[] rwiElements) {
+	        // needed to expand Together macros
+	        IdeManager im = IdeAccess.getIdeManager();
+	        String fileNames = getFileNamesForInstrumentation(rwiElements);
+	        // not files --> no command
+	        if (fileNames == null || fileNames.equals("")) return null;
+	        String result = im.expandMacros(ideContext, "$SYSTEMJVM$") + // .../jdk/bin/java -classpath
+	            "\"" + im.expandMacros(ideContext, "$CLASSPATH$") + // $together classpath$
+	            File.pathSeparator + // path separator
+	            im.expandMacros(ideContext, "$TGH$") + // Together home directory
+	            File.separator + "lib" + File.separator + "dresden-ocl-injector.jar" + // Injector JAR file
+	            File.pathSeparator + im.expandMacros(ideContext, "$DESTINATION$") + // .../out/classes/...
+	            File.pathSeparator + im.expandMacros(ideContext, "$SOURCEPATH$") + // .../myprojects/...
+	            "\" " + "tudresden.ocl.injection.ocl.Main " + "--name-adapter together " + commands + " " +
+	            getReflectionModelForInstrumentation(rwiElements) + fileNames;
+	        return result;
+	    }*/
 
-    /**
-     * Cleans all elements that are currently instrumented by running the Injector.
-     * A call of this operation causes <b>all</b> classes in the project that are marked to be instrumented.
-     * 
-     * Calls <code>runInjector()</code> 
-     */
-    public void cleanAllRwiElements(IdeContext ideContext) {
-        CollectInstrumentedElementsVisitor ciev = new CollectInstrumentedElementsVisitor();
-        rwiElements = ciev.getAllInstrumentedElements();
-        execCommand = constructExecCommand("--clean --modify", ideContext, rwiElements);
-        if (execCommand != null) {
-            for (int i=0; i<rwiElements.length; i++) {
-				addElementTypesToNode((RwiNode)rwiElements[i]);
-            }
-            // run the command
-            IdeAccess.getIdeManager().addCommandAndWait(this);
-            for (int i=0; i<rwiElements.length; i++) {
-				removeElementTypesFromNode((RwiNode)rwiElements[i]);
-            }
-        }
-    }
+	/**
+	 * Extracts a string of consecutive file names from a list of <code>RwiElement</code>s.
+	 * Usually called by <code>constructExecCommand</code>
+	 * @param rwiElements the list of <code>RwiElements</code> whose file names are to be extracted
+	 * @return a String in the form <code>"filenameOne.java filenameTwo.java filenameThree.java"</code>
+	 */
+	/*    private String getFileNamesForInstrumentation(RwiElement[] rwiElements) {
+	        String result = "";
+	        for (int i = 0; i < rwiElements.length; i++) {
+	            result += "\"" + rwiElements[i].getProperty(RwiProperty.FILE) + "\" ";
+	        }
+	        return result;
+	    }*/
 
-    /**
-     * Generates the command string to be used with <code>runInjector()</code>.
-     * @param commands usually <code>"--modify"</code> or <code>"--modify --clean"</code>
-     * @param ideContext Together's current IdeContext
-     * @param rwiElements the elements (should be <code>RwiNode</code>s) to be instrumented 
-     */
-	private String constructExecCommand(String commands, IdeContext ideContext, RwiElement[] rwiElements) {
-        // needed to expand Together macros
-        IdeManager im = IdeAccess.getIdeManager();
-        String fileNames = getFileNamesForInstrumentation(rwiElements);
-        // not files --> no command
-		if (fileNames == null || fileNames.equals("")) return null;
-
-        String result =
-            im.expandMacros(ideContext, "$SYSTEMJVM$") + // .../jdk/bin/java -classpath
-            "\"" + im.expandMacros(ideContext, "$CLASSPATH$") + // $together classpath$
-            File.pathSeparator + // path separator
-            im.expandMacros(ideContext, "$TGH$") + // Together home directory
-            File.separator + "lib" + File.separator + "dresden-ocl-injector.jar" + // Injector JAR file
-            File.pathSeparator +
-            im.expandMacros(ideContext, "$DESTINATION$") + // .../out/classes/...
-            File.pathSeparator +
-            im.expandMacros(ideContext, "$SOURCEPATH$") + // .../myprojects/...
-            "\" " +
-            "tudresden.ocl.injection.ocl.Main " +
-            "--name-adapter together " + commands + " " +
-            getReflectionModelForInstrumentation(rwiElements) +
-            fileNames;
-        return result;
-    }
-
-    /**
-     * Extracts a string of consecutive file names from a list of <code>RwiElement</code>s.
-     * Usually called by <code>constructExecCommand</code>
-     * @param rwiElements the list of <code>RwiElements</code> whose file names are to be extracted
-     * @return a String in the form <code>"filenameOne.java filenameTwo.java filenameThree.java"</code> 
-     */
-	private String getFileNamesForInstrumentation(RwiElement[] rwiElements) {
-        String result = "";
-        for (int i=0; i<rwiElements.length; i++) {
-            result += "\"" + rwiElements[i].getProperty(RwiProperty.FILE) + "\" ";
-        }
-        return result;
-    }
-
-    /**
-     * Generates a string with <code>--reflection-model</code> options and their respective packagenames for the use with <code>constructExecCommand</code>.
-     * 
-     * All import statements of the Java files that are represented by <code>rwiElements</code> and names of the packages the <code>rwiElement</code>s belong to are being used.
-     * @param rwiElements the list of <code>RwiElement</code>s that are to be analysed for the packages used.
-     * @return A string in the form of <code>"--reflection-facade testmodel.test --reflection-facade java.util --reflection-facade java.io"</code> 
-     */
-    private String getReflectionModelForInstrumentation(RwiElement[] rwiElements) {
-        HashSet tempHashSet = new HashSet();
-        String result = "";
-        String temp_packageName;
-
-		for (int i=0; i<rwiElements.length; i++) {
-            if (rwiElements[i] instanceof RwiNode) {
-                // first the package
-                tempHashSet.add(((RwiNode)rwiElements[i]).getContainingPackage().getProperty(RwiProperty.FULL_NAME));
-                // then the import statements
-				SciClass sciClass = (SciClass)rwiElements[i].getCodeElement();
+	/**
+	 * Generates a string with <code>--reflection-model</code> options and their respective packagenames for the use with
+	 * <code>constructExecCommand</code>. All import statements of the Java files that are represented by
+	 * <code>rwiElements</code> and names of the packages the <code>rwiElement</code>s belong to are being used.
+	 * @param rwiElements the list of <code>RwiElement</code>s that are to be analysed for the packages used.
+	 * @return A string in the form of <code>"--reflection-facade testmodel.test --reflection-facade java.util
+	 * --reflection-facade java.io"</code>
+	 */
+	private String[] getReflectionModelForInstrumentation(RwiElement[] rwiElements) {
+		HashSet tempHashSet = new HashSet();
+		// String result = "";
+		String[] result;
+		String temp_packageName;
+		for (int i = 0; i < rwiElements.length; i++) {
+			if (rwiElements[i] instanceof RwiNode) {
+				// first the package
+				tempHashSet.add(
+					((RwiNode) rwiElements[i])
+						.getContainingPackage()
+						.getProperty(
+						RwiProperty.FULL_NAME));
+				// then the import statements
+				SciClass sciClass = (SciClass) rwiElements[i].getCodeElement();
 				SciFile sciFile = sciClass.getContainingFile();
 				SciJavaImportList importList = sciFile.getJavaImportList();
-	            SciJavaImportEnumeration importEnumeration = importList.imports();
+				SciJavaImportEnumeration importEnumeration =
+					importList.imports();
 				while (importEnumeration.hasMoreElements()) {
-        	        SciJavaImport sciJavaImport = importEnumeration.nextSciJavaImport();
-            	    temp_packageName = sciJavaImport.getImportText();
-    	            temp_packageName = temp_packageName.substring(0, temp_packageName.lastIndexOf("."));
-	                tempHashSet.add(temp_packageName);
-        	    }
-            }
-        }
+					SciJavaImport sciJavaImport =
+						importEnumeration.nextSciJavaImport();
+					temp_packageName = sciJavaImport.getImportText();
+					temp_packageName =
+						temp_packageName.substring(
+							0,
+							temp_packageName.lastIndexOf("."));
+					tempHashSet.add(temp_packageName);
+				}
+			}
+		}
 
+		result = new String[tempHashSet.size()];
 		Iterator iter = tempHashSet.iterator();
-        String tempString;
+		String tempString;
+		int i = 0;
 		while (iter.hasNext()) {
-            tempString = (String)iter.next();
-            if (tempString.equals("")) {
-                result += "--reflection-model \"\" ";
-            } else {
-				result += "--reflection-model " + tempString + " ";
-            }
-        }
-
+			tempString = (String) iter.next();
+			if (tempString.equals("")) {
+				result[i] = "\"\"";
+			} else {
+				result[i] = tempString;
+			}
+			i++;
+		}
 		return result;
-    }
+	}
 
+	/**
+	 * Visitor to search for elements, which are marked for Instrumentation in the model.
+	 * @author Christian Nill
+	 */
+	class CollectMarkedElementsVisitor extends RwiVisitorAdapter {
+		ArrayList rwiElementArrayList;
 
-
-    /**
-     * Visitor to search for elements, which are marked for Instrumentation in the model.
-     * @author Christian Nill
-     */
-    class CollectMarkedElementsVisitor extends RwiVisitorAdapter {
-        ArrayList rwiElementArrayList;
-
-		/**
-         * Returns an array of all <code>RwiElement</code>s that are marked in the model.
-         */
-        public RwiElement[] getAllMarkedElements() {
-            rwiElementArrayList = new ArrayList();
+		/** Returns an array of all <code>RwiElement</code>s that are marked in the model. */
+		public RwiElement[] getAllMarkedElements() {
+			rwiElementArrayList = new ArrayList();
 			RwiModel myModel = RwiModelAccess.getModel();
-            RwiPackageEnumeration rpe = myModel.rootPackages(RwiProperty.MODEL_PART);
-            while (rpe.hasMoreElements()) {
-                visitPackage(rpe.nextRwiPackage());
-            }
-
+			RwiPackageEnumeration rpe =
+				myModel.rootPackages(RwiProperty.MODEL_PART);
+			while (rpe.hasMoreElements()) {
+				visitPackage(rpe.nextRwiPackage());
+			}
 			// what's wrong with that line? Results in ClassCastException.
-	        // RwiElement[] resultArray = (RwiElement[])rwiElementArrayList.toArray();
+			// RwiElement[] resultArray = (RwiElement[])rwiElementArrayList.toArray();
 			// do it "per hand" instead:
-            RwiElement[] resultArray = new RwiNode[rwiElementArrayList.size()];
-            for (int i=0; i<resultArray.length; i++) {
-                resultArray[i] = (RwiElement)rwiElementArrayList.get(i);
-            }
-
-            return resultArray;
-        }
-
+			RwiElement[] resultArray = new RwiNode[rwiElementArrayList.size()];
+			for (int i = 0; i < resultArray.length; i++) {
+				resultArray[i] = (RwiElement) rwiElementArrayList.get(i);
+			}
+			return resultArray;
+		}
 
 		/**
-         * Shorthand for {@link visitPackage(RwiPackage, boolean) visitPackage(RwiPackage, true)}.
-         * @return <code>null</code>
-         */
+		 * Shorthand for {@link visitPackage(RwiPackage, boolean) visitPackage(RwiPackage, true)}.
+		 * @return <code>null</code>
+		 */
 		public Object visitPackage(RwiPackage rwiPackage) {
-            return visitPackage(rwiPackage, true);
-        }
+			return visitPackage(rwiPackage, true);
+		}
 
 		/**
-         * searches packages for <code>RwiNode</code>s that are marked with the <code>@selectedForInstrumentation</code> tag.
-         * @param rwiPackage The package to be visited
-         * @param recursing If <code>true</code>, subpackages will be searched recursively.
-         * @return <code>null</code>
-         */
-        public Object visitPackage(RwiPackage rwiPackage, boolean recursing) {
-            // Search for the right class first
-            RwiNodeEnumeration rne = rwiPackage.nodes();
-            while (rne.hasMoreElements()) {
-                RwiNode someRwiNode = rne.nextRwiNode();
-                if (someRwiNode.hasProperty("selectedForInstrumentation")) {
-                    rwiElementArrayList.add(someRwiNode);
-    	        }
-		    }
-            // if nothing found and recursing is desired, check for subpackages
-            if (recursing) {
-    	        RwiPackageEnumeration rpe = rwiPackage.subpackages();
-        	    while (rpe.hasMoreElements()) {
-            	    RwiPackage someRwiPackage = rpe.nextRwiPackage();
-					if (! someRwiPackage.getProperty(RwiProperty.MODEL_PART).equals("import")) {
-	                	visitPackage(someRwiPackage);
-                    }
-	            }
-	        }
-   	        return null;
-        }
-    }
+		 * searches packages for <code>RwiNode</code>s that are marked with the <code>@selectedForInstrumentation</code> tag.
+		 * @param rwiPackage The package to be visited
+		 * @param recursing If <code>true</code>, subpackages will be searched recursively.
+		 * @return <code>null</code>
+		 */
+		public Object visitPackage(RwiPackage rwiPackage, boolean recursing) {
+			// Search for the right class first
+			RwiNodeEnumeration rne = rwiPackage.nodes();
+			while (rne.hasMoreElements()) {
+				RwiNode someRwiNode = rne.nextRwiNode();
+				if (someRwiNode.hasProperty("selectedForInstrumentation")) {
+					rwiElementArrayList.add(someRwiNode);
+				}
+			}
+			// if nothing found and recursing is desired, check for subpackages
+			if (recursing) {
+				RwiPackageEnumeration rpe = rwiPackage.subpackages();
+				while (rpe.hasMoreElements()) {
+					RwiPackage someRwiPackage = rpe.nextRwiPackage();
+					if (!someRwiPackage
+						.getProperty(RwiProperty.MODEL_PART)
+						.equals("import")) {
+						visitPackage(someRwiPackage);
+					}
+				}
+			}
+			return null;
+		}
+	}
 
+	/**
+	 * Visitor to search for instrumented elements in the model.
+	 * @author Christian Nill
+	 */
+	class CollectInstrumentedElementsVisitor extends RwiVisitorAdapter {
+		ArrayList rwiElementArrayList;
 
-    /**
-     * Visitor to search for instrumented elements in the model.
-     * @author Christian Nill
-     */
-    class CollectInstrumentedElementsVisitor extends RwiVisitorAdapter {
-        ArrayList rwiElementArrayList;
-
-		/**
-         * Returns an array of <code>RwiNode</code>s with all currently instrumented nodes in the model.
-         */
-        public RwiNode[] getAllInstrumentedElements() {
-            rwiElementArrayList = new ArrayList();
+		/** Returns an array of <code>RwiNode</code>s with all currently instrumented nodes in the model. */
+		public RwiNode[] getAllInstrumentedElements() {
+			rwiElementArrayList = new ArrayList();
 			RwiModel myModel = RwiModelAccess.getModel();
-            RwiPackageEnumeration rpe = myModel.rootPackages(RwiProperty.MODEL_PART);
-            while (rpe.hasMoreElements()) {
-                visitPackage(rpe.nextRwiPackage());
-            }
-	        RwiNode[] resultArray = new RwiNode[rwiElementArrayList.size()];
-            for (int i=0; i<resultArray.length; i++) {
-                resultArray[i] = (RwiNode)rwiElementArrayList.get(i);
-            }
-            return resultArray;
-        }
+			RwiPackageEnumeration rpe =
+				myModel.rootPackages(RwiProperty.MODEL_PART);
+			while (rpe.hasMoreElements()) {
+				visitPackage(rpe.nextRwiPackage());
+			}
+			RwiNode[] resultArray = new RwiNode[rwiElementArrayList.size()];
+			for (int i = 0; i < resultArray.length; i++) {
+				resultArray[i] = (RwiNode) rwiElementArrayList.get(i);
+			}
+			return resultArray;
+		}
 
-		/**
-         * Shorthand for {@link visitPackage(RwiPackage, boolean) visitPackage(RwiPackage, true)}.
-         */
+		/** Shorthand for {@link visitPackage(RwiPackage, boolean) visitPackage(RwiPackage, true)}. */
 		public Object visitPackage(RwiPackage rwiPackage) {
-            return visitPackage(rwiPackage, true);
-        }
+			return visitPackage(rwiPackage, true);
+		}
 
 		/**
-         * searches packages for instrumented elements. To determine, whether or not they are instrumented,
-         * the operations of the nodes are searched for a tag <code>@author ocl_injector</code>
-         * @param rwiPackage The package to be visited
-         * @param recursing If <code>true</code>, subpackages will be searched recursively.
-         * @return <code>null</code>
-         */
-        public Object visitPackage(RwiPackage rwiPackage, boolean recursing) {
+		 * searches packages for instrumented elements. To determine, whether or not they are instrumented,
+		 * the operations of the nodes are searched for a tag <code>@author ocl_injector</code>
+		 * @param rwiPackage The package to be visited
+		 * @param recursing If <code>true</code>, subpackages will be searched recursively.
+		 * @return <code>null</code>
+		 */
+		public Object visitPackage(RwiPackage rwiPackage, boolean recursing) {
 			// only interesting if part of the model
-			if (rwiPackage.getProperty(RwiProperty.MODEL_PART).equals("import")) return null;
-
-            // Search for the right class first
-            RwiNodeEnumeration rne = rwiPackage.nodes();
-            while (rne.hasMoreElements()) {
-                RwiNode someRwiNode = rne.nextRwiNode();
-	            // determine whether class is instrumented by checking author of constructor
-    	        SciClass sciClass = SciModelAccess.getModel().findClass(SciLanguage.JAVA, someRwiNode.getProperty(RwiProperty.FULL_NAME));
-	            if (sciClass != null) {
-                    SciOperationEnumeration opEnum = sciClass.operations();
-	            	while (opEnum.hasMoreElements()) {
-    	    	        SciOperation sciOp = opEnum.nextSciOperation();
-	                    SciTag author = sciOp.getTagList().getTag("author");
-						if (author != null && author.getValue().equals("ocl_injector")) {
+			if (rwiPackage
+				.getProperty(RwiProperty.MODEL_PART)
+				.equals("import"))
+				return null;
+			// Search for the right class first
+			RwiNodeEnumeration rne = rwiPackage.nodes();
+			while (rne.hasMoreElements()) {
+				RwiNode someRwiNode = rne.nextRwiNode();
+				// determine whether class is instrumented by checking author of constructor
+				SciClass sciClass =
+					SciModelAccess.getModel().findClass(
+						SciLanguage.JAVA,
+						someRwiNode.getProperty(RwiProperty.FULL_NAME));
+				if (sciClass != null) {
+					SciOperationEnumeration opEnum = sciClass.operations();
+					while (opEnum.hasMoreElements()) {
+						SciOperation sciOp = opEnum.nextSciOperation();
+						SciTag author = sciOp.getTagList().getTag("author");
+						if (author != null
+							&& author.getValue().equals("ocl_injector")) {
 							rwiElementArrayList.add(someRwiNode);
-       	    	    	    break; // one evidence is enough
-    	        	    }
-	        	    }
-                }
-            }
-            // if nothing found and recursing is desired, check for subpackages
-            if (recursing) {
-    	        RwiPackageEnumeration rpe = rwiPackage.subpackages();
-        	    while (rpe.hasMoreElements()) {
-            	    RwiPackage someRwiPackage = rpe.nextRwiPackage();
-					if (! someRwiPackage.getProperty(RwiProperty.MODEL_PART).equals("import")) {
-	                	visitPackage(someRwiPackage);
-                    }
-	            }
-	        }
-   	        return null;
-        }
-    }
+							break; // one evidence is enough
+						}
+					}
+				}
+			}
+			// if nothing found and recursing is desired, check for subpackages
+			if (recursing) {
+				RwiPackageEnumeration rpe = rwiPackage.subpackages();
+				while (rpe.hasMoreElements()) {
+					RwiPackage someRwiPackage = rpe.nextRwiPackage();
+					if (!someRwiPackage
+						.getProperty(RwiProperty.MODEL_PART)
+						.equals("import")) {
+						visitPackage(someRwiPackage);
+					}
+				}
+			}
+			return null;
+		}
+	}
 
-
-    /**
-     * Adds the Javadoc tag <code>@element-type</code> to a class' Javadoc section, if the element already has a <code>@associates</code> tag.
-     * 
-     * Necessary for the OCL Injector to create iterators which are necessary when evaluating collections. 
-     */
-    private void addElementTypesToNode(RwiNode rwiNode) {
+	/**
+	 * Adds the Javadoc tag <code>@element-type</code> to a class' Javadoc section, if the element already has a
+	 * <code>@associates</code> tag. Necessary for the OCL Injector to create iterators which are necessary when
+	 * evaluating collections.
+	 */
+	private void addElementTypesToNode(RwiNode rwiNode) {
 		RwiMemberEnumeration rme = rwiNode.members();
-        while (rme.hasMoreElements()) {
-            RwiElement rwiElement = rme.nextRwiElement();
-            if (rwiElement.getProperty(RwiProperty.SHAPE_TYPE).equals(RwiShapeType.ATTRIBUTE) &&
-                rwiElement.hasProperty(RwiProperty.ASSOCIATES)) {
-                // set @element-type
-                rwiElement.setProperty("element-type",rwiElement.getProperty(RwiProperty.ASSOCIATES));
-            }
-        }
-    }
+		while (rme.hasMoreElements()) {
+			RwiElement rwiElement = rme.nextRwiElement();
+			if (rwiElement
+				.getProperty(RwiProperty.SHAPE_TYPE)
+				.equals(RwiShapeType.ATTRIBUTE)
+				&& rwiElement.hasProperty(RwiProperty.ASSOCIATES)) {
+				// set @element-type
+				rwiElement.setProperty(
+					"element-type",
+					rwiElement.getProperty(RwiProperty.ASSOCIATES));
+			}
+		}
+	}
 
-    /**
-     * Reverses the actions from <code>addElementTypesToNode()</code> 
-     */
-    private void removeElementTypesFromNode(RwiNode rwiNode) {
-/*		RwiMemberEnumeration rme = rwiNode.members();
-        while (rme.hasMoreElements()) {
-            RwiElement rwiElement = rme.nextRwiElement();
-            if (rwiElement.getProperty(RwiProperty.SHAPE_TYPE).equals(RwiShapeType.ATTRIBUTE) &&
-                rwiElement.hasProperty(RwiProperty.ASSOCIATES)) {
-                // set @element-type false
-                rwiElement.setProperty("element-type",false);
-            }
-        }
-*/    }
-
+	/** Reverses the actions from <code>addElementTypesToNode()</code> */
+	private void removeElementTypesFromNode(RwiNode rwiNode) {
+		/*		RwiMemberEnumeration rme = rwiNode.members();
+		        while (rme.hasMoreElements()) {
+		            RwiElement rwiElement = rme.nextRwiElement();
+		            if (rwiElement.getProperty(RwiProperty.SHAPE_TYPE).equals(RwiShapeType.ATTRIBUTE) &&
+		                rwiElement.hasProperty(RwiProperty.ASSOCIATES)) {
+		                // set @element-type false
+		                rwiElement.setProperty("element-type",false);
+		            }
+		        }
+		*/
+	}
 
 }
