@@ -1,3 +1,3 @@
 java -cp .:xerces.jar \
-  -Dtudresden.ocl.injection.lib.TypeTracer.log=tudresden/ocl/injection/test/ocltypetrace.txt \
+  -Dtudresden.ocl.injection.lib.TypeTracer.log=tudresden/ocl/injection/test/Example.ocltypetrace \
   tudresden.ocl.injection.test.Example
