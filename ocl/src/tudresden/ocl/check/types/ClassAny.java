@@ -1,6 +1,9 @@
 package tudresden.ocl.check.types;
 
 import java.lang.reflect.*;
+
+import java.util.*;
+
 import tudresden.ocl.check.*;
 import tudresden.ocl.lib.NameAdapter;
 
@@ -124,7 +127,14 @@ public class ClassAny implements Any {
     // inherited from interfaces are automatically included into the 
     // implementing class. This does not happen for methods inherited
     // from the superclass, so we have to ascend to all superclasses.
-    classloop: for(Class iclass=c; iclass!=null; iclass=iclass.getSuperclass())
+    
+    // unfortunately the above is only true for classes, getSuperclass invoked
+    // on an interface returns null, regardless of the interfaces extended by the
+    // interface. Therefore, we need to check out getInterfaces() if iclass is
+    // an interface
+    HashSet hsVisited = new HashSet();
+    LinkedList llToVisit = new LinkedList();
+    classloop: for(Class iclass=c; iclass!=null; )   //iclass=iclass.getSuperclass())
     {
       Method[] methods=iclass.getDeclaredMethods();
       methodloop: for(int i=0; i<methods.length; i++)
@@ -142,6 +152,32 @@ public class ClassAny implements Any {
         else
           throw new OclTypeException("ambigious method "+name+" of "+c+") queried.");
         break classloop;
+      }
+      
+      // determine classes to be visited
+      if (iclass.isInterface()) {
+        Class[] ca = iclass.getInterfaces();
+        for (int i = 0; i < ca.length; i++) {
+          if (!hsVisited.contains (ca[i])) {
+            llToVisit.add (ca[i]);
+          }
+        }
+      }
+      else {
+        if (!hsVisited.contains (iclass.getSuperclass())) {
+          llToVisit.add (iclass.getSuperclass ());
+        }
+      }
+      
+      // mark current class visited
+      hsVisited.add (iclass);
+
+      // go to next class
+      if (!llToVisit.isEmpty()) {
+        iclass = (Class) llToVisit.remove (0);
+      }
+      else {
+        iclass = null;
       }
     }
 

@@ -176,7 +176,9 @@ public class OclAnyImpl extends OclAny {
   {
     // this is very similar to tudresden.ocl.check.types.ClassAny.navigateParameterized
     // if you find a bug here, it it probably there as well.
-    for(Class iclass=myclass; iclass!=null; iclass=iclass.getSuperclass())
+    HashSet hsVisited = new HashSet();
+    LinkedList llToVisit = new LinkedList();
+    for(Class iclass=myclass; iclass!=null; ) //iclass=iclass.getSuperclass()
     {
       Method[] methods=iclass.getDeclaredMethods();
       Method foundmethod=null;
@@ -197,6 +199,32 @@ public class OclAnyImpl extends OclAny {
       }
       if(foundmethod!=null)
         return foundmethod;
+      
+      // determine classes to be visited
+      if (iclass.isInterface()) {
+        Class[] ca = iclass.getInterfaces();
+        for (int i = 0; i < ca.length; i++) {
+          if (!hsVisited.contains (ca[i])) {
+            llToVisit.add (ca[i]);
+          }
+        }
+      }
+      else {
+        if (!hsVisited.contains (iclass.getSuperclass())) {
+          llToVisit.add (iclass.getSuperclass ());
+        }
+      }
+      
+      // mark current class visited
+      hsVisited.add (iclass);
+
+      // go to next class
+      if (!llToVisit.isEmpty()) {
+        iclass = (Class) llToVisit.remove (0);
+      }
+      else {
+        iclass = null;
+      }
     }
     return null;
   }
