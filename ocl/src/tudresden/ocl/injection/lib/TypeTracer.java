@@ -19,6 +19,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.injection.lib;
 
 import java.util.*;
+import java.io.PrintStream;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 
 /**
    Contains the log of object types found in a collection.
@@ -103,13 +106,15 @@ public final class TypeTracer
   */
   public static final char REMOVE_MINIMA='-';
   
+  /**
+     The # character.
+     Used for the file format written to {@link #log}.
+  */
+  public static final char COMMENT='#';
+     
+  
   private void traceTypes(Iterator iterator, String kind)
   {
-    if(log==null)
-    {
-      log=System.out;
-    }
-    
     boolean usedLog=false;
     
     outerloop: 
@@ -167,8 +172,14 @@ public final class TypeTracer
   /**
      The information gathered by all type tracers is 
      written to this stream.
-     If this attribute is not set by the user code,
-     it is set to {@link System#out}.
+  
+     Is set to the file referred by the property 
+     tudresden.ocl.injection.lib.TypeTracer.log if this 
+     property is defined, otherwise points to
+     {@link System#out}.
+  
+     May also be set by the user code.
+  
   
      A description of the file format follows:
      <ul>
@@ -179,6 +190,7 @@ public final class TypeTracer
        <dt>{@link #ADD_ALL}<dt>      <dd>a type was added to {@link #types_all}.</dd>
        <dt>{@link #ADD_MINIMA}<dt>   <dd>a type was added to {@link #types_minima}.</dd>
        <dt>{@link #REMOVE_MINIMA}<dt><dd>a type was removed from {@link #types_minima}.</dd>
+       <dt>{@link #COMMENT}<dt>      <dd>the line should be ignored.</dd>
        </dl>
      </li>
      <li>
@@ -199,6 +211,23 @@ public final class TypeTracer
      </li>
      </ul>
   */
-  private static java.io.PrintStream log=null;
+  private static PrintStream log=System.out;
+      
+  static
+  {
+    String logfile=
+      System.getProperty("tudresden.ocl.injection.lib.TypeTracer.log");
+    if(logfile!=null)
+    {
+      try
+      {
+        log=new PrintStream(new FileOutputStream(logfile));
+      }
+      catch(FileNotFoundException e)
+      {
+        System.out.println("could not open type tracer log: "+e);
+      }
+    }
+  }
   
 }

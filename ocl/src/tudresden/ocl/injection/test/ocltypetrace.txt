@@ -1,0 +1,4 @@
+*tudresden.ocl.injection.test.Example#namedIntegers	element-type	java.lang.Integer
++tudresden.ocl.injection.test.Example#namedIntegers	element-type	java.lang.Integer
+*tudresden.ocl.injection.test.Example#namedIntegers	key-type	java.lang.String
++tudresden.ocl.injection.test.Example#namedIntegers	key-type	java.lang.String
