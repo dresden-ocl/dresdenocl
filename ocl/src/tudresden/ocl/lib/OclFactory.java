@@ -64,6 +64,8 @@ public interface OclFactory {
    *  @see OclString
    */
   public OclRoot getOclRepresentationFor(Object o);
+	
+	public OclRoot getOclRepresentationForNull(Class c);
 
   /** In contrast to all other methods, this one is restricted to return
    *  <CODE>OclBoolean</CODE> objects.

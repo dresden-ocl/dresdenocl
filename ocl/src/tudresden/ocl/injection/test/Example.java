@@ -292,8 +292,20 @@ public abstract class Example implements Runnable
   {
     testTypeTrace.add(o);
   }
+	
+	/**
+		Tests null strings to be treated as empty strings.
+		@invariant nullString: nullString=''
+	*/
+	String nullString=null;
 
-  static public void main(String[] args)
+	/**
+		Tests null collections to be treated as empty collections.
+		@invariant nullCollection: nullCollection->size=0
+	*/
+	HashSet nullCollection=null;
+
+	static public void main(String[] args)
   {
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
     tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.ArgoNameAdapter());

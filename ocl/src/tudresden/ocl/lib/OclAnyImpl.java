@@ -131,10 +131,10 @@ public class OclAnyImpl extends OclAny {
           return new OclAnyImpl(0,message);
         }
       } else {
-        if(featurelistener!=null)
-          featurelistener.onField(f, applicationObject);
-        f.setAccessible(true);
-        Object feature=f.get(applicationObject);
+				if(featurelistener!=null)
+					featurelistener.onField(f, applicationObject);
+				f.setAccessible(true);
+				Object feature=f.get(applicationObject);
 
         if(qualifier!=null)
         {
@@ -152,17 +152,19 @@ public class OclAnyImpl extends OclAny {
             throw new OclException("object "+feature+" cannot be qualified by "+qualifier);
         }
            
-        if (feature==null) {
-          String typeName=f.getType().getName();
-          if (typeName.equals("java.lang.String")) {
-            return new OclString(null);
-          } else {
+        if(feature!=null) 
+          return Ocl.getOclRepresentationFor(feature);
+        else 
+        {
+          OclRoot oclrep=Ocl.getOclRepresentationForNull(f.getType());
+          if(oclrep!=null)
+    	      return oclrep;
+	        else 
+          {
             return new OclAnyImpl(0,
               "field "+attributeName+" of object \""+applicationObject+
               "\" ("+applicationObject.getClass()+") is null");
           }
-        } else {
-          return Ocl.getOclRepresentationFor(feature);
         }
       }
     } catch (IllegalAccessException iae) {

@@ -106,6 +106,34 @@ public class DefaultOclFactory implements OclFactory {
       return new OclAnyImpl(o);
   }
 
+	/**
+		Return an OCL representation of the null value of
+		the given type. These are usually empty values, such
+		as empty strings or collections.
+		Returns null, if a suitable null value is not known.
+	*/
+	public OclRoot getOclRepresentationForNull(Class c)
+	{
+		if(java.lang.String.class==c)
+		{
+			return new OclString(null);
+		}
+		else if(Collection.class.isAssignableFrom(c))
+		{
+			if(Set.class.isAssignableFrom(c) || (Ocl.TAKE_VECTORS_AS_SET && (Vector.class.isAssignableFrom(c))))
+			{
+				return new OclSet(new HashSet());
+			}
+			else if(List.class.isAssignableFrom(c))
+			{
+				return new OclSequence(new ArrayList());
+			}
+			throw new OclException("encountered a java.util.Collection, which is neither Set or List.");
+		}
+		else
+			return null;
+	}
+
 
   // factory methods for basic values:
 

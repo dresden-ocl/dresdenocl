@@ -165,6 +165,10 @@ public final class Ocl {
     return factory.getOclRepresentationFor(o);
   }
 
+	public static OclRoot getOclRepresentationForNull(Class c) {
+		return factory.getOclRepresentationForNull(c);
+	}
+	
   public static OclBoolean getFor(boolean b) {
     return getOclRepresentationFor(b);
   }
