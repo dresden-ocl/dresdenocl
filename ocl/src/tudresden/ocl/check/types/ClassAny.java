@@ -42,7 +42,15 @@ public class ClassAny implements Any {
         throw new OclTypeException(c.getName()+" has no field "+name);
       }
       Class type=f.getType();
-      return getTypeForClass(type);
+      Type modeltype=getTypeForClass(type);
+      if(modeltype instanceof tudresden.ocl.check.types.Collection &&
+         rf.extender!=null)
+      {
+        Class elementtype=rf.extender.getElementType(f);
+        if(elementtype!=null)
+          modeltype=getTypeForClass(elementtype);
+      }
+      return modeltype;
     }
 
     /** this method has to solve the additional problem that the mapping from

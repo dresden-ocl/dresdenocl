@@ -35,7 +35,7 @@ package tudresden.ocl.check.types;
 import tudresden.ocl.check.*;
 import java.util.HashMap;
 import java.lang.reflect.*;
-import tudresden.ocl.lib.*;
+import tudresden.ocl.lib.NameAdapter;
 
 /** <code>ReflectionFacade</code> implements <code>ModelFacade</code>
  *  by extracting the required
@@ -92,6 +92,8 @@ public class ReflectionFacade implements ModelFacade {
    *  ReflectionFacades
    */
   protected HashMap classAnyInstances=new HashMap();
+  
+  protected ReflectionExtender extender;
 
   /** @param packageNames the names of the Java packages that contain the
    *              classes that will be queried for model information, without
@@ -105,13 +107,19 @@ public class ReflectionFacade implements ModelFacade {
    *  @param nameAdapter maps OCL names to Java names and vice versa; see explanation
    *              in NameAdapter documentation
    */
-  public ReflectionFacade(String[] packageNames, ReflectionAdapter reflAdapter, NameAdapter nameAdapter) {
+  public ReflectionFacade(String[] packageNames, ReflectionAdapter reflAdapter, NameAdapter nameAdapter, ReflectionExtender extender) {
     for (int i=0; i<packageNames.length; i++) {
       if (packageNames[i].equals("")) packageNames[i]=null;
     }
     this.packageNames=packageNames;
     this.reflAdapter=reflAdapter;
     this.nameAdapter=nameAdapter;
+    this.extender=extender;
+  }
+
+  public ReflectionFacade(String[] packageNames, ReflectionAdapter reflAdapter, NameAdapter nameAdapter) 
+  {
+    this(packageNames, reflAdapter, nameAdapter, null);
   }
 
   public Any getClassifier(String name) {
@@ -153,7 +161,5 @@ public class ReflectionFacade implements ModelFacade {
     }
     return ret;
   }
-
-
 
 }
