@@ -346,6 +346,7 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/injection/ocl/*.java" />
         <include name="tudresden/ocl/codegen/decl/*.java" />
         <include name="tudresden/ocl/sql/*.java" />
+        <include name="tudresden/ocl/sql/orstrategy/*.java" />
       </fileset>
     </copy>
 
@@ -357,6 +358,7 @@ Enhancements by Steffen Zschaler.
            optimize="on" >
       <classpath>
         <pathelement location="${xerces.jar}" />
+        <pathelement location="${nsuml.jar}" />
       </classpath>
     </javac>
 
@@ -440,6 +442,7 @@ Enhancements by Steffen Zschaler.
         <include name="tudresden/ocl/gui/*.java" />
         <include name="tudresden/ocl/gui/events/*.java" />
         <include name="tudresden/ocl/sql/*.java" />
+        <include name="tudresden/ocl/sql/orstrategy/*.java" />
         <include name="tudresden/ocl/injection/*.java" />
         <include name="tudresden/ocl/injection/ocl/*.java" />
         <include name="tudresden/ocl/injection/lib/*.java" />
@@ -455,6 +458,7 @@ Enhancements by Steffen Zschaler.
            optimize="on" >
       <classpath>
         <pathelement location="${xerces.jar}" />
+        <pathelement location="${nsuml.jar}" />
       </classpath>
     </javac>
 
