@@ -680,7 +680,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
         <pathelement location="${example.dir}" />
       </classpath>
       <arg value="--constraint-file" />
-      <arg value="tudresden/ocl/injection/test/Example.ocl" />
+      <arg value="${src.dir}/tudresden/ocl/injection/test/Example.ocl" />
       <arg value="--reflection-model" />
       <arg value="tudresden.ocl.injection.test" />
       <arg value="--name-adapter" />
@@ -779,7 +779,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
         <pathelement location="${royloy.dir}" />
       </classpath>
       <arg value="--constraint-file" />
-      <arg value="tudresden/ocl/test/royloy/oclexpressions" />
+      <arg value="${src.dir}/tudresden/ocl/test/royloy/oclexpressions" />
       <arg value="--reflection-model" />
       <arg value="tudresden.ocl.test.royloy" />
       <arg value="--violation-macro" />
