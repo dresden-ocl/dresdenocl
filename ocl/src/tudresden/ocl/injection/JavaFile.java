@@ -87,7 +87,12 @@ public final class JavaFile
      Maps type names to types.
      This mapping depends on the import statements encountered
      in this java file.
-     Implements Java Language Specification 7.5.3.
+  
+     Should implement 
+     Java Language Specification 6.5.4 &quot;Meaning of Type Names&quot;
+     and 
+     Java Language Specification 7.5 &quot;Import Declarations&quot;
+     but does not yet. TODO.
   
      Note, that the result depends also on the classes that are
      available (in the CLASSPATH) when running this method.
@@ -124,7 +129,7 @@ public final class JavaFile
 
     try
     {
-      // see Java Language Specification 7.5.3.
+      // see Java Language Specification 7.5.3. "Automatic Imports"
       return Class.forName("java.lang."+typename);
     }
     catch(ClassNotFoundException e) {};
