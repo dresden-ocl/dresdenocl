@@ -219,6 +219,10 @@ Enhancements by Steffen Zschaler.
         <include name="together.manifest" />
       </fileset>
     </copy>
+    <copy file="${src.dir}/together.readme" 
+          tofile="${build.dir}/ocl-together/README"
+    />
+    
         
     <javac srcdir= "${build.dir}/ocl-together"
            destdir="${build.dir}/ocl-together"
@@ -240,6 +244,7 @@ Enhancements by Steffen Zschaler.
       <include name="**/*.dtd" />
       <include name="tudresden/ocl/check/bootstrap/constraints.txt" />
       <include name="COPYING" />
+      <include name="README" />
     </jar>
   </target>
 
@@ -758,6 +763,7 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
       <classpath><pathelement location="${build.dir}/dresden-ocl-lib.jar" /></classpath>
     </javac>
     <echo taskname="inject" message="Injecting ${example.dir}/tudresden/ocl/injection/test/Example.java" />
+
     <java classname="tudresden.ocl.injection.ocl.Main" failonerror="yes">
       <classpath>
         <pathelement location="${build.dir}/dresden-ocl-injector.jar" />
