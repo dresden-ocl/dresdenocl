@@ -156,12 +156,17 @@
 
                       <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTextArea" name="m_jtaConstraintEditor">
+                        <Component class="javax.swing.JTextPane" name="m_jtpConstraintEditor">
                           <Properties>
-                            <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Contains the text of the currently selected constraint and allows you to edit it. Use the &quot;Submit&quot; button to save your changes."/>
                           </Properties>
+
+                          <Events>
+                            <EventHandler event="caretUpdate" handler="onCaretUpdate"/>
+                          </Events>
                           <Constraints>
-                            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout$JScrollPaneConstraintsDescription"/>
+                            <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                              <BorderConstraints direction="West"/>
+                            </Constraint>
                           </Constraints>
                         </Component>
                       </SubComponents>

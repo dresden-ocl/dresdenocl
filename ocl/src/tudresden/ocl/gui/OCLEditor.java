@@ -40,6 +40,8 @@ import tudresden.ocl.check.*;
 import tudresden.ocl.check.types.ModelFacade;
 
 import javax.swing.*;
+import javax.swing.text.*;
+import javax.swing.event.*;
 
 import java.util.*;
 
@@ -53,6 +55,24 @@ import java.util.*;
 public class OCLEditor extends javax.swing.JPanel
                         implements javax.swing.event.ListSelectionListener,
                                     ConstraintChangeListener {
+  /**
+    * Attributes used to denote fields that need to be replaced.
+    */
+  private static SimpleAttributeSet s_sasField
+      = new SimpleAttributeSet();
+  /**
+    * Attributes used to denote normal OCL constraint text.
+    */
+  private static SimpleAttributeSet s_sasNormalText
+      = new SimpleAttributeSet();
+  static {
+    s_sasField.addAttribute (
+        StyleConstants.CharacterConstants.Underline,
+        Boolean.TRUE);
+    s_sasField.addAttribute (
+        "isField",
+        Boolean.TRUE);    
+  }
 
   /**
     * Table model for the table of constraints.
@@ -419,6 +439,12 @@ public class OCLEditor extends javax.swing.JPanel
     return lResult;
   }
 
+  /**
+   * Add the given text to the edit pane, if a constraint is currently being
+   * edited. The text will replace the current selection. If saBefore/saAfter
+   * are not <code>null</code> and contain elements, these will be added as
+   * items to be replaced. The first such item will be selected.
+   */
   void addConstraintText (String[] saBefore,
                              String sText,
                              String[] saAfter) {
@@ -426,37 +452,53 @@ public class OCLEditor extends javax.swing.JPanel
       int nSelStart = -1;
       int nSelEnd = -1;
       
+      this.m_fHandleCaretUpdates = false;
+      
+      m_jtpConstraintEditor.replaceSelection ("");
+      
       if (saBefore != null) {
+        m_jtpConstraintEditor.setCharacterAttributes (s_sasField, true);
         for (int i = 0; i < saBefore.length; i++) {
           if (i == 0) {
-            nSelStart = m_jtaConstraintEditor.getSelectionStart();
-            nSelEnd = nSelStart + saBefore[i].length() + 2;
+            nSelStart = m_jtpConstraintEditor.getSelectionStart();
+            nSelEnd = nSelStart + saBefore[i].length();
           }
           
-          m_jtaConstraintEditor.replaceSelection ("<" + saBefore[i] + ">");
+          m_jtpConstraintEditor.replaceSelection (saBefore[i]);
         }
+        m_jtpConstraintEditor.setCharacterAttributes (s_sasNormalText, true);
       }
       
-      m_jtaConstraintEditor.replaceSelection (sText);
+      m_jtpConstraintEditor.replaceSelection (sText);
       
       if (saAfter != null) {
+        m_jtpConstraintEditor.setCharacterAttributes (s_sasField, true);
         for (int i = 0; i < saAfter.length; i++) {
           if ((i == 0) &&
                (nSelStart == -1)) {
-            nSelStart = m_jtaConstraintEditor.getSelectionStart();
-            nSelEnd = nSelStart + saAfter[i].length() + 2;
+            nSelStart = m_jtpConstraintEditor.getSelectionStart();
+            nSelEnd = nSelStart + saAfter[i].length();
           }
           
-          m_jtaConstraintEditor.replaceSelection ("<" + saAfter[i] + ">");
+          m_jtpConstraintEditor.replaceSelection (saAfter[i]);
         }
+        m_jtpConstraintEditor.setCharacterAttributes (s_sasNormalText, true);
       }
       
       if (nSelStart != -1) {
-        m_jtaConstraintEditor.setSelectionStart (nSelStart);
-        m_jtaConstraintEditor.setSelectionEnd (nSelEnd);        
+        m_jtpConstraintEditor.paintImmediately (
+            0, 0,
+            m_jtpConstraintEditor.getWidth(),
+            m_jtpConstraintEditor.getHeight());
+        m_jtpConstraintEditor.setSelectionStart (nSelStart);
+        m_jtpConstraintEditor.setSelectionEnd (nSelEnd);
       }
+      this.m_fHandleCaretUpdates = true;
       
-      m_jtaConstraintEditor.requestFocus();
+/*      java.awt.Frame fTop = (java.awt.Frame) getTopLevelAncestor();
+      fTop.toFront();
+      fTop.requestFocus();
+      m_jtpConstraintEditor.requestFocus();*/
     }
   }
   
@@ -477,7 +519,7 @@ public class OCLEditor extends javax.swing.JPanel
     m_jpConstraintEditorPane = new javax.swing.JPanel ();
     jPanel5 = new javax.swing.JPanel ();
     m_jspConstraintEditorScroller = new javax.swing.JScrollPane ();
-    m_jtaConstraintEditor = new javax.swing.JTextArea ();
+    m_jtpConstraintEditor = new javax.swing.JTextPane ();
     m_jpEditorButtonsGroup = new javax.swing.JPanel ();
     m_jbShowQuickBarButton = new javax.swing.JButton ();
     m_jbSubmitConstraintButton = new javax.swing.JButton ();
@@ -553,9 +595,14 @@ public class OCLEditor extends javax.swing.JPanel
           jPanel5.setBorder (new javax.swing.border.TitledBorder("Edit selected constraint"));
       
         
-              m_jtaConstraintEditor.setToolTipText ("Contains the text of the currently selected constraint and allows you to edit it. Use the \"Submit\" button to save your changes.");
+              m_jtpConstraintEditor.addCaretListener (new javax.swing.event.CaretListener () {
+                public void caretUpdate (javax.swing.event.CaretEvent evt) {
+                  onCaretUpdate (evt);
+                }
+              }
+              );
           
-              m_jspConstraintEditorScroller.setViewportView (m_jtaConstraintEditor);
+              m_jspConstraintEditorScroller.setViewportView (m_jtpConstraintEditor);
           
             gridBagConstraints3 = new java.awt.GridBagConstraints ();
             gridBagConstraints3.gridwidth = 0;
@@ -646,6 +693,114 @@ public class OCLEditor extends javax.swing.JPanel
 
   }//GEN-END:initComponents
 
+  private boolean m_fHandleCaretUpdates = true;
+  
+  private int m_nOldDot = 0;
+  private int m_nOldMark = 0;
+  
+  private void onCaretUpdate (javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_onCaretUpdate
+    if (! m_fHandleCaretUpdates) {
+      return;
+    }
+    
+    final CaretEvent e = evt;
+    SwingUtilities.invokeLater(new Runnable () {
+      public void run() {
+        // Get affected element
+        Element eAffected = m_jtpConstraintEditor.
+            getDocument().getDefaultRootElement();
+        while (! eAffected.isLeaf()) {
+          eAffected = eAffected.getElement (
+              eAffected.getElementIndex (e.getDot()));
+        }
+
+        if (eAffected.getAttributes().getAttribute("isField") == Boolean.TRUE) {
+          // enhance selection to end of field
+          int nFieldStart = eAffected.getStartOffset();
+          int nFieldEnd = eAffected.getEndOffset();
+
+          int nMark = e.getMark();
+          int nDot = e.getDot();
+          
+          int nSelStart = 0;
+          int nSelEnd = 0;
+          
+          if (nMark == nDot) {
+            // Cursor set
+            if (m_nOldDot > nDot) {
+              // coming in from the right
+              nSelStart = nFieldEnd;
+              nSelEnd = nFieldStart;
+            }
+            else {
+              // coming in from the left
+              nSelStart = nFieldStart;
+              nSelEnd = nFieldEnd;
+            }
+          }
+          else if (nMark < nDot) {
+            // Selection spanning toward the right
+            if (m_nOldDot > nDot) {
+              // making selection smaller...
+              nSelStart = Math.min (nMark, nFieldStart);
+              nSelEnd = Math.min (nDot, nFieldStart);
+            }
+            else {
+              if (nMark > nFieldStart) {
+                nSelStart = nFieldStart;
+              }
+              else {
+                nSelStart = nMark;
+              }
+
+              if (nDot <= nFieldEnd) {
+                nSelEnd = nFieldEnd;
+              }
+              else {
+                nSelEnd = nDot;
+              }
+            }
+          }
+          else {
+            if (m_nOldDot < nDot) {
+              // making selection smaller...
+              nSelStart = Math.max (nMark, nFieldEnd);
+              nSelEnd = Math.max (nDot, nFieldEnd);
+            }
+            else {
+              if (nMark < nFieldEnd) {
+                nSelStart = nFieldEnd;
+              }
+              else {
+                nSelStart = nMark;
+              }
+
+              if (nDot >= nFieldStart) {
+                nSelEnd = nFieldStart;
+              }
+              else {
+                nSelEnd = nDot;
+              }
+            }
+          }
+          
+          Caret c = m_jtpConstraintEditor.getCaret();
+          m_fHandleCaretUpdates = false;
+          c.setDot (nSelStart);
+          c.moveDot (nSelEnd);
+          m_fHandleCaretUpdates = true;
+          
+          m_nOldMark = nSelEnd;
+          m_nOldDot = nSelEnd;
+        }
+        else {
+          m_nOldDot = e.getDot();
+          m_nOldMark = e.getMark();
+        }
+      }
+    });
+  }//GEN-LAST:event_onCaretUpdate
+
   private void onQuickBarButton (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onQuickBarButton
     if (m_ocltQuickBar == null) {
       m_ocltQuickBar = new OCLToolbar (this);
@@ -673,7 +828,7 @@ public class OCLEditor extends javax.swing.JPanel
       if (nIdx != -1) {
         try {
           m_oclemModel.getConstraintAt (nIdx)
-              .setData (m_jtaConstraintEditor.getText());
+              .setData (m_jtpConstraintEditor.getText());
         }
         catch (OclParserException ope) {
           JOptionPane.showMessageDialog (null,
@@ -735,7 +890,7 @@ public class OCLEditor extends javax.swing.JPanel
   private javax.swing.JPanel m_jpConstraintEditorPane;
   private javax.swing.JPanel jPanel5;
   private javax.swing.JScrollPane m_jspConstraintEditorScroller;
-  private javax.swing.JTextArea m_jtaConstraintEditor;
+  private javax.swing.JTextPane m_jtpConstraintEditor;
   private javax.swing.JPanel m_jpEditorButtonsGroup;
   private javax.swing.JButton m_jbShowQuickBarButton;
   private javax.swing.JButton m_jbSubmitConstraintButton;
@@ -765,12 +920,14 @@ public class OCLEditor extends javax.swing.JPanel
       m_crCurrent = null;
     }
     
+    m_jtpConstraintEditor.setCharacterAttributes (s_sasNormalText, true);
     if (m_crCurrent != null) {
-      m_jtaConstraintEditor.setText (m_crCurrent.getData());
-      m_jtaConstraintEditor.requestFocus();
+      // TODO: Deal with fields.
+      m_jtpConstraintEditor.setText (m_crCurrent.getData());
+      m_jtpConstraintEditor.requestFocus();
     }
     else {
-      m_jtaConstraintEditor.setText ("");
+      m_jtpConstraintEditor.setText ("");
     }
   }
  
@@ -802,8 +959,9 @@ public class OCLEditor extends javax.swing.JPanel
     * Update the editor if the currently selected constraint changed.
     */
   public void constraintDataChanged(ConstraintChangeEvent cce) {
+    // TODO: Deal with fields.
     if (cce.getIndex() == m_jtConstraintList.getSelectedRow()) {
-      m_jtaConstraintEditor.setText (cce.getNew().getData());
+      m_jtpConstraintEditor.setText (cce.getNew().getData());
     }
   }
   

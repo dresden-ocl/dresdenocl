@@ -112,6 +112,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="result"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onResult"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -151,6 +155,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="="/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -162,6 +170,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&lt;&gt;"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -173,6 +185,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&lt;"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -183,6 +199,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&gt;"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -193,6 +213,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&lt;="/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -203,10 +227,29 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="&gt;="/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
                 </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JButton" name="m_jbParens">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="( )"/>
+              </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onParens"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignFlowLayout$FlowConstraintsDescription"/>
               </Constraints>
             </Component>
             <Container class="javax.swing.JPanel" name="pad3">
@@ -242,6 +285,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="+"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleNumericOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -252,6 +299,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="-"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleNumericOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -262,6 +313,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="*"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleNumericOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -272,6 +327,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="/"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleNumericOperator"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -291,6 +350,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="mod"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onNumberMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -301,6 +364,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="div"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onNumberMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -311,6 +378,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="abs"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onNumberMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -321,6 +392,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="max"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onNumberMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -331,6 +406,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="min"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onNumberMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -341,6 +420,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="round"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onNumberMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -351,6 +434,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="floor"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onNumberMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -390,6 +477,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="concat"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onStringMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -400,6 +491,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="size"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onStringMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -410,6 +505,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="toLower"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onStringMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -420,6 +519,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="toUpper"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onStringMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -430,6 +533,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="substring"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onStringMethod"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -469,6 +576,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="or"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleBooleanOperation"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -479,6 +590,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="and"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleBooleanOperation"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -489,6 +604,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="xor"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleBooleanOperation"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -499,6 +618,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="not"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleBooleanOperation"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -509,6 +632,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="implies"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onSimpleBooleanOperation"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -519,6 +646,10 @@
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="if then else"/>
               </Properties>
+
+              <Events>
+                <EventHandler event="actionPerformed" handler="onIfThenElse"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -576,7 +707,12 @@
                     <Component class="javax.swing.JButton" name="m_jbConstrColl">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Collection{}"/>
+                        <Property name="actionCommand" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Collection"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onConstructCollection"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="2" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -587,7 +723,12 @@
                     <Component class="javax.swing.JButton" name="m_jbConstrSet">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Set{}"/>
+                        <Property name="actionCommand" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Set"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onConstructCollection"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -598,7 +739,12 @@
                     <Component class="javax.swing.JButton" name="m_jbConstrBag">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Bag{}"/>
+                        <Property name="actionCommand" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Bag"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onConstructCollection"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -609,7 +755,12 @@
                     <Component class="javax.swing.JButton" name="m_jbConstrSeq">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Sequence{}"/>
+                        <Property name="actionCommand" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Sequence"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onConstructCollection"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="2" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -631,6 +782,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="size"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionAttr"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -641,6 +796,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="count"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionObjectArgMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -651,6 +810,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="isEmpty"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionAttr"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -661,6 +824,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="notEmpty"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionAttr"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -671,6 +838,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="includes"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionObjectArgMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -681,6 +852,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="includesAll"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionCollectionArgMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -700,6 +875,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="iterate"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionIterationMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -710,6 +889,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="exists"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionIterationMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -720,6 +903,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="forAll"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionIterationMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -730,6 +917,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="collect"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionIterationMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -740,6 +931,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="select"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionIterationMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -750,6 +945,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="reject"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionIterationMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -769,6 +968,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="union"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionCollectionArgMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -779,6 +982,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="intersection"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionCollectionArgMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="2" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -789,6 +996,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="including"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionObjectArgMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -799,6 +1010,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="excluding"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionObjectArgMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -809,6 +1024,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="sum"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onCollectionNoArgMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="1" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="0" insetsLeft="5" insetsRight="0" insetsTop="0" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -848,6 +1067,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="-"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onSetMinus"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -859,6 +1082,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="symmetricDifference"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onSetSymDiff"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="18" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="5" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -901,6 +1128,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="first"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onSequenceAttr"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -911,6 +1142,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="last"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onSequenceAttr"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -921,6 +1156,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="at"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onSequenceAt"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -931,6 +1170,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="append"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onSequenceObjectArgMethod"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="0" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
@@ -941,6 +1184,24 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="prepend"/>
                       </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onSequenceObjectArgMethod"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="m_jbSubSequence">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="subSequence"/>
+                      </Properties>
+
+                      <Events>
+                        <EventHandler event="actionPerformed" handler="onSequenceSubSequence"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                           <GridBagConstraints anchor="10" fill="0" gridHeight="1" gridWidth="1" gridX="-1" gridY="-1" insetsBottom="10" insetsLeft="5" insetsRight="5" insetsTop="5" ipadX="0" ipadY="0" weightX="0.0" weightY="0.0"/>

@@ -45,6 +45,13 @@ public class OCLToolbar extends javax.swing.JFrame {
     initComponents ();    
   }
 
+  /**
+   * Add the given text to the editor's edit pane, if a constraint is currently
+   * being edited. The text will replace the current selection. If
+   * saBefore/saAfter are not <code>null</code> and contain elements, these
+   * will be added as items to be replaced. The first such item will be
+   * selected.
+   */
   protected void addText (String[] saBefore,
                              String sText,
                              String[] saAfter) {
@@ -78,6 +85,7 @@ public class OCLToolbar extends javax.swing.JFrame {
     m_jbGreater = new javax.swing.JButton ();
     m_jbLessE = new javax.swing.JButton ();
     m_jbGreaterE = new javax.swing.JButton ();
+    m_jbParens = new javax.swing.JButton ();
     pad3 = new javax.swing.JPanel ();
     pad4 = new javax.swing.JPanel ();
     m_jpNumbers = new javax.swing.JPanel ();
@@ -152,6 +160,7 @@ public class OCLToolbar extends javax.swing.JFrame {
     m_jbSeqAt = new javax.swing.JButton ();
     m_jbSeqAppend = new javax.swing.JButton ();
     m_jbSeqPrepend = new javax.swing.JButton ();
+    m_jbSubSequence = new javax.swing.JButton ();
     jPanel29 = new javax.swing.JPanel ();
     jPanel30 = new javax.swing.JPanel ();
     getContentPane ().setLayout (new java.awt.GridBagLayout ());
@@ -223,6 +232,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpGeneral.add (m_jbAtPre, gridBagConstraints2);
     
         m_jbResult.setText ("result");
+        m_jbResult.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onResult (evt);
+          }
+        }
+        );
     
         gridBagConstraints2 = new java.awt.GridBagConstraints ();
         gridBagConstraints2.insets = new java.awt.Insets (5, 5, 10, 5);
@@ -250,6 +265,12 @@ public class OCLToolbar extends javax.swing.JFrame {
       java.awt.GridBagConstraints gridBagConstraints3;
   
         m_jbEquals.setText ("=");
+        m_jbEquals.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints3 = new java.awt.GridBagConstraints ();
         gridBagConstraints3.insets = new java.awt.Insets (5, 5, 10, 0);
@@ -257,6 +278,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBasics.add (m_jbEquals, gridBagConstraints3);
     
         m_jbNEquals.setText ("<>");
+        m_jbNEquals.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints3 = new java.awt.GridBagConstraints ();
         gridBagConstraints3.insets = new java.awt.Insets (5, 5, 10, 0);
@@ -264,6 +291,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBasics.add (m_jbNEquals, gridBagConstraints3);
     
         m_jbLess.setText ("<");
+        m_jbLess.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints3 = new java.awt.GridBagConstraints ();
         gridBagConstraints3.insets = new java.awt.Insets (5, 5, 10, 0);
@@ -271,6 +304,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBasics.add (m_jbLess, gridBagConstraints3);
     
         m_jbGreater.setText (">");
+        m_jbGreater.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints3 = new java.awt.GridBagConstraints ();
         gridBagConstraints3.insets = new java.awt.Insets (5, 5, 10, 0);
@@ -278,6 +317,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBasics.add (m_jbGreater, gridBagConstraints3);
     
         m_jbLessE.setText ("<=");
+        m_jbLessE.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints3 = new java.awt.GridBagConstraints ();
         gridBagConstraints3.insets = new java.awt.Insets (5, 5, 10, 0);
@@ -285,11 +330,30 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBasics.add (m_jbLessE, gridBagConstraints3);
     
         m_jbGreaterE.setText (">=");
+        m_jbGreaterE.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints3 = new java.awt.GridBagConstraints ();
         gridBagConstraints3.insets = new java.awt.Insets (5, 5, 10, 5);
         gridBagConstraints3.anchor = java.awt.GridBagConstraints.NORTHWEST;
         m_jpBasics.add (m_jbGreaterE, gridBagConstraints3);
+    
+        m_jbParens.setText ("( )");
+        m_jbParens.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onParens (evt);
+          }
+        }
+        );
+    
+        gridBagConstraints3 = new java.awt.GridBagConstraints ();
+        gridBagConstraints3.insets = new java.awt.Insets (5, 5, 10, 5);
+        gridBagConstraints3.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        m_jpBasics.add (m_jbParens, gridBagConstraints3);
     
     
         gridBagConstraints3 = new java.awt.GridBagConstraints ();
@@ -313,6 +377,12 @@ public class OCLToolbar extends javax.swing.JFrame {
       java.awt.GridBagConstraints gridBagConstraints4;
   
         m_jbPlus.setText ("+");
+        m_jbPlus.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleNumericOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -321,6 +391,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (m_jbPlus, gridBagConstraints4);
     
         m_jbMinus.setText ("-");
+        m_jbMinus.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleNumericOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -329,6 +405,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (m_jbMinus, gridBagConstraints4);
     
         m_jbMultiply.setText ("*");
+        m_jbMultiply.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleNumericOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -337,6 +419,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (m_jbMultiply, gridBagConstraints4);
     
         m_jbDivide.setText ("/");
+        m_jbDivide.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleNumericOperator (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -353,6 +441,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (pad5, gridBagConstraints4);
     
         m_jbModulus.setText ("mod");
+        m_jbModulus.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onNumberMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -361,6 +455,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (m_jbModulus, gridBagConstraints4);
     
         m_jbIntDiv.setText ("div");
+        m_jbIntDiv.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onNumberMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -369,6 +469,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (m_jbIntDiv, gridBagConstraints4);
     
         m_jbAbs.setText ("abs");
+        m_jbAbs.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onNumberMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -377,6 +483,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (m_jbAbs, gridBagConstraints4);
     
         m_jbMax.setText ("max");
+        m_jbMax.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onNumberMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -385,6 +497,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (m_jbMax, gridBagConstraints4);
     
         m_jbMin.setText ("min");
+        m_jbMin.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onNumberMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -393,6 +511,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (m_jbMin, gridBagConstraints4);
     
         m_jbRound.setText ("round");
+        m_jbRound.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onNumberMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -401,6 +525,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpNumbers.add (m_jbRound, gridBagConstraints4);
     
         m_jbFloor.setText ("floor");
+        m_jbFloor.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onNumberMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints4 = new java.awt.GridBagConstraints ();
         gridBagConstraints4.fill = java.awt.GridBagConstraints.BOTH;
@@ -433,30 +563,60 @@ public class OCLToolbar extends javax.swing.JFrame {
       java.awt.GridBagConstraints gridBagConstraints5;
   
         m_jbConcat.setText ("concat");
+        m_jbConcat.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onStringMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints5 = new java.awt.GridBagConstraints ();
         gridBagConstraints5.insets = new java.awt.Insets (5, 5, 5, 0);
         m_jpStrings.add (m_jbConcat, gridBagConstraints5);
     
         m_jbStrSize.setText ("size");
+        m_jbStrSize.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onStringMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints5 = new java.awt.GridBagConstraints ();
         gridBagConstraints5.insets = new java.awt.Insets (5, 5, 5, 0);
         m_jpStrings.add (m_jbStrSize, gridBagConstraints5);
     
         m_jbToLower.setText ("toLower");
+        m_jbToLower.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onStringMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints5 = new java.awt.GridBagConstraints ();
         gridBagConstraints5.insets = new java.awt.Insets (5, 5, 5, 0);
         m_jpStrings.add (m_jbToLower, gridBagConstraints5);
     
         m_jbToUpper.setText ("toUpper");
+        m_jbToUpper.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onStringMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints5 = new java.awt.GridBagConstraints ();
         gridBagConstraints5.insets = new java.awt.Insets (5, 5, 5, 0);
         m_jpStrings.add (m_jbToUpper, gridBagConstraints5);
     
         m_jbSubstring.setText ("substring");
+        m_jbSubstring.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onStringMethod (evt);
+          }
+        }
+        );
     
         gridBagConstraints5 = new java.awt.GridBagConstraints ();
         gridBagConstraints5.insets = new java.awt.Insets (5, 5, 5, 5);
@@ -485,6 +645,12 @@ public class OCLToolbar extends javax.swing.JFrame {
       java.awt.GridBagConstraints gridBagConstraints6;
   
         m_jbOr.setText ("or");
+        m_jbOr.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleBooleanOperation (evt);
+          }
+        }
+        );
     
         gridBagConstraints6 = new java.awt.GridBagConstraints ();
         gridBagConstraints6.fill = java.awt.GridBagConstraints.BOTH;
@@ -493,6 +659,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBooleans.add (m_jbOr, gridBagConstraints6);
     
         m_jbAnd.setText ("and");
+        m_jbAnd.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleBooleanOperation (evt);
+          }
+        }
+        );
     
         gridBagConstraints6 = new java.awt.GridBagConstraints ();
         gridBagConstraints6.fill = java.awt.GridBagConstraints.BOTH;
@@ -501,6 +673,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBooleans.add (m_jbAnd, gridBagConstraints6);
     
         m_jbXor.setText ("xor");
+        m_jbXor.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleBooleanOperation (evt);
+          }
+        }
+        );
     
         gridBagConstraints6 = new java.awt.GridBagConstraints ();
         gridBagConstraints6.fill = java.awt.GridBagConstraints.BOTH;
@@ -509,6 +687,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBooleans.add (m_jbXor, gridBagConstraints6);
     
         m_jbNot.setText ("not");
+        m_jbNot.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleBooleanOperation (evt);
+          }
+        }
+        );
     
         gridBagConstraints6 = new java.awt.GridBagConstraints ();
         gridBagConstraints6.fill = java.awt.GridBagConstraints.BOTH;
@@ -517,6 +701,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBooleans.add (m_jbNot, gridBagConstraints6);
     
         m_jbImplies.setText ("implies");
+        m_jbImplies.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onSimpleBooleanOperation (evt);
+          }
+        }
+        );
     
         gridBagConstraints6 = new java.awt.GridBagConstraints ();
         gridBagConstraints6.fill = java.awt.GridBagConstraints.BOTH;
@@ -525,6 +715,12 @@ public class OCLToolbar extends javax.swing.JFrame {
         m_jpBooleans.add (m_jbImplies, gridBagConstraints6);
     
         m_jbIfThenElse.setText ("if then else");
+        m_jbIfThenElse.addActionListener (new java.awt.event.ActionListener () {
+          public void actionPerformed (java.awt.event.ActionEvent evt) {
+            onIfThenElse (evt);
+          }
+        }
+        );
     
         gridBagConstraints6 = new java.awt.GridBagConstraints ();
         gridBagConstraints6.fill = java.awt.GridBagConstraints.BOTH;
@@ -555,241 +751,336 @@ public class OCLToolbar extends javax.swing.JFrame {
   
     
           m_jpCollectionsGeneral.setLayout (new java.awt.GridBagLayout ());
-          java.awt.GridBagConstraints gridBagConstraints10;
-      
-            m_jbConstrColl.setText ("Collection{}");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.gridwidth = 2;
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbConstrColl, gridBagConstraints10);
-        
-            m_jbConstrSet.setText ("Set{}");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbConstrSet, gridBagConstraints10);
-        
-            m_jbConstrBag.setText ("Bag{}");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbConstrBag, gridBagConstraints10);
-        
-            m_jbConstrSeq.setText ("Sequence{}");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.gridwidth = 2;
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbConstrSeq, gridBagConstraints10);
-        
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.gridwidth = 0;
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints10.weightx = 1.0;
-            m_jpCollectionsGeneral.add (pad12, gridBagConstraints10);
-        
-            m_jbCollSize.setText ("size");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbCollSize, gridBagConstraints10);
-        
-            m_jbColCount.setText ("count");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbColCount, gridBagConstraints10);
-        
-            m_jbIsEmpty.setText ("isEmpty");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbIsEmpty, gridBagConstraints10);
-        
-            m_jbNotEmpty.setText ("notEmpty");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbNotEmpty, gridBagConstraints10);
-        
-            m_jbIncludes.setText ("includes");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbIncludes, gridBagConstraints10);
-        
-            m_jbIncludesAll.setText ("includesAll");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbIncludesAll, gridBagConstraints10);
-        
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.gridwidth = 0;
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (pad13, gridBagConstraints10);
-        
-            m_jbIterate.setText ("iterate");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbIterate, gridBagConstraints10);
-        
-            m_jbExists.setText ("exists");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbExists, gridBagConstraints10);
-        
-            m_jbForAll.setText ("forAll");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbForAll, gridBagConstraints10);
-        
-            m_jbCollect.setText ("collect");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbCollect, gridBagConstraints10);
-        
-            m_jbSelect.setText ("select");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbSelect, gridBagConstraints10);
-        
-            m_jbReject.setText ("reject");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 5, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbReject, gridBagConstraints10);
-        
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.gridwidth = 0;
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            m_jpCollectionsGeneral.add (pad14, gridBagConstraints10);
-        
-            m_jbUnion.setText ("union");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 0, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbUnion, gridBagConstraints10);
-        
-            m_jbIntersection.setText ("intersection");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.gridwidth = 2;
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 0, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbIntersection, gridBagConstraints10);
-        
-            m_jbIncluding.setText ("including");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 0, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbIncluding, gridBagConstraints10);
-        
-            m_jbExcluding.setText ("excluding");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 0, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbExcluding, gridBagConstraints10);
-        
-            m_jbSum.setText ("sum");
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.insets = new java.awt.Insets (0, 5, 0, 0);
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (m_jbSum, gridBagConstraints10);
-        
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.gridwidth = 0;
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsGeneral.add (pad15, gridBagConstraints10);
-        
-        
-            gridBagConstraints10 = new java.awt.GridBagConstraints ();
-            gridBagConstraints10.gridwidth = 0;
-            gridBagConstraints10.gridheight = 0;
-            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints10.weightx = 1.0;
-            gridBagConstraints10.weighty = 1.0;
-            m_jpCollectionsGeneral.add (pad16, gridBagConstraints10);
-        
-          m_jtbCollections.addTab ("General", m_jpCollectionsGeneral);
-      
-          m_jpCollectionsSet.setLayout (new java.awt.GridBagLayout ());
           java.awt.GridBagConstraints gridBagConstraints8;
       
-            m_jbSetMinus.setText ("-");
+            m_jbConstrColl.setText ("Collection{}");
+            m_jbConstrColl.setActionCommand ("Collection");
+            m_jbConstrColl.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onConstructCollection (evt);
+              }
+            }
+            );
         
             gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.gridwidth = 2;
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints8.insets = new java.awt.Insets (5, 5, 5, 0);
             gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsSet.add (m_jbSetMinus, gridBagConstraints8);
+            m_jpCollectionsGeneral.add (m_jbConstrColl, gridBagConstraints8);
         
-            m_jbSymmetricDiff.setText ("symmetricDifference");
+            m_jbConstrSet.setText ("Set{}");
+            m_jbConstrSet.setActionCommand ("Set");
+            m_jbConstrSet.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onConstructCollection (evt);
+              }
+            }
+            );
         
             gridBagConstraints8 = new java.awt.GridBagConstraints ();
-            gridBagConstraints8.insets = new java.awt.Insets (5, 5, 5, 5);
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (5, 5, 5, 0);
             gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            m_jpCollectionsSet.add (m_jbSymmetricDiff, gridBagConstraints8);
+            m_jpCollectionsGeneral.add (m_jbConstrSet, gridBagConstraints8);
+        
+            m_jbConstrBag.setText ("Bag{}");
+            m_jbConstrBag.setActionCommand ("Bag");
+            m_jbConstrBag.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onConstructCollection (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (5, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbConstrBag, gridBagConstraints8);
+        
+            m_jbConstrSeq.setText ("Sequence{}");
+            m_jbConstrSeq.setActionCommand ("Sequence");
+            m_jbConstrSeq.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onConstructCollection (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.gridwidth = 2;
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (5, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbConstrSeq, gridBagConstraints8);
         
         
             gridBagConstraints8 = new java.awt.GridBagConstraints ();
             gridBagConstraints8.gridwidth = 0;
             gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints8.weightx = 1.0;
-            m_jpCollectionsSet.add (jPanel27, gridBagConstraints8);
+            m_jpCollectionsGeneral.add (pad12, gridBagConstraints8);
+        
+            m_jbCollSize.setText ("size");
+            m_jbCollSize.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionAttr (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbCollSize, gridBagConstraints8);
+        
+            m_jbColCount.setText ("count");
+            m_jbColCount.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionObjectArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbColCount, gridBagConstraints8);
+        
+            m_jbIsEmpty.setText ("isEmpty");
+            m_jbIsEmpty.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionAttr (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbIsEmpty, gridBagConstraints8);
+        
+            m_jbNotEmpty.setText ("notEmpty");
+            m_jbNotEmpty.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionAttr (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbNotEmpty, gridBagConstraints8);
+        
+            m_jbIncludes.setText ("includes");
+            m_jbIncludes.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionObjectArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbIncludes, gridBagConstraints8);
+        
+            m_jbIncludesAll.setText ("includesAll");
+            m_jbIncludesAll.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionCollectionArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbIncludesAll, gridBagConstraints8);
+        
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.gridwidth = 0;
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (pad13, gridBagConstraints8);
+        
+            m_jbIterate.setText ("iterate");
+            m_jbIterate.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionIterationMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbIterate, gridBagConstraints8);
+        
+            m_jbExists.setText ("exists");
+            m_jbExists.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionIterationMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbExists, gridBagConstraints8);
+        
+            m_jbForAll.setText ("forAll");
+            m_jbForAll.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionIterationMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbForAll, gridBagConstraints8);
+        
+            m_jbCollect.setText ("collect");
+            m_jbCollect.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionIterationMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbCollect, gridBagConstraints8);
+        
+            m_jbSelect.setText ("select");
+            m_jbSelect.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionIterationMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbSelect, gridBagConstraints8);
+        
+            m_jbReject.setText ("reject");
+            m_jbReject.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionIterationMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 5, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbReject, gridBagConstraints8);
+        
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.gridwidth = 0;
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            m_jpCollectionsGeneral.add (pad14, gridBagConstraints8);
+        
+            m_jbUnion.setText ("union");
+            m_jbUnion.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionCollectionArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 0, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbUnion, gridBagConstraints8);
+        
+            m_jbIntersection.setText ("intersection");
+            m_jbIntersection.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionCollectionArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.gridwidth = 2;
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 0, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbIntersection, gridBagConstraints8);
+        
+            m_jbIncluding.setText ("including");
+            m_jbIncluding.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionObjectArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 0, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbIncluding, gridBagConstraints8);
+        
+            m_jbExcluding.setText ("excluding");
+            m_jbExcluding.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionObjectArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 0, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbExcluding, gridBagConstraints8);
+        
+            m_jbSum.setText ("sum");
+            m_jbSum.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onCollectionNoArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.insets = new java.awt.Insets (0, 5, 0, 0);
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (m_jbSum, gridBagConstraints8);
+        
+        
+            gridBagConstraints8 = new java.awt.GridBagConstraints ();
+            gridBagConstraints8.gridwidth = 0;
+            gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints8.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsGeneral.add (pad15, gridBagConstraints8);
         
         
             gridBagConstraints8 = new java.awt.GridBagConstraints ();
@@ -798,49 +1089,45 @@ public class OCLToolbar extends javax.swing.JFrame {
             gridBagConstraints8.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints8.weightx = 1.0;
             gridBagConstraints8.weighty = 1.0;
-            m_jpCollectionsSet.add (jPanel28, gridBagConstraints8);
+            m_jpCollectionsGeneral.add (pad16, gridBagConstraints8);
         
-          m_jtbCollections.addTab ("Sets", m_jpCollectionsSet);
+          m_jtbCollections.addTab ("General", m_jpCollectionsGeneral);
       
-          m_jpCollectionsSequence.setLayout (new java.awt.GridBagLayout ());
+          m_jpCollectionsSet.setLayout (new java.awt.GridBagLayout ());
           java.awt.GridBagConstraints gridBagConstraints9;
       
-            m_jbSeqFirst.setText ("first");
+            m_jbSetMinus.setText ("-");
+            m_jbSetMinus.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onSetMinus (evt);
+              }
+            }
+            );
         
             gridBagConstraints9 = new java.awt.GridBagConstraints ();
-            gridBagConstraints9.insets = new java.awt.Insets (5, 5, 10, 0);
-            m_jpCollectionsSequence.add (m_jbSeqFirst, gridBagConstraints9);
+            gridBagConstraints9.insets = new java.awt.Insets (5, 5, 5, 0);
+            gridBagConstraints9.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsSet.add (m_jbSetMinus, gridBagConstraints9);
         
-            m_jbSeqLast.setText ("last");
-        
-            gridBagConstraints9 = new java.awt.GridBagConstraints ();
-            gridBagConstraints9.insets = new java.awt.Insets (5, 5, 10, 5);
-            m_jpCollectionsSequence.add (m_jbSeqLast, gridBagConstraints9);
-        
-            m_jbSeqAt.setText ("at");
-        
-            gridBagConstraints9 = new java.awt.GridBagConstraints ();
-            gridBagConstraints9.insets = new java.awt.Insets (5, 5, 10, 5);
-            m_jpCollectionsSequence.add (m_jbSeqAt, gridBagConstraints9);
-        
-            m_jbSeqAppend.setText ("append");
+            m_jbSymmetricDiff.setText ("symmetricDifference");
+            m_jbSymmetricDiff.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onSetSymDiff (evt);
+              }
+            }
+            );
         
             gridBagConstraints9 = new java.awt.GridBagConstraints ();
-            gridBagConstraints9.insets = new java.awt.Insets (5, 5, 10, 0);
-            m_jpCollectionsSequence.add (m_jbSeqAppend, gridBagConstraints9);
-        
-            m_jbSeqPrepend.setText ("prepend");
-        
-            gridBagConstraints9 = new java.awt.GridBagConstraints ();
-            gridBagConstraints9.insets = new java.awt.Insets (5, 5, 10, 5);
-            m_jpCollectionsSequence.add (m_jbSeqPrepend, gridBagConstraints9);
+            gridBagConstraints9.insets = new java.awt.Insets (5, 5, 5, 5);
+            gridBagConstraints9.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            m_jpCollectionsSet.add (m_jbSymmetricDiff, gridBagConstraints9);
         
         
             gridBagConstraints9 = new java.awt.GridBagConstraints ();
             gridBagConstraints9.gridwidth = 0;
             gridBagConstraints9.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints9.weightx = 1.0;
-            m_jpCollectionsSequence.add (jPanel29, gridBagConstraints9);
+            m_jpCollectionsSet.add (jPanel27, gridBagConstraints9);
         
         
             gridBagConstraints9 = new java.awt.GridBagConstraints ();
@@ -849,7 +1136,100 @@ public class OCLToolbar extends javax.swing.JFrame {
             gridBagConstraints9.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints9.weightx = 1.0;
             gridBagConstraints9.weighty = 1.0;
-            m_jpCollectionsSequence.add (jPanel30, gridBagConstraints9);
+            m_jpCollectionsSet.add (jPanel28, gridBagConstraints9);
+        
+          m_jtbCollections.addTab ("Sets", m_jpCollectionsSet);
+      
+          m_jpCollectionsSequence.setLayout (new java.awt.GridBagLayout ());
+          java.awt.GridBagConstraints gridBagConstraints10;
+      
+            m_jbSeqFirst.setText ("first");
+            m_jbSeqFirst.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onSequenceAttr (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints10 = new java.awt.GridBagConstraints ();
+            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 10, 0);
+            m_jpCollectionsSequence.add (m_jbSeqFirst, gridBagConstraints10);
+        
+            m_jbSeqLast.setText ("last");
+            m_jbSeqLast.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onSequenceAttr (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints10 = new java.awt.GridBagConstraints ();
+            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 10, 5);
+            m_jpCollectionsSequence.add (m_jbSeqLast, gridBagConstraints10);
+        
+            m_jbSeqAt.setText ("at");
+            m_jbSeqAt.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onSequenceAt (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints10 = new java.awt.GridBagConstraints ();
+            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 10, 5);
+            m_jpCollectionsSequence.add (m_jbSeqAt, gridBagConstraints10);
+        
+            m_jbSeqAppend.setText ("append");
+            m_jbSeqAppend.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onSequenceObjectArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints10 = new java.awt.GridBagConstraints ();
+            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 10, 0);
+            m_jpCollectionsSequence.add (m_jbSeqAppend, gridBagConstraints10);
+        
+            m_jbSeqPrepend.setText ("prepend");
+            m_jbSeqPrepend.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onSequenceObjectArgMethod (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints10 = new java.awt.GridBagConstraints ();
+            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 10, 5);
+            m_jpCollectionsSequence.add (m_jbSeqPrepend, gridBagConstraints10);
+        
+            m_jbSubSequence.setText ("subSequence");
+            m_jbSubSequence.addActionListener (new java.awt.event.ActionListener () {
+              public void actionPerformed (java.awt.event.ActionEvent evt) {
+                onSequenceSubSequence (evt);
+              }
+            }
+            );
+        
+            gridBagConstraints10 = new java.awt.GridBagConstraints ();
+            gridBagConstraints10.insets = new java.awt.Insets (5, 5, 10, 5);
+            m_jpCollectionsSequence.add (m_jbSubSequence, gridBagConstraints10);
+        
+        
+            gridBagConstraints10 = new java.awt.GridBagConstraints ();
+            gridBagConstraints10.gridwidth = 0;
+            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints10.weightx = 1.0;
+            m_jpCollectionsSequence.add (jPanel29, gridBagConstraints10);
+        
+        
+            gridBagConstraints10 = new java.awt.GridBagConstraints ();
+            gridBagConstraints10.gridwidth = 0;
+            gridBagConstraints10.gridheight = 0;
+            gridBagConstraints10.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints10.weightx = 1.0;
+            gridBagConstraints10.weighty = 1.0;
+            m_jpCollectionsSequence.add (jPanel30, gridBagConstraints10);
         
           m_jtbCollections.addTab ("Sequences", m_jpCollectionsSequence);
       
@@ -879,6 +1259,121 @@ public class OCLToolbar extends javax.swing.JFrame {
     setSize (new java.awt.Dimension (650, 300));
     setLocation((screenSize.width-650)/2, (screenSize.height-300)/2);
   }//GEN-END:initComponents
+
+  private void onParens (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onParens
+    addText (new String[] {"tmp"}, ")", null);
+    addText (null, "(", new String[] {"expression"});
+  }//GEN-LAST:event_onParens
+
+  private void onSequenceSubSequence (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSequenceSubSequence
+    addText (new String[] {"tmp"}, ")", null);
+    addText (new String[] {"tmp"}, ", ", new String[] {"integer expression"});
+    addText (new String[] {"sequence"}, "->" + evt.getActionCommand() + " (", new String[] {"integer expression"});
+  }//GEN-LAST:event_onSequenceSubSequence
+
+  private void onSequenceObjectArgMethod (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSequenceObjectArgMethod
+    addText (new String[] {"tmp"}, ")", null);
+    addText (new String[] {"sequence"}, "->" + evt.getActionCommand() + " (", new String[] {"element"});
+  }//GEN-LAST:event_onSequenceObjectArgMethod
+
+  private void onSequenceAt (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSequenceAt
+    addText (new String[] {"tmp"}, ")", null);
+    addText (new String[] {"sequence"}, "->at (", new String[] {"integer expression"});
+  }//GEN-LAST:event_onSequenceAt
+
+  private void onSequenceAttr (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSequenceAttr
+    addText (new String[] {"sequence"}, "->" + evt.getActionCommand(), null);
+  }//GEN-LAST:event_onSequenceAttr
+
+  private void onSetSymDiff (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSetSymDiff
+    addText (new String[] {"tmp"}, ")", null);
+    addText (new String[] {"set"}, "->symmetricDifference (", new String[] {"set"});
+  }//GEN-LAST:event_onSetSymDiff
+
+  private void onSetMinus (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSetMinus
+    addText (new String[] {"set"}, " - ", new String[] {"set"});
+  }//GEN-LAST:event_onSetMinus
+
+  private void onCollectionIterationMethod (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onCollectionIterationMethod
+    addText (new String[] {"tmp"}, ")", null);
+    addText (new String[] {"tmp"}, " | ", new String[] {"expression"});
+    addText (new String[] {"tmp"}, " : ", new String[] {"type"});
+    addText (new String[] {"collection"}, "->" + evt.getActionCommand() + " (", new String[] {"element"});
+  }//GEN-LAST:event_onCollectionIterationMethod
+
+  private void onCollectionCollectionArgMethod (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onCollectionCollectionArgMethod
+    addText (new String[] {"tmp"}, ")", null);
+    addText (new String[] {"collection"}, "->" + evt.getActionCommand() + " (", new String[] {"collection"});
+  }//GEN-LAST:event_onCollectionCollectionArgMethod
+
+  private void onCollectionNoArgMethod (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onCollectionNoArgMethod
+    addText (new String[] {"collection"}, "->" + evt.getActionCommand() + "()", null);
+  }//GEN-LAST:event_onCollectionNoArgMethod
+
+  private void onCollectionObjectArgMethod (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onCollectionObjectArgMethod
+    addText (new String[] {"tmp"}, ")", null);
+    addText (new String[] {"collection"}, "->" + evt.getActionCommand() + " (", new String[] {"element"});
+  }//GEN-LAST:event_onCollectionObjectArgMethod
+
+  private void onCollectionAttr (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onCollectionAttr
+    addText (new String[] {"collection"}, "->" + evt.getActionCommand(), null);
+  }//GEN-LAST:event_onCollectionAttr
+
+  private void onConstructCollection (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onConstructCollection
+    addText (new String[] {"tmp"}, "}", null);
+    addText (null, evt.getActionCommand() + " {", new String[] {"element list"});
+  }//GEN-LAST:event_onConstructCollection
+
+  private void onIfThenElse (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onIfThenElse
+    addText (new String[] {"tmp"}, " endif", null);
+    addText (new String[] {"tmp"}, " else ", new String[] {"expression"});
+    addText (new String[] {"tmp"}, " then ", new String[] {"expression"});
+    addText (null, "if ", new String[] {"boolean expression"});
+  }//GEN-LAST:event_onIfThenElse
+
+  private void onSimpleBooleanOperation (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSimpleBooleanOperation
+    addText (new String[] {"boolean expression"}, " " + evt.getActionCommand() + " ", new String[] {"boolean expression"});
+  }//GEN-LAST:event_onSimpleBooleanOperation
+
+  private void onStringMethod (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onStringMethod
+    if (evt.getActionCommand().equals ("concat")) {
+      addText (new String[] {"tmp"}, ")", null);
+      addText (new String[] {"string expression"}, "." + evt.getActionCommand() + " (", new String[] {"string expression"});
+    }
+    else if (evt.getActionCommand().equals ("substring")) {
+      addText (new String[] {"tmp"}, ")", null);
+      addText (new String[] {"tmp"}, ", ", new String[] {"integer expression"});
+      addText (new String[] {"string expression"}, "." + evt.getActionCommand() + " (", new String[] {"integer expression"});
+    }
+    else {
+      addText (new String[] {"string expression"},
+          "." + evt.getActionCommand() + " ", null);
+    }
+  }//GEN-LAST:event_onStringMethod
+
+  private void onNumberMethod (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onNumberMethod
+    if ((evt.getActionCommand().equals ("abs")) ||
+         (evt.getActionCommand().equals ("round")) ||
+         (evt.getActionCommand().equals ("floor"))) {
+      addText (new String[] {"numeric expression"}, "." + evt.getActionCommand() + " ", null);
+    }
+    else {
+      addText (new String[] {"tmp"}, ")", null);
+      addText (new String[] {"numeric expression"}, "." + evt.getActionCommand() + " (", new String[] {"numeric expression"});
+    }
+  }//GEN-LAST:event_onNumberMethod
+
+  private void onSimpleNumericOperator (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSimpleNumericOperator
+    addText (new String[] {"numeric expression"}, " " + evt.getActionCommand() + " ", new String[] {"numeric expression"});
+  }//GEN-LAST:event_onSimpleNumericOperator
+
+  private void onSimpleOperator (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSimpleOperator
+    addText (new String[] {"expression"}, " " + evt.getActionCommand() + " ", new String[] {"expression"});
+  }//GEN-LAST:event_onSimpleOperator
+
+  private void onResult (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onResult
+    addText (null, "result ", null);
+  }//GEN-LAST:event_onResult
 
   private void onAtPre (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAtPre
     addText (new String[] {"attribute or association"}, "@pre ", null);
@@ -912,6 +1407,7 @@ public class OCLToolbar extends javax.swing.JFrame {
   private javax.swing.JButton m_jbGreater;
   private javax.swing.JButton m_jbLessE;
   private javax.swing.JButton m_jbGreaterE;
+  private javax.swing.JButton m_jbParens;
   private javax.swing.JPanel pad3;
   private javax.swing.JPanel pad4;
   private javax.swing.JPanel m_jpNumbers;
@@ -986,6 +1482,7 @@ public class OCLToolbar extends javax.swing.JFrame {
   private javax.swing.JButton m_jbSeqAt;
   private javax.swing.JButton m_jbSeqAppend;
   private javax.swing.JButton m_jbSeqPrepend;
+  private javax.swing.JButton m_jbSubSequence;
   private javax.swing.JPanel jPanel29;
   private javax.swing.JPanel jPanel30;
   // End of variables declaration//GEN-END:variables
