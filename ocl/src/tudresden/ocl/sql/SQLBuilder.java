@@ -40,6 +40,7 @@ public interface SQLBuilder {
 	// views
         public void createView(String name, boolean alias); 
 	public void addAlias(String name); 
+        public void endView();
         
         // trigger
         public void createAssertionReplacement(String triggerName, String tableName, String viewName, String errMsg);

@@ -256,6 +256,7 @@ public class ObjectViewSchema implements ORMappingScheme {
 				}
 											
 				// add view the according map
+                                theSQLBuilder.endView();
 				view.setStatement(theSQLBuilder.getCode());
 				mc.addTable(view);
 				classifiersToViews.put(classifier, view);

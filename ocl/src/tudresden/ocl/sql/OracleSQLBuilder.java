@@ -33,6 +33,8 @@ public class OracleSQLBuilder implements SQLBuilder {
         protected String TYPE_FOR_FLOAT	= " NUMBER";
         protected String TYPE_FOR_DOUBLE = " NUMBER";
         protected String TYPE_FOR_STRING = " VARCHAR2(255)";
+        protected String TYPE_FOR_REAL = " NUMBER";
+        protected String TYPE_FOR_DATE = " DATE";
     
 	private StringBuffer theCode;
 	private int nextAliasPos;
@@ -188,7 +190,15 @@ public class OracleSQLBuilder implements SQLBuilder {
   			oraColType = TYPE_FOR_DOUBLE;
   		} else if (colType.equals("String")) {
   			oraColType = TYPE_FOR_STRING;
-  		}
+                } else if (colType.equals("Real")) {
+  			oraColType = TYPE_FOR_REAL;
+                } else if (colType.equals("Date")) {
+  			oraColType = TYPE_FOR_DATE;
+                } else {
+                        System.err.println("OracleSQLBuilder unknown type: " + colType);
+                        oraColType = colType;
+                }
+               
             
                 append("\t" + colName + indentStr + oraColType);
                 if (pk) append("\t" + "primary key");
@@ -205,6 +215,10 @@ public class OracleSQLBuilder implements SQLBuilder {
         public void addFKConstraint(String conName, String tableName, String colName, String fkTable,String fkColName) {
                 append("alter table " + tableName + " add constraint " + conName + "\n");
                 append("foreign key (" + colName + ") references " + fkTable + "(" + fkColName + ");\n\n");
+        }
+        
+        public void endView() {
+                append(";");
         }
         
 }

@@ -570,6 +570,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
             ois = new ObjectInputStream(fis);
               
             theOCLEditorModel = (SimpleOCLEditorModel)ois.readObject();
+            theOCLEditorModel.setModelFacade(theModelFacade);
                 
             ois.close();                
         } catch(Exception e) {

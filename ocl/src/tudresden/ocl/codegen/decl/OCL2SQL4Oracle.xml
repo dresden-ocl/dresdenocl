@@ -131,6 +131,20 @@
 			<li>from <param name="tables"/></li> 
 			<li>where <param name="joins"/>)</li>
 		</template>
+                <template spec="oclIsKindOf" rem="CLASS AND ATTRIBUTE">
+			<li>exists (</li>
+                        <li>select <param name="object"/> from <param name="ov_type"/>)</li>
+		</template>
+                <template spec="oclIsTypeOf" rem="CLASS AND ATTRIBUTE">
+			<li>exists (</li>
+                        <li>select <param name="object"/> from <param name="ov_type"/>)</li>
+                        <li>and not exist (</li>
+                        <li>select <param name="object"/> from <param name="ov_supertype"/>)</li>
+		</template>
+                <template spec="oclAsType" rem="CLASS AND ATTRIBUTE">
+		        <li>select <param name="object"/> from <param name="ov_type"/></li>
+		</template>
+
                 <template spec="navigation" rem="NAVIGATION">
 			<li>(select <param name="object"/></li>
 			<li>from <param name="tables"/></li> 
@@ -145,32 +159,47 @@
 
 		<template spec="forAll" rem="COMPLEX PREDICATE">
 			<li>not exists (</li>
-                        <li><param name="collection"/></li>
-                        <li>minus</li>
+                        <li><param name="collection"/> minus</li>
                         <li>select <param name="object"/> from <param name="table"/></li>
                         <li>where <param name="expression"/></li>
                         <li>)</li>
                 </template>
 		<template spec="includes" rem="COMPLEX PREDICATE">
-			<li>Feature includes not supported !</li>
+			<li>exists (</li>
+                        <li>select <param name="object"/> from DUAL</li>
+                        <li>intersect</li>
+                        <li><param name="collection"/>)</li>
 		</template>
 		<template spec="excludes" rem="COMPLEX PREDICATE">
-			<li>Feature excludes not supported !</li>
+			<li>not exists (</li>
+                        <li>select <param name="object"/> from DUAL</li>
+                        <li>intersect</li>
+                        <li><param name="collection"/>)</li>
 		</template>
 		<template spec="includesAll" rem="COMPLEX PREDICATE">
-			<li>Feature includesAll not supported !</li>
+			<li>not exists (</li>
+                        <li><param name="collection2"/></li>
+                        <li>minus</li>
+                        <li><param name="collection"/>)</li>
 		</template>
 		<template spec="excludesAll" rem="COMPLEX PREDICATE">
-			<li>Feature excludesAll not supported !</li>
+			<li>not exists (</li>
+                        <li><param name="collection2"/></li>
+                        <li>intersect</li>
+                        <li><param name="collection"/>)</li>
 		</template>
 		<template spec="isEmpty" rem="COMPLEX PREDICATE">
-			<li>Feature isEmpty not supported !</li>
+			<li>not exists (<param name="collection"/>)</li>
 		</template>
 		<template spec="notEmpty" rem="COMPLEX PREDICATE">
-			<li>Feature notEmpty not supported !</li>
+			<li>exists (<param name="collection"/>)</li>
 		</template>
 		<template spec="exists" rem="COMPLEX PREDICATE">
-			<li>Feature exists not supported !</li>
+			<li>exists (</li>
+                        <li><param name="collection"/> intersect</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where <param name="expression"/></li>
+                        <li>)</li>
 		</template>
 		<template spec="isUnique" rem="COMPLEX PREDICATE">
 			<li>Feature isUnique not supported !</li>
@@ -179,53 +208,75 @@
 			<li>Feature sortedby not supported !</li>
 		</template>
 
-		<template spec="sum" rem="BASIC VALUE">
-			<li>select nvl(sum(<param name="column"/>), 0)</li>
-			<li>from <param name="tables"/></li> 
-			<li>where <param name="joins"/></li>
-		</template>
 		<template spec="size" rem="BASIC VALUE">
-			<li>Feature size not supported !</li>
+			<li>select NVL(COUNT(*),0)</li>
+                        <li>from <param name="table"/></li>
+                        <li>where <param name="element"/> in</li>
+                        <li><param name="collection"/></li>
 		</template>
 		<template spec="count" rem="BASIC VALUE">
-			<li>Feature count not supported !</li>
+			<li>select NVL(COUNT(*),0)</li>
+                        <li>from <param name="table"/></li>
+                        <li>where <param name="element"/> in <param name="collection"/></li>
+                        <li>and <param name="element"/> = <param name="object"/></li>
+		</template>
+                <template spec="sum" rem="BASIC VALUE">
+			<li>select NVL(SUM(<param name="element"/>),0)</li>
+                        <li>from <param name="table"/></li>
+                        <li>where <param name="element"/> in <param name="collection"/></li>
 		</template>
 
 		<template spec="select" rem="QUERY">
-			<li>Feature select not supported !</li>
-		</template>
+			<li>(<param name="collection"/> minus</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where not (<param name="expression"/>))</li>
+        	</template>
 		<template spec="reject" rem="QUERY">
-			<li>Feature reject not supported !</li>
+			<li>(<param name="collection"/> minus</li>
+                        <li>select <param name="object"/> from <param name="table"/></li>
+                        <li>where (<param name="expression"/>))</li>
 		</template>
 		<template spec="set_intersection" rem="QUERY">
-			<li>Feature intersection not supported !</li>
+			<li>(<param name="collection"/> intersect</li>
+                        <li><param name="collection2"/>)</li>
 		</template>
 		<template spec="bag_intersection" rem="QUERY">
-			<li>Feature intersection not supported !</li>
+			<li>(<param name="collection"/> intersect all</li>
+                        <li><param name="collection2"/>)</li>
 		</template>
 		<template spec="set_including" rem="QUERY">
-			<li>Feature including not supported !</li>
+			<li>(<param name="collection"/> union</li>
+                        <li>select <param name="object"/> from DUAL)</li>
 		</template>
 		<template spec="bag_including" rem="QUERY">
-			<li>Feature including not supported !</li>
+			<li>(<param name="collection"/> union all</li>
+                        <li>select <param name="object"/> from DUAL)</li>
 		</template>
 		<template spec="sequence_including" rem="QUERY">
 			<li>Feature including not supported !</li>
 		</template>
-		<template spec="excluding" rem="QUERY">
-			<li>Feature excluding not supported !</li>
+		<template spec="set_excluding" rem="QUERY">
+			<li>(<param name="collection"/> minus</li>
+                        <li>select <param name="object"/> from DUAL)</li>
+		</template>
+                <template spec="bag_excluding" rem="QUERY">
+			<li>(<param name="collection"/> minus</li>
+                        <li>select <param name="object"/> from DUAL)</li>
 		</template>
 		<template spec="set_union" rem="QUERY">
-			<li>Feature union not supported !</li>
+			<li>(<param name="collection"/> union</li>
+                        <li><param name="collection2"/>)</li>
 		</template>
 		<template spec="bag_union" rem="QUERY">
-			<li>Feature union not supported !</li>
+			<li>(<param name="collection"/> union all</li>
+                        <li><param name="collection2"/>)</li>
 		</template>
 		<template spec="sequence_union" rem="QUERY">
 			<li>Feature union not supported !</li>
 		</template>
 		<template spec="symmetricDifference" rem="QUERY">
-			<li>Feature symmetricDifference not supported !</li>
+			<li>(<param name="collection"/> minus <param name="collection2"/></li>
+                        <li><param name="collection2"/> minus <param name="collection"/>)</li>
 		</template>
 		<template spec="collect" rem="QUERY">
 			<li>Feature collect not supported !</li>
@@ -272,13 +323,16 @@
 
 	<pattern rule="literal_collection">
 		<template spec="set" rem="QUERY">
-			<li>No support for collections !</li>
+			<li connector="true">union</li>
+			<li>select <param name="value"/> as elem from DUAL</li>
 		</template>
 		<template spec="bag" rem="QUERY">
-			<li>No support for collections !</li>
+			<li connector="true">union all</li>
+			<li>select <param name="value"/> as elem from DUAL</li>
 		</template>
 		<template spec="sequence" rem="QUERY">
-			<li>No support for collections !</li>
+			<li connector="true">union</li>
+			<li>select <param name="value"/> as elem, <param name="seqnr"/> as seqno from DUAL</li>
 		</template>
 	</pattern>
 
