@@ -125,20 +125,8 @@ public class Collection implements Type {
       ret=navigateCollection(name, params);
     }
     if (ret==null) {
-      StringBuffer sbFeatureSignature = new StringBuffer (name).append ("(");
-      if (params != null) {
-        for (int i = 0; i < params.length; i++) {
-          if (i > 0) {
-            sbFeatureSignature.append (",");
-          }
-          
-          sbFeatureSignature.append (params[i]);
-        }
-      }
-      sbFeatureSignature.append (")");
-      
       throw new OclTypeException(
-        "nonexistent feature \"" + sbFeatureSignature + "\" of type "+this+" accessed"
+        "nonexistent feature \"" + Basic.signatureString (name, params) + "\" of type "+this+" accessed"
       );
     }
     return ret;
