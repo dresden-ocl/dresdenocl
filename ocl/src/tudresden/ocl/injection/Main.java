@@ -97,7 +97,8 @@ final class OclInjector implements InjectionConsumer
     this.config=config;
   }
   
-  public void onPackage(JavaFile javafile) throws InjectorParseException
+  public void onPackage(JavaFile javafile) 
+    throws InjectorParseException
   {
   }
   
@@ -107,7 +108,7 @@ final class OclInjector implements InjectionConsumer
     
   private boolean discardnextfeature=false;
 
-  public void onClass(JavaClass cc)
+  public void onClass(JavaClass jc)
   {
     discardnextfeature=false;
 
@@ -121,7 +122,7 @@ final class OclInjector implements InjectionConsumer
     observedFeatures=new ArrayList();
   }
 
-  public void onClassEnd(JavaClass cc) 
+  public void onClassEnd(JavaClass jc) 
     throws IOException, InjectorParseException
   {
     if(clean) return;
@@ -132,7 +133,7 @@ final class OclInjector implements InjectionConsumer
     for(Iterator i=observedFeatures.iterator(); i.hasNext(); )
       writeObserver((JavaFeature)i.next());
     writeChangedChecker();
-    writeInvariants(cc.getName());
+    writeInvariants(jc.getName());
 
     methods=(ArrayList)
       (methods_stack.remove(methods_stack.size()-1));
@@ -142,47 +143,47 @@ final class OclInjector implements InjectionConsumer
       (observedFeatures_stack.remove(observedFeatures_stack.size()-1));
   }
   
-  public void onBehaviourHeader(JavaBehaviour cf) 
+  public void onBehaviourHeader(JavaBehaviour jb) 
     throws java.io.IOException
   {
-    if(clean || cf.isStatic())
-      output.write(cf.getLiteral());
+    if(clean || jb.isStatic())
+      output.write(jb.getLiteral());
     else
-      output.write(cf.getWrappedLiteral());
+      output.write(jb.getWrappedLiteral());
   }
 
   private String last_element_type=null;
   private String last_key_type=null;
 
-  public void onClassFeature(JavaFeature cf) 
+  public void onClassFeature(JavaFeature jf) 
     throws IOException, InjectorParseException
   {
     if(!clean)
     {
-      if(cf instanceof JavaAttribute &&
-         !Modifier.isFinal(cf.getModifiers()) &&
+      if(jf instanceof JavaAttribute &&
+         !Modifier.isFinal(jf.getModifiers()) &&
          !discardnextfeature)
-        observedFeatures.add(cf);
+        observedFeatures.add(jf);
       
-      if( cf instanceof JavaBehaviour && 
-          !cf.isStatic() && 
-          !discardnextfeature)
+      if(jf instanceof JavaBehaviour && 
+         !jf.isStatic() && 
+         !discardnextfeature)
       {
         if(delayinsertions)
-          methods.add(cf);
+          methods.add(jf);
         else
-          writeWrapper((JavaBehaviour)cf);
+          writeWrapper((JavaBehaviour)jf);
         
-        //if(!"void".equals(cf.getType()))
-          //observedFeatures.add(cf);
+        //if(!"void".equals(jf.getType()))
+          //observedFeatures.add(jf);
       }
       boolean notYetAddedToTypedAttributes=true;
       if(last_element_type!=null)
       {
-        if(cf instanceof JavaAttribute)
+        if(jf instanceof JavaAttribute)
         {
-          ((JavaAttribute)cf).setElementType(last_element_type);
-          typedAttributes.add(cf);
+          ((JavaAttribute)jf).setElementType(last_element_type);
+          typedAttributes.add(jf);
           notYetAddedToTypedAttributes=false;
         }
         else 
@@ -191,11 +192,11 @@ final class OclInjector implements InjectionConsumer
       }
       if(last_key_type!=null)
       {
-        if(cf instanceof JavaAttribute)
+        if(jf instanceof JavaAttribute)
         {
-          ((JavaAttribute)cf).setKeyType(last_key_type);
+          ((JavaAttribute)jf).setKeyType(last_key_type);
           if(notYetAddedToTypedAttributes)
-            typedAttributes.add(cf);
+            typedAttributes.add(jf);
         }
         else 
           throw new InjectorParseException("encountered @key-type tag on non-attribute");
@@ -205,7 +206,8 @@ final class OclInjector implements InjectionConsumer
     discardnextfeature=false;
   }
   
-  public boolean onComment(String comment) throws IOException
+  public boolean onComment(String comment) 
+    throws IOException
   {
     if(comment.startsWith("/**"))
     {
@@ -237,7 +239,8 @@ final class OclInjector implements InjectionConsumer
       throw new RuntimeException();
   }
 
-  public final void writeInvariants(String classname) throws IOException
+  private final void writeInvariants(String classname) 
+    throws IOException
   {
     SortedFragments sf=
       codefragments!=null ? (SortedFragments)(codefragments.get(classname)) : null;
@@ -251,7 +254,7 @@ final class OclInjector implements InjectionConsumer
   
 
   
-  public final void writeInvariant(String classname, CodeFragment cf) throws IOException
+  private final void writeInvariant(String classname, CodeFragment cf) throws IOException
   {
     Writer o=output;
 
@@ -296,22 +299,25 @@ final class OclInjector implements InjectionConsumer
   */
   public static final String OCL_AUTHOR="ocl_injector";
 
-  public final void writeWrapperInvariant() throws IOException
+  private final void writeWrapperInvariant() 
+    throws IOException
   {
     output.write("      ");
     output.write(Invariant.CHECKING_OPERATION);
     output.write("();\n");
   }
   
-  void writeCall(JavaMethod cf) throws IOException
+  private final void writeCall(JavaMethod jm) 
+    throws IOException
   {
     Writer o=output;
+    
     o.write("      ");
-    if(!"void".equals(cf.getType()))
+    if(!"void".equals(jm.getType()))
       o.write("result=");
-    o.write(cf.getWrappedName());
+    o.write(jm.getWrappedName());
     o.write('(');
-    for(Iterator i=cf.getParameters(); i.hasNext(); )
+    for(Iterator i=jm.getParameters(); i.hasNext(); )
     {
       i.next();
       o.write((String)i.next());
@@ -340,40 +346,41 @@ final class OclInjector implements InjectionConsumer
   }
   
   
-  public final void writeObserver(JavaFeature cf) 
+  private final void writeObserver(JavaFeature jf) 
     throws IOException, InjectorParseException
   {
     Writer o=output;
-    boolean is_collection=isCollection(cf);
+    
+    boolean is_collection=isCollection(jf);
     o.write("/**\n    A backup for detecting modifications.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n    @see #");
-    o.write(cf.getName());
+    o.write(jf.getName());
     o.write("\n  */");
     o.write(Modifier.toString(
-        (cf.getModifiers()&Modifier.STATIC)|Modifier.PRIVATE));
+        (jf.getModifiers()&Modifier.STATIC)|Modifier.PRIVATE));
     o.write(' ');
     if(is_collection)
       o.write("int");
     else
-      o.write(cf.getType());
+      o.write(jf.getType());
     o.write(' ');
-    o.write(cf.getName());
+    o.write(jf.getName());
     o.write(Invariant.BACKUP_SUFFIX);
     o.write('=');
     if(is_collection)
       o.write('0');
     else
-      o.write(cf.getName());
+      o.write(jf.getName());
     o.write(";/**\n    Contains observers for modifications of this feature.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n    @see #");
-    o.write(cf.getName());
+    o.write(jf.getName());
     o.write("\n  */");
     o.write(Modifier.toString(
-        (cf.getModifiers()&Modifier.STATIC)|Modifier.PUBLIC|Modifier.FINAL));
+        (jf.getModifiers()&Modifier.STATIC)|Modifier.PUBLIC|Modifier.FINAL));
     o.write(" java.util.HashSet ");
-    o.write(cf.getName());
+    o.write(jf.getName());
     o.write(Invariant.OBSERVER_SUFFIX);
     o.write("=new java.util.HashSet();");
   }
@@ -381,18 +388,21 @@ final class OclInjector implements InjectionConsumer
 
   public static final String CHANGED_CHECKER="checkForChangedFeatures";
   
-  public final void writeChangedCheckerCall() throws IOException
+  private final void writeChangedCheckerCall() 
+    throws IOException
   {
     Writer o=output;
+    
     o.write("      ");
     o.write(CHANGED_CHECKER);
     o.write("();\n");
   }
 
-  public final void writeChangedChecker() 
+  private final void writeChangedChecker() 
     throws IOException, InjectorParseException
   {
     Writer o=output;
+    
     o.write("/**\n    Checks object features, whether they have changed.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n  */private void ");
@@ -476,6 +486,7 @@ final class OclInjector implements InjectionConsumer
     throws IOException
   {
     Writer o=output;
+    
     String modifierString=
       Modifier.toString(jb.getModifiers()&~Modifier.ABSTRACT);
     if(modifierString.length()>0)
@@ -519,29 +530,30 @@ final class OclInjector implements InjectionConsumer
       writeWrapper((JavaMethod)jb);
   }
 
-  private final void writeWrapper(JavaConstructor cf) 
+  private final void writeWrapper(JavaConstructor jc) 
     throws IOException
   {
     Writer o=output;
+    
     o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n    @see #");
-    o.write(cf.getName());
+    o.write(jc.getName());
     o.write('(');
-    for(Iterator i=cf.getParameters(); i.hasNext(); )
+    for(Iterator i=jc.getParameters(); i.hasNext(); )
     {
       o.write((String)(i.next()));
       i.next();
       if(i.hasNext()) o.write(", ");
     }
-    if(cf.getParameters().hasNext())
+    if(jc.getParameters().hasNext())
       o.write(", ");
     o.write(tudresden.ocl.injection.lib.WrapperDummy.class.getName());
     o.write(")\n  */");
-    writeWrapperHeader(cf);
+    writeWrapperHeader(jc);
     o.write("\n  {\n");
     o.write("    this(");
-    for(Iterator i=cf.getParameters(); i.hasNext(); )
+    for(Iterator i=jc.getParameters(); i.hasNext(); )
     {
       i.next();
       o.write((String)i.next());
@@ -553,7 +565,7 @@ final class OclInjector implements InjectionConsumer
     o.write("    ");
     o.write(Invariant.CHECKING_FLAG);
     o.write("=true;\n");
-    if(hasInvariantScope(cf))
+    if(hasInvariantScope(jc))
       writeWrapperInvariant();
     o.write("    ");
     o.write(Invariant.CHECKING_FLAG);
@@ -561,9 +573,11 @@ final class OclInjector implements InjectionConsumer
     o.write("  }");
   }
 
-  private final void writeWrapper(JavaMethod jm) throws IOException
+  private final void writeWrapper(JavaMethod jm) 
+    throws IOException
   {
     Writer o=output;
+    
     o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n    @see #");
@@ -676,13 +690,14 @@ final class OclInjector implements InjectionConsumer
     o.write("  }");
   }
 
-  private final void writeTypeChecker(JavaAttribute jf) throws IOException
+  private final void writeTypeChecker(JavaAttribute ja) 
+    throws IOException
   {
-    writeTypeChecker(jf, Invariant.CHECK_ELEMENT_TYPES, jf.getElementType());
-    writeTypeChecker(jf, Invariant.CHECK_KEY_TYPES,     jf.getKeyType());
+    writeTypeChecker(ja, Invariant.CHECK_ELEMENT_TYPES, ja.getElementType());
+    writeTypeChecker(ja, Invariant.CHECK_KEY_TYPES,     ja.getKeyType());
   }
 
-  private final void writeTypeChecker(JavaAttribute jf, String kind, String type) 
+  private final void writeTypeChecker(JavaAttribute ja, String kind, String type) 
     throws IOException
   {
     if(type!=null)
@@ -691,7 +706,7 @@ final class OclInjector implements InjectionConsumer
       o.write("      if(!");
       o.write(kind);
       o.write('(');
-      o.write(jf.getName());
+      o.write(ja.getName());
       o.write(',');
       o.write(type);
       o.write(".class)) ");
@@ -704,7 +719,7 @@ final class OclInjector implements InjectionConsumer
       else
         throw new RuntimeException();
       o.write(" type checker failed at feature '");
-      o.write(jf.getName());
+      o.write(ja.getName());
       o.write("' of object \"+this+\".\");\n");
     }
   }
