@@ -35,7 +35,7 @@ package tudresden.ocl.check.types;
 public class DefaultReflectionAdapter implements ReflectionAdapter 
 {
 
-  public Type getTypeForClass(Class c) 
+  public Type getTypeForClass(Class c)
   {
     //System.out.println("getClassForType("+c+")");
     if(c==String.class)
@@ -45,12 +45,14 @@ public class DefaultReflectionAdapter implements ReflectionAdapter
             c==Integer.class || c==Integer.TYPE ||
             c==Long.class    || c==Long.TYPE)
       return Basic.INTEGER;
-    else if(c==Float.class  || c==Float.TYPE || 
+    else if(c==Float.class  || c==Float.TYPE ||
             c==Double.class || c==Double.TYPE)
       return Basic.REAL;
     else if(c==Boolean.class || c==Boolean.TYPE)
       return Basic.BOOLEAN;
-    else if(java.util.Collection.class.isAssignableFrom(c)) 
+    else if(c==Void.class || c==Void.TYPE)
+      return Any.VOID;
+    else if(java.util.Collection.class.isAssignableFrom(c))
     {
       int collectionKind;
       if(java.util.Set.class.isAssignableFrom(c) || 
