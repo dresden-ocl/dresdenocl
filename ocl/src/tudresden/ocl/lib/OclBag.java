@@ -1,0 +1,286 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * OCL Compiler                                                      *
+ * Copyright (C) 1999, 2000 Frank Finger (frank@finger.org).         *
+ * All rights reserved.                                              *
+ *                                                                   *
+ * This work was done as a diploma project at the Chair for Software *
+ * Technology, Dresden University Of Technology, Germany             *
+ * (http://www-st.inf.tu-dresden.de).  It is understood that any     *
+ * modification not identified as such is not covered by the         *
+ * preceding statement.                                              *
+ *                                                                   *
+ * This work is free software; you can redistribute it and/or        *
+ * modify it under the terms of the GNU Library General Public       *
+ * License as published by the Free Software Foundation; either      *
+ * version 2 of the License, or (at your option) any later version.  *
+ *                                                                   *
+ * This work is distributed in the hope that it will be useful,      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of    *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU *
+ * Library General Public License for more details.                  *
+ *                                                                   *
+ * You should have received a copy of the GNU Library General Public *
+ * License along with this library; if not, write to the             *
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,      *
+ * Boston, MA  02111-1307, USA.                                      *
+ *                                                                   *
+ * To submit a bug report, send a comment, or get the latest news on *
+ * this project and other projects, please visit the web site:       *
+ * http://www-st.inf.tu-dresden.de/ (Chair home page) or             *
+ * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+// FILE: d:/java/classes/de/tudresden/ocl/OclBag.java
+
+package tudresden.ocl.lib;
+import java.util.*;
+
+/** A OclBag is a unordered collection that may contain duplicates. See
+ *  documentation of OclCollection for further information.
+ *
+ *  @see OclCollection
+ *  @author Frank Finger
+ */
+public class OclBag extends OclUnsortedCollection {
+
+  /** the OclBag that is the result of an undefined OCL expression
+   */
+  public static OclBag UNDEFINED=new OclBag();
+
+  /** package-visible constructor for OclBag; the ordering of the argument list
+   *  is not reflected by OclBag
+   */
+  public OclBag(List list) {
+    super(list);
+  }
+
+  /** private constructor for undefined OclBag
+   */
+  private OclBag() {
+    bUndefined=true;
+  }
+
+  /** static factory method that returns an OclBag that contains no elements
+   */
+  public static OclBag getEmptyOclBag() {
+    ArrayList list=new ArrayList();
+    return new OclBag(list);
+  }
+
+  /** two OclBags are equal if they contain the same elements the same number
+   *  of times
+   *
+   *  @throws OclClassCastException if the parameter o is not of type
+   *          OclBag and Ocl.STRICT_CHECKING is <CODE>true</CODE>
+   */
+  public OclBoolean isEqualTo(Object o) {
+    if ( !(o instanceof OclBag) ) {
+      if (Ocl.STRICT_CHECKING) {
+        throw new OclClassCastException(
+          "OclBag isEqualTo() is called with a non-OclBag parameter"
+        );
+      } else {
+        return OclBoolean.FALSE;
+      }
+    }
+    OclBag other=(OclBag)o;
+    if (this.isUndefined() || other.isUndefined()) return OclBoolean.UNDEFINED;
+
+    HashMap hmThis=this.getCountMap();
+    HashMap hmOther=other.getCountMap();
+
+    if (hmThis.equals(hmOther)) {
+      return OclBoolean.TRUE;
+    } else {
+      return OclBoolean.FALSE;
+    }
+  }
+
+  /** @return an instance of OclBag
+   *  @see OclCollection#select(OclIterator iter, OclBooleanEvaluatable eval)
+   *  @see OclCollection#selectToList(OclIterator iter, OclBooleanEvaluatable eval)
+   */
+  public OclCollection select(OclIterator iter, OclBooleanEvaluatable eval) {
+    if (isUndefined()) return UNDEFINED;
+    List list=selectToList(iter, eval);
+    if (list==null)
+      return UNDEFINED;
+    else
+      return new OclBag(list);
+  }
+
+  /** @return an instance of OclBag
+   *  @see OclCollection#collect(OclIterator iter, OclRootEvaluatable eval)
+   *  @see OclCollection#collectToList(OclIterator iter, OclRootEvaluatable eval)
+   */
+  public OclCollection collect(OclIterator iter, OclRootEvaluatable eval) {
+    if (isUndefined()) return UNDEFINED;
+    List list=collectToList(iter, eval);
+    if (list==null)
+      return UNDEFINED;
+    else
+      return new OclBag(list);
+  }
+
+  /** This method tries to call the appropriate method of the same name (for
+   *  OclSet or OclBag parameters) or, if there is no such method, handles this
+   *  error by returning UNDEFINED or throwing an exception (depending on
+   *  Ocl.STRICT_CHECKING).
+   *
+   *  @see OclCollection#union(OclCollection col)
+   *  @see #union(OclBag col)
+   *  @see #union(OclSet col)
+   */
+  public OclCollection union(OclCollection col) {
+    if (isUndefined()) return UNDEFINED;
+    if (col instanceof OclSet)
+      return union( (OclSet)col );
+    else if (col instanceof OclBag)
+      return union( (OclBag)col );
+    else
+      if (Ocl.STRICT_CHECKING)
+        throw new OclClassCastException(
+          "tried to create union of OclBag and OclSequence"
+        );
+      else
+        return UNDEFINED;
+  }
+
+  /** The union of an OclBag and an OclSet is an OclBag.
+   *  This method calls OclSet.union(OclBag).
+   *
+   *  @see OclSet#union(OclBag bag)
+   */
+  public OclBag union(OclSet set) {
+    if (isUndefined()) return UNDEFINED;
+    return set.union(this);
+  }
+
+  /** The union of two OclBags is again an OclBag.
+   */
+  public OclBag union(OclBag bag) {
+    if (isUndefined()||bag.isUndefined()) return UNDEFINED;
+    ArrayList list=new ArrayList(collection.size()+bag.collection.size());
+    list.addAll(collection);
+    list.addAll(bag.collection);
+    return new OclBag(list);
+  }
+
+  /** @return an OclSet containing all elements found in both this bag
+   *          (regardless of their number) and the set given as argument
+   */
+  public OclSet intersection(OclSet set) {
+    if (isUndefined() || set.isUndefined()) return OclSet.UNDEFINED;
+    HashSet ret=new HashSet(set.collection.size());
+    Iterator iter=set.collection.iterator();
+    while (iter.hasNext()) {
+      Object next=iter.next();
+      if (collection.contains(next)) {
+        ret.add(next);
+      }
+    }
+    return new OclSet(ret);
+  }
+
+  /** @return an OclBag that contains all elements found in both this OclBag
+   *          and the OclBag given as argument; the number of times the element
+   *          is contained in the result OclBag is the minimum of the numbers
+   *          it is found in the two source OclBags
+   */
+  public OclUnsortedCollection intersection(OclBag bag) {
+    if (isUndefined() || bag.isUndefined()) return UNDEFINED;
+    HashMap hsThis=getCountMap();
+    HashMap hsOther=bag.getCountMap();
+    Iterator iter=hsThis.keySet().iterator();
+    ArrayList ret=new ArrayList(collection.size());
+    while(iter.hasNext()) {
+      Object key=iter.next();
+      Object vThis=hsThis.get(key);
+      Object vOther=hsOther.get(key);
+      if (vOther!=null) {
+        int iNewValue=Math.min(
+          ((Integer)vThis).intValue(),
+          ((Integer)vOther).intValue()
+        );
+        for (int i=0; i<iNewValue; i++) {
+          ret.add(key);
+        }
+      }
+    }
+    return new OclBag(ret);
+  }
+
+  /** STRICT_VALUE_TYPES determines whether the changes of the returned
+   *  collection affect this collection, and if the returned is actually
+   *  different from this collection.
+   *
+   *  @return an OclBag containing all elements of this bag, plus the argument
+   *
+   *  @see OclCollection#STRICT_VALUE_TYPES
+   */
+  public OclCollection including(OclRoot obj) {
+    if (isUndefined() || obj.isUndefined()) return UNDEFINED;
+    if (STRICT_VALUE_TYPES) {
+      ArrayList list=new ArrayList(collection);
+      list.add(obj);
+      return new OclBag(list);
+    } else {
+      collection.add(obj);
+      return this;
+    }
+  }
+
+  /** STRICT_VALUE_TYPES determines whether the changes of the returned
+   *  collection affect this collection, and if the returned is actually
+   *  different from this collection. If this OclBag is not backed by a
+   *  java.util.ArrayList, a new OclBag is created even if STRICT_VALUE_TYPES
+   *  is set to <CODE>false</CODE>.
+   *
+   *  @return an OclBag containing all elements of this bag but the argument
+   *
+   *  @see OclCollection#STRICT_VALUE_TYPES
+   */
+  public OclCollection excluding(OclRoot obj) {
+    if (isUndefined() || obj.isUndefined()) return UNDEFINED;
+    boolean bCreateCopy=STRICT_VALUE_TYPES || ! (collection instanceof ArrayList);
+    ArrayList list;
+    if ( bCreateCopy ) {
+      list=new ArrayList(collection);
+    } else {
+      list=(ArrayList)collection;
+    }
+    int i=list.indexOf(obj);
+    while (i!=-1) {
+      list.remove(i);
+      i=list.indexOf(obj);
+    }
+    if (bCreateCopy) {
+      return new OclBag(list);
+    } else {
+      return this;
+    }
+  }
+
+  /** @return a HashMap with elements of this collection as keys and an Integer
+   *          denoting their count as value
+   */
+  protected HashMap getCountMap() {
+    Iterator iter=collection.iterator();
+    HashMap count=new HashMap();
+    while (iter.hasNext()) {
+      Object key=iter.next();
+      if (count.get(key)==null) {
+        count.put(key, new Integer(1));
+      } else {
+        Integer oldvalue=(Integer)count.get(key);
+        count.put(key, new Integer( oldvalue.intValue()+1 ) );
+      }
+    }
+    return count;
+  }
+
+  public String toString() {
+    return "OclBag"+super.toString();
+  }
+
+} /* end class OclBag */
+
