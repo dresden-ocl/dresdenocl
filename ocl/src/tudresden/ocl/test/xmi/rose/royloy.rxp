@@ -1,0 +1,852 @@
+Platform: NT
+Output: MBCS
+Rose Version: 6.5.9232.10
+Global Symbol Entered; Model: 'royloy' with id G.1 at index  0
+Scoped Symbol Entered; Category: 'Logical View' with id S.10000 at index  0
+Scoped Symbol Entered; Class: 'Person' with id S.10001 at index  1
+Scoped Symbol Entered; Attribute: 'isUnemployed' with id S.10002 at index  2
+Scoped Symbol Entered; Attribute: 'age' with id S.10003 at index  3
+Scoped Symbol Entered; Attribute: 'isMarried' with id S.10004 at index  4
+Scoped Symbol Entered; Attribute: 'name' with id S.10005 at index  5
+Scoped Symbol Entered; Operation: 'getIncomeAfterTax' with id S.10006 at index  6
+Scoped Symbol Entered; Class: 'Company' with id S.10007 at index  7
+Scoped Symbol Entered; Attribute: 'numberOfEmployees' with id S.10008 at index  8
+Scoped Symbol Entered; Operation: 'getOldestEmployee' with id S.10009 at index  9
+Scoped Symbol Entered; Operation: 'getOldestEmployeeAge' with id S.10010 at index  10
+Scoped Symbol Entered; Class: 'LoyaltyProgram' with id S.10011 at index  11
+Scoped Symbol Entered; Operation: 'enroll' with id S.10012 at index  12
+Scoped Symbol Entered; Class: 'Customer' with id S.10013 at index  13
+Scoped Symbol Entered; Attribute: 'name' with id S.10014 at index  14
+Scoped Symbol Entered; Attribute: 'title' with id S.10015 at index  15
+Scoped Symbol Entered; Attribute: 'isMale' with id S.10016 at index  16
+Scoped Symbol Entered; Attribute: 'dateOfBirth' with id S.10017 at index  17
+Scoped Symbol Entered; Class: 'Membership' with id S.10018 at index  18
+Scoped Symbol Entered; Class: 'CustomerCard' with id S.10019 at index  19
+Scoped Symbol Entered; Attribute: 'valid' with id S.10020 at index  20
+Scoped Symbol Entered; Attribute: 'validFrom' with id S.10021 at index  21
+Scoped Symbol Entered; Attribute: 'validThru' with id S.10022 at index  22
+Scoped Symbol Entered; Attribute: 'color' with id S.10023 at index  23
+Scoped Symbol Entered; Attribute: 'color_gold' with id S.10024 at index  24
+Scoped Symbol Entered; Attribute: 'COLOR_SILVER' with id S.10025 at index  25
+Scoped Symbol Entered; Attribute: 'printedName' with id S.10026 at index  26
+Scoped Symbol Entered; Class: 'LoyaltyAccount' with id S.10027 at index  27
+Scoped Symbol Entered; Attribute: 'points' with id S.10028 at index  28
+Scoped Symbol Entered; Operation: 'earn' with id S.10029 at index  29
+Scoped Symbol Entered; Operation: 'burn' with id S.10030 at index  30
+Scoped Symbol Entered; Operation: 'isEmpty' with id S.10031 at index  31
+Scoped Symbol Entered; Class: 'ServiceLevel' with id S.10032 at index  32
+Scoped Symbol Entered; Attribute: 'name' with id S.10033 at index  33
+Scoped Symbol Entered; Class: 'ProgramPartner' with id S.10034 at index  34
+Scoped Symbol Entered; Attribute: 'numberOfCustomers' with id S.10035 at index  35
+Scoped Symbol Entered; Class: 'Service' with id S.10036 at index  36
+Scoped Symbol Entered; Attribute: 'condition' with id S.10037 at index  37
+Scoped Symbol Entered; Attribute: 'pointsEarned' with id S.10038 at index  38
+Scoped Symbol Entered; Attribute: 'pointsBurned' with id S.10039 at index  39
+Scoped Symbol Entered; Attribute: 'description' with id S.10040 at index  40
+Scoped Symbol Entered; Class: 'Transaction' with id S.10041 at index  41
+Scoped Symbol Entered; Attribute: 'points' with id S.10042 at index  42
+Scoped Symbol Entered; Attribute: 'date' with id S.10043 at index  43
+Scoped Symbol Entered; Operation: 'program' with id S.10044 at index  44
+Scoped Symbol Entered; Class: 'Burning' with id S.10045 at index  45
+Scoped Symbol Entered; Class: 'Earning' with id S.10046 at index  46
+Scoped Symbol Entered; Class: 'Date' with id S.10047 at index  47
+Scoped Symbol Entered; Attribute: 'now' with id S.10048 at index  48
+Scoped Symbol Entered; Operation: 'isBefore' with id S.10049 at index  49
+Scoped Symbol Entered; Operation: 'isAfter' with id S.10050 at index  50
+Scoped Symbol Entered; Operation: 'equals' with id S.10051 at index  51
+Scoped Symbol Entered; Class: 'Day' with id S.10052 at index  52
+Scoped Symbol Entered; Attribute: 'type' with id S.10053 at index  53
+Scoped Symbol Entered; Attribute: 'isWeekend' with id S.10054 at index  54
+Scoped Symbol Entered; Operation: 'setType' with id S.10055 at index  55
+Scoped Symbol Entered; Class: 'DayType' with id S.10056 at index  56
+Scoped Symbol Entered; Attribute: 'monday' with id S.10057 at index  57
+Scoped Symbol Entered; Attribute: 'tuesday' with id S.10058 at index  58
+Scoped Symbol Entered; Attribute: 'wednesday' with id S.10059 at index  59
+Scoped Symbol Entered; Attribute: 'thursday' with id S.10060 at index  60
+Scoped Symbol Entered; Attribute: 'friday' with id S.10061 at index  61
+Scoped Symbol Entered; Attribute: 'saturday' with id S.10062 at index  62
+Scoped Symbol Entered; Attribute: 'sunday' with id S.10063 at index  63
+Scoped Symbol Entered; Operation: 'getFollowingDay' with id S.10064 at index  64
+Scoped Symbol Entered; Class: 'Bank' with id S.10065 at index  65
+Scoped Symbol Entered; Class: 'Account' with id S.10066 at index  66
+Scoped Symbol Entered; Attribute: 'created' with id S.10067 at index  67
+Global Symbol Entered; Association: '{Company-Person}{3896DDAB000D}' with id G.2 at index  1
+Global Symbol Entered; Role: 'managedCompanies{3896DDAC036B}' with id G.3 at index  2
+Global Symbol Entered; Role: 'manager{3896DDAC037F}' with id G.4 at index  3
+Global Symbol Entered; Association: '{Customer-LoyaltyProgram}{3896E1140347}' with id G.5 at index  4
+Global Symbol Entered; Role: '{3896E1150230}' with id G.6 at index  5
+Global Symbol Entered; Role: 'program{3896E1150244}' with id G.7 at index  6
+Global Symbol Entered; Association: '{Membership-LoyaltyProgram}{3896E14A0010}' with id G.8 at index  7
+Global Symbol Entered; Role: '{3896E14B004D}' with id G.9 at index  8
+Global Symbol Entered; Role: 'program{3896E14B0057}' with id G.10 at index  9
+Global Symbol Entered; Association: '{Customer-Membership}{3896E188025E}' with id G.11 at index  10
+Global Symbol Entered; Role: '{3896E1890219}' with id G.12 at index  11
+Global Symbol Entered; Role: '{3896E1890237}' with id G.13 at index  12
+Global Symbol Entered; Association: '{CustomerCard-Customer}{3896E1CB0142}' with id G.14 at index  13
+Global Symbol Entered; Role: 'cards{3896E1CB032C}' with id G.15 at index  14
+Global Symbol Entered; Role: 'owner{3896E1CB034A}' with id G.16 at index  15
+Global Symbol Entered; Association: '{CustomerCard-Membership}{3896E20E02C4}' with id G.17 at index  16
+Global Symbol Entered; Role: 'card{3896E20F0230}' with id G.18 at index  17
+Global Symbol Entered; Role: '{3896E20F024E}' with id G.19 at index  18
+Global Symbol Entered; Association: '{LoyaltyAccount-Membership}{3896E24D0030}' with id G.20 at index  19
+Global Symbol Entered; Role: '{3896E24D029D}' with id G.21 at index  20
+Global Symbol Entered; Role: '{3896E24D02A7}' with id G.22 at index  21
+Global Symbol Entered; Association: '{Membership-ServiceLevel}{3896E282027B}' with id G.23 at index  22
+Global Symbol Entered; Role: '{3896E283018C}' with id G.24 at index  23
+Global Symbol Entered; Role: 'actualLevel{3896E28301A0}' with id G.25 at index  24
+Global Symbol Entered; Association: '{ServiceLevel-LoyaltyProgram}{3896E2F20100}' with id G.26 at index  25
+Global Symbol Entered; Role: '{3896E2F3027E}' with id G.27 at index  26
+Global Symbol Entered; Role: '{3896E2F30292}' with id G.28 at index  27
+Global Symbol Entered; Association: '{ProgramPartner-LoyaltyProgram}{3896E31E0135}' with id G.29 at index  28
+Global Symbol Entered; Role: 'partners{3896E31F0191}' with id G.30 at index  29
+Global Symbol Entered; Role: '{3896E31F01A5}' with id G.31 at index  30
+Global Symbol Entered; Association: '{Service-ProgramPartner}{3896E3A4011A}' with id G.32 at index  31
+Global Symbol Entered; Role: 'deliveredServices{3896E3A4030E}' with id G.33 at index  32
+Global Symbol Entered; Role: 'programPartner{3896E3A40322}' with id G.34 at index  33
+Global Symbol Entered; Association: '{Service-ServiceLevel}{3896E40203AA}' with id G.35 at index  34
+Global Symbol Entered; Role: '{3896E4030289}' with id G.36 at index  35
+Global Symbol Entered; Role: '{3896E403029D}' with id G.37 at index  36
+Global Symbol Entered; Association: '{Transaction-LoyaltyAccount}{3896E44E0359}' with id G.38 at index  37
+Global Symbol Entered; Role: 'transactions{3896E44F0346}' with id G.39 at index  38
+Global Symbol Entered; Role: '{3896E44F035A}' with id G.40 at index  39
+Global Symbol Entered; Association: '{CustomerCard-Transaction}{3896E48D00E3}' with id G.41 at index  40
+Global Symbol Entered; Role: 'card{3896E48E004E}' with id G.42 at index  41
+Global Symbol Entered; Role: 'transactions{3896E48E006C}' with id G.43 at index  42
+Global Symbol Entered; Association: '{Company-Person}{3896E50D0032}' with id G.44 at index  43
+Global Symbol Entered; Role: 'employers{3896E50D0281}' with id G.45 at index  44
+Global Symbol Entered; Role: 'employees{3896E50D0295}' with id G.46 at index  45
+Global Symbol Entered; Association: '{Person-Person}{3896E58A023B}' with id G.47 at index  46
+Global Symbol Entered; Role: 'husband{3896E58F01DE}' with id G.48 at index  47
+Global Symbol Entered; Role: 'wife{3896E58F01FC}' with id G.49 at index  48
+Global Symbol Entered; Association: '{Transaction-Service}{3896E6F10223}' with id G.50 at index  49
+Global Symbol Entered; Role: 'transactions{3896E6F201DE}' with id G.51 at index  50
+Global Symbol Entered; Role: '{3896E6F201F2}' with id G.52 at index  51
+Global Symbol Entered; Association: '{Person-Bank}{38C79BDE02A3}' with id G.53 at index  52
+Global Symbol Entered; Role: 'customer{38C79BE00011}' with id G.54 at index  53
+Unable to find scoping symbol 'Logical View::<unnamed>::customer' for Attribute Logical View::<unnamed>::customer::index
+Scoped Symbol Entered; Attribute: 'index' with id X.1 at index  68
+Global Symbol Entered; Role: '{38C79BE0001B}' with id G.55 at index  54
+Scoped Symbol Entered; Subsystem: 'Component View' with id S.10068 at index  69
+Scoped Symbol Entered; Module: 'Person' with id S.10069 at index  70
+DoModuleDependencies for module: Person count =  0
+Scoped Symbol Entered; Category: 'Use Case View' with id S.10070 at index  71
+Create Model: royloy
+Create AssociationRef for Class: Person
+Switch Roles: Role1Type = Logical View::Company Role2Type = Logical View::Person
+Add Association End ref(G.4) Role: manager{3896DDAC037F}
+Create AssociationRef for Class: Person
+Switch Roles: Role1Type = Logical View::Company Role2Type = Logical View::Person
+Add Association End ref(G.46) Role: employees{3896E50D0295}
+Create AssociationRef for Class: Person
+Add Association End ref(G.48) Role: husband{3896E58F01DE}
+Add 2nd Association End ref(G.49) Role: wife{3896E58F01FC}
+Create AssociationRef for Class: Person
+Add Association End ref(G.54) Role: customer{38C79BE00011}
+Global Symbol Entered; Basic Type: 'boolean' with id G.56 at index  55
+Global Symbol Entered; Basic Type: 'int' with id G.57 at index  56
+Global Symbol Entered; Basic Type: 'String' with id G.58 at index  57
+Global Symbol Entered; Basic Type: 'double' with id G.60 at index  58
+Create AssociationRef for Class: Company
+Add Association End ref(G.3) Role: managedCompanies{3896DDAC036B}
+Create AssociationRef for Class: Company
+Add Association End ref(G.45) Role: employers{3896E50D0281}
+Create AssociationRef for Class: LoyaltyProgram
+Switch Roles: Role1Type = Logical View::Customer Role2Type = Logical View::LoyaltyProgram
+Add Association End ref(G.7) Role: program{3896E1150244}
+Create AssociationRef for Class: LoyaltyProgram
+Switch Roles: Role1Type = Logical View::Membership Role2Type = Logical View::LoyaltyProgram
+Add Association End ref(G.10) Role: program{3896E14B0057}
+Create AssociationRef for Class: LoyaltyProgram
+Switch Roles: Role1Type = Logical View::ServiceLevel Role2Type = Logical View::LoyaltyProgram
+Add Association End ref(G.28) Role: {3896E2F30292}
+Create AssociationRef for Class: LoyaltyProgram
+Switch Roles: Role1Type = Logical View::ProgramPartner Role2Type = Logical View::LoyaltyProgram
+Add Association End ref(G.31) Role: {3896E31F01A5}
+Global Symbol Entered; Basic Type: 'void' with id G.66 at index  59
+Create AssociationRef for Class: Customer
+Add Association End ref(G.6) Role: {3896E1150230}
+Create AssociationRef for Class: Customer
+Add Association End ref(G.12) Role: {3896E1890219}
+Create AssociationRef for Class: Customer
+Switch Roles: Role1Type = Logical View::CustomerCard Role2Type = Logical View::Customer
+Add Association End ref(G.16) Role: owner{3896E1CB034A}
+Create AssociationRef for Class: Membership
+Add Association End ref(G.9) Role: {3896E14B004D}
+Create AssociationRef for Class: Membership
+Switch Roles: Role1Type = Logical View::Customer Role2Type = Logical View::Membership
+Add Association End ref(G.13) Role: {3896E1890237}
+Create AssociationRef for Class: Membership
+Switch Roles: Role1Type = Logical View::CustomerCard Role2Type = Logical View::Membership
+Add Association End ref(G.19) Role: {3896E20F024E}
+Create AssociationRef for Class: Membership
+Switch Roles: Role1Type = Logical View::LoyaltyAccount Role2Type = Logical View::Membership
+Add Association End ref(G.22) Role: {3896E24D02A7}
+Create AssociationRef for Class: Membership
+Add Association End ref(G.24) Role: {3896E283018C}
+Create AssociationRef for Class: CustomerCard
+Add Association End ref(G.15) Role: cards{3896E1CB032C}
+Create AssociationRef for Class: CustomerCard
+Add Association End ref(G.18) Role: card{3896E20F0230}
+Create AssociationRef for Class: CustomerCard
+Add Association End ref(G.42) Role: card{3896E48E004E}
+Create AssociationRef for Class: LoyaltyAccount
+Add Association End ref(G.21) Role: {3896E24D029D}
+Create AssociationRef for Class: LoyaltyAccount
+Switch Roles: Role1Type = Logical View::Transaction Role2Type = Logical View::LoyaltyAccount
+Add Association End ref(G.40) Role: {3896E44F035A}
+Create AssociationRef for Class: ServiceLevel
+Switch Roles: Role1Type = Logical View::Membership Role2Type = Logical View::ServiceLevel
+Add Association End ref(G.25) Role: actualLevel{3896E28301A0}
+Create AssociationRef for Class: ServiceLevel
+Add Association End ref(G.27) Role: {3896E2F3027E}
+Create AssociationRef for Class: ServiceLevel
+Switch Roles: Role1Type = Logical View::Service Role2Type = Logical View::ServiceLevel
+Add Association End ref(G.37) Role: {3896E403029D}
+Create AssociationRef for Class: ProgramPartner
+Add Association End ref(G.30) Role: partners{3896E31F0191}
+Create AssociationRef for Class: ProgramPartner
+Switch Roles: Role1Type = Logical View::Service Role2Type = Logical View::ProgramPartner
+Add Association End ref(G.34) Role: programPartner{3896E3A40322}
+Create AssociationRef for Class: Service
+Add Association End ref(G.33) Role: deliveredServices{3896E3A4030E}
+Create AssociationRef for Class: Service
+Add Association End ref(G.36) Role: {3896E4030289}
+Create AssociationRef for Class: Service
+Switch Roles: Role1Type = Logical View::Transaction Role2Type = Logical View::Service
+Add Association End ref(G.52) Role: {3896E6F201F2}
+Create AssociationRef for Class: Transaction
+Add Association End ref(G.39) Role: transactions{3896E44F0346}
+Create AssociationRef for Class: Transaction
+Switch Roles: Role1Type = Logical View::CustomerCard Role2Type = Logical View::Transaction
+Add Association End ref(G.43) Role: transactions{3896E48E006C}
+Create AssociationRef for Class: Transaction
+Add Association End ref(G.51) Role: transactions{3896E6F201DE}
+Create AssociationRef for Class: Bank
+Switch Roles: Role1Type = Logical View::Person Role2Type = Logical View::Bank
+Add Association End ref(G.55) Role: {38C79BE0001B}
+Process association portion of Association Class: S.10066
+Role: customer
+  Association End: Person
+  Association end: G.54 added to association S.10066
+  Class/UseCase/Interface: Person
+Role: 
+  Association End: Bank
+  Association end: G.55 added to association S.10066
+  Class/UseCase/Interface: Bank
+Process Association: {Company-Person}{3896DDAB000D}
+Role: managedCompanies
+  Association End: Company
+  Association end: G.3 added to association G.2
+  Class/UseCase/Interface: Company
+Role: manager
+  Association End: Person
+  Association end: G.4 added to association G.2
+  Class/UseCase/Interface: Person
+Process Association: {Company-Person}{3896E50D0032}
+Role: employers
+  Association End: Company
+  Association end: G.45 added to association G.44
+  Class/UseCase/Interface: Company
+Role: employees
+  Association End: Person
+  Association end: G.46 added to association G.44
+  Class/UseCase/Interface: Person
+Process Association: {Person-Person}{3896E58A023B}
+Role: husband
+  Association End: Person
+  Association end: G.48 added to association G.47
+  Class/UseCase/Interface: Person
+Role: wife
+  Association End: Person
+  Association end: G.49 added to association G.47
+  Class/UseCase/Interface: Person
+Process Association: {Company-Person}{3896DDAB000D}
+>>>>Already Defined -- Quit
+Process Association: {Company-Person}{3896E50D0032}
+>>>>Already Defined -- Quit
+Process Association: {Customer-LoyaltyProgram}{3896E1140347}
+Role: 
+  Association End: Customer
+  Association end: G.6 added to association G.5
+  Class/UseCase/Interface: Customer
+Role: program
+  Association End: LoyaltyProgram
+  Association end: G.7 added to association G.5
+  Class/UseCase/Interface: LoyaltyProgram
+Process Association: {Membership-LoyaltyProgram}{3896E14A0010}
+Role: 
+  Association End: Membership
+  Association end: G.9 added to association G.8
+  Class/UseCase/Interface: Membership
+Role: program
+  Association End: LoyaltyProgram
+  Association end: G.10 added to association G.8
+  Class/UseCase/Interface: LoyaltyProgram
+Process Association: {ServiceLevel-LoyaltyProgram}{3896E2F20100}
+Role: 
+  Association End: ServiceLevel
+  Association end: G.27 added to association G.26
+  Class/UseCase/Interface: ServiceLevel
+Role: 
+  Association End: LoyaltyProgram
+  Association end: G.28 added to association G.26
+  Class/UseCase/Interface: LoyaltyProgram
+Process Association: {ProgramPartner-LoyaltyProgram}{3896E31E0135}
+Role: partners
+  Association End: ProgramPartner
+  Association end: G.30 added to association G.29
+  Class/UseCase/Interface: ProgramPartner
+Role: 
+  Association End: LoyaltyProgram
+  Association end: G.31 added to association G.29
+  Class/UseCase/Interface: LoyaltyProgram
+Process Association: {Customer-LoyaltyProgram}{3896E1140347}
+>>>>Already Defined -- Quit
+Process Association: {Customer-Membership}{3896E188025E}
+Role: 
+  Association End: Customer
+  Association end: G.12 added to association G.11
+  Class/UseCase/Interface: Customer
+Role: 
+  Association End: Membership
+  Association end: G.13 added to association G.11
+  Class/UseCase/Interface: Membership
+Process Association: {CustomerCard-Customer}{3896E1CB0142}
+Role: cards
+  Association End: CustomerCard
+  Association end: G.15 added to association G.14
+  Class/UseCase/Interface: CustomerCard
+Role: owner
+  Association End: Customer
+  Association end: G.16 added to association G.14
+  Class/UseCase/Interface: Customer
+Process Association: {Membership-LoyaltyProgram}{3896E14A0010}
+>>>>Already Defined -- Quit
+Process Association: {Customer-Membership}{3896E188025E}
+>>>>Already Defined -- Quit
+Process Association: {CustomerCard-Membership}{3896E20E02C4}
+Role: card
+  Association End: CustomerCard
+  Association end: G.18 added to association G.17
+  Class/UseCase/Interface: CustomerCard
+Role: 
+  Association End: Membership
+  Association end: G.19 added to association G.17
+  Class/UseCase/Interface: Membership
+Process Association: {LoyaltyAccount-Membership}{3896E24D0030}
+Role: 
+  Association End: LoyaltyAccount
+  Association end: G.21 added to association G.20
+  Class/UseCase/Interface: LoyaltyAccount
+Role: 
+  Association End: Membership
+  Association end: G.22 added to association G.20
+  Class/UseCase/Interface: Membership
+Process Association: {Membership-ServiceLevel}{3896E282027B}
+Role: 
+  Association End: Membership
+  Association end: G.24 added to association G.23
+  Class/UseCase/Interface: Membership
+Role: actualLevel
+  Association End: ServiceLevel
+  Association end: G.25 added to association G.23
+  Class/UseCase/Interface: ServiceLevel
+Process Association: {CustomerCard-Customer}{3896E1CB0142}
+>>>>Already Defined -- Quit
+Process Association: {CustomerCard-Membership}{3896E20E02C4}
+>>>>Already Defined -- Quit
+Process Association: {CustomerCard-Transaction}{3896E48D00E3}
+Role: card
+  Association End: CustomerCard
+  Association end: G.42 added to association G.41
+  Class/UseCase/Interface: CustomerCard
+Role: transactions
+  Association End: Transaction
+  Association end: G.43 added to association G.41
+  Class/UseCase/Interface: Transaction
+Process Association: {LoyaltyAccount-Membership}{3896E24D0030}
+>>>>Already Defined -- Quit
+Process Association: {Transaction-LoyaltyAccount}{3896E44E0359}
+Role: transactions
+  Association End: Transaction
+  Association end: G.39 added to association G.38
+  Class/UseCase/Interface: Transaction
+Role: 
+  Association End: LoyaltyAccount
+  Association end: G.40 added to association G.38
+  Class/UseCase/Interface: LoyaltyAccount
+Process Association: {Membership-ServiceLevel}{3896E282027B}
+>>>>Already Defined -- Quit
+Process Association: {ServiceLevel-LoyaltyProgram}{3896E2F20100}
+>>>>Already Defined -- Quit
+Process Association: {Service-ServiceLevel}{3896E40203AA}
+Role: 
+  Association End: Service
+  Association end: G.36 added to association G.35
+  Class/UseCase/Interface: Service
+Role: 
+  Association End: ServiceLevel
+  Association end: G.37 added to association G.35
+  Class/UseCase/Interface: ServiceLevel
+Process Association: {ProgramPartner-LoyaltyProgram}{3896E31E0135}
+>>>>Already Defined -- Quit
+Process Association: {Service-ProgramPartner}{3896E3A4011A}
+Role: deliveredServices
+  Association End: Service
+  Association end: G.33 added to association G.32
+  Class/UseCase/Interface: Service
+Role: programPartner
+  Association End: ProgramPartner
+  Association end: G.34 added to association G.32
+  Class/UseCase/Interface: ProgramPartner
+Process Association: {Service-ProgramPartner}{3896E3A4011A}
+>>>>Already Defined -- Quit
+Process Association: {Service-ServiceLevel}{3896E40203AA}
+>>>>Already Defined -- Quit
+Process Association: {Transaction-Service}{3896E6F10223}
+Role: transactions
+  Association End: Transaction
+  Association end: G.51 added to association G.50
+  Class/UseCase/Interface: Transaction
+Role: 
+  Association End: Service
+  Association end: G.52 added to association G.50
+  Class/UseCase/Interface: Service
+Process Association: {Transaction-LoyaltyAccount}{3896E44E0359}
+>>>>Already Defined -- Quit
+Process Association: {CustomerCard-Transaction}{3896E48D00E3}
+>>>>Already Defined -- Quit
+Process Association: {Transaction-Service}{3896E6F10223}
+>>>>Already Defined -- Quit
+Module written as component: Person
+Global Symbol Entered; Generalization: '{Burning->Transaction}{3896DF950260}' with id G.83 at index  60
+Global Symbol Entered; Generalization: '{Earning->Transaction}{3896DF9E01F5}' with id G.84 at index  61
+Create Package diagrams for /royloy
+New UISModelElement created @ G.85, extends G.1
+Scoped Symbol Entered; ClassDiagram: 'Main' with id S.10071 at index  72
+Generate Class Diagram: Logical View::Main
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.86
+** Class model id is S.10045
+AddPresentationForNoteView ignores label: 'Burning'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.87
+** Class model id is S.10046
+AddPresentationForNoteView ignores label: 'Earning'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.88
+** Class model id is S.10047
+AddPresentationForNoteView ignores label: 'Date'
+AddPresentationForNoteView ignores label: 'now : Date
+
+isBefore(d : Date) : boolean
+isAfter(d : Date) : boolean
+equals(d : Date) : boolean'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.89
+** Class model id is S.10013
+AddPresentationForNoteView ignores label: 'Customer'
+AddPresentationForNoteView ignores label: 'name : String
+title : String
+isMale : boolean
+dateOfBirth : Date
+'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.90
+** Class model id is S.10018
+AddPresentationForNoteView ignores label: 'Membership'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.91
+**Association model id = G.11
+Create UMLPresentation for Role # G.92
+Role Presentation: G.92, refers to G.12
+Create UMLPresentation for Role # G.93
+Role Presentation: G.93, refers to G.13
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: 1
+Rose shortcoming forces dropping of label: 0..*
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.94
+** Class model id is S.10011
+AddPresentationForNoteView ignores label: 'LoyaltyProgram'
+AddPresentationForNoteView ignores label: '
+enroll(c : Customer) : void'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.95
+**Association model id = G.5
+Create UMLPresentation for Role # G.96
+Role Presentation: G.96, refers to G.6
+Create UMLPresentation for Role # G.97
+Role Presentation: G.97, refers to G.7
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: 0..*
+Rose shortcoming forces dropping of label: +program
+Rose shortcoming forces dropping of label: 0..*
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.98
+**Association model id = G.8
+Create UMLPresentation for Role # G.99
+Role Presentation: G.99, refers to G.9
+Create UMLPresentation for Role # G.100
+Role Presentation: G.100, refers to G.10
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: 0..*
+Rose shortcoming forces dropping of label: +program
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.101
+** Class model id is S.10027
+AddPresentationForNoteView ignores label: 'LoyaltyAccount'
+AddPresentationForNoteView ignores label: 'points : int
+
+earn(i : int) : void
+burn(i : int) : void
+isEmpty() : boolean'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.102
+**Association model id = G.20
+Create UMLPresentation for Role # G.103
+Role Presentation: G.103, refers to G.21
+Create UMLPresentation for Role # G.104
+Role Presentation: G.104, refers to G.22
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: 0..1
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.105
+** Class model id is S.10019
+AddPresentationForNoteView ignores label: 'CustomerCard'
+AddPresentationForNoteView ignores label: 'valid : boolean
+validFrom : Date
+validThru : Date
+color : int
+color_gold : int
+COLOR_SILVER : int
+printedName : String
+'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.106
+**Association model id = G.14
+Create UMLPresentation for Role # G.107
+Role Presentation: G.107, refers to G.15
+Create UMLPresentation for Role # G.108
+Role Presentation: G.108, refers to G.16
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +cards
+Rose shortcoming forces dropping of label: 0..*
+Rose shortcoming forces dropping of label: +owner
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.109
+**Association model id = G.17
+Create UMLPresentation for Role # G.110
+Role Presentation: G.110, refers to G.18
+Create UMLPresentation for Role # G.111
+Role Presentation: G.111, refers to G.19
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +card
+Rose shortcoming forces dropping of label: 1
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.112
+** Class model id is S.10034
+AddPresentationForNoteView ignores label: 'ProgramPartner'
+AddPresentationForNoteView ignores label: 'numberOfCustomers : int
+'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.113
+**Association model id = G.29
+Create UMLPresentation for Role # G.114
+Role Presentation: G.114, refers to G.30
+Create UMLPresentation for Role # G.115
+Role Presentation: G.115, refers to G.31
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +partners
+Rose shortcoming forces dropping of label: 1..*
+Rose shortcoming forces dropping of label: 1..*
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.116
+** Class model id is S.10032
+AddPresentationForNoteView ignores label: 'ServiceLevel'
+AddPresentationForNoteView ignores label: 'name : String
+'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.117
+**Association model id = G.23
+Create UMLPresentation for Role # G.118
+Role Presentation: G.118, refers to G.24
+Create UMLPresentation for Role # G.119
+Role Presentation: G.119, refers to G.25
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: 0..*
+Rose shortcoming forces dropping of label: +actualLevel
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.120
+**Association model id = G.26
+Create UMLPresentation for Role # G.121
+Role Presentation: G.121, refers to G.27
+Create UMLPresentation for Role # G.122
+Role Presentation: G.122, refers to G.28
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: 1..*
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.123
+** Class model id is S.10041
+AddPresentationForNoteView ignores label: 'Transaction'
+AddPresentationForNoteView ignores label: 'points : int
+date : Date
+
+program() : LoyaltyProgram'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.124
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.125
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.126
+**Association model id = G.38
+Create UMLPresentation for Role # G.127
+Role Presentation: G.127, refers to G.39
+Create UMLPresentation for Role # G.128
+Role Presentation: G.128, refers to G.40
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +transactions
+Rose shortcoming forces dropping of label: 0..*
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.129
+**Association model id = G.41
+Create UMLPresentation for Role # G.130
+Role Presentation: G.130, refers to G.42
+Create UMLPresentation for Role # G.131
+Role Presentation: G.131, refers to G.43
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +card
+Rose shortcoming forces dropping of label: 1
+Rose shortcoming forces dropping of label: +transactions
+Rose shortcoming forces dropping of label: 0..*
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.132
+** Class model id is S.10036
+AddPresentationForNoteView ignores label: 'Service'
+AddPresentationForNoteView ignores label: 'condition : boolean
+pointsEarned : int
+pointsBurned : int
+description : String
+'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.133
+**Association model id = G.32
+Create UMLPresentation for Role # G.134
+Role Presentation: G.134, refers to G.33
+Create UMLPresentation for Role # G.135
+Role Presentation: G.135, refers to G.34
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +deliveredServices
+Rose shortcoming forces dropping of label: 0..*
+Rose shortcoming forces dropping of label: +programPartner
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.136
+**Association model id = G.35
+Create UMLPresentation for Role # G.137
+Role Presentation: G.137, refers to G.36
+Create UMLPresentation for Role # G.138
+Role Presentation: G.138, refers to G.37
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: 1
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.139
+**Association model id = G.50
+Create UMLPresentation for Role # G.140
+Role Presentation: G.140, refers to G.51
+Create UMLPresentation for Role # G.141
+Role Presentation: G.141, refers to G.52
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +transactions
+Rose shortcoming forces dropping of label: 0..*
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.142
+** Class model id is S.10052
+AddPresentationForNoteView ignores label: 'Day'
+AddPresentationForNoteView ignores label: 'type : DayType
+isWeekend : boolean
+
+setType(dt : DayType) : void'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.143
+** Class model id is S.10056
+AddPresentationForNoteView ignores label: 'DayType'
+AddPresentationForNoteView ignores label: 'monday : DayType
+tuesday : DayType
+wednesday : DayType
+thursday : DayType
+friday : DayType
+saturday : DayType
+sunday : DayType
+
+getFollowingDay(dt : DayType) : DayType'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.144
+** Class model id is S.10007
+AddPresentationForNoteView ignores label: 'Company'
+AddPresentationForNoteView ignores label: 'numberOfEmployees : int
+
+getOldestEmployee() : Person
+getOldestEmployeeAge() : int'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.145
+** Class model id is S.10001
+AddPresentationForNoteView ignores label: 'Person'
+AddPresentationForNoteView ignores label: 'isUnemployed : boolean
+age : int
+isMarried : boolean
+name : String
+
+getIncomeAfterTax(d : double) : double'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.146
+**Association model id = G.2
+Create UMLPresentation for Role # G.147
+Role Presentation: G.147, refers to G.3
+Create UMLPresentation for Role # G.148
+Role Presentation: G.148, refers to G.4
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +managedCompanies
+Rose shortcoming forces dropping of label: 0..*
+Rose shortcoming forces dropping of label: +manager
+Rose shortcoming forces dropping of label: 1
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.149
+**Association model id = G.44
+Create UMLPresentation for Role # G.150
+Role Presentation: G.150, refers to G.45
+Create UMLPresentation for Role # G.151
+Role Presentation: G.151, refers to G.46
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +employers
+Rose shortcoming forces dropping of label: 0..*
+Rose shortcoming forces dropping of label: +employees
+Rose shortcoming forces dropping of label: 0..*
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.152
+**Association model id = G.47
+Create UMLPresentation for Role # G.153
+Role Presentation: G.153, refers to G.48
+Create UMLPresentation for Role # G.154
+Role Presentation: G.154, refers to G.49
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +husband
+Rose shortcoming forces dropping of label: 0..1
+Rose shortcoming forces dropping of label: +wife
+Rose shortcoming forces dropping of label: 0..1
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.155
+** Class model id is S.10065
+AddPresentationForNoteView ignores label: 'Bank'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.156
+**Association model id = S.10066
+Create UMLPresentation for Role # G.157
+Role Presentation: G.157, refers to G.54
+Create UMLPresentation for Role # G.158
+Role Presentation: G.158, refers to G.55
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +customer
+Rose shortcoming forces dropping of label: 0..1
+Rose shortcoming forces dropping of label: 1
+Rose shortcoming forces dropping of label: index : int
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.159
+** Class model id is S.10066
+AddPresentationForNoteView ignores label: 'Account'
+AddPresentationForNoteView ignores label: 'created : Date
+'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView fails--unknown noteview type
+GenerateScenarioDiagram -- category: Logical View
+GenerateStateActivityDiagram -- category: Logical View
+GenerateStateActivityDiagram -- class: Person
+GenerateStateActivityDiagram -- operation: getIncomeAfterTax
+GenerateStateActivityDiagram -- class: Company
+GenerateStateActivityDiagram -- operation: getOldestEmployee
+GenerateStateActivityDiagram -- operation: getOldestEmployeeAge
+GenerateStateActivityDiagram -- class: LoyaltyProgram
+GenerateStateActivityDiagram -- operation: enroll
+GenerateStateActivityDiagram -- class: Customer
+GenerateStateActivityDiagram -- class: Membership
+GenerateStateActivityDiagram -- class: CustomerCard
+GenerateStateActivityDiagram -- class: LoyaltyAccount
+GenerateStateActivityDiagram -- operation: earn
+GenerateStateActivityDiagram -- operation: burn
+GenerateStateActivityDiagram -- operation: isEmpty
+GenerateStateActivityDiagram -- class: ServiceLevel
+GenerateStateActivityDiagram -- class: ProgramPartner
+GenerateStateActivityDiagram -- class: Service
+GenerateStateActivityDiagram -- class: Transaction
+GenerateStateActivityDiagram -- operation: program
+GenerateStateActivityDiagram -- class: Burning
+GenerateStateActivityDiagram -- class: Earning
+GenerateStateActivityDiagram -- class: Date
+GenerateStateActivityDiagram -- operation: isBefore
+GenerateStateActivityDiagram -- operation: isAfter
+GenerateStateActivityDiagram -- operation: equals
+GenerateStateActivityDiagram -- class: Day
+GenerateStateActivityDiagram -- operation: setType
+GenerateStateActivityDiagram -- class: DayType
+GenerateStateActivityDiagram -- operation: getFollowingDay
+GenerateStateActivityDiagram -- class: Bank
+GenerateStateActivityDiagram -- class: Account
+Using existing UISModelElement @ G.85, extends G.1
+Scoped Symbol Entered; ModuleDiagram: 'Main' with id S.10072 at index  73
+Generate Module Diagram: Main

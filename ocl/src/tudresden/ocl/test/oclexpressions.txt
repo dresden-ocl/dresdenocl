@@ -1,0 +1,41 @@
+<ocl>
+context Person inv: age>=0
+
+<ocl>
+context Company inv: 
+  employees->iterate(
+    p:Person ; b:Bag(Person)=Bag{} |
+    b->including(p)
+  )->includes(manager)
+
+<ocl syntax=0>
+context Person : whatever
+
+<ocl syntax=1>
+context Company inv: self.numberOfEmployees=employees->size
+
+<ocl>
+context Company inv:
+manager.employers->includes(self)
+
+<ocl>
+context Person inv:
+managedCompanies->forAll(employees->includes(self))
+
+<ocl>
+context Person inv:
+Set{ 0 .. 199 }->includes(age)
+
+<ocl types=0>
+context Person inv:
+Set{ 'a' .. 'z' }->includes(name.substring(1, 1))
+
+<ocl>
+context Person inv:
+let firstLetter:String=name.substring(1,1) in
+firstLetter = firstLetter.toUpper
+
+<ocl>
+context Person inv:
+let firstLetter:Person=name.substring(1,1) in
+firstLetter = firstLetter.toUpper

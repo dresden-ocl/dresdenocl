@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE pgml SYSTEM "pgml.dtd">
+<pgml description="uci.uml.visual.UMLClassDiagram|S.100124"
+      name="class diagram 4"
+>
+  <group name="Fig0"
+       description="uci.uml.visual.FigClass[96, 64, 101, 61]"
+       href="S.100216"
+       fill="1"
+       fillcolor="-1"
+       stroke="1"
+       strokecolor="-16777216"
+  >
+    <private>
+    </private>
+    
+    <rectangle name="Fig0.0"
+      x="97"
+      y="65"
+      width="99"
+      height="59"
+      fill="1"
+      fillcolor="-1"
+      stroke="1"
+      strokecolor="-16777216"
+    />
+    <text name="Fig0.1"
+      x="96"
+      y="64"
+      fill="1"
+      fillcolor="-1"
+      stroke="1"
+      strokecolor="-16777216"
+      font="Dialog"
+      textsize="9"
+    >classBeleph</text>
+    <text name="Fig0.2"
+      x="96"
+      y="80"
+      fill="1"
+      fillcolor="-1"
+      stroke="1"
+      strokecolor="-16777216"
+      font="Dialog"
+      textsize="9"
+    ></text>
+    <text name="Fig0.3"
+      x="96"
+      y="102"
+      fill="1"
+      fillcolor="-1"
+      stroke="1"
+      strokecolor="-16777216"
+      font="Dialog"
+      textsize="9"
+    ></text>
+  </group>
+</pgml>

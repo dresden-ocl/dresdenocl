@@ -1,0 +1,52 @@
+<html>
+<body>
+<p>This package constitutes the OCL Class Library. The library uses the Java 2
+collection framework and therefore cannot be used with JDK 1.1.
+
+<h3>Intention</h3>
+
+This class library is intended to be used in a OCL to Java generator. The
+Java source code produced by this utility consists to a large part of calls
+to this library. A primary goal in the design of the library is therefore to faciliate
+code generation. This is done be making the generation process as far as possible
+independent of model information (except, of course, for the OCL expression itself). 
+
+<p>To derive Java source code from the OCL expression, all type information has to
+extracted from the operations of the expression. Some interfaces, like 
+OclSubtractable, were introduced to support this.
+
+<p>The following class diagrams 
+should give a basic idea of the design. The diagrams are produced with the open-source
+case tool <a href="http://www.ics.uci.edu/pub/arch/uml">Argo/UML</a>, that was also
+used for code sceleton generation.
+
+
+
+<p><img src="../../../Basisbibliothek.gif">
+<p>This diagram shows <a href="OclRoot.html">OclRoot</a>, the root 
+interface of the class library, and the classes 
+implementing it directly. All classes of the library that represent predefined OCL 
+types implement OclRoot.
+
+<hr>
+<p><img src="../../../Basistypen.gif">
+<p>OCL data types are the basic types (above), application-specific types (below) and 
+collection types.
+<p><img src="../../../Anwendungsklassen.gif">
+<hr>
+<p><img src="../../../Kollektionen.gif">
+<p>The Collection-Related Types are a central part of OCL predefined classes. The 
+classes that represent them in the class library are shown in the diagram above. 
+<p>The diagram below shown classes necessary to implement the "iterating methods" 
+(i.e. methods having an OCL expression as argument) of OCL.
+<p><img src="../../../Hilfsklassen.gif">
+<hr>
+<p><img src="../../../Ocl.gif">
+<p>The class <CODE>Ocl</CODE> provides class methods that access a factory class to generate OCL 
+class library representations for application objects and values (e.g. 
+OclInteger for int, OclAny for application classes, OclSet for application 
+collections).
+Similar plug-in objects are used to make the library adaptable to a code
+generators schemes for state diagram representation and to name conversions.
+</body>
+</html>

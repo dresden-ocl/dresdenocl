@@ -1,0 +1,37 @@
+Package tudresden.ocl.parser.precompiler;
+
+Helpers
+  all = [0..127];
+  special = '(' | ')' | 10 | 13 | 9 ;
+  anychar = [[[[[[all - '('] - ')'] - 10] - 13] -9] - '|'];
+
+Tokens
+  comment = '--' [[all - 10] - 13]* [10 + 13]?;
+  
+  new_line = 10 | 13 | 13 10;
+  blank = 9 | ' '*;
+  tab = 9;
+  
+  bar = '|';
+
+  l_par = '(' ;
+  r_par = ')' ;
+
+  anything = anychar*;
+  
+Ignored Tokens
+  comment,
+  new_line,
+  blank,
+  tab;
+  
+Productions
+  sentence = 
+    word* ;
+    
+  word = 
+    {par_less} anything |
+    {with_par} l_par sentence r_par |
+    {bar} bar ;
+    
+

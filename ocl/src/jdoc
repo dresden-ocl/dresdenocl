@@ -1,0 +1,26 @@
+-d ./api 
+-classpath .
+-author 
+-private 
+-windowtitle "OCL Compiler" 
+-doctitle "OCL Compiler"
+tudresden.ocl.parser 
+tudresden.ocl.parser.node 
+tudresden.ocl.parser.analysis 
+tudresden.ocl.parser.lexer 
+tudresden.ocl.parser.parser 
+tudresden.ocl.parser.precompiler 
+tudresden.ocl.parser.precompiler.node 
+tudresden.ocl.parser.precompiler.analysis 
+tudresden.ocl.parser.precompiler.lexer 
+tudresden.ocl.parser.precompiler.parser 
+tudresden.ocl.normalize 
+tudresden.ocl.lib 
+tudresden.ocl.lib.test 
+tudresden.ocl.test 
+tudresden.ocl.codegen 
+tudresden.ocl.check 
+tudresden.ocl.check.types 
+tudresden.ocl.check.types.testfacade 
+tudresden.ocl.check.types.xmifacade 
+tudresden.ocl
