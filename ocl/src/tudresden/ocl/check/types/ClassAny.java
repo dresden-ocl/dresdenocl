@@ -54,44 +54,49 @@ public class ClassAny implements Any {
     return modeltype;
   }
 
-  /** this method has to solve the additional problem that the mapping from
-   *  OCL types to Java types is not a homomorhpism: Java <code>int</code>s
-   *  do not conform to Java <code>float</code>s while OCL Integer is a
-   *  subtype of OCL Real; therefore all possible replacements of
-   *  Integer with Real have to be tried
-   */
-  public Type navigateParameterized(String name, Type[] params) throws OclTypeException {
+  public Type navigateParameterized(String name, Type[] params) throws OclTypeException 
+  {
     Type ret=Basic.navigateAnyParameterized(name, params);
-    if (ret!=null) return ret;
-    Method m=null;
-    int countInteger=countIntegerInParams(params);
-    int countCombinations=(int) Math.pow(2.0d , (double)countInteger);
-    for (int convCode=0; m==null && convCode<countCombinations; convCode++) {
-      Class[] jParams=getClassArrayForTypeArray(params, convCode);
-      Class nextClass=c;
-      while (nextClass!=null && m==null) {
-        try {
-          m=nextClass.getDeclaredMethod(name, jParams);
-        }
-        catch (NoSuchMethodException nsm) {
-          // try next class
-        }
-        nextClass=nextClass.getSuperclass();
+    if (ret!=null) 
+      return ret;
+    
+    Method foundmethod=null;
+
+    // this is very similar to tudresden.ocl.lib.OclAnyImpl.getFeature(String,Object[])
+    // if you find a bug here, its probably there as well.
+    classloop: for(Class iclass=c; iclass!=null; iclass=iclass.getSuperclass())
+    {
+      Method[] methods=iclass.getDeclaredMethods();
+      methodloop: for(int i=0; i<methods.length; i++)
+      {
+        if(!name.equals(methods[i].getName()))
+          continue methodloop;
+        Class[] parametertypes=methods[i].getParameterTypes();
+        if(params.length!=parametertypes.length)
+          continue methodloop;
+        for(int j=0; j<params.length; j++)
+          if(!params[j].conformsTo(getTypeForClass(parametertypes[j])))
+            continue methodloop;
+        foundmethod=methods[i];
+        break classloop;
       }
     }
-    if (m==null) {
+
+    if(foundmethod==null) 
+    {
       StringBuffer sb=new StringBuffer();
       sb.append(c.toString()+" has no method "+name+" with parameters (");
-      for (int i=0; i<params.length; i++) {
-        if (i!=0) {
+      for (int i=0; i<params.length; i++) 
+      {
+        if (i!=0) 
           sb.append(", ");
-        }
         sb.append(params[i]+"/"+params[i]);
       }
       sb.append(")");
       throw new OclTypeException(sb.toString());
     }
-    return getTypeForClass(m.getReturnType());
+
+    return getTypeForClass(foundmethod.getReturnType());
   }
 
   public boolean hasState(String stateName) {
@@ -107,47 +112,6 @@ public class ClassAny implements Any {
     } else {
       return false;
     }
-  }
-
-  /** @param convCode conversion code; if convCode is seen as bit array then
-   *         convCode[i]==1 means that the i-th occurence of Integer in the
-   *         parameter type array <code>ocl</code> is replaced by Real
-   */
-  protected Class[] getClassArrayForTypeArray(Type[] ocl, int convCode) {
-    Class[] java=new Class[ocl.length];
-    int integerCount=0;
-    for (int i=0; i<ocl.length; i++) {
-      Type t=ocl[i];
-      if (t==Basic.INTEGER) {
-        if ( ((convCode >> integerCount) & 1) == 1) {
-          // i-th bit is "1"
-          t=Basic.REAL;
-        }
-        integerCount++;
-      }
-      Class c=getClassForType(t);
-      java[i]=c;
-    }
-    return java;
-  }
-
-  protected int countIntegerInParams(Type[] params) {
-    int ret=0;
-    for (int i=0; i<params.length; i++) {
-      if (params[i]==Basic.INTEGER) {
-        ret++;
-      }
-    }
-    return ret;
-  }
-
-  protected Class getClassForType(Type t) {
-    Class ret=rf.reflAdapter.getClassForType(t);
-    if (ret==null) {
-      ClassAny ca=(ClassAny)t;
-      ret=ca.c;
-    }
-    return ret;
   }
 
   public boolean equals(Object o) {

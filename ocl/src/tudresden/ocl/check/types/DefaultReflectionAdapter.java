@@ -34,24 +34,6 @@ package tudresden.ocl.check.types;
 
 public class DefaultReflectionAdapter implements ReflectionAdapter {
 
-
-  public Class getClassForType(Type t) {
-    if (t==Basic.INTEGER) {
-      return Integer.TYPE;
-    } else if (t==Basic.REAL) {
-      return Float.TYPE;
-    } else if (t==Basic.STRING) {
-      return String.class;
-    } else if (t==Basic.BOOLEAN) {
-      return Boolean.TYPE;
-    } else if (t instanceof Collection) {
-      return java.util.Vector.class;
-    } else if (t instanceof OclType) {
-      return Class.class;
-    }
-    return null;
-  }
-
   public Type getTypeForClass(Class c) {
     if (c==String.class) {
       return tudresden.ocl.check.types.Basic.STRING;

@@ -61,13 +61,4 @@ public interface ReflectionAdapter {
    */
   public Type getTypeForClass(Class c);
 
-
-  /** an implementation should respect the difference between e.g.
-   *  <code>Integer.class</code> and <code>Integer.TYPE</code>
-   *
-   *  @return the java.lang.Class object for the class that implements
-   *          the given OCL type if that is a predefined type, or
-   *          <code>null</code> otherwise
-   */
-  public Class getClassForType(Type t);
 }
