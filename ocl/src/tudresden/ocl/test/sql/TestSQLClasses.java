@@ -36,6 +36,7 @@ public class TestSQLClasses extends TestCase {
     		t.addTest(TestORMappingSchemeImp.suite());
     		t.addTest(TestObjectViewSchema.suite());
                 t.addTest(TestTriggerGenerator.suite());
+                t.addTest(TestILSQLCodeGenerator.suite());
 
     		return t;
 	}

@@ -123,7 +123,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         // object oriented Model from XMI file
         JPanel oom = new JPanel(new BorderLayout());
         oom.setBorder(BorderFactory.createTitledBorder(" URL of XMI file "));
-        tfXmiSource = new JTextField();
+        tfXmiSource = new JTextField("file:/home/sl13/Diplom/abschluszbsp/university_example.xmi");
         oom.add(BorderLayout.CENTER, tfXmiSource);
         
         JPanel oomb = new JPanel(new GridLayout(1,2));
@@ -148,7 +148,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         JPanel prdir = new JPanel(new BorderLayout());
         prdir.setBorder(BorderFactory.createTitledBorder(" project directory "));
         
-        tfProjectDirectory = new JTextField();
+        tfProjectDirectory = new JTextField("/home/sl13/Diplom/abschluszbsp");
         prdir.add(BorderLayout.CENTER, tfProjectDirectory);
         
         bProjectDirectory = new JButton(". . .");
@@ -454,6 +454,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
         CodeFragment cf[];
         DeclarativeCodeFragment dcf;
         TriggerGenerator tg;
+        NameCreator nameCreator = new NameCreator();
         
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         prepareProgressInfo();
@@ -480,6 +481,7 @@ public class OCL2SQL extends JPanel implements ActionListener {
             for (int i=0; i<theOCLEditorModel.getConstraintCount(); i++) {
                 constraint = (theOCLEditorModel.getConstraintAt(i)).getData();
                 theTree = OclTree.createTree(constraint, theModelFacade);
+                theTree.setNameCreator(nameCreator);
                 theTree.applyDefaultNormalizations();
                 cf = theSQLCodeGenerator.getCode(theTree);
                 tmp.append(cf[0].getCode() + "\n");

@@ -207,7 +207,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 		Guide guide;
                 
                 for (int i=0; i<guides.size(); i++) {
-			guide = (Guide)guides.get(i);
+			guide = (Guide)guides.get(i); 
 			guide.reset();
 						
 			for (int k=0; k<guide.numberOfSteps(); k++) {

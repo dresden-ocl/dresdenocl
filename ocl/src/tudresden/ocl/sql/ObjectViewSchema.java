@@ -299,7 +299,7 @@ public class ObjectViewSchema implements ORMappingScheme {
   			
 	  			
   				// add according guides
-  				guides = theORM.guidesToAssociationEnds(classifier, assEndName);
+  				guides = theORM.guidesToAssociationEnds(classifier, assEndName);                                
   				if (guides.size() > 0) {
   					g1 = (Guide)guides.get(0);
   					g2 = new Guide(true);

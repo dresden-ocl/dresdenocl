@@ -30,168 +30,36 @@ import java.io.*;
 import java.util.*;
 
 public class TestILSQLCodeGenerator extends TestCase {
-	Model theRoughModel, theModel;
-	ORMappingScheme theORMS1, theORMS2;
-	ILSQLCodeGenerator theCG;
-	OclTree tree;
-	String constraint, sqlCode;
-	CodeFragment frags[];
+        ORMappingScheme orm;
+        OclTree tree;
+        ModelFacade mf;
+        String xmiSrc = (TestILSQLCodeGenerator.class.getResource("university_example.xmi")).toString();
+        String ruleSrc = (TestILSQLCodeGenerator.class.getResource("../../codegen/decl/OCL2SQL4Oracle.xml")).toString();
+        ILSQLCodeGenerator theCG;
 
 	public TestILSQLCodeGenerator(String n) {
 		super(n);
 	}
 	
 	protected void setUp() {
-		// the type information Model for the OCL compiler
-		theModel = new Model("test model");
-		theModel.setRoughMode(false);
-		
-		List pp = new ArrayList();
-		pp.add("test_model");		
-		ModelClass a = new ModelClass(pp, "A");
-		ModelClass b = new ModelClass(pp, "B");
-		ModelClass c = new ModelClass(pp, "C");
-		ModelClass d = new ModelClass(pp, "D");
-		ModelClass e = new ModelClass(pp, "E");
-		ModelClass f = new ModelClass(pp, "F");
-		
-		a.addAttribute(new ModelAttribute("a1", Basic.INTEGER));
-		a.addAttribute(new ModelAttribute("a2", Basic.BOOLEAN));
-		a.addAttribute(new ModelAttribute("a3", Basic.STRING));
-		
-		b.addAttribute(new ModelAttribute("b1", Basic.INTEGER));
-		b.addAttribute(new ModelAttribute("b2", Basic.BOOLEAN));
-		b.addAttribute(new ModelAttribute("b3", Basic.STRING));
-		
-		c.addAttribute(new ModelAttribute("c1", Basic.INTEGER));
-		c.addAttribute(new ModelAttribute("c2", Basic.BOOLEAN));
-		c.addAttribute(new ModelAttribute("c3", Basic.STRING));
-		c.addAttribute(new ModelAttribute("c4", f));
-		
-		d.addAttribute(new ModelAttribute("d1", Basic.INTEGER));
-		
-		e.addAttribute(new ModelAttribute("e1", Basic.STRING));
-		
-		f.addAttribute(new ModelAttribute("f1", Basic.INTEGER));
-		f.addAttribute(new ModelAttribute("f2", Basic.BOOLEAN));
-		f.addAttribute(new ModelAttribute("f3", Basic.STRING));
-		
-		d.addDirectSupertype(b);
-		e.addDirectSupertype(b);
-		
-		Type params[] = {};
-		b.addOperation(new ModelOperation("operationB", params, Basic.BOOLEAN, true));
-		
-		theModel.putClassifier(a);
-		theModel.putClassifier(b);
-		theModel.putClassifier(c);
-		theModel.putClassifier(d);
-		theModel.putClassifier(e);
-		theModel.putClassifier(f);
-		
-		ModelAssociation ma;
-		
-		ma = new ModelAssociation(null);
-		ma.addEnd(new ModelAssociationEnd("a1",a,"1",false,null));
-		ma.addEnd(new ModelAssociationEnd("b1",b,"1..*",false,null));
-		ma.dissolve(theModel);
-				
-		ma = new ModelAssociation(null);
-		ma.addEnd(new ModelAssociationEnd("a2",a,"0..*",false,null));
-		ma.addEnd(new ModelAssociationEnd("b2",b,"0..*",false,null));
-		ma.dissolve(theModel);
-		
-		ma = new ModelAssociation(null);
-		ma.addEnd(new ModelAssociationEnd("ra1",a,"1",false,null));
-		ma.addEnd(new ModelAssociationEnd("ra2",a,"1",false,null));
-		ma.dissolve(theModel);
-		
-		ma = new ModelAssociation(null);
-		ma.addEnd(new ModelAssociationEnd("a",a,"1",false,null));
-		ma.addEnd(new ModelAssociationEnd("c",c,"1..*",false,null));
-		ma.dissolve(theModel);
-		
-		theModel.flatten();	
-		
-		// the Model for the object relational mapping information
-		theRoughModel = new Model("test model");
-		theRoughModel.setRoughMode(true);
-		
-		pp = new ArrayList();
-		pp.add("test_model");		
-		a = new ModelClass(pp, "A");
-		b = new ModelClass(pp, "B");
-		c = new ModelClass(pp, "C");
-		d = new ModelClass(pp, "D");
-		e = new ModelClass(pp, "E");
-		f = new ModelClass(pp, "F");
-		
-		a.addAttribute(new ModelAttribute("a1", Basic.INTEGER));
-		a.addAttribute(new ModelAttribute("a2", Basic.BOOLEAN));
-		a.addAttribute(new ModelAttribute("a3", Basic.STRING));
-		
-		b.addAttribute(new ModelAttribute("b1", Basic.INTEGER));
-		b.addAttribute(new ModelAttribute("b2", Basic.BOOLEAN));
-		b.addAttribute(new ModelAttribute("b3", Basic.STRING));
-		
-		c.addAttribute(new ModelAttribute("c1", Basic.INTEGER));
-		c.addAttribute(new ModelAttribute("c2", Basic.BOOLEAN));
-		c.addAttribute(new ModelAttribute("c3", Basic.STRING));
-		c.addAttribute(new ModelAttribute("c4", f));
-		
-		d.addAttribute(new ModelAttribute("d1", Basic.INTEGER));
-		
-		e.addAttribute(new ModelAttribute("e1", Basic.STRING));
-		
-		f.addAttribute(new ModelAttribute("f1", Basic.INTEGER));
-		f.addAttribute(new ModelAttribute("f2", Basic.BOOLEAN));
-		f.addAttribute(new ModelAttribute("f3", Basic.STRING));
-		
-		d.addDirectSupertype(b);
-		e.addDirectSupertype(b);
-		
-		b.addOperation(new ModelOperation("operationB", params, Basic.BOOLEAN, true));
-		
-		theRoughModel.putClassifier(a);
-		theRoughModel.putClassifier(b);
-		theRoughModel.putClassifier(c);
-		theRoughModel.putClassifier(d);
-		theRoughModel.putClassifier(e);
-		theRoughModel.putClassifier(f);
-		
-		ma = new ModelAssociation(null);
-		ma.addEnd(new ModelAssociationEnd("a1",a,"1",false,null));
-		ma.addEnd(new ModelAssociationEnd("b1",b,"1..*",false,null));
-		theRoughModel.putAssociation(ma);
-		
-		ma = new ModelAssociation(null);
-		ma.addEnd(new ModelAssociationEnd("a2",a,"0..*",false,null));
-		ma.addEnd(new ModelAssociationEnd("b2",b,"0..*",false,null));
-		theRoughModel.putAssociation(ma);
-		
-		ma = new ModelAssociation(null);
-		ma.addEnd(new ModelAssociationEnd("ra1",a,"1",false,null));
-		ma.addEnd(new ModelAssociationEnd("ra2",a,"1",false,null));
-		theRoughModel.putAssociation(ma);
-		
-		ma = new ModelAssociation(null);
-		ma.addEnd(new ModelAssociationEnd("a",a,"1",false,null));
-		ma.addEnd(new ModelAssociationEnd("c",c,"1..*",false,null));
-		theRoughModel.putAssociation(ma);
-		
-		theRoughModel.determineAllSupertypes();		
-		
-		theORMS1 = new ObjectViewSchema(new ORMappingImp(theRoughModel), new OracleSQLBuilder());
-		theORMS2 = new ObjectViewSchema(new ORMappingImp(theRoughModel, 1, 1, "int", false), new OracleSQLBuilder());
-		theCG = new ILSQLCodeGenerator((TestILSQLCodeGenerator.class.getResource("../../codegen/decl/OCL2SQL4Oracle.xml")).toString());
-		
+		orm = new ObjectViewSchema(new UniversityExampleSchema(), new OracleSQLBuilder());
+                theCG = new ILSQLCodeGenerator(ruleSrc);
+                theCG.setORMappingScheme(orm);
+                try {
+                    mf = XmiParser.createModel(xmiSrc, "university example in classic mode");
+                } catch(Exception e) {
+                    System.err.println("XmiParser error: " + e.getMessage());
+                }
 	}	
 	
-	private CodeFragment[] getSQLCode(String constraint) 
+	private String getSQLCode(String constraint) 
 	throws IOException{
-		tree = OclTree.createTree(constraint, theModel);
+                CodeFragment cf[];
+            
+		tree = OclTree.createTree(constraint, mf);
 		tree.applyDefaultNormalizations();
-		return theCG.getCode(tree);
+                cf = theCG.getCode(tree);
+                return cf[0].getCode();
 	}
 	
 	private boolean equal(String str1, String str2) {
@@ -214,46 +82,6 @@ public class TestILSQLCodeGenerator extends TestCase {
 		return str1.equals(str2);		
 	}
 		
-	/** 
-	 * the access to attributes is possible in the following ways:
-	 *   - access from the context to attributes that map to a single column
-	 *   - access at the end of a navigation to attributes that map to a single column
-	 *   - access to attributes from superclasses that are overwritten 
-	 */
-	public void testAttributeAccess() 
-	throws IOException{
-		/*
-		// access from the context to attributes that map to one column
-		theCG.setORMappingScheme(theORMS2);
-		constraint = "context A inv testInv: a1 > 5";
-		frags = getSQLCode(constraint);
-		
-		sqlCode =  "CREATE OR REPLACE VIEW testInv AS";
-		sqlCode += "(select * from OV_A SELF";
-		sqlCode += "where not (SELF.A1 > 5)))";
-		
-		assert(equal(frags[0].getCode(), sqlCode));
-		
-		// access at the end of a navigation to attributes that map to one column
-		theCG.setORMappingScheme(theORMS1);
-		constraint = "context C inv: a.a1 > 5";
-		frags = getSQLCode(constraint);
-				
-		sqlCode =  "CREATE OR REPLACE VIEW testInv AS";
-		sqlCode += "(select * from OV_C SELF";
-		sqlCode += "where not ((select A1 from A, C ";
-		sqlCode += "            where A.PK1 = C.APK1 ";
-		sqlCode += "            and C.PK3 = SELF.PK3)";
-		sqlCode += "           > 5)))";
-		
-		//assert(equal(frags[0].getCode(), sqlCode));		
-		
-		*/
-		theCG.setORMappingScheme(theORMS2);
-		constraint = "context A inv testInv: b2->forAll(b1 > 5)";
-		frags = getSQLCode(constraint);
-	}
-	
 	public void testPrepareJoin() {
 		List guides = new ArrayList();
 		Guide guide;
@@ -336,11 +164,43 @@ public class TestILSQLCodeGenerator extends TestCase {
 							    "(TA1.APK = SELF.APK)"));				
 	}
 		
+        public void testUniversityExampleInv() {
+            String expres;
+            String genres
+            
+            System.err.println("... generate university example invariants");
+                        
+            try {
+            // inv1
+            genres = getSQLCode("context Person inv inv1: self.supervisor.grade.value > self.grade.value");
+            expres = new String();
+            expres += "create or replace view inv1 as (                                                             ";
+            expres += " select * from OV_PERSON SELF                                                                ";
+            expres += " where not (                                                                                 ";
+            expres += "     (select VALUE                                                                           ";
+            expres += "      from OV_GRADE TA2,OV_PERSON TA3,OV_PERSON TA4                                          ";
+            expres += "      where (TA2.GID = TA3.GRADE) and (TA3.PID = TA4.SUPERVISOR) and (TA4.PID = SELF.PID))   ";
+            expres += "     >                                                                                       ";
+            expres += "     (select VALUE                                                                           ";         
+            expres += "      from OV_GRADE TA0,OV_PERSON TA1                                                        ";
+            expres += "      where (TA0.GID = TA1.GRADE) and (TA1.PID = SELF.PID))                                  ";
+            expres += "))                                                                                           ";
+            assert(equal(genres, expres));
+            
+            // inv2
+            
+    
+            
+            } catch(IOException e) {
+                System.err.println(e.toString());
+            }                        
+        }
+        
 	public static Test suite() {
 		TestSuite t=new TestSuite();
 
-    		t.addTest(new TestILSQLCodeGenerator("testAttributeAccess"));
     		t.addTest(new TestILSQLCodeGenerator("testPrepareJoin"));
+                t.addTest(new TestILSQLCodeGenerator("testUniversityExampleInv"));
     		
     		return t;
 	}

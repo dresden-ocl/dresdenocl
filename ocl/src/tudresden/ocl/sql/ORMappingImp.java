@@ -642,7 +642,7 @@ public class ORMappingImp implements ORMapping {
   				} else {
   					// 1:1 association
   					pkTables = getTableList((List)classesToTables.get(getClassName(mae1.getModelClass())));
-  					fkTables = getTableList((List)classesToTables.get(getClassName(mae2.getModelClass())));
+  					fkTables = getTableList((List)classesToTables.get(getClassName(mae2.getModelClass())));                              
   					
   					// primary keys from mae1 into mae2 class
   					fkSet = buryForeignKeys(pkTables, fkTables, mae1.getName(), new HashSet());
