@@ -35,6 +35,11 @@ public final class JavaMethod extends JavaBehaviour
   */
   private int name_end;
   
+  /**
+     The length of the wrapper appendix on the method name,
+     or -1 if the method was not wrapped.
+  */
+  private int wrapper_appendix=-1;
   
   public JavaMethod(JavaClass parent, 
                     int modifiers, 
@@ -44,34 +49,40 @@ public final class JavaMethod extends JavaBehaviour
     throws InjectorParseException
   {
     // parent must not be null
-    super(parent, modifiers, type, 
-      (name.endsWith(WRAPPER_SUFFIX)) ?
-      name.substring(0, name.length()-WRAPPER_SUFFIX.length()):
-      name
-      );
+    super(parent, modifiers, type, cleanName(name));
 
     if(type==null)
       throw new RuntimeException();
 
+    int pos=name.indexOf(WRAPPER_SUFFIX);
+    if(pos>=0)
+      wrapper_appendix=name.length()-pos;
+    
     this.name_end=name_end;
+  }
+
+  private final static String cleanName(String n)
+  {
+    int pos=n.indexOf(WRAPPER_SUFFIX);
+    return 
+      (pos>=0) ? n.substring(0, pos) : n;
   }
 
   public final void setLiteral(String literal)
   {
-    int wsl=WRAPPER_SUFFIX.length();
-    if(WRAPPER_SUFFIX.regionMatches(0, literal, name_end-wsl, wsl))
+    if(wrapper_appendix>=0)
     {
       literal=
-        literal.substring(0, name_end-wsl)+
+        literal.substring(0, name_end-wrapper_appendix)+
         literal.substring(name_end, literal.length());
-      name_end-=wsl;
+      name_end-=wrapper_appendix;
     }
     super.setLiteral(literal);
   }
 
   public final String getWrappedName()
   {
-    return name+WRAPPER_SUFFIX;
+    return name+WRAPPER_SUFFIX+getParent().getFullNameEscaped();
   }
 
   public final String getWrappedLiteral()
@@ -79,6 +90,7 @@ public final class JavaMethod extends JavaBehaviour
     return
         literal.substring(0, name_end)+
         WRAPPER_SUFFIX+
+        getParent().getFullNameEscaped()+
         literal.substring(name_end, literal.length());
   }
 

@@ -283,6 +283,10 @@ public abstract class Example[onClass] implements Runnable
             [onBehaviourHeader]void accessifierPackage() {}[onClassFeature]
   [onBehaviourHeader]public    void accessifierPublic() {}[onClassFeature]
   
+  [onBehaviourHeader]void test_super()
+  {
+  }[onClassFeature]
+
   [onBehaviourHeader]static public void main(String[] args)
   {
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
@@ -292,6 +296,7 @@ public abstract class Example[onClass] implements Runnable
     e2.i=10;
     e2.anInteger=new Integer(8);
     e2.getQualifiers();
+    e2.test_super();
   }[onClassFeature]
 
 [onClassEnd]}
@@ -313,6 +318,15 @@ class SecondExample[onClass] extends Example{
   }
 
   [onBehaviourHeader]void abstractMethod()  {}[onClassFeature]
+  
+  [onDocComment]/**
+     Tests, whether injection does not produce infinite loops,
+     when wrapping methods with calls to super.
+  */
+  [onBehaviourHeader]void test_super()
+  {
+    super.test_super();
+  }[onClassFeature]
   
   static
   {

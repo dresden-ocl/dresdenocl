@@ -91,25 +91,25 @@ public abstract class Example implements Runnable
     {
       boolean someDrinnerBoolean=true;
     
-      public void run_wrappedbyocl()
+      public void run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner_Drinner()
       {
       }
     /**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #run_wrappedbyocl()
+    @see #run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner_Drinner()
   */public void run()
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      run_wrappedbyocl();
+      run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner_Drinner();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      run_wrappedbyocl();
+      run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner_Drinner();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -150,25 +150,25 @@ public abstract class Example implements Runnable
 
     boolean someInnerBoolean=true;
     
-    public void run_wrappedbyocl()
+    public void run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner()
     {
     }
   /**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #run_wrappedbyocl()
+    @see #run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner()
   */public void run()
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      run_wrappedbyocl();
+      run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      run_wrappedbyocl();
+      run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -233,7 +233,7 @@ public abstract class Example implements Runnable
     namedIntegers.put("5", new Integer(5));
   }
 
-  public void set_wrappedbyocl(String name, Integer type,// what a cool parameter
+  public void set_wrappedbyocl_tudresden_ocl_injection_test_Example(String name, Integer type,// what a cool parameter
     final Integer[] qualifiers)
   {
     if(name==null)
@@ -262,7 +262,7 @@ public abstract class Example implements Runnable
   /**
      Some example doc-comment.
   */
-  public void run_wrappedbyocl()
+  public void run_wrappedbyocl_tudresden_ocl_injection_test_Example()
   {}
 
   /**
@@ -317,17 +317,17 @@ public abstract class Example implements Runnable
   */
   HashMap namedIntegers=new HashMap();
   
-  public boolean poly1_wrappedbyocl(Interface someInterface)
+  public boolean poly1_wrappedbyocl_tudresden_ocl_injection_test_Example(Interface someInterface)
   {
     return true;
   }
 
-  public String getName_wrappedbyocl()
+  public String getName_wrappedbyocl_tudresden_ocl_injection_test_Example()
   {
     return name;
   }
 
-  public Integer getType_wrappedbyocl()
+  public Integer getType_wrappedbyocl_tudresden_ocl_injection_test_Example()
   {
     return type;
   }
@@ -338,7 +338,7 @@ public abstract class Example implements Runnable
      @postcondition stringsMinusGreaterincludes_inlinehallopost_:         strings->includes('inlinehallopost')
      @postcondition stringsMinusGreaterincludes_inline_space_hallo_post_: strings->includes('inline space hallo post')
   */
-  public Integer[] getQualifiers_wrappedbyocl()
+  public Integer[] getQualifiers_wrappedbyocl_tudresden_ocl_injection_test_Example()
   {
     namedIntegers.put("10", new Integer(10));
     return qualifiers;
@@ -346,7 +346,7 @@ public abstract class Example implements Runnable
 
   public Integer unqualifiedType=null;
 
-  public Integer getUnqualifiedType_wrappedbyocl() throws IllegalArgumentException
+  public Integer getUnqualifiedType_wrappedbyocl_tudresden_ocl_injection_test_Example() throws IllegalArgumentException
   {
     if(unqualifiedType!=null)
       return unqualifiedType;
@@ -361,7 +361,7 @@ public abstract class Example implements Runnable
 
   private Object parent;
 
-  public void setParent_wrappedbyocl  (Object parent)
+  public void setParent_wrappedbyocl_tudresden_ocl_injection_test_Example  (Object parent)
     throws
       IllegalArgumentException,
       NullPointerException
@@ -372,21 +372,25 @@ public abstract class Example implements Runnable
       throw new IllegalArgumentException("An attributes parent cannot be set twice.");
   }
 
-  public Object getParent_wrappedbyocl()
+  public Object getParent_wrappedbyocl_tudresden_ocl_injection_test_Example()
   {
     return parent;
   }
 
-  public void printData_wrappedbyocl
+  public void printData_wrappedbyocl_tudresden_ocl_injection_test_Example
     (java.io.PrintStream o)
   {
   }
   
-  private   void accessifierPrivate_wrappedbyocl() {}
-  protected void accessifierProtected_wrappedbyocl() {}
-            void accessifierPackage_wrappedbyocl() {}
-  public    void accessifierPublic_wrappedbyocl() {}
+  private   void accessifierPrivate_wrappedbyocl_tudresden_ocl_injection_test_Example() {}
+  protected void accessifierProtected_wrappedbyocl_tudresden_ocl_injection_test_Example() {}
+            void accessifierPackage_wrappedbyocl_tudresden_ocl_injection_test_Example() {}
+  public    void accessifierPublic_wrappedbyocl_tudresden_ocl_injection_test_Example() {}
   
+  void test_super_wrappedbyocl_tudresden_ocl_injection_test_Example()
+  {
+  }
+
   static public void main(String[] args)
   {
     tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
@@ -396,6 +400,7 @@ public abstract class Example implements Runnable
     e2.i=10;
     e2.anInteger=new Integer(8);
     e2.getQualifiers();
+    e2.test_super();
   }
 
 /**
@@ -424,18 +429,18 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #set_wrappedbyocl(String, Integer, Integer[])
+    @see #set_wrappedbyocl_tudresden_ocl_injection_test_Example(String, Integer, Integer[])
   */public void set(String name, Integer type, Integer[] qualifiers)
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      set_wrappedbyocl(name, type, qualifiers);
+      set_wrappedbyocl_tudresden_ocl_injection_test_Example(name, type, qualifiers);
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      set_wrappedbyocl(name, type, qualifiers);
+      set_wrappedbyocl_tudresden_ocl_injection_test_Example(name, type, qualifiers);
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -445,18 +450,18 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #run_wrappedbyocl()
+    @see #run_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */public void run()
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      run_wrappedbyocl();
+      run_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      run_wrappedbyocl();
+      run_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -466,19 +471,19 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #poly1_wrappedbyocl(Interface)
+    @see #poly1_wrappedbyocl_tudresden_ocl_injection_test_Example(Interface)
   */public boolean poly1(Interface someInterface)
   {
     boolean result;
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      result=poly1_wrappedbyocl(someInterface);
+      result=poly1_wrappedbyocl_tudresden_ocl_injection_test_Example(someInterface);
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      result=poly1_wrappedbyocl(someInterface);
+      result=poly1_wrappedbyocl_tudresden_ocl_injection_test_Example(someInterface);
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -489,19 +494,19 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #getName_wrappedbyocl()
+    @see #getName_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */public String getName()
   {
     String result;
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      result=getName_wrappedbyocl();
+      result=getName_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      result=getName_wrappedbyocl();
+      result=getName_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -512,19 +517,19 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #getType_wrappedbyocl()
+    @see #getType_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */public Integer getType()
   {
     Integer result;
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      result=getType_wrappedbyocl();
+      result=getType_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      result=getType_wrappedbyocl();
+      result=getType_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -535,12 +540,12 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #getQualifiers_wrappedbyocl()
+    @see #getQualifiers_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */public Integer[] getQualifiers()
   {
     Integer[] result;
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      result=getQualifiers_wrappedbyocl();
+      result=getQualifiers_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
@@ -579,7 +584,7 @@ public abstract class Example implements Runnable
         final tudresden.ocl.lib.OclBoolean tudOclNode71=tudOclNode69.isEqualTo(tudOclNode70);
       }
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      result=getQualifiers_wrappedbyocl();
+      result=getQualifiers_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -632,19 +637,19 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #getUnqualifiedType_wrappedbyocl()
+    @see #getUnqualifiedType_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */public Integer getUnqualifiedType() throws IllegalArgumentException
   {
     Integer result;
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      result=getUnqualifiedType_wrappedbyocl();
+      result=getUnqualifiedType_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      result=getUnqualifiedType_wrappedbyocl();
+      result=getUnqualifiedType_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -655,18 +660,18 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #setParent_wrappedbyocl(Object)
+    @see #setParent_wrappedbyocl_tudresden_ocl_injection_test_Example(Object)
   */public void setParent(Object parent) throws IllegalArgumentException, NullPointerException
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      setParent_wrappedbyocl(parent);
+      setParent_wrappedbyocl_tudresden_ocl_injection_test_Example(parent);
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      setParent_wrappedbyocl(parent);
+      setParent_wrappedbyocl_tudresden_ocl_injection_test_Example(parent);
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -676,19 +681,19 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #getParent_wrappedbyocl()
+    @see #getParent_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */public Object getParent()
   {
     Object result;
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      result=getParent_wrappedbyocl();
+      result=getParent_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      result=getParent_wrappedbyocl();
+      result=getParent_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -699,18 +704,18 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #printData_wrappedbyocl(java.io.PrintStream)
+    @see #printData_wrappedbyocl_tudresden_ocl_injection_test_Example(java.io.PrintStream)
   */public void printData(java.io.PrintStream o)
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      printData_wrappedbyocl(o);
+      printData_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      printData_wrappedbyocl(o);
+      printData_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -720,18 +725,18 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #accessifierPrivate_wrappedbyocl()
+    @see #accessifierPrivate_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */private void accessifierPrivate()
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      accessifierPrivate_wrappedbyocl();
+      accessifierPrivate_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      accessifierPrivate_wrappedbyocl();
+      accessifierPrivate_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -741,18 +746,18 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #accessifierProtected_wrappedbyocl()
+    @see #accessifierProtected_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */protected void accessifierProtected()
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      accessifierProtected_wrappedbyocl();
+      accessifierProtected_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      accessifierProtected_wrappedbyocl();
+      accessifierProtected_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -762,18 +767,18 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #accessifierPackage_wrappedbyocl()
+    @see #accessifierPackage_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */void accessifierPackage()
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      accessifierPackage_wrappedbyocl();
+      accessifierPackage_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      accessifierPackage_wrappedbyocl();
+      accessifierPackage_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -783,18 +788,39 @@ public abstract class Example implements Runnable
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #accessifierPublic_wrappedbyocl()
+    @see #accessifierPublic_wrappedbyocl_tudresden_ocl_injection_test_Example()
   */public void accessifierPublic()
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      accessifierPublic_wrappedbyocl();
+      accessifierPublic_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      accessifierPublic_wrappedbyocl();
+      accessifierPublic_wrappedbyocl_tudresden_ocl_injection_test_Example();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #test_super_wrappedbyocl_tudresden_ocl_injection_test_Example()
+  */void test_super()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      test_super_wrappedbyocl_tudresden_ocl_injection_test_Example();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      test_super_wrappedbyocl_tudresden_ocl_injection_test_Example();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -1606,7 +1632,16 @@ class SecondExample extends Example{
     i=10;
   }
 
-  void abstractMethod_wrappedbyocl()  {}
+  void abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_SecondExample()  {}
+  
+  /**
+     Tests, whether injection does not produce infinite loops,
+     when wrapping methods with calls to super.
+  */
+  void test_super_wrappedbyocl_tudresden_ocl_injection_test_SecondExample()
+  {
+    super.test_super();
+  }
   
   static
   {
@@ -1628,18 +1663,39 @@ class SecondExample extends Example{
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #abstractMethod_wrappedbyocl()
+    @see #abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_SecondExample()
   */void abstractMethod()
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      abstractMethod_wrappedbyocl();
+      abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      abstractMethod_wrappedbyocl();
+      abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #test_super_wrappedbyocl_tudresden_ocl_injection_test_SecondExample()
+  */void test_super()
+  {
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      test_super_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      test_super_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
@@ -1688,23 +1744,23 @@ class SecondExample extends Example{
 class ThirdExample extends SecondExample
 {
   // this class has no explicit constructor
-  void abstractMethod_wrappedbyocl()  {}
+  void abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_ThirdExample()  {}
 /**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
     @author ocl_injector
-    @see #abstractMethod_wrappedbyocl()
+    @see #abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_ThirdExample()
   */void abstractMethod()
   {
     if(tudresden.ocl.injection.lib.Invariant.checking_flag)
-      abstractMethod_wrappedbyocl();
+      abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_ThirdExample();
     else
     {
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
-      abstractMethod_wrappedbyocl();
+      abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_ThirdExample();
       tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
