@@ -60,9 +60,12 @@ public final class Instrumentor implements InjectionConsumer
 		this.config=config;
 		this.identityhashcode=config.hashmode.getName()+".identityHashCode";
 
-		lineSeparator = "\n";
+		lineSeparator = System.getProperty("line.separator");
 		if(lineSeparator==null)
-			throw new NullPointerException("Property \"line separator\" should not be null.");
+		{
+			System.out.println("warning: property \"line.separator\" is null, using LF (unix style).");
+			lineSeparator = "\n";
+		}
 	}
 
 	public void onPackage(JavaFile javafile)
