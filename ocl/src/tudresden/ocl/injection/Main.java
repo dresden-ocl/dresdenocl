@@ -439,7 +439,7 @@ final class OclInjector implements InjectionConsumer
     o.write(jf.getName());
     o.write("\n  */");
     o.write(Modifier.toString(
-        (jf.getModifiers()&Modifier.STATIC)|Modifier.PRIVATE));
+        (jf.getModifiers()&Modifier.STATIC)|Modifier.PRIVATE|Modifier.TRANSIENT));
     o.write(' ');
     if(is_collection)
       o.write("int");
@@ -459,7 +459,7 @@ final class OclInjector implements InjectionConsumer
     o.write(jf.getName());
     o.write("\n  */");
     o.write(Modifier.toString(
-        (jf.getModifiers()&Modifier.STATIC)|Modifier.PUBLIC|Modifier.FINAL));
+        (jf.getModifiers()&Modifier.STATIC)|Modifier.PUBLIC|Modifier.FINAL|Modifier.TRANSIENT));
     o.write(" java.util.HashSet ");
     o.write(jf.getName());
     o.write(Invariant.OBSERVER_SUFFIX);
