@@ -24,6 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
 package tudresden.ocl.injection.reverseeng;
 
+import java.awt.Font;
+
 import java.util.*;
 
 import javax.swing.*;
@@ -39,7 +41,16 @@ import javax.swing.text.*;
   */
 public class TypeEditPage extends javax.swing.JPanel {
 
-  public static class ProposalReason {
+  public static Icon s_iType = new javax.swing.ImageIcon (TypeNodeRenderer.class.getResource ("resources/type.gif"));
+  public static Icon s_iReason = new javax.swing.ImageIcon (TypeNodeRenderer.class.getResource ("resources/reason.gif"));
+    
+  public static interface TreeElement {
+    public Icon getIcon(boolean fExpanded);
+    public String getToolTip();
+    public boolean useBold();
+  }
+  
+  public static class ProposalReason implements TreeElement {
     String m_sReason;
     
     public ProposalReason (String sReason) {
@@ -51,9 +62,21 @@ public class TypeEditPage extends javax.swing.JPanel {
     public String toString() {
       return m_sReason;
     }
+    
+    public Icon getIcon(boolean fExpanded) {
+      return s_iReason;
+    }
+    
+    public String getToolTip() {
+      return "Proposal Reason.";
+    }
+    
+    public boolean useBold() {
+      return false;
+    }
   }
   
-  public static class ProposedType {
+  public static class ProposedType implements TreeElement {
     
     private String m_sTypeName;
     private List m_lprReasons = new LinkedList();
@@ -82,8 +105,31 @@ public class TypeEditPage extends javax.swing.JPanel {
       m_lprReasons.add (pr);
     }
     
+    public void addAllReasons (ProposedType pt) {
+      for (Iterator i = pt.getReasons(); i.hasNext();) {
+        addReason ((ProposalReason) i.next());
+      }
+    }
+    
+    public boolean equals (Object o) {
+      return ((o instanceof ProposedType) &&
+               (((ProposedType) o).m_sTypeName.equals (this.m_sTypeName)));
+    }
+    
     public String toString() {
       return m_sTypeName;
+    }
+    
+    public Icon getIcon(boolean fExpanded) {
+      return s_iType;
+    }
+    
+    public String getToolTip() {
+      return "Proposed Type.";
+    }
+    
+    public boolean useBold() {
+      return false;
     }
   }
   
@@ -93,11 +139,7 @@ public class TypeEditPage extends javax.swing.JPanel {
     public String getCurrentType();
   }
   
-  static class TypeNodeRenderer extends DefaultTreeCellRenderer {
-    
-    static Icon s_iType = new javax.swing.ImageIcon (TypeNodeRenderer.class.getResource ("resources/type.gif"));
-    static Icon s_iReason = new javax.swing.ImageIcon (TypeNodeRenderer.class.getResource ("resources/reason.gif"));
-    
+  static class TypeNodeRenderer extends DefaultTreeCellRenderer {    
     public TypeNodeRenderer () {
       super();
     }
@@ -111,17 +153,30 @@ public class TypeEditPage extends javax.swing.JPanel {
                                                                   boolean hasFocus) {
       super.getTreeCellRendererComponent (tree, value, sel, expanded, leaf, row, hasFocus);
       
-      Object oData = ((DefaultMutableTreeNode) value).getUserObject();
-
-      if (oData instanceof ProposedType) {
-        setIcon (s_iType);
-        setToolTipText ("Proposed type.");
-      }
-      else {
-        setIcon (s_iReason);
-        setToolTipText ("Reason for proposal.");
-      }
+      DefaultMutableTreeNode dmtnValue = (DefaultMutableTreeNode) value;
       
+      if (dmtnValue.getUserObject() instanceof TreeElement) {
+        TreeElement teData = (TreeElement) dmtnValue.getUserObject();
+
+        if (teData != null) {
+          setIcon (teData.getIcon (expanded));
+          setToolTipText (teData.getToolTip());
+
+          if (getFont() != null) {
+            int nStyle = getFont().getStyle();
+
+            if (teData.useBold()) {
+              nStyle |= Font.BOLD;
+            }
+            else {
+              nStyle &= ~Font.BOLD;
+            }
+
+            setFont (getFont().deriveFont (nStyle));
+          }
+        }
+      }
+
       return this;
     }
   }  
@@ -172,7 +227,8 @@ public class TypeEditPage extends javax.swing.JPanel {
     m_jtfSelection.setText (m_tdType.getCurrentType());
   }
   
-  private void fillInProposedTypes() {
+  private static List s_lptDefaultTypes;
+  static {
     final String[] asDefaultTypes = {"java.lang.Boolean",
                                       "java.lang.Byte",
                                       "java.lang.Character",
@@ -186,10 +242,23 @@ public class TypeEditPage extends javax.swing.JPanel {
                                       "java.lang.String",
                                       "java.lang.StringBuffer"};
     
+    s_lptDefaultTypes = new ArrayList();
+    
+    for (int i = 0; i < asDefaultTypes.length; i++) {
+      s_lptDefaultTypes.add (new ProposedType (asDefaultTypes[i], new String[] {"Standard Type."}));
+    }
+  }
+  
+  private void fillInProposedTypes() {
     List lProposals = m_tdType.getProposedTypes();
     for (Iterator i = lProposals.iterator(); i.hasNext();) {
       // Add proposed type.
       ProposedType pt = (ProposedType) i.next();
+      
+      int nIdx = s_lptDefaultTypes.indexOf (pt);
+      if (nIdx > -1) {
+        pt.addAllReasons ((ProposedType) s_lptDefaultTypes.get (nIdx));
+      }
       
       DefaultMutableTreeNode dmtnProposal = new DefaultMutableTreeNode (pt);
       ((DefaultMutableTreeNode) m_dtmProposals.getRoot()).add (dmtnProposal);
@@ -199,15 +268,17 @@ public class TypeEditPage extends javax.swing.JPanel {
       }
     }
     
-    for (int i = 0; i < asDefaultTypes.length; i++) {
-      ProposedType pt = new ProposedType (asDefaultTypes[i], new String[] {"Default type."});
-
-      DefaultMutableTreeNode dmtnProposal = new DefaultMutableTreeNode (pt);
-      ((DefaultMutableTreeNode) m_dtmProposals.getRoot()).add (dmtnProposal);
+    for (Iterator i = s_lptDefaultTypes.iterator(); i.hasNext();) {
+      ProposedType pt = (ProposedType) i.next();
       
-      for (Iterator j = pt.getReasons(); j.hasNext();) {
-        dmtnProposal.add (new DefaultMutableTreeNode ((ProposalReason) j.next()));
-      }      
+      if (! lProposals.contains (pt)) {
+        DefaultMutableTreeNode dmtnProposal = new DefaultMutableTreeNode (pt);
+        ((DefaultMutableTreeNode) m_dtmProposals.getRoot()).add (dmtnProposal);
+
+        for (Iterator j = pt.getReasons(); j.hasNext();) {
+          dmtnProposal.add (new DefaultMutableTreeNode ((ProposalReason) j.next()));
+        }
+      }
     }
   }
   

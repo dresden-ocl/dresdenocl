@@ -54,10 +54,12 @@ public class TypeTraceInfo extends Object {
     
     scan();
     
+    /*
     System.err.println ("All key types: \n" + m_mpslsAllKeyTypes);
     System.err.println ("\nKey type minima: \n" + m_mpslsKeyTypeMinima);
     System.err.println ("\nAll element types: \n" + m_mpslsAllElementTypes);
     System.err.println ("\nElement type minima: \n" + m_mpslsElementTypeMinima + "\n");
+    */
   }
   
   /**

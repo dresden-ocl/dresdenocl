@@ -432,7 +432,9 @@ public class RevengGUI extends javax.swing.JDialog {
       
       List lCurrentSet = ttiCurrent.getAllElementTypes (sFeatureID);
       
-      sReturn.addAll (lCurrentSet);
+      if (lCurrentSet != null) {
+        sReturn.addAll (lCurrentSet);
+      }
     }
     
     return sReturn;
@@ -451,7 +453,9 @@ public class RevengGUI extends javax.swing.JDialog {
       
       List lCurrentSet = ttiCurrent.getElementTypeMinima (sFeatureID);
       
-      sReturn.addAll (lCurrentSet);
+      if (lCurrentSet != null) {
+        sReturn.addAll (lCurrentSet);
+      }
     }
     
     return sReturn;
@@ -470,7 +474,9 @@ public class RevengGUI extends javax.swing.JDialog {
       
       List lCurrentSet = ttiCurrent.getAllKeyTypes (sFeatureID);
       
-      sReturn.addAll (lCurrentSet);
+      if (lCurrentSet != null) {
+        sReturn.addAll (lCurrentSet);
+      }
     }
     
     return sReturn;
@@ -489,7 +495,9 @@ public class RevengGUI extends javax.swing.JDialog {
       
       List lCurrentSet = ttiCurrent.getKeyTypeMinima (sFeatureID);
       
-      sReturn.addAll (lCurrentSet);
+      if (lCurrentSet != null) {
+        sReturn.addAll (lCurrentSet);
+      }
     }
     
     return sReturn;

@@ -422,6 +422,94 @@ public abstract class AbstractDescriptor extends Object {
   public String getJavaDocName() {
     return m_jcParent.getFullName() + "#" + getName();
   }
+
+  public static String s_sMinimalTypeReasonString = "Identified as minimal type during runtime type tracing.";
+  public static String s_sAllTypesReasonString = "Identified as actual type during runtime type tracing.";
+
+  class TracedTypeProposal extends TypeEditPage.ProposedType {
+    
+    private boolean m_fMinimalType;
+    
+    public TracedTypeProposal (String sType, boolean fMinimalType) {
+      super (sType, 
+             ((fMinimalType)?
+              (new String[] {s_sMinimalTypeReasonString}):
+              (new String[] {s_sAllTypesReasonString})));
+              
+      m_fMinimalType = fMinimalType;
+    }
+    
+    public boolean useBold() {
+      return m_fMinimalType;
+    }
+    
+    public String getToolTip() {
+      if (m_fMinimalType) {
+        return "Type identified as minimal type during runtime type tracing.";
+      }
+      else {
+        return "Type identified during runtime type tracing.";
+      }
+    }
+    
+    
+  }
+  
+  /**
+    * Return a list of {@link TypeEditPage.ProposedType ProposedType}s that can be used in the
+    * {@link TypeEditPage} for the element-type tag.
+    */
+  public List getProposedElementTypes() {
+    List lReturn = new LinkedList();
+    List lMinima = new LinkedList (RevengGUI.getTheApp().getElementTypeMinima (this));
+
+    for (Iterator i = lMinima.iterator(); i.hasNext();) {
+      lReturn.add (new TracedTypeProposal ((String) i.next(), true));
+    }
+
+    List lAllTypes = new LinkedList (RevengGUI.getTheApp().getAllElementTypes (this));
+    for (Iterator i = lAllTypes.iterator(); i.hasNext();) {
+      String sCurrent = (String) i.next();
+      int nIdx = lMinima.indexOf (sCurrent);
+
+      if (nIdx > -1) {
+        ((TypeEditPage.ProposedType) lReturn.get (nIdx)).addReason (s_sAllTypesReasonString);
+      }
+      else {
+        lReturn.add (new TracedTypeProposal (sCurrent, false));
+      }
+    }
+
+    return lReturn;
+  }
+  
+  /**
+    * Return a list of {@link TypeEditPage.ProposedType ProposedType}s that can be used in the
+    * {@link TypeEditPage} for the key-type tag.
+    */
+  public List getProposedKeyTypes() {
+    List lReturn = new LinkedList();
+    List lMinima = new LinkedList (RevengGUI.getTheApp().getKeyTypeMinima (this));
+
+    for (Iterator i = lMinima.iterator(); i.hasNext();) {
+      lReturn.add (new TracedTypeProposal ((String) i.next(), true));
+    }
+
+    List lAllTypes = new LinkedList (RevengGUI.getTheApp().getAllKeyTypes (this));
+    for (Iterator i = lAllTypes.iterator(); i.hasNext();) {
+      String sCurrent = (String) i.next();
+      int nIdx = lMinima.indexOf (sCurrent);
+
+      if (nIdx > -1) {
+        ((TypeEditPage.ProposedType) lReturn.get (nIdx)).addReason (s_sAllTypesReasonString);
+      }
+      else {
+        lReturn.add (new TracedTypeProposal (sCurrent, false));
+      }
+    }
+
+    return lReturn;
+  }
   
   /**
     * Get the name of the described feature as for displaying it to a user.

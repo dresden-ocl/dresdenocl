@@ -63,7 +63,7 @@ public class MapTreeNode extends AbstractFeatureTreeNode {
       }
       
       public List getProposedTypes() {
-        return new LinkedList();
+        return getDescriptor().getProposedElementTypes();
       }
       
       public String getCurrentType() {
@@ -76,7 +76,7 @@ public class MapTreeNode extends AbstractFeatureTreeNode {
       }
       
       public List getProposedTypes() {
-        return new LinkedList();
+        return getDescriptor().getProposedKeyTypes();
       }
       
       public String getCurrentType() {
