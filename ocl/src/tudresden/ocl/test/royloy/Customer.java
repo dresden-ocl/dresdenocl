@@ -10,6 +10,10 @@ public class Customer extends RLObject {
 
   public String name;
 
+  /**
+     @invariant title_gender:
+        title=(if isMale=true then 'Mr' else 'Ms' endif)
+  */
   public String title;
 
   public boolean isMale;

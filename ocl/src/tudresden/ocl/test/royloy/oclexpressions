@@ -1,52 +1,6 @@
 
-context Customer
-inv title_gender:
-title=(if isMale=true then 'Mr' else 'Ms' endif)
-
-context LoyaltyProgram
-inv customer_unique_name:
-self.customer->forAll(
-  c1, c2 | c1<>c2 implies c1.name<>c2.name
-)
-inv  customer_unique_name2:
-self.customer->isUnique(name)
-
-context Membership
-inv membership_back:
-customer.cards.membership->includes(self)
-
-context Membership
-inv actualLevel:
-program.serviceLevel->includes(actualLevel)
-
-context Membership
-inv: loyaltyAccount.points>=0 or loyaltyAccount->isEmpty
-
-context Service
-inv: self.pointsEarned>0 implies not (self.pointsBurned=0)
-
-context ServiceLevel
-inv: loyaltyProgram.partners->includes(service.programPartner)
-
-context Transaction
-inv: self.program()=card.membership.program
-
 context Transaction::program()
 post: result=self.card.membership.program
-
-context ProgramPartner
-inv: self.deliveredServices.transactions->iterate(
-      t:Transaction;
-      result:Integer = 0 |
-      if t.oclIsTypeOf(Burning) then result+t.points else result endif
-    )
-    <=
-    self.deliveredServices.transactions->iterate(
-      t:Transaction;
-      result:Integer = 0 |
-      if t.oclIsTypeOf(Earning) then result+t.points else result endif
-    )
--- to do: 't.points' was 'points' -> default context in iterate
 
 context OclAny
 inv metamodel:

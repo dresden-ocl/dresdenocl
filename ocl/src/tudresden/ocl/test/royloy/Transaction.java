@@ -22,6 +22,9 @@ public class Transaction extends RLObject {
 
   // Operations
 
+  /**
+     @invariant: self.program()=card.membership.program
+  */
   public LoyaltyProgram program() {
     LoyaltyProgram ret=loyaltyAccount.membership.program;
 

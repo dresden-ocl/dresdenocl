@@ -10,6 +10,9 @@ public class Service extends RLObject {
   // Attributes
   public boolean condition;
 
+  /**
+     @invariant: self.pointsEarned>0 implies not (self.pointsBurned=0)
+  */
   public int pointsEarned;
 
   public int pointsBurned;

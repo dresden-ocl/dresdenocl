@@ -10,6 +10,11 @@ public class ServiceLevel extends RLObject {
   public String name;
 
   // Associations
+
+  /**
+     @invariant: 
+        loyaltyProgram.partners->includes(service.programPartner)
+  */
   public LoyaltyProgram loyaltyProgram;
 
   /**
