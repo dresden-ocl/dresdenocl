@@ -26,7 +26,11 @@ public class ClassAttribute extends ClassFeature
   */
   private String element_type=null;
 
-  public ClassAttribute(String classname, int modifiers, String type, String name)
+  public ClassAttribute(String classname, 
+                        int modifiers, 
+                        String type, 
+                        String name)
+    throws InjectorParseException
   {
     super(classname, modifiers, type, name);
   }
@@ -41,6 +45,18 @@ public class ClassAttribute extends ClassFeature
   public final String getElementType()
   {
     return element_type;
+  }
+
+  public final int getAllowedModifiers()
+  {
+    return
+      java.lang.reflect.Modifier.PUBLIC |
+      java.lang.reflect.Modifier.PROTECTED |
+      java.lang.reflect.Modifier.PRIVATE |
+      java.lang.reflect.Modifier.FINAL |
+      java.lang.reflect.Modifier.STATIC |
+      java.lang.reflect.Modifier.TRANSIENT |
+      java.lang.reflect.Modifier.VOLATILE;
   }
 
 }

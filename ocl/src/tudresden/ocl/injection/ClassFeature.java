@@ -22,7 +22,7 @@ import java.io.*;
 import java.util.*;
 import tudresden.ocl.codegen.CodeFragment;
 
-public class ClassFeature
+public abstract class ClassFeature
 {
   private String classname;
 
@@ -38,12 +38,23 @@ public class ClassFeature
   
   protected String literal;
 
-  public ClassFeature(String classname, int modifiers, String type, String name)
+  public ClassFeature(String classname, 
+                      int modifiers, 
+                      String type, 
+                      String name)
+    throws InjectorParseException
   {
     this.classname=classname;
     this.modifiers=modifiers;
     this.type=type;
     this.name=name;
+    
+    int over=modifiers&~getAllowedModifiers();
+    if(over!=0)
+      throw new InjectorParseException(
+        "modifier(s) "+java.lang.reflect.Modifier.toString(over)+
+        " not allowed for class feature "+name+
+        " of type "+getClass().getName()+'.');
   }
   
   public final String getClassName()
@@ -56,6 +67,8 @@ public class ClassFeature
     return modifiers;
   }
   
+  public abstract int getAllowedModifiers();
+
   public final boolean isStatic()
   {
     return java.lang.reflect.Modifier.isStatic(modifiers);

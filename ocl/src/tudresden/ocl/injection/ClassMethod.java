@@ -45,7 +45,12 @@ public class ClassMethod extends ClassFeature
   private ArrayList throwables=new ArrayList();
     
 
-  public ClassMethod(String classname, int modifiers, String type, String name, int name_end)
+  public ClassMethod(String classname, 
+                     int modifiers, 
+                     String type, 
+                     String name, 
+                     int name_end)
+    throws InjectorParseException
   {
     super(classname, modifiers, type, name);
     this.name_end=name_end;
@@ -133,6 +138,19 @@ public class ClassMethod extends ClassFeature
     return buf.toString();
   }
     
+  public final int getAllowedModifiers()
+  {
+    return
+      java.lang.reflect.Modifier.PUBLIC |
+      java.lang.reflect.Modifier.PROTECTED |
+      java.lang.reflect.Modifier.PRIVATE |
+      java.lang.reflect.Modifier.FINAL |
+      java.lang.reflect.Modifier.STATIC |
+      java.lang.reflect.Modifier.ABSTRACT |
+      java.lang.reflect.Modifier.NATIVE |
+      java.lang.reflect.Modifier.SYNCHRONIZED;
+  }
+
   public final void printMore(PrintStream o)
   {
     for(Iterator i=parameters.iterator(); i.hasNext(); )
