@@ -127,9 +127,8 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     {
       if(this.packagename==null)
         throw new InjectorParseException("expected root package, found "+packagename+'.');
-      String packagename=javafile.getPackageName();
-      if(!this.packagename.equals(packagename))
-        throw new InjectorParseException("expected package "+this.packagename+", found "+packagename+'.');
+      if(!this.packagename.equals(javafile.getPackageName()))
+        throw new InjectorParseException("expected package "+this.packagename+", found "+javafile.getPackageName()+'.');
     }
     
     public void onImport(String importname)

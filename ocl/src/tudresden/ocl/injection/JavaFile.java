@@ -37,6 +37,14 @@ public final class JavaFile
      @element-type String
   */
   private ArrayList imports=new ArrayList();
+  
+  /**
+     Distiguishes two stages in life cycle of this object:
+     getting imports via addImport and finding types via findType.
+     @see #addImport
+     @see #findType
+  */
+  private boolean buildStage=true;
 
   /**
      @throws InjectorParseException if called more than once.
@@ -44,8 +52,11 @@ public final class JavaFile
   public final void setPackage(String packagename)
     throws InjectorParseException
   {
+    if(!buildStage)
+      throw new RuntimeException();
     if(this.packagename!=null)
       throw new InjectorParseException("only one package statement allowed.");
+
     this.packagename=packagename;
   }
   
@@ -56,12 +67,17 @@ public final class JavaFile
 
   public final void addImport(String importname)
   {
+    if(!buildStage)
+      throw new RuntimeException();
+
     imports.add(importname);
   }
 
   public final Class findType(String typename)
   {
     //System.out.println("findtype: >"+typename+"<");
+    
+    buildStage=false;
 
     if(packagename==null)
       throw new RuntimeException();
