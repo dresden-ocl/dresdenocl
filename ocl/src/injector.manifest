@@ -1,1 +1,2 @@
 Main-Class: tudresden.ocl.injection.Main
+Class-Path: xerces.jar
