@@ -28,11 +28,13 @@ public class DeclarativeCodeFragment implements CodeFragment {
     protected String constraintName;
     protected String constraintType;
     protected String code;
+    protected String additionalInfo[];
 
-    public DeclarativeCodeFragment(String name, String type, String code) {
+    public DeclarativeCodeFragment(String name, String type, String code, String[] additionalInfo) {
 	constraintName = name;
 	constraintType = type;
 	this.code = code;
+        this.additionalInfo = additionalInfo;
     }
 
     /**
@@ -75,5 +77,12 @@ public class DeclarativeCodeFragment implements CodeFragment {
      */
     public String getResultVariable() {
 	return null;
+    }
+    
+    /**
+     * @return additional Information about the code fragment
+     */
+    public String[] getAdditionalInfo() {
+        return additionalInfo;
     }
 }

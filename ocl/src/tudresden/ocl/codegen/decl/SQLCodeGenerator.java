@@ -149,7 +149,7 @@ public class SQLCodeGenerator extends DeclarativeCodeGenerator {
 			}
 
 		 	formatSQLCode();
-			fragments.add(new DeclarativeCodeFragment(constraintName, constrainedType, code.toString()));
+			fragments.add(new DeclarativeCodeFragment(constraintName, constrainedType, code.toString(), null));
 		} else {
 			// Error !!!
 		}

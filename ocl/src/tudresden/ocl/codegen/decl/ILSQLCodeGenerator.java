@@ -27,6 +27,8 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ import java.util.ArrayList;
 public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 	String constrainedType;
         String constraintName;
-	String oclTokens = "sum;count;size;select;forAll;includes;includesAll;excludesAll;isEmpty;notEmpty;exists;isUnique;sortedby;allInstances";
+	String oclTokens = "sum;count;size;select;forAll;includes;includesAll;excludesAll;isEmpty;notEmpty;exists;isUnique;sortedby;allInstances;intersection;including;excluding;union;symmetricDifference";
 	String oclTokBasic1 = "size;toUpper;toLower;abs;floor;round";
 	String oclTokBasic2 = "max;min;div;mod;concat";
 	String oclTokBasic3 = "substring";
@@ -50,6 +52,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
          * @element-type List
          */
 	Map navigation;
+        Set involvedTables;
 	Hashtable declarators;
 	boolean formatCode = true;
 	int aliasCount;
@@ -59,6 +62,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
         String joinTargetObject;
 
 	final static String STANDARDKEY = "elem";
+        final static String STANDARDTABLE = "DUAL";
         final static String COMPLEX_PREDICATE = "inlcudes;excludes;includesAll;excludesAll;isEmpty;notEmpty;exists;forAll;isUnique";
 
 	// constructor
@@ -70,7 +74,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 	
 	// helper methodes
 	public void formatSQLCode() {
-		int count, ind;
+                int count, ind;
 		String indent = "";
 		Vector v = new Vector();
 
@@ -178,6 +182,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 		constrainedType = null;
         	constraintName = null;
 		navigation = new HashMap();
+                involvedTables = new HashSet();
 		declarators = new Hashtable();
 		aliasCount = 0;
 		joinAliasCount = 0;
@@ -221,6 +226,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 				} else {
 					tables.append("," + guide.getFrom() + " " + tableAlias);					
 				}
+                                involvedTables.add(new String(guide.getFrom()));
 			
 				// add logical link to next join
 				if (joins.length() > 0) {
@@ -272,8 +278,8 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 
         public void inAConstraintBody(AConstraintBody node) {
         	String expTask = getUniqueTask();
-                constraintName =  node.getName().toString().trim();                                
-                
+                constraintName =  node.getName().toString().trim();     
+                                
         	ca.reset();
         	ca.setArgument("constraint_name", constraintName);
         	ca.setArgument("context_table", (String)getIn(node));
@@ -304,11 +310,12 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
 				// code generate a number of code fragments equal to the number of tables !!!
 				String tableName = ((Table)e.next()).getTableName();
 				replaceTask(task, tableName);
+                                involvedTables.add(tableName);
 			}
 
 		 	if (formatCode) formatSQLCode();
-		 	System.err.println("--> " + constrainedType + ":" + constraintName + "\n" + code.toString());
-			fragments.add(new DeclarativeCodeFragment(constraintName, constrainedType, code.toString()));
+		 	System.err.println("--> " + constrainedType + ":" + constraintName + "\n" + code.toString());                        
+			fragments.add(new DeclarativeCodeFragment(constraintName, constrainedType, code.toString(), (String[])involvedTables.toArray(new String[involvedTables.size()])));
 		} else {
 			// Error !!!
 		}
@@ -623,7 +630,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
     		String spec = "";
     		MappedClass mc = null;
     		Guide guide;
-    		String pkName = "";
+    		String pkName = "", pkTable = "";
     		boolean codeForPathName = false;
     		AStandardDeclarator asd = null;
    		Node fcp = null;
@@ -633,7 +640,7 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
    		Table table = new Table("dummy");
     	
     		List guides = (List)navigation.get(node.parent());
-
+                System.err.println("current pathName: " + pathName);
 
     		if (oclTokens.indexOf(pathName) == -1) {
     			// quit if no guides list is available or complain about empty list
@@ -700,12 +707,16 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
    			
    			// prepare navigation data
    			if ((guides != null) && (guides.size() > 0)) {
-   				guide = (Guide)guides.get(0);
-   				guide.reset();
-    				guide.next();
-    				pkName = guide.getSelect();
-    				prepareJoin(guides);
-    			} 
+   			    guide = (Guide)guides.get(0);
+   			    guide.reset();
+    			    guide.next();
+    			    pkName = guide.getSelect();
+                            pkTable = guide.getFrom();
+    			    prepareJoin(guides);
+                        } else {
+                            pkName = STANDARDKEY;
+                            pkTable = STANDARDTABLE;
+                        }                        
    			
    			// generate code
    			// features that need to be mapped using the MODEL TYPE QUERY
@@ -734,16 +745,94 @@ public class ILSQLCodeGenerator extends DeclarativeCodeGenerator {
    			
    				// features that need to be mapped using the COMPLEX PREDICATE pattern from UML'99
                           	if ((pathName.equals("includes")) || (pathName.equals("excludes"))) {
+                                    ca.reset();
+                                    ca.setArgument("collection", task);
+        			    ca.setArgument("object", taskAp);
+        			    codeForPathName = true;
                           	} else if ((pathName.equals("includesAll")) || (pathName.equals("excludesAll"))) {
+                                    ca.reset();
+                                    ca.setArgument("collection", task);
+        			    ca.setArgument("collection2", taskAp);
+        			    codeForPathName = true;
   			  	} else if ((pathName.equals("isEmpty")) || (pathName.equals("notEmpty"))) {
+                                    ca.reset();
+                                    ca.setArgument("collection", task);
+        			    codeForPathName = true;
 	         		} else if ((pathName.equals("forAll")) || (pathName.equals("exists")) || (pathName.equals("isUnique"))) {
-  					ca.reset();
-                                        ca.setArgument("collection", task);
-        				ca.setArgument("object", pkName);
-        				ca.setArgument("table", table.getTableName() + " " + tableAlias.toUpperCase());
-        				ca.setArgument("expression", taskAp);
-        				codeForPathName = true;
+  				    ca.reset();
+                                    ca.setArgument("collection", task);
+        			    ca.setArgument("object", pkName);
+        			    ca.setArgument("table", table.getTableName() + " " + tableAlias.toUpperCase());
+        			    ca.setArgument("expression", taskAp);
+        			    codeForPathName = true;
   				}
+                                
+                                // features that need to be mapped using the QUERY pattern from UML'99
+  			        Type type = theTree.getNodeType(node.parent());
+  			        if (type != null) {
+  				    if (type instanceof Collection) {
+  					if (((Collection)type).getCollectionKind() == Collection.SET) spec = "set";
+  					if (((Collection)type).getCollectionKind() == Collection.BAG) spec = "bag";
+  					if (((Collection)type).getCollectionKind() == Collection.SEQUENCE) spec = "sequence";
+  				    }
+  			        }
+                                
+                                if ((pathName.equals("select")) || (pathName.equals("reject"))) {
+                                    ca.reset();
+                                    ca.setArgument("collection", task);
+        			    ca.setArgument("object", pkName);
+        			    ca.setArgument("table", table.getTableName() + " " + tableAlias.toUpperCase());
+        			    ca.setArgument("expression", taskAp);   
+                                    codeForPathName = true;
+ 			        } else if (pathName.equals("intersection")) { 
+                                    ca.reset();
+                                    ca.setArgument("collection", task);
+                                    ca.setArgument("collection2", taskAp);
+                                    pathName = spec + "_intersection";
+                                    codeForPathName = true;
+        			} else if ((pathName.equals("including")) || (pathName.equals("excluding"))) {
+                                    ca.reset();
+                                    ca.setArgument("collection", task);
+  				    ca.setArgument("object", taskAp);
+                                    pathName = spec + "_" + pathName;
+                                    codeForPathName = true;
+ 			        } else if (pathName.equals("union")) { 
+                                    ca.reset();
+                                    ca.setArgument("collection", task);
+                                    ca.setArgument("collection2", taskAp);
+                                    pathName = spec + "_" + pathName;
+                                    codeForPathName = true;
+   			        } else if (pathName.equals("symmetricDifference")) {  
+                                    ca.reset();
+                                    ca.setArgument("collection", task);
+                                    ca.setArgument("collection2", taskAp);
+                                    pathName = pathName;
+                                    codeForPathName = true;
+ 			        } else if (pathName.equals("collect")) {  
+                                    // todo
+  			        }
+                                
+                                // features that need to be mapped using the BASIC VALUE pattern from UML'99
+                                if (pathName.equals("size")) {
+                                    ca.reset();
+   				    ca.setArgument("table", pkTable);
+                                    ca.setArgument("element", pkName);
+                                    ca.setArgument("collection", task);
+                                    codeForPathName = true;
+   			        } else if (pathName.equals("count")) {
+       				    ca.reset();
+                                    ca.setArgument("table", pkTable);
+                                    ca.setArgument("element", pkName);
+                                    ca.setArgument("object", taskAp);
+                                    ca.setArgument("collection", task);
+                                    codeForPathName = true;
+        	                } else if (pathName.equals("sum")) {                                    
+   				    ca.reset();
+                                    ca.setArgument("table", pkTable);
+                                    ca.setArgument("element", pkName);
+                                    ca.setArgument("collection", task);
+                                    codeForPathName = true;
+   			        }
 			  
 			  	if (codeForPathName) {
                           		try {

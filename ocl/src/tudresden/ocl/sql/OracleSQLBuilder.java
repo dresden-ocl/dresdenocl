@@ -48,7 +48,6 @@ public class OracleSQLBuilder implements SQLBuilder {
 		theCode.insert(nextAliasPos, s);
 	}
 		
-	// views
 	public void createView(String name, boolean alias) {
 		append("create or replace view " + name);
 		if (alias) {
@@ -70,7 +69,6 @@ public class OracleSQLBuilder implements SQLBuilder {
 		aliasCount++;
 	}
 		
-	// select-from-where statements
 	public void createSelect() {
 		append("select ");		
 		aliasCount = 0;
@@ -106,4 +104,24 @@ public class OracleSQLBuilder implements SQLBuilder {
 	public void addAnd() {
 		append("\nand ");
 	}
+        
+        public void createAssertionReplacement(String triggerName,String tableName,String viewName,String errMsg) {
+                append("create or replace trigger " + triggerName + "\n");
+                append("after insert or update or delete on " + tableName + "\n");
+                append("begin");
+                append("  if ((select NVL(COUNT(*),0) from " + viewName + ") > 0) then\n");  
+                append("     raise_application_error(-20000,\"" + errMsg +"\");\n");
+                append("  end if;\n");
+                append("end;\n");
+        }
+        
+        public void createECATriggerTemplate(String triggerName,String tableName,String viewName) {
+                append("create or replace trigger " + triggerName + "\n");
+                append("after insert or update or delete on " + tableName + "\n");
+                append("begin");
+                append("  if ((select NVL(COUNT(*),0) from " + viewName + ") > 0) then\n");  
+                append("     // todo: add action code here\n");
+                append("  end if;\n");
+                append("end;\n");
+        }        
 }

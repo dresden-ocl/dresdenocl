@@ -33,7 +33,11 @@ public interface SQLBuilder {
 	// views
 	public void createView(String name, boolean alias); 
 	public void addAlias(String name); 
-		
+        
+        // trigger
+        public void createAssertionReplacement(String triggerName, String tableName, String viewName, String errMsg);
+        public void createECATriggerTemplate(String triggerName, String tableName, String viewName);
+  
 	// select-from-where statements
 	public void createSelect(); 
 	public void addColumn(String name);
@@ -44,5 +48,5 @@ public interface SQLBuilder {
 	// operators
 	public void createUnion();	
 	public void addEquation(String op1, String op2);
-	public void addAnd();
+        public void addAnd();
 }
