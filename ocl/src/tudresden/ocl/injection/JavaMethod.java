@@ -30,12 +30,8 @@ public final class JavaMethod extends JavaBehaviour
   public static final String WRAPPER_SUFFIX="_wrappedbyocl";
   
   /**
-     The index of the end of the feature name in literal.
-     Needed for getWrappedLiteral() and getNotWrappedLiteral(),
-     if this is not a constructor.
-       @see #getWrappedLiteral()
-       @see #getNotWrappedLiteral()
-       @see #literal
+     The index of the end of the feature name in {@see #literal}.
+     Needed for {@see #getWrappedLiteral()}.
   */
   private int name_end;
   
