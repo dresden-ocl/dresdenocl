@@ -358,13 +358,13 @@ final class OclInjector implements InjectionConsumer
     else
       o.write(cf.getType());
     o.write(' ');
-    o.write(cf.getNotWrappedName());
+    o.write(cf.getName());
     o.write(Invariant.BACKUP_SUFFIX);
     o.write('=');
     if(is_collection)
       o.write('0');
     else
-      o.write(cf.getNotWrappedName());
+      o.write(cf.getName());
     o.write(";/**\n    Contains observers for modifications of this feature.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
     o.write(OCL_AUTHOR);
     o.write("\n    @see #");
@@ -373,7 +373,7 @@ final class OclInjector implements InjectionConsumer
     o.write(Modifier.toString(
         (cf.getModifiers()&Modifier.STATIC)|Modifier.PUBLIC|Modifier.FINAL));
     o.write(" java.util.HashSet ");
-    o.write(cf.getNotWrappedName());
+    o.write(cf.getName());
     o.write(Invariant.OBSERVER_SUFFIX);
     o.write("=new java.util.HashSet();");
   }
@@ -407,31 +407,31 @@ final class OclInjector implements InjectionConsumer
       {
         o.write(Invariant.IDENTITY_HASH_CODE);
         o.write('(');
-        o.write(jf.getNotWrappedName());
+        o.write(jf.getName());
         o.write(')');
       }
       else
-        o.write(jf.getNotWrappedName());
+        o.write(jf.getName());
       o.write("!=");
-      o.write(jf.getNotWrappedName());
+      o.write(jf.getName());
       o.write(Invariant.BACKUP_SUFFIX);
       o.write(")\n    {\n      ");
-      o.write(jf.getNotWrappedName());
+      o.write(jf.getName());
       o.write(Invariant.BACKUP_SUFFIX);
       o.write('=');
       if(is_collection)
       {
         o.write(Invariant.IDENTITY_HASH_CODE);
         o.write('(');
-        o.write(jf.getNotWrappedName());
+        o.write(jf.getName());
         o.write(')');
       }
       else
-        o.write(jf.getNotWrappedName());
+        o.write(jf.getName());
       o.write(";\n");
       
       //o.write("      System.out.println(\"notify invariants for attribute '");
-      //o.write(jf.getNotWrappedName());
+      //o.write(jf.getName());
       //o.write("' on object '\"+this+'\\'');\n");
       
       if(jf instanceof JavaAttribute)
@@ -440,7 +440,7 @@ final class OclInjector implements InjectionConsumer
       o.write("      ");
       o.write(Invariant.NOTIFY_OBSERVING_INVARIANTS);
       o.write('(');
-      o.write(jf.getNotWrappedName());
+      o.write(jf.getName());
       o.write(Invariant.OBSERVER_SUFFIX);
       o.write(");\n    }\n");
     }
@@ -472,45 +472,25 @@ final class OclInjector implements InjectionConsumer
       (getInvariantScope(jb.getModifiers()) >= config.invariantScope);
   }
   
-  public final void writeWrapper(JavaBehaviour cf) throws IOException
+  private final void writeWrapperHeader(JavaBehaviour jb)
+    throws IOException
   {
     Writer o=output;
-    o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
-    o.write(OCL_AUTHOR);
-    o.write("\n    @see #");
-    if(cf instanceof JavaConstructor)
-      o.write(cf.getName());
-    else
-      o.write(((JavaMethod)cf).getWrappedName());
-    o.write('(');
-    for(Iterator i=cf.getParameters(); i.hasNext(); )
-    {
-      o.write((String)(i.next()));
-      i.next();
-      if(i.hasNext()) o.write(", ");
-    }
-    if(cf instanceof JavaConstructor)
-    {
-      if(cf.getParameters().hasNext())
-        o.write(", ");
-      o.write(tudresden.ocl.injection.lib.WrapperDummy.class.getName());
-    }
-    o.write(")\n  */");
     String modifierString=
-      Modifier.toString(cf.getModifiers()&~Modifier.ABSTRACT);
+      Modifier.toString(jb.getModifiers()&~Modifier.ABSTRACT);
     if(modifierString.length()>0)
     {
       o.write(modifierString);
       o.write(' ');
     }
-    if(cf.getType()!=null)
+    if(jb.getType()!=null)
     {
-      o.write(cf.getType());
+      o.write(jb.getType());
       o.write(' ');
     }
-    o.write(cf.getNotWrappedName());
+    o.write(jb.getName());
     o.write('(');
-    for(Iterator i=cf.getParameters(); i.hasNext(); )
+    for(Iterator i=jb.getParameters(); i.hasNext(); )
     {
       o.write((String)i.next());
       o.write(' ');
@@ -518,7 +498,7 @@ final class OclInjector implements InjectionConsumer
       if(i.hasNext()) o.write(", ");
     }
     o.write(')');
-    Iterator throwables=cf.getThrowables();
+    Iterator throwables=jb.getThrowables();
     if(throwables.hasNext())
     {
       o.write(" throws ");
@@ -528,38 +508,82 @@ final class OclInjector implements InjectionConsumer
         if(throwables.hasNext()) o.write(", ");
       }
     }
+  }
+
+  private final void writeWrapper(JavaBehaviour jb) 
+    throws IOException
+  {
+    if(jb instanceof JavaConstructor)
+      writeWrapper((JavaConstructor)jb);
+    else
+      writeWrapper((JavaMethod)jb);
+  }
+
+  private final void writeWrapper(JavaConstructor cf) 
+    throws IOException
+  {
+    Writer o=output;
+    o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+    o.write(OCL_AUTHOR);
+    o.write("\n    @see #");
+    o.write(cf.getName());
+    o.write('(');
+    for(Iterator i=cf.getParameters(); i.hasNext(); )
+    {
+      o.write((String)(i.next()));
+      i.next();
+      if(i.hasNext()) o.write(", ");
+    }
+    if(cf.getParameters().hasNext())
+      o.write(", ");
+    o.write(tudresden.ocl.injection.lib.WrapperDummy.class.getName());
+    o.write(")\n  */");
+    writeWrapperHeader(cf);
     o.write("\n  {\n");
-    if((cf instanceof JavaMethod) && !"void".equals(cf.getType()))
+    o.write("    this(");
+    for(Iterator i=cf.getParameters(); i.hasNext(); )
+    {
+      i.next();
+      o.write((String)i.next());
+      o.write(", ");
+    }
+    o.write('(');
+    o.write(tudresden.ocl.injection.lib.WrapperDummy.class.getName());
+    o.write(")null);\n");
+    o.write("    ");
+    o.write(Invariant.CHECKING_FLAG);
+    o.write("=true;\n");
+    if(hasInvariantScope(cf))
+      writeWrapperInvariant();
+    o.write("    ");
+    o.write(Invariant.CHECKING_FLAG);
+    o.write("=false;\n");
+    o.write("  }");
+  }
+
+  private final void writeWrapper(JavaMethod jm) throws IOException
+  {
+    Writer o=output;
+    o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+    o.write(OCL_AUTHOR);
+    o.write("\n    @see #");
+    o.write(jm.getWrappedName());
+    o.write('(');
+    for(Iterator i=jm.getParameters(); i.hasNext(); )
+    {
+      o.write((String)(i.next()));
+      i.next();
+      if(i.hasNext()) o.write(", ");
+    }
+    o.write(")\n  */");
+    writeWrapperHeader(jm);
+    o.write("\n  {\n");
+    if(!"void".equals(jm.getType()))
     {
       o.write("    ");
-      o.write(cf.getType());
+      o.write(jm.getType());
       o.write(" result;\n");
     }
-    if(cf instanceof JavaConstructor)
-    {
-      o.write("    this(");
-      for(Iterator i=cf.getParameters(); i.hasNext(); )
-      {
-        i.next();
-        o.write((String)i.next());
-        o.write(", ");
-      }
-      o.write('(');
-      o.write(tudresden.ocl.injection.lib.WrapperDummy.class.getName());
-      o.write(")null);\n");
-      o.write("    ");
-      o.write(Invariant.CHECKING_FLAG);
-      o.write("=true;\n");
-      if(hasInvariantScope(cf))
-        writeWrapperInvariant();
-      o.write("    ");
-      o.write(Invariant.CHECKING_FLAG);
-      o.write("=false;\n");
-    }
-    else
-    {
-    // TODO identation
-    JavaMethod jm=(JavaMethod)cf;
     o.write("    if(");
     o.write(Invariant.CHECKING_FLAG);
     o.write(")\n");
@@ -567,49 +591,46 @@ final class OclInjector implements InjectionConsumer
     o.write("    else\n    {\n      ");
     o.write(Invariant.CHECKING_FLAG);
     o.write("=true;\n");
-    //if(!cf.isConstructor())
+    writeChangedCheckerCall();
+    if(hasInvariantScope(jm))
+      writeWrapperInvariant();
+    if(codefragments!=null)
     {
-      writeChangedCheckerCall();
-      if(hasInvariantScope(cf))
-        writeWrapperInvariant();
-      if(codefragments!=null)
+      SortedFragments sf=(SortedFragments)codefragments.get(jm.getParent().getName());
+      if(sf!=null)
       {
-        SortedFragments sf=(SortedFragments)codefragments.get(cf.getParent().getName());
-        if(sf!=null)
+        for(Iterator i=sf.transfer.iterator(); i.hasNext(); )
         {
-          for(Iterator i=sf.transfer.iterator(); i.hasNext(); )
+          CodeFragment frag=(CodeFragment)i.next();
+          if(jm.getSignature().equals(frag.getConstrainedOperation()))
+            o.write(frag.getCode());
+        }
+        for(Iterator i=sf.pre.iterator(); i.hasNext(); )
+        {
+          CodeFragment frag=(CodeFragment)i.next();
+          if(jm.getSignature().equals(frag.getConstrainedOperation()))
           {
-            CodeFragment frag=(CodeFragment)i.next();
-            if(jm.getSignature().equals(frag.getConstrainedOperation()))
-              o.write(frag.getCode());
+            o.write("      {\n");
+            o.write(frag.getCode());
+            o.write("        if(!");
+            o.write(frag.getResultVariable());
+            o.write(".isTrue())\n          ");
+            o.write(violationmakro);
+            o.write("(\"violated ocl precondition '");
+            o.write(frag.getName());
+            o.write("' on object '\"+this+\"' operation '");
+            o.write(frag.getConstrainedOperation());
+            o.write("'.\");\n      }\n");
           }
-          for(Iterator i=sf.pre.iterator(); i.hasNext(); )
+        }
+        for(Iterator i=sf.preparation.iterator(); i.hasNext(); )
+        {
+          CodeFragment frag=(CodeFragment)i.next();
+          if(jm.getSignature().equals(frag.getConstrainedOperation()))
           {
-            CodeFragment frag=(CodeFragment)i.next();
-            if(jm.getSignature().equals(frag.getConstrainedOperation()))
-            {
-              o.write("      {\n");
-              o.write(frag.getCode());
-              o.write("        if(!");
-              o.write(frag.getResultVariable());
-              o.write(".isTrue())\n          ");
-              o.write(violationmakro);
-              o.write("(\"violated ocl precondition '");
-              o.write(frag.getName());
-              o.write("' on object '\"+this+\"' operation '");
-              o.write(frag.getConstrainedOperation());
-              o.write("'.\");\n      }\n");
-            }
-          }
-          for(Iterator i=sf.preparation.iterator(); i.hasNext(); )
-          {
-            CodeFragment frag=(CodeFragment)i.next();
-            if(jm.getSignature().equals(frag.getConstrainedOperation()))
-            {
-              o.write("      {\n");
-              o.write(frag.getCode());
-              o.write("      }\n");
-            }
+            o.write("      {\n");
+            o.write(frag.getCode());
+            o.write("      }\n");
           }
         }
       }
@@ -622,11 +643,11 @@ final class OclInjector implements InjectionConsumer
     o.write(Invariant.CHECKING_FLAG);
     o.write("=true;\n");
     writeChangedCheckerCall();
-    if(hasInvariantScope(cf))
+    if(hasInvariantScope(jm))
       writeWrapperInvariant();
     if(codefragments!=null)
     {
-      SortedFragments sf=(SortedFragments)codefragments.get(cf.getParent().getName());
+      SortedFragments sf=(SortedFragments)codefragments.get(jm.getParent().getName());
       if(sf!=null)
         for(Iterator i=sf.post.iterator(); i.hasNext(); )
         {
@@ -650,9 +671,8 @@ final class OclInjector implements InjectionConsumer
     o.write("      ");
     o.write(Invariant.CHECKING_FLAG);
     o.write("=false;\n    }\n");
-    if(!"void".equals(cf.getType()))
+    if(!"void".equals(jm.getType()))
       o.write("    return result;\n");
-    }
     o.write("  }");
   }
 
