@@ -77,6 +77,58 @@
                     <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
                   </Constraints>
                 </Component>
+                <Component class="javax.swing.JLabel" name="m_jlSpace">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value=" "/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout$JScrollPaneConstraintsDescription"/>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JButton" name="m_jbSave">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
+                      <Image iconType="3" name="/tudresden/ocl/injection/reverseeng/resources/save.gif"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+                      <Dimension value="[25, 25]"/>
+                    </Property>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+                      <Dimension value="[25, 25]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+                      <Dimension value="[25, 25]"/>
+                    </Property>
+                    <Property name="enabled" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
+                  </Properties>
+
+                  <Events>
+                    <EventHandler event="actionPerformed" handler="m_jbSaveActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JButton" name="m_jbSaveAll">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
+                      <Image iconType="3" name="/tudresden/ocl/injection/reverseeng/resources/saveAll.gif"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+                      <Dimension value="[25, 25]"/>
+                    </Property>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+                      <Dimension value="[25, 25]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="com.netbeans.developer.editors.DimensionEditor">
+                      <Dimension value="[25, 25]"/>
+                    </Property>
+                    <Property name="enabled" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.DesignBoxLayout$BoxConstraintsDescription"/>
+                  </Constraints>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JScrollPane" name="m_jspTreeScroller">

@@ -110,6 +110,11 @@ public class FileTreeNode extends RevengTreeNode {
     */
   private boolean m_fDirty = false;
   
+  /**
+    * If non-null, will be notified whenever m_fDirty changes.
+    */
+  private RevengGUI m_rguiDirtyObserver = null;
+  
   public FileTreeNode (DefaultTreeModel dtmModel) {
     super(dtmModel);
   }
@@ -143,8 +148,6 @@ public class FileTreeNode extends RevengTreeNode {
       public void run() {
         ensureParsed (false);
 
-        m_fUseDefaultIcon = false;
-        
         FolderTreeNode ftnParent = (FolderTreeNode) getParent();
         if (ftnParent != null) {
           if (m_fHadError ||
@@ -194,6 +197,7 @@ public class FileTreeNode extends RevengTreeNode {
       }
       finally {
         m_fParsed = true;
+        m_fUseDefaultIcon = false;
       }
     }
 
@@ -208,6 +212,14 @@ public class FileTreeNode extends RevengTreeNode {
       }
       else {
         add (new ErrorTreeNode (getModel(), m_sErrorMessage));
+      }
+    }
+    else {
+      if ((!m_fHadError) &&
+          (m_acAnalysisResults.getAllFeatures().size() == 0) &&
+          (getAllowsChildren())) {
+        setAllowsChildren (false);
+        nodeChanged();
       }
     }
   }
@@ -266,7 +278,13 @@ public class FileTreeNode extends RevengTreeNode {
 
     updateIcon();
     
+    boolean fDirtyChanged = ! m_fDirty;
     m_fDirty = true;
+    
+    if (fDirtyChanged &&
+        (m_rguiDirtyObserver != null)) {
+      m_rguiDirtyObserver.onDirtyChanged (this, true);
+    }
   }
   
   private void updateIcon() {
@@ -299,5 +317,26 @@ public class FileTreeNode extends RevengTreeNode {
     */
   public boolean isDirty() {
     return m_fDirty;
+  }
+
+  /**
+    * Start to call rguiObserver's onDirtyChanged method whenever the dirty state of this node changes.
+    */
+  public void startDirtyChangeNotification (RevengGUI rguiObserver) {
+    m_rguiDirtyObserver = rguiObserver;
+  }
+  
+  /**
+    * Stop calling rguiObserver's onDirtyChanged method whenever the dirty state of this node changes.
+    */
+  public void stopDirtyChangeNotification() {
+    m_rguiDirtyObserver = null;
+  }
+  
+  /**
+    * Save the associated file.
+    */
+  public void save() throws IOException {
+    JOptionPane.showMessageDialog (null, "This would save the file...");
   }
 }

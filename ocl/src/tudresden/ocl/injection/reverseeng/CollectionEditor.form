@@ -51,7 +51,7 @@
     <Component class="javax.swing.JComboBox" name="m_jcbElementType">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="Enter type of collection elements.&#xa;The dropdown box contains suggestions and standard types."/>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="com.netbeans.developer.modules.loaders.form.RADConnectionPropertyEditor" preCode="m_tcmElementTypeModel = new TypeComboModel() {&#xa;  public void setSelectedItem (Object oSelectedItem) {&#xa;    super.setSelectedItem (oSelectedItem);&#xa;    &#xa;    m_cdModel.setElementType ((String) getSelectedItem());&#xa;  }&#xa;};">
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="com.netbeans.developer.modules.loaders.form.RADConnectionPropertyEditor" preCode="m_tcmElementTypeModel = new TypeComboModel() {&#xa;  public void setSelectedItem (Object oSelectedItem) {&#xa;    super.setSelectedItem (oSelectedItem);&#xa;    &#xa;    if (m_fEditingStarted) {&#xa;      m_cdModel.setElementType ((String) getSelectedItem());&#xa;    }&#xa;  }&#xa;};">
           <Connection code="m_tcmElementTypeModel" type="code"/>
         </Property>
         <Property name="editable" type="boolean" editor="sun.beans.editors.BoolEditor" value="true"/>

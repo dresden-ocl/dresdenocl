@@ -18,6 +18,8 @@ public class MapEditor extends javax.swing.JPanel {
   private TypeComboModel m_tcmKeyTypeModel;
   private TypeComboModel m_tcmElementTypeModel;
   
+  private boolean m_fEditingStarted = false;
+  
   /** Creates new form MapEditor */
   public MapEditor (MapDescriptor mdModel) {
     super();
@@ -33,6 +35,9 @@ public class MapEditor extends javax.swing.JPanel {
     
     m_jcbElementType.setSelectedItem (sElementType);
     m_jcbKeyType.setSelectedItem (sKeyType);
+    
+    // Allow edits to propagate
+    m_fEditingStarted = true;
   }
 
   /** This method is called from within the constructor to
@@ -80,7 +85,9 @@ public class MapEditor extends javax.swing.JPanel {
       public void setSelectedItem (Object oSelectedItem) {
         super.setSelectedItem (oSelectedItem);
 
-        m_mdModel.setKeyType ((String) getSelectedItem());
+        if (m_fEditingStarted) {
+          m_mdModel.setKeyType ((String) getSelectedItem());
+        }
       }
     };
     m_jcbKeyType.setModel (m_tcmKeyTypeModel);
@@ -108,7 +115,9 @@ public class MapEditor extends javax.swing.JPanel {
       public void setSelectedItem (Object oSelectedItem) {
         super.setSelectedItem (oSelectedItem);
 
-        m_mdModel.setElementType ((String) getSelectedItem());
+        if (m_fEditingStarted) {
+          m_mdModel.setElementType ((String) getSelectedItem());
+        }
       }
     };
     m_jcbElementType.setModel (m_tcmElementTypeModel);

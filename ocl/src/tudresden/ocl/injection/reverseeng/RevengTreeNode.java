@@ -24,6 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
 package tudresden.ocl.injection.reverseeng;
 
+import java.io.*;
+
 import javax.swing.*;
 import javax.swing.tree.*;
 
@@ -146,4 +148,31 @@ public abstract class RevengTreeNode extends DefaultMutableTreeNode {
     }
   }
   
+  /**
+    * Start to call rguiObserver's onDirtyChanged method whenever the dirty state of this node changes.
+    */
+  public void startDirtyChangeNotification (RevengGUI rguiObserver) {
+    if (getParent() != null) {
+      ((RevengTreeNode) getParent()).startDirtyChangeNotification (rguiObserver);
+    }
+  }
+  
+  /**
+    * Stop calling rguiObserver's onDirtyChanged method whenever the dirty state of this node changes.
+    */
+  public void stopDirtyChangeNotification() {
+    if (getParent() != null) {
+      ((RevengTreeNode) getParent()).stopDirtyChangeNotification();
+    }
+  }
+  
+  /**
+    * Save the file to which this node belongs.
+    */
+  public void save()
+    throws IOException {
+    if (getParent() != null) {
+      ((RevengTreeNode) getParent()).save();
+    }
+  }
 }

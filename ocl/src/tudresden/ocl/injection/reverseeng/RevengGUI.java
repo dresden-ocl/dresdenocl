@@ -43,6 +43,8 @@ import tudresden.ocl.injection.*;
 public class RevengGUI extends javax.swing.JDialog {
 
   private DefaultTreeModel m_dtmFileModel;
+  private RevengTreeNode m_rtnCurrent = null;
+  private List m_lrtnUnsavedTreeNodes = new LinkedList();
   
   /** Creates new form RevengGUI */
   public RevengGUI(java.awt.Frame parent,boolean modal) {
@@ -63,6 +65,9 @@ public class RevengGUI extends javax.swing.JDialog {
     m_jpLeft = new javax.swing.JPanel ();
     m_jtbTreeBar = new javax.swing.JToolBar ();
     m_jbUpOneLevel = new javax.swing.JButton ();
+    m_jlSpace = new javax.swing.JLabel ();
+    m_jbSave = new javax.swing.JButton ();
+    m_jbSaveAll = new javax.swing.JButton ();
     m_jspTreeScroller = new javax.swing.JScrollPane ();
     m_jtFiles = new javax.swing.JTree ();
     m_dtmFileModel = new DefaultTreeModel (new DefaultMutableTreeNode(), true); // just use a fake root
@@ -92,6 +97,32 @@ public class RevengGUI extends javax.swing.JDialog {
           m_jbUpOneLevel.setMinimumSize (new java.awt.Dimension(25, 25));
       
           m_jtbTreeBar.add (m_jbUpOneLevel);
+      
+          m_jlSpace.setText (" ");
+      
+          m_jtbTreeBar.add (m_jlSpace);
+      
+          m_jbSave.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/injection/reverseeng/resources/save.gif")));
+          m_jbSave.setPreferredSize (new java.awt.Dimension(25, 25));
+          m_jbSave.setMaximumSize (new java.awt.Dimension(25, 25));
+          m_jbSave.setMinimumSize (new java.awt.Dimension(25, 25));
+          m_jbSave.setEnabled (false);
+          m_jbSave.addActionListener (new java.awt.event.ActionListener () {
+            public void actionPerformed (java.awt.event.ActionEvent evt) {
+              m_jbSaveActionPerformed (evt);
+            }
+          }
+          );
+      
+          m_jtbTreeBar.add (m_jbSave);
+      
+          m_jbSaveAll.setIcon (new javax.swing.ImageIcon (getClass ().getResource ("/tudresden/ocl/injection/reverseeng/resources/saveAll.gif")));
+          m_jbSaveAll.setPreferredSize (new java.awt.Dimension(25, 25));
+          m_jbSaveAll.setMaximumSize (new java.awt.Dimension(25, 25));
+          m_jbSaveAll.setMinimumSize (new java.awt.Dimension(25, 25));
+          m_jbSaveAll.setEnabled (false);
+      
+          m_jtbTreeBar.add (m_jbSaveAll);
       
         m_jpLeft.add (m_jtbTreeBar, java.awt.BorderLayout.NORTH);
     
@@ -156,15 +187,43 @@ public class RevengGUI extends javax.swing.JDialog {
 
   }//GEN-END:initComponents
 
+  private void m_jbSaveActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jbSaveActionPerformed
+    if (m_rtnCurrent != null) {
+      try {
+        m_rtnCurrent.save();
+      }
+      catch (IOException ioe) {
+        JOptionPane.showMessageDialog (this, 
+                                         "An error occurred when attempting to save: " + ioe.getLocalizedMessage(), 
+                                         "Error", 
+                                         JOptionPane.ERROR_MESSAGE);
+      }
+    }
+  }//GEN-LAST:event_m_jbSaveActionPerformed
+
   private void m_jtFilesValueChanged (javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_m_jtFilesValueChanged
     if (evt.isAddedPath()) {
-      RevengTreeNode rtn = (RevengTreeNode) evt.getPath().getLastPathComponent();
+      if (m_rtnCurrent != null) {
+        m_rtnCurrent.stopDirtyChangeNotification();
+      }
+      
+      m_rtnCurrent = (RevengTreeNode) evt.getPath().getLastPathComponent();
 
-      m_jspProperties.setViewportView (rtn.getRightComponent());
+      m_jspProperties.setViewportView (m_rtnCurrent.getRightComponent());
 
       /*this.getRootPane().revalidate();
       this.getRootPane().repaint();*/
       pack(); // Not especially elegant! Does anybody know a better way of getting that JScrollPane to redraw?
+      
+      m_jbSave.setEnabled (m_rtnCurrent.isDirty());
+      
+      if (m_rtnCurrent != null) {
+        m_rtnCurrent.startDirtyChangeNotification (this);
+      }      
+    }
+    else {
+      m_jbSave.setEnabled (false);
+      m_jbSaveAll.setEnabled(false);
     }
   }//GEN-LAST:event_m_jtFilesValueChanged
 
@@ -216,18 +275,39 @@ public class RevengGUI extends javax.swing.JDialog {
   }
   
   /**
-  * @param args the command line arguments
-  */
+    * Invoked whenever the current tree node's dirty flag changes.
+    */
+  public void onDirtyChanged (RevengTreeNode rtn, boolean fNewValue) {
+    if (fNewValue) {
+      m_jbSave.setEnabled (true);
+      m_jbSaveAll.setEnabled (true);
+      
+      m_lrtnUnsavedTreeNodes.add (rtn);
+    }
+    else {
+      m_jbSave.setEnabled (false);
+
+      m_lrtnUnsavedTreeNodes.remove (rtn);
+      
+      m_jbSaveAll.setEnabled (m_lrtnUnsavedTreeNodes.size() > 0);
+    }
+  }
+  
+  /**
+    * @param args the command line arguments
+    */
   public static void main (String args[]) {
     new RevengGUI (new javax.swing.JFrame (), true).show ();
   }
-
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JSplitPane m_jspSplitter;
   private javax.swing.JPanel m_jpLeft;
   private javax.swing.JToolBar m_jtbTreeBar;
   private javax.swing.JButton m_jbUpOneLevel;
+  private javax.swing.JLabel m_jlSpace;
+  private javax.swing.JButton m_jbSave;
+  private javax.swing.JButton m_jbSaveAll;
   private javax.swing.JScrollPane m_jspTreeScroller;
   private javax.swing.JTree m_jtFiles;
   private javax.swing.JScrollPane m_jspProperties;

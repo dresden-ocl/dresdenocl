@@ -34,7 +34,7 @@ public class CollectionEditor extends javax.swing.JPanel {
 
   private CollectionDescriptor m_cdModel;
   private TypeComboModel m_tcmElementTypeModel;
-  
+  private boolean m_fEditingStarted = false;  
   
   /** Creates new form CollectionEditor */
   public CollectionEditor (CollectionDescriptor cdModel) {
@@ -48,6 +48,9 @@ public class CollectionEditor extends javax.swing.JPanel {
         
     m_jtaDocComment.setText (m_cdModel.getCleanedComment());
     m_jcbElementType.setSelectedItem (sElementType);
+    
+    // Allow edits to propagate
+    m_fEditingStarted = true;
   }
 
   /** This method is called from within the constructor to
@@ -93,7 +96,9 @@ public class CollectionEditor extends javax.swing.JPanel {
       public void setSelectedItem (Object oSelectedItem) {
         super.setSelectedItem (oSelectedItem);
 
-        m_cdModel.setElementType ((String) getSelectedItem());
+        if (m_fEditingStarted) {
+          m_cdModel.setElementType ((String) getSelectedItem());
+        }
       }
     };
     m_jcbElementType.setModel (m_tcmElementTypeModel);
