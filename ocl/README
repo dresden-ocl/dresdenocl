@@ -94,6 +94,86 @@ tab is exactly ONE level of identation.
 You may mix tabs and spaces within a file, but then tab width is 2,
 in words "two".
 
+2.6 CHANGELOG
+-------------
+Every commit resulting in a changed behaviour (probably anything
+besides beautifying code) gets a record there. Please don't forget
+to document your changes. A policy for CHANGELOG entries is at the
+end of that file.
+
+
+3. RELEASE POLICY
+-----------------
+
+3.1. Release Numbers
+--------------------
+Each release gets a unique number in the form of major.minor.revision.
+
+* Major numbers are reserved for compatibility breaking restructurings
+  of the whole project.
+* Minor numbers are for changes breaking source or binary compatibility,
+  but require small efforts to adapt existing applications using the
+  OCL Toolkit.
+* Revision upgrades guarantuee source and binary compatibility.
+
+3.2. CVS Tags
+-------------
+Each release is tagged with "RELEASE_<release number>".
+The following is strictly required: after a
+
+   cvs update -r RELEASE_<release number>
+   ant clean dist -Ddist.version=<release number>
+
+one gets exactly the released files offered for download on the server,
+except of the file time stamps.
+
+3.3 RELEASE PROCEDURE (as a result of the above)
+------------------------------------------------
+1)  Get the desired version (probably the most current) from CVS
+
+2a) ant clean all,
+    proceed only if everything is ok, according to CHECK-IN policy in README
+
+2b) Do any additional tests, which cannot be done automatically. Yet to be
+    specified, at least the interactive applets should be started and a minimal
+    clickthrough should be performed.
+
+3)  Choose a release number according to 3.1.
+    This number is represesented by <new release number> below.
+
+4a) Edit CHANGELOG: Replace the title of the first section
+      "Changes from x.y.z to current CVS"
+    to
+      "Changes from x.y.z to <new release number>"
+
+4b) cvs commit -m "closed section for <new release number>" CHANGELOG
+
+5)  cvs tag RELEASE_<new release number>
+
+6)  ant dist -Ddist.version=<new release number>
+    After that, you will find the following in directory dist
+
+    * dresden-ocl-<new release number>.tar.gz
+      containing everything needed for using the toolkit: jars, docs, etc.
+    * dresden-ocl-<new release number>-src.tar.gz
+      containing the image of a freshly checked out cvs of this version.
+      This means: all files maintained in CVS.
+
+7a) Edit CHANGELOG: Add a new section on top:
+      "Changes from <new release number> to current CVS"
+
+7b) cvs commit -m "opened section for post-<new release number>" CHANGELOG
+
+8)  Upload the files created by 6) to sourceforge into the
+    "released files section".
+
+9)  Make announcement in dresden-ocl-discussion.
+    Subject is "released version <new release number>". Put the corresponding
+    section of CHANGELOG into that mail.
+
+10) (Optional) Propose an announcement for dresden-ocl-announce on
+    dresden-ocl-discussion. Such an announcement demands careful evaluation.
+    There should be at least three month between messages on dresden-ocl-announce.
 
 
 
