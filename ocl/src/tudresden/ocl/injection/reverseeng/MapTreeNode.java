@@ -24,6 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
 package tudresden.ocl.injection.reverseeng;
 
+import java.util.*;
+
 import javax.swing.*;
 
 import javax.swing.tree.*;
@@ -34,18 +36,13 @@ import javax.swing.tree.*;
   * @author  sz9 (Steffen Zschaler)
   * @version 0.1
   */
-public class MapTreeNode extends RevengTreeNode {
+public class MapTreeNode extends AbstractFeatureTreeNode {
   
   static Icon s_iOK = new javax.swing.ImageIcon (MapTreeNode.class.getResource ("resources/map.gif"));
   static Icon s_iInCompl = new javax.swing.ImageIcon (MapTreeNode.class.getResource ("resources/mapInCompl.gif"));
   
   public MapTreeNode (DefaultTreeModel dtmModel, MapDescriptor md) {
-    super(dtmModel);
-
-    setUserObject (md);
-    md.setAssociatedTreeNode (this);
-
-    setAllowsChildren(false);
+    super(dtmModel, md);
   }
 
   public Icon getIcon (boolean fExpanded) {
@@ -57,17 +54,32 @@ public class MapTreeNode extends RevengTreeNode {
     }
   }
 
-  public void fill() {
-    setAllowsChildren (false);
-
-    nodeChanged();
-  }
-
-  /**
-    * Return a MapEditor for this node.
-    */
-  public JComponent getRightComponent() {
-    return new MapEditor (getDescriptor());
+  public Iterator getPropertyPages() {
+    List l = new LinkedList();
+    l.add (new PropertyPage ("Map Properties", new MapEditor (getDescriptor())));
+    
+    final Iterator iStandardPages = super.getPropertyPages();
+    final Iterator iNewPages = l.iterator();
+    
+    return new Iterator() {
+      public boolean hasNext() {
+        return (iStandardPages.hasNext() ||
+                 iNewPages.hasNext());
+      }
+      
+      public Object next() {
+        if (iStandardPages.hasNext()) {
+          return iStandardPages.next();
+        }
+        else {
+          return iNewPages.next();
+        }
+      }
+      
+      public void remove() {
+        throw new UnsupportedOperationException();
+      }
+    };
   }
 
   /**

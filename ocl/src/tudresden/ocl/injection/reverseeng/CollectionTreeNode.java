@@ -24,6 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
 package tudresden.ocl.injection.reverseeng;
 
+import java.util.*;
+
 import javax.swing.*;
 
 import javax.swing.tree.*;
@@ -33,18 +35,13 @@ import javax.swing.tree.*;
  * @author  sz9
  * @version 
  */
-public class CollectionTreeNode extends RevengTreeNode {
+public class CollectionTreeNode extends AbstractFeatureTreeNode {
   
   static Icon s_iOK = new javax.swing.ImageIcon (CollectionTreeNode.class.getResource ("resources/collection.gif"));
   static Icon s_iInCompl = new javax.swing.ImageIcon (CollectionTreeNode.class.getResource ("resources/collectionInCompl.gif"));
   
   public CollectionTreeNode (DefaultTreeModel dtmModel, CollectionDescriptor cd) {
-    super (dtmModel);
-
-    setUserObject (cd);
-    cd.setAssociatedTreeNode (this);
-
-    setAllowsChildren(false);
+    super (dtmModel, cd);
   }
 
   public Icon getIcon (boolean fExpanded) {
@@ -56,18 +53,36 @@ public class CollectionTreeNode extends RevengTreeNode {
     }
   }
 
-  public void fill() {
-    setAllowsChildren (false);
-
-    nodeChanged();
-  }
-
   public CollectionDescriptor getDescriptor() {
     return (CollectionDescriptor) getUserObject();
   }
 
-  public JComponent getRightComponent() {
-    return new CollectionEditor (getDescriptor());
+  public Iterator getPropertyPages() {
+    List l = new LinkedList();
+    l.add (new PropertyPage ("Collection Properties", new CollectionEditor (getDescriptor())));
+    
+    final Iterator iStandardPages = super.getPropertyPages();
+    final Iterator iNewPages = l.iterator();
+    
+    return new Iterator() {
+      public boolean hasNext() {
+        return (iStandardPages.hasNext() ||
+                 iNewPages.hasNext());
+      }
+      
+      public Object next() {
+        if (iStandardPages.hasNext()) {
+          return iStandardPages.next();
+        }
+        else {
+          return iNewPages.next();
+        }
+      }
+      
+      public void remove() {
+        throw new UnsupportedOperationException();
+      }
+    };
   }
 
   public String toString () {      

@@ -172,21 +172,27 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="m_jspProperties">
+        <Container class="javax.swing.JTabbedPane" name="m_jtpProperties">
+          <Properties>
+            <Property name="tabPlacement" type="int" editor="sun.beans.editors.IntEditor" value="3"/>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="right"/>
             </Constraint>
           </Constraints>
 
-          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout"/>
+          <Layout class="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="m_jlDefaultComponent">
+            <Component class="javax.swing.JLabel" name="m_jlNoProperties">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="com.netbeans.developer.editors.StringEditor" value="No properties for current selection!"/>
+                <Property name="enabled" type="boolean" editor="sun.beans.editors.BoolEditor" value="false"/>
               </Properties>
               <Constraints>
-                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JScrollPaneSupportLayout$JScrollPaneConstraintsDescription"/>
+                <Constraint layoutClass="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout" value="com.netbeans.developerx.loaders.form.formeditor.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="No properties..." toolTip="No properties..."/>
+                </Constraint>
               </Constraints>
             </Component>
           </SubComponents>

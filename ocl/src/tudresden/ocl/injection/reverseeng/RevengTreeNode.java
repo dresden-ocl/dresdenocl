@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.injection.reverseeng;
 
 import java.io.*;
+import java.util.*;
 
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -35,11 +36,6 @@ import javax.swing.tree.*;
   * @version 0.1
   */
 public abstract class RevengTreeNode extends DefaultMutableTreeNode {
-    
-  /**
-    * The component associated with any node that doesn't change the default behavior.
-    */
-  static JLabel s_jlNoProperties = new JLabel ("No properties for current selection!");
   
   /**
     * The model which this node is part of.
@@ -86,10 +82,33 @@ public abstract class RevengTreeNode extends DefaultMutableTreeNode {
   public void collapsed() { }
     
   /**
-    * Get the component to be shown in the right hand panel of the GUI.
+    * Get the property panes to be shown in the right hand panel of the GUI.
     */ 
-  public JComponent getRightComponent () {
-    return s_jlNoProperties;
+  public Iterator getPropertyPages() {
+    return new Iterator() {
+      private boolean m_fHasNext = true;
+
+      public boolean hasNext() {
+        return m_fHasNext;
+      }
+
+      public Object next() {
+        if (m_fHasNext) {
+          m_fHasNext = false;
+          
+          PropertyPage ppReturn = new PropertyPage ("No properties...", new JLabel ("No properties for current selection!"));
+          ppReturn.setEnabled (false);
+          return ppReturn;
+        }
+        else {
+          throw new NoSuchElementException();
+        }
+      }
+
+      public void remove() {
+        throw new UnsupportedOperationException();
+      }
+    };
   }
   
   /**

@@ -227,4 +227,8 @@ public abstract class AbstractDescriptor extends Object {
   public String getContainingClass() {
     return m_sContainingClass;
   }
+  
+  public JavaClass getContainingClassJavaClass() {
+    return m_jcParent;
+  }
 }

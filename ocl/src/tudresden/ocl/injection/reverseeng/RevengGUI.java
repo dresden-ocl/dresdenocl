@@ -75,8 +75,8 @@ public class RevengGUI extends javax.swing.JDialog {
     FolderTreeNode ftnRoot = new FolderTreeNode(m_dtmFileModel, new File ("."));
     m_dtmFileModel.setRoot (ftnRoot);
     ftnRoot.fill();
-    m_jspProperties = new javax.swing.JScrollPane ();
-    m_jlDefaultComponent = new javax.swing.JLabel ();
+    m_jtpProperties = new javax.swing.JTabbedPane ();
+    m_jlNoProperties = new javax.swing.JLabel ();
     getContentPane ().setLayout (new java.awt.GridBagLayout ());
     java.awt.GridBagConstraints gridBagConstraints1;
     setDefaultCloseOperation (javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -173,12 +173,14 @@ public class RevengGUI extends javax.swing.JDialog {
     
       m_jspSplitter.setLeftComponent (m_jpLeft);
   
+      m_jtpProperties.setTabPlacement (3);
   
-        m_jlDefaultComponent.setText ("No properties for current selection!");
+        m_jlNoProperties.setText ("No properties for current selection!");
+        m_jlNoProperties.setEnabled (false);
     
-        m_jspProperties.setViewportView (m_jlDefaultComponent);
+        m_jtpProperties.addTab ("No properties...", null, m_jlNoProperties, "No properties...");
     
-      m_jspSplitter.setRightComponent (m_jspProperties);
+      m_jspSplitter.setRightComponent (m_jtpProperties);
   
 
     gridBagConstraints1 = new java.awt.GridBagConstraints ();
@@ -241,11 +243,12 @@ public class RevengGUI extends javax.swing.JDialog {
       
       m_rtnCurrent = (RevengTreeNode) evt.getPath().getLastPathComponent();
 
-      m_jspProperties.setViewportView (m_rtnCurrent.getRightComponent());
-
-      /*this.getRootPane().revalidate();
-      this.getRootPane().repaint();*/
-      pack(); // Not especially elegant! Does anybody know a better way of getting that JScrollPane to redraw?
+      m_jtpProperties.removeAll();
+      
+      for (Iterator i = m_rtnCurrent.getPropertyPages(); i.hasNext();) {
+        PropertyPage pp = (PropertyPage) i.next();
+        m_jtpProperties.addTab (pp.getTitle(), pp.getIcon(), pp.getComponent(), pp.getToolTip());
+      }
       
       m_jbSave.setEnabled (m_rtnCurrent.isDirty());
       
@@ -347,8 +350,8 @@ public class RevengGUI extends javax.swing.JDialog {
   private javax.swing.JButton m_jbSaveAll;
   private javax.swing.JScrollPane m_jspTreeScroller;
   private javax.swing.JTree m_jtFiles;
-  private javax.swing.JScrollPane m_jspProperties;
-  private javax.swing.JLabel m_jlDefaultComponent;
+  private javax.swing.JTabbedPane m_jtpProperties;
+  private javax.swing.JLabel m_jlNoProperties;
   // End of variables declaration//GEN-END:variables
 
 }
