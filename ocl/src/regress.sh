@@ -5,5 +5,5 @@ java \
   test.ui.TestRunner tudresden.ocl.test.TestAll > regress.results
 
 echo --- diffs in regress.results
-diff regress.results regress.results.reference
+diff -c regress.results regress.results.reference
 

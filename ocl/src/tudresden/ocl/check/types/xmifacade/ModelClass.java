@@ -410,10 +410,14 @@ public final class ModelClass implements Any, Comparable
       "Expected operation \""+Model.signatureString(name,params)+
       "\" in classifier \""+fullName+"\" not found.");
   }
-  
+
+  /**
+     States are not supported.
+     This method always returns true.
+  */
   public boolean hasState(String name)
   {
-    return false;
+    return true;
   }
 
   public boolean conformsTo(Type t)
