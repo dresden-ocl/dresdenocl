@@ -1,0 +1,25 @@
+
+1. SPECIFICATION
+---------------
+
+This JAR archive contains a module for the CASE tool Borland
+Together ControlCenter. It is believed to work with all versions
+starting from version 6.0.
+
+
+2. INSTALLATION
+---------------
+
+For using the modules provided within Together, first create a
+subdirectory 'ocl' in
+$TOGETHERHOME$/modules/com/togethersoft/modules. Then copy the
+JAR file to that destination (that is to:
+$TOGETHERHOME$/modules/com/togethersoft/modules/ocl) and start
+Together as usual.
+
+Once Together is up and running select "Activate / Deactivate
+Features" from the "Tools" menu. Choose the "Early Access" tab
+and mark the two checkboxes "OCL Editor" and "OCL Injector".
+
+Upon completion Together's message pane should display two
+confirmations of both modules having been activated.
