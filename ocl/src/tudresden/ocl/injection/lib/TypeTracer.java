@@ -23,23 +23,23 @@ import java.util.*;
 public final class TypeTracer
 {
 
-  public static final String TRACE_TYPES="tudresden.ocl.injection.lib.TraceTypes.traceTypes";
+  public static final String TRACE_TYPES="tudresden.ocl.injection.lib.TypeTracer.traceTypes";
   
   private static final HashMap element_types=new HashMap();
   private static final HashMap key_types=new HashMap();
 
   public static void traceTypes(String attr, Collection c)
   {
-    traceTypes(attr, c.iterator(), element_types);
+    traceTypes(attr, c.iterator(), element_types, "element-type");
   }
 
   public static void traceTypes(String attr, Map m)
   {
-    traceTypes(attr, m.values().iterator(), element_types);
-    traceTypes(attr, m.keySet().iterator(), key_types);
+    traceTypes(attr, m.values().iterator(), element_types, "element-type");
+    traceTypes(attr, m.keySet().iterator(), key_types, "key-type");
   }
 
-  private static void traceTypes(String attr, Iterator i, HashMap types)
+  private static void traceTypes(String attr, Iterator i, HashMap types, String kind)
   {
     TypeTracer tt=(TypeTracer)(types.get(attr));
     if(tt==null)
@@ -47,7 +47,7 @@ public final class TypeTracer
       tt=new TypeTracer(attr);
       types.put(attr, tt);
     }
-    tt.traceTypes(i);
+    tt.traceTypes(i, kind);
   }
 
   private String attr;
@@ -69,8 +69,18 @@ public final class TypeTracer
   */
   private HashSet types_minima=new HashSet();
   
-  private void traceTypes(Iterator iterator)
+  public static final char SEPARATOR='\t';
+  public static final char ADD_ALL='*';
+  public static final char ADD_MINIMA='+';
+  public static final char REMOVE_MINIMA='-';
+  
+  private void traceTypes(Iterator iterator, String kind)
   {
+    if(log==null)
+    {
+      log=System.out;
+    }
+    
     boolean usedLog=false;
     
     outerloop: 
@@ -81,9 +91,11 @@ public final class TypeTracer
         continue outerloop;
       
       types_all.add(c);
-      log.print('*');
+      log.print(ADD_ALL);
       log.print(attr);
-      log.print(' ');
+      log.print(SEPARATOR);
+      log.print(kind);
+      log.print(SEPARATOR);
       log.println(c.getName());
       usedLog=true;
       
@@ -100,18 +112,22 @@ public final class TypeTracer
         if(c.isAssignableFrom(i_minima)) // i_minima is subtype of c
         {
           i.remove();
-          log.print('-');
+          log.print(REMOVE_MINIMA);
           log.print(attr);
-          log.print(' ');
+          log.print(SEPARATOR);
+          log.print(kind);
+          log.print(SEPARATOR);
           log.println(i_minima.getName());
           gets_in=true;
         }
       }
       
       types_minima.add(c);
-      log.print('+');
+      log.print(ADD_MINIMA);
       log.print(attr);
-      log.print(' ');
+      log.print(SEPARATOR);
+      log.print(kind);
+      log.print(SEPARATOR);
       log.println(c.getName());
     }
     if(usedLog)

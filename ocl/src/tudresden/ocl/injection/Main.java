@@ -33,6 +33,8 @@ import tudresden.ocl.check.types.xmifacade.XmiParser;
 import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.codegen.JavaCodeGenerator;
 import tudresden.ocl.injection.lib.Invariant;
+import tudresden.ocl.injection.lib.WrapperDummy;
+import tudresden.ocl.injection.lib.TypeTracer;
 
 
 final class ClassState
@@ -466,6 +468,9 @@ final class OclInjector implements InjectionConsumer
       if(jf instanceof JavaAttribute)
         writeTypeChecker((JavaAttribute)jf);
       
+      if(is_collection&&config.tracetypes)
+        writeTypeTracer((JavaAttribute)jf);
+      
       o.write("      ");
       o.write(Invariant.NOTIFY_OBSERVING_INVARIANTS);
       o.write('(');
@@ -567,7 +572,7 @@ final class OclInjector implements InjectionConsumer
     }
     if(jc.getParameters().hasNext())
       o.write(", ");
-    o.write(tudresden.ocl.injection.lib.WrapperDummy.class.getName());
+    o.write(WrapperDummy.class.getName());
     o.write(")\n  */");
     writeWrapperHeader(jc);
     o.write("\n  {\n");
@@ -579,7 +584,7 @@ final class OclInjector implements InjectionConsumer
       o.write(", ");
     }
     o.write('(');
-    o.write(tudresden.ocl.injection.lib.WrapperDummy.class.getName());
+    o.write(WrapperDummy.class.getName());
     o.write(")null);\n");
     o.write("    ");
     o.write(Invariant.CHECKING_FLAG);
@@ -772,6 +777,23 @@ final class OclInjector implements InjectionConsumer
       o.write("' of object \"+this+\".\");\n");
     }
   }
+  
+  
+  // type tracing
+  
+  private final void writeTypeTracer(JavaAttribute ja)
+    throws IOException
+  {
+    Writer o=output;
+    
+    o.write("      ");
+    o.write(TypeTracer.TRACE_TYPES);
+    o.write("(\"");
+    o.write(ja.getFullDocName());
+    o.write("\", ");
+    o.write(ja.getName());
+    o.write(");\n");
+  }
 
 }
   
@@ -781,6 +803,7 @@ final class OclInjectorConfig
   boolean insertimmediatly=false;
   boolean clean=false;
   String violationmakro=null;
+  boolean tracetypes=false;
 
   static final int INVARIANT_SCOPE_PRIVATE  =0;
   static final int INVARIANT_SCOPE_PROTECTED=1;
@@ -919,6 +942,8 @@ public class Main
       "      the scope of invariants\n"+
       "  -vm --violation-makro makro\n"+
       "      what to to, if a constraint fails.\n"+
+      "  -tt --trace-types\n"+
+      "      trace types of collection elements.\n"+
       "  -c  --clean\n"+
       "      clean files\n"+
       "  -m  --modify\n"+
@@ -1048,6 +1073,8 @@ public class Main
           }
           conf.violationmakro=args[i];
         }
+        else if("--trace-types".equals(args[i])||"-tt".equals(args[i]))
+          conf.tracetypes=true;
         else if("--modify".equals(args[i])||"-m".equals(args[i]))
           modify=true;
         else if("--clean".equals(args[i])||"-c".equals(args[i]))

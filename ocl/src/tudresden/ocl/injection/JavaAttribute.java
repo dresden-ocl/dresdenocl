@@ -52,6 +52,18 @@ public final class JavaAttribute extends JavaFeature
   }
 
   /**
+     Return a fully qualified name of the attribute,
+     including class and package path.
+     Syntax follows the javadoc tags, 
+     with a '#' between class and attribute name.
+     Is used for type tracing log files.
+  */
+  public final String getFullDocName()
+  {
+    return getFile().getPackageName()+'.'+getParent().getName()+'#'+getName();
+  }
+  
+  /**
      Sets the content of the @element-type tag in the doccomment 
      connected to this attribute.
      Must be called at most once.
