@@ -1156,9 +1156,9 @@ public abstract class Example implements Runnable
       type_oclbackup812374=type;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(type_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(qualifiers)!=qualifiers_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(qualifiers)!=qualifiers_oclbackup812374)
     {
-      qualifiers_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(qualifiers);
+      qualifiers_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(qualifiers);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(qualifiers_oclobservinginvariants812374);
     }
     if(hallo!=hallo_oclbackup812374)
@@ -1221,9 +1221,9 @@ public abstract class Example implements Runnable
       uglyAttribute5_oclbackup812374=uglyAttribute5;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute5_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(uglyAttribute6)!=uglyAttribute6_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(uglyAttribute6)!=uglyAttribute6_oclbackup812374)
     {
-      uglyAttribute6_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(uglyAttribute6);
+      uglyAttribute6_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(uglyAttribute6);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(uglyAttribute6_oclobservinginvariants812374);
     }
     if(uglyAttribute7!=uglyAttribute7_oclbackup812374)
@@ -1241,9 +1241,9 @@ public abstract class Example implements Runnable
       a_oclbackup812374=a;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(a_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(collectionWithoutComment)!=collectionWithoutComment_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(collectionWithoutComment)!=collectionWithoutComment_oclbackup812374)
     {
-      collectionWithoutComment_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(collectionWithoutComment);
+      collectionWithoutComment_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(collectionWithoutComment);
       tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#collectionWithoutComment", collectionWithoutComment);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(collectionWithoutComment_oclobservinginvariants812374);
     }
@@ -1252,22 +1252,22 @@ public abstract class Example implements Runnable
       b_oclbackup812374=b;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(b_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(mapWithoutComment)!=mapWithoutComment_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(mapWithoutComment)!=mapWithoutComment_oclbackup812374)
     {
-      mapWithoutComment_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(mapWithoutComment);
+      mapWithoutComment_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(mapWithoutComment);
       tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#mapWithoutComment", mapWithoutComment);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(mapWithoutComment_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(myStrings)!=myStrings_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(myStrings)!=myStrings_oclbackup812374)
     {
-      myStrings_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(myStrings);
+      myStrings_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(myStrings);
       if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(myStrings,java.lang.String.class)) System.out.println("element type checker failed at feature 'myStrings' of object "+this+".");
       tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#myStrings", myStrings);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(myStrings_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(integers)!=integers_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(integers)!=integers_oclbackup812374)
     {
-      integers_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(integers);
+      integers_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(integers);
       if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(integers,Integer.class)) System.out.println("element type checker failed at feature 'integers' of object "+this+".");
       tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#integers", integers);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(integers_oclobservinginvariants812374);
@@ -1277,9 +1277,9 @@ public abstract class Example implements Runnable
       anInteger_oclbackup812374=anInteger;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(anInteger_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(dates)!=dates_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(dates)!=dates_oclbackup812374)
     {
-      dates_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(dates);
+      dates_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(dates);
       if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(dates,Date.class)) System.out.println("element type checker failed at feature 'dates' of object "+this+".");
       tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#dates", dates);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(dates_oclobservinginvariants812374);
@@ -1289,9 +1289,9 @@ public abstract class Example implements Runnable
       aDate_oclbackup812374=aDate;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(aDate_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(interfaces)!=interfaces_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(interfaces)!=interfaces_oclbackup812374)
     {
-      interfaces_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(interfaces);
+      interfaces_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(interfaces);
       if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(interfaces,AbstractImplementation.class)) System.out.println("element type checker failed at feature 'interfaces' of object "+this+".");
       tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#interfaces", interfaces);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(interfaces_oclobservinginvariants812374);
@@ -1301,9 +1301,9 @@ public abstract class Example implements Runnable
       anInterface_oclbackup812374=anInterface;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(anInterface_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(formats)!=formats_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(formats)!=formats_oclbackup812374)
     {
-      formats_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(formats);
+      formats_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(formats);
       if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(formats,Format.class)) System.out.println("element type checker failed at feature 'formats' of object "+this+".");
       tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#formats", formats);
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(formats_oclobservinginvariants812374);
@@ -1313,9 +1313,9 @@ public abstract class Example implements Runnable
       aFormat_oclbackup812374=aFormat;
       tudresden.ocl.injection.lib.Invariant.notifyObservingInvariants(aFormat_oclobservinginvariants812374);
     }
-    if(tudresden.ocl.injection.lib.Invariant.identityHashCode(namedIntegers)!=namedIntegers_oclbackup812374)
+    if(tudresden.ocl.injection.lib.HashExact.identityHashCode(namedIntegers)!=namedIntegers_oclbackup812374)
     {
-      namedIntegers_oclbackup812374=tudresden.ocl.injection.lib.Invariant.identityHashCode(namedIntegers);
+      namedIntegers_oclbackup812374=tudresden.ocl.injection.lib.HashExact.identityHashCode(namedIntegers);
       if(!tudresden.ocl.injection.lib.Invariant.checkElementTypes(namedIntegers,Integer.class)) System.out.println("element type checker failed at feature 'namedIntegers' of object "+this+".");
       if(!tudresden.ocl.injection.lib.Invariant.checkKeyTypes(namedIntegers,String.class)) System.out.println("key type checker failed at feature 'namedIntegers' of object "+this+".");
       tudresden.ocl.injection.lib.TypeTracer.traceTypes("tudresden.ocl.injection.test.Example#namedIntegers", namedIntegers);

@@ -33,6 +33,8 @@ import tudresden.ocl.check.types.xmifacade.XmiParser;
 import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.codegen.JavaCodeGenerator;
 import tudresden.ocl.injection.lib.Invariant;
+import tudresden.ocl.injection.lib.HashExact;
+import tudresden.ocl.injection.lib.HashSize;
 import tudresden.ocl.injection.lib.WrapperDummy;
 import tudresden.ocl.injection.lib.TypeTracer;
 
@@ -91,6 +93,7 @@ final class OclInjector implements InjectionConsumer
   private boolean clean;
   private String violationmacro;
   private OclInjectorConfig config;
+  private String identityhashcode;
 
 
   /**
@@ -116,6 +119,11 @@ final class OclInjector implements InjectionConsumer
     this.clean=config.clean;
     this.violationmacro=config.violationmacro;
     this.config=config;
+    
+    if(config.simplehash)
+      this.identityhashcode=HashSize.IDENTITY_HASH_CODE;
+    else
+      this.identityhashcode=HashExact.IDENTITY_HASH_CODE;
   }
   
   public void onPackage(JavaFile javafile) 
@@ -497,7 +505,7 @@ final class OclInjector implements InjectionConsumer
       o.write("    if(");
       if(is_collection)
       {
-        o.write(Invariant.IDENTITY_HASH_CODE);
+        o.write(identityhashcode);
         o.write('(');
         o.write(jf.getName());
         o.write(')');
@@ -513,7 +521,7 @@ final class OclInjector implements InjectionConsumer
       o.write('=');
       if(is_collection)
       {
-        o.write(Invariant.IDENTITY_HASH_CODE);
+        o.write(identityhashcode);
         o.write('(');
         o.write(jf.getName());
         o.write(')');
@@ -874,6 +882,7 @@ final class OclInjectorConfig
 
   boolean insertimmediately=false;
   boolean tracechecking=false;
+  boolean simplehash=false;
   boolean clean=false;
   String violationmacro=null;
   boolean tracetypes=false;
@@ -1171,6 +1180,8 @@ public class Main
           conf.insertimmediately=true;
         else if("--trace-checking".equals(args[i]))
           conf.tracechecking=true;
+        else if("--simple-hash".equals(args[i]))
+          conf.simplehash=true;
         else if(args[i].startsWith("-"))
         {
           System.out.println("unknown option: "+args[i]);
