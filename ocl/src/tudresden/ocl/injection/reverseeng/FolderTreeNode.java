@@ -92,6 +92,17 @@ public class FolderTreeNode extends RevengTreeNode {
     */
   private int m_cUncriticalChildren = 0;
   
+  /**
+    * Folder that has already been associated a tree node ({@link #m_ftnMissOnFill}) and therefore,
+    * does not require creation of a new tree node.
+    */
+  private File m_fMissOnFill = null;
+  
+  /**
+    * Node associated with file indicated by {@link m_fMissOnFill}.
+    */
+  private FolderTreeNode m_ftnMissOnFill = null;
+  
   /** 
     * Creates new FolderTreeNode 
     */
@@ -102,6 +113,15 @@ public class FolderTreeNode extends RevengTreeNode {
   public FolderTreeNode (DefaultTreeModel dtmModel, File f) {
     this(dtmModel);
 
+    setFolder (f);
+  }
+  
+  protected FolderTreeNode (DefaultTreeModel dtmModel, File f, File fMissOnFill, FolderTreeNode ftnMissOnFill) {
+    this (dtmModel);
+    
+    m_fMissOnFill = fMissOnFill;
+    m_ftnMissOnFill = ftnMissOnFill;
+    
     setFolder (f);
   }
   
@@ -194,7 +214,8 @@ public class FolderTreeNode extends RevengTreeNode {
     
     File[] afFiles = getFolder().listFiles (new RevengFileFilter());
 
-    if (afFiles.length == 0) {
+    if ((afFiles == null) ||
+         (afFiles.length == 0)) {
       setAllowsChildren (false);
 
       setCriticalFolder (false);
@@ -232,7 +253,16 @@ public class FolderTreeNode extends RevengTreeNode {
 
       for (Iterator i = lFiles.iterator(); i.hasNext();) {
         File f = (File) i.next();
-        if (f.isDirectory()) {
+        
+        if ((m_fMissOnFill != null) &&
+             (m_fMissOnFill.getAbsoluteFile().equals (f.getAbsoluteFile()))){
+          add (m_ftnMissOnFill);
+          m_ftnMissOnFill.parentAdded();
+          
+          m_fMissOnFill = null;
+          m_ftnMissOnFill = null;
+        }
+        else if (f.isDirectory()) {
           add (new FolderTreeNode (getModel(), f));
         }
         else {
@@ -271,6 +301,22 @@ public class FolderTreeNode extends RevengTreeNode {
           else
             ftnParent.notifyUnknownChildTurnedUnCritical();
         }
+      }
+    }
+  }
+  
+  /**
+    * Called when this node gets a parent. It will have to indicate its critical state.
+    */
+  protected void parentAdded() {
+    if (!m_fUseDefaultIcon) {      
+      // Critical state already decided...
+      FolderTreeNode ftnParent = (FolderTreeNode) getParent();
+      if (m_fCriticalFolder) {
+        ftnParent.notifyCriticalChild();
+      }
+      else {
+        ftnParent.notifyUnknownChildTurnedUnCritical();
       }
     }
   }
@@ -332,7 +378,7 @@ public class FolderTreeNode extends RevengTreeNode {
     File fParent = getFolder().getParentFile();
     
     if (fParent != null) {
-      return new FolderTreeNode (getModel(), fParent);
+      return new FolderTreeNode (getModel(), fParent, getFolder(), this);
     }
     else {
       return null;
