@@ -44,6 +44,7 @@ jar -cfm dresden-ocl-injector.jar injector.manifest $ALLFILES
 jar -cfM royloy.jar \
 	tudresden/ocl/test/royloy/*.java \
 	tudresden/ocl/test/royloy/oclexpressions \
-	tudresden/ocl/test/TestInjection.*
+	tudresden/ocl/test/TestInjection.* \
+	tudresden/ocl/test/TestInjectionRoyloy.*
 
 
