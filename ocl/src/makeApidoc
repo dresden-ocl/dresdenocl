@@ -1,11 +1,2 @@
 rm -rf ./api/*
 javadoc -J-mx50m -d ./api @jdoc
-
-tar c ./api | gzip --best > dresden-ocl-api.tar.gz
-
-tar c \
-  --exclude=CVS \
-  --exclude=api \
-  "--exclude=*.class" \
-  "--exclude=*.jar" \
-  . | gzip --best > dresden-ocl-src.tar.gz
