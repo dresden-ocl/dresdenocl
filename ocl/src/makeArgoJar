@@ -1,0 +1,15 @@
+jar -cf ocl-argo.jar \
+	tudresden/ocl/*.class \
+	tudresden/ocl/normalize/*.class \
+	tudresden/ocl/check/*.class \
+	tudresden/ocl/check/bootstrap/*.class \
+	tudresden/ocl/check/bootstrap/constraints.txt \
+	tudresden/ocl/check/types/*.class \
+	tudresden/ocl/lib/*.class \
+	tudresden/ocl/parser/*.class \
+	tudresden/ocl/parser/analysis/*.class \
+	tudresden/ocl/parser/node/*.class \
+	tudresden/ocl/parser/lexer/*.class \
+	tudresden/ocl/parser/lexer/lexer.dat \
+	tudresden/ocl/parser/parser/*.class \
+	tudresden/ocl/parser/parser/parser.dat
