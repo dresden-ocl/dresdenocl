@@ -35,7 +35,9 @@ public abstract class Example implements Runnable
   private volatile Integer[] qualifiers;
   String hallo="hallo";
   
+  /**TestCommentCommaSeparated123*/
   int commaSeparated1,commaSeparated2=0,commaSeparated3; 
+  /**TestCommentCommaSeparated456*/
   int commaSeparated4=80,commaSeparated5,commaSeparated6=200; 
 
   // these attributes test the ability of the parser
@@ -104,14 +106,14 @@ public abstract class Example implements Runnable
   }  
 
   /**
-    * Testcomment
+    * Testcomment A
     */
   private int a;
   
   private List collectionWithoutComment;
   
   /**
-    * Testcomment
+    * Testcomment B
     */
   private int b;
   

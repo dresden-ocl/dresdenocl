@@ -95,7 +95,10 @@ public class TestInjectionConsumer implements InjectionConsumer
   {
     try
     {
-      output.write("[onClassFeature("+cf.getName()+")]");
+      output.write("[onClassFeature("+cf.getName()+")");
+      if(doccomment!=null)
+        output.write("{"+doccomment+"}");
+      output.write("]");
     }
     catch(IOException e) { System.out.println(e); };
   }
