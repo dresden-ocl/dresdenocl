@@ -1,4 +1,4 @@
- /*
+/*
 Copyright (C) 2000  Sten Loecher
 
 This library is free software; you can redistribute it and/or
@@ -19,28 +19,20 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package tudresden.ocl.test.sql;
 
 import junit.framework.*;
-import tudresden.ocl.sql.*;
-import tudresden.ocl.check.types.xmifacade.*;
-import org.xml.sax.SAXException;
-import java.io.*;
 
-public class TestORMappingSchemeImp extends TestCase {
+public class TestSQLClasses extends TestCase {
 
-	public TestORMappingSchemeImp(String n) {
+	public TestSQLClasses(String n) {
 		super(n);
 	}
 
-	public void testInitialCase()
-	throws SAXException, IOException {
-		String url = TestORMappingSchemeImp.class.getResource("royloy.xmi").toString();
-		ORMapping orm = new ORMappingImp(XmiParser.createRoughModel(url, url));
-		ORMappingSchemeImp ormsi = new ORMappingSchemeImp(orm);
-	}
-
-	public static Test suit() {
+	public static Test suite() {
 		TestSuite t=new TestSuite();
 
-    		t.addTest(new TestTable("testInitialCase"));
+    		t.addTest(TestTable.suite());
+    		t.addTest(TestGuide.suite());
+    		t.addTest(TestMappedClass.suite());
+    		//t.addTest(TestORMappingSchemeImp.suite());
 
     		return t;
 	}
