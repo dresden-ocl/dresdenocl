@@ -370,6 +370,27 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclBoolean excludes(OclRoot obj) {
     return includes(obj).not();
   }
+	
+	/** @return if this collection does contain non of the 
+	 *           elements in coll
+	 * 
+	 *  @see #excludes(OclRoot a)
+	 */
+  public OclBoolean excludesAll(OclCollection coll) {
+    if(isUndefined()) 
+      return new OclBoolean(0,getUndefinedReason());
+    if(coll.isUndefined()) 
+      return new OclBoolean(0,coll.getUndefinedReason());
+    boolean ret=true;
+    Iterator iter=coll.collection.iterator();
+    while (iter.hasNext() && ret) {
+    	try {
+    		ret = excludes((OclRoot)iter.next()).isTrue();
+    	} catch (OclException e) {
+    	}
+    }
+    return Ocl.getOclRepresentationFor(ret);
+  }
 
   /** @return an OclInteger denoting the number of objects in this collection
    *          that are equal to the argument of the operation

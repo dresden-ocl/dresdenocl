@@ -130,18 +130,18 @@ Productions
     {operation}  operation_context ;
     
   classifier_context = 
-    classifier_head? type_name ;
+    classifier_head? path_type_name ;
   
   // added (SableCC)
   classifier_head = 
     name colon ;
   
   operation_context = 
-    type_name dcolon name l_par formal_parameter_list? r_par return_type_declaration? ;
+    path_type_name dcolon name l_par formal_parameter_list? r_par return_type_declaration? ;
   
   // added (SableCC)
   return_type_declaration = 
-    colon type_name;
+    colon path_type_name;
     
   formal_parameter_list = 
     formal_parameter formal_parameter_list_tail* ;
@@ -151,7 +151,7 @@ Productions
     semicolon formal_parameter;
     
   formal_parameter = 
-    name colon type_name ;
+    name colon path_type_name ;
     
   stereotype = 
     {inv} t_inv | 
@@ -286,13 +286,13 @@ Productions
   // added (SableCC)
   declarator_type_declaration =
     colon simple_type_specifier ;
-    
+
   path_type_name = 
-    type_name path_type_name_tail* ;
-    
+    path_tail* type_name;
+
   // added (SableCC)
-  path_type_name_tail =
-    dcolon type_name ;
+  path_tail = 
+    name dcolon;
 
   // added to solve keyword conflict
   type_name =

@@ -113,7 +113,7 @@ public class ReflectionFacade implements ModelFacade
    */
   public ReflectionFacade(String[] packageNames, ReflectionAdapter reflAdapter, NameAdapter nameAdapter, ReflectionExtender extender) {
     for (int i=0; i<packageNames.length; i++) {
-      if (packageNames[i].equals("")) packageNames[i]=null;
+      if (packageNames[i]==null || packageNames[i].equals("")) packageNames[i]=null;
     }
     this.packageNames=packageNames;
     this.reflAdapter=reflAdapter;

@@ -63,10 +63,18 @@ public class DefaultContextInsertion implements NodeNormalizer {
       PPrimaryExpression pPrimary=ape.getPrimaryExpression();
       if (pPrimary instanceof AFeaturePrimaryExpression) {
         AFeaturePrimaryExpression aFPrimary=(AFeaturePrimaryExpression)pPrimary;
-        PPathNameBegin pPath=((APathName)aFPrimary.getPathName()).getPathNameBegin();
-        if (pPath instanceof ANamePathNameBegin) { // could also have been a type name
-          ANamePathNameBegin aNPath=(ANamePathNameBegin)pPath;
-          String name=aNPath.getName().toString().trim();
+				
+				PPathNameBegin pPath=((APathName)aFPrimary.getPathName()).getPathNameBegin();
+				PPathNameEnd ePath = null;
+				if (!((APathName)aFPrimary.getPathName()).getPathNameTail().isEmpty()) {
+					APathNameTail tmp = (APathNameTail)((APathName)aFPrimary.getPathName()).getPathNameTail().getLast();
+        	ePath=tmp.getPathNameEnd();
+				}
+        if (pPath instanceof ANamePathNameBegin && 
+        		(ePath == null || ePath instanceof ANamePathNameEnd)) { // could also have been a type name
+        
+					ANamePathNameBegin aNPath=(ANamePathNameBegin)pPath;        
+					String name=aNPath.getName().toString().trim();
           if ( ! tree.isNameBound(name, n) ) {
             // name is not an OCL variable or self, so here we go...
 
