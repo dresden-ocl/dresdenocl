@@ -436,27 +436,27 @@ public final class ModelClass implements Any, Comparable
     return
       fullName.compareTo(other.fullName);
   }
-  
+
   // ---------------------------------------------------------------------
   /**
-   * This methode will be called instead of flatten if the underlying model is rough. 
+   * This methode will be called instead of flatten if the underlying model is rough.
    * It determines all generalization relationships but does no flattening.
    * @author Sten Loecher
    */
   public void determineAllSupertypes() {
  	if(directSupertypes==null) return;
-    
+
     	HashSet superset=new HashSet();
     	for(Iterator i=directSupertypes.iterator(); i.hasNext(); ) {
       		ModelClass c=(ModelClass)(i.next());
       		c.determineAllSupertypes();
       		superset.addAll(c.allSupertypes);
       	}
-      	
+
 	superset.addAll(directSupertypes);
     	allSupertypes=superset;
   }
-  
+
   /**
    * @return true if the model class has supertypes, false otherwise
    * @author Sten Loecher
@@ -471,22 +471,33 @@ public final class ModelClass implements Any, Comparable
 
   /**
    * @return the name of the topmost parent class of the generalization hierarchy of this model class
+   * @exception IllegalStateException if more than one generalization root exists
    * @author Sten Loecher
-   */  
-  public String generalizationRoot() {
-  	if (allSupertypes != null) {
+   */
+  public String generalizationRoot()
+  throws IllegalStateException {
+        String result = null;
+
+        if (allSupertypes != null) {
   		Iterator i = allSupertypes.iterator();
   		ModelClass c;
-  		
-  		while (i.hasNext()) {
+
+    		while (i.hasNext()) {
   			c = (ModelClass)i.next();
-  			if (!c.hasSupertypes()) return c.getShortName();		
+  			if (!c.hasSupertypes()) {
+                          if (result == null) {
+                            result = c.getShortName();
+                          } else {
+                            throw new IllegalStateException("Number of generalization roots is greater than one !");
+                          }
+                        }
   		}
-	} 
-		
-	return shortName;
+	}
+
+        if (result == null) result = shortName;
+	return result;
   }
-  
+
   /**
    * @return an unmodifiable Map that contains all attributes (and association partners if model is not in rough mode)
    * @author Sten Loecher
@@ -494,7 +505,7 @@ public final class ModelClass implements Any, Comparable
   public Map attributes() {
   	return Collections.unmodifiableMap(attributes);
   }
-  
+
   /**
    * @return an unmodifiable Map that contains all operations of the class
    * @author Sten Loecher
@@ -502,12 +513,12 @@ public final class ModelClass implements Any, Comparable
   public Map operations() {
   	return Collections.unmodifiableMap(operations);
   }
-  
+
   /**
    * @return true if class s is a direct supertype of this class, false otherwise
    * @author Sten Loecher
    */
   public boolean isDirectSupertype(ModelClass s) {
 	return directSupertypes.contains(s);
-  } 
+  }
 }
