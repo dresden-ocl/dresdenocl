@@ -1,5 +1,6 @@
 export LIBFILES="\
-	tudresden/ocl/lib/*.class"
+	tudresden/ocl/lib/*.class \
+	tudresden/ocl/injection/lib/*.class"
 jar -cf dresden-ocl-lib.jar $LIBFILES
 
 export ARGOFILES="\

@@ -20,6 +20,7 @@ package tudresden.ocl.injection;
 
 import java.io.*;
 import java.util.*;
+import java.lang.reflect.Modifier;
 import tudresden.ocl.OclTree;
 import tudresden.ocl.NameCreator;
 import tudresden.ocl.lib.NameAdapter;
@@ -31,6 +32,7 @@ import tudresden.ocl.check.OclTypeException;
 import tudresden.ocl.check.types.xmifacade.XmiParser;
 import tudresden.ocl.codegen.CodeFragment;
 import tudresden.ocl.codegen.JavaCodeGenerator;
+import tudresden.ocl.injection.lib.Invariant;
 
 final class OclInjector implements InjectionConsumer
 {
@@ -68,6 +70,20 @@ final class OclInjector implements InjectionConsumer
   */
   private ArrayList typedAttributes_stack=new ArrayList();
 
+  /**
+     Collects all features of the current class, which should be observed.
+     @see JavaFeature
+  */
+  private ArrayList observedFeatures=null;
+
+  /**
+     Collects the observedFeature attributes of outer classes,
+     when operating on a inner class.
+     @see #observedFeatures
+  */
+  private ArrayList observedFeatures_stack=new ArrayList();
+
+  
   OclInjector(Writer output, OclInjectorConfig conf)
   {
     this.output=output;
@@ -97,6 +113,8 @@ final class OclInjector implements InjectionConsumer
     methods=(delayinsertions ? new ArrayList() : null);
     typedAttributes_stack.add(typedAttributes);
     typedAttributes=new ArrayList();
+    observedFeatures_stack.add(observedFeatures);
+    observedFeatures=new ArrayList();
   }
 
   public void onClassEnd(JavaClass cc) throws IOException
@@ -106,12 +124,17 @@ final class OclInjector implements InjectionConsumer
     if(delayinsertions)
       for(Iterator i=methods.iterator(); i.hasNext(); )
         writeWrapper((JavaMethod)i.next());
+    for(Iterator i=observedFeatures.iterator(); i.hasNext(); )
+      writeObserver((JavaFeature)i.next());
+    writeChangedChecker();
     writeInvariants(cc.getName());
 
     methods=(ArrayList)
       (methods_stack.remove(methods_stack.size()-1));
     typedAttributes=(ArrayList)
       (typedAttributes_stack.remove(typedAttributes_stack.size()-1));
+    observedFeatures=(ArrayList)
+      (observedFeatures_stack.remove(observedFeatures_stack.size()-1));
   }
   
   public void onMethodHeader(JavaMethod cf) 
@@ -131,6 +154,11 @@ final class OclInjector implements InjectionConsumer
   {
     if(!clean)
     {
+      if(cf instanceof JavaAttribute &&
+         !Modifier.isFinal(cf.getModifiers()) &&
+         !discardnextfeature)
+        observedFeatures.add(cf);
+      
       if( cf instanceof JavaMethod && 
           !((JavaMethod)cf).isConstructor() && 
           !cf.isStatic() && 
@@ -140,6 +168,9 @@ final class OclInjector implements InjectionConsumer
           methods.add(cf);
         else
           writeWrapper((JavaMethod)cf);
+        
+        //if(!"void".equals(cf.getType()))
+          //observedFeatures.add(cf);
       }
       boolean notYetAddedToTypedAttributes=true;
       if(last_element_type!=null)
@@ -169,7 +200,7 @@ final class OclInjector implements InjectionConsumer
     }
     discardnextfeature=false;
   }
-
+  
   public boolean onComment(String comment) throws IOException
   {
     if(comment.startsWith("/**"))
@@ -196,48 +227,62 @@ final class OclInjector implements InjectionConsumer
 
   public void onFileEnd()
   {
-    if(!methods_stack.isEmpty() || !typedAttributes_stack.isEmpty())
+    if(!methods_stack.isEmpty() || 
+       !typedAttributes_stack.isEmpty() ||
+       !observedFeatures_stack.isEmpty())
       throw new RuntimeException();
   }
 
-  public static final String INV_METHOD="checkOclInvariants";
-  public static final String CHECKING_FLAG="currently_checking_ocl";
-
   public final void writeInvariants(String classname) throws IOException
   {
-    Writer o=output;
-    o.write("/**\n    A flag, that currently ocl constraints are checked on this object.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
-    o.write(OCL_AUTHOR);
-    o.write("\n  */private boolean ");
-    o.write(CHECKING_FLAG);
-    o.write("=false;");
-    o.write("/**\n    A method for checking ocl invariants.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
-    o.write(OCL_AUTHOR);
-    o.write("\n  */private final void ");
-    o.write(INV_METHOD);
-    o.write("()\n  {\n");
-    for(Iterator i=typedAttributes.iterator(); i.hasNext(); )
-      writeElementChecker((JavaAttribute)i.next());
     SortedFragments sf=
       codefragments!=null ? (SortedFragments)(codefragments.get(classname)) : null;
     if(sf!=null)
     {
       java.util.Collection v=sf.inv;
       for(Iterator e=v.iterator(); e.hasNext(); )
-      {
-        CodeFragment cf=(CodeFragment)(e.next());
-        o.write("    {\n");
-        o.write(cf.getCode());
-        o.write("        if(!");
-        o.write(cf.getResultVariable());
-        o.write(".isTrue())\n          ");
-        o.write(violationmakro);
-        o.write("(\"violated ocl invariant '");
-        o.write(cf.getName());
-        o.write("' on object '\"+this+\"'.\");\n    }\n");
-      }
+        writeInvariant(classname, (CodeFragment)(e.next()));
     }
-    o.write('}');
+  }
+  
+
+  
+  public final void writeInvariant(String classname, CodeFragment cf) throws IOException
+  {
+    Writer o=output;
+
+    o.write("/**\n    An object representing ocl invariant ");
+    o.write(cf.getName());
+    o.write(" on this object.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+    o.write(OCL_AUTHOR);
+    o.write("\n  */private final tudresden.ocl.injection.lib.Invariant ");
+    o.write(Invariant.INVARIANT_OBJECT);
+    o.write(cf.getName());
+    o.write("=new tudresden.ocl.injection.lib.Invariant(\"");
+    o.write(cf.getName());
+    o.write("\", this);");
+    o.write("/**\n    Checks ocl invariant ");
+    o.write(cf.getName());
+    o.write(" on this object.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+    o.write(OCL_AUTHOR);
+    o.write("\n  */public final void ");
+    o.write(Invariant.INVARIANT_METHOD);
+    o.write(cf.getName());
+    o.write("()\n  {\n");
+    o.write("    tudresden.ocl.lib.OclAnyImpl.setFeatureListener(");
+    o.write(Invariant.INVARIANT_OBJECT);
+    o.write(cf.getName());
+    o.write(");\n");
+    o.write(cf.getCode());
+    o.write("    tudresden.ocl.lib.OclAnyImpl.clearFeatureListener();\n");
+    o.write("    if(!");
+    o.write(cf.getResultVariable());
+    o.write(".isTrue()) ");
+    o.write(violationmakro);
+    o.write("(\"violated ocl invariant '");
+    o.write(cf.getName());
+    o.write("' on object '\"+this+\"'.\");\n");
+    o.write("  }");
   }
   
   /**
@@ -247,16 +292,13 @@ final class OclInjector implements InjectionConsumer
   */
   public static final String OCL_AUTHOR="ocl_injector";
 
-  public final void writeWrapperInvariant(JavaFeature cf) throws IOException
+  public final void writeWrapperInvariant() throws IOException
   {
-    if(!java.lang.reflect.Modifier.isStatic(cf.getModifiers()))
-    {
-      output.write("      ");
-      output.write(INV_METHOD);
-      output.write("();\n");
-    }
+    output.write("      ");
+    output.write(Invariant.CHECKING_OPERATION);
+    output.write("();\n");
   }
-
+  
   void writeCall(JavaMethod cf) throws IOException
   {
     Writer o=output;
@@ -274,6 +316,91 @@ final class OclInjector implements InjectionConsumer
     o.write(");\n");
   }
 
+
+  public final String BACKUP_SUFFIX="_oclbackup";
+  
+  public final void writeObserver(JavaFeature cf) throws IOException
+  {
+    Writer o=output;
+    o.write("/**\n    A backup for detecting modifications.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+    o.write(OCL_AUTHOR);
+    o.write("\n    @see #");
+    o.write(cf.getName());
+    o.write("\n  */");
+    o.write(Modifier.toString(
+        (cf.getModifiers()&Modifier.STATIC)|Modifier.PRIVATE));
+    o.write(' ');
+    o.write(cf.getType());
+    o.write(' ');
+    o.write(cf.getNotWrappedName());
+    o.write(BACKUP_SUFFIX);
+    o.write('=');
+    o.write(cf.getNotWrappedName());
+    o.write(";/**\n    Contains observers for modifications of this feature.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+    o.write(OCL_AUTHOR);
+    o.write("\n    @see #");
+    o.write(cf.getName());
+    o.write("\n  */");
+    o.write(Modifier.toString(
+        (cf.getModifiers()&Modifier.STATIC)|Modifier.PUBLIC|Modifier.FINAL));
+    o.write(" java.util.HashSet ");
+    o.write(cf.getNotWrappedName());
+    o.write(Invariant.OBSERVER_SUFFIX);
+    o.write("=new java.util.HashSet();");
+  }
+  
+
+  public static final String CHANGED_CHECKER="checkForChangedFeatures";
+  
+  public final void writeChangedCheckerCall() throws IOException
+  {
+    Writer o=output;
+    o.write("      ");
+    o.write(CHANGED_CHECKER);
+    o.write("();\n");
+  }
+
+  public final void writeChangedChecker() throws IOException
+  {
+    Writer o=output;
+    o.write("/**\n    Checks object features, whether they have changed.\n    Generated automatically, DO NOT CHANGE!\n    @author ");
+    o.write(OCL_AUTHOR);
+    o.write("\n  */private void ");
+    o.write(CHANGED_CHECKER);
+    o.write("()\n  {\n");
+    for(Iterator i=observedFeatures.iterator(); i.hasNext(); )
+    {
+      JavaFeature jf=(JavaFeature)i.next();
+      o.write("    if(");
+      o.write(jf.getNotWrappedName());
+      o.write("!=");
+      o.write(jf.getNotWrappedName());
+      o.write(BACKUP_SUFFIX);
+      o.write(")\n    {\n      ");
+      o.write(jf.getNotWrappedName());
+      o.write(BACKUP_SUFFIX);
+      o.write('=');
+      o.write(jf.getNotWrappedName());
+      o.write(";\n");
+      
+      //o.write("      System.out.println(\"notify invariants for attribute '");
+      //o.write(jf.getNotWrappedName());
+      //o.write("' on object '\"+this+'\\'');\n");
+      
+      if(jf instanceof JavaAttribute)
+        writeTypeChecker((JavaAttribute)jf);
+      
+      o.write("      ");
+      o.write(Invariant.NOTIFY_OBSERVING_INVARIANTS);
+      o.write('(');
+      o.write(jf.getNotWrappedName());
+      o.write(Invariant.OBSERVER_SUFFIX);
+      o.write(");\n    }\n");
+    }
+    o.write("  }");
+  }
+  
+
   public final void writeWrapper(JavaMethod cf) throws IOException
   {
     Writer o=output;
@@ -290,8 +417,7 @@ final class OclInjector implements InjectionConsumer
     }
     o.write(")\n  */");
     String modifierString=
-      java.lang.reflect.Modifier.toString(
-        cf.getModifiers()&~java.lang.reflect.Modifier.ABSTRACT);
+      Modifier.toString(cf.getModifiers()&~Modifier.ABSTRACT);
     if(modifierString.length()>0)
     {
       o.write(modifierString);
@@ -330,15 +456,16 @@ final class OclInjector implements InjectionConsumer
       o.write(" result;\n");
     }
     o.write("    if(");
-    o.write(CHECKING_FLAG);
+    o.write(Invariant.CHECKING_FLAG);
     o.write(")\n");
     writeCall(cf);
     o.write("    else\n    {\n      ");
-    o.write(CHECKING_FLAG);
+    o.write(Invariant.CHECKING_FLAG);
     o.write("=true;\n");
     if(!cf.isConstructor())
     {
-      writeWrapperInvariant(cf);
+      writeChangedCheckerCall();
+      writeWrapperInvariant();
       if(codefragments!=null)
       {
         SortedFragments sf=(SortedFragments)codefragments.get(cf.getParent().getName());
@@ -382,13 +509,14 @@ final class OclInjector implements InjectionConsumer
       }
     }
     o.write("      ");
-    o.write(CHECKING_FLAG);
+    o.write(Invariant.CHECKING_FLAG);
     o.write("=false;\n");
     writeCall(cf);
     o.write("      ");
-    o.write(CHECKING_FLAG);
+    o.write(Invariant.CHECKING_FLAG);
     o.write("=true;\n");
-    writeWrapperInvariant(cf);
+    writeChangedCheckerCall();
+    writeWrapperInvariant();
     if(codefragments!=null)
     {
       SortedFragments sf=(SortedFragments)codefragments.get(cf.getParent().getName());
@@ -413,45 +541,35 @@ final class OclInjector implements InjectionConsumer
         }
     }
     o.write("      ");
-    o.write(CHECKING_FLAG);
+    o.write(Invariant.CHECKING_FLAG);
     o.write("=false;\n    }\n");
     if(!cf.isConstructor() && !"void".equals(cf.getType()))
       o.write("    return result;\n");
     o.write("  }");
   }
 
-  public void writeElementChecker(JavaAttribute cf) throws IOException
+  private final void writeTypeChecker(JavaAttribute jf) throws IOException
   {
-    Class et=cf.getFile().findType(cf.getType());
-
-    if(java.util.Collection.class.isAssignableFrom(et))
-    {
-      writeIteratorChecker(cf, cf.getElementType(), "");
-    }
-    else if(java.util.Map.class.isAssignableFrom(et))
-    {
-      writeIteratorChecker(cf, cf.getElementType(), ".values()");
-      writeIteratorChecker(cf, cf.getKeyType(), ".keySet()");
-    }
-    else
-      throw new RuntimeException();
+    writeTypeChecker(jf, Invariant.CHECK_ELEMENT_TYPES, jf.getElementType());
+    writeTypeChecker(jf, Invariant.CHECK_KEY_TYPES,     jf.getKeyType());
   }
 
-  public void writeIteratorChecker(
-      JavaAttribute cf,
-      String contenttype, 
-      String createset)
+  private final void writeTypeChecker(JavaAttribute jf, String kind, String type) 
     throws IOException
   {
-    Writer o=output;
-    o.write("    for(Iterator i=");
-    o.write(cf.getName());
-    o.write(createset);
-    o.write(".iterator(); i.hasNext(); )\n      if(!(i.next() instanceof ");
-    o.write(contenttype);
-    o.write("))\n        ");
-    o.write(violationmakro);
-    o.write("(\"element checker failed.\");\n");
+    if(type!=null)
+    {
+      Writer o=output;
+      o.write("      if(!");
+      o.write(kind);
+      o.write('(');
+      o.write(jf.getName());
+      o.write(',');
+      o.write(type);
+      o.write(".class)) ");
+      o.write(violationmakro);
+      o.write("(\"type checker failed.\");\n");
+    }
   }
 
 }

@@ -109,6 +109,11 @@ public abstract class JavaFeature
   {
     return name;
   }
+  
+  public String getNotWrappedName()
+  {
+    return name;
+  }
 
   public final void print(PrintStream o)
   {

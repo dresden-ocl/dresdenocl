@@ -20,6 +20,7 @@ package tudresden.ocl.test;
 
 import java.util.*;
 import tudresden.ocl.test.royloy.*;
+import tudresden.ocl.injection.lib.Invariant;
 
 public class TestInjection
 {
@@ -79,8 +80,8 @@ public class TestInjection
       p3.age=-3;
       expectViolation("violated ocl invariant 'age_greater_zero' on object 'tudresden.ocl.test.royloy.Person[Person1]'.");
       expectViolation("violated ocl invariant 'age_greater_zero' on object 'tudresden.ocl.test.royloy.Person[Person2]'.");
-      expectViolation("violated ocl invariant 'age_positive' on object 'tudresden.ocl.test.royloy.Person[Person3]'.");
       expectViolation("violated ocl invariant 'age_greater_zero' on object 'tudresden.ocl.test.royloy.Person[Person3]'.");
+      expectViolation("violated ocl invariant 'age_positive' on object 'tudresden.ocl.test.royloy.Person[Person3]'.");
       expectViolation("violated ocl invariant 'age0to199' on object 'tudresden.ocl.test.royloy.Person[Person3]'.");
       expectViolation("violated ocl invariant 'customers_ordered_by_age' on object 'tudresden.ocl.test.royloy.Bank[Bank1]'.");
       expectViolation("violated ocl invariant 'bank_customer2_age' on object 'tudresden.ocl.test.royloy.Bank[Bank1]'.");
@@ -97,10 +98,6 @@ public class TestInjection
     }
     assertAll();
     
-    if(!ev.isEmpty())
-      error("expected violations >"+ev+"< not encountered.");
-    if(!evPost.isEmpty())
-      error("expected violations post >"+evPost+"< not encountered.");
   }
   
   /**
@@ -121,41 +118,70 @@ public class TestInjection
   {
     for(Iterator i=allobjects.iterator(); i.hasNext(); )
       ((RLObject)i.next()).assert();
+    for(Iterator i=allobjects.iterator(); i.hasNext(); )
+      ((RLObject)i.next()).assert();
+
+    if(!ev.isEmpty())
+    {
+      StringBuffer buf=new StringBuffer();
+      buf.append("expected violations not encountered:\n");
+      for(Iterator i=ev.iterator(); i.hasNext(); )
+      {
+        buf.append("    ");
+        buf.append((String)i.next());
+        buf.append('\n');
+      }
+      error(buf.toString());
+      ev.clear();
+    }
+
+    ev=ev2;
+    for(Iterator i=Invariant.allInvariants.iterator(); i.hasNext(); )
+      ((Invariant)i.next()).invoke();
+    ev=ev1;
   }
   
-  private ArrayList ev=new ArrayList();
-  private HashSet evPost=new HashSet();
+  /**
+     Contains all expected constraint violations.
+     @element-type String
+  */
+  private HashSet ev1=new HashSet();
+  private HashSet ev2=new HashSet();
+  private HashSet ev=ev1;
   
-  public void onViolation(String mid)
+  public void onViolation(String message)
   {
-    String m=stripId(mid);
+    String m=stripId(message);
     
     //System.out.println("violation :"+m);
     
-    String em= ev.isEmpty() ? null : (String)(ev.get(0));
-      
-    if(m.equals(em))
+    if(ev.contains(m))
     {
-      ev.remove(0);
-      evPost.add(mid);
+      ev.remove(m);
     }
-    else if(evPost.contains(mid))
-      evPost.remove(mid);
     else
     {
-      error(
-        "unexpected violation:\n  expected:    "+
-        (em==null?"none":'>'+em+'<')+
-        "\n  encountered: >"+m+'<'
-      );
-      evPost.add(mid);
+      StringBuffer buf=new StringBuffer();
+      buf.append("unexpected violation:\n  encountered: >");
+      buf.append(m);
+      buf.append('<');
+      for(Iterator i=ev.iterator(); i.hasNext(); )
+      {
+        buf.append("expected:    ");
+        buf.append((String)i.next());
+        buf.append('\n');
+      }
+      error(buf.toString());
     }
   }
   
   private void expectViolation(String m)
   {
     //System.out.println("expection :"+m);
-    ev.add(m);
+    if(ev1.contains(m)) throw new RuntimeException();
+    ev1.add(m);
+    if(ev2.contains(m)) throw new RuntimeException();
+    ev2.add(m);
   }
   
   private void error(String m)

@@ -86,6 +86,10 @@ public class OclAnyImpl extends OclAny {
     return isEqualTo(o).not();
   }
 
+  /**
+     Calls getFeatureQualified without qualifiers.
+     @see #getFeatureQualified
+  */
   public OclRoot getFeature(String attributeName) 
   {
     return getFeatureQualified(attributeName, null);
@@ -127,6 +131,8 @@ public class OclAnyImpl extends OclAny {
           return new OclAnyImpl(0,message);
         }
       } else {
+        if(featurelistener!=null)
+          featurelistener.onField(f, applicationObject);
         f.setAccessible(true);
         Object feature=f.get(applicationObject);
 
@@ -226,6 +232,8 @@ public class OclAnyImpl extends OclAny {
           return new OclAnyImpl(0,message);
         }
       } else {
+        if(featurelistener!=null)
+          featurelistener.onMethod(foundmethod, applicationObject);
         foundmethod.setAccessible(true);
         Object feature=foundmethod.invoke(applicationObject, params);
         return Ocl.getOclRepresentationFor(feature);
@@ -272,6 +280,8 @@ public class OclAnyImpl extends OclAny {
           " queried"
         );
       } else {
+        if(featurelistener!=null)
+          featurelistener.onField(f, applicationObject);
         Object feature=f.get(applicationObject);
         if (feature==null) {
           return new OclSequence(0,"non-existent field "+name+" of object "+applicationObject+
@@ -325,5 +335,23 @@ public class OclAnyImpl extends OclAny {
   }
 
 
+  private static FeatureListener featurelistener=null;
+  
+  public static void setFeatureListener(FeatureListener f)
+  {
+    if(f==null)
+      throw new RuntimeException();
+    if(featurelistener!=null)
+      throw new RuntimeException();
+    featurelistener=f;
+  }
+  
+  public static void clearFeatureListener()
+  {
+    if(featurelistener==null)
+      throw new RuntimeException();
+    featurelistener=null;
+  }
+  
 } /* end class OclAnyImpl */
 
