@@ -23,6 +23,28 @@ import java.io.Writer;
 
 public interface TaskInstrumentor
 {
+	public void onDocComment(JavaClass jc, String doccomment);
+	
 	public void onAttributeChanged(Writer o, JavaAttribute ja, boolean is_weakly_typed)
+	throws IOException;
+	
+	public String getMutex();
+	
+	public void onWrapperConstructor(Writer o, JavaConstructor jc)
+	throws IOException;
+	
+	public void onWrapperDefaultConstructor(Writer o, JavaClass jc)
+	throws IOException;
+	
+	public void	onWrapperPre(Writer o, JavaMethod jm)
+	throws IOException;
+	
+	public void	onWrapperPost(Writer o, JavaMethod jm)
+	throws IOException;
+	
+	public void onClassEndPerFeature(Writer o, JavaFeature jf)
+	throws IOException;
+	
+	public void onClassEnd(Writer o, JavaClass jc)
 	throws IOException;
 }

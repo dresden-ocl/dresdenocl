@@ -105,13 +105,13 @@ public abstract class Example implements Runnable
       run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner_Drinner();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner_Drinner();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -164,13 +164,13 @@ public abstract class Example implements Runnable
       run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       run_wrappedbyocl_tudresden_ocl_injection_test_Example_Inner();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -456,13 +456,13 @@ public abstract class Example implements Runnable
       set_wrappedbyocl_tudresden_ocl_injection_test_Example(name, type, qualifiers);
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       set_wrappedbyocl_tudresden_ocl_injection_test_Example(name, type, qualifiers);
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -477,13 +477,13 @@ public abstract class Example implements Runnable
       run_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       run_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -499,13 +499,13 @@ public abstract class Example implements Runnable
       result=poly1_wrappedbyocl_tudresden_ocl_injection_test_Example(someInterface);
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       result=poly1_wrappedbyocl_tudresden_ocl_injection_test_Example(someInterface);
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -522,13 +522,13 @@ public abstract class Example implements Runnable
       result=getName_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       result=getName_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -545,13 +545,13 @@ public abstract class Example implements Runnable
       result=getType_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       result=getType_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -568,8 +568,8 @@ public abstract class Example implements Runnable
       result=getQualifiers_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
         tudresden.ocl.lib.OclString tudOclNode70;
       {
@@ -605,8 +605,8 @@ public abstract class Example implements Runnable
       }
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       result=getQualifiers_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       {
         final tudresden.ocl.lib.OclAnyImpl tudOclNode60=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
@@ -665,13 +665,13 @@ public abstract class Example implements Runnable
       result=getUnqualifiedType_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       result=getUnqualifiedType_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -687,13 +687,13 @@ public abstract class Example implements Runnable
       setParent_wrappedbyocl_tudresden_ocl_injection_test_Example(parent);
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       setParent_wrappedbyocl_tudresden_ocl_injection_test_Example(parent);
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -709,13 +709,13 @@ public abstract class Example implements Runnable
       result=getParent_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       result=getParent_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -731,13 +731,13 @@ public abstract class Example implements Runnable
       printData_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       printData_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -752,13 +752,13 @@ public abstract class Example implements Runnable
       accessifierPrivate_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       accessifierPrivate_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -773,13 +773,13 @@ public abstract class Example implements Runnable
       accessifierProtected_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       accessifierProtected_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -794,13 +794,13 @@ public abstract class Example implements Runnable
       accessifierPackage_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       accessifierPackage_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -815,13 +815,13 @@ public abstract class Example implements Runnable
       accessifierPublic_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       accessifierPublic_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -836,13 +836,13 @@ public abstract class Example implements Runnable
       test_super_wrappedbyocl_tudresden_ocl_injection_test_Example();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       test_super_wrappedbyocl_tudresden_ocl_injection_test_Example();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -857,13 +857,13 @@ public abstract class Example implements Runnable
       addTestTypeTrace_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       addTestTypeTrace_wrappedbyocl_tudresden_ocl_injection_test_Example(o);
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -1798,13 +1798,13 @@ class SecondExample extends Example{
       abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -1819,13 +1819,13 @@ class SecondExample extends Example{
       test_super_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       test_super_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -1841,13 +1841,13 @@ class SecondExample extends Example{
       result=toString_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       result=toString_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
@@ -1907,13 +1907,13 @@ class ThirdExample extends SecondExample
       abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_ThirdExample();
     else
     {
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
       abstractMethod_wrappedbyocl_tudresden_ocl_injection_test_ThirdExample();
-      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }

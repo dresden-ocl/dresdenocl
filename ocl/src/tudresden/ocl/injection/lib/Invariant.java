@@ -47,7 +47,6 @@ public final class Invariant implements FeatureListener, Serializable
   
 
   public static final String OBSERVER_SUFFIX="_oclobservinginvariants812374";
-  public static final String BACKUP_SUFFIX="_oclbackup812374";
   
   private final void addObserver(String featurename, Object o)
   {

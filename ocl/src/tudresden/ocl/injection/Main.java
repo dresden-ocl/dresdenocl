@@ -38,6 +38,7 @@ import tudresden.ocl.injection.lib.HashSize;
 import tudresden.ocl.injection.lib.HashModCount;
 import tudresden.ocl.injection.lib.WrapperDummy;
 import tudresden.ocl.injection.lib.TypeTracer;
+import tudresden.ocl.injection.ocl.OclConfig;
 
 
 public class Main
@@ -46,7 +47,7 @@ public class Main
   public static void makeConstraint(String text,
                                     String kind,
                                     String context,
-                                    InstrumentorConfig conf)
+                                    OclConfig conf)
     throws OclParserException, OclTypeException
   {
     String constraintString="context "+context+' '+kind+' '+text;
@@ -58,7 +59,7 @@ public class Main
     catch(IOException e) { throw new RuntimeException(e.toString()); }
   }
 
-  public static void makeConstraint(String constraintString, InstrumentorConfig conf)
+  public static void makeConstraint(String constraintString, OclConfig conf)
     throws OclParserException, OclTypeException, IOException
   {
     //System.out.println("Loaded constraint:");
@@ -83,7 +84,7 @@ public class Main
     }
   }
 
-  public static void makeCode(File constraintfile, InstrumentorConfig conf)
+  public static void makeCode(File constraintfile, OclConfig conf)
     throws OclParserException, OclTypeException, IOException
   {
     BufferedReader br=new BufferedReader(new FileReader(constraintfile));
@@ -208,7 +209,9 @@ public class Main
     boolean modify=false;
     ArrayList sourcefiles=new ArrayList();
     InstrumentorConfig conf=new InstrumentorConfig();
+		OclConfig oclconf = new OclConfig();
 		TypeTraceConfig typeTraceConfig = null;
+		String violationmacro = null;
     try
     {
       for(int i=0; i<args.length; i++)
@@ -277,15 +280,15 @@ public class Main
             return;
           }
           if("private".equals(args[i])||"all".equals(args[i]))
-            conf.invariantScope=conf.INVARIANT_SCOPE_PRIVATE;
+            oclconf.invariantScope=oclconf.INVARIANT_SCOPE_PRIVATE;
           else if("protected".equals(args[i]))
-            conf.invariantScope=conf.INVARIANT_SCOPE_PROTECTED;
+            oclconf.invariantScope=oclconf.INVARIANT_SCOPE_PROTECTED;
           else if("package".equals(args[i]))
-            conf.invariantScope=conf.INVARIANT_SCOPE_PACKAGE;
+            oclconf.invariantScope=oclconf.INVARIANT_SCOPE_PACKAGE;
           else if("public".equals(args[i]))
-            conf.invariantScope=conf.INVARIANT_SCOPE_PUBLIC;
+            oclconf.invariantScope=oclconf.INVARIANT_SCOPE_PUBLIC;
           else if("explicit".equals(args[i]))
-            conf.invariantScope=conf.INVARIANT_SCOPE_EXPLICIT;
+            oclconf.invariantScope=oclconf.INVARIANT_SCOPE_EXPLICIT;
           else
           {
             System.out.println("invariant scope must be 'all', 'private', 'protected', 'package', 'public' or 'explicit'.");
@@ -295,7 +298,7 @@ public class Main
         }
         else if("--violation-macro".equals(args[i])||"-vm".equals(args[i]))
         {
-          if(conf.violationmacro!=null)
+          if(violationmacro!=null)
           {
             System.out.println("can use only one violation macro.");
             System.out.println(usage);
@@ -308,7 +311,7 @@ public class Main
             System.out.println(usage);
             return;
           }
-          conf.violationmacro=args[i];
+          violationmacro=args[i];
         }
         else if("--trace-types".equals(args[i])||"-tt".equals(args[i]))
 				{
@@ -322,13 +325,13 @@ public class Main
         else if("--insert-immediately".equals(args[i]))
           conf.insertimmediately=true;
         else if("--trace-checking".equals(args[i]))
-          conf.tracechecking=true;
+          oclconf.tracechecking=true;
         else if("--simple-hash".equals(args[i]))
           conf.hashmode=HashSize.class;
         else if("--modcount-hash".equals(args[i]))
           conf.hashmode=HashModCount.class;
         else if("--log-class".equals(args[i]))
-          conf.logclass=true;
+          oclconf.logclass=true;
         else if(args[i].startsWith("-"))
         {
           System.out.println("unknown option: "+args[i]);
@@ -349,18 +352,18 @@ public class Main
         return;
       }
 			
-      if(conf.violationmacro==null)
-        conf.violationmacro="System.out.println";
+      if(violationmacro==null)
+        violationmacro="System.out.println";
 
-			{
-				ArrayList taskConfigs = new ArrayList();
-				taskConfigs.add(new TypeCheckConfig(conf.violationmacro));
-				if(typeTraceConfig!=null)
-     			taskConfigs.add(typeTraceConfig);
-				conf.taskConfigs=new TaskConfig[taskConfigs.size()];
-				for(int i=0; i<conf.taskConfigs.length; i++)
-					conf.taskConfigs[i] = (TaskConfig)taskConfigs.get(i);
-			}
+      if(nameadapter==null)
+        nameadapter=new SimpleNameAdapter();
+      oclconf.modelfacade=new ReflectionFacade
+      (
+        (String[])(reflectionmodel.toArray(new String[0])),
+        new DefaultReflectionAdapter(),
+        nameadapter,
+        new SourceReflectionExtender()
+      );
 
       if(conf.clean&&constraintfile!=null)
       {
@@ -369,21 +372,23 @@ public class Main
         return;
       }
 
-      if(nameadapter==null)
-        nameadapter=new SimpleNameAdapter();
-      conf.modelfacade=new ReflectionFacade
-      (
-        (String[])(reflectionmodel.toArray(new String[0])),
-        new DefaultReflectionAdapter(),
-        nameadapter,
-        new SourceReflectionExtender()
-      );
-
       if(constraintfile!=null)
       {
-        makeCode(new File(constraintfile), conf);
+        makeCode(new File(constraintfile), oclconf);
       }
             
+			{
+				ArrayList taskConfigs = new ArrayList();
+				taskConfigs.add(new TypeCheckConfig(violationmacro));
+				if(typeTraceConfig!=null)
+     			taskConfigs.add(typeTraceConfig);
+				oclconf.violationmacro = violationmacro;
+				taskConfigs.add(oclconf);
+				conf.taskConfigs=new TaskConfig[taskConfigs.size()];
+				for(int i=0; i<conf.taskConfigs.length; i++)
+					conf.taskConfigs[i] = (TaskConfig)taskConfigs.get(i);
+			}
+
       for(Iterator i=sourcefiles.iterator(); i.hasNext(); )
       {
         String s=(String)i.next();

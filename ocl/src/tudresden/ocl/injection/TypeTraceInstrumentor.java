@@ -38,4 +38,13 @@ public final class TypeTraceInstrumentor implements TaskInstrumentor
 		}
 	}
 	
+	public void onDocComment(JavaClass jc, String doccomment) {}
+	public String getMutex() { return null; }
+	public void onWrapperConstructor(Writer o, JavaConstructor jc) {}
+	public void onWrapperDefaultConstructor(Writer o, JavaClass jc) {}
+	public void	onWrapperPre(Writer o, JavaMethod jm) {}
+	public void	onWrapperPost(Writer o, JavaMethod jm) {}
+	public void onClassEndPerFeature(Writer o, JavaFeature jf) {}
+	public void onClassEnd(Writer o, JavaClass jc) {}
+	
 }

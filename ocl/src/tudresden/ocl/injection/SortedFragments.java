@@ -24,15 +24,15 @@ import tudresden.ocl.codegen.CodeFragment;
 
 public class SortedFragments
 {
-  ArrayList inv=new ArrayList();
-  ArrayList post=new ArrayList();
-  ArrayList pre=new ArrayList();
-  ArrayList transfer=new ArrayList();
-  ArrayList preparation=new ArrayList();
+  public ArrayList inv=new ArrayList();
+  public ArrayList post=new ArrayList();
+  public ArrayList pre=new ArrayList();
+  public ArrayList transfer=new ArrayList();
+  public ArrayList preparation=new ArrayList();
   
   private String constrainedType;
   
-  SortedFragments(CodeFragment firstFragment)
+  public SortedFragments(CodeFragment firstFragment)
   {
     constrainedType=firstFragment.getConstrainedType();
     addFragment(firstFragment);
