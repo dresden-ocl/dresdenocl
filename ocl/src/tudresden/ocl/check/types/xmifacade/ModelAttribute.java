@@ -25,7 +25,7 @@ import tudresden.ocl.check.OclTypeException;
    Represents an attribute or association partner of a class.
    Note: type==Model.AMIGOUS means, the attribute cannot be used in OCL due to attribute ambiguities.
    See OCL spec 5.4.1. for details.
-   @see Model.AMBIGOUS
+   @see Model#AMBIGOUS
 */
 public final class ModelAttribute implements Comparable
 {
