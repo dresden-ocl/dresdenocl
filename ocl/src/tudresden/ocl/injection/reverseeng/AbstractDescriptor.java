@@ -38,6 +38,11 @@ import javax.swing.tree.*;
   */
 public abstract class AbstractDescriptor extends Object {
 
+  public String getDocComment()
+  {
+    return "";
+  }
+  
   /**
     * The analysis in which this descriptor occurred.
     */
