@@ -6,7 +6,7 @@ dresden-ocl build file
 Process this file with ant (http://jakarta.apache.org).
 Tested with Ant 1.3.
 
-$Id: build.xml,v 1.18 2001/08/11 10:06:17 rw7 Exp $
+$Id: build.xml,v 1.19 2001/08/28 18:40:40 rw7 Exp $
 Authored by Dan Shields <daniel@pointrelease.com>.
 Derived from first version by Luc Maisonobe <Luc.Maisonobe@cnes.fr>,
 but heavily reworked.
@@ -38,11 +38,45 @@ New version by Ralf Wiebicke.
     <echo message="  docs                      api docs" />
     <echo message="  jars                      all jar files" />
     <echo message="  test                      run junit tests" />
-    <echo message="  clean                     delete all generated file except api docs" />    
+    <echo message="  clean                     delete all generated file except api docs" />
   </target>
 
 
-  <target name="compile">       
+  <target name="sablecc">
+    <echo message="WARNING!!!" />
+    <echo message="integration of sablecc into build process is still experimental!!!" />
+    <echo message="put the sablecc.jar into this directory." />
+    <uptodate property="sablecc.notRequired"
+              targetfile="${src.dir}/tudresden/ocl/parser/parser/parser.dat" >
+      <srcfiles dir="${src.dir}" includes="sablecc.jar"/>
+      <srcfiles dir="${src.dir}" includes="ocl.grammar" />
+    </uptodate>
+    <antcall target="sablecc-internal" />
+  </target>
+
+  <target name="sablecc-internal" unless="sablecc.notRequired">
+    <java classname="org.sablecc.sablecc.SableCC"
+          taskname="sablecc">
+      <classpath>
+        <pathelement location="sablecc.jar" />
+      </classpath>
+      <arg value="-d" />
+      <arg value="${src.dir}" />
+      <arg value="${src.dir}/ocl.grammar" />
+    </java>
+  </target>
+
+  <target name="clean-sablecc">
+    <delete>
+      <fileset dir="${src.dir}/tudresden/ocl/parser/analysis" includes="*.java"/>
+      <fileset dir="${src.dir}/tudresden/ocl/parser/lexer" includes="*.java,lexer.dat"/>
+      <fileset dir="${src.dir}/tudresden/ocl/parser/parser" includes="*.java,parser.dat"/>
+      <fileset dir="${src.dir}/tudresden/ocl/parser/node" includes="*.java"/>
+    </delete>
+  </target>
+
+
+  <target name="compile">
     <javac srcdir= "${src.dir}"
            destdir="${src.dir}"
            deprecation="on"
@@ -53,7 +87,7 @@ New version by Ralf Wiebicke.
       <classpath>
         <pathelement location="${xerces.jar}" />
         <pathelement location="${junit.jar}" />
-      </classpath>      
+      </classpath>
     </javac>
   </target>
 
