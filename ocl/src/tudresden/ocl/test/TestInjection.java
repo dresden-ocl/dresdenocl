@@ -76,6 +76,23 @@ public class TestInjection
     }
     assertAll();
     {
+      c2.employees.remove(c2.manager);
+      c2.manager.employers.remove(c2);
+      // This is a hack, because lazy constraint
+      // evaluation does not care about modifications 
+      // in collections yet.
+      c2.employees=new HashSet(c2.employees);
+      c2.manager.employers=new HashSet(c2.manager.employers);
+      // end of hack.
+      expectViolation("violated ocl invariant 'numberOfEmployees' on object 'tudresden.ocl.test.royloy.Company[Company2]'.");
+      expectViolation("violated ocl invariant 'manager_is_employee' on object 'tudresden.ocl.test.royloy.Company[Company2]'.");
+      expectViolation("violated ocl invariant 'manager_is_employee2' on object 'tudresden.ocl.test.royloy.Company[Company2]'.");
+      assertAll();
+      c2.employees.add(c2.manager);
+      c2.manager.employers.add(c2);
+    }
+    assertAll();
+    {
       int age=p3.age;
       p3.age=-3;
       expectViolation("violated ocl invariant 'age_greater_zero' on object 'tudresden.ocl.test.royloy.Person[Person1]'.");
@@ -114,17 +131,19 @@ public class TestInjection
     allobjects.add(o);
   }
   
-  private void assertAll()
+  private void ensureAllViolations()
   {
-    for(Iterator i=allobjects.iterator(); i.hasNext(); )
-      ((RLObject)i.next()).assert();
-    for(Iterator i=allobjects.iterator(); i.hasNext(); )
-      ((RLObject)i.next()).assert();
-
     if(!ev.isEmpty())
     {
       StringBuffer buf=new StringBuffer();
-      buf.append("expected violations not encountered:\n");
+      buf.append("expected violations not encountered in phase ");
+      if(ev==ev1)
+        buf.append('1');
+      else if(ev==ev2)
+        buf.append('2');
+      else 
+        throw new RuntimeException();
+      buf.append(":\n");
       for(Iterator i=ev.iterator(); i.hasNext(); )
       {
         buf.append("    ");
@@ -134,11 +153,27 @@ public class TestInjection
       error(buf.toString());
       ev.clear();
     }
+  }
 
+  private void assertAll()
+  {
+    // phase 1: checking invariants lazily.
+    ev=ev1;
+    for(Iterator i=allobjects.iterator(); i.hasNext(); )
+      ((RLObject)i.next()).assert();
+    for(Iterator i=allobjects.iterator(); i.hasNext(); )
+      ((RLObject)i.next()).assert();
+    ensureAllViolations();
+    ev=null;
+
+    // phase 2: checking all invariants.
+    // must encounter exactly the same violations, 
+    // as in phase 1.
     ev=ev2;
     for(Iterator i=Invariant.allInvariants.iterator(); i.hasNext(); )
       ((Invariant)i.next()).invoke();
-    ev=ev1;
+    ensureAllViolations();
+    ev=null;
   }
   
   /**
@@ -147,7 +182,7 @@ public class TestInjection
   */
   private HashSet ev1=new HashSet();
   private HashSet ev2=new HashSet();
-  private HashSet ev=ev1;
+  private HashSet ev=null;
   
   public void onViolation(String message)
   {
@@ -162,14 +197,21 @@ public class TestInjection
     else
     {
       StringBuffer buf=new StringBuffer();
-      buf.append("unexpected violation:\n  encountered: >");
+      buf.append("unexpected violation in phase ");
+      if(ev==ev1)
+        buf.append('1');
+      else if(ev==ev2)
+        buf.append('2');
+      else 
+        throw new RuntimeException();
+      buf.append(":\n    encountered: >");
       buf.append(m);
-      buf.append('<');
+      buf.append("<\n");
       for(Iterator i=ev.iterator(); i.hasNext(); )
       {
-        buf.append("expected:    ");
+        buf.append("    expected:    >");
         buf.append((String)i.next());
-        buf.append('\n');
+        buf.append("<\n");
       }
       error(buf.toString());
     }
