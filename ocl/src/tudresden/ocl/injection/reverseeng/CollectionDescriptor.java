@@ -32,52 +32,17 @@ package tudresden.ocl.injection.reverseeng;
   * @author  sz9 (Steffen Zschaler)
   * @version 0.1
   */
-public class CollectionDescriptor extends Object {
+public class CollectionDescriptor extends AbstractDescriptor {
 
-  /**
-    * The name of the attribute.
-    */
-  private String m_sName;
-  
-  /**
-    * The element type.
-    */
-  private String m_sElementType;
-  
-  /**
-    * The comment number.
-    */
-  private int m_nCommentID;
-  
   /** 
     * Creates new CollectionDescriptor 
     *
     * @param sName the attribute's name
-    * @param sElementType the element type
+    * @param sComment the associated doc comment
     * @param nCommentID the comment number of the associated doc comment
     */
-  public CollectionDescriptor (String sName, String sElementType, int nCommentID) {
-    super ();
-    
-    m_sName = sName;
-    m_sElementType = sElementType;
-    m_nCommentID = nCommentID;
-  }
-  
-  public String getName () {
-    return m_sName;
-  }
-  
-  public String getElementType () {
-    return m_sElementType;
-  }
-  
-  public void setElementType (String sElementType) {
-    m_sElementType = sElementType;
-  }
-  
-  public int getCommentID () {
-    return m_nCommentID;
+  public CollectionDescriptor (String sName, String sComment, int nCommentID) {
+    super (sName, sComment, nCommentID);
   }
   
   public String toString () {

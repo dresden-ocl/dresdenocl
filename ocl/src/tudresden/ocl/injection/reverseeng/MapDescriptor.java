@@ -32,66 +32,25 @@ package tudresden.ocl.injection.reverseeng;
   * @author  sz9 (Steffen Zschaler)
   * @version 0.1
   */
-public class MapDescriptor extends Object {
+public class MapDescriptor extends AbstractDescriptor {
 
-  /**
-    * The name of the attribute.
-    */
-  private String m_sName;
-  
-  /**
-    * The key type.
-    */
-  private String m_sKeyType;
-
-  /**
-    * The element type.
-    */
-  private String m_sElementType;
-  
-  /**
-    * The comment number.
-    */
-  private int m_nCommentID;
-
-  
   /** 
     * Creates new MapDescriptor 
     */
-  public MapDescriptor(String sName, String sKeyType, String sElementType, int nCommentID) {
-    super ();
-    
-    m_sName = sName;
-    m_sKeyType = sKeyType;
-    m_sElementType = sElementType;
-    m_nCommentID = nCommentID;
-  }
-  
-    public String getName () {
-    return m_sName;
-  }
-  
-  public String getKeyType () {
-    return m_sKeyType;
+  public MapDescriptor(String sName, String sComment, int nCommentID) {
+    super (sName, sComment, nCommentID);
   }
   
   public void setKeyType (String sKeyType) {
-    m_sKeyType = sKeyType;
+    super.setKeyType (sKeyType);
   }
  
-  public String getElementType () {
-    return m_sElementType;
-  }
-  
-  public void setElementType (String sElementType) {
-    m_sElementType = sElementType;
-  }
-  
-  public int getCommentID () {
-    return m_nCommentID;
-  }
-  
   public String toString () {
     return "Map<" + getKeyType () + " -> " + getElementType () + "> " + getName () + " at comment ID " + getCommentID ();
+  }
+      
+  public boolean isIncomplete() {
+    return ((super.isIncomplete()) &&
+             (getKeyType() == null));
   }
 }

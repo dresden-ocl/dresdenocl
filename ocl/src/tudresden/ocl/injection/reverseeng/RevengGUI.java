@@ -32,11 +32,14 @@ import javax.swing.tree.*;
 
 import javax.swing.*;
 
+import tudresden.ocl.injection.*;
+
 /** 
- *
- * @author  sz9
- * @version 
- */
+  * GUI for specifying element and key types for collections and maps extracted from Java Source Code.
+  *
+  * @author  sz9 (Steffen Zschaler)
+  * @version 0.1
+  */
 public class RevengGUI extends javax.swing.JDialog {
 
   private DefaultTreeModel m_dtmFileModel;
@@ -62,8 +65,9 @@ public class RevengGUI extends javax.swing.JDialog {
     m_jbUpOneLevel = new javax.swing.JButton ();
     m_jspTreeScroller = new javax.swing.JScrollPane ();
     m_jtFiles = new javax.swing.JTree ();
-    FileTreeNode ftnRoot = new FileTreeNode(new File ("."));
-    m_dtmFileModel = new DefaultTreeModel (ftnRoot, true);
+    m_dtmFileModel = new DefaultTreeModel (new DefaultMutableTreeNode(), true); // just use a fake root
+    FileTreeNode ftnRoot = new FileTreeNode(m_dtmFileModel, new File ("."));
+    m_dtmFileModel.setRoot (ftnRoot);
     ftnRoot.fill (m_dtmFileModel);
     m_jspProperties = new javax.swing.JScrollPane ();
     m_jtPropertiesTable = new javax.swing.JTable ();
@@ -196,6 +200,9 @@ public class RevengGUI extends javax.swing.JDialog {
     System.exit (0);
   }//GEN-LAST:event_closeDialog
   
+  /**
+    * Abstract super class for each node in the treeview.
+    */
   abstract static class RevengTreeNode extends DefaultMutableTreeNode {
     
     static JLabel s_jlNoProperties = new JLabel ("No properties for current selection!");
@@ -206,7 +213,7 @@ public class RevengGUI extends javax.swing.JDialog {
     
     public abstract Icon getIcon (boolean fExpanded);
     public abstract void fill (DefaultTreeModel dtmModel);
-    
+        
     public void collapsed (DefaultTreeModel dtmModel) {
       if (! isLeaf()) {
         removeAllChildren();
@@ -311,7 +318,7 @@ public class RevengGUI extends javax.swing.JDialog {
     }
 
     public JComponent getRightComponent() {
-      return new JLabel ("Map editor!");
+      return new MapEditor (getDescriptor());
     }
     
     public MapDescriptor getDescriptor() {
@@ -375,7 +382,7 @@ public class RevengGUI extends javax.swing.JDialog {
     }
 
     public JComponent getRightComponent() {
-      return new JLabel ("Collection editor!");
+      return new CollectionEditor (getDescriptor());
     }
     
     public String toString () {      
@@ -386,22 +393,99 @@ public class RevengGUI extends javax.swing.JDialog {
   }
   
   static class FileTreeNode extends RevengTreeNode {
-    public FileTreeNode () {
+    
+    static ThreadPool s_tpIconComputers = new ThreadPool ("Icon Calculator Pool");
+    
+    static Icon s_iNormalFile = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("normalFile.gif"));
+    static Icon s_iFileError = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileError.gif"));
+    static Icon s_iFileWithCollections = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithCollections.gif"));
+    static Icon s_iFileWithCollectionsInComplete = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithCollectionsInComplete.gif"));
+    static Icon s_iFileWithCollectionsAndMaps = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithCollectionsAndMaps.gif"));
+    static Icon s_iFileWithCollectionsAndMapsInComplete = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithCollectionsAndMapsInComplete.gif"));
+    static Icon s_iFileWithMaps = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithMaps.gif"));
+    static Icon s_iFileWithMapsInComplete = new javax.swing.ImageIcon (FileTreeNode.class.getResource ("fileWithMapsInComplete.gif"));
+    
+    private boolean m_fUseDefaultIcon = true;
+    private boolean m_fParsed = false;
+    private boolean m_fHadError = false;
+    private String m_sErrorMessage = null;
+    private AnalysisConsumer m_acAnalysisResults = null;
+    
+    private DefaultTreeModel m_dtm;
+    
+    public FileTreeNode (DefaultTreeModel dtm) {
       super();
+      
+      m_dtm = dtm;
     }
     
-    public FileTreeNode (File f) {
-      this();
+    public FileTreeNode (DefaultTreeModel dtm, File f) {
+      this(dtm);
       
       setFile (f);
     }
     
     public void setFile (File f) {
       setUserObject (f);
+      
+      m_fUseDefaultIcon = true;
+      m_fParsed = false;
+      m_fHadError = false;
+      m_sErrorMessage = null;
+      m_acAnalysisResults = null;
+      
+      if (! f.isDirectory()) {
+        s_tpIconComputers.addTask (new Runnable() {
+          public void run() {
+            ensureParsed (false);
+            
+            synchronized (this) {
+              m_fUseDefaultIcon = false;
+              m_dtm.nodeChanged (FileTreeNode.this);
+            }
+          }
+        });
+      }
     }
     
     public File getFile() {
       return (File) getUserObject ();
+    }
+    
+    protected synchronized void ensureParsed (boolean fUpdateChildren) {
+      if (! m_fParsed) {
+        try {
+          m_acAnalysisResults = AnalysisConsumer.analyse (getFile());
+          m_fHadError = false;
+        }
+        catch (IOException ioex) {
+          m_acAnalysisResults = null;
+          m_fHadError = true;
+
+          m_sErrorMessage = "Couldn't read file: " + ioex.getLocalizedMessage();          
+        }
+        catch (InjectorParseException ipe) {
+          m_acAnalysisResults = null;
+          m_fHadError = true;
+          m_sErrorMessage = "Not a Java file, or file is corrupted: " + ipe.getMessage();
+        }
+        finally {
+          m_fParsed = true;
+        }
+      }
+      
+      
+      if (fUpdateChildren) {
+        removeAllChildren();
+
+        if (! m_fHadError) {
+          add (new CollectionHolderNode (m_acAnalysisResults.getCollections ()));
+          add (new MapHolderNode (m_acAnalysisResults.getMaps ()));
+        }
+        else {
+          add (new ErrorTreeNode (m_sErrorMessage));
+        }
+      }
     }
     
     public Icon getIcon (boolean fExpanded) {
@@ -414,7 +498,35 @@ public class RevengGUI extends javax.swing.JDialog {
         }
       }
       else {
-        return javax.swing.UIManager.getIcon ("Tree.leafIcon");
+        if (m_fUseDefaultIcon) {
+          return javax.swing.UIManager.getIcon ("Tree.leafIcon");
+        }
+        
+        ensureParsed (false);
+        
+        if (! m_fHadError) {
+          switch (m_acAnalysisResults.getStatus()) {
+            case AnalysisConsumer.STATUS_NORMALFILE:
+              return s_iNormalFile;
+            case AnalysisConsumer.STATUS_COLLECTIONSONLY:
+              return s_iFileWithCollections;
+            case AnalysisConsumer.STATUS_COLLECTIONSONLY_INCOMPL:
+              return s_iFileWithCollectionsInComplete;
+            case AnalysisConsumer.STATUS_MAPSONLY:
+              return s_iFileWithMaps;
+            case AnalysisConsumer.STATUS_MAPSONLY_INCOMPL:
+              return s_iFileWithMapsInComplete;
+            case AnalysisConsumer.STATUS_COLLECTIONSANDMAPS:
+              return s_iFileWithCollectionsAndMaps;
+            case AnalysisConsumer.STATUS_COLLECTIONSANDMAPS_INCOMPL:
+              return s_iFileWithCollectionsAndMapsInComplete;
+            default:
+              return javax.swing.UIManager.getIcon ("Tree.leafIcon");
+          }
+        }
+        else {
+          return s_iFileError;
+        }
       }
     }
     
@@ -466,7 +578,7 @@ public class RevengGUI extends javax.swing.JDialog {
           });
           
           for (Iterator i = lFiles.iterator(); i.hasNext();) {
-            add (new FileTreeNode ((File) i.next()));
+            add (new FileTreeNode (dtmModel, (File) i.next()));
           }
 
           dtmModel.nodeStructureChanged (this);
@@ -474,17 +586,9 @@ public class RevengGUI extends javax.swing.JDialog {
       }
       else {
         // Current node is java file
-        try {
-          AnalysisConsumer ac = AnalysisConsumer.analyse (fLister);
-     
-          add (new CollectionHolderNode (ac.getCollections ()));
-          add (new MapHolderNode (ac.getMaps ()));
-        }
-        catch (Throwable t) {
-          t.printStackTrace ();
-          
-          add (new ErrorTreeNode ("Not a Java file, or file is corrupted."));
-        }
+        ensureParsed (true);
+        
+        dtmModel.nodeStructureChanged (this);
       }
     }
     

@@ -51,6 +51,41 @@ import java.io.*;
 public class AnalysisConsumer extends Object implements InjectionConsumer {
 
   /**
+    * Normal Java file: no collections, no maps.
+    */
+  public static final int STATUS_NORMALFILE = 0;
+  
+  /**
+    * File contains only collections which are complete.
+    */
+  public static final int STATUS_COLLECTIONSONLY = 1;
+  
+  /**
+    * File contains only collections, some of which are incomplete.
+    */
+  public static final int STATUS_COLLECTIONSONLY_INCOMPL = 2;
+
+  /**
+    * File contains only maps which are complete.
+    */
+  public static final int STATUS_MAPSONLY = 3;
+  
+  /**
+    * File contains only maps, some of which are incomplete.
+    */
+  public static final int STATUS_MAPSONLY_INCOMPL = 4;
+  
+  /**
+    * File contains collections and maps which are complete.
+    */
+  public static final int STATUS_COLLECTIONSANDMAPS = 5;
+  
+  /**
+    * File contains collections and maps, some of which are incomplete.
+    */
+  public static final int STATUS_COLLECTIONSANDMAPS_INCOMPL = 6;
+  
+  /**
     * Optimization: Cache for Collection class object.
     */
   public static Class s_clCollection;
@@ -105,6 +140,8 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
   {
     m_lmdMaps = new LinkedList();
   }
+  
+  private int m_nStatus = STATUS_NORMALFILE;
   
   /** 
     * Creates new AnalysisConsumer 
@@ -173,22 +210,77 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
           // Not a simple type --> check whether collection
           if (s_clCollection.isAssignableFrom (clClass)) {
             // A collection
-            m_lcdCollections.add (new CollectionDescriptor (cf.getName (), 
-                                  ((m_sCurrentComment != null)?
-                                   (Injector.findDocTag (m_sCurrentComment, "element-type")):
-                                   (null)),
-                                  m_cComments));
+            CollectionDescriptor cd = new CollectionDescriptor (cf.getName (), 
+                                                                   m_sCurrentComment,
+                                                                   m_cComments);
+            m_lcdCollections.add (cd);
+            
+            switch (m_nStatus) {
+              case STATUS_COLLECTIONSANDMAPS:
+                if (cd.isIncomplete()) {
+                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
+                }
+                break;
+                
+              case STATUS_MAPSONLY:
+                if (cd.isIncomplete()) {
+                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
+                }
+                else {
+                  m_nStatus = STATUS_COLLECTIONSANDMAPS;
+                }
+                break;
+
+              case STATUS_MAPSONLY_INCOMPL:
+                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
+                  break;
+
+              case STATUS_NORMALFILE:                
+              case STATUS_COLLECTIONSONLY:
+                if (cd.isIncomplete()) {
+                  m_nStatus = STATUS_COLLECTIONSONLY_INCOMPL;
+                }
+                else {
+                  m_nStatus = STATUS_COLLECTIONSONLY;
+                }
+            }
           }
           else if (s_clMap.isAssignableFrom (clClass)) {
             // A map
-            m_lmdMaps.add (new MapDescriptor (cf.getName (), 
-                           ((m_sCurrentComment != null)?
-                            (Injector.findDocTag (m_sCurrentComment, "key-type")):
-                            (null)),
-                           ((m_sCurrentComment != null)?
-                            (Injector.findDocTag (m_sCurrentComment, "element-type")):
-                            (null)),
-                           m_cComments));
+            MapDescriptor md = new MapDescriptor (cf.getName (), 
+                                                    m_sCurrentComment,
+                                                    m_cComments);
+            m_lmdMaps.add (md);
+
+            switch (m_nStatus) {
+              case STATUS_COLLECTIONSANDMAPS:
+                if (md.isIncomplete()) {
+                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
+                }
+                break;
+                
+              case STATUS_COLLECTIONSONLY:
+                if (md.isIncomplete()) {
+                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
+                }
+                else {
+                  m_nStatus = STATUS_COLLECTIONSANDMAPS;
+                }
+                break;
+
+              case STATUS_COLLECTIONSONLY_INCOMPL:
+                  m_nStatus = STATUS_COLLECTIONSANDMAPS_INCOMPL;
+                  break;
+                  
+              case STATUS_NORMALFILE:
+              case STATUS_MAPSONLY:
+                if (md.isIncomplete()) {
+                  m_nStatus = STATUS_MAPSONLY_INCOMPL;
+                }
+                else {
+                  m_nStatus = STATUS_MAPSONLY;
+                }
+            }
           }
         }
       }
@@ -223,6 +315,10 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     *
     */
   public void onFileEnd() {}
+  
+  public int getStatus() {
+    return m_nStatus;
+  }
   
   public List getCollections() {
     return m_lcdCollections;
