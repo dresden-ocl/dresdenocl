@@ -26,7 +26,7 @@ public abstract class Example implements Runnable
     super();
   }
 
-  public void set(String name, Integer type,// what a cool parameter
+  public void set_wrappedbyocl(String name, Integer type,// what a cool parameter
     Integer[] qualifiers)
   {
     if(name==null)
@@ -42,22 +42,44 @@ public abstract class Example implements Runnable
     if(qualifiers!=null&&qualifiers.length==0)
       throw new IllegalArgumentException();
     this.qualifiers=qualifiers;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #set_wrappedbyocl(String, Integer, Integer[])
+  */public void set(String name, Integer type, Integer[] qualifiers)
+  {
+    checkOclInvariants();
+    set_wrappedbyocl(name, type, qualifiers);
+    checkOclInvariants();
   }
 
-  abstract void abstractMethod();
+  abstract void abstractMethod_wrappedbyocl();/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #abstractMethod_wrappedbyocl()
+  */void abstractMethod()
+  {
+    checkOclInvariants();
+    abstractMethod_wrappedbyocl();
+    checkOclInvariants();
+  }
 
   /**
      Some example doc-comment.
   */
-  public void run()
+  public void run_wrappedbyocl()
   {}/**
-    Blah blah.
-    Zippel zappel.
-    @see #getName()
-    @author ocl injector
-  */void ocl_function()
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #run_wrappedbyocl()
+  */public void run()
   {
-    // some ocl code.
+    checkOclInvariants();
+    run_wrappedbyocl();
+    checkOclInvariants();
   }
 
   /**
@@ -67,24 +89,90 @@ public abstract class Example implements Runnable
   */
   Vector strings=new Vector();
 
-  public String getName()
+  public String getName_wrappedbyocl()
   {
     return name;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #getName_wrappedbyocl()
+  */public String getName()
+  {
+    checkOclInvariants();
+    String result=getName_wrappedbyocl();
+    checkOclInvariants();
+    return result;
   }
 
   public Integer getType_wrappedbyocl()
   {
     return type;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #getType_wrappedbyocl()
+  */public Integer getType()
+  {
+    checkOclInvariants();
+    Integer result=getType_wrappedbyocl();
+    checkOclInvariants();
+    return result;
   }
 
-  public Integer[] getQualifiers()
+  public Integer[] getQualifiers_wrappedbyocl()
   {
     return qualifiers;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #getQualifiers_wrappedbyocl()
+  */public Integer[] getQualifiers()
+  {
+    checkOclInvariants();
+    {
+final tudresden.ocl.lib.OclAnyImpl tudOclNode4=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+final tudresden.ocl.lib.OclString tudOclNode5=tudresden.ocl.lib.Ocl.toOclString(tudOclNode4.getFeature("hallo"));
+final tudresden.ocl.lib.OclString tudOclNode6=new tudresden.ocl.lib.OclString("bello");
+final tudresden.ocl.lib.OclBoolean tudOclNode7=tudOclNode5.isEqualTo(tudOclNode6);
+      if(!tudOclNode7.isTrue())
+        throw new RuntimeException("ocl precondition tudOclPre0 violated");
+    }
+tudresden.ocl.lib.OclString tudOclNode14;
+    {
+final tudresden.ocl.lib.OclAnyImpl tudOclNode12=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+final tudresden.ocl.lib.OclAnyImpl tudOclResult1=tudresden.ocl.lib.OclAnyImpl.UNDEFINED;
+final tudresden.ocl.lib.OclString tudOclNode13=tudresden.ocl.lib.Ocl.toOclString(tudOclNode12.getFeature("hallo"));
+tudOclNode14=tudresden.ocl.lib.Ocl.toOclString(tudOclNode12.getFeature("hallo"));
+final tudresden.ocl.lib.OclBoolean tudOclNode15=tudOclNode13.isEqualTo(tudOclNode14);
+    }
+    Integer[] result=getQualifiers_wrappedbyocl();
+    checkOclInvariants();
+    {
+final tudresden.ocl.lib.OclAnyImpl tudOclNode8=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+final tudresden.ocl.lib.OclAnyImpl tudOclResult0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+final tudresden.ocl.lib.OclString tudOclNode9=tudresden.ocl.lib.Ocl.toOclString(tudOclNode8.getFeature("hallo"));
+final tudresden.ocl.lib.OclString tudOclNode10=new tudresden.ocl.lib.OclString("hallo");
+final tudresden.ocl.lib.OclBoolean tudOclNode11=tudOclNode9.isEqualTo(tudOclNode10);
+      if(!tudOclNode11.isTrue())
+        throw new RuntimeException("ocl postcondition tudOclPost0 violated");
+    }
+    {
+final tudresden.ocl.lib.OclAnyImpl tudOclNode12=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+final tudresden.ocl.lib.OclAnyImpl tudOclResult1=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(result) );
+final tudresden.ocl.lib.OclString tudOclNode13=tudresden.ocl.lib.Ocl.toOclString(tudOclNode12.getFeature("hallo"));
+final tudresden.ocl.lib.OclBoolean tudOclNode15=tudOclNode13.isEqualTo(tudOclNode14);
+      if(!tudOclNode15.isTrue())
+        throw new RuntimeException("ocl postcondition tudOclPost1 violated");
+    }
+    return result;
   }
 
   public Integer unqualifiedType=null;
 
-  public Integer getUnqualifiedType() throws IllegalArgumentException
+  public Integer getUnqualifiedType_wrappedbyocl() throws IllegalArgumentException
   {
     if(unqualifiedType!=null)
       return unqualifiedType;
@@ -95,11 +183,22 @@ public abstract class Example implements Runnable
     unqualifiedType=
       (type instanceof Integer) ? type : type;
     return unqualifiedType;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #getUnqualifiedType_wrappedbyocl()
+  */public Integer getUnqualifiedType() throws IllegalArgumentException
+  {
+    checkOclInvariants();
+    Integer result=getUnqualifiedType_wrappedbyocl();
+    checkOclInvariants();
+    return result;
   }
 
   private Object parent;
 
-  public void setParent  (Object parent)
+  public void setParent_wrappedbyocl  (Object parent)
     throws
       IllegalArgumentException,
       NullPointerException
@@ -108,21 +207,73 @@ public abstract class Example implements Runnable
       this.parent=parent;
     else
       throw new IllegalArgumentException("An attributes parent cannot be set twice.");
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #setParent_wrappedbyocl(Object)
+  */public void setParent(Object parent) throws IllegalArgumentException, NullPointerException
+  {
+    checkOclInvariants();
+    setParent_wrappedbyocl(parent);
+    checkOclInvariants();
   }
 
-  public Object getParent()
+  public Object getParent_wrappedbyocl()
   {
     return parent;
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #getParent_wrappedbyocl()
+  */public Object getParent()
+  {
+    checkOclInvariants();
+    Object result=getParent_wrappedbyocl();
+    checkOclInvariants();
+    return result;
   }
 
-  public void printData
+  public void printData_wrappedbyocl
     (java.io.PrintStream o)
   {
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+      @see #printData_wrappedbyocl(java.io.PrintStream)
+  */public void printData(java.io.PrintStream o)
+  {
+    checkOclInvariants();
+    printData_wrappedbyocl(o);
+    checkOclInvariants();
   }
 
-}
+/**
+    A method for checking ocl invariants.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+  */private final void checkOclInvariants()
+  {
+    for(int i=0; i<strings.size(); i++)
+      if(!(strings.elementAt(i) instanceof java.lang.String))
+        throw new RuntimeException();
+final tudresden.ocl.lib.OclAnyImpl tudOclNode0=tudresden.ocl.lib.Ocl.toOclAnyImpl( tudresden.ocl.lib.Ocl.getFor(this) );
+final tudresden.ocl.lib.OclString tudOclNode1=tudresden.ocl.lib.Ocl.toOclString(tudOclNode0.getFeature("hallo"));
+final tudresden.ocl.lib.OclString tudOclNode2=new tudresden.ocl.lib.OclString("hallo");
+final tudresden.ocl.lib.OclBoolean tudOclNode3=tudOclNode1.isEqualTo(tudOclNode2);
+    if(!tudOclNode3.isTrue())
+      throw new RuntimeException("ocl invariant tudOclInv0 violated");
+}}
 
 class SecondExample{
   int i;
-}
+/**
+    A method for checking ocl invariants.
+    Generated automatically, DO NOT CHANGE!
+      @author ocl injector
+  */private final void checkOclInvariants()
+  {
+}}
 

@@ -261,7 +261,7 @@ public class Injector
     }
   }
 
-  private ClassFeature parseFeature()
+  private ClassFeature parseFeature(String classname)
     throws IOException, EndException, InjectorParseException
   {
     int modifiers=0;
@@ -319,7 +319,7 @@ public class Injector
     }
 
     ClassFeature cf=
-      new ClassFeature(modifiers, featuretype, featurename, position_name_end);
+      new ClassFeature(classname, modifiers, featuretype, featurename, position_name_end);
 
     if(c=='(') // it's a method/constructor
     {
@@ -498,12 +498,12 @@ public class Injector
         }
         break;
       case '\0':
-        ClassFeature cf=parseFeature();
+        ClassFeature cf=parseFeature(classname);
         if(cf.isMethod()&&!cf.isConstructor()&&!discardnextfeature)
         {
           if(insertWrappers)
           {
-            cf.writeWrapper(output);
+            cf.writeWrapper(output, codefragments);
           }
           else
             cfs.addElement(cf);
@@ -527,7 +527,7 @@ public class Injector
 
     if(!insertWrappers)
       for(int i=0; i<cfs.size(); i++)
-        ((ClassFeature)cfs.elementAt(i)).writeWrapper(output);
+        ((ClassFeature)cfs.elementAt(i)).writeWrapper(output, codefragments);
 
     writeInvariants(output, ets, classname);
   }
@@ -543,7 +543,8 @@ public class Injector
     o.write("()\n  {\n");
     for(int i=0; i<ets.size(); i++)
       ((ClassFeature)(ets.elementAt(i))).writeElementChecker(o);
-    SortedFragments sf=(SortedFragments)(codefragments.get(classname));
+    SortedFragments sf=
+      codefragments!=null ? (SortedFragments)(codefragments.get(classname)) : null;
     if(sf!=null)
     {
       Vector v=sf.inv;
@@ -553,7 +554,7 @@ public class Injector
         o.write(cf.getCode());
         o.write("    if(!");
         o.write(cf.getResultVariable());
-        o.write(".isTrue())\n      throw new RuntimeException(\"ocl constraint ");
+        o.write(".isTrue())\n      throw new RuntimeException(\"ocl invariant ");
         o.write(cf.getName());
         o.write(" violated\");\n");
       }
@@ -655,7 +656,10 @@ public class Injector
   {
     File outputfile=new File(tobemodifiedfile.getPath()+TEMPFILE_SUFFIX);
     inject(tobemodifiedfile, outputfile, codefragments);
-    outputfile.renameTo(tobemodifiedfile);
+    if(!tobemodifiedfile.delete())
+      System.out.println("warning: deleting "+tobemodifiedfile+" failed.");
+    if(!outputfile.renameTo(tobemodifiedfile))
+      System.out.println("warning: renaming "+outputfile+" to "+tobemodifiedfile+" failed.");
   }
 
   class EndException extends Exception

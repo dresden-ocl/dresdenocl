@@ -20,10 +20,13 @@ package tudresden.ocl.injection;
 
 import java.io.*;
 import java.util.*;
+import tudresden.ocl.codegen.CodeFragment;
 
 public class ClassFeature
 {
   public static final String WRAPPER_SUFFIX="_wrappedbyocl";
+  
+  private String classname;
 
   private int modifiers;
 
@@ -41,27 +44,28 @@ public class ClassFeature
      Has the same size as paramnames.
        @see paramnames
   */
-  private Vector paramtypes=null;
+  private ArrayList paramtypes=null;
 
   /**
      Contains parameter names. Is null for attributes.
      Has the same size as paramtypes.
        @see paramtypes
   */
-  private Vector paramnames=null;
+  private ArrayList paramnames=null;
 
   /**
      Contains all names given in the "throws" clause.
      Is null for attributes.
   */
-  private Vector throwables=null;
+  private ArrayList throwables=null;
 
   String literal;
 
   private String element_type=null;
 
-  public ClassFeature(int modifiers, String type, String name, int name_end)
+  public ClassFeature(String classname, int modifiers, String type, String name, int name_end)
   {
+    this.classname=classname;
     this.modifiers=modifiers;
     this.type=type;
     this.name=name;
@@ -70,9 +74,9 @@ public class ClassFeature
 
   public void setMethod()
   {
-    paramtypes=new Vector();
-    paramnames=new Vector();
-    throwables=new Vector();
+    paramtypes=new ArrayList();
+    paramnames=new ArrayList();
+    throwables=new ArrayList();
   }
 
   public boolean isMethod()
@@ -82,13 +86,13 @@ public class ClassFeature
 
   public final void addParameter(String paramtype, String paramname)
   {
-    paramtypes.addElement(paramtype);
-    paramnames.addElement(paramname);
+    paramtypes.add(paramtype);
+    paramnames.add(paramname);
   }
 
   public final void addThrowable(String throwable)
   {
-    throwables.addElement(throwable);
+    throwables.add(throwable);
   }
 
   public final void setLiteral(String literal)
@@ -130,7 +134,7 @@ public class ClassFeature
     else
       return name;
   }
-
+  
   public final String getWrappedLiteral()
   {
     if(name.endsWith(WRAPPER_SUFFIX))
@@ -152,19 +156,36 @@ public class ClassFeature
       return literal;
   }
 
+  private String signature;
+  public String getSignature()
+  {
+    if(signature!=null)
+      return signature;
+    StringBuffer buf=new StringBuffer();
+    buf.append(getNotWrappedName());
+    buf.append('(');
+    for(Iterator i=paramtypes.iterator(); i.hasNext(); )
+    {
+      buf.append((String)i.next());
+      if(i.hasNext()) buf.append(',');
+    }
+    buf.append(')');
+    return buf.toString();
+  }
+    
   public static final String OCL_AUTHOR="ocl injector";
 
-  public final void writeWrapper(Writer o) throws IOException
+  public final void writeWrapper(Writer o, Hashtable codefragments) throws IOException
   {
     o.write("/**\n    A wrapper for checking ocl constraints.\n    Generated automatically, DO NOT CHANGE!\n      @author ");
     o.write(OCL_AUTHOR);
     o.write("\n      @see #");
     o.write(getWrappedName());
     o.write('(');
-    for(int i=0; i<paramtypes.size(); i++)
+    for(Iterator i=paramtypes.iterator(); i.hasNext(); )
     {
-      if(i>0) o.write(", ");
-      o.write((String)(paramtypes.elementAt(i)));
+      o.write((String)(i.next()));
+      if(i.hasNext()) o.write(", ");
     }
     o.write(")\n  */");
     String modifierString=
@@ -182,21 +203,22 @@ public class ClassFeature
     }
     o.write(getNotWrappedName());
     o.write('(');
-    for(int i=0; i<paramtypes.size(); i++)
+    Iterator pni=paramnames.iterator();
+    for(Iterator i=paramtypes.iterator(); i.hasNext(); )
     {
-      if(i>0) o.write(", ");
-      o.write(paramtypes.elementAt(i).toString());
+      o.write((String)i.next());
       o.write(' ');
-      o.write((String)(paramnames.elementAt(i)));
+      o.write((String)pni.next());
+      if(i.hasNext()) o.write(", ");
     }
     o.write(')');
     if(throwables.size()>0)
     {
       o.write(" throws ");
-      for(int i=0; i<throwables.size(); i++)
+      for(Iterator i=throwables.iterator(); i.hasNext(); )
       {
-        if(i>0) o.write(", ");
-        o.write(throwables.elementAt(i).toString());
+        o.write((String)i.next());
+        if(i.hasNext()) o.write(", ");
       }
     }
     o.write("\n  {\n");
@@ -205,7 +227,43 @@ public class ClassFeature
       o.write("    ");
       o.write(Injector.INV_METHOD);
       o.write("();\n");
-      o.write("    // some codefragments pre\n");
+      if(codefragments!=null)
+      {
+        SortedFragments sf=(SortedFragments)codefragments.get(classname);
+        if(sf!=null)
+        {
+          for(Iterator i=sf.pre.iterator(); i.hasNext(); )
+          {
+            CodeFragment cf=(CodeFragment)i.next();
+            if(getSignature().equals(cf.getConstrainedOperation()))
+            {
+              o.write("    {\n");
+              o.write(cf.getCode());
+              o.write("      if(!");
+              o.write(cf.getResultVariable());
+              o.write(".isTrue())\n        throw new RuntimeException(\"ocl precondition ");
+              o.write(cf.getName());
+              o.write(" violated\");\n    }\n");
+            }
+          }
+          for(Iterator i=sf.transfer.iterator(); i.hasNext(); )
+          {
+            CodeFragment cf=(CodeFragment)i.next();
+            if(getSignature().equals(cf.getConstrainedOperation()))
+              o.write(cf.getCode());
+          }
+          for(Iterator i=sf.preparation.iterator(); i.hasNext(); )
+          {
+            CodeFragment cf=(CodeFragment)i.next();
+            if(getSignature().equals(cf.getConstrainedOperation()))
+            {
+              o.write("    {\n");
+              o.write(cf.getCode());
+              o.write("    }\n");
+            }
+          }
+        }
+      }
     }
     o.write("    ");
     if(!isConstructor() && !"void".equals(type))
@@ -215,16 +273,34 @@ public class ClassFeature
     }
     o.write(getWrappedName());
     o.write('(');
-    for(int i=0; i<paramnames.size(); i++)
+    for(Iterator i=paramnames.iterator(); i.hasNext(); )
     {
-      if(i>0) o.write(", ");
-      o.write((String)(paramnames.elementAt(i)));
+      o.write((String)i.next());
+      if(i.hasNext()) o.write(", ");
     }
     o.write(");\n");
     o.write("    ");
     o.write(Injector.INV_METHOD);
     o.write("();\n");
-    o.write("    // some codefragments post\n");
+    if(codefragments!=null)
+    {
+      SortedFragments sf=(SortedFragments)codefragments.get(classname);
+      if(sf!=null)
+        for(Iterator i=sf.post.iterator(); i.hasNext(); )
+        {
+          CodeFragment cf=(CodeFragment)i.next();
+          if(getSignature().equals(cf.getConstrainedOperation()))
+          {
+            o.write("    {\n");
+            o.write(cf.getCode());
+            o.write("      if(!");
+            o.write(cf.getResultVariable());
+            o.write(".isTrue())\n        throw new RuntimeException(\"ocl postcondition ");
+            o.write(cf.getName());
+            o.write(" violated\");\n    }\n");
+          }
+        }
+    }
     if(!isConstructor() && !"void".equals(type))
       o.write("    return result;\n");
     o.write("  }");
@@ -246,11 +322,13 @@ public class ClassFeature
     o.println("  "+(isMethod()?"method":"attribute")+" ("+java.lang.reflect.Modifier.toString(modifiers)+") >"+type+"< >"+name+"<");
     if(isMethod())
     {
-      for(int i=0; i<paramtypes.size(); i++)
-        o.println("    parameter >"+paramtypes.elementAt(i)+"< >"+paramnames.elementAt(i)+"<");
-      for(int i=0; i<throwables.size(); i++)
-        o.println("    throwable >"+throwables.elementAt(i)+"<");
+      Iterator pni=paramnames.iterator();
+      for(Iterator i=paramtypes.iterator(); i.hasNext(); )
+        o.println("    parameter >"+i.next()+"< >"+pni.next()+"<");
+      for(Iterator i=throwables.iterator(); i.hasNext(); )
+        o.println("    throwable >"+i.next()+"<");
     }
+    System.out.println("    signatr: >"+getSignature()+"<");
     System.out.println("    literal: >"+literal+"<"+name_end);
     System.out.println("    wrapped: >"+getWrappedLiteral()+"<");
     System.out.println("    notwrap: >"+getNotWrappedLiteral()+"<");

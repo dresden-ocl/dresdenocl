@@ -23,7 +23,7 @@ import java.util.*;
 import tudresden.ocl.OclTree;
 import tudresden.ocl.NameCreator;
 import tudresden.ocl.parser.OclParserException;
-import tudresden.ocl.check.types.ModelFacade;
+import tudresden.ocl.check.types.*;
 import tudresden.ocl.check.OclTypeException;
 import tudresden.ocl.check.types.xmifacade.XmiParser;
 import tudresden.ocl.codegen.CodeFragment;
@@ -198,12 +198,34 @@ public class Main
         }
         else
         {
-          String[] constraints=loadConstraints(new File(constraintfile));
-          ModelFacade modelfacade=
-            tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel);
-          OclTree[] ocltrees=checkConstraints(constraints, modelfacade);
-          Hashtable codefragments=generateCode(ocltrees);
-          for(int j=i+1; j<args.length; j++)
+          Hashtable codefragments=null;
+          if(constraintfile!=null)
+          {
+            if((xmimodel==null) == (reflectionmodel==null))
+            {
+              System.out.println("There must be exaxtly one of --xmi-model and --reflect-model");
+              System.out.println(usage);
+              return;
+            }
+            String[] constraints=loadConstraints(new File(constraintfile));
+            String[] rp={reflectionmodel};
+            ModelFacade modelfacade;
+            if(xmimodel!=null)
+              modelfacade=tudresden.ocl.check.types.xmifacade.XmiParser.getModel(xmimodel);
+            else
+              modelfacade=new ReflectionFacade
+              (
+                rp,
+                new DefaultReflectionAdapter(),
+                new tudresden.ocl.lib.SimpleNameAdapter()
+              );
+            OclTree[] ocltrees=checkConstraints(constraints, modelfacade);
+            codefragments=generateCode(ocltrees);
+          }
+          else
+            System.out.println("no constraints given, generating code for @element-type only.");
+            
+          for(int j=i; j<args.length; j++)
           {
             if(modify)
               Injector.inject(new File(args[j]), codefragments);

@@ -1,0 +1,11 @@
+
+context Example
+inv: hallo='hallo'
+
+context Example::getQualifiers()
+pre:  hallo='bello'
+post: hallo='hallo'
+post: hallo=hallo@pre
+
+
+
