@@ -89,7 +89,7 @@ final class OclInjector implements InjectionConsumer
   private HashMap codefragments;
   private boolean delayinsertions;
   private boolean clean;
-  private String violationmakro;
+  private String violationmacro;
   private OclInjectorConfig config;
 
 
@@ -114,7 +114,7 @@ final class OclInjector implements InjectionConsumer
     this.codefragments=config.codefragments;
     this.delayinsertions=!config.insertimmediatly;
     this.clean=config.clean;
-    this.violationmakro=config.violationmakro;
+    this.violationmacro=config.violationmacro;
     this.config=config;
   }
   
@@ -300,7 +300,7 @@ final class OclInjector implements InjectionConsumer
     o.write("    if(!");
     o.write(cf.getResultVariable());
     o.write(".isTrue()) ");
-    o.write(violationmakro);
+    o.write(violationmacro);
     o.write("(\"violated ocl invariant '");
     o.write(cf.getName());
     o.write("' on object '\"+this+\"'.\");\n");
@@ -647,7 +647,7 @@ final class OclInjector implements InjectionConsumer
             o.write("        if(!");
             o.write(frag.getResultVariable());
             o.write(".isTrue())\n          ");
-            o.write(violationmakro);
+            o.write(violationmacro);
             o.write("(\"violated ocl precondition '");
             o.write(frag.getName());
             o.write("' on object '\"+this+\"' operation '");
@@ -691,7 +691,7 @@ final class OclInjector implements InjectionConsumer
             o.write("        if(!");
             o.write(frag.getResultVariable());
             o.write(".isTrue())\n          ");
-            o.write(violationmakro);
+            o.write(violationmacro);
             o.write("(\"violated ocl postcondition '");
             o.write(frag.getName());
             o.write("' on object '\"+this+\"' operation '");
@@ -758,7 +758,7 @@ final class OclInjector implements InjectionConsumer
       o.write(',');
       o.write(type);
       o.write(".class)) ");
-      o.write(violationmakro);
+      o.write(violationmacro);
       o.write("(\"");
       if(kind==Invariant.CHECK_ELEMENT_TYPES)
         o.write("element");
@@ -796,7 +796,7 @@ final class OclInjectorConfig
   HashMap codefragments=null;
   boolean insertimmediatly=false;
   boolean clean=false;
-  String violationmakro=null;
+  String violationmacro=null;
   boolean tracetypes=false;
 
   static final int INVARIANT_SCOPE_PRIVATE  =0;
@@ -934,7 +934,7 @@ public class Main
       "      the nameadapter\n"+
       "  -is --invariant-scope [all|private|protected|package|public|explicit]\n"+
       "      the scope of invariants\n"+
-      "  -vm --violation-makro makro\n"+
+      "  -vm --violation-macro macro\n"+
       "      what to to, if a constraint fails.\n"+
       "  -tt --trace-types\n"+
       "      trace types of collection elements.\n"+
@@ -1050,22 +1050,22 @@ public class Main
             return;
           }
         }
-        else if("--violation-makro".equals(args[i])||"-vm".equals(args[i]))
+        else if("--violation-macro".equals(args[i])||"-vm".equals(args[i]))
         {
-          if(conf.violationmakro!=null)
+          if(conf.violationmacro!=null)
           {
-            System.out.println("can use only one violation makro.");
+            System.out.println("can use only one violation macro.");
             System.out.println(usage);
             return;
           }
           i++;
           if(i>=args.length)
           {
-            System.out.println("violation makro not given.");
+            System.out.println("violation macro not given.");
             System.out.println(usage);
             return;
           }
-          conf.violationmakro=args[i];
+          conf.violationmacro=args[i];
         }
         else if("--trace-types".equals(args[i])||"-tt".equals(args[i]))
           conf.tracetypes=true;
@@ -1095,8 +1095,8 @@ public class Main
         return;
       }
 
-      if(conf.violationmakro==null)
-        conf.violationmakro="System.out.println";
+      if(conf.violationmacro==null)
+        conf.violationmacro="System.out.println";
 
       if(conf.clean)
         System.out.println("cleaning code.");
