@@ -1771,6 +1771,11 @@ class SecondExample extends Example{
     // this has to be tested too.
   }
   
+  public String toString_wrappedbyocl_tudresden_ocl_injection_test_SecondExample()
+  {
+    return getClass().getName();
+  }
+  
 /**
     A wrapper for checking ocl constraints.
     Generated automatically, DO NOT CHANGE!
@@ -1824,6 +1829,29 @@ class SecondExample extends Example{
       tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
       tudresden.ocl.injection.lib.Invariant.checking_flag=false;
     }
+  }/**
+    A wrapper for checking ocl constraints.
+    Generated automatically, DO NOT CHANGE!
+    @author ocl_injector
+    @see #toString_wrappedbyocl_tudresden_ocl_injection_test_SecondExample()
+  */public String toString()
+  {
+    String result;
+    if(tudresden.ocl.injection.lib.Invariant.checking_flag)
+      result=toString_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
+    else
+    {
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+      result=toString_wrappedbyocl_tudresden_ocl_injection_test_SecondExample();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=true;
+      checkForChangedFeatures();
+      tudresden.ocl.injection.lib.Invariant.checkVacantInvariants();
+      tudresden.ocl.injection.lib.Invariant.checking_flag=false;
+    }
+    return result;
   }/**
     A backup for detecting modifications.
     Generated automatically, DO NOT CHANGE!

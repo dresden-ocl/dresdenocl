@@ -353,6 +353,11 @@ class SecondExample extends Example{
     // this has to be tested too.
   }
   
+  public String toString()
+  {
+    return getClass().getName();
+  }
+  
 }
 
 class ThirdExample extends SecondExample

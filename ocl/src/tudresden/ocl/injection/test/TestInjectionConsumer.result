@@ -353,6 +353,11 @@ class SecondExample[onClass] extends Example{
     // this has to be tested too.
   }
   
+  [onBehaviourHeader]public String toString()
+  {
+    return getClass().getName();
+  }[onClassFeature]
+  
 [onClassEnd]}
 
 class ThirdExample[onClass] extends SecondExample
