@@ -50,6 +50,18 @@ public final class JavaAttribute extends JavaFeature
     if(type==null)
       throw new RuntimeException();
   }
+  
+  /**
+     Constructs a java attribute with the same 
+     {@link #parent}, {@link #modifiers} and {@link #type}
+     but the given name.
+     Needed for comma separated attributes.
+  */
+  public JavaAttribute(JavaAttribute ja, String name)
+    throws InjectorParseException
+  {
+    this(ja.getParent(), ja.getModifiers(), ja.type, name);
+  }
 
   /**
      Return a fully qualified name of the attribute,

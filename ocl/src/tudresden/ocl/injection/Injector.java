@@ -47,6 +47,8 @@ public final class Injector
   private boolean start_block=false;
   private boolean collect_when_blocking=false;
   private StringBuffer collector=new StringBuffer();
+  
+  private String doccomment=null;
 
   private JavaFile javafile=new JavaFile();
 
@@ -264,34 +266,41 @@ public final class Injector
      the first opening curly bracket of the body.
      For attribute initializers, the input stream must be directly 
      behind the '='.
+     @return 
+        the delimiter, which terminated the attribute initializer
+        (';' or ',') or '}' for methods.
   */
-  private void parseBody(boolean attribute) 
+  private char parseBody(boolean attribute) 
     throws IOException, EndException, InjectorParseException
   {
     //System.out.println("    body("+(attribute?"attribute":"method")+")");
 
     int bracketdepth=( attribute ? 0 : 1 );
-    charloop: while(true)
+    while(true)
     {
       switch(read())
       {
       case '/': readComment(); break;
-      case '{': 
+      case '{': case '(':
         bracketdepth++; 
         break;
-      case '}': 
+      case '}': case ')':
         bracketdepth--;
         if(bracketdepth==0 && !attribute)
-          break charloop;
+          return '}';
         if(bracketdepth<0)
           throw new InjectorParseException("';' expected.");
         break;
-      case ';':
-        // dont have to test for wait for semicolon here
+      case ';': 
+        // dont have to test for "attribute" here
         // since then the test in the '}' branch would have
         // already terminated the loop
         if(bracketdepth==0)
-          break charloop;
+          return ';';
+        break;
+      case ',':
+        if(bracketdepth==0)
+          return ',';
         break;
       // ignore brackets inside of literal String's
       case '"':
@@ -326,7 +335,7 @@ public final class Injector
                        if null, there is no containing class, and 
                        the feature must be a class itself.
   */
-  private JavaFeature parseFeature(JavaClass parent)
+  private JavaFeature[] parseFeature(JavaClass parent)
     throws IOException, EndException, InjectorParseException
   {
     return parseFeature(parent, buf.toString());
@@ -338,7 +347,7 @@ public final class Injector
      @parameter bufs the first token of the class feature.
      @see #parseFeature(JavaClass)
   */
-  private JavaFeature parseFeature(JavaClass parent, String bufs)
+  private JavaFeature[] parseFeature(JavaClass parent, String bufs)
     throws IOException, EndException, InjectorParseException
   {
     int modifiers=0;
@@ -369,11 +378,13 @@ public final class Injector
       else if("interface".equals(bufs))
       {
         modifiers|=java.lang.reflect.Modifier.INTERFACE;
-        return parseClass(parent, modifiers);
+        JavaClass[] jcarray={ parseClass(parent, modifiers) };
+        return jcarray;
       }
       else if("class".equals(bufs))
       {
-        return parseClass(parent, modifiers);
+        JavaClass[] jcarray={ parseClass(parent, modifiers) };
+        return jcarray;
       }
       else
       {
@@ -426,14 +437,14 @@ public final class Injector
         new JavaMethod(parent, modifiers, featuretype, featurename, position_name_end);
       jb.setLastParameterStart(collector.length()+1);
       parseMethod(jb);
-      return jb;
+      JavaFeature[] jbarray={jb};
+      return jbarray;
     }
     else // it's an attribute
     {
       JavaAttribute ja=
         new JavaAttribute(parent, modifiers, featuretype, featurename);
-      parseAttribute(ja, c);
-      return ja;
+      return parseAttribute(ja, c);
     }
   }
 
@@ -536,30 +547,46 @@ public final class Injector
     }
   }
 
-  private void parseAttribute(JavaAttribute ja, char c)
+  private JavaAttribute[] parseAttribute(JavaAttribute ja, char c)
     throws IOException, EndException, InjectorParseException
   {
-    switch(c)
+    final ArrayList commaSeparatedAttributes=new ArrayList();
+    commaSeparatedAttributes.add(ja);
+    if(!do_block) ja.print(System.out);
+
+    while(true)
     {
-    case ';': 
-      if(collect_when_blocking)
-        write(getCollector());
-      flushOutbuf();
-      break;
-    case '=':
-      if(collect_when_blocking)
-        write(getCollector());
-      parseBody(true);
-      flushOutbuf();
-      break;
-    default:
-      throw new InjectorParseException("';' or '=' expected.");
-    }
-    if(do_block)
-      getCollector();
-    else
-    {
-      //ja.print(System.out);
+      
+      switch(c)
+      {
+      case ';': 
+        if(collect_when_blocking)
+          write(getCollector());
+        flushOutbuf();
+        if(do_block)
+          getCollector();
+        JavaAttribute[] jaarray=
+          new JavaAttribute[commaSeparatedAttributes.size()];
+        commaSeparatedAttributes.toArray(jaarray);
+        return jaarray;
+      case ',':
+        c=readToken();
+        if(c!='\0')
+          throw new InjectorParseException("attribute name expected.");
+        ja=new JavaAttribute(ja, buf.toString());
+        commaSeparatedAttributes.add(ja);
+        //if(!do_block) ja.print(System.out);
+        c=readToken();
+        break;
+      case '=':
+        if(collect_when_blocking)
+          write(getCollector());
+        c=parseBody(true);
+        flushOutbuf();
+        break;
+      default:
+        throw new InjectorParseException("';', '=' or ',' expected.");
+      }
     }
   }
 
@@ -594,11 +621,24 @@ public final class Injector
         getCollector();
         break ml;
       case 'c':
-        //System.out.println("comment: "+comment);
-        scheduleBlock(consumer.onComment(comment));
+        if(comment.startsWith("/**"))
+        {
+          doccomment=comment;
+          //System.out.println("doccomment: "+doccomment);
+          scheduleBlock(consumer.onDocComment(doccomment));
+        }
+        else
+        {
+          //System.out.println("comment: "+comment);
+          write(comment);
+          scheduleBlock(true);
+        }
         break;
       case '\0':
-        consumer.onClassFeature(parseFeature(jc));
+        JavaFeature[] jfarray=parseFeature(jc);
+        for(int i=0; i<jfarray.length; i++)
+          consumer.onClassFeature(jfarray[i], doccomment);
+        doccomment=null;
         scheduleBlock(true);
         break;
       case ';': 

@@ -57,8 +57,9 @@ public interface InjectionConsumer
   
   /**
      Encountered the header of a java method.
-     Is called additionally to onClassFeature.
-     @see #onClassFeature(JavaFeature)
+     Is called additionally to 
+     {@link #onClassFeature(JavaFeature, String)}.
+
      @parameter cf
         contains all parsed information about the method
   */
@@ -67,20 +68,26 @@ public interface InjectionConsumer
   
   /**
      Called for attributes and methods.
-     Is called additionally to onBehaviourHeader.
-     @see #onBehaviourHeader(JavaBehaviour)
+     Is called additionally to 
+     {@link #onBehaviourHeader(JavaBehaviour)}.
+  
+     @parameter doccomment
+        the doccomment associated to this feature.
+        Is null, if there was none.
   */
-  public void onClassFeature(JavaFeature cf) throws java.io.IOException, InjectorParseException;
+  public void onClassFeature(JavaFeature cf, String doccomment) 
+    throws java.io.IOException, InjectorParseException;
   
   /**
-     Encountered a java comment.
+     Encountered a java documentation comment.
      Is called for comments on class level only, 
      i.e. inside a class, but outside of methods and attributes.
   
      @return 
         if false is returned, the next class feature is ignored.
   */
-  public boolean onComment(String comment) throws java.io.IOException;
+  public boolean onDocComment(String doccomment) 
+    throws java.io.IOException;
 
   /**
      Encountered the end of the input stream.

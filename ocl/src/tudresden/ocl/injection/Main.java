@@ -175,10 +175,7 @@ final class OclInjector implements InjectionConsumer
     }
   }
 
-  private String last_element_type=null;
-  private String last_key_type=null;
-
-  public void onClassFeature(JavaFeature jf) 
+  public void onClassFeature(JavaFeature jf, String doccomment) 
     throws IOException, InjectorParseException
   {
     if(!clean)
@@ -200,6 +197,15 @@ final class OclInjector implements InjectionConsumer
         //if(!"void".equals(jf.getType()))
           //observedFeatures.add(jf);
       }
+
+      String last_element_type=null;
+      String last_key_type=null;
+      if(doccomment!=null)
+      {
+        last_element_type=Injector.findDocTag(doccomment, "element-type");
+        last_key_type=    Injector.findDocTag(doccomment, "key-type");
+      }
+
       boolean notYetAddedToTypedAttributes=true;
       if(last_element_type!=null)
       {
@@ -211,7 +217,6 @@ final class OclInjector implements InjectionConsumer
         }
         else 
           throw new InjectorParseException("encountered @element-type tag on non-attribute");
-        last_element_type=null;
       }
       if(last_key_type!=null)
       {
@@ -223,33 +228,22 @@ final class OclInjector implements InjectionConsumer
         }
         else 
           throw new InjectorParseException("encountered @key-type tag on non-attribute");
-        last_key_type=null;
       }
     }
     discardnextfeature=false;
   }
   
-  public boolean onComment(String comment) 
+  public boolean onDocComment(String doccomment) 
     throws IOException
   {
-    if(comment.startsWith("/**"))
+    if(OCL_AUTHOR.equals(Injector.findDocTag(doccomment, "author")))
     {
-      if(OCL_AUTHOR.equals(Injector.findDocTag(comment, "author")))
-      {
-        discardnextfeature=true;
-        return false;
-      }
-      else
-      {
-        last_element_type=Injector.findDocTag(comment, "element-type");
-        last_key_type=Injector.findDocTag(comment, "key-type");
-        output.write(comment);
-        return true;
-      }
+      discardnextfeature=true;
+      return false;
     }
     else
     {
-      output.write(comment);
+      output.write(doccomment);
       return true;
     }
   }

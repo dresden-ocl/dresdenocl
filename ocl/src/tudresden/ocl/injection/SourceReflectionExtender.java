@@ -159,18 +159,22 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     {
     }
   
-    private String last_element_type=null;
-    private String last_key_type=null;
-
     public void onBehaviourHeader(JavaBehaviour jb)
     {
     }
     
-    public void onClassFeature(JavaFeature cf) 
+    public void onClassFeature(JavaFeature cf, String doccomment) 
       throws java.io.IOException, InjectorParseException
     {
       if(cf instanceof JavaAttribute)
       {
+        String last_element_type=null;
+        String last_key_type=null;
+        if(doccomment!=null)
+        {
+          last_element_type=Injector.findDocTag(doccomment, "element-type");
+          last_key_type=    Injector.findDocTag(doccomment, "key-type");
+        }
         if(last_element_type!=null)
         {
           Class c=cf.getFile().findType(last_element_type);
@@ -215,17 +219,10 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
           }
         }
       }
-      last_element_type=null;
-      last_key_type=null;
     }
   
-    public boolean onComment(String comment)
+    public boolean onDocComment(String doccomment)
     {
-      if(comment.startsWith("/**"))
-      {
-        last_element_type=Injector.findDocTag(comment, "element-type");
-        last_key_type=Injector.findDocTag(comment, "key-type");
-      }
       return true;
     }
   

@@ -200,7 +200,7 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     * <p><strong>This method relies on the compiled versions of all classes of the system to be analysed
     * to be available in the classpath.</strong></p>
     */
-  public void onClassFeature(JavaFeature cf) throws InjectorParseException, java.io.IOException {
+  public void onClassFeature(JavaFeature cf, String doccomment) throws InjectorParseException, java.io.IOException {
     if (cf instanceof JavaAttribute) {
       // Attribute. Also a collection?
       if (cf.getType () != null) {
@@ -297,11 +297,11 @@ public class AnalysisConsumer extends Object implements InjectionConsumer {
     *
     * @return Always true, to indicate that the next feature should be parsed.
     */
-  public boolean onComment(String comment) throws java.io.IOException {
+  public boolean onDocComment(String doccomment) throws java.io.IOException {
     
-    if (comment.startsWith ("/**")) {
+    if (doccomment.startsWith ("/**")) {
       // JavaDoc comment: Save it!
-      m_sCurrentComment = comment;
+      m_sCurrentComment = doccomment;
       m_cComments++;
     }
     

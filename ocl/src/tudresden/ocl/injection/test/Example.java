@@ -34,6 +34,9 @@ public abstract class Example implements Runnable
   private Integer type=new Integer(5);
   private volatile Integer[] qualifiers;
   String hallo="hallo";
+  
+  int commaSeparated1,commaSeparated2=0,commaSeparated3; 
+  int commaSeparated4=80,commaSeparated5,commaSeparated6=200; 
 
   // these attributes test the ability of the parser
   // to skip more complex (ugly) attribute initializers
