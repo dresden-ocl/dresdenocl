@@ -42,6 +42,11 @@ public class Person extends RLObject
   return 0.0f;
   }
   
+  public String toString()
+  {
+    return super.toString()+'['+name+']';
+  }
+  
   public boolean assert()
   {
     return true;

@@ -5,7 +5,9 @@ import java.util.*;
 
 public class Company extends RLObject
 {
-
+  
+  public String description;
+  
   public int numberOfEmployees;
 
   // Associations
@@ -17,8 +19,9 @@ public class Company extends RLObject
   */
   public HashSet employees=new HashSet();
   
-  public Company(Person manager)
+  public Company(String description, Person manager)
   {
+    this.description=description;
     this.manager=manager;
   }
 
@@ -28,6 +31,11 @@ public class Company extends RLObject
 
   public int getOldestEmployeeAge() {
   return 0;
+  }
+  
+  public String toString()
+  {
+    return super.toString()+'['+description+']';
   }
   
   public boolean assert()

@@ -19,7 +19,7 @@ public abstract class RLObject implements Serializable {
     id=idCounter++;
   }
 
-  public String toString() {
+  public String toXString() {
     String ret=getClass().getName()+"@"+getID();
     Field[] fields=getClass().getFields();
     for (int i=0; i<fields.length; i++) {

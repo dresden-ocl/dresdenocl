@@ -1,5 +1,5 @@
 
-context Person inv: age>=0
+context Person inv age: age>=0
 
 context Person
 inv: age.div(7)<7
@@ -7,24 +7,24 @@ inv: age.mod(7)<7
 inv: age.max(7)<7
 inv: age.min(7)<7
 
-context Company inv:
+context Company inv manager_is_employee:
   employees->iterate(
     p:Person ; b:Bag(Person)=Bag{} |
     b->including(p)
   )->includes(manager)
 
-context Company inv: self.numberOfEmployees=employees->size
+context Company inv numberOfEmployees: self.numberOfEmployees=employees->size
 
-context Company inv:
+context Company inv manager_is_employee2:
 manager.employers->includes(self)
 
-context Person inv:
+context Person inv manager_is_employee3:
 managedCompanies->forAll(employees->includes(self))
 
-context Person inv:
+context Person inv age2:
 employers.employees->forAll(age>0)
 
-context Person inv:
+context Person inv husband:
 if isMarried then 
   wife->isEmpty xor husband->isEmpty
 else
@@ -78,7 +78,7 @@ inv: self.deliveredServices.transactions->iterate(
 context Person inv:
 Set{ 0 .. 199 }->includes(age)
 
-context Person inv substring:
+context Person inv nameUpperCase:
 let firstLetter:String=name.substring(1,1) in
 firstLetter = firstLetter.toUpper
 

@@ -43,8 +43,8 @@ public class TestInjection
     ao.add(p1=new Person("person1"));
     ao.add(p2=new Person("person2"));
     ao.add(p3=new Person("person3"));
-    ao.add(c1=new Company(p3));
-    ao.add(c2=new Company(p3));
+    ao.add(c1=new Company("company1", p3));
+    ao.add(c2=new Company("company2", p3));
     p1.employers.add(c1); c1.employees.add(p1);
     p2.employers.add(c2); c2.employees.add(p2);
     p3.employers.add(c2); c2.employees.add(p3);
