@@ -6,6 +6,8 @@ Changes to current CVS
 Changes that could break older environments
 -------------------------------------------
 
+* [Injector]     Added onFileDocComment to TaskInstrumentor.java .
+
 Other changes
 -------------
 * [Type Checker] Improved error reports in Collection.navigateParameterized()
@@ -18,6 +20,10 @@ Other changes
 
 Fixed bugs
 ----------
+* [Injector]     #223583 OCL constraints at class level
+                 Added onFileDocComment to TaskInstrumentor to allow for handling
+                 of file level javadoc comments.
+
 * [Injector]     The generated code did not reset Invariant.checking_flag if
                  the code checking contraints raised an exception, and in the
                  same situation Invariant.checkVacantVariants did not reset
