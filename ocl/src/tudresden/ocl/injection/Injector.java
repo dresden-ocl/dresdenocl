@@ -78,7 +78,7 @@ public final class Injector
   /**
      The line number in the current file.
   */
-  private int linenumber=0;
+  private int linenumber=1;
 
   /**
      The character in the current line.
@@ -810,11 +810,22 @@ public final class Injector
 
   private class ParseException extends InjectorParseException
   {
+    int ln;
+    int lp;
+    
     private ParseException(String message)
     {
       //super("["+linenumber+':'+lineposition+']'+' '+message);
       super (message);
+      ln=linenumber;
+      lp=lineposition;
     }
+    
+    public String getMessage()
+    {
+      return "["+linenumber+':'+lineposition+']'+' '+super.getMessage();
+    }
+    
   }
   
   /**
