@@ -22,6 +22,7 @@
 
 // OCLEditor.java -- new version of the ocl editor intented for practical use
 //
+// 08/08/2002  [sz9 ]  Fixed issue #511143 by hardcoding line breaking at column 50.
 // 10/16/2001  [sz9 ]  Added support for editor instances that whish to prevent
 //                     a constraint's context from being edited.
 // 10/16/2001  [sz9 ]  Added support for replacing the table model in subclasses.
@@ -48,7 +49,7 @@ import javax.swing.event.*;
 
 import java.util.*;
 
-/** 
+/**
   * An editor for a list of OCL Constraints. The editor allows editing
   * of a list of {@link ConstraintRepresentation constraint representations}
   * as specified by its {@link OCLEditorModel model}.
@@ -831,7 +832,7 @@ public class OCLEditor extends javax.swing.JPanel
         }
         m_jtpConstraintEditor.setCharacterAttributes (s_sasNormalText, true);
       }
-      
+
       if (nSelStart != -1) {
         m_jtpConstraintEditor.paintImmediately (
             0, 0,
@@ -1249,6 +1250,32 @@ public class OCLEditor extends javax.swing.JPanel
     repaint();
   }//GEN-LAST:event_onQuickBarButton
 
+  protected String wrapMessage (String sMessage,
+                                int nMaxLineLen) {
+    StringBuffer sbResult = new StringBuffer (sMessage.length());
+    int i = 0;
+    
+    while (i < sMessage.length()) {
+      int nEndOfLine = i + nMaxLineLen;
+      
+      if (nEndOfLine > sMessage.length()) {
+        nEndOfLine = sMessage.length();
+      }
+      
+      while ((nEndOfLine > i + 1) &&
+             (sMessage.charAt (nEndOfLine - 1) != ' ')) {
+        nEndOfLine--;
+      }
+      
+      sbResult.append (sMessage.substring (i, nEndOfLine - 1))
+              .append ('\n');
+      
+      i = nEndOfLine;
+    }
+    
+    return sbResult.toString();
+  }
+  
   /**
     * React to the submit button.
     */
@@ -1268,20 +1295,24 @@ public class OCLEditor extends javax.swing.JPanel
         catch (OclParserException ope) {
           int nCaretPos = getCaretPositionFromLineAndColumn (
               ope.getErrorLine(),
-              ope.getErrorCol());
+              ope.getErrorCol()
+            );
 
+          String sWrappedMessage = wrapMessage (
+              ope.getMessage(),
+              50
+            );
+          
           JOptionPane.showMessageDialog (null,
-                                           "Syntax error: " +
-                                                ope.getMessage()/* +
-                                                " at (" + ope.getErrorLine() +
-                                                ", " + ope.getErrorCol() + ")"*/,
+                                           "Syntax error:\n" +
+                                             sWrappedMessage,
                                            "Error",
                                            JOptionPane.ERROR_MESSAGE);
 
           m_jtpConstraintEditor.select (nCaretPos, nCaretPos);
           m_jtpConstraintEditor.requestFocus();
           
-          ope.printStackTrace();
+          //ope.printStackTrace();
         }
         catch (OclTypeException ote) {
           JOptionPane.showMessageDialog (null,

@@ -40,6 +40,8 @@ Other changes
 
 Fixed bugs
 ----------
+* [OCL Editor]   Fixed issue #511143, by hardcoding wrapping at column 50.
+
 * [Injector]     Enhanced OCLInstrumentor.fillInSignature to modify array types to sequence types
 
 * [Java Code Generator]
