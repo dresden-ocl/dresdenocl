@@ -19,7 +19,7 @@ jar -cf dresden-ocl-lib.jar $LIBFILES
 export ARGOFILES="\
 	$LIBFILES \
 	tudresden/ocl/*.class \
-	tudresden/ocl/*.gif \
+	tudresden/ocl/images/*.gif \
 	tudresden/ocl/normalize/*.class \
 	tudresden/ocl/check/*.class \
 	tudresden/ocl/check/bootstrap/*.class \
