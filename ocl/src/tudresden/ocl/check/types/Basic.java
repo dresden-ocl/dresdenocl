@@ -143,13 +143,13 @@ public class Basic implements Any {
   }
 
   protected Type navigateInteger(String name, Type[] params) {
-    if (name.equals("div") && params.length==1 && params[1]==INTEGER) {
+    if (name.equals("div") && params.length==1 && params[0]==INTEGER) {
       return INTEGER;
-    } else if (name.equals("mod") && params.length==1 && params[1]==INTEGER) {
+    } else if (name.equals("mod") && params.length==1 && params[0]==INTEGER) {
       return INTEGER;
-    } else if (name.equals("max") && params.length==1 && params[1]==INTEGER) {
+    } else if (name.equals("max") && params.length==1 && params[0]==INTEGER) {
       return INTEGER;
-    } else if (name.equals("min") && params.length==1 && params[1]==INTEGER) {
+    } else if (name.equals("min") && params.length==1 && params[0]==INTEGER) {
       return INTEGER;
     } else {
       return null;
