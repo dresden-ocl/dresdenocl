@@ -238,9 +238,9 @@ final class OclInjector implements InjectionConsumer
         o.write(cf.getResultVariable());
         o.write(".isTrue())\n          ");
         o.write(violationMakro);
-        o.write("(\"ocl invariant ");
+        o.write("(\"violated ocl invariant '");
         o.write(cf.getName());
-        o.write(" violated\");\n    }\n");
+        o.write("' on object '\"+this+\"'.\");\n    }\n");
       }
     }
     o.write('}');
@@ -367,9 +367,11 @@ final class OclInjector implements InjectionConsumer
               o.write(frag.getResultVariable());
               o.write(".isTrue())\n          ");
               o.write(violationMakro);
-              o.write("(\"ocl precondition ");
+              o.write("(\"violated ocl precondition '");
               o.write(frag.getName());
-              o.write(" violated\");\n      }\n");
+              o.write("' on object '\"+this+\"' operation '");
+              o.write(frag.getConstrainedOperation());
+              o.write("'.\");\n      }\n");
             }
           }
           for(Iterator i=sf.preparation.iterator(); i.hasNext(); )
@@ -408,9 +410,11 @@ final class OclInjector implements InjectionConsumer
             o.write(frag.getResultVariable());
             o.write(".isTrue())\n          ");
             o.write(violationMakro);
-            o.write("(\"ocl postcondition ");
+            o.write("(\"violated ocl postcondition '");
             o.write(frag.getName());
-            o.write(" violated\");\n      }\n");
+            o.write("' on object '\"+this+\"' operation '");
+            o.write(frag.getConstrainedOperation());
+            o.write("'.\");\n      }\n");
           }
         }
     }
@@ -442,13 +446,13 @@ final class OclInjector implements InjectionConsumer
   public void writeIteratorChecker(
       ClassAttribute cf,
       String contenttype, 
-      String createiterator) 
+      String createset)
     throws IOException
   {
     Writer o=output;
     o.write("    for(Iterator i=");
     o.write(cf.getName());
-    o.write(createiterator);
+    o.write(createset);
     o.write(".iterator(); i.hasNext(); )\n      if(!(i.next() instanceof ");
     o.write(contenttype);
     o.write("))\n        ");
