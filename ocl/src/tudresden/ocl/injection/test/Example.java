@@ -191,6 +191,7 @@ public abstract class Example implements Runnable
 
   public Integer[] getQualifiers()
   {
+    namedIntegers.put("10", new Integer(10));
     return qualifiers;
   }
 

@@ -8,6 +8,7 @@ inv: self.interfaces->includes(anInterface)
 inv: self.formats->includes(aFormat)
 inv: self.poly1(anInterface)=true
 inv: self.anInterface.someMethod(10)=0
+inv: self.namedIntegers->includes(10)
 
 context Example::getQualifiers()
 pre:  hallo='bello'

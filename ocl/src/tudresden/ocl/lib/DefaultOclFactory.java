@@ -65,6 +65,12 @@ public class DefaultOclFactory implements OclFactory {
         return new OclSequence(list);
       }
       throw new OclException("encountered a java.util.Collection, which is neither Set or List.");
+    } else if (o instanceof java.util.Map) {
+      java.util.Map om=(java.util.Map)o;
+      HashSet set=new HashSet();
+      for(Iterator i=om.values().iterator(); i.hasNext(); ) 
+        set.add(getOclRepresentationFor(i.next()));
+      return new OclSet(set);
     } else if (o instanceof Boolean)
       return getOclRepresentationFor( ((Boolean)o).booleanValue() );
     else if (o instanceof Integer)

@@ -43,10 +43,13 @@ public class DefaultReflectionAdapter implements ReflectionAdapter {
       return tudresden.ocl.check.types.Basic.REAL;
     } else if (c==Boolean.class || c==Boolean.TYPE) {
       return tudresden.ocl.check.types.Basic.BOOLEAN;
-    } else if(java.util.Collection.class.isAssignableFrom(c)) 
+    } else if(java.util.Collection.class.isAssignableFrom(c)||
+              java.util.Map.class.isAssignableFrom(c)) 
     {
       int collectionKind;
-      if(java.util.Set.class.isAssignableFrom(c) || (tudresden.ocl.lib.Ocl.TAKE_VECTORS_AS_SET && java.util.Vector.class.isAssignableFrom(c)))
+      if(java.util.Set.class.isAssignableFrom(c) || 
+         java.util.Map.class.isAssignableFrom(c) || 
+         (tudresden.ocl.lib.Ocl.TAKE_VECTORS_AS_SET && java.util.Vector.class.isAssignableFrom(c)))
         collectionKind=tudresden.ocl.check.types.Collection.SET;
       else if(java.util.List.class.isAssignableFrom(c))
         collectionKind=tudresden.ocl.check.types.Collection.SEQUENCE;
