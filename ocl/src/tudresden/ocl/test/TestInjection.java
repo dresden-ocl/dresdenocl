@@ -60,9 +60,16 @@ public class TestInjection
       ((RLObject)i.next()).assert();
   }
   
+  public void onViolation(String message)
+  {
+    System.out.println(message);
+  }
+  
+  static public TestInjection theInstance;
+  
   static public void main(String[] args)
   {
-    (new TestInjection()).doTest();
+    (theInstance=new TestInjection()).doTest();
   }
 
 }

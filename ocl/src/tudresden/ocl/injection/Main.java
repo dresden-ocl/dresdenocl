@@ -38,6 +38,7 @@ final class OclInjector implements InjectionConsumer
   private HashMap codefragments;
   private boolean delayinsertions;
   private boolean clean;
+  private String violationmakro;
 
   /**
      Collects all methods (ClassMethod) of the current class, except automatically generated methods.
@@ -75,6 +76,7 @@ final class OclInjector implements InjectionConsumer
     this.codefragments=conf.codefragments;
     this.delayinsertions=!conf.insertimmediatly;
     this.clean=conf.clean;
+    this.violationmakro=conf.violationmakro;
   }
   
   private String packagename;
@@ -206,7 +208,6 @@ final class OclInjector implements InjectionConsumer
   }
 
   public static final String INV_METHOD="checkOclInvariants";
-  public static final String violationMakro="System.out.println";
   public static final String CHECKING_FLAG="currently_checking_ocl";
 
   public final void writeInvariants(String classname) throws IOException
@@ -237,7 +238,7 @@ final class OclInjector implements InjectionConsumer
         o.write("        if(!");
         o.write(cf.getResultVariable());
         o.write(".isTrue())\n          ");
-        o.write(violationMakro);
+        o.write(violationmakro);
         o.write("(\"violated ocl invariant '");
         o.write(cf.getName());
         o.write("' on object '\"+this+\"'.\");\n    }\n");
@@ -366,7 +367,7 @@ final class OclInjector implements InjectionConsumer
               o.write("        if(!");
               o.write(frag.getResultVariable());
               o.write(".isTrue())\n          ");
-              o.write(violationMakro);
+              o.write(violationmakro);
               o.write("(\"violated ocl precondition '");
               o.write(frag.getName());
               o.write("' on object '\"+this+\"' operation '");
@@ -409,7 +410,7 @@ final class OclInjector implements InjectionConsumer
             o.write("        if(!");
             o.write(frag.getResultVariable());
             o.write(".isTrue())\n          ");
-            o.write(violationMakro);
+            o.write(violationmakro);
             o.write("(\"violated ocl postcondition '");
             o.write(frag.getName());
             o.write("' on object '\"+this+\"' operation '");
@@ -456,7 +457,7 @@ final class OclInjector implements InjectionConsumer
     o.write(".iterator(); i.hasNext(); )\n      if(!(i.next() instanceof ");
     o.write(contenttype);
     o.write("))\n        ");
-    o.write(violationMakro);
+    o.write(violationmakro);
     o.write("(\"element checker failed.\");\n");
   }
 
@@ -467,6 +468,7 @@ final class OclInjectorConfig
   HashMap codefragments=null;
   boolean insertimmediatly=false;
   boolean clean=false;
+  String violationmakro=null;
 }
 
 public class Main
@@ -680,6 +682,23 @@ public class Main
             return;
           }
         }
+        else if("--violation-makro".equals(args[i]))
+        {
+          if(conf.violationmakro!=null)
+          {
+            System.out.println("can use only one violation makro.");
+            System.out.println(usage);
+            return;
+          }
+          i++;
+          if(i>=args.length)
+          {
+            System.out.println("violation makro not given.");
+            System.out.println(usage);
+            return;
+          }
+          conf.violationmakro=args[i];
+        }
         else if("--modify".equals(args[i])||"-m".equals(args[i]))
           modify=true;
         else if("--clean".equals(args[i])||"-c".equals(args[i]))
@@ -705,7 +724,10 @@ public class Main
         System.out.println(usage);
         return;
       }
-  
+
+      if(conf.violationmakro==null)
+        conf.violationmakro="System.out.println";
+
       if(conf.clean)
         System.out.println("cleaning code.");
       else if(constraintfile==null)
