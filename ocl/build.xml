@@ -23,6 +23,7 @@ Enhancements by Steffen Zschaler.
 
   <property name="xerces.jar" value="${src.dir}/xerces.jar" />
   <property name="nsuml.jar"  value="${src.dir}/lib/nsuml.jar" />
+  <property name="jdom.jar"   value="${src.dir}/lib/jdom.jar" />
   <property name="junit.jar"  value="${src.dir}/junit.jar"  />
 
   <property file="local.properties" />
@@ -582,6 +583,8 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
       <classpath>
         <pathelement location="${xerces.jar}" />
         <pathelement location="${junit.jar}" />
+        <pathelement location="${nsuml.jar}" />
+        <pathelement location="${jdom.jar}" />
         <pathelement location="${src.dir}" />
         <pathelement location="${path.jar.ant}" />
       </classpath>
