@@ -47,9 +47,7 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
       return null;
 
     //System.out.println("getElementType(): "+field);
-    if(!java.util.Collection.class.isAssignableFrom(field.getType()))
-      System.out.println("warning: "+field+"is field has not a collection type.");
-    
+
     Class declaringclass=fieldclass;
     while(fieldclass.getDeclaringClass()!=null)
       declaringclass=fieldclass.getDeclaringClass();
@@ -166,6 +164,9 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
             Field f=current_classobject.getDeclaredField(cf.getName());
             elementtypes.put(f,c);
             //System.out.println("SourceReflectionFacade: put("+f+","+c+")");
+            if(!java.util.Collection.class.isAssignableFrom(f.getType()) &&
+               !java.util.Map.class.isAssignableFrom(f.getType()) )
+              System.out.println("warning: field "+f+" of element-type "+c+" is not a collection/map.");
           }
           catch(NoSuchFieldException e) { throw new RuntimeException(e.toString()); }
         }
