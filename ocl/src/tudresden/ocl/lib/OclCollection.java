@@ -613,8 +613,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
      Makes this instance represent an undefined value.
      This method is needed, since OclCollections are not immutable
      in this implementation.
-     @see setToInclude
-     @see setToRange
+     @see #setToInclude
+     @see #setToRange
      @throws RuntimeException if the collection is already undefined
   */
   protected void becomeUndefined(String undefinedreason)
