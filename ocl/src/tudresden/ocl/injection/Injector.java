@@ -436,7 +436,7 @@ public final class Injector
         (JavaBehaviour)new JavaConstructor(parent, modifiers, featurename) :
         new JavaMethod(parent, modifiers, featuretype, featurename, position_name_end);
       jb.setLastParameterStart(collector.length()+1);
-      parseMethod(jb);
+      parseBehaviour(jb);
       JavaFeature[] jbarray={jb};
       return jbarray;
     }
@@ -448,7 +448,7 @@ public final class Injector
     }
   }
 
-  private void parseMethod(JavaBehaviour jb)
+  private void parseBehaviour(JavaBehaviour jb)
     throws IOException, EndException, InjectorParseException
   {
     char c=readToken();

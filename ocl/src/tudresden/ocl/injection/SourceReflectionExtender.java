@@ -168,16 +168,16 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
     {
       if(cf instanceof JavaAttribute)
       {
-        String last_element_type=null;
-        String last_key_type=null;
+        String element_type=null;
+        String key_type=null;
         if(doccomment!=null)
         {
-          last_element_type=Injector.findDocTag(doccomment, "element-type");
-          last_key_type=    Injector.findDocTag(doccomment, "key-type");
+          element_type=Injector.findDocTag(doccomment, "element-type");
+          key_type=    Injector.findDocTag(doccomment, "key-type");
         }
-        if(last_element_type!=null)
+        if(element_type!=null)
         {
-          Class c=cf.getFile().findType(last_element_type);
+          Class c=cf.getFile().findType(element_type);
           //System.out.println("findType(element):"+c);
           if(c!=null)
           {
@@ -197,9 +197,9 @@ public class SourceReflectionExtender implements tudresden.ocl.check.types.Refle
             }
           }
         }
-        if(last_key_type!=null)
+        if(key_type!=null)
         {
-          Class c=cf.getFile().findType(last_key_type);
+          Class c=cf.getFile().findType(key_type);
           //System.out.println("findType(key):"+c);
           if(c!=null)
           {

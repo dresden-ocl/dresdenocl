@@ -198,31 +198,31 @@ final class OclInjector implements InjectionConsumer
           //observedFeatures.add(jf);
       }
 
-      String last_element_type=null;
-      String last_key_type=null;
+      String element_type=null;
+      String key_type=null;
       if(doccomment!=null)
       {
-        last_element_type=Injector.findDocTag(doccomment, "element-type");
-        last_key_type=    Injector.findDocTag(doccomment, "key-type");
+        element_type=Injector.findDocTag(doccomment, "element-type");
+        key_type=    Injector.findDocTag(doccomment, "key-type");
       }
 
       boolean notYetAddedToTypedAttributes=true;
-      if(last_element_type!=null)
+      if(element_type!=null)
       {
         if(jf instanceof JavaAttribute)
         {
-          ((JavaAttribute)jf).setElementType(last_element_type);
+          ((JavaAttribute)jf).setElementType(element_type);
           class_state.typedAttributes.add(jf);
           notYetAddedToTypedAttributes=false;
         }
         else 
           throw new InjectorParseException("encountered @element-type tag on non-attribute");
       }
-      if(last_key_type!=null)
+      if(key_type!=null)
       {
         if(jf instanceof JavaAttribute)
         {
-          ((JavaAttribute)jf).setKeyType(last_key_type);
+          ((JavaAttribute)jf).setKeyType(key_type);
           if(notYetAddedToTypedAttributes)
             class_state.typedAttributes.add(jf);
         }
