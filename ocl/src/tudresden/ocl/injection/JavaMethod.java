@@ -59,7 +59,7 @@ public final class JavaMethod extends JavaBehaviour
   public final void setLiteral(String literal)
   {
     int wsl=WRAPPER_SUFFIX.length();
-    if(WRAPPER_SUFFIX.equals(literal.substring(name_end-wsl, name_end)))
+    if(WRAPPER_SUFFIX.regionMatches(0, literal, name_end-wsl, wsl))
     {
       literal=
         literal.substring(0, name_end-wsl)+
