@@ -562,7 +562,7 @@ public class ORMappingImp implements ORMapping {
   	Guide guide;
   	Map assEndNameToGuidesList;
   	List tempList, tabList, pkTables, fkTables;
-  	Set fkSet;
+  	Set fkSet, fkSet2;
   	
   	while (i.hasNext()) {
   		ma = (ModelAssociation)i.next();
@@ -642,20 +642,20 @@ public class ORMappingImp implements ORMapping {
   				} else {
   					// 1:1 association
   					pkTables = getTableList((List)classesToTables.get(getClassName(mae1.getModelClass())));
-  					fkTables = getTableList((List)classesToTables.get(getClassName(mae2.getModelClass())));                              
+  					fkTables = getTableList((List)classesToTables.get(getClassName(mae2.getModelClass())));  
   					
   					// primary keys from mae1 into mae2 class
   					fkSet = buryForeignKeys(pkTables, fkTables, mae1.getName(), new HashSet());
-  					
-  					// guide
+                                        
+                                        // primary keys from mae2 into mae1 class
+  					fkSet2 = buryForeignKeys(fkTables, pkTables, mae2.getName(), new HashSet());
+                         
+    					// guide mae1 --> mae2
   					assEndNameToGuidesList = getAssEndMap(mae1.getModelClass());
-  					assEndNameToGuidesList.put(mae2.getName(), createGuideList(mae1.getModelClass(), mae2.getModelClass(), null, false, fkSet));
+  					assEndNameToGuidesList.put(mae2.getName(), createGuideList(mae1.getModelClass(), mae2.getModelClass(), null, false, fkSet2));
   					navGuides.put(getClassName(mae1.getModelClass()), assEndNameToGuidesList);
-  					
-  					// primary keys from mae2 into mae1 class
-  					fkSet = buryForeignKeys(fkTables, pkTables, mae2.getName(), new HashSet());
-  					 					
-  					// guide
+  							 					
+  					// guide mae2 --> mae1
   					assEndNameToGuidesList = getAssEndMap(mae2.getModelClass());
   					assEndNameToGuidesList.put(mae1.getName(), createGuideList(mae2.getModelClass(), mae1.getModelClass(), null, false, fkSet));
   					navGuides.put(getClassName(mae2.getModelClass()), assEndNameToGuidesList);
@@ -821,7 +821,9 @@ public class ORMappingImp implements ORMapping {
   						guide.add(getPrimaryKeyString(t2), t2.getTableName(), getForeignKeyString(t2, t1, fkSet));
 	  					guide.add(getPrimaryKeyString(t1), t1.getTableName(), getPrimaryKeyString(t1));
   					} else {
-  						guide.add(getPrimaryKeyString(t2), t2.getTableName(), getPrimaryKeyString(t2));
+  						//guide.add(getPrimaryKeyString(t2), t2.getTableName(), getPrimaryKeyString(t2));
+	  					//guide.add(getForeignKeyString(t1, t2, fkSet), t1.getTableName(), getPrimaryKeyString(t1));
+                                                guide.add(getPrimaryKeyString(t2), t2.getTableName(), getPrimaryKeyString(t2));
 	  					guide.add(getForeignKeyString(t1, t2, fkSet), t1.getTableName(), getPrimaryKeyString(t1));
 	  				}
 	  			}

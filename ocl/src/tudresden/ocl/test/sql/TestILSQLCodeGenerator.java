@@ -166,7 +166,7 @@ public class TestILSQLCodeGenerator extends TestCase {
 		
         public void testUniversityExampleInv() {
             String expres;
-            String genres
+            String genres;
             
             System.err.println("... generate university example invariants");
                         
