@@ -77,6 +77,15 @@ Enhancements by Steffen Zschaler.
     </sablecc>
   </target>
 
+  <target name="sablecc.clean">
+    <delete>
+      <fileset dir="${src.dir}/tudresden/ocl/parser/analysis" includes="*.java"/>
+      <fileset dir="${src.dir}/tudresden/ocl/parser/lexer"    includes="*.java,lexer.dat"/>
+      <fileset dir="${src.dir}/tudresden/ocl/parser/parser"   includes="*.java,parser.dat"/>
+      <fileset dir="${src.dir}/tudresden/ocl/parser/node"     includes="*.java"/>
+    </delete>
+  </target>
+
 
   <target name="compile"
           description="Compiles all java files into the source directory."
@@ -93,6 +102,12 @@ Enhancements by Steffen Zschaler.
         <pathelement location="${junit.jar}" />
       </classpath>
     </javac>
+  </target>
+
+  <target name="compile.clean">
+    <delete>
+      <fileset dir="${src.dir}/tudresden" includes="**/*.class" />
+    </delete>
   </target>
 
 
@@ -516,15 +531,9 @@ Enhancements by Steffen Zschaler.
 
   <target name="clean"
           description="Deletes all generated files except API documentation and distributions."
+          depends="sablecc.clean, compile.clean"
   >
     <delete dir="${build.dir}"/>
-    <delete>
-      <fileset dir="${src.dir}/tudresden" includes="**/*.class" />
-      <fileset dir="${src.dir}/tudresden/ocl/parser/analysis" includes="*.java"/>
-      <fileset dir="${src.dir}/tudresden/ocl/parser/lexer"    includes="*.java,lexer.dat"/>
-      <fileset dir="${src.dir}/tudresden/ocl/parser/parser"   includes="*.java,parser.dat"/>
-      <fileset dir="${src.dir}/tudresden/ocl/parser/node"     includes="*.java"/>
-    </delete>
   </target>
 
 
@@ -577,6 +586,11 @@ This software is published under the &lt;a href="http://www.gnu.org/copyleft/les
       </classpath>
     </javadoc>
 
+  </target>
+
+  <target name="docs.clean"
+          description="Removes Javadoc API documentation.">
+    <delete dir="${docs.dir}" />
   </target>
 
 
