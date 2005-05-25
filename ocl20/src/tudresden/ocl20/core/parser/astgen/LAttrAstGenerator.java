@@ -657,7 +657,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         // length()-1 is last character (index is 0-based), length()-2
         // drops trailing tick "'" character
         //
-        myAst.setStringSymbol(astValue.substring(1, astValue.length()-2));
+        myAst.setStringSymbol(astValue.substring(1, astValue.length()-1));
         return myAst;
     }    
 
