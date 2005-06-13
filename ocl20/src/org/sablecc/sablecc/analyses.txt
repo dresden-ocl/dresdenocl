@@ -369,9 +369,9 @@ Macro:LAttrEvalAdapterCaseBodyNode_customHeritage
             if ( childHrtg == null ) {
                 childHrtg = nodeHrtg.copy();
             }
-            if ( verbose) System.out.println("   descending into child '$0$' with custom heritage... ");
+            if (verbose) System.out.println("   descending into child '$0$' of alternative $1$ with custom heritage... ");
             ast$0$ = ($3$) child$0$.apply(this, childHrtg );
-            if ( verbose) System.out.println("   back from '$0$'.");
+            if (verbose) System.out.println("   back from '$0$'.");
         }
 $
 
@@ -388,9 +388,9 @@ Macro:LAttrEvalAdapterCaseBodyNode_defaultHeritage
         $2$ child$0$ = node.get$0$();
         $3$ ast$0$ = null;
         if( child$0$ != null) {
-            if ( verbose) System.out.println("   descending into child '$0$'... ");
+            if (verbose) System.out.println("   descending into child '$0$' of alternative $1$... ");
             ast$0$ = ($3$) child$0$.apply(this, nodeHrtg.copy());
-            if ( verbose) System.out.println("   back from '$0$'.");
+            if (verbose) System.out.println("   back from '$0$'.");
         }
 $
 
@@ -415,9 +415,9 @@ Macro:LAttrEvalAdapterCaseBodyList_customHeritage
                 if ( childHrtg == null ) {
                     childHrtg = nodeHrtg.copy();
                 }
-                if ( verbose) System.out.println("   descending into child '$0$' with custom heritage... ");
+                if (verbose) System.out.println("   descending into child '$0$' of alternative $1$ with custom heritage... ");
                 ast$0$ = ($3$) child$0$.apply(this, childHrtg );
-                if ( verbose) System.out.println("   back from '$0$'.");
+                if (verbose) System.out.println("   back from '$0$'.");
                 astList$0$.add(ast$0$);
             }
         }
@@ -439,9 +439,9 @@ Macro:LAttrEvalAdapterCaseBodyList_defaultHeritage
             Object temp[] = node.get$0$().toArray();
             for(int i = 0; i < temp.length; i++) {
                 child$0$ = ($2$) temp[i];
-                if ( verbose) System.out.println("   descending into child '$0$'... ");
+                if (verbose) System.out.println("   descending into child '$0$' of alternative $1$... ");
                 ast$0$ = ($3$) child$0$.apply(this, nodeHrtg.copy());
-                if ( verbose) System.out.println("   back from '$0$'.");
+                if (verbose) System.out.println("   back from '$0$'.");
                 astList$0$.add(ast$0$);
             }
         }
@@ -468,7 +468,9 @@ Macro:LAttrEvalAdapterCaseBodyList_makeTree
                 if ( childHrtg == null ) {
                     childHrtg = nodeHrtg.copy();
                 }
+                if (verbose) System.out.println("   descending into child '$0$' of alternative $1$... ");
                 astTree$0$ = ($3$) child$0$.apply(this, childHrtg);
+                if (verbose) System.out.println("   back from '$0$'.");
                 astPrevious$0$ = astTree$0$;
             }
         }
@@ -599,7 +601,7 @@ Macro:LAttrEvalAdapterCaseToken_default
 
     public final $1$ case$0$($0$ node, Object param) throws AttrEvalException {
         Token curTk = (Token) node;
-        if ( verbose) System.out.println("default token: '" + curTk.getText() + "', at " + curTk.getLine() + ":" + curTk.getPos() +"...  ");
+        if (verbose) System.out.println("default token: '" + curTk.getText() + "', at " + curTk.getLine() + ":" + curTk.getPos() +"...  ");
         this.setCurrentToken(curTk);
         return node.getText();
     }
@@ -614,10 +616,10 @@ Macro:LAttrEvalAdapterCaseToken_custom
 
     public final $1$ case$0$($0$ node, Object param) throws AttrEvalException {
         Token curTk = (Token) node;
-        if ( verbose) System.out.print("custom token: '" + curTk.getText() + "', at " + curTk.getLine() + ":" + curTk.getPos() +"...  ");
+        if (verbose) System.out.print("custom token: '" + curTk.getText() + "', at " + curTk.getLine() + ":" + curTk.getPos() +"...  ");
         this.setCurrentToken(curTk);
         $1$ result = createNodeFor_$0$(node, (Heritage) param);
-        if ( verbose) System.out.println("token node created.");
+        if (verbose) System.out.println("token node created.");
         return result;
     }
     public abstract $1$ createNodeFor_$0$($0$ node, Heritage nodeHrtg) throws AttrEvalException;
