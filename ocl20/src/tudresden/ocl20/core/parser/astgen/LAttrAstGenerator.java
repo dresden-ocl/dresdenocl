@@ -33,6 +33,7 @@ import tudresden.ocl20.parser.astlib.*;
 import tudresden.ocl20.parser.sablecc.analysis.*;
 import tudresden.ocl20.parser.sablecc.node.*;
 import tudresden.ocl20.parser.util.SimpleMessageSink;
+import tudresden.ocl20.parser.util.ListTransformer;
 
 import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
 import tudresden.ocl20.jmi.uml15.core.CorePackage;
@@ -76,18 +77,70 @@ import tudresden.ocl20.jmi.ocl.commonmodel.Package;
  */
 public class LAttrAstGenerator extends LAttrEvalAdapter {
     
-    
-    /** Never use this member directly, call EMPTY_LIST() instead. */
-    private static final List __EMPTY_LIST = new ArrayList();
-    /** Returns an empty list. */
-    private static List EMPTY_LIST() {
-        // safety net in case client code modifies the empty list instance
-        if ( __EMPTY_LIST.size() != 0 ) {
-            __EMPTY_LIST.clear();
+    private static class TrActualParamListToIteratorVarsList implements ListTransformer {
+        private NodeFactory factory = null;
+        private Classifier defaultVarType = null;
+        
+        public TrActualParamListToIteratorVarsList(NodeFactory factory) {
+            this.factory = factory;
         }
-        return __EMPTY_LIST;
-    }
+        
+        public void setDefaultType(Classifier t) {
+            defaultVarType = t;
+        }
 
+        /**
+         * Transforms list of VariableDeclaration instances into a list of 
+         * VariableDeclarations for iterator variables and checks that all
+         * instances of the input list indeed have a variable type set.
+         *
+         * Input: List of VariableDeclaration instances. <br>
+         * Output: List of VariableDeclaration instances with type field set to
+         *      default variable type if no type specified.
+         */
+        public List transform(List param) throws AttrEvalException {
+            List result = new LinkedList();
+            Iterator it = param.iterator();
+            while ( it.hasNext() ) {
+                Object obj = it.next();
+                assert (obj instanceof OclActualParameterListItem):
+                    "Expecting objects of type OclActualParameterListItem but found " + obj.getClass().getName();
+                OclActualParameterListItem item = (OclActualParameterListItem) obj;
+                boolean isFormalParameter = item.isFormalParameter();
+                boolean isSimpleName = item.isSimpleName();
+                boolean isValid = (isFormalParameter | isSimpleName );
+                if ( ! isValid ) {
+                    throw new AttrEvalException("Iterator variables must not have an initial value");
+                }
+                assert ( defaultVarType != null ):
+                    "Default variable type must be set for iterator variable transformation";
+                VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
+                if ( isFormalParameter ) {
+                    OclFormalParameter fp = item.getFormalParameterValue();
+                    vd.setNameA(fp.getName());
+                    Classifier type = fp.getType();
+                    assert ( type != null ):
+                        "'type' of a formal parameter must be defined, but is not for iterator variable '" +
+                            fp.getName() +"'";
+                    vd.setType(type);
+                } else if ( isSimpleName ) {
+                    String name = item.getSimpleNameValue();
+                    vd.setNameA(name);
+                    vd.setType(defaultVarType);
+                }
+                result.add(vd);
+            }
+            defaultVarType = null;
+            return result;
+        }
+    }
+    
+    
+    
+    //
+    //  ===== private attributes =====
+    //
+    
     private SimpleMessageSink logger = null;
     
     private OclModel model = null;
@@ -103,8 +156,66 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     
     private Comparator cmpByName = new CmpModelElementByName();
     
-    private static final String noMatchingRuleMessage = 
+    private static final String noMatchingRuleMessage =
             "No matching attribute evaluation rule(s) for this expression";
+    
+    /** ActualParameterList to Iterator Variable List */
+    private TrActualParamListToIteratorVarsList transAPL2IVL = null;
+    /** ActualParameterList to Expression List */
+    private ListTransformer transAPL2ExpL = null;
+
+    /** Never use this member directly, call EMPTY_LIST() instead. */
+    private static final List __EMPTY_LIST = new ArrayList();
+    /** Returns an empty list. */
+    private static List EMPTY_LIST() {
+        // safety net in case client code modifies the empty list instance
+        if ( __EMPTY_LIST.size() != 0 ) {
+            __EMPTY_LIST.clear();
+        }
+        return __EMPTY_LIST;
+    }
+    
+    //
+    //  ===== constructor and private convenience methods =====
+    //
+    
+    /**
+     * Creates new ASTGenerator 
+     *
+     * @param context   The OclModel instance which forms the "external" context
+     *                  of the OCL expression for which the AST should be
+     *                  computed.
+     */
+    public LAttrAstGenerator(OclModel context) {
+        this.model = context;
+        this.helper = new OclModelHelper(model);        
+        this.topPackage = this.model.getTopPackage();
+        this.library = this.model.getOclLibrary();
+        this.expFactory = this.model.getOclExpressionFactory();
+        this.stdLibFactory = JmiOclFactory.getInstance(model.getModel());
+        this.typeEval = new TypeEvaluator(model);
+        NodeFactory nodeFactory = new NodeFactory(helper, context);
+        this.setNodeFactory(nodeFactory);
+        this.transAPL2IVL = new TrActualParamListToIteratorVarsList(nodeFactory);
+    }
+    
+    /**
+     * Sets the message sing to which debug and informative messages should be 
+     * logged.
+     */
+    public void setMessageSink(SimpleMessageSink sink) {
+        logger = sink;
+    }
+    
+    /**
+     * Logs a message to the message sink connected to this AST generator 
+     * instance. If no message sink is connected, this method does nothing.
+     */
+    protected void log(String msg) {
+        if ( logger != null ) {
+            logger.processMessage(msg);
+        }        
+    }
 
     
     /**
@@ -380,7 +491,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         AssociationEndCallExp result = (AssociationEndCallExp) factory.createNode("AssociationEndCallExp");
         if ( qualifiers != null ) {
             result.getQualifiers().clear();
-            result.getQualifiers().addAll(qualifiers);            
+            result.getQualifiers().addAll(qualifiers);
         }
         result.setReferredAssociationEnd(referredAssociationEnd);
         source = processTimeExpression(source, astTime);        
@@ -413,7 +524,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
      * given list of OclMessageArg parameters
      */
     protected OclMessageExp createMessageExp(OclExpression target, String name, List params) throws AttrEvalException {
-        List paramTypes = getTypesForParameters(params);            
+        List paramTypes = getTypesForParameters(params);
         int numParams = params.size(); 
 
         Classifier targetType = obtainType(target);
@@ -526,45 +637,6 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     }
     
     
-    
-    
-    /**
-     * Creates new ASTGenerator 
-     *
-     * @param context   The OclModel instance which forms the "external" context
-     *                  of the OCL expression for which the AST should be
-     *                  computed.
-     */
-    public LAttrAstGenerator(OclModel context) {
-        this.model = context;
-        this.helper = new OclModelHelper(model);        
-        this.topPackage = this.model.getTopPackage();
-        this.library = this.model.getOclLibrary();
-        this.expFactory = this.model.getOclExpressionFactory();
-        this.stdLibFactory = JmiOclFactory.getInstance(model.getModel());
-        this.typeEval = new TypeEvaluator(model);
-        this.setNodeFactory(new NodeFactory(helper, context));
-        // completeMetamodel();
-    }
-    
-    /**
-     * Sets the message sing to which debug and informative messages should be 
-     * logged.
-     */
-    public void setMessageSink(SimpleMessageSink sink) {
-        logger = sink;
-    }
-    
-    /**
-     * Logs a message to the message sink connected to this AST generator 
-     * instance. If no message sink is connected, this method does nothing.
-     */
-    protected void log(String msg) {
-        if ( logger != null ) {
-            logger.processMessage(msg);
-        }        
-    }
-    
     // ======================================================================
     //
     //    Following: attribute evaluation rules for OCL2.0 grammar rules
@@ -654,7 +726,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         //
         // substring() returns string starting at start index (0-based)
         // and extends up to, but not including character at end index.
-        // length()-1 is last character (index is 0-based), length()-2
+        // length()-1 is last character (index is 0-based), length()-1
         // drops trailing tick "'" character
         //
         myAst.setStringSymbol(astValue.substring(1, astValue.length()-1));
@@ -800,7 +872,10 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             } else if ( astElement.isFormalParameter() ) {
                 OclFormalParameter fp = astElement.getFormalParameterValue();
                 vd.setNameA(fp.getName());
-                vd.setType(fp.getType());
+                Classifier type = fp.getType();
+                assert ( type != null ):
+                    "'type' of a formal parameter must be defined, but is not for iterator variable '" + fp.getName() + "'";
+                vd.setType(type);
             }
             astTail.add(0, astElement);
         } else {
@@ -1662,7 +1737,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                 assert (srcType != null): "source type must not be null";
                 Operation refOp = srcType.lookupOperation(nameHead, parameterTypes);
                 assertParserCondition( refOp != null, "operation " + nameHead + 
-                    "does not exist for source type " + srcType.getNameA());
+                    " does not exist for source type " + srcType.getNameA());
                 
                 // create and initialize node 
                 OperationCallExp opex = (OperationCallExp) factory.createNode("OperationCallExp");
@@ -2168,12 +2243,25 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         
         if ( consElem instanceof Attribute ) {
             Attribute consAttr = (Attribute) consElem;
+            
+
+            if ( consAttr instanceof tudresden.ocl20.jmi.uml15.core.Attribute ) {
+                tudresden.ocl20.jmi.uml15.core.Attribute consAttrUml = 
+                    (tudresden.ocl20.jmi.uml15.core.Attribute) consAttr;
+                assert ( expOcl instanceof tudresden.ocl20.jmi.uml15.datatypes.Expression ):
+                    "expressions for initial value of UML15 Attribute must be UML15 Expression instances";
+                tudresden.ocl20.jmi.uml15.datatypes.Expression expUml = 
+                    (tudresden.ocl20.jmi.uml15.datatypes.Expression) expOcl;
+                consAttrUml.setInitialValue(expUml);
+            } else {
+                log("Warning: missing method 'setInitialValue' in tudresden.ocl20.jmi.ocl.commonmodel.Attribute " +
+                    "prevents support for initial value constraints in models not based on UML15 metamodel");
+            }
+
             // @@TODO@@ attach "expression in ocl" to constrained attribute (as attribute's initial value)
             // consAttr.setInitialValue(expOcl);
 //            throw new AttrEvalException("Missing method 'setInitialValue' in tudresden.ocl20.jmi.ocl.commonmodel.Attribute " +
 //                "prevents support for initial value constraints.");
-            log("Warning: missing method 'setInitialValue' in tudresden.ocl20.jmi.ocl.commonmodel.Attribute " +
-                "prevents support for initial value constraints");
         } else {
             throw new AttrEvalException("Unsupported constrained element " +
                 "type '" + consElem.getClass().getName() + "'");
@@ -2474,14 +2562,14 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
 
         OclExpression source = hrtg.getCurrentSourceExpression();
         assert ( source != null ):
-            "source expression must not be null";
+            "source expression must not be null";   // already checked in computeEnvFor_Body
         
         Classifier sourceType = obtainType(source);
-        assert ( sourceType != null ):
+        assert ( sourceType != null ):              // already checked in computeEnvFor_Body
             "type of source expression must not be null";
             
         boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
-        assert ( sourceIsCollection ):
+        assert ( sourceIsCollection ):              // already checked in computeEnvFor_Body
             "source expression must have a collection type for IteratorExp";
             
         // for "one" and "isUnique", only one iterator is allowed
@@ -2498,28 +2586,25 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         CollectionType collType = (CollectionType) sourceType;
         Classifier elemType = collType.getElementType();
         
+        this.transAPL2IVL.setDefaultType(elemType);
+        List transformedIterators = this.transAPL2IVL.transform(astIterators);
+        
         // initialize ast node's attributes
         Collection iteratorsInExp = myAst.getIterators();
         iteratorsInExp.clear();        
-        if ( ( astIterators != null ) && ( astIterators.size() > 0 ) ) {
-            iteratorsInExp.addAll(astIterators);
+        if ( ( transformedIterators != null ) && ( transformedIterators.size() > 0 ) ) {
+            Iterator itAstIt = transformedIterators.iterator();
+            while ( itAstIt.hasNext() ) {
+                VariableDeclaration vd = (VariableDeclaration) itAstIt.next();
+                iteratorsInExp.add(vd);
+            }
         } else {
             // if no iterator variable is explicitly given, we have to create   
             // one  
             VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
             vd.setNameA(this.anonIterVars.getNextAsString());
+            vd.setType(elemType);
             iteratorsInExp.add(vd);
-        }
-        // assert all vardecls have a type, either explicitly declared or
-        // implicitly derived from the collection's element type
-        Iterator itIt = iteratorsInExp.iterator();
-        while ( itIt.hasNext() ) {
-            VariableDeclaration curVd = (VariableDeclaration) itIt.next();
-            Classifier curType = curVd.getType();            
-            if ( curType == null ) {
-                // set type from collections element type 
-                curVd.setType(elemType);
-            }
         }
         
         Classifier bodyType = obtainType(astBody);
@@ -2541,10 +2626,29 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     public Heritage insideAIterateArrowPropertyCallExpCs_computeHeritageFor_Body(AIterateArrowPropertyCallExpCs parent, PExpression child, Heritage parentHrtgCopy, String astIterate, List astIterators, VariableDeclaration astAccumulator) throws AttrEvalException {
         Environment oldEnv = parentHrtgCopy.getEnv();
         WritableEnvironment newEnv = oldEnv.nestedEnvironment();
-        Iterator it = astIterators.iterator();
+
+        OclExpression source = parentHrtgCopy.getCurrentSourceExpression();
+        assert ( source != null ):
+            "source expression must not be null";
+        
+        Classifier sourceType = obtainType(source);
+        assert ( sourceType != null ):
+            "type of source expression must not be null";
+            
+        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+        assert ( sourceIsCollection ):
+            "source expression must have a collection type for IterateExp";
+            
+        CollectionType collType = (CollectionType) sourceType;
+        Classifier elemType = collType.getElementType();
+
+        this.transAPL2IVL.setDefaultType(elemType);
+        List convertedIterators = this.transAPL2IVL.transform(astIterators);
+        Iterator it = convertedIterators.iterator();
+        
         try {
             while ( it.hasNext() ) {
-                VariableDeclaration vd = (VariableDeclaration) it.next();
+                VariableDeclaration vd = ( VariableDeclaration ) it.next();
                 newEnv.addElement(vd.getNameA(), vd, true);
             }
             newEnv.addElement(astAccumulator.getNameA(), astAccumulator, true);
@@ -2552,7 +2656,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             rethrowDNE(dne, "creation of environment for body of IterateExp");
         }        
         parentHrtgCopy.setEnv(newEnv);        
-        parentHrtgCopy.setContextIsIteratorVarDecl(false);
+        parentHrtgCopy.setContextIsIteratorVarDecl(true);
         return parentHrtgCopy;
     }
         
@@ -2574,6 +2678,9 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             
         CollectionType collType = (CollectionType) sourceType;
         Classifier elemType = collType.getElementType();
+
+        this.transAPL2IVL.setDefaultType(elemType);
+        List transformedIterators = this.transAPL2IVL.transform(astIterators);
         
         myAst.setNameA(astIterate);
         myAst.setResult(astAccumulator);
@@ -2582,8 +2689,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         
         Collection iteratorsInExp = myAst.getIterators();
         iteratorsInExp.clear();
-        if ( ( astIterators != null ) && ( astIterators.size() > 0 ) ) {
-            iteratorsInExp.addAll(astIterators);
+        if ( ( transformedIterators != null ) && ( transformedIterators.size() > 0 ) ) {
+            iteratorsInExp.addAll(transformedIterators);
         } else {
             VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
             vd.setNameA(this.anonIterVars.getNextAsString());
@@ -2639,6 +2746,17 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     public Heritage insideAIteratorArrowPropertyCallExpCs_computeHeritageFor_Iterators(AIteratorArrowPropertyCallExpCs parent, PIteratorVarsCs child, Heritage parentHrtgCopy, String astName) throws AttrEvalException {
         parentHrtgCopy.setContextIsIteratorVarDecl(true);
         return parentHrtgCopy;
+    }
+    
+    
+    public List computeAstFor_APropertyCallParametersCs(Heritage nodeHrtg,
+            List astParamList) throws AttrEvalException {
+        // ensure that myAst is not null, if it is, return an empty list
+        if ( astParamList == null ) {
+            return (List) factory.createNode("List");
+        } else {
+            return astParamList;
+        }
     }
     
     
@@ -2713,7 +2831,6 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         }
     }
 
-
     public Heritage insideAIteratorVarsCs_computeHeritageFor_Iterators(AIteratorVarsCs parent, PActualParameterListCs child, Heritage parentHrtgCopy) throws AttrEvalException {
         parentHrtgCopy.setContextIsIteratorVarDecl(true);
         return parentHrtgCopy;
@@ -2722,10 +2839,29 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     public Heritage insideAIteratorArrowPropertyCallExpCs_computeHeritageFor_Body(AIteratorArrowPropertyCallExpCs parent, PExpression child, Heritage parentHrtgCopy, String astName, List astIterators) throws AttrEvalException {
         Environment oldEnv = parentHrtgCopy.getEnv();
         WritableEnvironment newEnv = oldEnv.nestedEnvironment();
-        Iterator it = astIterators.iterator();
+        
+        OclExpression source = parentHrtgCopy.getCurrentSourceExpression();
+        Classifier sourceType = obtainType(source);
+        assert ( sourceType != null ): 
+            "type of source expression must not be null";
+            
+        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+        if ( ! sourceIsCollection ) {
+            throw new AttrEvalException("Source expression must have a collection type for IteratorExp");
+        }
+
+        CollectionType collType = (CollectionType) sourceType;
+        Classifier elemType = collType.getElementType();
+            
+        this.transAPL2IVL.setDefaultType(elemType);
+        List transformedIterators = this.transAPL2IVL.transform(astIterators);
+        
+        Iterator it = transformedIterators.iterator();
         try {
             while ( it.hasNext() ) {
-                VariableDeclaration vd = (VariableDeclaration) it.next();
+                Object o = it.next();
+                // System.out.println("object type: " + o.getClass().getName());
+                VariableDeclaration vd = (VariableDeclaration) o;
                 newEnv.addElement(vd.getNameA(), vd, true);
             }
         } catch (DuplicateNameException dne) {
