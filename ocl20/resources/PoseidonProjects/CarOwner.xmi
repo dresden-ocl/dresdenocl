@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8' ?>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Jan 06 09:44:37 CET 2005'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Jun 02 10:21:02 CEST 2005'>
   <XMI.header>
     <XMI.documentation>
       <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
@@ -23,6 +23,14 @@
               <UML:Classifier.feature>
                 <UML:Attribute xmi.id = 'I1e4a47emfdc84d14a1mm7fa8' name = 'model' visibility = 'public'
                   isSpecification = 'false' ownerScope = 'instance' changeability = 'changeable'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = 'I771eebm1043c19111cmm7e15'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'I771eebm1043c19111cmm7e14' lower = '1'
+                          upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
                   <UML:StructuralFeature.type>
                     <UML:Class xmi.idref = 'Id4c5a0m100f5e86befmm7e80'/>
                   </UML:StructuralFeature.type>
@@ -30,6 +38,14 @@
                 <UML:Attribute xmi.id = 'I1e4a47emfde2082715mm7ff7' name = 'productionDate'
                   visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
                   changeability = 'changeable'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = 'I771eebm1043c19111cmm7e13'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'I771eebm1043c19111cmm7e12' lower = '1'
+                          upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
                   <UML:StructuralFeature.type>
                     <UML:Class xmi.idref = 'Id4c5a0m100f5e86befmm7e80'/>
                   </UML:StructuralFeature.type>
