@@ -341,11 +341,11 @@ Productions
 //           {custom} [lhs]:attr_name l_arrow custom depend_specifier validate? semicolon
 //         ;              
 
-    attr_name =
-        P.external_name [name_tail]:attr_name_tail* ;
+//     attr_name =
+//         P.external_name [name_tail]:attr_name_tail* ;
 
-    attr_name_tail =
-        dot P.external_name;
+//     attr_name_tail =
+//         dot P.external_name;
 
 //     depend_specifier = 
 //         depends_on l_brace [names]:attr_name* r_brace;
