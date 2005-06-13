@@ -569,7 +569,8 @@ Productions
     ;
 
   arrow_property_call_exp_cs <PropertyCallExp> =
-      {iterate} <IterateExp> T.iterate
+      {iterate} <IterateExp> 
+                T.iterate 
                 paren_open
                 [iterators]:iterate_vars_cs?
                 [accumulator]:initialized_variable_cs
@@ -622,8 +623,9 @@ Productions
         bracket_close #chain
     ;
 
+  
   property_call_parameters_cs <List> =
-        paren_open [param_list]:actual_parameter_list_cs? #customheritage paren_close #chain 
+        paren_open [param_list]:actual_parameter_list_cs? #customheritage paren_close #nocreate
     ;
 
   signal_spec_exp_cs <OclSignalSpec> =
