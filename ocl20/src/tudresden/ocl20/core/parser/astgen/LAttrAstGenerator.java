@@ -164,17 +164,6 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     /** ActualParameterList to Expression List */
     private ListTransformer transAPL2ExpL = null;
 
-    /** Never use this member directly, call EMPTY_LIST() instead. */
-    private static final List __EMPTY_LIST = new ArrayList();
-    /** Returns an empty list. */
-    private static List EMPTY_LIST() {
-        // safety net in case client code modifies the empty list instance
-        if ( __EMPTY_LIST.size() != 0 ) {
-            __EMPTY_LIST.clear();
-        }
-        return __EMPTY_LIST;
-    }
-    
     //
     //  ===== constructor and private convenience methods =====
     //
@@ -1260,7 +1249,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             Classifier opType = typeEval.getType(astOperand);
             myAst.setSrcType(opType);
             
-            Operation op = opType.lookupOperation(astOperator, EMPTY_LIST());
+            Operation op = opType.lookupOperation(astOperator, Collections.EMPTY_LIST);
             if ( op == null ) {
                 throw new AttrEvalException("No unary (prefix) operation '" + astOperator + 
                     "' in classifier '" + opType.getNameA() + "'");
