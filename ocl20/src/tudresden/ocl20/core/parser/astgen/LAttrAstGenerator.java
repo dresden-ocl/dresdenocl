@@ -161,8 +161,6 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     
     /** ActualParameterList to Iterator Variable List */
     private TrActualParamListToIteratorVarsList transAPL2IVL = null;
-    /** ActualParameterList to Expression List */
-    private ListTransformer transAPL2ExpL = null;
 
     //
     //  ===== constructor and private convenience methods =====
