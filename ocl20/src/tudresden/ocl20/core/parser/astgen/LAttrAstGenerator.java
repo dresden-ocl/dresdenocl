@@ -682,29 +682,36 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         return helper.createBooleanLiteral(astTrue.booleanValue());
     }
     
-    //      IntegerLiteralExp           
-    public IntegerLiteralExp computeAstFor_AIntegerLiteralExpCs(IntegerLiteralExp myAst, Heritage nodeHrtgCopy, Integer astValue) {
-        myAst.setIntegerSymbol(astValue.intValue());
-        return myAst;
-    }
     
     //      RealLiteralExp              
-    public RealLiteralExp computeAstFor_ARealLiteralExpCs(RealLiteralExp myAst, Heritage nodeHrtgCopy, Integer astInteger, String astFraction, String astExponent) throws AttrEvalException {
-        String realLiteralStr = astInteger.toString();      // grammar ensures != null
-        if ( astFraction != null ) { 
-            realLiteralStr += astFraction;
-        }        
-        if ( astExponent != null ) {                        // grammar ensures != null
-            realLiteralStr += astExponent;
+    public NumericLiteralExp computeAstFor_ANumericLiteralExpCs(Heritage nodeHrtgCopy, Integer astInteger, String astFraction, String astExponent) throws AttrEvalException {
+        boolean hasFraction = ( astFraction != null );
+        boolean hasExponent = ( astExponent != null );
+        
+        if ( hasFraction || hasExponent ) {
+            // this is a real literal, create instance of RealLiteralExp
+            RealLiteralExp result = (RealLiteralExp) factory.createNode("RealLiteralExp");
+            
+            String realLiteralStr = astInteger.toString();      // grammar ensures != null
+            if ( hasFraction ) { 
+                realLiteralStr += astFraction;
+            }        
+            if ( hasExponent  ) {                        // grammar ensures != null
+                realLiteralStr += astExponent;
+            }
+            double realLiteralValue = 0.0;
+            try { 
+                realLiteralValue = java.lang.Double.valueOf(realLiteralStr).doubleValue();
+            } catch (NumberFormatException nfe) {
+                throw new AttrEvalException("Invalid numeric format for real literal", nfe);
+            }
+            result.setRealSymbol(realLiteralValue);
+            return result;
+        } else {
+            IntegerLiteralExp result = (IntegerLiteralExp) factory.createNode("IntegerLiteralExp");
+            result.setIntegerSymbol(astInteger.intValue());
+            return result;
         }
-        double realLiteralValue = 0.0;
-        try { 
-            realLiteralValue = java.lang.Double.valueOf(realLiteralStr).doubleValue();
-        } catch (NumberFormatException nfe) {
-            throw new AttrEvalException("Invalid numeric format for real literal", nfe);
-        }
-        myAst.setRealSymbol(realLiteralValue);
-        return myAst;
     }
 
     //      StringLiteralExp            
@@ -1188,7 +1195,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     public OperationCallExp computeAstFor_ABinaryRelationalExpCs(OperationCallExp myAst, Heritage nodeHrtgCopy, OclExpression astOperand, OclBinaryExpTail astTail) throws AttrEvalException {
         try {
             myAst.setSource(astOperand);
-            Classifier opType = typeEval.getType(astOperand);
+            Classifier opType = obtainType(astOperand);
+            assert (opType != null): "type of left operand is null";
             myAst.setSrcType(opType);
             String operator = astTail.getOperator();
             OclExpression rightOperand = astTail.getOperand();
