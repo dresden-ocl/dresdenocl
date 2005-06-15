@@ -779,6 +779,9 @@ public class OCL20GUI extends javax.swing.JFrame implements SimpleMessageSink {
         } catch (Throwable t) {
             oclModel.endTrans(true);
             String message = t.getMessage();
+            if ( message == null ) {
+                message = "No exception detail message available";
+            }
             String position = null;
             Token tk = astgen.getCurrentToken();
             if ( tk != null ) {
