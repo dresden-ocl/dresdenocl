@@ -453,6 +453,8 @@ Productions
         [integer]:integer_literal
         [fraction]:real_fraction?
         [exponent]:real_exponent
+            // ^ mandatory to prevent reduce/reduce conflict with 
+            // integer_literal_exp_cs
     ;
   integer_literal_exp_cs <IntegerLiteralExp> =
         [value]:integer_literal
