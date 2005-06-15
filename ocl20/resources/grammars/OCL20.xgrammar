@@ -444,21 +444,16 @@ Productions
    ;
 
   primitive_literal_exp_cs <PrimitiveLiteralExp> =
-      {integer} integer_literal_exp_cs  #chain
-    | {real} real_literal_exp_cs        #chain
+      {numeric} numeric_literal_exp_cs  #chain
     | {string} string_literal_exp_cs    #chain
     | {boolean} boolean_literal_exp_cs  #chain
     ;
-  real_literal_exp_cs <RealLiteralExp> =
+  numeric_literal_exp_cs <NumericLiteralExp> =
         [integer]:integer_literal
         [fraction]:real_fraction?
-        [exponent]:real_exponent
-            // ^ mandatory to prevent reduce/reduce conflict with 
-            // integer_literal_exp_cs
+        [exponent]:real_exponent?       #nocreate
     ;
-  integer_literal_exp_cs <IntegerLiteralExp> =
-        [value]:integer_literal
-    ;
+
   string_literal_exp_cs <StringLiteralExp> =
         [value]:string_literal
     ;
