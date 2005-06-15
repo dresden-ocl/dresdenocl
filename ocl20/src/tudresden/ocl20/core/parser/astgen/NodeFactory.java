@@ -79,6 +79,7 @@ public class NodeFactory extends Object {
         c.put("BooleanLiteralExp",      new Ctor() { public Object cr() { return f.createBooleanLiteralExp(); } } );
         c.put("StringLiteralExp",       new Ctor() { public Object cr() { return f.createStringLiteralExp(); } } );
         c.put("RealLiteralExp",         new Ctor() { public Object cr() { return f.createRealLiteralExp(); } } );
+        c.put("CollectionLiteralExp",   new Ctor() { public Object cr() { return f.createCollectionLiteralExp(); } } );
         c.put("List",                   new Ctor() { public Object cr() { return new java.util.LinkedList(); } } ); 
 
         c.put("OclFormalParameter",     new Ctor() { public Object cr() { return new OclFormalParameter(); } } );        
