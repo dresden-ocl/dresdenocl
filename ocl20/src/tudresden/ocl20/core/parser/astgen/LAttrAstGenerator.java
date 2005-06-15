@@ -2841,7 +2841,13 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         Classifier elemType = collType.getElementType();
             
         this.transAPL2IVL.setDefaultType(elemType);
-        List transformedIterators = this.transAPL2IVL.transform(astIterators);
+        List transformedIterators = null;
+        // iterators available?
+        if ( astIterators != null ) {
+           transformedIterators = this.transAPL2IVL.transform(astIterators);
+        } else {
+            transformedIterators = Collections.EMPTY_LIST;
+        }
         
         Iterator it = transformedIterators.iterator();
         try {
