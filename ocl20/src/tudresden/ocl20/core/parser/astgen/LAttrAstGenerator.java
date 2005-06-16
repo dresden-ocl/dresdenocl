@@ -159,6 +159,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     private static final String noMatchingRuleMessage =
             "No matching attribute evaluation rule(s) for this expression";
     
+    private static final String ANONYMOUS_ITERATOR_NAME = "";
+    
     /** ActualParameterList to Iterator Variable List */
     private TrActualParamListToIteratorVarsList transAPL2IVL = null;
 
@@ -1396,7 +1398,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         
         OclExpression result = null;
         
-        // 0. check for "contextIsIteratorVarDecl" => create iterator variable exp 
+        // 0a. check for "contextIsIteratorVarDecl" => create iterator variable exp 
         if ( hrtg.isContextIsIteratorVarDecl() ) {
             assertParserCondition( astTime == null, "time expression not allowed here");
             assertParserCondition( numNameElements == 1, "only simple names allowed here, but found " + 
@@ -1405,7 +1407,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             exp.setNameA((String) astName.get(0));
             return exp;
         }
-        // 0a. check for "contextIsOclOpWithTypeArg" => create type argument 
+        // 0b. check for "contextIsOclOpWithTypeArg" => create type argument 
         if ( hrtg.isContextIsOclOpWithTypeArg() ) {
             assertParserCondition( astTime == null, "time expression not allowed here");
             Classifier cls = lookupClassifier(astName, hrtg.getEnv(), "lookup of classifier as type argument");
@@ -2623,6 +2625,59 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     //
     // ======================================================================== 
     
+    public Heritage insideAIteratorArrowPropertyCallExpCs_computeHeritageFor_Iterators(AIteratorArrowPropertyCallExpCs parent, PIteratorVarsCs child, Heritage parentHrtgCopy, String astName) throws AttrEvalException {
+        parentHrtgCopy.setContextIsIteratorVarDecl(true);
+        return parentHrtgCopy;
+    }
+    
+    public Heritage insideAIteratorArrowPropertyCallExpCs_computeHeritageFor_Body(AIteratorArrowPropertyCallExpCs parent, PExpression child, Heritage parentHrtgCopy, String astName, List astIterators) throws AttrEvalException {
+        Environment oldEnv = parentHrtgCopy.getEnv();
+        WritableEnvironment newEnv = oldEnv.nestedEnvironment();
+        
+        OclExpression source = parentHrtgCopy.getCurrentSourceExpression();
+        Classifier sourceType = obtainType(source);
+        assert ( sourceType != null ): 
+            "type of source expression must not be null";
+            
+        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+        if ( ! sourceIsCollection ) {
+            throw new AttrEvalException("Source expression must have a collection type for IteratorExp");
+        }
+
+        CollectionType collType = (CollectionType) sourceType;
+        Classifier elemType = collType.getElementType();
+        assert ( elemType != null ):
+            "element type of source collection is null";
+            
+        this.transAPL2IVL.setDefaultType(elemType);
+        List transformedIterators = null;
+        // iterators available?
+        if ( astIterators != null ) {
+            transformedIterators = this.transAPL2IVL.transform(astIterators);
+        }
+        if ( astIterators == null || astIterators.size() == 0 ) {
+            transformedIterators = new ArrayList(1);
+            VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
+            vd.setType(elemType);
+            vd.setNameA(ANONYMOUS_ITERATOR_NAME);
+            transformedIterators.add(vd);
+        }
+        
+        Iterator it = transformedIterators.iterator();
+        try {
+            while ( it.hasNext() ) {
+                Object o = it.next();
+                // System.out.println("object type: " + o.getClass().getName());
+                VariableDeclaration vd = (VariableDeclaration) o;
+                newEnv.addElement(vd.getNameA(), vd, true);
+            }
+        } catch (DuplicateNameException dne) {
+            rethrowDNE(dne, "creation of environment for body of IteratorExp");
+        }
+        parentHrtgCopy.setEnv(newEnv);
+        return parentHrtgCopy;
+    }
+    
     public IteratorExp computeAstFor_AIteratorArrowPropertyCallExpCs(IteratorExp myAst, Heritage nodeHrtg, String astName, List astIterators, OclExpression astBody) throws AttrEvalException {
         Heritage hrtg = nodeHrtg;
         Environment env = hrtg.getEnv();
@@ -2654,7 +2709,10 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         Classifier elemType = collType.getElementType();
         
         this.transAPL2IVL.setDefaultType(elemType);
-        List transformedIterators = this.transAPL2IVL.transform(astIterators);
+        List transformedIterators = null;
+        if ( astIterators != null ) {
+            transformedIterators = this.transAPL2IVL.transform(astIterators);
+        }
         
         // initialize ast node's attributes
         Collection iteratorsInExp = myAst.getIterators();
@@ -2669,7 +2727,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             // if no iterator variable is explicitly given, we have to create   
             // one  
             VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
-            vd.setNameA(this.anonIterVars.getNextAsString());
+            vd.setNameA(ANONYMOUS_ITERATOR_NAME);
             vd.setType(elemType);
             iteratorsInExp.add(vd);
         }
@@ -2683,11 +2741,6 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         myAst.setSource(source);
         myAst.setNameA(astName);
         return myAst;
-    }
-    
-    public Heritage insideAIterateVarsCs_computeHeritageFor_Iterators(AIterateVarsCs parent, PActualParameterListCs child, Heritage parentHrtgCopy) throws AttrEvalException {
-        parentHrtgCopy.setContextIsIteratorVarDecl(true);
-        return null;
     }
     
     public Heritage insideAIterateArrowPropertyCallExpCs_computeHeritageFor_Body(AIterateArrowPropertyCallExpCs parent, PExpression child, Heritage parentHrtgCopy, String astIterate, List astIterators, VariableDeclaration astAccumulator) throws AttrEvalException {
@@ -2778,6 +2831,20 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         return myAst;
     }
     
+    public Heritage insideAIteratorVarsCs_computeHeritageFor_Iterators(AIteratorVarsCs parent, PActualParameterListCs child, Heritage parentHrtgCopy) throws AttrEvalException {
+        parentHrtgCopy.setContextIsIteratorVarDecl(true);
+        return parentHrtgCopy;
+    }
+    
+    public Heritage insideAIterateVarsCs_computeHeritageFor_Iterators(AIterateVarsCs parent, PActualParameterListCs child, Heritage parentHrtgCopy) throws AttrEvalException {
+        parentHrtgCopy.setContextIsIteratorVarDecl(true);
+        return null;
+    }
+
+    //
+    // ===== actual parameter lists and their list items =====
+    //
+    
     public OclActualParameterListItem computeAstFor_ATypedActualParameterListElementCs(OclActualParameterListItem myAst, Heritage nodeHrtg, OclFormalParameter astParam) throws AttrEvalException {
         assert (astParam.getName() != null):
             "name of formal parameter must be set";
@@ -2820,13 +2887,6 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         }
     }
     
-    
-    public Heritage insideAIteratorArrowPropertyCallExpCs_computeHeritageFor_Iterators(AIteratorArrowPropertyCallExpCs parent, PIteratorVarsCs child, Heritage parentHrtgCopy, String astName) throws AttrEvalException {
-        parentHrtgCopy.setContextIsIteratorVarDecl(true);
-        return parentHrtgCopy;
-    }
-    
-    
     public List computeAstFor_APropertyCallParametersCs(Heritage nodeHrtg,
             List astParamList) throws AttrEvalException {
         // ensure that myAst is not null, if it is, return an empty list
@@ -2837,11 +2897,11 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         }
     }
     
-    
     public Heritage insideAPropertyCallParametersCs_computeHeritageFor_ParamList(APropertyCallParametersCs parent, PActualParameterListCs child, Heritage parentHrtgCopy) throws AttrEvalException {
         parentHrtgCopy.setContextIsIteratorVarDecl(false);
         return parentHrtgCopy;
     }
+
     
     public Heritage insideAQualifiers_computeHeritageFor_ActualParameterListCs(AQualifiers parent, PActualParameterListCs child, Heritage parentHrtgCopy) throws AttrEvalException {
         parentHrtgCopy.setContextIsIteratorVarDecl(false);
@@ -2908,53 +2968,6 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             }
         }
     }
-
-    public Heritage insideAIteratorVarsCs_computeHeritageFor_Iterators(AIteratorVarsCs parent, PActualParameterListCs child, Heritage parentHrtgCopy) throws AttrEvalException {
-        parentHrtgCopy.setContextIsIteratorVarDecl(true);
-        return parentHrtgCopy;
-    }
-    
-    public Heritage insideAIteratorArrowPropertyCallExpCs_computeHeritageFor_Body(AIteratorArrowPropertyCallExpCs parent, PExpression child, Heritage parentHrtgCopy, String astName, List astIterators) throws AttrEvalException {
-        Environment oldEnv = parentHrtgCopy.getEnv();
-        WritableEnvironment newEnv = oldEnv.nestedEnvironment();
-        
-        OclExpression source = parentHrtgCopy.getCurrentSourceExpression();
-        Classifier sourceType = obtainType(source);
-        assert ( sourceType != null ): 
-            "type of source expression must not be null";
-            
-        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
-        if ( ! sourceIsCollection ) {
-            throw new AttrEvalException("Source expression must have a collection type for IteratorExp");
-        }
-
-        CollectionType collType = (CollectionType) sourceType;
-        Classifier elemType = collType.getElementType();
-            
-        this.transAPL2IVL.setDefaultType(elemType);
-        List transformedIterators = null;
-        // iterators available?
-        if ( astIterators != null ) {
-           transformedIterators = this.transAPL2IVL.transform(astIterators);
-        } else {
-            transformedIterators = Collections.EMPTY_LIST;
-        }
-        
-        Iterator it = transformedIterators.iterator();
-        try {
-            while ( it.hasNext() ) {
-                Object o = it.next();
-                // System.out.println("object type: " + o.getClass().getName());
-                VariableDeclaration vd = (VariableDeclaration) o;
-                newEnv.addElement(vd.getNameA(), vd, true);
-            }
-        } catch (DuplicateNameException dne) {
-            rethrowDNE(dne, "creation of environment for body of IteratorExp");
-        }
-        parentHrtgCopy.setEnv(newEnv);
-        return parentHrtgCopy;
-    }
-    
     
 }
 
