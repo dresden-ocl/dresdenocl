@@ -99,7 +99,9 @@ public class Heritage extends Object implements Cloneable {
     private OclExpression currentLeftSibling;
     
     /**
-     * Holds value of property contextIsIteratorVarDecl.
+     * Indicates whether the syntactic form (part of concrete syntax tree) currently
+     * being under attribute evaluation is used in a context made up of an OCL operation
+     * with type argument, such as oclAsType, oclIsKindOf, oclIsTypeOf.
      */
     private boolean contextIsIteratorVarDecl;
     
@@ -112,6 +114,11 @@ public class Heritage extends Object implements Cloneable {
      * Null means: no result variable available.
      */
     private VariableDeclaration resultVariable;
+    
+    /**
+     * Holds value of property contextIsOclOpWithTypeArg.
+     */
+    private boolean contextIsOclOpWithTypeArg;
     
     /** Creates new Heritage */
     public Heritage() {
@@ -322,6 +329,22 @@ public class Heritage extends Object implements Cloneable {
      */
     public void setResultVariable(VariableDeclaration resultVariable) {
         this.resultVariable = resultVariable;
+    }
+    
+    /**
+     * Getter for property contextIsOclOpWithTypeArg.
+     * @return Value of property contextIsOclOpWithTypeArg.
+     */
+    public boolean isContextIsOclOpWithTypeArg() {
+        return this.contextIsOclOpWithTypeArg;
+    }
+    
+    /**
+     * Setter for property contextIsOclOpWithTypeArg.
+     * @param contextIsOclOpWithTypeArg New value of property contextIsOclOpWithTypeArg.
+     */
+    public void setContextIsOclOpWithTypeArg(boolean contextIsOclOpWithTypeArg) {
+        this.contextIsOclOpWithTypeArg = contextIsOclOpWithTypeArg;
     }
     
 }

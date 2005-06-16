@@ -873,10 +873,16 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             }
             astTail.add(0, astElement);
         } else {
-            assert( astElement.isFullExpression() ):
-                "only full expressions allowed in production actual_parameter_list_cs outside an iterator variable declaration";
-            OclExpression exp = astElement.getFullExpressionValue();
-            astTail.add(0, exp);
+            if ( hrtg.isContextIsOclOpWithTypeArg() ) {
+                assert ( astElement.isTypeSpecifier() ):
+                    "only type specifiers allowed in production actual_parameter_list_cs in a type argument list";
+                astTail.add(0, astElement);
+            } else {
+                assert( astElement.isFullExpression() ):
+                    "only full expressions allowed in production actual_parameter_list_cs outside an iterator variable declaration";
+                OclExpression exp = astElement.getFullExpressionValue();
+                astTail.add(0, exp);
+            }
         }
         return astTail;
     }
@@ -1318,8 +1324,20 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         // on the first hand    
         parentHrtgCopy.setContextIsPropPostfixTail(false);
         parentHrtgCopy.setContextIsPropertyPrimary(false);
+        parentHrtgCopy.setContextIsOclOpWithTypeArg(isOclOpWithTypeArg(astName));
         return parentHrtgCopy;
     }    
+    
+    private boolean isOclOpWithTypeArg(List opName) {
+        if ( opName.size() != 1 ) return false;
+        String name = (String) opName.get(0);
+        boolean result = name.equals("oclIsTypeOf") ||
+                name.equals("oclIsKindOf") ||
+                name.equals("oclAsType");
+        return result;
+    }
+    
+    
     
     //     WithTailPostfixExpCs: compute AST and Heritage for postfix tail      
     public OclExpression computeAstFor_AWithTailPostfixExpCs(Heritage nodeHrtg, OclExpression astSource, OclExpression astTreePostfixExpTailCs) throws AttrEvalException {
@@ -1355,6 +1373,10 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         boolean contextIsPropertyPrimary = hrtg.isContextIsPropertyPrimary();
         boolean contextIsPropPostfixTail = hrtg.isContextIsPropPostfixTail();
         
+        assert (contextIsPropertyPrimary ^ contextIsPropPostfixTail):
+            "Internal error: property_call_exp_cs{path_time} must be used either in context " + 
+            "property_primary or prop_postfix_tail";
+        
         if ( contextIsPropertyPrimary ) {
             return computeAstFor_APathTimePropertyCallExpCs_inContextPropertyPrimary(nodeHrtgCopy, astName, astTime);
         }
@@ -1374,13 +1396,21 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         
         OclExpression result = null;
         
-        // 0. check for "contextIsIteratorVarDecl"  
+        // 0. check for "contextIsIteratorVarDecl" => create iterator variable exp 
         if ( hrtg.isContextIsIteratorVarDecl() ) {
             assertParserCondition( astTime == null, "time expression not allowed here");
             assertParserCondition( numNameElements == 1, "only simple names allowed here, but found " + 
                 "path name with " + numNameElements );
             OclExpression exp = (OclExpression) factory.createNode("VariableExp");
             exp.setNameA((String) astName.get(0));
+            return exp;
+        }
+        // 0a. check for "contextIsOclOpWithTypeArg" => create type argument 
+        if ( hrtg.isContextIsOclOpWithTypeArg() ) {
+            assertParserCondition( astTime == null, "time expression not allowed here");
+            Classifier cls = lookupClassifier(astName, hrtg.getEnv(), "lookup of classifier as type argument");
+            OclExpression exp = (OclExpression) factory.createNode("VariableExp");
+            exp.setType(cls);
             return exp;
         }
         
@@ -1504,6 +1534,26 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             ", searched for path name " + pathNameToString(astName));        
     } // end: computeAstFor_APathTimePropertyCallExpCs_inContextPropertyPrimary
 
+    private Classifier lookupClassifier(List pathName, Environment env, String context) throws AttrEvalException {
+        NamedElement ne = null;
+        try { 
+            ne = env.lookupPathName(pathName);
+        } catch ( DuplicateNameException dne ) {
+            rethrowDNE(dne, context);
+        }
+        if ( ne == null ) {
+            throw new AttrEvalException("Path name not found in environment: '" + pathNameToString(pathName));
+        }
+        ModelElement me = ne.getReferredElement();
+        assert ( me != null ): "Named element refers to <null> model element";
+        
+        if ( ! (me instanceof Classifier ) ) {
+            throw new AttrEvalException("Classifier name expected (found implementation type " + ne.getClass().getName() + ", which is not a classifier implementation)" );
+        }
+        Classifier cls = (Classifier) me;
+        return cls;
+    }
+    
     public OclExpression computeAstFor_APathTimePropertyCallExpCs_inContextPropPostfixTail(Heritage nodeHrtgCopy, List astName, OclTimeExp astTime) throws AttrEvalException {
         Heritage hrtg = nodeHrtgCopy;
         
@@ -1625,18 +1675,22 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         
         boolean contextIsPropertyPrimary = hrtg.isContextIsPropertyPrimary();
         boolean contextIsPropPostfixTail = hrtg.isContextIsPropPostfixTail();
+        boolean contextIsOclOpWithTypeArg = isOclOpWithTypeArg(astName);
         
         assert (contextIsPropertyPrimary ^ contextIsPropPostfixTail):
-            "Internal error: property_call_exp_cs must be used either in context " + 
+            "Internal error: property_call_exp_cs{arg_list} must be used either in context " + 
             "property_primary or prop_postfix_tail";
         
         int numNameElements = astName.size();
         
         assert (astParameters != null):  "Internal error: parameter list " +
-            "reference 'astParameters' for AArgListPropertyCalLExpCs may not be null";
-        List parameterTypes = getTypesForParameters(astParameters);
+            "reference 'astParameters' for AArgListPropertyCallExpCs may not be null";
         
         if ( contextIsPropertyPrimary ) {
+            assertParserCondition( ! contextIsOclOpWithTypeArg,
+                "ocl operations with type argument only supported as postfix expression tail, i. e. " + 
+                "you must specify the source expression explicitly");
+            List parameterTypes = getTypesForParameters(astParameters);
             if ( numNameElements == 1 ) {
                 String nameHead = (String) astName.get(0);
                 // check for implicit (instance) operation [OperationCallExpCS::D and ::F]                
@@ -1647,7 +1701,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                     NamedElement neSource = refOpWSrc.getSource();
                     ModelElement meSource = neSource.getReferredElement();
                     assert meSource instanceof OclExpression: "source expression must be " +
-                        "a an instance of a subclass of OclExpression";
+                        "an instance of a subclass of OclExpression";
                     
                     OperationCallExp opex = (OperationCallExp) factory.createNode("OperationCallExp");
                     opex.setSource( (OclExpression) meSource);
@@ -1719,12 +1773,29 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             OclExpression source = hrtg.getCurrentSourceExpression();
             assert (source != null):
                 "source expression may not be null if contextIsPropPostfixTail inside current method";
-                
+        
             assertParserCondition(numNameElements == 1, 
                 "only simple names allowed in this context but found path name " +
                  "with " + numNameElements + " elements");
-            
             String nameHead = (String) astName.get(0);
+
+            if ( contextIsOclOpWithTypeArg ) {
+                assertParserCondition(astParameters != null, "parameter list must not be null for " +
+                    "ocl operations with type argument");
+                assertParserCondition(astParameters.size() == 1, "exactly one parameter required for " +
+                    "ocl operations with type argument");
+                OclActualParameterListItem param = (OclActualParameterListItem) astParameters.get(0);
+                assert param.isTypeSpecifier():
+                    "internal error: parameter must be a type specifier in this context";
+                Classifier cls = param.getTypeSpecifierValue();
+                
+                OclOperationWithTypeArgExp oclop = (OclOperationWithTypeArgExp) factory.createNode("OclOperationWithTypeArgExp");
+                oclop.setNameA(nameHead);
+                oclop.setSource(source);
+                oclop.setTypeArgument(cls);
+                return oclop;
+            }
+            List parameterTypes = getTypesForParameters(astParameters);            
             boolean isCollection = source instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
             if ( ! isCollection ) {
                 // source no collection, create operation call
@@ -1866,6 +1937,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     public Heritage insideAQualifiedPropertyCallExpCs_computeHeritageFor_Qualifiers(AQualifiedPropertyCallExpCs parent, PQualifiers child, Heritage parentHrtgCopy, List astName) throws AttrEvalException {
         parentHrtgCopy.setContextIsPropertyPrimary(false);
         parentHrtgCopy.setContextIsPropPostfixTail(false);
+        parentHrtgCopy.setContextIsOclOpWithTypeArg(false);
         return parentHrtgCopy;
     }
     
@@ -2720,15 +2792,26 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     public OclActualParameterListItem computeAstFor_AUntypedActualParameterListElementCs(OclActualParameterListItem myAst, Heritage nodeHrtg, OclExpression astElement) throws AttrEvalException {
         Heritage hrtg = nodeHrtg;
         boolean contextIsIteratorVarDecl = hrtg.isContextIsIteratorVarDecl();
+        boolean contextIsOclOpWithTypeArg = hrtg.isContextIsOclOpWithTypeArg();
         
         if ( contextIsIteratorVarDecl ) {
             // allowed: simple name/identifier 
             assert (astElement instanceof VariableExp):
                 "inside an iterator variable declaration, path_time_property_exp " +
-                "must return an instance of VariableExp but found java class " + 
+                "must return an instance of VariableExp, but found java class " + 
                 astElement.getClass().getName();
             OclFormalParameter param = new OclFormalParameter();
             myAst.setSimpleNameValue(astElement.getNameA());
+            return myAst;
+        } else if ( contextIsOclOpWithTypeArg ) {
+            // allowed: path names identifying a classifier
+            assert ( astElement instanceof VariableExp):
+                "inside an ocl operation with type argument, path_time_property_exp " +
+                "must return an instance of VariableExp, but found java class " +
+                astElement.getClass().getName();
+            Classifier cls = astElement.getType();
+            assert ( cls != null ): "internal error: type of type argument not found";
+            myAst.setTypeSpecifierValue(cls);
             return myAst;
         } else {
             // allowed/expected: full ocl expression

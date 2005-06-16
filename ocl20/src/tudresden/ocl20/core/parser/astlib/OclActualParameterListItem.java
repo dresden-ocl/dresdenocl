@@ -29,7 +29,9 @@
 
 package tudresden.ocl20.parser.astlib;
 
+import tudresden.ocl20.jmi.ocl.commonmodel.Classifier;
 import tudresden.ocl20.jmi.ocl.expressions.OclExpression;
+import java.util.List;
 
 /**
  *
@@ -57,6 +59,12 @@ public class OclActualParameterListItem extends Object {
      * Holds value of property formalParameter.
      */
     private boolean formalParameter;
+    
+    /**
+     * Holds value of property typeSpecifier.
+     */
+    private boolean typeSpecifier;
+    
     
     /** Creates new OclActualParameterListItem */
     public OclActualParameterListItem() {
@@ -100,6 +108,7 @@ public class OclActualParameterListItem extends Object {
         this.fullExpression = true;
         this.simpleName = false;
         this.formalParameter = false;
+        this.typeSpecifier = false;
     }
     public OclExpression getFullExpressionValue() {
         return this.fullExpressionValue;
@@ -111,17 +120,25 @@ public class OclActualParameterListItem extends Object {
         this.simpleName = true;
         this.fullExpression = false;
         this.formalParameter = false;
+        this.typeSpecifier = false;
     }
     public String getSimpleNameValue() {
         return this.simpleNameValue;
     }
     
     private OclFormalParameter formalParameterValue;
+    
+    /**
+     * Holds value of property typeSpecifierValue.
+     */
+    private Classifier typeSpecifierValue;
+    
     public void setFormalParameterValue(OclFormalParameter param) {
         this.formalParameterValue = param;
         this.formalParameter = true;
         this.fullExpression = false;
         this.simpleName = false;
+        this.typeSpecifier = false;
     }
     public OclFormalParameter getFormalParameterValue() {
         return this.formalParameterValue;
@@ -141,6 +158,42 @@ public class OclActualParameterListItem extends Object {
      */
     public void setFormalParameter(boolean formalParameter) {
         this.formalParameter = formalParameter;
+    }
+    
+    /**
+     * Getter for property typeName.
+     * @return Value of property typeName.
+     */
+    public boolean isTypeSpecifier() {
+        return this.typeSpecifier;
+    }
+    
+    /**
+     * Setter for property typeName.
+     * @param typeName New value of property typeName.
+     */
+    public void setTypeSpecifier(boolean typeSpecifier) {
+        this.typeSpecifier = typeSpecifier;
+    }
+    
+    /**
+     * Getter for property typeNameValue.
+     * @return Value of property typeNameValue.
+     */
+    public Classifier getTypeSpecifierValue() {
+        return this.typeSpecifierValue;
+    }
+    
+    /**
+     * Setter for property typeNameValue.
+     * @param typeNameValue New value of property typeNameValue.
+     */
+    public void setTypeSpecifierValue(Classifier typeNameValue) {
+        this.typeSpecifierValue = typeNameValue;
+        this.formalParameter = false;
+        this.fullExpression = false;
+        this.simpleName = false;
+        this.typeSpecifier = true;
     }
     
 }

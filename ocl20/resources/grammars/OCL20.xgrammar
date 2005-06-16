@@ -158,8 +158,6 @@ Tokens
   iterate               = 'iterate';
 
   // tokens for special iterate "instances":
-  // still missing: "isUnique", "one" (require additional checks on 
-  // ast: only one iterator allowed)
   select                = 'select';
   reject                = 'reject';
   collect               = 'collect';
@@ -168,6 +166,10 @@ Tokens
   exists                = 'exists';
   one                   = 'one';
   is_unique             = 'isUnique';
+
+  ocl_op_is_type_of     = 'oclIsTypeOf';
+  ocl_op_is_kind_of     = 'oclIsKindOf';
+  ocl_op_as_type        = 'oclAsType';
 
   integer_literal <Integer>   = decimal_digit+;
   real_fraction               = dot decimal_digit+;
@@ -418,6 +420,7 @@ Productions
      {simple} simple_name #chain
    | {iterate} iterate #chain
    | {iterator_name} iterator_name_cs #chain
+   | {ocl_op_name} ocl_op_name #chain
    ;
 
   // added (iterator names are required to decide whether IteratorExpCS::A or
@@ -433,9 +436,15 @@ Productions
    | {is_unique} T.is_unique #chain
    ;
 
+  // added (names of ocl operation with type argument)
+  ocl_op_name <String> =
+     {kind_of} T.ocl_op_is_kind_of      #chain
+   | {type_of} T.ocl_op_is_type_of      #chain
+   | {as_type} T.ocl_op_as_type         #chain
+   ;
+
   path_name_cs <List>           = [qualifier]:path_name_head_cs* [name]:identifier_cs #nocreate;
   path_name_head_cs <String>    = identifier_cs dbl_colon #chain;
-
 
   literal_exp_cs <LiteralExp> =
      {lit_collection}   collection_literal_exp_cs   #chain
@@ -620,6 +629,10 @@ Productions
         bracket_close #chain
     ;
 
+  // type argument for oclIsKindOf, oclIsTypeOf and oclAsType
+  type_argument <Classifier> =
+        paren_open [type]:type_specifier paren_close #chain
+    ;
   
   property_call_parameters_cs <List> =
         paren_open [param_list]:actual_parameter_list_cs? #customheritage paren_close #nocreate

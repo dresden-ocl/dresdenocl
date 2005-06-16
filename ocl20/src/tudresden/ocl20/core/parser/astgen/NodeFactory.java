@@ -69,11 +69,12 @@ public class NodeFactory extends Object {
     private Map creatorsByType = new HashMap();
     private void initialize() {
         Map c = creatorsByType;
-        c.put("Object",                 new Ctor() { public Object cr() { return new Object(); } } );
-        c.put("CollectionItem",         new Ctor() { public Object cr() { return f.createCollectionItem(); } } );
-        c.put("IfExp",                  new Ctor() { public Object cr() { return f.createIfExp(); } } );
-        c.put("LetExp",                 new Ctor() { public Object cr() { return f.createLetExp(); } } );
-        c.put("OperationCallExp",       new Ctor() { public Object cr() { return f.createOperationCallExp(); } } );
+        c.put("Object",                     new Ctor() { public Object cr() { return new Object(); } } );
+        c.put("CollectionItem",             new Ctor() { public Object cr() { return f.createCollectionItem(); } } );
+        c.put("IfExp",                      new Ctor() { public Object cr() { return f.createIfExp(); } } );
+        c.put("LetExp",                     new Ctor() { public Object cr() { return f.createLetExp(); } } );
+        c.put("OperationCallExp",           new Ctor() { public Object cr() { return f.createOperationCallExp(); } } );
+        c.put("OclOperationWithTypeArgExp", new Ctor() { public Object cr() { return f.createOclOperationWithTypeArgExp(); } } );
         c.put("VariableDeclaration",    new Ctor() { public Object cr() { return f.createVariableDeclaration(); } } );
         c.put("IntegerLiteralExp",      new Ctor() { public Object cr() { return f.createIntegerLiteralExp(); } } );
         c.put("BooleanLiteralExp",      new Ctor() { public Object cr() { return f.createBooleanLiteralExp(); } } );
