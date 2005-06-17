@@ -71,6 +71,7 @@ public class NodeFactory extends Object {
         Map c = creatorsByType;
         c.put("Object",                     new Ctor() { public Object cr() { return new Object(); } } );
         c.put("CollectionItem",             new Ctor() { public Object cr() { return f.createCollectionItem(); } } );
+        c.put("CollectionRange",            new Ctor() { public Object cr() { return f.createCollectionRange(); } } );
         c.put("IfExp",                      new Ctor() { public Object cr() { return f.createIfExp(); } } );
         c.put("LetExp",                     new Ctor() { public Object cr() { return f.createLetExp(); } } );
         c.put("OperationCallExp",           new Ctor() { public Object cr() { return f.createOperationCallExp(); } } );
