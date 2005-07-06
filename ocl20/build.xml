@@ -584,6 +584,31 @@
         </java>
         
     </target>
+    <target name="run.parser-cli"
+        depends="init,jar.parsertools"
+        description="runs the OCL2.0 parser CLI" >
+        <java classname="tudresden.ocl20.parser.OCL20CLI"
+            fork="true" maxmemory="128M"> 
+	    <arg value="${XMI}" />
+	    <arg value="${OCL}" />
+            <jvmarg value="-ea" />
+            <assertions>
+              <enable/>
+            </assertions>
+            <classpath>
+                <path refid="libs.basic" />
+                <path refid="libs.mdr" />
+                <path refid="libs.jmi.ocl20" />
+                <pathelement location="${jar.libs.parsertools}" />
+                <pathelement location="${jar.libs.sableparser}" />
+                <pathelement location="${jar.libs.sable-astlib}" />
+                <pathelement location="${jar.libs.ocl20repository}" />
+                <pathelement location="${jar.libs.ocl20stdlib}" />
+                <pathelement location="${dir.resources}" />
+            </classpath>
+        </java>
+        
+    </target>
     
     
     <!--                                                                   -->
