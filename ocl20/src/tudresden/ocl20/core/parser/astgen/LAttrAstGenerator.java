@@ -1204,7 +1204,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         try {
             myAst.setSource(astOperand);
             Classifier opType = obtainType(astOperand);
-            assert (opType != null): "type of left operand is null";
+            assert (opType != null): "Type of left operand is null. Did you explicitly specify multiplicity of left operand in model? Type checker will fail otherwise. Check process output (stdout) for possible null pointer exception in TypeEvaluator.";
             myAst.setSrcType(opType);
             String operator = astTail.getOperator();
             OclExpression rightOperand = astTail.getOperand();
