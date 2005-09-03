@@ -2939,14 +2939,20 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         List paramTypes = this.getTypesForParameters(astParameters);
         Operation refOp = null;
         
-        if ( ! sourceIsCollection ) {            
+        // this will probably cause problems with nestes collection
+	// types!
+	// hack for preventing wrapping of an explicit ->asSet()
+             
+	if ( (! sourceIsCollection) && (astName.compareTo("asSet") != 0)) {   
             Classifier setType = this.library.getSetType(sourceType);
             refOp = setType.lookupOperation(astName, paramTypes);
             if ( refOp != null ) {
                 myAst.getArguments().clear();
                 myAst.getArguments().addAll(astParameters);
                 myAst.setReferredOperation(refOp);
-                source = this.oclExpressionWithAsSet(source);
+		log("Info: adding type-conversion 'asSet' to '" + astName 
+		    + "' with source type '" + sourceType.getNameA() + "'.");
+		source = this.oclExpressionWithAsSet(source);
                 myAst.setSource(source);
                 return myAst;
             } else {
