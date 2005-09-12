@@ -108,6 +108,7 @@ public class NodeFactory extends Object {
         c.put("AssociationClassCallExp",    new Ctor() { public Object cr() { return f.createAssociationClassCallExp(); } } );
         c.put("EnumLiteralExp",             new Ctor() { public Object cr() { return f.createEnumLiteralExp(); } } );
         c.put("IteratorExp",                new Ctor() { public Object cr() { return f.createIteratorExp(); } } );
+        c.put("IterateExp",                 new Ctor() { public Object cr() { return f.createIterateExp(); } } );
         // c.put("EnumLiteralExp",             new Ctor() { public Object cr() { return f.createEnumLiteralExp(); } } );
     }
 

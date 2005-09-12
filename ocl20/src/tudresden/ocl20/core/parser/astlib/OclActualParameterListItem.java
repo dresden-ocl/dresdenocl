@@ -161,35 +161,35 @@ public class OclActualParameterListItem extends Object {
     }
     
     /**
-     * Getter for property typeName.
-     * @return Value of property typeName.
+     * Getter for property typeSpecifier.
+     * @return Value of property typeSpecifier.
      */
     public boolean isTypeSpecifier() {
         return this.typeSpecifier;
     }
     
     /**
-     * Setter for property typeName.
-     * @param typeName New value of property typeName.
+     * Setter for property typeSpecifier.
+     * @param typeSpecifier New value of property typeSpecifier.
      */
     public void setTypeSpecifier(boolean typeSpecifier) {
         this.typeSpecifier = typeSpecifier;
     }
     
     /**
-     * Getter for property typeNameValue.
-     * @return Value of property typeNameValue.
+     * Getter for property typeSpecifierValue.
+     * @return Value of property typeSpecifierValue.
      */
     public Classifier getTypeSpecifierValue() {
         return this.typeSpecifierValue;
     }
     
     /**
-     * Setter for property typeNameValue.
-     * @param typeNameValue New value of property typeNameValue.
+     * Setter for property typeSpecifierValue.
+     * @param typeSpecifierValue New value of property typeSpecifierValue.
      */
-    public void setTypeSpecifierValue(Classifier typeNameValue) {
-        this.typeSpecifierValue = typeNameValue;
+    public void setTypeSpecifierValue(Classifier typeSpecifierValue) {
+        this.typeSpecifierValue = typeSpecifierValue;
         this.formalParameter = false;
         this.fullExpression = false;
         this.simpleName = false;

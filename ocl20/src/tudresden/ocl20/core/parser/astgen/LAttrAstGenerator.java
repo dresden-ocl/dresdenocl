@@ -2742,6 +2742,11 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         myAst.setNameA(astName);
         return myAst;
     }
+
+    public Heritage insideAIterateArrowPropertyCallExpCs_computeHeritageFor_Iterators(AIterateArrowPropertyCallExpCs parent, PIterateVarsCs child, Heritage parentHrtgCopy, String astName) throws AttrEvalException {
+        parentHrtgCopy.setContextIsIteratorVarDecl(true);
+        return parentHrtgCopy;
+    }
     
     public Heritage insideAIterateArrowPropertyCallExpCs_computeHeritageFor_Body(AIterateArrowPropertyCallExpCs parent, PExpression child, Heritage parentHrtgCopy, String astIterate, List astIterators, VariableDeclaration astAccumulator) throws AttrEvalException {
         Environment oldEnv = parentHrtgCopy.getEnv();
@@ -2761,11 +2766,20 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             
         CollectionType collType = (CollectionType) sourceType;
         Classifier elemType = collType.getElementType();
-
         this.transAPL2IVL.setDefaultType(elemType);
-        List convertedIterators = this.transAPL2IVL.transform(astIterators);
-        Iterator it = convertedIterators.iterator();
-        
+        List transformedIterators = null;
+        // iterators available?
+        if ( astIterators != null ) {
+            transformedIterators = this.transAPL2IVL.transform(astIterators);
+        }
+        if ( astIterators == null || astIterators.size() == 0 ) {
+            transformedIterators = new ArrayList(1);
+            VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
+            vd.setType(elemType);
+            vd.setNameA(ANONYMOUS_ITERATOR_NAME);
+            transformedIterators.add(vd);
+        }
+        Iterator it = transformedIterators.iterator();
         try {
             while ( it.hasNext() ) {
                 VariableDeclaration vd = ( VariableDeclaration ) it.next();
@@ -2774,9 +2788,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             newEnv.addElement(astAccumulator.getNameA(), astAccumulator, true);
         } catch (DuplicateNameException dne) {
             rethrowDNE(dne, "creation of environment for body of IterateExp");
-        }        
-        parentHrtgCopy.setEnv(newEnv);        
-        parentHrtgCopy.setContextIsIteratorVarDecl(true);
+        }
+        parentHrtgCopy.setEnv(newEnv);
         return parentHrtgCopy;
     }
         
