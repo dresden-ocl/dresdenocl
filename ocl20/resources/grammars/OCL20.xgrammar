@@ -578,7 +578,7 @@ Productions
       {iterate} <IterateExp> 
                 T.iterate 
                 paren_open
-                [iterators]:iterate_vars_cs?
+                [iterators]:iterate_vars_cs? #customheritage
                 [accumulator]:initialized_variable_cs
                 vertical_bar
                 [body]:expression #customheritage
@@ -606,7 +606,7 @@ Productions
 
 
   iterate_vars_cs <List> =
-      // must return list of VariableDclaration instances
+      // must return list of VariableDeclaration instances
       [iterators]:actual_parameter_list_cs #customheritage
       semi_colon
       #chain
