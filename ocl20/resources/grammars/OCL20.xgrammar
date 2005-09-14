@@ -645,16 +645,6 @@ Productions
         paren_close
     ;
 
-//   actual_parameter_list_cs <List> =
-//         [element]:expression
-//         [tail]:actual_parameter_list_tail_cs ? #nocreate
-//     ;
-
-//   actual_parameter_list_tail_cs <List> =
-//         comma
-//         [tail]:actual_parameter_list_cs #chain
-//     ;
-
   actual_parameter_list_cs <List> =
       // must return list of VariableDeclaration in context "IteratorVarDecl"
       [element]:actual_parameter_list_element_cs [tail]:actual_parameter_list_tail_cs? #nocreate
@@ -693,7 +683,7 @@ Productions
     ;
 
   //
-  // ----- initialized variable s (for tuple literals) -----
+  // ----- initialized variables (for tuple literals) -----
   //
   initialized_variable_list_cs <List> = 
         [item]:initialized_variable_cs
