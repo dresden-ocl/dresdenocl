@@ -362,7 +362,9 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
                 String pathName = this.getPathNameA();
                 // use endsWith instead of equals, since the top package also
                 // has a name 
-                if ( pathName.endsWith("java::lang::String") ) {
+                if ( pathName.endsWith("java::lang::String") 
+				|  pathName.endsWith("UML_OCL::String")
+				|  pathName.endsWith("oclLib::String")) {
                     return this.getOclLibrary().getOclString();
                 }
             }
