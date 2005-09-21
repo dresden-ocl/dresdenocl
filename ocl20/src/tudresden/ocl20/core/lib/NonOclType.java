@@ -30,7 +30,7 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.lib;
+package tudresden.ocl20.core.lib;
 
 /**
  * This interface is used by the reconvert methods of {@link OclFactory OclFactory} to describe the type an operation parameter has in the model.

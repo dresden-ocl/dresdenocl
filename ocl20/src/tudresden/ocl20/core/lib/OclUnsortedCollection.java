@@ -31,7 +31,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // FILE: d:/java/classes/de/tudresden/ocl/OclUnsortedCollection.java
 
-package tudresden.ocl20.lib;
+package tudresden.ocl20.core.lib;
 import java.util.*;
 
 /** This class is not defined in the OCL specification. It is necessary since

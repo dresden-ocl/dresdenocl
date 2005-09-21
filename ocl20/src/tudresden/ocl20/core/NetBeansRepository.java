@@ -30,7 +30,7 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20;
+package tudresden.ocl20.core;
 
 import org.netbeans.api.mdr.*;
 import org.netbeans.api.xmi.*;

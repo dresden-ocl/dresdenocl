@@ -30,14 +30,14 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.types;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 import java.util.*;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.*;
-import tudresden.ocl20.jmi.mof14.mof14ocl.types.*;
-import tudresden.ocl20.jmi.mof14.mof14ocl.adapters.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.types.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.adapters.*;
 /**
  *
  * @author  Administrator
@@ -163,14 +163,14 @@ public class OclLibraryHelper {
         return (SequenceType) findCollectionType("Sequence", elementType);
     }
     
-    public tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType getCollectionType(MofClass elementType){
+    public tudresden.ocl20.core.jmi.mof14.mof14ocl.types.CollectionType getCollectionType(MofClass elementType){
         return findCollectionType("Collection", elementType);
     }
     
-    private tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType findCollectionType(String name, MofClass elementType){
+    private tudresden.ocl20.core.jmi.mof14.mof14ocl.types.CollectionType findCollectionType(String name, MofClass elementType){
         Iterator it = getCollectionTypes(elementType).iterator();
         while(it.hasNext()){
-            tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType ct = (tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType) it.next();
+            tudresden.ocl20.core.jmi.mof14.mof14ocl.types.CollectionType ct = (tudresden.ocl20.core.jmi.mof14.mof14ocl.types.CollectionType) it.next();
             if(ct.getNameA().startsWith(name)){
                 return  ct;
             }
@@ -193,7 +193,7 @@ public class OclLibraryHelper {
             String elementTypeName = elementType.getNameA();
             
             
-            tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType collectionType = oclTypes.getCollectionType().createCollectionType();
+            tudresden.ocl20.core.jmi.mof14.mof14ocl.types.CollectionType collectionType = oclTypes.getCollectionType().createCollectionType();
             collectionType.setName("Collection("+elementTypeName+")");
             collectionType.setContainer(oclLibPackage);
             result.add(collectionType);
@@ -237,7 +237,7 @@ public class OclLibraryHelper {
             //create a generic product Operation
             //The exact return type is to be determined by the type checker
             
-            tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType c2;
+            tudresden.ocl20.core.jmi.mof14.mof14ocl.types.CollectionType c2;
             SetType resultType;
             if(elementType.equals(oclAny)){
                 //avoid cyclic invocation
@@ -514,7 +514,7 @@ public class OclLibraryHelper {
     //        if(
     //        //!(mc instanceof DataType && !(mc instanceof Enumeration))
     //        !isPrimitive(mc)
-    //        && !(mc instanceof tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType)
+    //        && !(mc instanceof tudresden.ocl20.core.jmi.mof14.mof14ocl.types.CollectionType)
     //        && !(mc instanceof TupleType)
     //        && !mc.equals(oclAny)){
     //            //System.out.println("Created allInstances()-Operation for " + mc.getName()+" "+mc);
@@ -641,8 +641,8 @@ public class OclLibraryHelper {
                     oclType=ae;
                 }
                 
-                else if(type instanceof tudresden.ocl20.jmi.mof14.mof14ocl.types.CollectionType){
-                    tudresden.ocl20.jmi.mof14.model.CollectionType ct = (tudresden.ocl20.jmi.mof14.model.CollectionType)type;
+                else if(type instanceof tudresden.ocl20.core.jmi.mof14.mof14ocl.types.CollectionType){
+                    tudresden.ocl20.core.jmi.mof14.model.CollectionType ct = (tudresden.ocl20.core.jmi.mof14.model.CollectionType)type;
                     oclType = mapDataTypeToOcl(ct.getType(), ct.getMultiplicity());
                 }
                 

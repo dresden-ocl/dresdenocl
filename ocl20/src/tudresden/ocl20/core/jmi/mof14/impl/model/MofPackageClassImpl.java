@@ -30,12 +30,12 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 
 /**
  *
@@ -51,7 +51,7 @@ public abstract class MofPackageClassImpl extends ClassProxyHandler implements M
     /** get the top-most package of the model (if there are more than one, a top most
      * package is created that contains/imports all other packages)
      */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Package getTopPackage() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Package getTopPackage() {
 
         //System.out.println("outermostpckg: "+refOutermostPackage());
         

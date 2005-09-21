@@ -34,10 +34,12 @@ package tudresden.ocl20.test;
 
 import tudresden.ocl20.*;
 
-import tudresden.ocl20.jmi.ocl.*;
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.MetaModelConst;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.jmi.ocl.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 
 import java.util.*;
 
@@ -63,10 +65,10 @@ public class UmlOclModelLoadTest {
             model = new OclModel(MetaModelConst.UML15, modelXmi);
             model.beginTrans(true);
             
-            tudresden.ocl20.jmi.ocl.commonmodel.Package topPackage = model.getTopPackage();
+            tudresden.ocl20.core.jmi.ocl.commonmodel.Package topPackage = model.getTopPackage();
             
             OclExpressionFactory factory = model.getOclExpressionFactory();
-            tudresden.ocl20.TypeEvaluator typeEvl = model.getTypeEvaluator();
+            tudresden.ocl20.core.TypeEvaluator typeEvl = model.getTypeEvaluator();
             OclLibrary oclLib = model.getOclLibrary();
             
             
@@ -142,7 +144,7 @@ public class UmlOclModelLoadTest {
             ci2.setItem(ile2);
             
             CollectionLiteralExp cle = factory.createCollectionLiteralExp();
-            cle.setKind(tudresden.ocl20.jmi.ocl.expressions.CollectionKindEnum.SEQUENCE);
+            cle.setKind(tudresden.ocl20.core.jmi.ocl.expressions.CollectionKindEnum.SEQUENCE);
             cle.getParts().add(ci1);
             cle.getParts().add(ci2);
             

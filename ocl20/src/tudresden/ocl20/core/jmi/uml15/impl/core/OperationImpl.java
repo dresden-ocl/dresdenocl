@@ -30,11 +30,11 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.core;
+package tudresden.ocl20.core.jmi.uml15.impl.core;
 
 import java.util.*;
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -118,7 +118,7 @@ public abstract class OperationImpl extends ModelElementImpl implements Operatio
         return params;
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getOwnerA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getOwnerA() {
         return getOwner();
     }
     
@@ -126,7 +126,7 @@ public abstract class OperationImpl extends ModelElementImpl implements Operatio
         return this.getOwnerScope().equals(ScopeKindEnum.SK_INSTANCE);
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Parameter getReturnParameterA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Parameter getReturnParameterA() {
         Iterator it = getParameter().iterator();
 
         while(it.hasNext()){

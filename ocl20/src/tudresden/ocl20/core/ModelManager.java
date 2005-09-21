@@ -30,7 +30,7 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20;
+package tudresden.ocl20.core;
 
 import javax.jmi.model.*;
 import javax.jmi.xmi.*;
@@ -40,7 +40,7 @@ import java.util.*;
 //import org.omg.uml.*;
 import java.io.*;
 
-import tudresden.ocl20.NetBeansRepository;
+import tudresden.ocl20.core.NetBeansRepository;
 
 /**
  * This class provides operations for managing the metamodels and models in the repository.

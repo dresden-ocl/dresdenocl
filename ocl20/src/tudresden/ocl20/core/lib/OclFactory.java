@@ -31,7 +31,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // FILE: d:/java/classes/de/tudresden/ocl/OclFactory.java
 
-package tudresden.ocl20.lib;
+package tudresden.ocl20.core.lib;
 import java.util.*;
 
 /** A interface defining operations expected of a OCL representation

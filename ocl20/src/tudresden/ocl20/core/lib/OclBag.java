@@ -31,7 +31,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // FILE: d:/java/classes/de/tudresden/ocl/OclBag.java
 
-package tudresden.ocl20.lib;
+package tudresden.ocl20.core.lib;
 import java.util.*;
 
 /** A OclBag is a unordered collection that may contain duplicates. See

@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20;
+package tudresden.ocl20.core;
 
-import tudresden.ocl20.jmi.ocl.commonmodel.ModelElement;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.ModelElement;
 import java.util.*;
 
 /**

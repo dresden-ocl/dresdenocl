@@ -30,15 +30,15 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.core;
+package tudresden.ocl20.core.jmi.uml15.impl.core;
 
 
-import tudresden.ocl20.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
 
-import tudresden.ocl20.jmi.uml15.uml15ocl.expressions.ExpressionInOcl;
-import tudresden.ocl20.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.expressions.ExpressionInOcl;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
 
-//import tudresden.ocl20.jmi.impl.uml15ocl.OclLibrary;
+//import tudresden.ocl20.core.jmi.impl.uml15ocl.OclLibrary;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -53,13 +53,13 @@ public abstract class ConstraintImpl extends ModelElementImpl implements Constra
         super(storable);
     }
     
-    public void setConstrainedElementA(tudresden.ocl20.jmi.ocl.commonmodel.ModelElement me) {
+    public void setConstrainedElementA(tudresden.ocl20.core.jmi.ocl.commonmodel.ModelElement me) {
        java.util.List l =  this.getConstrainedElement();
        l.clear();
        l.add(me);
     }
         
-    public tudresden.ocl20.jmi.ocl.commonmodel.ModelElement getConstrainedElementA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.ModelElement getConstrainedElementA() {
         java.util.List l =  this.getConstrainedElement();
         if(!l.isEmpty()){
             return (ModelElement) l.get(0);
@@ -67,12 +67,12 @@ public abstract class ConstraintImpl extends ModelElementImpl implements Constra
         return null;
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Expression getBodyA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Expression getBodyA() {
         Expression exp = this.getBody();
         return exp;
     }
     
-    public void setBodyA(tudresden.ocl20.jmi.ocl.commonmodel.Expression exp) {
+    public void setBodyA(tudresden.ocl20.core.jmi.ocl.commonmodel.Expression exp) {
         this.setBody((ExpressionInOcl)exp);      
     }
     

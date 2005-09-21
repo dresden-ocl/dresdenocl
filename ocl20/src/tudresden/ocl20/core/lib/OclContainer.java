@@ -31,7 +31,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // FILE: d:/java/classes/de/tudresden/ocl/OclContainer.java
 
-package tudresden.ocl20.lib;
+package tudresden.ocl20.core.lib;
 import java.util.*;
 
 /** This class is a implementation of OclRoot that is backed by a "contained"

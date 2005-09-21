@@ -30,13 +30,13 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.modelmanagement;
+package tudresden.ocl20.core.jmi.uml15.impl.modelmanagement;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
-import tudresden.ocl20.jmi.uml15.modelmanagement.*;
-import tudresden.ocl20.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.modelmanagement.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
 
 
 import java.util.*;
@@ -48,7 +48,7 @@ import java.util.*;
  *this class has to be provided due to multiple inheritance with Classifier and Package.
  *See http://mdr.netbeans.org/custom_implementations.html (Case 3)
  */
-public abstract class SubsystemImpl extends PackageImpl implements tudresden.ocl20.jmi.uml15.modelmanagement.Subsystem{
+public abstract class SubsystemImpl extends PackageImpl implements tudresden.ocl20.core.jmi.uml15.modelmanagement.Subsystem{
     
     /** Creates a new instance of ModelImpl */
     protected SubsystemImpl (StorableObject storable) {

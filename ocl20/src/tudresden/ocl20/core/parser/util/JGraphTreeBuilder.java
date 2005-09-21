@@ -27,7 +27,7 @@
  *
  */
 
-package tudresden.ocl20.parser.util;
+package tudresden.ocl20.core.parser.util;
 
 // import org._3pq.jgrapht.graph.*;
 import org.jgraph.graph.*;

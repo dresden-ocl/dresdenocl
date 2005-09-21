@@ -68,7 +68,7 @@ public class TypeMap extends Object {
             { "List"
             }
         );
-        addPackage(m, "tudresden.ocl20.jmi.ocl.expressions", new String[] 
+        addPackage(m, "tudresden.ocl20.core.jmi.ocl.expressions", new String[] 
             {
                 "AArgumentsOclMessageExp",
                 "ABodyLoopExp",
@@ -127,7 +127,7 @@ public class TypeMap extends Object {
                 "OclExpression"
             }
         );
-        addPackage(m, "tudresden.ocl20.jmi.ocl.commonmodel", new String[] 
+        addPackage(m, "tudresden.ocl20.core.jmi.ocl.commonmodel", new String[] 
             {
                 "AssociationEnd",
                 "Attribute",
@@ -154,7 +154,7 @@ public class TypeMap extends Object {
                 "TypedElement"
             }
         );
-        addPackage(m, "tudresden.ocl20.jmi.ocl.types", new String[]
+        addPackage(m, "tudresden.ocl20.core.jmi.ocl.types", new String[]
             {
                 "AElementTypeCollectionTypes",
                 "AReferredOperationOclMessageType",
@@ -171,7 +171,7 @@ public class TypeMap extends Object {
                 "VoidType"                
             }
         );
-        addPackage(m, "tudresden.ocl20.parser.astlib", new String[] 
+        addPackage(m, "tudresden.ocl20.core.parser.astlib", new String[] 
             {
                 "OclContextDeclaration",
                 "OclFormalParameter",

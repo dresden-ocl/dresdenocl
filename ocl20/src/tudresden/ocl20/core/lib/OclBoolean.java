@@ -31,7 +31,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // FILE: d:/java/classes/de/tudresden/ocl/OclBoolean.java
 
-package tudresden.ocl20.lib;
+package tudresden.ocl20.core.lib;
 import java.util.*;
 
 /** A class that represents the basic OCL type Boolean. There is no public

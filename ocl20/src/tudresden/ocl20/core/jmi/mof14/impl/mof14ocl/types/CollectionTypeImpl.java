@@ -30,11 +30,11 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.types;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.types.*;
+import tudresden.ocl20.core.jmi.mof14.impl.model.MofClassImpl;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.types.*;
 
-import tudresden.ocl20.jmi.mof14.impl.model.MofClassImpl;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
@@ -53,7 +53,7 @@ public abstract class CollectionTypeImpl extends MofClassImpl implements Collect
     //Basically the only difference is the superclass (MofClassImpl),
     //which implements getOclLibrary()
     
-    public boolean conformsTo(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public boolean conformsTo(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         if(super.conformsTo(c)){
             return true;
         }
@@ -72,13 +72,13 @@ public abstract class CollectionTypeImpl extends MofClassImpl implements Collect
         return false; 
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c){
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c){
         if(c instanceof CollectionType){
             //System.out.println(getName());
             //System.out.println(((Classifier)c).getName());
                     
             CollectionType ct = (CollectionType) c;
-            tudresden.ocl20.jmi.ocl.commonmodel.Classifier elementType = getElementType().commonSuperType(ct.getElementType());
+            tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier elementType = getElementType().commonSuperType(ct.getElementType());
             if(elementType == null){
                 return null;
             }
@@ -101,8 +101,8 @@ public abstract class CollectionTypeImpl extends MofClassImpl implements Collect
         return null; 
     }
     
-    public  tudresden.ocl20.jmi.ocl.commonmodel.Classifier getFlatElementType() {
-        tudresden.ocl20.jmi.ocl.commonmodel.Classifier elementType = getElementType();
+    public  tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getFlatElementType() {
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier elementType = getElementType();
         if(elementType instanceof CollectionType){
             return ((CollectionType) elementType).getFlatElementType();
         }

@@ -4,13 +4,13 @@
  * Created on 5. Juni 2003, 18:00
  */
 
-package tudresden.ocl20.codegen;
+package tudresden.ocl20.codegen.java;
 
 import java.util.*;
-import tudresden.ocl20.jmi.ocl.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 
 /**
  *

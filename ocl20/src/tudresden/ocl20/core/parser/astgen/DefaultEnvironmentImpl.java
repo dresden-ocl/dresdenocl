@@ -27,14 +27,14 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
-import tudresden.ocl20.jmi.ocl.commonmodel.ModelElement;
-import tudresden.ocl20.jmi.ocl.commonmodel.Attribute;
-import tudresden.ocl20.jmi.ocl.commonmodel.AssociationEnd;
-import tudresden.ocl20.jmi.ocl.commonmodel.AssociationClass;
-import tudresden.ocl20.jmi.ocl.commonmodel.Operation;
-import tudresden.ocl20.jmi.ocl.commonmodel.Classifier;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.ModelElement;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationEnd;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationClass;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Operation;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier;
 
 import java.util.*;
 

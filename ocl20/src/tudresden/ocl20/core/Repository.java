@@ -30,7 +30,7 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20;
+package tudresden.ocl20.core;
 
 import java.io.File;
 import java.io.FileOutputStream;

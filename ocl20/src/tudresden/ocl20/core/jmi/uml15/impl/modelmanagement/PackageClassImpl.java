@@ -29,15 +29,15 @@
  * http://www-st.inf.tu-dresden.de/ (Chair home page) or             *
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package tudresden.ocl20.jmi.uml15.impl.modelmanagement;
+package tudresden.ocl20.core.jmi.uml15.impl.modelmanagement;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
-import tudresden.ocl20.jmi.uml15.modelmanagement.*;
-import tudresden.ocl20.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper;
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
-import tudresden.ocl20.jmi.uml15.impl.modelmanagement.ModelHelper;
+import tudresden.ocl20.core.jmi.uml15.impl.modelmanagement.ModelHelper;
+import tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper;
+import tudresden.ocl20.core.jmi.uml15.modelmanagement.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 
 /**
  *
@@ -50,7 +50,7 @@ public abstract class PackageClassImpl extends ClassProxyHandler implements Pack
         super(storable);
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Package getTopPackage() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Package getTopPackage() {
             
         ModelHelper mh = ModelHelper.getInstance((Uml15Package)this.refOutermostPackage());
         return mh.getTopPackage();

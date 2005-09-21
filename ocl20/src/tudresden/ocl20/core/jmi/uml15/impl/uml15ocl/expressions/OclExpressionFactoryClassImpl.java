@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.uml15ocl.expressions;
+package tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.expressions;
 
-import tudresden.ocl20.jmi.uml15.uml15ocl.expressions.*;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.expressions.*;
 
 import org.netbeans.mdr.handlers.ClassProxyHandler;
 import org.netbeans.mdr.storagemodel.StorableClass;
@@ -50,7 +50,7 @@ public abstract class OclExpressionFactoryClassImpl extends ClassProxyHandler im
         super(storable);
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.OclExpressionFactory getInstance() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.OclExpressionFactory getInstance() {
         Iterator instances = refAllOfClass().iterator();
         if(instances.hasNext()){
             return (OclExpressionFactory) instances.next();

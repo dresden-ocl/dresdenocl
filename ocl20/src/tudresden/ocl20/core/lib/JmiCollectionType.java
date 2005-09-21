@@ -30,7 +30,7 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.lib;
+package tudresden.ocl20.core.lib;
 
 /**
  * Describes a JMI collection type (can be a Collection or a List).

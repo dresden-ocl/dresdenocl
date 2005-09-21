@@ -27,10 +27,10 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
-import tudresden.ocl20.jmi.uml15.core.Classifier;
-import tudresden.ocl20.jmi.uml15.modelmanagement.Package;
+import tudresden.ocl20.core.jmi.uml15.core.Classifier;
+import tudresden.ocl20.core.jmi.uml15.modelmanagement.Package;
 
 /**
  * Implements extended namespace functionality for the parser. Constructor
@@ -41,12 +41,12 @@ import tudresden.ocl20.jmi.uml15.modelmanagement.Package;
  */
 public abstract class UML15Namespace implements Namespace {
     
-    protected tudresden.ocl20.jmi.uml15.core.Namespace umlNamespace = null;
-    public tudresden.ocl20.jmi.uml15.core.Namespace getDecorated() {
+    protected tudresden.ocl20.core.jmi.uml15.core.Namespace umlNamespace = null;
+    public tudresden.ocl20.core.jmi.uml15.core.Namespace getDecorated() {
         return umlNamespace;
     }
     
-    public UML15Namespace(tudresden.ocl20.jmi.uml15.core.Namespace decorateMe) {
+    public UML15Namespace(tudresden.ocl20.core.jmi.uml15.core.Namespace decorateMe) {
         this.umlNamespace = decorateMe;
     }
     
@@ -65,11 +65,11 @@ public abstract class UML15Namespace implements Namespace {
     }
     
     
-    public static UML15Namespace createDecorator(tudresden.ocl20.jmi.uml15.core.Namespace decorateMe) {
-        if ( decorateMe instanceof tudresden.ocl20.jmi.uml15.core.Classifier ) {
+    public static UML15Namespace createDecorator(tudresden.ocl20.core.jmi.uml15.core.Namespace decorateMe) {
+        if ( decorateMe instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier ) {
             return new UML15ClassifierNamespace( (Classifier) decorateMe);
-        } else if ( decorateMe instanceof tudresden.ocl20.jmi.uml15.modelmanagement.Package ) {
-            return new UML15PackageNamespace( (tudresden.ocl20.jmi.uml15.modelmanagement.Package) decorateMe );
+        } else if ( decorateMe instanceof tudresden.ocl20.core.jmi.uml15.modelmanagement.Package ) {
+            return new UML15PackageNamespace( (tudresden.ocl20.core.jmi.uml15.modelmanagement.Package) decorateMe );
         } else {
             throw new RuntimeException("Unimplemented UML15 namespace type: " + decorateMe.getClass().getName());
         }
@@ -128,7 +128,7 @@ public abstract class UML15Namespace implements Namespace {
         // the appropriate environment content in "namedElements" matching the namespace
         // kind
         
-        tudresden.ocl20.parser.astgen.Namespace parent = this.getNamespace();
+        tudresden.ocl20.core.parser.astgen.Namespace parent = this.getNamespace();
         if ( parent != null ) {
             result.setParent(this.getNamespace().getEnvironmentWithParents());
         } else {

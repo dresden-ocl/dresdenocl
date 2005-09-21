@@ -27,7 +27,7 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
 /**
  *

@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 
 
 import java.util.*;
@@ -126,7 +126,7 @@ public class ModelHelper {
      * In MOF we only have  the concept of "package". So we return a package that clusters 
      * all top level packages of the topModel
      */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Package getTopPackage(){
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Package getTopPackage(){
         return topPackage;
     }
     

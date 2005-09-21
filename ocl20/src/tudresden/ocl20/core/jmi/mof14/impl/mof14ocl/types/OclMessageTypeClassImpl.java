@@ -30,13 +30,13 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.types;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
-import tudresden.ocl20.jmi.mof14.model.*;
-import tudresden.ocl20.jmi.mof14.mof14ocl.types.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.types.*;
 
 import java.util.*;
 
@@ -50,12 +50,12 @@ public abstract class OclMessageTypeClassImpl extends ClassProxyHandler implemen
         super(storable);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.OclMessageType makeFromSignal(tudresden.ocl20.jmi.ocl.commonmodel.Signal sig) {
+    public tudresden.ocl20.core.jmi.ocl.types.OclMessageType makeFromSignal(tudresden.ocl20.core.jmi.ocl.commonmodel.Signal sig) {
         //we dont have signals  in  MOF
         return null;
     }
     
-    public tudresden.ocl20.jmi.ocl.types.OclMessageType makeFromOperation(tudresden.ocl20.jmi.ocl.commonmodel.Operation op) {
+    public tudresden.ocl20.core.jmi.ocl.types.OclMessageType makeFromOperation(tudresden.ocl20.core.jmi.ocl.commonmodel.Operation op) {
         OclMessageType result = make(op.getReturnParameterA().getTypeA());
        
         List contents = result.getContents();
@@ -72,7 +72,7 @@ public abstract class OclMessageTypeClassImpl extends ClassProxyHandler implemen
         return result;
     }
     
-    private OclMessageType make(tudresden.ocl20.jmi.ocl.commonmodel.Classifier returnType){
+    private OclMessageType make(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier returnType){
         OclMessageType result = createOclMessageType();
         OclLibraryHelper oclLib = OclLibraryHelper.getInstance((ModelPackage)this.refOutermostPackage());
         result.setContainer(oclLib.getOclLibPackage());

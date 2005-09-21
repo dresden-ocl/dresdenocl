@@ -27,18 +27,18 @@
  *
  */
 
-package tudresden.ocl20.parser.util;
+package tudresden.ocl20.core.parser.util;
 
-import tudresden.ocl20.ModelManager;
-import tudresden.ocl20.jmi.uml15.modelmanagement.Package;
-import tudresden.ocl20.jmi.uml15.core.Association;
-import tudresden.ocl20.jmi.uml15.core.AssociationEnd;
-// import tudresden.ocl20.jmi.ocl.commonmodel.AssociationEnd;
-import tudresden.ocl20.jmi.ocl.commonmodel.Classifier;
-import tudresden.ocl20.jmi.ocl.commonmodel.Attribute;
-import tudresden.ocl20.jmi.ocl.commonmodel.Operation;
-import tudresden.ocl20.jmi.ocl.commonmodel.Parameter;
-import tudresden.ocl20.jmi.ocl.commonmodel.ModelElement;
+import tudresden.ocl20.core.ModelManager;
+import tudresden.ocl20.core.jmi.uml15.modelmanagement.Package;
+import tudresden.ocl20.core.jmi.uml15.core.Association;
+import tudresden.ocl20.core.jmi.uml15.core.AssociationEnd;
+// import tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationEnd;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Operation;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Parameter;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.ModelElement;
 
 import javax.jmi.reflect.*;
 import javax.swing.*;
@@ -62,15 +62,15 @@ public class TextualModelTreeBuilder {
         this.mm = mmgr;
     }
     
-    public DefaultMutableTreeNode caseTopPackage( tudresden.ocl20.jmi.ocl.commonmodel.Package topPackage ) {
+    public DefaultMutableTreeNode caseTopPackage( tudresden.ocl20.core.jmi.ocl.commonmodel.Package topPackage ) {
         return caseGenericPackage(topPackage, "[TOP-PKG]");
     }
     
-    public DefaultMutableTreeNode casePackage( tudresden.ocl20.jmi.ocl.commonmodel.Package pkg ) {
+    public DefaultMutableTreeNode casePackage( tudresden.ocl20.core.jmi.ocl.commonmodel.Package pkg ) {
         return caseGenericPackage( pkg, "[PKG]" );
     }
         
-    private DefaultMutableTreeNode caseGenericPackage( tudresden.ocl20.jmi.ocl.commonmodel.Package pkg, String prefix ) {
+    private DefaultMutableTreeNode caseGenericPackage( tudresden.ocl20.core.jmi.ocl.commonmodel.Package pkg, String prefix ) {
         String name = pkg.getNameA();
         DefaultMutableTreeNode dmtn = new DefaultMutableTreeNode(prefix + " " + name);
         if ( pkg instanceof Package ) {

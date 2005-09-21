@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.adapters;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.adapters;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.adapters.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.adapters.*;
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -40,14 +40,14 @@ import org.netbeans.mdr.storagemodel.StorableObject;
  * CommonModel::EnumarationLiteral
  * @author Administrator
  */
-public abstract class AdEnumerationLiteralImpl extends tudresden.ocl20.jmi.mof14.impl.model.ModelElementImpl implements AdEnumerationLiteral{
+public abstract class AdEnumerationLiteralImpl extends tudresden.ocl20.core.jmi.mof14.impl.model.ModelElementImpl implements AdEnumerationLiteral{
     
     /** Creates a new instance of EnumerationImpl */
     protected AdEnumerationLiteralImpl(StorableObject storable) {
         super(storable);
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Enumeration getEnumerationA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Enumeration getEnumerationA() {
         return this.getEnumeration();
     }    
    

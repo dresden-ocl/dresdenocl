@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 import java.util.*;
@@ -80,7 +80,7 @@ public abstract class OperationImpl extends ModelElementImpl implements Operatio
     }
     
 //    /** yields the result OCL-type of the operation. */    
-//    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getReturnType() {
+//    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getReturnType() {
 //        Iterator it = getContents().iterator();
 //            
 //        Parameter returnParam = null;
@@ -152,7 +152,7 @@ public abstract class OperationImpl extends ModelElementImpl implements Operatio
     }
     
     /** get the owning classifier of this operation */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getOwnerA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getOwnerA() {
         return (MofClass) getContainer(); 
     }
     
@@ -162,7 +162,7 @@ public abstract class OperationImpl extends ModelElementImpl implements Operatio
     }
     
     /** get the return parameter */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Parameter getReturnParameterA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Parameter getReturnParameterA() {
         Iterator it = getContents().iterator();
 
         while(it.hasNext()){

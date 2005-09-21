@@ -30,10 +30,10 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
-import tudresden.ocl20.jmi.mof14.model.*;
-import tudresden.ocl20.jmi.mof14.mof14ocl.expressions.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.expressions.*;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -90,14 +90,14 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
     /** get all signals (inclusive inherited) of this Classifier. For MOF always an
      * empty set.
      */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Signal lookupSignal(java.lang.String sigName, java.util.List paramTypes) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Signal lookupSignal(java.lang.String sigName, java.util.List paramTypes) {
         //MOF does not have Signals
         return null;
     }
   
 
     /** find an operation of this classifier by its name and in/inout - parametertypes */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Operation lookupOperation(java.lang.String name, java.util.List paramTypes) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Operation lookupOperation(java.lang.String name, java.util.List paramTypes) {
     
         Iterator allOperationsIt =  allOperations().iterator();
         while(allOperationsIt.hasNext()){
@@ -111,10 +111,10 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
     }
     
     /** find an attribute of this classifier by its name */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Attribute lookupAttribute(java.lang.String attName) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute lookupAttribute(java.lang.String attName) {
         Iterator allAttributesIt =  allAttributes().iterator();
         while(allAttributesIt.hasNext()){
-            tudresden.ocl20.jmi.ocl.commonmodel.Attribute a = (tudresden.ocl20.jmi.ocl.commonmodel.Attribute) allAttributesIt.next();               
+            tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute a = (tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute) allAttributesIt.next();               
             //tbd: make UML-MOF-Common
             if(attName.equals(((Attribute)a).getNameA())){
                 return a;
@@ -125,7 +125,7 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
     
     //MOF-specific
     /** find an opposite association end of this classifier by its name */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.AssociationEnd lookupAssociationEnd(java.lang.String name) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationEnd lookupAssociationEnd(java.lang.String name) {
         //in MOF, we only have binary Associations. That makes it a bit easier.
         //the name is interpreted to be the  name of a  reference ! (MOF1.4 chapter 3.9.3.1)
         Iterator contentsIt = getContents().iterator();
@@ -137,8 +137,8 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
         }
         Iterator parentsIt = getParents().iterator();
         while(parentsIt.hasNext()){
-            tudresden.ocl20.jmi.ocl.commonmodel.Classifier parent = (tudresden.ocl20.jmi.ocl.commonmodel.Classifier) parentsIt.next();
-            tudresden.ocl20.jmi.ocl.commonmodel.AssociationEnd ae = parent.lookupAssociationEnd(name);
+            tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier parent = (tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier) parentsIt.next();
+            tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationEnd ae = parent.lookupAssociationEnd(name);
             if(ae!=null){
                 return ae;
             }
@@ -149,43 +149,43 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
     /** find an association class of this classifier by its name.
      * for MOF always null.
      */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.AssociationClass lookupAssociationClass(java.lang.String name) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationClass lookupAssociationClass(java.lang.String name) {
         //MOF does not have AssociationClasses
         return null;
     }
     
     //MOF-specific
-    protected tudresden.ocl20.jmi.ocl.types.OclLibrary getOclLibrary() {
+    protected tudresden.ocl20.core.jmi.ocl.types.OclLibrary getOclLibrary() {
         return ((ModelPackage)refOutermostPackage()).getMof14ocl().getTypes().getOclLibrary().getInstance();
     }
      
     //MOF-UML-Common
     /** Get the Set-Type that has this Classifier as element type. */    
-    public tudresden.ocl20.jmi.ocl.types.SetType getSetType() {
+    public tudresden.ocl20.core.jmi.ocl.types.SetType getSetType() {
         return getOclLibrary().getSetType(this);
     }
     
     //MOF-UML-Common
     /** Get the Sequence-Type that has this Classifier as element type. */    
-    public tudresden.ocl20.jmi.ocl.types.SequenceType getSequenceType() {
+    public tudresden.ocl20.core.jmi.ocl.types.SequenceType getSequenceType() {
         return getOclLibrary().getSequenceType(this);
     }
     
     //MOF-UML-Common
     /** Get the Collection-Type that has this Classifier as element type. */    
-    public tudresden.ocl20.jmi.ocl.types.CollectionType getCollectionType() {
+    public tudresden.ocl20.core.jmi.ocl.types.CollectionType getCollectionType() {
         return getOclLibrary().getCollectionType(this);
     }
     
     //MOF-UML-Common
     /** Get the Bag-Type that has this Classifier as element type. */    
-    public tudresden.ocl20.jmi.ocl.types.BagType getBagType() {
+    public tudresden.ocl20.core.jmi.ocl.types.BagType getBagType() {
         return getOclLibrary().getBagType(this);
     }
     
     //MOF-UML-Common
     /** conforms this classifier to the other one? */    
-    public boolean conformsTo(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public boolean conformsTo(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         //System.out.println(getName()+" conformsTo "+((MofClass)c).getName()+" ?");
         
         if(equals(c)){
@@ -194,7 +194,7 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
         
         Iterator it = getParents().iterator();
         while(it.hasNext()){
-            tudresden.ocl20.jmi.ocl.commonmodel.Classifier parent = (tudresden.ocl20.jmi.ocl.commonmodel.Classifier) it.next();
+            tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier parent = (tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier) it.next();
             
                 //System.out.println("Consider parent:" + parent.getName());
                 if(parent.equals(c)){
@@ -210,7 +210,7 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
     
     //MOF-UML-Common
     /** Get the common supertype of two classifiers. */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         
         Set thisParents = new HashSet(); ;
         thisParents.add(this);
@@ -228,7 +228,7 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
             Set thisParentsTemp = new HashSet();
             Iterator thisParentsIt = thisParents.iterator();
             while(thisParentsIt.hasNext()){
-                tudresden.ocl20.jmi.ocl.commonmodel.Classifier aThisParent = (tudresden.ocl20.jmi.ocl.commonmodel.Classifier) thisParentsIt.next();
+                tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier aThisParent = (tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier) thisParentsIt.next();
                 if(cTC.contains(aThisParent)){
                     return aThisParent;
                 }
@@ -239,7 +239,7 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
             Set cParentsTemp = new HashSet();
             Iterator cParentsIt = cParents.iterator();
             while(cParentsIt.hasNext()){
-                tudresden.ocl20.jmi.ocl.commonmodel.Classifier aCParent = (tudresden.ocl20.jmi.ocl.commonmodel.Classifier) cParentsIt.next();
+                tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier aCParent = (tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier) cParentsIt.next();
                 if(thisTC.contains(aCParent)){
                     return aCParent;
                 }
@@ -262,7 +262,7 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
         return ((ModelPackage)this.refImmediatePackage()).getMof14ocl().getOcl().getExpressions().getAContextualClassifierExpressionInOcl().getExpressionInOcl(this);
     }    
    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Operation createOperation(java.lang.String name, tudresden.ocl20.jmi.ocl.commonmodel.Classifier resultType, java.util.List params){
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Operation createOperation(java.lang.String name, tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier resultType, java.util.List params){
         ModelPackage modelPackage = (ModelPackage)this.refImmediatePackage();
         
         Operation operation = modelPackage.getOperation().createOperation(name, "", ScopeKindEnum.INSTANCE_LEVEL, VisibilityKindEnum.PUBLIC_VIS, true);

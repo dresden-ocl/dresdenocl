@@ -27,11 +27,11 @@
         <property name="dir.resources.ocleval" value="${dir.resources}/generatedOclEval" />
         <property name="dir.grammars" value="${dir.resources}/grammars" />
 <!--        <property name="dir.buildconf" value="${basedir}/build" /> -->
-        <property name="dir.software" value="${basedir}/software" />
+        <property name="dir.software" value="${basedir}/lib/external" />
         <property name="jar.libs.jgraph" value="${dir.software}/jgraph.jar" />
         <property name="jar.libs.jgraphaddons" value="${dir.software}/jgraphaddons.jar" />
         <property name="dir.libs.basic" value="${dir.software}/lib" />        
-        <property name="dir.libs.mdr" value="${basedir}/software/mdr" />        
+        <property name="dir.libs.mdr" value="lib/external/mdr" />        
         <property name="jar.sablecc.plain" value="${dir.software}/sablecc.jar" />
         <property name="jar.sablecc.anttask" value="${dir.software}/sablecc-anttask.jar" />
         <taskdef name="sablecc" classname="org.sablecc.ant.taskdef.Sablecc">
@@ -70,11 +70,11 @@
         <property name="srcdir.jmi.if" value="${dir.resources}/generatedJMI" />
         <property name="objdir.jmi.if" value="${objdir.base}/jmi-api" />
         
-        <property name="srcdir.jmi.impl" value="${srcdir.generic}/tudresden/ocl20/jmi" />
+        <property name="srcdir.jmi.impl" value="${srcdir.generic}/tudresden/ocl20/core/jmi" />
         <property name="objdir.jmi.impl" value="${objdir.base}/jmi-impl" />
         
-        <property name="objdir.libs" value="${basedir}/libs" />
-        <property name="destdir.javadoc" value="${basedir}/doc/api-new" />
+        <property name="objdir.libs" value="${basedir}/lib/internal" />
+        <property name="destdir.javadoc" value="${basedir}/doc/api" />
         
         <property name="jar.libs.jmi-api.relative" value="ocl20jmiapi.jar" />
         <property name="jar.libs.jmi-api" value="${objdir.libs}/ocl20jmiapi.jar" />
@@ -155,22 +155,22 @@
     
     
     <!-- compile MDR interfaces -->
-    <target name="compile.mdrlib.api" depends="init"
+    <!--<target name="compile.mdrlib.api" depends="init"
         description="compiles NetBeans MDR API (mdrapi)">
         <mkdir dir="${objdir.mdrlib.api}" />
         <javac srcdir="${srcdir.mdrlib.api}" destdir="${objdir.mdrlib.api}"
             debug="true" debuglevel="lines,vars,source" source="1.4">
             <classpath refid="libs.basic" />
         </javac>
-    </target>
+    </target>-->
     <!-- create MDR interface library package -->
-    <target name="jar.mdrlib.api" depends="compile.mdrlib.api"
+    <!--<target name="jar.mdrlib.api" depends="compile.mdrlib.api"
         description="packs compiled MDR API into a jar file">
         <jar basedir="${objdir.mdrlib.api}" destfile="${jar.libs.mdr.api}" />
-    </target>
+    </target>-->
     
     <!-- compile MDR utilities -->
-    <target name="compile.mdrlib.utils" depends="init,jar.mdrlib.api" description="compiles NetBeans MDR JMI Utilities (jmiutils)">        
+    <!--<target name="compile.mdrlib.utils" depends="init,jar.mdrlib.api" description="compiles NetBeans MDR JMI Utilities (jmiutils)">        
         <mkdir dir="${objdir.mdrlib.utils}" />
         <javac srcdir="${srcdir.mdrlib.utils}" destdir="${objdir.mdrlib.utils}"
             debug="true" debuglevel="lines,vars,source" source="1.4">
@@ -183,15 +183,15 @@
         <copy todir="${objdir.mdrlib.utils}/META-INF">
             <fileset dir="${srcdir.mdrlib.utils}/META-INF" />
         </copy>
-    </target>
+    </target>-->
     <!-- create MDR JMI utilities package -->
-    <target name="jar.mdrlib.utils" depends="compile.mdrlib.utils"
+    <!--<target name="jar.mdrlib.utils" depends="compile.mdrlib.utils"
         description="packs compiled MDR JMI utilities into a jar file">
         <jar basedir="${objdir.mdrlib.utils}" destfile="${jar.libs.mdr.jmiutils}" />
-    </target>
+    </target>-->
 
     <!-- compile MDR implementation -->
-    <target name="compile.mdrlib.impl" depends="init,jar.mdrlib.api,jar.mdrlib.utils"
+    <!--<target name="compile.mdrlib.impl" depends="init,jar.mdrlib.api,jar.mdrlib.utils"
         description="compiles NetBeans MDR Implementation (nbmdr)">
         <mkdir dir="${objdir.mdrlib.impl}" />
         <javac srcdir="${srcdir.mdrlib.impl}" destdir="${objdir.mdrlib.impl}"
@@ -205,17 +205,17 @@
         <copy todir="${objdir.mdrlib.impl}/META-INF">
             <fileset dir="${srcdir.mdrlib.impl}/META-INF" />
         </copy>
-    </target>
+    </target>-->
     <!-- create MDR implementation package -->
-    <target name="jar.mdrlib.impl" depends="compile.mdrlib.impl"
+    <!--<target name="jar.mdrlib.impl" depends="compile.mdrlib.impl"
         description="packs compiled MDR implementation into a jar file">
         <jar basedir="${objdir.mdrlib.impl}" destfile="${jar.libs.mdr.impl}" />
-    </target>
+    </target>-->
 
     
     
     <!-- create JAR archives for all required MDR subpackages (API, impl, utils) -->
-    <target name="jar.mdrlibs" depends="init" />
+    <!--<target name="jar.mdrlibs" depends="init" />-->
     
     <!-- mdr libs are pre-build now -->
     <!-- <target name="jar.mdrlibs" depends="init,jar.mdrlib.api,jar.mdrlib.impl,jar.mdrlib.utils" /> -->
@@ -244,7 +244,7 @@
         description="compiles JMI implementation classes for MOF-OCL and UML-OCL">
         <javac srcdir="${srcdir.generic}" destdir="${objdir.jmi.impl}"
             debug="true" debuglevel="lines,vars,source" source="1.4">
-            <include name="tudresden/ocl20/jmi/**/*.java" />            
+            <include name="tudresden/ocl20/core/jmi/**/*.java" />            
             <classpath id="libs.jmi-api">
                 <pathelement location="${jar.libs.jmi-api}" />
                 <path refid="libs.mdr" />
@@ -264,12 +264,12 @@
         <mkdir dir="${objdir.generic}" />
         <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}"
             debug="true" debuglevel="lines,vars,source">
-            <include name="tudresden/ocl20/lib/*.java" />            
-            <include name="tudresden/ocl20/TypeEvaluator.java" />
-            <include name="tudresden/ocl20/OclModelHelper.java" />
-            <include name="tudresden/ocl20/OclModelException.java" />
-            <include name="tudresden/ocl20/OclModel.java" />
-            <include name="tudresden/ocl20/WellFormednessException.java" />
+            <include name="tudresden/ocl20/core/lib/*.java" />            
+            <include name="tudresden/ocl20/core/TypeEvaluator.java" />
+            <include name="tudresden/ocl20/core/OclModelHelper.java" />
+            <include name="tudresden/ocl20/core/OclModelException.java" />
+            <include name="tudresden/ocl20/core/OclModel.java" />
+            <include name="tudresden/ocl20/core/WellFormednessException.java" />
             <classpath>
                 <!-- <pathelement location="${jar.libs.jmi-api}" /> -->
                 <path refid="libs.basic" />
@@ -282,12 +282,12 @@
     <target name="jar.ocl20stdlib" depends="compile.ocl20stdlib"
         description="packs compiled JMI-backed OCL2.0 Standard library into a jar file">
         <jar basedir="${objdir.generic}" destfile="${jar.libs.ocl20stdlib}">
-            <include name="tudresden/ocl20/lib/*.class" />
-            <include name="tudresden/ocl20/TypeEvaluator.class" />
-            <include name="tudresden/ocl20/OclModelHelper.class" />
-            <include name="tudresden/ocl20/OclModelException.class" />
-            <include name="tudresden/ocl20/OclModel.class" />
-            <include name="tudresden/ocl20/WellFormednessException.class" />
+            <include name="tudresden/ocl20/core/lib/*.class" />
+            <include name="tudresden/ocl20/core/TypeEvaluator.class" />
+            <include name="tudresden/ocl20/core/OclModelHelper.class" />
+            <include name="tudresden/ocl20/core/OclModelException.class" />
+            <include name="tudresden/ocl20/core/OclModel.class" />
+            <include name="tudresden/ocl20/core/WellFormednessException.class" />
         </jar>
     </target>
     
@@ -402,17 +402,17 @@
         description="checks whether the OCL20 parser code generated by SableCC-extended is up to date">
         <condition property="codegen.sableparser.uptodate" >
             <and>
-                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/parser/parser.dat" />
-                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/lexer/lexer.dat" />
-                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/analysis/Analysis.java" />
-                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/analysis/AnalysisAdapter.java" />
-                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/analysis/DepthFirstAdapter.java" />
-                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/analysis/ReversedDepthFirstAdapter.java" />
-                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/analysis/AnalysisWithReturn.java" />
-                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/analysis/LAttrEvalAdapter.java" />
+                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/parser/parser.dat" />
+                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/lexer/lexer.dat" />
+                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/analysis/Analysis.java" />
+                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/analysis/AnalysisAdapter.java" />
+                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/analysis/DepthFirstAdapter.java" />
+                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/analysis/ReversedDepthFirstAdapter.java" />
+                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/analysis/AnalysisWithReturn.java" />
+                <uptodate srcfile="${dir.grammars}/OCL20.xgrammar" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/analysis/LAttrEvalAdapter.java" />
                 
-                <uptodate srcfile="${jar.sablecc.extended}" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/analysis/AnalysisWithReturn.java" />
-                <uptodate srcfile="${jar.sablecc.extended}" targetfile="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc/analysis/LAttrEvalAdapter.java" />
+                <uptodate srcfile="${jar.sablecc.extended}" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/analysis/AnalysisWithReturn.java" />
+                <uptodate srcfile="${jar.sablecc.extended}" targetfile="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc/analysis/LAttrEvalAdapter.java" />
             </and>
         </condition>
     </target>
@@ -431,7 +431,7 @@
             debug="true" debuglevel="lines,vars,source"
             deprecation="true" source="1.4">
                         
-            <include name="tudresden/ocl20/parser/astlib/*.java" />
+            <include name="tudresden/ocl20/core/parser/astlib/*.java" />
             <include name="org/sablecc/sablecc/TypeMap.java" />
             
             <classpath>
@@ -447,7 +447,7 @@
 
         <jar basedir="${objdir.generic}" destfile="${jar.libs.sable-astlib}">
             <include name="org/sablecc/sablecc/TypeMap.class" />
-            <include name="tudresden/ocl20/parser/astlib/**" />
+            <include name="tudresden/ocl20/core/parser/astlib/**" />
         </jar>
    </target>
 
@@ -462,7 +462,7 @@
         unless="codegen.sableparser.uptodate"
         description="generate the OCL2.0 parser skeleton using SableCC-extended">
         <delete verbose="true" failonerror="false">
-            <fileset dir="${srcdir.sableparser}/tudresden/ocl20/parser/sablecc">
+            <fileset dir="${srcdir.sableparser}/tudresden/ocl20/core/parser/sablecc">
                 <include name="analysis/*.java" />
                 <include name="node/*.java" />
                 <include name="lexer/*" />
@@ -470,7 +470,7 @@
             </fileset>
         </delete>
         <delete verbose="true" failonerror="false">
-            <fileset dir="${objdir.sableparser}/tudresden/ocl20/parser/sablecc">
+            <fileset dir="${objdir.sableparser}/tudresden/ocl20/core/parser/sablecc">
                 <include name="**.class" />
                 <include name="**.dat" />
                 <include name="**.txt" />
@@ -492,8 +492,8 @@
         <mkdir dir="${objdir.generic}" />
         <javac srcdir="${srcdir.sableparser}" destdir="${objdir.generic}"
             debug="true" debuglevel="lines,vars,source" source="1.4">
-            <include name="tudresden/ocl20/parser/sablecc/**/*.java" />
-            <include name="tudresden/ocl20/parser/sablecc/*.java" />
+            <include name="tudresden/ocl20/core/parser/sablecc/**/*.java" />
+            <include name="tudresden/ocl20/core/parser/sablecc/*.java" />
             <classpath id="classpath.sableparser">
                 <pathelement location="${jar.libs.jmi-api}" />
                 <pathelement location="${jar.libs.sable-astlib}" />
@@ -503,15 +503,15 @@
         </javac>
         <copy todir="${objdir.generic}">
             <fileset dir="${srcdir.sableparser}">
-                <include name="tudresden/ocl20/parser/sablecc/**/*.dat"/>
-                <include name="tudresden/ocl20/parser/sablecc/**/*.txt"/>
+                <include name="tudresden/ocl20/core/parser/sablecc/**/*.dat"/>
+                <include name="tudresden/ocl20/core/parser/sablecc/**/*.txt"/>
             </fileset>
         </copy>
     </target>
     <target name="jar.sableparser" depends="init,compile.sableparser"
         description="packs basic OCL20 parser components (AST library, lexer, parser) into a jar file" >
         <jar basedir="${objdir.generic}" destfile="${jar.libs.sableparser}">
-            <include name="tudresden/ocl20/parser/sablecc/**" />
+            <include name="tudresden/ocl20/core/parser/sablecc/**" />
         </jar>
     </target>
     
@@ -526,12 +526,12 @@
         <javac srcdir="${srcdir.sableparser}" destdir="${objdir.generic}" 
             debug="true" debuglevel="lines,vars,source"
             source="1.4">
-            <include name="tudresden/ocl20/parser/**/*.java" />
-            <include name="tudresden/ocl20/parser/*.java" />
-            <include name="tudresden/ocl20/parser/astgen/LAttrAstGenerator.java" />
-            <exclude name="tudresden/ocl20/parser/sablecc/**" />
-            <exclude name="tudresden/ocl20/parser/astgen/ASTGenerator.java" />
-            <exclude name="tudresden/ocl20/parser/OCL20ASTGeneratorExample.java" />
+            <include name="tudresden/ocl20/core/parser/**/*.java" />
+            <include name="tudresden/ocl20/core/parser/*.java" />
+            <include name="tudresden/ocl20/core/parser/astgen/LAttrAstGenerator.java" />
+            <exclude name="tudresden/ocl20/core/parser/sablecc/**" />
+            <exclude name="tudresden/ocl20/core/parser/astgen/ASTGenerator.java" />
+            <exclude name="tudresden/ocl20/core/parser/OCL20ASTGeneratorExample.java" />
             <classpath id="classpath.parsertools">
                 <path refid="libs.basic" />
                 <path refid="libs.mdr" />
@@ -548,20 +548,20 @@
         depends="init,init.mdr,jar.jmi.if,jar.jmi.impl,jar.ocl20repository,jar.ocl20stdlib,jar.sableparser,compile.parsertools"
         description="packs the OCL2.0 parser tools into a jar file" >
         <jar basedir="${objdir.generic}" destfile="${jar.libs.parsertools}">
-            <include name="tudresden/ocl20/parser/sablecc/**" />
-            <include name="tudresden/ocl20/parser/**/*.class" />
-            <include name="tudresden/ocl20/parser/*.class" />
-            <include name="tudresden/ocl20/parser/astgen/LAttrAstGenerator.class" />
-            <exclude name="tudresden/ocl20/parser/sablecc/**" />
-            <exclude name="tudresden/ocl20/parser/astgen/ASTGenerator.class" />
-            <exclude name="tudresden/ocl20/parser/OCL20ASTGeneratorExample.class" />
+            <include name="tudresden/ocl20/core/parser/sablecc/**" />
+            <include name="tudresden/ocl20/core/parser/**/*.class" />
+            <include name="tudresden/ocl20/core/parser/*.class" />
+            <include name="tudresden/ocl20/core/parser/astgen/LAttrAstGenerator.class" />
+            <exclude name="tudresden/ocl20/core/parser/sablecc/**" />
+            <exclude name="tudresden/ocl20/core/parser/astgen/ASTGenerator.class" />
+            <exclude name="tudresden/ocl20/core/parser/OCL20ASTGeneratorExample.class" />
         </jar>
     </target>
     
     <target name="run.parser-gui"
         depends="init,jar.parsertools"
         description="runs the OCL2.0 parser GUI" >
-        <java classname="tudresden.ocl20.parser.OCL20GUI"
+        <java classname="tudresden.ocl20.core.parser.OCL20GUI"
             fork="true" maxmemory="128M"> <!-- spawn="true" -->
             <!-- <jvmarg value="-Xdebug"/> -->  
             <!-- <jvmarg value="-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"/> --> 
@@ -587,7 +587,7 @@
     <target name="run.parser-cli"
         depends="init,jar.parsertools"
         description="runs the OCL2.0 parser CLI" >
-        <java classname="tudresden.ocl20.parser.OCL20CLI"
+        <java classname="tudresden.ocl20.core.parser.OCL20CLI"
             fork="true" maxmemory="128M"> 
 	    <arg value="${XMI}" />
 	    <arg value="${OCL}" />
@@ -620,14 +620,14 @@
         <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
             deprecation="true"
             debug="true" debuglevel="lines,vars,source">
-            <include name="tudresden/ocl20/*.java" />
-            <include name="tudresden/ocl20/util/**.java" />
+            <include name="tudresden/ocl20/core/*.java" />
+            <include name="tudresden/ocl20/core/util/**.java" />
             <exclude name="**.html" />
-            <exclude name="tudresden/ocl20/TypeEvaluator.java" />
-            <exclude name="tudresden/ocl20/OclModelHelper.java" />
-            <exclude name="tudresden/ocl20/OclModelException.java" />
-            <exclude name="tudresden/ocl20/OclModel.java" />
-            <exclude name="tudresden/ocl20/WellFormednessException.java" />
+            <exclude name="tudresden/ocl20/core/TypeEvaluator.java" />
+            <exclude name="tudresden/ocl20/core/OclModelHelper.java" />
+            <exclude name="tudresden/ocl20/core/OclModelException.java" />
+            <exclude name="tudresden/ocl20/core/OclModel.java" />
+            <exclude name="tudresden/ocl20/core/WellFormednessException.java" />
             <classpath>
                 <path refid="libs.basic" />
                 <path refid="libs.mdr" />
@@ -637,8 +637,8 @@
     <target name="jar.ocl20repository" depends="init,compile.ocl20repository"
         description="packs components for OCL20 basic support (lib, MDR integration) into a jar file" >
         <jar basedir="${objdir.generic}" destfile="${jar.libs.ocl20repository}">
-            <include name="tudresden/ocl20/*.class" />
-            <include name="tudresden/ocl20/util/**.class" />
+            <include name="tudresden/ocl20/core/*.class" />
+            <include name="tudresden/ocl20/core/util/**.class" />
         </jar>
     </target>
 
@@ -658,7 +658,7 @@
             </and>
         </condition>
     </target>
-    <target name="init.mdr" depends="init,init.mdr.uptodate,jar.mdrlibs,jar.ocl20repository"
+    <target name="init.mdr" depends="init,init.mdr.uptodate,jar.ocl20repository"
         description="initializes the Meta-Data Repository (MDR)"
         unless="init.mdr.uptodate">
         <mkdir dir="${dir.resources.mdr}" />
@@ -671,7 +671,7 @@
                 <include name="**/*.java" />
             </fileset>
         </delete>
-        <java classname="tudresden.ocl20.MetaModelIntegrator"
+        <java classname="tudresden.ocl20.core.MetaModelIntegrator"
             failonerror="true" fork="true" >
             <classpath>
                 <path refid="libs.mdr" />
@@ -693,7 +693,7 @@
         <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
             deprecation="true"
             debug="true" debuglevel="lines,vars,source">
-            <include name="tudresden/ocl20/oclscript/**.java" />
+            <include name="tudresden/ocl20/core/oclscript/**.java" />
             <exclude name="**.html" />
             <classpath>
                 <path refid="libs.mdr" />
@@ -706,7 +706,7 @@
         description="packs the OclScript runner into a jar file" >
         <mkdir dir="${objdir.generic}"/>
         <jar basedir="${objdir.generic}" destfile="${jar.libs.oclscriptrunner}">
-            <include name="tudresden/ocl20/oclscript/*.class" />
+            <include name="tudresden/ocl20/core/oclscript/*.class" />
         </jar>
     </target>
     <target name="run.oclscript"
@@ -737,7 +737,7 @@
         <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
             deprecation="true"
             debug="true" debuglevel="lines,vars,source">
-            <include name="tudresden/ocl20/codegen/**.java" />
+            <include name="tudresden/ocl20/codegen/java/**.java" />
             <exclude name="**.html" />
             <classpath>
                 <path refid="libs.mdr" />
@@ -750,7 +750,7 @@
         description="packs the Java code generator into a jar file" >
         <mkdir dir="${objdir.generic}"/>
         <jar basedir="${objdir.generic}" destfile="${jar.libs.codegen.java}">
-            <include name="tudresden/ocl20/codegen/*.class" />
+            <include name="tudresden/ocl20/codegen/java/*.class" />
         </jar>
     </target>
         
@@ -849,12 +849,12 @@
 		<exclude name="resources/grammars/*.TSG" />
                 <exclude name="**/.nb*" />
             </fileset>
-            <include name="software/jgraph.jar" />
-            <include name="software/jgraphaddons.jar" />
+            <include name="$(dir.software)/jgraph.jar" />
+            <include name="$(dir.software)/jgraphaddons.jar" />
             <!-- <include name="software/antlr.jar" /> -->
-	    <include name="software/README" />
-            <include name="software/sablecc.jar" />
-            <include name="software/lib/*.jar" />
+	    <include name="$(dir.software)/README" />
+            <include name="$(dir.software)/sablecc.jar" />
+            <include name="$(dir.software)/lib/*.jar" />
             <include name="src/**" />
             <include name="src_mdr/**" />
             <include name="GETTING-STARTED" />
@@ -871,14 +871,14 @@
         <delete failonerror="false">
             <fileset dir="${objdir.generic}" includes="**/*" />
             <fileset dir="${objdir.jmi.if}" includes="**/*" />
-            <fileset dir="${objdir.mdrlib.api}" includes="**/*" />
-            <fileset dir="${objdir.mdrlib.utils}" includes="**/*" />
-            <fileset dir="${objdir.mdrlib.impl}" includes="**/*" />
+            <!--<fileset dir="${objdir.mdrlib.api}" includes="**/*" />-->
+            <!--<fileset dir="${objdir.mdrlib.utils}" includes="**/*" />-->
+            <!--<fileset dir="${objdir.mdrlib.impl}" includes="**/*" />-->
             <fileset dir="${srcdir.jmi.if}" includes="**/*" />
-            <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/parser/sablecc/analysis/*.*" />
-            <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/parser/sablecc/node/*.*" />
-            <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/parser/sablecc/lexer/*.*" />
-            <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/parser/sablecc/parser/*.*" />
+            <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/core/parser/sablecc/analysis/*.*" />
+            <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/core/parser/sablecc/node/*.*" />
+            <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/core/parser/sablecc/lexer/*.*" />
+            <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/core/parser/sablecc/parser/*.*" />
             <fileset dir="${objdir.jmi.impl}" includes="**/*" />
             <fileset dir="${objdir.sablecc-extended}" includes="**/*" />
             <fileset dir="${srcdir.sablecc-extended}" includes="org/sablecc/sablecc/analysis/*.*" />

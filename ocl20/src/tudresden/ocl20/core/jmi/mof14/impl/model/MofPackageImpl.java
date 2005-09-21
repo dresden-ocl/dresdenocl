@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -51,7 +51,7 @@ public abstract class MofPackageImpl extends GeneralizableElementImpl implements
     
     //find a package by full qualified name
     /** find a package by its "::"-separated pathname */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Package findPackage(java.util.List pathName) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Package findPackage(java.util.List pathName) {
         if(pathName.size()==0){
             return this;
         } else {
@@ -82,7 +82,7 @@ public abstract class MofPackageImpl extends GeneralizableElementImpl implements
     }
     
     /** find a classifier by its "::"-separated pathname */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier findClassifier(java.util.List pathName) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier findClassifier(java.util.List pathName) {
         if(pathName.size()==1){
         //not fully qualified, just a simple Classifier name
             
@@ -90,7 +90,7 @@ public abstract class MofPackageImpl extends GeneralizableElementImpl implements
              
             //add-on: If the class is in the Ocl Library,  always return that one.
             MofPackageImpl oclLibPackage = (MofPackageImpl) getOclLibrary().getOclLibPackage();
-            tudresden.ocl20.jmi.ocl.commonmodel.Classifier cl = oclLibPackage.findClassifierHere(name);
+            tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier cl = oclLibPackage.findClassifierHere(name);
             if(cl!=null){
                 return cl;
             }
@@ -98,7 +98,7 @@ public abstract class MofPackageImpl extends GeneralizableElementImpl implements
             Collection candidates = new  HashSet();
             findClassifierUnqualified(name, candidates, new HashSet());
             if(candidates.size()==1){
-                return (tudresden.ocl20.jmi.ocl.commonmodel.Classifier) candidates.iterator().next();
+                return (tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier) candidates.iterator().next();
             }
            
             
@@ -127,7 +127,7 @@ public abstract class MofPackageImpl extends GeneralizableElementImpl implements
             return;
         } 
         visitedPackages.add(this);
-        tudresden.ocl20.jmi.ocl.commonmodel.Classifier candidate = findClassifierHere(name);
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier candidate = findClassifierHere(name);
         if(candidate != null){
             System.out.println("Classifier "+name+" found in Package "+this.getNameA());
             classifiers.add(candidate);
@@ -141,7 +141,7 @@ public abstract class MofPackageImpl extends GeneralizableElementImpl implements
     }
     
     //look for a Classifier in this package (and all inherited packages) 
-    private tudresden.ocl20.jmi.ocl.commonmodel.Classifier findClassifierHere(String name){
+    private tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier findClassifierHere(String name){
         try{ 
             ModelElement me = (ModelElement) this.lookupElementExtended(name);              
             if(me instanceof Classifier){

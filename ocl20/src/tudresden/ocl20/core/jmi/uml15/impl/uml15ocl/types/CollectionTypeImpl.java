@@ -30,13 +30,13 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.uml15ocl.types;
+package tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types;
 
-import tudresden.ocl20.jmi.uml15.impl.core.ClassifierImpl;
+import tudresden.ocl20.core.jmi.uml15.impl.core.ClassifierImpl;
 
-import tudresden.ocl20.jmi.uml15.uml15ocl.types.*;
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.uml15.*;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.types.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.*;
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
@@ -52,7 +52,7 @@ public abstract class CollectionTypeImpl extends ClassifierImpl implements Colle
         super(storable);
     }
     
-    public boolean conformsTo(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public boolean conformsTo(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         if(super.conformsTo(c)){
             return true;
         }
@@ -71,7 +71,7 @@ public abstract class CollectionTypeImpl extends ClassifierImpl implements Colle
         return false; 
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c){
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c){
         if(c instanceof CollectionType){
             System.out.println(getNameA());
             System.out.println(((Classifier)c).getNameA());
@@ -100,7 +100,7 @@ public abstract class CollectionTypeImpl extends ClassifierImpl implements Colle
         return null; 
     }
     
-    public  tudresden.ocl20.jmi.ocl.commonmodel.Classifier getFlatElementType() {
+    public  tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getFlatElementType() {
         Classifier elementType = (Classifier)getElementType();
         if(elementType instanceof CollectionType){
             return ((CollectionType) elementType).getFlatElementType();

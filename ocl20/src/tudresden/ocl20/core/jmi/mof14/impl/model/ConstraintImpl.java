@@ -30,11 +30,11 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
-import tudresden.ocl20.jmi.mof14.model.*;
-import tudresden.ocl20.jmi.mof14.mof14ocl.expressions.ExpressionInOcl;
-import tudresden.ocl20.jmi.mof14.mof14ocl.adapters.AdExpression;
+import tudresden.ocl20.core.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.expressions.ExpressionInOcl;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.adapters.AdExpression;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -52,14 +52,14 @@ public abstract class ConstraintImpl extends ModelElementImpl implements Constra
     }
     
     /** set the model element this Constraint is attached to */    
-    public void setConstrainedElementA(tudresden.ocl20.jmi.ocl.commonmodel.ModelElement me) {
+    public void setConstrainedElementA(tudresden.ocl20.core.jmi.ocl.commonmodel.ModelElement me) {
        java.util.Collection c =  this.getConstrainedElements();
        c.clear();
        c.add(me);
     }
     
     /** get the model element this Constraint is attached to */    
-     public tudresden.ocl20.jmi.ocl.commonmodel.ModelElement getConstrainedElementA() {
+     public tudresden.ocl20.core.jmi.ocl.commonmodel.ModelElement getConstrainedElementA() {
         java.util.Collection c =  this.getConstrainedElements();
         if(!c.isEmpty()){
             return (ModelElement) c.iterator().next();
@@ -68,13 +68,13 @@ public abstract class ConstraintImpl extends ModelElementImpl implements Constra
     }
      
      /** get the body expression */     
-    public  tudresden.ocl20.jmi.ocl.commonmodel.Expression getBodyA() {
+    public  tudresden.ocl20.core.jmi.ocl.commonmodel.Expression getBodyA() {
         AdExpression exp = ((ModelPackage)this.refOutermostPackage()).getMof14ocl().getAdapters().getABodyConstraint().getBody(this);      
             return  exp;
     }
     
     /** set the body expression */    
-    public void setBodyA(tudresden.ocl20.jmi.ocl.commonmodel.Expression exp) {
+    public void setBodyA(tudresden.ocl20.core.jmi.ocl.commonmodel.Expression exp) {
         ((ModelPackage)this.refOutermostPackage()).getMof14ocl().getAdapters().getABodyConstraint().add((AdExpression)exp,this);      
     }
     

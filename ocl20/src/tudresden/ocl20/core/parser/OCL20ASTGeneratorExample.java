@@ -27,14 +27,18 @@
  *
  */
 
-package tudresden.ocl20.parser;
+package tudresden.ocl20.core.parser;
 
 import tudresden.ocl20.*;
 
-import tudresden.ocl20.jmi.ocl.*;
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.MetaModelConst;
+import tudresden.ocl20.core.ModelManager;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.TypeEvaluator;
+import tudresden.ocl20.core.jmi.ocl.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 
 import javax.jmi.reflect.*;
 
@@ -109,7 +113,7 @@ public class OCL20ASTGeneratorExample {
     }
     
     private static void visualizeModel(OclModel model) throws Exception {
-        tudresden.ocl20.jmi.ocl.commonmodel.Package topPkg = model.getTopPackage();
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Package topPkg = model.getTopPackage();
         
         OclExpressionFactory factory = model.getOclExpressionFactory();
         TypeEvaluator typeEval = model.getTypeEvaluator();

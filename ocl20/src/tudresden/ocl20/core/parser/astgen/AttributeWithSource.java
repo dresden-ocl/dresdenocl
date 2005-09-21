@@ -27,9 +27,9 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
-import tudresden.ocl20.jmi.ocl.commonmodel.Attribute;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute;
 
 /**
  *

@@ -27,9 +27,9 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
-import tudresden.ocl20.jmi.ocl.commonmodel.ModelElement;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.ModelElement;
 
 /**
  * Support for modification (writing) of an Environment.

@@ -30,11 +30,11 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.core;
+package tudresden.ocl20.core.jmi.uml15.impl.core;
 
-import tudresden.ocl20.jmi.uml15.uml15.*;
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
@@ -51,7 +51,7 @@ public abstract class ParameterImpl extends ModelElementImpl implements Paramete
     }
     
     //Ocl Submission version 1.6, chapter 3.3.8, p 3-23
-    public tudresden.ocl20.jmi.ocl.commonmodel.Attribute asAttribute() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute asAttribute() {
         Uml15Package umlPackage = (Uml15Package) this.refOutermostPackage(); 
         
         
@@ -61,7 +61,7 @@ public abstract class ParameterImpl extends ModelElementImpl implements Paramete
         } else {
             name = getNameA();
         }
-        tudresden.ocl20.jmi.ocl.commonmodel.Classifier type = this.getTypeA(); 
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier type = this.getTypeA(); 
         
         Attribute a = (Attribute) umlPackage.getCore().getAttribute().make(name,type);
         
@@ -81,19 +81,19 @@ public abstract class ParameterImpl extends ModelElementImpl implements Paramete
         return false;  //or true... nevermind
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getTypeA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getTypeA() {
         return this.getType().toOclType();
     }
     
     private static Map kindMap = new HashMap();
     static {
-        kindMap.put(ParameterDirectionKindEnum.PDK_INOUT, tudresden.ocl20.jmi.ocl.commonmodel.DirectionKindEnum.INOUT);
-        kindMap.put(ParameterDirectionKindEnum.PDK_IN, tudresden.ocl20.jmi.ocl.commonmodel.DirectionKindEnum.IN);
-        kindMap.put(ParameterDirectionKindEnum.PDK_OUT, tudresden.ocl20.jmi.ocl.commonmodel.DirectionKindEnum.OUT);
-        kindMap.put(ParameterDirectionKindEnum.PDK_RETURN, tudresden.ocl20.jmi.ocl.commonmodel.DirectionKindEnum.RETURN);
+        kindMap.put(ParameterDirectionKindEnum.PDK_INOUT, tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKindEnum.INOUT);
+        kindMap.put(ParameterDirectionKindEnum.PDK_IN, tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKindEnum.IN);
+        kindMap.put(ParameterDirectionKindEnum.PDK_OUT, tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKindEnum.OUT);
+        kindMap.put(ParameterDirectionKindEnum.PDK_RETURN, tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKindEnum.RETURN);
     }
-    public tudresden.ocl20.jmi.ocl.commonmodel.DirectionKind getKindA() {
-        return (tudresden.ocl20.jmi.ocl.commonmodel.DirectionKind) kindMap.get(this.getKind());
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKind getKindA() {
+        return (tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKind) kindMap.get(this.getKind());
     }
     
 }

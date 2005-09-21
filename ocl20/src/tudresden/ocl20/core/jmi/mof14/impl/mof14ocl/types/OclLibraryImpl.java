@@ -30,11 +30,11 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.types;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.types.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.types.*;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
@@ -47,15 +47,15 @@ import java.util.*;
  */
 public abstract class OclLibraryImpl extends InstanceHandler implements OclLibrary{
     
-    tudresden.ocl20.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper lib;
+    tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper lib;
     
     /** Creates a new instance of OclLibraryImpl */
     protected OclLibraryImpl(StorableObject storable) {      
         super(storable);
-        lib = tudresden.ocl20.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper.getInstance((ModelPackage)refOutermostPackage());
+        lib = tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper.getInstance((ModelPackage)refOutermostPackage());
     }
     
-    private tudresden.ocl20.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper getLib(){
+    private tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper getLib(){
         return lib;
     }
     
@@ -63,19 +63,19 @@ public abstract class OclLibraryImpl extends InstanceHandler implements OclLibra
         return (TypesPackage) refImmediatePackage();
     }
     
-    public tudresden.ocl20.jmi.ocl.types.OclMessageType makeOclMessageType(tudresden.ocl20.jmi.ocl.commonmodel.Signal sig) {
+    public tudresden.ocl20.core.jmi.ocl.types.OclMessageType makeOclMessageType(tudresden.ocl20.core.jmi.ocl.commonmodel.Signal sig) {
         return getTypesPackage().getOclMessageType().makeFromSignal(sig);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.OclMessageType makeOclMessageType(tudresden.ocl20.jmi.ocl.commonmodel.Operation op) {
+    public tudresden.ocl20.core.jmi.ocl.types.OclMessageType makeOclMessageType(tudresden.ocl20.core.jmi.ocl.commonmodel.Operation op) {
         return getTypesPackage().getOclMessageType().makeFromOperation(op);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.TupleType makeTupleType(java.util.List atts){
+    public tudresden.ocl20.core.jmi.ocl.types.TupleType makeTupleType(java.util.List atts){
         return getTypesPackage().getTupleType().make(atts);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.TupleType makeTupleType(java.util.List names, java.util.List types) {       
+    public tudresden.ocl20.core.jmi.ocl.types.TupleType makeTupleType(java.util.List names, java.util.List types) {       
         AttributeClass  ac = ((ModelPackage)refOutermostPackage()).getAttribute();
         List attr = new ArrayList();
         for(int i = 0; i<names.size(); i++){
@@ -84,51 +84,51 @@ public abstract class OclLibraryImpl extends InstanceHandler implements OclLibra
         return makeTupleType(attr);
     }
       
-    public tudresden.ocl20.jmi.ocl.types.VoidType getOclVoid() {
+    public tudresden.ocl20.core.jmi.ocl.types.VoidType getOclVoid() {
         return getLib().getVoid();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Primitive getOclString() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Primitive getOclString() {
         return getLib().getString();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Primitive getOclReal() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Primitive getOclReal() {
         return getLib().getReal();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Primitive getOclInteger() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Primitive getOclInteger() {
         return getLib().getInteger();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Primitive getOclBoolean() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Primitive getOclBoolean() {
         return getLib().getBoolean();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getOclAny() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getOclAny() {
         return getLib().getAny();
     }
     
-    public tudresden.ocl20.jmi.ocl.types.SetType getSetType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.types.SetType getSetType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         return getLib().getSetType((MofClass)c);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.SequenceType getSequenceType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.types.SequenceType getSequenceType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         return getLib().getSequenceType((MofClass)c);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.CollectionType getCollectionType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.types.CollectionType getCollectionType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         return getLib().getCollectionType((MofClass)c);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.BagType getBagType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.types.BagType getBagType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         return getLib().getBagType((MofClass)c);
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Package getOclLibPackage() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Package getOclLibPackage() {
         return getLib().getOclLibPackage();
     }
     
-    public boolean contains(tudresden.ocl20.jmi.ocl.commonmodel.Operation op) {
+    public boolean contains(tudresden.ocl20.core.jmi.ocl.commonmodel.Operation op) {
         Namespace container = ((Operation)op).getContainer();
         while(!(container instanceof MofPackage) && container != null){
             container=container.getContainer();

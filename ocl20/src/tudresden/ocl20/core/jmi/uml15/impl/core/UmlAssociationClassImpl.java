@@ -30,10 +30,10 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.core;
+package tudresden.ocl20.core.jmi.uml15.impl.core;
 
 
-import tudresden.ocl20.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;

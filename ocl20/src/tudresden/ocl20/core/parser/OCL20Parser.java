@@ -27,14 +27,14 @@
  *
  */
 
-package tudresden.ocl20.parser;
+package tudresden.ocl20.core.parser;
 
-import tudresden.ocl20.parser.sablecc.analysis.*;
-import tudresden.ocl20.parser.sablecc.lexer.Lexer;
-import tudresden.ocl20.parser.sablecc.lexer.LexerException;
-import tudresden.ocl20.parser.sablecc.parser.Parser;
-import tudresden.ocl20.parser.sablecc.parser.ParserException;
-import tudresden.ocl20.parser.sablecc.node.*;
+import tudresden.ocl20.core.parser.sablecc.analysis.*;
+import tudresden.ocl20.core.parser.sablecc.lexer.Lexer;
+import tudresden.ocl20.core.parser.sablecc.lexer.LexerException;
+import tudresden.ocl20.core.parser.sablecc.node.*;
+import tudresden.ocl20.core.parser.sablecc.parser.Parser;
+import tudresden.ocl20.core.parser.sablecc.parser.ParserException;
 
 import java.io.*;
 

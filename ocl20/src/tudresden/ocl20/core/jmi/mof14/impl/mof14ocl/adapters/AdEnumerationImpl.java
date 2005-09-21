@@ -30,13 +30,13 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.adapters;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.adapters;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.adapters.*;
-import tudresden.ocl20.jmi.mof14.model.ModelPackage;
-import tudresden.ocl20.jmi.mof14.model.EnumerationType;
-import tudresden.ocl20.jmi.mof14.impl.model.ClassifierImpl;
-import tudresden.ocl20.jmi.mof14.model.TypeMapping;
+import tudresden.ocl20.core.jmi.mof14.impl.model.ClassifierImpl;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.adapters.*;
+import tudresden.ocl20.core.jmi.mof14.model.ModelPackage;
+import tudresden.ocl20.core.jmi.mof14.model.EnumerationType;
+import tudresden.ocl20.core.jmi.mof14.model.TypeMapping;
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -44,7 +44,7 @@ import org.netbeans.mdr.storagemodel.StorableObject;
  * CommonModel::Enumeration
  * @author Administrator
  */
-public abstract class AdEnumerationImpl extends tudresden.ocl20.jmi.mof14.impl.model.MofClassImpl implements AdEnumeration{
+public abstract class AdEnumerationImpl extends tudresden.ocl20.core.jmi.mof14.impl.model.MofClassImpl implements AdEnumeration{
     
     /** Creates a new instance of AdEnumerationImpl */
     protected AdEnumerationImpl(StorableObject storable){

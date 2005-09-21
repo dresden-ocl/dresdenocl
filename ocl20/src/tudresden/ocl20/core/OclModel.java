@@ -30,10 +30,10 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20;
+package tudresden.ocl20.core;
 
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
 
 import javax.jmi.reflect.*;
 import javax.jmi.model.*;
@@ -50,9 +50,9 @@ public class OclModel {
     
 
     private OclExpressionFactory factory;   
-    private tudresden.ocl20.TypeEvaluator typeEvl;
+    private tudresden.ocl20.core.TypeEvaluator typeEvl;
     private OclLibrary oclLib;
-    private tudresden.ocl20.jmi.ocl.commonmodel.Package topPackage;
+    private tudresden.ocl20.core.jmi.ocl.commonmodel.Package topPackage;
 
     //For MOF-OCL, model is an Instance of ModelPackage. 
     //For UML-OCL, model is an Instance of UmlPackage
@@ -177,8 +177,8 @@ public class OclModel {
     
     /**
      * The package that represents this model in the repository.
-     * For MOF-OCL, model is an Instance of {@link  tudresden.ocl20.jmi.mof14.model.ModelPackage ModelPackage} 
-     * For UML-OCL, model is an Instance of {@link  tudresden.ocl20.jmi.uml15.uml15.Uml15Package UmlPackage} 
+     * For MOF-OCL, model is an Instance of {@link  tudresden.ocl20.core.jmi.mof14.model.ModelPackage ModelPackage} 
+     * For UML-OCL, model is an Instance of {@link  tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package UmlPackage} 
      */
     public RefPackage getModel(){
         return model;
@@ -200,7 +200,7 @@ public class OclModel {
         
         //find the topmost package    
         RefClass packageClass = getPackageClass(commonModelPackage);       
-        topPackage = (tudresden.ocl20.jmi.ocl.commonmodel.Package)packageClass.refInvokeOperation("getTopPackage",new ArrayList());
+        topPackage = (tudresden.ocl20.core.jmi.ocl.commonmodel.Package)packageClass.refInvokeOperation("getTopPackage",new ArrayList());
         
         //find the singleton instance of the OclExpressionFactory
         factory = (OclExpressionFactory)specificExpressionsPackage.refClass("OclExpressionFactory").refInvokeOperation("getInstance",new ArrayList());
@@ -269,37 +269,37 @@ public class OclModel {
     
     
     /** 
-     * This factory allows the creation of instances of the subclasses of {@link tudresden.ocl20.jmi.ocl.expressions.OclExpression OclExpression} within this OCL model.
+     * This factory allows the creation of instances of the subclasses of {@link tudresden.ocl20.core.jmi.ocl.expressions.OclExpression OclExpression} within this OCL model.
      */
-    public tudresden.ocl20.jmi.ocl.expressions.OclExpressionFactory getOclExpressionFactory() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.OclExpressionFactory getOclExpressionFactory() {
         return factory;
     }
     
     
     /** 
-     * This type evaluator determines the type of an {@link tudresden.ocl20.jmi.ocl.expressions.OclExpression OclExpression} within this OCL model.
+     * This type evaluator determines the type of an {@link tudresden.ocl20.core.jmi.ocl.expressions.OclExpression OclExpression} within this OCL model.
      */
-    public tudresden.ocl20.TypeEvaluator getTypeEvaluator() {
+    public tudresden.ocl20.core.TypeEvaluator getTypeEvaluator() {
         return typeEvl;
     }
     
     /** 
      * This instance of OclLibrary allows easy access to the predefined types in the OCL standard library package  within this OCL model.
      */
-    public tudresden.ocl20.jmi.ocl.types.OclLibrary getOclLibrary() {
+    public tudresden.ocl20.core.jmi.ocl.types.OclLibrary getOclLibrary() {
         return oclLib;
     }
     
     
     /**
      * This package is the topmost package of this OCL model. All lookups 
-     * for a class by its qualified name ( {@link tudresden.ocl20.jmi.ocl.commonmodel.Package#findClassifier findClassifier}) should be done by using this package as starting point.
+     * for a class by its qualified name ( {@link tudresden.ocl20.core.jmi.ocl.commonmodel.Package#findClassifier findClassifier}) should be done by using this package as starting point.
      */
-    public tudresden.ocl20.jmi.ocl.commonmodel.Package getTopPackage() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Package getTopPackage() {
         return topPackage;
     }
     
-    //    public tudresden.ocl20.jmi.oclcs.OclcsPackage getOclcsPackage(){
+    //    public tudresden.ocl20.core.jmi.oclcs.OclcsPackage getOclcsPackage(){
     //        return oclcsPackage;
     //    }
     

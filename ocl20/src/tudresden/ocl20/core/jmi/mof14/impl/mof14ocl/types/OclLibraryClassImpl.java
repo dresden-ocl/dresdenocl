@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.types;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.types.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.types.*;
 
 import org.netbeans.mdr.handlers.ClassProxyHandler;
 import org.netbeans.mdr.storagemodel.StorableClass;
@@ -49,7 +49,7 @@ public abstract class OclLibraryClassImpl extends ClassProxyHandler implements O
         super(storable);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.OclLibrary getInstance() {
+    public tudresden.ocl20.core.jmi.ocl.types.OclLibrary getInstance() {
         Iterator instances = refAllOfClass().iterator();
         if(instances.hasNext()){
             return (OclLibrary) instances.next();

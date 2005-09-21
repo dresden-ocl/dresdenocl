@@ -30,16 +30,16 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.commonbehavior;
+package tudresden.ocl20.core.jmi.uml15.impl.commonbehavior;
 
 /**
  *
  * @author  Administrator
  */
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.commonbehavior.*;
+import tudresden.ocl20.core.jmi.uml15.impl.core.ModelElementImpl;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.commonbehavior.*;
 
-import tudresden.ocl20.jmi.uml15.impl.core.ModelElementImpl;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -47,7 +47,7 @@ import org.netbeans.mdr.storagemodel.StorableObject;
 import java.util.*;
 
 
-public abstract class SignalImpl extends tudresden.ocl20.jmi.uml15.impl.core.ClassifierImpl implements Signal{
+public abstract class SignalImpl extends tudresden.ocl20.core.jmi.uml15.impl.core.ClassifierImpl implements Signal{
     
     /** Creates a new instance of SignalImpl */
     public SignalImpl(StorableObject storable) {

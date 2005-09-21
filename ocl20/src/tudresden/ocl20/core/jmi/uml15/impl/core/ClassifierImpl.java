@@ -30,17 +30,17 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.core;
+package tudresden.ocl20.core.jmi.uml15.impl.core;
 
 import java.util.*;
 
 
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.datatypes.*;
-import tudresden.ocl20.jmi.uml15.uml15ocl.expressions.*;
-import tudresden.ocl20.jmi.uml15.commonbehavior.Reception;
-import tudresden.ocl20.jmi.uml15.commonbehavior.Signal;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.expressions.*;
+import tudresden.ocl20.core.jmi.uml15.commonbehavior.Reception;
+import tudresden.ocl20.core.jmi.uml15.commonbehavior.Signal;
 
 import tudresden.ocl20.jmi.uml15.uml15ocl.types.*;
 
@@ -73,7 +73,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     
     //Ocl Submission version 1.6, chapter 3.2.1
     //MOF-UML-Common
-    public boolean conformsTo(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public boolean conformsTo(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         //System.out.println(getName()+" conformsTo "+((Classifier)c).getName()+" ?");
         
         if(equals(c)){
@@ -82,7 +82,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
         
         Iterator it = getParents().iterator();
         while(it.hasNext()){
-            tudresden.ocl20.jmi.ocl.commonmodel.Classifier parent = (tudresden.ocl20.jmi.ocl.commonmodel.Classifier) it.next();
+            tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier parent = (tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier) it.next();
             
                 //System.out.println("Consider parent:" + ((Classifier)parent).getName());
                 if(parent.equals(c)){
@@ -97,7 +97,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     }
     
     //Ocl Submission version 1.6, chapter 3.3.8, p 3-22
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         
         Set thisParents = new HashSet(); ;
         thisParents.add(this);
@@ -115,7 +115,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
             Set thisParentsTemp = new HashSet();
             Iterator thisParentsIt = thisParents.iterator();
             while(thisParentsIt.hasNext()){
-                tudresden.ocl20.jmi.ocl.commonmodel.Classifier aThisParent = (tudresden.ocl20.jmi.ocl.commonmodel.Classifier) thisParentsIt.next();
+                tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier aThisParent = (tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier) thisParentsIt.next();
                 if(cTC.contains(aThisParent)){
                     return aThisParent;
                 }
@@ -126,7 +126,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
             Set cParentsTemp = new HashSet();
             Iterator cParentsIt = cParents.iterator();
             while(cParentsIt.hasNext()){
-                tudresden.ocl20.jmi.ocl.commonmodel.Classifier aCParent = (tudresden.ocl20.jmi.ocl.commonmodel.Classifier) cParentsIt.next();
+                tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier aCParent = (tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier) cParentsIt.next();
                 if(thisTC.contains(aCParent)){
                     return aCParent;
                 }
@@ -137,16 +137,16 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
         return null; //should only occure if c is a collection type
     }
     
-    public tudresden.ocl20.jmi.ocl.types.CollectionType getCollectionType(){
+    public tudresden.ocl20.core.jmi.ocl.types.CollectionType getCollectionType(){
         return getOclLibrary().getCollectionType(this);
     }
-    public tudresden.ocl20.jmi.ocl.types.SetType getSetType(){
+    public tudresden.ocl20.core.jmi.ocl.types.SetType getSetType(){
         return getOclLibrary().getSetType(this);
     }
-    public tudresden.ocl20.jmi.ocl.types.BagType getBagType(){
+    public tudresden.ocl20.core.jmi.ocl.types.BagType getBagType(){
         return getOclLibrary().getBagType(this);
     }
-    public tudresden.ocl20.jmi.ocl.types.SequenceType getSequenceType(){
+    public tudresden.ocl20.core.jmi.ocl.types.SequenceType getSequenceType(){
         return getOclLibrary().getSequenceType(this);
     }
     
@@ -202,7 +202,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     //in order to get some more efficient code.
     //But, of course, they  still conform to the specification.
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.AssociationClass lookupAssociationClass(java.lang.String name) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationClass lookupAssociationClass(java.lang.String name) {
         //the "association" reference is missing in the UML-Metamodel!
         Iterator ownEnds = ((CorePackage)this.refImmediatePackage()).getAParticipantAssociation().getAssociation(this).iterator();
         while(ownEnds.hasNext()){
@@ -224,7 +224,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     }
     
     //Ocl Submission version 1.6, chapter 3.3.8 p.3-23
-    public tudresden.ocl20.jmi.ocl.commonmodel.AssociationEnd lookupAssociationEnd(java.lang.String name) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationEnd lookupAssociationEnd(java.lang.String name) {
         //Iterator ownEnds = this.getAssociation().
         //the "association" reference is missing in the UML-Metamodel!
         Iterator ownEnds = ((CorePackage)this.refImmediatePackage()).getAParticipantAssociation().getAssociation(this).iterator();
@@ -268,7 +268,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     
     
     //Ocl Submission version 1.6, chapter 3.3.8 p.3-23
-    public tudresden.ocl20.jmi.ocl.commonmodel.Attribute lookupAttribute(java.lang.String attName) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute lookupAttribute(java.lang.String attName) {
         Iterator featuresIt =  getFeature().iterator();
         while(featuresIt.hasNext()){
             Feature feature  = (Feature) featuresIt.next();
@@ -289,7 +289,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     }
     
     //Issue: overloading ... what about operation(Object) vs operation(String) ?
-    public tudresden.ocl20.jmi.ocl.commonmodel.Operation lookupOperation(java.lang.String name, List paramTypes) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Operation lookupOperation(java.lang.String name, List paramTypes) {
         Operation op;
         
         //UML-MOF-Common
@@ -304,7 +304,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
         return null;
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Signal lookupSignal(java.lang.String sigName, List paramTypes) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Signal lookupSignal(java.lang.String sigName, List paramTypes) {
         Iterator featuresIt =  getFeature().iterator();
         while(featuresIt.hasNext()){
             Feature feature  = (Feature) featuresIt.next();
@@ -328,7 +328,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
         return null;
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier toOclType() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier toOclType() {
         // Problem: no predefined types in OCL -> every CASE Tool does "whatever it likes"
         if ( this instanceof DataType ) {
             String name = getNameA().toLowerCase();
@@ -388,7 +388,7 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     } 
     
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Operation createOperation(java.lang.String name, tudresden.ocl20.jmi.ocl.commonmodel.Classifier resultType, java.util.List params){
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Operation createOperation(java.lang.String name, tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier resultType, java.util.List params){
         CorePackage corePackage = (CorePackage)this.refImmediatePackage();
         
         Operation operation = corePackage.getOperation().createOperation(name, VisibilityKindEnum.VK_PUBLIC, false,ScopeKindEnum.SK_INSTANCE, true, CallConcurrencyKindEnum.CCK_CONCURRENT, false, false, false, "");

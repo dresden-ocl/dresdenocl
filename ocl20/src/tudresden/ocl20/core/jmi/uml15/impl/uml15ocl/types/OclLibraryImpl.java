@@ -30,16 +30,16 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.uml15ocl.types;
+package tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types;
 
-import tudresden.ocl20.jmi.uml15.uml15ocl.types.*;
-import tudresden.ocl20.jmi.uml15.core.Classifier;
-import tudresden.ocl20.jmi.uml15.core.Namespace;
-import tudresden.ocl20.jmi.uml15.modelmanagement.Package;
-import tudresden.ocl20.jmi.uml15.core.Operation;
-import tudresden.ocl20.jmi.uml15.core.Attribute;
-import tudresden.ocl20.jmi.uml15.core.AttributeClass;
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.types.*;
+import tudresden.ocl20.core.jmi.uml15.core.Classifier;
+import tudresden.ocl20.core.jmi.uml15.core.Namespace;
+import tudresden.ocl20.core.jmi.uml15.modelmanagement.Package;
+import tudresden.ocl20.core.jmi.uml15.core.Operation;
+import tudresden.ocl20.core.jmi.uml15.core.Attribute;
+import tudresden.ocl20.core.jmi.uml15.core.AttributeClass;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -51,15 +51,15 @@ import  java.util.*;
  */
 public abstract class OclLibraryImpl extends InstanceHandler implements OclLibrary{
     
-    private tudresden.ocl20.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper lib;
+    private tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper lib;
     
     /** Creates a new instance of OclLibraryImpl */
     protected OclLibraryImpl(StorableObject storable) {      
         super(storable);
-        lib = tudresden.ocl20.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper.getInstance(this);
+        lib = tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper.getInstance(this);
     }
     
-    private tudresden.ocl20.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper getLib(){
+    private tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper getLib(){
         return lib;
     }
     
@@ -67,19 +67,19 @@ public abstract class OclLibraryImpl extends InstanceHandler implements OclLibra
         return (TypesPackage) refImmediatePackage();
     }
     
-    public tudresden.ocl20.jmi.ocl.types.OclMessageType makeOclMessageType(tudresden.ocl20.jmi.ocl.commonmodel.Signal sig) {
+    public tudresden.ocl20.core.jmi.ocl.types.OclMessageType makeOclMessageType(tudresden.ocl20.core.jmi.ocl.commonmodel.Signal sig) {
         return getTypesPackage().getOclMessageType().makeFromSignal(sig);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.OclMessageType makeOclMessageType(tudresden.ocl20.jmi.ocl.commonmodel.Operation op) {
+    public tudresden.ocl20.core.jmi.ocl.types.OclMessageType makeOclMessageType(tudresden.ocl20.core.jmi.ocl.commonmodel.Operation op) {
         return getTypesPackage().getOclMessageType().makeFromOperation(op);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.TupleType makeTupleType(java.util.List atts){
+    public tudresden.ocl20.core.jmi.ocl.types.TupleType makeTupleType(java.util.List atts){
         return getTypesPackage().getTupleType().make(atts);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.TupleType makeTupleType(java.util.List names, java.util.List types) {       
+    public tudresden.ocl20.core.jmi.ocl.types.TupleType makeTupleType(java.util.List names, java.util.List types) {       
         AttributeClass  ac = ((Uml15Package)refOutermostPackage()).getCore().getAttribute();
         List attr = new ArrayList();
         for(int i = 0; i<names.size(); i++){
@@ -88,51 +88,51 @@ public abstract class OclLibraryImpl extends InstanceHandler implements OclLibra
         return makeTupleType(attr);
     }
       
-    public tudresden.ocl20.jmi.ocl.types.VoidType getOclVoid() {
+    public tudresden.ocl20.core.jmi.ocl.types.VoidType getOclVoid() {
         return getLib().getVoid();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Primitive getOclString() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Primitive getOclString() {
         return getLib().getString();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Primitive getOclReal() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Primitive getOclReal() {
         return getLib().getReal();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Primitive getOclInteger() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Primitive getOclInteger() {
         return getLib().getInteger();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Primitive getOclBoolean() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Primitive getOclBoolean() {
         return getLib().getBoolean();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getOclAny() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getOclAny() {
         return getLib().getAny();
     }
     
-    public tudresden.ocl20.jmi.ocl.types.SetType getSetType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.types.SetType getSetType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         return getLib().getSetType((Classifier)c);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.SequenceType getSequenceType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.types.SequenceType getSequenceType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         return getLib().getSequenceType((Classifier)c);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.CollectionType getCollectionType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.types.CollectionType getCollectionType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         return getLib().getCollectionType((Classifier)c);
     }
     
-    public tudresden.ocl20.jmi.ocl.types.BagType getBagType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public tudresden.ocl20.core.jmi.ocl.types.BagType getBagType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         return getLib().getBagType((Classifier)c);
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Package getOclLibPackage() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Package getOclLibPackage() {
         return getLib().getOclLibPackage();
     }
        
-    public boolean contains(tudresden.ocl20.jmi.ocl.commonmodel.Operation op) {
+    public boolean contains(tudresden.ocl20.core.jmi.ocl.commonmodel.Operation op) {
         Namespace container = ((Operation)op).getOwner().getNamespace();
         while(!(container instanceof Package) && container != null){
             container=container.getNamespace();

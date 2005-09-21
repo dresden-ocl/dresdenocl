@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -48,8 +48,8 @@ public abstract class ClassifierImpl extends GeneralizableElementImpl implements
     }
     
     /** map this NonOclType to an Ocl-Type */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier toOclType() {
-        tudresden.ocl20.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper oclLib = tudresden.ocl20.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper.getInstance(this);
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier toOclType() {
+        tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper oclLib = tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper.getInstance(this);
         return oclLib.mapDataTypeToOcl(this);
     }
     

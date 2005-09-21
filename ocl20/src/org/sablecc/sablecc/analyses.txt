@@ -67,10 +67,10 @@ package $0$;
 import $1$.*;
 import $2$astlib.*;
 
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.primitivetypes.*;
-import tudresden.ocl20.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.primitivetypes.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
 
 import java.util.List;
 
@@ -298,10 +298,10 @@ import $3$astgen.Heritage;
 import $3$astgen.Environment;
 import $3$astgen.NodeFactory;
 import $3$astlib.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.primitivetypes.*;
-import tudresden.ocl20.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.primitivetypes.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
 
 import java.util.*;
 

@@ -4,14 +4,15 @@
  * Created on 14. Mai 2003, 15:11
  */
 
-package tudresden.ocl20.codegen;
+package tudresden.ocl20.codegen.java;
 
-import tudresden.ocl20.util.ReflectiveVisitor;
-import tudresden.ocl20.jmi.ocl.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
-import tudresden.ocl20.OclModel;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.lib.*;
+import tudresden.ocl20.core.util.ReflectiveVisitor;
+import tudresden.ocl20.core.jmi.ocl.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -21,7 +22,6 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import tudresden.ocl20.lib.*;
 
 /**
  * Generates Java code for evaluating an OclExpression. Subclasses determine how the code for model access will look like. 

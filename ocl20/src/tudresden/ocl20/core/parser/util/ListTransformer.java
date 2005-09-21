@@ -27,10 +27,11 @@
  *
  */
 
-package tudresden.ocl20.parser.util;
+package tudresden.ocl20.core.parser.util;
 
 import java.util.List;
-import tudresden.ocl20.parser.sablecc.analysis.AttrEvalException;
+
+import tudresden.ocl20.core.parser.sablecc.analysis.AttrEvalException;
 
 /**
  *

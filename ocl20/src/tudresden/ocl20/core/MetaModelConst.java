@@ -30,7 +30,7 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20;
+package tudresden.ocl20.core;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -50,7 +50,7 @@ public class MetaModelConst {
     /**
      * The package prefix of the Common-OCL JMI-Interfaces.
      */
-    public static final String OCLPCKGPRFX = "tudresden.ocl20.jmi";
+    public static final String OCLPCKGPRFX = "tudresden.ocl20.core.jmi";
     
     /**
      * The name of the CommonModel package.
@@ -100,7 +100,7 @@ public class MetaModelConst {
     /**
      * The package prefix for the JMI interfaces for UML 1.5 and for UML1.5-OCL.
      */
-    public static final String UML15PCKGPRFX = "tudresden.ocl20.jmi.uml15";
+    public static final String UML15PCKGPRFX = "tudresden.ocl20.core.jmi.uml15";
     
     /**
      * The path for the XMI document containing the Common-OCL package and the UML1.5-OCL package (with meta-proxies).
@@ -125,7 +125,7 @@ public class MetaModelConst {
     /**
      * The package prefix for the JMI interfaces for MOF 1.4 and for MOF1.4-OCL.
      */
-    public static final String MOF14PCKGPRFX = "tudresden.ocl20.jmi.mof14";
+    public static final String MOF14PCKGPRFX = "tudresden.ocl20.core.jmi.mof14";
     
     /**
      * The path for the XMI document containing the Common-OCL package and the MOF1.4-OCL package (with meta-proxies).

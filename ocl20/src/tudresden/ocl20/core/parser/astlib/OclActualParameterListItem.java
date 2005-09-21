@@ -27,10 +27,10 @@
  *
  */
 
-package tudresden.ocl20.parser.astlib;
+package tudresden.ocl20.core.parser.astlib;
 
-import tudresden.ocl20.jmi.ocl.commonmodel.Classifier;
-import tudresden.ocl20.jmi.ocl.expressions.OclExpression;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier;
+import tudresden.ocl20.core.jmi.ocl.expressions.OclExpression;
 import java.util.List;
 
 /**

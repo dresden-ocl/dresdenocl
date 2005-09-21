@@ -30,13 +30,13 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.types;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.types.*;
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.types.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 
 import java.util.*;
 /**
@@ -56,7 +56,7 @@ public abstract class TupleTypeClassImpl extends ClassProxyHandler implements Tu
     //If there  is  already  a TupleType with the given attribute names and types,
     //that one is returned instead of creating a new one.
     
-    public tudresden.ocl20.jmi.ocl.types.TupleType make(java.util.List atts) {
+    public tudresden.ocl20.core.jmi.ocl.types.TupleType make(java.util.List atts) {
               
         //Ocl Submission version 1.6, chapter 3.2.2, p3-7
         StringBuffer name = new StringBuffer("Tuple(");

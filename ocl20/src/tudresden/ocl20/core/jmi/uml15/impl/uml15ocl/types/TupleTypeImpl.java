@@ -30,14 +30,15 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.uml15ocl.types;
+package tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types;
 
 import java.util.*;
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.datatypes.*;
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
-import tudresden.ocl20.jmi.uml15.uml15ocl.types.*;
-import tudresden.ocl20.jmi.uml15.impl.core.ClassifierImpl;
+
+import tudresden.ocl20.core.jmi.uml15.impl.core.ClassifierImpl;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.types.*;
 
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -56,7 +57,7 @@ public abstract class TupleTypeImpl extends ClassifierImpl implements TupleType{
     //we consider "attributes" instead of "allAttributes", because
     //we dont establish real Generalizations  between TupleTypes
     //that is, a TupleType only inherits directly  from OclAny
-    public boolean conformsTo(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public boolean conformsTo(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         if(c instanceof TupleType){
             Iterator otherIt = c.allAttributes().iterator();
             while(otherIt.hasNext()){
@@ -72,7 +73,7 @@ public abstract class TupleTypeImpl extends ClassifierImpl implements TupleType{
             return super.conformsTo(c);  //will return true for OclAny only
         }
     }
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c){
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c){
         if(c instanceof TupleType){
             CorePackage core = ((Uml15Package)refOutermostPackage()).getCore();
 

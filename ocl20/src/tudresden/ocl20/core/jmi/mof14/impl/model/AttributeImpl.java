@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 /** MOF1.4-specific implementations for Operations defined in
@@ -66,7 +66,7 @@ public abstract class AttributeImpl extends ModelElementImpl  implements Attribu
     /** yields the type of the attribute (mapped to an OCL type, but without
      * consideration of multiplicity, because that is the task of the TypeEvaluator)
      */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getTypeA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getTypeA() {
         return this.getType().toOclType();
     }
     

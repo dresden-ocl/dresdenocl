@@ -29,14 +29,15 @@
  * http://www-st.inf.tu-dresden.de/ (Chair home page) or             *
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package tudresden.ocl20.codegen;
+package tudresden.ocl20.codegen.java;
 
 import tudresden.ocl20.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.OclPackage;
-import tudresden.ocl20.util.Naming;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.util.Naming;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.OclPackage;
 
 
 import java.util.*;
@@ -107,7 +108,7 @@ public class JmiClassCodeGenerator {
         
         //disgusting...
         //FIXME by adding an abstract method to commonmodel.Classifier 
-        Collection expressions = ((tudresden.ocl20.jmi.mof14.model.ModelPackage)model.getModel()).getMof14ocl().getOcl().getExpressions().getAContextualClassifierExpressionInOcl().getExpressionInOcl(context);
+        Collection expressions = ((tudresden.ocl20.core.jmi.mof14.model.ModelPackage)model.getModel()).getMof14ocl().getOcl().getExpressions().getAContextualClassifierExpressionInOcl().getExpressionInOcl(context);
         
         Set constraintNames = new HashSet(); 
         //Create an evaluate Method for every Constraint that has this context.

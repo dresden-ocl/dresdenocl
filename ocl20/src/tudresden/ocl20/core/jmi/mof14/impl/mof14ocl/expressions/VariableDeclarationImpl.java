@@ -30,11 +30,11 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.expressions;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.expressions;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.expressions.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.expressions.*;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -42,20 +42,20 @@ import org.netbeans.mdr.storagemodel.StorableObject;
  * OCL::Expressions::VariableDeclaration
  * @author Administrator
  */
-public abstract class VariableDeclarationImpl extends tudresden.ocl20.jmi.mof14.impl.model.ModelElementImpl implements VariableDeclaration{
+public abstract class VariableDeclarationImpl extends tudresden.ocl20.core.jmi.mof14.impl.model.ModelElementImpl implements VariableDeclaration{
     
     protected VariableDeclarationImpl(StorableObject storable) {
         super(storable);
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Parameter asParameter() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Parameter asParameter() {
         ModelPackage modelPkg = (ModelPackage)refOutermostPackage();
         Parameter p = modelPkg.getParameter().createParameter(getNameA(), getNameA(), DirectionKindEnum.IN_DIR,modelPkg.createMultiplicityType(1,1, false, false));
         p.setType((MofClass)getType());
         return p;
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Attribute asAttribute() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute asAttribute() {
         return ((ModelPackage)refOutermostPackage()).getAttribute().make(getNameA(),getType());
     }
     

@@ -23,7 +23,7 @@
  * MA  02111-1307  USA
  *
  */
-Package tudresden.ocl20.parser.sablecc;
+Package tudresden.ocl20.core.parser.sablecc;
 
 //
 // Step 1: define tokens, replace them in production rules
@@ -578,7 +578,7 @@ Productions
       {iterate} <IterateExp> 
                 T.iterate 
                 paren_open
-                [iterators]:iterate_vars_cs? #customheritage
+                [iterators]:iterate_vars_cs?
                 [accumulator]:initialized_variable_cs
                 vertical_bar
                 [body]:expression #customheritage
@@ -606,7 +606,7 @@ Productions
 
 
   iterate_vars_cs <List> =
-      // must return list of VariableDeclaration instances
+      // must return list of VariableDclaration instances
       [iterators]:actual_parameter_list_cs #customheritage
       semi_colon
       #chain
@@ -644,6 +644,16 @@ Productions
         [args]:message_argument_list_cs?
         paren_close
     ;
+
+//   actual_parameter_list_cs <List> =
+//         [element]:expression
+//         [tail]:actual_parameter_list_tail_cs ? #nocreate
+//     ;
+
+//   actual_parameter_list_tail_cs <List> =
+//         comma
+//         [tail]:actual_parameter_list_cs #chain
+//     ;
 
   actual_parameter_list_cs <List> =
       // must return list of VariableDeclaration in context "IteratorVarDecl"
@@ -683,7 +693,7 @@ Productions
     ;
 
   //
-  // ----- initialized variables (for tuple literals) -----
+  // ----- initialized variable s (for tuple literals) -----
   //
   initialized_variable_list_cs <List> = 
         [item]:initialized_variable_cs

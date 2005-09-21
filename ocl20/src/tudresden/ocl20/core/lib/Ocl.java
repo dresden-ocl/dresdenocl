@@ -37,7 +37,7 @@
 
 // FILE: d:/java/classes/de/tudresden/ocl/Ocl.java
 
-package tudresden.ocl20.lib;
+package tudresden.ocl20.core.lib;
 import java.util.*;
 
 /**

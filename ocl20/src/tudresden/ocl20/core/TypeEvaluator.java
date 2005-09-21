@@ -30,12 +30,12 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20;
+package tudresden.ocl20.core;
 
-import tudresden.ocl20.util.ReflectiveVisitor;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.util.ReflectiveVisitor;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -299,11 +299,11 @@ public class TypeEvaluator extends ReflectiveVisitor{
     //evaluate the type of a CollectionLiteralExp  
     public void evaluate(CollectionLiteralExp exp) throws WellFormednessException{
        
-        tudresden.ocl20.jmi.ocl.expressions.CollectionKind kind = exp.getKind();
+        tudresden.ocl20.core.jmi.ocl.expressions.CollectionKind kind = exp.getKind();
         if(kind==null){
             throw new WellFormednessException(exp, WellFormednessException.EC_NO_COLLECTIONKIND);
         }
-        if(kind == tudresden.ocl20.jmi.ocl.expressions.CollectionKindEnum.COLLECTION){
+        if(kind == tudresden.ocl20.core.jmi.ocl.expressions.CollectionKindEnum.COLLECTION){
             throw new WellFormednessException(exp, WellFormednessException.EC_KIND_IS_COLLECTION);
         }
         
@@ -316,10 +316,10 @@ public class TypeEvaluator extends ReflectiveVisitor{
             elementType = (Classifier)elementType.commonSuperType(getType(p));
         }
                
-        if(kind == tudresden.ocl20.jmi.ocl.expressions.CollectionKindEnum.SET){ type = (Classifier)elementType.getSetType(); }
-        if(kind == tudresden.ocl20.jmi.ocl.expressions.CollectionKindEnum.BAG){ type = (Classifier)elementType.getBagType(); }
-        if(kind == tudresden.ocl20.jmi.ocl.expressions.CollectionKindEnum.SEQUENCE){ type = (Classifier)elementType.getSequenceType(); }
-        //if(kind == tudresden.ocl20.jmi.ocl.expressions.CollectionKindEnum.ORDEREDSET){ type = (Classifier)elementType.getOrderedSetType(); }
+        if(kind == tudresden.ocl20.core.jmi.ocl.expressions.CollectionKindEnum.SET){ type = (Classifier)elementType.getSetType(); }
+        if(kind == tudresden.ocl20.core.jmi.ocl.expressions.CollectionKindEnum.BAG){ type = (Classifier)elementType.getBagType(); }
+        if(kind == tudresden.ocl20.core.jmi.ocl.expressions.CollectionKindEnum.SEQUENCE){ type = (Classifier)elementType.getSequenceType(); }
+        //if(kind == tudresden.ocl20.core.jmi.ocl.expressions.CollectionKindEnum.ORDEREDSET){ type = (Classifier)elementType.getOrderedSetType(); }
         
         exp.setType(type);
     }

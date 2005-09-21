@@ -27,7 +27,7 @@
  *
  */
 
-package tudresden.ocl20.parser.util;
+package tudresden.ocl20.core.parser.util;
 
 /**
  * Interface for a class of of objects which can accept simple textual messages

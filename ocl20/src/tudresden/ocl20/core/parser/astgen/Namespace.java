@@ -27,13 +27,13 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
 import java.util.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.Classifier;
-import tudresden.ocl20.jmi.ocl.commonmodel.Package;
-//import tudresden.ocl20.jmi.ocl.commonmodel.StateMachine;
-//import tudresden.ocl20.jmi.ocl.commonmodel.Subsystem;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Package;
+//import tudresden.ocl20.core.jmi.ocl.commonmodel.StateMachine;
+//import tudresden.ocl20.core.jmi.ocl.commonmodel.Subsystem;
 
 /**
  *

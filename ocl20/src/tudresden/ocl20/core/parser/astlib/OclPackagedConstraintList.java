@@ -27,7 +27,7 @@
  *
  */
 
-package tudresden.ocl20.parser.astlib;
+package tudresden.ocl20.core.parser.astlib;
 
 import java.util.*;
 

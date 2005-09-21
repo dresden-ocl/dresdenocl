@@ -30,12 +30,12 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.types;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.types.*;
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.impl.model.MofClassImpl;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.types.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 
-import tudresden.ocl20.jmi.mof14.impl.model.MofClassImpl;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
@@ -56,7 +56,7 @@ public abstract class TupleTypeImpl extends MofClassImpl implements TupleType{
     //we consider "attributes" instead of "allAttributes", because
     //we dont establish real Generalizations  between TupleTypes
     //that is, a TupleType only inherits directly  from OclAny
-    public boolean conformsTo(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c) {
+    public boolean conformsTo(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         if(c instanceof TupleType){
             Iterator otherIt = c.allAttributes().iterator();
             while(otherIt.hasNext()){
@@ -78,7 +78,7 @@ public abstract class TupleTypeImpl extends MofClassImpl implements TupleType{
             return super.conformsTo(c);  //will return true for OclAny only
         }
     }
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.jmi.ocl.commonmodel.Classifier c){
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c){
         if(c instanceof TupleType){
             ModelPackage modelPkg = (ModelPackage)refOutermostPackage();
 
@@ -93,7 +93,7 @@ public abstract class TupleTypeImpl extends MofClassImpl implements TupleType{
                 if(matchingAttr !=  null){
 
                     String name = otherAttr.getNameA();
-                    tudresden.ocl20.jmi.ocl.commonmodel.Classifier type = ((tudresden.ocl20.jmi.ocl.commonmodel.Classifier)matchingAttr.getType()).commonSuperType((tudresden.ocl20.jmi.ocl.commonmodel.Classifier)otherAttr.getType());
+                    tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier type = ((tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier)matchingAttr.getType()).commonSuperType((tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier)otherAttr.getType());
                     Attribute a = (Attribute)modelPkg.getAttribute().make(name,type);
                     commonAttributes.add(a);
                 }           

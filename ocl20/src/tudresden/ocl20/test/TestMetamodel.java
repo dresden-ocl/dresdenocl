@@ -33,16 +33,21 @@
 package tudresden.ocl20.test;
 
 import tudresden.ocl20.*;
-import tudresden.ocl20.codegen.*;
+import tudresden.ocl20.codegen.java.*;
+import tudresden.ocl20.core.MetaModelConst;
+import tudresden.ocl20.core.ModelManager;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.Repository;
+import tudresden.ocl20.core.RepositoryManager;
 
 import javax.jmi.model.*;
 import javax.jmi.xmi.*;
 import javax.jmi.reflect.*;
 import java.util.*;
 
-//import tudresden.ocl20.jmi.ocl.commonmodel.*;
-//import tudresden.ocl20.jmi.ocl.types.*;
-//import tudresden.ocl20.jmi.ocl.expressions.*;
+//import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
+//import tudresden.ocl20.core.jmi.ocl.types.*;
+//import tudresden.ocl20.core.jmi.ocl.expressions.*;
 
 /**
  *
@@ -113,92 +118,92 @@ public class TestMetamodel {
         
         //            OclcsPackage cs = model.getOclcsPackage();
         
-        tudresden.ocl20.jmi.ocl.commonmodel.Package topPackage = metamodelAsMof14Ocl.getTopPackage();
-        tudresden.ocl20.jmi.ocl.expressions.OclExpressionFactory factory = metamodelAsMof14Ocl.getOclExpressionFactory();
-        tudresden.ocl20.TypeEvaluator typeEvl = metamodelAsMof14Ocl.getTypeEvaluator();
-        tudresden.ocl20.jmi.ocl.types.OclLibrary oclLib = metamodelAsMof14Ocl.getOclLibrary();
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Package topPackage = metamodelAsMof14Ocl.getTopPackage();
+        tudresden.ocl20.core.jmi.ocl.expressions.OclExpressionFactory factory = metamodelAsMof14Ocl.getOclExpressionFactory();
+        tudresden.ocl20.core.TypeEvaluator typeEvl = metamodelAsMof14Ocl.getTypeEvaluator();
+        tudresden.ocl20.core.jmi.ocl.types.OclLibrary oclLib = metamodelAsMof14Ocl.getOclLibrary();
         
         
         List pathName;
         pathName = new ArrayList();
         pathName.add("mmpkg");
         pathName.add("TestClass");
-        tudresden.ocl20.jmi.ocl.commonmodel.Classifier context = topPackage.findClassifier(pathName);
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier context = topPackage.findClassifier(pathName);
         
         //declaration of  variable "self"
-        tudresden.ocl20.jmi.ocl.expressions.VariableDeclaration selfDecl = factory.createVariableDeclaration();
+        tudresden.ocl20.core.jmi.ocl.expressions.VariableDeclaration selfDecl = factory.createVariableDeclaration();
         selfDecl.setNameA("self");
         selfDecl.setType(context);
         
         //a reference to the self variable
-        tudresden.ocl20.jmi.ocl.expressions.VariableExp self = factory.createVariableExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.VariableExp self = factory.createVariableExp();
         self.setReferredVariable(selfDecl);
         
-        tudresden.ocl20.jmi.ocl.expressions.IntegerLiteralExp ile1a = factory.createIntegerLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.IntegerLiteralExp ile1a = factory.createIntegerLiteralExp();
         ile1a.setIntegerSymbol(10);
-        tudresden.ocl20.jmi.ocl.expressions.IntegerLiteralExp ile1b = factory.createIntegerLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.IntegerLiteralExp ile1b = factory.createIntegerLiteralExp();
         ile1b.setIntegerSymbol(18);
         
-        tudresden.ocl20.jmi.ocl.expressions.CollectionRange cr1 = factory.createCollectionRange();
+        tudresden.ocl20.core.jmi.ocl.expressions.CollectionRange cr1 = factory.createCollectionRange();
         cr1.setFirst(ile1a);
         cr1.setLast(ile1b);
         
-        tudresden.ocl20.jmi.ocl.expressions.CollectionLiteralExp cle1 = factory.createCollectionLiteralExp();
-        cle1.setKind(tudresden.ocl20.jmi.ocl.expressions.CollectionKindEnum.SEQUENCE);
+        tudresden.ocl20.core.jmi.ocl.expressions.CollectionLiteralExp cle1 = factory.createCollectionLiteralExp();
+        cle1.setKind(tudresden.ocl20.core.jmi.ocl.expressions.CollectionKindEnum.SEQUENCE);
         cle1.getParts().add(cr1);
         
         pathName = new ArrayList();
         pathName.add("mmpkg");
         pathName.add("ABC");
-        tudresden.ocl20.jmi.ocl.commonmodel.Enumeration en = (tudresden.ocl20.jmi.ocl.commonmodel.Enumeration) topPackage.findClassifier(pathName);
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Enumeration en = (tudresden.ocl20.core.jmi.ocl.commonmodel.Enumeration) topPackage.findClassifier(pathName);
         Iterator it = en.getLiteralA().iterator();
-        tudresden.ocl20.jmi.ocl.commonmodel.EnumerationLiteral el = null;
+        tudresden.ocl20.core.jmi.ocl.commonmodel.EnumerationLiteral el = null;
         while(it.hasNext()){
-            tudresden.ocl20.jmi.ocl.commonmodel.EnumerationLiteral el1 = (tudresden.ocl20.jmi.ocl.commonmodel.EnumerationLiteral) it.next();
+            tudresden.ocl20.core.jmi.ocl.commonmodel.EnumerationLiteral el1 = (tudresden.ocl20.core.jmi.ocl.commonmodel.EnumerationLiteral) it.next();
             if(el1.getNameA().equals("a")){
                 el = el1;
             }
             
         }
-        tudresden.ocl20.jmi.ocl.expressions.EnumLiteralExp ele1 = factory.createEnumLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.EnumLiteralExp ele1 = factory.createEnumLiteralExp();
         ele1.setReferredEnumLiteral(el);
         
-        tudresden.ocl20.jmi.ocl.expressions.IntegerLiteralExp ile2 = factory.createIntegerLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.IntegerLiteralExp ile2 = factory.createIntegerLiteralExp();
         ile2.setIntegerSymbol(20);
         
-        tudresden.ocl20.jmi.ocl.expressions.IntegerLiteralExp ile3 = factory.createIntegerLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.IntegerLiteralExp ile3 = factory.createIntegerLiteralExp();
         ile3.setIntegerSymbol(25);
         
-        tudresden.ocl20.jmi.ocl.expressions.RealLiteralExp rle1 = factory.createRealLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.RealLiteralExp rle1 = factory.createRealLiteralExp();
         rle1.setRealSymbol(1.1415);
         
-        tudresden.ocl20.jmi.ocl.expressions.BooleanLiteralExp ble1 = factory.createBooleanLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.BooleanLiteralExp ble1 = factory.createBooleanLiteralExp();
         ble1.setBooleanSymbol(true);
         
-        tudresden.ocl20.jmi.ocl.expressions.StringLiteralExp sle1 = factory.createStringLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.StringLiteralExp sle1 = factory.createStringLiteralExp();
         sle1.setStringSymbol("dumdidum");
         
         
-        tudresden.ocl20.jmi.ocl.expressions.IntegerLiteralExp ile4 = factory.createIntegerLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.IntegerLiteralExp ile4 = factory.createIntegerLiteralExp();
         ile4.setIntegerSymbol(200);
         
-        tudresden.ocl20.jmi.ocl.expressions.IntegerLiteralExp ile5 = factory.createIntegerLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.IntegerLiteralExp ile5 = factory.createIntegerLiteralExp();
         ile5.setIntegerSymbol(250);
         
-        tudresden.ocl20.jmi.ocl.expressions.VariableDeclaration vd1 = factory.createVariableDeclaration();
+        tudresden.ocl20.core.jmi.ocl.expressions.VariableDeclaration vd1 = factory.createVariableDeclaration();
         vd1.setNameA("field1");
         vd1.setInitExpression(ile4);
         
-        tudresden.ocl20.jmi.ocl.expressions.VariableDeclaration vd2 = factory.createVariableDeclaration();
+        tudresden.ocl20.core.jmi.ocl.expressions.VariableDeclaration vd2 = factory.createVariableDeclaration();
         vd2.setNameA("field2");
         vd2.setInitExpression(ile5);
         
-        tudresden.ocl20.jmi.ocl.expressions.TupleLiteralExp tle1 = factory.createTupleLiteralExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.TupleLiteralExp tle1 = factory.createTupleLiteralExp();
         tle1.getTuplePart().add(vd1);
         tle1.getTuplePart().add(vd2);
         
         
-        tudresden.ocl20.jmi.ocl.expressions.OperationCallExp testOpExp = factory.createOperationCallExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.OperationCallExp testOpExp = factory.createOperationCallExp();
         List paramTypes = new ArrayList();
         paramTypes.add(typeEvl.getType(cle1));
         paramTypes.add(typeEvl.getType(ele1));
@@ -209,7 +214,7 @@ public class TestMetamodel {
         paramTypes.add(typeEvl.getType(sle1));
         paramTypes.add(typeEvl.getType(tle1));
         
-        tudresden.ocl20.jmi.ocl.commonmodel.Operation testOp = context.lookupOperation("testOp", paramTypes);
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Operation testOp = context.lookupOperation("testOp", paramTypes);
         testOpExp.setReferredOperation(testOp);
         testOpExp.getArguments().add(cle1);
         testOpExp.getArguments().add(ele1);
@@ -222,10 +227,10 @@ public class TestMetamodel {
         
         testOpExp.setSource(self);
         
-        tudresden.ocl20.jmi.ocl.expressions.AttributeCallExp attrExp = factory.createAttributeCallExp();
+        tudresden.ocl20.core.jmi.ocl.expressions.AttributeCallExp attrExp = factory.createAttributeCallExp();
         attrExp.setSource(testOpExp);
         
-        tudresden.ocl20.jmi.ocl.commonmodel.Attribute field2 = typeEvl.getType(testOpExp).lookupAttribute("f");
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute field2 = typeEvl.getType(testOpExp).lookupAttribute("f");
         attrExp.setReferredAttribute(field2);
         
         typeEvl.getType(attrExp);

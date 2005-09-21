@@ -30,14 +30,14 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.modelmanagement;
+package tudresden.ocl20.core.jmi.uml15.impl.modelmanagement;
 
 import javax.jmi.reflect.*;
 import java.util.*;
 
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.modelmanagement.*;
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.modelmanagement.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 /**
  *
  * @author  Administrator

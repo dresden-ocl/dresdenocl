@@ -30,12 +30,12 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 
 /**
  *
@@ -48,7 +48,7 @@ public abstract class AttributeClassImpl extends ClassProxyHandler implements At
         super(storable);
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Attribute make(String name, tudresden.ocl20.jmi.ocl.commonmodel.Classifier type) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute make(String name, tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier type) {
         ModelPackage modelPackage = (ModelPackage) this.refOutermostPackage();
         
         Attribute a = this.createAttribute();

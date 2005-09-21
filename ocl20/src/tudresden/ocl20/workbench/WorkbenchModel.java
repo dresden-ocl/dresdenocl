@@ -33,10 +33,14 @@
 package tudresden.ocl20.workbench;
 
 import tudresden.ocl20.*;
-import tudresden.ocl20.oclscript.*;
-import tudresden.ocl20.codegen.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
+import tudresden.ocl20.codegen.java.*;
+import tudresden.ocl20.core.MetaModelConst;
+import tudresden.ocl20.core.ModelManager;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.lib.*;
+import tudresden.ocl20.core.oclscript.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
 
 import javax.jmi.model.ModelPackage;
 import javax.jmi.reflect.*;
@@ -46,7 +50,6 @@ import java.lang.reflect.*;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import tudresden.ocl20.lib.*;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -316,7 +319,7 @@ public class WorkbenchModel {
     }
     
     private String makeUniqueName(String name, Collection names){
-        return tudresden.ocl20.util.Naming.makeUniqueName(name, names);
+        return tudresden.ocl20.core.util.Naming.makeUniqueName(name, names);
     }
     
     

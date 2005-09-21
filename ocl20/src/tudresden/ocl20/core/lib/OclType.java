@@ -31,7 +31,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // FILE: d:/java/classes/de/tudresden/ocl/OclType.java
 
-package tudresden.ocl20.lib; /* !!! if the package name is changed,
+package tudresden.ocl20.core.lib; /* !!! if the package name is changed,
                             * please change the class attribute
                             * "oclPackage" further down
                             */

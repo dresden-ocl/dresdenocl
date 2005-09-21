@@ -29,9 +29,10 @@
  * http://www-st.inf.tu-dresden.de/ (Chair home page) or             *
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package tudresden.ocl20.codegen;
+package tudresden.ocl20.codegen.java;
 
 import tudresden.ocl20.*;
+import tudresden.ocl20.core.OclModel;
 
 /**
  * This CodeGenerator creates Java-Code that uses the Jmi-Implementation of the OCL basis library.
@@ -57,7 +58,7 @@ public class JmiCodeGenerator extends CodeGenerator {
             return "final "+getPkgPrefix()+"JmiOclFactory "+id+" = "+getPkgPrefix()+"JmiOclFactory.getInstance(model);\n";
     }
     
-    protected String getNonOclType(tudresden.ocl20.jmi.ocl.commonmodel.Parameter parameter) {
+    protected String getNonOclType(tudresden.ocl20.core.jmi.ocl.commonmodel.Parameter parameter) {
         return tm.getNonOclType(parameter);
     }
     

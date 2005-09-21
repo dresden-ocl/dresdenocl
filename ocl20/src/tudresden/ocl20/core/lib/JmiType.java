@@ -30,7 +30,7 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.lib;
+package tudresden.ocl20.core.lib;
 
 /**
  * This class describes for JMI model access the type of a parameter of an operation.

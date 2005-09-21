@@ -30,10 +30,10 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.core;
+package tudresden.ocl20.core.jmi.uml15.impl.core;
 
-import tudresden.ocl20.jmi.uml15.core.ModelElement;
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.core.ModelElement;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -49,7 +49,7 @@ public abstract class ModelElementImpl extends InstanceHandler implements ModelE
         super(storable);
     }
     
-    protected tudresden.ocl20.jmi.ocl.types.OclLibrary getOclLibrary() {
+    protected tudresden.ocl20.core.jmi.ocl.types.OclLibrary getOclLibrary() {
         return ((Uml15Package)refOutermostPackage()).getUml15ocl().getTypes().getOclLibrary().getInstance();
     }
     

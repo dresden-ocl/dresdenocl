@@ -27,28 +27,28 @@
  *
  */
 
-package tudresden.ocl20.parser;
+package tudresden.ocl20.core.parser;
 
-import tudresden.ocl20.parser.util.*;
+import tudresden.ocl20.core.parser.util.*;
 
-import tudresden.ocl20.parser.sablecc.analysis.*;
-import tudresden.ocl20.parser.sablecc.lexer.Lexer;
-import tudresden.ocl20.parser.sablecc.lexer.LexerException;
-import tudresden.ocl20.parser.sablecc.parser.Parser;
-import tudresden.ocl20.parser.sablecc.parser.ParserException;
-import tudresden.ocl20.parser.sablecc.node.*;
+import tudresden.ocl20.core.parser.sablecc.analysis.*;
+import tudresden.ocl20.core.parser.sablecc.lexer.Lexer;
+import tudresden.ocl20.core.parser.sablecc.lexer.LexerException;
+import tudresden.ocl20.core.parser.sablecc.parser.Parser;
+import tudresden.ocl20.core.parser.sablecc.parser.ParserException;
+import tudresden.ocl20.core.parser.sablecc.node.*;
 
-import tudresden.ocl20.parser.util.TextualCSTBuilder;
-import tudresden.ocl20.parser.astgen.LAttrAstGenerator;
-import tudresden.ocl20.parser.astgen.Heritage;
-import tudresden.ocl20.parser.astgen.NodeFactory;
+import tudresden.ocl20.core.parser.util.TextualCSTBuilder;
+import tudresden.ocl20.core.parser.astgen.LAttrAstGenerator;
+import tudresden.ocl20.core.parser.astgen.Heritage;
+import tudresden.ocl20.core.parser.astgen.NodeFactory;
 
-import tudresden.ocl20.*;
+import tudresden.ocl20.core.*;
 
-import tudresden.ocl20.jmi.ocl.*;
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 
 import javax.jmi.reflect.*;
 
@@ -251,7 +251,7 @@ public class OCL20CLI {
                 OclModel newModel = new OclModel(metaModelName, modelUrl);
                 this.setOclModel(newModel, modelUrl);
 
-                tudresden.ocl20.jmi.ocl.commonmodel.Package topPkg = newModel.getTopPackage();
+                tudresden.ocl20.core.jmi.ocl.commonmodel.Package topPkg = newModel.getTopPackage();
                 String topName = topPkg.getNameA();
                 System.out.println("Top package name: '" + topName + "'");
             } catch (OclModelException ex) {

@@ -27,14 +27,14 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
 /**
  *
  * Library class providing utility methods to manage specialized namespace
  * objects for subclasses of UML or MOF namespaces. The code in this library
  * should be moved to specific implementations of astgen.Namespace when 
- * namespace handling is added to the tudresden.ocl20.jmi.ocl.commonmodel
+ * namespace handling is added to the tudresden.ocl20.core.jmi.ocl.commonmodel
  * package.
  *
  * @author Ansgar Konermann
@@ -46,20 +46,20 @@ public class NamespaceUtility {
         
         Namespace result = null;
         
-        if ( o instanceof tudresden.ocl20.jmi.uml15.core.Classifier ) {
-            return new UML15ClassifierNamespace((tudresden.ocl20.jmi.uml15.core.Classifier) o);
+        if ( o instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier ) {
+            return new UML15ClassifierNamespace((tudresden.ocl20.core.jmi.uml15.core.Classifier) o);
         }
-        if ( o instanceof tudresden.ocl20.jmi.uml15.modelmanagement.Package ) {
-            return new UML15PackageNamespace((tudresden.ocl20.jmi.uml15.modelmanagement.Package) o);
+        if ( o instanceof tudresden.ocl20.core.jmi.uml15.modelmanagement.Package ) {
+            return new UML15PackageNamespace((tudresden.ocl20.core.jmi.uml15.modelmanagement.Package) o);
         }
         throw new RuntimeException("Namespace kind not implemented: " + o.getClass().getName());        
     }
     
     public static boolean isKindOfNamespace(Object o) {
-        if ( o instanceof tudresden.ocl20.jmi.uml15.core.Classifier ) {
+        if ( o instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier ) {
             return true;
         }
-        if ( o instanceof tudresden.ocl20.jmi.uml15.modelmanagement.Package ) {
+        if ( o instanceof tudresden.ocl20.core.jmi.uml15.modelmanagement.Package ) {
             return true;
         }
         // other namespace subclasses not supported yet, so we cannot handle them

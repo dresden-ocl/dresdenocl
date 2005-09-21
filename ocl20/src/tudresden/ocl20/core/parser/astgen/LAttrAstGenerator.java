@@ -27,33 +27,33 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
-import tudresden.ocl20.parser.astlib.*;
-import tudresden.ocl20.parser.sablecc.analysis.*;
-import tudresden.ocl20.parser.sablecc.node.*;
-import tudresden.ocl20.parser.util.SimpleMessageSink;
-import tudresden.ocl20.parser.util.ListTransformer;
+import tudresden.ocl20.core.parser.astlib.*;
+import tudresden.ocl20.core.parser.sablecc.analysis.*;
+import tudresden.ocl20.core.parser.sablecc.node.*;
+import tudresden.ocl20.core.parser.util.SimpleMessageSink;
+import tudresden.ocl20.core.parser.util.ListTransformer;
 
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
-import tudresden.ocl20.jmi.uml15.core.CorePackage;
-import tudresden.ocl20.jmi.uml15.datatypes.CallConcurrencyKindEnum;
-import tudresden.ocl20.jmi.uml15.datatypes.ScopeKindEnum;
-import tudresden.ocl20.jmi.uml15.datatypes.ParameterDirectionKindEnum;
-import tudresden.ocl20.jmi.uml15.datatypes.VisibilityKindEnum;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.core.CorePackage;
+import tudresden.ocl20.core.jmi.uml15.datatypes.CallConcurrencyKindEnum;
+import tudresden.ocl20.core.jmi.uml15.datatypes.ScopeKindEnum;
+import tudresden.ocl20.core.jmi.uml15.datatypes.ParameterDirectionKindEnum;
+import tudresden.ocl20.core.jmi.uml15.datatypes.VisibilityKindEnum;
 
-import tudresden.ocl20.OclModel;
-import tudresden.ocl20.OclModelHelper;
-import tudresden.ocl20.TypeEvaluator;
-import tudresden.ocl20.WellFormednessException;
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.OclModelHelper;
+import tudresden.ocl20.core.TypeEvaluator;
+import tudresden.ocl20.core.WellFormednessException;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 
-import tudresden.ocl20.lib.*;
+import tudresden.ocl20.core.lib.*;
 
-import tudresden.ocl20.util.Naming;
-import tudresden.ocl20.util.Sequence;
+import tudresden.ocl20.core.util.Naming;
+import tudresden.ocl20.core.util.Sequence;
 
 import javax.jmi.reflect.RefPackage;
 
@@ -65,7 +65,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
-import tudresden.ocl20.jmi.ocl.commonmodel.Package;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Package;
 
 /**
  * Generates an OCL2.0 abstract syntax tree from a SableCC concrete syntax tree
@@ -243,13 +243,13 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         if ( cls == null ) {
             return "<null>";
         }
-        assert ( cls instanceof tudresden.ocl20.jmi.uml15.core.Classifier ):
+        assert ( cls instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier ):
             "Classifiers must be UML15 classifiers (MOF14 not supported by parser yet)";
-        tudresden.ocl20.jmi.uml15.core.Classifier umlCls = (tudresden.ocl20.jmi.uml15.core.Classifier) cls;
+        tudresden.ocl20.core.jmi.uml15.core.Classifier umlCls = (tudresden.ocl20.core.jmi.uml15.core.Classifier) cls;
         StringBuffer sb = new StringBuffer(256);
         String name = umlCls.getNameA();
         sb.append(name);        
-        tudresden.ocl20.jmi.uml15.core.Namespace clsNs = umlCls.getNamespace();
+        tudresden.ocl20.core.jmi.uml15.core.Namespace clsNs = umlCls.getNamespace();
         while ( clsNs != null ) {
             String nsName = clsNs.getName();
             sb.insert(0, "::");
@@ -257,7 +257,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             clsNs = clsNs.getNamespace();
         }
         sb.append(", java class: " + cls.getClass().getName());
-        log("Info: implementation of tudresden.ocl20.jmi.ocl.Classifier.getPathNameA() desired for error message composition (currently abstract for UML15 classifiers)");
+        log("Info: implementation of tudresden.ocl20.core.jmi.ocl.Classifier.getPathNameA() desired for error message composition (currently abstract for UML15 classifiers)");
         return sb.toString();
         
     }
@@ -439,10 +439,10 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     protected IteratorExp createImplicitCollectIteratorExp(OclExpression source,
         PropertyCallExp body) throws AttrEvalException {
         
-        assert source instanceof tudresden.ocl20.jmi.ocl.types.CollectionType:
+        assert source instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType:
             "source expression for implicit collect must have collection type";
             
-        CollectionType collType = (tudresden.ocl20.jmi.ocl.types.CollectionType) source;
+        CollectionType collType = (tudresden.ocl20.core.jmi.ocl.types.CollectionType) source;
         Classifier elemType = collType.getElementType();
 
         IteratorExp itex = (IteratorExp) factory.createNode("IteratorExp");
@@ -1582,7 +1582,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             return attrcallexp;
         }
         
-        if ( ! (source instanceof tudresden.ocl20.jmi.ocl.types.CollectionType ) ) {
+        if ( ! (source instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType ) ) {
             // is not an ocl collection, check for association end/association class
             AssociationEnd assocEnd = type.lookupAssociationEnd(name);
             if ( assocEnd != null ) {
@@ -1798,7 +1798,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                 return oclop;
             }
             List parameterTypes = getTypesForParameters(astParameters);            
-            boolean isCollection = source instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+            boolean isCollection = source instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
             if ( ! isCollection ) {
                 // source no collection, create operation call
                 Classifier srcType = obtainType(source);
@@ -1817,7 +1817,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                 return result;                
             } else {
                 // source is collection, create implicit collect for operation 
-                CollectionType collType = (tudresden.ocl20.jmi.ocl.types.CollectionType) source;
+                CollectionType collType = (tudresden.ocl20.core.jmi.ocl.types.CollectionType) source;
                 Classifier elemType = collType.getElementType();
                 assertParserCondition( astTime == null, "time expression not allowed here");
                 Operation refOp = elemType.lookupOperation(nameHead, parameterTypes);
@@ -1893,7 +1893,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             OclExpression source = hrtg.getCurrentSourceExpression();
             assert (source != null):
                 "source expression may not be null in this context";
-            boolean isCollection = source instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+            boolean isCollection = source instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
             if ( ! isCollection ) {
                 // source expression is no collection 
                 Classifier srcType = source.getType();
@@ -1913,7 +1913,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             } else {
                 // source expression is a collection
                 assertParserCondition( astTime == null, "time expression not allowed here");
-                CollectionType coll = (tudresden.ocl20.jmi.ocl.types.CollectionType) source;
+                CollectionType coll = (tudresden.ocl20.core.jmi.ocl.types.CollectionType) source;
                 Classifier elemType = coll.getElementType();
                 
                 AssociationEnd assocEnd = elemType.lookupAssociationEnd(name);
@@ -2100,8 +2100,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             // OR we insert dependencies into the parser (access the UML model  
             // directly 
             // throw new AttrEvalException("Attribute definition not implemented yet");
-            if ( ctxCls instanceof tudresden.ocl20.jmi.uml15.core.Classifier ) {
-                tudresden.ocl20.jmi.uml15.core.Classifier umlCls = (tudresden.ocl20.jmi.uml15.core.Classifier) ctxCls;
+            if ( ctxCls instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier ) {
+                tudresden.ocl20.core.jmi.uml15.core.Classifier umlCls = (tudresden.ocl20.core.jmi.uml15.core.Classifier) ctxCls;
                 umlCls.getConstraint().add(cons);
                 log("Warning: attribute definition is incomplete and possibly violates the OCL2.0 specification.");
             } else {
@@ -2118,8 +2118,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             // OR we insert dependencies into the parser (access the UML model  
             // directly 
             // throw new AttrEvalException("Operation definition not implemented yet");
-            if ( ctxCls instanceof tudresden.ocl20.jmi.uml15.core.Classifier ) {
-                tudresden.ocl20.jmi.uml15.core.Classifier umlCls = (tudresden.ocl20.jmi.uml15.core.Classifier) ctxCls;
+            if ( ctxCls instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier ) {
+                tudresden.ocl20.core.jmi.uml15.core.Classifier umlCls = (tudresden.ocl20.core.jmi.uml15.core.Classifier) ctxCls;
                 umlCls.getConstraint().add(cons);
                 log("Warning: operation definition is incomplete and possibly violates the OCL2.0 specification.");
             } else {
@@ -2314,22 +2314,22 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             Attribute consAttr = (Attribute) consElem;
             
 
-            if ( consAttr instanceof tudresden.ocl20.jmi.uml15.core.Attribute ) {
-                tudresden.ocl20.jmi.uml15.core.Attribute consAttrUml = 
-                    (tudresden.ocl20.jmi.uml15.core.Attribute) consAttr;
-                assert ( expOcl instanceof tudresden.ocl20.jmi.uml15.datatypes.Expression ):
+            if ( consAttr instanceof tudresden.ocl20.core.jmi.uml15.core.Attribute ) {
+                tudresden.ocl20.core.jmi.uml15.core.Attribute consAttrUml = 
+                    (tudresden.ocl20.core.jmi.uml15.core.Attribute) consAttr;
+                assert ( expOcl instanceof tudresden.ocl20.core.jmi.uml15.datatypes.Expression ):
                     "expressions for initial value of UML15 Attribute must be UML15 Expression instances";
-                tudresden.ocl20.jmi.uml15.datatypes.Expression expUml = 
-                    (tudresden.ocl20.jmi.uml15.datatypes.Expression) expOcl;
+                tudresden.ocl20.core.jmi.uml15.datatypes.Expression expUml = 
+                    (tudresden.ocl20.core.jmi.uml15.datatypes.Expression) expOcl;
                 consAttrUml.setInitialValue(expUml);
             } else {
-                log("Warning: missing method 'setInitialValue' in tudresden.ocl20.jmi.ocl.commonmodel.Attribute " +
+                log("Warning: missing method 'setInitialValue' in tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute " +
                     "prevents support for initial value constraints in models not based on UML15 metamodel");
             }
 
             // @@TODO@@ attach "expression in ocl" to constrained attribute (as attribute's initial value)
             // consAttr.setInitialValue(expOcl);
-//            throw new AttrEvalException("Missing method 'setInitialValue' in tudresden.ocl20.jmi.ocl.commonmodel.Attribute " +
+//            throw new AttrEvalException("Missing method 'setInitialValue' in tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute " +
 //                "prevents support for initial value constraints.");
         } else {
             throw new AttrEvalException("Unsupported constrained element " +
@@ -2639,7 +2639,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         assert ( sourceType != null ): 
             "type of source expression must not be null";
             
-        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
         if ( ! sourceIsCollection ) {
             throw new AttrEvalException("Source expression must have a collection type for IteratorExp");
         }
@@ -2690,7 +2690,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         assert ( sourceType != null ):              // already checked in computeEnvFor_Body
             "type of source expression must not be null";
             
-        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
         assert ( sourceIsCollection ):              // already checked in computeEnvFor_Body
             "source expression must have a collection type for IteratorExp";
             
@@ -2760,7 +2760,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         assert ( sourceType != null ):
             "type of source expression must not be null";
             
-        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
         assert ( sourceIsCollection ):
             "source expression must have a collection type for IterateExp";
             
@@ -2805,7 +2805,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         assert ( sourceType != null ):
             "type of source expression must not be null";
             
-        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
         assert ( sourceIsCollection ):
             "source expression must have a collection type for IterateExp";
             
@@ -2948,7 +2948,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             astParameters = new ArrayList(0); // if not present, use empty list
         }
             
-        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.jmi.ocl.types.CollectionType;
+        boolean sourceIsCollection = sourceType instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
         List paramTypes = this.getTypesForParameters(astParameters);
         Operation refOp = null;
         

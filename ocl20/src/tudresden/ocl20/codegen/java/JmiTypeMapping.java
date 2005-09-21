@@ -29,9 +29,9 @@
  * http://www-st.inf.tu-dresden.de/ (Chair home page) or             *
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package tudresden.ocl20.codegen;
+package tudresden.ocl20.codegen.java;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +39,7 @@ import java.util.Iterator;
 
 /**
  * Generates code for uniquely identifying the types of operation parameters in the model.
- * This is needed as argument (NonOclType) for the renconvert() method in {@link tudresden.ocl20.lib.JmiOclLibrary JmiOclLibrary}
+ * This is needed as argument (NonOclType) for the renconvert() method in {@link tudresden.ocl20.core.lib.JmiOclLibrary JmiOclLibrary}
  *
  * @author  Stefan Ocke
  */
@@ -56,7 +56,7 @@ public class JmiTypeMapping{
         return cg.getPkgPrefix();
     }
     
-    public String getNonOclType(tudresden.ocl20.jmi.ocl.commonmodel.Parameter parameter){
+    public String getNonOclType(tudresden.ocl20.core.jmi.ocl.commonmodel.Parameter parameter){
         if(!(parameter instanceof Parameter)){
             throw new RuntimeException("JmiTypeMapping can only be applied to MOF parameters!");
         }

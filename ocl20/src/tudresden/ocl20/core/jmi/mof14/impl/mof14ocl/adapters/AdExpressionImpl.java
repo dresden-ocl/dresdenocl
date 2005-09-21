@@ -30,10 +30,10 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.mof14ocl.adapters;
+package tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.adapters;
 
-import tudresden.ocl20.jmi.mof14.mof14ocl.adapters.*;
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.mof14ocl.adapters.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -68,11 +68,11 @@ public abstract class AdExpressionImpl extends InstanceHandler implements AdExpr
         return getBody();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Constraint getConstraintA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Constraint getConstraintA() {
         return this.getConstraint();
     }
     
-    public void setConstraintA(tudresden.ocl20.jmi.ocl.commonmodel.Constraint c) {
+    public void setConstraintA(tudresden.ocl20.core.jmi.ocl.commonmodel.Constraint c) {
         this.setConstraint((Constraint) c);
     }
     

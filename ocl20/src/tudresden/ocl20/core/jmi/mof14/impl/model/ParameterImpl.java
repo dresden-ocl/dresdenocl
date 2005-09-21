@@ -30,9 +30,9 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.mof14.impl.model;
+package tudresden.ocl20.core.jmi.mof14.impl.model;
 
-import tudresden.ocl20.jmi.mof14.model.*;
+import tudresden.ocl20.core.jmi.mof14.model.*;
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 import java.util.*;
@@ -54,7 +54,7 @@ public abstract class ParameterImpl extends ModelElementImpl implements Paramete
      * evaluator to build up the
      * tuple type, for the case that the operation has out parameters.
      */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Attribute asAttribute() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute asAttribute() {
         ModelPackage modelPackage = (ModelPackage) this.refOutermostPackage(); 
         
         String name;
@@ -64,7 +64,7 @@ public abstract class ParameterImpl extends ModelElementImpl implements Paramete
             name = getNameA();
         }
 
-        tudresden.ocl20.jmi.ocl.commonmodel.Classifier type = getTypeA(); //consider multiplicity and ordering! MOF->OclTypemapping!
+        tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier type = getTypeA(); //consider multiplicity and ordering! MOF->OclTypemapping!
         
         Attribute a = (Attribute) modelPackage.getAttribute().make(name,type);
         
@@ -88,22 +88,22 @@ public abstract class ParameterImpl extends ModelElementImpl implements Paramete
      * account, because parameter multiplicity is not seen as a Common-Model concept
      * but as MOF-specific.
      */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getTypeA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getTypeA() {
         ModelPackage modelPackage = (ModelPackage) this.refOutermostPackage(); 
-        tudresden.ocl20.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper oclLib = tudresden.ocl20.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper.getInstance(modelPackage);
+        tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper oclLib = tudresden.ocl20.core.jmi.mof14.impl.mof14ocl.types.OclLibraryHelper.getInstance(modelPackage);
         return oclLib.mapDataTypeToOcl(getType(), getMultiplicity());
     }
     
     private static Map kindMap = new HashMap();
     static {
-        kindMap.put(DirectionKindEnum.INOUT_DIR, tudresden.ocl20.jmi.ocl.commonmodel.DirectionKindEnum.INOUT);
-        kindMap.put(DirectionKindEnum.IN_DIR, tudresden.ocl20.jmi.ocl.commonmodel.DirectionKindEnum.IN);
-        kindMap.put(DirectionKindEnum.OUT_DIR, tudresden.ocl20.jmi.ocl.commonmodel.DirectionKindEnum.OUT);
-        kindMap.put(DirectionKindEnum.RETURN_DIR, tudresden.ocl20.jmi.ocl.commonmodel.DirectionKindEnum.RETURN);
+        kindMap.put(DirectionKindEnum.INOUT_DIR, tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKindEnum.INOUT);
+        kindMap.put(DirectionKindEnum.IN_DIR, tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKindEnum.IN);
+        kindMap.put(DirectionKindEnum.OUT_DIR, tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKindEnum.OUT);
+        kindMap.put(DirectionKindEnum.RETURN_DIR, tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKindEnum.RETURN);
     }
     /** is the parameter kind in,inout or out? */    
-    public tudresden.ocl20.jmi.ocl.commonmodel.DirectionKind getKindA() {
-        return (tudresden.ocl20.jmi.ocl.commonmodel.DirectionKind) kindMap.get(this.getDirection());
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKind getKindA() {
+        return (tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKind) kindMap.get(this.getDirection());
     }
     
 }

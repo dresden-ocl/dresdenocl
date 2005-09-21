@@ -30,17 +30,20 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.oclscript;
+package tudresden.ocl20.core.oclscript;
 
 import tudresden.ocl20.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.OclModelHelper;
+import tudresden.ocl20.core.WellFormednessException;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
 
 import java.io.*;
 import java.util.*;
 
 /**
- * A parser for a simple script language (OCL script) for creating OCL expressions within an {@link tudresden.ocl20.OclModel OclModel}
+ * A parser for a simple script language (OCL script) for creating OCL expressions within an {@link tudresden.ocl20.core.OclModel OclModel}
  * This was helpful to create OCL expressions in abstract syntax as long as no parser for "real OCL Syntax" did exist.
  * @author  Stefan Ocke
  */

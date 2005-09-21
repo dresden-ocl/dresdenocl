@@ -30,10 +30,10 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.core;
+package tudresden.ocl20.core.jmi.uml15.impl.core;
 
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
@@ -69,7 +69,7 @@ public abstract class AttributeImpl extends ModelElementImpl implements Attribut
         return false; //that is kind of ambiguous in the UML-spec...
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Classifier getTypeA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier getTypeA() {
         return this.getType().toOclType();
     }
      

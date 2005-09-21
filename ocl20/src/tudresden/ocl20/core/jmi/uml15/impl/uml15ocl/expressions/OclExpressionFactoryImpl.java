@@ -30,11 +30,11 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.uml15ocl.expressions;
+package tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.expressions;
 
-import tudresden.ocl20.jmi.uml15.uml15ocl.expressions.*;
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
-import tudresden.ocl20.jmi.uml15.datatypes.VisibilityKindEnum;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.expressions.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.datatypes.VisibilityKindEnum;
 
 
 import org.netbeans.mdr.handlers.InstanceHandler;
@@ -54,103 +54,103 @@ public abstract class OclExpressionFactoryImpl extends InstanceHandler implement
         return (ExpressionsPackage) refImmediatePackage();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.VariableExp createVariableExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.VariableExp createVariableExp() {
         return getExpPackage().getVariableExp().createVariableExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.VariableDeclaration createVariableDeclaration() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.VariableDeclaration createVariableDeclaration() {
         return getExpPackage().getVariableDeclaration().createVariableDeclaration();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.UnspecifiedValueExp createUnspecifiedValueExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.UnspecifiedValueExp createUnspecifiedValueExp() {
         return getExpPackage().getUnspecifiedValueExp().createUnspecifiedValueExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.TupleLiteralExp createTupleLiteralExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.TupleLiteralExp createTupleLiteralExp() {
         return getExpPackage().getTupleLiteralExp().createTupleLiteralExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.StringLiteralExp createStringLiteralExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.StringLiteralExp createStringLiteralExp() {
         return getExpPackage().getStringLiteralExp().createStringLiteralExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.RealLiteralExp createRealLiteralExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.RealLiteralExp createRealLiteralExp() {
         return getExpPackage().getRealLiteralExp().createRealLiteralExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.OperationCallExp createOperationCallExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.OperationCallExp createOperationCallExp() {
         return getExpPackage().getOperationCallExp().createOperationCallExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.OclOperationWithTypeArgExp createOclOperationWithTypeArgExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.OclOperationWithTypeArgExp createOclOperationWithTypeArgExp() {
         return getExpPackage().getOclOperationWithTypeArgExp().createOclOperationWithTypeArgExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.OclMessageExp createOclMessageExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.OclMessageExp createOclMessageExp() {
         return getExpPackage().getOclMessageExp().createOclMessageExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.OclMessageArg createOclMessageArg() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.OclMessageArg createOclMessageArg() {
         return getExpPackage().getOclMessageArg().createOclMessageArg();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.LetExp createLetExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.LetExp createLetExp() {
         return getExpPackage().getLetExp().createLetExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.IteratorExp createIteratorExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.IteratorExp createIteratorExp() {
         return getExpPackage().getIteratorExp().createIteratorExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.IterateExp createIterateExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.IterateExp createIterateExp() {
         return getExpPackage().getIterateExp().createIterateExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.IntegerLiteralExp createIntegerLiteralExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.IntegerLiteralExp createIntegerLiteralExp() {
         return getExpPackage().getIntegerLiteralExp().createIntegerLiteralExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.IfExp createIfExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.IfExp createIfExp() {
         return getExpPackage().getIfExp().createIfExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.EnumLiteralExp createEnumLiteralExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.EnumLiteralExp createEnumLiteralExp() {
         return getExpPackage().getEnumLiteralExp().createEnumLiteralExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.CollectionRange createCollectionRange() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.CollectionRange createCollectionRange() {
         return getExpPackage().getCollectionRange().createCollectionRange();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.CollectionLiteralExp createCollectionLiteralExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.CollectionLiteralExp createCollectionLiteralExp() {
         return getExpPackage().getCollectionLiteralExp().createCollectionLiteralExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.CollectionItem createCollectionItem() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.CollectionItem createCollectionItem() {
         return getExpPackage().getCollectionItem().createCollectionItem();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.BooleanLiteralExp createBooleanLiteralExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.BooleanLiteralExp createBooleanLiteralExp() {
         return getExpPackage().getBooleanLiteralExp().createBooleanLiteralExp();    
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.AttributeCallExp createAttributeCallExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.AttributeCallExp createAttributeCallExp() {
         return getExpPackage().getAttributeCallExp().createAttributeCallExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.AssociationEndCallExp createAssociationEndCallExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.AssociationEndCallExp createAssociationEndCallExp() {
         return getExpPackage().getAssociationEndCallExp().createAssociationEndCallExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.AssociationClassCallExp createAssociationClassCallExp() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.AssociationClassCallExp createAssociationClassCallExp() {
         return getExpPackage().getAssociationClassCallExp().createAssociationClassCallExp();
     }
     
-    public tudresden.ocl20.jmi.ocl.expressions.ExpressionInOcl createExpressionInOcl() {
+    public tudresden.ocl20.core.jmi.ocl.expressions.ExpressionInOcl createExpressionInOcl() {
         return getExpPackage().getExpressionInOcl().createExpressionInOcl(); 
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Constraint createConstraint() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Constraint createConstraint() {
         return ((Uml15Package)this.refOutermostPackage()).getCore().getConstraint().createConstraint("", VisibilityKindEnum.VK_PUBLIC, false, null);
     }
 }

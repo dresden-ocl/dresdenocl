@@ -27,9 +27,9 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
-import tudresden.ocl20.jmi.ocl.commonmodel.AssociationEnd;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationEnd;
 
 /**
  *

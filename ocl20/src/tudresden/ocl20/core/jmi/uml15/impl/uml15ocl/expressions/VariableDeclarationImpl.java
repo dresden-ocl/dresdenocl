@@ -30,13 +30,13 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.uml15ocl.expressions;
+package tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.expressions;
 
 
-import tudresden.ocl20.jmi.uml15.uml15ocl.expressions.*;
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.datatypes.*;
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.expressions.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -45,13 +45,13 @@ import org.netbeans.mdr.storagemodel.StorableObject;
  *
  * @author  Administrator
  */
-public abstract class VariableDeclarationImpl extends tudresden.ocl20.jmi.uml15.impl.core.ModelElementImpl implements VariableDeclaration{
+public abstract class VariableDeclarationImpl extends tudresden.ocl20.core.jmi.uml15.impl.core.ModelElementImpl implements VariableDeclaration{
     
     protected VariableDeclarationImpl(StorableObject storable) {
         super(storable);
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Parameter asParameter() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Parameter asParameter() {
         Parameter p = ((Uml15Package)refOutermostPackage()).getCore().getParameter().createParameter();
         p.setNameA(getNameA());
         p.setKind(ParameterDirectionKindEnum.PDK_IN);
@@ -59,7 +59,7 @@ public abstract class VariableDeclarationImpl extends tudresden.ocl20.jmi.uml15.
         return p;
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Attribute asAttribute() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute asAttribute() {
         return ((Uml15Package)refOutermostPackage()).getCore().getAttribute().make(getNameA(),getType());
     }
     

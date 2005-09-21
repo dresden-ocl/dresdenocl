@@ -35,11 +35,11 @@ package tudresden.ocl20.test;
 
 import tudresden.ocl20.*;
 
-import tudresden.ocl20.jmi.ocl.*;
-//import tudresden.ocl20.jmi.oclcs.*;
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.*;
+//import tudresden.ocl20.core.jmi.oclcs.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 
 import javax.jmi.reflect.*;
 
@@ -48,7 +48,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import tudresden.ocl20.codegen.*;
+import tudresden.ocl20.codegen.java.*;
+import tudresden.ocl20.core.MetaModelConst;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.WellFormednessException;
 
 /**
  * A simple test case that loads a metamodel as instance of MOF14OCL an creates some OCL Expressions within it.
@@ -80,10 +83,10 @@ public class MofOclModelLoadTest {
             
 //            OclcsPackage cs = model.getOclcsPackage();
             
-            tudresden.ocl20.jmi.ocl.commonmodel.Package topPackage = model.getTopPackage();
+            tudresden.ocl20.core.jmi.ocl.commonmodel.Package topPackage = model.getTopPackage();
             
             OclExpressionFactory factory = model.getOclExpressionFactory();
-            tudresden.ocl20.TypeEvaluator typeEvl = model.getTypeEvaluator();
+            tudresden.ocl20.core.TypeEvaluator typeEvl = model.getTypeEvaluator();
             OclLibrary oclLib = model.getOclLibrary();
            
            
@@ -208,7 +211,7 @@ public class MofOclModelLoadTest {
             
             
             CollectionLiteralExp cle = factory.createCollectionLiteralExp();
-            cle.setKind(tudresden.ocl20.jmi.ocl.expressions.CollectionKindEnum.SEQUENCE);
+            cle.setKind(tudresden.ocl20.core.jmi.ocl.expressions.CollectionKindEnum.SEQUENCE);
             cle.getParts().add(ci1);
             cle.getParts().add(ci2);
             cle.getParts().add(cr);

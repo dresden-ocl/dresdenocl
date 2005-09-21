@@ -30,14 +30,14 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.core;
+package tudresden.ocl20.core.jmi.uml15.impl.core;
 
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
-import tudresden.ocl20.jmi.uml15.datatypes.*;
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 
 /**
  *
@@ -50,7 +50,7 @@ public abstract class AttributeClassImpl extends ClassProxyHandler implements At
         super(storable);
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Attribute make(String name, tudresden.ocl20.jmi.ocl.commonmodel.Classifier type) {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute make(String name, tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier type) {
         DataTypesPackage dataTypes = ((CorePackage)refImmediatePackage()).getDataTypes();
         
         Attribute a = this.createAttribute();

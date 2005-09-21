@@ -27,11 +27,12 @@
  *
  */
 
-package tudresden.ocl20.parser.util;
+package tudresden.ocl20.core.parser.util;
 
-import tudresden.ocl20.parser.sablecc.analysis.*;
-import tudresden.ocl20.parser.sablecc.node.Start;
-import tudresden.ocl20.parser.sablecc.node.Node;
+import tudresden.ocl20.core.parser.sablecc.analysis.*;
+import tudresden.ocl20.core.parser.sablecc.node.Node;
+import tudresden.ocl20.core.parser.sablecc.node.Start;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**

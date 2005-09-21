@@ -30,11 +30,11 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20;
+package tudresden.ocl20.core;
 
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
-import tudresden.ocl20.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +52,7 @@ public class OclModelHelper {
     
     private OclModel model;
     
-    private tudresden.ocl20.jmi.ocl.commonmodel.Package topPackage;
+    private tudresden.ocl20.core.jmi.ocl.commonmodel.Package topPackage;
     
     private OclExpressionFactory factory ;
     private TypeEvaluator typeEvl ;
@@ -250,7 +250,7 @@ public class OclModelHelper {
      * @param pathname the "::"-separated qualified name of the package
      * @return the package
      */
-    public tudresden.ocl20.jmi.ocl.commonmodel.Package findPackage(String pathname){
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Package findPackage(String pathname){
         return topPackage.findPackage(tokenizePath(pathname));
     }
     

@@ -27,20 +27,20 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
-import tudresden.ocl20.parser.astlib.*;
-import tudresden.ocl20.parser.sablecc.analysis.*;
-import tudresden.ocl20.parser.sablecc.node.*;
 
-import tudresden.ocl20.parser.util.SimpleMessageSink;
 
-import tudresden.ocl20.OclModel;
-import tudresden.ocl20.OclModelHelper;
 
 import java.util.*;
 
-import tudresden.ocl20.jmi.ocl.commonmodel.Package;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.OclModelHelper;
+import tudresden.ocl20.core.parser.astlib.*;
+import tudresden.ocl20.core.parser.sablecc.analysis.*;
+import tudresden.ocl20.core.parser.sablecc.node.*;
+import tudresden.ocl20.core.parser.util.SimpleMessageSink;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.Package;
 
 
 /**
@@ -57,7 +57,7 @@ public class ASTGenerator extends DepthFirstAdapter {
     
     private OclModel model = null;
     private OclModelHelper helper = null;
-    private tudresden.ocl20.jmi.ocl.commonmodel.Package topPackage = null;
+    private tudresden.ocl20.core.jmi.ocl.commonmodel.Package topPackage = null;
     
     /**
      * Creates new ASTGenerator 

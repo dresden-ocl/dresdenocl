@@ -30,11 +30,11 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.datatypes;
+package tudresden.ocl20.core.jmi.uml15.impl.datatypes;
 
-import tudresden.ocl20.jmi.uml15.datatypes.*;
-import tudresden.ocl20.jmi.uml15.core.Constraint;
-import tudresden.ocl20.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.core.Constraint;
+import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -68,7 +68,7 @@ public abstract class ExpressionImpl extends InstanceHandler implements Expressi
         return getBody();
     }
     
-    public tudresden.ocl20.jmi.ocl.commonmodel.Constraint getConstraintA() {
+    public tudresden.ocl20.core.jmi.ocl.commonmodel.Constraint getConstraintA() {
         javax.jmi.reflect.RefFeatured rf = this.refImmediateComposite();
         if(rf != null && rf instanceof Constraint){
             return (Constraint) rf;
@@ -77,12 +77,12 @@ public abstract class ExpressionImpl extends InstanceHandler implements Expressi
         }
     }
     
-    public void setConstraintA(tudresden.ocl20.jmi.ocl.commonmodel.Constraint c) {
+    public void setConstraintA(tudresden.ocl20.core.jmi.ocl.commonmodel.Constraint c) {
         Constraint old = (Constraint) this.refImmediateComposite();
         if (old != null){
             old.setBody(null);
         }
-        ((Constraint) c).setBody((tudresden.ocl20.jmi.uml15.uml15ocl.expressions.ExpressionInOcl) this);
+        ((Constraint) c).setBody((tudresden.ocl20.core.jmi.uml15.uml15ocl.expressions.ExpressionInOcl) this);
         
     }
     

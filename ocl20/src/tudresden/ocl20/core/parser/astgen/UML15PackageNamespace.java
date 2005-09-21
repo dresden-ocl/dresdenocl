@@ -27,11 +27,11 @@
  *
  */
 
-package tudresden.ocl20.parser.astgen;
+package tudresden.ocl20.core.parser.astgen;
 
-import tudresden.ocl20.jmi.uml15.modelmanagement.Package;
-import tudresden.ocl20.jmi.uml15.core.ModelElement;
-import tudresden.ocl20.jmi.uml15.core.Classifier;
+import tudresden.ocl20.core.jmi.uml15.modelmanagement.Package;
+import tudresden.ocl20.core.jmi.uml15.core.ModelElement;
+import tudresden.ocl20.core.jmi.uml15.core.Classifier;
 import java.util.*;
 
 /**
@@ -84,23 +84,23 @@ public class UML15PackageNamespace extends UML15Namespace {
             // System.out.println("UML15PackageNamespace: processing element of class " + el.getClass().getName());
             
             String name = el.getNameA();
-            if ( el instanceof tudresden.ocl20.jmi.uml15.core.Classifier ) {
+            if ( el instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier ) {
                 // add classifier 
                 // System.out.println("  Adding UML15 classifier '" + name + "'");
                 result.addElement(name, el, false);
-            } else if ( el instanceof tudresden.ocl20.jmi.uml15.modelmanagement.Package ) {
+            } else if ( el instanceof tudresden.ocl20.core.jmi.uml15.modelmanagement.Package ) {
                 // add package
                 // System.out.println("  Adding UML15 Package '" + name + "'");
                 result.addElement(name, el, false);
-            } else if ( el instanceof tudresden.ocl20.jmi.uml15.core.Association ) {
+            } else if ( el instanceof tudresden.ocl20.core.jmi.uml15.core.Association ) {
                 // do nothing 
-            } else if ( el instanceof tudresden.ocl20.jmi.uml15.core.AssociationEnd ) {
+            } else if ( el instanceof tudresden.ocl20.core.jmi.uml15.core.AssociationEnd ) {
                 // do nothing 
-            } else if ( el instanceof tudresden.ocl20.jmi.uml15.core.TagDefinition ) {
+            } else if ( el instanceof tudresden.ocl20.core.jmi.uml15.core.TagDefinition ) {
                 // do nothing
-            } else if ( el instanceof tudresden.ocl20.jmi.uml15.core.Stereotype ) {
+            } else if ( el instanceof tudresden.ocl20.core.jmi.uml15.core.Stereotype ) {
                 // do nothing
-            } else if ( el instanceof tudresden.ocl20.jmi.uml15.core.Generalization ) {
+            } else if ( el instanceof tudresden.ocl20.core.jmi.uml15.core.Generalization ) {
                 // do nothing
             } else {
                 System.out.println("Warning: unknown type of member in package namespace: " + el.getClass().getName() + " for name " + name);

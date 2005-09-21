@@ -27,7 +27,7 @@
  *
  */
 
-package tudresden.ocl20.util;
+package tudresden.ocl20.core.util;
 
 /**
  *

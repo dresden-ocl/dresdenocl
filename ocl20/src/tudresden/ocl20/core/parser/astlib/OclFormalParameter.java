@@ -27,11 +27,11 @@
  *
  */
 
-package tudresden.ocl20.parser.astlib;
+package tudresden.ocl20.core.parser.astlib;
 
-import tudresden.ocl20.jmi.ocl.types.*;
-import tudresden.ocl20.jmi.ocl.expressions.*;
-import tudresden.ocl20.jmi.ocl.commonmodel.*;
+import tudresden.ocl20.core.jmi.ocl.types.*;
+import tudresden.ocl20.core.jmi.ocl.expressions.*;
+import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 
 /**
  *

@@ -30,16 +30,16 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20.jmi.uml15.impl.uml15ocl.types;
+package tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types;
 
-import tudresden.ocl20.jmi.uml15.uml15ocl.*;
-import tudresden.ocl20.jmi.uml15.uml15ocl.types.*;
-import tudresden.ocl20.jmi.uml15.uml15.*;
-import tudresden.ocl20.jmi.uml15.core.*;
-import tudresden.ocl20.jmi.uml15.datatypes.*;
-import tudresden.ocl20.jmi.uml15.uml15.*;
+import tudresden.ocl20.core.jmi.uml15.impl.modelmanagement.*;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.*;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.types.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.*;
+import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.uml15.*;
 
-import tudresden.ocl20.jmi.uml15.impl.modelmanagement.*;
 
 import java.util.List;
 import java.util.Iterator;
@@ -81,7 +81,7 @@ public class OclLibraryHelper {
     DataType oclAny;
     VoidType oclVoid;
     
-    tudresden.ocl20.jmi.uml15.modelmanagement.Package oclLibPackage;
+    tudresden.ocl20.core.jmi.uml15.modelmanagement.Package oclLibPackage;
     
     private OclLibraryHelper(Uml15Package umlPackage){
         this.umlPackage = (Uml15Package) umlPackage;
@@ -91,9 +91,9 @@ public class OclLibraryHelper {
         
         List pathname = new ArrayList();
         pathname.add(OCLPACKAGENAME);
-        tudresden.ocl20.jmi.uml15.modelmanagement.Package topPackage= mh.getTopPackage();
+        tudresden.ocl20.core.jmi.uml15.modelmanagement.Package topPackage= mh.getTopPackage();
         
-        oclLibPackage = (tudresden.ocl20.jmi.uml15.modelmanagement.Package) topPackage.findPackage(pathname);
+        oclLibPackage = (tudresden.ocl20.core.jmi.uml15.modelmanagement.Package) topPackage.findPackage(pathname);
         if(oclLibPackage != null){
             //the OCL standard library has already been created before.
             //just look up all the fixed parts
@@ -123,7 +123,7 @@ public class OclLibraryHelper {
         return getInstance((Uml15Package)bo.refOutermostPackage());
     }
     
-    public tudresden.ocl20.jmi.uml15.modelmanagement.Package getOclLibPackage(){
+    public tudresden.ocl20.core.jmi.uml15.modelmanagement.Package getOclLibPackage(){
         return oclLibPackage;
     }
     

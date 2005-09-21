@@ -30,7 +30,7 @@
  * http://www-st.inf.tu-dresden.de/ocl/ (project home page)          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package tudresden.ocl20;
+package tudresden.ocl20.core;
 
 import javax.jmi.xmi.XmiReader;
 import java.util.Collection;
@@ -460,8 +460,9 @@ public class MetaModelIntegrator {
         MetaModelIntegrator.integrateMetaModels(metamodel, name, topPckgName, jmiPrfx);
         
         //generate the JMI interfaces
-        System.out.println("Generating JMI Interfaces");
+        System.out.print("Generating JMI Interfaces");
         String generatedjmidirPath = java.net.URLDecoder.decode(ClassLoader.getSystemClassLoader().getResource(MetaModelConst.GENERATEDJMIDIR+java.io.File.separator).getPath(), "UTF-8");
+        System.out.println(" to "+generatedjmidirPath);
         repository.generateJMIInterfaces(metamodel, new java.io.File(generatedjmidirPath+java.io.File.separator));
                
         //export the result of the integration
