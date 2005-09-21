@@ -42,7 +42,7 @@ import tudresden.ocl20.core.jmi.uml15.uml15ocl.expressions.*;
 import tudresden.ocl20.core.jmi.uml15.commonbehavior.Reception;
 import tudresden.ocl20.core.jmi.uml15.commonbehavior.Signal;
 
-import tudresden.ocl20.jmi.uml15.uml15ocl.types.*;
+import tudresden.ocl20.core.jmi.uml15.uml15ocl.types.*;
 
 //import tudresden.ocl20.jmi.impl.uml15ocl.OclLibrary;
 
