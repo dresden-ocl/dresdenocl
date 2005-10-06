@@ -34,7 +34,7 @@ import java.util.Iterator;
 public abstract class CodeGenerator extends ReflectiveVisitor {
     
     
-    public static final String DEFAULTPKGPREFIX = "tudresden.ocl20.lib.";
+    public static final String DEFAULTPKGPREFIX = "tudresden.ocl20.core.lib.";
     
     private String pkgPrefix;
     
@@ -63,7 +63,7 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
         this.model = model;
         oclLib = model.getOclLibrary();
 
-        //shall every class name be fully qualified by "tudresden.ocl20.lib" ?
+        //shall every class name be fully qualified by "tudresden.ocl20.core.lib" ?
         if(usePkgPrfx){
             pkgPrefix=DEFAULTPKGPREFIX;
         } else {
@@ -327,7 +327,7 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
         result.append(getCode(accuVarInitExp));
         
         
-        //like: final tudresden.ocl2.lib.OclContainer tudOcl20Accu0=new tudresden.ocl20.lib.OclContainer(tudOclNode5);
+        //like: final tudresden.ocl2.core.lib.OclContainer tudOcl20Accu0=new tudresden.ocl20.core.lib.OclContainer(tudOclNode5);
         result.append("final ");
         result.append(getPkgPrefix());
         result.append("OclContainer ");
@@ -350,7 +350,7 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
         result.append(getExpId(srcExp));
         result.append(".getIterator();\n");
         
-        //like final tudresden.ocl20.lib.OclRootEvaluatable tudOclEval0=new tudresden.ocl20.lib.OclRootEvaluatable() {
+        //like final tudresden.ocl20.core.lib.OclRootEvaluatable tudOclEval0=new tudresden.ocl20.core.lib.OclRootEvaluatable() {
         
         String evalId = createEvalId();
         result.append("final ");
@@ -717,7 +717,7 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
     }
     
     public String transform(TupleLiteralExp exp){
-        //like: final tudresden.ocl20.lib.OclTuple tuple = new tudresden.ocl20.lib.OclTuple(new String []{...}, new OclRoot[]{...});
+        //like: final tudresden.ocl20.core.lib.OclTuple tuple = new tudresden.ocl20.core.lib.OclTuple(new String []{...}, new OclRoot[]{...});
     
         StringBuffer result=new StringBuffer();
         
@@ -760,8 +760,8 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
     
     public String transform(EnumLiteralExp exp){
         //like:
-        //final tudresden.ocl20.lib.OclEnumType enumtype = fact.getOclEnumTypeFor("OCL::Expressions::CollectionKind");
-        //final tudresden.ocl20.lib.OclEnumLiteral enumlit = enumtype.getLiteralFor("Collection");
+        //final tudresden.ocl20.core.lib.OclEnumType enumtype = fact.getOclEnumTypeFor("OCL::Expressions::CollectionKind");
+        //final tudresden.ocl20.core.lib.OclEnumLiteral enumlit = enumtype.getLiteralFor("Collection");
         
         StringBuffer result=new StringBuffer();
         Classifier enumtype = exp.getType();
@@ -783,11 +783,11 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
 
     public String transform(CollectionLiteralExp exp){
 //like:
-//final tudresden.ocl20.lib.OclSequence tudOcl20Exp0 = tudresden.ocl20.lib.OclSequence.getEmptyOclSequence();
-//final tudresden.ocl20.lib.OclInteger tudOcl20Exp1 = new tudresden.ocl20.lib.OclInteger(10);
-//final tudresden.ocl20.lib.OclInteger tudOcl20Exp2 = new tudresden.ocl20.lib.OclInteger(18);
+//final tudresden.ocl20.core.lib.OclSequence tudOcl20Exp0 = tudresden.ocl20.core.lib.OclSequence.getEmptyOclSequence();
+//final tudresden.ocl20.core.lib.OclInteger tudOcl20Exp1 = new tudresden.ocl20.core.lib.OclInteger(10);
+//final tudresden.ocl20.core.lib.OclInteger tudOcl20Exp2 = new tudresden.ocl20.core.lib.OclInteger(18);
 //tudOcl20Exp0.setToRange(tudOcl20Exp1, tudOcl20Exp2);
-//final tudresden.ocl20.lib.OclInteger tudOcl20Exp3 = new tudresden.ocl20.lib.OclInteger(34);
+//final tudresden.ocl20.core.lib.OclInteger tudOcl20Exp3 = new tudresden.ocl20.core.lib.OclInteger(34);
 //tudOcl20Exp0.setToInclude(tudOcl20Exp3);
         
         StringBuffer result=new StringBuffer();
