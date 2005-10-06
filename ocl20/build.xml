@@ -217,7 +217,7 @@
     <!-- create JAR archives for all required MDR subpackages (API, impl, utils) -->
     <!--<target name="jar.mdrlibs" depends="init" />-->
     
-    <!-- mdr libs are pre-build now -->
+    <!-- mdr libs are pre-build -->
     <!-- <target name="jar.mdrlibs" depends="init,jar.mdrlib.api,jar.mdrlib.impl,jar.mdrlib.utils" /> -->
 
     
