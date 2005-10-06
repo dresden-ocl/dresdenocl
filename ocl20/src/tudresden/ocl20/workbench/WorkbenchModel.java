@@ -32,13 +32,13 @@
 
 package tudresden.ocl20.workbench;
 
-import tudresden.ocl20.*;
+import tudresden.ocl20.core.*;
+import tudresden.ocl20.core.lib.*;
+import tudresden.ocl20.core.oclscript.*;
 import tudresden.ocl20.codegen.java.*;
 import tudresden.ocl20.core.MetaModelConst;
 import tudresden.ocl20.core.ModelManager;
 import tudresden.ocl20.core.OclModel;
-import tudresden.ocl20.core.lib.*;
-import tudresden.ocl20.core.oclscript.*;
 import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 import tudresden.ocl20.core.jmi.ocl.expressions.*;
 
