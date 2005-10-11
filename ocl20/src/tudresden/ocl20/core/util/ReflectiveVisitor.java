@@ -42,7 +42,7 @@ import java.util.*;
  */
 public abstract class ReflectiveVisitor {
     
-    public static String pathname = "tudresden.ocl20.util.ReflectiveVisitor"; 
+    public static String pathname = "tudresden.ocl20.core.util.ReflectiveVisitor"; 
     
     String methodName;
     
