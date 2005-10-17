@@ -12,6 +12,7 @@
   To get the toolkit running, you need:
   1. Jakarta Ant (I used Ant 1.6.2. For other versions, your mileage may vary).
   2. Java SDK 1.4 (I used Sun's J2SDK 1.4.2_05 on Linux Slackware 9.1).
+     Java SDK 1.5 to compile the OCL22SQL tool.
   3. Make sure that your system's environment variable $JAVA_HOME is set 
      properly and "tools.jar" is located at $JAVA_HOME/lib/tools.jar
   
@@ -57,8 +58,23 @@
      d. browse UML models in the repository (very basic browsing only)
      e. running an attribute evaluator over the concrete syntax tree to create
         the abstract syntax tree.
+        
+   3. OCL22SQL tool
+      This software was written by Florian Heidenreich for his student research
+      project (Grosser Beleg). It provides a GUI to create integrity views from 
+      textual OCL invariants and allows:
+      a. loading of OCL constraint files
+      b. loading UML15 models to run attribute evaluation/AST generation against
+         (using XMI)
+      c. choosing between different object-relational mapping schemes to create
+         DDL-scripts for table schemas and DDL-scripts for object views
+      d. generating of SQL integrity views from the AST
+      
+      Please note, that this tool doesn't support association classes and OCL 
+      operations over collections at the moment.
+      
 
-   Both applications share a common codebase. To faciliate building and running
+   All applications share a common codebase. To faciliate building and running
    them, there is an Ant script in $BASE/build.
 
    To build and run the OCL workbench, change working directory to $BASE and
@@ -69,6 +85,10 @@
    For the OCL2.0 parser GUI, change the working directory to $BASE and type:
 
         ant run.parser-gui
+        
+   For the OCL22SQL tool, change the working directory to $BASE and type:
+   
+        ant run.ocl22sql
 
 
    OCL2.0 Workbench
@@ -110,6 +130,25 @@
 
    Report any violations of OCL2.0 AST generation rules to Ansgar Konermann.
    Thank you. :o)
+   
+   
+   OCL22SQL tool
+   -----------------
+
+   First choose a project directory where the various *.sql files should be
+   generated to and choose a OCL constraint file, for example 
+   "university_example.ocl".
+   
+   Then choose the corresponding model as XMI, for example
+   "university_example.xmi".
+   
+   Select one of the three available mapping schemes for the object-relational
+   mapping and press "Execute Project". You'll notice some status messages
+   appearing on your console.
+   
+   After the text "Finished!" is displayed on the console, switch to the 
+   "Output" tab and have a look at the generated DDL and SQL code.
+
 
 
    Contact
@@ -117,14 +156,20 @@
 
    Report problems with the OCL parser to Ansgar Konermann. You can reach him
    by email: ansgar at itikko dot net
+   
+   Report problems with the OCL22SQL tool to Florian Heidenreich. You can reach
+   him by email: mail at fheidenreich dot de
 
    TODO: ask Stefan whether we may publish his email address here and which
          address should be used
+         
+
 
    Version information
    -------------------
-   This version of the tookit was compiled from:
-   Repository URL: svn+ssh://diamond.itikko.net/ddocl2/trunk
-   Revision: 179
-   Compilation date: 20050216 time: 155328+0100
+   
+   Not versioned at the moment. Please check the CVS repository at
+    http://sourceforge.net/cvs/?group_id=5840
+   for the latest version of the toolkit.
 
+   
