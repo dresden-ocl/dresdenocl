@@ -40,6 +40,8 @@
                 <!-- <pathelement location="${jar.sablecc.anttask}" /> -->
             </classpath>
         </taskdef>
+    	
+    	<property name="jar.xerces" value="${dir.software}/xerces.jar" />
         
         
         <property name="dir.build" value="${basedir}/build" />
@@ -75,6 +77,8 @@
         
         <property name="objdir.libs" value="${basedir}/lib/internal" />
         <property name="destdir.javadoc" value="${basedir}/doc/api" />
+    	
+    	<property name="srcdir.ocl22sql" value="${srcdir.generic}" />
         
         <property name="jar.libs.jmi-api.relative" value="ocl20jmiapi.jar" />
         <property name="jar.libs.jmi-api" value="${objdir.libs}/ocl20jmiapi.jar" />
@@ -90,6 +94,7 @@
         <property name="jar.libs.oclscriptrunner" value="${objdir.libs}/ocl20scriptrunner.jar" />
         <property name="jar.libs.codegen.java"  value="${objdir.libs}/ocl20codegen-java.jar" />
         <property name="jar.libs.workbench" value="${objdir.libs}/ocl20workbench.jar" />
+        <property name="jar.libs.ocl22sql" value="${objdir.libs}/ocl22sql.jar" />
         
         <property name="jar.javax.jmi" value="${dir.libs.basic}/jmi.jar" />
         <property name="jar.javax.jmi-mof" value="${dir.libs.basic}/mof.jar"/>        
@@ -609,6 +614,63 @@
         </java>
         
     </target>
+	
+	<!--                                                                   -->
+	<!--  Compiles the OCL22SQL tool                                       -->
+	<!--                                                                   -->
+	<target name="compile.ocl22sql" depends="init,jar.sableparser,jar.ocl20stdlib,jar.parsertools"
+		description="compile the OCL22SQL tool" >
+		<mkdir dir="${objdir.generic}" />
+		<javac srcdir="${srcdir.ocl22sql}" destdir="${objdir.generic}" 
+			debug="true" debuglevel="lines,vars,source"
+			source="1.5">
+			<include name="tudresden/ocl20/codegen/sql/**/*.java" />
+			<exclude name="tudresden/ocl20/codegen/sql/test/**/*.java" />
+			<classpath id="classpath.ocl22sql">
+				<path refid="libs.basic" />
+				<path refid="libs.mdr" />
+				<pathelement location="${jar.libs.jmi-api}" />
+				<pathelement location="${jar.sableparser}" />
+				<pathelement location="${jar.xerces}" />
+				<pathelement location="${dir.resources}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- depends="init,jar.sableparser" -->
+	<target name="jar.ocl22sql"
+		depends="init,init.mdr,jar.jmi.if,jar.jmi.impl,jar.ocl20repository,jar.ocl20stdlib,jar.sableparser,compile.parsertools,compile.ocl22sql"
+		description="packs the OCL22SQL tool into a jar file" >
+        <jar basedir="${objdir.generic}" destfile="${jar.libs.ocl22sql}">
+			<include name="tudresden/ocl20/codegen/sql/**" />
+		</jar>
+	</target>
+
+	<target name="run.ocl22sql"
+		depends="init,jar.parsertools,jar.ocl22sql"
+		description="runs the OCL22SQL tool" >
+		<java classname="tudresden.ocl20.codegen.sql.OCL22SQL" 
+			fork="true" maxmemory="128M">
+            <jvmarg value="-ea" />
+			<assertions>
+				<enable/>
+			</assertions>
+			<classpath>
+				<path refid="libs.basic" />
+				<path refid="libs.mdr" />
+				<path refid="libs.jmi.ocl20" />
+				<pathelement location="${jar.libs.parsertools}" />
+				<pathelement location="${jar.libs.sableparser}" />
+				<pathelement location="${jar.libs.sable-astlib}" />
+				<pathelement location="${jar.libs.ocl20repository}" />
+				<pathelement location="${jar.libs.ocl20stdlib}" />
+				<pathelement location="${jar.libs.ocl22sql}" />
+				<pathelement location="${jar.xerces}" />
+				<pathelement location="${dir.resources}" />
+			</classpath>
+		</java>
+	</target>
+
     
     
     <!--                                                                   -->
