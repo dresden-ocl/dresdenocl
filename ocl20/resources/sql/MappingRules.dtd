@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	MODULE:	MappingRules.dtd					
+	VERSION:1.0							
+	DATE:	06/10/00						
+	AUTHOR:	Sten Loecher						
+	PURPOSE:DTD for use in documents that are about to describe	
+		mapping patterns from one artifical language into 	
+		another one based on grammar rules			
+-->
+
+<!ELEMENT catalog	(description?, pattern*)>
+<!ATTLIST catalog	name CDATA #REQUIRED>
+<!ELEMENT name		(#PCDATA)>	
+<!ELEMENT description	(#PCDATA)>
+<!ELEMENT pattern	(template)*>
+<!ATTLIST pattern	rule ID #REQUIRED>
+<!ELEMENT template	(li)+>	
+<!ATTLIST template	spec CDATA #REQUIRED
+			rem  CDATA #IMPLIED>
+<!ELEMENT li		(#PCDATA | param)*>
+<!ATTLIST li		connector (true|false) "false">
+<!ELEMENT param		EMPTY>
+<!ATTLIST param		name CDATA #REQUIRED>
