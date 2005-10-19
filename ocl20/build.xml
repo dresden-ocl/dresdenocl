@@ -158,75 +158,6 @@
         
     </target>
     
-    
-    <!-- compile MDR interfaces -->
-    <!--<target name="compile.mdrlib.api" depends="init"
-        description="compiles NetBeans MDR API (mdrapi)">
-        <mkdir dir="${objdir.mdrlib.api}" />
-        <javac srcdir="${srcdir.mdrlib.api}" destdir="${objdir.mdrlib.api}"
-            debug="true" debuglevel="lines,vars,source" source="1.4">
-            <classpath refid="libs.basic" />
-        </javac>
-    </target>-->
-    <!-- create MDR interface library package -->
-    <!--<target name="jar.mdrlib.api" depends="compile.mdrlib.api"
-        description="packs compiled MDR API into a jar file">
-        <jar basedir="${objdir.mdrlib.api}" destfile="${jar.libs.mdr.api}" />
-    </target>-->
-    
-    <!-- compile MDR utilities -->
-    <!--<target name="compile.mdrlib.utils" depends="init,jar.mdrlib.api" description="compiles NetBeans MDR JMI Utilities (jmiutils)">        
-        <mkdir dir="${objdir.mdrlib.utils}" />
-        <javac srcdir="${srcdir.mdrlib.utils}" destdir="${objdir.mdrlib.utils}"
-            debug="true" debuglevel="lines,vars,source" source="1.4">
-            <classpath>
-                <pathelement location="${jar.libs.mdr.api}" />
-                <path refid="libs.basic" />
-            </classpath>
-        </javac>
-        <mkdir dir="${objdir.mdrlib.utils}/META-INF" />
-        <copy todir="${objdir.mdrlib.utils}/META-INF">
-            <fileset dir="${srcdir.mdrlib.utils}/META-INF" />
-        </copy>
-    </target>-->
-    <!-- create MDR JMI utilities package -->
-    <!--<target name="jar.mdrlib.utils" depends="compile.mdrlib.utils"
-        description="packs compiled MDR JMI utilities into a jar file">
-        <jar basedir="${objdir.mdrlib.utils}" destfile="${jar.libs.mdr.jmiutils}" />
-    </target>-->
-
-    <!-- compile MDR implementation -->
-    <!--<target name="compile.mdrlib.impl" depends="init,jar.mdrlib.api,jar.mdrlib.utils"
-        description="compiles NetBeans MDR Implementation (nbmdr)">
-        <mkdir dir="${objdir.mdrlib.impl}" />
-        <javac srcdir="${srcdir.mdrlib.impl}" destdir="${objdir.mdrlib.impl}"
-            debug="true" debuglevel="lines,vars,source" source="1.4">
-            <classpath>
-                <pathelement location="${jar.libs.mdr.jmiutils}" />
-                <pathelement location="${jar.libs.mdr.api}" />
-                <path refid="libs.basic" />
-            </classpath>
-        </javac>
-        <copy todir="${objdir.mdrlib.impl}/META-INF">
-            <fileset dir="${srcdir.mdrlib.impl}/META-INF" />
-        </copy>
-    </target>-->
-    <!-- create MDR implementation package -->
-    <!--<target name="jar.mdrlib.impl" depends="compile.mdrlib.impl"
-        description="packs compiled MDR implementation into a jar file">
-        <jar basedir="${objdir.mdrlib.impl}" destfile="${jar.libs.mdr.impl}" />
-    </target>-->
-
-    
-    
-    <!-- create JAR archives for all required MDR subpackages (API, impl, utils) -->
-    <!--<target name="jar.mdrlibs" depends="init" />-->
-    
-    <!-- mdr libs are pre-build -->
-    <!-- <target name="jar.mdrlibs" depends="init,jar.mdrlib.api,jar.mdrlib.impl,jar.mdrlib.utils" /> -->
-
-    
-
     <!-- compile JMI interfaces -->
     <target name="compile.jmi.if" depends="init,init.mdr"
         description="compiles JMI interfaces generated for (meta-)model access">
@@ -758,6 +689,7 @@
             <include name="tudresden/ocl20/core/oclscript/**.java" />
             <exclude name="**.html" />
             <classpath>
+            	<path refid="libs.basic" />
                 <path refid="libs.mdr" />
                 <path refid="libs.jmi.ocl20" />
             </classpath>
@@ -802,7 +734,8 @@
             <include name="tudresden/ocl20/codegen/java/**.java" />
             <exclude name="**.html" />
             <classpath>
-                <path refid="libs.mdr" />
+                <path refid="libs.basic" />
+            	<path refid="libs.mdr" />
                 <path refid="libs.jmi.ocl20" />
             </classpath>
         </javac>
