@@ -129,9 +129,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 				next = ac.getSource();
 				featureName = ac.getReferredAttribute().getNameA();
 				startType = next.getType().getNameA();				
-			}
-			else
-			if (exp instanceof AssociationEndCallExp) {
+			} else if (exp instanceof AssociationEndCallExp) {
 				AssociationEndCallExp ae = (AssociationEndCallExp)exp;
 				next = ae.getSource();
 				featureName = ae.getReferredAssociationEnd().getNameA();
@@ -158,7 +156,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 					guide = mc.getJoinGuide(featureName);
 					debug(guide);
 					guides.add(guide);
-            	}                        	
+            	}
             } catch(NullPointerException e) {
 				guide = mc.getJoinGuide(mc.getClassName());
 				guide.setAlias(startType);
@@ -175,9 +173,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 					tmpNext = ac.getSource();
 					featureName = ac.getReferredAttribute().getNameA();
 					startType = tmpNext.getType().getNameA();				
-				}
-				else
-				if (next instanceof AssociationEndCallExp) {
+				} else if (next instanceof AssociationEndCallExp) {
 					AssociationEndCallExp ae = (AssociationEndCallExp)next;
 					tmpNext = ae.getSource();
 					featureName = ae.getReferredAssociationEnd().getNameA();
@@ -197,9 +193,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 					guides.add(guide);    
 					
 					// TODO: add special handling of complex attributes here
-				}
-				else
-				if (mc.isAssociationEnd(featureName)) {
+				} else if (mc.isAssociationEnd(featureName)) {
 					// next feature navigates to an association end
 					guide = mc.getJoinGuide(featureName);
 					if (i == 0) guide.setAlias(startFeature.toUpperCase());
@@ -210,7 +204,9 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 				
 				// assign guides list to last source (necessary for type features without successor)
 				if (tmpNext == null) {
-					if (guides.size() == 0) guides.add(guide);
+					if (guides.size() == 0) {
+						guides.add(guide);
+					}
 					navigation.put(next, guides);
 				}      
 				
@@ -224,7 +220,9 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			}
 			
 			// if no source exists, assign the guides list to the original expression
-			if (guides.size() == 0) guides.add(guide);
+			if (guides.size() == 0) {
+				guides.add(guide);
+			}
 			navigation.put(exp, guides);
 			
 			updateInvolvedTables(guides);
@@ -241,8 +239,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 
 		try {
 			result.append((String) visit(exp));
-		}
-		catch (NoSuchMethodException e) {
+		} catch (NoSuchMethodException e) {
 			// some  method is missing in the visitor implementation
 			e.printStackTrace();
 		} catch (java.lang.reflect.InvocationTargetException e) {
@@ -262,8 +259,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		
 		try {
 			result.append((String) visit(exp));
-		}
-		catch (NoSuchMethodException e) {
+		} catch (NoSuchMethodException e) {
 			// some  method is missing in the visitor implementation
 			e.printStackTrace();
 		} catch (java.lang.reflect.InvocationTargetException e) {
@@ -436,25 +432,18 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		
 		if (srcExp instanceof OperationCallExp) {
 			attrType = srcExp.getType();
-		}
-		else		
-		if (srcExp instanceof AttributeCallExp) {
+		} else if (srcExp instanceof AttributeCallExp) {
 			attrType = ((AttributeCallExp)srcExp).getReferredAttribute().getTypeA();
-		}
-		else
-		if (srcExp instanceof PrimitiveLiteralExp) {
+		} else if (srcExp instanceof PrimitiveLiteralExp) {
 			attrType = ((PrimitiveLiteralExp)srcExp).getType();
-		}
-		else {
+		} else {
 			throw new IllegalStateException("Unhandled attribute type for relational expression =!");
 		}	
 		
 		if (attrType instanceof Primitive) {
 			if (attrType.getNameA().equals("Boolean")) {
 				spec.append("equal_Bool"); 
-			}
-			else
-			if (attrType.getNameA().equals("Integer") || 
+			} else if (attrType.getNameA().equals("Integer") || 
 				attrType.getNameA().equals("Real") ||
 				attrType.getNameA().equals("String") ||
 				// TODO: Not sure about Enumeration, maybe it's Enum
@@ -462,26 +451,18 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			{
 				spec.append("equal_IntRealStringEnum"); 
 			}
-		}
-		else if (attrType instanceof CollectionType) {
+		} else if (attrType instanceof CollectionType) {
 			if(attrType instanceof SetType) {
 				spec.append("equal_Set");
-            }
-            else
-			if(attrType instanceof SequenceType) {
+            } else if(attrType instanceof SequenceType) {
 				spec.append("equal_Sequence");
-            }
-            else
-			if(attrType instanceof BagType) {
+            } else if(attrType instanceof BagType) {
 				spec.append("equal_Bag");
-            }
-            else
-			if(attrType instanceof OrderedSetType) {
+            } else if(attrType instanceof OrderedSetType) {
                 // spec = "equal_OrderedSet"
                 throw new RuntimeException("OrderedSetType not yet supported by code generation.");
             }
-		}
-		else {
+		} else {
 			spec.append("equal_Any");
 		}
 		
@@ -599,8 +580,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			Classifier attrType = ((AttributeCallExp)srcExp).getReferredAttribute().getTypeA();
 			if (attrType instanceof Primitive) {
 				spec.append("nequal");
-			}
-			else {
+			} else {
 				spec.append("nequal_Any");
 			}
 		}
@@ -687,7 +667,8 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 				} else {
 					tables.append("," + guide.getFrom() + " " + tableAlias);					
 				}
-                                involvedTables.add(new String(guide.getFrom()));
+
+				involvedTables.add(new String(guide.getFrom()));
 			
 				// add logical link to next join
 				if (joins.length() > 0) {
@@ -699,7 +680,9 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 				joins.append(tableAlias + "." + guide.getWhere());
 				joins.append(" = ");	
                                 
-				if ((i == 0) && (k == 0)) joinTargetObject = tableAlias + "." + guide.getWhere();
+				if ((i == 0) && (k == 0)) {
+					joinTargetObject = tableAlias + "." + guide.getWhere();
+				}
 				
 				select = guide.getSelect();
 				from = guide.getFrom();
@@ -752,21 +735,21 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 				    (where.equals(guide.getWhere())))
 					continue;
                                 
-                    // add derived table to table representation
-					codeAgent.reset();
-					codeAgent.setArgument("object", guide.getSelect());
-					codeAgent.setArgument("table1", guide.getFrom());
-					codeAgent.setArgument("ref_object", guide.getWhere());
-                    
-                    // last step of whole derived table must be treated in a special way
-                    if ((i == (guides.size() - 1))  && (k == (guide.numberOfSteps() - 1))) { 
-						codeAgent.setArgument("context_alias", guide.getAlias());
-						codeAgent.setArgument("context_object", guide.getWhere());
-                        koc = "navigation_context";
-                    } else {                                    
-						codeAgent.setArgument("table2", ph);
-                        koc = "navigation";
-                    }				
+                // add derived table to table representation
+				codeAgent.reset();
+				codeAgent.setArgument("object", guide.getSelect());
+				codeAgent.setArgument("table1", guide.getFrom());
+				codeAgent.setArgument("ref_object", guide.getWhere());
+                
+                // last step of whole derived table must be treated in a special way
+                if ((i == (guides.size() - 1))  && (k == (guide.numberOfSteps() - 1))) { 
+					codeAgent.setArgument("context_alias", guide.getAlias());
+					codeAgent.setArgument("context_object", guide.getWhere());
+                    koc = "navigation_context";
+                } else {                                    
+					codeAgent.setArgument("table2", ph);
+                    koc = "navigation";
+                }				
                                 
 				try {
     			    thisCode = codeAgent.getCodeFor("feature_call", koc);                                    
@@ -777,7 +760,9 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
                 if (navExpr.length() == 0) {
                     navExpr = thisCode;
                 } else {                                    
-                    if (thisCode.endsWith("\n")) thisCode = thisCode.substring(0, thisCode.length()-1);
+                    if (thisCode.endsWith("\n")) {
+                    	thisCode = thisCode.substring(0, thisCode.length()-1);
+                    }
                     navExpr = replaceInString(navExpr, ph, thisCode);
                 }                                                                
                 
@@ -911,8 +896,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 				} catch (Exception e) {
 					throw new RuntimeException("attribute_context at feature primary expression: " + e.toString());
 				}
-			}
-			else {
+			} else {
 				// attribute access with navigation
 				prepareNavigation(guides);
                 result.append(tableRepresentation);
@@ -937,8 +921,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		try {			
 			if (exp.isBooleanSymbol()) {
 				result.append(codeAgent.getCodeFor("literal", "boolean_true"));
-			}
-			else {
+			} else {
 				result.append(codeAgent.getCodeFor("literal", "boolean_false"));
 			}
 		} catch (Exception e) {
@@ -1001,8 +984,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		
     	try {
     		result= new StringBuffer(codeAgent.getCodeFor("constraint_body", "any"));
-    	}
-		catch (Exception e) {
+    	} catch (Exception e) {
 			e.printStackTrace();
     	}
 		
@@ -1084,74 +1066,49 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		// relational expressions
 		if (name.equals("=")) {
 			handleRelEquals(srcExp, codeSrcExp, args, rule, spec);						
-		}
-		else
-		if (name.equals("<>")) {
+		} else if (name.equals("<>")) {
 			handleRelNEquals(srcExp, codeSrcExp, args, rule, spec);						
-		}
-		else
-		if (name.equals(">")) {
+		} else if (name.equals(">")) {
 			handleRelGreater(codeSrcExp, args, rule, spec);
-		}
-		else
-		if (name.equals(">=")) {
+		} else if (name.equals(">=")) {
 			handleRelGreaterEqual(codeSrcExp, args, rule, spec);
-		}
-		else
-		if (name.equals("<")) {
+		} else if (name.equals("<")) {
 			handleRelLesser(codeSrcExp, args, rule, spec);
-		}
-		else
-		if (name.equals("<=")) {
+		} else if (name.equals("<=")) {
 			handleRelLesserEqual(codeSrcExp, args, rule, spec);
 		}
 		
 		// additive expressions
-		else
-		if (name.equals("+")) {
+		else if (name.equals("+")) {
 			handleAddPlus(codeSrcExp, args, rule, spec);
-		}
-		else
-		if (name.equals("-")) {
-			if (args.isEmpty()) {
+		} else if (name.equals("-")) {
+			if (args.isEmpty()) { // unary minus special case
 				handleUnaryMinus(codeSrcExp, rule, spec);
-			}
-			else {
+			} else {
 				handleAddMinus(codeSrcExp, args, rule, spec);
 			}
 		}
 		
 		// multiplicative expressions
-		else
-		if (name.equals("*")) {
+		else if (name.equals("*")) {
 			handleMultMult(codeSrcExp, args, rule, spec);
-		}
-		else
-		if (name.equals("/")) {
+		} else if (name.equals("/")) {
 			handleMultDiv(codeSrcExp, args, rule, spec);
 		}
 			
 		// logical expression
-		else
-		if (name.equals("and")) {
+		else if (name.equals("and")) {
 			handleLogAnd(codeSrcExp, args, rule, spec);
-		}
-		else
-		if (name.equals("or")) {
+		} else if (name.equals("or")) {
 			handleLogOr(codeSrcExp, args, rule, spec);
-		}
-		else
-		if (name.equals("xor")) {
+		} else if (name.equals("xor")) {
 			handleLogXor(codeSrcExp, args, rule, spec);
-		}
-		else
-		if (name.equals("implies")) {
+		} else if (name.equals("implies")) {
 			handleRelImplies(codeSrcExp, args, rule, spec);
 		}
 		
 		// unary expressions (unary minus special case above)
-		else
-		if (name.equals("not")) {
+		else if (name.equals("not")) {
 			handleUnaryNot(codeSrcExp, rule, spec);
 		}
 		
