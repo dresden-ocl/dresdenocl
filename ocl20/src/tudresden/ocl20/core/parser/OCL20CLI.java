@@ -45,6 +45,9 @@ import tudresden.ocl20.core.parser.astgen.NodeFactory;
 
 import tudresden.ocl20.core.*;
 
+import tudresden.ocl20.core.MetaModelConst;
+import tudresden.ocl20.core.OclModel;
+import tudresden.ocl20.core.OclModelException;
 import tudresden.ocl20.core.jmi.ocl.*;
 import tudresden.ocl20.core.jmi.ocl.types.*;
 import tudresden.ocl20.core.jmi.ocl.expressions.*;
@@ -67,7 +70,7 @@ import java.util.*;
 public class OCL20CLI {
     private Start cst = null;
     private OclModel oclModel = null;
-    private boolean verbose = true;
+    private boolean verbose = false;
 
     private void setOclModel(OclModel model, String modelXmiPath) {
         this.oclModel = model;
@@ -263,14 +266,7 @@ public class OCL20CLI {
         }
     }
 
-    private void usage () {
-        System.out.println("Usage: ocl2cli [--help] [--verbose] [--mmodel MOF14 | UML15] [--outfile output] xmi-file ocl-file");
-        System.out.println("Options:");
-        System.out.println("  --help           Display this information");
-        System.out.println("  --verbose        Verbose mode");
-        System.out.println("  --outfile <file> Output is written to <file>");
-        System.out.println("  --mmodel <arg>   Select meta-model");
-    }
+
     /**
      * @param args the command line arguments
      */
@@ -281,18 +277,16 @@ public class OCL20CLI {
         String XmiFilename = "";
         String OclFilename = "";
         String constraints = "";
-        String metaModelName = MetaModelConst.UML15;
+        String metaModelName = null;
 
 
         while (i < args.length && args[i].startsWith("-")) {
             arg = args[i++];
 
             if (arg.equals("--verbose")) {
+                System.out.println("verbose mode on");
                 verbose = true;
-            } else if (arg.equals("--help")) {
-		usage();
-                System.exit(0);
-	    } else if (arg.equals("--outfile")) {
+            } else if (arg.equals("--outfile")) {
                 if (i < args.length)
                     outputfile = args[i++];
                 else
@@ -322,7 +316,8 @@ public class OCL20CLI {
             }
         }
         if (i != args.length - 2) {
-            System.err.println("Usage: ocl2cli [--help] [--verbose] [--mmodel MOF14 | UML15] [--outfile output] xmi-file ocl-file");
+	    System.err.println(" i = " +i+" arg = "+args.length);
+            System.err.println("Usage: OCL2CLI [--verbose] [--mmodel MOF14 | UML15] [--outfile output] xmi-file ocl-file");
             System.exit(1);
         } else {
             XmiFilename = args[i++];
@@ -330,17 +325,18 @@ public class OCL20CLI {
         }
 
 
+        metaModelName = MetaModelConst.UML15;
 
-	if(verbose) System.out.println("Loading XMI file: "+XmiFilename);
+	if(verbose) System.out.println("Loading XMI file");
         loadModelXmi(metaModelName,new File(XmiFilename));
 
-	if(verbose) System.out.println("Loading OCL file: "+OclFilename);
+	if(verbose) System.out.println("Loading OCL file");
 	constraints = loadOclFile(new File(OclFilename));
 
 	if(verbose) System.out.println("Parsing concrete syntax of OCL constraints");
         runParser(constraints);
 
-	if(verbose) System.out.println("Generate abstract syntax tree (OCL type-checking)");
+	if(verbose) System.out.println("Generate abstract syntax tree (includes OCL type-checking)");
         generateAst();
 
 
@@ -349,7 +345,6 @@ public class OCL20CLI {
             saveModelXmi(new File(outputfile));
         }
         if ( oclModel != null ) {
-	    if(verbose) System.out.println("Shutdown ...");
             oclModel.closeAndShutDown();
         }
         System.exit(0);

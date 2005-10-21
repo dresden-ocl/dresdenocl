@@ -29,27 +29,29 @@
 
 package tudresden.ocl20.core.parser;
 
+import tudresden.ocl20.core.parser.util.*;
 
+import tudresden.ocl20.core.parser.sablecc.analysis.*;
+import tudresden.ocl20.core.parser.sablecc.lexer.Lexer;
+import tudresden.ocl20.core.parser.sablecc.lexer.LexerException;
+import tudresden.ocl20.core.parser.sablecc.parser.Parser;
+import tudresden.ocl20.core.parser.sablecc.parser.ParserException;
+import tudresden.ocl20.core.parser.sablecc.node.*;
 
-// import tudresden.ocl20.parser.astgen.ASTGenerator;
+import tudresden.ocl20.core.parser.util.TextualCSTBuilder;
+import tudresden.ocl20.core.parser.util.GraphicalCSTBuilder;
+import tudresden.ocl20.core.parser.astgen.LAttrAstGenerator;
+import tudresden.ocl20.core.parser.astgen.Heritage;
+import tudresden.ocl20.core.parser.astgen.NodeFactory;
+// import tudresden.ocl20.core.parser.astgen.ASTGenerator;
 
 // stefan ocke's common model and OCL model management
-import tudresden.ocl20.*;
+import tudresden.ocl20.core.*;
 
 import tudresden.ocl20.core.MetaModelConst;
 import tudresden.ocl20.core.ModelManager;
 import tudresden.ocl20.core.OclModel;
 import tudresden.ocl20.core.OclModelException;
-import tudresden.ocl20.core.parser.astgen.Heritage;
-import tudresden.ocl20.core.parser.astgen.LAttrAstGenerator;
-import tudresden.ocl20.core.parser.astgen.NodeFactory;
-import tudresden.ocl20.core.parser.sablecc.analysis.*;
-import tudresden.ocl20.core.parser.sablecc.lexer.Lexer;
-import tudresden.ocl20.core.parser.sablecc.lexer.LexerException;
-import tudresden.ocl20.core.parser.sablecc.node.*;
-import tudresden.ocl20.core.parser.sablecc.parser.Parser;
-import tudresden.ocl20.core.parser.sablecc.parser.ParserException;
-import tudresden.ocl20.core.parser.util.*;
 import tudresden.ocl20.core.jmi.ocl.*;
 import tudresden.ocl20.core.jmi.ocl.types.*;
 import tudresden.ocl20.core.jmi.ocl.expressions.*;
@@ -1020,7 +1022,17 @@ public class OCL20GUI extends javax.swing.JFrame implements SimpleMessageSink {
         mMessage.setText(message);
         mMessageDialog.setModal(true);
         mMessageDialog.pack();
-        mMessageDialog.show();
+        mMessageDialog.setVisible(true);
+    }
+    
+    private void displayException(String reason, Exception e) {
+    	StringWriter sw = new StringWriter(1024);
+    	PrintWriter pw = new PrintWriter(sw);
+    	pw.println(reason);
+    	pw.println(e.getLocalizedMessage());
+    	e.printStackTrace(pw);
+    	pw.close();
+    	displayMessage(sw.toString());
     }
     
     /** Exit the Application */
@@ -1070,8 +1082,11 @@ public class OCL20GUI extends javax.swing.JFrame implements SimpleMessageSink {
             // displayMessage("Compilation time: " + (stop_time - start_time) + " ms" );
 
             // update/display parse tree
+        } catch (ParserException pe) {
+        	displayException("Parser exception (syntax error) at token '" +
+        			pe.getToken().getText() + "'", pe);
         } catch (Exception e) {
-            displayMessage("Cannot parse OCL constraint: " + e.getLocalizedMessage());
+            displayException("Cannot parse OCL constraint", e);
             // e.printStackTrace(System.err);
         }
     }

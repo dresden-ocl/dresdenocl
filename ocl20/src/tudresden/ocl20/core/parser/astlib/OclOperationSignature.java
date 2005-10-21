@@ -55,6 +55,11 @@ public class OclOperationSignature extends Object {
      */
     private Classifier returnType;
     
+    /**
+     * Holds value of property operationName
+     */
+    private String operationName;
+    
     /** Creates new OclOperationSignature */
     public OclOperationSignature() {
     }
@@ -90,6 +95,29 @@ public class OclOperationSignature extends Object {
         return result;
     }
     
+    /**
+     * Convenience operation returning a list of all parameter names of this
+     * operation. Returns a list of String instances
+     */
+    public List getFormalParameterNames() {
+        if ( this.formalParameters == null ) {
+            return new ArrayList(0);
+        }
+        Iterator it = formalParameters.iterator();
+        List result = new ArrayList(formalParameters.size());
+        while ( it.hasNext() ) {
+            OclFormalParameter param = (OclFormalParameter) it.next();
+            String name = param.getName();
+            assert ( name != null ):
+                "Name of formal parameter must not be null";
+            assert ( ! "".equals(name) ):
+            	"Name of formal parameter must not be empty";
+            result.add(name);
+        }
+        return result;
+    }
+    
+    
     
     /**
      * Setter for property formalParameters, which is a list of OclFormalParameter instances.
@@ -113,6 +141,22 @@ public class OclOperationSignature extends Object {
      */
     public void setReturnType(Classifier returnType) {
         this.returnType = returnType;
+    }
+    
+    /**
+     * Getter for property operationName.
+     * @return Value of property operationName
+     */
+    public String getOperationName() {
+    	return this.operationName;
+    }
+    
+    /**
+     * Setter for property operationName.
+     * @param operationName New value of property operationName.
+     */
+    public void setOperationName(String operationName) {
+    	this.operationName = operationName;
     }
     
 }

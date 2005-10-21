@@ -29,13 +29,6 @@
 
 package tudresden.ocl20.core.parser.astgen;
 
-import tudresden.ocl20.core.jmi.ocl.commonmodel.ModelElement;
-import tudresden.ocl20.core.jmi.ocl.commonmodel.Attribute;
-import tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationEnd;
-import tudresden.ocl20.core.jmi.ocl.commonmodel.Operation;
-
-import java.util.*;
-
 /**
  *
  * Abstract read-write Environment implementation based on the definition in [OCL16]. 

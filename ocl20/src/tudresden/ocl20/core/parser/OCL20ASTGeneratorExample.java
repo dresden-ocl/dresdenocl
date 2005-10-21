@@ -29,7 +29,7 @@
 
 package tudresden.ocl20.core.parser;
 
-import tudresden.ocl20.*;
+import tudresden.ocl20.core.*;
 
 import tudresden.ocl20.core.MetaModelConst;
 import tudresden.ocl20.core.ModelManager;

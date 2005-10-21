@@ -29,17 +29,17 @@
 
 package tudresden.ocl20.core.parser.astgen;
 
+import tudresden.ocl20.core.parser.astlib.*;
+import tudresden.ocl20.core.parser.sablecc.analysis.*;
+import tudresden.ocl20.core.parser.sablecc.node.*;
 
+import tudresden.ocl20.core.parser.util.SimpleMessageSink;
 
 
 import java.util.*;
 
 import tudresden.ocl20.core.OclModel;
 import tudresden.ocl20.core.OclModelHelper;
-import tudresden.ocl20.core.parser.astlib.*;
-import tudresden.ocl20.core.parser.sablecc.analysis.*;
-import tudresden.ocl20.core.parser.sablecc.node.*;
-import tudresden.ocl20.core.parser.util.SimpleMessageSink;
 import tudresden.ocl20.core.jmi.ocl.commonmodel.Package;
 
 

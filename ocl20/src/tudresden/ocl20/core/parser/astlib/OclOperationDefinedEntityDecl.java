@@ -41,9 +41,9 @@ package tudresden.ocl20.core.parser.astlib;
 public class OclOperationDefinedEntityDecl extends OclDefinedEntityDecl {
     
     /**
-     * Holds value of property operationDeclaration.
+     * Holds value of property operationSignature.
      */
-    private OclOperationSignature operationDeclaration;
+    private OclOperationSignature operationSignature;
     
     public OclOperationDefinedEntityDecl() {
         super(OclDefinedEntityDecl.EntityType.OPERATION);
@@ -53,16 +53,16 @@ public class OclOperationDefinedEntityDecl extends OclDefinedEntityDecl {
      * Getter for property operationDeclaration.
      * @return Value of property operationDeclaration.
      */
-    public OclOperationSignature getOperationDeclaration() {
-        return this.operationDeclaration;
+    public OclOperationSignature getOperationSignature() {
+        return this.operationSignature;
     }
     
     /**
      * Setter for property operationDeclaration.
      * @param operationDeclaration New value of property operationDeclaration.
      */
-    public void setOperationDeclaration(OclOperationSignature operationDeclaration) {
-        this.operationDeclaration = operationDeclaration;
+    public void setOperationSignature(OclOperationSignature operationSignature) {
+        this.operationSignature = operationSignature;
     }
     
 }

@@ -34,28 +34,27 @@ import tudresden.ocl20.core.parser.sablecc.analysis.*;
 import tudresden.ocl20.core.parser.sablecc.node.*;
 import tudresden.ocl20.core.parser.util.SimpleMessageSink;
 import tudresden.ocl20.core.parser.util.ListTransformer;
-
-import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
-import tudresden.ocl20.core.jmi.uml15.core.CorePackage;
-import tudresden.ocl20.core.jmi.uml15.datatypes.CallConcurrencyKindEnum;
-import tudresden.ocl20.core.jmi.uml15.datatypes.ScopeKindEnum;
-import tudresden.ocl20.core.jmi.uml15.datatypes.ParameterDirectionKindEnum;
-import tudresden.ocl20.core.jmi.uml15.datatypes.VisibilityKindEnum;
+import tudresden.ocl20.core.util.Sequence;
 
 import tudresden.ocl20.core.OclModel;
 import tudresden.ocl20.core.OclModelHelper;
 import tudresden.ocl20.core.TypeEvaluator;
 import tudresden.ocl20.core.WellFormednessException;
+//import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
+//import tudresden.ocl20.core.jmi.uml15.core.CorePackage;
+//import tudresden.ocl20.core.jmi.uml15.datatypes.CallConcurrencyKindEnum;
+//import tudresden.ocl20.core.jmi.uml15.datatypes.ScopeKindEnum;
+//import tudresden.ocl20.core.jmi.uml15.datatypes.ParameterDirectionKindEnum;
+//import tudresden.ocl20.core.jmi.uml15.datatypes.VisibilityKindEnum;
+
 import tudresden.ocl20.core.jmi.ocl.types.*;
 import tudresden.ocl20.core.jmi.ocl.expressions.*;
 import tudresden.ocl20.core.jmi.ocl.commonmodel.*;
 
 import tudresden.ocl20.core.lib.*;
 
-import tudresden.ocl20.core.util.Naming;
-import tudresden.ocl20.core.util.Sequence;
 
-import javax.jmi.reflect.RefPackage;
+//import javax.jmi.reflect.RefPackage;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -602,6 +601,33 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     }
     
     /**
+     * 
+     */
+    protected List createVarDeclListFromOclFormalParamList(List input) throws AttrEvalException {
+    	ArrayList result = null;
+    	assert(input != null):
+    		"Cannot convert null-lists";
+    	result = new ArrayList( input.size() );
+    	Iterator it = input.iterator();
+    	while ( it.hasNext() ) {
+    		OclFormalParameter fp = (OclFormalParameter) it.next();
+    		VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
+    		String pname = fp.getName();
+    		assert (pname != null):
+    			"Formal parameter name must not be null";
+    		assert ( ! "".equals(pname) ):
+    			"Formal parameter name must not be empty";
+    		Classifier ptype = fp.getType();
+    		assert ( ptype != null ):
+    			"Formal parameter type must not be null";
+    		vd.setNameA(pname);
+    		vd.setType(ptype);
+    		result.add(vd);
+    	}
+    	return result;
+    }
+    
+    /**
      * Obtains the type of a ModelElement. If the model element is an OclExpression
      * and the type is already set in the expression via setType, this method uses
      * getType() as a shortcut to obtain the type and returns it. Otherwise, the
@@ -684,38 +710,31 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         return helper.createBooleanLiteral(astTrue.booleanValue());
     }
     
-    
-    //      RealLiteralExp              
-    public NumericLiteralExp computeAstFor_ANumericLiteralExpCs(Heritage nodeHrtgCopy, Integer astInteger, String astFraction, String astExponent) throws AttrEvalException {
-        boolean hasFraction = ( astFraction != null );
-        boolean hasExponent = ( astExponent != null );
-        
-        if ( hasFraction || hasExponent ) {
-            // this is a real literal, create instance of RealLiteralExp
-            RealLiteralExp result = (RealLiteralExp) factory.createNode("RealLiteralExp");
-            
-            String realLiteralStr = astInteger.toString();      // grammar ensures != null
-            if ( hasFraction ) { 
-                realLiteralStr += astFraction;
-            }        
-            if ( hasExponent  ) {                        // grammar ensures != null
-                realLiteralStr += astExponent;
-            }
-            double realLiteralValue = 0.0;
-            try { 
-                realLiteralValue = java.lang.Double.valueOf(realLiteralStr).doubleValue();
-            } catch (NumberFormatException nfe) {
-                throw new AttrEvalException("Invalid numeric format for real literal", nfe);
-            }
-            result.setRealSymbol(realLiteralValue);
-            return result;
-        } else {
-            IntegerLiteralExp result = (IntegerLiteralExp) factory.createNode("IntegerLiteralExp");
-            result.setIntegerSymbol(astInteger.intValue());
-            return result;
-        }
-    }
+	public Integer computeAstFor_ARealExponent(Heritage nodeHrtgCopy, String astIndicator, String astSign, Integer astExponent) throws AttrEvalException {
+		boolean validIndicator = astIndicator.equals("e") || astIndicator.equals("E");
+		if ( ! validIndicator ) {
+			throw new AttrEvalException("Invalid real literal exponent indicator '" + astIndicator + "', expecting 'e' or 'E'");
+		}
+		int expValue = astExponent.intValue();
+		if ( astSign.equals("-") ) {
+			// exponent is negative
+			expValue = -expValue;
+		}
+		Integer result = new Integer(expValue);
+		return result;
+	}
 
+
+	public IntegerLiteralExp computeAstFor_AIntNumericLiteralExpCs(IntegerLiteralExp myAst, Heritage nodeHrtg, Integer astInteger) throws AttrEvalException {
+        myAst.setIntegerSymbol(astInteger.intValue());
+        return myAst;
+	}
+
+	public RealLiteralExp computeAstFor_ARealNumericLiteralExpCs(RealLiteralExp myAst, Heritage nodeHrtg, Double astReal) throws AttrEvalException {
+        myAst.setRealSymbol(astReal.doubleValue());
+        return myAst;
+	}
+	
     //      StringLiteralExp            
     public StringLiteralExp computeAstFor_AStringLiteralExpCs(StringLiteralExp myAst, Heritage nodeHrtgCopy, String astValue) throws AttrEvalException {        
         // remove tick characters at beginning and end of string literal token
@@ -763,6 +782,20 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         }
         return result;
     }
+    
+    // real literals
+	public Double createNodeFor_TRealLiteral(TRealLiteral node, Heritage nodeHrtg) throws AttrEvalException {
+		String text = node.getText();
+        double realLiteralValue = 0.0;
+        try { 
+            realLiteralValue = java.lang.Double.valueOf(text).doubleValue();
+        } catch (NumberFormatException nfe) {
+            throw new AttrEvalException("Invalid numeric format of real literal '" + text + "'", nfe);
+        }
+        Double result = new Double(realLiteralValue);
+		return result;
+	}
+
     
     
     //      collection literals     
@@ -1396,7 +1429,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         int numNameElements = astName.size();
         NamedElement ne = null;
         
-        OclExpression result = null;
+        // @@TODO: erase the following line (commented out to make sure it does not break anything if removed) 
+        // OclExpression result = null;
         
         // 0a. check for "contextIsIteratorVarDecl" => create iterator variable exp 
         if ( hrtg.isContextIsIteratorVarDecl() ) {
@@ -2058,7 +2092,40 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     }
               
     // classifier constraints (definition)
-    public OclDefinitionConstraint computeAstFor_ADefinitionConstraintCs(OclDefinitionConstraint myAst, Heritage nodeHrtgCopy, OclDefinedEntityDecl astEntity, OclExpression astDefinition) throws AttrEvalException {
+	public Heritage insideADefinitionConstraintCs_computeHeritageFor_Definition(ADefinitionConstraintCs parent, POclExpressionCs child, Heritage parentHrtgCopy, OclDefinedEntityDecl astEntity) throws AttrEvalException {
+		Heritage result = null;
+		if ( astEntity.getType().equals(OclDefinedEntityDecl.EntityType.OPERATION ) ) {
+			result = parentHrtgCopy;
+			WritableEnvironment wrenv = result.getEnv().nestedEnvironment();
+			OclOperationDefinedEntityDecl opdecl = astEntity.asOperationDeclaration();
+			OclOperationSignature opsig = opdecl.getOperationSignature();
+			List params = opsig.getFormalParameters();
+			Iterator it = params.iterator();
+			while ( it.hasNext() ) {
+				OclFormalParameter fp = (OclFormalParameter) it.next();
+				String pname = fp.getName();
+				assert (pname != null):
+					"Name of formal parameter must not be null";
+				assert (! "".contains(pname)):
+					"Name of formal parameter must not be empty";
+				Classifier ptype = fp.getType();
+				assert (ptype != null):
+					"Type of formal parameter must not be null";
+				VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
+				vd.setNameA(pname);
+				vd.setType(ptype);
+				try {
+					wrenv.addElement(pname, vd, false);
+				} catch (DuplicateNameException dne) {
+					rethrowDNE(dne, "adding formal parameter variables to environment");
+				}
+			}
+			result.setEnv(wrenv);
+		}
+		return result;
+	}
+
+	public OclDefinitionConstraint computeAstFor_ADefinitionConstraintCs(OclDefinitionConstraint myAst, Heritage nodeHrtgCopy, OclDefinedEntityDecl astEntity, OclExpression astDefinition) throws AttrEvalException {
         myAst.setEntity(astEntity);
         myAst.setDefinition(astDefinition);
         return myAst;
@@ -2068,7 +2135,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         return myAst;
     }    
     public OclOperationDefinedEntityDecl computeAstFor_AOperationDefinedEntityDeclCs(OclOperationDefinedEntityDecl myAst, Heritage nodeHrtgCopy, OclOperationSignature astOperation) throws AttrEvalException {
-        myAst.setOperationDeclaration(astOperation);
+        myAst.setOperationSignature(astOperation);
         return myAst;
     }
        
@@ -2080,18 +2147,17 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         expOcl.setLanguageA("OCL");
         expOcl.setBodyExpression(astDefinition.getDefinition());
         expOcl.setContextualClassifier(ctxCls);
-        
+
         Constraint cons = expFactory.createConstraint();
-        cons.setStereotypeNameA("definition");
-        cons.setNameA(astName);
-        cons.setConstrainedElementA(ctxCls);
         cons.setBodyA(expOcl);
-        
+        cons.setNameA(astName);
+
         OclDefinedEntityDecl deDecl = astDefinition.getEntity();
-        OclDefinedEntityDecl.EntityType type = deDecl.getType();
+        OclDefinedEntityDecl.EntityType type = deDecl.getType();        
 
         if ( OclDefinedEntityDecl.EntityType.ATTRIBUTE.equals(type) ) {
             OclAttributeDefinedEntityDecl adecl = deDecl.asAttributeDeclaration();
+            
             // @@TODO@@ implement definition constraint (create new attribute in model)
             // create an attribute
             
@@ -2100,6 +2166,12 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             // OR we insert dependencies into the parser (access the UML model  
             // directly 
             // throw new AttrEvalException("Attribute definition not implemented yet");
+
+            cons.setStereotypeNameA("definition");
+            cons.setNameA(astName);
+            // v- constrained element needs to be defined attribute or operation
+            cons.setConstrainedElementA(ctxCls);
+
             if ( ctxCls instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier ) {
                 tudresden.ocl20.core.jmi.uml15.core.Classifier umlCls = (tudresden.ocl20.core.jmi.uml15.core.Classifier) ctxCls;
                 umlCls.getConstraint().add(cons);
@@ -2109,23 +2181,21 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                 log("Attribute definition not implemented yet (at " + pos + ") or not a UML15 classifier.");
             }
         } else if ( OclDefinedEntityDecl.EntityType.OPERATION.equals(type) ) {
-            OclOperationDefinedEntityDecl odecl = deDecl.asOperationDeclaration();            
-            // @@TODO@@ implement definition constraint (create new operation in model)
-            // create an operation
+            OclOperationDefinedEntityDecl odecl = deDecl.asOperationDeclaration();
+            OclOperationSignature osig = odecl.getOperationSignature();
+            List opParams = osig.getFormalParameters();
+            List opVardecls = createVarDeclListFromOclFormalParamList(opParams);
             
-            // this will not work universally until we have generic JMI access  
-            // to the underlying model via a "commonmodel" abstraction layer    
-            // OR we insert dependencies into the parser (access the UML model  
-            // directly 
-            // throw new AttrEvalException("Operation definition not implemented yet");
-            if ( ctxCls instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier ) {
-                tudresden.ocl20.core.jmi.uml15.core.Classifier umlCls = (tudresden.ocl20.core.jmi.uml15.core.Classifier) ctxCls;
-                umlCls.getConstraint().add(cons);
-                log("Warning: operation definition is incomplete and possibly violates the OCL2.0 specification.");
-            } else {
-                String pos = "" + this.currentToken.getLine() + ":" + this.currentToken.getPos();
-                log("Operation definition not implemented yet (at " + pos + ") or not a UML15 classifier.");
-            }
+            Classifier opResType = osig.getReturnType();
+            String opName = osig.getOperationName();
+            
+            // @@TODO: update CommonOCL metamodel to contain createOperation with correct signature
+            // v-- method signature differs in UML-OCL's "ClassifierImpl"
+            log("Warning: Common-OCL's Classifier::createOperation does not work. No operation created.");
+            // Operation newOp = ctxCls.createOperation(opName, opResType, opVardecls);
+            
+            // cons.setStereotypeNameA("body");
+            // cons.setConstrainedElementA(newOp);
         } else {
             throw new RuntimeException("Unknown entity type " + type + " in OCL 'def' constraint");
         }            
@@ -2516,7 +2586,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         return result;
     }
     
-    public OclOperationSignature computeAstFor_AOperationSignatureCs(OclOperationSignature myAst, Heritage nodeHrtgCopy, List astParameters, Classifier astReturnType) throws AttrEvalException {
+    public OclOperationSignature computeAstFor_AOperationSignatureCs(OclOperationSignature myAst, Heritage nodeHrtgCopy, String astOperationName, List astParameters, Classifier astReturnType) throws AttrEvalException {
+    	myAst.setOperationName(astOperationName);
         // formal parameter list is optional (may be null)  
         if ( astParameters == null ) {
             // install empty list as formal parameter list  
@@ -2953,19 +3024,19 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         Operation refOp = null;
         
         // this will probably cause problems with nestes collection
-	// types!
-	// hack for preventing wrapping of an explicit ->asSet()
+        // types!
+        // hack for preventing wrapping of an explicit ->asSet()
              
-	if ( (! sourceIsCollection) && (astName.compareTo("asSet") != 0)) {   
+        if ( (! sourceIsCollection) && (astName.compareTo("asSet") != 0)) {   
             Classifier setType = this.library.getSetType(sourceType);
             refOp = setType.lookupOperation(astName, paramTypes);
             if ( refOp != null ) {
                 myAst.getArguments().clear();
                 myAst.getArguments().addAll(astParameters);
                 myAst.setReferredOperation(refOp);
-		log("Info: adding type-conversion 'asSet' to '" + astName 
-		    + "' with source type '" + sourceType.getNameA() + "'.");
-		source = this.oclExpressionWithAsSet(source);
+                log("Info: adding type-conversion 'asSet' to '" + astName 
+                		+ "' with source type '" + sourceType.getNameA() + "'.");
+                source = this.oclExpressionWithAsSet(source);
                 myAst.setSource(source);
                 return myAst;
             } else {
@@ -2973,7 +3044,19 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                     "not exist for Set('" + sourceType.getNameA() + "')");
             }
         } else {
-            // source is collection type 
+            // source is collection type
+        	
+//        	// some debug output:
+//        	log("Looking up operation '" + astName + "' on type ' " + sourceType.getNameA() + "'");
+//        	log("Parameter types:");
+//        	Iterator it = paramTypes.iterator();
+//        	int i = 1;
+//        	while ( it.hasNext() ) {
+//        		Classifier clz = (Classifier) it.next();
+//        		log("Param " + i + " type: " + clz.getNameA());        		
+//        	}
+//        	// end debug output
+        	
             refOp = sourceType.lookupOperation(astName, paramTypes);
             if ( refOp != null ) {
                 myAst.getArguments().clear();
@@ -2987,6 +3070,5 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             }
         }
     }
-    
 }
 
