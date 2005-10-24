@@ -26,6 +26,7 @@
         <property name="dir.resources.mmwithocl" value="${dir.resources}/MetamodelsWithOcl" />
         <property name="dir.resources.ocleval" value="${dir.resources}/generatedOclEval" />
         <property name="dir.grammars" value="${dir.resources}/grammars" />
+    	<property name="dir.doc" value="${basedir}/doc"/>
 <!--        <property name="dir.buildconf" value="${basedir}/build" /> -->
         <property name="dir.software" value="${basedir}/lib/external" />
         <property name="jar.libs.jgraph" value="${dir.software}/jgraph.jar" />
@@ -76,7 +77,7 @@
         <property name="objdir.jmi.impl" value="${objdir.base}/jmi-impl" />
         
         <property name="objdir.libs" value="${basedir}/lib/internal" />
-        <property name="destdir.javadoc" value="${basedir}/doc/api" />
+        <property name="destdir.javadoc" value="${dir.doc}/api" />
     	
     	<property name="srcdir.ocl22sql" value="${srcdir.generic}" />
         
@@ -863,29 +864,31 @@
 
     <target name="clean" depends="init"
         description="Clean all build products." >
-        <delete failonerror="false">
-            <fileset dir="${objdir.generic}" includes="**/*" />
-            <fileset dir="${objdir.jmi.if}" includes="**/*" />
-            <!--<fileset dir="${objdir.mdrlib.api}" includes="**/*" />-->
-            <!--<fileset dir="${objdir.mdrlib.utils}" includes="**/*" />-->
-            <!--<fileset dir="${objdir.mdrlib.impl}" includes="**/*" />-->
-            <fileset dir="${srcdir.jmi.if}" includes="**/*" />
-            <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/core/parser/sablecc/analysis/*.*" />
+        <delete includeEmptyDirs="true" failonerror="false">
+		    <fileset dir="${objdir.generic}" />
+            <fileset dir="${objdir.jmi.if}"  />
+            <fileset dir="${srcdir.jmi.if}" />
+            <!--
+        	<fileset dir="${srcdir.generic}" includes="tudresden/ocl20/core/parser/sablecc/analysis/*.*" />
             <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/core/parser/sablecc/node/*.*" />
             <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/core/parser/sablecc/lexer/*.*" />
             <fileset dir="${srcdir.generic}" includes="tudresden/ocl20/core/parser/sablecc/parser/*.*" />
-            <fileset dir="${objdir.jmi.impl}" includes="**/*" />
-            <fileset dir="${objdir.sablecc-extended}" includes="**/*" />
-            <fileset dir="${srcdir.sablecc-extended}" includes="org/sablecc/sablecc/analysis/*.*" />
-            <fileset dir="${srcdir.sablecc-extended}" includes="org/sablecc/sablecc/node/*.*" />
-            <fileset dir="${srcdir.sablecc-extended}" includes="org/sablecc/sablecc/lexer/*.*" />
-            <fileset dir="${srcdir.sablecc-extended}" includes="org/sablecc/sablecc/parser/*.*" />
-            <fileset dir="${destdir.javadoc}" includes="**/*" />
+            -->
+        	<fileset dir="${srcdir.generic}/tudresden/ocl20/core/parser/sablecc"/>
+        	<fileset dir="${objdir.jmi.impl}"  />
+            <fileset dir="${objdir.sablecc-extended}"  />
+            <fileset dir="${srcdir.sablecc-extended}/org/sablecc/sablecc/analysis"  />
+            <fileset dir="${srcdir.sablecc-extended}/org/sablecc/sablecc/node"  />
+            <fileset dir="${srcdir.sablecc-extended}/org/sablecc/sablecc/lexer"  />
+            <fileset dir="${srcdir.sablecc-extended}/org/sablecc/sablecc/parser"  />
+
+            <fileset dir="${destdir.javadoc}" />
             <fileset dir="${objdir.libs}" includes="*.jar" />
-            <fileset dir="${dir.resources.mmwithocl}" includes="**/*" />
-            <fileset dir="${dir.resources.mdr}" includes="**/*" />
-            <fileset dir="${dir.resources.ocleval}" includes="**/*" />
+            <fileset dir="${dir.resources.mmwithocl}"  />
+            <fileset dir="${dir.resources.mdr}"  />
+            <fileset dir="${dir.resources.ocleval}" />
             <fileset dir="${basedir}" includes="${jar.distrib}" />
+        	<fileset dir="${objdir.base}" />
         </delete>
     </target>
     
