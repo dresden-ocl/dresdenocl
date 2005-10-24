@@ -267,6 +267,14 @@ public class OCL20CLI {
     }
 
 
+    private void usage () {
+        System.out.println("Usage: ocl2cli [--help] [--verbose] [--mmodel MOF14 | UML15] [--outfile output] xmi-file ocl-file");
+        System.out.println("Options:");
+        System.out.println("  --help           Display this information");
+        System.out.println("  --verbose        Verbose mode");
+        System.out.println("  --outfile <file> Output is written to <file>");
+        System.out.println("  --mmodel <arg>   Select meta-model");
+    }
     /**
      * @param args the command line arguments
      */
@@ -277,7 +285,7 @@ public class OCL20CLI {
         String XmiFilename = "";
         String OclFilename = "";
         String constraints = "";
-        String metaModelName = null;
+        String metaModelName = MetaModelConst.UML15;
 
 
         while (i < args.length && args[i].startsWith("-")) {
@@ -286,7 +294,10 @@ public class OCL20CLI {
             if (arg.equals("--verbose")) {
                 System.out.println("verbose mode on");
                 verbose = true;
-            } else if (arg.equals("--outfile")) {
+            } else if (arg.equals("--help")) {
+		usage();
+                System.exit(0);
+	    } else if (arg.equals("--outfile")) {
                 if (i < args.length)
                     outputfile = args[i++];
                 else
@@ -316,8 +327,7 @@ public class OCL20CLI {
             }
         }
         if (i != args.length - 2) {
-	    System.err.println(" i = " +i+" arg = "+args.length);
-            System.err.println("Usage: OCL2CLI [--verbose] [--mmodel MOF14 | UML15] [--outfile output] xmi-file ocl-file");
+            System.err.println("Usage: ocl2cli [--help] [--verbose] [--mmodel MOF14 | UML15] [--outfile output] xmi-file ocl-file");
             System.exit(1);
         } else {
             XmiFilename = args[i++];
@@ -325,18 +335,17 @@ public class OCL20CLI {
         }
 
 
-        metaModelName = MetaModelConst.UML15;
 
-	if(verbose) System.out.println("Loading XMI file");
+	if(verbose) System.out.println("Loading XMI file: "+XmiFilename);
         loadModelXmi(metaModelName,new File(XmiFilename));
 
-	if(verbose) System.out.println("Loading OCL file");
+	if(verbose) System.out.println("Loading OCL file: "+OclFilename);
 	constraints = loadOclFile(new File(OclFilename));
 
 	if(verbose) System.out.println("Parsing concrete syntax of OCL constraints");
         runParser(constraints);
 
-	if(verbose) System.out.println("Generate abstract syntax tree (includes OCL type-checking)");
+	if(verbose) System.out.println("Generate abstract syntax tree (OCL type-checking)");
         generateAst();
 
 
