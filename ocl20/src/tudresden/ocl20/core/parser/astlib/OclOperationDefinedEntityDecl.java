@@ -44,6 +44,11 @@ public class OclOperationDefinedEntityDecl extends OclDefinedEntityDecl {
      * Holds value of property operationSignature.
      */
     private OclOperationSignature operationSignature;
+
+    /**
+     * Holds value of property operationName
+     */
+    private String operationName;
     
     public OclOperationDefinedEntityDecl() {
         super(OclDefinedEntityDecl.EntityType.OPERATION);
@@ -63,6 +68,23 @@ public class OclOperationDefinedEntityDecl extends OclDefinedEntityDecl {
      */
     public void setOperationSignature(OclOperationSignature operationSignature) {
         this.operationSignature = operationSignature;
+    }
+
+    
+    /**
+     * Getter for property operationName.
+     * @return Value of property operationName
+     */
+    public String getOperationName() {
+    	return this.operationName;
+    }
+    
+    /**
+     * Setter for property operationName.
+     * @param operationName New value of property operationName.
+     */
+    public void setOperationName(String operationName) {
+    	this.operationName = operationName;
     }
     
 }

@@ -55,10 +55,6 @@ public class OclOperationSignature extends Object {
      */
     private Classifier returnType;
     
-    /**
-     * Holds value of property operationName
-     */
-    private String operationName;
     
     /** Creates new OclOperationSignature */
     public OclOperationSignature() {
@@ -141,22 +137,6 @@ public class OclOperationSignature extends Object {
      */
     public void setReturnType(Classifier returnType) {
         this.returnType = returnType;
-    }
-    
-    /**
-     * Getter for property operationName.
-     * @return Value of property operationName
-     */
-    public String getOperationName() {
-    	return this.operationName;
-    }
-    
-    /**
-     * Setter for property operationName.
-     * @param operationName New value of property operationName.
-     */
-    public void setOperationName(String operationName) {
-    	this.operationName = operationName;
     }
     
 }

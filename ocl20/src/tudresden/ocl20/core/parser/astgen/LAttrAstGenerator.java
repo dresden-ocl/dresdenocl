@@ -2106,7 +2106,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
 				String pname = fp.getName();
 				assert (pname != null):
 					"Name of formal parameter must not be null";
-				assert (! "".contains(pname)):
+				assert (! "".equals(pname)):
 					"Name of formal parameter must not be empty";
 				Classifier ptype = fp.getType();
 				assert (ptype != null):
@@ -2134,7 +2134,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         myAst.setAttributeDeclaration(astAttribute);
         return myAst;
     }    
-    public OclOperationDefinedEntityDecl computeAstFor_AOperationDefinedEntityDeclCs(OclOperationDefinedEntityDecl myAst, Heritage nodeHrtgCopy, OclOperationSignature astOperation) throws AttrEvalException {
+    public OclOperationDefinedEntityDecl computeAstFor_AOperationDefinedEntityDeclCs(OclOperationDefinedEntityDecl myAst, Heritage nodeHrtgCopy, String astName, OclOperationSignature astOperation) throws AttrEvalException {
+	myAst.setOperationName(astName);
         myAst.setOperationSignature(astOperation);
         return myAst;
     }
@@ -2187,7 +2188,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             List opVardecls = createVarDeclListFromOclFormalParamList(opParams);
             
             Classifier opResType = osig.getReturnType();
-            String opName = osig.getOperationName();
+            String opName = odecl.getOperationName();
             
             // @@TODO: update CommonOCL metamodel to contain createOperation with correct signature
             // v-- method signature differs in UML-OCL's "ClassifierImpl"
@@ -2199,7 +2200,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         } else {
             throw new RuntimeException("Unknown entity type " + type + " in OCL 'def' constraint");
         }            
-        myAst.setName(astName);
+        myAst.setName(astOperationName);
         myAst.setDefinition(astDefinition);
         return myAst;
     }    
@@ -2586,8 +2587,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         return result;
     }
     
-    public OclOperationSignature computeAstFor_AOperationSignatureCs(OclOperationSignature myAst, Heritage nodeHrtgCopy, String astOperationName, List astParameters, Classifier astReturnType) throws AttrEvalException {
-    	myAst.setOperationName(astOperationName);
+    public OclOperationSignature computeAstFor_AOperationSignatureCs(OclOperationSignature myAst, Heritage nodeHrtgCopy, List astParameters, Classifier astReturnType) throws AttrEvalException {
+    	//myAst.setOperationName(astOperationName);
         // formal parameter list is optional (may be null)  
         if ( astParameters == null ) {
             // install empty list as formal parameter list  

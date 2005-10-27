@@ -272,11 +272,11 @@ Productions
         {attribute} <OclAttributeDefinedEntityDecl>
             [attribute]:formal_parameter_cs 
    |    {operation} <OclOperationDefinedEntityDecl>
+            [operation_name]:simple_name 
             [operation]:operation_signature_cs 
    ;
 
   operation_signature_cs <OclOperationSignature> =
-        [operation_name]:simple_name 
         paren_open
         [parameters]:formal_parameter_list_cs?
         paren_close 
