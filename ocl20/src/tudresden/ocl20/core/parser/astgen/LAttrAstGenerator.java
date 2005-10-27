@@ -2200,7 +2200,6 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         } else {
             throw new RuntimeException("Unknown entity type " + type + " in OCL 'def' constraint");
         }            
-        myAst.setName(astOperationName);
         myAst.setDefinition(astDefinition);
         return myAst;
     }    
