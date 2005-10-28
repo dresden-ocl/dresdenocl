@@ -363,7 +363,7 @@ public class OCL20CLI {
     private void runParser(String text) {
 
         try {
-            Lexer lexer   = new Lexer (new PushbackReader(new StringReader(text)));
+            Lexer lexer   = new Lexer (new PushbackReader(new StringReader(text),1024));
             Parser parser = new Parser(lexer);
             cst    = parser.parse();
         } catch (Exception e) {

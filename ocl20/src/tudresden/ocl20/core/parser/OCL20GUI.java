@@ -1058,7 +1058,7 @@ public class OCL20GUI extends javax.swing.JFrame implements SimpleMessageSink {
             start_time = System.currentTimeMillis();
 
             // create lexer
-            Lexer lexer = new Lexer (new PushbackReader(new StringReader(text)));
+            Lexer lexer = new Lexer (new PushbackReader(new StringReader(text),1024));
 
             // parser program
             Parser parser = new Parser(lexer);
