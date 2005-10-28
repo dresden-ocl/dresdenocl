@@ -50,7 +50,7 @@ context Car
 inv:
   let o: oclLib::Integer = 42 in 
   let p: Person = owner->asSequence()->first() in
-  1 + 1 > 2
+    1 + 1 > 2
 
 context Person::age: Integer
   init: let a: Integer = 5 in let b: Integer = 7 in if a < b then 0 else 0 endif
@@ -64,6 +64,27 @@ context Car::model: String
 context Car::driveTo(x: Integer, y: Integer): Boolean
   pre precond1: x > 0 and y > 0 and x <= 100 and y <= 100 and not self.owner->isEmpty()
   body: true
+
+-- test parsing of def: constraints for operations
+context Car
+def: isMyCar(me: Person): Boolean = owner->includes(me)
+
+-- test parsing of operation contexts
+context Car::getTopSpeed(): Real
+  post: true
+
+-- test parsing of operations with type argument
+context Car
+inv: self.oclIsTypeOf(OclAny)
+
+-- test parsing of real literals
+context Car
+  inv: topSpeed >= 10.0
+  inv: topSpeed >= 1.0e1
+  inv: topSpeed >= 1.0e+1
+  inv: topSpeed >= 1.0e+001
+  inv: topSpeed >= 100.0e-1
+  inv: topSpeed >= 100.0e-01
 
 endpackage
 
