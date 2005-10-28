@@ -429,6 +429,37 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     }
 
     /**
+     * Creates an OclOperationWithTypeArgExp instance for an operation which takes a type
+     * argument.
+     * @param astOpName
+     * 			Name of the operation taking the type argument
+     * @param source
+     * 			OclExpression representing the source expression
+     * @param astParameters
+     * 			List containing a single instance of OclActualParameterListItem
+     * @return
+     * 			OclOperationWithTypeArgExp representing the specified operation.
+     * @throws AttrEvalException
+     */
+    protected OclOperationWithTypeArgExp createOpWithTypeArg(String astOpName, OclExpression source, List astParameters) throws AttrEvalException {
+	    assertParserCondition(astParameters != null, "parameter list must not be null for " +
+	    	"ocl operations with type argument");
+	    assertParserCondition(astParameters.size() == 1, "exactly one parameter required for " +
+	    	"ocl operations with type argument");
+	    OclActualParameterListItem param = (OclActualParameterListItem) astParameters.get(0);
+	    assert param.isTypeSpecifier():
+	    	"internal error: parameter must be a type specifier in this context";
+	    Classifier cls = param.getTypeSpecifierValue();
+	
+	    OclOperationWithTypeArgExp oclop = (OclOperationWithTypeArgExp) factory.createNode("OclOperationWithTypeArgExp");
+	    oclop.setNameA(astOpName);
+	    oclop.setSource(source);
+	    oclop.setTypeArgument(cls);
+	    return oclop;
+    }
+
+
+    /**
      * Creates an iterator expression for (implicit) collect operations with
      * <i>source</i> as the iterator's source expression and <i>body</i> as
      * the iterator's body expression. The body's source expression is set
@@ -1723,12 +1754,22 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             "reference 'astParameters' for AArgListPropertyCallExpCs may not be null";
         
         if ( contextIsPropertyPrimary ) {
-            assertParserCondition( ! contextIsOclOpWithTypeArg,
-                "ocl operations with type argument only supported as postfix expression tail, i. e. " + 
-                "you must specify the source expression explicitly");
+        	
             List parameterTypes = getTypesForParameters(astParameters);
             if ( numNameElements == 1 ) {
                 String nameHead = (String) astName.get(0);
+
+                // check for ocl operation with type argument with implicit source 
+                if ( contextIsOclOpWithTypeArg ) {
+                	// v-- this does not work if we're inside an iterator. in this case, 
+                	// we need to obtain the source expression by looking at the (one, implicit)
+                	// iterator variable. Otherwise, we simply use the current source expression.
+                	OclExpression source = hrtg.getCurrentSourceExpression();
+                	assert ( source != null ):
+                		"source expression must not be null for ocl operation with type argument";
+            		return createOpWithTypeArg(nameHead, source, astParameters);
+            	}
+
                 // check for implicit (instance) operation [OperationCallExpCS::D and ::F]                
                 OperationWithSource refOpWSrc = nodeEnv.lookupImplicitOperationWithSource(nameHead, parameterTypes);
                 if ( refOpWSrc != null ) {
@@ -1816,20 +1857,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             String nameHead = (String) astName.get(0);
 
             if ( contextIsOclOpWithTypeArg ) {
-                assertParserCondition(astParameters != null, "parameter list must not be null for " +
-                    "ocl operations with type argument");
-                assertParserCondition(astParameters.size() == 1, "exactly one parameter required for " +
-                    "ocl operations with type argument");
-                OclActualParameterListItem param = (OclActualParameterListItem) astParameters.get(0);
-                assert param.isTypeSpecifier():
-                    "internal error: parameter must be a type specifier in this context";
-                Classifier cls = param.getTypeSpecifierValue();
-                
-                OclOperationWithTypeArgExp oclop = (OclOperationWithTypeArgExp) factory.createNode("OclOperationWithTypeArgExp");
-                oclop.setNameA(nameHead);
-                oclop.setSource(source);
-                oclop.setTypeArgument(cls);
-                return oclop;
+            	return createOpWithTypeArg(nameHead, source, astParameters);
             }
             List parameterTypes = getTypesForParameters(astParameters);            
             boolean isCollection = source instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
@@ -2134,8 +2162,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         myAst.setAttributeDeclaration(astAttribute);
         return myAst;
     }    
-    public OclOperationDefinedEntityDecl computeAstFor_AOperationDefinedEntityDeclCs(OclOperationDefinedEntityDecl myAst, Heritage nodeHrtgCopy, String astName, OclOperationSignature astOperation) throws AttrEvalException {
-	myAst.setOperationName(astName);
+    public OclOperationDefinedEntityDecl computeAstFor_AOperationDefinedEntityDeclCs(OclOperationDefinedEntityDecl myAst, Heritage nodeHrtgCopy, String astOperationName, OclOperationSignature astOperation) throws AttrEvalException {
+        myAst.setOperationName(astOperationName);
         myAst.setOperationSignature(astOperation);
         return myAst;
     }
@@ -2192,17 +2220,47 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             
             // @@TODO: update CommonOCL metamodel to contain createOperation with correct signature
             // v-- method signature differs in UML-OCL's "ClassifierImpl"
-            log("Warning: Common-OCL's Classifier::createOperation does not work. No operation created.");
-            // Operation newOp = ctxCls.createOperation(opName, opResType, opVardecls);
+            // log("Warning: Common-OCL's Classifier::createOperation does not work. No operation created.");
+
+            // v-- call helper operation. 
+            // @@TODO: remove this if common OCL contains createOperation method which requires only (one) list of VariableDeclaration instances
+            List opVarNames = new ArrayList(opVardecls.size());
+            List opVarTypes = new ArrayList(opVardecls.size());
+            splitVarDeclListToNamesAndTypes(opVardecls, opVarNames, opVarTypes);
+            // ^-- end helper operation
+            Operation newOp = ctxCls.createOperation(opName, opResType, opVarNames, opVarTypes);
             
-            // cons.setStereotypeNameA("body");
-            // cons.setConstrainedElementA(newOp);
+            cons.setStereotypeNameA("body");
+            cons.setConstrainedElementA(newOp);
         } else {
             throw new RuntimeException("Unknown entity type " + type + " in OCL 'def' constraint");
         }            
+        myAst.setName(astName);
         myAst.setDefinition(astDefinition);
         return myAst;
-    }    
+    }
+    
+    /**
+     * Ugly helper operation. Splits a list of VariableDeclaration instances into two lists
+     * containing the names and types of the variables, in the same order as given in the
+     * original list.
+     * @param opVardecls
+     * @param opVarNames
+     * 	On input: caller must pass empty list instance. On output: list of variable names (String instances).
+     * @param opVarTypes
+     *  On input: caller must pass empty list instance. On output: list of variable types (Classifier instances)
+     */
+    private void  splitVarDeclListToNamesAndTypes(List opVardecls, List opVarNames, List opVarTypes) {
+    	Iterator it = opVardecls.iterator();
+    	while ( it.hasNext() ) {
+    		VariableDeclaration vd = ( VariableDeclaration ) it.next();
+    		Classifier type = vd.getType();
+    		opVarTypes.add(type);
+    		String name = vd.getNameA();
+    		opVarNames.add(name);
+    	}
+    }
+
     
     public OclInvariantClassifierConstraint computeAstFor_AInvariantClassifierConstraintCs(OclInvariantClassifierConstraint myAst, Heritage nodeHrtgCopy, String astName, OclExpression astInvariant) throws AttrEvalException {
         Heritage hrtg = nodeHrtgCopy;
@@ -2587,7 +2645,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     }
     
     public OclOperationSignature computeAstFor_AOperationSignatureCs(OclOperationSignature myAst, Heritage nodeHrtgCopy, List astParameters, Classifier astReturnType) throws AttrEvalException {
-    	//myAst.setOperationName(astOperationName);
+    	// myAst.setOperationName(astOperationName);
         // formal parameter list is optional (may be null)  
         if ( astParameters == null ) {
             // install empty list as formal parameter list  
