@@ -100,8 +100,8 @@ public class Heritage extends Object implements Cloneable {
     
     /**
      * Indicates whether the syntactic form (part of concrete syntax tree) currently
-     * being under attribute evaluation is used in a context made up of an OCL operation
-     * with type argument, such as oclAsType, oclIsKindOf, oclIsTypeOf.
+     * being under attribute evaluation is used in a context forming an iterator
+     * variable declaration.
      */
     private boolean contextIsIteratorVarDecl;
     
@@ -116,7 +116,9 @@ public class Heritage extends Object implements Cloneable {
     private VariableDeclaration resultVariable;
     
     /**
-     * Holds value of property contextIsOclOpWithTypeArg.
+     * Indicates whether the syntactic form (part of concrete syntax tree) currently
+     * being under attribute evaluation is used in a context made up of an OCL operation
+     * with type argument, such as oclAsType, oclIsKindOf, oclIsTypeOf.
      */
     private boolean contextIsOclOpWithTypeArg;
     
