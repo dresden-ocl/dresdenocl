@@ -103,7 +103,7 @@ public class Heritage extends Object implements Cloneable {
      * being under attribute evaluation is used in a context forming an iterator
      * variable declaration.
      */
-    private boolean contextIsIteratorVarDecl;
+    private boolean contextIsIteratorVarDecl = false;
     
     /**
      * Holds value of property resultVariable. Used to store a result variable for
@@ -120,7 +120,29 @@ public class Heritage extends Object implements Cloneable {
      * being under attribute evaluation is used in a context made up of an OCL operation
      * with type argument, such as oclAsType, oclIsKindOf, oclIsTypeOf.
      */
-    private boolean contextIsOclOpWithTypeArg;
+    private boolean contextIsOclOpWithTypeArg = false;
+    
+    /**
+     * Indicates whether the current context is an iterator or iterate expression.
+     * If so, 
+     */
+    private boolean contextIsIteratorExp = false;
+    
+    /**
+     * If contextIsIteratorExp is true, this attribute indicates whether there exist
+     * explicit iterator variables or not. True means: only one implicit iterator variable
+     * exists or must be created. False means: at least one explicit iterator variable
+     * is contained in the textual OCL expression. Used by attribute computation method
+     * computeAstFor_AArgListPropertyCallExpCs
+     */
+    private boolean lacksExplicitIteratorVariables = false;
+    
+    /**
+     * If lacksExplicitIteratorVariables is true, this member stores the implicit
+     * iterator variable.
+     */
+    private VariableDeclaration implicitIteratorVariable;
+    
     
     /** Creates new Heritage */
     public Heritage() {
@@ -347,6 +369,50 @@ public class Heritage extends Object implements Cloneable {
      */
     public void setContextIsOclOpWithTypeArg(boolean contextIsOclOpWithTypeArg) {
         this.contextIsOclOpWithTypeArg = contextIsOclOpWithTypeArg;
+    }
+
+    /**
+     * @return Returns the contextIsIteratorExp.
+     */
+    public boolean isContextIsIteratorExp() {
+        return contextIsIteratorExp;
+    }
+
+    /**
+     * @param contextIsIteratorExp The contextIsIteratorExp to set.
+     */
+    public void setContextIsIteratorExp(boolean contextIsIteratorExp) {
+        this.contextIsIteratorExp = contextIsIteratorExp;
+    }
+
+    /**
+     * @return Returns the implicitIteratorVariable.
+     */
+    public VariableDeclaration getImplicitIteratorVariable() {
+        return implicitIteratorVariable;
+    }
+
+    /**
+     * @param implicitIteratorVariable The implicitIteratorVariable to set.
+     */
+    public void setImplicitIteratorVariable(
+            VariableDeclaration implicitIteratorVariable) {
+        this.implicitIteratorVariable = implicitIteratorVariable;
+    }
+
+    /**
+     * @return Returns the lacksExplicitIteratorVariables.
+     */
+    public boolean isLacksExplicitIteratorVariables() {
+        return lacksExplicitIteratorVariables;
+    }
+
+    /**
+     * @param lacksExplicitIteratorVariables The lacksExplicitIteratorVariables to set.
+     */
+    public void setLacksExplicitIteratorVariables(
+            boolean lacksExplicitIteratorVariables) {
+        this.lacksExplicitIteratorVariables = lacksExplicitIteratorVariables;
     }
     
 }

@@ -1755,21 +1755,42 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         
         if ( contextIsPropertyPrimary ) {
         	
-            List parameterTypes = getTypesForParameters(astParameters);
+            List parameterTypes = null;
+            // parameterTypes is required to be in same scope as "if (contextIsPropertyPrimary)",
+            // but getTypesForParameters expects OclExpression as type of list elements (=> class cast exception)
+            if ( ! contextIsOclOpWithTypeArg ) {
+                parameterTypes = getTypesForParameters(astParameters);
+            }
+            
             if ( numNameElements == 1 ) {
                 String nameHead = (String) astName.get(0);
 
                 // check for ocl operation with type argument with implicit source 
                 if ( contextIsOclOpWithTypeArg ) {
-                	// v-- this does not work if we're inside an iterator. in this case, 
-                	// we need to obtain the source expression by looking at the (one, implicit)
-                	// iterator variable. Otherwise, we simply use the current source expression.
-                	OclExpression source = hrtg.getCurrentSourceExpression();
-                	assert ( source != null ):
-                		"source expression must not be null for ocl operation with type argument";
+                    OclExpression source = null;
+                    // there is no such method like "lookupImplicitOperationWithTypeArg" in
+                    // class Environment, so we do a manual lookup of the implicit element
+                    // here, which is passed via Heritage.
+                    
+                    // @@TODO: continue here: 20051028
+                    // isContextIsIteratorExp does not work here, since this member is only set
+                    // down inside insideAArgListPropertyCallExpCs_computeHeritageFor_Body
+                    // it is not propagated back/up to computeAstFor_AArgListPropertyCallExpCs
+                    if ( hrtg.isContextIsIteratorExp() && hrtg.isLacksExplicitIteratorVariables() ) {
+                        VariableDeclaration vd = hrtg.getImplicitIteratorVariable();
+                        assert (vd != null):
+                            "Implicit iterator variable in Heritage must not be null inside an iterator with only one implicit iterator variable (internal error)";
+                        source = this.createVariableExpFromDeclaration(vd);
+                    } else {
+                        source = hrtg.getCurrentSourceExpression();
+                        if ( source == null ) {
+                            throw new AttrEvalException("Outside of an iterator/iterate expression with only one implicit iterator variable, source expression must not be null for ocl operation with type argument.");
+                        }
+                    }
             		return createOpWithTypeArg(nameHead, source, astParameters);
             	}
 
+                
                 // check for implicit (instance) operation [OperationCallExpCS::D and ::F]                
                 OperationWithSource refOpWSrc = nodeEnv.lookupImplicitOperationWithSource(nameHead, parameterTypes);
                 if ( refOpWSrc != null ) {
@@ -2603,6 +2624,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                 rethrowDNE(dne, "addition of formal operation parameters to environment");
             }
         }
+        // v-- result variable is added to environment later, if we detect that the steretype is
+        // 'post' or 'body'. We only put it into the *Heritage* now (not Environment)
         if ( returnParam != null ) {
             VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
             final String name = "result";            
@@ -2610,8 +2633,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             vd.setType(returnType);
             resultHeritage.setResultVariable(vd);
         }
-        // @@TODO@@ add formal parameters and result variable to environment
-        // @@TODO@@ remove "result" variable later, if we detect that steretype name does not equal "post"
+
         
         // update result heritage   
         resultHeritage.setEnv(innerEnv);
@@ -2645,7 +2667,6 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     }
     
     public OclOperationSignature computeAstFor_AOperationSignatureCs(OclOperationSignature myAst, Heritage nodeHrtgCopy, List astParameters, Classifier astReturnType) throws AttrEvalException {
-    	// myAst.setOperationName(astOperationName);
         // formal parameter list is optional (may be null)  
         if ( astParameters == null ) {
             // install empty list as formal parameter list  
@@ -2756,12 +2777,16 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     
     public Heritage insideAIteratorArrowPropertyCallExpCs_computeHeritageFor_Iterators(AIteratorArrowPropertyCallExpCs parent, PIteratorVarsCs child, Heritage parentHrtgCopy, String astName) throws AttrEvalException {
         parentHrtgCopy.setContextIsIteratorVarDecl(true);
+        parentHrtgCopy.setContextIsIteratorExp(true);
         return parentHrtgCopy;
     }
     
     public Heritage insideAIteratorArrowPropertyCallExpCs_computeHeritageFor_Body(AIteratorArrowPropertyCallExpCs parent, PExpression child, Heritage parentHrtgCopy, String astName, List astIterators) throws AttrEvalException {
         Environment oldEnv = parentHrtgCopy.getEnv();
         WritableEnvironment newEnv = oldEnv.nestedEnvironment();
+
+        parentHrtgCopy.setContextIsIteratorExp(true);
+
         
         OclExpression source = parentHrtgCopy.getCurrentSourceExpression();
         Classifier sourceType = obtainType(source);
@@ -2785,11 +2810,14 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             transformedIterators = this.transAPL2IVL.transform(astIterators);
         }
         if ( astIterators == null || astIterators.size() == 0 ) {
+            // create one implicit iterator variable
             transformedIterators = new ArrayList(1);
             VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
             vd.setType(elemType);
             vd.setNameA(ANONYMOUS_ITERATOR_NAME);
             transformedIterators.add(vd);
+            parentHrtgCopy.setLacksExplicitIteratorVariables(true);
+            parentHrtgCopy.setImplicitIteratorVariable(vd);
         }
         
         Iterator it = transformedIterators.iterator();
@@ -2881,6 +2909,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         Environment oldEnv = parentHrtgCopy.getEnv();
         WritableEnvironment newEnv = oldEnv.nestedEnvironment();
 
+        parentHrtgCopy.setContextIsIteratorExp(true);
+        
         OclExpression source = parentHrtgCopy.getCurrentSourceExpression();
         assert ( source != null ):
             "source expression must not be null";
@@ -2907,6 +2937,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             vd.setType(elemType);
             vd.setNameA(ANONYMOUS_ITERATOR_NAME);
             transformedIterators.add(vd);
+            parentHrtgCopy.setLacksExplicitIteratorVariables(true);
+            parentHrtgCopy.setImplicitIteratorVariable(vd);
         }
         Iterator it = transformedIterators.iterator();
         try {
