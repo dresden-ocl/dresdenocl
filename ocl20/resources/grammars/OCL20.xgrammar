@@ -389,8 +389,6 @@ Productions
         paren_close #nocreate
     ;
 
-  // expression <OclExpression> = logical_exp_cs #chain;
-
   ocl_expression_cs <OclExpression> =
       {with_let}    let_exp_cs      #chain
     | {without_let} logical_exp_cs  #chain
