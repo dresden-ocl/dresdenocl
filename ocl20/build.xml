@@ -70,7 +70,7 @@
         <property name="objdir.mdrlib.api" value="${objdir.mdrlibs}/api" />
         <property name="objdir.mdrlib.impl" value="${objdir.mdrlibs}/impl" />
         <property name="objdir.mdrlib.utils" value="${objdir.mdrlibs}/utils" />
-        <property name="srcdir.jmi.if" value="${dir.resources}/generatedJMI" />
+        <property name="srcdir.jmi.if" value="${basedir}/generated_src/generatedJMI" />
         <property name="objdir.jmi.if" value="${objdir.base}/jmi-api" />
         
         <property name="srcdir.jmi.impl" value="${srcdir.generic}/tudresden/ocl20/core/jmi" />
@@ -671,6 +671,7 @@
                 <path refid="libs.mdr" />
                 <path refid="libs.basic" />
                 <pathelement location="${jar.libs.ocl20repository}" />
+                <pathelement location="${basedir}/generated_src"/>
                 <pathelement location="${dir.resources}" />
             </classpath>
         </java>
