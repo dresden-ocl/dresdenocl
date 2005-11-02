@@ -229,8 +229,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             sb.append((String) it.next());
             while ( it.hasNext() ) {
                 String elem = (String) it.next();
-                sb.append(elem);
                 sb.append("::");
+                sb.append(elem);
             }
             return sb.toString();
         } else {
