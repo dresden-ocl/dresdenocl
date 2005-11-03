@@ -6,7 +6,6 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public class TestTable extends TestCase {
-	private Table t;
 
 	public TestTable(String n) {
 		super(n);
