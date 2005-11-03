@@ -227,7 +227,7 @@ public class OclLibraryHelper {
             createOperation(collectionType, "excludesAll", new Object [] [] {{collectionType, "c"}}, booleanPrimitive);
             createOperation(collectionType, "isEmpty", null, booleanPrimitive);
             createOperation(collectionType, "notEmpty", null, booleanPrimitive);
-            createOperation(collectionType, "sum", null, collectionType);
+            createOperation(collectionType, "sum", null, elementType);
             
             //create a generic product Operation
             //The exact return type is to be determined by the type checker
