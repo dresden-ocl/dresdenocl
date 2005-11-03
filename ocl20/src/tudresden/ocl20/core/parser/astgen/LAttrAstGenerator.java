@@ -1902,11 +1902,11 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             if ( contextIsOclOpWithTypeArg ) {
             	return createOpWithTypeArg(nameHead, source, astParameters);
             }
-            List parameterTypes = getTypesForParameters(astParameters);            
-            boolean isCollection = source instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
+            List parameterTypes = getTypesForParameters(astParameters);   
+	    Classifier srcType = obtainType(source);
+            boolean isCollection = srcType instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
             if ( ! isCollection ) {
                 // source no collection, create operation call
-                Classifier srcType = obtainType(source);
                 assert (srcType != null): "source type must not be null";
                 Operation refOp = srcType.lookupOperation(nameHead, parameterTypes);
                 assertParserCondition( refOp != null, "operation " + nameHead + 
@@ -1922,7 +1922,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                 return result;                
             } else {
                 // source is collection, create implicit collect for operation 
-                CollectionType collType = (tudresden.ocl20.core.jmi.ocl.types.CollectionType) source;
+                CollectionType collType = (tudresden.ocl20.core.jmi.ocl.types.CollectionType) srcType;
                 Classifier elemType = collType.getElementType();
                 assertParserCondition( astTime == null, "time expression not allowed here");
                 Operation refOp = elemType.lookupOperation(nameHead, parameterTypes);
@@ -1998,10 +1998,11 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             OclExpression source = hrtg.getCurrentSourceExpression();
             assert (source != null):
                 "source expression may not be null in this context";
-            boolean isCollection = source instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
+		Classifier srcType = obtainType(source);
+		boolean isCollection = srcType instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType;
             if ( ! isCollection ) {
                 // source expression is no collection 
-                Classifier srcType = source.getType();
+                
                 assert (srcType != null): "type of source expression must not be null";
                 AssociationEnd assocEnd = srcType.lookupAssociationEnd(name);
                 if ( assocEnd != null ) {
@@ -2018,7 +2019,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             } else {
                 // source expression is a collection
                 assertParserCondition( astTime == null, "time expression not allowed here");
-                CollectionType coll = (tudresden.ocl20.core.jmi.ocl.types.CollectionType) source;
+                CollectionType coll = (tudresden.ocl20.core.jmi.ocl.types.CollectionType) srcType;
                 Classifier elemType = coll.getElementType();
                 
                 AssociationEnd assocEnd = elemType.lookupAssociationEnd(name);
