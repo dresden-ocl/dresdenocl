@@ -378,6 +378,25 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     }
     
     /**
+     * Helper method which returns the string representation of the parameter types list
+     * 
+     * @param the parameter types list
+     * @return the string representation of the parameter types list as (type1, type2, ...)
+     */
+    protected String getStringForParameterTypes(List paramTypes) {
+    	String paramTypesString = "(";
+    	for (int i = 0; i < paramTypes.size(); i++) {
+    		paramTypesString += ((Classifier)paramTypes.get(i)).getNameA() + ", ";
+    	}
+    	if (paramTypesString.length() > 0) {
+    		paramTypesString = paramTypesString.substring(0, paramTypesString.length() - 2);
+    	}
+    	paramTypesString += ")";
+    	
+    	return paramTypesString;
+    }
+    
+    /**
      * @param parameters List of OclMessageArg instances passed as parameters
      *        to an OperationCallExp
      * @return a list containing the types of all parameters in the input list
@@ -3155,7 +3174,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                 myAst.setSource(source);
                 return myAst;
             } else {
-                throw new AttrEvalException("operation named '" + astName + "' does " +
+            	throw new AttrEvalException("operation named '" + astName + getStringForParameterTypes(paramTypes) + "' does " +
                     "not exist for classifier '" + sourceType.getNameA() + "'");
             }
         }
