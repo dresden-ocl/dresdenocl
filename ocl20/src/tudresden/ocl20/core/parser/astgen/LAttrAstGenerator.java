@@ -3149,7 +3149,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                 myAst.setSource(source);
                 return myAst;
             } else {
-                throw new AttrEvalException("operation named '" + astName + "' does " +
+                throw new AttrEvalException("operation named '" + astName + getStringForParameterTypes(paramTypes) + "' does " +
                     "not exist for Set('" + sourceType.getNameA() + "')");
             }
         } else {
