@@ -487,11 +487,13 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
      */
     protected IteratorExp createImplicitCollectIteratorExp(OclExpression source,
         PropertyCallExp body) throws AttrEvalException {
+
+        Classifier type = obtainType(source);
         
-        assert source instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType:
+        assert type instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType:
             "source expression for implicit collect must have collection type";
             
-        CollectionType collType = (tudresden.ocl20.core.jmi.ocl.types.CollectionType) source;
+        CollectionType collType = (tudresden.ocl20.core.jmi.ocl.types.CollectionType) type;
         Classifier elemType = collType.getElementType();
 
         IteratorExp itex = (IteratorExp) factory.createNode("IteratorExp");
@@ -1666,7 +1668,8 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             return attrcallexp;
         }
         
-        if ( ! (source instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType ) ) {
+        if ( ! (type instanceof tudresden.ocl20.core.jmi.ocl.types.CollectionType ) ) {
+
             // is not an ocl collection, check for association end/association class
             AssociationEnd assocEnd = type.lookupAssociationEnd(name);
             if ( assocEnd != null ) {
@@ -1690,7 +1693,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             }
         } else {
             // source is an ocl collection  
-            CollectionType collType = (CollectionType) source;
+            CollectionType collType = (CollectionType) type;
             Classifier elemType = collType.getElementType();
             // 1. check whether name denotes an attribute of source 
             refAttr = elemType.lookupAttribute(name);
