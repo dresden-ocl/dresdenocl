@@ -225,7 +225,7 @@ public class ORMappingImpl implements ORMapping {
 	public Map<String,String> getAssociationEnds(String classifier)
 	{
 		Map<String,String> result = new HashMap<String,String>();
-		Classifier c = (Classifier)hlp.findClassifier(classifier), endClass, assEndClass;
+		Classifier c = (Classifier)hlp.findClassifier(classifier);
 		
 		Iterator ownEnds = ((CorePackage)c.refImmediatePackage()).getAParticipantAssociation().getAssociation(c).iterator();
         while(ownEnds.hasNext()){
@@ -680,13 +680,6 @@ public class ORMappingImpl implements ORMapping {
 		}
 
 		return result;
-	}
-
-	/**
-	 * Mapping of class names to table names.
-	 */
-	private String getTableName(Classifier cls) {
-		return new String(cls.getName().toUpperCase());
 	}
 
 	/**
