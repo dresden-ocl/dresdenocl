@@ -1147,10 +1147,23 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     //
     
     public LetExp computeAstFor_ALetExpCs(LetExp myAst, Heritage nodeHrtgCopy, List astVariables, OclExpression astExpression) throws AttrEvalException {
-        if ( astVariables.size() != 1 ) {
-            throw new AttrEvalException("Only one variable declaration supported " +
-                "in current implementation due to limitations in LetExp.setVariable(), " +
-                "which supports only multiplicity 'exactly 1'");
+	OclExpression tmpExp = astExpression;
+        if ( astVariables.size() >1 ) {
+            //throw new AttrEvalException("Only one variable declaration supported " +
+	    //"in current implementation due to limitations in LetExp.setVariable(), " +
+	    //  "which supports only multiplicity 'exactly 1'");
+	    for (int i = astVariables.size()-1; i>0; i--) {
+		LetExp tmpLet = (LetExp) factory.createNode("LetExp");
+		// type and initial value are present, grammar assures this  
+		VariableDeclaration vardecl = (VariableDeclaration) astVariables.get(i);
+		assert ( vardecl.getType() != null ):
+		    "type of initialized variable must not be null";
+		assert ( vardecl.getInitExpression() != null ):
+		    "initializer expression of initialized variable not present";
+		    tmpLet.setVariable(vardecl);
+		    tmpLet.setIn(tmpExp);
+		    tmpExp = tmpLet;
+	    }
         }
         // type and initial value are present, grammar assures this             
         VariableDeclaration vardecl = (VariableDeclaration) astVariables.get(0);
@@ -1160,7 +1173,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
         assert ( vardecl.getInitExpression() != null ):
             "initializer expression of initialized variable not present";
         myAst.setVariable(vardecl);
-        myAst.setIn(astExpression);
+        myAst.setIn(tmpExp);
         return myAst;
     }
     
