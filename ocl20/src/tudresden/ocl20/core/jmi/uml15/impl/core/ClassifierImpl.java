@@ -99,6 +99,8 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     //Ocl Submission version 1.6, chapter 3.3.8, p 3-22
     public tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier commonSuperType(tudresden.ocl20.core.jmi.ocl.commonmodel.Classifier c) {
         
+	if (this.conformsTo(c)) { return c;    }
+	if (c.conformsTo(this)) { return this; }
         Set thisParents = new HashSet(); ;
         thisParents.add(this);
         Set cParents = new HashSet(); ;
