@@ -1820,11 +1820,12 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
                     Operation refOp = refOpWSrc.getOperation();
                     NamedElement neSource = refOpWSrc.getSource();
                     ModelElement meSource = neSource.getReferredElement();
-                    assert meSource instanceof OclExpression: "source expression must be " +
-                        "an instance of a subclass of OclExpression";
+		    VariableExp source = (VariableExp)this.createVariableExpFromDeclaration(meSource);
+		    //assert source instanceof OclExpression: "source expression must be " +
+		    //  "an instance of a subclass of OclExpression";
                     
                     OperationCallExp opex = (OperationCallExp) factory.createNode("OperationCallExp");
-                    opex.setSource( (OclExpression) meSource);
+                    opex.setSource( (OclExpression) source);
                     opex.setReferredOperation(refOp);
                     opex.getArguments().clear();
                     
