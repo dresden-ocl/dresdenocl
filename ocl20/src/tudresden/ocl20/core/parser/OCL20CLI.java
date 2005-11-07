@@ -58,11 +58,11 @@ import javax.jmi.reflect.*;
 
 import java.io.*;
 import java.util.*;
-
+import java.util.zip.*;
 
 /**
  *
- * Simple GUI for the experimental OCL20 parser.
+ * Simple CLI for the experimental OCL20 parser.
  * 
  * @author Achim D. Brucker
  * @author Ansgar Konermann
@@ -237,6 +237,51 @@ public class OCL20CLI {
         }
     }
 
+    public static final void copyInputStream(InputStream in, OutputStream out)
+	throws IOException
+    {
+	byte[] buffer = new byte[1024];
+	int len;
+	
+	while((len = in.read(buffer)) >= 0)
+	    out.write(buffer, 0, len);
+	
+    in.close();
+    out.close();
+    }
+
+    private void loadModelArgo(String metaModelname, java.io.File file  ) {
+	String argoName = file.getName();
+	String path = file.getAbsolutePath();
+	if (!argoName.endsWith(".zargo")) {
+	    System.err.println("Not an ArgoUML file: " + path + " (no .zargo suffix)! Aborting load."); 
+	    return;
+	}
+	if ( ! file.canRead()) {
+	    System.err.println("Cannot read model file " + path + "! Aborting load.");
+	    return;
+	}
+	
+	try {
+	    String  baseName = argoName.substring(0,argoName.length()-6);
+	    ZipFile argoFile = new ZipFile(file);
+	    
+	    File temp = File.createTempFile(baseName,".xmi");
+	    temp.deleteOnExit();
+	    
+	    copyInputStream(argoFile.getInputStream(argoFile.getEntry(baseName+".xmi")), 
+			    new BufferedOutputStream(new FileOutputStream(temp)));
+	    argoFile.close();
+	    loadModelXmi(metaModelname, temp);
+	}
+	catch (IOException ioe) {
+	    System.err.println("Unhandled exception:");
+	    ioe.printStackTrace();
+	}
+	
+	return;
+    }
+    
     private void loadModelXmi(String metaModelName, java.io.File file) {
         String path = file.getAbsolutePath();
         String modelUrl = "file:" + path;
@@ -268,7 +313,9 @@ public class OCL20CLI {
 
 
     private void usage () {
-        System.out.println("Usage: ocl2cli [--help] [--verbose] [--mmodel MOF14 | UML15] [--outfile output] xmi-file ocl-file");
+        System.out.println("Usage: ocl2cli [--help] [--verbose] [--mmodel MOF14 | UML15] [--outfile output] model-file ocl-file");
+	System.out.println("       where 'model-file' is either a XMI (*.xmi) file or an ArgoUML (*.zargo) file");
+        System.out.println("");
         System.out.println("Options:");
         System.out.println("  --help           Display this information");
         System.out.println("  --verbose        Verbose mode");
@@ -334,11 +381,14 @@ public class OCL20CLI {
             OclFilename = args[i++];
         }
 
-
-
-	if(verbose) System.out.println("Loading XMI file: "+XmiFilename);
-        loadModelXmi(metaModelName,new File(XmiFilename));
-
+       
+	if (XmiFilename.endsWith(".zargo")) {
+	    if(verbose) System.out.println("Loading ArgoUML file: "+XmiFilename);
+	    loadModelArgo(metaModelName,new File(XmiFilename));
+	}else{
+	    if(verbose) System.out.println("Loading XMI file: "+XmiFilename);
+	    loadModelXmi(metaModelName,new File(XmiFilename));
+	}
 	if(verbose) System.out.println("Loading OCL file: "+OclFilename);
 	constraints = loadOclFile(new File(OclFilename));
 

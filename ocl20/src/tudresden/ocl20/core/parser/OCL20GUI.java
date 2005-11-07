@@ -84,6 +84,7 @@ import java.awt.Dimension;
 
 import java.io.*;
 import java.util.*;
+import java.util.zip.*;
 
 
 /**
@@ -847,7 +848,12 @@ public class OCL20GUI extends javax.swing.JFrame implements SimpleMessageSink {
             returnValue = mModelFileChooser.showOpenDialog(this);
             if ( returnValue == javax.swing.JFileChooser.APPROVE_OPTION ) {
                 // load file
-                loadModelXmi(metaModelName, mModelFileChooser.getSelectedFile());
+		File XmiFile = mModelFileChooser.getSelectedFile();
+		if ((XmiFile.getName()).endsWith(".zargo")) {
+		    loadModelArgo(metaModelName,XmiFile);
+		}else{
+		    loadModelXmi(metaModelName,XmiFile);
+		}
             }
         }
     }//GEN-LAST:event_mButtonLoadModelActionPerformed
@@ -987,6 +993,53 @@ public class OCL20GUI extends javax.swing.JFrame implements SimpleMessageSink {
             displayMessage("Cannot write to file " + path + "! Aborting save.");
         }
     }
+
+
+    public static final void copyInputStream(InputStream in, OutputStream out)
+	throws IOException
+    {
+	byte[] buffer = new byte[1024];
+	int len;
+	
+	while((len = in.read(buffer)) >= 0)
+	    out.write(buffer, 0, len);
+	
+    in.close();
+    out.close();
+    }
+
+    private void loadModelArgo(String metaModelname, java.io.File file  ) {
+	String argoName = file.getName();
+	String path = file.getAbsolutePath();
+	if (!argoName.endsWith(".zargo")) {
+	    System.err.println("Not an ArgoUML file: " + path + " (no .zargo suffix)! Aborting load."); 
+	    return;
+	}
+	if ( ! file.canRead()) {
+	    System.err.println("Cannot read model file " + path + "! Aborting load.");
+	    return;
+	}
+	
+	try {
+	    String  baseName = argoName.substring(0,argoName.length()-6);
+	    ZipFile argoFile = new ZipFile(file);
+	    
+	    File temp = File.createTempFile(baseName,".xmi");
+	    temp.deleteOnExit();
+	    
+	    copyInputStream(argoFile.getInputStream(argoFile.getEntry(baseName+".xmi")), 
+			    new BufferedOutputStream(new FileOutputStream(temp)));
+	    argoFile.close();
+	    loadModelXmi(metaModelname, temp);
+	}
+	catch (IOException ioe) {
+	    System.err.println("Unhandled exception:");
+	    ioe.printStackTrace();
+	}
+	
+	return;
+    }
+
         
     private void loadModelXmi(String metaModelName, java.io.File file) {
         String path = file.getAbsolutePath();
