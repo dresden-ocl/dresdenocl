@@ -2851,7 +2851,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             transformedIterators = new ArrayList(1);
             VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
             vd.setType(elemType);
-            vd.setNameA(this.anonIterVars.getNextAsString());
+            vd.setNameA(ANONYMOUS_ITERATOR_NAME);
             transformedIterators.add(vd);
             parentHrtgCopy.setLacksExplicitIteratorVariables(true);
             parentHrtgCopy.setImplicitIteratorVariable(vd);
@@ -2921,7 +2921,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             // if no iterator variable is explicitly given, we have to create   
             // one  
             VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
-            vd.setNameA(this.anonIterVars.getNextAsString());
+            vd.setNameA(ANONYMOUS_ITERATOR_NAME);
             vd.setType(elemType);
             iteratorsInExp.add(vd);
         }
@@ -2972,7 +2972,7 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
             transformedIterators = new ArrayList(1);
             VariableDeclaration vd = (VariableDeclaration) factory.createNode("VariableDeclaration");
             vd.setType(elemType);
-            vd.setNameA(this.anonIterVars.getNextAsString());
+            vd.setNameA(ANONYMOUS_ITERATOR_NAME);
             transformedIterators.add(vd);
             parentHrtgCopy.setLacksExplicitIteratorVariables(true);
             parentHrtgCopy.setImplicitIteratorVariable(vd);
