@@ -662,7 +662,6 @@ public class OCL20GUI extends javax.swing.JFrame implements SimpleMessageSink {
     }//GEN-END:initComponents
 
     private void mButtonListModelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mButtonListModelsActionPerformed
-        // TODO add your handling code here:
         
         String metaModel = MetaModelConst.UML15;
         TextualModelTreeBuilder mtb = new TextualModelTreeBuilder(ModelManager.getInstance());
@@ -692,12 +691,10 @@ public class OCL20GUI extends javax.swing.JFrame implements SimpleMessageSink {
     }//GEN-LAST:event_mButtonListModelsActionPerformed
 
     private void mButtonReserve2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mButtonReserve2ActionPerformed
-        // TODO add your handling code here:
         mMdlLogTextArea.setText("");
     }//GEN-LAST:event_mButtonReserve2ActionPerformed
 
     private void mButtonReserve1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mButtonReserve1ActionPerformed
-        // TODO add your handling code here:
         
     }//GEN-LAST:event_mButtonReserve1ActionPerformed
 
