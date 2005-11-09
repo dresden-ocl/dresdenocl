@@ -47,6 +47,7 @@ import tudresden.ocl20.core.jmi.uml15.core.Attribute;
 import tudresden.ocl20.core.jmi.uml15.core.Classifier;
 import tudresden.ocl20.core.jmi.uml15.core.CorePackage;
 import tudresden.ocl20.core.jmi.uml15.core.Operation;
+import tudresden.ocl20.core.jmi.uml15.core.UmlAssociationClass;
 import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 import tudresden.ocl20.codegen.sql.codegen.Guide;
 import tudresden.ocl20.codegen.sql.util.MetaModelHelper;
@@ -720,16 +721,28 @@ public class ORMappingImpl implements ORMapping {
 	  		if ((MetaModelHelper.allEndsAreMultiple(ass)) || (oneTablePerAssociation)) {
 	  			// tables for all associations with multiplicity * on all ends
 	  			// or for each association if oneTablePerAssociation == true
-
-				//TODO: determine if the class is an AssociationClass and map the 
-				// class attributes to a new table
-				
-				// create the association table
+	  			
 	  			assTabCount++;
 	  			fkTables = new ArrayList<Table>();
-	  			assTab = new Table(ASSTABNAME + assTabCount);
+
+				// determine if the class is an AssociationClass and map the 
+				// class attributes to a new table (or to an already mapped table)
+	  			if (ass instanceof UmlAssociationClass) {
+	  				// only create new Table if the Class wasn't mapped already
+	  				if (classesToTables.get(ass.getNameA()) == null) {
+	  					assTab = new Table(getTableName(ass.getNameA()));
+	  					mapClassToTable((Classifier)ass);
+	  					mapClassAttributes((Classifier)ass);
+	  					tables.add(assTab);
+	  				} else {
+	  					assTab = getTable(getTableName(ass.getNameA()));
+	  				}
+	  			} else {
+					// create the association table
+		  			assTab = new Table(ASSTABNAME + assTabCount);
+		  			tables.add(assTab);
+	  			}
 	  			fkTables.add(assTab);
-	  			tables.add(assTab);
 	  			
 	  			// bury all necessary foreign keys
 	  			fkSet = new HashSet<String>();
