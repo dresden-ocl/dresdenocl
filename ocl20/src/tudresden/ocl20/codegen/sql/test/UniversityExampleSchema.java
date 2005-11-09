@@ -188,7 +188,7 @@ public class UniversityExampleSchema implements ORMapping {
     /**
      * @param classifier a classifier
      * @return a List with all table objects the classifier was mapped to
-     * @see tudresden.ocl20.sql.orm.Table
+     * @see tudresden.ocl20.codegen.sql.orm.Table
      */
     public List<Table> getClassTables(String classifier) {
         List<Table> result = new ArrayList<Table>();
@@ -202,7 +202,7 @@ public class UniversityExampleSchema implements ORMapping {
      * @param classifier a classifier
      * @param assEnd the name of the association end
      * @return a List that contains guides to to the specified association end from the classifier
-     * @see tudresden.ocl20.sql.codegen.Guide
+     * @see tudresden.ocl20.codegen.sql.codegen.Guide
      */
     public List<Guide> guidesToAssociationEnds(String classifier,String assEnd) {
         List<Guide> result = new ArrayList<Guide>();
@@ -270,7 +270,7 @@ public class UniversityExampleSchema implements ORMapping {
     
     /**
      * @return a List with all table objects created during the object relational mapping
-     * @see tudresden.ocl20.sql.orm.Table
+     * @see tudresden.ocl20.codegen.sql.orm.Table
      */
     public List<Table> getTables() {
         List<Table> result = new ArrayList<Table>();

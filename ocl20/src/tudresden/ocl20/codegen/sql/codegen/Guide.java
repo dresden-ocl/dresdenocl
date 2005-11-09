@@ -42,7 +42,7 @@ import java.util.*;
  * an alias, the alias in use should be stored within the Guide object too.
  *
  * @author Sten Loecher, Florian Heidenreich
- * @see tudresden.ocl20.sql.codegen.MappedClass
+ * @see tudresden.ocl20.codegen.sql.codegen.MappedClass
  */
 public class  Guide {
 	

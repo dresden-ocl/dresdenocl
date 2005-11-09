@@ -46,7 +46,7 @@ import tudresden.ocl20.codegen.sql.orm.Table;
  * provides a number of service methods.
  *
  * @author Sten Loecher, Florian Heidenreich
- * @see tudresden.ocl20.sql.orm.ORMappingScheme
+ * @see tudresden.ocl20.codegen.sql.orm.ORMappingScheme
  * @invariant associationEnds->isUnique(ae:associationEnd|ae.name)
  */
 public class MappedClass {
