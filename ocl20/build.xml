@@ -96,6 +96,7 @@
         <property name="jar.libs.codegen.java"  value="${objdir.libs}/ocl20codegen-java.jar" />
         <property name="jar.libs.workbench" value="${objdir.libs}/ocl20workbench.jar" />
         <property name="jar.libs.ocl22sql" value="${objdir.libs}/ocl22sql.jar" />
+        <property name="jar.libs.utilityexample" value="${objdir.libs}/utilityexample.jar" />
         
         <property name="jar.javax.jmi" value="${dir.libs.basic}/jmi.jar" />
         <property name="jar.javax.jmi-mof" value="${dir.libs.basic}/mof.jar"/>        
@@ -799,7 +800,52 @@
             </classpath>
         </java>
     </target>
-    
+ 
+	<target name="compile.utilityexample" depends="init, jar.jmi.if, jar.jmi.impl, jar.sableparser"
+			description="Compiles the classes Utility and UtilityTest">
+	       <mkdir dir="${objdir.generic}" />
+	        <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
+	            deprecation="true"
+	            debug="true" debuglevel="lines,vars,source">
+	            <include name="tudresden/ocl20/util/Utility*.java" />
+	            <exclude name="**.html" />
+	            <classpath>
+	                <path refid="libs.mdr" />
+	                <path refid="libs.basic" />
+	                <path refid="libs.jmi.ocl20" />
+	                <!--<path refid="libs.javatools" />-->
+	            </classpath>
+	        </javac>		
+	</target>
+	
+    <target name="jar.utilityexample"
+        depends="init,compile.utilityexample"
+        description="packs the Utility Example into a jar file" >
+        <mkdir dir="${objdir.generic}"/>
+        <jar basedir="${objdir.generic}" destfile="${jar.libs.utilityexample}">
+            <include name="tudresden/ocl20/util/Utility*.class" />
+        </jar>
+    </target>
+	
+	<target name="run.utilityexample" depends="init, jar.parsertools, jar.utilityexample"
+			description="Runs the Class UtilityTest">
+	       <java classname="tudresden.ocl20.util.UtilityTest"
+	            failonerror="true" fork="true">
+	      		<classpath>
+	                <path refid="libs.basic" />
+	                <path refid="libs.mdr" />
+	                <path refid="libs.jmi.ocl20" />
+	            	<pathelement location="${jar.libs.utilityexample}"/>
+	                <pathelement location="${jar.libs.parsertools}" />
+	                <pathelement location="${jar.libs.sableparser}" />
+	                <pathelement location="${jar.libs.sable-astlib}" />
+	                <pathelement location="${jar.libs.ocl20repository}" />
+	                <pathelement location="${jar.libs.ocl20stdlib}" />
+	                <pathelement location="${dir.resources}" />
+	 	         </classpath>
+	        </java>
+		
+	</target>
     <target name="svn.info" depends="init">
         <tempfile property="file.svninfo" />
         <exec executable="svn" output="${file.svninfo}">

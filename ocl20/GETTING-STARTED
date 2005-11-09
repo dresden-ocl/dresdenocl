@@ -36,7 +36,7 @@
   Build targets
   -------------
 
-  There are two applications in the toolkit by now.
+  There are four applications in the toolkit by now.
 
   1. OCL2.0 Workbench
      This software was written by Stefan Ocke for his diploma thesis. It provides
@@ -73,9 +73,16 @@
       Please note, that this tool doesn't support association classes and OCL 
       operations over collections at the moment.
       
+   4. UtilityTest 
+   	  This Software was written by Jordi Cabot Sagrera. It is an example 
+   	  how to use the Class Utility which provides some helper methods. Take a 
+   	  look at the classes UtilityTest and Utility if you plan to work directly on the 
+   	  repository. It is a text-based application, which uses the CarWorld-Model 
+   	  in /resources/PoseidonProjects.
+      
 
    All applications share a common codebase. To faciliate building and running
-   them, there is an Ant script in $BASE/build.
+   them, there is an Ant script in $BASE/build.xml.
 
    To build and run the OCL workbench, change working directory to $BASE and
    type:
@@ -89,6 +96,10 @@
    For the OCL22SQL tool, change the working directory to $BASE and type:
    
         ant run.ocl22sql
+        
+   For the UtilityTest, change the working directory to $BASE and type:
+   		
+   		ant run.utilityexample
 
 
    OCL2.0 Workbench
@@ -148,6 +159,13 @@
    
    After the text "Finished!" is displayed on the console, switch to the 
    "Output" tab and have a look at the generated DDL and SQL code.
+   
+   
+   UtilityTest
+   -----------------
+   
+   For this Example you shoult take a look at the code to understand what 
+   is printed out during execution. 
 
 
 
