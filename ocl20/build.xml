@@ -125,7 +125,7 @@
         </path>
         <path id="libs.basic">
             <fileset dir="${dir.libs.basic}">
-                <include name="*.jar" />
+                <include name="**.jar" />
             </fileset>
         </path>
         <path id="libs.javatools">
@@ -157,6 +157,12 @@
         <path id="libs.apache-oro">
             <pathelement location="${dir.software}/jakarta-oro-2.0.8.jar" />
         </path>
+    	<path id="libs.external">
+            <fileset dir="${dir.software}">
+                 <include name="**.jar" />
+             </fileset>
+    	</path>
+      	
         
     </target>
     
@@ -236,11 +242,13 @@
         <mkdir dir="${destdir.javadoc}"/>
         <javadoc destdir="${destdir.javadoc}" 
             packagenames="tudresden.*"
-            source="1.4">
+            source="1.5">
             <classpath>
                 <path refid="libs.mdr" />
                 <path refid="libs.antlr" />
-                <path refid="libs.apache-oro" />
+            	<path refid="libs.apache-oro" />
+            	<path refid="libs.basic" />
+            	<path refid="libs.external"/>
             </classpath>
             <sourcepath>
                 <pathelement location="${srcdir.jmi.if}"/>
