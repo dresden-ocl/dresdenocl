@@ -1299,27 +1299,23 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     }
     
     public OperationCallExp computeAstFor_ABinaryRelationalExpCs(OperationCallExp myAst, Heritage nodeHrtgCopy, OclExpression astOperand, OclBinaryExpTail astTail) throws AttrEvalException {
-        try {
-            myAst.setSource(astOperand);
-            Classifier opType = obtainType(astOperand);
-            assert (opType != null): "Type of left operand is null. Did you explicitly specify multiplicity of left operand in model? Type checker will fail otherwise. Check process output (stdout) for possible null pointer exception in TypeEvaluator.";
-            myAst.setSrcType(opType);
-            String operator = astTail.getOperator();
-            OclExpression rightOperand = astTail.getOperand();
-            Classifier opTypeRight = typeEval.getType(rightOperand);
-            ArrayList paramList = new ArrayList(1);
-            paramList.add(opTypeRight);
-            Operation op = opType.lookupOperation(operator, paramList);
-            if ( op == null ) {
-                throw new AttrEvalException("No binary relational operation '" + operator + 
-                    "' in classifier '" + opType.getNameA() + "'");
-            }
-            myAst.setReferredOperation(op);
-            myAst.getArguments().clear();
-            myAst.getArguments().add(rightOperand);
-        } catch ( WellFormednessException wfe ) {
-            throw new AttrEvalException("Wellformedness rules violated", wfe);
-        }
+	myAst.setSource(astOperand);
+	Classifier opType = obtainType(astOperand);
+	assert (opType != null): "Type of left operand is null. Did you explicitly specify multiplicity of left operand in model? Type checker will fail otherwise. Check process output (stdout) for possible null pointer exception in TypeEvaluator.";
+        myAst.setSrcType(opType);
+	String operator = astTail.getOperator();
+	OclExpression rightOperand = astTail.getOperand();
+	Classifier opTypeRight = obtainType(rightOperand);
+	ArrayList paramList = new ArrayList(1);
+	paramList.add(opTypeRight);
+	Operation op = opType.lookupOperation(operator, paramList);
+	if ( op == null ) {
+	    throw new AttrEvalException("No binary relational operation '" + operator + 
+					"("+ opTypeRight.getNameA() +")' in classifier '" + opType.getNameA() + "'");
+	}
+	myAst.setReferredOperation(op);
+	myAst.getArguments().clear();
+	myAst.getArguments().add(rightOperand);
         return myAst;
     }
     
@@ -2717,6 +2713,14 @@ public class LAttrAstGenerator extends LAttrEvalAdapter {
     }
     
     public OclOperationConstraint computeAstFor_AOperationConstraintCs(OclOperationConstraint myAst, Heritage nodeHrtgCopy, OclOperationConstraintStereotype astStereotype, String astName, OclExpression astExpression) throws AttrEvalException {
+
+	Classifier constrType = obtainType(astExpression);
+	if ((astStereotype.equals(astStereotype.PRE) ||
+	     astStereotype.equals(astStereotype.POST))
+	    && ( ! constrType.getNameA().equals("Boolean") )) {
+	    throw new AttrEvalException("Type of pre- or post-condition must be 'Boolean', found " + constrType.getNameA() );
+	}
+
         Heritage hrtg = nodeHrtgCopy;
         Classifier cls = hrtg.getContextualClassifier();
         assert ( cls != null ):
