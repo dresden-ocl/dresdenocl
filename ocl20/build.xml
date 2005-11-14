@@ -957,6 +957,36 @@ More info goes here.
     </echo>
     </target>
 
-    
+	<target name="compile-all" description="compiles all compile-targets" depends="
+						compile.codegen.java,
+						compile.jmi.if,
+						compile.jmi.impl,
+						compile.ocl20repository,
+						compile.ocl20stdlib,
+						compile.ocl22sql,
+						compile.oclscript,
+						compile.parsertools,
+						compile.sablecc-ext,
+						compile.sableparser,
+						compile.sableparser.astnode,
+						compile.utilityexample,
+						compile.workbench">
+	</target>
+
+	<target name="jar-all" description="creates all jar-files" depends="
+						jar.codegen.java,
+						jar.jmi.if,
+						jar.jmi.impl,
+						jar.ocl20repository,
+						jar.ocl20stdlib,
+						jar.ocl22sql,
+						jar.oclscript,
+						jar.parsertools,
+						jar.sablecc.extended,
+						jar.sableparser,
+						jar.sableparser.astnode,
+						jar.utilityexample,
+						jar.workbench">
+	</target>
 </project>
 
