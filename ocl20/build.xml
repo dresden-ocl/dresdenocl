@@ -957,7 +957,7 @@ More info goes here.
     </echo>
     </target>
 
-	<target name="compile-all" description="compiles all compile-targets" depends="
+	<target name="compile" description="compiles all compile-targets" depends="
 						compile.codegen.java,
 						compile.jmi.if,
 						compile.jmi.impl,
@@ -973,7 +973,7 @@ More info goes here.
 						compile.workbench">
 	</target>
 
-	<target name="jar-all" description="creates all jar-files" depends="
+	<target name="jar" description="creates all jar-files" depends="
 						jar.codegen.java,
 						jar.jmi.if,
 						jar.jmi.impl,
