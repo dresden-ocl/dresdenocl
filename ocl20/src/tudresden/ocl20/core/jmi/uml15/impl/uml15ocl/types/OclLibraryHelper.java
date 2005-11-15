@@ -432,19 +432,18 @@ public class OclLibraryHelper {
         
         //make OclAny supertype of any Classifier that has no supertype yet.
         
-        Iterator classifierIt;
         Classifier classifier;
-        
-        classifierIt = core.getClassifier().refAllOfType().iterator();
-        while(classifierIt.hasNext()){
-            classifier = (Classifier) classifierIt.next();
+	//classifierIt = core.getClassifier().refAllOfType().iterator();
+	Object[] classifierArr = core.getClassifier().refAllOfType().toArray();
+	for (int i = 0; i< classifierArr.length; i++){
+            classifier = (Classifier) classifierArr[i];
             if(hasNoSupertypes(classifier)
             && !classifier.equals(oclAny)
             && !classifier.equals(oclVoid)
             //            && !classifier.equals(oclType)
             && !classifier.equals(oclState)){
                 
-                createGeneralization(oclAny, classifier);
+		 createGeneralization(oclAny, classifier);
             }
             if(hasNoSubtypes(classifier)
             && !classifier.equals(oclAny)
