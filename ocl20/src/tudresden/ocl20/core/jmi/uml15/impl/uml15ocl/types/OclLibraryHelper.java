@@ -408,6 +408,8 @@ public class OclLibraryHelper {
         createOperation(stringPrimitive, "substring", new Object [] [] {{integerPrimitive, "lower"}, {integerPrimitive, "upper"}}, stringPrimitive);
         createOperation(stringPrimitive, "toInteger", null, integerPrimitive);
         createOperation(stringPrimitive, "toReal", null, realPrimitive);
+        createOperation(stringPrimitive, "toUpper", null, stringPrimitive);
+        createOperation(stringPrimitive, "toLower", null, stringPrimitive);
         
         //        oclType = core.getEnumeration().createEnumeration("OclType", VisibilityKindEnum.VK_PUBLIC,
         //        false, false, false, false);
