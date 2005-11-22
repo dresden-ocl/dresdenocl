@@ -1,0 +1,193 @@
+
+  GETTING STARTED WITH THE DRESDEN OCL TOOLKIT FOR OCL2.0 (Source Release)
+
+  This document is still in a very early stage and covers only the most basic
+  information needed to get the toolkit running. If you encounter problems,
+  please don't hesitate to report them (See "Contact" at the end of this 
+  document).
+
+  Prerequisites
+  -------------
+
+  To get the toolkit running, you need:
+  1. Jakarta Ant (I used Ant 1.6.2. For other versions, your mileage may vary).
+  2. Java SDK 1.4 (I used Sun's J2SDK 1.4.2_05 on Linux Slackware 9.1).
+     Java SDK 1.5 to compile the OCL22SQL tool.
+  3. Make sure that your system's environment variable $JAVA_HOME is set 
+     properly and "tools.jar" is located at $JAVA_HOME/lib/tools.jar
+  
+  For the Parser GUI:
+  If you want to load models into the parser GUI other than those provided with
+  the distribution , I recommend using the XMI export in Gentleware's "Poseidon
+  for UML 3.0". I used the community edition, which can be obtained for the cost
+  of its download at http://www.gentleware.com/. Make sure your model's XMI file
+  does not containe diagram data (untag the corresponding option when saving XMI
+  file).
+
+
+  Conventions
+  -----------
+
+  In this document, the variable $BASE refers to the directory where you
+  unpacked the distribution jar file into. E. g. if you unpacked the toolkit
+  into /home/adam/ocl20, then $BASE would have the value "/home/adam/ocl20".
+
+
+  Build targets
+  -------------
+
+  There are four applications in the toolkit by now.
+
+  1. OCL2.0 Workbench
+     This software was written by Stefan Ocke for his diploma thesis. It provides
+     following functions:
+     a. loading metamodels into the repository using XMI
+     b. creation of OCL invariants for loaded metamodels
+     c. generating code for those invariants
+     d. loading of models and execution of generated code to check for compliance
+        with invariants
+
+  2. OCL2.0 Parser GUI
+     This software was written by Ansgar Konermann for his diploma thesis. It
+     provides a GUI to the OCL2.0 parser and allows:
+     a. editing, loading and saving of text files containing OCL2.0 constraints
+     b. parsing OCL2.0 constraints into a concrete syntax tree and visualizing
+        this tree
+     c. loading UML15 models to run attribute evaluation/AST generation against
+        (using XMI)
+     d. browse UML models in the repository (very basic browsing only)
+     e. running an attribute evaluator over the concrete syntax tree to create
+        the abstract syntax tree.
+        
+   3. OCL22SQL tool
+      This software was written by Florian Heidenreich for his student research
+      project (Grosser Beleg). It provides a GUI to create integrity views from 
+      textual OCL invariants and allows:
+      a. loading of OCL constraint files
+      b. loading UML15 models to run attribute evaluation/AST generation against
+         (using XMI)
+      c. choosing between different object-relational mapping schemes to create
+         DDL-scripts for table schemas and DDL-scripts for object views
+      d. generating of SQL integrity views from the AST
+      
+      Please note, that this tool doesn't support association classes and OCL 
+      operations over collections at the moment.
+      
+   4. UtilityTest 
+   	  This Software was written by Jordi Cabot Sagrera. It is an example 
+   	  how to use the Class Utility which provides some helper methods. Take a 
+   	  look at the classes UtilityTest and Utility if you plan to work directly on the 
+   	  repository. It is a text-based application, which uses the CarWorld-Model 
+   	  in /resources/PoseidonProjects.
+      
+
+   All applications share a common codebase. To faciliate building and running
+   them, there is an Ant script in $BASE/build.xml.
+
+   To build and run the OCL workbench, change working directory to $BASE and
+   type:
+
+        ant run.workbench
+
+   For the OCL2.0 parser GUI, change the working directory to $BASE and type:
+
+        ant run.parser-gui
+        
+   For the OCL22SQL tool, change the working directory to $BASE and type:
+   
+        ant run.ocl22sql
+        
+   For the UtilityTest, change the working directory to $BASE and type:
+   		
+   		ant run.utilityexample
+
+
+   OCL2.0 Workbench
+   ----------------
+
+   TODO: short introduction on how to work with the workbench
+
+
+   OCL2.0 Parser GUI
+   -----------------
+
+   To run the parser, load an OCL constraint file, say "OCL-Syntaxtest.ocl".
+   The application automatically switches over to the "CST" tab. Click button
+   "Parse (CS)" to parse the constraint into a concrete syntax tree.
+
+   The concrete syntax tree will be displayed. Click "Expand all" to expand all
+   tree nodes. If you want to have the CST visualized, click "Visualize". This 
+   will take a while. The GUI will switch to the "CST Viz" panel after when done.
+   
+   Next, load a model. Click the "Model" tab and import CarOwner.xmi. This will
+   again take a while. When done, you may switch to the "Repo" tab and click
+   "Browse Mdls". This will show all UML models in the repository. You can
+   expand package and classifier nodes. Button "Erase Mdl" has no function yet.
+
+   Click "ASTGen log", where you can find the logging output of the AST generator.
+   Click "Generate". It might result in an exception. If the log output suggests
+   to you that there's a problem with the parser, feel free to report it (see
+   section "Contact" below).
+   You can use "Clear" to clear the logging console. For the example file named
+   above, aside from some "not yet implemented" notes for attribute definitions,
+   the AST generation should complete successfully.
+
+   Press "Export XMI" to export the model including all the OCL constraints.
+   Select a descriptive name for your exported model (e. g. "CarOwner-WithOCL.xmi").
+   Export will again take a while. Default export directory is 
+        $BASE/resources/PoseidonProjects
+   Review the exported file with a text editor. Search for strings matching
+   "constraint". 
+
+   Report any violations of OCL2.0 AST generation rules to Ansgar Konermann.
+   Thank you. :o)
+   
+   
+   OCL22SQL tool
+   -----------------
+
+   First choose a project directory where the various *.sql files should be
+   generated to and choose a OCL constraint file, for example 
+   "university_example.ocl".
+   
+   Then choose the corresponding model as XMI, for example
+   "university_example.xmi".
+   
+   Select one of the three available mapping schemes for the object-relational
+   mapping and press "Execute Project". You'll notice some status messages
+   appearing on your console.
+   
+   After the text "Finished!" is displayed on the console, switch to the 
+   "Output" tab and have a look at the generated DDL and SQL code.
+   
+   
+   UtilityTest
+   -----------------
+   
+   For this Example you shoult take a look at the code to understand what 
+   is printed out during execution. 
+
+
+
+   Contact
+   -------
+
+   Report problems with the OCL parser to Ansgar Konermann. You can reach him
+   by email: ansgar at itikko dot net
+   
+   Report problems with the OCL22SQL tool to Florian Heidenreich. You can reach
+   him by email: mail at fheidenreich dot de
+
+   TODO: ask Stefan whether we may publish his email address here and which
+         address should be used
+         
+
+
+   Version information
+   -------------------
+   
+   Not versioned at the moment. Please check the CVS repository at
+    http://sourceforge.net/cvs/?group_id=5840
+   for the latest version of the toolkit.
+
+   

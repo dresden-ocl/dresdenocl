@@ -493,7 +493,9 @@
     <target name="jar.parsertools" 
         depends="init,init.mdr,jar.jmi.if,jar.jmi.impl,jar.ocl20repository,jar.ocl20stdlib,jar.sableparser,compile.parsertools"
         description="packs the OCL2.0 parser tools into a jar file" >
-        <jar basedir="${objdir.generic}" destfile="${jar.libs.parsertools}">
+        <jar 	basedir="${objdir.generic}" 
+        		destfile="${jar.libs.parsertools}"
+        		manifest="${dir.resources}/manifest/parsertools.manifest">
             <include name="tudresden/ocl20/core/parser/sablecc/**" />
             <include name="tudresden/ocl20/core/parser/**/*.class" />
             <include name="tudresden/ocl20/core/parser/*.class" />
@@ -582,7 +584,9 @@
 	<target name="jar.ocl22sql"
 		depends="init,init.mdr,jar.jmi.if,jar.jmi.impl,jar.ocl20repository,jar.ocl20stdlib,jar.sableparser,compile.parsertools,compile.ocl22sql"
 		description="packs the OCL22SQL tool into a jar file" >
-        <jar basedir="${objdir.generic}" destfile="${jar.libs.ocl22sql}">
+        <jar 	basedir="${objdir.generic}" 
+        	 	destfile="${jar.libs.ocl22sql}"
+        	 	manifest="${dir.resources}/manifest/ocl2sql.manifest">
 			<include name="tudresden/ocl20/codegen/sql/**" />
 		</jar>
 	</target>
@@ -784,7 +788,9 @@
         depends="init,compile.workbench"
         description="packs the OCL2.0 workbench into a jar file" >
         <mkdir dir="${objdir.generic}"/>
-        <jar basedir="${objdir.generic}" destfile="${jar.libs.workbench}">
+        <jar 	basedir="${objdir.generic}" 
+        		destfile="${jar.libs.workbench}"
+	        	manifest="${dir.resources}/manifest/workbench.manifest">
             <include name="tudresden/ocl20/workbench/*.class" />
         </jar>
     </target>
@@ -863,10 +869,64 @@
         <delete file="${file.svninfo}" />
     </target>
     
-    <target name="dist" depends="init,clean,svn.info"
-        description="Creates a minimal distribution jar file" >
+    <target name="dist" depends="init,jar"
+        description="Creates a binary and a source distribution package" >
         
-        <mkdir dir="${objdir.mdrlib.utils}/META-INF" />
+    	<!-- Binary files --> 
+    	<mkdir dir="${basedir}/dist/bin"/>
+    	<mkdir dir="${basedir}/dist/bin/lib/external"/>
+    	<mkdir dir="${basedir}/dist/bin/resources"/>
+    	<mkdir dir="${basedir}/dist/bin/scripts"/>
+    	<copy todir="${basedir}/dist/bin/resources">
+    		<fileset dir="${basedir}/resources"/>
+    	</copy>
+    	<copy todir="${basedir}/dist/bin">
+    		<fileset file="${jar.libs.ocl22sql}"/>
+       		<fileset file="${jar.libs.parsertools}"/>
+    		<fileset file="${jar.libs.workbench}"/>
+	   		<fileset file="${jar.libs.parsertools}"/>
+    		<fileset file="${jar.libs.sableparser}"/>
+    		<fileset file="${jar.libs.jmi-api}"/>
+    		<fileset file="${jar.libs.ocl20stdlib}"/>
+    		<fileset file="${jar.libs.ocl20repository}"/>
+    		<fileset file="${jar.libs.jmi-impl}"/>
+    		<fileset file="${jar.libs.oclscriptrunner}"/>
+    		<fileset file="${jar.libs.codegen.java}"/>
+    		<fileset file="${basedir}/GETTING-STARTED-bin"/>
+    	</copy>
+    	<copy todir="${basedir}/dist/bin/lib/external">
+    		<fileset file="${basedir}/lib/external/lib/jmi.jar"/>
+    		<fileset file="${basedir}/lib/external/lib/mof.jar"/>
+    		<fileset file="${basedir}/lib/external/lib/openide.jar"/>
+    		<fileset file="${basedir}/lib/external/mdr/nbjmi_mdrapi.jar"/>
+    		<fileset file="${basedir}/lib/external/mdr/nbjmi_mdrimpl.jar"/>
+			<fileset file="${basedir}/lib/external/mdr/nbjmi_jmiutils.jar"/>
+    		<fileset file="${basedir}/lib/external/xerces.jar"/>
+    		<fileset file="${basedir}/lib/external/jgraph.jar"/>
+    		<fileset file="${basedir}/lib/external/jgraphaddons.jar"/>
+    	</copy>
+    	<copy todir="${basedir}/dist/bin/scripts">
+			<fileset dir="${basedir}/scripts"/>
+    	</copy>
+    	
+    	<!-- Source files -->
+    	<mkdir dir="${basedir}/dist/src"/>
+    	<copy todir="${basedir}/dist/src">
+    		<fileset dir="${basedir}">
+    			<include name="src/**"/>
+    			<include name="generated_src/**"/>
+    			<include name="lib/external/**"/>
+    			<include name="resources/**"/>
+    			<exclude name="resources/repository/**"/>
+    			<exclude name="resources/MetamodelsWithOcl/**"/>
+    			<exclude name="resources/*"/>
+    			<include name="scripts/**"/>
+    			<include name="build.xml"/>
+    			<include name="GETTING-STARTED-src"/>
+    		</fileset>
+    	</copy>
+    	
+  <!--      <mkdir dir="${objdir.mdrlib.utils}/META-INF" />
 
         <copy todir="${basedir}" >
             <fileset file="${basedir}/whiteboard/GETTING-STARTED" />
@@ -880,9 +940,7 @@
         <jar basedir="${basedir}" destfile="${jar.distrib.basename}${svninfo.Revision}${jar.distrib.suffix}" update="false" >
             <include name="build/**" />
             <fileset dir="${basedir}">
-                <!-- <include name="doc/thesis/**/*.pdf" /> -->
-                <!-- <include name="doc/thesis/**/*.ppt" /> -->
-                <include name="resources/MOFMetamodel/**" />
+                 <include name="resources/MOFMetamodel/**" />
                 <include name="resources/Models/**" />
                 <include name="resources/OCLMetamodel/**" />
                 <include name="resources/OclScript/**" />
@@ -902,8 +960,7 @@
             </fileset>
             <include name="$(dir.software)/jgraph.jar" />
             <include name="$(dir.software)/jgraphaddons.jar" />
-            <!-- <include name="software/antlr.jar" /> -->
-	    <include name="$(dir.software)/README" />
+ 	    <include name="$(dir.software)/README" />
             <include name="$(dir.software)/sablecc.jar" />
             <include name="$(dir.software)/lib/*.jar" />
             <include name="src/**" />
@@ -914,7 +971,7 @@
             <exclude name="**/*.old" />
             <exclude name="**/.nb*" />
         </jar>
-        <delete file="${basedir}/GETTING-STARTED" />
+        <delete file="${basedir}/GETTING-STARTED" />-->
     </target>
 
     <target name="clean" depends="init"
@@ -944,6 +1001,7 @@
             <fileset dir="${dir.resources.ocleval}" />
             <fileset dir="${basedir}" includes="${jar.distrib}" />
         	<fileset dir="${objdir.base}" />
+        	<fileset dir="${basedir}/dist"/>
         </delete>
     </target>
     
