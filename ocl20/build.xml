@@ -869,9 +869,12 @@
         <delete file="${file.svninfo}" />
     </target>
     
-    <target name="dist" depends="init,jar"
+    <target name="dist" 
         description="Creates a binary and a source distribution package" >
-        
+        <!-- Cleaning and Building Project -->
+    	<ant antfile="build.xml" target="clean"/>
+    	<ant antfile="build.xml" target="jar"/>
+    	
     	<!-- Binary files --> 
     	<mkdir dir="${basedir}/dist/bin"/>
     	<mkdir dir="${basedir}/dist/bin/lib/external"/>
@@ -908,6 +911,8 @@
     	<copy todir="${basedir}/dist/bin/scripts">
 			<fileset dir="${basedir}/scripts"/>
     	</copy>
+    	<tar tarfile="${basedir}/dist/dresden-ocl2-2.0.tar" basedir="${basedir}/dist/bin"/>
+    	<gzip zipfile="${basedir}/dist/dresden-ocl2-2.0.tar.gz" src="${basedir}/dist/dresden-ocl2-2.0.tar"/>
     	
     	<!-- Source files -->
     	<mkdir dir="${basedir}/dist/src"/>
@@ -926,52 +931,16 @@
     		</fileset>
     	</copy>
     	
-  <!--      <mkdir dir="${objdir.mdrlib.utils}/META-INF" />
+    	<tar tarfile="${basedir}/dist/dresden-ocl2-src-2.0.tar" basedir="${basedir}/dist/bin"/>
+    	<gzip zipfile="${basedir}/dist/dresden-ocl2-src-2.0.tar.gz" src="${basedir}/dist/dresden-ocl2-src-2.0.tar"/>
 
-        <copy todir="${basedir}" >
-            <fileset file="${basedir}/whiteboard/GETTING-STARTED" />
-            <filterset begintoken="@@" endtoken="@@">
-                <filter token="REVISION" value="${svninfo.Revision}" />
-                <filter token="URL" value="${svninfo.URL}" />
-                <filter token="TODAY_ISO" value="${TODAY_ISO}" />
-                <filter token="NOW_ISO" value="${NOW_ISO}" />
-            </filterset>
-        </copy>
-        <jar basedir="${basedir}" destfile="${jar.distrib.basename}${svninfo.Revision}${jar.distrib.suffix}" update="false" >
-            <include name="build/**" />
-            <fileset dir="${basedir}">
-                 <include name="resources/MOFMetamodel/**" />
-                <include name="resources/Models/**" />
-                <include name="resources/OCLMetamodel/**" />
-                <include name="resources/OclScript/**" />
-                <include name="resources/TstMetamodel/**" />
-                <include name="resources/UML1.5Metamodel/**" />
-                <include name="resources/UMLSamples/**" />
-                <include name="resources/grammars/**" />
-                <include name="resources/constraints/**" />
-                <include name="resources/PoseidonProjects/**" />
-                <exclude name="**/*.old" />
-                <exclude name="**/*-old-*" />
-                <exclude name="resources/PoseidonProjects/*WithConstraints*.xm?" />
-                <exclude name="resources/grammars/historic/**" />
-                <exclude name="resources/grammars/*.g" />
-		<exclude name="resources/grammars/*.TSG" />
-                <exclude name="**/.nb*" />
-            </fileset>
-            <include name="$(dir.software)/jgraph.jar" />
-            <include name="$(dir.software)/jgraphaddons.jar" />
- 	    <include name="$(dir.software)/README" />
-            <include name="$(dir.software)/sablecc.jar" />
-            <include name="$(dir.software)/lib/*.jar" />
-            <include name="src/**" />
-            <include name="src_mdr/**" />
-            <include name="GETTING-STARTED" />
-	    <include name="build.xml" />
-            <exclude name="src/tudresden/ocl20/spectool/**" />
-            <exclude name="**/*.old" />
-            <exclude name="**/.nb*" />
-        </jar>
-        <delete file="${basedir}/GETTING-STARTED" />-->
+    	<!-- delete temporary files-->
+        <delete includeEmptyDirs="true" failonerror="false">
+		    <fileset dir="${basedir}/dist/bin" />
+        	<fileset dir="${basedir}/dist/src" />
+        	<fileset file="${basedir}/dist/*.tar"/>
+        </delete>
+
     </target>
 
     <target name="clean" depends="init"
