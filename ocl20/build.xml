@@ -907,6 +907,7 @@
     		<fileset file="${basedir}/lib/external/xerces.jar"/>
     		<fileset file="${basedir}/lib/external/jgraph.jar"/>
     		<fileset file="${basedir}/lib/external/jgraphaddons.jar"/>
+    		<fileset file="${basedir}/lib/external/LICENSE*"/>
     	</copy>
     	<copy todir="${basedir}/dist/bin/scripts">
 			<fileset dir="${basedir}/scripts"/>
