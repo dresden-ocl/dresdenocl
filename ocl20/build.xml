@@ -895,7 +895,7 @@
     		<fileset file="${jar.libs.jmi-impl}"/>
     		<fileset file="${jar.libs.oclscriptrunner}"/>
     		<fileset file="${jar.libs.codegen.java}"/>
-    		<fileset file="${basedir}/GETTING-STARTED-bin"/>
+    		<fileset file="${basedir}/GETTING-STARTED"/>
     	</copy>
     	<copy todir="${basedir}/dist/bin/lib/external">
     		<fileset file="${basedir}/lib/external/lib/jmi.jar"/>
@@ -928,7 +928,7 @@
     			<exclude name="resources/*"/>
     			<include name="scripts/**"/>
     			<include name="build.xml"/>
-    			<include name="GETTING-STARTED-src"/>
+    			<include name="GETTING-STARTED"/>
     		</fileset>
     	</copy>
     	
