@@ -1,5 +1,5 @@
 
-  GETTING STARTED WITH THE DRESDEN OCL TOOLKIT FOR OCL2.0
+  GETTING STARTED WITH THE DRESDEN OCL TOOLKIT FOR OCL2.0 (Source Release)
 
   This document is still in a very early stage and covers only the most basic
   information needed to get the toolkit running. If you encounter problems,
@@ -9,12 +9,14 @@
   Prerequisites
   -------------
 
-  To get the toolkit running, you need:
-  1. Jakarta Ant (I used Ant 1.6.2. For other versions, your mileage may vary).
-  2. Java SDK 1.4 (I used Sun's J2SDK 1.4.2_05 on Linux Slackware 9.1).
-     Java SDK 1.5 to compile the OCL22SQL tool.
-  3. Make sure that your system's environment variable $JAVA_HOME is set 
+  To get the toolkit running from a binary release, you need:
+  1. Java JRE 1.5
+  2. Make sure that your system's environment variable $JAVA_HOME is set 
      properly and "tools.jar" is located at $JAVA_HOME/lib/tools.jar
+  
+  To get the toolkit running from source code, you additionally need:
+  1. Jakarta Ant (I used Ant 1.6.2. For other versions, your mileage may vary).
+  2. Java SDK 1.5
   
   For the Parser GUI:
   If you want to load models into the parser GUI other than those provided with
@@ -87,19 +89,22 @@
    To build and run the OCL workbench, change working directory to $BASE and
    type:
 
-        ant run.workbench
+        ant run.workbench (for source releases)
+        java -jar ocl20workbench.jar (for binary releases)
 
    For the OCL2.0 parser GUI, change the working directory to $BASE and type:
 
-        ant run.parser-gui
+        ant run.parser-gui (for source releases)
+        java -jar ocl20parsertools.jar (for binary releases)
         
    For the OCL22SQL tool, change the working directory to $BASE and type:
    
-        ant run.ocl22sql
+        ant run.ocl22sql (for source releases)
+        java -jar ocl22sql.jar (for binary releases)
         
    For the UtilityTest, change the working directory to $BASE and type:
    		
-   		ant run.utilityexample
+   		ant run.utilityexample (only for source releases)
 
 
    OCL2.0 Workbench
