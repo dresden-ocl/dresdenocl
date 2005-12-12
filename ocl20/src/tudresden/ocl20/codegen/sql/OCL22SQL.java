@@ -92,7 +92,6 @@ public class OCL22SQL extends JPanel implements ActionListener {
 	private JButton jBtnLoadConstraints;
 	private JButton jBtnLoadProject;
 	private JButton jBtnLoadXmi;
-	private JButton jBtnParseXmi;
     
 	private JFrame jMainFrame;
 	
