@@ -53,7 +53,7 @@ public class MetaModelHelper {
 	/**
 	 * Constant which contains all type names which are considered as Java types by the OCL22SQL tool 
 	 */
-	public static final String JAVATYPES = "Bag(OclAny) boolean boolean[] Boolean Byte Character Collection(OclAny) Color Date Double float Float Hashtable int Integer Long OclAny OclState OclVoid Point Real Rectangle Sequence(OclAny) Set(OclAny) Stack String Vector char void";
+	public static final String JAVATYPES = "Bag(OclAny) boolean boolean[] Boolean byte byte[] Byte char char[] Character Collection(OclAny) Color Date double double[] Double float float[] Float Hashtable int int[] Integer long long[] Long OclAny OclState OclVoid Point Real Rectangle Sequence(OclAny) Set(OclAny) Stack String Vector void";
 
 	/**
 	 * Returns true, if all AssiciationEnds of the given Association a are multiple (m:n)
