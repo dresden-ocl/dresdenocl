@@ -43,13 +43,18 @@ import tudresden.ocl20.core.util.ReflectiveVisitor;
  * of OCL invariants to SQL code is done by the class CodeAgent.
  * 
  * @author Florian Heidenreich
- * @see tudresden.ocl20.sql.codegen.CodeAgent
- * @see tudresden.ocl20.sql.codegen.ObjectViewSchema
+ * @see tudresden.ocl20.codegen.sql.codegen.CodeAgent
+ * @see tudresden.ocl20.codegen.sql.codegen.ObjectViewSchema
  */
 public class SQLCodeGenerator extends ReflectiveVisitor {
 	
-	/** default context alias name*/
-	private final static String ALIAS = "SELF";
+	private static final String SEQNO = "SEQNO";
+
+	private final String ALIAS = "TA";
+	
+	private int aliasCount = 0;
+	
+	private List<String> aliasList;
 
 	/** CodeAgent to create parameterized SQL code templates */
 	private CodeAgent codeAgent;
@@ -59,25 +64,20 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	
 	/** name of the current constraint */
     private String constraintName;
-
+	
 	/** Set of tables involved with the current constraint */
 	private Set<String> involvedTables;
 	
-	/** flag for output of debug messages. This can be removed later */
-	private boolean isDebug = false;
-	
 	/** counter to create unique join aliases */
 	private int joinAliasCount = 0;
-	
 	/**
 	 * true if classic column joins should be generated, false if derived tables are needed.
 	 * At the moment only derived tables are well tested.
      */
     private boolean joinMode = false;
-	
 	/** holds the current code necessary for table navigation */
 	private String joinRepresentation;
-	private String tableRepresentation;
+	
 	private String joinTargetObject;
 	
 	/** true if the integrity query specifies the primary key for the constrained table, false otherwise */
@@ -86,6 +86,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	/** Mapping between OclExpression instances and their corresponding navigation guides */
 	private Map<OclExpression, List<Guide>> navigation;
 	
+	private String tableRepresentation;
 	/** object relational mapping scheme */
 	private ORMappingScheme theMap;
 	
@@ -93,12 +94,14 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * Creates a new SQLCodeGenerator. 
 	 * 
 	 * @param rules an URL of the file containing the mapping rules
-	 * @see tudresden.ocl20.sql.codegen.CodeAgent
+	 * @see tudresden.ocl20.codegen.sql.codegen.CodeAgent
 	 */
 	public SQLCodeGenerator(String rules) {
 		super("transform");
 		reset();
 		codeAgent = new CodeAgent(rules);
+		aliasList = new LinkedList<String>();
+		aliasList.add(getUniqueAlias());
 	}
 	
 	/**
@@ -120,7 +123,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		}
 		
 		// this instanceof switching is a little bit ugly. A special visitor can be used later		
-		if (exp instanceof AttributeCallExp || exp instanceof AssociationEndCallExp) {
+		if (exp instanceof AttributeCallExp || exp instanceof AssociationEndCallExp || exp instanceof AssociationClassCallExp) {
 			
 			OclExpression next = null;
 						
@@ -134,10 +137,12 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 				next = ae.getSource();
 				featureName = ae.getReferredAssociationEnd().getNameA();
 				startType = next.getType().getNameA();				
+			} else if (exp instanceof AssociationClassCallExp) {
+				AssociationClassCallExp acc = (AssociationClassCallExp)exp;
+				next = acc.getSource();
+				featureName = acc.getReferredAssociationClass().getNameA();
+				startType = next.getType().getNameA();
 			}
-			
-			debug(featureName);
-			debug(startType);
 			
 			startFeature = featureName;
 			
@@ -150,11 +155,9 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
             try {
             	if (mc.isAttribute(featureName)) {
 					guide = mc.getAttributeGuide(featureName);
-					debug(guide);
 					guides.add(guide);
             	} else if (mc.isAssociationEnd(featureName)) {
 					guide = mc.getJoinGuide(featureName);
-					debug(guide);
 					guides.add(guide);
             	}
             } catch(NullPointerException e) {
@@ -164,7 +167,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		
 			int i = 0;
 			
-			while (next != null && (next instanceof AttributeCallExp || next instanceof AssociationEndCallExp)) {
+			while (next != null && (next instanceof AttributeCallExp || next instanceof AssociationEndCallExp || next instanceof AssociationClassCallExp)) {
 				
 				OclExpression tmpNext = null;
 				
@@ -178,10 +181,12 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 					tmpNext = ae.getSource();
 					featureName = ae.getReferredAssociationEnd().getNameA();
 					startType = tmpNext.getType().getNameA();				
+				} else if (exp instanceof AssociationClassCallExp) {
+					AssociationClassCallExp acc = (AssociationClassCallExp)exp;
+					tmpNext = acc.getSource();
+					featureName = acc.getReferredAssociationClass().getNameA();
+					startType = tmpNext.getType().getNameA();
 				}
-				
-				debug(featureName);
-				debug(startType);
 				
 				mc = theMap.getMappedClass(startType);
 				
@@ -189,15 +194,11 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 					// next feature is an attribute
 					guide = mc.getAttributeGuide(featureName);
 					if (i == 0) guide.setAlias(startFeature.toUpperCase());
-					debug(guide);
 					guides.add(guide);    
-					
-					// TODO: add special handling of complex attributes here
 				} else if (mc.isAssociationEnd(featureName)) {
 					// next feature navigates to an association end
 					guide = mc.getJoinGuide(featureName);
 					if (i == 0) guide.setAlias(startFeature.toUpperCase());
-					debug(guide);
 					guides.add(guide);
 					mc = mc.getAssociationEnd(featureName);                                        
 				}
@@ -216,7 +217,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			
 			// assign alias to last element
 			if (next == null || next instanceof VariableExp) {
-				guide.setAlias(ALIAS);
+				guide.setAlias(aliasList.get(aliasList.size()-1));
 			}
 			
 			// if no source exists, assign the guides list to the original expression
@@ -227,6 +228,34 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			
 			updateInvolvedTables(guides);
 		}
+	}
+	
+	/**
+	 * This helper method creates a Guide for a given static Classifier
+	 * @param type the Classifier for which the Guide is to be created
+	 * @return the Guide for the given static Classifier
+	 */
+	private ArrayList<Guide> createGuidesForClassifier(Classifier type) {
+		ArrayList<Guide> guides = new ArrayList<Guide>();
+		Guide g = new Guide(false);
+		MappedClass mc = theMap.getMappedClass(type.getNameA());
+		
+		String objects = "", tables = "";
+		for (Table t : mc.getTables()) {
+			tables += t.getTableName() + ", ";
+			objects += t.getPrimaryKeyRepresentation() + ", ";
+		}
+		if (tables.length() > 0) {
+			tables = tables.substring(0, tables.length() - 2);
+		}
+		if (objects.length() > 0) {
+			objects = objects.substring(0, objects.length() - 2);
+		}
+		
+		g.add(objects, tables, "");	
+		guides.add(g);
+		
+		return guides;
 	}
 		
 	/**
@@ -249,7 +278,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
         return result.toString();
     }
 	
-	/**
+    /**
 	 * Generates SQL Code for an OclExpression.
 	 * 
 	 * @param exp the OclExpression
@@ -257,19 +286,21 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
     public String getCode(OclExpression exp) {
         StringBuffer result = new StringBuffer("");
 		
-		try {
-			result.append((String) visit(exp));
-		} catch (NoSuchMethodException e) {
-			// some  method is missing in the visitor implementation
-			e.printStackTrace();
-		} catch (java.lang.reflect.InvocationTargetException e) {
-			e.getTargetException().printStackTrace();
-		}
+        if (exp != null) {
+			try {
+				result.append((String) visit(exp));
+			} catch (NoSuchMethodException e) {
+				// some  method is missing in the visitor implementation
+				e.printStackTrace();
+			} catch (java.lang.reflect.InvocationTargetException e) {
+				e.getTargetException().printStackTrace();
+			}
+        }
 
         return result.toString();
     }
 	
-    /**
+	/**
      *  Returns a string that contains all join definitions to put into a where clause.
      *  puplic for use in TestCases.
      *  
@@ -278,7 +309,32 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	public String getJoinRepresentation() {
 		return joinRepresentation;
 	}
-	
+
+	private Table getOclSupertypeTable(Classifier type) throws IllegalStateException {
+    	MappedClass mc = theMap.getMappedClass(type.getNameA());            
+        
+        if (mc.supertypes().size() == 0) return null; 
+        if (mc.supertypes().size() > 1) {
+        	throw new IllegalStateException("Illegal number of supertypes for type: " + type.getNameA() + " !");
+        }
+        mc = theMap.getMappedClass((String)mc.supertypes().iterator().next());
+        if (mc.getTables().size() != 1) {
+        	throw new IllegalStateException("Illegal number of class tables for supertype of: " + type.getNameA() + " !");            
+        }
+                                
+        return mc.getTables().get(0);
+    }
+
+	private Table getOclTypeTable(Classifier type) throws IllegalStateException {
+    	MappedClass mc = theMap.getMappedClass(type.getNameA());
+        
+    	if (mc == null || mc.getTables().size() != 1) {
+    		throw new IllegalStateException("Illegal number of class tables for type: " + type.getNameA() + " !");
+    	}
+                                
+        return mc.getTables().get(0);
+    }
+
 	/**
      *  Returns a String that contains all tables for a classic join to put into a from clause
      *  puplic for use in TestCases.
@@ -287,6 +343,20 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
      */
 	public String getTableRepresentation() {
 		return tableRepresentation;
+	}
+
+	/**
+	 * @return a unique table alias for use in the SQL code
+	 */
+	private String getUniqueAlias() {
+		if (aliasCount == 0) {
+			aliasCount++;
+			return "SELF";
+		} else {
+			String result = ALIAS + aliasCount;
+			aliasCount++;
+			return result;
+		}
 	}
 
 	/**
@@ -299,7 +369,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleAddMinus(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Additive expression - needs exactly one argument";
+		assert(args.size() == 1) : "Additive expression - needs exactly one argument";
 		
 		codeAgent.setArgument("mult_exp_1", codeSrcExp);
 		codeAgent.setArgument("mult_exp_2", args.get(0));
@@ -317,7 +387,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleAddPlus(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Additive expression + needs exactly one argument";
+		assert(args.size() == 1) : "Additive expression + needs exactly one argument";
 		
 		codeAgent.setArgument("mult_exp_1", codeSrcExp);
 		codeAgent.setArgument("mult_exp_2", args.get(0));
@@ -325,6 +395,247 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		spec.append("plus");		
 	}
 
+	private void handleAllInstances(Guide g, StringBuffer rule, StringBuffer spec) {
+		codeAgent.reset();
+		codeAgent.setArgument("object", g.getSelect());
+		codeAgent.setArgument("tables", g.getFrom());
+		
+		rule.append("feature_call");
+		spec.append("allInstances");
+	}
+
+	private void handleCollCount(String codeSrcExp, Guide guide, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "count() needs exactly one argument";
+		assert(guide != null) : "count(): guide may not be null";
+		
+		guide.reset();
+		guide.next();
+		
+		codeAgent.reset();
+		codeAgent.setArgument("table", guide.getFrom());
+        codeAgent.setArgument("element", guide.getSelect());
+        codeAgent.setArgument("collection", codeSrcExp);
+        codeAgent.setArgument("object", args.get(0));
+		rule.append("feature_call");
+		spec.append("count");	
+	}
+
+	private void handleCollExcludes(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "excludes() needs exactly one argument";
+		
+		codeAgent.reset();
+		codeAgent.setArgument("object", args.get(0));
+		codeAgent.setArgument("collection", codeSrcExp);
+		
+		rule.append("feature_call");
+		spec.append("excludes");
+	}
+	
+	private void handleCollExcludesAll(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "excludesAll() needs exactly one argument";
+		
+		codeAgent.reset();
+		codeAgent.setArgument("collection", codeSrcExp);
+		codeAgent.setArgument("collection2", args.get(0));
+		
+		rule.append("feature_call");
+		spec.append("excludesAll");		
+	}
+	
+	private void handleCollExcluding(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "excluding() needs exactly one argument";
+		assert(spec.length() > 0) : "excluding() spec is empty (should be set or bag)";
+		
+		codeAgent.reset();
+		codeAgent.setArgument("object", args.get(0));
+		codeAgent.setArgument("collection", codeSrcExp);
+		
+		rule.append("feature_call");
+		spec.append("_excluding");		
+	}
+	
+	private void handleCollExists(String codeSrcExp, Guide guide, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "exists() needs exactly one argument";
+		assert(guide != null) : "exists(): guide may not be null";
+		
+		guide.reset();
+		guide.next();
+			
+		codeAgent.reset();
+		codeAgent.setArgument("table", guide.getFrom());
+        codeAgent.setArgument("object", guide.getSelect());
+        codeAgent.setArgument("collection", codeSrcExp);
+        codeAgent.setArgument("expression", args.get(0));
+		rule.append("feature_call");
+		spec.append("exists");
+	}
+	
+	private void handleCollIncludes(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "includes() needs exactly one argument";
+		
+		codeAgent.reset();
+		codeAgent.setArgument("object", args.get(0));
+		codeAgent.setArgument("collection", codeSrcExp);
+		
+		rule.append("feature_call");
+		spec.append("includes");
+	}
+
+	private void handleCollIncludesAll(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "includesAll() needs exactly one argument";
+		
+		codeAgent.reset();
+		codeAgent.setArgument("collection", codeSrcExp);
+		codeAgent.setArgument("collection2", args.get(0));
+		
+		rule.append("feature_call");
+		spec.append("includesAll");
+	}
+
+	private void handleCollIncluding(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1): "including() needs exactly one argument";
+		assert(spec.length() > 0): "including() spec is empty (should be set or bag)";
+		
+		codeAgent.reset();
+		codeAgent.setArgument("object", args.get(0));
+		codeAgent.setArgument("collection", codeSrcExp);
+		
+		rule.append("feature_call");
+		spec.append("_including");		
+	}
+
+	private void handleCollIntersection(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1): "intersection() needs exactly one argument";
+		assert(spec.length() > 0): "intersection() spec is empty (should be set or bag)";
+		
+		codeAgent.reset();
+		codeAgent.setArgument("collection", args.get(0));
+		codeAgent.setArgument("collection2", codeSrcExp);
+		
+		rule.append("feature_call");
+		spec.append("_intersection");
+		
+	}
+	
+	private void handleCollIsEmpty(String codeSrcExp, StringBuffer rule, StringBuffer spec) {
+		codeAgent.reset();
+        codeAgent.setArgument("collection", codeSrcExp);
+		rule.append("feature_call");
+		spec.append("isEmpty");
+	}
+	
+	private void handleCollNotEmpty(String codeSrcExp, StringBuffer rule, StringBuffer spec) {
+		codeAgent.reset();
+		codeAgent.setArgument("collection", codeSrcExp);
+		rule.append("feature_call");
+		spec.append("notEmpty");
+	}
+	
+	private void handleCollSize(String codeSrcExp, Guide guide, StringBuffer rule, StringBuffer spec) {
+		assert(guide != null) : "size(): guide may not be null";
+		guide.reset();
+		guide.next();
+			
+		codeAgent.reset();
+		codeAgent.setArgument("table", guide.getFrom());
+        codeAgent.setArgument("element", guide.getSelect());
+        codeAgent.setArgument("collection", codeSrcExp);
+		rule.append("feature_call");
+		spec.append("size");
+	}
+
+	private void handleCollSum(String codeSrcExp, Guide guide, StringBuffer rule, StringBuffer spec) {
+		assert(guide != null) : "sum(): guide may not be null";
+		guide.reset();
+		guide.next();
+		
+		codeAgent.reset();
+		codeAgent.setArgument("table", guide.getFrom());
+        codeAgent.setArgument("element", guide.getSelect());
+        codeAgent.setArgument("collection", codeSrcExp);
+		rule.append("feature_call");
+		spec.append("sum");
+	}
+		
+	private void handleCollSymmetricDifference(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "symmetricDifference() needs exactly one argument";
+		
+		codeAgent.reset();
+		codeAgent.setArgument("collection", args.get(0));
+		codeAgent.setArgument("collection2", codeSrcExp);
+		
+		rule.append("feature_call");
+		spec.append("symmetricDifference");
+		
+	}
+        
+    private void handleCollUnion(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "union() needs exactly one argument";
+		assert(spec.length() > 0) : "union() spec is empty (should be set or bag)";
+		
+		codeAgent.reset();
+		codeAgent.setArgument("collection", args.get(0));
+		codeAgent.setArgument("collection2", codeSrcExp);
+		
+		rule.append("feature_call");
+		spec.append("_union");
+		
+	}
+	
+	private void handleIterCollect(String codeSrcExp, List<Guide> guides, List<String> args, StringBuffer rule, StringBuffer spec) {
+		codeAgent.setArgument("expression", "<collect>");
+		rule.append("feature_call");
+		spec.append("collect");
+	}
+	
+	private void handleIterForAll(String codeSrcExp, Guide guide, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "forAll() needs exactly one argument";
+		assert(guide != null) : "forAll(): guide may not be null";
+		
+		guide.reset();
+		guide.next();
+		
+		codeAgent.reset();
+		codeAgent.setArgument("table", guide.getFrom() + " " + aliasList.get(aliasList.size()-1));
+        codeAgent.setArgument("object", guide.getSelect());
+        codeAgent.setArgument("collection", codeSrcExp);
+        codeAgent.setArgument("expression", args.get(0));
+		rule.append("feature_call");
+		spec.append("forAll");
+	}
+	
+	private void handleIterReject(String codeSrcExp, Guide guide, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "reject() needs exactly one argument";
+		assert(guide != null) : "reject(): guide may not be null";
+		
+		guide.reset();
+		guide.next();
+			
+		codeAgent.reset();
+		codeAgent.setArgument("table", guide.getFrom() + " " + aliasList.get(aliasList.size()-1));
+        codeAgent.setArgument("object", guide.getSelect());
+        codeAgent.setArgument("collection", codeSrcExp);
+        codeAgent.setArgument("expression", args.get(0));
+		rule.append("feature_call");
+		spec.append("reject");
+	}
+	
+	private void handleIterSelect(String codeSrcExp, Guide guide, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "select() needs exactly one argument";
+		assert(guide != null) : "select(): guide may not be null";
+		
+		guide.reset();
+		guide.next();
+			
+		codeAgent.reset();
+		codeAgent.setArgument("table", guide.getFrom() + " " + aliasList.get(aliasList.size()-1));
+        codeAgent.setArgument("object", guide.getSelect());
+        codeAgent.setArgument("collection", codeSrcExp);
+        codeAgent.setArgument("expression", args.get(0));
+		rule.append("feature_call");
+		spec.append("select");
+	}
+	
 	/**
 	 * Parameterizes the CodeAgent for a logical and operation
 	 * 
@@ -335,14 +646,14 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleLogAnd(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Logical expression and needs exactly one argument";
+		assert(args.size() == 1) : "Logical expression and needs exactly one argument";
 		
 		codeAgent.setArgument("rel_exp_1", codeSrcExp);
 		codeAgent.setArgument("rel_exp_2", args.get(0));	
 		rule.append("logical_expression_tail");
 		spec.append("and");		
 	}
-
+	
 	/**
 	 * Parameterizes the CodeAgent for a logical or operation
 	 * 
@@ -353,14 +664,14 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleLogOr(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Logical expression or needs exactly one argument";
+		assert(args.size() == 1) : "Logical expression or needs exactly one argument";
 		
 		codeAgent.setArgument("rel_exp_1", codeSrcExp);
 		codeAgent.setArgument("rel_exp_2", args.get(0));	
 		rule.append("logical_expression_tail");
 		spec.append("or");		
 	}
-
+	
 	/**
 	 * Parameterizes the CodeAgent for a logical xor operation
 	 * 
@@ -371,14 +682,14 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleLogXor(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Logical expression xor needs exactly one argument";
+		assert(args.size() == 1) : "Logical expression xor needs exactly one argument";
 		
 		codeAgent.setArgument("rel_exp_1", codeSrcExp);
 		codeAgent.setArgument("rel_exp_2", args.get(0));	
 		rule.append("logical_expression_tail");
 		spec.append("xor");		
 	}
-
+	
 	/**
 	 * Parameterizes the CodeAgent for a divide operation
 	 * 
@@ -389,14 +700,14 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleMultDiv(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Multiplicative expression / needs exactly one argument";
+		assert(args.size() == 1) : "Multiplicative expression / needs exactly one argument";
 		
 		codeAgent.setArgument("un_exp_1", codeSrcExp);
 		codeAgent.setArgument("un_exp_2", args.get(0));
 		rule.append("multiplicative_expression_tail");
 		spec.append("div");		
 	}
-
+	
 	/**
 	 * Parameterizes the CodeAgent for a multiply operation
 	 * 
@@ -407,14 +718,40 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleMultMult(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Multiplicative expression * needs exactly one argument";
+		assert(args.size() == 1) : "Multiplicative expression * needs exactly one argument";
 		
 		codeAgent.setArgument("un_exp_1", codeSrcExp);
 		codeAgent.setArgument("un_exp_2", args.get(0));
 		rule.append("multiplicative_expression_tail");
 		spec.append("mult");
 	}
+	
+	private void handleOclIsKindOf(Table typeTable, StringBuffer rule, StringBuffer spec) {
+		codeAgent.reset();
+		codeAgent.setArgument("table", typeTable.getTableName());
+        codeAgent.setArgument("object", typeTable.getPrimaryKeyRepresentation());
+        codeAgent.setArgument("context_object", aliasList.get(aliasList.size()-1) + "." + typeTable.getPrimaryKeyRepresentation());
+		rule.append("feature_call");
+		spec.append("oclIsKindOf");		
+	}
 
+	private void handleOclIsTypeOf(Table typeTable, Table superTypeTable, StringBuffer rule, StringBuffer spec) {
+		codeAgent.reset();
+		codeAgent.setArgument("table", typeTable.getTableName());
+        codeAgent.setArgument("object", typeTable.getPrimaryKeyRepresentation());
+        codeAgent.setArgument("context_object", aliasList.get(aliasList.size()-1) + "." + typeTable.getPrimaryKeyRepresentation());
+						
+		if (superTypeTable == null) {
+            codeAgent.setArgument("table2", "foo"); 
+        } else {
+            codeAgent.enableConnector();
+            codeAgent.setArgument("table2", superTypeTable.getTableName()); 
+        }
+		
+		rule.append("feature_call");
+		spec.append("oclIsTypeOf");		
+	}
+	
 	/**
 	 * Parameterizes the CodeAgent for a relational equals operation
 	 * 
@@ -426,7 +763,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleRelEquals(OclExpression srcExp, String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Relational expression = needs exactly one argument";
+		assert(args.size() == 1) : "Relational expression = needs exactly one argument";
 		
 		Classifier attrType = null;
 		
@@ -446,7 +783,6 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			} else if (attrType.getNameA().equals("Integer") || 
 				attrType.getNameA().equals("Real") ||
 				attrType.getNameA().equals("String") ||
-				// TODO: Not sure about Enumeration, maybe it's Enum
 				attrType.getNameA().equals("Enumeration"))
 			{
 				spec.append("equal_IntRealStringEnum"); 
@@ -483,7 +819,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleRelGreater(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Relational expression > needs exactly one argument";
+		assert(args.size() == 1) : "Relational expression > needs exactly one argument";
 		
 		codeAgent.setArgument("add_exp_1", codeSrcExp);
 		codeAgent.setArgument("add_exp_2", args.get(0));
@@ -501,7 +837,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleRelGreaterEqual(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Relational expression >= needs exactly one argument";
+		assert(args.size() == 1) : "Relational expression >= needs exactly one argument";
 		
 		codeAgent.setArgument("add_exp_1", codeSrcExp);
 		codeAgent.setArgument("add_exp_2", args.get(0));
@@ -519,7 +855,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleRelImplies(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Logical expression implies needs exactly one argument";
+		assert(args.size() == 1) : "Logical expression implies needs exactly one argument";
 		
 		codeAgent.setArgument("rel_exp_1", codeSrcExp);
 		codeAgent.setArgument("rel_exp_2", args.get(0));	
@@ -537,7 +873,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleRelLesser(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Relational expression < needs exactly one argument";
+		assert(args.size() == 1) : "Relational expression < needs exactly one argument";
 		
 		codeAgent.setArgument("add_exp_1", codeSrcExp);
 		codeAgent.setArgument("add_exp_2", args.get(0));
@@ -555,14 +891,14 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleRelLesserEqual(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Relational expression <= needs exactly one argument";
+		assert(args.size() == 1) : "Relational expression <= needs exactly one argument";
 		
 		codeAgent.setArgument("add_exp_1", codeSrcExp);
 		codeAgent.setArgument("add_exp_2", args.get(0));
 		rule.append("relational_expression_tail");
 		spec.append("lteq");
 	}
-	
+
 	/**
 	 * Parameterizes the CodeAgent for a relational not-equal operation
 	 * 
@@ -574,7 +910,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	 * @pre args.size()==1
 	 */
 	private void handleRelNEquals(OclExpression srcExp, String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
-		assert(args.size()==1): "Relational expression <> needs exactly one argument";
+		assert(args.size() == 1) : "Relational expression <> needs exactly one argument";
 		
 		if (srcExp instanceof AttributeCallExp) {
 			Classifier attrType = ((AttributeCallExp)srcExp).getReferredAttribute().getTypeA();
@@ -591,6 +927,45 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		codeAgent.setArgument("add_exp_2", args.get(0));
 		rule.append("relational_expression_tail");
 		
+	}
+	
+	private void handleSequenceExcluding(String codeSrcExp, List<String> args, Guide guide, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "excluding() needs exactly one argument";
+		guide.reset();
+		guide.next();
+		codeAgent.reset();
+		codeAgent.setArgument("seqNo", SEQNO);
+		codeAgent.setArgument("seqNo2", SEQNO);
+		codeAgent.setArgument("sequence", codeSrcExp);
+		codeAgent.setArgument("object", args.get(0));
+		codeAgent.setArgument("element", guide.getSelect());
+		rule.append("feature_call");
+		spec.append("sequence_excluding");		
+	}
+
+	private void handleSequenceIncluding(String codeSrcExp, List<String> args, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1) : "including() needs exactly one argument";
+		codeAgent.reset();
+		codeAgent.setArgument("seqNo", SEQNO);
+		codeAgent.setArgument("seqNo2", SEQNO);
+		codeAgent.setArgument("sequence", codeSrcExp);
+		codeAgent.setArgument("object", args.get(0));
+		rule.append("feature_call");
+		spec.append("sequence_including");		
+	}
+
+	private void handleSequenceUnion(String codeSrcExp, List<String> args, Guide guide, StringBuffer rule, StringBuffer spec) {
+		assert(args.size() == 1): "union() needs exactly one argument";
+		guide.reset();
+		guide.next();
+		codeAgent.reset();
+		codeAgent.setArgument("seqNo", SEQNO);
+		codeAgent.setArgument("seqNo2", SEQNO);
+		codeAgent.setArgument("sequence", codeSrcExp);
+		codeAgent.setArgument("sequence2", args.get(0));
+		codeAgent.setArgument("element", guide.getSelect());
+		rule.append("feature_call");
+		spec.append("sequence_union");
 	}
 	
 	/**
@@ -620,7 +995,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		rule.append("unary_expression");
 		spec.append("not");		
 	}
-		
+	
 	/**
 	 * Prepares a classic join navigation (currently not well tested)
 	 * 
@@ -710,8 +1085,8 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		    throw new RuntimeException("navigation_classic: " + e.toString());
 		}                                                                                   
 	}
-        
-    /**
+	
+	/**
 	 * Prepares a navigation statement using derived tables
 	 * 
 	 * @pre guides.size() > 1
@@ -789,7 +1164,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
             prepareDerivedTable(guides);
         }           
     }
-	
+
 	/**
 	 * A replacement method for Strings.
 	 * 
@@ -810,7 +1185,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 
 		return sourceBuffer.toString();
 	}
-	
+
 	/**
 	 *  Resets the SQLCodeGenerator object to initial values.
      *  Must be used, if multiple invariants will be translated 
@@ -823,7 +1198,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		joinAliasCount = 0;
 		navigation = new HashMap<OclExpression, List<Guide>>();
 	}
-	
+
 	/**
 	 * Sets the object relational mapping scheme used by the code generator.
 	 * 
@@ -833,6 +1208,36 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		theMap = orm;
 	}
 	
+	/**
+	 * Generates a code fragment for the given OclExpression
+	 * 
+	 * @param exp expression to generate code for
+	 * @return a SQL code fragment for this expression 
+	 */
+	public String transform(AssociationClassCallExp exp) {
+		/* StringBuffer result = new StringBuffer();
+		
+		assignGuides(exp);
+		
+		List<Guide> guides = navigation.get(exp);
+		Guide guide;
+		if (guides != null) {
+			guide = (Guide)guides.get(0);
+            guide.reset();
+            guide.next();
+			
+			if (guide.isNavigation()) {	
+	            // navigation only
+	            prepareNavigation(guides);
+	            result.append(tableRepresentation);
+			}
+		}
+		
+		return result.toString();*/
+		
+		return "! Association Classes not supported !";
+	}
+
 	/**
 	 * Generates a code fragment for the given OclExpression
 	 * 
@@ -872,12 +1277,6 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		
 		assignGuides(exp);
 			
-		// this block is commented out, because we already
-		// assign the guides for the complete source hierarchy for this object 
-/*		if (exp.getSource() != null) {
-			result.append(getCode(exp.getSource()));
-		}*/
-		
 		List<Guide> guides = navigation.get(exp);
 		Guide guide;
 		if (guides != null) {
@@ -895,6 +1294,18 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 					result.append(codeAgent.getCodeFor("feature_call", "attribute_context"));
 				} catch (Exception e) {
 					throw new RuntimeException("attribute_context at feature primary expression: " + e.toString());
+				}
+				
+				// special case for Boolean attributes: (expand 'attribute' to 'attribute = 1')
+				if (exp.getReferredAttribute().getTypeA().getNameA().equals("Boolean")) {
+					codeAgent.reset();
+	                codeAgent.setArgument("attribute", result.toString());
+	                try {
+	                	result = new StringBuffer();
+						result.append(codeAgent.getCodeFor("feature_call", "attribute_boolean"));
+					} catch (Exception e) {
+						throw new RuntimeException("attribute_boolean: " + e.toString());
+					}
 				}
 			} else {
 				// attribute access with navigation
@@ -930,7 +1341,50 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		
 		return result.toString();
 	}
-	
+
+	/**
+	 * Generates a code fragment for the given OclExpression
+	 * 
+	 * @param exp expression to generate code for
+	 * @return a SQL code fragment for this expression 
+	 */
+	public String transform(CollectionLiteralExp exp) {
+		StringBuffer result = new StringBuffer("");
+		String spec = "";
+		
+		if (exp.getKind() == CollectionKindEnum.BAG) {
+			spec = "bag";
+		} else if (exp.getKind() == CollectionKindEnum.SET) {
+			spec = "set";
+		} else if (exp.getKind() == CollectionKindEnum.SEQUENCE) {
+			spec = "sequence";
+		} else {
+			assert(false): "Unknown CollectionKind";
+		}
+		
+		// evaluate the parts
+		List parts = exp.getParts();
+        for(int i = 0; i < parts.size(); i++) {
+        	codeAgent.reset();
+        	codeAgent.setArgument("value", getCode((OclExpression) ((CollectionItem) parts.get(i)).getItem()));
+        	
+        	if (exp.getKind() == CollectionKindEnum.SEQUENCE) {
+				codeAgent.setArgument("seqnr", i + 1 + "");
+			}
+        	
+        	try {
+				if (result.length() != 0) {
+					codeAgent.enableConnector();
+				}
+				result.append(codeAgent.getCodeFor("literal_collection", spec));
+			} catch (Exception e) {
+				System.err.println(e.toString());
+			}
+        }
+		
+		return result.toString();
+	}
+
 	/**
 	 * Generates a code fragment for the given OclExpression
 	 * 
@@ -952,7 +1406,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		
 		return result.toString();
 	}
-	
+
 	/**
 	 * Generates a code fragment for the given OclExpression
 	 * 
@@ -968,9 +1422,6 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		Table table = (Table)theMap.getMappedClass(constrainedType).getTables().get(0);
 			
 		OclExpression bodyExp = exp.getBodyExpression();
-		debug(bodyExp.getNameA());
-		debug(bodyExp.getType().getNameA());
-		
 		String expression = getCode(bodyExp);
 		
 		codeAgent.reset();
@@ -979,7 +1430,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
     	}		
 		codeAgent.setArgument("constraint_name", constraintName);
 		codeAgent.setArgument("context_table", table.getTableName());
-		codeAgent.setArgument("context_alias", ALIAS);
+		codeAgent.setArgument("context_alias", aliasList.get(aliasList.size()-1));
 		codeAgent.setArgument("expression", expression);
 		
     	try {
@@ -990,7 +1441,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		
 		return result.toString();
 	}
-	
+
 	/**
 	 * Generates a code fragment for the given OclExpression
 	 * 
@@ -1033,7 +1484,96 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 				
 		return result.toString();
 	}
-	
+
+	/**
+	 * Generates a code fragment for the given OclExpression
+	 * 
+	 * @param exp expression to generate code for
+	 * @return a SQL code fragment for this expression 
+	 */
+	public String transform(IteratorExp exp) {
+		StringBuffer result = new StringBuffer("");
+		StringBuffer rule = new StringBuffer();
+		StringBuffer spec = new StringBuffer();
+		
+		OclExpression srcExp = exp.getSource();
+		String name = exp.getNameA();
+		
+		// get code for source expression
+		String codeSrcExp = getCode(srcExp);
+
+		// create new alias for iterator
+		aliasList.add(getUniqueAlias());
+
+		// evaluate the arguments
+		List<String> args = new ArrayList<String>();
+		args.add(getCode(exp.getBody()));
+        
+		if (name.equals("collect")) {
+			handleIterCollect(codeSrcExp, navigation.get(srcExp), args, rule, spec); // dummy
+		} else if (name.equals("forAll")) {
+			handleIterForAll(codeSrcExp, navigation.get(srcExp).get(0), args, rule, spec);
+		} else if (name.equals("reject")) {
+			assert(srcExp.getType() instanceof CollectionType): "source of reject iterator must be of type CollectionType";
+			
+			// create Guide object to the elements of this IteratorExp for later use in the parent of this IteratorExp
+			ArrayList<Guide> guides = createGuidesForClassifier(((CollectionType)srcExp.getType()).getElementType());
+			navigation.put(exp, guides);
+			
+			handleIterReject(codeSrcExp, guides.get(0), args, rule, spec);
+		} else if (name.equals("select")) {
+			assert(srcExp.getType() instanceof CollectionType): "source of select iterator must be of type CollectionType";
+			
+			// create Guide object to the elements of this IteratorExp for later use in the parent of this IteratorExp
+			ArrayList<Guide> guides = createGuidesForClassifier(((CollectionType)srcExp.getType()).getElementType());
+			navigation.put(exp, guides);
+			
+			handleIterSelect(codeSrcExp, guides.get(0), args, rule, spec);
+		}
+		
+		
+		try {
+			result.append(codeAgent.getCodeFor(rule.toString(), spec.toString()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		aliasList.remove(aliasList.size()-1);
+		
+		return result.toString();
+	}
+
+	/**
+	 * Generates a code fragment for the given OclExpression
+	 * 
+	 * @param exp expression to generate code for
+	 * @return a SQL code fragment for this expression 
+	 */
+	public String transform(OclOperationWithTypeArgExp exp) {
+		StringBuffer result = new StringBuffer("");
+		StringBuffer rule = new StringBuffer();
+		StringBuffer spec = new StringBuffer();
+		String name = exp.getNameA();
+		
+		// other feature calls - CLASS AND ATTRIBUTE
+		if (name.equals("oclIsKindOf")) {
+			Table typeTable = getOclTypeTable(exp.getTypeArgument());
+			handleOclIsKindOf(typeTable, rule, spec);
+		} else if (name.equals("oclIsTypeOf")) {
+			Table typeTable = getOclTypeTable(exp.getTypeArgument());
+			Table superTypeTable = getOclSupertypeTable(exp.getTypeArgument());
+			handleOclIsTypeOf(typeTable, superTypeTable, rule, spec);
+		}
+		
+		try {
+			result.append(codeAgent.getCodeFor(rule.toString(), spec.toString()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result.toString();
+	}
+
 	/**
 	 * Generates a code fragment for the given OclExpression
 	 * 
@@ -1112,37 +1652,162 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			handleUnaryNot(codeSrcExp, rule, spec);
 		}
 		
-/*		else
-		if (name.equals("size")) {
-			List<Guide> guides = navigation.get(srcExp);
-			if (guides != null) {
-				Guide g = guides.get(0);
-				g.reset();
-				g.next();
-				
-				codeAgent.reset();
-				codeAgent.setArgument("table", g.getFrom());
-	            codeAgent.setArgument("element", g.getSelect());
-	            codeAgent.setArgument("collection", codeSrcExp);
-				rule.append("feature_call");
-				spec.append("size");
+		// collection related operations - BASIC VALUE
+		else if (name.equals("count")) {
+			handleCollCount(codeSrcExp, navigation.get(srcExp).get(0), args, rule, spec);
+		} else if (name.equals("size") && !(srcExp.getType() instanceof Primitive)) {
+			handleCollSize(codeSrcExp, navigation.get(srcExp).get(0), rule, spec);
+		} else if (name.equals("sum")) {
+			List<Guide> guides;
+			if (srcExp instanceof OperationCallExp && ((OperationCallExp)srcExp).getReferredOperation().getNameA().equals("asSet")) {
+				guides = navigation.get(((OperationCallExp)srcExp).getSource());
+			} else {
+				guides = navigation.get(srcExp);
+			}
+			handleCollSum(codeSrcExp, guides.get(0), rule, spec);
+		}
+		
+		// collection related operations - COMPLEX PREDICATE
+		else if (name.equals("includes")) {
+			handleCollIncludes(codeSrcExp, args, rule, spec);
+		} else if (name.equals("excludes")) {
+			handleCollExcludes(codeSrcExp, args, rule, spec);
+		} else if (name.equals("includesAll")) {
+			handleCollIncludesAll(codeSrcExp, args, rule, spec);
+		} else if (name.equals("excludesAll")) {
+			handleCollExcludesAll(codeSrcExp, args, rule, spec);
+		} else if (name.equals("isEmpty")) {
+			handleCollIsEmpty(codeSrcExp, rule, spec);
+		} else if (name.equals("notEmpty")) {
+			handleCollNotEmpty(codeSrcExp, rule, spec);
+		} else if (name.equals("exists")) {
+			handleCollExists(codeSrcExp, navigation.get(srcExp).get(0), args, rule, spec);
+		} else if (name.equals("intersection")) {
+			CollectionType collType = (CollectionType)srcExp.getType();
+			
+			if (collType instanceof BagType) {
+				spec.append("bag");
+			} else if (collType instanceof SetType) {
+				spec.append("set");
+			}
+			handleCollIntersection(codeSrcExp, args, rule, spec);
+		} else if (name.equals("including")) {
+			CollectionType collType = (CollectionType)srcExp.getType();
+			
+			if (collType instanceof SequenceType) {
+				handleSequenceIncluding(codeSrcExp, args, rule, spec);
+			} else {
+				if (collType instanceof BagType) {
+					spec.append("bag");
+				} else if (collType instanceof SetType) {
+					spec.append("set");
+				}
+				handleCollIncluding(codeSrcExp, args, rule, spec);
+			}
+		} else if (name.equals("excluding")) {
+			CollectionType collType = (CollectionType)srcExp.getType();
+			
+			if (collType instanceof SequenceType) {
+				ArrayList<Guide> guides = createGuidesForClassifier(((CollectionType)srcExp.getType()).getElementType());
+				handleSequenceExcluding(codeSrcExp, args, guides.get(0), rule, spec);
+			} else {
+				if (collType instanceof BagType) {
+					spec.append("bag");
+				} else if (collType instanceof SetType) {
+					spec.append("set");
+				}
+				handleCollExcluding(codeSrcExp, args, rule, spec);
+			}
+		} else if (name.equals("union")) {
+			CollectionType collType = (CollectionType)srcExp.getType();
+			
+			if (collType instanceof SequenceType) {
+				ArrayList<Guide> guides = createGuidesForClassifier(((CollectionType)srcExp.getType()).getElementType());
+				handleSequenceUnion(codeSrcExp, args, guides.get(0), rule, spec);
+			} else {
+				if (collType instanceof BagType) {
+					spec.append("bag");
+				} else if (collType instanceof SetType) {
+					spec.append("set");
+				}
+				handleCollUnion(codeSrcExp, args, rule, spec);
 			}
 		}
-		else
-		if (name.equals("notEmpty")) {
-			List<Guide> guides = navigation.get(srcExp);
-			if (guides != null) {
-				Guide g = guides.get(0);
-				g.reset();
-				g.next();
-				
-				codeAgent.reset();
-	            codeAgent.setArgument("collection", codeSrcExp);
-				rule.append("feature_call");
-				spec.append("notEmpty");
-			}
-		}*/
 		
+		// collection related operations - MODEL TYPE QUERY
+		else if (name.equals("allInstances")) {
+			// create Guide object to the return value of allInstances for later use in the parent of this expression
+			ArrayList<Guide> guides = createGuidesForClassifier(exp.getSrcType());
+			navigation.put(exp, guides);
+			
+			handleAllInstances(guides.get(0), rule, spec);
+		}
+		
+		else if (name.equals("symmetricDifference")) {
+			handleCollSymmetricDifference(codeSrcExp, args, rule, spec);
+		}
+		
+		// BASIC TYPE - String operations
+		else if (name.equals("size")) {
+			codeAgent.setArgument("operand", codeSrcExp);
+			rule.append("feature_call");
+			spec.append("basic_size");
+		} else if (name.equals("concat")) {
+			codeAgent.setArgument("operand1", codeSrcExp);
+			codeAgent.setArgument("operand2", args.get(0));
+			rule.append("feature_call");
+			spec.append("basic_concat");
+		} else if (name.equals("toUpper")) {
+			codeAgent.setArgument("operand", codeSrcExp);
+			rule.append("feature_call");
+			spec.append("basic_toUpper");
+		} else if (name.equals("toLower")) {
+			codeAgent.setArgument("operand", codeSrcExp);
+			rule.append("feature_call");
+			spec.append("basic_toLower");
+		} else if (name.equals("substring")) {
+			codeAgent.setArgument("operand", codeSrcExp);
+			codeAgent.setArgument("start", args.get(0));
+			codeAgent.setArgument("end", args.get(1));
+			rule.append("feature_call");
+			spec.append("basic_substring");
+		}
+		
+		// BASIC TYPE - Real and Integer operations
+		else if (name.equals("abs")) {
+			codeAgent.setArgument("operand", codeSrcExp);
+			rule.append("feature_call");
+			spec.append("basic_abs");
+		} else if (name.equals("floor")) {
+			codeAgent.setArgument("operand", codeSrcExp);
+			rule.append("feature_call");
+			spec.append("basic_floor");
+		} else if (name.equals("max")) {
+			codeAgent.setArgument("operand1", codeSrcExp);
+			codeAgent.setArgument("operand2", args.get(0));
+			rule.append("feature_call");
+			spec.append("basic_max");
+		} else if (name.equals("min")) {
+			codeAgent.setArgument("operand1", codeSrcExp);
+			codeAgent.setArgument("operand2", args.get(0));
+			rule.append("feature_call");
+			spec.append("basic_min");
+		} else if (name.equals("round")) {
+			codeAgent.setArgument("operand", codeSrcExp);
+			rule.append("feature_call");
+			spec.append("basic_round");
+		} else if (name.equals("div")) {
+			codeAgent.setArgument("operand1", codeSrcExp);
+			codeAgent.setArgument("operand2", args.get(0));
+			rule.append("feature_call");
+			spec.append("basic_div");
+		} else if (name.equals("mod")) {
+			codeAgent.setArgument("operand1", codeSrcExp);
+			codeAgent.setArgument("operand2", args.get(0));
+			rule.append("feature_call");
+			spec.append("basic_mod");
+		}
+
 		else {
 			ignore = true;
 			result.append(codeSrcExp);
@@ -1183,8 +1848,6 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	public String transform(StringLiteralExp exp) {
 		StringBuffer result = new StringBuffer("");
 		
-		debug(exp.getStringSymbol());
-		
 		codeAgent.reset();
 		codeAgent.setArgument("value", exp.getStringSymbol());
 		
@@ -1194,12 +1857,10 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			System.err.println(e.toString());
 		}
 		
-		debug(result.toString());
-		
 		return result.toString();
 	}
-	
-	/**
+    
+    /**
 	 * Generates a code fragment for the given OclExpression
 	 * 
 	 * @param exp expression to generate code for
@@ -1210,8 +1871,8 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		
 		return result.toString();
 	}
-
-	/**
+    
+    /**
      *  Adds all tables to the involved tables list which are contained within the guides in the specified list.
      *  
      *  @param guides a List object containing Guide objects for the translation of navigation
@@ -1228,15 +1889,4 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
             }
         }
     }
-	
-	/**
-	 * Helper method to output debug messages
-	 * 
-	 * @param arg Object or String to output
-	 */
-	private void debug(Object arg) {
-		if (isDebug) {
-			System.err.println(arg);
-		}
-	}
 }
