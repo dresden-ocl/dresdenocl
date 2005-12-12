@@ -73,7 +73,8 @@
       d. generating of SQL integrity views from the AST
       
       Please note, that this tool doesn't support association classes and OCL 
-      operations over collections at the moment.
+      constraints which use the class names instead of association ends for
+      navigation.
       
    4. UtilityTest 
    	  This Software was written by Jordi Cabot Sagrera. It is an example 
