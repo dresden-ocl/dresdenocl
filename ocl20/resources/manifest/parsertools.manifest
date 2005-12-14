@@ -1,0 +1,2 @@
+Main-Class: tudresden.ocl20.core.parser.OCL20GUI
+Class-Path: ./resources/ ocl20parserbase.jar ocl20jmiimpl.jar ocl20parsertools.jar ocl20jmiapi.jar ocl20stdlib.jar ocl20repository.jar lib/external/jmi.jar lib/external/mof.jar lib/external/openide.jar lib/external/nbjmi_mdrapi.jar lib/external/nbjmi_mdrimpl.jar lib/external/nbjmi_jmiutils.jar lib/external/xerces.jar lib/external/jgraph.jar lib/external/jgraphaddons.jar
