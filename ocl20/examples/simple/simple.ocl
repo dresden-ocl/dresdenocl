@@ -1,0 +1,154 @@
+--  
+-- Testing OCL syntax variations
+-- 
+package simple
+  -- testing implicit self 
+  -- =====================
+  context A
+    inv self_short: i = 5			
+    inv self_long:  self.i = 5			
+    inv: self.i=self.attribB.attribA.i
+    inv: i = attribB.attribA.i
+    inv iskind:  self.oclIsKindOf(A)
+    inv meth: self.m(1) > 5
+    inv meth2: self.m(self.i) > 5
+    inv real: r = 2.45
+    inv: not Set{1,2,3,4,5} ->isEmpty()
+    inv: Set{} ->isEmpty()
+
+
+  context B
+    inv constant: self.j = 42
+    inv iskind:  not self.oclIsKindOf(A)
+    inv istype:  self.oclIsTypeOf(B)
+  
+  context C
+    inv cast: self.oclAsType(A).oclIsTypeOf(A)
+
+  -- ->size() on non-collection types
+  -- ================================
+  --  context A
+  --  inv: self.i->size() > 0 
+
+  -- implicit ->asSet()
+  -- ==================
+  -- context A
+  --   inv setshort: self.i->size() > 0          
+  --   inv set_long: self.i->asSet()->size() > 0  
+  --   inv intAsSet:    1->asSet()->includes(1)
+  --   inv intInclude:  1->includes(1)
+  --   inv intSizew:    1->size() > 0
+  --   inv inc: self.i ->includes(4)         
+
+
+  -- Operations: pre/post
+  -- ==============================
+  context A::m(p:Integer):Integer
+    pre: p > 0 
+    post: (result = 0 - p)   and  p > (0-5)
+
+  -- Operations: @per
+  -- ==============================
+  context A::m(p:Integer):Integer                
+    post pre1: self = self@pre                     
+    post pre2: p = i@pre - 5                       
+    post pre3: self.i=self.attribB.attribA.i@pre   
+    post pre4: self.i=self.attribB.attribA@pre.i   
+    post pre5: self.i=self.attribB@pre.attribA.i   
+    post pre6: self.i=self@pre.attribB.attribA.i   
+
+
+  -- syntactical variants of iterate/forall
+  -- ======================================
+  context B
+   inv forall:       self.a->forAll(a:A  | a.i = 5)
+   inv twoforall:    self.a->forAll(a:A, b:A | a.i = b.i)
+   inv existential:  self.a->exists(a:A | a.i = 5)
+
+
+  -- shorthand for collect [omg:ocl:2003, p27]
+  -- =========================================
+  -- context B
+  -- inv collect_short: self.a.i = Set{5}            
+  -- inv collect_long:  self.a ->collect(i) = Set{5}   
+  -- inv collect_test:  self.a.i = 5                         
+  -- inv collect_test2:  self.a->collect(i) = 5              
+  -- inv strange_collect: self.a->size() = 1 implies self.a.i=5  
+
+  -- access to top-level path-expressions
+  -- ====================================
+  -- context B               -- Dresden  
+  --  inv: simple::A.i = 5  -- Dresden	 
+
+  -- types of overloaded infix operations
+  -- ====================================
+  context A
+    inv: r     = 1.0    
+    inv: i + r = 10     
+    inv: i + r = 10.0   
+    inv: r     = 10.0   
+    inv: r     = 10     
+  
+  -- @pre for method calls
+  -- =====================
+  context A::m(p:Integer):Integer 
+    post: self.m(4)=5      -- Dresden
+    post: self@pre.m(4)=5  -- Dresden
+    post: self.m@pre(4)=5  -- Dresden
+ 
+  -- body vs. post
+  -- =============
+  context A::m(p:Integer):Integer   
+    body testbody: p 
+
+  -- body (recursive)
+  -- ================
+  -- context A::m(p:Integer):Integer
+  --   body: p * m(p-1)              
+
+
+  -- init:
+  -- =====
+  context A::i : Integer  
+    init:  0                     
+
+  -- def (attributes):
+  -- =================
+  -- context A                      
+  -- def: s:String=''              
+
+  -- def (method):
+  -- =================
+  -- context A                 
+  -- def: fac(n:Integer):Integer = n fac(n-1)  
+
+  -- derive:
+  -- =======
+  -- context A.r
+  -- derive: i                      
+     
+
+  -- oclAsType (explicit overriding):
+  -- ================================
+  -- context D
+  -- inv: self.oclAsType(A).r = 0 
+
+
+  -- let expressions
+  -- ===============
+  context A::m(p:Integer):Integer      
+  pre: let m:Integer = p+5 in  m > 0  
+ 
+
+  -- operations on sets
+  -- ==================
+  context B
+    inv mt: self.a->isEmpty()
+    inv full: self.a->notEmpty()
+    inv un: self.a->union(self.a) = self.a
+    inv inter: self.a->intersection(self.a) = self.a 
+
+
+endpackage
+  
+ 
