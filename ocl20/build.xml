@@ -869,7 +869,7 @@
         <delete file="${file.svninfo}" />
     </target>
     
-    <target name="dist" 
+    <target name="dist" depends="init"
         description="Creates a binary and a source distribution package" >
         <!-- Cleaning and Building Project -->
     	<ant antfile="build.xml" target="clean"/>
@@ -880,9 +880,13 @@
     	<mkdir dir="${basedir}/dist/bin/lib/external"/>
     	<mkdir dir="${basedir}/dist/bin/resources"/>
     	<mkdir dir="${basedir}/dist/bin/scripts"/>
-    	<copy todir="${basedir}/dist/bin/resources">
-    		<fileset dir="${basedir}/resources"/>
-    	</copy>
+    	<mkdir dir="${basedir}/dist/bin/examples"/>
+       	<copy todir="${basedir}/dist/bin/resources">
+        		<fileset dir="${basedir}/resources"/>
+        </copy>
+       	<copy todir="${basedir}/dist/bin/examples">
+        		<fileset dir="${basedir}/examples"/>
+        </copy>
     	<copy todir="${basedir}/dist/bin">
     		<fileset file="${jar.libs.ocl22sql}"/>
        		<fileset file="${jar.libs.parsertools}"/>
@@ -894,7 +898,7 @@
     		<fileset file="${jar.libs.ocl20repository}"/>
     		<fileset file="${jar.libs.jmi-impl}"/>
     		<fileset file="${jar.libs.oclscriptrunner}"/>
-    		<fileset file="${jar.libs.codegen.java}"/>
+    		<fileset file="${basedir}/lib/internal/ocl20codegen-java.jar"/>
     		<fileset file="${basedir}/GETTING-STARTED"/>
     	</copy>
     	<copy todir="${basedir}/dist/bin/lib/external">
@@ -912,8 +916,8 @@
     	<copy todir="${basedir}/dist/bin/scripts">
 			<fileset dir="${basedir}/scripts"/>
     	</copy>
-    	<tar tarfile="${basedir}/dist/dresden-ocl2-2.0.tar" basedir="${basedir}/dist/bin"/>
-    	<gzip zipfile="${basedir}/dist/dresden-ocl2-2.0.tar.gz" src="${basedir}/dist/dresden-ocl2-2.0.tar"/>
+    	<tar tarfile="${basedir}/dist/dresden-ocl2-1.0.tar" basedir="${basedir}/dist/bin"/>
+    	<gzip zipfile="${basedir}/dist/dresden-ocl2-1.0.tar.gz" src="${basedir}/dist/dresden-ocl2-1.0.tar"/>
     	
     	<!-- Source files -->
     	<mkdir dir="${basedir}/dist/src"/>
@@ -929,11 +933,12 @@
     			<include name="scripts/**"/>
     			<include name="build.xml"/>
     			<include name="GETTING-STARTED"/>
+    			<include name="examples/**"/>
     		</fileset>
     	</copy>
     	
-    	<tar tarfile="${basedir}/dist/dresden-ocl2-src-2.0.tar" basedir="${basedir}/dist/bin"/>
-    	<gzip zipfile="${basedir}/dist/dresden-ocl2-src-2.0.tar.gz" src="${basedir}/dist/dresden-ocl2-src-2.0.tar"/>
+    	<tar tarfile="${basedir}/dist/dresden-ocl2-src-1.0.tar" basedir="${basedir}/dist/src"/>
+    	<gzip zipfile="${basedir}/dist/dresden-ocl2-src-1.0.tar.gz" src="${basedir}/dist/dresden-ocl2-src-1.0.tar"/>
 
     	<!-- delete temporary files-->
         <delete includeEmptyDirs="true" failonerror="false">
