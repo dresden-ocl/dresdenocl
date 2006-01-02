@@ -54,7 +54,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 	
 	private int aliasCount = 0;
 	
-	private List<String> aliasList;
+	private LinkedList<String> aliasList;
 
 	/** CodeAgent to create parameterized SQL code templates */
 	private CodeAgent codeAgent;
@@ -217,7 +217,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			
 			// assign alias to last element
 			if (next == null || next instanceof VariableExp) {
-				guide.setAlias(aliasList.get(aliasList.size()-1));
+				guide.setAlias(aliasList.getLast());
 			}
 			
 			// if no source exists, assign the guides list to the original expression
@@ -596,7 +596,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		guide.next();
 		
 		codeAgent.reset();
-		codeAgent.setArgument("table", guide.getFrom() + " " + aliasList.get(aliasList.size()-1));
+		codeAgent.setArgument("table", guide.getFrom() + " " + aliasList.getLast());
         codeAgent.setArgument("object", guide.getSelect());
         codeAgent.setArgument("collection", codeSrcExp);
         codeAgent.setArgument("expression", args.get(0));
@@ -612,7 +612,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		guide.next();
 			
 		codeAgent.reset();
-		codeAgent.setArgument("table", guide.getFrom() + " " + aliasList.get(aliasList.size()-1));
+		codeAgent.setArgument("table", guide.getFrom() + " " + aliasList.getLast());
         codeAgent.setArgument("object", guide.getSelect());
         codeAgent.setArgument("collection", codeSrcExp);
         codeAgent.setArgument("expression", args.get(0));
@@ -628,7 +628,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		guide.next();
 			
 		codeAgent.reset();
-		codeAgent.setArgument("table", guide.getFrom() + " " + aliasList.get(aliasList.size()-1));
+		codeAgent.setArgument("table", guide.getFrom() + " " + aliasList.getLast());
         codeAgent.setArgument("object", guide.getSelect());
         codeAgent.setArgument("collection", codeSrcExp);
         codeAgent.setArgument("expression", args.get(0));
@@ -730,7 +730,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		codeAgent.reset();
 		codeAgent.setArgument("table", typeTable.getTableName());
         codeAgent.setArgument("object", typeTable.getPrimaryKeyRepresentation());
-        codeAgent.setArgument("context_object", aliasList.get(aliasList.size()-1) + "." + typeTable.getPrimaryKeyRepresentation());
+        codeAgent.setArgument("context_object", aliasList.getLast() + "." + typeTable.getPrimaryKeyRepresentation());
 		rule.append("feature_call");
 		spec.append("oclIsKindOf");		
 	}
@@ -739,7 +739,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 		codeAgent.reset();
 		codeAgent.setArgument("table", typeTable.getTableName());
         codeAgent.setArgument("object", typeTable.getPrimaryKeyRepresentation());
-        codeAgent.setArgument("context_object", aliasList.get(aliasList.size()-1) + "." + typeTable.getPrimaryKeyRepresentation());
+        codeAgent.setArgument("context_object", aliasList.getLast() + "." + typeTable.getPrimaryKeyRepresentation());
 						
 		if (superTypeTable == null) {
             codeAgent.setArgument("table2", "foo"); 
@@ -1430,7 +1430,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
     	}		
 		codeAgent.setArgument("constraint_name", constraintName);
 		codeAgent.setArgument("context_table", table.getTableName());
-		codeAgent.setArgument("context_alias", aliasList.get(aliasList.size()-1));
+		codeAgent.setArgument("context_alias", aliasList.getLast());
 		codeAgent.setArgument("expression", expression);
 		
     	try {
@@ -1538,7 +1538,7 @@ public class SQLCodeGenerator extends ReflectiveVisitor {
 			e.printStackTrace();
 		}
 		
-		aliasList.remove(aliasList.size()-1);
+		aliasList.removeLast();
 		
 		return result.toString();
 	}
