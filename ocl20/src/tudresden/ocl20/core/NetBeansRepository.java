@@ -52,9 +52,20 @@ public class NetBeansRepository implements Repository {
     private MDRepository mdRepository;
     private Map refPackageToName = new HashMap();
     
+    /**
+	 * Storage location of the MDR
+	 */
+	public static final String MDR = "repositoryLocation";
+    
     public NetBeansRepository() {
         try{
-        java.net.URL repositoryUrl = NetBeansRepository.class.getResource("/repository/");
+        String repositoryLoc = System.getProperty(NetBeansRepository.MDR);
+        java.net.URL repositoryUrl = null;
+        if (repositoryLoc != null)
+           repositoryUrl = new File(repositoryLoc).toURL();
+        else
+           repositoryUrl = NetBeansRepository.class.getResource("/repository/");
+        
         System.out.println("Repository in: "+ repositoryUrl+ " "+java.net.URLDecoder.decode((new java.net.URL(repositoryUrl,"repository").getPath()), "UTF-8"));
         System.setProperty("org.netbeans.mdr.persistence.Dir", java.net.URLDecoder.decode((new java.net.URL(repositoryUrl,"repository").getPath()), "UTF-8"));
         System.setProperty("org.netbeans.mdr.storagemodel.StorageFactoryClassName",
@@ -207,6 +218,11 @@ public class NetBeansRepository implements Repository {
     }
     public void endTrans(boolean rollback){
         this.mdRepository.endTrans(rollback);
+    }
+    
+    public RefBaseObject getElementByMofID(String mofID)
+    {
+    	return this.mdRepository.getByMofId(mofID);
     }
     
 }
