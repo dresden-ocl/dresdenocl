@@ -32,7 +32,11 @@
 
 package tudresden.ocl20.core.jmi.uml15.impl.core;
 
+import java.util.List;
+
 import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.integration.ModelFacade;
+
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -49,5 +53,27 @@ public abstract class EnumerationImpl extends ClassifierImpl implements Enumerat
     
     public java.util.List getLiteralA() {
         return this.getLiteral();
-    }     
+    }   
+    
+    protected abstract java.util.List super_getLiteral();
+    
+    /**
+     * Returns all enumeration literals of an enumeration. If an instance of the class ModelFacade exists 
+     * the method getLiteral() of the class ModelFacade is used.
+     */
+    public java.util.List getLiteral() 
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    	
+    		List list = instance.getLiteral(this.refMofId());
+    		list.addAll(super_getLiteral());
+    		
+    		return list;    		
+    	}
+        
+    	return super_getLiteral();
+    }
 }

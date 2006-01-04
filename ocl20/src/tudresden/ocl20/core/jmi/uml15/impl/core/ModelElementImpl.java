@@ -34,6 +34,7 @@ package tudresden.ocl20.core.jmi.uml15.impl.core;
 
 import tudresden.ocl20.core.jmi.uml15.core.ModelElement;
 import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.integration.ModelFacade;
 
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
@@ -59,6 +60,40 @@ public abstract class ModelElementImpl extends InstanceHandler implements ModelE
     
     public java.lang.String getNameA() {
         return getName();
+    }
+    
+    protected abstract java.lang.String super_getName();
+    public java.lang.String getName()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getName(this.refMofId());
+    	}
+    	
+        return super_getName();
+    }
+    
+    protected abstract tudresden.ocl20.core.jmi.uml15.core.Namespace super_getNamespace();
+    
+    
+    /**
+     * Returns the namespace of an modelelement. If an instance of the class ModelFacade exists
+     * the methode getNamespace() of the class ModelFacade is used.
+     */
+    public tudresden.ocl20.core.jmi.uml15.core.Namespace getNamespace()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getNamespace(this.refMofId());
+    	}
+    	
+        return super_getNamespace();
     }
     
 }

@@ -35,6 +35,8 @@ package tudresden.ocl20.core.jmi.uml15.impl.core;
 import java.util.*;
 import tudresden.ocl20.core.jmi.uml15.core.*;
 import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.integration.ModelFacade;
+
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -44,7 +46,7 @@ import org.netbeans.mdr.storagemodel.StorableObject;
  *
  * @author  Administrator
  */
-public abstract class OperationImpl extends ModelElementImpl implements Operation{
+public abstract class OperationImpl extends FeatureImpl implements Operation{
     
     protected OperationImpl(StorableObject storable) {
         super(storable);
@@ -138,5 +140,24 @@ public abstract class OperationImpl extends ModelElementImpl implements Operatio
         
         return null;
     }
+    
+    protected abstract List super_getParameter();
+    
+    /**
+     * Returns the parameters of an operation. If an instance of the class ModelFacade exists 
+     * the method getParameter() of the class ModelFacade is used.
+     */
+    public List getParameter()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{
+    		return instance.getParameter(this.refMofId());    		
+    	}
+    	
+        return super_getParameter();
+    } 
     
 }

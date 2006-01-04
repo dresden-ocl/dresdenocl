@@ -38,11 +38,14 @@ import java.util.*;
 import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 import tudresden.ocl20.core.jmi.uml15.core.*;
 import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.core.jmi.uml15.impl.modelmanagement.ModelHelper;
+import tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper;
+import tudresden.ocl20.core.jmi.uml15.modelmanagement.Model;
 import tudresden.ocl20.core.jmi.uml15.uml15ocl.expressions.*;
 import tudresden.ocl20.core.jmi.uml15.commonbehavior.Reception;
 import tudresden.ocl20.core.jmi.uml15.commonbehavior.Signal;
-
-import tudresden.ocl20.core.jmi.uml15.uml15ocl.types.*;
+import tudresden.ocl20.integration.ModelFacade;
+import tudresden.ocl20.core.jmi.uml15.core.Enumeration;
 
 //import tudresden.ocl20.jmi.impl.uml15ocl.OclLibrary;
 
@@ -53,19 +56,65 @@ import org.netbeans.mdr.storagemodel.StorableObject;
  *
  * @author  Administrator
  */
-public abstract class ClassifierImpl extends ModelElementImpl implements Classifier{
+public abstract class ClassifierImpl extends NamespaceImpl implements Classifier{
     
     /** Creates a new instance of ClassifierImpl */
     protected ClassifierImpl(StorableObject storable) {
         super(storable);
     }
     
-    public List getParents(){
+    /**
+     * Returns the parents of a classifier. If a classifier has no parents and if an instance of the class ModelFacade exists
+     * this methods returns the OCL-Type OclAny. If the classifier is an Instance of the class OclVoid this method returns
+     * all classes without parents.
+     */
+    public List getParents()
+    {
+    	List result = new ArrayList();
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+
+    	if (instance != null)
+    	{
+    	    if (instance.isRepresentative(this.refMofId())&&
+    	        instance.hasRefObject(this.refMofId()))
+    	      {
+    	         if (getGeneralization().isEmpty() && !(this instanceof Interface) && !(this instanceof Enumeration))
+    	         {
+    	         	result.add(OclLibraryHelper.getInstance(this).
+    											getAny());
+    	            return result;
+    	    	    }
+    	      }    	      
+    	   
+	    	if (equals(OclLibraryHelper.getInstance(this).getVoid()))
+	    	{
+	    		Model topPackage = ModelHelper.
+	    						   		getInstance(
+	    						   				(Uml15Package) this.refOutermostPackage()).
+	    						   						getTopPackage();
+	    		result.addAll(((NamespaceImpl)topPackage).getAllClassesWithoutSpez());
+	    		return result;
+	    	}
+    	}   
+    	Iterator it = getGeneralization().iterator();
+
+    	while(it.hasNext())
+    	{
+    	    Generalization g = (Generalization)it.next(); 
+    	    result.add(g.getParent());
+    	}
+    	return result;
+    }
+    
+    /**
+     * Returns all subclasses of a classifier.
+     */
+	public List getChildren(){
         List result = new ArrayList();
-        Iterator it = getGeneralization().iterator();
+        Iterator it = getSpecialisation().iterator();
         while(it.hasNext()){
             Generalization g = (Generalization)it.next(); 
-            result.add(g.getParent());
+            result.add(g.getChild());
             //System.out.println(" "+getName()+"   Parent:" +g.getParent().getName());
         }
         return result;
@@ -169,9 +218,9 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
                 allAttributes.add(feature);
             }
         }
-        Iterator parentsIt = getGeneralization().iterator();
+        Iterator parentsIt = this.getParents().iterator();
         while(parentsIt.hasNext()){
-            Classifier parent = (Classifier) ((Generalization) parentsIt.next()).getParent();
+            Classifier parent = (Classifier) parentsIt.next();
             allAttributes.addAll(parent.allAttributes());
         }
         return allAttributes;
@@ -187,9 +236,11 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
                 allOperations.add(feature);
             }
         }
-        Iterator parentsIt = getGeneralization().iterator();
+        Iterator parentsIt = this.getParents().iterator();
+        
         while(parentsIt.hasNext()){
-            Classifier parent = (Classifier) ((Generalization) parentsIt.next()).getParent();
+            Classifier parent = (Classifier) parentsIt.next();
+            //System.out.println(parent.getNameA());
             allOperations.addAll(parent.allOperations());
         }
         return allOperations;
@@ -206,17 +257,27 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     
     public tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationClass lookupAssociationClass(java.lang.String name) {
         //the "association" reference is missing in the UML-Metamodel!
-        Iterator ownEnds = ((CorePackage)this.refImmediatePackage()).getAParticipantAssociation().getAssociation(this).iterator();
-        while(ownEnds.hasNext()){
+    	Iterator ownEnds = null;
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		ownEnds = instance.getAssociationEnds(this.refMofId()).iterator();
+    	}
+    	else
+    		ownEnds = ((CorePackage)this.refImmediatePackage()).getAParticipantAssociation().getAssociation(this).iterator();
+    	
+    	while(ownEnds.hasNext()){
             AssociationEnd ownEnd = (AssociationEnd) ownEnds.next();
             Association a = ownEnd.getAssociation();
             if(a instanceof UmlAssociationClass && name.equals(a.getNameA())){
                 return (UmlAssociationClass) a;
             }
         }
-        Iterator parentsIt = getGeneralization().iterator();
+        Iterator parentsIt = this.getParents().iterator();//getGeneralization().iterator();
         while(parentsIt.hasNext()){
-            Classifier parent = (Classifier) ((Generalization) parentsIt.next()).getParent();
+            Classifier parent = (Classifier) parentsIt.next();//((GeneralizationImpl) parentsIt.next()).getParent();
             UmlAssociationClass ac = (UmlAssociationClass) parent.lookupAssociationClass(name);
             if(ac != null){
                 return ac;
@@ -229,7 +290,17 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
     public tudresden.ocl20.core.jmi.ocl.commonmodel.AssociationEnd lookupAssociationEnd(java.lang.String name) {
         //Iterator ownEnds = this.getAssociation().
         //the "association" reference is missing in the UML-Metamodel!
-        Iterator ownEnds = ((CorePackage)this.refImmediatePackage()).getAParticipantAssociation().getAssociation(this).iterator();
+    	Iterator ownEnds = null;
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		ownEnds = instance.getAssociationEnds(this.refMofId()).iterator();
+    	}
+    	else
+    		ownEnds = ((CorePackage)this.refImmediatePackage()).getAParticipantAssociation().getAssociation(this).iterator();
+    	
         while(ownEnds.hasNext()){
             AssociationEnd ownEnd = (AssociationEnd) ownEnds.next();
             Association a = ownEnd.getAssociation();
@@ -242,9 +313,9 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
                 }
             }
         }
-        Iterator parentsIt = getGeneralization().iterator();
+        Iterator parentsIt = this.getParents().iterator();//getGeneralization().iterator();
         while(parentsIt.hasNext()){
-            Classifier parent = (Classifier) ((Generalization) parentsIt.next()).getParent();
+            Classifier parent = (Classifier) parentsIt.next();//((GeneralizationImpl) parentsIt.next()).getParent();
             AssociationEnd ae = (AssociationEnd) parent.lookupAssociationEnd(name);
             if(ae != null){
                 return ae;
@@ -278,9 +349,9 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
                 return (Attribute) feature;
             }
         }
-        Iterator parentsIt = getGeneralization().iterator();
+        Iterator parentsIt = this.getParents().iterator();//getGeneralization().iterator();
         while(parentsIt.hasNext()){
-            Classifier parent = (Classifier) ((Generalization) parentsIt.next()).getParent();
+            Classifier parent = (Classifier) parentsIt.next();//((GeneralizationImpl) parentsIt.next()).getParent();
             Attribute a = (Attribute) parent.lookupAttribute(attName);
             if(a != null){
                 return a;
@@ -318,9 +389,9 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
                 }
             }
         }
-        Iterator parentsIt = getGeneralization().iterator();
+        Iterator parentsIt = this.getParents().iterator();//getGeneralization().iterator();
         while(parentsIt.hasNext()){
-            Classifier parent = (Classifier) ((Generalization) parentsIt.next()).getParent();
+            Classifier parent = (Classifier) parentsIt.next();//((GeneralizationImpl) parentsIt.next()).getParent();
             Signal s = (Signal) parent.lookupSignal(sigName, paramTypes);
             if(s != null){
                 return s;
@@ -409,6 +480,72 @@ public abstract class ClassifierImpl extends ModelElementImpl implements Classif
         returnParam.setBehavioralFeature(operation);
         returnParam.setType((Classifier) resultType);
         return operation;
+    }
+    
+    protected abstract java.util.List super_getFeature();
+
+    /**
+     * Returns the features of a classifier. If an instance of the class ModelFacade exists
+     * the methode getFeature() of the class ModelFacade is used.
+     */
+    public java.util.List getFeature() 
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    	
+    		List list = instance.getFeature(this.refMofId());
+    		list.addAll(super_getFeature());
+    		
+    		return list;    		
+    	}
+        
+    	return super_getFeature();
+    }
+    
+    protected abstract Collection super_getGeneralization();
+
+    /**
+     * Returns the generalization of a classifier, where the classifier is the superclass. 
+     * If an instance of the class ModelFacade exists the method getGeneralization() of 
+     * the class ModelFacade is used.
+     */
+    public Collection getGeneralization()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{
+    		Collection col = new ArrayList();
+    		col = instance.getGeneralization(this.refMofId());
+    		
+    		return col;    		
+    	}
+        
+    	return super_getGeneralization();
+    }
+    
+    /**
+     * Returns the generalization of a classifier, where the classifier is the subclass. 
+     * If an instance of the class ModelFacade exists the method getSpecialisation() of 
+     * the class ModelFacade is used.
+     */
+    public Collection getSpecialisation()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{
+    		Collection col = new ArrayList();
+    		col = instance.getSpecialization(this.refMofId());
+    		
+    		return col;    		
+    	}
+        
+    	return ((Uml15Package)this.refOutermostPackage()).getCore().getAParentSpecialization().getSpecialization(this);
     }
     
 }

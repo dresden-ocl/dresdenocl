@@ -33,6 +33,8 @@
 package tudresden.ocl20.core.jmi.uml15.impl.core;
 
 import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.integration.ModelFacade;
+
 import org.netbeans.mdr.handlers.InstanceHandler;
 import org.netbeans.mdr.storagemodel.StorableObject;
 
@@ -50,5 +52,23 @@ public abstract class EnumerationLiteralImpl extends ModelElementImpl implements
     public tudresden.ocl20.core.jmi.ocl.commonmodel.Enumeration getEnumerationA() {
         return this.getEnumeration();
     }    
+    
+    protected abstract Enumeration super_getEnumeration();
+    
+    /**
+     * Returns the enumeration of a enumeration literal. If an instance of the class ModelFacade exists 
+     * the method getEnumeration() of the class ModelFacade is used.
+     */
+    public Enumeration getEnumeration()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{
+    		return instance.getEnumeration(this.refMofId());
+    	}
+    	return this.super_getEnumeration();
+    }
    
 }

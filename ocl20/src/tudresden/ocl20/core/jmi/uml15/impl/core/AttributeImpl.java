@@ -34,6 +34,8 @@ package tudresden.ocl20.core.jmi.uml15.impl.core;
 
 import tudresden.ocl20.core.jmi.uml15.core.*;
 import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.integration.ModelFacade;
+
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
@@ -42,7 +44,7 @@ import java.util.*;
  *
  * @author  Administrator
  */
-public abstract class AttributeImpl extends ModelElementImpl implements Attribute{
+public abstract class AttributeImpl extends FeatureImpl implements Attribute{
     
     /** Creates a new instance of AttributeImpl */
     protected AttributeImpl(StorableObject storable) {
@@ -75,6 +77,63 @@ public abstract class AttributeImpl extends ModelElementImpl implements Attribut
      
     public boolean isInstanceLevelA() {
         return this.getOwnerScope().equals(ScopeKindEnum.SK_INSTANCE);
+    }
+    
+protected abstract tudresden.ocl20.core.jmi.uml15.core.Classifier super_getType();
+    
+    /**
+     * Returns the type of an attribute. If an instance of the class ModelFacade exists 
+     * the method getType() of the class ModelFacade is used.
+     */
+    public tudresden.ocl20.core.jmi.uml15.core.Classifier getType()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getType(this.refMofId());
+    	}
+    	
+        return super_getType();
+    }
+    
+    protected abstract tudresden.ocl20.core.jmi.uml15.datatypes.Multiplicity super_getMultiplicity();
+    
+    /**
+     * Returns the multiplicity of an attribute. If an instance of the class ModelFacade exists 
+     * the method getMultiplicity() of the class ModelFacade is used.
+     */    
+    public tudresden.ocl20.core.jmi.uml15.datatypes.Multiplicity getMultiplicity()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getMultiplicity(this.refMofId());
+    	}
+    	
+        return super_getMultiplicity();
+    }
+    
+    protected abstract OrderingKind super_getOrdering();
+    
+    /**
+     * Returns the ordering kind of an attribute. If an instance of the class ModelFacade exists 
+     * the method getOrderingKind() of the class ModelFacade is used.
+     */
+    public OrderingKind getOrdering()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getOrdering(this.refMofId());
+    	}
+    	
+        return super_getOrdering();
     }
     
 }

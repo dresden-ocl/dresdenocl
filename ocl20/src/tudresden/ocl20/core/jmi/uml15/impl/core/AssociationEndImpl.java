@@ -37,6 +37,7 @@ import org.netbeans.mdr.storagemodel.*;
 
 import tudresden.ocl20.core.jmi.uml15.datatypes.*;
 import tudresden.ocl20.core.jmi.uml15.core.*;
+import tudresden.ocl20.integration.ModelFacade;
 
 import java.util.*;
 /**
@@ -86,6 +87,25 @@ public abstract class AssociationEndImpl extends ModelElementImpl implements Ass
     
     public java.util.List getQualifiersA() {
        return getQualifier();
+    }
+    
+    protected abstract tudresden.ocl20.core.jmi.uml15.datatypes.Multiplicity super_getMultiplicity();
+    
+    /**
+     * Returns the multiplicity of an association end. If an instance of the class ModelFacade exists 
+     * the method getMultiplicity() of the class ModelFacade is used.
+     */
+    public tudresden.ocl20.core.jmi.uml15.datatypes.Multiplicity getMultiplicity()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getMultiplicity(this.refMofId());
+    	}
+    	
+        return super_getMultiplicity();
     }
     
     

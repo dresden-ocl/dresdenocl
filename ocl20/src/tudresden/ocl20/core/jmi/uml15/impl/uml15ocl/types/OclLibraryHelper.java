@@ -179,6 +179,12 @@ public class OclLibraryHelper {
         return null;
     }
     
+    public Collection findCollectionTypes(Classifier elementType)
+    {
+        Collection result = umlPackage.getUml15ocl().getOcl().getTypes().getAElementTypeCollectionTypes().getCollectionTypes(elementType);
+        return result;
+    }
+    
     //get Collection, Bag, Sequence and Set Type for  a given element type.
     //the collection types are created on demand.
     //(Due to nesting there is  an infinite number  of collection types.)
@@ -556,7 +562,7 @@ public class OclLibraryHelper {
         false, sk, true, CallConcurrencyKindEnum.CCK_SEQUENTIAL,
         false, false, false, null);
         op.setOwner(owner);
-        
+        op.setNamespace(owner);
         Parameter result = core.getParameter().createParameter();
         result.setNameA("result");
         result.setKind(ParameterDirectionKindEnum.PDK_RETURN);

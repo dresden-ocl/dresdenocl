@@ -35,6 +35,8 @@ package tudresden.ocl20.core.jmi.uml15.impl.core;
 import tudresden.ocl20.core.jmi.uml15.uml15.*;
 import tudresden.ocl20.core.jmi.uml15.core.*;
 import tudresden.ocl20.core.jmi.uml15.datatypes.*;
+import tudresden.ocl20.integration.ModelFacade;
+
 import org.netbeans.mdr.handlers.*;
 import org.netbeans.mdr.storagemodel.*;
 
@@ -94,6 +96,44 @@ public abstract class ParameterImpl extends ModelElementImpl implements Paramete
     }
     public tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKind getKindA() {
         return (tudresden.ocl20.core.jmi.ocl.commonmodel.DirectionKind) kindMap.get(this.getKind());
+    }
+    
+protected abstract Classifier super_getType();
+    
+    /**
+     * Returns the type of a parameter. If an instance of the class ModelFacade exists 
+     * the method getType() of the class ModelFacade is used.
+     */
+    public Classifier getType()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getType(this.refMofId());
+    	}
+    	
+        return super_getType();
+    }
+    
+    protected abstract ParameterDirectionKind super_getKind();
+    
+    /**
+     * Returns the ParameterDirectionKind of a parameter. If an instance of the class ModelFacade exists 
+     * the method getKind() of the class ModelFacade is used.
+     */
+    public ParameterDirectionKind getKind()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getKind(this.refMofId());
+    	}
+    	
+        return super_getKind();
     }
     
 }

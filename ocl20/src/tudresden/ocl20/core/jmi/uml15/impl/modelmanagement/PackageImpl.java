@@ -45,7 +45,7 @@ import java.util.*;
  *
  * @author  Administrator
  */
-public abstract class PackageImpl extends tudresden.ocl20.core.jmi.uml15.impl.core.ModelElementImpl implements tudresden.ocl20.core.jmi.uml15.modelmanagement.Package{
+public abstract class PackageImpl extends tudresden.ocl20.core.jmi.uml15.impl.core.NamespaceImpl implements tudresden.ocl20.core.jmi.uml15.modelmanagement.Package{
     
     /** Creates a new instance of ModelImpl */
     protected PackageImpl(StorableObject storable) {
