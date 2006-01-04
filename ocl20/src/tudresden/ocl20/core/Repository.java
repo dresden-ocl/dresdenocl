@@ -130,4 +130,8 @@ public interface Repository {
      */
     void generateJMIInterfaces(RefBaseObject baseObject, final File directory) throws RepositoryException;
     
+    /**
+     * Returns the Element with the given mofID. 
+     */
+    public RefBaseObject getElementByMofID(String mofID);
 }
