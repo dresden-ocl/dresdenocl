@@ -65,6 +65,25 @@ public class OclModel {
         
     }
     
+    /** Creates a new instance of OclModel. The OCL standard library package will be created, if not already existent.
+     * @param metamodelname should be one of {@link MetaModelConst#MOF14 MOF14}, {@link MetaModelConst#UML15 UML15}
+     * @param model UML model or MOF model
+     * @throws OclModelException
+     */
+    public OclModel(String metamodelname, RefPackage model) throws OclModelException {
+        try{
+            this.beginTrans(true);
+            this.model = model;
+            init(metamodelname);
+            this.endTrans(false);            
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            close();
+            throw new OclModelException(e);
+        }
+    }
+    
     /** Loads an OCL model from an XMI Document. The OCL standard library package will be created, if not already existent.
      * The name of the OCL model in the repository will be a generated one.
      * @param metamodelname should be one of {@link MetaModelConst#MOF14 MOF14}, {@link MetaModelConst#UML15 UML15}
