@@ -187,7 +187,7 @@
     <target name="compile.jmi.impl" depends="jar.jmi.if"
         description="compiles JMI implementation classes for MOF-OCL and UML-OCL">
         <javac srcdir="${srcdir.generic}" destdir="${objdir.jmi.impl}"
-            debug="true" debuglevel="lines,vars,source" source="1.4">
+            debug="true" debuglevel="lines,vars,source" source="1.5">
             <include name="tudresden/ocl20/core/jmi/**/*.java" />            
             <classpath id="libs.jmi-api">
                 <pathelement location="${jar.libs.jmi-api}" />
