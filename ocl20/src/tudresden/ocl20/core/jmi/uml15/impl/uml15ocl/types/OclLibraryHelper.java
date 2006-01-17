@@ -562,7 +562,6 @@ public class OclLibraryHelper {
         false, sk, true, CallConcurrencyKindEnum.CCK_SEQUENTIAL,
         false, false, false, null);
         op.setOwner(owner);
-        op.setNamespace(owner);
         Parameter result = core.getParameter().createParameter();
         result.setNameA("result");
         result.setKind(ParameterDirectionKindEnum.PDK_RETURN);
