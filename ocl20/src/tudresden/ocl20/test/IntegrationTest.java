@@ -269,7 +269,6 @@ public class IntegrationTest
 		{
 			Object o = it.next();
 			System.out.println(offset+"####Methode :" + ((ModelElement)o).getName());
-			System.out.println(offset+"######Namensraum :" + ((Operation)o).getNamespace().getName());
 			System.out.println(offset+"######Owner :" + ((Operation)o).getOwner().getName());
 			System.out.println(offset+"######OwnerScope :" + ((Operation)o).getOwnerScope());
 				
