@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="tudresden.ocl20.eclipse.ocleditor"
+   name="EclipseOCLEditor Plug-in"
+   version="1.0.0"
+   provider-name="">
+
+   <runtime>
+      <library name="EclipseOCLEditor.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+   <requires>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="tudresden.ocl20.eclipseplugin"/>
+   </requires>
+   <extension-point id="OCLEditorExtensionPoint" name="OCLEditorExtensionPoint" schema="resources/schema/OCLEditorExtensionPoint.exsd"/>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            icon="resources/icons/OCLToolkit_Logo.gif"
+            class="tudresden.ocl20.eclipse.plugins.ocleditor.views.OCLEditor"
+            category="tudresden.ocl20.eclipse.ocleditor.category"
+            name="OCL-Editor"
+            id="tudresden.ocl20.eclipse.ocleditor"/>
+      <category
+            name="OCL Toolkit For Eclipse"
+            id="tudresden.ocl20.eclipse.ocleditor.category"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.viewActions">
+      <viewContribution
+            id="tudresden.ocl20.eclipse.ocleditor.viewContribution"
+            targetID="tudresden.ocl20.eclipse.ocleditor">
+            <action
+               disabledIcon="resources/icons/editCancelDisabled.gif"
+               toolbarPath="additions"
+               label="Abbrechen"
+               tooltip="Abbrechen"
+               icon="resources/icons/editCancel.gif"
+               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.AbortEditAction"
+               style="push"
+               id="tudresden.ocl20.eclipse.ocleditor.abort">
+            <enablement>
+               <systemProperty
+                     value="2"
+                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
+            </enablement>
+         </action>
+            <action
+               disabledIcon="resources/icons/editOKDisabled.gif"
+               toolbarPath="additions"
+               label="Validieren"
+               icon="resources/icons/editOK.gif"
+               tooltip="OCL-Ausdruck validieren"
+               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.ValidateAction"
+               style="push"
+               id="tudresden.ocl20.eclipse.ocleditor.validate">
+            <enablement>
+               <systemProperty
+                     value="2"
+                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
+            </enablement>
+         </action>
+            <action
+               disabledIcon="resources/icons/editDisabled.gif"
+               toolbarPath="additions"
+               label="Editieren"
+               icon="resources/icons/edit.gif"
+               tooltip="OCL-Ausdruck editieren"
+               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.EditAction"
+               style="push"
+               id="tudresden.ocl20.eclipse.ocleditor.edit">
+            <enablement>
+               <systemProperty
+                     value="2"
+                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
+            </enablement>
+         </action>
+         <action
+               disabledIcon="resources/icons/delOCLDisabled.gif"
+               toolbarPath="additions"
+               label="Löschen"
+               icon="resources/icons/delOCL.gif"
+               tooltip="OCL-Ausdruck löschen"
+               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.DeleteAction"
+               style="push"
+               id="tudresden.ocl20.eclipse.ocleditor.delete">
+            <enablement>
+               <systemProperty
+                     value="2"
+                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
+            </enablement>
+         </action>
+         <action
+               disabledIcon="resources/icons/newOCLDisabled.gif"
+               toolbarPath="additions"
+               label="Neu"
+               icon="resources/icons/newOCL.gif"
+               tooltip="Neuen OCL-Ausdruck erstellen"
+               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.CreateAction"
+               style="push"
+               id="tudresden.ocl20.eclipse.ocleditor.new">
+            <enablement>
+               <systemProperty
+                     value="2"
+                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
+            </enablement>
+         </action>         
+      </viewContribution>
+   </extension>
+</plugin>

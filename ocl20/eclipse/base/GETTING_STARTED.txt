@@ -1,0 +1,15 @@
+Setting up the 'OCL Toolkit for Eclipse' plugin project:
+
+  1. Checkout the following folders of the cvs in an existing project:
+  		
+  		src
+  		eclipse/base
+  		lib
+  		resources
+
+  2. Copy the plugin.xml and the build.properties file from the folder
+  	 eclipse/base to the top level folder of the project
+  	 
+  3. Set the folders eclipse/base/src and src as the project src folders
+     
+  4. Run the build.xml file (run.parser-gui and run.workbench)
