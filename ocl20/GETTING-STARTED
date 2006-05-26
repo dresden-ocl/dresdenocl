@@ -26,7 +26,16 @@
   does not containe diagram data (untag the corresponding option when saving XMI
   file).
 
-
+  For Transformation Framework:
+  If you want to transform uml models with the transformation framework other 
+  than those provided with the distribution , I recommend using the XMI export 
+  in Gentleware's "Poseidon for UML 3.2". I used the community edition, 
+  which can be obtained for the cost of its download at http://www.gentleware.com/.
+  Make sure your model's XMI file does not containe diagram data (untag the 
+  corresponding option when saving XMI file).
+  A detailed HOWTO can be found under $BASE/resources/cwm/howto
+  Example models can be found under $BASE/resources/cwm/UmlModels
+  
   Conventions
   -----------
 
@@ -38,7 +47,7 @@
   Build targets
   -------------
 
-  There are four applications in the toolkit by now.
+  There are five applications in the toolkit by now.
 
   1. OCL2.0 Workbench
      This software was written by Stefan Ocke for his diploma thesis. It provides
@@ -82,7 +91,14 @@
    	  look at the classes UtilityTest and Utility if you plan to work directly on the 
    	  repository. It is a text-based application, which uses the CarWorld-Model 
    	  in /resources/PoseidonProjects.
-      
+   	  
+   5. Transformation Framework
+   	  This Software was written by Christian Wende for his student research project 
+   	  (Groﬂer Beleg). It provides a framework to implement, manage, configure and 
+   	  execute metamodelbased transformations.
+   	  The distribution comes with a implementation of transformations performing
+   	  a database-shema generation from uml models.
+  	  
 
    All applications share a common codebase. To faciliate building and running
    them, there is an Ant script in $BASE/build.xml.
@@ -107,6 +123,10 @@
    		
    		ant run.utilityexample (only for source releases)
 
+   For the Transformation Framework , change the working directory to $BASE and type:
+   		
+   		ant run.transformationGUI (only for source releases)
+   
 
    OCL2.0 Workbench
    ----------------
@@ -174,7 +194,13 @@
    is printed out during execution. 
 
 
-
+   Transformation Framework
+   ------------------
+   
+   A short introduction how to use the Transformation Framework can be found in:
+   $BASE/resources/cwm/howto
+   Example models can be found under $BASE/resources/cwm/UmlModels
+  
    Contact
    -------
 
@@ -187,7 +213,8 @@
    TODO: ask Stefan whether we may publish his email address here and which
          address should be used
          
-
+   Report problems with the Transformation Framework to Christian Wende. You can reach
+   him by email: chr dot wende at gmx dot de
 
    Version information
    -------------------

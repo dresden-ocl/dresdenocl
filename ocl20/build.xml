@@ -108,6 +108,14 @@
         <property name="jar.distrib.basename" value="${basedir}/DDOCL20_Preview-Rev" />
         <property name="jar.distrib.suffix" value=".jar" />
         
+<!-- Transformation Framework -->    
+    	<property name="jar.libs.transformation" value="${objdir.libs}/trans_engine.jar" />
+    	<property name="jar.libs.CWM" value="${objdir.libs}/CWM.jar" />
+    	<property name="jar.libs.stringTemplate" value="${dir.software}/stringtemplate.jar" />
+    	<property name="jar.libs.antlr" value="${dir.software}/antlr.jar" />
+    	<property name="jar.libs.junit" value="${dir.software}/junit.jar" />
+<!-- Transformation Framework -->  
+    	
         <mkdir dir="${objdir.generic}" />
         <mkdir dir="${objdir.libs}" />
         <mkdir dir="${destdir.javadoc}" /> 
@@ -1021,5 +1029,164 @@ More info goes here.
 						jar.utilityexample,
 						jar.workbench">
 	</target>
+	
+    <!-- Transformation Framework -->
+
+	<target name="compile.trans-engine" depends="init, init.mdr, init.cwm, jar.parsertools, jar.ocl20repository"
+		description="Compiles the classes for transformation engine">
+        <mkdir dir="${objdir.generic}" />
+        <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
+            deprecation="true"
+            debug="true" debuglevel="lines,vars,source">
+            <include name="tudresden/ocl20/transformation/*" />
+            <include name="tudresden/ocl20/transformation/util/*" />
+            <include name="tudresden/ocl20/transformation/inspect/interfaces/*" />
+        	<include name="tudresden/ocl20/transformation/impl/*" />
+        	<include name="tudresden/ocl20/transformation/interfaces/*" />
+        	<include name="tudresden/ocl20/transformation/templates/*" />
+        	<include name="tudresden/ocl20/transformation/gui/*" />
+        	<include name="tudresden/ocl20/transformation/test/*" />
+        	<include name="tudresden/ocl20/transformation/exception/*" />
+        	<include name="tudresden/ocl20/codegen/decl/mapping/*" />
+        	<include name="tudresden/ocl20/codegen/decl/template/*" />
+			<exclude name="**.html" />
+            <classpath>
+            	<pathelement location="${jar.libs.stringTemplate}" />
+            	<pathelement location="${jar.libs.antlr}" />
+            	<pathelement location="${jar.libs.junit}" />
+            	<pathelement location="${jar.libs.ocl20repository}" />
+		       	<path refid="libs.mdr" />
+                <path refid="libs.basic" />
+                <path refid="libs.jmi.ocl20" />
+            </classpath>
+        </javac>		
+	</target>
+		
+	<target name="jar.trans-engine"
+	    depends="compile.trans-engine"
+	    description="packs the transformation engine into a jar file" >
+        <mkdir dir="${objdir.generic}"/>
+        <jar basedir="${objdir.generic}" destfile="${jar.libs.transformation}">
+            <include name="tudresden/ocl20/transformation/*.class" />
+            <include name="tudresden/ocl20/transformation/util/*.class" />
+            <include name="tudresden/ocl20/transformation/inspect/interfaces/*.class" />
+        	<include name="tudresden/ocl20/transformation/impl/*.class" />
+       		<include name="tudresden/ocl20/transformation/interfaces/*.class" />
+        	<include name="tudresden/ocl20/transformation/templates/*.class" />                
+        	<include name="tudresden/ocl20/transformation/gui/*.class" />
+        	<include name="tudresden/ocl20/transformation/test/*.class" />
+        	<include name="tudresden/ocl20/transformation/exception/*.class" />
+        	<include name="tudresden/ocl20/codegen/decl/mapping/*.class" />
+        	<include name="tudresden/ocl20/codegen/decl/template/*.class" />
+		</jar>
+    </target>
+
+    <target name="compile.initCWM" depends="init, init.mdr, jar.parsertools, jar.ocl20repository"
+		description="Compiles the classes for the CWM Integration">
+        <mkdir dir="${objdir.generic}" />
+        <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
+            deprecation="true"
+            debug="true" debuglevel="lines,vars,source">
+            <include name="tudresden/ocl20/cwm/init/*" />
+            <exclude name="**.html" />
+            <classpath>
+            	<pathelement location="${jar.libs.ocl20repository}" />
+                <path refid="libs.mdr" />
+                <path refid="libs.basic" />
+                <path refid="libs.jmi.ocl20" />
+             </classpath>
+        </javac>		
+	</target>
+		
+	<target name="jar.initCWM"
+        depends="compile.initCWM"
+        description="packs the classes for the CWM Integration into a jar file" >
+        <mkdir dir="${objdir.generic}"/>
+        <jar basedir="${objdir.generic}" destfile="${jar.libs.CWM}">
+            <include name="tudresden/ocl20/cwm/init/*.class" />
+        </jar>
+    </target>
+	
+    <target name="init.cwm" depends="init, jar.initCWM" 
+		description="Integrates the CWM">
+		<echo>Starting CWM Integration</echo>
+    	<java classname="tudresden.ocl20.cwm.init.CWMIntegrator"
+    		failonerror="true" fork="true">
+      		<classpath>
+      			<pathelement location="${jar.libs.CWM}" /> 
+      			<pathelement location="${jar.libs.ocl20repository}" />
+                <pathelement location="${basedir}/generated_src"/>
+                <pathelement location="${dir.resources}" />
+              	<path refid="libs.basic" />
+				<path refid="libs.mdr" />
+				<path refid="libs.jmi.ocl20" />
+      		</classpath>
+        </java>
+	</target>
+    
+    <target name="compile.cwm.jmi.if" depends="init.cwm"
+        description="compiles JMI interfaces generated for (meta-)model access">
+        <mkdir dir="${objdir.jmi.if}" />
+        <javac srcdir="${srcdir.jmi.if}" destdir="${objdir.jmi.if}"
+            debug="true" debuglevel="lines,vars,source">
+            <classpath>
+            	<path refid="libs.mdr" />
+        		<path refid="libs.basic" />                
+        	</classpath>
+        </javac>
+    </target>
+    
+    <target name="jar.cwm.jmi.if" depends="compile.cwm.jmi.if"
+        description="packs compiled JMI interfaces into a jar file">
+        <jar basedir="${objdir.jmi.if}" destfile="${jar.libs.jmi-api}" />
+    </target>
+ 
+    
+	<target name="run.transformationGUI" depends="jar.cwm.jmi.if, jar.jmi.impl, jar.trans-engine" 
+		description="Starts the GUI for the transformation engine">
+        <echo>Starting Transformation Engine GUI</echo>
+	    <java classname="tudresden.ocl20.transformation.gui.DBGenApplication"
+		    failonerror="true" fork="true">
+      		<classpath>
+             	<pathelement location="${jar.libs.transformation}"/>
+                <pathelement location="${dir.resources}" />
+      			<pathelement location="${jar.libs.stringTemplate}" />
+      			<pathelement location="${jar.libs.antlr}" />
+      			<path refid="libs.basic" />
+				<path refid="libs.mdr" />
+				<path refid="libs.jmi.ocl20" />
+				<pathelement location="${jar.libs.ocl20repository}" />
+      			<pathelement location="${jar.libs.ocl20stdlib}" />
+			</classpath>
+	    </java>
+	</target>
+	
+	<!--<target name="run.transformationGUI" depends="jar.cwm.jmi.if, jar.jmi.impl, jar.ocl22sql, jar.trans-engine" 
+				description="Starts the GUI for the transformation engine">
+		            <echo>Starting Transformation Engine GUI</echo>
+		    	    <java classname="tudresden.ocl20.transformation.gui.DBGenApplication"
+		    		      failonerror="true" fork="true">
+		    		      		<classpath>
+		    		             	<pathelement location="${jar.libs.transformation}"/>
+		    		                <pathelement location="${dir.resources}" />
+		    		      			<pathelement location="${jar.libs.stringTemplate}" />
+		    		      			<pathelement location="${jar.libs.antlr}" />
+					      			<path refid="libs.basic" />
+		  	    					<path refid="libs.mdr" />
+		  	    					<path refid="libs.jmi.ocl20" />
+		  	    					<pathelement location="${jar.libs.parsertools}" />
+		  	    					<pathelement location="${jar.libs.sableparser}" />
+		  	    					<pathelement location="${jar.libs.sable-astlib}" />
+		  	    					<pathelement location="${jar.libs.ocl20repository}" />
+		  	    					<pathelement location="${jar.libs.ocl20stdlib}" />
+		    		      	        <pathelement location="${jar.libs.codegen.java}" />
+		    		      			<pathelement location="${jar.libs.ocl22sql}"/>
+		    		      	              
+		  	    					<pathelement location="${jar.xerces}" />
+		  	    				</classpath>
+		    		        </java>
+		        </target>
+			-->
+
 </project>
 

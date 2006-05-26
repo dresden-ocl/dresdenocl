@@ -32,15 +32,11 @@
 
 package tudresden.ocl20.core;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Collection;
-import javax.jmi.model.ModelPackage;
-import javax.jmi.model.MofPackage;
-import javax.jmi.xmi.XmiReader;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
-
+// TODO merge with the orginal MetaModelConst !!!
 /**
  * This class provides some constants for OCL, MOF and UML metamodel.
  * @author  Stefan Ocke
@@ -148,9 +144,20 @@ public class MetaModelConst {
      * The directory for XMI documents that are the results of the metamodel integration.
      */
     public static final String METAMODELSWITHOCLDIR = "MetamodelsWithOcl";
+
+	//summarizes the constants for MOF 1.4 an UML 1.5
+    private static Map<String, MetaModelInfo> metaModelInfos;
     
-    //summarizes the constants for MOF 1.4 an UML 1.5
-    private static Map metaModelInfos;
+    // added by Christian Wende for CWM
+    public static final String CWM = "CWM";
+
+    public static final String CWMXMI = "cwm/CWM-MOF.xmi";
+
+    public static final String CWMPCKG = "Relational";
+
+    public static final String CWMPCKGPRFX = "tudresden.ocl20.core.jmi.cwm";
+
+    // added end
     
     /**
      * Summarizes the constants for a metamodel that is subject to integration with OCL.
@@ -217,9 +224,11 @@ public class MetaModelConst {
     }
     
     static{
-        metaModelInfos =  new HashMap();
+        metaModelInfos =  new HashMap<String, MetaModelInfo>();
         metaModelInfos.put(MOF14, new MetaModelInfo(MOF14, MOF14OCLXMI, MOF14XMI, MODELPCKG, MOF14PCKGPRFX));
         metaModelInfos.put(UML15, new MetaModelInfo(UML15, UML15OCLXMI, UML15XMI, UMLPCKG, UML15PCKGPRFX));
+        // added by Christian Wende for CWM
+        metaModelInfos.put(CWM, new MetaModelInfo(CWM, null, CWMXMI, CWMPCKG, CWMPCKGPRFX));
     }
     
     /** Gets a structure comprising all constants for a metamodel that is subject to integration with OCL.
@@ -227,6 +236,15 @@ public class MetaModelConst {
      */
     public static MetaModelInfo getMMInfo(String metamodelname){
         return (MetaModelInfo)metaModelInfos.get(metamodelname);
+    }
+    
+    public static String getMetamodelForRefPackage(String pkg) {
+    	for(MetaModelInfo info : metaModelInfos.values()) {
+    		if(info.packageToInstantiate.equals(pkg)) {
+    			return info.name;
+    		}
+    	}
+    	return null;
     }
     
     private MetaModelConst() {

@@ -1,0 +1,347 @@
+<?xml version = '1.0' encoding = 'UTF-8' ?>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' xmlns:UML2 = 'org.omg.xmi.namespace.UML2'
+  timestamp = 'Thu Feb 09 13:25:06 CET 2006'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
+      <XMI.exporterVersion>1.0</XMI.exporterVersion>
+    </XMI.documentation>
+  </XMI.header>
+  <XMI.content>
+    <UML:Model xmi.id = 'Im2eb7427fm108fd5471b1mm7f54' name = 'Modell 1' isSpecification = 'false'
+      isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
+      <UML:Namespace.ownedElement>
+        <UML:Package xmi.id = 'Im2eb7427fm108fd5471b1mm7eee' name = 'main' visibility = 'public'
+          isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
+          <UML:Namespace.ownedElement>
+            <UML:Class xmi.id = 'Im2eb7427fm108fd5471b1mm7f4c' name = 'Person' visibility = 'public'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'
+              isActive = 'false'>
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id = 'Im2eb7427fm108fd5471b1mm7f35' name = 'firstname'
+                  visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable'>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref = 'Im2eb7427fm108fd5471b1mm7eef'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id = 'Im2eb7427fm108fd5471b1mm7f23' name = 'lastname'
+                  visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable'>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref = 'Im2eb7427fm108fd5471b1mm7eef'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id = 'Im2eb7427fm108fd5471b1mm7f12' name = 'age' visibility = 'private'
+                  isSpecification = 'false' ownerScope = 'instance' changeability = 'changeable'>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref = 'Im2eb7427fm108fd5471b1mm7ee3'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:DataType xmi.id = 'Im2eb7427fm108fd5471b1mm7eef' name = 'String' visibility = 'public'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'/>
+            <UML:DataType xmi.id = 'Im2eb7427fm108fd5471b1mm7ee3' name = 'int' visibility = 'public'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'/>
+            <UML:Generalization xmi.id = 'Im2eb7427fm108fd5471b1mm7ecf' isSpecification = 'false'>
+              <UML:Generalization.child>
+                <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7ee2'/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7f4c'/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+            <UML:Generalization xmi.id = 'Im2eb7427fm108fd5471b1mm7e11' isSpecification = 'false'>
+              <UML:Generalization.child>
+                <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7e24'/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7f4c'/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+            <UML:Class xmi.id = 'Im2eb7427fm108fd5471b1mm7d98' name = 'Examination'
+              visibility = 'public' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false' isActive = 'false'/>
+            <UML:Class xmi.id = 'Im2eb7427fm108fd5471b1mm7d37' name = 'Faculty' visibility = 'public'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'
+              isActive = 'false'/>
+            <UML:Class xmi.id = 'Im2eb7427fm108fd5471b1mm7e95' name = 'Lecture' visibility = 'public'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'
+              isActive = 'false'>
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id = 'Im2eb7427fm108fd5471b1mm7e7e' name = 'topic' visibility = 'private'
+                  isSpecification = 'false' ownerScope = 'instance' changeability = 'changeable'>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref = 'Im2eb7427fm108fd5471b1mm7eef'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Association xmi.id = 'Im2eb7427fm108fd5471b1mm7d7f' name = 'AExaminationLecture'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7d85' name = 'examination'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7d62'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7d61' lower = '0'
+                          upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7d98'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7d82' name = 'lecture'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7d60'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7d5f' lower = '1'
+                          upper = '-1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7e95'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Class xmi.id = 'Im2eb7427fm108fd5471b1mm7e24' name = 'Professor' visibility = 'public'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'
+              isActive = 'false'>
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref = 'Im2eb7427fm108fd5471b1mm7e11'/>
+              </UML:GeneralizableElement.generalization>
+            </UML:Class>
+            <UML:Association xmi.id = 'Im2eb7427fm108fd5471b1mm7dbd' name = 'AProfessorLecture'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7dc3' name = 'professor'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'false' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7d9c'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7d9b' lower = '1'
+                          upper = '-1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7e24'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7dc0' name = 'lecture'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'false' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7d9a'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7d99' lower = '0'
+                          upper = '-1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7e95'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Association xmi.id = 'Im2eb7427fm108fd5471b1mm7d1e' name = 'AFacultyProfessor'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7d24' name = 'faculty'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7d01'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7d00' lower = '0'
+                          upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7d37'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7d21' name = 'head'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7d1f'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7d20' lower = '1'
+                          upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7e24'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Class xmi.id = 'Im2eb7427fm108fd5471b1mm7ee2' name = 'Student' visibility = 'public'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'
+              isActive = 'false'>
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref = 'Im2eb7427fm108fd5471b1mm7ecf'/>
+              </UML:GeneralizableElement.generalization>
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id = 'Im2eb7427fm108fd5471b1mm7ec8' name = 'studentID'
+                  visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable'>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref = 'Im2eb7427fm108fd5471b1mm7ee3'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Association xmi.id = 'Im2eb7427fm108fd5471b1mm7e45' name = 'AStudentLecture'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7e4b' name = 'listener'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7e28'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7e27' lower = '0'
+                          upper = '-1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7ee2'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7e48' name = 'lecture'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7e26'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7e25' lower = '0'
+                          upper = '-1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7e95'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Association xmi.id = 'Im2eb7427fm108fd5471b1mm7d58' name = 'AStudentExamination'
+              isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7d5e' name = 'examination'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7d3b'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7d3a' lower = '0'
+                          upper = '-1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7d98'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id = 'Im2eb7427fm108fd5471b1mm7d5b' name = 'participant'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'false' ordering = 'unordered'
+                  aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id = 'Im2eb7427fm108fd5471b1mm7d39'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = 'Im2eb7427fm108fd5471b1mm7d38' lower = '0'
+                          upper = '-1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7ee2'/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Class xmi.id = 'Im57a60f5bm109456614femm7d53' name = 'JuniorProfessor'
+              visibility = 'public' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false' isActive = 'false'>
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref = 'Im57a60f5bm109456614femm7d40'/>
+              </UML:GeneralizableElement.generalization>
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id = 'Im57a60f5bm109456614femm7d39' name = 'juniorYear'
+                  visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable'>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref = 'Im2eb7427fm108fd5471b1mm7ee3'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Generalization xmi.id = 'Im57a60f5bm109456614femm7d40' isSpecification = 'false'>
+              <UML:Generalization.child>
+                <UML:Class xmi.idref = 'Im57a60f5bm109456614femm7d53'/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7e24'/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+            <UML:Class xmi.id = 'I533bd0f6m1094ec3ba4cmm7d39' name = 'GraduateExamination'
+              visibility = 'public' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false' isActive = 'false'>
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref = 'I533bd0f6m1094ec3ba4cmm7d26'/>
+              </UML:GeneralizableElement.generalization>
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id = 'I533bd0f6m1094ec3ba4cmm7d1f' name = 'topic' visibility = 'private'
+                  isSpecification = 'false' ownerScope = 'instance' changeability = 'changeable'>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref = 'Im2eb7427fm108fd5471b1mm7eef'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Generalization xmi.id = 'I533bd0f6m1094ec3ba4cmm7d26' isSpecification = 'false'>
+              <UML:Generalization.child>
+                <UML:Class xmi.idref = 'I533bd0f6m1094ec3ba4cmm7d39'/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref = 'Im2eb7427fm108fd5471b1mm7d98'/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+          </UML:Namespace.ownedElement>
+        </UML:Package>
+        <UML:DataType xmi.id = 'I2c8176fam109076261eamm7d88' name = 'Person[]' visibility = 'public'
+          isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'/>
+        <UML:Package xmi.id = 'I2c8176fam109076261eamm7d42' name = 'java' isSpecification = 'false'
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
+          <UML:Namespace.ownedElement>
+            <UML:Package xmi.id = 'I2c8176fam109076261eamm7d43' name = 'lang' isSpecification = 'false'
+              isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
+              <UML:Namespace.ownedElement>
+                <UML:DataType xmi.id = 'I2c8176fam109076261eamm7d44' name = 'int' isSpecification = 'false'
+                  isRoot = 'false' isLeaf = 'false' isAbstract = 'false'/>
+                <UML:DataType xmi.id = 'I2c8176fam109076261eamm7d41' name = 'void' isSpecification = 'false'
+                  isRoot = 'false' isLeaf = 'false' isAbstract = 'false'/>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+          </UML:Namespace.ownedElement>
+        </UML:Package>
+      </UML:Namespace.ownedElement>
+    </UML:Model>
+  </XMI.content>
+</XMI>
