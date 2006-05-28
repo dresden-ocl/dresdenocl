@@ -27,11 +27,11 @@ AS ( $body$ );
 >>
 
 createColumn(name, type, primaryKey, foreignKey) ::= <<
-`$name$` $typeMap.(type)$$if(primaryKey)$ PRIMARY KEY $endif$
+$name$ $typeMap.(type)$$if(primaryKey)$ PRIMARY KEY $endif$
 >>
 
 createTable(tablename, columns) ::= <<
-CREATE TABLE `$tablename$` (
+CREATE TABLE $tablename$ (
 $columns$ 
 );
 >>
