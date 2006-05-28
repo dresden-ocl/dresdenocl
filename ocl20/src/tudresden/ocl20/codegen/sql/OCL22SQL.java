@@ -84,6 +84,7 @@ import tudresden.ocl20.codegen.sql.orm.ORMappingMode;
  * Simple GUI for the experimental OCL22SQL tool.
  * 
  * @author Florian Heidenreich
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class OCL22SQL extends JPanel implements ActionListener {
 

@@ -43,6 +43,7 @@ import java.util.*;
  *
  * @author Sten Loecher, Florian Heidenreich
  * @see tudresden.ocl20.codegen.sql.codegen.MappedClass
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class  Guide {
 	

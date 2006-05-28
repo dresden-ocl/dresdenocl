@@ -39,6 +39,7 @@ import java.util.List;
  * names and the SQL Statement can be stored in a View object.
  * 
  * @author Sten Loecher, Florian Heidenreich
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class View extends Table {
 	/** 

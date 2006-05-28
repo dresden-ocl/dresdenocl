@@ -38,6 +38,7 @@ import tudresden.ocl20.codegen.sql.codegen.Guide;
  * a relational schema.
  * 
  * @author Sten Loecher, Florian Heidenreich
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public interface ORMapping {
 

@@ -45,6 +45,7 @@ import tudresden.ocl20.core.util.ReflectiveVisitor;
  * @author Florian Heidenreich
  * @see tudresden.ocl20.codegen.sql.codegen.CodeAgent
  * @see tudresden.ocl20.codegen.sql.codegen.ObjectViewSchema
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class SQLCodeGenerator extends ReflectiveVisitor {
 	

@@ -33,6 +33,7 @@ package tudresden.ocl20.codegen.sql.codegen;
  * 
  * @author Sten Loecher
  * @see SQLBuilder
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class OracleSQLBuilder implements SQLBuilder {
         protected String TYPE_FOR_BOOLEAN = " NUMBER(1)";

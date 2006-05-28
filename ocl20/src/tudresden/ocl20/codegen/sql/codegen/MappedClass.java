@@ -48,6 +48,7 @@ import tudresden.ocl20.codegen.sql.orm.Table;
  * @author Sten Loecher, Florian Heidenreich
  * @see tudresden.ocl20.codegen.sql.orm.ORMappingScheme
  * @invariant associationEnds->isUnique(ae:associationEnd|ae.name)
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class MappedClass {
 

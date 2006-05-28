@@ -85,6 +85,7 @@ import tudresden.ocl20.codegen.sql.util.MetaModelHelper;
  * </ol>
  * 
  * @author Florian Heidenreich
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  * 
  */
 public class ORMappingImpl implements ORMapping {

@@ -41,6 +41,7 @@ import org.xml.sax.SAXException;
 /**
  * Chooses code templates from a XML file that relates to a given specification.
  * @author Sten Loecher
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class CodeAgent {
 	

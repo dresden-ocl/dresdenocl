@@ -51,6 +51,7 @@ import java.util.Set;
  * - the name of a column in the foreign table.<br>
  * @author Sten Loecher
  * @version 2.0 (Entirely new implementation due to new requirements.)
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class Table {
 

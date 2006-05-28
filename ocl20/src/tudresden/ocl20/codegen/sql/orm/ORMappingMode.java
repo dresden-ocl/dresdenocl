@@ -31,6 +31,7 @@ package tudresden.ocl20.codegen.sql.orm;
  * This enum encapsulates the possible object-relational mapping options
  * 
  * @author Florian Heidenreich
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  *
  */
 public enum ORMappingMode {

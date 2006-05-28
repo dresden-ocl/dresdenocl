@@ -44,6 +44,7 @@ import tudresden.ocl20.codegen.sql.orm.Table;
  * @author Sten Loecher
  * @see ORMapping
  * @see SQLBuilder
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class SchemaGenerator implements SQLDirector {
 	private String theScript;

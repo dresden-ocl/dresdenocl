@@ -33,6 +33,7 @@ import tudresden.ocl20.codegen.sql.codegen.MappedClass;
  *  schemes to the  SQL code generator.
  *
  *  @author Sten Loecher
+ *  @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public interface ORMappingScheme {
 

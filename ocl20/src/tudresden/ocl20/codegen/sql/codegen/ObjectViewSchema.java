@@ -46,6 +46,7 @@ import tudresden.ocl20.codegen.sql.orm.View;
  * all tupels respectivly objects related to a class via one virtual table.
  * 
  * @author Sten Loecher
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class ObjectViewSchema implements ORMappingScheme, SQLDirector {
 

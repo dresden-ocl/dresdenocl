@@ -47,6 +47,7 @@ import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
  * model elements.
  * 
  * @author Florian Heidenreich
+ * @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public class MetaModelHelper {
 

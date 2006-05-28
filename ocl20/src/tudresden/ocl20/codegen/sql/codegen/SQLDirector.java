@@ -34,6 +34,7 @@ package tudresden.ocl20.codegen.sql.codegen;
  *  
  *  @author Sten Loecher
  *  @see SQLBuilder
+ *  @deprecated See tudresden.ocl20.codegen.decl.tools.sql
  */
 public interface SQLDirector {
     /**
