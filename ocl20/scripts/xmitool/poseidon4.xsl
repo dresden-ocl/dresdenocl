@@ -1,6 +1,7 @@
 <?xml version="1.0"?> 
 <!-- This stylesheet deletes UML diagrams from an XMI file -->
 <!-- Created by John V. Sichi and contributed to the mdr-users list -->
+<!-- Modified by Florian Heidenreich -->
 
 <xsl:stylesheet 
   version="1.0" 
@@ -20,6 +21,12 @@
   <xsl:template match="UML:Uml1SemanticModelBridge" />
 
   <!-- UML2 trick -->
+  <xsl:template match="UML:Parameter/UML2:TypedElement.type">
+    <xsl:element name="UML:Parameter.type">
+      <xsl:apply-templates />
+    </xsl:element>
+  </xsl:template>
+  
   <xsl:template match="UML2:TypedElement.type">
     <xsl:element name="UML:StructuralFeature.type">
       <xsl:apply-templates />
