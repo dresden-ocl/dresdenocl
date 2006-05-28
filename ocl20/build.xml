@@ -79,7 +79,8 @@
         <property name="objdir.libs" value="${basedir}/lib/internal" />
         <property name="destdir.javadoc" value="${dir.doc}/api" />
     	
-    	<property name="srcdir.ocl22sql" value="${srcdir.generic}" />
+        <property name="srcdir.ocl22decl" value="${srcdir.generic}" />
+        <property name="srcdir.ocl22sql" value="${srcdir.generic}" />
         
         <property name="jar.libs.jmi-api.relative" value="ocl20jmiapi.jar" />
         <property name="jar.libs.jmi-api" value="${objdir.libs}/ocl20jmiapi.jar" />
@@ -95,6 +96,7 @@
         <property name="jar.libs.oclscriptrunner" value="${objdir.libs}/ocl20scriptrunner.jar" />
         <property name="jar.libs.codegen.java"  value="${objdir.libs}/ocl20codegen-java.jar" />
         <property name="jar.libs.workbench" value="${objdir.libs}/ocl20workbench.jar" />
+        <property name="jar.libs.ocl22decl" value="${objdir.libs}/ocl22decl.jar" />
         <property name="jar.libs.ocl22sql" value="${objdir.libs}/ocl22sql.jar" />
         <property name="jar.libs.utilityexample" value="${objdir.libs}/utilityexample.jar" />
         
@@ -569,18 +571,53 @@
 	<!--                                                                   -->
 	<!--  Compiles the OCL22SQL tool                                       -->
 	<!--                                                                   -->
-	<target name="compile.ocl22sql" depends="init,jar.sableparser,jar.ocl20stdlib,jar.parsertools"
+	<target name="compile.ocl22decl" depends="init,jar.sableparser,jar.ocl20stdlib,jar.parsertools"
+		description="compile the OCL22Decl tools" >
+		<mkdir dir="${objdir.generic}" />
+		<javac srcdir="${srcdir.ocl22decl}" destdir="${objdir.generic}" 
+			debug="true" debuglevel="lines,vars,source"
+			source="1.5">
+			<include name="tudresden/ocl20/codegen/decl/**/*.java" />
+			<exclude name="tudresden/ocl20/codegen/decl/tools/**/*.java" />
+			<exclude name="tudresden/ocl20/codegen/decl/test/**/*.java" />
+			<classpath id="classpath.ocl22decl">
+				<path refid="libs.basic" />
+				<path refid="libs.mdr" />
+				<pathelement location="${jar.libs.jmi-api}" />
+				<pathelement location="${jar.libs.stringTemplate}" />
+				<pathelement location="${jar.libs.antlr}" />
+				<pathelement location="${jar.sableparser}" />
+				<pathelement location="${jar.xerces}" />
+				<pathelement location="${dir.resources}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="jar.ocl22decl"
+		depends="init,init.mdr,jar.jmi.if,jar.jmi.impl,jar.ocl20repository,jar.ocl20stdlib,jar.sableparser,compile.parsertools,compile.ocl22decl"
+		description="packs the OCL22Decl tools into a jar file" >
+        <jar 	basedir="${objdir.generic}" 
+        	 	destfile="${jar.libs.ocl22decl}">
+			<include name="tudresden/ocl20/codegen/decl/**" />
+		</jar>
+	</target>
+
+	<target name="compile.ocl22sql" depends="init.cwm,jar.trans-engine,jar.ocl22decl"
 		description="compile the OCL22SQL tool" >
 		<mkdir dir="${objdir.generic}" />
 		<javac srcdir="${srcdir.ocl22sql}" destdir="${objdir.generic}" 
 			debug="true" debuglevel="lines,vars,source"
 			source="1.5">
-			<include name="tudresden/ocl20/codegen/sql/**/*.java" />
-			<exclude name="tudresden/ocl20/codegen/sql/test/**/*.java" />
+			<include name="tudresden/ocl20/codegen/decl/tools/sql/**/*.java" />
+
 			<classpath id="classpath.ocl22sql">
 				<path refid="libs.basic" />
 				<path refid="libs.mdr" />
 				<pathelement location="${jar.libs.jmi-api}" />
+				<pathelement location="${jar.libs.ocl22decl}" />
+				<pathelement location="${jar.libs.stringTemplate}" />
+				<pathelement location="${jar.libs.transformation}" />
+				<pathelement location="${jar.libs.antlr}" />
 				<pathelement location="${jar.sableparser}" />
 				<pathelement location="${jar.xerces}" />
 				<pathelement location="${dir.resources}" />
@@ -590,19 +627,19 @@
 
 	<!-- depends="init,jar.sableparser" -->
 	<target name="jar.ocl22sql"
-		depends="init,init.mdr,jar.jmi.if,jar.jmi.impl,jar.ocl20repository,jar.ocl20stdlib,jar.sableparser,compile.parsertools,compile.ocl22sql"
+		depends="compile.ocl22sql"
 		description="packs the OCL22SQL tool into a jar file" >
         <jar 	basedir="${objdir.generic}" 
         	 	destfile="${jar.libs.ocl22sql}"
-        	 	manifest="${dir.resources}/manifest/ocl2sql.manifest">
-			<include name="tudresden/ocl20/codegen/sql/**" />
+    	 		manifest="${dir.resources}/manifest/ocl22sql.manifest">
+			<include name="tudresden/ocl20/codegen/decl/tools/sql/**" />
 		</jar>
 	</target>
 
 	<target name="run.ocl22sql"
-		depends="init,jar.parsertools,jar.ocl22sql"
+		depends="jar.ocl22sql"
 		description="runs the OCL22SQL tool" >
-		<java classname="tudresden.ocl20.codegen.sql.OCL22SQL" 
+		<java classname="tudresden.ocl20.codegen.decl.tools.sql.OCL22SQL" 
 			fork="true" maxmemory="128M">
             <jvmarg value="-ea" />
 			<assertions>
@@ -618,7 +655,10 @@
 				<pathelement location="${jar.libs.ocl20repository}" />
 				<pathelement location="${jar.libs.ocl20stdlib}" />
 				<pathelement location="${jar.libs.ocl22sql}" />
-				<pathelement location="${jar.xerces}" />
+				<pathelement location="${jar.libs.ocl22decl}" />
+				<pathelement location="${jar.libs.transformation}" />
+				<pathelement location="${jar.libs.antlr}" />
+				<pathelement location="${jar.libs.stringTemplate}" />
 				<pathelement location="${dir.resources}" />
 			</classpath>
 		</java>
@@ -1032,7 +1072,7 @@ More info goes here.
 	
     <!-- Transformation Framework -->
 
-	<target name="compile.trans-engine" depends="init, init.mdr, init.cwm, jar.parsertools, jar.ocl20repository"
+	<target name="compile.trans-engine" depends="init, init.mdr, init.cwm, jar.parsertools, jar.ocl20repository, jar.ocl22decl"
 		description="Compiles the classes for transformation engine">
         <mkdir dir="${objdir.generic}" />
         <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
@@ -1047,8 +1087,6 @@ More info goes here.
         	<include name="tudresden/ocl20/transformation/gui/*" />
         	<include name="tudresden/ocl20/transformation/test/*" />
         	<include name="tudresden/ocl20/transformation/exception/*" />
-        	<include name="tudresden/ocl20/codegen/decl/mapping/*" />
-        	<include name="tudresden/ocl20/codegen/decl/template/*" />
 			<exclude name="**.html" />
             <classpath>
             	<pathelement location="${jar.libs.stringTemplate}" />
@@ -1076,8 +1114,6 @@ More info goes here.
         	<include name="tudresden/ocl20/transformation/gui/*.class" />
         	<include name="tudresden/ocl20/transformation/test/*.class" />
         	<include name="tudresden/ocl20/transformation/exception/*.class" />
-        	<include name="tudresden/ocl20/codegen/decl/mapping/*.class" />
-        	<include name="tudresden/ocl20/codegen/decl/template/*.class" />
 		</jar>
     </target>
 
