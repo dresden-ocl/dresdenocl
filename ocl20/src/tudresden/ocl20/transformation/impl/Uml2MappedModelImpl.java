@@ -293,8 +293,16 @@ public class Uml2MappedModelImpl extends M2XTransformation<Uml15Package, MappedM
 		return mc;
 	}
 
+	private int assTabCounter = 0;
+	private String getUniqueAssTabName() {
+		assTabCounter++;
+		return "ASSTAB" + assTabCounter;
+	}
+	
 	private void map_association2guide(Association association) throws InvalidModelException {
 		String assName = association.getName();
+		if (assName == null) assName = getUniqueAssTabName();
+		
 		String assTableName = conf.get(ASSOCIATION_TABLE_PREFIX.getKey()) + assName;
 		List<AssociationEnd> aEnds = association.getConnection();
 		if(!(aEnds.size()==2) ) {
