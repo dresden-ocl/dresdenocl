@@ -1,0 +1,88 @@
+-- 
+-- OCL22SQL test and demonstration constraints
+-- 
+-- Part of Dresden OCL Tookit, see LICENSE for license terms.
+-- (c) 2006 Florian Heidenreich <mail@fheidenreich.de>
+-- 
+-- 
+-- Use this constraint file with model university_example.xmi
+-- 
+
+package Uni
+
+/*
+ * The academic grade of a persons supervisor must be greater
+ * than the academic grade of the supervised person.
+ *
+ * Used patterns: BASIC TYPE, NAVIGATION, CLASS AND ATTRIBUTE
+ */
+context Person
+inv tudOclInv1: self.supervisor.grade.value > self.grade.value
+
+
+/*
+ * The number of subfacilities must be greater than or equal to 2
+ *
+ * Used patterns: BASIC VALUE, CLASS AND ATTRIBUTE
+ */
+context Faculty
+inv tudOclInv2: self.subFacility->size() >= 2
+
+
+/*
+ * All subfacilities must be an Institute
+ *
+ * Used patterns: QUERY, BASIC TYPE, CLASS AND ATTRIBUTE, COMPLEX PREDICATE
+ */
+context Faculty
+inv tudOclInv3: self.subFacility->forAll(f:Facility | f.oclIsTypeOf(Institute))
+
+
+/*
+ * The tax class of an employee depends on the academic grade 
+ * of the employee
+ *
+ * Used patterns: BASIC TYPE, NAVIGATION, CLASS AND ATTRIBUTE
+ */
+context Employee
+inv tudOclInv4:	((self.grade.name = 'diploma') implies (self.taxClass = 'tc1'))
+						and ((self.grade.name = 'doctor') implies (self.taxClass = 'tc2'))
+						and ((self.grade.name = 'professor') implies (self.taxClass = 'tc3'))
+
+
+/*
+ * The head of the facility is included in the members of the facility
+ *
+ * Used patterns: 
+ */
+context Facility
+inv tudOclInv5: self.member->includes(self.headOfFacility)
+
+
+/*
+ * If a diploma thesis is in progress, the author must be of type Student
+ */
+context Paper
+inv tudOclInv6: ((self.purpose = 'Diplom') and (self.inProgress = true)) implies (self.author->forAll(p:Person | p.oclIsTypeOf(Student)))
+
+
+/*
+ * The head of the faculty is a professor
+ */
+context Faculty
+inv tudOclInv7: self.headOfFacility.grade.name = 'professor'
+
+/*
+ * Test for invalid names of grades
+ */
+context Grade
+inv tudOclInv8: Set{'none','diploma','doctor','professor'}->includes(self.name)
+
+
+/*
+ * A employee with a doctor degree implies the existence of a paper with 'Dissertation' as purpose.
+ */
+context Employee
+inv tudOclInv9: (self.grade.name = 'doctor') implies (self.papers->select(p:Paper | p.purpose = 'Dissertation')->size() = 1)
+
+endpackage
