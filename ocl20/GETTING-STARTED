@@ -71,9 +71,9 @@
         the abstract syntax tree.
         
    3. OCL22SQL tool
-      This software was written by Florian Heidenreich for his student research
-      project (Grosser Beleg). It provides a GUI to create integrity views from 
-      textual OCL invariants and allows:
+      This software was written as a prototype example for the DeclarativeCode-
+      Generator by Florian Heidenreich for his diploma thesis. It provides a GUI 
+      to create integrity views from textual OCL invariants and allows:
       a. loading of OCL constraint files
       b. loading UML15 models to run attribute evaluation/AST generation against
          (using XMI)
@@ -179,8 +179,8 @@
    Then choose the corresponding model as XMI, for example
    "university_example.xmi".
    
-   Select one of the three available mapping schemes for the object-relational
-   mapping and press "Execute Project". You'll notice some status messages
+   Choose the transformation parameters for the object-relational
+   mapping and press "Next". You'll notice some status messages
    appearing on your console.
    
    After the text "Finished!" is displayed on the console, switch to the 
