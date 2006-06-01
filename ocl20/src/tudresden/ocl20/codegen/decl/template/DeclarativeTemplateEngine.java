@@ -30,6 +30,8 @@ package tudresden.ocl20.codegen.decl.template;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.LinkedList;
 
 import org.antlr.stringtemplate.StringTemplateGroup;
@@ -64,12 +66,12 @@ public class DeclarativeTemplateEngine implements TemplateEngine {
 	public DeclarativeTemplateEngine(LinkedList<String> groupFiles) throws FileNotFoundException {
 		assert(groupFiles.size() > 0);
 		
-		Reader groupReader = new FileReader(ClassLoader.getSystemClassLoader().getResource(groupFiles.getLast()).getFile());
+		Reader groupReader = new FileReader(getFullTemplateFileName(groupFiles.getLast()));
 		leafGroup = new StringTemplateGroup(groupReader);
-				
+
 		StringTemplateGroup lastGroup = leafGroup; 
 		for (int i = 1; i < groupFiles.size(); i++) {
-			groupReader = new FileReader(ClassLoader.getSystemClassLoader().getResource(groupFiles.get(groupFiles.size()- i - 1)).getFile());
+			groupReader = new FileReader(getFullTemplateFileName(groupFiles.get(groupFiles.size()- i - 1)));
 			StringTemplateGroup superGroup = new StringTemplateGroup(groupReader);
 			lastGroup.setSuperGroup(superGroup);
 			lastGroup = superGroup;
@@ -77,10 +79,22 @@ public class DeclarativeTemplateEngine implements TemplateEngine {
 	}
 	
 	/**
-	 * Returns
+	 * Returns the DeclarativeTemplate specified by the given template name
 	 */
 	public DeclarativeTemplate getTemplate(String name) {
 		return new DeclarativeTemplate(leafGroup.getInstanceOf(name));
 	}
 
+	/**
+	 * Helper method to return the full path of the template file
+	 */
+	private String getFullTemplateFileName(String templateGroupFile) {
+		String decodedFileName = ClassLoader.getSystemClassLoader().getResource(templateGroupFile).getFile();
+		try {
+			decodedFileName = URLDecoder.decode(decodedFileName, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return decodedFileName;
+	}
 }
