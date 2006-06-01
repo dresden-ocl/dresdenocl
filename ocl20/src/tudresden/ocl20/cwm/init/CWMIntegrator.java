@@ -60,10 +60,14 @@ public class CWMIntegrator {
         URL outputDir = ClassLoader.getSystemClassLoader().getResource("cwm/");
         String integratedXmiUrl = null;
 		try {
-			integratedXmiUrl = new URL(outputDir ,"CWM.integrated.xml").getPath();
+			integratedXmiUrl = java.net.URLDecoder.decode(new URL(outputDir ,"CWM.integrated.xml").getPath(), "UTF-8");
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e){
+			System.out.println("The encoding of the jmi export path is not supported.");
+			e.printStackTrace();
+ 			
 		}
         
         
@@ -117,7 +121,7 @@ public class CWMIntegrator {
 		} catch (ModelManagerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
         
           
 	}
