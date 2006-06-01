@@ -4,11 +4,11 @@ import java.util.Collection;
 
 import javax.jmi.reflect.RefPackage;
 
+import tudresden.ocl20.core.MetaModelConst;
 import tudresden.ocl20.core.ModelManager;
 import tudresden.ocl20.core.jmi.uml15.core.Attribute;
 import tudresden.ocl20.core.jmi.uml15.core.Method;
 import tudresden.ocl20.core.jmi.uml15.core.UmlClass;
-import tudresden.ocl20.cwm.init.MetaModelConst;
 import tudresden.ocl20.eclipse.plugins.visual.model.UmlVisualNode;
 import tudresden.ocl20.eclipse.plugins.visual.model.VisualNode;
 import tudresden.ocl20.eclipse.plugins.visual.util.TopNode;
