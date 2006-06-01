@@ -11,40 +11,10 @@
       <library name="OCLToolkitForEclipse.jar">
          <export name="*"/>
       </library>
-      <library name="lib/external/lib/jmi.jar">
+      <library name="lib/external/antlr.jar">
          <export name="*"/>
       </library>
-      <library name="lib/external/mdr/nbjmi_jmiutils.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/external/jgraph.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/external/jgraphaddons.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/external/junit.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/external/sablecc.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/external/xerces.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/external/lib/mof.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/external/lib/openide.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/external/mdr/nbjmi_mdrapi.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/external/mdr/nbjmi_mdrimpl.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20jmiapi.jar">
+      <library name="lib/external/stringtemplate.jar">
          <export name="*"/>
       </library>
    </runtime>
