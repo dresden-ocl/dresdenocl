@@ -71,7 +71,7 @@ public class DeclarativeTemplateEngine implements TemplateEngine {
 
 		StringTemplateGroup lastGroup = leafGroup; 
 		for (int i = 1; i < groupFiles.size(); i++) {
-			groupReader = new FileReader(getFullTemplateFileName(groupFiles.get(groupFiles.size()- i - 1)));
+			groupReader = new FileReader(getFullTemplateFileName(groupFiles.get(groupFiles.size() - i - 1)));
 			StringTemplateGroup superGroup = new StringTemplateGroup(groupReader);
 			lastGroup.setSuperGroup(superGroup);
 			lastGroup = superGroup;
