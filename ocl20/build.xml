@@ -929,12 +929,17 @@
     	<mkdir dir="${basedir}/dist/bin/resources"/>
     	<mkdir dir="${basedir}/dist/bin/scripts"/>
     	<mkdir dir="${basedir}/dist/bin/examples"/>
+    	<mkdir dir="${basedir}/dist/bin/eclipse"/>
        	<copy todir="${basedir}/dist/bin/resources">
         		<fileset dir="${basedir}/resources"/>
         </copy>
        	<copy todir="${basedir}/dist/bin/examples">
         		<fileset dir="${basedir}/examples"/>
         </copy>
+    	<echo message="To include eclipse plugins into this release you have to place them in eclipse/bin"/>
+    	<copy todir="${basedir}/dist/bin/eclipse">
+    		<fileset dir="${basedir}/eclipse/bin"/>
+    	</copy>
     	<copy todir="${basedir}/dist/bin">
     		<fileset file="${jar.libs.ocl22sql}"/>
     		<fileset file="${jar.libs.ocl22decl}"/>
@@ -987,6 +992,7 @@
     			<include name="build.xml"/>
     			<include name="GETTING-STARTED"/>
     			<include name="examples/**"/>
+    			<include name="eclispe/**"/>
     		</fileset>
     	</copy>
     	
@@ -994,11 +1000,11 @@
     	<gzip zipfile="${basedir}/dist/dresden-ocl2-src-1.0.tar.gz" src="${basedir}/dist/dresden-ocl2-src-1.0.tar"/>
 
     	<!-- delete temporary files-->
-        <!--<delete includeEmptyDirs="true" failonerror="false">
+        <delete includeEmptyDirs="true" failonerror="false">
 		    <fileset dir="${basedir}/dist/bin" />
         	<fileset dir="${basedir}/dist/src" />
         	<fileset file="${basedir}/dist/*.tar"/>
-        </delete>-->
+        </delete>
 
     </target>
 
