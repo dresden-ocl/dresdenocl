@@ -17,6 +17,87 @@
       <library name="lib/external/stringtemplate.jar">
          <export name="*"/>
       </library>
+      <library name="lib/external/lib/jmi.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/lib/mof.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/lib/openide.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/mdr/nbjmi_jmiutils.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/mdr/nbjmi_mdrapi.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/mdr/nbjmi_mdrimpl.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/jgraph.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/jgraphaddons.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/junit.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/sablecc.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/external/xerces.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/CWM.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20codegen-java.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20jmiapi.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20jmiimpl.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20parser-astlib.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20parserbase.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20parsertools.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20repository.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20scriptrunner.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20stdlib.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl20workbench.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl22decl.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/ocl22sql.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/sablecc-extended.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/trans_engine.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/internal/utilityexample.jar">
+         <export name="*"/>
+      </library>
    </runtime>
 
    <requires>
