@@ -974,8 +974,8 @@
     	<copy todir="${basedir}/dist/bin/scripts">
 			<fileset dir="${basedir}/scripts"/>
     	</copy>
-    	<tar tarfile="${basedir}/dist/dresden-ocl2-1.0.tar" basedir="${basedir}/dist/bin"/>
-    	<gzip zipfile="${basedir}/dist/dresden-ocl2-1.0.tar.gz" src="${basedir}/dist/dresden-ocl2-1.0.tar"/>
+    	<tar tarfile="${basedir}/dist/dresden-ocl2-1.1.tar" basedir="${basedir}/dist/bin"/>
+    	<gzip zipfile="${basedir}/dist/dresden-ocl2-1.1.tar.gz" src="${basedir}/dist/dresden-ocl2-1.1.tar"/>
     	
     	<!-- Source files -->
     	<mkdir dir="${basedir}/dist/src"/>
@@ -992,12 +992,13 @@
     			<include name="build.xml"/>
     			<include name="GETTING-STARTED"/>
     			<include name="examples/**"/>
-    			<include name="eclispe/**"/>
+    			<include name="eclipse/**"/>
+    			<exclude name="eclipse/bin/**"/>
     		</fileset>
     	</copy>
     	
-    	<tar tarfile="${basedir}/dist/dresden-ocl2-src-1.0.tar" basedir="${basedir}/dist/src"/>
-    	<gzip zipfile="${basedir}/dist/dresden-ocl2-src-1.0.tar.gz" src="${basedir}/dist/dresden-ocl2-src-1.0.tar"/>
+    	<tar tarfile="${basedir}/dist/dresden-ocl2-src-1.1.tar" basedir="${basedir}/dist/src"/>
+    	<gzip zipfile="${basedir}/dist/dresden-ocl2-src-1.1.tar.gz" src="${basedir}/dist/dresden-ocl2-src-1.1.tar"/>
 
     	<!-- delete temporary files-->
         <delete includeEmptyDirs="true" failonerror="false">

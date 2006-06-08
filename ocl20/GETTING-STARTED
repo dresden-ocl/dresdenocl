@@ -125,7 +125,8 @@
 
    For the Transformation Framework , change the working directory to $BASE and type:
    		
-   		ant run.transformationGUI (only for source releases)
+   		ant run.transformationGUI (for source releases)
+   		java -jar trans_engine.jar (for binary releases)
    
 
    OCL2.0 Workbench
