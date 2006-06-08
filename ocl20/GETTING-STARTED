@@ -47,7 +47,7 @@
   Build targets
   -------------
 
-  There are five applications in the toolkit by now.
+  There are six applications in the toolkit by now.
 
   1. OCL2.0 Workbench
      This software was written by Stefan Ocke for his diploma thesis. It provides
@@ -98,6 +98,14 @@
    	  execute metamodelbased transformations.
    	  The distribution comes with a implementation of transformations performing
    	  a database-shema generation from uml models.
+   	  
+   6. Eclipse Plugins
+      There are three Eclipse plugins shipped with this toolkit. The Base plugin and 
+      the OCL Editor plugin were written by Mirko Stölzel. The Visualization plugin 
+      was written by Kai-Uwe Gärtner.
+      The OCL Editor plugin provides a text editor for OCL Constraints.
+      The Visualization plugin helps you to see what is inside the Netbeans Repository.
+      The Base provides the basic functions of the toolkit to other plugins.
   	  
 
    All applications share a common codebase. To faciliate building and running
@@ -201,6 +209,29 @@
    A short introduction how to use the Transformation Framework can be found in:
    $BASE/resources/cwm/howto
    Example models can be found under $BASE/resources/cwm/UmlModels
+   
+   
+   Visualization Plugin for Eclipse SDK
+   ------------------
+   
+   To run the visualization plugin you need the following:
+   
+    - at least Eclipse SDK 3.0
+    - Eclipse GEF
+    
+   If you have a binary release you can simply copy the contents of the 'eclipse' 
+   folder to your local eclipse folder. If you have a source release you can find 
+   instructions in eclipse/GETTING_STARTED.
+   
+   To visualize an OCL constraint proceed the following steps:
+   
+    1. Import your UML-Model (XMI file) and you OCL constraint (OCL file) into a 
+       project.
+    2. Load the UML-Model by right-clicking the XMI file and choosing 
+       "Model Visualization->Load XMI file".
+    3. Load you OCL-Constraint the same way
+    4. You will see the visualized repository content in a new view
+    
   
    Contact
    -------
