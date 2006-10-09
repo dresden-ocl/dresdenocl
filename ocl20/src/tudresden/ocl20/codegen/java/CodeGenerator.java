@@ -225,7 +225,7 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
         else if(type instanceof CollectionType){
             result = mapTypeToDescriptor(((CollectionType)type).getElementType());
             if(type instanceof SetType){
-                result+=".getOclSetType)";
+                result+=".getOclSetType()";
             }
             else if(type instanceof SequenceType){
                 result+=".getOclSequenceType()";
