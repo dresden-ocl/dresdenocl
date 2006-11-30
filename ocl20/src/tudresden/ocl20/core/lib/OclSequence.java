@@ -41,8 +41,10 @@ import java.util.*;
  *
  *  @see OclCollection
  *  @author Frank Finger
+ *  
+ *  made a subclass of OclSortedCollection by Ronny Brandt  
  */
-public class OclSequence extends OclCollection {
+public class OclSequence extends OclSortedCollection {
 
   /** public constructor for valid OclSequences; it should be considered to use
    *  Ocl.getOclSequenceFor(Object o) instead of calling this constructor
@@ -159,8 +161,10 @@ public class OclSequence extends OclCollection {
       return col;
     if (col instanceof OclSequence)
       return union((OclSequence)col);
+    else if (col instanceof OclOrderedSet)
+    	return union((OclOrderedSet)col);
     else
-      return new OclSequence(0,"OclSequence union() called with non-OclSequence argument");
+      return new OclSequence(0,"OclSequence union() called with OclUnsortedCollection argument");
   }
 
   /** @return the OclSequence consisting of all elements of this OclSequence,
@@ -175,6 +179,16 @@ public class OclSequence extends OclCollection {
     list.addAll(seq.collection);
     return new OclSequence(list);
   }
+  
+  public OclSequence union(OclOrderedSet oset) {
+  	if (isUndefined())
+  		return this;
+  	if (oset.isUndefined())
+  		return new OclSequence(0, oset.getUndefinedReason());
+  	ArrayList list = new ArrayList(collection);
+  	list.addAll(oset.collection);
+  	return new OclSequence(list);
+  }
 
   /** Ocl.STRICT_VALUE_TYPES determines whether the returned OclSequence is
    *  a newly constructed one, or if this OclSequence is changed appropriately
@@ -185,7 +199,7 @@ public class OclSequence extends OclCollection {
    *  @return the OclSequence consisting of all elements of this OclSequence,
    *          followes by the object given as argument
    */
-  public OclSequence append(OclRoot obj) {
+  public OclSortedCollection append(OclRoot obj) {
     if(isUndefined())
       return this;
     if(obj.isUndefined()) 
@@ -209,7 +223,7 @@ public class OclSequence extends OclCollection {
    *  @return the OclSequence consisting of the object given as argument followed
    *          by all elements of this OclSequence
    */
-  public OclSequence prepend(OclRoot obj) {
+  public OclSortedCollection prepend(OclRoot obj) {
     if(isUndefined())
       return this;
     if(obj.isUndefined()) 
@@ -294,12 +308,13 @@ public class OclSequence extends OclCollection {
     return at( size() );
   }
 
+
   /** @return an OclSequence containing all elements of this OclSequence,
    *          followed by the object given as parameter; this method is
    *          implemented to call <CODE>append(obj)</CODE>
    */
   public OclSequence including(OclRoot obj) {
-    return append(obj);
+    return (OclSequence)append(obj);
   }
 
   /** @return an OclSequence containing all elements of this OclSequence that
@@ -329,6 +344,66 @@ public class OclSequence extends OclCollection {
 
   public String toString() {
     return "OclSequence"+super.toString();
+  }
+  
+  /**
+   * @return the index of the Object <code>obj</code> in the sequence 
+   * 				 or an undefined OclInteger if <code>obj</code> is not in
+   *         sequence
+   * @author Ronny Brandt   
+   */
+  public OclInteger indexOf(OclRoot obj) {
+		if (isUndefined())
+			return new OclInteger(0, this.getUndefinedReason());
+		if (obj.isUndefined())
+			return new OclInteger(0, obj.getUndefinedReason());
+
+		/*int index = 1;
+		Iterator iter=collection.iterator();
+		while (iter.hasNext()) {
+			try {
+				if (obj.isEqualTo(iter.next()).isTrue())
+					return new OclInteger(index);
+			} catch (OclException e) {
+        // isEqualTo raised exception bcause obj is not of same type as next				
+			}
+			index++;
+		}
+		return new OclInteger(0, "object "+obj.toString()+" not found within indexOf()");*/
+		
+		int index;
+    if (!(collection instanceof List)) {
+    	ArrayList list = new ArrayList(collection);
+    	index = list.indexOf(obj) + 1;
+    }
+    else
+    {
+  		index = ((List)collection).indexOf(obj) + 1;
+    }
+		if (index > 0)
+			return new OclInteger(index);
+		return new OclInteger(0, "object "+obj.toString()+" not found within indexOf()");
+  }
+  
+  
+  /**
+   * @return an OclSortedCollection with Object <code>obj</code> at position
+   *         <code>index</code>   
+   * @author Ronny Brandt   
+   */
+  public OclSortedCollection insertAt(OclInteger index, OclRoot obj) {
+    if(isUndefined())
+      return this;
+    if(obj.isUndefined()) 
+      return new OclSequence(0, obj.getUndefinedReason());
+    if (!(collection instanceof List)) {
+      ArrayList list = new ArrayList(collection);
+      list.add(index.getInt()-1, obj);
+      return new OclSequence(list);
+    } else {
+      ((List)collection).add(index.getInt()-1, obj);
+      return this;
+    }
   }
 } /* end class OclSequence */
 

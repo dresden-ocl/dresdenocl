@@ -22,6 +22,7 @@
         <property name="build.debuglevel" value="lines,vars,source" />
         
         <property name="dir.resources" value="${basedir}/resources" />
+        <property name="dir.classpath" value="${dir.resources}/classpath" />
         <property name="dir.resources.mdr" value="${dir.resources}/repository" />
         <property name="dir.resources.mmwithocl" value="${dir.resources}/MetamodelsWithOcl" />
         <property name="dir.resources.ocleval" value="${dir.resources}/generatedOclEval" />
@@ -95,6 +96,8 @@
         <property name="jar.libs.parsertools" value="${objdir.libs}/ocl20parsertools.jar" />
         <property name="jar.libs.oclscriptrunner" value="${objdir.libs}/ocl20scriptrunner.jar" />
         <property name="jar.libs.codegen.java"  value="${objdir.libs}/ocl20codegen-java.jar" />
+        <property name="jar.libs.codegenGUI"  value="${objdir.libs}/ocl20codegenGUI-java.jar" />
+        <property name="jar.libs.injector"  value="${objdir.libs}/ocl20injector.jar" />
         <property name="jar.libs.workbench" value="${objdir.libs}/ocl20workbench.jar" />
         <property name="jar.libs.ocl22decl" value="${objdir.libs}/ocl22decl.jar" />
         <property name="jar.libs.ocl22sql" value="${objdir.libs}/ocl22sql.jar" />
@@ -521,7 +524,8 @@
         description="runs the OCL2.0 parser GUI" >
         <java classname="tudresden.ocl20.core.parser.OCL20GUI"
             fork="true" maxmemory="128M"> <!-- spawn="true" -->
-            <!-- <jvmarg value="-Xdebug"/> -->  
+            <!-- <jvmarg value="-Xdebug"/> --> 
+ 
             <!-- <jvmarg value="-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"/> --> 
             <jvmarg value="-ea" />
             <assertions>
@@ -788,7 +792,7 @@
     <!--  Compiles, packages and runs the Java code generator              -->
     <!--                                                                   -->
     <target name="compile.codegen.java"
-        depends="init,init.mdr,jar.ocl20repository,jar.jmi.if,jar.jmi.impl"
+        depends="init,init.mdr,jar.ocl20repository,jar.jmi.if,jar.jmi.impl,jar.parsertools"
         description="Compiles the Java code generator runner" >
         <mkdir dir="${objdir.generic}" />
         <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
@@ -800,6 +804,7 @@
                 <path refid="libs.basic" />
             	<path refid="libs.mdr" />
                 <path refid="libs.jmi.ocl20" />
+                <pathelement location="${jar.libs.parsertools}" />
             </classpath>
         </javac>
     </target>
@@ -1246,5 +1251,88 @@ More info goes here.
 		        </target>
 			-->
 
-</project>
+    <target name="compile.injector"
+        depends="init,init.mdr,jar.ocl20repository,jar.jmi.if,jar.jmi.impl,jar.sableparser,jar.ocl20stdlib,jar.parsertools,compile.codegenGUI"
+        description="Compiles the OCL2.0 injector" >
+        <mkdir dir="${objdir.generic}" />
+        <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
+            deprecation="true"
+            debug="true" debuglevel="lines,vars,source">
+            <include name="tudresden/ocl20/injection/**/**.java" />
+            <exclude name="**.html" />
+            <classpath>
+                <path refid="libs.mdr" />
+                <path refid="libs.basic" />
+                <path refid="libs.jmi.ocl20" />
+                <path refid="libs.javatools" />
+				<pathelement location="${jar.libs.jmi-api}" />
+				<pathelement location="${jar.sableparser}" />
+				<pathelement location="${jar.xerces}" />
+				<pathelement location="${dir.resources}" />
+            </classpath>
+        </javac>
+    </target>
+    <target name="jar.injector"
+        depends="init,compile.injector"
+        description="packs the OCL2.0 java codegen into a jar file" >
+        <mkdir dir="${objdir.generic}"/>
+        <jar 	basedir="${objdir.generic}" 
+        		destfile="${jar.libs.injector}">
+        </jar>
+    </target>
 
+    <!--                                                                   -->
+    <!--  Runs the OCL2.0 codegenGUI                                       -->
+    <!--                                                                   -->
+    <target name="compile.codegenGUI"
+        depends="init,init.mdr,jar.ocl20repository,jar.parsertools"
+        description="Compiles the Java code generator GUI" >
+        <mkdir dir="${objdir.generic}" />
+        <javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" 
+            deprecation="true"
+            debug="true" debuglevel="lines,vars,source">
+            <include name="tudresden/ocl20/codegen/java/**.java" />
+            <exclude name="**.html" />
+            <classpath>
+                <path refid="libs.basic" />
+            	<path refid="libs.mdr" />
+                <path refid="libs.jmi.ocl20" />
+                <pathelement location="${jar.libs.parsertools}" />
+            </classpath>
+        </javac>
+    </target>
+    <target name="jar.codegenGUI"
+        depends="init,jar.sableparser,jar.ocl20stdlib,jar.injector,compile.codegenGUI"
+        description="packs the Java code generator GUI into a jar file" >
+        <mkdir dir="${objdir.generic}"/>
+        <jar basedir="${objdir.generic}"
+            destfile="${jar.libs.codegenGUI}"
+            manifest="${dir.resources}/manifest/javacodegenGUI.manifest">
+            <include name="tudresden/ocl20/codegen/java/*.class" />
+        </jar>
+    </target>
+    <target name="run.codegenGUI"
+        depends="init,init.mdr,jar.codegenGUI,jar.parsertools"
+        description="runs the OCL2.0 codegenerator GUI" >
+        <mkdir dir="${dir.resources.ocleval}" />
+        <java classname="tudresden.ocl20.codegen.java.JavaCodeGeneratorGUI"
+            failonerror="true" fork="true">
+            <classpath>
+                <path refid="libs.basic" />
+                <path refid="libs.mdr" />
+                <path refid="libs.jmi.ocl20" />
+                <path refid="libs.javatools" />
+				<pathelement location="${jar.libs.parsertools}" />
+				<pathelement location="${jar.libs.sableparser}" />
+				<pathelement location="${jar.libs.sable-astlib}" />
+				<pathelement location="${jar.xerces}" />
+                <pathelement location="${jar.libs.codegen.java}" />
+                <pathelement location="${jar.libs.injector}" />
+                <pathelement location="${jar.libs.ocl20stdlib}" />
+                <pathelement location="${jar.libs.ocl20repository}" />
+                <pathelement location="${dir.resources}" />
+                <pathelement location="${dir.classpath}" />
+            </classpath>
+        </java>
+    </target>
+</project>

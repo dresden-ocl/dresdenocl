@@ -54,7 +54,9 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
     }  
     
     private OclModel model;
-    private OclLibrary oclLib;
+    
+    // Changed to protected by Ronny Brandt
+    protected OclLibrary oclLib;
     //private TypeMapping typeMapping;
     
     /** Creates a new instance of CodeGenerator */
@@ -130,7 +132,8 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
     protected String createAccuId(){ return env.createAccuId(); }
     protected String createEvalId(){ return env.createEvalId(); }
     
-    private String mapType(Classifier type){
+    // Changed to protected by Ronny Brandt
+    protected String mapType(Classifier type){
         return mapType(type, true);
     }
     //maps Ocl types from the abstract sytax to the name of the respective class in the Ocl basis library
@@ -195,7 +198,8 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
     }
     
     //maps Ocl types from the abstract sytax to the respective type descriptor in the Ocl basis library
-    private String mapTypeToDescriptor(Classifier type){
+    // Changed to protected by Ronny Brandt
+    protected String mapTypeToDescriptor(Classifier type){
         String result= null;
         if(type.equals(oclLib.getOclAny())){
             result = getPkgPrefix()+"OclType.getOclAny()";
@@ -297,7 +301,8 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
         return result;
     }
     
-    private String getEvaluatableType(IteratorExp exp){
+    // Changed to protected by Ronny Brandt
+    protected String getEvaluatableType(IteratorExp exp){
         String result = (String) evaluatables.get(exp.getNameA());
         if(result==null){
             result = "OclRoot";
@@ -305,7 +310,8 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
         return result;
     }
     
-    private String getEvaluatable(IteratorExp exp){
+    // Changed to protected by Ronny Brandt
+    protected String getEvaluatable(IteratorExp exp){
         
         return getEvaluatableType(exp)+"Evaluatable";
     }
@@ -441,13 +447,15 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
         return result.toString();
     }
     
-    private String getCast(String type, String propertyCall){
+    // Changed to protected by Ronny Brandt
+    protected String getCast(String type, String propertyCall){
         return getPkgPrefix()+"Ocl.to"+type+"("+ propertyCall +")";
     }
     
     //like:
     //final OclModelType tudOclNode1a= fact.getOclTypeFor("OCL::Expressions::BooleanLiteralExp");
-    private String transform(Classifier c){
+    // Changed to protected by Ronny Brandt
+    protected String transform(Classifier c){
         if(getTypeId(c)== null){
             StringBuffer result=new StringBuffer();
             result.append("final ");
@@ -484,7 +492,8 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
         operationNames.put(">=", "isGreaterEqual");
     }
     
-    private String mapOpName(String name){
+    // Changed to protected by Ronny Brandt
+    protected String mapOpName(String name){
         String result = (String)operationNames.get(name);
         if(result==null){
             return name;
@@ -506,7 +515,8 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
 
     }
     
-    private boolean opNeedsCast(String opname){
+    // Changed to protected by Ronny Brandt
+    protected boolean opNeedsCast(String opname){
         return operatitonsWithCast.contains(opname);
     }
     

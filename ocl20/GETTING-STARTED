@@ -47,7 +47,7 @@
   Build targets
   -------------
 
-  There are six applications in the toolkit by now.
+  There are seven applications in the toolkit by now.
 
   1. OCL2.0 Workbench
      This software was written by Stefan Ocke for his diploma thesis. It provides
@@ -107,6 +107,13 @@
       The Visualization plugin helps you to see what is inside the Netbeans Repository.
       The Base provides the basic functions of the toolkit to other plugins.
   	  
+   7. Java Codegenerator GUI
+      This software was written by Ronny Brandt for his student research project
+      (Großer Beleg). It is an extension of the codegenerator written by
+      Stefan Ocke. With this software you can load UML-models provided as XMI files
+      and OCL-constraints and generate java code to check these constraints at runtime.
+      This generated code also can be injected in existing java files (instrumentation)
+      and they can be reverse engineered too.  
 
    All applications share a common codebase. To faciliate building and running
    them, there is an Ant script in $BASE/build.xml.
@@ -136,6 +143,13 @@
    		ant run.transformationGUI (for source releases)
    		java -jar trans_engine.jar (for binary releases)
    
+   For the codegenerator GUI, change the working directory to $BASE and type:
+   
+      ant run.codegenGUI (for source releases)
+      java -jar ocl20codegenGUI-java.jar (for binary releases
+          (classes for injection in $BASE\resources\classpath))
+      java -cp ocl20codegenGUI-java.jar;./CLASSPATH tudresden.ocl20.codegen.java.JavaCodeGeneratorGUI
+          (for binary releases (classes for injection CLASSPATH))
 
    OCL2.0 Workbench
    ----------------
@@ -231,7 +245,27 @@
        "Model Visualization->Load XMI file".
     3. Load you OCL-Constraint the same way
     4. You will see the visualized repository content in a new view
-    
+
+
+   Codegenerator GUI
+   ------------------
+   
+   Whithin the codegenerator GUI you con choose between generating code as a
+   string (tab 'CodeGenerator'), to generate code an instrument existing java
+   files (tab 'CodeInjector') or to reverse engineer instrumented java files
+   (tab 'ReverseEngineering').
+   To instrument existing java files (generate code as a string is similar) you
+   have to load an UML-model provided as an XMI file (XMI files created with
+   argoUML and Poseidon For UML 3.0 are tested, XMI files created with
+   Poseidon For UML 4.x can be transformed using the XmiTool by Florian Heidenreich)
+   and an .ocl file containing the constraints. Besides you have to choose the
+   java files to be instrumented.
+   For injection the classes for the java files to be injected have to be within
+   the classpath. 
+   An example containing an XMI file, an OCL file and some working java files
+   can be found in $BASE\resources\javacodegenexample. The class files for the
+   example are already included in $BASE\resources\classpath.
+   
   
    Contact
    -------
@@ -247,6 +281,9 @@
          
    Report problems with the Transformation Framework to Christian Wende. You can reach
    him by email: chr dot wende at gmx dot de
+   
+   Report problems with the codegenerator GUI to Ronny Brandt. You can reach him
+   by email: ronny_brandt at gmx dot de
 
    Version information
    -------------------
