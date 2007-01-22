@@ -2,9 +2,9 @@
 <?eclipse version="3.0"?>
 <plugin
    id="tudresden.ocl20.eclipse.ocleditor"
-   name="EclipseOCLEditor Plug-in"
+   name="Dresden OCL Editor"
    version="1.0.0"
-   provider-name="">
+   provider-name="TU-Dresden - SWT">
 
    <runtime>
       <library name="EclipseOCLEditor.jar">
@@ -23,7 +23,7 @@
          point="org.eclipse.ui.views">
       <view
             icon="resources/icons/OCLToolkit_Logo.gif"
-            class="tudresden.ocl20.eclipse.plugins.ocleditor.views.OCLEditor"
+            class="tudresden.ocl20.eclipse.plugins.ocleditor.OCLEditorControler"
             category="tudresden.ocl20.eclipse.ocleditor.category"
             name="OCL-Editor"
             id="tudresden.ocl20.eclipse.ocleditor"/>
@@ -32,85 +32,10 @@
             id="tudresden.ocl20.eclipse.ocleditor.category"/>
    </extension>
    <extension
-         point="org.eclipse.ui.viewActions">
-      <viewContribution
-            id="tudresden.ocl20.eclipse.ocleditor.viewContribution"
-            targetID="tudresden.ocl20.eclipse.ocleditor">
-            <action
-               disabledIcon="resources/icons/editCancelDisabled.gif"
-               toolbarPath="additions"
-               label="Abbrechen"
-               tooltip="Abbrechen"
-               icon="resources/icons/editCancel.gif"
-               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.AbortEditAction"
-               style="push"
-               id="tudresden.ocl20.eclipse.ocleditor.abort">
-            <enablement>
-               <systemProperty
-                     value="2"
-                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
-            </enablement>
-         </action>
-            <action
-               disabledIcon="resources/icons/editOKDisabled.gif"
-               toolbarPath="additions"
-               label="Validieren"
-               icon="resources/icons/editOK.gif"
-               tooltip="OCL-Ausdruck validieren"
-               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.ValidateAction"
-               style="push"
-               id="tudresden.ocl20.eclipse.ocleditor.validate">
-            <enablement>
-               <systemProperty
-                     value="2"
-                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
-            </enablement>
-         </action>
-            <action
-               disabledIcon="resources/icons/editDisabled.gif"
-               toolbarPath="additions"
-               label="Editieren"
-               icon="resources/icons/edit.gif"
-               tooltip="OCL-Ausdruck editieren"
-               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.EditAction"
-               style="push"
-               id="tudresden.ocl20.eclipse.ocleditor.edit">
-            <enablement>
-               <systemProperty
-                     value="2"
-                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
-            </enablement>
-         </action>
-         <action
-               disabledIcon="resources/icons/delOCLDisabled.gif"
-               toolbarPath="additions"
-               label="Löschen"
-               icon="resources/icons/delOCL.gif"
-               tooltip="OCL-Ausdruck löschen"
-               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.DeleteAction"
-               style="push"
-               id="tudresden.ocl20.eclipse.ocleditor.delete">
-            <enablement>
-               <systemProperty
-                     value="2"
-                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
-            </enablement>
-         </action>
-         <action
-               disabledIcon="resources/icons/newOCLDisabled.gif"
-               toolbarPath="additions"
-               label="Neu"
-               icon="resources/icons/newOCL.gif"
-               tooltip="Neuen OCL-Ausdruck erstellen"
-               class="tudresden.ocl20.eclipse.plugins.ocleditor.views.actions.CreateAction"
-               style="push"
-               id="tudresden.ocl20.eclipse.ocleditor.new">
-            <enablement>
-               <systemProperty
-                     value="2"
-                     name="tudresden.ocl20.eclipse.ocleditor.state"/>
-            </enablement>
-         </action>         
-      </viewContribution>
+         point="tudresden.ocl20.eclipseplugin.initializeMDR">
+      <initializer
+            class="tudresden.ocl20.eclipse.plugins.ocleditor.extension.MDRInitializer"
+            id="OCLEditor.MDRInitializer"
+            name="MDRInitializer"/>
    </extension>
 </plugin>
