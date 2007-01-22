@@ -79,8 +79,13 @@ public abstract class PackageImpl extends tudresden.ocl20.core.jmi.uml15.impl.co
         int pnsize = pathName.size();
         assert ( pnsize != 0 ):
             "cannot search for package with empty name, need at least one path name element";
-
-        String nameHead = (String) pathName.get(0);
+        
+        String nameHead = (String) pathName.get(0);        
+        if ( pnsize == 1 &&
+        	 nameHead.equals(this.getName()) ) {
+        	return this;        	
+        }
+        
         Iterator it = getOwnedElement().iterator();
         while(it.hasNext()){
             ModelElement me = (ModelElement) it.next();
