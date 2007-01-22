@@ -37,6 +37,7 @@ import org.netbeans.api.xmi.*;
 import javax.jmi.model.*;
 import javax.jmi.xmi.*;
 import javax.jmi.reflect.*;
+import org.netbeans.api.mdr.events.MDRChangeListener;
 
 import java.io.*;
 import java.util.*;
@@ -223,6 +224,16 @@ public class NetBeansRepository implements Repository {
     public RefBaseObject getElementByMofID(String mofID)
     {
     	return this.mdRepository.getByMofId(mofID);
+    }
+    
+    public void addRepositoryListener(MDRChangeListener listener)
+    {
+    	this.mdRepository.addListener(listener);
+    }
+    
+    public void removeRepositoryListener(MDRChangeListener listener)
+    {
+    	this.mdRepository.removeListener(listener);
     }
     
 }
