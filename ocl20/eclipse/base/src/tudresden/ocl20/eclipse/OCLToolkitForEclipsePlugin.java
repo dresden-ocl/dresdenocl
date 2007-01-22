@@ -4,14 +4,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.plugin.*;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-
-import tudresden.ocl20.core.MetaModelConst;
 import tudresden.ocl20.core.ModelManager;
-import tudresden.ocl20.core.NetBeansRepository;
-import tudresden.ocl20.core.parser.sablecc.lexer.Lexer;
-import tudresden.ocl20.core.parser.sablecc.parser.Parser;
+import tudresden.ocl20.eclipse.extensionpoint.MDRInitializerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,11 +16,14 @@ import java.util.*;
 /**
  * The main plugin class to be used in the desktop.
  */
-public class OCLToolkitForEclipsePlugin extends AbstractUIPlugin {
+public class OCLToolkitForEclipsePlugin extends AbstractUIPlugin{
+	
 	//The shared instance.
 	private static OCLToolkitForEclipsePlugin plugin;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
+	//MDR is initialized
+	private boolean mdrInit = false;
 	
 	/**
 	 * The constructor.
@@ -49,21 +47,8 @@ public class OCLToolkitForEclipsePlugin extends AbstractUIPlugin {
 		
 		System.setProperty("org.openide.util.Lookup", "tudresden.ocl20.eclipse.EclipsePluginCustomLookup");
 		Thread.currentThread().setContextClassLoader(EclipsePluginCustomLookup.class.getClassLoader());
-		
-		File persistentStoreFile = null;
-		IPath path = this.getStateLocation().append(IPath.SEPARATOR + "repository" + IPath.SEPARATOR);
-		persistentStoreFile = new File(path.toOSString());
-		
-		System.setProperty(NetBeansRepository.MDR, persistentStoreFile.getAbsolutePath());
-		
-		if (!persistentStoreFile.exists())
-		{	
-			persistentStoreFile.mkdirs();
-			System.out.println("Load metamodel into repository");
-			File metaModelSourceFile = 
-				new File(getResource("resources/UML15_plus_OCLMetamodel.xml").getFile());
-			ModelManager.getInstance().loadMetaModel(metaModelSourceFile.toURI().toString(),MetaModelConst.UML15);			
-		}		
+		MDRInitializerFactory factory = MDRInitializerFactory.getInstance();
+		factory.initMDR();
 	}
 
 	/**
@@ -81,6 +66,21 @@ public class OCLToolkitForEclipsePlugin extends AbstractUIPlugin {
 	public static OCLToolkitForEclipsePlugin getDefault() {
 		return plugin;
 	}
+	
+	public File getMetamodel()
+	{
+		File metaModelFile = 
+			new File(getResource("resources/UML15_plus_OCLMetamodel.xml").getFile());
+		return metaModelFile;
+	}
+	
+	public File getDefaultMDRDirectory()
+	{
+		File mdrDirectory = null;
+		IPath path = this.getStateLocation().append(IPath.SEPARATOR + "repository" + IPath.SEPARATOR);
+		mdrDirectory = new File(path.toOSString());
+		return mdrDirectory;
+	}	
 
 	/**
 	 * Returns the string from the plugin's resource bundle,
@@ -128,5 +128,5 @@ public class OCLToolkitForEclipsePlugin extends AbstractUIPlugin {
 			}
 		else
 		   	return null;
-	}   
+	}	
 }

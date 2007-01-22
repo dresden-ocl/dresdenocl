@@ -74,10 +74,26 @@ public class EclipsePluginCustomLookup extends Lookup {
 	private boolean inited = false;
 
 	private void called() {
-		if(!inited) {
+		if(!inited) 
+		{
 			inited = true;
-			delegate = new ProxyLookup(new Lookup[] {
-				Lookups.singleton(new XMISaxReaderImpl()),
+			System.out.println("Lookup init start");
+			delegate = new ProxyLookup(new Lookup[]
+			{
+				Lookups.singleton(new XMISaxReaderImpl()),			
+				Lookups.singleton(new XMIWriterImpl()),
+				Lookups.singleton(new XmiDtdProducer()),
+				Lookups.singleton(new JMIMapperImpl()),
+				Lookups.singleton(new JMIMapperCFImpl()),
+				Lookups.singleton(new ReaderFactory()),
+				Lookups.singleton(new WriterFactory()),
+				Lookups.singleton(new ConsumerFactory()),
+				Lookups.singleton(new ProducerFactory()),
+				Lookups.singleton(new Logger())
+			});
+			delegate = new ProxyLookup(new Lookup[]
+			{
+				Lookups.singleton(new XMISaxReaderImpl()),			
 				Lookups.singleton(new XMIWriterImpl()),
 				Lookups.singleton(new XmiDtdProducer()),
 				Lookups.singleton(new JMIMapperImpl()),
@@ -87,9 +103,9 @@ public class EclipsePluginCustomLookup extends Lookup {
 				Lookups.singleton(new ConsumerFactory()),
 				Lookups.singleton(new ProducerFactory()),
 				Lookups.singleton(new Logger()),
-				Lookups.singleton(new NBMDRManagerImpl()),
-				Lookups.singleton(new NBMDRepositoryImpl())
-			});			
+				Lookups.singleton(new NBMDRepositoryImpl()),
+				Lookups.singleton(new NBMDRManagerImpl())
+			});
 		}
 	}
 

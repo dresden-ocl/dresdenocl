@@ -4,7 +4,7 @@
    id="tudresden.ocl20.eclipseplugin"
    name="OCLToolkitForEclipse Plug-in"
    version="2.0.0"
-   provider-name=""
+   provider-name="TU-Dresden - SWT"
    class="tudresden.ocl20.eclipse.OCLToolkitForEclipsePlugin">
 
    <runtime>
@@ -50,52 +50,7 @@
       <library name="lib/external/xerces.jar">
          <export name="*"/>
       </library>
-      <library name="lib/internal/CWM.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20codegen-java.jar">
-         <export name="*"/>
-      </library>
       <library name="lib/internal/ocl20jmiapi.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20jmiimpl.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20parser-astlib.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20parserbase.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20parsertools.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20repository.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20scriptrunner.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20stdlib.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl20workbench.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl22decl.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/ocl22sql.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/sablecc-extended.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/trans_engine.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/internal/utilityexample.jar">
          <export name="*"/>
       </library>
    </runtime>
@@ -104,4 +59,5 @@
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
    </requires>
+   <extension-point id="initializeMDR" name="initializeMDR" schema="eclipse/base/schema/initializeMDR.exsd"/>
 </plugin>
