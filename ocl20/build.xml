@@ -1412,6 +1412,7 @@ More info goes here.
 				 classpath="${objdir.eclipse.toolkit.generated_src}"/>				
 		<readPluginInfo pluginXmlLoc="${srcdir.eclipse.toolkit}"/>
 		<property name = "objdir.eclipse.toolkit.plugin" value = "${objdir.eclipse.toolkit}/plugins/${plugin.id}_${plugin.version}"/>
+		<mkdir dir="${objdir.eclipse.toolkit}/plugins"/>
 		<mkdir dir="${objdir.eclipse.toolkit.plugin}"/>
 		<jar basedir="${objdir.eclipse.toolkit.generated_src}" 
 			 destfile="${objdir.eclipse.toolkit.plugin}/OCLToolkitForEclipse.jar" >
@@ -1468,6 +1469,7 @@ More info goes here.
 				 classpath="${objdir.eclipse.toolkit.generated_src}"/>				
 		<readPluginInfos pluginXmlLoc="${srcdir.eclipse.ocleditor}"/>
 		<property name = "objdir.eclipse.ocleditor.plugin" value = "${objdir.eclipse.ocleditor}/plugins/${plugin.id}_${plugin.version}"/>
+		<delete dir="${objdir.eclipse.ocleditor}/plugins"/>
 		<mkdir dir="${objdir.eclipse.ocleditor.plugin}"/>
 		<jar basedir="${objdir.eclipse.ocleditor.generated_src}" 
 			 destfile="${objdir.eclipse.ocleditor.plugin}/EclipseOCLEditor.jar" >
@@ -1485,6 +1487,7 @@ More info goes here.
 	<target name="export.eclipse.updatesite"
 			depends="export.eclipseplugin, export.ocleditor"
 		    description="Creates Eclipse OCL update site">
+		<delete dir="${objdir.eclipse.update}"/>
 		<mkdir dir="${objdir.eclipse.update}"/>
 		<mkdir dir="${objdir.eclipse.update}/plugins"/>
 		<mkdir dir="${objdir.eclipse.update}/features"/>

@@ -54,12 +54,12 @@ public class JavaCodeGenerator extends CodeGenerator {
 	
 	UmlTypeMapping tm = new UmlTypeMapping(this);
 	
-	private StringBuffer globalCode = new StringBuffer();
+	protected StringBuffer globalCode = new StringBuffer();
 	
-	private HashMap all = new HashMap();
-	private HashMap used = new HashMap();
+	protected HashMap all = new HashMap();
+	protected HashMap used = new HashMap();
 	
-	private Boolean prepCode = false;
+	protected Boolean prepCode = false;
 	
 	public JavaCodeGenerator(OclModel model) {
 		super(model, true);
