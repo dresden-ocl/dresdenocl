@@ -6,59 +6,50 @@
  */
 package tudresden.ocl20.integration;
 
-import java.io.IOException;
 import java.io.PushbackReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 
-import javax.jmi.model.ModelPackage;
-import javax.jmi.model.MofPackage;
-import javax.jmi.reflect.RefPackage;
+import javax.jmi.reflect.RefAssociation;
+import javax.jmi.reflect.RefAssociationLink;
+import javax.jmi.reflect.RefObject;
+
+import org.netbeans.api.mdr.events.MDRChangeEvent;
+import org.netbeans.api.mdr.events.MDRChangeListener;
 
 import tudresden.ocl20.core.MetaModelConst;
-import tudresden.ocl20.core.MetaModelIntegrator;
-import tudresden.ocl20.core.MetaModelUtil;
 import tudresden.ocl20.core.ModelManager;
 import tudresden.ocl20.core.ModelManagerException;
+import tudresden.ocl20.core.NetBeansRepository;
 import tudresden.ocl20.core.OclModel;
-import tudresden.ocl20.core.OclModelException;
-import tudresden.ocl20.core.Repository;
 import tudresden.ocl20.core.RepositoryManager;
-import tudresden.ocl20.core.MetaModelConst.MetaModelInfo;
-import tudresden.ocl20.core.jmi.uml15.core.Association;
-import tudresden.ocl20.core.jmi.uml15.core.AssociationEnd;
-import tudresden.ocl20.core.jmi.uml15.core.CorePackage;
-import tudresden.ocl20.core.jmi.uml15.core.Namespace;
-import tudresden.ocl20.core.jmi.uml15.core.UmlClass;
-import tudresden.ocl20.core.jmi.uml15.datatypes.Multiplicity;
-import tudresden.ocl20.core.jmi.uml15.datatypes.MultiplicityRange;
-import tudresden.ocl20.core.jmi.uml15.impl.core.ModelElementImpl;
+import tudresden.ocl20.core.jmi.uml15.core.Classifier;
 import tudresden.ocl20.core.jmi.uml15.impl.modelmanagement.ModelHelper;
-import tudresden.ocl20.core.jmi.uml15.impl.modelmanagement.PackageImpl;
+import tudresden.ocl20.core.jmi.uml15.impl.uml15ocl.types.OclLibraryHelper;
 import tudresden.ocl20.core.jmi.uml15.modelmanagement.Model;
-import tudresden.ocl20.core.jmi.uml15.modelmanagement.Package;
 import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 import tudresden.ocl20.core.parser.astgen.Heritage;
 import tudresden.ocl20.core.parser.astgen.LAttrAstGenerator;
-import tudresden.ocl20.core.parser.sablecc.analysis.AttrEvalException;
 import tudresden.ocl20.core.parser.sablecc.lexer.Lexer;
-import tudresden.ocl20.core.parser.sablecc.lexer.LexerException;
 import tudresden.ocl20.core.parser.sablecc.node.Start;
 import tudresden.ocl20.core.parser.sablecc.parser.Parser;
-import tudresden.ocl20.core.parser.sablecc.parser.ParserException;
 
 /**
  * This class can be use to start the validation of a constraint.
  * @author Mirko 
  */
-public class OCLChecker 
+public class OCLChecker implements MDRChangeListener 
 {
-	public static HashMap instances = new HashMap();
+	public final static String DEBUG = "OCLChecker.DEBUG";
+	
+	public static String topPackageName = "topPackage";
+	public static HashMap<Object, OCLChecker> instances = new HashMap<Object, OCLChecker>();
+	
+	private ArrayList<RefAssociation> assoc = new ArrayList<RefAssociation>();
+	private ArrayList<RefObject> classes = new ArrayList<RefObject>();
 	
 	/**
 	 * Returns the existing OCLChecker instance for the given object or creates a new instance. 
@@ -95,6 +86,8 @@ public class OCLChecker
 
 	private static ModelManager mm = ModelManager.getInstance();   
     private Uml15Package model = null;
+
+	private boolean rollBack;
     
     private OCLChecker()
     {
@@ -106,14 +99,13 @@ public class OCLChecker
      */
 	public void initModel() throws Exception
     {     
-		//deleteModel();
-		System.out.println("Initialize Model");
 		mm.beginTrans(true);
 		model = (Uml15Package) mm.createOclModel(MetaModelConst.UML15, this.getUniqueName());
 		Model rootModel = model.getModelManagement().getModel().createModel();
-	    rootModel.setNameA("rootPackage");	 
-	    
-	    mm.endTrans(false);    	
+	    rootModel.setNameA(topPackageName);	 
+	    model.getUml15ocl().getTypes().getOclLibrary().getInstance();
+	    ((NetBeansRepository)RepositoryManager.getRepository()).addRepositoryListener(this);
+		mm.endTrans(false);    	
     } 
 	
 	/**
@@ -125,13 +117,12 @@ public class OCLChecker
 		ModelFacade instance = ModelFacade.getInstance(this.model.refMofId());
 		Model topPackage = ModelHelper.getInstance(this.model).getTopPackage();
 		
-		ArrayList result = new ArrayList();
-		Iterator it = this.instances.keySet().iterator();
+		Iterator it = instances.keySet().iterator();
 		while (it.hasNext())
 		{
 			Object caseTop = it.next();
-			if (this.instances.get(caseTop) != null)
-				if (this.instances.get(caseTop).equals(this))
+			if (instances.get(caseTop) != null)
+				if (instances.get(caseTop).equals(this))
 						instance.addRefObject(topPackage.refMofId(), caseTop);					
 		}
 	}
@@ -139,22 +130,41 @@ public class OCLChecker
 	/**
 	 * Validates the given constraint. 
 	 */
-	public void validate(String constraint) throws OclModelException, ParserException, LexerException, IOException, AttrEvalException
+	public void validate(String constraint) throws Exception
 	{
 		if (this.model != null)
 		{
-			OclModel oclModel =  new OclModel(MetaModelConst.UML15, model);
-			System.out.println("Syntaxprüfung");
-			Lexer lexer = new Lexer (new PushbackReader(new StringReader(constraint)));
-			System.out.println("CSTErstellung");
-			Parser parser = new Parser(lexer);			
-			Start cst = parser.parse();
-			System.out.println("Konsistenzprüfung");
-			LAttrAstGenerator astgen = new LAttrAstGenerator(oclModel);
-			Heritage hrtg = new Heritage();
-			oclModel.beginTrans(true);
-			cst.apply(astgen, hrtg);
-			oclModel.endTrans(false);			
+			OclModel oclModel = null;
+			Start cst = null;
+			try
+			{
+				this.rollBack();
+				this.assoc.clear();
+				this.classes.clear();
+				oclModel =  new OclModel(MetaModelConst.UML15, model);
+				Lexer lexer = new Lexer (new PushbackReader(new StringReader(constraint)));
+				Parser parser = new Parser(lexer);			
+				cst = parser.parse();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				throw e;
+			}
+			try
+			{
+				LAttrAstGenerator astgen = new LAttrAstGenerator(oclModel);
+				Heritage hrtg = new Heritage();
+				oclModel.beginTrans(true);							
+				cst.apply(astgen, hrtg);
+				mm.endTrans(false);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				mm.endTrans(false);
+				throw e;
+			}					
 		}
 		else
 			System.out.println("Please initialize the model first!");
@@ -175,8 +185,7 @@ public class OCLChecker
 	 */
 	public void deleteElements(Object refObject) 
 	{
-		ModelFacade instance = ModelFacade.getInstance(this.model.refMofId());
-		instance.deleteElements(refObject);
+		ModelFacade.deleteElements(refObject);
 	}
 	
 	/**
@@ -191,13 +200,87 @@ public class OCLChecker
 	}
 	
 	/**
+	 * Removes all created OCL metmodel instances from the MDR.
+	 *
+	 */
+	private void rollBack()
+	{
+		this.rollBack = true;
+		int DEBUG_ASSOC_COUNT = 0;
+		int DEBUG_CLASSES_COUNT = 0;
+		
+		if (System.getProperty(DEBUG) != null)
+		{
+			System.out.println("ROLLBACK - AssocSize: " + assoc.size());
+			System.out.println("ROLLBACK - ClassesSize: " + classes.size());
+		}
+		
+		for (int i = 0; i < this.classes.size(); i++)
+		{
+			RefObject object = this.classes.get(i);
+			
+			if (ModelFacade.isRepresentative(object.refMofId()))
+			{
+				if (object instanceof Classifier)
+				{
+					Object[] types = OclLibraryHelper.getInstance(object.refOutermostPackage()).findCollectionTypes((Classifier) object).toArray();
+					for (int j = 0; j < types.length; j++)
+					{
+						RefObject colType = (RefObject) types[j];
+						classes.remove(colType);
+					}
+				}
+				classes.remove(i);
+			}
+		}
+		
+		for (int i = 0; i < this.assoc.size(); i++)
+		{
+			RefAssociation assoc = this.assoc.get(i);
+			if (assoc.refAllLinks() != null)
+			{
+				ArrayList<RefAssociationLink> links = new ArrayList<RefAssociationLink>(assoc.refAllLinks());
+				for (int j = 0; j < links.size(); j++)
+				{
+					RefAssociationLink link = links.get(j);
+					if (this.classes.contains(link.refFirstEnd()) ||
+						this.classes.contains(link.refSecondEnd()))
+					{
+						assoc.refRemoveLink(link.refFirstEnd(), link.refSecondEnd());
+						DEBUG_ASSOC_COUNT++;						
+					}
+				}
+			}
+		}
+		
+		for (int i = 0; i < this.classes.size(); i++)
+		{
+			RefObject object = this.classes.get(i);
+			try
+			{
+				object.refDelete();
+			}
+			catch (Exception e)
+			{
+				//object already deleted
+			}
+			DEBUG_CLASSES_COUNT++;			
+		}
+		if (System.getProperty(DEBUG) != null)
+		{
+			System.out.println("ROLLBACK - AssocRemoved: " + DEBUG_ASSOC_COUNT);
+			System.out.println("ROLLBACK - ClassesRemoved: " + DEBUG_CLASSES_COUNT);
+		}
+		this.rollBack = false;
+	}
+	
+	/**
 	 * Returns an unique name for a new model.
 	 */
 	private String getUniqueName()
 	{
 		try 
 		{
-			boolean found = false;
 			Collection col = mm.getAllModelNames();
 			String name = "WorkingModel";
 			int i = col.size()+1;
@@ -215,5 +298,31 @@ public class OCLChecker
 			return "";
 		}
 		
+	}
+
+	public void change(MDRChangeEvent evt) 
+	{
+		try
+		{
+			if (!this.rollBack)
+			{
+				if (evt.isOfType(MDRChangeEvent.EVENTMASK_ON_ASSOCIATION))
+					if (!this.assoc.contains(evt.getSource()))
+						this.assoc.add((RefAssociation) evt.getSource());
+				if (evt.isOfType(MDRChangeEvent.EVENTMASK_ON_INSTANCE) &&
+					evt.getSource() instanceof RefObject)
+					if (!this.classes.contains(evt.getSource()))
+						this.classes.add((RefObject) evt.getSource());
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public Uml15Package getModel()
+	{
+		return model;
 	}
 }

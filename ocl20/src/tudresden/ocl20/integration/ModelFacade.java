@@ -48,25 +48,25 @@ public abstract class ModelFacade
 	/**
 	 * All instances of the class ModelFacade which are associated to an UML-Model in the MDR.
 	 */
-	private static HashMap instances = new HashMap();
+	private static HashMap<String, ModelFacade> instances = new HashMap<String, ModelFacade>();
 	
 	/**
 	 * All associations between the elements in the MDR and the objects in the repository of a CASE-Tool.
 	 */
-	private static HashMap refObjects = new HashMap();
+	private static HashMap<String, Object> refObjects = new HashMap<String, Object>();
 	
 	/**
      * Returns the UML-Model in the MDR which is associated to the given ModelFacade.
      */
 	private Uml15Package getModel(ModelFacade facade)
 	{
-		Iterator it = this.instances.keySet().iterator();
+		Iterator<String> it = instances.keySet().iterator();
 		Uml15Package model = null;
 		while (it.hasNext())
 		{
 			String mofID = it.next().toString();
-			if (this.instances.get(mofID) != null)
-				if (this.instances.get(mofID).equals(facade))
+			if (instances.get(mofID) != null)
+				if (instances.get(mofID).equals(facade))
 					model = (Uml15Package) RepositoryManager.getRepository().getElementByMofID(mofID);			
 		}
 		return model;
@@ -83,24 +83,32 @@ public abstract class ModelFacade
 	/**
      * Returns all element in the MDR which are associated to the given object. 
      */
-	private List getAllElement(Object refObject)
+	private static List<RefBaseObject> getAllElement(Object refObject)
 	{
-		ArrayList result = new ArrayList();
-		Iterator it = this.refObjects.keySet().iterator();
+		ArrayList<RefBaseObject> result = new ArrayList<RefBaseObject>();
+		Iterator<String> it = refObjects.keySet().iterator();
 		while (it.hasNext())
 		{
 			String mofID = it.next().toString();
-			if (this.refObjects.get(mofID) != null)
-				if (this.refObjects.get(mofID).equals(refObject))
+			if (refObjects.get(mofID) != null)
+				if (refObjects.get(mofID).equals(refObject))
 					result.add(RepositoryManager.getRepository().getElementByMofID(mofID));			
 		}
 		return result;
 	}
 	
 	/**
+     * Returns all element in the MDR which are associated to the given object. 
+     */
+	private static RefObject getElement(String mofID)
+	{
+		return (RefObject) RepositoryManager.getRepository().getElementByMofID(mofID);		
+	}
+	
+	/**
      * Deletes all collection types of an classifier in the OCL Standard Library.
      */
-	private void deleteCollectionTypes(Classifier c)
+	private static void deleteCollectionTypes(Classifier c)
 	{
 		Object[] types = OclLibraryHelper.getInstance(c.refOutermostPackage()).findCollectionTypes(c).toArray();
 		for (int i = 0; i < types.length; i++)
@@ -113,9 +121,9 @@ public abstract class ModelFacade
 	/**
      * Returns true if an object in the repository of the CASE-Tool is associated to the element in the MDR with the given mofID.
      */
-	public boolean isRepresentative(String mofID)
+	public static boolean isRepresentative(String mofID)
 	{
-		return this.refObjects.containsKey(mofID);
+		return refObjects.containsKey(mofID);
 	}
 	
 	/**
@@ -123,7 +131,7 @@ public abstract class ModelFacade
      */
 	public Object getRefObject(String mofID)
 	{
-		return this.refObjects.get(mofID);
+		return refObjects.get(mofID);
 	}
 	
 	/**
@@ -132,7 +140,7 @@ public abstract class ModelFacade
      */
 	protected Object getElement(Classes elementClass, Object refObject)
 	{
-		Collection elements = this.getAllElement(refObject);
+		Collection elements = getAllElement(refObject);
 		Iterator it = elements.iterator();
 		Object existingElement = null;
 		while (it.hasNext())
@@ -220,19 +228,41 @@ public abstract class ModelFacade
 	/**
      * Deletes all elements in the MDR which are associated to the given object. 
      */
-	public void deleteElements(Object refObject)
+	public static void replaceRefObject(Object oldRefObject, Object newRefObject)
 	{
-		ArrayList elements = (ArrayList) getAllElement(refObject);
-		for (int i = 0; i < elements.size(); i++)
+		ArrayList<Object> allRefObjects = new ArrayList<Object>(refObjects.values());
+		ArrayList<String> keySet = new ArrayList<String>(refObjects.keySet());
+		for (int i = 0; i < allRefObjects.size(); i++)
 		{
-			RefObject object = (RefObject) elements.get(i);
-			if (object instanceof Classifier)
+			Object object = allRefObjects.get(i);
+			if (object != null && object.equals(oldRefObject))
 			{
-				this.deleteCollectionTypes((Classifier) object);
+				String key = keySet.get(i).toString();
+				refObjects.put(key, newRefObject);
 			}
-			object.refDelete();
 		}
 		
+	}
+	
+	/**
+     * Deletes all elements in the MDR which are associated to the given object. 
+     */
+	public static void deleteElements(Object refObject)
+	{
+		ArrayList<String> keySet = new ArrayList<String>(refObjects.keySet());
+		for (int i = 0; i < keySet.size(); i++)
+		{
+			RefObject object = getElement(keySet.get(i).toString());
+			if (object != null && object.equals(refObject))
+			{
+				if (object instanceof Classifier)
+				{
+					deleteCollectionTypes((Classifier) object);
+				}
+				object.refDelete();
+				refObjects.remove(keySet.get(i).toString());
+			}
+		}		
 	}
 	
 	/**
@@ -257,8 +287,8 @@ public abstract class ModelFacade
 	
 	public static ModelFacade getInstance(String mofID) 
 	{
-		if (instances != null)
-			return (ModelFacade) instances.get(mofID);
+		if (instances != null && instances.get(mofID) != null)
+			return instances.get(mofID);
 		return null;
 	}
 
