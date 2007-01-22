@@ -96,7 +96,7 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
         return pkgPrefix;
     }
 
-    String getFactoryId() {
+    protected String getFactoryId() {
         return env.getFactoryId();
     }
 
@@ -121,11 +121,11 @@ public abstract class CodeGenerator extends ReflectiveVisitor {
     }
         
     //just some delegations to Environment
-    String getExpId(OclExpression exp){ return env.getExpId(exp); }
+    protected String getExpId(OclExpression exp){ return env.getExpId(exp); }
     protected String createExpId(OclExpression exp){ return env.createExpId(exp); }
-    String getVarId(VariableDeclaration vd){ return env.getVarId(vd); }
+    protected String getVarId(VariableDeclaration vd){ return env.getVarId(vd); }
     protected String createVarId(VariableDeclaration vd){ return env.createVarId(vd); }
-    String getTypeId(Classifier type){ return env.getTypeId(type); }
+    protected String getTypeId(Classifier type){ return env.getTypeId(type); }
     protected String createTypeId(Classifier type){ return env.createTypeId(type); }
     protected String createParamId(){ return env.createParamId(); }
     protected String createIteratorId(){ return env.createIteratorId(); } 

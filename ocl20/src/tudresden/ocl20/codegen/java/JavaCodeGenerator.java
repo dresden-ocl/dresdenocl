@@ -1180,4 +1180,18 @@ public class JavaCodeGenerator extends CodeGenerator {
     	return postPreCode.toString();
     }
 
+    protected String[] getOrderedExpressionIds()
+    {
+    	return env.getOrderedExpressionIds();
+    }  
+    
+    protected OclExpression getExpressionById(String id)
+    {
+    	return env.getExpressionById(id);
+    }
+    
+    protected void clearEnvironment()
+    {
+    	this.env.clear();
+    }
 }

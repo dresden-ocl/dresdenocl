@@ -417,6 +417,63 @@ class Environment {
     }
 
     
-
+    public String[] getOrderedExpressionIds()
+    {
+    	if (expressions.size() != 0)
+    	{
+    		ArrayList<String> tmp = new ArrayList<String>(expressions.values());
+    		
+    		int i = 0;
+    		while (i < tmp.size())
+    			if (tmp.get(i) == null ||
+    				!tmp.get(i).startsWith(Environment.EXP))
+    				tmp.remove(i);
+    			else
+    				i++;
+    		String[] result = new String[tmp.size()];
+    		tmp.toArray(result);
+    		Arrays.sort(result, new StringComparator());
+    		return result;
+    	}
+    	return new String[0];
+    } 
+    
+    public OclExpression getExpressionById(String id)
+    {
+    	if (expressions.size() != 0)
+    	{
+    		Iterator it = expressions.keySet().iterator();
+    		while (it.hasNext())
+    		{
+    			OclExpression exp = (OclExpression) it.next();
+    			if (expressions.get(exp) != null &&
+    				expressions.get(exp).toString().equals(id))
+    				return exp;
+    		}
+    	}
+    	return null;
+    }
+    
+    public void clear()
+    {
+    	this.types = new HashMap();
+    	expressions = new HashMap();
+    	variables = new HashMap();
+    	this.factoryId = null;
+    }
+    
+    private class StringComparator implements Comparator<String>
+    {
+		public int compare(String s1, String s2) 
+		{
+			Integer idS1 = new Integer(s1.substring(Environment.EXP.length()));
+			Integer idS2 = new Integer(s2.substring(Environment.EXP.length()));
+			if (idS1 > idS2)
+				return 1;
+			else if (idS1 < idS2)
+				return -1;
+			return 0;
+		}
+    }
 }
 
