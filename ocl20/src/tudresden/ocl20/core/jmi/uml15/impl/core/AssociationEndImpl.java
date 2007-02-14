@@ -108,5 +108,58 @@ public abstract class AssociationEndImpl extends ModelElementImpl implements Ass
         return super_getMultiplicity();
     }
     
-    
+    /**
+     * Returns the association of an association end. If an instance of the class ModelFacade exists 
+     * the method getAssociation() of the class ModelFacade is used.
+     * Implemented by Raphael Schmid (schmidra@student.ethz.ch).
+     */
+    public tudresden.ocl20.core.jmi.uml15.core.Association getAssociation()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getAssociation(this.refMofId());
+    	} else {
+		return null;
+	}
+    }
+
+    /**
+     * Returns the classifier of an association end. If an instance of the class ModelFacade exists 
+     * the method getParticipant() of the class ModelFacade is used.
+     * Implemented by Raphael Schmid (schmidra@student.ethz.ch).
+     */
+    public tudresden.ocl20.core.jmi.uml15.core.Classifier getParticipant()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getParticipant(this.refMofId());
+    	} else {
+		return null;
+	}
+    }
+
+   /**
+     * Returns the OrderingKind of an attribute or an association end. If an instance of the class ModelFacade exists 
+     * the method getOrdering() of the class ModelFacade is used.
+     * Implemented by Raphael Schmid (schmidra@student.ethz.ch).
+     */
+    public tudresden.ocl20.core.jmi.uml15.datatypes.OrderingKind getOrdering()
+    {
+    	ModelFacade instance = ModelFacade.getInstance(this.refOutermostPackage().refMofId());
+    	if (instance != null && 
+    		instance.isRepresentative(this.refMofId())&&
+    		instance.hasRefObject(this.refMofId()))
+    	{    		
+    		return instance.getOrdering(this.refMofId());
+    	} 
+    	else {
+    		return null;
+    	}
+	}    
 }
