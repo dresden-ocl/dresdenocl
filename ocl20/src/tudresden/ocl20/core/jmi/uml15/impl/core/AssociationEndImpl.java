@@ -123,12 +123,12 @@ public abstract class AssociationEndImpl extends ModelElementImpl implements Ass
     		instance.hasRefObject(this.refMofId()))
     	{    		
     		return instance.getAssociation(this.refMofId());
-    	} else {
-		return null;
-	}
+    	} 
+    	
+		return super_getAssociation();	
     }
     
-    protected abstract tudresden.ocl20.core.jmi.uml15.core.Classifier super_getParticipant()
+    protected abstract tudresden.ocl20.core.jmi.uml15.core.Classifier super_getParticipant();
 
     /**
      * Returns the classifier of an association end. If an instance of the class ModelFacade exists 
@@ -143,12 +143,12 @@ public abstract class AssociationEndImpl extends ModelElementImpl implements Ass
     		instance.hasRefObject(this.refMofId()))
     	{    		
     		return instance.getParticipant(this.refMofId());
-    	} else {
-		return null;
-	}
+    	} 
+    	
+		return super_getParticipant();	
     }
     
-    protected abstract tudresden.ocl20.core.jmi.uml15.datatypes.OrderingKind super_getOrdering()
+    protected abstract tudresden.ocl20.core.jmi.uml15.datatypes.OrderingKind super_getOrdering();
 
    /**
      * Returns the OrderingKind of an attribute or an association end. If an instance of the class ModelFacade exists 
@@ -164,8 +164,8 @@ public abstract class AssociationEndImpl extends ModelElementImpl implements Ass
     	{    		
     		return instance.getOrdering(this.refMofId());
     	} 
-    	else {
-    		return null;
-    	}
+    	
+    	return super_getOrdering();
+    	
 	}    
 }
