@@ -108,6 +108,8 @@ public abstract class AssociationEndImpl extends ModelElementImpl implements Ass
         return super_getMultiplicity();
     }
     
+    protected abstract tudresden.ocl20.core.jmi.uml15.core.Association super_getAssociation();
+    
     /**
      * Returns the association of an association end. If an instance of the class ModelFacade exists 
      * the method getAssociation() of the class ModelFacade is used.
@@ -125,6 +127,8 @@ public abstract class AssociationEndImpl extends ModelElementImpl implements Ass
 		return null;
 	}
     }
+    
+    protected abstract tudresden.ocl20.core.jmi.uml15.core.Classifier super_getParticipant()
 
     /**
      * Returns the classifier of an association end. If an instance of the class ModelFacade exists 
@@ -143,6 +147,8 @@ public abstract class AssociationEndImpl extends ModelElementImpl implements Ass
 		return null;
 	}
     }
+    
+    protected abstract tudresden.ocl20.core.jmi.uml15.datatypes.OrderingKind super_getOrdering()
 
    /**
      * Returns the OrderingKind of an attribute or an association end. If an instance of the class ModelFacade exists 
