@@ -966,6 +966,8 @@
 			<fileset file="${jar.libs.oclscriptrunner}"/>
 			<fileset file="${jar.libs.transformation}"/>
 			<fileset file="${jar.libs.CWM}"/>
+  		<fileset file="${jar.libs.codegenGUI}"/>
+  		<fileset file="${jar.libs.injector}"/>
 			<fileset file="${basedir}/lib/internal/ocl20codegen-java.jar"/>
 			<fileset file="${basedir}/GETTING-STARTED"/>
 		</copy>
@@ -986,8 +988,8 @@
 		<copy todir="${basedir}/dist/bin/scripts">
 			<fileset dir="${basedir}/scripts"/>
 		</copy>
-		<tar tarfile="${basedir}/dist/dresden-ocl2-1.1.tar" basedir="${basedir}/dist/bin"/>
-		<gzip zipfile="${basedir}/dist/dresden-ocl2-1.1.tar.gz" src="${basedir}/dist/dresden-ocl2-1.1.tar"/>
+		<tar tarfile="${basedir}/dist/dresden-ocl2-1.2.tar" basedir="${basedir}/dist/bin"/>
+		<gzip zipfile="${basedir}/dist/dresden-ocl2-1.2.tar.gz" src="${basedir}/dist/dresden-ocl2-1.2.tar"/>
 
 		<!-- Source files -->
 		<mkdir dir="${basedir}/dist/src"/>
@@ -1009,8 +1011,8 @@
 			</fileset>
 		</copy>
 
-		<tar tarfile="${basedir}/dist/dresden-ocl2-src-1.1.tar" basedir="${basedir}/dist/src"/>
-		<gzip zipfile="${basedir}/dist/dresden-ocl2-src-1.1.tar.gz" src="${basedir}/dist/dresden-ocl2-src-1.1.tar"/>
+		<tar tarfile="${basedir}/dist/dresden-ocl2-src-1.2.tar" basedir="${basedir}/dist/src"/>
+		<gzip zipfile="${basedir}/dist/dresden-ocl2-src-1.2.tar.gz" src="${basedir}/dist/dresden-ocl2-src-1.2.tar"/>
 
 		<!-- delete temporary files-->
 		<delete includeEmptyDirs="true" failonerror="false">
@@ -1081,7 +1083,9 @@ More info goes here.
 						compile.sableparser.astnode,
 						compile.trans-engine,
 						compile.utilityexample,
-						compile.workbench">
+						compile.workbench,
+            compile.codegenGUI,
+            compile.injector">
 	</target>
 
 	<target name="jar" description="creates all jar-files" depends="
@@ -1101,7 +1105,9 @@ More info goes here.
 						jar.sableparser.astnode,
 						jar.trans-engine,
 						jar.utilityexample,
-						jar.workbench">
+						jar.workbench,
+            jar.codegenGUI,
+            jar.injector">
 	</target>
 
 	<!-- Transformation Framework -->
