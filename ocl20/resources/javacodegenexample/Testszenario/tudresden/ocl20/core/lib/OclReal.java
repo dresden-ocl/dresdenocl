@@ -624,15 +624,6 @@ public class OclReal extends OclAny implements
 
   }
 
-  /**
-   * @return the java class of this object  
-   * @author: Ronny Brandt     
-   */
-  public Class toUmlClass() {
-  	  return double.class;
-  }
-
-
 } /* end class OclReal */
 
 

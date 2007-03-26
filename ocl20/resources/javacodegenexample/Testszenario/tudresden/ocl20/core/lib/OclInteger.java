@@ -574,17 +574,6 @@ public class OclInteger extends OclReal {
 
   }
 
-  /**
-   * @return the java class of this object  
-   * @author: Ronny Brandt     
-   */
-  public Class toUmlClass() {
-	  return int.class;
-  }
-
-
-
-
 } /* end class OclInteger */
 
 

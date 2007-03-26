@@ -350,17 +350,6 @@ public class OclString extends OclAny implements OclSizable {
 
   }
 
-  /**
-   * @return the java class of this object  
-   * @author: Ronny Brandt     
-   */
-  public Class toUmlClass() {
-  	  return String.class;
-  }
-
-
-
-
 } /* end class OclString */
 
 

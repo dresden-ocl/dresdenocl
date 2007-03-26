@@ -238,13 +238,6 @@ public class OclTuple extends OclAny {
 
     }
 
-    /**
-     * @return the java class of this object  
-     * @author: Ronny Brandt     
-     */
-    public Class toUmlClass() {
-    	throw new OclException("toUmlClass() not yet supported for OclTupleType");
-    }
 }
 
 

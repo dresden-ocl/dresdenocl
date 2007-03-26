@@ -410,15 +410,6 @@ public class OclBoolean extends OclAny {
 
   }
 
-  /**
-   * @return the java class of this object  
-   * @author: Ronny Brandt     
-   */
-  public Class toUmlClass() {
-	  return boolean.class;
-  }
-
-
 } /* end class OclBoolean */
 
 

@@ -1426,15 +1426,6 @@ public abstract class OclCollection implements OclSizable, OclRoot {
 
   }
 
-  /**
-   * @return the java class of this object  
-   * @author: Ronny Brandt     
-   */
-  public Class toUmlClass() {
-	  return this.collection.getClass();
-  }
-   
-
 } /* end class OclCollection */
 
 

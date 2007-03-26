@@ -132,14 +132,6 @@ public interface OclRoot extends Cloneable{
 
     public OclBoolean oclIsTypeOf(OclType t);
 
-    /**
-     * @return the java class of this object  
-     * @author: Ronny Brandt     
-     */
-    public Class toUmlClass();
-
-    
-
 }
 
 

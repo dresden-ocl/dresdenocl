@@ -236,20 +236,6 @@ public class OclContainer implements OclRoot {
 
     }
 
-    
-    /**
-     * @return the java class of this object  
-     * @author: Ronny Brandt     
-     */
-    public Class toUmlClass() {
-    	  return containedValue.toUmlClass();
-    }
-    
-
-    
-
-    
-
 } /* end class OclContainer */
 
 

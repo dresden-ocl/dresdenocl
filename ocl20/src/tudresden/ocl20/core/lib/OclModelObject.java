@@ -350,15 +350,5 @@ public class OclModelObject extends OclAny{
 
     //    }
 
-    
-    /**
-     * @return the java class of this object  
-     * @author: Ronny Brandt     
-     */
-    public Class toUmlClass() {
-    	  return null;
-    }
-   
-
 }
 

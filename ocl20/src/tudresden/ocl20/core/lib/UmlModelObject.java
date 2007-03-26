@@ -65,13 +65,6 @@ public class UmlModelObject extends OclModelObject {
 			return OclBoolean.FALSE;
 	}
 	
-	private Class getUmlClass(Object o) {
-		if (!(o instanceof OclRoot))
-			return o.getClass();
-		else
-			return ((OclRoot)o).toUmlClass();
-	}
-	
 	protected Object getFeatureImpl(String name) {
 		Class c = object.getClass();
 		Field field = null;
@@ -120,7 +113,7 @@ public class UmlModelObject extends OclModelObject {
 		Iterator it = params.iterator();
 		int i = 0;
 		while (it.hasNext()) {
-			params_class[i] = getUmlClass(it.next());			
+			params_class[i] = it.next().getClass();
 		}
 		try {
 			//method = c.getDeclaredMethod(name, params_class);

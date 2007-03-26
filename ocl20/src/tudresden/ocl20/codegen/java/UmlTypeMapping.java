@@ -81,7 +81,7 @@ public class UmlTypeMapping {
 					name.toUpperCase().equals("STRING"))
 				result.append(name.toUpperCase());
 			else
-				result.append("UmlType.MODELTYPE");
+				result.append("MODELTYPE");
 			//System.err.println("Parametertyp: "+((UmlClass)type).getName()+"\n");
 			//result.append("Parametertyp: "+((UmlClass)type).getName()+"\n");
 		}
