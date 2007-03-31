@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL Standard Library
+Bundle-SymbolicName: tudresden.ocl20.pivot.essentialocl.standardlibrary
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin
+Bundle-Vendor: TU Dresden, Software Engineering Department
+Require-Bundle: org.eclipse.core.runtime
+Eclipse-LazyStart: true
+Export-Package: tudresden.ocl20.pivot.essentialocl.standardlibrary
