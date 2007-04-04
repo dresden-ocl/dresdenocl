@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.pivotmodel/src"
+    modelPluginID="tudresden.ocl20.pivot.pivotmodel" templateDirectory="/tudresden.ocl20.pivot.pivotmodel/templates"
+    dynamicTemplates="true" modelName="Pivot Model" nonNLSMarkers="true" rootExtendsInterface=""
+    rootImplementsInterface="" suppressEMFTypes="true" suppressEMFMetaData="true"
+    suppressEMFModelTags="true" codeFormatting="true" booleanFlagsField="" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0">
+  <foreignModel>pivotmodel.ecore</foreignModel>
+  <foreignModel>datatypes.ecore</foreignModel>
+  <genPackages prefix="PivotModel" basePackage="tudresden.ocl20.pivot" disposableProviderFactory="true"
+      generateExampleClass="false" multipleEditorPages="false" generateModelWizard="false"
+      ecorePackage="pivotmodel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="pivotmodel.ecore#//ParameterDirectionKind">
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ParameterDirectionKind/in"/>
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ParameterDirectionKind/out"/>
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ParameterDirectionKind/inout"/>
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ParameterDirectionKind/return"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="pivotmodel.ecore#//ConstraintKind">
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ConstraintKind/invariant"/>
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ConstraintKind/definition"/>
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ConstraintKind/precondition"/>
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ConstraintKind/postcondition"/>
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ConstraintKind/initial"/>
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ConstraintKind/derived"/>
+      <genEnumLiterals ecoreEnumLiteral="pivotmodel.ecore#//ConstraintKind/body"/>
+    </genEnums>
+    <genClasses ecoreClass="pivotmodel.ecore#//Enumeration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Enumeration/ownedLiteral"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="pivotmodel.ecore#//NamedElement">
+      <genFeatures createChild="false" propertyCategory="" propertyDescription=""
+          ecoreFeature="ecore:EAttribute pivotmodel.ecore#//NamedElement/name"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//NamedElement/qualifiedName"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//NamedElement/owner"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//Operation">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Operation/owningType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Operation/ownedParameter"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Operation/inputParameter"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Operation/outputParameter"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" propertyCategory=""
+          ecoreFeature="ecore:EReference pivotmodel.ecore#//Operation/returnParameter"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Operation/signatureParameter"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Operation/hasMatchingSignature">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Operation/hasMatchingSignature/paramTypes"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Operation/addParameter">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Operation/addParameter/p"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="pivotmodel.ecore#//MultiplicityElement">
+      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//MultiplicityElement/ordered"/>
+      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//MultiplicityElement/unique"/>
+      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//MultiplicityElement/multiple"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//Namespace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Namespace/ownedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Namespace/ownedRule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Namespace/nestedNamespace"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Namespace/nestingNamespace"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Namespace/addType">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Namespace/addType/type"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Namespace/addRule">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Namespace/addRule/rule"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Namespace/addNestedNamespace">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Namespace/addNestedNamespace/namespace"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//Type">
+      <genFeatures notify="false" createChild="false" propertyMultiLine="true" propertySortChoices="true"
+          ecoreFeature="ecore:EReference pivotmodel.ecore#//Type/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Type/ownedOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Type/ownedProperty"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Type/namespace"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/conformsTo">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Type/conformsTo/other"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/commonSuperType">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Type/commonSuperType/other"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/allProperties"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/allOperations"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/lookupProperty">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Type/lookupProperty/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/lookupOperation">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Type/lookupOperation/name"/>
+        <genParameters ecoreParameter="pivotmodel.ecore#//Type/lookupOperation/paramTypes"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/addProperty">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Type/addProperty/property"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/addOperation">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Type/addOperation/operation"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/addSuperType">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Type/addSuperType/type"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//Parameter">
+      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//Parameter/kind"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Parameter/operation"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Parameter/asProperty"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Parameter/clone"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//EnumerationLiteral">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//EnumerationLiteral/enumeration"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//Property">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Property/owningType"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Property/cmpSlots">
+        <genParameters ecoreParameter="pivotmodel.ecore#//Property/cmpSlots/p"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="pivotmodel.ecore#//TypedElement">
+      <genFeatures createChild="false" propertyMultiLine="true" propertySortChoices="true"
+          ecoreFeature="ecore:EReference pivotmodel.ecore#//TypedElement/type"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//TypedElement/genericType"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//PrimitiveType"/>
+    <genClasses image="false" ecoreClass="pivotmodel.ecore#//Feature">
+      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//Feature/static"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//Constraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//Constraint/kind"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Constraint/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Constraint/specification"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Constraint/constrainedElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//Constraint/definedFeature"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//Expression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//Expression/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//Expression/language"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Expression/constraint"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="pivotmodel.ecore#//ConstrainableElement"/>
+    <genClasses image="false" ecoreClass="pivotmodel.ecore#//GenericElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pivotmodel.ecore#//GenericElement/ownedTypeParameter"/>
+      <genOperations ecoreOperation="pivotmodel.ecore#//GenericElement/addTypeParameter">
+        <genParameters ecoreParameter="pivotmodel.ecore#//GenericElement/addTypeParameter/typeParameter"/>
+      </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//GenericElement/bindTypeParameter">
+        <genParameters ecoreParameter="pivotmodel.ecore#//GenericElement/bindTypeParameter/parameters"/>
+        <genParameters ecoreParameter="pivotmodel.ecore#//GenericElement/bindTypeParameter/types"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//GenericType">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//GenericType/typedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//TypeParameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//TypeParameter/genericElement"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//TypeArgument">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//TypeArgument/owningGenericType"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//ParameterGenericType">
+      <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference pivotmodel.ecore#//ParameterGenericType/typeParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="pivotmodel.ecore#//ComplexGenericType">
+      <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference pivotmodel.ecore#//ComplexGenericType/unboundType"/>
+      <genFeatures property="None" notify="false" children="true" createChild="false"
+          ecoreFeature="ecore:EReference pivotmodel.ecore#//ComplexGenericType/typeArgument"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Datatypes" basePackage="tudresden.ocl20.pivot" disposableProviderFactory="true"
+      generateExampleClass="false" multipleEditorPages="false" generateModelWizard="false"
+      ecorePackage="datatypes.ecore#/">
+    <genDataTypes ecoreDataType="datatypes.ecore#//Sequence">
+      <genTypeParameters ecoreTypeParameter="datatypes.ecore#//Sequence/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="datatypes.ecore#//Set">
+      <genTypeParameters ecoreTypeParameter="datatypes.ecore#//Set/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="datatypes.ecore#//UnlimitedNatural"/>
+    <genDataTypes ecoreDataType="datatypes.ecore#//Integer"/>
+    <genDataTypes ecoreDataType="datatypes.ecore#//Boolean"/>
+    <genDataTypes ecoreDataType="datatypes.ecore#//String"/>
+    <genDataTypes ecoreDataType="datatypes.ecore#//Real"/>
+    <genDataTypes ecoreDataType="datatypes.ecore#//Bag">
+      <genTypeParameters ecoreTypeParameter="datatypes.ecore#//Bag/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="datatypes.ecore#//OrderedSet">
+      <genTypeParameters ecoreTypeParameter="datatypes.ecore#//OrderedSet/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="datatypes.ecore#//Collection">
+      <genTypeParameters ecoreTypeParameter="datatypes.ecore#//Collection/T"/>
+    </genDataTypes>
+  </genPackages>
+</genmodel:GenModel>

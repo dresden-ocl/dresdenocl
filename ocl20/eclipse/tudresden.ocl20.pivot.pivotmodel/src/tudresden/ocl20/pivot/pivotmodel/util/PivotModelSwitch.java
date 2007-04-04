@@ -1,0 +1,635 @@
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
+ * All rights reserved.                                                      *
+ *                                                                           *
+ * This work was done as a project at the Chair for Software Technology      *
+ * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
+ * It is understood that any modification not identified as such is not      *
+ * covered by the preceding statement.                                       *
+ *                                                                           *
+ * This work is free software; you can redistribute it and/or modify it      *
+ * under the terms of the GNU Library General Public License as published    *
+ * by the Free Software Foundation; either version 2 of the License, or      *
+ * (at your option) any later version.                                       *
+ *                                                                           *
+ * This work is distributed in the hope that it will be useful, but WITHOUT  *
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
+ * License for more details.                                                 *
+ *                                                                           *
+ * You should have received a copy of the GNU Library General Public License *
+ * along with this library; if not, you can view it online at                *
+ * http://www.fsf.org/licensing/licenses/gpl.html.                           *
+ *                                                                           *
+ * To submit a bug report, send a comment, or get the latest news on this    *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
+ * For more information on OCL and related projects visit the OCL Portal:    *
+ * http://st.inf.tu-dresden.de/ocl                                           *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * $Id$
+ */
+package tudresden.ocl20.pivot.pivotmodel.util;
+
+import java.util.List;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+
+import tudresden.ocl20.pivot.pivotmodel.*;
+
+import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Switch</b> for the model's inheritance hierarchy.
+ * It supports the call {@link #doSwitch(EObject) doSwitch(object)}
+ * to invoke the <code>caseXXX</code> method for each class of the model,
+ * starting with the actual class of the object
+ * and proceeding up the inheritance hierarchy
+ * until a non-null result is returned,
+ * which is the result of the switch.
+ * <!-- end-user-doc -->
+ * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl
+ * @generated
+ */
+public class PivotModelSwitch<T> {
+
+  /**
+   * The cached model package
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected static PivotModelPackageImpl modelPackage;
+
+  /**
+   * Creates an instance of the switch.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PivotModelSwitch() {
+    if (modelPackage == null) {
+      modelPackage = PivotModelPackageImpl.eINSTANCE;
+    }
+  }
+
+  /**
+   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the first non-null result returned by a <code>caseXXX</code> call.
+   * @generated
+   */
+  public T doSwitch(EObject theEObject) {
+    return doSwitch(theEObject.eClass(),theEObject);
+  }
+
+  /**
+   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the first non-null result returned by a <code>caseXXX</code> call.
+   * @generated
+   */
+  protected T doSwitch(EClass theEClass, EObject theEObject) {
+    if (theEClass.eContainer() == modelPackage) {
+      return doSwitch(theEClass.getClassifierID(),theEObject);
+    }
+    else {
+      List<EClass> eSuperTypes = theEClass.getESuperTypes();
+      return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(eSuperTypes.get(0),
+          theEObject);
+    }
+  }
+
+  /**
+   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the first non-null result returned by a <code>caseXXX</code> call.
+   * @generated
+   */
+  protected T doSwitch(int classifierID, EObject theEObject) {
+    switch (classifierID) {
+      case PivotModelPackageImpl.ENUMERATION: {
+        Enumeration enumeration = (Enumeration) theEObject;
+        T result = caseEnumeration(enumeration);
+        if (result == null) result = caseType(enumeration);
+        if (result == null) result = caseNamedElement(enumeration);
+        if (result == null) result = caseConstrainableElement(enumeration);
+        if (result == null) result = caseGenericElement(enumeration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.NAMED_ELEMENT: {
+        NamedElement namedElement = (NamedElement) theEObject;
+        T result = caseNamedElement(namedElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.OPERATION: {
+        Operation operation = (Operation) theEObject;
+        T result = caseOperation(operation);
+        if (result == null) result = caseFeature(operation);
+        if (result == null) result = caseTypedElement(operation);
+        if (result == null) result = caseNamedElement(operation);
+        if (result == null) result = caseMultiplicityElement(operation);
+        if (result == null) result = caseConstrainableElement(operation);
+        if (result == null) result = caseGenericElement(operation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.MULTIPLICITY_ELEMENT: {
+        MultiplicityElement multiplicityElement = (MultiplicityElement) theEObject;
+        T result = caseMultiplicityElement(multiplicityElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.NAMESPACE: {
+        Namespace namespace = (Namespace) theEObject;
+        T result = caseNamespace(namespace);
+        if (result == null) result = caseNamedElement(namespace);
+        if (result == null) result = caseGenericElement(namespace);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.TYPE: {
+        Type type = (Type) theEObject;
+        T result = caseType(type);
+        if (result == null) result = caseNamedElement(type);
+        if (result == null) result = caseConstrainableElement(type);
+        if (result == null) result = caseGenericElement(type);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.PARAMETER: {
+        Parameter parameter = (Parameter) theEObject;
+        T result = caseParameter(parameter);
+        if (result == null) result = caseTypedElement(parameter);
+        if (result == null) result = caseNamedElement(parameter);
+        if (result == null) result = caseMultiplicityElement(parameter);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.ENUMERATION_LITERAL: {
+        EnumerationLiteral enumerationLiteral = (EnumerationLiteral) theEObject;
+        T result = caseEnumerationLiteral(enumerationLiteral);
+        if (result == null) result = caseNamedElement(enumerationLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.PROPERTY: {
+        Property property = (Property) theEObject;
+        T result = caseProperty(property);
+        if (result == null) result = caseFeature(property);
+        if (result == null) result = caseTypedElement(property);
+        if (result == null) result = caseNamedElement(property);
+        if (result == null) result = caseMultiplicityElement(property);
+        if (result == null) result = caseConstrainableElement(property);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.TYPED_ELEMENT: {
+        TypedElement typedElement = (TypedElement) theEObject;
+        T result = caseTypedElement(typedElement);
+        if (result == null) result = caseNamedElement(typedElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.PRIMITIVE_TYPE: {
+        PrimitiveType primitiveType = (PrimitiveType) theEObject;
+        T result = casePrimitiveType(primitiveType);
+        if (result == null) result = caseType(primitiveType);
+        if (result == null) result = caseNamedElement(primitiveType);
+        if (result == null) result = caseConstrainableElement(primitiveType);
+        if (result == null) result = caseGenericElement(primitiveType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.FEATURE: {
+        Feature feature = (Feature) theEObject;
+        T result = caseFeature(feature);
+        if (result == null) result = caseTypedElement(feature);
+        if (result == null) result = caseNamedElement(feature);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.CONSTRAINT: {
+        Constraint constraint = (Constraint) theEObject;
+        T result = caseConstraint(constraint);
+        if (result == null) result = caseNamedElement(constraint);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.EXPRESSION: {
+        Expression expression = (Expression) theEObject;
+        T result = caseExpression(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.CONSTRAINABLE_ELEMENT: {
+        ConstrainableElement constrainableElement = (ConstrainableElement) theEObject;
+        T result = caseConstrainableElement(constrainableElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.GENERIC_ELEMENT: {
+        GenericElement genericElement = (GenericElement) theEObject;
+        T result = caseGenericElement(genericElement);
+        if (result == null) result = caseNamedElement(genericElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.GENERIC_TYPE: {
+        GenericType genericType = (GenericType) theEObject;
+        T result = caseGenericType(genericType);
+        if (result == null) result = caseNamedElement(genericType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.TYPE_PARAMETER: {
+        TypeParameter typeParameter = (TypeParameter) theEObject;
+        T result = caseTypeParameter(typeParameter);
+        if (result == null) result = caseNamedElement(typeParameter);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.TYPE_ARGUMENT: {
+        TypeArgument typeArgument = (TypeArgument) theEObject;
+        T result = caseTypeArgument(typeArgument);
+        if (result == null) result = caseTypedElement(typeArgument);
+        if (result == null) result = caseNamedElement(typeArgument);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE: {
+        ParameterGenericType parameterGenericType = (ParameterGenericType) theEObject;
+        T result = caseParameterGenericType(parameterGenericType);
+        if (result == null) result = caseGenericType(parameterGenericType);
+        if (result == null) result = caseNamedElement(parameterGenericType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE: {
+        ComplexGenericType complexGenericType = (ComplexGenericType) theEObject;
+        T result = caseComplexGenericType(complexGenericType);
+        if (result == null) result = caseGenericType(complexGenericType);
+        if (result == null) result = caseNamedElement(complexGenericType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      default:
+        return defaultCase(theEObject);
+    }
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Enumeration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Enumeration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseEnumeration(Enumeration object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Named Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Named Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseNamedElement(NamedElement object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseOperation(Operation object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Multiplicity Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Multiplicity Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseMultiplicityElement(MultiplicityElement object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Namespace</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Namespace</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseNamespace(Namespace object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseType(Type object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Parameter</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseParameter(Parameter object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Enumeration Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Enumeration Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseEnumerationLiteral(EnumerationLiteral object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Property</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Property</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseProperty(Property object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Typed Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Typed Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseTypedElement(TypedElement object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Primitive Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Primitive Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T casePrimitiveType(PrimitiveType object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Feature</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Feature</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseFeature(Feature object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Constraint</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Constraint</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseConstraint(Constraint object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseExpression(Expression object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Constrainable Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Constrainable Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T caseConstrainableElement(ConstrainableElement object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Generic Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Generic Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGenericElement(GenericElement object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Type Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Type Parameter</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeParameter(TypeParameter object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Type Argument</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Type Argument</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeArgument(TypeArgument object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Parameter Generic Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Parameter Generic Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterGenericType(ParameterGenericType object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Complex Generic Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Complex Generic Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseComplexGenericType(ComplexGenericType object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>Generic Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>Generic Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGenericType(GenericType object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch, but this is the last case anyway.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject)
+   * @generated
+   */
+  @SuppressWarnings("unused")
+  public T defaultCase(EObject object) {
+    return null;
+  }
+
+} //PivotModelSwitch

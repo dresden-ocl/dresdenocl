@@ -1,0 +1,381 @@
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
+ * All rights reserved.                                                      *
+ *                                                                           *
+ * This work was done as a project at the Chair for Software Technology      *
+ * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
+ * It is understood that any modification not identified as such is not      *
+ * covered by the preceding statement.                                       *
+ *                                                                           *
+ * This work is free software; you can redistribute it and/or modify it      *
+ * under the terms of the GNU Library General Public License as published    *
+ * by the Free Software Foundation; either version 2 of the License, or      *
+ * (at your option) any later version.                                       *
+ *                                                                           *
+ * This work is distributed in the hope that it will be useful, but WITHOUT  *
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
+ * License for more details.                                                 *
+ *                                                                           *
+ * You should have received a copy of the GNU Library General Public License *
+ * along with this library; if not, you can view it online at                *
+ * http://www.fsf.org/licensing/licenses/gpl.html.                           *
+ *                                                                           *
+ * To submit a bug report, send a comment, or get the latest news on this    *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
+ * For more information on OCL and related projects visit the OCL Portal:    *
+ * http://st.inf.tu-dresden.de/ocl                                           *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * $Id$
+ */
+package tudresden.ocl20.pivot.pivotmodel.impl;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.ListIterator;
+
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
+import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+
+/**
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Complex Generic Type</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl#getUnboundType <em>Unbound Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl#getTypeArgument <em>Type Argument</em>}</li>
+ * </ul>
+ * </p>
+ * 
+ * @generated
+ */
+public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGenericType {
+
+  /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(ComplexGenericTypeImpl.class);
+
+  /**
+   * The cached value of the '{@link #getUnboundType() <em>Unbound Type</em>}' reference. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @see #getUnboundType()
+   * @generated
+   * @ordered
+   */
+  protected Type unboundType = null;
+
+  /**
+   * The cached value of the '{@link #getTypeArgument() <em>Type Argument</em>}' containment
+   * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @see #getTypeArgument()
+   * @generated
+   * @ordered
+   */
+  protected EList<TypeArgument> typeArgument = null;
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  protected ComplexGenericTypeImpl() {
+    super();
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return PivotModelPackageImpl.Literals.COMPLEX_GENERIC_TYPE;
+  }
+
+  /**
+   * Overridden to return the name of the associated (non-)generic type wrapped by this
+   * <code>ComplexGenericType</code>.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
+   */
+  @Override
+  public String getName() {
+    return getUnboundType() != null ? getUnboundType().getName() : ""; //$NON-NLS-1$
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public Type getUnboundType() {
+    return unboundType;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public void setUnboundType(Type newUnboundType) {
+    Type oldUnboundType = unboundType;
+    unboundType = newUnboundType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this,Notification.SET,
+          PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__UNBOUND_TYPE,oldUnboundType,unboundType));
+  }
+
+  /**
+   * The implementation in this class simply redirects to {{@link #getTypeArgumentGen()} which
+   * contains the code generated by EMF. Client may, however, override this method to provide
+   * specific behaviour, e.g., adapt to other model repositories.
+   * 
+   * @generated NOT
+   */
+  public List<TypeArgument> getTypeArgument() {
+    return getTypeArgumentGen();
+  }
+
+  /**
+   * <!-- begin-user-doc -->The code generated for {{@link #getTypeArgument()} is redirected to
+   * this method. <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  protected final List<TypeArgument> getTypeArgumentGen() {
+    if (typeArgument == null) {
+      typeArgument = new EObjectContainmentWithInverseEList<TypeArgument>(TypeArgument.class,this,
+          PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT,
+          PivotModelPackageImpl.TYPE_ARGUMENT__OWNING_GENERIC_TYPE);
+    }
+    return typeArgument;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated NOT
+   */
+  public ComplexGenericType addTypeArgument(TypeArgument typeArgument) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("addTypeArgument(typeArgument=" + typeArgument + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    // use the generated method because getTypeArgument() may be overridden by subclasses
+    getTypeArgumentGen().add(typeArgument);
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("addTypeArgument() - exit"); //$NON-NLS-1$
+    }
+
+    return this;
+  }
+
+  /**
+   * This method will bind the type of the {@link #getTypedElement() owning TypedElement} if the
+   * {@link #getUnboundType() unbound type} of this <code>ComplexGenericType</code> can be fully
+   * bound with the bindings represented by the <code>parameters</code> and <code>types</code>
+   * arguments. Even if the given lists are empty, this method will attempt to bind the unbound type
+   * using the {@link TypeArgument}s set for this <code>ComplexGenericType</code>. *
+   */
+  @Override
+  public TypedElement doBindTypedElement(List<TypeParameter> parameters, List<? extends Type> types) {
+    TypedElement typedElement = getTypedElement();
+    Type unboundType = getUnboundType();
+
+    // check that an unbound type has been set
+    if (unboundType == null) {
+      throw new IllegalStateException("No unbound type set for " + this); //$NON-NLS-1$
+    }
+
+    // check that number of type argument equals number of type parameters of unbound type
+    if (getTypeArgument().size() != unboundType.getOwnedTypeParameter().size()) {
+      throw new IllegalStateException("The number of type arguments for " + this //$NON-NLS-1$
+          + " does not match the number of type parameters of " + unboundType + "."); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    // create new lists for binding the generic types in the unbound type
+    List<TypeParameter> unboundTypeParameters = new ArrayList<TypeParameter>();
+    List<Type> typeArgumentTypes = new ArrayList<Type>();
+
+    // collect all type arguments that have a normal type
+    for (ListIterator<TypeArgument> it = getTypeArgument().listIterator(); it.hasNext();) {
+      TypeArgument typeArgument = it.next();
+
+      // bind the type argument if it has a generic type
+      if (typeArgument.getType() == null && typeArgument.getGenericType() != null) {
+        typeArgument.getGenericType().bindTypedElement(parameters,types);
+      }
+
+      // if the type argument has a non-generic type now, add it to the new bindings
+      if (typeArgument.getType() != null) {
+        unboundTypeParameters.add(unboundType.getOwnedTypeParameter().get(it.previousIndex()));
+        typeArgumentTypes.add(typeArgument.getType());
+      }
+    }
+
+    // now bind the type with the collected type parameters and types
+    unboundType = unboundType.bindTypeParameter(unboundTypeParameters,typeArgumentTypes);
+
+    // if all type parameters have been bound we can set the typed element's type
+    if (unboundType.getOwnedTypeParameter().isEmpty()) {
+      if (logger.isDebugEnabled()) {
+        logger.debug("Binding type of " + typedElement + " with " + unboundType + "."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+      }
+
+      typedElement.setType(unboundType);
+    }
+
+    return typedElement;
+  }
+
+  /**
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
+   */
+  @Override
+  public ComplexGenericType clone() {
+    return initialize(PivotModelFactory.INSTANCE.createComplexGenericType());
+  }
+
+  /**
+   * Helper method that initializes a cloned <code>ComplexGenericType</code>.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#initialize(tudresden.ocl20.pivot.pivotmodel.NamedElement)
+   */
+  protected ComplexGenericType initialize(ComplexGenericType clone) {
+    clone.setUnboundType(getUnboundType());
+
+    // clone the contained type arguments
+    for (TypeArgument typeArgument : getTypeArgument()) {
+      clone.addTypeArgument(typeArgument.clone());
+    }
+
+    return clone;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+      NotificationChain msgs) {
+    switch (featureID) {
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT:
+        return ((InternalEList<InternalEObject>) (InternalEList<?>) getTypeArgument()).basicAdd(
+            otherEnd,msgs);
+    }
+    return super.eInverseAdd(otherEnd,featureID,msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
+      NotificationChain msgs) {
+    switch (featureID) {
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT:
+        return ((InternalEList<?>) getTypeArgument()).basicRemove(otherEnd,msgs);
+    }
+    return super.eInverseRemove(otherEnd,featureID,msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType) {
+    switch (featureID) {
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__UNBOUND_TYPE:
+        return getUnboundType();
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT:
+        return getTypeArgument();
+    }
+    return super.eGet(featureID,resolve,coreType);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public void eSet(int featureID, Object newValue) {
+    switch (featureID) {
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__UNBOUND_TYPE:
+        setUnboundType((Type) newValue);
+        return;
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT:
+        getTypeArgument().clear();
+        getTypeArgument().addAll((Collection<? extends TypeArgument>) newValue);
+        return;
+    }
+    super.eSet(featureID,newValue);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID) {
+    switch (featureID) {
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__UNBOUND_TYPE:
+        setUnboundType((Type) null);
+        return;
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT:
+        getTypeArgument().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID) {
+    switch (featureID) {
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__UNBOUND_TYPE:
+        return unboundType != null;
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT:
+        return typeArgument != null && !typeArgument.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
+
+} // ComplexGenericTypeImpl

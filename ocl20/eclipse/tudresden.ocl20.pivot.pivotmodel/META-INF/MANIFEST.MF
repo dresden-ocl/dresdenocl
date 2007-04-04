@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: tudresden.ocl20.pivot.pivotmodel; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: tudresden.ocl20.pivot.datatypes,
+ tudresden.ocl20.pivot.datatypes.impl,
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.pivotmodel.base,
+ tudresden.ocl20.pivot.pivotmodel.impl,
+ tudresden.ocl20.pivot.pivotmodel.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ tudresden.ocl20.logging,
+ org.apache.commons.lang
+Eclipse-LazyStart: true
+Bundle-Activator: tudresden.ocl20.pivot.PivotModelPlugin
