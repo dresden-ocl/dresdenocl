@@ -46,20 +46,20 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getInitExpression <em>Init Expression</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getInitExpression <em>Init Expression</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class VariableImpl extends TypedElementImpl implements Variable {
@@ -70,9 +70,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   private static final Logger logger = Logger.getLogger(VariableImpl.class);
 
   /**
-   * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getRepresentedParameter()
    * @generated
    * @ordered
@@ -80,9 +80,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   protected Parameter representedParameter = null;
 
   /**
-   * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getInitExpression()
    * @generated
    * @ordered
@@ -90,8 +90,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   protected OclExpression initExpression = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected VariableImpl() {
@@ -99,13 +99,25 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to return the name of the {@link #getRepresentedParameter() represented parameter}
+   * if this <code>Variable</code> represents a {@link Parameter}.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.VARIABLE;
+  public String getName() {
+    return representedParameter != null ? representedParameter.getName() : super.getName();
+  }
+
+  /**
+   * Overridden to return the type of the {@link #getRepresentedParameter() represented parameter}
+   * if this <code>Variable</code> represents a {@link Parameter}.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+   */
+  @Override
+  public Type getType() {
+    return representedParameter != null ? representedParameter.getType() : super.getType();
   }
 
   /**
@@ -119,8 +131,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Parameter getRepresentedParameter() {
@@ -128,8 +140,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setRepresentedParameter(Parameter newRepresentedParameter) {
@@ -142,8 +154,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getInitExpression() {
@@ -151,8 +163,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetInitExpression(OclExpression newInitExpression,
@@ -169,8 +181,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setInitExpression(OclExpression newInitExpression) {
@@ -191,8 +203,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated NOT
    */
   public Parameter asParameter() {
@@ -215,8 +227,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated NOT
    */
   public Property asProperty() {
@@ -224,9 +236,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
       logger.debug("asProperty() - enter"); //$NON-NLS-1$
     }
 
-    Property property;
+    Property property = PivotModelFactory.INSTANCE.createProperty();
 
-    property = PivotModelFactory.INSTANCE.createProperty();
     property.setName(getName());
     property.setType(getType());
 
@@ -238,8 +249,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -253,8 +264,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -269,8 +280,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -287,8 +298,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -305,8 +316,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -320,4 +331,14 @@ public class VariableImpl extends TypedElementImpl implements Variable {
     return super.eIsSet(featureID);
   }
 
-} //VariableImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.VARIABLE;
+  }
+
+} // VariableImpl
