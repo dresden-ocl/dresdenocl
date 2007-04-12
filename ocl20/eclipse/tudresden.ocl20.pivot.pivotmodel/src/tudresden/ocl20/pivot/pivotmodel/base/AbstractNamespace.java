@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -35,23 +35,37 @@ package tudresden.ocl20.pivot.pivotmodel.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl;
 
 /**
  * This class is meant as a base class for DSL- and/or repository-specific implementations of the
- * Pivot Model {@link Namespace} concept. It defines skeletons for the most essential operations
- * that need to be supported by subclasses. These methods mostly forward to abstract versions
- * suffixed with 'Impl' and combine the result with the contents of the EMF-managed fields from the
- * superclass. Thus, it is possible to create a view of the domain-specific repository with
- * additional transient elements contributed via the <code>add</code> methods in the superclass.
- * Clients should override the abstract methods and return appropriate adapters for the elements
- * corresponding to the respective Pivot Model concepts. This class currently does not use any
- * caching or other performance optimizations in order to support repositories with alternating
- * content. Clients may implement their own caching behavior or override the implementation in this
- * class altogether. Of course, an entirely new implementation of the <code>Namespace</code>
- * interface is possible as well.
+ * Pivot Model {@link Namespace} concept. It defines the minimal set of operations that need to be
+ * supported by subclasses. This class currently does not use any caching or other performance
+ * optimizations in order to support repositories with alternating content. Clients may implement
+ * their own caching behavior or override the implementation in this class altogether. Of course, an
+ * entirely new implementation of the <code>Namespace</code> interface is possible as well.
+ * 
+ * <p>
+ * Special attention should be payed to methods returning collections. In the superclass
+ * {@link NamespaceImpl}, the corresponding EMF-generated code is usually forwarded to a method
+ * suffixed with <code>Gen</code>. These are used by special <code>add...</code> methods which
+ * allow adding new elements to multivalued properties. This design allows overriding the
+ * corresponding getter method without losing the EMF implementation. Moreover, subclasses can now
+ * combine the elements added via <code>add...</code> in the superclass and those returned as
+ * adapters from the model, thereby creating a transient "view" of the model.
+ * </p>
+ * 
+ * <p>
+ * In this class, the principle is exemplified in the {@link #getNestedNamespace()} method. It
+ * combines the results of {@link #getNestedNamespaceGen()} and {@link #getNestedNamespaceImpl()}.
+ * The latter has to be implemented in subclasses. This is useful to add additional namespaces for
+ * the {@link Constraint}s created when parsing OCL expressions. In theory, this approach can be
+ * repeated for all other multivalued properties ({@link #getOwnedRule()}, {@link #getOwnedType()})
+ * as well.
+ * </p>
  * 
  * @author Matthias Braeuer
  * @version 1.0 29.03.2007
@@ -71,13 +85,12 @@ public abstract class AbstractNamespace extends NamespaceImpl implements Namespa
   @Override
   public abstract Namespace getNestingNamespace();
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestedNamespace()
+  /**
+   * Combines the values of {@link #getNestedNamespaceGen()} and {@link #getNestedNamespaceImpl()}
+   * into a new list.
    */
   @Override
-  public List<Namespace> getNestedNamespace() {
+  public final List<Namespace> getNestedNamespace() {
     List<Namespace> nestedNamespace = new ArrayList<Namespace>();
     nestedNamespace.addAll(getNestedNamespaceImpl());
     nestedNamespace.addAll(getNestedNamespaceGen());
@@ -89,23 +102,11 @@ public abstract class AbstractNamespace extends NamespaceImpl implements Namespa
    */
   protected abstract List<Namespace> getNestedNamespaceImpl();
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedType()
-   */
-  @Override
-  public List<Type> getOwnedType() {
-    List<Type> ownedType = new ArrayList<Type>();
-    ownedType.addAll(getOwnedTypeImpl());
-    ownedType.addAll(getOwnedTypeGen());
-    return ownedType;
-  }
-
   /**
    * Subclasses should return a list for adapters for the {@link Type}s contained in this
    * <code>Namespace</code>.
    */
-  protected abstract List<Type> getOwnedTypeImpl();
+  @Override
+  public abstract List<Type> getOwnedType();
 
 }
