@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -47,14 +47,13 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class SequenceTypeImpl extends CollectionTypeImpl implements SequenceType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected SequenceTypeImpl() {
@@ -63,7 +62,6 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements SequenceType
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override

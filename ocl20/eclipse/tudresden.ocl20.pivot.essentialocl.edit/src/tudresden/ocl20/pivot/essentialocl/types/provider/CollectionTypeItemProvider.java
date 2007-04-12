@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -47,6 +47,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider;

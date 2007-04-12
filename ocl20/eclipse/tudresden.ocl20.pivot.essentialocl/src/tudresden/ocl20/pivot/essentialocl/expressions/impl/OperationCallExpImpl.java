@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -57,7 +57,6 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getArgument <em>Argument</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getReferredOperation <em>Referred Operation</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,16 +83,6 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
    * @ordered
    */
   protected Operation referredOperation = null;
-
-  /**
-   * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getQualifier()
-   * @generated
-   * @ordered
-   */
-  protected EList<OclExpression> qualifier = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -155,27 +144,12 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
    * <!-- end-user-doc -->
    * @generated
    */
-  public List<OclExpression> getQualifier() {
-    if (qualifier == null) {
-      qualifier = new EObjectContainmentEList<OclExpression>(OclExpression.class,this,
-          ExpressionsPackageImpl.OPERATION_CALL_EXP__QUALIFIER);
-    }
-    return qualifier;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
       NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.OPERATION_CALL_EXP__ARGUMENT:
         return ((InternalEList<?>) getArgument()).basicRemove(otherEnd,msgs);
-      case ExpressionsPackageImpl.OPERATION_CALL_EXP__QUALIFIER:
-        return ((InternalEList<?>) getQualifier()).basicRemove(otherEnd,msgs);
     }
     return super.eInverseRemove(otherEnd,featureID,msgs);
   }
@@ -192,8 +166,6 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
         return getArgument();
       case ExpressionsPackageImpl.OPERATION_CALL_EXP__REFERRED_OPERATION:
         return getReferredOperation();
-      case ExpressionsPackageImpl.OPERATION_CALL_EXP__QUALIFIER:
-        return getQualifier();
     }
     return super.eGet(featureID,resolve,coreType);
   }
@@ -214,10 +186,6 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
       case ExpressionsPackageImpl.OPERATION_CALL_EXP__REFERRED_OPERATION:
         setReferredOperation((Operation) newValue);
         return;
-      case ExpressionsPackageImpl.OPERATION_CALL_EXP__QUALIFIER:
-        getQualifier().clear();
-        getQualifier().addAll((Collection<? extends OclExpression>) newValue);
-        return;
     }
     super.eSet(featureID,newValue);
   }
@@ -236,9 +204,6 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
       case ExpressionsPackageImpl.OPERATION_CALL_EXP__REFERRED_OPERATION:
         setReferredOperation((Operation) null);
         return;
-      case ExpressionsPackageImpl.OPERATION_CALL_EXP__QUALIFIER:
-        getQualifier().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -255,8 +220,6 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
         return argument != null && !argument.isEmpty();
       case ExpressionsPackageImpl.OPERATION_CALL_EXP__REFERRED_OPERATION:
         return referredOperation != null;
-      case ExpressionsPackageImpl.OPERATION_CALL_EXP__QUALIFIER:
-        return qualifier != null && !qualifier.isEmpty();
     }
     return super.eIsSet(featureID);
   }

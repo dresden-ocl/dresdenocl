@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions;
 
+import java.util.List;
+
 import tudresden.ocl20.pivot.pivotmodel.Property;
 
 /**
@@ -43,6 +45,7 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  * The following features are supported:
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,5 +76,19 @@ public interface PropertyCallExp extends FeatureCallExp {
    * @generated
    */
   void setReferredProperty(Property value);
+
+  /**
+   * Returns the value of the '<em><b>Qualifier</b></em>' containment reference list.
+   * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Qualifier</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Qualifier</em>' containment reference list.
+   * @generated
+   */
+  List<OclExpression> getQualifier();
 
 } // PropertyCallExp

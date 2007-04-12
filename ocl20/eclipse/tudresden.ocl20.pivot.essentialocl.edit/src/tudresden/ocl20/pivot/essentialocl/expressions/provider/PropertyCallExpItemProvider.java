@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -40,6 +40,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.command.CommandParameter;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -50,6 +51,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import org.eclipse.emf.edit.provider.ViewerNotification;
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
 import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
 
@@ -110,6 +113,36 @@ public class PropertyCallExpItemProvider extends FeatureCallExpItemProvider impl
   }
 
   /**
+   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+    if (childrenFeatures == null) {
+      super.getChildrenFeatures(object);
+      childrenFeatures.add(ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER);
+    }
+    return childrenFeatures;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EStructuralFeature getChildFeature(Object object, Object child) {
+    // Check the type of the specified child object and return the proper feature to use for
+    // adding (see {@link AddCommand}) it as a child.
+
+    return super.getChildFeature(object,child);
+  }
+
+  /**
    * This returns PropertyCallExp.gif.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -143,6 +176,12 @@ public class PropertyCallExpItemProvider extends FeatureCallExpItemProvider impl
   @Override
   public void notifyChanged(Notification notification) {
     updateChildren(notification);
+
+    switch (notification.getFeatureID(PropertyCallExp.class)) {
+      case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
+        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        return;
+    }
     super.notifyChanged(notification);
   }
 
@@ -157,6 +196,101 @@ public class PropertyCallExpItemProvider extends FeatureCallExpItemProvider impl
   protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
       Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createVariableExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createUnlimitedNaturalExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createTypeLiteralExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createTupleLiteralExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createStringLiteralExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createRealLiteralExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createPropertyCallExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createOperationCallExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createUndefinedLiteralExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createLetExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createIteratorExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createIterateExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createInvalidLiteralExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createIntegerLiteralExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createIfExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createBooleanLiteralExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createCollectionLiteralExp()));
+
+    newChildDescriptors.add(createChildParameter(
+        ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
+            .createEnumLiteralExp()));
+  }
+
+  /**
+   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getCreateChildText(Object owner, Object feature, Object child,
+      Collection<?> selection) {
+    Object childFeature = feature;
+    Object childObject = child;
+
+    boolean qualify = childFeature == ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE
+        || childFeature == ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP__QUALIFIER;
+
+    if (qualify) {
+      return getString(
+          "_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+    }
+    return super.getCreateChildText(owner,feature,child,selection);
   }
 
   /**

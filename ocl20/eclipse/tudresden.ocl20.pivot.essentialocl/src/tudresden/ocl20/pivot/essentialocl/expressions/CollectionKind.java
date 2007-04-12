@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -31,11 +31,6 @@
  * $Id$
  */
 package tudresden.ocl20.pivot.essentialocl.expressions;
-
-import static tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind.BAG_VALUE;
-import static tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind.ORDERED_SET_VALUE;
-import static tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind.SEQUENCE_VALUE;
-import static tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind.SET_VALUE;
 
 import java.util.Arrays;
 import java.util.Collections;

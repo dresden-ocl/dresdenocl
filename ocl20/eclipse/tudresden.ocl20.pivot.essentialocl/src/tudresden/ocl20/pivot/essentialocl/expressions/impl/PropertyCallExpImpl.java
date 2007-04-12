@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -32,10 +32,18 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import java.util.Collection;
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 
@@ -47,6 +55,7 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  * The following features are implemented:
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +72,16 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
    * @ordered
    */
   protected Property referredProperty = null;
+
+  /**
+   * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getQualifier()
+   * @generated
+   * @ordered
+   */
+  protected EList<OclExpression> qualifier = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -111,11 +130,41 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
    * <!-- end-user-doc -->
    * @generated
    */
+  public List<OclExpression> getQualifier() {
+    if (qualifier == null) {
+      qualifier = new EObjectContainmentEList<OclExpression>(OclExpression.class,this,
+          ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER);
+    }
+    return qualifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
+      NotificationChain msgs) {
+    switch (featureID) {
+      case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
+        return ((InternalEList<?>) getQualifier()).basicRemove(otherEnd,msgs);
+    }
+    return super.eInverseRemove(otherEnd,featureID,msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
       case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
         return getReferredProperty();
+      case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
+        return getQualifier();
     }
     return super.eGet(featureID,resolve,coreType);
   }
@@ -125,11 +174,16 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
       case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
         setReferredProperty((Property) newValue);
+        return;
+      case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
+        getQualifier().clear();
+        getQualifier().addAll((Collection<? extends OclExpression>) newValue);
         return;
     }
     super.eSet(featureID,newValue);
@@ -146,6 +200,9 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
       case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
         setReferredProperty((Property) null);
         return;
+      case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
+        getQualifier().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -160,6 +217,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
     switch (featureID) {
       case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
         return referredProperty != null;
+      case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
+        return qualifier != null && !qualifier.isEmpty();
     }
     return super.eIsSet(featureID);
   }

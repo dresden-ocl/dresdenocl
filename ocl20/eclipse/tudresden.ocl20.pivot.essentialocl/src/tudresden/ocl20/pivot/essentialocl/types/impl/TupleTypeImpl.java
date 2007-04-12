@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -63,10 +63,10 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TupleTypeImpl extends TypeImpl implements TupleType {
@@ -339,7 +339,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public OclLibrary getOclLibrary() {
@@ -350,7 +349,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
    * <!-- begin-user-doc --> The reference to the {@link OclLibrary} facade should be set after a
    * <code>TupleType</code> instance is created. Otherwise, there might be errors when determining
    * type conformance.<!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclLibrary(OclLibrary newOclLibrary) {
@@ -549,7 +547,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
     return clone;
   }
-  
+
   /**
    * Overridden to indicate that the name of a <code>TupleType</code> is determined automatically.
    * 
@@ -562,7 +560,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -576,7 +573,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -591,7 +587,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -626,7 +621,6 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override

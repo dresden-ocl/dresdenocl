@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -72,7 +72,6 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
   public boolean conformsTo(Type other) {
     return true;
   }
-  
 
   /**
    * The common super type of <code>VoidType</code> and another {@link Type} is the other type. 

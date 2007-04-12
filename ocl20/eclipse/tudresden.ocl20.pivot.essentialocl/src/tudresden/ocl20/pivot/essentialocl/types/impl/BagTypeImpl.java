@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -104,7 +104,6 @@ public class BagTypeImpl extends CollectionTypeImpl implements BagType {
     return "Bag"; //$NON-NLS-1$
   }
 
-  
   /* (non-Javadoc)
    * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List, java.util.List)
    */

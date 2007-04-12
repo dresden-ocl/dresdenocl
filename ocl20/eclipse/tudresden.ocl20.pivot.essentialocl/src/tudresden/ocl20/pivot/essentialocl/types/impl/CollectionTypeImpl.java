@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -43,7 +43,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
@@ -54,11 +53,11 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getElementType <em>Element Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getElementType <em>Element Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CollectionTypeImpl extends TypeImpl implements CollectionType {
@@ -90,7 +89,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected CollectionTypeImpl() {
@@ -188,7 +186,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Type getElementType() {
@@ -225,7 +222,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   /**
    * <!-- begin-user-doc -->The code for {@link #setElementType(Type)} is forwarded to this method.
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setElementTypeGen(Type newElementType) {
@@ -238,7 +234,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public OclLibrary getOclLibrary() {
@@ -247,7 +242,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclLibrary(OclLibrary newOclLibrary) {
@@ -489,7 +483,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -505,7 +498,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -523,7 +515,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -563,7 +554,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override

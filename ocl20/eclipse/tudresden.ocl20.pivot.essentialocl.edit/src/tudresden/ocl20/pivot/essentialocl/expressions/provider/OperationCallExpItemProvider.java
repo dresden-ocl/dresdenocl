@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -127,7 +127,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider imp
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
       childrenFeatures.add(ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__ARGUMENT);
-      childrenFeatures.add(ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER);
     }
     return childrenFeatures;
   }
@@ -182,7 +181,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider imp
 
     switch (notification.getFeatureID(OperationCallExp.class)) {
       case ExpressionsPackageImpl.OPERATION_CALL_EXP__ARGUMENT:
-      case ExpressionsPackageImpl.OPERATION_CALL_EXP__QUALIFIER:
         fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
         return;
     }
@@ -272,78 +270,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider imp
     newChildDescriptors.add(createChildParameter(
         ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__ARGUMENT,ExpressionsFactory.INSTANCE
             .createEnumLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createVariableExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createUnlimitedNaturalExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createTypeLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createTupleLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createStringLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createRealLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createPropertyCallExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createOperationCallExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createUndefinedLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createLetExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createIteratorExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createIterateExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createInvalidLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createIntegerLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createIfExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createBooleanLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createCollectionLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER,ExpressionsFactory.INSTANCE
-            .createEnumLiteralExp()));
   }
 
   /**
@@ -359,8 +285,7 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider imp
     Object childObject = child;
 
     boolean qualify = childFeature == ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE
-        || childFeature == ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__ARGUMENT
-        || childFeature == ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__QUALIFIER;
+        || childFeature == ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP__ARGUMENT;
 
     if (qualify) {
       return getString(

@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -1205,13 +1205,22 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int PROPERTY_CALL_EXP__REFERRED_PROPERTY = FEATURE_CALL_EXP_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Qualifier</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROPERTY_CALL_EXP__QUALIFIER = FEATURE_CALL_EXP_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Property Call Exp</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int PROPERTY_CALL_EXP_FEATURE_COUNT = FEATURE_CALL_EXP_FEATURE_COUNT + 1;
+  public static final int PROPERTY_CALL_EXP_FEATURE_COUNT = FEATURE_CALL_EXP_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl <em>Operation Call Exp</em>}' class.
@@ -1296,22 +1305,13 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int OPERATION_CALL_EXP__REFERRED_OPERATION = FEATURE_CALL_EXP_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Qualifier</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int OPERATION_CALL_EXP__QUALIFIER = FEATURE_CALL_EXP_FEATURE_COUNT + 2;
-
-  /**
    * The number of structural features of the '<em>Operation Call Exp</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int OPERATION_CALL_EXP_FEATURE_COUNT = FEATURE_CALL_EXP_FEATURE_COUNT + 3;
+  public static final int OPERATION_CALL_EXP_FEATURE_COUNT = FEATURE_CALL_EXP_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.UndefinedLiteralExpImpl <em>Undefined Literal Exp</em>}' class.
@@ -3068,6 +3068,19 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getQualifier <em>Qualifier</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Qualifier</em>'.
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getQualifier()
+   * @see #getPropertyCallExp()
+   * @generated
+   */
+  public EReference getPropertyCallExp_Qualifier() {
+    return (EReference) propertyCallExpEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp <em>Primitive Literal Exp</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3115,19 +3128,6 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    */
   public EReference getOperationCallExp_ReferredOperation() {
     return (EReference) operationCallExpEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp#getQualifier <em>Qualifier</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Qualifier</em>'.
-   * @see tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp#getQualifier()
-   * @see #getOperationCallExp()
-   * @generated
-   */
-  public EReference getOperationCallExp_Qualifier() {
-    return (EReference) operationCallExpEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -3713,13 +3713,13 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 
     propertyCallExpEClass = createEClass(PROPERTY_CALL_EXP);
     createEReference(propertyCallExpEClass,PROPERTY_CALL_EXP__REFERRED_PROPERTY);
+    createEReference(propertyCallExpEClass,PROPERTY_CALL_EXP__QUALIFIER);
 
     primitiveLiteralExpEClass = createEClass(PRIMITIVE_LITERAL_EXP);
 
     operationCallExpEClass = createEClass(OPERATION_CALL_EXP);
     createEReference(operationCallExpEClass,OPERATION_CALL_EXP__ARGUMENT);
     createEReference(operationCallExpEClass,OPERATION_CALL_EXP__REFERRED_OPERATION);
-    createEReference(operationCallExpEClass,OPERATION_CALL_EXP__QUALIFIER);
 
     oclExpressionEClass = createEClass(OCL_EXPRESSION);
 
@@ -3938,6 +3938,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
         thePivotModelPackageImpl.getProperty(),
         null,
         "referredProperty",null,0,1,PropertyCallExp.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getPropertyCallExp_Qualifier(),
+        this.getOclExpression(),
+        null,
+        "qualifier",null,0,-1,PropertyCallExp.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(primitiveLiteralExpEClass,PrimitiveLiteralExp.class,
         "PrimitiveLiteralExp",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -3954,11 +3959,6 @@ public class ExpressionsPackageImpl extends EPackageImpl {
         thePivotModelPackageImpl.getOperation(),
         null,
         "referredOperation",null,0,1,OperationCallExp.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getOperationCallExp_Qualifier(),
-        this.getOclExpression(),
-        null,
-        "qualifier",null,0,-1,OperationCallExp.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(oclExpressionEClass,OclExpression.class,
         "OclExpression",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -4340,6 +4340,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
         .getPropertyCallExp_ReferredProperty();
 
     /**
+     * The meta object literal for the '<em><b>Qualifier</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EReference PROPERTY_CALL_EXP__QUALIFIER = eINSTANCE
+        .getPropertyCallExp_Qualifier();
+
+    /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PrimitiveLiteralExpImpl <em>Primitive Literal Exp</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4376,15 +4385,6 @@ public class ExpressionsPackageImpl extends EPackageImpl {
      */
     public static final EReference OPERATION_CALL_EXP__REFERRED_OPERATION = eINSTANCE
         .getOperationCallExp_ReferredOperation();
-
-    /**
-     * The meta object literal for the '<em><b>Qualifier</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EReference OPERATION_CALL_EXP__QUALIFIER = eINSTANCE
-        .getOperationCallExp_Qualifier();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl <em>Ocl Expression</em>}' class.

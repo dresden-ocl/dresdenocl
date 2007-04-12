@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -42,24 +42,23 @@ import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Iterate Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Iterate Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl#getResult <em>Result</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
-   * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getResult()
    * @generated
    * @ordered
@@ -67,8 +66,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   protected Variable result = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected IterateExpImpl() {
@@ -76,18 +75,32 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to return the String <code>"iterate"</code> as specified in the abstract syntax
+   * mapping for IterateExpCS (OCL Specification, Section 9.3). Clients (e.g., a parser) do not need
+   * to set the name explicitly.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.ITERATE_EXP;
+  public String getName() {
+    return "iterate"; //$NON-NLS-1$
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Overridden to prevent setting the name of an iterate expression. This method will throw an
+   * {@link UnsupportedOperationException}.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
+   */
+  @Override
+  public void setName(String newName) {
+    throw new UnsupportedOperationException(
+        "The name of an IterateExp cannot be set, it defaults to 'iterate'"); //$NON-NLS-1$
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Variable getResult() {
@@ -95,8 +108,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetResult(Variable newResult, NotificationChain msgs) {
@@ -112,8 +125,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setResult(Variable newResult) {
@@ -134,8 +147,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -149,8 +162,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -163,8 +176,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -178,8 +191,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -193,8 +206,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -206,4 +219,14 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
     return super.eIsSet(featureID);
   }
 
-} //IterateExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.ITERATE_EXP;
+  }
+
+} // IterateExpImpl

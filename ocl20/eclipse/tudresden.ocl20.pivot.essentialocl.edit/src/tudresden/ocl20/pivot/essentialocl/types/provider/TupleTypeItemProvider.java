@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -56,10 +56,9 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.essentialocl.types.TupleType} object. <!-- begin-user-doc --> <!--
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.TupleType} object.
+ * <!-- begin-user-doc --> <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class TupleTypeItemProvider extends TypeItemProvider implements IEditingDomainItemProvider,
@@ -67,9 +66,9 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
     IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public TupleTypeItemProvider(AdapterFactory adapterFactory) {
@@ -77,9 +76,9 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -93,9 +92,9 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
   }
 
   /**
-   * This adds a property descriptor for the Ocl Library feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Ocl Library feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addOclLibraryPropertyDescriptor(Object object) {
@@ -110,8 +109,8 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
   }
 
   /**
-   * This returns TupleType.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This returns TupleType.gif.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
@@ -212,7 +211,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -223,9 +221,9 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
 
   /**
    * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object. <!-- begin-user-doc -->
+   * describing all of the children that can be created under this object.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -235,9 +233,9 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
