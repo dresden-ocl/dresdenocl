@@ -132,6 +132,18 @@
       </eAnnotations>
       <eParameters name="namespace" eType="#//Namespace"/>
     </eOperations>
+    <eOperations name="lookupType" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Returns a {@link Type} in this &lt;code>Namespace&lt;/code> with the&#xD;&#xA;given name.&#xD;&#xA;&#xD;&#xA;It is specified as follows:&#xD;&#xA;&lt;pre>&#xD;&#xA;context Namespace&#xD;&#xA;def: lookupType(name : String) : Type =&#xD;&#xA;   self.ownedType()->any(t | t.name = name)&#xD;&#xA;&lt;/pre>&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eParameters name="name" eType="ecore:EDataType datatypes.ecore#//String"/>
+    </eOperations>
+    <eOperations name="lookupNamespace" eType="#//Namespace">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Returns a {@link Namespace} in this &lt;code>Namespace&lt;/code> with the&#xD;&#xA;given name.&#xD;&#xA;&#xD;&#xA;It is specified as follows:&#xD;&#xA;&lt;pre>&#xD;&#xA;context Namespace&#xD;&#xA;def: lookupNamespace(name : String) : Namespace =&#xD;&#xA;   self.nestedNamespace()->any(ns | ns.name = name)&#xD;&#xA;&lt;/pre>&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eParameters name="name" eType="ecore:EDataType datatypes.ecore#//String"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" upperBound="-1"
         eType="#//Type" containment="true" eOpposite="#//Type/namespace">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -279,6 +291,12 @@
         <details key="documentation" value="&lt;p>&#xD;&#xA;Adds an {@link EnumerationLiteral} to this &lt;code>Enumeration&lt;/code>.&#xD;&#xA;This operation is required to properly support cloning enumerations.&#xD;&#xA;The operation returns a reference to this &lt;code>Enumeration&lt;/code>.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
       <eParameters name="literal" lowerBound="1" eType="#//EnumerationLiteral"/>
+    </eOperations>
+    <eOperations name="lookupLiteral" eType="#//EnumerationLiteral">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Returns an {@link EnumerationLiteral} of this &lt;code>Enumeration&lt;/code>&#xD;&#xA;with the given name.&#xD;&#xA;&#xD;&#xA;It is specified as follows:&#xD;&#xA;&lt;pre>&#xD;&#xA;context Enumeration&#xD;&#xA;def: lookupLiteral(name : String) : EnumerationLiteral =&#xD;&#xA;   self.ownedLiteral()->any(l | l.name = name)&#xD;&#xA;&lt;/pre>&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eParameters name="name" eType="ecore:EDataType datatypes.ecore#//String"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLiteral" upperBound="-1"
         eType="#//EnumerationLiteral" containment="true" eOpposite="#//EnumerationLiteral/enumeration">
