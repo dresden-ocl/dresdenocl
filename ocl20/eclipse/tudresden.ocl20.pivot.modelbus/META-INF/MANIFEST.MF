@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model Bus
+Bundle-SymbolicName: tudresden.ocl20.pivot.modelbus;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.pivot.modelbus.ModelBusPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.emf.ecore.xmi,
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.essentialocl,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary,
+ tudresden.ocl20.logging,
+ org.apache.commons.lang
+Eclipse-LazyStart: true
+Bundle-ClassPath: resources/,
+ .
+Export-Package: tudresden.ocl20.pivot.modelbus;
+  uses:="tudresden.ocl20.pivot.modelbus.event,
+   tudresden.ocl20.pivot.essentialocl.expressions,
+   tudresden.ocl20.pivot.pivotmodel,
+   org.osgi.framework,
+   org.apache.log4j,
+   tudresden.ocl20.pivot.modelbus.util,
+   tudresden.ocl20.pivot.essentialocl.standardlibrary,
+   tudresden.ocl20.pivot.essentialocl.types,
+   tudresden.ocl20.pivot.modelbus.descriptor,
+   org.eclipse.jface.resource,
+   org.eclipse.core.runtime",
+ tudresden.ocl20.pivot.modelbus.base;uses:="tudresden.ocl20.pivot.pivotmodel,tudresden.ocl20.pivot.modelbus",
+ tudresden.ocl20.pivot.modelbus.descriptor;uses:="org.eclipse.core.runtime,org.eclipse.ui",
+ tudresden.ocl20.pivot.modelbus.event;uses:="tudresden.ocl20.pivot.modelbus",
+ tudresden.ocl20.pivot.modelbus.util

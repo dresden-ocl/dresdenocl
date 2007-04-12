@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types:OclLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel" xmlns:types="http://www.omg.org/2006/essentialocl/types">
+  <oclBoolean name="Boolean" superType="//@oclAny" kind="Boolean"/>
+  <oclString name="String" superType="//@oclAny" kind="String"/>
+  <oclInteger name="Integer" superType="//@oclReal" kind="Integer"/>
+  <oclReal name="Real" superType="//@oclAny" kind="Real"/>
+  <oclAny name="OclAny">
+    <ownedOperation name="=">
+      <ownedParameter name="object2" type="//@oclAny"/>
+      <ownedParameter name="result" type="//@oclBoolean" kind="return"/>
+    </ownedOperation>
+  </oclAny>
+  <oclVoid name="OclVoid"/>
+  <oclInvalid name="OclInvalid"/>
+  <oclType name="OclType"/>
+  <oclCollection oclLibrary="/">
+    <ownedTypeParameter name="T"/>
+    <ownedOperation name="size" type="//@oclInteger"/>
+    <ownedOperation name="includes" type="//@oclBoolean">
+      <ownedParameter name="object">
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclCollection/@ownedTypeParameter.0"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="excludes" type="//@oclBoolean">
+      <ownedParameter name="object">
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclCollection/@ownedTypeParameter.0"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="count" type="//@oclInteger">
+      <ownedParameter name="object">
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclCollection/@ownedTypeParameter.0"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="includesAll" type="//@oclBoolean">
+      <ownedParameter name="c2">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclCollection">
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclCollection/@ownedTypeParameter.0"/>
+          </typeArgument>
+        </genericType>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="excludesAll" type="//@oclBoolean">
+      <ownedParameter name="c2"/>
+    </ownedOperation>
+    <ownedOperation name="isEmpty" type="//@oclBoolean"/>
+    <ownedOperation name="notEmpty" type="//@oclBoolean"/>
+    <ownedOperation name="sum">
+      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclCollection/@ownedTypeParameter.0"/>
+    </ownedOperation>
+    <ownedOperation name="product">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclTuple.0">
+            <typeArgument>
+              <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclCollection/@ownedTypeParameter.0"/>
+            </typeArgument>
+            <typeArgument>
+              <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclCollection/@ownedOperation.9/@ownedTypeParameter.0"/>
+            </typeArgument>
+          </genericType>
+        </typeArgument>
+      </genericType>
+      <ownedTypeParameter name="T2"/>
+      <ownedParameter name="c2">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclCollection">
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclCollection/@ownedOperation.9/@ownedTypeParameter.0"/>
+          </typeArgument>
+        </genericType>
+      </ownedParameter>
+    </ownedOperation>
+  </oclCollection>
+  <oclSequence oclLibrary="/">
+    <ownedTypeParameter name="T"/>
+  </oclSequence>
+  <oclBag oclLibrary="/">
+    <ownedTypeParameter name="T"/>
+  </oclBag>
+  <oclSet oclLibrary="/">
+    <ownedTypeParameter name="T"/>
+  </oclSet>
+  <oclOrderedSet oclLibrary="/">
+    <ownedTypeParameter name="T"/>
+  </oclOrderedSet>
+  <oclTuple superType="//@oclAny" oclLibrary="/">
+    <ownedTypeParameter name="F"/>
+    <ownedTypeParameter name="S"/>
+    <ownedProperty name="first">
+      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclTuple.0/@ownedTypeParameter.0"/>
+    </ownedProperty>
+    <ownedProperty name="second">
+      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclTuple.0/@ownedTypeParameter.1"/>
+    </ownedProperty>
+  </oclTuple>
+</types:OclLibrary>
