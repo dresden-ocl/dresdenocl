@@ -14,9 +14,7 @@
     <nestedGenPackages prefix="Types" basePackage="tudresden.ocl20.pivot.essentialocl"
         disposableProviderFactory="true" generateExampleClass="false" multipleEditorPages="false"
         ecorePackage="essentialocl.ecore#//types">
-      <genClasses ecoreClass="essentialocl.ecore#//types/BagType">
-        <genOperations ecoreOperation="essentialocl.ecore#//types/BagType/clone"/>
-      </genClasses>
+      <genClasses ecoreClass="essentialocl.ecore#//types/BagType"/>
       <genClasses ecoreClass="essentialocl.ecore#//types/TupleType">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference essentialocl.ecore#//types/TupleType/oclLibrary"/>
@@ -26,51 +24,46 @@
             propertySortChoices="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/CollectionType/elementType"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference essentialocl.ecore#//types/CollectionType/oclLibrary"/>
-        <genOperations ecoreOperation="essentialocl.ecore#//types/CollectionType/clone"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//types/InvalidType"/>
-      <genClasses ecoreClass="essentialocl.ecore#//types/OrderedSetType">
-        <genOperations ecoreOperation="essentialocl.ecore#//types/OrderedSetType/clone"/>
-      </genClasses>
-      <genClasses ecoreClass="essentialocl.ecore#//types/SequenceType">
-        <genOperations ecoreOperation="essentialocl.ecore#//types/SequenceType/clone"/>
-      </genClasses>
-      <genClasses ecoreClass="essentialocl.ecore#//types/SetType">
-        <genOperations ecoreOperation="essentialocl.ecore#//types/SetType/clone"/>
-      </genClasses>
+      <genClasses ecoreClass="essentialocl.ecore#//types/OrderedSetType"/>
+      <genClasses ecoreClass="essentialocl.ecore#//types/SequenceType"/>
+      <genClasses ecoreClass="essentialocl.ecore#//types/SetType"/>
       <genClasses ecoreClass="essentialocl.ecore#//types/VoidType"/>
       <genClasses ecoreClass="essentialocl.ecore#//types/TypeType"/>
       <genClasses ecoreClass="essentialocl.ecore#//types/OclLibrary">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclVoid"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclBoolean"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclString"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclInteger"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclReal"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclInvalid"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclType"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclAny"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclVoid"/>
+        <genFeatures property="None" children="true" createChild="true" propertyCategory=""
+            propertyDescription="" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclInvalid"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclType"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclCollection"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclSequence"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclBag"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclSet"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclOrderedSet"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclTuple"/>
         <genOperations ecoreOperation="essentialocl.ecore#//types/OclLibrary/makeTupleType">
           <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/makeTupleType/atts"/>
         </genOperations>
         <genOperations ecoreOperation="essentialocl.ecore#//types/OclLibrary/getCollectionType">
-          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getCollectionType/t"/>
+          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getCollectionType/elementType"/>
         </genOperations>
         <genOperations ecoreOperation="essentialocl.ecore#//types/OclLibrary/getSequenceType">
-          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getSequenceType/t"/>
+          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getSequenceType/elementType"/>
         </genOperations>
         <genOperations ecoreOperation="essentialocl.ecore#//types/OclLibrary/getBagType">
-          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getBagType/t"/>
+          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getBagType/elementType"/>
         </genOperations>
         <genOperations ecoreOperation="essentialocl.ecore#//types/OclLibrary/getSetType">
-          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getSetType/t"/>
+          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getSetType/elementType"/>
         </genOperations>
         <genOperations ecoreOperation="essentialocl.ecore#//types/OclLibrary/getOrderedSetType">
-          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getOrderedSetType/t"/>
+          <genParameters ecoreParameter="essentialocl.ecore#//types/OclLibrary/getOrderedSetType/elementType"/>
         </genOperations>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//types/AnyType"/>
@@ -91,7 +84,7 @@
       <genClasses ecoreClass="essentialocl.ecore#//expressions/Variable">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/Variable/representedParameter"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/Variable/initExpression"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/Variable/initExpression"/>
         <genOperations ecoreOperation="essentialocl.ecore#//expressions/Variable/asParameter"/>
         <genOperations ecoreOperation="essentialocl.ecore#//expressions/Variable/asProperty"/>
       </genClasses>
@@ -103,11 +96,11 @@
             ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/TypeLiteralExp/referredType"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/TupleLiteralPart">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/TupleLiteralPart/property"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/TupleLiteralPart/value"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/TupleLiteralPart/property"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/TupleLiteralPart/value"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/TupleLiteralExp">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/TupleLiteralExp/part"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/TupleLiteralExp/part"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/StringLiteralExp">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute essentialocl.ecore#//expressions/StringLiteralExp/stringSymbol"/>
@@ -118,13 +111,13 @@
       <genClasses ecoreClass="essentialocl.ecore#//expressions/PropertyCallExp">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/PropertyCallExp/referredProperty"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/PropertyCallExp/qualifier"/>
       </genClasses>
       <genClasses image="false" ecoreClass="essentialocl.ecore#//expressions/PrimitiveLiteralExp"/>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/OperationCallExp">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/OperationCallExp/argument"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/OperationCallExp/argument"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/OperationCallExp/referredOperation"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/OperationCallExp/qualifier"/>
       </genClasses>
       <genClasses image="false" ecoreClass="essentialocl.ecore#//expressions/OclExpression">
         <genOperations ecoreOperation="essentialocl.ecore#//expressions/OclExpression/withAtPre"/>
@@ -133,55 +126,55 @@
       <genClasses image="false" ecoreClass="essentialocl.ecore#//expressions/NumericLiteralExp"/>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/UndefinedLiteralExp"/>
       <genClasses image="false" ecoreClass="essentialocl.ecore#//expressions/LoopExp">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/LoopExp/body"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/LoopExp/iterator"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/LoopExp/body"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/LoopExp/iterator"/>
       </genClasses>
       <genClasses image="false" ecoreClass="essentialocl.ecore#//expressions/LiteralExp"/>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/LetExp">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/LetExp/in"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/LetExp/variable"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/LetExp/in"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/LetExp/variable"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/IteratorExp"/>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/IterateExp">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/IterateExp/result"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/IterateExp/result"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/InvalidLiteralExp"/>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/IntegerLiteralExp">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute essentialocl.ecore#//expressions/IntegerLiteralExp/integerSymbol"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/IfExp">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/IfExp/condition"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/IfExp/thenExpression"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/IfExp/elseExpression"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/IfExp/condition"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/IfExp/thenExpression"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/IfExp/elseExpression"/>
       </genClasses>
       <genClasses image="false" ecoreClass="essentialocl.ecore#//expressions/FeatureCallExp"/>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/BooleanLiteralExp">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute essentialocl.ecore#//expressions/BooleanLiteralExp/booleanSymbol"/>
       </genClasses>
       <genClasses image="false" ecoreClass="essentialocl.ecore#//expressions/CallExp">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CallExp/source"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CallExp/source"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/CollectionItem">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CollectionItem/item"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CollectionItem/item"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/CollectionLiteralExp">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CollectionLiteralExp/part"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CollectionLiteralExp/part"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute essentialocl.ecore#//expressions/CollectionLiteralExp/kind"/>
       </genClasses>
       <genClasses image="false" ecoreClass="essentialocl.ecore#//expressions/CollectionLiteralPart"/>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/CollectionRange">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CollectionRange/first"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CollectionRange/last"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CollectionRange/first"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/CollectionRange/last"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/EnumLiteralExp">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/EnumLiteralExp/referredEnumLiteral"/>
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/ExpressionInOcl">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/ExpressionInOcl/bodyExpression"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/ExpressionInOcl/context"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/ExpressionInOcl/result"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/ExpressionInOcl/parameter"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/ExpressionInOcl/bodyExpression"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/ExpressionInOcl/context"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/ExpressionInOcl/result"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/ExpressionInOcl/parameter"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>
