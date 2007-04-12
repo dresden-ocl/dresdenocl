@@ -163,6 +163,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExp" eSuperTypes="#//expressions/FeatureCallExp">
       <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Property"
           resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="qualifier" upperBound="-1"
+          eType="#//expressions/OclExpression" containment="true" resolveProxies="false"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveLiteralExp" abstract="true"
         eSuperTypes="#//expressions/LiteralExp"/>
@@ -171,8 +173,6 @@
           eType="#//expressions/OclExpression" containment="true" resolveProxies="false"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Operation"
           resolveProxies="false"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="qualifier" upperBound="-1"
-          eType="#//expressions/OclExpression" containment="true" resolveProxies="false"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclExpression" abstract="true" eSuperTypes="../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//TypedElement ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//NamedElement">
       <eOperations name="withAtPre" eType="#//expressions/OperationCallExp">
