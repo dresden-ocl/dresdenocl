@@ -36,7 +36,7 @@
 # ====================================================================
 
 pluginName = <%=genModel.getModelName()%> Edit Support
-providerName = TU Dresden, Software Engineering Department
+providerName = TU Dresden, Software Technology Group
 
 <%if (genModel.isCreationCommands()) {%>
 _UI_CreateChild_text = {0}

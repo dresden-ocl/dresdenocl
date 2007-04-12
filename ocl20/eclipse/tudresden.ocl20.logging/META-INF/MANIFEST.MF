@@ -4,7 +4,7 @@ Bundle-Name: Logging Support
 Bundle-SymbolicName: tudresden.ocl20.logging
 Bundle-Version: 1.0.0
 Bundle-Activator: tudresden.ocl20.logging.LoggingPlugin
-Bundle-Vendor: TU Dresden, Software Engineering Department
+Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.lang
 Eclipse-LazyStart: true
