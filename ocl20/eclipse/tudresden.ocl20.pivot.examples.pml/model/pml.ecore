@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pml"
+    nsURI="http://www.tu-dresden.de/ocl20/pivot/2007/pml" nsPrefix="pml">
+  <eClassifiers xsi:type="ecore:EClass" name="Plugin">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="provider" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="#//Feature"
+        eOpposite="#//Feature/plugins"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extensionPoints" upperBound="-1"
+        eType="#//ExtensionPoint" containment="true" eOpposite="#//ExtensionPoint/plugin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
+        eType="#//Service" containment="true" eOpposite="#//Service/plugin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activator" lowerBound="1"
+        eType="#//JavaType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plugins" upperBound="-1"
+        eType="#//Plugin" containment="true" eOpposite="#//Plugin/feature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtensionPoint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plugin" lowerBound="1"
+        eType="#//Plugin" transient="true" eOpposite="#//Plugin/extensionPoints"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//JavaType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullyQualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Service">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plugin" lowerBound="1"
+        eType="#//Plugin" transient="true" eOpposite="#//Plugin/services"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1"
+        eType="#//JavaType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ServiceParameter" containment="true" eOpposite="#//ServiceParameter/service"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//JavaType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
+        eType="#//Service" transient="true" eOpposite="#//Service/parameters"/>
+  </eClassifiers>
+</ecore:EPackage>
