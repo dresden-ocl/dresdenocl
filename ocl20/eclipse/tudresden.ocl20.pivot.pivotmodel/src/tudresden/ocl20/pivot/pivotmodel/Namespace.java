@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -185,6 +185,46 @@ public interface Namespace extends NamedElement, GenericElement {
    * @generated
    */
   Namespace addNestedNamespace(Namespace namespace);
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <p>
+   * Returns a {@link Type} in this <code>Namespace</code> with the
+   * given name.
+   * 
+   * It is specified as follows:
+   * <pre>
+   * context Namespace
+   * def: lookupType(name : String) : Type =
+   *    self.ownedType()->any(t | t.name = name)
+   * </pre>
+   * </p>
+   * <!-- end-model-doc -->
+   * @generated
+   */
+  Type lookupType(String name);
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <p>
+   * Returns a {@link Namespace} in this <code>Namespace</code> with the
+   * given name.
+   * 
+   * It is specified as follows:
+   * <pre>
+   * context Namespace
+   * def: lookupNamespace(name : String) : Namespace =
+   *    self.nestedNamespace()->any(ns | ns.name = name)
+   * </pre>
+   * </p>
+   * <!-- end-model-doc -->
+   * @generated
+   */
+  Namespace lookupNamespace(String name);
 
   /**
    * Redefines {@link NamedElement#clone()} with a covariant return type.

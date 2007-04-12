@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -32,11 +32,10 @@
  */
 package tudresden.ocl20.pivot.pivotmodel.impl;
 
-import org.apache.log4j.Logger;
-
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -341,6 +340,58 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
     }
 
     return this;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated NOT
+   */
+  public Type lookupType(String name) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("lookupType(name=" + name + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    Type type = null;
+    
+    for (Type ownedType : getOwnedType()) {
+      if (ownedType.getName().equals(name)) {
+        type = ownedType;
+        break;
+      }
+    }
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("lookupType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated NOT
+   */
+  public Namespace lookupNamespace(String name) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("lookupNamespace(name=" + name + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    Namespace namespace = null;
+    
+    for (Namespace nestedNamespace : getNestedNamespace()) {
+      if (nestedNamespace.getName().equals(name)) {
+        namespace = nestedNamespace;
+        break;
+      }
+    }
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("lookupNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
+    }
+    
+    return namespace;
   }
 
   /**

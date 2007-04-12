@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -135,6 +135,32 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
     }
 
     return this;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated NOT
+   */
+  public EnumerationLiteral lookupLiteral(String name) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("lookupLiteral(name=" + name + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    EnumerationLiteral literal = null;
+    
+    for (EnumerationLiteral l : getOwnedLiteral()) {
+      if (l.getName().equals(name)) {
+        literal = l;
+        break;
+      }
+    }
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("lookupLiteral() - exit - return value=" + literal); //$NON-NLS-1$
+    }
+    
+    return literal;
   }
 
   /**
