@@ -178,35 +178,6 @@ public class IterateExpItemProvider extends LoopExpItemProvider implements
   protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
       Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.ITERATE_EXP__RESULT,ExpressionsFactory.INSTANCE
-            .createVariable()));
-  }
-
-  /**
-   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getCreateChildText(Object owner, Object feature, Object child,
-      Collection<?> selection) {
-    Object childFeature = feature;
-    Object childObject = child;
-
-    boolean qualify = childFeature == ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE
-        || childFeature == ExpressionsPackageImpl.Literals.LOOP_EXP__BODY
-        || childFeature == ExpressionsPackageImpl.Literals.LOOP_EXP__ITERATOR
-        || childFeature == ExpressionsPackageImpl.Literals.ITERATE_EXP__RESULT;
-
-    if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-    }
-    return super.getCreateChildText(owner,feature,child,selection);
   }
 
   /**

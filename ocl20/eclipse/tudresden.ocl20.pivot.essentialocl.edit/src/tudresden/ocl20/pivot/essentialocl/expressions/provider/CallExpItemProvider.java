@@ -167,60 +167,6 @@ public class CallExpItemProvider extends OclExpressionItemProvider implements
   protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
       Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createVariableExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createUnlimitedNaturalExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createTypeLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createTupleLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createStringLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createRealLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createPropertyCallExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createOperationCallExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createUndefinedLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createLetExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createIteratorExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createIterateExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createInvalidLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createIntegerLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createIfExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createBooleanLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createCollectionLiteralExp()));
-
-    newChildDescriptors.add(createChildParameter(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE,
-        ExpressionsFactory.INSTANCE.createEnumLiteralExp()));
   }
 
   /**

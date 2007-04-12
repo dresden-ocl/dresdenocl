@@ -178,10 +178,6 @@ public class TupleLiteralExpItemProvider extends LiteralExpItemProvider implemen
   protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
       Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.TUPLE_LITERAL_EXP__PART,ExpressionsFactory.INSTANCE
-            .createTupleLiteralPart()));
   }
 
   /**

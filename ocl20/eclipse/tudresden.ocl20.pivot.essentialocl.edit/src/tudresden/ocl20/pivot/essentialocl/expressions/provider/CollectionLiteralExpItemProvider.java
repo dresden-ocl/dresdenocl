@@ -203,14 +203,6 @@ public class CollectionLiteralExpItemProvider extends LiteralExpItemProvider imp
   protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
       Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_EXP__PART,ExpressionsFactory.INSTANCE
-            .createCollectionItem()));
-
-    newChildDescriptors.add(createChildParameter(
-        ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_EXP__PART,ExpressionsFactory.INSTANCE
-            .createCollectionRange()));
   }
 
   /**
