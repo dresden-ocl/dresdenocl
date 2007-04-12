@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -45,21 +45,20 @@ import tudresden.ocl20.pivot.pivotmodel.*;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
- * 
  * @generated
  */
 public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFactory {
 
   /**
-   * The singleton instance of the factory. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The singleton instance of the factory.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   public static final PivotModelFactoryImpl eINSTANCE = init();
 
   /**
-   * Creates the default factory implementation. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   public static PivotModelFactoryImpl init() {
@@ -77,8 +76,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
   }
 
   /**
-   * Creates an instance of the factory. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   public PivotModelFactoryImpl() {
@@ -87,7 +86,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -129,7 +127,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -149,7 +146,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -169,7 +165,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Enumeration createEnumeration() {
@@ -179,7 +174,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Operation createOperation() {
@@ -189,7 +183,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Namespace createNamespace() {
@@ -199,7 +192,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Type createType() {
@@ -209,7 +201,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Parameter createParameter() {
@@ -219,7 +210,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public EnumerationLiteral createEnumerationLiteral() {
@@ -229,7 +219,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Property createProperty() {
@@ -239,7 +228,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public PrimitiveType createPrimitiveType() {
@@ -249,7 +237,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Constraint createConstraint() {
@@ -259,7 +246,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Expression createExpression() {
@@ -269,7 +255,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public TypeParameter createTypeParameter() {
@@ -279,7 +264,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public TypeArgument createTypeArgument() {
@@ -289,7 +273,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public ParameterGenericType createParameterGenericType() {
@@ -299,7 +282,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public ComplexGenericType createComplexGenericType() {
@@ -309,7 +291,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public ParameterDirectionKind createParameterDirectionKindFromString(EDataType eDataType,
@@ -323,7 +304,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unused")
@@ -333,7 +313,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public ConstraintKind createConstraintKindFromString(EDataType eDataType, String initialValue) {
@@ -346,7 +325,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unused")
@@ -356,7 +334,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public PrimitiveTypeKind createPrimitiveTypeKindFromString(EDataType eDataType,
@@ -370,7 +347,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unused")
@@ -380,7 +356,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public PivotModelPackageImpl getPivotModelPackageImpl() {
@@ -389,7 +364,6 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @deprecated
    * @generated
    */

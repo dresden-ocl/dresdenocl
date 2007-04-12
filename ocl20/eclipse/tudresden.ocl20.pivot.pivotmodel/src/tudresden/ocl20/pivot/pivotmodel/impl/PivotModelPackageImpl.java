@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -3067,6 +3067,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
     EOperation op = addEOperation(enumerationEClass,this.getEnumeration(),"addLiteral",1,1); //$NON-NLS-1$
     addEParameter(op,this.getEnumerationLiteral(),"literal",1,1); //$NON-NLS-1$
 
+    op = addEOperation(enumerationEClass,this.getEnumerationLiteral(),"lookupLiteral",0,1); //$NON-NLS-1$
+    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1); //$NON-NLS-1$
+
     initEClass(namedElementEClass,NamedElement.class,
         "NamedElement",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
@@ -3175,6 +3178,12 @@ public class PivotModelPackageImpl extends EPackageImpl {
 
     op = addEOperation(namespaceEClass,this.getNamespace(),"addNestedNamespace",1,1); //$NON-NLS-1$
     addEParameter(op,this.getNamespace(),"namespace",0,1); //$NON-NLS-1$
+
+    op = addEOperation(namespaceEClass,this.getType(),"lookupType",0,1); //$NON-NLS-1$
+    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1); //$NON-NLS-1$
+
+    op = addEOperation(namespaceEClass,this.getNamespace(),"lookupNamespace",0,1); //$NON-NLS-1$
+    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1); //$NON-NLS-1$
 
     initEClass(typeEClass,Type.class,"Type",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
