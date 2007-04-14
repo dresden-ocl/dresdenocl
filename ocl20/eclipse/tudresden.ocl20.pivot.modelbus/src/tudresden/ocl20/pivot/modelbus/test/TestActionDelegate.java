@@ -1,5 +1,7 @@
 package tudresden.ocl20.pivot.modelbus.test;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -30,6 +32,11 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  */
 public class TestActionDelegate extends ActionDelegate implements IWorkbenchWindowActionDelegate {
 
+  /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(TestActionDelegate.class);
+
   private IWorkbenchWindow window;
 
   /*
@@ -57,22 +64,27 @@ public class TestActionDelegate extends ActionDelegate implements IWorkbenchWind
 
     IModelProvider ecoreModelProvider = ecore.getModelProvider();
 
-    IModel pml;
-    Namespace topNamespace;
+    IModel pml,pivotmodel;
 
     try {
       pml = ecoreModelProvider.getModel(FileLocator.resolve(FileLocator.find(Platform
           .getBundle("tudresden.ocl20.pivot.examples.pml"),new Path("model/pml.ecore"),null)));
-      topNamespace = pml.getTopNamespace();
+      pivotmodel = ecoreModelProvider.getModel(FileLocator.resolve(FileLocator.find(Platform
+          .getBundle("tudresden.ocl20.pivot.pivotmodel"),new Path("model/pivotmodel.ecore"),null)));
+      
+      ModelBusPlugin.getModelRegistry().addModel(pml);
+      ModelBusPlugin.getModelRegistry().addModel(pivotmodel);
+      
+      window.getActivePage().showView("tudresden.ocl20.pivot.modelbus.ui.views.models");
     }
     
     catch (Exception e) {
       MessageDialog.openError(window.getShell(),"Error","Error: " + e.getMessage());
+      logger.error("Error",e);
       return;
     }
     
     OclLibrary oclLibrary = pml.getOclLibraryProvider().getOclLibrary();
-    
     MessageDialog.openInformation(window.getShell(),"Test",oclLibrary.toString());
 
   }
