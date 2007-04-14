@@ -38,15 +38,19 @@ import java.util.List;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.osgi.util.NLS;
 
+import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
@@ -67,7 +71,7 @@ public class EcoreModel extends AbstractModel implements IModel {
   private Resource resource;
 
   // the adapter for the top package of the associated Ecore model
-  private Namespace topNamespace;
+  private Namespace rootNamespace;
 
   /**
    * Creates a new <code>EcoreModel</code> adapting the given {@link EPackage}.
@@ -76,18 +80,11 @@ public class EcoreModel extends AbstractModel implements IModel {
    * 
    */
   public EcoreModel(Resource resource) {
-    super(resource.getURI().toString());
-
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreModel(resource=" + resource + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+    super(resource.getURI().toString(),ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+        EcoreMetamodelPlugin.ID));
 
     // initialize
     this.resource = resource;
-
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreModel() - exit"); //$NON-NLS-1$
-    }
   }
 
   /*
@@ -101,32 +98,31 @@ public class EcoreModel extends AbstractModel implements IModel {
   }
 
   /**
-   * This method lazily creates the adapter for the root package in the associated Ecore model.
-   * Thus, any possible resource loading errors will not happen until this method is called for the
-   * first time.
+   * This method lazily creates a {@link Namespace} adapter for the virtual root package in the
+   * associated Ecore model. Thus, any possible resource loading errors will not happen until this
+   * method is called for the first time.
    * 
    * @throws ModelAccessException if an error occurs when creating the adapter for the top namespace
    * 
-   * @see tudresden.ocl20.pivot.modelbus.IModel#getTopNamespace()
+   * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
    */
-  public Namespace getTopNamespace() throws ModelAccessException {
+  public Namespace getRootNamespace() throws ModelAccessException {
 
-    if (topNamespace == null) {
-      topNamespace = createTopNamespace();
+    if (rootNamespace == null) {
+      rootNamespace = createRootNamespace();
     }
 
-    return topNamespace;
+    return rootNamespace;
   }
 
   /**
-   * Helper method that creates the adapter for the top namespace.
+   * Helper method that creates the adapter for the root namespace.
    * 
    * @return a <code>Namespace</code> instance
    * 
    * @throws ModelAccessException if an error occurs while loading the adapted Ecore model
    */
-  protected Namespace createTopNamespace() throws ModelAccessException {
-    EPackage rootPackage;
+  protected Namespace createRootNamespace() throws ModelAccessException {
 
     // load the resource
     if (!resource.isLoaded()) {
@@ -143,24 +139,21 @@ public class EcoreModel extends AbstractModel implements IModel {
       }
 
     }
-    
+
     // get the root packages
     List<EObject> roots = resource.getContents();
 
-    // if there is only one root package we simply use it
-    if (roots.size() == 1 && roots.get(0) instanceof EPackage) {
-      rootPackage = (EPackage) roots.get(0);
-    }
+    // create a new package to serve as the root package
+    EPackage rootPackage = EcoreFactory.eINSTANCE.createEPackage();
 
-    // otherwise create a new package to serve as the root package
-    else {
-      rootPackage = EcoreFactory.eINSTANCE.createEPackage();
+    // add all sub-packages and subtypes to the new root package
+    for (EObject eObject : roots) {
+      if (eObject instanceof EPackage) {
+        rootPackage.getESubpackages().add((EPackage) eObject);
+      }
 
-      // add all sub-packages to the new root package
-      for (EObject object : roots) {
-        if (object instanceof EPackage) {
-          rootPackage.getESubpackages().add((EPackage) object);
-        }
+      if (eObject instanceof EClassifier) {
+        rootPackage.getEClassifiers().add((EClassifier) eObject);
       }
     }
 
