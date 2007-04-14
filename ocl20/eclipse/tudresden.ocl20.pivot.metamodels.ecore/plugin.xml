@@ -5,7 +5,7 @@
          point="tudresden.ocl20.pivot.modelbus.metamodels">
       <metamodel
             icon="icons/ecore.gif"
-            id="tudresden.ocl20.pivot.metamodels.ecore.metamodel"
+            id="tudresden.ocl20.pivot.metamodels.ecore"
             modelProvider="tudresden.ocl20.pivot.metamodels.ecore.internal.provider.EcoreModelProvider"
             name="Ecore">
       </metamodel>
