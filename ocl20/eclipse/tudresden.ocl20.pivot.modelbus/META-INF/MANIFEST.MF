@@ -31,4 +31,7 @@ Export-Package: tudresden.ocl20.pivot.modelbus;
  tudresden.ocl20.pivot.modelbus.base;uses:="tudresden.ocl20.pivot.pivotmodel,tudresden.ocl20.pivot.modelbus",
  tudresden.ocl20.pivot.modelbus.descriptor;uses:="org.eclipse.core.runtime,org.eclipse.ui",
  tudresden.ocl20.pivot.modelbus.event;uses:="tudresden.ocl20.pivot.modelbus",
+ tudresden.ocl20.pivot.modelbus.internal;x-internal:=true,
+ tudresden.ocl20.pivot.modelbus.internal.descriptor;x-internal:=true,
+ tudresden.ocl20.pivot.modelbus.test;uses:="org.eclipse.ui.actions,org.eclipse.jface.action,org.eclipse.ui",
  tudresden.ocl20.pivot.modelbus.util
