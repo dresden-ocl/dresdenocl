@@ -111,6 +111,10 @@ public class ErrorLogAppender extends AppenderSkeleton {
         severity = IStatus.CANCEL;
         break;
 
+      case Priority.ERROR_INT:
+        severity = IStatus.ERROR;
+        break;
+        
       case Priority.WARN_INT:
         severity = IStatus.WARNING;
         break;
