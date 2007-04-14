@@ -8,18 +8,18 @@ import tudresden.ocl20.logging.LoggingPlugin;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class EcorePlugin extends Plugin {
+public class EcoreMetamodelPlugin extends Plugin {
 
 	// The plug-in ID
-	public static final String ID = "tudresden.ocl20.pivot.metamodel.ecore"; //$NON-NLS-1$
+	public static final String ID = "tudresden.ocl20.pivot.metamodels.ecore"; //$NON-NLS-1$
 
 	// The shared instance
-	private static EcorePlugin plugin;
+	private static EcoreMetamodelPlugin plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public EcorePlugin() {
+	public EcoreMetamodelPlugin() {
     plugin = this;
 	}
 
@@ -50,7 +50,7 @@ public class EcorePlugin extends Plugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static EcorePlugin getDefault() {
+	public static EcoreMetamodelPlugin getDefault() {
 		return plugin;
 	}
 
