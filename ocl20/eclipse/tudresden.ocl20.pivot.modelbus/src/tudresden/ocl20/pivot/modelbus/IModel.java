@@ -52,16 +52,27 @@ public interface IModel {
    * @return a <code>String</code> that identifies this model
    */
   String getDisplayName();
+  
+  /**
+   * Returns the {@link IMetamodel metamodel} for this model.
+   * 
+   * @return an <code>IMetamodel</code> instance
+   */
+  IMetamodel getMetamodel();
 
   /**
-   * Returns an adapter for the top element in the model that corresponds to the Pivot Model
-   * {@link Namespace} concept.
+   * Returns the root {@link Namespace namespace} in the model. This <code>Namespace</code>
+   * represents the root of the model hierachy. It is not itself part of the model, but merely
+   * serves as a container for other model elements (including other namespaces and
+   * {@link Type types}). In particular, this namespace is not taken into account when looking for
+   * namespaces and types using {@link #findNamespace(List)} or {@link #findType(List)},
+   * respectively.
    * 
    * @return a <code>Namespace</code> instance
    * 
-   * @throws ModelAccessException if the top namespace cannot be retrieved from the model
+   * @throws ModelAccessException if the root namespace cannot be retrieved from the model
    */
-  Namespace getTopNamespace() throws ModelAccessException;
+  Namespace getRootNamespace() throws ModelAccessException;
 
   /**
    * This operation allows to find a {@link Type} anywhere in the corresponding model. It is an
@@ -88,7 +99,7 @@ public interface IModel {
    * @param pathName a fully qualified name identifying a namespace
    * 
    * @return a <code>Namespace</code> instance or <code>null</code>
-   *
+   * 
    * @throws ModelAccessException if an error occurs when accessing the adapted model
    */
   Namespace findNamespace(List<String> pathName) throws ModelAccessException;
