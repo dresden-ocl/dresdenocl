@@ -98,16 +98,13 @@ public class EnumerationLiteralItemProvider extends NamedElementItemProvider imp
   }
 
   /**
-   * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to simply use the super{@link #getText(Object) super implementation}.
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    String label = ((EnumerationLiteral) object).getName();
-    return label == null || label.length() == 0 ? getString("_UI_EnumerationLiteral_type") : //$NON-NLS-1$
-        getString("_UI_EnumerationLiteral_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+    return super.getText(object);
   }
 
   /**

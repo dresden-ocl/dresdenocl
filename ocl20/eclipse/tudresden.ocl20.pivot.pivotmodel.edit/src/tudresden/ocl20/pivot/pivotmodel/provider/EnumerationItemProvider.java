@@ -134,16 +134,13 @@ public class EnumerationItemProvider extends TypeItemProvider implements
   }
 
   /**
-   * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to simply return the super{@link #getText(Object) super implementation}. 
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    String label = ((Enumeration) object).getName();
-    return label == null || label.length() == 0 ? getString("_UI_Enumeration_type") : //$NON-NLS-1$
-        getString("_UI_Enumeration_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+    return super.getText(object);
   }
 
   /**
