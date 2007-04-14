@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model Bus UI
+Bundle-SymbolicName: tudresden.ocl20.pivot.modelbus.ui; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.views,
+ org.eclipse.emf.edit,
+ org.eclipse.emf.edit.ui,
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.pivotmodel.edit,
+ tudresden.ocl20.pivot.essentialocl.edit,
+ tudresden.ocl20.logging,
+ org.apache.commons.lang
+Eclipse-LazyStart: true
