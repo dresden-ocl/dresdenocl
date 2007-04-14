@@ -51,11 +51,30 @@ public interface IModelRegistry {
   IModel[] getModels();
   
   /**
-   * Adds a {@link IModel model} to this <code>IModelRegistry</code>.
+   * Adds a {@link IModel model} to this <code>IModelRegistry</code>. If the model registry was
+   * empty, this becomes the active model.
    * 
    * @param model the model
+   * 
+   * @see #setActiveModel(IModel)
    */
   void addModel(IModel model);
+  
+  /**
+   * Sets the given model as the active model in the <code>IModelRegistry</code>. This allows
+   * to update visual representations of the registry to be updated independently.
+   * 
+   * @param model the new active model
+   */
+  void setActiveModel(IModel model);
+  
+  /**
+   * Returns the currently active model in the model registry. If there are no models in the
+   * model registry, <code>null</code> is returned.
+   * 
+   * @return a <code>IModel</code> instance or <code>null</code>
+   */
+  IModel getActiveModel();
   
   /**
    * Disposes the registry.

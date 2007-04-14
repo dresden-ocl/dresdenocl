@@ -19,5 +19,13 @@ public interface IModelRegistryListener {
    * @param e an event object with more details
    */
   void modelAdded(ModelRegistryEvent e);
+  
+  /**
+   * This method is called when the active {@link IModel model} is changed in a 
+   * {@link IModelRegistry registry}.
+   * 
+   * @param e an event object with more details
+   */
+  void activeModelChanged(ModelRegistryEvent e);
 
 }
