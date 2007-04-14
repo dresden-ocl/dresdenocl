@@ -45,6 +45,7 @@ public class ModelBusMessages extends NLS {
   private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.modelbus.internal.messages"; //$NON-NLS-1$
 
   public static String AbstractModelProvider_LoadingModel;
+  public static String ModelRegistry_SettingActiveModel;
   public static String OclLibraryProvider_LoadOclLibrary;
 
   static {
