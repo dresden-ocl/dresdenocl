@@ -35,8 +35,10 @@ package tudresden.ocl20.pivot.modelbus.base;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelFactory;
 import tudresden.ocl20.pivot.modelbus.IOclLibraryProvider;
@@ -67,6 +69,9 @@ public abstract class AbstractModel implements IModel {
 
   // this model's name as displayed to clients
   private String displayName;
+  
+  // the metamodel of this model
+  private IMetamodel metamodel;
 
   /**
    * Constructor to be called by subclasses. The <code>displayName</code> is a name that should be
@@ -74,9 +79,18 @@ public abstract class AbstractModel implements IModel {
    * identifier.
    * 
    * @param displayName a name for this model
+   * @param metamodel the metamodel for this model
    */
-  protected AbstractModel(String displayName) {
-    this.displayName = displayName;
+  protected AbstractModel(String displayName, IMetamodel metamodel) {
+    
+    // use an empty string if display name is null
+    this.displayName = StringUtils.defaultString(displayName);
+    
+    if (metamodel == null) {
+      throw new IllegalArgumentException("The metamodel reference must not be null."); //$NON-NLS-1$
+    }
+    
+    this.metamodel = metamodel;
   }
 
   /*
@@ -86,6 +100,14 @@ public abstract class AbstractModel implements IModel {
    */
   public String getDisplayName() {
     return displayName;
+  }
+
+  
+  /* (non-Javadoc)
+   * @see tudresden.ocl20.pivot.modelbus.IModel#getMetamodel()
+   */
+  public IMetamodel getMetamodel() {
+    return metamodel;
   }
 
   /*
@@ -135,7 +157,7 @@ public abstract class AbstractModel implements IModel {
     }
 
     // start with the top namespace
-    namespace = getTopNamespace();
+    namespace = getRootNamespace();
 
     for (String namespaceName : pathName) {
       namespace = namespace.lookupNamespace(namespaceName);
@@ -169,7 +191,7 @@ public abstract class AbstractModel implements IModel {
     Type type;
     
     // find all types that match this path name
-    List<Type> types = findTypeHere(getTopNamespace(),pathName,true);
+    List<Type> types = findTypeHere(getRootNamespace(),pathName,true);
     
     // check if several types were found
     if (types.size() > 1) {
