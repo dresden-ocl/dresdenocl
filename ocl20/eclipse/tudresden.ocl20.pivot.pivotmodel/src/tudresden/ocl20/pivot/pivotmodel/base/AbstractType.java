@@ -104,9 +104,14 @@ public abstract class AbstractType extends TypeImpl implements Type {
    */
   @Override
   public final List<Type> getSuperType() {
+    
+    // we use an Ecore List here so that the TypeItemProvider can properly display super types
+    // in the Properties View
     List<Type> superTypes = new BasicEList<Type>();
+    
     superTypes.addAll(getSuperTypeGen());
     superTypes.addAll(getSuperTypeImpl());
+    
     return superTypes;
   }
 
