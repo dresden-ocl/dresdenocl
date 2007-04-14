@@ -237,19 +237,19 @@
       <eParameters name="type" eType="#//Type"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superType" upperBound="-1"
-        eType="#//Type">
+        eType="#//Type" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;References the immediate supertypes of a &#xD;&#xA;&lt;code>Type&lt;/code>, from which the type inherits.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
-        eType="#//Operation" containment="true" eOpposite="#//Operation/owningType">
+        eType="#//Operation" containment="true" resolveProxies="false" eOpposite="#//Operation/owningType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;References the {@link Operation operations} owned by this &lt;code>Type&lt;/code>. This is an ordered association.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProperty" upperBound="-1"
-        eType="#//Property" containment="true" eOpposite="#//Property/owningType">
+        eType="#//Property" containment="true" resolveProxies="false" eOpposite="#//Property/owningType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;References the {@link Property properties} owned by this &lt;code>Type&lt;/code>. This is an ordered association.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>

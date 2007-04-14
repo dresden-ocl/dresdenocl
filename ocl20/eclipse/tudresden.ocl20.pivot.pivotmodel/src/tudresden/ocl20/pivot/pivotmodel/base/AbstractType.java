@@ -3,6 +3,8 @@ package tudresden.ocl20.pivot.pivotmodel.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicEList;
+
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
@@ -102,7 +104,7 @@ public abstract class AbstractType extends TypeImpl implements Type {
    */
   @Override
   public final List<Type> getSuperType() {
-    List<Type> superTypes = new ArrayList<Type>();
+    List<Type> superTypes = new BasicEList<Type>();
     superTypes.addAll(getSuperTypeGen());
     superTypes.addAll(getSuperTypeImpl());
     return superTypes;

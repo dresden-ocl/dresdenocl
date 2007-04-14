@@ -3190,7 +3190,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
         getType_SuperType(),
         this.getType(),
         null,
-        "superType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "superType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getType_OwnedOperation(),
         this.getOperation(),
