@@ -62,6 +62,7 @@ import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
+import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 
@@ -82,14 +83,14 @@ public interface IModelFactory {
    * 
    * @param name an optional name for the <code>Constraint</code>
    * @param kind one of the constants defined in {@link ConstraintKind}
-   * @param namespacePathName the namespace where the <code>Constraint</code> should be stored in
+   * @param namespace the namespace where the <code>Constraint</code> should be stored in
    * @param specification the <code>Expression</code> that specifies the <code>Constraint</code>
    * @param constrainedElement at least one element that is the target of the
    *          <code>Constraint</code>
    * 
    * @return a <code>Constraint</code> instance
    */
-  Constraint createConstraint(String name, ConstraintKind kind, String namespacePathName,
+  Constraint createConstraint(String name, ConstraintKind kind, Namespace namespace,
       Expression specification, ConstrainableElement... constrainedElement);
 
   /**

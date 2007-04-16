@@ -208,27 +208,20 @@ public class ModelFactory implements IModelFactory {
     return collectionRange;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createConstraint(java.lang.String,
-   *      tudresden.ocl20.pivot.pivotmodel.ConstraintKind, java.lang.String,
-   *      tudresden.ocl20.pivot.pivotmodel.Expression,
-   *      tudresden.ocl20.pivot.pivotmodel.ConstrainableElement[])
-   */
-  public Constraint createConstraint(String name, ConstraintKind kind, String namespacePathName,
+
+  public Constraint createConstraint(String name, ConstraintKind kind, Namespace namespace,
       Expression specification, ConstrainableElement... constrainedElement) {
 
     if (logger.isDebugEnabled()) {
-      logger.debug("createConstraint(name=" + name + ", kind=" + kind + ", namespacePathName=" //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-          + namespacePathName + ", specification=" + specification + ", constrainedElement=" //$NON-NLS-1$ //$NON-NLS-2$
+      logger.debug("createConstraint(name=" + name + ", kind=" + kind + ", namespace=" //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+          + namespace + ", specification=" + specification + ", constrainedElement=" //$NON-NLS-1$ //$NON-NLS-2$
           + ArrayUtils.toString(constrainedElement) + ") - enter"); //$NON-NLS-1$
     }
 
-    if (kind == null || namespacePathName == null || specification == null
+    if (kind == null || namespace == null || specification == null
         || constrainedElement == null) {
       throw new IllegalArgumentException("Parameters must not be null: kind=" + kind //$NON-NLS-1$
-          + ", namespacePathName=" + namespacePathName + ", specification=" + specification //$NON-NLS-1$ //$NON-NLS-2$
+          + ", namespace=" + namespace + ", specification=" + specification //$NON-NLS-1$ //$NON-NLS-2$
           + ", constrainedElement=" + ArrayUtils.toString(constrainedElement) + "."); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
@@ -236,21 +229,9 @@ public class ModelFactory implements IModelFactory {
 
     constraint.setName(name);
     constraint.setKind(kind);
+    constraint.setNamespace(namespace);
     constraint.setSpecification(specification);
     constraint.getConstrainedElement().addAll(Arrays.asList(constrainedElement));
-
-    // lookup the namespace
-    Namespace namespace;
-
-    try {
-      namespace = model.findNamespace(tokenizePathName(namespacePathName));
-    }
-    catch (ModelAccessException e) {
-      throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
-          + model.getDisplayName() + "'.",e); //$NON-NLS-1$
-    }
-
-    constraint.setNamespace(namespace);
 
     if (logger.isDebugEnabled()) {
       logger.debug("createConstraint() - exit - return value=" + constraint); //$NON-NLS-1$
