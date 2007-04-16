@@ -58,6 +58,7 @@ import tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
+import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
@@ -79,17 +80,17 @@ public interface IModelFactory {
    * Creates a new {@link Constraint}. The name is optional. but the pther parameters need to have
    * valid values.
    * 
-   * @param name an optional name for the <code>Constrain</code>
+   * @param name an optional name for the <code>Constraint</code>
    * @param kind one of the constants defined in {@link ConstraintKind}
    * @param namespacePathName the namespace where the <code>Constraint</code> should be stored in
    * @param specification the <code>Expression</code> that specifies the <code>Constraint</code>
-   * @param constrainedElementPathName at least one element that is the target of the
+   * @param constrainedElement at least one element that is the target of the
    *          <code>Constraint</code>
    * 
    * @return a <code>Constraint</code> instance
    */
   Constraint createConstraint(String name, ConstraintKind kind, String namespacePathName,
-      Expression specification, String... constrainedElementPathName);
+      Expression specification, ConstrainableElement... constrainedElement);
 
   /**
    * Creates a new {@link ExpressionInOcl}. The body expression and the context variable must not

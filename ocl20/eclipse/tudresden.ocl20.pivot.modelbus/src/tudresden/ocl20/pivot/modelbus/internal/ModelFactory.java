@@ -208,11 +208,8 @@ public class ModelFactory implements IModelFactory {
     return collectionRange;
   }
 
-  /**
-   * Implementation note: at the moment only types are supported as constrainable elements.
-   * To support constraints on operations and properties, an additional method
-   * <code>findConstrainableElement</code> has to be introduced that uses {@link #findType(List)}
-   * and then looks for corresponding features in the type.
+  /*
+   * (non-Javadoc)
    * 
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createConstraint(java.lang.String,
    *      tudresden.ocl20.pivot.pivotmodel.ConstraintKind, java.lang.String,
@@ -220,22 +217,19 @@ public class ModelFactory implements IModelFactory {
    *      tudresden.ocl20.pivot.pivotmodel.ConstrainableElement[])
    */
   public Constraint createConstraint(String name, ConstraintKind kind, String namespacePathName,
-      Expression specification, String... constrainedElementPathName) {
+      Expression specification, ConstrainableElement... constrainedElement) {
 
     if (logger.isDebugEnabled()) {
       logger.debug("createConstraint(name=" + name + ", kind=" + kind + ", namespacePathName=" //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-          + namespacePathName
-          + ", specification=" + specification + ", constrainedElementPathName=" //$NON-NLS-1$ //$NON-NLS-2$
-          + ArrayUtils.toString(constrainedElementPathName) + ") - enter"); //$NON-NLS-1$
+          + namespacePathName + ", specification=" + specification + ", constrainedElement=" //$NON-NLS-1$ //$NON-NLS-2$
+          + ArrayUtils.toString(constrainedElement) + ") - enter"); //$NON-NLS-1$
     }
 
     if (kind == null || namespacePathName == null || specification == null
-        || constrainedElementPathName == null) {
-      throw new IllegalArgumentException(
-          "Parameters must not be null: kind=" + kind + ", namespacePathName=" //$NON-NLS-1$ //$NON-NLS-2$
-              + namespacePathName
-              + ", specification=" + specification + ", constrainedElementPathName=" //$NON-NLS-1$//$NON-NLS-2$
-              + ArrayUtils.toString(constrainedElementPathName) + "."); //$NON-NLS-1$
+        || constrainedElement == null) {
+      throw new IllegalArgumentException("Parameters must not be null: kind=" + kind //$NON-NLS-1$
+          + ", namespacePathName=" + namespacePathName + ", specification=" + specification //$NON-NLS-1$ //$NON-NLS-2$
+          + ", constrainedElement=" + ArrayUtils.toString(constrainedElement) + "."); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     Constraint constraint = PivotModelFactory.INSTANCE.createConstraint();
@@ -243,7 +237,7 @@ public class ModelFactory implements IModelFactory {
     constraint.setName(name);
     constraint.setKind(kind);
     constraint.setSpecification(specification);
-    
+    constraint.getConstrainedElement().addAll(Arrays.asList(constrainedElement));
 
     // lookup the namespace
     Namespace namespace;
@@ -257,16 +251,6 @@ public class ModelFactory implements IModelFactory {
     }
 
     constraint.setNamespace(namespace);
-
-    // lookup the constrained elements (currently only types)
-    List<ConstrainableElement> constrainedElement = new ArrayList<ConstrainableElement>(
-        constrainedElementPathName.length);
-    
-    for (int i = 0; i < constrainedElementPathName.length; i++) {
-      constrainedElement.add(findType(tokenizePathName(constrainedElementPathName[i])));
-    }
-    
-    constraint.getConstrainedElement().addAll(constrainedElement);
 
     if (logger.isDebugEnabled()) {
       logger.debug("createConstraint() - exit - return value=" + constraint); //$NON-NLS-1$
@@ -1084,7 +1068,7 @@ public class ModelFactory implements IModelFactory {
       throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
           + model.getDisplayName() + "'.",e); //$NON-NLS-1$
     }
-    
+
     if (type == null) {
       throw new IllegalArgumentException("Unable to find type '" + pathName + "'."); //$NON-NLS-1$//$NON-NLS-2$
     }
