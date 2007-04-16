@@ -34,6 +34,7 @@ package tudresden.ocl20.pivot.modelbus.internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -207,38 +208,65 @@ public class ModelFactory implements IModelFactory {
     return collectionRange;
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Implementation note: at the moment only types are supported as constrainable elements.
+   * To support constraints on operations and properties, an additional method
+   * <code>findConstrainableElement</code> has to be introduced that uses {@link #findType(List)}
+   * and then looks for corresponding features in the type.
    * 
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createConstraint(java.lang.String,
-   *      tudresden.ocl20.pivot.pivotmodel.ConstraintKind,
-   *      tudresden.ocl20.pivot.pivotmodel.Namespace, tudresden.ocl20.pivot.pivotmodel.Expression,
+   *      tudresden.ocl20.pivot.pivotmodel.ConstraintKind, java.lang.String,
+   *      tudresden.ocl20.pivot.pivotmodel.Expression,
    *      tudresden.ocl20.pivot.pivotmodel.ConstrainableElement[])
    */
-  public Constraint createConstraint(String name, ConstraintKind kind, Namespace namespace,
-      Expression specification, ConstrainableElement... constrainedElement) {
+  public Constraint createConstraint(String name, ConstraintKind kind, String namespacePathName,
+      Expression specification, String... constrainedElementPathName) {
 
     if (logger.isDebugEnabled()) {
-      logger
-          .debug("createConstraint(name=" + name + ", kind=" + kind + ", namespace=" + namespace //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-              + ", specification=" + specification + ", constrainedElement=" + ArrayUtils.toString(constrainedElement) //$NON-NLS-1$//$NON-NLS-2$
-              + ") - enter"); //$NON-NLS-1$
+      logger.debug("createConstraint(name=" + name + ", kind=" + kind + ", namespacePathName=" //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+          + namespacePathName
+          + ", specification=" + specification + ", constrainedElementPathName=" //$NON-NLS-1$ //$NON-NLS-2$
+          + ArrayUtils.toString(constrainedElementPathName) + ") - enter"); //$NON-NLS-1$
     }
 
-    if (kind == null || namespace == null || specification == null || constrainedElement == null) {
+    if (kind == null || namespacePathName == null || specification == null
+        || constrainedElementPathName == null) {
       throw new IllegalArgumentException(
-          "Parameters must not be null: kind=" + kind + ", namespace=" //$NON-NLS-1$ //$NON-NLS-2$
-              + namespace + ", specification=" + specification + ", constrainedElement=" //$NON-NLS-1$//$NON-NLS-2$
-              + constrainedElement + "."); //$NON-NLS-1$
+          "Parameters must not be null: kind=" + kind + ", namespacePathName=" //$NON-NLS-1$ //$NON-NLS-2$
+              + namespacePathName
+              + ", specification=" + specification + ", constrainedElementPathName=" //$NON-NLS-1$//$NON-NLS-2$
+              + ArrayUtils.toString(constrainedElementPathName) + "."); //$NON-NLS-1$
     }
 
     Constraint constraint = PivotModelFactory.INSTANCE.createConstraint();
 
     constraint.setName(name);
     constraint.setKind(kind);
-    constraint.setNamespace(namespace);
     constraint.setSpecification(specification);
-    constraint.getConstrainedElement().addAll(Arrays.asList(constrainedElement));
+    
+
+    // lookup the namespace
+    Namespace namespace;
+
+    try {
+      namespace = model.findNamespace(tokenizePathName(namespacePathName));
+    }
+    catch (ModelAccessException e) {
+      throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
+          + model.getDisplayName() + "'.",e); //$NON-NLS-1$
+    }
+
+    constraint.setNamespace(namespace);
+
+    // lookup the constrained elements (currently only types)
+    List<ConstrainableElement> constrainedElement = new ArrayList<ConstrainableElement>(
+        constrainedElementPathName.length);
+    
+    for (int i = 0; i < constrainedElementPathName.length; i++) {
+      constrainedElement.add(findType(tokenizePathName(constrainedElementPathName[i])));
+    }
+    
+    constraint.getConstrainedElement().addAll(constrainedElement);
 
     if (logger.isDebugEnabled()) {
       logger.debug("createConstraint() - exit - return value=" + constraint); //$NON-NLS-1$
@@ -278,7 +306,7 @@ public class ModelFactory implements IModelFactory {
 
     // find the enumeration
     Type enumeration = findType(pathName);
-    
+
     // check that we found an enumeration
     if (!(enumeration instanceof Enumeration)) {
       throw new IllegalArgumentException("The path name " + pathName //$NON-NLS-1$
@@ -603,11 +631,6 @@ public class ModelFactory implements IModelFactory {
     // lookup the type
     Type owningType = findType(pathName);
 
-    if (owningType == null) {
-      throw new IllegalArgumentException("Unable to find the owning type for static operation " //$NON-NLS-1$
-          + referredOperationPathName);
-    }
-
     // collect the parameter types
     List<Type> paramTypes = new ArrayList<Type>();
 
@@ -715,11 +738,6 @@ public class ModelFactory implements IModelFactory {
 
     // lookup the type
     Type owningType = findType(pathName);
-
-    if (owningType == null) {
-      throw new IllegalArgumentException("Unable to find the owning type for static property " //$NON-NLS-1$
-          + referredPropertyPathName);
-    }
 
     // lookup the property
     Property property = owningType.lookupProperty(referredProperty);
@@ -832,16 +850,10 @@ public class ModelFactory implements IModelFactory {
 
     // if a type name has been defined try to find the corresponding type
     if (!StringUtils.isEmpty(typeName)) {
-
-      // lookup the type
       type = findType(tokenizePathName(typeName));
-
-      if (type == null) {
-        throw new IllegalArgumentException("Unable to find type '" + typeName + "'."); //$NON-NLS-1$//$NON-NLS-2$
-      }
     }
 
-    // if no type is given, we need the value to infer the type
+    // if no type is given, we need a value to infer the type (in TupleLiteralPart.getType)
     else if (value == null) {
       throw new IllegalArgumentException(
           "The value of the TupleLiteralPart must not be null if no type name is provided."); //$NON-NLS-1$
@@ -881,10 +893,6 @@ public class ModelFactory implements IModelFactory {
     }
 
     Type type = findType(tokenizePathName(referredTypeName));
-
-    if (type == null) {
-      throw new IllegalArgumentException("Unable to find type '" + referredTypeName + "'."); //$NON-NLS-1$//$NON-NLS-2$
-    }
 
     TypeLiteralExp typeLiteralExp = ExpressionsFactory.INSTANCE.createTypeLiteralExp();
     typeLiteralExp.setReferredType(type);
@@ -957,19 +965,15 @@ public class ModelFactory implements IModelFactory {
     if (StringUtils.isEmpty(name)) {
       throw new IllegalArgumentException("The 'name' argument must not be null or empty."); //$NON-NLS-1$
     }
-    
+
     Type type = null;
 
     // if the type name is given lookup the type
     if (StringUtils.isNotEmpty(typeName)) {
       type = findType(tokenizePathName(typeName));
-
-      if (type == null) {
-        throw new IllegalArgumentException("Unable to find type '" + typeName + "'."); //$NON-NLS-1$//$NON-NLS-2$
-      }
     }
 
-    // else check whether an init expression exists to infer the type
+    // else check whether an init expression exists to infer the type (in Variable.getType)
     else if (initExpression == null) {
       throw new IllegalArgumentException(
           "The init expression must not be null if no type name is given."); //$NON-NLS-1$
@@ -981,7 +985,7 @@ public class ModelFactory implements IModelFactory {
     if (type != null) {
       variable.setType(type);
     }
-    
+
     if (initExpression != null) {
       variable.setInitExpression(initExpression);
     }
@@ -989,7 +993,7 @@ public class ModelFactory implements IModelFactory {
     if (logger.isDebugEnabled()) {
       logger.debug("createVariable() - exit - return value=" + variable); //$NON-NLS-1$
     }
-    
+
     return variable;
   }
 
@@ -1002,7 +1006,7 @@ public class ModelFactory implements IModelFactory {
     if (logger.isDebugEnabled()) {
       logger.debug("createVariable(representedParameter=" + representedParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
-    
+
     if (representedParameter == null) {
       throw new IllegalArgumentException("The represented parameter must not be null."); //$NON-NLS-1$
     }
@@ -1013,7 +1017,7 @@ public class ModelFactory implements IModelFactory {
     if (logger.isDebugEnabled()) {
       logger.debug("createVariable() - exit - return value=" + variable); //$NON-NLS-1$
     }
-    
+
     return variable;
   }
 
@@ -1030,16 +1034,16 @@ public class ModelFactory implements IModelFactory {
     if (referredVariable == null) {
       throw new IllegalArgumentException("The referred variable must not be null."); //$NON-NLS-1$
     }
-    
+
     VariableExp variableExp = ExpressionsFactory.INSTANCE.createVariableExp();
     variableExp.setReferredVariable(referredVariable);
 
     if (logger.isDebugEnabled()) {
       logger.debug("createVariableExp() - exit - return value=" + variableExp); //$NON-NLS-1$
     }
-    
+
     return variableExp;
-    
+
   }
 
   /**
@@ -1049,16 +1053,26 @@ public class ModelFactory implements IModelFactory {
    * 
    * @return a list of path segments
    */
+  @SuppressWarnings("unchecked")
   protected List<String> tokenizePathName(String pathName) {
+
+    // return an empty list if the path name is empty
+    if (StringUtils.isEmpty(pathName)) {
+      return Collections.EMPTY_LIST;
+    }
+
     return Arrays.asList(pathName.split("::")); //$NON-NLS-1$
   }
-  
+
   /**
    * Helper method that looks up a {@link Type} in the acciated model.
    * 
    * @param pathName the path name of the type to look for
    * 
-   * @return a <code>Type</code> instance or <code>null</code>
+   * @return a <code>Type</code> instance
+   * 
+   * @throws IllegalStateException if the model cannot be accessed
+   * @throws IllegalArgumentException if no type with that path name can be found
    */
   protected Type findType(List<String> pathName) {
     Type type;
@@ -1067,7 +1081,12 @@ public class ModelFactory implements IModelFactory {
       type = model.findType(pathName);
     }
     catch (ModelAccessException e) {
-      throw new IllegalStateException("An error occured when accessing the model.",e); //$NON-NLS-1$
+      throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
+          + model.getDisplayName() + "'.",e); //$NON-NLS-1$
+    }
+    
+    if (type == null) {
+      throw new IllegalArgumentException("Unable to find type '" + pathName + "'."); //$NON-NLS-1$//$NON-NLS-2$
     }
 
     return type;

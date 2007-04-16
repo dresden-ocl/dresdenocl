@@ -83,15 +83,15 @@ public interface IModelFactory {
    * 
    * @param name an optional name for the <code>Constrain</code>
    * @param kind one of the constants defined in {@link ConstraintKind}
-   * @param namespace the namespace where the <code>Constraint</code> should be stored in
+   * @param namespacePathName the namespace where the <code>Constraint</code> should be stored in
    * @param specification the <code>Expression</code> that specifies the <code>Constraint</code>
-   * @param constrainedElement at least one element that is the target of the
+   * @param constrainedElementPathName at least one element that is the target of the
    *          <code>Constraint</code>
    * 
    * @return a <code>Constraint</code> instance
    */
-  Constraint createConstraint(String name, ConstraintKind kind, Namespace namespace,
-      Expression specification, ConstrainableElement... constrainedElement);
+  Constraint createConstraint(String name, ConstraintKind kind, String namespacePathName,
+      Expression specification, String... constrainedElementPathName);
 
   /**
    * Creates a new {@link ExpressionInOcl}. The body expression and the context variable must not
