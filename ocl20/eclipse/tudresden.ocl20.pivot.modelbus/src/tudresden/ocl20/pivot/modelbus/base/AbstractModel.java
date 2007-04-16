@@ -69,7 +69,7 @@ public abstract class AbstractModel implements IModel {
 
   // this model's name as displayed to clients
   private String displayName;
-  
+
   // the metamodel of this model
   private IMetamodel metamodel;
 
@@ -82,14 +82,14 @@ public abstract class AbstractModel implements IModel {
    * @param metamodel the metamodel for this model
    */
   protected AbstractModel(String displayName, IMetamodel metamodel) {
-    
+
     // use an empty string if display name is null
     this.displayName = StringUtils.defaultString(displayName);
-    
+
     if (metamodel == null) {
       throw new IllegalArgumentException("The metamodel reference must not be null."); //$NON-NLS-1$
     }
-    
+
     this.metamodel = metamodel;
   }
 
@@ -102,8 +102,9 @@ public abstract class AbstractModel implements IModel {
     return displayName;
   }
 
-  
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see tudresden.ocl20.pivot.modelbus.IModel#getMetamodel()
    */
   public IMetamodel getMetamodel() {
@@ -150,15 +151,15 @@ public abstract class AbstractModel implements IModel {
       logger.debug("findNamespace(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
-    Namespace namespace;
-
-    if (pathName == null || pathName.size() == 0) {
-      throw new IllegalArgumentException("The path name must not be null or empty."); //$NON-NLS-1$
+    // path name must not be null
+    if (pathName == null) {
+      throw new IllegalArgumentException("The path name must not be null."); //$NON-NLS-1$
     }
 
-    // start with the top namespace
-    namespace = getRootNamespace();
+    // by default use the root namespace
+    Namespace namespace = getRootNamespace();
 
+    // iterate through the namespace hierarchy
     for (String namespaceName : pathName) {
       namespace = namespace.lookupNamespace(namespaceName);
 
@@ -189,28 +190,28 @@ public abstract class AbstractModel implements IModel {
     }
 
     Type type;
-    
+
     // find all types that match this path name
     List<Type> types = findTypeHere(getRootNamespace(),pathName,true);
-    
+
     // check if several types were found
     if (types.size() > 1) {
-      logger.warn("More than one type with path name " + pathName + " were found: " + types);  //$NON-NLS-1$//$NON-NLS-2$
+      logger.warn("More than one type with path name " + pathName + " were found: " + types); //$NON-NLS-1$//$NON-NLS-2$
       type = null;
     }
-    
+
     else if (types.size() == 0) {
       type = null;
     }
-    
+
     else {
       type = types.get(0);
     }
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("findType() - exit - return value=" + type); //$NON-NLS-1$
     }
-    
+
     return type;
   }
 
@@ -265,7 +266,7 @@ public abstract class AbstractModel implements IModel {
     if (logger.isDebugEnabled()) {
       logger.debug("findTypeHere() - exit - return value=" + types); //$NON-NLS-1$
     }
-    
+
     return types;
   }
 

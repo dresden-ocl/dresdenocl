@@ -52,7 +52,7 @@ public interface IModel {
    * @return a <code>String</code> that identifies this model
    */
   String getDisplayName();
-  
+
   /**
    * Returns the {@link IMetamodel metamodel} for this model.
    * 
@@ -95,6 +95,7 @@ public interface IModel {
    * This operation allows to find a {@link Namespace} anywhere in the corresponding model. It is an
    * additional operation defined in the OCL Specification, Section 12.12. The path name needs to be
    * fully qualified. If no namespace with this path name is found, <code>null</code> is returned.
+   * An empty path name results in the {@link #getRootNamespace() root namespace}.
    * 
    * @param pathName a fully qualified name identifying a namespace
    * 
