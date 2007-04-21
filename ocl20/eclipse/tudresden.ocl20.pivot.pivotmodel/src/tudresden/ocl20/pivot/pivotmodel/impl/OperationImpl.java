@@ -670,13 +670,13 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
       // bind the type of the operaton if generic
       if (boundOperation.getType() == null && boundOperation.getGenericType() != null) {
-        boundOperation.getGenericType().bindTypedElement(parameters,types);
+        boundOperation.getGenericType().bindGenericType(parameters,types,boundOperation);
       }
       
       // bind all parameters
       for (Parameter parameter : boundOperation.getOwnedParameter()) {
         if (parameter.getType() == null && parameter.getGenericType() != null) {
-          parameter.getGenericType().bindTypedElement(parameters,types);
+          parameter.getGenericType().bindGenericType(parameters,types,parameter);
         }
       }
     }

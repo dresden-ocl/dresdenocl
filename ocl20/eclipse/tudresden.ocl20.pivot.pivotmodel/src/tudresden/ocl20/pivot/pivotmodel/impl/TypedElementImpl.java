@@ -182,11 +182,11 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
     if (newGenericType != genericType) {
       NotificationChain msgs = null;
       if (genericType != null)
-        msgs = ((InternalEObject) genericType).eInverseRemove(this,
-            PivotModelPackageImpl.GENERIC_TYPE__TYPED_ELEMENT,GenericType.class,msgs);
+        msgs = ((InternalEObject) genericType).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
+            - PivotModelPackageImpl.TYPED_ELEMENT__GENERIC_TYPE,null,msgs);
       if (newGenericType != null)
-        msgs = ((InternalEObject) newGenericType).eInverseAdd(this,
-            PivotModelPackageImpl.GENERIC_TYPE__TYPED_ELEMENT,GenericType.class,msgs);
+        msgs = ((InternalEObject) newGenericType).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
+            - PivotModelPackageImpl.TYPED_ELEMENT__GENERIC_TYPE,null,msgs);
       msgs = basicSetGenericType(newGenericType,msgs);
       if (msgs != null) msgs.dispatch();
     }
@@ -202,23 +202,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
   @Override
   protected EClass eStaticClass() {
     return PivotModelPackageImpl.Literals.TYPED_ELEMENT;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
-    switch (featureID) {
-      case PivotModelPackageImpl.TYPED_ELEMENT__GENERIC_TYPE:
-        if (genericType != null)
-          msgs = ((InternalEObject) genericType).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-              - PivotModelPackageImpl.TYPED_ELEMENT__GENERIC_TYPE,null,msgs);
-        return basicSetGenericType((GenericType) otherEnd,msgs);
-    }
-    return super.eInverseAdd(otherEnd,featureID,msgs);
   }
 
   /**

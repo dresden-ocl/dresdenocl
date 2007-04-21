@@ -128,21 +128,20 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
   }
 
   /**
-   * This method will bind the type of the {@link #getTypedElement() owning TypedElement} if the
+   * This method will bind the type of the <code>typedElement</code> if the
    * {@link #getTypeParameter() type parameter} of this <code>ParameterGenericType</code> is in
    * the given list of type parameters that shall be bound.
    */
   @Override
-  protected TypedElement doBindTypedElement(List<TypeParameter> parameters,
-      List<? extends Type> types) {
-    TypedElement typedElement = getTypedElement();
-
+  protected TypedElement doBindGenericType(List<TypeParameter> parameters,
+      List<? extends Type> types, TypedElement typedElement) {
+ 
     // we have to iterate and compare manually because EObjectEList checks for object identity
-    // rather than object equality, to the TypeParameter would not be found
+    // rather than object equality, so the correct TypeParameter would not be found
     for (ListIterator<TypeParameter> it = parameters.listIterator(); it.hasNext();) {
       TypeParameter typeParameterToBind = it.next();
 
-      // check if the type parameter referenced by this GenericType should be bound 
+      // check if the type parameter referenced by this GenericType should be bound
       if (typeParameterToBind.equals(getTypeParameter())) {
         Type type = types.get(it.previousIndex());
 
@@ -157,6 +156,21 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
     }
 
     return typedElement;
+  }
+
+  
+  /**
+   * This method currently does nothing since we do not support type parameters as generic super
+   * types. This can be implemented later if necessary.
+   * 
+   * @return the given <code>subType</code> without any changes
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List, java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
+   */
+  @Override
+  protected Type doBindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
+      Type subType) {
+    return subType;
   }
 
   /*

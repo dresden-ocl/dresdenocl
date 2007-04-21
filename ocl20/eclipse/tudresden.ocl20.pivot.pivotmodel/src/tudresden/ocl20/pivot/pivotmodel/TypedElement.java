@@ -83,7 +83,6 @@ public interface TypedElement extends NamedElement {
 
   /**
    * Returns the value of the '<em><b>Generic Type</b></em>' containment reference.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.GenericType#getTypedElement <em>Typed Element</em>}'.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Generic Type</em>' containment reference isn't clear,
@@ -92,7 +91,6 @@ public interface TypedElement extends NamedElement {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Generic Type</em>' containment reference.
    * @see #setGenericType(GenericType)
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericType#getTypedElement
    * @generated
    */
   GenericType getGenericType();

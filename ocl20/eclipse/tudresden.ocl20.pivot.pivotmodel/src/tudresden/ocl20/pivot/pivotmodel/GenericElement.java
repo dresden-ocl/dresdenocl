@@ -84,6 +84,27 @@ public interface GenericElement extends NamedElement {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <p>
+   * Binds the given {@link TypeParameter type parameters} with the given 
+   * {@link Type types}. This means that all references to the type parameters
+   * (e.g., in properties or operations) will be replaced with the corresponding
+   * types. The binding will result in a new <code>NamedElement</code> that
+   * has some or all of its type parameters bound. The original <code>GenericElement</code>
+   * will not be touched. If all type parameters are bound, this operation essentially
+   *  represents an instantiation of a generic type with concrete values for its type
+   * parameters. 
+   * </p>
+   * 
+   * <p>
+   * The two lists must have the same size and must not contain <code>null</code>
+   * elements. The lists may be empty, though. In this case, the binding will still
+   * work because the <code>GenericElement</code> may reference
+   * {@link ComplexGenericType}s that already have {@link TypeArgument}s
+   * attached to them. These bindings will be performed even if no further
+   * bindings have been defined via the arguments passed to this method.
+   * </p>
+   * <!-- end-model-doc -->
    * @generated
    */
   NamedElement bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types);

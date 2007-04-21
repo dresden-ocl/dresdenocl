@@ -220,7 +220,25 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int TYPE__SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+  public static final int TYPE__SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE__GENERIC_SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+  /**
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE__NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -241,22 +259,13 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int TYPE__OWNED_PROPERTY = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE__NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-  /**
    * The number of structural features of the '<em>Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
+  public static final int TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl <em>Enumeration</em>}' class.
@@ -314,6 +323,24 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int ENUMERATION__SUPER_TYPE = TYPE__SUPER_TYPE;
 
   /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ENUMERATION__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ENUMERATION__NAMESPACE = TYPE__NAMESPACE;
+
+  /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -330,15 +357,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int ENUMERATION__OWNED_PROPERTY = TYPE__OWNED_PROPERTY;
-
-  /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int ENUMERATION__NAMESPACE = TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Literal</b></em>' containment reference list.
@@ -1124,6 +1142,24 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int PRIMITIVE_TYPE__SUPER_TYPE = TYPE__SUPER_TYPE;
 
   /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__NAMESPACE = TYPE__NAMESPACE;
+
+  /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1140,15 +1176,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int PRIMITIVE_TYPE__OWNED_PROPERTY = TYPE__OWNED_PROPERTY;
-
-  /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__NAMESPACE = TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -1417,22 +1444,13 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int GENERIC_TYPE__OWNER = NAMED_ELEMENT__OWNER;
 
   /**
-   * The feature id for the '<em><b>Typed Element</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_TYPE__TYPED_ELEMENT = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
    * The number of structural features of the '<em>Generic Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int GENERIC_TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+  public static final int GENERIC_TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
@@ -1600,15 +1618,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int PARAMETER_GENERIC_TYPE__OWNER = GENERIC_TYPE__OWNER;
 
   /**
-   * The feature id for the '<em><b>Typed Element</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PARAMETER_GENERIC_TYPE__TYPED_ELEMENT = GENERIC_TYPE__TYPED_ELEMENT;
-
-  /**
    * The feature id for the '<em><b>Type Parameter</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1662,15 +1671,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int COMPLEX_GENERIC_TYPE__OWNER = GENERIC_TYPE__OWNER;
-
-  /**
-   * The feature id for the '<em><b>Typed Element</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int COMPLEX_GENERIC_TYPE__TYPED_ELEMENT = GENERIC_TYPE__TYPED_ELEMENT;
 
   /**
    * The feature id for the '<em><b>Unbound Type</b></em>' reference.
@@ -2297,7 +2297,20 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EReference getType_SuperType() {
-    return (EReference) typeEClass.getEStructuralFeatures().get(0);
+    return (EReference) typeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.pivotmodel.Type#getGenericSuperType <em>Generic Super Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Generic Super Type</em>'.
+   * @see tudresden.ocl20.pivot.pivotmodel.Type#getGenericSuperType()
+   * @see #getType()
+   * @generated
+   */
+  public EReference getType_GenericSuperType() {
+    return (EReference) typeEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -2336,7 +2349,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EReference getType_Namespace() {
-    return (EReference) typeEClass.getEStructuralFeatures().get(3);
+    return (EReference) typeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2693,19 +2706,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
   }
 
   /**
-   * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.pivotmodel.GenericType#getTypedElement <em>Typed Element</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the container reference '<em>Typed Element</em>'.
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericType#getTypedElement()
-   * @see #getGenericType()
-   * @generated
-   */
-  public EReference getGenericType_TypedElement() {
-    return (EReference) genericTypeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.pivotmodel.TypeParameter <em>Type Parameter</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2924,10 +2924,11 @@ public class PivotModelPackageImpl extends EPackageImpl {
     createEReference(namespaceEClass,NAMESPACE__NESTING_NAMESPACE);
 
     typeEClass = createEClass(TYPE);
-    createEReference(typeEClass,TYPE__SUPER_TYPE);
+    createEReference(typeEClass,TYPE__NAMESPACE);
     createEReference(typeEClass,TYPE__OWNED_OPERATION);
     createEReference(typeEClass,TYPE__OWNED_PROPERTY);
-    createEReference(typeEClass,TYPE__NAMESPACE);
+    createEReference(typeEClass,TYPE__SUPER_TYPE);
+    createEReference(typeEClass,TYPE__GENERIC_SUPER_TYPE);
 
     parameterEClass = createEClass(PARAMETER);
     createEAttribute(parameterEClass,PARAMETER__KIND);
@@ -2967,7 +2968,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
     createEReference(genericElementEClass,GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
 
     genericTypeEClass = createEClass(GENERIC_TYPE);
-    createEReference(genericTypeEClass,GENERIC_TYPE__TYPED_ELEMENT);
 
     typeParameterEClass = createEClass(TYPE_PARAMETER);
     createEReference(typeParameterEClass,TYPE_PARAMETER__GENERIC_ELEMENT);
@@ -3187,10 +3187,10 @@ public class PivotModelPackageImpl extends EPackageImpl {
 
     initEClass(typeEClass,Type.class,"Type",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
-        getType_SuperType(),
-        this.getType(),
-        null,
-        "superType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        getType_Namespace(),
+        this.getNamespace(),
+        this.getNamespace_OwnedType(),
+        "namespace",null,0,1,Type.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getType_OwnedOperation(),
         this.getOperation(),
@@ -3202,10 +3202,15 @@ public class PivotModelPackageImpl extends EPackageImpl {
         this.getProperty_OwningType(),
         "ownedProperty",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
     initEReference(
-        getType_Namespace(),
-        this.getNamespace(),
-        this.getNamespace_OwnedType(),
-        "namespace",null,0,1,Type.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        getType_SuperType(),
+        this.getType(),
+        null,
+        "superType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getType_GenericSuperType(),
+        this.getGenericType(),
+        null,
+        "genericSuperType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     op = addEOperation(typeEClass,theDatatypesPackageImpl.getBoolean(),"conformsTo",0,1); //$NON-NLS-1$
     addEParameter(op,this.getType(),"other",0,1); //$NON-NLS-1$
@@ -3287,7 +3292,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
     initEReference(
         getTypedElement_GenericType(),
         this.getGenericType(),
-        this.getGenericType_TypedElement(),
+        null,
         "genericType",null,0,1,TypedElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(primitiveTypeEClass,PrimitiveType.class,
@@ -3378,13 +3383,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 
     initEClass(genericTypeEClass,GenericType.class,
         "GenericType",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getGenericType_TypedElement(),
-        this.getTypedElement(),
-        this.getTypedElement_GenericType(),
-        "typedElement",null,0,1,GenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(genericTypeEClass,this.getTypedElement(),"bindTypedElement",1,1); //$NON-NLS-1$
+    op = addEOperation(genericTypeEClass,this.getTypedElement(),"bindGenericType",1,1); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType(this.getTypeParameter());
     g1.getETypeArguments().add(g2);
@@ -3395,6 +3395,20 @@ public class PivotModelPackageImpl extends EPackageImpl {
     g3 = createEGenericType(this.getType());
     g2.setEUpperBound(g3);
     addEParameter(op,g1,"types",1,1); //$NON-NLS-1$
+    addEParameter(op,this.getTypedElement(),"typedElement",0,1); //$NON-NLS-1$
+
+    op = addEOperation(genericTypeEClass,this.getType(),"bindGenericSuperType",0,1); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType(this.getTypeParameter());
+    g1.getETypeArguments().add(g2);
+    addEParameter(op,g1,"parameters",1,1); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType();
+    g1.getETypeArguments().add(g2);
+    g3 = createEGenericType(this.getType());
+    g2.setEUpperBound(g3);
+    addEParameter(op,g1,"types",1,1); //$NON-NLS-1$
+    addEParameter(op,this.getType(),"subType",0,1); //$NON-NLS-1$
 
     initEClass(typeParameterEClass,TypeParameter.class,
         "TypeParameter",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -3698,6 +3712,14 @@ public class PivotModelPackageImpl extends EPackageImpl {
     public static final EReference TYPE__SUPER_TYPE = eINSTANCE.getType_SuperType();
 
     /**
+     * The meta object literal for the '<em><b>Generic Super Type</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE.getType_GenericSuperType();
+
+    /**
      * The meta object literal for the '<em><b>Owned Operation</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3972,15 +3994,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EClass GENERIC_TYPE = eINSTANCE.getGenericType();
-
-    /**
-     * The meta object literal for the '<em><b>Typed Element</b></em>' container reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EReference GENERIC_TYPE__TYPED_ELEMENT = eINSTANCE
-        .getGenericType_TypedElement();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl <em>Type Parameter</em>}' class.

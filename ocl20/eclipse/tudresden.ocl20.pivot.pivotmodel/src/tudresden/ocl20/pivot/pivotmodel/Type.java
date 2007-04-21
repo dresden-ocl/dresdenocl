@@ -47,10 +47,11 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty <em>Owned Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getGenericSuperType <em>Generic Super Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +72,20 @@ public interface Type extends NamedElement, ConstrainableElement, GenericElement
    * @generated
    */
   List<Type> getSuperType();
+
+  /**
+   * Returns the value of the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.GenericType}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Generic Super Type</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Generic Super Type</em>' containment reference list.
+   * @generated
+   */
+  List<GenericType> getGenericSuperType();
 
   /**
    * Returns the value of the '<em><b>Owned Operation</b></em>' containment reference list. The

@@ -38,6 +38,8 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -45,6 +47,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+
+import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
  * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.GenericType}
@@ -82,12 +86,24 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
   }
 
   /**
-   * This returns GenericType.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * This returns GenericType.gif.
    * 
-   * @generated
+   * <p>
+   * Overridden to return <em>GenericSuperType.gif</em> if the generic type is the generic super
+   * type of a type.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public Object getImage(Object object) {
+    
+    EReference eContainmentFeature = ((EObject)object).eContainmentFeature();
+    
+    if (eContainmentFeature == PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE) {
+      return overlayImage(object,getResourceLocator().getImage("full/obj16/GenericSuperType")); //$NON-NLS-1$
+    }
+    
     return overlayImage(object,getResourceLocator().getImage("full/obj16/GenericType")); //$NON-NLS-1$
   }
 

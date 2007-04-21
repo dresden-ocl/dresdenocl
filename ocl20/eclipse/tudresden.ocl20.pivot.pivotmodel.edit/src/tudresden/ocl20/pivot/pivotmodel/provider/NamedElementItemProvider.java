@@ -51,12 +51,14 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.NamedElement} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.NamedElement}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class NamedElementItemProvider extends ItemProviderAdapter implements
@@ -64,9 +66,9 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   public NamedElementItemProvider(AdapterFactory adapterFactory) {
@@ -74,9 +76,9 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -109,9 +111,9 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
   }
 
   /**
-   * This adds a property descriptor for the Qualified Name feature.
-   * <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Qualified Name feature. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   protected void addQualifiedNamePropertyDescriptor(Object object) {
@@ -141,6 +143,40 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
   }
 
   /**
+   * Helper method that returns the character used as the opening delimiter for type parameters.
+   * This can be overridden by subclasses to alter the way their type parameters are displayed. The
+   * default implementation returns <code>'<'</code>.
+   * 
+   * <p>
+   * Due to multiple inheritance, there is no concrete item provider class for
+   * {@link GenericElement}s. That's why shared methods have been moved up the inheritance
+   * hierarchy to <code>NamedElementItemProvider</code>.
+   * </p>
+   * 
+   * @return the type parameter list opening character
+   */
+  protected char getTypeParameterListOpeningDelimiter() {
+    return '<';
+  }
+
+  /**
+   * Helper method that returns the character used as the closing delimiter for type parameters.
+   * This can be overridden by subclasses to alter the way their type parameters are displayed. The
+   * default implementation returns <code>'>'</code>.
+   * 
+   * <p>
+   * Due to multiple inheritance, there is no concrete item provider class for
+   * {@link GenericElement}s. That's why shared methods have been moved up the inheritance
+   * hierarchy to <code>NamedElementItemProvider</code>.
+   * </p>
+   * 
+   * @return the type parameter list opening character
+   */
+  protected char getTypeParameterListClosingDelimiter() {
+    return '>';
+  }
+
+  /**
    * Helper method for subclasses that adapts the given {@link NamedElement} to an
    * {@link IItemLabelProvider}.
    * 
@@ -157,6 +193,7 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -174,9 +211,9 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
 
   /**
    * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object.
-   * <!-- begin-user-doc -->
+   * describing all of the children that can be created under this object. <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -186,9 +223,9 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   @Override

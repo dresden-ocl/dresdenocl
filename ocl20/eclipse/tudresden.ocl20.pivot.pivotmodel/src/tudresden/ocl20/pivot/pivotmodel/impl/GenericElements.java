@@ -74,7 +74,7 @@ public class GenericElements {
    * 
    * <p>
    * Example: Binding both type parameters of {@code Map<K,V>} with the type named
-   * <code>Boolean</code> will result in the key "<code>K,V:K->Boolean,V->Boolean</code>".
+   * <code>Boolean</code> will result in the key "<code>Map<K,V>:K->Boolean,V->Boolean</code>".
    * Note that the given lists must not contain <code>null</code> values.
    * </p>
    */

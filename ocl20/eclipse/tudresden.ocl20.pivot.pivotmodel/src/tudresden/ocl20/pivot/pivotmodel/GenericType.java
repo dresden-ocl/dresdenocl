@@ -39,49 +39,25 @@ import java.util.List;
  * A representation of the model object '<em><b>Generic Type</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericType#getTypedElement <em>Typed Element</em>}</li>
- * </ul>
- * </p>
  *
  * @generated
  */
 public interface GenericType extends NamedElement {
 
   /**
-   * Returns the value of the '<em><b>Typed Element</b></em>' container reference.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType <em>Generic Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Typed Element</em>' container reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Typed Element</em>' container reference.
-   * @see #setTypedElement(TypedElement)
-   * @see tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType
-   * @generated
-   */
-  TypedElement getTypedElement();
-
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.GenericType#getTypedElement <em>Typed Element</em>}' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Typed Element</em>' container reference.
-   * @see #getTypedElement()
    * @generated
    */
-  void setTypedElement(TypedElement value);
+  TypedElement bindGenericType(List<TypeParameter> parameters, List<? extends Type> types,
+      TypedElement typedElement);
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  TypedElement bindTypedElement(List<TypeParameter> parameters, List<? extends Type> types);
+  Type bindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types, Type subType);
 
   /**
    * Redefines {@link NamedElement#clone()} with a covariant return type.

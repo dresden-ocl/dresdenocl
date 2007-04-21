@@ -65,9 +65,8 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypedElement}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypedElement} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class TypedElementItemProvider extends NamedElementItemProvider implements
@@ -75,9 +74,9 @@ public class TypedElementItemProvider extends NamedElementItemProvider implement
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public TypedElementItemProvider(AdapterFactory adapterFactory) {
@@ -85,9 +84,9 @@ public class TypedElementItemProvider extends NamedElementItemProvider implement
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -118,9 +117,9 @@ public class TypedElementItemProvider extends NamedElementItemProvider implement
   }
 
   /**
-   * This adds a property descriptor for the Generic Type feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Generic Type feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addGenericTypePropertyDescriptor(Object object) {
@@ -136,8 +135,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider implement
   }
 
   /**
-   * A special property descriptor that additionally includes all {@link TypeParameter}s of the
-   * {@link Type}.
+   * A special property descriptor for the type of a {@link TypedElement} that additionally includes
+   * all {@link TypeParameter}s of the {@link Type}.
    */
   protected class TypePropertyDescriptor extends ItemPropertyDescriptor {
 
@@ -159,13 +158,6 @@ public class TypedElementItemProvider extends NamedElementItemProvider implement
     @Override
     public Collection<?> getChoiceOfValues(Object object) {
       Collection<Object> result = new ArrayList<Object>(super.getChoiceOfValues(object));
-
-      // filter out any generic types, these are created automaically when a Type Parameter is used
-      for (Iterator<Object> it = result.iterator(); it.hasNext();) {
-        if (it.next() instanceof GenericType) {
-          it.remove();
-        }
-      }
 
       // go up the containment hierachy and collect all type parameters
       for (NamedElement e = (NamedElement) object; e != null; e = e.getOwner()) {
@@ -368,7 +360,6 @@ public class TypedElementItemProvider extends NamedElementItemProvider implement
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -386,9 +377,9 @@ public class TypedElementItemProvider extends NamedElementItemProvider implement
 
   /**
    * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object. <!-- begin-user-doc -->
+   * describing all of the children that can be created under this object.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -398,9 +389,9 @@ public class TypedElementItemProvider extends NamedElementItemProvider implement
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override

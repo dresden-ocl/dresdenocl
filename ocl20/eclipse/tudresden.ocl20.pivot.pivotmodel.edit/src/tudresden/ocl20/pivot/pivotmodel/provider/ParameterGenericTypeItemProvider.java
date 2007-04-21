@@ -52,10 +52,9 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType} object. <!-- begin-user-doc -->
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType} object.
+ * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider implements
@@ -63,9 +62,9 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider im
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public ParameterGenericTypeItemProvider(AdapterFactory adapterFactory) {
@@ -73,9 +72,9 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider im
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -89,9 +88,9 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider im
   }
 
   /**
-   * This adds a property descriptor for the Type Parameter feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Type Parameter feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addTypeParameterPropertyDescriptor(Object object) {
@@ -102,18 +101,18 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider im
             getString("_UI_ParameterGenericType_typeParameter_feature"), //$NON-NLS-1$
             getString(
                 "_UI_PropertyDescriptor_description","_UI_ParameterGenericType_typeParameter_feature","_UI_ParameterGenericType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER,false,false,true,
+            PivotModelPackageImpl.Literals.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER,true,false,true,
             null,null,null));
   }
 
   /**
-   * This returns ParameterGenericType.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * Adapted to simply default to the super{@link #getImage(Object) super implementation}.
    * 
-   * @generated
+   * @generated NOT
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/ParameterGenericType")); //$NON-NLS-1$
+    return super.getImage(object);
   }
 
   /**
@@ -136,7 +135,6 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider im
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -147,9 +145,9 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider im
 
   /**
    * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object. <!-- begin-user-doc -->
+   * describing all of the children that can be created under this object.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -159,9 +157,9 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider im
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override

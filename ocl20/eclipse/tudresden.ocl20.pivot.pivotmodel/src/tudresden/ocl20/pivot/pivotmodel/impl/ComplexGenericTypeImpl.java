@@ -193,15 +193,67 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
   }
 
   /**
-   * This method will bind the type of the {@link #getTypedElement() owning TypedElement} if the
+   * This method will bind the type of the <code>typedElement</code> if the
    * {@link #getUnboundType() unbound type} of this <code>ComplexGenericType</code> can be fully
    * bound with the bindings represented by the <code>parameters</code> and <code>types</code>
    * arguments. Even if the given lists are empty, this method will attempt to bind the unbound type
-   * using the {@link TypeArgument}s set for this <code>ComplexGenericType</code>. *
+   * using the {@link TypeArgument}s set for this <code>ComplexGenericType</code>.
    */
   @Override
-  public TypedElement doBindTypedElement(List<TypeParameter> parameters, List<? extends Type> types) {
-    TypedElement typedElement = getTypedElement();
+  public TypedElement doBindGenericType(List<TypeParameter> parameters, List<? extends Type> types,
+      TypedElement typedElement) {
+
+    // bind the unbound type of this complex generic type
+    Type boundType = bindUnboundType(parameters,types);
+
+    // if all type parameters have been bound we can set the typed element's type
+    if (boundType.getOwnedTypeParameter().isEmpty()) {
+      if (logger.isDebugEnabled()) {
+        logger.debug("Binding type of '" + typedElement.getQualifiedName() + "' with '" //$NON-NLS-1$ //$NON-NLS-2$
+            + boundType.getName() + "'."); //$NON-NLS-1$
+      }
+
+      typedElement.setType(boundType);
+    }
+
+    return typedElement;
+  }
+
+  /**
+   * This method will add a bound super type to the given <code>Type</code> if the
+   * {@link #getUnboundType() unbound type} of this <code>ComplexGenericType</code> can be fully
+   * bound with the bindings represented by the <code>parameters</code> and <code>types</code>
+   * arguments. Even if the given lists are empty, this method will attempt to bind the unbound type
+   * using the {@link TypeArgument}s set for this <code>ComplexGenericType</code>.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List,
+   *      java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
+   */
+  @Override
+  protected Type doBindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
+      Type subType) {
+
+    // bind the unbound type of this complex generic type
+    Type boundType = bindUnboundType(parameters,types);
+
+    // if all type parameters have been bound, add the bound type to the super types of subtype
+    if (boundType.getOwnedTypeParameter().isEmpty()) {
+      if (logger.isDebugEnabled()) {
+        logger.debug("Adding bound super type '" + boundType.getName() + "' to type '" //$NON-NLS-1$ //$NON-NLS-2$
+            + subType.getQualifiedName() + "'."); //$NON-NLS-1$
+      }
+
+      subType.addSuperType(boundType);
+    }
+
+    return subType;
+  }
+
+  /**
+   * Helper method that binds the unbound type of this <code>ComplexGenericType</code> with the
+   * given bindings.
+   */
+  protected Type bindUnboundType(List<TypeParameter> parameters, List<? extends Type> types) {
     Type unboundType = getUnboundType();
 
     // check that an unbound type has been set
@@ -225,7 +277,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
       // bind the type argument if it has a generic type
       if (typeArgument.getType() == null && typeArgument.getGenericType() != null) {
-        typeArgument.getGenericType().bindTypedElement(parameters,types);
+        typeArgument.getGenericType().bindGenericType(parameters,types,typeArgument);
       }
 
       // if the type argument has a non-generic type now, add it to the new bindings
@@ -235,19 +287,8 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
       }
     }
 
-    // now bind the type with the collected type parameters and types
-    unboundType = unboundType.bindTypeParameter(unboundTypeParameters,typeArgumentTypes);
-
-    // if all type parameters have been bound we can set the typed element's type
-    if (unboundType.getOwnedTypeParameter().isEmpty()) {
-      if (logger.isDebugEnabled()) {
-        logger.debug("Binding type of " + typedElement + " with " + unboundType + "."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-      }
-
-      typedElement.setType(unboundType);
-    }
-
-    return typedElement;
+    // now bind the type with the collected type parameters and types and return the result
+    return unboundType.bindTypeParameter(unboundTypeParameters,typeArgumentTypes);
   }
 
   /**

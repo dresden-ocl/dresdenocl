@@ -141,13 +141,13 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
   }
 
   /**
-   * This returns ComplexGenericType.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * Adapted to simply default to the super{@link #getImage(Object) super implementation}.
    * 
-   * @generated
+   * @generated NOT
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/ComplexGenericType")); //$NON-NLS-1$
+    return super.getImage(object);
   }
 
   /**
