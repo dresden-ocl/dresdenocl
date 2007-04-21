@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.modelbus;
 
+import java.util.List;
+
 import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
@@ -62,7 +64,6 @@ import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 
@@ -83,15 +84,14 @@ public interface IModelFactory {
    * 
    * @param name an optional name for the <code>Constraint</code>
    * @param kind one of the constants defined in {@link ConstraintKind}
-   * @param namespace the namespace where the <code>Constraint</code> should be stored in
    * @param specification the <code>Expression</code> that specifies the <code>Constraint</code>
    * @param constrainedElement at least one element that is the target of the
    *          <code>Constraint</code>
    * 
    * @return a <code>Constraint</code> instance
    */
-  Constraint createConstraint(String name, ConstraintKind kind, Namespace namespace,
-      Expression specification, ConstrainableElement... constrainedElement);
+  Constraint createConstraint(String name, ConstraintKind kind, Expression specification,
+      ConstrainableElement... constrainedElement);
 
   /**
    * Creates a new {@link ExpressionInOcl}. The body expression and the context variable must not
@@ -119,12 +119,12 @@ public interface IModelFactory {
    * first time.
    * 
    * @param name the name of the variable
-   * @param typeName the type of the variable
+   * @param typePathName the type of the variable
    * @param initExpression an (optional) initialization expression
    * 
    * @return a <code>Variable</code> instance
    */
-  Variable createVariable(String name, String typeName, OclExpression initExpression);
+  Variable createVariable(String name, List<String> typePathName, OclExpression initExpression);
 
   /**
    * Creates a new {@link Variable} that represents a {@link Parameter} in an expression that
@@ -153,7 +153,8 @@ public interface IModelFactory {
    * @param qualifier
    * @return
    */
-  PropertyCallExp createPropertyCallExp(String referredPropertyPathName, OclExpression... qualifier);
+  PropertyCallExp createPropertyCallExp(List<String> referredPropertyPathName,
+      OclExpression... qualifier);
 
   /**
    * @param source
@@ -177,7 +178,7 @@ public interface IModelFactory {
    * 
    * @return an <code>OperationCallExp</code> instance
    */
-  OperationCallExp createOperationCallExp(String referredOperationPathName,
+  OperationCallExp createOperationCallExp(List<String> referredOperationPathName,
       OclExpression... argument);
 
   /**
@@ -246,10 +247,13 @@ public interface IModelFactory {
 
   /**
    * @param name
-   * @param typeName
+   * @param typePathName
+   * @param value
+   * 
    * @return
    */
-  TupleLiteralPart createTupleLiteralPart(String name, String typeName, OclExpression value);
+  TupleLiteralPart createTupleLiteralPart(String name, List<String> typePathName,
+      OclExpression value);
 
   /**
    * @param parts
@@ -261,7 +265,7 @@ public interface IModelFactory {
    * @param referredEnumLiteralPathName
    * @return
    */
-  EnumLiteralExp createEnumLiteralExp(String referredEnumLiteralPathName);
+  EnumLiteralExp createEnumLiteralExp(List<String> referredEnumLiteralPathName);
 
   /**
    * @param realSymbol
@@ -304,9 +308,10 @@ public interface IModelFactory {
   InvalidLiteralExp createInvalidLiteralExp();
 
   /**
-   * @param referredTypeName
+   * @param referredTypePathName
+   * 
    * @return
    */
-  TypeLiteralExp createTypeLiteralExp(String referredTypeName);
+  TypeLiteralExp createTypeLiteralExp(List<String> referredTypePathName);
 
 }

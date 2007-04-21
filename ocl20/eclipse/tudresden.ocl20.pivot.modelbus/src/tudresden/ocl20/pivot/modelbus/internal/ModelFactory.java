@@ -34,7 +34,6 @@ package tudresden.ocl20.pivot.modelbus.internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -68,8 +67,10 @@ import tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelFactory;
+import tudresden.ocl20.pivot.modelbus.IOclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
@@ -78,7 +79,6 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
@@ -100,11 +100,28 @@ public class ModelFactory implements IModelFactory {
   // the model which is the basis for OCL expressions created by this factory
   private IModel model;
 
+  // the OCL Library instance; will be retrieved from the IOclLibraryProvider of the model
+  private OclLibrary oclLibrary;
+
   /**
    * @param model
    */
   public ModelFactory(IModel model) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("ModelFactory(model=" + model + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    // usually this would not happen unless clients create model factories themselves
+    if (model == null) {
+      throw new IllegalArgumentException("No valid model provided to the Model Factory."); //$NON-NLS-1$
+    }
+
+    // initialize
     this.model = model;
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("ModelFactory() - exit"); //$NON-NLS-1$
+    }
   }
 
   /*
@@ -208,28 +225,33 @@ public class ModelFactory implements IModelFactory {
     return collectionRange;
   }
 
-
-  public Constraint createConstraint(String name, ConstraintKind kind, Namespace namespace,
-      Expression specification, ConstrainableElement... constrainedElement) {
+  /*
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createConstraint(java.lang.String,
+   *      tudresden.ocl20.pivot.pivotmodel.ConstraintKind,
+   *      tudresden.ocl20.pivot.pivotmodel.Expression,
+   *      tudresden.ocl20.pivot.pivotmodel.ConstrainableElement[])
+   */
+  public Constraint createConstraint(String name, ConstraintKind kind, Expression specification,
+      ConstrainableElement... constrainedElement) {
 
     if (logger.isDebugEnabled()) {
-      logger.debug("createConstraint(name=" + name + ", kind=" + kind + ", namespace=" //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-          + namespace + ", specification=" + specification + ", constrainedElement=" //$NON-NLS-1$ //$NON-NLS-2$
-          + ArrayUtils.toString(constrainedElement) + ") - enter"); //$NON-NLS-1$
+      logger.debug("createConstraint(name=" + name + ", kind=" + kind + ", specification=" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+          + specification + ", constrainedElement=" + ArrayUtils.toString(constrainedElement) //$NON-NLS-1$
+          + ") - enter"); //$NON-NLS-1$
     }
 
-    if (kind == null || namespace == null || specification == null
-        || constrainedElement == null) {
+    if (kind == null || specification == null || constrainedElement == null) {
       throw new IllegalArgumentException("Parameters must not be null: kind=" + kind //$NON-NLS-1$
-          + ", namespace=" + namespace + ", specification=" + specification //$NON-NLS-1$ //$NON-NLS-2$
-          + ", constrainedElement=" + ArrayUtils.toString(constrainedElement) + "."); //$NON-NLS-1$ //$NON-NLS-2$
+          + ", specification=" + specification //$NON-NLS-1$
+          + ", constrainedElement=" + ArrayUtils.toString(constrainedElement) + "."); //$NON-NLS-1$//$NON-NLS-2$
     }
 
     Constraint constraint = PivotModelFactory.INSTANCE.createConstraint();
 
     constraint.setName(name);
     constraint.setKind(kind);
-    constraint.setNamespace(namespace);
     constraint.setSpecification(specification);
     constraint.getConstrainedElement().addAll(Arrays.asList(constrainedElement));
 
@@ -244,25 +266,16 @@ public class ModelFactory implements IModelFactory {
   /*
    * (non-Javadoc)
    * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createEnumLiteralExp(java.lang.String)
+   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createEnumLiteralExp(java.util.List)
    */
-  public EnumLiteralExp createEnumLiteralExp(String referredEnumLiteralPathName) {
+  public EnumLiteralExp createEnumLiteralExp(List<String> pathName) {
     if (logger.isDebugEnabled()) {
-      logger
-          .debug("createEnumLiteralExp(referredEnumLiteralPathName=" + referredEnumLiteralPathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+      logger.debug("createEnumLiteralExp(pathName=" + pathName + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
     }
 
-    if (StringUtils.isEmpty(referredEnumLiteralPathName)) {
-      throw new IllegalArgumentException(
-          "Parameter 'referredEnumLiteralPathName' must not be null or empty."); //$NON-NLS-1$
-    }
-
-    // create a list of path segments
-    List<String> pathName = tokenizePathName(referredEnumLiteralPathName);
-
-    if (pathName.size() < 2) {
-      throw new IllegalArgumentException(
-          "The path name for an enumeration literal must consist of at least two segments."); //$NON-NLS-1$
+    if (pathName == null || pathName.size() < 2) {
+      throw new IllegalArgumentException("The path name '" + pathName //$NON-NLS-1$
+          + "' is either null or does not have the minimal number of two segments."); //$NON-NLS-1$
     }
 
     // separate the enumeration name and the literal name
@@ -307,8 +320,8 @@ public class ModelFactory implements IModelFactory {
       Variable context, Variable result, Variable... parameter) {
     if (logger.isDebugEnabled()) {
       logger.debug("createExpressionInOcl(bodyExpression=" + bodyExpression + ", context=" //$NON-NLS-1$ //$NON-NLS-2$
-          + context
-          + ", result=" + result + ", parameter=" + ArrayUtils.toString(parameter) + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+          + context + ", result=" + result + ", parameter=" + ArrayUtils.toString(parameter) //$NON-NLS-1$ //$NON-NLS-2$
+          + ") - enter"); //$NON-NLS-1$
     }
 
     if (bodyExpression == null || context == null) {
@@ -545,8 +558,8 @@ public class ModelFactory implements IModelFactory {
 
     if (operation == null) {
       throw new IllegalArgumentException("Unable to find operation '" + referredOperationName //$NON-NLS-1$
-          + "' with argument types " + paramTypes + "' in type " //$NON-NLS-1$ //$NON-NLS-2$
-          + source.getType().getQualifiedName() + "."); //$NON-NLS-1$
+          + "' with argument types " + paramTypes + " in type '" //$NON-NLS-1$ //$NON-NLS-2$
+          + source.getType().getQualifiedName() + "'."); //$NON-NLS-1$
     }
 
     OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE.createOperationCallExp();
@@ -556,6 +569,9 @@ public class ModelFactory implements IModelFactory {
     if (argument != null) {
       operationCallExp.getArgument().addAll(Arrays.asList(argument));
     }
+    
+    // a property call expression needs access to the OCL library for determining its type
+    operationCallExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createOperationCallExp() - exit - return value=" + operationCallExp); //$NON-NLS-1$
@@ -567,26 +583,18 @@ public class ModelFactory implements IModelFactory {
   /*
    * (non-Javadoc)
    * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createOperationCallExp(java.lang.String,
+   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createOperationCallExp(java.util.List,
    *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression[])
    */
-  public OperationCallExp createOperationCallExp(String referredOperationPathName,
-      OclExpression... argument) {
+  public OperationCallExp createOperationCallExp(List<String> pathName, OclExpression... argument) {
     if (logger.isDebugEnabled()) {
-      logger.debug("createOperationCallExp(referredOperationPathName=" + referredOperationPathName //$NON-NLS-1$
+      logger.debug("createOperationCallExp(pathName=" + pathName //$NON-NLS-1$
           + ", argument=" + ArrayUtils.toString(argument) + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
-    if (StringUtils.isEmpty(referredOperationPathName)) {
-      throw new IllegalArgumentException(
-          "The path name of the referred static operation must not be null or empty."); //$NON-NLS-1$
-    }
-
-    List<String> pathName = tokenizePathName(referredOperationPathName);
-
-    if (pathName.size() < 2) {
-      throw new IllegalArgumentException("The path name of operation '" + referredOperationPathName //$NON-NLS-1$
-          + "' cannot refer to a static operation as it does not have at least two segments."); //$NON-NLS-1$
+    if (pathName == null || pathName.size() < 2) {
+      throw new IllegalArgumentException("The static operation path name '" + pathName //$NON-NLS-1$
+          + "' is either null or does not have the required number of at least two segments."); //$NON-NLS-1$
     }
 
     // split the pathname into the type and operation part
@@ -617,10 +625,13 @@ public class ModelFactory implements IModelFactory {
     // create the expression
     OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE.createOperationCallExp();
     operationCallExp.setReferredOperation(operation);
-
+    
     if (argument != null) {
       operationCallExp.getArgument().addAll(Arrays.asList(argument));
     }
+
+    // a property call expression needs access to the OCL library for determining its type
+    operationCallExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createOperationCallExp() - exit - return value=" + operationCallExp); //$NON-NLS-1$
@@ -647,6 +658,7 @@ public class ModelFactory implements IModelFactory {
           + ", referredPropertyName=" + referredPropertyName + "."); //$NON-NLS-1$//$NON-NLS-2$
     }
 
+    // lookup the property
     Property property = source.getType().lookupProperty(referredPropertyName);
 
     if (property == null) {
@@ -658,6 +670,9 @@ public class ModelFactory implements IModelFactory {
 
     propertyCallExp.setSource(source);
     propertyCallExp.setReferredProperty(property);
+
+    // a property call expression needs access to the OCL library for determining its type
+    propertyCallExp.setOclLibrary(getOclLibrary());
 
     if (qualifier != null) {
       propertyCallExp.getQualifier().addAll(Arrays.asList(qualifier));
@@ -673,28 +688,18 @@ public class ModelFactory implements IModelFactory {
   /*
    * (non-Javadoc)
    * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createPropertyCallExp(java.lang.String,
+   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createPropertyCallExp(java.util.List,
    *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression[])
    */
-  public PropertyCallExp createPropertyCallExp(String referredPropertyPathName,
-      OclExpression... qualifier) {
+  public PropertyCallExp createPropertyCallExp(List<String> pathName, OclExpression... qualifier) {
     if (logger.isDebugEnabled()) {
-      logger.debug("createPropertyCallExp(referredPropertyPathName=" + referredPropertyPathName //$NON-NLS-1$
+      logger.debug("createPropertyCallExp(pathName=" + pathName //$NON-NLS-1$
           + ", qualifier=" + ArrayUtils.toString(qualifier) + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
-    if (StringUtils.isEmpty(referredPropertyPathName)) {
-      throw new IllegalArgumentException(
-          "The path name of the referred property must not be null or empty."); //$NON-NLS-1$
-    }
-
-    List<String> pathName = tokenizePathName(referredPropertyPathName);
-
-    if (pathName.size() < 2) {
-      throw new IllegalArgumentException(
-          "The path name of property '" //$NON-NLS-1$
-              + referredPropertyPathName
-              + "' cannot refer to a static property because it does not contain at least two segments."); //$NON-NLS-1$
+    if (pathName == null || pathName.size() < 2) {
+      throw new IllegalArgumentException("The static property path name '" + pathName //$NON-NLS-1$
+          + "' is either null or does not have the required number of at least two segments."); //$NON-NLS-1$
     }
 
     // split the path name into the type name and the property name
@@ -715,6 +720,9 @@ public class ModelFactory implements IModelFactory {
     // create the expression
     PropertyCallExp propertyCallExp = ExpressionsFactory.INSTANCE.createPropertyCallExp();
     propertyCallExp.setReferredProperty(property);
+    
+    // a property call expression needs access to the OCL library for determining its type
+    propertyCallExp.setOclLibrary(getOclLibrary());
 
     if (qualifier != null) {
       propertyCallExp.getQualifier().addAll(Arrays.asList(qualifier));
@@ -801,7 +809,8 @@ public class ModelFactory implements IModelFactory {
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createTupleLiteralPart(java.lang.String,
    *      java.lang.String, tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
    */
-  public TupleLiteralPart createTupleLiteralPart(String name, String typeName, OclExpression value) {
+  public TupleLiteralPart createTupleLiteralPart(String name, List<String> typeName,
+      OclExpression value) {
     if (logger.isDebugEnabled()) {
       logger.debug("createTupleLiteralPart(name=" + name + ", typeName=" + typeName + ", value=" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
           + value + ") - enter"); //$NON-NLS-1$
@@ -814,8 +823,8 @@ public class ModelFactory implements IModelFactory {
     Type type = null;
 
     // if a type name has been defined try to find the corresponding type
-    if (!StringUtils.isEmpty(typeName)) {
-      type = findType(tokenizePathName(typeName));
+    if (typeName != null && typeName.size() > 0) {
+      type = findType(typeName);
     }
 
     // if no type is given, we need a value to infer the type (in TupleLiteralPart.getType)
@@ -845,19 +854,19 @@ public class ModelFactory implements IModelFactory {
   /*
    * (non-Javadoc)
    * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createTypeLiteralExp(java.lang.String)
+   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createTypeLiteralExp(java.util.List)
    */
-  public TypeLiteralExp createTypeLiteralExp(String referredTypeName) {
+  public TypeLiteralExp createTypeLiteralExp(List<String> referredTypeName) {
     if (logger.isDebugEnabled()) {
       logger.debug("createTypeLiteralExp(referredTypeName=" + referredTypeName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
-    if (StringUtils.isEmpty(referredTypeName)) {
+    if (referredTypeName == null || referredTypeName.size() == 0) {
       throw new IllegalArgumentException(
           "The argument 'referredTypeName' must not be null or empty."); //$NON-NLS-1$
     }
 
-    Type type = findType(tokenizePathName(referredTypeName));
+    Type type = findType(referredTypeName);
 
     TypeLiteralExp typeLiteralExp = ExpressionsFactory.INSTANCE.createTypeLiteralExp();
     typeLiteralExp.setReferredType(type);
@@ -918,10 +927,9 @@ public class ModelFactory implements IModelFactory {
    * (non-Javadoc)
    * 
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createVariable(java.lang.String,
-   *      tudresden.ocl20.pivot.pivotmodel.Type,
-   *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
+   *      java.util.List, tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
    */
-  public Variable createVariable(String name, String typeName, OclExpression initExpression) {
+  public Variable createVariable(String name, List<String> typeName, OclExpression initExpression) {
     if (logger.isDebugEnabled()) {
       logger.debug("createVariable(name=" + name + ", typeName=" + typeName + ", initExpression=" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
           + initExpression + ") - enter"); //$NON-NLS-1$
@@ -934,8 +942,8 @@ public class ModelFactory implements IModelFactory {
     Type type = null;
 
     // if the type name is given lookup the type
-    if (StringUtils.isNotEmpty(typeName)) {
-      type = findType(tokenizePathName(typeName));
+    if (typeName != null && typeName.size() > 0) {
+      type = findType(typeName);
     }
 
     // else check whether an init expression exists to infer the type (in Variable.getType)
@@ -1002,6 +1010,9 @@ public class ModelFactory implements IModelFactory {
 
     VariableExp variableExp = ExpressionsFactory.INSTANCE.createVariableExp();
     variableExp.setReferredVariable(referredVariable);
+    
+    // a variable expression needs access to the OCL library for determining its type
+    variableExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createVariableExp() - exit - return value=" + variableExp); //$NON-NLS-1$
@@ -1009,24 +1020,6 @@ public class ModelFactory implements IModelFactory {
 
     return variableExp;
 
-  }
-
-  /**
-   * Helper method to split a path name separated by <code>::</code> into a list of strings.
-   * 
-   * @param pathName a path name
-   * 
-   * @return a list of path segments
-   */
-  @SuppressWarnings("unchecked")
-  protected List<String> tokenizePathName(String pathName) {
-
-    // return an empty list if the path name is empty
-    if (StringUtils.isEmpty(pathName)) {
-      return Collections.EMPTY_LIST;
-    }
-
-    return Arrays.asList(pathName.split("::")); //$NON-NLS-1$
   }
 
   /**
@@ -1055,5 +1048,24 @@ public class ModelFactory implements IModelFactory {
     }
 
     return type;
+  }
+
+  /**
+   * Helper method to lazily get the OCL Library Provider
+   */
+  protected OclLibrary getOclLibrary() {
+    
+    if (oclLibrary == null) {
+      IOclLibraryProvider provider = model.getOclLibraryProvider();
+
+      if (provider == null) {
+        throw new IllegalStateException("Failed to retrieve an OCL Library Provider from model '" //$NON-NLS-1$
+            + model.getDisplayName() + "'."); //$NON-NLS-1$
+      }
+      
+      oclLibrary = provider.getOclLibrary();
+    }
+    
+    return oclLibrary;
   }
 }
