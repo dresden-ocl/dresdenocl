@@ -200,10 +200,18 @@ public class LoggingPlugin extends Plugin {
    * 
    * <p>
    * The <code>LoggingPlugin</code> provides a default <em>log4j.properties</em> configuration
-   * file which will be used in this case. This file sets the log level to {@link Level#WARN} and
-   * appends an {@link ErrorLogAppender}. Client plugins can contribute their own log properties
-   * through a <em>log4j.properties</em> file that is either located in their root path or
-   * accessible via the plugin's classloader.
+   * file which will be used in this case. This file sets the log level to {@link Level#WARN WARN}.
+   * It also defines an {@link ErrorLogAppender} named <code>"errorLog"</code>, but does not
+   * assign it to the root logger. This is to prevent the Error Log from being flooded with messages
+   * if clients set the log level for their loggers to {@link Level#DEBUG DEBUG} during development.
+   * </p>
+   * 
+   * <p>
+   * Client plugins can contribute their own log properties through a <em>log4j.properties</em>
+   * file that is either located in their root path or accessible via the plugin's classloader. In
+   * this file, they may also use the Error Log appender defined by the <code>LoggingPlugin</code>.
+   * If a custom <code>log4j.properties</code> file is provided, this method will load it and
+   * configure the default log4j logger hierarchy.
    * </p>
    * 
    * @param plugin the plugin that provides additional log4j properties
