@@ -1,18 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <types:OclLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel" xmlns:types="http://www.omg.org/2006/essentialocl/types">
-  <oclBoolean name="Boolean" superType="//@oclAny" kind="Boolean"/>
-  <oclString name="String" superType="//@oclAny" kind="String"/>
-  <oclInteger name="Integer" superType="//@oclReal" kind="Integer"/>
-  <oclReal name="Real" superType="//@oclAny" kind="Real"/>
+  <oclBoolean name="Boolean" superType="//@oclAny" kind="Boolean">
+    <ownedOperation name="not" type="//@oclBoolean"/>
+    <ownedOperation name="or" type="//@oclBoolean">
+      <ownedParameter name="b" type="//@oclBoolean"/>
+    </ownedOperation>
+    <ownedOperation name="xor" type="//@oclBoolean">
+      <ownedParameter name="b" type="//@oclBoolean"/>
+    </ownedOperation>
+    <ownedOperation name="and" type="//@oclBoolean">
+      <ownedParameter name="b" type="//@oclBoolean"/>
+    </ownedOperation>
+    <ownedOperation name="implies" type="//@oclBoolean">
+      <ownedParameter name="b" type="//@oclBoolean"/>
+    </ownedOperation>
+  </oclBoolean>
+  <oclString name="String" superType="//@oclAny" kind="String">
+    <ownedOperation name="size" type="//@oclInteger"/>
+    <ownedOperation name="concat" type="//@oclString">
+      <ownedParameter name="s" type="//@oclString"/>
+    </ownedOperation>
+    <ownedOperation name="substring" type="//@oclString">
+      <ownedParameter name="lower" type="//@oclInteger"/>
+      <ownedParameter name="upper" type="//@oclInteger"/>
+    </ownedOperation>
+    <ownedOperation name="toInteger" type="//@oclInteger"/>
+    <ownedOperation name="toReal" type="//@oclReal"/>
+  </oclString>
+  <oclInteger name="Integer" superType="//@oclReal" kind="Integer">
+    <ownedOperation name="-" type="//@oclInteger"/>
+    <ownedOperation name="+" type="//@oclInteger">
+      <ownedParameter name="i" type="//@oclInteger"/>
+    </ownedOperation>
+    <ownedOperation name="-" type="//@oclInteger">
+      <ownedParameter name="i" type="//@oclInteger"/>
+    </ownedOperation>
+    <ownedOperation name="*" type="//@oclInteger">
+      <ownedParameter name="i" type="//@oclInteger"/>
+    </ownedOperation>
+    <ownedOperation name="/" type="//@oclInteger">
+      <ownedParameter name="i" type="//@oclInteger"/>
+    </ownedOperation>
+    <ownedOperation name="abs" type="//@oclInteger"/>
+    <ownedOperation name="div" type="//@oclInteger">
+      <ownedParameter name="i" type="//@oclInteger"/>
+    </ownedOperation>
+    <ownedOperation name="mod" type="//@oclInteger">
+      <ownedParameter name="i" type="//@oclInteger"/>
+    </ownedOperation>
+    <ownedOperation name="max" type="//@oclInteger">
+      <ownedParameter name="i" type="//@oclInteger"/>
+    </ownedOperation>
+    <ownedOperation name="min" type="//@oclInteger">
+      <ownedParameter name="i" type="//@oclInteger"/>
+    </ownedOperation>
+  </oclInteger>
+  <oclReal name="Real" superType="//@oclAny" kind="Real">
+    <ownedOperation name="-" type="//@oclReal"/>
+    <ownedOperation name="+" type="//@oclReal">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
+    <ownedOperation name="-" type="//@oclReal">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
+    <ownedOperation name="*" type="//@oclReal">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
+    <ownedOperation name="/" type="//@oclReal">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
+    <ownedOperation name="abs" type="//@oclReal"/>
+    <ownedOperation name="floor" type="//@oclInteger"/>
+    <ownedOperation name="round" type="//@oclInteger"/>
+    <ownedOperation name="max" type="//@oclReal"/>
+    <ownedOperation name="min" type="//@oclReal"/>
+    <ownedOperation name="&lt;" type="//@oclBoolean">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
+    <ownedOperation name=">" type="//@oclBoolean">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
+    <ownedOperation name="&lt;=" type="//@oclBoolean">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
+    <ownedOperation name=">=" type="//@oclBoolean">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
+  </oclReal>
   <oclAny name="OclAny">
     <ownedOperation name="=">
       <ownedParameter name="object2" type="//@oclAny"/>
       <ownedParameter name="result" type="//@oclBoolean" kind="return"/>
     </ownedOperation>
+    <ownedOperation name="&lt;>" type="//@oclBoolean">
+      <ownedParameter name="object2" type="//@oclAny"/>
+    </ownedOperation>
+    <ownedOperation name="oclIsNew" type="//@oclBoolean"/>
+    <ownedOperation name="oclIsUndefined" type="//@oclBoolean"/>
+    <ownedOperation name="oclIsInvalid" type="//@oclBoolean"/>
+    <ownedOperation name="oclAsType">
+      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.5/@ownedTypeParameter.0"/>
+      <ownedTypeParameter name="T"/>
+      <ownedParameter name="typespec" type="//@oclType"/>
+    </ownedOperation>
+    <ownedOperation name="oclIsTypeOf" type="//@oclBoolean">
+      <ownedParameter name="typespec" type="//@oclType"/>
+    </ownedOperation>
+    <ownedOperation name="oclIsKindOf" type="//@oclBoolean">
+      <ownedParameter name="typespec" type="//@oclType"/>
+    </ownedOperation>
+    <ownedOperation name="asSet">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.8/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedTypeParameter name="T"/>
+    </ownedOperation>
+    <ownedOperation name="allInstances" static="true">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.9/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedTypeParameter name="T"/>
+    </ownedOperation>
   </oclAny>
   <oclVoid name="OclVoid"/>
   <oclInvalid name="OclInvalid"/>
-  <oclType name="OclType"/>
+  <oclType name="OclType">
+    <ownedOperation name="=" type="//@oclBoolean">
+      <ownedParameter name="object" type="//@oclType"/>
+    </ownedOperation>
+    <ownedOperation name="&lt;>" type="//@oclBoolean">
+      <ownedParameter name="object" type="//@oclType"/>
+    </ownedOperation>
+  </oclType>
   <oclCollection oclLibrary="/">
     <ownedTypeParameter name="T"/>
     <ownedOperation name="size" type="//@oclInteger"/>
@@ -73,12 +196,22 @@
   </oclCollection>
   <oclSequence oclLibrary="/">
     <ownedTypeParameter name="T"/>
+    <genericSuperType xsi:type="pivot:ComplexGenericType" unboundType="//@oclCollection">
+      <typeArgument>
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
+      </typeArgument>
+    </genericSuperType>
   </oclSequence>
   <oclBag oclLibrary="/">
     <ownedTypeParameter name="T"/>
   </oclBag>
   <oclSet oclLibrary="/">
     <ownedTypeParameter name="T"/>
+    <genericSuperType xsi:type="pivot:ComplexGenericType" unboundType="//@oclCollection">
+      <typeArgument>
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSet/@ownedTypeParameter.0"/>
+      </typeArgument>
+    </genericSuperType>
   </oclSet>
   <oclOrderedSet oclLibrary="/">
     <ownedTypeParameter name="T"/>
