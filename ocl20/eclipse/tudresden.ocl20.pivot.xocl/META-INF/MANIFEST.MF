@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: tudresden.ocl20.pivot.xocl; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: tudresden.ocl20.pivot.xocl,
+ tudresden.ocl20.pivot.xocl.impl,
+ tudresden.ocl20.pivot.xocl.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.apache.commons.lang
+Eclipse-LazyStart: true

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.xocl/src"
+    modelPluginID="tudresden.ocl20.pivot.xocl" templateDirectory="/tudresden.ocl20.pivot.pivotmodel/templates"
+    dynamicTemplates="true" modelName="XOCL" nonNLSMarkers="true" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.rose" complianceLevel="5.0">
+  <foreignModel>F:\Studium\Grosser Beleg\models\xocl\xocl.mdl</foreignModel>
+  <genPackages prefix="XOCL" basePackage="tudresden.ocl20.pivot" disposableProviderFactory="true"
+      multipleEditorPages="false" ecorePackage="xocl.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xocl.ecore#//ConstraintKindXS">
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//ConstraintKindXS/invariant"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//ConstraintKindXS/definition"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//ConstraintKindXS/precondition"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//ConstraintKindXS/postcondition"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//ConstraintKindXS/initialvalue"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//ConstraintKindXS/derivedvalue"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//ConstraintKindXS/body"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xocl.ecore#//CollectionKindXS">
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionKindXS/Set"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionKindXS/OrderedSet"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionKindXS/Bag"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionKindXS/Sequence"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xocl.ecore#//CollectionOperationXS">
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/default"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/equals"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/equalsNot"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/minus"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/append"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/asBag"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/asOrderedSet"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/asSequence"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/asSet"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/at"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/count"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/excludes"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/excludesAll"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/excluding"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/first"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/flatten"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/includes"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/includesAll"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/including"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/indexOf"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/insertAt"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/intersection"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/isEmpty"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/last"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/notEmpty"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/prepend"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/size"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/sum"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/subOrderedSet"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/subSequence"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/symmetricDifference"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//CollectionOperationXS/union"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xocl.ecore#//IteratorExpressionXS">
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/default"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/any"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/collect"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/collectNested"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/exists"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/forAll"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/isUnique"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/one"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/reject"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/select"/>
+      <genEnumLiterals ecoreEnumLiteral="xocl.ecore#//IteratorExpressionXS/sortedBy"/>
+    </genEnums>
+    <genClasses ecoreClass="xocl.ecore#//ConstraintXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//ConstraintXS/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//ConstraintXS/kind"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//ConstraintXS/constrainedElement"/>
+      <genFeatures property="None" children="true" createChild="true" propertySortChoices="true"
+          ecoreFeature="ecore:EReference xocl.ecore#//ConstraintXS/specification"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xocl.ecore#//ConstraintXS/NamespaceXS"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//ExpressionInOclXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//ExpressionInOclXS/body"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xocl.ecore#//ExpressionInOclXS/constraint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//ExpressionInOclXS/bodyExpression"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference xocl.ecore#//ExpressionInOclXS/context"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference xocl.ecore#//ExpressionInOclXS/parameter"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference xocl.ecore#//ExpressionInOclXS/result"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="xocl.ecore#//OclExpressionXS"/>
+    <genClasses ecoreClass="xocl.ecore#//VariableXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//VariableXS/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//VariableXS/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//VariableXS/initExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//BooleanLiteralExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//BooleanLiteralExpXS/booleanSymbol"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="xocl.ecore#//CallExpXS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//CallExpXS/source"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//CollectionItemXS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//CollectionItemXS/item"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//CollectionLiteralExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//CollectionLiteralExpXS/kind"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//CollectionLiteralExpXS/part"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="xocl.ecore#//CollectionLiteralPartXS"/>
+    <genClasses ecoreClass="xocl.ecore#//CollectionOperationCallExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//CollectionOperationCallExpXS/referredCollectionOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//CollectionRangeXS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//CollectionRangeXS/last"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//CollectionRangeXS/first"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//EnumLiteralExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//EnumLiteralExpXS/referredEnumLiteralPathName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="xocl.ecore#//FeatureCallExpXS"/>
+    <genClasses ecoreClass="xocl.ecore#//IfExpXS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//IfExpXS/elseExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//IfExpXS/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//IfExpXS/thenExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//IntegerLiteralExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//IntegerLiteralExpXS/integerSymbol"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//IterateExpXS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//IterateExpXS/result"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//InvalidLiteralExpXS"/>
+    <genClasses ecoreClass="xocl.ecore#//IteratorExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//IteratorExpXS/name"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//LetExpXS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//LetExpXS/in"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//LetExpXS/variable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="xocl.ecore#//LiteralExpXS"/>
+    <genClasses image="false" ecoreClass="xocl.ecore#//LoopExpXS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//LoopExpXS/iterator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//LoopExpXS/body"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//ModelOperationCallExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//ModelOperationCallExpXS/referredOperationName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="xocl.ecore#//NumericLiteralExpXS"/>
+    <genClasses ecoreClass="xocl.ecore#//OperationCallExpXS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//OperationCallExpXS/argument"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="xocl.ecore#//PrimitiveLiteralExpXS"/>
+    <genClasses ecoreClass="xocl.ecore#//PropertyCallExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//PropertyCallExpXS/referredPropertyName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//PropertyCallExpXS/qualifier"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//RealLiteralExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//RealLiteralExpXS/realSymbol"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//StaticOperationCallExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//StaticOperationCallExpXS/referredOperationPathName"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//StaticPropertyCallExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//StaticPropertyCallExpXS/referredPropertyPathName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//StaticPropertyCallExpXS/qualifier"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//StringLiteralExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//StringLiteralExpXS/stringSymbol"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//TupleLiteralExpXS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//TupleLiteralExpXS/part"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//TupleLiteralPartXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//TupleLiteralPartXS/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//TupleLiteralPartXS/typeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//TupleLiteralPartXS/value"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//TypeLiteralExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//TypeLiteralExpXS/referredTypeName"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//UndefinedLiteralExpXS"/>
+    <genClasses ecoreClass="xocl.ecore#//UnlimitedNaturalExpXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//UnlimitedNaturalExpXS/symbol"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//VariableExpXS">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xocl.ecore#//VariableExpXS/referredVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="xocl.ecore#//NamespaceXS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xocl.ecore#//NamespaceXS/pathName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xocl.ecore#//NamespaceXS/ownedRule"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL Parser UI
+Bundle-SymbolicName: tudresden.ocl20.pivot.parser.ui;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.pivot.parser.ui.ParserUIPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.parser,
+ tudresden.ocl20.pivot.modelbus
+Eclipse-LazyStart: true
