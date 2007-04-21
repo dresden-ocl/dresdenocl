@@ -120,6 +120,8 @@
             ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/OperationCallExp/referredOperation"/>
       </genClasses>
       <genClasses image="false" ecoreClass="essentialocl.ecore#//expressions/OclExpression">
+        <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference essentialocl.ecore#//expressions/OclExpression/oclLibrary"/>
         <genOperations ecoreOperation="essentialocl.ecore#//expressions/OclExpression/withAtPre"/>
         <genOperations ecoreOperation="essentialocl.ecore#//expressions/OclExpression/withAsSet"/>
       </genClasses>
