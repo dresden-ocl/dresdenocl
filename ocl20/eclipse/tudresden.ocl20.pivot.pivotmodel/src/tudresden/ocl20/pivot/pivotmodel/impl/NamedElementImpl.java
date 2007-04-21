@@ -139,10 +139,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements NamedEleme
    * @generated NOT
    */
   public String getQualifiedName() {
-    // the null check for getOwner().getName() is a hack to prevent a transient root namespace
-    // (created by the ModelRegistry) from showing up in the qualified name
-    return getOwner() != null && getOwner().getName() != null ? getOwner().getQualifiedName()
-        + "::" + getName() : getName(); //$NON-NLS-1$
+    return getOwner() != null ? getOwner().getQualifiedName() + "::" + getName() : getName(); //$NON-NLS-1$
   }
 
   /**
