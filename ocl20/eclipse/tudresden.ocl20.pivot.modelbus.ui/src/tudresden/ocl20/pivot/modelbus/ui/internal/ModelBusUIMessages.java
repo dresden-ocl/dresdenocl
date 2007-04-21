@@ -21,5 +21,6 @@ public class ModelBusUIMessages extends NLS {
   }
 
   private ModelBusUIMessages() {
+    // no implementation necessary
   }
 }
