@@ -42,7 +42,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.osgi.util.NLS;
 
@@ -145,6 +144,7 @@ public class EcoreModel extends AbstractModel implements IModel {
 
     // create a new package to serve as the root package
     EPackage rootPackage = EcoreFactory.eINSTANCE.createEPackage();
+    rootPackage.setName("root"); //$NON-NLS-1$
 
     // add all sub-packages and subtypes to the new root package
     for (EObject eObject : roots) {
