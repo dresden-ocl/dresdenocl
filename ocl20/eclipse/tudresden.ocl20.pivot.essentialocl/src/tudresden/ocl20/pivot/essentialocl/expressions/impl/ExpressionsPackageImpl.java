@@ -183,13 +183,22 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int OCL_EXPRESSION__GENERIC_TYPE = PivotModelPackageImpl.TYPED_ELEMENT__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int OCL_EXPRESSION__OCL_LIBRARY = PivotModelPackageImpl.TYPED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Ocl Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int OCL_EXPRESSION_FEATURE_COUNT = PivotModelPackageImpl.TYPED_ELEMENT_FEATURE_COUNT + 0;
+  public static final int OCL_EXPRESSION_FEATURE_COUNT = PivotModelPackageImpl.TYPED_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl <em>Variable Exp</em>}' class.
@@ -245,6 +254,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int VARIABLE_EXP__GENERIC_TYPE = OCL_EXPRESSION__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int VARIABLE_EXP__OCL_LIBRARY = OCL_EXPRESSION__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Referred Variable</b></em>' reference.
@@ -402,6 +420,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int LITERAL_EXP__GENERIC_TYPE = OCL_EXPRESSION__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int LITERAL_EXP__OCL_LIBRARY = OCL_EXPRESSION__OCL_LIBRARY;
+
+  /**
    * The number of structural features of the '<em>Literal Exp</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -464,6 +491,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int PRIMITIVE_LITERAL_EXP__GENERIC_TYPE = LITERAL_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_LITERAL_EXP__OCL_LIBRARY = LITERAL_EXP__OCL_LIBRARY;
 
   /**
    * The number of structural features of the '<em>Primitive Literal Exp</em>' class.
@@ -530,6 +566,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int NUMERIC_LITERAL_EXP__GENERIC_TYPE = PRIMITIVE_LITERAL_EXP__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NUMERIC_LITERAL_EXP__OCL_LIBRARY = PRIMITIVE_LITERAL_EXP__OCL_LIBRARY;
+
+  /**
    * The number of structural features of the '<em>Numeric Literal Exp</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -592,6 +637,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int UNLIMITED_NATURAL_EXP__GENERIC_TYPE = NUMERIC_LITERAL_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int UNLIMITED_NATURAL_EXP__OCL_LIBRARY = NUMERIC_LITERAL_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Symbol</b></em>' attribute.
@@ -665,6 +719,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int TYPE_LITERAL_EXP__GENERIC_TYPE = LITERAL_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_LITERAL_EXP__OCL_LIBRARY = LITERAL_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Referred Type</b></em>' reference.
@@ -822,6 +885,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int TUPLE_LITERAL_EXP__GENERIC_TYPE = LITERAL_EXP__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TUPLE_LITERAL_EXP__OCL_LIBRARY = LITERAL_EXP__OCL_LIBRARY;
+
+  /**
    * The feature id for the '<em><b>Part</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -893,6 +965,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int STRING_LITERAL_EXP__GENERIC_TYPE = PRIMITIVE_LITERAL_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int STRING_LITERAL_EXP__OCL_LIBRARY = PRIMITIVE_LITERAL_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>String Symbol</b></em>' attribute.
@@ -968,6 +1049,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int REAL_LITERAL_EXP__GENERIC_TYPE = NUMERIC_LITERAL_EXP__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int REAL_LITERAL_EXP__OCL_LIBRARY = NUMERIC_LITERAL_EXP__OCL_LIBRARY;
+
+  /**
    * The feature id for the '<em><b>Real Symbol</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1039,6 +1129,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int CALL_EXP__GENERIC_TYPE = OCL_EXPRESSION__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int CALL_EXP__OCL_LIBRARY = OCL_EXPRESSION__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -1114,6 +1213,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int FEATURE_CALL_EXP__GENERIC_TYPE = CALL_EXP__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE_CALL_EXP__OCL_LIBRARY = CALL_EXP__OCL_LIBRARY;
+
+  /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1185,6 +1293,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int PROPERTY_CALL_EXP__GENERIC_TYPE = FEATURE_CALL_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROPERTY_CALL_EXP__OCL_LIBRARY = FEATURE_CALL_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -1278,6 +1395,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int OPERATION_CALL_EXP__GENERIC_TYPE = FEATURE_CALL_EXP__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int OPERATION_CALL_EXP__OCL_LIBRARY = FEATURE_CALL_EXP__OCL_LIBRARY;
+
+  /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1369,6 +1495,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int UNDEFINED_LITERAL_EXP__GENERIC_TYPE = LITERAL_EXP__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int UNDEFINED_LITERAL_EXP__OCL_LIBRARY = LITERAL_EXP__OCL_LIBRARY;
+
+  /**
    * The number of structural features of the '<em>Undefined Literal Exp</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1431,6 +1566,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int LOOP_EXP__GENERIC_TYPE = CALL_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int LOOP_EXP__OCL_LIBRARY = CALL_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -1524,6 +1668,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int LET_EXP__GENERIC_TYPE = OCL_EXPRESSION__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int LET_EXP__OCL_LIBRARY = OCL_EXPRESSION__OCL_LIBRARY;
+
+  /**
    * The feature id for the '<em><b>In</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1604,6 +1757,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int ITERATOR_EXP__GENERIC_TYPE = LOOP_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ITERATOR_EXP__OCL_LIBRARY = LOOP_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -1695,6 +1857,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int ITERATE_EXP__GENERIC_TYPE = LOOP_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ITERATE_EXP__OCL_LIBRARY = LOOP_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -1797,6 +1968,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int INVALID_LITERAL_EXP__GENERIC_TYPE = LITERAL_EXP__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int INVALID_LITERAL_EXP__OCL_LIBRARY = LITERAL_EXP__OCL_LIBRARY;
+
+  /**
    * The number of structural features of the '<em>Invalid Literal Exp</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1859,6 +2039,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int INTEGER_LITERAL_EXP__GENERIC_TYPE = NUMERIC_LITERAL_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int INTEGER_LITERAL_EXP__OCL_LIBRARY = NUMERIC_LITERAL_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Integer Symbol</b></em>' attribute.
@@ -1932,6 +2121,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int IF_EXP__GENERIC_TYPE = OCL_EXPRESSION__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int IF_EXP__OCL_LIBRARY = OCL_EXPRESSION__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -2023,6 +2221,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int BOOLEAN_LITERAL_EXP__GENERIC_TYPE = PRIMITIVE_LITERAL_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int BOOLEAN_LITERAL_EXP__OCL_LIBRARY = PRIMITIVE_LITERAL_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Boolean Symbol</b></em>' attribute.
@@ -2235,6 +2442,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int COLLECTION_LITERAL_EXP__GENERIC_TYPE = LITERAL_EXP__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int COLLECTION_LITERAL_EXP__OCL_LIBRARY = LITERAL_EXP__OCL_LIBRARY;
+
+  /**
    * The feature id for the '<em><b>Part</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2397,6 +2613,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int ENUM_LITERAL_EXP__GENERIC_TYPE = LITERAL_EXP__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ENUM_LITERAL_EXP__OCL_LIBRARY = LITERAL_EXP__OCL_LIBRARY;
 
   /**
    * The feature id for the '<em><b>Referred Enum Literal</b></em>' reference.
@@ -3143,6 +3368,19 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#getOclLibrary <em>Ocl Library</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ocl Library</em>'.
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#getOclLibrary()
+   * @see #getOclExpression()
+   * @generated
+   */
+  public EReference getOclExpression_OclLibrary() {
+    return (EReference) oclExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp <em>Numeric Literal Exp</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3722,6 +3960,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
     createEReference(operationCallExpEClass,OPERATION_CALL_EXP__REFERRED_OPERATION);
 
     oclExpressionEClass = createEClass(OCL_EXPRESSION);
+    createEReference(oclExpressionEClass,OCL_EXPRESSION__OCL_LIBRARY);
 
     numericLiteralExpEClass = createEClass(NUMERIC_LITERAL_EXP);
 
@@ -3814,6 +4053,8 @@ public class ExpressionsPackageImpl extends EPackageImpl {
         .getEPackage(PivotModelPackageImpl.eNS_URI);
     DatatypesPackageImpl theDatatypesPackageImpl = (DatatypesPackageImpl) EPackage.Registry.INSTANCE
         .getEPackage(DatatypesPackageImpl.eNS_URI);
+    TypesPackageImpl theTypesPackageImpl = (TypesPackageImpl) EPackage.Registry.INSTANCE
+        .getEPackage(TypesPackageImpl.eNS_URI);
 
     // Create type parameters
 
@@ -3962,6 +4203,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 
     initEClass(oclExpressionEClass,OclExpression.class,
         "OclExpression",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getOclExpression_OclLibrary(),
+        theTypesPackageImpl.getOclLibrary(),
+        null,
+        "oclLibrary",null,0,1,OclExpression.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     op = addEOperation(oclExpressionEClass,this.getOperationCallExp(),"withAtPre",0,1); //$NON-NLS-1$
 
@@ -4395,6 +4641,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EClass OCL_EXPRESSION = eINSTANCE.getOclExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Ocl Library</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EReference OCL_EXPRESSION__OCL_LIBRARY = eINSTANCE
+        .getOclExpression_OclLibrary();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.NumericLiteralExpImpl <em>Numeric Literal Exp</em>}' class.

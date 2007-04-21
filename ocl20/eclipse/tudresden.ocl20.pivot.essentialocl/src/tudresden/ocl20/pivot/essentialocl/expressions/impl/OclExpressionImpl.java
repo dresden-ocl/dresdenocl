@@ -32,25 +32,60 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
-import org.eclipse.emf.ecore.EClass;
+import java.util.Arrays;
 
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-import tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl;
+import tudresden.ocl20.pivot.essentialocl.types.AnyType;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Ocl Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class OclExpressionImpl extends TypedElementImpl implements OclExpression {
 
   /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(OclExpressionImpl.class);
+
+  /**
+   * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}' reference. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @see #getOclLibrary()
+   * @generated
+   * @ordered
+   */
+  protected OclLibrary oclLibrary = null;
+
+  /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected OclExpressionImpl() {
@@ -59,15 +94,47 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.OCL_EXPRESSION;
+  public OclLibrary getOclLibrary() {
+    if (oclLibrary != null && ((EObject) oclLibrary).eIsProxy()) {
+      InternalEObject oldOclLibrary = (InternalEObject) oclLibrary;
+      oclLibrary = (OclLibrary) eResolveProxy(oldOclLibrary);
+      if (oclLibrary != oldOclLibrary) {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this,Notification.RESOLVE,
+              ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY,oldOclLibrary,oclLibrary));
+      }
+    }
+    return oclLibrary;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public OclLibrary basicGetOclLibrary() {
+    return oclLibrary;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public void setOclLibrary(OclLibrary newOclLibrary) {
+    OclLibrary oldOclLibrary = oclLibrary;
+    oclLibrary = newOclLibrary;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this,Notification.SET,
+          ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY,oldOclLibrary,oclLibrary));
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OperationCallExp withAtPre() {
@@ -77,13 +144,232 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
+   * Additional operation defined in the OCL Specification, Section 8.3.9:
+   * 
+   * <p>
+   * The following operation returns an operation call expression for the predefined asSet()
+   * operation with the self expression as its source.
+   * 
+   * <pre>
+   * context OclExpression::withAsSet() : OperationCallExp
+   * post: result.name = ‘asSet’
+   * post: result.argument-&gt;isEmpty()
+   * post: result.source = self
+   * </pre>
+   * 
+   * </p>
+   * 
+   * <p>
+   * Note that this implementation additionally sets the referred operation of the new
+   * <code>OperationCallExp</code> to the corresponding <code>asSet</code> operation, The OCL
+   * specification seems to be incomplete here because it remains open how the referred operation
+   * should be found by an OCL code generator or interpreter. Since <code>asSet</code> is a
+   * generic operation, it is {@link OperationImpl#bindTypeParameter() bound} with the type of this
+   * <code>OclExpression</code>.
+   * </p>
+   * 
+   * @generated NOT
+   * 
    */
   public OperationCallExp withAsSet() {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
+    if (logger.isDebugEnabled()) {
+      logger.debug("withAsSet() - enter"); //$NON-NLS-1$
+    }
+
+    // lookup the asSet operation
+    Operation asSetOperation = getType().lookupOperation("asSet",Arrays.asList(new Type[] {})); //$NON-NLS-1$
+
+    if (asSetOperation == null) {
+      throw new IllegalStateException("Failed to lookup the 'asSet' operation in type '" //$NON-NLS-1$
+          + getType().getName() + "'."); //$NON-NLS-1$
+    }
+
+    // check that the operation defines a single type parameter
+    if (asSetOperation.getOwnedTypeParameter().size() != 1) {
+      throw new IllegalStateException("The 'asSet' operation in type '" + getType().getName() //$NON-NLS-1$
+          + "' does not define the expected type parameter."); //$NON-NLS-1$
+    }
+
+    // bind the type parameter with the type of this operation
+    asSetOperation = asSetOperation.bindTypeParameter(Arrays.asList(asSetOperation
+        .getOwnedTypeParameter().get(0)),Arrays.asList(getType()));
+
+    // create a new operation call expression
+    OperationCallExp withAsSet = ExpressionsFactory.INSTANCE.createOperationCallExp();
+
+    withAsSet.setName("asSet"); //$NON-NLS-1$
+    withAsSet.setSource(this);
+    withAsSet.setReferredOperation(asSetOperation);
+    
+    // set the reference to the OCL Library
+    withAsSet.setOclLibrary(oclLibrary);
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("withAsSet() - exit - return value=" + withAsSet); //$NON-NLS-1$
+    }
+
+    return withAsSet;
+  }
+
+  /**
+   * Helper method to be used in subclasses when determining the {@link #getType() type} of an OCL
+   * expression. The method will make sure that a Pivot Model <code>Type</code> can be used within
+   * OCL expressions.
+   * 
+   * <p>
+   * If the given type is a {@link PrimitiveType} whose kind is not
+   * {@link PrimitiveTypeKind#UNKNOWN UNKNOWN}, it will be transformed into the corresponding
+   * primitive type from the OCL Library. Otherwise, unless the type already is an OCL
+   * {@link CollectionType}, this method will ensure that the given type descends from
+   * {@link OclLibrary#getOclAny() OclAny} to provide the predefined OCL operations.
+   * </p>
+   * 
+   * <p>
+   * This method will throw an {@link IllegalStateException} if the
+   * {@link #getOclLibrary() OclLibrary reference} has not been initialized.
+   * </p>
+   * 
+   * @param type the type that should be "converted" into an OCL-compatible type
+   * 
+   * @return either one of the predefined OCL primitive types or the same type with
+   *         <code>OclAny</code> as one of its supertypes
+   * 
+   * @throws IllegalStateException if {@link #getOclLibrary()} is <code>null</code>
+   */
+  protected Type getOclType(Type type) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("getOclType(type=" + type + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    // check parameter (note that a type of null does NOT imply a conversion to OclVoid because
+    // null and OclVoid are defined on different meta layers)
+    if (type == null) {
+      throw new IllegalArgumentException("Parameter 'type' must not be null"); //$NON-NLS-1$
+    }
+
+    // make sure we have access to the OCL library
+    if (oclLibrary == null) {
+      throw new IllegalStateException("Unable to determine the OCL type for '" + type.getName() //$NON-NLS-1$
+          + "' because the OCL Library reference has not been initialized."); //$NON-NLS-1$
+    }
+
+    // if the given type is a primitive type
+    if (type instanceof PrimitiveType) {
+      type = mapPrimitiveType((PrimitiveType) type);
+    }
+
+    else if (!(type instanceof CollectionType)) {
+      type = ensureDescendanceFromOclAny(type);
+    }
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("getOclType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+
+    return type;
+  }
+
+  // helper method to convert a primitive type into the corresponding OCL type
+  private Type mapPrimitiveType(PrimitiveType type) {
+
+    switch (type.getKind()) {
+      case BOOLEAN:
+        return oclLibrary.getOclBoolean();
+      case INTEGER:
+        return oclLibrary.getOclInteger();
+      case REAL:
+        return oclLibrary.getOclReal();
+      case STRING:
+        return oclLibrary.getOclString();
+      case UNKNOWN:
+        return ensureDescendanceFromOclAny(type);
+      default:
+        logger.warn("Unknown kind of primitive type: " + type); //$NON-NLS-1$
+        return type;
+    }
+
+  }
+
+  // helper method that will add OclAny to the super types of the given type if necessary
+  // Note: we do not walk up the inheritance hierarchy because through multiple inheritance
+  // the type may extend several times from OclAny anyways.
+  private Type ensureDescendanceFromOclAny(Type type) {
+    AnyType oclAny = oclLibrary.getOclAny();
+
+    if (!type.getSuperType().contains(oclAny)) {
+      type.getSuperType().add(oclAny);
+    }
+
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType) {
+    switch (featureID) {
+      case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
+        if (resolve) return getOclLibrary();
+        return basicGetOclLibrary();
+    }
+    return super.eGet(featureID,resolve,coreType);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public void eSet(int featureID, Object newValue) {
+    switch (featureID) {
+      case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
+        setOclLibrary((OclLibrary) newValue);
+        return;
+    }
+    super.eSet(featureID,newValue);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID) {
+    switch (featureID) {
+      case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
+        setOclLibrary((OclLibrary) null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID) {
+    switch (featureID) {
+      case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
+        return oclLibrary != null;
+    }
+    return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.OCL_EXPRESSION;
   }
 
 } // OclExpressionImpl

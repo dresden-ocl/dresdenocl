@@ -47,10 +47,10 @@ import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class IterateExpImpl extends LoopExpImpl implements IterateExp {
@@ -67,7 +67,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected IterateExpImpl() {
@@ -100,7 +99,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Variable getResult() {
@@ -109,7 +107,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetResult(Variable newResult, NotificationChain msgs) {
@@ -126,7 +123,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setResult(Variable newResult) {
@@ -148,7 +144,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -163,7 +158,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -177,7 +171,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -192,7 +185,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -207,7 +199,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -221,7 +212,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
