@@ -120,6 +120,35 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
   }
 
   /**
+   * Overridden to include the element type if it is not null. In this case, the
+   * {@link CollectionType} should have been bound already and the type parameters will be empty.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeNameWithTypeArguments(tudresden.ocl20.pivot.pivotmodel.Type)
+   */
+  @Override
+  protected CharSequence getTypeNameWithTypeArguments(Type type) {
+    CollectionType collectionType = (CollectionType) type;
+
+    // check whether the element type has been bound
+    Type elementType = collectionType.getElementType();
+
+    if (elementType != null) {
+      StringBuilder name;
+
+      // initialize with the type's name
+      name = new StringBuilder(getTypeName(collectionType));
+
+      // append element type
+      name.append(getTypeParameterListOpeningDelimiter()).append(elementType.getName()).append(
+          getTypeParameterListClosingDelimiter());
+
+      return name;
+    }
+
+    return super.getTypeNameWithTypeArguments(collectionType);
+  }
+
+  /**
    * Overridden to return the constant string <code>"Collection"</code>.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)

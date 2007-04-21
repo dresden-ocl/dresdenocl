@@ -49,7 +49,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -133,15 +132,29 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
   }
 
   /**
-   * Overridden to suppress the type arguments.
+   * Overridden to suppress the type arguments and add a OCL-conformant rendering of the elements of
+   * the <code>TupleType</code>.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeNameWithTypeArguments(tudresden.ocl20.pivot.pivotmodel.Type)
    */
   @Override
   protected CharSequence getTypeNameWithTypeArguments(Type type) {
-    StringBuilder name;
-    name = new StringBuilder(getTypeName(type));
-    name.append(getTypeExtension(type));
+    StringBuilder name = new StringBuilder(getTypeName(type));
+
+    // append the properties of the tuple type
+    name.append('(');
+
+    for (Iterator<Property> it = type.getOwnedProperty().iterator(); it.hasNext();) {
+      Property p = it.next();
+      name.append(getLabelProvider(p).getText(p));
+
+      if (it.hasNext()) {
+        name.append(", "); //$NON-NLS-1$
+      }
+    }
+
+    name.append(')');
+
     return name;
   }
 
@@ -155,36 +168,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
   @SuppressWarnings("unused")
   protected CharSequence getTypeName(Type type) {
     return "Tuple"; //$NON-NLS-1$
-  }
-
-  /**
-   * Overridden to include the properties of the {@link TupleType}. In addition to the rules
-   * defined in the OCL specification (and implemented in
-   * {@link TupleTypeImpl#determineTupleTypeName(List)}), we also take generic types into account
-   * here.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeExtension(tudresden.ocl20.pivot.pivotmodel.Type)
-   */
-  @Override
-  protected CharSequence getTypeExtension(Type type) {
-    StringBuilder properties;
-
-    // initialize
-    properties = new StringBuilder().append('(');
-
-    // append all properties using the formatting specified by TypedElementItemProvider
-    for (Iterator<Property> it = type.getOwnedProperty().iterator(); it.hasNext();) {
-      Property p = it.next();
-      properties.append(getLabelProvider(p).getText(p));
-
-      if (it.hasNext()) {
-        properties.append(", "); //$NON-NLS-1$
-      }
-    }
-
-    properties.append(')');
-
-    return properties;
   }
 
   /**
