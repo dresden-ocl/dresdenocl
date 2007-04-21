@@ -38,26 +38,27 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Variable Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl#getReferredVariable <em>Referred Variable</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl#getReferredVariable <em>Referred Variable</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 
   /**
-   * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getReferredVariable()
    * @generated
    * @ordered
@@ -65,8 +66,8 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
   protected Variable referredVariable = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected VariableExpImpl() {
@@ -74,18 +75,35 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of the <code>VariableExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of a VariableExp is the type of the variable to which it refers.
+   * 
+   * <pre>
+   * context VariableExp
+   * inv: type = referredVariable.type
+   * </pre>
+   * 
+   * If the {@link #getReferredVariable() referred variable} of this <code>VariableExp</code> is
+   * <code>null</code>, a {@link WellformednessException} is thrown.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.VARIABLE_EXP;
+  public Type getType() {
+
+    if (referredVariable == null) {
+      throw new WellformednessException("The referred variable of a VariableExp must not be null."); //$NON-NLS-1$
+    }
+
+    return getOclType(referredVariable.getType());
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Variable getReferredVariable() {
@@ -93,8 +111,8 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setReferredVariable(Variable newReferredVariable) {
@@ -107,8 +125,8 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -121,8 +139,8 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -136,8 +154,8 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -151,8 +169,8 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -164,4 +182,14 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
     return super.eIsSet(featureID);
   }
 
-} //VariableExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.VARIABLE_EXP;
+  }
+
+} // VariableExpImpl

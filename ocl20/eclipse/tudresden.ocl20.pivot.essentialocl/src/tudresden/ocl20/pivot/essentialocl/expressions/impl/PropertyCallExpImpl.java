@@ -45,28 +45,29 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Property Call Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Property Call Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl#getReferredProperty <em>Referred Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl#getQualifier <em>Qualifier</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl#getReferredProperty <em>Referred Property</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyCallExp {
 
   /**
-   * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getReferredProperty()
    * @generated
    * @ordered
@@ -74,9 +75,9 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   protected Property referredProperty = null;
 
   /**
-   * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}' containment reference
+   * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getQualifier()
    * @generated
    * @ordered
@@ -84,8 +85,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   protected EList<OclExpression> qualifier = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected PropertyCallExpImpl() {
@@ -93,18 +94,36 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of the <code>PropertyCallExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of the call expression is the type of the referred property
+   * 
+   * <pre>
+   * context PropertyCallExp
+   * inv: type = referredProperty.type
+   * </pre>
+   * 
+   * If the {@link #getReferredProperty() referred property} of this <code>PropertyCallExp</code>
+   * is <code>null</code>, a {@link WellformednessException} is thrown.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP;
+  public Type getType() {
+
+    if (referredProperty == null) {
+      throw new WellformednessException(
+          "The referred property of a PropertyCallExp must not be null."); //$NON-NLS-1$
+    }
+
+    return getOclType(referredProperty.getType());
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Property getReferredProperty() {
@@ -112,8 +131,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setReferredProperty(Property newReferredProperty) {
@@ -126,8 +145,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public List<OclExpression> getQualifier() {
@@ -139,8 +158,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -154,8 +173,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -170,8 +189,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -190,8 +209,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -208,8 +227,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -223,4 +242,14 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
     return super.eIsSet(featureID);
   }
 
-} //PropertyCallExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP;
+  }
+
+} // PropertyCallExpImpl

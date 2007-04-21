@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -46,28 +47,31 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Operation Call Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Operation Call Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getArgument <em>Argument</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getReferredOperation <em>Referred Operation</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getArgument <em>Argument</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getReferredOperation <em>Referred Operation</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class OperationCallExpImpl extends FeatureCallExpImpl implements OperationCallExp {
 
   /**
-   * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference
+   * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getArgument()
    * @generated
    * @ordered
@@ -75,9 +79,9 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   protected EList<OclExpression> argument = null;
 
   /**
-   * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getReferredOperation()
    * @generated
    * @ordered
@@ -85,8 +89,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   protected Operation referredOperation = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected OperationCallExpImpl() {
@@ -94,18 +98,64 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of this <code>OperationCallExp</code>. Unfortunately, the
+   * OCL Specification does not define any wellformedness rules for the type of an
+   * <code>OperationCallExp</code>. As a result, this implementation simply follows the approach
+   * taken by the last release of the Dresden OCL2 Toolkit.
+   * 
+   * <p>
+   * There, the type of an Operation Call Expression is the result type of the referred operation or
+   * a tuple type comprising the result type of the operation and all out and inout parameters.
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP;
+  public Type getType() {
+    Type type;
+
+    if (referredOperation == null) {
+      throw new WellformednessException(
+          "The referred operation of an OperationCallExp must not be null."); //$NON-NLS-1$
+    }
+
+    // if there are any output parameters, the expression type is a tuple type
+    if (referredOperation.getOutputParameter().size() > 0) {
+
+      // check that the OCL library reference is set
+      if (oclLibrary == null) {
+        throw new IllegalStateException("The OclLibrary reference for " + this //$NON-NLS-1$
+            + " has not been initialized."); //$NON-NLS-1$
+      }
+
+      List<Property> tupleTypeProperties = new ArrayList<Property>();
+
+      // add all output parameters
+      for (Parameter parameter : referredOperation.getOutputParameter()) {
+        tupleTypeProperties.add(parameter.asProperty());
+      }
+
+      // add the return parameter if existing
+      if (referredOperation.getReturnParameter() != null) {
+        tupleTypeProperties.add(referredOperation.getReturnParameter().asProperty());
+      }
+
+      type = oclLibrary.makeTupleType(tupleTypeProperties);
+    }
+
+    // otherwise default to the operation's type
+    else {
+      // TODO: bind allInstances and product
+
+      type = referredOperation.getType();
+    }
+
+    return getOclType(type);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public List<OclExpression> getArgument() {
@@ -117,8 +167,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Operation getReferredOperation() {
@@ -126,8 +176,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setReferredOperation(Operation newReferredOperation) {
@@ -140,8 +190,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -155,8 +205,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -171,8 +221,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -191,8 +241,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -209,8 +259,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -224,4 +274,14 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
     return super.eIsSet(featureID);
   }
 
-} //OperationCallExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP;
+  }
+
+} // OperationCallExpImpl
