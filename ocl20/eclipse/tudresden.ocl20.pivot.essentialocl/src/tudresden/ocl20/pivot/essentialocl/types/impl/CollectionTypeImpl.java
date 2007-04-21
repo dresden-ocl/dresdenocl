@@ -206,7 +206,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
     }
 
     // the element type must not have been set before
-    if (getElementType() != null) {
+    if (elementType != null) {
       throw new IllegalStateException(
           "The element type of a colllection type cannot be changed once it has been set."); //$NON-NLS-1$
     }
