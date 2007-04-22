@@ -946,12 +946,6 @@ public class ModelFactory implements IModelFactory {
       type = findType(typeName);
     }
 
-    // else check whether an init expression exists to infer the type (in Variable.getType)
-    else if (initExpression == null) {
-      throw new IllegalArgumentException(
-          "The init expression must not be null if no type name is given."); //$NON-NLS-1$
-    }
-
     Variable variable = ExpressionsFactory.INSTANCE.createVariable();
     variable.setName(name);
 
