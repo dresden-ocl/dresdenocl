@@ -42,12 +42,6 @@ public abstract class AbstractOperation extends OperationImpl implements Operati
    */
   @Override
   public abstract String getName();
-  
-  /**
-   * Subclasses should return the type of the adapted <code>Operation</code>.
-   */
-  @Override
-  public abstract Type getType();
 
   /**
    * Subclasses should return adapters for the owned {@link Parameter}s of the adapted
