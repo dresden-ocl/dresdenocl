@@ -45,35 +45,36 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation;
 
-
 /**
- * An implementation of the Pivot Model {@link Operation} concept for Ecore. 
- *
+ * An implementation of the Pivot Model {@link Operation} concept for Ecore.
+ * 
  * @author Matthias Braeuer
  * @version 1.0 12.04.2007
  */
 public class EcoreOperation extends AbstractOperation implements Operation {
 
-  //  Logger for this class
+  // Logger for this class
   private static final Logger logger = Logger.getLogger(EcoreOperation.class);
 
   // the adapted EOperation
   private EOperation eOperation;
-  
+
   public EcoreOperation(EOperation eOperation) {
     if (logger.isDebugEnabled()) {
       logger.debug("EcoreOperation(eOperation=" + eOperation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
-    
+
     // initialize
     this.eOperation = eOperation;
 
     if (logger.isDebugEnabled()) {
       logger.debug("EcoreOperation() - exit"); //$NON-NLS-1$
     }
- }
-  
-  /* (non-Javadoc)
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getName()
    */
   @Override
@@ -81,21 +82,34 @@ public class EcoreOperation extends AbstractOperation implements Operation {
     return eOperation.getName();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getType()
+   */
+  public Type getType() {
+    return EcoreAdapterFactory.INSTANCE.createType(eOperation.getEType());
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwnedParameter()
    */
   @Override
   public List<Parameter> getOwnedParameter() {
     List<Parameter> ownedParameter = new ArrayList<Parameter>();
-    
+
     for (EParameter parameter : eOperation.getEParameters()) {
       ownedParameter.add(EcoreAdapterFactory.INSTANCE.createParameter(parameter));
     }
-    
+
     return ownedParameter;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwningType()
    */
   @Override
@@ -103,7 +117,9 @@ public class EcoreOperation extends AbstractOperation implements Operation {
     return EcoreAdapterFactory.INSTANCE.createType(eOperation.getEContainingClass());
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isMultiple()
    */
   @Override
@@ -111,7 +127,9 @@ public class EcoreOperation extends AbstractOperation implements Operation {
     return eOperation.isMany();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isOrdered()
    */
   @Override
@@ -119,14 +137,14 @@ public class EcoreOperation extends AbstractOperation implements Operation {
     return eOperation.isOrdered();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique()
    */
   @Override
   public boolean isUnique() {
     return eOperation.isUnique();
   }
-  
-  
 
 }
