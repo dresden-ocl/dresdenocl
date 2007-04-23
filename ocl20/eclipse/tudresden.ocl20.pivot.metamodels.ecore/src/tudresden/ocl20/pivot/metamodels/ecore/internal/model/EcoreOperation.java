@@ -87,6 +87,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getType()
    */
+  @Override
   public Type getType() {
     return EcoreAdapterFactory.INSTANCE.createType(eOperation.getEType());
   }
