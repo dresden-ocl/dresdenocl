@@ -561,7 +561,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
       logger.debug("addProperty(p=" + property + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
-    // use the generated method, not the client-specific list obtained through getOwnedOperation()
+    // use the generated method, not the client-specific list obtained through getOwnedProperty()
     getOwnedPropertyGen().add(property);
 
     if (logger.isDebugEnabled()) {
