@@ -9,7 +9,7 @@
             id="tudresden.ocl20.views.category">
       </category>
       <view
-            name="Models"
+            name="Model Browser"
             icon="icons/models.gif"
             category="tudresden.ocl20.views.category"
             class="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView"
