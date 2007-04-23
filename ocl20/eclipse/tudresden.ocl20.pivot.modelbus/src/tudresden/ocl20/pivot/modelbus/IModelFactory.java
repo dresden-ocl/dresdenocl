@@ -60,6 +60,7 @@ import tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
@@ -111,12 +112,12 @@ public interface IModelFactory {
       Variable context, Variable result, Variable... parameter);
 
   /**
-   * Creates a new {@link Variable}. The name must not be <code>null</code>. If the type is
-   * <code>null</code>, it will be determined from the init expression which must not be
-   * <code>null</code> in this case. Otherwise, the init expression is optional. This method will
-   * not check whether the type of the init expression conforms to the given type. Instead, this has
-   * to be checked by the <code>Variable</code> implementation once the type is accessed for the
-   * first time.
+   * Creates a new {@link Variable}. The name must not be <code>null</code>. Type and init
+   * expression are optional (OCL Specification, Section 9.3). If none is given, however, it is
+   * likely that a {@link WellformednessException} will be thrown at a later time when the type is
+   * requested. If both a type and an init expression are given, this method will not check whether
+   * the type of the init expression conforms to the given type. Instead, this will be checked by
+   * the <code>Variable</code> implementation once the type is accessed for the first time.
    * 
    * @param name the name of the variable
    * @param typePathName the type of the variable
