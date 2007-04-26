@@ -140,9 +140,9 @@ public class TypeItemProvider extends NamedElementItemProvider implements
       EList<Type> superTypes = (EList<Type>) value;
       EList<GenericType> genericSuperTypes = new BasicEList<GenericType>();
 
-      for (Iterator<Type> it = superTypes.iterator(); it.hasNext(); ) {
+      for (Iterator<Type> it = superTypes.iterator(); it.hasNext();) {
         Type type = it.next();
-        
+
         // check if the type has any type parameters
         if (!type.getOwnedTypeParameter().isEmpty()) {
 
@@ -263,6 +263,28 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
       for (Iterator<Type> it = type.getSuperType().iterator(); it.hasNext();) {
         label.append(it.next().getName());
+
+        if (it.hasNext()) {
+          label.append(", "); //$NON-NLS-1$
+        }
+      }
+    }
+
+    // append generic super types if any
+    if (!type.getGenericSuperType().isEmpty()) {
+
+      // no non-generic super types
+      if (type.getSuperType().isEmpty()) {
+        label.append(" -> "); //$NON-NLS-1$
+      }
+
+      else {
+        label.append(", "); //$NON-NLS-1$
+      }
+
+      for (Iterator<GenericType> it = type.getGenericSuperType().iterator(); it.hasNext();) {
+        GenericType genericType = it.next();
+        label.append(getLabelProvider(genericType).getText(genericType));
 
         if (it.hasNext()) {
           label.append(", "); //$NON-NLS-1$
