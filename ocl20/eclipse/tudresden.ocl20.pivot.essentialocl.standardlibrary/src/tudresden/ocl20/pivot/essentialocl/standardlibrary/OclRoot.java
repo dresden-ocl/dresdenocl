@@ -60,12 +60,12 @@ public interface OclRoot extends OclAdapter {
    * Returns the qualified property value with the given name. This is meant to support hashtable
    * properties or the access to multi-valued properties via an index.
    * 
-   * @param propertyName
-   * @param qualified
+   * @param propertyName the name of the property
+   * @param qualified an array of qualifying objects
    * 
-   * @return
+   * @return the value of the corresponding qualified property as an <code>OclRoot</code>
    */
-  OclRoot getPropertyValue(String propertyName, OclRoot qualifier);
+  OclRoot getPropertyValue(String propertyName, OclRoot... qualifier);
 
   /**
    * @param propertyName
@@ -96,6 +96,6 @@ public interface OclRoot extends OclAdapter {
    * @param parameters
    * @return
    */
-  OclRoot invokeOperation(String operationName, OclRoot[] parameters);
+  OclRoot invokeOperation(String operationName, OclRoot... parameters);
 
 }
