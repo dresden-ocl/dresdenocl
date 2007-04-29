@@ -544,6 +544,10 @@ public class ModelFactory implements IModelFactory {
           + ", referredOperationName=" + referredOperationName + ","); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    // create the expression
+    OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE.createOperationCallExp();
+    operationCallExp.setSource(source);
+
     // collect the parameter types
     List<Type> paramTypes = new ArrayList<Type>();
 
@@ -551,25 +555,14 @@ public class ModelFactory implements IModelFactory {
       for (int i = 0; i < argument.length; i++) {
         paramTypes.add(argument[i].getType());
       }
-    }
-
-    // lookup the operation
-    Operation operation = source.getType().lookupOperation(referredOperationName,paramTypes);
-
-    if (operation == null) {
-      throw new IllegalArgumentException("Unable to find operation '" + referredOperationName //$NON-NLS-1$
-          + "' with argument types " + paramTypes + " in type '" //$NON-NLS-1$ //$NON-NLS-2$
-          + source.getType().getQualifiedName() + "'."); //$NON-NLS-1$
-    }
-
-    OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE.createOperationCallExp();
-    operationCallExp.setSource(source);
-    operationCallExp.setReferredOperation(operation);
-
-    if (argument != null) {
+      
       operationCallExp.getArgument().addAll(Arrays.asList(argument));
     }
-    
+
+    // lookup the operation (might not be found if the source is invalid or undefined)
+    operationCallExp.setReferredOperation(source.getType().lookupOperation(referredOperationName,
+        paramTypes));
+
     // a property call expression needs access to the OCL library for determining its type
     operationCallExp.setOclLibrary(getOclLibrary());
 
@@ -625,7 +618,7 @@ public class ModelFactory implements IModelFactory {
     // create the expression
     OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE.createOperationCallExp();
     operationCallExp.setReferredOperation(operation);
-    
+
     if (argument != null) {
       operationCallExp.getArgument().addAll(Arrays.asList(argument));
     }
@@ -658,22 +651,16 @@ public class ModelFactory implements IModelFactory {
           + ", referredPropertyName=" + referredPropertyName + "."); //$NON-NLS-1$//$NON-NLS-2$
     }
 
-    // lookup the property
-    Property property = source.getType().lookupProperty(referredPropertyName);
-
-    if (property == null) {
-      throw new IllegalArgumentException("Unable to find property '" + referredPropertyName //$NON-NLS-1$
-          + "' in type '" + source.getType().getQualifiedName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
+    // create the expression
     PropertyCallExp propertyCallExp = ExpressionsFactory.INSTANCE.createPropertyCallExp();
 
     propertyCallExp.setSource(source);
-    propertyCallExp.setReferredProperty(property);
+    propertyCallExp.setReferredProperty(source.getType().lookupProperty(referredPropertyName));
 
     // a property call expression needs access to the OCL library for determining its type
     propertyCallExp.setOclLibrary(getOclLibrary());
 
+    // set the qualifiers if existing
     if (qualifier != null) {
       propertyCallExp.getQualifier().addAll(Arrays.asList(qualifier));
     }
@@ -720,7 +707,7 @@ public class ModelFactory implements IModelFactory {
     // create the expression
     PropertyCallExp propertyCallExp = ExpressionsFactory.INSTANCE.createPropertyCallExp();
     propertyCallExp.setReferredProperty(property);
-    
+
     // a property call expression needs access to the OCL library for determining its type
     propertyCallExp.setOclLibrary(getOclLibrary());
 
@@ -1004,7 +991,7 @@ public class ModelFactory implements IModelFactory {
 
     VariableExp variableExp = ExpressionsFactory.INSTANCE.createVariableExp();
     variableExp.setReferredVariable(referredVariable);
-    
+
     // a variable expression needs access to the OCL library for determining its type
     variableExp.setOclLibrary(getOclLibrary());
 
@@ -1048,7 +1035,7 @@ public class ModelFactory implements IModelFactory {
    * Helper method to lazily get the OCL Library Provider
    */
   protected OclLibrary getOclLibrary() {
-    
+
     if (oclLibrary == null) {
       IOclLibraryProvider provider = model.getOclLibraryProvider();
 
@@ -1056,10 +1043,10 @@ public class ModelFactory implements IModelFactory {
         throw new IllegalStateException("Failed to retrieve an OCL Library Provider from model '" //$NON-NLS-1$
             + model.getDisplayName() + "'."); //$NON-NLS-1$
       }
-      
+
       oclLibrary = provider.getOclLibrary();
     }
-    
+
     return oclLibrary;
   }
 }
