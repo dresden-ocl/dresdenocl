@@ -113,6 +113,11 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   @Override
   public Type getType() {
 
+    // a property call on undefined or invalid returns invalid
+    if (isUndefinedOrInvalid(getSource().getType())) {
+      return getOclLibrary().getOclInvalid();
+    }
+    
     if (referredProperty == null) {
       throw new WellformednessException(
           "The referred property of a PropertyCallExp must not be null."); //$NON-NLS-1$
