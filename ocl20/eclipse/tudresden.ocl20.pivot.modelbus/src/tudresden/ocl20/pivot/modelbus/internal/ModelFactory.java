@@ -544,10 +544,6 @@ public class ModelFactory implements IModelFactory {
           + ", referredOperationName=" + referredOperationName + ","); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
-    // create the expression
-    OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE.createOperationCallExp();
-    operationCallExp.setSource(source);
-
     // collect the parameter types
     List<Type> paramTypes = new ArrayList<Type>();
 
@@ -555,13 +551,27 @@ public class ModelFactory implements IModelFactory {
       for (int i = 0; i < argument.length; i++) {
         paramTypes.add(argument[i].getType());
       }
-      
-      operationCallExp.getArgument().addAll(Arrays.asList(argument));
     }
 
-    // lookup the operation (might not be found if the source is invalid or undefined)
-    operationCallExp.setReferredOperation(source.getType().lookupOperation(referredOperationName,
-        paramTypes));
+    // lookup the operation
+    Type sourceType = source.getType();
+    Operation operation = sourceType.lookupOperation(referredOperationName,paramTypes);
+
+    // invalid and undefined conform to all types, so we ignore that we haven't found an operation
+    if (operation == null && sourceType != oclLibrary.getOclVoid()
+        && sourceType != oclLibrary.getOclInvalid()) {
+      throw new IllegalArgumentException("Unable to find operation '" + referredOperationName //$NON-NLS-1$
+          + "' with argument types " + paramTypes + " in type '" //$NON-NLS-1$ //$NON-NLS-2$
+          + source.getType().getQualifiedName() + "'."); //$NON-NLS-1$
+    }
+
+    OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE.createOperationCallExp();
+    operationCallExp.setSource(source);
+    operationCallExp.setReferredOperation(operation);
+
+    if (argument != null) {
+      operationCallExp.getArgument().addAll(Arrays.asList(argument));
+    }
 
     // a property call expression needs access to the OCL library for determining its type
     operationCallExp.setOclLibrary(getOclLibrary());
@@ -651,11 +661,21 @@ public class ModelFactory implements IModelFactory {
           + ", referredPropertyName=" + referredPropertyName + "."); //$NON-NLS-1$//$NON-NLS-2$
     }
 
-    // create the expression
+    // lookup the property
+    Type sourceType = source.getType();
+    Property property = sourceType.lookupProperty(referredPropertyName);
+
+    // invalid and undefined conform to all types, so we ignore that we haven't found a property
+    if (property == null && sourceType != oclLibrary.getOclVoid()
+        && sourceType != oclLibrary.getOclInvalid()) {
+      throw new IllegalArgumentException("Unable to find property '" + referredPropertyName //$NON-NLS-1$
+          + "' in type '" + source.getType().getQualifiedName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
     PropertyCallExp propertyCallExp = ExpressionsFactory.INSTANCE.createPropertyCallExp();
 
     propertyCallExp.setSource(source);
-    propertyCallExp.setReferredProperty(source.getType().lookupProperty(referredPropertyName));
+    propertyCallExp.setReferredProperty(property);
 
     // a property call expression needs access to the OCL library for determining its type
     propertyCallExp.setOclLibrary(getOclLibrary());
