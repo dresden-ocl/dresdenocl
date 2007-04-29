@@ -115,6 +115,13 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
     Type type;
 
     if (referredOperation == null) {
+
+      // an operation call on undefined or invalid results in invalid
+      if (isUndefinedOrInvalid(getSource().getType())) {
+        return getOclLibrary().getOclInvalid();
+      }
+      
+      // error: the source is not invalid or undefined, but no referred operation is set  
       throw new WellformednessException(
           "The referred operation of an OperationCallExp must not be null."); //$NON-NLS-1$
     }
