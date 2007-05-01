@@ -36,13 +36,26 @@
   A detailed HOWTO can be found under $BASE/resources/cwm/howto
   Example models can be found under $BASE/resources/cwm/UmlModels
   
+  
+  Project configuration
+  ---------------------
+  
+  If you are using Eclipse, follow these instructions to configure the project:
+	1. checkout "ocl20" and all subfolders
+	2. add all .jar-files in "lib/external", "lib/external/lib", "lib/external/mdr"
+		 to the project
+	3. "build.xml"->Run As->2 Ant Build...: check "jar" and run the script
+	4. refresh the project
+	5. add "src" and "generated_src/generatedJMI" as source files
+	
+  
   Conventions
   -----------
 
   In this document, the variable $BASE refers to the directory where you
   unpacked the distribution jar file into. E. g. if you unpacked the toolkit
   into /home/adam/ocl20, then $BASE would have the value "/home/adam/ocl20".
-
+	
 
   Build targets
   -------------
