@@ -24,13 +24,22 @@
             propertySortChoices="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/CollectionType/elementType"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference essentialocl.ecore#//types/CollectionType/oclLibrary"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute essentialocl.ecore#//types/CollectionType/kind"/>
       </genClasses>
-      <genClasses ecoreClass="essentialocl.ecore#//types/InvalidType"/>
+      <genClasses ecoreClass="essentialocl.ecore#//types/InvalidType">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference essentialocl.ecore#//types/InvalidType/oclLibrary"/>
+      </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//types/OrderedSetType"/>
       <genClasses ecoreClass="essentialocl.ecore#//types/SequenceType"/>
       <genClasses ecoreClass="essentialocl.ecore#//types/SetType"/>
-      <genClasses ecoreClass="essentialocl.ecore#//types/VoidType"/>
-      <genClasses ecoreClass="essentialocl.ecore#//types/TypeType"/>
+      <genClasses ecoreClass="essentialocl.ecore#//types/VoidType">
+        <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference essentialocl.ecore#//types/VoidType/oclLibrary"/>
+      </genClasses>
+      <genClasses ecoreClass="essentialocl.ecore#//types/TypeType">
+        <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference essentialocl.ecore#//types/TypeType/representedType"/>
+      </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//types/OclLibrary">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclBoolean"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference essentialocl.ecore#//types/OclLibrary/oclString"/>
@@ -72,10 +81,11 @@
         disposableProviderFactory="true" generateExampleClass="false" multipleEditorPages="false"
         generateModelWizard="false" ecorePackage="essentialocl.ecore#//expressions">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="essentialocl.ecore#//expressions/CollectionKind">
+        <genEnumLiterals ecoreEnumLiteral="essentialocl.ecore#//expressions/CollectionKind/Collection"/>
+        <genEnumLiterals ecoreEnumLiteral="essentialocl.ecore#//expressions/CollectionKind/Sequence"/>
+        <genEnumLiterals ecoreEnumLiteral="essentialocl.ecore#//expressions/CollectionKind/Bag"/>
         <genEnumLiterals ecoreEnumLiteral="essentialocl.ecore#//expressions/CollectionKind/Set"/>
         <genEnumLiterals ecoreEnumLiteral="essentialocl.ecore#//expressions/CollectionKind/OrderedSet"/>
-        <genEnumLiterals ecoreEnumLiteral="essentialocl.ecore#//expressions/CollectionKind/Bag"/>
-        <genEnumLiterals ecoreEnumLiteral="essentialocl.ecore#//expressions/CollectionKind/Sequence"/>
       </genEnums>
       <genClasses ecoreClass="essentialocl.ecore#//expressions/VariableExp">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
