@@ -101,13 +101,27 @@
     <ownedOperation name="oclAsType">
       <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.5/@ownedTypeParameter.0"/>
       <ownedTypeParameter name="T"/>
-      <ownedParameter name="typespec" type="//@oclType"/>
+      <ownedParameter name="typespec">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.5/@ownedTypeParameter.0"/>
+          </typeArgument>
+        </genericType>
+      </ownedParameter>
     </ownedOperation>
     <ownedOperation name="oclIsTypeOf" type="//@oclBoolean">
-      <ownedParameter name="typespec" type="//@oclType"/>
+      <ownedParameter name="typespec">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
+          <typeArgument/>
+        </genericType>
+      </ownedParameter>
     </ownedOperation>
     <ownedOperation name="oclIsKindOf" type="//@oclBoolean">
-      <ownedParameter name="typespec" type="//@oclType"/>
+      <ownedParameter name="typespec">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
+          <typeArgument/>
+        </genericType>
+      </ownedParameter>
     </ownedOperation>
     <ownedOperation name="asSet">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
@@ -126,9 +140,15 @@
       <ownedTypeParameter name="T"/>
     </ownedOperation>
   </oclAny>
-  <oclVoid name="OclVoid"/>
-  <oclInvalid name="OclInvalid"/>
+  <oclVoid name="OclVoid">
+    <ownedOperation name="oclIsUndefined" type="//@oclBoolean"/>
+  </oclVoid>
+  <oclInvalid name="OclInvalid">
+    <ownedOperation name="oclIsUndefined" type="//@oclBoolean"/>
+    <ownedOperation name="oclIsInvalid" type="//@oclBoolean"/>
+  </oclInvalid>
   <oclType name="OclType">
+    <ownedTypeParameter name="T"/>
     <ownedOperation name="=" type="//@oclBoolean">
       <ownedParameter name="object" type="//@oclType"/>
     </ownedOperation>
@@ -194,7 +214,7 @@
       </ownedParameter>
     </ownedOperation>
   </oclCollection>
-  <oclSequence oclLibrary="/">
+  <oclSequence oclLibrary="/" kind="Sequence">
     <ownedTypeParameter name="T"/>
     <ownedOperation name="count" type="//@oclInteger">
       <ownedParameter name="object">
@@ -341,7 +361,7 @@
       </typeArgument>
     </genericSuperType>
   </oclSequence>
-  <oclBag oclLibrary="/">
+  <oclBag oclLibrary="/" kind="Bag">
     <ownedTypeParameter name="T"/>
     <ownedOperation name="=" type="//@oclBoolean">
       <ownedParameter name="bag">
@@ -475,7 +495,7 @@
       </typeArgument>
     </genericSuperType>
   </oclBag>
-  <oclSet oclLibrary="/">
+  <oclSet oclLibrary="/" kind="Set">
     <ownedTypeParameter name="T"/>
     <ownedOperation name="union">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
@@ -637,7 +657,7 @@
       </typeArgument>
     </genericSuperType>
   </oclSet>
-  <oclOrderedSet oclLibrary="/">
+  <oclOrderedSet oclLibrary="/" kind="OrderedSet">
     <ownedTypeParameter name="T"/>
     <ownedOperation name="append">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
