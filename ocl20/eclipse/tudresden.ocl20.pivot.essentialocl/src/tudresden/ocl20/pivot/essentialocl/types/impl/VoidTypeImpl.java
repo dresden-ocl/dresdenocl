@@ -32,19 +32,17 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.apache.log4j.Logger;
-
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
