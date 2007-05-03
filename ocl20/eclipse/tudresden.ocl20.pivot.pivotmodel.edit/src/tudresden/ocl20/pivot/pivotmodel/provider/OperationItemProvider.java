@@ -317,7 +317,7 @@ public class OperationItemProvider extends FeatureItemProvider implements
 
     // append the name of the operation
     name.append(operation.getName());
-    
+
     // append parameters
     name.append('(');
 
@@ -344,7 +344,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
    * <p>
    * The EMF implementation is altered here to send content refresh and label refresh notifications
    * if the owned parameters or the (generic) type of the operation changes (an update to a
-   * contained return parameter might be necessary).
+   * contained return parameter might be necessary). In addition, changes to the owned type
+   * parameters should trigger a label update.
    * </p>
    * 
    * @generated NOT
@@ -357,6 +358,7 @@ public class OperationItemProvider extends FeatureItemProvider implements
       case PivotModelPackageImpl.OPERATION__TYPE:
       case PivotModelPackageImpl.OPERATION__GENERIC_TYPE:
       case PivotModelPackageImpl.OPERATION__OWNED_PARAMETER:
+      case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
         fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,true));
         return;
     }

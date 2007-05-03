@@ -1160,22 +1160,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int TYPE_TYPE__GENERIC_SUPER_TYPE = PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE;
 
   /**
-   * The feature id for the '<em><b>Represented Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_TYPE__REPRESENTED_TYPE = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
-
-  /**
    * The number of structural features of the '<em>Type Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TYPE_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 1;
+  public static final int TYPE_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.
@@ -1769,19 +1760,6 @@ public class TypesPackageImpl extends EPackageImpl {
   }
 
   /**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Represented Type</em>'.
-   * @see tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType()
-   * @see #getTypeType()
-   * @generated
-   */
-  public EReference getTypeType_RepresentedType() {
-    return (EReference) typeTypeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary <em>Ocl Library</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2040,7 +2018,6 @@ public class TypesPackageImpl extends EPackageImpl {
     createEReference(voidTypeEClass,VOID_TYPE__OCL_LIBRARY);
 
     typeTypeEClass = createEClass(TYPE_TYPE);
-    createEReference(typeTypeEClass,TYPE_TYPE__REPRESENTED_TYPE);
 
     oclLibraryEClass = createEClass(OCL_LIBRARY);
     createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_BOOLEAN);
@@ -2164,11 +2141,6 @@ public class TypesPackageImpl extends EPackageImpl {
 
     initEClass(typeTypeEClass,TypeType.class,
         "TypeType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getTypeType_RepresentedType(),
-        thePivotModelPackageImpl.getType(),
-        null,
-        "representedType",null,0,1,TypeType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(oclLibraryEClass,OclLibrary.class,
         "OclLibrary",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -2425,15 +2397,6 @@ public class TypesPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EClass TYPE_TYPE = eINSTANCE.getTypeType();
-
-    /**
-     * The meta object literal for the '<em><b>Represented Type</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EReference TYPE_TYPE__REPRESENTED_TYPE = eINSTANCE
-        .getTypeType_RepresentedType();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.

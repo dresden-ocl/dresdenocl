@@ -68,7 +68,6 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 /**
  * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Type} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class TypeItemProvider extends NamedElementItemProvider implements
@@ -76,9 +75,9 @@ public class TypeItemProvider extends NamedElementItemProvider implements
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public TypeItemProvider(AdapterFactory adapterFactory) {
@@ -86,9 +85,9 @@ public class TypeItemProvider extends NamedElementItemProvider implements
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -102,15 +101,18 @@ public class TypeItemProvider extends NamedElementItemProvider implements
   }
 
   /**
-   * This adds a property descriptor for the Super Type feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Super Type feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addSuperTypePropertyDescriptor(Object object) {
-    itemPropertyDescriptors.add(new SuperTypePropertyDescriptor(
-        getString("_UI_Type_superType_feature"),getString("_UI_PropertyDescriptor_description", //$NON-NLS-1$//$NON-NLS-2$
-            "_UI_Type_superType_feature","_UI_Type_type"))); //$NON-NLS-1$//$NON-NLS-2$
+    itemPropertyDescriptors
+        .add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory)
+            .getRootAdapterFactory(),getResourceLocator(),getString("_UI_Type_superType_feature"), //$NON-NLS-1$
+            getString(
+                "_UI_PropertyDescriptor_description","_UI_Type_superType_feature","_UI_Type_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            PivotModelPackageImpl.Literals.TYPE__SUPER_TYPE,true,true,true,null,null,null));
   }
 
   /**
@@ -215,7 +217,6 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -227,8 +228,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
   }
 
   /**
-   * This returns Type.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This returns Type.gif.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
@@ -401,9 +402,9 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
   /**
    * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object. <!-- begin-user-doc -->
+   * describing all of the children that can be created under this object.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -425,9 +426,9 @@ public class TypeItemProvider extends NamedElementItemProvider implements
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override

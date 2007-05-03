@@ -53,26 +53,6 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>Real</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #REAL_VALUE
-   * @generated
-   * @ordered
-   */
-  REAL(2, "Real", "Real"), //$NON-NLS-1$ //$NON-NLS-2$
-
-  /**
-   * The '<em><b>Boolean</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #BOOLEAN_VALUE
-   * @generated
-   * @ordered
-   */
-  BOOLEAN(3, "Boolean", "Boolean"), //$NON-NLS-1$ //$NON-NLS-2$
-
-  /**
    * The '<em><b>String</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -96,35 +76,27 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
    * @generated
    * @ordered
    */
-  INTEGER(1, "Integer", "Integer"); //$NON-NLS-1$ //$NON-NLS-2$
+  INTEGER(1, "Integer", "Integer"), //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>Real</b></em>' literal value.
+   * The '<em><b>Real</b></em>' literal object.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Real</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
-   * @see #REAL
+   * @see #REAL_VALUE
    * @generated
    * @ordered
    */
-  public static final int REAL_VALUE = 2;
+  REAL(2, "Real", "Real"), //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>Boolean</b></em>' literal value.
+   * The '<em><b>Boolean</b></em>' literal object.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Boolean</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
-   * @see #BOOLEAN
+   * @see #BOOLEAN_VALUE
    * @generated
    * @ordered
    */
-  public static final int BOOLEAN_VALUE = 3;
+  BOOLEAN(3, "Boolean", "Boolean"); //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
    * The '<em><b>String</b></em>' literal value.
@@ -167,6 +139,34 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
    * @ordered
    */
   public static final int INTEGER_VALUE = 1;
+
+  /**
+   * The '<em><b>Real</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Real</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #REAL
+   * @generated
+   * @ordered
+   */
+  public static final int REAL_VALUE = 2;
+
+  /**
+   * The '<em><b>Boolean</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Boolean</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #BOOLEAN
+   * @generated
+   * @ordered
+   */
+  public static final int BOOLEAN_VALUE = 3;
 
   /**
    * An array of all the '<em><b>Primitive Type Kind</b></em>' enumerators.

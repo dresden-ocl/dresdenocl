@@ -55,10 +55,9 @@ import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType} object. <!-- begin-user-doc --> <!--
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType} object.
+ * <!-- begin-user-doc --> <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider implements
@@ -66,9 +65,9 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public ComplexGenericTypeItemProvider(AdapterFactory adapterFactory) {
@@ -76,9 +75,9 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -92,9 +91,9 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
   }
 
   /**
-   * This adds a property descriptor for the Unbound Type feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Unbound Type feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addUnboundTypePropertyDescriptor(Object object) {
@@ -129,7 +128,6 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -199,7 +197,6 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -210,9 +207,9 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
 
   /**
    * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object. <!-- begin-user-doc -->
+   * describing all of the children that can be created under this object.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -222,9 +219,9 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override

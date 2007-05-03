@@ -227,7 +227,7 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
         return;
       }
 
-      // any other change to the parameter's name, type or generic type needs to be propagated
+        // any other change to the parameter's name, type or generic type needs to be propagated
       case PivotModelPackageImpl.PARAMETER__NAME:
       case PivotModelPackageImpl.PARAMETER__TYPE:
       case PivotModelPackageImpl.PARAMETER__GENERIC_TYPE:

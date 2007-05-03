@@ -56,12 +56,12 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getElementType <em>Element Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getKind <em>Kind</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getElementType <em>Element Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CollectionTypeImpl extends TypeImpl implements CollectionType {
@@ -92,9 +92,9 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   protected OclLibrary oclLibrary = null;
 
   /**
-   * The default value of the '{@link #getKind() <em>Kind</em>}' attribute. <!-- begin-user-doc
+   * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
+   * <!-- begin-user-doc
    * --> <!-- end-user-doc -->
-   * 
    * @see #getKind()
    * @generated
    * @ordered
@@ -102,9 +102,9 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   protected static final CollectionKind KIND_EDEFAULT = CollectionKind.COLLECTION;
 
   /**
-   * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!-- begin-user-doc -->
+   * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @see #getKind()
    * @generated
    * @ordered
@@ -219,7 +219,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Type getElementType() {
@@ -256,7 +255,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   /**
    * <!-- begin-user-doc -->The code for {@link #setElementType(Type)} is forwarded to this method.
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setElementTypeGen(Type newElementType) {
@@ -269,7 +267,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public OclLibrary getOclLibrary() {
@@ -278,7 +275,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclLibrary(OclLibrary newOclLibrary) {
@@ -291,7 +287,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public CollectionKind getKind() {
@@ -300,7 +295,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setKind(CollectionKind newKind) {
@@ -537,7 +531,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
     // set kind
     clone.setKind(getKind());
-    
+
     // set reference to OCL library
     clone.setOclLibrary(getOclLibrary());
 
@@ -557,7 +551,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -575,7 +568,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -596,7 +588,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -640,7 +631,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -656,7 +646,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   @Override
   public String toString() {
     return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
-        .append("elementType",elementType).append("kind",kind).toString();  //$NON-NLS-1$//$NON-NLS-2$
+        .append("elementType",elementType).append("kind",kind).toString(); //$NON-NLS-1$//$NON-NLS-2$
   }
 
 } // CollectionTypeImpl

@@ -48,12 +48,12 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import tudresden.ocl20.pivot.pivotmodel.GenericType;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.GenericType}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.GenericType} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class GenericTypeItemProvider extends NamedElementItemProvider implements
@@ -61,9 +61,9 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public GenericTypeItemProvider(AdapterFactory adapterFactory) {
@@ -71,9 +71,9 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -97,13 +97,13 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
    */
   @Override
   public Object getImage(Object object) {
-    
-    EReference eContainmentFeature = ((EObject)object).eContainmentFeature();
-    
+
+    EReference eContainmentFeature = ((EObject) object).eContainmentFeature();
+
     if (eContainmentFeature == PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE) {
       return overlayImage(object,getResourceLocator().getImage("full/obj16/GenericSuperType")); //$NON-NLS-1$
     }
-    
+
     return overlayImage(object,getResourceLocator().getImage("full/obj16/GenericType")); //$NON-NLS-1$
   }
 
@@ -136,9 +136,9 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 
   /**
    * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object. <!-- begin-user-doc -->
+   * describing all of the children that can be created under this object.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -148,9 +148,9 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override

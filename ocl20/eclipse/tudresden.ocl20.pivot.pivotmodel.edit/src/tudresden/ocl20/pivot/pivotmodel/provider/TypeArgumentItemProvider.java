@@ -54,9 +54,8 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class TypeArgumentItemProvider extends TypedElementItemProvider implements
@@ -64,9 +63,9 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider implement
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public TypeArgumentItemProvider(AdapterFactory adapterFactory) {
@@ -74,9 +73,9 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider implement
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -89,8 +88,8 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider implement
   }
 
   /**
-   * This returns TypeArgument.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This returns TypeArgument.gif.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
@@ -151,9 +150,9 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider implement
 
   /**
    * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object. <!-- begin-user-doc -->
+   * describing all of the children that can be created under this object.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -163,9 +162,9 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider implement
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
