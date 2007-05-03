@@ -32,19 +32,17 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
@@ -57,7 +55,6 @@ import tudresden.ocl20.pivot.essentialocl.types.TupleType;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
@@ -156,13 +153,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int COLLECTION_TYPE__OWNED_TYPE_PARAMETER = PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int COLLECTION_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+  public static final int COLLECTION_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -183,13 +180,22 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int COLLECTION_TYPE__OWNED_PROPERTY = PivotModelPackageImpl.TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int COLLECTION_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
+  public static final int COLLECTION_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int COLLECTION_TYPE__GENERIC_SUPER_TYPE = PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE;
 
   /**
    * The feature id for the '<em><b>Element Type</b></em>' reference.
@@ -210,13 +216,22 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int COLLECTION_TYPE__OCL_LIBRARY = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Kind</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int COLLECTION_TYPE__KIND = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>Collection Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int COLLECTION_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 2;
+  public static final int COLLECTION_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.BagTypeImpl <em>Bag Type</em>}' class.
@@ -265,13 +280,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int BAG_TYPE__OWNED_TYPE_PARAMETER = COLLECTION_TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int BAG_TYPE__SUPER_TYPE = COLLECTION_TYPE__SUPER_TYPE;
+  public static final int BAG_TYPE__NAMESPACE = COLLECTION_TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -292,13 +307,22 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int BAG_TYPE__OWNED_PROPERTY = COLLECTION_TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int BAG_TYPE__NAMESPACE = COLLECTION_TYPE__NAMESPACE;
+  public static final int BAG_TYPE__SUPER_TYPE = COLLECTION_TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int BAG_TYPE__GENERIC_SUPER_TYPE = COLLECTION_TYPE__GENERIC_SUPER_TYPE;
 
   /**
    * The feature id for the '<em><b>Element Type</b></em>' reference.
@@ -317,6 +341,15 @@ public class TypesPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int BAG_TYPE__OCL_LIBRARY = COLLECTION_TYPE__OCL_LIBRARY;
+
+  /**
+   * The feature id for the '<em><b>Kind</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int BAG_TYPE__KIND = COLLECTION_TYPE__KIND;
 
   /**
    * The number of structural features of the '<em>Bag Type</em>' class.
@@ -374,13 +407,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int TUPLE_TYPE__OWNED_TYPE_PARAMETER = PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TUPLE_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+  public static final int TUPLE_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -401,13 +434,22 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int TUPLE_TYPE__OWNED_PROPERTY = PivotModelPackageImpl.TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TUPLE_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
+  public static final int TUPLE_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TUPLE_TYPE__GENERIC_SUPER_TYPE = PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE;
 
   /**
    * The feature id for the '<em><b>Ocl Library</b></em>' reference.
@@ -474,13 +516,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int INVALID_TYPE__OWNED_TYPE_PARAMETER = PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int INVALID_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+  public static final int INVALID_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -501,13 +543,31 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int INVALID_TYPE__OWNED_PROPERTY = PivotModelPackageImpl.TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int INVALID_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
+  public static final int INVALID_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int INVALID_TYPE__GENERIC_SUPER_TYPE = PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int INVALID_TYPE__OCL_LIBRARY = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Invalid Type</em>' class.
@@ -516,7 +576,7 @@ public class TypesPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int INVALID_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
+  public static final int INVALID_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OrderedSetTypeImpl <em>Ordered Set Type</em>}' class.
@@ -565,13 +625,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int ORDERED_SET_TYPE__OWNED_TYPE_PARAMETER = COLLECTION_TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int ORDERED_SET_TYPE__SUPER_TYPE = COLLECTION_TYPE__SUPER_TYPE;
+  public static final int ORDERED_SET_TYPE__NAMESPACE = COLLECTION_TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -592,13 +652,22 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int ORDERED_SET_TYPE__OWNED_PROPERTY = COLLECTION_TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int ORDERED_SET_TYPE__NAMESPACE = COLLECTION_TYPE__NAMESPACE;
+  public static final int ORDERED_SET_TYPE__SUPER_TYPE = COLLECTION_TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ORDERED_SET_TYPE__GENERIC_SUPER_TYPE = COLLECTION_TYPE__GENERIC_SUPER_TYPE;
 
   /**
    * The feature id for the '<em><b>Element Type</b></em>' reference.
@@ -617,6 +686,15 @@ public class TypesPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int ORDERED_SET_TYPE__OCL_LIBRARY = COLLECTION_TYPE__OCL_LIBRARY;
+
+  /**
+   * The feature id for the '<em><b>Kind</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ORDERED_SET_TYPE__KIND = COLLECTION_TYPE__KIND;
 
   /**
    * The number of structural features of the '<em>Ordered Set Type</em>' class.
@@ -674,13 +752,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int SEQUENCE_TYPE__OWNED_TYPE_PARAMETER = COLLECTION_TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int SEQUENCE_TYPE__SUPER_TYPE = COLLECTION_TYPE__SUPER_TYPE;
+  public static final int SEQUENCE_TYPE__NAMESPACE = COLLECTION_TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -701,13 +779,22 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int SEQUENCE_TYPE__OWNED_PROPERTY = COLLECTION_TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int SEQUENCE_TYPE__NAMESPACE = COLLECTION_TYPE__NAMESPACE;
+  public static final int SEQUENCE_TYPE__SUPER_TYPE = COLLECTION_TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int SEQUENCE_TYPE__GENERIC_SUPER_TYPE = COLLECTION_TYPE__GENERIC_SUPER_TYPE;
 
   /**
    * The feature id for the '<em><b>Element Type</b></em>' reference.
@@ -726,6 +813,15 @@ public class TypesPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int SEQUENCE_TYPE__OCL_LIBRARY = COLLECTION_TYPE__OCL_LIBRARY;
+
+  /**
+   * The feature id for the '<em><b>Kind</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int SEQUENCE_TYPE__KIND = COLLECTION_TYPE__KIND;
 
   /**
    * The number of structural features of the '<em>Sequence Type</em>' class.
@@ -783,13 +879,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int SET_TYPE__OWNED_TYPE_PARAMETER = COLLECTION_TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int SET_TYPE__SUPER_TYPE = COLLECTION_TYPE__SUPER_TYPE;
+  public static final int SET_TYPE__NAMESPACE = COLLECTION_TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -810,13 +906,22 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int SET_TYPE__OWNED_PROPERTY = COLLECTION_TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int SET_TYPE__NAMESPACE = COLLECTION_TYPE__NAMESPACE;
+  public static final int SET_TYPE__SUPER_TYPE = COLLECTION_TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int SET_TYPE__GENERIC_SUPER_TYPE = COLLECTION_TYPE__GENERIC_SUPER_TYPE;
 
   /**
    * The feature id for the '<em><b>Element Type</b></em>' reference.
@@ -835,6 +940,15 @@ public class TypesPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int SET_TYPE__OCL_LIBRARY = COLLECTION_TYPE__OCL_LIBRARY;
+
+  /**
+   * The feature id for the '<em><b>Kind</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int SET_TYPE__KIND = COLLECTION_TYPE__KIND;
 
   /**
    * The number of structural features of the '<em>Set Type</em>' class.
@@ -892,13 +1006,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int VOID_TYPE__OWNED_TYPE_PARAMETER = PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int VOID_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+  public static final int VOID_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -919,13 +1033,31 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int VOID_TYPE__OWNED_PROPERTY = PivotModelPackageImpl.TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int VOID_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
+  public static final int VOID_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int VOID_TYPE__GENERIC_SUPER_TYPE = PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int VOID_TYPE__OCL_LIBRARY = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Void Type</em>' class.
@@ -934,7 +1066,7 @@ public class TypesPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int VOID_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
+  public static final int VOID_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.TypeTypeImpl <em>Type Type</em>}' class.
@@ -983,13 +1115,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int TYPE_TYPE__OWNED_TYPE_PARAMETER = PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TYPE_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+  public static final int TYPE_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -1010,13 +1142,31 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int TYPE_TYPE__OWNED_PROPERTY = PivotModelPackageImpl.TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TYPE_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
+  public static final int TYPE_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_TYPE__GENERIC_SUPER_TYPE = PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Represented Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_TYPE__REPRESENTED_TYPE = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Type Type</em>' class.
@@ -1025,7 +1175,7 @@ public class TypesPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int TYPE_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
+  public static final int TYPE_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.
@@ -1219,13 +1369,13 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int ANY_TYPE__OWNED_TYPE_PARAMETER = PivotModelPackageImpl.TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int ANY_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+  public static final int ANY_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
 
   /**
    * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -1246,13 +1396,22 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int ANY_TYPE__OWNED_PROPERTY = PivotModelPackageImpl.TYPE__OWNED_PROPERTY;
 
   /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int ANY_TYPE__NAMESPACE = PivotModelPackageImpl.TYPE__NAMESPACE;
+  public static final int ANY_TYPE__SUPER_TYPE = PivotModelPackageImpl.TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ANY_TYPE__GENERIC_SUPER_TYPE = PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE;
 
   /**
    * The number of structural features of the '<em>Any Type</em>' class.
@@ -1499,6 +1658,19 @@ public class TypesPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getKind <em>Kind</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Kind</em>'.
+   * @see tudresden.ocl20.pivot.essentialocl.types.CollectionType#getKind()
+   * @see #getCollectionType()
+   * @generated
+   */
+  public EAttribute getCollectionType_Kind() {
+    return (EAttribute) collectionTypeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType <em>Invalid Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1508,6 +1680,19 @@ public class TypesPackageImpl extends EPackageImpl {
    */
   public EClass getInvalidType() {
     return invalidTypeEClass;
+  }
+
+  /**
+   * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the container reference '<em>Ocl Library</em>'.
+   * @see tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary()
+   * @see #getInvalidType()
+   * @generated
+   */
+  public EReference getInvalidType_OclLibrary() {
+    return (EReference) invalidTypeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1559,6 +1744,19 @@ public class TypesPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ocl Library</em>'.
+   * @see tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary()
+   * @see #getVoidType()
+   * @generated
+   */
+  public EReference getVoidType_OclLibrary() {
+    return (EReference) voidTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType <em>Type Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1568,6 +1766,19 @@ public class TypesPackageImpl extends EPackageImpl {
    */
   public EClass getTypeType() {
     return typeTypeEClass;
+  }
+
+  /**
+   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Represented Type</em>'.
+   * @see tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType()
+   * @see #getTypeType()
+   * @generated
+   */
+  public EReference getTypeType_RepresentedType() {
+    return (EReference) typeTypeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1814,8 +2025,10 @@ public class TypesPackageImpl extends EPackageImpl {
     collectionTypeEClass = createEClass(COLLECTION_TYPE);
     createEReference(collectionTypeEClass,COLLECTION_TYPE__ELEMENT_TYPE);
     createEReference(collectionTypeEClass,COLLECTION_TYPE__OCL_LIBRARY);
+    createEAttribute(collectionTypeEClass,COLLECTION_TYPE__KIND);
 
     invalidTypeEClass = createEClass(INVALID_TYPE);
+    createEReference(invalidTypeEClass,INVALID_TYPE__OCL_LIBRARY);
 
     orderedSetTypeEClass = createEClass(ORDERED_SET_TYPE);
 
@@ -1824,8 +2037,10 @@ public class TypesPackageImpl extends EPackageImpl {
     setTypeEClass = createEClass(SET_TYPE);
 
     voidTypeEClass = createEClass(VOID_TYPE);
+    createEReference(voidTypeEClass,VOID_TYPE__OCL_LIBRARY);
 
     typeTypeEClass = createEClass(TYPE_TYPE);
+    createEReference(typeTypeEClass,TYPE_TYPE__REPRESENTED_TYPE);
 
     oclLibraryEClass = createEClass(OCL_LIBRARY);
     createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_BOOLEAN);
@@ -1872,6 +2087,8 @@ public class TypesPackageImpl extends EPackageImpl {
     // Obtain other dependent packages
     PivotModelPackageImpl thePivotModelPackageImpl = (PivotModelPackageImpl) EPackage.Registry.INSTANCE
         .getEPackage(PivotModelPackageImpl.eNS_URI);
+    ExpressionsPackageImpl theExpressionsPackageImpl = (ExpressionsPackageImpl) EPackage.Registry.INSTANCE
+        .getEPackage(ExpressionsPackageImpl.eNS_URI);
     DatatypesPackageImpl theDatatypesPackageImpl = (DatatypesPackageImpl) EPackage.Registry.INSTANCE
         .getEPackage(DatatypesPackageImpl.eNS_URI);
 
@@ -1915,9 +2132,18 @@ public class TypesPackageImpl extends EPackageImpl {
         this.getOclLibrary(),
         null,
         "oclLibrary",null,1,1,CollectionType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEAttribute(
+        getCollectionType_Kind(),
+        theExpressionsPackageImpl.getCollectionKind(),
+        "kind",null,1,1,CollectionType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(invalidTypeEClass,InvalidType.class,
         "InvalidType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getInvalidType_OclLibrary(),
+        this.getOclLibrary(),
+        this.getOclLibrary_OclInvalid(),
+        "oclLibrary",null,1,1,InvalidType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(orderedSetTypeEClass,OrderedSetType.class,
         "OrderedSetType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -1930,9 +2156,19 @@ public class TypesPackageImpl extends EPackageImpl {
 
     initEClass(voidTypeEClass,VoidType.class,
         "VoidType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getVoidType_OclLibrary(),
+        this.getOclLibrary(),
+        null,
+        "oclLibrary",null,1,1,VoidType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(typeTypeEClass,TypeType.class,
         "TypeType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getTypeType_RepresentedType(),
+        thePivotModelPackageImpl.getType(),
+        null,
+        "representedType",null,0,1,TypeType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(oclLibraryEClass,OclLibrary.class,
         "OclLibrary",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -1969,7 +2205,7 @@ public class TypesPackageImpl extends EPackageImpl {
     initEReference(
         getOclLibrary_OclInvalid(),
         this.getInvalidType(),
-        null,
+        this.getInvalidType_OclLibrary(),
         "oclInvalid",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclType(),
@@ -2106,6 +2342,14 @@ public class TypesPackageImpl extends EPackageImpl {
         .getCollectionType_OclLibrary();
 
     /**
+     * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EAttribute COLLECTION_TYPE__KIND = eINSTANCE.getCollectionType_Kind();
+
+    /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.InvalidTypeImpl <em>Invalid Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2114,6 +2358,15 @@ public class TypesPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EClass INVALID_TYPE = eINSTANCE.getInvalidType();
+
+    /**
+     * The meta object literal for the '<em><b>Ocl Library</b></em>' container reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EReference INVALID_TYPE__OCL_LIBRARY = eINSTANCE
+        .getInvalidType_OclLibrary();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OrderedSetTypeImpl <em>Ordered Set Type</em>}' class.
@@ -2156,6 +2409,14 @@ public class TypesPackageImpl extends EPackageImpl {
     public static final EClass VOID_TYPE = eINSTANCE.getVoidType();
 
     /**
+     * The meta object literal for the '<em><b>Ocl Library</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EReference VOID_TYPE__OCL_LIBRARY = eINSTANCE.getVoidType_OclLibrary();
+
+    /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.TypeTypeImpl <em>Type Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2164,6 +2425,15 @@ public class TypesPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EClass TYPE_TYPE = eINSTANCE.getTypeType();
+
+    /**
+     * The meta object literal for the '<em><b>Represented Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EReference TYPE_TYPE__REPRESENTED_TYPE = eINSTANCE
+        .getTypeType_RepresentedType();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.
