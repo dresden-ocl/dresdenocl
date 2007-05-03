@@ -557,9 +557,7 @@ public class ModelFactory implements IModelFactory {
     Type sourceType = source.getType();
     Operation operation = sourceType.lookupOperation(referredOperationName,paramTypes);
 
-    // invalid and undefined conform to all types, so we ignore that we haven't found an operation
-    if (operation == null && sourceType != oclLibrary.getOclVoid()
-        && sourceType != oclLibrary.getOclInvalid()) {
+    if (operation == null) {
       throw new IllegalArgumentException("Unable to find operation '" + referredOperationName //$NON-NLS-1$
           + "' with argument types " + paramTypes + " in type '" //$NON-NLS-1$ //$NON-NLS-2$
           + source.getType().getQualifiedName() + "'."); //$NON-NLS-1$
@@ -665,9 +663,8 @@ public class ModelFactory implements IModelFactory {
     Type sourceType = source.getType();
     Property property = sourceType.lookupProperty(referredPropertyName);
 
-    // invalid and undefined conform to all types, so we ignore that we haven't found a property
-    if (property == null && sourceType != oclLibrary.getOclVoid()
-        && sourceType != oclLibrary.getOclInvalid()) {
+    // invalid and undefined conform to all types, so we ignore if we haven't found a property
+    if (property == null) {
       throw new IllegalArgumentException("Unable to find property '" + referredPropertyName //$NON-NLS-1$
           + "' in type '" + source.getType().getQualifiedName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$
     }
@@ -877,6 +874,9 @@ public class ModelFactory implements IModelFactory {
 
     TypeLiteralExp typeLiteralExp = ExpressionsFactory.INSTANCE.createTypeLiteralExp();
     typeLiteralExp.setReferredType(type);
+    
+    // initialize reference to the OCL Library
+    typeLiteralExp.setOclLibrary(oclLibrary);
 
     if (logger.isDebugEnabled()) {
       logger.debug("createTypeLiteralExp() - exit - return value=" + typeLiteralExp); //$NON-NLS-1$

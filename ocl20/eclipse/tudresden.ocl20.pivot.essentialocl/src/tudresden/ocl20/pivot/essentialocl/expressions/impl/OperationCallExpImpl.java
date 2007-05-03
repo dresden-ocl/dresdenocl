@@ -114,20 +114,14 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   public Type getType() {
     Type type;
 
+    // check wellformedness of abstract syntax
     if (referredOperation == null) {
-
-      // an operation call on undefined or invalid results in invalid
-      if (isUndefinedOrInvalid(getSource().getType())) {
-        return getOclLibrary().getOclInvalid();
-      }
-      
-      // error: the source is not invalid or undefined, but no referred operation is set  
       throw new WellformednessException(
           "The referred operation of an OperationCallExp must not be null."); //$NON-NLS-1$
     }
 
     // if there are any output parameters, the expression type is a tuple type
-    if (referredOperation.getOutputParameter().size() > 0) {
+    else if (referredOperation.getOutputParameter().size() > 0) {
 
       // check that the OCL library reference is set
       if (oclLibrary == null) {
