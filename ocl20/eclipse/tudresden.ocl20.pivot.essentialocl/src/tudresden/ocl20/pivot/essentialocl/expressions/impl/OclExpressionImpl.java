@@ -46,7 +46,9 @@ import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
+import tudresden.ocl20.pivot.essentialocl.types.VoidType;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
@@ -200,7 +202,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
     withAsSet.setName("asSet"); //$NON-NLS-1$
     withAsSet.setSource(this);
     withAsSet.setReferredOperation(asSetOperation);
-    
+
     // set the reference to the OCL Library
     withAsSet.setOclLibrary(oclLibrary);
 
@@ -219,9 +221,10 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
    * <p>
    * If the given type is a {@link PrimitiveType} whose kind is not
    * {@link PrimitiveTypeKind#UNKNOWN UNKNOWN}, it will be transformed into the corresponding
-   * primitive type from the OCL Library. Otherwise, unless the type already is an OCL
-   * {@link CollectionType}, this method will ensure that the given type descends from
-   * {@link OclLibrary#getOclAny() OclAny} to provide the predefined OCL operations.
+   * primitive type from the OCL Library. Otherwise, unless the type is an OCL
+   * {@link CollectionType}, {@link VoidType} or {@link InvalidType}, this method will ensure that
+   * the given type descends from {@link OclLibrary#getOclAny() OclAny} to provide the predefined
+   * OCL operations.
    * </p>
    * 
    * <p>
@@ -253,12 +256,13 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
           + "' because the OCL Library reference has not been initialized."); //$NON-NLS-1$
     }
 
-    // if the given type is a primitive type
+    // if the given type is a primitive type, map it to one of the predefined OCL types
     if (type instanceof PrimitiveType) {
       type = mapPrimitiveType((PrimitiveType) type);
     }
 
-    else if (!(type instanceof CollectionType)) {
+    // else ensure that it derives from OclAny unless it is a collection type, void or invalid
+    else if (!(type instanceof CollectionType || type instanceof VoidType || type instanceof InvalidType)) {
       type = ensureDescendanceFromOclAny(type);
     }
 
@@ -271,23 +275,38 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
 
   // helper method to convert a primitive type into the corresponding OCL type
   private Type mapPrimitiveType(PrimitiveType type) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("mapPrimitiveType(type=" + type + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    Type mappedType;
 
     switch (type.getKind()) {
       case BOOLEAN:
-        return oclLibrary.getOclBoolean();
+        mappedType = oclLibrary.getOclBoolean();
+        break;
       case INTEGER:
-        return oclLibrary.getOclInteger();
+        mappedType = oclLibrary.getOclInteger();
+        break;
       case REAL:
-        return oclLibrary.getOclReal();
+        mappedType = oclLibrary.getOclReal();
+        break;
       case STRING:
-        return oclLibrary.getOclString();
+        mappedType = oclLibrary.getOclString();
+        break;
       case UNKNOWN:
-        return ensureDescendanceFromOclAny(type);
+        mappedType = ensureDescendanceFromOclAny(type);
+        break;
       default:
         logger.warn("Unknown kind of primitive type: " + type); //$NON-NLS-1$
-        return type;
+        mappedType = type;
     }
 
+    if (logger.isDebugEnabled()) {
+      logger.debug("mapPrimitiveType() - exit - return value=" + mappedType); //$NON-NLS-1$
+    }
+
+    return mappedType;
   }
 
   // helper method that will add OclAny to the super types of the given type if necessary
@@ -301,6 +320,18 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
     }
 
     return type;
+  }
+
+  /**
+   * Helper method for subclasses that returns the reference to the {@link OclLibrary} if it has
+   * been set, otherwise throws an {@link IllegalStateException}.
+   */
+  protected OclLibrary getValidOclLibrary() {
+    if (oclLibrary == null) {
+      throw new IllegalStateException("The reference to the OCL Library has not been initialized."); //$NON-NLS-1$
+    }
+
+    return oclLibrary;
   }
 
   /**
