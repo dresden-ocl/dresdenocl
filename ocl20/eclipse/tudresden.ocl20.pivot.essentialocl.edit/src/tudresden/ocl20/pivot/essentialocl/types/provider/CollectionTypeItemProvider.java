@@ -47,6 +47,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -84,6 +86,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
       super.getPropertyDescriptors(object);
 
       addOclLibraryPropertyDescriptor(object);
+      addKindPropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
   }
@@ -103,6 +106,24 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
             getString(
                 "_UI_PropertyDescriptor_description","_UI_CollectionType_oclLibrary_feature","_UI_CollectionType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             TypesPackageImpl.Literals.COLLECTION_TYPE__OCL_LIBRARY,true,false,true,null,null,null));
+  }
+
+  /**
+   * This adds a property descriptor for the Kind feature.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected void addKindPropertyDescriptor(Object object) {
+    itemPropertyDescriptors
+        .add(createItemPropertyDescriptor(
+            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            getResourceLocator(),
+            getString("_UI_CollectionType_kind_feature"), //$NON-NLS-1$
+            getString(
+                "_UI_PropertyDescriptor_description","_UI_CollectionType_kind_feature","_UI_CollectionType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            TypesPackageImpl.Literals.COLLECTION_TYPE__KIND,true,false,false,
+            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
   }
 
   /**
