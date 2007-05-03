@@ -35,7 +35,6 @@ package tudresden.ocl20.pivot.essentialocl.types.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-
 import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
 
 /**
