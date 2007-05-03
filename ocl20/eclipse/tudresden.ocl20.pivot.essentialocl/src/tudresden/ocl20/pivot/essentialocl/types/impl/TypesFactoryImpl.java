@@ -35,12 +35,21 @@ package tudresden.ocl20.pivot.essentialocl.types.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import tudresden.ocl20.pivot.essentialocl.types.*;
+import tudresden.ocl20.pivot.essentialocl.types.AnyType;
+import tudresden.ocl20.pivot.essentialocl.types.BagType;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
+import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
+import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
+import tudresden.ocl20.pivot.essentialocl.types.SetType;
+import tudresden.ocl20.pivot.essentialocl.types.TupleType;
+import tudresden.ocl20.pivot.essentialocl.types.TypeType;
+import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
+import tudresden.ocl20.pivot.essentialocl.types.VoidType;
 
 /**
  * <!-- begin-user-doc -->
