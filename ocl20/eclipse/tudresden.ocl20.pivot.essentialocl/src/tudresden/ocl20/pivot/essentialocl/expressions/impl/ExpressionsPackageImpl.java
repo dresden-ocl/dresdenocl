@@ -4374,10 +4374,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 
     // Initialize enums and add enum literals
     initEEnum(collectionKindEEnum,CollectionKind.class,"CollectionKind"); //$NON-NLS-1$
+    addEEnumLiteral(collectionKindEEnum,CollectionKind.COLLECTION);
+    addEEnumLiteral(collectionKindEEnum,CollectionKind.SEQUENCE);
+    addEEnumLiteral(collectionKindEEnum,CollectionKind.BAG);
     addEEnumLiteral(collectionKindEEnum,CollectionKind.SET);
     addEEnumLiteral(collectionKindEEnum,CollectionKind.ORDERED_SET);
-    addEEnumLiteral(collectionKindEEnum,CollectionKind.BAG);
-    addEEnumLiteral(collectionKindEEnum,CollectionKind.SEQUENCE);
 
     // Create resource
     createResource(eNS_URI);
