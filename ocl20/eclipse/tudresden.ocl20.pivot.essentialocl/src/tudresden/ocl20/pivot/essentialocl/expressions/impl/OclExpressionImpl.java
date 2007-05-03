@@ -193,8 +193,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
     }
 
     // bind the type parameter with the type of this operation
-    asSetOperation = asSetOperation.bindTypeParameter(Arrays.asList(asSetOperation
-        .getOwnedTypeParameter().get(0)),Arrays.asList(getType()));
+    asSetOperation = asSetOperation.bindTypeParameter(asSetOperation.getOwnedTypeParameter(),Arrays
+        .asList(getType()));
 
     // create a new operation call expression
     OperationCallExp withAsSet = ExpressionsFactory.INSTANCE.createOperationCallExp();
