@@ -93,17 +93,6 @@ public class OrderedSetTypeImpl extends CollectionTypeImpl implements OrderedSet
     return getOclLibrary().getCollectionType(commonElementType);
   }
 
-  /**
-   * Overridden to return the string <code>"OrderedSet"</code> as defined in the OCL 2.0
-   * Specification, Section 8.2.2.
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCollectionTypeName()
-   */
-  @Override
-  protected String getCollectionTypeName() {
-    return "OrderedSet"; //$NON-NLS-1$
-  }
-
   /*
    * (non-Javadoc)
    * 

@@ -93,19 +93,11 @@ public class BagTypeImpl extends CollectionTypeImpl implements BagType {
     return getOclLibrary().getCollectionType(commonElementType);
   }
 
-  /**
-   * Overridden to return the string <code>"Bag"</code> as defined in the OCL 2.0 Specification,
-   * Section 8.2.2.
+  /*
+   * (non-Javadoc)
    * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCollectionTypeName()
-   */
-  @Override
-  protected String getCollectionTypeName() {
-    return "Bag"; //$NON-NLS-1$
-  }
-
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List, java.util.List)
+   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List,
+   *      java.util.List)
    */
   @Override
   public BagType bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types) {

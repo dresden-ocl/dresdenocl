@@ -93,17 +93,6 @@ public class SetTypeImpl extends CollectionTypeImpl implements SetType {
     return getOclLibrary().getCollectionType(commonElementType);
   }
 
-  /**
-   * Overridden to return the string <code>"Set"</code> as defined in the OCL 2.0 Specification,
-   * Section 8.2.2.
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCollectionTypeName()
-   */
-  @Override
-  protected String getCollectionTypeName() {
-    return "Set"; //$NON-NLS-1$
-  }
-
   /* (non-Javadoc)
    * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List, java.util.List)
    */

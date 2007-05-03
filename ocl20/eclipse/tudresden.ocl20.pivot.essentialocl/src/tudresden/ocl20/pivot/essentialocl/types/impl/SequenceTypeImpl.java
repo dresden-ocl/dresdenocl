@@ -47,13 +47,14 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
 public class SequenceTypeImpl extends CollectionTypeImpl implements SequenceType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected SequenceTypeImpl() {
@@ -62,6 +63,7 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements SequenceType
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -91,17 +93,6 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements SequenceType
     }
 
     return getOclLibrary().getCollectionType(commonElementType);
-  }
-
-  /**
-   * Overridden to return the string <code>"Sequence"</code> as defined in the OCL 2.0
-   * Specification, Section 8.2.2.
-   * 
-   * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCollectionTypeName()
-   */
-  @Override
-  protected String getCollectionTypeName() {
-    return "Sequence"; //$NON-NLS-1$
   }
 
   /*
