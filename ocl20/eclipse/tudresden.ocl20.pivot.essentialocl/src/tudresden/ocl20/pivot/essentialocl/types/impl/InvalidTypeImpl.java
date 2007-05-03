@@ -32,10 +32,24 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.apache.log4j.Logger;
+
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
 
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
 
@@ -43,14 +57,24 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Invalid Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.InvalidTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 
   /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(InvalidTypeImpl.class);
+
+  /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected InvalidTypeImpl() {
@@ -71,7 +95,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
   }
 
   /**
-   * Invalid conforms to all other types (OCL 2.0 specification, Section 8.2.2):
+   * <code>Invalid</code> conforms to all other types (OCL 2.0 specification, Section 8.2.2):
    * 
    * <pre>
    * context InvalidType
@@ -87,7 +111,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
   }
 
   /**
-   * The common super type of <code>InvalidType</code> and another {@link Type} is the other type. 
+   * The common super type of <code>InvalidType</code> and another {@link Type} is the other type.
    * 
    * @return the given other type
    * 
@@ -99,7 +123,231 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
   }
 
   /**
+   * Since <code>invalid</code> conforms to all other types, we can also try to call any operation
+   * on it. However, only the predefined operations <code>oclIsUndefined</code> and
+   * <code>oclIsInvalid</code> are actually available on <code>OclInvalid</code>. Hence, this
+   * method is overridden to return a freshly created operation with the given name if the
+   * {@link #lookupOperation(String, List) super implementation} cannot find the correct operation.
+   * The new operation instance will have the type {@link OclLibrary#getOclInvalid() OclInvalid}
+   * since any operation call on <code>invalid</code> should result in <code>invalid</code> (OCL 2.0
+   * Specification, Section 11.2). This little implementation trick avoids having to make
+   * <code>OclInvalid</code> the subtype of all model types which would be very expensive.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#lookupOperation(java.lang.String,
+   *      java.util.List)
+   */
+  @Override
+  public Operation lookupOperation(String name, List<Type> paramTypes) {
+    Operation operation;
+
+    // try to look up using default implementation (will only find oclIsUndefined and oclIsInvalid)
+    operation = super.lookupOperation(name,paramTypes);
+
+    // if no operation with this name was found, simply make up a new one
+    if (operation == null) {
+
+      if (logger.isInfoEnabled()) {
+        logger.info("Creating implicit operation '" + name + "' for InvalidType"); //$NON-NLS-1$//$NON-NLS-2$
+      }
+
+      operation = PivotModelFactory.INSTANCE.createOperation();
+      operation.setName(name);
+
+      // set the type of the new operation to invalid
+      if (getOclLibrary() == null) {
+        throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
+            + "' is not contained in the OCL Library."); //$NON-NLS-1$
+      }
+
+      operation.setType(getOclLibrary().getOclInvalid());
+    }
+
+    return operation;
+  }
+
+  /**
+   * Since <code>invalid</code> conforms to all other types, we can also try to call any property
+   * on it. Hence, this method is overridden to return a freshly created property with the given
+   * name. The new property instance will have the type
+   * {@link OclLibrary#getOclInvalid() OclInvalid} since any property call on <code>invalid</code>
+   * should result in <code>invalid</code> (OCL 2.0 Specification, Section 11.2). This little
+   * implementation trick avoids having to make <code>OclInvalid</code> the subtype of all model
+   * types which would be very expensive.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#lookupProperty(java.lang.String)
+   */
+  @Override
+  public Property lookupProperty(String name) {
+
+    if (logger.isInfoEnabled()) {
+      logger.info("Creating implicit property '" + name + "' for InvalidType"); //$NON-NLS-1$//$NON-NLS-2$
+    }
+
+    Property property = PivotModelFactory.INSTANCE.createProperty();
+    property.setName(name);
+
+    // set the type of the new property to invalid
+    if (getOclLibrary() == null) {
+      throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
+          + "' is not contained in the OCL Library."); //$NON-NLS-1$
+    }
+
+    property.setType(getOclLibrary().getOclInvalid());
+
+    return property;
+  }
+
+  /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public OclLibrary getOclLibrary() {
+    if (eContainerFeatureID != TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY) return null;
+    return (OclLibrary) eContainer();
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public NotificationChain basicSetOclLibrary(OclLibrary newOclLibrary, NotificationChain msgs) {
+    msgs = eBasicSetContainer((InternalEObject) newOclLibrary,
+        TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY,msgs);
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public void setOclLibrary(OclLibrary newOclLibrary) {
+    if (newOclLibrary != eInternalContainer()
+        || (eContainerFeatureID != TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY && newOclLibrary != null)) {
+      if (EcoreUtil.isAncestor(this,(EObject) newOclLibrary))
+        throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+      NotificationChain msgs = null;
+      if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
+      if (newOclLibrary != null)
+        msgs = ((InternalEObject) newOclLibrary).eInverseAdd(this,
+            TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,OclLibrary.class,msgs);
+      msgs = basicSetOclLibrary(newOclLibrary,msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this,Notification.SET,
+          TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY,newOclLibrary,newOclLibrary));
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+      NotificationChain msgs) {
+    switch (featureID) {
+      case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
+        if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
+        return basicSetOclLibrary((OclLibrary) otherEnd,msgs);
+    }
+    return super.eInverseAdd(otherEnd,featureID,msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
+      NotificationChain msgs) {
+    switch (featureID) {
+      case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
+        return basicSetOclLibrary(null,msgs);
+    }
+    return super.eInverseRemove(otherEnd,featureID,msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+    switch (eContainerFeatureID) {
+      case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
+        return eInternalContainer().eInverseRemove(this,TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
+            OclLibrary.class,msgs);
+    }
+    return super.eBasicRemoveFromContainerFeature(msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType) {
+    switch (featureID) {
+      case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
+        return getOclLibrary();
+    }
+    return super.eGet(featureID,resolve,coreType);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public void eSet(int featureID, Object newValue) {
+    switch (featureID) {
+      case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
+        setOclLibrary((OclLibrary) newValue);
+        return;
+    }
+    super.eSet(featureID,newValue);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID) {
+    switch (featureID) {
+      case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
+        setOclLibrary((OclLibrary) null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID) {
+    switch (featureID) {
+      case TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY:
+        return getOclLibrary() != null;
+    }
+    return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override

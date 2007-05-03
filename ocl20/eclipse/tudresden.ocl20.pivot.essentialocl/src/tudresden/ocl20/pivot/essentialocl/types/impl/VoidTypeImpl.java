@@ -32,10 +32,22 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.apache.log4j.Logger;
+
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.VoidType;
 
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
 
@@ -43,14 +55,33 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Void Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.VoidTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class VoidTypeImpl extends TypeImpl implements VoidType {
 
   /**
+   * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}' reference. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @see #getOclLibrary()
+   * @generated
+   * @ordered
+   */
+  protected OclLibrary oclLibrary = null;
+  /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(VoidTypeImpl.class);
+
+  /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected VoidTypeImpl() {
@@ -74,7 +105,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
   }
 
   /**
-   * The common super type of <code>VoidType</code> and another {@link Type} is the other type. 
+   * The common super type of <code>VoidType</code> and another {@link Type} is the other type.
    * 
    * @return the given other type
    * 
@@ -83,6 +114,82 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
   @Override
   public Type commonSuperType(Type other) {
     return other;
+  }
+
+  /**
+   * Since <code>undefined</code> (the single instance of <code>OclVoid</code>) conforms to all
+   * other types, we can also try to call any operation on it. However, only the predefined
+   * operation <code>oclIsUndefined</code> is actually available on <code>OclVoid</code>.
+   * Hence, this method is overridden to return a freshly created operation with the given name if
+   * the {@link #lookupOperation(String, List) super implementation} cannot find the correct
+   * operation. The new operation instance will have the type
+   * {@link OclLibrary#getOclInvalid() OclInvalid} since any operation call on
+   * <code>undefined</code> should result in <code>invalid</code> (OCL 2.0 Specification,
+   * Section 11.2).This little implementation trick avoids having to make <code>OclVoid</code> the
+   * subtype of all model types which would be very expensive.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#lookupOperation(java.lang.String,
+   *      java.util.List)
+   */
+  @Override
+  public Operation lookupOperation(String name, List<Type> paramTypes) {
+    Operation operation;
+
+    // try to look up using default implementation (will only find oclIsUndefined and oclIsInvalid)
+    operation = super.lookupOperation(name,paramTypes);
+
+    // if no operation with this name was found, simply make up a new one
+    if (operation == null) {
+
+      if (logger.isInfoEnabled()) {
+        logger.info("Creating implicit operation '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
+      }
+
+      operation = PivotModelFactory.INSTANCE.createOperation();
+      operation.setName(name);
+
+      // set the type of the new operation to invalid
+      if (getOclLibrary() == null) {
+        throw new IllegalStateException("The VoidType called '" + getName() //$NON-NLS-1$
+            + "' is not contained in the OCL Library."); //$NON-NLS-1$
+      }
+
+      operation.setType(getOclLibrary().getOclInvalid());
+    }
+
+    return operation;
+  }
+
+  /**
+   * Since <code>undefined</code> conforms to all other types, we can also try to call any
+   * property on it. Hence, this method is overridden to return a freshly created property with the
+   * given name. The new property instance will have the type
+   * {@link OclLibrary#getOclInvalid() OclInvalid} since any property call on <code>undefined</code>
+   * should result in <code>invalid</code> (OCL 2.0 Specification, Section 11.2). This little
+   * implementation trick avoids having to make <code>OclVoid</code> the subtype of all model
+   * types which would be very expensive.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#lookupProperty(java.lang.String)
+   */
+  @Override
+  public Property lookupProperty(String name) {
+
+    if (logger.isInfoEnabled()) {
+      logger.info("Creating implicit property '" + name + "' for VoidType"); //$NON-NLS-1$//$NON-NLS-2$
+    }
+
+    Property property = PivotModelFactory.INSTANCE.createProperty();
+    property.setName(name);
+
+    // set the type of the new property to invalid
+    if (getOclLibrary() == null) {
+      throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
+          + "' is not contained in the OCL Library."); //$NON-NLS-1$
+    }
+
+    property.setType(getOclLibrary().getOclInvalid());
+
+    return property;
   }
 
   /**
@@ -100,6 +207,106 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public OclLibrary getOclLibrary() {
+    if (oclLibrary != null && ((EObject) oclLibrary).eIsProxy()) {
+      InternalEObject oldOclLibrary = (InternalEObject) oclLibrary;
+      oclLibrary = (OclLibrary) eResolveProxy(oldOclLibrary);
+      if (oclLibrary != oldOclLibrary) {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this,Notification.RESOLVE,
+              TypesPackageImpl.VOID_TYPE__OCL_LIBRARY,oldOclLibrary,oclLibrary));
+      }
+    }
+    return oclLibrary;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public OclLibrary basicGetOclLibrary() {
+    return oclLibrary;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public void setOclLibrary(OclLibrary newOclLibrary) {
+    OclLibrary oldOclLibrary = oclLibrary;
+    oclLibrary = newOclLibrary;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this,Notification.SET,TypesPackageImpl.VOID_TYPE__OCL_LIBRARY,
+          oldOclLibrary,oclLibrary));
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType) {
+    switch (featureID) {
+      case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
+        if (resolve) return getOclLibrary();
+        return basicGetOclLibrary();
+    }
+    return super.eGet(featureID,resolve,coreType);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public void eSet(int featureID, Object newValue) {
+    switch (featureID) {
+      case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
+        setOclLibrary((OclLibrary) newValue);
+        return;
+    }
+    super.eSet(featureID,newValue);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID) {
+    switch (featureID) {
+      case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
+        setOclLibrary((OclLibrary) null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID) {
+    switch (featureID) {
+      case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
+        return oclLibrary != null;
+    }
+    return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
