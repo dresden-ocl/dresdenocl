@@ -32,32 +32,35 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import java.util.Arrays;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type Literal Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TypeLiteralExpImpl#getReferredType <em>Referred Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TypeLiteralExpImpl#getReferredType <em>Referred Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp {
 
   /**
-   * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}' reference. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getReferredType()
    * @generated
    * @ordered
@@ -65,8 +68,8 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
   protected Type referredType = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected TypeLiteralExpImpl() {
@@ -74,18 +77,31 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * The type of a <code>TypeLiteralExp</code> is the single instance of {@link TypeType} called
+   * <code>OclType</code>. Since this is a generic type, it is bound with the
+   * {@link #getReferredType() referred type} of this <code>TypeLiteralExp</code>.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.TYPE_LITERAL_EXP;
+  public Type getType() {
+
+    if (referredType == null) {
+      throw new WellformednessException("The referred type of a TypeLiteralExp must not be null."); //$NON-NLS-1$
+    }
+
+    // get the OclType from the Standard Library
+    Type type = getValidOclLibrary().getOclType();
+    
+    // bind the type with the referred type
+    type = type.bindTypeParameter(type.getOwnedTypeParameter(),Arrays.asList(referredType));
+
+    return type;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Type getReferredType() {
@@ -93,8 +109,8 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setReferredType(Type newReferredType) {
@@ -106,8 +122,8 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -120,8 +136,8 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -135,8 +151,8 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -150,8 +166,8 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -163,4 +179,14 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
     return super.eIsSet(featureID);
   }
 
-} //TypeLiteralExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.TYPE_LITERAL_EXP;
+  }
+
+} // TypeLiteralExpImpl
