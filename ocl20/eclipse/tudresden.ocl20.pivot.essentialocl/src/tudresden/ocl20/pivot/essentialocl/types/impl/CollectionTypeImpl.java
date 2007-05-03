@@ -35,6 +35,8 @@ package tudresden.ocl20.pivot.essentialocl.types.impl;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
@@ -172,7 +174,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
     if (getElementType() != null) {
       name.append('(').append(getElementType().getName()).append(')');
     }
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("determineCollectionTypeName() - exit - return value=" + name); //$NON-NLS-1$
     }
@@ -181,9 +183,9 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   }
 
   /**
-   * Helper method to return the literal for this type of collection. This simply returns the
-   * string value of the {@link #getKind() kind} of this collection type as modelled in the
-   * Standard Library.
+   * Helper method to return the literal for this type of collection. This simply returns the string
+   * value of the {@link #getKind() kind} of this collection type as modelled in the Standard
+   * Library.
    * 
    * @return a <code>String</code> representing the type of collection
    */
@@ -533,6 +535,9 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   protected CollectionType initialize(CollectionType clone) {
     super.initialize(clone);
 
+    // set kind
+    clone.setKind(getKind());
+    
     // set reference to OCL library
     clone.setOclLibrary(getOclLibrary());
 
@@ -639,24 +644,19 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
    * @generated
    */
   @Override
-  public String toString() {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (kind: "); //$NON-NLS-1$
-    result.append(kind);
-    result.append(')');
-    return result.toString();
+  protected EClass eStaticClass() {
+    return TypesPackageImpl.Literals.COLLECTION_TYPE;
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * Adapted the EMF implementation for consistent strings.
    * 
-   * @generated
+   * @generated NOT
    */
   @Override
-  protected EClass eStaticClass() {
-    return TypesPackageImpl.Literals.COLLECTION_TYPE;
+  public String toString() {
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("elementType",elementType).append("kind",kind).toString();  //$NON-NLS-1$//$NON-NLS-2$
   }
 
 } // CollectionTypeImpl
