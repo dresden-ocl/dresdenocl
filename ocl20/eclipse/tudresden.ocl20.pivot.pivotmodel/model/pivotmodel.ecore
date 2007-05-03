@@ -473,6 +473,12 @@
       </eParameters>
       <eParameters name="subType" eType="#//Type"/>
     </eOperations>
+    <eOperations name="isConformant" eType="ecore:EDataType datatypes.ecore#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Returns &lt;code>true&lt;/code> if the given type conforms to this&#xD;&#xA;&lt;code>GenericType&lt;/code>, &lt;code>false&lt;/code> otherwise.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eParameters name="type" eType="#//Type"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterGenericType" eSuperTypes="#//GenericType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" eType="#//TypeParameter"

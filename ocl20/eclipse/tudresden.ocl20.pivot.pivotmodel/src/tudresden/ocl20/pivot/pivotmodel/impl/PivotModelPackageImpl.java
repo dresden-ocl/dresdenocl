@@ -214,24 +214,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int TYPE__OWNED_TYPE_PARAMETER = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE__SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-  /**
-   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE__GENERIC_SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 5;
-
-  /**
    * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -257,6 +239,24 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int TYPE__OWNED_PROPERTY = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE__SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE__GENERIC_SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
   /**
    * The number of structural features of the '<em>Type</em>' class.
@@ -314,24 +314,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int ENUMERATION__OWNED_TYPE_PARAMETER = TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int ENUMERATION__SUPER_TYPE = TYPE__SUPER_TYPE;
-
-  /**
-   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int ENUMERATION__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
-
-  /**
    * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -357,6 +339,24 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int ENUMERATION__OWNED_PROPERTY = TYPE__OWNED_PROPERTY;
+
+  /**
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ENUMERATION__SUPER_TYPE = TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int ENUMERATION__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
 
   /**
    * The feature id for the '<em><b>Owned Literal</b></em>' containment reference list.
@@ -1133,24 +1133,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int PRIMITIVE_TYPE__OWNED_TYPE_PARAMETER = TYPE__OWNED_TYPE_PARAMETER;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__SUPER_TYPE = TYPE__SUPER_TYPE;
-
-  /**
-   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
-
-  /**
    * The feature id for the '<em><b>Namespace</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1176,6 +1158,24 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int PRIMITIVE_TYPE__OWNED_PROPERTY = TYPE__OWNED_PROPERTY;
+
+  /**
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__SUPER_TYPE = TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
 
   /**
    * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -3409,6 +3409,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
     g2.setEUpperBound(g3);
     addEParameter(op,g1,"types",1,1); //$NON-NLS-1$
     addEParameter(op,this.getType(),"subType",0,1); //$NON-NLS-1$
+
+    op = addEOperation(genericTypeEClass,theDatatypesPackageImpl.getBoolean(),"isConformant",0,1); //$NON-NLS-1$
+    addEParameter(op,this.getType(),"type",0,1); //$NON-NLS-1$
 
     initEClass(typeParameterEClass,TypeParameter.class,
         "TypeParameter",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$

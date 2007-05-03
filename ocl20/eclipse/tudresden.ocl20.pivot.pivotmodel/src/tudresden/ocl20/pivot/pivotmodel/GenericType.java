@@ -60,6 +60,19 @@ public interface GenericType extends NamedElement {
   Type bindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types, Type subType);
 
   /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <p>
+   * Returns <code>true</code> if the given type conforms to this
+   * <code>GenericType</code>, <code>false</code> otherwise.
+   * </p>
+   * <!-- end-model-doc -->
+   * @generated
+   */
+  boolean isConformant(Type type);
+
+  /**
    * Redefines {@link NamedElement#clone()} with a covariant return type.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()

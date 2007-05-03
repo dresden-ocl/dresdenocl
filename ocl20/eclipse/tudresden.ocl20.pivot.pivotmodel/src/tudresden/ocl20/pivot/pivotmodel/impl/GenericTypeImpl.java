@@ -48,7 +48,7 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class GenericTypeImpl extends NamedElementImpl implements GenericType {
@@ -60,7 +60,6 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements Generi
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected GenericTypeImpl() {
@@ -183,6 +182,13 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements Generi
       List<? extends Type> types, Type subType);
 
   /**
+   * Made abstract in order to leave implementation to subclasses.
+   * 
+   * @generated NOT
+   */
+  public abstract boolean isConformant(Type type);
+
+  /**
    * Overridden to set the covariant return type. The actual implementation is left to subclasses.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
@@ -210,7 +216,6 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements Generi
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override

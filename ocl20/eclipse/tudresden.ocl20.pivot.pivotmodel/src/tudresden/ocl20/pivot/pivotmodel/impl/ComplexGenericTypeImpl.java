@@ -208,8 +208,8 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
     // if all type parameters have been bound we can set the typed element's type
     if (boundType.getOwnedTypeParameter().isEmpty()) {
-      if (logger.isDebugEnabled()) {
-        logger.debug("Binding type of '" + typedElement.getQualifiedName() + "' with '" //$NON-NLS-1$ //$NON-NLS-2$
+      if (logger.isInfoEnabled()) {
+        logger.info("Binding type of '" + typedElement.getQualifiedName() + "' with '" //$NON-NLS-1$ //$NON-NLS-2$
             + boundType.getName() + "'."); //$NON-NLS-1$
       }
 
@@ -238,8 +238,8 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
     // if all type parameters have been bound, add the bound type to the super types of subtype
     if (boundType.getOwnedTypeParameter().isEmpty()) {
-      if (logger.isDebugEnabled()) {
-        logger.debug("Adding bound super type '" + boundType.getName() + "' to type '" //$NON-NLS-1$ //$NON-NLS-2$
+      if (logger.isInfoEnabled()) {
+        logger.info("Adding bound super type '" + boundType.getName() + "' to type '" //$NON-NLS-1$ //$NON-NLS-2$
             + subType.getQualifiedName() + "'."); //$NON-NLS-1$
       }
 
@@ -289,6 +289,25 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
     // now bind the type with the collected type parameters and types and return the result
     return unboundType.bindTypeParameter(unboundTypeParameters,typeArgumentTypes);
+  }
+
+  /**
+   * This method returns <code>true</code> if the given type conforms to the
+   * {@link #getUnboundType() unbound type} of this <code>ComplexGenericType</code>. * For
+   * example, if the unbound type is a generic type {@code List<T>}, then any <code>List</code>
+   * type will be conformant to this type.
+   * 
+   * <p>
+   * Note that this is not entirely correct, because nested generic types would actually need
+   * special treatment. Since this is a rather special case and not required for an OCL engine,
+   * we currently ignore it in this prototypical implementation.
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#isConformantType(tudresden.ocl20.pivot.pivotmodel.Type)
+   */
+  @Override
+  public boolean isConformant(Type type) {
+    return type != null && type.conformsTo(getUnboundType());
   }
 
   /**

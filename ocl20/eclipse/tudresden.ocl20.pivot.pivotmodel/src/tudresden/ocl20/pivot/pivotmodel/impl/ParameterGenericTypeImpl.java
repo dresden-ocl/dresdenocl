@@ -135,7 +135,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
   @Override
   protected TypedElement doBindGenericType(List<TypeParameter> parameters,
       List<? extends Type> types, TypedElement typedElement) {
- 
+
     // we have to iterate and compare manually because EObjectEList checks for object identity
     // rather than object equality, so the correct TypeParameter would not be found
     for (ListIterator<TypeParameter> it = parameters.listIterator(); it.hasNext();) {
@@ -145,8 +145,8 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
       if (typeParameterToBind.equals(getTypeParameter())) {
         Type type = types.get(it.previousIndex());
 
-        if (logger.isDebugEnabled()) {
-          logger.debug("Binding type of '" + typedElement + "' with '" + type + "'."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        if (logger.isInfoEnabled()) {
+          logger.info("Binding type of '" + typedElement + "' with '" + type + "'."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         }
 
         typedElement.setType(type);
@@ -158,19 +158,40 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
     return typedElement;
   }
 
-  
   /**
    * This method currently does nothing since we do not support type parameters as generic super
    * types. This can be implemented later if necessary.
    * 
    * @return the given <code>subType</code> without any changes
    * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List, java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List,
+   *      java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
    */
   @Override
+  @SuppressWarnings("unused")
   protected Type doBindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
       Type subType) {
     return subType;
+  }
+
+  /**
+   * This method returns <code>true</code> because any type is conformant to an unbound
+   * {@link TypeParameter}. The non-generic type of an element referring to a type parameter simply
+   * is the root of the object hierarchy (e.g. java.lang.Object or OclAny).
+   * 
+   * <p>
+   * To see why, consider the following example: a generic operation {@code <T> op(param:T) : T} can
+   * be called with any argument, no matter what type. The type parameter <code>T</code> will
+   * consecutively be bound to the type of the argument, determining the correct return type.
+   * </p>
+   * 
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#isConformantType(tudresden.ocl20.pivot.pivotmodel.Type)
+   */
+  @Override
+  @SuppressWarnings("unused")
+  public boolean isConformant(Type type) {
+    return true;
   }
 
   /*

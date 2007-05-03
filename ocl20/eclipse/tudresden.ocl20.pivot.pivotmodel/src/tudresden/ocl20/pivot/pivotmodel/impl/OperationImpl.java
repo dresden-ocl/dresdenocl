@@ -38,6 +38,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -74,19 +75,19 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isOrdered <em>Ordered</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique <em>Unique</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isMultiple <em>Multiple</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter <em>Input Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter <em>Output Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter <em>Return Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter <em>Signature Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isOrdered <em>Ordered</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique <em>Unique</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isMultiple <em>Multiple</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter <em>Input Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter <em>Output Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter <em>Return Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter <em>Signature Parameter</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class OperationImpl extends FeatureImpl implements Operation {
@@ -117,9 +118,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
   protected boolean ordered = ORDERED_EDEFAULT;
 
   /**
-   * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute. <!-- begin-user-doc
+   * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+   * <!-- begin-user-doc
    * --> <!-- end-user-doc -->
-   * 
    * @see #isUnique()
    * @generated
    * @ordered
@@ -127,9 +128,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
   protected static final boolean UNIQUE_EDEFAULT = true;
 
   /**
-   * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute. <!-- begin-user-doc
+   * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+   * <!-- begin-user-doc
    * --> <!-- end-user-doc -->
-   * 
    * @see #isUnique()
    * @generated
    * @ordered
@@ -157,9 +158,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
   protected boolean multiple = MULTIPLE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getOwnedTypeParameter() <em>Owned Type Parameter</em>}'
-   * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOwnedTypeParameter() <em>Owned Type Parameter</em>}' containment reference list.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOwnedTypeParameter()
    * @generated
    * @ordered
@@ -167,9 +167,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
   protected EList<TypeParameter> ownedTypeParameter = null;
 
   /**
-   * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment
-   * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment reference list.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOwnedParameter()
    * @generated
    * @ordered
@@ -181,7 +180,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected OperationImpl() {
@@ -304,7 +302,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public boolean isOrdered() {
@@ -313,7 +310,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOrdered(boolean newOrdered) {
@@ -326,7 +322,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public boolean isUnique() {
@@ -335,7 +330,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setUnique(boolean newUnique) {
@@ -348,7 +342,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public boolean isMultiple() {
@@ -357,7 +350,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setMultiple(boolean newMultiple) {
@@ -382,7 +374,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
   /**
    * <!-- begin-user-doc -->The code generated for {{@link #getOwnedTypeParameterGen()} is
    * redirected to this method.<!-- end-user-doc -->
-   * 
    * @generated
    */
   protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -396,7 +387,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Type getOwningType() {
@@ -406,7 +396,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOwningType(Type newOwningType, NotificationChain msgs) {
@@ -417,7 +406,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOwningType(Type newOwningType) {
@@ -452,7 +440,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
   /**
    * <!-- begin-user-doc -->The code generated for {{@link #getOwnedParameter()} is redirected to
    * this method. <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected final List<Parameter> getOwnedParameterGen() {
@@ -573,11 +560,30 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
     // check type conformance of each parameter
     else {
-      int index = 0;
 
-      for (Type type : paramTypes) {
-        if (!type.conformsTo(inputParameters.get(index++).getType())) {
-          match = false;
+      for (ListIterator<Type> it = paramTypes.listIterator(); it.hasNext();) {
+        Type type = it.next();
+
+        // get the next input parameter of this operation
+        Parameter parameter = inputParameters.get(it.previousIndex());
+
+        // if the input parameter has no type, check for conformance with generic type
+        if (parameter.getType() == null) {
+
+          if (parameter.getGenericType() != null) {
+            match = parameter.getGenericType().isConformant(type);
+          }
+
+        }
+
+        // else check for conformance with the type
+        else {
+          match = type.conformsTo(parameter.getType());
+        }
+
+        // there is no sense in continuing the search if two parameters did not match
+        if (match == false) {
+          break;
         }
       }
     }
@@ -672,7 +678,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
       if (boundOperation.getType() == null && boundOperation.getGenericType() != null) {
         boundOperation.getGenericType().bindGenericType(parameters,types,boundOperation);
       }
-      
+
       // bind all parameters
       for (Parameter parameter : boundOperation.getOwnedParameter()) {
         if (parameter.getType() == null && parameter.getGenericType() != null) {
@@ -735,7 +741,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -758,7 +763,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -777,7 +781,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -792,7 +795,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -824,7 +826,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -857,7 +858,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -887,7 +887,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -919,7 +918,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -955,7 +953,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -991,7 +988,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override

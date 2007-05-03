@@ -78,15 +78,15 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getNamespace <em>Namespace</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedOperation <em>Owned Operation</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedProperty <em>Owned Property</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getSuperType <em>Super Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getGenericSuperType <em>Generic Super Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedOperation <em>Owned Operation</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getOwnedProperty <em>Owned Property</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getGenericSuperType <em>Generic Super Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TypeImpl extends NamedElementImpl implements Type {
@@ -97,9 +97,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
   private static final Logger logger = Logger.getLogger(TypeImpl.class);
 
   /**
-   * The cached value of the '{@link #getOwnedTypeParameter() <em>Owned Type Parameter</em>}'
-   * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOwnedTypeParameter() <em>Owned Type Parameter</em>}' containment reference list.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOwnedTypeParameter()
    * @generated
    * @ordered
@@ -107,19 +106,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
   protected EList<TypeParameter> ownedTypeParameter = null;
 
   /**
-   * The cached value of the '{@link #getGenericSuperType() <em>Generic Super Type</em>}'
-   * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getGenericSuperType()
-   * @generated
-   * @ordered
-   */
-  protected EList<GenericType> genericSuperType = null;
-
-  /**
-   * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' containment
-   * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' containment reference list.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOwnedOperation()
    * @generated
    * @ordered
@@ -127,9 +115,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
   protected EList<Operation> ownedOperation = null;
 
   /**
-   * The cached value of the '{@link #getOwnedProperty() <em>Owned Property</em>}' containment
-   * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOwnedProperty() <em>Owned Property</em>}' containment reference list.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOwnedProperty()
    * @generated
    * @ordered
@@ -146,12 +133,20 @@ public class TypeImpl extends NamedElementImpl implements Type {
    */
   protected EList<Type> superType = null;
 
+  /**
+   * The cached value of the '{@link #getGenericSuperType() <em>Generic Super Type</em>}' containment reference list.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @see #getGenericSuperType()
+   * @generated
+   * @ordered
+   */
+  protected EList<GenericType> genericSuperType = null;
+
   // a map that contains instances of this Type with some or all of their type parameters bound
   private static Map<String, Type> boundTypes;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected TypeImpl() {
@@ -182,7 +177,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
   /**
    * <!-- begin-user-doc -->The code generated for {{@link #getSuperType()} is redirected to this
    * method. <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected final List<Type> getSuperTypeGen() {
@@ -194,7 +188,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public List<GenericType> getGenericSuperType() {
@@ -267,7 +260,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
   /**
    * <!-- begin-user-doc -->The code generated for {{@link #getOwnedTypeParameterGen()} is
    * redirected to this method.<!-- end-user-doc -->
-   * 
    * @generated
    */
   protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -281,7 +273,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Namespace getNamespace() {
@@ -291,7 +282,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetNamespace(Namespace newNamespace, NotificationChain msgs) {
@@ -302,7 +292,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setNamespace(Namespace newNamespace) {
@@ -704,7 +693,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
         }
       }
     }
-    
+
     // bind all generic supertypes
     for (GenericType genericSuperType : getGenericSuperType()) {
       genericSuperType.bindGenericSuperType(parameters,types,boundType);
@@ -773,7 +762,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -799,7 +787,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -822,7 +809,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -837,7 +823,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -861,7 +846,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -897,7 +881,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -927,7 +910,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -951,7 +933,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -975,7 +956,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -999,7 +979,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
