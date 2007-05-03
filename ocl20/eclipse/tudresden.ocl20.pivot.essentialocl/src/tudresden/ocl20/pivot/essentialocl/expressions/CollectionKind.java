@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology,     *
+ * This work was done as a project at the Chair for Software Technology      *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -46,24 +46,24 @@ import java.util.List;
  */
 public enum CollectionKind implements InternalCollectionKind {
   /**
-   * The '<em><b>Set</b></em>' literal object.
+   * The '<em><b>Collection</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #SET_VALUE
+   * @see #COLLECTION_VALUE
    * @generated
    * @ordered
    */
-  SET(0, "Set", "Set"), //$NON-NLS-1$ //$NON-NLS-2$
+  COLLECTION(0, "Collection", "Collection"), //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>Ordered Set</b></em>' literal object.
+   * The '<em><b>Sequence</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #ORDERED_SET_VALUE
+   * @see #SEQUENCE_VALUE
    * @generated
    * @ordered
    */
-  ORDERED_SET(1, "OrderedSet", "OrderedSet"), //$NON-NLS-1$ //$NON-NLS-2$
+  SEQUENCE(1, "Sequence", "Sequence"), //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
    * The '<em><b>Bag</b></em>' literal object.
@@ -76,42 +76,52 @@ public enum CollectionKind implements InternalCollectionKind {
   BAG(2, "Bag", "Bag"), //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>Sequence</b></em>' literal object.
+   * The '<em><b>Set</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #SEQUENCE_VALUE
+   * @see #SET_VALUE
    * @generated
    * @ordered
    */
-  SEQUENCE(3, "Sequence", "Sequence"); //$NON-NLS-1$ //$NON-NLS-2$
+  SET(3, "Set", "Set"), //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>Set</b></em>' literal value.
+   * The '<em><b>Ordered Set</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #ORDERED_SET_VALUE
+   * @generated
+   * @ordered
+   */
+  ORDERED_SET(4, "OrderedSet", "OrderedSet"); //$NON-NLS-1$ //$NON-NLS-2$
+
+  /**
+   * The '<em><b>Collection</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Set</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Collection</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #SET
+   * @see #COLLECTION
    * @generated
    * @ordered
    */
-  public static final int SET_VALUE = 0;
+  public static final int COLLECTION_VALUE = 0;
 
   /**
-   * The '<em><b>Ordered Set</b></em>' literal value.
+   * The '<em><b>Sequence</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Ordered Set</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Sequence</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #ORDERED_SET
+   * @see #SEQUENCE
    * @generated
    * @ordered
    */
-  public static final int ORDERED_SET_VALUE = 1;
+  public static final int SEQUENCE_VALUE = 1;
 
   /**
    * The '<em><b>Bag</b></em>' literal value.
@@ -128,18 +138,32 @@ public enum CollectionKind implements InternalCollectionKind {
   public static final int BAG_VALUE = 2;
 
   /**
-   * The '<em><b>Sequence</b></em>' literal value.
+   * The '<em><b>Set</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Sequence</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Set</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #SEQUENCE
+   * @see #SET
    * @generated
    * @ordered
    */
-  public static final int SEQUENCE_VALUE = 3;
+  public static final int SET_VALUE = 3;
+
+  /**
+   * The '<em><b>Ordered Set</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Ordered Set</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #ORDERED_SET
+   * @generated
+   * @ordered
+   */
+  public static final int ORDERED_SET_VALUE = 4;
 
   /**
    * An array of all the '<em><b>Collection Kind</b></em>' enumerators.
@@ -147,8 +171,8 @@ public enum CollectionKind implements InternalCollectionKind {
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final CollectionKind[] VALUES_ARRAY = new CollectionKind[] { SET, ORDERED_SET,
-      BAG, SEQUENCE, };
+  private static final CollectionKind[] VALUES_ARRAY = new CollectionKind[] { COLLECTION, SEQUENCE,
+      BAG, SET, ORDERED_SET, };
 
   /**
    * A public read-only list of all the '<em><b>Collection Kind</b></em>' enumerators.
@@ -199,14 +223,16 @@ public enum CollectionKind implements InternalCollectionKind {
    */
   public static CollectionKind get(int value) {
     switch (value) {
+      case COLLECTION_VALUE:
+        return COLLECTION;
+      case SEQUENCE_VALUE:
+        return SEQUENCE;
+      case BAG_VALUE:
+        return BAG;
       case SET_VALUE:
         return SET;
       case ORDERED_SET_VALUE:
         return ORDERED_SET;
-      case BAG_VALUE:
-        return BAG;
-      case SEQUENCE_VALUE:
-        return SEQUENCE;
     }
     return null;
   }
