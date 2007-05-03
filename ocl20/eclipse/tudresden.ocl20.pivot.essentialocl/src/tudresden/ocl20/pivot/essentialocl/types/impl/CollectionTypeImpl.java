@@ -40,6 +40,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
@@ -53,11 +54,12 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getElementType <em>Element Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getElementType <em>Element Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class CollectionTypeImpl extends TypeImpl implements CollectionType {
@@ -88,8 +90,30 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   protected OclLibrary oclLibrary = null;
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The default value of the '{@link #getKind() <em>Kind</em>}' attribute. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
+   * @see #getKind()
    * @generated
+   * @ordered
+   */
+  protected static final CollectionKind KIND_EDEFAULT = CollectionKind.COLLECTION;
+
+  /**
+   * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * 
+   * @see #getKind()
+   * @generated
+   * @ordered
+   */
+  protected CollectionKind kind = KIND_EDEFAULT;
+
+  /**
+   * The EMF implementation is adapted in order to set the element type of the collection type to
+   * <code>OclAny</code> which is the default.
+   * 
+   * @generated NOT
    */
   protected CollectionTypeImpl() {
     super();
@@ -115,8 +139,14 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   @Override
   public String getName() {
 
-    // determine the name initially and after the element type has been set
-    if (name == NAME_EDEFAULT || elementType != null) {
+    // check whether the name has already been determined
+    if (name == NAME_EDEFAULT) {
+
+      // we cannot determine the name until the element type is set
+      if (elementType == null) {
+        return getCollectionTypeName();
+      }
+
       name = determineCollectionTypeName();
     }
 
@@ -142,7 +172,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
     if (getElementType() != null) {
       name.append('(').append(getElementType().getName()).append(')');
     }
-
+    
     if (logger.isDebugEnabled()) {
       logger.debug("determineCollectionTypeName() - exit - return value=" + name); //$NON-NLS-1$
     }
@@ -151,13 +181,14 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   }
 
   /**
-   * Helper method to return the literal for this type of collection as defined in the OCL
-   * specification. Subclasses should override.
+   * Helper method to return the literal for this type of collection. This simply returns the
+   * string value of the {@link #getKind() kind} of this collection type as modelled in the
+   * Standard Library.
    * 
    * @return a <code>String</code> representing the type of collection
    */
   protected String getCollectionTypeName() {
-    return "Collection"; //$NON-NLS-1$
+    return getKind().toString();
   }
 
   /**
@@ -186,6 +217,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Type getElementType() {
@@ -222,6 +254,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   /**
    * <!-- begin-user-doc -->The code for {@link #setElementType(Type)} is forwarded to this method.
    * <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setElementTypeGen(Type newElementType) {
@@ -234,6 +267,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclLibrary getOclLibrary() {
@@ -242,6 +276,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setOclLibrary(OclLibrary newOclLibrary) {
@@ -250,6 +285,28 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this,Notification.SET,
           TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY,oldOclLibrary,oclLibrary));
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public CollectionKind getKind() {
+    return kind;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public void setKind(CollectionKind newKind) {
+    CollectionKind oldKind = kind;
+    kind = newKind == null ? KIND_EDEFAULT : newKind;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this,Notification.SET,TypesPackageImpl.COLLECTION_TYPE__KIND,
+          oldKind,kind));
   }
 
   /**
@@ -307,7 +364,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#conformsTo(tudresden.ocl20.pivot.pivotmodel.Type)
    */
   @Override
-  public boolean conformsTo(Type other) {
+  public final boolean conformsTo(Type other) {
     if (logger.isDebugEnabled()) {
       logger.debug("conformsTo(other=" + other + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
@@ -317,13 +374,22 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
     // by default the other type is not conformant
     conformant = false;
 
-    // check other metatype
+    // the other type must be a collection type, too
     if (other instanceof CollectionType) {
       CollectionType otherCollectionType = (CollectionType) other;
-      Type elementType = getElementType();
 
-      conformant = (elementType != null) ? elementType.conformsTo(otherCollectionType
-          .getElementType()) : false;
+      // a collection type conforms to a type of the same kind or the super type Collection
+      if (getKind() == otherCollectionType.getKind()
+          || otherCollectionType.getKind() == CollectionKind.COLLECTION) {
+
+        Type otherElementType = otherCollectionType.getElementType();
+
+        // collection types always conform to unbound collection types; this is a bit of a hack
+        // to ensure that operations with unbound collection types as parameters (e.g.,
+        // Collection::product) can be looked up properly
+        conformant = otherElementType == null ? true : (elementType != null ? elementType
+            .conformsTo(otherElementType) : false);
+      }
     }
 
     if (logger.isDebugEnabled()) {
@@ -424,26 +490,29 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
       throw new IllegalStateException("An OCL Collection type must have exactly one type parameter"); //$NON-NLS-1$
     }
 
-    Type elementType = null;
+    // bind the collection type with the given parameters
+    CollectionType boundCollectionType = (CollectionType) super.bindTypeParameter(parameters,types);
 
-    // find the TypeParameter that corresponds to the element type; we have to find it manually
-    // since the EObjectEList checks for object identity, not object equality
-    for (ListIterator<TypeParameter> it = parameters.listIterator(); it.hasNext();) {
-      if (it.next().equals(getOwnedTypeParameter().get(0))) {
-        elementType = types.get(it.previousIndex());
-        break;
+    // check whether this is a newly bound collection type, i.e. the element type hasnt been set yet
+    if (boundCollectionType.getElementType() == null) {
+      Type elementType = null;
+
+      // find the TypeParameter that corresponds to the element type; we have to find it manually
+      // since the EObjectEList checks for object identity, not object equality
+      for (ListIterator<TypeParameter> it = parameters.listIterator(); it.hasNext();) {
+        if (it.next().equals(getOwnedTypeParameter().get(0))) {
+          elementType = types.get(it.previousIndex());
+          break;
+        }
+      }
+
+      // the element type could be null if an empty binding information was supplied
+      if (elementType != null) {
+        boundCollectionType.setElementType(elementType);
       }
     }
 
-    // now bind the collection type with the given parameters
-    CollectionType collectionType = (CollectionType) super.bindTypeParameter(parameters,types);
-
-    // finally set the new element type if it hasn't been set in the meantime
-    if (elementType != null && collectionType.getElementType() == null) {
-      collectionType.setElementType(elementType);
-    }
-
-    return collectionType;
+    return boundCollectionType;
   }
 
   /**
@@ -483,6 +552,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -492,12 +562,15 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
         return getElementType();
       case TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY:
         return getOclLibrary();
+      case TypesPackageImpl.COLLECTION_TYPE__KIND:
+        return getKind();
     }
     return super.eGet(featureID,resolve,coreType);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -509,12 +582,16 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
       case TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY:
         setOclLibrary((OclLibrary) newValue);
         return;
+      case TypesPackageImpl.COLLECTION_TYPE__KIND:
+        setKind((CollectionKind) newValue);
+        return;
     }
     super.eSet(featureID,newValue);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -526,14 +603,17 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
       case TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY:
         setOclLibrary((OclLibrary) null);
         return;
+      case TypesPackageImpl.COLLECTION_TYPE__KIND:
+        setKind(KIND_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
 
   /**
-   * The EMF implementation is adapted to prevent that the name of the <code>CollectionType</code>
-   * is serialized to XMI. This is necessary to prevent setting the name upon loading the document
-   * which would throw an exception.
+   * The EMF implementation is adapted to prevent that the name and element type of the
+   * <code>CollectionType</code> are serialized to XMI. This is necessary to prevent setting these
+   * properties upon loading the document which would cause an exception.
    * 
    * @generated NOT
    * 
@@ -542,10 +622,11 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
-      case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
-        return elementType != null;
       case TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY:
         return oclLibrary != null;
+      case TypesPackageImpl.COLLECTION_TYPE__KIND:
+        return kind != KIND_EDEFAULT;
+      case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
       case TypesPackageImpl.COLLECTION_TYPE__NAME:
         return false;
     }
@@ -554,6 +635,23 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public String toString() {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (kind: "); //$NON-NLS-1$
+    result.append(kind);
+    result.append(')');
+    return result.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
