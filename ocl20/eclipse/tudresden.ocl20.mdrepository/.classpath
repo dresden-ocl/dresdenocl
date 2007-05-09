@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="lib/internal/ocl20jmiapi.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/internal/ocl20jmiimpl.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/external/mdr/nbjmi_jmiutils.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/external/mdr/nbjmi_mdrapi.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/external/mdr/nbjmi_mdrimpl.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/external/lib/jmi.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/external/lib/mof.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/external/lib/openide.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
