@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mof Adapter
+Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.mof;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.pivot.metamodels.mof.MofMetamodelPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.pivotmodel,
+ org.apache.commons.lang,
+ tudresden.ocl20.mdrepository
+Eclipse-LazyStart: true
+Bundle-Vendor: TU Dresden, Software Technology Group
