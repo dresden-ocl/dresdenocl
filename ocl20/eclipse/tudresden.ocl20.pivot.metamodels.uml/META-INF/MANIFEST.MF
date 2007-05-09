@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Uml Adapter
+Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.uml;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.pivot.metamodels.uml.UmlMetamodelPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.mdrepository,
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.pivotmodel,
+ org.apache.commons.lang
+Eclipse-LazyStart: true
+Bundle-Vendor: TU Dresden, Software Technology Group

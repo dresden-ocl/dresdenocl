@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="tudresden.ocl20.pivot.modelbus.metamodels">
+      <metamodel
+            icon="icons/uml.gif"
+            id="tudresden.ocl20.pivot.metamodels.uml"
+            modelProvider="tudresden.ocl20.pivot.metamodels.uml.internal.provider.UmlModelProvider"
+            name="Uml">
+      </metamodel>
+   </extension>
+
+</plugin>
