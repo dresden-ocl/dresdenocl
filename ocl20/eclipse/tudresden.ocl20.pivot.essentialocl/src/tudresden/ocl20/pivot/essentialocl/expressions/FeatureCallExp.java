@@ -32,13 +32,57 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions;
 
+import tudresden.ocl20.pivot.pivotmodel.Type;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Feature Call Exp</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType <em>Source Type</em>}</li>
+ * </ul>
+ * </p>
  *
  * @generated
  */
 public interface FeatureCallExp extends CallExp {
+
+  /**
+   * Returns the value of the '<em><b>Source Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <p>
+   * The source type of a <code>FeatureCallExp</code> is only required
+   * for static feature calls because these do not have an explicit source
+   * expression as defined by {@link CallExp}.
+   * </p>
+   * 
+   * <p>
+   * Actually, this attribute is currently only required for the static <code>allInstances</code>
+   * operation because its return type <code>Set(T)</code> depends
+   * on the type it is called on. For instance, <code>MyClass::allInstances()</code>
+   * has the return type <code>Set(MyClass)</code>. Since the corresponding
+   * generic operation from the OCL Standard Library needs to be bound to
+   * the source type, it must be available somewhere in the abstract syntax.
+   * </p>
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Source Type</em>' reference.
+   * @see #setSourceType(Type)
+   * @generated
+   */
+  Type getSourceType();
+
+  /**
+   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType <em>Source Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Source Type</em>' reference.
+   * @see #getSourceType()
+   * @generated
+   */
+  void setSourceType(Type value);
 } // FeatureCallExp

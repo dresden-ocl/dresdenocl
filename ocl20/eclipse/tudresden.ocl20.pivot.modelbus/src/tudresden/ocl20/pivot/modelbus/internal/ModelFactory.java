@@ -625,6 +625,7 @@ public class ModelFactory implements IModelFactory {
 
     // create the expression
     OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE.createOperationCallExp();
+    operationCallExp.setSourceType(owningType);
     operationCallExp.setReferredOperation(operation);
 
     if (argument != null) {
@@ -723,6 +724,7 @@ public class ModelFactory implements IModelFactory {
 
     // create the expression
     PropertyCallExp propertyCallExp = ExpressionsFactory.INSTANCE.createPropertyCallExp();
+    propertyCallExp.setSourceType(owningType);
     propertyCallExp.setReferredProperty(property);
 
     // a property call expression needs access to the OCL library for determining its type

@@ -33,6 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -48,8 +49,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.TupleType;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -122,13 +126,6 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
 
     // if there are any output parameters, the expression type is a tuple type
     else if (referredOperation.getOutputParameter().size() > 0) {
-
-      // check that the OCL library reference is set
-      if (oclLibrary == null) {
-        throw new IllegalStateException("The OclLibrary reference for " + this //$NON-NLS-1$
-            + " has not been initialized."); //$NON-NLS-1$
-      }
-
       List<Property> tupleTypeProperties = new ArrayList<Property>();
 
       // add all output parameters
@@ -141,18 +138,55 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
         tupleTypeProperties.add(referredOperation.getReturnParameter().asProperty());
       }
 
-      type = oclLibrary.makeTupleType(tupleTypeProperties);
+      type = getValidOclLibrary().makeTupleType(tupleTypeProperties);
     }
 
     // otherwise default to the operation's type
     else {
-      // TODO: bind allInstances and product
+      // TODO: remove these explicit references to the OCL Standard Library from the code
+
+      // deal with 'allInstances'
+      if (referredOperation.getName().equals("allInstances")) { //$NON-NLS-1$
+        referredOperation = bindAllInstancesOperation(referredOperation);
+      }
 
       type = referredOperation.getType();
     }
 
     return getOclType(type);
   }
+  
+  // helper method to bind the 'OclAny::allInstances' operation
+  private Operation bindAllInstancesOperation(Operation allInstancesOperation) {
+    Type srcType;
+    
+    // determine the source type of the 'allInstances' call
+    srcType = source != null ? source.getType() : sourceType;
+
+    if (srcType == null) {
+      throw new WellformednessException(
+          "The source type of the operation call to 'allInstances' cannot be determined."); //$NON-NLS-1$
+    }
+
+    // allInstances may only refer to types with a finite number of instances
+    if (srcType instanceof PrimitiveType || srcType instanceof CollectionType
+        || srcType instanceof TupleType) {
+      throw new WellformednessException(
+          "The 'allInstances' operation may only be called on types with a finite number of instances, " //$NON-NLS-1$
+              + "the source type '" + srcType.getName() + "' is invalid."); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    // check that the 'allInstances' operation has been modeled correctly
+    if (allInstancesOperation.getOwnedTypeParameter().size() != 1) {
+      throw new IllegalStateException(
+          "The 'allInstances' operation in the OCL Library has not been modeled with exactly one type parameter."); //$NON-NLS-1$
+    }
+
+    // now bind the 'allInstances' operation with the source type
+    return allInstancesOperation.bindTypeParameter(referredOperation
+        .getOwnedTypeParameter(),Arrays.asList(sourceType));
+  }
+  
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->

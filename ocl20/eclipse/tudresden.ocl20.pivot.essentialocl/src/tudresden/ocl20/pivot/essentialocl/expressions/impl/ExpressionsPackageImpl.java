@@ -1231,13 +1231,22 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   public static final int FEATURE_CALL_EXP__SOURCE = CALL_EXP__SOURCE;
 
   /**
+   * The feature id for the '<em><b>Source Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE_CALL_EXP__SOURCE_TYPE = CALL_EXP_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Feature Call Exp</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int FEATURE_CALL_EXP_FEATURE_COUNT = CALL_EXP_FEATURE_COUNT + 0;
+  public static final int FEATURE_CALL_EXP_FEATURE_COUNT = CALL_EXP_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl <em>Property Call Exp</em>}' class.
@@ -1311,6 +1320,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int PROPERTY_CALL_EXP__SOURCE = FEATURE_CALL_EXP__SOURCE;
+
+  /**
+   * The feature id for the '<em><b>Source Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROPERTY_CALL_EXP__SOURCE_TYPE = FEATURE_CALL_EXP__SOURCE_TYPE;
 
   /**
    * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -1411,6 +1429,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
    * @ordered
    */
   public static final int OPERATION_CALL_EXP__SOURCE = FEATURE_CALL_EXP__SOURCE;
+
+  /**
+   * The feature id for the '<em><b>Source Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int OPERATION_CALL_EXP__SOURCE_TYPE = FEATURE_CALL_EXP__SOURCE_TYPE;
 
   /**
    * The feature id for the '<em><b>Argument</b></em>' containment reference list.
@@ -3630,6 +3657,19 @@ public class ExpressionsPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType <em>Source Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Source Type</em>'.
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType()
+   * @see #getFeatureCallExp()
+   * @generated
+   */
+  public EReference getFeatureCallExp_SourceType() {
+    return (EReference) featureCallExpEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp <em>Boolean Literal Exp</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3992,6 +4032,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
     createEReference(ifExpEClass,IF_EXP__ELSE_EXPRESSION);
 
     featureCallExpEClass = createEClass(FEATURE_CALL_EXP);
+    createEReference(featureCallExpEClass,FEATURE_CALL_EXP__SOURCE_TYPE);
 
     booleanLiteralExpEClass = createEClass(BOOLEAN_LITERAL_EXP);
     createEAttribute(booleanLiteralExpEClass,BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL);
@@ -4117,10 +4158,9 @@ public class ExpressionsPackageImpl extends EPackageImpl {
         null,
         "initExpression",null,0,1,Variable.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    EOperation op = addEOperation(variableEClass,thePivotModelPackageImpl.getParameter(),
-        "asParameter",0,1); //$NON-NLS-1$
+    addEOperation(variableEClass,thePivotModelPackageImpl.getParameter(),"asParameter",0,1); //$NON-NLS-1$
 
-    op = addEOperation(variableEClass,thePivotModelPackageImpl.getProperty(),"asProperty",0,1); //$NON-NLS-1$
+    addEOperation(variableEClass,thePivotModelPackageImpl.getProperty(),"asProperty",0,1); //$NON-NLS-1$
 
     initEClass(unlimitedNaturalExpEClass,UnlimitedNaturalExp.class,
         "UnlimitedNaturalExp",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -4209,9 +4249,9 @@ public class ExpressionsPackageImpl extends EPackageImpl {
         null,
         "oclLibrary",null,0,1,OclExpression.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(oclExpressionEClass,this.getOperationCallExp(),"withAtPre",0,1); //$NON-NLS-1$
+    addEOperation(oclExpressionEClass,this.getOperationCallExp(),"withAtPre",0,1); //$NON-NLS-1$
 
-    op = addEOperation(oclExpressionEClass,this.getOperationCallExp(),"withAsSet",0,1); //$NON-NLS-1$
+    addEOperation(oclExpressionEClass,this.getOperationCallExp(),"withAsSet",0,1); //$NON-NLS-1$
 
     initEClass(numericLiteralExpEClass,NumericLiteralExp.class,
         "NumericLiteralExp",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -4289,6 +4329,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 
     initEClass(featureCallExpEClass,FeatureCallExp.class,
         "FeatureCallExp",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getFeatureCallExp_SourceType(),
+        thePivotModelPackageImpl.getType(),
+        null,
+        "sourceType",null,0,1,FeatureCallExp.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(booleanLiteralExpEClass,BooleanLiteralExp.class,
         "BooleanLiteralExp",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -4834,6 +4879,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EClass FEATURE_CALL_EXP = eINSTANCE.getFeatureCallExp();
+
+    /**
+     * The meta object literal for the '<em><b>Source Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EReference FEATURE_CALL_EXP__SOURCE_TYPE = eINSTANCE
+        .getFeatureCallExp_SourceType();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.BooleanLiteralExpImpl <em>Boolean Literal Exp</em>}' class.

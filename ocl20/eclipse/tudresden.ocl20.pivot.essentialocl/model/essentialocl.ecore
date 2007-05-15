@@ -232,7 +232,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" lowerBound="1"
           eType="#//expressions/OclExpression" containment="true" resolveProxies="false"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="FeatureCallExp" abstract="true" eSuperTypes="#//expressions/CallExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FeatureCallExp" abstract="true" eSuperTypes="#//expressions/CallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sourceType" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;The source type of a &lt;code>FeatureCallExp&lt;/code> is only required&#xD;&#xA;for static feature calls because these do not have an explicit source&#xD;&#xA;expression as defined by {@link CallExp}.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Actually, this attribute is currently only required for the static &lt;code>allInstances&lt;/code>&#xD;&#xA;operation because its return type &lt;code>Set(T)&lt;/code> depends&#xD;&#xA;on the type it is called on. For instance, &lt;code>MyClass::allInstances()&lt;/code>&#xD;&#xA;has the return type &lt;code>Set(MyClass)&lt;/code>. Since the corresponding&#xD;&#xA;generic operation from the OCL Standard Library needs to be bound to&#xD;&#xA;the source type, it must be available somewhere in the abstract syntax.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExp" eSuperTypes="#//expressions/PrimitiveLiteralExp">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="booleanSymbol" eType="ecore:EDataType ../../tudresden.ocl20.pivot.pivotmodel/model/datatypes.ecore#//Boolean"/>
     </eClassifiers>
