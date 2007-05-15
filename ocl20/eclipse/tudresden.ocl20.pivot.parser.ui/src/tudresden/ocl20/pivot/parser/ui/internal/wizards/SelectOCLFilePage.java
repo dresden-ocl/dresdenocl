@@ -37,12 +37,13 @@ import java.io.File;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FileFieldEditor;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -144,14 +145,18 @@ public class SelectOCLFilePage extends WizardPage {
     fileSelectionEditor = new FileFieldEditor("oclFile",ParserUIMessages.ParseOCLPage_SelectOCLFileLabel,fileSelectionArea); //$NON-NLS-1$
     fileSelectionEditor.setFileExtensions(getFileExtensions());
 
-    fileSelectionEditor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener() {
+    fileSelectionEditor.setPropertyChangeListener(new IPropertyChangeListener() {
 
-      @SuppressWarnings("unused")
-      public void modifyText(ModifyEvent e) {
-        updatePageComplete();
+      public void propertyChange(PropertyChangeEvent event) {
+        
+        if (event.getProperty().equals(FieldEditor.VALUE)) {
+          updatePageComplete();
+        }
+        
       }
-
+      
     });
+
   }
 
   // initializes the file selection area from the selecton in the workspace

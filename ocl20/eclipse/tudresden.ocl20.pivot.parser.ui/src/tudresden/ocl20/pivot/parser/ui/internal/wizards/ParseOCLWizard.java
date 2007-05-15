@@ -86,7 +86,7 @@ public class ParseOCLWizard extends Wizard implements IImportWizard {
     IOclParser parser = ParserPlugin.getParser(activeModel);
 
     try {
-      parser.parse(selectOCLFilePage.getSelectedOCLFile().toURL());
+      parser.parse(selectOCLFilePage.getSelectedOCLFile().toURI().toURL());
     }
 
     catch (ParseException e) {
