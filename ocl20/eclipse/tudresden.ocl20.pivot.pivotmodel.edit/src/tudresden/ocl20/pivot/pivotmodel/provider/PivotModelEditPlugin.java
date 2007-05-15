@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.pivotmodel.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**

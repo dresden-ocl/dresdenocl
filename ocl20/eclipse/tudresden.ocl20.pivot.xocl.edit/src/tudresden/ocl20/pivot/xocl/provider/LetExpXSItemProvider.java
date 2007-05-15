@@ -39,7 +39,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -161,15 +160,14 @@ public class LetExpXSItemProvider extends OclExpressionXSItemProvider implements
   }
 
   /**
-   * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object.
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
-      Object object) {
+  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
 
     newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LET_EXP_XS__IN,

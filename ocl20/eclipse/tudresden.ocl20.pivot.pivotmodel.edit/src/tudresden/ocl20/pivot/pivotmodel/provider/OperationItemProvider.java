@@ -40,7 +40,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -59,9 +58,8 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Operation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Operation} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class OperationItemProvider extends FeatureItemProvider implements
@@ -69,9 +67,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public OperationItemProvider(AdapterFactory adapterFactory) {
@@ -79,9 +77,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -101,9 +99,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This adds a property descriptor for the Ordered feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Ordered feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addOrderedPropertyDescriptor(Object object) {
@@ -119,9 +117,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This adds a property descriptor for the Unique feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Unique feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addUniquePropertyDescriptor(Object object) {
@@ -137,9 +135,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This adds a property descriptor for the Multiple feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Multiple feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addMultiplePropertyDescriptor(Object object) {
@@ -155,9 +153,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This adds a property descriptor for the Input Parameter feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Input Parameter feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addInputParameterPropertyDescriptor(Object object) {
@@ -173,9 +171,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This adds a property descriptor for the Output Parameter feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Output Parameter feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addOutputParameterPropertyDescriptor(Object object) {
@@ -191,9 +189,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This adds a property descriptor for the Return Parameter feature. <!-- begin-user-doc --> <!--
+   * This adds a property descriptor for the Return Parameter feature.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   protected void addReturnParameterPropertyDescriptor(Object object) {
@@ -209,9 +207,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This adds a property descriptor for the Signature Parameter feature. <!-- begin-user-doc -->
+   * This adds a property descriptor for the Signature Parameter feature.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected void addSignatureParameterPropertyDescriptor(Object object) {
@@ -247,7 +245,6 @@ public class OperationItemProvider extends FeatureItemProvider implements
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -259,8 +256,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This returns Operation.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This returns Operation.gif.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
@@ -366,15 +363,14 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object. <!-- begin-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
-      Object object) {
+  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
 
     newChildDescriptors.add(createChildParameter(
@@ -387,9 +383,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override

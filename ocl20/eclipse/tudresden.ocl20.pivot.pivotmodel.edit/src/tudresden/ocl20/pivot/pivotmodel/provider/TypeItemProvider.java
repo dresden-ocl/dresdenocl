@@ -44,7 +44,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.command.CreateChildCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -102,17 +101,17 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
   /**
    * This adds a property descriptor for the Super Type feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * The EMF implementation is adapted to add the special {@link SuperTypePropertyDescriptor}.
+   * </p>
+   * 
+   * @generated NOT
    */
   protected void addSuperTypePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory)
-            .getRootAdapterFactory(),getResourceLocator(),getString("_UI_Type_superType_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_Type_superType_feature","_UI_Type_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.TYPE__SUPER_TYPE,true,true,true,null,null,null));
+    itemPropertyDescriptors.add(new SuperTypePropertyDescriptor(
+        getString("_UI_Type_superType_feature"),getString("_UI_PropertyDescriptor_description", //$NON-NLS-1$//$NON-NLS-2$
+            "_UI_Type_superType_feature","_UI_Type_type"))); //$NON-NLS-1$//$NON-NLS-2$
   }
 
   /**
@@ -401,15 +400,14 @@ public class TypeItemProvider extends NamedElementItemProvider implements
   }
 
   /**
-   * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object.
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
-      Object object) {
+  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
 
     newChildDescriptors.add(createChildParameter(

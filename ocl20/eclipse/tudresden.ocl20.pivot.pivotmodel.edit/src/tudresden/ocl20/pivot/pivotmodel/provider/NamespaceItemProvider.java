@@ -39,13 +39,8 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.emf.edit.command.CommandParameter;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -59,7 +54,6 @@ import tudresden.ocl20.pivot.pivotmodel.GenericType;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
@@ -239,7 +233,7 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
    * @generated NOT
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
+  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors,
       Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
 
