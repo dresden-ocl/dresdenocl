@@ -75,8 +75,11 @@ import tudresden.ocl20.pivot.xocl.CollectionOperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.ConstraintKindXS;
 import tudresden.ocl20.pivot.xocl.ConstraintXS;
 import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
+import tudresden.ocl20.pivot.xocl.IntegerLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.NamespaceXS;
 import tudresden.ocl20.pivot.xocl.OclExpressionXS;
+import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.PropertyCallExpXS;
 import tudresden.ocl20.pivot.xocl.VariableExpXS;
 import tudresden.ocl20.pivot.xocl.VariableXS;
@@ -104,9 +107,6 @@ public class XOCLParser implements IOclParser {
    * {@link OclExpression}s from {@link OclExpressionXS} elements.
    */
   protected class ModelSwitch extends XOCLSwitch<OclExpression> {
-
-    // a logger for this class
-    private final Logger logger = ParserPlugin.getLogger(ModelSwitch.class);
 
     // a cache of previously created variables
     private Map<VariableXS, Variable> variables;
@@ -143,16 +143,21 @@ public class XOCLParser implements IOclParser {
     /*
      * (non-Javadoc)
      * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseModelOperationCallExpXS(tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS)
+     */
+    @Override
+    public OclExpression caseModelOperationCallExpXS(ModelOperationCallExpXS expression) {
+      return getModelFactory().createOperationCallExp(doSwitch(expression.getSource()),
+          expression.getReferredOperationName(),parseArguments(expression));
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseCollectionOperationCallExpXS(tudresden.ocl20.pivot.xocl.CollectionOperationCallExpXS)
      */
     @Override
     public OclExpression caseCollectionOperationCallExpXS(CollectionOperationCallExpXS expression) {
-      List<OclExpression> argument = new ArrayList<OclExpression>(expression.getArgument().size());
-
-      // parse the arguments of the operation call expression
-      for (OclExpressionXS oclExpressionXS : expression.getArgument()) {
-        argument.add(doSwitch(oclExpressionXS));
-      }
 
       // parse the source expression
       OclExpression source = doSwitch(expression.getSource());
@@ -164,8 +169,25 @@ public class XOCLParser implements IOclParser {
       }
 
       return getModelFactory().createOperationCallExp(source,
-          expression.getReferredCollectionOperation().toString(),
-          argument.toArray(new OclExpression[argument.size()]));
+          expression.getReferredCollectionOperation().toString(),parseArguments(expression));
+    }
+
+    
+    /**
+     * Helper method to parse the arguments of an operation call expression.
+     */
+    private OclExpression[] parseArguments(OperationCallExpXS operationCallExpXS) {
+      List<OclExpression> arguments;
+
+      // create a new list for the OCL expressions parsed from the arguments
+      arguments = new ArrayList<OclExpression>(operationCallExpXS.getArgument().size());
+
+      // parse the arguments of the operation call expression
+      for (OclExpressionXS oclExpressionXS : operationCallExpXS.getArgument()) {
+        arguments.add(doSwitch(oclExpressionXS));
+      }
+
+      return arguments.toArray(new OclExpression[arguments.size()]);
     }
 
     /*
@@ -191,6 +213,17 @@ public class XOCLParser implements IOclParser {
 
       return getModelFactory().createVariableExp(variable);
     }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseIntegerLiteralExpXS(tudresden.ocl20.pivot.xocl.IntegerLiteralExpXS)
+     */
+    @Override
+    public OclExpression caseIntegerLiteralExpXS(IntegerLiteralExpXS expression) {
+      return getModelFactory().createIntegerLiteralExp(expression.getIntegerSymbol());
+    }
+
   }
 
   /**
