@@ -292,6 +292,11 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
     ModelSelectionAction action = modelSelectionActions.get(model);
 
     if (action != null && action != selectedAction) {
+      
+      if (selectedAction != null) {
+        selectedAction.setChecked(false);  
+      }
+      
       action.setChecked(true);
       selectedAction = action;
     }

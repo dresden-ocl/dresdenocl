@@ -17,6 +17,23 @@
       </view>
    </extension>
    <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
+            name="Dresden OCL2 Toolkit">
+      </category>
+      <wizard
+            category="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
+            class="tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelWizard"
+            icon="icons/models.gif"
+            id="tudresden.ocl20.pivot.modelbus.ui.importWizards.loadModelWizard"
+            name="Domain-Specific Model">
+         <description>
+            Load a domain-specific model into the Model Browser view.
+         </description>
+      </wizard>
+   </extension>
+      <extension
          point="org.eclipse.ui.actionSets">
       <actionSet
             description="Temporary tests"
@@ -32,5 +49,5 @@
          </action>
       </actionSet>
    </extension>
-
+   
 </plugin>
