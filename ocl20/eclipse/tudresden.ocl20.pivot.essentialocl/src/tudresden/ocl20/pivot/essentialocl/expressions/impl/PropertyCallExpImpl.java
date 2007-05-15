@@ -107,6 +107,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
    * 
    * If the {@link #getReferredProperty() referred property} of this <code>PropertyCallExp</code>
    * is <code>null</code>, a {@link WellformednessException} is thrown.
+   * </p>
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
