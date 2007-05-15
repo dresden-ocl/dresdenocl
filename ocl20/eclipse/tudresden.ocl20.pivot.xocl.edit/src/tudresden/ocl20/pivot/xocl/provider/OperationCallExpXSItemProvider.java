@@ -158,7 +158,11 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
 
     if (StringUtils.isNotEmpty(referredOperation)) {
 
-      if (isInfix(operationCallExp)) {
+      if (isUnary(operationCallExp)) {
+        label.append(referredOperation).append(' ');
+      }
+      
+      else if (isInfix(operationCallExp)) {
         label.append(' ').append(referredOperation).append(' ');
 
         if (operationCallExp.getArgument().size() == 1) {
@@ -203,6 +207,12 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
    * used to separate the operation name from the source name.
    */
   protected abstract String getOperationDelimiter();
+
+  /**
+   * Helper method used by the template method {@link #getText(Object)}. Returns whether the
+   * associated operation is unary or not.
+   */
+  protected abstract boolean isUnary(OperationCallExpXS operationCallExp);
 
   /**
    * Helper method used by the template method {@link #getText(Object)}. Returns whether the

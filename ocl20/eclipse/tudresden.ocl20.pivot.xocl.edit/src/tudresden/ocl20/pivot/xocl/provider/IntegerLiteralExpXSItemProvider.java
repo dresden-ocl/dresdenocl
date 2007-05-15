@@ -46,7 +46,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.xocl.IntegerLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
@@ -117,23 +116,24 @@ public class IntegerLiteralExpXSItemProvider extends NumericLiteralExpXSItemProv
   }
 
   /**
-   * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Adapted to return the value of the referenced integer literal if set.
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    IntegerLiteralExpXS integerLiteralExpXS = (IntegerLiteralExpXS) object;
-    return getString("_UI_IntegerLiteralExpXS_type") + " " + integerLiteralExpXS.getIntegerSymbol(); //$NON-NLS-1$ //$NON-NLS-2$
+    return String.valueOf(((IntegerLiteralExpXS) object).getIntegerSymbol());
   }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted the EMF implementation to update the whole hierarchy if the integer symbol changes.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -141,7 +141,7 @@ public class IntegerLiteralExpXSItemProvider extends NumericLiteralExpXSItemProv
 
     switch (notification.getFeatureID(IntegerLiteralExpXS.class)) {
       case XOCLPackage.INTEGER_LITERAL_EXP_XS__INTEGER_SYMBOL:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
+        updateLabel(notification);
         return;
     }
     super.notifyChanged(notification);

@@ -54,9 +54,10 @@ import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.CollectionOperationCallExpXS} object.
- * <!-- begin-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.xocl.CollectionOperationCallExpXS} object. <!-- begin-user-doc -->
  * <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXSItemProvider
@@ -64,9 +65,9 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
     ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   public CollectionOperationCallExpXSItemProvider(AdapterFactory adapterFactory) {
@@ -74,9 +75,9 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -108,8 +109,8 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
   }
 
   /**
-   * This returns CollectionOperationCallExpXS.gif.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * This returns CollectionOperationCallExpXS.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -144,8 +145,20 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
   }
 
   /**
-   * Returns true for {@link CollectionOperationXS#EQUALS},
-   * {@link CollectionOperationXS#EQUALS_NOT} and {@link CollectionOperationXS#MINUS}.
+   * Returns <code>false</code> since collection operations are never unary.
+   * 
+   * @see tudresden.ocl20.pivot.xocl.provider.OperationCallExpXSItemProvider#isUnary(tudresden.ocl20.pivot.xocl.OperationCallExpXS)
+   */
+  @Override
+  @SuppressWarnings("unused")
+  protected boolean isUnary(OperationCallExpXS operationCallExp) {
+    return false;
+  }
+
+  /**
+   * Returns <code>true</code> for {@link CollectionOperationXS#EQUALS},
+   * {@link CollectionOperationXS#EQUALS_NOT} and {@link CollectionOperationXS#MINUS},
+   * <code>false</code> otherwise.
    * 
    * @see tudresden.ocl20.pivot.xocl.provider.OperationCallExpXSItemProvider#isInfix(tudresden.ocl20.pivot.xocl.OperationCallExpXS)
    */
@@ -175,7 +188,9 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
     return operation != null ? operation.toString() : null;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see tudresden.ocl20.pivot.xocl.provider.OperationCallExpXSItemProvider#getDefaultString()
    */
   @Override
@@ -187,6 +202,7 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -202,10 +218,9 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
+   * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -237,9 +252,9 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   @Override

@@ -32,8 +32,11 @@
  */
 package tudresden.ocl20.pivot.xocl.provider;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -52,29 +55,44 @@ import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS} object.
- * <!-- begin-user-doc --> <!--
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS} object. <!-- begin-user-doc --> <!--
  * end-user-doc -->
+ * 
  * @generated
  */
 public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemProvider implements
     IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
     IItemLabelProvider, IItemPropertySource {
 
+  // helper caches with the names of all unary and infix operations
+  private Set<String> unaryOperations = new HashSet<String>();
+  private Set<String> infixOperations = new HashSet<String>();
+
   /**
    * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted to initialize the set with the infix operations.
+   * </p>
+   * 
+   * @generated NOT
    */
+  @SuppressWarnings("nls")
   public ModelOperationCallExpXSItemProvider(AdapterFactory adapterFactory) {
     super(adapterFactory);
+
+    // initialize the sets with the predefined OCL library operations
+    unaryOperations.addAll(Arrays.asList("not","-"));
+    infixOperations.addAll(Arrays.asList("+","-","*","/","div","mod","<",">","<=",">=","=","<>",
+        "or","xor","and","implies"));
+
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -88,9 +106,9 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   }
 
   /**
-   * This adds a property descriptor for the Referred Operation Name feature.
-   * <!-- begin-user-doc
+   * This adds a property descriptor for the Referred Operation Name feature. <!-- begin-user-doc
    * --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected void addReferredOperationNamePropertyDescriptor(Object object) {
@@ -106,8 +124,8 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   }
 
   /**
-   * This returns ModelOperationCallExpXS.gif.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * This returns ModelOperationCallExpXS.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -151,17 +169,35 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   }
 
   /**
-   * Returns <code>false</code> since normal model operations are never infix.
+   * Returns <code>true</code> for the unary operations <code>not</code> and <code>-</code>,
+   * <code>false</code> otherwise.
+   * 
+   * @see tudresden.ocl20.pivot.xocl.provider.OperationCallExpXSItemProvider#isUnary(tudresden.ocl20.pivot.xocl.OperationCallExpXS)
+   */
+  @Override
+  protected boolean isUnary(OperationCallExpXS operationCallExp) {
+    return operationCallExp.getArgument().isEmpty()
+        && unaryOperations.contains(((ModelOperationCallExpXS) operationCallExp)
+            .getReferredOperationName());
+  }
+
+  /**
+   * Returns <code>true</code> for infix operations (arithmetic and logical operations),
+   * <code>false</code> otherwise.
    * 
    * @see tudresden.ocl20.pivot.xocl.provider.OperationCallExpXSItemProvider#isInfix(tudresden.ocl20.pivot.xocl.OperationCallExpXS)
    */
   @Override
   @SuppressWarnings("unused")
   protected boolean isInfix(OperationCallExpXS operationCallExp) {
-    return false;
+    return operationCallExp.getArgument().size() == 1
+        && infixOperations.contains(((ModelOperationCallExpXS) operationCallExp)
+            .getReferredOperationName());
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see tudresden.ocl20.pivot.xocl.provider.OperationCallExpXSItemProvider#getDefaultString()
    */
   @Override
@@ -193,10 +229,9 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
+   * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -228,9 +263,9 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   @Override
