@@ -7,7 +7,7 @@
             icon="icons/ecore.gif"
             id="tudresden.ocl20.pivot.metamodels.ecore"
             modelProvider="tudresden.ocl20.pivot.metamodels.ecore.internal.provider.EcoreModelProvider"
-            name="Ecore">
+            name="Eclipse Modeling Framework (EMF) Ecore">
       </metamodel>
    </extension>
 
