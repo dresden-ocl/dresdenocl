@@ -30,83 +30,44 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.parser.ui;
+package tudresden.ocl20.pivot.parser.ui.internal;
 
-import org.apache.log4j.Logger;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.osgi.framework.BundleContext;
-
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.eclipse.osgi.util.NLS;
 
 /**
- * The activator class controls the plug-in life cycle
+ * Localized messages for the Parser UI Plugin.
+ * 
+ * @author Matthias Braeuer
+ * @version 1.0 09.05.2007
  */
-public class ParserUIPlugin extends AbstractUIPlugin {
+public class ParserUIMessages extends NLS {
 
-	// The plug-in ID
-	public static final String ID = "tudresden.ocl20.pivot.parser.ui"; //$NON-NLS-1$
+  private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.parser.ui.internal.messages"; //$NON-NLS-1$
 
-	// The shared instance
-	private static ParserUIPlugin plugin;
+  public static String ParseOCLPage_Description;
+  
+  public static String ParseOCLPage_SelectOCLFileLabel;
+  
+  public static String ParseOCLPage_Title;
 
-	/**
-	 * The constructor
-	 */
-	public ParserUIPlugin() {
-    // no implementation necessary
-	}
+  public static String ParseOCLWizard_CheckLog;
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
-	 */
-	@Override
-  public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-	}
+  public static String ParseOCLWizard_ErrorMessageDialogTitle;
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-	 */
-	@Override
-  public void stop(BundleContext context) throws Exception {
-    plugin = null;
-		super.stop(context);
-	}
+  public static String ParseOCLWizard_ErrorOccuredDuringParsing;
 
-	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
-	 */
-	public static ParserUIPlugin getDefault() {
-		return plugin;
-	}
+  public static String ParseOCLWizard_NoActiveModelErrorMessage;
 
-  /**
-   * Returns an image descriptor for the image file at the given
-   * plug-in relative path
-   *
-   * @param path the path
-   * @return the image descriptor
-   */
-  public static ImageDescriptor getImageDescriptor(String path) {
-    return imageDescriptorFromPlugin(ID, path);
+  public static String ParseOCLWizard_UnexpectedError;
+
+  public static String ParseOCLWizard_WindowTitle;
+
+  static {
+    // initialize resource bundle
+    NLS.initializeMessages(BUNDLE_NAME,ParserUIMessages.class);
   }
 
-  
-  /**
-   * Facade method for the classes in this plugin that hides the dependency from the
-   * <code>tudresden.ocl20.logging</code> plugin.
-   * 
-   * @param clazz the class to return the logger for
-   * 
-   * @return a log4j <code>Logger</code> instance
-   */
-  public static Logger getLogger(Class<?> clazz) {
-    return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
+  private ParserUIMessages() {
+    // no implementation necessary
   }
 }

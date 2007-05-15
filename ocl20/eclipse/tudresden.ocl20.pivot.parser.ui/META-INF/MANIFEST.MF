@@ -5,8 +5,10 @@ Bundle-SymbolicName: tudresden.ocl20.pivot.parser.ui;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: tudresden.ocl20.pivot.parser.ui.ParserUIPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui,
+ org.eclipse.ui.ide,
  tudresden.ocl20.logging,
  tudresden.ocl20.pivot.parser,
  tudresden.ocl20.pivot.modelbus
