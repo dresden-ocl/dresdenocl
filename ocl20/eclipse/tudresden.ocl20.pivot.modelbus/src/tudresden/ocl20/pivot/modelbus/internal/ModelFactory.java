@@ -397,6 +397,9 @@ public class ModelFactory implements IModelFactory {
 
     IntegerLiteralExp integerLiteralExp = ExpressionsFactory.INSTANCE.createIntegerLiteralExp();
     integerLiteralExp.setIntegerSymbol(integerSymbol);
+    
+    // initialize reference to the OCL Library
+    integerLiteralExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createIntegerLiteralExp() - exit - return value=" + integerLiteralExp); //$NON-NLS-1$
