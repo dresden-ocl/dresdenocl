@@ -37,26 +37,29 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Integer Literal Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Integer Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IntegerLiteralExpImpl#getIntegerSymbol <em>Integer Symbol</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IntegerLiteralExpImpl#getIntegerSymbol <em>Integer Symbol</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements IntegerLiteralExp {
 
   /**
    * The default value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getIntegerSymbol()
    * @generated
    * @ordered
@@ -64,9 +67,9 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
   protected static final int INTEGER_SYMBOL_EDEFAULT = 0;
 
   /**
-   * The cached value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getIntegerSymbol()
    * @generated
    * @ordered
@@ -74,8 +77,8 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
   protected int integerSymbol = INTEGER_SYMBOL_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected IntegerLiteralExpImpl() {
@@ -83,18 +86,28 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of the <code>IntegerLiteralExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of an integer Literal expression is the type Integer.
+   * 
+   * <pre>
+   *    context IntegerLiteralExp
+   *    inv: self.type.name = ‘Integer’
+   * </pre>
+   * 
+   * </p>
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.INTEGER_LITERAL_EXP;
+  public Type getType() {
+    return getValidOclLibrary().getOclInteger();
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public int getIntegerSymbol() {
@@ -102,8 +115,8 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setIntegerSymbol(int newIntegerSymbol) {
@@ -115,8 +128,8 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -129,8 +142,8 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -144,8 +157,8 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -159,8 +172,8 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -173,19 +186,25 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public String toString() {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (integerSymbol: "); //$NON-NLS-1$
-    result.append(integerSymbol);
-    result.append(')');
-    return result.toString();
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.INTEGER_LITERAL_EXP;
   }
 
-} //IntegerLiteralExpImpl
+  /**
+   * Adapted the EMF implementation to return a standard string rendering.
+   * 
+   * @generated NOT
+   * 
+   */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("integerSymbol",integerSymbol).toString(); //$NON-NLS-1$
+  }
+
+} // IntegerLiteralExpImpl
