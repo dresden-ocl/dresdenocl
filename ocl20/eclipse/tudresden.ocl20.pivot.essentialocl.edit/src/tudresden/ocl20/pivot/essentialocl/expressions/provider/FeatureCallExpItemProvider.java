@@ -37,11 +37,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
-import org.eclipse.emf.edit.command.CommandParameter;
-
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -50,6 +47,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
 import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
 
 /**
@@ -83,8 +81,27 @@ public class FeatureCallExpItemProvider extends CallExpItemProvider implements
     if (itemPropertyDescriptors == null) {
       super.getPropertyDescriptors(object);
 
+      addSourceTypePropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
+  }
+
+  /**
+   * This adds a property descriptor for the Source Type feature.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected void addSourceTypePropertyDescriptor(Object object) {
+    itemPropertyDescriptors
+        .add(createItemPropertyDescriptor(
+            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            getResourceLocator(),
+            getString("_UI_FeatureCallExp_sourceType_feature"), //$NON-NLS-1$
+            getString(
+                "_UI_PropertyDescriptor_description","_UI_FeatureCallExp_sourceType_feature","_UI_FeatureCallExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            ExpressionsPackageImpl.Literals.FEATURE_CALL_EXP__SOURCE_TYPE,true,false,true,null,
+            null,null));
   }
 
   /**
@@ -114,15 +131,14 @@ public class FeatureCallExpItemProvider extends CallExpItemProvider implements
   }
 
   /**
-   * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object.
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<CommandParameter> newChildDescriptors,
-      Object object) {
+  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
     super.collectNewChildDescriptors(newChildDescriptors,object);
   }
 

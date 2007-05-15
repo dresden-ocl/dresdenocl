@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.types.presentation;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelEditPlugin;

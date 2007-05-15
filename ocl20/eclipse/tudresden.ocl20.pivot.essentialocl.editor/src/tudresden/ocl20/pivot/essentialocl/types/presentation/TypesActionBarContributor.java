@@ -36,19 +36,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
-
-import org.eclipse.emf.edit.command.CommandParameter;
-
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-
 import org.eclipse.emf.edit.ui.action.ControlAction;
 import org.eclipse.emf.edit.ui.action.CreateChildAction;
 import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.action.ValidateAction;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
@@ -60,14 +55,12 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.SubContributionItem;
-
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.Viewer;
-
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
@@ -298,8 +291,8 @@ public class TypesActionBarContributor extends EditingDomainActionBarContributor
 
     // Query the new selection for appropriate new child/sibling descriptors
     //
-    Collection<CommandParameter> newChildDescriptors = null;
-    Collection<CommandParameter> newSiblingDescriptors = null;
+    Collection<?> newChildDescriptors = null;
+    Collection<?> newSiblingDescriptors = null;
 
     ISelection selection = event.getSelection();
     if (selection instanceof IStructuredSelection && ((IStructuredSelection) selection).size() == 1) {
@@ -333,11 +326,11 @@ public class TypesActionBarContributor extends EditingDomainActionBarContributor
    * <!-- end-user-doc -->
    * @generated
    */
-  protected Collection<IAction> generateCreateChildActions(
-      Collection<? extends CommandParameter> descriptors, ISelection selection) {
+  protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors,
+      ISelection selection) {
     Collection<IAction> actions = new ArrayList<IAction>();
     if (descriptors != null) {
-      for (CommandParameter descriptor : descriptors) {
+      for (Object descriptor : descriptors) {
         actions.add(new CreateChildAction(activeEditorPart,selection,descriptor));
       }
     }
@@ -351,11 +344,11 @@ public class TypesActionBarContributor extends EditingDomainActionBarContributor
    * <!-- end-user-doc -->
    * @generated
    */
-  protected Collection<IAction> generateCreateSiblingActions(
-      Collection<? extends CommandParameter> descriptors, ISelection selection) {
+  protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors,
+      ISelection selection) {
     Collection<IAction> actions = new ArrayList<IAction>();
     if (descriptors != null) {
-      for (CommandParameter descriptor : descriptors) {
+      for (Object descriptor : descriptors) {
         actions.add(new CreateSiblingAction(activeEditorPart,selection,descriptor));
       }
     }
@@ -366,7 +359,7 @@ public class TypesActionBarContributor extends EditingDomainActionBarContributor
    * This populates the specified <code>manager</code> with {@link org.eclipse.jface.action.ActionContributionItem}s
    * based on the {@link org.eclipse.jface.action.IAction}s contained in the <code>actions</code> collection,
    * by inserting them before the specified contribution item <code>contributionID</code>.
-   * If <code>ID</code> is <code>null</code>, they are simply added.
+   * If <code>contributionID</code> is <code>null</code>, they are simply added.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
