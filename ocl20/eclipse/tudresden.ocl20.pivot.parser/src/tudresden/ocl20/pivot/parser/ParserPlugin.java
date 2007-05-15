@@ -117,6 +117,11 @@ public class ParserPlugin extends Plugin {
       throw new IllegalStateException("The OCL parser plug-in has not been activated."); //$NON-NLS-1$
     }
     
+    // check the argument
+    if (model == null) {
+      throw new IllegalArgumentException("The model to be used for parsing must not be null."); //$NON-NLS-1$
+    }
+    
     // lazily create the map of parsers
     if (plugin.parsers == null) {
       plugin.parsers = new HashMap<IModel, IOclParser>();
