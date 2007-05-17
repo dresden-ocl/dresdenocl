@@ -107,7 +107,17 @@ public class ModelAnalyser {
 		}
 		return instancesOfType;
 	}
-	
+
+	/* 
+	 * The return type of java.lang.Class.getInterfaces()
+	 * has changed in Java 1.6.
+	 * To compile this file using Java 1.6 or later, change the
+	 * generic of the List 'interfaces' from List<Class> to
+	 * List<Class<?>>. Also change the generic of the List
+	 * 'newInterfaces' from List<Class> to
+	 * List<Class<?>> and the type of the for lopp in the else
+	 * case from Class to Class<?>.
+	 */
 	public static boolean instanceIsOfType(RefObject instance, Class type) {
 		List<Class> interfaces  = Arrays.asList(instance.getClass().getInterfaces());
 		while(interfaces.size() > 0) {

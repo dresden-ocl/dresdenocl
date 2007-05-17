@@ -69,6 +69,13 @@ public class ElementFactory<MODEL extends RefPackage> {
 		RefPackage pkg = loadBasePackage(mPackage);
 		Collection<RefAssociation> assos = pkg.refAllAssociations();
 		for(RefAssociation ass:assos) {
+			/* 
+			 * The return type of java.lang.Class.getInterfaces()
+			 * has changed in Java 1.6.
+			 * To compile this file using Java 1.6 or later, change the
+			 * generic of the List 'interfaces' from List<Class> to
+			 * List<Class<?>>. 
+			 */
 			List<Class> interfaces = Arrays.asList(ass.getClass().getInterfaces());
 			if(interfaces.contains(type)) {
 				Method add = null;
