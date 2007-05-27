@@ -109,7 +109,7 @@ public abstract class AbstractModelProvider implements IModelProvider {
     URL modelFileUrl;
 
     try {
-      modelFileUrl = modelFile.toURL();
+      modelFileUrl = modelFile.toURI().toURL();
     }
 
     catch (MalformedURLException e) {
