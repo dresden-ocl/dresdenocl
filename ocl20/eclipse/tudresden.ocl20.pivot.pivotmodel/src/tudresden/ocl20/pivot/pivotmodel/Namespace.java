@@ -198,7 +198,7 @@ public interface Namespace extends NamedElement, GenericElement {
    * <pre>
    * context Namespace
    * def: lookupType(name : String) : Type =
-   *    self.ownedType()->any(t | t.name = name)
+   *    self.ownedType->any(t | t.name = name)
    * </pre>
    * </p>
    * <!-- end-model-doc -->
@@ -218,7 +218,7 @@ public interface Namespace extends NamedElement, GenericElement {
    * <pre>
    * context Namespace
    * def: lookupNamespace(name : String) : Namespace =
-   *    self.nestedNamespace()->any(ns | ns.name = name)
+   *    self.nestedNamespace->any(ns | ns.name = name)
    * </pre>
    * </p>
    * <!-- end-model-doc -->
