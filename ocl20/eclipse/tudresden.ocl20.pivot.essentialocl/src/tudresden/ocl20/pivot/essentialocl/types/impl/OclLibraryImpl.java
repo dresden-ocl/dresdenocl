@@ -909,15 +909,13 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
       throw new IllegalArgumentException("Illegal element type " + elementType); //$NON-NLS-1$
     }
 
-    // get the template type and check it
-    sequenceType = getOclSequence();
-
-    if (sequenceType == null) {
+    // check that the OCL SequenceType has been modeled
+    if (oclSequence == null) {
       throw new IllegalStateException("The OCL Sequence type is missing in the modeled OCL Library"); //$NON-NLS-1$
     }
 
     // bind the template type and set the element type
-    sequenceType = sequenceType.bindTypeParameter(sequenceType.getOwnedTypeParameter(),Arrays
+    sequenceType = oclSequence.bindTypeParameter(oclSequence.getOwnedTypeParameter(),Arrays
         .asList(elementType));
 
     if (logger.isDebugEnabled()) {
@@ -944,15 +942,13 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
       throw new IllegalArgumentException("Illegal element type " + elementType); //$NON-NLS-1$
     }
 
-    // get the template type and check it
-    bagType = getOclBag();
-
-    if (bagType == null) {
+    // check the the OclBag type has been modelled
+    if (oclBag == null) {
       throw new IllegalStateException("The OCL Bag type is missing in the modeled OCL Library"); //$NON-NLS-1$
     }
 
     // bind the template type and set the element type
-    bagType = bagType.bindTypeParameter(bagType.getOwnedTypeParameter(),Arrays.asList(elementType));
+    bagType = oclBag.bindTypeParameter(oclBag.getOwnedTypeParameter(),Arrays.asList(elementType));
 
     if (logger.isDebugEnabled()) {
       logger.debug("getBagType() - exit - return value=" + bagType); //$NON-NLS-1$
@@ -978,15 +974,13 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
       throw new IllegalArgumentException("Illegal element type " + elementType); //$NON-NLS-1$
     }
 
-    // get the template type and check it
-    setType = getOclSet();
-
-    if (setType == null) {
+    // check that the SetType has been modeled
+    if (oclSet == null) {
       throw new IllegalStateException("The OCL Set type is missing in the modeled OCL Library"); //$NON-NLS-1$
     }
 
     // bind the template type and set the element type
-    setType = setType.bindTypeParameter(setType.getOwnedTypeParameter(),Arrays.asList(elementType));
+    setType = oclSet.bindTypeParameter(oclSet.getOwnedTypeParameter(),Arrays.asList(elementType));
 
     if (logger.isDebugEnabled()) {
       logger.debug("getSetType() - exit - return value=" + setType); //$NON-NLS-1$
@@ -1008,20 +1002,18 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
     OrderedSetType orderedSetType;
 
     // precondition check
-    if (elementType == null || elementType.equals(getOclInvalid())) {
+    if (elementType == null || elementType.equals(oclInvalid)) {
       throw new IllegalArgumentException("Illegal element type " + elementType); //$NON-NLS-1$
     }
 
-    // get the template type and check it
-    orderedSetType = getOclOrderedSet();
-
-    if (orderedSetType == null) {
+    // check that the OrderedSetType has been modeled
+    if (oclOrderedSet == null) {
       throw new IllegalStateException(
           "The OCL OrderedSet type is missing in the modeled OCL Library"); //$NON-NLS-1$
     }
 
     // bind the template type and set the element type
-    orderedSetType = orderedSetType.bindTypeParameter(orderedSetType.getOwnedTypeParameter(),Arrays
+    orderedSetType = oclOrderedSet.bindTypeParameter(oclOrderedSet.getOwnedTypeParameter(),Arrays
         .asList(elementType));
 
     if (logger.isDebugEnabled()) {
