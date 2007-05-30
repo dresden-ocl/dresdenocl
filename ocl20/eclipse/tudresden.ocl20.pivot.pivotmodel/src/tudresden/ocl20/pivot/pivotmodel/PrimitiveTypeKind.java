@@ -37,41 +37,31 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Primitive Type Kind</b></em>',
- * and utility methods for working with them.
- * <!-- end-user-doc -->
- * <!-- begin-model-doc -->
+ * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>Primitive Type Kind</b></em>',
+ * and utility methods for working with them. <!-- end-user-doc --> <!-- begin-model-doc -->
  * <p>
  * An enumeration that defines literals for the predefined kinds of {@link PrimitiveType}s.
  * </p>
  * <!-- end-model-doc -->
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
  * @generated
  */
 public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
-  //$NON-NLS-1$ //$NON-NLS-2$
-
   /**
-   * The '<em><b>String</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #STRING_VALUE
-   * @generated
-   * @ordered
-   */
-  STRING(4, "String", "String"), /**
-   * The '<em><b>Unknown</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The '<em><b>Unknown</b></em>' literal object. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
    * @see #UNKNOWN_VALUE
    * @generated
    * @ordered
    */
-  UNKNOWN(0, "Unknown", "Unknown"), /**
-   * The '<em><b>Integer</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+  UNKNOWN(0, "Unknown", "Unknown"), //$NON-NLS-1$ //$NON-NLS-2$
+  
+  /**
+   * The '<em><b>Integer</b></em>' literal object. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
    * @see #INTEGER_VALUE
    * @generated
    * @ordered
@@ -79,9 +69,8 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   INTEGER(1, "Integer", "Integer"), //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>Real</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The '<em><b>Real</b></em>' literal object. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #REAL_VALUE
    * @generated
    * @ordered
@@ -89,37 +78,32 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   REAL(2, "Real", "Real"), //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>Boolean</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The '<em><b>Boolean</b></em>' literal object. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
    * @see #BOOLEAN_VALUE
    * @generated
    * @ordered
    */
-  BOOLEAN(3, "Boolean", "Boolean"); //$NON-NLS-1$ //$NON-NLS-2$
+  BOOLEAN(3, "Boolean", "Boolean"), //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>String</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>String</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #STRING
+   * The '<em><b>String</b></em>' literal object. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @see #STRING_VALUE
    * @generated
    * @ordered
    */
-  public static final int STRING_VALUE = 4;
+  STRING(4, "String", "String"); //$NON-NLS-1$ //$NON-NLS-2$
 
   /**
-   * The '<em><b>Unknown</b></em>' literal value.
-   * <!-- begin-user-doc -->
+   * The '<em><b>Unknown</b></em>' literal value. <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Unknown</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
+   * If the meaning of '<em><b>Unknown</b></em>' literal object isn't clear, there really
+   * should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
+   * 
    * @see #UNKNOWN
    * @generated
    * @ordered
@@ -127,13 +111,13 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   public static final int UNKNOWN_VALUE = 0;
 
   /**
-   * The '<em><b>Integer</b></em>' literal value.
-   * <!-- begin-user-doc -->
+   * The '<em><b>Integer</b></em>' literal value. <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Integer</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
+   * If the meaning of '<em><b>Integer</b></em>' literal object isn't clear, there really
+   * should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
+   * 
    * @see #INTEGER
    * @generated
    * @ordered
@@ -141,13 +125,13 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   public static final int INTEGER_VALUE = 1;
 
   /**
-   * The '<em><b>Real</b></em>' literal value.
-   * <!-- begin-user-doc -->
+   * The '<em><b>Real</b></em>' literal value. <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Real</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
+   * If the meaning of '<em><b>Real</b></em>' literal object isn't clear, there really should
+   * be more of a description here...
    * </p>
    * <!-- end-user-doc -->
+   * 
    * @see #REAL
    * @generated
    * @ordered
@@ -155,13 +139,13 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   public static final int REAL_VALUE = 2;
 
   /**
-   * The '<em><b>Boolean</b></em>' literal value.
-   * <!-- begin-user-doc -->
+   * The '<em><b>Boolean</b></em>' literal value. <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Boolean</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
+   * If the meaning of '<em><b>Boolean</b></em>' literal object isn't clear, there really
+   * should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
+   * 
    * @see #BOOLEAN
    * @generated
    * @ordered
@@ -169,27 +153,41 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   public static final int BOOLEAN_VALUE = 3;
 
   /**
-   * An array of all the '<em><b>Primitive Type Kind</b></em>' enumerators.
-   * <!-- begin-user-doc -->
+   * The '<em><b>String</b></em>' literal value. <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>String</b></em>' literal object isn't clear, there really should
+   * be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
+   * 
+   * @see #STRING
+   * @generated
+   * @ordered
+   */
+  public static final int STRING_VALUE = 4;
+
+  /**
+   * An array of all the '<em><b>Primitive Type Kind</b></em>' enumerators. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   private static final PrimitiveTypeKind[] VALUES_ARRAY = new PrimitiveTypeKind[] { UNKNOWN,
       INTEGER, REAL, BOOLEAN, STRING, };
 
   /**
-   * A public read-only list of all the '<em><b>Primitive Type Kind</b></em>' enumerators.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * A public read-only list of all the '<em><b>Primitive Type Kind</b></em>' enumerators. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public static final List<PrimitiveTypeKind> VALUES = Collections.unmodifiableList(Arrays
       .asList(VALUES_ARRAY));
 
   /**
-   * Returns the '<em><b>Primitive Type Kind</b></em>' literal with the specified literal value.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Returns the '<em><b>Primitive Type Kind</b></em>' literal with the specified literal
+   * value. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public static PrimitiveTypeKind get(String literal) {
@@ -203,9 +201,9 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   }
 
   /**
-   * Returns the '<em><b>Primitive Type Kind</b></em>' literal with the specified name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Returns the '<em><b>Primitive Type Kind</b></em>' literal with the specified name. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public static PrimitiveTypeKind getByName(String name) {
@@ -219,9 +217,9 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   }
 
   /**
-   * Returns the '<em><b>Primitive Type Kind</b></em>' literal with the specified integer value.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Returns the '<em><b>Primitive Type Kind</b></em>' literal with the specified integer
+   * value. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public static PrimitiveTypeKind get(int value) {
@@ -241,30 +239,29 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   private final int value;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   private final String name;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   private final String literal;
 
   /**
-   * Only this class can construct instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Only this class can construct instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   private PrimitiveTypeKind(int value, String name, String literal) {
@@ -274,8 +271,8 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public int getValue() {
@@ -283,8 +280,8 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public String getName() {
@@ -292,8 +289,8 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public String getLiteral() {
@@ -301,9 +298,9 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
   }
 
   /**
-   * Returns the literal value of the enumerator, which is its string representation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Returns the literal value of the enumerator, which is its string representation. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -311,15 +308,15 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
     return literal;
   }
 
-} //PrimitiveTypeKind
+} // PrimitiveTypeKind
 
 
 /**
- * A private implementation interface used to hide the inheritance from Enumerator.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * A private implementation interface used to hide the inheritance from Enumerator. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 interface InternalPrimitiveTypeKind extends org.eclipse.emf.common.util.Enumerator {
-  // Empty 
+  // Empty
 }
