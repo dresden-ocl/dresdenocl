@@ -52,36 +52,38 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType <em>Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getGenericType <em>Generic Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType <em>Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getGenericType <em>Generic Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class TypedElementImpl extends NamedElementImpl implements TypedElement {
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-   * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference. <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * 
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected Type type = null;
+  protected Type type;
 
   /**
-   * The cached value of the '{@link #getGenericType() <em>Generic Type</em>}' containment reference.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getGenericType() <em>Generic Type</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getGenericType()
    * @generated
    * @ordered
    */
-  protected GenericType genericType = null;
+  protected GenericType genericType;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected TypedElementImpl() {
@@ -90,6 +92,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Type getType() {
@@ -98,6 +101,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setType(Type newType) {
@@ -110,6 +114,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public GenericType getGenericType() {
@@ -136,6 +141,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetGenericType(GenericType newGenericType, NotificationChain msgs) {
@@ -152,10 +158,10 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * Decorator method for {@link #setGenericTypeGen(GenericType)} that resets the
-   * {@link #getType() type} of this <code>TypedElement</code> if a <code>GenericType</code>
-   * is set. This ensures that a <code>TypedElement</code> with a generic type has to be
-   * {@link GenericType#bindTypedElement(java.util.List, java.util.List) bound} first
-   * before it has a proper non-generic type.
+   * {@link #getType() type} of this <code>TypedElement</code> if a <code>GenericType</code> is
+   * set. This ensures that a <code>TypedElement</code> with a generic type has to be
+   * {@link GenericType#bindTypedElement(java.util.List, java.util.List) bound} first before it has
+   * a proper non-generic type.
    * 
    * @see GenericElement#bind(TypeParameter, Type)
    * 
@@ -164,8 +170,8 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
   public void setGenericType(GenericType newGenericType) {
 
     // reset an existing type if the new generic type is different from the old one
-    if ((getGenericType() == null && newGenericType != null)
-        || (getGenericType() != null && !getGenericType().equals(newGenericType))) {
+    if ((genericType == null && newGenericType != null)
+        || (genericType != null && !genericType.equals(newGenericType))) {
       setType(null);
     }
 
@@ -197,6 +203,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -206,6 +213,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -220,6 +228,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -235,6 +244,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -252,6 +262,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -269,6 +280,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
