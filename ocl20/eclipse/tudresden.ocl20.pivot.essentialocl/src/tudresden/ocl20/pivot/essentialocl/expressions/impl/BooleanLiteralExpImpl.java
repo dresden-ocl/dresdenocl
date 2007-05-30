@@ -32,31 +32,41 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Boolean Literal Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Boolean Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.BooleanLiteralExpImpl#isBooleanSymbol <em>Boolean Symbol</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.BooleanLiteralExpImpl#isBooleanSymbol <em>Boolean Symbol</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements BooleanLiteralExp {
 
   /**
-   * The default value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(BooleanLiteralExpImpl.class);
+
+  /**
+   * The default value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #isBooleanSymbol()
    * @generated
    * @ordered
@@ -64,9 +74,9 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
   protected static final boolean BOOLEAN_SYMBOL_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #isBooleanSymbol()
    * @generated
    * @ordered
@@ -74,27 +84,49 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
   protected boolean booleanSymbol = BOOLEAN_SYMBOL_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected BooleanLiteralExpImpl() {
     super();
   }
-
+  
+  
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of the <code>BooleanLiteralExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of an boolean Literal expression is the type Boolean.
+   * 
+   * <pre>
+   *    context IntegerLiteralExp
+   *    inv: self.type.name = ‘Boolean’
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.BOOLEAN_LITERAL_EXP;
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    Type type = getValidOclLibrary().getOclBoolean();
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public boolean isBooleanSymbol() {
@@ -102,8 +134,8 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setBooleanSymbol(boolean newBooleanSymbol) {
@@ -115,8 +147,8 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -129,8 +161,8 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -144,8 +176,8 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -159,8 +191,8 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -173,19 +205,26 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public String toString() {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (booleanSymbol: "); //$NON-NLS-1$
-    result.append(booleanSymbol);
-    result.append(')');
-    return result.toString();
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.BOOLEAN_LITERAL_EXP;
   }
 
-} //BooleanLiteralExpImpl
+  /**
+   * Adapted the EMF implementation to use the Jakarta Commons Lang mechanism instead.
+   * 
+   * @see java.lang.Object#toString()
+   * 
+   * @generated NOT
+   */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("booleanSymbol",booleanSymbol).toString(); //$NON-NLS-1$
+  }
+
+} // BooleanLiteralExpImpl
