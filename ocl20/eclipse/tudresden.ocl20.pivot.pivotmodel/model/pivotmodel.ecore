@@ -104,6 +104,9 @@
       </eAnnotations>
       <eParameters name="typeParameter" eType="#//TypeParameter"/>
     </eOperations>
+    <eOperations name="getBoundType" eType="#//Type">
+      <eParameters name="typeParam" eType="#//TypeParameter"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypeParameter" upperBound="-1"
         eType="#//TypeParameter" containment="true" eOpposite="#//TypeParameter/genericElement"/>
   </eClassifiers>
@@ -443,7 +446,7 @@
     </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GenericType" abstract="true" eSuperTypes="#//NamedElement">
-    <eOperations name="bindGenericType" lowerBound="1" eType="#//TypedElement">
+    <eOperations name="bindGenericType" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Boolean">
       <eParameters name="parameters" lowerBound="1">
         <eGenericType eClassifier="ecore:EDataType datatypes.ecore#//Sequence">
           <eTypeArguments eClassifier="#//TypeParameter"/>
@@ -458,7 +461,7 @@
       </eParameters>
       <eParameters name="typedElement" eType="#//TypedElement"/>
     </eOperations>
-    <eOperations name="bindGenericSuperType" eType="#//Type">
+    <eOperations name="bindGenericSuperType" eType="ecore:EDataType datatypes.ecore#//Boolean">
       <eParameters name="parameters" lowerBound="1">
         <eGenericType eClassifier="ecore:EDataType datatypes.ecore#//Sequence">
           <eTypeArguments eClassifier="#//TypeParameter"/>
