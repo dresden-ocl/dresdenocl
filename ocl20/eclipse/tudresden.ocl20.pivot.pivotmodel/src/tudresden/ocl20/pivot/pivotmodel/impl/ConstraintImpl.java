@@ -107,7 +107,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
    * @generated
    * @ordered
    */
-  protected Expression specification = null;
+  protected Expression specification;
 
   /**
    * The cached value of the '{@link #getConstrainedElement() <em>Constrained Element</em>}' reference list.
@@ -116,7 +116,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
    * @generated
    * @ordered
    */
-  protected EList<ConstrainableElement> constrainedElement = null;
+  protected EList<ConstrainableElement> constrainedElement;
 
   /**
    * The cached value of the '{@link #getDefinedFeature() <em>Defined Feature</em>}' reference.
@@ -125,7 +125,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
    * @generated
    * @ordered
    */
-  protected Feature definedFeature = null;
+  protected Feature definedFeature;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->

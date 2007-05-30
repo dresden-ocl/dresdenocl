@@ -73,7 +73,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
    * @generated
    * @ordered
    */
-  protected EList<EnumerationLiteral> ownedLiteral = null;
+  protected EList<EnumerationLiteral> ownedLiteral;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -148,18 +148,18 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
     }
 
     EnumerationLiteral literal = null;
-    
+
     for (EnumerationLiteral l : getOwnedLiteral()) {
       if (l.getName().equals(name)) {
         literal = l;
         break;
       }
     }
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("lookupLiteral() - exit - return value=" + literal); //$NON-NLS-1$
     }
-    
+
     return literal;
   }
 

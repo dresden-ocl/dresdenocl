@@ -114,37 +114,43 @@ public class PivotModelSwitch<T> {
    */
   protected T doSwitch(int classifierID, EObject theEObject) {
     switch (classifierID) {
-      case PivotModelPackageImpl.ENUMERATION: {
-        Enumeration enumeration = (Enumeration) theEObject;
-        T result = caseEnumeration(enumeration);
-        if (result == null) result = caseType(enumeration);
-        if (result == null) result = caseNamedElement(enumeration);
-        if (result == null) result = caseConstrainableElement(enumeration);
-        if (result == null) result = caseGenericElement(enumeration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case PivotModelPackageImpl.NAMED_ELEMENT: {
         NamedElement namedElement = (NamedElement) theEObject;
         T result = caseNamedElement(namedElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case PivotModelPackageImpl.OPERATION: {
-        Operation operation = (Operation) theEObject;
-        T result = caseOperation(operation);
-        if (result == null) result = caseFeature(operation);
-        if (result == null) result = caseTypedElement(operation);
-        if (result == null) result = caseNamedElement(operation);
-        if (result == null) result = caseMultiplicityElement(operation);
-        if (result == null) result = caseConstrainableElement(operation);
-        if (result == null) result = caseGenericElement(operation);
+      case PivotModelPackageImpl.TYPED_ELEMENT: {
+        TypedElement typedElement = (TypedElement) theEObject;
+        T result = caseTypedElement(typedElement);
+        if (result == null) result = caseNamedElement(typedElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.FEATURE: {
+        Feature feature = (Feature) theEObject;
+        T result = caseFeature(feature);
+        if (result == null) result = caseTypedElement(feature);
+        if (result == null) result = caseNamedElement(feature);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
       case PivotModelPackageImpl.MULTIPLICITY_ELEMENT: {
         MultiplicityElement multiplicityElement = (MultiplicityElement) theEObject;
         T result = caseMultiplicityElement(multiplicityElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.GENERIC_ELEMENT: {
+        GenericElement genericElement = (GenericElement) theEObject;
+        T result = caseGenericElement(genericElement);
+        if (result == null) result = caseNamedElement(genericElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.CONSTRAINABLE_ELEMENT: {
+        ConstrainableElement constrainableElement = (ConstrainableElement) theEObject;
+        T result = caseConstrainableElement(constrainableElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -165,12 +171,23 @@ public class PivotModelSwitch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case PivotModelPackageImpl.PARAMETER: {
-        Parameter parameter = (Parameter) theEObject;
-        T result = caseParameter(parameter);
-        if (result == null) result = caseTypedElement(parameter);
-        if (result == null) result = caseNamedElement(parameter);
-        if (result == null) result = caseMultiplicityElement(parameter);
+      case PivotModelPackageImpl.PRIMITIVE_TYPE: {
+        PrimitiveType primitiveType = (PrimitiveType) theEObject;
+        T result = casePrimitiveType(primitiveType);
+        if (result == null) result = caseType(primitiveType);
+        if (result == null) result = caseNamedElement(primitiveType);
+        if (result == null) result = caseConstrainableElement(primitiveType);
+        if (result == null) result = caseGenericElement(primitiveType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.ENUMERATION: {
+        Enumeration enumeration = (Enumeration) theEObject;
+        T result = caseEnumeration(enumeration);
+        if (result == null) result = caseType(enumeration);
+        if (result == null) result = caseNamedElement(enumeration);
+        if (result == null) result = caseConstrainableElement(enumeration);
+        if (result == null) result = caseGenericElement(enumeration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -192,54 +209,24 @@ public class PivotModelSwitch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case PivotModelPackageImpl.TYPED_ELEMENT: {
-        TypedElement typedElement = (TypedElement) theEObject;
-        T result = caseTypedElement(typedElement);
-        if (result == null) result = caseNamedElement(typedElement);
+      case PivotModelPackageImpl.OPERATION: {
+        Operation operation = (Operation) theEObject;
+        T result = caseOperation(operation);
+        if (result == null) result = caseFeature(operation);
+        if (result == null) result = caseTypedElement(operation);
+        if (result == null) result = caseNamedElement(operation);
+        if (result == null) result = caseMultiplicityElement(operation);
+        if (result == null) result = caseConstrainableElement(operation);
+        if (result == null) result = caseGenericElement(operation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case PivotModelPackageImpl.PRIMITIVE_TYPE: {
-        PrimitiveType primitiveType = (PrimitiveType) theEObject;
-        T result = casePrimitiveType(primitiveType);
-        if (result == null) result = caseType(primitiveType);
-        if (result == null) result = caseNamedElement(primitiveType);
-        if (result == null) result = caseConstrainableElement(primitiveType);
-        if (result == null) result = caseGenericElement(primitiveType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case PivotModelPackageImpl.FEATURE: {
-        Feature feature = (Feature) theEObject;
-        T result = caseFeature(feature);
-        if (result == null) result = caseTypedElement(feature);
-        if (result == null) result = caseNamedElement(feature);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case PivotModelPackageImpl.CONSTRAINT: {
-        Constraint constraint = (Constraint) theEObject;
-        T result = caseConstraint(constraint);
-        if (result == null) result = caseNamedElement(constraint);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case PivotModelPackageImpl.EXPRESSION: {
-        Expression expression = (Expression) theEObject;
-        T result = caseExpression(expression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case PivotModelPackageImpl.CONSTRAINABLE_ELEMENT: {
-        ConstrainableElement constrainableElement = (ConstrainableElement) theEObject;
-        T result = caseConstrainableElement(constrainableElement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case PivotModelPackageImpl.GENERIC_ELEMENT: {
-        GenericElement genericElement = (GenericElement) theEObject;
-        T result = caseGenericElement(genericElement);
-        if (result == null) result = caseNamedElement(genericElement);
+      case PivotModelPackageImpl.PARAMETER: {
+        Parameter parameter = (Parameter) theEObject;
+        T result = caseParameter(parameter);
+        if (result == null) result = caseTypedElement(parameter);
+        if (result == null) result = caseNamedElement(parameter);
+        if (result == null) result = caseMultiplicityElement(parameter);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -247,6 +234,22 @@ public class PivotModelSwitch<T> {
         GenericType genericType = (GenericType) theEObject;
         T result = caseGenericType(genericType);
         if (result == null) result = caseNamedElement(genericType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE: {
+        ParameterGenericType parameterGenericType = (ParameterGenericType) theEObject;
+        T result = caseParameterGenericType(parameterGenericType);
+        if (result == null) result = caseGenericType(parameterGenericType);
+        if (result == null) result = caseNamedElement(parameterGenericType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE: {
+        ComplexGenericType complexGenericType = (ComplexGenericType) theEObject;
+        T result = caseComplexGenericType(complexGenericType);
+        if (result == null) result = caseGenericType(complexGenericType);
+        if (result == null) result = caseNamedElement(complexGenericType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -265,19 +268,16 @@ public class PivotModelSwitch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE: {
-        ParameterGenericType parameterGenericType = (ParameterGenericType) theEObject;
-        T result = caseParameterGenericType(parameterGenericType);
-        if (result == null) result = caseGenericType(parameterGenericType);
-        if (result == null) result = caseNamedElement(parameterGenericType);
+      case PivotModelPackageImpl.CONSTRAINT: {
+        Constraint constraint = (Constraint) theEObject;
+        T result = caseConstraint(constraint);
+        if (result == null) result = caseNamedElement(constraint);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE: {
-        ComplexGenericType complexGenericType = (ComplexGenericType) theEObject;
-        T result = caseComplexGenericType(complexGenericType);
-        if (result == null) result = caseGenericType(complexGenericType);
-        if (result == null) result = caseNamedElement(complexGenericType);
+      case PivotModelPackageImpl.EXPRESSION: {
+        Expression expression = (Expression) theEObject;
+        T result = caseExpression(expression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }

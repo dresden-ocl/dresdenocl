@@ -46,28 +46,29 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Expression</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getBody <em>Body</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getLanguage <em>Language</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getConstraint <em>Constraint</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getBody <em>Body</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getLanguage <em>Language</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getConstraint <em>Constraint</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ExpressionImpl extends EObjectImpl implements Expression {
 
   /**
-   * The default value of the '{@link #getBody() <em>Body</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The default value of the '{@link #getBody() <em>Body</em>}' attribute. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
    * @see #getBody()
    * @generated
    * @ordered
@@ -75,9 +76,9 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   protected static final String BODY_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getBody() <em>Body</em>}' attribute.
-   * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getBody() <em>Body</em>}' attribute. <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * 
    * @see #getBody()
    * @generated
    * @ordered
@@ -85,9 +86,9 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   protected String body = BODY_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getLanguage()
    * @generated
    * @ordered
@@ -95,9 +96,9 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   protected static final String LANGUAGE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getLanguage()
    * @generated
    * @ordered
@@ -105,8 +106,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   protected String language = LANGUAGE_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected ExpressionImpl() {
@@ -114,8 +115,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -124,8 +125,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public String getBody() {
@@ -133,8 +134,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setBody(String newBody) {
@@ -146,8 +147,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public String getLanguage() {
@@ -155,8 +156,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setLanguage(String newLanguage) {
@@ -168,8 +169,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Constraint getConstraint() {
@@ -178,8 +179,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetConstraint(Constraint newConstraint, NotificationChain msgs) {
@@ -189,8 +190,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setConstraint(Constraint newConstraint) {
@@ -212,8 +213,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -228,8 +229,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -243,8 +244,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -258,8 +259,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -276,8 +277,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -297,8 +298,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -318,8 +319,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -336,21 +337,16 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Adapted the EMF implementation to use Jakarta Commons Lang instead. 
+   * 
+   * @see java.lang.Object#toString()
+   * 
+   * @generated NOT
    */
   @Override
   public String toString() {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (body: "); //$NON-NLS-1$
-    result.append(body);
-    result.append(", language: "); //$NON-NLS-1$
-    result.append(language);
-    result.append(')');
-    return result.toString();
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("body",body).append("language",language).toString(); //$NON-NLS-1$ //$NON-NLS-2$
   }
 
-} //ExpressionImpl
+} // ExpressionImpl

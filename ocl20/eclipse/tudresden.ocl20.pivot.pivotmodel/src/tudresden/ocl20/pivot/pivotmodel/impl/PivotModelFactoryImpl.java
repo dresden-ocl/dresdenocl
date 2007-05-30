@@ -91,34 +91,34 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
   @Override
   public EObject create(EClass eClass) {
     switch (eClass.getClassifierID()) {
-      case PivotModelPackageImpl.ENUMERATION:
-        return (EObject) createEnumeration();
-      case PivotModelPackageImpl.OPERATION:
-        return (EObject) createOperation();
       case PivotModelPackageImpl.NAMESPACE:
         return (EObject) createNamespace();
       case PivotModelPackageImpl.TYPE:
         return (EObject) createType();
-      case PivotModelPackageImpl.PARAMETER:
-        return (EObject) createParameter();
+      case PivotModelPackageImpl.PRIMITIVE_TYPE:
+        return (EObject) createPrimitiveType();
+      case PivotModelPackageImpl.ENUMERATION:
+        return (EObject) createEnumeration();
       case PivotModelPackageImpl.ENUMERATION_LITERAL:
         return (EObject) createEnumerationLiteral();
       case PivotModelPackageImpl.PROPERTY:
         return (EObject) createProperty();
-      case PivotModelPackageImpl.PRIMITIVE_TYPE:
-        return (EObject) createPrimitiveType();
-      case PivotModelPackageImpl.CONSTRAINT:
-        return (EObject) createConstraint();
-      case PivotModelPackageImpl.EXPRESSION:
-        return (EObject) createExpression();
-      case PivotModelPackageImpl.TYPE_PARAMETER:
-        return (EObject) createTypeParameter();
-      case PivotModelPackageImpl.TYPE_ARGUMENT:
-        return (EObject) createTypeArgument();
+      case PivotModelPackageImpl.OPERATION:
+        return (EObject) createOperation();
+      case PivotModelPackageImpl.PARAMETER:
+        return (EObject) createParameter();
       case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE:
         return (EObject) createParameterGenericType();
       case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE:
         return (EObject) createComplexGenericType();
+      case PivotModelPackageImpl.TYPE_PARAMETER:
+        return (EObject) createTypeParameter();
+      case PivotModelPackageImpl.TYPE_ARGUMENT:
+        return (EObject) createTypeArgument();
+      case PivotModelPackageImpl.CONSTRAINT:
+        return (EObject) createConstraint();
+      case PivotModelPackageImpl.EXPRESSION:
+        return (EObject) createExpression();
       default:
         throw new IllegalArgumentException(
             "The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -132,12 +132,12 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
   @Override
   public Object createFromString(EDataType eDataType, String initialValue) {
     switch (eDataType.getClassifierID()) {
+      case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
+        return createPrimitiveTypeKindFromString(eDataType,initialValue);
       case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
         return createParameterDirectionKindFromString(eDataType,initialValue);
       case PivotModelPackageImpl.CONSTRAINT_KIND:
         return createConstraintKindFromString(eDataType,initialValue);
-      case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
-        return createPrimitiveTypeKindFromString(eDataType,initialValue);
       default:
         throw new IllegalArgumentException(
             "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -151,12 +151,12 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
   @Override
   public String convertToString(EDataType eDataType, Object instanceValue) {
     switch (eDataType.getClassifierID()) {
+      case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
+        return convertPrimitiveTypeKindToString(eDataType,instanceValue);
       case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
         return convertParameterDirectionKindToString(eDataType,instanceValue);
       case PivotModelPackageImpl.CONSTRAINT_KIND:
         return convertConstraintKindToString(eDataType,instanceValue);
-      case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
-        return convertPrimitiveTypeKindToString(eDataType,instanceValue);
       default:
         throw new IllegalArgumentException(
             "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$

@@ -129,7 +129,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getNamedElement()
    * @generated
    */
-  public static final int NAMED_ELEMENT = 1;
+  public static final int NAMED_ELEMENT = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -175,7 +175,435 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getType()
    * @generated
    */
-  public static final int TYPE = 5;
+  public static final int TYPE = 7;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl <em>Enumeration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumeration()
+   * @generated
+   */
+  public static final int ENUMERATION = 9;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl <em>Typed Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypedElement()
+   * @generated
+   */
+  public static final int TYPED_ELEMENT = 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPED_ELEMENT__NAME = NAMED_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPED_ELEMENT__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Owner</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPED_ELEMENT__OWNER = NAMED_ELEMENT__OWNER;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPED_ELEMENT__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Generic Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPED_ELEMENT__GENERIC_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Typed Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPED_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl <em>Feature</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getFeature()
+   * @generated
+   */
+  public static final int FEATURE = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE__NAME = TYPED_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE__QUALIFIED_NAME = TYPED_ELEMENT__QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Owner</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE__OWNER = TYPED_ELEMENT__OWNER;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE__TYPE = TYPED_ELEMENT__TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE__GENERIC_TYPE = TYPED_ELEMENT__GENERIC_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Feature</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl <em>Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getOperation()
+   * @generated
+   */
+  public static final int OPERATION = 12;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.MultiplicityElement <em>Multiplicity Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.MultiplicityElement
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getMultiplicityElement()
+   * @generated
+   */
+  public static final int MULTIPLICITY_ELEMENT = 3;
+
+  /**
+   * The feature id for the '<em><b>Ordered</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int MULTIPLICITY_ELEMENT__ORDERED = 0;
+
+  /**
+   * The feature id for the '<em><b>Unique</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int MULTIPLICITY_ELEMENT__UNIQUE = 1;
+
+  /**
+   * The feature id for the '<em><b>Multiple</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int MULTIPLICITY_ELEMENT__MULTIPLE = 2;
+
+  /**
+   * The number of structural features of the '<em>Multiplicity Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int MULTIPLICITY_ELEMENT_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl <em>Namespace</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getNamespace()
+   * @generated
+   */
+  public static final int NAMESPACE = 6;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl <em>Parameter</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameter()
+   * @generated
+   */
+  public static final int PARAMETER = 13;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumerationLiteral()
+   * @generated
+   */
+  public static final int ENUMERATION_LITERAL = 10;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl <em>Property</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getProperty()
+   * @generated
+   */
+  public static final int PROPERTY = 11;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveType()
+   * @generated
+   */
+  public static final int PRIMITIVE_TYPE = 8;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl <em>Constraint</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstraint()
+   * @generated
+   */
+  public static final int CONSTRAINT = 19;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl <em>Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getExpression()
+   * @generated
+   */
+  public static final int EXPRESSION = 20;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement <em>Constrainable Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstrainableElement()
+   * @generated
+   */
+  public static final int CONSTRAINABLE_ELEMENT = 5;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getGenericElement()
+   * @generated
+   */
+  public static final int GENERIC_ELEMENT = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int GENERIC_ELEMENT__NAME = NAMED_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int GENERIC_ELEMENT__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Owner</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int GENERIC_ELEMENT__OWNER = NAMED_ELEMENT__OWNER;
+
+  /**
+   * The feature id for the '<em><b>Owned Type Parameter</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int GENERIC_ELEMENT__OWNED_TYPE_PARAMETER = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Generic Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int GENERIC_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Constrainable Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int CONSTRAINABLE_ELEMENT_FEATURE_COUNT = 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NAMESPACE__NAME = NAMED_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NAMESPACE__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Owner</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NAMESPACE__OWNER = NAMED_ELEMENT__OWNER;
+
+  /**
+   * The feature id for the '<em><b>Owned Type Parameter</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NAMESPACE__OWNED_TYPE_PARAMETER = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NAMESPACE__OWNED_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NAMESPACE__OWNED_RULE = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Nested Namespace</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NAMESPACE__NESTED_NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Nesting Namespace</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NAMESPACE__NESTING_NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+  /**
+   * The number of structural features of the '<em>Namespace</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int NAMESPACE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -268,14 +696,103 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
   /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl <em>Enumeration</em>}' class.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumeration()
    * @generated
+   * @ordered
    */
-  public static final int ENUMERATION = 0;
+  public static final int PRIMITIVE_TYPE__NAME = TYPE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__QUALIFIED_NAME = TYPE__QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Owner</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__OWNER = TYPE__OWNER;
+
+  /**
+   * The feature id for the '<em><b>Owned Type Parameter</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__OWNED_TYPE_PARAMETER = TYPE__OWNED_TYPE_PARAMETER;
+
+  /**
+   * The feature id for the '<em><b>Namespace</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__NAMESPACE = TYPE__NAMESPACE;
+
+  /**
+   * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__OWNED_OPERATION = TYPE__OWNED_OPERATION;
+
+  /**
+   * The feature id for the '<em><b>Owned Property</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__OWNED_PROPERTY = TYPE__OWNED_PROPERTY;
+
+  /**
+   * The feature id for the '<em><b>Super Type</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__SUPER_TYPE = TYPE__SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Kind</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE__KIND = TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Primitive Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PRIMITIVE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -377,23 +894,13 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int ENUMERATION_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl <em>Typed Element</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypedElement()
-   * @generated
-   */
-  public static final int TYPED_ELEMENT = 9;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TYPED_ELEMENT__NAME = NAMED_ELEMENT__NAME;
+  public static final int ENUMERATION_LITERAL__NAME = NAMED_ELEMENT__NAME;
 
   /**
    * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -402,7 +909,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int TYPED_ELEMENT__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+  public static final int ENUMERATION_LITERAL__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
 
   /**
    * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -411,44 +918,25 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int TYPED_ELEMENT__OWNER = NAMED_ELEMENT__OWNER;
+  public static final int ENUMERATION_LITERAL__OWNER = NAMED_ELEMENT__OWNER;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
+   * The feature id for the '<em><b>Enumeration</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TYPED_ELEMENT__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 0;
+  public static final int ENUMERATION_LITERAL__ENUMERATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Generic Type</b></em>' containment reference.
+   * The number of structural features of the '<em>Enumeration Literal</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TYPED_ELEMENT__GENERIC_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Typed Element</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPED_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl <em>Feature</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getFeature()
-   * @generated
-   */
-  public static final int FEATURE = 11;
+  public static final int ENUMERATION_LITERAL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -457,7 +945,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int FEATURE__NAME = TYPED_ELEMENT__NAME;
+  public static final int PROPERTY__NAME = FEATURE__NAME;
 
   /**
    * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -466,7 +954,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int FEATURE__QUALIFIED_NAME = TYPED_ELEMENT__QUALIFIED_NAME;
+  public static final int PROPERTY__QUALIFIED_NAME = FEATURE__QUALIFIED_NAME;
 
   /**
    * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -475,7 +963,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int FEATURE__OWNER = TYPED_ELEMENT__OWNER;
+  public static final int PROPERTY__OWNER = FEATURE__OWNER;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -484,7 +972,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int FEATURE__TYPE = TYPED_ELEMENT__TYPE;
+  public static final int PROPERTY__TYPE = FEATURE__TYPE;
 
   /**
    * The feature id for the '<em><b>Generic Type</b></em>' containment reference.
@@ -493,7 +981,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int FEATURE__GENERIC_TYPE = TYPED_ELEMENT__GENERIC_TYPE;
+  public static final int PROPERTY__GENERIC_TYPE = FEATURE__GENERIC_TYPE;
 
   /**
    * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -502,26 +990,52 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int FEATURE__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 0;
+  public static final int PROPERTY__STATIC = FEATURE__STATIC;
 
   /**
-   * The number of structural features of the '<em>Feature</em>' class.
+   * The feature id for the '<em><b>Ordered</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int FEATURE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
+  public static final int PROPERTY__ORDERED = FEATURE_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl <em>Operation</em>}' class.
+   * The feature id for the '<em><b>Unique</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getOperation()
    * @generated
+   * @ordered
    */
-  public static final int OPERATION = 2;
+  public static final int PROPERTY__UNIQUE = FEATURE_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Multiple</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROPERTY__MULTIPLE = FEATURE_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROPERTY__OWNING_TYPE = FEATURE_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>Property</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -677,153 +1191,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 10;
 
   /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.MultiplicityElement <em>Multiplicity Element</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.MultiplicityElement
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getMultiplicityElement()
-   * @generated
-   */
-  public static final int MULTIPLICITY_ELEMENT = 3;
-
-  /**
-   * The feature id for the '<em><b>Ordered</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int MULTIPLICITY_ELEMENT__ORDERED = 0;
-
-  /**
-   * The feature id for the '<em><b>Unique</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int MULTIPLICITY_ELEMENT__UNIQUE = 1;
-
-  /**
-   * The feature id for the '<em><b>Multiple</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int MULTIPLICITY_ELEMENT__MULTIPLE = 2;
-
-  /**
-   * The number of structural features of the '<em>Multiplicity Element</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int MULTIPLICITY_ELEMENT_FEATURE_COUNT = 3;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl <em>Namespace</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getNamespace()
-   * @generated
-   */
-  public static final int NAMESPACE = 4;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int NAMESPACE__NAME = NAMED_ELEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int NAMESPACE__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
-
-  /**
-   * The feature id for the '<em><b>Owner</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int NAMESPACE__OWNER = NAMED_ELEMENT__OWNER;
-
-  /**
-   * The feature id for the '<em><b>Owned Type Parameter</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int NAMESPACE__OWNED_TYPE_PARAMETER = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int NAMESPACE__OWNED_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int NAMESPACE__OWNED_RULE = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Nested Namespace</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int NAMESPACE__NESTED_NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-  /**
-   * The feature id for the '<em><b>Nesting Namespace</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int NAMESPACE__NESTING_NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-  /**
-   * The number of structural features of the '<em>Namespace</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int NAMESPACE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl <em>Parameter</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameter()
-   * @generated
-   */
-  public static final int PARAMETER = 6;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -923,14 +1290,14 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
   /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl <em>Generic Type</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumerationLiteral()
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getGenericType()
    * @generated
    */
-  public static final int ENUMERATION_LITERAL = 7;
+  public static final int GENERIC_TYPE = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -939,7 +1306,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int ENUMERATION_LITERAL__NAME = NAMED_ELEMENT__NAME;
+  public static final int GENERIC_TYPE__NAME = NAMED_ELEMENT__NAME;
 
   /**
    * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -948,7 +1315,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int ENUMERATION_LITERAL__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+  public static final int GENERIC_TYPE__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
 
   /**
    * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -957,35 +1324,46 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int ENUMERATION_LITERAL__OWNER = NAMED_ELEMENT__OWNER;
+  public static final int GENERIC_TYPE__OWNER = NAMED_ELEMENT__OWNER;
 
   /**
-   * The feature id for the '<em><b>Enumeration</b></em>' container reference.
+   * The number of structural features of the '<em>Generic Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int ENUMERATION_LITERAL__ENUMERATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+  public static final int GENERIC_TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Enumeration Literal</em>' class.
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypeParameter()
    * @generated
-   * @ordered
    */
-  public static final int ENUMERATION_LITERAL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+  public static final int TYPE_PARAMETER = 17;
 
   /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl <em>Property</em>}' class.
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl <em>Type Argument</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getProperty()
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypeArgument()
    * @generated
    */
-  public static final int PROPERTY = 8;
+  public static final int TYPE_ARGUMENT = 18;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl <em>Parameter Generic Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterGenericType()
+   * @generated
+   */
+  public static final int PARAMETER_GENERIC_TYPE = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -994,7 +1372,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int PROPERTY__NAME = FEATURE__NAME;
+  public static final int PARAMETER_GENERIC_TYPE__NAME = GENERIC_TYPE__NAME;
 
   /**
    * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -1003,7 +1381,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int PROPERTY__QUALIFIED_NAME = FEATURE__QUALIFIED_NAME;
+  public static final int PARAMETER_GENERIC_TYPE__QUALIFIED_NAME = GENERIC_TYPE__QUALIFIED_NAME;
 
   /**
    * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -1012,7 +1390,161 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int PROPERTY__OWNER = FEATURE__OWNER;
+  public static final int PARAMETER_GENERIC_TYPE__OWNER = GENERIC_TYPE__OWNER;
+
+  /**
+   * The feature id for the '<em><b>Type Parameter</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PARAMETER_GENERIC_TYPE__TYPE_PARAMETER = GENERIC_TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Parameter Generic Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PARAMETER_GENERIC_TYPE_FEATURE_COUNT = GENERIC_TYPE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl <em>Complex Generic Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getComplexGenericType()
+   * @generated
+   */
+  public static final int COMPLEX_GENERIC_TYPE = 16;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int COMPLEX_GENERIC_TYPE__NAME = GENERIC_TYPE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int COMPLEX_GENERIC_TYPE__QUALIFIED_NAME = GENERIC_TYPE__QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Owner</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int COMPLEX_GENERIC_TYPE__OWNER = GENERIC_TYPE__OWNER;
+
+  /**
+   * The feature id for the '<em><b>Unbound Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int COMPLEX_GENERIC_TYPE__UNBOUND_TYPE = GENERIC_TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Type Argument</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT = GENERIC_TYPE_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Complex Generic Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int COMPLEX_GENERIC_TYPE_FEATURE_COUNT = GENERIC_TYPE_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_PARAMETER__NAME = NAMED_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_PARAMETER__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Owner</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_PARAMETER__OWNER = NAMED_ELEMENT__OWNER;
+
+  /**
+   * The feature id for the '<em><b>Generic Element</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_PARAMETER__GENERIC_ELEMENT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Type Parameter</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_PARAMETER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_ARGUMENT__NAME = TYPED_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_ARGUMENT__QUALIFIED_NAME = TYPED_ELEMENT__QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Owner</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_ARGUMENT__OWNER = TYPED_ELEMENT__OWNER;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1021,7 +1553,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int PROPERTY__TYPE = FEATURE__TYPE;
+  public static final int TYPE_ARGUMENT__TYPE = TYPED_ELEMENT__TYPE;
 
   /**
    * The feature id for the '<em><b>Generic Type</b></em>' containment reference.
@@ -1030,180 +1562,25 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int PROPERTY__GENERIC_TYPE = FEATURE__GENERIC_TYPE;
+  public static final int TYPE_ARGUMENT__GENERIC_TYPE = TYPED_ELEMENT__GENERIC_TYPE;
 
   /**
-   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * The feature id for the '<em><b>Owning Generic Type</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int PROPERTY__STATIC = FEATURE__STATIC;
+  public static final int TYPE_ARGUMENT__OWNING_GENERIC_TYPE = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Ordered</b></em>' attribute.
+   * The number of structural features of the '<em>Type Argument</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int PROPERTY__ORDERED = FEATURE_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Unique</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PROPERTY__UNIQUE = FEATURE_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Multiple</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PROPERTY__MULTIPLE = FEATURE_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Owning Type</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PROPERTY__OWNING_TYPE = FEATURE_FEATURE_COUNT + 3;
-
-  /**
-   * The number of structural features of the '<em>Property</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 4;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveType()
-   * @generated
-   */
-  public static final int PRIMITIVE_TYPE = 10;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__NAME = TYPE__NAME;
-
-  /**
-   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__QUALIFIED_NAME = TYPE__QUALIFIED_NAME;
-
-  /**
-   * The feature id for the '<em><b>Owner</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__OWNER = TYPE__OWNER;
-
-  /**
-   * The feature id for the '<em><b>Owned Type Parameter</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__OWNED_TYPE_PARAMETER = TYPE__OWNED_TYPE_PARAMETER;
-
-  /**
-   * The feature id for the '<em><b>Namespace</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__NAMESPACE = TYPE__NAMESPACE;
-
-  /**
-   * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__OWNED_OPERATION = TYPE__OWNED_OPERATION;
-
-  /**
-   * The feature id for the '<em><b>Owned Property</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__OWNED_PROPERTY = TYPE__OWNED_PROPERTY;
-
-  /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__SUPER_TYPE = TYPE__SUPER_TYPE;
-
-  /**
-   * The feature id for the '<em><b>Generic Super Type</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
-
-  /**
-   * The feature id for the '<em><b>Kind</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE__KIND = TYPE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Primitive Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PRIMITIVE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl <em>Constraint</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstraint()
-   * @generated
-   */
-  public static final int CONSTRAINT = 12;
+  public static final int TYPE_ARGUMENT_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1287,16 +1664,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int CONSTRAINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
   /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl <em>Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getExpression()
-   * @generated
-   */
-  public static final int EXPRESSION = 13;
-
-  /**
    * The feature id for the '<em><b>Body</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1333,373 +1700,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int EXPRESSION_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement <em>Constrainable Element</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstrainableElement()
-   * @generated
-   */
-  public static final int CONSTRAINABLE_ELEMENT = 14;
-
-  /**
-   * The number of structural features of the '<em>Constrainable Element</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int CONSTRAINABLE_ELEMENT_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getGenericElement()
-   * @generated
-   */
-  public static final int GENERIC_ELEMENT = 15;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_ELEMENT__NAME = NAMED_ELEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_ELEMENT__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
-
-  /**
-   * The feature id for the '<em><b>Owner</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_ELEMENT__OWNER = NAMED_ELEMENT__OWNER;
-
-  /**
-   * The feature id for the '<em><b>Owned Type Parameter</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_ELEMENT__OWNED_TYPE_PARAMETER = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Generic Element</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl <em>Generic Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getGenericType()
-   * @generated
-   */
-  public static final int GENERIC_TYPE = 16;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_TYPE__NAME = NAMED_ELEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_TYPE__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
-
-  /**
-   * The feature id for the '<em><b>Owner</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_TYPE__OWNER = NAMED_ELEMENT__OWNER;
-
-  /**
-   * The number of structural features of the '<em>Generic Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int GENERIC_TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypeParameter()
-   * @generated
-   */
-  public static final int TYPE_PARAMETER = 17;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_PARAMETER__NAME = NAMED_ELEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_PARAMETER__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
-
-  /**
-   * The feature id for the '<em><b>Owner</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_PARAMETER__OWNER = NAMED_ELEMENT__OWNER;
-
-  /**
-   * The feature id for the '<em><b>Generic Element</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_PARAMETER__GENERIC_ELEMENT = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Type Parameter</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_PARAMETER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl <em>Type Argument</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypeArgument()
-   * @generated
-   */
-  public static final int TYPE_ARGUMENT = 18;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_ARGUMENT__NAME = TYPED_ELEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_ARGUMENT__QUALIFIED_NAME = TYPED_ELEMENT__QUALIFIED_NAME;
-
-  /**
-   * The feature id for the '<em><b>Owner</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_ARGUMENT__OWNER = TYPED_ELEMENT__OWNER;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_ARGUMENT__TYPE = TYPED_ELEMENT__TYPE;
-
-  /**
-   * The feature id for the '<em><b>Generic Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_ARGUMENT__GENERIC_TYPE = TYPED_ELEMENT__GENERIC_TYPE;
-
-  /**
-   * The feature id for the '<em><b>Owning Generic Type</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_ARGUMENT__OWNING_GENERIC_TYPE = TYPED_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Type Argument</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int TYPE_ARGUMENT_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl <em>Parameter Generic Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterGenericType()
-   * @generated
-   */
-  public static final int PARAMETER_GENERIC_TYPE = 19;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PARAMETER_GENERIC_TYPE__NAME = GENERIC_TYPE__NAME;
-
-  /**
-   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PARAMETER_GENERIC_TYPE__QUALIFIED_NAME = GENERIC_TYPE__QUALIFIED_NAME;
-
-  /**
-   * The feature id for the '<em><b>Owner</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PARAMETER_GENERIC_TYPE__OWNER = GENERIC_TYPE__OWNER;
-
-  /**
-   * The feature id for the '<em><b>Type Parameter</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PARAMETER_GENERIC_TYPE__TYPE_PARAMETER = GENERIC_TYPE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Parameter Generic Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PARAMETER_GENERIC_TYPE_FEATURE_COUNT = GENERIC_TYPE_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl <em>Complex Generic Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getComplexGenericType()
-   * @generated
-   */
-  public static final int COMPLEX_GENERIC_TYPE = 20;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int COMPLEX_GENERIC_TYPE__NAME = GENERIC_TYPE__NAME;
-
-  /**
-   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int COMPLEX_GENERIC_TYPE__QUALIFIED_NAME = GENERIC_TYPE__QUALIFIED_NAME;
-
-  /**
-   * The feature id for the '<em><b>Owner</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int COMPLEX_GENERIC_TYPE__OWNER = GENERIC_TYPE__OWNER;
-
-  /**
-   * The feature id for the '<em><b>Unbound Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int COMPLEX_GENERIC_TYPE__UNBOUND_TYPE = GENERIC_TYPE_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Type Argument</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT = GENERIC_TYPE_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Complex Generic Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int COMPLEX_GENERIC_TYPE_FEATURE_COUNT = GENERIC_TYPE_FEATURE_COUNT + 2;
-
-  /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind <em>Parameter Direction Kind</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1707,7 +1707,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterDirectionKind()
    * @generated
    */
-  public static final int PARAMETER_DIRECTION_KIND = 21;
+  public static final int PARAMETER_DIRECTION_KIND = 22;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.ConstraintKind <em>Constraint Kind</em>}' enum.
@@ -1717,7 +1717,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstraintKind()
    * @generated
    */
-  public static final int CONSTRAINT_KIND = 22;
+  public static final int CONSTRAINT_KIND = 23;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind <em>Primitive Type Kind</em>}' enum.
@@ -1727,7 +1727,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
    * @generated
    */
-  public static final int PRIMITIVE_TYPE_KIND = 23;
+  public static final int PRIMITIVE_TYPE_KIND = 21;
 
   /**
    * The meta object id for the '<em>Clone Not Supported Exception</em>' data type.
@@ -2896,26 +2896,27 @@ public class PivotModelPackageImpl extends EPackageImpl {
     isCreated = true;
 
     // Create classes and their features
-    enumerationEClass = createEClass(ENUMERATION);
-    createEReference(enumerationEClass,ENUMERATION__OWNED_LITERAL);
-
     namedElementEClass = createEClass(NAMED_ELEMENT);
     createEAttribute(namedElementEClass,NAMED_ELEMENT__NAME);
     createEAttribute(namedElementEClass,NAMED_ELEMENT__QUALIFIED_NAME);
     createEReference(namedElementEClass,NAMED_ELEMENT__OWNER);
 
-    operationEClass = createEClass(OPERATION);
-    createEReference(operationEClass,OPERATION__OWNING_TYPE);
-    createEReference(operationEClass,OPERATION__OWNED_PARAMETER);
-    createEReference(operationEClass,OPERATION__INPUT_PARAMETER);
-    createEReference(operationEClass,OPERATION__OUTPUT_PARAMETER);
-    createEReference(operationEClass,OPERATION__RETURN_PARAMETER);
-    createEReference(operationEClass,OPERATION__SIGNATURE_PARAMETER);
+    typedElementEClass = createEClass(TYPED_ELEMENT);
+    createEReference(typedElementEClass,TYPED_ELEMENT__TYPE);
+    createEReference(typedElementEClass,TYPED_ELEMENT__GENERIC_TYPE);
+
+    featureEClass = createEClass(FEATURE);
+    createEAttribute(featureEClass,FEATURE__STATIC);
 
     multiplicityElementEClass = createEClass(MULTIPLICITY_ELEMENT);
     createEAttribute(multiplicityElementEClass,MULTIPLICITY_ELEMENT__ORDERED);
     createEAttribute(multiplicityElementEClass,MULTIPLICITY_ELEMENT__UNIQUE);
     createEAttribute(multiplicityElementEClass,MULTIPLICITY_ELEMENT__MULTIPLE);
+
+    genericElementEClass = createEClass(GENERIC_ELEMENT);
+    createEReference(genericElementEClass,GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
+
+    constrainableElementEClass = createEClass(CONSTRAINABLE_ELEMENT);
 
     namespaceEClass = createEClass(NAMESPACE);
     createEReference(namespaceEClass,NAMESPACE__OWNED_TYPE);
@@ -2930,9 +2931,11 @@ public class PivotModelPackageImpl extends EPackageImpl {
     createEReference(typeEClass,TYPE__SUPER_TYPE);
     createEReference(typeEClass,TYPE__GENERIC_SUPER_TYPE);
 
-    parameterEClass = createEClass(PARAMETER);
-    createEAttribute(parameterEClass,PARAMETER__KIND);
-    createEReference(parameterEClass,PARAMETER__OPERATION);
+    primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
+    createEAttribute(primitiveTypeEClass,PRIMITIVE_TYPE__KIND);
+
+    enumerationEClass = createEClass(ENUMERATION);
+    createEReference(enumerationEClass,ENUMERATION__OWNED_LITERAL);
 
     enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
     createEReference(enumerationLiteralEClass,ENUMERATION_LITERAL__ENUMERATION);
@@ -2940,15 +2943,32 @@ public class PivotModelPackageImpl extends EPackageImpl {
     propertyEClass = createEClass(PROPERTY);
     createEReference(propertyEClass,PROPERTY__OWNING_TYPE);
 
-    typedElementEClass = createEClass(TYPED_ELEMENT);
-    createEReference(typedElementEClass,TYPED_ELEMENT__TYPE);
-    createEReference(typedElementEClass,TYPED_ELEMENT__GENERIC_TYPE);
+    operationEClass = createEClass(OPERATION);
+    createEReference(operationEClass,OPERATION__OWNING_TYPE);
+    createEReference(operationEClass,OPERATION__OWNED_PARAMETER);
+    createEReference(operationEClass,OPERATION__INPUT_PARAMETER);
+    createEReference(operationEClass,OPERATION__OUTPUT_PARAMETER);
+    createEReference(operationEClass,OPERATION__RETURN_PARAMETER);
+    createEReference(operationEClass,OPERATION__SIGNATURE_PARAMETER);
 
-    primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
-    createEAttribute(primitiveTypeEClass,PRIMITIVE_TYPE__KIND);
+    parameterEClass = createEClass(PARAMETER);
+    createEAttribute(parameterEClass,PARAMETER__KIND);
+    createEReference(parameterEClass,PARAMETER__OPERATION);
 
-    featureEClass = createEClass(FEATURE);
-    createEAttribute(featureEClass,FEATURE__STATIC);
+    genericTypeEClass = createEClass(GENERIC_TYPE);
+
+    parameterGenericTypeEClass = createEClass(PARAMETER_GENERIC_TYPE);
+    createEReference(parameterGenericTypeEClass,PARAMETER_GENERIC_TYPE__TYPE_PARAMETER);
+
+    complexGenericTypeEClass = createEClass(COMPLEX_GENERIC_TYPE);
+    createEReference(complexGenericTypeEClass,COMPLEX_GENERIC_TYPE__UNBOUND_TYPE);
+    createEReference(complexGenericTypeEClass,COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT);
+
+    typeParameterEClass = createEClass(TYPE_PARAMETER);
+    createEReference(typeParameterEClass,TYPE_PARAMETER__GENERIC_ELEMENT);
+
+    typeArgumentEClass = createEClass(TYPE_ARGUMENT);
+    createEReference(typeArgumentEClass,TYPE_ARGUMENT__OWNING_GENERIC_TYPE);
 
     constraintEClass = createEClass(CONSTRAINT);
     createEAttribute(constraintEClass,CONSTRAINT__KIND);
@@ -2962,30 +2982,10 @@ public class PivotModelPackageImpl extends EPackageImpl {
     createEAttribute(expressionEClass,EXPRESSION__LANGUAGE);
     createEReference(expressionEClass,EXPRESSION__CONSTRAINT);
 
-    constrainableElementEClass = createEClass(CONSTRAINABLE_ELEMENT);
-
-    genericElementEClass = createEClass(GENERIC_ELEMENT);
-    createEReference(genericElementEClass,GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
-
-    genericTypeEClass = createEClass(GENERIC_TYPE);
-
-    typeParameterEClass = createEClass(TYPE_PARAMETER);
-    createEReference(typeParameterEClass,TYPE_PARAMETER__GENERIC_ELEMENT);
-
-    typeArgumentEClass = createEClass(TYPE_ARGUMENT);
-    createEReference(typeArgumentEClass,TYPE_ARGUMENT__OWNING_GENERIC_TYPE);
-
-    parameterGenericTypeEClass = createEClass(PARAMETER_GENERIC_TYPE);
-    createEReference(parameterGenericTypeEClass,PARAMETER_GENERIC_TYPE__TYPE_PARAMETER);
-
-    complexGenericTypeEClass = createEClass(COMPLEX_GENERIC_TYPE);
-    createEReference(complexGenericTypeEClass,COMPLEX_GENERIC_TYPE__UNBOUND_TYPE);
-    createEReference(complexGenericTypeEClass,COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT);
-
     // Create enums
+    primitiveTypeKindEEnum = createEEnum(PRIMITIVE_TYPE_KIND);
     parameterDirectionKindEEnum = createEEnum(PARAMETER_DIRECTION_KIND);
     constraintKindEEnum = createEEnum(CONSTRAINT_KIND);
-    primitiveTypeKindEEnum = createEEnum(PRIMITIVE_TYPE_KIND);
 
     // Create data types
     cloneNotSupportedExceptionEDataType = createEDataType(CLONE_NOT_SUPPORTED_EXCEPTION);
@@ -3023,53 +3023,39 @@ public class PivotModelPackageImpl extends EPackageImpl {
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    enumerationEClass.getESuperTypes().add(this.getType());
-    operationEClass.getESuperTypes().add(this.getFeature());
-    operationEClass.getESuperTypes().add(this.getTypedElement());
-    operationEClass.getESuperTypes().add(this.getNamedElement());
-    operationEClass.getESuperTypes().add(this.getMultiplicityElement());
-    operationEClass.getESuperTypes().add(this.getConstrainableElement());
-    operationEClass.getESuperTypes().add(this.getGenericElement());
+    typedElementEClass.getESuperTypes().add(this.getNamedElement());
+    featureEClass.getESuperTypes().add(this.getTypedElement());
+    genericElementEClass.getESuperTypes().add(this.getNamedElement());
     namespaceEClass.getESuperTypes().add(this.getNamedElement());
     namespaceEClass.getESuperTypes().add(this.getGenericElement());
     typeEClass.getESuperTypes().add(this.getNamedElement());
     typeEClass.getESuperTypes().add(this.getConstrainableElement());
     typeEClass.getESuperTypes().add(this.getGenericElement());
-    parameterEClass.getESuperTypes().add(this.getTypedElement());
-    parameterEClass.getESuperTypes().add(this.getNamedElement());
-    parameterEClass.getESuperTypes().add(this.getMultiplicityElement());
+    primitiveTypeEClass.getESuperTypes().add(this.getType());
+    enumerationEClass.getESuperTypes().add(this.getType());
     enumerationLiteralEClass.getESuperTypes().add(this.getNamedElement());
     propertyEClass.getESuperTypes().add(this.getFeature());
     propertyEClass.getESuperTypes().add(this.getTypedElement());
     propertyEClass.getESuperTypes().add(this.getNamedElement());
     propertyEClass.getESuperTypes().add(this.getMultiplicityElement());
     propertyEClass.getESuperTypes().add(this.getConstrainableElement());
-    typedElementEClass.getESuperTypes().add(this.getNamedElement());
-    primitiveTypeEClass.getESuperTypes().add(this.getType());
-    featureEClass.getESuperTypes().add(this.getTypedElement());
-    constraintEClass.getESuperTypes().add(this.getNamedElement());
-    genericElementEClass.getESuperTypes().add(this.getNamedElement());
+    operationEClass.getESuperTypes().add(this.getFeature());
+    operationEClass.getESuperTypes().add(this.getTypedElement());
+    operationEClass.getESuperTypes().add(this.getNamedElement());
+    operationEClass.getESuperTypes().add(this.getMultiplicityElement());
+    operationEClass.getESuperTypes().add(this.getConstrainableElement());
+    operationEClass.getESuperTypes().add(this.getGenericElement());
+    parameterEClass.getESuperTypes().add(this.getTypedElement());
+    parameterEClass.getESuperTypes().add(this.getNamedElement());
+    parameterEClass.getESuperTypes().add(this.getMultiplicityElement());
     genericTypeEClass.getESuperTypes().add(this.getNamedElement());
-    typeParameterEClass.getESuperTypes().add(this.getNamedElement());
-    typeArgumentEClass.getESuperTypes().add(this.getTypedElement());
     parameterGenericTypeEClass.getESuperTypes().add(this.getGenericType());
     complexGenericTypeEClass.getESuperTypes().add(this.getGenericType());
+    typeParameterEClass.getESuperTypes().add(this.getNamedElement());
+    typeArgumentEClass.getESuperTypes().add(this.getTypedElement());
+    constraintEClass.getESuperTypes().add(this.getNamedElement());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(enumerationEClass,Enumeration.class,
-        "Enumeration",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getEnumeration_OwnedLiteral(),
-        this.getEnumerationLiteral(),
-        this.getEnumerationLiteral_Enumeration(),
-        "ownedLiteral",null,0,-1,Enumeration.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    EOperation op = addEOperation(enumerationEClass,this.getEnumeration(),"addLiteral",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getEnumerationLiteral(),"literal",1,1); //$NON-NLS-1$
-
-    op = addEOperation(enumerationEClass,this.getEnumerationLiteral(),"lookupLiteral",0,1); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1); //$NON-NLS-1$
-
     initEClass(namedElementEClass,NamedElement.class,
         "NamedElement",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
@@ -3086,8 +3072,223 @@ public class PivotModelPackageImpl extends EPackageImpl {
         null,
         "owner",null,0,1,NamedElement.class,IS_TRANSIENT,IS_VOLATILE,!IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(namedElementEClass,this.getNamedElement(),"clone",1,1); //$NON-NLS-1$
+    EOperation op = addEOperation(namedElementEClass,this.getNamedElement(),
+        "clone",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
     addEException(op,this.getCloneNotSupportedException());
+
+    initEClass(typedElementEClass,TypedElement.class,
+        "TypedElement",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getTypedElement_Type(),
+        this.getType(),
+        null,
+        "type",null,1,1,TypedElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getTypedElement_GenericType(),
+        this.getGenericType(),
+        null,
+        "genericType",null,0,1,TypedElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
+    initEClass(featureEClass,Feature.class,
+        "Feature",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEAttribute(
+        getFeature_Static(),
+        theDatatypesPackageImpl.getBoolean(),
+        "static","false",0,1,Feature.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+
+    initEClass(multiplicityElementEClass,MultiplicityElement.class,
+        "MultiplicityElement",IS_ABSTRACT,IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEAttribute(
+        getMultiplicityElement_Ordered(),
+        theDatatypesPackageImpl.getBoolean(),
+        "ordered","false",0,1,MultiplicityElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+    initEAttribute(
+        getMultiplicityElement_Unique(),
+        theDatatypesPackageImpl.getBoolean(),
+        "unique","true",0,1,MultiplicityElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+    initEAttribute(
+        getMultiplicityElement_Multiple(),
+        theDatatypesPackageImpl.getBoolean(),
+        "multiple","false",0,1,MultiplicityElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+
+    initEClass(genericElementEClass,GenericElement.class,
+        "GenericElement",IS_ABSTRACT,IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getGenericElement_OwnedTypeParameter(),
+        this.getTypeParameter(),
+        this.getTypeParameter_GenericElement(),
+        "ownedTypeParameter",null,0,-1,GenericElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(genericElementEClass,this.getGenericElement(),
+        "addTypeParameter",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getTypeParameter(),"typeParameter",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(genericElementEClass,this.getNamedElement(),
+        "bindTypeParameter",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    EGenericType g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    EGenericType g2 = createEGenericType(this.getTypeParameter());
+    g1.getETypeArguments().add(g2);
+    addEParameter(op,g1,"parameters",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType();
+    g1.getETypeArguments().add(g2);
+    EGenericType g3 = createEGenericType(this.getType());
+    g2.setEUpperBound(g3);
+    addEParameter(op,g1,"types",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(genericElementEClass,this.getType(),"getBoundType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getTypeParameter(),"typeParam",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    initEClass(constrainableElementEClass,ConstrainableElement.class,
+        "ConstrainableElement",IS_ABSTRACT,IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+    initEClass(namespaceEClass,Namespace.class,
+        "Namespace",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getNamespace_OwnedType(),
+        this.getType(),
+        this.getType_Namespace(),
+        "ownedType",null,0,-1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getNamespace_OwnedRule(),
+        this.getConstraint(),
+        this.getConstraint_Namespace(),
+        "ownedRule",null,0,-1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getNamespace_NestedNamespace(),
+        this.getNamespace(),
+        this.getNamespace_NestingNamespace(),
+        "nestedNamespace",null,0,-1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getNamespace_NestingNamespace(),
+        this.getNamespace(),
+        this.getNamespace_NestedNamespace(),
+        "nestingNamespace",null,0,1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(namespaceEClass,this.getNamespace(),"addType",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getType(),"type",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(namespaceEClass,this.getNamespace(),"addRule",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getConstraint(),"rule",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(namespaceEClass,this.getNamespace(),
+        "addNestedNamespace",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getNamespace(),"namespace",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(namespaceEClass,this.getType(),"lookupType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(namespaceEClass,this.getNamespace(),
+        "lookupNamespace",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    initEClass(typeEClass,Type.class,"Type",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getType_Namespace(),
+        this.getNamespace(),
+        this.getNamespace_OwnedType(),
+        "namespace",null,0,1,Type.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getType_OwnedOperation(),
+        this.getOperation(),
+        this.getOperation_OwningType(),
+        "ownedOperation",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getType_OwnedProperty(),
+        this.getProperty(),
+        this.getProperty_OwningType(),
+        "ownedProperty",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getType_SuperType(),
+        this.getType(),
+        null,
+        "superType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getType_GenericSuperType(),
+        this.getGenericType(),
+        null,
+        "genericSuperType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(typeEClass,theDatatypesPackageImpl.getBoolean(),
+        "conformsTo",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getType(),"other",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(typeEClass,this.getType(),"commonSuperType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getType(),"other",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(typeEClass,null,"allProperties",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType(this.getProperty());
+    g1.getETypeArguments().add(g2);
+    initEOperation(op,g1);
+
+    op = addEOperation(typeEClass,null,"allOperations",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType(this.getOperation());
+    g1.getETypeArguments().add(g2);
+    initEOperation(op,g1);
+
+    op = addEOperation(typeEClass,this.getProperty(),"lookupProperty",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(typeEClass,this.getOperation(),"lookupOperation",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType(this.getType());
+    g1.getETypeArguments().add(g2);
+    addEParameter(op,g1,"paramTypes",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(typeEClass,this.getType(),"addProperty",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getProperty(),"property",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(typeEClass,this.getType(),"addOperation",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getOperation(),"operation",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(typeEClass,this.getType(),"addSuperType",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getType(),"type",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    initEClass(primitiveTypeEClass,PrimitiveType.class,
+        "PrimitiveType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEAttribute(
+        getPrimitiveType_Kind(),
+        this.getPrimitiveTypeKind(),
+        "kind","Unknown",1,1,PrimitiveType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+
+    initEClass(enumerationEClass,Enumeration.class,
+        "Enumeration",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getEnumeration_OwnedLiteral(),
+        this.getEnumerationLiteral(),
+        this.getEnumerationLiteral_Enumeration(),
+        "ownedLiteral",null,0,-1,Enumeration.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(enumerationEClass,this.getEnumeration(),
+        "addLiteral",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getEnumerationLiteral(),"literal",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(enumerationEClass,this.getEnumerationLiteral(),
+        "lookupLiteral",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    initEClass(enumerationLiteralEClass,EnumerationLiteral.class,
+        "EnumerationLiteral",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getEnumerationLiteral_Enumeration(),
+        this.getEnumeration(),
+        this.getEnumeration_OwnedLiteral(),
+        "enumeration",null,0,1,EnumerationLiteral.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
+    initEClass(propertyEClass,Property.class,
+        "Property",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getProperty_OwningType(),
+        this.getType(),
+        this.getType_OwnedProperty(),
+        "owningType",null,0,1,Property.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(propertyEClass,theDatatypesPackageImpl.getBoolean(),
+        "cmpSlots",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getProperty(),"p",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(operationEClass,Operation.class,
         "Operation",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -3123,131 +3324,14 @@ public class PivotModelPackageImpl extends EPackageImpl {
         "signatureParameter",null,0,-1,Operation.class,IS_TRANSIENT,IS_VOLATILE,!IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     op = addEOperation(operationEClass,theDatatypesPackageImpl.getBoolean(),
-        "hasMatchingSignature",0,1); //$NON-NLS-1$
-    EGenericType g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
-    EGenericType g2 = createEGenericType(this.getType());
-    g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"paramTypes",0,1); //$NON-NLS-1$
-
-    op = addEOperation(operationEClass,this.getOperation(),"addParameter",0,1); //$NON-NLS-1$
-    addEParameter(op,this.getParameter(),"param",0,1); //$NON-NLS-1$
-
-    initEClass(multiplicityElementEClass,MultiplicityElement.class,
-        "MultiplicityElement",IS_ABSTRACT,IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEAttribute(
-        getMultiplicityElement_Ordered(),
-        theDatatypesPackageImpl.getBoolean(),
-        "ordered","false",0,1,MultiplicityElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-    initEAttribute(
-        getMultiplicityElement_Unique(),
-        theDatatypesPackageImpl.getBoolean(),
-        "unique","true",0,1,MultiplicityElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-    initEAttribute(
-        getMultiplicityElement_Multiple(),
-        theDatatypesPackageImpl.getBoolean(),
-        "multiple","false",0,1,MultiplicityElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-
-    initEClass(namespaceEClass,Namespace.class,
-        "Namespace",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getNamespace_OwnedType(),
-        this.getType(),
-        this.getType_Namespace(),
-        "ownedType",null,0,-1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getNamespace_OwnedRule(),
-        this.getConstraint(),
-        this.getConstraint_Namespace(),
-        "ownedRule",null,0,-1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getNamespace_NestedNamespace(),
-        this.getNamespace(),
-        this.getNamespace_NestingNamespace(),
-        "nestedNamespace",null,0,-1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getNamespace_NestingNamespace(),
-        this.getNamespace(),
-        this.getNamespace_NestedNamespace(),
-        "nestingNamespace",null,0,1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    op = addEOperation(namespaceEClass,this.getNamespace(),"addType",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"type",0,1); //$NON-NLS-1$
-
-    op = addEOperation(namespaceEClass,this.getNamespace(),"addRule",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getConstraint(),"rule",0,1); //$NON-NLS-1$
-
-    op = addEOperation(namespaceEClass,this.getNamespace(),"addNestedNamespace",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getNamespace(),"namespace",0,1); //$NON-NLS-1$
-
-    op = addEOperation(namespaceEClass,this.getType(),"lookupType",0,1); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1); //$NON-NLS-1$
-
-    op = addEOperation(namespaceEClass,this.getNamespace(),"lookupNamespace",0,1); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1); //$NON-NLS-1$
-
-    initEClass(typeEClass,Type.class,"Type",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getType_Namespace(),
-        this.getNamespace(),
-        this.getNamespace_OwnedType(),
-        "namespace",null,0,1,Type.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getType_OwnedOperation(),
-        this.getOperation(),
-        this.getOperation_OwningType(),
-        "ownedOperation",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getType_OwnedProperty(),
-        this.getProperty(),
-        this.getProperty_OwningType(),
-        "ownedProperty",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getType_SuperType(),
-        this.getType(),
-        null,
-        "superType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getType_GenericSuperType(),
-        this.getGenericType(),
-        null,
-        "genericSuperType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    op = addEOperation(typeEClass,theDatatypesPackageImpl.getBoolean(),"conformsTo",0,1); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"other",0,1); //$NON-NLS-1$
-
-    op = addEOperation(typeEClass,this.getType(),"commonSuperType",0,1); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"other",0,1); //$NON-NLS-1$
-
-    op = addEOperation(typeEClass,null,"allProperties",0,1); //$NON-NLS-1$
-    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
-    g2 = createEGenericType(this.getProperty());
-    g1.getETypeArguments().add(g2);
-    initEOperation(op,g1);
-
-    op = addEOperation(typeEClass,null,"allOperations",0,1); //$NON-NLS-1$
-    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
-    g2 = createEGenericType(this.getOperation());
-    g1.getETypeArguments().add(g2);
-    initEOperation(op,g1);
-
-    op = addEOperation(typeEClass,this.getProperty(),"lookupProperty",0,1); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1); //$NON-NLS-1$
-
-    op = addEOperation(typeEClass,this.getOperation(),"lookupOperation",0,1); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1); //$NON-NLS-1$
+        "hasMatchingSignature",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType(this.getType());
     g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"paramTypes",0,1); //$NON-NLS-1$
+    addEParameter(op,g1,"paramTypes",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(typeEClass,this.getType(),"addProperty",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getProperty(),"property",0,1); //$NON-NLS-1$
-
-    op = addEOperation(typeEClass,this.getType(),"addOperation",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getOperation(),"operation",0,1); //$NON-NLS-1$
-
-    op = addEOperation(typeEClass,this.getType(),"addSuperType",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"type",0,1); //$NON-NLS-1$
+    op = addEOperation(operationEClass,this.getOperation(),"addParameter",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getParameter(),"param",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(parameterEClass,Parameter.class,
         "Parameter",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -3261,53 +3345,83 @@ public class PivotModelPackageImpl extends EPackageImpl {
         this.getOperation_OwnedParameter(),
         "operation",null,0,1,Parameter.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(parameterEClass,this.getProperty(),"asProperty",0,1); //$NON-NLS-1$
+    addEOperation(parameterEClass,this.getProperty(),"asProperty",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(enumerationLiteralEClass,EnumerationLiteral.class,
-        "EnumerationLiteral",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(genericTypeEClass,GenericType.class,
+        "GenericType",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+    op = addEOperation(genericTypeEClass,theDatatypesPackageImpl.getBoolean(),
+        "bindGenericType",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType(this.getTypeParameter());
+    g1.getETypeArguments().add(g2);
+    addEParameter(op,g1,"parameters",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType();
+    g1.getETypeArguments().add(g2);
+    g3 = createEGenericType(this.getType());
+    g2.setEUpperBound(g3);
+    addEParameter(op,g1,"types",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getTypedElement(),"typedElement",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(genericTypeEClass,theDatatypesPackageImpl.getBoolean(),
+        "bindGenericSuperType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType(this.getTypeParameter());
+    g1.getETypeArguments().add(g2);
+    addEParameter(op,g1,"parameters",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
+    g2 = createEGenericType();
+    g1.getETypeArguments().add(g2);
+    g3 = createEGenericType(this.getType());
+    g2.setEUpperBound(g3);
+    addEParameter(op,g1,"types",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getType(),"subType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    op = addEOperation(genericTypeEClass,theDatatypesPackageImpl.getBoolean(),
+        "isConformant",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getType(),"type",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+
+    initEClass(parameterGenericTypeEClass,ParameterGenericType.class,
+        "ParameterGenericType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
-        getEnumerationLiteral_Enumeration(),
-        this.getEnumeration(),
-        this.getEnumeration_OwnedLiteral(),
-        "enumeration",null,0,1,EnumerationLiteral.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        getParameterGenericType_TypeParameter(),
+        this.getTypeParameter(),
+        null,
+        "typeParameter",null,0,1,ParameterGenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(propertyEClass,Property.class,
-        "Property",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(complexGenericTypeEClass,ComplexGenericType.class,
+        "ComplexGenericType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
-        getProperty_OwningType(),
-        this.getType(),
-        this.getType_OwnedProperty(),
-        "owningType",null,0,1,Property.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    op = addEOperation(propertyEClass,theDatatypesPackageImpl.getBoolean(),"cmpSlots",0,1); //$NON-NLS-1$
-    addEParameter(op,this.getProperty(),"p",0,1); //$NON-NLS-1$
-
-    initEClass(typedElementEClass,TypedElement.class,
-        "TypedElement",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getTypedElement_Type(),
+        getComplexGenericType_UnboundType(),
         this.getType(),
         null,
-        "type",null,1,1,TypedElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "unboundType",null,0,1,ComplexGenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
     initEReference(
-        getTypedElement_GenericType(),
-        this.getGenericType(),
-        null,
-        "genericType",null,0,1,TypedElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        getComplexGenericType_TypeArgument(),
+        this.getTypeArgument(),
+        this.getTypeArgument_OwningGenericType(),
+        "typeArgument",null,0,-1,ComplexGenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(primitiveTypeEClass,PrimitiveType.class,
-        "PrimitiveType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEAttribute(
-        getPrimitiveType_Kind(),
-        this.getPrimitiveTypeKind(),
-        "kind","Unknown",1,1,PrimitiveType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+    op = addEOperation(complexGenericTypeEClass,this.getComplexGenericType(),
+        "addTypeArgument",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getTypeArgument(),"typeArgument",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(featureEClass,Feature.class,
-        "Feature",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEAttribute(
-        getFeature_Static(),
-        theDatatypesPackageImpl.getBoolean(),
-        "static","false",0,1,Feature.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+    initEClass(typeParameterEClass,TypeParameter.class,
+        "TypeParameter",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getTypeParameter_GenericElement(),
+        this.getGenericElement(),
+        this.getGenericElement_OwnedTypeParameter(),
+        "genericElement",null,0,1,TypeParameter.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
+    initEClass(typeArgumentEClass,TypeArgument.class,
+        "TypeArgument",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getTypeArgument_OwningGenericType(),
+        this.getComplexGenericType(),
+        this.getComplexGenericType_TypeArgument(),
+        "owningGenericType",null,0,1,TypeArgument.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(constraintEClass,Constraint.class,
         "Constraint",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -3336,8 +3450,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
         null,
         "definedFeature",null,0,1,Constraint.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(constraintEClass,this.getConstraint(),"addConstrainedElement",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getConstrainableElement(),"constrainedElement",1,1); //$NON-NLS-1$
+    op = addEOperation(constraintEClass,this.getConstraint(),
+        "addConstrainedElement",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op,this.getConstrainableElement(),"constrainedElement",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(expressionEClass,Expression.class,
         "Expression",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -3355,105 +3470,14 @@ public class PivotModelPackageImpl extends EPackageImpl {
         this.getConstraint_Specification(),
         "constraint",null,0,1,Expression.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(constrainableElementEClass,ConstrainableElement.class,
-        "ConstrainableElement",IS_ABSTRACT,IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-
-    initEClass(genericElementEClass,GenericElement.class,
-        "GenericElement",IS_ABSTRACT,IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getGenericElement_OwnedTypeParameter(),
-        this.getTypeParameter(),
-        this.getTypeParameter_GenericElement(),
-        "ownedTypeParameter",null,0,-1,GenericElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    op = addEOperation(genericElementEClass,this.getGenericElement(),"addTypeParameter",0,1); //$NON-NLS-1$
-    addEParameter(op,this.getTypeParameter(),"typeParameter",0,1); //$NON-NLS-1$
-
-    op = addEOperation(genericElementEClass,this.getNamedElement(),"bindTypeParameter",1,1); //$NON-NLS-1$
-    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
-    g2 = createEGenericType(this.getTypeParameter());
-    g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"parameters",1,1); //$NON-NLS-1$
-    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
-    g2 = createEGenericType();
-    g1.getETypeArguments().add(g2);
-    EGenericType g3 = createEGenericType(this.getType());
-    g2.setEUpperBound(g3);
-    addEParameter(op,g1,"types",1,1); //$NON-NLS-1$
-
-    initEClass(genericTypeEClass,GenericType.class,
-        "GenericType",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-
-    op = addEOperation(genericTypeEClass,this.getTypedElement(),"bindGenericType",1,1); //$NON-NLS-1$
-    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
-    g2 = createEGenericType(this.getTypeParameter());
-    g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"parameters",1,1); //$NON-NLS-1$
-    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
-    g2 = createEGenericType();
-    g1.getETypeArguments().add(g2);
-    g3 = createEGenericType(this.getType());
-    g2.setEUpperBound(g3);
-    addEParameter(op,g1,"types",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getTypedElement(),"typedElement",0,1); //$NON-NLS-1$
-
-    op = addEOperation(genericTypeEClass,this.getType(),"bindGenericSuperType",0,1); //$NON-NLS-1$
-    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
-    g2 = createEGenericType(this.getTypeParameter());
-    g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"parameters",1,1); //$NON-NLS-1$
-    g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
-    g2 = createEGenericType();
-    g1.getETypeArguments().add(g2);
-    g3 = createEGenericType(this.getType());
-    g2.setEUpperBound(g3);
-    addEParameter(op,g1,"types",1,1); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"subType",0,1); //$NON-NLS-1$
-
-    op = addEOperation(genericTypeEClass,theDatatypesPackageImpl.getBoolean(),"isConformant",0,1); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"type",0,1); //$NON-NLS-1$
-
-    initEClass(typeParameterEClass,TypeParameter.class,
-        "TypeParameter",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getTypeParameter_GenericElement(),
-        this.getGenericElement(),
-        this.getGenericElement_OwnedTypeParameter(),
-        "genericElement",null,0,1,TypeParameter.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    initEClass(typeArgumentEClass,TypeArgument.class,
-        "TypeArgument",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getTypeArgument_OwningGenericType(),
-        this.getComplexGenericType(),
-        this.getComplexGenericType_TypeArgument(),
-        "owningGenericType",null,0,1,TypeArgument.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    initEClass(parameterGenericTypeEClass,ParameterGenericType.class,
-        "ParameterGenericType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getParameterGenericType_TypeParameter(),
-        this.getTypeParameter(),
-        null,
-        "typeParameter",null,0,1,ParameterGenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    initEClass(complexGenericTypeEClass,ComplexGenericType.class,
-        "ComplexGenericType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEReference(
-        getComplexGenericType_UnboundType(),
-        this.getType(),
-        null,
-        "unboundType",null,0,1,ComplexGenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getComplexGenericType_TypeArgument(),
-        this.getTypeArgument(),
-        this.getTypeArgument_OwningGenericType(),
-        "typeArgument",null,0,-1,ComplexGenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    op = addEOperation(complexGenericTypeEClass,this.getComplexGenericType(),"addTypeArgument",0,1); //$NON-NLS-1$
-    addEParameter(op,this.getTypeArgument(),"typeArgument",1,1); //$NON-NLS-1$
-
     // Initialize enums and add enum literals
+    initEEnum(primitiveTypeKindEEnum,PrimitiveTypeKind.class,"PrimitiveTypeKind"); //$NON-NLS-1$
+    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.UNKNOWN);
+    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.INTEGER);
+    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.REAL);
+    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.BOOLEAN);
+    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.STRING);
+
     initEEnum(parameterDirectionKindEEnum,ParameterDirectionKind.class,"ParameterDirectionKind"); //$NON-NLS-1$
     addEEnumLiteral(parameterDirectionKindEEnum,ParameterDirectionKind.IN);
     addEEnumLiteral(parameterDirectionKindEEnum,ParameterDirectionKind.OUT);
@@ -3468,13 +3492,6 @@ public class PivotModelPackageImpl extends EPackageImpl {
     addEEnumLiteral(constraintKindEEnum,ConstraintKind.INITIAL);
     addEEnumLiteral(constraintKindEEnum,ConstraintKind.DERIVED);
     addEEnumLiteral(constraintKindEEnum,ConstraintKind.BODY);
-
-    initEEnum(primitiveTypeKindEEnum,PrimitiveTypeKind.class,"PrimitiveTypeKind"); //$NON-NLS-1$
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.UNKNOWN);
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.INTEGER);
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.REAL);
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.BOOLEAN);
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.STRING);
 
     // Initialize data types
     initEDataType(cloneNotSupportedExceptionEDataType,CloneNotSupportedException.class,
