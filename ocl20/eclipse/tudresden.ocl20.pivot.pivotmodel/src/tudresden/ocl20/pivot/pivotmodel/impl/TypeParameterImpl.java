@@ -51,16 +51,17 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl#getGenericElement <em>Generic Element</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl#getGenericElement <em>Generic Element</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TypeParameterImpl extends NamedElementImpl implements TypeParameter {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected TypeParameterImpl() {
@@ -69,6 +70,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -78,6 +80,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public GenericElement getGenericElement() {
@@ -87,6 +90,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetGenericElement(GenericElement newGenericElement,
@@ -98,6 +102,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setGenericElement(GenericElement newGenericElement) {
@@ -142,16 +147,19 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
    * Overridden to only include the name of the owning {@link GenericElement} instead of the full
    * namespace hierarchy. This is necessary for the correct working of the {@link #hashCode()} and
    * {@link #equals(Object)} methods when binding the <code>TypeParameters</code> of
-   * <code>GenericElement</code>s.
+   * <code>GenericElement</code>s since the implementation of these methods is based on the
+   * equality of the fully qualified name.
    * 
    * <p>
-   * Before <code>GenericElement</code>s are {@link GenericElement#bindTypeParameter() bound},
-   * they are cloned but not added to the original element's namespace. Thus, the fully qualified
-   * name of the owned <code>TypeParameter</code> will be different. This will prevent recognizing
-   * two <code>TypeParameter</code>s as equal and therefore hinder binding. Changing the
-   * qualified name is an alternative to overriding the {@link #hashCode()} and
-   * {@link #equals(Object)} methods. This is also more suitable for the display in a graphical
-   * editor.
+   * Now, before <code>GenericElement</code>s are
+   * {@link GenericElement#bindTypeParameter() bound}, they are cloned but not added to the
+   * original element's namespace. Thus, their fully qualified name (and that of the owned
+   * <code>TypeParameter</code>s) will be different. During binding, this would prevent
+   * recognizing two <code>TypeParameter</code>s as equal and therefore hinder binding. Thus,
+   * changing the qualified name to only include the parent solves this problem. An alternative
+   * would be to override the {@link #hashCode()} and {@link #equals(Object)} methods, but that
+   * would require more effort. Changing the fully qualified name instead also works fine for the
+   * display in a graphical editor.
    * </p>
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
@@ -164,6 +172,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -179,6 +188,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -193,6 +203,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -207,6 +218,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -220,6 +232,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -234,6 +247,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -248,6 +262,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
