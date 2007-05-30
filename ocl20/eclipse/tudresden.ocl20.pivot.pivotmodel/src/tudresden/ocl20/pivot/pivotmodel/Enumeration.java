@@ -101,7 +101,7 @@ public interface Enumeration extends Type {
    * <pre>
    * context Enumeration
    * def: lookupLiteral(name : String) : EnumerationLiteral =
-   *    self.ownedLiteral()->any(l | l.name = name)
+   *    self.ownedLiteral->any(l | l.name = name)
    * </pre>
    * </p>
    * <!-- end-model-doc -->
