@@ -35,9 +35,11 @@ package tudresden.ocl20.pivot.xocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -45,6 +47,9 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
 
 /**
  * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.CollectionLiteralPartXS} object.
@@ -128,4 +133,27 @@ public class CollectionLiteralPartXSItemProvider extends ItemProviderAdapter imp
     return XOCLEditPlugin.INSTANCE;
   }
 
+  /**
+   * Helper method for subclasses to quickly return the label for an object created by a suitable
+   * adapter.
+   */
+  protected String getLabel(Object object) {
+    Object labelProvider = adapterFactory.adapt(object,IItemLabelProvider.class);
+
+    if (labelProvider instanceof IItemLabelProvider) {
+      return ((IItemLabelProvider) labelProvider).getText(object);
+    }
+
+    return StringUtils.EMPTY;
+  }
+
+  /**
+   * Helper method to recursively update the label of all expressions in the tree.
+   */
+  protected void updateLabel(Notification notification) {
+    for (EObject owner = (EObject) notification.getNotifier(); owner != null
+        && !(owner instanceof ExpressionInOclXS); owner = owner.eContainer()) {
+      fireNotifyChanged(new ViewerNotification(notification,owner,false,true));
+    }
+  }
 }

@@ -49,15 +49,15 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.xocl.CollectionKindXS;
 import tudresden.ocl20.pivot.xocl.CollectionLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.CollectionLiteralPartXS;
 import tudresden.ocl20.pivot.xocl.XOCLFactory;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.CollectionLiteralExpXS} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.CollectionLiteralExpXS}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider implements
@@ -65,9 +65,9 @@ public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   public CollectionLiteralExpXSItemProvider(AdapterFactory adapterFactory) {
@@ -75,9 +75,9 @@ public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -91,9 +91,9 @@ public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider
   }
 
   /**
-   * This adds a property descriptor for the Kind feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds a property descriptor for the Kind feature. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
    * @generated
    */
   protected void addKindPropertyDescriptor(Object object) {
@@ -109,11 +109,12 @@ public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider
   }
 
   /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
+   * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+   * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -126,8 +127,8 @@ public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -139,9 +140,8 @@ public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider
   }
 
   /**
-   * This returns CollectionLiteralExpXS.gif.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns CollectionLiteralExpXS.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -150,25 +150,39 @@ public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider
   }
 
   /**
-   * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Adapted to reflect the OCL concrete syntax
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    CollectionKindXS labelValue = ((CollectionLiteralExpXS) object).getKind();
-    String label = labelValue == null ? null : labelValue.toString();
-    return label == null || label.length() == 0 ? getString("_UI_CollectionLiteralExpXS_type") : //$NON-NLS-1$
-        getString("_UI_CollectionLiteralExpXS_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+    CollectionLiteralExpXS expression = (CollectionLiteralExpXS) object;
+
+    // append the name of the collection
+    StringBuilder label = new StringBuilder(expression.getKind().toString());
+
+    // append the collection literal parts
+    label.append('{');
+
+    for (CollectionLiteralPartXS part : expression.getPart()) {
+      label.append(getLabel(part));
+    }
+
+    label.append('}');
+
+    return label.toString();
   }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted the EMF implementation to update the whole hierarchy if the collection literal
+   * expression changes.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -176,20 +190,20 @@ public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider
 
     switch (notification.getFeatureID(CollectionLiteralExpXS.class)) {
       case XOCLPackage.COLLECTION_LITERAL_EXP_XS__KIND:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
+        updateLabel(notification);
         return;
       case XOCLPackage.COLLECTION_LITERAL_EXP_XS__PART:
         fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        updateLabel(notification);
         return;
     }
     super.notifyChanged(notification);
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
+   * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -206,9 +220,9 @@ public class CollectionLiteralExpXSItemProvider extends LiteralExpXSItemProvider
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   @Override

@@ -49,7 +49,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.xocl.OclExpressionXS;
+import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
 
 /**
  * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.OclExpressionXS} object.
@@ -155,7 +155,7 @@ public class OclExpressionXSItemProvider extends ItemProviderAdapter implements
    */
   protected void updateLabel(Notification notification) {
     for (EObject owner = (EObject) notification.getNotifier(); owner != null
-        && owner instanceof OclExpressionXS; owner = owner.eContainer()) {
+        && !(owner instanceof ExpressionInOclXS); owner = owner.eContainer()) {
       fireNotifyChanged(new ViewerNotification(notification,owner,false,true));
     }
   }

@@ -128,14 +128,13 @@ public class CollectionItemXSItemProvider extends CollectionLiteralPartXSItemPro
   }
 
   /**
-   * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Adapted to reflect the OCL concrete syntax.
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    return getString("_UI_CollectionItemXS_type"); //$NON-NLS-1$
+    return getLabel(((CollectionItemXS) object).getItem());
   }
 
   /**
