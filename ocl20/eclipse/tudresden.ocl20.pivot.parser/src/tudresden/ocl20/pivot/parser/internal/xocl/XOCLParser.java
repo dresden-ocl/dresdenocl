@@ -52,6 +52,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.osgi.util.NLS;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
 import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
@@ -71,7 +74,12 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.xocl.CollectionItemXS;
+import tudresden.ocl20.pivot.xocl.CollectionKindXS;
+import tudresden.ocl20.pivot.xocl.CollectionLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.CollectionLiteralPartXS;
 import tudresden.ocl20.pivot.xocl.CollectionOperationCallExpXS;
+import tudresden.ocl20.pivot.xocl.CollectionRangeXS;
 import tudresden.ocl20.pivot.xocl.ConstraintKindXS;
 import tudresden.ocl20.pivot.xocl.ConstraintXS;
 import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
@@ -83,6 +91,7 @@ import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.PropertyCallExpXS;
 import tudresden.ocl20.pivot.xocl.VariableExpXS;
 import tudresden.ocl20.pivot.xocl.VariableXS;
+import tudresden.ocl20.pivot.xocl.XOCLPackage;
 import tudresden.ocl20.pivot.xocl.util.XOCLSwitch;
 
 /**
@@ -172,7 +181,6 @@ public class XOCLParser implements IOclParser {
           expression.getReferredCollectionOperation().toString(),parseArguments(expression));
     }
 
-    
     /**
      * Helper method to parse the arguments of an operation call expression.
      */
@@ -222,6 +230,82 @@ public class XOCLParser implements IOclParser {
     @Override
     public OclExpression caseIntegerLiteralExpXS(IntegerLiteralExpXS expression) {
       return getModelFactory().createIntegerLiteralExp(expression.getIntegerSymbol());
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseCollectionLiteralExpXS(tudresden.ocl20.pivot.xocl.CollectionLiteralExpXS)
+     */
+    @Override
+    public OclExpression caseCollectionLiteralExpXS(CollectionLiteralExpXS expression) {
+      List<CollectionLiteralPart> parts = new ArrayList<CollectionLiteralPart>(expression.getPart()
+          .size());
+
+      // parse the individual parts
+      for (CollectionLiteralPartXS part : expression.getPart()) {
+
+        switch (part.eClass().getClassifierID()) {
+          case XOCLPackage.COLLECTION_ITEM_XS:
+            parts.add(createCollectionItem((CollectionItemXS) part));
+            break;
+          case XOCLPackage.COLLECTION_RANGE_XS:
+            parts.add(createCollectionRange((CollectionRangeXS) part));
+            break;
+        }
+      }
+
+      return getModelFactory().createCollectionLiteralExp(
+          translateCollectionKind(expression.getKind()),
+          parts.toArray(new CollectionLiteralPart[parts.size()]));
+    }
+
+    /**
+     * Helper method to create an OCL abstract syntax {@link CollectionItem} from an XOCL
+     * {@link CollectionItemXS}.
+     */
+    private CollectionLiteralPart createCollectionItem(CollectionItemXS part) {
+      return getModelFactory().createCollectionItem(doSwitch(part.getItem()));
+    }
+
+    /**
+     * Helper method to create an OCL abstract syntax {@link CollectionRange} from an XOCL
+     * {@link CollectionRangeXS}.
+     */
+    private CollectionLiteralPart createCollectionRange(CollectionRangeXS part) {
+      return getModelFactory().createCollectionRange(doSwitch(part.getFirst()),
+          doSwitch(part.getLast()));
+    }
+
+    /**
+     * Translates a collection kind from XOCL to the OCL abstract syntax equivalent.
+     */
+    private CollectionKind translateCollectionKind(CollectionKindXS collectionKindXS) {
+      CollectionKind kind;
+
+      switch (collectionKindXS) {
+        case SEQUENCE:
+          kind = CollectionKind.SEQUENCE;
+          break;
+
+        case BAG:
+          kind = CollectionKind.BAG;
+          break;
+
+        case SET:
+          kind = CollectionKind.SET;
+          break;
+
+        case ORDERED_SET:
+          kind = CollectionKind.ORDERED_SET;
+          break;
+
+        default:
+          throw new IllegalArgumentException("Unknown collection kind '" + collectionKindXS //$NON-NLS-1$
+              + "' found in XOCL expression."); //$NON-NLS-1$
+      }
+
+      return kind;
     }
 
   }
@@ -727,7 +811,7 @@ public class XOCLParser implements IOclParser {
   }
 
   /**
-   * Helper method that returns the model factory. May
+   * Helper method that returns the model factory.
    */
   protected IModelFactory getModelFactory() {
     return modelFactory;
