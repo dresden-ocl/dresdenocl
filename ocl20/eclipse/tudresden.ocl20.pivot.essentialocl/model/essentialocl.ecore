@@ -197,7 +197,8 @@
           <details key="documentation" value="&lt;p>&#xD;&#xA;The OCL 2.0 specification defines an additional operation that returns&#xD;&#xA;an {@link OperationCallExp operation call expression} for the predefined&#xD;&#xA;&lt;code>asSet()&lt;/code> operation with the self expression as its source.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;It is specified as follows:&#xD;&#xA;&#xD;&#xA;&lt;pre>&#xD;&#xA;context OclExpression::withAtPre() : OperationCallExp&#xD;&#xA;post: result.name = 'asSet'&#xD;&#xA;post: result.argument->isEmpty()&#xD;&#xA;post: result.source = self&#xD;&#xA;&lt;/pre>&#xD;&#xA;&#xD;&#xA;&lt;/p>"/>
         </eAnnotations>
       </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="oclLibrary" eType="#//types/OclLibrary"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="oclLibrary" eType="#//types/OclLibrary"
+          resolveProxies="false"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NumericLiteralExp" abstract="true"
         eSuperTypes="#//expressions/PrimitiveLiteralExp"/>
