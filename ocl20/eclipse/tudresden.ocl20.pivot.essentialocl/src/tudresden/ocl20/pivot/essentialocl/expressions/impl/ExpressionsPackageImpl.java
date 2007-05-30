@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -4158,9 +4157,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
         null,
         "initExpression",null,0,1,Variable.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    addEOperation(variableEClass,thePivotModelPackageImpl.getParameter(),"asParameter",0,1); //$NON-NLS-1$
+    addEOperation(variableEClass,thePivotModelPackageImpl.getParameter(),
+        "asParameter",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
-    addEOperation(variableEClass,thePivotModelPackageImpl.getProperty(),"asProperty",0,1); //$NON-NLS-1$
+    addEOperation(variableEClass,thePivotModelPackageImpl.getProperty(),
+        "asProperty",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(unlimitedNaturalExpEClass,UnlimitedNaturalExp.class,
         "UnlimitedNaturalExp",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -4247,11 +4248,13 @@ public class ExpressionsPackageImpl extends EPackageImpl {
         getOclExpression_OclLibrary(),
         theTypesPackageImpl.getOclLibrary(),
         null,
-        "oclLibrary",null,0,1,OclExpression.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclLibrary",null,0,1,OclExpression.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
-    addEOperation(oclExpressionEClass,this.getOperationCallExp(),"withAtPre",0,1); //$NON-NLS-1$
+    addEOperation(oclExpressionEClass,this.getOperationCallExp(),
+        "withAtPre",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
-    addEOperation(oclExpressionEClass,this.getOperationCallExp(),"withAsSet",0,1); //$NON-NLS-1$
+    addEOperation(oclExpressionEClass,this.getOperationCallExp(),
+        "withAsSet",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(numericLiteralExpEClass,NumericLiteralExp.class,
         "NumericLiteralExp",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$

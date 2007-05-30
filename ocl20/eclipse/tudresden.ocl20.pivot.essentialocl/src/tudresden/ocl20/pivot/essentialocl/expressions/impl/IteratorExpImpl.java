@@ -35,21 +35,21 @@ package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Iterator Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Iterator Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
 public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected IteratorExpImpl() {
@@ -57,8 +57,61 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Overridden to determine the type of the <code>IteratorExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * [1] If the iterator is ‘forAll,’ ‘isUnique,’ or ‘exists’ the type of the iterator must be
+   * Boolean.
+   * 
+   * <pre>
+   *   context IteratorExp
+   *   inv: name = ‘exists’ or name = ‘forAll’ or name = ‘isUnique’
+   *      implies type.oclIsKindOf(PrimitiveType) and type.name = ‘Boolean’
+   * </pre>
+   * 
+   * [2] The result type of the collect operation on a sequence type is a sequence, the result type
+   * of ‘collect’ on any other collection type is a Bag. The type of the body is always the type of
+   * the elements in the return collection.
+   * 
+   * <pre>
+   *   context IteratorExp
+   *   inv: name = ‘collect’ implies
+   *      if source.type.oclIsKindOf(SequenceType) then
+   *         type = expression.type.collectionType-&gt;select(oclIsTypeOf(SequenceType))-&gt;first()
+   *      else
+   *         type = expression.type.collectionType-&gt;select(oclIsTypeOf(BagType))-&gt;first()
+   *      endif
+   * </pre>
+   * 
+   * [3] The ‘select’ and ‘reject’ iterators have the same type as its source.
+   * 
+   * <pre>
+   *   context IteratorExp
+   *   inv: name = ‘select’ or name = ‘reject’ implies type = source.type
+   * </pre>
+   * 
+   * [4] The type of the body of the select, reject, exists, and forAll must be boolean.
+   * 
+   * <pre>
+   *   context IteratorExp
+   *   inv: name = ‘exists’ or name = ‘forAll’ or name = ‘select’ or name = ‘reject’
+   *      implies body.type.name = ‘Boolean’
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+   */
+  @Override
+  protected Type evaluateType() {
+    // TODO: implement type evaluation
+    throw new UnsupportedOperationException(
+        "The type evaluation for 'IteratorExp' has still to be implemented."); //$NON-NLS-1$
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -66,4 +119,4 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
     return ExpressionsPackageImpl.Literals.ITERATOR_EXP;
   }
 
-} //IteratorExpImpl
+} // IteratorExpImpl

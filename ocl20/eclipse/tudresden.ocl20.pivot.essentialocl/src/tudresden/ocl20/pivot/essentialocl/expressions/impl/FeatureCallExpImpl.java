@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -85,12 +86,36 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
     return ExpressionsPackageImpl.Literals.FEATURE_CALL_EXP;
   }
 
+  
+  /**
+   * The EMF implementation is altered to return the type of the {@link #getSource() source} of this
+   * <code>FeatureCallExp</code> if no explicit source type has been set. 
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType()
+   * 
+   * @generated NOT
+   */
+  public Type getSourceType() {
+    Type srcType;
+
+    // determine the source type either via the source or via the sourceType field
+    srcType = source != null ? source.getType() : sourceType;
+
+    if (srcType == null) {
+      throw new WellformednessException(
+          "The source type of the feature call expression '" + this + "' cannot be determined."); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    return srcType;
+  }
+  
   /**
    * <!-- begin-user-doc -->
+   * The code for {@link #getSourceType()} is forwarded to this method.
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getSourceType() {
+  public Type getSourceTypeGen() {
     if (sourceType != null && ((EObject) sourceType).eIsProxy()) {
       InternalEObject oldSourceType = (InternalEObject) sourceType;
       sourceType = (Type) eResolveProxy(oldSourceType);
@@ -102,6 +127,9 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
     }
     return sourceType;
   }
+  
+  
+  
 
   /**
    * <!-- begin-user-doc -->

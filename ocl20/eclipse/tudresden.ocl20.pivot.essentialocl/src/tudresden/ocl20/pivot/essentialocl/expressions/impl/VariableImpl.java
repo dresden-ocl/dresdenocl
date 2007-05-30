@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
@@ -55,11 +56,11 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getInitExpression <em>Init Expression</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getInitExpression <em>Init Expression</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class VariableImpl extends TypedElementImpl implements Variable {
@@ -70,8 +71,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   private static final Logger logger = Logger.getLogger(VariableImpl.class);
 
   /**
-   * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getRepresentedParameter()
    * @generated
    * @ordered
@@ -79,8 +81,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   protected Parameter representedParameter = null;
 
   /**
-   * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getInitExpression()
    * @generated
    * @ordered
@@ -88,7 +91,14 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   protected OclExpression initExpression = null;
 
   /**
+   * A flag to symbolize whether the type of the <code>Variable</code> has already been determined
+   * and according wellformedness rules checked.
+   */
+  private boolean typeEvaluated = false;
+
+  /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected VariableImpl() {
@@ -107,14 +117,94 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * Overridden to return the type of the {@link #getRepresentedParameter() represented parameter}
-   * if this <code>Variable</code> represents a {@link Parameter}.
+   * Overridden to lazily determine the type of the variable.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
   public Type getType() {
-    return representedParameter != null ? representedParameter.getType() : super.getType();
+
+    if (!typeEvaluated) {
+      type = evaluateType();
+    }
+
+    return type;
+  }
+
+  /**
+   * Determines the type of this <code>Variable</code>. This is either the type of a
+   * {@link #getRepresentedParameter() represented parameter}, the type of the init expression or
+   * simply the type directly set when creating the variable. This method will additionally check
+   * the wellformedness rule of the OCL Specification, Section 8.3:
+   * 
+   * <p>
+   * For initialized variable declarations, the type of the initExpression must conform to the type
+   * of the declared variable.
+   * 
+   * <pre>
+   *   context Variable
+   *   inv: initExpression-&gt;notEmpty() implies initExpression.type.conformsTo (type)
+   * </pre>
+   * 
+   * </p>
+   * 
+   */
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    Type evaluatedType;
+
+    if (representedParameter != null) {
+      evaluatedType = representedParameter.getType();
+    }
+
+    else if (initExpression != null) {
+
+      // check that the type of the init expression conforms to the declared type
+      if (type != null && !initExpression.getType().conformsTo(type)) {
+        throw new WellformednessException("The type of the init expression of variable '" + name //$NON-NLS-1$
+            + "' does not conform to the declared type."); //$NON-NLS-1$
+      }
+
+      // no type declared, use the type of the init expression
+      evaluatedType = initExpression.getType();
+    }
+
+    // default to the declared type
+    else if (type != null) {
+      evaluatedType = type;
+    }
+
+    else {
+      throw new WellformednessException("Failed to determine the type of variable '" + name + "'."); //$NON-NLS-1$//$NON-NLS-2$
+    }
+
+    // remember that we have evaluated the type
+    typeEvaluated = true;
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + evaluatedType); //$NON-NLS-1$
+    }
+
+    return evaluatedType;
+  }
+
+  /**
+   * Overridden to prevent setting the type after it has already been set.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setType(tudresden.ocl20.pivot.pivotmodel.Type)
+   */
+  @Override
+  public void setType(Type newType) {
+
+    if (type != null) {
+      throw new IllegalStateException(
+          "The type of a Variable cannot be altered after it has been set."); //$NON-NLS-1$
+    }
+
+    super.setType(newType);
   }
 
   /**
@@ -129,6 +219,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Parameter getRepresentedParameter() {
@@ -137,6 +228,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setRepresentedParameter(Parameter newRepresentedParameter) {
@@ -150,6 +242,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getInitExpression() {
@@ -158,6 +251,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetInitExpression(OclExpression newInitExpression,
@@ -175,6 +269,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setInitExpression(OclExpression newInitExpression) {
@@ -242,6 +337,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -256,6 +352,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -271,6 +368,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -288,6 +386,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -305,6 +404,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -320,6 +420,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override

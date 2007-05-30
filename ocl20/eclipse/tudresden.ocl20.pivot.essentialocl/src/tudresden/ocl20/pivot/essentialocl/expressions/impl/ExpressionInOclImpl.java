@@ -48,6 +48,8 @@ import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Expression In Ocl</b></em>'.
@@ -55,20 +57,21 @@ import tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getBodyExpression <em>Body Expression</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getContext <em>Context</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getResult <em>Result</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getParameter <em>Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getBodyExpression <em>Body Expression</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getContext <em>Context</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getResult <em>Result</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getParameter <em>Parameter</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInOcl {
 
   /**
-   * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment reference.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getBodyExpression()
    * @generated
    * @ordered
@@ -96,8 +99,9 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
   protected Variable result = null;
 
   /**
-   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference list.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference
+   * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getParameter()
    * @generated
    * @ordered
@@ -106,6 +110,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected ExpressionInOclImpl() {
@@ -136,6 +141,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getBodyExpression() {
@@ -144,6 +150,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetBodyExpression(OclExpression newBodyExpression,
@@ -162,6 +169,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setBodyExpression(OclExpression newBodyExpression) {
@@ -184,6 +192,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Variable getContext() {
@@ -192,6 +201,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetContext(Variable newContext, NotificationChain msgs) {
@@ -208,6 +218,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setContext(Variable newContext) {
@@ -229,6 +240,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Variable getResult() {
@@ -237,6 +249,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetResult(Variable newResult, NotificationChain msgs) {
@@ -253,6 +266,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setResult(Variable newResult) {
@@ -274,6 +288,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public List<Variable> getParameter() {
@@ -286,6 +301,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -306,6 +322,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -325,6 +342,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -350,6 +368,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -373,6 +392,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -392,11 +412,23 @@ public class ExpressionInOclImpl extends ExpressionImpl implements ExpressionInO
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
   protected EClass eStaticClass() {
     return ExpressionsPackageImpl.Literals.EXPRESSION_IN_OCL;
+  }
+
+  /**
+   * Overridden to use Jakarta Commons Lang for unified stringification. 
+   * 
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("context",context).append("result",result).append("parameter",parameter).toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
   }
 
 } // ExpressionInOclImpl

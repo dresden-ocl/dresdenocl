@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -56,6 +58,8 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Operation Call Exp</b></em>'.
@@ -71,6 +75,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @generated
  */
 public class OperationCallExpImpl extends FeatureCallExpImpl implements OperationCallExp {
+
+  /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(OperationCallExpImpl.class);
 
   /**
    * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference
@@ -115,7 +124,11 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  public Type getType() {
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
     Type type;
 
     // check wellformedness of abstract syntax
@@ -145,28 +158,39 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
     else {
       // TODO: remove these explicit references to the OCL Standard Library from the code
 
-      // deal with 'allInstances'
+      // bind 'allInstances' operation
       if (referredOperation.getName().equals("allInstances")) { //$NON-NLS-1$
         referredOperation = bindAllInstancesOperation(referredOperation);
       }
 
-      type = referredOperation.getType();
+      // TODO: bind 'oclAsType'
+
+      // bind 'product' operation
+      else if (referredOperation.getName().equals("product") //$NON-NLS-1$
+          && getSourceType() instanceof CollectionType) {
+        // TODO: bind 'product'
+      }
+      
+      // map the operation's type to a corresponding OCL type
+      type = getOclType(referredOperation.getType());
     }
 
-    return getOclType(type);
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
   }
-  
+
   // helper method to bind the 'OclAny::allInstances' operation
   private Operation bindAllInstancesOperation(Operation allInstancesOperation) {
-    Type srcType;
-    
-    // determine the source type of the 'allInstances' call
-    srcType = source != null ? source.getType() : sourceType;
-
-    if (srcType == null) {
-      throw new WellformednessException(
-          "The source type of the operation call to 'allInstances' cannot be determined."); //$NON-NLS-1$
+    if (logger.isDebugEnabled()) {
+      logger.debug("bindAllInstancesOperation(allInstancesOperation=" + allInstancesOperation //$NON-NLS-1$
+          + ") - enter"); //$NON-NLS-1$
     }
+
+    // determine the source type
+    Type srcType = getSourceType();
 
     // allInstances may only refer to types with a finite number of instances
     if (srcType instanceof PrimitiveType || srcType instanceof CollectionType
@@ -183,10 +207,15 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
     }
 
     // now bind the 'allInstances' operation with the source type
-    return allInstancesOperation.bindTypeParameter(referredOperation
+    allInstancesOperation = allInstancesOperation.bindTypeParameter(allInstancesOperation
         .getOwnedTypeParameter(),Arrays.asList(sourceType));
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("bindAllInstancesOperation() - exit - return value=" + allInstancesOperation); //$NON-NLS-1$
+    }
+
+    return allInstancesOperation;
   }
-  
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -317,6 +346,17 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   @Override
   protected EClass eStaticClass() {
     return ExpressionsPackageImpl.Literals.OPERATION_CALL_EXP;
+  }
+
+  /**
+   * Overridden for unified toString appearance
+   * 
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("referredOperation",referredOperation).toString(); //$NON-NLS-1$
   }
 
 } // OperationCallExpImpl

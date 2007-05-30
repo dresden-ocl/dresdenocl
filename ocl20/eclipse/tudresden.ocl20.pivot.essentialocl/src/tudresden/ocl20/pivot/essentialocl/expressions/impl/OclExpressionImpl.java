@@ -37,8 +37,6 @@ import java.util.Arrays;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
@@ -83,7 +81,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
    * @generated
    * @ordered
    */
-  protected OclLibrary oclLibrary = null;
+  protected OclLibrary oclLibrary;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -95,21 +93,41 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * Overridden to implement lazy caching of evaluated types. Subclasses should implement
+   * {@link #evaluateType()} for the actual type evaluation logic.
    * 
-   * @generated
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
-  public OclLibrary getOclLibrary() {
-    if (oclLibrary != null && ((EObject) oclLibrary).eIsProxy()) {
-      InternalEObject oldOclLibrary = (InternalEObject) oclLibrary;
-      oclLibrary = (OclLibrary) eResolveProxy(oldOclLibrary);
-      if (oclLibrary != oldOclLibrary) {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this,Notification.RESOLVE,
-              ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY,oldOclLibrary,oclLibrary));
-      }
+  @Override
+  public final Type getType() {
+
+    if (type == null) {
+      type = evaluateType();
     }
-    return oclLibrary;
+
+    return type;
+
+  }
+
+  /**
+   * Evaluates the type of this <code>OclExpression</code>. Subclasses need to implement this
+   * according to the OCL specification.
+   * 
+   * @return a <code>Type</code> instance.
+   */
+  protected abstract Type evaluateType();
+
+  /**
+   * Overridden to prevent clients from setting the type of an <code>OclExpression</code>
+   * directly. This method will throw an {@link UnsupportedOperationException}.
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setType(tudresden.ocl20.pivot.pivotmodel.Type)
+   */
+  @Override
+  @SuppressWarnings("unused")
+  public void setType(Type newType) {
+    throw new UnsupportedOperationException(
+        "The type of an OclExpression cannot be set directly because it is evaluated automatically."); //$NON-NLS-1$
   }
 
   /**
@@ -117,7 +135,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
    * 
    * @generated
    */
-  public OclLibrary basicGetOclLibrary() {
+  public OclLibrary getOclLibrary() {
     return oclLibrary;
   }
 
@@ -343,8 +361,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
       case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
-        if (resolve) return getOclLibrary();
-        return basicGetOclLibrary();
+        return getOclLibrary();
     }
     return super.eGet(featureID,resolve,coreType);
   }

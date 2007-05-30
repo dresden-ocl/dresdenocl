@@ -40,26 +40,27 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Collection Item</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Collection Item</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionItemImpl#getItem <em>Item</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionItemImpl#getItem <em>Item</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class CollectionItemImpl extends CollectionLiteralPartImpl implements CollectionItem {
 
   /**
-   * The cached value of the '{@link #getItem() <em>Item</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getItem() <em>Item</em>}' containment reference. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getItem()
    * @generated
    * @ordered
@@ -67,8 +68,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   protected OclExpression item = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected CollectionItemImpl() {
@@ -76,8 +77,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -86,8 +87,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getItem() {
@@ -95,8 +96,36 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Overridden to determine the type of the <code>CollectionItem</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of a CollectionItem is the type of the item expression.
+   * 
+   * <pre>
+   *   context CollectionItem
+   *   inv: type = item.type
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+   */
+  @Override
+  public Type getType() {
+
+    // check invariant
+    if (item == null) {
+      throw new WellformednessException(
+          "The referenced item of a CollectionLiteralItem must not be null."); //$NON-NLS-1$
+    }
+    
+    return item.getType();
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetItem(OclExpression newItem, NotificationChain msgs) {
@@ -112,8 +141,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setItem(OclExpression newItem) {
@@ -134,8 +163,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -149,8 +178,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -163,8 +192,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -178,8 +207,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -193,8 +222,8 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -206,4 +235,4 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
     return super.eIsSet(featureID);
   }
 
-} //CollectionItemImpl
+} // CollectionItemImpl

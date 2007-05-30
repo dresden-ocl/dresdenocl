@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -54,6 +56,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @generated
  */
 public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
+
+  /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(VariableExpImpl.class);
 
   /**
    * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}'
@@ -92,13 +99,22 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  public Type getType() {
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
 
     if (referredVariable == null) {
       throw new WellformednessException("The referred variable of a VariableExp must not be null."); //$NON-NLS-1$
     }
 
-    return getOclType(referredVariable.getType());
+    Type type = getOclType(referredVariable.getType());
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
   }
 
   /**

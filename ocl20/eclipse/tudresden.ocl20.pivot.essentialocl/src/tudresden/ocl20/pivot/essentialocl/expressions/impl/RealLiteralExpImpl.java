@@ -32,31 +32,40 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Real Literal Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Real Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.RealLiteralExpImpl#getRealSymbol <em>Real Symbol</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.RealLiteralExpImpl#getRealSymbol <em>Real Symbol</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLiteralExp {
 
   /**
-   * The default value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(RealLiteralExpImpl.class);
+
+  /**
+   * The default value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getRealSymbol()
    * @generated
    * @ordered
@@ -64,9 +73,9 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLit
   protected static final float REAL_SYMBOL_EDEFAULT = 0.0F;
 
   /**
-   * The cached value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getRealSymbol()
    * @generated
    * @ordered
@@ -74,8 +83,8 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLit
   protected float realSymbol = REAL_SYMBOL_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected RealLiteralExpImpl() {
@@ -83,18 +92,39 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLit
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of the <code>RealLiteralExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of a real Literal expression is the type Real.
+   * 
+   * <pre>
+   *    context RealLiteralExp
+   *    inv: self.type.name = ‘Real’
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.REAL_LITERAL_EXP;
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    Type type = getValidOclLibrary().getOclReal();
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public float getRealSymbol() {
@@ -102,8 +132,8 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLit
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setRealSymbol(float newRealSymbol) {
@@ -115,8 +145,8 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLit
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -129,8 +159,8 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLit
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -144,8 +174,8 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLit
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -159,8 +189,8 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLit
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -173,19 +203,26 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements RealLit
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public String toString() {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (realSymbol: "); //$NON-NLS-1$
-    result.append(realSymbol);
-    result.append(')');
-    return result.toString();
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.REAL_LITERAL_EXP;
   }
 
-} //RealLiteralExpImpl
+  /**
+   * Adapted the EMF implementation for uniform rendering with Jakarta Commons Lang mechanism.
+   * 
+   * @see java.lang.Object#toString()
+   * 
+   * @generated NOT
+   */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("realSymbol",realSymbol).toString(); //$NON-NLS-1$
+  }
+
+} // RealLiteralExpImpl

@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -55,6 +57,11 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @generated
  */
 public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements IntegerLiteralExp {
+
+  /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(IntegerLiteralExpImpl.class);
 
   /**
    * The default value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
@@ -98,11 +105,22 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements Inte
    * </pre>
    * 
    * </p>
+   * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  public Type getType() {
-    return getValidOclLibrary().getOclInteger();
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    Type type = getValidOclLibrary().getOclInteger();
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
   }
 
   /**

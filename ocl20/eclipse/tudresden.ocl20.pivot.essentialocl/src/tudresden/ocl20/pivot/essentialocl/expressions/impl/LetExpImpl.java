@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -41,27 +43,33 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Let Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Let Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl#getIn <em>In</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl#getVariable <em>Variable</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl#getIn <em>In</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl#getVariable <em>Variable</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class LetExpImpl extends OclExpressionImpl implements LetExp {
 
   /**
-   * The cached value of the '{@link #getIn() <em>In</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(LetExpImpl.class);
+
+  /**
+   * The cached value of the '{@link #getIn() <em>In</em>}' containment reference. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getIn()
    * @generated
    * @ordered
@@ -70,8 +78,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 
   /**
    * The cached value of the '{@link #getVariable() <em>Variable</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getVariable()
    * @generated
    * @ordered
@@ -79,8 +87,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   protected Variable variable = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected LetExpImpl() {
@@ -88,18 +96,44 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of the <code>LetExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of a Let expression is the type of the in expression.
+   * 
+   * <pre>
+   *   context LetExp
+   *   inv: type = in.type
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.LET_EXP;
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+    
+    // check invariant
+    if (in == null) {
+      throw new WellformednessException("The 'in' expression of a LetExp must not be null."); //$NON-NLS-1$
+    }
+    
+    Type type = in.getType();
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getIn() {
@@ -107,8 +141,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetIn(OclExpression newIn, NotificationChain msgs) {
@@ -124,8 +158,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setIn(OclExpression newIn) {
@@ -146,8 +180,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Variable getVariable() {
@@ -155,8 +189,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetVariable(Variable newVariable, NotificationChain msgs) {
@@ -172,8 +206,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setVariable(Variable newVariable) {
@@ -194,8 +228,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -211,8 +245,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -227,8 +261,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -245,8 +279,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -263,8 +297,8 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -278,4 +312,14 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
     return super.eIsSet(featureID);
   }
 
-} //LetExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.LET_EXP;
+  }
+
+} // LetExpImpl

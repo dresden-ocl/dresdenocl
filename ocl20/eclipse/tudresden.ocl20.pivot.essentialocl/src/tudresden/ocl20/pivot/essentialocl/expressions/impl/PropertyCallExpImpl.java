@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
@@ -63,6 +65,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @generated
  */
 public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyCallExp {
+
+  /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(PropertyCallExpImpl.class);
 
   /**
    * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}'
@@ -112,14 +119,24 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  public Type getType() {
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
 
     if (referredProperty == null) {
       throw new WellformednessException(
           "The referred property of a PropertyCallExp must not be null."); //$NON-NLS-1$
     }
 
-    return getOclType(referredProperty.getType());
+    // the type of the property is mapped to an OCL type
+    Type type = getOclType(referredProperty.getType());
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
   }
 
   /**

@@ -44,26 +44,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tuple Literal Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Tuple Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralExpImpl#getPart <em>Part</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralExpImpl#getPart <em>Part</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralExp {
 
   /**
-   * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getPart()
    * @generated
    * @ordered
@@ -71,8 +71,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
   protected EList<TupleLiteralPart> part = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected TupleLiteralExpImpl() {
@@ -80,8 +80,40 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Overridden to determine the type of the <code>StringLiteralExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * [1] The type of a TupleLiteralExp is a TupleType with the specified parts.
+   * 
+   * <pre>
+   *   context TupleLiteralExp
+   *   inv: type.oclIsKindOf (TupleType)
+   *      and part-&gt;forAll (tlep |
+   *         type.oclAsType (TupleType).allProperties()-&gt;exists (tp | tlep.attribute = tp))
+   *      and part-&gt;size() = type.oclAsType (TupleType).allProperties()-&gt;size()
+   * </pre>
+   * 
+   * [2] All tuple literal expression parts of one tuple literal expression have unique names.
+   * 
+   * <pre>
+   *   context TupleLiteralExp
+   *   inv: part-&gt;isUnique (attribute.name)
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+   */
+  @Override
+  protected Type evaluateType() {
+    // TODO: implement type evaluation for tuple types
+    throw new UnsupportedOperationException(
+        "The type evaluation for tuple types has still to be implemented."); //$NON-NLS-1$
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -90,8 +122,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public List<TupleLiteralPart> getPart() {
@@ -103,8 +135,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -118,8 +150,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -132,8 +164,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -149,8 +181,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -164,8 +196,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -177,4 +209,4 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
     return super.eIsSet(featureID);
   }
 
-} //TupleLiteralExpImpl
+} // TupleLiteralExpImpl

@@ -32,24 +32,31 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Undefined Literal Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Undefined Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
 public class UndefinedLiteralExpImpl extends LiteralExpImpl implements UndefinedLiteralExp {
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(UndefinedLiteralExpImpl.class);
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected UndefinedLiteralExpImpl() {
@@ -57,8 +64,39 @@ public class UndefinedLiteralExpImpl extends LiteralExpImpl implements Undefined
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Overridden to implement type evaluation. The OCL specification does not define this explicitly,
+   * but the semantics are relatively clear:
+   * 
+   * <p>
+   * The type of an undefined Literal expression is OclVoid.
+   * 
+   * <pre>
+   * context UndefinedLiteralExp
+   * inv: self.type.name = 'OclVoid'
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+   */
+  @Override
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    Type type = getValidOclLibrary().getOclVoid();
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -66,4 +104,4 @@ public class UndefinedLiteralExpImpl extends LiteralExpImpl implements Undefined
     return ExpressionsPackageImpl.Literals.UNDEFINED_LITERAL_EXP;
   }
 
-} //UndefinedLiteralExpImpl
+} // UndefinedLiteralExpImpl

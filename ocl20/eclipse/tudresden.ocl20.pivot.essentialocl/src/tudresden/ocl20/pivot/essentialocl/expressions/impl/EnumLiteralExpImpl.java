@@ -32,32 +32,40 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Enum Literal Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Enum Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.EnumLiteralExpImpl#getReferredEnumLiteral <em>Referred Enum Literal</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.EnumLiteralExpImpl#getReferredEnumLiteral <em>Referred Enum Literal</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp {
 
   /**
-   * The cached value of the '{@link #getReferredEnumLiteral() <em>Referred Enum Literal</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(EnumLiteralExpImpl.class);
+
+  /**
+   * The cached value of the '{@link #getReferredEnumLiteral() <em>Referred Enum Literal</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getReferredEnumLiteral()
    * @generated
    * @ordered
@@ -65,8 +73,8 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp
   protected EnumerationLiteral referredEnumLiteral = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected EnumLiteralExpImpl() {
@@ -74,18 +82,45 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of the <code>EnumLiteralExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of an enum Literal expression is the type of the referred literal.
+   * 
+   * <pre>
+   *   context EnumLiteralExp
+   *   inv: self.type = referredEnumLiteral.enumeration
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.ENUM_LITERAL_EXP;
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    // check invariant
+    if (referredEnumLiteral == null) {
+      throw new WellformednessException(
+          "The referred enum literal of an EnumLiteralExp must not be null."); //$NON-NLS-1$
+    }
+
+    Type type = referredEnumLiteral.getEnumeration();
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public EnumerationLiteral getReferredEnumLiteral() {
@@ -93,8 +128,8 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setReferredEnumLiteral(EnumerationLiteral newReferredEnumLiteral) {
@@ -107,8 +142,8 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -121,8 +156,8 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -136,8 +171,8 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -151,8 +186,8 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -164,4 +199,14 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp
     return super.eIsSet(featureID);
   }
 
-} //EnumLiteralExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.ENUM_LITERAL_EXP;
+  }
+
+} // EnumLiteralExpImpl

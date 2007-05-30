@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -40,28 +42,34 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.IfExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>If Exp</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>If Exp</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl#getCondition <em>Condition</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl#getThenExpression <em>Then Expression</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl#getElseExpression <em>Else Expression</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl#getCondition <em>Condition</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl#getThenExpression <em>Then Expression</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl#getElseExpression <em>Else Expression</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class IfExpImpl extends OclExpressionImpl implements IfExp {
 
   /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(IfExpImpl.class);
+
+  /**
    * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getCondition()
    * @generated
    * @ordered
@@ -69,9 +77,9 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   protected OclExpression condition = null;
 
   /**
-   * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getThenExpression()
    * @generated
    * @ordered
@@ -79,9 +87,9 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   protected OclExpression thenExpression = null;
 
   /**
-   * The cached value of the '{@link #getElseExpression() <em>Else Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getElseExpression() <em>Else Expression</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getElseExpression()
    * @generated
    * @ordered
@@ -89,8 +97,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   protected OclExpression elseExpression = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected IfExpImpl() {
@@ -98,18 +106,61 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of the <code>IfExp</code> according to the OCL specification
+   * (Section 8.3):
+   * 
+   * The type of the if expression is the most common supertype of the else and then expressions.
+   * 
+   * <pre>
+   *   context IfExp
+   *   inv: self.type = thenExpression.type.commonSuperType(elseExpression.type)
+   * </pre>
+   * 
+   * In addition, another wellformedness rule is checked: The type of the condition of an if
+   * expression must be Boolean.
+   * 
+   * <pre>
+   *   context IfExp
+   *   inv: self.condition.type.oclIsKindOf(PrimitiveType) and self.condition.type.name = ‘Boolean’
+   * </pre>
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.IF_EXP;
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    // check invariant
+    if (condition == null) {
+      throw new WellformednessException("The condition of an IfExp must not be null."); //$NON-NLS-1$
+    }
+
+    // check wellformedness rule that the condition must have a boolean type
+    if (condition.getType() != getValidOclLibrary().getOclBoolean()) {
+      throw new WellformednessException("The type of the condition of an IfExp must be Boolean."); //$NON-NLS-1$
+    }
+
+    // check that both then and else expressions are not null
+    if (thenExpression == null || elseExpression == null) {
+      throw new WellformednessException(
+          "Both the 'thenExpression' and the 'elseExpression' of an IfExp must not be null."); //$NON-NLS-1$
+    }
+    
+    // determine the type
+    Type type = thenExpression.getType().commonSuperType(elseExpression.getType());
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+    
+    return type;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getCondition() {
@@ -117,8 +168,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetCondition(OclExpression newCondition, NotificationChain msgs) {
@@ -134,8 +185,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setCondition(OclExpression newCondition) {
@@ -156,8 +207,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getThenExpression() {
@@ -165,8 +216,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetThenExpression(OclExpression newThenExpression,
@@ -183,8 +234,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setThenExpression(OclExpression newThenExpression) {
@@ -205,8 +256,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getElseExpression() {
@@ -214,8 +265,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetElseExpression(OclExpression newElseExpression,
@@ -232,8 +283,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setElseExpression(OclExpression newElseExpression) {
@@ -254,8 +305,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -273,8 +324,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -291,8 +342,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -312,8 +363,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -333,8 +384,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -350,4 +401,14 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
     return super.eIsSet(featureID);
   }
 
-} //IfExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.IF_EXP;
+  }
+
+} // IfExpImpl

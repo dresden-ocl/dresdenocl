@@ -84,7 +84,7 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  public Type getType() {
+  protected Type evaluateType() {
 
     if (referredType == null) {
       throw new WellformednessException("The referred type of a TypeLiteralExp must not be null."); //$NON-NLS-1$

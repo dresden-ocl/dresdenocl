@@ -32,31 +32,40 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>String Literal Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>String Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.StringLiteralExpImpl#getStringSymbol <em>String Symbol</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.StringLiteralExpImpl#getStringSymbol <em>String Symbol</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements StringLiteralExp {
 
   /**
-   * The default value of the '{@link #getStringSymbol() <em>String Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(StringLiteralExpImpl.class);
+
+  /**
+   * The default value of the '{@link #getStringSymbol() <em>String Symbol</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getStringSymbol()
    * @generated
    * @ordered
@@ -64,9 +73,9 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   protected static final String STRING_SYMBOL_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getStringSymbol() <em>String Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getStringSymbol() <em>String Symbol</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getStringSymbol()
    * @generated
    * @ordered
@@ -74,8 +83,8 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   protected String stringSymbol = STRING_SYMBOL_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected StringLiteralExpImpl() {
@@ -83,18 +92,39 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to determine the type of the <code>StringLiteralExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of a string Literal expression is the type Real.
+   * 
+   * <pre>
+   *    context StringLiteralExp
+   *    inv: self.type.name = ‘String’
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.STRING_LITERAL_EXP;
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    Type type = getValidOclLibrary().getOclString();
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+
+    return type;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public String getStringSymbol() {
@@ -102,8 +132,8 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setStringSymbol(String newStringSymbol) {
@@ -115,8 +145,8 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -129,8 +159,8 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -144,8 +174,8 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -159,8 +189,8 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -174,19 +204,26 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public String toString() {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (stringSymbol: "); //$NON-NLS-1$
-    result.append(stringSymbol);
-    result.append(')');
-    return result.toString();
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.STRING_LITERAL_EXP;
   }
 
-} //StringLiteralExpImpl
+  /**
+   * Adapted the EMF implementation to use the Jakarta Commons Lang mechanism
+   * 
+   * @see java.lang.Object#toString()
+   * 
+   * @generated NOT
+   */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("stringSymbol",stringSymbol).toString(); //$NON-NLS-1$
+  }
+
+} // StringLiteralExpImpl

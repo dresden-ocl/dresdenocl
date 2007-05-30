@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -40,6 +42,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Iterate Exp</b></em>'.
@@ -47,13 +51,18 @@ import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl#getResult <em>Result</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class IterateExpImpl extends LoopExpImpl implements IterateExp {
+
+  /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(IterateExpImpl.class);
 
   /**
    * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference. <!--
@@ -67,10 +76,82 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected IterateExpImpl() {
     super();
+  }
+
+  /**
+   * Overridden to determine the type of the <code>IterateExp</code> according to the OCL
+   * specification (Section 8.3):
+   * 
+   * <p>
+   * The type of the iterate is the type of the result variable.
+   * 
+   * <pre>
+   *   context IterateExp
+   *   inv: type = result.type
+   * </pre>
+   * 
+   * In addition, the following wellformedness rules are checked:<br>
+   * <br>
+   * 
+   * The type of the body expression must conform to the declared type of the result variable.
+   * context IterateExp
+   * 
+   * <pre>
+   *   inv: body.type.conformsTo(result.type)
+   * </pre>
+   * 
+   * A result variable must have an init expression.
+   * 
+   * <pre>
+   *   context IterateExp
+   *   inv: self.result.initExpression-&gt;size() = 1
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+   */
+  @Override
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    // check invariant
+    if (result == null) {
+      throw new WellformednessException("The 'result' variable of an IterateExp must not be null."); //$NON-NLS-1$
+    }
+
+    // check body expression and WFR [2]
+    if (body == null) {
+      throw new WellformednessException("The body expression of an IterateExp must not be null."); //$NON-NLS-1$
+    }
+
+    if (!body.getType().conformsTo(result.getType())) {
+      throw new WellformednessException("The type of the body expression ('" + body.getType() //$NON-NLS-1$
+          + "') of IterateExp does not conform to the type of the result variable ('" //$NON-NLS-1$
+          + result.getType() + "')."); //$NON-NLS-1$
+    }
+
+    // check WFR [3]
+    if (result.getInitExpression() == null) {
+      throw new WellformednessException(
+          "The 'result' variable of an IterateExp must have an init expression."); //$NON-NLS-1$
+    }
+
+    // determine the type
+    Type type = result.getType();
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+
+    return type;
   }
 
   /**
@@ -92,6 +173,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
    */
   @Override
+  @SuppressWarnings("unused")
   public void setName(String newName) {
     throw new UnsupportedOperationException(
         "The name of an IterateExp cannot be set, it defaults to 'iterate'"); //$NON-NLS-1$
@@ -99,6 +181,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Variable getResult() {
@@ -107,6 +190,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetResult(Variable newResult, NotificationChain msgs) {
@@ -123,6 +207,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setResult(Variable newResult) {
@@ -144,6 +229,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -158,6 +244,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -171,6 +258,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -185,6 +273,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -199,6 +288,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -212,6 +302,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
