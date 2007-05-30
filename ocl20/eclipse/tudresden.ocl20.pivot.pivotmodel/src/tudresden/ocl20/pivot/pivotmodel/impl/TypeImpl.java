@@ -103,7 +103,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
    * @generated
    * @ordered
    */
-  protected EList<TypeParameter> ownedTypeParameter = null;
+  protected EList<TypeParameter> ownedTypeParameter;
 
   /**
    * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' containment reference list.
@@ -112,7 +112,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
    * @generated
    * @ordered
    */
-  protected EList<Operation> ownedOperation = null;
+  protected EList<Operation> ownedOperation;
 
   /**
    * The cached value of the '{@link #getOwnedProperty() <em>Owned Property</em>}' containment reference list.
@@ -121,7 +121,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
    * @generated
    * @ordered
    */
-  protected EList<Property> ownedProperty = null;
+  protected EList<Property> ownedProperty;
 
   /**
    * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference list. <!--
@@ -131,7 +131,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
    * @generated
    * @ordered
    */
-  protected EList<Type> superType = null;
+  protected EList<Type> superType;
 
   /**
    * The cached value of the '{@link #getGenericSuperType() <em>Generic Super Type</em>}' containment reference list.
@@ -140,7 +140,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
    * @generated
    * @ordered
    */
-  protected EList<GenericType> genericSuperType = null;
+  protected EList<GenericType> genericSuperType;
 
   // a map that contains instances of this Type with some or all of their type parameters bound
   private static Map<String, Type> boundTypes;
@@ -681,9 +681,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
       // bind all operations
       for (Operation operation : boundType.allOperations()) {
-        if (operation.getType() == null && operation.getGenericType() != null) {
-          operation.getGenericType().bindGenericType(parameters,types,operation);
-        }
 
         // bind the parameters of the operation
         for (Parameter parameter : operation.getOwnedParameter()) {
@@ -691,12 +688,24 @@ public class TypeImpl extends NamedElementImpl implements Type {
             parameter.getGenericType().bindGenericType(parameters,types,parameter);
           }
         }
+        
+        // bind the type of the operation
+        if (operation.getType() == null && operation.getGenericType() != null) {
+          operation.getGenericType().bindGenericType(parameters,types,operation);
+        }
       }
-    }
-
-    // bind all generic supertypes
-    for (GenericType genericSuperType : getGenericSuperType()) {
-      genericSuperType.bindGenericSuperType(parameters,types,boundType);
+      
+      // bind all generic supertypes
+      for (Iterator<GenericType> it = boundType.getGenericSuperType().iterator(); it.hasNext();) {
+        GenericType genericSuperType = it.next();
+        boolean success = genericSuperType.bindGenericSuperType(parameters,types,boundType);
+        
+        // if the generic super type was successfully bound, remove it from the type
+        // (we have to do this here to avoid ConcurrentModificationExceptions in the list)
+        if (success) {
+          it.remove();
+        }
+      }
     }
 
     if (logger.isDebugEnabled()) {
@@ -707,11 +716,22 @@ public class TypeImpl extends NamedElementImpl implements Type {
   }
 
   /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Type getBoundType(TypeParameter typeParam) {
+    // TODO: implement this method
+    // Ensure that you remove @generated or mark it @generated NOT
+    throw new UnsupportedOperationException();
+  }
+
+  /**
    * Helper method that lazily creates the map with cached bound types
    * 
    * @return a {@code Map<String,TypeParameter>} instance
    */
-  protected Map<String, Type> getBoundTypes() {
+  protected static Map<String, Type> getBoundTypes() {
 
     if (boundTypes == null) {
       boundTypes = new HashMap<String, Type>();
@@ -755,6 +775,11 @@ public class TypeImpl extends NamedElementImpl implements Type {
     // copy supertype list; do not clone the super types because they are not contained by this type
     for (Type superType : getSuperType()) {
       clone.addSuperType(superType);
+    }
+    
+    // clone the generic supertypes
+    for (GenericType genericSuperType : getGenericSuperType()) {
+      clone.getGenericSuperType().add(genericSuperType.clone());
     }
 
     return clone;
