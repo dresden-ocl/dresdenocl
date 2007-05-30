@@ -85,7 +85,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * @generated
    * @ordered
    */
-  protected EList<TypeParameter> ownedTypeParameter = null;
+  protected EList<TypeParameter> ownedTypeParameter;
 
   /**
    * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference list.
@@ -94,7 +94,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * @generated
    * @ordered
    */
-  protected EList<Type> ownedType = null;
+  protected EList<Type> ownedType;
 
   /**
    * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}' containment reference list.
@@ -103,7 +103,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * @generated
    * @ordered
    */
-  protected EList<Constraint> ownedRule = null;
+  protected EList<Constraint> ownedRule;
 
   /**
    * The cached value of the '{@link #getNestedNamespace() <em>Nested Namespace</em>}' containment reference list.
@@ -112,7 +112,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * @generated
    * @ordered
    */
-  protected EList<Namespace> nestedNamespace = null;
+  protected EList<Namespace> nestedNamespace;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -353,18 +353,18 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
     }
 
     Type type = null;
-    
+
     for (Type ownedType : getOwnedType()) {
       if (ownedType.getName().equals(name)) {
         type = ownedType;
         break;
       }
     }
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("lookupType() - exit - return value=" + type); //$NON-NLS-1$
     }
-    
+
     return type;
   }
 
@@ -379,18 +379,18 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
     }
 
     Namespace namespace = null;
-    
+
     for (Namespace nestedNamespace : getNestedNamespace()) {
       if (nestedNamespace.getName().equals(name)) {
         namespace = nestedNamespace;
         break;
       }
     }
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("lookupNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
     }
-    
+
     return namespace;
   }
 
@@ -419,6 +419,17 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * @generated
    */
   public NamedElement bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types) {
+    // TODO: implement this method
+    // Ensure that you remove @generated or mark it @generated NOT
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Type getBoundType(TypeParameter typeParam) {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
     throw new UnsupportedOperationException();

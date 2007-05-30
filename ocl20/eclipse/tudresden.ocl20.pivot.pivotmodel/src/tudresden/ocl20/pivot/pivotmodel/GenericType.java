@@ -49,7 +49,7 @@ public interface GenericType extends NamedElement {
    * <!-- end-user-doc -->
    * @generated
    */
-  TypedElement bindGenericType(List<TypeParameter> parameters, List<? extends Type> types,
+  boolean bindGenericType(List<TypeParameter> parameters, List<? extends Type> types,
       TypedElement typedElement);
 
   /**
@@ -57,7 +57,8 @@ public interface GenericType extends NamedElement {
    * <!-- end-user-doc -->
    * @generated
    */
-  Type bindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types, Type subType);
+  boolean bindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
+      Type subType);
 
   /**
    * <!-- begin-user-doc -->

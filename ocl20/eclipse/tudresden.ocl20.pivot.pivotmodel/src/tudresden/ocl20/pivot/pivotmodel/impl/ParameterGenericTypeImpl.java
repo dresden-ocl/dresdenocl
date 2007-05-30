@@ -73,7 +73,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
    * @generated
    * @ordered
    */
-  protected TypeParameter typeParameter = null;
+  protected TypeParameter typeParameter;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -133,7 +133,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
    * the given list of type parameters that shall be bound.
    */
   @Override
-  protected TypedElement doBindGenericType(List<TypeParameter> parameters,
+  protected boolean doBindGenericType(List<TypeParameter> parameters,
       List<? extends Type> types, TypedElement typedElement) {
 
     // we have to iterate and compare manually because EObjectEList checks for object identity
@@ -146,32 +146,38 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
         Type type = types.get(it.previousIndex());
 
         if (logger.isInfoEnabled()) {
-          logger.info("Binding type of '" + typedElement + "' with '" + type + "'."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+          logger.info("Binding type of '" + typedElement.getQualifiedName() + "' with '" //$NON-NLS-1$ //$NON-NLS-2$
+              + type.getName() + "'."); //$NON-NLS-1$
         }
 
+        // reset the generic type
+        typedElement.setGenericType(null);
+
+        // now set the type (the order is important, see TypedElement.setGenericType)
         typedElement.setType(type);
 
-        break;
+        // break ans signal success
+        return true;
       }
     }
 
-    return typedElement;
+    return false;
   }
 
   /**
    * This method currently does nothing since we do not support type parameters as generic super
    * types. This can be implemented later if necessary.
    * 
-   * @return the given <code>subType</code> without any changes
+   * @return always <code>false</code>
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List,
    *      java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
    */
   @Override
   @SuppressWarnings("unused")
-  protected Type doBindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
+  protected boolean doBindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
       Type subType) {
-    return subType;
+    return false;
   }
 
   /**

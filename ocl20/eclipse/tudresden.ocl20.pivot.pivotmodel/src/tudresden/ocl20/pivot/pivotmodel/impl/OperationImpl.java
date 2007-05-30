@@ -164,7 +164,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * @generated
    * @ordered
    */
-  protected EList<TypeParameter> ownedTypeParameter = null;
+  protected EList<TypeParameter> ownedTypeParameter;
 
   /**
    * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment reference list.
@@ -173,7 +173,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * @generated
    * @ordered
    */
-  protected EList<Parameter> ownedParameter = null;
+  protected EList<Parameter> ownedParameter;
 
   // a map that contains instances of this Operation with some or all type parameters bound
   private static Map<String, Operation> boundOperations;
@@ -688,6 +688,17 @@ public class OperationImpl extends FeatureImpl implements Operation {
     }
 
     return boundOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Type getBoundType(TypeParameter typeParam) {
+    // TODO: implement this method
+    // Ensure that you remove @generated or mark it @generated NOT
+    throw new UnsupportedOperationException();
   }
 
   /**

@@ -103,22 +103,24 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements Generi
    * 
    * @generated NOT
    */
-  public final TypedElement bindGenericType(List<TypeParameter> parameters,
+  public final boolean bindGenericType(List<TypeParameter> parameters,
       List<? extends Type> types, TypedElement typedElement) {
     if (logger.isDebugEnabled()) {
       logger.debug("bindGenericType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
           + ", typedElement=" + typedElement + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
     }
 
-    // check parameters, then perform binding
+    // check parameters
     checkBindingParameters(parameters,types);
-    typedElement = doBindGenericType(parameters,types,typedElement);
+    
+    // perform binding
+    boolean success = doBindGenericType(parameters,types,typedElement);
 
     if (logger.isDebugEnabled()) {
-      logger.debug("bindGenericType() - exit - return value=" + typedElement); //$NON-NLS-1$
+      logger.debug("bindGenericType() - exit - return value=" + success); //$NON-NLS-1$
     }
 
-    return typedElement;
+    return success;
   }
 
   /**
@@ -129,28 +131,30 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements Generi
    * @param types the types for binding
    * @param subType the type whose generic super type should be bound
    * 
-   * @return the given <code>TypedElement</code>, either with a bound type or unchanged
+   * @return a <code>boolean</code> indicating whether the binding was successful
    * 
    * @see GenericType#bindGenericType(List, List, TypedElement)
    * 
    * @generated NOT
    */
-  public Type bindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
+  public boolean bindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
       Type subType) {
     if (logger.isDebugEnabled()) {
       logger.debug("bindGenericSuperType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
           + ", subType=" + subType + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
     }
 
-    // check parameters and perform binding
+    // check parameters
     checkBindingParameters(parameters,types);
-    subType = doBindGenericSuperType(parameters,types,subType);
+    
+    // perform binding
+    boolean success = doBindGenericSuperType(parameters,types,subType);
 
     if (logger.isDebugEnabled()) {
-      logger.debug("bindGenericSuperType() - exit - return value=" + subType); //$NON-NLS-1$
+      logger.debug("bindGenericSuperType() - exit - return value=" + success); //$NON-NLS-1$
     }
 
-    return subType;
+    return success;
   }
 
   /**
@@ -172,13 +176,13 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements Generi
   /**
    * Subclasses need to implement the actual binding.
    */
-  protected abstract TypedElement doBindGenericType(List<TypeParameter> parameters,
+  protected abstract boolean doBindGenericType(List<TypeParameter> parameters,
       List<? extends Type> types, TypedElement typedElement);
 
   /**
    * Subclasses need to implement the actual binding.
    */
-  protected abstract Type doBindGenericSuperType(List<TypeParameter> parameters,
+  protected abstract boolean doBindGenericSuperType(List<TypeParameter> parameters,
       List<? extends Type> types, Type subType);
 
   /**

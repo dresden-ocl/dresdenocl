@@ -109,4 +109,11 @@ public interface GenericElement extends NamedElement {
    */
   NamedElement bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types);
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  Type getBoundType(TypeParameter typeParam);
+
 } // GenericElement

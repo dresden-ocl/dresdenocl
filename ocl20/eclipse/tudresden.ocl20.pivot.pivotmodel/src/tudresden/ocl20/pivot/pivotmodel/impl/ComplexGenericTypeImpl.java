@@ -60,11 +60,11 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl#getUnboundType <em>Unbound Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl#getTypeArgument <em>Type Argument</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl#getUnboundType <em>Unbound Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl#getTypeArgument <em>Type Argument</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGenericType {
@@ -82,21 +82,19 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
    * @generated
    * @ordered
    */
-  protected Type unboundType = null;
+  protected Type unboundType;
 
   /**
-   * The cached value of the '{@link #getTypeArgument() <em>Type Argument</em>}' containment
-   * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getTypeArgument() <em>Type Argument</em>}' containment reference list.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getTypeArgument()
    * @generated
    * @ordered
    */
-  protected EList<TypeArgument> typeArgument = null;
+  protected EList<TypeArgument> typeArgument;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected ComplexGenericTypeImpl() {
@@ -105,7 +103,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -126,7 +123,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public Type getUnboundType() {
@@ -135,7 +131,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setUnboundType(Type newUnboundType) {
@@ -160,7 +155,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
   /**
    * <!-- begin-user-doc -->The code generated for {{@link #getTypeArgument()} is redirected to
    * this method. <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected final List<TypeArgument> getTypeArgumentGen() {
@@ -200,7 +194,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
    * using the {@link TypeArgument}s set for this <code>ComplexGenericType</code>.
    */
   @Override
-  public TypedElement doBindGenericType(List<TypeParameter> parameters, List<? extends Type> types,
+  public boolean doBindGenericType(List<TypeParameter> parameters, List<? extends Type> types,
       TypedElement typedElement) {
 
     // bind the unbound type of this complex generic type
@@ -213,10 +207,17 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
             + boundType.getName() + "'."); //$NON-NLS-1$
       }
 
+      // reset the generic type first
+      typedElement.setGenericType(null);
+      
+      // now set the type (the order is important, see TypedElement.setGenericType)
       typedElement.setType(boundType);
+      
+      // signal success
+      return true;
     }
 
-    return typedElement;
+    return false;
   }
 
   /**
@@ -230,7 +231,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
    *      java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
    */
   @Override
-  protected Type doBindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
+  protected boolean doBindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
       Type subType) {
 
     // bind the unbound type of this complex generic type
@@ -243,10 +244,14 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
             + subType.getQualifiedName() + "'."); //$NON-NLS-1$
       }
 
+      // add the bound super type 
       subType.addSuperType(boundType);
+      
+      // signal success
+      return true;
     }
 
-    return subType;
+    return false;
   }
 
   /**
@@ -275,7 +280,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
     for (ListIterator<TypeArgument> it = getTypeArgument().listIterator(); it.hasNext();) {
       TypeArgument typeArgument = it.next();
 
-      // bind the type argument if it has a generic type
+      // bind the type argument first if it has a generic type
       if (typeArgument.getType() == null && typeArgument.getGenericType() != null) {
         typeArgument.getGenericType().bindGenericType(parameters,types,typeArgument);
       }
@@ -338,7 +343,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -355,7 +359,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -370,7 +373,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -386,7 +388,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -406,7 +407,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -424,7 +424,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements ComplexGe
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
