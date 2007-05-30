@@ -150,10 +150,18 @@
   <oclType name="OclType">
     <ownedTypeParameter name="T"/>
     <ownedOperation name="=" type="//@oclBoolean">
-      <ownedParameter name="object" type="//@oclType"/>
+      <ownedParameter name="object">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
+          <typeArgument/>
+        </genericType>
+      </ownedParameter>
     </ownedOperation>
     <ownedOperation name="&lt;>" type="//@oclBoolean">
-      <ownedParameter name="object" type="//@oclType"/>
+      <ownedParameter name="object">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
+          <typeArgument/>
+        </genericType>
+      </ownedParameter>
     </ownedOperation>
   </oclType>
   <oclCollection oclLibrary="/">
