@@ -278,7 +278,7 @@ public interface IModelFactory {
    * @param symbol
    * @return
    */
-  UnlimitedNaturalExp createUnlimitedNaturalExp(String symbol);
+  UnlimitedNaturalExp createUnlimitedNaturalExp(long symbol);
 
   /**
    * @param integerSymbol

@@ -168,8 +168,10 @@ public class ModelFactory implements IModelFactory {
     return collectionItem;
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Creates a {@link CollectionLiteralExp}. Both parameters <code>kind</code> and
+   * <code>parts</code> must not be <code>null</code>. However, the <code>parts</code>
+   * varargs array may be empty, in this case an empty collection will be created.
    * 
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createCollectionLiteralExp(java.lang.String,
    *      java.util.List)
@@ -181,15 +183,19 @@ public class ModelFactory implements IModelFactory {
           + ArrayUtils.toString(parts) + ") - enter"); //$NON-NLS-1$
     }
 
+    // check parameters
     if (kind == null || parts == null) {
       throw new IllegalArgumentException(
           "Parameters must not be null: kind=" + kind + ", parts=" + parts + "."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     }
-
+    
     CollectionLiteralExp collectionLiteralExp = ExpressionsFactory.INSTANCE
         .createCollectionLiteralExp();
     collectionLiteralExp.setKind(kind);
     collectionLiteralExp.getPart().addAll(Arrays.asList(parts));
+    
+    // set the reference to the OCL Library
+    collectionLiteralExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createCollectionLiteralExp() - exit - return value=" + collectionLiteralExp); //$NON-NLS-1$
@@ -397,7 +403,7 @@ public class ModelFactory implements IModelFactory {
 
     IntegerLiteralExp integerLiteralExp = ExpressionsFactory.INSTANCE.createIntegerLiteralExp();
     integerLiteralExp.setIntegerSymbol(integerSymbol);
-    
+
     // initialize reference to the OCL Library
     integerLiteralExp.setOclLibrary(getOclLibrary());
 
@@ -879,7 +885,7 @@ public class ModelFactory implements IModelFactory {
 
     TypeLiteralExp typeLiteralExp = ExpressionsFactory.INSTANCE.createTypeLiteralExp();
     typeLiteralExp.setReferredType(type);
-    
+
     // initialize reference to the OCL Library
     typeLiteralExp.setOclLibrary(oclLibrary);
 
@@ -915,13 +921,9 @@ public class ModelFactory implements IModelFactory {
    * 
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createUnlimitedNaturalExp(java.lang.String)
    */
-  public UnlimitedNaturalExp createUnlimitedNaturalExp(String symbol) {
+  public UnlimitedNaturalExp createUnlimitedNaturalExp(long symbol) {
     if (logger.isDebugEnabled()) {
       logger.debug("createUnlimitedNaturalExp(symbol=" + symbol + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
-    if (StringUtils.isEmpty(symbol)) {
-      throw new IllegalArgumentException("The argument 'symbol' must not be null or empty."); //$NON-NLS-1$
     }
 
     UnlimitedNaturalExp unlimitedNaturalExp = ExpressionsFactory.INSTANCE

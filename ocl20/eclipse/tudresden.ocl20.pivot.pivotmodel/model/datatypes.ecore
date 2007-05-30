@@ -7,7 +7,7 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="float"/>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="long"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Collection" instanceClassName="java.util.Collection"
       serializable="false">
     <eTypeParameters name="T"/>

@@ -103,7 +103,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSequence()
    * @generated
    */
-  public static final int SEQUENCE = 0;
+  public static final int SEQUENCE = 6;
 
   /**
    * The meta object id for the '<em>Set</em>' data type.
@@ -113,17 +113,16 @@ public class DatatypesPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSet()
    * @generated
    */
-  public static final int SET = 1;
+  public static final int SET = 8;
 
   /**
    * The meta object id for the '<em>Unlimited Natural</em>' data type.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see java.lang.String
    * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
    * @generated
    */
-  public static final int UNLIMITED_NATURAL = 2;
+  public static final int UNLIMITED_NATURAL = 4;
 
   /**
    * The meta object id for the '<em>Integer</em>' data type.
@@ -132,7 +131,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getInteger()
    * @generated
    */
-  public static final int INTEGER = 3;
+  public static final int INTEGER = 1;
 
   /**
    * The meta object id for the '<em>Boolean</em>' data type.
@@ -141,7 +140,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getBoolean()
    * @generated
    */
-  public static final int BOOLEAN = 4;
+  public static final int BOOLEAN = 0;
 
   /**
    * The meta object id for the '<em>String</em>' data type.
@@ -151,7 +150,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getString()
    * @generated
    */
-  public static final int STRING = 5;
+  public static final int STRING = 3;
 
   /**
    * The meta object id for the '<em>Real</em>' data type.
@@ -160,7 +159,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getReal()
    * @generated
    */
-  public static final int REAL = 6;
+  public static final int REAL = 2;
 
   /**
    * The meta object id for the '<em>Bag</em>' data type.
@@ -180,7 +179,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getOrderedSet()
    * @generated
    */
-  public static final int ORDERED_SET = 8;
+  public static final int ORDERED_SET = 9;
 
   /**
    * The meta object id for the '<em>Collection</em>' data type.
@@ -190,7 +189,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
    * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getCollection()
    * @generated
    */
-  public static final int COLLECTION = 9;
+  public static final int COLLECTION = 5;
 
   /**
    * <!-- begin-user-doc -->
@@ -367,11 +366,10 @@ public class DatatypesPackageImpl extends EPackageImpl {
   }
 
   /**
-   * Returns the meta object for data type '{@link java.lang.String <em>Unlimited Natural</em>}'.
+   * Returns the meta object for data type '<em>Unlimited Natural</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for data type '<em>Unlimited Natural</em>'.
-   * @see java.lang.String
    * @generated
    */
   public EDataType getUnlimitedNatural() {
@@ -489,16 +487,16 @@ public class DatatypesPackageImpl extends EPackageImpl {
     isCreated = true;
 
     // Create data types
-    sequenceEDataType = createEDataType(SEQUENCE);
-    setEDataType = createEDataType(SET);
-    unlimitedNaturalEDataType = createEDataType(UNLIMITED_NATURAL);
-    integerEDataType = createEDataType(INTEGER);
     booleanEDataType = createEDataType(BOOLEAN);
-    stringEDataType = createEDataType(STRING);
+    integerEDataType = createEDataType(INTEGER);
     realEDataType = createEDataType(REAL);
-    bagEDataType = createEDataType(BAG);
-    orderedSetEDataType = createEDataType(ORDERED_SET);
+    stringEDataType = createEDataType(STRING);
+    unlimitedNaturalEDataType = createEDataType(UNLIMITED_NATURAL);
     collectionEDataType = createEDataType(COLLECTION);
+    sequenceEDataType = createEDataType(SEQUENCE);
+    bagEDataType = createEDataType(BAG);
+    setEDataType = createEDataType(SET);
+    orderedSetEDataType = createEDataType(ORDERED_SET);
   }
 
   /**
@@ -525,22 +523,22 @@ public class DatatypesPackageImpl extends EPackageImpl {
     setNsURI(eNS_URI);
 
     // Initialize data types
-    initEDataType(sequenceEDataType,List.class,
-        "Sequence",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEDataType(setEDataType,Set.class,"Set",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEDataType(unlimitedNaturalEDataType,String.class,
-        "UnlimitedNatural",IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEDataType(integerEDataType,int.class,"Integer",IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEDataType(booleanEDataType,boolean.class,
         "Boolean",IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEDataType(integerEDataType,int.class,"Integer",IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEDataType(realEDataType,float.class,"Real",IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEDataType(stringEDataType,String.class,
         "String",IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEDataType(realEDataType,float.class,"Real",IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEDataType(bagEDataType,List.class,"Bag",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEDataType(orderedSetEDataType,List.class,
-        "OrderedSet",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEDataType(unlimitedNaturalEDataType,long.class,
+        "UnlimitedNatural",IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEDataType(collectionEDataType,Collection.class,
         "Collection",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEDataType(sequenceEDataType,List.class,
+        "Sequence",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEDataType(bagEDataType,List.class,"Bag",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEDataType(setEDataType,Set.class,"Set",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEDataType(orderedSetEDataType,List.class,
+        "OrderedSet",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
     // Create resource
     createResource(eNS_URI);
@@ -584,7 +582,6 @@ public class DatatypesPackageImpl extends EPackageImpl {
      * The meta object literal for the '<em>Unlimited Natural</em>' data type.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see java.lang.String
      * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
      * @generated
      */

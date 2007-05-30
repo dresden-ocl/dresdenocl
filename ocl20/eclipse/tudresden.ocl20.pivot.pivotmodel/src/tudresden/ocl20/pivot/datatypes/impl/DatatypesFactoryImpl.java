@@ -109,16 +109,16 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
   @Override
   public Object createFromString(EDataType eDataType, String initialValue) {
     switch (eDataType.getClassifierID()) {
-      case DatatypesPackageImpl.UNLIMITED_NATURAL:
-        return createUnlimitedNaturalFromString(eDataType,initialValue);
-      case DatatypesPackageImpl.INTEGER:
-        return createIntegerFromString(eDataType,initialValue);
       case DatatypesPackageImpl.BOOLEAN:
         return createBooleanFromString(eDataType,initialValue);
-      case DatatypesPackageImpl.STRING:
-        return createStringFromString(eDataType,initialValue);
+      case DatatypesPackageImpl.INTEGER:
+        return createIntegerFromString(eDataType,initialValue);
       case DatatypesPackageImpl.REAL:
         return createRealFromString(eDataType,initialValue);
+      case DatatypesPackageImpl.STRING:
+        return createStringFromString(eDataType,initialValue);
+      case DatatypesPackageImpl.UNLIMITED_NATURAL:
+        return createUnlimitedNaturalFromString(eDataType,initialValue);
       default:
         throw new IllegalArgumentException(
             "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -133,16 +133,16 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
   @Override
   public String convertToString(EDataType eDataType, Object instanceValue) {
     switch (eDataType.getClassifierID()) {
-      case DatatypesPackageImpl.UNLIMITED_NATURAL:
-        return convertUnlimitedNaturalToString(eDataType,instanceValue);
-      case DatatypesPackageImpl.INTEGER:
-        return convertIntegerToString(eDataType,instanceValue);
       case DatatypesPackageImpl.BOOLEAN:
         return convertBooleanToString(eDataType,instanceValue);
-      case DatatypesPackageImpl.STRING:
-        return convertStringToString(eDataType,instanceValue);
+      case DatatypesPackageImpl.INTEGER:
+        return convertIntegerToString(eDataType,instanceValue);
       case DatatypesPackageImpl.REAL:
         return convertRealToString(eDataType,instanceValue);
+      case DatatypesPackageImpl.STRING:
+        return convertStringToString(eDataType,instanceValue);
+      case DatatypesPackageImpl.UNLIMITED_NATURAL:
+        return convertUnlimitedNaturalToString(eDataType,instanceValue);
       default:
         throw new IllegalArgumentException(
             "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
