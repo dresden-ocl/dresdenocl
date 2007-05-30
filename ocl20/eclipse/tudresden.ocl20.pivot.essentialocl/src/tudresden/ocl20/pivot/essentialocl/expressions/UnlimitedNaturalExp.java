@@ -57,10 +57,10 @@ public interface UnlimitedNaturalExp extends NumericLiteralExp {
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Symbol</em>' attribute.
-   * @see #setSymbol(String)
+   * @see #setSymbol(long)
    * @generated
    */
-  String getSymbol();
+  long getSymbol();
 
   /**
    * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp#getSymbol <em>Symbol</em>}' attribute.
@@ -70,6 +70,6 @@ public interface UnlimitedNaturalExp extends NumericLiteralExp {
    * @see #getSymbol()
    * @generated
    */
-  void setSymbol(String value);
+  void setSymbol(long value);
 
 } // UnlimitedNaturalExp

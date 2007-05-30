@@ -32,50 +32,60 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.log4j.Logger;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Unlimited Natural Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Unlimited Natural Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.UnlimitedNaturalExpImpl#getSymbol <em>Symbol</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.UnlimitedNaturalExpImpl#getSymbol <em>Symbol</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements UnlimitedNaturalExp {
 
   /**
-   * The default value of the '{@link #getSymbol() <em>Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(UnlimitedNaturalExpImpl.class);
+
+  /**
+   * The default value of the '{@link #getSymbol() <em>Symbol</em>}' attribute. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getSymbol()
    * @generated
    * @ordered
    */
-  protected static final String SYMBOL_EDEFAULT = null;
+  protected static final long SYMBOL_EDEFAULT = 0L;
 
   /**
-   * The cached value of the '{@link #getSymbol() <em>Symbol</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getSymbol() <em>Symbol</em>}' attribute. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
    * @see #getSymbol()
    * @generated
    * @ordered
    */
-  protected String symbol = SYMBOL_EDEFAULT;
+  protected long symbol = SYMBOL_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected UnlimitedNaturalExpImpl() {
@@ -83,31 +93,44 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements Un
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to implement type evaluation. The OCL specification does not define any
+   * wellformedness rules for UnlimitedNaturalExp. Theoretically, this should be the UML
+   * <code>UnlimitedNatural</code> type. However, this one is not available in the OCL Standard
+   * Library. For the moment being, this method returns the OCL <code>Integer</code> type as it
+   * most closely corresponds to an unlimited natural number.
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
    */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.UNLIMITED_NATURAL_EXP;
+  protected Type evaluateType() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - enter"); //$NON-NLS-1$
+    }
+
+    Type type = getValidOclLibrary().getOclInteger();
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
+    }
+
+    return type;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
-  public String getSymbol() {
+  public long getSymbol() {
     return symbol;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
-  public void setSymbol(String newSymbol) {
-    String oldSymbol = symbol;
+  public void setSymbol(long newSymbol) {
+    long oldSymbol = symbol;
     symbol = newSymbol;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this,Notification.SET,
@@ -115,37 +138,37 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements Un
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
       case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
-        return getSymbol();
+        return new Long(getSymbol());
     }
     return super.eGet(featureID,resolve,coreType);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
       case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
-        setSymbol((String) newValue);
+        setSymbol(((Long) newValue).longValue());
         return;
     }
     super.eSet(featureID,newValue);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -159,33 +182,40 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements Un
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
       case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
-        return SYMBOL_EDEFAULT == null ? symbol != null : !SYMBOL_EDEFAULT.equals(symbol);
+        return symbol != SYMBOL_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public String toString() {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (symbol: "); //$NON-NLS-1$
-    result.append(symbol);
-    result.append(')');
-    return result.toString();
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.UNLIMITED_NATURAL_EXP;
   }
 
-} //UnlimitedNaturalExpImpl
+  /**
+   * Adapted the EMF implementation to use the Jakarta Commons mechanism instead.
+   * 
+   * @see java.lang.Object#toString()
+   * 
+   * @generated NOT
+   */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("symbol",symbol).toString(); //$NON-NLS-1$
+  }
+
+} // UnlimitedNaturalExpImpl
