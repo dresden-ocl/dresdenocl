@@ -334,7 +334,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
     AnyType oclAny = oclLibrary.getOclAny();
 
     if (!type.getSuperType().contains(oclAny)) {
-      type.getSuperType().add(oclAny);
+      type.addSuperType(oclAny);
     }
 
     return type;
