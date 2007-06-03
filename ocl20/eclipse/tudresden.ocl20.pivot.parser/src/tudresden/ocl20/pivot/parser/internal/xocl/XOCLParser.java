@@ -89,6 +89,7 @@ import tudresden.ocl20.pivot.xocl.NamespaceXS;
 import tudresden.ocl20.pivot.xocl.OclExpressionXS;
 import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.PropertyCallExpXS;
+import tudresden.ocl20.pivot.xocl.TypeLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.VariableExpXS;
 import tudresden.ocl20.pivot.xocl.VariableXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
@@ -230,6 +231,17 @@ public class XOCLParser implements IOclParser {
     @Override
     public OclExpression caseIntegerLiteralExpXS(IntegerLiteralExpXS expression) {
       return getModelFactory().createIntegerLiteralExp(expression.getIntegerSymbol());
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseTypeLiteralExpXS(tudresden.ocl20.pivot.xocl.TypeLiteralExpXS)
+     */
+    @Override
+    public OclExpression caseTypeLiteralExpXS(TypeLiteralExpXS expression) {
+      return getModelFactory().createTypeLiteralExp(
+          tokenizePathName(expression.getReferredTypeName()));
     }
 
     /*
