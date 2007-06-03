@@ -118,23 +118,28 @@ public class TypeLiteralExpXSItemProvider extends LiteralExpXSItemProvider imple
 
   /**
    * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted the EMF implementation to resemble the OCL concrete syntax
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
     String label = ((TypeLiteralExpXS) object).getReferredTypeName();
-    return label == null || label.length() == 0 ? getString("_UI_TypeLiteralExpXS_type") : //$NON-NLS-1$
-        getString("_UI_TypeLiteralExpXS_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+    return label == null || label.length() == 0 ? getString("_UI_TypeLiteralExpXS_type") : label; //$NON-NLS-1$
   }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted the EMF implementation to propagate changes to parent expressions.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -142,8 +147,7 @@ public class TypeLiteralExpXSItemProvider extends LiteralExpXSItemProvider imple
 
     switch (notification.getFeatureID(TypeLiteralExpXS.class)) {
       case XOCLPackage.TYPE_LITERAL_EXP_XS__REFERRED_TYPE_NAME:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
-        return;
+        updateLabel(notification);
     }
     super.notifyChanged(notification);
   }
