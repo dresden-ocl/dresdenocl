@@ -34,7 +34,9 @@ package tudresden.ocl20.pivot.modelbus.internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -103,6 +105,8 @@ public class ModelFactory implements IModelFactory {
   // the OCL Library instance; will be retrieved from the IOclLibraryProvider of the model
   private OclLibrary oclLibrary;
 
+  private Map<String, Type> primitiveTypes = new HashMap<String, Type>();
+
   /**
    * @param model
    */
@@ -118,6 +122,22 @@ public class ModelFactory implements IModelFactory {
 
     // initialize
     this.model = model;
+
+    oclLibrary = model.getOclLibraryProvider().getOclLibrary();
+    
+    primitiveTypes.put("OclAny", oclLibrary.getOclAny());
+    primitiveTypes.put("OclBag", oclLibrary.getOclBag());
+    primitiveTypes.put("OclBoolean", oclLibrary.getOclBoolean());
+    primitiveTypes.put("OclCollection", oclLibrary.getOclCollection());
+    primitiveTypes.put("OclInteger", oclLibrary.getOclInteger());
+    primitiveTypes.put("OclInvalid", oclLibrary.getOclInvalid());
+    primitiveTypes.put("OclOrderedSet", oclLibrary.getOclOrderedSet());
+    primitiveTypes.put("OclReal", oclLibrary.getOclReal());
+    primitiveTypes.put("OclSequence", oclLibrary.getOclSequence());
+    primitiveTypes.put("OclSet", oclLibrary.getOclSet());
+    primitiveTypes.put("OclString", oclLibrary.getOclString());
+    primitiveTypes.put("OclType", oclLibrary.getOclType());
+    primitiveTypes.put("OclVoid", oclLibrary.getOclVoid());
 
     if (logger.isDebugEnabled()) {
       logger.debug("ModelFactory() - exit"); //$NON-NLS-1$
@@ -136,6 +156,8 @@ public class ModelFactory implements IModelFactory {
 
     BooleanLiteralExp booleanLiteralExp = ExpressionsFactory.INSTANCE.createBooleanLiteralExp();
     booleanLiteralExp.setBooleanSymbol(booleanSymbol);
+
+    booleanLiteralExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createBooleanLiteralExp() - exit - return value=" + booleanLiteralExp); //$NON-NLS-1$
@@ -425,6 +447,8 @@ public class ModelFactory implements IModelFactory {
     }
 
     InvalidLiteralExp invalidLiteralExp = ExpressionsFactory.INSTANCE.createInvalidLiteralExp();
+
+    invalidLiteralExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createInvalidLiteralExp() - exit - return value=" + invalidLiteralExp); //$NON-NLS-1$
@@ -909,6 +933,8 @@ public class ModelFactory implements IModelFactory {
     UndefinedLiteralExp undefinedLiteralExp = ExpressionsFactory.INSTANCE
         .createUndefinedLiteralExp();
 
+    undefinedLiteralExp.setOclLibrary(getOclLibrary());
+
     if (logger.isDebugEnabled()) {
       logger.debug("createUndefinedLiteralExp() - exit - return value=" + undefinedLiteralExp); //$NON-NLS-1$
     }
@@ -1041,14 +1067,19 @@ public class ModelFactory implements IModelFactory {
    * @throws IllegalArgumentException if no type with that path name can be found
    */
   protected Type findType(List<String> pathName) {
-    Type type;
+    Type type = null;
 
-    try {
-      type = model.findType(pathName);
-    }
-    catch (ModelAccessException e) {
-      throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
-          + model.getDisplayName() + "'.",e); //$NON-NLS-1$
+    if (pathName.size() == 1)
+    	type = primitiveTypes.get(pathName.get(0));
+
+    if (type == null) {
+	    try {
+	      type = model.findType(pathName);
+	    }
+	    catch (ModelAccessException e) {
+	      throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
+	          + model.getDisplayName() + "'.",e); //$NON-NLS-1$
+	    }
     }
 
     if (type == null) {
