@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -57,8 +58,10 @@ import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
 import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelFactory;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
@@ -74,6 +77,7 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.xocl.BooleanLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.CollectionItemXS;
 import tudresden.ocl20.pivot.xocl.CollectionKindXS;
 import tudresden.ocl20.pivot.xocl.CollectionLiteralExpXS;
@@ -84,12 +88,18 @@ import tudresden.ocl20.pivot.xocl.ConstraintKindXS;
 import tudresden.ocl20.pivot.xocl.ConstraintXS;
 import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
 import tudresden.ocl20.pivot.xocl.IntegerLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.InvalidLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.IteratorExpXS;
+import tudresden.ocl20.pivot.xocl.LetExpXS;
 import tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.NamespaceXS;
 import tudresden.ocl20.pivot.xocl.OclExpressionXS;
 import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.PropertyCallExpXS;
+import tudresden.ocl20.pivot.xocl.TupleLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.TupleLiteralPartXS;
 import tudresden.ocl20.pivot.xocl.TypeLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.UndefinedLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.VariableExpXS;
 import tudresden.ocl20.pivot.xocl.VariableXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
@@ -272,6 +282,69 @@ public class XOCLParser implements IOclParser {
           parts.toArray(new CollectionLiteralPart[parts.size()]));
     }
 
+    public OclExpression caseTupleLiteralExpXS(TupleLiteralExpXS object) {
+    	List<TupleLiteralPart> parts = new ArrayList<TupleLiteralPart>(object.getPart().size());
+    	
+    	Iterator<TupleLiteralPartXS> it = object.getPart().iterator();
+    	
+    	while (it.hasNext()) {
+    		TupleLiteralPartXS partXS = it.next();
+    		OclExpression value = doSwitch((EObject)partXS.getValue());
+    		TupleLiteralPart part = getModelFactory().createTupleLiteralPart(partXS.getName(),
+      			Arrays.asList(partXS.getTypeName().split("::")), value);
+    		parts.add(part);
+    	}
+    	
+    	OclExpression ret = getModelFactory().createTupleLiteralExp(
+    			parts.toArray(new TupleLiteralPart[0]));
+    	
+//    	System.out.println("Parts: " + parts);
+    	
+      return ret;
+    }
+
+    public OclExpression caseBooleanLiteralExpXS(BooleanLiteralExpXS expression) {
+    	return getModelFactory().createBooleanLiteralExp(expression.isBooleanSymbol());
+    }
+    
+    public OclExpression caseIteratorExpXS(IteratorExpXS expression) {
+    	OclExpression ret = null;
+    	
+    	System.out.println("BodyExpXS: " + expression.getBody());
+    	OclExpression body = doSwitch((EObject)expression.getBody());
+    	System.out.println("Body: " + body);
+    	
+    	OclExpression source = doSwitch((EObject)expression.getSource());
+    	System.out.println("Source: " + source);
+    	
+    	System.out.println("Name: " + expression.getName());
+    	
+    	System.out.println("Iterator: " + expression.getIterator());
+    	List<Variable> vars = new ArrayList<Variable>(expression.getIterator().size());
+    	Iterator<VariableXS> it = expression.getIterator().iterator();
+    	while (it.hasNext())
+    		vars.add((Variable)doSwitch(it.next()));
+    	
+    	ret = getModelFactory().createIteratorExp(source, expression.getName().getName(), 
+    			body, vars.toArray(new Variable[0]));
+    	System.out.println("IteratorExp: " + ret);
+    			
+    	ret = null;
+    	return ret;
+    }
+    
+    public OclExpression caseInvalidLiteralExpXS(InvalidLiteralExpXS expression) {
+    	OclExpression ret = getModelFactory().createInvalidLiteralExp();
+    	
+    	return ret;
+    }
+    
+    public OclExpression caseUndefinedLiteralExpXS(UndefinedLiteralExpXS expression) {
+    	OclExpression ret = getModelFactory().createUndefinedLiteralExp();
+    	
+    	return ret;
+    }
+    
     /**
      * Helper method to create an OCL abstract syntax {@link CollectionItem} from an XOCL
      * {@link CollectionItemXS}.
@@ -318,6 +391,26 @@ public class XOCLParser implements IOclParser {
       }
 
       return kind;
+    }
+    
+    public OclExpression caseLetExpXS(LetExpXS expression) {
+      VariableXS variableXS = expression.getVariable();
+
+      if (variableXS == null) {
+        throw new IllegalArgumentException(
+            "The referred variable of a VariableExp must not be null."); //$NON-NLS-1$
+      }
+
+      Variable variable = variables.get(expression.getVariable());
+      
+      if (variable == null) {
+        variable = createVariable(variableXS, this);
+        variables.put(variableXS, variable);
+      }
+      
+      OclExpression exp = doSwitch((EObject)expression.getIn());
+
+      return getModelFactory().createLetExp(variable, exp);
     }
 
   }
@@ -667,7 +760,7 @@ public class XOCLParser implements IOclParser {
     }
 
     Type type;
-
+    
     try {
       type = model.findType(pathName);
     }
