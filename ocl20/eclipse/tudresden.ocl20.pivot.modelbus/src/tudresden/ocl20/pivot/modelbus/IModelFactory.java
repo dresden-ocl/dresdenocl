@@ -128,6 +128,22 @@ public interface IModelFactory {
   Variable createVariable(String name, List<String> typePathName, OclExpression initExpression);
 
   /**
+   * Creates a new {@link Variable} with the same semantics as
+   * {@link #createVariable(String, List, OclExpression)}, but allows to additionally specify a
+   * list of type arguments for the type of the variable. This is required for generic types such as
+   * the collection types from the OCL Standard Library.
+   * 
+   * @param name the name of the variable
+   * @param typePathName the type of the variable
+   * @param typeArguments a list of type names 8each represented as a list of path segments) 
+   * @param initExpression an (optional) initialization expression
+   * 
+   * @return
+   */
+  Variable createVariable(String name, List<String> typePathName, List<List<String>> typeArguments,
+      OclExpression initExpression);
+
+  /**
    * Creates a new {@link Variable} that represents a {@link Parameter} in an expression that
    * constrains an {@link Operation}. The name and type of the <code>Variable</code> will be
    * determined automatically.

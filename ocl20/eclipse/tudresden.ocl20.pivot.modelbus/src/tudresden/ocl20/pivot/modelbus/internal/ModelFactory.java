@@ -105,6 +105,7 @@ public class ModelFactory implements IModelFactory {
   // the OCL Library instance; will be retrieved from the IOclLibraryProvider of the model
   private OclLibrary oclLibrary;
 
+  // a cache for the primitive types from the OCL Standard library
   private Map<String, Type> primitiveTypes = new HashMap<String, Type>();
 
   /**
@@ -120,28 +121,41 @@ public class ModelFactory implements IModelFactory {
       throw new IllegalArgumentException("No valid model provided to the Model Factory."); //$NON-NLS-1$
     }
 
-    // initialize
+    // initialize the reference to the model
     this.model = model;
 
+    // get the OCL Standard Library and initialize the cache with the OCL primitive types
     oclLibrary = model.getOclLibraryProvider().getOclLibrary();
-    
-    primitiveTypes.put("OclAny", oclLibrary.getOclAny());
-    primitiveTypes.put("OclBag", oclLibrary.getOclBag());
-    primitiveTypes.put("OclBoolean", oclLibrary.getOclBoolean());
-    primitiveTypes.put("OclCollection", oclLibrary.getOclCollection());
-    primitiveTypes.put("OclInteger", oclLibrary.getOclInteger());
-    primitiveTypes.put("OclInvalid", oclLibrary.getOclInvalid());
-    primitiveTypes.put("OclOrderedSet", oclLibrary.getOclOrderedSet());
-    primitiveTypes.put("OclReal", oclLibrary.getOclReal());
-    primitiveTypes.put("OclSequence", oclLibrary.getOclSequence());
-    primitiveTypes.put("OclSet", oclLibrary.getOclSet());
-    primitiveTypes.put("OclString", oclLibrary.getOclString());
-    primitiveTypes.put("OclType", oclLibrary.getOclType());
-    primitiveTypes.put("OclVoid", oclLibrary.getOclVoid());
+    initializePrimitiveTypes();
 
     if (logger.isDebugEnabled()) {
       logger.debug("ModelFactory() - exit"); //$NON-NLS-1$
     }
+  }
+
+  /**
+   * Helper method to initialize the cache with the primitive types.
+   * 
+   * TODO: These explicit String references to the OCL Standard Library types should be replaced by
+   * a generic lookup mechanism, maybe configured via external property files. To see why this is
+   * necessary, notice that the type returned by oclLibrary.getOclBoolean() is not necessarily named
+   * "Boolean". It is just known that this is the OCL boolean type, the concrete naming is up to the
+   * model of the Standard Library provided by the OclLibraryProvider.
+   */
+  private void initializePrimitiveTypes() {
+    primitiveTypes.put("OclAny",oclLibrary.getOclAny()); //$NON-NLS-1$
+    primitiveTypes.put("Bag",oclLibrary.getOclBag()); //$NON-NLS-1$
+    primitiveTypes.put("Boolean",oclLibrary.getOclBoolean()); //$NON-NLS-1$
+    primitiveTypes.put("Collection",oclLibrary.getOclCollection()); //$NON-NLS-1$
+    primitiveTypes.put("Integer",oclLibrary.getOclInteger()); //$NON-NLS-1$
+    primitiveTypes.put("Invalid",oclLibrary.getOclInvalid()); //$NON-NLS-1$
+    primitiveTypes.put("OrderedSet",oclLibrary.getOclOrderedSet()); //$NON-NLS-1$
+    primitiveTypes.put("Real",oclLibrary.getOclReal()); //$NON-NLS-1$
+    primitiveTypes.put("Sequence",oclLibrary.getOclSequence()); //$NON-NLS-1$
+    primitiveTypes.put("Set",oclLibrary.getOclSet()); //$NON-NLS-1$
+    primitiveTypes.put("String",oclLibrary.getOclString()); //$NON-NLS-1$
+    primitiveTypes.put("OclType",oclLibrary.getOclType()); //$NON-NLS-1$
+    primitiveTypes.put("OclVoid",oclLibrary.getOclVoid()); //$NON-NLS-1$
   }
 
   /*
@@ -210,12 +224,12 @@ public class ModelFactory implements IModelFactory {
       throw new IllegalArgumentException(
           "Parameters must not be null: kind=" + kind + ", parts=" + parts + "."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     }
-    
+
     CollectionLiteralExp collectionLiteralExp = ExpressionsFactory.INSTANCE
         .createCollectionLiteralExp();
     collectionLiteralExp.setKind(kind);
     collectionLiteralExp.getPart().addAll(Arrays.asList(parts));
-    
+
     // set the reference to the OCL Library
     collectionLiteralExp.setOclLibrary(getOclLibrary());
 
@@ -969,10 +983,12 @@ public class ModelFactory implements IModelFactory {
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createVariable(java.lang.String,
    *      java.util.List, tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
    */
-  public Variable createVariable(String name, List<String> typeName, OclExpression initExpression) {
+  public Variable createVariable(String name, List<String> typePathName,
+      OclExpression initExpression) {
     if (logger.isDebugEnabled()) {
-      logger.debug("createVariable(name=" + name + ", typeName=" + typeName + ", initExpression=" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-          + initExpression + ") - enter"); //$NON-NLS-1$
+      logger
+          .debug("createVariable(name=" + name + ", typeName=" + typePathName + ", initExpression=" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+              + initExpression + ") - enter"); //$NON-NLS-1$
     }
 
     if (StringUtils.isEmpty(name)) {
@@ -982,10 +998,68 @@ public class ModelFactory implements IModelFactory {
     Type type = null;
 
     // if the type name is given lookup the type
-    if (typeName != null && typeName.size() > 0) {
-      type = findType(typeName);
+    if (typePathName != null && typePathName.size() > 0) {
+      type = findType(typePathName);
     }
 
+    Variable variable = ExpressionsFactory.INSTANCE.createVariable();
+    variable.setName(name);
+
+    if (type != null) {
+      variable.setType(type);
+    }
+
+    if (initExpression != null) {
+      variable.setInitExpression(initExpression);
+    }
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("createVariable() - exit - return value=" + variable); //$NON-NLS-1$
+    }
+
+    return variable;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createVariable(java.lang.String,
+   *      java.util.List, java.util.List,
+   *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
+   */
+  public Variable createVariable(String name, List<String> typePathName,
+      List<List<String>> typeArguments, OclExpression initExpression) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("createVariable(name=" + name + ", typePathName=" + typePathName //$NON-NLS-1$ //$NON-NLS-2$
+          + ", typeArguments=" + typeArguments + ", initExpression=" + initExpression //$NON-NLS-1$ //$NON-NLS-2$
+          + ") - enter"); //$NON-NLS-1$
+    }
+
+    if (StringUtils.isEmpty(name)) {
+      throw new IllegalArgumentException("The 'name' argument must not be null or empty."); //$NON-NLS-1$
+    }
+
+    Type type = null;
+
+    // if the type name is given lookup the type
+    if (typePathName != null && typePathName.size() > 0) {
+      type = findType(typePathName);
+
+      // try to bind type arguments
+      if (typeArguments != null) {
+        List<Type> typeArgs = new ArrayList<Type>();
+
+        // collect the type arguments
+        for (List<String> typeArgumentTypePath : typeArguments) {
+          typeArgs.add(findType(typeArgumentTypePath));
+        }
+
+        // bind the generic type (will throw an exception if the number of type args is not correct)
+        type = type.bindTypeParameter(type.getOwnedTypeParameter(),typeArgs);
+      }
+    }
+
+    // create the variable
     Variable variable = ExpressionsFactory.INSTANCE.createVariable();
     variable.setName(name);
 
@@ -1069,17 +1143,20 @@ public class ModelFactory implements IModelFactory {
   protected Type findType(List<String> pathName) {
     Type type = null;
 
-    if (pathName.size() == 1)
-    	type = primitiveTypes.get(pathName.get(0));
+    // try to look up a primitive type
+    if (pathName.size() == 1) {
+      type = primitiveTypes.get(pathName.get(0));
+    }
 
+    // if no primitive type found, try to look in the model
     if (type == null) {
-	    try {
-	      type = model.findType(pathName);
-	    }
-	    catch (ModelAccessException e) {
-	      throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
-	          + model.getDisplayName() + "'.",e); //$NON-NLS-1$
-	    }
+      try {
+        type = model.findType(pathName);
+      }
+      catch (ModelAccessException e) {
+        throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
+            + model.getDisplayName() + "'.",e); //$NON-NLS-1$
+      }
     }
 
     if (type == null) {
