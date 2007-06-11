@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -56,12 +55,12 @@ import org.eclipse.osgi.util.NLS;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange;
 import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelFactory;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
@@ -212,6 +211,29 @@ public class XOCLParser implements IOclParser {
     /*
      * (non-Javadoc)
      * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseLetExpXS(tudresden.ocl20.pivot.xocl.LetExpXS)
+     */
+    @Override
+    public OclExpression caseLetExpXS(LetExpXS expression) {
+      VariableXS variableXS = expression.getVariable();
+
+      if (variableXS == null) {
+        throw new IllegalArgumentException("The declared variable of a LetExpXS must not be null."); //$NON-NLS-1$
+      }
+
+      Variable variable = variables.get(expression.getVariable());
+
+      if (variable == null) {
+        variable = createVariable(variableXS,this);
+        variables.put(variableXS,variable);
+      }
+
+      return getModelFactory().createLetExp(variable,doSwitch(expression.getIn()));
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseVariableExpXS(tudresden.ocl20.pivot.xocl.VariableExpXS)
      */
     @Override
@@ -231,6 +253,16 @@ public class XOCLParser implements IOclParser {
       }
 
       return getModelFactory().createVariableExp(variable);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseBooleanLiteralExpXS(tudresden.ocl20.pivot.xocl.BooleanLiteralExpXS)
+     */
+    @Override
+    public OclExpression caseBooleanLiteralExpXS(BooleanLiteralExpXS expression) {
+      return getModelFactory().createBooleanLiteralExp(expression.isBooleanSymbol());
     }
 
     /*
@@ -282,69 +314,75 @@ public class XOCLParser implements IOclParser {
           parts.toArray(new CollectionLiteralPart[parts.size()]));
     }
 
-    public OclExpression caseTupleLiteralExpXS(TupleLiteralExpXS object) {
-    	List<TupleLiteralPart> parts = new ArrayList<TupleLiteralPart>(object.getPart().size());
-    	
-    	Iterator<TupleLiteralPartXS> it = object.getPart().iterator();
-    	
-    	while (it.hasNext()) {
-    		TupleLiteralPartXS partXS = it.next();
-    		OclExpression value = doSwitch((EObject)partXS.getValue());
-    		TupleLiteralPart part = getModelFactory().createTupleLiteralPart(partXS.getName(),
-      			Arrays.asList(partXS.getTypeName().split("::")), value);
-    		parts.add(part);
-    	}
-    	
-    	OclExpression ret = getModelFactory().createTupleLiteralExp(
-    			parts.toArray(new TupleLiteralPart[0]));
-    	
-//    	System.out.println("Parts: " + parts);
-    	
-      return ret;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseTupleLiteralExpXS(tudresden.ocl20.pivot.xocl.TupleLiteralExpXS)
+     */
+    @Override
+    public OclExpression caseTupleLiteralExpXS(TupleLiteralExpXS expression) {
+      List<TupleLiteralPart> parts = new ArrayList<TupleLiteralPart>(expression.getPart().size());
+
+      for (TupleLiteralPartXS part : expression.getPart()) {
+        parts.add(getModelFactory().createTupleLiteralPart(part.getName(),
+            tokenizePathName(part.getTypeName()),doSwitch(part.getValue())));
+      }
+
+      return getModelFactory().createTupleLiteralExp(parts.toArray(new TupleLiteralPart[0]));
     }
 
-    public OclExpression caseBooleanLiteralExpXS(BooleanLiteralExpXS expression) {
-    	return getModelFactory().createBooleanLiteralExp(expression.isBooleanSymbol());
-    }
-    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseIteratorExpXS(tudresden.ocl20.pivot.xocl.IteratorExpXS)
+     */
+    @Override
     public OclExpression caseIteratorExpXS(IteratorExpXS expression) {
-    	OclExpression ret = null;
-    	
-    	System.out.println("BodyExpXS: " + expression.getBody());
-    	OclExpression body = doSwitch((EObject)expression.getBody());
-    	System.out.println("Body: " + body);
-    	
-    	OclExpression source = doSwitch((EObject)expression.getSource());
-    	System.out.println("Source: " + source);
-    	
-    	System.out.println("Name: " + expression.getName());
-    	
-    	System.out.println("Iterator: " + expression.getIterator());
-    	List<Variable> vars = new ArrayList<Variable>(expression.getIterator().size());
-    	Iterator<VariableXS> it = expression.getIterator().iterator();
-    	while (it.hasNext())
-    		vars.add((Variable)doSwitch(it.next()));
-    	
-    	ret = getModelFactory().createIteratorExp(source, expression.getName().getName(), 
-    			body, vars.toArray(new Variable[0]));
-    	System.out.println("IteratorExp: " + ret);
-    			
-    	ret = null;
-    	return ret;
+      List<Variable> iteratorVars = new ArrayList<Variable>(expression.getIterator().size());
+
+      for (VariableXS variableXS : expression.getIterator()) {
+        Variable iteratorVariable = createVariable(variableXS,this);
+        iteratorVars.add(iteratorVariable);
+
+        // add the iterator variable temporarily to the list of variables available to the parser
+        variables.put(variableXS,iteratorVariable);
+      }
+
+      // parse the source and body expression
+      OclExpression source = doSwitch(expression.getSource());
+      OclExpression body = doSwitch(expression.getBody());
+
+      // remove the iterator variables again from the parser map
+      for (VariableXS variableXS : expression.getIterator()) {
+        variables.remove(variableXS);
+      }
+
+      return getModelFactory().createIteratorExp(source,expression.getName().toString(),body,
+          iteratorVars.toArray(new Variable[iteratorVars.size()]));
     }
-    
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseInvalidLiteralExpXS(tudresden.ocl20.pivot.xocl.InvalidLiteralExpXS)
+     */
+    @Override
+    @SuppressWarnings("unused")
     public OclExpression caseInvalidLiteralExpXS(InvalidLiteralExpXS expression) {
-    	OclExpression ret = getModelFactory().createInvalidLiteralExp();
-    	
-    	return ret;
+      return getModelFactory().createInvalidLiteralExp();
     }
-    
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseUndefinedLiteralExpXS(tudresden.ocl20.pivot.xocl.UndefinedLiteralExpXS)
+     */
+    @Override
+    @SuppressWarnings("unused")
     public OclExpression caseUndefinedLiteralExpXS(UndefinedLiteralExpXS expression) {
-    	OclExpression ret = getModelFactory().createUndefinedLiteralExp();
-    	
-    	return ret;
+      return getModelFactory().createUndefinedLiteralExp();
     }
-    
+
     /**
      * Helper method to create an OCL abstract syntax {@link CollectionItem} from an XOCL
      * {@link CollectionItemXS}.
@@ -391,26 +429,6 @@ public class XOCLParser implements IOclParser {
       }
 
       return kind;
-    }
-    
-    public OclExpression caseLetExpXS(LetExpXS expression) {
-      VariableXS variableXS = expression.getVariable();
-
-      if (variableXS == null) {
-        throw new IllegalArgumentException(
-            "The referred variable of a VariableExp must not be null."); //$NON-NLS-1$
-      }
-
-      Variable variable = variables.get(expression.getVariable());
-      
-      if (variable == null) {
-        variable = createVariable(variableXS, this);
-        variables.put(variableXS, variable);
-      }
-      
-      OclExpression exp = doSwitch((EObject)expression.getIn());
-
-      return getModelFactory().createLetExp(variable, exp);
     }
 
   }
@@ -760,7 +778,7 @@ public class XOCLParser implements IOclParser {
     }
 
     Type type;
-    
+
     try {
       type = model.findType(pathName);
     }
