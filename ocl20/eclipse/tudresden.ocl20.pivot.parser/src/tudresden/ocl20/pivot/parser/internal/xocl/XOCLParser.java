@@ -41,6 +41,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -785,7 +787,7 @@ public class XOCLParser implements IOclParser {
 
     catch (ModelAccessException e) {
       logger.error("findType(pathName=" + pathName + ")",e); //$NON-NLS-1$//$NON-NLS-2$
-      throw new IllegalArgumentException("An error occured when accessing model '" //$NON-NLS-1$
+      throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
           + model.getDisplayName() + "'."); //$NON-NLS-1$
     }
 
@@ -800,16 +802,94 @@ public class XOCLParser implements IOclParser {
    * Helper method to find a property in the associated model.
    */
   protected Property findProperty(List<String> pathName) {
-    // TODO: implement lookup of properties
-    return null;
+    if (logger.isDebugEnabled()) {
+      logger.debug("findProperty(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    Type contextualType;
+    Property property;
+
+    // find the contextual type
+    contextualType = findContextualType(pathName);
+
+    // lookup the property
+    property = contextualType.lookupProperty(pathName.get(pathName.size() - 1));
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("findProperty() - exit - return value=" + property); //$NON-NLS-1$
+    }
+
+    return property;
   }
 
   /**
    * Helper method to find an operation in the associated model.
    */
   protected Operation findOperation(List<String> pathName) {
-    // TODO: implement lookup of operations
-    return null;
+    Type contextualType;
+    Operation operation = null;
+
+    // find the contextual type
+    contextualType = findContextualType(pathName);
+
+    // instantiate a regular expression to match operations and extract their names and parameters
+    // (for more information on this pattern, see ExpressionInOclXSImpl.getOperationPattern)
+    Pattern operationPattern = Pattern
+        .compile("(\\w+)(\\(\\s*(?:(?:\\w+\\s*:\\s*\\w+,\\s*)*\\w+\\s*:\\s*\\w+)?\\s*\\))\\s*(?::\\s*(\\w+))?"); //$NON-NLS-1$
+    Matcher matcher = operationPattern.matcher(pathName.get(pathName.size() - 1));
+
+    // if the syntax of the operation signature is valid, extract relevant parts
+    if (matcher.matches()) {
+      String operationName;
+      String[] parameterTypeNames;
+      List<Type> parameterTypes;
+
+      // the operation name is in the first capture group
+      operationName = matcher.group(1);
+
+      // the parameters are in the second capture group
+      String parameters = matcher.group(2);
+
+      // trim leading and trailing parenthesis
+      parameters = parameters.substring(1,parameters.length() - 1);
+
+      // tokenize around the commas to get the parameter names and types
+      String[] parametersArray = parameters.split("\\s*,\\s*"); //$NON-NLS-1$
+
+      // collect the parameter types
+      for (int i = 0; i < parametersArray.length; i++) {
+        parametersArray[i] = parametersArray[i].substring(parametersArray[i].indexOf(':') + 1);
+      }
+
+      // assign the parameter types array
+      parameterTypeNames = parametersArray;
+
+      // find the parameter types
+      parameterTypes = new ArrayList<Type>(parameterTypeNames.length);
+
+      for (String typeName : parameterTypeNames) {
+        parameterTypes.add(findType(tokenizePathName(typeName)));
+      }
+
+      // lookup the operation
+      operation = contextualType.lookupOperation(operationName,parameterTypes);
+    }
+
+    return operation;
+  }
+
+  /**
+   * Helper method to find the contextual type of an operation or property constraint.
+   */
+  private Type findContextualType(List<String> pathName) {
+    Type contextualType = findType(pathName.subList(0,pathName.size() - 1));
+
+    if (contextualType == null) {
+      throw new IllegalArgumentException(
+          "Unable to find the contextual type for constrained element " + pathName); //$NON-NLS-1$
+    }
+
+    return contextualType;
   }
 
   /**
