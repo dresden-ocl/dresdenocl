@@ -118,6 +118,10 @@ public class EcoreAdapterFactory {
    */
   public Type createType(EClassifier eClassifier) {
     Type type;
+    
+    if (eClassifier == null) {
+      return null;
+    }
 
     if (eClassifier instanceof EClass) {
       type = createType((EClass) eClassifier);
