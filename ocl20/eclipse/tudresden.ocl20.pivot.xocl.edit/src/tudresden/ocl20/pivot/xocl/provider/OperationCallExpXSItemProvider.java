@@ -149,10 +149,6 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
     // get the string for the source expression
     OclExpressionXS source = operationCallExp.getSource();
 
-    if (source != null) {
-      label.append(getLabel(source));
-    }
-
     // get the referred operation
     String referredOperation = getReferredOperationName(operationCallExp);
 
@@ -160,9 +156,11 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
 
       if (isUnary(operationCallExp)) {
         label.append(referredOperation).append(' ');
+        label.append(getLabel(source));
       }
       
       else if (isInfix(operationCallExp)) {
+        label.append(getLabel(source));
         label.append(' ').append(referredOperation).append(' ');
 
         if (operationCallExp.getArgument().size() == 1) {
