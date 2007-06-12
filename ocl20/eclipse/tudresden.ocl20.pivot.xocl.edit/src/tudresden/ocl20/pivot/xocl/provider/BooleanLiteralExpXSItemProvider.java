@@ -46,7 +46,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.xocl.BooleanLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
@@ -117,23 +116,24 @@ public class BooleanLiteralExpXSItemProvider extends PrimitiveLiteralExpXSItemPr
   }
 
   /**
-   * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Adapted EMF implementation to reflect OCL concrete syntax.
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    BooleanLiteralExpXS booleanLiteralExpXS = (BooleanLiteralExpXS) object;
-    return getString("_UI_BooleanLiteralExpXS_type") + " " + booleanLiteralExpXS.isBooleanSymbol(); //$NON-NLS-1$ //$NON-NLS-2$
+    return String.valueOf(((BooleanLiteralExpXS) object).isBooleanSymbol());
   }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   *
+   * <p>
+   * Adapted to update the entire expression tree if the boolean symbol changes.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -141,7 +141,7 @@ public class BooleanLiteralExpXSItemProvider extends PrimitiveLiteralExpXSItemPr
 
     switch (notification.getFeatureID(BooleanLiteralExpXS.class)) {
       case XOCLPackage.BOOLEAN_LITERAL_EXP_XS__BOOLEAN_SYMBOL:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
+        updateLabel(notification);
         return;
     }
     super.notifyChanged(notification);
