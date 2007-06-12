@@ -190,9 +190,9 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   @Override
   @SuppressWarnings("unused")
   protected boolean isInfix(OperationCallExpXS operationCallExp) {
-    return operationCallExp.getArgument().size() == 1
-        && infixOperations.contains(((ModelOperationCallExpXS) operationCallExp)
-            .getReferredOperationName());
+    String operationName = ((ModelOperationCallExpXS) operationCallExp).getReferredOperationName();
+    return infixOperations.contains(operationName)
+        && !(operationName.equals("-") && operationCallExp.getArgument().size() == 0); //$NON-NLS-1$
   }
 
   /*
