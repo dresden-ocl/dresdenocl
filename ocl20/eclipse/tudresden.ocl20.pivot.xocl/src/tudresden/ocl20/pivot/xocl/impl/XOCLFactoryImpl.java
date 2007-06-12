@@ -127,6 +127,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
         return createExpressionInOclXS();
       case XOCLPackage.VARIABLE_XS:
         return createVariableXS();
+      case XOCLPackage.PROPERTY_CALL_EXP_XS:
+        return createPropertyCallExpXS();
       case XOCLPackage.BOOLEAN_LITERAL_EXP_XS:
         return createBooleanLiteralExpXS();
       case XOCLPackage.COLLECTION_ITEM_XS:
@@ -153,8 +155,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
         return createLetExpXS();
       case XOCLPackage.MODEL_OPERATION_CALL_EXP_XS:
         return createModelOperationCallExpXS();
-      case XOCLPackage.PROPERTY_CALL_EXP_XS:
-        return createPropertyCallExpXS();
+      case XOCLPackage.NAMESPACE_XS:
+        return createNamespaceXS();
       case XOCLPackage.REAL_LITERAL_EXP_XS:
         return createRealLiteralExpXS();
       case XOCLPackage.STATIC_OPERATION_CALL_EXP_XS:
@@ -175,8 +177,6 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
         return createUnlimitedNaturalExpXS();
       case XOCLPackage.VARIABLE_EXP_XS:
         return createVariableExpXS();
-      case XOCLPackage.NAMESPACE_XS:
-        return createNamespaceXS();
       default:
         throw new IllegalArgumentException(
             "The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$

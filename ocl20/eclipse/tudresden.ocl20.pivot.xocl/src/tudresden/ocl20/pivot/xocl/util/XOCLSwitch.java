@@ -136,6 +136,15 @@ public class XOCLSwitch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case XOCLPackage.PROPERTY_CALL_EXP_XS: {
+        PropertyCallExpXS propertyCallExpXS = (PropertyCallExpXS) theEObject;
+        T result = casePropertyCallExpXS(propertyCallExpXS);
+        if (result == null) result = caseFeatureCallExpXS(propertyCallExpXS);
+        if (result == null) result = caseCallExpXS(propertyCallExpXS);
+        if (result == null) result = caseOclExpressionXS(propertyCallExpXS);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case XOCLPackage.BOOLEAN_LITERAL_EXP_XS: {
         BooleanLiteralExpXS booleanLiteralExpXS = (BooleanLiteralExpXS) theEObject;
         T result = caseBooleanLiteralExpXS(booleanLiteralExpXS);
@@ -281,6 +290,12 @@ public class XOCLSwitch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case XOCLPackage.NAMESPACE_XS: {
+        NamespaceXS namespaceXS = (NamespaceXS) theEObject;
+        T result = caseNamespaceXS(namespaceXS);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case XOCLPackage.NUMERIC_LITERAL_EXP_XS: {
         NumericLiteralExpXS numericLiteralExpXS = (NumericLiteralExpXS) theEObject;
         T result = caseNumericLiteralExpXS(numericLiteralExpXS);
@@ -304,15 +319,6 @@ public class XOCLSwitch<T> {
         T result = casePrimitiveLiteralExpXS(primitiveLiteralExpXS);
         if (result == null) result = caseLiteralExpXS(primitiveLiteralExpXS);
         if (result == null) result = caseOclExpressionXS(primitiveLiteralExpXS);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case XOCLPackage.PROPERTY_CALL_EXP_XS: {
-        PropertyCallExpXS propertyCallExpXS = (PropertyCallExpXS) theEObject;
-        T result = casePropertyCallExpXS(propertyCallExpXS);
-        if (result == null) result = caseFeatureCallExpXS(propertyCallExpXS);
-        if (result == null) result = caseCallExpXS(propertyCallExpXS);
-        if (result == null) result = caseOclExpressionXS(propertyCallExpXS);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -400,12 +406,6 @@ public class XOCLSwitch<T> {
         VariableExpXS variableExpXS = (VariableExpXS) theEObject;
         T result = caseVariableExpXS(variableExpXS);
         if (result == null) result = caseOclExpressionXS(variableExpXS);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case XOCLPackage.NAMESPACE_XS: {
-        NamespaceXS namespaceXS = (NamespaceXS) theEObject;
-        T result = caseNamespaceXS(namespaceXS);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }

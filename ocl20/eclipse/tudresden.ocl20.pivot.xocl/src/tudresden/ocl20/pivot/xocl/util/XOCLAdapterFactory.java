@@ -119,6 +119,11 @@ public class XOCLAdapterFactory extends AdapterFactoryImpl {
     }
 
     @Override
+    public Adapter casePropertyCallExpXS(PropertyCallExpXS object) {
+      return createPropertyCallExpXSAdapter();
+    }
+
+    @Override
     public Adapter caseBooleanLiteralExpXS(BooleanLiteralExpXS object) {
       return createBooleanLiteralExpXSAdapter();
     }
@@ -209,6 +214,11 @@ public class XOCLAdapterFactory extends AdapterFactoryImpl {
     }
 
     @Override
+    public Adapter caseNamespaceXS(NamespaceXS object) {
+      return createNamespaceXSAdapter();
+    }
+
+    @Override
     public Adapter caseNumericLiteralExpXS(NumericLiteralExpXS object) {
       return createNumericLiteralExpXSAdapter();
     }
@@ -221,11 +231,6 @@ public class XOCLAdapterFactory extends AdapterFactoryImpl {
     @Override
     public Adapter casePrimitiveLiteralExpXS(PrimitiveLiteralExpXS object) {
       return createPrimitiveLiteralExpXSAdapter();
-    }
-
-    @Override
-    public Adapter casePropertyCallExpXS(PropertyCallExpXS object) {
-      return createPropertyCallExpXSAdapter();
     }
 
     @Override
@@ -276,11 +281,6 @@ public class XOCLAdapterFactory extends AdapterFactoryImpl {
     @Override
     public Adapter caseVariableExpXS(VariableExpXS object) {
       return createVariableExpXSAdapter();
-    }
-
-    @Override
-    public Adapter caseNamespaceXS(NamespaceXS object) {
-      return createNamespaceXSAdapter();
     }
 
     @Override

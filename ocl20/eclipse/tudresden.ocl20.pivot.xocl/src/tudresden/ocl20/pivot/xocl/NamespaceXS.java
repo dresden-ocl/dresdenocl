@@ -84,7 +84,6 @@ public interface NamespaceXS extends EObject {
   /**
    * Returns the value of the '<em><b>Owned Rule</b></em>' containment reference list.
    * The list contents are of type {@link tudresden.ocl20.pivot.xocl.ConstraintXS}.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.xocl.ConstraintXS#getNamespaceXS <em>Namespace XS</em>}'.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Owned Rule</em>' containment reference list isn't clear,
@@ -93,8 +92,7 @@ public interface NamespaceXS extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Owned Rule</em>' containment reference list.
    * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getNamespaceXS_OwnedRule()
-   * @see tudresden.ocl20.pivot.xocl.ConstraintXS#getNamespaceXS
-   * @model type="tudresden.ocl20.pivot.xocl.ConstraintXS" opposite="NamespaceXS" containment="true"
+   * @model type="tudresden.ocl20.pivot.xocl.ConstraintXS" containment="true"
    * @generated
    */
   EList<ConstraintXS> getOwnedRule();

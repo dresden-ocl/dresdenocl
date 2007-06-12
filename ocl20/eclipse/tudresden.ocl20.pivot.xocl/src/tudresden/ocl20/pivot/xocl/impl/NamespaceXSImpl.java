@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -92,7 +93,7 @@ public class NamespaceXSImpl extends EObjectImpl implements NamespaceXS {
    * @generated
    * @ordered
    */
-  protected EList<ConstraintXS> ownedRule = null;
+  protected EList<ConstraintXS> ownedRule;
 
   /**
    * <!-- begin-user-doc -->
@@ -142,27 +143,10 @@ public class NamespaceXSImpl extends EObjectImpl implements NamespaceXS {
    */
   public EList<ConstraintXS> getOwnedRule() {
     if (ownedRule == null) {
-      ownedRule = new EObjectContainmentWithInverseEList<ConstraintXS>(ConstraintXS.class,this,
-          XOCLPackage.NAMESPACE_XS__OWNED_RULE,XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS);
+      ownedRule = new EObjectContainmentEList<ConstraintXS>(ConstraintXS.class,this,
+          XOCLPackage.NAMESPACE_XS__OWNED_RULE);
     }
     return ownedRule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
-    switch (featureID) {
-      case XOCLPackage.NAMESPACE_XS__OWNED_RULE:
-        return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedRule()).basicAdd(
-            otherEnd,msgs);
-    }
-    return super.eInverseAdd(otherEnd,featureID,msgs);
   }
 
   /**

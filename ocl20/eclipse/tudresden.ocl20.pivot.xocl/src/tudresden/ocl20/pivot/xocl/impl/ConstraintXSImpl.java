@@ -56,8 +56,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ConstraintXSImpl#getName <em>Name</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ConstraintXSImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ConstraintXSImpl#getConstrainedElement <em>Constrained Element</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ConstraintXSImpl#getDefinedFeature <em>Defined Feature</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ConstraintXSImpl#getSpecification <em>Specification</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ConstraintXSImpl#getNamespaceXS <em>Namespace XS</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,6 +126,26 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
   protected String constrainedElement = CONSTRAINED_ELEMENT_EDEFAULT;
 
   /**
+   * The default value of the '{@link #getDefinedFeature() <em>Defined Feature</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDefinedFeature()
+   * @generated
+   * @ordered
+   */
+  protected static final String DEFINED_FEATURE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getDefinedFeature() <em>Defined Feature</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDefinedFeature()
+   * @generated
+   * @ordered
+   */
+  protected String definedFeature = DEFINED_FEATURE_EDEFAULT;
+
+  /**
    * The cached value of the '{@link #getSpecification() <em>Specification</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -133,7 +153,7 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
    * @generated
    * @ordered
    */
-  protected ExpressionInOclXS specification = null;
+  protected ExpressionInOclXS specification;
 
   /**
    * <!-- begin-user-doc -->
@@ -225,6 +245,28 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getDefinedFeature() {
+    return definedFeature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDefinedFeature(String newDefinedFeature) {
+    String oldDefinedFeature = definedFeature;
+    definedFeature = newDefinedFeature;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this,Notification.SET,
+          XOCLPackage.CONSTRAINT_XS__DEFINED_FEATURE,oldDefinedFeature,definedFeature));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ExpressionInOclXS getSpecification() {
     return specification;
   }
@@ -274,50 +316,6 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NamespaceXS getNamespaceXS() {
-    if (eContainerFeatureID != XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS) return null;
-    return (NamespaceXS) eContainer();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetNamespaceXS(NamespaceXS newNamespaceXS, NotificationChain msgs) {
-    msgs = eBasicSetContainer((InternalEObject) newNamespaceXS,
-        XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS,msgs);
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setNamespaceXS(NamespaceXS newNamespaceXS) {
-    if (newNamespaceXS != eInternalContainer()
-        || (eContainerFeatureID != XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS && newNamespaceXS != null)) {
-      if (EcoreUtil.isAncestor(this,newNamespaceXS))
-        throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
-      NotificationChain msgs = null;
-      if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
-      if (newNamespaceXS != null)
-        msgs = ((InternalEObject) newNamespaceXS).eInverseAdd(this,
-            XOCLPackage.NAMESPACE_XS__OWNED_RULE,NamespaceXS.class,msgs);
-      msgs = basicSetNamespaceXS(newNamespaceXS,msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS,
-          newNamespaceXS,newNamespaceXS));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
       NotificationChain msgs) {
@@ -327,9 +325,6 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
           msgs = ((InternalEObject) specification).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
               - XOCLPackage.CONSTRAINT_XS__SPECIFICATION,null,msgs);
         return basicSetSpecification((ExpressionInOclXS) otherEnd,msgs);
-      case XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS:
-        if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetNamespaceXS((NamespaceXS) otherEnd,msgs);
     }
     return super.eInverseAdd(otherEnd,featureID,msgs);
   }
@@ -345,25 +340,8 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
     switch (featureID) {
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:
         return basicSetSpecification(null,msgs);
-      case XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS:
-        return basicSetNamespaceXS(null,msgs);
     }
     return super.eInverseRemove(otherEnd,featureID,msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-    switch (eContainerFeatureID) {
-      case XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS:
-        return eInternalContainer().eInverseRemove(this,XOCLPackage.NAMESPACE_XS__OWNED_RULE,
-            NamespaceXS.class,msgs);
-    }
-    return super.eBasicRemoveFromContainerFeature(msgs);
   }
 
   /**
@@ -380,10 +358,10 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
         return getKind();
       case XOCLPackage.CONSTRAINT_XS__CONSTRAINED_ELEMENT:
         return getConstrainedElement();
+      case XOCLPackage.CONSTRAINT_XS__DEFINED_FEATURE:
+        return getDefinedFeature();
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:
         return getSpecification();
-      case XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS:
-        return getNamespaceXS();
     }
     return super.eGet(featureID,resolve,coreType);
   }
@@ -405,11 +383,11 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
       case XOCLPackage.CONSTRAINT_XS__CONSTRAINED_ELEMENT:
         setConstrainedElement((String) newValue);
         return;
+      case XOCLPackage.CONSTRAINT_XS__DEFINED_FEATURE:
+        setDefinedFeature((String) newValue);
+        return;
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:
         setSpecification((ExpressionInOclXS) newValue);
-        return;
-      case XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS:
-        setNamespaceXS((NamespaceXS) newValue);
         return;
     }
     super.eSet(featureID,newValue);
@@ -432,11 +410,11 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
       case XOCLPackage.CONSTRAINT_XS__CONSTRAINED_ELEMENT:
         setConstrainedElement(CONSTRAINED_ELEMENT_EDEFAULT);
         return;
+      case XOCLPackage.CONSTRAINT_XS__DEFINED_FEATURE:
+        setDefinedFeature(DEFINED_FEATURE_EDEFAULT);
+        return;
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:
         setSpecification((ExpressionInOclXS) null);
-        return;
-      case XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS:
-        setNamespaceXS((NamespaceXS) null);
         return;
     }
     super.eUnset(featureID);
@@ -457,10 +435,11 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
       case XOCLPackage.CONSTRAINT_XS__CONSTRAINED_ELEMENT:
         return CONSTRAINED_ELEMENT_EDEFAULT == null ? constrainedElement != null
             : !CONSTRAINED_ELEMENT_EDEFAULT.equals(constrainedElement);
+      case XOCLPackage.CONSTRAINT_XS__DEFINED_FEATURE:
+        return DEFINED_FEATURE_EDEFAULT == null ? definedFeature != null
+            : !DEFINED_FEATURE_EDEFAULT.equals(definedFeature);
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:
         return specification != null;
-      case XOCLPackage.CONSTRAINT_XS__NAMESPACE_XS:
-        return getNamespaceXS() != null;
     }
     return super.eIsSet(featureID);
   }
@@ -481,6 +460,8 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
     result.append(kind);
     result.append(", constrainedElement: "); //$NON-NLS-1$
     result.append(constrainedElement);
+    result.append(", definedFeature: "); //$NON-NLS-1$
+    result.append(definedFeature);
     result.append(')');
     return result.toString();
   }

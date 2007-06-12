@@ -88,6 +88,7 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
       addNamePropertyDescriptor(object);
       addKindPropertyDescriptor(object);
       addConstrainedElementPropertyDescriptor(object);
+      addDefinedFeaturePropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
   }
@@ -143,6 +144,24 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
             getString(
                 "_UI_PropertyDescriptor_description","_UI_ConstraintXS_constrainedElement_feature","_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             XOCLPackage.Literals.CONSTRAINT_XS__CONSTRAINED_ELEMENT,true,false,false,
+            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+  }
+
+  /**
+   * This adds a property descriptor for the Defined Feature feature.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected void addDefinedFeaturePropertyDescriptor(Object object) {
+    itemPropertyDescriptors
+        .add(createItemPropertyDescriptor(
+            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            getResourceLocator(),
+            getString("_UI_ConstraintXS_definedFeature_feature"), //$NON-NLS-1$
+            getString(
+                "_UI_PropertyDescriptor_description","_UI_ConstraintXS_definedFeature_feature","_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.CONSTRAINT_XS__DEFINED_FEATURE,true,false,false,
             ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
   }
 
@@ -265,6 +284,7 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
       case XOCLPackage.CONSTRAINT_XS__NAME:
       case XOCLPackage.CONSTRAINT_XS__KIND:
       case XOCLPackage.CONSTRAINT_XS__CONSTRAINED_ELEMENT:
+      case XOCLPackage.CONSTRAINT_XS__DEFINED_FEATURE:
         fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
         return;
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:

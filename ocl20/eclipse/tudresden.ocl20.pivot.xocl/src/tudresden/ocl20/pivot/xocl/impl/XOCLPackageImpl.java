@@ -489,8 +489,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getConstraintXS_Specification() {
-    return (EReference) constraintXSEClass.getEStructuralFeatures().get(3);
+  public EAttribute getConstraintXS_DefinedFeature() {
+    return (EAttribute) constraintXSEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -498,7 +498,7 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getConstraintXS_NamespaceXS() {
+  public EReference getConstraintXS_Specification() {
     return (EReference) constraintXSEClass.getEStructuralFeatures().get(4);
   }
 
@@ -1281,8 +1281,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
     createEAttribute(constraintXSEClass,CONSTRAINT_XS__NAME);
     createEAttribute(constraintXSEClass,CONSTRAINT_XS__KIND);
     createEAttribute(constraintXSEClass,CONSTRAINT_XS__CONSTRAINED_ELEMENT);
+    createEAttribute(constraintXSEClass,CONSTRAINT_XS__DEFINED_FEATURE);
     createEReference(constraintXSEClass,CONSTRAINT_XS__SPECIFICATION);
-    createEReference(constraintXSEClass,CONSTRAINT_XS__NAMESPACE_XS);
 
     expressionInOclXSEClass = createEClass(EXPRESSION_IN_OCL_XS);
     createEAttribute(expressionInOclXSEClass,EXPRESSION_IN_OCL_XS__BODY);
@@ -1298,6 +1298,10 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
     createEAttribute(variableXSEClass,VARIABLE_XS__NAME);
     createEAttribute(variableXSEClass,VARIABLE_XS__TYPE);
     createEReference(variableXSEClass,VARIABLE_XS__INIT_EXPRESSION);
+
+    propertyCallExpXSEClass = createEClass(PROPERTY_CALL_EXP_XS);
+    createEAttribute(propertyCallExpXSEClass,PROPERTY_CALL_EXP_XS__REFERRED_PROPERTY_NAME);
+    createEReference(propertyCallExpXSEClass,PROPERTY_CALL_EXP_XS__QUALIFIER);
 
     booleanLiteralExpXSEClass = createEClass(BOOLEAN_LITERAL_EXP_XS);
     createEAttribute(booleanLiteralExpXSEClass,BOOLEAN_LITERAL_EXP_XS__BOOLEAN_SYMBOL);
@@ -1357,16 +1361,16 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
     createEAttribute(modelOperationCallExpXSEClass,
         MODEL_OPERATION_CALL_EXP_XS__REFERRED_OPERATION_NAME);
 
+    namespaceXSEClass = createEClass(NAMESPACE_XS);
+    createEAttribute(namespaceXSEClass,NAMESPACE_XS__PATH_NAME);
+    createEReference(namespaceXSEClass,NAMESPACE_XS__OWNED_RULE);
+
     numericLiteralExpXSEClass = createEClass(NUMERIC_LITERAL_EXP_XS);
 
     operationCallExpXSEClass = createEClass(OPERATION_CALL_EXP_XS);
     createEReference(operationCallExpXSEClass,OPERATION_CALL_EXP_XS__ARGUMENT);
 
     primitiveLiteralExpXSEClass = createEClass(PRIMITIVE_LITERAL_EXP_XS);
-
-    propertyCallExpXSEClass = createEClass(PROPERTY_CALL_EXP_XS);
-    createEAttribute(propertyCallExpXSEClass,PROPERTY_CALL_EXP_XS__REFERRED_PROPERTY_NAME);
-    createEReference(propertyCallExpXSEClass,PROPERTY_CALL_EXP_XS__QUALIFIER);
 
     realLiteralExpXSEClass = createEClass(REAL_LITERAL_EXP_XS);
     createEAttribute(realLiteralExpXSEClass,REAL_LITERAL_EXP_XS__REAL_SYMBOL);
@@ -1396,10 +1400,6 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
 
     variableExpXSEClass = createEClass(VARIABLE_EXP_XS);
     createEReference(variableExpXSEClass,VARIABLE_EXP_XS__REFERRED_VARIABLE);
-
-    namespaceXSEClass = createEClass(NAMESPACE_XS);
-    createEAttribute(namespaceXSEClass,NAMESPACE_XS__PATH_NAME);
-    createEReference(namespaceXSEClass,NAMESPACE_XS__OWNED_RULE);
 
     // Create enums
     constraintKindXSEEnum = createEEnum(CONSTRAINT_KIND_XS);
@@ -1436,6 +1436,7 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    propertyCallExpXSEClass.getESuperTypes().add(this.getFeatureCallExpXS());
     booleanLiteralExpXSEClass.getESuperTypes().add(this.getPrimitiveLiteralExpXS());
     callExpXSEClass.getESuperTypes().add(this.getOclExpressionXS());
     collectionItemXSEClass.getESuperTypes().add(this.getCollectionLiteralPartXS());
@@ -1456,7 +1457,6 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
     numericLiteralExpXSEClass.getESuperTypes().add(this.getPrimitiveLiteralExpXS());
     operationCallExpXSEClass.getESuperTypes().add(this.getFeatureCallExpXS());
     primitiveLiteralExpXSEClass.getESuperTypes().add(this.getLiteralExpXS());
-    propertyCallExpXSEClass.getESuperTypes().add(this.getFeatureCallExpXS());
     realLiteralExpXSEClass.getESuperTypes().add(this.getNumericLiteralExpXS());
     staticOperationCallExpXSEClass.getESuperTypes().add(this.getModelOperationCallExpXS());
     staticPropertyCallExpXSEClass.getESuperTypes().add(this.getPropertyCallExpXS());
@@ -1482,16 +1482,15 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
         getConstraintXS_ConstrainedElement(),
         ecorePackage.getEString(),
         "constrainedElement",null,0,1,ConstraintXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEAttribute(
+        getConstraintXS_DefinedFeature(),
+        ecorePackage.getEString(),
+        "definedFeature",null,0,1,ConstraintXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getConstraintXS_Specification(),
         this.getExpressionInOclXS(),
         this.getExpressionInOclXS_Constraint(),
         "specification",null,0,1,ConstraintXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getConstraintXS_NamespaceXS(),
-        this.getNamespaceXS(),
-        this.getNamespaceXS_OwnedRule(),
-        "NamespaceXS",null,0,1,ConstraintXS.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(expressionInOclXSEClass,ExpressionInOclXS.class,
         "ExpressionInOclXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -1543,6 +1542,18 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
         this.getOclExpressionXS(),
         null,
         "initExpression",null,0,1,VariableXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
+    initEClass(propertyCallExpXSEClass,PropertyCallExpXS.class,
+        "PropertyCallExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEAttribute(
+        getPropertyCallExpXS_ReferredPropertyName(),
+        ecorePackage.getEString(),
+        "referredPropertyName",null,0,1,PropertyCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getPropertyCallExpXS_Qualifier(),
+        this.getOclExpressionXS(),
+        null,
+        "qualifier",null,0,-1,PropertyCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(booleanLiteralExpXSEClass,BooleanLiteralExpXS.class,
         "BooleanLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -1691,6 +1702,18 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
         ecorePackage.getEString(),
         "referredOperationName",null,0,1,ModelOperationCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
+    initEClass(namespaceXSEClass,NamespaceXS.class,
+        "NamespaceXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEAttribute(
+        getNamespaceXS_PathName(),
+        ecorePackage.getEString(),
+        "pathName",null,0,1,NamespaceXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEReference(
+        getNamespaceXS_OwnedRule(),
+        this.getConstraintXS(),
+        null,
+        "ownedRule",null,0,-1,NamespaceXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+
     initEClass(numericLiteralExpXSEClass,NumericLiteralExpXS.class,
         "NumericLiteralExpXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
@@ -1704,18 +1727,6 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
 
     initEClass(primitiveLiteralExpXSEClass,PrimitiveLiteralExpXS.class,
         "PrimitiveLiteralExpXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-
-    initEClass(propertyCallExpXSEClass,PropertyCallExpXS.class,
-        "PropertyCallExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEAttribute(
-        getPropertyCallExpXS_ReferredPropertyName(),
-        ecorePackage.getEString(),
-        "referredPropertyName",null,0,1,PropertyCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getPropertyCallExpXS_Qualifier(),
-        this.getOclExpressionXS(),
-        null,
-        "qualifier",null,0,-1,PropertyCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     initEClass(realLiteralExpXSEClass,RealLiteralExpXS.class,
         "RealLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -1785,18 +1796,6 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
         this.getVariableXS(),
         null,
         "referredVariable",null,0,1,VariableExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-
-    initEClass(namespaceXSEClass,NamespaceXS.class,
-        "NamespaceXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEAttribute(
-        getNamespaceXS_PathName(),
-        ecorePackage.getEString(),
-        "pathName",null,0,1,NamespaceXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEReference(
-        getNamespaceXS_OwnedRule(),
-        this.getConstraintXS(),
-        this.getConstraintXS_NamespaceXS(),
-        "ownedRule",null,0,-1,NamespaceXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
 
     // Initialize enums and add enum literals
     initEEnum(constraintKindXSEEnum,ConstraintKindXS.class,"ConstraintKindXS"); //$NON-NLS-1$

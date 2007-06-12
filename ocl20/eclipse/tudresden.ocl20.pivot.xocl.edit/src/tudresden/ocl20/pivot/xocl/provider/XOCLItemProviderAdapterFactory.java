@@ -848,6 +848,7 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
     if (constraintXSItemProvider != null) constraintXSItemProvider.dispose();
     if (expressionInOclXSItemProvider != null) expressionInOclXSItemProvider.dispose();
     if (variableXSItemProvider != null) variableXSItemProvider.dispose();
+    if (propertyCallExpXSItemProvider != null) propertyCallExpXSItemProvider.dispose();
     if (booleanLiteralExpXSItemProvider != null) booleanLiteralExpXSItemProvider.dispose();
     if (collectionItemXSItemProvider != null) collectionItemXSItemProvider.dispose();
     if (collectionLiteralExpXSItemProvider != null) collectionLiteralExpXSItemProvider.dispose();
@@ -862,7 +863,7 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
     if (iteratorExpXSItemProvider != null) iteratorExpXSItemProvider.dispose();
     if (letExpXSItemProvider != null) letExpXSItemProvider.dispose();
     if (modelOperationCallExpXSItemProvider != null) modelOperationCallExpXSItemProvider.dispose();
-    if (propertyCallExpXSItemProvider != null) propertyCallExpXSItemProvider.dispose();
+    if (namespaceXSItemProvider != null) namespaceXSItemProvider.dispose();
     if (realLiteralExpXSItemProvider != null) realLiteralExpXSItemProvider.dispose();
     if (staticOperationCallExpXSItemProvider != null)
       staticOperationCallExpXSItemProvider.dispose();
@@ -874,7 +875,6 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
     if (undefinedLiteralExpXSItemProvider != null) undefinedLiteralExpXSItemProvider.dispose();
     if (unlimitedNaturalExpXSItemProvider != null) unlimitedNaturalExpXSItemProvider.dispose();
     if (variableExpXSItemProvider != null) variableExpXSItemProvider.dispose();
-    if (namespaceXSItemProvider != null) namespaceXSItemProvider.dispose();
   }
 
 }

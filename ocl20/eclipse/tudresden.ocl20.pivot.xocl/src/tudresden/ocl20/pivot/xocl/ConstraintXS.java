@@ -45,8 +45,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tudresden.ocl20.pivot.xocl.ConstraintXS#getName <em>Name</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.xocl.ConstraintXS#getKind <em>Kind</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.xocl.ConstraintXS#getConstrainedElement <em>Constrained Element</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.ConstraintXS#getDefinedFeature <em>Defined Feature</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.xocl.ConstraintXS#getSpecification <em>Specification</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.ConstraintXS#getNamespaceXS <em>Namespace XS</em>}</li>
  * </ul>
  * </p>
  *
@@ -138,6 +138,32 @@ public interface ConstraintXS extends EObject {
   void setConstrainedElement(String value);
 
   /**
+   * Returns the value of the '<em><b>Defined Feature</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Defined Feature</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Defined Feature</em>' attribute.
+   * @see #setDefinedFeature(String)
+   * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getConstraintXS_DefinedFeature()
+   * @model
+   * @generated
+   */
+  String getDefinedFeature();
+
+  /**
+   * Sets the value of the '{@link tudresden.ocl20.pivot.xocl.ConstraintXS#getDefinedFeature <em>Defined Feature</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Defined Feature</em>' attribute.
+   * @see #getDefinedFeature()
+   * @generated
+   */
+  void setDefinedFeature(String value);
+
+  /**
    * Returns the value of the '<em><b>Specification</b></em>' containment reference.
    * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.xocl.ExpressionInOclXS#getConstraint <em>Constraint</em>}'.
    * <!-- begin-user-doc -->
@@ -164,33 +190,5 @@ public interface ConstraintXS extends EObject {
    * @generated
    */
   void setSpecification(ExpressionInOclXS value);
-
-  /**
-   * Returns the value of the '<em><b>Namespace XS</b></em>' container reference.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.xocl.NamespaceXS#getOwnedRule <em>Owned Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Namespace XS</em>' container reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Namespace XS</em>' container reference.
-   * @see #setNamespaceXS(NamespaceXS)
-   * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getConstraintXS_NamespaceXS()
-   * @see tudresden.ocl20.pivot.xocl.NamespaceXS#getOwnedRule
-   * @model opposite="ownedRule"
-   * @generated
-   */
-  NamespaceXS getNamespaceXS();
-
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.xocl.ConstraintXS#getNamespaceXS <em>Namespace XS</em>}' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Namespace XS</em>' container reference.
-   * @see #getNamespaceXS()
-   * @generated
-   */
-  void setNamespaceXS(NamespaceXS value);
 
 } // ConstraintXS

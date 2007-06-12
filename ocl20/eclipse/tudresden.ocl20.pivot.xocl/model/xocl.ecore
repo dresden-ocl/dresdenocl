@@ -7,10 +7,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ConstraintKindXS"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constrainedElement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="definedFeature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//ExpressionInOclXS"
         containment="true" eOpposite="#//ExpressionInOclXS/constraint"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="NamespaceXS" eType="#//NamespaceXS"
-        transient="true" eOpposite="#//NamespaceXS/ownedRule"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ConstraintKindXS">
     <eLiterals name="invariant"/>
@@ -123,7 +122,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="NamespaceXS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRule" upperBound="-1"
-        eType="#//ConstraintXS" containment="true" eOpposite="#//ConstraintXS/NamespaceXS"/>
+        eType="#//ConstraintXS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumericLiteralExpXS" abstract="true"
       eSuperTypes="#//PrimitiveLiteralExpXS"/>
