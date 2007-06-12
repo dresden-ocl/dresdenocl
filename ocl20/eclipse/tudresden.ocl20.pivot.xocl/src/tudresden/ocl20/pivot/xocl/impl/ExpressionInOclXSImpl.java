@@ -65,23 +65,23 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getBody <em>Body</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getConstraint <em>Constraint</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getBodyExpression <em>Body Expression</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getContext <em>Context</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getParameter <em>Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getResult <em>Result</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getBody <em>Body</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getConstraint <em>Constraint</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getBodyExpression <em>Body Expression</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getContext <em>Context</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getParameter <em>Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOclXS {
 
   /**
-   * The default value of the '{@link #getBody() <em>Body</em>}' attribute.
-   * <!-- begin-user-doc
+   * The default value of the '{@link #getBody() <em>Body</em>}' attribute. <!-- begin-user-doc
    * --> <!-- end-user-doc -->
+   * 
    * @see #getBody()
    * @generated
    * @ordered
@@ -89,9 +89,9 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
   protected static final String BODY_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getBody() <em>Body</em>}' attribute.
-   * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getBody() <em>Body</em>}' attribute. <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * 
    * @see #getBody()
    * @generated
    * @ordered
@@ -99,8 +99,9 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
   protected String body = BODY_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment reference.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getBodyExpression()
    * @generated
    * @ordered
@@ -118,8 +119,9 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
   protected VariableXS context = null;
 
   /**
-   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference list.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference
+   * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getParameter()
    * @generated
    * @ordered
@@ -143,6 +145,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected ExpressionInOclXSImpl() {
@@ -151,6 +154,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -160,6 +164,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public String getBody() {
@@ -168,6 +173,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setBody(String newBody) {
@@ -180,6 +186,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpressionXS getBodyExpression() {
@@ -188,6 +195,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetBodyExpression(OclExpressionXS newBodyExpression,
@@ -205,6 +213,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setBodyExpression(OclExpressionXS newBodyExpression) {
@@ -255,6 +264,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetContext(VariableXS newContext, NotificationChain msgs) {
@@ -271,6 +281,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setContext(VariableXS newContext) {
@@ -409,6 +420,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetResult(VariableXS newResult, NotificationChain msgs) {
@@ -425,6 +437,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setResult(VariableXS newResult) {
@@ -446,6 +459,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public ConstraintXS getConstraint() {
@@ -455,6 +469,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetConstraint(ConstraintXS newConstraint, NotificationChain msgs) {
@@ -465,6 +480,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setConstraint(ConstraintXS newConstraint) {
@@ -500,12 +516,11 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
   protected String getContextualType() {
     String contextualType;
 
-    if (isTypeConstraint()) {
-      contextualType = getConstrainedElement();
-    }
+    // initialize with the path of the constrained element
+    contextualType = getConstrainedElement();
 
-    else {
-      contextualType = getConstrainedElement();
+    // if this is a property or operation constraint
+    if (!isTypeConstraint()) {
 
       // the type is the part of the string before the last '::' characters
       if (contextualType != null) {
@@ -573,7 +588,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
         // the parameters are in the second capture group
         String parameters = matcher.group(2);
 
-        // no parameters
+        // no parameters, only leading and trailing parenthesis
         if (parameters.length() == 2) {
           return new String[][] {};
         }
@@ -585,7 +600,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
         String[] parametersArray = parameters.split("\\s*,\\s*"); //$NON-NLS-1$
 
         // collect the parameters and their types
-        List<String[]> parametersList = new ArrayList<String[]>(parameters.length());
+        List<String[]> parametersList = new ArrayList<String[]>(parametersArray.length);
 
         for (int i = 0; i < parametersArray.length; i++) {
           String[] parameter = parametersArray[i].trim().split("\\s*:\\s*"); //$NON-NLS-1$
@@ -604,12 +619,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
    */
   protected boolean isTypeConstraint() {
     ConstraintKindXS kind = getConstraint().getKind();
-
-    if (kind == ConstraintKindXS.INVARIANT || kind == ConstraintKindXS.DEFINITION) {
-      return true;
-    }
-
-    return false;
+    return kind == ConstraintKindXS.INVARIANT || kind == ConstraintKindXS.DEFINITION;
   }
 
   /**
@@ -617,12 +627,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
    */
   protected boolean isPropertyConstraint() {
     ConstraintKindXS kind = getConstraint().getKind();
-
-    if (kind == ConstraintKindXS.INITIALVALUE || kind == ConstraintKindXS.DERIVEDVALUE) {
-      return true;
-    }
-
-    return false;
+    return kind == ConstraintKindXS.INITIALVALUE || kind == ConstraintKindXS.DERIVEDVALUE;
   }
 
   /**
@@ -630,13 +635,8 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
    */
   protected boolean isOperationConstraint() {
     ConstraintKindXS kind = getConstraint().getKind();
-
-    if (kind == ConstraintKindXS.BODY || kind == ConstraintKindXS.PRECONDITION
-        || kind == ConstraintKindXS.POSTCONDITION) {
-      return true;
-    }
-
-    return false;
+    return kind == ConstraintKindXS.BODY || kind == ConstraintKindXS.PRECONDITION
+        || kind == ConstraintKindXS.POSTCONDITION;
   }
 
   /**
@@ -680,6 +680,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -695,6 +696,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -717,6 +719,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -731,6 +734,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -754,6 +758,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -785,6 +790,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -844,6 +850,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
