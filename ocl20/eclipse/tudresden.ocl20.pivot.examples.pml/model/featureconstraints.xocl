@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xocl:NamespaceXS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xocl="http://www.tu-dresden.de/ocl20/pivot/2007/xocl" pathName="pml">
+  <ownedRule name="" kind="body" constrainedElement="Plugin::addExtensionPoint(point:ExtensionPoint) : Boolean">
+    <specification body="result = true">
+      <bodyExpression xsi:type="xocl:ModelOperationCallExpXS" referredOperationName="=">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.0/@specification/@result"/>
+        <argument xsi:type="xocl:BooleanLiteralExpXS" booleanSymbol="true"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule kind="initialvalue" constrainedElement="Plugin::id">
+    <specification body="1">
+      <bodyExpression xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+    </specification>
+  </ownedRule>
+</xocl:NamespaceXS>
