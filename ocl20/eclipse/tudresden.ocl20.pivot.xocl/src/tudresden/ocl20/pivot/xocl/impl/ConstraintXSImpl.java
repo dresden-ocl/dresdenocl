@@ -38,12 +38,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import tudresden.ocl20.pivot.xocl.ConstraintKindXS;
 import tudresden.ocl20.pivot.xocl.ConstraintXS;
 import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
-import tudresden.ocl20.pivot.xocl.NamespaceXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**

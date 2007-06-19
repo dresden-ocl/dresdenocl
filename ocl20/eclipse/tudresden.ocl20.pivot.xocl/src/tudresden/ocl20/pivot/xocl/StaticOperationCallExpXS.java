@@ -32,9 +32,6 @@
  */
 package tudresden.ocl20.pivot.xocl;
 
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

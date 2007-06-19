@@ -1,10 +1,8 @@
 package tudresden.ocl20.pivot.parser.ui.test;
 
-import org.apache.log4j.Logger;
-
-import java.io.IOException;
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;

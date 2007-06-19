@@ -39,7 +39,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import tudresden.ocl20.pivot.xocl.*;
 import tudresden.ocl20.pivot.xocl.BooleanLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.CollectionItemXS;
 import tudresden.ocl20.pivot.xocl.CollectionKindXS;

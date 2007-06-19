@@ -34,15 +34,41 @@ package tudresden.ocl20.pivot.essentialocl.expressions.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.*;
-
+import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.CallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange;
+import tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
+import tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.IfExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.LoopExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
+import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
+import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-
 import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;

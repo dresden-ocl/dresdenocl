@@ -32,8 +32,6 @@
  */
 package tudresden.ocl20.pivot.pivotmodel.tests;
 
-import junit.framework.TestCase;
-
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 
 /**

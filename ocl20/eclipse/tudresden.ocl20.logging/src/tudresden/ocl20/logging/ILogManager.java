@@ -1,5 +1,6 @@
 package tudresden.ocl20.logging;
 
+import org.apache.log4j.Hierarchy;
 import org.apache.log4j.Logger;
 
 /**
