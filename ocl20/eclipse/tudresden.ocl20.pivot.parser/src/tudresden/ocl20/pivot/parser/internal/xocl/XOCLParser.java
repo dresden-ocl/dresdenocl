@@ -653,8 +653,8 @@ public class XOCLParser implements IOclParser {
     catch (Exception e) {
       logger.error("createConstraint(constraintXS=" + constraintXS + ", packageName=" + packageName //$NON-NLS-1$ //$NON-NLS-2$
           + ")",e); //$NON-NLS-1$
-      throw new ParseException("An error occured while parsing constraint '" //$NON-NLS-1$
-          + constraintXS.getName() + "'.",e); //$NON-NLS-1$
+      throw new ParseException("Error in constraint '" + constraintXS.getName() + "': "  //$NON-NLS-1$//$NON-NLS-2$
+          + e.getMessage(),e);
     }
 
     if (logger.isDebugEnabled()) {
@@ -812,8 +812,19 @@ public class XOCLParser implements IOclParser {
     // find the contextual type
     contextualType = findContextualType(pathName);
 
+    // split off the type of the property if existent
+    String propertyName = pathName.get(pathName.size() - 1);
+    int typeSeparatorIndex = propertyName.indexOf(':');
+
+    if (typeSeparatorIndex > 0) {
+      propertyName = propertyName.substring(0,typeSeparatorIndex);
+    }
+
     // lookup the property
-    property = contextualType.lookupProperty(pathName.get(pathName.size() - 1));
+    property = contextualType.lookupProperty(propertyName);
+
+    // TODO: theoretically, we should check whether the declared type equals the actual type
+    // but in this prototypical parser, we do without it
 
     if (logger.isDebugEnabled()) {
       logger.debug("findProperty() - exit - return value=" + property); //$NON-NLS-1$
