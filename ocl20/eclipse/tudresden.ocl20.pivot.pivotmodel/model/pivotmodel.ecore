@@ -44,7 +44,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="genericType" eType="#//GenericType"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="#//TypedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="#//TypedElement #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;p>&#xD;&#xA;An additional metaclass in comparison with &#xD;&#xA;UML::Core::Basic, a &lt;code>Feature&lt;/code> introduces &#xD;&#xA;the notion of a class-scope (i.e. static) feature in a {@link &#xD;&#xA;Type}.&#xD;&#xA;&lt;/p>"/>
     </eAnnotations>

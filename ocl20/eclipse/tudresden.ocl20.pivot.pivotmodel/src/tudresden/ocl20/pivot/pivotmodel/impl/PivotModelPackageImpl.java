@@ -307,13 +307,40 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int FEATURE__GENERIC_TYPE = TYPED_ELEMENT__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ordered</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE__ORDERED = TYPED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Unique</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE__UNIQUE = TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Multiple</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int FEATURE__MULTIPLE = TYPED_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
    * The feature id for the '<em><b>Static</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int FEATURE__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 0;
+  public static final int FEATURE__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Feature</em>' class.
@@ -322,7 +349,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int FEATURE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
+  public static final int FEATURE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl <em>Operation</em>}' class.
@@ -984,6 +1011,33 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int PROPERTY__GENERIC_TYPE = FEATURE__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ordered</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROPERTY__ORDERED = FEATURE__ORDERED;
+
+  /**
+   * The feature id for the '<em><b>Unique</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROPERTY__UNIQUE = FEATURE__UNIQUE;
+
+  /**
+   * The feature id for the '<em><b>Multiple</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROPERTY__MULTIPLE = FEATURE__MULTIPLE;
+
+  /**
    * The feature id for the '<em><b>Static</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -993,40 +1047,13 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int PROPERTY__STATIC = FEATURE__STATIC;
 
   /**
-   * The feature id for the '<em><b>Ordered</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PROPERTY__ORDERED = FEATURE_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Unique</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PROPERTY__UNIQUE = FEATURE_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Multiple</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int PROPERTY__MULTIPLE = FEATURE_FEATURE_COUNT + 2;
-
-  /**
    * The feature id for the '<em><b>Owning Type</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int PROPERTY__OWNING_TYPE = FEATURE_FEATURE_COUNT + 3;
+  public static final int PROPERTY__OWNING_TYPE = FEATURE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Property</em>' class.
@@ -1035,7 +1062,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 4;
+  public static final int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1083,6 +1110,33 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int OPERATION__GENERIC_TYPE = FEATURE__GENERIC_TYPE;
 
   /**
+   * The feature id for the '<em><b>Ordered</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int OPERATION__ORDERED = FEATURE__ORDERED;
+
+  /**
+   * The feature id for the '<em><b>Unique</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int OPERATION__UNIQUE = FEATURE__UNIQUE;
+
+  /**
+   * The feature id for the '<em><b>Multiple</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int OPERATION__MULTIPLE = FEATURE__MULTIPLE;
+
+  /**
    * The feature id for the '<em><b>Static</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1092,40 +1146,13 @@ public class PivotModelPackageImpl extends EPackageImpl {
   public static final int OPERATION__STATIC = FEATURE__STATIC;
 
   /**
-   * The feature id for the '<em><b>Ordered</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int OPERATION__ORDERED = FEATURE_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Unique</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int OPERATION__UNIQUE = FEATURE_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Multiple</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int OPERATION__MULTIPLE = FEATURE_FEATURE_COUNT + 2;
-
-  /**
    * The feature id for the '<em><b>Owned Type Parameter</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int OPERATION__OWNED_TYPE_PARAMETER = FEATURE_FEATURE_COUNT + 3;
+  public static final int OPERATION__OWNED_TYPE_PARAMETER = FEATURE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Owning Type</b></em>' container reference.
@@ -1134,7 +1161,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int OPERATION__OWNING_TYPE = FEATURE_FEATURE_COUNT + 4;
+  public static final int OPERATION__OWNING_TYPE = FEATURE_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
@@ -1143,7 +1170,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int OPERATION__OWNED_PARAMETER = FEATURE_FEATURE_COUNT + 5;
+  public static final int OPERATION__OWNED_PARAMETER = FEATURE_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Input Parameter</b></em>' reference list.
@@ -1152,7 +1179,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int OPERATION__INPUT_PARAMETER = FEATURE_FEATURE_COUNT + 6;
+  public static final int OPERATION__INPUT_PARAMETER = FEATURE_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Output Parameter</b></em>' reference list.
@@ -1161,7 +1188,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int OPERATION__OUTPUT_PARAMETER = FEATURE_FEATURE_COUNT + 7;
+  public static final int OPERATION__OUTPUT_PARAMETER = FEATURE_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Return Parameter</b></em>' reference.
@@ -1170,7 +1197,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int OPERATION__RETURN_PARAMETER = FEATURE_FEATURE_COUNT + 8;
+  public static final int OPERATION__RETURN_PARAMETER = FEATURE_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Signature Parameter</b></em>' reference list.
@@ -1179,7 +1206,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int OPERATION__SIGNATURE_PARAMETER = FEATURE_FEATURE_COUNT + 9;
+  public static final int OPERATION__SIGNATURE_PARAMETER = FEATURE_FEATURE_COUNT + 6;
 
   /**
    * The number of structural features of the '<em>Operation</em>' class.
@@ -1188,7 +1215,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 10;
+  public static final int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3025,6 +3052,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
     // Add supertypes to classes
     typedElementEClass.getESuperTypes().add(this.getNamedElement());
     featureEClass.getESuperTypes().add(this.getTypedElement());
+    featureEClass.getESuperTypes().add(this.getMultiplicityElement());
     genericElementEClass.getESuperTypes().add(this.getNamedElement());
     namespaceEClass.getESuperTypes().add(this.getNamedElement());
     namespaceEClass.getESuperTypes().add(this.getGenericElement());
