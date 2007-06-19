@@ -33,6 +33,7 @@
 package tudresden.ocl20.pivot.xocl.provider;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -68,9 +69,9 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   public OperationCallExpXSItemProvider(AdapterFactory adapterFactory) {
@@ -78,9 +79,9 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -112,6 +113,7 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -123,8 +125,8 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
   }
 
   /**
-   * This returns OperationCallExpXS.gif.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * This returns OperationCallExpXS.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -148,42 +150,52 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
 
     // get the string for the source expression
     OclExpressionXS source = operationCallExp.getSource();
+    String sourceLabel = source != null ? getLabel(source) : UNDEFINED;
 
     // get the referred operation
     String referredOperation = getReferredOperationName(operationCallExp);
 
-    if (StringUtils.isNotEmpty(referredOperation)) {
+    // if no operation has been defined yet, simply print the source label
+    if (StringUtils.isEmpty(referredOperation)) {
+      label.append(sourceLabel);
+    }
+
+    // else differentiate between different forms of operations
+    else {
 
       if (isUnary(operationCallExp)) {
         label.append(referredOperation).append(' ');
-        label.append(getLabel(source));
+        label.append(sourceLabel);
       }
-      
+
       else if (isInfix(operationCallExp)) {
-        label.append(getLabel(source));
+        label.append(sourceLabel);
         label.append(' ').append(referredOperation).append(' ');
 
         if (operationCallExp.getArgument().size() == 1) {
           label.append(getLabel(operationCallExp.getArgument().get(0)));
         }
+        
+        else {
+          label.append(UNDEFINED);
+        }
       }
 
       else {
 
-        // only append the delimiter if there is a source expression (there is none for static ops)
-        if (source != null) {
-          label.append(getOperationDelimiter());
-        }
-
-        // append the operation name
-        label.append(referredOperation);
+        // append the source label, the operation delimiter and the operation name
+        label.append(sourceLabel).append(getOperationDelimiter()).append(referredOperation);
 
         // append the parameters
         label.append('(');
 
-        for (OclExpressionXS argument : operationCallExp.getArgument()) {
-          String argumentValue = getLabel(argument);
+        for (Iterator<OclExpressionXS> it = operationCallExp.getArgument().iterator(); it.hasNext();) {
+          String argumentValue = getLabel(it.next());
           label.append(StringUtils.isNotEmpty(argumentValue) ? argumentValue : UNDEFINED);
+
+          if (it.hasNext()) {
+            label.append(',');
+          }
         }
 
         label.append(')');
@@ -191,7 +203,7 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
     }
 
     // if some parts are undefined return the default string
-    return label.length() != 0 ? label.toString() : getDefaultString();
+    return label.toString();
   }
 
   /**
@@ -201,8 +213,8 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
   protected abstract String getReferredOperationName(OperationCallExpXS operationCallExp);
 
   /**
-   * Helper method used by the template method {@link #getText(Object)}. Returns the delimiter
-   * used to separate the operation name from the source name.
+   * Helper method used by the template method {@link #getText(Object)}. Returns the delimiter used
+   * to separate the operation name from the source name.
    */
   protected abstract String getOperationDelimiter();
 
@@ -217,13 +229,6 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
    * associated operation is infix or not.
    */
   protected abstract boolean isInfix(OperationCallExpXS operationCallExp);
-
-  /**
-   * Helper method used by the template method {@link #getText(Object)}. Returns the default
-   * string to be used as a label if the information entered by the user is incomplete to display
-   * the expression in a senseful way.
-   */
-  protected abstract String getDefaultString();
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -249,10 +254,9 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
+   * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -368,9 +372,9 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
    * end-user-doc -->
+   * 
    * @generated
    */
   @Override

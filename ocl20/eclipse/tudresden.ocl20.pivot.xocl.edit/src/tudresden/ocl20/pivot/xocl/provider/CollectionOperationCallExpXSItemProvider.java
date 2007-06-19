@@ -188,15 +188,6 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
     return operation != null ? operation.toString() : null;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.xocl.provider.OperationCallExpXSItemProvider#getDefaultString()
-   */
-  @Override
-  protected String getDefaultString() {
-    return getString("_UI_CollectionOperationCallExpXS_type"); //$NON-NLS-1$;
-  }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

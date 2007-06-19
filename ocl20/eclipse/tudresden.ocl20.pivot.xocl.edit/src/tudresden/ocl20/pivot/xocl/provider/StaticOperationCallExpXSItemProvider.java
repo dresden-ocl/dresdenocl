@@ -107,13 +107,6 @@ public class StaticOperationCallExpXSItemProvider extends ModelOperationCallExpX
     return super.getText(object);
   }
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.xocl.provider.ModelOperationCallExpXSItemProvider#getDefaultString()
-   */
-  @Override
-  protected String getDefaultString() {
-    return getString("_UI_StaticOperationCallExpXS_type"); //$NON-NLS-1$
-  }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

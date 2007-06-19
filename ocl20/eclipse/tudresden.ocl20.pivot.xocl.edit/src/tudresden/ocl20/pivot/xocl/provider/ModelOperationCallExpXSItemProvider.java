@@ -195,16 +195,6 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
         && !(operationName.equals("-") && operationCallExp.getArgument().size() == 0); //$NON-NLS-1$
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.xocl.provider.OperationCallExpXSItemProvider#getDefaultString()
-   */
-  @Override
-  protected String getDefaultString() {
-    return getString("_UI_ModelOperationCallExpXS_type"); //$NON-NLS-1$
-  }
-
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
