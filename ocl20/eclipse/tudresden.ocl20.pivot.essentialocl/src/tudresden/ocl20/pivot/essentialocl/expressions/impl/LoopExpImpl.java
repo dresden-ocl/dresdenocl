@@ -35,6 +35,7 @@ package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -47,27 +48,29 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import tudresden.ocl20.pivot.essentialocl.expressions.LoopExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Loop Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Loop Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl#getBody <em>Body</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl#getIterator <em>Iterator</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl#getBody <em>Body</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl#getIterator <em>Iterator</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 
   /**
-   * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getBody()
    * @generated
    * @ordered
@@ -75,9 +78,9 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   protected OclExpression body = null;
 
   /**
-   * The cached value of the '{@link #getIterator() <em>Iterator</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getIterator() <em>Iterator</em>}' containment reference
+   * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getIterator()
    * @generated
    * @ordered
@@ -85,8 +88,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   protected EList<Variable> iterator = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected LoopExpImpl() {
@@ -94,18 +97,79 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Checks the wellformedness rules defined for loop expressions:
+   * 
+   * <p>
+   * [1] The type of the source expression must be a collection.
+   * 
+   * <pre>
+   * context LoopExp
+   * inv: source.type.oclIsKindOf (CollectionType)
+   * </pre>
+   * 
+   * [2] The loop variable of an iterator expression has no init expression.
+   * 
+   * <pre>
+   * context LoopExp
+   * inv: self.iterator-&gt;forAll(initExpression-&gt;isEmpty())
+   * </pre>
+   * 
+   * [3] The type of each iterator variable must be the type of the elements of the source
+   * collection.
+   * 
+   * <pre>
+   * context IteratorExp
+   * inv: self.iterator-&gt;forAll(type = source.type.oclAsType(CollectionType).elementType)
+   * </pre>
+   * 
+   * </p>
    */
-  @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.LOOP_EXP;
+  protected void validateWellformednessRules() {
+    Type sourceType, sourceElementType;
+
+    // check that a source and a body has been set
+    if (source == null || body == null) {
+      throw new WellformednessException(
+          "The source or the body of a loop expression must not be null."); //$NON-NLS-1$
+    }
+    
+    // check that a name for the loop expression has been set
+    if (StringUtils.isEmpty(name)) {
+      throw new WellformednessException("A loop expression must have a name."); //$NON-NLS-1$
+    }
+
+    // get the source type
+    sourceType = source.getType();
+
+    // validate [1]
+    if (!(sourceType instanceof CollectionType)) {
+      throw new WellformednessException(
+          "The type of the source of a loop expression must be a collection type."); //$NON-NLS-1$
+    }
+
+    // get the element type of the source collection
+    sourceElementType = ((CollectionType) sourceType).getElementType();
+
+    // iterate through the iterator variables
+    for (Variable iterator : this.iterator) {
+
+      // validate [2]
+      if (iterator.getInitExpression() != null) {
+        throw new WellformednessException("An iterator variable must not have an init expression."); //$NON-NLS-1$
+      }
+
+      // validate [3]
+      if (!sourceElementType.equals(iterator.getType())) {
+        throw new WellformednessException(
+            "The type of an iterator variable must equal the element type of the source collection."); //$NON-NLS-1$
+      }
+
+    }
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getBody() {
@@ -113,8 +177,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetBody(OclExpression newBody, NotificationChain msgs) {
@@ -130,8 +194,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setBody(OclExpression newBody) {
@@ -152,8 +216,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public List<Variable> getIterator() {
@@ -165,8 +229,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -182,8 +246,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -198,8 +262,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -218,8 +282,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -236,8 +300,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -251,4 +315,14 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
     return super.eIsSet(featureID);
   }
 
-} //LoopExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.LOOP_EXP;
+  }
+
+} // LoopExpImpl
