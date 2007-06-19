@@ -537,6 +537,9 @@ public class ModelFactory implements IModelFactory {
       iteratorExp.getIterator().addAll(Arrays.asList(iterator));
     }
 
+    // set the reference to the OCL library
+    iteratorExp.setOclLibrary(getOclLibrary());
+    
     if (logger.isDebugEnabled()) {
       logger.debug("createIteratorExp() - exit - return value=" + iteratorExp); //$NON-NLS-1$
     }
