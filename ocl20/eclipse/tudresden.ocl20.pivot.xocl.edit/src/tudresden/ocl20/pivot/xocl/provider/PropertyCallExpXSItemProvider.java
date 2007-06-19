@@ -56,9 +56,9 @@ import tudresden.ocl20.pivot.xocl.XOCLFactory;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.PropertyCallExpXS} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.PropertyCallExpXS}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider implements
@@ -66,9 +66,9 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   public PropertyCallExpXSItemProvider(AdapterFactory adapterFactory) {
@@ -76,9 +76,9 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -92,9 +92,9 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * This adds a property descriptor for the Referred Property Name feature.
-   * <!-- begin-user-doc -->
+   * This adds a property descriptor for the Referred Property Name feature. <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected void addReferredPropertyNamePropertyDescriptor(Object object) {
@@ -110,11 +110,12 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
+   * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+   * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -127,8 +128,8 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -140,9 +141,8 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * This returns PropertyCallExpXS.gif.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns PropertyCallExpXS.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -164,19 +164,25 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
     PropertyCallExpXS propertyCallExp = (PropertyCallExpXS) object;
     StringBuilder label = new StringBuilder();
 
+    // get the referred property
+    String referredProperty = propertyCallExp.getReferredPropertyName();
+
     // get the string for the source expression
     OclExpressionXS source = propertyCallExp.getSource();
 
+    // only add the source if it has been defined
     if (source != null) {
       label.append(getLabel(source));
       label.append('.');
-
-      // get the referred property
-      String referredProperty = propertyCallExp.getReferredPropertyName();
       label.append(StringUtils.isNotEmpty(referredProperty) ? referredProperty : UNDEFINED);
     }
+    
+    // if source is not defined, only add property if it has been set
+    else if (StringUtils.isNotEmpty(referredProperty)) {
+      label.append(referredProperty);
+    }
 
-    // if some parts are undefined return the default string
+    // if all parts are undefined return the default string
     return label.length() != 0 ? label.toString() : getString("_UI_PropertyCallExpXS_type"); //$NON-NLS-1$
   }
 
@@ -208,10 +214,9 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
+   * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -304,9 +309,9 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -327,9 +332,9 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   @Override
