@@ -192,7 +192,13 @@
       </ownedParameter>
     </ownedOperation>
     <ownedOperation name="excludesAll" type="//@oclBoolean">
-      <ownedParameter name="c2"/>
+      <ownedParameter name="c2">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclCollection">
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclCollection/@ownedTypeParameter.0"/>
+          </typeArgument>
+        </genericType>
+      </ownedParameter>
     </ownedOperation>
     <ownedOperation name="isEmpty" type="//@oclBoolean"/>
     <ownedOperation name="notEmpty" type="//@oclBoolean"/>
