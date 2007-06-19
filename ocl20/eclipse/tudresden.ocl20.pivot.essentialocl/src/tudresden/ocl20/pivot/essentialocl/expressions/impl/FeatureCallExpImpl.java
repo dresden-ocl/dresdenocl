@@ -34,33 +34,34 @@ package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
+import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Feature Call Exp</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Feature Call Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType <em>Source Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType <em>Source Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureCallExp {
 
   /**
-   * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' reference. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getSourceType()
    * @generated
    * @ordered
@@ -68,8 +69,8 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
   protected Type sourceType;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected FeatureCallExpImpl() {
@@ -77,19 +78,68 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * Overridden to additionally convert the type into a collection type if necessary.
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#getOclType(tudresden.ocl20.pivot.pivotmodel.Type)
    */
   @Override
-  protected EClass eStaticClass() {
-    return ExpressionsPackageImpl.Literals.FEATURE_CALL_EXP;
+  protected Type getOclType(Type type) {
+
+    // use super implementation
+    type = super.getOclType(type);
+
+    // convert to collection type if necessary
+    type = convertToCollectionType(type,getFeature());
+
+    return type;
   }
 
-  
+  /**
+   * Helper method for subclasses to convert the given type into a collection type if necessary
+   * based on the multiplicity attributes of the given feature.
+   */
+  private Type convertToCollectionType(Type type, MultiplicityElement element) {
+
+    if (element.isMultiple()) {
+
+      if (element.isUnique()) {
+
+        if (element.isOrdered()) {
+          type = oclLibrary.getOrderedSetType(type);
+        }
+
+        else {
+          type = oclLibrary.getSetType(type);
+        }
+
+      }
+
+      else {
+
+        if (element.isOrdered()) {
+          type = oclLibrary.getSequenceType(type);
+        }
+
+        else {
+          type = oclLibrary.getBagType(type);
+        }
+      }
+    }
+
+    return type;
+  }
+
+  /**
+   * Returns the {@link Feature feature}referenced by this <code>FeatureCallExp</code>. Needs to
+   * be implemented in subclasses.
+   * 
+   * @return a <code>Feature</code> instance.
+   */
+  protected abstract Feature getFeature();
+
   /**
    * The EMF implementation is altered to return the type of the {@link #getSource() source} of this
-   * <code>FeatureCallExp</code> if no explicit source type has been set. 
+   * <code>FeatureCallExp</code> if no explicit source type has been set.
    * 
    * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType()
    * 
@@ -108,11 +158,11 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
 
     return srcType;
   }
-  
+
   /**
-   * <!-- begin-user-doc -->
-   * The code for {@link #getSourceType()} is forwarded to this method.
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> The code for {@link #getSourceType()} is forwarded to this method. <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   public Type getSourceTypeGen() {
@@ -127,13 +177,10 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
     }
     return sourceType;
   }
-  
-  
-  
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Type basicGetSourceType() {
@@ -141,8 +188,8 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setSourceType(Type newSourceType) {
@@ -154,8 +201,8 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -169,8 +216,8 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -184,8 +231,8 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -199,8 +246,8 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -212,4 +259,14 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
     return super.eIsSet(featureID);
   }
 
-} //FeatureCallExpImpl
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return ExpressionsPackageImpl.Literals.FEATURE_CALL_EXP;
+  }
+
+} // FeatureCallExpImpl

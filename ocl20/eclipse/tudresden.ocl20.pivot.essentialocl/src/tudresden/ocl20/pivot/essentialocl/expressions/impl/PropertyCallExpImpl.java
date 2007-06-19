@@ -48,8 +48,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Property Call Exp</b></em>'.
@@ -124,19 +127,30 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
       logger.debug("evaluateType() - enter"); //$NON-NLS-1$
     }
 
+    // check wellformedness
     if (referredProperty == null) {
       throw new WellformednessException(
           "The referred property of a PropertyCallExp must not be null."); //$NON-NLS-1$
     }
 
-    // the type of the property is mapped to an OCL type
+    // map the type of the property to an OCL type
     Type type = getOclType(referredProperty.getType());
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
     }
-    
+
     return type;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getFeature()
+   */
+  @Override
+  protected Feature getFeature() {
+    return getReferredProperty();
   }
 
   /**
@@ -268,6 +282,17 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
   @Override
   protected EClass eStaticClass() {
     return ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
+        .append("referredProperty",referredProperty).toString(); //$NON-NLS-1$
   }
 
 } // PropertyCallExpImpl

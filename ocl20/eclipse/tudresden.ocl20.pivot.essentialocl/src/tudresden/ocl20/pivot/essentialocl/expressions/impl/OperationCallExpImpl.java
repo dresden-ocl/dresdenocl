@@ -53,6 +53,7 @@ import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
@@ -170,7 +171,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
           && getSourceType() instanceof CollectionType) {
         // TODO: bind 'product'
       }
-      
+
       // map the operation's type to a corresponding OCL type
       type = getOclType(referredOperation.getType());
     }
@@ -178,7 +179,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
     if (logger.isDebugEnabled()) {
       logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
     }
-    
+
     return type;
   }
 
@@ -215,6 +216,16 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
     }
 
     return allInstancesOperation;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getFeature()
+   */
+  @Override
+  protected Feature getFeature() {
+    return getReferredOperation();
   }
 
   /**
