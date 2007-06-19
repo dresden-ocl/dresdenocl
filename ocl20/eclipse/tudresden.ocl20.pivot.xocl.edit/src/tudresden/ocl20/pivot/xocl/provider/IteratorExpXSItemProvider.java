@@ -33,8 +33,10 @@
 package tudresden.ocl20.pivot.xocl.provider;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -46,10 +48,10 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.xocl.IteratorExpXS;
-import tudresden.ocl20.pivot.xocl.IteratorExpressionXS;
+import tudresden.ocl20.pivot.xocl.OclExpressionXS;
+import tudresden.ocl20.pivot.xocl.VariableXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
@@ -119,24 +121,67 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
 
   /**
    * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted to reflect the OCL concrete syntax.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    IteratorExpressionXS labelValue = ((IteratorExpXS) object).getName();
-    String label = labelValue == null ? null : labelValue.toString();
-    return label == null || label.length() == 0 ? getString("_UI_IteratorExpXS_type") : //$NON-NLS-1$
-        getString("_UI_IteratorExpXS_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+    IteratorExpXS iteratorExp = (IteratorExpXS) object;
+    
+    // get the source of the iterator expression
+    OclExpressionXS source = iteratorExp.getSource();
+    
+    // initialize the label with the source label or the default label
+    StringBuilder label = new StringBuilder(source != null ? getLabel(source) : UNDEFINED);
+    
+    // get the referred iterator expression
+    String referredIterator = iteratorExp.getName().toString();
+    
+    // only add the iterator stuff when an iterator has been selected
+    if (StringUtils.isNotEmpty(referredIterator)) {
+      
+      // add the operator, the name of the iterator and the opening parenthesis
+      label.append("->").append(referredIterator).append('('); //$NON-NLS-1$
+      
+      // append the iterators
+      for (Iterator<VariableXS> it = iteratorExp.getIterator().iterator(); it.hasNext();) {
+        label.append(getLabel(it.next()));
+        
+        if (it.hasNext()) {
+          label.append(", "); //$NON-NLS-1$
+        }
+      }
+      
+      // append the vertical bar if there have been iterators defined
+      if (!iteratorExp.getIterator().isEmpty()) {
+        label.append(" | "); //$NON-NLS-1$
+      }
+      
+      // append the body expression
+      String bodyLabel = getLabel(iteratorExp.getBody());
+      label.append(StringUtils.isNotEmpty(bodyLabel) ? bodyLabel : UNDEFINED);
+      
+      // append closing parenthesis
+      label.append(')');
+    }
+
+    // if all parts are missing return the default string
+    return label.length() != 0 ? label.toString() : getString("_UI_IteratorExpXS_type"); //$NON-NLS-1$
   }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted to change the entire tree if the name of the iterator changes
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -144,8 +189,7 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
 
     switch (notification.getFeatureID(IteratorExpXS.class)) {
       case XOCLPackage.ITERATOR_EXP_XS__NAME:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
-        return;
+        updateLabel(notification);
     }
     super.notifyChanged(notification);
   }

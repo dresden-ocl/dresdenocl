@@ -131,9 +131,11 @@ public class LoopExpXSItemProvider extends CallExpXSItemProvider implements
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted to update the entire tree if the iterator or body expression changes
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -143,6 +145,7 @@ public class LoopExpXSItemProvider extends CallExpXSItemProvider implements
       case XOCLPackage.LOOP_EXP_XS__ITERATOR:
       case XOCLPackage.LOOP_EXP_XS__BODY:
         fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        updateLabel(notification);
         return;
     }
     super.notifyChanged(notification);
