@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xocl:NamespaceXS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xocl="http://www.tu-dresden.de/ocl20/pivot/2007/xocl" pathName="Bank">
+  <ownedRule kind="derivedvalue" constrainedElement="Person::totalBalance">
+    <specification body="self.accounts.balance->sum()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="sum">
+        <source xsi:type="xocl:IteratorExpXS" name="collect">
+          <source xsi:type="xocl:PropertyCallExpXS" referredPropertyName="accounts">
+            <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.0/@specification/@context"/>
+          </source>
+          <iterator name="iterator" type="Account"/>
+          <body xsi:type="xocl:PropertyCallExpXS" referredPropertyName="balance">
+            <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.0/@specification/@bodyExpression/@source/@iterator.0"/>
+          </body>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+</xocl:NamespaceXS>
