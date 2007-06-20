@@ -581,7 +581,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
           match = type.conformsTo(parameter.getType());
         }
 
-        // there is no sense in continuing the search if two parameters did not match
+        // there is no need for continuing the search if two parameters did not match
         if (match == false) {
           break;
         }
