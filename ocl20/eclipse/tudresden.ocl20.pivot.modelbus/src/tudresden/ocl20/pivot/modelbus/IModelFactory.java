@@ -80,7 +80,7 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 public interface IModelFactory {
 
   /**
-   * Creates a new {@link Constraint}. The name is optional. but the pther parameters need to have
+   * Creates a new {@link Constraint}. The name is optional. but the other parameters need to have
    * valid values.
    * 
    * @param name an optional name for the <code>Constraint</code>
@@ -124,8 +124,10 @@ public interface IModelFactory {
    * @param initExpression an (optional) initialization expression
    * 
    * @return a <code>Variable</code> instance
+   * 
+   * @throws FactoryException if the variable cannot be created 
    */
-  Variable createVariable(String name, List<String> typePathName, OclExpression initExpression);
+  Variable createVariable(String name, List<String> typePathName, OclExpression initExpression) throws FactoryException;
 
   /**
    * Creates a new {@link Variable} with the same semantics as
@@ -135,13 +137,15 @@ public interface IModelFactory {
    * 
    * @param name the name of the variable
    * @param typePathName the type of the variable
-   * @param typeArguments a list of type names 8each represented as a list of path segments) 
+   * @param typeArguments a list of type names 8each represented as a list of path segments)
    * @param initExpression an (optional) initialization expression
    * 
-   * @return
+   * @return a <code>Variable</code> instance
+   * 
+   * @throws FactoryException if the variable cannot be created
    */
   Variable createVariable(String name, List<String> typePathName, List<List<String>> typeArguments,
-      OclExpression initExpression);
+      OclExpression initExpression) throws FactoryException;
 
   /**
    * Creates a new {@link Variable} that represents a {@link Parameter} in an expression that
@@ -169,9 +173,10 @@ public interface IModelFactory {
    * @param referredPropertyPathName
    * @param qualifier
    * @return
+   * @throws FactoryException 
    */
   PropertyCallExp createPropertyCallExp(List<String> referredPropertyPathName,
-      OclExpression... qualifier);
+      OclExpression... qualifier) throws FactoryException;
 
   /**
    * @param source
@@ -194,9 +199,11 @@ public interface IModelFactory {
    * @param argument an optional list of arguments
    * 
    * @return an <code>OperationCallExp</code> instance
+   * 
+   * @throws FactoryException if the expression cannot be created 
    */
   OperationCallExp createOperationCallExp(List<String> referredOperationPathName,
-      OclExpression... argument);
+      OclExpression... argument) throws FactoryException;
 
   /**
    * @param source
@@ -268,9 +275,10 @@ public interface IModelFactory {
    * @param value
    * 
    * @return
+   * @throws FactoryException 
    */
   TupleLiteralPart createTupleLiteralPart(String name, List<String> typePathName,
-      OclExpression value);
+      OclExpression value) throws FactoryException;
 
   /**
    * @param parts
@@ -281,8 +289,10 @@ public interface IModelFactory {
   /**
    * @param referredEnumLiteralPathName
    * @return
+   * @throws FactoryException
    */
-  EnumLiteralExp createEnumLiteralExp(List<String> referredEnumLiteralPathName);
+  EnumLiteralExp createEnumLiteralExp(List<String> referredEnumLiteralPathName)
+      throws FactoryException;
 
   /**
    * @param realSymbol
@@ -328,7 +338,8 @@ public interface IModelFactory {
    * @param referredTypePathName
    * 
    * @return
+   * @throws FactoryException 
    */
-  TypeLiteralExp createTypeLiteralExp(List<String> referredTypePathName);
+  TypeLiteralExp createTypeLiteralExp(List<String> referredTypePathName) throws FactoryException;
 
 }

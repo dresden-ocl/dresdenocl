@@ -114,6 +114,14 @@ public interface IModel {
    * @return
    */
   IOclLibraryProvider getOclLibraryProvider();
+  
+  /**
+   * Returns a {@link ITypeResolver type resolver} object that can be used to find types in the
+   * OCL standard library and in this model.
+   * 
+   * @return a <code>ITypeResolver</code> instance
+   */
+  ITypeResolver getTypeResolver();
 
   /**
    * @return

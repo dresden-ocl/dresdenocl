@@ -34,9 +34,7 @@ package tudresden.ocl20.pivot.modelbus.internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -70,11 +68,15 @@ import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
+import tudresden.ocl20.pivot.modelbus.FactoryException;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelFactory;
 import tudresden.ocl20.pivot.modelbus.IOclLibraryProvider;
+import tudresden.ocl20.pivot.modelbus.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.TypeNotFoundException;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
@@ -105,8 +107,8 @@ public class ModelFactory implements IModelFactory {
   // the OCL Library instance; will be retrieved from the IOclLibraryProvider of the model
   private OclLibrary oclLibrary;
 
-  // a cache for the primitive types from the OCL Standard library
-  private Map<String, Type> primitiveTypes = new HashMap<String, Type>();
+  // the type resolver used for looking up types
+  private ITypeResolver typeResolver;
 
   /**
    * @param model
@@ -124,38 +126,9 @@ public class ModelFactory implements IModelFactory {
     // initialize the reference to the model
     this.model = model;
 
-    // get the OCL Standard Library and initialize the cache with the OCL primitive types
-    oclLibrary = model.getOclLibraryProvider().getOclLibrary();
-    initializePrimitiveTypes();
-
     if (logger.isDebugEnabled()) {
       logger.debug("ModelFactory() - exit"); //$NON-NLS-1$
     }
-  }
-
-  /**
-   * Helper method to initialize the cache with the primitive types.
-   * 
-   * TODO: These explicit String references to the OCL Standard Library types should be replaced by
-   * a generic lookup mechanism, maybe configured via external property files. To see why this is
-   * necessary, notice that the type returned by oclLibrary.getOclBoolean() is not necessarily named
-   * "Boolean". It is just known that this is the OCL boolean type, the concrete naming is up to the
-   * model of the Standard Library provided by the OclLibraryProvider.
-   */
-  private void initializePrimitiveTypes() {
-    primitiveTypes.put("OclAny",oclLibrary.getOclAny()); //$NON-NLS-1$
-    primitiveTypes.put("Bag",oclLibrary.getOclBag()); //$NON-NLS-1$
-    primitiveTypes.put("Boolean",oclLibrary.getOclBoolean()); //$NON-NLS-1$
-    primitiveTypes.put("Collection",oclLibrary.getOclCollection()); //$NON-NLS-1$
-    primitiveTypes.put("Integer",oclLibrary.getOclInteger()); //$NON-NLS-1$
-    primitiveTypes.put("Invalid",oclLibrary.getOclInvalid()); //$NON-NLS-1$
-    primitiveTypes.put("OrderedSet",oclLibrary.getOclOrderedSet()); //$NON-NLS-1$
-    primitiveTypes.put("Real",oclLibrary.getOclReal()); //$NON-NLS-1$
-    primitiveTypes.put("Sequence",oclLibrary.getOclSequence()); //$NON-NLS-1$
-    primitiveTypes.put("Set",oclLibrary.getOclSet()); //$NON-NLS-1$
-    primitiveTypes.put("String",oclLibrary.getOclString()); //$NON-NLS-1$
-    primitiveTypes.put("OclType",oclLibrary.getOclType()); //$NON-NLS-1$
-    primitiveTypes.put("OclVoid",oclLibrary.getOclVoid()); //$NON-NLS-1$
   }
 
   /*
@@ -310,7 +283,7 @@ public class ModelFactory implements IModelFactory {
    * 
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createEnumLiteralExp(java.util.List)
    */
-  public EnumLiteralExp createEnumLiteralExp(List<String> pathName) {
+  public EnumLiteralExp createEnumLiteralExp(List<String> pathName) throws FactoryException {
     if (logger.isDebugEnabled()) {
       logger.debug("createEnumLiteralExp(pathName=" + pathName + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
     }
@@ -539,7 +512,7 @@ public class ModelFactory implements IModelFactory {
 
     // set the reference to the OCL library
     iteratorExp.setOclLibrary(getOclLibrary());
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("createIteratorExp() - exit - return value=" + iteratorExp); //$NON-NLS-1$
     }
@@ -637,7 +610,8 @@ public class ModelFactory implements IModelFactory {
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createOperationCallExp(java.util.List,
    *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression[])
    */
-  public OperationCallExp createOperationCallExp(List<String> pathName, OclExpression... argument) {
+  public OperationCallExp createOperationCallExp(List<String> pathName, OclExpression... argument)
+      throws FactoryException {
     if (logger.isDebugEnabled()) {
       logger.debug("createOperationCallExp(pathName=" + pathName //$NON-NLS-1$
           + ", argument=" + ArrayUtils.toString(argument) + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -746,7 +720,8 @@ public class ModelFactory implements IModelFactory {
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createPropertyCallExp(java.util.List,
    *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression[])
    */
-  public PropertyCallExp createPropertyCallExp(List<String> pathName, OclExpression... qualifier) {
+  public PropertyCallExp createPropertyCallExp(List<String> pathName, OclExpression... qualifier)
+      throws FactoryException {
     if (logger.isDebugEnabled()) {
       logger.debug("createPropertyCallExp(pathName=" + pathName //$NON-NLS-1$
           + ", qualifier=" + ArrayUtils.toString(qualifier) + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -866,7 +841,7 @@ public class ModelFactory implements IModelFactory {
    *      java.lang.String, tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
    */
   public TupleLiteralPart createTupleLiteralPart(String name, List<String> typeName,
-      OclExpression value) {
+      OclExpression value) throws FactoryException {
     if (logger.isDebugEnabled()) {
       logger.debug("createTupleLiteralPart(name=" + name + ", typeName=" + typeName + ", value=" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
           + value + ") - enter"); //$NON-NLS-1$
@@ -912,7 +887,7 @@ public class ModelFactory implements IModelFactory {
    * 
    * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createTypeLiteralExp(java.util.List)
    */
-  public TypeLiteralExp createTypeLiteralExp(List<String> referredTypeName) {
+  public TypeLiteralExp createTypeLiteralExp(List<String> referredTypeName) throws FactoryException {
     if (logger.isDebugEnabled()) {
       logger.debug("createTypeLiteralExp(referredTypeName=" + referredTypeName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
@@ -987,7 +962,7 @@ public class ModelFactory implements IModelFactory {
    *      java.util.List, tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
    */
   public Variable createVariable(String name, List<String> typePathName,
-      OclExpression initExpression) {
+      OclExpression initExpression) throws FactoryException {
     if (logger.isDebugEnabled()) {
       logger
           .debug("createVariable(name=" + name + ", typeName=" + typePathName + ", initExpression=" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -1031,7 +1006,7 @@ public class ModelFactory implements IModelFactory {
    *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
    */
   public Variable createVariable(String name, List<String> typePathName,
-      List<List<String>> typeArguments, OclExpression initExpression) {
+      List<List<String>> typeArguments, OclExpression initExpression) throws FactoryException {
     if (logger.isDebugEnabled()) {
       logger.debug("createVariable(name=" + name + ", typePathName=" + typePathName //$NON-NLS-1$ //$NON-NLS-2$
           + ", typeArguments=" + typeArguments + ", initExpression=" + initExpression //$NON-NLS-1$ //$NON-NLS-2$
@@ -1134,43 +1109,7 @@ public class ModelFactory implements IModelFactory {
   }
 
   /**
-   * Helper method that looks up a {@link Type} in the acciated model.
-   * 
-   * @param pathName the path name of the type to look for
-   * 
-   * @return a <code>Type</code> instance
-   * 
-   * @throws IllegalStateException if the model cannot be accessed
-   * @throws IllegalArgumentException if no type with that path name can be found
-   */
-  protected Type findType(List<String> pathName) {
-    Type type = null;
-
-    // try to look up a primitive type
-    if (pathName.size() == 1) {
-      type = primitiveTypes.get(pathName.get(0));
-    }
-
-    // if no primitive type found, try to look in the model
-    if (type == null) {
-      try {
-        type = model.findType(pathName);
-      }
-      catch (ModelAccessException e) {
-        throw new IllegalStateException("An error occured when accessing model '" //$NON-NLS-1$
-            + model.getDisplayName() + "'.",e); //$NON-NLS-1$
-      }
-    }
-
-    if (type == null) {
-      throw new IllegalArgumentException("Unable to find type '" + pathName + "'."); //$NON-NLS-1$//$NON-NLS-2$
-    }
-
-    return type;
-  }
-
-  /**
-   * Helper method to lazily get the OCL Library Provider
+   * Helper method to lazily get the OCL Library.
    */
   protected OclLibrary getOclLibrary() {
 
@@ -1178,13 +1117,58 @@ public class ModelFactory implements IModelFactory {
       IOclLibraryProvider provider = model.getOclLibraryProvider();
 
       if (provider == null) {
-        throw new IllegalStateException("Failed to retrieve an OCL Library Provider from model '" //$NON-NLS-1$
-            + model.getDisplayName() + "'."); //$NON-NLS-1$
+        throw new ModelBusException("The model '" + model.getDisplayName() //$NON-NLS-1$
+            + "' did not return a valid provider for the OCL Standard Library."); //$NON-NLS-1$
       }
 
       oclLibrary = provider.getOclLibrary();
     }
 
     return oclLibrary;
+  }
+
+  /**
+   * Helper method to lazily get the type resolver.
+   */
+  protected ITypeResolver getTypeResolver() {
+
+    if (typeResolver == null) {
+      typeResolver = model.getTypeResolver();
+
+      if (typeResolver == null) {
+        throw new ModelBusException("The model '" + model.getDisplayName() //$NON-NLS-1$
+            + "'did not provide a valid type resolver."); //$NON-NLS-1$
+      }
+    }
+
+    return typeResolver;
+  }
+
+  /**
+   * Helper method to look up a type using the associated type resolver. Handles all possible
+   * checked exceptions by converting them into a factory exception.
+   */
+  protected Type findType(List<String> pathName) throws FactoryException {
+    Type type;
+
+    try {
+      type = getTypeResolver().findType(pathName);
+    }
+
+    catch (TypeNotFoundException e) {
+      logger.error("findType(pathName=" + pathName + ")",e);  //$NON-NLS-1$//$NON-NLS-2$
+      throw new FactoryException("Failed to lookup type " + pathName //$NON-NLS-1$
+          + ", both in the OCL Standard Library and the associated model '" //$NON-NLS-1$
+          + model.getDisplayName() + "'.",e); //$NON-NLS-1$
+
+    }
+
+    catch (ModelAccessException e) {
+      logger.error("findType(pathName=" + pathName + ")",e); //$NON-NLS-1$ //$NON-NLS-2$
+      throw new FactoryException("An error occured when accessing model '" + model.getDisplayName() //$NON-NLS-1$
+          + "'.",e); //$NON-NLS-1$
+    }
+
+    return type;
   }
 }

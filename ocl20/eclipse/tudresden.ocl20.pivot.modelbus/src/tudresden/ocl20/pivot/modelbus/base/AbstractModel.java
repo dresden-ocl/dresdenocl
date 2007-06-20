@@ -42,9 +42,11 @@ import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelFactory;
 import tudresden.ocl20.pivot.modelbus.IOclLibraryProvider;
+import tudresden.ocl20.pivot.modelbus.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.internal.ModelFactory;
 import tudresden.ocl20.pivot.modelbus.internal.OclLibraryProvider;
+import tudresden.ocl20.pivot.modelbus.internal.TypeResolver;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -61,17 +63,21 @@ public abstract class AbstractModel implements IModel {
    */
   private static final Logger logger = Logger.getLogger(AbstractModel.class);
 
-  // a cached instance of the OCL Library provider
-  private IOclLibraryProvider oclLibraryProvider;
-
-  // cached instance of the model factory
-  private IModelFactory modelFactory;
-
   // this model's name as displayed to clients
   private String displayName;
 
   // the metamodel of this model
   private IMetamodel metamodel;
+
+  // a cached instance of the OCL Library provider
+  private IOclLibraryProvider oclLibraryProvider;
+
+  // cached instance of the model factory
+  private IModelFactory modelFactory;
+  
+  // the type resolver of this model
+  private ITypeResolver typeResolver;
+
 
   /**
    * Constructor to be called by subclasses. The <code>displayName</code> is a name that should be
@@ -139,6 +145,21 @@ public abstract class AbstractModel implements IModel {
     }
 
     return oclLibraryProvider;
+  }
+
+  
+  
+  /* (non-Javadoc)
+   * @see tudresden.ocl20.pivot.modelbus.IModel#getTypeResolver()
+   */
+  public ITypeResolver getTypeResolver() {
+    
+    if (typeResolver == null) {
+      typeResolver = new TypeResolver(this);
+    }
+
+    return typeResolver;
+    
   }
 
   /*
