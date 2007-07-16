@@ -154,11 +154,6 @@ public abstract class MofClassImpl extends ClassifierImpl implements MofClass{
         return null;
     }
     
-    //MOF-specific
-    protected tudresden.ocl20.core.jmi.ocl.types.OclLibrary getOclLibrary() {
-        return ((ModelPackage)refOutermostPackage()).getMof14ocl().getTypes().getOclLibrary().getInstance();
-    }
-     
     //MOF-UML-Common
     /** Get the Set-Type that has this Classifier as element type. */    
     public tudresden.ocl20.core.jmi.ocl.types.SetType getSetType() {
