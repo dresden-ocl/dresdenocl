@@ -32,6 +32,7 @@
 package tudresden.ocl20.core.lib;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -114,6 +115,10 @@ public class UmlModelObject extends OclModelObject {
 		int i = 0;
 		while (it.hasNext()) {
 			params_class[i] = it.next().getClass();
+			// The missing i++ was reported by Manfred Stock via the mailing list
+			// (See Bug 1669320 in SourceForge Tracker list).
+			// Fixed by Claas Wilke in July 2007.
+			i++;
 		}
 		try {
 			//method = c.getDeclaredMethod(name, params_class);
@@ -122,8 +127,17 @@ public class UmlModelObject extends OclModelObject {
 				featurelistener.onMethod(method, object);
 			method.setAccessible(true);
 			return method.invoke(object, parameters);
-		} catch (Exception e) {
-			throw new OclException("getFeature("+name+", ...) for "+this+" failed: "+e.getMessage());
+		} 
+		catch (Exception e) {
+			// The advanced handling of InvocationTargetException as
+			// Exception Cause was recommended by Manfred Stock via the mailing list
+			// (See Bug 1669320 in SourceForge Tracker list).
+			// Implemented by Claas Wilke in July 2007.			
+			if (e.getCause() != null && e.getCause() instanceof InvocationTargetException) {
+				throw new OclException("getFeature("+name+", ...) for "+this+" failed: "+ e.getCause().getMessage());
+			}
+			// Old implementation
+			else throw new OclException("getFeature("+name+", ...) for "+this+" failed: "+e.getMessage());
 		}
 	}
 	
