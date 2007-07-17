@@ -60,295 +60,325 @@
 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-
-
 package tudresden.ocl20.core.lib;
 
-
-
 /**
-
- * Represents an object from the model.
-
- * @author  Stefan Ocke
-
+ * 
+ * <p>Represents an object from the model.</p>
+ * 
+ * <p>In nearly all cases this class could be considered as an abstract 
+ * class because sub classes like <code>JmiModelObject</code> or
+ * <code>UmlModelObject</code> overwrite methods like 
+ * <code>getFeaturerImpl</code> or <code>isEqualTo</code>.</p>
+ * 
+ * <p>But the class <code>Ocl</code> contains a method <code>toOclModelObject</code>
+ * which casts instances of <code>OclRoot</code> to <code>OclModelObject</code>.
+ * That's why <code>OclModelObject</code> isn't designed as an abstract class.</p>
+ * 
+ * <p><i>(Documentation completed by Claas Wilke in July 2007)</i></p>
+ * 
+ * @see tudresden.ocl20.core.lib.Ocl
+ * @see tudresden.ocl20.core.lib.JmiModelObject
+ * @see tudresden.ocl20.core.lib.UmlModelObject
+ * 
+ * @author Stefan Ocke
+ * 
  */
+public class OclModelObject extends OclAny {
 
-public class OclModelObject extends OclAny{
+	protected OclFactory factory;
 
-    
+	/** Creates a new instance of ModelObject */
 
-    protected OclFactory factory;
+	protected OclModelObject(OclFactory factory) {
 
-    
+		this.factory = factory;
 
-    /** Creates a new instance of ModelObject */
+	}
 
-    protected OclModelObject(OclFactory factory) {
+	/** 
+	 * <p>Creates an undefined instance of <code>OclModelObject</code>.</p>
+	 *  
+	 * <p><i>(Documentation completed by Claas Wilke in July 2007)</i></p>
+	 * 
+	 * @param undefinedReason The reason, why the <code>OclModelObject</code> is undefined.
+	 */
+	public OclModelObject(String undefinedReason) {
 
-        this.factory = factory;
+		super(0, undefinedReason);
 
-    }
+	}
 
-    
+	/**
+	 * <p>Compares the <code>OclModelObject</code> to a given <code>Object</code>.</p>
+	 * 
+	 * <p><b>ATTENTION: Reimplement this method in sub classes because this implementation always
+	 * returns an undefined <code>OclBoolean</code>!</b></p>
+	 * 
+	 * <p><i>(Documentation completed by Claas Wilke in July 2007)</i></p>
+	 *
+	 * @return OclBoolean 
+	 */
+	public OclBoolean isEqualTo(Object o) {
 
-    public OclModelObject(String undefinedReason){
+		return new OclBoolean(0, getUndefinedReason());
 
-        super(0, undefinedReason);
+	}
 
-    }
+	/**
+	 * <p>Checks, if the <code>OclModelObject</code> is in a given <code>OclState</code>.</p>
+	 * 
+	 * <p><b>ATTENTION: Reimplement this method in sub classes because this implementation always
+	 * returns an undefined <code>OclBoolean</code>!</b></p>
+	 * 
+	 * <p><i>(Documentation completed by Claas Wilke in July 2007)</i></p>
+	 *
+	 * @return OclBoolean 
+	 */
+	public OclBoolean oclInState(OclState state) {
 
-    
+		return new OclBoolean(0, getUndefinedReason());
 
-    public OclBoolean isEqualTo(Object o){
+	}
 
-        return new OclBoolean(0, getUndefinedReason());
+	// /** Gets a feature of this modelobject. The OCL type of the result is
+	// determined by its Java Class.*/
 
-    }
+	// public OclRoot getFeature(String name){
 
-    
+	// if(isUndefined()){
 
-    public OclBoolean oclInState(OclState state){
+	// return new OclUndefined(this.getUndefinedReason());
 
-        return new OclBoolean(0, getUndefinedReason());
+	// }
 
-    }
+	// Object result = getFeatureImpl(name);
 
-    
+	//        
 
-//    /** Gets a feature of this modelobject. The OCL type of the result is determined by its Java Class.*/
+	// return factory.getOclRepresentationFor(result);
 
-//    public OclRoot getFeature(String name){
+	// }
 
-//        if(isUndefined()){
+	/**
+	 * Gets a feature of this modelobject. Explicitly stating the expected OCL
+	 * type.
+	 */
 
-//            return new OclUndefined(this.getUndefinedReason());
+	public OclRoot getFeature(OclType type, String name) {
 
-//        }
+		if (isUndefined()) {
 
-//        Object result = getFeatureImpl(name);
+			return new OclUndefined(this.getUndefinedReason());
 
-//        
+		}
 
-//        return factory.getOclRepresentationFor(result);
+		Object result = getFeatureImpl(name);
 
-//    }
+		OclRoot or = factory.getOclRepresentationFor(type, result);
 
-    
+		if (or.isUndefined()) {
 
-    /** Gets a feature of this modelobject. Explicitly stating the expected OCL type.*/
+			return new OclUndefined("feature " + name + " is null in " + this);
 
-    public OclRoot getFeature(OclType type, String name){
+		}
 
-        if(isUndefined()){
+		return or;
 
-            return new OclUndefined(this.getUndefinedReason());
+	}
 
-        }
+	/**
+	 * <p>Returns a feature implementation of this <code>OclModelObject</code>.</p>
+	 * 
+	 * <p><b>ATTENTION: Reimplement this method in sub classes because this implementation always
+	 * returns <code>null</code>!</b></p>
+	 * 
+	 * <p><i>(Documentation completed by Claas Wilke in July 2007)</i></p>
+	 *
+	 * @return Object 
+	 */
+	protected Object getFeatureImpl(String name) {
 
-        Object result = getFeatureImpl(name);
+		return null;
 
-        
+	}
 
-        OclRoot or = factory.getOclRepresentationFor(type,result);
+	/**
+	 * Calls an operation of this modelobject. Explicitly stating the expected
+	 * OCL type.
+	 */
 
-        if(or.isUndefined()){
+	public OclRoot getFeature(OclType type, String name,
+			OclParameter[] parameters) {
 
-            return new OclUndefined("feature "+name+" is null in "+this);
+		if (isUndefined()) {
 
-        }
+			return new OclUndefined(this.getUndefinedReason());
 
-        return or;
+		}
 
-    }
+		Object[] params;
 
-    
+		boolean hasOutParams = false;
 
-    protected Object getFeatureImpl(String name){
+		if (parameters == null) {
 
-        return null;
+			params = new Object[0];
 
-    }
+		}
 
-    
+		else {
 
-    
+			params = new Object[parameters.length];
 
-    /** Calls an operation of this modelobject. Explicitly stating the expected OCL type.*/
+			for (int i = 0; i < params.length; i++) {
 
-    
+				params[i] = factory.reconvert(parameters[i]);
 
-    public OclRoot getFeature(OclType type, String name, OclParameter [] parameters){
+				int dir = parameters[i].getDirection();
 
-        if(isUndefined()){
+				if (dir == OclParameter.DIR_INOUT
+						|| dir == OclParameter.DIR_OUT) {
 
-            return new OclUndefined(this.getUndefinedReason());
+					hasOutParams = true;
 
-        }
+				}
 
-        Object [] params;
+			}
 
-        boolean hasOutParams = false;
+		}
 
-        if (parameters==null){
+		Object result = getFeatureImpl(name, params);
 
-            params = new Object[0];
+		OclRoot or;
 
-        }
+		if (!hasOutParams) {
 
-        else{
+			or = factory.getOclRepresentationFor(type, result);
 
-            params = new Object[parameters.length];
+			// provide some more precise undefined reason
 
-            for(int i = 0; i<params.length; i++){
+			if (or.isUndefined()) {
 
-                params[i] = factory.reconvert(parameters[i]);
+				or = new OclUndefined("feature " + name
+						+ "(): result is null in " + this);
 
-                int dir = parameters[i].getDirection();
+			}
 
-                if(dir == OclParameter.DIR_INOUT || dir == OclParameter.DIR_OUT){
+		} else {
 
-                    hasOutParams = true;
+			OclTupleType tt = (OclTupleType) type;
 
-                }
+			OclRoot value;
 
-            }
+			// the operattion has out or inout-parameters -> construct a tuple
+			// containing all results
 
-        }
+			OclTuple tuple = new OclTuple();
 
-        Object result = getFeatureImpl(name, params);
+			value = factory.getOclRepresentationFor(tt.getType("result"),
+					result);
 
-        
+			if (value.isUndefined()) {
 
-        OclRoot or;
+				value = new OclUndefined("feature " + name
+						+ "(): result is null in " + this);
 
-        
+			}
 
-        if(!hasOutParams){
+			tuple.setValue("result", value);
 
-            or = factory.getOclRepresentationFor(type,result);
+			for (int i = 0; i < params.length; i++) {
 
-            
+				int dir = parameters[i].getDirection();
 
-            //provide some more precise undefined reason
+				if (dir == OclParameter.DIR_INOUT
+						|| dir == OclParameter.DIR_OUT) {
 
-            if(or.isUndefined()){
+					String paramName = parameters[i].getName();
 
-                or = new OclUndefined("feature "+name+"(): result is null in "+this);
+					value = factory.getOclRepresentationFor(tt
+							.getType(paramName), params[i]);
 
-            }
+					if (value.isUndefined()) {
 
-        } else {
+						value = new OclUndefined("feature " + name
+								+ "(): out/inout parameter" + paramName
+								+ " is null in " + this);
 
-            OclTupleType tt = (OclTupleType) type;
+					}
 
-            OclRoot value;
+					tuple.setValue(paramName, value);
 
-            
+				}
 
-            //the operattion has out or inout-parameters -> construct a tuple containing all results
+			}
 
-            OclTuple tuple = new OclTuple();
+			or = tuple;
 
-            
+		}
 
-            value = factory.getOclRepresentationFor(tt.getType("result"),result);
+		return or;
 
-            if(value.isUndefined()){
+	}
 
-                value = new OclUndefined("feature "+name+"(): result is null in "+this);
+	/**
+	 * <p>Returns a feature implementation of this <code>OclModelObject</code>.</p>
+	 * 
+	 * <p><b>ATTENTION: Reimplement this method in sub classes because this implementation always
+	 * returns <code>null</code>!</b></p>
+	 * 
+	 * <p><i>(Documentation completed by Claas Wilke in July 2007)</i></p>
+	 *
+	 * @return Object 
+	 */
+	protected Object getFeatureImpl(String name, Object[] parameters) {
 
-            }
+		return null;
 
-            
+	}
 
-            tuple.setValue("result", value);
+	// /** Calls an operation of this modelobject. The OCL type of the result is
+	// determined by its Java Class.*/
 
-            
+	// // issue: what about out-parameters? TupleType ....
 
-            for(int i = 0; i<params.length; i++){
+	//
 
-                int dir = parameters[i].getDirection();
+	// public OclRoot getFeature(String name, OclRoot [] parameters){
 
-                if(dir == OclParameter.DIR_INOUT || dir == OclParameter.DIR_OUT){
+	// if(isUndefined()){
 
-                    String paramName = parameters[i].getName();
+	// return new OclUndefined(this.getUndefinedReason());
 
-                    value = factory.getOclRepresentationFor(tt.getType(paramName), params[i]);
+	// }
 
-                    if(value.isUndefined()){
+	// Object [] params;
 
-                        value = new OclUndefined("feature "+name+"(): out/inout parameter"+ paramName +" is null in "+this);
+	// if (parameters==null){
 
-                    }
+	// params = new Object[0];
 
-                    tuple.setValue(paramName, value);
+	// }
 
-                }
+	// else{
 
-            }
+	// params = new Object[parameters.length];
 
-            or = tuple;
+	// for(int i = 0; i<params.length; i++){
 
-        }
+	// params[i] = factory.reconvert(parameters[i]);
 
-        
+	// }
 
-        return or;
+	// }
 
-    }
+	// Object result = getFeatureImpl(name, params);
 
-    
+	//
 
-    protected Object getFeatureImpl(String name, Object [] parameters){
+	// return factory.getOclRepresentationFor(result);
 
-        return null;
-
-    }
-
-    
-
-    //    /** Calls an operation of this modelobject.  The OCL type of the result is determined by its Java Class.*/
-
-    //    // issue: what about out-parameters? TupleType ....
-
-    //
-
-    //    public OclRoot getFeature(String name, OclRoot [] parameters){
-
-    //        if(isUndefined()){
-
-    //            return new OclUndefined(this.getUndefinedReason());
-
-    //        }
-
-    //        Object [] params;
-
-    //        if (parameters==null){
-
-    //            params = new Object[0];
-
-    //        }
-
-    //        else{
-
-    //            params = new Object[parameters.length];
-
-    //            for(int i = 0; i<params.length; i++){
-
-    //                params[i] = factory.reconvert(parameters[i]);
-
-    //            }
-
-    //        }
-
-    //        Object result = getFeatureImpl(name, params);
-
-    //
-
-    //        return factory.getOclRepresentationFor(result);
-
-    //    }
+	// }
 
 }
-
