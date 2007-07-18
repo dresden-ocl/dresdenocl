@@ -38,31 +38,31 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UmlModelType extends OclModelType {
-	
+
 	private Class jClass;
-	
+
 	UmlModelType(String name, Class jClass, OclFactory factory) {
 		super(name, factory);
 		this.jClass = jClass;
 	}
-	
+
 	public static final UmlModelType ANY = new UmlModelType("ANY", null, null);
 
 	public Class getJClass() {
 		return jClass;
 	}
-	
+
 	@Override
 	Object getFeatureImpl(String name) {
 		Class c = jClass;
 		Field field = null;
-		while (c!=null && field==null)
-		{
+		while (c != null && field == null) {
 			try {
 				field = c.getDeclaredField(name);
 			} catch (SecurityException e1) {
 				// TODO Auto-generated catch block
-				throw new OclException("getFeature("+name+") for "+this+" failed: "+e1.getMessage());
+				throw new OclException("getFeature(" + name + ") for " + this
+						+ " failed: " + e1.getMessage());
 			} catch (NoSuchFieldException e1) {
 				// TODO Auto-generated catch block
 				// Do nothing
@@ -71,21 +71,22 @@ public class UmlModelType extends OclModelType {
 			}
 		}
 		if (field == null)
-			throw new OclException("getFeature("+name+") for "+this+" failed");
-		else
-		{
+			throw new OclException("getFeature(" + name + ") for " + this
+					+ " failed");
+		else {
 			field.setAccessible(true);
 			try {
-				//System.out.println("Feld: " + field.getName());
+				// System.out.println("Feld: " + field.getName());
 				return field.get(null);
 			} catch (Exception e) {
-				throw new OclException("getFeature("+name+") for "+this+" failed: "+e.getMessage());
+				throw new OclException("getFeature(" + name + ") for " + this
+						+ " failed: " + e.getMessage());
 			}
 		}
 	}
 
 	@Override
-	//TODO: Find method if parameter-types have to be casted
+	// TODO: Find method if parameter-types have to be casted
 	Object getFeatureImpl(String name, Object[] parameters) {
 		Method method = null;
 		List params = Arrays.asList(parameters);
@@ -98,62 +99,82 @@ public class UmlModelType extends OclModelType {
 		Iterator it = params.iterator();
 		int i = 0;
 		while (it.hasNext()) {
-			params_class[i] = it.next().getClass();			
+			params_class[i] = it.next().getClass();
 		}
 		try {
-			//method = jClass.getDeclaredMethod(name, params_class);
-			method = new BetterMethodFinder(jClass).findMethod(name, params_class);
+			// method = jClass.getDeclaredMethod(name, params_class);
+			method = new BetterMethodFinder(jClass).findMethod(name,
+					params_class);
 			method.setAccessible(true);
 			return method.invoke(null, parameters);
 		} catch (Exception e) {
-			throw new OclException("getFeature("+name+", ...) for "+this.getName()+"failed: "+e.getMessage());
+			throw new OclException("getFeature(" + name + ", ...) for "
+					+ this.getName() + "failed: " + e.getMessage());
 		}
 	}
-	
+
 	public boolean equals(Object o) {
 		if (!(o instanceof UmlModelType))
 			return false;
 		else
-			return ((UmlModelType)o).jClass.equals(jClass);
+			return ((UmlModelType) o).jClass.equals(jClass);
 	}
-	
+
+	/**
+	 * <p>Checks if this <code>UmlModelType</code> is of a given type
+	 * <b>and only exactly this type, not one of its subtpyes!</b></p>
+	 * 
+	 * <p><i>Documentation added by Claas Wilke in July 2007.</i></p>
+	 * 
+	 * @return boolean: true if the <code>UmlModelType</code> is of the given type.
+	 */
 	boolean isOfType(OclRoot or) {
 		if (or.isUndefined())
 			return false;
-		
+
 		if (!(or instanceof UmlModelObject))
 			return false;
+		
 		else {
 			if (this == ANY)
 				return true;
 			
-			Object mo = ((UmlModelObject)or).getObject();
+			//FIXME check type not also sub types!
+			//Will be fixed by Michael Thiele
+
+			Object mo = ((UmlModelObject) or).getObject();
 			return jClass.isInstance(mo);
 		}
 	}
-	
+
+	/**
+	 * <p>Checks if this <code>UmlModelType</code> is of a given type
+	 * <b>or one of its subtypes</b>).</p>
+	 * 
+	 * <p><i>Documentation added by Claas Wilke in July 2007.</i></p>
+	 * 
+	 * @return boolean: true if the <code>UmlModelType</code> is of the given type.
+	 */
 	boolean isOfKind(OclRoot or) {
 		if (or.isUndefined()) {
 			return true;
 		}
-		
+
 		if (!(or instanceof UmlModelObject)) {
 			return false;
-		} 
-		else 
-		{
-			if (this==ANY) {
+		} else {
+			if (this == ANY) {
 				return true;
 			}
-			Object o = ((UmlModelObject)or).getObject();
+			Object o = ((UmlModelObject) or).getObject();
 			return jClass.isInstance(o);
 		}
 	}
-	
-	
-	//TODO: implement allInstances() for UmlModelType
+
+	// TODO: implement allInstances() for UmlModelType
 	public OclSet allInstances() {
-		throw new OclException("allInstances() not yet supported for UmlModelType");
+		throw new OclException(
+				"allInstances() not yet supported for UmlModelType");
 	}
 
 }
