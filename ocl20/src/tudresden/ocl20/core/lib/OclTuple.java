@@ -106,15 +106,15 @@ public class OclTuple extends OclAny {
 
     }
 
-    
-
+    /**
+     * <p>Constructs an instance representing an undefined <code>OclTuple</code>.</p>
+     * 
+	 * @param undefinedreason The reason why the <code>OclTuple</code> is undefined.
+     */
+	/* Documentation added an Constructor refactored by Claas Wilke in July 2007. */
     public OclTuple(String undefinedReason){
-
-        super(0, undefinedReason);
-
+        super(undefinedReason);
     }
-
-    
 
     /**
 
@@ -143,14 +143,14 @@ public class OclTuple extends OclAny {
         OclTuple other=(OclTuple)o;
 
         if(isUndefined()){
-
-            return new OclBoolean(0,getUndefinedReason());
+        	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+            return new OclBoolean(getUndefinedReason());
 
         }
 
         if(other.isUndefined()){
-
-            return new OclBoolean(0,other.getUndefinedReason());
+        	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+            return new OclBoolean(other.getUndefinedReason());
 
         }
 

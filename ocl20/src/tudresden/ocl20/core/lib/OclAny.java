@@ -32,16 +32,60 @@
 // FILE: d:/java/classes/de/tudresden/ocl/OclAny.java
 
 package tudresden.ocl20.core.lib;
-import java.util.*;
 
 /** This class represents the part of the OCL type OclAny common to basic
  *  types and application types, i.e. the availablity of certain properties.
  */
 public abstract class OclAny implements OclRoot {
     
+    /**
+     * The reason, why this object represents an undefined value.
+     * Additionally, this is the tag, whether this object represents
+     * a undefined value.
+     *Is null, if and only if it is not undefined.
+     */
+	/* Changed from private to protected during refactoring by Claas Wilke
+	 * in July 2007. */
+    protected String undefinedreason = null;
+
+    /**
+	 * <p>Constructs an new instance of <code>OclAny</code>.</p>
+	 */
+	/* Documentation added during refacotring by Claas Wilke in July 2007. */
     public OclAny() {
     }
-    
+      
+    /**
+     * <p>Constructs an instance representing an undefined value.</p>
+     * 
+     * <p>This Constructor is deprecated. To create an
+     * undefined OclAny use Construtor <code>protected OclAny(String 
+     * undefinedreason)</code></p>
+	 *
+	 * @param dummy Must be 0.
+	 * @param undefinedreason The reason why the <code>OclAny</code> is undefined.
+     * @deprecated <p>This Constructor is deprecated. To create an
+     * undefined <code>OclAny</code> use Construtor <code>protected OclAny(String 
+     * undefinedreason)</code></p>
+     * 
+     */
+    /* Deprecated during refacotring by Claas Wilke in July 2007. */
+    protected OclAny(int dummy, String undefinedreason) {
+        if(dummy!=0)
+            throw new RuntimeException();
+        this.undefinedreason=undefinedreason;
+    }
+
+    /**
+     * <p>Constructs an instance representing an undefined value.</p>
+     * 
+	 * @param undefinedreason The reason why the <code>OclAny</code> is undefined.
+     */
+    /* Created during refacotring by Claas Wilke in July 2007. */
+    protected OclAny(String undefinedreason) {
+        this.undefinedreason=undefinedreason;
+    }
+ 
     public abstract OclBoolean isEqualTo(Object o);
     
     /** @return the negated result of isEqualTo
@@ -55,7 +99,8 @@ public abstract class OclAny implements OclRoot {
      */
     public OclBoolean oclIsKindOf(OclType t) {
         if(isUndefined()){
-            return new OclBoolean(0, getUndefinedReason());
+        	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+            return new OclBoolean(getUndefinedReason());
         }
         return OclBoolean.getOclRepresentationFor(t.isOfKind(this));
     }
@@ -67,34 +112,16 @@ public abstract class OclAny implements OclRoot {
      */
     public OclBoolean oclIsTypeOf(OclType t) {
         if(isUndefined()){
-            return new OclBoolean(0, getUndefinedReason());
+        	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+            return new OclBoolean(getUndefinedReason());
         }
         return OclBoolean.getOclRepresentationFor(t.isOfType(this));
     }
-    
-    
+       
     public OclAny oclAsType(OclType t) {
         return this;
     }
         
-    /**
-     The reason, why this object represents an undefined value.
-     Additionally, this is the tag, whether this object represents
-     a undefined value.
-     Is null, if and only if it is not undefined.
-     */
-    private String undefinedreason=null;
-    
-    /**
-     Constructs an instance representing an undefined value.
-     @parameter dummy must be 0.
-     */
-    protected OclAny(int dummy, String undefinedreason) {
-        if(dummy!=0)
-            throw new RuntimeException();
-        this.undefinedreason=undefinedreason;
-    }
-    
     public final boolean isUndefined() {
         return undefinedreason!=null;
     }

@@ -72,9 +72,11 @@ public class OclBag extends OclUnsortedCollection {
     }
     OclBag other=(OclBag)o;
     if(isUndefined())
-      return new OclBoolean(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
     if(other.isUndefined()) 
-      return new OclBoolean(0,other.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(other.getUndefinedReason());
 
     HashMap hmThis=this.getCountMap();
     HashMap hmOther=other.getCountMap();

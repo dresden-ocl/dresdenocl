@@ -81,13 +81,15 @@ public class OclEnumLiteral extends OclAny {
     protected OclEnumLiteral(){
 
     }
-
-    
-
+   
+    /**
+     * <p>Constructs an instance representing an undefined <code>OclEnumLiteral</code>.</p>
+     * 
+	 * @param undefinedreason The reason why the <code>OclEnumLiteral</code> is undefined.
+     */
+	/* Documentation added an Constructor refactored by Claas Wilke in July 2007. */
     public OclEnumLiteral(String undefinedReason){
-
-        super(0, undefinedReason);
-
+        super(undefinedReason);
     }
 
     
@@ -95,8 +97,8 @@ public class OclEnumLiteral extends OclAny {
     public OclBoolean isEqualTo(Object o){
 
         //OclEnumLiteral is only directly instantiated in case of undefined
-
-        return new OclBoolean(0, getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+        return new OclBoolean(getUndefinedReason());
 
     }
 

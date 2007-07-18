@@ -96,19 +96,17 @@ public class OclModelObject extends OclAny {
 
 	}
 
-	/** 
-	 * <p>Creates an undefined instance of <code>OclModelObject</code>.</p>
-	 *  
-	 * <p><i>(Documentation completed by Claas Wilke in July 2007)</i></p>
-	 * 
-	 * @param undefinedReason The reason, why the <code>OclModelObject</code> is undefined.
-	 */
+    /**
+     * <p>Constructs an instance representing an undefined <code>OclModelObject.</code></p>
+     * 
+	 * @param undefinedreason The reason why the <code>OclModelObject</code> is undefined.
+     */
+	/* Documentation added an Constructor refactored by Claas Wilke in July 2007. */
 	public OclModelObject(String undefinedReason) {
-
-		super(0, undefinedReason);
-
+		super(undefinedReason);
 	}
 
+	
 	/**
 	 * <p>Compares the <code>OclModelObject</code> to a given <code>Object</code>.</p>
 	 * 
@@ -120,8 +118,8 @@ public class OclModelObject extends OclAny {
 	 * @return OclBoolean 
 	 */
 	public OclBoolean isEqualTo(Object o) {
-
-		return new OclBoolean(0, getUndefinedReason());
+		/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+		return new OclBoolean(getUndefinedReason());
 
 	}
 
@@ -136,8 +134,8 @@ public class OclModelObject extends OclAny {
 	 * @return OclBoolean 
 	 */
 	public OclBoolean oclInState(OclState state) {
-
-		return new OclBoolean(0, getUndefinedReason());
+		/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+		return new OclBoolean(getUndefinedReason());
 
 	}
 

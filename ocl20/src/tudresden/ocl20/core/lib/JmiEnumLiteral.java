@@ -54,9 +54,11 @@ public class JmiEnumLiteral extends OclEnumLiteral {
         }
         JmiEnumLiteral other=(JmiEnumLiteral)o;
         if (isUndefined())
-            return new OclBoolean(0,getUndefinedReason());
+        	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+            return new OclBoolean(getUndefinedReason());
         else if(other.isUndefined())
-            return new OclBoolean(0,other.getUndefinedReason());
+        	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+            return new OclBoolean(other.getUndefinedReason());
         
         if (this.refEnum.equals(other.refEnum)) {
             return OclBoolean.TRUE;

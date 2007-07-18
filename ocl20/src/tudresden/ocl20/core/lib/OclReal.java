@@ -66,10 +66,6 @@
 
 package tudresden.ocl20.core.lib;
 
-import java.util.*;
-
-
-
 /** This class represents the OCL basic type Real. To implement the the abstract
 
  *  mathematical definition of the OCL specification, this class uses
@@ -134,17 +130,33 @@ public class OclReal extends OclAny implements
 
 
 
-  /** constructor for undefined OclReal value */
+	/**
+	 * <p>Constructs an instance representing an undefined <code>OclReal</code>.</p>
+	 * 
+	 * <p>This Constructor is deprecated. To create an undefined <code>OclReal</code> use
+	 * Construtor <code>protected OclReal(String undefinedreason)</code></p>
+	 * 
+	 * @param dummy Must be 0.
+	 * @param undefinedreason The reason why the <code>OclReal</code> is undefined.
+	 * @deprecated <p>This Constructor is deprecated. To create an undefined <code>OclReal</code> 
+	 * use Construtor <code>protected OclReal(String undefinedreason)</code></p>
+	 */
+	/* Deprecated during refacotring by Claas Wilke in July 2007. */
+    public OclReal(int dummy, String undefinedreason) {
+        super(dummy, undefinedreason);
+        dValue=Double.NaN; // hopefully makes fail-fast
+    }
 
-  public OclReal(int dummy, String reason) {
-
-    super(dummy, reason);
-
-    dValue=Double.NaN; // hopefully makes fail-fast
-
-  }
-
-
+    /**
+     * <p>Constructs an instance representing an undefined <code>OclReal</code>.</p>
+     * 
+	 * @param undefinedreason The reason why the <code>OclReal</code> is undefined.
+     */
+    /* Created during refacotring by Claas Wilke in July 2007. */
+    public OclReal(String undefinedreason) {
+        super(undefinedreason);
+        dValue=Double.NaN; // hopefully makes fail-fast
+    }
 
   /** Two OclReals are equal if their <CODE>long</CODE> values are
 
@@ -157,12 +169,12 @@ public class OclReal extends OclAny implements
     OclReal or=toOclReal(o, "OclReal isEqualTo()");
 
     if(isUndefined())
-
-      return new OclBoolean(0,getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(getUndefinedReason());
 
     if(or.isUndefined())
-
-      return new OclBoolean(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(or.getUndefinedReason());
 
     return OclBoolean.getOclRepresentationFor( getDouble()==or.getDouble() );
 
@@ -395,8 +407,8 @@ public class OclReal extends OclAny implements
   public OclInteger floor() {
 
     if(isUndefined())
-
-      return new OclInteger(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(getUndefinedReason());
 
     return new OclInteger( (long) Math.floor( getDouble() ) );
 
@@ -411,8 +423,8 @@ public class OclReal extends OclAny implements
   public OclInteger round() {
 
     if(isUndefined())
-
-      return new OclInteger(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(getUndefinedReason());
 
     return new OclInteger( Math.round(getDouble()) );
 
@@ -509,12 +521,12 @@ public class OclReal extends OclAny implements
     OclReal or=toOclReal(c, "OclReal isLessThan()");
 
     if(isUndefined())
-
-      return new OclBoolean(0,getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(getUndefinedReason());
 
     if(or.isUndefined()) 
-
-      return new OclBoolean(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(or.getUndefinedReason());
 
     return OclBoolean.getOclRepresentationFor(getDouble()<or.getDouble());
 
@@ -527,12 +539,12 @@ public class OclReal extends OclAny implements
     OclReal or=toOclReal(c, "OclReal isLessThan()");
 
     if(isUndefined())
-
-      return new OclBoolean(0,getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(getUndefinedReason());
 
     if(or.isUndefined()) 
-
-      return new OclBoolean(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(or.getUndefinedReason());
 
     return OclBoolean.getOclRepresentationFor(getDouble()>or.getDouble());
 
@@ -545,12 +557,12 @@ public class OclReal extends OclAny implements
     OclReal or=toOclReal(c, "OclReal isLessThan()");
 
     if(isUndefined())
-
-      return new OclBoolean(0,getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(getUndefinedReason());
 
     if(or.isUndefined())
-
-      return new OclBoolean(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(or.getUndefinedReason());
 
     return OclBoolean.getOclRepresentationFor(getDouble()<=or.getDouble());
 
@@ -563,12 +575,12 @@ public class OclReal extends OclAny implements
     OclReal or=toOclReal(c, "OclReal isLessThan()");
 
     if(isUndefined())
-
-      return new OclBoolean(0,getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(getUndefinedReason());
 
     if(or.isUndefined())
-
-      return new OclBoolean(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(or.getUndefinedReason());
 
     return OclBoolean.getOclRepresentationFor(getDouble()>=or.getDouble());
 
@@ -593,8 +605,8 @@ public class OclReal extends OclAny implements
    */
 
   public OclRoot getFeature(String name) {
-
-    return new OclReal(0,"feature "+name+" of OclBoolean requested");
+	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    return new OclReal("feature "+name+" of OclBoolean requested");
 
   }
 
@@ -609,9 +621,8 @@ public class OclReal extends OclAny implements
       return ret;
 
     } catch (Exception cce) {
-
-      return new OclReal(0,methodname+" called with non-OclReal parameter");
-
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclReal(methodname+" called with non-OclReal parameter");
     }
 
   }

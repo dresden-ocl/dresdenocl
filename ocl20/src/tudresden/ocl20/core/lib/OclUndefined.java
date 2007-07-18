@@ -143,8 +143,8 @@ public class OclUndefined implements OclRoot{
     
 
     public OclBoolean oclIsKindOf(OclType t) {
-
-        return new OclBoolean(0, getUndefinedReason());   //specification says: true !
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+        return new OclBoolean(getUndefinedReason());   //specification says: true !
 
         
 
@@ -153,8 +153,8 @@ public class OclUndefined implements OclRoot{
     
 
     public OclBoolean oclIsTypeOf(OclType t) {
-
-        return new OclBoolean(0, getUndefinedReason());   //specification says: false !
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+        return new OclBoolean(getUndefinedReason());   //specification says: false !
 
     }
 

@@ -66,10 +66,6 @@
 
 package tudresden.ocl20.core.lib;
 
-import java.util.*;
-
-
-
 /** This class is a implementation of OclRoot that is backed by a "contained"
 
  *  OclRoot object. That contained object can be changed. <CODE>OclContainer</CODE> is
@@ -137,8 +133,8 @@ public class OclContainer implements OclRoot {
             return containedValue.isEqualTo(cont.containedValue);
 
         } catch (ClassCastException e) {
-
-            return new OclBoolean(0,"OclContainer isEqualTo() called with non-OclContainer argument");
+        	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+            return new OclBoolean("OclContainer isEqualTo() called with non-OclContainer argument");
 
         }
 

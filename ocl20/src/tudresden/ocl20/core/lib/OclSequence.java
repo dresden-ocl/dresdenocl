@@ -80,9 +80,11 @@ public class OclSequence extends OclSortedCollection {
     }
     OclSequence other=(OclSequence)o;
     if(isUndefined())
-      return new OclBoolean(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
     if(other.isUndefined())
-      return new OclBoolean(0,other.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(other.getUndefinedReason());
     Iterator i1=this.collection.iterator();
     Iterator i2=other.collection.iterator();
     while (i1.hasNext() && i2.hasNext()) {
@@ -354,9 +356,11 @@ public class OclSequence extends OclSortedCollection {
    */
   public OclInteger indexOf(OclRoot obj) {
 		if (isUndefined())
-			return new OclInteger(0, this.getUndefinedReason());
+			/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+			return new OclInteger(this.getUndefinedReason());
 		if (obj.isUndefined())
-			return new OclInteger(0, obj.getUndefinedReason());
+			/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+			return new OclInteger(obj.getUndefinedReason());
 
 		/*int index = 1;
 		Iterator iter=collection.iterator();
@@ -382,7 +386,8 @@ public class OclSequence extends OclSortedCollection {
     }
 		if (index > 0)
 			return new OclInteger(index);
-		return new OclInteger(0, "object "+obj.toString()+" not found within indexOf()");
+		/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+		return new OclInteger("object "+obj.toString()+" not found within indexOf()");
   }
   
   

@@ -38,7 +38,6 @@
 // FILE: d:/java/classes/de/tudresden/ocl/Ocl.java
 
 package tudresden.ocl20.core.lib;
-import java.util.*;
 
 /**
  * This class provides static methods for type casting instances of OclRoot.
@@ -55,7 +54,8 @@ public final class Ocl {
    */
   public static OclSizable toOclSizable(OclRoot or) {
     if(or.isUndefined())
-      return new OclString(0,or.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclString(or.getUndefinedReason(), false);
     try {
       return (OclSizable) or;
     } catch (ClassCastException e) {
@@ -85,11 +85,13 @@ public final class Ocl {
    */
   public static OclSubtractable toOclSubtractable(OclRoot or) {
     if(or.isUndefined())
-      return new OclInteger(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclInteger(or.getUndefinedReason());
     try {
       return (OclSubtractable) or;
     } catch (ClassCastException e) {
-      return new OclReal(0,"tried to cast "+or+" to OclSubtractable");
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclReal("tried to cast "+or+" to OclSubtractable");
     }
   }
 
@@ -160,11 +162,13 @@ public final class Ocl {
    */
   public static OclString toOclString(OclRoot or) {
     if(or.isUndefined())
-      return new OclString(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclString(or.getUndefinedReason(), false);
     try {
       return (OclString) or;
     } catch (ClassCastException e) {
-      return new OclString(0,"tried to cast "+or+" to OclString");
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclString("tried to cast "+or+" to OclString", false);
     }
   }
 
@@ -175,11 +179,13 @@ public final class Ocl {
    */
   public static OclBoolean toOclBoolean(OclRoot or) {
     if(or.isUndefined())
-      return new OclBoolean(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean(or.getUndefinedReason());
     try {
       return (OclBoolean) or;
     } catch (ClassCastException e) {
-      return new OclBoolean(0,"tried to cast "+or+" to OclBoolean");
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclBoolean("tried to cast "+or+" to OclBoolean");
     }
   }
 
@@ -190,11 +196,13 @@ public final class Ocl {
    */
   public static OclComparable toOclComparable(OclRoot or) {
     if(or.isUndefined())
-      return new OclInteger(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclInteger(or.getUndefinedReason());
     try {
       return (OclComparable) or;
     } catch (ClassCastException e) {
-      return new OclReal(0,"tried to cast "+or+" to OclComparable");
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclReal("tried to cast "+or+" to OclComparable");
     }
   }
 
@@ -205,11 +213,13 @@ public final class Ocl {
    */
   public static OclAddable toOclAddable(OclRoot or) {
     if(or.isUndefined())
-      return new OclInteger(0,or.getUndefinedReason());
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclInteger(or.getUndefinedReason());
     try {
       return (OclAddable) or;
     } catch (ClassCastException e) {
-      return new OclReal(0,"tried to cast "+or+" to OclAddable");
+      /* Constructor changed during refactoring by Claas Wilke in July 2007. */
+      return new OclReal("tried to cast "+or+" to OclAddable");
     }
   }
 
@@ -220,11 +230,13 @@ public final class Ocl {
    */
   public static OclMultiplyable toOclMultiplyable(OclRoot or) {
     if(or.isUndefined())
-      return new OclInteger(0,or.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(or.getUndefinedReason());
     try {
       return (OclMultiplyable) or;
     } catch (ClassCastException e) {
-      return new OclReal(0,"tried to cast "+or+" to OclMultiplyable");
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclReal("tried to cast "+or+" to OclMultiplyable");
     }
   }
 
@@ -235,11 +247,13 @@ public final class Ocl {
    */
   public static OclReal toOclReal(OclRoot or) {
     if(or.isUndefined())
-      return new OclInteger(0,or.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(or.getUndefinedReason());
     try {
       return (OclReal) or;
     } catch (ClassCastException e) {
-      return new OclReal(0,"tried to cast "+or+" to OclReal");
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclReal("tried to cast "+or+" to OclReal");
     }
   }
 
@@ -250,11 +264,13 @@ public final class Ocl {
    */
   public static OclInteger toOclInteger(OclRoot or) {
     if(or.isUndefined())
-      return new OclInteger(0,or.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(or.getUndefinedReason());
     try {
       return (OclInteger) or;
     } catch (ClassCastException e) {
-      return new OclInteger(0,"tried to cast "+or+" to OclInteger");
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger("tried to cast "+or+" to OclInteger");
     }
   }
 
@@ -265,7 +281,8 @@ public final class Ocl {
    */
   public static OclAny toOclAny(OclRoot or) {
     if(or.isUndefined())
-      return new OclInteger(0,or.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(or.getUndefinedReason());
     try {
       return (OclAny) or;
     } catch (ClassCastException e) {

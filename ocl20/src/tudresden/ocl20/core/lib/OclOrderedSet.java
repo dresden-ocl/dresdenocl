@@ -47,9 +47,11 @@ public class OclOrderedSet extends OclSortedCollection {
 
   public OclInteger indexOf(OclRoot obj) {
     if (isUndefined())
-      return new OclInteger(0, getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(getUndefinedReason());
     if (obj.isUndefined())
-      return new OclInteger(0, obj.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(obj.getUndefinedReason());
     int index;
     if (!(collection instanceof List)) {
       ArrayList list = new ArrayList(collection);
@@ -62,7 +64,8 @@ public class OclOrderedSet extends OclSortedCollection {
     if (index > 0)
       return new OclInteger(index);
     else
-      return new OclInteger(0, "object "+obj.toString()+" not found within indexOf()");
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger("object "+obj.toString()+" not found within indexOf()");
   }
 
   public OclBoolean isEqualTo(Object o) {
@@ -74,9 +77,11 @@ public class OclOrderedSet extends OclSortedCollection {
     }
     OclOrderedSet other = (OclOrderedSet)o;
     if (isUndefined())
-      return new OclBoolean(0, getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
     if (other.isUndefined())
-      return new OclBoolean(0, other.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(other.getUndefinedReason());
     Iterator i1 = this.collection.iterator();
     Iterator i2 = other.collection.iterator();
     while (i1.hasNext() && i2.hasNext()) {

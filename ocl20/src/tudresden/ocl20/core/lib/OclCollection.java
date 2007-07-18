@@ -275,9 +275,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
     public OclBoolean oclIsKindOf(OclType t) {
 
         if(isUndefined()){
-
-            return new OclBoolean(0, getUndefinedReason());
-
+        	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+            return new OclBoolean(getUndefinedReason());
         }
 
         return OclBoolean.getOclRepresentationFor(t.isOfKind(this));
@@ -303,9 +302,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
     public OclBoolean oclIsTypeOf(OclType t) {
 
         if(isUndefined()){
-
-            return new OclBoolean(0, getUndefinedReason());
-
+        	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+            return new OclBoolean(getUndefinedReason());
         }
 
         return OclBoolean.getOclRepresentationFor(t.isOfType(this));
@@ -375,8 +373,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclBoolean exists(OclIterator iter, OclBooleanEvaluatable eval) {
 
     if(isUndefined()) 
-
-      return new OclBoolean(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
 
     OclBoolean ret=OclBoolean.FALSE;
 
@@ -411,10 +409,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclBoolean forAll(OclIterator iter, OclBooleanEvaluatable eval) {
 
     if (isUndefined()) 
-
-      return new OclBoolean(0,getUndefinedReason());
-
-
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
 
       OclBoolean ret= OclBoolean.TRUE;
 
@@ -453,8 +449,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclBoolean isUnique(OclIterator iter, OclRootEvaluatable eval) {
 
     if(isUndefined()) 
-
-      return new OclBoolean(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
 
     boolean ret=true;
 
@@ -649,8 +645,9 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   
 
   public OclBoolean one(OclIterator iter, OclBooleanEvaluatable eval){
-
-    if (isUndefined()) return new OclBoolean(0, this.getUndefinedReason());
+    if (isUndefined()) 
+  	  	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(this.getUndefinedReason());
 
     ArrayList list=new ArrayList(collection.size());
 
@@ -687,8 +684,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
     }
 
     if(undefined){
-
-        return new OclBoolean(0, "The evaluation of the body of the 'one'-Iterator was undefined for at least one element of the collection");
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+        return new OclBoolean("The evaluation of the body of the 'one'-Iterator was undefined for at least one element of the collection");
 
     } else {
 
@@ -887,8 +884,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclInteger size() {
 
     if(isUndefined()) 
-
-      return new OclInteger(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(getUndefinedReason());
 
     return new OclInteger(collection.size());
 
@@ -911,12 +908,12 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclBoolean includes(OclRoot obj) {
 
     if(isUndefined()) 
-
-      return new OclBoolean(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
 
     if(obj.isUndefined()) 
-
-      return new OclBoolean(0,obj.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(obj.getUndefinedReason());
 
     boolean ret=false;
 
@@ -977,10 +974,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclInteger count(OclRoot or) {
 
     if(isUndefined()) 
-
-      return new OclInteger(0,getUndefinedReason());
-
-    
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(getUndefinedReason());
 
     Iterator iter=collection.iterator();
 
@@ -1011,12 +1006,12 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclBoolean includesAll(OclCollection coll) {
 
     if(isUndefined()) 
-
-      return new OclBoolean(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
 
     if(coll.isUndefined()) 
-
-      return new OclBoolean(0,coll.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(coll.getUndefinedReason());
 
     return OclBoolean.getOclRepresentationFor(collection.containsAll(coll.collection));
 
@@ -1033,8 +1028,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclBoolean isEmpty() {
 
     if(isUndefined()) 
-
-      return new OclBoolean(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
 
     return OclBoolean.getOclRepresentationFor(collection.isEmpty());
 
@@ -1069,8 +1064,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
   public OclAddable sum() {
 
     if(isUndefined()) 
-
-      return new OclInteger(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(getUndefinedReason());
 
     if (collection.isEmpty()) return new OclInteger(0l);
 
@@ -1095,8 +1090,8 @@ public abstract class OclCollection implements OclSizable, OclRoot {
     }
 
     catch (ClassCastException cce) {
-
-      return new OclInteger(0,"sum() of collection with non-OclAddable element requested");
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger("sum() of collection with non-OclAddable element requested");
 
     }
 

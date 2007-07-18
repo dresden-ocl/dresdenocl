@@ -66,10 +66,6 @@
 
 package tudresden.ocl20.core.lib;
 
-import java.util.*;
-
-
-
 /** This class represents the basic OCL type Integer. The Integer value is
 
  *  stored in a <code>long</code> attribute, thus restricting the possible
@@ -134,17 +130,33 @@ public class OclInteger extends OclReal {
 
 
 
-  /** constructor for undefined OclInteger value */
+	/**
+	 * <p>Constructs an instance representing an undefined <code>OclInteger</code>.</p>
+	 * 
+	 * <p>This Constructor is deprecated. To create an undefined <code>OclInteger</code> use
+	 * Construtor <code>protected OclInteger(String undefinedreason)</code></p>
+	 * 
+	 * @param dummy Must be 0.
+	 * @param undefinedreason The reason why the <code>OclInteger</code> is undefined.
+	 * @deprecated <p>This Constructor is deprecated. To create an undefined <code>OclReal</code> 
+	 * use Construtor <code>protected OclInteger(String undefinedreason)</code></p>
+	 */
+	/* Deprecated during refacotring by Claas Wilke in July 2007. */
+    public OclInteger(int dummy, String undefinedreason) {
+    	super(dummy, undefinedreason);
+    	lValue=Long.MIN_VALUE; // hopefully makes fail-fast
+    }
 
-  public OclInteger(int dummy, String reason) {
-
-    super(dummy, reason);
-
-    lValue=Long.MIN_VALUE; // hopefully makes fail-fast
-
-  }
-
-
+    /**
+     * <p>Constructs an instance representing an undefined <code>OclInteger</code>.</p>
+     * 
+     * @param undefinedreason The reason why the <code>OclInteger</code> is undefined.
+     */
+    /* Created during refacotring by Claas Wilke in July 2007. */
+    public OclInteger(String undefinedreason) {
+	    super(undefinedreason);
+	    lValue=Long.MIN_VALUE; // hopefully makes fail-fast
+	}
 
   /** This method is only invoked in case of an error: OclInteger's add
 
@@ -349,8 +361,8 @@ public class OclInteger extends OclReal {
   public OclReal divide(OclInteger oi) {
 
     if (oi.lValue==0l) {
-
-      return new OclInteger(0,"division by zero");
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger("division by zero");
 
     }
 
@@ -431,8 +443,8 @@ public class OclInteger extends OclReal {
   public OclInteger div(OclInteger i) {
 
     if (i.lValue==0l) {
-
-      return new OclInteger(0,"division by zero");
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger("division by zero");
 
     }
 
@@ -535,9 +547,8 @@ public class OclInteger extends OclReal {
       return ret;
 
     } catch (ClassCastException cce) {
-
-      return new OclInteger(0,methodname+" called with non-OclInteger parameter");
-
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclInteger(methodname+" called with non-OclInteger parameter");
     }
 
   }

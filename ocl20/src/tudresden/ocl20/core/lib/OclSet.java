@@ -78,9 +78,11 @@ public class OclSet extends OclUnsortedCollection implements OclSubtractable {
     }
     OclSet other=(OclSet)o;
     if(isUndefined())
-      return new OclBoolean(0,getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(getUndefinedReason());
     if(other.isUndefined()) 
-      return new OclBoolean(0,other.getUndefinedReason());
+    	/* Constructor changed during refactoring by Claas Wilke in July 2007. */
+    	return new OclBoolean(other.getUndefinedReason());
     if ( this.collection.containsAll( other.collection ) &&
           other.collection.containsAll( this.collection ) ) {
       return OclBoolean.TRUE;
