@@ -28,7 +28,8 @@ import tudresden.ocl20.logging.appender.PluginLogFileAppender;
 public class DefaultLogManager implements ILogManager {
 
   // a logger for this class
-  private static final Logger logger = Logger.getLogger(DefaultLogManager.class);
+  private static final Logger logger = Logger
+      .getLogger(DefaultLogManager.class);
 
   // the plugin that belongs to this log manager
   private Plugin plugin;
@@ -40,39 +41,48 @@ public class DefaultLogManager implements ILogManager {
   private boolean disposed;
 
   /**
-   * Creates a new <code>DefaultLogManager</code> instance for the given {@link Plugin}. A log4j
-   * {@link Hierarchy} object will be created specifically for this <code>LogManager</code>.
+   * Creates a new <code>DefaultLogManager</code> instance for the given
+   * {@link Plugin}. A log4j {@link Hierarchy} object will be created
+   * specifically for this <code>LogManager</code>.
    * 
-   * @param plugin the corresponding Eclipse plugin, must NOT be <code>null</code>
+   * @param aPlugin the corresponding Eclipse plugin, must NOT be
+   *          <code>null</code>
    */
-  public DefaultLogManager(Plugin plugin) {
+  public DefaultLogManager(final Plugin aPlugin) {
     if (logger.isDebugEnabled()) {
-      logger.debug("DefaultLogManager(plugin=" + plugin + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+      logger.debug("DefaultLogManager(plugin=" + aPlugin + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     // precondition check
-    if (plugin == null) {
+    if (aPlugin == null) {
       throw new IllegalArgumentException("The parameter 'plugin' was null!"); //$NON-NLS-1$
     }
 
     // set the plugin
-    this.plugin = plugin;
+    this.plugin = aPlugin;
 
-    // instantiate a new log4j hierarchy with the root logger's log level set to WARN
+    // instantiate a new log4j hierarchy with log level set to WARN
     hierarchy = new Hierarchy(new RootLogger(Level.WARN));
 
-    // add a special hierarchy listener to configure the Eclipse appenders if necessary
+    // add a special hierarchy listener to configure the Eclipse appenders if
+    // necessary
     hierarchy.addHierarchyEventListener(new PluginEventListener());
 
     // configure the hierarchy
-    new PropertyConfigurator().doConfigure(getLoggerPropertiesUrl(),hierarchy);
+    new PropertyConfigurator().doConfigure(getLoggerPropertiesUrl(), hierarchy);
 
     if (logger.isDebugEnabled()) {
       logger.debug("DefaultLogManager() - exit"); //$NON-NLS-1$
     }
   }
 
-  // helper method to find a custom version of the logger properties in the associated plugin
+  /**
+   * Helper method to find a custom version of the logger properties in the
+   * associated plugin. If no custom properties are found, the URL of the
+   * default properties in this plugin is returned.
+   * 
+   * @return a <code>URL</code> instance
+   */
   private URL getLoggerPropertiesUrl() {
     if (logger.isDebugEnabled()) {
       logger.debug("getLoggerPropertiesUrl() - enter"); //$NON-NLS-1$
@@ -90,47 +100,55 @@ public class DefaultLogManager implements ILogManager {
 
     // default to own logger properties
     if (url == null) {
-      url = LoggingPlugin.getDefault().getBundle().getEntry("/" + DEFAULT_CONFIG_FILE_NAME); //$NON-NLS-1$
+      url = LoggingPlugin.getDefault().getBundle().getEntry(
+          "/" + DEFAULT_CONFIG_FILE_NAME); //$NON-NLS-1$
     }
 
     if (logger.isDebugEnabled()) {
       logger.debug("getLoggerPropertiesUrl() - exit - return value=" + url); //$NON-NLS-1$
     }
-    
+
     return url;
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Returns the logger with the given name managed by the log4j
+   * {@link Hierarchy} encapsulated by this log manager.
    * 
-   * @see tudresden.ocl20.logging.ILogManager#getLogger(java.lang.String)
+   * @param name the name of the desired logger
+   * 
+   * @return a <code>Logger</code> instance
    */
-  public Logger getLogger(String name) {
+  public Logger getLogger(final String name) {
     return hierarchy.getLogger(name);
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Delegates to the encapsulated {@link Hierarchy log4j hierarchy}'s
+   * {@link Hierarchy#getLogger(String)} method by passing the
+   * {@link Class#getCanonicalName() canonical name} of the given class.
    * 
-   * @see tudresden.ocl20.logging.ILogManager#getLogger(java.lang.Class)
+   * @param clazz the class to return a logger for
+   * 
+   * @return a <code>Logger</code> instance
    */
-  public Logger getLogger(Class<?> clazz) {
+  public Logger getLogger(final Class<?> clazz) {
     return hierarchy.getLogger(clazz.getCanonicalName());
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Returns the root logger of the encapsulated
+   * {@link Hierarchy log4j hierarchy}.
    * 
-   * @see tudresden.ocl20.logging.ILogManager#getRootLogger()
+   * @return a <code>Logger</code> instance
    */
   public Logger getRootLogger() {
     return hierarchy.getRootLogger();
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.logging.ILogManager#dispose()
+
+  /**
+   * Shuts down the encapsulated {@link Hierarchy log4j hierarchy}.
    */
   public void dispose() {
     if (logger.isDebugEnabled()) {
@@ -148,48 +166,56 @@ public class DefaultLogManager implements ILogManager {
     }
   }
 
-  /*
-   * (non-Javadoc)
+
+  /**
+   * Returns a string representation of this log manager using the Jakarta
+   * Commons Lang library. 
    * 
-   * @see java.lang.Object#toString()
+   * @return a <code>String</code> instance
    */
   @Override
   public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE)
-        .append("plugin",plugin).append("disposed",disposed).toString(); //$NON-NLS-1$ //$NON-NLS-2$
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
+        "plugin", plugin).append("disposed", disposed).toString(); //$NON-NLS-1$ //$NON-NLS-2$
   }
 
   /**
    * Returns the plugin associated with this log manager.
    * 
-   * @return a <code>Plugin</code> instance or <code>null</code> if no plugin has been set
+   * @return a <code>Plugin</code> instance or <code>null</code> if no
+   *         plugin has been set
    */
   protected Plugin getPlugin() {
     return plugin;
   }
 
-  // a custom hierarchy event listener that will set the necessary properties for the special
-  // plugin-based log4j appenders. Note that we don't need to check whether the plugin belonging
-  // to this LogManager is null because in this case the listener would not have been attached to
-  // the log4j hierarchy.
+  /**
+   * A custom hierarchy event listener that will set the necessary properties
+   * for the special plugin-based log4j appenders. Note that we don't need to
+   * check whether the plugin belonging to this LogManager is null because in
+   * this case the listener would not have been attached to the log4j hierarchy.
+   */
   protected class PluginEventListener implements HierarchyEventListener {
 
     /**
-     * Logger for this class
+     * Logger for this class.
      */
     private final Logger logger = Logger.getLogger(PluginEventListener.class);
 
     /**
-     * Called when a new appender is added for a particular level. Internally it checks if the
-     * appender is one of our custom ones and sets its custom properties.
+     * Called when a new appender is added for a particular level. Internally it
+     * checks if the appender is one of our custom ones and sets its custom
+     * properties.
      * 
      * @param category level
      * @param appender appender added for this level
      */
     @SuppressWarnings("unused")
-    public void addAppenderEvent(Category cat, Appender appender) {
+    public void addAppenderEvent(final Category category,
+        final Appender appender) {
       if (logger.isDebugEnabled()) {
-        logger.debug("addAppenderEvent(cat=" + cat + ", appender=" + appender + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        logger
+            .debug("addAppenderEvent(cat=" + category + ", appender=" + appender + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
       }
 
       if (appender instanceof ErrorLogAppender) {
@@ -197,7 +223,8 @@ public class DefaultLogManager implements ILogManager {
       }
 
       else if (appender instanceof PluginLogFileAppender) {
-        ((PluginLogFileAppender) appender).setStateLocation(getPlugin().getStateLocation());
+        ((PluginLogFileAppender) appender).setStateLocation(getPlugin()
+            .getStateLocation());
       }
 
       if (logger.isDebugEnabled()) {
@@ -206,13 +233,15 @@ public class DefaultLogManager implements ILogManager {
     }
 
     /**
-     * Called when an appender is removed from for a particular level. Does nothing.
+     * Called when an appender is removed from for a particular level. Does
+     * nothing.
      * 
      * @param category level
      * @param appender appender added for this level
      */
     @SuppressWarnings("unused")
-    public void removeAppenderEvent(Category cat, Appender appender) {
+    public void removeAppenderEvent(final Category category,
+        final Appender appender) {
       // no implementation necessary
     }
   }

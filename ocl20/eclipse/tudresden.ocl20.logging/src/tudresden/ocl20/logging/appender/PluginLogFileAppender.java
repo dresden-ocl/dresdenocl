@@ -9,13 +9,14 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * This class is a custom log4j appender that logs to a file in an Eclipse plugin's state location.
- * It can be configured using the standard configuration options available for
- * {@link RollingFileAppender}. The state location can either be provided using one of the
- * overloaded constructors or by calling the {@link #setStateLocation(IPath)} method. The appender
- * won't be {@link #activateOptions() activated} until the state location of the corresponding
- * plugin has been {@link #setStateLocation(IPath) set}. Clients may extend this class to provide
- * specialized behaviour.
+ * This class is a custom log4j appender that logs to a file in an Eclipse
+ * plugin's state location. It can be configured using the standard
+ * configuration options available for {@link RollingFileAppender}. The state
+ * location can either be provided using one of the overloaded constructors or
+ * by calling the {@link #setStateLocation(IPath)} method. The appender won't be
+ * {@link #activateOptions() activated} until the state location of the
+ * corresponding plugin has been {@link #setStateLocation(IPath) set}. Clients
+ * may extend this class to provide specialized behaviour.
  * 
  * @author Matthias Braeuer (based on version by Manoel Marques)
  */
@@ -35,8 +36,8 @@ public class PluginLogFileAppender extends RollingFileAppender {
   }
 
   /**
-   * Creates a new PluginLogFileAppender providing the plugin state location, a layout and the file
-   * name for the log file.
+   * Creates a new PluginLogFileAppender providing the plugin state location, a
+   * layout and the file name for the log file.
    * 
    * @param layout the {@link Layout} instance to use
    * @param stateLocation the path to the plug-in state location
@@ -44,9 +45,9 @@ public class PluginLogFileAppender extends RollingFileAppender {
    * 
    * @throws IOException if an I/O error occurs
    */
-  public PluginLogFileAppender(Layout layout, IPath stateLocation, String fileName)
-      throws IOException {
-    this(layout,stateLocation,fileName,true);
+  public PluginLogFileAppender(Layout layout, IPath stateLocation,
+      String fileName) throws IOException {
+    this(layout, stateLocation, fileName, true);
   }
 
   /**
@@ -59,9 +60,9 @@ public class PluginLogFileAppender extends RollingFileAppender {
    * 
    * @throws IOException if an I/O error occurs
    */
-  public PluginLogFileAppender(Layout layout, IPath stateLocation, String fileName, boolean append)
-      throws IOException {
-    super(layout,fileName,append);
+  public PluginLogFileAppender(Layout layout, IPath stateLocation,
+      String fileName, boolean append) throws IOException {
+    super(layout, fileName, append);
 
     // set the state location and activate options
     setStateLocation(stateLocation);
@@ -69,10 +70,11 @@ public class PluginLogFileAppender extends RollingFileAppender {
   }
 
   /**
-   * Sets the state location. If {@link #activateOptions()} call is pending, translates the file
-   * name and calls {@link #activateOptions()}.
+   * Sets the state location. If {@link #activateOptions()} call is pending,
+   * translates the file name and calls {@link #activateOptions()}.
    * 
-   * @param stateLocation an <code>IPath</code> instance representing the plug-in state location
+   * @param stateLocation an <code>IPath</code> instance representing the
+   *          plug-in state location
    */
   public void setStateLocation(IPath stateLocation) {
 
@@ -92,8 +94,9 @@ public class PluginLogFileAppender extends RollingFileAppender {
   }
 
   /**
-   * Sets the file name for the log file. Overridden to resolve the file name in relation to the
-   * plugin's config directory once the state location has been set.
+   * Sets the file name for the log file. Overridden to resolve the file name in
+   * relation to the plugin's config directory once the state location has been
+   * set.
    * 
    * @param file file name
    * 
@@ -106,7 +109,6 @@ public class PluginLogFileAppender extends RollingFileAppender {
     if (stateLocation == null) {
       super.setFile(file);
     }
-
     else {
       super.setFile(getTranslatedFileName(file));
     }
@@ -118,7 +120,8 @@ public class PluginLogFileAppender extends RollingFileAppender {
 
     // state check
     if (stateLocation == null) {
-      throw new IllegalStateException("Plugin state location has not been set yet."); //$NON-NLS-1$
+      throw new IllegalStateException(
+          "Plugin state location has not been set yet."); //$NON-NLS-1$
     }
 
     // precondition check
@@ -131,12 +134,15 @@ public class PluginLogFileAppender extends RollingFileAppender {
 
     // validity check
     if (fileName.length() == 0) {
-      throw new IllegalArgumentException("The parameter 'fileName' consisted only of whitespace."); //$NON-NLS-1$
+      throw new IllegalArgumentException(
+          "The parameter 'fileName' consisted only of whitespace."); //$NON-NLS-1$
     }
 
     // find the last path segment of the file
     int index = fileName.lastIndexOf('/');
-    if (index == -1) index = fileName.lastIndexOf('\\');
+    if (index == -1) {
+      index = fileName.lastIndexOf('\\');
+    }
 
     // get the file name
     if (index != -1) {
@@ -150,8 +156,8 @@ public class PluginLogFileAppender extends RollingFileAppender {
   }
 
   /**
-   * Finishes instance initialization. If state location was not set, set activate as pending and
-   * does nothing.
+   * Finishes instance initialization. If state location was not set, set
+   * activate as pending and does nothing.
    */
   @Override
   public void activateOptions() {
@@ -170,8 +176,10 @@ public class PluginLogFileAppender extends RollingFileAppender {
    */
   @Override
   public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).append("stateLocation", //$NON-NLS-1$
-        stateLocation).append("activateOptionsPending",activateOptionsPending).toString(); //$NON-NLS-1$
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
+        "stateLocation", //$NON-NLS-1$
+        stateLocation)
+        .append("activateOptionsPending", activateOptionsPending).toString(); //$NON-NLS-1$
   }
 
 }
