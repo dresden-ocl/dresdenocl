@@ -37,6 +37,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import tudresden.ocl20.pivot.pivotmodel.*;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -103,7 +104,7 @@ public class PivotModelSwitch<T> {
    * @generated
    */
   public T doSwitch(EObject theEObject) {
-    return doSwitch(theEObject.eClass(),theEObject);
+    return doSwitch(theEObject.eClass(), theEObject);
   }
 
   /**
@@ -115,12 +116,12 @@ public class PivotModelSwitch<T> {
    */
   protected T doSwitch(EClass theEClass, EObject theEObject) {
     if (theEClass.eContainer() == modelPackage) {
-      return doSwitch(theEClass.getClassifierID(),theEObject);
+      return doSwitch(theEClass.getClassifierID(), theEObject);
     }
     else {
       List<EClass> eSuperTypes = theEClass.getESuperTypes();
-      return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(eSuperTypes.get(0),
-          theEObject);
+      return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
+          eSuperTypes.get(0), theEObject);
     }
   }
 
@@ -307,13 +308,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Enumeration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Enumeration</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Enumeration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Enumeration</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -323,13 +324,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Named Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Named Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -339,13 +340,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Operation</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Operation</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Operation</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -355,13 +356,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Multiplicity Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Multiplicity Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -371,13 +372,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Namespace</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Namespace</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Namespace</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Namespace</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -387,13 +388,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -403,13 +404,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Parameter</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Parameter</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -419,13 +420,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Enumeration Literal</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Enumeration Literal</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Enumeration Literal</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Enumeration Literal</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -435,13 +436,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Property</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Property</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Property</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -451,13 +452,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Typed Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Typed Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Typed Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -467,13 +468,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Primitive Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Primitive Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -483,13 +484,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Feature</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Feature</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Feature</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -499,13 +500,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Constraint</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Constraint</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Constraint</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Constraint</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -515,13 +516,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -531,13 +532,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Constrainable Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Constrainable Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Constrainable Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Constrainable Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -547,13 +548,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Generic Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Generic Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Generic Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Generic Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -562,13 +563,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Type Parameter</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Type Parameter</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Type Parameter</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Type Parameter</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -577,13 +578,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Type Argument</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Type Argument</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Type Argument</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Type Argument</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -592,13 +593,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Parameter Generic Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Generic Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Parameter Generic Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Generic Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -607,13 +608,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Complex Generic Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Complex Generic Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Complex Generic Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Complex Generic Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -622,13 +623,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Generic Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Generic Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Generic Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Generic Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -637,13 +638,13 @@ public class PivotModelSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch, but this is the last case anyway.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject)
    * @generated
    */

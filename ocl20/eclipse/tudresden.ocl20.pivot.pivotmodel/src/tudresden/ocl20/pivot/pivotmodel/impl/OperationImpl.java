@@ -60,7 +60,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
@@ -75,9 +74,6 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isOrdered <em>Ordered</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique <em>Unique</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isMultiple <em>Multiple</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
@@ -96,66 +92,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * Logger for this class
    */
   private static final Logger logger = Logger.getLogger(OperationImpl.class);
-
-  /**
-   * The default value of the '{@link #isOrdered() <em>Ordered</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #isOrdered()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean ORDERED_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isOrdered() <em>Ordered</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #isOrdered()
-   * @generated
-   * @ordered
-   */
-  protected boolean ordered = ORDERED_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
-   * <!-- begin-user-doc
-   * --> <!-- end-user-doc -->
-   * @see #isUnique()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean UNIQUE_EDEFAULT = true;
-
-  /**
-   * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
-   * <!-- begin-user-doc
-   * --> <!-- end-user-doc -->
-   * @see #isUnique()
-   * @generated
-   * @ordered
-   */
-  protected boolean unique = UNIQUE_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #isMultiple() <em>Multiple</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #isMultiple()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean MULTIPLE_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isMultiple() <em>Multiple</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #isMultiple()
-   * @generated
-   * @ordered
-   */
-  protected boolean multiple = MULTIPLE_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getOwnedTypeParameter() <em>Owned Type Parameter</em>}' containment reference list.
@@ -198,10 +134,14 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
     qualifiedName.append('(');
 
-    for (Iterator<Parameter> it = getSignatureParameter().iterator(); it.hasNext();) {
+    for (Iterator<Parameter> it = getSignatureParameter().iterator(); it
+        .hasNext();) {
       Parameter parameter = it.next();
-      qualifiedName.append(parameter.getType() != null ? parameter.getType().getQualifiedName()
-          : "null"); //$NON-NLS-1$
+
+      // append the type name or the generic type name
+      qualifiedName.append(parameter.getType() != null ? parameter.getType()
+          .getQualifiedName() : (parameter.getGenericType() != null ? parameter
+          .getGenericType().getName() : "null")); //$NON-NLS-1$
 
       if (it.hasNext()) {
         qualifiedName.append(',');
@@ -270,7 +210,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
       Type returnParameterType = returnParameter.getType();
 
       if ((returnParameterType == null && newType != null)
-          || (returnParameterType != null && !returnParameterType.equals(newType))) {
+          || (returnParameterType != null && !returnParameterType
+              .equals(newType))) {
         returnParameter.setType(newType);
       }
     }
@@ -301,66 +242,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isOrdered() {
-    return ordered;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOrdered(boolean newOrdered) {
-    boolean oldOrdered = ordered;
-    ordered = newOrdered;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,PivotModelPackageImpl.OPERATION__ORDERED,
-          oldOrdered,ordered));
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isUnique() {
-    return unique;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUnique(boolean newUnique) {
-    boolean oldUnique = unique;
-    unique = newUnique;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,PivotModelPackageImpl.OPERATION__UNIQUE,
-          oldUnique,unique));
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isMultiple() {
-    return multiple;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public void setMultiple(boolean newMultiple) {
-    boolean oldMultiple = multiple;
-    multiple = newMultiple;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          PivotModelPackageImpl.OPERATION__MULTIPLE,oldMultiple,multiple));
-  }
-
-  /**
    * The implementation in this class simply redirects to {{@link #getOwnedTypeParameterGen()}
    * which contains the code generated by EMF. Clients may, however, override this method to provide
    * specific behaviour, e.g., adapt to other model repositories.
@@ -379,7 +260,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
   protected final List<TypeParameter> getOwnedTypeParameterGen() {
     if (ownedTypeParameter == null) {
       ownedTypeParameter = new EObjectContainmentWithInverseEList<TypeParameter>(
-          TypeParameter.class,this,PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER,
+          TypeParameter.class, this,
+          PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER,
           PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT);
     }
     return ownedTypeParameter;
@@ -390,7 +272,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * @generated
    */
   public Type getOwningType() {
-    if (eContainerFeatureID != PivotModelPackageImpl.OPERATION__OWNING_TYPE) return null;
+    if (eContainerFeatureID != PivotModelPackageImpl.OPERATION__OWNING_TYPE)
+      return null;
     return (Type) eContainer();
   }
 
@@ -398,9 +281,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetOwningType(Type newOwningType, NotificationChain msgs) {
+  public NotificationChain basicSetOwningType(Type newOwningType,
+      NotificationChain msgs) {
     msgs = eBasicSetContainer((InternalEObject) newOwningType,
-        PivotModelPackageImpl.OPERATION__OWNING_TYPE,msgs);
+        PivotModelPackageImpl.OPERATION__OWNING_TYPE, msgs);
     return msgs;
   }
 
@@ -411,19 +295,21 @@ public class OperationImpl extends FeatureImpl implements Operation {
   public void setOwningType(Type newOwningType) {
     if (newOwningType != eInternalContainer()
         || (eContainerFeatureID != PivotModelPackageImpl.OPERATION__OWNING_TYPE && newOwningType != null)) {
-      if (EcoreUtil.isAncestor(this,(EObject) newOwningType))
-        throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+      if (EcoreUtil.isAncestor(this, (EObject) newOwningType))
+        throw new IllegalArgumentException(
+            "Recursive containment not allowed for " + toString()); //$NON-NLS-1$
       NotificationChain msgs = null;
       if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
       if (newOwningType != null)
         msgs = ((InternalEObject) newOwningType).eInverseAdd(this,
-            PivotModelPackageImpl.TYPE__OWNED_OPERATION,Type.class,msgs);
-      msgs = basicSetOwningType(newOwningType,msgs);
+            PivotModelPackageImpl.TYPE__OWNED_OPERATION, Type.class, msgs);
+      msgs = basicSetOwningType(newOwningType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          PivotModelPackageImpl.OPERATION__OWNING_TYPE,newOwningType,newOwningType));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          PivotModelPackageImpl.OPERATION__OWNING_TYPE, newOwningType,
+          newOwningType));
   }
 
   /**
@@ -444,7 +330,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
    */
   protected final List<Parameter> getOwnedParameterGen() {
     if (ownedParameter == null) {
-      ownedParameter = new EObjectContainmentWithInverseEList<Parameter>(Parameter.class,this,
+      ownedParameter = new EObjectContainmentWithInverseEList<Parameter>(
+          Parameter.class, this,
           PivotModelPackageImpl.OPERATION__OWNED_PARAMETER,
           PivotModelPackageImpl.PARAMETER__OPERATION);
     }
@@ -457,8 +344,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * @generated NOT
    */
   public List<Parameter> getInputParameter() {
-    return getFilteredParameters(
-        EnumSet.of(ParameterDirectionKind.IN,ParameterDirectionKind.INOUT),
+    return getFilteredParameters(EnumSet.of(ParameterDirectionKind.IN,
+        ParameterDirectionKind.INOUT),
         PivotModelPackageImpl.Literals.OPERATION__INPUT_PARAMETER);
   }
 
@@ -468,8 +355,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * @generated NOT
    */
   public List<Parameter> getOutputParameter() {
-    return getFilteredParameters(EnumSet
-        .of(ParameterDirectionKind.OUT,ParameterDirectionKind.INOUT),
+    return getFilteredParameters(EnumSet.of(ParameterDirectionKind.OUT,
+        ParameterDirectionKind.INOUT),
         PivotModelPackageImpl.Literals.OPERATION__OUTPUT_PARAMETER);
   }
 
@@ -479,8 +366,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * @generated NOT
    */
   public List<Parameter> getSignatureParameter() {
-    return getFilteredParameters(EnumSet.of(ParameterDirectionKind.IN,ParameterDirectionKind.INOUT,
-        ParameterDirectionKind.OUT),PivotModelPackageImpl.Literals.OPERATION__SIGNATURE_PARAMETER);
+    return getFilteredParameters(EnumSet.of(ParameterDirectionKind.IN,
+        ParameterDirectionKind.INOUT, ParameterDirectionKind.OUT),
+        PivotModelPackageImpl.Literals.OPERATION__SIGNATURE_PARAMETER);
   }
 
   /**
@@ -496,7 +384,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
    *         <code>Parameters</code>.
    */
   protected List<Parameter> getFilteredParameters(
-      EnumSet<ParameterDirectionKind> filteredDirections, EStructuralFeature structuralFeature) {
+      EnumSet<ParameterDirectionKind> filteredDirections,
+      EStructuralFeature structuralFeature) {
     ArrayList<Parameter> filteredParameters;
 
     // create an empty list
@@ -511,8 +400,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
     // we return a EcoreEList here to support the EMF framework (editor, notification etc.)
     // subclasses may override if they provide their own container visualization options
-    return new EcoreEList.UnmodifiableEList<Parameter>(this,structuralFeature,filteredParameters
-        .size(),filteredParameters.toArray());
+    return new EcoreEList.UnmodifiableEList<Parameter>(this, structuralFeature,
+        filteredParameters.size(), filteredParameters.toArray());
   }
 
   /**
@@ -541,7 +430,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
    */
   public boolean hasMatchingSignature(List<Type> paramTypes) {
     if (logger.isDebugEnabled()) {
-      logger.debug("hasMatchingSignature(paramTypes=" + paramTypes + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+      logger
+          .debug("hasMatchingSignature(paramTypes=" + paramTypes + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     boolean match;
@@ -622,7 +512,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
    */
   public Operation addTypeParameter(TypeParameter typeParameter) {
     if (logger.isDebugEnabled()) {
-      logger.debug("addTypeParameter(typeParameter=" + typeParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+      logger
+          .debug("addTypeParameter(typeParameter=" + typeParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     // use the generated method, not the one that may be overridden by clients
@@ -639,18 +530,20 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * 
    * @generated NOT
    */
-  public Operation bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types) {
+  public Operation bindTypeParameter(List<TypeParameter> parameters,
+      List<? extends Type> types) {
     String bindingKey;
     Operation boundOperation;
 
     // precondition check
-    if (parameters == null || types == null || parameters.size() != types.size()) {
+    if (parameters == null || types == null
+        || parameters.size() != types.size()) {
       throw new IllegalArgumentException(
           "Illegal arguments: parameters=" + parameters + ", types=" + types); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     // determine the String identifier for the binding
-    bindingKey = GenericElements.determineBindingKey(this,parameters,types);
+    bindingKey = GenericElements.determineBindingKey(this, parameters, types);
 
     // try to find a previously bound operation and create a new one if necessary
     boundOperation = getBoundOperations().get(bindingKey);
@@ -660,8 +553,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
       // remove the type parameter that is going to be bound; note that we cannot simply use
       // removeAll because EObjectEList uses object identity, not object equality for comparison
-      for (Iterator<TypeParameter> it = boundOperation.getOwnedTypeParameter().iterator(); it
-          .hasNext();) {
+      for (Iterator<TypeParameter> it = boundOperation.getOwnedTypeParameter()
+          .iterator(); it.hasNext();) {
         TypeParameter ownedTypeParameter = it.next();
 
         for (TypeParameter typeParameterToBind : parameters) {
@@ -672,17 +565,20 @@ public class OperationImpl extends FeatureImpl implements Operation {
       }
 
       // add the bound operation to the map with the cached bound operations
-      boundOperations.put(bindingKey,boundOperation);
+      boundOperations.put(bindingKey, boundOperation);
 
       // bind the type of the operaton if generic
-      if (boundOperation.getType() == null && boundOperation.getGenericType() != null) {
-        boundOperation.getGenericType().bindGenericType(parameters,types,boundOperation);
+      if (boundOperation.getType() == null
+          && boundOperation.getGenericType() != null) {
+        boundOperation.getGenericType().bindGenericType(parameters, types,
+            boundOperation);
       }
 
       // bind all parameters
       for (Parameter parameter : boundOperation.getOwnedParameter()) {
         if (parameter.getType() == null && parameter.getGenericType() != null) {
-          parameter.getGenericType().bindGenericType(parameters,types,parameter);
+          parameter.getGenericType().bindGenericType(parameters, types,
+              parameter);
         }
       }
     }
@@ -691,8 +587,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   public Type getBoundType(TypeParameter typeParam) {
@@ -761,15 +656,16 @@ public class OperationImpl extends FeatureImpl implements Operation {
     switch (featureID) {
       case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
         return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedTypeParameter())
-            .basicAdd(otherEnd,msgs);
+            .basicAdd(otherEnd, msgs);
       case PivotModelPackageImpl.OPERATION__OWNING_TYPE:
-        if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetOwningType((Type) otherEnd,msgs);
+        if (eInternalContainer() != null)
+          msgs = eBasicRemoveFromContainer(msgs);
+        return basicSetOwningType((Type) otherEnd, msgs);
       case PivotModelPackageImpl.OPERATION__OWNED_PARAMETER:
-        return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedParameter()).basicAdd(
-            otherEnd,msgs);
+        return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedParameter())
+            .basicAdd(otherEnd, msgs);
     }
-    return super.eInverseAdd(otherEnd,featureID,msgs);
+    return super.eInverseAdd(otherEnd, featureID, msgs);
   }
 
   /**
@@ -777,17 +673,19 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
-        return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(
+            otherEnd, msgs);
       case PivotModelPackageImpl.OPERATION__OWNING_TYPE:
-        return basicSetOwningType(null,msgs);
+        return basicSetOwningType(null, msgs);
       case PivotModelPackageImpl.OPERATION__OWNED_PARAMETER:
-        return ((InternalEList<?>) getOwnedParameter()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getOwnedParameter()).basicRemove(otherEnd,
+            msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -795,11 +693,12 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * @generated
    */
   @Override
-  public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+  public NotificationChain eBasicRemoveFromContainerFeature(
+      NotificationChain msgs) {
     switch (eContainerFeatureID) {
       case PivotModelPackageImpl.OPERATION__OWNING_TYPE:
         return eInternalContainer().eInverseRemove(this,
-            PivotModelPackageImpl.TYPE__OWNED_OPERATION,Type.class,msgs);
+            PivotModelPackageImpl.TYPE__OWNED_OPERATION, Type.class, msgs);
     }
     return super.eBasicRemoveFromContainerFeature(msgs);
   }
@@ -811,12 +710,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
-      case PivotModelPackageImpl.OPERATION__ORDERED:
-        return isOrdered() ? Boolean.TRUE : Boolean.FALSE;
-      case PivotModelPackageImpl.OPERATION__UNIQUE:
-        return isUnique() ? Boolean.TRUE : Boolean.FALSE;
-      case PivotModelPackageImpl.OPERATION__MULTIPLE:
-        return isMultiple() ? Boolean.TRUE : Boolean.FALSE;
       case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
         return getOwnedTypeParameter();
       case PivotModelPackageImpl.OPERATION__OWNING_TYPE:
@@ -832,7 +725,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
       case PivotModelPackageImpl.OPERATION__SIGNATURE_PARAMETER:
         return getSignatureParameter();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -843,18 +736,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
-      case PivotModelPackageImpl.OPERATION__ORDERED:
-        setOrdered(((Boolean) newValue).booleanValue());
-        return;
-      case PivotModelPackageImpl.OPERATION__UNIQUE:
-        setUnique(((Boolean) newValue).booleanValue());
-        return;
-      case PivotModelPackageImpl.OPERATION__MULTIPLE:
-        setMultiple(((Boolean) newValue).booleanValue());
-        return;
       case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
         getOwnedTypeParameter().clear();
-        getOwnedTypeParameter().addAll((Collection<? extends TypeParameter>) newValue);
+        getOwnedTypeParameter().addAll(
+            (Collection<? extends TypeParameter>) newValue);
         return;
       case PivotModelPackageImpl.OPERATION__OWNING_TYPE:
         setOwningType((Type) newValue);
@@ -864,7 +749,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
         getOwnedParameter().addAll((Collection<? extends Parameter>) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -874,15 +759,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
   @Override
   public void eUnset(int featureID) {
     switch (featureID) {
-      case PivotModelPackageImpl.OPERATION__ORDERED:
-        setOrdered(ORDERED_EDEFAULT);
-        return;
-      case PivotModelPackageImpl.OPERATION__UNIQUE:
-        setUnique(UNIQUE_EDEFAULT);
-        return;
-      case PivotModelPackageImpl.OPERATION__MULTIPLE:
-        setMultiple(MULTIPLE_EDEFAULT);
-        return;
       case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
         getOwnedTypeParameter().clear();
         return;
@@ -903,12 +779,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
-      case PivotModelPackageImpl.OPERATION__ORDERED:
-        return ordered != ORDERED_EDEFAULT;
-      case PivotModelPackageImpl.OPERATION__UNIQUE:
-        return unique != UNIQUE_EDEFAULT;
-      case PivotModelPackageImpl.OPERATION__MULTIPLE:
-        return multiple != MULTIPLE_EDEFAULT;
       case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
         return ownedTypeParameter != null && !ownedTypeParameter.isEmpty();
       case PivotModelPackageImpl.OPERATION__OWNING_TYPE:
@@ -933,18 +803,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
    */
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-    if (baseClass == MultiplicityElement.class) {
-      switch (derivedFeatureID) {
-        case PivotModelPackageImpl.OPERATION__ORDERED:
-          return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED;
-        case PivotModelPackageImpl.OPERATION__UNIQUE:
-          return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE;
-        case PivotModelPackageImpl.OPERATION__MULTIPLE:
-          return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE;
-        default:
-          return -1;
-      }
-    }
     if (baseClass == ConstrainableElement.class) {
       switch (derivedFeatureID) {
         default:
@@ -959,7 +817,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
           return -1;
       }
     }
-    return super.eBaseStructuralFeatureID(derivedFeatureID,baseClass);
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
   }
 
   /**
@@ -968,18 +826,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
    */
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-    if (baseClass == MultiplicityElement.class) {
-      switch (baseFeatureID) {
-        case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED:
-          return PivotModelPackageImpl.OPERATION__ORDERED;
-        case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE:
-          return PivotModelPackageImpl.OPERATION__UNIQUE;
-        case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE:
-          return PivotModelPackageImpl.OPERATION__MULTIPLE;
-        default:
-          return -1;
-      }
-    }
     if (baseClass == ConstrainableElement.class) {
       switch (baseFeatureID) {
         default:
@@ -994,7 +840,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
           return -1;
       }
     }
-    return super.eDerivedStructuralFeatureID(baseFeatureID,baseClass);
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
   /**
@@ -1015,9 +861,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
    */
   @Override
   public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendToString(
-        super.toString()).append("ordered",isOrdered()).append("unique",isUnique()).append( //$NON-NLS-1$ //$NON-NLS-2$
-        "multiple",isMultiple()).toString(); //$NON-NLS-1$
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        .appendToString(super.toString())
+        .append("ordered", isOrdered()).append("unique", isUnique()).append( //$NON-NLS-1$ //$NON-NLS-2$
+            "multiple", isMultiple()).toString(); //$NON-NLS-1$
   }
 
 } // OperationImpl

@@ -47,7 +47,8 @@ import tudresden.ocl20.pivot.pivotmodel.*;
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
  * @generated
  */
-public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFactory {
+public class PivotModelFactoryImpl extends EFactoryImpl implements
+    PivotModelFactory {
 
   /**
    * The singleton instance of the factory.
@@ -133,11 +134,11 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
   public Object createFromString(EDataType eDataType, String initialValue) {
     switch (eDataType.getClassifierID()) {
       case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
-        return createPrimitiveTypeKindFromString(eDataType,initialValue);
+        return createPrimitiveTypeKindFromString(eDataType, initialValue);
       case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
-        return createParameterDirectionKindFromString(eDataType,initialValue);
+        return createParameterDirectionKindFromString(eDataType, initialValue);
       case PivotModelPackageImpl.CONSTRAINT_KIND:
-        return createConstraintKindFromString(eDataType,initialValue);
+        return createConstraintKindFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException(
             "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -152,11 +153,11 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
   public String convertToString(EDataType eDataType, Object instanceValue) {
     switch (eDataType.getClassifierID()) {
       case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
-        return convertPrimitiveTypeKindToString(eDataType,instanceValue);
+        return convertPrimitiveTypeKindToString(eDataType, instanceValue);
       case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
-        return convertParameterDirectionKindToString(eDataType,instanceValue);
+        return convertParameterDirectionKindToString(eDataType, instanceValue);
       case PivotModelPackageImpl.CONSTRAINT_KIND:
-        return convertConstraintKindToString(eDataType,instanceValue);
+        return convertConstraintKindToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException(
             "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -293,8 +294,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
-  public ParameterDirectionKind createParameterDirectionKindFromString(EDataType eDataType,
-      String initialValue) {
+  public ParameterDirectionKind createParameterDirectionKindFromString(
+      EDataType eDataType, String initialValue) {
     ParameterDirectionKind result = ParameterDirectionKind.get(initialValue);
     if (result == null)
       throw new IllegalArgumentException(
@@ -307,7 +308,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
    * @generated
    */
   @SuppressWarnings("unused")
-  public String convertParameterDirectionKindToString(EDataType eDataType, Object instanceValue) {
+  public String convertParameterDirectionKindToString(EDataType eDataType,
+      Object instanceValue) {
     return instanceValue == null ? null : instanceValue.toString();
   }
 
@@ -315,7 +317,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
-  public ConstraintKind createConstraintKindFromString(EDataType eDataType, String initialValue) {
+  public ConstraintKind createConstraintKindFromString(EDataType eDataType,
+      String initialValue) {
     ConstraintKind result = ConstraintKind.get(initialValue);
     if (result == null)
       throw new IllegalArgumentException(
@@ -328,7 +331,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
    * @generated
    */
   @SuppressWarnings("unused")
-  public String convertConstraintKindToString(EDataType eDataType, Object instanceValue) {
+  public String convertConstraintKindToString(EDataType eDataType,
+      Object instanceValue) {
     return instanceValue == null ? null : instanceValue.toString();
   }
 
@@ -336,8 +340,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
-  public PrimitiveTypeKind createPrimitiveTypeKindFromString(EDataType eDataType,
-      String initialValue) {
+  public PrimitiveTypeKind createPrimitiveTypeKindFromString(
+      EDataType eDataType, String initialValue) {
     PrimitiveTypeKind result = PrimitiveTypeKind.get(initialValue);
     if (result == null)
       throw new IllegalArgumentException(
@@ -350,7 +354,8 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements PivotModelFac
    * @generated
    */
   @SuppressWarnings("unused")
-  public String convertPrimitiveTypeKindToString(EDataType eDataType, Object instanceValue) {
+  public String convertPrimitiveTypeKindToString(EDataType eDataType,
+      Object instanceValue) {
     return instanceValue == null ? null : instanceValue.toString();
   }
 

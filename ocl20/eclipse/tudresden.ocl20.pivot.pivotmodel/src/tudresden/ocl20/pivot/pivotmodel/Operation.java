@@ -60,8 +60,8 @@ import java.util.List;
  *
  * @generated
  */
-public interface Operation extends Feature, TypedElement, NamedElement, MultiplicityElement,
-    ConstrainableElement, GenericElement {
+public interface Operation extends Feature, TypedElement, NamedElement,
+    MultiplicityElement, ConstrainableElement, GenericElement {
 
   /**
    * Returns the value of the '<em><b>Owning Type</b></em>' container reference. It is
@@ -210,7 +210,8 @@ public interface Operation extends Feature, TypedElement, NamedElement, Multipli
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
    */
-  Operation bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types);
+  Operation bindTypeParameter(List<TypeParameter> parameters,
+      List<? extends Type> types);
 
   /**
    * Redefines {@link NamedElement#clone()} with a covariant return type.

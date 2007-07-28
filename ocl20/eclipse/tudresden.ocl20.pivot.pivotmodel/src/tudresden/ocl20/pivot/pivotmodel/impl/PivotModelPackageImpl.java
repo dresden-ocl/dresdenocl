@@ -1957,7 +1957,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   private PivotModelPackageImpl() {
-    super(eNS_URI,((EFactory) PivotModelFactory.INSTANCE));
+    super(eNS_URI, ((EFactory) PivotModelFactory.INSTANCE));
   }
 
   /**
@@ -1997,7 +1997,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
     // Obtain or create and register package
     PivotModelPackageImpl thePivotModelPackageImpl = (PivotModelPackageImpl) (EPackage.Registry.INSTANCE
         .getEPackage(eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
-        .getEPackage(eNS_URI) : new PivotModelPackageImpl());
+        .getEPackage(eNS_URI)
+        : new PivotModelPackageImpl());
 
     isInited = true;
 
@@ -2209,7 +2210,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EAttribute getMultiplicityElement_Ordered() {
-    return (EAttribute) multiplicityElementEClass.getEStructuralFeatures().get(0);
+    return (EAttribute) multiplicityElementEClass.getEStructuralFeatures().get(
+        0);
   }
 
   /**
@@ -2222,7 +2224,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EAttribute getMultiplicityElement_Unique() {
-    return (EAttribute) multiplicityElementEClass.getEStructuralFeatures().get(1);
+    return (EAttribute) multiplicityElementEClass.getEStructuralFeatures().get(
+        1);
   }
 
   /**
@@ -2235,7 +2238,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EAttribute getMultiplicityElement_Multiple() {
-    return (EAttribute) multiplicityElementEClass.getEStructuralFeatures().get(2);
+    return (EAttribute) multiplicityElementEClass.getEStructuralFeatures().get(
+        2);
   }
 
   /**
@@ -2439,7 +2443,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EReference getEnumerationLiteral_Enumeration() {
-    return (EReference) enumerationLiteralEClass.getEStructuralFeatures().get(0);
+    return (EReference) enumerationLiteralEClass.getEStructuralFeatures()
+        .get(0);
   }
 
   /**
@@ -2804,7 +2809,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EReference getParameterGenericType_TypeParameter() {
-    return (EReference) parameterGenericTypeEClass.getEStructuralFeatures().get(0);
+    return (EReference) parameterGenericTypeEClass.getEStructuralFeatures()
+        .get(0);
   }
 
   /**
@@ -2829,7 +2835,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EReference getComplexGenericType_UnboundType() {
-    return (EReference) complexGenericTypeEClass.getEStructuralFeatures().get(0);
+    return (EReference) complexGenericTypeEClass.getEStructuralFeatures()
+        .get(0);
   }
 
   /**
@@ -2842,7 +2849,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EReference getComplexGenericType_TypeArgument() {
-    return (EReference) complexGenericTypeEClass.getEStructuralFeatures().get(1);
+    return (EReference) complexGenericTypeEClass.getEStructuralFeatures()
+        .get(1);
   }
 
   /**
@@ -2924,90 +2932,94 @@ public class PivotModelPackageImpl extends EPackageImpl {
 
     // Create classes and their features
     namedElementEClass = createEClass(NAMED_ELEMENT);
-    createEAttribute(namedElementEClass,NAMED_ELEMENT__NAME);
-    createEAttribute(namedElementEClass,NAMED_ELEMENT__QUALIFIED_NAME);
-    createEReference(namedElementEClass,NAMED_ELEMENT__OWNER);
+    createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+    createEAttribute(namedElementEClass, NAMED_ELEMENT__QUALIFIED_NAME);
+    createEReference(namedElementEClass, NAMED_ELEMENT__OWNER);
 
     typedElementEClass = createEClass(TYPED_ELEMENT);
-    createEReference(typedElementEClass,TYPED_ELEMENT__TYPE);
-    createEReference(typedElementEClass,TYPED_ELEMENT__GENERIC_TYPE);
+    createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
+    createEReference(typedElementEClass, TYPED_ELEMENT__GENERIC_TYPE);
 
     featureEClass = createEClass(FEATURE);
-    createEAttribute(featureEClass,FEATURE__STATIC);
+    createEAttribute(featureEClass, FEATURE__STATIC);
 
     multiplicityElementEClass = createEClass(MULTIPLICITY_ELEMENT);
-    createEAttribute(multiplicityElementEClass,MULTIPLICITY_ELEMENT__ORDERED);
-    createEAttribute(multiplicityElementEClass,MULTIPLICITY_ELEMENT__UNIQUE);
-    createEAttribute(multiplicityElementEClass,MULTIPLICITY_ELEMENT__MULTIPLE);
+    createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__ORDERED);
+    createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__UNIQUE);
+    createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__MULTIPLE);
 
     genericElementEClass = createEClass(GENERIC_ELEMENT);
-    createEReference(genericElementEClass,GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
+    createEReference(genericElementEClass,
+        GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
 
     constrainableElementEClass = createEClass(CONSTRAINABLE_ELEMENT);
 
     namespaceEClass = createEClass(NAMESPACE);
-    createEReference(namespaceEClass,NAMESPACE__OWNED_TYPE);
-    createEReference(namespaceEClass,NAMESPACE__OWNED_RULE);
-    createEReference(namespaceEClass,NAMESPACE__NESTED_NAMESPACE);
-    createEReference(namespaceEClass,NAMESPACE__NESTING_NAMESPACE);
+    createEReference(namespaceEClass, NAMESPACE__OWNED_TYPE);
+    createEReference(namespaceEClass, NAMESPACE__OWNED_RULE);
+    createEReference(namespaceEClass, NAMESPACE__NESTED_NAMESPACE);
+    createEReference(namespaceEClass, NAMESPACE__NESTING_NAMESPACE);
 
     typeEClass = createEClass(TYPE);
-    createEReference(typeEClass,TYPE__NAMESPACE);
-    createEReference(typeEClass,TYPE__OWNED_OPERATION);
-    createEReference(typeEClass,TYPE__OWNED_PROPERTY);
-    createEReference(typeEClass,TYPE__SUPER_TYPE);
-    createEReference(typeEClass,TYPE__GENERIC_SUPER_TYPE);
+    createEReference(typeEClass, TYPE__NAMESPACE);
+    createEReference(typeEClass, TYPE__OWNED_OPERATION);
+    createEReference(typeEClass, TYPE__OWNED_PROPERTY);
+    createEReference(typeEClass, TYPE__SUPER_TYPE);
+    createEReference(typeEClass, TYPE__GENERIC_SUPER_TYPE);
 
     primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
-    createEAttribute(primitiveTypeEClass,PRIMITIVE_TYPE__KIND);
+    createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__KIND);
 
     enumerationEClass = createEClass(ENUMERATION);
-    createEReference(enumerationEClass,ENUMERATION__OWNED_LITERAL);
+    createEReference(enumerationEClass, ENUMERATION__OWNED_LITERAL);
 
     enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
-    createEReference(enumerationLiteralEClass,ENUMERATION_LITERAL__ENUMERATION);
+    createEReference(enumerationLiteralEClass, ENUMERATION_LITERAL__ENUMERATION);
 
     propertyEClass = createEClass(PROPERTY);
-    createEReference(propertyEClass,PROPERTY__OWNING_TYPE);
+    createEReference(propertyEClass, PROPERTY__OWNING_TYPE);
 
     operationEClass = createEClass(OPERATION);
-    createEReference(operationEClass,OPERATION__OWNING_TYPE);
-    createEReference(operationEClass,OPERATION__OWNED_PARAMETER);
-    createEReference(operationEClass,OPERATION__INPUT_PARAMETER);
-    createEReference(operationEClass,OPERATION__OUTPUT_PARAMETER);
-    createEReference(operationEClass,OPERATION__RETURN_PARAMETER);
-    createEReference(operationEClass,OPERATION__SIGNATURE_PARAMETER);
+    createEReference(operationEClass, OPERATION__OWNING_TYPE);
+    createEReference(operationEClass, OPERATION__OWNED_PARAMETER);
+    createEReference(operationEClass, OPERATION__INPUT_PARAMETER);
+    createEReference(operationEClass, OPERATION__OUTPUT_PARAMETER);
+    createEReference(operationEClass, OPERATION__RETURN_PARAMETER);
+    createEReference(operationEClass, OPERATION__SIGNATURE_PARAMETER);
 
     parameterEClass = createEClass(PARAMETER);
-    createEAttribute(parameterEClass,PARAMETER__KIND);
-    createEReference(parameterEClass,PARAMETER__OPERATION);
+    createEAttribute(parameterEClass, PARAMETER__KIND);
+    createEReference(parameterEClass, PARAMETER__OPERATION);
 
     genericTypeEClass = createEClass(GENERIC_TYPE);
 
     parameterGenericTypeEClass = createEClass(PARAMETER_GENERIC_TYPE);
-    createEReference(parameterGenericTypeEClass,PARAMETER_GENERIC_TYPE__TYPE_PARAMETER);
+    createEReference(parameterGenericTypeEClass,
+        PARAMETER_GENERIC_TYPE__TYPE_PARAMETER);
 
     complexGenericTypeEClass = createEClass(COMPLEX_GENERIC_TYPE);
-    createEReference(complexGenericTypeEClass,COMPLEX_GENERIC_TYPE__UNBOUND_TYPE);
-    createEReference(complexGenericTypeEClass,COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT);
+    createEReference(complexGenericTypeEClass,
+        COMPLEX_GENERIC_TYPE__UNBOUND_TYPE);
+    createEReference(complexGenericTypeEClass,
+        COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT);
 
     typeParameterEClass = createEClass(TYPE_PARAMETER);
-    createEReference(typeParameterEClass,TYPE_PARAMETER__GENERIC_ELEMENT);
+    createEReference(typeParameterEClass, TYPE_PARAMETER__GENERIC_ELEMENT);
 
     typeArgumentEClass = createEClass(TYPE_ARGUMENT);
-    createEReference(typeArgumentEClass,TYPE_ARGUMENT__OWNING_GENERIC_TYPE);
+    createEReference(typeArgumentEClass, TYPE_ARGUMENT__OWNING_GENERIC_TYPE);
 
     constraintEClass = createEClass(CONSTRAINT);
-    createEAttribute(constraintEClass,CONSTRAINT__KIND);
-    createEReference(constraintEClass,CONSTRAINT__NAMESPACE);
-    createEReference(constraintEClass,CONSTRAINT__SPECIFICATION);
-    createEReference(constraintEClass,CONSTRAINT__CONSTRAINED_ELEMENT);
-    createEReference(constraintEClass,CONSTRAINT__DEFINED_FEATURE);
+    createEAttribute(constraintEClass, CONSTRAINT__KIND);
+    createEReference(constraintEClass, CONSTRAINT__NAMESPACE);
+    createEReference(constraintEClass, CONSTRAINT__SPECIFICATION);
+    createEReference(constraintEClass, CONSTRAINT__CONSTRAINED_ELEMENT);
+    createEReference(constraintEClass, CONSTRAINT__DEFINED_FEATURE);
 
     expressionEClass = createEClass(EXPRESSION);
-    createEAttribute(expressionEClass,EXPRESSION__BODY);
-    createEAttribute(expressionEClass,EXPRESSION__LANGUAGE);
-    createEReference(expressionEClass,EXPRESSION__CONSTRAINT);
+    createEAttribute(expressionEClass, EXPRESSION__BODY);
+    createEAttribute(expressionEClass, EXPRESSION__LANGUAGE);
+    createEReference(expressionEClass, EXPRESSION__CONSTRAINT);
 
     // Create enums
     primitiveTypeKindEEnum = createEEnum(PRIMITIVE_TYPE_KIND);
@@ -3084,446 +3096,497 @@ public class PivotModelPackageImpl extends EPackageImpl {
     constraintEClass.getESuperTypes().add(this.getNamedElement());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(namedElementEClass,NamedElement.class,
-        "NamedElement",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(namedElementEClass, NamedElement.class,
+        "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getNamedElement_Name(),
         theDatatypesPackageImpl.getString(),
-        "name","",1,1,NamedElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,!IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        "name", "", 1, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
     initEAttribute(
         getNamedElement_QualifiedName(),
         theDatatypesPackageImpl.getString(),
-        "qualifiedName",null,0,1,NamedElement.class,IS_TRANSIENT,IS_VOLATILE,!IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "qualifiedName", null, 0, 1, NamedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getNamedElement_Owner(),
         this.getNamedElement(),
         null,
-        "owner",null,0,1,NamedElement.class,IS_TRANSIENT,IS_VOLATILE,!IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "owner", null, 0, 1, NamedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    EOperation op = addEOperation(namedElementEClass,this.getNamedElement(),
-        "clone",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEException(op,this.getCloneNotSupportedException());
+    EOperation op = addEOperation(namedElementEClass, this.getNamedElement(),
+        "clone", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEException(op, this.getCloneNotSupportedException());
 
-    initEClass(typedElementEClass,TypedElement.class,
-        "TypedElement",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(typedElementEClass, TypedElement.class,
+        "TypedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getTypedElement_Type(),
         this.getType(),
         null,
-        "type",null,1,1,TypedElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "type", null, 1, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getTypedElement_GenericType(),
         this.getGenericType(),
         null,
-        "genericType",null,0,1,TypedElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "genericType", null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(featureEClass,Feature.class,
-        "Feature",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(featureEClass, Feature.class,
+        "Feature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getFeature_Static(),
         theDatatypesPackageImpl.getBoolean(),
-        "static","false",0,1,Feature.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        "static", "false", 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-    initEClass(multiplicityElementEClass,MultiplicityElement.class,
-        "MultiplicityElement",IS_ABSTRACT,IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        multiplicityElementEClass,
+        MultiplicityElement.class,
+        "MultiplicityElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getMultiplicityElement_Ordered(),
         theDatatypesPackageImpl.getBoolean(),
-        "ordered","false",0,1,MultiplicityElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        "ordered", "false", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
     initEAttribute(
         getMultiplicityElement_Unique(),
         theDatatypesPackageImpl.getBoolean(),
-        "unique","true",0,1,MultiplicityElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        "unique", "true", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
     initEAttribute(
         getMultiplicityElement_Multiple(),
         theDatatypesPackageImpl.getBoolean(),
-        "multiple","false",0,1,MultiplicityElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        "multiple", "false", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-    initEClass(genericElementEClass,GenericElement.class,
-        "GenericElement",IS_ABSTRACT,IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        genericElementEClass,
+        GenericElement.class,
+        "GenericElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getGenericElement_OwnedTypeParameter(),
         this.getTypeParameter(),
         this.getTypeParameter_GenericElement(),
-        "ownedTypeParameter",null,0,-1,GenericElement.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "ownedTypeParameter", null, 0, -1, GenericElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(genericElementEClass,this.getGenericElement(),
-        "addTypeParameter",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getTypeParameter(),"typeParameter",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(genericElementEClass, this.getGenericElement(),
+        "addTypeParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getTypeParameter(),
+        "typeParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(genericElementEClass,this.getNamedElement(),
-        "bindTypeParameter",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(genericElementEClass, this.getNamedElement(),
+        "bindTypeParameter", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     EGenericType g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     EGenericType g2 = createEGenericType(this.getTypeParameter());
     g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"parameters",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, g1, "parameters", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType();
     g1.getETypeArguments().add(g2);
     EGenericType g3 = createEGenericType(this.getType());
     g2.setEUpperBound(g3);
-    addEParameter(op,g1,"types",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, g1, "types", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(genericElementEClass,this.getType(),"getBoundType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getTypeParameter(),"typeParam",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(genericElementEClass, this.getType(),
+        "getBoundType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getTypeParameter(),
+        "typeParam", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(constrainableElementEClass,ConstrainableElement.class,
-        "ConstrainableElement",IS_ABSTRACT,IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        constrainableElementEClass,
+        ConstrainableElement.class,
+        "ConstrainableElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(namespaceEClass,Namespace.class,
-        "Namespace",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(namespaceEClass, Namespace.class,
+        "Namespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getNamespace_OwnedType(),
         this.getType(),
         this.getType_Namespace(),
-        "ownedType",null,0,-1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "ownedType", null, 0, -1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getNamespace_OwnedRule(),
         this.getConstraint(),
         this.getConstraint_Namespace(),
-        "ownedRule",null,0,-1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "ownedRule", null, 0, -1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getNamespace_NestedNamespace(),
         this.getNamespace(),
         this.getNamespace_NestingNamespace(),
-        "nestedNamespace",null,0,-1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "nestedNamespace", null, 0, -1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getNamespace_NestingNamespace(),
         this.getNamespace(),
         this.getNamespace_NestedNamespace(),
-        "nestingNamespace",null,0,1,Namespace.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "nestingNamespace", null, 0, 1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(namespaceEClass,this.getNamespace(),"addType",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"type",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(namespaceEClass, this.getNamespace(),
+        "addType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(namespaceEClass,this.getNamespace(),"addRule",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getConstraint(),"rule",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(namespaceEClass, this.getNamespace(),
+        "addRule", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getConstraint(), "rule", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(namespaceEClass,this.getNamespace(),
-        "addNestedNamespace",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getNamespace(),"namespace",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(namespaceEClass, this.getNamespace(),
+        "addNestedNamespace", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getNamespace(),
+        "namespace", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(namespaceEClass,this.getType(),"lookupType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(namespaceEClass, this.getType(),
+        "lookupType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, theDatatypesPackageImpl.getString(),
+        "name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(namespaceEClass,this.getNamespace(),
-        "lookupNamespace",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(namespaceEClass, this.getNamespace(),
+        "lookupNamespace", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, theDatatypesPackageImpl.getString(),
+        "name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(typeEClass,Type.class,"Type",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(typeEClass, Type.class,
+        "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getType_Namespace(),
         this.getNamespace(),
         this.getNamespace_OwnedType(),
-        "namespace",null,0,1,Type.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "namespace", null, 0, 1, Type.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getType_OwnedOperation(),
         this.getOperation(),
         this.getOperation_OwningType(),
-        "ownedOperation",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "ownedOperation", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getType_OwnedProperty(),
         this.getProperty(),
         this.getProperty_OwningType(),
-        "ownedProperty",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "ownedProperty", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getType_SuperType(),
         this.getType(),
         null,
-        "superType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "superType", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getType_GenericSuperType(),
         this.getGenericType(),
         null,
-        "genericSuperType",null,0,-1,Type.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "genericSuperType", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(typeEClass,theDatatypesPackageImpl.getBoolean(),
-        "conformsTo",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"other",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(typeEClass, theDatatypesPackageImpl.getBoolean(),
+        "conformsTo", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getType(), "other", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(typeEClass,this.getType(),"commonSuperType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"other",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(typeEClass, this.getType(),
+        "commonSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getType(), "other", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(typeEClass,null,"allProperties",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(typeEClass, null,
+        "allProperties", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType(this.getProperty());
     g1.getETypeArguments().add(g2);
-    initEOperation(op,g1);
+    initEOperation(op, g1);
 
-    op = addEOperation(typeEClass,null,"allOperations",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(typeEClass, null,
+        "allOperations", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType(this.getOperation());
     g1.getETypeArguments().add(g2);
-    initEOperation(op,g1);
+    initEOperation(op, g1);
 
-    op = addEOperation(typeEClass,this.getProperty(),"lookupProperty",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(typeEClass, this.getProperty(),
+        "lookupProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, theDatatypesPackageImpl.getString(),
+        "name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(typeEClass,this.getOperation(),"lookupOperation",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(typeEClass, this.getOperation(),
+        "lookupOperation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, theDatatypesPackageImpl.getString(),
+        "name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType(this.getType());
     g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"paramTypes",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, g1, "paramTypes", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(typeEClass,this.getType(),"addProperty",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getProperty(),"property",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(typeEClass, this.getType(),
+        "addProperty", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getProperty(),
+        "property", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(typeEClass,this.getType(),"addOperation",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getOperation(),"operation",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(typeEClass, this.getType(),
+        "addOperation", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getOperation(),
+        "operation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(typeEClass,this.getType(),"addSuperType",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"type",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(typeEClass, this.getType(),
+        "addSuperType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(primitiveTypeEClass,PrimitiveType.class,
-        "PrimitiveType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        primitiveTypeEClass,
+        PrimitiveType.class,
+        "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getPrimitiveType_Kind(),
         this.getPrimitiveTypeKind(),
-        "kind","Unknown",1,1,PrimitiveType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        "kind", "Unknown", 1, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-    initEClass(enumerationEClass,Enumeration.class,
-        "Enumeration",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(enumerationEClass, Enumeration.class,
+        "Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getEnumeration_OwnedLiteral(),
         this.getEnumerationLiteral(),
         this.getEnumerationLiteral_Enumeration(),
-        "ownedLiteral",null,0,-1,Enumeration.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "ownedLiteral", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(enumerationEClass,this.getEnumeration(),
-        "addLiteral",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getEnumerationLiteral(),"literal",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(enumerationEClass, this.getEnumeration(),
+        "addLiteral", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getEnumerationLiteral(),
+        "literal", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(enumerationEClass,this.getEnumerationLiteral(),
-        "lookupLiteral",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,theDatatypesPackageImpl.getString(),"name",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(enumerationEClass, this.getEnumerationLiteral(),
+        "lookupLiteral", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, theDatatypesPackageImpl.getString(),
+        "name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(enumerationLiteralEClass,EnumerationLiteral.class,
-        "EnumerationLiteral",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        enumerationLiteralEClass,
+        EnumerationLiteral.class,
+        "EnumerationLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getEnumerationLiteral_Enumeration(),
         this.getEnumeration(),
         this.getEnumeration_OwnedLiteral(),
-        "enumeration",null,0,1,EnumerationLiteral.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "enumeration", null, 0, 1, EnumerationLiteral.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(propertyEClass,Property.class,
-        "Property",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(propertyEClass, Property.class,
+        "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getProperty_OwningType(),
         this.getType(),
         this.getType_OwnedProperty(),
-        "owningType",null,0,1,Property.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "owningType", null, 0, 1, Property.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(propertyEClass,theDatatypesPackageImpl.getBoolean(),
-        "cmpSlots",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getProperty(),"p",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(propertyEClass, theDatatypesPackageImpl.getBoolean(),
+        "cmpSlots", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getProperty(), "p", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(operationEClass,Operation.class,
-        "Operation",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(operationEClass, Operation.class,
+        "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getOperation_OwningType(),
         this.getType(),
         this.getType_OwnedOperation(),
-        "owningType",null,0,1,Operation.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "owningType", null, 0, 1, Operation.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOperation_OwnedParameter(),
         this.getParameter(),
         this.getParameter_Operation(),
-        "ownedParameter",null,0,-1,Operation.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "ownedParameter", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOperation_InputParameter(),
         this.getParameter(),
         null,
-        "inputParameter",null,0,-1,Operation.class,IS_TRANSIENT,IS_VOLATILE,!IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "inputParameter", null, 0, -1, Operation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOperation_OutputParameter(),
         this.getParameter(),
         null,
-        "outputParameter",null,0,-1,Operation.class,IS_TRANSIENT,IS_VOLATILE,!IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "outputParameter", null, 0, -1, Operation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOperation_ReturnParameter(),
         this.getParameter(),
         null,
-        "returnParameter",null,0,1,Operation.class,IS_TRANSIENT,IS_VOLATILE,!IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "returnParameter", null, 0, 1, Operation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOperation_SignatureParameter(),
         this.getParameter(),
         null,
-        "signatureParameter",null,0,-1,Operation.class,IS_TRANSIENT,IS_VOLATILE,!IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "signatureParameter", null, 0, -1, Operation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(operationEClass,theDatatypesPackageImpl.getBoolean(),
-        "hasMatchingSignature",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(operationEClass, theDatatypesPackageImpl.getBoolean(),
+        "hasMatchingSignature", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType(this.getType());
     g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"paramTypes",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, g1, "paramTypes", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(operationEClass,this.getOperation(),"addParameter",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getParameter(),"param",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(operationEClass, this.getOperation(),
+        "addParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getParameter(), "param", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(parameterEClass,Parameter.class,
-        "Parameter",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(parameterEClass, Parameter.class,
+        "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getParameter_Kind(),
         this.getParameterDirectionKind(),
-        "kind","in",0,1,Parameter.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        "kind", "in", 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
     initEReference(
         getParameter_Operation(),
         this.getOperation(),
         this.getOperation_OwnedParameter(),
-        "operation",null,0,1,Parameter.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "operation", null, 0, 1, Parameter.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    addEOperation(parameterEClass,this.getProperty(),"asProperty",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEOperation(parameterEClass, this.getProperty(),
+        "asProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(genericTypeEClass,GenericType.class,
-        "GenericType",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(genericTypeEClass, GenericType.class,
+        "GenericType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    op = addEOperation(genericTypeEClass,theDatatypesPackageImpl.getBoolean(),
-        "bindGenericType",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(genericTypeEClass, theDatatypesPackageImpl.getBoolean(),
+        "bindGenericType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType(this.getTypeParameter());
     g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"parameters",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, g1, "parameters", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType();
     g1.getETypeArguments().add(g2);
     g3 = createEGenericType(this.getType());
     g2.setEUpperBound(g3);
-    addEParameter(op,g1,"types",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getTypedElement(),"typedElement",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, g1, "types", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getTypedElement(),
+        "typedElement", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(genericTypeEClass,theDatatypesPackageImpl.getBoolean(),
-        "bindGenericSuperType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(genericTypeEClass, theDatatypesPackageImpl.getBoolean(),
+        "bindGenericSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType(this.getTypeParameter());
     g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"parameters",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, g1, "parameters", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     g2 = createEGenericType();
     g1.getETypeArguments().add(g2);
     g3 = createEGenericType(this.getType());
     g2.setEUpperBound(g3);
-    addEParameter(op,g1,"types",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"subType",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, g1, "types", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getType(), "subType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(genericTypeEClass,theDatatypesPackageImpl.getBoolean(),
-        "isConformant",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getType(),"type",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(genericTypeEClass, theDatatypesPackageImpl.getBoolean(),
+        "isConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(parameterGenericTypeEClass,ParameterGenericType.class,
-        "ParameterGenericType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        parameterGenericTypeEClass,
+        ParameterGenericType.class,
+        "ParameterGenericType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getParameterGenericType_TypeParameter(),
         this.getTypeParameter(),
         null,
-        "typeParameter",null,0,1,ParameterGenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "typeParameter", null, 0, 1, ParameterGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(complexGenericTypeEClass,ComplexGenericType.class,
-        "ComplexGenericType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        complexGenericTypeEClass,
+        ComplexGenericType.class,
+        "ComplexGenericType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getComplexGenericType_UnboundType(),
         this.getType(),
         null,
-        "unboundType",null,0,1,ComplexGenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "unboundType", null, 0, 1, ComplexGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getComplexGenericType_TypeArgument(),
         this.getTypeArgument(),
         this.getTypeArgument_OwningGenericType(),
-        "typeArgument",null,0,-1,ComplexGenericType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "typeArgument", null, 0, -1, ComplexGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(complexGenericTypeEClass,this.getComplexGenericType(),
-        "addTypeArgument",0,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getTypeArgument(),"typeArgument",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(complexGenericTypeEClass, this.getComplexGenericType(),
+        "addTypeArgument", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getTypeArgument(),
+        "typeArgument", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(typeParameterEClass,TypeParameter.class,
-        "TypeParameter",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        typeParameterEClass,
+        TypeParameter.class,
+        "TypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getTypeParameter_GenericElement(),
         this.getGenericElement(),
         this.getGenericElement_OwnedTypeParameter(),
-        "genericElement",null,0,1,TypeParameter.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "genericElement", null, 0, 1, TypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(typeArgumentEClass,TypeArgument.class,
-        "TypeArgument",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        typeArgumentEClass,
+        TypeArgument.class,
+        "TypeArgument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getTypeArgument_OwningGenericType(),
         this.getComplexGenericType(),
         this.getComplexGenericType_TypeArgument(),
-        "owningGenericType",null,0,1,TypeArgument.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "owningGenericType", null, 0, 1, TypeArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(constraintEClass,Constraint.class,
-        "Constraint",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(constraintEClass, Constraint.class,
+        "Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getConstraint_Kind(),
         this.getConstraintKind(),
-        "kind",null,1,1,Constraint.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "kind", null, 1, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getConstraint_Namespace(),
         this.getNamespace(),
         this.getNamespace_OwnedRule(),
-        "namespace",null,0,1,Constraint.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "namespace", null, 0, 1, Constraint.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getConstraint_Specification(),
         this.getExpression(),
         this.getExpression_Constraint(),
-        "specification",null,1,1,Constraint.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "specification", null, 1, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getConstraint_ConstrainedElement(),
         this.getConstrainableElement(),
         null,
-        "constrainedElement",null,0,-1,Constraint.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "constrainedElement", null, 0, -1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getConstraint_DefinedFeature(),
         this.getFeature(),
         null,
-        "definedFeature",null,0,1,Constraint.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "definedFeature", null, 0, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(constraintEClass,this.getConstraint(),
-        "addConstrainedElement",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
-    addEParameter(op,this.getConstrainableElement(),"constrainedElement",1,1,IS_UNIQUE,IS_ORDERED); //$NON-NLS-1$
+    op = addEOperation(constraintEClass, this.getConstraint(),
+        "addConstrainedElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, this.getConstrainableElement(),
+        "constrainedElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(expressionEClass,Expression.class,
-        "Expression",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(expressionEClass, Expression.class,
+        "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getExpression_Body(),
         theDatatypesPackageImpl.getString(),
-        "body",null,0,1,Expression.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "body", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEAttribute(
         getExpression_Language(),
         theDatatypesPackageImpl.getString(),
-        "language",null,0,1,Expression.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "language", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getExpression_Constraint(),
         this.getConstraint(),
         this.getConstraint_Specification(),
-        "constraint",null,0,1,Expression.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "constraint", null, 0, 1, Expression.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
     // Initialize enums and add enum literals
-    initEEnum(primitiveTypeKindEEnum,PrimitiveTypeKind.class,"PrimitiveTypeKind"); //$NON-NLS-1$
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.UNKNOWN);
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.INTEGER);
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.REAL);
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.BOOLEAN);
-    addEEnumLiteral(primitiveTypeKindEEnum,PrimitiveTypeKind.STRING);
+    initEEnum(primitiveTypeKindEEnum, PrimitiveTypeKind.class,
+        "PrimitiveTypeKind"); //$NON-NLS-1$
+    addEEnumLiteral(primitiveTypeKindEEnum, PrimitiveTypeKind.UNKNOWN);
+    addEEnumLiteral(primitiveTypeKindEEnum, PrimitiveTypeKind.INTEGER);
+    addEEnumLiteral(primitiveTypeKindEEnum, PrimitiveTypeKind.REAL);
+    addEEnumLiteral(primitiveTypeKindEEnum, PrimitiveTypeKind.BOOLEAN);
+    addEEnumLiteral(primitiveTypeKindEEnum, PrimitiveTypeKind.STRING);
 
-    initEEnum(parameterDirectionKindEEnum,ParameterDirectionKind.class,"ParameterDirectionKind"); //$NON-NLS-1$
-    addEEnumLiteral(parameterDirectionKindEEnum,ParameterDirectionKind.IN);
-    addEEnumLiteral(parameterDirectionKindEEnum,ParameterDirectionKind.OUT);
-    addEEnumLiteral(parameterDirectionKindEEnum,ParameterDirectionKind.INOUT);
-    addEEnumLiteral(parameterDirectionKindEEnum,ParameterDirectionKind.RETURN);
+    initEEnum(parameterDirectionKindEEnum, ParameterDirectionKind.class,
+        "ParameterDirectionKind"); //$NON-NLS-1$
+    addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.IN);
+    addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.OUT);
+    addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.INOUT);
+    addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.RETURN);
 
-    initEEnum(constraintKindEEnum,ConstraintKind.class,"ConstraintKind"); //$NON-NLS-1$
-    addEEnumLiteral(constraintKindEEnum,ConstraintKind.INVARIANT);
-    addEEnumLiteral(constraintKindEEnum,ConstraintKind.DEFINITION);
-    addEEnumLiteral(constraintKindEEnum,ConstraintKind.PRECONDITION);
-    addEEnumLiteral(constraintKindEEnum,ConstraintKind.POSTCONDITION);
-    addEEnumLiteral(constraintKindEEnum,ConstraintKind.INITIAL);
-    addEEnumLiteral(constraintKindEEnum,ConstraintKind.DERIVED);
-    addEEnumLiteral(constraintKindEEnum,ConstraintKind.BODY);
+    initEEnum(constraintKindEEnum, ConstraintKind.class, "ConstraintKind"); //$NON-NLS-1$
+    addEEnumLiteral(constraintKindEEnum, ConstraintKind.INVARIANT);
+    addEEnumLiteral(constraintKindEEnum, ConstraintKind.DEFINITION);
+    addEEnumLiteral(constraintKindEEnum, ConstraintKind.PRECONDITION);
+    addEEnumLiteral(constraintKindEEnum, ConstraintKind.POSTCONDITION);
+    addEEnumLiteral(constraintKindEEnum, ConstraintKind.INITIAL);
+    addEEnumLiteral(constraintKindEEnum, ConstraintKind.DERIVED);
+    addEEnumLiteral(constraintKindEEnum, ConstraintKind.BODY);
 
     // Initialize data types
-    initEDataType(cloneNotSupportedExceptionEDataType,CloneNotSupportedException.class,
-        "CloneNotSupportedException",!IS_SERIALIZABLE,!IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEDataType(
+        cloneNotSupportedExceptionEDataType,
+        CloneNotSupportedException.class,
+        "CloneNotSupportedException", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
     // Create resource
     createResource(eNS_URI);
@@ -3578,7 +3641,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+    public static final EAttribute NAMED_ELEMENT__NAME = eINSTANCE
+        .getNamedElement_Name();
 
     /**
      * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
@@ -3595,7 +3659,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference NAMED_ELEMENT__OWNER = eINSTANCE.getNamedElement_Owner();
+    public static final EReference NAMED_ELEMENT__OWNER = eINSTANCE
+        .getNamedElement_Owner();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl <em>Operation</em>}' class.
@@ -3613,7 +3678,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OPERATION__OWNING_TYPE = eINSTANCE.getOperation_OwningType();
+    public static final EReference OPERATION__OWNING_TYPE = eINSTANCE
+        .getOperation_OwningType();
 
     /**
      * The meta object literal for the '<em><b>Owned Parameter</b></em>' containment reference list feature.
@@ -3668,7 +3734,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getMultiplicityElement()
      * @generated
      */
-    public static final EClass MULTIPLICITY_ELEMENT = eINSTANCE.getMultiplicityElement();
+    public static final EClass MULTIPLICITY_ELEMENT = eINSTANCE
+        .getMultiplicityElement();
 
     /**
      * The meta object literal for the '<em><b>Ordered</b></em>' attribute feature.
@@ -3713,7 +3780,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference NAMESPACE__OWNED_TYPE = eINSTANCE.getNamespace_OwnedType();
+    public static final EReference NAMESPACE__OWNED_TYPE = eINSTANCE
+        .getNamespace_OwnedType();
 
     /**
      * The meta object literal for the '<em><b>Owned Rule</b></em>' containment reference list feature.
@@ -3721,7 +3789,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference NAMESPACE__OWNED_RULE = eINSTANCE.getNamespace_OwnedRule();
+    public static final EReference NAMESPACE__OWNED_RULE = eINSTANCE
+        .getNamespace_OwnedRule();
 
     /**
      * The meta object literal for the '<em><b>Nested Namespace</b></em>' containment reference list feature.
@@ -3757,7 +3826,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference TYPE__SUPER_TYPE = eINSTANCE.getType_SuperType();
+    public static final EReference TYPE__SUPER_TYPE = eINSTANCE
+        .getType_SuperType();
 
     /**
      * The meta object literal for the '<em><b>Generic Super Type</b></em>' containment reference list feature.
@@ -3765,7 +3835,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE.getType_GenericSuperType();
+    public static final EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE
+        .getType_GenericSuperType();
 
     /**
      * The meta object literal for the '<em><b>Owned Operation</b></em>' containment reference list feature.
@@ -3773,7 +3844,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference TYPE__OWNED_OPERATION = eINSTANCE.getType_OwnedOperation();
+    public static final EReference TYPE__OWNED_OPERATION = eINSTANCE
+        .getType_OwnedOperation();
 
     /**
      * The meta object literal for the '<em><b>Owned Property</b></em>' containment reference list feature.
@@ -3781,7 +3853,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference TYPE__OWNED_PROPERTY = eINSTANCE.getType_OwnedProperty();
+    public static final EReference TYPE__OWNED_PROPERTY = eINSTANCE
+        .getType_OwnedProperty();
 
     /**
      * The meta object literal for the '<em><b>Namespace</b></em>' container reference feature.
@@ -3789,7 +3862,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference TYPE__NAMESPACE = eINSTANCE.getType_Namespace();
+    public static final EReference TYPE__NAMESPACE = eINSTANCE
+        .getType_Namespace();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -3807,7 +3881,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EAttribute PARAMETER__KIND = eINSTANCE.getParameter_Kind();
+    public static final EAttribute PARAMETER__KIND = eINSTANCE
+        .getParameter_Kind();
 
     /**
      * The meta object literal for the '<em><b>Operation</b></em>' container reference feature.
@@ -3815,7 +3890,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference PARAMETER__OPERATION = eINSTANCE.getParameter_Operation();
+    public static final EReference PARAMETER__OPERATION = eINSTANCE
+        .getParameter_Operation();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
@@ -3825,7 +3901,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumerationLiteral()
      * @generated
      */
-    public static final EClass ENUMERATION_LITERAL = eINSTANCE.getEnumerationLiteral();
+    public static final EClass ENUMERATION_LITERAL = eINSTANCE
+        .getEnumerationLiteral();
 
     /**
      * The meta object literal for the '<em><b>Enumeration</b></em>' container reference feature.
@@ -3852,7 +3929,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference PROPERTY__OWNING_TYPE = eINSTANCE.getProperty_OwningType();
+    public static final EReference PROPERTY__OWNING_TYPE = eINSTANCE
+        .getProperty_OwningType();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl <em>Typed Element</em>}' class.
@@ -3870,7 +3948,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference TYPED_ELEMENT__TYPE = eINSTANCE.getTypedElement_Type();
+    public static final EReference TYPED_ELEMENT__TYPE = eINSTANCE
+        .getTypedElement_Type();
 
     /**
      * The meta object literal for the '<em><b>Generic Type</b></em>' containment reference feature.
@@ -3897,7 +3976,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EAttribute PRIMITIVE_TYPE__KIND = eINSTANCE.getPrimitiveType_Kind();
+    public static final EAttribute PRIMITIVE_TYPE__KIND = eINSTANCE
+        .getPrimitiveType_Kind();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl <em>Feature</em>}' class.
@@ -3915,7 +3995,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EAttribute FEATURE__STATIC = eINSTANCE.getFeature_Static();
+    public static final EAttribute FEATURE__STATIC = eINSTANCE
+        .getFeature_Static();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl <em>Constraint</em>}' class.
@@ -3933,7 +4014,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EAttribute CONSTRAINT__KIND = eINSTANCE.getConstraint_Kind();
+    public static final EAttribute CONSTRAINT__KIND = eINSTANCE
+        .getConstraint_Kind();
 
     /**
      * The meta object literal for the '<em><b>Namespace</b></em>' container reference feature.
@@ -3941,7 +4023,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference CONSTRAINT__NAMESPACE = eINSTANCE.getConstraint_Namespace();
+    public static final EReference CONSTRAINT__NAMESPACE = eINSTANCE
+        .getConstraint_Namespace();
 
     /**
      * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
@@ -3986,7 +4069,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EAttribute EXPRESSION__BODY = eINSTANCE.getExpression_Body();
+    public static final EAttribute EXPRESSION__BODY = eINSTANCE
+        .getExpression_Body();
 
     /**
      * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
@@ -3994,7 +4078,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EAttribute EXPRESSION__LANGUAGE = eINSTANCE.getExpression_Language();
+    public static final EAttribute EXPRESSION__LANGUAGE = eINSTANCE
+        .getExpression_Language();
 
     /**
      * The meta object literal for the '<em><b>Constraint</b></em>' container reference feature.
@@ -4002,7 +4087,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference EXPRESSION__CONSTRAINT = eINSTANCE.getExpression_Constraint();
+    public static final EReference EXPRESSION__CONSTRAINT = eINSTANCE
+        .getExpression_Constraint();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement <em>Constrainable Element</em>}' class.
@@ -4012,7 +4098,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstrainableElement()
      * @generated
      */
-    public static final EClass CONSTRAINABLE_ELEMENT = eINSTANCE.getConstrainableElement();
+    public static final EClass CONSTRAINABLE_ELEMENT = eINSTANCE
+        .getConstrainableElement();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}' class.
@@ -4089,7 +4176,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterGenericType()
      * @generated
      */
-    public static final EClass PARAMETER_GENERIC_TYPE = eINSTANCE.getParameterGenericType();
+    public static final EClass PARAMETER_GENERIC_TYPE = eINSTANCE
+        .getParameterGenericType();
 
     /**
      * The meta object literal for the '<em><b>Type Parameter</b></em>' reference feature.
@@ -4108,7 +4196,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getComplexGenericType()
      * @generated
      */
-    public static final EClass COMPLEX_GENERIC_TYPE = eINSTANCE.getComplexGenericType();
+    public static final EClass COMPLEX_GENERIC_TYPE = eINSTANCE
+        .getComplexGenericType();
 
     /**
      * The meta object literal for the '<em><b>Unbound Type</b></em>' reference feature.
@@ -4136,7 +4225,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterDirectionKind()
      * @generated
      */
-    public static final EEnum PARAMETER_DIRECTION_KIND = eINSTANCE.getParameterDirectionKind();
+    public static final EEnum PARAMETER_DIRECTION_KIND = eINSTANCE
+        .getParameterDirectionKind();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.ConstraintKind <em>Constraint Kind</em>}' enum.
@@ -4156,7 +4246,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
      * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
      * @generated
      */
-    public static final EEnum PRIMITIVE_TYPE_KIND = eINSTANCE.getPrimitiveTypeKind();
+    public static final EEnum PRIMITIVE_TYPE_KIND = eINSTANCE
+        .getPrimitiveTypeKind();
 
     /**
      * The meta object literal for the '<em>Clone Not Supported Exception</em>' data type.
