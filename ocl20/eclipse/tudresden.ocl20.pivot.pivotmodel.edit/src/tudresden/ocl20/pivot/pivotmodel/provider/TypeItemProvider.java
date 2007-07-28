@@ -284,7 +284,7 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
       for (Iterator<GenericType> it = type.getGenericSuperType().iterator(); it.hasNext();) {
         GenericType genericType = it.next();
-        label.append(getLabelProvider(genericType).getText(genericType));
+        label.append(getLabel(genericType));
 
         if (it.hasNext()) {
           label.append(", "); //$NON-NLS-1$

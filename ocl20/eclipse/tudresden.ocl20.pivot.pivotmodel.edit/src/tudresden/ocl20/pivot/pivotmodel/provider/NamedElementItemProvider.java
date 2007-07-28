@@ -185,6 +185,17 @@ public class NamedElementItemProvider extends ItemProviderAdapter implements
     return (IItemLabelProvider) ((ComposeableAdapterFactory) getAdapterFactory())
         .getRootAdapterFactory().adapt(namedElement,IItemLabelProvider.class);
   }
+  
+  /**
+   * Helper method for subclasses that returns the label for a given {@link NamedElement}.
+   * 
+   * @param namedElement the named element
+   * 
+   * @return a <code>String</code> representing the named element
+   */
+  protected String getLabel(NamedElement namedElement) {
+    return getLabelProvider(namedElement).getText(namedElement);
+  }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

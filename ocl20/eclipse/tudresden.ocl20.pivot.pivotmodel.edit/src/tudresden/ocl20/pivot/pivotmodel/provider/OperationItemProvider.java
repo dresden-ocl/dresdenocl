@@ -322,7 +322,7 @@ public class OperationItemProvider extends FeatureItemProvider implements
       Parameter parameter = it.next();
 
       // use the parameter-specific label provider for rendering the text
-      name.append(getLabelProvider(parameter).getText(parameter));
+      name.append(getLabel(parameter));
 
       if (it.hasNext()) {
         name.append(", "); //$NON-NLS-1$

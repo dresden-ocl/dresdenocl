@@ -165,7 +165,7 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
     ComplexGenericType genericType = (ComplexGenericType) object;
     Type unboundType = genericType.getUnboundType();
 
-    // cast the label provider into a TypeItemProvider
+    // the label provider should be a TypeItemProvider, maybe we should check, though
     TypeItemProvider typeItemProvider = (TypeItemProvider) getLabelProvider(unboundType);
 
     // get the type name
@@ -174,6 +174,7 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider impl
     // add a type-specific delimiter for the type arguments
     label.append(typeItemProvider.getTypeParameterListOpeningDelimiter());
 
+    // append the type arguments
     for (Iterator<TypeArgument> it = genericType.getTypeArgument().iterator(); it.hasNext();) {
       TypeArgument typeArg = it.next();
 

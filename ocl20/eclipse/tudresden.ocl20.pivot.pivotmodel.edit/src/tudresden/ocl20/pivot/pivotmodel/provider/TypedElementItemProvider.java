@@ -351,7 +351,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider implement
    * @return a formatted name for the generic type
    */
   protected CharSequence getGenericTypeName(GenericType genericType) {
-    return getLabelProvider(genericType).getText(genericType);
+    return getLabel(genericType);
   }
 
   /**
