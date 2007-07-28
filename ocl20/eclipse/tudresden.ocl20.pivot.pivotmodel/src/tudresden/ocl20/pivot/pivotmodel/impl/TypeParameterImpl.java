@@ -57,7 +57,9 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * 
  * @generated
  */
-public class TypeParameterImpl extends NamedElementImpl implements TypeParameter {
+public class TypeParameterImpl extends NamedElementImpl implements
+    TypeParameter {
+
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -84,7 +86,8 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
    * @generated
    */
   public GenericElement getGenericElement() {
-    if (eContainerFeatureID != PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT) return null;
+    if (eContainerFeatureID != PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT)
+      return null;
     return (GenericElement) eContainer();
   }
 
@@ -93,10 +96,10 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
    * 
    * @generated
    */
-  public NotificationChain basicSetGenericElement(GenericElement newGenericElement,
-      NotificationChain msgs) {
+  public NotificationChain basicSetGenericElement(
+      GenericElement newGenericElement, NotificationChain msgs) {
     msgs = eBasicSetContainer((InternalEObject) newGenericElement,
-        PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT,msgs);
+        PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT, msgs);
     return msgs;
   }
 
@@ -108,19 +111,22 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
   public void setGenericElement(GenericElement newGenericElement) {
     if (newGenericElement != eInternalContainer()
         || (eContainerFeatureID != PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT && newGenericElement != null)) {
-      if (EcoreUtil.isAncestor(this,(EObject) newGenericElement))
-        throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+      if (EcoreUtil.isAncestor(this, (EObject) newGenericElement))
+        throw new IllegalArgumentException(
+            "Recursive containment not allowed for " + toString()); //$NON-NLS-1$
       NotificationChain msgs = null;
       if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
       if (newGenericElement != null)
         msgs = ((InternalEObject) newGenericElement).eInverseAdd(this,
-            PivotModelPackageImpl.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,GenericElement.class,msgs);
-      msgs = basicSetGenericElement(newGenericElement,msgs);
+            PivotModelPackageImpl.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+            GenericElement.class, msgs);
+      msgs = basicSetGenericElement(newGenericElement, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT,newGenericElement,newGenericElement));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT,
+          newGenericElement, newGenericElement));
   }
 
   /**
@@ -130,11 +136,13 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
    */
   @Override
   public TypeParameter clone() {
-    return (TypeParameter) initialize(PivotModelFactory.INSTANCE.createTypeParameter());
+    return (TypeParameter) initialize(PivotModelFactory.INSTANCE
+        .createTypeParameter());
   }
 
   /**
-   * Returns the name of the {@link GenericElement} that owns this <code>TypeParameter</code>.
+   * Returns the name of the {@link GenericElement} that owns this
+   * <code>TypeParameter</code>.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
    */
@@ -144,30 +152,36 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
   }
 
   /**
-   * Overridden to only include the name of the owning {@link GenericElement} instead of the full
-   * namespace hierarchy. This is necessary for the correct working of the {@link #hashCode()} and
-   * {@link #equals(Object)} methods when binding the <code>TypeParameters</code> of
-   * <code>GenericElement</code>s since the implementation of these methods is based on the
-   * equality of the fully qualified name.
+   * Helper method that returns a name useful for identifying this
+   * <code>TypeParameter</code>. This method is used by
+   * {@link #equals(Object)} and {@link #hashCode()} when determining the
+   * equality with another <code>TypeParameter</code>. This is important in
+   * the context of
+   * {@link GenericElement#bindTypeParameter(java.util.List, java.util.List) binding}
+   * the type parameters of a {@link GenericElement generic element}. The name
+   * alone is not enough for this purpose, since two different type parameters
+   * may have the same name. However, the full
+   * {@link #getQualifiedName() qualified name} is not helpful either.
    * 
    * <p>
-   * Now, before <code>GenericElement</code>s are
-   * {@link GenericElement#bindTypeParameter() bound}, they are cloned but not added to the
-   * original element's namespace. Thus, their fully qualified name (and that of the owned
-   * <code>TypeParameter</code>s) will be different. During binding, this would prevent
-   * recognizing two <code>TypeParameter</code>s as equal and therefore hinder binding. Thus,
-   * changing the qualified name to only include the parent solves this problem. An alternative
-   * would be to override the {@link #hashCode()} and {@link #equals(Object)} methods, but that
-   * would require more effort. Changing the fully qualified name instead also works fine for the
-   * display in a graphical editor.
+   * To see why, consider that generic elements are cloned before they are
+   * bound. However, they are not added to the original element's namespace.
+   * Thus, their fully qualified name (and that of the owned
+   * <code>TypeParameter</code>s) will be different. During binding, this
+   * would prevent recognizing two <code>TypeParameter</code>s as equal and
+   * therefore hinder binding. Thus, changing the qualified name to only include
+   * the parent solves this problem.
    * </p>
    * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
+   * <p>
+   * Thus, this method returns a name that only includes the name of the owning
+   * {@link GenericElement} instead of the full namespace hierarchy. This should
+   * sufficiently identify any type parameter.
+   * </p>
    */
-  @Override
-  public String getQualifiedName() {
-    return getGenericElement() != null ? getGenericElement().getName() + "::" + getName() //$NON-NLS-1$
-    : getName();
+  private String getIdentifyingName() {
+    return getGenericElement() != null ? getGenericElement().getName() + "::" //$NON-NLS-1$
+        + getName() : getName();
   }
 
   /**
@@ -180,10 +194,11 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
       NotificationChain msgs) {
     switch (featureID) {
       case PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT:
-        if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetGenericElement((GenericElement) otherEnd,msgs);
+        if (eInternalContainer() != null)
+          msgs = eBasicRemoveFromContainer(msgs);
+        return basicSetGenericElement((GenericElement) otherEnd, msgs);
     }
-    return super.eInverseAdd(otherEnd,featureID,msgs);
+    return super.eInverseAdd(otherEnd, featureID, msgs);
   }
 
   /**
@@ -192,13 +207,13 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT:
-        return basicSetGenericElement(null,msgs);
+        return basicSetGenericElement(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -207,11 +222,13 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
    * @generated
    */
   @Override
-  public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+  public NotificationChain eBasicRemoveFromContainerFeature(
+      NotificationChain msgs) {
     switch (eContainerFeatureID) {
       case PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT:
         return eInternalContainer().eInverseRemove(this,
-            PivotModelPackageImpl.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,GenericElement.class,msgs);
+            PivotModelPackageImpl.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+            GenericElement.class, msgs);
     }
     return super.eBasicRemoveFromContainerFeature(msgs);
   }
@@ -227,7 +244,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
       case PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT:
         return getGenericElement();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -242,7 +259,7 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
         setGenericElement((GenericElement) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -272,6 +289,54 @@ public class TypeParameterImpl extends NamedElementImpl implements TypeParameter
         return getGenericElement() != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * Overridden to base the hash code on the name of this element and its owner
+   * only. See {@link #getIdentifyingName()} for more details.
+   * 
+   * @return a hash code for this type parameter
+   */
+  @Override
+  public int hashCode() {
+    String identifyingName = getIdentifyingName();
+
+    final int prime = 31;
+    int result = 1;
+    result = prime * result
+        + ((identifyingName == null) ? 0 : identifyingName.hashCode());
+    return result;
+  }
+
+  /**
+   * Overridden so that type parameters are considered equal when their name and
+   * the name of their owning generic element are equal. See
+   * {@link #getIdentifyingName()} for more details.
+   * 
+   * @param obj the other object
+   * 
+   * @return <code>true</code> if the other object is a
+   *         <code>TypeParameter</code> with the same name and equally-named
+   *         owner, <code>false</code> otherwise
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+
+    if (!(obj instanceof TypeParameterImpl)) return false;
+    final TypeParameterImpl other = (TypeParameterImpl) obj;
+
+    String identifyingName = getIdentifyingName();
+    String otherIdentifyingName = other.getIdentifyingName();
+    
+    if (identifyingName == null) {
+      if (otherIdentifyingName != null) return false;
+    }
+    
+    else if (!identifyingName.equals(otherIdentifyingName)) return false;
+    
+    return true;
   }
 
 } // TypeParameterImpl
