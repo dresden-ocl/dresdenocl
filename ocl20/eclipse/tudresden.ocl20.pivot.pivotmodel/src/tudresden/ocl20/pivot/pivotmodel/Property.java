@@ -53,8 +53,8 @@ package tudresden.ocl20.pivot.pivotmodel;
  *
  * @generated
  */
-public interface Property extends Feature, TypedElement, NamedElement, MultiplicityElement,
-    ConstrainableElement {
+public interface Property extends Feature, TypedElement, NamedElement,
+    MultiplicityElement, ConstrainableElement {
 
   /**
    * Returns the value of the '<em><b>Owning Type</b></em>' container reference. It is
