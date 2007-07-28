@@ -144,7 +144,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements IEditingD
 
     for (Iterator<Property> it = type.getOwnedProperty().iterator(); it.hasNext();) {
       Property p = it.next();
-      name.append(getLabelProvider(p).getText(p));
+      name.append(getLabel(p));
 
       if (it.hasNext()) {
         name.append(", "); //$NON-NLS-1$
