@@ -105,6 +105,9 @@
       <eParameters name="typeParameter" eType="#//TypeParameter"/>
     </eOperations>
     <eOperations name="getBoundType" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Returns the {@link Type} that has been bound to the&#xD;&#xA;given {@link TypeParameter type parameter}. Returns&#xD;&#xA;&lt;code>null&lt;/code> if no type has been bound or this&#xD;&#xA;type parameter is not part of the generic type definition.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
       <eParameters name="typeParam" eType="#//TypeParameter"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypeParameter" upperBound="-1"
