@@ -96,7 +96,7 @@ public class OclUndefined implements OclRoot{
 
         if(undefinedreason==null)
 
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
 
         this.undefinedreason=undefinedreason;
 
