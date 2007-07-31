@@ -162,6 +162,11 @@ public class UmlOclFactory extends AbstractOclFactory {
 		return reconvert(targetType, oclObject, false);
 	}
 	
+	/*
+	 * Java code used with the Dresden OCL Toolkit can either use primitive
+	 * types or wrappers for these types.
+	 * Autoboxing and -unboxing is supported since Java 5.0.
+	 */
 	public Object reconvert(NonOclType targetType, OclRoot oclObject, boolean arrayWrap) {
 		if (targetType == null)
 			throw new OclException("UML Type Mapping: reconvert: targetType must not be null!");
