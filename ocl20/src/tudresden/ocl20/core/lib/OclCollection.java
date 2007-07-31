@@ -498,19 +498,9 @@ public abstract class OclCollection implements OclSizable, OclRoot {
 
       iter.next();
 
-      java.lang.Comparable key;
+      java.lang.Comparable key = eval.evaluate();
 
-      try {
-
-        key = eval.evaluate();
-
-      } catch (ClassCastException e) {
-
-        return new OclSequence(0,"ClassCastException in OclComparableEvaluatable.evaluate()");
-
-      }
-
-      OclRoot obj    = iter.getValue();
+      OclRoot obj = iter.getValue();
 
       if (tm.keySet().contains(key)) {
 
