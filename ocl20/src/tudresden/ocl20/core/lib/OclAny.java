@@ -117,7 +117,12 @@ public abstract class OclAny implements OclRoot {
         }
         return OclBoolean.getOclRepresentationFor(t.isOfType(this));
     }
-       
+    
+    /*
+     * Note: This method is not supported by the Dresden OCL Toolkit; see "Java-
+     * Implementierung der OCL-Basisbibliothek", p.7 (Frank Finger, Gro§er
+     * Beleg, July 1999)
+     */
     public OclAny oclAsType(OclType t) {
         return this;
     }
