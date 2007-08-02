@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Primitive Type</b></em>'.
@@ -48,18 +49,18 @@ import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl#getKind <em>Kind</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
   /**
    * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
-   * <!-- begin-user-doc
-   * --> <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getKind()
    * @generated
    * @ordered
@@ -67,8 +68,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
   protected static final PrimitiveTypeKind KIND_EDEFAULT = PrimitiveTypeKind.UNKNOWN;
   /**
    * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getKind()
    * @generated
    * @ordered
@@ -77,6 +78,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected PrimitiveTypeImpl() {
@@ -84,16 +86,52 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
+   * Overridden to implement special type conformance rules. Since there is an
+   * endless number of primitive types in various metamodels (with differing
+   * names), we cannot check for conformance based on the qualified name of the
+   * primitive type. Instead, the {@link #getKind() kind} of the primitive type
+   * is the decisive criterion.
+   * 
+   * <p>
+   * More precisely, two primitive types conform to each other if their
+   * <code>kind</code> is equal. Moreover, we implement the special rule that
+   * a primitive type with kind {@link PrimitiveTypeKind#INTEGER INTEGER}
+   * conforms to one with kind {@link PrimitiveTypeKind#REAL REAL}.
+   * Domain-specific subclasses may override if integers do not conform to reals
+   * in their domain.
+   * </p>
+   * 
+   * @param other the other type
+   * 
+   * @return <code>true</code> if this type conforms to the other,
+   *         <code>false</code> otherwise
    */
   @Override
-  protected EClass eStaticClass() {
-    return PivotModelPackageImpl.Literals.PRIMITIVE_TYPE;
+  public boolean conformsTo(Type other) {
+    boolean conforms = false;
+    
+    if (other instanceof PrimitiveType) {
+      PrimitiveTypeKind thisKind, otherKind;
+
+      // get this and the other type's kind
+      otherKind = ((PrimitiveType) other).getKind();
+      thisKind = getKind();
+      
+      switch (thisKind) {
+        case INTEGER:
+          conforms = otherKind == PrimitiveTypeKind.REAL;
+          break;
+        default:
+          conforms = thisKind == otherKind;
+      }
+    }
+    
+    return conforms;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public PrimitiveTypeKind getKind() {
@@ -102,14 +140,15 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setKind(PrimitiveTypeKind newKind) {
     PrimitiveTypeKind oldKind = kind;
     kind = newKind == null ? KIND_EDEFAULT : newKind;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          PivotModelPackageImpl.PRIMITIVE_TYPE__KIND,oldKind,kind));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          PivotModelPackageImpl.PRIMITIVE_TYPE__KIND, oldKind, kind));
   }
 
   /*
@@ -135,6 +174,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -143,11 +183,12 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
       case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
         return getKind();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -157,11 +198,12 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
         setKind((PrimitiveTypeKind) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -176,6 +218,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -188,14 +231,25 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
   }
 
   /**
-   * The EMF implementation is changed to use the Jakarta Commons Lang ToStringBuilder instead.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return PivotModelPackageImpl.Literals.PRIMITIVE_TYPE;
+  }
+
+  /**
+   * The EMF implementation is changed to use the Jakarta Commons Lang
+   * ToStringBuilder instead.
    * 
    * @generated NOT
    */
   @Override
   public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendToString(
-        super.toString()).append("kind",getKind()).toString(); //$NON-NLS-1$
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        .appendToString(super.toString()).append("kind", getKind()).toString(); //$NON-NLS-1$
   }
 
 } // PrimitiveTypeImpl

@@ -160,6 +160,43 @@ public class TypeImpl extends NamedElementImpl implements Type {
     super();
   }
 
+  
+  /**
+   * Overridden to include the type parameters if existent.
+   * 
+   * @return a <code>String</code> with the name of this <code>Type</code>
+   */
+  @Override
+  public String getQualifiedName() {
+    String name;
+    
+    if (!getOwnedTypeParameter().isEmpty()) {
+      StringBuilder nameBuilder = new StringBuilder(super.getName());
+      
+      nameBuilder.append('<');
+      
+      for (Iterator<TypeParameter> it = getOwnedTypeParameter().iterator(); it.hasNext();) {
+        nameBuilder.append(it.next().getName());
+        
+        if (it.hasNext()) {
+          nameBuilder.append(", "); //$NON-NLS-1$
+        }
+      }
+      
+      nameBuilder.append('>');
+
+      name = nameBuilder.toString();
+    }
+    
+    else {
+      name = super.getName();
+    }
+    
+    
+    return name;
+  }
+
+
   /**
    * Overridden to return the {@link #getNamespace() namespace} of this
    * <code>Type</code>.

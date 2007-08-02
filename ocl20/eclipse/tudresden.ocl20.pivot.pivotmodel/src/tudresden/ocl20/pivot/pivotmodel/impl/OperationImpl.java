@@ -74,16 +74,16 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter <em>Input Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter <em>Output Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter <em>Return Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter <em>Signature Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter <em>Input Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter <em>Output Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter <em>Return Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter <em>Signature Parameter</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class OperationImpl extends FeatureImpl implements Operation {
@@ -94,8 +94,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
   private static final Logger logger = Logger.getLogger(OperationImpl.class);
 
   /**
-   * The cached value of the '{@link #getOwnedTypeParameter() <em>Owned Type Parameter</em>}' containment reference list.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getOwnedTypeParameter() <em>Owned Type Parameter</em>}'
+   * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getOwnedTypeParameter()
    * @generated
    * @ordered
@@ -103,19 +104,22 @@ public class OperationImpl extends FeatureImpl implements Operation {
   protected EList<TypeParameter> ownedTypeParameter;
 
   /**
-   * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment reference list.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}'
+   * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getOwnedParameter()
    * @generated
    * @ordered
    */
   protected EList<Parameter> ownedParameter;
 
-  // a map that contains instances of this Operation with some or all type parameters bound
+  // a map that contains instances of this Operation with some or all type
+  // parameters bound
   private static Map<String, Operation> boundOperations;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected OperationImpl() {
@@ -123,15 +127,36 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * Overridden to additionally include the types of the parameters of this <code>Operation</code>.
-   * This is necessary because overloaded operations could not be distinguished otherwise.
+   * Overridden to additionally include type arguments if this is a generic
+   * operation as well as parameter types. This is necessary because overloaded
+   * operations could not be distinguished otherwise.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
    */
   @Override
   public String getQualifiedName() {
-    StringBuilder qualifiedName = new StringBuilder(super.getQualifiedName());
+    StringBuilder qualifiedName = new StringBuilder();
 
+    // prepend type parameters if existing
+    if (!getOwnedTypeParameter().isEmpty()) {
+      qualifiedName.append('<');
+
+      for (Iterator<TypeParameter> it = getOwnedTypeParameter().iterator(); it
+          .hasNext();) {
+        qualifiedName.append(it.next().getName());
+
+        if (it.hasNext()) {
+          qualifiedName.append(", "); //$NON-NLS-1$
+        }
+      }
+
+      qualifiedName.append('>').append(' ');
+    }
+
+    // append the qualified name determined in the superclass
+    qualifiedName.append(super.getQualifiedName());
+
+    // append parameters
     qualifiedName.append('(');
 
     for (Iterator<Parameter> it = getSignatureParameter().iterator(); it
@@ -154,7 +179,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * Overridden to return the {@link #getOwningType() owning type} of this <code>Operation</code>.
+   * Overridden to return the {@link #getOwningType() owning type} of this
+   * <code>Operation</code>.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
    */
@@ -164,8 +190,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * Overridden to return the type of the {@link #getReturnParameter() return parameter} if there is
-   * one. Otherwise, default to super implementation.
+   * Overridden to return the type of the
+   * {@link #getReturnParameter() return parameter} if there is one. Otherwise,
+   * default to super implementation.
    */
   @Override
   public Type getType() {
@@ -179,8 +206,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * Overridden to return the generic type of the {@link #getReturnParameter() return parameter} if
-   * there is one. Otherwise, default to super implementation.
+   * Overridden to return the generic type of the
+   * {@link #getReturnParameter() return parameter} if there is one. Otherwise,
+   * default to super implementation.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getGenericType()
    */
@@ -196,8 +224,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * Overridden so that the type of the {@link #getReturnParameter() return parameter} is changed if
-   * one exists.
+   * Overridden so that the type of the
+   * {@link #getReturnParameter() return parameter} is changed if one exists.
    */
   @Override
   public void setType(Type newType) {
@@ -218,8 +246,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /*
-   * Overridden so that the generic type of the {@link #getReturnParameter() return parameter} is
-   * changed if one exists.
+   * Overridden so that the generic type of the
+   * {@link #getReturnParameter() return parameter} is changed if one exists.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setGenericType(tudresden.ocl20.pivot.pivotmodel.GenericType)
    */
@@ -243,8 +271,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * The implementation in this class simply redirects to {{@link #getOwnedTypeParameterGen()}
-   * which contains the code generated by EMF. Clients may, however, override this method to provide
-   * specific behaviour, e.g., adapt to other model repositories.
+   * which contains the code generated by EMF. Clients may, however, override
+   * this method to provide specific behaviour, e.g., adapt to other model
+   * repositories.
    * 
    * @generated NOT
    */
@@ -253,8 +282,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * <!-- begin-user-doc -->The code generated for {{@link #getOwnedTypeParameterGen()} is
-   * redirected to this method.<!-- end-user-doc -->
+   * <!-- begin-user-doc -->The code generated for {{@link #getOwnedTypeParameterGen()}
+   * is redirected to this method.<!-- end-user-doc -->
+   * 
    * @generated
    */
   protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -269,6 +299,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Type getOwningType() {
@@ -279,6 +310,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public NotificationChain basicSetOwningType(Type newOwningType,
@@ -290,6 +322,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setOwningType(Type newOwningType) {
@@ -313,9 +346,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * The implementation in this class simply redirects to {{@link #getOwnedParameterGen()} which
-   * contains the code generated by EMF. Client may, however, override this method to provide
-   * specific behaviour, e.g., adapt to other model repositories.
+   * The implementation in this class simply redirects to {{@link #getOwnedParameterGen()}
+   * which contains the code generated by EMF. Client may, however, override
+   * this method to provide specific behaviour, e.g., adapt to other model
+   * repositories.
    * 
    * @generated NOT
    */
@@ -324,8 +358,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * <!-- begin-user-doc -->The code generated for {{@link #getOwnedParameter()} is redirected to
-   * this method. <!-- end-user-doc -->
+   * <!-- begin-user-doc -->The code generated for {{@link #getOwnedParameter()}
+   * is redirected to this method. <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected final List<Parameter> getOwnedParameterGen() {
@@ -376,12 +411,14 @@ public class OperationImpl extends FeatureImpl implements Operation {
    * {@link #getOwnedParameter() list of all parameters} according to their
    * {@link Parameter#getKind() direction}.
    * 
-   * @param directionKinds an <code>EnumSet</code> containing the direction kinds of the
-   *          parameters that should be contained in the filtered list
-   * @param structuralFeature the meta object representing the corresponding feature
+   * @param directionKinds an <code>EnumSet</code> containing the direction
+   *          kinds of the parameters that should be contained in the filtered
+   *          list
+   * @param structuralFeature the meta object representing the corresponding
+   *          feature
    * 
-   * @return an {@link EcoreEList.UnmodifiableEList<Parameter>} with the filtered
-   *         <code>Parameters</code>.
+   * @return an {@link EcoreEList.UnmodifiableEList<Parameter>} with the
+   *         filtered <code>Parameters</code>.
    */
   protected List<Parameter> getFilteredParameters(
       EnumSet<ParameterDirectionKind> filteredDirections,
@@ -398,8 +435,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
       }
     }
 
-    // we return a EcoreEList here to support the EMF framework (editor, notification etc.)
-    // subclasses may override if they provide their own container visualization options
+    // we return a EcoreEList here to support the EMF framework (editor,
+    // notification etc.)
+    // subclasses may override if they provide their own container visualization
+    // options
     return new EcoreEList.UnmodifiableEList<Parameter>(this, structuralFeature,
         filteredParameters.size(), filteredParameters.toArray());
   }
@@ -430,8 +469,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
    */
   public boolean hasMatchingSignature(List<Type> paramTypes) {
     if (logger.isDebugEnabled()) {
-      logger
-          .debug("hasMatchingSignature(paramTypes=" + paramTypes + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+      logger.debug("hasMatchingSignature(paramTypes=" + paramTypes //$NON-NLS-1$
+          + ") - enter"); //$NON-NLS-1$
     }
 
     boolean match;
@@ -457,7 +496,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
         // get the next input parameter of this operation
         Parameter parameter = inputParameters.get(it.previousIndex());
 
-        // if the input parameter has no type, check for conformance with generic type
+        // if input parameter has no type, check conformance with generic type
         if (parameter.getType() == null) {
 
           if (parameter.getGenericType() != null) {
@@ -471,7 +510,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
           match = type.conformsTo(parameter.getType());
         }
 
-        // there is no need for continuing the search if two parameters did not match
+        // no need for continuing the search if two parameters did not match
         if (match == false) {
           break;
         }
@@ -495,7 +534,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
       logger.debug("addParameter(param=" + param + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
-    // use the generated method because getOwnedParameter() may be overridden by subclasses
+    // use the generated method because getOwnedParameter() may be overridden by
+    // subclasses
     getOwnedParameterGen().add(param);
 
     if (logger.isDebugEnabled()) {
@@ -545,14 +585,16 @@ public class OperationImpl extends FeatureImpl implements Operation {
     // determine the String identifier for the binding
     bindingKey = GenericElements.determineBindingKey(this, parameters, types);
 
-    // try to find a previously bound operation and create a new one if necessary
+    // try to find a previously bound operation and create a new one if
+    // necessary
     boundOperation = getBoundOperations().get(bindingKey);
 
     if (boundOperation == null) {
       boundOperation = this.clone();
 
-      // remove the type parameter that is going to be bound; note that we cannot simply use
-      // removeAll because EObjectEList uses object identity, not object equality for comparison
+      // remove the type parameter that is going to be bound; note that we
+      // cannot simply use removeAll because EObjectEList uses object identity,
+      // not object equality for comparison
       for (Iterator<TypeParameter> it = boundOperation.getOwnedTypeParameter()
           .iterator(); it.hasNext();) {
         TypeParameter ownedTypeParameter = it.next();
@@ -588,6 +630,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Type getBoundType(TypeParameter typeParam) {
@@ -647,6 +690,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -670,6 +714,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -690,6 +735,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -705,6 +751,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -730,6 +777,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -754,6 +802,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -774,6 +823,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -799,6 +849,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -822,6 +873,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -845,6 +897,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -853,9 +906,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
   }
 
   /**
-   * Changed EMF implementation in order to use a consistent style. In addition, the getter methods
-   * are used to get attribute values. This is important if repository-specific subclasses have
-   * alternative ways of obtaining their attribute values.
+   * Changed EMF implementation in order to use a consistent style. In addition,
+   * the getter methods are used to get attribute values. This is important if
+   * repository-specific subclasses have alternative ways of obtaining their
+   * attribute values.
    * 
    * @generated NOT
    */
