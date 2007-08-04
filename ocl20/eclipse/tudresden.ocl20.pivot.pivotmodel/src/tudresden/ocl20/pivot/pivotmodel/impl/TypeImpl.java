@@ -160,7 +160,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
     super();
   }
 
-  
   /**
    * Overridden to include the type parameters if existent.
    * 
@@ -169,33 +168,32 @@ public class TypeImpl extends NamedElementImpl implements Type {
   @Override
   public String getQualifiedName() {
     String name;
-    
+
     if (!getOwnedTypeParameter().isEmpty()) {
-      StringBuilder nameBuilder = new StringBuilder(super.getName());
-      
+      StringBuilder nameBuilder = new StringBuilder(super.getQualifiedName());
+
       nameBuilder.append('<');
-      
-      for (Iterator<TypeParameter> it = getOwnedTypeParameter().iterator(); it.hasNext();) {
+
+      for (Iterator<TypeParameter> it = getOwnedTypeParameter().iterator(); it
+          .hasNext();) {
         nameBuilder.append(it.next().getName());
-        
+
         if (it.hasNext()) {
           nameBuilder.append(", "); //$NON-NLS-1$
         }
       }
-      
+
       nameBuilder.append('>');
 
       name = nameBuilder.toString();
     }
-    
+
     else {
-      name = super.getName();
+      name = super.getQualifiedName();
     }
-    
-    
+
     return name;
   }
-
 
   /**
    * Overridden to return the {@link #getNamespace() namespace} of this
@@ -1162,19 +1160,19 @@ public class TypeImpl extends NamedElementImpl implements Type {
   public boolean equals(Object obj) {
     if (this == obj) return true;
     if (obj == null) return false;
-    
+
     if (!(obj instanceof TypeImpl)) return false;
     final TypeImpl other = (TypeImpl) obj;
-    
+
     String qualifiedName = getQualifiedName();
     String otherQualifiedName = other.getQualifiedName();
-    
+
     if (qualifiedName == null) {
       if (otherQualifiedName != null) return false;
     }
-    
+
     else if (!qualifiedName.equals(otherQualifiedName)) return false;
-    
+
     return true;
   }
 
