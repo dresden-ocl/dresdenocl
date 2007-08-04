@@ -209,7 +209,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
 
     // now bind the 'allInstances' operation with the source type
     allInstancesOperation = allInstancesOperation.bindTypeParameter(allInstancesOperation
-        .getOwnedTypeParameter(),Arrays.asList(sourceType));
+        .getOwnedTypeParameter(),Arrays.asList(srcType));
 
     if (logger.isDebugEnabled()) {
       logger.debug("bindAllInstancesOperation() - exit - return value=" + allInstancesOperation); //$NON-NLS-1$
