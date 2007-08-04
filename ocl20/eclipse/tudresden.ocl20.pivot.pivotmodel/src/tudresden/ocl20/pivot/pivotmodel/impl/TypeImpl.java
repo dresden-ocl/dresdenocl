@@ -167,10 +167,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
    */
   @Override
   public String getQualifiedName() {
-    String name;
+    String name = super.getQualifiedName();
 
     if (!getOwnedTypeParameter().isEmpty()) {
-      StringBuilder nameBuilder = new StringBuilder(super.getQualifiedName());
+      StringBuilder nameBuilder = new StringBuilder(name);
 
       nameBuilder.append('<');
 
@@ -186,10 +186,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
       nameBuilder.append('>');
 
       name = nameBuilder.toString();
-    }
-
-    else {
-      name = super.getQualifiedName();
     }
 
     return name;
