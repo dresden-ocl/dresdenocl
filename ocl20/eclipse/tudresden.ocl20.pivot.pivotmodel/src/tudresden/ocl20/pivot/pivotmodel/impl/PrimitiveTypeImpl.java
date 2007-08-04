@@ -88,17 +88,15 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
   /**
    * Overridden to implement special type conformance rules. Since there is an
    * endless number of primitive types in various metamodels (with differing
-   * names), we cannot check for conformance based on the qualified name of the
-   * primitive type. Instead, the {@link #getKind() kind} of the primitive type
-   * is the decisive criterion.
+   * names), we cannot solely check for conformance based on the qualified name
+   * of the primitive type. Instead, the {@link #getKind() kind} of the
+   * primitive type has to be considered as well.
    * 
    * <p>
    * More precisely, two primitive types conform to each other if their
-   * <code>kind</code> is equal. Moreover, we implement the special rule that
-   * a primitive type with kind {@link PrimitiveTypeKind#INTEGER INTEGER}
+   * <code>kind</code> is equal. Furthermore, we implement the special rule
+   * that a primitive type with kind {@link PrimitiveTypeKind#INTEGER INTEGER}
    * conforms to one with kind {@link PrimitiveTypeKind#REAL REAL}.
-   * Domain-specific subclasses may override if integers do not conform to reals
-   * in their domain.
    * </p>
    * 
    * @param other the other type
@@ -108,25 +106,26 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
    */
   @Override
   public boolean conformsTo(Type other) {
-    boolean conforms = false;
-    
-    if (other instanceof PrimitiveType) {
+    boolean conformant = super.conformsTo(other);
+
+    if (!conformant && other instanceof PrimitiveType) {
       PrimitiveTypeKind thisKind, otherKind;
 
       // get this and the other type's kind
       otherKind = ((PrimitiveType) other).getKind();
       thisKind = getKind();
-      
-      switch (thisKind) {
-        case INTEGER:
-          conforms = otherKind == PrimitiveTypeKind.REAL;
-          break;
-        default:
-          conforms = thisKind == otherKind;
+
+      if (thisKind == PrimitiveTypeKind.INTEGER) {
+        conformant = otherKind == PrimitiveTypeKind.INTEGER
+            || otherKind == PrimitiveTypeKind.REAL;
+      }
+
+      else {
+        conformant = thisKind == otherKind;
       }
     }
-    
-    return conforms;
+
+    return conformant;
   }
 
   /**
