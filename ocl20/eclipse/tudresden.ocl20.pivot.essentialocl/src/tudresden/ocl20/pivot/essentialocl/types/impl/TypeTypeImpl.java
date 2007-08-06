@@ -35,7 +35,9 @@ package tudresden.ocl20.pivot.essentialocl.types.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
+import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
 
 /**
@@ -43,13 +45,14 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
 public class TypeTypeImpl extends TypeImpl implements TypeType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected TypeTypeImpl() {
@@ -57,25 +60,23 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
   }
 
   /**
-   * Simply returns the name of the <code>TypeType</code> which will be <code>OclType</code>
-   * because the OCL 2.0 Specification defines only this single instance. As a member of the OCL
-   * Standard Library, <code>OclType</code> does not really have a namespace. It is implicitly
-   * available in all namespaces.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
-   */
-  @Override
-  public String getQualifiedName() {
-    return getName();
-  }
-
-  /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
   protected EClass eStaticClass() {
     return TypesPackageImpl.Literals.TYPE_TYPE;
+  }
+
+  /**
+   * Overridden to create a <code>TypeType</code> instance instead.
+   * 
+   * @return a <code>TypeType</code> instance
+   */
+  @Override
+  public Type clone() {
+    return initialize(TypesFactory.INSTANCE.createTypeType());
   }
 
 } // TypeTypeImpl
