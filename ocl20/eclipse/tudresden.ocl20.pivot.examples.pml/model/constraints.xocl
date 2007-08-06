@@ -9,4 +9,12 @@
       </bodyExpression>
     </specification>
   </ownedRule>
+  <ownedRule name="checkOclAsType" constrainedElement="Plugin">
+    <specification body="self.oclAsType(Feature)">
+      <bodyExpression xsi:type="xocl:ModelOperationCallExpXS" referredOperationName="oclAsType">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.1/@specification/@context"/>
+        <argument xsi:type="xocl:TypeLiteralExpXS" referredTypeName="Feature"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
 </xocl:NamespaceXS>
