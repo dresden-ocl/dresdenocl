@@ -57,7 +57,8 @@ import java.util.List;
  *
  * @generated
  */
-public interface Type extends NamedElement, ConstrainableElement, GenericElement {
+public interface Type extends NamedElement, ConstrainableElement,
+    GenericElement {
 
   /**
    * Returns the value of the '<em><b>Super Type</b></em>' reference list. The list contents
@@ -316,7 +317,8 @@ public interface Type extends NamedElement, ConstrainableElement, GenericElement
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
    */
-  Type bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types);
+  Type bindTypeParameter(List<TypeParameter> parameters,
+      List<? extends Type> types);
 
   /**
    * Redefines {@link NamedElement#clone()} with a covariant return type.

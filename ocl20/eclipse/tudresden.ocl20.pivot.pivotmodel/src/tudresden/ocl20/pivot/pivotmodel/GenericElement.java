@@ -123,6 +123,6 @@ public interface GenericElement extends NamedElement {
    * <!-- end-model-doc -->
    * @generated
    */
-  Type getBoundType(TypeParameter typeParam);
+  Type getTypeForParameter(TypeParameter typeParam);
 
 } // GenericElement
