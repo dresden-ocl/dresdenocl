@@ -129,7 +129,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements PropertyC
 
     // check wellformedness
     if (referredProperty == null) {
-      throw new WellformednessException(
+      throw new WellformednessException(this,
           "The referred property of a PropertyCallExp must not be null."); //$NON-NLS-1$
     }
 

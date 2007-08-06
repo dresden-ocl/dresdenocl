@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -42,6 +43,7 @@ import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type Literal Exp</b></em>'.
@@ -55,11 +57,12 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @generated
  */
-public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp {
+public class TypeLiteralExpImpl extends LiteralExpImpl implements
+    TypeLiteralExp {
 
   /**
-   * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}' reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getReferredType()
    * @generated
@@ -77,9 +80,10 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
   }
 
   /**
-   * The type of a <code>TypeLiteralExp</code> is the single instance of {@link TypeType} called
-   * <code>OclType</code>. Since this is a generic type, it is bound with the
-   * {@link #getReferredType() referred type} of this <code>TypeLiteralExp</code>.
+   * The type of a <code>TypeLiteralExp</code> is the single instance of
+   * {@link TypeType} called <code>OclType</code>. Since this is a generic
+   * type, it is bound with the {@link #getReferredType() referred type} of this
+   * <code>TypeLiteralExp</code>.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
@@ -87,14 +91,16 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
   protected Type evaluateType() {
 
     if (referredType == null) {
-      throw new WellformednessException("The referred type of a TypeLiteralExp must not be null."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "The referred type of a TypeLiteralExp must not be null."); //$NON-NLS-1$
     }
 
     // get the OclType from the Standard Library
     Type type = getValidOclLibrary().getOclType();
-    
+
     // bind the type with the referred type
-    type = type.bindTypeParameter(type.getOwnedTypeParameter(),Arrays.asList(referredType));
+    type = type.bindTypeParameter(new ArrayList<TypeParameter>(type
+        .getOwnedTypeParameter()), Arrays.asList(referredType));
 
     return type;
   }
@@ -117,8 +123,9 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
     Type oldReferredType = referredType;
     referredType = newReferredType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE,oldReferredType,referredType));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE,
+          oldReferredType, referredType));
   }
 
   /**
@@ -132,7 +139,7 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
       case ExpressionsPackageImpl.TYPE_LITERAL_EXP__REFERRED_TYPE:
         return getReferredType();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -147,7 +154,7 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements TypeLiteralExp
         setReferredType((Type) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

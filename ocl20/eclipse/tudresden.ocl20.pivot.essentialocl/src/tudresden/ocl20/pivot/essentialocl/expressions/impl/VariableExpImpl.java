@@ -82,8 +82,8 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
   }
 
   /**
-   * Overridden to determine the type of the <code>VariableExp</code> according to the OCL
-   * specification (Section 8.3):
+   * Overridden to determine the type of the <code>VariableExp</code>
+   * according to the OCL specification (Section 8.3):
    * 
    * <p>
    * The type of a VariableExp is the type of the variable to which it refers.
@@ -93,8 +93,9 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
    * inv: type = referredVariable.type
    * </pre>
    * 
-   * If the {@link #getReferredVariable() referred variable} of this <code>VariableExp</code> is
-   * <code>null</code>, a {@link WellformednessException} is thrown.
+   * If the {@link #getReferredVariable() referred variable} of this
+   * <code>VariableExp</code> is <code>null</code>, a
+   * {@link WellformednessException} is thrown.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
@@ -105,15 +106,16 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
     }
 
     if (referredVariable == null) {
-      throw new WellformednessException("The referred variable of a VariableExp must not be null."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "The referred variable of a VariableExp must not be null."); //$NON-NLS-1$
     }
 
     Type type = getOclType(referredVariable.getType());
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
     }
-    
+
     return type;
   }
 
@@ -135,9 +137,9 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
     Variable oldReferredVariable = referredVariable;
     referredVariable = newReferredVariable;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE,oldReferredVariable,
-          referredVariable));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE,
+          oldReferredVariable, referredVariable));
   }
 
   /**
@@ -151,7 +153,7 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
       case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
         return getReferredVariable();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -166,7 +168,7 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
         setReferredVariable((Variable) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

@@ -62,13 +62,13 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
   }
 
   /**
-   * Overridden to determine the type of the <code>IteratorExp</code> according to the OCL
-   * specification (Section 8.3). Note that the specification is incomplete and this implementation
-   * adds a few more rules.
+   * Overridden to determine the type of the <code>IteratorExp</code>
+   * according to the OCL specification (Section 8.3). Note that the
+   * specification is incomplete and this implementation adds a few more rules.
    * 
    * <p>
-   * [1] If the iterator is ‘forAll,’ ‘isUnique,’ or ‘exists’ the type of the iterator must be
-   * Boolean.
+   * [1] If the iterator is ‘forAll,’ ‘isUnique,’ or ‘exists’ the type of the
+   * iterator must be Boolean.
    * 
    * <pre>
    *   context IteratorExp
@@ -76,9 +76,10 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
    *      implies type.oclIsKindOf(PrimitiveType) and type.name = ‘Boolean’
    * </pre>
    * 
-   * [2] The result type of the collect operation on a sequence type is a sequence, the result type
-   * of ‘collect’ on any other collection type is a Bag. The type of the body is always the type of
-   * the elements in the return collection.
+   * [2] The result type of the collect operation on a sequence type is a
+   * sequence, the result type of ‘collect’ on any other collection type is a
+   * Bag. The type of the body is always the type of the elements in the return
+   * collection.
    * 
    * <pre>
    *   context IteratorExp
@@ -107,10 +108,9 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 
     // check for wellformedness of loop expression
     validateWellformednessRules();
-    
-    
-    
-    // determine the types of the source collection, its elements and the body expression
+
+    // determine the types of the source collection, its elements and the body
+    // expression
     sourceType = source.getType();
     elementType = ((CollectionType) sourceType).getElementType();
     bodyType = body.getType();
@@ -146,7 +146,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
     // additional rule missing in the spec
     else if (name.equals("collectNested")) { //$NON-NLS-1$
 
-      if (sourceType instanceof SequenceType || sourceType instanceof OrderedSetType) {
+      if (sourceType instanceof SequenceType
+          || sourceType instanceof OrderedSetType) {
         type = getValidOclLibrary().getSequenceType(bodyType);
       }
 
@@ -158,28 +159,30 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
     // implement rule [2]
     else if (name.equals("collect")) { //$NON-NLS-1$
       Type resultElementType;
-      
+
       // flatten the type of the body expression
       if (bodyType instanceof CollectionType) {
         resultElementType = ((CollectionType) bodyType).getElementType();
       }
-      
+
       else {
         resultElementType = bodyType;
       }
-      
+
       // we enhance rule [2] with a treatment of ordered sets
-      if (sourceType instanceof SequenceType || sourceType instanceof OrderedSetType) {
+      if (sourceType instanceof SequenceType
+          || sourceType instanceof OrderedSetType) {
         type = getValidOclLibrary().getSequenceType(resultElementType);
       }
-      
+
       else {
         type = getValidOclLibrary().getBagType(resultElementType);
       }
     }
-    
+
     else {
-      throw new WellformednessException("Unknown iterator expression: '" + name + "'.");  //$NON-NLS-1$//$NON-NLS-2$
+      throw new WellformednessException(this,
+          "Unknown iterator expression: '" + name + "'."); //$NON-NLS-1$//$NON-NLS-2$
     }
 
     return type;
@@ -189,7 +192,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
    * Overridden to additionally check the following wellformedness rule
    * 
    * <p>
-   * [4] The type of the body of the select, reject, exists, and forAll must be boolean.
+   * [4] The type of the body of the select, reject, exists, and forAll must be
+   * boolean.
    * 
    * <pre>
    *   context IteratorExp
@@ -210,8 +214,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
         || name.equals("reject") || name.equals("any") || name.equals("one")) { //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
       if (body.getType() != oclLibrary.getOclBoolean()) {
-        throw new WellformednessException("The body expression of an '" + name //$NON-NLS-1$
-            + "' iterator expression must have the type Boolean."); //$NON-NLS-1$
+        throw new WellformednessException(this, "The body expression of an '" //$NON-NLS-1$
+            + name + "' iterator expression must have the type Boolean."); //$NON-NLS-1$
       }
     }
   }

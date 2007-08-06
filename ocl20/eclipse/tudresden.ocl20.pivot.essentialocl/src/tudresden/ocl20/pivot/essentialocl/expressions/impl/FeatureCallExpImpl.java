@@ -152,8 +152,8 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
     srcType = source != null ? source.getType() : sourceType;
 
     if (srcType == null) {
-      throw new WellformednessException(
-          "The source type of the feature call expression '" + this + "' cannot be determined."); //$NON-NLS-1$ //$NON-NLS-2$
+      throw new WellformednessException(this,
+          "The source type of a feature call expression must not be empty."); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     return srcType;

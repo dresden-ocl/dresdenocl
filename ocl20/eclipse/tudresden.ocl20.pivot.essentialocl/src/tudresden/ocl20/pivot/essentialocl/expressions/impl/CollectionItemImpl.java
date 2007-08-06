@@ -116,7 +116,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
 
     // check invariant
     if (item == null) {
-      throw new WellformednessException(
+      throw new WellformednessException(this,
           "The referenced item of a CollectionLiteralItem must not be null."); //$NON-NLS-1$
     }
     

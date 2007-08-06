@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
@@ -51,6 +52,7 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
 
@@ -66,16 +68,18 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
  * 
  * @generated
  */
-public abstract class OclExpressionImpl extends TypedElementImpl implements OclExpression {
+public abstract class OclExpressionImpl extends TypedElementImpl implements
+    OclExpression {
 
   /**
    * Logger for this class
    */
-  private static final Logger logger = Logger.getLogger(OclExpressionImpl.class);
+  private static final Logger logger = Logger
+      .getLogger(OclExpressionImpl.class);
 
   /**
-   * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}' reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getOclLibrary()
    * @generated
@@ -93,8 +97,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
   }
 
   /**
-   * Overridden to implement lazy caching of evaluated types. Subclasses should implement
-   * {@link #evaluateType()} for the actual type evaluation logic.
+   * Overridden to implement lazy caching of evaluated types. Subclasses should
+   * implement {@link #evaluateType()} for the actual type evaluation logic.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
@@ -110,16 +114,17 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
   }
 
   /**
-   * Evaluates the type of this <code>OclExpression</code>. Subclasses need to implement this
-   * according to the OCL specification.
+   * Evaluates the type of this <code>OclExpression</code>. Subclasses need
+   * to implement this according to the OCL specification.
    * 
    * @return a <code>Type</code> instance.
    */
   protected abstract Type evaluateType();
 
   /**
-   * Overridden to prevent clients from setting the type of an <code>OclExpression</code>
-   * directly. This method will throw an {@link UnsupportedOperationException}.
+   * Overridden to prevent clients from setting the type of an
+   * <code>OclExpression</code> directly. This method will throw an
+   * {@link UnsupportedOperationException}.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setType(tudresden.ocl20.pivot.pivotmodel.Type)
    */
@@ -148,8 +153,9 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
     OclLibrary oldOclLibrary = oclLibrary;
     oclLibrary = newOclLibrary;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY,oldOclLibrary,oclLibrary));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY, oldOclLibrary,
+          oclLibrary));
   }
 
   /**
@@ -167,8 +173,8 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
    * Additional operation defined in the OCL Specification, Section 8.3.9:
    * 
    * <p>
-   * The following operation returns an operation call expression for the predefined asSet()
-   * operation with the self expression as its source.
+   * The following operation returns an operation call expression for the
+   * predefined asSet() operation with the self expression as its source.
    * 
    * <pre>
    * context OclExpression::withAsSet() : OperationCallExp
@@ -180,11 +186,13 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
    * </p>
    * 
    * <p>
-   * Note that this implementation additionally sets the referred operation of the new
-   * <code>OperationCallExp</code> to the corresponding <code>asSet</code> operation, The OCL
-   * specification seems to be incomplete here because it remains open how the referred operation
-   * should be found by an OCL code generator or interpreter. Since <code>asSet</code> is a
-   * generic operation, it is {@link OperationImpl#bindTypeParameter() bound} with the type of this
+   * Note that this implementation additionally sets the referred operation of
+   * the new <code>OperationCallExp</code> to the corresponding
+   * <code>asSet</code> operation, The OCL specification seems to be
+   * incomplete here because it remains open how the referred operation should
+   * be found by an OCL code generator or interpreter. Since <code>asSet</code>
+   * is a generic operation, it is
+   * {@link OperationImpl#bindTypeParameter() bound} with the type of this
    * <code>OclExpression</code>.
    * </p>
    * 
@@ -197,25 +205,30 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
     }
 
     // lookup the asSet operation
-    Operation asSetOperation = getType().lookupOperation("asSet",Arrays.asList(new Type[] {})); //$NON-NLS-1$
+    Operation asSetOperation = getType().lookupOperation(
+        "asSet", Arrays.asList(new Type[] {})); //$NON-NLS-1$
 
     if (asSetOperation == null) {
-      throw new IllegalStateException("Failed to lookup the 'asSet' operation in type '" //$NON-NLS-1$
-          + getType().getName() + "'."); //$NON-NLS-1$
+      throw new IllegalStateException(
+          "Failed to lookup the 'asSet' operation in type '" //$NON-NLS-1$
+              + getType().getName() + "'."); //$NON-NLS-1$
     }
 
     // check that the operation defines a single type parameter
     if (asSetOperation.getOwnedTypeParameter().size() != 1) {
-      throw new IllegalStateException("The 'asSet' operation in type '" + getType().getName() //$NON-NLS-1$
-          + "' does not define the expected type parameter."); //$NON-NLS-1$
+      throw new IllegalStateException(
+          "The 'asSet' operation in type '" + getType().getName() //$NON-NLS-1$
+              + "' does not define the expected type parameter."); //$NON-NLS-1$
     }
 
     // bind the type parameter with the type of this operation
-    asSetOperation = asSetOperation.bindTypeParameter(asSetOperation.getOwnedTypeParameter(),Arrays
-        .asList(getType()));
+    asSetOperation = asSetOperation.bindTypeParameter(
+        new ArrayList<TypeParameter>(asSetOperation.getOwnedTypeParameter()),
+        Arrays.asList(getType()));
 
     // create a new operation call expression
-    OperationCallExp withAsSet = ExpressionsFactory.INSTANCE.createOperationCallExp();
+    OperationCallExp withAsSet = ExpressionsFactory.INSTANCE
+        .createOperationCallExp();
 
     withAsSet.setName("asSet"); //$NON-NLS-1$
     withAsSet.setSource(this);
@@ -232,17 +245,18 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
   }
 
   /**
-   * Helper method to be used in subclasses when determining the {@link #getType() type} of an OCL
-   * expression. The method will make sure that a Pivot Model <code>Type</code> can be used within
-   * OCL expressions.
+   * Helper method to be used in subclasses when determining the
+   * {@link #getType() type} of an OCL expression. The method will make sure
+   * that a Pivot Model <code>Type</code> can be used within OCL expressions.
    * 
    * <p>
    * If the given type is a {@link PrimitiveType} whose kind is not
-   * {@link PrimitiveTypeKind#UNKNOWN UNKNOWN}, it will be transformed into the corresponding
-   * primitive type from the OCL Library. Otherwise, unless the type is an OCL
-   * {@link CollectionType}, {@link VoidType} or {@link InvalidType}, this method will ensure that
-   * the given type descends from {@link OclLibrary#getOclAny() OclAny} to provide the predefined
-   * OCL operations.
+   * {@link PrimitiveTypeKind#UNKNOWN UNKNOWN}, it will be transformed into the
+   * corresponding primitive type from the OCL Library. Otherwise, unless the
+   * type is an OCL {@link CollectionType}, {@link VoidType} or
+   * {@link InvalidType}, this method will ensure that the given type descends
+   * from {@link OclLibrary#getOclAny() OclAny} to provide the predefined OCL
+   * operations.
    * </p>
    * 
    * <p>
@@ -252,34 +266,36 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
    * 
    * @param type the type that should be "converted" into an OCL-compatible type
    * 
-   * @return either one of the predefined OCL primitive types or the same type with
-   *         <code>OclAny</code> as one of its supertypes
+   * @return either one of the predefined OCL primitive types or the same type
+   *         with <code>OclAny</code> as one of its supertypes
    * 
-   * @throws IllegalStateException if {@link #getOclLibrary()} is <code>null</code>
+   * @throws IllegalStateException if {@link #getOclLibrary()} is
+   *           <code>null</code>
    */
   protected Type getOclType(Type type) {
     if (logger.isDebugEnabled()) {
       logger.debug("getOclType(type=" + type + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
-    // check parameter (note that a type of null does NOT imply a conversion to OclVoid because
-    // null and OclVoid are defined on different meta layers)
+    // check parameter (note that a type of null does NOT imply a conversion to
+    // OclVoid because null and OclVoid are defined on different meta layers)
     if (type == null) {
       throw new IllegalArgumentException("Parameter 'type' must not be null"); //$NON-NLS-1$
     }
 
     // make sure we have access to the OCL library
     if (oclLibrary == null) {
-      throw new IllegalStateException("Unable to determine the OCL type for '" + type.getName() //$NON-NLS-1$
-          + "' because the OCL Library reference has not been initialized."); //$NON-NLS-1$
+      throw new IllegalStateException(
+          "Unable to determine the OCL type for '" + type.getName() //$NON-NLS-1$
+              + "' because the OCL Library reference has not been initialized."); //$NON-NLS-1$
     }
 
-    // if the given type is a primitive type, map it to one of the predefined OCL types
+    // map primitive types
     if (type instanceof PrimitiveType) {
       type = mapPrimitiveType((PrimitiveType) type);
     }
 
-    // else ensure that it derives from OclAny unless it is a collection type, void or invalid
+    // type must derive from OclAny unless it is a collection, void or invalid
     else if (!(type instanceof CollectionType || type instanceof VoidType || type instanceof InvalidType)) {
       type = ensureDescendanceFromOclAny(type);
     }
@@ -327,8 +343,10 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
     return mappedType;
   }
 
-  // helper method that will add OclAny to the super types of the given type if necessary
-  // Note: we do not walk up the inheritance hierarchy because through multiple inheritance
+  // helper method that will add OclAny to the super types of the given type if
+  // necessary
+  // Note: we do not walk up the inheritance hierarchy because through multiple
+  // inheritance
   // the type may extend several times from OclAny anyways.
   private Type ensureDescendanceFromOclAny(Type type) {
     AnyType oclAny = oclLibrary.getOclAny();
@@ -341,12 +359,14 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
   }
 
   /**
-   * Helper method for subclasses that returns the reference to the {@link OclLibrary} if it has
-   * been set, otherwise throws an {@link IllegalStateException}.
+   * Helper method for subclasses that returns the reference to the
+   * {@link OclLibrary} if it has been set, otherwise throws an
+   * {@link IllegalStateException}.
    */
   protected OclLibrary getValidOclLibrary() {
     if (oclLibrary == null) {
-      throw new IllegalStateException("The reference to the OCL Library has not been initialized."); //$NON-NLS-1$
+      throw new IllegalStateException(
+          "The reference to the OCL Library has not been initialized."); //$NON-NLS-1$
     }
 
     return oclLibrary;
@@ -363,7 +383,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
       case ExpressionsPackageImpl.OCL_EXPRESSION__OCL_LIBRARY:
         return getOclLibrary();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -378,7 +398,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements OclE
         setOclLibrary((OclLibrary) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

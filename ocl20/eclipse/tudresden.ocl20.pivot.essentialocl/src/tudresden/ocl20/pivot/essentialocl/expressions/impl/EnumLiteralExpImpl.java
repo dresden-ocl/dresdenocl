@@ -105,7 +105,7 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements EnumLiteralExp
 
     // check invariant
     if (referredEnumLiteral == null) {
-      throw new WellformednessException(
+      throw new WellformednessException(this,
           "The referred enum literal of an EnumLiteralExp must not be null."); //$NON-NLS-1$
     }
 

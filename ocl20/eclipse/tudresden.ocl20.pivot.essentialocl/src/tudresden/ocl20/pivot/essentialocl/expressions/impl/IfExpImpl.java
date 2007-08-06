@@ -46,8 +46,8 @@ import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>If Exp</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>If Exp</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -67,8 +67,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   private static final Logger logger = Logger.getLogger(IfExpImpl.class);
 
   /**
-   * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getCondition() <em>Condition</em>}'
+   * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getCondition()
    * @generated
@@ -77,8 +77,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   protected OclExpression condition = null;
 
   /**
-   * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}'
+   * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getThenExpression()
    * @generated
@@ -87,8 +87,8 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   protected OclExpression thenExpression = null;
 
   /**
-   * The cached value of the '{@link #getElseExpression() <em>Else Expression</em>}' containment
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getElseExpression() <em>Else Expression</em>}'
+   * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getElseExpression()
    * @generated
@@ -106,18 +106,19 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
   }
 
   /**
-   * Overridden to determine the type of the <code>IfExp</code> according to the OCL specification
-   * (Section 8.3):
+   * Overridden to determine the type of the <code>IfExp</code> according to
+   * the OCL specification (Section 8.3):
    * 
-   * The type of the if expression is the most common supertype of the else and then expressions.
+   * The type of the if expression is the most common supertype of the else and
+   * then expressions.
    * 
    * <pre>
    *   context IfExp
    *   inv: self.type = thenExpression.type.commonSuperType(elseExpression.type)
    * </pre>
    * 
-   * In addition, another wellformedness rule is checked: The type of the condition of an if
-   * expression must be Boolean.
+   * In addition, another wellformedness rule is checked: The type of the
+   * condition of an if expression must be Boolean.
    * 
    * <pre>
    *   context IfExp
@@ -134,27 +135,30 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
 
     // check invariant
     if (condition == null) {
-      throw new WellformednessException("The condition of an IfExp must not be null."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "The condition of an IfExp must not be null.");
     }
 
     // check wellformedness rule that the condition must have a boolean type
     if (condition.getType() != getValidOclLibrary().getOclBoolean()) {
-      throw new WellformednessException("The type of the condition of an IfExp must be Boolean."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "The type of the condition of an IfExp must be Boolean."); //$NON-NLS-1$
     }
 
     // check that both then and else expressions are not null
     if (thenExpression == null || elseExpression == null) {
-      throw new WellformednessException(
-          "Both the 'thenExpression' and the 'elseExpression' of an IfExp must not be null."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "Neither the 'thenExpression' nor the 'elseExpression' of an IfExp may be null."); //$NON-NLS-1$
     }
-    
+
     // determine the type
-    Type type = thenExpression.getType().commonSuperType(elseExpression.getType());
-    
+    Type type = thenExpression.getType().commonSuperType(
+        elseExpression.getType());
+
     if (logger.isDebugEnabled()) {
       logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
     }
-    
+
     return type;
   }
 
@@ -172,12 +176,14 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
    * 
    * @generated
    */
-  public NotificationChain basicSetCondition(OclExpression newCondition, NotificationChain msgs) {
+  public NotificationChain basicSetCondition(OclExpression newCondition,
+      NotificationChain msgs) {
     OclExpression oldCondition = condition;
     condition = newCondition;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.IF_EXP__CONDITION,oldCondition,newCondition);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, ExpressionsPackageImpl.IF_EXP__CONDITION,
+          oldCondition, newCondition);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -193,17 +199,19 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
     if (newCondition != condition) {
       NotificationChain msgs = null;
       if (condition != null)
-        msgs = ((InternalEObject) condition).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.IF_EXP__CONDITION,null,msgs);
+        msgs = ((InternalEObject) condition).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.IF_EXP__CONDITION,
+            null, msgs);
       if (newCondition != null)
-        msgs = ((InternalEObject) newCondition).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.IF_EXP__CONDITION,null,msgs);
-      msgs = basicSetCondition(newCondition,msgs);
+        msgs = ((InternalEObject) newCondition).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.IF_EXP__CONDITION,
+            null, msgs);
+      msgs = basicSetCondition(newCondition, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,ExpressionsPackageImpl.IF_EXP__CONDITION,
-          newCondition,newCondition));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.IF_EXP__CONDITION, newCondition, newCondition));
   }
 
   /**
@@ -220,13 +228,14 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
    * 
    * @generated
    */
-  public NotificationChain basicSetThenExpression(OclExpression newThenExpression,
-      NotificationChain msgs) {
+  public NotificationChain basicSetThenExpression(
+      OclExpression newThenExpression, NotificationChain msgs) {
     OclExpression oldThenExpression = thenExpression;
     thenExpression = newThenExpression;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION,oldThenExpression,newThenExpression);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION,
+          oldThenExpression, newThenExpression);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -242,17 +251,20 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
     if (newThenExpression != thenExpression) {
       NotificationChain msgs = null;
       if (thenExpression != null)
-        msgs = ((InternalEObject) thenExpression).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION,null,msgs);
+        msgs = ((InternalEObject) thenExpression).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION, null, msgs);
       if (newThenExpression != null)
-        msgs = ((InternalEObject) newThenExpression).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION,null,msgs);
-      msgs = basicSetThenExpression(newThenExpression,msgs);
+        msgs = ((InternalEObject) newThenExpression).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION, null, msgs);
+      msgs = basicSetThenExpression(newThenExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION,newThenExpression,newThenExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION, newThenExpression,
+          newThenExpression));
   }
 
   /**
@@ -269,13 +281,14 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
    * 
    * @generated
    */
-  public NotificationChain basicSetElseExpression(OclExpression newElseExpression,
-      NotificationChain msgs) {
+  public NotificationChain basicSetElseExpression(
+      OclExpression newElseExpression, NotificationChain msgs) {
     OclExpression oldElseExpression = elseExpression;
     elseExpression = newElseExpression;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION,oldElseExpression,newElseExpression);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION,
+          oldElseExpression, newElseExpression);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -291,17 +304,20 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
     if (newElseExpression != elseExpression) {
       NotificationChain msgs = null;
       if (elseExpression != null)
-        msgs = ((InternalEObject) elseExpression).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION,null,msgs);
+        msgs = ((InternalEObject) elseExpression).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION, null, msgs);
       if (newElseExpression != null)
-        msgs = ((InternalEObject) newElseExpression).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION,null,msgs);
-      msgs = basicSetElseExpression(newElseExpression,msgs);
+        msgs = ((InternalEObject) newElseExpression).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION, null, msgs);
+      msgs = basicSetElseExpression(newElseExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION,newElseExpression,newElseExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION, newElseExpression,
+          newElseExpression));
   }
 
   /**
@@ -310,17 +326,17 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.IF_EXP__CONDITION:
-        return basicSetCondition(null,msgs);
+        return basicSetCondition(null, msgs);
       case ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION:
-        return basicSetThenExpression(null,msgs);
+        return basicSetThenExpression(null, msgs);
       case ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION:
-        return basicSetElseExpression(null,msgs);
+        return basicSetElseExpression(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -338,7 +354,7 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
       case ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION:
         return getElseExpression();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -359,7 +375,7 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
         setElseExpression((OclExpression) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

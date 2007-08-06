@@ -68,8 +68,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 
   /**
-   * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getBody() <em>Body</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getBody()
    * @generated
@@ -78,8 +78,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
   protected OclExpression body = null;
 
   /**
-   * The cached value of the '{@link #getIterator() <em>Iterator</em>}' containment reference
-   * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getIterator() <em>Iterator</em>}'
+   * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getIterator()
    * @generated
@@ -114,8 +114,8 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
    * inv: self.iterator-&gt;forAll(initExpression-&gt;isEmpty())
    * </pre>
    * 
-   * [3] The type of each iterator variable must be the type of the elements of the source
-   * collection.
+   * [3] The type of each iterator variable must be the type of the elements of
+   * the source collection.
    * 
    * <pre>
    * context IteratorExp
@@ -129,13 +129,14 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 
     // check that a source and a body has been set
     if (source == null || body == null) {
-      throw new WellformednessException(
-          "The source or the body of a loop expression must not be null."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "Neither source nor body of a loop expression may be null."); //$NON-NLS-1$
     }
-    
+
     // check that a name for the loop expression has been set
     if (StringUtils.isEmpty(name)) {
-      throw new WellformednessException("A loop expression must have a name."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "A loop expression must have a name."); //$NON-NLS-1$
     }
 
     // get the source type
@@ -143,7 +144,7 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 
     // validate [1]
     if (!(sourceType instanceof CollectionType)) {
-      throw new WellformednessException(
+      throw new WellformednessException(this,
           "The type of the source of a loop expression must be a collection type."); //$NON-NLS-1$
     }
 
@@ -155,12 +156,13 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 
       // validate [2]
       if (iterator.getInitExpression() != null) {
-        throw new WellformednessException("An iterator variable must not have an init expression."); //$NON-NLS-1$
+        throw new WellformednessException(this,
+            "An iterator variable must not have an init expression."); //$NON-NLS-1$
       }
 
       // validate [3]
       if (!sourceElementType.equals(iterator.getType())) {
-        throw new WellformednessException(
+        throw new WellformednessException(this,
             "The type of an iterator variable must equal the element type of the source collection."); //$NON-NLS-1$
       }
 
@@ -181,12 +183,14 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
    * 
    * @generated
    */
-  public NotificationChain basicSetBody(OclExpression newBody, NotificationChain msgs) {
+  public NotificationChain basicSetBody(OclExpression newBody,
+      NotificationChain msgs) {
     OclExpression oldBody = body;
     body = newBody;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.LOOP_EXP__BODY,oldBody,newBody);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, ExpressionsPackageImpl.LOOP_EXP__BODY, oldBody,
+          newBody);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -202,17 +206,19 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
     if (newBody != body) {
       NotificationChain msgs = null;
       if (body != null)
-        msgs = ((InternalEObject) body).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.LOOP_EXP__BODY,null,msgs);
+        msgs = ((InternalEObject) body).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LOOP_EXP__BODY,
+            null, msgs);
       if (newBody != null)
-        msgs = ((InternalEObject) newBody).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.LOOP_EXP__BODY,null,msgs);
-      msgs = basicSetBody(newBody,msgs);
+        msgs = ((InternalEObject) newBody).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LOOP_EXP__BODY,
+            null, msgs);
+      msgs = basicSetBody(newBody, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,ExpressionsPackageImpl.LOOP_EXP__BODY,
-          newBody,newBody));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.LOOP_EXP__BODY, newBody, newBody));
   }
 
   /**
@@ -222,7 +228,7 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
    */
   public List<Variable> getIterator() {
     if (iterator == null) {
-      iterator = new EObjectContainmentEList<Variable>(Variable.class,this,
+      iterator = new EObjectContainmentEList<Variable>(Variable.class, this,
           ExpressionsPackageImpl.LOOP_EXP__ITERATOR);
     }
     return iterator;
@@ -234,15 +240,15 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.LOOP_EXP__BODY:
-        return basicSetBody(null,msgs);
+        return basicSetBody(null, msgs);
       case ExpressionsPackageImpl.LOOP_EXP__ITERATOR:
-        return ((InternalEList<?>) getIterator()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getIterator()).basicRemove(otherEnd, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -258,7 +264,7 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
       case ExpressionsPackageImpl.LOOP_EXP__ITERATOR:
         return getIterator();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -278,7 +284,7 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
         getIterator().addAll((Collection<? extends Variable>) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

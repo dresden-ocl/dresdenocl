@@ -65,8 +65,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   private static final Logger logger = Logger.getLogger(IterateExpImpl.class);
 
   /**
-   * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getResult() <em>Result</em>}'
+   * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getResult()
    * @generated
@@ -84,8 +84,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * Overridden to determine the type of the <code>IterateExp</code> according to the OCL
-   * specification (Section 8.3):
+   * Overridden to determine the type of the <code>IterateExp</code> according
+   * to the OCL specification (Section 8.3):
    * 
    * <p>
    * The type of the iterate is the type of the result variable.
@@ -98,8 +98,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
    * In addition, the following wellformedness rules are checked:<br>
    * <br>
    * 
-   * The type of the body expression must conform to the declared type of the result variable.
-   * context IterateExp
+   * The type of the body expression must conform to the declared type of the
+   * result variable. context IterateExp
    * 
    * <pre>
    *   inv: body.type.conformsTo(result.type)
@@ -124,23 +124,26 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 
     // check invariant
     if (result == null) {
-      throw new WellformednessException("The 'result' variable of an IterateExp must not be null."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "The 'result' variable of an IterateExp must not be null."); //$NON-NLS-1$
     }
 
     // check body expression and WFR [2]
     if (body == null) {
-      throw new WellformednessException("The body expression of an IterateExp must not be null."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "The body expression of an IterateExp must not be null."); //$NON-NLS-1$
     }
 
     if (!body.getType().conformsTo(result.getType())) {
-      throw new WellformednessException("The type of the body expression ('" + body.getType() //$NON-NLS-1$
-          + "') of IterateExp does not conform to the type of the result variable ('" //$NON-NLS-1$
-          + result.getType() + "')."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "The type of the body expression ('" + body.getType() //$NON-NLS-1$
+              + "') must conform to the type of the result variable ('" //$NON-NLS-1$
+              + result.getType() + "')."); //$NON-NLS-1$
     }
 
     // check WFR [3]
     if (result.getInitExpression() == null) {
-      throw new WellformednessException(
+      throw new WellformednessException(this,
           "The 'result' variable of an IterateExp must have an init expression."); //$NON-NLS-1$
     }
 
@@ -155,9 +158,9 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * Overridden to return the String <code>"iterate"</code> as specified in the abstract syntax
-   * mapping for IterateExpCS (OCL Specification, Section 9.3). Clients (e.g., a parser) do not need
-   * to set the name explicitly.
+   * Overridden to return the String <code>"iterate"</code> as specified in
+   * the abstract syntax mapping for IterateExpCS (OCL Specification, Section
+   * 9.3). Clients (e.g., a parser) do not need to set the name explicitly.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
    */
@@ -167,8 +170,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
   }
 
   /**
-   * Overridden to prevent setting the name of an iterate expression. This method will throw an
-   * {@link UnsupportedOperationException}.
+   * Overridden to prevent setting the name of an iterate expression. This
+   * method will throw an {@link UnsupportedOperationException}.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
    */
@@ -193,12 +196,14 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
    * 
    * @generated
    */
-  public NotificationChain basicSetResult(Variable newResult, NotificationChain msgs) {
+  public NotificationChain basicSetResult(Variable newResult,
+      NotificationChain msgs) {
     Variable oldResult = result;
     result = newResult;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.ITERATE_EXP__RESULT,oldResult,newResult);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, ExpressionsPackageImpl.ITERATE_EXP__RESULT,
+          oldResult, newResult);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -214,17 +219,19 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
     if (newResult != result) {
       NotificationChain msgs = null;
       if (result != null)
-        msgs = ((InternalEObject) result).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.ITERATE_EXP__RESULT,null,msgs);
+        msgs = ((InternalEObject) result)
+            .eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.ITERATE_EXP__RESULT, null, msgs);
       if (newResult != null)
-        msgs = ((InternalEObject) newResult).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.ITERATE_EXP__RESULT,null,msgs);
-      msgs = basicSetResult(newResult,msgs);
+        msgs = ((InternalEObject) newResult)
+            .eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.ITERATE_EXP__RESULT, null, msgs);
+      msgs = basicSetResult(newResult, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.ITERATE_EXP__RESULT,newResult,newResult));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.ITERATE_EXP__RESULT, newResult, newResult));
   }
 
   /**
@@ -233,13 +240,13 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.ITERATE_EXP__RESULT:
-        return basicSetResult(null,msgs);
+        return basicSetResult(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -253,7 +260,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
       case ExpressionsPackageImpl.ITERATE_EXP__RESULT:
         return getResult();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -268,7 +275,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
         setResult((Variable) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

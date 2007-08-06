@@ -81,8 +81,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   protected Parameter representedParameter = null;
 
   /**
-   * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}'
+   * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getInitExpression()
    * @generated
@@ -91,8 +91,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   protected OclExpression initExpression = null;
 
   /**
-   * A flag to symbolize whether the type of the <code>Variable</code> has already been determined
-   * and according wellformedness rules checked.
+   * A flag to symbolize whether the type of the <code>Variable</code> has
+   * already been determined and according wellformedness rules checked.
    */
   private boolean typeEvaluated = false;
 
@@ -106,14 +106,16 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * Overridden to return the name of the {@link #getRepresentedParameter() represented parameter}
-   * if this <code>Variable</code> represents a {@link Parameter}.
+   * Overridden to return the name of the
+   * {@link #getRepresentedParameter() represented parameter} if this
+   * <code>Variable</code> represents a {@link Parameter}.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
    */
   @Override
   public String getName() {
-    return representedParameter != null ? representedParameter.getName() : super.getName();
+    return representedParameter != null ? representedParameter.getName()
+        : super.getName();
   }
 
   /**
@@ -132,14 +134,15 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * Determines the type of this <code>Variable</code>. This is either the type of a
-   * {@link #getRepresentedParameter() represented parameter}, the type of the init expression or
-   * simply the type directly set when creating the variable. This method will additionally check
-   * the wellformedness rule of the OCL Specification, Section 8.3:
+   * Determines the type of this <code>Variable</code>. This is either the
+   * type of a {@link #getRepresentedParameter() represented parameter}, the
+   * type of the init expression or simply the type directly set when creating
+   * the variable. This method will additionally check the wellformedness rule
+   * of the OCL Specification, Section 8.3:
    * 
    * <p>
-   * For initialized variable declarations, the type of the initExpression must conform to the type
-   * of the declared variable.
+   * For initialized variable declarations, the type of the initExpression must
+   * conform to the type of the declared variable.
    * 
    * <pre>
    *   context Variable
@@ -162,10 +165,11 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 
     else if (initExpression != null) {
 
-      // check that the type of the init expression conforms to the declared type
+      // check that the init expression conforms to the declared type
       if (type != null && !initExpression.getType().conformsTo(type)) {
-        throw new WellformednessException("The type of the init expression of variable '" + name //$NON-NLS-1$
-            + "' does not conform to the declared type."); //$NON-NLS-1$
+        throw new WellformednessException(initExpression,
+            "The type of the init expression of variable '" + name //$NON-NLS-1$
+                + "' must conform to the declared type."); //$NON-NLS-1$
       }
 
       // no type declared, use the type of the init expression
@@ -178,7 +182,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
     }
 
     else {
-      throw new WellformednessException("Failed to determine the type of variable '" + name + "'."); //$NON-NLS-1$//$NON-NLS-2$
+      throw new WellformednessException(this, "The type of variable '" + name //$NON-NLS-1$
+          + "' cannot be determined."); //$NON-NLS-1$
     }
 
     // remember that we have evaluated the type
@@ -208,7 +213,8 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   }
 
   /**
-   * Returns <code>null</code> as a <code>Variable</code> does not have an owner.
+   * Returns <code>null</code> as a <code>Variable</code> does not have an
+   * owner.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
    */
@@ -235,9 +241,9 @@ public class VariableImpl extends TypedElementImpl implements Variable {
     Parameter oldRepresentedParameter = representedParameter;
     representedParameter = newRepresentedParameter;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.VARIABLE__REPRESENTED_PARAMETER,oldRepresentedParameter,
-          representedParameter));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.VARIABLE__REPRESENTED_PARAMETER,
+          oldRepresentedParameter, representedParameter));
   }
 
   /**
@@ -254,13 +260,14 @@ public class VariableImpl extends TypedElementImpl implements Variable {
    * 
    * @generated
    */
-  public NotificationChain basicSetInitExpression(OclExpression newInitExpression,
-      NotificationChain msgs) {
+  public NotificationChain basicSetInitExpression(
+      OclExpression newInitExpression, NotificationChain msgs) {
     OclExpression oldInitExpression = initExpression;
     initExpression = newInitExpression;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,oldInitExpression,newInitExpression);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
+          oldInitExpression, newInitExpression);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -276,17 +283,20 @@ public class VariableImpl extends TypedElementImpl implements Variable {
     if (newInitExpression != initExpression) {
       NotificationChain msgs = null;
       if (initExpression != null)
-        msgs = ((InternalEObject) initExpression).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,null,msgs);
+        msgs = ((InternalEObject) initExpression).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null, msgs);
       if (newInitExpression != null)
-        msgs = ((InternalEObject) newInitExpression).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,null,msgs);
-      msgs = basicSetInitExpression(newInitExpression,msgs);
+        msgs = ((InternalEObject) newInitExpression).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null, msgs);
+      msgs = basicSetInitExpression(newInitExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,newInitExpression,newInitExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, newInitExpression,
+          newInitExpression));
   }
 
   /**
@@ -341,13 +351,13 @@ public class VariableImpl extends TypedElementImpl implements Variable {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION:
-        return basicSetInitExpression(null,msgs);
+        return basicSetInitExpression(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -363,7 +373,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
       case ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION:
         return getInitExpression();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -381,7 +391,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
         setInitExpression((OclExpression) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

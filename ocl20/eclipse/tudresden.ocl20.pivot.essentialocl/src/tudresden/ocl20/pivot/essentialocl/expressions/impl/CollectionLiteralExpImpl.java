@@ -69,16 +69,18 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * 
  * @generated
  */
-public class CollectionLiteralExpImpl extends LiteralExpImpl implements CollectionLiteralExp {
+public class CollectionLiteralExpImpl extends LiteralExpImpl implements
+    CollectionLiteralExp {
 
   /**
    * Logger for this class
    */
-  private static final Logger logger = Logger.getLogger(CollectionLiteralExpImpl.class);
+  private static final Logger logger = Logger
+      .getLogger(CollectionLiteralExpImpl.class);
 
   /**
-   * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getPart() <em>Part</em>}' containment
+   * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getPart()
    * @generated
@@ -87,8 +89,8 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
   protected EList<CollectionLiteralPart> part;
 
   /**
-   * The default value of the '{@link #getKind() <em>Kind</em>}' attribute. <!-- begin-user-doc
-   * --> <!-- end-user-doc -->
+   * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getKind()
    * @generated
@@ -97,8 +99,8 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
   protected static final CollectionKind KIND_EDEFAULT = CollectionKind.COLLECTION;
 
   /**
-   * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getKind()
    * @generated
@@ -116,13 +118,14 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
   }
 
   /**
-   * Overridden to determine the type of the <code>CollectionLiteralExp</code> according to the
-   * OCL specification (Section 8.3):
+   * Overridden to determine the type of the <code>CollectionLiteralExp</code>
+   * according to the OCL specification (Section 8.3):
    * 
    * <p>
-   * The type of a collection literal expression is determined by the collection kind selection and
-   * the common supertype of all elements. Note that the definition below implicitly states that
-   * empty collections have OclVoid as their elementType.
+   * The type of a collection literal expression is determined by the collection
+   * kind selection and the common supertype of all elements. Note that the
+   * definition below implicitly states that empty collections have OclVoid as
+   * their elementType.
    * 
    * <pre>
    *   context CollectionLiteralExp
@@ -133,9 +136,9 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
    *   inv: type.oclAsType (CollectionType).elementType = part-&gt;iterate (p; c : Classifier = OclVoid | c.commonSuperType (p.type))
    * </pre>
    * 
-   * Note that an additional wellformedness rule defined in the OCL specification (Section 8.3) is
-   * checked here as well: 'Collection’ is an abstract class on the M1 level and has no M0
-   * instances.
+   * Note that an additional wellformedness rule defined in the OCL
+   * specification (Section 8.3) is checked here as well: 'Collection’ is an
+   * abstract class on the M1 level and has no M0 instances.
    * 
    * <pre>
    *   context CollectionLiteralExp
@@ -157,14 +160,15 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 
     // check that the expression has the correct kind
     if (kind == CollectionKind.COLLECTION) {
-      throw new WellformednessException(
-          "A CollectionLiteralExp may not have the kind 'Collection' since Collection is an abstract class and cannot be instantiated."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "A CollectionLiteralExp may not have the kind 'Collection'."); //$NON-NLS-1$
     }
 
     // get a valid local reference to the OCL library
     OclLibrary oclLibrary = getValidOclLibrary();
 
-    // determine the common supertype of all parts as the collection's element type
+    // determine the common supertype of all parts as the collection's element
+    // type
     elementType = oclLibrary.getOclVoid();
 
     for (CollectionLiteralPart literalPart : part) {
@@ -191,13 +195,14 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
 
       default:
         // this should not happen
-        throw new WellformednessException("Unknown collection kind for a CollectionLiteralExp"); //$NON-NLS-1$
+        throw new WellformednessException(this,
+            "Unknown collection kind for a CollectionLiteralExp"); //$NON-NLS-1$
     }
 
     if (logger.isDebugEnabled()) {
       logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
     }
-    
+
     return type;
   }
 
@@ -208,7 +213,8 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
    */
   public List<CollectionLiteralPart> getPart() {
     if (part == null) {
-      part = new EObjectContainmentEList<CollectionLiteralPart>(CollectionLiteralPart.class,this,
+      part = new EObjectContainmentEList<CollectionLiteralPart>(
+          CollectionLiteralPart.class, this,
           ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART);
     }
     return part;
@@ -232,8 +238,8 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
     CollectionKind oldKind = kind;
     kind = newKind == null ? KIND_EDEFAULT : newKind;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND,oldKind,kind));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND, oldKind, kind));
   }
 
   /**
@@ -242,13 +248,13 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART:
-        return ((InternalEList<?>) getPart()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getPart()).basicRemove(otherEnd, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -264,7 +270,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
       case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND:
         return getKind();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -278,13 +284,14 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
     switch (featureID) {
       case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART:
         getPart().clear();
-        getPart().addAll((Collection<? extends CollectionLiteralPart>) newValue);
+        getPart()
+            .addAll((Collection<? extends CollectionLiteralPart>) newValue);
         return;
       case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND:
         setKind((CollectionKind) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -332,7 +339,8 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
   }
 
   /**
-   * Changed EMF implementation to render string representations using Jakarta Commons Lang.
+   * Changed EMF implementation to render string representations using Jakarta
+   * Commons Lang.
    * 
    * @see java.lang.Object#toString()
    * 
@@ -340,8 +348,8 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements Collecti
    */
   @Override
   public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
-        .append("kind",kind).toString(); //$NON-NLS-1$
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        .appendSuper(super.toString()).append("kind", kind).toString(); //$NON-NLS-1$
   }
 
 } // CollectionLiteralExpImpl
