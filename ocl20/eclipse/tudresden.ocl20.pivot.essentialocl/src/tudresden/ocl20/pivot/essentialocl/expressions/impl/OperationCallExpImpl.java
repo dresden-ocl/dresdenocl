@@ -32,13 +32,14 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -53,14 +54,14 @@ import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
+import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Operation Call Exp</b></em>'.
@@ -75,16 +76,18 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * 
  * @generated
  */
-public class OperationCallExpImpl extends FeatureCallExpImpl implements OperationCallExp {
+public class OperationCallExpImpl extends FeatureCallExpImpl implements
+    OperationCallExp {
 
   /**
    * Logger for this class
    */
-  private static final Logger logger = Logger.getLogger(OperationCallExpImpl.class);
+  private static final Logger logger = Logger
+      .getLogger(OperationCallExpImpl.class);
 
   /**
-   * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference
-   * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getArgument() <em>Argument</em>}'
+   * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getArgument()
    * @generated
@@ -112,14 +115,16 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
   }
 
   /**
-   * Overridden to determine the type of this <code>OperationCallExp</code>. Unfortunately, the
-   * OCL Specification does not define any wellformedness rules for the type of an
-   * <code>OperationCallExp</code>. As a result, this implementation simply follows the approach
-   * taken by the last release of the Dresden OCL2 Toolkit.
+   * Overridden to determine the type of this <code>OperationCallExp</code>.
+   * Unfortunately, the OCL Specification does not define any wellformedness
+   * rules for the type of an <code>OperationCallExp</code>. As a result,
+   * this implementation simply follows the approach taken by the last release
+   * of the Dresden OCL2 Toolkit.
    * 
    * <p>
-   * There, the type of an Operation Call Expression is the result type of the referred operation or
-   * a tuple type comprising the result type of the operation and all out and inout parameters.
+   * There, the type of an Operation Call Expression is the result type of the
+   * referred operation or a tuple type comprising the result type of the
+   * operation and all out and inout parameters.
    * </p>
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
@@ -134,7 +139,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
 
     // check wellformedness of abstract syntax
     if (referredOperation == null) {
-      throw new WellformednessException(
+      throw new WellformednessException(this,
           "The referred operation of an OperationCallExp must not be null."); //$NON-NLS-1$
     }
 
@@ -149,7 +154,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
 
       // add the return parameter if existing
       if (referredOperation.getReturnParameter() != null) {
-        tupleTypeProperties.add(referredOperation.getReturnParameter().asProperty());
+        tupleTypeProperties.add(referredOperation.getReturnParameter()
+            .asProperty());
       }
 
       type = getValidOclLibrary().makeTupleType(tupleTypeProperties);
@@ -157,14 +163,17 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
 
     // otherwise default to the operation's type
     else {
-      // TODO: remove these explicit references to the OCL Standard Library from the code
+      // TODO: remove explicit references to the OCL Standard Library from code
 
       // bind 'allInstances' operation
       if (referredOperation.getName().equals("allInstances")) { //$NON-NLS-1$
         referredOperation = bindAllInstancesOperation(referredOperation);
       }
 
-      // TODO: bind 'oclAsType'
+      // bind 'oclAsType' operation
+      else if (referredOperation.getName().equals("oclAsType")) { //$NON-NLS-1$
+        referredOperation = bindOclAsTypeOperation(referredOperation);
+      }
 
       // bind 'product' operation
       else if (referredOperation.getName().equals("product") //$NON-NLS-1$
@@ -183,11 +192,75 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
     return type;
   }
 
-  // helper method to bind the 'OclAny::allInstances' operation
+  /**
+   * Helper method to bind the 'OclAny::oclAsType' operation
+   * 
+   * TODO: Clean up this implementation with something smarter. The current code
+   * is a pretty big hack, because we need to know the signature of the
+   * 'oclAsType' operation (i.e., exactly one parameter of type OclType). It
+   * would be more clever to implement something like the automatic binding of
+   * generic method type parameters in Java. More precisely, we first look for
+   * an occurence of the method's type parameter in the (unbound) signature and
+   * then find out what type has been bound at this position.
+   */
+  private Operation bindOclAsTypeOperation(Operation oclAsTypeOperation) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("bindOclAsTypeOperation(oclAsTypeOperation=" //$NON-NLS-1$
+          + oclAsTypeOperation + ") - enter"); //$NON-NLS-1$
+    }
+
+    OclExpression argument;
+    TypeType argumentType;
+    Type type;
+
+    // check arguments
+    if (getArgument().size() != 1) {
+      throw new WellformednessException(this,
+          "The 'oclAsType' operation must have exactly one argument."); //$NON-NLS-1$
+    }
+
+    // get the single argument of the 'oclAsType' operation
+    argument = getArgument().get(0);
+
+    // check type of argument
+    if (!(argument.getType() instanceof TypeType)) {
+      throw new WellformednessException(this,
+          "The operation 'oclAsType' must have an OclType as its argument."); //$NON-NLS-1$
+    }
+
+    // get the type of the argument
+    argumentType = (TypeType) argument.getType();
+
+    // get the type that is bound to the type parameter of the OclType type
+    type = argumentType.getTypeForParameter(getValidOclLibrary().getOclType()
+        .getOwnedTypeParameter().get(0));
+
+    // check that we have found a valid type
+    if (type == null) {
+      throw new WellformednessException(this,
+          "Unable to determine the type represented by the OclType given as an argument."); //$NON-NLS-1$
+    }
+
+    // bind the oclAsType operation, which will set its return type
+    oclAsTypeOperation = oclAsTypeOperation
+        .bindTypeParameter(new ArrayList<TypeParameter>(oclAsTypeOperation
+            .getOwnedTypeParameter()), Arrays.asList(type));
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("bindOclAsTypeOperation() - exit - return value=" //$NON-NLS-1$
+          + oclAsTypeOperation);
+    }
+
+    return oclAsTypeOperation;
+  }
+
+  /**
+   * Helper method to bind the 'OclAny::allInstances' operation
+   */
   private Operation bindAllInstancesOperation(Operation allInstancesOperation) {
     if (logger.isDebugEnabled()) {
-      logger.debug("bindAllInstancesOperation(allInstancesOperation=" + allInstancesOperation //$NON-NLS-1$
-          + ") - enter"); //$NON-NLS-1$
+      logger.debug("bindAllInstancesOperation(allInstancesOperation=" //$NON-NLS-1$
+          + allInstancesOperation + ") - enter"); //$NON-NLS-1$
     }
 
     // determine the source type
@@ -196,23 +269,19 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
     // allInstances may only refer to types with a finite number of instances
     if (srcType instanceof PrimitiveType || srcType instanceof CollectionType
         || srcType instanceof TupleType) {
-      throw new WellformednessException(
-          "The 'allInstances' operation may only be called on types with a finite number of instances, " //$NON-NLS-1$
-              + "the source type '" + srcType.getName() + "' is invalid."); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
-    // check that the 'allInstances' operation has been modeled correctly
-    if (allInstancesOperation.getOwnedTypeParameter().size() != 1) {
-      throw new IllegalStateException(
-          "The 'allInstances' operation in the OCL Library has not been modeled with exactly one type parameter."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "The 'allInstances' operation cannot be invoked on '" //$NON-NLS-1$
+              + srcType.getName() + "'."); //$NON-NLS-1$
     }
 
     // now bind the 'allInstances' operation with the source type
-    allInstancesOperation = allInstancesOperation.bindTypeParameter(allInstancesOperation
-        .getOwnedTypeParameter(),Arrays.asList(srcType));
+    allInstancesOperation = allInstancesOperation.bindTypeParameter(
+        new ArrayList<TypeParameter>(allInstancesOperation
+            .getOwnedTypeParameter()), Arrays.asList(srcType));
 
     if (logger.isDebugEnabled()) {
-      logger.debug("bindAllInstancesOperation() - exit - return value=" + allInstancesOperation); //$NON-NLS-1$
+      logger.debug("bindAllInstancesOperation() - exit - return value=" //$NON-NLS-1$
+          + allInstancesOperation);
     }
 
     return allInstancesOperation;
@@ -235,7 +304,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
    */
   public List<OclExpression> getArgument() {
     if (argument == null) {
-      argument = new EObjectContainmentEList<OclExpression>(OclExpression.class,this,
+      argument = new EObjectContainmentEList<OclExpression>(
+          OclExpression.class, this,
           ExpressionsPackageImpl.OPERATION_CALL_EXP__ARGUMENT);
     }
     return argument;
@@ -259,9 +329,9 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
     Operation oldReferredOperation = referredOperation;
     referredOperation = newReferredOperation;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.OPERATION_CALL_EXP__REFERRED_OPERATION,oldReferredOperation,
-          referredOperation));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.OPERATION_CALL_EXP__REFERRED_OPERATION,
+          oldReferredOperation, referredOperation));
   }
 
   /**
@@ -270,13 +340,13 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.OPERATION_CALL_EXP__ARGUMENT:
-        return ((InternalEList<?>) getArgument()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getArgument()).basicRemove(otherEnd, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -292,7 +362,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
       case ExpressionsPackageImpl.OPERATION_CALL_EXP__REFERRED_OPERATION:
         return getReferredOperation();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -312,7 +382,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
         setReferredOperation((Operation) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -366,8 +436,9 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements Operatio
    */
   @Override
   public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendSuper(super.toString())
-        .append("referredOperation",referredOperation).toString(); //$NON-NLS-1$
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        .appendSuper(super.toString()).append(
+            "referredOperation", referredOperation).toString(); //$NON-NLS-1$
   }
 
 } // OperationCallExpImpl
