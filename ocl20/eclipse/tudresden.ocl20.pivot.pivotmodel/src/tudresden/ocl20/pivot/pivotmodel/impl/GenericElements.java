@@ -32,30 +32,25 @@
  */
 package tudresden.ocl20.pivot.pivotmodel.impl;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.lang.NullArgumentException;
 
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 
 /**
- * This class contains utility methods that are used by {@link GenericElement}s. This is necessary
- * because generic elements do not share a common superclass. Due to overlapping inheritance
- * hierachies, <code>GenericElement</code> is only realized as a mixin interface.
+ * This class contains utility methods that are used by {@link GenericElement}s.
+ * This is necessary because generic elements do not share a common superclass.
+ * Due to overlapping inheritance hierachies, <code>GenericElement</code> is
+ * only realized as a mixin interface.
  * 
  * @author Matthias Braeuer
  * @version 1.0 29.03.2007
  */
 public class GenericElements {
-
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(GenericElements.class);
 
   /**
    * This class is not meant to be instantiated.
@@ -65,56 +60,59 @@ public class GenericElements {
   }
 
   /**
-   * This method determines a <code>String</code> key to be used for caching already bound
-   * {@link GenericElement}s. The key will contain the name of the generic element and the type
-   * parameters that have not yet been bound (<code>unboundParameters</code>), the parameters
-   * that are supposed to be bound (<code>parametersToBind</code>) and the types that will be
-   * bound to the type parameters (<code>typesToBind</code>). Thus, the key uniquely identifies
-   * a particular binding, whether the generic element had previously been bound or not.
+   * Checks the parameters for a binding and throws an exception if they are not
+   * valid.
    * 
-   * <p>
-   * Example: Binding both type parameters of {@code Map<K,V>} with the type named
-   * <code>Boolean</code> will result in the key "<code>Map<K,V>:K->Boolean,V->Boolean</code>".
-   * Note that the given lists must not contain <code>null</code> values.
-   * </p>
+   * @param parameters the list of type parameters
+   * @param types the list of types
    */
-  public static String determineBindingKey(GenericElement genericElement,
-      List<TypeParameter> parametersToBind, List<? extends Type> typesToBind) {
+  public static void checkBindingParameters(List<TypeParameter> parameters,
+      List<? extends Type> types) {
 
-    // initialize empty
-    StringBuilder bindingKey = new StringBuilder();
-
-    // append fully qualified name of genericElement
-    bindingKey.append(genericElement.getQualifiedName());
-
-    // append unbound type parameters
-    bindingKey.append('<');
-
-    for (Iterator<TypeParameter> i = genericElement.getOwnedTypeParameter().iterator(); i.hasNext();) {
-      bindingKey.append(i.next().getName());
-
-      if (i.hasNext()) {
-        bindingKey.append(',');
-      }
+    if (parameters == null || types == null) {
+      throw new NullArgumentException("parameters or types"); //$NON-NLS-1$
     }
 
-    bindingKey.append('>');
-    bindingKey.append(':');
-
-    // append type parameters to bind and the corresponding type
-    for (ListIterator<TypeParameter> it = parametersToBind.listIterator(); it.hasNext();) {
-      bindingKey.append(it.next().getName()).append("->").append( //$NON-NLS-1$
-          typesToBind.get(it.previousIndex()).getQualifiedName());
-
-      if (it.hasNext()) {
-        bindingKey.append(',');
-      }
+    if (parameters.size() != types.size()) {
+      throw new IllegalArgumentException(
+          "The list of type parameters must have the same size as the list of types."); //$NON-NLS-1$
     }
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("determineBindingKey() - exit - return value=" + bindingKey); //$NON-NLS-1$
+    if (parameters.contains(null) || types.contains(null)) {
+      throw new IllegalArgumentException(
+          "The lists with type parameters and types must not contain null values."); //$NON-NLS-1$
     }
 
-    return bindingKey.toString();
+  }
+
+  /**
+   * Returns whether the given {@link TypedElement typed element} has a generic
+   * type amd no non-generic type. In other words, determines whether the typed
+   * element should be bound during a generic binding.
+   * 
+   * @param typedElement the typed element
+   * 
+   * @return <code>true</code> if the typed element has a <code>null</code>
+   *         type and a non-<code>null</code> generic type
+   */
+  public static boolean isGeneric(TypedElement typedElement) {
+    return typedElement.getType() == null
+        && typedElement.getGenericType() != null;
+  }
+  
+  
+  /**
+   * Helper method that binds a {@link TypedElement}..
+   * 
+   * @param typedElement the typed element
+   */
+  public static void bindTypedElement(TypedElement typedElement,
+      List<TypeParameter> parameters, List<? extends Type> types) {
+
+    if (isGeneric(typedElement)) {
+      typedElement.getGenericType().bindGenericType(parameters, types,
+          typedElement);
+    }
+
   }
 }

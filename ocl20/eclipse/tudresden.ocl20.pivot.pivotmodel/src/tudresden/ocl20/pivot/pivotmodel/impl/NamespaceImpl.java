@@ -161,7 +161,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
   protected final List<TypeParameter> getOwnedTypeParameterGen() {
     if (ownedTypeParameter == null) {
       ownedTypeParameter = new EObjectContainmentWithInverseEList<TypeParameter>(
-          TypeParameter.class,this,PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER,
+          TypeParameter.class, this,
+          PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER,
           PivotModelPackageImpl.TYPE_PARAMETER__GENERIC_ELEMENT);
     }
     return ownedTypeParameter;
@@ -185,8 +186,9 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    */
   protected final List<Constraint> getOwnedRuleGen() {
     if (ownedRule == null) {
-      ownedRule = new EObjectContainmentWithInverseEList<Constraint>(Constraint.class,this,
-          PivotModelPackageImpl.NAMESPACE__OWNED_RULE,PivotModelPackageImpl.CONSTRAINT__NAMESPACE);
+      ownedRule = new EObjectContainmentWithInverseEList<Constraint>(
+          Constraint.class, this, PivotModelPackageImpl.NAMESPACE__OWNED_RULE,
+          PivotModelPackageImpl.CONSTRAINT__NAMESPACE);
     }
     return ownedRule;
   }
@@ -209,8 +211,9 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    */
   protected final List<Type> getOwnedTypeGen() {
     if (ownedType == null) {
-      ownedType = new EObjectContainmentWithInverseEList<Type>(Type.class,this,
-          PivotModelPackageImpl.NAMESPACE__OWNED_TYPE,PivotModelPackageImpl.TYPE__NAMESPACE);
+      ownedType = new EObjectContainmentWithInverseEList<Type>(Type.class,
+          this, PivotModelPackageImpl.NAMESPACE__OWNED_TYPE,
+          PivotModelPackageImpl.TYPE__NAMESPACE);
     }
     return ownedType;
   }
@@ -233,7 +236,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    */
   protected final List<Namespace> getNestedNamespaceGen() {
     if (nestedNamespace == null) {
-      nestedNamespace = new EObjectContainmentWithInverseEList<Namespace>(Namespace.class,this,
+      nestedNamespace = new EObjectContainmentWithInverseEList<Namespace>(
+          Namespace.class, this,
           PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE,
           PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE);
     }
@@ -245,7 +249,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * @generated
    */
   public Namespace getNestingNamespace() {
-    if (eContainerFeatureID != PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE) return null;
+    if (eContainerFeatureID != PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE)
+      return null;
     return (Namespace) eContainer();
   }
 
@@ -253,10 +258,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetNestingNamespace(Namespace newNestingNamespace,
-      NotificationChain msgs) {
+  public NotificationChain basicSetNestingNamespace(
+      Namespace newNestingNamespace, NotificationChain msgs) {
     msgs = eBasicSetContainer((InternalEObject) newNestingNamespace,
-        PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE,msgs);
+        PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE, msgs);
     return msgs;
   }
 
@@ -267,20 +272,22 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
   public void setNestingNamespace(Namespace newNestingNamespace) {
     if (newNestingNamespace != eInternalContainer()
         || (eContainerFeatureID != PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE && newNestingNamespace != null)) {
-      if (EcoreUtil.isAncestor(this,(EObject) newNestingNamespace))
-        throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+      if (EcoreUtil.isAncestor(this, (EObject) newNestingNamespace))
+        throw new IllegalArgumentException(
+            "Recursive containment not allowed for " + toString()); //$NON-NLS-1$
       NotificationChain msgs = null;
       if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
       if (newNestingNamespace != null)
         msgs = ((InternalEObject) newNestingNamespace).eInverseAdd(this,
-            PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE,Namespace.class,msgs);
-      msgs = basicSetNestingNamespace(newNestingNamespace,msgs);
+            PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE, Namespace.class,
+            msgs);
+      msgs = basicSetNestingNamespace(newNestingNamespace, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE,newNestingNamespace,
-          newNestingNamespace));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE,
+          newNestingNamespace, newNestingNamespace));
   }
 
   /**
@@ -401,7 +408,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    */
   public Namespace addTypeParameter(TypeParameter typeParameter) {
     if (logger.isDebugEnabled()) {
-      logger.debug("addTypeParameter(typeParameter=" + typeParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+      logger
+          .debug("addTypeParameter(typeParameter=" + typeParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     // use the generated method instead of the client-specific one
@@ -418,7 +426,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
-  public NamedElement bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types) {
+  public NamedElement bindTypeParameter(List<TypeParameter> parameters,
+      List<? extends Type> types) {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
     throw new UnsupportedOperationException();
@@ -429,7 +438,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getBoundType(TypeParameter typeParam) {
+  public Type getTypeForParameter(TypeParameter typeParam) {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
     throw new UnsupportedOperationException();
@@ -484,21 +493,22 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
     switch (featureID) {
       case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
         return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedTypeParameter())
-            .basicAdd(otherEnd,msgs);
+            .basicAdd(otherEnd, msgs);
       case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
-        return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedType()).basicAdd(
-            otherEnd,msgs);
+        return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedType())
+            .basicAdd(otherEnd, msgs);
       case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
-        return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedRule()).basicAdd(
-            otherEnd,msgs);
+        return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedRule())
+            .basicAdd(otherEnd, msgs);
       case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
-        return ((InternalEList<InternalEObject>) (InternalEList<?>) getNestedNamespace()).basicAdd(
-            otherEnd,msgs);
+        return ((InternalEList<InternalEObject>) (InternalEList<?>) getNestedNamespace())
+            .basicAdd(otherEnd, msgs);
       case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
-        if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetNestingNamespace((Namespace) otherEnd,msgs);
+        if (eInternalContainer() != null)
+          msgs = eBasicRemoveFromContainer(msgs);
+        return basicSetNestingNamespace((Namespace) otherEnd, msgs);
     }
-    return super.eInverseAdd(otherEnd,featureID,msgs);
+    return super.eInverseAdd(otherEnd, featureID, msgs);
   }
 
   /**
@@ -506,21 +516,23 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
-        return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(
+            otherEnd, msgs);
       case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
-        return ((InternalEList<?>) getOwnedType()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getOwnedType()).basicRemove(otherEnd, msgs);
       case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
-        return ((InternalEList<?>) getOwnedRule()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getOwnedRule()).basicRemove(otherEnd, msgs);
       case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
-        return ((InternalEList<?>) getNestedNamespace()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getNestedNamespace()).basicRemove(otherEnd,
+            msgs);
       case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
-        return basicSetNestingNamespace(null,msgs);
+        return basicSetNestingNamespace(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -528,11 +540,13 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
    * @generated
    */
   @Override
-  public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+  public NotificationChain eBasicRemoveFromContainerFeature(
+      NotificationChain msgs) {
     switch (eContainerFeatureID) {
       case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
         return eInternalContainer().eInverseRemove(this,
-            PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE,Namespace.class,msgs);
+            PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE, Namespace.class,
+            msgs);
     }
     return super.eBasicRemoveFromContainerFeature(msgs);
   }
@@ -555,7 +569,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
       case PivotModelPackageImpl.NAMESPACE__NESTING_NAMESPACE:
         return getNestingNamespace();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -568,7 +582,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
     switch (featureID) {
       case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
         getOwnedTypeParameter().clear();
-        getOwnedTypeParameter().addAll((Collection<? extends TypeParameter>) newValue);
+        getOwnedTypeParameter().addAll(
+            (Collection<? extends TypeParameter>) newValue);
         return;
       case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
         getOwnedType().clear();
@@ -586,7 +601,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
         setNestingNamespace((Namespace) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -650,7 +665,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
           return -1;
       }
     }
-    return super.eBaseStructuralFeatureID(derivedFeatureID,baseClass);
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
   }
 
   /**
@@ -667,7 +682,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
           return -1;
       }
     }
-    return super.eDerivedStructuralFeatureID(baseFeatureID,baseClass);
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
 } // NamespaceImpl

@@ -3182,7 +3182,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
     addEParameter(op, g1, "types", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
     op = addEOperation(genericElementEClass, this.getType(),
-        "getBoundType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+        "getTypeForParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     addEParameter(op, this.getTypeParameter(),
         "typeParam", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 

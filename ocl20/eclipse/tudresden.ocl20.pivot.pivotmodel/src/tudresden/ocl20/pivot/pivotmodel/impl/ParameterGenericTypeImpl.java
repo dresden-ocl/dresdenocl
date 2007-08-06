@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.pivotmodel.impl;
 
 import java.util.List;
-import java.util.ListIterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
@@ -45,6 +44,7 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Parameter Generic Type</b></em>'.
@@ -58,16 +58,18 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * 
  * @generated
  */
-public class ParameterGenericTypeImpl extends GenericTypeImpl implements ParameterGenericType {
+public class ParameterGenericTypeImpl extends GenericTypeImpl implements
+    ParameterGenericType {
 
   /**
    * Logger for this class
    */
-  private static final Logger logger = Logger.getLogger(ParameterGenericTypeImpl.class);
+  private static final Logger logger = Logger
+      .getLogger(ParameterGenericTypeImpl.class);
 
   /**
-   * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getTypeParameter()
    * @generated
@@ -122,51 +124,49 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
     TypeParameter oldTypeParameter = typeParameter;
     typeParameter = newTypeParameter;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER,oldTypeParameter,
-          typeParameter));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER,
+          oldTypeParameter, typeParameter));
   }
 
   /**
    * This method will bind the type of the <code>typedElement</code> if the
-   * {@link #getTypeParameter() type parameter} of this <code>ParameterGenericType</code> is in
-   * the given list of type parameters that shall be bound.
+   * {@link #getTypeParameter() type parameter} of this
+   * <code>ParameterGenericType</code> is in the given list of type parameters
+   * that shall be bound.
    */
   @Override
   protected boolean doBindGenericType(List<TypeParameter> parameters,
       List<? extends Type> types, TypedElement typedElement) {
 
-    // we have to iterate and compare manually because EObjectEList checks for object identity
-    // rather than object equality, so the correct TypeParameter would not be found
-    for (ListIterator<TypeParameter> it = parameters.listIterator(); it.hasNext();) {
-      TypeParameter typeParameterToBind = it.next();
+    int index;
 
-      // check if the type parameter referenced by this GenericType should be bound
-      if (typeParameterToBind.equals(getTypeParameter())) {
-        Type type = types.get(it.previousIndex());
+    // search the type parameter of this generic type in the list of parameters
+    index = ListUtil.indexOf(parameters, getTypeParameter());
 
-        if (logger.isInfoEnabled()) {
-          logger.info("Binding type of '" + typedElement.getQualifiedName() + "' with '" //$NON-NLS-1$ //$NON-NLS-2$
-              + type.getName() + "'."); //$NON-NLS-1$
-        }
+    // bind the generic type if type parameter was found
+    if (index != -1) {
+      Type type = types.get(index);
 
-        // reset the generic type
-        typedElement.setGenericType(null);
-
-        // now set the type (the order is important, see TypedElement.setGenericType)
-        typedElement.setType(type);
-
-        // break ans signal success
-        return true;
+      if (logger.isInfoEnabled()) {
+        logger.info("Binding type of '" + typedElement.getQualifiedName() //$NON-NLS-1$
+            + "' with '" + type.getName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
       }
+
+      // reset the generic type, then set the type (the order is important)
+      typedElement.setGenericType(null);
+      typedElement.setType(type);
+
+      // break ans signal success
+      return true;
     }
 
     return false;
   }
 
   /**
-   * This method currently does nothing since we do not support type parameters as generic super
-   * types. This can be implemented later if necessary.
+   * This method currently does nothing since we do not support type parameters
+   * as generic super types. This can be implemented later if necessary.
    * 
    * @return always <code>false</code>
    * 
@@ -175,20 +175,22 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
    */
   @Override
   @SuppressWarnings("unused")
-  protected boolean doBindGenericSuperType(List<TypeParameter> parameters, List<? extends Type> types,
-      Type subType) {
+  protected boolean doBindGenericSuperType(List<TypeParameter> parameters,
+      List<? extends Type> types, Type subType) {
     return false;
   }
 
   /**
-   * This method returns <code>true</code> because any type is conformant to an unbound
-   * {@link TypeParameter}. The non-generic type of an element referring to a type parameter simply
-   * is the root of the object hierarchy (e.g. java.lang.Object or OclAny).
+   * This method returns <code>true</code> because any type is conformant to
+   * an unbound {@link TypeParameter}. The non-generic type of an element
+   * referring to a type parameter simply is the root of the object hierarchy
+   * (e.g. java.lang.Object or OclAny).
    * 
    * <p>
-   * To see why, consider the following example: a generic operation {@code <T> op(param:T) : T} can
-   * be called with any argument, no matter what type. The type parameter <code>T</code> will
-   * consecutively be bound to the type of the argument, determining the correct return type.
+   * To see why, consider the following example: a generic operation
+   * {@code <T> op(param:T) : T} can be called with any argument, no matter what
+   * type. The type parameter <code>T</code> will consecutively be bound to
+   * the type of the argument, determining the correct return type.
    * </p>
    * 
    * 
@@ -231,7 +233,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
       case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
         return getTypeParameter();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -246,7 +248,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements Paramet
         setTypeParameter((TypeParameter) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

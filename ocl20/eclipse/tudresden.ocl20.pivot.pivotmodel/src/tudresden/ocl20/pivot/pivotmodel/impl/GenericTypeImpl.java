@@ -110,9 +110,6 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements Generi
           + ", typedElement=" + typedElement + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
     }
 
-    // check parameters
-    checkBindingParameters(parameters,types);
-    
     // perform binding
     boolean success = doBindGenericType(parameters,types,typedElement);
 
@@ -144,9 +141,6 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements Generi
           + ", subType=" + subType + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
     }
 
-    // check parameters
-    checkBindingParameters(parameters,types);
-    
     // perform binding
     boolean success = doBindGenericSuperType(parameters,types,subType);
 
@@ -155,22 +149,6 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements Generi
     }
 
     return success;
-  }
-
-  /**
-   * Helper method that checks the parameters for validity.
-   */
-  protected void checkBindingParameters(List<TypeParameter> parameters, List<? extends Type> types) {
-
-    if (parameters == null || types == null) {
-      throw new IllegalArgumentException("Arguments must not be null: parameters=" + parameters //$NON-NLS-1$
-          + ", types=" + types); //$NON-NLS-1$
-    }
-
-    if (parameters.size() != types.size()) {
-      throw new IllegalStateException(
-          "The number of type parameters must match the number of types to be bound."); //$NON-NLS-1$
-    }
   }
 
   /**

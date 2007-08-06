@@ -69,7 +69,7 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type</b></em>'.
@@ -149,7 +149,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
    * A map that contains instances of this Type with some or all of their type
    * parameters bound.
    */
-  private static Map<String, Type> boundTypes;
+  private static Map<Binding, Type> boundTypes;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -158,37 +158,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
    */
   protected TypeImpl() {
     super();
-  }
-
-  /**
-   * Overridden to include the type parameters if existent.
-   * 
-   * @return a <code>String</code> with the name of this <code>Type</code>
-   */
-  @Override
-  public String getQualifiedName() {
-    String name = super.getQualifiedName();
-
-    if (!getOwnedTypeParameter().isEmpty()) {
-      StringBuilder nameBuilder = new StringBuilder(name);
-
-      nameBuilder.append('<');
-
-      for (Iterator<TypeParameter> it = getOwnedTypeParameter().iterator(); it
-          .hasNext();) {
-        nameBuilder.append(it.next().getName());
-
-        if (it.hasNext()) {
-          nameBuilder.append(", "); //$NON-NLS-1$
-        }
-      }
-
-      nameBuilder.append('>');
-
-      name = nameBuilder.toString();
-    }
-
-    return name;
   }
 
   /**
@@ -692,8 +661,11 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
   /**
    * Performs a binding of type parameters as described for
-   * {@link GenericElement#bindTypeParameter()}. In addition, the generic super
-   * types of this type are bound as well.
+   * {@link GenericElement#bindTypeParameter()}. Note that the lists for
+   * <code>parameters</code> and <code>types</code> must support comparison
+   * of elements via equality, not identity. In particular, this means that
+   * Ecore {@link EObjectEList}s should be copied into a new list before
+   * calling this method.
    * 
    * @generated NOT
    */
@@ -704,46 +676,30 @@ public class TypeImpl extends NamedElementImpl implements Type {
           + types + ") - enter"); //$NON-NLS-1$
     }
 
-    String bindingKey;
+    // precondition check
+    GenericElements.checkBindingParameters(parameters, types);
+
+    Binding binding;
     Type boundType;
 
-    // precondition check
-    if (parameters == null || types == null
-        || parameters.size() != types.size()) {
-      throw new IllegalArgumentException(
-          "Illegal arguments: parameters=" + parameters + ", types=" + types); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
-    // determine the String identifier for the binding
-    bindingKey = GenericElements.determineBindingKey(this, parameters, types);
+    // create a new binding
+    binding = new Binding(this, parameters, types);
 
     // try to find a previously bound type and create a new one if necessary
-    boundType = getBoundTypes().get(bindingKey);
+    boundType = getBoundTypes().get(binding);
 
     if (boundType == null) {
       boundType = this.clone();
 
-      // remove the type parameter that is going to be bound; note that we
-      // cannot simply use removeAll because EObjectEList uses object identity,
-      // not object equality for comparison
-      for (Iterator<TypeParameter> it = boundType.getOwnedTypeParameter()
-          .iterator(); it.hasNext();) {
-        TypeParameter ownedTypeParameter = it.next();
+      // remove the type parameters that are going to be bound
+      ListUtil.removeAll(boundType.getOwnedTypeParameter(), parameters);
 
-        for (TypeParameter typeParameterToBind : parameters) {
-          if (ownedTypeParameter.equals(typeParameterToBind)) {
-            it.remove();
-          }
-        }
-      }
-
-      // cache early to prevent endless loop if properties or operations have
-      // the same generic type
-      boundTypes.put(bindingKey, boundType);
+      // cache early to prevent endless loop if type is required while binding
+      boundTypes.put(binding, boundType);
 
       // bind all properties
       for (Property property : boundType.allProperties()) {
-        bindTypedElement(property, parameters, types);
+        GenericElements.bindTypedElement(property, parameters, types);
       }
 
       // bind all operations
@@ -751,11 +707,11 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
         // bind the parameters of the operation
         for (Parameter parameter : operation.getOwnedParameter()) {
-          bindTypedElement(parameter, parameters, types);
+          GenericElements.bindTypedElement(parameter, parameters, types);
         }
 
         // bind the type of the operation
-        bindTypedElement(operation, parameters, types);
+        GenericElements.bindTypedElement(operation, parameters, types);
       }
 
       // bind all generic supertypes
@@ -763,13 +719,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
           .iterator(); it.hasNext();) {
         GenericType genericSuperType = it.next();
 
-        boolean success = genericSuperType.bindGenericSuperType(parameters,
-            types, boundType);
-
-        // if the generic super type was successfully bound, remove it from the
-        // type (we have to do this here to avoid
-        // ConcurrentModificationExceptions in the list)
-        if (success) {
+        // if generic super type was successfully bound, remove it from the type
+        if (genericSuperType.bindGenericSuperType(parameters, types, boundType)) {
           it.remove();
         }
       }
@@ -783,30 +734,23 @@ public class TypeImpl extends NamedElementImpl implements Type {
   }
 
   /**
-   * Helper method that abstracts out the code to bind a {@link TypedElement}
-   * from {@link #bindTypeParameter(List, List)}.
-   * 
-   * @param typedElement
-   */
-  private void bindTypedElement(TypedElement typedElement,
-      List<TypeParameter> parameters, List<? extends Type> types) {
-
-    if (typedElement.getType() == null && typedElement.getGenericType() != null) {
-      typedElement.getGenericType().bindGenericType(parameters, types,
-          typedElement);
-    }
-
-  }
-
-  /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
-   * @generated
+   * @generated NOT
    */
-  public Type getBoundType(TypeParameter typeParam) {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
+  public Type getTypeForParameter(TypeParameter typeParam) {
+    Type type = null;
+
+    // look for a binding that has created this type
+    for (Binding binding : boundTypes.keySet()) {
+      Type boundType = boundTypes.get(binding);
+
+      if (this.equals(boundType)) {
+        type = binding.getType(typeParam);
+      }
+    }
+
+    return type;
   }
 
   /**
@@ -814,10 +758,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
    * 
    * @return a {@code Map<String,TypeParameter>} instance
    */
-  protected static Map<String, Type> getBoundTypes() {
+  protected static Map<Binding, Type> getBoundTypes() {
 
     if (boundTypes == null) {
-      boundTypes = new HashMap<String, Type>();
+      boundTypes = new HashMap<Binding, Type>();
     }
 
     return boundTypes;
