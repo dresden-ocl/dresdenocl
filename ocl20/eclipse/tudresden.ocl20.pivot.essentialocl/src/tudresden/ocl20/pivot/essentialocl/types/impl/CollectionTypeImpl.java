@@ -80,7 +80,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
    * @generated
    * @ordered
    */
-  protected Type elementType = null;
+  protected Type elementType;
 
   /**
    * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}'
@@ -90,7 +90,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
    * @generated
    * @ordered
    */
-  protected OclLibrary oclLibrary = null;
+  protected OclLibrary oclLibrary;
 
   /**
    * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
@@ -228,14 +228,14 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
    */
   public void setElementType(Type newElementType) {
     if (logger.isDebugEnabled()) {
-      logger
-          .debug("setElementType(newElementType=" + newElementType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+      logger.debug("setElementType(newElementType=" + newElementType //$NON-NLS-1$
+          + ") - enter"); //$NON-NLS-1$
     }
 
     // the element type must not have been set before
     if (elementType != null) {
       throw new IllegalStateException(
-          "The element type of a colllection type cannot be changed once it has been set."); //$NON-NLS-1$
+          "The element type of a collection type cannot be changed once it has been set."); //$NON-NLS-1$
     }
 
     // set the type using the generated method
@@ -494,18 +494,14 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   public CollectionType bindTypeParameter(List<TypeParameter> parameters,
       List<? extends Type> types) {
 
-    // check that the CollectionType has been modeled correctly
-    if (getOwnedTypeParameter().size() != 1) {
-      throw new IllegalStateException(
-          "An OCL Collection type must have exactly one type parameter"); //$NON-NLS-1$
-    }
+    CollectionType boundType;
 
     // bind the collection type with the given parameters
-    CollectionType boundCollectionType = (CollectionType) super
-        .bindTypeParameter(parameters, types);
+    boundType = (CollectionType) super.bindTypeParameter(parameters, types);
 
-    // is this a newly bound collection type (element type not set yet)?
-    if (boundCollectionType.getElementType() == null) {
+    // set the element type if it has not yet been set and if the given bindings
+    // contain the type parameter of this collection type
+    if (boundType.getElementType() == null) {
       Type elementType = null;
       int index;
 
@@ -518,11 +514,11 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
       // set the element type if it was found
       if (elementType != null) {
-        boundCollectionType.setElementType(elementType);
+        boundType.setElementType(elementType);
       }
     }
 
-    return boundCollectionType;
+    return boundType;
   }
 
   /**
@@ -536,17 +532,20 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
   }
 
   /**
-   * Overridden to additionally set the reference to the {@link OclLibrary}.
+   * Overridden to additionally set the kind, the element type and the reference
+   * to the {@link OclLibrary}.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Type)
    */
   protected CollectionType initialize(CollectionType clone) {
     super.initialize(clone);
 
-    // set kind
     clone.setKind(getKind());
 
-    // set reference to OCL library
+    if (elementType != null) {
+      clone.setElementType(elementType);
+    }
+
     clone.setOclLibrary(getOclLibrary());
 
     return clone;
