@@ -37,6 +37,8 @@ import java.util.List;
 import org.apache.commons.lang.NullArgumentException;
 
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
@@ -99,12 +101,13 @@ public class GenericElements {
     return typedElement.getType() == null
         && typedElement.getGenericType() != null;
   }
-  
-  
+
   /**
    * Helper method that binds a {@link TypedElement}..
    * 
    * @param typedElement the typed element
+   * @param parameters the type parameters to bind
+   * @param types the types to bind to the type parameters
    */
   public static void bindTypedElement(TypedElement typedElement,
       List<TypeParameter> parameters, List<? extends Type> types) {
@@ -113,6 +116,26 @@ public class GenericElements {
       typedElement.getGenericType().bindGenericType(parameters, types,
           typedElement);
     }
+
+  }
+
+  /**
+   * Helper method to bind an operation.
+   * 
+   * @param operation the operation to bind
+   * @param parameters the type parameters to bind
+   * @param types the types to bind to the type parameters
+   */
+  public static void bindOperation(Operation operation,
+      List<TypeParameter> parameters, List<? extends Type> types) {
+
+    // bind the parameters of the operation
+    for (Parameter parameter : operation.getOwnedParameter()) {
+      GenericElements.bindTypedElement(parameter, parameters, types);
+    }
+
+    // bind the type of the operation
+    GenericElements.bindTypedElement(operation, parameters, types);
 
   }
 }
