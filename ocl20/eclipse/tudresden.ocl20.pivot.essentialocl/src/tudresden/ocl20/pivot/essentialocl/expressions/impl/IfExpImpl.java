@@ -136,7 +136,7 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
     // check invariant
     if (condition == null) {
       throw new WellformednessException(this,
-          "The condition of an IfExp must not be null.");
+          "The condition of an IfExp must not be null."); //$NON-NLS-1$
     }
 
     // check wellformedness rule that the condition must have a boolean type
