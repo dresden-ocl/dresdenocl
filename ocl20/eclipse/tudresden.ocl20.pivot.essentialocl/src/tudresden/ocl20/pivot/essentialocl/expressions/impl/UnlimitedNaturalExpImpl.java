@@ -101,6 +101,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements Un
    * 
    * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
    */
+  @Override
   protected Type evaluateType() {
     if (logger.isDebugEnabled()) {
       logger.debug("evaluateType() - enter"); //$NON-NLS-1$
