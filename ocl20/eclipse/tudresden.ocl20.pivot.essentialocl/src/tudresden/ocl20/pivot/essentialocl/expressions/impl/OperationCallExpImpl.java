@@ -211,7 +211,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
     OclExpression argument;
     TypeType argumentType;
-    Type type;
+    Type representedType;
 
     // check arguments
     if (getArgument().size() != 1) {
@@ -228,23 +228,20 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
           "The operation 'oclAsType' must have an OclType as its argument."); //$NON-NLS-1$
     }
 
-    // get the type of the argument
     argumentType = (TypeType) argument.getType();
 
-    // get the type that is bound to the type parameter of the OclType type
-    type = argumentType.getTypeForParameter(getValidOclLibrary().getOclType()
-        .getOwnedTypeParameter().get(0));
+    // get the type that is represented by the TypeType
+    representedType = argumentType.getRepresentedType();
 
-    // check that we have found a valid type
-    if (type == null) {
+    if (representedType == null) {
       throw new WellformednessException(this,
-          "Unable to determine the type represented by the OclType given as an argument."); //$NON-NLS-1$
+          "Unable to determine the type represented by the passed OclType."); //$NON-NLS-1$
     }
 
     // bind the oclAsType operation, which will set its return type
     oclAsTypeOperation = oclAsTypeOperation
         .bindTypeParameter(new ArrayList<TypeParameter>(oclAsTypeOperation
-            .getOwnedTypeParameter()), Arrays.asList(type));
+            .getOwnedTypeParameter()), Arrays.asList(representedType));
 
     if (logger.isDebugEnabled()) {
       logger.debug("bindOclAsTypeOperation() - exit - return value=" //$NON-NLS-1$
