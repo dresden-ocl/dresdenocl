@@ -19,7 +19,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="oclLibrary" lowerBound="1"
           eType="#//types/OclLibrary" resolveProxies="false">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="&lt;p>&#xD;&#xA;The reference to the {@link OclLibrary} facade class is necessary&#xD;&#xA;for determining type conformance and common super types. This&#xD;&#xA;implementation uses a dependency injection approach. Whenever&#xD;&#xA;a &lt;code>CollectionType&lt;/code> is created, the reference to the &#xD;&#xA;&lt;code>OclLibrary&lt;/code> should be set. Note that the old toolkit&#xD;&#xA;ised a  Singleton approach which is not repeated here to maintain&#xD;&#xA;clear interfaces.&#xD;&#xA;&lt;/p>"/>
+          <details key="documentation" value="&lt;p>&#xD;&#xA;The reference to the {@link OclLibrary} facade class is necessary&#xD;&#xA;for determining type conformance and common super types. This&#xD;&#xA;implementation uses a dependency injection approach. Whenever&#xD;&#xA;a &lt;code>CollectionType&lt;/code> is created, the reference to the &#xD;&#xA;&lt;code>OclLibrary&lt;/code> should be set. Note that the old toolkit&#xD;&#xA;used a  Singleton approach which is not repeated here to maintain&#xD;&#xA;clear interfaces.&#xD;&#xA;&lt;/p>"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1"
@@ -40,10 +40,16 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="oclLibrary" lowerBound="1"
           eType="#//types/OclLibrary"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="TypeType" eSuperTypes="../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeType" eSuperTypes="../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;The &lt;code>Type&lt;/code> represented by this &lt;code>TypeType&lt;/code>.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="representedType" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type"
+          resolveProxies="false"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclLibrary">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;p>&#xD;&#xA;The &lt;code>OclLibrary&lt;/code> interface provides access  to the types of the OCL Standard Library as defined in the OCL specification, Chapter 11.&#xD;&#xA;&#xD;&#xA;As EMF does not allow to model operations with class scope, the &lt;code>OclLibrary&lt;code> also provides a version of the {@link #makeTupleType() TupleType::make} operation (with JMI, this method would be located inside &lt;code>TupleTypeClass&lt;/code>).&#xD;&#xA;&#xD;&#xA;The OCL Collection types for a particular element type can be retrieved with one of the corresponding, type-specific methods. &#xD;&#xA;&#xD;&#xA;Sensible implementations of this interface should cache previously created Tuple and Collection types.&#xD;&#xA;&lt;/p>"/>
+        <details key="documentation" value="&lt;p>&#xD;&#xA;The &lt;code>OclLibrary&lt;/code> interface provides access  to the types of the&#xD;&#xA;OCL Standard Library as defined in the OCL specification, Chapter 11.&#xD;&#xA;As EMF does not allow to model operations with class scope, the&#xD;&#xA;&lt;code>OclLibrary&lt;code> also provides a version of the&#xD;&#xA;{@link #makeTupleType() TupleType::make} operation (with JMI, this method&#xD;&#xA;would be located inside &lt;code>TupleTypeClass&lt;/code>).&#xD;&#xA;The OCL Collection types for a particular element type can be retrieved with&#xD;&#xA;one of the corresponding, type-specific methods.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
       <eOperations name="makeTupleType" eType="#//types/TupleType">
         <eParameters name="atts">

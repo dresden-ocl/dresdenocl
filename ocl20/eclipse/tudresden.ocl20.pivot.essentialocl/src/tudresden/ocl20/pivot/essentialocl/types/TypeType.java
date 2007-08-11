@@ -39,8 +39,44 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * A representation of the model object '<em><b>Type Type</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <p>
+ * The <code>Type</code> represented by this <code>TypeType</code>.
+ * </p>
+ * <!-- end-model-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}</li>
+ * </ul>
+ * </p>
  *
  * @generated
  */
 public interface TypeType extends Type {
+
+  /**
+   * Returns the value of the '<em><b>Represented Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Represented Type</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Represented Type</em>' reference.
+   * @see #setRepresentedType(Type)
+   * @generated
+   */
+  Type getRepresentedType();
+
+  /**
+   * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Represented Type</em>' reference.
+   * @see #getRepresentedType()
+   * @generated
+   */
+  void setRepresentedType(Type value);
 } // TypeType

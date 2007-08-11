@@ -32,23 +32,51 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types.impl;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
+import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
+
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.TypeTypeImpl#getRepresentedType <em>Represented Type</em>}</li>
+ * </ul>
  * </p>
  * 
  * @generated
  */
 public class TypeTypeImpl extends TypeImpl implements TypeType {
+
+  /**
+   * Logger for this class
+   */
+  private static final Logger logger = Logger.getLogger(TypeTypeImpl.class);
+
+  /**
+   * The cached value of the '{@link #getRepresentedType() <em>Represented Type</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @see #getRepresentedType()
+   * @generated
+   * @ordered
+   */
+  protected Type representedType;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -70,6 +98,155 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
   }
 
   /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public Type getRepresentedType() {
+    return representedType;
+  }
+
+  /**
+   * This method acts as a decorator for {@link #setRepresentedTypeGen(Type)} to
+   * prevent that the represented type of a TypeType is changed after it has
+   * been set the first time. An <code>IllegalStateException</code> will be
+   * thrown if clients attempt to set the represented type again.
+   * 
+   * @generated NOT
+   */
+  public void setRepresentedType(Type newElementType) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("setRepresentedType(newElementType=" + newElementType //$NON-NLS-1$
+          + ") - enter"); //$NON-NLS-1$
+    }
+
+    // the element type must not have been set before
+    if (representedType != null) {
+      throw new IllegalStateException(
+          "The represented type of a TypeType cannot be changed once it has been set."); //$NON-NLS-1$
+    }
+
+    // set the type using the generated method
+    setRepresentedTypeGen(newElementType);
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("setRepresentedType() - exit"); //$NON-NLS-1$
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->The code for {@link #setRepresentedType(Type)} will
+   * be forwarded to this method. <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  public void setRepresentedTypeGen(Type newRepresentedType) {
+    Type oldRepresentedType = representedType;
+    representedType = newRepresentedType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE, oldRepresentedType,
+          representedType));
+  }
+
+  /**
+   * Overridden to set the represented type of the <code>TypeType</code> after
+   * binding.
+   * 
+   * @param parameters
+   * @param types
+   * @return
+   */
+  @Override
+  public Type bindTypeParameter(List<TypeParameter> parameters,
+      List<? extends Type> types) {
+
+    TypeType boundType;
+
+    // bind the TypeType with the given parameters
+    boundType = (TypeType) super.bindTypeParameter(parameters, types);
+
+    // set the represented type if it has not yet been set and if the given
+    // bindings contain the type parameter of this TypeType
+    if (boundType.getRepresentedType() == null) {
+      Type representedType = null;
+      int index;
+
+      // find the TypeParameter that corresponds to the element type
+      index = ListUtil.indexOf(parameters, getOwnedTypeParameter().get(0));
+
+      if (index != -1) {
+        representedType = types.get(index);
+      }
+
+      // set the element type if it was found
+      if (representedType != null) {
+        boundType.setRepresentedType(representedType);
+      }
+    }
+
+    return boundType;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType) {
+    switch (featureID) {
+      case TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE:
+        return getRepresentedType();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public void eSet(int featureID, Object newValue) {
+    switch (featureID) {
+      case TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE:
+        setRepresentedType((Type) newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID) {
+    switch (featureID) {
+      case TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE:
+        setRepresentedType((Type) null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID) {
+    switch (featureID) {
+      case TypesPackageImpl.TYPE_TYPE__REPRESENTED_TYPE:
+        return representedType != null;
+    }
+    return super.eIsSet(featureID);
+  }
+
+  /**
    * Overridden to create a <code>TypeType</code> instance instead.
    * 
    * @return a <code>TypeType</code> instance
@@ -77,6 +254,33 @@ public class TypeTypeImpl extends TypeImpl implements TypeType {
   @Override
   public Type clone() {
     return initialize(TypesFactory.INSTANCE.createTypeType());
+  }
+
+  /**
+   * Sets the represented type of this <code>TypeType</code> and does the
+   * initialization defined in {@link TypeImpl}.
+   */
+  protected TypeType initialize(TypeType clone) {
+    super.initialize(clone);
+
+    if (representedType != null) {
+      clone.setRepresentedType(representedType);
+    }
+
+    return clone;
+  }
+
+  /**
+   * Returns a string representation of this <code>TypeType</code> using the
+   * Jakarta Commons Lang {@link ToStringBuilder}.
+   * 
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        .appendSuper(super.toString()).append("representedType", //$NON-NLS-1$
+            representedType).toString();
   }
 
 } // TypeTypeImpl

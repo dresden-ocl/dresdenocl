@@ -89,7 +89,7 @@ public class TypesSwitch<T> {
    * @generated
    */
   public T doSwitch(EObject theEObject) {
-    return doSwitch(theEObject.eClass(),theEObject);
+    return doSwitch(theEObject.eClass(), theEObject);
   }
 
   /**
@@ -101,12 +101,12 @@ public class TypesSwitch<T> {
    */
   protected T doSwitch(EClass theEClass, EObject theEObject) {
     if (theEClass.eContainer() == modelPackage) {
-      return doSwitch(theEClass.getClassifierID(),theEObject);
+      return doSwitch(theEClass.getClassifierID(), theEObject);
     }
     else {
       List<EClass> eSuperTypes = theEClass.getESuperTypes();
-      return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(eSuperTypes.get(0),
-          theEObject);
+      return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
+          eSuperTypes.get(0), theEObject);
     }
   }
 
@@ -235,13 +235,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Bag Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Bag Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Bag Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Bag Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -250,13 +250,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Tuple Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Tuple Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Tuple Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Tuple Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -265,13 +265,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Collection Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Collection Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Collection Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Collection Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -280,13 +280,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Invalid Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Invalid Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Invalid Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Invalid Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -295,13 +295,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Ordered Set Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Ordered Set Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Ordered Set Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Ordered Set Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -310,13 +310,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Sequence Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Sequence Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -325,13 +325,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Set Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Set Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Set Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Set Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -340,13 +340,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Void Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Void Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Void Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -355,13 +355,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Type Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Type Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Type Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Type Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -370,13 +370,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Ocl Library</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Ocl Library</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Ocl Library</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Ocl Library</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -385,13 +385,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Any Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Any Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Any Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Any Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -400,13 +400,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Named Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Named Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -415,13 +415,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Constrainable Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Constrainable Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Constrainable Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Constrainable Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -430,13 +430,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Generic Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Generic Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Generic Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Generic Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -445,13 +445,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
@@ -460,13 +460,13 @@ public class TypesSwitch<T> {
   }
 
   /**
-   * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch, but this is the last case anyway.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject)
    * @generated
    */

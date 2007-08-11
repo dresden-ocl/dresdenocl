@@ -95,7 +95,7 @@ public interface CollectionType extends Type {
    * implementation uses a dependency injection approach. Whenever
    * a <code>CollectionType</code> is created, the reference to the 
    * <code>OclLibrary</code> should be set. Note that the old toolkit
-   * ised a  Singleton approach which is not repeated here to maintain
+   * used a  Singleton approach which is not repeated here to maintain
    * clear interfaces.
    * </p>
    * <!-- end-model-doc -->
@@ -158,6 +158,7 @@ public interface CollectionType extends Type {
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
    */
-  CollectionType bindTypeParameter(List<TypeParameter> parameters, List<? extends Type> types);
+  CollectionType bindTypeParameter(List<TypeParameter> parameters,
+      List<? extends Type> types);
 
 } // CollectionType

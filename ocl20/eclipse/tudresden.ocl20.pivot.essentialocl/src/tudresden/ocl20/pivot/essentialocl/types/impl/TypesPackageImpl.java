@@ -1160,13 +1160,22 @@ public class TypesPackageImpl extends EPackageImpl {
   public static final int TYPE_TYPE__GENERIC_SUPER_TYPE = PivotModelPackageImpl.TYPE__GENERIC_SUPER_TYPE;
 
   /**
+   * The feature id for the '<em><b>Represented Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int TYPE_TYPE__REPRESENTED_TYPE = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Type Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int TYPE_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 0;
+  public static final int TYPE_TYPE_FEATURE_COUNT = PivotModelPackageImpl.TYPE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.
@@ -1506,7 +1515,7 @@ public class TypesPackageImpl extends EPackageImpl {
    * @generated
    */
   private TypesPackageImpl() {
-    super(eNS_URI,((EFactory) TypesFactory.INSTANCE));
+    super(eNS_URI, ((EFactory) TypesFactory.INSTANCE));
   }
 
   /**
@@ -1540,12 +1549,14 @@ public class TypesPackageImpl extends EPackageImpl {
    */
   public static TypesPackageImpl init() {
     if (isInited)
-      return (TypesPackageImpl) EPackage.Registry.INSTANCE.getEPackage(TypesPackageImpl.eNS_URI);
+      return (TypesPackageImpl) EPackage.Registry.INSTANCE
+          .getEPackage(TypesPackageImpl.eNS_URI);
 
     // Obtain or create and register package
     TypesPackageImpl theTypesPackageImpl = (TypesPackageImpl) (EPackage.Registry.INSTANCE
         .getEPackage(eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE
-        .getEPackage(eNS_URI) : new TypesPackageImpl());
+        .getEPackage(eNS_URI)
+        : new TypesPackageImpl());
 
     isInited = true;
 
@@ -1757,6 +1768,19 @@ public class TypesPackageImpl extends EPackageImpl {
    */
   public EClass getTypeType() {
     return typeTypeEClass;
+  }
+
+  /**
+   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Represented Type</em>'.
+   * @see tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType()
+   * @see #getTypeType()
+   * @generated
+   */
+  public EReference getTypeType_RepresentedType() {
+    return (EReference) typeTypeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1998,15 +2022,15 @@ public class TypesPackageImpl extends EPackageImpl {
     bagTypeEClass = createEClass(BAG_TYPE);
 
     tupleTypeEClass = createEClass(TUPLE_TYPE);
-    createEReference(tupleTypeEClass,TUPLE_TYPE__OCL_LIBRARY);
+    createEReference(tupleTypeEClass, TUPLE_TYPE__OCL_LIBRARY);
 
     collectionTypeEClass = createEClass(COLLECTION_TYPE);
-    createEReference(collectionTypeEClass,COLLECTION_TYPE__ELEMENT_TYPE);
-    createEReference(collectionTypeEClass,COLLECTION_TYPE__OCL_LIBRARY);
-    createEAttribute(collectionTypeEClass,COLLECTION_TYPE__KIND);
+    createEReference(collectionTypeEClass, COLLECTION_TYPE__ELEMENT_TYPE);
+    createEReference(collectionTypeEClass, COLLECTION_TYPE__OCL_LIBRARY);
+    createEAttribute(collectionTypeEClass, COLLECTION_TYPE__KIND);
 
     invalidTypeEClass = createEClass(INVALID_TYPE);
-    createEReference(invalidTypeEClass,INVALID_TYPE__OCL_LIBRARY);
+    createEReference(invalidTypeEClass, INVALID_TYPE__OCL_LIBRARY);
 
     orderedSetTypeEClass = createEClass(ORDERED_SET_TYPE);
 
@@ -2015,25 +2039,26 @@ public class TypesPackageImpl extends EPackageImpl {
     setTypeEClass = createEClass(SET_TYPE);
 
     voidTypeEClass = createEClass(VOID_TYPE);
-    createEReference(voidTypeEClass,VOID_TYPE__OCL_LIBRARY);
+    createEReference(voidTypeEClass, VOID_TYPE__OCL_LIBRARY);
 
     typeTypeEClass = createEClass(TYPE_TYPE);
+    createEReference(typeTypeEClass, TYPE_TYPE__REPRESENTED_TYPE);
 
     oclLibraryEClass = createEClass(OCL_LIBRARY);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_BOOLEAN);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_STRING);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_INTEGER);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_REAL);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_ANY);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_VOID);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_INVALID);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_TYPE);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_COLLECTION);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_SEQUENCE);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_BAG);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_SET);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_ORDERED_SET);
-    createEReference(oclLibraryEClass,OCL_LIBRARY__OCL_TUPLE);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_BOOLEAN);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_STRING);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_INTEGER);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_REAL);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_ANY);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_VOID);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_INVALID);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_TYPE);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_COLLECTION);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_SEQUENCE);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_BAG);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_SET);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_ORDERED_SET);
+    createEReference(oclLibraryEClass, OCL_LIBRARY__OCL_TUPLE);
 
     anyTypeEClass = createEClass(ANY_TYPE);
   }
@@ -2076,7 +2101,8 @@ public class TypesPackageImpl extends EPackageImpl {
     // Add supertypes to classes
     bagTypeEClass.getESuperTypes().add(this.getCollectionType());
     tupleTypeEClass.getESuperTypes().add(thePivotModelPackageImpl.getType());
-    collectionTypeEClass.getESuperTypes().add(thePivotModelPackageImpl.getType());
+    collectionTypeEClass.getESuperTypes().add(
+        thePivotModelPackageImpl.getType());
     invalidTypeEClass.getESuperTypes().add(thePivotModelPackageImpl.getType());
     orderedSetTypeEClass.getESuperTypes().add(this.getCollectionType());
     sequenceTypeEClass.getESuperTypes().add(this.getCollectionType());
@@ -2086,158 +2112,180 @@ public class TypesPackageImpl extends EPackageImpl {
     anyTypeEClass.getESuperTypes().add(thePivotModelPackageImpl.getType());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(bagTypeEClass,BagType.class,
-        "BagType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(bagTypeEClass, BagType.class,
+        "BagType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(tupleTypeEClass,TupleType.class,
-        "TupleType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(tupleTypeEClass, TupleType.class,
+        "TupleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getTupleType_OclLibrary(),
         this.getOclLibrary(),
         null,
-        "oclLibrary",null,1,1,TupleType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclLibrary", null, 1, 1, TupleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(collectionTypeEClass,CollectionType.class,
-        "CollectionType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        collectionTypeEClass,
+        CollectionType.class,
+        "CollectionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getCollectionType_ElementType(),
         thePivotModelPackageImpl.getType(),
         null,
-        "elementType",null,0,1,CollectionType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "elementType", null, 0, 1, CollectionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getCollectionType_OclLibrary(),
         this.getOclLibrary(),
         null,
-        "oclLibrary",null,1,1,CollectionType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclLibrary", null, 1, 1, CollectionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEAttribute(
         getCollectionType_Kind(),
         theExpressionsPackageImpl.getCollectionKind(),
-        "kind",null,1,1,CollectionType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "kind", null, 1, 1, CollectionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(invalidTypeEClass,InvalidType.class,
-        "InvalidType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(invalidTypeEClass, InvalidType.class,
+        "InvalidType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getInvalidType_OclLibrary(),
         this.getOclLibrary(),
         this.getOclLibrary_OclInvalid(),
-        "oclLibrary",null,1,1,InvalidType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclLibrary", null, 1, 1, InvalidType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(orderedSetTypeEClass,OrderedSetType.class,
-        "OrderedSetType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        orderedSetTypeEClass,
+        OrderedSetType.class,
+        "OrderedSetType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(sequenceTypeEClass,SequenceType.class,
-        "SequenceType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        sequenceTypeEClass,
+        SequenceType.class,
+        "SequenceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(setTypeEClass,SetType.class,
-        "SetType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(setTypeEClass, SetType.class,
+        "SetType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(voidTypeEClass,VoidType.class,
-        "VoidType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(voidTypeEClass, VoidType.class,
+        "VoidType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getVoidType_OclLibrary(),
         this.getOclLibrary(),
         null,
-        "oclLibrary",null,1,1,VoidType.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclLibrary", null, 1, 1, VoidType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(typeTypeEClass,TypeType.class,
-        "TypeType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(typeTypeEClass, TypeType.class,
+        "TypeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(
+        getTypeType_RepresentedType(),
+        thePivotModelPackageImpl.getType(),
+        null,
+        "representedType", null, 0, 1, TypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(oclLibraryEClass,OclLibrary.class,
-        "OclLibrary",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(oclLibraryEClass, OclLibrary.class,
+        "OclLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclBoolean(),
         thePivotModelPackageImpl.getPrimitiveType(),
         null,
-        "oclBoolean",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclBoolean", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclString(),
         thePivotModelPackageImpl.getPrimitiveType(),
         null,
-        "oclString",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclString", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclInteger(),
         thePivotModelPackageImpl.getPrimitiveType(),
         null,
-        "oclInteger",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclInteger", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclReal(),
         thePivotModelPackageImpl.getPrimitiveType(),
         null,
-        "oclReal",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclReal", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclAny(),
         this.getAnyType(),
         null,
-        "oclAny",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclAny", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclVoid(),
         this.getVoidType(),
         null,
-        "oclVoid",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclVoid", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclInvalid(),
         this.getInvalidType(),
         this.getInvalidType_OclLibrary(),
-        "oclInvalid",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclInvalid", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclType(),
         this.getTypeType(),
         null,
-        "oclType",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclType", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclCollection(),
         this.getCollectionType(),
         null,
-        "oclCollection",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclCollection", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclSequence(),
         this.getSequenceType(),
         null,
-        "oclSequence",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclSequence", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclBag(),
         this.getBagType(),
         null,
-        "oclBag",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclBag", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclSet(),
         this.getSetType(),
         null,
-        "oclSet",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclSet", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclOrderedSet(),
         this.getOrderedSetType(),
         null,
-        "oclOrderedSet",null,1,1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclOrderedSet", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getOclLibrary_OclTuple(),
         this.getTupleType(),
         null,
-        "oclTuple",null,1,-1,OclLibrary.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "oclTuple", null, 1, -1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    EOperation op = addEOperation(oclLibraryEClass,this.getTupleType(),"makeTupleType",0,1); //$NON-NLS-1$
+    EOperation op = addEOperation(oclLibraryEClass, this.getTupleType(),
+        "makeTupleType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
     EGenericType g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
     EGenericType g2 = createEGenericType(thePivotModelPackageImpl.getProperty());
     g1.getETypeArguments().add(g2);
-    addEParameter(op,g1,"atts",0,1); //$NON-NLS-1$
+    addEParameter(op, g1, "atts", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(oclLibraryEClass,this.getCollectionType(),"getCollectionType",0,1); //$NON-NLS-1$
-    addEParameter(op,thePivotModelPackageImpl.getType(),"elementType",0,1); //$NON-NLS-1$
+    op = addEOperation(oclLibraryEClass, this.getCollectionType(),
+        "getCollectionType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, thePivotModelPackageImpl.getType(),
+        "elementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(oclLibraryEClass,this.getSequenceType(),"getSequenceType",0,1); //$NON-NLS-1$
-    addEParameter(op,thePivotModelPackageImpl.getType(),"elementType",0,1); //$NON-NLS-1$
+    op = addEOperation(oclLibraryEClass, this.getSequenceType(),
+        "getSequenceType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, thePivotModelPackageImpl.getType(),
+        "elementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(oclLibraryEClass,this.getBagType(),"getBagType",0,1); //$NON-NLS-1$
-    addEParameter(op,thePivotModelPackageImpl.getType(),"elementType",0,1); //$NON-NLS-1$
+    op = addEOperation(oclLibraryEClass, this.getBagType(),
+        "getBagType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, thePivotModelPackageImpl.getType(),
+        "elementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(oclLibraryEClass,this.getSetType(),"getSetType",0,1); //$NON-NLS-1$
-    addEParameter(op,thePivotModelPackageImpl.getType(),"elementType",0,1); //$NON-NLS-1$
+    op = addEOperation(oclLibraryEClass, this.getSetType(),
+        "getSetType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, thePivotModelPackageImpl.getType(),
+        "elementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    op = addEOperation(oclLibraryEClass,this.getOrderedSetType(),"getOrderedSetType",0,1); //$NON-NLS-1$
-    addEParameter(op,thePivotModelPackageImpl.getType(),"elementType",0,1); //$NON-NLS-1$
+    op = addEOperation(oclLibraryEClass, this.getOrderedSetType(),
+        "getOrderedSetType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+    addEParameter(op, thePivotModelPackageImpl.getType(),
+        "elementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(anyTypeEClass,AnyType.class,
-        "AnyType",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(anyTypeEClass, AnyType.class,
+        "AnyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
     // Create resource
     createResource(eNS_URI);
@@ -2283,7 +2331,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference TUPLE_TYPE__OCL_LIBRARY = eINSTANCE.getTupleType_OclLibrary();
+    public static final EReference TUPLE_TYPE__OCL_LIBRARY = eINSTANCE
+        .getTupleType_OclLibrary();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl <em>Collection Type</em>}' class.
@@ -2319,7 +2368,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EAttribute COLLECTION_TYPE__KIND = eINSTANCE.getCollectionType_Kind();
+    public static final EAttribute COLLECTION_TYPE__KIND = eINSTANCE
+        .getCollectionType_Kind();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.InvalidTypeImpl <em>Invalid Type</em>}' class.
@@ -2386,7 +2436,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference VOID_TYPE__OCL_LIBRARY = eINSTANCE.getVoidType_OclLibrary();
+    public static final EReference VOID_TYPE__OCL_LIBRARY = eINSTANCE
+        .getVoidType_OclLibrary();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.TypeTypeImpl <em>Type Type</em>}' class.
@@ -2397,6 +2448,15 @@ public class TypesPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EClass TYPE_TYPE = eINSTANCE.getTypeType();
+
+    /**
+     * The meta object literal for the '<em><b>Represented Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EReference TYPE_TYPE__REPRESENTED_TYPE = eINSTANCE
+        .getTypeType_RepresentedType();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.
@@ -2414,7 +2474,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_VOID = eINSTANCE.getOclLibrary_OclVoid();
+    public static final EReference OCL_LIBRARY__OCL_VOID = eINSTANCE
+        .getOclLibrary_OclVoid();
 
     /**
      * The meta object literal for the '<em><b>Ocl Any</b></em>' containment reference feature.
@@ -2422,7 +2483,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_ANY = eINSTANCE.getOclLibrary_OclAny();
+    public static final EReference OCL_LIBRARY__OCL_ANY = eINSTANCE
+        .getOclLibrary_OclAny();
 
     /**
      * The meta object literal for the '<em><b>Ocl Collection</b></em>' containment reference feature.
@@ -2448,7 +2510,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_BAG = eINSTANCE.getOclLibrary_OclBag();
+    public static final EReference OCL_LIBRARY__OCL_BAG = eINSTANCE
+        .getOclLibrary_OclBag();
 
     /**
      * The meta object literal for the '<em><b>Ocl Set</b></em>' containment reference feature.
@@ -2456,7 +2519,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_SET = eINSTANCE.getOclLibrary_OclSet();
+    public static final EReference OCL_LIBRARY__OCL_SET = eINSTANCE
+        .getOclLibrary_OclSet();
 
     /**
      * The meta object literal for the '<em><b>Ocl Ordered Set</b></em>' containment reference feature.
@@ -2473,7 +2537,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_TUPLE = eINSTANCE.getOclLibrary_OclTuple();
+    public static final EReference OCL_LIBRARY__OCL_TUPLE = eINSTANCE
+        .getOclLibrary_OclTuple();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.AnyTypeImpl <em>Any Type</em>}' class.
@@ -2491,7 +2556,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_BOOLEAN = eINSTANCE.getOclLibrary_OclBoolean();
+    public static final EReference OCL_LIBRARY__OCL_BOOLEAN = eINSTANCE
+        .getOclLibrary_OclBoolean();
 
     /**
      * The meta object literal for the '<em><b>Ocl String</b></em>' containment reference feature.
@@ -2499,7 +2565,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_STRING = eINSTANCE.getOclLibrary_OclString();
+    public static final EReference OCL_LIBRARY__OCL_STRING = eINSTANCE
+        .getOclLibrary_OclString();
 
     /**
      * The meta object literal for the '<em><b>Ocl Integer</b></em>' containment reference feature.
@@ -2507,7 +2574,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_INTEGER = eINSTANCE.getOclLibrary_OclInteger();
+    public static final EReference OCL_LIBRARY__OCL_INTEGER = eINSTANCE
+        .getOclLibrary_OclInteger();
 
     /**
      * The meta object literal for the '<em><b>Ocl Real</b></em>' containment reference feature.
@@ -2515,7 +2583,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_REAL = eINSTANCE.getOclLibrary_OclReal();
+    public static final EReference OCL_LIBRARY__OCL_REAL = eINSTANCE
+        .getOclLibrary_OclReal();
 
     /**
      * The meta object literal for the '<em><b>Ocl Invalid</b></em>' containment reference feature.
@@ -2523,7 +2592,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_INVALID = eINSTANCE.getOclLibrary_OclInvalid();
+    public static final EReference OCL_LIBRARY__OCL_INVALID = eINSTANCE
+        .getOclLibrary_OclInvalid();
 
     /**
      * The meta object literal for the '<em><b>Ocl Type</b></em>' containment reference feature.
@@ -2531,7 +2601,8 @@ public class TypesPackageImpl extends EPackageImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference OCL_LIBRARY__OCL_TYPE = eINSTANCE.getOclLibrary_OclType();
+    public static final EReference OCL_LIBRARY__OCL_TYPE = eINSTANCE
+        .getOclLibrary_OclType();
 
   }
 
