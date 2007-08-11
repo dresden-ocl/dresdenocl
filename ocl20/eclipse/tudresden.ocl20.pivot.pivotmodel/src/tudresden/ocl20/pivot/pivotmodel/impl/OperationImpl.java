@@ -580,31 +580,16 @@ public class OperationImpl extends FeatureImpl implements Operation {
       // remove the type parameters that are going to be bound
       ListUtil.removeAll(boundOperation.getOwnedTypeParameter(), parameters);
 
-      // bind the type of the operation if generic
-      GenericElements.bindTypedElement(boundOperation, parameters, types);
-
-      // bind all parameters
-      for (Parameter parameter : boundOperation.getOwnedParameter()) {
-        GenericElements.bindTypedElement(parameter, parameters, types);
-      }
+      // bind the operation
+      GenericElements.bindOperation(boundOperation, parameters, types);
     }
 
     if (logger.isDebugEnabled()) {
       logger.debug("bindTypeParameter() - exit - return value=" //$NON-NLS-1$
           + boundOperation);
     }
+    
     return boundOperation;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public Type getTypeForParameter(TypeParameter typeParam) {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
   }
 
   /**

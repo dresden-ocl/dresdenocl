@@ -433,17 +433,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Type getTypeForParameter(TypeParameter typeParam) {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-  }
-
   /*
    * (non-Javadoc)
    * 

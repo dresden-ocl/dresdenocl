@@ -64,7 +64,6 @@ import tudresden.ocl20.pivot.pivotmodel.GenericType;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -150,6 +149,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
    * parameters bound.
    */
   private static Map<Binding, Type> boundTypes;
+
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -698,20 +698,13 @@ public class TypeImpl extends NamedElementImpl implements Type {
       boundTypes.put(binding, boundType);
 
       // bind all properties
-      for (Property property : boundType.allProperties()) {
+      for (Property property : boundType.getOwnedProperty()) {
         GenericElements.bindTypedElement(property, parameters, types);
       }
 
       // bind all operations
-      for (Operation operation : boundType.allOperations()) {
-
-        // bind the parameters of the operation
-        for (Parameter parameter : operation.getOwnedParameter()) {
-          GenericElements.bindTypedElement(parameter, parameters, types);
-        }
-
-        // bind the type of the operation
-        GenericElements.bindTypedElement(operation, parameters, types);
+      for (Operation operation : boundType.getOwnedOperation()) {
+        GenericElements.bindOperation(operation, parameters, types);
       }
 
       // bind all generic supertypes
@@ -733,25 +726,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
     return boundType;
   }
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-  public Type getTypeForParameter(TypeParameter typeParam) {
-    Type type = null;
-
-    // look for a binding that has created this type
-    for (Binding binding : boundTypes.keySet()) {
-      Type boundType = boundTypes.get(binding);
-
-      if (this.equals(boundType)) {
-        type = binding.getType(typeParam);
-      }
-    }
-
-    return type;
-  }
 
   /**
    * Helper method that lazily creates the map with cached bound types

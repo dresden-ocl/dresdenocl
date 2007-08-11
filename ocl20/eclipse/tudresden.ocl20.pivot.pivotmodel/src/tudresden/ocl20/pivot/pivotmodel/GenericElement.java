@@ -110,19 +110,4 @@ public interface GenericElement extends NamedElement {
   NamedElement bindTypeParameter(List<TypeParameter> parameters,
       List<? extends Type> types);
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * Returns the {@link Type} that has been bound to the
-   * given {@link TypeParameter type parameter}. Returns
-   * <code>null</code> if no type has been bound or this
-   * type parameter is not part of the generic type definition.
-   * </p>
-   * <!-- end-model-doc -->
-   * @generated
-   */
-  Type getTypeForParameter(TypeParameter typeParam);
-
 } // GenericElement
