@@ -153,7 +153,7 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements FeatureC
 
     if (srcType == null) {
       throw new WellformednessException(this,
-          "The source type of a feature call expression must not be empty."); //$NON-NLS-1$ //$NON-NLS-2$
+          "The source type of a feature call expression must not be empty."); //$NON-NLS-1$
     }
 
     return srcType;
