@@ -168,18 +168,18 @@ public class Binding {
 
       result.append('>');
     }
-    
-    // add a separator to better identify the binding 
-    result.append(':');
 
-    // append type parameters to bind and the corresponding type
-    for (ListIterator<TypeParameter> it = typeParameters.listIterator(); it
-        .hasNext();) {
-      result.append(it.next().getName()).append("->").append( //$NON-NLS-1$
-          types.get(it.previousIndex()).getQualifiedName());
+    // add the type parameters and types bound to them
+    if (typeParameters.size() > 0) {
+      result.append(':');
 
-      if (it.hasNext()) {
-        result.append(',');
+      for (int i = 0; i < typeParameters.size(); i++) {
+        result.append(typeParameters.get(i).getName()).append("->").append( //$NON-NLS-1$
+            types.get(i).getQualifiedName());
+        
+        if (i < typeParameters.size() - 1) {
+          result.append(',');
+        }
       }
     }
 
