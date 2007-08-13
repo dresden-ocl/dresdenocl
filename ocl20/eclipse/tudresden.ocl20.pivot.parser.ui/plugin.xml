@@ -8,9 +8,9 @@
             class="tudresden.ocl20.pivot.parser.ui.internal.wizards.ParseOCLWizard"
             icon="icons/ocl.gif"
             id="tudresden.ocl20.pivot.parser.ui.importWizards.loadOclWizard.LoadOCLWizard"
-            name="XOCL Expressions">
+            name="OCL Expressions">
          <description>
-            Parse XOCL expressions for the active model in the Model Browser.
+            Parse OCL expressions for the active model in the Model Browser.
          </description>
       </wizard>
    </extension>
