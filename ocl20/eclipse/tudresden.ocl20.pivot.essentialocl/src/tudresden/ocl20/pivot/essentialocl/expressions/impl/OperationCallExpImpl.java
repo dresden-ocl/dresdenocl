@@ -164,21 +164,29 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
     // otherwise default to the operation's type
     else {
       // TODO: remove explicit references to the OCL Standard Library from code
+      String operationName = referredOperation.getName();
 
       // bind 'allInstances' operation
-      if (referredOperation.getName().equals("allInstances")) { //$NON-NLS-1$
+      if (operationName == "allInstances") { //$NON-NLS-1$
         referredOperation = bindAllInstancesOperation(referredOperation);
       }
 
       // bind 'oclAsType' operation
-      else if (referredOperation.getName().equals("oclAsType")) { //$NON-NLS-1$
+      else if (operationName == "oclAsType") { //$NON-NLS-1$
         referredOperation = bindOclAsTypeOperation(referredOperation);
       }
 
-      // bind 'product' operation
-      else if (referredOperation.getName().equals("product") //$NON-NLS-1$
-          && getSourceType() instanceof CollectionType) {
-        // TODO: bind 'product'
+      // bind 'flatten' operation
+      else if (getSourceType() instanceof CollectionType) {
+
+        if (operationName == "flatten") { //$NON-NLS-1$
+          referredOperation = bindFlattenOperation(referredOperation);
+        }
+
+        else if (operationName == "product") { //$NON-NLS-1$
+          // TODO: bind 'product'
+        }
+
       }
 
       // map the operation's type to a corresponding OCL type
@@ -190,6 +198,57 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
     }
 
     return type;
+  }
+
+  /**
+   * Helper method to bind the 'flatten' operation. The definition is the same
+   * for Set, Bag, and Sequence. E.g.:
+   * 
+   * <p>
+   * If the element type is not a collection type, this results in the same
+   * self. If the element type is a collection type, the result is the set
+   * containing all the elements of all the elements of self.
+   * 
+   * <pre>
+   * post: result = if self.type.elementType.oclIsKindOf(CollectionType) then
+   *    self-&gt;iterate(c; acc : Set() = Set{} |
+   *      acc-&gt;union(c-&gt;asSet() ) )
+   *    else
+   *      self
+   *    endif
+   * </pre>
+   * 
+   * </p>
+   */
+  private Operation bindFlattenOperation(Operation flattenOperation) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("bindFlattenOperation(flattenOperation=" + flattenOperation //$NON-NLS-1$
+          + ") - enter"); //$NON-NLS-1$
+    }
+
+    CollectionType sourceType;
+    Type elementType;
+
+    // it is safe to cast here since we checked in evaluateType
+    sourceType = (CollectionType) getSourceType();
+    elementType = sourceType.getElementType();
+
+    // check the element type of the source collection type
+    if (elementType instanceof CollectionType) {
+      elementType = ((CollectionType) elementType).getElementType();
+    }
+
+    // bind the operation
+    flattenOperation = flattenOperation.bindTypeParameter(
+        new ArrayList<TypeParameter>(flattenOperation.getOwnedTypeParameter()),
+        Arrays.asList(elementType));
+    
+    if (logger.isDebugEnabled()) {
+      logger.debug("bindFlattenOperation() - exit - return value=" //$NON-NLS-1$
+          + flattenOperation);
+    }
+    
+    return flattenOperation;
   }
 
   /**
