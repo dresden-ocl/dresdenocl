@@ -63,18 +63,20 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TupleTypeImpl extends TypeImpl implements TupleType {
 
   /**
-   * An adapter that listens for changes in the properties list of this tuple type
+   * An adapter that listens for changes in the properties list of this tuple
+   * type
    */
-  protected class PropertiesChangedAdapter extends AdapterImpl implements Adapter {
+  protected class PropertiesChangedAdapter extends AdapterImpl implements
+      Adapter {
 
     // an adapter that will listen for changes to a property's type and name
     private Adapter propertyChangeAdapter = new AdapterImpl() {
@@ -98,7 +100,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
         // attach the PropertyChangeAdapter to added properties or remove it
         switch (msg.getEventType()) {
           case Notification.ADD:
-            ((PropertyImpl) msg.getNewValue()).eAdapters().add(propertyChangeAdapter);
+            ((PropertyImpl) msg.getNewValue()).eAdapters().add(
+                propertyChangeAdapter);
             break;
           case Notification.ADD_MANY:
             for (PropertyImpl p : ((List<PropertyImpl>) msg.getNewValue())) {
@@ -106,7 +109,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
             }
             break;
           case Notification.REMOVE:
-            ((PropertyImpl) msg.getOldValue()).eAdapters().remove(propertyChangeAdapter);
+            ((PropertyImpl) msg.getOldValue()).eAdapters().remove(
+                propertyChangeAdapter);
             break;
           case Notification.REMOVE_MANY:
             for (PropertyImpl p : ((List<PropertyImpl>) msg.getNewValue())) {
@@ -122,8 +126,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   }
 
   /**
-   * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}' reference. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}'
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getOclLibrary()
    * @generated
@@ -138,13 +142,19 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   private static final Logger logger = Logger.getLogger(TupleTypeImpl.class);
 
   /**
-   * This is an additional operation defined in the OCL 2.0 Specification (Section 8.3.9). The
-   * operation returns a new <code>TupleType</code>. It is specified as follows:
+   * This is an additional operation defined in the OCL 2.0 Specification
+   * (Section 8.3.9). The operation returns a new <code>TupleType</code>. It
+   * is specified as follows:
    * 
    * <pre>
    * context TupleType::make(atts : Sequence(Property) ) : TupleType
    * post: Sequence{1..atts-&gt;size()}-&gt;forAll(i | result.ownedAttribute.at(i).cmpSlots(atts.at(i))
    * </pre>
+   * 
+   * Note that this specification suggests that the given properties are NOT
+   * meant to be contained in the new tuple type. Thus, this implementation
+   * simply clones the given properties. This is necessary to avoid that the
+   * given properties are removed from another containment list.
    * 
    * @param atts
    * @return
@@ -166,8 +176,13 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
     // create a new tuple type if necessary
     if (tupleType == null) {
       tupleType = TypesFactory.INSTANCE.createTupleType();
-      tupleType.getOwnedProperty().addAll(atts);
-      getTupleTypes().put(name,tupleType);
+
+      // clone the properties and add them to the new tuple type
+      for (Property property : atts) {
+        tupleType.getOwnedProperty().add(property.clone());
+      }
+
+      getTupleTypes().put(name, tupleType);
     }
 
     if (logger.isDebugEnabled()) {
@@ -178,8 +193,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   }
 
   /**
-   * Returns the <code>Map</code> with the cached OCL <code>Tuple</code> types. Lazily creates
-   * this map on demand.
+   * Returns the <code>Map</code> with the cached OCL <code>Tuple</code>
+   * types. Lazily creates this map on demand.
    * 
    * @return a {@code Map<String,TupleType>} instance
    */
@@ -192,25 +207,28 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   }
 
   /**
-   * Helper method that determines the name of a <code>TupleType</code> from a given list of
-   * properties based on the invariant given in the OCL specification. See {@link #getName()} for a
-   * full specification of this invariant.
+   * Helper method that determines the name of a <code>TupleType</code> from a
+   * given list of properties based on the invariant given in the OCL
+   * specification. See {@link #getName()} for a full specification of this
+   * invariant.
    * 
-   * @return a <code>String</code> with the name of a <code>TupleType</code> with these
-   *         properties
+   * @return a <code>String</code> with the name of a <code>TupleType</code>
+   *         with these properties
    * 
    * @see #getName()
    */
   public static String determineTupleTypeName(List<Property> properties) {
     if (logger.isDebugEnabled()) {
-      logger.debug("determineTupleTypeName(properties=" + properties + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+      logger
+          .debug("determineTupleTypeName(properties=" + properties + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     Property[] propertiesArray;
     StringBuilder name;
 
     // cache the properties in an array
-    // TODO: investigate concurrency issues and concurrent modification potential
+    // TODO: investigate concurrency issues and concurrent modification
+    // potential
     propertiesArray = properties.toArray(new Property[properties.size()]);
 
     // create a string buffer to store the name
@@ -232,7 +250,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
       }
 
       else {
-        logger.warn("The property '" + propertiesArray[i].getName() + "' has no type!"); //$NON-NLS-1$ //$NON-NLS-2$
+        logger
+            .warn("The property '" + propertiesArray[i].getName() + "' has no type!"); //$NON-NLS-1$ //$NON-NLS-2$
         name.append("null"); //$NON-NLS-1$
       }
 
@@ -255,17 +274,19 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   protected TupleTypeImpl() {
     super();
 
-    // tuples may not have operations, so we prevent this with an unmodifiable list
+    // tuples may not have operations, so we prevent this with an unmodifiable
+    // list
     ownedOperation = new EcoreEList.UnmodifiableEList<Operation>(this,
-        PivotModelPackageImpl.Literals.TYPE__OWNED_OPERATION,0,new Operation[] {});
+        PivotModelPackageImpl.Literals.TYPE__OWNED_OPERATION, 0,
+        new Operation[] {});
 
     // add an adapter that listens for changes to the owned properties
     eAdapters().add(new PropertiesChangedAdapter());
   }
 
   /**
-   * The name of a tuple type includes the names of the individual parts and the types of those
-   * parts (OCL 2.0 specification, Section 8.2.2).
+   * The name of a tuple type includes the names of the individual parts and the
+   * types of those parts (OCL 2.0 specification, Section 8.2.2).
    * 
    * <p>
    * The corresponding OCL invariant is defined as follows:
@@ -300,15 +321,17 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   }
 
   /**
-   * Overridden to prevent clients from changing the name of the <code>TupleType</code>. This
-   * method will throw an {@link UnsupportedOperationException}.
+   * Overridden to prevent clients from changing the name of the
+   * <code>TupleType</code>. This method will throw an
+   * {@link UnsupportedOperationException}.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
    */
   @Override
   @SuppressWarnings("unused")
   public final void setName(String newName) {
-    throw new UnsupportedOperationException("The name of tuple types cannot be changed,"); //$NON-NLS-1$
+    throw new UnsupportedOperationException(
+        "The name of tuple types cannot be changed,"); //$NON-NLS-1$
   }
 
   /**
@@ -319,9 +342,9 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   }
 
   /**
-   * Simply returns the name of the <code>TupleType</code>. As a member of the OCL Standard
-   * Library, a <code>TupleType</code> does not really have a namespace. It is implicitly
-   * available in all namespaces.
+   * Simply returns the name of the <code>TupleType</code>. As a member of
+   * the OCL Standard Library, a <code>TupleType</code> does not really have a
+   * namespace. It is implicitly available in all namespaces.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
    */
@@ -339,6 +362,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclLibrary getOclLibrary() {
@@ -346,22 +370,24 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   }
 
   /**
-   * <!-- begin-user-doc --> The reference to the {@link OclLibrary} facade should be set after a
-   * <code>TupleType</code> instance is created. Otherwise, there might be errors when determining
-   * type conformance.<!-- end-user-doc -->
+   * <!-- begin-user-doc --> The reference to the {@link OclLibrary} facade
+   * should be set after a <code>TupleType</code> instance is created.
+   * Otherwise, there might be errors when determining type conformance.<!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   public void setOclLibrary(OclLibrary newOclLibrary) {
     OclLibrary oldOclLibrary = oclLibrary;
     oclLibrary = newOclLibrary;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY,
-          oldOclLibrary,oclLibrary));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY, oldOclLibrary, oclLibrary));
   }
 
   /**
-   * Tuple types conform to each other when their names and types conform to each other (OCL 2.0
-   * specification, Section 8.2.2).
+   * Tuple types conform to each other when their names and types conform to
+   * each other (OCL 2.0 specification, Section 8.2.2).
    * 
    * <p>
    * The corresponding OCL invariant is defined as follows:
@@ -415,14 +441,15 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
         else {
           Type ownPropertyType = ownProperty.getType();
-          conformant = (ownPropertyType != null) ? ownPropertyType.conformsTo(otherProperty
-              .getType()) : false;
+          conformant = (ownPropertyType != null) ? ownPropertyType
+              .conformsTo(otherProperty.getType()) : false;
         }
       }
     }
 
     else {
-      conformant = super.conformsTo(other); // this will only return true if other is OclAny
+      conformant = super.conformsTo(other); // this will only return true if
+                                            // other is OclAny
     }
 
     if (logger.isDebugEnabled()) {
@@ -433,23 +460,25 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   }
 
   /**
-   * Overridden to implement special rules to determine the common super type for tuple types.
+   * Overridden to implement special rules to determine the common super type
+   * for tuple types.
    * 
    * <p>
-   * If the other type is a <code>TupleType</code> as well, then the common super type is the
-   * "intersection" of the two tuple types. For instance,
+   * If the other type is a <code>TupleType</code> as well, then the common
+   * super type is the "intersection" of the two tuple types. For instance,
    * <code>TupleType(a:Integer, b:Set(Real))</code> and
    * <code>TupleType(b:Bag(Real), c:String)</code> yields a common super type
    * <code>TupleType(b:Collection(Real))</code>.
    * </p>
    * 
    * <p>
-   * If the other type is not a <code>TupleType</code> and not a {@link CollectionType}, the
-   * common super type is <code>OclAny</code>.
+   * If the other type is not a <code>TupleType</code> and not a
+   * {@link CollectionType}, the common super type is <code>OclAny</code>.
    * </p>
    * 
    * <p>
-   * Otherwise, there is no common super type and <code>null</code> is returned.
+   * Otherwise, there is no common super type and <code>null</code> is
+   * returned.
    * </p>
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#commonSuperType(tudresden.ocl20.pivot.pivotmodel.Type)
@@ -480,11 +509,14 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
           Type propertyType = ownProperty.getType();
 
           if (propertyType != null) {
-            propertyType = propertyType.commonSuperType(otherProperty.getType());
+            propertyType = propertyType
+                .commonSuperType(otherProperty.getType());
 
-            // we found a common super type, create a new property with name and this type
+            // we found a common super type, create a new property with name and
+            // this type
             if (propertyType != null) {
-              Property commmonProperty = PivotModelFactory.INSTANCE.createProperty();
+              Property commmonProperty = PivotModelFactory.INSTANCE
+                  .createProperty();
               commmonProperty.setName(propertyName);
               commmonProperty.setType(propertyType);
               commonProperties.add(commmonProperty);
@@ -503,15 +535,17 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
     }
 
     if (logger.isDebugEnabled()) {
-      logger.debug("commonSuperType() - exit - return value=" + commonSuperType); //$NON-NLS-1$
+      logger
+          .debug("commonSuperType() - exit - return value=" + commonSuperType); //$NON-NLS-1$
     }
 
     return commonSuperType;
   }
 
   /**
-   * Overridden because <code>TupleType</code> instances may not have operations. This method will
-   * throw a <code>UnsupportedOperationException</code>.
+   * Overridden because <code>TupleType</code> instances may not have
+   * operations. This method will throw a
+   * <code>UnsupportedOperationException</code>.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#addOperation(tudresden.ocl20.pivot.pivotmodel.Operation)
    */
@@ -549,7 +583,8 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   }
 
   /**
-   * Overridden to indicate that the name of a <code>TupleType</code> is determined automatically.
+   * Overridden to indicate that the name of a <code>TupleType</code> is
+   * determined automatically.
    * 
    * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#hasVolatileName()
    */
@@ -560,6 +595,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -568,11 +604,12 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
       case TypesPackageImpl.TUPLE_TYPE__OCL_LIBRARY:
         return getOclLibrary();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -582,11 +619,12 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
         setOclLibrary((OclLibrary) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -600,9 +638,9 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
   }
 
   /**
-   * The EMF implementation is adapted to prevent that the name of the <code>TupleType</code> is
-   * serialized to XMI. This is necessary to prevent setting the name upon loading the document
-   * which would throw an exception.
+   * The EMF implementation is adapted to prevent that the name of the
+   * <code>TupleType</code> is serialized to XMI. This is necessary to prevent
+   * setting the name upon loading the document which would throw an exception.
    * 
    * @generated NOT
    * 
@@ -621,6 +659,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
