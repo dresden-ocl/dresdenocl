@@ -360,7 +360,7 @@ public class ModelFactory implements IModelFactory {
   public ExpressionInOcl createExpressionInOcl(String body,
       OclExpression bodyExpression, Variable context, Variable result,
       Variable... parameter) {
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("createExpressionInOcl(bodyExpression=" + bodyExpression //$NON-NLS-1$
           + ", context=" + context + ", result=" + result + ", parameter=" //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
@@ -816,13 +816,13 @@ public class ModelFactory implements IModelFactory {
     propertyCallExp.setSourceType(owningType);
     propertyCallExp.setReferredProperty(property);
 
-    // a property call expression needs access to the OCL library for
-    // determining its type
-    propertyCallExp.setOclLibrary(getOclLibrary());
-
+    // add qualifiers
     if (qualifier != null) {
       propertyCallExp.getQualifier().addAll(Arrays.asList(qualifier));
     }
+
+    // set reference to OCL library
+    propertyCallExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createPropertyCallExp() - exit - return value=" //$NON-NLS-1$
@@ -871,9 +871,12 @@ public class ModelFactory implements IModelFactory {
           "The argument 'stringSymbol' must not be null."); //$NON-NLS-1$
     }
 
-    StringLiteralExp stringLiteralExp = ExpressionsFactory.INSTANCE
-        .createStringLiteralExp();
+    StringLiteralExp stringLiteralExp;
+
+    // create and initialize a new StringLiteralExp
+    stringLiteralExp = ExpressionsFactory.INSTANCE.createStringLiteralExp();
     stringLiteralExp.setStringSymbol(stringSymbol);
+    stringLiteralExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createStringLiteralExp() - exit - return value=" //$NON-NLS-1$
@@ -894,12 +897,17 @@ public class ModelFactory implements IModelFactory {
           + ") - enter"); //$NON-NLS-1$
     }
 
-    TupleLiteralExp tupleLiteralExp = ExpressionsFactory.INSTANCE
-        .createTupleLiteralExp();
+    TupleLiteralExp tupleLiteralExp;
+
+    // create new expression and add parts
+    tupleLiteralExp = ExpressionsFactory.INSTANCE.createTupleLiteralExp();
 
     if (parts != null) {
       tupleLiteralExp.getPart().addAll(Arrays.asList(parts));
     }
+
+    // set reference to OCL library
+    tupleLiteralExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createTupleLiteralExp() - exit - return value=" //$NON-NLS-1$
@@ -910,54 +918,23 @@ public class ModelFactory implements IModelFactory {
 
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createTupleLiteralPart(java.lang.String,
-   *      java.lang.String,
-   *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
+  /**
+   * Creates a new {@link TupleLiteralPart}.
    */
-  public TupleLiteralPart createTupleLiteralPart(String name,
-      List<String> typeName, OclExpression value) throws FactoryException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createTupleLiteralPart(name=" + name + ", typeName=" //$NON-NLS-1$ //$NON-NLS-2$
-          + typeName + ", value=" + value + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+  public TupleLiteralPart createTupleLiteralPart(Variable variableDeclaration) {
+
+    if (variableDeclaration == null) {
+      throw new NullArgumentException("variableDeclaration"); //$NON-NLS-1$
     }
 
-    if (StringUtils.isEmpty(name)) {
-      throw new IllegalArgumentException(
-          "The argument 'name' must not be null or empty."); //$NON-NLS-1$
-    }
+    TupleLiteralPart part;
 
-    Type type = null;
+    // create a new part
+    part = ExpressionsFactory.INSTANCE.createTupleLiteralPart();
 
-    // if a type name has been defined try to find the corresponding type
-    if (typeName != null && typeName.size() > 0) {
-      type = findType(typeName);
-    }
-
-    // if no type is given, we need a value to infer the type (in
-    // TupleLiteralPart.getType)
-    else if (value == null) {
-      throw new IllegalArgumentException(
-          "The value of the TupleLiteralPart must not be null if no type name is provided."); //$NON-NLS-1$
-    }
-
-    TupleLiteralPart part = ExpressionsFactory.INSTANCE
-        .createTupleLiteralPart();
-    part.setName(name);
-
-    if (type != null) {
-      part.setType(type);
-    }
-
-    if (value != null) {
-      part.setValue(value);
-    }
-
-    if (logger.isDebugEnabled()) {
-      logger.debug("createTupleLiteralPart() - exit - return value=" + part); //$NON-NLS-1$
-    }
+    // set the property and the value of the part
+    part.setProperty(variableDeclaration.asProperty());
+    part.setValue(variableDeclaration.getInitExpression());
 
     return part;
   }

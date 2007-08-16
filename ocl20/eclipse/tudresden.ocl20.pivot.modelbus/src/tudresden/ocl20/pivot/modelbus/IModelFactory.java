@@ -69,10 +69,11 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 
 /**
- * This class contains many utility methods to create {@link OclExpression}s and their parts. The
- * signatures of the methods reflect the needs of a primitive string-based script engine, but may
- * not necessarily be suited for a real OCL parser. Thus, this interface may be refactored once an
- * OCL parser for the Pivot Model-based architecture is being built.
+ * This class contains many utility methods to create {@link OclExpression}s
+ * and their parts. The signatures of the methods reflect the needs of a
+ * primitive string-based script engine, but may not necessarily be suited for a
+ * real OCL parser. Thus, this interface may be refactored once an OCL parser
+ * for the Pivot Model-based architecture is being built.
  * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
@@ -80,77 +81,88 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 public interface IModelFactory {
 
   /**
-   * Creates a new {@link Constraint}. The name is optional. but the other parameters need to have
-   * valid values.
+   * Creates a new {@link Constraint}. The name is optional. but the other
+   * parameters need to have valid values.
    * 
    * @param name an optional name for the <code>Constraint</code>
    * @param kind one of the constants defined in {@link ConstraintKind}
-   * @param specification the <code>Expression</code> that specifies the <code>Constraint</code>
+   * @param specification the <code>Expression</code> that specifies the
+   *          <code>Constraint</code>
    * @param constrainedElement at least one element that is the target of the
    *          <code>Constraint</code>
    * 
    * @return a <code>Constraint</code> instance
    */
-  Constraint createConstraint(String name, ConstraintKind kind, Expression specification,
-      ConstrainableElement... constrainedElement);
+  Constraint createConstraint(String name, ConstraintKind kind,
+      Expression specification, ConstrainableElement... constrainedElement);
 
   /**
-   * Creates a new {@link ExpressionInOcl}. The body expression and the context variable must not
-   * be <code>null</code>. The result and parameter variables are optional since they are only
-   * required for constraints whose context is an operation.
+   * Creates a new {@link ExpressionInOcl}. The body expression and the context
+   * variable must not be <code>null</code>. The result and parameter
+   * variables are optional since they are only required for constraints whose
+   * context is an operation.
    * 
-   * @param body the body expression as a <code>String</code> in OCL concrete syntax
-   * @param bodyExpression the <code>OclExpresson</code> that is the body of the
-   *          <code>ExpressonInOcl</code>
-   * @param context the <code>Variable</code> representing the contextual classifier
+   * @param body the body expression as a <code>String</code> in OCL concrete
+   *          syntax
+   * @param bodyExpression the <code>OclExpresson</code> that is the body of
+   *          the <code>ExpressonInOcl</code>
+   * @param context the <code>Variable</code> representing the contextual
+   *          classifier
    * @param result the result variable of an operation constraint
    * @param parameter the parameters of an operation constraint
    * 
    * @return an <code>ExpressionInOcl</code> instance
    */
-  ExpressionInOcl createExpressionInOcl(String body, OclExpression bodyExpression,
-      Variable context, Variable result, Variable... parameter);
+  ExpressionInOcl createExpressionInOcl(String body,
+      OclExpression bodyExpression, Variable context, Variable result,
+      Variable... parameter);
 
   /**
-   * Creates a new {@link Variable}. The name must not be <code>null</code>. Type and init
-   * expression are optional (OCL Specification, Section 9.3). If none is given, however, it is
-   * likely that a {@link WellformednessException} will be thrown at a later time when the type is
-   * requested. If both a type and an init expression are given, this method will not check whether
-   * the type of the init expression conforms to the given type. Instead, this will be checked by
-   * the <code>Variable</code> implementation once the type is accessed for the first time.
+   * Creates a new {@link Variable}. The name must not be <code>null</code>.
+   * Type and init expression are optional (OCL Specification, Section 9.3). If
+   * none is given, however, it is likely that a {@link WellformednessException}
+   * will be thrown at a later time when the type is requested. If both a type
+   * and an init expression are given, this method will not check whether the
+   * type of the init expression conforms to the given type. Instead, this will
+   * be checked by the <code>Variable</code> implementation once the type is
+   * accessed for the first time.
    * 
    * @param name the name of the variable
    * @param typePathName the type of the variable
-   * @param initExpression an (optional) initialization expression
-   * 
-   * @return a <code>Variable</code> instance
-   * 
-   * @throws FactoryException if the variable cannot be created 
-   */
-  Variable createVariable(String name, List<String> typePathName, OclExpression initExpression) throws FactoryException;
-
-  /**
-   * Creates a new {@link Variable} with the same semantics as
-   * {@link #createVariable(String, List, OclExpression)}, but allows to additionally specify a
-   * list of type arguments for the type of the variable. This is required for generic types such as
-   * the collection types from the OCL Standard Library.
-   * 
-   * @param name the name of the variable
-   * @param typePathName the type of the variable
-   * @param typeArguments a list of type names 8each represented as a list of path segments)
    * @param initExpression an (optional) initialization expression
    * 
    * @return a <code>Variable</code> instance
    * 
    * @throws FactoryException if the variable cannot be created
    */
-  Variable createVariable(String name, List<String> typePathName, List<List<String>> typeArguments,
+  Variable createVariable(String name, List<String> typePathName,
       OclExpression initExpression) throws FactoryException;
 
   /**
-   * Creates a new {@link Variable} that represents a {@link Parameter} in an expression that
-   * constrains an {@link Operation}. The name and type of the <code>Variable</code> will be
-   * determined automatically.
+   * Creates a new {@link Variable} with the same semantics as
+   * {@link #createVariable(String, List, OclExpression)}, but allows to
+   * additionally specify a list of type arguments for the type of the variable.
+   * This is required for generic types such as the collection types from the
+   * OCL Standard Library.
+   * 
+   * @param name the name of the variable
+   * @param typePathName the type of the variable
+   * @param typeArguments a list of type names 8each represented as a list of
+   *          path segments)
+   * @param initExpression an (optional) initialization expression
+   * 
+   * @return a <code>Variable</code> instance
+   * 
+   * @throws FactoryException if the variable cannot be created
+   */
+  Variable createVariable(String name, List<String> typePathName,
+      List<List<String>> typeArguments, OclExpression initExpression)
+      throws FactoryException;
+
+  /**
+   * Creates a new {@link Variable} that represents a {@link Parameter} in an
+   * expression that constrains an {@link Operation}. The name and type of the
+   * <code>Variable</code> will be determined automatically.
    * 
    * @param representedParameter the <code>Parameter</code> represented by the
    *          <code>Variable</code>
@@ -166,14 +178,14 @@ public interface IModelFactory {
    * 
    * @return
    */
-  PropertyCallExp createPropertyCallExp(OclExpression source, String referredPropertyName,
-      OclExpression... qualifier);
+  PropertyCallExp createPropertyCallExp(OclExpression source,
+      String referredPropertyName, OclExpression... qualifier);
 
   /**
    * @param referredPropertyPathName
    * @param qualifier
    * @return
-   * @throws FactoryException 
+   * @throws FactoryException
    */
   PropertyCallExp createPropertyCallExp(List<String> referredPropertyPathName,
       OclExpression... qualifier) throws FactoryException;
@@ -185,25 +197,27 @@ public interface IModelFactory {
    * 
    * @return
    */
-  OperationCallExp createOperationCallExp(OclExpression source, String referredOperationName,
-      OclExpression... argument);
+  OperationCallExp createOperationCallExp(OclExpression source,
+      String referredOperationName, OclExpression... argument);
 
   /**
    * Creates a new {@link OperationCallExp} for a static operation. The
-   * <code>referredOperationPathName</code> must not be <code>null</code>, the arguments are
-   * optional. The owning type must exist in the associated {@link IModel model} and the specified
-   * operation must be static.
+   * <code>referredOperationPathName</code> must not be <code>null</code>,
+   * the arguments are optional. The owning type must exist in the associated
+   * {@link IModel model} and the specified operation must be static.
    * 
-   * @param referredOperationPathName the fully qualified name of the operation (i.e., including the
-   *          fully qualified name of its owning <code>Type</code>
+   * @param referredOperationPathName the fully qualified name of the operation
+   *          (i.e., including the fully qualified name of its owning
+   *          <code>Type</code>
    * @param argument an optional list of arguments
    * 
    * @return an <code>OperationCallExp</code> instance
    * 
-   * @throws FactoryException if the expression cannot be created 
+   * @throws FactoryException if the expression cannot be created
    */
-  OperationCallExp createOperationCallExp(List<String> referredOperationPathName,
-      OclExpression... argument) throws FactoryException;
+  OperationCallExp createOperationCallExp(
+      List<String> referredOperationPathName, OclExpression... argument)
+      throws FactoryException;
 
   /**
    * @param source
@@ -213,8 +227,8 @@ public interface IModelFactory {
    * @param iterator
    * @return
    */
-  IterateExp createIterateExp(OclExpression source, OclExpression body, Variable result,
-      Variable... iterator);
+  IterateExp createIterateExp(OclExpression source, OclExpression body,
+      Variable result, Variable... iterator);
 
   /**
    * @param source
@@ -224,8 +238,8 @@ public interface IModelFactory {
    * 
    * @return
    */
-  IteratorExp createIteratorExp(OclExpression source, String name, OclExpression body,
-      Variable... iterator);
+  IteratorExp createIteratorExp(OclExpression source, String name,
+      OclExpression body, Variable... iterator);
 
   /**
    * @param condition
@@ -270,15 +284,16 @@ public interface IModelFactory {
       CollectionLiteralPart... parts);
 
   /**
-   * @param name
-   * @param typePathName
-   * @param value
+   * Creates a new {@link TupleLiteralPart} from a
+   * {@link Variable variable declaration}.
    * 
-   * @return
-   * @throws FactoryException 
+   * @param variableDeclaration the variable declaration for which the tuple
+   *          literal part should be created
+   * 
+   * @return a <code>TupleLiteralPart</code> instance
    */
-  TupleLiteralPart createTupleLiteralPart(String name, List<String> typePathName,
-      OclExpression value) throws FactoryException;
+  TupleLiteralPart createTupleLiteralPart(Variable variableDeclaration)
+      throws FactoryException;
 
   /**
    * @param parts
@@ -338,8 +353,9 @@ public interface IModelFactory {
    * @param referredTypePathName
    * 
    * @return
-   * @throws FactoryException 
+   * @throws FactoryException
    */
-  TypeLiteralExp createTypeLiteralExp(List<String> referredTypePathName) throws FactoryException;
+  TypeLiteralExp createTypeLiteralExp(List<String> referredTypePathName)
+      throws FactoryException;
 
 }
