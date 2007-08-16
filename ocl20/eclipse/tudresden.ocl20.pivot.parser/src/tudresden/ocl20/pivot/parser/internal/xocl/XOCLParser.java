@@ -90,9 +90,11 @@ import tudresden.ocl20.pivot.xocl.CollectionOperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.CollectionRangeXS;
 import tudresden.ocl20.pivot.xocl.ConstraintKindXS;
 import tudresden.ocl20.pivot.xocl.ConstraintXS;
+import tudresden.ocl20.pivot.xocl.EnumLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
 import tudresden.ocl20.pivot.xocl.IntegerLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.InvalidLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.IterateExpXS;
 import tudresden.ocl20.pivot.xocl.IteratorExpXS;
 import tudresden.ocl20.pivot.xocl.LetExpXS;
 import tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS;
@@ -100,6 +102,7 @@ import tudresden.ocl20.pivot.xocl.NamespaceXS;
 import tudresden.ocl20.pivot.xocl.OclExpressionXS;
 import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.PropertyCallExpXS;
+import tudresden.ocl20.pivot.xocl.StringLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.TupleLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.TupleLiteralPartXS;
 import tudresden.ocl20.pivot.xocl.TypeLiteralExpXS;
@@ -300,6 +303,49 @@ public class XOCLParser implements IOclParser {
           .createIntegerLiteralExp(expression.getIntegerSymbol());
     }
 
+    /**
+     * Parses a <code>StringLiteralExpressionXS</code>.
+     */
+    @Override
+    public OclExpression caseStringLiteralExpXS(StringLiteralExpXS expression) {
+      return modelFactory.createStringLiteralExp(expression.getStringSymbol());
+    }
+
+    /**
+     * Parses an <code>EnumLiteralExpXS^</code>.
+     */
+    @Override
+    public OclExpression caseEnumLiteralExpXS(EnumLiteralExpXS expression) {
+      if (logger.isDebugEnabled()) {
+        logger.debug("caseEnumLiteralExpXS(expression=" + expression //$NON-NLS-1$
+            + ") - enter"); //$NON-NLS-1$
+      }
+
+      OclExpression enumLiteralExp;
+
+      try {
+        enumLiteralExp = modelFactory
+            .createEnumLiteralExp(tokenizePathName(expression
+                .getReferredEnumLiteralPathName()));
+      }
+
+      catch (FactoryException e) {
+        logger.error("caseEnumLiteralExpXS(expression=" + expression + ")", e); //$NON-NLS-1$ //$NON-NLS-2$
+
+        throw new ParseRuntimeException(
+            "An error occured when creating the enum literal expression for '" //$NON-NLS-1$
+                + expression.getReferredEnumLiteralPathName() + "'.", e); //$NON-NLS-1$
+
+      }
+
+      if (logger.isDebugEnabled()) {
+        logger.debug("caseEnumLiteralExpXS() - exit - return value=" //$NON-NLS-1$
+            + enumLiteralExp);
+      }
+
+      return enumLiteralExp;
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -353,6 +399,57 @@ public class XOCLParser implements IOclParser {
               .toArray(new CollectionLiteralPart[parts.size()]));
     }
 
+    /**
+     * Helper method to create an OCL abstract syntax {@link CollectionItem}
+     * from an XOCL {@link CollectionItemXS}.
+     */
+    private CollectionLiteralPart createCollectionItem(CollectionItemXS part) {
+      return modelFactory.createCollectionItem(doSwitch(part.getItem()));
+    }
+
+    /**
+     * Helper method to create an OCL abstract syntax {@link CollectionRange}
+     * from an XOCL {@link CollectionRangeXS}.
+     */
+    private CollectionLiteralPart createCollectionRange(CollectionRangeXS part) {
+      return modelFactory.createCollectionRange(doSwitch(part.getFirst()),
+          doSwitch(part.getLast()));
+    }
+
+    /**
+     * Translates a collection kind from XOCL to the OCL abstract syntax
+     * equivalent.
+     */
+    private CollectionKind translateCollectionKind(
+        CollectionKindXS collectionKindXS) {
+      CollectionKind kind;
+
+      switch (collectionKindXS) {
+        case SEQUENCE:
+          kind = CollectionKind.SEQUENCE;
+          break;
+
+        case BAG:
+          kind = CollectionKind.BAG;
+          break;
+
+        case SET:
+          kind = CollectionKind.SET;
+          break;
+
+        case ORDERED_SET:
+          kind = CollectionKind.ORDERED_SET;
+          break;
+
+        default:
+          throw new IllegalArgumentException(
+              "Unknown collection kind '" + collectionKindXS //$NON-NLS-1$
+                  + "' found in XOCL expression."); //$NON-NLS-1$
+      }
+
+      return kind;
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -360,28 +457,94 @@ public class XOCLParser implements IOclParser {
      */
     @Override
     public OclExpression caseTupleLiteralExpXS(TupleLiteralExpXS expression) {
-      List<TupleLiteralPart> parts = new ArrayList<TupleLiteralPart>(expression
-          .getPart().size());
+      List<TupleLiteralPart> parts;
+
+      // parse the tuple literal parts
+      parts = new ArrayList<TupleLiteralPart>(expression.getPart().size());
 
       for (TupleLiteralPartXS partXS : expression.getPart()) {
-        TupleLiteralPart part;
-
-        try {
-          part = modelFactory.createTupleLiteralPart(partXS.getName(),
-              tokenizePathName(partXS.getTypeName()), doSwitch(partXS
-                  .getValue()));
-        }
-
-        catch (FactoryException e) {
-          throw new ParseRuntimeException(
-              "Failed to create a tuple literal expression.", e); //$NON-NLS-1$
-        }
-
-        parts.add(part);
+        parts.add(createTupleLiteralPart(partXS));
       }
 
       return modelFactory.createTupleLiteralExp(parts
-          .toArray(new TupleLiteralPart[0]));
+          .toArray(new TupleLiteralPart[parts.size()]));
+    }
+
+    /**
+     * Helper method to parse a {@link TupleLiteralPartXS}.
+     */
+    protected TupleLiteralPart createTupleLiteralPart(
+        TupleLiteralPartXS tupleLiteralPartXS) {
+
+      if (logger.isDebugEnabled()) {
+        logger.debug("createTupleLiteralPart(tupleLiteralPartXS=" //$NON-NLS-1$
+            + tupleLiteralPartXS + ") - enter"); //$NON-NLS-1$
+      }
+
+      TupleLiteralPart part;
+
+      try {
+        part = modelFactory.createTupleLiteralPart(createVariable(
+            tupleLiteralPartXS.getVariableDeclaration(), this));
+      }
+
+      catch (FactoryException e) {
+        logger.error("createTupleLiteralPart(tupleLiteralPartXS=" //$NON-NLS-1$
+            + tupleLiteralPartXS + ")", e); //$NON-NLS-1$
+
+        throw new ParseRuntimeException(
+            "Failed to create tuple literal part from variable '" //$NON-NLS-1$
+                + tupleLiteralPartXS.getVariableDeclaration().getName() + "'.", //$NON-NLS-1$
+            e);
+
+      }
+
+      if (logger.isDebugEnabled()) {
+        logger.debug("createTupleLiteralPart() - exit - return value=" + part); //$NON-NLS-1$
+      }
+
+      return part;
+
+    }
+
+    /**
+     * Parses an <code>IterateExpXS</code>.
+     */
+    @Override
+    public OclExpression caseIterateExpXS(IterateExpXS expression) {
+      List<Variable> iterator;
+      Variable result;
+      OclExpression source, body;
+
+      // collect iterator variables
+      iterator = new ArrayList<Variable>(expression.getIterator().size());
+
+      for (VariableXS iteratorXS : expression.getIterator()) {
+        Variable iteratorVar = createVariable(iteratorXS, this);
+        iterator.add(iteratorVar);
+
+        // add the iterator variable temporarily to the list of variables
+        // available to the parser
+        variables.put(iteratorXS, iteratorVar);
+      }
+
+      // create the accumulator variable
+      result = createVariable(expression.getResult(), this);
+      variables.put(expression.getResult(), result);
+
+      // parse source and body
+      source = doSwitch(expression.getSource());
+      body = doSwitch(expression.getBody());
+
+      // remove iterator variables and result variable again
+      for (VariableXS iteratorXS : expression.getIterator()) {
+        variables.remove(iteratorXS);
+      }
+
+      variables.remove(expression.getResult());
+
+      return modelFactory.createIterateExp(source, body, result, iterator
+          .toArray(new Variable[iterator.size()]));
     }
 
     /*
@@ -439,58 +602,6 @@ public class XOCLParser implements IOclParser {
         UndefinedLiteralExpXS expression) {
       return modelFactory.createUndefinedLiteralExp();
     }
-
-    /**
-     * Helper method to create an OCL abstract syntax {@link CollectionItem}
-     * from an XOCL {@link CollectionItemXS}.
-     */
-    private CollectionLiteralPart createCollectionItem(CollectionItemXS part) {
-      return modelFactory.createCollectionItem(doSwitch(part.getItem()));
-    }
-
-    /**
-     * Helper method to create an OCL abstract syntax {@link CollectionRange}
-     * from an XOCL {@link CollectionRangeXS}.
-     */
-    private CollectionLiteralPart createCollectionRange(CollectionRangeXS part) {
-      return modelFactory.createCollectionRange(doSwitch(part.getFirst()),
-          doSwitch(part.getLast()));
-    }
-
-    /**
-     * Translates a collection kind from XOCL to the OCL abstract syntax
-     * equivalent.
-     */
-    private CollectionKind translateCollectionKind(
-        CollectionKindXS collectionKindXS) {
-      CollectionKind kind;
-
-      switch (collectionKindXS) {
-        case SEQUENCE:
-          kind = CollectionKind.SEQUENCE;
-          break;
-
-        case BAG:
-          kind = CollectionKind.BAG;
-          break;
-
-        case SET:
-          kind = CollectionKind.SET;
-          break;
-
-        case ORDERED_SET:
-          kind = CollectionKind.ORDERED_SET;
-          break;
-
-        default:
-          throw new IllegalArgumentException(
-              "Unknown collection kind '" + collectionKindXS //$NON-NLS-1$
-                  + "' found in XOCL expression."); //$NON-NLS-1$
-      }
-
-      return kind;
-    }
-
   }
 
   /**
@@ -499,6 +610,11 @@ public class XOCLParser implements IOclParser {
    * XOCLSwitch class.
    */
   protected class ParseRuntimeException extends RuntimeException {
+
+    /**
+     * Logger for this class
+     */
+    private final Logger logger = Logger.getLogger(ParseRuntimeException.class);
 
     // default serial version id
     private static final long serialVersionUID = 1L;
