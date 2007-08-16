@@ -150,7 +150,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
    */
   private static Map<Binding, Type> boundTypes;
 
-
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
@@ -382,6 +381,10 @@ public class TypeImpl extends NamedElementImpl implements Type {
    * @generated NOT
    */
   public Type commonSuperType(Type other) {
+    if (logger.isDebugEnabled()) {
+      logger.debug("commonSuperType(other=" + other + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
     Type commonSuperType;
 
     // by default there is no common supertype
@@ -469,6 +472,11 @@ public class TypeImpl extends NamedElementImpl implements Type {
       }
     }
 
+    if (logger.isDebugEnabled()) {
+      logger.debug("commonSuperType() - exit - return value=" + //$NON-NLS-1$
+          commonSuperType);
+    }
+    
     return commonSuperType;
   }
 
@@ -725,7 +733,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
     return boundType;
   }
-
 
   /**
    * Helper method that lazily creates the map with cached bound types
