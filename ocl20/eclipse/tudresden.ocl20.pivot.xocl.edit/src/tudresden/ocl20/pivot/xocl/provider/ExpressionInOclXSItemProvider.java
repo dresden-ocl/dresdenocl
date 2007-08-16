@@ -60,9 +60,9 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+public class ExpressionInOclXSItemProvider extends ItemProviderAdapter
+    implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -102,13 +102,14 @@ public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implement
   protected void addBodyPropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_ExpressionInOclXS_body_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_ExpressionInOclXS_body_feature","_UI_ExpressionInOclXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_ExpressionInOclXS_body_feature", "_UI_ExpressionInOclXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY, true, false,
+            false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
   }
 
   /**
@@ -119,13 +120,15 @@ public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implement
    */
   protected void addContextPropertyDescriptor(Object object) {
     itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory)
-            .getRootAdapterFactory(),
+        .add(createItemPropertyDescriptor(
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_ExpressionInOclXS_context_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_ExpressionInOclXS_context_feature","_UI_ExpressionInOclXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__CONTEXT,false,false,false,null,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_ExpressionInOclXS_context_feature", "_UI_ExpressionInOclXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__CONTEXT, false, false,
+            false, null, null, null));
   }
 
   /**
@@ -136,13 +139,15 @@ public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implement
    */
   protected void addParameterPropertyDescriptor(Object object) {
     itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory)
-            .getRootAdapterFactory(),
+        .add(createItemPropertyDescriptor(
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_ExpressionInOclXS_parameter_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_ExpressionInOclXS_parameter_feature","_UI_ExpressionInOclXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__PARAMETER,false,false,false,null,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_ExpressionInOclXS_parameter_feature", "_UI_ExpressionInOclXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__PARAMETER, false, false,
+            false, null, null, null));
   }
 
   /**
@@ -153,13 +158,15 @@ public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implement
    */
   protected void addResultPropertyDescriptor(Object object) {
     itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory)
-            .getRootAdapterFactory(),
+        .add(createItemPropertyDescriptor(
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_ExpressionInOclXS_result_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_ExpressionInOclXS_result_feature","_UI_ExpressionInOclXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__RESULT,false,false,false,null,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_ExpressionInOclXS_result_feature", "_UI_ExpressionInOclXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__RESULT, false, false,
+            false, null, null, null));
   }
 
   /**
@@ -171,10 +178,12 @@ public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implement
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
-      childrenFeatures.add(XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION);
+      childrenFeatures
+          .add(XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION);
     }
     return childrenFeatures;
   }
@@ -189,7 +198,7 @@ public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implement
     // Check the type of the specified child object and return the proper feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
@@ -200,7 +209,8 @@ public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implement
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/ExpressionInOclXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/ExpressionInOclXS")); //$NON-NLS-1$
   }
 
   /**
@@ -231,10 +241,12 @@ public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implement
 
     switch (notification.getFeatureID(ExpressionInOclXS.class)) {
       case XOCLPackage.EXPRESSION_IN_OCL_XS__BODY:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), false, true));
         return;
       case XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
@@ -248,92 +260,93 @@ public class ExpressionInOclXSItemProvider extends ItemProviderAdapter implement
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createBooleanLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createCollectionLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createCollectionOperationCallExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createEnumLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createIfExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createIntegerLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createIfExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createIterateExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createInvalidLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createIterateExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createIteratorExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createLetExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createIteratorExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createModelOperationCallExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createLetExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createPropertyCallExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createRealLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createStaticOperationCallExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createStaticPropertyCallExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createStringLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createTupleLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createTypeLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createUndefinedLiteralExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createUnlimitedNaturalExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,XOCLFactory.eINSTANCE
-            .createVariableExpXS()));
+        XOCLPackage.Literals.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+        XOCLFactory.eINSTANCE.createVariableExpXS()));
   }
 
   /**

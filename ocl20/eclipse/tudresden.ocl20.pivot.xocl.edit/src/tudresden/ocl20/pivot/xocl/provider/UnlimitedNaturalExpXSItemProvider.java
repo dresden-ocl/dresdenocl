@@ -57,8 +57,9 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class UnlimitedNaturalExpXSItemProvider extends NumericLiteralExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
+public class UnlimitedNaturalExpXSItemProvider extends
+    NumericLiteralExpXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
     IItemLabelProvider, IItemPropertySource {
 
   /**
@@ -96,13 +97,14 @@ public class UnlimitedNaturalExpXSItemProvider extends NumericLiteralExpXSItemPr
   protected void addSymbolPropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_UnlimitedNaturalExpXS_symbol_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_UnlimitedNaturalExpXS_symbol_feature","_UI_UnlimitedNaturalExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.UNLIMITED_NATURAL_EXP_XS__SYMBOL,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_UnlimitedNaturalExpXS_symbol_feature", "_UI_UnlimitedNaturalExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.UNLIMITED_NATURAL_EXP_XS__SYMBOL, true, false,
+            false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
   }
 
   /**
@@ -113,7 +115,8 @@ public class UnlimitedNaturalExpXSItemProvider extends NumericLiteralExpXSItemPr
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/UnlimitedNaturalExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/UnlimitedNaturalExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -142,7 +145,8 @@ public class UnlimitedNaturalExpXSItemProvider extends NumericLiteralExpXSItemPr
 
     switch (notification.getFeatureID(UnlimitedNaturalExpXS.class)) {
       case XOCLPackage.UNLIMITED_NATURAL_EXP_XS__SYMBOL:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), false, true));
         return;
     }
     super.notifyChanged(notification);
@@ -156,8 +160,9 @@ public class UnlimitedNaturalExpXSItemProvider extends NumericLiteralExpXSItemPr
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**

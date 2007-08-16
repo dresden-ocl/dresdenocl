@@ -58,8 +58,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * @generated
  */
 public class LoopExpXSItemProvider extends CallExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+    IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -95,7 +95,8 @@ public class LoopExpXSItemProvider extends CallExpXSItemProvider implements
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
       childrenFeatures.add(XOCLPackage.Literals.LOOP_EXP_XS__ITERATOR);
@@ -114,7 +115,7 @@ public class LoopExpXSItemProvider extends CallExpXSItemProvider implements
     // Check the type of the specified child object and return the proper feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
@@ -144,7 +145,8 @@ public class LoopExpXSItemProvider extends CallExpXSItemProvider implements
     switch (notification.getFeatureID(LoopExpXS.class)) {
       case XOCLPackage.LOOP_EXP_XS__ITERATOR:
       case XOCLPackage.LOOP_EXP_XS__BODY:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         updateLabel(notification);
         return;
     }
@@ -159,74 +161,97 @@ public class LoopExpXSItemProvider extends CallExpXSItemProvider implements
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__ITERATOR,
-        XOCLFactory.eINSTANCE.createVariableXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__ITERATOR, XOCLFactory.eINSTANCE
+            .createVariableXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createBooleanLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createCollectionLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createCollectionOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createIfExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createEnumLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createIfExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createIterateExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createIntegerLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createIterateExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createIteratorExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createInvalidLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createLetExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createIteratorExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createLetExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createModelOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createRealLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createStaticOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createStaticPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createStringLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createTupleLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createTypeLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createUndefinedLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createUnlimitedNaturalExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.LOOP_EXP_XS__BODY,
-        XOCLFactory.eINSTANCE.createVariableExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.LOOP_EXP_XS__BODY, XOCLFactory.eINSTANCE
+            .createVariableExpXS()));
   }
 
   /**
@@ -245,11 +270,11 @@ public class LoopExpXSItemProvider extends CallExpXSItemProvider implements
         || childFeature == XOCLPackage.Literals.LOOP_EXP_XS__BODY;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**

@@ -52,19 +52,21 @@ import tudresden.ocl20.pivot.xocl.XOCLFactory;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.CollectionRangeXS} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.xocl.CollectionRangeXS} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class CollectionRangeXSItemProvider extends CollectionLiteralPartXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
+public class CollectionRangeXSItemProvider extends
+    CollectionLiteralPartXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This constructs an instance from a factory and a notifier. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public CollectionRangeXSItemProvider(AdapterFactory adapterFactory) {
@@ -72,9 +74,9 @@ public class CollectionRangeXSItemProvider extends CollectionLiteralPartXSItemPr
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the property descriptors for the adapted class. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -87,15 +89,18 @@ public class CollectionRangeXSItemProvider extends CollectionLiteralPartXSItemPr
   }
 
   /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * This specifies how to implement {@link #getChildren} and is used to deduce
+   * an appropriate feature for an
+   * {@link org.eclipse.emf.edit.command.AddCommand},
+   * {@link org.eclipse.emf.edit.command.RemoveCommand} or
    * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
       childrenFeatures.add(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST);
@@ -105,46 +110,64 @@ public class CollectionRangeXSItemProvider extends CollectionLiteralPartXSItemPr
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
   protected EStructuralFeature getChildFeature(Object object, Object child) {
-    // Check the type of the specified child object and return the proper feature to use for
+    // Check the type of the specified child object and return the proper
+    // feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
-   * This returns CollectionRangeXS.gif.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns CollectionRangeXS.gif. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/CollectionRangeXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/CollectionRangeXS")); //$NON-NLS-1$
   }
 
   /**
    * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted to resemble the OCL concrete syntax.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    return getString("_UI_CollectionRangeXS_type"); //$NON-NLS-1$
+    CollectionRangeXS range = (CollectionRangeXS) object;
+
+    StringBuilder label = new StringBuilder();
+
+    label.append(getLabel(range.getFirst()));
+    label.append(".."); //$NON-NLS-1$
+    label.append(getLabel(range.getLast()));
+
+    return label.toString();
   }
 
   /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * This handles model notifications by calling {@link #updateChildren} to
+   * update any cached children and by creating a viewer notification, which it
+   * passes to {@link #fireNotifyChanged}.
+   * 
+   * <p>
+   * Adapted the EMF implementation to update the whole hierarchy if the
+   * collection literal expression changes.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -153,154 +176,200 @@ public class CollectionRangeXSItemProvider extends CollectionLiteralPartXSItemPr
     switch (notification.getFeatureID(CollectionRangeXS.class)) {
       case XOCLPackage.COLLECTION_RANGE_XS__LAST:
       case XOCLPackage.COLLECTION_RANGE_XS__FIRST:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        updateLabel(notification);
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+   * describing the children that can be created under this object. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createBooleanLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createCollectionLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createCollectionOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createIfExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createEnumLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createIfExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createIterateExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createIntegerLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createIterateExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createIteratorExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createInvalidLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createLetExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createIteratorExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createLetExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createModelOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createRealLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createStaticOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createStaticPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createStringLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createTupleLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createTypeLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createUndefinedLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createUnlimitedNaturalExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST,
-        XOCLFactory.eINSTANCE.createVariableExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__LAST, XOCLFactory.eINSTANCE
+            .createVariableExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createBooleanLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createCollectionLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createCollectionOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createIfExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createEnumLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createIfExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createIterateExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createIntegerLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createIterateExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createIteratorExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createInvalidLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createLetExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createIteratorExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createLetExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createModelOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createRealLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createStaticOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createStaticPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createStringLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createTupleLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createTypeLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createUndefinedLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createUnlimitedNaturalExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST,
-        XOCLFactory.eINSTANCE.createVariableExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST, XOCLFactory.eINSTANCE
+            .createVariableExpXS()));
   }
 
   /**
-   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the label text for
+   * {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -313,17 +382,17 @@ public class CollectionRangeXSItemProvider extends CollectionLiteralPartXSItemPr
         || childFeature == XOCLPackage.Literals.COLLECTION_RANGE_XS__FIRST;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Return the resource locator for this item provider's resources. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override

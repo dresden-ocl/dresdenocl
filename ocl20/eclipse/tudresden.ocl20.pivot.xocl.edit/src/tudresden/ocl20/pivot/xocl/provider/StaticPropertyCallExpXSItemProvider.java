@@ -54,8 +54,9 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class StaticPropertyCallExpXSItemProvider extends PropertyCallExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
+public class StaticPropertyCallExpXSItemProvider extends
+    PropertyCallExpXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
     IItemLabelProvider, IItemPropertySource {
 
   /**
@@ -91,7 +92,8 @@ public class StaticPropertyCallExpXSItemProvider extends PropertyCallExpXSItemPr
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/StaticPropertyCallExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/StaticPropertyCallExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -128,8 +130,9 @@ public class StaticPropertyCallExpXSItemProvider extends PropertyCallExpXSItemPr
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**
@@ -148,11 +151,11 @@ public class StaticPropertyCallExpXSItemProvider extends PropertyCallExpXSItemPr
         || childFeature == XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**

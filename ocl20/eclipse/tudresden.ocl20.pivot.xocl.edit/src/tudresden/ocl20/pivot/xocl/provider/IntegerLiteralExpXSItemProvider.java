@@ -56,8 +56,9 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class IntegerLiteralExpXSItemProvider extends NumericLiteralExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
+public class IntegerLiteralExpXSItemProvider extends
+    NumericLiteralExpXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
     IItemLabelProvider, IItemPropertySource {
 
   /**
@@ -95,13 +96,15 @@ public class IntegerLiteralExpXSItemProvider extends NumericLiteralExpXSItemProv
   protected void addIntegerSymbolPropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_IntegerLiteralExpXS_integerSymbol_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_IntegerLiteralExpXS_integerSymbol_feature","_UI_IntegerLiteralExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.INTEGER_LITERAL_EXP_XS__INTEGER_SYMBOL,true,false,false,
-            ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_IntegerLiteralExpXS_integerSymbol_feature", "_UI_IntegerLiteralExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.INTEGER_LITERAL_EXP_XS__INTEGER_SYMBOL, true,
+            false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null,
+            null));
   }
 
   /**
@@ -112,7 +115,8 @@ public class IntegerLiteralExpXSItemProvider extends NumericLiteralExpXSItemProv
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/IntegerLiteralExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/IntegerLiteralExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -155,8 +159,9 @@ public class IntegerLiteralExpXSItemProvider extends NumericLiteralExpXSItemProv
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**

@@ -51,9 +51,9 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class UndefinedLiteralExpXSItemProvider extends LiteralExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+public class UndefinedLiteralExpXSItemProvider extends LiteralExpXSItemProvider
+    implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -88,7 +88,8 @@ public class UndefinedLiteralExpXSItemProvider extends LiteralExpXSItemProvider 
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/UndefinedLiteralExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/UndefinedLiteralExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -123,8 +124,9 @@ public class UndefinedLiteralExpXSItemProvider extends LiteralExpXSItemProvider 
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**

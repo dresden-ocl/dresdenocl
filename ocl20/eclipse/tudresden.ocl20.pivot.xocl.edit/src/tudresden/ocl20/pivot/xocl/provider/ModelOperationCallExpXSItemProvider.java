@@ -55,14 +55,14 @@ import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS} object. <!-- begin-user-doc --> <!--
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS} object.
+ * <!-- begin-user-doc --> <!--
  * end-user-doc -->
- * 
  * @generated
  */
-public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
+public class ModelOperationCallExpXSItemProvider extends
+    OperationCallExpXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
     IItemLabelProvider, IItemPropertySource {
 
   // helper caches with the names of all unary and infix operations
@@ -83,16 +83,16 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
     super(adapterFactory);
 
     // initialize the sets with the predefined OCL library operations
-    unaryOperations.addAll(Arrays.asList("not","-"));
-    infixOperations.addAll(Arrays.asList("+","-","*","/","div","mod","<",">","<=",">=","=","<>",
-        "or","xor","and","implies"));
+    unaryOperations.addAll(Arrays.asList("not", "-"));
+    infixOperations.addAll(Arrays.asList("+", "-", "*", "/", "div", "mod", "<",
+        ">", "<=", ">=", "=", "<>", "or", "xor", "and", "implies"));
 
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -106,31 +106,34 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   }
 
   /**
-   * This adds a property descriptor for the Referred Operation Name feature. <!-- begin-user-doc
+   * This adds a property descriptor for the Referred Operation Name feature.
+   * <!-- begin-user-doc
    * --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected void addReferredOperationNamePropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_ModelOperationCallExpXS_referredOperationName_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_ModelOperationCallExpXS_referredOperationName_feature","_UI_ModelOperationCallExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.MODEL_OPERATION_CALL_EXP_XS__REFERRED_OPERATION_NAME,true,false,
-            false,ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_ModelOperationCallExpXS_referredOperationName_feature", "_UI_ModelOperationCallExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.MODEL_OPERATION_CALL_EXP_XS__REFERRED_OPERATION_NAME,
+            true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+            null, null));
   }
 
   /**
-   * This returns ModelOperationCallExpXS.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This returns ModelOperationCallExpXS.gif.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/ModelOperationCallExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/ModelOperationCallExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -155,7 +158,8 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
    */
   @Override
   protected String getReferredOperationName(OperationCallExpXS operationCallExp) {
-    return ((ModelOperationCallExpXS) operationCallExp).getReferredOperationName();
+    return ((ModelOperationCallExpXS) operationCallExp)
+        .getReferredOperationName();
   }
 
   /**
@@ -177,8 +181,9 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   @Override
   protected boolean isUnary(OperationCallExpXS operationCallExp) {
     return operationCallExp.getArgument().isEmpty()
-        && unaryOperations.contains(((ModelOperationCallExpXS) operationCallExp)
-            .getReferredOperationName());
+        && unaryOperations
+            .contains(((ModelOperationCallExpXS) operationCallExp)
+                .getReferredOperationName());
   }
 
   /**
@@ -190,7 +195,8 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   @Override
   @SuppressWarnings("unused")
   protected boolean isInfix(OperationCallExpXS operationCallExp) {
-    String operationName = ((ModelOperationCallExpXS) operationCallExp).getReferredOperationName();
+    String operationName = ((ModelOperationCallExpXS) operationCallExp)
+        .getReferredOperationName();
     return infixOperations.contains(operationName)
         && !(operationName.equals("-") && operationCallExp.getArgument().size() == 0); //$NON-NLS-1$
   }
@@ -219,14 +225,15 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-   * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**
@@ -245,17 +252,17 @@ public class ModelOperationCallExpXSItemProvider extends OperationCallExpXSItemP
         || childFeature == XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override

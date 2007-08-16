@@ -58,8 +58,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * @generated
  */
 public class IterateExpXSItemProvider extends LoopExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+    IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -95,7 +95,8 @@ public class IterateExpXSItemProvider extends LoopExpXSItemProvider implements
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
       childrenFeatures.add(XOCLPackage.Literals.ITERATE_EXP_XS__RESULT);
@@ -113,7 +114,7 @@ public class IterateExpXSItemProvider extends LoopExpXSItemProvider implements
     // Check the type of the specified child object and return the proper feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
@@ -124,7 +125,8 @@ public class IterateExpXSItemProvider extends LoopExpXSItemProvider implements
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/IterateExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/IterateExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -151,7 +153,8 @@ public class IterateExpXSItemProvider extends LoopExpXSItemProvider implements
 
     switch (notification.getFeatureID(IterateExpXS.class)) {
       case XOCLPackage.ITERATE_EXP_XS__RESULT:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
@@ -165,11 +168,13 @@ public class IterateExpXSItemProvider extends LoopExpXSItemProvider implements
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.ITERATE_EXP_XS__RESULT,
-        XOCLFactory.eINSTANCE.createVariableXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.ITERATE_EXP_XS__RESULT, XOCLFactory.eINSTANCE
+            .createVariableXS()));
   }
 
   /**
@@ -190,11 +195,11 @@ public class IterateExpXSItemProvider extends LoopExpXSItemProvider implements
         || childFeature == XOCLPackage.Literals.ITERATE_EXP_XS__RESULT;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**

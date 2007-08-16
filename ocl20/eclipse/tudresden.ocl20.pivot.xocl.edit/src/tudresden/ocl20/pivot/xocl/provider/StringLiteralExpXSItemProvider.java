@@ -47,25 +47,26 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.xocl.StringLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.StringLiteralExpXS} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.xocl.StringLiteralExpXS} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class StringLiteralExpXSItemProvider extends PrimitiveLiteralExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
+public class StringLiteralExpXSItemProvider extends
+    PrimitiveLiteralExpXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This constructs an instance from a factory and a notifier. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public StringLiteralExpXSItemProvider(AdapterFactory adapterFactory) {
@@ -73,9 +74,9 @@ public class StringLiteralExpXSItemProvider extends PrimitiveLiteralExpXSItemPro
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the property descriptors for the adapted class. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -89,32 +90,35 @@ public class StringLiteralExpXSItemProvider extends PrimitiveLiteralExpXSItemPro
   }
 
   /**
-   * This adds a property descriptor for the String Symbol feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds a property descriptor for the String Symbol feature. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected void addStringSymbolPropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_StringLiteralExpXS_stringSymbol_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_StringLiteralExpXS_stringSymbol_feature","_UI_StringLiteralExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.STRING_LITERAL_EXP_XS__STRING_SYMBOL,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_StringLiteralExpXS_stringSymbol_feature", "_UI_StringLiteralExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.STRING_LITERAL_EXP_XS__STRING_SYMBOL, true,
+            false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
+            null));
   }
 
   /**
-   * This returns StringLiteralExpXS.gif.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns StringLiteralExpXS.gif. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/StringLiteralExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/StringLiteralExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -141,11 +145,16 @@ public class StringLiteralExpXSItemProvider extends PrimitiveLiteralExpXSItemPro
   }
 
   /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * This handles model notifications by calling {@link #updateChildren} to
+   * update any cached children and by creating a viewer notification, which it
+   * passes to {@link #fireNotifyChanged}.
+   * 
+   * <p>
+   * Adapted the EMF implementation to update the whole hierarchy if the
+   * string literal changes.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -153,28 +162,29 @@ public class StringLiteralExpXSItemProvider extends PrimitiveLiteralExpXSItemPro
 
     switch (notification.getFeatureID(StringLiteralExpXS.class)) {
       case XOCLPackage.STRING_LITERAL_EXP_XS__STRING_SYMBOL:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
+        updateLabel(notification);
         return;
     }
     super.notifyChanged(notification);
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+   * describing the children that can be created under this object. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Return the resource locator for this item provider's resources. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override

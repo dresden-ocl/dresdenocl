@@ -58,8 +58,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * @generated
  */
 public class IfExpXSItemProvider extends OclExpressionXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+    IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -95,7 +95,8 @@ public class IfExpXSItemProvider extends OclExpressionXSItemProvider implements
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
       childrenFeatures.add(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION);
@@ -115,7 +116,7 @@ public class IfExpXSItemProvider extends OclExpressionXSItemProvider implements
     // Check the type of the specified child object and return the proper feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
@@ -126,7 +127,8 @@ public class IfExpXSItemProvider extends OclExpressionXSItemProvider implements
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/IfExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/IfExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -155,7 +157,8 @@ public class IfExpXSItemProvider extends OclExpressionXSItemProvider implements
       case XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION:
       case XOCLPackage.IF_EXP_XS__CONDITION:
       case XOCLPackage.IF_EXP_XS__THEN_EXPRESSION:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
@@ -169,197 +172,261 @@ public class IfExpXSItemProvider extends OclExpressionXSItemProvider implements
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createBooleanLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createCollectionLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createCollectionOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createIfExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createEnumLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createIfExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createIterateExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createIntegerLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createIterateExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createIteratorExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createInvalidLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createLetExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createIteratorExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createLetExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createModelOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createRealLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createStaticOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createStaticPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createStringLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createTupleLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createTypeLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createUndefinedLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createUnlimitedNaturalExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION,
-        XOCLFactory.eINSTANCE.createVariableExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__ELSE_EXPRESSION, XOCLFactory.eINSTANCE
+            .createVariableExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createBooleanLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createCollectionLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createCollectionOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createIfExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createEnumLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createIfExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createIterateExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createIntegerLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createIterateExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createIteratorExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createInvalidLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createLetExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createIteratorExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createLetExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createModelOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createRealLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createStaticOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createStaticPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createStringLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createTupleLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createTypeLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createUndefinedLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createUnlimitedNaturalExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__CONDITION,
-        XOCLFactory.eINSTANCE.createVariableExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__CONDITION, XOCLFactory.eINSTANCE
+            .createVariableExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createBooleanLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createCollectionLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createCollectionOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createIfExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createEnumLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createIfExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createIterateExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createIntegerLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createIterateExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createIteratorExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createInvalidLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createLetExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createIteratorExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createLetExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createModelOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createRealLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createStaticOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createStaticPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createStringLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createTupleLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createTypeLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createUndefinedLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createUnlimitedNaturalExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION,
-        XOCLFactory.eINSTANCE.createVariableExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION, XOCLFactory.eINSTANCE
+            .createVariableExpXS()));
   }
 
   /**
@@ -379,11 +446,11 @@ public class IfExpXSItemProvider extends OclExpressionXSItemProvider implements
         || childFeature == XOCLPackage.Literals.IF_EXP_XS__THEN_EXPRESSION;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**

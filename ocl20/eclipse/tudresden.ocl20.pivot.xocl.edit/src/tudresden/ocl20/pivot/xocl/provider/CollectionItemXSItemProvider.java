@@ -52,19 +52,21 @@ import tudresden.ocl20.pivot.xocl.XOCLFactory;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.CollectionItemXS} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.xocl.CollectionItemXS} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class CollectionItemXSItemProvider extends CollectionLiteralPartXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
+public class CollectionItemXSItemProvider extends
+    CollectionLiteralPartXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
     IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This constructs an instance from a factory and a notifier. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public CollectionItemXSItemProvider(AdapterFactory adapterFactory) {
@@ -72,9 +74,9 @@ public class CollectionItemXSItemProvider extends CollectionLiteralPartXSItemPro
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the property descriptors for the adapted class. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -87,15 +89,18 @@ public class CollectionItemXSItemProvider extends CollectionLiteralPartXSItemPro
   }
 
   /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * This specifies how to implement {@link #getChildren} and is used to deduce
+   * an appropriate feature for an
+   * {@link org.eclipse.emf.edit.command.AddCommand},
+   * {@link org.eclipse.emf.edit.command.RemoveCommand} or
    * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
       childrenFeatures.add(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM);
@@ -104,27 +109,29 @@ public class CollectionItemXSItemProvider extends CollectionLiteralPartXSItemPro
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
   protected EStructuralFeature getChildFeature(Object object, Object child) {
-    // Check the type of the specified child object and return the proper feature to use for
+    // Check the type of the specified child object and return the proper
+    // feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
-   * This returns CollectionItemXS.gif.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns CollectionItemXS.gif. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/CollectionItemXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/CollectionItemXS")); //$NON-NLS-1$
   }
 
   /**
@@ -138,11 +145,16 @@ public class CollectionItemXSItemProvider extends CollectionLiteralPartXSItemPro
   }
 
   /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * This handles model notifications by calling {@link #updateChildren} to
+   * update any cached children and by creating a viewer notification, which it
+   * passes to {@link #fireNotifyChanged}.
+   * 
+   * <p>
+   * Adapted the EMF implementation to update the whole hierarchy if the
+   * collection literal expression changes.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -150,91 +162,115 @@ public class CollectionItemXSItemProvider extends CollectionLiteralPartXSItemPro
 
     switch (notification.getFeatureID(CollectionItemXS.class)) {
       case XOCLPackage.COLLECTION_ITEM_XS__ITEM:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        updateLabel(notification);
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+   * describing the children that can be created under this object. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createBooleanLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createCollectionLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createCollectionOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createIfExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createEnumLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createIfExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createIterateExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createIntegerLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createIterateExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createIteratorExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createInvalidLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createLetExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createIteratorExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createLetExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createModelOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createRealLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createStaticOperationCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createStaticPropertyCallExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createStringLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createTupleLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createTypeLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createUndefinedLiteralExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createUnlimitedNaturalExpXS()));
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM,
-        XOCLFactory.eINSTANCE.createVariableExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.COLLECTION_ITEM_XS__ITEM, XOCLFactory.eINSTANCE
+            .createVariableExpXS()));
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Return the resource locator for this item provider's resources. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override

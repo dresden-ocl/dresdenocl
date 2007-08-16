@@ -54,20 +54,20 @@ import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.xocl.CollectionOperationCallExpXS} object. <!-- begin-user-doc -->
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.CollectionOperationCallExpXS} object.
+ * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
-public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXSItemProvider
-    implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class CollectionOperationCallExpXSItemProvider extends
+    OperationCallExpXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
+    IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public CollectionOperationCallExpXSItemProvider(AdapterFactory adapterFactory) {
@@ -75,9 +75,9 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -99,23 +99,25 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
   protected void addReferredCollectionOperationPropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_CollectionOperationCallExpXS_referredCollectionOperation_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_CollectionOperationCallExpXS_referredCollectionOperation_feature","_UI_CollectionOperationCallExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                "_UI_PropertyDescriptor_description", "_UI_CollectionOperationCallExpXS_referredCollectionOperation_feature", "_UI_CollectionOperationCallExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             XOCLPackage.Literals.COLLECTION_OPERATION_CALL_EXP_XS__REFERRED_COLLECTION_OPERATION,
-            true,false,false,ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+            true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+            null, null));
   }
 
   /**
-   * This returns CollectionOperationCallExpXS.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This returns CollectionOperationCallExpXS.gif.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage(
+    return overlayImage(object, getResourceLocator().getImage(
         "full/obj16/CollectionOperationCallExpXS")); //$NON-NLS-1$
   }
 
@@ -165,7 +167,8 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
   @Override
   protected boolean isInfix(OperationCallExpXS operationCallExp) {
 
-    switch (((CollectionOperationCallExpXS) operationCallExp).getReferredCollectionOperation()) {
+    switch (((CollectionOperationCallExpXS) operationCallExp)
+        .getReferredCollectionOperation()) {
       case EQUALS:
       case EQUALS_NOT:
       case MINUS:
@@ -188,12 +191,10 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
     return operation != null ? operation.toString() : null;
   }
 
-
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -202,21 +203,23 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
 
     switch (notification.getFeatureID(CollectionOperationCallExpXS.class)) {
       case XOCLPackage.COLLECTION_OPERATION_CALL_EXP_XS__REFERRED_COLLECTION_OPERATION:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), false, true));
         return;
     }
     super.notifyChanged(notification);
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-   * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**
@@ -235,17 +238,17 @@ public class CollectionOperationCallExpXSItemProvider extends OperationCallExpXS
         || childFeature == XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override

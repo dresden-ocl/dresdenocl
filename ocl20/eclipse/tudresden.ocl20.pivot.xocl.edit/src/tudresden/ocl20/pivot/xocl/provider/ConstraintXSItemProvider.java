@@ -61,8 +61,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * @generated
  */
 public class ConstraintXSItemProvider extends ItemProviderAdapter implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+    IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -102,13 +102,14 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
   protected void addNamePropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_ConstraintXS_name_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_ConstraintXS_name_feature","_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.CONSTRAINT_XS__NAME,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_ConstraintXS_name_feature", "_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.CONSTRAINT_XS__NAME, true, false, false,
+            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
   }
 
   /**
@@ -120,13 +121,14 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
   protected void addKindPropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_ConstraintXS_kind_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_ConstraintXS_kind_feature","_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.CONSTRAINT_XS__KIND,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_ConstraintXS_kind_feature", "_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.CONSTRAINT_XS__KIND, true, false, false,
+            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
   }
 
   /**
@@ -138,13 +140,15 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
   protected void addConstrainedElementPropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_ConstraintXS_constrainedElement_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_ConstraintXS_constrainedElement_feature","_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.CONSTRAINT_XS__CONSTRAINED_ELEMENT,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_ConstraintXS_constrainedElement_feature", "_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.CONSTRAINT_XS__CONSTRAINED_ELEMENT, true,
+            false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
+            null));
   }
 
   /**
@@ -156,13 +160,14 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
   protected void addDefinedFeaturePropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_ConstraintXS_definedFeature_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_ConstraintXS_definedFeature_feature","_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.CONSTRAINT_XS__DEFINED_FEATURE,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_ConstraintXS_definedFeature_feature", "_UI_ConstraintXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.CONSTRAINT_XS__DEFINED_FEATURE, true, false,
+            false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
   }
 
   /**
@@ -175,7 +180,8 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
       childrenFeatures.add(XOCLPackage.Literals.CONSTRAINT_XS__SPECIFICATION);
@@ -192,7 +198,7 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
     // Check the type of the specified child object and return the proper feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
@@ -202,7 +208,8 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/ConstraintXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/ConstraintXS")); //$NON-NLS-1$
   }
 
   /**
@@ -285,10 +292,12 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
       case XOCLPackage.CONSTRAINT_XS__KIND:
       case XOCLPackage.CONSTRAINT_XS__CONSTRAINED_ELEMENT:
       case XOCLPackage.CONSTRAINT_XS__DEFINED_FEATURE:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), false, true));
         return;
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
@@ -302,10 +311,12 @@ public class ConstraintXSItemProvider extends ItemProviderAdapter implements
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.CONSTRAINT_XS__SPECIFICATION,
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.CONSTRAINT_XS__SPECIFICATION,
         XOCLFactory.eINSTANCE.createExpressionInOclXS()));
   }
 

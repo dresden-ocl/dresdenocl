@@ -56,9 +56,9 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeLiteralExpXSItemProvider extends LiteralExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+public class TypeLiteralExpXSItemProvider extends LiteralExpXSItemProvider
+    implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -95,13 +95,15 @@ public class TypeLiteralExpXSItemProvider extends LiteralExpXSItemProvider imple
   protected void addReferredTypeNamePropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_TypeLiteralExpXS_referredTypeName_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_TypeLiteralExpXS_referredTypeName_feature","_UI_TypeLiteralExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.TYPE_LITERAL_EXP_XS__REFERRED_TYPE_NAME,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_TypeLiteralExpXS_referredTypeName_feature", "_UI_TypeLiteralExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.TYPE_LITERAL_EXP_XS__REFERRED_TYPE_NAME, true,
+            false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
+            null));
   }
 
   /**
@@ -112,7 +114,8 @@ public class TypeLiteralExpXSItemProvider extends LiteralExpXSItemProvider imple
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/TypeLiteralExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/TypeLiteralExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -159,8 +162,9 @@ public class TypeLiteralExpXSItemProvider extends LiteralExpXSItemProvider imple
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**

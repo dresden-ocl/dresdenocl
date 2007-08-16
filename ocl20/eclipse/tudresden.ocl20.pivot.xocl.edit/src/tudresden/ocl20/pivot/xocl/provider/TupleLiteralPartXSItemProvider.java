@@ -39,15 +39,12 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.xocl.TupleLiteralPartXS;
@@ -55,19 +52,20 @@ import tudresden.ocl20.pivot.xocl.XOCLFactory;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class TupleLiteralPartXSItemProvider extends ItemProviderAdapter implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+public class TupleLiteralPartXSItemProvider extends ElementXSItemProvider
+    implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This constructs an instance from a factory and a notifier. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public TupleLiteralPartXSItemProvider(AdapterFactory adapterFactory) {
@@ -75,9 +73,9 @@ public class TupleLiteralPartXSItemProvider extends ItemProviderAdapter implemen
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the property descriptors for the adapted class. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -85,204 +83,120 @@ public class TupleLiteralPartXSItemProvider extends ItemProviderAdapter implemen
     if (itemPropertyDescriptors == null) {
       super.getPropertyDescriptors(object);
 
-      addNamePropertyDescriptor(object);
-      addTypeNamePropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
   }
 
   /**
-   * This adds a property descriptor for the Name feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void addNamePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_TupleLiteralPartXS_name_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_TupleLiteralPartXS_name_feature","_UI_TupleLiteralPartXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__NAME,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
-  }
-
-  /**
-   * This adds a property descriptor for the Type Name feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void addTypeNamePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_TupleLiteralPartXS_typeName_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_TupleLiteralPartXS_typeName_feature","_UI_TupleLiteralPartXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__TYPE_NAME,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
-  }
-
-  /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * This specifies how to implement {@link #getChildren} and is used to deduce
+   * an appropriate feature for an
+   * {@link org.eclipse.emf.edit.command.AddCommand},
+   * {@link org.eclipse.emf.edit.command.RemoveCommand} or
    * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
-      childrenFeatures.add(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE);
+      childrenFeatures
+          .add(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION);
     }
     return childrenFeatures;
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
   protected EStructuralFeature getChildFeature(Object object, Object child) {
-    // Check the type of the specified child object and return the proper feature to use for
+    // Check the type of the specified child object and return the proper
+    // feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
-   * This returns TupleLiteralPartXS.gif.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns TupleLiteralPartXS.gif. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/TupleLiteralPartXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/TupleLiteralPartXS")); //$NON-NLS-1$
   }
 
   /**
    * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted the EMF implementation to resemble the OCL concrete syntax. </p
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    String label = ((TupleLiteralPartXS) object).getName();
-    return label == null || label.length() == 0 ? getString("_UI_TupleLiteralPartXS_type") : //$NON-NLS-1$
-        getString("_UI_TupleLiteralPartXS_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+    TupleLiteralPartXS part = (TupleLiteralPartXS) object;
+
+    return part.getVariableDeclaration() != null ? getLabel(part
+        .getVariableDeclaration()) : getString("_UI_TupleLiteralPartXS_type"); //$NON-NLS-1$
   }
 
   /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * This handles model notifications by calling {@link #updateChildren} to
+   * update any cached children and by creating a viewer notification, which it
+   * passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+   * 
+   * <p>
+   * Adapted the EMF implementation to update the whole hierarchy if the
+   * variable declaration changes.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
     updateChildren(notification);
 
     switch (notification.getFeatureID(TupleLiteralPartXS.class)) {
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__NAME:
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__TYPE_NAME:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
-        return;
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+      case XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION:
+        updateLabel(notification);
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+   * describing the children that can be created under this object. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createIfExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createIterateExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createIteratorExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createLetExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
-
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VALUE,
-        XOCLFactory.eINSTANCE.createVariableExpXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION,
+        XOCLFactory.eINSTANCE.createVariableXS()));
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Return the resource locator for this item provider's resources. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override

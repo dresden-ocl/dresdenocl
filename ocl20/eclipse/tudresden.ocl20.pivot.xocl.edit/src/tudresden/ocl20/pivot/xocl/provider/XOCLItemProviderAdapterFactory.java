@@ -61,8 +61,8 @@ import tudresden.ocl20.pivot.xocl.util.XOCLAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implements
-    ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory
+    implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 
   /**
    * This keeps track of the root adapter factory that delegates to this adapter factory.
@@ -211,7 +211,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createBooleanLiteralExpXSAdapter() {
     if (booleanLiteralExpXSItemProvider == null) {
-      booleanLiteralExpXSItemProvider = new BooleanLiteralExpXSItemProvider(this);
+      booleanLiteralExpXSItemProvider = new BooleanLiteralExpXSItemProvider(
+          this);
     }
 
     return booleanLiteralExpXSItemProvider;
@@ -257,7 +258,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createCollectionLiteralExpXSAdapter() {
     if (collectionLiteralExpXSItemProvider == null) {
-      collectionLiteralExpXSItemProvider = new CollectionLiteralExpXSItemProvider(this);
+      collectionLiteralExpXSItemProvider = new CollectionLiteralExpXSItemProvider(
+          this);
     }
 
     return collectionLiteralExpXSItemProvider;
@@ -349,7 +351,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createIntegerLiteralExpXSAdapter() {
     if (integerLiteralExpXSItemProvider == null) {
-      integerLiteralExpXSItemProvider = new IntegerLiteralExpXSItemProvider(this);
+      integerLiteralExpXSItemProvider = new IntegerLiteralExpXSItemProvider(
+          this);
     }
 
     return integerLiteralExpXSItemProvider;
@@ -395,7 +398,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createInvalidLiteralExpXSAdapter() {
     if (invalidLiteralExpXSItemProvider == null) {
-      invalidLiteralExpXSItemProvider = new InvalidLiteralExpXSItemProvider(this);
+      invalidLiteralExpXSItemProvider = new InvalidLiteralExpXSItemProvider(
+          this);
     }
 
     return invalidLiteralExpXSItemProvider;
@@ -579,7 +583,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createUndefinedLiteralExpXSAdapter() {
     if (undefinedLiteralExpXSItemProvider == null) {
-      undefinedLiteralExpXSItemProvider = new UndefinedLiteralExpXSItemProvider(this);
+      undefinedLiteralExpXSItemProvider = new UndefinedLiteralExpXSItemProvider(
+          this);
     }
 
     return undefinedLiteralExpXSItemProvider;
@@ -602,7 +607,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createUnlimitedNaturalExpXSAdapter() {
     if (unlimitedNaturalExpXSItemProvider == null) {
-      unlimitedNaturalExpXSItemProvider = new UnlimitedNaturalExpXSItemProvider(this);
+      unlimitedNaturalExpXSItemProvider = new UnlimitedNaturalExpXSItemProvider(
+          this);
     }
 
     return unlimitedNaturalExpXSItemProvider;
@@ -648,7 +654,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createStaticPropertyCallExpXSAdapter() {
     if (staticPropertyCallExpXSItemProvider == null) {
-      staticPropertyCallExpXSItemProvider = new StaticPropertyCallExpXSItemProvider(this);
+      staticPropertyCallExpXSItemProvider = new StaticPropertyCallExpXSItemProvider(
+          this);
     }
 
     return staticPropertyCallExpXSItemProvider;
@@ -671,7 +678,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createStaticOperationCallExpXSAdapter() {
     if (staticOperationCallExpXSItemProvider == null) {
-      staticOperationCallExpXSItemProvider = new StaticOperationCallExpXSItemProvider(this);
+      staticOperationCallExpXSItemProvider = new StaticOperationCallExpXSItemProvider(
+          this);
     }
 
     return staticOperationCallExpXSItemProvider;
@@ -717,7 +725,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createModelOperationCallExpXSAdapter() {
     if (modelOperationCallExpXSItemProvider == null) {
-      modelOperationCallExpXSItemProvider = new ModelOperationCallExpXSItemProvider(this);
+      modelOperationCallExpXSItemProvider = new ModelOperationCallExpXSItemProvider(
+          this);
     }
 
     return modelOperationCallExpXSItemProvider;
@@ -740,7 +749,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Adapter createCollectionOperationCallExpXSAdapter() {
     if (collectionOperationCallExpXSItemProvider == null) {
-      collectionOperationCallExpXSItemProvider = new CollectionOperationCallExpXSItemProvider(this);
+      collectionOperationCallExpXSItemProvider = new CollectionOperationCallExpXSItemProvider(
+          this);
     }
 
     return collectionOperationCallExpXSItemProvider;
@@ -753,7 +763,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
    * @generated
    */
   public ComposeableAdapterFactory getRootAdapterFactory() {
-    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+    return parentAdapterFactory == null ? this : parentAdapterFactory
+        .getRootAdapterFactory();
   }
 
   /**
@@ -762,7 +773,8 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
+  public void setParentAdapterFactory(
+      ComposedAdapterFactory parentAdapterFactory) {
     this.parentAdapterFactory = parentAdapterFactory;
   }
 
@@ -784,7 +796,7 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
    */
   @Override
   public Adapter adapt(Notifier notifier, Object type) {
-    return super.adapt(notifier,this);
+    return super.adapt(notifier, this);
   }
 
   /**
@@ -795,7 +807,7 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
   @Override
   public Object adapt(Object object, Object type) {
     if (isFactoryForType(type)) {
-      Object adapter = super.adapt(object,type);
+      Object adapter = super.adapt(object, type);
       if (!(type instanceof Class) || (((Class<?>) type).isInstance(adapter))) {
         return adapter;
       }
@@ -846,34 +858,52 @@ public class XOCLItemProviderAdapterFactory extends XOCLAdapterFactory implement
    */
   public void dispose() {
     if (constraintXSItemProvider != null) constraintXSItemProvider.dispose();
-    if (expressionInOclXSItemProvider != null) expressionInOclXSItemProvider.dispose();
+    if (expressionInOclXSItemProvider != null)
+      expressionInOclXSItemProvider.dispose();
     if (variableXSItemProvider != null) variableXSItemProvider.dispose();
-    if (propertyCallExpXSItemProvider != null) propertyCallExpXSItemProvider.dispose();
-    if (booleanLiteralExpXSItemProvider != null) booleanLiteralExpXSItemProvider.dispose();
-    if (collectionItemXSItemProvider != null) collectionItemXSItemProvider.dispose();
-    if (collectionLiteralExpXSItemProvider != null) collectionLiteralExpXSItemProvider.dispose();
+    if (propertyCallExpXSItemProvider != null)
+      propertyCallExpXSItemProvider.dispose();
+    if (booleanLiteralExpXSItemProvider != null)
+      booleanLiteralExpXSItemProvider.dispose();
+    if (collectionItemXSItemProvider != null)
+      collectionItemXSItemProvider.dispose();
+    if (collectionLiteralExpXSItemProvider != null)
+      collectionLiteralExpXSItemProvider.dispose();
     if (collectionOperationCallExpXSItemProvider != null)
       collectionOperationCallExpXSItemProvider.dispose();
-    if (collectionRangeXSItemProvider != null) collectionRangeXSItemProvider.dispose();
-    if (enumLiteralExpXSItemProvider != null) enumLiteralExpXSItemProvider.dispose();
+    if (collectionRangeXSItemProvider != null)
+      collectionRangeXSItemProvider.dispose();
+    if (enumLiteralExpXSItemProvider != null)
+      enumLiteralExpXSItemProvider.dispose();
     if (ifExpXSItemProvider != null) ifExpXSItemProvider.dispose();
-    if (integerLiteralExpXSItemProvider != null) integerLiteralExpXSItemProvider.dispose();
+    if (integerLiteralExpXSItemProvider != null)
+      integerLiteralExpXSItemProvider.dispose();
     if (iterateExpXSItemProvider != null) iterateExpXSItemProvider.dispose();
-    if (invalidLiteralExpXSItemProvider != null) invalidLiteralExpXSItemProvider.dispose();
+    if (invalidLiteralExpXSItemProvider != null)
+      invalidLiteralExpXSItemProvider.dispose();
     if (iteratorExpXSItemProvider != null) iteratorExpXSItemProvider.dispose();
     if (letExpXSItemProvider != null) letExpXSItemProvider.dispose();
-    if (modelOperationCallExpXSItemProvider != null) modelOperationCallExpXSItemProvider.dispose();
+    if (modelOperationCallExpXSItemProvider != null)
+      modelOperationCallExpXSItemProvider.dispose();
     if (namespaceXSItemProvider != null) namespaceXSItemProvider.dispose();
-    if (realLiteralExpXSItemProvider != null) realLiteralExpXSItemProvider.dispose();
+    if (realLiteralExpXSItemProvider != null)
+      realLiteralExpXSItemProvider.dispose();
     if (staticOperationCallExpXSItemProvider != null)
       staticOperationCallExpXSItemProvider.dispose();
-    if (staticPropertyCallExpXSItemProvider != null) staticPropertyCallExpXSItemProvider.dispose();
-    if (stringLiteralExpXSItemProvider != null) stringLiteralExpXSItemProvider.dispose();
-    if (tupleLiteralExpXSItemProvider != null) tupleLiteralExpXSItemProvider.dispose();
-    if (tupleLiteralPartXSItemProvider != null) tupleLiteralPartXSItemProvider.dispose();
-    if (typeLiteralExpXSItemProvider != null) typeLiteralExpXSItemProvider.dispose();
-    if (undefinedLiteralExpXSItemProvider != null) undefinedLiteralExpXSItemProvider.dispose();
-    if (unlimitedNaturalExpXSItemProvider != null) unlimitedNaturalExpXSItemProvider.dispose();
+    if (staticPropertyCallExpXSItemProvider != null)
+      staticPropertyCallExpXSItemProvider.dispose();
+    if (stringLiteralExpXSItemProvider != null)
+      stringLiteralExpXSItemProvider.dispose();
+    if (tupleLiteralExpXSItemProvider != null)
+      tupleLiteralExpXSItemProvider.dispose();
+    if (tupleLiteralPartXSItemProvider != null)
+      tupleLiteralPartXSItemProvider.dispose();
+    if (typeLiteralExpXSItemProvider != null)
+      typeLiteralExpXSItemProvider.dispose();
+    if (undefinedLiteralExpXSItemProvider != null)
+      undefinedLiteralExpXSItemProvider.dispose();
+    if (unlimitedNaturalExpXSItemProvider != null)
+      unlimitedNaturalExpXSItemProvider.dispose();
     if (variableExpXSItemProvider != null) variableExpXSItemProvider.dispose();
   }
 

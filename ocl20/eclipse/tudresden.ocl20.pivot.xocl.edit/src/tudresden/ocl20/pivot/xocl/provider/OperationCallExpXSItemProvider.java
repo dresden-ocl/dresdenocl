@@ -64,8 +64,9 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * 
  * @generated NOT
  */
-public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
+public abstract class OperationCallExpXSItemProvider extends
+    FeatureCallExpXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
     IItemLabelProvider, IItemPropertySource {
 
   /**
@@ -103,10 +104,12 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
-      childrenFeatures.add(XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT);
+      childrenFeatures
+          .add(XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT);
     }
     return childrenFeatures;
   }
@@ -121,7 +124,7 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
     // Check the type of the specified child object and return the proper feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
@@ -131,7 +134,8 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/OperationCallExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/OperationCallExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -175,7 +179,7 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
         if (operationCallExp.getArgument().size() == 1) {
           label.append(getLabel(operationCallExp.getArgument().get(0)));
         }
-        
+
         else {
           label.append(UNDEFINED);
         }
@@ -184,14 +188,17 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
       else {
 
         // append the source label, the operation delimiter and the operation name
-        label.append(sourceLabel).append(getOperationDelimiter()).append(referredOperation);
+        label.append(sourceLabel).append(getOperationDelimiter()).append(
+            referredOperation);
 
         // append the parameters
         label.append('(');
 
-        for (Iterator<OclExpressionXS> it = operationCallExp.getArgument().iterator(); it.hasNext();) {
+        for (Iterator<OclExpressionXS> it = operationCallExp.getArgument()
+            .iterator(); it.hasNext();) {
           String argumentValue = getLabel(it.next());
-          label.append(StringUtils.isNotEmpty(argumentValue) ? argumentValue : UNDEFINED);
+          label.append(StringUtils.isNotEmpty(argumentValue) ? argumentValue
+              : UNDEFINED);
 
           if (it.hasNext()) {
             label.append(',');
@@ -210,7 +217,8 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
    * Helper method used by the template method {@link #getText(Object)}. Subclasses should return
    * the name of the operation here.
    */
-  protected abstract String getReferredOperationName(OperationCallExpXS operationCallExp);
+  protected abstract String getReferredOperationName(
+      OperationCallExpXS operationCallExp);
 
   /**
    * Helper method used by the template method {@link #getText(Object)}. Returns the delimiter used
@@ -246,7 +254,8 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
 
     switch (notification.getFeatureID(OperationCallExpXS.class)) {
       case XOCLPackage.OPERATION_CALL_EXP_XS__ARGUMENT:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         updateLabel(notification);
         return;
     }
@@ -260,92 +269,93 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createBooleanLiteralExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createCollectionLiteralExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createCollectionOperationCallExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createEnumLiteralExpXS()));
-
-    newChildDescriptors
-        .add(createChildParameter(XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
-            XOCLFactory.eINSTANCE.createIfExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createIntegerLiteralExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createIfExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createIterateExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createInvalidLiteralExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createIterateExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createIteratorExpXS()));
-
-    newChildDescriptors
-        .add(createChildParameter(XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
-            XOCLFactory.eINSTANCE.createLetExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createModelOperationCallExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createIteratorExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createPropertyCallExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createLetExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createRealLiteralExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createStaticOperationCallExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createStaticPropertyCallExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createStringLiteralExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createTupleLiteralExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createTypeLiteralExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createUndefinedLiteralExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createUnlimitedNaturalExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,XOCLFactory.eINSTANCE
-            .createVariableExpXS()));
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
+
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
+
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT,
+        XOCLFactory.eINSTANCE.createVariableExpXS()));
   }
 
   /**
@@ -364,11 +374,11 @@ public abstract class OperationCallExpXSItemProvider extends FeatureCallExpXSIte
         || childFeature == XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**

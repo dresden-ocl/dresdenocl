@@ -53,9 +53,10 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * end-user-doc -->
  * @generated
  */
-public class StaticOperationCallExpXSItemProvider extends ModelOperationCallExpXSItemProvider
-    implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class StaticOperationCallExpXSItemProvider extends
+    ModelOperationCallExpXSItemProvider implements IEditingDomainItemProvider,
+    IStructuredItemContentProvider, ITreeItemContentProvider,
+    IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -89,7 +90,8 @@ public class StaticOperationCallExpXSItemProvider extends ModelOperationCallExpX
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/StaticOperationCallExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/StaticOperationCallExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -106,7 +108,6 @@ public class StaticOperationCallExpXSItemProvider extends ModelOperationCallExpX
   public String getText(Object object) {
     return super.getText(object);
   }
-
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -132,8 +133,9 @@ public class StaticOperationCallExpXSItemProvider extends ModelOperationCallExpX
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**
@@ -152,11 +154,11 @@ public class StaticOperationCallExpXSItemProvider extends ModelOperationCallExpX
         || childFeature == XOCLPackage.Literals.OPERATION_CALL_EXP_XS__ARGUMENT;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**

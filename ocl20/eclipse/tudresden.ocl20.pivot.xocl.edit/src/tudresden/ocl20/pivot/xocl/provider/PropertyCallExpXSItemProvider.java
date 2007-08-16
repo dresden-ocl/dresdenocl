@@ -56,19 +56,18 @@ import tudresden.ocl20.pivot.xocl.XOCLFactory;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.PropertyCallExpXS}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.PropertyCallExpXS} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider
+    implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   public PropertyCallExpXSItemProvider(AdapterFactory adapterFactory) {
@@ -76,9 +75,9 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -92,21 +91,23 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * This adds a property descriptor for the Referred Property Name feature. <!-- begin-user-doc -->
+   * This adds a property descriptor for the Referred Property Name feature.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected void addReferredPropertyNamePropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_PropertyCallExpXS_referredPropertyName_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_PropertyCallExpXS_referredPropertyName_feature","_UI_PropertyCallExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__REFERRED_PROPERTY_NAME,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_PropertyCallExpXS_referredPropertyName_feature", "_UI_PropertyCallExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__REFERRED_PROPERTY_NAME,
+            true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+            null, null));
   }
 
   /**
@@ -119,17 +120,18 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
-      childrenFeatures.add(XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER);
+      childrenFeatures
+          .add(XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER);
     }
     return childrenFeatures;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -137,17 +139,18 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
     // Check the type of the specified child object and return the proper feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
-   * This returns PropertyCallExpXS.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This returns PropertyCallExpXS.gif.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/PropertyCallExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/PropertyCallExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -174,16 +177,18 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
     if (source != null) {
       label.append(getLabel(source));
       label.append('.');
-      label.append(StringUtils.isNotEmpty(referredProperty) ? referredProperty : UNDEFINED);
+      label.append(StringUtils.isNotEmpty(referredProperty) ? referredProperty
+          : UNDEFINED);
     }
-    
+
     // if source is not defined, only add property if it has been set
     else if (StringUtils.isNotEmpty(referredProperty)) {
       label.append(referredProperty);
     }
 
     // if all parts are undefined return the default string
-    return label.length() != 0 ? label.toString() : getString("_UI_PropertyCallExpXS_type"); //$NON-NLS-1$
+    return label.length() != 0 ? label.toString()
+        : getString("_UI_PropertyCallExpXS_type"); //$NON-NLS-1$
   }
 
   /**
@@ -206,7 +211,8 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
         updateLabel(notification);
         return;
       case XOCLPackage.PROPERTY_CALL_EXP_XS__QUALIFIER:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         updateLabel(notification);
         return;
     }
@@ -214,98 +220,99 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-   * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createBooleanLiteralExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createPropertyCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createCollectionLiteralExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createBooleanLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createCollectionOperationCallExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createCollectionLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createEnumLiteralExpXS()));
-
-    newChildDescriptors
-        .add(createChildParameter(XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
-            XOCLFactory.eINSTANCE.createIfExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createCollectionOperationCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createIntegerLiteralExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createEnumLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createIterateExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createIfExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createInvalidLiteralExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createIntegerLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createIteratorExpXS()));
-
-    newChildDescriptors
-        .add(createChildParameter(XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
-            XOCLFactory.eINSTANCE.createLetExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createIterateExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createModelOperationCallExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createInvalidLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createPropertyCallExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createIteratorExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createRealLiteralExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createLetExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createStaticOperationCallExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createModelOperationCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createStaticPropertyCallExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createRealLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createStringLiteralExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createStaticOperationCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createTupleLiteralExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createStaticPropertyCallExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createTypeLiteralExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createStringLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createUndefinedLiteralExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createTupleLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createUnlimitedNaturalExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createTypeLiteralExpXS()));
 
     newChildDescriptors.add(createChildParameter(
-        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,XOCLFactory.eINSTANCE
-            .createVariableExpXS()));
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createUndefinedLiteralExpXS()));
+
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createUnlimitedNaturalExpXS()));
+
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER,
+        XOCLFactory.eINSTANCE.createVariableExpXS()));
   }
 
   /**
@@ -324,17 +331,17 @@ public class PropertyCallExpXSItemProvider extends FeatureCallExpXSItemProvider 
         || childFeature == XOCLPackage.Literals.PROPERTY_CALL_EXP_XS__QUALIFIER;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**
-   * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc --> <!--
    * end-user-doc -->
-   * 
    * @generated
    */
   @Override

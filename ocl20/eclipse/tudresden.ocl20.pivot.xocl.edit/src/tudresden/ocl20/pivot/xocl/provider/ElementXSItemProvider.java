@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -38,42 +38,45 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.xocl.VariableExpXS;
-import tudresden.ocl20.pivot.xocl.VariableXS;
-import tudresden.ocl20.pivot.xocl.XOCLPackage;
+import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.VariableExpXS} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.ElementXS} object.
+ * <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * @generated
  */
-public class VariableExpXSItemProvider extends OclExpressionXSItemProvider
-    implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+public class ElementXSItemProvider extends ItemProviderAdapter implements
+    IEditingDomainItemProvider, IStructuredItemContentProvider,
     ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-  public VariableExpXSItemProvider(AdapterFactory adapterFactory) {
+  public ElementXSItemProvider(AdapterFactory adapterFactory) {
     super(adapterFactory);
   }
 
   /**
    * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   @Override
@@ -81,83 +84,31 @@ public class VariableExpXSItemProvider extends OclExpressionXSItemProvider
     if (itemPropertyDescriptors == null) {
       super.getPropertyDescriptors(object);
 
-      addReferredVariablePropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
   }
 
   /**
-   * This adds a property descriptor for the Referred Variable feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addReferredVariablePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory)
-                .getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_VariableExpXS_referredVariable_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description", "_UI_VariableExpXS_referredVariable_feature", "_UI_VariableExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.VARIABLE_EXP_XS__REFERRED_VARIABLE, true,
-            false, true, null, null, null));
-  }
-
-  /**
-   * This returns VariableExpXS.gif.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object getImage(Object object) {
-    return overlayImage(object, getResourceLocator().getImage(
-        "full/obj16/VariableExpXS")); //$NON-NLS-1$
-  }
-
-  /**
    * This returns the label text for the adapted class.
-   * 
-   * <p>
-   * The EMF implementation is changed to return a string representing the referred variable.
-   * </p>
-   * 
-   * @generated NOT
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
    */
   @Override
   public String getText(Object object) {
-    String label = null;
-
-    VariableXS variable = ((VariableExpXS) object).getReferredVariable();
-
-    if (variable != null) {
-      label = variable.getName();
-    }
-
-    return StringUtils.isEmpty(label) ? getString("_UI_VariableExpXS_type") : label; //$NON-NLS-1$
-
+    return getString("_UI_ElementXS_type"); //$NON-NLS-1$
   }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * 
-   * <p>
-   * Adapted the EMF implementation to update the whole hierarchy if the referred variable changes.
-   * </p>
-   * 
-   * @generated NOT
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
    */
   @Override
   public void notifyChanged(Notification notification) {
     updateChildren(notification);
-
-    switch (notification.getFeatureID(VariableExpXS.class)) {
-      case XOCLPackage.VARIABLE_EXP_XS__REFERRED_VARIABLE:
-        updateLabel(notification);
-        return;
-    }
     super.notifyChanged(notification);
   }
 
@@ -176,8 +127,8 @@ public class VariableExpXSItemProvider extends OclExpressionXSItemProvider
 
   /**
    * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   @Override
@@ -185,4 +136,28 @@ public class VariableExpXSItemProvider extends OclExpressionXSItemProvider
     return XOCLEditPlugin.INSTANCE;
   }
 
+  /**
+   * Helper method for subclasses to quickly return the label for an object created by a suitable
+   * adapter.
+   */
+  protected String getLabel(Object object) {
+    Object labelProvider = adapterFactory.adapt(object,
+        IItemLabelProvider.class);
+
+    if (labelProvider instanceof IItemLabelProvider) {
+      return ((IItemLabelProvider) labelProvider).getText(object);
+    }
+
+    return StringUtils.EMPTY;
+  }
+  
+  /**
+   * Helper method to recursively update the label of all expressions in the tree.
+   */
+  protected void updateLabel(Notification notification) {
+    for (EObject owner = (EObject) notification.getNotifier(); owner != null
+        && !(owner instanceof ExpressionInOclXS); owner = owner.eContainer()) {
+      fireNotifyChanged(new ViewerNotification(notification, owner, false, true));
+    }
+  }
 }

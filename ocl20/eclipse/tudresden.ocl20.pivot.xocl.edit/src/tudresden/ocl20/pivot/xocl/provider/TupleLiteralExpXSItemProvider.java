@@ -33,6 +33,7 @@
 package tudresden.ocl20.pivot.xocl.provider;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -48,23 +49,25 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.xocl.TupleLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.TupleLiteralPartXS;
 import tudresden.ocl20.pivot.xocl.XOCLFactory;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.TupleLiteralExpXS} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.xocl.TupleLiteralExpXS} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class TupleLiteralExpXSItemProvider extends LiteralExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+public class TupleLiteralExpXSItemProvider extends LiteralExpXSItemProvider
+    implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This constructs an instance from a factory and a notifier. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public TupleLiteralExpXSItemProvider(AdapterFactory adapterFactory) {
@@ -72,9 +75,9 @@ public class TupleLiteralExpXSItemProvider extends LiteralExpXSItemProvider impl
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the property descriptors for the adapted class. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -87,15 +90,18 @@ public class TupleLiteralExpXSItemProvider extends LiteralExpXSItemProvider impl
   }
 
   /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * This specifies how to implement {@link #getChildren} and is used to deduce
+   * an appropriate feature for an
+   * {@link org.eclipse.emf.edit.command.AddCommand},
+   * {@link org.eclipse.emf.edit.command.RemoveCommand} or
    * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
       childrenFeatures.add(XOCLPackage.Literals.TUPLE_LITERAL_EXP_XS__PART);
@@ -104,46 +110,74 @@ public class TupleLiteralExpXSItemProvider extends LiteralExpXSItemProvider impl
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
   protected EStructuralFeature getChildFeature(Object object, Object child) {
-    // Check the type of the specified child object and return the proper feature to use for
+    // Check the type of the specified child object and return the proper
+    // feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
-   * This returns TupleLiteralExpXS.gif.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns TupleLiteralExpXS.gif. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
    * @generated
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/TupleLiteralExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/TupleLiteralExpXS")); //$NON-NLS-1$
   }
 
   /**
    * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted the EMF implementation to resemble the OCL concrete syntax.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    return getString("_UI_TupleLiteralExpXS_type"); //$NON-NLS-1$
+    TupleLiteralExpXS expression = (TupleLiteralExpXS) object;
+
+    StringBuilder label = new StringBuilder("Tuple"); //$NON-NLS-1$
+
+    // append tuple literal parts
+    label.append('{');
+
+    for (Iterator<TupleLiteralPartXS> it = expression.getPart().iterator(); it
+        .hasNext();) {
+      label.append(getLabel(it.next()));
+
+      if (it.hasNext()) {
+        label.append(", "); //$NON-NLS-1$
+      }
+    }
+
+    label.append('}');
+
+    return label.toString();
   }
 
   /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * This handles model notifications by calling {@link #updateChildren} to
+   * update any cached children and by creating a viewer notification, which it
+   * passes to {@link #fireNotifyChanged}.
+   * 
+   * <p>
+   * Adapted the EMF implementation to update the whole hierarchy if the
+   * tuple literal parts change.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -151,31 +185,35 @@ public class TupleLiteralExpXSItemProvider extends LiteralExpXSItemProvider impl
 
     switch (notification.getFeatureID(TupleLiteralExpXS.class)) {
       case XOCLPackage.TUPLE_LITERAL_EXP_XS__PART:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        updateLabel(notification);
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+   * describing the children that can be created under this object. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.TUPLE_LITERAL_EXP_XS__PART,
-        XOCLFactory.eINSTANCE.createTupleLiteralPartXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.TUPLE_LITERAL_EXP_XS__PART, XOCLFactory.eINSTANCE
+            .createTupleLiteralPartXS()));
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Return the resource locator for this item provider's resources. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override

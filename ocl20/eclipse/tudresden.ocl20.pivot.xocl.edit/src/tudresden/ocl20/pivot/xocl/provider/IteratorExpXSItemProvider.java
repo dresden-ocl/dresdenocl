@@ -61,8 +61,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * @generated
  */
 public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+    IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -99,13 +99,14 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
   protected void addNamePropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_IteratorExpXS_name_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_IteratorExpXS_name_feature","_UI_IteratorExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.ITERATOR_EXP_XS__NAME,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_IteratorExpXS_name_feature", "_UI_IteratorExpXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.ITERATOR_EXP_XS__NAME, true, false, false,
+            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
   }
 
   /**
@@ -116,7 +117,8 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/IteratorExpXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/IteratorExpXS")); //$NON-NLS-1$
   }
 
   /**
@@ -131,46 +133,49 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
   @Override
   public String getText(Object object) {
     IteratorExpXS iteratorExp = (IteratorExpXS) object;
-    
+
     // get the source of the iterator expression
     OclExpressionXS source = iteratorExp.getSource();
-    
+
     // initialize the label with the source label or the default label
-    StringBuilder label = new StringBuilder(source != null ? getLabel(source) : UNDEFINED);
-    
+    StringBuilder label = new StringBuilder(source != null ? getLabel(source)
+        : UNDEFINED);
+
     // get the referred iterator expression
     String referredIterator = iteratorExp.getName().toString();
-    
+
     // only add the iterator stuff when an iterator has been selected
     if (StringUtils.isNotEmpty(referredIterator)) {
-      
+
       // add the operator, the name of the iterator and the opening parenthesis
       label.append("->").append(referredIterator).append('('); //$NON-NLS-1$
-      
+
       // append the iterators
-      for (Iterator<VariableXS> it = iteratorExp.getIterator().iterator(); it.hasNext();) {
+      for (Iterator<VariableXS> it = iteratorExp.getIterator().iterator(); it
+          .hasNext();) {
         label.append(getLabel(it.next()));
-        
+
         if (it.hasNext()) {
           label.append(", "); //$NON-NLS-1$
         }
       }
-      
+
       // append the vertical bar if there have been iterators defined
       if (!iteratorExp.getIterator().isEmpty()) {
         label.append(" | "); //$NON-NLS-1$
       }
-      
+
       // append the body expression
       String bodyLabel = getLabel(iteratorExp.getBody());
       label.append(StringUtils.isNotEmpty(bodyLabel) ? bodyLabel : UNDEFINED);
-      
+
       // append closing parenthesis
       label.append(')');
     }
 
     // if all parts are missing return the default string
-    return label.length() != 0 ? label.toString() : getString("_UI_IteratorExpXS_type"); //$NON-NLS-1$
+    return label.length() != 0 ? label.toString()
+        : getString("_UI_IteratorExpXS_type"); //$NON-NLS-1$
   }
 
   /**
@@ -202,8 +207,9 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
   }
 
   /**
@@ -222,11 +228,11 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
         || childFeature == XOCLPackage.Literals.LOOP_EXP_XS__BODY;
 
     if (qualify) {
-      return getString(
-          "_UI_CreateChild_text2", //$NON-NLS-1$
-          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+      return getString("_UI_CreateChild_text2", //$NON-NLS-1$
+          new Object[] { getTypeText(childObject),
+              getFeatureText(childFeature), getTypeText(owner) });
     }
-    return super.getCreateChildText(owner,feature,child,selection);
+    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**

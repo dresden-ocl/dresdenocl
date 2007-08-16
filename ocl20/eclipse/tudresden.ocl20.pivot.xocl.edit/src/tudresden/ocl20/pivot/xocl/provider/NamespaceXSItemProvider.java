@@ -61,8 +61,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * @generated
  */
 public class NamespaceXSItemProvider extends ItemProviderAdapter implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+    IEditingDomainItemProvider, IStructuredItemContentProvider,
+    ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
    * This constructs an instance from a factory and a notifier.
@@ -99,13 +99,14 @@ public class NamespaceXSItemProvider extends ItemProviderAdapter implements
   protected void addPathNamePropertyDescriptor(Object object) {
     itemPropertyDescriptors
         .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+            ((ComposeableAdapterFactory) adapterFactory)
+                .getRootAdapterFactory(),
             getResourceLocator(),
             getString("_UI_NamespaceXS_pathName_feature"), //$NON-NLS-1$
             getString(
-                "_UI_PropertyDescriptor_description","_UI_NamespaceXS_pathName_feature","_UI_NamespaceXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            XOCLPackage.Literals.NAMESPACE_XS__PATH_NAME,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
+                "_UI_PropertyDescriptor_description", "_UI_NamespaceXS_pathName_feature", "_UI_NamespaceXS_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            XOCLPackage.Literals.NAMESPACE_XS__PATH_NAME, true, false, false,
+            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
   }
 
   /**
@@ -117,7 +118,8 @@ public class NamespaceXSItemProvider extends ItemProviderAdapter implements
    * @generated
    */
   @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(
+      Object object) {
     if (childrenFeatures == null) {
       super.getChildrenFeatures(object);
       childrenFeatures.add(XOCLPackage.Literals.NAMESPACE_XS__OWNED_RULE);
@@ -135,7 +137,7 @@ public class NamespaceXSItemProvider extends ItemProviderAdapter implements
     // Check the type of the specified child object and return the proper feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object,child);
+    return super.getChildFeature(object, child);
   }
 
   /**
@@ -146,7 +148,8 @@ public class NamespaceXSItemProvider extends ItemProviderAdapter implements
    */
   @Override
   public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/NamespaceXS")); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage(
+        "full/obj16/NamespaceXS")); //$NON-NLS-1$
   }
 
   /**
@@ -177,10 +180,12 @@ public class NamespaceXSItemProvider extends ItemProviderAdapter implements
 
     switch (notification.getFeatureID(NamespaceXS.class)) {
       case XOCLPackage.NAMESPACE_XS__PATH_NAME:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), false, true));
         return;
       case XOCLPackage.NAMESPACE_XS__OWNED_RULE:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
+        fireNotifyChanged(new ViewerNotification(notification, notification
+            .getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
@@ -194,11 +199,13 @@ public class NamespaceXSItemProvider extends ItemProviderAdapter implements
    * @generated
    */
   @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+  protected void collectNewChildDescriptors(
+      Collection<Object> newChildDescriptors, Object object) {
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add(createChildParameter(XOCLPackage.Literals.NAMESPACE_XS__OWNED_RULE,
-        XOCLFactory.eINSTANCE.createConstraintXS()));
+    newChildDescriptors.add(createChildParameter(
+        XOCLPackage.Literals.NAMESPACE_XS__OWNED_RULE, XOCLFactory.eINSTANCE
+            .createConstraintXS()));
   }
 
   /**
