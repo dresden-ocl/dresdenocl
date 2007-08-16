@@ -6,8 +6,6 @@ import java.util.ListIterator;
 
 import org.eclipse.emf.ecore.util.EObjectEList;
 
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-
 /**
  * A helper class to properly deal with lists that use identity instead of
  * equality in their operations. This is particularly meant for those cases

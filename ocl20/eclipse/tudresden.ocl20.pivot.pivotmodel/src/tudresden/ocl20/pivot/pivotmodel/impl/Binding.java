@@ -2,7 +2,6 @@ package tudresden.ocl20.pivot.pivotmodel.impl;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EObjectEList;

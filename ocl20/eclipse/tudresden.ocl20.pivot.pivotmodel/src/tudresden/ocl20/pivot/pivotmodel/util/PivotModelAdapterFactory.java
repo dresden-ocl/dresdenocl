@@ -34,13 +34,30 @@ package tudresden.ocl20.pivot.pivotmodel.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.*;
-
+import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
+import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Enumeration;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.Expression;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
+import tudresden.ocl20.pivot.pivotmodel.GenericElement;
+import tudresden.ocl20.pivot.pivotmodel.GenericType;
+import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
+import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
+import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
