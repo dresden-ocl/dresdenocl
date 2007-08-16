@@ -12,4 +12,14 @@
       </bodyExpression>
     </specification>
   </ownedRule>
+  <ownedRule name="s2" constrainedElement="Plugin">
+    <specification body="Sequence{1..5}">
+      <bodyExpression xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+        <part xsi:type="xocl:CollectionRangeXS">
+          <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+        </part>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
 </xocl:NamespaceXS>
