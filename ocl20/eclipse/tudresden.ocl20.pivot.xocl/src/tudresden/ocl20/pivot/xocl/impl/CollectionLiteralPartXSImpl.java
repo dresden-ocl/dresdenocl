@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.xocl.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import tudresden.ocl20.pivot.xocl.CollectionLiteralPartXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
@@ -47,8 +46,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public abstract class CollectionLiteralPartXSImpl extends EObjectImpl implements
-    CollectionLiteralPartXS {
+public abstract class CollectionLiteralPartXSImpl extends ElementXSImpl
+    implements CollectionLiteralPartXS {
 
   /**
    * <!-- begin-user-doc -->

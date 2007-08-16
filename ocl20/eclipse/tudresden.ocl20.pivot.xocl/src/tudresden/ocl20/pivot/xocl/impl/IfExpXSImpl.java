@@ -67,7 +67,7 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
    * @generated
    * @ordered
    */
-  protected OclExpressionXS elseExpression = null;
+  protected OclExpressionXS elseExpression;
 
   /**
    * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
@@ -77,7 +77,7 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
    * @generated
    * @ordered
    */
-  protected OclExpressionXS condition = null;
+  protected OclExpressionXS condition;
 
   /**
    * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment reference.
@@ -87,7 +87,7 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
    * @generated
    * @ordered
    */
-  protected OclExpressionXS thenExpression = null;
+  protected OclExpressionXS thenExpression;
 
   /**
    * <!-- begin-user-doc -->
@@ -122,13 +122,14 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetElseExpression(OclExpressionXS newElseExpression,
-      NotificationChain msgs) {
+  public NotificationChain basicSetElseExpression(
+      OclExpressionXS newElseExpression, NotificationChain msgs) {
     OclExpressionXS oldElseExpression = elseExpression;
     elseExpression = newElseExpression;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION,oldElseExpression,newElseExpression);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION,
+          oldElseExpression, newElseExpression);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -144,17 +145,20 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
     if (newElseExpression != elseExpression) {
       NotificationChain msgs = null;
       if (elseExpression != null)
-        msgs = ((InternalEObject) elseExpression).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION,null,msgs);
+        msgs = ((InternalEObject) elseExpression).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION,
+            null, msgs);
       if (newElseExpression != null)
-        msgs = ((InternalEObject) newElseExpression).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION,null,msgs);
-      msgs = basicSetElseExpression(newElseExpression,msgs);
+        msgs = ((InternalEObject) newElseExpression).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION,
+            null, msgs);
+      msgs = basicSetElseExpression(newElseExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION,
-          newElseExpression,newElseExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION, newElseExpression,
+          newElseExpression));
   }
 
   /**
@@ -171,12 +175,14 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetCondition(OclExpressionXS newCondition, NotificationChain msgs) {
+  public NotificationChain basicSetCondition(OclExpressionXS newCondition,
+      NotificationChain msgs) {
     OclExpressionXS oldCondition = condition;
     condition = newCondition;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.IF_EXP_XS__CONDITION,oldCondition,newCondition);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.IF_EXP_XS__CONDITION, oldCondition,
+          newCondition);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -192,17 +198,19 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
     if (newCondition != condition) {
       NotificationChain msgs = null;
       if (condition != null)
-        msgs = ((InternalEObject) condition).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.IF_EXP_XS__CONDITION,null,msgs);
+        msgs = ((InternalEObject) condition).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.IF_EXP_XS__CONDITION, null,
+            msgs);
       if (newCondition != null)
-        msgs = ((InternalEObject) newCondition).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.IF_EXP_XS__CONDITION,null,msgs);
-      msgs = basicSetCondition(newCondition,msgs);
+        msgs = ((InternalEObject) newCondition).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.IF_EXP_XS__CONDITION, null,
+            msgs);
+      msgs = basicSetCondition(newCondition, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.IF_EXP_XS__CONDITION,
-          newCondition,newCondition));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.IF_EXP_XS__CONDITION, newCondition, newCondition));
   }
 
   /**
@@ -219,13 +227,14 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetThenExpression(OclExpressionXS newThenExpression,
-      NotificationChain msgs) {
+  public NotificationChain basicSetThenExpression(
+      OclExpressionXS newThenExpression, NotificationChain msgs) {
     OclExpressionXS oldThenExpression = thenExpression;
     thenExpression = newThenExpression;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.IF_EXP_XS__THEN_EXPRESSION,oldThenExpression,newThenExpression);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.IF_EXP_XS__THEN_EXPRESSION,
+          oldThenExpression, newThenExpression);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -241,17 +250,20 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
     if (newThenExpression != thenExpression) {
       NotificationChain msgs = null;
       if (thenExpression != null)
-        msgs = ((InternalEObject) thenExpression).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.IF_EXP_XS__THEN_EXPRESSION,null,msgs);
+        msgs = ((InternalEObject) thenExpression).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.IF_EXP_XS__THEN_EXPRESSION,
+            null, msgs);
       if (newThenExpression != null)
-        msgs = ((InternalEObject) newThenExpression).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.IF_EXP_XS__THEN_EXPRESSION,null,msgs);
-      msgs = basicSetThenExpression(newThenExpression,msgs);
+        msgs = ((InternalEObject) newThenExpression).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.IF_EXP_XS__THEN_EXPRESSION,
+            null, msgs);
+      msgs = basicSetThenExpression(newThenExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.IF_EXP_XS__THEN_EXPRESSION,
-          newThenExpression,newThenExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.IF_EXP_XS__THEN_EXPRESSION, newThenExpression,
+          newThenExpression));
   }
 
   /**
@@ -260,17 +272,17 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.IF_EXP_XS__ELSE_EXPRESSION:
-        return basicSetElseExpression(null,msgs);
+        return basicSetElseExpression(null, msgs);
       case XOCLPackage.IF_EXP_XS__CONDITION:
-        return basicSetCondition(null,msgs);
+        return basicSetCondition(null, msgs);
       case XOCLPackage.IF_EXP_XS__THEN_EXPRESSION:
-        return basicSetThenExpression(null,msgs);
+        return basicSetThenExpression(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -288,7 +300,7 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
       case XOCLPackage.IF_EXP_XS__THEN_EXPRESSION:
         return getThenExpression();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -309,7 +321,7 @@ public class IfExpXSImpl extends OclExpressionXSImpl implements IfExpXS {
         setThenExpression((OclExpressionXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

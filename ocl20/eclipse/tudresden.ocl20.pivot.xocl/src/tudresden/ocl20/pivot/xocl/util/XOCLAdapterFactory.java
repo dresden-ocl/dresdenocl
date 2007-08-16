@@ -34,12 +34,48 @@ package tudresden.ocl20.pivot.xocl.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.xocl.*;
+import tudresden.ocl20.pivot.xocl.BooleanLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.CallExpXS;
+import tudresden.ocl20.pivot.xocl.CollectionItemXS;
+import tudresden.ocl20.pivot.xocl.CollectionLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.CollectionLiteralPartXS;
+import tudresden.ocl20.pivot.xocl.CollectionOperationCallExpXS;
+import tudresden.ocl20.pivot.xocl.CollectionRangeXS;
+import tudresden.ocl20.pivot.xocl.ConstraintXS;
+import tudresden.ocl20.pivot.xocl.ElementXS;
+import tudresden.ocl20.pivot.xocl.EnumLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
+import tudresden.ocl20.pivot.xocl.FeatureCallExpXS;
+import tudresden.ocl20.pivot.xocl.IfExpXS;
+import tudresden.ocl20.pivot.xocl.IntegerLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.InvalidLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.IterateExpXS;
+import tudresden.ocl20.pivot.xocl.IteratorExpXS;
+import tudresden.ocl20.pivot.xocl.LetExpXS;
+import tudresden.ocl20.pivot.xocl.LiteralExpXS;
+import tudresden.ocl20.pivot.xocl.LoopExpXS;
+import tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS;
+import tudresden.ocl20.pivot.xocl.NamespaceXS;
+import tudresden.ocl20.pivot.xocl.NumericLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.OclExpressionXS;
+import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
+import tudresden.ocl20.pivot.xocl.PrimitiveLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.PropertyCallExpXS;
+import tudresden.ocl20.pivot.xocl.RealLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.StaticOperationCallExpXS;
+import tudresden.ocl20.pivot.xocl.StaticPropertyCallExpXS;
+import tudresden.ocl20.pivot.xocl.StringLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.TupleLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.TupleLiteralPartXS;
+import tudresden.ocl20.pivot.xocl.TypeLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.UndefinedLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.UnlimitedNaturalExpXS;
+import tudresden.ocl20.pivot.xocl.VariableExpXS;
+import tudresden.ocl20.pivot.xocl.VariableXS;
+import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -99,6 +135,11 @@ public class XOCLAdapterFactory extends AdapterFactoryImpl {
   protected XOCLSwitch<Adapter> modelSwitch = new XOCLSwitch<Adapter>() {
 
     @Override
+    public Adapter caseElementXS(ElementXS object) {
+      return createElementXSAdapter();
+    }
+
+    @Override
     public Adapter caseConstraintXS(ConstraintXS object) {
       return createConstraintXSAdapter();
     }
@@ -149,7 +190,8 @@ public class XOCLAdapterFactory extends AdapterFactoryImpl {
     }
 
     @Override
-    public Adapter caseCollectionOperationCallExpXS(CollectionOperationCallExpXS object) {
+    public Adapter caseCollectionOperationCallExpXS(
+        CollectionOperationCallExpXS object) {
       return createCollectionOperationCallExpXSAdapter();
     }
 
@@ -300,6 +342,20 @@ public class XOCLAdapterFactory extends AdapterFactoryImpl {
   @Override
   public Adapter createAdapter(Notifier target) {
     return modelSwitch.doSwitch((EObject) target);
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.xocl.ElementXS <em>Element XS</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see tudresden.ocl20.pivot.xocl.ElementXS
+   * @generated
+   */
+  public Adapter createElementXSAdapter() {
+    return null;
   }
 
   /**

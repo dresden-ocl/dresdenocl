@@ -61,7 +61,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class PropertyCallExpXSImpl extends FeatureCallExpXSImpl implements PropertyCallExpXS {
+public class PropertyCallExpXSImpl extends FeatureCallExpXSImpl implements
+    PropertyCallExpXS {
 
   /**
    * The default value of the '{@link #getReferredPropertyName() <em>Referred Property Name</em>}' attribute.
@@ -91,7 +92,7 @@ public class PropertyCallExpXSImpl extends FeatureCallExpXSImpl implements Prope
    * @generated
    * @ordered
    */
-  protected EList<OclExpressionXS> qualifier = null;
+  protected EList<OclExpressionXS> qualifier;
 
   /**
    * <!-- begin-user-doc -->
@@ -130,9 +131,9 @@ public class PropertyCallExpXSImpl extends FeatureCallExpXSImpl implements Prope
     String oldReferredPropertyName = referredPropertyName;
     referredPropertyName = newReferredPropertyName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.PROPERTY_CALL_EXP_XS__REFERRED_PROPERTY_NAME,oldReferredPropertyName,
-          referredPropertyName));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.PROPERTY_CALL_EXP_XS__REFERRED_PROPERTY_NAME,
+          oldReferredPropertyName, referredPropertyName));
   }
 
   /**
@@ -142,7 +143,8 @@ public class PropertyCallExpXSImpl extends FeatureCallExpXSImpl implements Prope
    */
   public EList<OclExpressionXS> getQualifier() {
     if (qualifier == null) {
-      qualifier = new EObjectContainmentEList<OclExpressionXS>(OclExpressionXS.class,this,
+      qualifier = new EObjectContainmentEList<OclExpressionXS>(
+          OclExpressionXS.class, this,
           XOCLPackage.PROPERTY_CALL_EXP_XS__QUALIFIER);
     }
     return qualifier;
@@ -154,13 +156,13 @@ public class PropertyCallExpXSImpl extends FeatureCallExpXSImpl implements Prope
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.PROPERTY_CALL_EXP_XS__QUALIFIER:
-        return ((InternalEList<?>) getQualifier()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getQualifier()).basicRemove(otherEnd, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -176,7 +178,7 @@ public class PropertyCallExpXSImpl extends FeatureCallExpXSImpl implements Prope
       case XOCLPackage.PROPERTY_CALL_EXP_XS__QUALIFIER:
         return getQualifier();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -196,7 +198,7 @@ public class PropertyCallExpXSImpl extends FeatureCallExpXSImpl implements Prope
         getQualifier().addAll((Collection<? extends OclExpressionXS>) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

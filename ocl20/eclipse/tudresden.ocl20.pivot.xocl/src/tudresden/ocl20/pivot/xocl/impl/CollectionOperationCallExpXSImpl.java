@@ -53,8 +53,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class CollectionOperationCallExpXSImpl extends OperationCallExpXSImpl implements
-    CollectionOperationCallExpXS {
+public class CollectionOperationCallExpXSImpl extends OperationCallExpXSImpl
+    implements CollectionOperationCallExpXS {
 
   /**
    * The default value of the '{@link #getReferredCollectionOperation() <em>Referred Collection Operation</em>}' attribute.
@@ -109,14 +109,17 @@ public class CollectionOperationCallExpXSImpl extends OperationCallExpXSImpl imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReferredCollectionOperation(CollectionOperationXS newReferredCollectionOperation) {
+  public void setReferredCollectionOperation(
+      CollectionOperationXS newReferredCollectionOperation) {
     CollectionOperationXS oldReferredCollectionOperation = referredCollectionOperation;
     referredCollectionOperation = newReferredCollectionOperation == null ? REFERRED_COLLECTION_OPERATION_EDEFAULT
         : newReferredCollectionOperation;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
+      eNotify(new ENotificationImpl(
+          this,
+          Notification.SET,
           XOCLPackage.COLLECTION_OPERATION_CALL_EXP_XS__REFERRED_COLLECTION_OPERATION,
-          oldReferredCollectionOperation,referredCollectionOperation));
+          oldReferredCollectionOperation, referredCollectionOperation));
   }
 
   /**
@@ -130,7 +133,7 @@ public class CollectionOperationCallExpXSImpl extends OperationCallExpXSImpl imp
       case XOCLPackage.COLLECTION_OPERATION_CALL_EXP_XS__REFERRED_COLLECTION_OPERATION:
         return getReferredCollectionOperation();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -145,7 +148,7 @@ public class CollectionOperationCallExpXSImpl extends OperationCallExpXSImpl imp
         setReferredCollectionOperation((CollectionOperationXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

@@ -58,7 +58,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class TupleLiteralExpXSImpl extends LiteralExpXSImpl implements TupleLiteralExpXS {
+public class TupleLiteralExpXSImpl extends LiteralExpXSImpl implements
+    TupleLiteralExpXS {
 
   /**
    * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list.
@@ -68,7 +69,7 @@ public class TupleLiteralExpXSImpl extends LiteralExpXSImpl implements TupleLite
    * @generated
    * @ordered
    */
-  protected EList<TupleLiteralPartXS> part = null;
+  protected EList<TupleLiteralPartXS> part;
 
   /**
    * <!-- begin-user-doc -->
@@ -96,7 +97,8 @@ public class TupleLiteralExpXSImpl extends LiteralExpXSImpl implements TupleLite
    */
   public EList<TupleLiteralPartXS> getPart() {
     if (part == null) {
-      part = new EObjectContainmentEList<TupleLiteralPartXS>(TupleLiteralPartXS.class,this,
+      part = new EObjectContainmentEList<TupleLiteralPartXS>(
+          TupleLiteralPartXS.class, this,
           XOCLPackage.TUPLE_LITERAL_EXP_XS__PART);
     }
     return part;
@@ -108,13 +110,13 @@ public class TupleLiteralExpXSImpl extends LiteralExpXSImpl implements TupleLite
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.TUPLE_LITERAL_EXP_XS__PART:
-        return ((InternalEList<?>) getPart()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getPart()).basicRemove(otherEnd, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -128,7 +130,7 @@ public class TupleLiteralExpXSImpl extends LiteralExpXSImpl implements TupleLite
       case XOCLPackage.TUPLE_LITERAL_EXP_XS__PART:
         return getPart();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -145,7 +147,7 @@ public class TupleLiteralExpXSImpl extends LiteralExpXSImpl implements TupleLite
         getPart().addAll((Collection<? extends TupleLiteralPartXS>) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

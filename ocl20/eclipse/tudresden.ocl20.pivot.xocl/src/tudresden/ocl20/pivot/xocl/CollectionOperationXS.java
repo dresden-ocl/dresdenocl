@@ -855,9 +855,10 @@ public enum CollectionOperationXS implements Enumerator {
    * @generated
    */
   private static final CollectionOperationXS[] VALUES_ARRAY = new CollectionOperationXS[] {
-      DEFAULT, EQUALS, EQUALS_NOT, MINUS, APPEND, AS_BAG, AS_ORDERED_SET, AS_SEQUENCE, AS_SET, AT,
-      COUNT, EXCLUDES, EXCLUDES_ALL, EXCLUDING, FIRST, FLATTEN, INCLUDES, INCLUDES_ALL, INCLUDING,
-      INDEX_OF, INSERT_AT, INTERSECTION, IS_EMPTY, LAST, NOT_EMPTY, PREPEND, SIZE, SUM,
+      DEFAULT, EQUALS, EQUALS_NOT, MINUS, APPEND, AS_BAG, AS_ORDERED_SET,
+      AS_SEQUENCE, AS_SET, AT, COUNT, EXCLUDES, EXCLUDES_ALL, EXCLUDING, FIRST,
+      FLATTEN, INCLUDES, INCLUDES_ALL, INCLUDING, INDEX_OF, INSERT_AT,
+      INTERSECTION, IS_EMPTY, LAST, NOT_EMPTY, PREPEND, SIZE, SUM,
       SUB_ORDERED_SET, SUB_SEQUENCE, SYMMETRIC_DIFFERENCE, UNION, };
 
   /**
@@ -866,8 +867,8 @@ public enum CollectionOperationXS implements Enumerator {
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<CollectionOperationXS> VALUES = Collections.unmodifiableList(Arrays
-      .asList(VALUES_ARRAY));
+  public static final List<CollectionOperationXS> VALUES = Collections
+      .unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
    * Returns the '<em><b>Collection Operation XS</b></em>' literal with the specified literal value.

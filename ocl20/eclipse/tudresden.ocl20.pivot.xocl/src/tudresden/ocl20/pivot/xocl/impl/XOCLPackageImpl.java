@@ -50,6 +50,7 @@ import tudresden.ocl20.pivot.xocl.CollectionOperationXS;
 import tudresden.ocl20.pivot.xocl.CollectionRangeXS;
 import tudresden.ocl20.pivot.xocl.ConstraintKindXS;
 import tudresden.ocl20.pivot.xocl.ConstraintXS;
+import tudresden.ocl20.pivot.xocl.ElementXS;
 import tudresden.ocl20.pivot.xocl.EnumLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
 import tudresden.ocl20.pivot.xocl.FeatureCallExpXS;
@@ -90,6 +91,13 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * @generated
  */
 public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass elementXSEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -394,7 +402,7 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   private XOCLPackageImpl() {
-    super(eNS_URI,XOCLFactory.eINSTANCE);
+    super(eNS_URI, XOCLFactory.eINSTANCE);
   }
 
   /**
@@ -427,12 +435,15 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public static XOCLPackage init() {
-    if (isInited) return (XOCLPackage) EPackage.Registry.INSTANCE.getEPackage(XOCLPackage.eNS_URI);
+    if (isInited)
+      return (XOCLPackage) EPackage.Registry.INSTANCE
+          .getEPackage(XOCLPackage.eNS_URI);
 
     // Obtain or create and register package
     XOCLPackageImpl theXOCLPackage = (XOCLPackageImpl) (EPackage.Registry.INSTANCE
         .getEPackage(eNS_URI) instanceof XOCLPackageImpl ? EPackage.Registry.INSTANCE
-        .getEPackage(eNS_URI) : new XOCLPackageImpl());
+        .getEPackage(eNS_URI)
+        : new XOCLPackageImpl());
 
     isInited = true;
 
@@ -446,6 +457,15 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
     theXOCLPackage.freeze();
 
     return theXOCLPackage;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getElementXS() {
+    return elementXSEClass;
   }
 
   /**
@@ -652,7 +672,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public EAttribute getBooleanLiteralExpXS_BooleanSymbol() {
-    return (EAttribute) booleanLiteralExpXSEClass.getEStructuralFeatures().get(0);
+    return (EAttribute) booleanLiteralExpXSEClass.getEStructuralFeatures().get(
+        0);
   }
 
   /**
@@ -706,7 +727,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public EAttribute getCollectionLiteralExpXS_Kind() {
-    return (EAttribute) collectionLiteralExpXSEClass.getEStructuralFeatures().get(0);
+    return (EAttribute) collectionLiteralExpXSEClass.getEStructuralFeatures()
+        .get(0);
   }
 
   /**
@@ -715,7 +737,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public EReference getCollectionLiteralExpXS_Part() {
-    return (EReference) collectionLiteralExpXSEClass.getEStructuralFeatures().get(1);
+    return (EReference) collectionLiteralExpXSEClass.getEStructuralFeatures()
+        .get(1);
   }
 
   /**
@@ -832,7 +855,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public EAttribute getIntegerLiteralExpXS_IntegerSymbol() {
-    return (EAttribute) integerLiteralExpXSEClass.getEStructuralFeatures().get(0);
+    return (EAttribute) integerLiteralExpXSEClass.getEStructuralFeatures().get(
+        0);
   }
 
   /**
@@ -967,7 +991,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public EReference getOperationCallExpXS_Argument() {
-    return (EReference) operationCallExpXSEClass.getEStructuralFeatures().get(0);
+    return (EReference) operationCallExpXSEClass.getEStructuralFeatures()
+        .get(0);
   }
 
   /**
@@ -1012,7 +1037,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public EAttribute getStringLiteralExpXS_StringSymbol() {
-    return (EAttribute) stringLiteralExpXSEClass.getEStructuralFeatures().get(0);
+    return (EAttribute) stringLiteralExpXSEClass.getEStructuralFeatures()
+        .get(0);
   }
 
   /**
@@ -1047,26 +1073,9 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTupleLiteralPartXS_Name() {
-    return (EAttribute) tupleLiteralPartXSEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getTupleLiteralPartXS_TypeName() {
-    return (EAttribute) tupleLiteralPartXSEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTupleLiteralPartXS_Value() {
-    return (EReference) tupleLiteralPartXSEClass.getEStructuralFeatures().get(2);
+  public EReference getTupleLiteralPartXS_VariableDeclaration() {
+    return (EReference) tupleLiteralPartXSEClass.getEStructuralFeatures()
+        .get(0);
   }
 
   /**
@@ -1111,7 +1120,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public EAttribute getUnlimitedNaturalExpXS_Symbol() {
-    return (EAttribute) unlimitedNaturalExpXSEClass.getEStructuralFeatures().get(0);
+    return (EAttribute) unlimitedNaturalExpXSEClass.getEStructuralFeatures()
+        .get(0);
   }
 
   /**
@@ -1192,7 +1202,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public EAttribute getModelOperationCallExpXS_ReferredOperationName() {
-    return (EAttribute) modelOperationCallExpXSEClass.getEStructuralFeatures().get(0);
+    return (EAttribute) modelOperationCallExpXSEClass.getEStructuralFeatures()
+        .get(0);
   }
 
   /**
@@ -1210,7 +1221,8 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
    * @generated
    */
   public EAttribute getCollectionOperationCallExpXS_ReferredCollectionOperation() {
-    return (EAttribute) collectionOperationCallExpXSEClass.getEStructuralFeatures().get(0);
+    return (EAttribute) collectionOperationCallExpXSEClass
+        .getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1277,44 +1289,51 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
     isCreated = true;
 
     // Create classes and their features
+    elementXSEClass = createEClass(ELEMENT_XS);
+
     constraintXSEClass = createEClass(CONSTRAINT_XS);
-    createEAttribute(constraintXSEClass,CONSTRAINT_XS__NAME);
-    createEAttribute(constraintXSEClass,CONSTRAINT_XS__KIND);
-    createEAttribute(constraintXSEClass,CONSTRAINT_XS__CONSTRAINED_ELEMENT);
-    createEAttribute(constraintXSEClass,CONSTRAINT_XS__DEFINED_FEATURE);
-    createEReference(constraintXSEClass,CONSTRAINT_XS__SPECIFICATION);
+    createEAttribute(constraintXSEClass, CONSTRAINT_XS__NAME);
+    createEAttribute(constraintXSEClass, CONSTRAINT_XS__KIND);
+    createEAttribute(constraintXSEClass, CONSTRAINT_XS__CONSTRAINED_ELEMENT);
+    createEAttribute(constraintXSEClass, CONSTRAINT_XS__DEFINED_FEATURE);
+    createEReference(constraintXSEClass, CONSTRAINT_XS__SPECIFICATION);
 
     expressionInOclXSEClass = createEClass(EXPRESSION_IN_OCL_XS);
-    createEAttribute(expressionInOclXSEClass,EXPRESSION_IN_OCL_XS__BODY);
-    createEReference(expressionInOclXSEClass,EXPRESSION_IN_OCL_XS__CONSTRAINT);
-    createEReference(expressionInOclXSEClass,EXPRESSION_IN_OCL_XS__BODY_EXPRESSION);
-    createEReference(expressionInOclXSEClass,EXPRESSION_IN_OCL_XS__CONTEXT);
-    createEReference(expressionInOclXSEClass,EXPRESSION_IN_OCL_XS__PARAMETER);
-    createEReference(expressionInOclXSEClass,EXPRESSION_IN_OCL_XS__RESULT);
+    createEAttribute(expressionInOclXSEClass, EXPRESSION_IN_OCL_XS__BODY);
+    createEReference(expressionInOclXSEClass, EXPRESSION_IN_OCL_XS__CONSTRAINT);
+    createEReference(expressionInOclXSEClass,
+        EXPRESSION_IN_OCL_XS__BODY_EXPRESSION);
+    createEReference(expressionInOclXSEClass, EXPRESSION_IN_OCL_XS__CONTEXT);
+    createEReference(expressionInOclXSEClass, EXPRESSION_IN_OCL_XS__PARAMETER);
+    createEReference(expressionInOclXSEClass, EXPRESSION_IN_OCL_XS__RESULT);
 
     oclExpressionXSEClass = createEClass(OCL_EXPRESSION_XS);
 
     variableXSEClass = createEClass(VARIABLE_XS);
-    createEAttribute(variableXSEClass,VARIABLE_XS__NAME);
-    createEAttribute(variableXSEClass,VARIABLE_XS__TYPE);
-    createEReference(variableXSEClass,VARIABLE_XS__INIT_EXPRESSION);
+    createEAttribute(variableXSEClass, VARIABLE_XS__NAME);
+    createEAttribute(variableXSEClass, VARIABLE_XS__TYPE);
+    createEReference(variableXSEClass, VARIABLE_XS__INIT_EXPRESSION);
 
     propertyCallExpXSEClass = createEClass(PROPERTY_CALL_EXP_XS);
-    createEAttribute(propertyCallExpXSEClass,PROPERTY_CALL_EXP_XS__REFERRED_PROPERTY_NAME);
-    createEReference(propertyCallExpXSEClass,PROPERTY_CALL_EXP_XS__QUALIFIER);
+    createEAttribute(propertyCallExpXSEClass,
+        PROPERTY_CALL_EXP_XS__REFERRED_PROPERTY_NAME);
+    createEReference(propertyCallExpXSEClass, PROPERTY_CALL_EXP_XS__QUALIFIER);
 
     booleanLiteralExpXSEClass = createEClass(BOOLEAN_LITERAL_EXP_XS);
-    createEAttribute(booleanLiteralExpXSEClass,BOOLEAN_LITERAL_EXP_XS__BOOLEAN_SYMBOL);
+    createEAttribute(booleanLiteralExpXSEClass,
+        BOOLEAN_LITERAL_EXP_XS__BOOLEAN_SYMBOL);
 
     callExpXSEClass = createEClass(CALL_EXP_XS);
-    createEReference(callExpXSEClass,CALL_EXP_XS__SOURCE);
+    createEReference(callExpXSEClass, CALL_EXP_XS__SOURCE);
 
     collectionItemXSEClass = createEClass(COLLECTION_ITEM_XS);
-    createEReference(collectionItemXSEClass,COLLECTION_ITEM_XS__ITEM);
+    createEReference(collectionItemXSEClass, COLLECTION_ITEM_XS__ITEM);
 
     collectionLiteralExpXSEClass = createEClass(COLLECTION_LITERAL_EXP_XS);
-    createEAttribute(collectionLiteralExpXSEClass,COLLECTION_LITERAL_EXP_XS__KIND);
-    createEReference(collectionLiteralExpXSEClass,COLLECTION_LITERAL_EXP_XS__PART);
+    createEAttribute(collectionLiteralExpXSEClass,
+        COLLECTION_LITERAL_EXP_XS__KIND);
+    createEReference(collectionLiteralExpXSEClass,
+        COLLECTION_LITERAL_EXP_XS__PART);
 
     collectionLiteralPartXSEClass = createEClass(COLLECTION_LITERAL_PART_XS);
 
@@ -1323,83 +1342,87 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
         COLLECTION_OPERATION_CALL_EXP_XS__REFERRED_COLLECTION_OPERATION);
 
     collectionRangeXSEClass = createEClass(COLLECTION_RANGE_XS);
-    createEReference(collectionRangeXSEClass,COLLECTION_RANGE_XS__LAST);
-    createEReference(collectionRangeXSEClass,COLLECTION_RANGE_XS__FIRST);
+    createEReference(collectionRangeXSEClass, COLLECTION_RANGE_XS__LAST);
+    createEReference(collectionRangeXSEClass, COLLECTION_RANGE_XS__FIRST);
 
     enumLiteralExpXSEClass = createEClass(ENUM_LITERAL_EXP_XS);
-    createEAttribute(enumLiteralExpXSEClass,ENUM_LITERAL_EXP_XS__REFERRED_ENUM_LITERAL_PATH_NAME);
+    createEAttribute(enumLiteralExpXSEClass,
+        ENUM_LITERAL_EXP_XS__REFERRED_ENUM_LITERAL_PATH_NAME);
 
     featureCallExpXSEClass = createEClass(FEATURE_CALL_EXP_XS);
 
     ifExpXSEClass = createEClass(IF_EXP_XS);
-    createEReference(ifExpXSEClass,IF_EXP_XS__ELSE_EXPRESSION);
-    createEReference(ifExpXSEClass,IF_EXP_XS__CONDITION);
-    createEReference(ifExpXSEClass,IF_EXP_XS__THEN_EXPRESSION);
+    createEReference(ifExpXSEClass, IF_EXP_XS__ELSE_EXPRESSION);
+    createEReference(ifExpXSEClass, IF_EXP_XS__CONDITION);
+    createEReference(ifExpXSEClass, IF_EXP_XS__THEN_EXPRESSION);
 
     integerLiteralExpXSEClass = createEClass(INTEGER_LITERAL_EXP_XS);
-    createEAttribute(integerLiteralExpXSEClass,INTEGER_LITERAL_EXP_XS__INTEGER_SYMBOL);
+    createEAttribute(integerLiteralExpXSEClass,
+        INTEGER_LITERAL_EXP_XS__INTEGER_SYMBOL);
 
     iterateExpXSEClass = createEClass(ITERATE_EXP_XS);
-    createEReference(iterateExpXSEClass,ITERATE_EXP_XS__RESULT);
+    createEReference(iterateExpXSEClass, ITERATE_EXP_XS__RESULT);
 
     invalidLiteralExpXSEClass = createEClass(INVALID_LITERAL_EXP_XS);
 
     iteratorExpXSEClass = createEClass(ITERATOR_EXP_XS);
-    createEAttribute(iteratorExpXSEClass,ITERATOR_EXP_XS__NAME);
+    createEAttribute(iteratorExpXSEClass, ITERATOR_EXP_XS__NAME);
 
     letExpXSEClass = createEClass(LET_EXP_XS);
-    createEReference(letExpXSEClass,LET_EXP_XS__IN);
-    createEReference(letExpXSEClass,LET_EXP_XS__VARIABLE);
+    createEReference(letExpXSEClass, LET_EXP_XS__IN);
+    createEReference(letExpXSEClass, LET_EXP_XS__VARIABLE);
 
     literalExpXSEClass = createEClass(LITERAL_EXP_XS);
 
     loopExpXSEClass = createEClass(LOOP_EXP_XS);
-    createEReference(loopExpXSEClass,LOOP_EXP_XS__ITERATOR);
-    createEReference(loopExpXSEClass,LOOP_EXP_XS__BODY);
+    createEReference(loopExpXSEClass, LOOP_EXP_XS__ITERATOR);
+    createEReference(loopExpXSEClass, LOOP_EXP_XS__BODY);
 
     modelOperationCallExpXSEClass = createEClass(MODEL_OPERATION_CALL_EXP_XS);
     createEAttribute(modelOperationCallExpXSEClass,
         MODEL_OPERATION_CALL_EXP_XS__REFERRED_OPERATION_NAME);
 
     namespaceXSEClass = createEClass(NAMESPACE_XS);
-    createEAttribute(namespaceXSEClass,NAMESPACE_XS__PATH_NAME);
-    createEReference(namespaceXSEClass,NAMESPACE_XS__OWNED_RULE);
+    createEAttribute(namespaceXSEClass, NAMESPACE_XS__PATH_NAME);
+    createEReference(namespaceXSEClass, NAMESPACE_XS__OWNED_RULE);
 
     numericLiteralExpXSEClass = createEClass(NUMERIC_LITERAL_EXP_XS);
 
     operationCallExpXSEClass = createEClass(OPERATION_CALL_EXP_XS);
-    createEReference(operationCallExpXSEClass,OPERATION_CALL_EXP_XS__ARGUMENT);
+    createEReference(operationCallExpXSEClass, OPERATION_CALL_EXP_XS__ARGUMENT);
 
     primitiveLiteralExpXSEClass = createEClass(PRIMITIVE_LITERAL_EXP_XS);
 
     realLiteralExpXSEClass = createEClass(REAL_LITERAL_EXP_XS);
-    createEAttribute(realLiteralExpXSEClass,REAL_LITERAL_EXP_XS__REAL_SYMBOL);
+    createEAttribute(realLiteralExpXSEClass, REAL_LITERAL_EXP_XS__REAL_SYMBOL);
 
     staticOperationCallExpXSEClass = createEClass(STATIC_OPERATION_CALL_EXP_XS);
 
     staticPropertyCallExpXSEClass = createEClass(STATIC_PROPERTY_CALL_EXP_XS);
 
     stringLiteralExpXSEClass = createEClass(STRING_LITERAL_EXP_XS);
-    createEAttribute(stringLiteralExpXSEClass,STRING_LITERAL_EXP_XS__STRING_SYMBOL);
+    createEAttribute(stringLiteralExpXSEClass,
+        STRING_LITERAL_EXP_XS__STRING_SYMBOL);
 
     tupleLiteralExpXSEClass = createEClass(TUPLE_LITERAL_EXP_XS);
-    createEReference(tupleLiteralExpXSEClass,TUPLE_LITERAL_EXP_XS__PART);
+    createEReference(tupleLiteralExpXSEClass, TUPLE_LITERAL_EXP_XS__PART);
 
     tupleLiteralPartXSEClass = createEClass(TUPLE_LITERAL_PART_XS);
-    createEAttribute(tupleLiteralPartXSEClass,TUPLE_LITERAL_PART_XS__NAME);
-    createEAttribute(tupleLiteralPartXSEClass,TUPLE_LITERAL_PART_XS__TYPE_NAME);
-    createEReference(tupleLiteralPartXSEClass,TUPLE_LITERAL_PART_XS__VALUE);
+    createEReference(tupleLiteralPartXSEClass,
+        TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION);
 
     typeLiteralExpXSEClass = createEClass(TYPE_LITERAL_EXP_XS);
-    createEAttribute(typeLiteralExpXSEClass,TYPE_LITERAL_EXP_XS__REFERRED_TYPE_NAME);
+    createEAttribute(typeLiteralExpXSEClass,
+        TYPE_LITERAL_EXP_XS__REFERRED_TYPE_NAME);
 
     undefinedLiteralExpXSEClass = createEClass(UNDEFINED_LITERAL_EXP_XS);
 
     unlimitedNaturalExpXSEClass = createEClass(UNLIMITED_NATURAL_EXP_XS);
-    createEAttribute(unlimitedNaturalExpXSEClass,UNLIMITED_NATURAL_EXP_XS__SYMBOL);
+    createEAttribute(unlimitedNaturalExpXSEClass,
+        UNLIMITED_NATURAL_EXP_XS__SYMBOL);
 
     variableExpXSEClass = createEClass(VARIABLE_EXP_XS);
-    createEReference(variableExpXSEClass,VARIABLE_EXP_XS__REFERRED_VARIABLE);
+    createEReference(variableExpXSEClass, VARIABLE_EXP_XS__REFERRED_VARIABLE);
 
     // Create enums
     constraintKindXSEEnum = createEEnum(CONSTRAINT_KIND_XS);
@@ -1436,429 +1459,511 @@ public class XOCLPackageImpl extends EPackageImpl implements XOCLPackage {
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    oclExpressionXSEClass.getESuperTypes().add(this.getElementXS());
+    variableXSEClass.getESuperTypes().add(this.getElementXS());
     propertyCallExpXSEClass.getESuperTypes().add(this.getFeatureCallExpXS());
-    booleanLiteralExpXSEClass.getESuperTypes().add(this.getPrimitiveLiteralExpXS());
+    booleanLiteralExpXSEClass.getESuperTypes().add(
+        this.getPrimitiveLiteralExpXS());
     callExpXSEClass.getESuperTypes().add(this.getOclExpressionXS());
-    collectionItemXSEClass.getESuperTypes().add(this.getCollectionLiteralPartXS());
+    collectionItemXSEClass.getESuperTypes().add(
+        this.getCollectionLiteralPartXS());
     collectionLiteralExpXSEClass.getESuperTypes().add(this.getLiteralExpXS());
-    collectionOperationCallExpXSEClass.getESuperTypes().add(this.getOperationCallExpXS());
-    collectionRangeXSEClass.getESuperTypes().add(this.getCollectionLiteralPartXS());
+    collectionLiteralPartXSEClass.getESuperTypes().add(this.getElementXS());
+    collectionOperationCallExpXSEClass.getESuperTypes().add(
+        this.getOperationCallExpXS());
+    collectionRangeXSEClass.getESuperTypes().add(
+        this.getCollectionLiteralPartXS());
     enumLiteralExpXSEClass.getESuperTypes().add(this.getLiteralExpXS());
     featureCallExpXSEClass.getESuperTypes().add(this.getCallExpXS());
     ifExpXSEClass.getESuperTypes().add(this.getOclExpressionXS());
-    integerLiteralExpXSEClass.getESuperTypes().add(this.getNumericLiteralExpXS());
+    integerLiteralExpXSEClass.getESuperTypes().add(
+        this.getNumericLiteralExpXS());
     iterateExpXSEClass.getESuperTypes().add(this.getLoopExpXS());
     invalidLiteralExpXSEClass.getESuperTypes().add(this.getLiteralExpXS());
     iteratorExpXSEClass.getESuperTypes().add(this.getLoopExpXS());
     letExpXSEClass.getESuperTypes().add(this.getOclExpressionXS());
     literalExpXSEClass.getESuperTypes().add(this.getOclExpressionXS());
     loopExpXSEClass.getESuperTypes().add(this.getCallExpXS());
-    modelOperationCallExpXSEClass.getESuperTypes().add(this.getOperationCallExpXS());
-    numericLiteralExpXSEClass.getESuperTypes().add(this.getPrimitiveLiteralExpXS());
+    modelOperationCallExpXSEClass.getESuperTypes().add(
+        this.getOperationCallExpXS());
+    numericLiteralExpXSEClass.getESuperTypes().add(
+        this.getPrimitiveLiteralExpXS());
     operationCallExpXSEClass.getESuperTypes().add(this.getFeatureCallExpXS());
     primitiveLiteralExpXSEClass.getESuperTypes().add(this.getLiteralExpXS());
     realLiteralExpXSEClass.getESuperTypes().add(this.getNumericLiteralExpXS());
-    staticOperationCallExpXSEClass.getESuperTypes().add(this.getModelOperationCallExpXS());
-    staticPropertyCallExpXSEClass.getESuperTypes().add(this.getPropertyCallExpXS());
-    stringLiteralExpXSEClass.getESuperTypes().add(this.getPrimitiveLiteralExpXS());
+    staticOperationCallExpXSEClass.getESuperTypes().add(
+        this.getModelOperationCallExpXS());
+    staticPropertyCallExpXSEClass.getESuperTypes().add(
+        this.getPropertyCallExpXS());
+    stringLiteralExpXSEClass.getESuperTypes().add(
+        this.getPrimitiveLiteralExpXS());
     tupleLiteralExpXSEClass.getESuperTypes().add(this.getLiteralExpXS());
+    tupleLiteralPartXSEClass.getESuperTypes().add(this.getElementXS());
     typeLiteralExpXSEClass.getESuperTypes().add(this.getLiteralExpXS());
     undefinedLiteralExpXSEClass.getESuperTypes().add(this.getLiteralExpXS());
-    unlimitedNaturalExpXSEClass.getESuperTypes().add(this.getNumericLiteralExpXS());
+    unlimitedNaturalExpXSEClass.getESuperTypes().add(
+        this.getNumericLiteralExpXS());
     variableExpXSEClass.getESuperTypes().add(this.getOclExpressionXS());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(constraintXSEClass,ConstraintXS.class,
-        "ConstraintXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(elementXSEClass, ElementXS.class,
+        "ElementXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+    initEClass(
+        constraintXSEClass,
+        ConstraintXS.class,
+        "ConstraintXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getConstraintXS_Name(),
         ecorePackage.getEString(),
-        "name",null,0,1,ConstraintXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "name", null, 0, 1, ConstraintXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEAttribute(
         getConstraintXS_Kind(),
         this.getConstraintKindXS(),
-        "kind",null,0,1,ConstraintXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "kind", null, 0, 1, ConstraintXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEAttribute(
         getConstraintXS_ConstrainedElement(),
         ecorePackage.getEString(),
-        "constrainedElement",null,0,1,ConstraintXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "constrainedElement", null, 0, 1, ConstraintXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEAttribute(
         getConstraintXS_DefinedFeature(),
         ecorePackage.getEString(),
-        "definedFeature",null,0,1,ConstraintXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "definedFeature", null, 0, 1, ConstraintXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getConstraintXS_Specification(),
         this.getExpressionInOclXS(),
         this.getExpressionInOclXS_Constraint(),
-        "specification",null,0,1,ConstraintXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "specification", null, 0, 1, ConstraintXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(expressionInOclXSEClass,ExpressionInOclXS.class,
-        "ExpressionInOclXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        expressionInOclXSEClass,
+        ExpressionInOclXS.class,
+        "ExpressionInOclXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getExpressionInOclXS_Body(),
         ecorePackage.getEString(),
-        "body",null,0,1,ExpressionInOclXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "body", null, 0, 1, ExpressionInOclXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getExpressionInOclXS_Constraint(),
         this.getConstraintXS(),
         this.getConstraintXS_Specification(),
-        "constraint",null,0,1,ExpressionInOclXS.class,IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "constraint", null, 0, 1, ExpressionInOclXS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getExpressionInOclXS_BodyExpression(),
         this.getOclExpressionXS(),
         null,
-        "bodyExpression",null,1,1,ExpressionInOclXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "bodyExpression", null, 1, 1, ExpressionInOclXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getExpressionInOclXS_Context(),
         this.getVariableXS(),
         null,
-        "context",null,0,1,ExpressionInOclXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "context", null, 0, 1, ExpressionInOclXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getExpressionInOclXS_Parameter(),
         this.getVariableXS(),
         null,
-        "parameter",null,0,-1,ExpressionInOclXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "parameter", null, 0, -1, ExpressionInOclXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getExpressionInOclXS_Result(),
         this.getVariableXS(),
         null,
-        "result",null,0,1,ExpressionInOclXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "result", null, 0, 1, ExpressionInOclXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(oclExpressionXSEClass,OclExpressionXS.class,
-        "OclExpressionXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        oclExpressionXSEClass,
+        OclExpressionXS.class,
+        "OclExpressionXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(variableXSEClass,VariableXS.class,
-        "VariableXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(variableXSEClass, VariableXS.class,
+        "VariableXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getVariableXS_Name(),
         ecorePackage.getEString(),
-        "name",null,0,1,VariableXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "name", null, 0, 1, VariableXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEAttribute(
         getVariableXS_Type(),
         ecorePackage.getEString(),
-        "type",null,0,1,VariableXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "type", null, 0, 1, VariableXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getVariableXS_InitExpression(),
         this.getOclExpressionXS(),
         null,
-        "initExpression",null,0,1,VariableXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "initExpression", null, 0, 1, VariableXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(propertyCallExpXSEClass,PropertyCallExpXS.class,
-        "PropertyCallExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        propertyCallExpXSEClass,
+        PropertyCallExpXS.class,
+        "PropertyCallExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getPropertyCallExpXS_ReferredPropertyName(),
         ecorePackage.getEString(),
-        "referredPropertyName",null,0,1,PropertyCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "referredPropertyName", null, 0, 1, PropertyCallExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getPropertyCallExpXS_Qualifier(),
         this.getOclExpressionXS(),
         null,
-        "qualifier",null,0,-1,PropertyCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "qualifier", null, 0, -1, PropertyCallExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(booleanLiteralExpXSEClass,BooleanLiteralExpXS.class,
-        "BooleanLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        booleanLiteralExpXSEClass,
+        BooleanLiteralExpXS.class,
+        "BooleanLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getBooleanLiteralExpXS_BooleanSymbol(),
         ecorePackage.getEBoolean(),
-        "booleanSymbol",null,0,1,BooleanLiteralExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "booleanSymbol", null, 0, 1, BooleanLiteralExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(callExpXSEClass,CallExpXS.class,
-        "CallExpXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(callExpXSEClass, CallExpXS.class,
+        "CallExpXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getCallExpXS_Source(),
         this.getOclExpressionXS(),
         null,
-        "source",null,0,1,CallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "source", null, 0, 1, CallExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(collectionItemXSEClass,CollectionItemXS.class,
-        "CollectionItemXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        collectionItemXSEClass,
+        CollectionItemXS.class,
+        "CollectionItemXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getCollectionItemXS_Item(),
         this.getOclExpressionXS(),
         null,
-        "item",null,1,1,CollectionItemXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "item", null, 1, 1, CollectionItemXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(collectionLiteralExpXSEClass,CollectionLiteralExpXS.class,
-        "CollectionLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        collectionLiteralExpXSEClass,
+        CollectionLiteralExpXS.class,
+        "CollectionLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getCollectionLiteralExpXS_Kind(),
         this.getCollectionKindXS(),
-        "kind",null,0,1,CollectionLiteralExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "kind", null, 0, 1, CollectionLiteralExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getCollectionLiteralExpXS_Part(),
         this.getCollectionLiteralPartXS(),
         null,
-        "part",null,0,-1,CollectionLiteralExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "part", null, 0, -1, CollectionLiteralExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(collectionLiteralPartXSEClass,CollectionLiteralPartXS.class,
-        "CollectionLiteralPartXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        collectionLiteralPartXSEClass,
+        CollectionLiteralPartXS.class,
+        "CollectionLiteralPartXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(collectionOperationCallExpXSEClass,CollectionOperationCallExpXS.class,
-        "CollectionOperationCallExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        collectionOperationCallExpXSEClass,
+        CollectionOperationCallExpXS.class,
+        "CollectionOperationCallExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getCollectionOperationCallExpXS_ReferredCollectionOperation(),
         this.getCollectionOperationXS(),
-        "referredCollectionOperation",null,0,1,CollectionOperationCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "referredCollectionOperation", null, 0, 1, CollectionOperationCallExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(collectionRangeXSEClass,CollectionRangeXS.class,
-        "CollectionRangeXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        collectionRangeXSEClass,
+        CollectionRangeXS.class,
+        "CollectionRangeXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getCollectionRangeXS_Last(),
         this.getOclExpressionXS(),
         null,
-        "last",null,1,1,CollectionRangeXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "last", null, 1, 1, CollectionRangeXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getCollectionRangeXS_First(),
         this.getOclExpressionXS(),
         null,
-        "first",null,1,1,CollectionRangeXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "first", null, 1, 1, CollectionRangeXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(enumLiteralExpXSEClass,EnumLiteralExpXS.class,
-        "EnumLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        enumLiteralExpXSEClass,
+        EnumLiteralExpXS.class,
+        "EnumLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getEnumLiteralExpXS_ReferredEnumLiteralPathName(),
         ecorePackage.getEString(),
-        "referredEnumLiteralPathName",null,0,1,EnumLiteralExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "referredEnumLiteralPathName", null, 0, 1, EnumLiteralExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(featureCallExpXSEClass,FeatureCallExpXS.class,
-        "FeatureCallExpXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        featureCallExpXSEClass,
+        FeatureCallExpXS.class,
+        "FeatureCallExpXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(ifExpXSEClass,IfExpXS.class,
-        "IfExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(ifExpXSEClass, IfExpXS.class,
+        "IfExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getIfExpXS_ElseExpression(),
         this.getOclExpressionXS(),
         null,
-        "elseExpression",null,1,1,IfExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "elseExpression", null, 1, 1, IfExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getIfExpXS_Condition(),
         this.getOclExpressionXS(),
         null,
-        "condition",null,1,1,IfExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "condition", null, 1, 1, IfExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getIfExpXS_ThenExpression(),
         this.getOclExpressionXS(),
         null,
-        "thenExpression",null,1,1,IfExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "thenExpression", null, 1, 1, IfExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(integerLiteralExpXSEClass,IntegerLiteralExpXS.class,
-        "IntegerLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        integerLiteralExpXSEClass,
+        IntegerLiteralExpXS.class,
+        "IntegerLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getIntegerLiteralExpXS_IntegerSymbol(),
         ecorePackage.getEInt(),
-        "integerSymbol",null,0,1,IntegerLiteralExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "integerSymbol", null, 0, 1, IntegerLiteralExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(iterateExpXSEClass,IterateExpXS.class,
-        "IterateExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        iterateExpXSEClass,
+        IterateExpXS.class,
+        "IterateExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getIterateExpXS_Result(),
         this.getVariableXS(),
         null,
-        "result",null,0,1,IterateExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "result", null, 0, 1, IterateExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(invalidLiteralExpXSEClass,InvalidLiteralExpXS.class,
-        "InvalidLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        invalidLiteralExpXSEClass,
+        InvalidLiteralExpXS.class,
+        "InvalidLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(iteratorExpXSEClass,IteratorExpXS.class,
-        "IteratorExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        iteratorExpXSEClass,
+        IteratorExpXS.class,
+        "IteratorExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getIteratorExpXS_Name(),
         this.getIteratorExpressionXS(),
-        "name",null,0,1,IteratorExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "name", null, 0, 1, IteratorExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(letExpXSEClass,LetExpXS.class,
-        "LetExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(letExpXSEClass, LetExpXS.class,
+        "LetExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getLetExpXS_In(),
         this.getOclExpressionXS(),
         null,
-        "in",null,1,1,LetExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "in", null, 1, 1, LetExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getLetExpXS_Variable(),
         this.getVariableXS(),
         null,
-        "variable",null,1,1,LetExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "variable", null, 1, 1, LetExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(literalExpXSEClass,LiteralExpXS.class,
-        "LiteralExpXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(literalExpXSEClass, LiteralExpXS.class,
+        "LiteralExpXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(loopExpXSEClass,LoopExpXS.class,
-        "LoopExpXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(loopExpXSEClass, LoopExpXS.class,
+        "LoopExpXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getLoopExpXS_Iterator(),
         this.getVariableXS(),
         null,
-        "iterator",null,0,-1,LoopExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "iterator", null, 0, -1, LoopExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getLoopExpXS_Body(),
         this.getOclExpressionXS(),
         null,
-        "body",null,1,1,LoopExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "body", null, 1, 1, LoopExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(modelOperationCallExpXSEClass,ModelOperationCallExpXS.class,
-        "ModelOperationCallExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        modelOperationCallExpXSEClass,
+        ModelOperationCallExpXS.class,
+        "ModelOperationCallExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getModelOperationCallExpXS_ReferredOperationName(),
         ecorePackage.getEString(),
-        "referredOperationName",null,0,1,ModelOperationCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "referredOperationName", null, 0, 1, ModelOperationCallExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(namespaceXSEClass,NamespaceXS.class,
-        "NamespaceXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(namespaceXSEClass, NamespaceXS.class,
+        "NamespaceXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getNamespaceXS_PathName(),
         ecorePackage.getEString(),
-        "pathName",null,0,1,NamespaceXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "pathName", null, 0, 1, NamespaceXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
     initEReference(
         getNamespaceXS_OwnedRule(),
         this.getConstraintXS(),
         null,
-        "ownedRule",null,0,-1,NamespaceXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "ownedRule", null, 0, -1, NamespaceXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(numericLiteralExpXSEClass,NumericLiteralExpXS.class,
-        "NumericLiteralExpXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        numericLiteralExpXSEClass,
+        NumericLiteralExpXS.class,
+        "NumericLiteralExpXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(operationCallExpXSEClass,OperationCallExpXS.class,
-        "OperationCallExpXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        operationCallExpXSEClass,
+        OperationCallExpXS.class,
+        "OperationCallExpXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getOperationCallExpXS_Argument(),
         this.getOclExpressionXS(),
         null,
-        "argument",null,0,-1,OperationCallExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "argument", null, 0, -1, OperationCallExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(primitiveLiteralExpXSEClass,PrimitiveLiteralExpXS.class,
-        "PrimitiveLiteralExpXS",IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        primitiveLiteralExpXSEClass,
+        PrimitiveLiteralExpXS.class,
+        "PrimitiveLiteralExpXS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(realLiteralExpXSEClass,RealLiteralExpXS.class,
-        "RealLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        realLiteralExpXSEClass,
+        RealLiteralExpXS.class,
+        "RealLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getRealLiteralExpXS_RealSymbol(),
         ecorePackage.getEFloat(),
-        "realSymbol",null,0,1,RealLiteralExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "realSymbol", null, 0, 1, RealLiteralExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(staticOperationCallExpXSEClass,StaticOperationCallExpXS.class,
-        "StaticOperationCallExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        staticOperationCallExpXSEClass,
+        StaticOperationCallExpXS.class,
+        "StaticOperationCallExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(staticPropertyCallExpXSEClass,StaticPropertyCallExpXS.class,
-        "StaticPropertyCallExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        staticPropertyCallExpXSEClass,
+        StaticPropertyCallExpXS.class,
+        "StaticPropertyCallExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(stringLiteralExpXSEClass,StringLiteralExpXS.class,
-        "StringLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        stringLiteralExpXSEClass,
+        StringLiteralExpXS.class,
+        "StringLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getStringLiteralExpXS_StringSymbol(),
         ecorePackage.getEString(),
-        "stringSymbol",null,0,1,StringLiteralExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "stringSymbol", null, 0, 1, StringLiteralExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(tupleLiteralExpXSEClass,TupleLiteralExpXS.class,
-        "TupleLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        tupleLiteralExpXSEClass,
+        TupleLiteralExpXS.class,
+        "TupleLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getTupleLiteralExpXS_Part(),
         this.getTupleLiteralPartXS(),
         null,
-        "part",null,0,-1,TupleLiteralExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "part", null, 0, -1, TupleLiteralExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(tupleLiteralPartXSEClass,TupleLiteralPartXS.class,
-        "TupleLiteralPartXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-    initEAttribute(
-        getTupleLiteralPartXS_Name(),
-        ecorePackage.getEString(),
-        "name",null,0,1,TupleLiteralPartXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
-    initEAttribute(
-        getTupleLiteralPartXS_TypeName(),
-        ecorePackage.getEString(),
-        "typeName",null,0,1,TupleLiteralPartXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+    initEClass(
+        tupleLiteralPartXSEClass,
+        TupleLiteralPartXS.class,
+        "TupleLiteralPartXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
-        getTupleLiteralPartXS_Value(),
-        this.getOclExpressionXS(),
+        getTupleLiteralPartXS_VariableDeclaration(),
+        this.getVariableXS(),
         null,
-        "value",null,1,1,TupleLiteralPartXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,IS_COMPOSITE,!IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "variableDeclaration", null, 1, 1, TupleLiteralPartXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(typeLiteralExpXSEClass,TypeLiteralExpXS.class,
-        "TypeLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        typeLiteralExpXSEClass,
+        TypeLiteralExpXS.class,
+        "TypeLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getTypeLiteralExpXS_ReferredTypeName(),
         ecorePackage.getEString(),
-        "referredTypeName",null,0,1,TypeLiteralExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "referredTypeName", null, 0, 1, TypeLiteralExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(undefinedLiteralExpXSEClass,UndefinedLiteralExpXS.class,
-        "UndefinedLiteralExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        undefinedLiteralExpXSEClass,
+        UndefinedLiteralExpXS.class,
+        "UndefinedLiteralExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-    initEClass(unlimitedNaturalExpXSEClass,UnlimitedNaturalExpXS.class,
-        "UnlimitedNaturalExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        unlimitedNaturalExpXSEClass,
+        UnlimitedNaturalExpXS.class,
+        "UnlimitedNaturalExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEAttribute(
         getUnlimitedNaturalExpXS_Symbol(),
         ecorePackage.getEString(),
-        "symbol",null,0,1,UnlimitedNaturalExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_UNSETTABLE,!IS_ID,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "symbol", null, 0, 1, UnlimitedNaturalExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-    initEClass(variableExpXSEClass,VariableExpXS.class,
-        "VariableExpXS",!IS_ABSTRACT,!IS_INTERFACE,IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEClass(
+        variableExpXSEClass,
+        VariableExpXS.class,
+        "VariableExpXS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(
         getVariableExpXS_ReferredVariable(),
         this.getVariableXS(),
         null,
-        "referredVariable",null,0,1,VariableExpXS.class,!IS_TRANSIENT,!IS_VOLATILE,IS_CHANGEABLE,!IS_COMPOSITE,IS_RESOLVE_PROXIES,!IS_UNSETTABLE,IS_UNIQUE,!IS_DERIVED,IS_ORDERED); //$NON-NLS-1$
+        "referredVariable", null, 0, 1, VariableExpXS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
     // Initialize enums and add enum literals
-    initEEnum(constraintKindXSEEnum,ConstraintKindXS.class,"ConstraintKindXS"); //$NON-NLS-1$
-    addEEnumLiteral(constraintKindXSEEnum,ConstraintKindXS.INVARIANT);
-    addEEnumLiteral(constraintKindXSEEnum,ConstraintKindXS.DEFINITION);
-    addEEnumLiteral(constraintKindXSEEnum,ConstraintKindXS.PRECONDITION);
-    addEEnumLiteral(constraintKindXSEEnum,ConstraintKindXS.POSTCONDITION);
-    addEEnumLiteral(constraintKindXSEEnum,ConstraintKindXS.INITIALVALUE);
-    addEEnumLiteral(constraintKindXSEEnum,ConstraintKindXS.DERIVEDVALUE);
-    addEEnumLiteral(constraintKindXSEEnum,ConstraintKindXS.BODY);
+    initEEnum(constraintKindXSEEnum, ConstraintKindXS.class, "ConstraintKindXS"); //$NON-NLS-1$
+    addEEnumLiteral(constraintKindXSEEnum, ConstraintKindXS.INVARIANT);
+    addEEnumLiteral(constraintKindXSEEnum, ConstraintKindXS.DEFINITION);
+    addEEnumLiteral(constraintKindXSEEnum, ConstraintKindXS.PRECONDITION);
+    addEEnumLiteral(constraintKindXSEEnum, ConstraintKindXS.POSTCONDITION);
+    addEEnumLiteral(constraintKindXSEEnum, ConstraintKindXS.INITIALVALUE);
+    addEEnumLiteral(constraintKindXSEEnum, ConstraintKindXS.DERIVEDVALUE);
+    addEEnumLiteral(constraintKindXSEEnum, ConstraintKindXS.BODY);
 
-    initEEnum(collectionKindXSEEnum,CollectionKindXS.class,"CollectionKindXS"); //$NON-NLS-1$
-    addEEnumLiteral(collectionKindXSEEnum,CollectionKindXS.SET);
-    addEEnumLiteral(collectionKindXSEEnum,CollectionKindXS.ORDERED_SET);
-    addEEnumLiteral(collectionKindXSEEnum,CollectionKindXS.BAG);
-    addEEnumLiteral(collectionKindXSEEnum,CollectionKindXS.SEQUENCE);
+    initEEnum(collectionKindXSEEnum, CollectionKindXS.class, "CollectionKindXS"); //$NON-NLS-1$
+    addEEnumLiteral(collectionKindXSEEnum, CollectionKindXS.SET);
+    addEEnumLiteral(collectionKindXSEEnum, CollectionKindXS.ORDERED_SET);
+    addEEnumLiteral(collectionKindXSEEnum, CollectionKindXS.BAG);
+    addEEnumLiteral(collectionKindXSEEnum, CollectionKindXS.SEQUENCE);
 
-    initEEnum(collectionOperationXSEEnum,CollectionOperationXS.class,"CollectionOperationXS"); //$NON-NLS-1$
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.DEFAULT);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.EQUALS);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.EQUALS_NOT);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.MINUS);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.APPEND);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.AS_BAG);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.AS_ORDERED_SET);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.AS_SEQUENCE);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.AS_SET);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.AT);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.COUNT);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.EXCLUDES);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.EXCLUDES_ALL);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.EXCLUDING);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.FIRST);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.FLATTEN);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.INCLUDES);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.INCLUDES_ALL);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.INCLUDING);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.INDEX_OF);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.INSERT_AT);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.INTERSECTION);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.IS_EMPTY);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.LAST);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.NOT_EMPTY);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.PREPEND);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.SIZE);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.SUM);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.SUB_ORDERED_SET);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.SUB_SEQUENCE);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.SYMMETRIC_DIFFERENCE);
-    addEEnumLiteral(collectionOperationXSEEnum,CollectionOperationXS.UNION);
+    initEEnum(collectionOperationXSEEnum, CollectionOperationXS.class,
+        "CollectionOperationXS"); //$NON-NLS-1$
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.DEFAULT);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.EQUALS);
+    addEEnumLiteral(collectionOperationXSEEnum,
+        CollectionOperationXS.EQUALS_NOT);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.MINUS);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.APPEND);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.AS_BAG);
+    addEEnumLiteral(collectionOperationXSEEnum,
+        CollectionOperationXS.AS_ORDERED_SET);
+    addEEnumLiteral(collectionOperationXSEEnum,
+        CollectionOperationXS.AS_SEQUENCE);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.AS_SET);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.AT);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.COUNT);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.EXCLUDES);
+    addEEnumLiteral(collectionOperationXSEEnum,
+        CollectionOperationXS.EXCLUDES_ALL);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.EXCLUDING);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.FIRST);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.FLATTEN);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.INCLUDES);
+    addEEnumLiteral(collectionOperationXSEEnum,
+        CollectionOperationXS.INCLUDES_ALL);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.INCLUDING);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.INDEX_OF);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.INSERT_AT);
+    addEEnumLiteral(collectionOperationXSEEnum,
+        CollectionOperationXS.INTERSECTION);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.IS_EMPTY);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.LAST);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.NOT_EMPTY);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.PREPEND);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.SIZE);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.SUM);
+    addEEnumLiteral(collectionOperationXSEEnum,
+        CollectionOperationXS.SUB_ORDERED_SET);
+    addEEnumLiteral(collectionOperationXSEEnum,
+        CollectionOperationXS.SUB_SEQUENCE);
+    addEEnumLiteral(collectionOperationXSEEnum,
+        CollectionOperationXS.SYMMETRIC_DIFFERENCE);
+    addEEnumLiteral(collectionOperationXSEEnum, CollectionOperationXS.UNION);
 
-    initEEnum(iteratorExpressionXSEEnum,IteratorExpressionXS.class,"IteratorExpressionXS"); //$NON-NLS-1$
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.DEFAULT);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.ANY);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.COLLECT);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.COLLECT_NESTED);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.EXISTS);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.FOR_ALL);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.IS_UNIQUE);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.ONE);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.REJECT);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.SELECT);
-    addEEnumLiteral(iteratorExpressionXSEEnum,IteratorExpressionXS.SORTED_BY);
+    initEEnum(iteratorExpressionXSEEnum, IteratorExpressionXS.class,
+        "IteratorExpressionXS"); //$NON-NLS-1$
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.DEFAULT);
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.ANY);
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.COLLECT);
+    addEEnumLiteral(iteratorExpressionXSEEnum,
+        IteratorExpressionXS.COLLECT_NESTED);
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.EXISTS);
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.FOR_ALL);
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.IS_UNIQUE);
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.ONE);
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.REJECT);
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.SELECT);
+    addEEnumLiteral(iteratorExpressionXSEEnum, IteratorExpressionXS.SORTED_BY);
 
     // Create resource
     createResource(eNS_URI);

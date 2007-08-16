@@ -72,7 +72,7 @@ public abstract class LoopExpXSImpl extends CallExpXSImpl implements LoopExpXS {
    * @generated
    * @ordered
    */
-  protected EList<VariableXS> iterator = null;
+  protected EList<VariableXS> iterator;
 
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -82,7 +82,7 @@ public abstract class LoopExpXSImpl extends CallExpXSImpl implements LoopExpXS {
    * @generated
    * @ordered
    */
-  protected OclExpressionXS body = null;
+  protected OclExpressionXS body;
 
   /**
    * <!-- begin-user-doc -->
@@ -110,8 +110,8 @@ public abstract class LoopExpXSImpl extends CallExpXSImpl implements LoopExpXS {
    */
   public EList<VariableXS> getIterator() {
     if (iterator == null) {
-      iterator = new EObjectContainmentEList<VariableXS>(VariableXS.class,this,
-          XOCLPackage.LOOP_EXP_XS__ITERATOR);
+      iterator = new EObjectContainmentEList<VariableXS>(VariableXS.class,
+          this, XOCLPackage.LOOP_EXP_XS__ITERATOR);
     }
     return iterator;
   }
@@ -130,12 +130,13 @@ public abstract class LoopExpXSImpl extends CallExpXSImpl implements LoopExpXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBody(OclExpressionXS newBody, NotificationChain msgs) {
+  public NotificationChain basicSetBody(OclExpressionXS newBody,
+      NotificationChain msgs) {
     OclExpressionXS oldBody = body;
     body = newBody;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.LOOP_EXP_XS__BODY,oldBody,newBody);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.LOOP_EXP_XS__BODY, oldBody, newBody);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -151,17 +152,17 @@ public abstract class LoopExpXSImpl extends CallExpXSImpl implements LoopExpXS {
     if (newBody != body) {
       NotificationChain msgs = null;
       if (body != null)
-        msgs = ((InternalEObject) body).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.LOOP_EXP_XS__BODY,null,msgs);
+        msgs = ((InternalEObject) body).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.LOOP_EXP_XS__BODY, null, msgs);
       if (newBody != null)
-        msgs = ((InternalEObject) newBody).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.LOOP_EXP_XS__BODY,null,msgs);
-      msgs = basicSetBody(newBody,msgs);
+        msgs = ((InternalEObject) newBody).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.LOOP_EXP_XS__BODY, null, msgs);
+      msgs = basicSetBody(newBody, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.LOOP_EXP_XS__BODY,newBody,
-          newBody));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.LOOP_EXP_XS__BODY, newBody, newBody));
   }
 
   /**
@@ -170,15 +171,15 @@ public abstract class LoopExpXSImpl extends CallExpXSImpl implements LoopExpXS {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.LOOP_EXP_XS__ITERATOR:
-        return ((InternalEList<?>) getIterator()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getIterator()).basicRemove(otherEnd, msgs);
       case XOCLPackage.LOOP_EXP_XS__BODY:
-        return basicSetBody(null,msgs);
+        return basicSetBody(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -194,7 +195,7 @@ public abstract class LoopExpXSImpl extends CallExpXSImpl implements LoopExpXS {
       case XOCLPackage.LOOP_EXP_XS__BODY:
         return getBody();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -214,7 +215,7 @@ public abstract class LoopExpXSImpl extends CallExpXSImpl implements LoopExpXS {
         setBody((OclExpressionXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

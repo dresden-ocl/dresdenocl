@@ -52,8 +52,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class ModelOperationCallExpXSImpl extends OperationCallExpXSImpl implements
-    ModelOperationCallExpXS {
+public class ModelOperationCallExpXSImpl extends OperationCallExpXSImpl
+    implements ModelOperationCallExpXS {
 
   /**
    * The default value of the '{@link #getReferredOperationName() <em>Referred Operation Name</em>}' attribute.
@@ -112,9 +112,9 @@ public class ModelOperationCallExpXSImpl extends OperationCallExpXSImpl implemen
     String oldReferredOperationName = referredOperationName;
     referredOperationName = newReferredOperationName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
+      eNotify(new ENotificationImpl(this, Notification.SET,
           XOCLPackage.MODEL_OPERATION_CALL_EXP_XS__REFERRED_OPERATION_NAME,
-          oldReferredOperationName,referredOperationName));
+          oldReferredOperationName, referredOperationName));
   }
 
   /**
@@ -128,7 +128,7 @@ public class ModelOperationCallExpXSImpl extends OperationCallExpXSImpl implemen
       case XOCLPackage.MODEL_OPERATION_CALL_EXP_XS__REFERRED_OPERATION_NAME:
         return getReferredOperationName();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -143,7 +143,7 @@ public class ModelOperationCallExpXSImpl extends OperationCallExpXSImpl implemen
         setReferredOperationName((String) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

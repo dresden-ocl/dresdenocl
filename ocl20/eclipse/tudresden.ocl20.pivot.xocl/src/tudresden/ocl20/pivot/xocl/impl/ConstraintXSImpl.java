@@ -190,8 +190,8 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.CONSTRAINT_XS__NAME,oldName,
-          name));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.CONSTRAINT_XS__NAME, oldName, name));
   }
 
   /**
@@ -212,8 +212,8 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
     ConstraintKindXS oldKind = kind;
     kind = newKind == null ? KIND_EDEFAULT : newKind;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.CONSTRAINT_XS__KIND,oldKind,
-          kind));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.CONSTRAINT_XS__KIND, oldKind, kind));
   }
 
   /**
@@ -234,8 +234,9 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
     String oldConstrainedElement = constrainedElement;
     constrainedElement = newConstrainedElement;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.CONSTRAINT_XS__CONSTRAINED_ELEMENT,oldConstrainedElement,constrainedElement));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.CONSTRAINT_XS__CONSTRAINED_ELEMENT,
+          oldConstrainedElement, constrainedElement));
   }
 
   /**
@@ -256,8 +257,9 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
     String oldDefinedFeature = definedFeature;
     definedFeature = newDefinedFeature;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.CONSTRAINT_XS__DEFINED_FEATURE,oldDefinedFeature,definedFeature));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.CONSTRAINT_XS__DEFINED_FEATURE, oldDefinedFeature,
+          definedFeature));
   }
 
   /**
@@ -274,13 +276,14 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetSpecification(ExpressionInOclXS newSpecification,
-      NotificationChain msgs) {
+  public NotificationChain basicSetSpecification(
+      ExpressionInOclXS newSpecification, NotificationChain msgs) {
     ExpressionInOclXS oldSpecification = specification;
     specification = newSpecification;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.CONSTRAINT_XS__SPECIFICATION,oldSpecification,newSpecification);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.CONSTRAINT_XS__SPECIFICATION,
+          oldSpecification, newSpecification);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -297,16 +300,19 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
       NotificationChain msgs = null;
       if (specification != null)
         msgs = ((InternalEObject) specification).eInverseRemove(this,
-            XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT,ExpressionInOclXS.class,msgs);
+            XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT,
+            ExpressionInOclXS.class, msgs);
       if (newSpecification != null)
         msgs = ((InternalEObject) newSpecification).eInverseAdd(this,
-            XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT,ExpressionInOclXS.class,msgs);
-      msgs = basicSetSpecification(newSpecification,msgs);
+            XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT,
+            ExpressionInOclXS.class, msgs);
+      msgs = basicSetSpecification(newSpecification, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.CONSTRAINT_XS__SPECIFICATION,
-          newSpecification,newSpecification));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.CONSTRAINT_XS__SPECIFICATION, newSpecification,
+          newSpecification));
   }
 
   /**
@@ -320,11 +326,12 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
     switch (featureID) {
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:
         if (specification != null)
-          msgs = ((InternalEObject) specification).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-              - XOCLPackage.CONSTRAINT_XS__SPECIFICATION,null,msgs);
-        return basicSetSpecification((ExpressionInOclXS) otherEnd,msgs);
+          msgs = ((InternalEObject) specification)
+              .eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+                  - XOCLPackage.CONSTRAINT_XS__SPECIFICATION, null, msgs);
+        return basicSetSpecification((ExpressionInOclXS) otherEnd, msgs);
     }
-    return super.eInverseAdd(otherEnd,featureID,msgs);
+    return super.eInverseAdd(otherEnd, featureID, msgs);
   }
 
   /**
@@ -333,13 +340,13 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:
-        return basicSetSpecification(null,msgs);
+        return basicSetSpecification(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -361,7 +368,7 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
       case XOCLPackage.CONSTRAINT_XS__SPECIFICATION:
         return getSpecification();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -388,7 +395,7 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
         setSpecification((ExpressionInOclXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -427,7 +434,8 @@ public class ConstraintXSImpl extends EObjectImpl implements ConstraintXS {
   public boolean eIsSet(int featureID) {
     switch (featureID) {
       case XOCLPackage.CONSTRAINT_XS__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+            .equals(name);
       case XOCLPackage.CONSTRAINT_XS__KIND:
         return kind != KIND_EDEFAULT;
       case XOCLPackage.CONSTRAINT_XS__CONSTRAINED_ELEMENT:

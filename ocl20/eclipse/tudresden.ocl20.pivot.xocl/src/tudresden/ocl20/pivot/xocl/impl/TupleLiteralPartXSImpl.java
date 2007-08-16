@@ -37,10 +37,9 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import tudresden.ocl20.pivot.xocl.OclExpressionXS;
 import tudresden.ocl20.pivot.xocl.TupleLiteralPartXS;
+import tudresden.ocl20.pivot.xocl.VariableXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
@@ -50,65 +49,24 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.TupleLiteralPartXSImpl#getName <em>Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.TupleLiteralPartXSImpl#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.impl.TupleLiteralPartXSImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.impl.TupleLiteralPartXSImpl#getVariableDeclaration <em>Variable Declaration</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TupleLiteralPartXSImpl extends EObjectImpl implements TupleLiteralPartXS {
+public class TupleLiteralPartXSImpl extends ElementXSImpl implements
+    TupleLiteralPartXS {
 
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getVariableDeclaration() <em>Variable Declaration</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getVariableDeclaration()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getTypeName() <em>Type Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTypeName()
-   * @generated
-   * @ordered
-   */
-  protected static final String TYPE_NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTypeName()
-   * @generated
-   * @ordered
-   */
-  protected String typeName = TYPE_NAME_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected OclExpressionXS value = null;
+  protected VariableXS variableDeclaration;
 
   /**
    * <!-- begin-user-doc -->
@@ -134,8 +92,8 @@ public class TupleLiteralPartXSImpl extends EObjectImpl implements TupleLiteralP
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName() {
-    return name;
+  public VariableXS getVariableDeclaration() {
+    return variableDeclaration;
   }
 
   /**
@@ -143,56 +101,15 @@ public class TupleLiteralPartXSImpl extends EObjectImpl implements TupleLiteralP
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName) {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.TUPLE_LITERAL_PART_XS__NAME,
-          oldName,name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getTypeName() {
-    return typeName;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTypeName(String newTypeName) {
-    String oldTypeName = typeName;
-    typeName = newTypeName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.TUPLE_LITERAL_PART_XS__TYPE_NAME,oldTypeName,typeName));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public OclExpressionXS getValue() {
-    return value;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetValue(OclExpressionXS newValue, NotificationChain msgs) {
-    OclExpressionXS oldValue = value;
-    value = newValue;
+  public NotificationChain basicSetVariableDeclaration(
+      VariableXS newVariableDeclaration, NotificationChain msgs) {
+    VariableXS oldVariableDeclaration = variableDeclaration;
+    variableDeclaration = newVariableDeclaration;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE,oldValue,newValue);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET,
+          XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION,
+          oldVariableDeclaration, newVariableDeclaration);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -204,21 +121,26 @@ public class TupleLiteralPartXSImpl extends EObjectImpl implements TupleLiteralP
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(OclExpressionXS newValue) {
-    if (newValue != value) {
+  public void setVariableDeclaration(VariableXS newVariableDeclaration) {
+    if (newVariableDeclaration != variableDeclaration) {
       NotificationChain msgs = null;
-      if (value != null)
-        msgs = ((InternalEObject) value).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE,null,msgs);
-      if (newValue != null)
-        msgs = ((InternalEObject) newValue).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE,null,msgs);
-      msgs = basicSetValue(newValue,msgs);
+      if (variableDeclaration != null)
+        msgs = ((InternalEObject) variableDeclaration).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE
+                - XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION,
+            null, msgs);
+      if (newVariableDeclaration != null)
+        msgs = ((InternalEObject) newVariableDeclaration).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE
+                - XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION,
+            null, msgs);
+      msgs = basicSetVariableDeclaration(newVariableDeclaration, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE,
-          newValue,newValue));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION,
+          newVariableDeclaration, newVariableDeclaration));
   }
 
   /**
@@ -227,13 +149,13 @@ public class TupleLiteralPartXSImpl extends EObjectImpl implements TupleLiteralP
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE:
-        return basicSetValue(null,msgs);
+      case XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION:
+        return basicSetVariableDeclaration(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -244,14 +166,10 @@ public class TupleLiteralPartXSImpl extends EObjectImpl implements TupleLiteralP
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__NAME:
-        return getName();
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__TYPE_NAME:
-        return getTypeName();
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE:
-        return getValue();
+      case XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION:
+        return getVariableDeclaration();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -259,20 +177,15 @@ public class TupleLiteralPartXSImpl extends EObjectImpl implements TupleLiteralP
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__NAME:
-        setName((String) newValue);
-        return;
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__TYPE_NAME:
-        setTypeName((String) newValue);
-        return;
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE:
-        setValue((OclExpressionXS) newValue);
+      case XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION:
+        setVariableDeclaration((VariableXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -283,14 +196,8 @@ public class TupleLiteralPartXSImpl extends EObjectImpl implements TupleLiteralP
   @Override
   public void eUnset(int featureID) {
     switch (featureID) {
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__TYPE_NAME:
-        setTypeName(TYPE_NAME_EDEFAULT);
-        return;
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE:
-        setValue((OclExpressionXS) null);
+      case XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION:
+        setVariableDeclaration((VariableXS) null);
         return;
     }
     super.eUnset(featureID);
@@ -304,32 +211,10 @@ public class TupleLiteralPartXSImpl extends EObjectImpl implements TupleLiteralP
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__TYPE_NAME:
-        return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
-      case XOCLPackage.TUPLE_LITERAL_PART_XS__VALUE:
-        return value != null;
+      case XOCLPackage.TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION:
+        return variableDeclaration != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString() {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: "); //$NON-NLS-1$
-    result.append(name);
-    result.append(", typeName: "); //$NON-NLS-1$
-    result.append(typeName);
-    result.append(')');
-    return result.toString();
   }
 
 } //TupleLiteralPartXSImpl

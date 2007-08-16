@@ -52,7 +52,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class IntegerLiteralExpXSImpl extends NumericLiteralExpXSImpl implements IntegerLiteralExpXS {
+public class IntegerLiteralExpXSImpl extends NumericLiteralExpXSImpl implements
+    IntegerLiteralExpXS {
 
   /**
    * The default value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
@@ -111,8 +112,9 @@ public class IntegerLiteralExpXSImpl extends NumericLiteralExpXSImpl implements 
     int oldIntegerSymbol = integerSymbol;
     integerSymbol = newIntegerSymbol;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.INTEGER_LITERAL_EXP_XS__INTEGER_SYMBOL,oldIntegerSymbol,integerSymbol));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.INTEGER_LITERAL_EXP_XS__INTEGER_SYMBOL, oldIntegerSymbol,
+          integerSymbol));
   }
 
   /**
@@ -126,7 +128,7 @@ public class IntegerLiteralExpXSImpl extends NumericLiteralExpXSImpl implements 
       case XOCLPackage.INTEGER_LITERAL_EXP_XS__INTEGER_SYMBOL:
         return new Integer(getIntegerSymbol());
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -141,7 +143,7 @@ public class IntegerLiteralExpXSImpl extends NumericLiteralExpXSImpl implements 
         setIntegerSymbol(((Integer) newValue).intValue());
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

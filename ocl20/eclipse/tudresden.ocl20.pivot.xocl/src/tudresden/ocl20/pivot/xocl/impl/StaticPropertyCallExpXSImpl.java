@@ -46,8 +46,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class StaticPropertyCallExpXSImpl extends PropertyCallExpXSImpl implements
-    StaticPropertyCallExpXS {
+public class StaticPropertyCallExpXSImpl extends PropertyCallExpXSImpl
+    implements StaticPropertyCallExpXS {
 
   /**
    * <!-- begin-user-doc -->

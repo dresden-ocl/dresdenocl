@@ -64,7 +64,7 @@ public interface LoopExpXS extends CallExpXS {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Iterator</em>' containment reference list.
    * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getLoopExpXS_Iterator()
-   * @model type="tudresden.ocl20.pivot.xocl.VariableXS" containment="true"
+   * @model containment="true"
    * @generated
    */
   EList<VariableXS> getIterator();

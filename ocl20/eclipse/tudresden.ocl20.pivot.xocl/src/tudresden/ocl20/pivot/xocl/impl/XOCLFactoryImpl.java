@@ -191,13 +191,13 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
   public Object createFromString(EDataType eDataType, String initialValue) {
     switch (eDataType.getClassifierID()) {
       case XOCLPackage.CONSTRAINT_KIND_XS:
-        return createConstraintKindXSFromString(eDataType,initialValue);
+        return createConstraintKindXSFromString(eDataType, initialValue);
       case XOCLPackage.COLLECTION_KIND_XS:
-        return createCollectionKindXSFromString(eDataType,initialValue);
+        return createCollectionKindXSFromString(eDataType, initialValue);
       case XOCLPackage.COLLECTION_OPERATION_XS:
-        return createCollectionOperationXSFromString(eDataType,initialValue);
+        return createCollectionOperationXSFromString(eDataType, initialValue);
       case XOCLPackage.ITERATOR_EXPRESSION_XS:
-        return createIteratorExpressionXSFromString(eDataType,initialValue);
+        return createIteratorExpressionXSFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException(
             "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -213,13 +213,13 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
   public String convertToString(EDataType eDataType, Object instanceValue) {
     switch (eDataType.getClassifierID()) {
       case XOCLPackage.CONSTRAINT_KIND_XS:
-        return convertConstraintKindXSToString(eDataType,instanceValue);
+        return convertConstraintKindXSToString(eDataType, instanceValue);
       case XOCLPackage.COLLECTION_KIND_XS:
-        return convertCollectionKindXSToString(eDataType,instanceValue);
+        return convertCollectionKindXSToString(eDataType, instanceValue);
       case XOCLPackage.COLLECTION_OPERATION_XS:
-        return convertCollectionOperationXSToString(eDataType,instanceValue);
+        return convertCollectionOperationXSToString(eDataType, instanceValue);
       case XOCLPackage.ITERATOR_EXPRESSION_XS:
-        return convertIteratorExpressionXSToString(eDataType,instanceValue);
+        return convertIteratorExpressionXSToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException(
             "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -511,7 +511,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
    * <!-- end-user-doc -->
    * @generated
    */
-  public ConstraintKindXS createConstraintKindXSFromString(EDataType eDataType, String initialValue) {
+  public ConstraintKindXS createConstraintKindXSFromString(EDataType eDataType,
+      String initialValue) {
     ConstraintKindXS result = ConstraintKindXS.get(initialValue);
     if (result == null)
       throw new IllegalArgumentException(
@@ -524,7 +525,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertConstraintKindXSToString(EDataType eDataType, Object instanceValue) {
+  public String convertConstraintKindXSToString(EDataType eDataType,
+      Object instanceValue) {
     return instanceValue == null ? null : instanceValue.toString();
   }
 
@@ -533,7 +535,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
    * <!-- end-user-doc -->
    * @generated
    */
-  public CollectionKindXS createCollectionKindXSFromString(EDataType eDataType, String initialValue) {
+  public CollectionKindXS createCollectionKindXSFromString(EDataType eDataType,
+      String initialValue) {
     CollectionKindXS result = CollectionKindXS.get(initialValue);
     if (result == null)
       throw new IllegalArgumentException(
@@ -546,7 +549,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertCollectionKindXSToString(EDataType eDataType, Object instanceValue) {
+  public String convertCollectionKindXSToString(EDataType eDataType,
+      Object instanceValue) {
     return instanceValue == null ? null : instanceValue.toString();
   }
 
@@ -555,8 +559,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
    * <!-- end-user-doc -->
    * @generated
    */
-  public CollectionOperationXS createCollectionOperationXSFromString(EDataType eDataType,
-      String initialValue) {
+  public CollectionOperationXS createCollectionOperationXSFromString(
+      EDataType eDataType, String initialValue) {
     CollectionOperationXS result = CollectionOperationXS.get(initialValue);
     if (result == null)
       throw new IllegalArgumentException(
@@ -569,7 +573,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertCollectionOperationXSToString(EDataType eDataType, Object instanceValue) {
+  public String convertCollectionOperationXSToString(EDataType eDataType,
+      Object instanceValue) {
     return instanceValue == null ? null : instanceValue.toString();
   }
 
@@ -578,8 +583,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
    * <!-- end-user-doc -->
    * @generated
    */
-  public IteratorExpressionXS createIteratorExpressionXSFromString(EDataType eDataType,
-      String initialValue) {
+  public IteratorExpressionXS createIteratorExpressionXSFromString(
+      EDataType eDataType, String initialValue) {
     IteratorExpressionXS result = IteratorExpressionXS.get(initialValue);
     if (result == null)
       throw new IllegalArgumentException(
@@ -592,7 +597,8 @@ public class XOCLFactoryImpl extends EFactoryImpl implements XOCLFactory {
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertIteratorExpressionXSToString(EDataType eDataType, Object instanceValue) {
+  public String convertIteratorExpressionXSToString(EDataType eDataType,
+      Object instanceValue) {
     return instanceValue == null ? null : instanceValue.toString();
   }
 

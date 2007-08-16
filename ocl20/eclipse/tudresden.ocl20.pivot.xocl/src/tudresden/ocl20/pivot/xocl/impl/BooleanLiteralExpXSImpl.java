@@ -52,8 +52,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class BooleanLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implements
-    BooleanLiteralExpXS {
+public class BooleanLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl
+    implements BooleanLiteralExpXS {
 
   /**
    * The default value of the '{@link #isBooleanSymbol() <em>Boolean Symbol</em>}' attribute.
@@ -112,8 +112,9 @@ public class BooleanLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implement
     boolean oldBooleanSymbol = booleanSymbol;
     booleanSymbol = newBooleanSymbol;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.BOOLEAN_LITERAL_EXP_XS__BOOLEAN_SYMBOL,oldBooleanSymbol,booleanSymbol));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.BOOLEAN_LITERAL_EXP_XS__BOOLEAN_SYMBOL, oldBooleanSymbol,
+          booleanSymbol));
   }
 
   /**
@@ -127,7 +128,7 @@ public class BooleanLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implement
       case XOCLPackage.BOOLEAN_LITERAL_EXP_XS__BOOLEAN_SYMBOL:
         return isBooleanSymbol() ? Boolean.TRUE : Boolean.FALSE;
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -142,7 +143,7 @@ public class BooleanLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implement
         setBooleanSymbol(((Boolean) newValue).booleanValue());
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

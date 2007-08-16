@@ -147,7 +147,7 @@ public interface ExpressionInOclXS extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parameter</em>' containment reference list.
    * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getExpressionInOclXS_Parameter()
-   * @model type="tudresden.ocl20.pivot.xocl.VariableXS" containment="true"
+   * @model containment="true"
    * @generated
    */
   EList<VariableXS> getParameter();

@@ -50,7 +50,8 @@ public interface XOCLFactory extends EFactory {
    * <!-- end-user-doc -->
    * @generated
    */
-  XOCLFactory eINSTANCE = tudresden.ocl20.pivot.xocl.impl.XOCLFactoryImpl.init();
+  XOCLFactory eINSTANCE = tudresden.ocl20.pivot.xocl.impl.XOCLFactoryImpl
+      .init();
 
   /**
    * Returns a new object of class '<em>Constraint XS</em>'.

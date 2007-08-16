@@ -3,6 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xocl"
     nsURI="http://www.tu-dresden.de/ocl20/pivot/2007/xocl" nsPrefix="xocl">
+  <eClassifiers xsi:type="ecore:EClass" name="ElementXS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConstraintXS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ConstraintKindXS"/>
@@ -33,8 +34,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//VariableXS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OclExpressionXS" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableXS">
+  <eClassifiers xsi:type="ecore:EClass" name="OclExpressionXS" abstract="true" eSuperTypes="#//ElementXS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableXS" eSuperTypes="#//ElementXS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initExpression" eType="#//OclExpressionXS"
@@ -67,7 +68,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="part" upperBound="-1" eType="#//CollectionLiteralPartXS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPartXS" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPartXS" abstract="true"
+      eSuperTypes="#//ElementXS"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionOperationCallExpXS" eSuperTypes="#//OperationCallExpXS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredCollectionOperation"
         eType="#//CollectionOperationXS"/>
@@ -145,11 +147,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="part" upperBound="-1" eType="#//TupleLiteralPartXS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralPartXS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//OclExpressionXS"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralPartXS" eSuperTypes="#//ElementXS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclaration" lowerBound="1"
+        eType="#//VariableXS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeLiteralExpXS" eSuperTypes="#//LiteralExpXS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredTypeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

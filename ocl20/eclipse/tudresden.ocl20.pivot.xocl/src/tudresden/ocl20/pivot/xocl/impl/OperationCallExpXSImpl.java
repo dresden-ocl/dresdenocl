@@ -58,8 +58,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public abstract class OperationCallExpXSImpl extends FeatureCallExpXSImpl implements
-    OperationCallExpXS {
+public abstract class OperationCallExpXSImpl extends FeatureCallExpXSImpl
+    implements OperationCallExpXS {
 
   /**
    * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference list.
@@ -69,7 +69,7 @@ public abstract class OperationCallExpXSImpl extends FeatureCallExpXSImpl implem
    * @generated
    * @ordered
    */
-  protected EList<OclExpressionXS> argument = null;
+  protected EList<OclExpressionXS> argument;
 
   /**
    * <!-- begin-user-doc -->
@@ -97,7 +97,8 @@ public abstract class OperationCallExpXSImpl extends FeatureCallExpXSImpl implem
    */
   public EList<OclExpressionXS> getArgument() {
     if (argument == null) {
-      argument = new EObjectContainmentEList<OclExpressionXS>(OclExpressionXS.class,this,
+      argument = new EObjectContainmentEList<OclExpressionXS>(
+          OclExpressionXS.class, this,
           XOCLPackage.OPERATION_CALL_EXP_XS__ARGUMENT);
     }
     return argument;
@@ -109,13 +110,13 @@ public abstract class OperationCallExpXSImpl extends FeatureCallExpXSImpl implem
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.OPERATION_CALL_EXP_XS__ARGUMENT:
-        return ((InternalEList<?>) getArgument()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getArgument()).basicRemove(otherEnd, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -129,7 +130,7 @@ public abstract class OperationCallExpXSImpl extends FeatureCallExpXSImpl implem
       case XOCLPackage.OPERATION_CALL_EXP_XS__ARGUMENT:
         return getArgument();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -146,7 +147,7 @@ public abstract class OperationCallExpXSImpl extends FeatureCallExpXSImpl implem
         getArgument().addAll((Collection<? extends OclExpressionXS>) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

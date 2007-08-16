@@ -52,7 +52,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class EnumLiteralExpXSImpl extends LiteralExpXSImpl implements EnumLiteralExpXS {
+public class EnumLiteralExpXSImpl extends LiteralExpXSImpl implements
+    EnumLiteralExpXS {
 
   /**
    * The default value of the '{@link #getReferredEnumLiteralPathName() <em>Referred Enum Literal Path Name</em>}' attribute.
@@ -107,13 +108,14 @@ public class EnumLiteralExpXSImpl extends LiteralExpXSImpl implements EnumLitera
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReferredEnumLiteralPathName(String newReferredEnumLiteralPathName) {
+  public void setReferredEnumLiteralPathName(
+      String newReferredEnumLiteralPathName) {
     String oldReferredEnumLiteralPathName = referredEnumLiteralPathName;
     referredEnumLiteralPathName = newReferredEnumLiteralPathName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
+      eNotify(new ENotificationImpl(this, Notification.SET,
           XOCLPackage.ENUM_LITERAL_EXP_XS__REFERRED_ENUM_LITERAL_PATH_NAME,
-          oldReferredEnumLiteralPathName,referredEnumLiteralPathName));
+          oldReferredEnumLiteralPathName, referredEnumLiteralPathName));
   }
 
   /**
@@ -127,7 +129,7 @@ public class EnumLiteralExpXSImpl extends LiteralExpXSImpl implements EnumLitera
       case XOCLPackage.ENUM_LITERAL_EXP_XS__REFERRED_ENUM_LITERAL_PATH_NAME:
         return getReferredEnumLiteralPathName();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -142,7 +144,7 @@ public class EnumLiteralExpXSImpl extends LiteralExpXSImpl implements EnumLitera
         setReferredEnumLiteralPathName((String) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -170,7 +172,8 @@ public class EnumLiteralExpXSImpl extends LiteralExpXSImpl implements EnumLitera
     switch (featureID) {
       case XOCLPackage.ENUM_LITERAL_EXP_XS__REFERRED_ENUM_LITERAL_PATH_NAME:
         return REFERRED_ENUM_LITERAL_PATH_NAME_EDEFAULT == null ? referredEnumLiteralPathName != null
-            : !REFERRED_ENUM_LITERAL_PATH_NAME_EDEFAULT.equals(referredEnumLiteralPathName);
+            : !REFERRED_ENUM_LITERAL_PATH_NAME_EDEFAULT
+                .equals(referredEnumLiteralPathName);
     }
     return super.eIsSet(featureID);
   }

@@ -52,7 +52,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class TypeLiteralExpXSImpl extends LiteralExpXSImpl implements TypeLiteralExpXS {
+public class TypeLiteralExpXSImpl extends LiteralExpXSImpl implements
+    TypeLiteralExpXS {
 
   /**
    * The default value of the '{@link #getReferredTypeName() <em>Referred Type Name</em>}' attribute.
@@ -111,8 +112,9 @@ public class TypeLiteralExpXSImpl extends LiteralExpXSImpl implements TypeLitera
     String oldReferredTypeName = referredTypeName;
     referredTypeName = newReferredTypeName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.TYPE_LITERAL_EXP_XS__REFERRED_TYPE_NAME,oldReferredTypeName,referredTypeName));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.TYPE_LITERAL_EXP_XS__REFERRED_TYPE_NAME,
+          oldReferredTypeName, referredTypeName));
   }
 
   /**
@@ -126,7 +128,7 @@ public class TypeLiteralExpXSImpl extends LiteralExpXSImpl implements TypeLitera
       case XOCLPackage.TYPE_LITERAL_EXP_XS__REFERRED_TYPE_NAME:
         return getReferredTypeName();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -141,7 +143,7 @@ public class TypeLiteralExpXSImpl extends LiteralExpXSImpl implements TypeLitera
         setReferredTypeName((String) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

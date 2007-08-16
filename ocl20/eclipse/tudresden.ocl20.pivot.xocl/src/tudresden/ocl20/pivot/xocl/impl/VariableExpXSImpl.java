@@ -54,7 +54,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class VariableExpXSImpl extends OclExpressionXSImpl implements VariableExpXS {
+public class VariableExpXSImpl extends OclExpressionXSImpl implements
+    VariableExpXS {
 
   /**
    * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
@@ -64,7 +65,7 @@ public class VariableExpXSImpl extends OclExpressionXSImpl implements VariableEx
    * @generated
    * @ordered
    */
-  protected VariableXS referredVariable = null;
+  protected VariableXS referredVariable;
 
   /**
    * <!-- begin-user-doc -->
@@ -96,8 +97,9 @@ public class VariableExpXSImpl extends OclExpressionXSImpl implements VariableEx
       referredVariable = (VariableXS) eResolveProxy(oldReferredVariable);
       if (referredVariable != oldReferredVariable) {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this,Notification.RESOLVE,
-              XOCLPackage.VARIABLE_EXP_XS__REFERRED_VARIABLE,oldReferredVariable,referredVariable));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+              XOCLPackage.VARIABLE_EXP_XS__REFERRED_VARIABLE,
+              oldReferredVariable, referredVariable));
       }
     }
     return referredVariable;
@@ -121,8 +123,9 @@ public class VariableExpXSImpl extends OclExpressionXSImpl implements VariableEx
     VariableXS oldReferredVariable = referredVariable;
     referredVariable = newReferredVariable;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.VARIABLE_EXP_XS__REFERRED_VARIABLE,oldReferredVariable,referredVariable));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.VARIABLE_EXP_XS__REFERRED_VARIABLE, oldReferredVariable,
+          referredVariable));
   }
 
   /**
@@ -137,7 +140,7 @@ public class VariableExpXSImpl extends OclExpressionXSImpl implements VariableEx
         if (resolve) return getReferredVariable();
         return basicGetReferredVariable();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -152,7 +155,7 @@ public class VariableExpXSImpl extends OclExpressionXSImpl implements VariableEx
         setReferredVariable((VariableXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

@@ -85,7 +85,27 @@ public interface XOCLPackage extends EPackage {
    * <!-- end-user-doc -->
    * @generated
    */
-  XOCLPackage eINSTANCE = tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl.init();
+  XOCLPackage eINSTANCE = tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl
+      .init();
+
+  /**
+   * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.ElementXSImpl <em>Element XS</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see tudresden.ocl20.pivot.xocl.impl.ElementXSImpl
+   * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getElementXS()
+   * @generated
+   */
+  int ELEMENT_XS = 0;
+
+  /**
+   * The number of structural features of the '<em>Element XS</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELEMENT_XS_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.ConstraintXSImpl <em>Constraint XS</em>}' class.
@@ -95,7 +115,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getConstraintXS()
    * @generated
    */
-  int CONSTRAINT_XS = 0;
+  int CONSTRAINT_XS = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -159,7 +179,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getExpressionInOclXS()
    * @generated
    */
-  int EXPRESSION_IN_OCL_XS = 1;
+  int EXPRESSION_IN_OCL_XS = 2;
 
   /**
    * The feature id for the '<em><b>Body</b></em>' attribute.
@@ -232,7 +252,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getOclExpressionXS()
    * @generated
    */
-  int OCL_EXPRESSION_XS = 2;
+  int OCL_EXPRESSION_XS = 3;
 
   /**
    * The number of structural features of the '<em>Ocl Expression XS</em>' class.
@@ -241,7 +261,7 @@ public interface XOCLPackage extends EPackage {
    * @generated
    * @ordered
    */
-  int OCL_EXPRESSION_XS_FEATURE_COUNT = 0;
+  int OCL_EXPRESSION_XS_FEATURE_COUNT = ELEMENT_XS_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.VariableXSImpl <em>Variable XS</em>}' class.
@@ -251,7 +271,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getVariableXS()
    * @generated
    */
-  int VARIABLE_XS = 3;
+  int VARIABLE_XS = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -260,7 +280,7 @@ public interface XOCLPackage extends EPackage {
    * @generated
    * @ordered
    */
-  int VARIABLE_XS__NAME = 0;
+  int VARIABLE_XS__NAME = ELEMENT_XS_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -269,7 +289,7 @@ public interface XOCLPackage extends EPackage {
    * @generated
    * @ordered
    */
-  int VARIABLE_XS__TYPE = 1;
+  int VARIABLE_XS__TYPE = ELEMENT_XS_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Init Expression</b></em>' containment reference.
@@ -278,7 +298,7 @@ public interface XOCLPackage extends EPackage {
    * @generated
    * @ordered
    */
-  int VARIABLE_XS__INIT_EXPRESSION = 2;
+  int VARIABLE_XS__INIT_EXPRESSION = ELEMENT_XS_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Variable XS</em>' class.
@@ -287,7 +307,7 @@ public interface XOCLPackage extends EPackage {
    * @generated
    * @ordered
    */
-  int VARIABLE_XS_FEATURE_COUNT = 3;
+  int VARIABLE_XS_FEATURE_COUNT = ELEMENT_XS_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.LiteralExpXSImpl <em>Literal Exp XS</em>}' class.
@@ -297,7 +317,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getLiteralExpXS()
    * @generated
    */
-  int LITERAL_EXP_XS = 20;
+  int LITERAL_EXP_XS = 21;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.PrimitiveLiteralExpXSImpl <em>Primitive Literal Exp XS</em>}' class.
@@ -307,7 +327,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getPrimitiveLiteralExpXS()
    * @generated
    */
-  int PRIMITIVE_LITERAL_EXP_XS = 26;
+  int PRIMITIVE_LITERAL_EXP_XS = 27;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.BooleanLiteralExpXSImpl <em>Boolean Literal Exp XS</em>}' class.
@@ -317,7 +337,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getBooleanLiteralExpXS()
    * @generated
    */
-  int BOOLEAN_LITERAL_EXP_XS = 5;
+  int BOOLEAN_LITERAL_EXP_XS = 6;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.CallExpXSImpl <em>Call Exp XS</em>}' class.
@@ -327,7 +347,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getCallExpXS()
    * @generated
    */
-  int CALL_EXP_XS = 6;
+  int CALL_EXP_XS = 7;
 
   /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -355,7 +375,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getCollectionLiteralPartXS()
    * @generated
    */
-  int COLLECTION_LITERAL_PART_XS = 9;
+  int COLLECTION_LITERAL_PART_XS = 10;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.CollectionItemXSImpl <em>Collection Item XS</em>}' class.
@@ -365,7 +385,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getCollectionItemXS()
    * @generated
    */
-  int COLLECTION_ITEM_XS = 7;
+  int COLLECTION_ITEM_XS = 8;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.CollectionLiteralExpXSImpl <em>Collection Literal Exp XS</em>}' class.
@@ -375,7 +395,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getCollectionLiteralExpXS()
    * @generated
    */
-  int COLLECTION_LITERAL_EXP_XS = 8;
+  int COLLECTION_LITERAL_EXP_XS = 9;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.FeatureCallExpXSImpl <em>Feature Call Exp XS</em>}' class.
@@ -385,7 +405,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getFeatureCallExpXS()
    * @generated
    */
-  int FEATURE_CALL_EXP_XS = 13;
+  int FEATURE_CALL_EXP_XS = 14;
 
   /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -413,7 +433,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getOperationCallExpXS()
    * @generated
    */
-  int OPERATION_CALL_EXP_XS = 25;
+  int OPERATION_CALL_EXP_XS = 26;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.CollectionOperationCallExpXSImpl <em>Collection Operation Call Exp XS</em>}' class.
@@ -423,7 +443,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getCollectionOperationCallExpXS()
    * @generated
    */
-  int COLLECTION_OPERATION_CALL_EXP_XS = 10;
+  int COLLECTION_OPERATION_CALL_EXP_XS = 11;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.CollectionRangeXSImpl <em>Collection Range XS</em>}' class.
@@ -433,7 +453,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getCollectionRangeXS()
    * @generated
    */
-  int COLLECTION_RANGE_XS = 11;
+  int COLLECTION_RANGE_XS = 12;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.EnumLiteralExpXSImpl <em>Enum Literal Exp XS</em>}' class.
@@ -443,7 +463,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getEnumLiteralExpXS()
    * @generated
    */
-  int ENUM_LITERAL_EXP_XS = 12;
+  int ENUM_LITERAL_EXP_XS = 13;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.IfExpXSImpl <em>If Exp XS</em>}' class.
@@ -453,7 +473,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getIfExpXS()
    * @generated
    */
-  int IF_EXP_XS = 14;
+  int IF_EXP_XS = 15;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.NumericLiteralExpXSImpl <em>Numeric Literal Exp XS</em>}' class.
@@ -463,7 +483,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getNumericLiteralExpXS()
    * @generated
    */
-  int NUMERIC_LITERAL_EXP_XS = 24;
+  int NUMERIC_LITERAL_EXP_XS = 25;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.IntegerLiteralExpXSImpl <em>Integer Literal Exp XS</em>}' class.
@@ -473,7 +493,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getIntegerLiteralExpXS()
    * @generated
    */
-  int INTEGER_LITERAL_EXP_XS = 15;
+  int INTEGER_LITERAL_EXP_XS = 16;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.LoopExpXSImpl <em>Loop Exp XS</em>}' class.
@@ -483,7 +503,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getLoopExpXS()
    * @generated
    */
-  int LOOP_EXP_XS = 21;
+  int LOOP_EXP_XS = 22;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.IterateExpXSImpl <em>Iterate Exp XS</em>}' class.
@@ -493,7 +513,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getIterateExpXS()
    * @generated
    */
-  int ITERATE_EXP_XS = 16;
+  int ITERATE_EXP_XS = 17;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.InvalidLiteralExpXSImpl <em>Invalid Literal Exp XS</em>}' class.
@@ -503,7 +523,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getInvalidLiteralExpXS()
    * @generated
    */
-  int INVALID_LITERAL_EXP_XS = 17;
+  int INVALID_LITERAL_EXP_XS = 18;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.IteratorExpXSImpl <em>Iterator Exp XS</em>}' class.
@@ -513,7 +533,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getIteratorExpXS()
    * @generated
    */
-  int ITERATOR_EXP_XS = 18;
+  int ITERATOR_EXP_XS = 19;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.LetExpXSImpl <em>Let Exp XS</em>}' class.
@@ -523,7 +543,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getLetExpXS()
    * @generated
    */
-  int LET_EXP_XS = 19;
+  int LET_EXP_XS = 20;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.ModelOperationCallExpXSImpl <em>Model Operation Call Exp XS</em>}' class.
@@ -533,7 +553,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getModelOperationCallExpXS()
    * @generated
    */
-  int MODEL_OPERATION_CALL_EXP_XS = 22;
+  int MODEL_OPERATION_CALL_EXP_XS = 23;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.PropertyCallExpXSImpl <em>Property Call Exp XS</em>}' class.
@@ -543,7 +563,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getPropertyCallExpXS()
    * @generated
    */
-  int PROPERTY_CALL_EXP_XS = 4;
+  int PROPERTY_CALL_EXP_XS = 5;
 
   /**
    * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -624,7 +644,7 @@ public interface XOCLPackage extends EPackage {
    * @generated
    * @ordered
    */
-  int COLLECTION_LITERAL_PART_XS_FEATURE_COUNT = 0;
+  int COLLECTION_LITERAL_PART_XS_FEATURE_COUNT = ELEMENT_XS_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Item</b></em>' containment reference.
@@ -1048,7 +1068,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getRealLiteralExpXS()
    * @generated
    */
-  int REAL_LITERAL_EXP_XS = 27;
+  int REAL_LITERAL_EXP_XS = 28;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.StaticOperationCallExpXSImpl <em>Static Operation Call Exp XS</em>}' class.
@@ -1058,7 +1078,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getStaticOperationCallExpXS()
    * @generated
    */
-  int STATIC_OPERATION_CALL_EXP_XS = 28;
+  int STATIC_OPERATION_CALL_EXP_XS = 29;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.StaticPropertyCallExpXSImpl <em>Static Property Call Exp XS</em>}' class.
@@ -1068,7 +1088,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getStaticPropertyCallExpXS()
    * @generated
    */
-  int STATIC_PROPERTY_CALL_EXP_XS = 29;
+  int STATIC_PROPERTY_CALL_EXP_XS = 30;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.StringLiteralExpXSImpl <em>String Literal Exp XS</em>}' class.
@@ -1078,7 +1098,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getStringLiteralExpXS()
    * @generated
    */
-  int STRING_LITERAL_EXP_XS = 30;
+  int STRING_LITERAL_EXP_XS = 31;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.TupleLiteralExpXSImpl <em>Tuple Literal Exp XS</em>}' class.
@@ -1088,7 +1108,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getTupleLiteralExpXS()
    * @generated
    */
-  int TUPLE_LITERAL_EXP_XS = 31;
+  int TUPLE_LITERAL_EXP_XS = 32;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.TupleLiteralPartXSImpl <em>Tuple Literal Part XS</em>}' class.
@@ -1098,7 +1118,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getTupleLiteralPartXS()
    * @generated
    */
-  int TUPLE_LITERAL_PART_XS = 32;
+  int TUPLE_LITERAL_PART_XS = 33;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.TypeLiteralExpXSImpl <em>Type Literal Exp XS</em>}' class.
@@ -1108,7 +1128,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getTypeLiteralExpXS()
    * @generated
    */
-  int TYPE_LITERAL_EXP_XS = 33;
+  int TYPE_LITERAL_EXP_XS = 34;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.UndefinedLiteralExpXSImpl <em>Undefined Literal Exp XS</em>}' class.
@@ -1118,7 +1138,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getUndefinedLiteralExpXS()
    * @generated
    */
-  int UNDEFINED_LITERAL_EXP_XS = 34;
+  int UNDEFINED_LITERAL_EXP_XS = 35;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.UnlimitedNaturalExpXSImpl <em>Unlimited Natural Exp XS</em>}' class.
@@ -1128,7 +1148,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getUnlimitedNaturalExpXS()
    * @generated
    */
-  int UNLIMITED_NATURAL_EXP_XS = 35;
+  int UNLIMITED_NATURAL_EXP_XS = 36;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.VariableExpXSImpl <em>Variable Exp XS</em>}' class.
@@ -1138,7 +1158,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getVariableExpXS()
    * @generated
    */
-  int VARIABLE_EXP_XS = 36;
+  int VARIABLE_EXP_XS = 37;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.impl.NamespaceXSImpl <em>Namespace XS</em>}' class.
@@ -1148,7 +1168,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getNamespaceXS()
    * @generated
    */
-  int NAMESPACE_XS = 23;
+  int NAMESPACE_XS = 24;
 
   /**
    * The feature id for the '<em><b>Path Name</b></em>' attribute.
@@ -1304,31 +1324,13 @@ public interface XOCLPackage extends EPackage {
   int TUPLE_LITERAL_EXP_XS_FEATURE_COUNT = LITERAL_EXP_XS_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Variable Declaration</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TUPLE_LITERAL_PART_XS__NAME = 0;
-
-  /**
-   * The feature id for the '<em><b>Type Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TUPLE_LITERAL_PART_XS__TYPE_NAME = 1;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TUPLE_LITERAL_PART_XS__VALUE = 2;
+  int TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION = ELEMENT_XS_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Tuple Literal Part XS</em>' class.
@@ -1337,7 +1339,7 @@ public interface XOCLPackage extends EPackage {
    * @generated
    * @ordered
    */
-  int TUPLE_LITERAL_PART_XS_FEATURE_COUNT = 3;
+  int TUPLE_LITERAL_PART_XS_FEATURE_COUNT = ELEMENT_XS_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Referred Type Name</b></em>' attribute.
@@ -1410,7 +1412,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getConstraintKindXS()
    * @generated
    */
-  int CONSTRAINT_KIND_XS = 37;
+  int CONSTRAINT_KIND_XS = 38;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.CollectionKindXS <em>Collection Kind XS</em>}' enum.
@@ -1420,7 +1422,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getCollectionKindXS()
    * @generated
    */
-  int COLLECTION_KIND_XS = 38;
+  int COLLECTION_KIND_XS = 39;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.CollectionOperationXS <em>Collection Operation XS</em>}' enum.
@@ -1430,7 +1432,7 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getCollectionOperationXS()
    * @generated
    */
-  int COLLECTION_OPERATION_XS = 39;
+  int COLLECTION_OPERATION_XS = 40;
 
   /**
    * The meta object id for the '{@link tudresden.ocl20.pivot.xocl.IteratorExpressionXS <em>Iterator Expression XS</em>}' enum.
@@ -1440,7 +1442,17 @@ public interface XOCLPackage extends EPackage {
    * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getIteratorExpressionXS()
    * @generated
    */
-  int ITERATOR_EXPRESSION_XS = 40;
+  int ITERATOR_EXPRESSION_XS = 41;
+
+  /**
+   * Returns the meta object for class '{@link tudresden.ocl20.pivot.xocl.ElementXS <em>Element XS</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Element XS</em>'.
+   * @see tudresden.ocl20.pivot.xocl.ElementXS
+   * @generated
+   */
+  EClass getElementXS();
 
   /**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.xocl.ConstraintXS <em>Constraint XS</em>}'.
@@ -2203,37 +2215,15 @@ public interface XOCLPackage extends EPackage {
   EClass getTupleLiteralPartXS();
 
   /**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getName <em>Name</em>}'.
+   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getVariableDeclaration <em>Variable Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getName()
+   * @return the meta object for the containment reference '<em>Variable Declaration</em>'.
+   * @see tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getVariableDeclaration()
    * @see #getTupleLiteralPartXS()
    * @generated
    */
-  EAttribute getTupleLiteralPartXS_Name();
-
-  /**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getTypeName <em>Type Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getTypeName()
-   * @see #getTupleLiteralPartXS()
-   * @generated
-   */
-  EAttribute getTupleLiteralPartXS_TypeName();
-
-  /**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Value</em>'.
-   * @see tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getValue()
-   * @see #getTupleLiteralPartXS()
-   * @generated
-   */
-  EReference getTupleLiteralPartXS_Value();
+  EReference getTupleLiteralPartXS_VariableDeclaration();
 
   /**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.xocl.TypeLiteralExpXS <em>Type Literal Exp XS</em>}'.
@@ -2404,6 +2394,16 @@ public interface XOCLPackage extends EPackage {
   interface Literals {
 
     /**
+     * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.ElementXSImpl <em>Element XS</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tudresden.ocl20.pivot.xocl.impl.ElementXSImpl
+     * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getElementXS()
+     * @generated
+     */
+    EClass ELEMENT_XS = eINSTANCE.getElementXS();
+
+    /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.ConstraintXSImpl <em>Constraint XS</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2435,7 +2435,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute CONSTRAINT_XS__CONSTRAINED_ELEMENT = eINSTANCE.getConstraintXS_ConstrainedElement();
+    EAttribute CONSTRAINT_XS__CONSTRAINED_ELEMENT = eINSTANCE
+        .getConstraintXS_ConstrainedElement();
 
     /**
      * The meta object literal for the '<em><b>Defined Feature</b></em>' attribute feature.
@@ -2443,7 +2444,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute CONSTRAINT_XS__DEFINED_FEATURE = eINSTANCE.getConstraintXS_DefinedFeature();
+    EAttribute CONSTRAINT_XS__DEFINED_FEATURE = eINSTANCE
+        .getConstraintXS_DefinedFeature();
 
     /**
      * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
@@ -2451,7 +2453,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CONSTRAINT_XS__SPECIFICATION = eINSTANCE.getConstraintXS_Specification();
+    EReference CONSTRAINT_XS__SPECIFICATION = eINSTANCE
+        .getConstraintXS_Specification();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl <em>Expression In Ocl XS</em>}' class.
@@ -2469,7 +2472,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EXPRESSION_IN_OCL_XS__BODY = eINSTANCE.getExpressionInOclXS_Body();
+    EAttribute EXPRESSION_IN_OCL_XS__BODY = eINSTANCE
+        .getExpressionInOclXS_Body();
 
     /**
      * The meta object literal for the '<em><b>Constraint</b></em>' container reference feature.
@@ -2477,7 +2481,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EXPRESSION_IN_OCL_XS__CONSTRAINT = eINSTANCE.getExpressionInOclXS_Constraint();
+    EReference EXPRESSION_IN_OCL_XS__CONSTRAINT = eINSTANCE
+        .getExpressionInOclXS_Constraint();
 
     /**
      * The meta object literal for the '<em><b>Body Expression</b></em>' containment reference feature.
@@ -2494,7 +2499,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EXPRESSION_IN_OCL_XS__CONTEXT = eINSTANCE.getExpressionInOclXS_Context();
+    EReference EXPRESSION_IN_OCL_XS__CONTEXT = eINSTANCE
+        .getExpressionInOclXS_Context();
 
     /**
      * The meta object literal for the '<em><b>Parameter</b></em>' containment reference list feature.
@@ -2502,7 +2508,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EXPRESSION_IN_OCL_XS__PARAMETER = eINSTANCE.getExpressionInOclXS_Parameter();
+    EReference EXPRESSION_IN_OCL_XS__PARAMETER = eINSTANCE
+        .getExpressionInOclXS_Parameter();
 
     /**
      * The meta object literal for the '<em><b>Result</b></em>' containment reference feature.
@@ -2510,7 +2517,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EXPRESSION_IN_OCL_XS__RESULT = eINSTANCE.getExpressionInOclXS_Result();
+    EReference EXPRESSION_IN_OCL_XS__RESULT = eINSTANCE
+        .getExpressionInOclXS_Result();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.OclExpressionXSImpl <em>Ocl Expression XS</em>}' class.
@@ -2554,7 +2562,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VARIABLE_XS__INIT_EXPRESSION = eINSTANCE.getVariableXS_InitExpression();
+    EReference VARIABLE_XS__INIT_EXPRESSION = eINSTANCE
+        .getVariableXS_InitExpression();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.BooleanLiteralExpXSImpl <em>Boolean Literal Exp XS</em>}' class.
@@ -2627,7 +2636,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute COLLECTION_LITERAL_EXP_XS__KIND = eINSTANCE.getCollectionLiteralExpXS_Kind();
+    EAttribute COLLECTION_LITERAL_EXP_XS__KIND = eINSTANCE
+        .getCollectionLiteralExpXS_Kind();
 
     /**
      * The meta object literal for the '<em><b>Part</b></em>' containment reference list feature.
@@ -2635,7 +2645,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference COLLECTION_LITERAL_EXP_XS__PART = eINSTANCE.getCollectionLiteralExpXS_Part();
+    EReference COLLECTION_LITERAL_EXP_XS__PART = eINSTANCE
+        .getCollectionLiteralExpXS_Part();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.CollectionLiteralPartXSImpl <em>Collection Literal Part XS</em>}' class.
@@ -2655,7 +2666,8 @@ public interface XOCLPackage extends EPackage {
      * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getCollectionOperationCallExpXS()
      * @generated
      */
-    EClass COLLECTION_OPERATION_CALL_EXP_XS = eINSTANCE.getCollectionOperationCallExpXS();
+    EClass COLLECTION_OPERATION_CALL_EXP_XS = eINSTANCE
+        .getCollectionOperationCallExpXS();
 
     /**
      * The meta object literal for the '<em><b>Referred Collection Operation</b></em>' attribute feature.
@@ -2682,7 +2694,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference COLLECTION_RANGE_XS__LAST = eINSTANCE.getCollectionRangeXS_Last();
+    EReference COLLECTION_RANGE_XS__LAST = eINSTANCE
+        .getCollectionRangeXS_Last();
 
     /**
      * The meta object literal for the '<em><b>First</b></em>' containment reference feature.
@@ -2690,7 +2703,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference COLLECTION_RANGE_XS__FIRST = eINSTANCE.getCollectionRangeXS_First();
+    EReference COLLECTION_RANGE_XS__FIRST = eINSTANCE
+        .getCollectionRangeXS_First();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.EnumLiteralExpXSImpl <em>Enum Literal Exp XS</em>}' class.
@@ -2737,7 +2751,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference IF_EXP_XS__ELSE_EXPRESSION = eINSTANCE.getIfExpXS_ElseExpression();
+    EReference IF_EXP_XS__ELSE_EXPRESSION = eINSTANCE
+        .getIfExpXS_ElseExpression();
 
     /**
      * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
@@ -2753,7 +2768,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference IF_EXP_XS__THEN_EXPRESSION = eINSTANCE.getIfExpXS_ThenExpression();
+    EReference IF_EXP_XS__THEN_EXPRESSION = eINSTANCE
+        .getIfExpXS_ThenExpression();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.IntegerLiteralExpXSImpl <em>Integer Literal Exp XS</em>}' class.
@@ -2927,7 +2943,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference OPERATION_CALL_EXP_XS__ARGUMENT = eINSTANCE.getOperationCallExpXS_Argument();
+    EReference OPERATION_CALL_EXP_XS__ARGUMENT = eINSTANCE
+        .getOperationCallExpXS_Argument();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.PrimitiveLiteralExpXSImpl <em>Primitive Literal Exp XS</em>}' class.
@@ -2964,7 +2981,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PROPERTY_CALL_EXP_XS__QUALIFIER = eINSTANCE.getPropertyCallExpXS_Qualifier();
+    EReference PROPERTY_CALL_EXP_XS__QUALIFIER = eINSTANCE
+        .getPropertyCallExpXS_Qualifier();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.RealLiteralExpXSImpl <em>Real Literal Exp XS</em>}' class.
@@ -2982,7 +3000,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute REAL_LITERAL_EXP_XS__REAL_SYMBOL = eINSTANCE.getRealLiteralExpXS_RealSymbol();
+    EAttribute REAL_LITERAL_EXP_XS__REAL_SYMBOL = eINSTANCE
+        .getRealLiteralExpXS_RealSymbol();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.StaticOperationCallExpXSImpl <em>Static Operation Call Exp XS</em>}' class.
@@ -2992,7 +3011,8 @@ public interface XOCLPackage extends EPackage {
      * @see tudresden.ocl20.pivot.xocl.impl.XOCLPackageImpl#getStaticOperationCallExpXS()
      * @generated
      */
-    EClass STATIC_OPERATION_CALL_EXP_XS = eINSTANCE.getStaticOperationCallExpXS();
+    EClass STATIC_OPERATION_CALL_EXP_XS = eINSTANCE
+        .getStaticOperationCallExpXS();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.StaticPropertyCallExpXSImpl <em>Static Property Call Exp XS</em>}' class.
@@ -3039,7 +3059,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TUPLE_LITERAL_EXP_XS__PART = eINSTANCE.getTupleLiteralExpXS_Part();
+    EReference TUPLE_LITERAL_EXP_XS__PART = eINSTANCE
+        .getTupleLiteralExpXS_Part();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.TupleLiteralPartXSImpl <em>Tuple Literal Part XS</em>}' class.
@@ -3052,28 +3073,13 @@ public interface XOCLPackage extends EPackage {
     EClass TUPLE_LITERAL_PART_XS = eINSTANCE.getTupleLiteralPartXS();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Variable Declaration</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TUPLE_LITERAL_PART_XS__NAME = eINSTANCE.getTupleLiteralPartXS_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Type Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TUPLE_LITERAL_PART_XS__TYPE_NAME = eINSTANCE.getTupleLiteralPartXS_TypeName();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TUPLE_LITERAL_PART_XS__VALUE = eINSTANCE.getTupleLiteralPartXS_Value();
+    EReference TUPLE_LITERAL_PART_XS__VARIABLE_DECLARATION = eINSTANCE
+        .getTupleLiteralPartXS_VariableDeclaration();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.TypeLiteralExpXSImpl <em>Type Literal Exp XS</em>}' class.
@@ -3120,7 +3126,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute UNLIMITED_NATURAL_EXP_XS__SYMBOL = eINSTANCE.getUnlimitedNaturalExpXS_Symbol();
+    EAttribute UNLIMITED_NATURAL_EXP_XS__SYMBOL = eINSTANCE
+        .getUnlimitedNaturalExpXS_Symbol();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.VariableExpXSImpl <em>Variable Exp XS</em>}' class.
@@ -3138,7 +3145,8 @@ public interface XOCLPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VARIABLE_EXP_XS__REFERRED_VARIABLE = eINSTANCE.getVariableExpXS_ReferredVariable();
+    EReference VARIABLE_EXP_XS__REFERRED_VARIABLE = eINSTANCE
+        .getVariableExpXS_ReferredVariable();
 
     /**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.xocl.impl.NamespaceXSImpl <em>Namespace XS</em>}' class.

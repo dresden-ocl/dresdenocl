@@ -131,8 +131,8 @@ public class NamespaceXSImpl extends EObjectImpl implements NamespaceXS {
     String oldPathName = pathName;
     pathName = newPathName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.NAMESPACE_XS__PATH_NAME,
-          oldPathName,pathName));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.NAMESPACE_XS__PATH_NAME, oldPathName, pathName));
   }
 
   /**
@@ -142,8 +142,8 @@ public class NamespaceXSImpl extends EObjectImpl implements NamespaceXS {
    */
   public EList<ConstraintXS> getOwnedRule() {
     if (ownedRule == null) {
-      ownedRule = new EObjectContainmentEList<ConstraintXS>(ConstraintXS.class,this,
-          XOCLPackage.NAMESPACE_XS__OWNED_RULE);
+      ownedRule = new EObjectContainmentEList<ConstraintXS>(ConstraintXS.class,
+          this, XOCLPackage.NAMESPACE_XS__OWNED_RULE);
     }
     return ownedRule;
   }
@@ -154,13 +154,13 @@ public class NamespaceXSImpl extends EObjectImpl implements NamespaceXS {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.NAMESPACE_XS__OWNED_RULE:
-        return ((InternalEList<?>) getOwnedRule()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getOwnedRule()).basicRemove(otherEnd, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -176,7 +176,7 @@ public class NamespaceXSImpl extends EObjectImpl implements NamespaceXS {
       case XOCLPackage.NAMESPACE_XS__OWNED_RULE:
         return getOwnedRule();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -196,7 +196,7 @@ public class NamespaceXSImpl extends EObjectImpl implements NamespaceXS {
         getOwnedRule().addAll((Collection<? extends ConstraintXS>) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -226,7 +226,8 @@ public class NamespaceXSImpl extends EObjectImpl implements NamespaceXS {
   public boolean eIsSet(int featureID) {
     switch (featureID) {
       case XOCLPackage.NAMESPACE_XS__PATH_NAME:
-        return PATH_NAME_EDEFAULT == null ? pathName != null : !PATH_NAME_EDEFAULT.equals(pathName);
+        return PATH_NAME_EDEFAULT == null ? pathName != null
+            : !PATH_NAME_EDEFAULT.equals(pathName);
       case XOCLPackage.NAMESPACE_XS__OWNED_RULE:
         return ownedRule != null && !ownedRule.isEmpty();
     }

@@ -63,7 +63,7 @@ public interface OperationCallExpXS extends FeatureCallExpXS {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Argument</em>' containment reference list.
    * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getOperationCallExpXS_Argument()
-   * @model type="tudresden.ocl20.pivot.xocl.OclExpressionXS" containment="true"
+   * @model containment="true"
    * @generated
    */
   EList<OclExpressionXS> getArgument();

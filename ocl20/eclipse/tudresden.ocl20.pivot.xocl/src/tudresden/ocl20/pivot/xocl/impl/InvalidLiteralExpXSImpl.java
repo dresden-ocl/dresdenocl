@@ -46,7 +46,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class InvalidLiteralExpXSImpl extends LiteralExpXSImpl implements InvalidLiteralExpXS {
+public class InvalidLiteralExpXSImpl extends LiteralExpXSImpl implements
+    InvalidLiteralExpXS {
 
   /**
    * <!-- begin-user-doc -->

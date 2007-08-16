@@ -229,8 +229,9 @@ public enum ConstraintKindXS implements Enumerator {
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final ConstraintKindXS[] VALUES_ARRAY = new ConstraintKindXS[] { INVARIANT,
-      DEFINITION, PRECONDITION, POSTCONDITION, INITIALVALUE, DERIVEDVALUE, BODY, };
+  private static final ConstraintKindXS[] VALUES_ARRAY = new ConstraintKindXS[] {
+      INVARIANT, DEFINITION, PRECONDITION, POSTCONDITION, INITIALVALUE,
+      DERIVEDVALUE, BODY, };
 
   /**
    * A public read-only list of all the '<em><b>Constraint Kind XS</b></em>' enumerators.
@@ -238,8 +239,8 @@ public enum ConstraintKindXS implements Enumerator {
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<ConstraintKindXS> VALUES = Collections.unmodifiableList(Arrays
-      .asList(VALUES_ARRAY));
+  public static final List<ConstraintKindXS> VALUES = Collections
+      .unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
    * Returns the '<em><b>Constraint Kind XS</b></em>' literal with the specified literal value.

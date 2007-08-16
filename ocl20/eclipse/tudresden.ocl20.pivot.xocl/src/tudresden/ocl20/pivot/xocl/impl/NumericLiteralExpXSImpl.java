@@ -46,8 +46,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public abstract class NumericLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implements
-    NumericLiteralExpXS {
+public abstract class NumericLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl
+    implements NumericLiteralExpXS {
 
   /**
    * <!-- begin-user-doc -->

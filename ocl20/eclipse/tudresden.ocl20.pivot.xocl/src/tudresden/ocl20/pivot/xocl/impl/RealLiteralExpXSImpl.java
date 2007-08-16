@@ -52,7 +52,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class RealLiteralExpXSImpl extends NumericLiteralExpXSImpl implements RealLiteralExpXS {
+public class RealLiteralExpXSImpl extends NumericLiteralExpXSImpl implements
+    RealLiteralExpXS {
 
   /**
    * The default value of the '{@link #getRealSymbol() <em>Real Symbol</em>}' attribute.
@@ -111,8 +112,9 @@ public class RealLiteralExpXSImpl extends NumericLiteralExpXSImpl implements Rea
     float oldRealSymbol = realSymbol;
     realSymbol = newRealSymbol;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.REAL_LITERAL_EXP_XS__REAL_SYMBOL,oldRealSymbol,realSymbol));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.REAL_LITERAL_EXP_XS__REAL_SYMBOL, oldRealSymbol,
+          realSymbol));
   }
 
   /**
@@ -126,7 +128,7 @@ public class RealLiteralExpXSImpl extends NumericLiteralExpXSImpl implements Rea
       case XOCLPackage.REAL_LITERAL_EXP_XS__REAL_SYMBOL:
         return new Float(getRealSymbol());
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -141,7 +143,7 @@ public class RealLiteralExpXSImpl extends NumericLiteralExpXSImpl implements Rea
         setRealSymbol(((Float) newValue).floatValue());
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

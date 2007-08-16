@@ -67,7 +67,7 @@ public class LetExpXSImpl extends OclExpressionXSImpl implements LetExpXS {
    * @generated
    * @ordered
    */
-  protected OclExpressionXS in = null;
+  protected OclExpressionXS in;
 
   /**
    * The cached value of the '{@link #getVariable() <em>Variable</em>}' containment reference.
@@ -77,7 +77,7 @@ public class LetExpXSImpl extends OclExpressionXSImpl implements LetExpXS {
    * @generated
    * @ordered
    */
-  protected VariableXS variable = null;
+  protected VariableXS variable;
 
   /**
    * <!-- begin-user-doc -->
@@ -112,12 +112,13 @@ public class LetExpXSImpl extends OclExpressionXSImpl implements LetExpXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetIn(OclExpressionXS newIn, NotificationChain msgs) {
+  public NotificationChain basicSetIn(OclExpressionXS newIn,
+      NotificationChain msgs) {
     OclExpressionXS oldIn = in;
     in = newIn;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.LET_EXP_XS__IN,oldIn,newIn);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.LET_EXP_XS__IN, oldIn, newIn);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -133,16 +134,17 @@ public class LetExpXSImpl extends OclExpressionXSImpl implements LetExpXS {
     if (newIn != in) {
       NotificationChain msgs = null;
       if (in != null)
-        msgs = ((InternalEObject) in).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.LET_EXP_XS__IN,null,msgs);
+        msgs = ((InternalEObject) in).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.LET_EXP_XS__IN, null, msgs);
       if (newIn != null)
-        msgs = ((InternalEObject) newIn).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.LET_EXP_XS__IN,null,msgs);
-      msgs = basicSetIn(newIn,msgs);
+        msgs = ((InternalEObject) newIn).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.LET_EXP_XS__IN, null, msgs);
+      msgs = basicSetIn(newIn, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.LET_EXP_XS__IN,newIn,newIn));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.LET_EXP_XS__IN, newIn, newIn));
   }
 
   /**
@@ -159,12 +161,14 @@ public class LetExpXSImpl extends OclExpressionXSImpl implements LetExpXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetVariable(VariableXS newVariable, NotificationChain msgs) {
+  public NotificationChain basicSetVariable(VariableXS newVariable,
+      NotificationChain msgs) {
     VariableXS oldVariable = variable;
     variable = newVariable;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.LET_EXP_XS__VARIABLE,oldVariable,newVariable);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.LET_EXP_XS__VARIABLE, oldVariable,
+          newVariable);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -180,17 +184,19 @@ public class LetExpXSImpl extends OclExpressionXSImpl implements LetExpXS {
     if (newVariable != variable) {
       NotificationChain msgs = null;
       if (variable != null)
-        msgs = ((InternalEObject) variable).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.LET_EXP_XS__VARIABLE,null,msgs);
+        msgs = ((InternalEObject) variable).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.LET_EXP_XS__VARIABLE, null,
+            msgs);
       if (newVariable != null)
-        msgs = ((InternalEObject) newVariable).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.LET_EXP_XS__VARIABLE,null,msgs);
-      msgs = basicSetVariable(newVariable,msgs);
+        msgs = ((InternalEObject) newVariable).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.LET_EXP_XS__VARIABLE, null,
+            msgs);
+      msgs = basicSetVariable(newVariable, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.LET_EXP_XS__VARIABLE,
-          newVariable,newVariable));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.LET_EXP_XS__VARIABLE, newVariable, newVariable));
   }
 
   /**
@@ -199,15 +205,15 @@ public class LetExpXSImpl extends OclExpressionXSImpl implements LetExpXS {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.LET_EXP_XS__IN:
-        return basicSetIn(null,msgs);
+        return basicSetIn(null, msgs);
       case XOCLPackage.LET_EXP_XS__VARIABLE:
-        return basicSetVariable(null,msgs);
+        return basicSetVariable(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -223,7 +229,7 @@ public class LetExpXSImpl extends OclExpressionXSImpl implements LetExpXS {
       case XOCLPackage.LET_EXP_XS__VARIABLE:
         return getVariable();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -241,7 +247,7 @@ public class LetExpXSImpl extends OclExpressionXSImpl implements LetExpXS {
         setVariable((VariableXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

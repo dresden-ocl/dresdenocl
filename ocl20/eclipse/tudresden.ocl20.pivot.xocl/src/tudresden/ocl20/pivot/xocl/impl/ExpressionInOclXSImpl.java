@@ -65,23 +65,24 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getBody <em>Body</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getConstraint <em>Constraint</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getBodyExpression <em>Body Expression</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getContext <em>Context</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getParameter <em>Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getConstraint <em>Constraint</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getContext <em>Context</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.impl.ExpressionInOclXSImpl#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
-public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOclXS {
+public class ExpressionInOclXSImpl extends EObjectImpl implements
+    ExpressionInOclXS {
 
   /**
-   * The default value of the '{@link #getBody() <em>Body</em>}' attribute. <!-- begin-user-doc
+   * The default value of the '{@link #getBody() <em>Body</em>}' attribute.
+   * <!-- begin-user-doc
    * --> <!-- end-user-doc -->
-   * 
    * @see #getBody()
    * @generated
    * @ordered
@@ -89,9 +90,9 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
   protected static final String BODY_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getBody() <em>Body</em>}' attribute. <!-- begin-user-doc -->
+   * The cached value of the '{@link #getBody() <em>Body</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * 
    * @see #getBody()
    * @generated
    * @ordered
@@ -99,14 +100,13 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
   protected String body = BODY_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getBodyExpression()
    * @generated
    * @ordered
    */
-  protected OclExpressionXS bodyExpression = null;
+  protected OclExpressionXS bodyExpression;
 
   /**
    * The cached value of the '{@link #getContext() <em>Context</em>}' containment reference. <!--
@@ -116,17 +116,16 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
    * @generated
    * @ordered
    */
-  protected VariableXS context = null;
+  protected VariableXS context;
 
   /**
-   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference
-   * list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference list.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getParameter()
    * @generated
    * @ordered
    */
-  protected EList<VariableXS> parameter = null;
+  protected EList<VariableXS> parameter;
 
   /**
    * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference. <!--
@@ -136,7 +135,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
    * @generated
    * @ordered
    */
-  protected VariableXS result = null;
+  protected VariableXS result;
 
   /**
    * A regular expression that matches an operation signature.
@@ -145,7 +144,6 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected ExpressionInOclXSImpl() {
@@ -154,7 +152,6 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -164,7 +161,6 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public String getBody() {
@@ -173,20 +169,18 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setBody(String newBody) {
     String oldBody = body;
     body = newBody;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.EXPRESSION_IN_OCL_XS__BODY,
-          oldBody,body));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.EXPRESSION_IN_OCL_XS__BODY, oldBody, body));
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public OclExpressionXS getBodyExpression() {
@@ -195,16 +189,16 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
-  public NotificationChain basicSetBodyExpression(OclExpressionXS newBodyExpression,
-      NotificationChain msgs) {
+  public NotificationChain basicSetBodyExpression(
+      OclExpressionXS newBodyExpression, NotificationChain msgs) {
     OclExpressionXS oldBodyExpression = bodyExpression;
     bodyExpression = newBodyExpression;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,oldBodyExpression,newBodyExpression);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,
+          oldBodyExpression, newBodyExpression);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -213,24 +207,26 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setBodyExpression(OclExpressionXS newBodyExpression) {
     if (newBodyExpression != bodyExpression) {
       NotificationChain msgs = null;
       if (bodyExpression != null)
-        msgs = ((InternalEObject) bodyExpression).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,null,msgs);
+        msgs = ((InternalEObject) bodyExpression)
+            .eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+                - XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION, null, msgs);
       if (newBodyExpression != null)
-        msgs = ((InternalEObject) newBodyExpression).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,null,msgs);
-      msgs = basicSetBodyExpression(newBodyExpression,msgs);
+        msgs = ((InternalEObject) newBodyExpression)
+            .eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+                - XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION, null, msgs);
+      msgs = basicSetBodyExpression(newBodyExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION,newBodyExpression,newBodyExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION, newBodyExpression,
+          newBodyExpression));
   }
 
   /**
@@ -254,8 +250,8 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
     String contextualType = getContextualType();
 
     // only set the new type if different from current type (setType checks only for identity)
-    if (contextualType == null && context.getType() != null || contextualType != null
-        && !contextualType.equals(context.getType())) {
+    if (contextualType == null && context.getType() != null
+        || contextualType != null && !contextualType.equals(context.getType())) {
       context.setType(contextualType);
     }
 
@@ -264,15 +260,16 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
-  public NotificationChain basicSetContext(VariableXS newContext, NotificationChain msgs) {
+  public NotificationChain basicSetContext(VariableXS newContext,
+      NotificationChain msgs) {
     VariableXS oldContext = context;
     context = newContext;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.EXPRESSION_IN_OCL_XS__CONTEXT,oldContext,newContext);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.EXPRESSION_IN_OCL_XS__CONTEXT,
+          oldContext, newContext);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -281,24 +278,25 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setContext(VariableXS newContext) {
     if (newContext != context) {
       NotificationChain msgs = null;
       if (context != null)
-        msgs = ((InternalEObject) context).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.EXPRESSION_IN_OCL_XS__CONTEXT,null,msgs);
+        msgs = ((InternalEObject) context).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.EXPRESSION_IN_OCL_XS__CONTEXT,
+            null, msgs);
       if (newContext != null)
-        msgs = ((InternalEObject) newContext).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.EXPRESSION_IN_OCL_XS__CONTEXT,null,msgs);
-      msgs = basicSetContext(newContext,msgs);
+        msgs = ((InternalEObject) newContext).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.EXPRESSION_IN_OCL_XS__CONTEXT,
+            null, msgs);
+      msgs = basicSetContext(newContext, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.EXPRESSION_IN_OCL_XS__CONTEXT,newContext,newContext));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.EXPRESSION_IN_OCL_XS__CONTEXT, newContext, newContext));
   }
 
   /**
@@ -312,8 +310,8 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
   public EList<VariableXS> getParameter() {
 
     if (parameter == null) {
-      parameter = new EObjectContainmentEList<VariableXS>(VariableXS.class,this,
-          XOCLPackage.EXPRESSION_IN_OCL_XS__PARAMETER);
+      parameter = new EObjectContainmentEList<VariableXS>(VariableXS.class,
+          this, XOCLPackage.EXPRESSION_IN_OCL_XS__PARAMETER);
     }
 
     // clear parameter variables that have been created previously
@@ -339,7 +337,8 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
           for (int i = 0; i < parameterArray.length; i++) {
             String[] parameterNameAndType = parameterArray[i];
 
-            VariableXS parameterVariable = XOCLFactory.eINSTANCE.createVariableXS();
+            VariableXS parameterVariable = XOCLFactory.eINSTANCE
+                .createVariableXS();
             parameterVariable.setName(parameterNameAndType[0]);
             parameterVariable.setType(parameterNameAndType[1]);
 
@@ -349,7 +348,8 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
         // else check each parameter if its name and type needs to be updated
         else {
-          for (ListIterator<VariableXS> it = parameter.listIterator(); it.hasNext();) {
+          for (ListIterator<VariableXS> it = parameter.listIterator(); it
+              .hasNext();) {
             VariableXS parameterVariable = it.next();
 
             String parameterName = parameterArray[it.previousIndex()][0];
@@ -420,15 +420,16 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
-  public NotificationChain basicSetResult(VariableXS newResult, NotificationChain msgs) {
+  public NotificationChain basicSetResult(VariableXS newResult,
+      NotificationChain msgs) {
     VariableXS oldResult = result;
     result = newResult;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT,oldResult,newResult);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT,
+          oldResult, newResult);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -437,68 +438,70 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setResult(VariableXS newResult) {
     if (newResult != result) {
       NotificationChain msgs = null;
       if (result != null)
-        msgs = ((InternalEObject) result).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT,null,msgs);
+        msgs = ((InternalEObject) result).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT,
+            null, msgs);
       if (newResult != null)
-        msgs = ((InternalEObject) newResult).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT,null,msgs);
-      msgs = basicSetResult(newResult,msgs);
+        msgs = ((InternalEObject) newResult).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT,
+            null, msgs);
+      msgs = basicSetResult(newResult, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT,
-          newResult,newResult));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT, newResult, newResult));
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public ConstraintXS getConstraint() {
-    if (eContainerFeatureID != XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT) return null;
+    if (eContainerFeatureID != XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT)
+      return null;
     return (ConstraintXS) eContainer();
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
-  public NotificationChain basicSetConstraint(ConstraintXS newConstraint, NotificationChain msgs) {
+  public NotificationChain basicSetConstraint(ConstraintXS newConstraint,
+      NotificationChain msgs) {
     msgs = eBasicSetContainer((InternalEObject) newConstraint,
-        XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT,msgs);
+        XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT, msgs);
     return msgs;
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setConstraint(ConstraintXS newConstraint) {
     if (newConstraint != eInternalContainer()
         || (eContainerFeatureID != XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT && newConstraint != null)) {
-      if (EcoreUtil.isAncestor(this,newConstraint))
-        throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+      if (EcoreUtil.isAncestor(this, newConstraint))
+        throw new IllegalArgumentException(
+            "Recursive containment not allowed for " + toString()); //$NON-NLS-1$
       NotificationChain msgs = null;
       if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
       if (newConstraint != null)
         msgs = ((InternalEObject) newConstraint).eInverseAdd(this,
-            XOCLPackage.CONSTRAINT_XS__SPECIFICATION,ConstraintXS.class,msgs);
-      msgs = basicSetConstraint(newConstraint,msgs);
+            XOCLPackage.CONSTRAINT_XS__SPECIFICATION, ConstraintXS.class, msgs);
+      msgs = basicSetConstraint(newConstraint, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT,newConstraint,newConstraint));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT, newConstraint,
+          newConstraint));
   }
 
   /**
@@ -527,7 +530,7 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
         int lastSeparatorIndex = contextualType.lastIndexOf("::"); //$NON-NLS-1$
 
         if (lastSeparatorIndex > 0) {
-          contextualType = contextualType.substring(0,lastSeparatorIndex);
+          contextualType = contextualType.substring(0, lastSeparatorIndex);
         }
       }
     }
@@ -594,13 +597,14 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
         }
 
         // trim leading and trailing parenthesis
-        parameters = parameters.substring(1,parameters.length() - 1);
+        parameters = parameters.substring(1, parameters.length() - 1);
 
         // tokenize around the commas
         String[] parametersArray = parameters.split("\\s*,\\s*"); //$NON-NLS-1$
 
         // collect the parameters and their types
-        List<String[]> parametersList = new ArrayList<String[]>(parametersArray.length);
+        List<String[]> parametersList = new ArrayList<String[]>(
+            parametersArray.length);
 
         for (int i = 0; i < parametersArray.length; i++) {
           String[] parameter = parametersArray[i].trim().split("\\s*:\\s*"); //$NON-NLS-1$
@@ -619,7 +623,8 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
    */
   protected boolean isTypeConstraint() {
     ConstraintKindXS kind = getConstraint().getKind();
-    return kind == ConstraintKindXS.INVARIANT || kind == ConstraintKindXS.DEFINITION;
+    return kind == ConstraintKindXS.INVARIANT
+        || kind == ConstraintKindXS.DEFINITION;
   }
 
   /**
@@ -627,7 +632,8 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
    */
   protected boolean isPropertyConstraint() {
     ConstraintKindXS kind = getConstraint().getKind();
-    return kind == ConstraintKindXS.INITIALVALUE || kind == ConstraintKindXS.DERIVEDVALUE;
+    return kind == ConstraintKindXS.INITIALVALUE
+        || kind == ConstraintKindXS.DERIVEDVALUE;
   }
 
   /**
@@ -635,7 +641,8 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
    */
   protected boolean isOperationConstraint() {
     ConstraintKindXS kind = getConstraint().getKind();
-    return kind == ConstraintKindXS.BODY || kind == ConstraintKindXS.PRECONDITION
+    return kind == ConstraintKindXS.BODY
+        || kind == ConstraintKindXS.PRECONDITION
         || kind == ConstraintKindXS.POSTCONDITION;
   }
 
@@ -680,7 +687,6 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -688,53 +694,52 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
       NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT:
-        if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetConstraint((ConstraintXS) otherEnd,msgs);
+        if (eInternalContainer() != null)
+          msgs = eBasicRemoveFromContainer(msgs);
+        return basicSetConstraint((ConstraintXS) otherEnd, msgs);
     }
-    return super.eInverseAdd(otherEnd,featureID,msgs);
+    return super.eInverseAdd(otherEnd, featureID, msgs);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT:
-        return basicSetConstraint(null,msgs);
+        return basicSetConstraint(null, msgs);
       case XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION:
-        return basicSetBodyExpression(null,msgs);
+        return basicSetBodyExpression(null, msgs);
       case XOCLPackage.EXPRESSION_IN_OCL_XS__CONTEXT:
-        return basicSetContext(null,msgs);
+        return basicSetContext(null, msgs);
       case XOCLPackage.EXPRESSION_IN_OCL_XS__PARAMETER:
-        return ((InternalEList<?>) getParameter()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getParameter()).basicRemove(otherEnd, msgs);
       case XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT:
-        return basicSetResult(null,msgs);
+        return basicSetResult(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
-  public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+  public NotificationChain eBasicRemoveFromContainerFeature(
+      NotificationChain msgs) {
     switch (eContainerFeatureID) {
       case XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT:
-        return eInternalContainer().eInverseRemove(this,XOCLPackage.CONSTRAINT_XS__SPECIFICATION,
-            ConstraintXS.class,msgs);
+        return eInternalContainer().eInverseRemove(this,
+            XOCLPackage.CONSTRAINT_XS__SPECIFICATION, ConstraintXS.class, msgs);
     }
     return super.eBasicRemoveFromContainerFeature(msgs);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -753,12 +758,11 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
       case XOCLPackage.EXPRESSION_IN_OCL_XS__RESULT:
         return getResult();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -785,12 +789,11 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
         setResult((VariableXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -835,7 +838,8 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
   public boolean eIsSet(int featureID) {
     switch (featureID) {
       case XOCLPackage.EXPRESSION_IN_OCL_XS__BODY:
-        return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT.equals(body);
+        return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT
+            .equals(body);
       case XOCLPackage.EXPRESSION_IN_OCL_XS__CONSTRAINT:
         return getConstraint() != null;
       case XOCLPackage.EXPRESSION_IN_OCL_XS__BODY_EXPRESSION:
@@ -850,7 +854,6 @@ public class ExpressionInOclXSImpl extends EObjectImpl implements ExpressionInOc
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override

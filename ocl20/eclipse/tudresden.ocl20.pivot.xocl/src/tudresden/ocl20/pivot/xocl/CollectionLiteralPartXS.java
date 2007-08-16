@@ -32,7 +32,6 @@
  */
 package tudresden.ocl20.pivot.xocl;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,5 +43,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface CollectionLiteralPartXS extends EObject {
+public interface CollectionLiteralPartXS extends ElementXS {
 } // CollectionLiteralPartXS

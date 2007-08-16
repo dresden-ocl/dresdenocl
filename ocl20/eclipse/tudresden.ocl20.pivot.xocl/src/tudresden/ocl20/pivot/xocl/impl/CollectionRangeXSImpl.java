@@ -56,7 +56,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implements CollectionRangeXS {
+public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl
+    implements CollectionRangeXS {
 
   /**
    * The cached value of the '{@link #getLast() <em>Last</em>}' containment reference.
@@ -66,7 +67,7 @@ public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implement
    * @generated
    * @ordered
    */
-  protected OclExpressionXS last = null;
+  protected OclExpressionXS last;
 
   /**
    * The cached value of the '{@link #getFirst() <em>First</em>}' containment reference.
@@ -76,7 +77,7 @@ public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implement
    * @generated
    * @ordered
    */
-  protected OclExpressionXS first = null;
+  protected OclExpressionXS first;
 
   /**
    * <!-- begin-user-doc -->
@@ -111,12 +112,14 @@ public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetLast(OclExpressionXS newLast, NotificationChain msgs) {
+  public NotificationChain basicSetLast(OclExpressionXS newLast,
+      NotificationChain msgs) {
     OclExpressionXS oldLast = last;
     last = newLast;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.COLLECTION_RANGE_XS__LAST,oldLast,newLast);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.COLLECTION_RANGE_XS__LAST, oldLast,
+          newLast);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -132,17 +135,19 @@ public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implement
     if (newLast != last) {
       NotificationChain msgs = null;
       if (last != null)
-        msgs = ((InternalEObject) last).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.COLLECTION_RANGE_XS__LAST,null,msgs);
+        msgs = ((InternalEObject) last).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.COLLECTION_RANGE_XS__LAST,
+            null, msgs);
       if (newLast != null)
-        msgs = ((InternalEObject) newLast).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.COLLECTION_RANGE_XS__LAST,null,msgs);
-      msgs = basicSetLast(newLast,msgs);
+        msgs = ((InternalEObject) newLast).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.COLLECTION_RANGE_XS__LAST,
+            null, msgs);
+      msgs = basicSetLast(newLast, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.COLLECTION_RANGE_XS__LAST,
-          newLast,newLast));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.COLLECTION_RANGE_XS__LAST, newLast, newLast));
   }
 
   /**
@@ -159,12 +164,14 @@ public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFirst(OclExpressionXS newFirst, NotificationChain msgs) {
+  public NotificationChain basicSetFirst(OclExpressionXS newFirst,
+      NotificationChain msgs) {
     OclExpressionXS oldFirst = first;
     first = newFirst;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.COLLECTION_RANGE_XS__FIRST,oldFirst,newFirst);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.COLLECTION_RANGE_XS__FIRST, oldFirst,
+          newFirst);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -180,17 +187,19 @@ public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implement
     if (newFirst != first) {
       NotificationChain msgs = null;
       if (first != null)
-        msgs = ((InternalEObject) first).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.COLLECTION_RANGE_XS__FIRST,null,msgs);
+        msgs = ((InternalEObject) first).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.COLLECTION_RANGE_XS__FIRST,
+            null, msgs);
       if (newFirst != null)
-        msgs = ((InternalEObject) newFirst).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.COLLECTION_RANGE_XS__FIRST,null,msgs);
-      msgs = basicSetFirst(newFirst,msgs);
+        msgs = ((InternalEObject) newFirst).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.COLLECTION_RANGE_XS__FIRST,
+            null, msgs);
+      msgs = basicSetFirst(newFirst, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.COLLECTION_RANGE_XS__FIRST,
-          newFirst,newFirst));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.COLLECTION_RANGE_XS__FIRST, newFirst, newFirst));
   }
 
   /**
@@ -199,15 +208,15 @@ public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implement
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.COLLECTION_RANGE_XS__LAST:
-        return basicSetLast(null,msgs);
+        return basicSetLast(null, msgs);
       case XOCLPackage.COLLECTION_RANGE_XS__FIRST:
-        return basicSetFirst(null,msgs);
+        return basicSetFirst(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -223,7 +232,7 @@ public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implement
       case XOCLPackage.COLLECTION_RANGE_XS__FIRST:
         return getFirst();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -241,7 +250,7 @@ public class CollectionRangeXSImpl extends CollectionLiteralPartXSImpl implement
         setFirst((OclExpressionXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

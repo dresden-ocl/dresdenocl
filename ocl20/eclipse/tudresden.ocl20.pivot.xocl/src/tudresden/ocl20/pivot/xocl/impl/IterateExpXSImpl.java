@@ -65,7 +65,7 @@ public class IterateExpXSImpl extends LoopExpXSImpl implements IterateExpXS {
    * @generated
    * @ordered
    */
-  protected VariableXS result = null;
+  protected VariableXS result;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,12 +100,14 @@ public class IterateExpXSImpl extends LoopExpXSImpl implements IterateExpXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetResult(VariableXS newResult, NotificationChain msgs) {
+  public NotificationChain basicSetResult(VariableXS newResult,
+      NotificationChain msgs) {
     VariableXS oldResult = result;
     result = newResult;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.ITERATE_EXP_XS__RESULT,oldResult,newResult);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.ITERATE_EXP_XS__RESULT, oldResult,
+          newResult);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -121,17 +123,19 @@ public class IterateExpXSImpl extends LoopExpXSImpl implements IterateExpXS {
     if (newResult != result) {
       NotificationChain msgs = null;
       if (result != null)
-        msgs = ((InternalEObject) result).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.ITERATE_EXP_XS__RESULT,null,msgs);
+        msgs = ((InternalEObject) result).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.ITERATE_EXP_XS__RESULT, null,
+            msgs);
       if (newResult != null)
-        msgs = ((InternalEObject) newResult).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.ITERATE_EXP_XS__RESULT,null,msgs);
-      msgs = basicSetResult(newResult,msgs);
+        msgs = ((InternalEObject) newResult).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.ITERATE_EXP_XS__RESULT, null,
+            msgs);
+      msgs = basicSetResult(newResult, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.ITERATE_EXP_XS__RESULT,
-          newResult,newResult));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.ITERATE_EXP_XS__RESULT, newResult, newResult));
   }
 
   /**
@@ -140,13 +144,13 @@ public class IterateExpXSImpl extends LoopExpXSImpl implements IterateExpXS {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.ITERATE_EXP_XS__RESULT:
-        return basicSetResult(null,msgs);
+        return basicSetResult(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -160,7 +164,7 @@ public class IterateExpXSImpl extends LoopExpXSImpl implements IterateExpXS {
       case XOCLPackage.ITERATE_EXP_XS__RESULT:
         return getResult();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -175,7 +179,7 @@ public class IterateExpXSImpl extends LoopExpXSImpl implements IterateExpXS {
         setResult((VariableXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

@@ -62,7 +62,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class CollectionLiteralExpXSImpl extends LiteralExpXSImpl implements CollectionLiteralExpXS {
+public class CollectionLiteralExpXSImpl extends LiteralExpXSImpl implements
+    CollectionLiteralExpXS {
 
   /**
    * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
@@ -92,7 +93,7 @@ public class CollectionLiteralExpXSImpl extends LiteralExpXSImpl implements Coll
    * @generated
    * @ordered
    */
-  protected EList<CollectionLiteralPartXS> part = null;
+  protected EList<CollectionLiteralPartXS> part;
 
   /**
    * <!-- begin-user-doc -->
@@ -131,8 +132,8 @@ public class CollectionLiteralExpXSImpl extends LiteralExpXSImpl implements Coll
     CollectionKindXS oldKind = kind;
     kind = newKind == null ? KIND_EDEFAULT : newKind;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.COLLECTION_LITERAL_EXP_XS__KIND,oldKind,kind));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.COLLECTION_LITERAL_EXP_XS__KIND, oldKind, kind));
   }
 
   /**
@@ -142,8 +143,9 @@ public class CollectionLiteralExpXSImpl extends LiteralExpXSImpl implements Coll
    */
   public EList<CollectionLiteralPartXS> getPart() {
     if (part == null) {
-      part = new EObjectContainmentEList<CollectionLiteralPartXS>(CollectionLiteralPartXS.class,
-          this,XOCLPackage.COLLECTION_LITERAL_EXP_XS__PART);
+      part = new EObjectContainmentEList<CollectionLiteralPartXS>(
+          CollectionLiteralPartXS.class, this,
+          XOCLPackage.COLLECTION_LITERAL_EXP_XS__PART);
     }
     return part;
   }
@@ -154,13 +156,13 @@ public class CollectionLiteralExpXSImpl extends LiteralExpXSImpl implements Coll
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.COLLECTION_LITERAL_EXP_XS__PART:
-        return ((InternalEList<?>) getPart()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getPart()).basicRemove(otherEnd, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -176,7 +178,7 @@ public class CollectionLiteralExpXSImpl extends LiteralExpXSImpl implements Coll
       case XOCLPackage.COLLECTION_LITERAL_EXP_XS__PART:
         return getPart();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -193,10 +195,11 @@ public class CollectionLiteralExpXSImpl extends LiteralExpXSImpl implements Coll
         return;
       case XOCLPackage.COLLECTION_LITERAL_EXP_XS__PART:
         getPart().clear();
-        getPart().addAll((Collection<? extends CollectionLiteralPartXS>) newValue);
+        getPart().addAll(
+            (Collection<? extends CollectionLiteralPartXS>) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

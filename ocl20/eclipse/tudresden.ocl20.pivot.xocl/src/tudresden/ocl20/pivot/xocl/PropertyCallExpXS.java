@@ -90,7 +90,7 @@ public interface PropertyCallExpXS extends FeatureCallExpXS {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Qualifier</em>' containment reference list.
    * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getPropertyCallExpXS_Qualifier()
-   * @model type="tudresden.ocl20.pivot.xocl.OclExpressionXS" containment="true"
+   * @model containment="true"
    * @generated
    */
   EList<OclExpressionXS> getQualifier();

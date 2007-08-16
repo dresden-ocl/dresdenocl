@@ -93,7 +93,7 @@ public interface CollectionLiteralExpXS extends LiteralExpXS {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Part</em>' containment reference list.
    * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getCollectionLiteralExpXS_Part()
-   * @model type="tudresden.ocl20.pivot.xocl.CollectionLiteralPartXS" containment="true"
+   * @model containment="true"
    * @generated
    */
   EList<CollectionLiteralPartXS> getPart();

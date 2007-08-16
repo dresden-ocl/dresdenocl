@@ -111,8 +111,8 @@ public class IteratorExpXSImpl extends LoopExpXSImpl implements IteratorExpXS {
     IteratorExpressionXS oldName = name;
     name = newName == null ? NAME_EDEFAULT : newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.ITERATOR_EXP_XS__NAME,
-          oldName,name));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.ITERATOR_EXP_XS__NAME, oldName, name));
   }
 
   /**
@@ -126,7 +126,7 @@ public class IteratorExpXSImpl extends LoopExpXSImpl implements IteratorExpXS {
       case XOCLPackage.ITERATOR_EXP_XS__NAME:
         return getName();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -141,7 +141,7 @@ public class IteratorExpXSImpl extends LoopExpXSImpl implements IteratorExpXS {
         setName((IteratorExpressionXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

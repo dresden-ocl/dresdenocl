@@ -154,8 +154,8 @@ public enum CollectionKindXS implements Enumerator {
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final CollectionKindXS[] VALUES_ARRAY = new CollectionKindXS[] { SET, ORDERED_SET,
-      BAG, SEQUENCE, };
+  private static final CollectionKindXS[] VALUES_ARRAY = new CollectionKindXS[] {
+      SET, ORDERED_SET, BAG, SEQUENCE, };
 
   /**
    * A public read-only list of all the '<em><b>Collection Kind XS</b></em>' enumerators.
@@ -163,8 +163,8 @@ public enum CollectionKindXS implements Enumerator {
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<CollectionKindXS> VALUES = Collections.unmodifiableList(Arrays
-      .asList(VALUES_ARRAY));
+  public static final List<CollectionKindXS> VALUES = Collections
+      .unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
    * Returns the '<em><b>Collection Kind XS</b></em>' literal with the specified literal value.

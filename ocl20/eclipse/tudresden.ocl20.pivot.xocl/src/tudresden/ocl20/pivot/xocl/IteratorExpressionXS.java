@@ -327,8 +327,9 @@ public enum IteratorExpressionXS implements Enumerator {
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final IteratorExpressionXS[] VALUES_ARRAY = new IteratorExpressionXS[] { DEFAULT,
-      ANY, COLLECT, COLLECT_NESTED, EXISTS, FOR_ALL, IS_UNIQUE, ONE, REJECT, SELECT, SORTED_BY, };
+  private static final IteratorExpressionXS[] VALUES_ARRAY = new IteratorExpressionXS[] {
+      DEFAULT, ANY, COLLECT, COLLECT_NESTED, EXISTS, FOR_ALL, IS_UNIQUE, ONE,
+      REJECT, SELECT, SORTED_BY, };
 
   /**
    * A public read-only list of all the '<em><b>Iterator Expression XS</b></em>' enumerators.
@@ -336,8 +337,8 @@ public enum IteratorExpressionXS implements Enumerator {
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<IteratorExpressionXS> VALUES = Collections.unmodifiableList(Arrays
-      .asList(VALUES_ARRAY));
+  public static final List<IteratorExpressionXS> VALUES = Collections
+      .unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
    * Returns the '<em><b>Iterator Expression XS</b></em>' literal with the specified literal value.

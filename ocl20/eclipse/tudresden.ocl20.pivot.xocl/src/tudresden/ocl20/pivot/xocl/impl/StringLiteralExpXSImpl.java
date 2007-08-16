@@ -52,7 +52,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class StringLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implements StringLiteralExpXS {
+public class StringLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implements
+    StringLiteralExpXS {
 
   /**
    * The default value of the '{@link #getStringSymbol() <em>String Symbol</em>}' attribute.
@@ -111,8 +112,9 @@ public class StringLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implements
     String oldStringSymbol = stringSymbol;
     stringSymbol = newStringSymbol;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.STRING_LITERAL_EXP_XS__STRING_SYMBOL,oldStringSymbol,stringSymbol));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.STRING_LITERAL_EXP_XS__STRING_SYMBOL, oldStringSymbol,
+          stringSymbol));
   }
 
   /**
@@ -126,7 +128,7 @@ public class StringLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implements
       case XOCLPackage.STRING_LITERAL_EXP_XS__STRING_SYMBOL:
         return getStringSymbol();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -141,7 +143,7 @@ public class StringLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implements
         setStringSymbol((String) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -168,8 +170,8 @@ public class StringLiteralExpXSImpl extends PrimitiveLiteralExpXSImpl implements
   public boolean eIsSet(int featureID) {
     switch (featureID) {
       case XOCLPackage.STRING_LITERAL_EXP_XS__STRING_SYMBOL:
-        return STRING_SYMBOL_EDEFAULT == null ? stringSymbol != null : !STRING_SYMBOL_EDEFAULT
-            .equals(stringSymbol);
+        return STRING_SYMBOL_EDEFAULT == null ? stringSymbol != null
+            : !STRING_SYMBOL_EDEFAULT.equals(stringSymbol);
     }
     return super.eIsSet(featureID);
   }

@@ -46,8 +46,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class StaticOperationCallExpXSImpl extends ModelOperationCallExpXSImpl implements
-    StaticOperationCallExpXS {
+public class StaticOperationCallExpXSImpl extends ModelOperationCallExpXSImpl
+    implements StaticOperationCallExpXS {
 
   /**
    * <!-- begin-user-doc -->

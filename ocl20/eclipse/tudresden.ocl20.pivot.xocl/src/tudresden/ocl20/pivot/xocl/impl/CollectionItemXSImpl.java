@@ -55,7 +55,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class CollectionItemXSImpl extends CollectionLiteralPartXSImpl implements CollectionItemXS {
+public class CollectionItemXSImpl extends CollectionLiteralPartXSImpl implements
+    CollectionItemXS {
 
   /**
    * The cached value of the '{@link #getItem() <em>Item</em>}' containment reference.
@@ -65,7 +66,7 @@ public class CollectionItemXSImpl extends CollectionLiteralPartXSImpl implements
    * @generated
    * @ordered
    */
-  protected OclExpressionXS item = null;
+  protected OclExpressionXS item;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,12 +101,14 @@ public class CollectionItemXSImpl extends CollectionLiteralPartXSImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetItem(OclExpressionXS newItem, NotificationChain msgs) {
+  public NotificationChain basicSetItem(OclExpressionXS newItem,
+      NotificationChain msgs) {
     OclExpressionXS oldItem = item;
     item = newItem;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.COLLECTION_ITEM_XS__ITEM,oldItem,newItem);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.COLLECTION_ITEM_XS__ITEM, oldItem,
+          newItem);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -121,17 +124,19 @@ public class CollectionItemXSImpl extends CollectionLiteralPartXSImpl implements
     if (newItem != item) {
       NotificationChain msgs = null;
       if (item != null)
-        msgs = ((InternalEObject) item).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.COLLECTION_ITEM_XS__ITEM,null,msgs);
+        msgs = ((InternalEObject) item).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.COLLECTION_ITEM_XS__ITEM,
+            null, msgs);
       if (newItem != null)
-        msgs = ((InternalEObject) newItem).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.COLLECTION_ITEM_XS__ITEM,null,msgs);
-      msgs = basicSetItem(newItem,msgs);
+        msgs = ((InternalEObject) newItem).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.COLLECTION_ITEM_XS__ITEM,
+            null, msgs);
+      msgs = basicSetItem(newItem, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.COLLECTION_ITEM_XS__ITEM,
-          newItem,newItem));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.COLLECTION_ITEM_XS__ITEM, newItem, newItem));
   }
 
   /**
@@ -140,13 +145,13 @@ public class CollectionItemXSImpl extends CollectionLiteralPartXSImpl implements
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.COLLECTION_ITEM_XS__ITEM:
-        return basicSetItem(null,msgs);
+        return basicSetItem(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -160,7 +165,7 @@ public class CollectionItemXSImpl extends CollectionLiteralPartXSImpl implements
       case XOCLPackage.COLLECTION_ITEM_XS__ITEM:
         return getItem();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -175,7 +180,7 @@ public class CollectionItemXSImpl extends CollectionLiteralPartXSImpl implements
         setItem((OclExpressionXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

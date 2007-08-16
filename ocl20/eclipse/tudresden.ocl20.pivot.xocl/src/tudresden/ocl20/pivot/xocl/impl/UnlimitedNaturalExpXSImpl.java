@@ -52,8 +52,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class UnlimitedNaturalExpXSImpl extends NumericLiteralExpXSImpl implements
-    UnlimitedNaturalExpXS {
+public class UnlimitedNaturalExpXSImpl extends NumericLiteralExpXSImpl
+    implements UnlimitedNaturalExpXS {
 
   /**
    * The default value of the '{@link #getSymbol() <em>Symbol</em>}' attribute.
@@ -112,8 +112,8 @@ public class UnlimitedNaturalExpXSImpl extends NumericLiteralExpXSImpl implement
     String oldSymbol = symbol;
     symbol = newSymbol;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.UNLIMITED_NATURAL_EXP_XS__SYMBOL,oldSymbol,symbol));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.UNLIMITED_NATURAL_EXP_XS__SYMBOL, oldSymbol, symbol));
   }
 
   /**
@@ -127,7 +127,7 @@ public class UnlimitedNaturalExpXSImpl extends NumericLiteralExpXSImpl implement
       case XOCLPackage.UNLIMITED_NATURAL_EXP_XS__SYMBOL:
         return getSymbol();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -142,7 +142,7 @@ public class UnlimitedNaturalExpXSImpl extends NumericLiteralExpXSImpl implement
         setSymbol((String) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -169,7 +169,8 @@ public class UnlimitedNaturalExpXSImpl extends NumericLiteralExpXSImpl implement
   public boolean eIsSet(int featureID) {
     switch (featureID) {
       case XOCLPackage.UNLIMITED_NATURAL_EXP_XS__SYMBOL:
-        return SYMBOL_EDEFAULT == null ? symbol != null : !SYMBOL_EDEFAULT.equals(symbol);
+        return SYMBOL_EDEFAULT == null ? symbol != null : !SYMBOL_EDEFAULT
+            .equals(symbol);
     }
     return super.eIsSet(featureID);
   }

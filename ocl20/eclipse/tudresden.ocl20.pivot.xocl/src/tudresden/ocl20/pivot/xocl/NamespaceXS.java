@@ -92,7 +92,7 @@ public interface NamespaceXS extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Owned Rule</em>' containment reference list.
    * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getNamespaceXS_OwnedRule()
-   * @model type="tudresden.ocl20.pivot.xocl.ConstraintXS" containment="true"
+   * @model containment="true"
    * @generated
    */
   EList<ConstraintXS> getOwnedRule();

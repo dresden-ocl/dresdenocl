@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
  * All rights reserved.                                                      *
  *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
+ * This work was done as a project at the Chair for Software Technology,     *
  * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
  * It is understood that any modification not identified as such is not      *
  * covered by the preceding statement.                                       *
@@ -30,42 +30,43 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.xocl;
+package tudresden.ocl20.pivot.xocl.impl;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import tudresden.ocl20.pivot.xocl.ElementXS;
+import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Tuple Literal Exp XS</b></em>'.
+ * An implementation of the model object '<em><b>Element XS</b></em>'.
  * <!-- end-user-doc -->
- *
  * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link tudresden.ocl20.pivot.xocl.TupleLiteralExpXS#getPart <em>Part</em>}</li>
- * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getTupleLiteralExpXS()
- * @model
  * @generated
  */
-public interface TupleLiteralExpXS extends LiteralExpXS {
+public abstract class ElementXSImpl extends EObjectImpl implements ElementXS {
 
   /**
-   * Returns the value of the '<em><b>Part</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Part</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Part</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getTupleLiteralExpXS_Part()
-   * @model containment="true"
    * @generated
    */
-  EList<TupleLiteralPartXS> getPart();
+  protected ElementXSImpl() {
+    super();
+  }
 
-} // TupleLiteralExpXS
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass() {
+    return XOCLPackage.Literals.ELEMENT_XS;
+  }
+
+} //ElementXSImpl

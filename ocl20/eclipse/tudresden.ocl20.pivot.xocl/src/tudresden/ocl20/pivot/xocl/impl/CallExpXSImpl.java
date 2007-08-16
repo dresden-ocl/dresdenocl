@@ -55,7 +55,8 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public abstract class CallExpXSImpl extends OclExpressionXSImpl implements CallExpXS {
+public abstract class CallExpXSImpl extends OclExpressionXSImpl implements
+    CallExpXS {
 
   /**
    * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
@@ -65,7 +66,7 @@ public abstract class CallExpXSImpl extends OclExpressionXSImpl implements CallE
    * @generated
    * @ordered
    */
-  protected OclExpressionXS source = null;
+  protected OclExpressionXS source;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,12 +101,14 @@ public abstract class CallExpXSImpl extends OclExpressionXSImpl implements CallE
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetSource(OclExpressionXS newSource, NotificationChain msgs) {
+  public NotificationChain basicSetSource(OclExpressionXS newSource,
+      NotificationChain msgs) {
     OclExpressionXS oldSource = source;
     source = newSource;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.CALL_EXP_XS__SOURCE,oldSource,newSource);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.CALL_EXP_XS__SOURCE, oldSource,
+          newSource);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -121,17 +124,19 @@ public abstract class CallExpXSImpl extends OclExpressionXSImpl implements CallE
     if (newSource != source) {
       NotificationChain msgs = null;
       if (source != null)
-        msgs = ((InternalEObject) source).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.CALL_EXP_XS__SOURCE,null,msgs);
+        msgs = ((InternalEObject) source).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.CALL_EXP_XS__SOURCE, null,
+            msgs);
       if (newSource != null)
-        msgs = ((InternalEObject) newSource).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.CALL_EXP_XS__SOURCE,null,msgs);
-      msgs = basicSetSource(newSource,msgs);
+        msgs = ((InternalEObject) newSource).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.CALL_EXP_XS__SOURCE, null,
+            msgs);
+      msgs = basicSetSource(newSource, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.CALL_EXP_XS__SOURCE,
-          newSource,newSource));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.CALL_EXP_XS__SOURCE, newSource, newSource));
   }
 
   /**
@@ -140,13 +145,13 @@ public abstract class CallExpXSImpl extends OclExpressionXSImpl implements CallE
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.CALL_EXP_XS__SOURCE:
-        return basicSetSource(null,msgs);
+        return basicSetSource(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -160,7 +165,7 @@ public abstract class CallExpXSImpl extends OclExpressionXSImpl implements CallE
       case XOCLPackage.CALL_EXP_XS__SOURCE:
         return getSource();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -175,7 +180,7 @@ public abstract class CallExpXSImpl extends OclExpressionXSImpl implements CallE
         setSource((OclExpressionXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

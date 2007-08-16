@@ -32,7 +32,6 @@
  */
 package tudresden.ocl20.pivot.xocl;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,9 +41,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getName <em>Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getValue <em>Value</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getVariableDeclaration <em>Variable Declaration</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,84 +49,32 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TupleLiteralPartXS extends EObject {
+public interface TupleLiteralPartXS extends ElementXS {
 
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Variable Declaration</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * If the meaning of the '<em>Variable Declaration</em>' reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getTupleLiteralPartXS_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Type Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type Name</em>' attribute.
-   * @see #setTypeName(String)
-   * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getTupleLiteralPartXS_TypeName()
-   * @model
-   * @generated
-   */
-  String getTypeName();
-
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getTypeName <em>Type Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type Name</em>' attribute.
-   * @see #getTypeName()
-   * @generated
-   */
-  void setTypeName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(OclExpressionXS)
-   * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getTupleLiteralPartXS_Value()
+   * @return the value of the '<em>Variable Declaration</em>' containment reference.
+   * @see #setVariableDeclaration(VariableXS)
+   * @see tudresden.ocl20.pivot.xocl.XOCLPackage#getTupleLiteralPartXS_VariableDeclaration()
    * @model containment="true" required="true"
    * @generated
    */
-  OclExpressionXS getValue();
+  VariableXS getVariableDeclaration();
 
   /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getValue <em>Value</em>}' containment reference.
+   * Sets the value of the '{@link tudresden.ocl20.pivot.xocl.TupleLiteralPartXS#getVariableDeclaration <em>Variable Declaration</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' containment reference.
-   * @see #getValue()
+   * @param value the new value of the '<em>Variable Declaration</em>' containment reference.
+   * @see #getVariableDeclaration()
    * @generated
    */
-  void setValue(OclExpressionXS value);
+  void setVariableDeclaration(VariableXS value);
 
 } // TupleLiteralPartXS

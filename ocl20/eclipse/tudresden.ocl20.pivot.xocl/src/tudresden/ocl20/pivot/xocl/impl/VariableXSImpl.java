@@ -37,7 +37,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import tudresden.ocl20.pivot.xocl.OclExpressionXS;
 import tudresden.ocl20.pivot.xocl.VariableXS;
@@ -58,7 +57,7 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
  *
  * @generated
  */
-public class VariableXSImpl extends EObjectImpl implements VariableXS {
+public class VariableXSImpl extends ElementXSImpl implements VariableXS {
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -108,7 +107,7 @@ public class VariableXSImpl extends EObjectImpl implements VariableXS {
    * @generated
    * @ordered
    */
-  protected OclExpressionXS initExpression = null;
+  protected OclExpressionXS initExpression;
 
   /**
    * <!-- begin-user-doc -->
@@ -147,8 +146,8 @@ public class VariableXSImpl extends EObjectImpl implements VariableXS {
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.VARIABLE_XS__NAME,oldName,
-          name));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.VARIABLE_XS__NAME, oldName, name));
   }
 
   /**
@@ -169,8 +168,8 @@ public class VariableXSImpl extends EObjectImpl implements VariableXS {
     String oldType = type;
     type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.VARIABLE_XS__TYPE,oldType,
-          type));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.VARIABLE_XS__TYPE, oldType, type));
   }
 
   /**
@@ -187,13 +186,14 @@ public class VariableXSImpl extends EObjectImpl implements VariableXS {
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetInitExpression(OclExpressionXS newInitExpression,
-      NotificationChain msgs) {
+  public NotificationChain basicSetInitExpression(
+      OclExpressionXS newInitExpression, NotificationChain msgs) {
     OclExpressionXS oldInitExpression = initExpression;
     initExpression = newInitExpression;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          XOCLPackage.VARIABLE_XS__INIT_EXPRESSION,oldInitExpression,newInitExpression);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, XOCLPackage.VARIABLE_XS__INIT_EXPRESSION,
+          oldInitExpression, newInitExpression);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -209,17 +209,20 @@ public class VariableXSImpl extends EObjectImpl implements VariableXS {
     if (newInitExpression != initExpression) {
       NotificationChain msgs = null;
       if (initExpression != null)
-        msgs = ((InternalEObject) initExpression).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.VARIABLE_XS__INIT_EXPRESSION,null,msgs);
+        msgs = ((InternalEObject) initExpression).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.VARIABLE_XS__INIT_EXPRESSION,
+            null, msgs);
       if (newInitExpression != null)
-        msgs = ((InternalEObject) newInitExpression).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - XOCLPackage.VARIABLE_XS__INIT_EXPRESSION,null,msgs);
-      msgs = basicSetInitExpression(newInitExpression,msgs);
+        msgs = ((InternalEObject) newInitExpression).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE - XOCLPackage.VARIABLE_XS__INIT_EXPRESSION,
+            null, msgs);
+      msgs = basicSetInitExpression(newInitExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,XOCLPackage.VARIABLE_XS__INIT_EXPRESSION,
-          newInitExpression,newInitExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          XOCLPackage.VARIABLE_XS__INIT_EXPRESSION, newInitExpression,
+          newInitExpression));
   }
 
   /**
@@ -228,13 +231,13 @@ public class VariableXSImpl extends EObjectImpl implements VariableXS {
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case XOCLPackage.VARIABLE_XS__INIT_EXPRESSION:
-        return basicSetInitExpression(null,msgs);
+        return basicSetInitExpression(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -252,7 +255,7 @@ public class VariableXSImpl extends EObjectImpl implements VariableXS {
       case XOCLPackage.VARIABLE_XS__INIT_EXPRESSION:
         return getInitExpression();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -273,7 +276,7 @@ public class VariableXSImpl extends EObjectImpl implements VariableXS {
         setInitExpression((OclExpressionXS) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
@@ -306,9 +309,11 @@ public class VariableXSImpl extends EObjectImpl implements VariableXS {
   public boolean eIsSet(int featureID) {
     switch (featureID) {
       case XOCLPackage.VARIABLE_XS__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+            .equals(name);
       case XOCLPackage.VARIABLE_XS__TYPE:
-        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT
+            .equals(type);
       case XOCLPackage.VARIABLE_XS__INIT_EXPRESSION:
         return initExpression != null;
     }
