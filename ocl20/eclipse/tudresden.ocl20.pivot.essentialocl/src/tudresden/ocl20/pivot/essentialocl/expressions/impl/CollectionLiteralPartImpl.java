@@ -35,23 +35,23 @@ package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Collection Literal Part</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Collection Literal Part</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
-public abstract class CollectionLiteralPartImpl extends TypedElementImpl implements
-    CollectionLiteralPart {
+public abstract class CollectionLiteralPartImpl extends TypedElementImpl
+    implements CollectionLiteralPart {
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected CollectionLiteralPartImpl() {
@@ -59,8 +59,30 @@ public abstract class CollectionLiteralPartImpl extends TypedElementImpl impleme
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Overridden to implement lazy caching of evaluated types. Subclasses should
+   * implement {@link #evaluateType()} for the actual type evaluation logic.
+   */
+  @Override
+  public final Type getType() {
+
+    if (type == null) {
+      type = evaluateType();
+    }
+
+    return type;
+  }
+
+  /**
+   * Evaluates the type of this <code>CollectionLiteralPart</code>.
+   * Subclasses need to implement this according to the OCL specification.
+   * 
+   * @return a <code>Type</code> instance.
+   */
+  protected abstract Type evaluateType();
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -68,4 +90,4 @@ public abstract class CollectionLiteralPartImpl extends TypedElementImpl impleme
     return ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_PART;
   }
 
-} //CollectionLiteralPartImpl
+} // CollectionLiteralPartImpl

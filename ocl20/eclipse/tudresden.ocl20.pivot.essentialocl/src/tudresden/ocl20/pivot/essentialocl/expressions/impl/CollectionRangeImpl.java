@@ -40,27 +40,29 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Collection Range</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Collection Range</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl#getFirst <em>First</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl#getLast <em>Last</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl#getFirst <em>First</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl#getLast <em>Last</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
-public class CollectionRangeImpl extends CollectionLiteralPartImpl implements CollectionRange {
+public class CollectionRangeImpl extends CollectionLiteralPartImpl implements
+    CollectionRange {
 
   /**
-   * The cached value of the '{@link #getFirst() <em>First</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getFirst() <em>First</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getFirst()
    * @generated
    * @ordered
@@ -68,9 +70,9 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
   protected OclExpression first = null;
 
   /**
-   * The cached value of the '{@link #getLast() <em>Last</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getLast() <em>Last</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getLast()
    * @generated
    * @ordered
@@ -78,8 +80,8 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
   protected OclExpression last = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected CollectionRangeImpl() {
@@ -87,8 +89,8 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -97,8 +99,37 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Overridden to determine the type of the <code>CollectionRange</code>
+   * according to the OCL specification (Section 8.3):
+   * 
+   * <p>
+   * The type of a CollectionRange is the common supertype of the expressions
+   * taking part in the range.
+   * 
+   * <pre>
+   * context CollectionRange
+   * inv: type = first.type.commonSuperType (last.type)
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @return a <code>Type</code> instance
+   */
+  @Override
+  public Type evaluateType() {
+
+    // check wellformedness
+    if (first == null || last == null) {
+      throw new WellformednessException(this,
+          "The first and last element of a collection range must not be null."); //$NON-NLS-1$
+    }
+
+    return first.getType().commonSuperType(last.getType());
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getFirst() {
@@ -106,16 +137,18 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
-  public NotificationChain basicSetFirst(OclExpression newFirst, NotificationChain msgs) {
+  public NotificationChain basicSetFirst(OclExpression newFirst,
+      NotificationChain msgs) {
     OclExpression oldFirst = first;
     first = newFirst;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,oldFirst,newFirst);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,
+          oldFirst, newFirst);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -123,30 +156,32 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setFirst(OclExpression newFirst) {
     if (newFirst != first) {
       NotificationChain msgs = null;
       if (first != null)
-        msgs = ((InternalEObject) first).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,null,msgs);
+        msgs = ((InternalEObject) first).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, null, msgs);
       if (newFirst != null)
-        msgs = ((InternalEObject) newFirst).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,null,msgs);
-      msgs = basicSetFirst(newFirst,msgs);
+        msgs = ((InternalEObject) newFirst).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, null, msgs);
+      msgs = basicSetFirst(newFirst, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.COLLECTION_RANGE__FIRST,newFirst,newFirst));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.COLLECTION_RANGE__FIRST, newFirst, newFirst));
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getLast() {
@@ -154,16 +189,18 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
-  public NotificationChain basicSetLast(OclExpression newLast, NotificationChain msgs) {
+  public NotificationChain basicSetLast(OclExpression newLast,
+      NotificationChain msgs) {
     OclExpression oldLast = last;
     last = newLast;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.COLLECTION_RANGE__LAST,oldLast,newLast);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, ExpressionsPackageImpl.COLLECTION_RANGE__LAST,
+          oldLast, newLast);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -171,47 +208,49 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setLast(OclExpression newLast) {
     if (newLast != last) {
       NotificationChain msgs = null;
       if (last != null)
-        msgs = ((InternalEObject) last).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.COLLECTION_RANGE__LAST,null,msgs);
+        msgs = ((InternalEObject) last).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.COLLECTION_RANGE__LAST, null, msgs);
       if (newLast != null)
-        msgs = ((InternalEObject) newLast).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.COLLECTION_RANGE__LAST,null,msgs);
-      msgs = basicSetLast(newLast,msgs);
+        msgs = ((InternalEObject) newLast).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.COLLECTION_RANGE__LAST, null, msgs);
+      msgs = basicSetLast(newLast, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.COLLECTION_RANGE__LAST,newLast,newLast));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.COLLECTION_RANGE__LAST, newLast, newLast));
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.COLLECTION_RANGE__FIRST:
-        return basicSetFirst(null,msgs);
+        return basicSetFirst(null, msgs);
       case ExpressionsPackageImpl.COLLECTION_RANGE__LAST:
-        return basicSetLast(null,msgs);
+        return basicSetLast(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -222,12 +261,12 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
       case ExpressionsPackageImpl.COLLECTION_RANGE__LAST:
         return getLast();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -240,12 +279,12 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
         setLast((OclExpression) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -262,8 +301,8 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -277,4 +316,4 @@ public class CollectionRangeImpl extends CollectionLiteralPartImpl implements Co
     return super.eIsSet(featureID);
   }
 
-} //CollectionRangeImpl
+} // CollectionRangeImpl

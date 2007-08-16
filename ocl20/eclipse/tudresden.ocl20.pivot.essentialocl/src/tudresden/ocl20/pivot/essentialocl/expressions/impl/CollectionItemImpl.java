@@ -112,7 +112,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements Col
    * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
    */
   @Override
-  public Type getType() {
+  public Type evaluateType() {
 
     // check invariant
     if (item == null) {

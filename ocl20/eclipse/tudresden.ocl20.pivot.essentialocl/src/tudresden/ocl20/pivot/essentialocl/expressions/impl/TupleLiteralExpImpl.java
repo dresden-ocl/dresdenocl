@@ -32,8 +32,11 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -44,6 +47,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -58,11 +63,12 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @generated
  */
-public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralExp {
+public class TupleLiteralExpImpl extends LiteralExpImpl implements
+    TupleLiteralExp {
 
   /**
-   * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
+   * The cached value of the '{@link #getPart() <em>Part</em>}' containment
+   * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @see #getPart()
    * @generated
@@ -80,8 +86,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
   }
 
   /**
-   * Overridden to determine the type of the <code>StringLiteralExp</code> according to the OCL
-   * specification (Section 8.3):
+   * Overridden to determine the type of the <code>TupleLiteralExp</code>
+   * according to the OCL specification (Section 8.3):
    * 
    * [1] The type of a TupleLiteralExp is a TupleType with the specified parts.
    * 
@@ -93,7 +99,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
    *      and part-&gt;size() = type.oclAsType (TupleType).allProperties()-&gt;size()
    * </pre>
    * 
-   * [2] All tuple literal expression parts of one tuple literal expression have unique names.
+   * [2] All tuple literal expression parts of one tuple literal expression have
+   * unique names.
    * 
    * <pre>
    *   context TupleLiteralExp
@@ -106,9 +113,45 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
    */
   @Override
   protected Type evaluateType() {
-    // TODO: implement type evaluation for tuple types
-    throw new UnsupportedOperationException(
-        "The type evaluation for tuple types has still to be implemented."); //$NON-NLS-1$
+    List<Property> tupleProperties;
+    Type type;
+    
+    // collect the properties of all tuple literal parts
+    tupleProperties = new ArrayList<Property>(getPart().size());
+    
+    for (TupleLiteralPart tupleLiteral : getPart()) {
+      Property partProperty = tupleLiteral.getProperty();
+
+      // check that the part references a property
+      if (partProperty == null) {
+        throw new WellformednessException(this,
+            "All tuple literal parts of a tuple literal expression " //$NON-NLS-1$
+                + "must reference a valid property. "); //$NON-NLS-1$
+      }
+
+      tupleProperties.add(partProperty);
+    }
+
+    // check wellformedness
+    Set<String> partNames = new HashSet<String>();
+
+    for (Property tupleProperty : tupleProperties) {
+      String partName = tupleProperty.getName();
+
+      // check uniqueness of part name
+      if (partNames.contains(partName)) {
+        throw new WellformednessException(this,
+            "All tuple literal parts of one tuple literal expression " //$NON-NLS-1$
+                + "must have unique names"); //$NON-NLS-1$
+      }
+      
+      partNames.add(partName);
+    }
+    
+    // get a tuple type with the corresponding properties
+    type = getValidOclLibrary().makeTupleType(tupleProperties);
+    
+    return type;
   }
 
   /**
@@ -128,7 +171,8 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
    */
   public List<TupleLiteralPart> getPart() {
     if (part == null) {
-      part = new EObjectContainmentEList<TupleLiteralPart>(TupleLiteralPart.class,this,
+      part = new EObjectContainmentEList<TupleLiteralPart>(
+          TupleLiteralPart.class, this,
           ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART);
     }
     return part;
@@ -140,13 +184,13 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
-        return ((InternalEList<?>) getPart()).basicRemove(otherEnd,msgs);
+        return ((InternalEList<?>) getPart()).basicRemove(otherEnd, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -160,7 +204,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
       case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
         return getPart();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
@@ -177,7 +221,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements TupleLiteralE
         getPart().addAll((Collection<? extends TupleLiteralPart>) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**

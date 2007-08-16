@@ -40,29 +40,31 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
+import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tuple Literal Part</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Tuple Literal Part</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getProperty <em>Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getValue <em>Value</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getProperty <em>Property</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
-public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiteralPart {
+public class TupleLiteralPartImpl extends TypedElementImpl implements
+    TupleLiteralPart {
 
   /**
-   * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getProperty() <em>Property</em>}'
+   * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getProperty()
    * @generated
    * @ordered
@@ -70,9 +72,9 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
   protected Property property = null;
 
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * The cached value of the '{@link #getValue() <em>Value</em>}' containment
+   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @see #getValue()
    * @generated
    * @ordered
@@ -80,8 +82,8 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
   protected OclExpression value = null;
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected TupleLiteralPartImpl() {
@@ -89,8 +91,8 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -99,8 +101,51 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Overridden to implement type evaluation for this
+   * <code>TupleLiteralPart</code>.
+   * 
+   * <p>
+   * The OCL 2.0 Specification does not say anything about how the type of a
+   * tuple literal part should be determined. So this implementation takes an
+   * educated guess and returns the type of the {@link Property} referenced by
+   * this part. However, the OCL spec lists a wellformedness rule as follows:
+   * </p>
+   * 
+   * <p>
+   * The type of the attribute is the type of the value expression.
+   * 
+   * <pre>
+   * context TupleLiteralPart
+   * inv: attribute.type = value.type
+   * </pre>
+   * 
+   * This implementation checks this constraint and throws a
+   * {@link WellformednessException} if it is not met.
+   * </p>
+   * 
+   * @return a <code>Type</code> instance
+   */
+  @Override
+  public Type getType() {
+
+    // check wellformedness
+    if (property == null || value == null) {
+      throw new WellformednessException(this,
+          "A TupleLiteralPart must reference a property and a value expression."); //$NON-NLS-1$
+    }
+
+    if (!property.getType().equals(value.getType())) {
+      throw new WellformednessException(this,
+          "The type of the property and the type of the value expression " //$NON-NLS-1$
+              + "of a TupleLiteralPart must be equal."); //$NON-NLS-1$
+    }
+
+    return property.getType();
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public Property getProperty() {
@@ -108,16 +153,19 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
-  public NotificationChain basicSetProperty(Property newProperty, NotificationChain msgs) {
+  public NotificationChain basicSetProperty(Property newProperty,
+      NotificationChain msgs) {
     Property oldProperty = property;
     property = newProperty;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,oldProperty,newProperty);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET,
+          ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, oldProperty,
+          newProperty);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -125,30 +173,35 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setProperty(Property newProperty) {
     if (newProperty != property) {
       NotificationChain msgs = null;
       if (property != null)
-        msgs = ((InternalEObject) property).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,null,msgs);
+        msgs = ((InternalEObject) property).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, null,
+            msgs);
       if (newProperty != null)
-        msgs = ((InternalEObject) newProperty).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,null,msgs);
-      msgs = basicSetProperty(newProperty,msgs);
+        msgs = ((InternalEObject) newProperty).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, null,
+            msgs);
+      msgs = basicSetProperty(newProperty, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,newProperty,newProperty));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, newProperty,
+          newProperty));
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public OclExpression getValue() {
@@ -156,16 +209,18 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
-  public NotificationChain basicSetValue(OclExpression newValue, NotificationChain msgs) {
+  public NotificationChain basicSetValue(OclExpression newValue,
+      NotificationChain msgs) {
     OclExpression oldValue = value;
     value = newValue;
     if (eNotificationRequired()) {
-      ENotificationImpl notification = new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,oldValue,newValue);
+      ENotificationImpl notification = new ENotificationImpl(this,
+          Notification.SET, ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,
+          oldValue, newValue);
       if (msgs == null) msgs = notification;
       else msgs.add(notification);
     }
@@ -173,47 +228,49 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public void setValue(OclExpression newValue) {
     if (newValue != value) {
       NotificationChain msgs = null;
       if (value != null)
-        msgs = ((InternalEObject) value).eInverseRemove(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,null,msgs);
+        msgs = ((InternalEObject) value).eInverseRemove(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null, msgs);
       if (newValue != null)
-        msgs = ((InternalEObject) newValue).eInverseAdd(this,EOPPOSITE_FEATURE_BASE
-            - ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,null,msgs);
-      msgs = basicSetValue(newValue,msgs);
+        msgs = ((InternalEObject) newValue).eInverseAdd(this,
+            EOPPOSITE_FEATURE_BASE
+                - ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null, msgs);
+      msgs = basicSetValue(newValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,newValue,newValue));
+      eNotify(new ENotificationImpl(this, Notification.SET,
+          ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, newValue, newValue));
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
+  public NotificationChain eInverseRemove(InternalEObject otherEnd,
+      int featureID, NotificationChain msgs) {
     switch (featureID) {
       case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
-        return basicSetProperty(null,msgs);
+        return basicSetProperty(null, msgs);
       case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
-        return basicSetValue(null,msgs);
+        return basicSetValue(null, msgs);
     }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -224,12 +281,12 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
       case ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE:
         return getValue();
     }
-    return super.eGet(featureID,resolve,coreType);
+    return super.eGet(featureID, resolve, coreType);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -242,12 +299,12 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
         setValue((OclExpression) newValue);
         return;
     }
-    super.eSet(featureID,newValue);
+    super.eSet(featureID, newValue);
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -264,8 +321,8 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
   }
 
   /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -279,4 +336,4 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements TupleLiter
     return super.eIsSet(featureID);
   }
 
-} //TupleLiteralPartImpl
+} // TupleLiteralPartImpl
