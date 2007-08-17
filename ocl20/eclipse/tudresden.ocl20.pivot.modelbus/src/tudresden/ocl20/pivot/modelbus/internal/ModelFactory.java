@@ -422,6 +422,8 @@ public class ModelFactory implements IModelFactory {
     ifExp.setCondition(condition);
     ifExp.setThenExpression(thenExpression);
     ifExp.setElseExpression(elseExpression);
+    
+    ifExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
       logger.debug("createIfExp() - exit - return value=" + ifExp); //$NON-NLS-1$
@@ -847,6 +849,8 @@ public class ModelFactory implements IModelFactory {
         .createRealLiteralExp();
     realLiteralExp.setRealSymbol(realSymbol);
 
+    realLiteralExp.setOclLibrary(getOclLibrary());
+    
     if (logger.isDebugEnabled()) {
       logger.debug("createRealLiteralExp() - exit - return value=" //$NON-NLS-1$
           + realLiteralExp);
