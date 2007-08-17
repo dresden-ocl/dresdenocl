@@ -92,6 +92,7 @@ import tudresden.ocl20.pivot.xocl.ConstraintKindXS;
 import tudresden.ocl20.pivot.xocl.ConstraintXS;
 import tudresden.ocl20.pivot.xocl.EnumLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.ExpressionInOclXS;
+import tudresden.ocl20.pivot.xocl.IfExpXS;
 import tudresden.ocl20.pivot.xocl.IntegerLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.InvalidLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.IterateExpXS;
@@ -102,6 +103,9 @@ import tudresden.ocl20.pivot.xocl.NamespaceXS;
 import tudresden.ocl20.pivot.xocl.OclExpressionXS;
 import tudresden.ocl20.pivot.xocl.OperationCallExpXS;
 import tudresden.ocl20.pivot.xocl.PropertyCallExpXS;
+import tudresden.ocl20.pivot.xocl.RealLiteralExpXS;
+import tudresden.ocl20.pivot.xocl.StaticOperationCallExpXS;
+import tudresden.ocl20.pivot.xocl.StaticPropertyCallExpXS;
 import tudresden.ocl20.pivot.xocl.StringLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.TupleLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.TupleLiteralPartXS;
@@ -181,6 +185,33 @@ public class XOCLParser implements IOclParser {
     /*
      * (non-Javadoc)
      * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseStaticPropertyCallExpXS(tudresden.ocl20.pivot.xocl.StaticPropertyCallExpXS)
+     */
+    @Override
+    public OclExpression caseStaticPropertyCallExpXS(StaticPropertyCallExpXS expression) {
+      List<OclExpression> qualifier = new ArrayList<OclExpression>(
+    		  expression.getQualifier().size());
+
+      // parse the qualifiers of the property call expression
+      for (OclExpressionXS oclExpressionXS : expression.getQualifier()) {
+        qualifier.add(doSwitch(oclExpressionXS));
+      }
+      
+      try {
+				return modelFactory.createPropertyCallExp(tokenizePathName(
+						expression.getReferredPropertyName()), 
+						qualifier.toArray(new OclExpression[qualifier.size()]));
+			} catch (FactoryException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+      
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseModelOperationCallExpXS(tudresden.ocl20.pivot.xocl.ModelOperationCallExpXS)
      */
     @Override
@@ -189,6 +220,24 @@ public class XOCLParser implements IOclParser {
       return modelFactory.createOperationCallExp(doSwitch(expression
           .getSource()), expression.getReferredOperationName(),
           parseArguments(expression));
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseStaticOperationCallExpXS(tudresden.ocl20.pivot.xocl.StaticOperationCallExpXS)
+     */
+    @Override
+    public OclExpression caseStaticOperationCallExpXS(StaticOperationCallExpXS expression) {
+    	try {
+    		return modelFactory.createOperationCallExp(
+    				tokenizePathName(expression.getReferredOperationName()),
+    				parseArguments(expression));
+    		} catch (FactoryException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
     }
 
     /*
@@ -301,6 +350,16 @@ public class XOCLParser implements IOclParser {
     public OclExpression caseIntegerLiteralExpXS(IntegerLiteralExpXS expression) {
       return modelFactory
           .createIntegerLiteralExp(expression.getIntegerSymbol());
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseRealLiteralExpXS(tudresden.ocl20.pivot.xocl.RealLiteralExpXS)
+     */
+    @Override
+    public OclExpression caseRealLiteralExpXS(RealLiteralExpXS expression) {
+      return modelFactory.createRealLiteralExp(expression.getRealSymbol());
     }
 
     /**
@@ -601,6 +660,20 @@ public class XOCLParser implements IOclParser {
     public OclExpression caseUndefinedLiteralExpXS(
         UndefinedLiteralExpXS expression) {
       return modelFactory.createUndefinedLiteralExp();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseIfExpXS(tudresden.ocl20.pivot.xocl.IfExpXS)
+     */
+    @Override
+    public OclExpression caseIfExpXS(IfExpXS expression) {
+    	OclExpression condition = doSwitch(expression.getCondition());
+    	OclExpression thenExpression = doSwitch(expression.getThenExpression());
+    	OclExpression elseExpression = doSwitch(expression.getElseExpression());
+    	
+    	return modelFactory.createIfExp(condition, thenExpression, elseExpression);
     }
   }
 
@@ -1089,7 +1162,10 @@ public class XOCLParser implements IOclParser {
       parameters = parameters.substring(1, parameters.length() - 1);
 
       // tokenize around the commas to get the parameter names and types
-      String[] parametersArray = parameters.split("\\s*,\\s*"); //$NON-NLS-1$
+      String[] parametersArray = {};
+      
+      if (!(parameters.equals("")))
+    	parametersArray = parameters.split(","); //$NON-NLS-1$
 
       // collect the parameter types
       for (int i = 0; i < parametersArray.length; i++) {
