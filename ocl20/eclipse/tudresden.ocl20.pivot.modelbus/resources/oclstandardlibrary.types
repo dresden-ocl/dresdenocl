@@ -72,8 +72,12 @@
     <ownedOperation name="abs" type="//@oclReal"/>
     <ownedOperation name="floor" type="//@oclInteger"/>
     <ownedOperation name="round" type="//@oclInteger"/>
-    <ownedOperation name="max" type="//@oclReal"/>
-    <ownedOperation name="min" type="//@oclReal"/>
+    <ownedOperation name="max" type="//@oclReal">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
+    <ownedOperation name="min" type="//@oclReal">
+      <ownedParameter name="r" type="//@oclReal"/>
+    </ownedOperation>
     <ownedOperation name="&lt;" type="//@oclBoolean">
       <ownedParameter name="r" type="//@oclReal"/>
     </ownedOperation>
@@ -139,6 +143,7 @@
       </genericType>
       <ownedTypeParameter name="T"/>
     </ownedOperation>
+    <ownedOperation name="atPre" type="//@oclAny"/>
   </oclAny>
   <oclVoid name="OclVoid">
     <ownedOperation name="oclIsUndefined" type="//@oclBoolean"/>
@@ -258,10 +263,24 @@
         </genericType>
       </ownedParameter>
     </ownedOperation>
+    <ownedOperation name="union">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSequence">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedParameter name="o">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
+          </typeArgument>
+        </genericType>
+      </ownedParameter>
+    </ownedOperation>
     <ownedOperation name="flatten">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSequence">
         <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedOperation.3/@ownedTypeParameter.0"/>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedOperation.4/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
       <ownedTypeParameter name="T2"/>
@@ -307,19 +326,19 @@
       <ownedParameter name="upper" type="//@oclInteger"/>
     </ownedOperation>
     <ownedOperation name="at">
-      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
       <ownedParameter name="i" type="//@oclInteger"/>
     </ownedOperation>
     <ownedOperation name="indexOf" type="//@oclInteger">
       <ownedParameter name="obj">
-        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation name="first">
-      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
     </ownedOperation>
     <ownedOperation name="last">
-      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+      <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
     </ownedOperation>
     <ownedOperation name="including">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSequence">
@@ -344,28 +363,28 @@
     <ownedOperation name="asBag">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclBag">
         <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
     </ownedOperation>
     <ownedOperation name="asSequence">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSequence">
         <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSet/@ownedTypeParameter.0"/>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
     </ownedOperation>
     <ownedOperation name="asSet">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
         <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSet/@ownedTypeParameter.0"/>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
     </ownedOperation>
     <ownedOperation name="asOrderedSet">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
         <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSet/@ownedTypeParameter.0"/>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
     </ownedOperation>
@@ -485,21 +504,21 @@
     <ownedOperation name="asSequence">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSequence">
         <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSet/@ownedTypeParameter.0"/>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
     </ownedOperation>
     <ownedOperation name="asSet">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
         <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSet/@ownedTypeParameter.0"/>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
     </ownedOperation>
     <ownedOperation name="asOrderedSet">
       <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
         <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSet/@ownedTypeParameter.0"/>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
         </typeArgument>
       </genericType>
     </ownedOperation>
@@ -727,6 +746,104 @@
     </ownedOperation>
     <ownedOperation name="last">
       <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+    </ownedOperation>
+    <ownedOperation name="count" type="//@oclInteger">
+      <ownedParameter name="object">
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="=" type="//@oclBoolean">
+      <ownedParameter name="s">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+          </typeArgument>
+        </genericType>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="union">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSequence">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedParameter name="s">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSequence">
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+          </typeArgument>
+        </genericType>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="union">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedParameter name="o">
+        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
+          </typeArgument>
+        </genericType>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="flatten">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedOperation.12/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedTypeParameter name="T2"/>
+    </ownedOperation>
+    <ownedOperation name="including">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedParameter name="object">
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="excluding">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+      <ownedParameter name="object">
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="asBag">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclBag">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+    </ownedOperation>
+    <ownedOperation name="asSequence">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSequence">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+    </ownedOperation>
+    <ownedOperation name="asSet">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
+    </ownedOperation>
+    <ownedOperation name="asOrderedSet">
+      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
+        <typeArgument>
+          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
+        </typeArgument>
+      </genericType>
     </ownedOperation>
     <genericSuperType xsi:type="pivot:ComplexGenericType" unboundType="//@oclCollection">
       <typeArgument>
