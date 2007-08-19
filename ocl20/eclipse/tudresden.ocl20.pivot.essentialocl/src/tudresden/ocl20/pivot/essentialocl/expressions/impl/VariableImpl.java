@@ -157,33 +157,36 @@ public class VariableImpl extends TypedElementImpl implements Variable {
       logger.debug("evaluateType() - enter"); //$NON-NLS-1$
     }
 
-    Type evaluatedType;
+    Type evaluatedType = null;
 
     if (representedParameter != null) {
       evaluatedType = representedParameter.getType();
     }
 
-    else if (initExpression != null) {
+    else if (type != null || initExpression != null) {
 
-      // check that the init expression conforms to the declared type
-      if (type != null && !initExpression.getType().conformsTo(type)) {
-        throw new WellformednessException(initExpression,
-            "The type of the init expression of variable '" + name //$NON-NLS-1$
-                + "' must conform to the declared type."); //$NON-NLS-1$
+      // if a type has been declared, use it
+      if (type != null) {
+        evaluatedType = type;
+
+        // check that init expression's type conforms to declared type
+        if (initExpression != null
+            && !initExpression.getType().conformsTo(type)) {
+          throw new WellformednessException(this,
+              "The type of the init expression of a variable must conform " //$NON-NLS-1$
+                  + "to the declared type."); //$NON-NLS-1$
+        }
       }
 
-      // no type declared, use the type of the init expression
-      evaluatedType = initExpression.getType();
-    }
+      else {
+        evaluatedType = initExpression.getType();
+      }
 
-    // default to the declared type
-    else if (type != null) {
-      evaluatedType = type;
     }
 
     else {
-      throw new WellformednessException(this, "The type of variable '" + name //$NON-NLS-1$
-          + "' cannot be determined."); //$NON-NLS-1$
+      throw new WellformednessException(this,
+          "Failed to determine the type of the variable."); //$NON-NLS-1$
     }
 
     // remember that we have evaluated the type
