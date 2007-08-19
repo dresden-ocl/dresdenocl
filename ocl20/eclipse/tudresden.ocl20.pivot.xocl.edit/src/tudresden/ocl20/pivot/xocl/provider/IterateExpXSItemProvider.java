@@ -48,6 +48,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.xocl.IterateExpXS;
+import tudresden.ocl20.pivot.xocl.LoopExpXS;
 import tudresden.ocl20.pivot.xocl.XOCLFactory;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
@@ -131,21 +132,52 @@ public class IterateExpXSItemProvider extends LoopExpXSItemProvider implements
 
   /**
    * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted to reflect the OCL concrete syntax
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public String getText(Object object) {
+    return super.getText(object);
+  }
+  
+  /**
+   * @param label
+   */
+  @Override
+  protected String getResultVariable(LoopExpXS expression) {
+    return getLabel(((IterateExpXS)expression).getResult());
+  }
+
+  /**
+   * Returns the EMF default string for iterate expressions.
+   */
+  @Override
+  protected String getDefaultString() {
     return getString("_UI_IterateExpXS_type"); //$NON-NLS-1$
+  }
+
+  /**
+   * Returns the string <code>"iterate"</code>.
+   */
+  @Override
+  protected String getLoopOperationName(LoopExpXS loopExp) {
+    return "iterate"; //$NON-NLS-1$
   }
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
+   * 
+   * <p>
+   * Adapted the EMF implementation to update the label hierarchy when the 
+   * result variable changes.
+   * </p>
+   * 
+   * @generated NOT
    */
   @Override
   public void notifyChanged(Notification notification) {
@@ -155,6 +187,7 @@ public class IterateExpXSItemProvider extends LoopExpXSItemProvider implements
       case XOCLPackage.ITERATE_EXP_XS__RESULT:
         fireNotifyChanged(new ViewerNotification(notification, notification
             .getNotifier(), true, false));
+        updateLabel(notification);
         return;
     }
     super.notifyChanged(notification);

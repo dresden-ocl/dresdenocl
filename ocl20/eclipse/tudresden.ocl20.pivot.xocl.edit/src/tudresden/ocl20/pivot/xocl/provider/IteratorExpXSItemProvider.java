@@ -33,10 +33,8 @@
 package tudresden.ocl20.pivot.xocl.provider;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -50,14 +48,15 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 
 import tudresden.ocl20.pivot.xocl.IteratorExpXS;
-import tudresden.ocl20.pivot.xocl.OclExpressionXS;
-import tudresden.ocl20.pivot.xocl.VariableXS;
+import tudresden.ocl20.pivot.xocl.IteratorExpressionXS;
+import tudresden.ocl20.pivot.xocl.LoopExpXS;
 import tudresden.ocl20.pivot.xocl.XOCLPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.xocl.IteratorExpXS} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.xocl.IteratorExpXS} object. <!-- begin-user-doc
+ * --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
@@ -65,9 +64,9 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
     ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This constructs an instance from a factory and a notifier. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   public IteratorExpXSItemProvider(AdapterFactory adapterFactory) {
@@ -75,9 +74,9 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
   }
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the property descriptors for the adapted class. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -91,9 +90,9 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
   }
 
   /**
-   * This adds a property descriptor for the Name feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds a property descriptor for the Name feature. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   protected void addNamePropertyDescriptor(Object object) {
@@ -110,9 +109,9 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
   }
 
   /**
-   * This returns IteratorExpXS.gif.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns IteratorExpXS.gif. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
    * @generated
    */
   @Override
@@ -125,62 +124,37 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
    * This returns the label text for the adapted class.
    * 
    * <p>
-   * Adapted to reflect the OCL concrete syntax.
+   * Adapted to reflect the OCL concrete syntax. This simply forwards to the
+   * super{@link #getText(Object) super implementation}.
    * </p>
    * 
    * @generated NOT
    */
   @Override
   public String getText(Object object) {
-    IteratorExpXS iteratorExp = (IteratorExpXS) object;
-
-    // get the source of the iterator expression
-    OclExpressionXS source = iteratorExp.getSource();
-
-    // initialize the label with the source label or the default label
-    StringBuilder label = new StringBuilder(source != null ? getLabel(source)
-        : UNDEFINED);
-
-    // get the referred iterator expression
-    String referredIterator = iteratorExp.getName().toString();
-
-    // only add the iterator stuff when an iterator has been selected
-    if (StringUtils.isNotEmpty(referredIterator)) {
-
-      // add the operator, the name of the iterator and the opening parenthesis
-      label.append("->").append(referredIterator).append('('); //$NON-NLS-1$
-
-      // append the iterators
-      for (Iterator<VariableXS> it = iteratorExp.getIterator().iterator(); it
-          .hasNext();) {
-        label.append(getLabel(it.next()));
-
-        if (it.hasNext()) {
-          label.append(", "); //$NON-NLS-1$
-        }
-      }
-
-      // append the vertical bar if there have been iterators defined
-      if (!iteratorExp.getIterator().isEmpty()) {
-        label.append(" | "); //$NON-NLS-1$
-      }
-
-      // append the body expression
-      String bodyLabel = getLabel(iteratorExp.getBody());
-      label.append(StringUtils.isNotEmpty(bodyLabel) ? bodyLabel : UNDEFINED);
-
-      // append closing parenthesis
-      label.append(')');
-    }
-
-    // if all parts are missing return the default string
-    return label.length() != 0 ? label.toString()
-        : getString("_UI_IteratorExpXS_type"); //$NON-NLS-1$
+    return super.getText(object);
   }
 
   /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+   * Returns the EMF default string for iterator expressions.
+   */
+  @Override
+  protected String getDefaultString() {
+    return getString("_UI_IteratorExpXS_type"); //$NON-NLS-1$
+  }
+
+  /**
+   * Returns the name of the associated {@link IteratorExpressionXS} enum.
+   */
+  @Override
+  protected String getLoopOperationName(LoopExpXS loopExpression) {
+    return ((IteratorExpXS) loopExpression).getName().toString();
+  }
+
+  /**
+   * This handles model notifications by calling {@link #updateChildren} to
+   * update any cached children and by creating a viewer notification, which it
+   * passes to {@link #fireNotifyChanged}.
    * 
    * <p>
    * Adapted to change the entire tree if the name of the iterator changes
@@ -200,10 +174,10 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
   }
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+   * describing the children that can be created under this object. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -213,9 +187,10 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
   }
 
   /**
-   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * This returns the label text for
+   * {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
@@ -236,9 +211,9 @@ public class IteratorExpXSItemProvider extends LoopExpXSItemProvider implements
   }
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+   * Return the resource locator for this item provider's resources. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
    * @generated
    */
   @Override
