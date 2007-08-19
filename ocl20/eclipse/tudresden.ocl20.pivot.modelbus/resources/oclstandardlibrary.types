@@ -749,7 +749,7 @@
     </ownedOperation>
     <ownedOperation name="count" type="//@oclInteger">
       <ownedParameter name="object">
-        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation name="=" type="//@oclBoolean">
@@ -784,7 +784,7 @@
       <ownedParameter name="o">
         <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
           <typeArgument>
-            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
           </typeArgument>
         </genericType>
       </ownedParameter>
@@ -804,7 +804,7 @@
         </typeArgument>
       </genericType>
       <ownedParameter name="object">
-        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation name="excluding">
@@ -814,7 +814,7 @@
         </typeArgument>
       </genericType>
       <ownedParameter name="object">
-        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclBag/@ownedTypeParameter.0"/>
+        <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclOrderedSet/@ownedTypeParameter.0"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation name="asBag">
