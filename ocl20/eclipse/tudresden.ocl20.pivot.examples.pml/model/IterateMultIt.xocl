@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xocl:NamespaceXS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xocl="http://www.tu-dresden.de/ocl20/pivot/2007/xocl" pathName="pml">
+  <ownedRule name="iterateMultIt" constrainedElement="Plugin">
+    <specification body="Set{1..4}->iterate(it1 : Integer; it2 : Integer; acc : Bag(String) = {} | acc->including(it1 * it2))">
+      <bodyExpression xsi:type="xocl:IterateExpXS">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <iterator name="it1" type="Integer"/>
+        <iterator name="it2" type="Integer"/>
+        <body xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="including">
+          <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.0/@specification/@bodyExpression/@result"/>
+          <argument xsi:type="xocl:ModelOperationCallExpXS" referredOperationName="*">
+            <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.0/@specification/@bodyExpression/@iterator.0"/>
+            <argument xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.0/@specification/@bodyExpression/@iterator.1"/>
+          </argument>
+        </body>
+        <result name="acc" type="Bag(Integer)">
+          <initExpression xsi:type="xocl:CollectionLiteralExpXS" kind="Bag"/>
+        </result>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+</xocl:NamespaceXS>
