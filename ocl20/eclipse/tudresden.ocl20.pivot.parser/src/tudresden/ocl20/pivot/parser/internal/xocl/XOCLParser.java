@@ -36,7 +36,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +43,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -188,25 +188,45 @@ public class XOCLParser implements IOclParser {
      * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseStaticPropertyCallExpXS(tudresden.ocl20.pivot.xocl.StaticPropertyCallExpXS)
      */
     @Override
-    public OclExpression caseStaticPropertyCallExpXS(StaticPropertyCallExpXS expression) {
-      List<OclExpression> qualifier = new ArrayList<OclExpression>(
-    		  expression.getQualifier().size());
+    public OclExpression caseStaticPropertyCallExpXS(
+        StaticPropertyCallExpXS expression) {
+
+      if (logger.isDebugEnabled()) {
+        logger.debug("caseStaticPropertyCallExpXS(expression=" + expression //$NON-NLS-1$
+            + ") - enter"); //$NON-NLS-1$
+      }
+
+      List<OclExpression> qualifier;
 
       // parse the qualifiers of the property call expression
+      qualifier = new ArrayList<OclExpression>(expression.getQualifier().size());
+
       for (OclExpressionXS oclExpressionXS : expression.getQualifier()) {
         qualifier.add(doSwitch(oclExpressionXS));
       }
-      
+
       try {
-				return modelFactory.createPropertyCallExp(tokenizePathName(
-						expression.getReferredPropertyName()), 
-						qualifier.toArray(new OclExpression[qualifier.size()]));
-			} catch (FactoryException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
-      
+        OclExpression returnOclExpression = modelFactory.createPropertyCallExp(
+            tokenizePathName(expression.getReferredPropertyName()), qualifier
+                .toArray(new OclExpression[qualifier.size()]));
+
+        if (logger.isDebugEnabled()) {
+          logger.debug("caseStaticPropertyCallExpXS() - exit - return value=" //$NON-NLS-1$
+              + returnOclExpression);
+        }
+
+        return returnOclExpression;
+      }
+
+      catch (FactoryException e) {
+        logger.error("caseStaticPropertyCallExpXS(expression=" + expression //$NON-NLS-1$
+            + ")", e); //$NON-NLS-1$
+
+        throw new ParseRuntimeException(
+            "Failed to parse static property call '" //$NON-NLS-1$
+                + expression.getReferredPropertyName() + "'.", e); //$NON-NLS-1$
+      }
+
     }
 
     /*
@@ -228,16 +248,35 @@ public class XOCLParser implements IOclParser {
      * @see tudresden.ocl20.pivot.xocl.util.XOCLSwitch#caseStaticOperationCallExpXS(tudresden.ocl20.pivot.xocl.StaticOperationCallExpXS)
      */
     @Override
-    public OclExpression caseStaticOperationCallExpXS(StaticOperationCallExpXS expression) {
-    	try {
-    		return modelFactory.createOperationCallExp(
-    				tokenizePathName(expression.getReferredOperationName()),
-    				parseArguments(expression));
-    		} catch (FactoryException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
+    public OclExpression caseStaticOperationCallExpXS(
+        StaticOperationCallExpXS expression) {
+
+      if (logger.isDebugEnabled()) {
+        logger.debug("caseStaticOperationCallExpXS(expression=" + expression //$NON-NLS-1$
+            + ") - enter"); //$NON-NLS-1$
+      }
+
+      try {
+        OclExpression returnOclExpression = modelFactory
+            .createOperationCallExp(tokenizePathName(expression
+                .getReferredOperationName()), parseArguments(expression));
+
+        if (logger.isDebugEnabled()) {
+          logger.debug("caseStaticOperationCallExpXS() - exit - return value=" //$NON-NLS-1$
+              + returnOclExpression);
+        }
+
+        return returnOclExpression;
+      }
+
+      catch (FactoryException e) {
+        logger.error("caseStaticOperationCallExpXS(expression=" + expression //$NON-NLS-1$
+            + ")", e); //$NON-NLS-1$
+
+        throw new ParseRuntimeException(
+            "Failed to parse the static operation call '" //$NON-NLS-1$
+                + expression.getReferredOperationName() + "'.", e); //$NON-NLS-1$
+      }
     }
 
     /*
@@ -669,11 +708,9 @@ public class XOCLParser implements IOclParser {
      */
     @Override
     public OclExpression caseIfExpXS(IfExpXS expression) {
-    	OclExpression condition = doSwitch(expression.getCondition());
-    	OclExpression thenExpression = doSwitch(expression.getThenExpression());
-    	OclExpression elseExpression = doSwitch(expression.getElseExpression());
-    	
-    	return modelFactory.createIfExp(condition, thenExpression, elseExpression);
+      return modelFactory.createIfExp(doSwitch(expression.getCondition()),
+          doSwitch(expression.getThenExpression()), doSwitch(expression
+              .getElseExpression()));
     }
   }
 
@@ -1149,7 +1186,7 @@ public class XOCLParser implements IOclParser {
     // if the syntax of the operation signature is valid, extract relevant parts
     if (matcher.matches()) {
       String operationName;
-      String[] parameterTypeNames;
+      String[] parametersArray;
       List<Type> parameterTypes;
 
       // the operation name is in the first capture group
@@ -1162,10 +1199,13 @@ public class XOCLParser implements IOclParser {
       parameters = parameters.substring(1, parameters.length() - 1);
 
       // tokenize around the commas to get the parameter names and types
-      String[] parametersArray = {};
-      
-      if (!(parameters.equals("")))
-    	parametersArray = parameters.split(","); //$NON-NLS-1$
+      if (parameters == StringUtils.EMPTY) {
+        parametersArray = ArrayUtils.EMPTY_STRING_ARRAY;
+      }
+
+      else {
+        parametersArray = parameters.split("\\s*,\\s*"); //$NON-NLS-1$
+      }
 
       // collect the parameter types
       for (int i = 0; i < parametersArray.length; i++) {
@@ -1173,13 +1213,10 @@ public class XOCLParser implements IOclParser {
             .indexOf(':') + 1);
       }
 
-      // assign the parameter types array
-      parameterTypeNames = parametersArray;
-
       // find the parameter types
-      parameterTypes = new ArrayList<Type>(parameterTypeNames.length);
+      parameterTypes = new ArrayList<Type>(parametersArray.length);
 
-      for (String typeName : parameterTypeNames) {
+      for (String typeName : parametersArray) {
         parameterTypes.add(findType(tokenizePathName(typeName)));
       }
 
@@ -1283,6 +1320,7 @@ public class XOCLParser implements IOclParser {
   /**
    * Creates a {@link Variable} from a {@link VariableXS}.
    */
+  @SuppressWarnings("unchecked")
   protected Variable createVariable(VariableXS variableXS,
       ModelSwitch modelSwitch) {
     if (logger.isDebugEnabled()) {
@@ -1292,16 +1330,37 @@ public class XOCLParser implements IOclParser {
 
     Variable variable;
     OclExpression initExpression = null;
+    List<String> typePath = null;
+    List<String> typeArgumentPath = null;
 
     // parse the init expression if existing
     if (variableXS.getInitExpression() != null) {
       initExpression = modelSwitch.doSwitch(variableXS.getInitExpression());
     }
 
-    // create the variable using the model factory and the given model switch
+    // check whether the type name contains type arguments
+    Matcher matcher = Pattern.compile("(\\w+)\\((\\w+)\\)").matcher( //$NON-NLS-1$
+        variableXS.getType());
+
+    if (matcher.matches()) {
+      typePath = tokenizePathName(matcher.group(1));
+      typeArgumentPath = tokenizePathName(matcher.group(2));
+    }
+
+    // create the variable using the model factory
     try {
-      variable = modelFactory.createVariable(variableXS.getName(),
-          tokenizePathName(variableXS.getType()), initExpression);
+
+      // create a variable with type arguments
+      if (typeArgumentPath != null) {
+        variable = modelFactory.createVariable(variableXS.getName(), typePath,
+            Arrays.asList(typeArgumentPath), initExpression);
+      }
+
+      // create an non-generic variable
+      else {
+        variable = modelFactory.createVariable(variableXS.getName(),
+            tokenizePathName(variableXS.getType()), initExpression);
+      }
     }
 
     catch (FactoryException e) {
@@ -1330,7 +1389,8 @@ public class XOCLParser implements IOclParser {
 
     // return an empty list if the path name is empty
     if (StringUtils.isEmpty(pathName)) {
-      return Collections.EMPTY_LIST;
+      throw new ParseRuntimeException(
+          "Encountered an empty path name for a type", null); //$NON-NLS-1$
     }
 
     return Arrays.asList(pathName.split("::")); //$NON-NLS-1$
