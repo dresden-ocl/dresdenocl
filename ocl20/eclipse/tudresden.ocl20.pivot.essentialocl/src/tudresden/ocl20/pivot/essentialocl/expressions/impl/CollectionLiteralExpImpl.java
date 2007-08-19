@@ -167,8 +167,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
     // get a valid local reference to the OCL library
     OclLibrary oclLibrary = getValidOclLibrary();
 
-    // determine the common supertype of all parts as the collection's element
-    // type
+    // the common supertype of all parts is the collection's element type
     elementType = oclLibrary.getOclVoid();
 
     for (CollectionLiteralPart literalPart : part) {
