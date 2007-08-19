@@ -68,7 +68,7 @@ public class TypeResolver implements ITypeResolver {
     
     // try to look up a primitive type
     if (pathName.size() == 1) {
-      type = getPrimitiveTypes().get(pathName.get(0));
+      type = getPredefinedTypes().get(pathName.get(0));
     }
 
     // if no primitive type found, try to look in the model
@@ -91,7 +91,7 @@ public class TypeResolver implements ITypeResolver {
   /**
    * Helper method to lazily get the OCL standard types.
    */
-  private Map<String, Type> getPrimitiveTypes(){
+  private Map<String, Type> getPredefinedTypes(){
 
     if (primitiveTypes == null) {
       
@@ -107,7 +107,7 @@ public class TypeResolver implements ITypeResolver {
 
       // instantiate the map for the primitive types and initialize it
       primitiveTypes = new HashMap<String, Type>();
-      initializePrimitiveTypes(oclLibrary);
+      initializePredefinedTypes(oclLibrary);
     }
 
     return primitiveTypes;
@@ -123,19 +123,19 @@ public class TypeResolver implements ITypeResolver {
    * "Boolean". It is just known that this is the OCL boolean type, the concrete naming is up to the
    * model of the Standard Library provided by the OclLibraryProvider.
    */
-  protected void initializePrimitiveTypes(OclLibrary oclLibrary) {
+  protected void initializePredefinedTypes(OclLibrary oclLibrary) {
     primitiveTypes.put("OclAny",oclLibrary.getOclAny()); //$NON-NLS-1$
-    primitiveTypes.put("Bag",oclLibrary.getOclBag()); //$NON-NLS-1$
-    primitiveTypes.put("Boolean",oclLibrary.getOclBoolean()); //$NON-NLS-1$
-    primitiveTypes.put("Collection",oclLibrary.getOclCollection()); //$NON-NLS-1$
-    primitiveTypes.put("Integer",oclLibrary.getOclInteger()); //$NON-NLS-1$
-    primitiveTypes.put("Invalid",oclLibrary.getOclInvalid()); //$NON-NLS-1$
-    primitiveTypes.put("OrderedSet",oclLibrary.getOclOrderedSet()); //$NON-NLS-1$
-    primitiveTypes.put("Real",oclLibrary.getOclReal()); //$NON-NLS-1$
-    primitiveTypes.put("Sequence",oclLibrary.getOclSequence()); //$NON-NLS-1$
-    primitiveTypes.put("Set",oclLibrary.getOclSet()); //$NON-NLS-1$
-    primitiveTypes.put("String",oclLibrary.getOclString()); //$NON-NLS-1$
     primitiveTypes.put("OclType",oclLibrary.getOclType()); //$NON-NLS-1$
     primitiveTypes.put("OclVoid",oclLibrary.getOclVoid()); //$NON-NLS-1$
+    primitiveTypes.put("Invalid",oclLibrary.getOclInvalid()); //$NON-NLS-1$
+    primitiveTypes.put("Boolean",oclLibrary.getOclBoolean()); //$NON-NLS-1$
+    primitiveTypes.put("Integer",oclLibrary.getOclInteger()); //$NON-NLS-1$
+    primitiveTypes.put("Real",oclLibrary.getOclReal()); //$NON-NLS-1$
+    primitiveTypes.put("String",oclLibrary.getOclString()); //$NON-NLS-1$
+    primitiveTypes.put("Collection",oclLibrary.getOclCollection()); //$NON-NLS-1$
+    primitiveTypes.put("Sequence",oclLibrary.getOclSequence()); //$NON-NLS-1$
+    primitiveTypes.put("Bag",oclLibrary.getOclBag()); //$NON-NLS-1$
+    primitiveTypes.put("Set",oclLibrary.getOclSet()); //$NON-NLS-1$
+    primitiveTypes.put("OrderedSet",oclLibrary.getOclOrderedSet()); //$NON-NLS-1$
   }
 }
