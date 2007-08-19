@@ -499,9 +499,7 @@ public class ModelFactory implements IModelFactory {
     }
 
     if (source == null || body == null || result == null) {
-      throw new IllegalArgumentException(
-          "Parameters must not be null: source=" + source //$NON-NLS-1$
-              + ", body=" + body + ", result=" + result + "."); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+      throw new NullArgumentException("source or body or result"); //$NON-NLS-1$
     }
 
     IterateExp iterateExp = ExpressionsFactory.INSTANCE.createIterateExp();
@@ -517,6 +515,7 @@ public class ModelFactory implements IModelFactory {
     if (logger.isDebugEnabled()) {
       logger.debug("createIterateExp() - exit - return value=" + iterateExp); //$NON-NLS-1$
     }
+    
     return iterateExp;
   }
 
