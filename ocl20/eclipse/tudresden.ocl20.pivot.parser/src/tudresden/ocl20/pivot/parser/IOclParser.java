@@ -34,6 +34,10 @@ package tudresden.ocl20.pivot.parser;
 
 import java.net.URL;
 
+import org.apache.commons.lang.NullArgumentException;
+
+import tudresden.ocl20.pivot.modelbus.IModel;
+
 /**
  * 
  * 
@@ -43,14 +47,36 @@ import java.net.URL;
 public interface IOclParser {
 
   /**
-   * Parses OCL expressions from the given <code>URL</code>.
+   * Parses OCL expressions from the given <code>URL</code>. The URL should
+   * point to a file or other resource that can be interpreted by a parser
+   * implementing this interface.
    * 
    * @param url a <code>URL</code> from where to load OCL expressions
    * 
-   * @throws ParseException when an error occurs
+   * @throws ParseException when an error occurs, reasons include an invalid
+   *           URL, a malformed OCL expression or problems relating to the model
+   * @throws IllegalStateException if no model has been set yet
    */
   void parse(URL url) throws ParseException;
-  
+
+  /**
+   * Returns the model this parser uses as a reference for evaluating OCL
+   * expressions. Returns <code>null</code> if no model has been set yet.
+   * 
+   * @return an <code>IModel</code> instance or <code>null</code>
+   */
+  IModel getModel();
+
+  /**
+   * Sets the {@link IModel model} to be used for evaluating expressions.
+   * 
+   * @param model the model, must not be <code>null</code>
+   * 
+   * @exception NullArgumentException if <code>model</code> is
+   *              <code>null</code>
+   */
+  void setModel(IModel model);
+
   /**
    * Dispose any resources held by this parser.
    */

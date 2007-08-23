@@ -53,9 +53,9 @@ public class ParserPlugin extends Plugin {
 
   // The shared instance
   private static ParserPlugin plugin;
-  
+
   // a map of cached parsers
-  private Map<IModel,IOclParser> parsers;
+  private Map<IModel, IOclParser> parsers;
 
   /**
    * The constructor
@@ -82,14 +82,14 @@ public class ParserPlugin extends Plugin {
    */
   @Override
   public void stop(BundleContext context) throws Exception {
-    
+
     // dipose all parsers
     for (IOclParser parser : parsers.values()) {
       parser.dispose();
     }
-    
+
     parsers.clear();
-    
+
     plugin = null;
     super.stop(context);
   }
@@ -102,8 +102,7 @@ public class ParserPlugin extends Plugin {
   public static ParserPlugin getDefault() {
     return plugin;
   }
-  
-  
+
   /**
    * Returns the {@link IOclParser OCL parser} managed by the plugin.
    * 
@@ -111,37 +110,40 @@ public class ParserPlugin extends Plugin {
    */
   public static IOclParser getParser(IModel model) {
     IOclParser parser;
-    
+
     // check that the plugin has been activated
     if (plugin == null) {
-      throw new IllegalStateException("The OCL parser plug-in has not been activated."); //$NON-NLS-1$
+      throw new IllegalStateException(
+          "The OCL parser plug-in has not been activated."); //$NON-NLS-1$
     }
-    
+
     // check the argument
     if (model == null) {
-      throw new IllegalArgumentException("The model to be used for parsing must not be null."); //$NON-NLS-1$
+      throw new IllegalArgumentException(
+          "The model to be used for parsing must not be null."); //$NON-NLS-1$
     }
-    
+
     // lazily create the map of parsers
     if (plugin.parsers == null) {
       plugin.parsers = new HashMap<IModel, IOclParser>();
     }
-    
+
     // try to retrieve a previously created parser
     parser = plugin.parsers.get(model);
-    
+
     // create a new parser if necessary
     if (parser == null) {
-      parser = new XOCLParser(model);
-      plugin.parsers.put(model,parser);
+      parser = new XOCLParser();
+      parser.setModel(model);
+      plugin.parsers.put(model, parser);
     }
-    
+
     return parser;
   }
 
   /**
-   * Facade method for the classes in this plugin that hides the dependency from the
-   * <code>tudresden.ocl20.logging</code> plugin.
+   * Facade method for the classes in this plugin that hides the dependency from
+   * the <code>tudresden.ocl20.logging</code> plugin.
    * 
    * @param clazz the class to return the logger for
    * 

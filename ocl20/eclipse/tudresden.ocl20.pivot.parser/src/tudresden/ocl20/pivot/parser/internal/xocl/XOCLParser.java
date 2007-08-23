@@ -45,8 +45,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -64,14 +62,13 @@ import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelbus.FactoryException;
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelFactory;
 import tudresden.ocl20.pivot.modelbus.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.TypeNotFoundException;
+import tudresden.ocl20.pivot.parser.AbstractOclParser;
 import tudresden.ocl20.pivot.parser.IOclParser;
 import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.parser.ParserPlugin;
 import tudresden.ocl20.pivot.parser.internal.ParserMessages;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -117,25 +114,12 @@ import tudresden.ocl20.pivot.xocl.XOCLPackage;
 import tudresden.ocl20.pivot.xocl.util.XOCLSwitch;
 
 /**
- * 
+ * A parser for XOCL expressions.
  * 
  * @author Matthias Braeuer
  * @version 1.0 17.04.2007
  */
-public class XOCLParser implements IOclParser {
-
-  // a logger for this class
-  private static final Logger logger = ParserPlugin.getLogger(XOCLParser.class);
-
-  // a cached reference to the model that is the base of OCL expressions parsed
-  // by this parser
-  private IModel model;
-
-  // a cached reference to the model factory
-  protected IModelFactory modelFactory;
-
-  // a cached reference to the type resolver
-  protected ITypeResolver typeResolver;
+public class XOCLParser extends AbstractOclParser implements IOclParser {
 
   /**
    * A concrete {@link XOCLSwitch} that uses an {@link IModelFactory} to produce
@@ -151,14 +135,20 @@ public class XOCLParser implements IOclParser {
     // a cache of previously created variables
     private Map<VariableXS, Variable> variables;
 
+    // the cached model factory
+    private IModelFactory modelFactory;
+
     /**
      * Creates a new <code>ModelSwitch</code> instance.
      * 
      * @param variables the map of variables visible in the scope of the
      *          associated <code>ExpressionInOcl</code>
+     * @param modelFactory2
      */
-    public ModelSwitch(Map<VariableXS, Variable> variables) {
+    public ModelSwitch(Map<VariableXS, Variable> variables,
+        IModelFactory modelFactory) {
       this.variables = variables;
+      this.modelFactory = modelFactory;
     }
 
     /*
@@ -338,7 +328,7 @@ public class XOCLParser implements IOclParser {
       Variable variable = variables.get(expression.getVariable());
 
       if (variable == null) {
-        variable = createVariable(variableXS, this);
+        variable = createVariable(variableXS, this, modelFactory);
         variables.put(variableXS, variable);
       }
 
@@ -583,7 +573,7 @@ public class XOCLParser implements IOclParser {
 
       try {
         part = modelFactory.createTupleLiteralPart(createVariable(
-            tupleLiteralPartXS.getVariableDeclaration(), this));
+            tupleLiteralPartXS.getVariableDeclaration(), this, modelFactory));
       }
 
       catch (FactoryException e) {
@@ -618,7 +608,7 @@ public class XOCLParser implements IOclParser {
       iterator = new ArrayList<Variable>(expression.getIterator().size());
 
       for (VariableXS iteratorXS : expression.getIterator()) {
-        Variable iteratorVar = createVariable(iteratorXS, this);
+        Variable iteratorVar = createVariable(iteratorXS, this, modelFactory);
         iterator.add(iteratorVar);
 
         // add the iterator variable temporarily to the list of variables
@@ -627,7 +617,7 @@ public class XOCLParser implements IOclParser {
       }
 
       // create the accumulator variable
-      result = createVariable(expression.getResult(), this);
+      result = createVariable(expression.getResult(), this, modelFactory);
       variables.put(expression.getResult(), result);
 
       // parse source and body
@@ -656,7 +646,8 @@ public class XOCLParser implements IOclParser {
           .getIterator().size());
 
       for (VariableXS variableXS : expression.getIterator()) {
-        Variable iteratorVariable = createVariable(variableXS, this);
+        Variable iteratorVariable = createVariable(variableXS, this,
+            modelFactory);
         iteratorVars.add(iteratorVariable);
 
         // add the iterator variable temporarily to the list of variables
@@ -721,11 +712,6 @@ public class XOCLParser implements IOclParser {
    */
   protected class ParseRuntimeException extends RuntimeException {
 
-    /**
-     * Logger for this class
-     */
-    private final Logger logger = Logger.getLogger(ParseRuntimeException.class);
-
     // default serial version id
     private static final long serialVersionUID = 1L;
 
@@ -739,67 +725,13 @@ public class XOCLParser implements IOclParser {
   }
 
   /**
-   * Creates a new <code>XOCLParser</code> instance.
-   * 
-   * @param model the model which OCL expressions should be added to
+   * Implements parsing for XOCL files.
    */
-  public XOCLParser(IModel model) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("XOCLParser(model=" + model + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
-    // precondition check
-    if (model == null) {
-      throw new IllegalArgumentException("The model must not be null."); //$NON-NLS-1$
-    }
-
-    // initialize
-    this.model = model;
-
-    // get the model factory from the model
-    modelFactory = model.getFactory();
-
-    if (modelFactory == null) {
-      throw new IllegalStateException(
-          "No model factory found for model '" + model.getDisplayName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
-    // get the type resolver
-    typeResolver = model.getTypeResolver();
-
-    if (typeResolver == null) {
-      throw new IllegalStateException(
-          "No type resolver found for model '" + model.getDisplayName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
-    if (logger.isDebugEnabled()) {
-      logger.debug("XOCLParser() - exit"); //$NON-NLS-1$
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.parser.IOclParser#parse(java.net.URL,
-   *      tudresden.ocl20.pivot.modelbus.IModel)
-   */
-  public void parse(URL url) throws ParseException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("parse(url=" + url + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
+  @Override
+  public void doParse(URL url) throws ParseException {
     NamespaceXS declaredPackage;
     String declaredPackageName;
     Namespace targetNamespace;
-
-    // check parameters
-    if (url == null) {
-      throw new IllegalArgumentException("The URL must not be null."); //$NON-NLS-1$
-    }
-
-    if (logger.isInfoEnabled()) {
-      logger.info(NLS.bind(ParserMessages.XOCLParser_Parsing, url));
-    }
 
     // get the top package and its name
     declaredPackage = getDeclaredPackage(loadResource(url));
@@ -823,12 +755,8 @@ public class XOCLParser implements IOclParser {
       }
 
       // create the constraint and add it to the target namespace
-      targetNamespace
-          .addRule(createConstraint(constraint, declaredPackageName));
-    }
-
-    if (logger.isDebugEnabled()) {
-      logger.debug("parse() - exit"); //$NON-NLS-1$
+      targetNamespace.addRule(createConstraint(constraint, declaredPackageName,
+          getModelFactory()));
     }
   }
 
@@ -921,14 +849,14 @@ public class XOCLParser implements IOclParser {
     Namespace targetNamespace;
 
     try {
-      targetNamespace = model.findNamespace(tokenizePathName(pathName));
+      targetNamespace = getModel().findNamespace(tokenizePathName(pathName));
     }
 
     catch (ModelAccessException e) {
       logger.error("findTargetNamespace(pathName=" + pathName + ")", e); //$NON-NLS-1$ //$NON-NLS-2$
       throw new ParseException(
           "Error while looking up namespace '" + pathName + "' in model '" //$NON-NLS-1$ //$NON-NLS-2$
-              + model.getDisplayName() + "'."); //$NON-NLS-1$
+              + getModel().getDisplayName() + "'."); //$NON-NLS-1$
     }
 
     if (logger.isDebugEnabled()) {
@@ -945,7 +873,7 @@ public class XOCLParser implements IOclParser {
    * considered relative to the given package.
    */
   protected Constraint createConstraint(ConstraintXS constraintXS,
-      String packageName) throws ParseException {
+      String packageName, IModelFactory modelFactory) throws ParseException {
 
     if (logger.isDebugEnabled()) {
       logger.debug("createConstraint(constraintXS=" + constraintXS //$NON-NLS-1$
@@ -963,10 +891,11 @@ public class XOCLParser implements IOclParser {
 
       // find the constrained element
       constrainedElement = findConstrainedElement(packageName, constraintXS
-          .getConstrainedElement(), constraintKind);
+          .getConstrainedElement(), constraintKind, getTypeResolver());
 
       // create the specification expression
-      specification = createExpressionInOcl(constraintXS.getSpecification());
+      specification = createExpressionInOcl(constraintXS.getSpecification(),
+          modelFactory);
 
       // create the constraint
       constraint = modelFactory.createConstraint(constraintXS.getName(),
@@ -1042,10 +971,11 @@ public class XOCLParser implements IOclParser {
   }
 
   /**
-   * Helper method to look for a {@link ConstrainableElement} in the model.
+   * Helper method to look for a {@link ConstrainableElement} in the getModel().
    */
   protected ConstrainableElement findConstrainedElement(String packageName,
-      String constrainedElementName, ConstraintKind constraintKind) {
+      String constrainedElementName, ConstraintKind constraintKind,
+      ITypeResolver typeResolver) {
 
     if (logger.isDebugEnabled()) {
       logger.debug("findConstrainedElement(packageName=" + packageName //$NON-NLS-1$
@@ -1074,18 +1004,18 @@ public class XOCLParser implements IOclParser {
     switch (constraintKind) {
       case INVARIANT:
       case DEFINITION:
-        element = findType(pathName);
+        element = findType(pathName, typeResolver);
         break;
 
       case DERIVED:
       case INITIAL:
-        element = findProperty(pathName);
+        element = findProperty(pathName, typeResolver);
         break;
 
       case BODY:
       case PRECONDITION:
       case POSTCONDITION:
-        element = findOperation(pathName);
+        element = findOperation(pathName, typeResolver);
         break;
     }
 
@@ -1094,7 +1024,7 @@ public class XOCLParser implements IOclParser {
       throw new IllegalArgumentException(
           "Failed to locate the constrained element '" //$NON-NLS-1$
               + constrainedElementName
-              + "' in model '" + model.getDisplayName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
+              + "' in model '" + getModel().getDisplayName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     if (logger.isDebugEnabled()) {
@@ -1105,9 +1035,9 @@ public class XOCLParser implements IOclParser {
   }
 
   /**
-   * Helper method to find a type in the associated model.
+   * Helper method to find a type in the associated getModel().
    */
-  protected Type findType(List<String> pathName) {
+  protected Type findType(List<String> pathName, ITypeResolver typeResolver) {
     Type type;
 
     try {
@@ -1117,7 +1047,7 @@ public class XOCLParser implements IOclParser {
     catch (ModelAccessException e) {
       logger.error("findType(pathName=" + pathName + ")", e); //$NON-NLS-1$//$NON-NLS-2$
       throw new ParseRuntimeException("An error occured when accessing model '" //$NON-NLS-1$
-          + model.getDisplayName() + "'.", e); //$NON-NLS-1$
+          + getModel().getDisplayName() + "'.", e); //$NON-NLS-1$
     }
 
     catch (TypeNotFoundException e) {
@@ -1130,9 +1060,10 @@ public class XOCLParser implements IOclParser {
   }
 
   /**
-   * Helper method to find a property in the associated model.
+   * Helper method to find a property in the associated getModel().
    */
-  protected Property findProperty(List<String> pathName) {
+  protected Property findProperty(List<String> pathName,
+      ITypeResolver typeResolver) {
     if (logger.isDebugEnabled()) {
       logger.debug("findProperty(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
@@ -1141,7 +1072,7 @@ public class XOCLParser implements IOclParser {
     Property property;
 
     // find the contextual type
-    contextualType = findContextualType(pathName);
+    contextualType = findContextualType(pathName, typeResolver);
 
     // split off the type of the property if existent
     String propertyName = pathName.get(pathName.size() - 1);
@@ -1155,8 +1086,7 @@ public class XOCLParser implements IOclParser {
     property = contextualType.lookupProperty(propertyName);
 
     // TODO: theoretically, we should check whether the declared type equals the
-    // actual type
-    // but in this prototypical parser, we do without it
+    // actual type but in this prototypical parser, we do without it
 
     if (logger.isDebugEnabled()) {
       logger.debug("findProperty() - exit - return value=" + property); //$NON-NLS-1$
@@ -1168,12 +1098,13 @@ public class XOCLParser implements IOclParser {
   /**
    * Helper method to find an operation in the associated model.
    */
-  protected Operation findOperation(List<String> pathName) {
+  protected Operation findOperation(List<String> pathName,
+      ITypeResolver typeResolver) {
     Type contextualType;
     Operation operation = null;
 
     // find the contextual type
-    contextualType = findContextualType(pathName);
+    contextualType = findContextualType(pathName, typeResolver);
 
     // instantiate a regular expression to match operations and extract their
     // names and parameters (for more information on this pattern, see
@@ -1217,7 +1148,7 @@ public class XOCLParser implements IOclParser {
       parameterTypes = new ArrayList<Type>(parametersArray.length);
 
       for (String typeName : parametersArray) {
-        parameterTypes.add(findType(tokenizePathName(typeName)));
+        parameterTypes.add(findType(tokenizePathName(typeName), typeResolver));
       }
 
       // lookup the operation
@@ -1231,8 +1162,13 @@ public class XOCLParser implements IOclParser {
    * Helper method to find the contextual type of an operation or property
    * constraint.
    */
-  private Type findContextualType(List<String> pathName) {
-    Type contextualType = findType(pathName.subList(0, pathName.size() - 1));
+  private Type findContextualType(List<String> pathName,
+      ITypeResolver typeResolver) {
+    Type contextualType;
+
+    // lookup the type
+    contextualType = findType(pathName.subList(0, pathName.size() - 1),
+        typeResolver);
 
     if (contextualType == null) {
       throw new IllegalArgumentException(
@@ -1247,7 +1183,7 @@ public class XOCLParser implements IOclParser {
    * {@link ExpressionInOclXS}.
    */
   protected ExpressionInOcl createExpressionInOcl(
-      ExpressionInOclXS expressionInOclXS) {
+      ExpressionInOclXS expressionInOclXS, IModelFactory modelFactory) {
     if (logger.isDebugEnabled()) {
       logger.debug("createExpressionInOcl(expressionInOclXS=" //$NON-NLS-1$
           + expressionInOclXS + ") - enter"); //$NON-NLS-1$
@@ -1270,7 +1206,7 @@ public class XOCLParser implements IOclParser {
     variables = new HashMap<VariableXS, Variable>();
 
     // create a new model switch
-    modelSwitch = new ModelSwitch(variables);
+    modelSwitch = new ModelSwitch(variables, modelFactory);
 
     // create the various variables of the expression in OCL and cache them
     contextVariableXS = expressionInOclXS.getContext();
@@ -1282,13 +1218,14 @@ public class XOCLParser implements IOclParser {
     }
 
     contextVariable = createVariable(expressionInOclXS.getContext(),
-        modelSwitch);
+        modelSwitch, modelFactory);
     variables.put(contextVariableXS, contextVariable);
 
     resultVariableXS = expressionInOclXS.getResult();
 
     if (resultVariableXS != null) {
-      resultVariable = createVariable(resultVariableXS, modelSwitch);
+      resultVariable = createVariable(resultVariableXS, modelSwitch,
+          modelFactory);
       variables.put(resultVariableXS, resultVariable);
     }
 
@@ -1297,7 +1234,7 @@ public class XOCLParser implements IOclParser {
 
     for (VariableXS parameterVariableXS : expressionInOclXS.getParameter()) {
       Variable parameterVariable = createVariable(parameterVariableXS,
-          modelSwitch);
+          modelSwitch, modelFactory);
       parameterVariables.add(parameterVariable);
       variables.put(parameterVariableXS, parameterVariable);
     }
@@ -1310,8 +1247,8 @@ public class XOCLParser implements IOclParser {
             .toArray(new Variable[parameterVariables.size()]));
 
     if (logger.isDebugEnabled()) {
-      logger
-          .debug("createExpressionInOcl() - exit - return value=" + expressionInOcl); //$NON-NLS-1$
+      logger.debug("createExpressionInOcl() - exit - return value=" //$NON-NLS-1$
+          + expressionInOcl);
     }
 
     return expressionInOcl;
@@ -1322,7 +1259,7 @@ public class XOCLParser implements IOclParser {
    */
   @SuppressWarnings("unchecked")
   protected Variable createVariable(VariableXS variableXS,
-      ModelSwitch modelSwitch) {
+      ModelSwitch modelSwitch, IModelFactory modelFactory) {
     if (logger.isDebugEnabled()) {
       logger.debug("createVariable(variableXS=" + variableXS + ", modelSwitch=" //$NON-NLS-1$ //$NON-NLS-2$
           + modelSwitch + ") - enter"); //$NON-NLS-1$
@@ -1394,26 +1331,6 @@ public class XOCLParser implements IOclParser {
     }
 
     return Arrays.asList(pathName.split("::")); //$NON-NLS-1$
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.parser.IOclParser#dispose()
-   */
-  public void dispose() {
-    model = null;
-    modelFactory = null;
-  }
-
-  /**
-   * Return a string representation of this parser.
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
-        "model", model) //$NON-NLS-1$
-        .toString();
   }
 
 }
