@@ -1130,7 +1130,7 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
       parameters = parameters.substring(1, parameters.length() - 1);
 
       // tokenize around the commas to get the parameter names and types
-      if (parameters == StringUtils.EMPTY) {
+      if (parameters.equals(StringUtils.EMPTY)) {
         parametersArray = ArrayUtils.EMPTY_STRING_ARRAY;
       }
 
@@ -1327,7 +1327,7 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
     // return an empty list if the path name is empty
     if (StringUtils.isEmpty(pathName)) {
       throw new ParseRuntimeException(
-          "Encountered an empty path name for a type", null); //$NON-NLS-1$
+          "Encountered an empty path name", null); //$NON-NLS-1$
     }
 
     return Arrays.asList(pathName.split("::")); //$NON-NLS-1$
