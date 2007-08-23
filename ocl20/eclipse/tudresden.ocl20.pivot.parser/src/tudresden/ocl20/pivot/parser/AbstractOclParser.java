@@ -41,7 +41,7 @@ public abstract class AbstractOclParser implements IOclParser {
    * 
    * @throws ParseException if something goes wrong while parsing
    */
-  public void parse(URL url) throws ParseException {
+  public final void parse(URL url) throws ParseException {
     if (logger.isDebugEnabled()) {
       logger.debug("parse(url=" + url + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
