@@ -167,23 +167,23 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
       String operationName = referredOperation.getName();
 
       // bind 'allInstances' operation
-      if (operationName == "allInstances") { //$NON-NLS-1$
+      if (operationName.equals("allInstances")) { //$NON-NLS-1$
         referredOperation = bindAllInstancesOperation(referredOperation);
       }
 
       // bind 'oclAsType' operation
-      else if (operationName == "oclAsType") { //$NON-NLS-1$
+      else if (operationName.equals("oclAsType")) { //$NON-NLS-1$
         referredOperation = bindOclAsTypeOperation(referredOperation);
       }
 
       // bind 'flatten' operation
       else if (getSourceType() instanceof CollectionType) {
 
-        if (operationName == "flatten") { //$NON-NLS-1$
+        if (operationName.equals("flatten")) { //$NON-NLS-1$
           referredOperation = bindFlattenOperation(referredOperation);
         }
 
-        else if (operationName == "product") { //$NON-NLS-1$
+        else if (operationName.equals("product")) { //$NON-NLS-1$
           // TODO: bind 'product'
         }
 
