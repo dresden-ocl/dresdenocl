@@ -63,7 +63,6 @@ import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelbus.FactoryException;
 import tudresden.ocl20.pivot.modelbus.IModelFactory;
-import tudresden.ocl20.pivot.modelbus.ITypeResolver;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.TypeNotFoundException;
 import tudresden.ocl20.pivot.parser.AbstractOclParser;
@@ -78,6 +77,7 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.xocl.BooleanLiteralExpXS;
 import tudresden.ocl20.pivot.xocl.CollectionItemXS;
 import tudresden.ocl20.pivot.xocl.CollectionKindXS;
@@ -891,7 +891,7 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
 
       // find the constrained element
       constrainedElement = findConstrainedElement(packageName, constraintXS
-          .getConstrainedElement(), constraintKind, getTypeResolver());
+          .getConstrainedElement(), constraintKind);
 
       // create the specification expression
       specification = createExpressionInOcl(constraintXS.getSpecification(),
@@ -974,8 +974,7 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
    * Helper method to look for a {@link ConstrainableElement} in the getModel().
    */
   protected ConstrainableElement findConstrainedElement(String packageName,
-      String constrainedElementName, ConstraintKind constraintKind,
-      ITypeResolver typeResolver) {
+      String constrainedElementName, ConstraintKind constraintKind) {
 
     if (logger.isDebugEnabled()) {
       logger.debug("findConstrainedElement(packageName=" + packageName //$NON-NLS-1$
@@ -1004,18 +1003,18 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
     switch (constraintKind) {
       case INVARIANT:
       case DEFINITION:
-        element = findType(pathName, typeResolver);
+        element = findType(pathName);
         break;
 
       case DERIVED:
       case INITIAL:
-        element = findProperty(pathName, typeResolver);
+        element = findProperty(pathName);
         break;
 
       case BODY:
       case PRECONDITION:
       case POSTCONDITION:
-        element = findOperation(pathName, typeResolver);
+        element = findOperation(pathName);
         break;
     }
 
@@ -1037,11 +1036,11 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
   /**
    * Helper method to find a type in the associated getModel().
    */
-  protected Type findType(List<String> pathName, ITypeResolver typeResolver) {
+  protected Type findType(List<String> pathName) {
     Type type;
 
     try {
-      type = typeResolver.findType(pathName);
+      type = getTypeResolver().findType(pathName);
     }
 
     catch (ModelAccessException e) {
@@ -1062,8 +1061,7 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
   /**
    * Helper method to find a property in the associated getModel().
    */
-  protected Property findProperty(List<String> pathName,
-      ITypeResolver typeResolver) {
+  protected Property findProperty(List<String> pathName) {
     if (logger.isDebugEnabled()) {
       logger.debug("findProperty(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
@@ -1072,7 +1070,7 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
     Property property;
 
     // find the contextual type
-    contextualType = findContextualType(pathName, typeResolver);
+    contextualType = findContextualType(pathName);
 
     // split off the type of the property if existent
     String propertyName = pathName.get(pathName.size() - 1);
@@ -1098,13 +1096,12 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
   /**
    * Helper method to find an operation in the associated model.
    */
-  protected Operation findOperation(List<String> pathName,
-      ITypeResolver typeResolver) {
+  protected Operation findOperation(List<String> pathName) {
     Type contextualType;
     Operation operation = null;
 
     // find the contextual type
-    contextualType = findContextualType(pathName, typeResolver);
+    contextualType = findContextualType(pathName);
 
     // instantiate a regular expression to match operations and extract their
     // names and parameters (for more information on this pattern, see
@@ -1148,7 +1145,7 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
       parameterTypes = new ArrayList<Type>(parametersArray.length);
 
       for (String typeName : parametersArray) {
-        parameterTypes.add(findType(tokenizePathName(typeName), typeResolver));
+        parameterTypes.add(findType(tokenizePathName(typeName)));
       }
 
       // lookup the operation
@@ -1162,13 +1159,11 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
    * Helper method to find the contextual type of an operation or property
    * constraint.
    */
-  private Type findContextualType(List<String> pathName,
-      ITypeResolver typeResolver) {
+  private Type findContextualType(List<String> pathName) {
     Type contextualType;
 
     // lookup the type
-    contextualType = findType(pathName.subList(0, pathName.size() - 1),
-        typeResolver);
+    contextualType = findType(pathName.subList(0, pathName.size() - 1));
 
     if (contextualType == null) {
       throw new IllegalArgumentException(
@@ -1255,7 +1250,10 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
   }
 
   /**
-   * Creates a {@link Variable} from a {@link VariableXS}.
+   * Creates a {@link Variable} from a {@link VariableXS}. The type of the
+   * variable can be a generic type (e.g. Collection(Integer)), but for
+   * simplicity reasons only one type parameter can be parsed. This is enough
+   * for the OCL collection types, but not for arbitrary generic types.
    */
   @SuppressWarnings("unchecked")
   protected Variable createVariable(VariableXS variableXS,
@@ -1267,43 +1265,42 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
 
     Variable variable;
     OclExpression initExpression = null;
-    List<String> typePath = null;
-    List<String> typeArgumentPath = null;
+    String typeName;
+    Matcher matcher;
 
     // parse the init expression if existing
     if (variableXS.getInitExpression() != null) {
       initExpression = modelSwitch.doSwitch(variableXS.getInitExpression());
     }
 
-    // check whether the type name contains type arguments
-    Matcher matcher = Pattern.compile("(\\w+)\\((\\w+)\\)").matcher( //$NON-NLS-1$
-        variableXS.getType());
+    // get the type of the variable
+    typeName = variableXS.getType();
 
+    // check whether the type name contains type arguments, the pattern
+    // defines two capture groups: the type name and the type argument
+    matcher = Pattern.compile("(\\w+)\\((\\w+)\\)").matcher(typeName); //$NON-NLS-1$
+
+    // type arguments given
     if (matcher.matches()) {
-      typePath = tokenizePathName(matcher.group(1));
-      typeArgumentPath = tokenizePathName(matcher.group(2));
+      Type type, typeArgument;
+
+      // find the type and the type argument
+      type = findType(tokenizePathName(matcher.group(1)));
+      typeArgument = findType(tokenizePathName(matcher.group(2)));
+
+      // bind the type with the type argument
+      type = type.bindTypeParameter(new ArrayList<TypeParameter>(type
+          .getOwnedTypeParameter()), Arrays.asList(typeArgument));
+
+      // create the variable with the bound type
+      variable = modelFactory.createVariable(variableXS.getName(), type,
+          initExpression);
     }
 
-    // create the variable using the model factory
-    try {
-
-      // create a variable with type arguments
-      if (typeArgumentPath != null) {
-        variable = modelFactory.createVariable(variableXS.getName(), typePath,
-            Arrays.asList(typeArgumentPath), initExpression);
-      }
-
-      // create an non-generic variable
-      else {
-        variable = modelFactory.createVariable(variableXS.getName(),
-            tokenizePathName(variableXS.getType()), initExpression);
-      }
-    }
-
-    catch (FactoryException e) {
-      throw new ParseRuntimeException(
-          "Failed to create variable '" + variableXS.getName() + "'.", e); //$NON-NLS-1$ //$NON-NLS-2$
-
+    // create an non-generic variable
+    else {
+      variable = modelFactory.createVariable(variableXS.getName(),
+          findType(tokenizePathName(typeName)), initExpression);
     }
 
     if (logger.isDebugEnabled()) {
@@ -1326,8 +1323,7 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
 
     // return an empty list if the path name is empty
     if (StringUtils.isEmpty(pathName)) {
-      throw new ParseRuntimeException(
-          "Encountered an empty path name", null); //$NON-NLS-1$
+      throw new ParseRuntimeException("Encountered an empty path name", null); //$NON-NLS-1$
     }
 
     return Arrays.asList(pathName.split("::")); //$NON-NLS-1$

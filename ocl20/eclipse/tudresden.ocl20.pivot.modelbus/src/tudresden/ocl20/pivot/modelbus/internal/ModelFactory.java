@@ -89,7 +89,6 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 
 /**
  * Standard implementation of the {@link IModelFactory} interface which relies
@@ -422,7 +421,7 @@ public class ModelFactory implements IModelFactory {
     ifExp.setCondition(condition);
     ifExp.setThenExpression(thenExpression);
     ifExp.setElseExpression(elseExpression);
-    
+
     ifExp.setOclLibrary(getOclLibrary());
 
     if (logger.isDebugEnabled()) {
@@ -515,7 +514,7 @@ public class ModelFactory implements IModelFactory {
     if (logger.isDebugEnabled()) {
       logger.debug("createIterateExp() - exit - return value=" + iterateExp); //$NON-NLS-1$
     }
-    
+
     return iterateExp;
   }
 
@@ -849,7 +848,7 @@ public class ModelFactory implements IModelFactory {
     realLiteralExp.setRealSymbol(realSymbol);
 
     realLiteralExp.setOclLibrary(getOclLibrary());
-    
+
     if (logger.isDebugEnabled()) {
       logger.debug("createRealLiteralExp() - exit - return value=" //$NON-NLS-1$
           + realLiteralExp);
@@ -1021,32 +1020,23 @@ public class ModelFactory implements IModelFactory {
     return unlimitedNaturalExp;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createVariable(java.lang.String,
-   *      java.util.List,
-   *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
+  /**
+   * Creates a {@link Variable} using the {@link ExpressionsFactory}. 
    */
-  public Variable createVariable(String name, List<String> typePathName,
-      OclExpression initExpression) throws FactoryException {
+  public Variable createVariable(String name, Type type,
+      OclExpression initExpression) {
     if (logger.isDebugEnabled()) {
-      logger.debug("createVariable(name=" + name + ", typeName=" + typePathName //$NON-NLS-1$ //$NON-NLS-2$
-          + ", initExpression=" + initExpression + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+      logger.debug("createVariable(name=" + name + ", type=" + type //$NON-NLS-1$ //$NON-NLS-2$
+          + ", initExpression=" + initExpression + ") - enter");  //$NON-NLS-1$//$NON-NLS-2$
     }
-
+    
+    // precondition check
     if (StringUtils.isEmpty(name)) {
       throw new IllegalArgumentException(
           "The 'name' argument must not be null or empty."); //$NON-NLS-1$
     }
 
-    Type type = null;
-
-    // if the type name is given lookup the type
-    if (typePathName != null && typePathName.size() > 0) {
-      type = findType(typePathName);
-    }
-
+    // create the variable and initialize
     Variable variable = ExpressionsFactory.INSTANCE.createVariable();
     variable.setName(name);
 
@@ -1058,71 +1048,11 @@ public class ModelFactory implements IModelFactory {
       variable.setInitExpression(initExpression);
     }
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("createVariable() - exit - return value=" + variable); //$NON-NLS-1$
-    }
-
-    return variable;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelFactory#createVariable(java.lang.String,
-   *      java.util.List, java.util.List,
-   *      tudresden.ocl20.pivot.essentialocl.expressions.OclExpression)
-   */
-  public Variable createVariable(String name, List<String> typePathName,
-      List<List<String>> typeArguments, OclExpression initExpression)
-      throws FactoryException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createVariable(name=" + name + ", typePathName=" //$NON-NLS-1$ //$NON-NLS-2$
-          + typePathName + ", typeArguments=" + typeArguments //$NON-NLS-1$
-          + ", initExpression=" + initExpression + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
-    if (StringUtils.isEmpty(name)) {
-      throw new IllegalArgumentException(
-          "The 'name' argument must not be null or empty."); //$NON-NLS-1$
-    }
-
-    Type type = null;
-
-    // if the type name is given lookup the type
-    if (typePathName != null && typePathName.size() > 0) {
-      type = findType(typePathName);
-
-      // try to bind type arguments
-      if (typeArguments != null) {
-        List<Type> typeArgs = new ArrayList<Type>();
-
-        // collect the type arguments
-        for (List<String> typeArgumentTypePath : typeArguments) {
-          typeArgs.add(findType(typeArgumentTypePath));
-        }
-
-        // bind the generic type
-        type = type.bindTypeParameter(new ArrayList<TypeParameter>(type
-            .getOwnedTypeParameter()), typeArgs);
-      }
-    }
-
-    // create the variable
-    Variable variable = ExpressionsFactory.INSTANCE.createVariable();
-    variable.setName(name);
-
-    if (type != null) {
-      variable.setType(type);
-    }
-
-    if (initExpression != null) {
-      variable.setInitExpression(initExpression);
-    }
 
     if (logger.isDebugEnabled()) {
       logger.debug("createVariable() - exit - return value=" + variable); //$NON-NLS-1$
     }
-
+    
     return variable;
   }
 

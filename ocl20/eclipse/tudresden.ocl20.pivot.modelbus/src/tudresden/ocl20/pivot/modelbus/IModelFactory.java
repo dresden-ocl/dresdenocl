@@ -67,6 +67,7 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * This class contains many utility methods to create {@link OclExpression}s
@@ -128,36 +129,12 @@ public interface IModelFactory {
    * accessed for the first time.
    * 
    * @param name the name of the variable
-   * @param typePathName the type of the variable
+   * @param type the type of the variable
    * @param initExpression an (optional) initialization expression
    * 
    * @return a <code>Variable</code> instance
-   * 
-   * @throws FactoryException if the variable cannot be created
    */
-  Variable createVariable(String name, List<String> typePathName,
-      OclExpression initExpression) throws FactoryException;
-
-  /**
-   * Creates a new {@link Variable} with the same semantics as
-   * {@link #createVariable(String, List, OclExpression)}, but allows to
-   * additionally specify a list of type arguments for the type of the variable.
-   * This is required for generic types such as the collection types from the
-   * OCL Standard Library.
-   * 
-   * @param name the name of the variable
-   * @param typePathName the type of the variable
-   * @param typeArguments a list of type names 8each represented as a list of
-   *          path segments)
-   * @param initExpression an (optional) initialization expression
-   * 
-   * @return a <code>Variable</code> instance
-   * 
-   * @throws FactoryException if the variable cannot be created
-   */
-  Variable createVariable(String name, List<String> typePathName,
-      List<List<String>> typeArguments, OclExpression initExpression)
-      throws FactoryException;
+  Variable createVariable(String name, Type type, OclExpression initExpression);
 
   /**
    * Creates a new {@link Variable} that represents a {@link Parameter} in an
