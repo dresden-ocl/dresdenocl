@@ -59,6 +59,9 @@
         </eParameters>
       </eOperations>
       <eOperations name="getCollectionType" eType="#//types/CollectionType">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;Returns the {@link CollectionType} with the given element type. The&#xD;&#xA;given &lt;code>elementType&lt;/code> must not be &lt;code>null&lt;/code> or&#xD;&#xA;{@link #getOclInvalid() OclInvalid} (OCL 2.0 specification, Section 8.2.2).&#xD;&#xA;It may be {@link #getOclVoid() OclVoid}, though.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
         <eParameters name="elementType" eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type"/>
       </eOperations>
       <eOperations name="getSequenceType" eType="#//types/SequenceType">

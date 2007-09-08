@@ -44,13 +44,14 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  *
  * <!-- begin-model-doc -->
  * <p>
- * The <code>OclLibrary</code> interface provides access  to the types of the OCL Standard Library as defined in the OCL specification, Chapter 11.
- * 
- * As EMF does not allow to model operations with class scope, the <code>OclLibrary<code> also provides a version of the {@link #makeTupleType() TupleType::make} operation (with JMI, this method would be located inside <code>TupleTypeClass</code>).
- * 
- * The OCL Collection types for a particular element type can be retrieved with one of the corresponding, type-specific methods. 
- * 
- * Sensible implementations of this interface should cache previously created Tuple and Collection types.
+ * The <code>OclLibrary</code> interface provides access  to the types of the
+ * OCL Standard Library as defined in the OCL specification, Chapter 11.
+ * As EMF does not allow to model operations with class scope, the
+ * <code>OclLibrary<code> also provides a version of the
+ * {@link #makeTupleType() TupleType::make} operation (with JMI, this method
+ * would be located inside <code>TupleTypeClass</code>).
+ * The OCL Collection types for a particular element type can be retrieved with
+ * one of the corresponding, type-specific methods.
  * </p>
  * <!-- end-model-doc -->
  *
@@ -366,6 +367,7 @@ public interface OclLibrary {
 
   /**
    * Returns the value of the '<em><b>Ocl Invalid</b></em>' containment reference.
+   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}'.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Ocl Invalid</em>' reference isn't clear, there really should be
@@ -374,6 +376,7 @@ public interface OclLibrary {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ocl Invalid</em>' containment reference.
    * @see #setOclInvalid(InvalidType)
+   * @see tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary
    * @generated
    */
   InvalidType getOclInvalid();
@@ -417,10 +420,15 @@ public interface OclLibrary {
   TupleType makeTupleType(List<Property> atts);
 
   /**
-   * <!-- begin-user-doc --> Returns the {@link CollectionType} with the given element type. The
-   * parameter <code>t</code> must not be <code>null</code> or
-   * {@link #getOclInvalid() OclInvalid} (OCL 2.0 specification, Section 8.2.2). It may be
-   * {@link #getOclVoid() OclVoid}, though. <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <p>
+   * Returns the {@link CollectionType} with the given element type. The
+   * given <code>elementType</code> must not be <code>null</code> or
+   * {@link #getOclInvalid() OclInvalid} (OCL 2.0 specification, Section 8.2.2).
+   * It may be {@link #getOclVoid() OclVoid}, though.
+   * </p>
+   * <!-- end-model-doc -->
    * @generated
    */
   CollectionType getCollectionType(Type elementType);

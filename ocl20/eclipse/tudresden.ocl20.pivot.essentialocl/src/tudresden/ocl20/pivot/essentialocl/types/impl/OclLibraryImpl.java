@@ -70,23 +70,23 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclBoolean <em>Ocl Boolean</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclString <em>Ocl String</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclInteger <em>Ocl Integer</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclReal <em>Ocl Real</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclAny <em>Ocl Any</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclVoid <em>Ocl Void</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclInvalid <em>Ocl Invalid</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclType <em>Ocl Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclCollection <em>Ocl Collection</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclSequence <em>Ocl Sequence</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclBag <em>Ocl Bag</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclSet <em>Ocl Set</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclOrderedSet <em>Ocl Ordered Set</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclTuple <em>Ocl Tuple</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclBoolean <em>Ocl Boolean</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclString <em>Ocl String</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclInteger <em>Ocl Integer</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclReal <em>Ocl Real</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclAny <em>Ocl Any</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclVoid <em>Ocl Void</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclInvalid <em>Ocl Invalid</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclType <em>Ocl Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclCollection <em>Ocl Collection</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclSequence <em>Ocl Sequence</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclBag <em>Ocl Bag</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclSet <em>Ocl Set</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclOrderedSet <em>Ocl Ordered Set</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclTuple <em>Ocl Tuple</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
@@ -97,148 +97,133 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
   private static final Logger logger = Logger.getLogger(OclLibraryImpl.class);
 
   /**
-   * The cached value of the '{@link #getOclBoolean() <em>Ocl Boolean</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclBoolean() <em>Ocl Boolean</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclBoolean()
    * @generated
    * @ordered
    */
-  protected PrimitiveType oclBoolean = null;
+  protected PrimitiveType oclBoolean;
 
   /**
-   * The cached value of the '{@link #getOclString() <em>Ocl String</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclString() <em>Ocl String</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclString()
    * @generated
    * @ordered
    */
-  protected PrimitiveType oclString = null;
+  protected PrimitiveType oclString;
 
   /**
-   * The cached value of the '{@link #getOclInteger() <em>Ocl Integer</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclInteger() <em>Ocl Integer</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclInteger()
    * @generated
    * @ordered
    */
-  protected PrimitiveType oclInteger = null;
+  protected PrimitiveType oclInteger;
 
   /**
-   * The cached value of the '{@link #getOclReal() <em>Ocl Real</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclReal() <em>Ocl Real</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclReal()
    * @generated
    * @ordered
    */
-  protected PrimitiveType oclReal = null;
+  protected PrimitiveType oclReal;
 
   /**
-   * The cached value of the '{@link #getOclAny() <em>Ocl Any</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclAny() <em>Ocl Any</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclAny()
    * @generated
    * @ordered
    */
-  protected AnyType oclAny = null;
+  protected AnyType oclAny;
 
   /**
-   * The cached value of the '{@link #getOclVoid() <em>Ocl Void</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclVoid() <em>Ocl Void</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclVoid()
    * @generated
    * @ordered
    */
-  protected VoidType oclVoid = null;
+  protected VoidType oclVoid;
 
   /**
-   * The cached value of the '{@link #getOclInvalid() <em>Ocl Invalid</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclInvalid() <em>Ocl Invalid</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclInvalid()
    * @generated
    * @ordered
    */
-  protected InvalidType oclInvalid = null;
+  protected InvalidType oclInvalid;
 
   /**
-   * The cached value of the '{@link #getOclType() <em>Ocl Type</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclType() <em>Ocl Type</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclType()
    * @generated
    * @ordered
    */
-  protected TypeType oclType = null;
+  protected TypeType oclType;
 
   /**
-   * The cached value of the '{@link #getOclCollection() <em>Ocl Collection</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclCollection() <em>Ocl Collection</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclCollection()
    * @generated
    * @ordered
    */
-  protected CollectionType oclCollection = null;
+  protected CollectionType oclCollection;
 
   /**
-   * The cached value of the '{@link #getOclSequence() <em>Ocl Sequence</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclSequence() <em>Ocl Sequence</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclSequence()
    * @generated
    * @ordered
    */
-  protected SequenceType oclSequence = null;
+  protected SequenceType oclSequence;
 
   /**
-   * The cached value of the '{@link #getOclBag() <em>Ocl Bag</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclBag() <em>Ocl Bag</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclBag()
    * @generated
    * @ordered
    */
-  protected BagType oclBag = null;
+  protected BagType oclBag;
 
   /**
-   * The cached value of the '{@link #getOclSet() <em>Ocl Set</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclSet() <em>Ocl Set</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclSet()
    * @generated
    * @ordered
    */
-  protected SetType oclSet = null;
+  protected SetType oclSet;
 
   /**
-   * The cached value of the '{@link #getOclOrderedSet() <em>Ocl Ordered Set</em>}'
-   * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclOrderedSet() <em>Ocl Ordered Set</em>}' containment reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclOrderedSet()
    * @generated
    * @ordered
    */
-  protected OrderedSetType oclOrderedSet = null;
+  protected OrderedSetType oclOrderedSet;
 
   /**
-   * The cached value of the '{@link #getOclTuple() <em>Ocl Tuple</em>}'
-   * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getOclTuple() <em>Ocl Tuple</em>}' containment reference list.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @see #getOclTuple()
    * @generated
    * @ordered
    */
-  protected EList<TupleType> oclTuple = null;
+  protected EList<TupleType> oclTuple;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   protected OclLibraryImpl() {
@@ -247,7 +232,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public VoidType getOclVoid() {
@@ -256,7 +240,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclVoid(VoidType newOclVoid,
@@ -275,7 +258,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclVoid(VoidType newOclVoid) {
@@ -299,7 +281,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public AnyType getOclAny() {
@@ -308,7 +289,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclAny(AnyType newOclAny,
@@ -327,7 +307,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclAny(AnyType newOclAny) {
@@ -351,7 +330,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public CollectionType getOclCollection() {
@@ -360,7 +338,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclCollection(
@@ -379,7 +356,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclCollection(CollectionType newOclCollection) {
@@ -404,7 +380,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public SequenceType getOclSequence() {
@@ -413,7 +388,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclSequence(SequenceType newOclSequence,
@@ -432,7 +406,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclSequence(SequenceType newOclSequence) {
@@ -457,7 +430,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public BagType getOclBag() {
@@ -466,7 +438,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclBag(BagType newOclBag,
@@ -485,7 +456,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclBag(BagType newOclBag) {
@@ -509,7 +479,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public SetType getOclSet() {
@@ -518,7 +487,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclSet(SetType newOclSet,
@@ -537,7 +505,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclSet(SetType newOclSet) {
@@ -561,7 +528,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public OrderedSetType getOclOrderedSet() {
@@ -570,7 +536,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclOrderedSet(
@@ -589,7 +554,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclOrderedSet(OrderedSetType newOclOrderedSet) {
@@ -614,7 +578,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public List<TupleType> getOclTuple() {
@@ -627,7 +590,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public PrimitiveType getOclBoolean() {
@@ -636,7 +598,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclBoolean(PrimitiveType newOclBoolean,
@@ -655,7 +616,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclBoolean(PrimitiveType newOclBoolean) {
@@ -680,7 +640,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public PrimitiveType getOclString() {
@@ -689,7 +648,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclString(PrimitiveType newOclString,
@@ -708,7 +666,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclString(PrimitiveType newOclString) {
@@ -732,7 +689,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public PrimitiveType getOclInteger() {
@@ -741,7 +697,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclInteger(PrimitiveType newOclInteger,
@@ -760,7 +715,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclInteger(PrimitiveType newOclInteger) {
@@ -785,7 +739,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public PrimitiveType getOclReal() {
@@ -794,7 +747,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclReal(PrimitiveType newOclReal,
@@ -813,7 +765,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclReal(PrimitiveType newOclReal) {
@@ -837,7 +788,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public InvalidType getOclInvalid() {
@@ -846,7 +796,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclInvalid(InvalidType newOclInvalid,
@@ -865,20 +814,19 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclInvalid(InvalidType newOclInvalid) {
     if (newOclInvalid != oclInvalid) {
       NotificationChain msgs = null;
       if (oclInvalid != null)
-        msgs = ((InternalEObject) oclInvalid).eInverseRemove(this,
-            EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
-            null, msgs);
+        msgs = ((InternalEObject) oclInvalid)
+            .eInverseRemove(this, TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY,
+                InvalidType.class, msgs);
       if (newOclInvalid != null)
-        msgs = ((InternalEObject) newOclInvalid).eInverseAdd(this,
-            EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_INVALID,
-            null, msgs);
+        msgs = ((InternalEObject) newOclInvalid)
+            .eInverseAdd(this, TypesPackageImpl.INVALID_TYPE__OCL_LIBRARY,
+                InvalidType.class, msgs);
       msgs = basicSetOclInvalid(newOclInvalid, msgs);
       if (msgs != null) msgs.dispatch();
     }
@@ -890,7 +838,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public TypeType getOclType() {
@@ -899,7 +846,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public NotificationChain basicSetOclType(TypeType newOclType,
@@ -918,7 +864,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   public void setOclType(TypeType newOclType) {
@@ -1137,8 +1082,26 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
   }
 
   /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+      NotificationChain msgs) {
+    switch (featureID) {
+      case TypesPackageImpl.OCL_LIBRARY__OCL_INVALID:
+        if (oclInvalid != null)
+          msgs = ((InternalEObject) oclInvalid).eInverseRemove(this,
+              EOPPOSITE_FEATURE_BASE
+                  - TypesPackageImpl.OCL_LIBRARY__OCL_INVALID, null, msgs);
+        return basicSetOclInvalid((InvalidType) otherEnd, msgs);
+    }
+    return super.eInverseAdd(otherEnd, featureID, msgs);
+  }
+
+  /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -1179,7 +1142,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -1219,7 +1181,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @SuppressWarnings("unchecked")
@@ -1275,7 +1236,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -1329,7 +1289,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
@@ -1369,7 +1328,6 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
    * @generated
    */
   @Override
