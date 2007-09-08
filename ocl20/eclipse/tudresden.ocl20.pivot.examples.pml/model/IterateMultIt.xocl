@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xocl:NamespaceXS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xocl="http://www.tu-dresden.de/ocl20/pivot/2007/xocl" pathName="pml">
   <ownedRule name="iterateMultIt" constrainedElement="Plugin">
-    <specification body="Set{1..4}->iterate(it1 : Integer; it2 : Integer; acc : Bag(String) = {} | acc->including(it1 * it2))">
+    <specification body="Set{1..4}->iterate(it1 : Integer; it2 : Integer; acc : Bag(Integer) = {} | acc->including(it1 * it2))">
       <bodyExpression xsi:type="xocl:IterateExpXS">
         <source xsi:type="xocl:CollectionLiteralExpXS">
           <part xsi:type="xocl:CollectionRangeXS">
