@@ -282,8 +282,7 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
       OclExpression source = doSwitch(expression.getSource());
 
       // if the source expression is not a collection type, we need to create a
-      // Singleton set with
-      // the expression (OCL Specification, Section 9.3)
+      // Singleton set with the expression (OCL Specification, Section 9.3)
       if (!(source.getType() instanceof CollectionType)) {
         source = source.withAsSet();
       }
@@ -745,6 +744,12 @@ public class XOCLParser extends AbstractOclParser implements IOclParser {
 
     // find the target namespace in the model
     targetNamespace = findTargetNamespace(declaredPackageName);
+
+    // check that namespace was found
+    if (targetNamespace == null) {
+      throw new ParseException("Failed to find namespace '" //$NON-NLS-1$
+          + declaredPackageName + "'."); //$NON-NLS-1$
+    }
 
     // parse each constraint in the package
     for (ConstraintXS constraint : declaredPackage.getOwnedRule()) {
