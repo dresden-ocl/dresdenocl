@@ -185,7 +185,7 @@ public interface IModelFactory {
    * 
    * @param referredOperationPathName the fully qualified name of the operation
    *          (i.e., including the fully qualified name of its owning
-   *          <code>Type</code>
+   *          <code>Type</code>)
    * @param argument an optional list of arguments
    * 
    * @return an <code>OperationCallExp</code> instance
