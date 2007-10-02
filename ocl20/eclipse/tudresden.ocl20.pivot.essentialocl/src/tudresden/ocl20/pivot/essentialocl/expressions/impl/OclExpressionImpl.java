@@ -159,14 +159,42 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * Additional operation defined in the OCL specification, Section 8.3.9:
    * 
-   * @generated
+   * <p>
+   * The following operation returns an operation call expression for the
+   * predefined <em>atPre()</em> operation with the self expression as its
+   * source.
+   * 
+   * <pre>
+   * context OclExpression::withAtPre() : OperationCallExp
+   * post: result.name = ‘atPre’
+   * post: result.argument-&gt;isEmpty()
+   * post: result.source = self
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @generated NOT
    */
   public OperationCallExp withAtPre() {
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
+    if (logger.isDebugEnabled()) {
+      logger.debug("withAtPre() - enter"); //$NON-NLS-1$
+    }
+
+    OperationCallExp atPre;
+
+    // create a new operation call expression
+    atPre = ExpressionsFactory.INSTANCE.createOperationCallExp();
+
+    atPre.setName("atPre"); //$NON-NLS-1$
+    atPre.setSource(this);
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("withAtPre() - exit - return value=" + atPre); //$NON-NLS-1$
+    }
+    
+    return atPre;
   }
 
   /**
@@ -206,7 +234,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 
     // lookup the asSet operation
     Operation asSetOperation = getType().lookupOperation(
-        "asSet", Arrays.asList(new Type[] {})); //$NON-NLS-1$
+        "asSet", new ArrayList<Type>()); //$NON-NLS-1$
 
     if (asSetOperation == null) {
       throw new IllegalStateException(
