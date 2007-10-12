@@ -193,7 +193,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
     if (logger.isDebugEnabled()) {
       logger.debug("withAtPre() - exit - return value=" + atPre); //$NON-NLS-1$
     }
-    
+
     return atPre;
   }
 
@@ -371,15 +371,26 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
     return mappedType;
   }
 
-  // helper method that will add OclAny to the super types of the given type if
-  // necessary
-  // Note: we do not walk up the inheritance hierarchy because through multiple
-  // inheritance
-  // the type may extend several times from OclAny anyways.
+  /**
+   * Helper method that will add OclAny to the super types of the given type if
+   * 
+   * <ul>
+   * <li>the type is not <code>OclAny</code> itself
+   * <li>the type does not already contain <code>OclAny</code> in its list of
+   * supertypes
+   * <li>the type does not have any other supertypes from which it could
+   * inherit the descendance from <code>OclAny</code>
+   * </ul>
+   * 
+   * 
+   * @param type
+   * @return
+   */
   private Type ensureDescendanceFromOclAny(Type type) {
     AnyType oclAny = oclLibrary.getOclAny();
 
-    if (!type.getSuperType().contains(oclAny)) {
+    if (!type.equals(oclAny) && !type.getSuperType().contains(oclAny)
+        && type.getSuperType().isEmpty()) {
       type.addSuperType(oclAny);
     }
 
