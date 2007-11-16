@@ -384,15 +384,22 @@ public class TypeImpl extends NamedElementImpl implements Type {
     if (logger.isDebugEnabled()) {
       logger.debug("commonSuperType(other=" + other + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
     }
+    
+    if (other == null) {
+      throw new NullArgumentException("other"); //$NON-NLS-1$
+    }
 
     Type commonSuperType;
 
     // by default there is no common supertype
     commonSuperType = null;
 
-    // this type is the common supertype if types are equal or the other
-    // conforms to this one
-    if (this.equals(other) || other == null || other.conformsTo(this)) {
+    // check direct conformance of the two types
+    if (this.conformsTo(other)) {
+      commonSuperType = other;
+    }
+    
+    else if (other.conformsTo(this)) {
       commonSuperType = this;
     }
 
@@ -412,10 +419,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
       // add the parents of both types to the corresponding sets
       thisSuperTypes.addAll(this.getSuperType());
       otherSuperTypes.addAll(other.getSuperType());
-
-      // add this and the other type to the transitive closure
-      allThisTypes.add(this);
-      allOtherTypes.add(other);
 
       // go up both inheritance hierarchies to the top
       while (!(thisSuperTypes.isEmpty() && otherSuperTypes.isEmpty())) {
@@ -467,7 +470,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
         }
 
         // save the next hierarchy level types for the next iteration
-        thisSuperTypes = temp;
+        otherSuperTypes = temp;
         temp.clear();
       }
     }
