@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="tudresden.ocl20.interpreter.actionSet"
+            label="Tests"
+            visible="true">
+         <action
+               class="tudresden.ocl20.interpreter.ui.test.InterpretConstraintsDelegate"
+               id="tudresden.ocl20.interpreter.InterpretConstraintAction"
+               label="Interpret"
+               style="push"
+               toolbarPath="tests">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="tudresden.ocl20.views.category"
+            name="Dresden OCL2 Toolkit">
+      </category>
+      <view
+            category="tudresden.ocl20.views.category"
+            class="tudresden.ocl20.interpreter.ui.internal.views.InterpreterView"
+            icon="icons/sample.gif"
+            id="tudresden.ocl20.interpreter.ui.internal.views.InterpreterView"
+            name="Interpreter">
+      </view>
+   </extension>
+
+</plugin>

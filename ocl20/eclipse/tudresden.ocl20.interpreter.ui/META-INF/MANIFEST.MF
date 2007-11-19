@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ui Plug-in
+Bundle-SymbolicName: tudresden.ocl20.interpreter.ui;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.interpreter.ui.InterpreterUIPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ tudresden.ocl20.interpreter,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.essentialocl,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary,
+ tudresden.ocl20.pivot.standardlibrary.java,
+ tudresden.ocl20.pivot.examples.living,
+ tudresden.ocl20.pivot.modelbus.ui
+Eclipse-LazyStart: true
+Bundle-Vendor: TU Dresden, Software Technology Group
