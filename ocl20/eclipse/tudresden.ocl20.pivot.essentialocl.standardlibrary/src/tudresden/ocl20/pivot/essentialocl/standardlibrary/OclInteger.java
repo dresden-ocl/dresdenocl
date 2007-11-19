@@ -32,13 +32,90 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclInteger extends OclAny {
+public interface OclInteger extends OclReal {
 
+	/**
+	 * 
+	 * @param i
+	 * @return the number of times that <code>i</code> fits completely within
+	 *         <code>this</code>.
+	 */
+	OclInteger div(OclInteger i);
+
+	/**
+	 * 
+	 * @param i
+	 * @return <code>this</code> modulo <code>i</code>
+	 */
+	OclInteger mod(OclInteger i);
+
+	/**
+	 * 
+	 * @param i
+	 * @return the value of the addition of <code>this</code> and
+	 *         <code>i</code>.
+	 */
+	OclInteger add(OclInteger i);
+
+	/**
+	 * 
+	 * @param i
+	 * @return the value of the subtraction of <code>i</code> from
+	 *         <code>this</code>.
+	 */
+	OclInteger subtract(OclInteger i);
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#negative()
+	 */
+	OclInteger negative();
+
+	/**
+	 * 
+	 * @param i
+	 * 
+	 * @return The value of the multiplication of <code>this</code> and
+	 *         <code>i</code>.
+	 */
+	OclInteger multiply(OclInteger i);
+
+	/**
+	 * 
+	 * @param i
+	 * 
+	 * @return The maximum of <code>this</code> an <code>i</code>.
+	 */
+	OclInteger max(OclInteger i);
+
+	/**
+	 * 
+	 * @param i
+	 * 
+	 * @return The minimum of <code>this</code> an <code>i</code>.
+	 */
+	OclInteger min(OclInteger i);
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#abs()
+	 */
+	OclInteger abs();
+
+	/**
+	 * 
+	 * @param i
+	 * 
+	 * @return The value of <code>this</code> divided by <code>i</code>.Evaluates
+	 *         to OclInvalid if <code>i</code> is equal to zero.
+	 */
+	OclReal divide(OclInteger i);
 }

@@ -32,13 +32,51 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclBag<T> extends OclCollection<T> {
+public interface OclBag<T> extends OclUnsortedCollection<T> {
 
+	/**
+	 * 
+	 * @param bag
+	 * @return the intersection of <code>this</code> and <code>bag</code>.
+	 */
+	OclBag<T> intersection(OclBag<T> bag);
+
+	/**
+	 * 
+	 * @param set
+	 * 
+	 * @return The union of <code>this</code> and <code>set</code>.
+	 */
+	OclBag<T> union(OclSet<T> set);
+
+	/**
+	 * 
+	 * @param o
+	 * 
+	 * @return The bag containing all elements of <code>this</code> plus
+	 *         <code>o</code>.
+	 */
+	OclBag<T> including(T o);
+
+	/**
+	 * 
+	 * @param o
+	 * 
+	 * @return The bag containing all elements of <code>this</code> apart from
+	 *         all occurrences of <code>o</code>.
+	 */
+	OclBag<T> excluding(T o);
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
+	 */
+	<T2 extends OclRoot> OclBag<T2> flatten();
 }

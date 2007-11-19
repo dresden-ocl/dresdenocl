@@ -32,13 +32,49 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
 public interface OclString extends OclAny {
 
+	/**
+	 * 
+	 * @return the number of characters of <code>this</code>.
+	 */
+	OclInteger size();
+
+	/**
+	 * 
+	 * @param s
+	 * @return the concatenation of <code>this</code> and <code>s</code>.
+	 */
+	OclString concat(OclString s);
+
+	/**
+	 * 
+	 * @param lower
+	 * @param upper
+	 * @return the sub-string of <code>this</code> starting at character
+	 *         number <code>lower</code>, up to and including character
+	 *         number <code>upper</code>. Character numbers run from 1 to
+	 *         <code>self.size()</code>.
+	 */
+	OclString substring(OclInteger lower, OclInteger upper);
+
+	/**
+	 * Converts <code>this</code> to an {@link OclInteger}.
+	 * 
+	 * @return
+	 */
+	OclInteger toInteger();
+
+	/**
+	 * Converts <code>this</code> to an {@link OclReal}.
+	 * 
+	 * @return
+	 */
+	OclReal toReal();
 }

@@ -32,13 +32,68 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclSet<T> extends OclCollection<T> {
+public interface OclSet<T> extends OclUnsortedCollection<T> {
 
+	/**
+	 * 
+	 * @param s
+	 * @return the elements of <code>this</code>, which are not in
+	 *         <code>s</code>.
+	 */
+	OclSet<T> complement(OclSet<T> s);
+
+	/**
+	 * 
+	 * @param s
+	 * @return the sets containing all the elements that are in
+	 *         <code>this</code> or <code>s</code>, but not in both.
+	 */
+	OclSet<T> symmetricDifference(OclSet<T> s);
+
+	/**
+	 * 
+	 * @param s
+	 * 
+	 * @return The union of <code>this</code> and <code>s</code>.
+	 */
+	OclSet<T> union(OclSet<T> s);
+
+	/**
+	 * 
+	 * @param o
+	 * 
+	 * @return The set containing all elements of <code>this</code> plus
+	 *         <code>o</code>.
+	 */
+	OclSet<T> including(T o);
+
+	/**
+	 * 
+	 * @param o
+	 * 
+	 * @return The set containing all elements of <code>this</code> without
+	 *         <code>o</code>.
+	 */
+	OclSet<T> excluding(T o);
+
+	/**
+	 * 
+	 * @param b
+	 * 
+	 * @return The intersection of <code>this</code> and <code>b</code>.
+	 */
+	OclSet<T> intersection(OclBag<T> b);
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
+	 */
+	<T2 extends OclRoot> OclSet<T2> flatten();
 }

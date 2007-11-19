@@ -32,18 +32,33 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
 public interface OclAdapter {
 
-  /**
-   * @return
-   */
-  Object getAdaptee();
-  
+	/**
+	 * Gets the adaptee.
+	 * 
+	 * @return the adaptee
+	 */
+	Object getAdaptee();
+
+	/**
+	 * Gets the adaptee class.
+	 * 
+	 * @return the class of the adaptee object
+	 */
+	Class getAdapteeClass();
+
+	/**
+	 * Sets the adaptee class. Used for oclAsType()
+	 * 
+	 * @param clazz
+	 *            the new adaptee class
+	 */
+	void setAdapteeClass(Class clazz);
 }

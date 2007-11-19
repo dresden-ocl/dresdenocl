@@ -32,13 +32,133 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
 public interface OclCollection<T> extends OclObject {
 
+	/**
+	 * 
+	 * @return the number of elements in the collection <code>this</code>.
+	 */
+	OclInteger size();
+
+	/**
+	 * 
+	 * @param object
+	 * @return true if <code>object</code> is an element of <code>this</code>,
+	 *         false otherwise.
+	 */
+	OclBoolean includes(T object);
+
+	/**
+	 * 
+	 * @param object
+	 * @return true if <code>object</code> is not an element of
+	 *         <code>this</code>, false otherwise.
+	 */
+	OclBoolean excludes(T object);
+
+	/**
+	 * 
+	 * @param object
+	 * @return the number of times that <code>object</code> occurs in the
+	 *         collection <code>this</code>.
+	 */
+	OclInteger count(T object);
+
+	/**
+	 * 
+	 * @param c2
+	 * @return does <code>this</code> contain all the elements of
+	 *         <code>c2</code>?
+	 */
+	OclBoolean includesAll(OclCollection<T> c2);
+
+	/**
+	 * 
+	 * @param c2
+	 * @return does <code>this</code> contain none of the elements of
+	 *         <code>c2</code>?
+	 */
+	OclBoolean excludesAll(OclCollection<T> c2);
+
+	/**
+	 * 
+	 * @return is <code>this</code> the empty collection?
+	 */
+	OclBoolean isEmpty();
+
+	/**
+	 * 
+	 * @return is <code>this</code> not the empty collection?
+	 */
+	OclBoolean notEmpty();
+
+	/**
+	 * The addition of all elements in <code>this</code>. Elements must be of
+	 * a type supporting the + operation. The + operation must take one
+	 * parameter of type <code>T</code> and be both associative: (a+b)+c =
+	 * a+(b+c), and commutative: a+b = b+a. {@link OclInteger} and
+	 * {@link OclReal} fulfill this condition.
+	 * 
+	 * @return the addition of all elements in <code>this</code>.
+	 */
+	T sum();
+
+	/**
+	 * 
+	 * @return the {@link OclBag} that contains all the elements from
+	 *         <code>this</code>.
+	 */
+	OclBag<T> asBag();
+
+	/**
+	 * 
+	 * @return an {@link OclOrderedSet} that contains all the elements from
+	 *         <code>this</code>, in undefined order.
+	 */
+	OclOrderedSet<T> asOrderedSet();
+
+	/**
+	 * 
+	 * @return a {@link OclSequence} that contains all the elements from
+	 *         <code>this</code>, in undefined order.
+	 */
+	OclSequence<T> asSequence();
+
+	/**
+	 * 
+	 * @return a {@link OclSequence} that contains all the elements from
+	 *         <code>this</code>, with duplbicates removed.
+	 */
+	OclSet<T> asSet();
+
+	/**
+	 * 
+	 * @param <T2>
+	 * @param c2
+	 * @return the cartesian product operation of <code>this</code> and
+	 *         <code>c2</code>.
+	 */
+	<T2 extends OclRoot> OclSet<OclTuple> product(OclCollection<T2> c2);
+
+	/**
+	 * Gets OCL representation of iterator for adapted collection.
+	 * 
+	 * @return the iterator
+	 */
+	OclIterator getIterator();
+
+	/**
+	 * If the element type is not a collection type, this results in the same
+	 * bag. If the element type is a collection type.
+	 * 
+	 * @return the bag containing all the elements of all the elements of
+	 *         <code>this</code>.
+	 */
+	<T2 extends OclRoot> OclCollection<T2> flatten();
 }

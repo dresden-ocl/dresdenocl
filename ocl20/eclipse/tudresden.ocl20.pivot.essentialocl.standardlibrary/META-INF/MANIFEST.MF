@@ -7,4 +7,6 @@ Bundle-Activator: tudresden.ocl20.pivot.essentialocl.StandardLibraryPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime
 Eclipse-LazyStart: true
-Export-Package: tudresden.ocl20.pivot.essentialocl.standardlibrary
+Export-Package: tudresden.ocl20.pivot.essentialocl,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary.base

@@ -32,13 +32,84 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclSequence<T> extends OclCollection<T> {
+public interface OclSequence<T> extends OclSortedCollection<T> {
 
+	/**
+	 * 
+	 * @param lower
+	 * @param upper
+	 * @return the sub-set of <code>this</code> starting at number
+	 *         <code>lower</code>, up to and including element number
+	 *         <code>upper</code>.
+	 */
+	OclSequence<T> subSequence(OclInteger lower, OclInteger upper);
+
+	/**
+	 * 
+	 * @param o
+	 * 
+	 * @return The sequence consisting of all elements in <code>this</code>,
+	 *         followed by all elements in <code>o</code>.
+	 */
+	OclSequence<T> union(OclOrderedSet<T> o);
+
+	/**
+	 * 
+	 * @param o
+	 * 
+	 * @return The sequence of elements, consisting of all elements of
+	 *         <code>this</code>, followed by <code>o</code>.
+	 */
+	OclSequence<T> append(T o);
+
+	/**
+	 * 
+	 * @param o
+	 * 
+	 * @return The sequence consisting of <code>o</code>, followed by all
+	 *         elements in <code>this</code>.
+	 */
+	OclSequence<T> prepend(T o);
+
+	/**
+	 * 
+	 * @param index
+	 * @param o
+	 * 
+	 * @return The sequence consisting of <code>this</code> with
+	 *         <code>o</code> inserted at position <code>index</code>.
+	 */
+	OclSequence<T> insertAt(OclInteger index, T o);
+
+	/**
+	 * 
+	 * @param o
+	 * 
+	 * @return The sequence containing all elements of <code>this</code> plus
+	 *         <code>o</code> added as the last element.
+	 */
+	OclSequence<T> including(T o);
+
+	/**
+	 * 
+	 * @param o
+	 * 
+	 * @return The sequence containing all elements of <code>this</code> apart
+	 *         from all occurrences of <code>o</code>. The order of the
+	 *         remaining elements is not changed.
+	 */
+	OclSequence<T> excluding(T o);
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
+	 */
+	<T2 extends OclRoot> OclSequence<T2> flatten();
 }

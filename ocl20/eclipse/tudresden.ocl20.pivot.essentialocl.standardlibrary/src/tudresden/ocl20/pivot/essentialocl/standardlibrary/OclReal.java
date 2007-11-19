@@ -32,13 +32,114 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
 /**
  * 
- *
+ * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclReal extends OclAny {
+public interface OclReal extends OclAny, OclComparable {
 
+	/**
+	 * 
+	 * @param r
+	 * @return the value of the addition of <code>this</code> and
+	 *         <code>r</code>.
+	 */
+	OclReal add(OclReal r);
+
+	/**
+	 * 
+	 * @param r
+	 * @return the value of the subtraction of <code>r</code> from
+	 *         <code>this</code>.
+	 */
+	OclReal subtract(OclReal r);
+
+	/**
+	 * 
+	 * @param r
+	 * @return the value of the multiplication of <code>this</code> and
+	 *         <code>r</code>.
+	 */
+	OclReal multiply(OclReal r);
+
+	/**
+	 * 
+	 * @return the negative value of <code>this</code>.
+	 */
+	OclReal negative();
+
+	/**
+	 * 
+	 * @param r
+	 * @return the value of <code>this</code> divided by <code>r</code>.
+	 *         Evaluates to {@link OclInvalid} if <code>r</code> is equal to
+	 *         zero.
+	 */
+	OclReal divide(OclReal r);
+
+	/**
+	 * 
+	 * @return the absolute value of <code>this</code>.
+	 */
+	OclReal abs();
+
+	/**
+	 * 
+	 * @return the largest {@link OclInteger} that is less than or equal to
+	 *         <code>this</code>.
+	 */
+	OclInteger floor();
+
+	/**
+	 * 
+	 * @return the {@link OclInteger} that is closest to <code>this</code>.
+	 *         When there are two such {@link OclInteger}, the largest one.
+	 */
+	OclInteger round();
+
+	/**
+	 * 
+	 * @param r
+	 * @return the maximum of <code>this</code> and <code>r</code>.
+	 */
+	OclReal max(OclReal r);
+
+	/**
+	 * 
+	 * @param r
+	 * @return the minimum of <code>this</code> and <code>r</code>.
+	 */
+	OclReal min(OclReal r);
+
+	/**
+	 * 
+	 * @param r
+	 * @return true if <code>this</code> is less than <code>r</code>.
+	 */
+	OclBoolean isLessThan(OclReal r);
+
+	/**
+	 * 
+	 * @param r
+	 * @return true if <code>this</code> is greater than <code>r</code>.
+	 */
+	OclBoolean isGreaterThan(OclReal r);
+
+	/**
+	 * 
+	 * @param r
+	 * @return true if <code>this</code> is less than or equal to
+	 *         <code>r</code>.
+	 */
+	OclBoolean isLessEqual(OclReal r);
+
+	/**
+	 * 
+	 * @param r
+	 * @return true if <code>this</code> is greater than or equal to
+	 *         <code>r</code>.
+	 */
+	OclBoolean isGreaterEqual(OclReal r);
 }
