@@ -73,339 +73,355 @@ import tudresden.ocl20.pivot.examples.pml.ServiceParameter;
  */
 public class ServiceImpl extends EObjectImpl implements Service {
 
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
 
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
-  /**
-   * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getReturnType()
-   * @generated
-   * @ordered
-   */
-  protected JavaType returnType = null;
+	/**
+	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReturnType()
+	 * @generated
+	 * @ordered
+	 */
+	protected JavaType returnType;
 
-  /**
-   * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getParameters()
-   * @generated
-   * @ordered
-   */
-  protected EList<ServiceParameter> parameters = null;
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ServiceParameter> parameters;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ServiceImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ServiceImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return PMLPackage.Literals.SERVICE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return PMLPackage.Literals.SERVICE;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName() {
-    return name;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName) {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,PMLPackage.SERVICE__NAME,oldName,name));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PMLPackage.SERVICE__NAME, oldName, name));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Plugin getPlugin() {
-    if (eContainerFeatureID != PMLPackage.SERVICE__PLUGIN) return null;
-    return (Plugin) eContainer();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Plugin getPlugin() {
+		if (eContainerFeatureID != PMLPackage.SERVICE__PLUGIN)
+			return null;
+		return (Plugin) eContainer();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetPlugin(Plugin newPlugin, NotificationChain msgs) {
-    msgs = eBasicSetContainer((InternalEObject) newPlugin,PMLPackage.SERVICE__PLUGIN,msgs);
-    return msgs;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetPlugin(Plugin newPlugin,
+			NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newPlugin,
+				PMLPackage.SERVICE__PLUGIN, msgs);
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setPlugin(Plugin newPlugin) {
-    if (newPlugin != eInternalContainer()
-        || (eContainerFeatureID != PMLPackage.SERVICE__PLUGIN && newPlugin != null)) {
-      if (EcoreUtil.isAncestor(this,newPlugin))
-        throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
-      NotificationChain msgs = null;
-      if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
-      if (newPlugin != null)
-        msgs = ((InternalEObject) newPlugin).eInverseAdd(this,PMLPackage.PLUGIN__SERVICES,
-            Plugin.class,msgs);
-      msgs = basicSetPlugin(newPlugin,msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,PMLPackage.SERVICE__PLUGIN,newPlugin,
-          newPlugin));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPlugin(Plugin newPlugin) {
+		if (newPlugin != eInternalContainer()
+				|| (eContainerFeatureID != PMLPackage.SERVICE__PLUGIN && newPlugin != null)) {
+			if (EcoreUtil.isAncestor(this, newPlugin))
+				throw new IllegalArgumentException(
+						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newPlugin != null)
+				msgs = ((InternalEObject) newPlugin).eInverseAdd(this,
+						PMLPackage.PLUGIN__SERVICES, Plugin.class, msgs);
+			msgs = basicSetPlugin(newPlugin, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PMLPackage.SERVICE__PLUGIN, newPlugin, newPlugin));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public JavaType getReturnType() {
-    if (returnType != null && returnType.eIsProxy()) {
-      InternalEObject oldReturnType = (InternalEObject) returnType;
-      returnType = (JavaType) eResolveProxy(oldReturnType);
-      if (returnType != oldReturnType) {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this,Notification.RESOLVE,PMLPackage.SERVICE__RETURN_TYPE,
-              oldReturnType,returnType));
-      }
-    }
-    return returnType;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavaType getReturnType() {
+		if (returnType != null && returnType.eIsProxy()) {
+			InternalEObject oldReturnType = (InternalEObject) returnType;
+			returnType = (JavaType) eResolveProxy(oldReturnType);
+			if (returnType != oldReturnType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							PMLPackage.SERVICE__RETURN_TYPE, oldReturnType,
+							returnType));
+			}
+		}
+		return returnType;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public JavaType basicGetReturnType() {
-    return returnType;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavaType basicGetReturnType() {
+		return returnType;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setReturnType(JavaType newReturnType) {
-    JavaType oldReturnType = returnType;
-    returnType = newReturnType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,PMLPackage.SERVICE__RETURN_TYPE,
-          oldReturnType,returnType));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReturnType(JavaType newReturnType) {
+		JavaType oldReturnType = returnType;
+		returnType = newReturnType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PMLPackage.SERVICE__RETURN_TYPE, oldReturnType, returnType));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<ServiceParameter> getParameters() {
-    if (parameters == null) {
-      parameters = new EObjectContainmentWithInverseEList<ServiceParameter>(ServiceParameter.class,
-          this,PMLPackage.SERVICE__PARAMETERS,PMLPackage.SERVICE_PARAMETER__SERVICE);
-    }
-    return parameters;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ServiceParameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentWithInverseEList<ServiceParameter>(
+					ServiceParameter.class, this,
+					PMLPackage.SERVICE__PARAMETERS,
+					PMLPackage.SERVICE_PARAMETER__SERVICE);
+		}
+		return parameters;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
-    switch (featureID) {
-      case PMLPackage.SERVICE__PLUGIN:
-        if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetPlugin((Plugin) otherEnd,msgs);
-      case PMLPackage.SERVICE__PARAMETERS:
-        return ((InternalEList<InternalEObject>) (InternalEList<?>) getParameters()).basicAdd(
-            otherEnd,msgs);
-    }
-    return super.eInverseAdd(otherEnd,featureID,msgs);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case PMLPackage.SERVICE__PLUGIN:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetPlugin((Plugin) otherEnd, msgs);
+		case PMLPackage.SERVICE__PARAMETERS:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getParameters())
+					.basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
-    switch (featureID) {
-      case PMLPackage.SERVICE__PLUGIN:
-        return basicSetPlugin(null,msgs);
-      case PMLPackage.SERVICE__PARAMETERS:
-        return ((InternalEList<?>) getParameters()).basicRemove(otherEnd,msgs);
-    }
-    return super.eInverseRemove(otherEnd,featureID,msgs);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case PMLPackage.SERVICE__PLUGIN:
+			return basicSetPlugin(null, msgs);
+		case PMLPackage.SERVICE__PARAMETERS:
+			return ((InternalEList<?>) getParameters()).basicRemove(otherEnd,
+					msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-    switch (eContainerFeatureID) {
-      case PMLPackage.SERVICE__PLUGIN:
-        return eInternalContainer().eInverseRemove(this,PMLPackage.PLUGIN__SERVICES,Plugin.class,
-            msgs);
-    }
-    return super.eBasicRemoveFromContainerFeature(msgs);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(
+			NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+		case PMLPackage.SERVICE__PLUGIN:
+			return eInternalContainer().eInverseRemove(this,
+					PMLPackage.PLUGIN__SERVICES, Plugin.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case PMLPackage.SERVICE__NAME:
-        return getName();
-      case PMLPackage.SERVICE__PLUGIN:
-        return getPlugin();
-      case PMLPackage.SERVICE__RETURN_TYPE:
-        if (resolve) return getReturnType();
-        return basicGetReturnType();
-      case PMLPackage.SERVICE__PARAMETERS:
-        return getParameters();
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case PMLPackage.SERVICE__NAME:
+			return getName();
+		case PMLPackage.SERVICE__PLUGIN:
+			return getPlugin();
+		case PMLPackage.SERVICE__RETURN_TYPE:
+			if (resolve)
+				return getReturnType();
+			return basicGetReturnType();
+		case PMLPackage.SERVICE__PARAMETERS:
+			return getParameters();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case PMLPackage.SERVICE__NAME:
-        setName((String) newValue);
-        return;
-      case PMLPackage.SERVICE__PLUGIN:
-        setPlugin((Plugin) newValue);
-        return;
-      case PMLPackage.SERVICE__RETURN_TYPE:
-        setReturnType((JavaType) newValue);
-        return;
-      case PMLPackage.SERVICE__PARAMETERS:
-        getParameters().clear();
-        getParameters().addAll((Collection<? extends ServiceParameter>) newValue);
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case PMLPackage.SERVICE__NAME:
+			setName((String) newValue);
+			return;
+		case PMLPackage.SERVICE__PLUGIN:
+			setPlugin((Plugin) newValue);
+			return;
+		case PMLPackage.SERVICE__RETURN_TYPE:
+			setReturnType((JavaType) newValue);
+			return;
+		case PMLPackage.SERVICE__PARAMETERS:
+			getParameters().clear();
+			getParameters().addAll(
+					(Collection<? extends ServiceParameter>) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case PMLPackage.SERVICE__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-      case PMLPackage.SERVICE__PLUGIN:
-        setPlugin((Plugin) null);
-        return;
-      case PMLPackage.SERVICE__RETURN_TYPE:
-        setReturnType((JavaType) null);
-        return;
-      case PMLPackage.SERVICE__PARAMETERS:
-        getParameters().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case PMLPackage.SERVICE__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case PMLPackage.SERVICE__PLUGIN:
+			setPlugin((Plugin) null);
+			return;
+		case PMLPackage.SERVICE__RETURN_TYPE:
+			setReturnType((JavaType) null);
+			return;
+		case PMLPackage.SERVICE__PARAMETERS:
+			getParameters().clear();
+			return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case PMLPackage.SERVICE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case PMLPackage.SERVICE__PLUGIN:
-        return getPlugin() != null;
-      case PMLPackage.SERVICE__RETURN_TYPE:
-        return returnType != null;
-      case PMLPackage.SERVICE__PARAMETERS:
-        return parameters != null && !parameters.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case PMLPackage.SERVICE__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
+		case PMLPackage.SERVICE__PLUGIN:
+			return getPlugin() != null;
+		case PMLPackage.SERVICE__RETURN_TYPE:
+			return returnType != null;
+		case PMLPackage.SERVICE__PARAMETERS:
+			return parameters != null && !parameters.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString() {
-    if (eIsProxy()) return super.toString();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: "); //$NON-NLS-1$
-    result.append(name);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: "); //$NON-NLS-1$
+		result.append(name);
+		result.append(')');
+		return result.toString();
+	}
 
 } //ServiceImpl

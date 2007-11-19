@@ -44,75 +44,85 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface PMLFactory extends EFactory {
 
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  PMLFactory eINSTANCE = tudresden.ocl20.pivot.examples.pml.impl.PMLFactoryImpl.init();
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	PMLFactory eINSTANCE = tudresden.ocl20.pivot.examples.pml.impl.PMLFactoryImpl
+			.init();
 
-  /**
-   * Returns a new object of class '<em>Plugin</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Plugin</em>'.
-   * @generated
-   */
-  Plugin createPlugin();
+	/**
+	 * Returns a new object of class '<em>Plugin</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Plugin</em>'.
+	 * @generated
+	 */
+	Plugin createPlugin();
 
-  /**
-   * Returns a new object of class '<em>Feature</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature</em>'.
-   * @generated
-   */
-  Feature createFeature();
+	/**
+	 * Returns a new object of class '<em>Feature</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Feature</em>'.
+	 * @generated
+	 */
+	Feature createFeature();
 
-  /**
-   * Returns a new object of class '<em>Extension Point</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Extension Point</em>'.
-   * @generated
-   */
-  ExtensionPoint createExtensionPoint();
+	/**
+	 * Returns a new object of class '<em>Extension Point</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Extension Point</em>'.
+	 * @generated
+	 */
+	ExtensionPoint createExtensionPoint();
 
-  /**
-   * Returns a new object of class '<em>Java Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Java Type</em>'.
-   * @generated
-   */
-  JavaType createJavaType();
+	/**
+	 * Returns a new object of class '<em>Java Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Java Type</em>'.
+	 * @generated
+	 */
+	JavaType createJavaType();
 
-  /**
-   * Returns a new object of class '<em>Service</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Service</em>'.
-   * @generated
-   */
-  Service createService();
+	/**
+	 * Returns a new object of class '<em>Service</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Service</em>'.
+	 * @generated
+	 */
+	Service createService();
 
-  /**
-   * Returns a new object of class '<em>Service Parameter</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Service Parameter</em>'.
-   * @generated
-   */
-  ServiceParameter createServiceParameter();
+	/**
+	 * Returns a new object of class '<em>Service Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Service Parameter</em>'.
+	 * @generated
+	 */
+	ServiceParameter createServiceParameter();
 
-  /**
-   * Returns the package supported by this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the package supported by this factory.
-   * @generated
-   */
-  PMLPackage getPMLPackage();
+	/**
+	 * Returns a new object of class '<em>Plugin Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Plugin Package</em>'.
+	 * @generated
+	 */
+	PluginPackage createPluginPackage();
+
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
+	PMLPackage getPMLPackage();
 
 } //PMLFactory

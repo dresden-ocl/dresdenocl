@@ -57,140 +57,142 @@ import tudresden.ocl20.pivot.examples.pml.PMLPackage;
  */
 public class JavaTypeImpl extends EObjectImpl implements JavaType {
 
-  /**
-   * The default value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFullyQualifiedName()
-   * @generated
-   * @ordered
-   */
-  protected static final String FULLY_QUALIFIED_NAME_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFullyQualifiedName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FULLY_QUALIFIED_NAME_EDEFAULT = null;
 
-  /**
-   * The cached value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFullyQualifiedName()
-   * @generated
-   * @ordered
-   */
-  protected String fullyQualifiedName = FULLY_QUALIFIED_NAME_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFullyQualifiedName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String fullyQualifiedName = FULLY_QUALIFIED_NAME_EDEFAULT;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected JavaTypeImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JavaTypeImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return PMLPackage.Literals.JAVA_TYPE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return PMLPackage.Literals.JAVA_TYPE;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getFullyQualifiedName() {
-    return fullyQualifiedName;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getFullyQualifiedName() {
+		return fullyQualifiedName;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setFullyQualifiedName(String newFullyQualifiedName) {
-    String oldFullyQualifiedName = fullyQualifiedName;
-    fullyQualifiedName = newFullyQualifiedName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,
-          PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME,oldFullyQualifiedName,fullyQualifiedName));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFullyQualifiedName(String newFullyQualifiedName) {
+		String oldFullyQualifiedName = fullyQualifiedName;
+		fullyQualifiedName = newFullyQualifiedName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME,
+					oldFullyQualifiedName, fullyQualifiedName));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
-        return getFullyQualifiedName();
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
+			return getFullyQualifiedName();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
-        setFullyQualifiedName((String) newValue);
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
+			setFullyQualifiedName((String) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
-        setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
+			setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
-        return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null
-            : !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case PMLPackage.JAVA_TYPE__FULLY_QUALIFIED_NAME:
+			return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null
+					: !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
+		}
+		return super.eIsSet(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString() {
-    if (eIsProxy()) return super.toString();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (fullyQualifiedName: "); //$NON-NLS-1$
-    result.append(fullyQualifiedName);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (fullyQualifiedName: "); //$NON-NLS-1$
+		result.append(fullyQualifiedName);
+		result.append(')');
+		return result.toString();
+	}
 
 } //JavaTypeImpl

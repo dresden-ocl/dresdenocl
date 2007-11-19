@@ -4,8 +4,13 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pml"
     nsURI="http://www.tu-dresden.de/ocl20/pivot/2007/pml" nsPrefix="pml">
   <eClassifiers xsi:type="ecore:EClass" name="Plugin">
-    <eOperations name="addExtensionPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="point" eType="#//ExtensionPoint"/>
+    <eOperations name="getSelf" eType="#//Plugin"/>
+    <eOperations name="getFive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="getValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getNameOf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="feature" eType="#//Feature"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -19,6 +24,7 @@
         eType="#//Service" containment="true" eOpposite="#//Service/plugin"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="activator" lowerBound="1"
         eType="#//JavaType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//SampleEnum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Feature">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -50,5 +56,18 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//JavaType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
         eType="#//Service" transient="true" eOpposite="#//Service/parameters"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PluginPackage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plugins" upperBound="-1"
+        eType="#//Plugin" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//JavaType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+        eType="#//Feature" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SampleEnum">
+    <eLiterals name="ValueOne" value="1"/>
+    <eLiterals name="ValueTwo" value="2"/>
+    <eLiterals name="ValueThree" value="3"/>
   </eClassifiers>
 </ecore:EPackage>

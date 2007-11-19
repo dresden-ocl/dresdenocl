@@ -54,84 +54,84 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ServiceParameter extends EObject {
 
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getServiceParameter_Name()
-   * @model
-   * @generated
-   */
-  String getName();
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getServiceParameter_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
-  /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(JavaType)
-   * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getServiceParameter_Type()
-   * @model required="true"
-   * @generated
-   */
-  JavaType getType();
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' reference.
+	 * @see #setType(JavaType)
+	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getServiceParameter_Type()
+	 * @model required="true"
+	 * @generated
+	 */
+	JavaType getType();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter#getType <em>Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
-   * @generated
-   */
-  void setType(JavaType value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter#getType <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(JavaType value);
 
-  /**
-   * Returns the value of the '<em><b>Service</b></em>' container reference.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.examples.pml.Service#getParameters <em>Parameters</em>}'.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Service</em>' container reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Service</em>' container reference.
-   * @see #setService(Service)
-   * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getServiceParameter_Service()
-   * @see tudresden.ocl20.pivot.examples.pml.Service#getParameters
-   * @model opposite="parameters" required="true"
-   * @generated
-   */
-  Service getService();
+	/**
+	 * Returns the value of the '<em><b>Service</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.examples.pml.Service#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Service</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Service</em>' container reference.
+	 * @see #setService(Service)
+	 * @see tudresden.ocl20.pivot.examples.pml.PMLPackage#getServiceParameter_Service()
+	 * @see tudresden.ocl20.pivot.examples.pml.Service#getParameters
+	 * @model opposite="parameters" required="true"
+	 * @generated
+	 */
+	Service getService();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter#getService <em>Service</em>}' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Service</em>' container reference.
-   * @see #getService()
-   * @generated
-   */
-  void setService(Service value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ServiceParameter#getService <em>Service</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Service</em>' container reference.
+	 * @see #getService()
+	 * @generated
+	 */
+	void setService(Service value);
 
 } // ServiceParameter
