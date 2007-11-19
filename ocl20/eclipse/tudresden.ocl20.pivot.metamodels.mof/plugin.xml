@@ -7,7 +7,7 @@
             icon="icons/mof.gif"
             id="tudresden.ocl20.pivot.metamodels.mof"
             modelProvider="tudresden.ocl20.pivot.metamodels.mof.internal.provider.MofModelProvider"
-            name="Mof">
+            name="MOF 1.4">
       </metamodel>
    </extension>
 

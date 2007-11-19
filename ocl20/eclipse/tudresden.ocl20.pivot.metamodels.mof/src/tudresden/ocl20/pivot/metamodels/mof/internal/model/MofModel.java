@@ -43,12 +43,13 @@ import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
+import tudresden.ocl20.pivot.models.mdr.internal.provider.MdrModelInstanceProvider;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
  * The root of the model is retrieved from {@link ModelHelper} with method
- * <code>getTopPackage()</code> and a corresponding {@link MofPackage}
- * adapter will be created.
+ * <code>getTopPackage()</code> and a corresponding {@link MofPackage} adapter
+ * will be created.
  * 
  * @author Ronny Brandt
  * @version 1.0 09.05.2007
@@ -59,26 +60,35 @@ public class MofModel extends AbstractModel implements IModel {
 	 */
 	private static final Logger logger = Logger.getLogger(MofModel.class);
 
-  // the ModelPackage containing the corresponding MOF model
+	// the ModelPackage containing the corresponding MOF model
 	private ModelPackage modelPackage;
-	
-  // the adapter for the top package of the associated MOF model
+
+	// the adapter for the top package of the associated MOF model
 	private Namespace rootNamespace;
-	
+
+	private String metamodelname;
+
 	/**
-   * Creates a new <code>MofModel</code> loading the {@link ModelPackage}
-   * with the given name from the repository.
-   * 
-   * @param modelname the name of the model in the repository
+	 * Creates a new <code>MofModel</code> loading the {@link ModelPackage}
+	 * with the given name from the repository.
+	 * 
+	 * @param modelname
+	 *            the name of the model in the repository
 	 */
 	public MofModel(String modelname) {
-		super(modelname, ModelBusPlugin.getMetamodelRegistry().getMetamodel(MofMetamodelPlugin.ID));
+		super(modelname, ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+				MofMetamodelPlugin.ID));
 		if (logger.isDebugEnabled()) {
-			logger.debug("MofModel(String modelname=" + modelname + ") - enter");
+			logger
+					.debug("MofModel(String modelname=" + modelname
+							+ ") - enter");
 		}
-		
+
+		metamodelname = modelname+"_as_MM";
+
 		try {
-			modelPackage = (ModelPackage) ModelManager.getInstance().getModel(modelname);
+			modelPackage = (ModelPackage) ModelManager.getInstance().getModel(
+					modelname);
 		} catch (ModelManagerException e) {
 			logger.error("MofModel(String)", e);
 
@@ -91,7 +101,9 @@ public class MofModel extends AbstractModel implements IModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getModelInstanceProvider()
 	 */
 	public IModelInstanceProvider getModelInstanceProvider() {
@@ -99,15 +111,18 @@ public class MofModel extends AbstractModel implements IModel {
 			logger.debug("getModelInstanceProvider() - enter");
 		}
 
-		// TODO Auto-generated method stub
+		IModelInstanceProvider mip = new MdrModelInstanceProvider(metamodelname);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("getModelInstanceProvider() - exit - return value=" + null);
+			logger.debug("getModelInstanceProvider() - exit - return value="
+					+ null);
 		}
-		return null;
+		return mip;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
 	 */
 	public Namespace getRootNamespace() throws ModelAccessException {
@@ -116,12 +131,15 @@ public class MofModel extends AbstractModel implements IModel {
 		}
 
 		if (rootNamespace == null) {
-			MofPackage topPackage = (MofPackage)ModelHelper.getInstance(modelPackage).getTopPackage();
-			rootNamespace = MofAdapterFactory.INSTANCE.createNamespace(topPackage);
+			MofPackage topPackage = (MofPackage) ModelHelper.getInstance(
+					modelPackage).getTopPackage();
+			rootNamespace = MofAdapterFactory.INSTANCE
+					.createNamespace(topPackage);
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("getRootNamespace() - exit - return value=" + rootNamespace);
+			logger.debug("getRootNamespace() - exit - return value="
+					+ rootNamespace);
 		}
 		return rootNamespace;
 	}
