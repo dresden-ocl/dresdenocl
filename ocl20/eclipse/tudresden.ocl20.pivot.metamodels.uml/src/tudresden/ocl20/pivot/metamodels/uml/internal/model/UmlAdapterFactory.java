@@ -67,37 +67,36 @@ public class UmlAdapterFactory {
 	private static final Logger logger = Logger
 			.getLogger(UmlAdapterFactory.class);
 
-  /**
-   * The Singleton instance of the factory.
-   */
+	/**
+	 * The Singleton instance of the factory.
+	 */
 	public static UmlAdapterFactory INSTANCE = new UmlAdapterFactory();
-	
-  // a cache for previously created adapters
+
+	// a cache for previously created adapters
 	Map<ModelElement, NamedElement> adapters;
-	
-  /**
-   * Clients are not supposed to instantiate this class.
-   */
+
+	/**
+	 * Clients are not supposed to instantiate this class.
+	 */
 	private UmlAdapterFactory() {
 		adapters = new HashMap<ModelElement, NamedElement>();
 	}
 
-  /**
-   * Creates a {@link Namespace} adapter for an {@link Package}.
-   */
+	/**
+	 * Creates a {@link Namespace} adapter for an {@link Package}.
+	 */
 	public Namespace createNamespace(Package umlPackage) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("createNamespace(Package umlPackage=" + umlPackage
 					+ ") - enter");
 		}
 
-		Namespace namespace = (Namespace)adapters.get(umlPackage);
-		
+		Namespace namespace = (Namespace) adapters.get(umlPackage);
+
 		if (namespace == null) {
 			namespace = new UmlNamespace(umlPackage);
 			adapters.put(umlPackage, namespace);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("createNamespace(Package) - exit - return value="
@@ -113,16 +112,20 @@ public class UmlAdapterFactory {
 	 */
 	public Type createType(UmlClass umlClass) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("createType(UmlClass umlClass=" + umlClass + ") - enter");
+			logger.debug("createType(UmlClass umlClass=" + umlClass
+					+ ") - enter");
 		}
 
-		Type type = (Type)adapters.get(umlClass);
-		
+		Type type = (Type) adapters.get(umlClass);
+
 		if (type == null) {
-			type = new UmlType(umlClass);
+			if (umlClass.getName().equals("String")) {
+				type = new UmlPrimitiveType(umlClass);
+			} else {
+				type = new UmlType(umlClass);
+			}
 			adapters.put(umlClass, type);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("createType(UmlClass) - exit - return value=" + type);
@@ -141,13 +144,12 @@ public class UmlAdapterFactory {
 					+ ") - enter");
 		}
 
-		Type type = (Type)adapters.get(umlInterface);
-		
+		Type type = (Type) adapters.get(umlInterface);
+
 		if (type == null) {
 			type = new UmlType(umlInterface);
 			adapters.put(umlInterface, type);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("createType(Interface) - exit - return value=" + type);
@@ -167,26 +169,27 @@ public class UmlAdapterFactory {
 		}
 
 		Type type = null;
-		
+
 		if (classifier instanceof UmlClass)
-			type = createType((UmlClass)classifier);
+			type = createType((UmlClass) classifier);
 		else if (classifier instanceof Interface)
-			type = createType((Interface)classifier);
+			type = createType((Interface) classifier);
 		else if (classifier instanceof Enumeration)
 			type = createEnumeration((Enumeration) classifier);
 		else if (classifier instanceof DataType)
 			type = createPrimitiveType((DataType) classifier);
 		else
-			throw new IllegalArgumentException("Unknown Uml Classifier type: " + classifier.getClass()); 
-		
-
+			throw new IllegalArgumentException("Unknown Uml Classifier type: "
+					+ classifier.getClass());
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("createType(Classifier) - exit - return value=" + type);
+			logger
+					.debug("createType(Classifier) - exit - return value="
+							+ type);
 		}
 		return type;
 	}
-	
+
 	/**
 	 * 
 	 * @param enumeration
@@ -194,21 +197,21 @@ public class UmlAdapterFactory {
 	 */
 	public Type createEnumeration(Enumeration enumeration) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("createEnumeration(Enumeration enumeration=" + enumeration
-					+ ") - enter");
+			logger.debug("createEnumeration(Enumeration enumeration="
+					+ enumeration + ") - enter");
 		}
 
 		Type pEnumeration = (Type) adapters.get(enumeration);
-		
+
 		if (pEnumeration == null) {
 			pEnumeration = new UmlEnumeration(enumeration);
 			adapters.put(enumeration, pEnumeration);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("createEnumeration(Enumeration) - exit - return value="
-					+ pEnumeration);
+			logger
+					.debug("createEnumeration(Enumeration) - exit - return value="
+							+ pEnumeration);
 		}
 		return pEnumeration;
 	}
@@ -224,13 +227,12 @@ public class UmlAdapterFactory {
 					+ ") - enter");
 		}
 
-		Type type = (Type)adapters.get(dataType);
-		
+		Type type = (Type) adapters.get(dataType);
+
 		if (type == null) {
 			type = new UmlPrimitiveType(dataType);
 			adapters.put(dataType, type);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("createPrimitiveType(DataType) - exit - return value="
@@ -252,13 +254,12 @@ public class UmlAdapterFactory {
 							+ operation + ") - enter");
 		}
 
-		Operation pOperation = (Operation)adapters.get(operation);
-		
+		Operation pOperation = (Operation) adapters.get(operation);
+
 		if (pOperation == null) {
 			pOperation = new UmlOperation(operation);
 			adapters.put(operation, pOperation);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
 			logger
@@ -279,13 +280,12 @@ public class UmlAdapterFactory {
 					+ ") - enter");
 		}
 
-		Property property = (Property)adapters.get(attribute);
-		
+		Property property = (Property) adapters.get(attribute);
+
 		if (property == null) {
 			property = new UmlProperty(attribute);
 			adapters.put(attribute, property);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("createProperty(Attribute) - exit - return value="
@@ -306,14 +306,13 @@ public class UmlAdapterFactory {
 					.debug("createParameter(tudresden.ocl20.core.jmi.uml15.core.Parameter parameter="
 							+ parameter + ") - enter");
 		}
-		
-		Parameter pParameter = (Parameter)adapters.get(parameter);
-		
+
+		Parameter pParameter = (Parameter) adapters.get(parameter);
+
 		if (pParameter == null) {
 			pParameter = new UmlParameter(parameter);
 			adapters.put(parameter, pParameter);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
 			logger
@@ -336,13 +335,13 @@ public class UmlAdapterFactory {
 							+ enumerationLiteral + ") - enter");
 		}
 
-		EnumerationLiteral pEnumerationLiteral = (EnumerationLiteral)adapters.get(enumerationLiteral);
-		
+		EnumerationLiteral pEnumerationLiteral = (EnumerationLiteral) adapters
+				.get(enumerationLiteral);
+
 		if (pEnumerationLiteral == null) {
 			pEnumerationLiteral = new UmlEnumerationLiteral(enumerationLiteral);
 			adapters.put(enumerationLiteral, pEnumerationLiteral);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
 			logger
@@ -364,16 +363,16 @@ public class UmlAdapterFactory {
 		}
 
 		Property property = (Property) adapters.get(associationEnd);
-		
+
 		if (property == null) {
 			property = new UmlAssociationEnd(associationEnd);
 			adapters.put(associationEnd, property);
 		}
-		
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("createProperty(AssociationEnd) - exit - return value="
-					+ property);
+			logger
+					.debug("createProperty(AssociationEnd) - exit - return value="
+							+ property);
 		}
 		return property;
 	}

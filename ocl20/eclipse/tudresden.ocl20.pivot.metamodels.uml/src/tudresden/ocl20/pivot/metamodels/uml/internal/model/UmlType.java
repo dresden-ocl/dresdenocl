@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import tudresden.ocl20.core.jmi.uml15.core.Abstraction;
 import tudresden.ocl20.core.jmi.uml15.core.Association;
 import tudresden.ocl20.core.jmi.uml15.core.AssociationEnd;
 import tudresden.ocl20.core.jmi.uml15.core.Classifier;
@@ -51,24 +52,25 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractType;
 
 /**
- * An implementation of the Pivot Model {@link Type} concept for
- * UML metamodel in MDR.
+ * An implementation of the Pivot Model {@link Type} concept for UML metamodel
+ * in MDR.
  * 
  * @author Ronny Brandt
  * @version 1.0 09.05.2007
  */
 public class UmlType extends AbstractType implements Type {
-	
+
 	/** Logger for this class. */
 	private static final Logger logger = Logger.getLogger(UmlType.class);
 
 	// the adapted UML classifier
 	private Classifier classifier;
-	
+
 	/**
 	 * Creates a new <code>UmlType</code> instance.
 	 * 
-	 * @param umlClass the {@link UmlClass} adapted by this class
+	 * @param umlClass
+	 *            the {@link UmlClass} adapted by this class
 	 */
 	public UmlType(UmlClass umlClass) {
 		if (logger.isDebugEnabled()) {
@@ -85,7 +87,8 @@ public class UmlType extends AbstractType implements Type {
 	/**
 	 * Creates a new <code>UmlType</code> instance.
 	 * 
-	 * @param umlInterface the {@link Interface} adapted by this class
+	 * @param umlInterface
+	 *            the {@link Interface} adapted by this class
 	 */
 	public UmlType(Interface umlInterface) {
 		if (logger.isDebugEnabled()) {
@@ -100,7 +103,9 @@ public class UmlType extends AbstractType implements Type {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getName()
 	 */
 	@Override
@@ -108,72 +113,67 @@ public class UmlType extends AbstractType implements Type {
 		return classifier.getName();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getNamespace()
 	 */
 	@Override
 	public Namespace getNamespace() {
-		return UmlAdapterFactory.INSTANCE.createNamespace((Package)classifier.getNamespace());
+		return UmlAdapterFactory.INSTANCE.createNamespace((Package) classifier
+				.getNamespace());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedOperationImpl()
 	 */
 	@Override
 	protected List<Operation> getOwnedOperationImpl() {
 		List<Operation> ownedOperation = new ArrayList<Operation>();
-		
+
 		Iterator it = classifier.allOperations().iterator();
-		
-		while(it.hasNext()) {
-			ModelElement me = (ModelElement)it.next();
+
+		while (it.hasNext()) {
+			ModelElement me = (ModelElement) it.next();
 			if (me instanceof tudresden.ocl20.core.jmi.uml15.core.Operation)
-				ownedOperation.add(UmlAdapterFactory.INSTANCE.
-						createOperation((tudresden.ocl20.core.jmi.uml15.core.Operation)me));
+				ownedOperation
+						.add(UmlAdapterFactory.INSTANCE
+								.createOperation((tudresden.ocl20.core.jmi.uml15.core.Operation) me));
 		}
 		return ownedOperation;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
 	 */
 	@Override
 	protected List<Property> getOwnedPropertyImpl() {
 		List<Property> ownedProperty = new ArrayList<Property>();
-		
+
 		Iterator it = classifier.allAttributes().iterator();
-		
-		while(it.hasNext()) {
-			ModelElement me = (ModelElement)it.next();
+
+		while (it.hasNext()) {
+			ModelElement me = (ModelElement) it.next();
 			if (me instanceof tudresden.ocl20.core.jmi.uml15.core.Attribute)
-				ownedProperty.add(UmlAdapterFactory.INSTANCE.
-						createProperty((tudresden.ocl20.core.jmi.uml15.core.Attribute)me));
+				ownedProperty
+						.add(UmlAdapterFactory.INSTANCE
+								.createProperty((tudresden.ocl20.core.jmi.uml15.core.Attribute) me));
 			else
 				System.out.println("AttributeType: " + me.getClass());
 		}
 
-		Iterator ita = classifier.getNamespace().getOwnedElement().iterator();
-		
-		while(ita.hasNext()) {
-			ModelElement ass = (ModelElement)ita.next();
-			if (ass instanceof Association)
-			{
-				List<AssociationEnd> aeList = ((Association)ass).getConnection();
-								
-				if (aeList.get(0).getParticipant() == classifier)
-				{
-					ownedProperty.add(UmlAdapterFactory.INSTANCE.createProperty(aeList.get(1)));
-				}
-				else if (aeList.get(1).getParticipant() == classifier)
-				{
-					ownedProperty.add(UmlAdapterFactory.INSTANCE.createProperty(aeList.get(0)));
-				}
-			}
-		}
+		ownedProperty.addAll(collectAssociations(classifier.getNamespace()));
+
 		return ownedProperty;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getSuperTypeImpl()
 	 */
 	@Override
@@ -183,20 +183,63 @@ public class UmlType extends AbstractType implements Type {
 		}
 
 		List<Type> superType = new ArrayList<Type>();
-				
-		Iterator it = classifier.getGeneralization().iterator();
-		
-		while(it.hasNext()) {
-			Generalization gen = (Generalization)it.next();
-			if (gen.getParent() instanceof tudresden.ocl20.core.jmi.uml15.core.Classifier)
-				superType.add(UmlAdapterFactory.INSTANCE.
-						createType((tudresden.ocl20.core.jmi.uml15.core.Classifier)gen.getParent()));
+
+		Iterator<Generalization> it = classifier.getGeneralization().iterator();
+
+		while (it.hasNext()) {
+			Generalization gen = it.next();
+			if (gen.getParent() instanceof Classifier)
+				superType.add(UmlAdapterFactory.INSTANCE
+						.createType((Classifier) gen.getParent()));
+		}
+
+		Iterator<Abstraction> it2 = classifier.getClientDependency().iterator();
+
+		while (it2.hasNext()) {
+			Iterator<Interface> it3 = it2.next().getSupplier().iterator();
+			while (it3.hasNext())
+				superType
+						.add(UmlAdapterFactory.INSTANCE.createType(it3.next()));
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("getSuperTypeImpl() - exit - return value=" + superType);
+			logger.debug("getSuperTypeImpl() - exit - return value="
+					+ superType);
 		}
 		return superType;
 	}
 
+	private List<Property> collectAssociations(
+			tudresden.ocl20.core.jmi.uml15.core.Namespace namespace) {
+		List<Property> temp = new ArrayList<Property>();
+
+		Iterator<ModelElement> it = namespace.getOwnedElement().iterator();
+		while (it.hasNext()) {
+			ModelElement me = it.next();
+			if (me instanceof Association) {
+				List<AssociationEnd> aeList = ((Association) me)
+						.getConnection();
+
+				AssociationEnd ae1 = aeList.get(0);
+				AssociationEnd ae2 = aeList.get(1);
+
+				if (ae1 != null && ae2.isNavigable()
+						&& ae1.getParticipant() == classifier) {
+					temp.add(UmlAdapterFactory.INSTANCE.createProperty(aeList
+							.get(1)));
+				} else if (ae2 != null && ae1.isNavigable()
+						&& ae2.getParticipant() == classifier) {
+					temp.add(UmlAdapterFactory.INSTANCE.createProperty(aeList
+							.get(0)));
+				}
+			}
+		}
+
+		tudresden.ocl20.core.jmi.uml15.core.Namespace superNamespace = namespace
+				.getNamespace();
+		if (superNamespace != null && superNamespace != namespace)
+			temp.addAll(collectAssociations(superNamespace));
+
+		return temp;
+	}
 }

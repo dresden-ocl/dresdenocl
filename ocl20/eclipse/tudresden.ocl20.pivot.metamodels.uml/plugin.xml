@@ -7,7 +7,7 @@
             icon="icons/uml.gif"
             id="tudresden.ocl20.pivot.metamodels.uml"
             modelProvider="tudresden.ocl20.pivot.metamodels.uml.internal.provider.UmlModelProvider"
-            name="Uml">
+            name="UML 1.5">
       </metamodel>
    </extension>
 

@@ -34,6 +34,7 @@ import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 
+import tudresden.ocl20.core.jmi.uml15.core.Classifier;
 import tudresden.ocl20.core.jmi.uml15.core.DataType;
 import tudresden.ocl20.core.jmi.uml15.modelmanagement.Package;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -56,7 +57,7 @@ public class UmlPrimitiveType extends AbstractPrimitiveType implements Type {
 	private static final Logger logger = Logger.getLogger(UmlPrimitiveType.class);
 
 	// the adapted UML data type
-	private DataType dataType;
+	private Classifier dataType;
 	
 	// Strings representing integer types in UML
 	private static String[] integerNames = {"int", "short", "long", "byte"};
@@ -69,7 +70,7 @@ public class UmlPrimitiveType extends AbstractPrimitiveType implements Type {
 	 * 
 	 * @param dataType the {@link DataType} adapted by this class
 	 */
-	public UmlPrimitiveType(DataType dataType) {
+	public UmlPrimitiveType(Classifier dataType) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("UmlPrimitiveType(DataType dataType=" + dataType
 					+ ") - enter");
@@ -96,18 +97,6 @@ public class UmlPrimitiveType extends AbstractPrimitiveType implements Type {
 			return PrimitiveTypeKind.INTEGER;
 		else if (Arrays.asList(realNames).contains(kind))
 			return PrimitiveTypeKind.REAL;
-/*		if (kind.equals("int"))
-			return PrimitiveTypeKind.INTEGER;
-		else if (kind.equals("short"))
-			return PrimitiveTypeKind.INTEGER;
-		else if (kind.equals("long"))
-			return PrimitiveTypeKind.INTEGER;
-		else if (kind.equals("byte"))
-			return PrimitiveTypeKind.INTEGER;
-		else if (kind.equals("float"))
-			return PrimitiveTypeKind.REAL;
-		else if (kind.equals("double"))
-			return PrimitiveTypeKind.REAL;*/
 		else if (kind.equals("boolean"))
 			return PrimitiveTypeKind.BOOLEAN;
 		else if (kind.equals("String"))

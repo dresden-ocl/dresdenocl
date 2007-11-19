@@ -109,7 +109,7 @@ public class UmlEnumerationLiteral extends AbstractEnumerationLiteral implements
 			logger.debug("getName() - enter");
 		}
 
-		String returnString = this.getName();
+		String returnString = this.enumerationLiteral.getName();
 		if (logger.isDebugEnabled()) {
 			logger.debug("getName() - exit - return value=" + returnString);
 		}

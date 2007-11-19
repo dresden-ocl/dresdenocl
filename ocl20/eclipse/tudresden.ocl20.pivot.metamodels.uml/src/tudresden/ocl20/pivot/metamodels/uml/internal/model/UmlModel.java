@@ -44,6 +44,7 @@ import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
+import tudresden.ocl20.pivot.models.mdr.internal.provider.MdrModelInstanceProvider;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -100,12 +101,12 @@ public class UmlModel extends AbstractModel implements IModel {
 			logger.debug("getModelInstanceProvider() - enter");
 		}
 
-		// TODO Auto-generated method stub
+		IModelInstanceProvider imip = new MdrModelInstanceProvider(getDisplayName());
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getModelInstanceProvider() - exit - return value=" + null);
 		}
-		return null;
+		return imip;
 	}
 	
   /**

@@ -32,6 +32,8 @@ package tudresden.ocl20.pivot.metamodels.uml.internal.model;
 
 import org.apache.log4j.Logger;
 
+import tudresden.ocl20.core.jmi.uml15.datatypes.ParameterDirectionKindEnum;
+import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -125,4 +127,14 @@ public class UmlParameter extends AbstractParameter implements Parameter {
 		return returnType;
 	}
 
+	public ParameterDirectionKind getKind() {
+		if (parameter.getKind() == ParameterDirectionKindEnum.PDK_INOUT)
+			return ParameterDirectionKind.INOUT;
+		else if (parameter.getKind() == ParameterDirectionKindEnum.PDK_OUT)
+			return ParameterDirectionKind.OUT;
+		else if (parameter.getKind() == ParameterDirectionKindEnum.PDK_RETURN)
+			return ParameterDirectionKind.RETURN;
+		else
+			return ParameterDirectionKind.IN;
+	}
 }

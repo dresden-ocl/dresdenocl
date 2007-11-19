@@ -47,8 +47,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration;
 
 /**
- * An implementation of the Pivot Model {@link Type} concept for
- * UML metamodel in MDR.
+ * An implementation of the Pivot Model {@link Type} concept for UML metamodel
+ * in MDR.
  * 
  * @author Ronny Brandt
  * @version 1.0 09.05.2007
@@ -61,16 +61,17 @@ public class UmlEnumeration extends AbstractEnumeration implements Type {
 
 	// the adapted UML enumeration
 	private Enumeration enumeration;
-	
-  /**
-   * Creates a new <code>UmlEnumeration</code> instance.
-   * 
-   * @param enumeration the UML <code>Enumeration</code> adapted by this object
-   */
+
+	/**
+	 * Creates a new <code>UmlEnumeration</code> instance.
+	 * 
+	 * @param enumeration
+	 *            the UML <code>Enumeration</code> adapted by this object
+	 */
 	public UmlEnumeration(Enumeration enumeration) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("UmlEnumeration(Enumeration enumeration=" + enumeration
-					+ ") - enter");
+			logger.debug("UmlEnumeration(Enumeration enumeration="
+					+ enumeration + ") - enter");
 		}
 
 		this.enumeration = enumeration;
@@ -80,11 +81,11 @@ public class UmlEnumeration extends AbstractEnumeration implements Type {
 		}
 	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getName()
-   */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getName()
+	 */
 	@Override
 	public String getName() {
 		if (logger.isDebugEnabled()) {
@@ -98,11 +99,11 @@ public class UmlEnumeration extends AbstractEnumeration implements Type {
 		return returnString;
 	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getNamespace()
-   */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getNamespace()
+	 */
 	@Override
 	public Namespace getNamespace() {
 		if (logger.isDebugEnabled()) {
@@ -112,16 +113,17 @@ public class UmlEnumeration extends AbstractEnumeration implements Type {
 		Namespace returnNamespace = UmlAdapterFactory.INSTANCE
 				.createNamespace((Package) enumeration.getNamespace());
 		if (logger.isDebugEnabled()) {
-			logger.debug("getNamespace() - exit - return value=" + returnNamespace);
+			logger.debug("getNamespace() - exit - return value="
+					+ returnNamespace);
 		}
 		return returnNamespace;
 	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getOwnedLiteral()
-   */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getOwnedLiteral()
+	 */
 	@Override
 	public List<EnumerationLiteral> getOwnedLiteral() {
 		if (logger.isDebugEnabled()) {
@@ -129,18 +131,20 @@ public class UmlEnumeration extends AbstractEnumeration implements Type {
 		}
 
 		List<EnumerationLiteral> ownedLiteral = new ArrayList<EnumerationLiteral>();
-		
+
 		Iterator it = enumeration.getLiteral().iterator();
-		
-		while(it.hasNext()) {
-			ModelElement me = (ModelElement)it.next();
-			if (me instanceof tudresden.ocl20.core.jmi.uml15.core.Parameter)
-				ownedLiteral.add(UmlAdapterFactory.INSTANCE.
-						createEnumerationLiteral((tudresden.ocl20.core.jmi.uml15.core.EnumerationLiteral)me));
+
+		while (it.hasNext()) {
+			ModelElement me = (ModelElement) it.next();
+			if (me instanceof tudresden.ocl20.core.jmi.uml15.core.EnumerationLiteral)
+				ownedLiteral
+						.add(UmlAdapterFactory.INSTANCE
+								.createEnumerationLiteral((tudresden.ocl20.core.jmi.uml15.core.EnumerationLiteral) me));
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("getOwnedLiteral() - exit - return value=" + ownedLiteral);
+			logger.debug("getOwnedLiteral() - exit - return value="
+					+ ownedLiteral);
 		}
 		return ownedLiteral;
 	}
