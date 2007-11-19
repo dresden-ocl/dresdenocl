@@ -51,6 +51,7 @@ import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
+import tudresden.ocl20.pivot.models.ecore.internal.provider.EcoreModelInstanceProvider;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -92,8 +93,7 @@ public class EcoreModel extends AbstractModel implements IModel {
    * @see tudresden.ocl20.pivot.modelbus.IModel#getModelInstanceProvider()
    */
   public IModelInstanceProvider getModelInstanceProvider() {
-    // TODO: implement model instance provider
-    return null;
+	  return new EcoreModelInstanceProvider(resource);
   }
 
   /**
