@@ -2,5 +2,6 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension-point id="metamodels" name="Metamodels" schema="schema/metamodels.exsd"/>
+   <extension-point id="models" name="Models" schema="schema/models.exsd"/>
 
 </plugin>
