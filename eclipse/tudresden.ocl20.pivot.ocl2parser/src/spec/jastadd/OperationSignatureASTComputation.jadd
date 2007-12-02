@@ -1,0 +1,50 @@
+/*
+    Copyright (C) 2007  Nils (s0006383@inf.tu-dresden.de)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+public aspect OperationSignatureASMComputation {
+	/*
+	 * OCL-Specification:
+	 * 
+	 * [A] operationCS ::= pathNameCS '::' simpleNameCS '(' parameterCS? ')' ':' typeCS?
+	 * [B] operationCS ::= simpleNameCS '(' parameterCS? ')' ':' typeCS?
+	 * 
+	 * Notice:
+	 * This method compute not the whole operation as in the grammar rule. The OperationSignatureContainer
+	 * contains only the parameters and the return value of an operation.
+	 */
+	public OperationSignatureContainer OperationSignatureAS.computeASM(Environment env) throws BuildingASMException {
+		// Transforms the list of variable as elements into a list of variables.
+		int numberVariable = getNumVariableAS();
+		java.util.List variableList = new ArrayList();
+		for(int i = 0; i < numberVariable; i++) {
+			Variable var = getVariableAS(i).computeASM(env);
+			variableList.add(var);
+		}
+		
+		
+		Type resultType = null;
+		
+		// If the operation signature has a type then compute this type.
+		if (hasType()) {
+			resultType = getType().computeASM(env);
+		}
+		
+		// Create a new operation signature container.
+		OperationSignatureContainer container = new OperationSignatureContainer(variableList, resultType);
+		return container;
+	}
+}

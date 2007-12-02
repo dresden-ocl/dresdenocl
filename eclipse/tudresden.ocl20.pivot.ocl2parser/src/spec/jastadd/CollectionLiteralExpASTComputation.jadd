@@ -1,0 +1,142 @@
+/*
+    Copyright (C) 2007  Nils (s0006383@inf.tu-dresden.de)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+public aspect CollectionLiteralExpASMComputation {
+	/*
+	 * OCL-Specification:
+	 * 
+	 * CollectionLiteral ::= CollectionTypeIdentifierCS '{' CollectionLiteralPartsCS? '}'
+	 */
+	public CollectionLiteralExp CollectionLiteralExpAS.computeASM(Environment env) throws BuildingASMException {
+		// Get the expression factory
+		IModelFactory factory = env.getExpFactory();
+		
+		// Get the name token of the collection literal expression. The name is the type of the expression
+		// (Bag, Set, OrderedSet, ...)
+		TokenAS name = getName();
+		
+		// The typ 'Collection' is not allowed to use, because the type 'Collection'
+		// is an abstract super type. (OCL Spec., page 67, Disambiguating rule 1).
+		if (name.getValue().equals("Collection")) throw new BuildingASMException("A collection literal" +
+				" expression is not allowed to be built with the super typ \' Collection \'", name);
+		
+	// Transform the string name into the enumeration element.
+	CollectionKind collectionKind = CollectionKind.getByName(name.getValue());
+	
+	// If no enumeration element with this type exists, it is an error. Normally the grammar cares
+	// about this, but we are careful.
+	if (collectionKind == null) throw new BuildingASMException("The collection type is undefined.", name);
+	
+	// Create a list of CollectionLiteralPart instances.
+	java.util.List partList = new ArrayList();
+	
+	// Get the number of collection literal parts
+	int numberParts = getNumCollectionLiteralPartAS();
+	
+	// Iterate over all collection literal parts and compute their corresponding
+	// type of the essential ocl.
+	for(int i = 0; i < numberParts; i++) {
+		CollectionLiteralPart part = getCollectionLiteralPartAS(i).computeASM(env);
+		
+		// Add the collection literal part to the list.
+		partList.add(part);
+	}
+	
+	// Create an array that is big enough to hold all collection literal parts.
+	CollectionLiteralPart parts[] = new CollectionLiteralPart[numberParts];
+	
+	// Transform the list into the array.
+	parts = (CollectionLiteralPart[])partList.toArray(parts);
+	
+	// Create a new CollectionLiteralExp with the collection kind and collection
+	// literal part array computed so far.
+	CollectionLiteralExp expression = null;
+	try {
+		expression = factory.createCollectionLiteralExp(collectionKind, parts);
+	}
+	catch(Throwable th) {
+		String message = th.getMessage();
+		message = message + " The collection literal expression couldn't be built. It is an internal error";
+		throw new BuildingASMException(message, null);
+	}
+	return expression;
+	
+	}
+	
+	
+	/*
+	 * OCL-Specification:
+	 * 
+	 * [A] CollectionLiteralPartCS ::= CollectionRangeCS
+	 * [B] CollectionLiteralPartCS ::= OclExpressionCS
+	 */
+	abstract public CollectionLiteralPart CollectionLiteralPartAS.computeASM(Environment env) throws BuildingASMException;
+	
+	/*
+	 * OCL-Specification:
+	 * 
+	 * CollectionRange ::= OclExpressionCS[1] "," OclExpressionCS[2]
+	 * 
+	 * Note that in the ocl-specification is an error. The delimiter between the ocl-expression must be '..'.
+	 */
+	public CollectionRange CollectionRangeAS.computeASM(Environment env) throws BuildingASMException {
+		// Get the expression factory.
+		IModelFactory factory = env.getExpFactory();
+		
+		// Transform the first expression abstract syntax element into corresponding essential ocl element
+		OclExpression leftExpression = getFirst().computeASM(env);
+
+		// Transform the last expression abstract syntax element into corresponding essential ocl element
+		OclExpression rightExpression = getLast().computeASM(env);
+		
+		// Create a new collection range element of the essential ocl.
+		CollectionRange collectionRange = null;
+		try {
+			collectionRange = factory.createCollectionRange(leftExpression, rightExpression); 
+		}
+		catch(Throwable th) {
+			String message = th.getMessage() + " The collection range couldn't be built. It is an internal error.";
+			throw new BuildingASMException(message, null);
+		}
+		
+		return collectionRange;
+	}
+	
+	/*
+	 * OCL-Specification:
+	 * [B] CollectionLiteralPartCS ::= OclExpressionCS
+	 */
+	public CollectionItem CollectionItemAS.computeASM(Environment env) throws BuildingASMException {
+		// Get the expression factory.
+		IModelFactory factory = env.getExpFactory();
+		
+		// Transform the ocl expression of this collection item as element into
+		// the coressponding ocl expression of the essential ocl.
+		OclExpression expression = getItem().computeASM(env);
+		
+		// Creates a new collection item with the computed expression.
+		CollectionItem item = null;
+		try {
+			item = factory.createCollectionItem(expression); 
+		}
+		catch(Throwable th) {
+			String message = th.getMessage() + " The collection item couldn't be built. It is an internal error.";
+			throw new BuildingASMException(message, null);
+		}
+		return item;
+	}
+}

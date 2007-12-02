@@ -1,0 +1,136 @@
+/*
+    Copyright (C) 2007  Nils (s0006383@inf.tu-dresden.de)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
+/**
+ * This aspect weaves methods into the as-classes of the ocl2 parser. These classes computes
+ * an error token for an ocl expression. The error token is the first token that is found in
+ * an ocl expression. This method is useful if no error token is reachable from an as-class.
+ */
+public aspect ErrorTokenComputation {
+	abstract public TokenAS OclExpressionAS.computeErrorToken() throws ErrorTokenComputationException;
+	
+	abstract public TokenAS LiteralExpAS.computeErrorToken() throws ErrorTokenComputationException;
+	
+	public TokenAS TupleLiteralExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		int numberParts = getNumParts();
+		if (numberParts > 0) return getParts(0).computeErrorToken();
+		
+		throw new ErrorTokenComputationException("A TupleLiteralExpression has no parts.");
+	}
+	
+	public TokenAS TupleLiteralPartAS.computeErrorToken()  throws ErrorTokenComputationException{
+		return getVariable().computeErrorToken();
+	}
+	
+	public TokenAS CollectionLiteralExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		return getName();
+	}
+	
+	abstract public TokenAS PrimitiveLiteralExpAS.computeErrorToken()  throws ErrorTokenComputationException;
+	
+	public TokenAS BooleanLiteralExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		return getValue();
+	}
+	
+	public TokenAS StringLiteralExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		return getValue();
+	}
+	
+	abstract public TokenAS NumericalLiteralExpAS.computeErrorToken()  throws ErrorTokenComputationException;
+	
+	public TokenAS IntegerLiteralExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		return getValue();
+	}
+	
+	public TokenAS RealLiteralExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		return getValue();
+	}
+	
+	public TokenAS LetExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		int numberVariable = getNumVariable();
+		if (numberVariable > 0) return getVariable(0).computeErrorToken();
+		
+		return getIn().computeErrorToken();
+	}
+	
+	public TokenAS IfExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		return getCondition().computeErrorToken();
+	}
+	
+	abstract public TokenAS CallExpAS.computeErrorToken()  throws ErrorTokenComputationException ;
+	abstract public TokenAS LoopExpAS.computeErrorToken() throws ErrorTokenComputationException ;
+	
+	public TokenAS IterateExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		if (hasSource()) return getSource().computeErrorToken();
+		
+		if (hasIterator()) return getIterator().computeErrorToken();
+		
+		return getResult().computeErrorToken();
+	}
+	
+	public TokenAS IteratorExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		if (hasSource()) return getSource().computeErrorToken();
+		
+		int numberIterator = getNumIterators();
+		if (numberIterator > 0) return getIterators(0).computeErrorToken();
+		
+		return getOperation();
+	}
+	
+	abstract public TokenAS FeatureCallExpAS.computeErrorToken()  throws ErrorTokenComputationException ;
+	
+	public TokenAS OperationCallExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		if (hasSource()) return getSource().computeErrorToken();
+		
+		return getName().computeErrorToken();
+	}
+	
+	public TokenAS PropertyCallExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		if (hasSource()) return getSource().computeErrorToken();
+		
+		return getPathName().computeErrorToken();
+	}
+	
+	public TokenAS VariableExpAS.computeErrorToken()  throws ErrorTokenComputationException {
+		return getVariable().computeErrorToken();
+	}
+	
+	public TokenAS VariableAS.computeErrorToken()  throws ErrorTokenComputationException {
+		return getName();
+	}
+	
+	abstract public TokenAS TypeAS.computeErrorToken()  throws ErrorTokenComputationException;
+	
+	public TokenAS PathNameAS.computeErrorToken()  throws ErrorTokenComputationException {
+		int numberNames = getNumTokenAS();
+		if (numberNames > 0) return getTokenAS(0);
+		
+		throw new ErrorTokenComputationException("A path name has no element.");
+	}
+	
+	public TokenAS TupleTypeAS.computeErrorToken()  throws ErrorTokenComputationException {
+		int numberVariable = getNumVariableAS();
+		if (numberVariable > 0) return getVariableAS(0).computeErrorToken();
+		
+		throw new ErrorTokenComputationException("A TupleType has no variable.");
+	}
+	
+	public TokenAS CollectionTypeAS.computeErrorToken()  throws ErrorTokenComputationException {
+		return getName();
+	}
+}

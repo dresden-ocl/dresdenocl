@@ -1,0 +1,41 @@
+/*
+    Copyright (C) 2007  Nils (s0006383@inf.tu-dresden.de)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
+/**
+ * This aspect weaves one method into the IfExpAS-class to compute an IfExp-instance
+ * of essential ocl.
+ */
+public aspect IfExpASMComputation {
+	/*
+	 * OCL-Specification:
+	 * 
+	 * IfExpCS ::= 'if' OclExpression[1] 'then' OclExpression[2] 'else' OclExpression[3] 'endif'
+	 * 
+	 * Meaning:
+	 * This method is very simple. It calls the compute-methods of the children and
+	 * assemble all parts to a IfExp-instance.
+	 */
+	public IfExp IfExpAS.computeASM(Environment env) throws BuildingASMException {
+		IModelFactory factory = env.getExpFactory();
+		OclExpression condition = this.getCondition().computeASM(env);
+		OclExpression thenExpression = this.getThenExpression().computeASM(env);
+		OclExpression elseExpression = this.getElseExpression().computeASM(env);
+		
+		return factory.createIfExp(condition, thenExpression, elseExpression);
+	}
+}
