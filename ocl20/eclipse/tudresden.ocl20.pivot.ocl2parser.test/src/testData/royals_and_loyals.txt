@@ -1,0 +1,29 @@
+Royals and Loyals 
+================= 
+
+This is the famous "Royals and Loyals" example. It is based on the
+model published on page 22 in [1]. The constraints are partly based on
+the constraints from the book, partly on the constraints that were
+developed for the corresponding example of the Octopus distribution
+[2] and some are were also developed by our own.
+
+The example exists out of three files:
+- royals_and_loyals.txt:   This text file.
+- royals_and_loyals.zargo: The model in ArgoUML [3] format. You need 
+                           at least version 0.20.alpha1 of ArgoUML. 
+                           This file can directly be used together 
+ 			   with the OCL parser GUI and CLI, i.e. you 
+			   do not need to export an XMI file..
+- royals_and_loyals.ocl:   The OCL specification of "Royals and
+                           Loyals". The specification as whole is not 
+                           meaningful (i.e. it is inconsistent), but it
+                           shows many different OCL constraints.
+References
+==========
+[1] J. Warmer and A. Kleppke, The Object Constraint Language ---
+    Getting Your Models Ready for MDA, 2nd edition. Addison-Wesley,
+    2003
+[2] Octopus: http://www.klasse.nl/english/research/octopus-intro.html
+[3] ArgoUML: http://argouml.tigris.org/ A recent developer release
+    of the upcoming 0.20 version is available at:
+    http://argouml.tigris.org/download/release020a4.html

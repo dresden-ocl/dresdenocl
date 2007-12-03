@@ -1,0 +1,3 @@
+- Schlüsselwort "Tuple" wurde noch nicht getestet 
+
+- wenn ein statisches Attribut aufgerufen wird, darf dahinter kein @pre stehen. Diese Prüfung wurde noch nicht durchgeführt.

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="tudresden.ocl20.pivot.ocl2parser.test.ExtensionPoint"
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            description="This is the menu bar button for the ocl2 parser test."
+            id="tudresden.ocl20.pivot.ocl2parser.test.ocl2parserTest"
+            label="OCL2 Parser Test"
+            visible="true">
+            
+            <action
+               class="tudresden.ocl20.pivot.ocl2parser.test.TestDelegate"
+               id="tudresden.ocl20.pivot.ocl2parser.test.Test"
+               label="OCL2Parser Test"
+               style="push"
+               toolbarPath="tests">
+         	</action>
+      </actionSet>
+   </extension>
+
+</plugin>

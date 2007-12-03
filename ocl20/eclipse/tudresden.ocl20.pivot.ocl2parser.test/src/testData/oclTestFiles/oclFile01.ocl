@@ -1,0 +1,12 @@
+----------------------------------------------------------------------
+-- Burning
+----------------------------------------------------------------------
+package RoyalLoyal 
+  context Burning 
+    inv: self.oclIsKindOf(Transaction) = true 
+    inv: self.oclIsTypeOf(Transaction) = false 
+    inv: self.oclIsTypeOf(Burning) = true 
+    inv: self.oclIsKindOf(Burning) = true 
+    inv: self.oclIsTypeOf(Earning) = false 
+    inv: self.oclIsKindOf(Earning) = false
+endpackage

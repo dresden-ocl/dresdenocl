@@ -1,0 +1,33 @@
+--
+----------------------------------------------------------------------
+-- ServiceLevel
+----------------------------------------------------------------------
+package RoyalLoyal
+
+context ServiceLevel 
+ inv: program.partners ->isEmpty()
+-- [AstGen]  inv: Set { Set { 1, 2 }, Set { 2, 3 }, Set { 14, 5, 6 } } ->isEmpty()
+   inv: Set { 1, 2, 3, 4, 5, 6 } ->isEmpty()
+-- [AstGen]  inv: Bag { Set { 1, 2 }, Set { 1, 2 }, Set { 4, 5, 6 } } ->isEmpty()
+   inv:  Bag { 1, 1, 2, 2, 4, 5, 6 } ->isEmpty()
+-- [AstGen]  inv: Sequence { Set { 1, 2 }, Set { 2, 3 }, Set { 4, 5, 6 } } ->isEmpty()
+   inv: Sequence { 2, 1, 2, 3, 5, 6, 4 } ->isEmpty()
+   inv: Set{1,4,7,10} - Set{4,7} = Set{1,10} 
+   inv: Set{1,4,7,10}->symmetricDifference(Set{4,5,7}) = Set{1,5,10} 
+   inv: Sequence{'a','b','c','c','d','e'}->first() = 'a' 
+   inv: Sequence{'a','b','c','c','d','e'}->at( 3 ) = 'c' 
+   inv: Sequence{'a','b','c','c','d','e'}->indexOf( 'c' ) = 3 
+   inv: Sequence{'a','b','c','c','d','e'}->subSequence( 3, 5 ) = 
+ 	Sequence{'c','c','d'} 
+   inv: Sequence{'a','b','c','c','d','e'}->append( 'X' ) = 
+ 			Sequence{'a','b','c','c','d','e','X'} 
+   inv: Sequence{'a','b','c','c','d','e'}->prepend( 'X' ) = 
+ 			Sequence{'X','a','b','c','c','d','e'}
+
+/*inv: OrderedSet{12,9,6,3} - Set{1,3,2} = OrderedSet{12,9,6}*/ 
+inv: OrderedSet{'a','b','c','d'}->last() = 'd' 
+inv: OrderedSet{'a','b','c','d'}->insertAt( 3, 'X' ) = 
+  	 OrderedSet{'a','b','X','c','d'} 
+inv: OrderedSet{'a','b','c','d'}->subOrderedSet( 2, 3 ) = 
+     OrderedSet{'b','c'} 
+endpackage
