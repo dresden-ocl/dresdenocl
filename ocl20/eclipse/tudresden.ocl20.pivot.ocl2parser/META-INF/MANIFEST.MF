@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ocl2parser
+Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2parser
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: tudresden.ocl20.pivot.essentialocl,
+ tudresden.ocl20.pivot.modelbus
+Bundle-Vendor: TU Dresden, Software Technology Group
+Export-Package: tudresden.ocl20.pivot.ocl2parser.parser,
+ tudresden.ocl20.pivot.ocl2parser.parser.exceptions

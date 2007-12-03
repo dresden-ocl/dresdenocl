@@ -1,0 +1,296 @@
+/*
+    Copyright (C) 2007  Nils (s0006383@inf.tu-dresden.de)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+public aspect ContextASMComputation {
+	abstract public java.util.List ContextAS.computeASM(Environment env) throws BuildingASMException;
+	protected TokenAS ContextAS.token = null;
+	protected int ContextAS.numberNames = 0;
+	
+	protected java.util.List ContextAS.computePathNameList() throws BuildingASMException {
+		/* If the path name of the context has no element, it is an error. The grammar assures that this never
+		 * happens, but it is saver if we examine this here nevertheless.
+		 */
+		if (getName().getNumTokenAS() == 0) throw new BuildingASMException("The path name must not be empty.", null);
+		
+		// Get the error token.
+		token = getName().getTokenAS(0);
+		
+		// Transform the list of token-as elements into a list of strings.
+		numberNames = getName().getNumTokenAS();
+		java.util.List pathNameList = new ArrayList();
+		for(int i = 0; i < numberNames; i++) {
+			pathNameList.add(getName().getTokenAS(i).getValue());
+		}
+		
+		return pathNameList;
+	}
+	
+	/*
+	 * OCL-Specification:
+	 * 
+	 * classifierContextDeclCS ::= 'context' pathNameCS invOrDefCS
+	 * 
+	 * [B] invOrDefCS[1] ::= 'def' (simpleNameCS)? ':' defExpressionCS invOrDefCS[2]
+	 * 
+	 * [B] defExpression ::= operationCS '=' OclExpression
+	 * 
+	 * Meaning:
+	 * This rule represents the 'context' clause. The method returns a list of constraints. Each
+	 * constraint is represented by the elements after the 'context' keyword, for example 'body', 'pre'
+	 * etc.
+	 * This method add the self-variable to the environment.
+	 */
+	public java.util.List ClassifierContextAS.computeASM(Environment env) throws BuildingASMException {
+		// Get the current namespace from the environment.
+		Namespace nm = env.getNamespace();
+		
+		
+		java.util.List pathNameList = computePathNameList();
+		
+		// Try to get the classifier type.
+		Type classifierType = null;
+		
+		// If the path name has only one element then this element must be the type that is contained by the namespace.
+		if (pathNameList.size() == 1) {
+			classifierType = nm.lookupType((String)pathNameList.get(0));
+			
+		}
+		else {// The path name has more than one element.
+			// The path name denotes a full qualified name. So lookup in the environment for that type.
+			classifierType = env.lookupType(pathNameList);
+		}
+		
+		// If no corresponding type to the path name, it is an error.
+		if (classifierType == null) throw new BuildingASMException("The type doesn't exists in the declared namespace.", token);
+		
+		// We must create a new nested environment to hide the added self variable from the other contexts.
+		Environment nestedEnv = env.nestedEnvironment();
+		
+		// The type that was found, becomes the self variable in the environment.
+		nestedEnv.setSelf(classifierType);
+		nestedEnv.setContext(classifierType);
+		
+		// Create a new self variable and add it to the environment.
+		Variable selfVariable = nestedEnv.getExpFactory().createVariable("self", classifierType, null);
+		nestedEnv.addImplicitVariable(selfVariable);
+		
+		/* Iterate over all classifier constraints and compute their corresponding constraint type (essential ocl).
+		 * Add the computed constraint to the constraint list.
+		 */
+		int numberConstraint = getNumClassifierConstraintAS();
+		java.util.List constraintList = new ArrayList();
+		for(int i = 0; i < numberConstraint; i++) {
+			Constraint constraint = getClassifierConstraintAS(i).computeASM(nestedEnv);
+			constraintList.add(constraint);
+		}
+		
+		return constraintList;
+	}
+	
+	/*
+	 * OCL-Specification:
+	 * operationContextDeclCS ::= 'context' operationCS prePostOrBodyDeclCS
+	 * 
+	 * Meaning:
+	 * This method computes a list of operation constraints. The operation constraint refers
+	 * to an operation. In this method the variables result and self will be created and they
+	 * are put into the environment for further computation.
+	 */
+	public java.util.List OperationContextAS.computeASM(Environment env) throws BuildingASMException {
+		// Get the current namespace.
+		Namespace nm = env.getNamespace();
+		
+		// Get the path name as list.
+		java.util.List pathNameList = computePathNameList();
+				
+		// Compute an operation signature container with the parameter and the result type.
+		OperationSignatureContainer signature = getOperationSignatureAS().computeASM(env);
+		
+		// Transforms the list of variables of the operation signature into a list of types.
+		java.util.List parameterTypeList = new ArrayList();
+		Iterator it = signature.getParameterList().iterator();
+		while(it.hasNext()) {
+			Variable var = (Variable) it.next();
+			parameterTypeList.add(var.getType());
+		}
+		
+		// Lookup for the type and the operation.
+		Type classifierType = null;
+		Operation operation = null;
+		
+		/* The path name has exactly two arguments. So the assumption is, that the first
+		 * element is a type and the second is the operation.
+		 */
+		if (pathNameList.size() == 2) {
+			// Look up for the type with the namespace.
+			classifierType = nm.lookupType((String)pathNameList.get(0));
+		}
+		else { /* The path name has more then two elements.
+		The assumption is here, that the first elements are a fully qualified type name and
+		the last element is the operation name. */
+		
+			// Get the first elements, that refer to the type.
+			java.util.List typePathName = pathNameList.subList(0, pathNameList.size());
+			// Lookup the type in the environment, that searches also in the model.
+			classifierType = env.lookupType(typePathName);
+		}
+		
+		// If no type is found with the given name, it is an error.
+		if (classifierType == null) throw new BuildingASMException("The type doesn't exists in the namespace.", token);
+		
+		// Get the last element of the path name. Our assumption was that is the operation name.
+		String operationName = (String)pathNameList.get(pathNameList.size()-1);
+		
+		// Look up this operation name in the type.
+		operation = classifierType.lookupOperation(operationName, parameterTypeList);
+		
+		// If the operation is not found, it is an error.
+		if (operation == null) throw new BuildingASMException("The operation doesn't exists.", token);
+		
+		/* The operation exists, but the user can specify a return type. If so it must be conform to the
+		 * type of the model operation.
+		 */
+		if (signature.getResultType() != null) {
+			// Get the result type of the operation (from the user)
+			Type signatureResultType = signature.getResultType();
+			
+			/* Examine whether this type conforms to the type of the model operation.
+			 * Denote that the method conformsTo examine also the super types. So the user can
+			 * specify a sub type rather then the original type of the model operation.
+			 */
+			if (!signatureResultType.conformsTo(operation.getType())) throw new BuildingASMException("The result" +
+					" type of the operation conforms not to the result type of the model operation.", token);
+		}
+		
+		// We must create a new nested environment to hide the self variable from the other contexts.
+		Environment nestedEnv = env.nestedEnvironment();
+		
+		// Set the self attribute in the environment with the classifier type.
+		nestedEnv.setSelf(classifierType);
+		
+		// Set the context of the environment.
+		nestedEnv.setContext(operation);
+		
+		/* Because the user can use the parameters of the operation in the body expression, we must
+		 * add these variable to the environment as implicit variables. So if the variable is used
+		 * we can take the right variable.
+		 */
+		Iterator it2 = signature.getParameterList().iterator();
+		while(it2.hasNext()) {
+			nestedEnv.addImplicitVariable((Variable) it2.next());
+		}
+			
+		// Create a new result variable and add it to the environment.
+		Variable resultVariable = nestedEnv.getExpFactory().createVariable("result", operation.getReturnParameter().getType(), null);
+		nestedEnv.addImplicitVariable(resultVariable);
+		
+		// Creates a new self variable and add it to the environment.
+		Variable selfVariable = nestedEnv.getExpFactory().createVariable("self", classifierType, null);
+		nestedEnv.addImplicitVariable(selfVariable);
+		
+		// Iterate over all operation constraint as elements and compute the constraint and add it all to a list.
+		int numberConstraint = getNumOperationConstraintAS();
+		java.util.List constraintList = new ArrayList();
+		for(int i = 0; i < numberConstraint; i++) {
+			Constraint constraint = getOperationConstraintAS(i).computeASM(nestedEnv);
+			constraintList.add(constraint);
+		}
+		
+		return constraintList;
+	}
+	
+	/*
+	 * OCL-Specification:
+	 * 
+	 * attrOrAssocContextDeclCS ::= 'context' pathNameCS '::' simpleName ':' typeCS initOrDerValueCS
+	 * 
+	 * Meaning:
+	 * This method computes a list of constraints. These constraints refers to attributes (or property in the
+	 * terms of the pivotmodell, respectively) or associations (but associations are properties in the
+	 * pivotmodel). This method will create the self variable and add this to the environment for
+	 * further computation.
+	 */
+	public java.util.List AttrOrAssocContextAS.computeASM(Environment env) throws BuildingASMException {
+		// Get the current namespace.
+		Namespace nm = env.getNamespace();
+		
+		// Get the path name as list.
+		java.util.List pathNameList = computePathNameList();
+		
+		// If the path name has exactly one element, it can't denote a property, so it is an error.
+		if (numberNames == 1) throw new BuildingASMException("The path name must denotes a property but it has only one element.", token);
+		
+		
+		Type classifierType = null;
+		
+		/* If the path name has two elements, our assumption is as follows: the first element denotes a type and the
+		 * denotes the property.
+		 */
+		if (numberNames == 2) {
+			// Get the first element, that denotes a type.
+			String typeName = (String) pathNameList.get(0);
+			
+			// Look for this type name in the namespace.
+			classifierType = nm.lookupType(typeName);
+		}
+		else { /* If the path name has more then two elements, our assumption is as follows:
+				the first part of the path name is fully qualified name of the type and the last
+				element is the property name.*/
+			
+			// Lookup for the type name with the environment.
+			classifierType = env.lookupType(pathNameList.subList(0, pathNameList.size()));
+		}
+		
+		// If no type is found, it is an error.
+		if (classifierType == null) throw new BuildingASMException("The path name references a type that doesn't exists.", token);
+		
+		// Get the propery name of the path name list (it is the last element).
+		String propertyName = (String) pathNameList.get(pathNameList.size()-1);
+		
+		// Lookup up for the property in the type.
+		Property property = classifierType.lookupProperty(propertyName);
+		
+		// If the property doesn't exists, it is an error.
+		if (property == null) throw new BuildingASMException("The property doesn't exists.", token);
+		
+		// We must create a new nested environment to hide the self variable from the other contexts.
+		Environment nestedEnv = env.nestedEnvironment();
+		
+		
+		// Set the self of the environment.
+		nestedEnv.setSelf(classifierType);
+		
+		// Set the context of the environment.
+		nestedEnv.setContext(property);
+		
+		// Creates a new self variable, add it to the environment.
+		Variable selfVariable = nestedEnv.getExpFactory().createVariable("self", classifierType, null);
+		nestedEnv.addImplicitVariable(selfVariable);
+		
+		/* Iterate over all attibute or associations constraint and compute their counterpart in the essenatial ocl.
+		 * Put the computed elements into a list.
+		 */
+		int numberConstraint = getNumAttrOrAssocConstraintAS();
+		java.util.List constraintList = new ArrayList();
+		for(int i = 0; i < numberConstraint; i++) {
+			Constraint constraint = getAttrOrAssocConstraintAS(i).computeASM(nestedEnv);
+			constraintList.add(constraint);
+		}
+		
+		return constraintList;
+	}
+}
