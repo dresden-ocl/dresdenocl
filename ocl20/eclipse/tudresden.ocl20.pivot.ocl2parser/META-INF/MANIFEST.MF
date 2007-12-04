@@ -7,5 +7,18 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.modelbus, tudresden.ocl20.pivot.pivotmodel
 Bundle-Vendor: TU Dresden, Software Technology Group
-Export-Package: tudresden.ocl20.pivot.ocl2parser.parser,
+Export-Package: org.sablecc.sablecc,
+ org.sablecc.sablecc.analysis,
+ org.sablecc.sablecc.lexer,
+ org.sablecc.sablecc.node,
+ org.sablecc.sablecc.parser,
+ tudresden.ocl20.pivot.ocl2parser.gen.ocl2as,
+ tudresden.ocl20.pivot.ocl2parser.gen.parserfiles.analysis,
+ tudresden.ocl20.pivot.ocl2parser.gen.parserfiles.lexer,
+ tudresden.ocl20.pivot.ocl2parser.gen.parserfiles.node,
+ tudresden.ocl20.pivot.ocl2parser.gen.parserfiles.parser,
+ tudresden.ocl20.pivot.ocl2parser.internal;x-internal:=true,
+ tudresden.ocl20.pivot.ocl2parser.internal.exception;x-internal:=true,
+ tudresden.ocl20.pivot.ocl2parser.ocl2Transformer,
+ tudresden.ocl20.pivot.ocl2parser.parser,
  tudresden.ocl20.pivot.ocl2parser.parser.exceptions
