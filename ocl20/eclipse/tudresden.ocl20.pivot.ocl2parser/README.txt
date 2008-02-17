@@ -48,3 +48,7 @@ on the "build.xml" and choose "Run -> Ant Build ...". In
 the opening dialog choose the card rider "JRE" and
 choose the option "Run in the same JRE as the workspace".
 After that try to run the target "build" again.
+
+If an error occurs while executing the parser then
+try to build the project with Java1.6 compliance and
+rebuild it.
