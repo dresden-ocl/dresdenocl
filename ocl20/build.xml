@@ -182,6 +182,12 @@
 			</fileset>
 		</path>
 
+		<!-- Some locations needed to compile, pack and execute the jUnit test suite. -->
+		<property name="dir.test" value="${basedir}/src/tudresden/ocl20/tests" />
+		<property name="dir.testresults" value="${basedir}/testresults" />
+		<property name="jar.libs.junit4" value="${dir.software}/junit-4.4.jar" />
+		<property name="jar.libs.test" value="${objdir.libs}/ocl20testsuite.jar" />
+		<property name="jar.libs.testrsrc" value="${objdir.libs}/ocl20testrsrc.jar" />
 
 	</target>
 
@@ -1556,4 +1562,63 @@ More info goes here.
 			  destfile="${objdir.eclipse.toolkit}/release/dresden-ocl2-eclipse.tar.gz"/>
 		<delete file="${objdir.eclipse.toolkit}/release/dresden-ocl2-eclipse.tar"/>
 	</target>
+	
+	<!-- Compiles the jUnit Test Suite of the Dresden OCL2 Toolkit. -->
+	<target name="compile.test" depends="init" description="Compiles the jUnit Test Suite of the Dresden OCL2 Toolkit.">
+		<delete verbose="true" includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${objdir.generic}/tudresden/ocl20/tests">
+				<include name="**/*.class" />
+			</fileset>
+		</delete>
+		<mkdir dir="${objdir.generic}" />
+		<javac srcdir="${srcdir.generic}" destdir="${objdir.generic}" deprecation="true" debug="true" debuglevel="lines,vars,source">
+			<include name="tudresden/ocl20/tests/*.java" />
+			<exclude name="**.html" />
+			<classpath>
+				<path refid="libs.basic" />
+				<path refid="libs.mdr" />
+				<path refid="libs.jmi.ocl20" />
+				<pathelement location="${jar.libs.stringTemplate}" />
+				<pathelement location="${jar.libs.parsertools}" />
+				<pathelement location="${jar.libs.junit4}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- Packs the jUnit Test Suite binaries of the Dresden OCL2 Toolkit into a jar archive. -->
+	<target name="jar.test" depends="compile.test" description="Packs the jUnit Test Suite into a jar file">
+		<mkdir dir="${objdir.generic}" />
+		<jar basedir="${objdir.generic}" destfile="${jar.libs.test}">
+			<include name="tudresden/ocl20/tests/**/*.class" />
+		</jar>
+	</target>
+
+	<!-- Runs the jUnit Test Suite of the Dresden OCL2 Toolkit. -->
+	<target name="test" depends="compile.test" description="Runs the jUnit Test Suite of the Dresden OCL2 Toolkit.">
+		<mkdir dir="${dir.testresults}" />
+		<junit fork="yes" errorproperty="test.failed" failureproperty="test.failed">
+			<classpath>
+				<pathelement location="${jar.libs.junit4}" />
+				<pathelement location="${objdir.generic}" />
+				<pathelement location="${dir.resources}" />
+				<pathelement location="${jar.libs.antlr}" />
+				<pathelement location="${jar.libs.stringTemplate}" />
+				<path refid="libs.basic" />
+				<path refid="libs.mdr" />
+			    <path refid="libs.jmi.ocl20" />
+			</classpath>
+			<formatter type="brief" usefile="no" />
+			<formatter type="xml" />
+			<!-- Execute the test suite and save report. -->
+			<batchtest todir="${dir.testresults}">
+				<fileset dir="${objdir.generic}" includes="tudresden/ocl20/tests/AllTests.class" />
+			</batchtest>
+		</junit>
+	    <!-- Report the test results as XML and XHTML files. -->
+		<junitreport todir="${dir.testresults}">
+			<report todir="${dir.testresults}" format="noframes" />
+			<fileset dir="${dir.testresults}" includes="TEST-*.xml" />
+		</junitreport>
+	</target>
+
 </project>
