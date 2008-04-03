@@ -470,4 +470,12 @@ public class Environment {
 	public void setSourceType(Type sourceType) {
 		this.sourceType = sourceType;
 	}
+	
+	/**
+	 * Returns the self variable.
+	 * @return the self variable
+	 */
+	public Variable getSelfVariable() {
+		return lookupImplicitProperty("self");
+	}
 }

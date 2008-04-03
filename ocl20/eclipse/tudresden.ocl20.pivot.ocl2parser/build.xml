@@ -49,6 +49,7 @@
 	<target name="build" depends="clean,gen">
 		<!-- <javac compiler="javac1.5" debug="true" srcdir="${sourceDic}" destdir="${binaryFiles}" /> -->
 		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+		<eclipse.refreshLocal resource="tudresden.ocl20.pivot.ocl2parser" depth="infinite" />
 		<eclipse.incrementalBuild />
 	</target>
 
@@ -77,6 +78,7 @@
 			<arg value="${sableCCSpec}/ocl2.parser" />
 		</java>
 		<eclipse.refreshLocal resource="tudresden.ocl20.pivot.ocl2parser" depth="infinite" />
+		<eclipse.incrementalBuild />
 	</target>
 
 	<!-- TARGET clean, removes all files that were generated -->
@@ -106,6 +108,7 @@
 		</jastadd>
 
 		<eclipse.refreshLocal resource="tudresden.ocl20.pivot.ocl2parser" depth="infinite" />
+		<eclipse.incrementalBuild />
 
 	</target>
 
@@ -119,8 +122,9 @@
 				<include name="**/*.ast" />
 			</fileset>
 		</jastadd>
-
+		
 		<eclipse.refreshLocal resource="tudresden.ocl20.pivot.ocl2parser" depth="infinite" />
+		<eclipse.incrementalBuild />
 
 	</target>
 	

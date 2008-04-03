@@ -87,7 +87,9 @@ public class OCL2Parser {
 		try {
 			List<Namespace> namespaceList = oclFile.computeASM(env);
 		} catch (BuildingASMException e) {
-			throw new SemanticException(e.getMessage());
+			e.printStackTrace();
+			SemanticException ex = new SemanticException(e.getMessage());
+			throw ex;
 		}
 		
 	}

@@ -85,12 +85,6 @@ public aspect OperationCallExpASMComputation {
 		
 		OclExpression[] arguments = null; //getArgumentArray(env);
 		
-		// The array of arguments is transformed into a list of arguments. This is needed by some method instead of the array.
-		/*java.util.List argumentList = new ArrayList();
-		for(int i = 0; i < arguments.length; i++) {
-			argumentList.add(arguments[i]);
-		}*/
-		
 		TokenAS token = getName().getTokenAS(0);
 		String operationName = (String) getName().getTokenAS(0).getValue();
 		
@@ -112,7 +106,7 @@ public aspect OperationCallExpASMComputation {
 				 */
 				if (sourceExpression == null) {
 					// Get the source type from the environment.
-					Type sourceType = env.getSourceType();
+					Type sourceType = nestedEnvironment.getSourceType();
 					
 					// If the source type is null, it is an error.
 					if (sourceType == null) throw new BuildingASMException("An internal error occured.", token);
@@ -126,33 +120,18 @@ public aspect OperationCallExpASMComputation {
 					} else { // This is no special ocl operation. So we compute the arguments normally.
 						arguments = getArgumentArray(env);
 					}
-					
-					// We transform the array of arguments in a list of arguments.
-					java.util.List argumentList = new ArrayList();
-					for(int i = 0; i < arguments.length; i++) {
-						argumentList.add(arguments[i]);
-					}
-					
-					// Lookup for the operation name in the type.
-					Operation foundOperation = sourceType.lookupOperation(operationName, argumentList);
-					
-					// If no operation was found, it is an error.
-					if (foundOperation == null) throw new BuildingASMException("An operation was not found.", token);
-					
-					// We must examine whether the operation is static. If not, it is an error.
-					if (!foundOperation.isStatic()) throw new BuildingASMException("An operation was found, but it is not static.", token);
-					
-					// We must compute the arguments.
-					arguments = getArgumentArray(env);
+									
+					java.util.List pathNameOperation = new ArrayList();
+					pathNameOperation.add(sourceType.getName());
+					pathNameOperation.add(operationName);
 					
 					// Try to create a static operation call expression.
 					OperationCallExp returnExpression = null;
 					try {
-						returnExpression = factory.createOperationCallExp(transformString2List(foundOperation.getQualifiedName()), arguments);
+						returnExpression = factory.createOperationCallExp(pathNameOperation, arguments);
 					}
 					catch(Exception ex) {
-						String message = ex.getMessage() + " An internal error occured.";
-						throw new BuildingASMException(message, token);
+						throw new BuildingASMException(ex.getMessage(), token);
 					}
 					
 					return returnExpression;
@@ -239,26 +218,34 @@ public aspect OperationCallExpASMComputation {
 				argumentList.add(arguments[i]);
 			}
 			
-			Operation operation = env.lookupImplicitOperation(operationName, argumentList);
+			
+			 
+			//Operation operation = env.lookupImplicitOperation(operationName, argumentList);
 			
 			// If no operation is found it is an error.
-			if (operation == null) throw new BuildingASMException("The operation was not found.", token);
+			//if (operation == null) throw new BuildingASMException("The operation was not found.", token);
 			
 			/* If no source exists, search for the operation in the implicit types of the environment.
 			 * One of this type holds the operation and this type will be packed in a variable.
 			 */
-			Variable sourceVariable = env.lookupImplicitSourceForOperation(operation);
+			//Variable sourceVariable = env.lookupImplicitSourceForOperation(operation);
 			
 			// If the operation has no owning type it is an strange error.
-			if (sourceVariable == null) throw new BuildingASMException("This maybe an internal error." +
+			/*if (sourceVariable == null) throw new BuildingASMException("This maybe an internal error." +
 					" The implicit operation was found but the operation has no owning type.", token);
-			
+			*/
 			/*
 			 * The returned variable will be packed in a variable expression. So the source
 			 * become a variable expression.
 			 */
-			VariableExp variableExpression = factory.createVariableExp(sourceVariable);
-			OclExpression sourceExpression = variableExpression;
+			//VariableExp variableExpression = factory.createVariableExp(sourceVariable);
+			//OclExpression sourceExpression = variableExpression;
+			
+			
+			Variable selfVariable = env.getSelfVariable();
+			OclExpression sourceExpression = factory.createVariableExp(selfVariable);
+			
+			
 			
 			/* This is case F of the OCL-Specifiation [page 80 and 81, Nonterminal OperationCallExpCS] */
 			if (hasAtPre()) {
@@ -271,7 +258,7 @@ public aspect OperationCallExpASMComputation {
 			}
 			catch(Exception ex) {
 				String message = ex.getMessage();
-				message = message + "The operation can't be build.";
+				message = message + " The operation can't be build.";
 				throw new BuildingASMException(message , token);
 			}
 			
@@ -290,24 +277,24 @@ public aspect OperationCallExpASMComputation {
 				pathNameList.add(getName().getTokenAS(i).getValue());
 			}
 			
-			// Transform the argument array in a list of types.
-			java.util.List paramList = new ArrayList();
-			for(int i = 0; i < arguments.length; i++) {
-				paramList.add(arguments[i].getType());
+			String staticOperationName = (String) pathNameList.get(pathNameList.size()-1);
+			
+			/*
+			 * If the operation name denotes a special ocl operation we must compute the arguments in
+			 * a special manner.
+			 */
+			if (staticOperationName.equals("oclIsKindOf") || staticOperationName.equals("oclIsTypeOf") || staticOperationName.equals("oclAsType")) {
+				arguments = computeSpecialOclOperationArguments(env, token);
+			} else { // This is no special ocl operation. So we compute the arguments normally.
+				arguments = getArgumentArray(env);
 			}
-			
-			Operation operation = env.lookupOperation(pathNameList, paramList);
-			
-			// The operation must be static, otherwise it is an error.
-			if (!operation.isStatic()) throw new BuildingASMException("The operation is not a static operation.", token);
-			
+					
 			OperationCallExp resultOperation = null;
 			try {
 				resultOperation = factory.createOperationCallExp(pathNameList, arguments);
 			}
 			catch(FactoryException ex) {
 				String message = ex.getMessage();
-				message = message + "An internal error occurd.";
 				throw new BuildingASMException(message, token);
 			}
 			

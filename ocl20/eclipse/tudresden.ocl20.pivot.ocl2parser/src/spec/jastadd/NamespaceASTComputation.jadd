@@ -23,7 +23,7 @@ public aspect NamespaceASMComputation {
 	 * [B] packageDeclarationCS ::= contextDeclCS*
 	 * 
 	 * Notice:
-	 * Only the first rule is realized by this method. The second rule isn't impelemted yet in
+	 * Only the first rule is realized by this method. The second rule isn't implemented yet in
 	 * the parser, so the user can only write expressions that begins witht the keyword 'package'.
 	 * The compute-method will return a namespace.
 	 */

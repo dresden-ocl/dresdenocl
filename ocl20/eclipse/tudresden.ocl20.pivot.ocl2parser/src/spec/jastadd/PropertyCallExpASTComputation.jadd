@@ -115,19 +115,13 @@ public aspect PropertyCallExpASTComputation {
 				pathNameList.add(getPathName().getTokenAS(i).getValue());
 			}
 			
-			// Lookup the type.
-			Type type = env.lookupType(pathNameList);
-			
-			// If no such type exists, it is an error.
-			if (type == null) throw new BuildingASMException("This type doesn't exists.", token);
-			
 			// Try to create a type literal expression.
 			TypeLiteralExp returnExpression = null;
 			try {
 				returnExpression = factory.createTypeLiteralExp(pathNameList);
 			}
 			catch(Exception ex) {
-				String message = ex.getMessage() + " An internal error occured while create a type literal expression.";
+				String message = ex.getMessage() + " The literal expression can not be built.";
 				throw new BuildingASMException(message, token);
 			}
 			
@@ -191,22 +185,16 @@ public aspect PropertyCallExpASTComputation {
 					if (sourceType == null) throw new BuildingASMException("An internal" +
 							" error occured, no source found for the property.", token);
 					
-					// Look up for the property in the type.
-					Property prop = sourceType.lookupProperty(attributeName);
-					
-					// If no property exsits, it is an error.
-					if (prop == null) throw new BuildingASMException("The property doesn't exists for the source.", token);
-					
-					// If the property isn't static, it is an error.
-					if (!prop.isStatic()) throw new BuildingASMException("A property was found, but it is not static.", token);
-					
 					// Try to create a static property call expression.
+					java.util.List propertyName = new java.util.ArrayList();
+					propertyName.add(sourceType.getName());
+					propertyName.add(attributeName);
 					PropertyCallExp returnExpression = null;
 					try {
-						returnExpression = factory.createPropertyCallExp(transformString2List(prop.getQualifiedName()), qualifiers);
+						returnExpression = factory.createPropertyCallExp(propertyName, qualifiers);
 					}
 					catch(Exception ex) {
-						String message = ex.getMessage() + "An internal error occured.";
+						String message = ex.getMessage() + " The static property can not be found.";
 						throw new BuildingASMException(message, token);
 					}
 					
@@ -216,13 +204,6 @@ public aspect PropertyCallExpASTComputation {
 					return returnExpression;
 				}
 				
-				// The source expression be a type literal expression.
-				Property property = null;
-				property = sourceExpression.getType().lookupProperty(attributeName);
-							
-				// If no property is found, it is an error.
-				if (property == null) throw new BuildingASMException("The property does not exists.", token);
-				
 				// If the property call has an @pre then make an @pre-ocl-expression.
 				if (hasAtPre()) {
 					sourceExpression = sourceExpression.withAtPre();
@@ -230,7 +211,12 @@ public aspect PropertyCallExpASTComputation {
 				
 				// Try to create a property call expression with the computed elements before.
 				PropertyCallExp result = null;
-				result = factory.createPropertyCallExp(sourceExpression, attributeName, qualifiers);
+				try {
+					result = factory.createPropertyCallExp(sourceExpression, attributeName, qualifiers);
+				} catch(Exception ex) {
+					throw new BuildingASMException(ex.getMessage() + " An error occured while building an property call expression.", token);
+				}
+				
 												
 				// If the factory method return null, then it is an internal error.
 				if (result == null) throw new BuildingASMException("An internal error occured.", token);
@@ -297,34 +283,16 @@ public aspect PropertyCallExpASTComputation {
 					if (property == null) {
 						VariableExp expression = factory.createVariableExp(sourceVariable);
 						return expression;
-						
-						/* We must transform the qualified name (a list separated by dots) into a list of
-						 * elemental parts.
-						 */
-						/*String qualifiedName = sourceVariable.getType().getQualifiedName();
-						java.util.List nameList = new ArrayList();
-						String partName = new String();
-						int lastPosition = 0;
-						while(lastPosition < qualifiedName.length()) {
-							int index = qualifiedName.indexOf("::", lastPosition);
-							// We are at the last part name.
-							if (index == -1) {
-								partName = qualifiedName.substring(lastPosition, qualifiedName.length());
-								nameList.add(partName);
-								break;
-							}
-							partName = qualifiedName.substring(lastPosition, index);
-							nameList.add(partName);
-							lastPosition = index+2;
-						}*/
-						
-						// Then we can take this list and compute the type literal expression;
-						/*TypeLiteralExp expression = computeTypeLiteralExpression(nameList, factory, token);
-						return expression;*/
 					}
 					
 					// Create a variable expression at top of the variable and make this to the source expression.
-					sourceExpression = factory.createVariableExp(sourceVariable);
+					try {
+						sourceExpression = factory.createVariableExp(sourceVariable);
+					} catch(Exception ex) {
+						throw new BuildingASMException(ex.getMessage() + " An error occured while building an variable" +
+								" expression (while building a property call expression).", token);
+					}
+					
 				}
 				
 				// Examine whether the operation call has an @pre. If so, make a @pre-ocl-expression.
@@ -334,7 +302,12 @@ public aspect PropertyCallExpASTComputation {
 				
 				// Try to create a property call expression with the elements that were computed before.
 				PropertyCallExp result = null;
-				result = factory.createPropertyCallExp(sourceExpression, attributeName, qualifiers);
+				try {
+					result = factory.createPropertyCallExp(sourceExpression, attributeName, qualifiers);
+				} catch(Exception ex) {
+					throw new BuildingASMException(ex.getMessage() + " An error occured while building a property call expression.", token);
+				}
+				
 								
 				// If the factory gives us null, it is an internal error.
 				if (result == null) throw new BuildingASMException("An internal error occured.", token);
@@ -366,16 +339,14 @@ public aspect PropertyCallExpASTComputation {
 			
 			// If the path name denotes a property.
 			if (property != null) {
-				// We must check whether this property is static.
-				if (!property.isStatic()) throw new BuildingASMException("The property must be static.", token);
-				
 				// Try to create a property call expression.
 				PropertyCallExp result = null;
 				try {
 					result = factory.createPropertyCallExp(pathNameList, qualifiers);
 				}
-				catch(FactoryException ex) {
-					throw new BuildingASMException("An internal error occured.", token);
+				catch(Exception ex) {
+					throw new BuildingASMException(ex.getMessage() + " An error occured while building" +
+							" a static property call expression.", token);
 				}
 				
 				
