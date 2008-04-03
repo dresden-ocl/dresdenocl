@@ -33,7 +33,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * This is a little experimental class. It loads the loyalty model and
  * query the model for some elements in the model.
  * In a manner of speaking this class is useless, but it show how make access to
- * a model, so for a beginner it might be usefull.
+ * a model, so for a beginner it might be useful.
  * @author Nils
  *
  */

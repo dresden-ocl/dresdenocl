@@ -1,0 +1,11 @@
+package Test
+
+context Person
+	inv: Person::getNumberOfPersons() > 5
+	inv: oclIsKindOf(Person)
+--  inv: Person::oclIsKindOf(Person)
+	inv uniqueNameForAll1_P1_VT:
+        Person.allInstances()->forAll(self2:Person|self<>self2 implies
+        self.name<>self2.name)
+
+endpackage

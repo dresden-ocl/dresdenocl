@@ -16,3 +16,9 @@ Excecute the test:
 Go to the
 testcase tudresden.ocl20.pivot.ocl2parser.test.parsertets.OclFilesTest.
 Make a right click on that and choose "Run -> Junit Plug-in Test".
+
+
+Hint:
+If an error occurs while executing the parser then
+try to build the project with Java1.6 compliance and
+rebuild it.

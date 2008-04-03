@@ -17,7 +17,21 @@
 
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import junit.framework.TestCase;
+import tudresden.ocl20.pivot.modelbus.IMetamodel;
+import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.IModelProvider;
+import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
+import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * This testcase tests the parser by letting the parser parse all test data files
@@ -205,6 +219,95 @@ public class OclFilesTest extends TestCase {
 			test.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
+			System.err.println(message);
+			ex.printStackTrace();
+			
+			fail();
+			return;
+		}
+		
+		assertTrue(true);
+	}
+	
+	public void testAllInstanceTest() {
+
+		IMetamodel umlMetaModel = null;
+		IModelProvider modelProvider = null;
+		IModel model = null;
+		String fileDirectory = null;
+		
+		try {
+			umlMetaModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel("tudresden.ocl20.pivot.metamodels.uml");
+			if (umlMetaModel == null) {
+				throw new Exception("Unable to load uml metmodel.   ");
+			}
+		} catch(Exception ex) {
+			System.err.println("Unable to load uml metmodel.   ");
+			ex.printStackTrace();
+			return;
+		}
+		
+		
+		
+		modelProvider = umlMetaModel.getModelProvider();
+		File currentDir = new File(".");
+		System.out.println("Current directory: " + currentDir.getAbsolutePath());
+		fileDirectory = "./src/testData/";
+		File modelFile = new File(fileDirectory+ "PersonTest.xmi");
+		if (!modelFile.exists()) {
+			System.err.println("The model file doesn't exists.");
+			fail();
+			return;
+		}
+		
+		try {
+			model = modelProvider.getModel(modelFile);
+		} catch(ModelAccessException ex) {
+			System.err.println("An error occured while loading the model.");
+			ex.printStackTrace();
+			fail();
+			return;
+		}
+		
+		try {
+			System.out.println("Model namespace: " + model.getRootNamespace().getName());
+			List<String> nm = new ArrayList<String>();
+			nm.add("Test");
+			Namespace namespace = model.findNamespace(nm);
+			if (namespace == null) {
+				System.out.println("No namespace was found");
+			} else {
+				System.out.println("The namespace that was found is: " + namespace.getName());
+			}
+			
+			List<String> pathNamePerson = new ArrayList<String>();
+			pathNamePerson.add("Person");
+			Type personType = model.findType(pathNamePerson);
+			System.out.println("Operations of person:");
+			for(Operation op : personType.allOperations()) {
+				System.out.println("Operation of person: " + op.getName());
+			}
+		} catch (ModelAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		String filename = "oclTestFiles/allInstanceTest.ocl"; 
+		try {
+			
+			File oclFile = new File(fileDirectory + filename);
+			System.out.println("The file is searched at: " + fileDirectory + filename);
+			if (!oclFile.exists()) throw new Exception("The ocl test file doesn't exists. File name: " + filename);
+			
+			FileReader oclFileReader = new FileReader(oclFile);
+			
+			OCL2Parser parser = new OCL2Parser(model, oclFileReader);
+			parser.parse();
+		} catch(Throwable ex) {
+			String message = " This error occured for file " + filename + ".";
 			System.err.println(message);
 			ex.printStackTrace();
 			
