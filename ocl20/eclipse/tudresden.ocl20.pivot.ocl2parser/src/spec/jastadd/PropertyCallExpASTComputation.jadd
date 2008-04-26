@@ -270,7 +270,7 @@ public aspect PropertyCallExpASTComputation {
 					
 					// We must build a variable expression.
 					if ((property == null) && (attributeName.equals("self"))) {
-						VariableExp expression = env.getExpFactory().createVariableExp(sourceVariable);
+						VariableExp expression = factory.createVariableExp(sourceVariable);
 						return expression;
 					}
 					

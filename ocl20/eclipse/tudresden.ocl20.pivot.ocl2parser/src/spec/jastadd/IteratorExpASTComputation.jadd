@@ -115,8 +115,8 @@ public aspect IteratorExpASTComputation {
 				/* If the variable has no type, then take the element type of the source expression.
 				 * OCL Specification page 73,  the third rule of the synthesized attributes.
 				 */
-				Type iteratorType = var.getType();
-				if (iteratorType == null) {
+				
+				if (!varAS.hasType()) {
 					var.setType(sourceElementType);
 				} else { // The user has specified a type for the iterator variable.
 					
@@ -124,6 +124,7 @@ public aspect IteratorExpASTComputation {
 					 * This user specified type must match the element type of the collection that
 					 * is involved iterator expression.
 					 */
+					Type iteratorType = var.getType();
 					if (iteratorType.conformsTo(sourceElementType) == false) throw new BuildingASMException("The specified" +
 							" type doesn't match with the element type of the collection" +
 							" type which is source of the iterator expression.", varAS.getName());
