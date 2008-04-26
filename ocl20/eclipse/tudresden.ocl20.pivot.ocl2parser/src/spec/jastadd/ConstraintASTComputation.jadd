@@ -297,7 +297,17 @@ public aspect ConstraintASMComputation {
 		// Create the constraint.
 		Constraint constraint = null;
 		try {
-			constraint = factory.createConstraint(optionalName, ConstraintKind.get("definition"), oclExpression, operation);
+			/*
+			 * Here we must notice a constraint the ocl specification:
+			 * context ExpressionInOcl
+			 *		def: isDefinitionConstraint : Boolean = self.constraint.stereotype.name = ‘definition’
+			 *				and
+			 *				self.constraint.constrainedElement->size() = 1
+			 *				and
+			 *				self.constraint.constrainedElement.any(true).oclIsKindOf(Classifier)
+			 */
+			constraint = factory.createConstraint(optionalName, ConstraintKind.get("definition"), oclExpression, selfVariable.getType());
+			constraint.setDefinedFeature(operation);
 		}
 		catch(Throwable th) {
 			String message = th.getMessage() + " A constraint could not be built.";
