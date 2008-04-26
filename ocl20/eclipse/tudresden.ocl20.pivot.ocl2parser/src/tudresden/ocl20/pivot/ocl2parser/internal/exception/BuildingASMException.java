@@ -38,7 +38,7 @@ public class BuildingASMException extends Exception {
 	public String getMessage() {
 		String message = super.getMessage();
 		if (token == null) return message;
-		message = message + " Error occrued at line " + token.getLine() +
+		message = message + " Error occured at line " + token.getLine() +
 		" and column " + token.getColumn() + ". The error occured at the token " + token.getValue() + ".";
 		return message;
 	}
