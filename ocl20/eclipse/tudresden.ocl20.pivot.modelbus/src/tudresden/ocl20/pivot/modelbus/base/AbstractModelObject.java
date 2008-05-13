@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
@@ -67,7 +66,6 @@ public abstract class AbstractModelObject implements IModelObject {
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getName()
 	 */
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -77,7 +75,6 @@ public abstract class AbstractModelObject implements IModelObject {
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedName()
 	 */
-	@Override
 	public List<String> getQualifiedName() {
 		return qualifiedName;
 	}
@@ -87,7 +84,6 @@ public abstract class AbstractModelObject implements IModelObject {
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedNameString()
 	 */
-	@Override
 	public String getQualifiedNameString() {
 		if (qualifiedNameString == null)
 			if (qualifiedName != null) {
@@ -107,7 +103,6 @@ public abstract class AbstractModelObject implements IModelObject {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#addResult(tudresden.ocl20.pivot.pivotmodel.Constraint,
 	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	@Override
 	public void addResult(Constraint cs, OclRoot result) {
 		results.put(cs, result);
 	}
@@ -117,7 +112,6 @@ public abstract class AbstractModelObject implements IModelObject {
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getResults()
 	 */
-	@Override
 	public Map<Constraint, OclRoot> getResults() {
 		return results;
 	}
