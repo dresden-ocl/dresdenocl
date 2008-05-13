@@ -1,17 +1,13 @@
 package tudresden.ocl20.pivot.models.mdr.internal.modelinstance;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.core.jmi.uml15.core.Classifier;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 public class UmlModelObject extends AbstractModelObject implements IModelObject {
 
@@ -23,7 +19,6 @@ public class UmlModelObject extends AbstractModelObject implements IModelObject 
 		this.qualifiedName = qualifiedName;
 	}
 
-	@Override
 	public OclRoot getOclObject() {
 		if (oclObject == null)
 			oclObject = (OclRoot) Platform.getAdapterManager().getAdapter(
