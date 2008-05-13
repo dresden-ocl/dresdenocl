@@ -1225,7 +1225,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * @see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart,
 	 *      org.eclipse.jface.viewers.ISelection)
 	 */
-	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		if (part instanceof ModelsView) {
 			if (selection instanceof TreeSelection) {
@@ -1296,7 +1295,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#activeModelInstanceChanged(tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
-	@Override
 	public void activeModelInstanceChanged(ModelInstanceRegistryEvent event) {
 		setActiveModelInstance(event.getAffectedModel(), event
 				.getAffectedModelInstance());
@@ -1321,7 +1319,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#modelInstanceAdded(tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
-	@Override
 	public void modelInstanceAdded(ModelInstanceRegistryEvent event) {
 	}
 
@@ -1330,7 +1327,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#activeModelChanged(tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
-	@Override
 	public void activeModelChanged(ModelRegistryEvent e) {
 		setActiveModelInstance(e.getAffectedModel(), ModelBusPlugin
 				.getModelInstanceRegistry().getActiveModelInstance(
@@ -1342,7 +1338,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded(tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
-	@Override
 	public void modelAdded(ModelRegistryEvent e) {
 	}
 
@@ -1661,7 +1656,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * 
 	 * @see tudresden.ocl20.interpreter.event.IInterpreterRegistryListener#interpretationFinished(tudresden.ocl20.interpreter.event.InterpreterRegistryEvent)
 	 */
-	@Override
 	public void interpretationFinished(InterpreterRegistryEvent e) {
 		refreshView();
 	}
