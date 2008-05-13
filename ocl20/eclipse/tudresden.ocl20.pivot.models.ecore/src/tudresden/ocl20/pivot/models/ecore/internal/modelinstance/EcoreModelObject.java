@@ -20,7 +20,6 @@ public class EcoreModelObject extends AbstractModelObject implements
 		this.qualifiedName = qualifiedName;
 	}
 
-	@Override
 	public OclRoot getOclObject() {
 		if (oclObject == null)
 			oclObject = (OclObject) Platform.getAdapterManager().getAdapter(
