@@ -34,4 +34,15 @@ public interface IModelBusConstants {
    * The name of the attribute containing the name of the metamodel. 
    */
   String ATT_NAME = "name"; //$NON-NLS-1$
+  
+  /**
+   * The ID of the class tudresden.ocl20.pivot.modelbus.ui.views.ModelsView.
+   */
+  public static final String MODELS_VIEW_ID = "tudresden.ocl20.pivot.modelbus.ui.views.models"; //$NON-NLS-1$
+
+  /**
+   * The ID of the class tudresden.ocl20.pivot.modelbus.ui.views.ModelInstancesView.
+   */
+  public static final String MODEL_INSTANCES_VIEW_ID = "tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView"; //$NON-NLS-1$
+
 }
