@@ -41,6 +41,7 @@ import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.parser.internal.ocl2parser.OCLParser;
 import tudresden.ocl20.pivot.parser.internal.xocl.XOCLParser;
 
 /**
@@ -133,7 +134,7 @@ public class ParserPlugin extends Plugin {
 
     // create a new parser if necessary
     if (parser == null) {
-      parser = new XOCLParser();
+      parser = new OCLParser();
       parser.setModel(model);
       plugin.parsers.put(model, parser);
     }

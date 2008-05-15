@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.xocl,
- org.apache.commons.lang
+ org.apache.commons.lang,
+ tudresden.ocl20.pivot.ocl2parser
 Eclipse-LazyStart: true
 Export-Package: tudresden.ocl20.pivot.parser;
   uses:="org.apache.log4j,
