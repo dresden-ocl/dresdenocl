@@ -59,6 +59,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
@@ -79,6 +80,9 @@ public class ModelInstancesView extends ViewPart implements
 		IModelInstanceRegistryListener, IModelRegistryListener,
 		ISelectionListener {
 
+	// The Constant ID of this class
+	public static final String ID = IModelBusConstants.MODEL_INSTANCES_VIEW_ID;
+
 	// The viewer
 	private TreeViewer viewer;
 
@@ -93,9 +97,6 @@ public class ModelInstancesView extends ViewPart implements
 
 	// The last model instance
 	private IModelInstance lastModelInstance = null;
-
-	// The Constant ID
-	public static final String ID = "tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView";
 
 	/**
 	 * The Class ModelObjectContentProvider.
