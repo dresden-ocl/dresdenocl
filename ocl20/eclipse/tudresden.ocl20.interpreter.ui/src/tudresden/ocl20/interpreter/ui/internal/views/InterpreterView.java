@@ -86,6 +86,7 @@ import tudresden.ocl20.interpreter.internal.Environment;
 import tudresden.ocl20.interpreter.internal.OclInterpreter;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
@@ -94,8 +95,6 @@ import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -832,11 +831,14 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 						} else if (constraint.getKind().equals(
 								ConstraintKind.POSTCONDITION)) {
 							if (kinds.contains(ConstraintKind.POSTCONDITION)) {
-								for (IModelObject mo : usedModelObjects)
-								{
-									List<String> qn = new ArrayList<String>(Arrays.asList(((NamedElement) constraint
-											.getConstrainedElement().get(0))
-											.getQualifiedName().split("::")));
+								for (IModelObject mo : usedModelObjects) {
+									List<String> qn = new ArrayList<String>(
+											Arrays
+													.asList(((NamedElement) constraint
+															.getConstrainedElement()
+															.get(0))
+															.getQualifiedName()
+															.split("::")));
 									String qnWithoutOperation = "";
 									if (!qn.get(0).contains("("))
 										qnWithoutOperation = qn.remove(0);
@@ -844,11 +846,13 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 									while (qnIt.hasNext()) {
 										String current = qnIt.next();
 										if (!current.contains("("))
-											qnWithoutOperation = qnWithoutOperation + "::" + current;
+											qnWithoutOperation = qnWithoutOperation
+													+ "::" + current;
 										else
 											break;
 									}
-									if (qnWithoutOperation.equals(mo.getQualifiedNameString()))
+									if (qnWithoutOperation.equals(mo
+											.getQualifiedNameString()))
 										interp.prepare(constraint, mo);
 								}
 							}
@@ -858,16 +862,18 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 										ConstraintKind.INITIAL)
 								|| constraint.getKind().equals(
 										ConstraintKind.DERIVED)) {
-							if (kinds.contains(constraint.getKind()))
-							{
+							if (kinds.contains(constraint.getKind())) {
 								String append = "";
-								if (constraint.getKind().equals(ConstraintKind.INITIAL))
+								if (constraint.getKind().equals(
+										ConstraintKind.INITIAL))
 									append = "-initial";
-								else if (constraint.getKind().equals(ConstraintKind.DERIVED))
+								else if (constraint.getKind().equals(
+										ConstraintKind.DERIVED))
 									append = "-derive";
 								env.addConstraint(((NamedElement) constraint
 										.getConstrainedElement().get(0))
-										.getQualifiedName()+append, constraint);
+										.getQualifiedName()
+										+ append, constraint);
 							}
 						}
 					}
@@ -1222,7 +1228,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 *      org.eclipse.jface.viewers.ISelection)
 	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (part instanceof ModelsView) {
+		if (part.getSite() != null
+				&& part.getSite().getId().equals(
+						IModelBusConstants.MODELS_VIEW_ID)) {
 			if (selection instanceof TreeSelection) {
 				viewer.removeFilter(actualFilter);
 				Iterator selIt = ((TreeSelection) selection).iterator();
@@ -1239,7 +1247,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 				viewer.addFilter(actualFilter);
 				refreshView();
 			}
-		} else if (part instanceof ModelInstancesView) {
+		} else if (part.getSite() != null
+				&& part.getSite().getId().equals(
+						IModelBusConstants.MODEL_INSTANCES_VIEW_ID)) {
 			if (selection instanceof TreeSelection) {
 				viewer.removeFilter(actualFilter);
 				Iterator selIt = ((TreeSelection) selection).iterator();
