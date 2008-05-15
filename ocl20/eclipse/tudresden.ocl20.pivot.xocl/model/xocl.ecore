@@ -194,6 +194,7 @@
     <eLiterals name="subSequence" value="28"/>
     <eLiterals name="symmetricDifference" value="29"/>
     <eLiterals name="union" value="30"/>
+    <eLiterals name="product" value="31"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="IteratorExpressionXS">
     <eLiterals name="default" value="-1" literal=""/>
