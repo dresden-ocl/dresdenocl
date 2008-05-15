@@ -15,6 +15,13 @@
             class="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView"
             id="tudresden.ocl20.pivot.modelbus.ui.views.models">
       </view>
+      <view
+            category="tudresden.ocl20.views.category"
+            class="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView"
+            icon="icons/sample.gif"
+            id="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView"
+            name="Model Instance Browser">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.importWizards">
@@ -32,6 +39,15 @@
             Load a domain-specific model into the Model Browser view.
          </description>
       </wizard>
+      <wizard
+            category="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
+            class="tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelInstanceWizard"
+            id="tudresden.ocl20.pivot.modelbus.ui.importWizards.loadModelInstanceWizard"
+            name="Modelinstance">
+         <description>
+            Load a model instance for specific model.
+         </description>
+      </wizard>
    </extension>
       <extension
          point="org.eclipse.ui.actionSets">
@@ -44,6 +60,13 @@
                class="tudresden.ocl20.pivot.modelbus.ui.test.LoadModelsDelegate"
                id="tudresden.ocl20.pivot.modelbus.modelLoadAction"
                label="Load Models"
+               style="push"
+               toolbarPath="tests">
+         </action>
+         <action
+               class="tudresden.ocl20.pivot.modelbus.ui.test.LoadModelInstanceDelegate"
+               id="tudresden.ocl20.pivot.modelbus.ui.modelInstanceLoadAction"
+               label="Load ModelInstance"
                style="push"
                toolbarPath="tests">
          </action>
