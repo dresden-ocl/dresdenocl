@@ -42,6 +42,7 @@
       <wizard
             category="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
             class="tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelInstanceWizard"
+            icon="icons/models.gif"
             id="tudresden.ocl20.pivot.modelbus.ui.importWizards.loadModelInstanceWizard"
             name="Modelinstance">
          <description>
