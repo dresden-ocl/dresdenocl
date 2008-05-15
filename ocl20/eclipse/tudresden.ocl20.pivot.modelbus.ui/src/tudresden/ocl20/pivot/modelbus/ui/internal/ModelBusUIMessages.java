@@ -50,6 +50,40 @@ public class ModelBusUIMessages extends NLS {
   
   public static String ModelsView_Error;
 
+  public static String LoadModelInstancePage_BrowseFileSystemButtonText;
+
+  public static String LoadModelInstancePage_BrowseWorkspaceButtonText;
+
+  public static String LoadModelInstancePage_BrowseWorkspaceDialogDescription;
+
+  public static String LoadModelInstancePage_BrowseWorkspaceDialogTitle;
+
+  public static String LoadModelInstancePage_Description;
+
+  public static String LoadModelInstancePage_ErrorMsgInvalidVariables;
+
+  public static String LoadModelInstancePage_ErrorMsgModelFileNotExisting;
+
+  public static String LoadModelInstancePage_LocationLabelText;
+
+  public static String LoadModelInstancePage_MessagePleaseChooseModel;
+
+  public static String LoadModelInstancePage_ModelFileGroupText;
+
+  public static String LoadModelInstancePage_SelectMetamodelErrorMessage;
+
+  public static String LoadModelInstancePage_SelectMetamodelLabel;
+
+  public static String LoadModelInstancePage_Title;
+
+  public static String LoadModelInstanceWizard_Title;
+
+  public static String LoadModelInstanceWizard_ErrorMessageDialogTitle;
+
+  public static String LoadModelInstanceWizard_ErrorOccured;
+
+  public static String LoadModelInstanceWizard_CheckLog;
+
   static {
     // initialize resource bundle
     NLS.initializeMessages(BUNDLE_NAME,ModelBusUIMessages.class);
