@@ -1029,13 +1029,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 						showMessage("Value for boolean must be either 'true' or 'false'");
 				} else if (typeCb.getText().equals("Result") && results != null) {
 					if (results.size() > 0) {
-						if (resultCb.getSelectionIndex() >= 0)
-						{
-							System.out.println("Index: " + resultCb.getSelectionIndex());
+						if (typeCb.getSelectionIndex() >= 0)
 							result = results
-									.get(resultCb.getSelectionIndex());
-							System.out.println("Result: " + result);
-						}
+									.get(typeCb.getSelectionIndex() - 1);
 						else
 							showMessage("No result selected");
 					}
@@ -1645,10 +1641,10 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * Refresh view.
 	 */
 	private void refreshView() {
-		viewer.refresh();
 		for (int i = 0, n = viewer.getTable().getColumnCount(); i < n; i++) {
 			viewer.getTable().getColumn(i).pack();
 		}
+		viewer.refresh();
 	}
 
 	/*
