@@ -1,0 +1,1649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xocl:NamespaceXS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xocl="http://www.tu-dresden.de/ocl20/pivot/2007/xocl" pathName="pml">
+  <ownedRule name="collectionAsBag" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->asBag()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="asBag">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionAsOrderedSet" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->asOrderedSet()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="asOrderedSet">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionAsSet" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->asSet()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="asSet">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionAsSequence" constrainedElement="Plugin">
+    <specification body="Bag{1, 1, 2, 3, 4, 3}->asSequence()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="asSequence">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionExcludes-True" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->excludes(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excludes">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionExcludes-False" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->excludes(2)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excludes">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionExcludesAll-True" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->excludesAll(Set{5, 6, 7})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excludesAll">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="7"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionExcludesAll-False" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->excludesAll(Set{4, 5, 6})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excludesAll">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionIncludes-True" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->includes(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="includes">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionIncludes-False" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->includes(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="includes">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionIncludesAll-True" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->includesAll(Bag{3, 3, 4})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="includesAll">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionIncludesAll-False" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->includesAll(Bag{3, 4, 5})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="includesAll">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionIsEmpty-True" constrainedElement="Plugin">
+    <specification body="Set{1}->excluding(1)->isEmpty()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="isEmpty">
+        <source xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excluding">
+          <source xsi:type="xocl:CollectionLiteralExpXS">
+            <part xsi:type="xocl:CollectionItemXS">
+              <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+            </part>
+          </source>
+          <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionIsEmpty-False" constrainedElement="Plugin">
+    <specification body="Set{1}->isEmpty()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="isEmpty">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionNotEmpty-True" constrainedElement="Plugin">
+    <specification body="Set{1}->notEmpty()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="notEmpty">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionNotEmpty-False" constrainedElement="Plugin">
+    <specification body="Set{1}->excluding(1)->notEmpty()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="notEmpty">
+        <source xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excluding">
+          <source xsi:type="xocl:CollectionLiteralExpXS">
+            <part xsi:type="xocl:CollectionItemXS">
+              <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+            </part>
+          </source>
+          <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionCount" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->count(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="count">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionSize" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->size()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="size">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionSum" constrainedElement="Plugin">
+    <specification body="Sequence{1, 1, 2, 3, 4, 3}->sum()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="sum">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceAt" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->at(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="at">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceFirst" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->first()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="first">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceLast" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->last()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="last">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceIndexOf" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->indexOf(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="indexOf">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceAppend" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->append(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="append">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequencePrepend" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->prepend(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="prepend">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceInsertAt" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->insertAt(3, 5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="insertAt">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceIncluding" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->including(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="including">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceExcluding" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->excluding(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excluding">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceSubSequence" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->subSequence(3, 5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="subSequence">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceIsEqualTo-True" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->isEqualTo(Sequence{3, 1, 2..10})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="=">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceIsEqualTo-False" constrainedElement="Plugin">
+    <specification body="Sequence{3, 1..10}->isEqualTo(Sequence{1, 2..10, 3})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="=">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceFlatten" constrainedElement="Plugin">
+    <specification body="Sequence{Sequence{1..5},Sequence{3..8}}->flatten">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="flatten">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+              <part xsi:type="xocl:CollectionRangeXS">
+                <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+                <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+              </part>
+            </item>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+              <part xsi:type="xocl:CollectionRangeXS">
+                <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="8"/>
+                <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+              </part>
+            </item>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceUnionSequence" constrainedElement="Plugin">
+    <specification body="Sequence{1, 3, 5}->union(Sequence{6, 4, 2})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="union">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="sequenceUnionOrderedSet" constrainedElement="Plugin">
+    <specification body="Sequence{1, 3, 5}->union(OrderedSet{6, 4, 2})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="union">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetAt" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->at(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="at">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetFirst" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->first()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="first">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetLast" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->last()">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="last">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetIndexOf" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->indexOf(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="indexOf">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetAppend" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->append(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="append">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetPrepend" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->prepend(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="prepend">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetInsertAt" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->insertAt(3, 5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="insertAt">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetIncluding" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->including(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="including">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetExcluding" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->excluding(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excluding">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetSubOrderedSet" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->subOrderedSet(3, 5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="subOrderedSet">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetIsEqualTo-True" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->isEqualTo(OrderedSet{3, 1, 2..10})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="=">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetIsEqualTo-False" constrainedElement="Plugin">
+    <specification body="OrderedSet{3, 1..10}->isEqualTo(OrderedSet{1, 2..10, 3})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="=">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetFlatten" constrainedElement="Plugin">
+    <specification body="OrderedSet{OrderedSet{1..5},OrderedSet{3..8}}->flatten">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="flatten">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+              <part xsi:type="xocl:CollectionRangeXS">
+                <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+                <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+              </part>
+            </item>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+              <part xsi:type="xocl:CollectionRangeXS">
+                <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="8"/>
+                <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+              </part>
+            </item>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetUnionOrderedSet" constrainedElement="Plugin">
+    <specification body="OrderedSet{1, 3, 5}->union(OrderedSet{6, 4, 2})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="union">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="orderedSetUnionSequence" constrainedElement="Plugin">
+    <specification body="OrderedSet{1, 3, 5}->union(Sequence{6, 4, 2})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="union">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="OrderedSet">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Sequence">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setIncluding" constrainedElement="Plugin">
+    <specification body="Set{3, 1..10}->including(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="including">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setExcluding" constrainedElement="Plugin">
+    <specification body="Set{3, 1..10}->excluding(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excluding">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setIsEqualTo-True" constrainedElement="Plugin">
+    <specification body="Set{3, 1..10}->isEqualTo(Set{1, 2..10})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="=">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setIsEqualTo-False" constrainedElement="Plugin">
+    <specification body="Set{3, 1..10}->isEqualTo(Set{1, 3..10})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="=">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setFlatten" constrainedElement="Plugin">
+    <specification body="Set{Set{1..5},Set{3..8}}->flatten">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="flatten">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:CollectionLiteralExpXS">
+              <part xsi:type="xocl:CollectionRangeXS">
+                <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+                <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+              </part>
+            </item>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:CollectionLiteralExpXS">
+              <part xsi:type="xocl:CollectionRangeXS">
+                <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="8"/>
+                <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+              </part>
+            </item>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setUnionSet" constrainedElement="Plugin">
+    <specification body="Set{1, 3, 5}->union(Set{6, 4, 3, 2})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="union">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setUnionBag" constrainedElement="Plugin">
+    <specification body="Set{1, 3, 5}->union(Bag{6, 4, 2, 2})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="union">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setIntersectionSet" constrainedElement="Plugin">
+    <specification body="Set{1, 2, 3, 4, 5}->intersection(Set{6, 5, 4, 3})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="intersection">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setIntersectionBag" constrainedElement="Plugin">
+    <specification body="Set{1, 2, 3, 4, 5}->intersection(Bag{6, 5, 4, 3, 4, 3})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="intersection">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setComplement" constrainedElement="Plugin">
+    <specification body="Set{1, 2, 3, 4, 5}->complement(Set{6, 5, 4, 3})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="-">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="setSymmetricDifference" constrainedElement="Plugin">
+    <specification body="Set{1, 2, 3, 4, 5}->symmetricDifference(Set{6, 5, 4, 3})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="symmetricDifference">
+        <source xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="bagIncluding" constrainedElement="Plugin">
+    <specification body="Bag{3, 1..10}->including(5)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="including">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="bagExcluding" constrainedElement="Plugin">
+    <specification body="Bag{3, 1..10}->excluding(3)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="excluding">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="bagIsEqualTo-True" constrainedElement="Plugin">
+    <specification body="Bag{3, 1..10}->isEqualTo(Bag{1, 2..10, 3})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="=">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="bagIsEqualTo-False" constrainedElement="Plugin">
+    <specification body="Bag{3, 1..10}->isEqualTo(Bag{1, 2..10})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="=">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionRangeXS">
+            <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="10"/>
+            <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="bagFlatten" constrainedElement="Plugin">
+    <specification body="Bag{Bag{1..5},Bag{3..8}}->flatten">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="flatten">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+              <part xsi:type="xocl:CollectionRangeXS">
+                <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+                <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+              </part>
+            </item>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+              <part xsi:type="xocl:CollectionRangeXS">
+                <last xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="8"/>
+                <first xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+              </part>
+            </item>
+          </part>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="bagUnionBag" constrainedElement="Plugin">
+    <specification body="Bag{1, 3, 5}->union(Bag{6, 4, 2})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="union">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="bagUnionSet" constrainedElement="Plugin">
+    <specification body="Bag{1, 3, 5}->union(Set{6, 4, 2})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="union">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="bagIntersectionBag" constrainedElement="Plugin">
+    <specification body="Bag{1, 2, 3, 3, 4, 5}->intersection(Bag{6, 5, 4, 3, 4, 3})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="intersection">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="bagIntersectionSet" constrainedElement="Plugin">
+    <specification body="Bag{1, 2, 3, 3, 4, 5}->intersection(Set{6, 5, 4, 3})">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="intersection">
+        <source xsi:type="xocl:CollectionLiteralExpXS" kind="Bag">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="2"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+        </source>
+        <argument xsi:type="xocl:CollectionLiteralExpXS">
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="6"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="5"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+          </part>
+          <part xsi:type="xocl:CollectionItemXS">
+            <item xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="3"/>
+          </part>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+</xocl:NamespaceXS>

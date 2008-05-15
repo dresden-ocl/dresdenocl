@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xocl:NamespaceXS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xocl="http://www.tu-dresden.de/ocl20/pivot/2007/xocl" pathName="pml">
+  <ownedRule name="simpleAttribute" constrainedElement="Plugin">
+    <specification body="self.name">
+      <bodyExpression xsi:type="xocl:PropertyCallExpXS" referredPropertyName="name">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.0/@specification/@context"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="complexAttribute" constrainedElement="Plugin" definedFeature="">
+    <specification body="self.activator">
+      <bodyExpression xsi:type="xocl:PropertyCallExpXS" referredPropertyName="activator">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.1/@specification/@context"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="collectionAttribute" constrainedElement="Feature">
+    <specification body="self.plugins">
+      <bodyExpression xsi:type="xocl:PropertyCallExpXS" referredPropertyName="plugins">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.2/@specification/@context"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="elementOfCollectionAttribute" constrainedElement="Feature">
+    <specification body="self.plugins->at(1)">
+      <bodyExpression xsi:type="xocl:CollectionOperationCallExpXS" referredCollectionOperation="at">
+        <source xsi:type="xocl:PropertyCallExpXS" referredPropertyName="plugins">
+          <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.3/@specification/@context"/>
+        </source>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="1"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="nestedAttribute" constrainedElement="Plugin" definedFeature="">
+    <specification body="self.feature.name">
+      <bodyExpression xsi:type="xocl:PropertyCallExpXS" referredPropertyName="name">
+        <source xsi:type="xocl:PropertyCallExpXS" referredPropertyName="feature">
+          <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.4/@specification/@context"/>
+        </source>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="primitiveOperation" constrainedElement="Plugin">
+    <specification body="self.getFive()">
+      <bodyExpression xsi:type="xocl:ModelOperationCallExpXS" referredOperationName="getFive">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.5/@specification/@context"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="complexOperation" constrainedElement="Plugin">
+    <specification body="self.getSelf()">
+      <bodyExpression xsi:type="xocl:ModelOperationCallExpXS" referredOperationName="getSelf">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.6/@specification/@context"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="operationWithSimpleParameter" constrainedElement="Plugin">
+    <specification body="self.getValue(4)">
+      <bodyExpression xsi:type="xocl:ModelOperationCallExpXS" referredOperationName="getValue">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.7/@specification/@context"/>
+        <argument xsi:type="xocl:IntegerLiteralExpXS" integerSymbol="4"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="operationWithComplexParameter" constrainedElement="Plugin">
+    <specification body="self.getNameOf(self.feature)">
+      <bodyExpression xsi:type="xocl:ModelOperationCallExpXS" referredOperationName="getNameOf">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.8/@specification/@context"/>
+        <argument xsi:type="xocl:PropertyCallExpXS" referredPropertyName="feature">
+          <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.8/@specification/@context"/>
+        </argument>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+  <ownedRule name="allInstances" constrainedElement="Plugin">
+    <specification body="self.allInstances()">
+      <bodyExpression xsi:type="xocl:ModelOperationCallExpXS" referredOperationName="allInstances">
+        <source xsi:type="xocl:VariableExpXS" referredVariable="//@ownedRule.9/@specification/@context"/>
+      </bodyExpression>
+    </specification>
+  </ownedRule>
+</xocl:NamespaceXS>
