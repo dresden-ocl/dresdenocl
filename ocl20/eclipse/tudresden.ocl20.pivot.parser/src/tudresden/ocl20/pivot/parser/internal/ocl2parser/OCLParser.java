@@ -56,13 +56,13 @@ public class OCLParser extends AbstractOclParser {
 		} catch(IOException ex) {
 			
 		} catch (ParsingException e) {
-			e.printStackTrace();
+			throw new ParseException(e.getMessage());
 		} catch (LexException e) {
-			e.printStackTrace();
+			throw new ParseException(e.getMessage());
 		} catch (BuildingASTException e) {
-			e.printStackTrace();
+			throw new ParseException(e.getMessage());
 		} catch (SemanticException e) {
-			e.printStackTrace();
+			throw new ParseException(e.getMessage());
 		}
 	}
 
