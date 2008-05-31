@@ -176,7 +176,7 @@ public class SelectOCLFilePage extends WizardPage {
    * Returns the file extensions accepted by the file editor of this page.
    */
   protected String[] getFileExtensions() {
-    return new String[] { "*.xocl" }; //$NON-NLS-1$
+    return new String[] { "*.ocl" }; //$NON-NLS-1$
   }
 
   /**
