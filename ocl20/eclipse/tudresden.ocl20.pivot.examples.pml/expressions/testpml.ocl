@@ -1,0 +1,24 @@
+package pml
+
+  context Plugin
+  inv PropertyCallExpName: self.name = 'P2'
+  
+  context Plugin
+  inv OperationCallExpAdd1: 5 + 4 < 9
+
+  context Plugin
+  inv OperationCallExpAdd2: 5 + 4 <= 9
+
+  context Plugin
+  inv OperationCallExpAdd3: 5 + 4 = 9
+
+  context Plugin
+  inv OperationCallExpAdd4: 5 + 4 >= 9
+
+  context Plugin
+  inv OperationCallExpAdd5: 5 + 4 > 9
+
+  context Plugin
+  inv BodyExpUsage: self.getFive() = 5
+
+endpackage
