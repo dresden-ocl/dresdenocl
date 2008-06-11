@@ -1,0 +1,17 @@
+<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil" class="pluginXML" %>
+<%GenModel genModel = (GenModel)argument;
+String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
+String projectName = PivotAdapterGeneratorUtil.getProjectName(genModel);%>
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.3"?>
+<plugin>
+    <extension
+    		point="tudresden.ocl20.pivot.modelbus.metamodels">
+      <metamodel
+            id = "<%=projectName%>"
+            modelProvider = "<%=projectName%>.internal.provider.<%=modelName%>ModelProvider"
+            name = "<%=modelName%>">
+      </metamodel>
+   </extension>
+
+</plugin>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension point="org.eclipse.emf.codegen.ecore.generatorAdapters">
+      <!-- Adapter Factory -->
+      <adapterFactory class="tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorAdapterFactory"/>
+      <!-- Single Adapter -->
+      <!--
+      <adapter modelClass="GenModel" class="org.eclipse.emf.examples.generator.validator.GenModelValidatorGeneratorAdapter"/>
+      <adapter modelClass="GenClass" class="org.eclipse.emf.examples.generator.validator.GenClassValidatorGeneratorAdapter"/>
+      -->
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="tudresden.ocl20.pivot.codegen.adapter.popupMenu"
+            objectClass="org.eclipse.emf.codegen.ecore.genmodel.GenModel">
+         <action
+               class="tudresden.ocl20.pivot.codegen.adapter.actions.GenerateAdaptersActionDelegate"
+               enablesFor="1"
+               id="tudresden.ocl20.pivot.codegen.adapter.generateAdapters"
+               label="Generate Pivot Model adapters"
+               menubarPath="additions"
+               tooltip="Creates a new plugin project with skeleton code for Pivot Model adapters">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

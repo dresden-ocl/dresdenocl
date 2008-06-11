@@ -1,0 +1,78 @@
+<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="EnumerationLiteralAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%GenClass genClass = (GenClass)argument;
+GenPackage genPackage = genClass.getGenPackage();
+GenModel genModel = genPackage.getGenModel();
+String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
+String adapterClass = PivotAdapterGeneratorUtil.getAdapterClassName(genModel, "EnumerationLiteral");
+String adapteeClass =  PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "EnumerationLiteral");
+String adapteeName = PivotAdapterGeneratorUtil.getDSLElementName(adapteeClass);
+String implementThis = PivotAdapterGeneratorUtil.getImplementThis();%>
+package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
+
+<%genModel.addImport("org.apache.log4j.Logger");
+genModel.addImport("tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral");
+genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Enumeration");
+genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral");
+genModel.addImport(PivotAdapterGeneratorUtil.getPackageNameFor(genClass) + adapteeClass);
+genModel.markImportLocation(stringBuffer);%>
+
+/**
+ * An implementation of the Pivot Model {@link EnumerationLiteral} concept for <%=modelName%>.
+ *
+ * @generated
+ */
+public class <%=adapterClass%> extends AbstractEnumerationLiteral implements EnumerationLiteral {
+
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger.getLogger(<%=adapterClass%>.class);
+
+	// the adapted <%=adapteeClass%> data type
+	private <%=adapteeClass%> <%=adapteeName%>;
+	
+	/**
+	 * Creates a new <code><%=adapterClass%></code> instance.
+	 *
+	 * @param <%=adapteeName%> the {@link <%=adapteeClass%>} that is adopted by this class
+	 *
+	 * @generated
+	 */
+	public <%=adapterClass%>(<%=adapteeClass%> <%=adapteeName%>) {
+	
+		if (logger.isDebugEnabled()) {
+			logger.debug("<%=adapterClass%>(<%=adapteeName%>=" + <%=adapteeName%> + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	
+		// initialize
+		this.<%=adapteeName%> = <%=adapteeName%>;
+	
+		if (logger.isDebugEnabled()) {
+			logger.debug("<%=adapteeClass%>() - exit"); //$NON-NLS-1$
+		}
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#getName()
+	 *
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		<%=implementThis%>
+		return null;
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#getEnumeration()
+	 *
+	 * @generated
+	 */
+	@Override
+	public Enumeration getEnumeration() {
+		<%=implementThis%>
+		return null;
+	}
+
+}
+<%genModel.emitSortedImports();%>

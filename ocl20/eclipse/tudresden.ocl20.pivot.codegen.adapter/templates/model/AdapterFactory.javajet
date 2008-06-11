@@ -1,0 +1,358 @@
+<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="AdapterFactory" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil"%>
+<%GenModel genModel = (GenModel)argument;
+String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
+String packageName = PivotAdapterGeneratorUtil.getAdapterPackage(genModel);
+String className = modelName + "AdapterFactory";
+String namespaceClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "Namespace");
+String namespaceName = PivotAdapterGeneratorUtil.getDSLElementName(namespaceClass);
+String typeClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "Type");
+String typeName = PivotAdapterGeneratorUtil.getDSLElementName(typeClass);
+String enumClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "Enumeration");
+String enumName = PivotAdapterGeneratorUtil.getDSLElementName(enumClass);
+String enumLiteralClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "EnumerationLiteral");
+String enumLiteralName = PivotAdapterGeneratorUtil.getDSLElementName(enumLiteralClass);
+String primitiveTypeClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "PrimitiveType");
+String primitiveTypeName = PivotAdapterGeneratorUtil.getDSLElementName(primitiveTypeClass);
+String propertyClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "Property");
+String propertyName = PivotAdapterGeneratorUtil.getDSLElementName(propertyClass);
+String operationClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "Operation");
+String operationName = PivotAdapterGeneratorUtil.getDSLElementName(operationClass);
+String parameterClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "Parameter");
+String parameterName = PivotAdapterGeneratorUtil.getDSLElementName(parameterClass);
+String commonSuperTypeName = PivotAdapterGeneratorUtil.getCommonSuperType(genModel);
+%>
+package <%=packageName%>;
+
+<%genModel.addImport("java.util.HashMap");
+genModel.addImport("java.util.Map");
+genModel.addImport("org.eclipse.osgi.util.NLS");
+genModel.addImport("org.apache.log4j.Logger");
+genModel.addImport("tudresden.ocl20.pivot.pivotmodel.NamedElement");
+if (!commonSuperTypeName.equals("Object")) {
+	genModel.addImport(commonSuperTypeName);
+}
+if (enumClass != null) {
+	if (!enumClass.contains("."))
+		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, enumClass));
+	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Enumeration");
+}
+if (enumLiteralClass != null) {
+	if (!enumLiteralClass.contains("."))
+		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, enumLiteralClass));
+	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral");
+}
+if (namespaceClass != null) {
+	if (!namespaceClass.contains("."))
+		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, namespaceClass));
+	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Namespace");
+}
+if (operationClass != null) {
+	if (!operationClass.contains("."))
+		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, operationClass));
+	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Operation");
+}
+if (parameterClass != null) {
+	if (!parameterClass.contains("."))
+		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, parameterClass));
+	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Parameter");
+}
+if (primitiveTypeClass != null) {
+	if (!primitiveTypeClass.contains("."))
+		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, primitiveTypeClass));
+	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.PrimitiveType");
+}
+if (propertyClass != null) {
+	if (!propertyClass.contains("."))
+		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, propertyClass));
+	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Property");
+}
+if (typeClass != null) {
+	if (!typeClass.contains("."))
+		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, typeClass));
+	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Type");
+}
+%>
+<%genModel.markImportLocation(stringBuffer);%>
+<%
+if (commonSuperTypeName.contains("."))	// get rid of the package name
+	commonSuperTypeName = commonSuperTypeName.substring(commonSuperTypeName.lastIndexOf(".") + 1);
+%>
+
+/**
+ * Factory for Pivot Model types.
+ *
+ * @generated
+ */
+public class <%=className%> {
+
+	// logger for this class
+	private static final Logger logger = Logger
+			.getLogger(<%=className%>.class);
+
+	/**
+	 * The Singleton instance of the factory.
+	 */
+	public static <%=className%> INSTANCE = new <%=className%>();
+
+	// a cache for previously created adapters
+	private Map<<%=commonSuperTypeName%>, NamedElement> adapters;
+
+	/**
+	 * Clients are not supposed to instantiate this class.
+	 *
+	 * @generated
+	 */
+	private <%=className%>() {
+		adapters = new HashMap<<%=commonSuperTypeName%>, NamedElement>();
+	}
+
+<%if (namespaceClass != null) {%>
+	/**
+	 * Creates a {@link Namespace} adapter for an {@link <%=namespaceClass%>}.
+	 *
+	 * @generated
+	 */
+	public Namespace createNamespace(<%=namespaceClass%> <%=namespaceName%>) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createNamespace(<%=namespaceName%>=" + <%=namespaceName%> +
+				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		Namespace namespace = (Namespace) adapters.get(<%=namespaceName%>);
+
+		if (namespace == null) {
+			if (logger.isInfoEnabled()) {
+					// TODO: replace "<%=namespaceName%>.getName()"
+					logger.info(NLS.bind(<%=modelName%>ModelMessages.<%=className%>_CreatingPivotModelAdapter,
+							"<%=namespaceClass%>", "<%=namespaceName%>.getName()")); //$NON-NLS-1$
+			}
+			namespace = new <%=modelName%>Namespace(<%=namespaceName%>);
+			adapters.put(<%=namespaceName%>, namespace);
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("createNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
+		}
+
+		return namespace;
+	}
+<%}%>
+
+<%if (typeClass != null) {%>
+	/**
+	 * Creates a {@link Type} adapter for a {@link <%=typeClass%>}.
+	 *
+	 * @generated
+	 */
+	public Type createType(<%=typeClass%> <%=typeName%>) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createType(<%=typeName%>=" + <%=typeName%> +
+				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		Type type = (Type) adapters.get(<%=typeName%>);
+
+		if (type == null) {
+			type = new <%=modelName%>Type(<%=typeName%>);
+			adapters.put(<%=typeName%>, type);
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
+		}
+
+		return type;
+	}
+	
+	// TODO: if there are multiple types in the DSL invoke this methode to decide
+	// 		which type to create
+	/*
+	public Type createType(DSLTypeSuperclass dslTypeSuperclass) {
+		Type type = null;
+
+		if (dslTypeSuperclass == null) {
+			return null;
+		}
+
+		// TODO: should check for all subclasses of dslTypeSuperclass
+		// if (dslTypeSuperclass instanceof ASubclass) {
+		//	type = createType((ASubclass) dslTypeSuperclass);
+		// }
+
+		else {
+			// should not happen
+			throw new IllegalArgumentException(
+					"Unknown DSLTypeSuperclass type: " + dslTypeSuperclass); //$NON-NLS-1$
+		}
+
+		return type;
+	}
+	*/
+
+<%}%>
+
+<%if (enumClass != null) {%>
+	/**
+	 * Creates an {@link Enumeration} adapter for an {@link <%=enumClass%>}.
+	 *
+	 * @generated
+	 */
+	public Enumeration createEnumeration(<%=enumClass%> <%=enumName%>) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createEnumeration(<%=enumName%>=" + <%=enumName%> +
+				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		Enumeration enumeration = (Enumeration) adapters.get(<%=enumName%>);
+
+		if (enumeration == null) {
+			enumeration = new <%=modelName%>Enumeration(<%=enumName%>);
+			adapters.put(<%=enumName%>, enumeration);
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("createEnumeration() - exit - return value=" + enumeration); //$NON-NLS-1$
+		}
+
+		return enumeration;
+	}
+<%}%>
+
+<%if (enumLiteralClass != null) {%>
+	/**
+	 * Creates an {@link EnumerationLiteral} adapter for an {@link <%=enumLiteralClass%>}.
+	 *
+	 * @generated
+	 */
+	public EnumerationLiteral createEnumerationLiteral(<%=enumLiteralClass%> <%=enumLiteralName%>) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createEnumerationLiteral(<%=enumLiteralName%>=" + <%=enumLiteralName%> + 
+				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		EnumerationLiteral literal = (EnumerationLiteral) adapters
+				.get(<%=enumLiteralName%>);
+
+		if (literal == null) {
+			literal = new <%=modelName%>EnumerationLiteral(<%=enumLiteralName%>);
+			adapters.put(<%=enumLiteralName%>, literal);
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("createEnumerationLiteral() - exit - return value=" + literal); //$NON-NLS-1$
+		}
+
+		return literal;
+	}
+<%}%>
+
+<%if (primitiveTypeClass != null) {%>
+	/**
+	 * Creates a {@link PrimitiveType} adapter for a {@link <%=primitiveTypeClass%>}.
+	 *
+	 * @generated
+	 */
+	public Type createPrimitiveType(<%=primitiveTypeClass%> <%=primitiveTypeName%>) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createPrimitiveType(<%=primitiveTypeName%>=" + <%=primitiveTypeName%> + 
+				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		PrimitiveType primitiveType = (PrimitiveType) adapters.get(<%=primitiveTypeName%>);
+
+		if (primitiveType == null) {
+			primitiveType = new <%=modelName%>PrimitiveType(<%=primitiveTypeName%>);
+			adapters.put(<%=primitiveTypeName%>, primitiveType);
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("createPrimitiveType() - exit - return value=" + primitiveType); //$NON-NLS-1$
+		}
+
+		return primitiveType;
+	}
+<%}%>
+
+<%if (propertyClass != null) {%>
+	/**
+	 * Creates a {@link Property} adapter for a {@link <%=propertyClass%>}.
+	 *
+	 * @generated
+	 */
+	public Property createProperty(<%=propertyClass%> <%=propertyName%>) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createProperty(<%=propertyName%>=" + <%=propertyName%> +
+				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		Property property = (Property) adapters.get(<%=propertyName%>);
+
+		if (property == null) {
+			property = new <%=modelName%>Property(<%=propertyName%>);
+			adapters.put(<%=propertyName%>, property);
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
+		}
+
+		return property;
+	}
+<%}%>
+
+<%if (operationClass != null) {%>
+	/**
+	 * Creates an {@link Operation} adapter for an {@link <%=operationClass%>}.
+	 *
+	 * @generated
+	 */
+	public Operation createOperation(<%=operationClass%> <%=operationName%>) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createOperation(<%=operationName%>=" + <%=operationName%> +
+				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		Operation operation = (Operation) adapters.get(<%=operationName%>);
+
+		if (operation == null) {
+			operation = new <%=modelName%>Operation(<%=operationName%>);
+			adapters.put(<%=operationName%>, operation);
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("createOperation() - exit - return value=" + operation); //$NON-NLS-1$
+		}
+
+		return operation;
+	}
+<%}%>
+
+<%if (parameterClass != null) {%>
+	/**
+	 * Creates a {@link Parameter} adapter for a {@link <%=parameterClass%>}.
+	 *
+	 * @generated
+	 */
+	public Parameter createParameter(<%=parameterClass%> <%=parameterName%>) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createParameter(<%=parameterName%>=" + <%=parameterName%> +
+				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		Parameter parameter = (Parameter) adapters.get(<%=parameterName%>);
+
+		if (parameter == null) {
+			parameter = new <%=modelName%>Parameter(<%=parameterName%>);
+			adapters.put(<%=parameterName%>, parameter);
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("createParameter() - exit - return value=" + parameter); //$NON-NLS-1$
+		}
+
+		return parameter;
+	}
+<%}%>
+
+}
+<%genModel.emitSortedImports();%>
