@@ -1,0 +1,44 @@
+Build Instructions for the Dresden OCL2 Toolkit Eclipse Plugins (Version 1)
+For the instructions for the Dresden OCL2 Toolkit (Version 2) see GETTING_STARTED.txt!
+
+The Dresden OCL2 Toolkit comes with a set of Eclipse plugins. These plugins 
+will not be built automatically by the main ant script. To build the Plugins 
+please follow these instructions:
+
+Base Plugin
+-------------
+
+The Base Plugin provides access to toolkit ressources for other Eclipse plugins.
+
+1.	Check out at least the folders 'src', 'resources', 'lib', 'eclipse/base' 
+	and the file build.xml into a new Java Project
+2. 	Copy the plugin.xml and the build.properties file from the folder 
+	eclipse/base to the top level folder of the project
+3. 	Set the folders eclipse/base/src and src as the project src folders
+4.	Use the function "PDE Tools->Convert Projects to Plugin Projects" of the
+	project's context menu.  
+5.	Run the build.xml file (target 'jar') and refresh your project
+6.	Include all missing jar files into the classpath
+
+
+OclEditor Plugin
+-----------------
+
+The OCLEditor Plugin provides an OCL editor for Eclipse.
+
+1.	You need the base plugin as a project in your workspace (see above)
+2.	Check out eclipse/ocleditor into a new Java Project
+3.	Use the function "PDE Tools->Convert Projects to Plugin Projects" of the
+	project's context menu.  
+
+Visualization Plugin
+-----------------
+
+With the Visualization Plugin you can visualize the inner structure of the 
+Netbeans Metadata Repository
+
+1.	You need the base plugin as a project in your workspace (see above)
+2.	Check out eclipse/visualization into a new Java Project
+3.	Use the function "PDE Tools->Convert Projects to Plugin Projects" of the
+	project's context menu.  
+4.	Add all missing jar files from you base plugin project to the classpath
