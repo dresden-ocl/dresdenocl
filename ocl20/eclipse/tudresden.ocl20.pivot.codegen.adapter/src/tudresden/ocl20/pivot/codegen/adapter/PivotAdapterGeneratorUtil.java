@@ -97,15 +97,10 @@ public class PivotAdapterGeneratorUtil {
 
 		Iterator<GenClass> dslTypeIter = annotatedElements.values().iterator();
 		EClass commonSuperType = null;
-		String origGenPackage = "";
 
+		// find the first common super type
 		if (dslTypeIter.hasNext()) {
 			GenClass dslTypeGenClass = dslTypeIter.next();
-			// this trick is necessary, since all package information needed for code
-			// generation is lost when the EClass, that is needed for the computation
-			// of the common super class, is used
-			origGenPackage = dslTypeGenClass.getGenPackage()
-					.getInterfacePackageName();
 			commonSuperType = dslTypeGenClass.getEcoreClass();
 		} else
 			// no elements are annotated, so no common super type can be found
@@ -118,10 +113,10 @@ public class PivotAdapterGeneratorUtil {
 				return "Object";
 			}
 		}
-		// the package of the original common super type is added to the name,
-		// since there is no way for an EClass to find out about its real package
-		// name
-		return origGenPackage + "." + commonSuperType.getName();
+
+		return genModel.findGenPackage(commonSuperType.getEPackage())
+				.getInterfacePackageName()
+				+ "." + commonSuperType.getName();
 	}
 
 	/**
