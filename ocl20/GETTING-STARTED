@@ -5,6 +5,19 @@
   information needed to get the toolkit running. If you encounter problems,
   please don't hesitate to report them (See "Contact" at the end of this 
   document).
+  
+  This directory contains two different Versions of the DRESDEN OCL2 TOOLKIT!
+  
+  The Dresden OCL2 Toolkit Version 1 is directly located in this directory.
+  The Dresden OCL2 Toolkit Version 2 contains a lot of Eclipse plug-ins which can be
+  found in the sub directory 'eclipse'.
+  
+  To learn more about the Version 2 of the DRESDEN OCL2 TOOLKIT read the
+  GETTING_STARTED.txt in the eclipse directory.
+  
+  If you want to know more about Version 1 of the DRESDEN OCL2 TOOLKIT, continue
+  reading this GETTING-STARTED file.
+  
 
   Prerequisites
   -------------
