@@ -20,14 +20,12 @@ by Ronny Brandt and Claas Wilke
 
 	The tutorial starts with the installation of the needed Eclipse plugins. Then it is described how to load a domain specific model and a model instance. Afterwords the importation and interpretation of OCL expressions will be explained.
 
-  The work and actions described in this tutorial were realized and tested with Eclipse 3.3.2 \cite{Ecl}. Besides the Eclipse SDK you need also to install the required plugins of the Eclipse Modeling Framework (EMF). During this tutorial the EMF plugins in version 2.3.2 were used.
-  
+  The procedure described in this tutorial is realized and tested with Eclipse 3.3.2 \cite{Ecl}. Besides the Eclipse SDK you also need to install the required plugins of the Eclipse Modeling Framework (EMF). During this tutorial the EMF plugins of version 2.3.2 were used.
+ 
   To install the EMF plugins you have to download them from the EMF website \cite{EMF} and to extract them into the ``plugins"' directory of Eclipse. Afterwords you can start the Eclipse SDK. Alternatively you can install the plugins by using the Eclipse Update Manager after starting the Eclipse SDK.
 	
 	\section{Installing the Dresden OCL2 Toolkit}
 	
-	Um die Werkzeuge des Dresden OCL2 Toolkits nutzen zu können, müssen diese entweder als Eclipse-Plugins installiert werden, oder als Plugin-Projekte in den Eclipse Workspace importiert werden. Beider Vorgehensweisen werden im folgenden kurz erläutert.
-
 	To use the Dresden 0CL2 Toolkit you need to install them as Eclipse plugins, or to import them into your Eclipse workspace. Both possibilities are explained in the following.
 	
 	\subsection{Installing the Eclipse plugins}
@@ -36,10 +34,9 @@ by Ronny Brandt and Claas Wilke
 	
 	\subsection{Importing the Toolkit into an Eclipse Workspace}
 
-	
-	Alternatively you ca import the OCL2 Toolkit as plugin projects into an Eclipse workspace. There are two different possibilities to import the plugins into a workspace. On the one hand you can import the plugins from your file system, if you already have downloaded them (e.g. from \cite{ToolkitSourceforge} as source code distribution). 
-	
-	One the other hand you can import the plugins directly from the SVN (Subversion) directory of the Dresden OCL2 Toolkit. Both possibilities are described below.
+	Alternatively you can import the OCL2 Toolkit as plugin projects into an Eclipse workspace. There are two different options to do that.
+
+On the one hand you can import the plugins from your file system, if you already have downloaded them (e.g. from \cite{ToolkitSourceforge} as a source code distribution). One the other hand you can import the plugins directly from the SVN (Subversion) directory of the Dresden OCL2 Toolkit. Both possibilities are described below.
 	
 	\subsubsection{Import the plugins from the local file system}
 	
@@ -83,6 +80,10 @@ by Ronny Brandt and Claas Wilke
 
 	\section{Building the OCL2 Parser}
 	
+  If you decided to run the OCL2 Toolkit as project plugins into your workspace,  you need to build the OCL2 parser of the Dresden OCL2 Toolkit via an Ant build script. If you installed the Toolkit using jar archives, you can skip this chapter of the tutorial.
+  
+  To build the OCL2 Parser select the file ``build.xml"' in the project ``tudresden.ocl20.pivot.ocl2parser"' and open the context menu via a right mouse click. Select the function ``Run As ... > Ant Build"' (see figure \ref{pic:Build}).
+
 	If you decided to run the OCL2 Toolkit as project plugins into your workspace,  you need to build the OCL2 parser of the Dresden OCL2 Toolkt via an Ant build script. If you installed the Toolkit using jar archives, you can skip this chapter of the tutorial.
 	To build the OCL2 Parser select the file ``build.xml"' in the project ``tudresden.ocl20.pivot.ocl2parser"' and open the context menu via a right mouse click. Select the function ``Run As ... > Ant Build"' (see figure \ref{pic:Build}).
 
@@ -216,11 +217,12 @@ by Ronny Brandt and Claas Wilke
 	
 	Using the ``Clear~..."' functionality, results can be removed from the interpreter view. You can remove all results or select results which you want to remove before (``Remove~Selected~Results"').
 	
-	Using the check box ``Use~cache"' you can activate the caching mechanism described in \cite{DABrandt} to improve the performance of the interpreter.
-
-	\section{Conclusion}
-	This tutorial has shown, how to use the Dresden OCL2 Toolkit version 2. It explained how to install or import and start the Toolkit's plugins. Afterwords it has shown how to use the interpreter of the Dresden OCL2 Toolkit.
-	
+  Using the check box ``Use~cache"', you can activate the caching mechanism described in \cite{DABrandt} to improve the performance of the interpreter.
+  
+  \section{Conclusion}
+  
+  This tutorial described how to use the Dresden OCL2 Toolkit version 2. It explained how to install or import and start the Toolkit's plugins. Afterwards the usage of the interpreter of the Dresden OCL2 Toolkit was shown.
+  	
 	As mentioned before, more information about the Dresden OCL2 Toolkit is available at the website of Dresden OCL2 Toolkits \cite{ToolkitHP}.
 
 	\newpage
