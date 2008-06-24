@@ -46,6 +46,7 @@ public class OclFilesTest extends TestCase {
 		String fileName = "oclTestFiles/oclFile01.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
+			test.setUMLModel("LoyalRoyalOCL2Parser_4.xmi");
 			test.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
@@ -229,9 +230,34 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}
 	
+/*
+ * 
+ * 
+ * Here we switch the model to Person.xmi
+ * 
+ * 
+ * 
+ * 
+ */
 	public void testAllInstanceTest() {
+		
+		String fileName = "oclTestFiles/allInstanceTest.ocl";
+		try {
+			TestPerformer test = TestPerformer.getDefault();
+			test.setUMLModel("PersonTest.xmi");
+			test.parseFile(fileName);
+		} catch(Throwable ex) {
+			String message = " This error occured for file " + fileName + ".";
+			System.err.println(message);
+			ex.printStackTrace();
+			
+			fail();
+			return;
+		}
+		
+		assertTrue(true);
 
-		IMetamodel umlMetaModel = null;
+		/*IMetamodel umlMetaModel = null;
 		IModelProvider modelProvider = null;
 		IModel model = null;
 		String fileDirectory = null;
@@ -308,6 +334,57 @@ public class OclFilesTest extends TestCase {
 			parser.parse();
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + filename + ".";
+			System.err.println(message);
+			ex.printStackTrace();
+			
+			fail();
+			return;
+		}
+		
+		assertTrue(true);*/
+	}
+	
+	public void testDefinitionTest() {
+		String fileName = "oclTestFiles/definitionTest.ocl";
+		try {
+			TestPerformer test = TestPerformer.getDefault();
+			test.parseFile(fileName);
+		} catch(Throwable ex) {
+			String message = " This error occured for file " + fileName + ".";
+			System.err.println(message);
+			ex.printStackTrace();
+			
+			fail();
+			return;
+		}
+		
+		assertTrue(true);
+	}
+	
+	public void testCollectionTest() {
+		String fileName = "oclTestFiles/collectionTest.ocl";
+		try {
+			TestPerformer test = TestPerformer.getDefault();
+			test.parseFile(fileName);
+		} catch(Throwable ex) {
+			String message = " This error occured for file " + fileName + ".";
+			System.err.println(message);
+			ex.printStackTrace();
+			
+			fail();
+			return;
+		}
+		
+		assertTrue(true);
+	}
+	
+	public void testIteratorCollectionTest() {
+		String fileName = "oclTestFiles/iteratorCollectionTest.ocl";
+		try {
+			TestPerformer test = TestPerformer.getDefault();
+			test.parseFile(fileName);
+		} catch(Throwable ex) {
+			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
 			ex.printStackTrace();
 			

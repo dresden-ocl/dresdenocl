@@ -40,7 +40,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class PropertyOutput extends TestCase {
 	public void testPrintLoyaltyProgramProperties() {
 		try {
-			IModel model = TestPerformer.getDefault().getLoyaltyProgramModel();
+			IModel model = TestPerformer.getDefault().getCurrentModel();
 			
 			List<String> pathName = new ArrayList<String>();
 			pathName.add("LoyaltyProgram");

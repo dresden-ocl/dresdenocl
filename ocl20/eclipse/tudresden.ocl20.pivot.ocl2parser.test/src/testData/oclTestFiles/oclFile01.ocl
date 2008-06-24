@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 package RoyalLoyal 
   context Burning 
-    inv: self.oclIsKindOf(Transaction) = true 
+    inv: self.oclIsKindOf(Transaction) = true
     inv: self.oclIsTypeOf(Transaction) = false 
     inv: self.oclIsTypeOf(Burning) = true 
     inv: self.oclIsKindOf(Burning) = true 

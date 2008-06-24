@@ -42,7 +42,7 @@ public class TestPerformer {
 	static protected TestPerformer self = null;
 	
 	/**
-	 * This constructor loads the uml metamodel and the model <i>LoyalRoyalOCL2Parser_4.xmi</i>.
+	 * This constructor loads the uml metamodel.
 	 * @throws Exception is thrown if any error occurred while loading the model or the metamodel
 	 */
 	private TestPerformer() throws Exception {
@@ -56,17 +56,6 @@ public class TestPerformer {
 		} catch(Exception ex) {
 			throw new Exception("Unable to load uml metmodel.   " + ex.getMessage());
 		}
-		
-		
-		
-		modelProvider = umlMetaModel.getModelProvider();
-		File currentDir = new File(".");
-		System.out.println("Current directory: " + currentDir.getAbsolutePath());
-		fileDirectory = "./src/testData/";
-		File modelFile = new File(fileDirectory+ "LoyalRoyalOCL2Parser_4.xmi");
-		if (!modelFile.exists()) throw new Exception("The model file doesn't exists.");
-		
-		model = modelProvider.getModel(modelFile);
 	}
 	
 	/**
@@ -78,6 +67,27 @@ public class TestPerformer {
 		if (self == null) self = new TestPerformer();
 		
 		return self;
+	}
+	
+	/**
+	 * With this method a model (in uml) can be set. This method must be
+	 * invoked before the <i>parseFile</i> method.
+	 * @param umlModelName the filename of the uml model that is located in the <i>./src/testdata</i> directory
+	 * @throws Exception is thrown if the model cannot be initialized or the model file is not found
+	 */
+	public void setUMLModel(String umlModelName) throws Exception {
+		if (model != null) {
+			if (model.getDisplayName().equals(umlModelName)) return;
+		}
+		
+		modelProvider = umlMetaModel.getModelProvider();
+		File currentDir = new File(".");
+		//System.out.println("Current directory: " + currentDir.getAbsolutePath());
+		fileDirectory = "./src/testData/";
+		File modelFile = new File(fileDirectory+ umlModelName);
+		if (!modelFile.exists()) throw new Exception("The model file doesn't exists.");
+		
+		model = modelProvider.getModel(modelFile);
 	}
 	
 	/**
@@ -102,7 +112,7 @@ public class TestPerformer {
 	 * Get the model instance of the loaded model.
 	 * @return the model instance of the loaded model
 	 */
-	public IModel getLoyaltyProgramModel() {
+	public IModel getCurrentModel() {
 		return model;
 	}
 }
