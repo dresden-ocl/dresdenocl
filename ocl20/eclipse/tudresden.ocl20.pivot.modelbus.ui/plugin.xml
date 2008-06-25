@@ -50,28 +50,5 @@
          </description>
       </wizard>
    </extension>
-      <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            description="Temporary tests"
-            id="tudresden.ocl20.pivot.modelbus.actionSet"
-            label="Model Bus"
-            visible="true">
-         <action
-               class="tudresden.ocl20.pivot.modelbus.ui.test.LoadModelsDelegate"
-               id="tudresden.ocl20.pivot.modelbus.modelLoadAction"
-               label="Load Models"
-               style="push"
-               toolbarPath="tests">
-         </action>
-         <action
-               class="tudresden.ocl20.pivot.modelbus.ui.test.LoadModelInstanceDelegate"
-               id="tudresden.ocl20.pivot.modelbus.ui.modelInstanceLoadAction"
-               label="Load ModelInstance"
-               style="push"
-               toolbarPath="tests">
-         </action>
-      </actionSet>
-   </extension>
    
 </plugin>
