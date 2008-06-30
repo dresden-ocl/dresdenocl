@@ -50,6 +50,7 @@ public class GenModelPivotAdapterGeneratorAdapter extends
 	protected static final int MODEL_MESSAGES_ID = 5;
 	protected static final int MESSAGES_ID = 6;
 	protected static final int PROVIDER_ID = 7;
+	protected static final int LOG4JPROPERTIES_ID = 8;
 
 	protected static final JETEmitterDescriptor[] JET_EMITTER_DESCRIPTORS = {
 			new JETEmitterDescriptor("manifest.mfjet",
@@ -67,7 +68,9 @@ public class GenModelPivotAdapterGeneratorAdapter extends
 			new JETEmitterDescriptor("model/Messages.propertiesjet",
 					"tudresden.ocl20.pivot.codegen.adapter.templates.Messages"),
 			new JETEmitterDescriptor("provider/ModelProvider.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.ModelProvider") };
+					"tudresden.ocl20.pivot.codegen.adapter.templates.ModelProvider"),
+			new JETEmitterDescriptor("log4j.propertiesjet",
+					"tudresden.ocl20.pivot.codegen.adapter.templates.Log4jProperties") };
 
 	protected JETEmitterDescriptor[] getJETEmitterDescriptors() {
 		return JET_EMITTER_DESCRIPTORS;
@@ -370,6 +373,19 @@ public class GenModelPivotAdapterGeneratorAdapter extends
 				1));
 	}
 
+	protected void generateLog4jProperties(String projectName, GenModel genModel,
+			Monitor monitor) {
+		monitor.beginTask("", 2);
+		message = PivotAdapterGeneratorPlugin.INSTANCE
+				.getString("GeneratingLog4jProperties.message");
+		monitor.subTask(message);
+
+		String targetFile = projectName + "/log4j.properties";
+		generateText(targetFile, getJETEmitter(getJETEmitterDescriptors(),
+				LOG4JPROPERTIES_ID), null, true,
+				getEncoding(URI.createURI(targetFile)), createMonitor(monitor, 1));
+	}
+
 	@Override
 	protected Diagnostic generateModel(Object object, Monitor monitor) {
 		GenModel genModel = (GenModel) object;
@@ -385,6 +401,7 @@ public class GenModelPivotAdapterGeneratorAdapter extends
 		generateModelMessages(projectName, genModel, monitor);
 		generateMessages(projectName, genModel, monitor);
 		generateModelProvider(projectName, genModel, monitor);
+		generateLog4jProperties(projectName, genModel, monitor);
 
 		return Diagnostic.OK_INSTANCE;
 	}

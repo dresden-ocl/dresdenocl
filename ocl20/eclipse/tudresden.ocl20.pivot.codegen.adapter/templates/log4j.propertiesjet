@@ -1,0 +1,20 @@
+<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil" class="Log4jProperties" %>
+<%GenModel genModel = (GenModel)argument;
+String projectName = PivotAdapterGeneratorUtil.getProjectName(genModel);%>
+# This file can be used to configure additional logging behaviour for this plugin.
+# The settings will be added to those provided by default by the LoggingPlugin.
+
+### stdout appender ###
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target = System.out
+log4j.appender.stdout.layout = org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern = %p %c: %m%n
+
+# socket appender #
+log4j.appender.socket=org.apache.log4j.net.SocketAppender
+log4j.appender.socket.RemoteHost=localhost
+log4j.appender.socket.Port=4445
+log4j.appender.socket.LocationInfo=true
+
+# activate debugging for test purposes
+log4j.logger.<%=projectName%> = debug,socket
