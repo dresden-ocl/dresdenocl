@@ -1,23 +1,18 @@
 
+  PLEASE BE AWARE THAT A NEWER VERSION OF THE TOOLKIT WAS DEVELOPED AND THIS
+  VERSION IS DEPRECATED!
+  
+  The newer version is called Dresden OCL2 Toolkit For Eclipse and can be found
+  in its own trunk directory.
+  
+  
+
   GETTING STARTED WITH THE DRESDEN OCL TOOLKIT FOR OCL2.0 (Source Release)
 
   This document is still in a very early stage and covers only the most basic
   information needed to get the toolkit running. If you encounter problems,
   please don't hesitate to report them (See "Contact" at the end of this 
-  document).
-  
-  This directory contains two different Versions of the DRESDEN OCL2 TOOLKIT!
-  
-  The Dresden OCL2 Toolkit Version 1 is directly located in this directory.
-  The Dresden OCL2 Toolkit Version 2 contains a lot of Eclipse plug-ins which can be
-  found in the sub directory 'eclipse'.
-  
-  To learn more about the Version 2 of the DRESDEN OCL2 TOOLKIT read the
-  GETTING_STARTED.txt in the eclipse directory.
-  
-  If you want to know more about Version 1 of the DRESDEN OCL2 TOOLKIT, continue
-  reading this GETTING-STARTED file.
-  
+  document).  
 
   Prerequisites
   -------------
