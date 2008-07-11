@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--                                                                         -->
+<!-- Build file for Dresden OCL20 Toolkit for Eclipse                        -->
+<!--                                                                         -->
+<!-- Copyright (c) 2008 Claas Wilke                                          -->
+<!-- Released under GNU Lesser General Public License (LGPL), Version 2.1    -->
+<!-- or later.                                                               -->
+<!--                                                                         -->
+
+<project basedir="." default="dist" name="DresdenOCL2.0">
+
+	<!-- Written by Claas Wilke (claaswilke@gmx.net) -->
+	<target name="dist" description="Creates a binary and a source distribution package of the eclipse plugins depending on the pivot model. The created distribution can be found in the folder dist. ATTENTION: Eclipse plugins must be created before using the Eclipse wizard!" >
+
+		<!-- Create Binary files directories -->
+		<!-- ATTENTION: Eclipse plugins must be created before! (See maessages below) -->
+		<echo message="ATTENTION: To include the eclipse plugins into this release you have to place them into the directory 'eclipse/bin'"/>
+		<echo message="The Eclipse plugins can be created using the Wizard 'Export -> Plug-in-Development -> deployable plugins and features.'"/>
+		<mkdir dir="${basedir}/dist/bin/eclipse"/>
+		<copy todir="${basedir}/dist/bin/eclipse">
+			<fileset dir="${basedir}/eclipse/bin"/>
+		</copy>
+
+		<!-- Create Source file directories -->
+		<mkdir dir="${basedir}/dist/src"/>
+		<copy todir="${basedir}/dist/src">
+			<fileset dir="${basedir}">
+				<include name="eclipse/**"/>
+				<exclude name="eclipse/OLD_GETTING_STARTED.txt"/>
+				<exclude name="eclipse/GETTING_STARTED.txt"/>
+				<exclude name="eclipse/base/**"/>
+				<exclude name="eclipse/ocleditor/**"/>
+				<exclude name="eclipse/visualization/**"/>
+				<exclude name="eclipse/bin/**"/>
+			</fileset>
+		</copy>
+
+		<!-- Create Documentation -->
+		<copy todir="${basedir}/dist/bin">
+			<fileset file="${basedir}/GETTING_STARTED.txt"/>
+		</copy>
+		<copy todir="${basedir}/dist/src">
+			<fileset file="${basedir}/GETTING_STARTED.txt"/>
+		</copy>
+		<copy todir="${basedir}/dist/bin/doc">
+			<fileset dir="${basedir}/doc/pdf">
+				<include name="tutorial_eng.pdf"/>
+				<include name="tutorial_ger.pdf"/>
+			</fileset>
+		</copy>
+		<copy todir="${basedir}/dist/src/doc">
+			<fileset dir="${basedir}/doc/pdf">
+				<include name="tutorial_eng.pdf"/>
+				<include name="tutorial_ger.pdf"/>
+			</fileset>
+		</copy>
+
+		<!-- Zip binary files -->
+		<tar tarfile="${basedir}/dist/dresden-ocl2-2.0.1.tar" basedir="${basedir}/dist/bin"/>
+		<gzip zipfile="${basedir}/dist/dresden-ocl2-2.0.1.tar.gz" src="${basedir}/dist/dresden-ocl2-2.0.1.tar"/>
+
+		<!-- Zip source files -->
+		<tar tarfile="${basedir}/dist/dresden-ocl2-src-2.0.1.tar" basedir="${basedir}/dist/src"/>
+		<gzip zipfile="${basedir}/dist/dresden-ocl2-src-2.0.1.tar.gz" src="${basedir}/dist/dresden-ocl2-src-2.0.1.tar"/>
+
+		<!-- delete temporary files -->
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${basedir}/dist/bin" />
+			<fileset dir="${basedir}/dist/src" />
+			<fileset file="${basedir}/dist/*.tar"/>
+		</delete>
+	</target>
+
+</project>
