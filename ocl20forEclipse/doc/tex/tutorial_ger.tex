@@ -11,11 +11,11 @@
 \begin{document}
 
 \begin{center}
-\textbf{\LARGE{Dresden OCL2 Toolkit Version 2 Tutorial\newline\newline}}
+\textbf{\LARGE{Eine Einführung in das\newline\newline Dresden OCL2 Toolkit for Eclipse\newline\newline}}
 von Ronny Brandt und Claas Wilke
 \end{center}
 
-	Dieses Dokument beschreibt den Einstieg in die Arbeit mit dem Dresden OCL2 Toolkit Version 2. Die Version 2 basiert auf der neuen Infrastruktur des Pivotmodells, das im Großen Beleg von Matthias Bräuer \cite{GBBraeuer} näher beschrieben ist. Weitere Informationen zum Toolkit befinden sich auch auf der Webseite des Dresden OCL2 Toolkit \cite{ToolkitHP}.
+	Dieses Dokument beschreibt den Einstieg in die Arbeit mit dem Dresden OCL2 Toolkit for Eclipse. Diese Toolkit Version basiert auf der neuen Infrastruktur des Pivotmodells, das im Großen Beleg von Matthias Bräuer \cite{GBBraeuer} näher beschrieben ist. Weitere Informationen zum Toolkit befinden sich auch auf der Webseite des Dresden OCL2 Toolkit \cite{ToolkitHP}.
 	
 	Das Tutorial gliedert sich wie folgt: Zunächst wird das Installieren der nötigen Eclipse-Plugins für das Toolkit beschrieben. Anschließend wird das Laden eines domänen-spezifischen Modells und einer Modell-Instanz beschrieben. Dann wird das laden von OCL Expressions erläutert. Zum Abschluss wird noch auf das Interpretieren von OCL Exressions eingegangen.
 	
@@ -23,13 +23,13 @@ von Ronny Brandt und Claas Wilke
 	
 	Um die EMF-Plugins zu installieren, müssen diese von der EMF-Homepage \cite{EMF} heruntergeladen und in das Plugin-Verzeichniss von Eclipse entpackt werden. Anschließend kann das Eclipse SDK gestartet werden. Alternativ können die Plugins auch nach dem Start des Eclipse SDK über den Eclipse Update Manager installiert werden. 
 	
-	\section{Das Dresden OCL2 Toolkit installieren}
+	\section{Das Dresden OCL2 Toolkit for Eclipse installieren}
 	
-	Um die Werkzeuge des Dresden OCL2 Toolkits nutzen zu können, müssen diese entweder als Eclipse-Plugins installiert werden, oder als Plugin-Projekte in den Eclipse Workspace importiert werden. Beider Vorgehensweisen werden im folgenden kurz erläutert.
+	Um die Werkzeuge des Dresden OCL2 Toolkit for Eclpise nutzen zu können, müssen diese entweder als Eclipse-Plugins installiert werden, oder als Plugin-Projekte in den Eclipse Workspace importiert werden. Beider Vorgehensweisen werden im folgenden kurz erläutert.
 	
 	\subsection{Installieren der Eclipse-Plugins}
 	
-	Um das Toolkit als Eclispe-Plugins zu installieren, müssen die Plugins als jar-Archive vorliegen. Diese sind z. B. unter \cite{ToolkitSourceforge} verfügbar. Die jar-Archive müssen einfach in den "`plugins"'-Unterordner des Eclipse SDK kopiert werden. Anschließend kann Eclipse gestartet und mit dem Dresden OCL2 Toolkit 2 gearbeitet werden.
+	Um das Toolkit als Eclispe-Plugins zu installieren, müssen die Plugins als jar-Archive vorliegen. Diese sind z. B. unter \cite{ToolkitSourceforge} verfügbar. Die jar-Archive müssen einfach in den "`plugins"'-Unterordner des Eclipse SDK kopiert werden. Anschließend kann Eclipse gestartet und mit dem Dresden OCL2 Toolkit for Eclipse gearbeitet werden.
 	
 	\subsection{Import als Projekte in den Workspace}
 	
@@ -43,14 +43,14 @@ von Ronny Brandt und Claas Wilke
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/Import-EPiW}
+		\includegraphics[width=0.8\linewidth]{figures/Import-EPiW}
 		\caption{Import vorhandener Plugins (1).}
 		\label{pic:Import-EPiW}
 	\end{figure}
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/ImportProjects}
+		\includegraphics[width=0.8\linewidth]{figures/ImportProjects}
 		\caption{Import vorhandener Plugins (2).}
 		\label{pic:ImportProjects}
 	\end{figure}
@@ -61,29 +61,29 @@ von Ronny Brandt und Claas Wilke
 	
 	Nach der Installation von Supclipse existiert eine neue "`Perspektive"' für den Zugriff auf SVN im Eclipse SDK. Diese kann über das Menü "`Window > Open Perpective > Other..."' durch Auswahl von "`SVN Repository Exploring"' geöffnet werden. Im View "`SVN Repository"' fügt man ein neues Repository hinzu (Siehe Abbildung \ref{pic:SVN}) und gibt "`https://dresden-ocl.svn.sourceforge.net/svnroot/""dresden-ocl/"' als URL ein. Nach der Auswahl von "`Finish"' erscheint das SVN-Wurzel\-ver\-zeichnis im Repository-View. 
 	
-	Um die Plugins nun zu importieren, markiert man diese im Repository-Verzeichnis "`trunk/ocl20/eclipse"' und wählt "`Checkout..."' im Kontextmenü (Siehe Abbildung \ref{pic:Checkout}). Die vorgegebenen Einstellungen können übernommen und die Plugins mit einem Klick auf "`Finish"' importiert werden.
+	Um die Plugins nun zu importieren, markiert man diese im Repository-Verzeichnis "`trunk/ocl20forEclipse/eclipse"' und wählt "`Checkout..."' im Kontextmenü (Siehe Abbildung \ref{pic:Checkout}). Die vorgegebenen Einstellungen können übernommen und die Plugins mit einem Klick auf "`Finish"' importiert werden.
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/SVN}
+		\includegraphics[width=0.5\linewidth]{figures/SVN}
 		\caption{Hinzufügen eines SVN-Repositories.}
 		\label{pic:SVN}
 	\end{figure}
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1.0\linewidth]{Bilder/Checkout}
+		\includegraphics[width=1.0\linewidth]{figures/Checkout}
 		\caption{Auschecken der erforderlichen Dresden OCL2 Toolkit Plugins.}
 		\label{pic:Checkout}
 	\end{figure}
 
 	\section{Build des Parsers}
 	
-	Falls Plugins des Dresden OCL2 Toolkits als Plugin-Projekte importiert wurden, muss nun noch der OCL2-Parser per Build-Skript erstellt werden. Bei einem Installieren der Plugins als jar-Archive ist dieser Schritt zu überspringen. Dazu muss im Projekt "`tudresden.ocl20.pivot.ocl2parser"' die Datei "`build.xml"' ausgewählt und mit Rechtsklick aus dem Kontextmenü die Funktion "`Run As ... > Ant Build"' ausgewählt werden (Siehe Abbildung \ref{pic:Build}).
+	Falls Plugins des Dresden OCL2 Toolkits for Eclipse als Plugin-Projekte importiert wurden, muss nun noch der OCL2-Parser per Build-Skript erstellt werden. Bei einem Installieren der Plugins als jar-Archive ist dieser Schritt zu überspringen. Dazu muss im Projekt "`tudresden.ocl20.pivot.ocl2parser"' die Datei "`build.xml"' ausgewählt und mit Rechtsklick aus dem Kontextmenü die Funktion "`Run As ... > Ant Build"' ausgewählt werden (Siehe Abbildung \ref{pic:Build}).
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1.0\linewidth]{Bilder/Build}
+		\includegraphics[width=1.0\linewidth]{figures/Build}
 		\caption{Ausführen des Build-Skripts für den OCL2-Parser.}
 		\label{pic:Build}
 	\end{figure}
@@ -92,7 +92,7 @@ von Ronny Brandt und Claas Wilke
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1.0\linewidth]{Bilder/AntConfig}
+		\includegraphics[width=1.0\linewidth]{figures/AntConfig}
 		\caption{Einstellen der JRE des Build-Skripts.}
 		\label{pic:AntConfig}
 	\end{figure}
@@ -101,25 +101,25 @@ von Ronny Brandt und Claas Wilke
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/Refresh}
+		\includegraphics[width=0.5\linewidth]{figures/Refresh}
 		\caption{Aktualisieren des Projekts "`tudresden.ocl20.pivot.oclparser"'.}
 		\label{pic:Refresh}
 	\end{figure}
 	
 	Anschließend müssen die Projekte noch neu compiliert werden. Dazu ist im Eclipse-Menü die Funktion "`Project > Clean... > Clean all projects"' auszuführen. Danach sollten die Projekte keine Fehler mehr enthalten und ausführbar sein.
 	
-	\section{OCL2 Toolkit Version 2 nutzen}
+	\section{OCL2 Toolkit for Eclipse nutzen}
 	
-	Bei einer Installation des OCL2 Toolkits als jar-Archive reicht zum Nutzen des Toolkits das Starten des Eclipse SDK aus. Beim Arbeiten mit importieren Plugin-Projekten im Eclipse Workspace, muss zunächst eine neue Instanz der Eclipse SDK gestartet werden. Diese wird über das Menü "`Run > Run As > Eclipse Application"' ausgeführt. Sollte der Menüpunkt "`Eclipse Application"' nicht vorhanden sein, so muss zunächst eines der Plugins markiert werden. Wenn die neue Instanz gestartet wurde können die Plugins - wie in den folgenden Unterabschnitten beschrieben - verwendet werden.
+	Bei einer Installation des OCL2 Toolkits for Eclipse als jar-Archive reicht zum Nutzen des Toolkits das Starten des Eclipse SDK aus. Beim Arbeiten mit importieren Plugin-Projekten im Eclipse Workspace, muss zunächst eine neue Instanz der Eclipse SDK gestartet werden. Diese wird über das Menü "`Run > Run As > Eclipse Application"' ausgeführt. Sollte der Menüpunkt "`Eclipse Application"' nicht vorhanden sein, so muss zunächst eines der Plugins markiert werden. Wenn die neue Instanz gestartet wurde können die Plugins - wie in den folgenden Unterabschnitten beschrieben - verwendet werden.
 	
 	\subsection{Ein Modell laden}
 	
-	Nach dem Starten der Eclipse-Umgebung mit den Plugins des Dresden OCL2 Toolkits muss zunächst ein Modell geladen werden. Dies geschieht mit Hilfe eines Import-Wizards (File~>~Import...). 
+	Nach dem Starten der Eclipse-Umgebung mit den Plugins des Dresden OCL2 Toolkit for Eclipse muss zunächst ein Modell geladen werden. Dies geschieht mit Hilfe eines Import-Wizards (File~>~Import...). 
 	In diesem Wizard wird nach der Auswahl des Punktes "`Dresden OCL2 Toolkit > Domain-Specific~Model"' die Modell-Datei und das zugehörige Meta-Modell gewählt (Siehe Abbildung \ref{pic:LoadModel}). Das im Tutorial verwendete PML-Modell befindet sich im Projekt "`tudresden.ocl20.examples.pml"' unter dem Pfad "`model/pml.ecore"'.
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/LoadModel}
+		\includegraphics[width=0.8\linewidth]{figures/LoadModel}
 		\caption{Laden eines domänen-spezifischen Modells.}
 		\label{pic:LoadModel}
 	\end{figure}
@@ -128,7 +128,7 @@ von Ronny Brandt und Claas Wilke
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/MoBrOE}
+		\includegraphics[width=0.5\linewidth]{figures/MoBrOE}
 		\caption{Geladenes PML-Model im Model Browser.}
 		\label{pic:MoBrOE}
 	\end{figure}
@@ -139,16 +139,16 @@ von Ronny Brandt und Claas Wilke
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/LoadInstance}
+		\includegraphics[width=0.8\linewidth]{figures/LoadInstance}
 		\caption{Laden einer PML-Modell-Instanz.}
 		\label{pic:LoadInstance}
 	\end{figure}
 	
-	Abbildung \ref{pic:MoInBr} zeigt die geladene Modell-Instanz für das PML-Modell. Auch in dieser Ansicht kann über den Menü-Button zwischen den verfügbaren Modell-Instanzen gewechselt werden. In dem Auswahlmenü werden allerdings nur diejenigen Modell-Instanzen gezeigt, die zum aktiven Modell gehören. Mit dem Wechsel des Modells werden auch die verfügbaren Modell-Instanzen gewechselt.
+	Abbildung \ref{pic:MoInBr} zeigt die geladene Modell-Instanz für das PML-Modell. Auch in dieser Ansicht kann über den Menü-Button zwischen den verfügbaren Modell-Instanzen gewechselt werden (in einigen Fällen muss die Modell-Instanz nach dem Laden erst über das Dreieck ausgewählt werden, bevor sie im Browser angezeigt wird). In dem Auswahlmenü werden allerdings nur diejenigen Modell-Instanzen gezeigt, die zum aktiven Modell gehören. Mit dem Wechsel des Modells werden auch die verfügbaren Modell-Instanzen gewechselt.
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/MoInBr}
+		\includegraphics[width=0.5\linewidth]{figures/MoInBr}
 		\caption{Geladene PML-Modell-Instanz im Model Instance Browser.}
 		\label{pic:MoInBr}
 	\end{figure}
@@ -160,7 +160,7 @@ von Ronny Brandt und Claas Wilke
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/LoadExpressions}
+		\includegraphics[width=0.8\linewidth]{figures/LoadExpressions}
 		\caption{Der Import von OCL-Expressions für ein zuvor geladenes Modell.}
 		\label{pic:LoadExpressions}
 	\end{figure}
@@ -169,7 +169,7 @@ von Ronny Brandt und Claas Wilke
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/MoBrME}
+		\includegraphics[width=0.5\linewidth]{figures/MoBrME}
 		\caption{Geladene Expressions für pml-Model im Model Browser.}
 		\label{pic:MoBrME}
 	\end{figure}
@@ -181,7 +181,7 @@ von Ronny Brandt und Claas Wilke
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1\linewidth]{Bilder/IntViewMen}
+		\includegraphics[width=1\linewidth]{figures/IntViewMen}
 		\caption{Das Kontext-Menü des Interpreters.}
 		\label{pic:IntViewMen}
 	\end{figure}
@@ -190,7 +190,7 @@ von Ronny Brandt und Claas Wilke
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1\linewidth]{Bilder/IntView}
+		\includegraphics[width=1\linewidth]{figures/IntView}
 		\caption{Ausgewählte Ergebnisse in der Interpreter View.}
 		\label{pic:IntView}
 	\end{figure}
@@ -203,7 +203,7 @@ von Ronny Brandt und Claas Wilke
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.4\linewidth]{Bilder/AVTEnv}
+		\includegraphics[width=0.4\linewidth]{figures/AVTEnv}
 		\caption{Dialog zum Hinzufügen von Variablen zum Environment.}
 		\label{pic:AVTEnv}
 	\end{figure}
@@ -213,7 +213,7 @@ von Ronny Brandt und Claas Wilke
 	Mit der Checkbox "`Use~cache"' kann gewählt werden, ob der Interpreter den in \cite{DABrandt} beschriebenen Mechanismus zur Performance-Steigerung nutzt.
 	
 	\section{Zusammenfassung}
-	Dieses Tutorial gab einen Einstieg in die Verwendung des Dresden OCL2 Toolkit Version 2. Es wurde erläutert, wie die Plugins des Toolkits installiert oder importiert und gestartet werden. Anschließend wurde auf die Arbeit mit dem Interpreter des Dresden OCL2 Toolkits eingegangen.
+	Dieses Tutorial gab einen Einstieg in die Verwendung des Dresden OCL2 Toolkit for Eclipse. Es wurde erläutert, wie die Plugins des Toolkits installiert oder importiert und gestartet werden. Anschließend wurde auf die Arbeit mit dem Interpreter des Dresden OCL2 Toolkit for Eclipse eingegangen.
 	
 	Bei weiteren Informationen zum Dresden OCL2 Toolkit sei hier nochmals auf die Webseite des Dresden OCL2 Toolkits verwiesen \cite{ToolkitHP}.
 

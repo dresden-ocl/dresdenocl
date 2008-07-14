@@ -12,11 +12,11 @@
 \begin{document}
 
 \begin{center}
-\textbf{\LARGE{Dresden OCL2 Toolkit Version 2 Tutorial\newline\newline}}
+\textbf{\LARGE{An Introduction into the\newline\newline Dresden OCL2 Toolkit for Eclipse\newline\newline}}
 by Ronny Brandt and Claas Wilke
 \end{center}
 
-  These tutorial describes the work with the Dresden OCL2 Toolkit version 2. The version 2 is based on the new infrastructure called the ``pivot model"'. The pivot model was developed by Matthias Bräuer and is described in his ``Großer Beleg"' \cite{GBBraeuer}. Further information about the toolkit is available at the website of the Dresden OCL2 Toolkit \cite{ToolkitHP}.
+  These tutorial describes the work with the Dresden OCL2 Toolkit for Eclipse. This version of the Toolkit is based on the new infrastructure called the ``pivot model"'. The pivot model was developed by Matthias Bräuer and is described in his ``Großer Beleg"' \cite{GBBraeuer}. Further information about the toolkit is available at the website of the Dresden OCL2 Toolkit \cite{ToolkitHP}.
 
 	The tutorial starts with the installation of the needed Eclipse plugins. Then it is described how to load a domain specific model and a model instance. Afterwords the importation and interpretation of OCL expressions will be explained.
 
@@ -24,9 +24,9 @@ by Ronny Brandt and Claas Wilke
  
   To install the EMF plugins you have to download them from the EMF website \cite{EMF} and to extract them into the ``plugins"' directory of Eclipse. Afterwords you can start the Eclipse SDK. Alternatively you can install the plugins by using the Eclipse Update Manager after starting the Eclipse SDK.
 	
-	\section{Installing the Dresden OCL2 Toolkit}
+	\section{Installing the Dresden OCL2 Toolkit for Eclipse}
 	
-	To use the Dresden 0CL2 Toolkit you need to install them as Eclipse plugins, or to import them into your Eclipse workspace. Both possibilities are explained in the following.
+	To use the Dresden OCL2 Toolkit for Eclipse you need to install them as Eclipse plugins, or to import them into your Eclipse workspace. Both possibilities are explained in the following.
 	
 	\subsection{Installing the Eclipse plugins}
 	
@@ -44,14 +44,14 @@ On the one hand you can import the plugins from your file system, if you already
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/Import-EPiW}
+		\includegraphics[width=0.8\linewidth]{figures/Import-EPiW}
 		\caption{Plugin import from local file system (1).}
 		\label{pic:Import-EPiW}
 	\end{figure}
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/ImportProjects}
+		\includegraphics[width=0.8\linewidth]{figures/ImportProjects}
 		\caption{Plugin import from local file system (2).}
 		\label{pic:ImportProjects}
 	\end{figure}
@@ -62,34 +62,31 @@ On the one hand you can import the plugins from your file system, if you already
 	
   After installing Subclipse a new Eclispe perspective for access to SVN should exist. The perspective can be opened via the menu ``Window > Open Perpective > Other... > SVN Repository Exploring"'. In the view ``SVN Repository"' you can add a new repository (see figure \ref{pic:SVN}) using the URL ``https://dresden-ocl.svn.sourceforge.net/svnroot/dresden-ocl/"'. After pressing the button ``Finish"' the SVN repository root should the visible in the repository view.
 	
-	To checkout the plugins, you now select them in the repository directory ``trunk/ocl20/eclipse"' and use the ``Checkout..."' function in the context menu (see figure \ref{pic:Checkout}). The given settings could be used and after a click on the ``Finish"' button the plugins should be imported.
+	To checkout the plugins, you now select them in the repository directory ``trunk/ocl20forEclipse/eclipse"' and use the ``Checkout..."' function in the context menu (see figure \ref{pic:Checkout}). The given settings could be used and after a click on the ``Finish"' button the plugins should be imported.
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/SVN}
+		\includegraphics[width=0.5\linewidth]{figures/SVN}
 		\caption{Adding an SVN repository.}
 		\label{pic:SVN}
 	\end{figure}
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1.0\linewidth]{Bilder/Checkout}
+		\includegraphics[width=1.0\linewidth]{figures/Checkout}
 		\caption{Checkout of the Dresden OCL2 Toolkit plugin projects.}
 		\label{pic:Checkout}
 	\end{figure}
 
 	\section{Building the OCL2 Parser}
 	
-  If you decided to run the OCL2 Toolkit as project plugins into your workspace,  you need to build the OCL2 parser of the Dresden OCL2 Toolkit via an Ant build script. If you installed the Toolkit using jar archives, you can skip this chapter of the tutorial.
+  If you decided to run the OCL2 Toolkit for Eclipse as project plugins into your workspace, you need to build the OCL2 parser of the Dresden OCL2 Toolkit for Eclipse via an Ant build script. If you installed the Toolkit using jar archives, you can skip this chapter of the tutorial.
   
   To build the OCL2 Parser select the file ``build.xml"' in the project ``tudresden.ocl20.pivot.ocl2parser"' and open the context menu via a right mouse click. Select the function ``Run As ... > Ant Build"' (see figure \ref{pic:Build}).
 
-	If you decided to run the OCL2 Toolkit as project plugins into your workspace,  you need to build the OCL2 parser of the Dresden OCL2 Toolkt via an Ant build script. If you installed the Toolkit using jar archives, you can skip this chapter of the tutorial.
-	To build the OCL2 Parser select the file ``build.xml"' in the project ``tudresden.ocl20.pivot.ocl2parser"' and open the context menu via a right mouse click. Select the function ``Run As ... > Ant Build"' (see figure \ref{pic:Build}).
-
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1.0\linewidth]{Bilder/Build}
+		\includegraphics[width=1.0\linewidth]{figures/Build}
 		\caption{Executing the OCL2 parser build script.}
 		\label{pic:Build}
 	\end{figure}
@@ -98,7 +95,7 @@ On the one hand you can import the plugins from your file system, if you already
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1.0\linewidth]{Bilder/AntConfig}
+		\includegraphics[width=1.0\linewidth]{figures/AntConfig}
 		\caption{Settings of the JRE for the Ant build script.}
 		\label{pic:AntConfig}
 	\end{figure}
@@ -107,16 +104,16 @@ On the one hand you can import the plugins from your file system, if you already
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/Refresh}
+		\includegraphics[width=0.5\linewidth]{figures/Refresh}
 		\caption{Refreshing the project ``tudresden.ocl20.pivot.oclparser"'.}
 		\label{pic:Refresh}
 	\end{figure}
 	
 	Additionally you need to recompile all depending projects. Select the function ``Project > Clean... > Clean all projects"' in the Eclipse menu to clean all projects. All the projects should not contain any errors anymore and should be executable.
 	
-	\section{Using the Dresden OCL2 Toolkit Version 2}
+	\section{Using the Dresden OCL2 Toolkit for Eclipse}
 
-	If you installed the OCL2 Tookit using jar archives, you can execute the Toolkit by starting your Eclipse SDK. If you imported the Toolkit as plugin projects into an Eclispe workspace, you have to start a new Eclipse SDK instance. You can start a new instance via the menu ``Run > Run As > Eclipse Application"'. If the menu ``Eclipse Application"' is not available or disabled you need to select one of the plugins of the toolkit first. After starting the new Eclipse instance you can use the Dresden OCL2 Toolkit as described below.
+	If you installed the OCL2 Toolkit for Eclipse using jar archives, you can execute the Toolkit by starting your Eclipse SDK. If you imported the Toolkit as plugin projects into an Eclipse workspace, you have to start a new Eclipse SDK instance. You can start a new instance via the menu ``Run > Run As > Eclipse Application"'. If the menu ``Eclipse Application"' is not available or disabled you need to select one of the plugins of the toolkit first. After starting the new Eclipse instance you can use the Dresden OCL2 Toolkit for Eclipse as described below.
 	
 	\subsection{Loading a domain specific model}
 	
@@ -124,7 +121,7 @@ On the one hand you can import the plugins from your file system, if you already
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/LoadModel}
+		\includegraphics[width=0.8\linewidth]{figures/LoadModel}
 		\caption{Loading a domain specific model.}
 		\label{pic:LoadModel}
 	\end{figure}
@@ -133,7 +130,7 @@ On the one hand you can import the plugins from your file system, if you already
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/MoBrOE}
+		\includegraphics[width=0.5\linewidth]{figures/MoBrOE}
 		\caption{The loaded PML model in the model browser.}
 		\label{pic:MoBrOE}
 	\end{figure}
@@ -144,16 +141,16 @@ On the one hand you can import the plugins from your file system, if you already
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/LoadInstance}
+		\includegraphics[width=0.8\linewidth]{figures/LoadInstance}
 		\caption{Loading a PML model instance.}
 		\label{pic:LoadInstance}
 	\end{figure}
 	
-	Figure \ref{pic:MoInBr} shows the loaded model instance of the PML model. Like in the model browser you can switch between different model instances. Note that the model instance browser only shows the model instances of the model actually selected in the model browser. By switching the domain specific model, you also switch the pool of model instances available in the model instance browser.
+	Figure \ref{pic:MoInBr} shows the loaded model instance of the PML model. Like in the model browser you can switch between different model instances (after loading a model instance you could have to select the model instance first, before it appears in the model instance browser). Note that the model instance browser only shows the model instances of the model actually selected in the model browser. By switching the domain specific model, you also switch the pool of model instances available in the model instance browser.
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/MoInBr}
+		\includegraphics[width=0.5\linewidth]{figures/MoInBr}
 		\caption{A loaded PML model instance in the Model Instance Browser.}
 		\label{pic:MoInBr}
 	\end{figure}
@@ -165,7 +162,7 @@ On the one hand you can import the plugins from your file system, if you already
 
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.8\linewidth]{Bilder/LoadExpressions}
+		\includegraphics[width=0.8\linewidth]{figures/LoadExpressions}
 		\caption{The import of OCL expressions of a model loaded before.}
 		\label{pic:LoadExpressions}
 	\end{figure}
@@ -174,7 +171,7 @@ On the one hand you can import the plugins from your file system, if you already
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.5\linewidth]{Bilder/MoBrME}
+		\includegraphics[width=0.5\linewidth]{figures/MoBrME}
 		\caption{Parsed expressions of the PML model in the Model Browser.}
 		\label{pic:MoBrME}
 	\end{figure}
@@ -186,7 +183,7 @@ On the one hand you can import the plugins from your file system, if you already
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1\linewidth]{Bilder/IntViewMen}
+		\includegraphics[width=1\linewidth]{figures/IntViewMen}
 		\caption{The context menu of the Tnterpreter View}
 		\label{pic:IntViewMen}
 	\end{figure}
@@ -197,7 +194,7 @@ On the one hand you can import the plugins from your file system, if you already
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=1\linewidth]{Bilder/IntView}
+		\includegraphics[width=1\linewidth]{figures/IntView}
 		\caption{Some results in the Interpreter View.}
 		\label{pic:IntView}
 	\end{figure}
@@ -210,7 +207,7 @@ On the one hand you can import the plugins from your file system, if you already
 	
 	\begin{figure}[!htbp]
 		\centering
-		\includegraphics[width=0.4\linewidth]{Bilder/AVTEnv}
+		\includegraphics[width=0.4\linewidth]{figures/AVTEnv}
 		\caption{Window to add a variable to the environment.}
 		\label{pic:AVTEnv}
 	\end{figure}
@@ -221,9 +218,9 @@ On the one hand you can import the plugins from your file system, if you already
   
   \section{Conclusion}
   
-  This tutorial described how to use the Dresden OCL2 Toolkit version 2. It explained how to install or import and start the Toolkit's plugins. Afterwards the usage of the interpreter of the Dresden OCL2 Toolkit was shown.
+  This tutorial described how to use the Dresden OCL2 Toolkit for Eclipse. It explained how to install or import and start the Toolkit's plugins. Afterwards the usage of the interpreter of the Dresden OCL2 Toolkit for Eclipse was shown.
   	
-	As mentioned before, more information about the Dresden OCL2 Toolkit is available at the website of Dresden OCL2 Toolkits \cite{ToolkitHP}.
+	As mentioned before, more information about the Dresden OCL2 Toolkit is available at the website of Dresden OCL2 Toolkit \cite{ToolkitHP}.
 
 	\newpage
 	\bibliographystyle{alphadin}
