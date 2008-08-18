@@ -16,6 +16,9 @@ genModel.addImport("tudresden.ocl20.pivot.modelbus.IModel");
 genModel.addImport("tudresden.ocl20.pivot.modelbus.IModelProvider");
 genModel.addImport("tudresden.ocl20.pivot.modelbus.ModelAccessException");
 genModel.addImport("tudresden.ocl20.pivot.modelbus.base.AbstractModelProvider");
+genModel.addImport("org.eclipse.emf.ecore.resource.Resource");
+genModel.addImport("org.eclipse.emf.ecore.resource.ResourceSet");
+genModel.addImport("org.eclipse.emf.ecore.resource.impl.ResourceSetImpl");
 %>
 <%genModel.markImportLocation(stringBuffer);%>
 
@@ -29,36 +32,54 @@ public class <%=className%> extends AbstractModelProvider implements IModelProvi
 
   // Logger for this class
   private static final Logger logger = Logger.getLogger(<%=className%>.class);
+  
+  private ResourceSet resourceSet = null;
 
   /**
    * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.net.URL)
 	 *
 	 * @generated
    */
-  public IModel getModel(URL modelURL) throws ModelAccessException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("getModel(modelURL=" + modelURL + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-
-    URI modelURI;
-    IModel model = null;
-
-    // try to create a URI
-    try {
-      modelURI = URI.createURI(modelURL.toString());
-    }
-    catch (IllegalArgumentException e) {
-      throw new ModelAccessException("Invalid URL: " + modelURL,e); //$NON-NLS-1$
-    }
-
-		<%=implementThis%>
-
-    if (logger.isDebugEnabled()) {
-      logger.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
-    }
-
-    return model;
-  }
+	public IModel getModel(URL modelURL) throws ModelAccessException {
+	  
+	  	if (logger.isDebugEnabled()) {
+			logger.debug("getModel(modelURL=" + modelURL + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	
+		URI modelURI;
+		IModel model = null;
+		Resource resource;
+	
+		// try to create a URI
+		try {
+			modelURI = URI.createURI(modelURL.toString());
+		} catch (IllegalArgumentException e) {
+			throw new ModelAccessException("Invalid URL: " + modelURL, e); //$NON-NLS-1$
+		}
+	
+		// get the resource
+		resource = getResourceSet().getResource(modelURI, false);
+	
+		if (resource == null) {
+			// we only want to create the resource, not load it
+			resource = getResourceSet().createResource(modelURI);
+		}
+	
+		model = new <%=modelName%>Model(getResourceSet().getResource(modelURI, false));
+	
+		if (logger.isDebugEnabled()) {
+			logger.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
+		}
+	
+		return model;
+	}
+	
+	private ResourceSet getResourceSet() {
+		if (resourceSet == null)
+			return new ResourceSetImpl();
+		else
+			return resourceSet;
+	}
 
 }
 <%genModel.emitSortedImports();%>
