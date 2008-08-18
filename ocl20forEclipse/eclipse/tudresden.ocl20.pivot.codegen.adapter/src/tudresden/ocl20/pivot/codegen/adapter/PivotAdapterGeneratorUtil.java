@@ -29,6 +29,8 @@ public class PivotAdapterGeneratorUtil {
 	private static Map<String, GenClass> annotatedElements;
 	private static Map<String, String> packageNames;
 
+	private static String reservedKeywords[] = new String[] { "package", "class" };
+
 	private PivotAdapterGeneratorUtil() {
 		super();
 	}
@@ -113,7 +115,7 @@ public class PivotAdapterGeneratorUtil {
 				return "Object";
 			}
 		}
-
+		
 		return genModel.findGenPackage(commonSuperType.getEPackage())
 				.getInterfacePackageName()
 				+ "." + commonSuperType.getName();
@@ -216,8 +218,15 @@ public class PivotAdapterGeneratorUtil {
 			String dslModelTypeName = annotatedElements.get(pivotModelType).getName();
 			if (dslModelTypeName.equalsIgnoreCase(pivotModelType))
 				return getGenClassPackage(genModel, dslModelTypeName);
-			else
+			else {
+				// check whether the DSLs type name equals one of Java's reserved
+				// keywords -> full package name
+				for (String keyword : reservedKeywords) {
+					if (dslModelTypeName.equalsIgnoreCase(keyword))
+						return getGenClassPackage(genModel, dslModelTypeName);
+				}
 				return dslModelTypeName;
+			}
 		} else
 			return null;
 	}
@@ -225,6 +234,11 @@ public class PivotAdapterGeneratorUtil {
 	public static String getDSLElementName(String dslElement) {
 		if (dslElement == null)
 			return null;
+		// test, if the name is one of the reserved keywords of Java
+		for (String keyword : reservedKeywords) {
+			if (dslElement.equalsIgnoreCase(keyword))
+				dslElement = "a" + startWithCapitalLetter(dslElement);
+		}
 		// if the DSL Type is used with package name in front of the class name,
 		// skip the package name and put "dsl" in front of the name to distinguish
 		// from the Pivot Model namespace name

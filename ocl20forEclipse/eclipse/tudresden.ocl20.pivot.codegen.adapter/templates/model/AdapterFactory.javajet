@@ -73,10 +73,7 @@ if (typeClass != null) {
 }
 %>
 <%genModel.markImportLocation(stringBuffer);%>
-<%
-if (commonSuperTypeName.contains("."))	// get rid of the package name
-	commonSuperTypeName = commonSuperTypeName.substring(commonSuperTypeName.lastIndexOf(".") + 1);
-%>
+
 
 /**
  * Factory for Pivot Model types.

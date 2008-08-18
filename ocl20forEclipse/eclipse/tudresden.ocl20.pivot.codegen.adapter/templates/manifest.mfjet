@@ -21,7 +21,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 	" tudresden.ocl20.pivot.modelbus," + System.getProperty("line.separator") +
 	" tudresden.ocl20.pivot.pivotmodel," + System.getProperty("line.separator") +
 	" tudresden.ocl20.logging," + System.getProperty("line.separator") +
-	" org.apache.commons.lang";%>
+	" org.apache.commons.lang," + System.getProperty("line.separator") + 
+	" tudresden.ocl20.pivot.models.ecore";%>
 <%Iterator<String> requiredPluginIterator = genModel.getModelRequiredPlugins().iterator();
 if (requiredPluginIterator.hasNext()) { 
 	String pluginID = requiredPluginIterator.next();%>
