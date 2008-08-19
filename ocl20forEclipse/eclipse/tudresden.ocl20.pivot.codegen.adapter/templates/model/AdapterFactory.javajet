@@ -259,7 +259,7 @@ public class <%=className%> {
 	 *
 	 * @generated
 	 */
-	public Type createPrimitiveType(<%=primitiveTypeClass%> <%=primitiveTypeName%>) {
+	public PrimitiveType createPrimitiveType(<%=primitiveTypeClass%> <%=primitiveTypeName%>) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("createPrimitiveType(<%=primitiveTypeName%>=" + <%=primitiveTypeName%> + 
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
