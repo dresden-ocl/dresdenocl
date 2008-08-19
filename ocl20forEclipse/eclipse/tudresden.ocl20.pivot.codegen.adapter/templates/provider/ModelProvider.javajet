@@ -74,11 +74,17 @@ public class <%=className%> extends AbstractModelProvider implements IModelProvi
 		return model;
 	}
 	
-	private ResourceSet getResourceSet() {
-		if (resourceSet == null)
-			return new ResourceSetImpl();
-		else
-			return resourceSet;
+ 	/**
+	 * Helper method that lazily creates a resource set.
+	 * 
+	 * @return
+	 */
+	protected ResourceSet getResourceSet() {
+
+		if (resourceSet == null) {
+			resourceSet = new ResourceSetImpl();
+		}
+		return resourceSet;
 	}
 
 }
