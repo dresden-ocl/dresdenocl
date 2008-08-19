@@ -29,10 +29,16 @@ public class <%=adapterClass%> extends AbstractType implements Type {
 	
 	/**
 	 * Logger for this class
+	 *
+	 * @generated
 	 */
 	private static final Logger logger = Logger.getLogger(<%=adapterClass%>.class);
 	
-	// the adapted <%=adapteeClass%> class
+	/**
+	 * the adapted <%=adapteeClass%> class
+	 *
+	 * @generated
+	 */
 	private <%=adapteeClass%> <%=adapteeName%>;
 	
 	/**

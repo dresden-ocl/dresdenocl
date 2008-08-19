@@ -26,10 +26,16 @@ public class <%=adapterClass%> extends AbstractParameter implements Parameter {
 
 	/**
 	 * Logger for this class
+	 *
+	 * @generated
 	 */
 	private static final Logger logger = Logger.getLogger(<%=adapterClass%>.class);
 
-	// the adapted <%=modelName%> <%=adapteeClass%>
+	/**
+	 * the adapted <%=modelName%> <%=adapteeClass%>
+	 *
+	 * @generated
+	 */
 	private <%=adapteeClass%> <%=adapteeName%>;
 
 	/**

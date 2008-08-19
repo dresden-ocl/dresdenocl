@@ -38,7 +38,11 @@ genModel.markImportLocation(stringBuffer);
  */
 public class <%=className%> extends AbstractModel implements IModel {
 
-	// a logger for this class
+	/**
+	 * a logger for this class
+	 *
+	 * @generated
+	 */
 	private static final Logger logger = Logger.getLogger(<%=className%>.class);
 
 	// the resource containing the corresponding <%=modelName%> model

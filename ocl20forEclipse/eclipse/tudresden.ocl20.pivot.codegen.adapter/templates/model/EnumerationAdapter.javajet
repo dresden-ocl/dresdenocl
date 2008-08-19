@@ -28,10 +28,16 @@ public class <%=adapterClass%> extends AbstractEnumeration implements Enumeratio
 
 	/**
 	 * Logger for this class
+	 *
+	 * @generated
 	 */
 	private static final Logger logger = Logger.getLogger(<%=adapterClass%>.class);
 
-	// the adapted <%=adapteeClass%> data type
+	/**
+	 * the adapted <%=adapteeClass%> data type
+	 *
+	 * @generated
+	 */
 	private <%=adapteeClass%> <%=adapteeName%>;
 	
 	/**

@@ -82,16 +82,26 @@ if (typeClass != null) {
  */
 public class <%=className%> {
 
-	// logger for this class
+	/**
+	 * logger for this class
+	 *
+	 * @generated
+	 */
 	private static final Logger logger = Logger
 			.getLogger(<%=className%>.class);
 
 	/**
 	 * The Singleton instance of the factory.
+	 *
+	 * @generated
 	 */
 	public static <%=className%> INSTANCE = new <%=className%>();
 
-	// a cache for previously created adapters
+	/**
+	 * a cache for previously created adapters
+	 *
+	 * @generated
+	 */
 	private Map<<%=commonSuperTypeName%>, NamedElement> adapters;
 
 	/**
