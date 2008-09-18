@@ -3,8 +3,8 @@
 GenPackage genPackage = genClass.getGenPackage();
 GenModel genModel = genPackage.getGenModel();
 String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
-String adapterClass = PivotAdapterGeneratorUtil.getAdapterClassName(genModel, "Operation");
-String adapteeClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "Operation");
+String adapterClass = PivotAdapterGeneratorUtil.getAdapterClassName(genModel, genClass);
+String adapteeClass = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeName(genModel, genClass);
 String adapteeName = PivotAdapterGeneratorUtil.getDSLElementName(adapteeClass);
 String implementThis = PivotAdapterGeneratorUtil.getImplementThis();%>
 package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;

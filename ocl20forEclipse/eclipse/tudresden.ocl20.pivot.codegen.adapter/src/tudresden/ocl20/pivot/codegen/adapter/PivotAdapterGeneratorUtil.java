@@ -1,8 +1,10 @@
 package tudresden.ocl20.pivot.codegen.adapter;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
@@ -26,10 +28,14 @@ public class PivotAdapterGeneratorUtil {
 
 	// caches for all annotated elements ("PivotModel") and packages of all
 	// classes in the DSL meta model
-	private static Map<String, GenClass> annotatedElements;
+	private static Map<GenClass, String> dSL2PivotModel;
 	private static Map<String, String> packageNames;
+	private static Map<String, List<String>> pivotModel2DSL;
 
 	private static String reservedKeywords[] = new String[] { "package", "class" };
+	private static String pivotModelTypes[] = new String[] { "Enumeration",
+			"EnumerationLiteral", "Namespace", "Operation", "Parameter",
+			"PrimitiveType", "Property", "Type" };
 
 	private PivotAdapterGeneratorUtil() {
 		super();
@@ -40,7 +46,8 @@ public class PivotAdapterGeneratorUtil {
 	 * annotated elements and package names.
 	 */
 	public static void reset() {
-		annotatedElements = null;
+		dSL2PivotModel = null;
+		pivotModel2DSL = null;
 		packageNames = null;
 	}
 
@@ -94,10 +101,10 @@ public class PivotAdapterGeneratorUtil {
 	 * @return the common superclass of the all DSL types
 	 */
 	public static String getCommonSuperType(GenModel genModel) {
-		if (annotatedElements == null)
+		if (dSL2PivotModel == null)
 			createAnnotatedElements(genModel);
 
-		Iterator<GenClass> dslTypeIter = annotatedElements.values().iterator();
+		Iterator<GenClass> dslTypeIter = dSL2PivotModel.keySet().iterator();
 		EClass commonSuperType = null;
 
 		// find the first common super type
@@ -115,7 +122,7 @@ public class PivotAdapterGeneratorUtil {
 				return "Object";
 			}
 		}
-		
+
 		return genModel.findGenPackage(commonSuperType.getEPackage())
 				.getInterfacePackageName()
 				+ "." + commonSuperType.getName();
@@ -184,14 +191,21 @@ public class PivotAdapterGeneratorUtil {
 	}
 
 	protected static void createAnnotatedElements(GenModel genModel) {
-		annotatedElements = new HashMap<String, GenClass>();
+		dSL2PivotModel = new HashMap<GenClass, String>();
+		pivotModel2DSL = new HashMap<String, List<String>>();
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			for (GenClass genClass : genPackage.getGenClasses()) {
 				for (EAnnotation annotation : genClass.getEcoreClass()
 						.getEAnnotations()) {
 					String pivotModelTypeName = getAnnotationDetails(annotation);
 					if (pivotModelTypeName != null) {
-						annotatedElements.put(pivotModelTypeName, genClass);
+						// fill maps for both mapping directions
+						dSL2PivotModel.put(genClass, pivotModelTypeName);
+						if (pivotModel2DSL.containsKey(pivotModelTypeName))
+							pivotModel2DSL.get(pivotModelTypeName).add(genClass.getName());
+						else
+							pivotModel2DSL.put(pivotModelTypeName, new LinkedList<String>(
+									Arrays.asList(genClass.getName())));
 					}
 				}
 			}
@@ -199,24 +213,27 @@ public class PivotAdapterGeneratorUtil {
 	}
 
 	/**
+	 * Method tests if the DSL type name is unique. If not it generates an unique
+	 * name.
 	 * 
 	 * @param genModel
 	 *          the genModel of the DSL
-	 * @param pivotModelType
-	 *          the Pivot Model type the DSL type is looked up for
-	 * @return the name of the DSL type that is mapped to the Pivot Model type
+	 * @param genClass
+	 *          the DSL type
+	 * @return a unique name of the DSL type that is mapped to a Pivot Model
+	 *         element
 	 */
-	public static String getPivotModelAttributeName(GenModel genModel,
-			String pivotModelType) {
-		// all annotated elements (Pivot Model -> Type, etc.) are cached
-		if (annotatedElements == null) {
+	public static String getDSLModelUniqueTypeName(GenModel genModel,
+			GenClass genClass) {
+		// all annotated elements (DSL Type -> Pivot Model) are cached
+		if (dSL2PivotModel == null) {
 			createAnnotatedElements(genModel);
 		}
-		if (annotatedElements.containsKey(pivotModelType)) {
+		if (dSL2PivotModel.containsKey(genClass)) {
 			// tests, if DSL type names equal Pivot Model elements -> to avoid
 			// any confusion, the DSL types are used with full package name
-			String dslModelTypeName = annotatedElements.get(pivotModelType).getName();
-			if (dslModelTypeName.equalsIgnoreCase(pivotModelType))
+			String dslModelTypeName = genClass.getName();
+			if (Arrays.asList(pivotModelTypes).contains(dslModelTypeName))
 				return getGenClassPackage(genModel, dslModelTypeName);
 			else {
 				// check whether the DSLs type name equals one of Java's reserved
@@ -231,6 +248,80 @@ public class PivotAdapterGeneratorUtil {
 			return null;
 	}
 
+	/**
+	 * Returns a <code>List</code> of (not necessarily unique) DSL type names
+	 * for a Pivot Model type (more than 1 DSL type can be mapped to a Pivot Model
+	 * type).
+	 * 
+	 * @param genModel
+	 *          the genModel of the DSL
+	 * @param pivotModelType
+	 *          the Pivot Model type the DSL types are looked up for
+	 * @return a <code>List</code> of (not necessarily unique) DSL type names
+	 *         that are mapped to the <code>pivotModelType</code>
+	 */
+	public static List<String> getDSLModelTypeNames(GenModel genModel,
+			String pivotModelType) {
+		if (pivotModel2DSL == null)
+			createAnnotatedElements(genModel);
+		if (pivotModel2DSL.containsKey(pivotModelType))
+			return pivotModel2DSL.get(pivotModelType);
+		return null;
+	}
+
+	/**
+	 * Returns a <code>List</code> of unique DSL type names for a Pivot Model
+	 * type (more than 1 DSL type can be mapped to a Pivot Model type).
+	 * 
+	 * @param genModel
+	 *          the genModel of the DSL
+	 * @param pivotModelType
+	 *          the Pivot Model type the DSL types are looked up for
+	 * @return a <code>List</code> of unique DSL type names that are mapped to
+	 *         the <code>pivotModelType</code>
+	 */
+	public static List<String> getDSLModelUniqueTypeNames(GenModel genModel,
+			String pivotModelType) {
+		if (pivotModel2DSL == null)
+			createAnnotatedElements(genModel);
+		if (pivotModel2DSL.containsKey(pivotModelType)) {
+			List<String> dslModelUniqueTypeNames = new LinkedList<String>();
+			// tests, if DSL type names equal Pivot Model elements -> to avoid
+			// any confusion, the DSL types are used with full package name
+			List<String> dslModelTypeNames = pivotModel2DSL.get(pivotModelType);
+			for (String dslModelTypeName : dslModelTypeNames) {
+				boolean withPackage = false;
+				if (Arrays.asList(pivotModelTypes).contains(dslModelTypeName)) {
+					dslModelUniqueTypeNames.add(getGenClassPackage(genModel,
+							dslModelTypeName));
+					withPackage = true;
+				}	else {
+					// check whether the DSLs type name equals one of Java's reserved
+					// keywords -> full package name
+					for (String keyword : reservedKeywords) {
+						if (dslModelTypeName.equalsIgnoreCase(keyword)) {
+							dslModelUniqueTypeNames.add(getGenClassPackage(genModel,
+									dslModelTypeName));
+							withPackage = true;
+							break;
+						}
+					}
+				}
+				if (!withPackage)
+					dslModelUniqueTypeNames.add(dslModelTypeName);
+			}
+			return dslModelUniqueTypeNames;
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param dslElement
+	 *          the name of the DSL element
+	 * @return a name for this element that can be used without any naming
+	 *         conflicts
+	 */
 	public static String getDSLElementName(String dslElement) {
 		if (dslElement == null)
 			return null;
@@ -255,20 +346,31 @@ public class PivotAdapterGeneratorUtil {
 	 *         implementation
 	 */
 	public static String getImplementThis() {
-		return "// TODO: implement this method";
+		return "// TODO: implement this method"
+				+ System.getProperty("line.separator") + "\t\t"
+				+ "// don't forget to remove the @generated tag or change it to \"@generated NOT\"";
 	}
 
 	/**
 	 * 
+	 * @param genModel
 	 * @param genClass
-	 *          the GenModelClass for which the adapter has to be generated
-	 * @param suffix
-	 *          the appropriate suffix for the generated adapter, e.g. "Type",
-	 *          "Operation", ...
+	 *          the DSL type
 	 * @return the name for the adapter class
 	 */
-	public static String getAdapterClassName(GenModel genModel, String suffix) {
-		return genModel.getModelName() + startWithCapitalLetter(suffix);
+	public static String getAdapterClassName(GenModel genModel, GenClass genClass) {
+		return genModel.getModelName() + startWithCapitalLetter(genClass.getName());
+	}
+
+	/**
+	 * 
+	 * @param genModel
+	 * @param mappedType
+	 *          the type name of the Pivot Model
+	 * @return
+	 */
+	public static String getAdapterClassName(GenModel genModel, String mappedType) {
+		return genModel.getModelName() + startWithCapitalLetter(mappedType);
 	}
 
 	/**
@@ -279,7 +381,7 @@ public class PivotAdapterGeneratorUtil {
 	 */
 	public static String getProjectName(GenModel genModel) {
 		return "tudresden.ocl20.pivot.metamodels."
-				+ startWithLowerCaseLetter(genModel.getModelName());
+				+ genModel.getModelName().toLowerCase();
 	}
 
 	public static String startWithCapitalLetter(String string) {

@@ -1,10 +1,12 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="Model" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="Model" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil java.util.List"%>
 <%GenModel genModel = (GenModel)argument;
 String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
 String packageName = PivotAdapterGeneratorUtil.getAdapterPackage(genModel);
 String className = modelName + "Model";
-String namespaceClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "Namespace");
-String typeClass = PivotAdapterGeneratorUtil.getPivotModelAttributeName(genModel, "Type");
+List<String> namespaceClasses = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeNames(genModel, "Namespace");
+String namespaceClass = namespaceClasses.isEmpty() ? null : namespaceClasses.get(0);
+List<String> typeClasses = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeNames(genModel, "Type");
+String typeClass = typeClasses.isEmpty() ? null : typeClasses.get(0);
 String implementThis = PivotAdapterGeneratorUtil.getImplementThis();%>
 package <%=packageName%>;
 
@@ -135,10 +137,14 @@ public class <%=className%> extends AbstractModel implements IModel {
 
 		// add all sub-packages and subtypes to the new root package
 		for (EObject eObject : roots) {
-			if (eObject instanceof <%=namespaceClass%>)
-				; // TODO: add package to root package
-			if (eObject instanceof <%=typeClass%>)
+			<%for (String aNamespaceClass : namespaceClasses) {%>
+			if (eObject instanceof <%=aNamespaceClass%>)
+				; // TODO: add namespace to root package
+			<%}%>
+			<%for (String aTypeClass : typeClasses) {%>
+			if (eObject instanceof <%=aTypeClass%>)
 				; // TODO: add types to root package
+			<%}%>
 		}
 
 		return <%=modelName%>AdapterFactory.INSTANCE.createNamespace(rootPackage);

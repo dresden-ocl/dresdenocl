@@ -97,15 +97,15 @@ public class GenClassPivotAdapterGeneratorAdapter extends
 	 *          a monitor for progress status
 	 * @return
 	 */
-	protected Diagnostic generateAdapter(String mappedType, GenModel genModel,
-			Monitor monitor) {
+	protected Diagnostic generateAdapter(GenClass genClass, GenModel genModel,
+			String mappedType, Monitor monitor) {
 
 		// info that a new adapter is generated
 		monitor.beginTask("", 2);
 		message = PivotAdapterGeneratorPlugin.INSTANCE.getString("Generating"
 				+ mappedType + "Adapter.message",
 				new Object[] { PivotAdapterGeneratorUtil.getAdapterClassName(genModel,
-						mappedType) });
+						genClass.getName()) });
 		monitor.subTask(message);
 
 		// put generated code into the src folder of the new project
@@ -115,7 +115,7 @@ public class GenClassPivotAdapterGeneratorAdapter extends
 		// generate the actual java class
 		generateJava(targetPath, PivotAdapterGeneratorUtil
 				.getAdapterPackage(genModel), PivotAdapterGeneratorUtil
-				.getAdapterClassName(genModel, mappedType), getJETEmitter(
+				.getAdapterClassName(genModel, genClass), getJETEmitter(
 				getJETEmitterDescriptors(), jetEmitterDescriptorIds.get(mappedType)),
 				null, createMonitor(monitor, 1));
 
@@ -154,7 +154,7 @@ public class GenClassPivotAdapterGeneratorAdapter extends
 				|| mappedType.equals("Operation") || mappedType.equals("Namespace")
 				|| mappedType.equals("EnumerationLiteral")
 				|| mappedType.equals("Enumeration"))
-			return generateAdapter(mappedType, genModel, monitor);
+			return generateAdapter(genClass, genModel, mappedType, monitor);
 
 		// no Pivot Model type found
 		return new BasicDiagnostic(GenClassPivotAdapterGeneratorAdapter.class
