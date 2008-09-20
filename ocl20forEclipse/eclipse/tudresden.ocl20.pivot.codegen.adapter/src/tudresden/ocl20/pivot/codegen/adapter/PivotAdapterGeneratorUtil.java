@@ -29,10 +29,12 @@ public class PivotAdapterGeneratorUtil {
 	// caches for all annotated elements ("PivotModel") and packages of all
 	// classes in the DSL meta model
 	private static Map<GenClass, String> dSL2PivotModel;
-	private static Map<String, String> packageNames;
 	private static Map<String, List<String>> pivotModel2DSL;
+	private static Map<String, String> packageNames;
+	private static List<EClass> allDSLTypes;
 
-	private static String reservedKeywords[] = new String[] { "package", "class" };
+	private static String reservedKeywords[] = new String[] { "package", "class",
+			"interface" };
 	private static String pivotModelTypes[] = new String[] { "Enumeration",
 			"EnumerationLiteral", "Namespace", "Operation", "Parameter",
 			"PrimitiveType", "Property", "Type" };
@@ -49,6 +51,7 @@ public class PivotAdapterGeneratorUtil {
 		dSL2PivotModel = null;
 		pivotModel2DSL = null;
 		packageNames = null;
+		allDSLTypes = null;
 	}
 
 	public final static String TEMPLATE_LOCATION = PivotAdapterGeneratorPlugin.INSTANCE
@@ -129,6 +132,31 @@ public class PivotAdapterGeneratorUtil {
 	}
 
 	/**
+	 * Computes the common super type for all DSL types that are mapped to the
+	 * Pivot Model Type type.
+	 * 
+	 * @param genModel
+	 * @return the name of the common super type for all DSL <code>Type</code>
+	 *         types.
+	 */
+	public static String getCommonSuperTypeForDSLTypes(GenModel genModel) {
+		EClass commonSuperType;
+		if (pivotModel2DSL == null)
+			createAnnotatedElements(genModel);
+		if (!allDSLTypes.isEmpty()) {
+			Iterator<EClass> typesIter = allDSLTypes.iterator();
+			commonSuperType = typesIter.next();
+			while (typesIter.hasNext()) {
+				commonSuperType = getCommonSuperType(commonSuperType, typesIter.next());
+			}
+			return genModel.findGenPackage(commonSuperType.getEPackage())
+					.getInterfacePackageName()
+					+ "." + commonSuperType.getName();
+		} else
+			return null;
+	}
+
+	/**
 	 * 
 	 * @param genClass
 	 * @return the full package name of the genClass
@@ -193,6 +221,7 @@ public class PivotAdapterGeneratorUtil {
 	protected static void createAnnotatedElements(GenModel genModel) {
 		dSL2PivotModel = new HashMap<GenClass, String>();
 		pivotModel2DSL = new HashMap<String, List<String>>();
+		allDSLTypes = new LinkedList<EClass>();
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			for (GenClass genClass : genPackage.getGenClasses()) {
 				for (EAnnotation annotation : genClass.getEcoreClass()
@@ -206,6 +235,8 @@ public class PivotAdapterGeneratorUtil {
 						else
 							pivotModel2DSL.put(pivotModelTypeName, new LinkedList<String>(
 									Arrays.asList(genClass.getName())));
+						if (pivotModelTypeName.equalsIgnoreCase("Type"))
+							allDSLTypes.add(genClass.getEcoreClass());
 					}
 				}
 			}
@@ -295,7 +326,7 @@ public class PivotAdapterGeneratorUtil {
 					dslModelUniqueTypeNames.add(getGenClassPackage(genModel,
 							dslModelTypeName));
 					withPackage = true;
-				}	else {
+				} else {
 					// check whether the DSLs type name equals one of Java's reserved
 					// keywords -> full package name
 					for (String keyword : reservedKeywords) {
@@ -347,7 +378,8 @@ public class PivotAdapterGeneratorUtil {
 	 */
 	public static String getImplementThis() {
 		return "// TODO: implement this method"
-				+ System.getProperty("line.separator") + "\t\t"
+				+ System.getProperty("line.separator")
+				+ "\t\t"
 				+ "// don't forget to remove the @generated tag or change it to \"@generated NOT\"";
 	}
 
@@ -371,6 +403,19 @@ public class PivotAdapterGeneratorUtil {
 	 */
 	public static String getAdapterClassName(GenModel genModel, String mappedType) {
 		return genModel.getModelName() + startWithCapitalLetter(mappedType);
+	}
+
+	/**
+	 * 
+	 * @param typeName
+	 * @return
+	 */
+	public static String getTypeNameWithoutPackage(String typeName) {
+		typeName = startWithLowerCaseLetter(typeName.substring(typeName
+				.lastIndexOf(".") + 1));
+		if (Arrays.asList(reservedKeywords).contains(typeName))
+			typeName = "a" + startWithCapitalLetter(typeName);
+		return typeName;
 	}
 
 	/**

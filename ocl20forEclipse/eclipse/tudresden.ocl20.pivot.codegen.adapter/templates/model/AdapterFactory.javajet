@@ -85,6 +85,8 @@ for (String parameterAdapterName : PivotAdapterGeneratorUtil.getDSLModelTypeName
 }
 
 String commonSuperTypeName = PivotAdapterGeneratorUtil.getCommonSuperType(genModel);
+String dslTypeSuperclass = PivotAdapterGeneratorUtil.getCommonSuperTypeForDSLTypes(genModel);
+String dslTypeSuperclassName = PivotAdapterGeneratorUtil.startWithLowerCaseLetter(PivotAdapterGeneratorUtil.getTypeNameWithoutPackage(dslTypeSuperclass));
 %>
 package <%=packageName%>;
 
@@ -264,32 +266,32 @@ public class <%=className%> {
 <%}%>
 
 <%if (!typeClasses.isEmpty()){%>
-	// TODO: if there are multiple types in the DSL invoke this method to decide
-	// 		which type to create
-	/*
-	public Type createType(DSLTypeSuperclass dslTypeSuperclass) {
+	/**
+	 * Creates a specific {@link Type} adapter for an unknown DSL type.
+	 *
+	 * @generated
+	 */
+	public Type createType(<%=dslTypeSuperclass%> <%=dslTypeSuperclassName%>) {
 		Type type = null;
 
-		if (dslTypeSuperclass == null) {
+		if (<%=dslTypeSuperclassName%> == null) {
 			return null;
 		}
 
-		// TODO: should check for all subclasses of dslTypeSuperclass
-		// if (dslTypeSuperclass instanceof ASubclass) {
-		//	type = createType((ASubclass) dslTypeSuperclass);
-		// }
-
+<%for (Object typeClass : typeClasses){%>
+		if (<%=dslTypeSuperclassName%> instanceof <%=typeClass%>) {
+			type = createType((<%=typeClass%>) <%=dslTypeSuperclassName%>);
+		}
+<%}%>
 		else {
 			// should not happen
 			throw new IllegalArgumentException(
-					"Unknown DSLTypeSuperclass type: " + dslTypeSuperclass); //$NON-NLS-1$
+					"Unknown type: " + <%=dslTypeSuperclassName%>); //$NON-NLS-1$
 		}
 
 		return type;
 	}
-	*/
 <%}%>
-
 
 <%for (int i = 0; i < enumClasses.size(); i++) {
 		String enumClass = enumClasses.get(i);
