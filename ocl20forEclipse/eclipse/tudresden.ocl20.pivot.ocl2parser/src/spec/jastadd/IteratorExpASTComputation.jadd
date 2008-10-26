@@ -104,22 +104,29 @@ public aspect IteratorExpASTComputation {
 				// Get the original variable as instance.
 				VariableAS varAS = getIterators(i);
 				
-				// Compute the variable.
-				Variable var = varAS.computeASM(env);
-				
 				/* If the variable has an init expression, it is an error.
 				 * OCL Specification page 76, disambiguating rule [1].
 				 */
+				if (varAS.hasExpression() == true) throw new BuildingASMException("The iterator must not have an init expression.", varAS.getName());
+				
+				/*
+				
+				// If the variable has an init expression, it is an error.
+				// OCL Specification page 76, disambiguating rule [1].
+				//
 				if (var.getInitExpression() != null) throw new BuildingASMException("The iterator must not have an init expression.", varAS.getName());
 				
-				/* If the variable has no type, then take the element type of the source expression.
-				 * OCL Specification page 73,  the third rule of the synthesized attributes.
-				 */
+				*/
 				
+				Variable var = null;
+				
+				/* If the variable has no type, then take the element type of the source expression.
+				 * OCL Specification page 73,  the third rule of the synthesised attributes.
+				 */
 				if (!varAS.hasType()) {
-					var.setType(sourceElementType);
+					var = env.getExpFactory().createVariable(varAS.getName().getValue(), sourceElementType, null);
 				} else { // The user has specified a type for the iterator variable.
-					
+					var = varAS.computeASM(env);
 					/*
 					 * This user specified type must match the element type of the collection that
 					 * is involved iterator expression.
@@ -221,7 +228,7 @@ public aspect IteratorExpASTComputation {
 		 * whether a the source expression has a name. If not we create a new variable name for the new iterator variable.
 		 */
 		String iteratorVariableName = sourceExpression.getName();
-		if (iteratorVariableName.equals("")) {
+		if ((iteratorVariableName == null) || (iteratorVariableName.equals(""))) {
 			iteratorVariableName = VariableNameGenerator.getDefault().getVariableName();
 		}
 		Variable iterator = factory.createVariable(iteratorVariableName, sourceElementType, null);
@@ -321,8 +328,13 @@ public aspect IteratorExpASTComputation {
 			// Look for the operation name in the element type.
 			Operation operation = sourceType.lookupOperation(operationName, argumentList);
 			
-			// Create an iterator variable with the name of the source expression and the element type of the source expression.		
-			Variable iterator = factory.createVariable(sourceExpression.getName(), sourceType, null);
+			// Create an iterator variable with the name of the source expression or if no one
+			// exists, generate a new name, and the element type of the source expression.
+			String iteratorVariableName = sourceExpression.getName();
+			if ((iteratorVariableName == null) || (iteratorVariableName.equals(""))) {
+				iteratorVariableName = VariableNameGenerator.getDefault().getVariableName();
+			}
+			Variable iterator = factory.createVariable(iteratorVariableName, sourceType, null);
 			
 			// Build on top of the variable a variable expression.
 			VariableExp variableExp = factory.createVariableExp(iterator);

@@ -109,11 +109,27 @@ public aspect TypeASMComputation {
 		
 		// Iterate over all variables.
 		for(int i = 0; i < numberVariable; i++) {
+			// Get the token of the variable for error handling.
+			TokenAS variableToken = getVariableAS(i).getName();
+			
+			VariableAS varAS = getVariableAS(i);
+			
+			// Examine whether the variable has an init expression. If so, it is an error.
+			// OCL-Specification, page 79, Disambiguating rule [1]
+			if (varAS.hasExpression() == true) throw new BuildingASMException("The variable may not" +
+					" have an init expression in a tuple type definition.", variableToken);
+			
+			// All variables must have a type. If no type exists, it is an error.
+			// OCL-Specification, page 79, Disambiguating rule [1]
+			if (varAS.hasType() == false) throw new BuildingASMException("The variable must have" +
+					" a type in the tuple type definition.", variableToken);
+						
 			// Transform the variable as instance into an variable.
 			Variable var = getVariableAS(i).computeASM(env);
 			
-			// Get the token of the variable for error handling.
-			TokenAS variableToken = getVariableAS(i).getName();
+			
+			
+			/*
 			
 			// Examine whether the variable has an init expression. If so, it is an error.
 			// OCL-Specification, page 79, Disambiguating rule [1]
@@ -124,6 +140,8 @@ public aspect TypeASMComputation {
 			// OCL-Specification, page 79, Disambiguating rule [1]
 			if (var.getType() == null) throw new BuildingASMException("The variable must have" +
 					" a type in the tuple type definition.", variableToken);
+					
+			*/
 			
 			// Add the variable as property to the list.
 			variableList.add(var.asProperty());

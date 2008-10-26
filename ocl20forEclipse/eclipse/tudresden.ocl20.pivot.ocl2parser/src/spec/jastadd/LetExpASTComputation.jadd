@@ -46,19 +46,28 @@ public aspect LetExpASMComputation {
 			// Get an VariableAS instance
 			VariableAS varAS = getVariable(i);
 			
+			// Examine whether the variable has a type. If not, it is an error (OCL Spec, page 87, disambiguating rule 2).
+			if (varAS.hasType() == false) throw new BuildingASMException("The variable has no type.", varAS.getName());
+			
+			// Examine whether the variable has an init expression. If not, it is an error (OCL Spec, page 87, disambiguating rule 2)
+			if (varAS.hasExpression() == false) throw new BuildingASMException("The variable has no valid init expression.", varAS.getName());
+			
 			// Compute the variable with the inner envirnoment. Note that
 			// this environment collect the variables in this for-loop.
 			// So no variable declared before the next computation can declared twice,
 			// for example in the ocl init expression of the variable.
 			Variable var = varAS.computeASM(innerEnv);
 			
+			/*
 			// Examine whether the variable has an init expression. If not, it is an error (OCL Spec, page 87, disambiguating rule 2)
 			if (var.getInitExpression() == null) throw new BuildingASMException("The variable has no valig init expression.", varAS.getName());
 			
 			// Examine whether the variable has a type. If not, it is an error (OCL Spec, page 87, disambiguating rule 2).
 			if (var.getType() == null) throw new BuildingASMException("The variable has no type.", varAS.getName());
 			
-			// Try to inersert the variable in the inner environment. If the inserting is not successfully done, then the
+			*/
+			
+			// Try to insert the variable in the inner environment. If the inserting is not successfully done, then the
 			// variable already was declared and this an error (OCL Spec, page 87, disambiguating rule 1).
 			boolean result = innerEnv.addVariable(var);
 			if (result == false) throw new BuildingASMException("The variable already exists.", varAS.getName());

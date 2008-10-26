@@ -24,7 +24,7 @@ public aspect IterateExpASMComputation {
 		// Get the expression factory.
 		IModelFactory factory = env.getExpFactory();
 		
-		// The iterate expression musst have a source.
+		// The iterate expression must have a source.
 		if (!hasSource()) throw new BuildingASMException("The iterate expression has no source, it is unusual, maybe it is an internal error.", null);
 		
 		// Compute the source expression.
@@ -32,12 +32,12 @@ public aspect IterateExpASMComputation {
 		
 		Variable iterator = null;
 		
-		// Iterate expression an interator
+		// Iterate expression an iterator
 		if (hasIterator()) {
 			// Compute the iterator variable.
 			iterator = getIterator().computeASM(env);
 			
-			// The iterator varaible must not have an init expression
+			// The iterator variable must not have an init expression
 			// OCL-specification page 77, Disambuating rule [2]
 			if (iterator.getInitExpression() != null) throw new BuildingASMException("The iterator variable of the" +
 					" iterate expression must have an empty init epxression. This error occurs if the parser build" +
@@ -48,13 +48,13 @@ public aspect IterateExpASMComputation {
 		else {// Iterate expression no iterator
 			Type iteratorType = null;
 			
-			// Examine whether the soure expression is of type collection type.
+			// Examine whether the source expression is of type collection type.
 			if (sourceExpression.getType() instanceof CollectionType) {
 				iteratorType = ((CollectionType)sourceExpression.getType()).getElementType();
 			}
 			else { // The source expression is not of type collection type.
 				
-				// If the source expression is not a collection type then take this type and pack into a collecton.
+				// If the source expression is not a collection type then take this type and pack into a collection.
 				// This behavior is NOT part of the ocl specification.
 				sourceExpression = sourceExpression.withAsSet();
 				//throw new BuildingASMException("The source expression is not of type collection type.", null);
@@ -68,16 +68,31 @@ public aspect IterateExpASMComputation {
 		Variable[] iteratorVariables = new Variable[1];
 		iteratorVariables[0] = iterator;
 		
+		// First we must examine some properties of the result variable.
+		VariableAS resultAS = getResult();
+		
+		// The result variable must have a type.
+		// OCL-specification, page 77, disambiguating rule [1]
+		if (resultAS.hasType() == false) throw new BuildingASMException("The result variable has no type.", null);
+		
+		// The result variable must have an initial expression.
+		// OCL-specification, page 77, disambiguating rule [1]
+		if (resultAS.hasExpression() == false) throw new BuildingASMException("The result variable has no init expression.", null);
+		
 		// Compute the result variable.
 		Variable resultVariable = getResult().computeASM(env);
 		
+		/*
+		
 		// The result variable must have a type.
-		// OCL-specification, page 77, disambuationg rule [1]
+		// OCL-specification, page 77, disambiguating rule [1]
 		if (resultVariable.getType() == null) throw new BuildingASMException("The result variable has no type.", null);
 		
 		// The result variable must have an initial expression.
-		// OCL-specification, page 77, disambuationg rule [1]
+		// OCL-specification, page 77, disambiguating rule [1]
 		if (resultVariable.getInitExpression() == null) throw new BuildingASMException("The result variable has no init expression.", null);
+		
+		*/
 		
 		
 		/* To compute the body expression, we must build a nested environment with the result
