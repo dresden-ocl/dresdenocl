@@ -11,5 +11,5 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.pivotmodel,
  org.apache.commons.lang,
  tudresden.ocl20.pivot.models.mdr
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-Vendor: TU Dresden, Software Technology Group

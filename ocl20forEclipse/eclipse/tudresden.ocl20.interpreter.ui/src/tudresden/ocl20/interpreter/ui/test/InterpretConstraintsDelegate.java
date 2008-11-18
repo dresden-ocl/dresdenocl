@@ -1,19 +1,11 @@
 package tudresden.ocl20.interpreter.ui.test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -24,12 +16,6 @@ import tudresden.ocl20.interpreter.IEnvironment;
 import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.interpreter.internal.Environment;
 import tudresden.ocl20.interpreter.internal.OclInterpreter;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.examples.living.Accomodation;
-import tudresden.ocl20.pivot.examples.living.City;
-import tudresden.ocl20.pivot.examples.living.Flat;
-import tudresden.ocl20.pivot.examples.living.House;
-import tudresden.ocl20.pivot.examples.living.Student;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
@@ -40,8 +26,6 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardlibraryAdapterFactory;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInteger;
 
 public class InterpretConstraintsDelegate extends ActionDelegate implements
 		IWorkbenchWindowActionDelegate {

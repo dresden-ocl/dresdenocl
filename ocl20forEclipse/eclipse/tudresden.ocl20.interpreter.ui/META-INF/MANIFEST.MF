@@ -13,7 +13,6 @@ Require-Bundle: org.eclipse.ui,
  tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.essentialocl.standardlibrary,
  tudresden.ocl20.pivot.standardlibrary.java,
- tudresden.ocl20.pivot.examples.living,
  tudresden.ocl20.pivot.modelbus.ui
 Eclipse-LazyStart: true
 Bundle-Vendor: TU Dresden, Software Technology Group

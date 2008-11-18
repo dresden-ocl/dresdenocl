@@ -9,8 +9,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.essentialocl.standardlibrary,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.pivot.standardlibrary.java,
- tudresden.ocl20.pivot.examples.pml
+ tudresden.ocl20.pivot.standardlibrary.java
 Eclipse-LazyStart: true
 Export-Package: tudresden.ocl20.pivot.models.ecore;uses:="org.osgi.framework,org.eclipse.core.runtime",
  tudresden.ocl20.pivot.models.ecore.internal.provider;uses:="tudresden.ocl20.pivot.modelbus,tudresden.ocl20.pivot.modelbus.base,org.eclipse.emf.ecore.resource"

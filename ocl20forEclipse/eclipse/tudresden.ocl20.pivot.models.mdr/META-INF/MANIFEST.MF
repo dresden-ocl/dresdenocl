@@ -10,8 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.mdrepository,
- tudresden.ocl20.pivot.standardlibrary.java,
- tudresden.ocl20.pivot.examples.living
+ tudresden.ocl20.pivot.standardlibrary.java
 Eclipse-LazyStart: true
 Export-Package: tudresden.ocl20.pivot.models.mdr,
  tudresden.ocl20.pivot.models.mdr.internal.provider
