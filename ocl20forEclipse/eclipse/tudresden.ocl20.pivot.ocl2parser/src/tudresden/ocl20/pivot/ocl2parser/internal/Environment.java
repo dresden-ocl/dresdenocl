@@ -43,8 +43,8 @@ public class Environment {
 	protected IModel model;
 	protected Type result;
 	protected Type self;
-	protected List<Variable> tempVariables;
-	protected List<Variable> implicitVariables;
+	//protected List<Variable> variables;
+	protected List<Variable> variables;
 	protected Namespace namespace;
 	protected IModelFactory expFactory;
 	protected ITypeResolver typeResolver;
@@ -57,8 +57,8 @@ public class Environment {
 	
 	public Environment(IModel model) {
 		namedElements = new ArrayList<NamedElement>();
-		tempVariables = new ArrayList<Variable>();
-		implicitVariables = new ArrayList<Variable>();
+		//tempVariables = new ArrayList<Variable>();
+		variables = new ArrayList<Variable>();
 		expFactory = model.getFactory();
 		this.model = model;
 		typeResolver = model.getTypeResolver();
@@ -231,13 +231,13 @@ public class Environment {
 	public Variable lookupImplicitProperty(String name) {
 		Property prop = null;
 		
-		for(Variable var : implicitVariables) {
+		for(Variable var : variables) {
 			Type varType = var.getType();
 			prop = varType.lookupProperty(name);
 			if (prop != null) return var;
 		}
 		
-		for(Variable var : implicitVariables) {
+		for(Variable var : variables) {
 			String varName = var.getName();
 			if (varName.equals(name)) return var;
 		}
@@ -277,7 +277,7 @@ public class Environment {
 		/*
 		 * Search the implicit variables for the operation.
 		 */
-		for(Variable var : implicitVariables) {
+		for(Variable var : variables) {
 			Type varType =  var.getType();
 			op = varType.lookupOperation(name, typeList);
 			if (op != null) return op;
@@ -371,9 +371,9 @@ public class Environment {
 	 * @return true if the variable was added, otherwise false
 	 */
 	public boolean addVariable(Variable var) {
-		if (tempVariables.contains(var)) return false;
+		if (variables.contains(var)) return false;
 		
-		tempVariables.add(var);
+		variables.add(var);
 		return true;
 	}
 	
@@ -407,8 +407,8 @@ public class Environment {
 	 * @param var the variable to add to the implicit variables
 	 */
 	public boolean addImplicitVariable(Variable var) {
-		if (implicitVariables.contains(var)) return false;
-		implicitVariables.add(var);
+		if (variables.contains(var)) return false;
+		variables.add(var);
 		
 		return true;
 	}
