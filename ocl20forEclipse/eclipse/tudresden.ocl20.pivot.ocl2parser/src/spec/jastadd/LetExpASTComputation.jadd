@@ -93,9 +93,9 @@ public aspect LetExpASMComputation {
 		
 		// Now we iterate over all the variables in the variable list in the reverse order. So
 		// the last variable will be the last variable in the last let expression.
-		for(int i = variableList.size()-1; i != 0; i--) {
+		for(int i = variableList.size(); i != 0; i--) {
 			// Get the variable.
-			Variable var =  (Variable) variableList.get(i);
+			Variable var =  (Variable) variableList.get(i-1);
 			
 			// Create a let expression with the variable and the temporary let expression.
 			// Note that the first temporary let expression is the in expression computed so far.
