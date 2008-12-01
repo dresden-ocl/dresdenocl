@@ -110,7 +110,7 @@ public class NetBeansRepository implements Repository {
     
     public ModelPackage createMetaModel(String name) throws RepositoryException{
         try{
-            System.out.println("Create MetaModel"+name);
+            System.out.println("Create MetaModel" + name);
             ModelPackage result = (ModelPackage) mdRepository.createExtent(name);
             refPackageToName.put(result, name);
             return result;

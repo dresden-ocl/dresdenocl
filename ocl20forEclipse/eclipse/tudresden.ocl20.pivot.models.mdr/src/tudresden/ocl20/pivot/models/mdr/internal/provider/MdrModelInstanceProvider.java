@@ -1,18 +1,11 @@
 package tudresden.ocl20.pivot.models.mdr.internal.provider;
 
-import java.io.IOException;
+import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 
-import javax.jmi.model.ModelPackage;
 import javax.jmi.reflect.RefPackage;
-import javax.jmi.xmi.MalformedXMIException;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 
@@ -21,8 +14,6 @@ import tudresden.ocl20.core.ModelManagerException;
 import tudresden.ocl20.core.NetBeansRepository;
 import tudresden.ocl20.core.Repository;
 import tudresden.ocl20.core.RepositoryManager;
-import tudresden.ocl20.core.jmi.uml15.core.ModelElement;
-import tudresden.ocl20.core.jmi.uml15.impl.modelmanagement.ModelHelper;
 import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
@@ -33,98 +24,211 @@ import tudresden.ocl20.pivot.models.mdr.internal.modelinstance.UmlModelInstance;
 public class MdrModelInstanceProvider extends AbstractModelInstanceProvider
 		implements IModelInstanceProvider {
 
-  private Repository repository = null;
-  private ModelManager modelmanager = null;
-	
-	private MdrModelInstanceProvider() {
-		
+	protected static String REPOSITORY_PATH = "/.metadata/.tudresden/repository";
+
+	private Repository repository = null;
+
+	private ModelManager modelManager = null;
+
+	private String modelName;
+
+	/**
+	 * <p>
+	 * Creates a new MdrModelInstanceProvider.
+	 * </p>
+	 * 
+	 * @param modelName
+	 *            The name of the model for which model instances shall be
+	 *            loaded.
+	 */
+	public MdrModelInstanceProvider(String modelName) {
+
+		this.modelName = modelName;
 	}
-	
-	private ModelPackage metamodel;
-	
-	private String modelname;
-	
-	public MdrModelInstanceProvider(String modelname) {
-		this.modelname = modelname;
-	}
-	
-	public IModelInstance getModelInstance(URL modelURL)
+
+	/**
+	 * <p>
+	 * Loads a model instance to a given URL.
+	 * </p>
+	 * 
+	 * @param instanceURL
+	 *            the {@link URL} of the model instance which shall be loaded.
+	 */
+	public IModelInstance getModelInstance(URL instanceURL)
 			throws ModelAccessException {
-		
-    IModelInstance modelInstance = null;
-    URI modelURI;
-    RefPackage rp = null;
-    
-    init();
-        
-    // try to create a URI
-    try {
-      modelURI = URI.createURI(modelURL.toString());
-    }
-    catch (IllegalArgumentException e) {
-      throw new ModelAccessException("Invalid URL: " + modelURL,e); //$NON-NLS-1$
-    }
-    
-    try {
-			rp = modelmanager.getModel(modelname);
-      if (rp instanceof tudresden.ocl20.core.jmi.mof14.model.ModelPackage)
-      	throw new ModelAccessException("Instances of MOF-Models not yet supported");
-      else if (rp instanceof Uml15Package) {
-      	Uml15Package uml15Package = (Uml15Package)rp;
-    		String path = modelURL.getFile();
-    		int pathnamestart = path.lastIndexOf(":") + 1;
-    		int extensionstart = path.lastIndexOf(".java");
-    		String filenameWOExtension = path.substring(pathnamestart, extensionstart);
-    		String[] parts = filenameWOExtension.split("/");
-    		Class clazz = null;
-    		ArrayList<String> partsList = new ArrayList<String>(Arrays.asList(parts));
-    		String currentPath = partsList.remove(partsList.size()-1);
-    		
-    		while (clazz == null && partsList.size() > 0) {
-    			try {
-						clazz = Class.forName(currentPath);
-					} catch (ClassNotFoundException e) {
-					} finally {
-						currentPath = partsList.remove(partsList.size()-1) + "." + currentPath;
-					}
-    		}
 
-    		if (clazz == null)
-    			throw new ModelAccessException("ModelProviderClass not found, maybe not in classpath");
-    		try {
-					clazz.getDeclaredMethod("getModelObjects", null);
-				} catch (Exception e) {
-    			throw new ModelAccessException("Class " + clazz + " doesn't provide needed methode getModelObjects()");
-				}
-				modelInstance = new UmlModelInstance(clazz, uml15Package);
+		IModelInstance result;
+		RefPackage refPackage;
 
-      }
-		} catch (ModelManagerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		this.init();
+
+		result = null;
+		refPackage = null;
+
+		/* try to create an URI */
+		try {
+			URI.createURI(instanceURL.toString());
 		}
 
-		return modelInstance;
+		catch (IllegalArgumentException e) {
+			String msg;
+
+			msg = "Invalid URL: " + instanceURL + ".";
+
+			throw new ModelAccessException(msg, e);
+		}
+
+		/* Try to get the model. */
+		try {
+			refPackage = modelManager.getModel(modelName);
+
+			/* Check if the given modelName specifies UML1.5 models. */
+			/* FIXME Remove MOF-Models from the model bus. */
+			if (!(refPackage instanceof Uml15Package)) {
+				String msg;
+
+				msg = "Only moodel Instances of UML1.5-Models are supported.";
+				msg += "Found model was instance of ";
+				msg += refPackage.getClass().getCanonicalName();
+
+				throw new ModelAccessException(msg);
+			}
+
+			else {
+				Uml15Package uml15Package;
+
+				String instancePath;
+				String instanceClassName;
+
+				int pathNameStart;
+				int extensionStart;
+				int index;
+
+				uml15Package = (Uml15Package) refPackage;
+				instancePath = instanceURL.getFile();
+
+				String[] filePathParts;
+				String currentPath;
+
+				Class<?> instanceProviderClass;
+
+				/*
+				 * Decode the path and get the path of the instance provider
+				 * Class without protocol and file extension.
+				 */
+				pathNameStart = instancePath.lastIndexOf(":") + 2;
+				extensionStart = instancePath.lastIndexOf(".java");
+				instanceClassName = instancePath.substring(pathNameStart,
+						extensionStart);
+
+				/* Split the filePath into directories. */
+				filePathParts = instanceClassName.split("/");
+
+				/* Get the last element. */
+				currentPath = filePathParts[filePathParts.length - 1];
+				index = filePathParts.length - 1;
+
+				instanceProviderClass = null;
+
+				/*
+				 * Iterate through all directories and decode into a canonical
+				 * class name.
+				 */
+				while (instanceProviderClass == null && index > 0) {
+
+					/* Try to load the class. */
+					try {
+						instanceProviderClass = Class.forName(currentPath);
+					}
+
+					catch (ClassNotFoundException e) {
+						/* Ignored the canonical name is not fully decoded. */
+					}
+
+					finally {
+						/*
+						 * Remove the last element of the filePathList and
+						 * complete the canonical name of the class.
+						 */
+						index--;
+						currentPath = filePathParts[index] + "." + currentPath;
+					}
+				}
+				/* The no class has been found, throw an exception. */
+				if (instanceProviderClass == null) {
+					String msg;
+
+					msg = "ModelProviderClass not found, maybe not in classpath. ";
+					msg += "The last class name searched for was "
+							+ currentPath;
+
+					throw new ModelAccessException(msg);
+				}
+				// no else.
+
+				/* Try to execute method which provides all model objects. */
+				try {
+					instanceProviderClass.getDeclaredMethod("getModelObjects",
+							null);
+				}
+
+				catch (Exception e) {
+					String msg;
+
+					msg = "Class " + instanceProviderClass;
+					msg += " doesn't provide needed methode getModelObjects().";
+
+					throw new ModelAccessException(msg);
+				}
+
+				result = new UmlModelInstance(instanceProviderClass,
+						uml15Package);
+			}
+		} catch (ModelManagerException e) {
+
+			throw new ModelAccessException(e.getMessage());
+		}
+
+		return result;
 	}
 
-	private void init() throws ModelAccessException {
-		String resPath = null;
-		try {
-			resPath = FileLocator.resolve(FileLocator.find(Platform.
-					getBundle("tudresden.ocl20.mdrepository"),
-					new Path("resources") ,null)).getPath();
-		} catch (IOException e) {
-	    throw new ModelAccessException("Error resolving path plugindir/resources/repository",e); //$NON-NLS-1$
+	/**
+	 * <p>
+	 * Initializes the MdrModelInstanceProvider
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 */
+	protected void init() throws ModelAccessException {
+
+		/* If the repository is not set yet, initialize it. */
+		if (this.repository == null) {
+
+			IPath workspacePath;
+			File repositoryDirectory;
+
+			/* Get workspace path and repository directory. */
+			workspacePath = Platform.getLocation();
+			repositoryDirectory = new File(workspacePath + REPOSITORY_PATH);
+
+			/* Eventually create the directory. */
+			if (!repositoryDirectory.exists()) {
+				repositoryDirectory.mkdirs();
+			}
+			// no else.
+
+			/* Get the repository. */
+			System.setProperty(NetBeansRepository.MDR, repositoryDirectory
+					.getPath());
+			this.repository = RepositoryManager.getRepository();
 		}
-		
-		if (repository == null) {
-			//repPath = "D:\\rep";
-			System.setProperty(NetBeansRepository.MDR, resPath+"/repository");
-			repository = RepositoryManager.getRepository();	
+		// no else.
+
+		/* If the model manager is not set yet, initialize it. */
+		if (this.modelManager == null) {
+
+			this.modelManager = ModelManager.getInstance();
 		}
-		
-		if (modelmanager == null)
-			modelmanager = ModelManager.getInstance();
-	
+		// no else.
 	}
 }

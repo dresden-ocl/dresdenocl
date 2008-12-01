@@ -4,8 +4,9 @@ Bundle-Name: Mdrepository Plug-in
 Bundle-SymbolicName: tudresden.ocl20.mdrepository
 Bundle-Version: 1.0.0
 Bundle-Activator: tudresden.ocl20.mdrepository.MDRepositoryPlugin
-Require-Bundle: org.eclipse.core.runtime
-Eclipse-LazyStart: true
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources
+Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/external/lib/jmi.jar,
  lib/external/lib/mof.jar,
  lib/external/lib/openide.jar,

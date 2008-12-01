@@ -258,10 +258,11 @@ public class ModelManager {
      * @return
      */    
     public ModelPackage loadMetaModel(String uri, String name) throws ModelManagerException{
-        System.out.println("LoadMetamodel" +uri+" "+name);
+        System.out.println("LoadMetamodel " +uri+" "+name);
         ModelPackage refPackage=null;
         try{
             refPackage = repository.getMetaModel(name);
+            
             if(refPackage != null){
                 repository.deleteMetaModel(refPackage);
             }

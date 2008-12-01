@@ -1,3 +1,8 @@
-Die Datei ModelProviderClass.java wird genutzt, um Objekte des beiligenden UML-Diagramms zu laden. Dafür muss das Eclipse-Plugin tudresden.ocl20.pivot.examples.living geladen sein, da dessen Klassen instanziert werden.
+Die Datei ModelProviderClass.java wird genutzt, um Objekte des beiligenden 
+UML-Diagramms zu laden. Dafür muss das Eclipse-Plugin 
+tudresden.ocl20.pivot.examples.living geladen sein, da dessen Klassen instanziert 
+werden.
 
-The file ModelProviderClass.java is used for loading an some objects for provided UML diagram. Therefor the eclipse plugin tudresden.ocl20.pivot.examples.living has to be loaded because these classes will be instantiated.
+The file ModelProviderClass.java is used for loading an some objects for provided 
+UML diagram. Therefor the eclipse plugin tudresden.ocl20.pivot.examples.living has 
+to be loaded because these classes will be instantiated.

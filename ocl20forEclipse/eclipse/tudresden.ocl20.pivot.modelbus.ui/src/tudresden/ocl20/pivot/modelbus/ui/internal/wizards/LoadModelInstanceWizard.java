@@ -153,6 +153,9 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 				// We need to throw a runtime exception or the wizard will
 				// close afterwards
 				errorMsg = "An error occured when loading model '" + model + "'"; //$NON-NLS-1$//$NON-NLS-2$
+				
+				e.printStackTrace();
+				
 				throw new IllegalStateException(errorMsg, e);
 			}
 

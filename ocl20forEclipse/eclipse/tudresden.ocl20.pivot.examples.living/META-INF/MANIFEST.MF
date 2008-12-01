@@ -5,3 +5,5 @@ Bundle-SymbolicName: tudresden.ocl20.pivot.examples.living
 Bundle-Version: 1.0.0
 Export-Package: tudresden.ocl20.pivot.examples.living
 Require-Bundle: tudresden.ocl20.pivot.modelbus
+Bundle-ClassPath: src/,
+ .
