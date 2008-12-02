@@ -81,12 +81,13 @@ public aspect ContextASMComputation {
 		Environment nestedEnv = env.nestedEnvironment();
 		
 		// The type that was found, becomes the self variable in the environment.
-		nestedEnv.setSelf(classifierType);
+		//nestedEnv.setSelf(classifierType);
 		nestedEnv.setContext(classifierType);
 		
 		// Create a new self variable and add it to the environment.
 		Variable selfVariable = nestedEnv.getExpFactory().createVariable("self", classifierType, null);
 		nestedEnv.addImplicitVariable(selfVariable);
+		nestedEnv.addExplicitVariable(selfVariable);
 		
 		/* Iterate over all classifier constraints and compute their corresponding constraint type (essential ocl).
 		 * Add the computed constraint to the constraint list.
@@ -180,7 +181,7 @@ public aspect ContextASMComputation {
 		Environment nestedEnv = env.nestedEnvironment();
 		
 		// Set the self attribute in the environment with the classifier type.
-		nestedEnv.setSelf(classifierType);
+		//nestedEnv.setSelf(classifierType);
 		
 		// Set the context of the environment.
 		nestedEnv.setContext(operation);
@@ -191,16 +192,18 @@ public aspect ContextASMComputation {
 		 */
 		Iterator it2 = signature.getParameterList().iterator();
 		while(it2.hasNext()) {
-			nestedEnv.addImplicitVariable((Variable) it2.next());
+			nestedEnv.addExplicitVariable((Variable) it2.next());
 		}
 			
 		// Create a new result variable and add it to the environment.
 		Variable resultVariable = nestedEnv.getExpFactory().createVariable("result", operation.getReturnParameter().getType(), null);
-		nestedEnv.addImplicitVariable(resultVariable);
+		//nestedEnv.addImplicitVariable(resultVariable);
+		nestedEnv.addExplicitVariable(resultVariable);
 		
 		// Creates a new self variable and add it to the environment.
 		Variable selfVariable = nestedEnv.getExpFactory().createVariable("self", classifierType, null);
 		nestedEnv.addImplicitVariable(selfVariable);
+		nestedEnv.addExplicitVariable(selfVariable);
 		
 		// Iterate over all operation constraint as elements and compute the constraint and add it all to a list.
 		int numberConstraint = getNumOperationConstraintAS();
@@ -272,13 +275,14 @@ public aspect ContextASMComputation {
 		
 		
 		// Set the self of the environment.
-		nestedEnv.setSelf(classifierType);
+		//nestedEnv.setSelf(classifierType);
 		
 		// Set the context of the environment.
 		nestedEnv.setContext(property);
 		
 		// Creates a new self variable, add it to the environment.
 		Variable selfVariable = nestedEnv.getExpFactory().createVariable("self", classifierType, null);
+		nestedEnv.addExplicitVariable(selfVariable);
 		nestedEnv.addImplicitVariable(selfVariable);
 		
 		/* Iterate over all attibute or associations constraint and compute their counterpart in the essenatial ocl.

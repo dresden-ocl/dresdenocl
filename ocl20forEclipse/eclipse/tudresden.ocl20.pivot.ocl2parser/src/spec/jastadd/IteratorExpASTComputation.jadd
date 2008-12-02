@@ -78,6 +78,9 @@ public aspect IteratorExpASTComputation {
 		// Get the operation name.
 		String operationName = getOperation().getValue();
 		
+		// Create an inner environment for the body expression.
+		Environment innerEnv = env.nestedEnvironment();
+		
 		// Get the element type of the source expression.
 		Type sourceElementType = ((CollectionType)sourceExpression.getType()).getElementType();
 		
@@ -91,6 +94,7 @@ public aspect IteratorExpASTComputation {
 			Variable implicitIterator = factory.createVariable(VariableNameGenerator.getDefault().getVariableName(), sourceElementType, null);
 			iterators = new Variable[1];
 			iterators[0] = implicitIterator;
+			innerEnv.addImplicitVariable(implicitIterator);
 		}
 		else { // The iterator expression has at least one interator variable.
 			
@@ -141,17 +145,18 @@ public aspect IteratorExpASTComputation {
 				if (iteratorList.contains(var)) throw new BuildingASMException("The iterator variable is declared twice.", varAS.getName());
 				iteratorList.add(var);
 				iterators[i] = var;
+				innerEnv.addExplicitVariable(var);
+				innerEnv.addExplicitVariable(var);
 			}
 		}
 				
-		// Create an inner environment for the body expression.
-		Environment innerEnv = env.nestedEnvironment();
+		
 		
 		// Add all iterator variables to the inner environment. We have assured that the variables are all different.
-		numberIterator = iterators.length;
-		for(int i = 0; i < numberIterator; i++) {
-			innerEnv.addImplicitVariable(iterators[i]);
-		}
+		//numberIterator = iterators.length;
+		//for(int i = 0; i < numberIterator; i++) {
+		//	innerEnv.addImplicitVariable(iterators[i]);
+		//}
 		
 		// We must set the contextial classifer type of the inner environment.
 		//innerEnv.setContextualClassifier(sourceElementType);

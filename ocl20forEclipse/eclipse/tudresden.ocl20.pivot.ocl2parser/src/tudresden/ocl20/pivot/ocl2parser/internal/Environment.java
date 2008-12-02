@@ -44,7 +44,8 @@ public class Environment {
 	protected Type result;
 	protected Type self;
 	//protected List<Variable> variables;
-	protected List<Variable> variables;
+	protected List<Variable> implicitVariables;
+	protected List<Variable> explicitVariables;
 	protected Namespace namespace;
 	protected IModelFactory expFactory;
 	protected ITypeResolver typeResolver;
@@ -58,7 +59,8 @@ public class Environment {
 	public Environment(IModel model) {
 		namedElements = new ArrayList<NamedElement>();
 		//tempVariables = new ArrayList<Variable>();
-		variables = new ArrayList<Variable>();
+		implicitVariables = new ArrayList<Variable>();
+		explicitVariables = new ArrayList<Variable>();
 		expFactory = model.getFactory();
 		this.model = model;
 		typeResolver = model.getTypeResolver();
@@ -73,14 +75,14 @@ public class Environment {
 	 * @param params the parameters of the operation
 	 * @return the operation if any is found, otherwise null
 	 */
-	public Operation lookupOperation(String name, List<Type> params) {
+	/*public Operation lookupOperation(String name, List<Type> params) {
 		Operation oper = self.lookupOperation(name, params);
 		if (oper != null) return oper;
 		
 		if (parent != null) return parent.lookupOperation(name, params);
 		
 		return null;
-	}
+	}*/
 	
 	/**
 	 * Looks for a type with the given path name. The assumption is
@@ -169,7 +171,7 @@ public class Environment {
 	 * @param parameterTypes the list of parameter types that the operation must have
 	 * @return the operation or null if the operation is not found or the path name is ambiguous
 	 */
-	public Operation lookupOperation(List<String> pathName, List<Type> parameterTypes) {
+	/*public Operation lookupOperation(List<String> pathName, List<Type> parameterTypes) {
 		Operation operation = null;
 
 	    // find the contextual type
@@ -181,7 +183,7 @@ public class Environment {
 	    operation = contextualType.lookupOperation(operationName, parameterTypes);
 	    
 	    return operation;
-	}
+	}*/
 	
 	/**
 	 * Finds the contextual classifier in the path name. The assumption is
@@ -221,26 +223,25 @@ public class Environment {
 	
 	/**
 	 * Looks for an implicit property. To do this we search in the implicit
-	 * variables first. If the type of one variable know this property, we return the variable.
-	 * Otherwise we search for the variables name (the self variable can be searched).
+	 * variables. If the type of one variable know this property, we return the variable.
 	 * If this failed, we search in the parent, if one exists. Otherwise we return null.
 	 * @param name the name of the property to be searched
-	 * @return the variable that contains the type that holds the property or the variable that
-	 * has the same name as the property or null, if no property or variable with this name exists.
+	 * @return the variable that contains the type that holds the property or null,
+	 * if no property or variable with this name exists.
 	 */
 	public Variable lookupImplicitProperty(String name) {
 		Property prop = null;
 		
-		for(Variable var : variables) {
+		for(Variable var : implicitVariables) {
 			Type varType = var.getType();
 			prop = varType.lookupProperty(name);
 			if (prop != null) return var;
 		}
 		
-		for(Variable var : variables) {
+		/*for(Variable var : implicitVariables) {
 			String varName = var.getName();
 			if (varName.equals(name)) return var;
-		}
+		}*/
 		
 		/*if (self != null) {
 			prop = self.lookupProperty(name);
@@ -254,10 +255,9 @@ public class Environment {
 	
 	/**
 	 * Looks for an implicit operation with the given name and the given ocl expressions
-	 * as parameters. The search begins with the implicit variables. If an operation is
+	 * as parameters. The search goes through the implicit variables. If an operation is
 	 * found that corresponds to a type of the implicit variables, then this operation
-	 * will be returned. Otherwise we will look up in the self type. If the self type has
-	 * no corresponding operation, then we will look up in the parent, if one exists. If
+	 * will be returned. Otherwise we will look up in the parent, if one exists. If
 	 * no parent exists we will returned null.
 	 * @param name the name of the operation to be searching for
 	 * @param params the ocl expression that forms the parameters
@@ -277,7 +277,7 @@ public class Environment {
 		/*
 		 * Search the implicit variables for the operation.
 		 */
-		for(Variable var : variables) {
+		for(Variable var : implicitVariables) {
 			Type varType =  var.getType();
 			op = varType.lookupOperation(name, typeList);
 			if (op != null) return op;
@@ -295,10 +295,10 @@ public class Environment {
 		
 		
 		// Search the self type for the operation if a self type exists.
-		if (self != null) {
+		/*if (self != null) {
 			op = self.lookupOperation(name, typeList);
 			if (op != null) return op;
-		}
+		}*/
 		
 		// Search the parent for the operation if one parent exists.
 		if (parent != null) return parent.lookupImplicitOperation(name, params);
@@ -316,13 +316,13 @@ public class Environment {
 	 * @return a variable with the empty name "" and the owning type of the operation, or null if no
 	 * operation or owning type exists
 	 */
-	public Variable lookupImplicitSourceForOperation(Operation operation) {
+	/*public Variable lookupImplicitSourceForOperation(Operation operation) {
 		Type operationType = operation.getOwningType();
 		if (operationType == null) return null;
 		
 		Variable var = expFactory.createVariable(operation.getName() + "$AddedVariable", operationType, null);
 		return var;
-	}
+	}*/
 	
 	/**
 	 * Looks for a namespace that is given through the parameter <i>pathName</i>. If the namespace
@@ -370,12 +370,12 @@ public class Environment {
 	 * @param var the variable to be added
 	 * @return true if the variable was added, otherwise false
 	 */
-	public boolean addVariable(Variable var) {
-		if (variables.contains(var)) return false;
+	/*public boolean addImplicitVariable(Variable var) {
+		if (implicitVariables.contains(var)) return false;
 		
-		variables.add(var);
+		implicitVariables.add(var);
 		return true;
-	}
+	}*/
 	
 	/**
 	 * Returns the expression factory of this environment.
@@ -407,8 +407,8 @@ public class Environment {
 	 * @param var the variable to add to the implicit variables
 	 */
 	public boolean addImplicitVariable(Variable var) {
-		if (variables.contains(var)) return false;
-		variables.add(var);
+		if (implicitVariables.contains(var)) return false;
+		implicitVariables.add(var);
 		
 		return true;
 	}
@@ -417,17 +417,17 @@ public class Environment {
 	 * Sets the self variable in the environment.
 	 * @param type the type that becomes the self variable.
 	 */
-	public void setSelf(Type type) {
+	/*public void setSelf(Type type) {
 		self = type;
-	}
+	}*/
 	
 	/**
 	 * Returns the self type.
 	 * @return the self type
 	 */
-	public Type getSelf() {
+	/*public Type getSelf() {
 		return self;
-	}
+	}*/
 	
 	/**
 	 * Sets the context of the environment.
@@ -476,6 +476,40 @@ public class Environment {
 	 * @return the self variable
 	 */
 	public Variable getSelfVariable() {
-		return lookupImplicitProperty("self");
+		return lookupExplicitVariable("self");
+	}
+	
+	/**
+	 * This method adds an explicit variable to the current
+	 * environment. If the variable already exists then the method
+	 * return false and the variable is not added twice. If the variable
+	 * doesn't exist then the variable will be added and true will return.
+	 * @param var the variable to be added
+	 * @return true if the variable doesn't already exist in the environment, otherwise false
+	 */
+	public boolean addExplicitVariable(Variable var) {
+		if (explicitVariables.contains(var)) return false;
+		
+		explicitVariables.add(var);
+		
+		return true;
+	}
+	
+	/**
+	 * This methods looks up for an explicit variable with the given <code>name</code>.
+	 * If the variable is not found in the current environment, the search will
+	 * continue in the parent environment if one exist. If no parent environment exist and
+	 * the variable was not found, null will be returned.
+	 * @param name the name of the variable to be searched for
+	 * @return the variable if one is found in the environment chain, otherwise false
+	 */
+	public Variable lookupExplicitVariable(String name) {
+		for(Variable var : explicitVariables) {
+			if (var.getName().equals(name)) return var;
+		}
+		
+		if (parent != null) return parent.lookupExplicitVariable(name);
+		
+		return null;
 	}
 }

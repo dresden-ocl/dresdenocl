@@ -69,7 +69,7 @@ public aspect LetExpASMComputation {
 			
 			// Try to insert the variable in the inner environment. If the inserting is not successfully done, then the
 			// variable already was declared and this an error (OCL Spec, page 87, disambiguating rule 1).
-			boolean result = innerEnv.addVariable(var);
+			boolean result = innerEnv.addExplicitVariable(var);
 			if (result == false) throw new BuildingASMException("The variable already exists.", varAS.getName());
 			
 			// Add the variable into the variable list

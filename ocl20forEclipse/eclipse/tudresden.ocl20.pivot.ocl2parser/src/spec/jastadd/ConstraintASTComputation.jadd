@@ -36,7 +36,7 @@ public aspect ConstraintASMComputation {
 		String bodyString = getExpression().computeBodyString();
 		
 		// Surround the expression in an expression-in-ocl.
-		Variable selfVariable = env.lookupImplicitProperty("self");
+		Variable selfVariable = env.getSelfVariable();
 		if (selfVariable == null) throw new BuildingASMException("The property 'self' was not found. In this case it is internal error.", null);
 		
 		ExpressionInOcl oclExpression = null;
@@ -139,7 +139,7 @@ public aspect ConstraintASMComputation {
 		/* Create an ocl expression with the computed elements. Because this is a definition a result variable and a
 		 * parameter list are not necessary.
 		 */
-		Variable selfVariable = env.lookupImplicitProperty("self");
+		Variable selfVariable = env.getSelfVariable();
 		if (selfVariable == null) throw new BuildingASMException("The property 'self' was not found. In this case it is internal error.", null);
 		
 		ExpressionInOcl oclExpression = null;
@@ -174,8 +174,8 @@ public aspect ConstraintASMComputation {
 		}
 		
 		
-		// The property must be add to the self type because this property can be used in other expressions.
-		env.getSelf().addProperty(property);
+		// The property must be added to the self type because this property can be used in other expressions.
+		env.getSelfVariable().getType().addProperty(property);
 		return constraint;
 	}
 	
@@ -230,7 +230,7 @@ public aspect ConstraintASMComputation {
 		while(it.hasNext()) {
 			Variable var = (Variable) it.next();
 			
-			Parameter param = null;
+			/*Parameter param = null;
 			try {
 				param = PivotModelFactory.INSTANCE.createParameter();
 			}
@@ -242,11 +242,12 @@ public aspect ConstraintASMComputation {
 			param.setType(var.getType());
 			param.setName(var.getName());
 			param.setOperation(operation);
-			param.setKind(ParameterDirectionKind.get("inout"));
-			operation.addParameter(param);
+			param.setKind(ParameterDirectionKind.get("inout"));*/
+			//operation.addParameter(param);
+			operation.addParameter(var.asParameter());
 			
-			// Add the variable to the implicit variables of the environment.
-			innerEnv.addImplicitVariable(var);
+			// Add the variable to the explicit variables of the environment.
+			innerEnv.addExplicitVariable(var);
 		}
 		
 		/* The operation has a special type namely the return parameter. So we build a new parameter with
@@ -280,7 +281,7 @@ public aspect ConstraintASMComputation {
 				" operation type must match the type of the expression.", getMethodName());
 		
 		// Create the ocl expression with the computed elements.
-		Variable selfVariable = env.lookupImplicitProperty("self");
+		Variable selfVariable = env.getSelfVariable();
 		if (selfVariable == null) throw new BuildingASMException("The property 'self' was not found. In this case it is internal error.", null);
 		
 		
@@ -316,7 +317,7 @@ public aspect ConstraintASMComputation {
 		
 		
 		// Add the new operation to the self type.
-		env.getSelf().addOperation(operation);
+		env.getSelfVariable().getType().addOperation(operation);
 		
 		return constraint;
 	}
@@ -359,8 +360,8 @@ public aspect ConstraintASMComputation {
 		if(!(expression.getType().conformsTo(primType))) throw new BuildingASMException("The expression type must be boolean.", errorToken);
 		
 		// Create the ocl expression.
-		Variable selfVariable = env.lookupImplicitProperty("self");
-		if (selfVariable == null) throw new BuildingASMException("The property 'self' was not found. In this case it is internal error.", null);
+		Variable selfVariable = env.getSelfVariable();
+		if (selfVariable == null) throw new BuildingASMException("The self variable was not found. In this case it is internal error.", null);
 		
 		ExpressionInOcl oclExpression = null;
 		try {
@@ -373,7 +374,7 @@ public aspect ConstraintASMComputation {
 		
 		
 		// Create the constraint.
-		Constraint constraint = factory.createConstraint(optionalName, ConstraintKind.get("invariant"), oclExpression, env.getSelf());
+		Constraint constraint = factory.createConstraint(optionalName, ConstraintKind.get("invariant"), oclExpression, selfVariable.getType());
 		
 		return constraint;
 	}
@@ -396,7 +397,7 @@ public aspect ConstraintASMComputation {
 		Variable resultVariable = null;
 		if (operationStereotype.equals("body")) {
 			resultVariable = factory.createVariable("result", operation.getType(), null);
-			env.addImplicitVariable(resultVariable);
+			env.addExplicitVariable(resultVariable);
 		}
 		// Compute the expression.
 		OclExpression expression = getExpression().computeASM(env);
@@ -428,7 +429,7 @@ public aspect ConstraintASMComputation {
 			if(!expression.getType().conformsTo(primType)) throw new BuildingASMException("The expression type must be boolean.", null);
 			
 			// Create the ocl expression.
-			Variable selfVariable = env.lookupImplicitProperty("self");
+			Variable selfVariable = env.getSelfVariable();
 			if (selfVariable == null) throw new BuildingASMException("The property 'self' was not found. In this case it is internal error.", null);
 			
 			ExpressionInOcl oclExpression = factory.createExpressionInOcl(bodyString, expression, selfVariable, null, null);
@@ -450,7 +451,7 @@ public aspect ConstraintASMComputation {
 					" must match the operation return type in the context.", getOperationStereotype());
 			
 			// Create the ocl expression.
-			Variable selfVariable = env.lookupImplicitProperty("self");
+			Variable selfVariable = env.getSelfVariable();
 			if (selfVariable == null) throw new BuildingASMException("The property 'self' was not found. In this case it is internal error.", null);
 			
 			ExpressionInOcl oclExpression = factory.createExpressionInOcl(bodyString, expression, selfVariable, resultVariable, null);

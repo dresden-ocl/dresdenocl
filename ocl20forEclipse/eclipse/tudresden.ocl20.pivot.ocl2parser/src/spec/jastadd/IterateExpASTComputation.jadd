@@ -30,6 +30,11 @@ public aspect IterateExpASMComputation {
 		// Compute the source expression.
 		OclExpression sourceExpression = getSource().computeASM(env);
 		
+		/* To compute the body expression, we must build a nested environment with the result
+		 * and iterator variable. 
+		 */
+		Environment nestedEnvironment = env.nestedEnvironment();
+		
 		Variable iterator = null;
 		
 		// Iterate expression an iterator
@@ -42,10 +47,11 @@ public aspect IterateExpASMComputation {
 			if (iterator.getInitExpression() != null) throw new BuildingASMException("The iterator variable of the" +
 					" iterate expression must have an empty init epxression. This error occurs if the parser build" +
 					" the iterator variable of the iterate expression with an init expression. This is an error.", null);
-			
+					
+			nestedEnvironment.addExplicitVariable(iterator);		
 			
 		}
-		else {// Iterate expression no iterator
+		else {// Iterate expression has no iterator
 			Type iteratorType = null;
 			
 			// Examine whether the source expression is of type collection type.
@@ -64,7 +70,7 @@ public aspect IterateExpASMComputation {
 			iterator = factory.createVariable(VariableNameGenerator.getDefault().getVariableName(), iteratorType, null);
 		}
 		
-		// Pack the only iterator variable in an array because the factory method exspect an array.
+		// Pack the only iterator variable in an array because the factory method expect an array.
 		Variable[] iteratorVariables = new Variable[1];
 		iteratorVariables[0] = iterator;
 		
@@ -95,12 +101,16 @@ public aspect IterateExpASMComputation {
 		*/
 		
 		
-		/* To compute the body expression, we must build a nested environment with the result
-		 * and iterator variable. Because both variable can be used to find implicit
-		 * properties or operations it must be added as implicit variable.
+		/*
+		 * We must add the result variable to an explicit variable in the environment.
 		 */
-		Environment nestedEnvironment = env.nestedEnvironment();
-		nestedEnvironment.addImplicitVariable(resultVariable);
+		nestedEnvironment.addExplicitVariable(resultVariable);
+		
+		/*
+		 * It is incurious whether the variable is a variable that was defined by the user or
+		 * it is a variable that is implicit generated. We must add the variable to
+		 * the implicit list.
+		 */
 		nestedEnvironment.addImplicitVariable(iterator);
 		
 		// Compute the body with the nested environment.

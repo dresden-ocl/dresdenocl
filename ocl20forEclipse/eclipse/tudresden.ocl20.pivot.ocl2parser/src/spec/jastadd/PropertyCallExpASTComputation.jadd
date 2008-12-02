@@ -232,6 +232,18 @@ public aspect PropertyCallExpASTComputation {
 				Variable sourceVariable = env.lookupImplicitProperty(attributeName);
 				
 				if (sourceVariable == null) {
+				
+					/* 
+					 * If we have no source, the name can be an explicit variable. If so,
+					 * we create a variable expression and return this.
+					 */
+					Variable explicitVariable = env.lookupExplicitVariable(attributeName);
+					
+					if (explicitVariable != null) {
+						VariableExp resultExp = env.getExpFactory().createVariableExp(explicitVariable);
+						return resultExp;
+					}
+					
 						/* It can be that the attributeName denotes a type. For example as parameter
 						 * of an 'oclIsKindOf' operation. In that case we must examine whether this is
 						 * really a type. So we lookup for that type. If one exists then we create
