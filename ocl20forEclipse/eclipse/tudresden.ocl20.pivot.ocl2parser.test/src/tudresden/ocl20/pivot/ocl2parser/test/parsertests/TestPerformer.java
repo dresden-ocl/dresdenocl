@@ -48,14 +48,9 @@ public class TestPerformer {
 	private TestPerformer() throws Exception {
 		super();
 		
-		try {
-			umlMetaModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel("tudresden.ocl20.pivot.metamodels.uml");
-			if (umlMetaModel == null) {
-				throw new Exception("Unable to load uml metmodel.   ");
-			}
-		} catch(Exception ex) {
-			throw new Exception("Unable to load uml metmodel.   " + ex.getMessage());
-		}
+		initializeMetamodel();
+		
+		
 	}
 	
 	/**
@@ -76,10 +71,11 @@ public class TestPerformer {
 	 * @throws Exception is thrown if the model cannot be initialized or the model file is not found
 	 */
 	public void setUMLModel(String umlModelName) throws Exception {
-		if (model != null) {
+		/*if (model != null) {
 			if (model.getDisplayName().equals(umlModelName)) return;
-		}
+		}*/
 		
+		initializeMetamodel();
 		modelProvider = umlMetaModel.getModelProvider();
 		File currentDir = new File(".");
 		//System.out.println("Current directory: " + currentDir.getAbsolutePath());
@@ -114,5 +110,20 @@ public class TestPerformer {
 	 */
 	public IModel getCurrentModel() {
 		return model;
+	}
+	
+	/**
+	 * This method initializes the uml metamodel.
+	 * @throws Exception is thrown if the metamodel is not found
+	 */
+	private void initializeMetamodel() throws Exception {
+		try {
+			umlMetaModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel("tudresden.ocl20.pivot.metamodels.uml");
+			if (umlMetaModel == null) {
+				throw new Exception("Unable to load uml metmodel.   ");
+			}
+		} catch(Exception ex) {
+			throw new Exception("Unable to load uml metmodel.   " + ex.getMessage());
+		}
 	}
 }
