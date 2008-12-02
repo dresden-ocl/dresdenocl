@@ -7,7 +7,6 @@ import javax.jmi.reflect.RefPackage;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.URI;
 
 import tudresden.ocl20.core.ModelManager;
 import tudresden.ocl20.core.ModelManagerException;
@@ -60,23 +59,21 @@ public class MdrModelInstanceProvider extends AbstractModelInstanceProvider
 		IModelInstance result;
 		RefPackage refPackage;
 
+		/* If no class has been found, throw an exception. */
+		if (!instanceURL.getFile().endsWith(".class")) {
+			String msg;
+
+			msg = "The given class is no class file. ";
+			msg += "Only files with the suffix '.class' are allowed.";
+			
+			throw new ModelAccessException(msg);
+		}
+		// no else.
+
 		this.init();
 
 		result = null;
 		refPackage = null;
-
-		/* try to create an URI */
-		try {
-			URI.createURI(instanceURL.toString());
-		}
-
-		catch (IllegalArgumentException e) {
-			String msg;
-
-			msg = "Invalid URL: " + instanceURL + ".";
-
-			throw new ModelAccessException(msg, e);
-		}
 
 		/* Try to get the model. */
 		try {
@@ -97,71 +94,69 @@ public class MdrModelInstanceProvider extends AbstractModelInstanceProvider
 			else {
 				Uml15Package uml15Package;
 
-				String instancePath;
-				String instanceClassName;
+				FileClassLoader classLoader;
+				Class<?> instanceProviderClass;
 
-				int pathNameStart;
-				int extensionStart;
+				String instancePath;
+				String packagePath;
+				String className;
+
 				int index;
 
 				uml15Package = (Uml15Package) refPackage;
 				instancePath = instanceURL.getFile();
 
-				String[] filePathParts;
-				String currentPath;
-
-				Class<?> instanceProviderClass;
-
-				/*
-				 * Decode the path and get the path of the instance provider
-				 * Class without protocol and file extension.
-				 */
-				pathNameStart = instancePath.lastIndexOf(":") + 2;
-				extensionStart = instancePath.lastIndexOf(".java");
-				instanceClassName = instancePath.substring(pathNameStart,
-						extensionStart);
-
-				/* Split the filePath into directories. */
-				filePathParts = instanceClassName.split("/");
-
-				/* Get the last element. */
-				currentPath = filePathParts[filePathParts.length - 1];
-				index = filePathParts.length - 1;
-
 				instanceProviderClass = null;
 
+				/* Split the path into class name and directory path. */
+				index = instancePath.lastIndexOf('/');
+				packagePath = instancePath;
+
 				/*
-				 * Iterate through all directories and decode into a canonical
-				 * class name.
+				 * Try to load the class directory for directory, decoding the
+				 * canonical class name.
 				 */
 				while (instanceProviderClass == null && index > 0) {
 
 					/* Try to load the class. */
 					try {
-						instanceProviderClass = Class.forName(currentPath);
+						packagePath = instancePath.substring(0, index);
+
+						className = instancePath.substring(index + 1);
+						className = className.replaceAll("/", ".");
+
+						/* Remove the end '.class' from the class name. */
+						className = className.substring(0,
+								className.length() - 6);
+
+						/* Try to load the class. */
+						classLoader = new FileClassLoader(packagePath
+								.substring(1)
+								+ "/");
+						instanceProviderClass = classLoader
+								.findClass(className);
 					}
 
+					/*
+					 * Ignored because the canonical name may not be fully
+					 * decoded.
+					 */
 					catch (ClassNotFoundException e) {
-						/* Ignored the canonical name is not fully decoded. */
+					} catch (NoClassDefFoundError e) {
 					}
 
+					/* Jump to the next upper directory. */
 					finally {
-						/*
-						 * Remove the last element of the filePathList and
-						 * complete the canonical name of the class.
-						 */
-						index--;
-						currentPath = filePathParts[index] + "." + currentPath;
+						index = packagePath.lastIndexOf('/');
 					}
 				}
-				/* The no class has been found, throw an exception. */
+				// end while.
+
+				/* If no class has been found, throw an exception. */
 				if (instanceProviderClass == null) {
 					String msg;
 
-					msg = "ModelProviderClass not found, maybe not in classpath. ";
-					msg += "The last class name searched for was "
-							+ currentPath;
-
+					msg = "ModelProviderClass could not be found.";
 					throw new ModelAccessException(msg);
 				}
 				// no else.
@@ -176,7 +171,7 @@ public class MdrModelInstanceProvider extends AbstractModelInstanceProvider
 					String msg;
 
 					msg = "Class " + instanceProviderClass;
-					msg += " doesn't provide needed methode getModelObjects().";
+					msg += " doesn't provide the needed method getModelObjects().";
 
 					throw new ModelAccessException(msg);
 				}
