@@ -20,7 +20,8 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	 * 
 	 * @generated
 	 */
-	private static final Logger logger = Logger.getLogger(UML2PrimitiveType.class);
+	private static final Logger logger = Logger
+			.getLogger(UML2PrimitiveType.class);
 
 	/**
 	 * the adapted org.eclipse.uml2.uml.PrimitiveType data type
@@ -33,24 +34,25 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	 * Creates a new <code>UML2PrimitiveType</code> instance.
 	 * 
 	 * @param dslPrimitiveType
-	 *          the {@link org.eclipse.uml2.uml.PrimitiveType} that is adopted by
-	 *          this class
+	 *            the {@link org.eclipse.uml2.uml.PrimitiveType} that is adopted
+	 *            by this class
 	 * 
 	 * @generated
 	 */
 	public UML2PrimitiveType(org.eclipse.uml2.uml.PrimitiveType dslPrimitiveType) {
-  
-    if (logger.isDebugEnabled()) {
-      logger.debug("UML2PrimitiveType(dslPrimitiveType=" + dslPrimitiveType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-  
-    // initialize
-    this.dslPrimitiveType = dslPrimitiveType;
-  
-    if (logger.isDebugEnabled()) {
-      logger.debug("org.eclipse.uml2.uml.PrimitiveType() - exit"); //$NON-NLS-1$
-    }
-  }
+
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("UML2PrimitiveType(dslPrimitiveType=" + dslPrimitiveType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		// initialize
+		this.dslPrimitiveType = dslPrimitiveType;
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("org.eclipse.uml2.uml.PrimitiveType() - exit"); //$NON-NLS-1$
+		}
+	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
@@ -75,36 +77,52 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 
 	/**
 	 * This method implements a type mapping from
-	 * org.eclipse.uml2.uml.PrimitiveType types to the predefined primitive types
-	 * of the Pivot Model.
+	 * org.eclipse.uml2.uml.PrimitiveType types to the predefined primitive
+	 * types of the Pivot Model.
 	 * 
 	 * @generated NOT
 	 */
 	@Override
 	public PrimitiveTypeKind getKind() {
 
-		String integerNames[] = new String[] { "int", "short", "long", "byte" };
-		String realNames[] = new String[] { "float", "double" };
-		String primitiveTypeName = dslPrimitiveType.getQualifiedName();
+		PrimitiveTypeKind result;
+
+		String integerNames[];
+		String realNames[];
+		String primitiveTypeName;
+
+		integerNames = new String[] { "int", "short", "long", "byte" };
+		realNames = new String[] { "float", "double" };
+		primitiveTypeName = dslPrimitiveType.getName();
+
+		result = null;
 
 		if (primitiveTypeName.equalsIgnoreCase("boolean"))
-			return PrimitiveTypeKind.BOOLEAN;
+			result = PrimitiveTypeKind.BOOLEAN;
 
-		if (primitiveTypeName.equalsIgnoreCase("string"))
-			return PrimitiveTypeKind.STRING;
+		else if (primitiveTypeName.equalsIgnoreCase("string"))
+			result = PrimitiveTypeKind.STRING;
 
-		for (String integerName : integerNames) {
-			if (primitiveTypeName.equalsIgnoreCase(integerName))
-				return PrimitiveTypeKind.INTEGER;
+		else {
+			for (String integerName : integerNames) {
+				if (primitiveTypeName.equalsIgnoreCase(integerName))
+					result = PrimitiveTypeKind.INTEGER;
+			}
 		}
 
-		for (String realName : realNames) {
-			if (primitiveTypeName.equalsIgnoreCase(realName))
-				return PrimitiveTypeKind.REAL;
+		if (result == null) {
+			for (String realName : realNames) {
+				if (primitiveTypeName.equalsIgnoreCase(realName))
+					return PrimitiveTypeKind.REAL;
+			}
 		}
+		// no else.
 
-		return PrimitiveTypeKind.UNKNOWN;
+		if (result == null) {
+			result = PrimitiveTypeKind.UNKNOWN;
+		}
+		// no else.
 
+		return result;
 	}
-
 }

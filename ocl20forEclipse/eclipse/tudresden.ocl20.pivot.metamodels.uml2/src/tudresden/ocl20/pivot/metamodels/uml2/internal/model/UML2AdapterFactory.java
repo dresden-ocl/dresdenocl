@@ -203,17 +203,17 @@ public class UML2AdapterFactory {
 		if (dslType instanceof Class)
 			type = createType((Class) dslType);
 
-		else if (dslType instanceof DataType)
-			type = createType((DataType) dslType);
-		
-		else if (dslType instanceof Interface)
-			type = createType(dslType);
-		
 		else if (dslType instanceof org.eclipse.uml2.uml.PrimitiveType)
 			type = createPrimitiveType((org.eclipse.uml2.uml.PrimitiveType) dslType);
 
 		else if (dslType instanceof org.eclipse.uml2.uml.Enumeration)
 			type = createEnumeration((org.eclipse.uml2.uml.Enumeration) dslType);
+		
+		else if (dslType instanceof DataType)
+			type = createType((DataType) dslType);
+		
+		else if (dslType instanceof Interface)
+			type = createType(dslType);
 		
 		else {
 			// should not happen
