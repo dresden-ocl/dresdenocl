@@ -19,7 +19,7 @@ import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
-import tudresden.ocl20.pivot.models.ecore.internal.provider.EcoreModelInstanceProvider;
+import tudresden.ocl20.pivot.models.uml2.internal.provider.Uml2ModelInstanceProvider;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -63,7 +63,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * @generated NOT
 	 */
 	public IModelInstanceProvider getModelInstanceProvider() {
-		return new EcoreModelInstanceProvider(resource);
+		return new Uml2ModelInstanceProvider(this);
 	}
 
 	/**
