@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.models.mdr.internal.provider;
+package tudresden.ocl20.pivot.models.mdr.internal.modelinstance;
 
 import java.io.File;
 import java.io.FileInputStream;

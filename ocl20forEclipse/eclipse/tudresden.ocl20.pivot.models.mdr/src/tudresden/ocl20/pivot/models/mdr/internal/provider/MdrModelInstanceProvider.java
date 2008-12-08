@@ -18,6 +18,7 @@ import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstanceProvider;
+import tudresden.ocl20.pivot.models.mdr.internal.modelinstance.FileClassLoader;
 import tudresden.ocl20.pivot.models.mdr.internal.modelinstance.UmlModelInstance;
 
 public class MdrModelInstanceProvider extends AbstractModelInstanceProvider
