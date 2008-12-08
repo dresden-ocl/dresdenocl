@@ -130,8 +130,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IOclInterpreter#interpret(tudresden.ocl20.pivot.pivotmodel.Constraint,
-	 *      tudresden.ocl20.pivot.modelbus.IModelObject)
+	 * @see
+	 * tudresden.ocl20.interpreter.IOclInterpreter#interpret(tudresden.ocl20
+	 * .pivot.pivotmodel.Constraint,
+	 * tudresden.ocl20.pivot.modelbus.IModelObject)
 	 */
 	public OclRoot interpret(Constraint constraint, IModelObject modelObject) {
 		if (logger.isDebugEnabled()) {
@@ -181,7 +183,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IOclInterpreter#prepare(tudresden.ocl20.pivot.pivotmodel.Constraint)
+	 * @see
+	 * tudresden.ocl20.interpreter.IOclInterpreter#prepare(tudresden.ocl20.pivot
+	 * .pivotmodel.Constraint)
 	 */
 	public void prepare(Constraint constraint, IModelObject modelObject) {
 		if (logger.isDebugEnabled()) {
@@ -208,8 +212,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IOclInterpreter#removeResults(java.util.List,
-	 *      java.util.List)
+	 * @see
+	 * tudresden.ocl20.interpreter.IOclInterpreter#removeResults(java.util.List,
+	 * java.util.List)
 	 */
 	public void removeResults(List<IModelObject> modelObjects,
 			List<Constraint> constraints) {
@@ -234,7 +239,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IOclInterpreter#clearResults(java.util.List)
+	 * @see
+	 * tudresden.ocl20.interpreter.IOclInterpreter#clearResults(java.util.List)
 	 */
 	public void clearResults(List<IModelObject> modelObjects) {
 		if (logger.isDebugEnabled()) {
@@ -304,7 +310,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseBooleanLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseBooleanLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp)
 	 */
 	@Override
 	public OclRoot caseBooleanLiteralExp(BooleanLiteralExp object) {
@@ -340,7 +349,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseCollectionLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseCollectionLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp)
 	 */
 	@Override
 	public OclRoot caseCollectionLiteralExp(CollectionLiteralExp object) {
@@ -445,7 +457,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseCollectionItem(tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseCollectionItem
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem)
 	 */
 	@Override
 	public OclRoot caseCollectionItem(CollectionItem object) {
@@ -480,7 +495,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseExpressionInOcl(tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseExpressionInOcl
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl)
 	 */
 	@Override
 	public OclRoot caseExpressionInOcl(ExpressionInOcl object) {
@@ -501,7 +519,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseIfExp(tudresden.ocl20.pivot.essentialocl.expressions.IfExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIfExp(tudresden.ocl20.pivot.essentialocl.expressions.IfExp)
 	 */
 	@Override
 	public OclRoot caseIfExp(IfExp object) {
@@ -539,7 +559,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseIntegerLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIntegerLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
 	 */
 	@Override
 	public OclRoot caseIntegerLiteralExp(IntegerLiteralExp object) {
@@ -575,7 +598,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseEnumLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseEnumLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp)
 	 */
 	@Override
 	public OclRoot caseEnumLiteralExp(EnumLiteralExp object) {
@@ -612,7 +638,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseOperationCallExp(tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseOperationCallExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
 	@Override
 	public OclRoot caseOperationCallExp(OperationCallExp object) {
@@ -635,6 +664,20 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 
 		String opName = env.getModelInstance().getOperationName(
 				object.getReferredOperation().getName(), parameters.length + 1);
+
+		/*
+		 * FIXME Transform the operation name for all operations which are
+		 * implemented with a different name than in OCL.
+		 */
+		if (opName.equals(">=")) {
+			opName = "isGreaterEqual";
+		} else if (opName.equals(">")) {
+			opName = "isGreaterThan";
+		} else if (opName.equals("<=")) {
+			opName = "isLessEqual";
+		} else if (opName.equals("<")) {
+			opName = "isLessThan";
+		}
 
 		OclRoot source = null;
 		if (object.getReferredOperation().isStatic()) {
@@ -775,7 +818,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#casePropertyCallExp(tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #casePropertyCallExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
 	 */
 	@Override
 	public OclRoot casePropertyCallExp(PropertyCallExp object) {
@@ -909,7 +955,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseRealLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseRealLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp)
 	 */
 	@Override
 	public OclRoot caseRealLiteralExp(RealLiteralExp object) {
@@ -945,7 +994,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseStringLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseStringLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp)
 	 */
 	@Override
 	public OclRoot caseStringLiteralExp(StringLiteralExp object) {
@@ -981,7 +1033,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseVariable(tudresden.ocl20.pivot.essentialocl.expressions.Variable)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseVariable(tudresden.ocl20.pivot.essentialocl.expressions.Variable)
 	 */
 	@Override
 	public OclRoot caseVariable(Variable object) {
@@ -1032,7 +1086,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseTupleLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseTupleLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp)
 	 */
 	@Override
 	public OclRoot caseTupleLiteralExp(TupleLiteralExp object) {
@@ -1081,7 +1138,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseTupleLiteralPart(tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseTupleLiteralPart
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart)
 	 */
 	@Override
 	public OclRoot caseTupleLiteralPart(TupleLiteralPart object) {
@@ -1116,7 +1176,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseLetExp(tudresden.ocl20.pivot.essentialocl.expressions.LetExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseLetExp(tudresden.ocl20.pivot.essentialocl.expressions.LetExp)
 	 */
 	@Override
 	public OclRoot caseLetExp(LetExp object) {
@@ -1147,7 +1209,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseVariableExp(tudresden.ocl20.pivot.essentialocl.expressions.VariableExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseVariableExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.VariableExp)
 	 */
 	@Override
 	public OclRoot caseVariableExp(VariableExp object) {
@@ -1181,7 +1246,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseTypeLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseTypeLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp)
 	 */
 	@Override
 	public OclRoot caseTypeLiteralExp(TypeLiteralExp object) {
@@ -1224,7 +1292,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseInvalidLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseInvalidLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp)
 	 */
 	@Override
 	public OclRoot caseInvalidLiteralExp(InvalidLiteralExp object) {
@@ -1256,7 +1327,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseUndefinedLiteralExp(tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseUndefinedLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp)
 	 */
 	@Override
 	public OclRoot caseUndefinedLiteralExp(UndefinedLiteralExp object) {
@@ -1295,7 +1369,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseIterateExp(tudresden.ocl20.pivot.essentialocl.expressions.IterateExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIterateExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.IterateExp)
 	 */
 	@Override
 	public OclRoot caseIterateExp(IterateExp object) {
@@ -1341,7 +1418,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch#caseIteratorExp(tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIteratorExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp)
 	 */
 	public OclRoot caseIteratorExp(IteratorExp object) {
 		if (logger.isDebugEnabled()) {
