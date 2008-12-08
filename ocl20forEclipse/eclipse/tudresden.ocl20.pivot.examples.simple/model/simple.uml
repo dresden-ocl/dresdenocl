@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="tudresden">
+  <packagedElement xmi:type="uml:Package" xmi:id="_AsKYYMHiEd2UNuYhQ_ApoA" name="ocl20">
+    <packagedElement xmi:type="uml:Package" xmi:id="_BlraUMHiEd2UNuYhQ_ApoA" name="pivot">
+      <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
+        <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="simple">
+          <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person">
+            <ownedAttribute xmi:id="_MIZyMMHiEd2UNuYhQ_ApoA" name="name" type="_IX5VAMHiEd2UNuYhQ_ApoA">
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_Mjqx4MHiEd2UNuYhQ_ApoA" value=""/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_Ppaa0MHiEd2UNuYhQ_ApoA" name="age" type="_GxO5MMHiEd2UNuYhQ_ApoA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_Tagt4MHiEd2UNuYhQ_ApoA" name="Student">
+            <generalization xmi:id="_U2mRYMHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XPL5YMHiEd2UNuYhQ_ApoA" name="Professor">
+            <generalization xmi:id="_XrWQ8MHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_GxO5MMHiEd2UNuYhQ_ApoA" name="int"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_IX5VAMHiEd2UNuYhQ_ApoA" name="String"/>
+</uml:Package>
