@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UML2 model instance Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.models.uml2;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.pivot.models.uml2.Uml2ModelPlugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ tudresden.ocl20.pivot.essentialocl,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary,
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.standardlibrary.java
+Export-Package: tudresden.ocl20.pivot.models.uml2.internal.provider
