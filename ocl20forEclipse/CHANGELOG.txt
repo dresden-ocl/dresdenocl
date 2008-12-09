@@ -1,0 +1,10 @@
+Changes and Bugs fixed during the different Releases
+====================================================
+
+Release 1.1 (Decembre 9th 2008)
+-------------------------------
+- The UML1.5 meta model works now in the binary release.
+- New meta model added: UML2.0.
+- New example added: Simple-Example.
+- Some Bugs of the OCL-Parser were fixed.
+- Some Bugs of the OCL-Interpreter were fixed.
