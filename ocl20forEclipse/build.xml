@@ -27,11 +27,6 @@
 		<copy todir="${basedir}/dist/src">
 			<fileset dir="${basedir}">
 				<include name="eclipse/**"/>
-				<exclude name="eclipse/OLD_GETTING_STARTED.txt"/>
-				<exclude name="eclipse/GETTING_STARTED.txt"/>
-				<exclude name="eclipse/base/**"/>
-				<exclude name="eclipse/ocleditor/**"/>
-				<exclude name="eclipse/visualization/**"/>
 				<exclude name="eclipse/bin/**"/>
 			</fileset>
 		</copy>
@@ -39,30 +34,30 @@
 		<!-- Create Documentation -->
 		<copy todir="${basedir}/dist/bin">
 			<fileset file="${basedir}/GETTING_STARTED.txt"/>
+			<fileset file="${basedir}/CHANGELOG.txt"/>
 		</copy>
 		<copy todir="${basedir}/dist/src">
 			<fileset file="${basedir}/GETTING_STARTED.txt"/>
+			<fileset file="${basedir}/CHANGELOG.txt"/>
 		</copy>
 		<copy todir="${basedir}/dist/bin/doc">
 			<fileset dir="${basedir}/doc/pdf">
-				<include name="tutorial_eng.pdf"/>
-				<include name="tutorial_ger.pdf"/>
+				<include name="tutorial.pdf"/>
 			</fileset>
 		</copy>
 		<copy todir="${basedir}/dist/src/doc">
 			<fileset dir="${basedir}/doc/pdf">
-				<include name="tutorial_eng.pdf"/>
-				<include name="tutorial_ger.pdf"/>
+				<include name="tutorial.pdf"/>
 			</fileset>
 		</copy>
 
 		<!-- Zip binary files -->
-		<tar tarfile="${basedir}/dist/dresden-ocl2-2.0.1.tar" basedir="${basedir}/dist/bin"/>
-		<gzip zipfile="${basedir}/dist/dresden-ocl2-2.0.1.tar.gz" src="${basedir}/dist/dresden-ocl2-2.0.1.tar"/>
+		<tar tarfile="${basedir}/dist/ocl2-for-eclipse-1.1.tar" basedir="${basedir}/dist/bin"/>
+		<gzip zipfile="${basedir}/dist/ocl2-for-eclipse-1.1.tar.gz" src="${basedir}/dist/ocl2-for-eclipse-1.1.tar"/>
 
 		<!-- Zip source files -->
-		<tar tarfile="${basedir}/dist/dresden-ocl2-src-2.0.1.tar" basedir="${basedir}/dist/src"/>
-		<gzip zipfile="${basedir}/dist/dresden-ocl2-src-2.0.1.tar.gz" src="${basedir}/dist/dresden-ocl2-src-2.0.1.tar"/>
+		<tar tarfile="${basedir}/dist/ocl2-for-eclipse-src-1.1.tar" basedir="${basedir}/dist/src"/>
+		<gzip zipfile="${basedir}/dist/ocl2-for-eclipse-src-1.1.tar.gz" src="${basedir}/dist/ocl2-for-eclipse-src-1.1.tar"/>
 
 		<!-- delete temporary files -->
 		<delete includeEmptyDirs="true" failonerror="false">

@@ -1,17 +1,17 @@
-Instructions for the Dresden OCL2 Toolkit for Eclipse
-=====================================================
-The Dresden OCL2 Toolkit for Eclipse is organized as a group of Eclipse Plugins.
+Instructions for Dresden OCL2 for Eclipse
+=========================================
+Dresden OCL2 for Eclipse is organized as a group of Eclipse Plug-ins.
 
 
-How to run the Dresden OCL2 Toolkit for Eclipse
-===============================================
-The Dresden OCL2 Toolkit for Eclipse is distributed as source code and binary jar archives. 
+How to run Dresden OCL2 for Eclipse
+===================================
+Dresden OCL2 for Eclipse is distributed as source code and binary jar archives. 
 How to run the toolkit in both situation is explained below.
 
 a) How to run a source code distribution
 
 If you got the source code distribution, import the directories located in the directory 'eclipse' 
-as plug-ins into your workspace. Afterwords you can run the plug-ins in a new Eclipse instance.
+as plug-ins into your workspace. Afterwards you can run the plug-ins in a new Eclipse instance.
 
 b) How to run a binary distribution
 
@@ -26,7 +26,7 @@ More information about the Dresden OCL2 Toolkit is also available at the Toolkit
 
 Bugs and known issues
 =====================
-Please be aware, that the Dresden OCL2 Toolkit for Eclipse is still under construction and 
+Please be aware, that the Dresden OCL2 for Eclipse is still under construction and 
 contains some bugs and issues already known by the development team. 
 Bugs already found are listed on the SourceForge project page of the Dresden OCL2 Toolkit
 (https://sourceforge.net/projects/dresden-ocl).
