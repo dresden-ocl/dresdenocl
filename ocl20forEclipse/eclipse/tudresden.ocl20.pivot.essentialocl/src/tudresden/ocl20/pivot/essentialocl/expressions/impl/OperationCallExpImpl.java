@@ -136,6 +136,17 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
     }
 
     Type type;
+    
+    /*
+     * If the referredOperation is null and the name of the OperationCallExp instance
+     * is 'atPre' then the method 'withAtPre()' was used before. So in this case we
+     * delegate the call to the source expression.
+     */
+    if (referredOperation == null) {
+    	if (name.equals("atPre")) {
+    		return source.getType();
+    	}
+    }
 
     // check wellformedness of abstract syntax
     if (referredOperation == null) {
