@@ -205,12 +205,12 @@ public aspect PropertyCallExpASTComputation {
 				}
 				
 				// If the property call has an @pre then make an @pre-ocl-expression.
-				if (hasAtPre()) {
+				/*if (hasAtPre()) {
 					sourceExpression = sourceExpression.withAtPre();
-				}
+				}*/
 				
 				// Try to create a property call expression with the computed elements before.
-				PropertyCallExp result = null;
+				OclExpression result = null;
 				try {
 					result = factory.createPropertyCallExp(sourceExpression, attributeName, qualifiers);
 				} catch(Exception ex) {
@@ -220,6 +220,11 @@ public aspect PropertyCallExpASTComputation {
 												
 				// If the factory method return null, then it is an internal error.
 				if (result == null) throw new BuildingASMException("An internal error occured.", token);
+				
+				// If the property call has an @pre then make an @pre-ocl-expression.
+				if (hasAtPre()) {
+					result = result.withAtPre();
+				}
 				
 				return result;
 			} 
@@ -308,12 +313,12 @@ public aspect PropertyCallExpASTComputation {
 				}
 				
 				// Examine whether the operation call has an @pre. If so, make a @pre-ocl-expression.
-				if (hasAtPre()) {
+				/*if (hasAtPre()) {
 					sourceExpression = sourceExpression.withAtPre();
-				}
+				}*/
 				
 				// Try to create a property call expression with the elements that were computed before.
-				PropertyCallExp result = null;
+				OclExpression result = null;
 				try {
 					result = factory.createPropertyCallExp(sourceExpression, attributeName, qualifiers);
 				} catch(Exception ex) {
@@ -323,6 +328,11 @@ public aspect PropertyCallExpASTComputation {
 								
 				// If the factory gives us null, it is an internal error.
 				if (result == null) throw new BuildingASMException("An internal error occured.", token);
+				
+				// Examine whether the operation call has an @pre. If so, make a @pre-ocl-expression.
+				if (hasAtPre()) {
+					result = result.withAtPre();
+				}
 				
 				return result;
 			}
