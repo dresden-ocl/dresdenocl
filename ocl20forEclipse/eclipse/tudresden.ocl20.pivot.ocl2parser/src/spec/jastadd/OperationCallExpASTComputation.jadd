@@ -153,7 +153,7 @@ public aspect OperationCallExpASMComputation {
 					}
 					
 					/* This is case E of the OCL-Specification [page 80 and 81, Nonterminal OperationCallExpCS] */
-					if (hasAtPre()) sourceExpression = sourceExpression.withAtPre();
+					//if (hasAtPre()) sourceExpression = sourceExpression.withAtPre();
 					OperationCallExp returnExpression = null;
 					try {
 						returnExpression = factory.createOperationCallExp(sourceExpression, operationName, arguments);
@@ -165,6 +165,8 @@ public aspect OperationCallExpASMComputation {
 					}
 					
 					if (returnExpression == null) throw new BuildingASMException("The operation is invalid.", token);
+					
+					if (hasAtPre()) returnExpression = returnExpression.withAtPre();
 					return returnExpression;
 				}
 				
@@ -248,9 +250,9 @@ public aspect OperationCallExpASMComputation {
 			
 			
 			/* This is case F of the OCL-Specifiation [page 80 and 81, Nonterminal OperationCallExpCS] */
-			if (hasAtPre()) {
+			/*if (hasAtPre()) {
 				sourceExpression = sourceExpression.withAtPre();
-			}
+			}*/
 			
 			OperationCallExp operationCallExpression = null;
 			try {
@@ -263,6 +265,10 @@ public aspect OperationCallExpASMComputation {
 			}
 			
 			if (operationCallExpression == null) throw new BuildingASMException("The operation can't be build.", token);
+			
+			if (hasAtPre()) {
+				operationCallExpression = operationCallExpression.withAtPre();
+			}
 			return operationCallExpression;
 		}
 		
