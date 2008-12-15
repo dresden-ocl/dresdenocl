@@ -254,16 +254,17 @@ public class Environment {
 	}
 	
 	/**
-	 * Looks for an implicit operation with the given name and the given ocl expressions
-	 * as parameters. The search goes through the implicit variables. If an operation is
-	 * found that corresponds to a type of the implicit variables, then this operation
+	 * Looks for an implicit variable that contains the operation that
+	 * is given by the <code>name</code> and parameters <code>params</code>
+	 * The search goes through the implicit variables. If an operation is
+	 * found that corresponds to a type of the implicit variables, then this variable
 	 * will be returned. Otherwise we will look up in the parent, if one exists. If
 	 * no parent exists we will returned null.
 	 * @param name the name of the operation to be searching for
 	 * @param params the ocl expression that forms the parameters
-	 * @return the operation if any is found, otherwise null 
+	 * @return the variable if any is found, otherwise null 
 	 */
-	public Operation lookupImplicitOperation(String name, List<OclExpression> params) {
+	public Variable lookupImplicitOperation(String name, List<OclExpression> params) {
 		Operation op = null;
 		
 		/* Convert the list of the ocl expression in a list of types.
@@ -280,7 +281,7 @@ public class Environment {
 		for(Variable var : implicitVariables) {
 			Type varType =  var.getType();
 			op = varType.lookupOperation(name, typeList);
-			if (op != null) return op;
+			if (op != null) return var;
 		}
 		
 		/*

@@ -232,10 +232,12 @@ public aspect IteratorExpASTComputation {
 		/* Create a new iterator variable with the element type and the name of the source, but first we must examine
 		 * whether a the source expression has a name. If not we create a new variable name for the new iterator variable.
 		 */
-		String iteratorVariableName = sourceExpression.getName();
+		/*String iteratorVariableName = sourceExpression.getName();
 		if ((iteratorVariableName == null) || (iteratorVariableName.equals(""))) {
 			iteratorVariableName = VariableNameGenerator.getDefault().getVariableName();
-		}
+		}*/
+		
+		String iteratorVariableName = VariableNameGenerator.getDefault().getVariableName();
 		Variable iterator = factory.createVariable(iteratorVariableName, sourceElementType, null);
 		
 		// Build a variable expression at top of the iterator variable.
@@ -335,10 +337,11 @@ public aspect IteratorExpASTComputation {
 			
 			// Create an iterator variable with the name of the source expression or if no one
 			// exists, generate a new name, and the element type of the source expression.
-			String iteratorVariableName = sourceExpression.getName();
+			/*String iteratorVariableName = sourceExpression.getName();
 			if ((iteratorVariableName == null) || (iteratorVariableName.equals(""))) {
 				iteratorVariableName = VariableNameGenerator.getDefault().getVariableName();
-			}
+			}*/
+			String iteratorVariableName = VariableNameGenerator.getDefault().getVariableName();
 			Variable iterator = factory.createVariable(iteratorVariableName, sourceType, null);
 			
 			// Build on top of the variable a variable expression.

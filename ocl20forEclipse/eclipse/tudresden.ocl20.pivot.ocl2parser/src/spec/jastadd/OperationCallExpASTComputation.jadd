@@ -244,10 +244,11 @@ public aspect OperationCallExpASMComputation {
 			//OclExpression sourceExpression = variableExpression;
 			
 			
-			Variable selfVariable = env.getSelfVariable();
-			OclExpression sourceExpression = factory.createVariableExp(selfVariable);
+			/*Variable selfVariable = env.getSelfVariable();
+			OclExpression sourceExpression = factory.createVariableExp(selfVariable);*/
 			
-			
+			Variable implVariable = env.lookupImplicitOperation(operationName, argumentList);
+			OclExpression sourceExpression = factory.createVariableExp(implVariable);
 			
 			/* This is case F of the OCL-Specifiation [page 80 and 81, Nonterminal OperationCallExpCS] */
 			/*if (hasAtPre()) {
