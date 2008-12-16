@@ -91,8 +91,8 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 		String realNames[];
 		String primitiveTypeName;
 
-		integerNames = new String[] { "int", "short", "long", "byte" };
-		realNames = new String[] { "float", "double" };
+		integerNames = new String[] { "byte", "int", "integer", "long", "short" };
+		realNames = new String[] { "double", "float", "real" };
 		primitiveTypeName = dslPrimitiveType.getName();
 
 		result = null;

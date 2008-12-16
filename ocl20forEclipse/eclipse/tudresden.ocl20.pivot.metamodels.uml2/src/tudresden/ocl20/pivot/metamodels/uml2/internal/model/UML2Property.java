@@ -1,6 +1,7 @@
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.TypedElement;
@@ -71,7 +72,7 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public Type getOwningType() {
-		
+
 		Type result;
 		Element owner;
 
@@ -85,16 +86,42 @@ public class UML2Property extends AbstractProperty implements Property {
 
 			result = UML2AdapterFactory.INSTANCE.createType(aTypedElement
 					.getType());
-		} 
-		
+		}
+
 		else if (owner instanceof org.eclipse.uml2.uml.Class) {
 			org.eclipse.uml2.uml.Class aClass;
-			
+
 			aClass = (org.eclipse.uml2.uml.Class) owner;
-			
+
 			result = UML2AdapterFactory.INSTANCE.createType(aClass);
-		}		
-		
+		}
+
+		else if (owner instanceof org.eclipse.uml2.uml.Association) {
+			org.eclipse.uml2.uml.Association anAssociation;
+
+			anAssociation = (org.eclipse.uml2.uml.Association) owner;
+
+			EList<org.eclipse.uml2.uml.Property> associationEnds = anAssociation
+					.getOwnedEnds();
+
+			/* Does only work for binary associations! */
+			for (org.eclipse.uml2.uml.Property anEnd : associationEnds) {
+
+				/*
+				 * Return the type of the end which does not represent this
+				 * property.
+				 */
+				if (!anEnd.equals(this.dslProperty)) {
+
+					result = UML2AdapterFactory.INSTANCE.createType(anEnd
+							.getType());
+					break;
+				}
+				// no else.
+
+			}
+		}
+
 		else {
 			if (logger.isInfoEnabled()) {
 				logger.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
@@ -102,7 +129,7 @@ public class UML2Property extends AbstractProperty implements Property {
 			}
 			// no else.
 		}
-		
+
 		return result;
 	}
 
@@ -134,6 +161,16 @@ public class UML2Property extends AbstractProperty implements Property {
 	@Override
 	public boolean isOrdered() {
 		return dslProperty.isOrdered();
+	}
+
+	/** 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public boolean isStatic() {
+		return dslProperty.isStatic();
 	}
 
 	/**

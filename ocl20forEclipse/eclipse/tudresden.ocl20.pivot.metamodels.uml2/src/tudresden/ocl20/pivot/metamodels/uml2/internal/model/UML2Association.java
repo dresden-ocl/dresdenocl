@@ -2,6 +2,8 @@ package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.TypedElement;
 
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -68,17 +70,39 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public Type getOwningType() {
-		if (dslProperty.getOwner() instanceof org.eclipse.uml2.uml.TypedElement)
-			return UML2AdapterFactory.INSTANCE
-					.createType(((org.eclipse.uml2.uml.TypedElement) dslProperty
-							.getOwner()).getType());
+
+		Type result;
+		Element owner;
+
+		result = null;
+		owner = this.dslProperty.getOwner();
+
+		if (owner instanceof TypedElement) {
+			TypedElement aTypedElement;
+
+			aTypedElement = (TypedElement) owner;
+
+			result = UML2AdapterFactory.INSTANCE.createType(aTypedElement
+					.getType());
+		} 
+		
+		else if (owner instanceof org.eclipse.uml2.uml.Class) {
+			org.eclipse.uml2.uml.Class aClass;
+			
+			aClass = (org.eclipse.uml2.uml.Class) owner;
+			
+			result = UML2AdapterFactory.INSTANCE.createType(aClass);
+		}		
+		
 		else {
 			if (logger.isInfoEnabled()) {
 				logger.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
 						.toString()));
 			}
-			return null;
+			// no else.
 		}
+		
+		return result;
 	}
 
 	/**

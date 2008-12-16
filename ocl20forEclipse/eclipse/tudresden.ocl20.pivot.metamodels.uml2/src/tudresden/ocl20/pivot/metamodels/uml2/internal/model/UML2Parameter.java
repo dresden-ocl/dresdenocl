@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter;
 
 /**
@@ -33,24 +33,25 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 * Creates a new <code>UML2Parameter</code> instance.
 	 * 
 	 * @param dslParameter
-	 *          the {@link org.eclipse.uml2.uml.Parameter} that is adopted by this
-	 *          class
+	 *            the {@link org.eclipse.uml2.uml.Parameter} that is adopted by
+	 *            this class
 	 * 
 	 * @generated
 	 */
 	public UML2Parameter(org.eclipse.uml2.uml.Parameter dslParameter) {
-    
-    if (logger.isDebugEnabled()) {
-      logger.debug("UML2Parameter(dslParameter=" + dslParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
 
-    // initialize adapted parameter
-    this.dslParameter = dslParameter;
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("UML2Parameter(dslParameter=" + dslParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("UML2Parameter() - exit"); //$NON-NLS-1$
-    }
-  }
+		// initialize adapted parameter
+		this.dslParameter = dslParameter;
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("UML2Parameter() - exit"); //$NON-NLS-1$
+		}
+	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
@@ -60,6 +61,37 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	@Override
 	public String getName() {
 		return dslParameter.getName();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind()
+	 * 
+	 * @generated NOT
+	 */
+	public ParameterDirectionKind getKind() {
+
+		org.eclipse.uml2.uml.ParameterDirectionKind dslKind;
+		dslKind = dslParameter.getDirection();
+
+		if (dslKind.getValue() == org.eclipse.uml2.uml.ParameterDirectionKind.IN) {
+			this.kind = ParameterDirectionKind.IN;
+		}
+
+		else if (dslKind.getValue() == org.eclipse.uml2.uml.ParameterDirectionKind.INOUT) {
+			this.kind = ParameterDirectionKind.INOUT;
+		}
+
+		else if (dslKind.getValue() == org.eclipse.uml2.uml.ParameterDirectionKind.OUT) {
+			this.kind = ParameterDirectionKind.OUT;
+		}
+
+		else if (dslKind.getValue() == org.eclipse.uml2.uml.ParameterDirectionKind.RETURN) {
+			this.kind = ParameterDirectionKind.RETURN;
+		}
+
+		return this.kind;
 	}
 
 	/**

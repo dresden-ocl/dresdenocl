@@ -37,24 +37,25 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 * Creates a new <code>UML2Operation</code> instance.
 	 * 
 	 * @param dslOperation
-	 *          the {@link org.eclipse.uml2.uml.Operation} that is adopted by this
-	 *          class
+	 *            the {@link org.eclipse.uml2.uml.Operation} that is adopted by
+	 *            this class
 	 * 
 	 * @generated
 	 */
 	public UML2Operation(org.eclipse.uml2.uml.Operation dslOperation) {
-  
-    if (logger.isDebugEnabled()) {
-      logger.debug("UML2Operation(dslOperation=" + dslOperation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
 
-    // initialize
-    this.dslOperation = dslOperation;
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("UML2Operation(dslOperation=" + dslOperation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("UML2Operation() - exit"); //$NON-NLS-1$
-    }
-  }
+		// initialize
+		this.dslOperation = dslOperation;
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("UML2Operation() - exit"); //$NON-NLS-1$
+		}
+	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getName()
@@ -74,6 +75,20 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	@Override
 	public Type getType() {
 		return UML2AdapterFactory.INSTANCE.createType(dslOperation.getType());
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter()
+	 * 
+	 * @generated NOT
+	 */
+	public Parameter getReturnParameter() {
+		Parameter result;
+
+		result = UML2AdapterFactory.INSTANCE.createParameter(this.dslOperation
+				.getReturnResult());
+		
+		return result;
 	}
 
 	/**
@@ -103,7 +118,8 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	public Type getOwningType() {
 		if (dslOperation.getOwner() instanceof org.eclipse.uml2.uml.Type)
 			return UML2AdapterFactory.INSTANCE
-					.createType(((org.eclipse.uml2.uml.Type) dslOperation.getOwner()));
+					.createType(((org.eclipse.uml2.uml.Type) dslOperation
+							.getOwner()));
 		else {
 			if (logger.isInfoEnabled()) {
 				logger.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
@@ -137,6 +153,14 @@ public class UML2Operation extends AbstractOperation implements Operation {
 		return dslOperation.isOrdered();
 	}
 
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
+	 * 
+	 * @generated NOT
+	 */
+	public boolean isStatic() {
+		return dslOperation.isStatic();
+	}
 	/**
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique()
 	 * 
