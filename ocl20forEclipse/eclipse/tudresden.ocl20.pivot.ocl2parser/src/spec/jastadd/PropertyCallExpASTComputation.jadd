@@ -403,7 +403,7 @@ public aspect PropertyCallExpASTComputation {
 			 * because we must determine the enumartion type. After that we can lookup up for the
 			 * last element in the list that must be literal of the enumeration.
 			 */
-			Type enumerationType = env.lookupType(pathNameList.subList(0, pathNameList.size()));
+			Type enumerationType = env.lookupType(pathNameList.subList(0, pathNameList.size()-1));
 			if (enumerationType != null) {
 				if (!(enumerationType instanceof Enumeration)) throw new BuildingASMException("The path name denotes not an enumeration type.", token);
 				Enumeration enumeration = (Enumeration) enumerationType;
@@ -414,6 +414,7 @@ public aspect PropertyCallExpASTComputation {
 					EnumLiteralExp result = null;
 					try {
 						result = factory.createEnumLiteralExp(pathNameList);
+						return result;
 					}
 					catch(Throwable th) {
 						String message = th.getMessage() + " The literal doesn't exists in the enumeration.";
