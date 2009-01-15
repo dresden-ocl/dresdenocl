@@ -1,0 +1,9 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Membership
+inv levelAnColor:
+  currentLevel.name = 'Silver' implies card.color = Color::silver
+  and
+  currentLevel.name = 'Gold' implies card.color = Color::gold
+
+endpackage

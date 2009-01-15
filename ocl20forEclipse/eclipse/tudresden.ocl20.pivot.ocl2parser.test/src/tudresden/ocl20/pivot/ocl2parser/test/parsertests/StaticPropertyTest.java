@@ -17,16 +17,17 @@
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
 */
+
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
 import junit.framework.TestCase;
 
-public class IncludesTest extends TestCase {
-	public void testIncludes() {
-		String fileName = "oclTestFiles/includes.ocl";
+public class StaticPropertyTest extends TestCase {
+	public void testStaticPropertyWithUML2() {
+		String fileName = "oclTestFiles/StaticPropertyTest_UML2.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("royalsandloyals_includes.xmi");
+			TestPerformer test = TestPerformer.getDefault("tudresden.ocl20.pivot.metamodels.uml2");
+			test.setModel("royalsandloyals.uml");
 			test.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";

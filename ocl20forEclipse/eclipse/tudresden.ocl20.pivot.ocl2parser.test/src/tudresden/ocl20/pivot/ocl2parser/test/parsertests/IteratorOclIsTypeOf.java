@@ -21,12 +21,12 @@ package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
 import junit.framework.TestCase;
 
-public class IncludesTest extends TestCase {
-	public void testIncludes() {
-		String fileName = "oclTestFiles/includes.ocl";
+public class IteratorOclIsTypeOf extends TestCase {
+	public void testOclIsTypeOfInIterator() {
+		String fileName = "oclTestFiles/Iterator_oclIsTypeOf.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("royalsandloyals_includes.xmi");
+			test.setModel("LoyalRoyalOCL2Parser_4.xmi");
 			test.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";

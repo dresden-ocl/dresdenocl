@@ -35,7 +35,7 @@ import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
  *
  */
 public class TestPerformer {
-	protected IMetamodel umlMetaModel = null;
+	protected IMetamodel metaModel = null;
 	protected IModelProvider modelProvider = null;
 	protected IModel model = null;
 	protected String fileDirectory = null;
@@ -48,18 +48,36 @@ public class TestPerformer {
 	private TestPerformer() throws Exception {
 		super();
 		
-		initializeMetamodel();
+		//initializeMetamodel();
 		
 		
 	}
 	
 	/**
-	 * With this method the singleton instance can be received.
+	 * With this method the singleton instance can be received. This instance is initialized
+	 * with the NetBeans UML Metamodel.
 	 * @return the singleton instance
 	 * @throws Exception is thrown if any error occurred
 	 */
 	static public TestPerformer getDefault() throws Exception {
 		if (self == null) self = new TestPerformer();
+		
+		self.initializeMetamodel("tudresden.ocl20.pivot.metamodels.uml");
+		
+		return self;
+	}
+	
+	/**
+	 * With this method the singleton instance can be received. With the argument a
+	 * metamodel can be specified.
+	 * @param metamodelName the name of the metamodel
+	 * @return the singleton instance with the given metamodel instance initialized
+	 * @throws Exception is thrown if any error occurred
+	 */
+	static public TestPerformer getDefault(String metamodelName) throws Exception {
+		if (self == null) self = new TestPerformer();
+		
+		self.initializeMetamodel(metamodelName);
 		
 		return self;
 	}
@@ -70,13 +88,13 @@ public class TestPerformer {
 	 * @param umlModelName the filename of the uml model that is located in the <i>./src/testdata</i> directory
 	 * @throws Exception is thrown if the model cannot be initialized or the model file is not found
 	 */
-	public void setUMLModel(String umlModelName) throws Exception {
+	public void setModel(String umlModelName) throws Exception {
 		/*if (model != null) {
 			if (model.getDisplayName().equals(umlModelName)) return;
 		}*/
 		
-		initializeMetamodel();
-		modelProvider = umlMetaModel.getModelProvider();
+		initializeMetamodel(metaModel.getId());
+		modelProvider = metaModel.getModelProvider();
 		File currentDir = new File(".");
 		//System.out.println("Current directory: " + currentDir.getAbsolutePath());
 		fileDirectory = "./src/testData/";
@@ -116,10 +134,11 @@ public class TestPerformer {
 	 * This method initializes the uml metamodel.
 	 * @throws Exception is thrown if the metamodel is not found
 	 */
-	private void initializeMetamodel() throws Exception {
+	private void initializeMetamodel(String metamodelName) throws Exception {
 		try {
-			umlMetaModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel("tudresden.ocl20.pivot.metamodels.uml");
-			if (umlMetaModel == null) {
+			//umlMetaModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel("tudresden.ocl20.pivot.metamodels.uml");
+			metaModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel(metamodelName);
+			if (metaModel == null) {
 				throw new Exception("Unable to load uml metmodel.   ");
 			}
 		} catch(Exception ex) {

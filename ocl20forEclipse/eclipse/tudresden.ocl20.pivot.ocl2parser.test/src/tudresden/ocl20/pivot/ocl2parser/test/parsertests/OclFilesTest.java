@@ -46,7 +46,7 @@ public class OclFilesTest extends TestCase {
 		String fileName = "oclTestFiles/oclFile01.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setUMLModel("LoyalRoyalOCL2Parser_4.xmi");
+			test.setModel("LoyalRoyalOCL2Parser_4.xmi");
 			test.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
