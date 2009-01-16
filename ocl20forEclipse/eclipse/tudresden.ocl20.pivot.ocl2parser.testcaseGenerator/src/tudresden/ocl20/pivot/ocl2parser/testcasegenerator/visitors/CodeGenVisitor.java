@@ -58,7 +58,7 @@ import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.ITypeEl
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.IVariable;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.BuildingASMException;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.ICodeBuilder;
-import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.UtilClass;
+import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.BuildingCodeUtilClass;
 
 /**
  * This visitor traverses the object model of the test model and generates the code for the
@@ -130,7 +130,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		
 		// The string element will return a localBuf with quotes, so we must remove them.
 		String bufString = localBuf.toString();
-		bufString = UtilClass.deleteChar(bufString, '"');
+		bufString = BuildingCodeUtilClass.deleteChar(bufString, '"');
 		
 		buffer.append("CollectionKind." + bufString);
 
@@ -177,7 +177,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		// The call to the string element will return a string with quotes, but we must remove them.
 		String bufString = localBuf.toString();
 		
-		bufString = UtilClass.deleteChar(bufString, '"');
+		bufString = BuildingCodeUtilClass.deleteChar(bufString, '"');
 		buffer.append("ConstraintKind." + bufString);
 
 	}
@@ -187,7 +187,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		IModelExpression param = node.getParameter().get(0);
 		
 		// If the parameter is a variable then take the last element of the variable chain.
-		if (param instanceof IVariable) param = UtilClass.transferLastElementOfVariableChainList((IVariable) param);
+		if (param instanceof IVariable) param = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) param);
 		
 		// The last element of the variable chain must be a string.
 		if (!(param instanceof IStringElement)) throw new BuildingASMException("The parameter of an EnumerationLiteral must be string.", param.getToken());
@@ -196,7 +196,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		String literalString = param.getToken().getValue();
 		
 		// Transform the pathname into a list of strings.
-		List<String> pathName = UtilClass.transformPathName2List(literalString);
+		List<String> pathName = BuildingCodeUtilClass.transformPathName2List(literalString);
 		
 		// Generate the code that builds the name of the enumeration path name.
 		code.append("List<String> enumName$" + elementNumber + " = new ArrayList<String>();\n");
@@ -241,7 +241,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 			node.getParameter().get(i).accept(this, localBuf);
 		}
 		
-		buffer.append("modelFactory.create" + node.getToken().getValue() + "(" + UtilClass.concatElementsOfStringBufferList(localBuffers) + ")");
+		buffer.append("modelFactory.create" + node.getToken().getValue() + "(" + BuildingCodeUtilClass.concatElementsOfStringBufferList(localBuffers) + ")");
 
 	}
 
@@ -323,7 +323,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		 * name will not occur in the generated code.
 		 */
 		IModelExpression param1 = node.getParameter().get(0);
-		if (param1 instanceof IVariable) param1 = UtilClass.transferLastElementOfVariableChainList((IVariable) param1);
+		if (param1 instanceof IVariable) param1 = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) param1);
 		
 		if (!(param1 instanceof IStringElement)) throw new BuildingASMException("The first parameter of the namespace element must be a string.", param1.getToken());
 		
@@ -331,7 +331,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		IStringElement paramString = (IStringElement) param1;
 		
 		// Make a string list of the full qualified namespace name.
-		List<String> pathName = UtilClass.transformPathName2List(paramString.getToken().getValue());
+		List<String> pathName = BuildingCodeUtilClass.transformPathName2List(paramString.getToken().getValue());
 		
 		// Notice the first free number.
 		int localNumber = elementNumber;
@@ -401,14 +401,14 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		IModelExpression param1 = node.getParameter().get(0);
 		
 		// If the first parameter is a variable then we take the last element of the variable chain.
-		if (param1 instanceof IVariable) param1 = UtilClass.transferLastElementOfVariableChainList((IVariable) param1);
+		if (param1 instanceof IVariable) param1 = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) param1);
 		
 		// If the last element of the variable chain isn't a string, it is an error.
 		if (!(param1 instanceof IStringElement)) throw new BuildingASMException("The first parameter of the operation" +
 				" must be a string that denotes the full qualified operation name.", param1.getToken());
 		
 		// Transform the string given by the user into a list of strings.
-		List<String> operationPathname = UtilClass.transformPathName2List(param1.getToken().getValue());
+		List<String> operationPathname = BuildingCodeUtilClass.transformPathName2List(param1.getToken().getValue());
 		
 		// The last element of the operation pathname is the operation name itself.
 		String operationName = operationPathname.get(operationPathname.size()-1);
@@ -420,7 +420,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		List<String> operationTypename = operationPathname.subList(0, operationPathname.size()-1);
 		
 		// Transform the operation type into a string with double colons. It is used to construct the error messages.
-		String operationTypenameString = UtilClass.concatElementsWithDblColon(operationTypename);
+		String operationTypenameString = BuildingCodeUtilClass.concatElementsWithDblColon(operationTypename);
 		
 		// Generate code that creates a string list that will contain the elements of the operation type path name.
 		code.append("List<String> operationTypename$" + localElementNumber + " = new ArrayList<String>();\n");
@@ -472,7 +472,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		IModelExpression param1 = node.getParameter().get(0);
 		
 		// If the first parameter is a variable then we take the last element of the variable chain.
-		if (param1 instanceof IVariable) param1 = UtilClass.transferLastElementOfVariableChainList((IVariable) param1);
+		if (param1 instanceof IVariable) param1 = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) param1);
 		
 		// If the first parameter isn't a string, then it is an error.
 		if (!(param1 instanceof IStringElement)) throw new BuildingASMException("The first parameter of a new operation must be a string that denotes the full qualified operation name.", param1.getToken());
@@ -481,13 +481,13 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		 * The first parameter denotes the full qualified path name to the new operation separated by double colons.
 		 * So we transfer this path name into a list of strings.
 		 */
-		List<String> operationPathname = UtilClass.transformPathName2List(param1.getToken().getValue());
+		List<String> operationPathname = BuildingCodeUtilClass.transformPathName2List(param1.getToken().getValue());
 		
 		// The operation type name consists of the all elements of the operation name except the last element that denotes the operation name itself.
 		List<String> operationTypename = operationPathname.subList(0, operationPathname.size()-1);
 		
 		// We need the operation typename separated by double colons for error messages.
-		String operationTypenameString = UtilClass.concatElementsWithDblColon(operationTypename);
+		String operationTypenameString = BuildingCodeUtilClass.concatElementsWithDblColon(operationTypename);
 		
 		// The operation name.
 		String operationName = operationPathname.get(operationPathname.size()-1);
@@ -598,7 +598,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		
 		// The string element will return a string with quotes, so we must remove them.
 		String bufString = localBuf.toString();
-		bufString = UtilClass.deleteChar(bufString, '"');
+		bufString = BuildingCodeUtilClass.deleteChar(bufString, '"');
 		
 		buffer.append("ParameterDirectionKind." + bufString);
 
@@ -609,13 +609,13 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		IModelExpression param1 = node.getParameter().get(0);
 		
 		// If the parameter is a variable then we take the last element of this variable chain.
-		if (param1 instanceof IVariable) param1 = UtilClass.transferLastElementOfVariableChainList((IVariable) param1);
+		if (param1 instanceof IVariable) param1 = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) param1);
 		
 		// The last element of the variable chain must be a string that denotes the path to the property.
 		if (!(param1 instanceof IStringElement)) throw new BuildingASMException("The first parameter of a property must be a string that denotes the path to the poperty.", param1.getToken());
 		
 		// Transform the path name given by the user to a list of strings.
-		List<String> pathNameProperty = UtilClass.transformPathName2List(param1.getToken().getValue());
+		List<String> pathNameProperty = BuildingCodeUtilClass.transformPathName2List(param1.getToken().getValue());
 		
 		// Generate the code that creates a string list that should represent the path name to the type of the property.
 		code.append("List<String> propertyTypename$" + elementNumber + " = new ArrayList<String>();\n");
@@ -632,7 +632,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		code.append("Type propertyType$" + elementNumber + " = referencedModel.findType(propertyTypename$" + elementNumber + ");\n");
 		
 		// Reconstruct the type name of the property from the property path name. It will be used for the error message to be generated.
-		String typeName = UtilClass.concatElementsWithDblColon(pathNameProperty.subList(0, pathNameProperty.size()-1));
+		String typeName = BuildingCodeUtilClass.concatElementsWithDblColon(pathNameProperty.subList(0, pathNameProperty.size()-1));
 		
 		// Reconstruct the property name from the property path name (it is the last element). It will be used for the error message to be generated.
 		String propertyName = pathNameProperty.get(pathNameProperty.size()-1);
@@ -667,14 +667,14 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		IModelExpression param1 = node.getParameter().get(0);
 		
 		// If the first parameter is a variable then we take the last element of the variable chain.
-		if (param1 instanceof IVariable) param1 = UtilClass.transferLastElementOfVariableChainList((IVariable) param1);
+		if (param1 instanceof IVariable) param1 = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) param1);
 		
 		// If the first parameter isn't a string then it is an error.
 		if (!(param1 instanceof IStringElement)) throw new BuildingASMException("The first parameter of a property" +
 				" (that should be created) must be string that denotes the full qualified path name of the new property.", param1.getToken());
 		
 		// Transform the string given by the user (separated by double colons) into a list of strings.
-		List<String> propertyPathname = UtilClass.transformPathName2List(param1.getToken().getValue());
+		List<String> propertyPathname = BuildingCodeUtilClass.transformPathName2List(param1.getToken().getValue());
 		
 		// Generate the code that creates the list of the property typename.
 		code.append("List<String> propertyTypename$" + localElementNumber + " = new ArrayList<String>();\n");
@@ -689,7 +689,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		}
 		
 		// Reconstruct the typename from the property path name. It will be used for error messages.
-		String typeName = UtilClass.concatElementsWithDblColon(propertyPathname.subList(0, propertyPathname.size()-1));
+		String typeName = BuildingCodeUtilClass.concatElementsWithDblColon(propertyPathname.subList(0, propertyPathname.size()-1));
 		
 		// Reconstruct the property name (it is the last element of the path name) from the property path name. It will be used for error messages.
 		String propertyName = propertyPathname.get(propertyPathname.size()-1);
@@ -810,7 +810,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		}
 		
 		// We concatenate the class names to a string.
-		String testclassString = UtilClass.concatElements(testClassNames);
+		String testclassString = BuildingCodeUtilClass.concatElements(testClassNames);
 
 		// Add the class names to the map.
 		testsuiteMap.put("testclassnames", testclassString);
@@ -974,7 +974,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 	public void visitTestcaseElement(ITestcaseElement node, StringBuffer buffer) throws BuildingASMException {
 		actualMap.put("testcasename", node.getToken().getValue());
 		
-		String transformedOclExpression = UtilClass.transformStringToExplicitNewLines(node.getOclExpression().getValue());
+		String transformedOclExpression = BuildingCodeUtilClass.transformStringToExplicitNewLines(node.getOclExpression().getValue());
 		actualMap.put("oclexpression", transformedOclExpression);
 		node.getResult().accept(this, null);
 		
@@ -992,7 +992,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		IModelExpression param1 = node.getParameter().get(0);
 		
 		// If the parameter is a variable, get the last element of the variable chain.
-		if (param1 instanceof IVariable) param1 = UtilClass.transferLastElementOfVariableChainList((IVariable) param1);
+		if (param1 instanceof IVariable) param1 = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) param1);
 		
 		// If the last element of the variable chain isn't a string element, it is an error.
 		if (!(param1 instanceof IStringElement)) throw new BuildingASMException("The first parameter of a type element must be a string.", param1.getToken());
@@ -1001,7 +1001,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		String paramString = param1.getToken().getValue();
 		
 		// The string value is path name. So we transform this into a string list.
-		List<String> pathName = UtilClass.transformPathName2List(paramString);
+		List<String> pathName = BuildingCodeUtilClass.transformPathName2List(paramString);
 		
 		// We save the actual element number.
 		int localNumber = elementNumber;
@@ -1054,7 +1054,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 			 * If we have a list, we must add a generic to the variable definition.
 			 */
 			if (node.getTypename().equals("List")) {
-				IListElement listElement = (IListElement) UtilClass.transferLastElementOfVariableChainList(node);
+				IListElement listElement = (IListElement) BuildingCodeUtilClass.transferLastElementOfVariableChainList(node);
 				
 				// If the list is an array, it must handled be different.
 				if (listElement.isArray()) {

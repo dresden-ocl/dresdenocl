@@ -66,7 +66,7 @@ import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.ITypeEl
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.IVariable;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.BuildingASMException;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.IEnvironment;
-import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.UtilClass;
+import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.BuildingCodeUtilClass;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
@@ -191,7 +191,7 @@ public class TypeCheckVisitor implements IVisitor {
 					 * The parameter can be a variable and we must take the last element
 					 * of the variable chain.
 					 */
-					IListElement list = UtilClass.transferList(exp);
+					IListElement list = BuildingCodeUtilClass.transferList(exp);
 					
 					/*
 					 * If the last element of the variable chain isn't a list element
@@ -345,7 +345,7 @@ public class TypeCheckVisitor implements IVisitor {
 				parameterMessage.add(lastElement);
 			}
 						
-			message = message + "\nOne possible parameter configuration to this element: " + UtilClass.concatElements(parameterMessage);
+			message = message + "\nOne possible parameter configuration to this element: " + BuildingCodeUtilClass.concatElements(parameterMessage);
 		}
 		
 		/*
@@ -505,7 +505,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 * So we must traverse this chain to the last element that is the string element.
 		 */
 		IModelExpression exp = firstParam; 
-		if (node.getParameter().get(0) instanceof IVariable) exp = UtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
+		if (node.getParameter().get(0) instanceof IVariable) exp = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
 		
 		/*
 		 * We must examine whether the last element of the chain is of type IStringLiteral.
@@ -522,7 +522,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 * With this list we search in the model for that namespace name.
 		 * 
 		 */
-		List<String> pathName = UtilClass.transformPathName2List(exp.getToken().getValue());
+		List<String> pathName = BuildingCodeUtilClass.transformPathName2List(exp.getToken().getValue());
 		
 		Namespace rootModelNamespace;
 		try {
@@ -568,13 +568,13 @@ public class TypeCheckVisitor implements IVisitor {
 		IModelExpression firstParam = node.getParameter().get(0);
 		if (!(firstParam.getTypename().equals("String"))) throw new BuildingASMException("The first parameter must be string.", firstParam.getToken());
 		
-		if (firstParam instanceof IVariable) firstParam = UtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
+		if (firstParam instanceof IVariable) firstParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
 		
 		// We get the value of the token.
 		String operationValue = firstParam.getToken().getValue();
 		
 		// We transform the path name into a list of strings.
-		List<String> operationName = UtilClass.transformPathName2List(operationValue);
+		List<String> operationName = BuildingCodeUtilClass.transformPathName2List(operationValue);
 		
 		// If the path name has less than two elements, it denotes not a new operation name.
 		if (operationName.size() < 2) throw new BuildingASMException("The new operation name" +
@@ -600,7 +600,7 @@ public class TypeCheckVisitor implements IVisitor {
 		if (!(secondParam.getTypename().equals("List"))) throw new BuildingASMException("The second parameter" +
 				" of the new operation declaration must be a list of parameters.", secondParam.getToken());
 		
-		if (secondParam instanceof IVariable) secondParam = UtilClass.transferLastElementOfVariableChainList((IVariable) secondParam);
+		if (secondParam instanceof IVariable) secondParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) secondParam);
 		
 		IListElement listElement = (IListElement) secondParam;
 		
@@ -653,7 +653,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 * So we must traverse this chain to the last element that is the string element.
 		 */
 		IModelExpression firstParam = node.getParameter().get(0);
-		if (firstParam instanceof IVariable) firstParam = UtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
+		if (firstParam instanceof IVariable) firstParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
 		
 		/*
 		 * We must examine whether the last element of the chain is of type IStringElement. If not
@@ -685,7 +685,7 @@ public class TypeCheckVisitor implements IVisitor {
 			secondParam = nullList;
 		}
 		// If the second parameter is a variable we get the last element of the variable chain.
-		if (secondParam instanceof IVariable) secondParam = UtilClass.transferLastElementOfVariableChainList((IVariable) secondParam);
+		if (secondParam instanceof IVariable) secondParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) secondParam);
 		
 		// The last element of the variable chain must be a list.
 		if (!(secondParam instanceof IListElement)) throw new BuildingASMException("This error is very strange" +
@@ -764,7 +764,7 @@ public class TypeCheckVisitor implements IVisitor {
 			IModelExpression exp = typeList.getParameter().get(i);
 			
 			// If the element is a variable get the last element of the variable chain.
-			if (exp instanceof IVariable) exp = UtilClass.transferLastElementOfVariableChainList((IVariable) exp);
+			if (exp instanceof IVariable) exp = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) exp);
 			
 			// The last element of the variable chain must be a type.
 			if (!(exp instanceof ITypeElement)) throw new BuildingASMException("The parameter denotes not a" +
@@ -777,7 +777,7 @@ public class TypeCheckVisitor implements IVisitor {
 			/* 
 			 * Get the type name that is associated the type element.
 			 */
-			List<String> typeName = UtilClass.transformPathName2List(typeParam.getToken().getValue());
+			List<String> typeName = BuildingCodeUtilClass.transformPathName2List(typeParam.getToken().getValue());
 			
 			/*
 			 * We look for the type in the model.
@@ -803,7 +803,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 */
 		
 		// Transform the token value into a list of strings.
-		List<String> operationName = UtilClass.transformPathName2List(firstParam.getToken().getValue());
+		List<String> operationName = BuildingCodeUtilClass.transformPathName2List(firstParam.getToken().getValue());
 		
 		// The operation name must have at least two elements.
 		if (operationName.size() < 2) throw new BuildingASMException("The full qualified operation name must have at least two elements.", node.getToken());
@@ -893,7 +893,7 @@ public class TypeCheckVisitor implements IVisitor {
 				// The second parameter can also be a variable.
 				if (secondParam instanceof IVariable) {
 					// In this case we get the last variable of a possible variable chain.
-					IVariable lastVariable = UtilClass.transferLastVariableOfVariableChainList((IVariable) secondParam);
+					IVariable lastVariable = BuildingCodeUtilClass.transferLastVariableOfVariableChainList((IVariable) secondParam);
 					
 					// Get the last element of the variable chain.
 					IModelExpression lastElement = lastVariable.getReference();
@@ -935,7 +935,7 @@ public class TypeCheckVisitor implements IVisitor {
 		IModelExpression exp = node.getParameter().get(0);
 		
 		// If the parameter is a variable then we transfer the last element of the variable chain to exp.
-		if (exp instanceof IVariable) exp = UtilClass.transferLastElementOfVariableChainList((IVariable)exp);
+		if (exp instanceof IVariable) exp = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable)exp);
 		
 		// The parameter must be of type string.
 		if (!(exp instanceof IStringElement)) throw new BuildingASMException("The parameter must be of type string.", value);
@@ -975,7 +975,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 * So we must traverse this chain to the last element that is the string element.
 		 */
 		IModelExpression exp = firstParam;
-		if(firstParam instanceof IVariable) exp = UtilClass.transferLastElementOfVariableChainList((IVariable) firstParam);
+		if(firstParam instanceof IVariable) exp = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) firstParam);
 		
 		/*
 		 * We must examine whether the last element of the chain is of type IStringElement.
@@ -986,7 +986,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 * The second parameter must be a type.
 		 */
 		IModelExpression secondParam = node.getParameter().get(1);
-		if (secondParam instanceof IVariable) secondParam = UtilClass.transferLastElementOfVariableChainList((IVariable)secondParam);
+		if (secondParam instanceof IVariable) secondParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable)secondParam);
 		
 		if (!(secondParam instanceof ITypeElement)) throw new BuildingASMException("The second parameter must specify a type.", value);
 		
@@ -995,7 +995,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 * instance must be converted to a list of strings because the value is a list of separated
 		 * string literals by the double colon '::'.
 		 */
-		List<String> propertyName = UtilClass.transformPathName2List(exp.getToken().getValue());
+		List<String> propertyName = BuildingCodeUtilClass.transformPathName2List(exp.getToken().getValue());
 		
 		// The pathname part that represents the type name.
 		List<String> pathNameType = null;
@@ -1048,7 +1048,7 @@ public class TypeCheckVisitor implements IVisitor {
 		}
 		
 		/*
-		 * The static property reference must have exactly two parameters.
+		 * The static property reference must have exactly one parameter.
 		 */
 		if(node.getParameter().size() != 1) throw new BuildingASMException("The static property reference must have exactly one parameter.", value);
 		
@@ -1058,7 +1058,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 * So we must traverse this chain to the last element that is the string element.
 		 */
 		IModelExpression exp = node.getParameter().get(0);
-		if(exp instanceof IVariable) exp = UtilClass.transferLastElementOfVariableChainList((IVariable) exp);
+		if(exp instanceof IVariable) exp = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) exp);
 		
 		/*
 		 * We must examine whether the last element of the chain is of type IStringElement.
@@ -1071,7 +1071,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 * instance must be converted to a list of strings because the value is a list of separated
 		 * string literals by the double colon '::'.
 		 */
-		List<String> propertyName = UtilClass.transformPathName2List(exp.getToken().getValue());
+		List<String> propertyName = BuildingCodeUtilClass.transformPathName2List(exp.getToken().getValue());
 		
 		// The pathname part that represents the type name.
 		List<String> pathNameType = null;
@@ -1189,7 +1189,7 @@ public class TypeCheckVisitor implements IVisitor {
 		 * last element of the chain.
 		 */
 		IModelExpression exp = firstParam;
-		if (firstParam instanceof IVariable) exp = UtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
+		if (firstParam instanceof IVariable) exp = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
 		
 		/*
 		 * If the last element of the chain isn't a string literal, it is an error.
@@ -1197,7 +1197,7 @@ public class TypeCheckVisitor implements IVisitor {
 		if (!(exp instanceof IStringElement)) throw new BuildingASMException("The first parameter must reference a string.", value);
 		
 		// Transform the string of the token into a path list.
-		List<String> pathName = UtilClass.transformPathName2List(exp.getToken().getValue());
+		List<String> pathName = BuildingCodeUtilClass.transformPathName2List(exp.getToken().getValue());
 		
 		// The instance that will hold the type.
 		Type type = null;
@@ -1230,7 +1230,7 @@ public class TypeCheckVisitor implements IVisitor {
 		// Get the parameter.
 		IModelExpression firstParam = node.getParameter().get(0);
 		
-		if (firstParam instanceof IVariable) firstParam = UtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
+		if (firstParam instanceof IVariable) firstParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable)firstParam);
 		
 		/*
 		 * The asSet element must have an essential ocl element as type, with the following exceptions:
@@ -1267,7 +1267,7 @@ public class TypeCheckVisitor implements IVisitor {
 		IModelExpression firstParam = node.getParameter().get(0);
 		
 		// If the parameter is a variable, we must get the last element of the chain.
-		if (firstParam instanceof IVariable) firstParam = UtilClass.transferLastElementOfVariableChainList((IVariable) firstParam);
+		if (firstParam instanceof IVariable) firstParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) firstParam);
 		
 		// If the last element of the chain isn't a string, it is an error.
 		if (!(firstParam instanceof IStringElement)) throw new BuildingASMException("The parameter must be a string.");
@@ -1333,7 +1333,7 @@ public class TypeCheckVisitor implements IVisitor {
 				// The second parameter can also be a variable.
 				if (secondParam instanceof IVariable) {
 					// In this case we get the last variable of a possible variable chain.
-					IVariable lastVariable = UtilClass.transferLastVariableOfVariableChainList((IVariable) secondParam);
+					IVariable lastVariable = BuildingCodeUtilClass.transferLastVariableOfVariableChainList((IVariable) secondParam);
 					
 					// Get the last element of the variable chain.
 					IModelExpression lastElement = lastVariable.getReference();
@@ -1397,7 +1397,7 @@ public class TypeCheckVisitor implements IVisitor {
 		IModelExpression fourthParam = node.getParameter().get(3);
 		
 		// If the parameter is a variable, so we take the last element of this variable chain.
-		if (fourthParam instanceof IVariable) fourthParam = UtilClass.transferLastElementOfVariableChainList((IVariable) fourthParam);
+		if (fourthParam instanceof IVariable) fourthParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) fourthParam);
 		
 		// The last element must be a list.
 		if (!(fourthParam.getTypename().equals("List"))) throw new BuildingASMException("The fourth parameter must be a list.", node.getToken());
@@ -1447,7 +1447,7 @@ public class TypeCheckVisitor implements IVisitor {
 		IModelExpression fifthParam = node.getParameter().get(4);
 		
 		// If the parameter is a variable, we get the last element of this chain.
-		if (fifthParam instanceof IVariable) fifthParam = UtilClass.transferLastElementOfVariableChainList((IVariable) fifthParam);
+		if (fifthParam instanceof IVariable) fifthParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) fifthParam);
 		
 		// The last element must be a new property or a new operation.
 		if (!((fifthParam instanceof IPropertyNewElement) || (fifthParam instanceof IOperationNewElement) || (fifthParam instanceof INullElement))) throw new BuildingASMException("The" +
@@ -1466,7 +1466,7 @@ public class TypeCheckVisitor implements IVisitor {
 		IModelExpression firstParam = node.getParameter().get(0);
 		
 		// If the parameter is a variable, we get the last element of the variable chain.
-		if (firstParam instanceof IVariable) firstParam = UtilClass.transferLastElementOfVariableChainList((IVariable) firstParam);
+		if (firstParam instanceof IVariable) firstParam = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) firstParam);
 		
 		// The last parameter must be a string.
 		if (!(firstParam instanceof IStringElement)) throw new BuildingASMException("The parameter must be a string.", value);
@@ -1500,13 +1500,13 @@ public class TypeCheckVisitor implements IVisitor {
 		IModelExpression firstParam = node.getParameter().get(0);
 		
 		IModelExpression exp = firstParam;
-		if (firstParam instanceof IVariable) exp = UtilClass.transferLastElementOfVariableChainList((IVariable) firstParam);
+		if (firstParam instanceof IVariable) exp = BuildingCodeUtilClass.transferLastElementOfVariableChainList((IVariable) firstParam);
 		
 		if (!(exp instanceof IStringElement)) throw new BuildingASMException("The parameter of the enumeration" +
 				" literal reference must be a string literal.", value);
 		
 		// Transform the value of the token into a pathname list.
-		List<String> pathName = UtilClass.transformPathName2List(exp.getToken().getValue());
+		List<String> pathName = BuildingCodeUtilClass.transformPathName2List(exp.getToken().getValue());
 		
 		// The pathname part that represents the enumeration name.
 		List<String> pathNameType = null;

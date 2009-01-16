@@ -26,16 +26,16 @@ import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.IListEl
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.IModelExpression;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.IVariable;
 
-public class UtilClass {
-	static private UtilClass instance;
+public class BuildingCodeUtilClass {
+	static private BuildingCodeUtilClass instance;
 	
-	private UtilClass() {
+	private BuildingCodeUtilClass() {
 		
 	}
 	
-	static public UtilClass getDefault() {
+	static public BuildingCodeUtilClass getDefault() {
 		if (instance == null) {
-			instance = new UtilClass();
+			instance = new BuildingCodeUtilClass();
 			return instance;
 		}
 		

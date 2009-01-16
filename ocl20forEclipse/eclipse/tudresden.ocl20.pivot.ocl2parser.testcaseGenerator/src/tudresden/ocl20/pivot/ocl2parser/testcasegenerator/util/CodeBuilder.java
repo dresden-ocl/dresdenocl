@@ -42,9 +42,11 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.CodeGenEcorePlugin;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.UniqueEList;
@@ -480,11 +482,11 @@ public class CodeBuilder implements ICodeBuilder {
 		IFolder internalFolder = defaultFolder.getFolder("internal");
 		internalFolder.create(true, true, null);
 		
-		IFolder compareFolder = internalFolder.getFolder("compare");
-		compareFolder.create(true, true, null);
+		IFolder destCompareDirectory = internalFolder.getFolder("compare");
+		destCompareDirectory.create(true, true, null);
 		
-		IFolder stringTreeFolder = compareFolder.getFolder("stringTree");
-		stringTreeFolder.create(true, true, null);
+		IFolder srcStringTreeFolder = destCompareDirectory.getFolder("stringTree");
+		srcStringTreeFolder.create(true, true, null);
 		
 		VelocityContext ctx = new VelocityContext();
 		ctx.put("packagename", projectname + ".internal");
@@ -493,73 +495,54 @@ public class CodeBuilder implements ICodeBuilder {
 		System.out.println(testFile.getAbsolutePath());
 		
 		Activator activator = Activator.getDefault();
-		//URL url = FileLocator.find(activator.getBundle(), new Path("./template/compare"), null);
-		
+				
 		Bundle bundle = Activator.getDefault().getBundle();
-		//Enumeration fileEnum = bundle.findEntries("./template/compare", "*", false);
-		URL url = bundle.getResource("template");
-		System.out.println(url.getFile());
-		System.out.println(url.getPath());
-		System.out.println(url.toExternalForm());
-		System.out.println(url.toURI().getPath());
-		//System.out.println(url.toURI().ge)
+				
+		URL fileLocatorURL = FileLocator.find(Activator.getDefault().getBundle(), new Path("template/compare"), null);
+		URL fileLocatorFileURL = FileLocator.toFileURL(fileLocatorURL);
 		
+		File srcCompareDirectory = new File(fileLocatorFileURL.toURI());
 		
-		/*while(fileEnum.hasMoreElements()) {
-			URL url = (URL) fileEnum.nextElement();
-			InputStream inputStream = url.openStream();
-		}*/
-		
-		//IPath path = activator.getStateLocation();
-		//URL url = activator.getClass().getResource("./template/compare");
-		
-		//String pathName = url.getFile();
-		
-		//URI uri = url.toURI();
-		
-		
-		//IPath path = URIUtil.toPath(uri);
-		//File compareDirectory = path.toFile();
-		
-		//File compareDirectory = new File(uri);
-		//InputStream stream = url.openStream();
-		
+		Velocity.setProperty("File.resource.loader.path", srcCompareDirectory.getAbsoluteFile());
 		
 		//File compareDirectory = new File("./template/compare");
-		File compareDirectory = new File(url.getFile());
-		url.openStream();
+		//File compareDirectory = new File(url.getFile());
+		//url.openStream();
 		
-		File[] contentCompareDirectory = compareDirectory.listFiles();
+		File[] contentCompareDirectory = srcCompareDirectory.listFiles();
 		
 		for(File sourceFile : contentCompareDirectory) {
 			if (sourceFile.isDirectory()) continue;
 			
-			IFile destinationFile = compareFolder.getFile(sourceFile.getName());
+			IFile destinationFile = destCompareDirectory.getFile(sourceFile.getName());
 			destinationFile.create(null, true, null);
 			
 			Writer destWriter = new FileWriter(destinationFile.getLocation().toFile());
 			Writer bufWriter = new BufferedWriter(destWriter);
 			
-			Template templ = Velocity.getTemplate("template/compare/" + sourceFile.getName());
+			Template templ = Velocity.getTemplate("./" + sourceFile.getName());
 			templ.merge(ctx, bufWriter);
 			
 			bufWriter.flush();
 			bufWriter.close();
 		}
 		
-		File stringTreeDirectory = new File("template/compare/stringTree");
-		File[] contentStringTreeDirectory = stringTreeDirectory.listFiles();
+		URL stringTreeDirectoryURL = FileLocator.toFileURL(FileLocator.find(Activator.getDefault().getBundle(), new Path("template/compare/stringTree"), null));
+		File srcStringTreeDirectory = new File(stringTreeDirectoryURL.toURI());
+		
+		//File stringTreeDirectory = new File("template/compare/stringTree");
+		File[] contentStringTreeDirectory = srcStringTreeDirectory.listFiles();
 		
 		for(File sourceFile : contentStringTreeDirectory) {
 			if (sourceFile.isDirectory()) continue;
 			
-			IFile destinationFile = stringTreeFolder.getFile(sourceFile.getName());
+			IFile destinationFile = srcStringTreeFolder.getFile(sourceFile.getName());
 			destinationFile.create(null, true, null);
 			
 			Writer destWriter = new FileWriter(destinationFile.getLocation().toFile());
 			Writer bufWriter = new BufferedWriter(destWriter);
 			
-			Template templ = Velocity.getTemplate("template/compare/stringTree/" + sourceFile.getName());
+			Template templ = Velocity.getTemplate("./stringTree/"  + sourceFile.getName());
 			templ.merge(ctx, bufWriter);
 			
 			bufWriter.flush();
