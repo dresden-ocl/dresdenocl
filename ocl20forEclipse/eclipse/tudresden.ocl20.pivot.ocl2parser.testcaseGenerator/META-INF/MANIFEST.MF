@@ -37,3 +37,5 @@ Export-Package: tudresden.ocl20.pivot.ocl2parser.testcasegenerator,
  tudresden.ocl20.pivot.ocl2parser.testcasegenerator.testcasegenerator.cst2ast,
  tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util,
  tudresden.ocl20.pivot.ocl2parser.testcasegenerator.visitors
+Import-Package: org.apache.tools.ant,
+ org.apache.tools.ant.taskdefs

@@ -28,13 +28,14 @@ import java.io.InputStream;
 import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -46,7 +47,6 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.CodeGenEcorePlugin;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.UniqueEList;
@@ -260,8 +260,14 @@ public class CodeBuilder implements ICodeBuilder {
 	 * @throws Exception thrown if the build.properties file isn't found or an error occurs while creating the file in the new project
 	 */
 	public void createBuildProperties() throws Exception {
+		// Find the 'build.properties' file.				
+		URL fileLocatorURL = FileLocator.find(Activator.getDefault().getBundle(), new Path("template/build.properties"), null);
+		
+		// Transform this url into an url that can be understood by the File class.
+		URL fileLocatorFileURL = FileLocator.toFileURL(fileLocatorURL);
+		
 		// We take the build.properties file.
-		File buildPropertiesFile = new File("./template/build.properties");
+		File buildPropertiesFile = new File(fileLocatorFileURL.toURI());
 		
 		// If the file doesn't exist it is an error.
 		if (!(buildPropertiesFile.exists())) throw new FileNotFoundException("The template file build.properties was not found in the directory template.");
@@ -408,6 +414,22 @@ public class CodeBuilder implements ICodeBuilder {
 	 * @throws Exception is thrown while accessing the file system or through the velocity engine
 	 */
 	private void createActivatorFile() throws Exception {
+			// Find the 'template' directory.				
+			URL fileLocatorURL = FileLocator.find(Activator.getDefault().getBundle(), new Path("template"), null);
+			
+			// Transform this url into an url that can be understood by the File class.
+			URL fileLocatorFileURL = FileLocator.toFileURL(fileLocatorURL);
+			
+			// Transform the url object into a file object that represents the 'template' directory.
+			File templateDirectory = new File(fileLocatorFileURL.toURI());
+			
+			// Create a set of properties with only one property that contains the 'template' directory.
+			Properties veloProperties = new Properties();
+			veloProperties.setProperty("file.resource.loader.path", templateDirectory.getAbsolutePath());
+			
+			// Initialize the velocity engine with the given properties, meaning with the 'template' directory as place where the templates are found.
+			VelocityEngine velo = new VelocityEngine(veloProperties);
+				
 			// We need the project name as the path name of the activator file.
 			String localProjectname = projectname.replace('.', '/');
 			
@@ -428,7 +450,8 @@ public class CodeBuilder implements ICodeBuilder {
 			ctx.put("projectpackage", projectname);
 			
 			// Get the template file and merge it with the values of the context.
-			Template templ = Velocity.getTemplate("./template/Activator.java");
+			//Template templ = Velocity.getTemplate("./template/Activator.java");
+			Template templ = velo.getTemplate("Activator.java");
 			templ.merge(ctx, bufWriter);
 			
 			// Flush and close the writer.
@@ -444,6 +467,22 @@ public class CodeBuilder implements ICodeBuilder {
 	 * @throws Exception can be thrown if a file system error occurs or the velocity report an error
 	 */
 	private void createManifestMF() throws Exception {
+		// Find the 'template' directory.				
+		URL fileLocatorURL = FileLocator.find(Activator.getDefault().getBundle(), new Path("template"), null);
+		
+		// Transform this url into an url that can be understood by the File class.
+		URL fileLocatorFileURL = FileLocator.toFileURL(fileLocatorURL);
+		
+		// Transform the url object into a file object that represents the 'template' directory.
+		File templateDirectory = new File(fileLocatorFileURL.toURI());
+		
+		// Create a set of properties with only one property that contains the 'template' directory.
+		Properties veloProperties = new Properties();
+		veloProperties.setProperty("file.resource.loader.path", templateDirectory.getAbsolutePath());
+		
+		// Initialize the velocity engine with the given properties, meaning with the 'template' directory as place where the templates are found.
+		VelocityEngine velo = new VelocityEngine(veloProperties);
+		
 		// First we create the manifest directory in the project folder.
 		IFolder metaInfFolder = project.getFolder("META-INF");
 		metaInfFolder.create(true, true, null);
@@ -466,7 +505,8 @@ public class CodeBuilder implements ICodeBuilder {
 		ctx.put("bundlename", projectname);
 		
 		// Get the template and merge them with the variables of the context.
-		Template templ = Velocity.getTemplate("./template/MANIFEST.MF");
+		//Template templ = Velocity.getTemplate("./template/MANIFEST.MF");
+		Template templ = velo.getTemplate("MANIFEST.MF");
 		templ.merge(ctx, bufWriter);
 		
 		// Flush and close the writer.
@@ -479,38 +519,47 @@ public class CodeBuilder implements ICodeBuilder {
 	 * @throws Exception is thrown if an error occurs while creating the files and folders
 	 */
 	private void createComparator() throws Exception {
+		// Create a new 'internal' folder in the new generated plugin.
 		IFolder internalFolder = defaultFolder.getFolder("internal");
 		internalFolder.create(true, true, null);
 		
+		// Create a new 'compare' folder in the new generated plugin into the 'internal' folder.
 		IFolder destCompareDirectory = internalFolder.getFolder("compare");
 		destCompareDirectory.create(true, true, null);
 		
+		// Create a new 'stringTree' folder under the 'compare' folder.
 		IFolder srcStringTreeFolder = destCompareDirectory.getFolder("stringTree");
 		srcStringTreeFolder.create(true, true, null);
 		
+		/* 
+		 * Set the velocity context. In the template files of the compartor only one variable must be set
+		 * and this is 'packagename'. The package name is the project name plus the postfix '.internal'.
+		 */
 		VelocityContext ctx = new VelocityContext();
 		ctx.put("packagename", projectname + ".internal");
 		
-		File testFile = new File(".");
-		System.out.println(testFile.getAbsolutePath());
-		
-		Activator activator = Activator.getDefault();
-				
-		Bundle bundle = Activator.getDefault().getBundle();
-				
+		// Locate the 'compare' directory of the testcase generator plugin.				
 		URL fileLocatorURL = FileLocator.find(Activator.getDefault().getBundle(), new Path("template/compare"), null);
+		
+		// Transform the previous url into a url that can be understood by the File class.
 		URL fileLocatorFileURL = FileLocator.toFileURL(fileLocatorURL);
 		
+		// Transform the url into a file object that represents the 'compare' folder.
 		File srcCompareDirectory = new File(fileLocatorFileURL.toURI());
 		
-		Velocity.setProperty("File.resource.loader.path", srcCompareDirectory.getAbsoluteFile());
 		
-		//File compareDirectory = new File("./template/compare");
-		//File compareDirectory = new File(url.getFile());
-		//url.openStream();
+		// Create a property set with only one property that holds the path of the 'compare' folder.
+		Properties veloProperties = new Properties();
+		veloProperties.setProperty("file.resource.loader.path", srcCompareDirectory.getAbsolutePath());
 		
+		// Create a velocity engine object with the given search path for the template files.
+		VelocityEngine velo = new VelocityEngine(veloProperties);
+		
+		
+		// Make an array of the compare directory.
 		File[] contentCompareDirectory = srcCompareDirectory.listFiles();
 		
+		// Copy the compare directory into the new plugin and merge the templates with the context. 
 		for(File sourceFile : contentCompareDirectory) {
 			if (sourceFile.isDirectory()) continue;
 			
@@ -520,19 +569,24 @@ public class CodeBuilder implements ICodeBuilder {
 			Writer destWriter = new FileWriter(destinationFile.getLocation().toFile());
 			Writer bufWriter = new BufferedWriter(destWriter);
 			
-			Template templ = Velocity.getTemplate("./" + sourceFile.getName());
+			//Template templ = Velocity.getTemplate("./" + sourceFile.getName());
+			//Template templ = Velocity.getTemplate(sourceFile.getName());
+			Template templ = velo.getTemplate(sourceFile.getName());
+			//Template templ = Velocity.getTemplate(sourceFile.getAbsolutePath());
 			templ.merge(ctx, bufWriter);
 			
 			bufWriter.flush();
 			bufWriter.close();
 		}
 		
+		// Locate the 'stringTree' directory.
 		URL stringTreeDirectoryURL = FileLocator.toFileURL(FileLocator.find(Activator.getDefault().getBundle(), new Path("template/compare/stringTree"), null));
 		File srcStringTreeDirectory = new File(stringTreeDirectoryURL.toURI());
 		
 		//File stringTreeDirectory = new File("template/compare/stringTree");
 		File[] contentStringTreeDirectory = srcStringTreeDirectory.listFiles();
 		
+		// Copy all files of the 'stringTree' directory and merge them with the context.
 		for(File sourceFile : contentStringTreeDirectory) {
 			if (sourceFile.isDirectory()) continue;
 			
@@ -542,7 +596,9 @@ public class CodeBuilder implements ICodeBuilder {
 			Writer destWriter = new FileWriter(destinationFile.getLocation().toFile());
 			Writer bufWriter = new BufferedWriter(destWriter);
 			
-			Template templ = Velocity.getTemplate("./stringTree/"  + sourceFile.getName());
+			//Template templ = Velocity.getTemplate("./stringTree/"  + sourceFile.getName());
+			Template templ = velo.getTemplate("./stringTree/"  + sourceFile.getName());
+			//Template templ = Velocity.getTemplate("stringTree/"  + sourceFile.getName());
 			templ.merge(ctx, bufWriter);
 			
 			bufWriter.flush();

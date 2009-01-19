@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="velocity-1.5/src/java"/>
 	<classpathentry exported="true" kind="lib" path="template/"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="/tudresden.ocl20.pivot.ocl2parser"/>
-	<classpathentry kind="lib" path="lib/velocity-dep-1.5.jar"/>
 	<classpathentry kind="lib" path="lib/jalopy.jar"/>
+	<classpathentry kind="lib" path="velocity-1.5/lib/antlr-2.7.5.jar"/>
+	<classpathentry kind="lib" path="velocity-1.5/lib/avalon-logkit-2.1.jar"/>
+	<classpathentry kind="lib" path="velocity-1.5/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="velocity-1.5/lib/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="velocity-1.5/lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="velocity-1.5/lib/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="velocity-1.5/lib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="velocity-1.5/lib/servletapi-2.3.jar"/>
+	<classpathentry kind="lib" path="velocity-1.5/lib/werken-xpath-0.9.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
