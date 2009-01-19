@@ -30,8 +30,6 @@
  */
 package tudresden.ocl20.interpreter.internal;
 
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,6 +41,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 
 import tudresden.ocl20.interpreter.IEnvironment;
@@ -87,13 +86,21 @@ import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
+ * <p>
+ * The main class of the OCL Interpreter which interprets OCL constraints.
+ * </p>
  * 
+ * <p>
+ * This class implements {@link ExpressionsSwitch} which traverses over
+ * instances of EssentialOCL.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 		IOclInterpreter {
@@ -115,7 +122,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	private boolean preparation = false;
 
 	// the current model object to be interpreted
-	private IModelObject modelObject;
+	private IModelObject constrainedModelObject;
 
 	/**
 	 * Instantiates a new ocl interpreter.
@@ -143,7 +150,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 		modelAccessNeeded = false;
 		preparation = false;
 
-		this.modelObject = modelObject;
+		this.constrainedModelObject = modelObject;
 		env.addVar("self", modelObject != null ? modelObject.getOclObject()
 				: null);
 
@@ -195,7 +202,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 		modelAccessNeeded = false;
 		preparation = true;
 
-		this.modelObject = modelObject;
+		this.constrainedModelObject = modelObject;
 		env.addVar("self", modelObject != null ? modelObject.getOclObject()
 				: null);
 
@@ -305,6 +312,655 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 					+ modelAccessNeeded);
 		}
 		return modelAccessNeeded;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseEnumLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp)
+	 */
+	@Override
+	public OclRoot caseEnumLiteralExp(EnumLiteralExp anEnumLiteralExp) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("caseEnumLiteralExp(EnumLiteralExp) - start");
+		}
+		// no else.
+
+		OclRoot result = null;
+
+		EnumerationLiteral referredEnumLiteral;
+		String literalName;
+		List<String> literalPath;
+
+		/* Eventually use a cached result. */
+		if (useCache && env.getCachedResult(anEnumLiteralExp) != null) {
+			result = env.getCachedResult(anEnumLiteralExp);
+		}
+
+		/* Else compute the result. */
+		else {
+
+			referredEnumLiteral = anEnumLiteralExp.getReferredEnumLiteral();
+
+			literalName = referredEnumLiteral.getQualifiedName();
+			literalPath = Arrays.asList(literalName.split("::"));
+
+			result = env.getModelInstance().findEnumLiteral(literalPath);
+
+			/* Eventually cache the result. */
+			if (useCache && !modelAccessNeeded) {
+				env.cacheResult(anEnumLiteralExp, result);
+			}
+			// no else.
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("caseEnumLiteralExp(EnumLiteralExp)"
+					+ " - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIntegerLiteralExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
+	 */
+	public OclRoot caseIntegerLiteralExp(IntegerLiteralExp intLiteralExp) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("caseIntegerLiteralExp(IntegerLiteralExp) - start");
+		}
+
+		OclRoot result = null;
+
+		/* Eventually use the cache to compute the result. */
+		if (useCache && env.getCachedResult(intLiteralExp) != null) {
+
+			result = env.getCachedResult(intLiteralExp);
+		}
+
+		/* Else interpret the result. */
+		else {
+
+			int intValue;
+
+			intValue = intLiteralExp.getIntegerSymbol();
+
+			result = env.getModelInstance().getFactory().createOclInteger(
+					intValue);
+
+			/* Eventually cache the result. */
+			if (useCache && !modelAccessNeeded) {
+				env.cacheResult(intLiteralExp, result);
+			}
+			// no else.
+
+		}
+		// end else.
+
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("caseIntegerLiteralExp(IntegerLiteralExp) - end - return value="
+							+ result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseOperationCallExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp)
+	 */
+	public OclRoot caseOperationCallExp(OperationCallExp object) {
+
+		OclRoot result;
+
+		if (logger.isDebugEnabled()) {
+			String log;
+
+			log = "caseOperationCallExp(OperationCallExp) - start";
+			logger.debug(log);
+		}
+
+		result = null;
+
+		/* Eventually use a cached result. */
+		if (useCache && env.getCachedResult(object) != null) {
+			result = env.getCachedResult(object);
+		}
+
+		/* Else compute the result. */
+		else {
+			OclRoot[] parameters;
+			OclRoot source;
+
+			Constraint body;
+			IEnvironment localEnv;
+
+			Operation referredOperation;
+			String opName;
+
+			ListIterator<OclExpression> argIterator;
+
+			parameters = new OclRoot[object.getArgument().size()];
+
+			referredOperation = object.getReferredOperation();
+			opName = env.getModelInstance().getOperationName(
+					referredOperation.getName(), parameters.length + 1);
+
+			/*
+			 * Transform the operation name for all operations which are
+			 * implemented with a different name than in OCL.
+			 */
+			if (opName.equals("=")) {
+				opName = "isEqualTo";
+			} else if (opName.equals("<>")) {
+				opName = "isNotEqualTo";
+			} else if (opName.equals(">=")) {
+				opName = "isGreaterEqual";
+			} else if (opName.equals(">")) {
+				opName = "isGreaterThan";
+			} else if (opName.equals("<=")) {
+				opName = "isLessEqual";
+			} else if (opName.equals("<")) {
+				opName = "isLessThan";
+			} else if (opName.equals("+")) {
+				opName = "add";
+			} else if (opName.equals("-")) {
+				/* Decide between unary and binary operation. */
+				if (parameters.length > 0) {
+					opName = "subtract";
+				} else {
+					opName = "negative";
+				}
+			} else if (opName.equals("*")) {
+				opName = "multiply";
+			} else if (opName.equals("/")) {
+				opName = "divide";
+			} else if (opName.equals("oclIsUndefined")) {
+				opName = "isOclUndefined";
+			}
+			// no else.
+
+			source = null;
+
+			/* Get the source type for static operations. */
+			if (object.getReferredOperation().isStatic()) {
+				List<String> pathName;
+				String typeName;
+
+				typeName = object.getSourceType().getQualifiedName();
+
+				/*
+				 * Convert the type name into a list containing the package
+				 * names.
+				 */
+				if (StringUtils.isEmpty(typeName)) {
+					pathName = Collections.emptyList();
+				} else {
+					pathName = Arrays.asList(typeName.split("::"));
+				}
+
+				/* Find the source type. */
+				source = env.getModelInstance().findType(pathName);
+			}
+
+			/* Compute the source type for non-static operations. */
+			else {
+				source = doSwitch((EObject) object.getSource());
+			}
+
+			body = env.getConstraint(object.getReferredOperation()
+					.getQualifiedName());
+			localEnv = null;
+
+			if (body != null) {
+				localEnv = Environment.getNewLocalEnvironment();
+			}
+			// no else.
+
+			argIterator = object.getArgument().listIterator();
+
+			/* Iterate through the arguments and compute the parameter values. */
+			while (argIterator.hasNext()) {
+				OclExpression exp;
+				OclRoot param;
+
+				exp = argIterator.next();
+				param = doSwitch((EObject) exp);
+				parameters[argIterator.previousIndex()] = param;
+
+				/* Eventually add the variables to the local environment. */
+				if (localEnv != null) {
+					localEnv.addVar(exp.getName(), param);
+				}
+				// no else.
+			}
+
+			/* Handle special operations. */
+
+			/* The operation atPre has to store the atPre value. */
+			if (opName.equals("atPre")) {
+
+				if (preparation) {
+					env.savePostconditionValue(object, source);
+					result = env.getModelInstance().getUndefined();
+				}
+
+				else {
+					result = env.getPostconditionValue(object);
+				}
+			}
+
+			/*
+			 * The operation oclIsNew has to store some values. To compute all
+			 * new values.
+			 */
+			else if (opName.equals("oclIsNew")) {
+
+				if (preparation) {
+					env.savePostconditionValue(object, env.getModelInstance()
+							.getFactory().createOclBoolean(
+									source instanceof OclVoid));
+					result = env.getModelInstance().getUndefined();
+				}
+
+				else {
+					result = env.getPostconditionValue(object);
+				}
+			}
+
+			/* Instances of OclVoid have their source as result. */
+			else if (source instanceof OclVoid) {
+				result = source;
+			}
+
+			/*
+			 * If allInstances for some reason is not possible for standard
+			 * library null is returned. In that case
+			 * modelInstance.getObjectsOfKind() is used.
+			 */
+			else if (opName.equals("allInstances")) {
+				List<String> typePath;
+				String typeName;
+
+				List<IModelObject> objectInstances;
+				Iterator<IModelObject> objectsIt;
+
+				List<OclRoot> instances;
+
+				typeName = object.getSourceType().getQualifiedName();
+
+				/*
+				 * Split the canonical name of the source type into its
+				 * packages.
+				 */
+				if (StringUtils.isEmpty(typeName)) {
+					typePath = Collections.emptyList();
+				} else {
+					typePath = Arrays.asList(typeName.split("::"));
+				}
+
+				objectInstances = new ArrayList<IModelObject>(env
+						.getModelInstance().getObjectsOfKind(typePath));
+				objectsIt = objectInstances.iterator();
+
+				instances = new ArrayList<OclRoot>(objectInstances.size());
+
+				/*
+				 * Iterate through the instances and add them to the instances
+				 * list.
+				 */
+				while (objectsIt.hasNext()) {
+					instances.add(objectsIt.next().getOclObject());
+				}
+
+				result = env.getModelInstance().getFactory().createOclSet(
+						instances.toArray(new OclRoot[instances.size()]));
+			}
+
+			/* The standard case. Invoke the operation and compute the result. */
+			else {
+
+				if (body == null) {
+
+					try {
+						result = source.invokeOperation(opName, parameters);
+					}
+
+					catch (NoSuchMethodException e) {
+						String log;
+
+						log = "caseOperationCallExp(OperationCallExp)";
+						logger.error(log, e);
+
+						e.printStackTrace();
+					}
+				}
+
+				else {
+					IOclInterpreter interp;
+
+					interp = new OclInterpreter(localEnv);
+					interp.setUseCache(useCache);
+					result = interp.interpret(body, constrainedModelObject);
+					modelAccessNeeded = interp.isModelAccessNeeded();
+				}
+			}
+			// end else.
+
+			/*
+			 * If the result or its source is an OclObject, the result cannot be
+			 * cached.
+			 */
+			if ((result instanceof OclObject) || (source instanceof OclObject)) {
+				modelAccessNeeded = true;
+			}
+
+		}
+		// end else.
+
+		/* Eventually cache the result. */
+		if (useCache && !modelAccessNeeded) {
+			env.cacheResult(object, result);
+		}
+		// no else.
+
+		if (logger.isDebugEnabled()) {
+			String log;
+
+			log = "caseOperationCallExp(OperationCallExp) - end - ";
+			log += "return value=" + result;
+			logger.debug(log);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #casePropertyCallExp
+	 * (tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
+	 */
+	public OclRoot casePropertyCallExp(PropertyCallExp aProperty) {
+
+		OclRoot result;
+		IEnvironment localEnv;
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("casePropertyCallExp(PropertyCallExp) - start");
+		}
+
+		result = null;
+
+		/* Eventually use a cached result. */
+		if (useCache && env.getCachedResult(aProperty) != null) {
+			result = env.getCachedResult(aProperty);
+		}
+
+		/* Else interpret the result. */
+		else {
+
+			OclRoot sourceObject;
+
+			String qualifiedPropertyName;
+			String propertyName;
+
+			sourceObject = null;
+
+			/* Handle static properties. */
+			if (aProperty.getReferredProperty().isStatic()) {
+				List<String> pathName;
+				String typeName;
+
+				typeName = aProperty.getSourceType().getQualifiedName();
+
+				/* Convert the canonical name into a List of packages. */
+				if (StringUtils.isEmpty(typeName)) {
+					pathName = Collections.emptyList();
+				} else {
+					pathName = Arrays.asList(typeName.split("::"));
+				}
+
+				/* For static properties the source is their Type. */
+				sourceObject = env.getModelInstance().findType(pathName);
+			}
+
+			/* Else interpret the sourceExp. */
+			else {
+				sourceObject = doSwitch((EObject) aProperty.getSource());
+			}
+
+			localEnv = null;
+
+			qualifiedPropertyName = aProperty.getReferredProperty()
+					.getQualifiedName();
+			propertyName = aProperty.getReferredProperty().getName();
+
+			/* Check if the property is a derived one. */
+			if (env.getConstraint(qualifiedPropertyName + "-derive") != null) {
+
+				Constraint derivedC;
+				IOclInterpreter interp;
+
+				derivedC = env.getConstraint(qualifiedPropertyName + "-derive");
+
+				localEnv = Environment.getNewLocalEnvironment();
+
+				interp = new OclInterpreter(localEnv);
+				interp.setUseCache(useCache);
+
+				result = interp.interpret(derivedC, constrainedModelObject);
+				modelAccessNeeded = interp.isModelAccessNeeded();
+			}
+
+			/* Else check if the property has a initial expression. */
+			else if (env.getConstraint(qualifiedPropertyName + "-initial") != null) {
+
+				Constraint initC;
+				IOclInterpreter interp;
+
+				initC = env.getConstraint(qualifiedPropertyName + "-initial");
+
+				localEnv = Environment.getNewLocalEnvironment();
+
+				interp = new OclInterpreter(localEnv);
+				interp.setUseCache(useCache);
+
+				result = interp.interpret(initC, constrainedModelObject);
+
+				modelAccessNeeded = interp.isModelAccessNeeded();
+			}
+
+			/* Else check if the property has a body expression. */
+			else if (env.getConstraint(propertyName) != null) {
+
+				Constraint body;
+				IOclInterpreter interp;
+
+				body = env.getConstraint(propertyName);
+
+				localEnv = Environment.getNewLocalEnvironment();
+
+				interp = new OclInterpreter(localEnv);
+				interp.setUseCache(useCache);
+
+				result = interp.interpret(body, constrainedModelObject);
+				modelAccessNeeded = interp.isModelAccessNeeded();
+			}
+
+			/* Else the property value must be set in the model instance. */
+			else {
+				try {
+					Type propertyType;
+
+					propertyType = aProperty.getType();
+
+					if (propertyType instanceof OrderedSetType) {
+						result = sourceObject
+								.getPropertyValueAsOrderedSet(propertyName);
+					}
+
+					else if (propertyType instanceof SequenceType) {
+						result = sourceObject
+								.getPropertyValueAsSequence(propertyName);
+					}
+
+					else if (propertyType instanceof SetType) {
+						result = sourceObject
+								.getPropertyValueAsSet(propertyName);
+					}
+
+					else if (propertyType instanceof BagType) {
+						result = sourceObject
+								.getPropertyValueAsBag(propertyName);
+					}
+
+					else {
+						result = sourceObject.getPropertyValue(propertyName);
+					}
+				}
+
+				catch (NoSuchFieldException e) {
+					logger.error("casePropertyCallExp(PropertyCallExp)", e);
+
+					e.printStackTrace();
+
+					result = env.getModelInstance().getInvalid();
+				}
+
+				catch (IllegalAccessException e) {
+					logger.error("casePropertyCallExp(PropertyCallExp)", e);
+
+					e.printStackTrace();
+
+					result = env.getModelInstance().getInvalid();
+				}
+			}
+
+			/* If the result is an OclObject, the result can not be cached. */
+			if (result instanceof OclObject) {
+				modelAccessNeeded = true;
+			}
+			// no else.
+
+			// Eventually cache the result.
+			if (useCache && !modelAccessNeeded) {
+				env.cacheResult(aProperty, result);
+			}
+			// no else.
+		}
+		// end else.
+
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("casePropertyCallExp(PropertyCallExp) - end - return value="
+							+ result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseVariable(tudresden.ocl20.pivot.essentialocl.expressions.Variable)
+	 */
+	public OclRoot caseVariable(Variable aVariable) {
+
+		OclRoot result;
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("caseVariable(Variable) - start");
+		}
+		// no else.
+
+		result = null;
+
+		/* Eventually use a caches result. */
+		if (useCache && env.getCachedResult(aVariable) != null) {
+			result = env.getCachedResult(aVariable);
+		}
+
+		else {
+
+			OclExpression initExp;
+			OclRoot initValue;
+
+			/* Eventually interpret the initExpression. */
+			initExp = aVariable.getInitExpression();
+			initValue = null;
+
+			if (initExp != null) {
+				initValue = doSwitch((EObject) aVariable.getInitExpression());
+			}
+			// no else.
+
+			/* Eventually get the value of the Variable from the environment. */
+			result = env.getVar(aVariable.getName());
+
+			/*
+			 * Else initialized the Variable and add the Variable to the
+			 * environment.
+			 */
+			if (result == null) {
+
+				if (initValue != null) {
+					result = initValue;
+					env.addVar(aVariable.getQualifiedName(), result);
+				}
+
+				else if (aVariable.getName().equals("self")) {
+					result = this.constrainedModelObject.getOclObject();
+				}
+
+				else {
+					System.out.println("Unknown Variable");
+					System.out.println("Variable name: " + aVariable.getName());
+					result = env.getModelInstance().getUndefined();
+				}
+			}
+
+			/* OclObject can't be cached. */
+			if (result instanceof OclObject) {
+				modelAccessNeeded = true;
+			}
+			// no else.
+
+			/* Eventually cache the result. */
+			if (useCache && !modelAccessNeeded) {
+				env.cacheResult(aVariable, result);
+			}
+			// no else.
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("caseVariable(Variable) - end - return value="
+					+ result);
+		}
+		return result;
 	}
 
 	/*
@@ -561,402 +1217,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseIntegerLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
-	 */
-	@Override
-	public OclRoot caseIntegerLiteralExp(IntegerLiteralExp object) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("caseIntegerLiteralExp(IntegerLiteralExp) - start");
-		}
-
-		OclRoot ret = null;
-
-		if (useCache && (ret = env.getCachedResult(object)) != null) {
-			if (logger.isDebugEnabled()) {
-				logger
-						.debug("caseIntegerLiteralExp(IntegerLiteralExp) - end - return value="
-								+ ret);
-			}
-			return ret;
-		}
-
-		ret = env.getModelInstance().getFactory().createOclInteger(
-				object.getIntegerSymbol());
-
-		if (useCache && !modelAccessNeeded)
-			env.cacheResult(object, ret);
-
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("caseIntegerLiteralExp(IntegerLiteralExp) - end - return value="
-							+ ret);
-		}
-		return ret;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseEnumLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp)
-	 */
-	@Override
-	public OclRoot caseEnumLiteralExp(EnumLiteralExp object) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("caseEnumLiteralExp(EnumLiteralExp) - start");
-		}
-
-		OclRoot ret = null;
-
-		if (useCache && (ret = env.getCachedResult(object)) != null) {
-			if (logger.isDebugEnabled()) {
-				logger
-						.debug("caseEnumLiteralExp(EnumLiteralExp) - end - return value="
-								+ ret);
-			}
-			return ret;
-		}
-
-		ret = env.getModelInstance().findEnumLiteral(
-				Arrays.asList(object.getReferredEnumLiteral()
-						.getQualifiedName().split("::")));
-
-		if (useCache && !modelAccessNeeded)
-			env.cacheResult(object, ret);
-
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("caseEnumLiteralExp(EnumLiteralExp) - end - return value="
-							+ ret);
-		}
-		return ret;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseOperationCallExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp)
-	 */
-	@Override
-	public OclRoot caseOperationCallExp(OperationCallExp object) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("caseOperationCallExp(OperationCallExp) - start");
-		}
-
-		OclRoot ret = null;
-
-		if (useCache && (ret = env.getCachedResult(object)) != null) {
-			if (logger.isDebugEnabled()) {
-				logger
-						.debug("caseOperationCallExp(OperationCallExp) - end - return value="
-								+ ret);
-			}
-			return ret;
-		}
-
-		OclRoot[] parameters = new OclRoot[object.getArgument().size()];
-
-		String opName = env.getModelInstance().getOperationName(
-				object.getReferredOperation().getName(), parameters.length + 1);
-
-		/*
-		 * FIXME Transform the operation name for all operations which are
-		 * implemented with a different name than in OCL.
-		 */
-		if (opName.equals(">=")) {
-			opName = "isGreaterEqual";
-		} else if (opName.equals(">")) {
-			opName = "isGreaterThan";
-		} else if (opName.equals("<=")) {
-			opName = "isLessEqual";
-		} else if (opName.equals("<")) {
-			opName = "isLessThan";
-		}
-
-		OclRoot source = null;
-		if (object.getReferredOperation().isStatic()) {
-			List<String> pathName;
-			String typeName = object.getSourceType().getQualifiedName();
-
-			if (StringUtils.isEmpty(typeName))
-				pathName = Collections.EMPTY_LIST;
-			else
-				pathName = Arrays.asList(typeName.split("::"));
-
-			source = env.getModelInstance().findType(pathName);
-		} else {
-			source = doSwitch((EObject) object.getSource());
-		}
-		Constraint body = env.getConstraint(object.getReferredOperation()
-				.getQualifiedName());
-		IEnvironment local = null;
-		if (body != null) {
-			local = Environment.getNewLocalEnvironment();
-		}
-		ListIterator<OclExpression> it = object.getArgument().listIterator();
-		while (it.hasNext()) {
-			OclExpression exp = it.next();
-			OclRoot param = doSwitch((EObject) exp);
-			parameters[it.previousIndex()] = param;
-			if (local != null)
-				local.addVar(exp.getName(), param);
-		}
-
-		if (opName.equals("atPre")) {
-			if (preparation) {
-				env.savePostconditionValue(object, source);
-				OclRoot returnOclRoot = env.getModelInstance().getUndefined();
-				if (logger.isDebugEnabled()) {
-					logger
-							.debug("caseOperationCallExp(OperationCallExp) - end - return value="
-									+ returnOclRoot);
-				}
-				return returnOclRoot;
-			} else {
-				OclRoot returnOclRoot = env.getPostconditionValue(object);
-				if (logger.isDebugEnabled()) {
-					logger
-							.debug("caseOperationCallExp(OperationCallExp) - end - return value="
-									+ returnOclRoot);
-				}
-				return returnOclRoot;
-			}
-		}
-
-		if (opName.equals("oclIsNew")) {
-			if (preparation) {
-				env.savePostconditionValue(object, env.getModelInstance()
-						.getFactory().createOclBoolean(
-								source instanceof OclVoid));
-				OclRoot returnOclRoot = env.getModelInstance().getUndefined();
-				if (logger.isDebugEnabled()) {
-					logger
-							.debug("caseOperationCallExp(OperationCallExp) - end - return value="
-									+ returnOclRoot);
-				}
-				return returnOclRoot;
-			} else {
-				OclRoot returnOclRoot = env.getPostconditionValue(object);
-				if (logger.isDebugEnabled()) {
-					logger
-							.debug("caseOperationCallExp(OperationCallExp) - end - return value="
-									+ returnOclRoot);
-				}
-				return returnOclRoot;
-			}
-		}
-
-		if (source instanceof OclVoid)
-			ret = source;
-		else {
-			if (body == null) {
-				try {
-					ret = source.invokeOperation(opName, parameters);
-				} catch (NoSuchMethodException e) {
-					logger.error("caseOperationCallExp(OperationCallExp)", e);
-
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else {
-				IOclInterpreter interp = new OclInterpreter(local);
-				interp.setUseCache(useCache);
-				ret = interp.interpret(body, modelObject);
-				modelAccessNeeded = interp.isModelAccessNeeded();
-			}
-		}
-
-		// If allInstances for some reason is not possible for standard library
-		// null is returned. In that case modelInstance.getObjectsOfKind() is
-		// used.
-		if (opName.equals("allInstances") && (ret instanceof OclVoid)) {
-			List<String> typePath;
-			String typeName = object.getSourceType().getQualifiedName();
-
-			if (StringUtils.isEmpty(typeName))
-				typePath = Collections.EMPTY_LIST;
-			else
-				typePath = Arrays.asList(typeName.split("::"));
-
-			List<IModelObject> objects = new ArrayList<IModelObject>(env
-					.getModelInstance().getObjectsOfKind(typePath));
-			List<OclRoot> instances = new ArrayList<OclRoot>(objects.size());
-			Iterator<IModelObject> objectsIt = objects.iterator();
-			while (objectsIt.hasNext())
-				instances.add(objectsIt.next().getOclObject());
-			OclRoot returnOclRoot = env.getModelInstance().getFactory()
-					.createOclSet(
-							instances.toArray(new OclRoot[instances.size()]));
-			if (logger.isDebugEnabled()) {
-				logger
-						.debug("caseOperationCallExp(OperationCallExp) - end - return value="
-								+ returnOclRoot);
-			}
-			return returnOclRoot;
-		}
-
-		if ((ret instanceof OclObject) || (source instanceof OclObject))
-			modelAccessNeeded = true;
-
-		if (useCache && !modelAccessNeeded)
-			env.cacheResult(object, ret);
-
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("caseOperationCallExp(OperationCallExp) - end - return value="
-							+ ret);
-		}
-		return ret;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #casePropertyCallExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
-	 */
-	@Override
-	public OclRoot casePropertyCallExp(PropertyCallExp object) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("casePropertyCallExp(PropertyCallExp) - start");
-		}
-
-		OclRoot ret = null;
-
-		if (useCache && (ret = env.getCachedResult(object)) != null) {
-			if (logger.isDebugEnabled()) {
-				logger
-						.debug("casePropertyCallExp(PropertyCallExp) - end - return value="
-								+ ret);
-			}
-			return ret;
-		}
-
-		OclRoot sourceExp = null;
-
-		if (object.getReferredProperty().isStatic()) {
-			List<String> pathName;
-			String typeName = object.getSourceType().getQualifiedName();
-
-			if (StringUtils.isEmpty(typeName))
-				pathName = Collections.EMPTY_LIST;
-			else
-				pathName = Arrays.asList(typeName.split("::"));
-
-			sourceExp = env.getModelInstance().findType(pathName);
-		} else {
-			sourceExp = doSwitch((EObject) object.getSource());
-		}
-
-		IEnvironment local = null;
-
-		Constraint derivedC = env.getConstraint(object.getReferredProperty()
-				.getQualifiedName()
-				+ "-derive");
-		if (derivedC != null) {
-			local = Environment.getNewLocalEnvironment();
-			IOclInterpreter interp = new OclInterpreter(local);
-			interp.setUseCache(useCache);
-			ret = interp.interpret(derivedC, modelObject);
-			modelAccessNeeded = interp.isModelAccessNeeded();
-		}
-
-		if (ret == null) {
-			Constraint initC = env.getConstraint(object.getReferredProperty()
-					.getQualifiedName()
-					+ "-initial");
-			if (initC != null) {
-				local = Environment.getNewLocalEnvironment();
-				IOclInterpreter interp = new OclInterpreter(local);
-				interp.setUseCache(useCache);
-				ret = interp.interpret(initC, modelObject);
-				modelAccessNeeded = interp.isModelAccessNeeded();
-			}
-		}
-
-		if (ret == null) {
-			Constraint body = env.getConstraint(object.getReferredProperty()
-					.getQualifiedName());
-			if (body != null) {
-				local = Environment.getNewLocalEnvironment();
-				IOclInterpreter interp = new OclInterpreter(local);
-				interp.setUseCache(useCache);
-				ret = interp.interpret(body, modelObject);
-				modelAccessNeeded = interp.isModelAccessNeeded();
-			}
-		}
-
-		if (ret == null) {
-			try {
-				if (object.getType() instanceof OrderedSetType)
-					ret = sourceExp.getPropertyValueAsOrderedSet(object
-							.getReferredProperty().getName());
-				else if (object.getType() instanceof SequenceType)
-					ret = sourceExp.getPropertyValueAsSequence(object
-							.getReferredProperty().getName());
-				else if (object.getType() instanceof SetType)
-					ret = sourceExp.getPropertyValueAsSet(object
-							.getReferredProperty().getName());
-				else if (object.getType() instanceof BagType)
-					ret = sourceExp.getPropertyValueAsBag(object
-							.getReferredProperty().getName());
-				else
-					ret = sourceExp.getPropertyValue(object
-							.getReferredProperty().getName());
-			} catch (NoSuchFieldException e) {
-				logger.error("casePropertyCallExp(PropertyCallExp)", e);
-
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				OclRoot returnOclRoot = env.getModelInstance().getInvalid();
-				if (logger.isDebugEnabled()) {
-					logger
-							.debug("casePropertyCallExp(PropertyCallExp) - end - return value="
-									+ returnOclRoot);
-				}
-				return returnOclRoot;
-			} catch (IllegalAccessException e) {
-				logger.error("casePropertyCallExp(PropertyCallExp)", e);
-
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				OclRoot returnOclRoot = env.getModelInstance().getInvalid();
-				if (logger.isDebugEnabled()) {
-					logger
-							.debug("casePropertyCallExp(PropertyCallExp) - end - return value="
-									+ returnOclRoot);
-				}
-				return returnOclRoot;
-			}
-		}
-
-		if (ret instanceof OclObject)
-			modelAccessNeeded = true;
-
-		if (useCache && !modelAccessNeeded)
-			env.cacheResult(object, ret);
-
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("casePropertyCallExp(PropertyCallExp) - end - return value="
-							+ ret);
-		}
-		return ret;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseRealLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp)
 	 */
@@ -1026,59 +1286,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 			logger
 					.debug("caseStringLiteralExp(StringLiteralExp) - end - return value="
 							+ ret);
-		}
-		return ret;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseVariable(tudresden.ocl20.pivot.essentialocl.expressions.Variable)
-	 */
-	@Override
-	public OclRoot caseVariable(Variable object) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("caseVariable(Variable) - start");
-		}
-
-		OclRoot ret = null;
-
-		if (useCache && (ret = env.getCachedResult(object)) != null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("caseVariable(Variable) - end - return value="
-						+ ret);
-			}
-			return ret;
-		}
-
-		OclExpression initExp = object.getInitExpression();
-		OclRoot init = null;
-
-		if (initExp != null) {
-			init = doSwitch((EObject) object.getInitExpression());
-		}
-
-		ret = env.getVar(object.getName());
-		if (ret == null) {
-			if (init != null) {
-				ret = init;
-				env.addVar(object.getQualifiedName(), ret);
-			} else {
-				System.out.println("Unknown Variable");
-				ret = env.getModelInstance().getUndefined();
-			}
-		}
-
-		if (ret instanceof OclObject)
-			modelAccessNeeded = true;
-
-		if (useCache && !modelAccessNeeded)
-			env.cacheResult(object, ret);
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("caseVariable(Variable) - end - return value=" + ret);
 		}
 		return ret;
 	}
@@ -1272,7 +1479,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 		String typeName = object.getReferredType().getQualifiedName();
 
 		if (StringUtils.isEmpty(typeName))
-			pathName = Collections.EMPTY_LIST;
+			pathName = Collections.emptyList();
 		else
 			pathName = Arrays.asList(typeName.split("::"));
 
