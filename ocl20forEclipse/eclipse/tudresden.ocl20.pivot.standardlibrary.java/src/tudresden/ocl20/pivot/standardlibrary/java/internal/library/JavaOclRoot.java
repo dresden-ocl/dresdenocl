@@ -54,6 +54,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractOclAdapter;
 
 /**
@@ -212,7 +213,11 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 
 		OclRoot result;
 
-		if (property instanceof Integer) {
+		if (property == null) {
+			result = JavaOclVoid.getInstance();
+		}
+
+		else if (property instanceof Integer) {
 			result = (OclRoot) Platform.getAdapterManager().getAdapter(
 					property, OclInteger.class);
 		}
@@ -266,10 +271,6 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 			result = (OclRoot) property;
 		}
 
-		else if (property == null) {
-			result = JavaOclVoid.getInstance();
-		}
-
 		else {
 			result = new JavaOclRoot(property);
 		}
@@ -318,7 +319,11 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 
 		else {
 			internalList = new ArrayList<OclRoot>();
-			internalList.add(property);
+
+			if (!(property instanceof OclVoid)) {
+				internalList.add(property);
+			}
+			// no else
 		}
 
 		result = new JavaOclBag<OclRoot>(internalList);
@@ -356,7 +361,11 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 
 		else {
 			internalList = new ArrayList<OclRoot>();
-			internalList.add(property);
+
+			if (!(property instanceof OclVoid)) {
+				internalList.add(property);
+			}
+			// no else
 		}
 
 		result = new JavaOclOrderedSet<OclRoot>(internalList);
@@ -393,7 +402,11 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 
 		else {
 			internalList = new ArrayList<OclRoot>();
-			internalList.add(property);
+
+			if (!(property instanceof OclVoid)) {
+				internalList.add(property);
+			}
+			// no else
 		}
 
 		result = new JavaOclSequence<OclRoot>(internalList);
