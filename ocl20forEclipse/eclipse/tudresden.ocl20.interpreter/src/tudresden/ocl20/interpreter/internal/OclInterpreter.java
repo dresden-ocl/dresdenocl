@@ -125,10 +125,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	private IModelObject constrainedModelObject;
 
 	/**
-	 * Instantiates a new ocl interpreter.
+	 * <p>
+	 * Instantiates a new {@link OclInterpreter}.
+	 * </p>
 	 * 
 	 * @param env
-	 *            the {@link IEnvironment} to be used
+	 *            The {@link IEnvironment} to be used during interpretation.
 	 */
 	public OclInterpreter(IEnvironment env) {
 		this.env = env;
@@ -313,6 +315,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 		}
 		return modelAccessNeeded;
 	}
+
+	// FIXME Refactored from here.
 
 	/*
 	 * (non-Javadoc)
@@ -962,6 +966,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 		}
 		return result;
 	}
+
+	// FIXME Refactored till here.
 
 	/*
 	 * (non-Javadoc)
