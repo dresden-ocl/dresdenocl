@@ -34,32 +34,44 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 
 /**
- * 
+ * <p>
+ * Represents OCL Objects of the Java standard library.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclObject extends JavaOclRoot implements OclObject {
 
-	// The type
+	/** The type of this JavaOclObject. */
 	protected OclType type = null;
-	
+
 	/**
-	 * Instantiates a new java ocl object.
+	 * <p>
+	 * Instantiates a new java OCL object.
+	 * </p>
 	 * 
-	 * @param adaptee the adaptee
+	 * @param adaptee
+	 *            The adapted model instance object.
 	 */
 	public JavaOclObject(Object adaptee) {
 		super(adaptee);
 	}
-	
-	/* (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#getType()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
-		if (type == null)
-			type = new JavaOclType(getAdapteeClass());
-		return type;
+		
+		if (this.type == null) {
+			this.type = new JavaOclType(getAdapteeClass());
+		}
+		// no else.
+		
+		return this.type;
 	}
 }

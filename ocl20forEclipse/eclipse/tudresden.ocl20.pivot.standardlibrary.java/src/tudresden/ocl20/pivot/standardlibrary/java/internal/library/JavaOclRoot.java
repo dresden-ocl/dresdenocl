@@ -35,6 +35,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,7 +45,6 @@ import org.eclipse.core.runtime.Platform;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
@@ -57,34 +57,27 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractOclAdapter;
 
 /**
- * 
+ * <p>
+ * Represents any OclType in the Java standard library.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 
-	// The undefinedreason
+	/** The reason why this Object is undefined - if it is. */
 	protected String undefinedreason = null;
 
 	/**
-	 * Instantiates a new java ocl root.
+	 * <p>
+	 * Instantiates a new {@link JavaOclRoot}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted model instance object of this {@link JavaOclRoot}.
 	 */
 	public JavaOclRoot(Object adaptee) {
 		super(adaptee);
-	}
-
-	/**
-	 * This could be done via ModelInstanceProvider
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#allInstances()
-	 */
-	public <T extends OclRoot> OclSet<T> allInstances() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/*
@@ -200,42 +193,85 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 				e.printStackTrace();
 			}
 
-			if (property instanceof Integer) {
-				result = (OclRoot) Platform.getAdapterManager().getAdapter(
-						property, OclInteger.class);
+			result = this.adaptProperty(property);
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Adapts a given model instance property (as {@link Object}) to an
+	 * {@link OclRoot}.
+	 * 
+	 * @param property
+	 *            The property which shall be adapted.
+	 * @return The adapted property.
+	 */
+	protected OclRoot adaptProperty(Object property) {
+
+		OclRoot result;
+
+		if (property instanceof Integer) {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					property, OclInteger.class);
+		}
+
+		else if (property instanceof Float) {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					property, OclReal.class);
+		}
+
+		else if (property instanceof Boolean) {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					property, OclBoolean.class);
+		}
+
+		else if (property instanceof String) {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					property, OclString.class);
+		}
+
+		else if (property.getClass().isEnum()) {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					property, OclEnumLiteral.class);
+		}
+
+		/*
+		 * If the property is a collection, each element must be adapted for
+		 * itself.
+		 */
+		else if (property instanceof Collection) {
+
+			Collection<?> aCollection;
+			List<OclRoot> propertyList;
+
+			aCollection = (Collection<?>) property;
+			propertyList = new ArrayList<OclRoot>();
+
+			for (Object anElement : aCollection) {
+
+				OclRoot adaptedElement;
+
+				/* Adapt anElement to OclRoot. */
+				adaptedElement = this.adaptProperty(anElement);
+
+				propertyList.add(adaptedElement);
 			}
 
-			else if (property instanceof Float) {
-				result = (OclRoot) Platform.getAdapterManager().getAdapter(
-						property, OclReal.class);
-			}
+			result = new JavaOclBag<OclRoot>(propertyList);
+		}
 
-			else if (property instanceof Boolean) {
-				result = (OclRoot) Platform.getAdapterManager().getAdapter(
-						property, OclBoolean.class);
-			}
+		else if (property instanceof OclRoot) {
+			result = (OclRoot) property;
+		}
 
-			else if (property instanceof String) {
-				result = (OclRoot) Platform.getAdapterManager().getAdapter(
-						property, OclString.class);
-			}
+		else if (property == null) {
+			result = JavaOclVoid.getInstance();
+		}
 
-			else if (property.getClass().isEnum()) {
-				result = (OclRoot) Platform.getAdapterManager().getAdapter(
-						property, OclEnumLiteral.class);
-			}
-
-			else if (property instanceof OclRoot) {
-				result = (OclRoot) property;
-			}
-
-			else if (property == null) {
-				result = JavaOclVoid.getInstance();
-			}
-
-			else {
-				result = new JavaOclRoot(property);
-			}
+		else {
+			result = new JavaOclRoot(property);
 		}
 
 		return result;
@@ -250,7 +286,6 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
 	 */
 	public OclRoot getPropertyValue(String propertyName, OclRoot... qualifier) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -260,16 +295,35 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#
 	 * getPropertyValueAsBag(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public OclBag<OclRoot> getPropertyValueAsBag(String propertyName)
 			throws NoSuchFieldException, IllegalAccessException {
-		OclRoot property = getPropertyValue(propertyName);
-		if (property instanceof OclCollection)
-			return ((OclCollection<OclRoot>) property).asBag();
-		else {
-			List<OclRoot> temp = new ArrayList<OclRoot>();
-			temp.add(property);
-			return new JavaOclBag(temp);
+
+		OclBag<OclRoot> result;
+
+		OclRoot property;
+		Object adaptedPropery;
+
+		/* Get the property as OclRoot. */
+		property = getPropertyValue(propertyName);
+		adaptedPropery = property.getAdaptee();
+
+		/* Adapt to an OclOrderedSet. */
+		List<OclRoot> internalList;
+
+		if (adaptedPropery instanceof Collection) {
+			internalList = new ArrayList<OclRoot>(
+					(Collection<OclRoot>) adaptedPropery);
 		}
+
+		else {
+			internalList = new ArrayList<OclRoot>();
+			internalList.add(property);
+		}
+
+		result = new JavaOclBag<OclRoot>(internalList);
+
+		return result;
 	}
 
 	/*
@@ -278,17 +332,36 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#
 	 * getPropertyValueAsOrderedSet(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public OclOrderedSet<OclRoot> getPropertyValueAsOrderedSet(
 			String propertyName) throws NoSuchFieldException,
 			IllegalAccessException {
-		OclRoot property = getPropertyValue(propertyName);
-		if (property instanceof OclCollection)
-			return ((OclCollection<OclRoot>) property).asOrderedSet();
-		else {
-			List<OclRoot> temp = new ArrayList<OclRoot>();
-			temp.add(property);
-			return new JavaOclOrderedSet(temp);
+
+		OclOrderedSet<OclRoot> result;
+
+		OclRoot property;
+		Object adaptedPropery;
+
+		/* Get the property as OclRoot. */
+		property = getPropertyValue(propertyName);
+		adaptedPropery = property.getAdaptee();
+
+		/* Adapt to an OclOrderedSet. */
+		List<OclRoot> internalList;
+
+		if (adaptedPropery instanceof Collection) {
+			internalList = new ArrayList<OclRoot>(
+					(Collection<OclRoot>) adaptedPropery);
 		}
+
+		else {
+			internalList = new ArrayList<OclRoot>();
+			internalList.add(property);
+		}
+
+		result = new JavaOclOrderedSet<OclRoot>(internalList);
+
+		return result;
 	}
 
 	/*
@@ -297,16 +370,35 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#
 	 * getPropertyValueAsSequence(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public OclSequence<OclRoot> getPropertyValueAsSequence(String propertyName)
 			throws NoSuchFieldException, IllegalAccessException {
-		OclRoot property = getPropertyValue(propertyName);
-		if (property instanceof OclCollection)
-			return ((OclCollection<OclRoot>) property).asSequence();
-		else {
-			List<OclRoot> temp = new ArrayList<OclRoot>();
-			temp.add(property);
-			return new JavaOclSequence(temp);
+
+		OclSequence<OclRoot> result;
+
+		OclRoot property;
+		Object adaptedPropery;
+
+		/* Get the property as OclRoot. */
+		property = getPropertyValue(propertyName);
+		adaptedPropery = property.getAdaptee();
+
+		/* Adapt to an OclOrderedSet. */
+		List<OclRoot> internalList;
+
+		if (adaptedPropery instanceof Collection) {
+			internalList = new ArrayList<OclRoot>(
+					(Collection<OclRoot>) adaptedPropery);
 		}
+
+		else {
+			internalList = new ArrayList<OclRoot>();
+			internalList.add(property);
+		}
+
+		result = new JavaOclSequence<OclRoot>(internalList);
+
+		return result;
 	}
 
 	/*
@@ -317,8 +409,15 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 */
 	public OclSet<OclRoot> getPropertyValueAsSet(String propertyName)
 			throws NoSuchFieldException, IllegalAccessException {
-		OclRoot property = getPropertyValue(propertyName);
-		return property.asSet();
+
+		OclSet<OclRoot> result;
+
+		OclRoot property;
+
+		property = getPropertyValue(propertyName);
+		result = property.asSet();
+
+		return result;
 	}
 
 	/*
@@ -700,6 +799,23 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 		}
 
 		return result;
+	}
+
+	// FIXME Continue refactoring here.
+
+	/**
+	 * <p>
+	 * Returns allInstances() of this type of {@link JavaOclRoot}.
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>Must be implemented by sub types or will return null!</strong>
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#allInstances()
+	 */
+	public <T extends OclRoot> OclSet<T> allInstances() {
+		return null;
 	}
 
 	/*

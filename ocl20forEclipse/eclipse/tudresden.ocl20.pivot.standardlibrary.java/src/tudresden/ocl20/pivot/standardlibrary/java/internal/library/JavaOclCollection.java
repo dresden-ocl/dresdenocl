@@ -53,27 +53,32 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 
 /**
- * 
+ * <p>
+ * This class implements the OCL type Collection in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public abstract class JavaOclCollection<T extends OclRoot> extends
 		JavaOclObject implements OclCollection<T> {
 
-	// The type
+	/** The type of this Collection. */
 	private OclType type;
 
 	/**
-	 * Instantiates a new java ocl collection.
+	 * <p>
+	 * Instantiates a new {@link JavaOclCollection}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted element of this {@link JavaOclCollection}.
 	 */
 	public JavaOclCollection(Collection<T> adaptee) {
 		super(adaptee);
 	}
 
+	// FIXME Continue refactoring here.
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -123,10 +128,13 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 		/* Else iterate and compare with all elements of this collection. */
 		else {
-			boolean boolResult = false;
+			Collection<T> adaptedCollection;
+			boolean boolResult;
 
-			/* FIXME anElement is JavaOclRoot containing an ArrayList. */
-			for (T anElement : (Collection<T>) this.getAdaptee()) {
+			boolResult = false;
+			adaptedCollection = (Collection<T>) this.getAdaptee();
+
+			for (T anElement : adaptedCollection) {
 				if (anObject.isEqualTo(anElement).isTrue()) {
 					boolResult = true;
 					break;
@@ -288,14 +296,28 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#isEmpty
 	 * ()
 	 */
+	@SuppressWarnings("unchecked")
 	public OclBoolean isEmpty() {
-		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
+
+		OclBoolean result;
+
+		/* Check if this Collection is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(this.getUndefinedreason());
 		}
-		return JavaOclBoolean.getInstance(((Collection<T>) getAdaptee())
-				.isEmpty());
+
+		/* Else compute the result. */
+		else {
+			boolean adaptedResult;
+
+			adaptedResult = ((Collection<T>) this.getAdaptee()).isEmpty();
+
+			result = JavaOclBoolean.getInstance(adaptedResult);
+		}
+
+		return result;
 	}
 
 	/*
@@ -306,7 +328,12 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	 * ()
 	 */
 	public OclBoolean notEmpty() {
-		return isEmpty().not();
+
+		OclBoolean result;
+
+		result = this.isEmpty().not();
+
+		return result;
 	}
 
 	/*

@@ -45,41 +45,55 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 
 /**
- * 
+ * <p>
+ * This class represents instances of {@link OclOrderedSet}.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclOrderedSet<T extends OclRoot> extends
 		JavaOclSortedCollection<T> implements OclOrderedSet<T> {
 
-	/** The type. */
+	/** The type of this OclRoot. */
 	private OclType type;
 
 	/**
-	 * Instantiates a new java ocl ordered set.
+	 * <p>
+	 * Instantiates a new {@link JavaOclOrderedSet} set.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted {@link Collection}.
 	 */
+	@SuppressWarnings("unchecked")
 	public JavaOclOrderedSet(List<T> adaptee) {
 		super(adaptee);
+
 		if (adaptee != null) {
-			List<T> temp = new ArrayList<T>();
-			Iterator<T> it = adaptee.iterator();
-			while (it.hasNext()) {
-				T o = it.next();
-				if (!temp.contains(o))
-					temp.add(o);
+			List<T> adaptedList;
+
+			adaptedList = new ArrayList<T>();
+
+			for (T anObject : (Collection<T>) this.adaptee) {
+
+				if (!adaptedList.contains(anObject)) {
+					adaptedList.add(anObject);
+				}
+				// no else.
 			}
-			this.adaptee = temp;
+
+			this.adaptee = adaptedList;
 		}
 	}
 
+	// FIXME Continue refactoring here.
+	
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#append(java.lang.Object)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#append
+	 * (java.lang.Object)
 	 */
 	public OclOrderedSet<T> append(T object) {
 		if (isOclUndefined().isTrue())
@@ -104,7 +118,9 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#prepend(java.lang.Object)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#prepend
+	 * (java.lang.Object)
 	 */
 	public OclOrderedSet<T> prepend(T object) {
 		if (isOclUndefined().isTrue())
@@ -130,8 +146,10 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#subOrderedSet(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#
+	 * subOrderedSet
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclOrderedSet<T> subOrderedSet(OclInteger lower, OclInteger upper) {
 		if (isOclUndefined().isTrue())
@@ -167,8 +185,10 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#insertAt(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
-	 *      java.lang.Object)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#insertAt
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
+	 * java.lang.Object)
 	 */
 	public OclOrderedSet<T> insertAt(OclInteger index, T obj) {
 		if (isOclUndefined().isTrue())
@@ -199,7 +219,9 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#excluding(java.lang.Object)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#excluding
+	 * (java.lang.Object)
 	 */
 	public OclOrderedSet<T> excluding(T object) {
 		if (isOclUndefined().isTrue())
@@ -224,7 +246,9 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten
+	 * ()
 	 */
 	public <T2 extends OclRoot> OclOrderedSet<T2> flatten() {
 		if (isOclUndefined().isTrue()) {
@@ -247,7 +271,9 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#including(java.lang.Object)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#including
+	 * (java.lang.Object)
 	 */
 	public OclOrderedSet<T> including(T object) {
 		return append(object);
@@ -256,7 +282,9 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#union
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet)
 	 */
 	public OclOrderedSet<T> union(OclOrderedSet<T> s) {
 		if (isOclUndefined().isTrue())
@@ -276,7 +304,9 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
@@ -293,7 +323,9 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection#isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	@Override
 	public OclBoolean isEqualTo(OclRoot object2) {
