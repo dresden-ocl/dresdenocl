@@ -8,3 +8,20 @@ Release 1.1 (Decembre 9th 2008)
 - New example added: Simple-Example.
 - Some Bugs of the OCL-Parser were fixed.
 - Some Bugs of the OCL-Interpreter were fixed.
+
+Release 1.X (x xth 2009)
+-------------------------------
+- Some Bugs of the OCL-Parser were fixed:
+ - Enumerations are now parsed correctly
+
+- Some Bugs of the OCL-Interpreter were fixed.
+ - Operation names are now interpreted correctly
+
+- Some Bugs of the Java Standard Library were fixed.
+ - Collections from model instances are now adapted correctly.
+
+- Some Bugs for Ecore instances were fixed.
+ - Enumerations are now adapted correctly.
+
+- Some Bugs for UML2 instances were fixed. 
+ - Model instance adaption does now work correctly.
