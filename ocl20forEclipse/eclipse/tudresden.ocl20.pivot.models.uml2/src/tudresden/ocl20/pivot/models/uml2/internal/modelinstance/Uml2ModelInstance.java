@@ -95,7 +95,12 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 		this.knownTypes = new HashMap<Class<?>, OclType>();
 		this.instanceName = providerClass.getCanonicalName();
 
+		/*
+		 * Register the adapters to enable successfull adaption to OclObject in
+		 * the standard library.
+		 */
 		this.currentSlAF = DEFAULTSLAF;
+		this.currentSlAF.registerAdapters();
 
 		try {
 			Method m = providerClass.getDeclaredMethod("getModelObjects",
