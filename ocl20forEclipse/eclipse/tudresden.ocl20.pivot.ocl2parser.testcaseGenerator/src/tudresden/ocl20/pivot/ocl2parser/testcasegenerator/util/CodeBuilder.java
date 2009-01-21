@@ -336,8 +336,24 @@ public class CodeBuilder implements ICodeBuilder {
 		// We build a velocity context with our hashmap.
 		VelocityContext ctx = new VelocityContext(map);
 		
-		// Get the template file.
-		Template templ = Velocity.getTemplate("./template/NamedTestcase.java");
+		// Find the 'template' directory.				
+		URL fileLocatorURL = FileLocator.find(Activator.getDefault().getBundle(), new Path("template"), null);
+		
+		// Transform this url into an url that can be understood by the File class.
+		URL fileLocatorFileURL = FileLocator.toFileURL(fileLocatorURL);
+		
+		// Transform the url object into a file object that represents the 'template' directory.
+		File templateDirectory = new File(fileLocatorFileURL.toURI());
+		
+		// Create a set of properties with only one property that contains the 'template' directory.
+		Properties veloProperties = new Properties();
+		veloProperties.setProperty("file.resource.loader.path", templateDirectory.getAbsolutePath());
+		
+		// Initialize the velocity engine with the given properties, meaning with the 'template' directory as place where the templates are found.
+		VelocityEngine velo = new VelocityEngine(veloProperties);
+		
+		// Get the 'NamedTestcase.java' template file.
+		Template templ = velo.getTemplate("NamedTestcase.java");
 		
 		/* 
 		 * Create a writer that references the new java file.
@@ -385,7 +401,23 @@ public class CodeBuilder implements ICodeBuilder {
 		
 		VelocityContext ctx = new VelocityContext(map);
 		
-		Template tmpl = Velocity.getTemplate("./template/TemplateSuite.java");
+		// Find the 'template' directory.				
+		URL fileLocatorURL = FileLocator.find(Activator.getDefault().getBundle(), new Path("template"), null);
+		
+		// Transform this url into an url that can be understood by the File class.
+		URL fileLocatorFileURL = FileLocator.toFileURL(fileLocatorURL);
+		
+		// Transform the url object into a file object that represents the 'template' directory.
+		File templateDirectory = new File(fileLocatorFileURL.toURI());
+		
+		// Create a set of properties with only one property that contains the 'template' directory.
+		Properties veloProperties = new Properties();
+		veloProperties.setProperty("file.resource.loader.path", templateDirectory.getAbsolutePath());
+		
+		// Initialize the velocity engine with the given properties, meaning with the 'template' directory as place where the templates are found.
+		VelocityEngine velo = new VelocityEngine(veloProperties);
+		
+		Template tmpl = velo.getTemplate("TemplateSuite.java");
 		tmpl.merge(ctx, bufferedWriter);
 		
 		bufferedWriter.flush();

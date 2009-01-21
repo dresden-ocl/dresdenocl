@@ -20,9 +20,15 @@
 package tudresden.ocl20.pivot.ocl2parser.testcasegenerator.visitors;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
@@ -30,6 +36,7 @@ import tudresden.ocl20.pivot.modelbus.IMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.TypeNotFoundException;
+import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.Activator;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.IAbstractModel;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.IAsSetElement;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.ICollectionKindElement;
@@ -65,8 +72,8 @@ import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.ITokenA
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.ITypeElement;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.IVariable;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.BuildingASMException;
-import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.IEnvironment;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.BuildingCodeUtilClass;
+import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.IEnvironment;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
@@ -1586,18 +1593,16 @@ public class TypeCheckVisitor implements IVisitor {
 			throws BuildingASMException {
 		// Get the token.
 		ITokenAS modelFileName = node.getToken();
-		
-		// Create a file instance with the given file name.
-		File modelFile = new File(modelFileName.getValue());
-				
+						
 		// Exist the model file? If not so, we will throw an exception.
+		File modelFile = new File(modelFileName.getValue());
 		if (!modelFile.exists()) throw new BuildingASMException("The model file doesn't exists.", modelFileName);
 		
 		// The instance that will hold the model.
 		IModel model = null;
 		try {
 			// Try to load the model from the file.
-			model = env.getMetamodel().getModelProvider().getModel(modelFile);
+			model = env.getMetamodel().getModelProvider().getModel(modelFile.getAbsoluteFile());
 		} catch(ModelAccessException ex) {
 			// If this isn't possible, we throw an exception.
 			throw new BuildingASMException("The model file contains no model.", modelFileName, ex);
