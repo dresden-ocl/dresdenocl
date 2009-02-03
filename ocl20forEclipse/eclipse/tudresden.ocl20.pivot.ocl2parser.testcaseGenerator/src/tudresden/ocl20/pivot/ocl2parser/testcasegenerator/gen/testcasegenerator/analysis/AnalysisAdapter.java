@@ -93,6 +93,7 @@ public class AnalysisAdapter implements Analysis
     public void caseTColon(TColon node) { defaultCase(node); }
     public void caseTOpenparen(TOpenparen node) { defaultCase(node); }
     public void caseTCloseparen(TCloseparen node) { defaultCase(node); }
+    public void caseTAtpre(TAtpre node) { defaultCase(node); }
     public void caseTTestcase(TTestcase node) { defaultCase(node); }
     public void caseTAbstractmodel(TAbstractmodel node) { defaultCase(node); }
     public void caseTOclexpression(TOclexpression node) { defaultCase(node); }

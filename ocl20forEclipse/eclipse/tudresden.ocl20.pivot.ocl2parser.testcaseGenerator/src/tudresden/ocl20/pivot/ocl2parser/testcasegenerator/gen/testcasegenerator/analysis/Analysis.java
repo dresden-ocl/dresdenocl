@@ -116,6 +116,8 @@ public interface Analysis extends Switch
     // void caseTOpenparen(TOpenparen node, Object param);
     void caseTCloseparen(TCloseparen node);
     // void caseTCloseparen(TCloseparen node, Object param);
+    void caseTAtpre(TAtpre node);
+    // void caseTAtpre(TAtpre node, Object param);
     void caseTTestcase(TTestcase node);
     // void caseTTestcase(TTestcase node, Object param);
     void caseTAbstractmodel(TAbstractmodel node);

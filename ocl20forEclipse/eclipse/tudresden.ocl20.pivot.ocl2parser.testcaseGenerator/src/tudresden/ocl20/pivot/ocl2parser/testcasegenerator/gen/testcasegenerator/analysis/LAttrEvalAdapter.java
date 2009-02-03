@@ -715,10 +715,18 @@ public abstract class LAttrEvalAdapter implements AnalysisWithReturn {
             astParameters = (List) childParameters.apply(this, nodeHrtg.copy());
             if (verbose) System.out.println("   back from 'Parameters'.");
         }
+        TAtpre childAtpre = node.getAtpre();
+        ITokenAS astAtpre = null;
+        if( childAtpre != null) {
+            if (verbose) System.out.println("   descending into child 'Atpre' of alternative AModelelementModelExpression... ");
+            astAtpre = (ITokenAS) childAtpre.apply(this, nodeHrtg.copy());
+            if (verbose) System.out.println("   back from 'Atpre'.");
+        }
         // create AST node for current CST node here.
         IModelExpression myAst = computeAstFor_AModelelementModelExpression(nodeHrtg,
             astIdent,
-            astParameters);
+            astParameters,
+            astAtpre);
         return myAst;
     }
     
@@ -731,12 +739,14 @@ public abstract class LAttrEvalAdapter implements AnalysisWithReturn {
      *        contained in an instance of type Heritage
      * @param  astIdent a reference to an instance of class ITokenAS
      * @param  astParameters a reference to an instance of class List
+     * @param  astAtpre a reference to an instance of class ITokenAS
      * @return the initialized AST node, which is an instance of IModelExpression (AST
      * type of production is IModelExpression).
      */
     public abstract IModelExpression computeAstFor_AModelelementModelExpression(Heritage nodeHrtg,
         ITokenAS astIdent,
-        List astParameters) throws AttrEvalException;
+        List astParameters,
+        ITokenAS astAtpre) throws AttrEvalException;
 
     public final IVariable caseAIdentModelExpression(AIdentModelExpression node, Object param) throws AttrEvalException { 
         Heritage nodeHrtg = (Heritage) param;
@@ -1223,6 +1233,16 @@ public abstract class LAttrEvalAdapter implements AnalysisWithReturn {
         this.setCurrentToken(curTk);
         return node.getText();
     }
+
+    public final ITokenAS caseTAtpre(TAtpre node, Object param) throws AttrEvalException {
+        Token curTk = (Token) node;
+        if (verbose) System.out.print("custom token: '" + curTk.getText() + "', at " + curTk.getLine() + ":" + curTk.getPos() +"...  ");
+        this.setCurrentToken(curTk);
+        ITokenAS result = createNodeFor_TAtpre(node, (Heritage) param);
+        if (verbose) System.out.println("token node created.");
+        return result;
+    }
+    public abstract ITokenAS createNodeFor_TAtpre(TAtpre node, Heritage nodeHrtg) throws AttrEvalException;
 
     public final String caseTTestcase(TTestcase node, Object param) throws AttrEvalException {
         Token curTk = (Token) node;

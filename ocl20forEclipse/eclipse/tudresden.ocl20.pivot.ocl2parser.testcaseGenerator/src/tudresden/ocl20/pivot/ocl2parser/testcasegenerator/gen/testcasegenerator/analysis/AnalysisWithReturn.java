@@ -68,6 +68,7 @@ public interface AnalysisWithReturn extends SwitchWithReturn {
     String caseTColon(TColon node, Object param) throws AttrEvalException;
     String caseTOpenparen(TOpenparen node, Object param) throws AttrEvalException;
     String caseTCloseparen(TCloseparen node, Object param) throws AttrEvalException;
+    ITokenAS caseTAtpre(TAtpre node, Object param) throws AttrEvalException;
     String caseTTestcase(TTestcase node, Object param) throws AttrEvalException;
     ITokenAS caseTAbstractmodel(TAbstractmodel node, Object param) throws AttrEvalException;
     String caseTOclexpression(TOclexpression node, Object param) throws AttrEvalException;

@@ -11,6 +11,7 @@ public final class AModelelementModelExpression extends PModelExpression
     private TOpenparen _openparen_;
     private PParameters _parameters_;
     private TCloseparen _closeparen_;
+    private TAtpre _atpre_;
 
     public AModelelementModelExpression()
     {
@@ -20,7 +21,8 @@ public final class AModelelementModelExpression extends PModelExpression
         TIdent _ident_,
         TOpenparen _openparen_,
         PParameters _parameters_,
-        TCloseparen _closeparen_)
+        TCloseparen _closeparen_,
+        TAtpre _atpre_)
     {
         setIdent(_ident_);
 
@@ -30,6 +32,8 @@ public final class AModelelementModelExpression extends PModelExpression
 
         setCloseparen(_closeparen_);
 
+        setAtpre(_atpre_);
+
     }
     public Object clone()
     {
@@ -37,7 +41,8 @@ public final class AModelelementModelExpression extends PModelExpression
             (TIdent) cloneNode(_ident_),
             (TOpenparen) cloneNode(_openparen_),
             (PParameters) cloneNode(_parameters_),
-            (TCloseparen) cloneNode(_closeparen_));
+            (TCloseparen) cloneNode(_closeparen_),
+            (TAtpre) cloneNode(_atpre_));
     }
 
     public void apply(Switch sw) {
@@ -148,13 +153,39 @@ public final class AModelelementModelExpression extends PModelExpression
         _closeparen_ = node;
     }
 
+    public TAtpre getAtpre()
+    {
+        return _atpre_;
+    }
+
+    public void setAtpre(TAtpre node)
+    {
+        if(_atpre_ != null)
+        {
+            _atpre_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        _atpre_ = node;
+    }
+
     public String toString()
     {
         return ""
             + toString(_ident_)
             + toString(_openparen_)
             + toString(_parameters_)
-            + toString(_closeparen_);
+            + toString(_closeparen_)
+            + toString(_atpre_);
     }
 
     void removeChild(Node child)
@@ -183,6 +214,12 @@ public final class AModelelementModelExpression extends PModelExpression
             return;
         }
 
+        if(_atpre_ == child)
+        {
+            _atpre_ = null;
+            return;
+        }
+
     }
 
     void replaceChild(Node oldChild, Node newChild)
@@ -208,6 +245,12 @@ public final class AModelelementModelExpression extends PModelExpression
         if(_closeparen_ == oldChild)
         {
             setCloseparen((TCloseparen) newChild);
+            return;
+        }
+
+        if(_atpre_ == oldChild)
+        {
+            setAtpre((TAtpre) newChild);
             return;
         }
 

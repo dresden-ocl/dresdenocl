@@ -76,6 +76,7 @@ import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax.impl.Va
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.gen.testcasegenerator.analysis.AttrEvalException;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.gen.testcasegenerator.analysis.LAttrEvalAdapter;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.gen.testcasegenerator.node.TAbstractmodel;
+import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.gen.testcasegenerator.node.TAtpre;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.gen.testcasegenerator.node.TError;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.gen.testcasegenerator.node.TFirstName;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.gen.testcasegenerator.node.TIdent;
@@ -215,7 +216,8 @@ public class AttributeEvaluator extends LAttrEvalAdapter {
 	@Override
 	public IModelExpression computeAstFor_AModelelementModelExpression(
 			Heritage nodeHrtg, ITokenAS astIdent,
-			List astParameters) throws AttrEvalException {
+			List astParameters,
+	        ITokenAS astAtpre) throws AttrEvalException {
 		
 		String element = astIdent.getValue();
 		IComplexElement cElement = null;
@@ -278,6 +280,10 @@ public class AttributeEvaluator extends LAttrEvalAdapter {
 			
 		{
 			cElement = factory.createEssentialOclElement(astIdent);
+			if (astAtpre != null) {
+				((IEssentialOclElement)cElement).setAtPre(true);
+			}
+			
 		}
 		
 		if (astParameters != null) cElement.setParameter(astParameters);
@@ -506,5 +512,11 @@ public class AttributeEvaluator extends LAttrEvalAdapter {
 		
 		myAst.add(astParameter);
 		return myAst;
+	}
+
+	@Override
+	public ITokenAS createNodeFor_TAtpre(TAtpre node, Heritage nodeHrtg)
+			throws AttrEvalException {
+		return createTokenFromSableCCToken(node);
 	}
 }

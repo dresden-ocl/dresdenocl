@@ -99,58 +99,63 @@ class TokenIndex extends AnalysisAdapter
         index = 17;
     }
 
-    public void caseTTestcase(TTestcase node)
+    public void caseTAtpre(TAtpre node)
     {
         index = 18;
     }
 
-    public void caseTAbstractmodel(TAbstractmodel node)
+    public void caseTTestcase(TTestcase node)
     {
         index = 19;
     }
 
-    public void caseTOclexpression(TOclexpression node)
+    public void caseTAbstractmodel(TAbstractmodel node)
     {
         index = 20;
     }
 
-    public void caseTRealValue(TRealValue node)
+    public void caseTOclexpression(TOclexpression node)
     {
         index = 21;
     }
 
-    public void caseTIntegerValue(TIntegerValue node)
+    public void caseTRealValue(TRealValue node)
     {
         index = 22;
     }
 
-    public void caseTIdent(TIdent node)
+    public void caseTIntegerValue(TIntegerValue node)
     {
         index = 23;
     }
 
-    public void caseTPackageName(TPackageName node)
+    public void caseTIdent(TIdent node)
     {
         index = 24;
     }
 
-    public void caseTCommentblock(TCommentblock node)
+    public void caseTPackageName(TPackageName node)
     {
         index = 25;
     }
 
-    public void caseTOclblock(TOclblock node)
+    public void caseTCommentblock(TCommentblock node)
     {
         index = 26;
     }
 
-    public void caseTStringLiteral(TStringLiteral node)
+    public void caseTOclblock(TOclblock node)
     {
         index = 27;
     }
 
-    public void caseEOF(EOF node)
+    public void caseTStringLiteral(TStringLiteral node)
     {
         index = 28;
+    }
+
+    public void caseEOF(EOF node)
+    {
+        index = 29;
     }
 }

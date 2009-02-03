@@ -341,6 +341,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
 
     public void caseAModelelementModelExpression(AModelelementModelExpression node) {
         inAModelelementModelExpression(node);
+        if(node.getAtpre() != null) {
+            node.getAtpre().apply(this);
+        }
         if(node.getCloseparen() != null) {
             node.getCloseparen().apply(this);
         }

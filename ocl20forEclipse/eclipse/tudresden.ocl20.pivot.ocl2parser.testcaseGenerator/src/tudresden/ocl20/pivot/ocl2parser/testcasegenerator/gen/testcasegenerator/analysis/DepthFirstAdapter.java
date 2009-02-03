@@ -353,6 +353,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         if(node.getCloseparen() != null) {
             node.getCloseparen().apply(this);
         }
+        if(node.getAtpre() != null) {
+            node.getAtpre().apply(this);
+        }
         outAModelelementModelExpression(node);
     }
 

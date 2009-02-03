@@ -241,7 +241,12 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 			node.getParameter().get(i).accept(this, localBuf);
 		}
 		
-		buffer.append("modelFactory.create" + node.getToken().getValue() + "(" + BuildingCodeUtilClass.concatElementsOfStringBufferList(localBuffers) + ")");
+		if (node.isAtPre()) {
+			buffer.append("modelFactory.create" + node.getToken().getValue() + "(" + BuildingCodeUtilClass.concatElementsOfStringBufferList(localBuffers) + ").withAtPre()");
+		} else {
+			buffer.append("modelFactory.create" + node.getToken().getValue() + "(" + BuildingCodeUtilClass.concatElementsOfStringBufferList(localBuffers) + ")");
+		}
+		
 
 	}
 

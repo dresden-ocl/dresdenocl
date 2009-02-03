@@ -90,6 +90,7 @@ Tokens
 {init_state} !colon 					= ':';
 {init_state} !openparen				= '(';
 {init_state} !closeparen				= ')';
+{init_state} atpre<ITokenAS>		= '@pre';
 {init_state} !testcase				= '#testcase';
 {init_state} abstractmodel<ITokenAS>= '#abstractmodel';
 {init_state -> ocl_state} !oclexpression			= '#oclexpression';
@@ -148,7 +149,7 @@ abstract_model<IAbstractModel> = abstractmodel brace_open first_name assign mode
 
 assignment<IVariable> = ident assign model_expression;
 
-model_expression<IModelExpression> = {modelelement}<IModelExpression> ident openparen parameters? closeparen#nocreate
+model_expression<IModelExpression> = {modelelement}<IModelExpression> ident openparen parameters? closeparen atpre?#nocreate 
 									| {ident}<IVariable> ident
 									| {null}<INullElement> null
 									| {simple}<ISimpleElement> simple_expression#chain

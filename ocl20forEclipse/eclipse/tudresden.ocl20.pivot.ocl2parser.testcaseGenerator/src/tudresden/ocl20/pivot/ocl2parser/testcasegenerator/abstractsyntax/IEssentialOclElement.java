@@ -20,5 +20,6 @@
 package tudresden.ocl20.pivot.ocl2parser.testcasegenerator.abstractsyntax;
 
 public interface IEssentialOclElement extends IComplexElement{
-
+	public void setAtPre(boolean atPre);
+	public boolean isAtPre();
 }

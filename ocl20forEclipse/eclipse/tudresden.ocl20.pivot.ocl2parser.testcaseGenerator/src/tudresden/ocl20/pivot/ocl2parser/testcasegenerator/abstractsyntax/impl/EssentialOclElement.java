@@ -27,10 +27,13 @@ import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.visitors.IVisitor;
 import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.visitors.IVisitorCodeGen;
 
 public class EssentialOclElement extends ComplexElement implements IEssentialOclElement{
+	private boolean atPre;
+	
 	public EssentialOclElement(ITokenAS token) {
 		super(token);
 		setTypename(token.getValue());
 		setPackageName(Messages.getString("EssentialOclExpressionsPackageName"));
+		atPre = false;
 	}
 	
 	public EssentialOclElement() {
@@ -113,6 +116,29 @@ public class EssentialOclElement extends ComplexElement implements IEssentialOcl
 	public void accept(IVisitorCodeGen visitor, StringBuffer buffer)
 			throws BuildingASMException {
 		visitor.visitEssentialOclElement(this, buffer);
+		
+	}
+
+	@Override
+	public boolean isAtPre() {
+		return atPre;
+	}
+
+	/**
+	 * If the <i>atPre</i> flag is set to true the type of this element
+	 * will set to <i>OperationCallExp</i>. If the flag is resetted
+	 * the original typename will be set (this is derivated from the value
+	 * of the token).
+	 */
+	@Override
+	public void setAtPre(boolean atPre) {
+		if (atPre == true) {
+			super.setTypename("OperationCallExp");
+		} else {
+			super.setTypename(super.getToken().getValue());
+		}
+		
+		this.atPre = atPre;
 		
 	}
 

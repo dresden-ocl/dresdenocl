@@ -280,14 +280,16 @@ public class Parser
                     case 35: { Node node = new35(); push(goTo(16), node, true); } break;
                     case 36: { Node node = new36(); push(goTo(16), node, true); } break;
                     case 37: { Node node = new37(); push(goTo(16), node, true); } break;
-                    case 38: { Node node = new38(); push(goTo(17), node, true); } break;
-                    case 39: { Node node = new39(); push(goTo(17), node, true); } break;
+                    case 38: { Node node = new38(); push(goTo(16), node, true); } break;
+                    case 39: { Node node = new39(); push(goTo(16), node, true); } break;
                     case 40: { Node node = new40(); push(goTo(17), node, true); } break;
                     case 41: { Node node = new41(); push(goTo(17), node, true); } break;
-                    case 42: { Node node = new42(); push(goTo(18), node, true); } break;
-                    case 43: { Node node = new43(); push(goTo(19), node, true); } break;
-                    case 44: { Node node = new44(); push(goTo(19), node, true); } break;
-                    case 45: { Node node = new45(); push(goTo(20), node, true); } break;
+                    case 42: { Node node = new42(); push(goTo(17), node, true); } break;
+                    case 43: { Node node = new43(); push(goTo(17), node, true); } break;
+                    case 44: { Node node = new44(); push(goTo(18), node, true); } break;
+                    case 45: { Node node = new45(); push(goTo(19), node, true); } break;
+                    case 46: { Node node = new46(); push(goTo(19), node, true); } break;
+                    case 47: { Node node = new47(); push(goTo(20), node, true); } break;
                     }
                     break;
                 case ACCEPT:
@@ -588,46 +590,70 @@ public class Parser
 
     Node new32()
     {
+        TAtpre node5 = null;
         TCloseparen node4 = (TCloseparen) pop();
         PParameters node3 = null;
         TOpenparen node2 = (TOpenparen) pop();
         TIdent node1 = (TIdent) pop();
-        AModelelementModelExpression node = new AModelelementModelExpression(node1, node2, node3, node4);
+        AModelelementModelExpression node = new AModelelementModelExpression(node1, node2, node3, node4, node5);
         return node;
     }
 
     Node new33()
     {
+        TAtpre node5 = null;
         TCloseparen node4 = (TCloseparen) pop();
         PParameters node3 = (PParameters) pop();
         TOpenparen node2 = (TOpenparen) pop();
         TIdent node1 = (TIdent) pop();
-        AModelelementModelExpression node = new AModelelementModelExpression(node1, node2, node3, node4);
+        AModelelementModelExpression node = new AModelelementModelExpression(node1, node2, node3, node4, node5);
         return node;
     }
 
     Node new34()
+    {
+        TAtpre node5 = (TAtpre) pop();
+        TCloseparen node4 = (TCloseparen) pop();
+        PParameters node3 = null;
+        TOpenparen node2 = (TOpenparen) pop();
+        TIdent node1 = (TIdent) pop();
+        AModelelementModelExpression node = new AModelelementModelExpression(node1, node2, node3, node4, node5);
+        return node;
+    }
+
+    Node new35()
+    {
+        TAtpre node5 = (TAtpre) pop();
+        TCloseparen node4 = (TCloseparen) pop();
+        PParameters node3 = (PParameters) pop();
+        TOpenparen node2 = (TOpenparen) pop();
+        TIdent node1 = (TIdent) pop();
+        AModelelementModelExpression node = new AModelelementModelExpression(node1, node2, node3, node4, node5);
+        return node;
+    }
+
+    Node new36()
     {
         TIdent node1 = (TIdent) pop();
         AIdentModelExpression node = new AIdentModelExpression(node1);
         return node;
     }
 
-    Node new35()
+    Node new37()
     {
         TNull node1 = (TNull) pop();
         ANullModelExpression node = new ANullModelExpression(node1);
         return node;
     }
 
-    Node new36()
+    Node new38()
     {
         PSimpleExpression node1 = (PSimpleExpression) pop();
         ASimpleModelExpression node = new ASimpleModelExpression(node1);
         return node;
     }
 
-    Node new37()
+    Node new39()
     {
         TCloseparen node5 = (TCloseparen) pop();
         PParameters node4 = (PParameters) pop();
@@ -638,21 +664,21 @@ public class Parser
         return node;
     }
 
-    Node new38()
+    Node new40()
     {
         TRealValue node1 = (TRealValue) pop();
         ARealSimpleExpression node = new ARealSimpleExpression(node1);
         return node;
     }
 
-    Node new39()
+    Node new41()
     {
         TIntegerValue node1 = (TIntegerValue) pop();
         AIntegerSimpleExpression node = new AIntegerSimpleExpression(node1);
         return node;
     }
 
-    Node new40()
+    Node new42()
     {
         TTick node3 = (TTick) pop();
         TStringLiteral node2 = null;
@@ -661,7 +687,7 @@ public class Parser
         return node;
     }
 
-    Node new41()
+    Node new43()
     {
         TTick node3 = (TTick) pop();
         TStringLiteral node2 = (TStringLiteral) pop();
@@ -670,7 +696,7 @@ public class Parser
         return node;
     }
 
-    Node new42()
+    Node new44()
     {
         PParameter node2 = (PParameter) pop();
         TComma node1 = (TComma) pop();
@@ -678,14 +704,14 @@ public class Parser
         return node;
     }
 
-    Node new43()
+    Node new45()
     {
         PParameter node1 = (PParameter) pop();
         ASingleParameters node = new ASingleParameters(node1);
         return node;
     }
 
-    Node new44()
+    Node new46()
     {
         PParameters node3 = (PParameters) pop();
         TComma node2 = (TComma) pop();
@@ -694,7 +720,7 @@ public class Parser
         return node;
     }
 
-    Node new45()
+    Node new47()
     {
         PModelExpression node1 = (PModelExpression) pop();
         AExpressionParameter node = new AExpressionParameter(node1);
@@ -704,24 +730,24 @@ public class Parser
     private static int[][][] actionTable;
 /*      {
 			{{-1, ERROR, 0}, {7, SHIFT, 1}, {8, SHIFT, 2}, },
-			{{-1, ERROR, 1}, {23, SHIFT, 8}, },
-			{{-1, ERROR, 2}, {23, SHIFT, 9}, },
-			{{-1, ERROR, 3}, {28, ACCEPT, -1}, },
+			{{-1, ERROR, 1}, {24, SHIFT, 8}, },
+			{{-1, ERROR, 2}, {24, SHIFT, 9}, },
+			{{-1, ERROR, 3}, {29, ACCEPT, -1}, },
 			{{-1, REDUCE, 0}, },
 			{{-1, REDUCE, 2}, {3, SHIFT, 10}, {6, SHIFT, 11}, },
 			{{-1, REDUCE, 1}, },
 			{{-1, ERROR, 7}, {3, SHIFT, 10}, {4, SHIFT, 15}, {5, SHIFT, 16}, },
 			{{-1, REDUCE, 16}, },
 			{{-1, REDUCE, 8}, },
-			{{-1, ERROR, 10}, {24, SHIFT, 21}, },
+			{{-1, ERROR, 10}, {25, SHIFT, 21}, },
 			{{-1, ERROR, 11}, {16, SHIFT, 22}, },
 			{{-1, REDUCE, 6}, },
 			{{-1, REDUCE, 3}, {6, SHIFT, 11}, },
 			{{-1, REDUCE, 4}, {6, SHIFT, 11}, },
-			{{-1, ERROR, 15}, {24, SHIFT, 25}, },
+			{{-1, ERROR, 15}, {25, SHIFT, 25}, },
 			{{-1, ERROR, 16}, {0, SHIFT, 26}, },
 			{{-1, ERROR, 17}, {4, SHIFT, 15}, {5, SHIFT, 16}, },
-			{{-1, REDUCE, 10}, {18, SHIFT, 28}, },
+			{{-1, REDUCE, 10}, {19, SHIFT, 28}, },
 			{{-1, ERROR, 19}, {5, SHIFT, 16}, },
 			{{-1, ERROR, 20}, {4, SHIFT, 15}, },
 			{{-1, REDUCE, 17}, },
@@ -729,24 +755,24 @@ public class Parser
 			{{-1, REDUCE, 7}, {6, SHIFT, 11}, },
 			{{-1, REDUCE, 5}, },
 			{{-1, REDUCE, 20}, },
-			{{-1, ERROR, 26}, {27, SHIFT, 35}, },
-			{{-1, REDUCE, 11}, {18, SHIFT, 28}, },
-			{{-1, ERROR, 28}, {23, SHIFT, 37}, },
+			{{-1, ERROR, 26}, {28, SHIFT, 35}, },
+			{{-1, REDUCE, 11}, {19, SHIFT, 28}, },
+			{{-1, ERROR, 28}, {24, SHIFT, 37}, },
 			{{-1, REDUCE, 14}, },
 			{{-1, ERROR, 30}, {9, SHIFT, 38}, },
-			{{-1, REDUCE, 12}, {18, SHIFT, 28}, },
+			{{-1, REDUCE, 12}, {19, SHIFT, 28}, },
 			{{-1, REDUCE, 18}, },
 			{{-1, REDUCE, 19}, },
-			{{-1, ERROR, 34}, {27, SHIFT, 40}, },
+			{{-1, ERROR, 34}, {28, SHIFT, 40}, },
 			{{-1, ERROR, 35}, {0, SHIFT, 41}, },
-			{{-1, REDUCE, 15}, {18, SHIFT, 28}, },
+			{{-1, REDUCE, 15}, {19, SHIFT, 28}, },
 			{{-1, REDUCE, 23}, },
-			{{-1, ERROR, 38}, {20, SHIFT, 42}, },
+			{{-1, ERROR, 38}, {21, SHIFT, 42}, },
 			{{-1, REDUCE, 13}, },
 			{{-1, ERROR, 40}, {0, SHIFT, 44}, },
 			{{-1, REDUCE, 21}, },
-			{{-1, ERROR, 42}, {26, SHIFT, 45}, },
-			{{-1, ERROR, 43}, {11, SHIFT, 46}, {19, SHIFT, 47}, },
+			{{-1, ERROR, 42}, {27, SHIFT, 45}, },
+			{{-1, ERROR, 43}, {11, SHIFT, 46}, {20, SHIFT, 47}, },
 			{{-1, ERROR, 44}, {17, SHIFT, 50}, },
 			{{-1, REDUCE, 24}, },
 			{{-1, REDUCE, 26}, },
@@ -757,38 +783,40 @@ public class Parser
 			{{-1, ERROR, 51}, {14, SHIFT, 53}, },
 			{{-1, REDUCE, 22}, },
 			{{-1, ERROR, 53}, {12, SHIFT, 54}, },
-			{{-1, ERROR, 54}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {21, SHIFT, 58}, {22, SHIFT, 59}, {23, SHIFT, 60}, },
-			{{-1, ERROR, 55}, {0, SHIFT, 63}, {27, SHIFT, 64}, },
-			{{-1, ERROR, 56}, {23, SHIFT, 65}, },
-			{{-1, REDUCE, 35}, },
-			{{-1, REDUCE, 38}, },
-			{{-1, REDUCE, 39}, },
-			{{-1, REDUCE, 34}, {16, SHIFT, 66}, },
-			{{-1, ERROR, 61}, {10, SHIFT, 67}, {23, SHIFT, 68}, },
-			{{-1, REDUCE, 36}, },
+			{{-1, ERROR, 54}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {22, SHIFT, 58}, {23, SHIFT, 59}, {24, SHIFT, 60}, },
+			{{-1, ERROR, 55}, {0, SHIFT, 63}, {28, SHIFT, 64}, },
+			{{-1, ERROR, 56}, {24, SHIFT, 65}, },
+			{{-1, REDUCE, 37}, },
 			{{-1, REDUCE, 40}, },
+			{{-1, REDUCE, 41}, },
+			{{-1, REDUCE, 36}, {16, SHIFT, 66}, },
+			{{-1, ERROR, 61}, {10, SHIFT, 67}, {24, SHIFT, 68}, },
+			{{-1, REDUCE, 38}, },
+			{{-1, REDUCE, 42}, },
 			{{-1, ERROR, 64}, {0, SHIFT, 71}, },
 			{{-1, ERROR, 65}, {16, SHIFT, 72}, },
-			{{-1, ERROR, 66}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {17, SHIFT, 73}, {21, SHIFT, 58}, {22, SHIFT, 59}, {23, SHIFT, 60}, },
+			{{-1, ERROR, 66}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {17, SHIFT, 73}, {22, SHIFT, 58}, {23, SHIFT, 59}, {24, SHIFT, 60}, },
 			{{-1, REDUCE, 27}, },
 			{{-1, ERROR, 68}, {12, SHIFT, 77}, },
 			{{-1, REDUCE, 30}, },
-			{{-1, ERROR, 70}, {10, SHIFT, 78}, {23, SHIFT, 68}, },
-			{{-1, REDUCE, 41}, },
-			{{-1, ERROR, 72}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {21, SHIFT, 58}, {22, SHIFT, 59}, {23, SHIFT, 60}, },
-			{{-1, REDUCE, 32}, },
-			{{-1, REDUCE, 45}, },
-			{{-1, ERROR, 75}, {17, SHIFT, 81}, },
-			{{-1, REDUCE, 43}, {13, SHIFT, 82}, },
-			{{-1, ERROR, 77}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {21, SHIFT, 58}, {22, SHIFT, 59}, {23, SHIFT, 60}, },
+			{{-1, ERROR, 70}, {10, SHIFT, 78}, {24, SHIFT, 68}, },
+			{{-1, REDUCE, 43}, },
+			{{-1, ERROR, 72}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {22, SHIFT, 58}, {23, SHIFT, 59}, {24, SHIFT, 60}, },
+			{{-1, REDUCE, 32}, {18, SHIFT, 81}, },
+			{{-1, REDUCE, 47}, },
+			{{-1, ERROR, 75}, {17, SHIFT, 82}, },
+			{{-1, REDUCE, 45}, {13, SHIFT, 83}, },
+			{{-1, ERROR, 77}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {22, SHIFT, 58}, {23, SHIFT, 59}, {24, SHIFT, 60}, },
 			{{-1, REDUCE, 28}, },
 			{{-1, REDUCE, 29}, },
-			{{-1, ERROR, 80}, {17, SHIFT, 84}, },
-			{{-1, REDUCE, 33}, },
-			{{-1, ERROR, 82}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {21, SHIFT, 58}, {22, SHIFT, 59}, {23, SHIFT, 60}, },
+			{{-1, ERROR, 80}, {17, SHIFT, 85}, },
+			{{-1, REDUCE, 34}, },
+			{{-1, REDUCE, 33}, {18, SHIFT, 86}, },
+			{{-1, ERROR, 83}, {0, SHIFT, 55}, {1, SHIFT, 56}, {2, SHIFT, 57}, {22, SHIFT, 58}, {23, SHIFT, 59}, {24, SHIFT, 60}, },
 			{{-1, REDUCE, 31}, },
-			{{-1, REDUCE, 37}, },
-			{{-1, REDUCE, 44}, },
+			{{-1, REDUCE, 39}, },
+			{{-1, REDUCE, 35}, },
+			{{-1, REDUCE, 46}, },
         };*/
     private static int[][][] gotoTable;
 /*      {
@@ -808,10 +836,10 @@ public class Parser
 			{{-1, 48}, },
 			{{-1, 49}, },
 			{{-1, 69}, {70, 79}, },
-			{{-1, 74}, {54, 61}, {77, 83}, },
+			{{-1, 74}, {54, 61}, {77, 84}, },
 			{{-1, 62}, },
 			{{-1, -1}, },
-			{{-1, 75}, {72, 80}, {82, 85}, },
+			{{-1, 75}, {72, 80}, {83, 87}, },
 			{{-1, 76}, },
 			{{-1, 14}, {13, 23}, },
 			{{-1, 31}, {27, 36}, },
@@ -850,10 +878,11 @@ public class Parser
 			"expecting: brace close, ',', '(', ')', ident",
 			"expecting: brace close, ident",
 			"expecting: tick, 'new', 'null', ')', real value, integer value, ident",
+			"expecting: brace close, ',', ')', '@pre', ident",
 			"expecting: ',', ')'",
         };*/
     private static int[] errors;
 /*      {
-			0, 1, 1, 2, 2, 3, 2, 4, 4, 3, 5, 6, 7, 7, 7, 5, 8, 9, 10, 11, 12, 13, 8, 7, 7, 14, 15, 10, 1, 10, 16, 10, 10, 10, 15, 8, 10, 16, 17, 10, 8, 18, 19, 20, 21, 20, 22, 16, 22, 22, 7, 23, 10, 24, 25, 26, 1, 27, 27, 27, 28, 29, 27, 27, 8, 6, 30, 22, 24, 29, 29, 27, 25, 27, 31, 21, 31, 25, 22, 29, 21, 27, 25, 29, 27, 21, 
+			0, 1, 1, 2, 2, 3, 2, 4, 4, 3, 5, 6, 7, 7, 7, 5, 8, 9, 10, 11, 12, 13, 8, 7, 7, 14, 15, 10, 1, 10, 16, 10, 10, 10, 15, 8, 10, 16, 17, 10, 8, 18, 19, 20, 21, 20, 22, 16, 22, 22, 7, 23, 10, 24, 25, 26, 1, 27, 27, 27, 28, 29, 27, 27, 8, 6, 30, 22, 24, 29, 29, 27, 25, 31, 32, 21, 32, 25, 22, 29, 21, 27, 31, 25, 29, 27, 27, 21, 
         };*/
 }
