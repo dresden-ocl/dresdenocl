@@ -293,8 +293,8 @@ public class BuildingCodeUtilClass {
 	 * Test
 	 * 
 	 * The method transforms this string into:
-	 * "Hallo\n"+
-	 * "Test"
+	 * "Hallo"
+	 * +"Test"
 	 * 
 	 * If <code>naturalString</code> is null, the method returns an empty string.
 	 * 
@@ -315,7 +315,7 @@ public class BuildingCodeUtilClass {
 						
 			// If the current character is a new line, we make this explicit, append quotes and a new line.
 			if (charAtPosition == '\n') {
-				buf.append("\\n\"\n+\"");
+				buf.append("\"\r\n+\"");
 			} else { // The current character isn't a new line, so we simply append this to the buffer.
 				buf.append(charAtPosition);
 			}
