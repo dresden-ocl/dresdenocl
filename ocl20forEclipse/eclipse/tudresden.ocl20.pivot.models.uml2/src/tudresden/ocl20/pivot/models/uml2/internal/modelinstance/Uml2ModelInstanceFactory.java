@@ -2,8 +2,10 @@ package tudresden.ocl20.pivot.models.uml2.internal.modelinstance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
@@ -122,8 +124,34 @@ public class Uml2ModelInstanceFactory extends AbstractModelInstanceFactory
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
 	 */
 	public OclTuple createOclTuple(String[] partNames, OclRoot[] partValues) {
-		// TODO Auto-generated method stub - Shall this method be implemented?
-		return null;
+
+		OclTuple result;
+
+		Map<String, OclRoot> partMap;
+
+		partMap = new HashMap<String, OclRoot>();
+
+		/* Check if the names and the values have the same length. */
+		if (partNames.length == partValues.length) {
+
+			int index;
+
+			index = 0;
+
+			/* Add all parts to the map. */
+			while (index < partNames.length) {
+
+				partMap.put(partNames[index], partValues[index]);
+
+				index++;
+			}
+		}
+		// no else.
+
+		result = (OclTuple) Platform.getAdapterManager().getAdapter(partMap,
+				OclTuple.class);
+
+		return result;
 	}
 
 }

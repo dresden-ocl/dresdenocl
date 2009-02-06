@@ -48,6 +48,8 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 	private IModelInstanceFactory factory;
 
 	private static Map<Integer, Map<String, String>> operationNames = new HashMap<Integer, Map<String, String>>();
+	
+	private ClassLoader myClassLoader;
 
 	static {
 		Map<String, String> binaryOperations = new HashMap<String, String>();
@@ -94,6 +96,7 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 		this.objectKinds = new ArrayList<List<String>>();
 		this.knownTypes = new HashMap<Class<?>, OclType>();
 		this.instanceName = providerClass.getCanonicalName();
+		this.myClassLoader = providerClass.getClassLoader();
 
 		/*
 		 * Register the adapters to enable successfull adaption to OclObject in
@@ -188,7 +191,7 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 
 			/* Try to load the class for the given path. */
 			try {
-				typeClass = Class.forName(path);
+				typeClass = this.myClassLoader.loadClass(path);
 
 				/* Check if the loaded types is already known. */
 				result = this.knownTypes.get(typeClass);
