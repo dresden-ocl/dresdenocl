@@ -35,141 +35,141 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 
 /**
- * 
+ * <p>
+ * This class implements the OCL type {@link OclBoolean} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
-	// The false instance
+	/* The false instance. */
 	private static OclBoolean FALSE = new JavaOclBoolean(false);
 
-	// The true instance
+	/* The true instance. */
 	private static OclBoolean TRUE = new JavaOclBoolean(true);
 
 	/**
-	 * Instantiates a new java ocl boolean.
+	 * <p>
+	 * Instantiates a new {@link OclBoolean}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted element of this {@link OclBoolean}.
 	 */
 	private JavaOclBoolean(Boolean adaptee) {
 		super(adaptee);
 	}
 
 	/**
-	 * Gets the single instance of JavaOclBoolean.
+	 * <p>
+	 * Gets the single instance of JavaOclBoolean which is true, or the other
+	 * which is false depending on the given value.
+	 * </p>
 	 * 
 	 * @param value
-	 *            the value
+	 *            Specifies whether true or false shall be returned.
 	 * 
 	 * @return single instance of JavaOclBoolean
 	 */
 	public static OclBoolean getInstance(Boolean value) {
-		if (value == null)
-			return new JavaOclBoolean(null);
-		else if (value == true)
-			return TRUE;
-		else
-			return FALSE;
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#and(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
-	 */
-	public OclBoolean and(OclBoolean b) {
-		if (!this.isTrue() || !b.isTrue())
-			return FALSE;
-		else if (isOclUndefined().isTrue())
-			return this;
-		else if (b.isOclUndefined().isTrue())
-			return b;
-		else
-			return TRUE;
-	}
+		OclBoolean result;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#not()
-	 */
-	public OclBoolean not() {
-		if (this.isTrue())
-			return FALSE;
-		else if (!this.isTrue())
-			return TRUE;
-		else if (isOclUndefined().isTrue())
-			return this;
-		else
-			throw new RuntimeException();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#or(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
-	 */
-	public OclBoolean or(OclBoolean b) {
-		if (this.isTrue())
-			return TRUE;
-		else if (b.isTrue())
-			return TRUE;
-		else if (isOclUndefined().isTrue())
-			return this;
-		else if (b.isOclUndefined().isTrue())
-			return b;
-		else
-			return FALSE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#xor(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
-	 */
-	public OclBoolean xor(OclBoolean b) {
-		return this.isNotEqualTo(b);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#implies(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
-	 */
-	public OclBoolean implies(OclBoolean b) {
-		return this.not().or(this.and(b));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot object2) {
-		if (!(object2 instanceof OclBoolean)) {
-			System.out
-					.println("OclBoolean isEqualTo() is called with a non-OclBoolean parameter");
-			return FALSE;
+		if (value == null) {
+			result = new JavaOclBoolean(null);
 		}
-		OclBoolean other = (OclBoolean) object2;
-		if (isOclUndefined().isTrue())
-			return this;
-		else if (other.isOclUndefined().isTrue())
-			return other;
-		if (this == object2)
-			return TRUE;
-		else
-			return FALSE;
+
+		else if (value == true) {
+			result = TRUE;
+		}
+
+		else {
+			result = FALSE;
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#isTrue()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#and(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
+	 */
+	public OclBoolean and(OclBoolean aBoolean) {
+
+		OclBoolean result;
+
+		if (!this.isTrue() || !aBoolean.isTrue()) {
+			result = FALSE;
+		}
+
+		else if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		else if (aBoolean.isOclUndefined().isTrue()) {
+			result = aBoolean;
+		}
+
+		else {
+			result = TRUE;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#ifThenElse
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	public OclRoot ifThenElse(OclRoot thenStatement, OclRoot elseStatement) {
+	
+		OclRoot result;
+	
+		/* Check if this boolean is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = JavaOclInvalid.getInstance();
+		}
+	
+		if (this.isTrue()) {
+			result = thenStatement;
+		}
+	
+		else {
+			result = elseStatement;
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#implies
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
+	 */
+	public OclBoolean implies(OclBoolean aBoolean) {
+
+		OclBoolean result;
+
+		result = this.not().or(this.and(aBoolean));
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#isTrue()
 	 */
 	public boolean isTrue() {
 		return ((Boolean) this.getAdaptee()).booleanValue();
@@ -178,22 +178,128 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#ifThenElse(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#not()
 	 */
-	public OclRoot ifThenElse(OclRoot thenStatement, OclRoot elseStatement) {
-		if (isOclUndefined().isTrue())
-			return JavaOclInvalid.getInstance();
-		if (isTrue())
-			return thenStatement;
-		else
-			return elseStatement;
+	public OclBoolean not() {
+
+		OclBoolean result;
+
+		if (isOclUndefined().isTrue()) {
+			result = this;
+		}
+		
+		else if (this.isTrue()) {
+			result = FALSE;
+		}
+
+		else if (!this.isTrue()) {
+			result = TRUE;
+		}
+
+		else {
+			String msg;
+
+			msg = "OclBoolean in illegal state.";
+
+			throw new RuntimeException(msg);
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#or(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
+	 */
+	public OclBoolean or(OclBoolean aBoolean) {
+
+		OclBoolean result;
+
+		if (this.isTrue()) {
+			result = TRUE;
+		}
+
+		else if (aBoolean.isTrue()) {
+			result = TRUE;
+		}
+
+		else if (isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		else if (aBoolean.isOclUndefined().isTrue()) {
+			result = aBoolean;
+		}
+
+		else {
+			result = FALSE;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#xor(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
+	 */
+	public OclBoolean xor(OclBoolean aBoolean) {
+		return this.isNotEqualTo(aBoolean);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	@Override
+	public OclBoolean isEqualTo(OclRoot anObject) {
+
+		OclBoolean result;
+
+		/* Check if the given Object is not a boolean. */
+		if (!(anObject instanceof OclBoolean)) {
+			result = FALSE;
+		}
+
+		else {
+			OclBoolean aBoolean;
+
+			aBoolean = (OclBoolean) anObject;
+
+			if (this.isOclUndefined().isTrue()) {
+				result = this;
+			}
+
+			else if (aBoolean.isOclUndefined().isTrue()) {
+				result = aBoolean;
+			}
+
+			if (this == anObject) {
+				result = TRUE;
+			}
+
+			else {
+				result = FALSE;
+			}
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {

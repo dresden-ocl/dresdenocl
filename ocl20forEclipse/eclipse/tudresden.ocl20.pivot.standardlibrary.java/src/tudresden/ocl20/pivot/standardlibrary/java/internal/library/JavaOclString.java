@@ -38,18 +38,22 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 
 /**
- * 
+ * <p>
+ * Provides an implementation of {@link OclString} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclString extends JavaOclAny implements OclString {
 
 	/**
-	 * Instantiates a new java ocl string.
+	 * <p>
+	 * Instantiates a new {@link JavaOclString}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted model instance object of this
+	 *            {@link JavaOclString}.
 	 */
 	public JavaOclString(String adaptee) {
 		super(adaptee);
@@ -58,15 +62,36 @@ public class JavaOclString extends JavaOclAny implements OclString {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#concat(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#concat(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclString)
 	 */
-	public OclString concat(OclString s) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (s.isOclUndefined().isTrue())
-			return s;
-		return new JavaOclString(((String) getAdaptee()).concat((String) s
-				.getAdaptee()));
+	public OclString concat(OclString aString) {
+
+		OclString result;
+
+		/* Check if this string is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given string is undefined. */
+		else if (aString.isOclUndefined().isTrue()) {
+			result = aString;
+		}
+
+		/* Else compute the result. */
+		else {
+			String thisString;
+			String theGivenString;
+
+			thisString = (String) this.getAdaptee();
+			theGivenString = (String) aString.getAdaptee();
+
+			result = new JavaOclString(thisString.concat(theGivenString));
+		}
+
+		return result;
 	}
 
 	/*
@@ -75,112 +100,207 @@ public class JavaOclString extends JavaOclAny implements OclString {
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#size()
 	 */
 	public OclInteger size() {
-		if (isOclUndefined().isTrue()) {
-			OclInteger ret = new JavaOclInteger(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
+
+		OclInteger result;
+
+		/* Check if this string is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = new JavaOclInteger(null);
+			result.setUndefinedreason(getUndefinedreason());
 		}
-		return new JavaOclInteger(((String) getAdaptee()).length());
+
+		/* Else compute the result. */
+		else {
+			result = new JavaOclInteger(((String) this.getAdaptee()).length());
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#substring(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#substring
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclString substring(OclInteger lower, OclInteger upper) {
-		if (isOclUndefined().isTrue())
-			return this;
-		try {
-			int start = (Integer) lower.getAdaptee();
-			int end = (Integer) upper.getAdaptee();
-			String sub = ((String) getAdaptee()).substring(start - 1, end);
-			return new JavaOclString(sub);
-		} catch (IndexOutOfBoundsException e) {
-			OclString ret = new JavaOclString(null);
-			ret.setUndefinedreason(e.toString());
-			return ret;
+
+		OclString result;
+
+		/* Check if this string is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
 		}
+
+		/* Else check if the lower index is undefined. */
+		else if (lower.isOclUndefined().isTrue()) {
+			result = new JavaOclString(null);
+			result.setUndefinedreason(lower.getUndefinedreason());
+		}
+
+		/* Else check if the lower index is undefined. */
+		else if (upper.isOclUndefined().isTrue()) {
+			result = new JavaOclString(null);
+			result.setUndefinedreason(upper.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			try {
+				String subString;
+				String thisString;
+
+				int start;
+				int end;
+
+				thisString = (String) this.getAdaptee();
+
+				start = (Integer) lower.getAdaptee();
+				end = (Integer) upper.getAdaptee();
+
+				subString = thisString.substring(start - 1, end);
+				result = new JavaOclString(subString);
+
+			}
+
+			catch (IndexOutOfBoundsException e) {
+				result = new JavaOclString(null);
+				result.setUndefinedreason(e.toString());
+			}
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toInteger()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toInteger()
 	 */
 	public OclInteger toInteger() {
-		if (isOclUndefined().isTrue()) {
-			OclInteger ret = new JavaOclInteger(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
+
+		OclInteger result;
+
+		/* Check if this string is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = new JavaOclInteger(null);
+			result.setUndefinedreason(getUndefinedreason());
 		}
-		try {
-			OclInteger ret = new JavaOclInteger(new Integer(
-					(String) getAdaptee()));
-			return ret;
-		} catch (NumberFormatException e) {
-			OclInteger ret = new JavaOclInteger(null);
-			ret.setUndefinedreason(e.toString());
-			return ret;
+
+		/* Else compute the result. */
+		else {
+			try {
+				String thisString;
+
+				thisString = (String) this.getAdaptee();
+
+				result = new JavaOclInteger(new Integer(thisString));
+			}
+
+			catch (NumberFormatException e) {
+				result = new JavaOclInteger(null);
+				result.setUndefinedreason(e.toString());
+			}
 		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toReal()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toReal()
 	 */
 	public OclReal toReal() {
-		if (isOclUndefined().isTrue()) {
-			OclReal ret = new JavaOclReal(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
+
+		OclReal result;
+
+		/* Check if this string is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = new JavaOclInteger(null);
+			result.setUndefinedreason(getUndefinedreason());
 		}
-		try {
-			OclReal ret = new JavaOclReal(new Double((String) getAdaptee()));
-			return ret;
-		} catch (NumberFormatException e) {
-			OclReal ret = new JavaOclReal(null);
-			ret.setUndefinedreason(e.toString());
-			return ret;
+
+		/* Else compute the result. */
+		else {
+			try {
+				String thisString;
+
+				thisString = (String) this.getAdaptee();
+
+				result = new JavaOclReal(new Double(thisString));
+			}
+
+			catch (NumberFormatException e) {
+				result = new JavaOclInteger(null);
+				result.setUndefinedreason(e.toString());
+			}
 		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	@Override
-	public OclBoolean isEqualTo(OclRoot object2) {
-		if (!(object2 instanceof OclString)) {
-			System.out
-					.println("OclString.isEqualTo() called with non-OclString parameter");
-			return JavaOclBoolean.getInstance(false);
-		} else {
-			OclString os = (OclString) object2;
-			if (isOclUndefined().isTrue()) {
-				OclBoolean ret = JavaOclBoolean.getInstance(null);
-				ret.setUndefinedreason(getUndefinedreason());
-				return ret;
-			}
-			if (os.isOclUndefined().isTrue()) {
-				OclBoolean ret = JavaOclBoolean.getInstance(null);
-				ret.setUndefinedreason(os.getUndefinedreason());
-				return ret;
-			}
-			if (((String) os.getAdaptee()).equals((String) getAdaptee()))
-				return JavaOclBoolean.getInstance(true);
-			else
-				return JavaOclBoolean.getInstance(false);
+	public OclBoolean isEqualTo(OclRoot anObject) {
+
+		OclBoolean result;
+
+		/* Check if the given object is a String. */
+		if (!(anObject instanceof OclString)) {
+			result = JavaOclBoolean.getInstance(false);
 		}
+
+		else {
+			OclString aString;
+
+			aString = (OclString) anObject;
+
+			/* Check if this String is undefined. */
+			if (isOclUndefined().isTrue()) {
+				result = JavaOclBoolean.getInstance(null);
+				result.setUndefinedreason(getUndefinedreason());
+			}
+
+			/* Check if the given String is undefined. */
+			else if (aString.isOclUndefined().isTrue()) {
+				result = JavaOclBoolean.getInstance(null);
+				result.setUndefinedreason(aString.getUndefinedreason());
+			}
+
+			/* Else compute the result. */
+			else {
+
+				if (((String) aString.getAdaptee())
+						.equals((String) getAdaptee())) {
+					result = JavaOclBoolean.getInstance(true);
+				}
+
+				else {
+					result = JavaOclBoolean.getInstance(false);
+				}
+			}
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {

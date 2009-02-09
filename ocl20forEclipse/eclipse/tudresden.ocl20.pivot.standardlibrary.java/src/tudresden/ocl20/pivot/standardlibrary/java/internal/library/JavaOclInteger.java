@@ -35,180 +35,294 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 
 /**
- * 
+ * <p>
+ * This class implements the OCL type {@link OclInteger} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/**
-	 * Instantiates a new java ocl integer.
+	 * <p>
+	 * Instantiates a new {@link JavaOclInteger}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted element of this {@link JavaOclInteger}.
 	 */
 	public JavaOclInteger(Integer adaptee) {
 		super(adaptee);
 	}
 
 	/**
-	 * Instantiates a new java ocl integer.
+	 * <p>
+	 * Instantiates a new {@link JavaOclInteger}.
+	 * </p>
 	 * 
-	 * @param l
-	 *            the l
+	 * @param literal
+	 *            The literal of this {@link JavaOclInteger}.
 	 */
-	public JavaOclInteger(int l) {
-		this(new Integer(l));
+	public JavaOclInteger(int literal) {
+		this(new Integer(literal));
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#add(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
-	public OclInteger add(OclInteger i) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (i.isOclUndefined().isTrue())
-			return i;
-		return new JavaOclInteger(((Number) getAdaptee()).intValue()
-				+ ((Number) i.getAdaptee()).intValue());
-	}
+	public OclInteger add(OclInteger anInteger) {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#div(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
-	 */
-	public OclInteger div(OclInteger i) {
-		if (((Integer) i.getAdaptee()) == 0) {
-			OclInteger ret = new JavaOclInteger(null);
-			ret.setUndefinedreason("division by zero");
-			return ret;
+		OclInteger result;
+
+		/* Check if this integer is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
 		}
-		if (isOclUndefined().isTrue())
-			return this;
-		if (i.isOclUndefined().isTrue())
-			return i;
-		return super.divide(i).floor();
+
+		/* Else check if the given integer is undefined. */
+		else if (anInteger.isOclUndefined().isTrue()) {
+			result = anInteger;
+		}
+
+		/* Else compute the result. */
+		else {
+			result = new JavaOclInteger(((Number) getAdaptee()).intValue()
+					+ ((Number) anInteger.getAdaptee()).intValue());
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#mod(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#div(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
-	public OclInteger mod(OclInteger i) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (i.isOclUndefined().isTrue())
-			return i;
-		return new JavaOclInteger(((Number) getAdaptee()).intValue()
-				% ((Number) i.getAdaptee()).intValue());
+	public OclInteger div(OclInteger anInteger) {
+
+		OclInteger result;
+
+		/* Check if this integer is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given integer is undefined. */
+		else if (anInteger.isOclUndefined().isTrue()) {
+			result = anInteger;
+		}
+
+		/* Else check if the given integer is zero. */
+		else if (((Integer) anInteger.getAdaptee()) == 0) {
+			result = new JavaOclInteger(null);
+			result.setUndefinedreason("Division by zero.");
+		}
+
+		/* Else compute the result. */
+		else {
+			result = super.divide(anInteger).floor();
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#subtract(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#divide(
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
-	public OclInteger subtract(OclInteger i) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (i.isOclUndefined().isTrue())
-			return i;
-		return new JavaOclInteger(((Number) getAdaptee()).intValue()
-				- ((Number) i.getAdaptee()).intValue());
+	public OclReal divide(OclInteger anInteger) {
+		return super.divide(anInteger);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal#negative()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#max(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
-	@Override
-	public OclInteger negative() {
-		if (isOclUndefined().isTrue())
-			return this;
-		return new JavaOclInteger(-((Number) getAdaptee()).intValue());
+	public OclInteger max(OclInteger anInteger) {
+
+		OclInteger result;
+
+		/* Check if this integer is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given integer is undefined. */
+		else if (anInteger.isOclUndefined().isTrue()) {
+			result = anInteger;
+		}
+
+		/* Else compute the result. */
+		else {
+			return new JavaOclInteger(Math.max(((Number) getAdaptee())
+					.intValue(), ((Number) anInteger.getAdaptee()).intValue()));
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#max(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#min(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
-	public OclInteger max(OclInteger i) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (i.isOclUndefined().isTrue())
-			return i;
-		return new JavaOclInteger(Math.max(((Number) getAdaptee()).intValue(),
-				((Number) i.getAdaptee()).intValue()));
+	public OclInteger min(OclInteger anInteger) {
+
+		OclInteger result;
+
+		/* Check if this integer is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given integer is undefined. */
+		else if (anInteger.isOclUndefined().isTrue()) {
+			result = anInteger;
+		}
+
+		/* Else compute the result. */
+		else {
+			return new JavaOclInteger(Math.min(((Number) getAdaptee())
+					.intValue(), ((Number) anInteger.getAdaptee()).intValue()));
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#min(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#mod(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
-	public OclInteger min(OclInteger i) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (i.isOclUndefined().isTrue())
-			return i;
-		return new JavaOclInteger(Math.min(((Number) getAdaptee()).intValue(),
-				((Number) i.getAdaptee()).intValue()));
+	public OclInteger mod(OclInteger anInteger) {
+
+		OclInteger result;
+
+		/* Check if this integer is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given integer is undefined. */
+		else if (anInteger.isOclUndefined().isTrue()) {
+			result = anInteger;
+		}
+
+		/* Else check if the given integer is zero. */
+		else if (((Integer) anInteger.getAdaptee()) == 0) {
+			result = new JavaOclInteger(null);
+			result.setUndefinedreason("Division by zero.");
+		}
+
+		/* Else compute the result. */
+		else {
+			result = new JavaOclInteger(((Number) getAdaptee()).intValue()
+					% ((Number) anInteger.getAdaptee()).intValue());
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#multiply(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#multiply
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
-	public OclInteger multiply(OclInteger i) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (i.isOclUndefined().isTrue())
-			return i;
-		return new JavaOclInteger(((Number) getAdaptee()).intValue()
-				* ((Number) i.getAdaptee()).intValue());
+	public OclInteger multiply(OclInteger anInteger) {
+
+		OclInteger result;
+
+		/* Check if this integer is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given integer is undefined. */
+		else if (anInteger.isOclUndefined().isTrue()) {
+			result = anInteger;
+		}
+
+		/* Else compute the result. */
+		else {
+			result = new JavaOclInteger(((Number) getAdaptee()).intValue()
+					* ((Number) anInteger.getAdaptee()).intValue());
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal#abs()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#subtract
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 */
+	public OclInteger subtract(OclInteger anInteger) {
+
+		OclInteger result;
+
+		/* Check if this integer is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given integer is undefined. */
+		else if (anInteger.isOclUndefined().isTrue()) {
+			result = anInteger;
+		}
+
+		/* Else compute the result. */
+		else {
+			result = new JavaOclInteger(((Number) getAdaptee()).intValue()
+					- ((Number) anInteger.getAdaptee()).intValue());
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
+	 * #abs()
 	 */
 	@Override
 	public OclInteger abs() {
-		if (isOclUndefined().isTrue())
-			return this;
-		return new JavaOclInteger(Math.abs(((Number) getAdaptee()).intValue()));
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#divide(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
-	 */
-	public OclReal divide(OclInteger i) {
-		if (((Integer) i.getAdaptee()) == 0) {
-			OclInteger ret = new JavaOclInteger(null);
-			ret.setUndefinedreason("division by zero");
-			return ret;
-		} else
-			return super.divide(i);
-	}
+		OclInteger result;
 
-	/**
-	 * Inkrement.
-	 * 
-	 * @return the ocl integer
-	 */
-	public OclInteger inkrement() {
-		return add(new JavaOclInteger(1));
+		/* Check if this integer is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else compute the result. */
+		else {
+			result = new JavaOclInteger(Math.abs(((Number) getAdaptee())
+					.intValue()));
+		}
+
+		return result;
 	}
 
 	/*
@@ -217,20 +331,72 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object o2) {
-		if (o2 instanceof OclInteger)
-			return (((Number) getAdaptee()).doubleValue() == ((Number) ((OclInteger) o2)
-					.getAdaptee()).doubleValue());
-		return false;
+	public boolean equals(Object anObject) {
+	
+		boolean result;
+	
+		/* Check if the given object is an integer. */
+		if (anObject instanceof OclInteger) {
+			Number adaptedDouble;
+			Number aDouble;
+	
+			adaptedDouble = ((Number) this.getAdaptee()).doubleValue();
+			aDouble = ((Number) ((OclInteger) anObject).getAdaptee())
+					.doubleValue();
+	
+			result = (adaptedDouble.equals(aDouble));
+		}
+	
+		else {
+			result = false;
+		}
+	
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
 		return JavaOclPrimitiveType.getType("Integer");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
+	 * #negative()
+	 */
+	@Override
+	public OclInteger negative() {
+
+		OclInteger result;
+
+		/* Check if this integer is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else compute the result. */
+		else {
+			result = new JavaOclInteger(-((Number) getAdaptee()).intValue());
+		}
+
+		return result;
+	}
+
+	/**
+	 * Inkrement.
+	 * 
+	 * @return the ocl integer
+	 */
+	public OclInteger increment() {
+		return this.add(new JavaOclInteger(1));
 	}
 }

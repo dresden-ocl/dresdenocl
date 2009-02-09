@@ -33,7 +33,6 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
@@ -42,19 +41,24 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection;
 
 /**
- * 
+ * <p>
+ * Provides an implementation of {@link OclUnsortedCollection} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
+@SuppressWarnings("unchecked")
 public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 		JavaOclCollection<T> implements OclUnsortedCollection<T> {
 
 	/**
-	 * Instantiates a new java ocl unsorted collection.
+	 * <p>
+	 * Instantiates a new {@link JavaOclUnsortedCollection}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adaptable {@link Collection} of this
+	 *            {@link JavaOclUnsortedCollection}.
 	 */
 	public JavaOclUnsortedCollection(Collection<T> adaptee) {
 		super(adaptee);
@@ -63,42 +67,78 @@ public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection#union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection
+	 * #union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
 	 */
-	public OclBag<T> union(OclBag<T> b) {
-		if (isOclUndefined().isTrue()) {
-			OclBag<T> ret = new JavaOclBag<T>(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
+	public OclBag<T> union(OclBag<T> aBag) {
+
+		OclBag<T> result;
+
+		/* Check if this collection is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = new JavaOclBag<T>(null);
+			result.setUndefinedreason(getUndefinedreason());
 		}
-		if (b.isOclUndefined().isTrue())
-			return b;
-		ArrayList<T> list = new ArrayList<T>((Collection<T>) getAdaptee());
-		list.addAll((Collection<T>) b.getAdaptee());
-		return new JavaOclBag<T>(list);
+
+		/* Else check if the given bag is undefined. */
+		else if (aBag.isOclUndefined().isTrue()) {
+			result = aBag;
+		}
+
+		/* Else compute the result. */
+		else {
+			ArrayList<T> resultList;
+
+			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
+			resultList.addAll((Collection<T>) aBag.getAdaptee());
+
+			result = new JavaOclBag<T>(resultList);
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection#intersection(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection
+	 * #intersection(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
 	 */
-	public OclSet<T> intersection(OclSet<T> s) {
+	public OclSet<T> intersection(OclSet<T> aSet) {
+
+		OclSet<T> result;
+
+		/* Check if this collection is undefined. */
 		if (isOclUndefined().isTrue()) {
-			OclSet<T> ret = new JavaOclSet<T>(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
+			result = new JavaOclSet<T>(null);
+			result.setUndefinedreason(getUndefinedreason());
 		}
-		if (s.isOclUndefined().isTrue())
-			return s;
-		List<T> thisSet = new ArrayList<T>((Collection<T>) getAdaptee());
-		List<T> result = new ArrayList<T>();
-		Iterator<T> it = ((Collection<T>) s.getAdaptee()).iterator();
-		while (it.hasNext()) {
-			T current = it.next();
-			if (thisSet.contains(current) && !result.contains(current))
-				result.add(current);
+
+		/* Else check if the given set is undefined. */
+		if (aSet.isOclUndefined().isTrue()) {
+			result = aSet;
 		}
-		return new JavaOclSet<T>(new HashSet<T>(result));
+
+		/* Else compute the result. */
+		else {
+			List<T> thisSetAsList;
+			List<T> resultList;
+
+			thisSetAsList = new ArrayList<T>((Collection<T>) this.getAdaptee());
+			resultList = new ArrayList<T>();
+
+			for (T anElement : (Collection<T>) aSet.getAdaptee()) {
+				if (thisSetAsList.contains(anElement)
+						&& !resultList.contains(anElement)) {
+					resultList.add(anElement);
+				}
+			}
+
+			return new JavaOclSet<T>(new HashSet<T>(resultList));
+		}
+
+		return result;
 	}
 }

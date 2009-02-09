@@ -33,20 +33,24 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTupleType;
 
 /**
- * 
+ * <p>
+ * Provides an implementation of {@link OclTupleType} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclTupleType extends JavaOclType implements OclTupleType {
 
 	/**
-	 * Instantiates a new java ocl tuple type.
+	 * <p>
+	 * Instantiates a new {@link JavaOclTupleType}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted model instance object of this
+	 *            {@link JavaOclTupleType} .
 	 */
-	public JavaOclTupleType(Class adaptee) {
+	public JavaOclTupleType(Class<?> adaptee) {
 		super(adaptee);
 	}
 }

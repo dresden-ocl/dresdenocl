@@ -32,7 +32,6 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -46,22 +45,26 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 
 /**
- * 
+ * <p>
+ * This class implements the OCL type {@link OclBag} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
+@SuppressWarnings("unchecked")
 public class JavaOclBag<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 		implements OclBag<T> {
 
-	// The type
+	/* The type of this collection. */
 	private OclType type;
 
 	/**
-	 * Instantiates a new java ocl bag.
+	 * <p>
+	 * Instantiates a new {@link JavaOclBag}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted element of this {@link JavaOclBag}.
 	 */
 	public JavaOclBag(List<T> adaptee) {
 		super(adaptee);
@@ -70,88 +73,177 @@ public class JavaOclBag<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection#isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot object2) {
-		if (!(object2 instanceof OclBag)) {
-			System.out
-					.println("OclBag isEqualTo() is called with a non-OclBag parameter");
-			return JavaOclBoolean.getInstance(false);
+	public OclBoolean isEqualTo(OclRoot anObject) {
+
+		OclBoolean result;
+
+		result = null;
+
+		/* Check if the given object is no OclBag. */
+		if (!(anObject instanceof OclBag)) {
+			result = JavaOclBoolean.getInstance(false);
 		}
-		OclBag other = (OclBag) object2;
-		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
+
+		/* Else compare the two Bags. */
+		else {
+			OclBag<?> aBag;
+
+			aBag = (OclBag) anObject;
+
+			/* Check if this or the given Bag is undefined. */
+			if (this.isOclUndefined().isTrue()) {
+				result = JavaOclBoolean.getInstance(null);
+				result.setUndefinedreason(getUndefinedreason());
+			}
+
+			else if (aBag.isOclUndefined().isTrue()) {
+				result = JavaOclBoolean.getInstance(null);
+				result.setUndefinedreason(aBag.getUndefinedreason());
+
+			}
+
+			else {
+				boolean booleanResult;
+
+				List<T> bagList1;
+				List<T> bagList2;
+
+				/* Clone both bags. */
+				bagList1 = new ArrayList<T>((List<T>) this.getAdaptee());
+				bagList2 = new ArrayList<T>((List<T>) aBag.getAdaptee());
+
+				booleanResult = true;
+
+				/* Iterate over the elements and compare them. */
+				for (T anElement : bagList2) {
+
+					/* Check if bagList1 is empty. */
+					if (bagList1.isEmpty()) {
+						booleanResult = false;
+						break;
+					}
+
+					/* Else check if anElement is in both lists. */
+					else if (bagList1.contains(anElement)) {
+						bagList1.remove(anElement);
+					}
+
+					else {
+						booleanResult = false;
+						break;
+					}
+				}
+
+				result = JavaOclBoolean.getInstance(booleanResult);
+			}
 		}
-		if (other.isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(other.getUndefinedreason());
-			return ret;
-		}
-		List<T> thisList = new ArrayList<T>((List<T>) getAdaptee());
-		List<T> otherList = new ArrayList<T>((List<T>) getAdaptee());
-		Iterator<T> it = ((List<T>) other.getAdaptee()).iterator();
-		boolean result = true;
-		while (it.hasNext() && result) {
-			T current = it.next();
-			result = (result && thisList.remove(current));
-			result = (result && otherList.remove(current));
-		}
-		return JavaOclBoolean.getInstance(result && thisList.isEmpty()
-				&& otherList.isEmpty());
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag#excluding(java.lang.Object)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag#excluding(java
+	 * .lang.Object)
 	 */
-	public OclBag<T> excluding(T object) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (object.isOclUndefined().isTrue()) {
-			OclBag<T> ret = new JavaOclBag<T>(null);
-			ret.setUndefinedreason(object.getUndefinedreason());
-			return ret;
+	public OclBag<T> excluding(T anObject) {
+
+		OclBag<T> result;
+
+		/* Check if this Bag is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
 		}
-		if (getAdaptee() instanceof ArrayList) {
-			while (((ArrayList<T>) getAdaptee()).remove(object))
-				;
-			return this;
-		} else {
-			List<T> ret = new ArrayList<T>((Collection<T>) getAdaptee());
-			while (ret.remove(object))
-				;
-			return new JavaOclBag<T>(ret);
+
+		/* Check if anObject is undefined. */
+		else if (anObject.isOclUndefined().isTrue()) {
+			result = new JavaOclBag<T>(null);
+			result.setUndefinedreason(anObject.getUndefinedreason());
 		}
+
+		/* Else try to remove the given Object. */
+		else if (this.getAdaptee() instanceof ArrayList) {
+			ArrayList<T> adaptedList;
+
+			adaptedList = (ArrayList<T>) this.getAdaptee();
+
+			while (adaptedList.remove(anObject)) {
+				/* Remove the given object as often as possible. */
+			}
+
+			result = this;
+		}
+
+		/* Else convert the adapted Object in to a list first. */
+		else {
+			List<T> resultList;
+
+			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
+
+			while (resultList.remove(anObject)) {
+				/* Remove the given object as often as possible. */
+			}
+
+			result = new JavaOclBag<T>(resultList);
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten
+	 * ()
 	 */
 	public <T2 extends OclRoot> OclBag<T2> flatten() {
+
+		OclBag<T2> result;
+
+		/* Check if this Bag is undefined. */
 		if (isOclUndefined().isTrue()) {
-			OclBag<T2> ret = new JavaOclBag<T2>(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
+			result = new JavaOclBag<T2>(null);
+			result.setUndefinedreason(getUndefinedreason());
 		}
-		OclIterator<T> it = getIterator();
-		OclBag<T2> result = new JavaOclBag<T2>(new ArrayList<T2>());
-		while (it.hasNext().isTrue()) {
-			T temp = it.next();
-			if (!(temp instanceof OclCollection))
-				return new JavaOclBag<T2>((List) getAdaptee());
-			if (temp instanceof OclBag)
-				result = result.union((OclBag<T2>) temp);
-			else if (temp instanceof OclSet)
-				result = result.union((OclSet<T2>) temp);
-			else
-				result = result.union(new JavaOclBag<T2>((new ArrayList<T2>(
-						(Collection<T2>) temp.getAdaptee()))));
+
+		else {
+			OclIterator<T> bagIt;
+			T anElement;
+
+			result = new JavaOclBag<T2>(new ArrayList<T2>());
+			bagIt = this.getIterator();
+
+			/* Iterate over this bag. */
+			while (bagIt.hasNext().isTrue()) {
+
+				anElement = bagIt.next();
+
+				if (!(anElement instanceof OclCollection)) {
+					result = new JavaOclBag<T2>((List) this.getAdaptee());
+				}
+
+				else if (anElement instanceof OclBag) {
+					result = result.union((OclBag<T2>) anElement);
+				}
+
+				else if (anElement instanceof OclSet) {
+					result = result.union((OclSet<T2>) anElement);
+				}
+
+				else {
+					result = result.union(new JavaOclBag<T2>(
+							(new ArrayList<T2>((Collection<T2>) anElement
+									.getAdaptee()))));
+				}
+			}
+
 		}
 		return result;
 	}
@@ -159,79 +251,150 @@ public class JavaOclBag<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag#including(java.lang.Object)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag#including(java
+	 * .lang.Object)
 	 */
-	public OclBag<T> including(T object) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (object.isOclUndefined().isTrue()) {
-			OclBag<T> ret = new JavaOclBag<T>(null);
-			ret.setUndefinedreason(object.getUndefinedreason());
-			return ret;
+	public OclBag<T> including(T anObject) {
+
+		OclBag<T> result;
+
+		/* Check, if this bag is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = this;
 		}
-		if (getAdaptee() instanceof ArrayList) {
-			((ArrayList<T>) getAdaptee()).add(object);
-			return this;
-		} else {
-			List<T> ret = new ArrayList<T>((Collection<T>) getAdaptee());
-			ret.add(object);
-			return new JavaOclBag<T>(ret);
+
+		/* Check if the given Object is undefined. */
+		else if (anObject.isOclUndefined().isTrue()) {
+			result = new JavaOclBag<T>(null);
+			result.setUndefinedreason(anObject.getUndefinedreason());
 		}
+
+		else {
+
+			List<T> resultList;
+
+			if (this.getAdaptee() instanceof ArrayList) {
+				resultList = (ArrayList<T>) this.getAdaptee();
+			}
+
+			else {
+				resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
+			}
+
+			resultList.add(anObject);
+			result = new JavaOclBag<T>(resultList);
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag#union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag#intersection
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
 	 */
-	public OclBag<T> union(OclSet<T> s) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (s.isOclUndefined().isTrue()) {
-			OclBag<T> ret = new JavaOclBag<T>(null);
-			ret.setUndefinedreason(s.getUndefinedreason());
-			return ret;
+	public OclBag<T> intersection(OclBag<T> aBag) {
+	
+		OclBag<T> result;
+	
+		/* Check if this bag is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = this;
 		}
-		List<T> list = new ArrayList<T>((List<T>) getAdaptee());
-		list.addAll((Set<T>) s.getAdaptee());
-		return new JavaOclBag<T>(list);
+	
+		/* Check if this aBag is undefined. */
+		else if (aBag.isOclUndefined().isTrue()) {
+			result = aBag;
+		}
+	
+		else {
+			List<T> adapteeList;
+			List<T> resultList;
+	
+			adapteeList = new ArrayList<T>((Collection<T>) this.getAdaptee());
+			resultList = new ArrayList<T>();
+	
+			/* Iterate through aBag's elements. */
+			for (T anElement : (Collection<T>) aBag.getAdaptee()) {
+	
+				/* Try to remove an Element from the adapteeList. */
+				if (adapteeList.remove(anElement)) {
+					/* It it could be removed, at it to the result. */
+					resultList.add(anElement);
+				}
+			}
+	
+			result = new JavaOclBag<T>(resultList);
+		}
+	
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag#intersection(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag#union(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclSet)
 	 */
-	public OclBag<T> intersection(OclBag<T> bag) {
+	public OclBag<T> union(OclSet<T> aSet) {
+
+		OclBag<T> result;
+
+		/* Check if this Bag is undefined. */
 		if (isOclUndefined().isTrue())
-			return this;
-		if (bag.isOclUndefined().isTrue())
-			return bag;
-		List<T> tempList = new ArrayList<T>((Collection<T>) getAdaptee());
-		List<T> result = new ArrayList<T>();
-		Iterator<T> it = ((Collection<T>) bag.getAdaptee()).iterator();
-		while (it.hasNext()) {
-			T current = it.next();
-			if (tempList.remove(current))
-				result.add(current);
+			result = this;
+
+		/* Check if aSet is undefined. */
+		else if (aSet.isOclUndefined().isTrue()) {
+			result = new JavaOclBag<T>(null);
+			result.setUndefinedreason(aSet.getUndefinedreason());
 		}
-		return new JavaOclBag<T>(result);
+
+		else {
+			List<T> resultList;
+
+			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
+			resultList.addAll((Set<T>) aSet.getAdaptee());
+
+			result = new JavaOclBag<T>(resultList);
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
-		if (type == null) {
-			OclType elementType = JavaOclType.getType("OclVoid");
-			if (((List<OclRoot>) getAdaptee()).size() > 0)
-				elementType = ((List<OclRoot>) getAdaptee()).get(0).getType();
-			type = JavaOclCollectionType.getType(OclCollectionTypeKind.BAG,
-					elementType);
+
+		/* Eventually compute the generic type. */
+		if (this.type == null) {
+			OclType genericType;
+
+			/* Check if this collection contains any element. */
+			if (((List<OclRoot>) getAdaptee()).size() > 0) {
+				genericType = ((List<OclRoot>) getAdaptee()).get(0).getType();
+			}
+
+			/* Else the generic type is void. */
+			else {
+				genericType = JavaOclType.getType("OclVoid");
+			}
+
+			this.type = JavaOclCollectionType.getType(
+					OclCollectionTypeKind.BAG, genericType);
 		}
-		return type;
+		// no els.
+
+		return this.type;
 	}
 }

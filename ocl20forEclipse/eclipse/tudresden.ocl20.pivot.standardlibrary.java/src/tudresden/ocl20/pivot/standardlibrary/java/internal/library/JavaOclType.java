@@ -38,108 +38,101 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 
 /**
- * 
+ * <p>
+ * Provides an implementation of {@link OclType} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclType extends JavaOclRoot implements OclType {
 
-	// The predefined types
+	/** The predefined types. */
 	protected static Map<String, OclType> predefinedTypes = new HashMap<String, OclType>();
 
-	// The OCLANYTYPE
+	/** The instance of OclAny. */
 	private static OclType OCLANYTYPE = new JavaOclType(Class.class, "OclAny");
 
-	// The OCLINVALIDTYPE
-	private static OclType OCLINVALIDTYPE = new JavaOclType(Class.class,
-			"OclInvalid");
-
-	// The OCLVOIDTYPE
+	/** The instance of OclVoid. */
 	private static OclType OCLVOIDTYPE = new JavaOclType(Class.class, "OclVoid");
 
-	// The OCLTYPETYPE
+	/** The instance of OclType. */
 	private static OclType OCLTYPETYPE = new JavaOclType(Class.class, "OclType");
 
-	// The name
+	/** The name of the implemented type. */
 	protected String name;
 
 	/**
-	 * Instantiates a new java ocl type.
+	 * <p>
+	 * Instantiates a new {@link JavaOclType}.
+	 * </p>
 	 * 
 	 * @param adaptable
-	 *            the adaptable
-	 * @param name
-	 *            the name
+	 *            The adaptable {@link Class} of this {@link JavaOclType}.
 	 */
-	protected JavaOclType(Class adaptable, String name) {
+	public JavaOclType(Class<?> adaptable) {
+		super(adaptable);
+
+		this.name = adaptable.getName();
+	}
+
+	/**
+	 * <p>
+	 * Instantiates a new {@link JavaOclType}.
+	 * </p>
+	 * 
+	 * @param adaptable
+	 *            The {@link Class} which shall be adapted.
+	 * @param name
+	 *            The name of the Type which shall be adapted.
+	 */
+	protected JavaOclType(Class<?> adaptable, String name) {
 		super(adaptable);
 		this.name = name;
 		predefinedTypes.put(name, this);
 	}
 
-	/**
-	 * Gets the type.
-	 * 
-	 * @param name
-	 *            the name
-	 * 
-	 * @return the type
-	 */
-	public static OclType getType(String name) {
-		OclType type = predefinedTypes.get(name);
-		return type;
-	}
-
-	/**
-	 * Instantiates a new java ocl type.
-	 * 
-	 * @param adaptable
-	 *            the adaptable
-	 */
-	public JavaOclType(Class adaptable) {
-		super(adaptable);
-		this.name = adaptable.getName();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#isOfKind(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#createInstance
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	public OclBoolean isOfKind(OclRoot o) {
-		if (this == OCLANYTYPE)
-			return JavaOclBoolean.getInstance(false); // oclAny has no direct
-														// instances
-		if (this == OCLVOIDTYPE && o.isOclUndefined().isTrue())
-			return JavaOclBoolean.getInstance(true);
-		return JavaOclBoolean.getInstance(((Class) getAdaptee()).isInstance(o
-				.getAdaptee()));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#isOfType(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public OclBoolean isOfType(OclRoot o) {
-		if (this == OCLANYTYPE)
-			return JavaOclBoolean.getInstance(false); // oclAny has no direct
-														// instances
-		if (this == OCLVOIDTYPE && o.isOclUndefined().isTrue())
-			return JavaOclBoolean.getInstance(true);
-		return JavaOclBoolean.getInstance(this.isEqualTo(o.getType()).isTrue());
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#getType()
-	 */
-	@Override
-	public OclType getType() {
-		return OCLTYPETYPE;
+	public OclRoot createInstance(OclRoot anOclRoot) {
+	
+		OclRoot result;
+	
+		Class<?> thisAdaptee;
+		Class<?> anAdaptee;
+	
+		thisAdaptee = (Class<?>) this.getAdaptee();
+		anAdaptee = anOclRoot.getAdapteeClass();
+	
+		if (anAdaptee.isAssignableFrom(thisAdaptee)) {
+	
+			if (this == OCLVOIDTYPE) {
+				result = JavaOclVoid.getInstance();
+			}
+	
+			else if (this == OCLTYPETYPE) {
+				result = new JavaOclType(anAdaptee);
+			}
+	
+			else if (this == OCLANYTYPE) {
+				return new JavaOclAny(anAdaptee);
+			}
+	
+			else {
+				result = new JavaOclObject(anAdaptee);
+				result.setAdapteeClass(thisAdaptee);
+			}
+		}
+	
+		else {
+			result = JavaOclVoid.getInstance();
+		}
+	
+		return result;
 	}
 
 	/*
@@ -154,20 +147,90 @@ public class JavaOclType extends JavaOclRoot implements OclType {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#createInstance(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#isOfKind(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	public OclRoot createInstance(OclRoot o) {
-		if (o.getAdapteeClass().isAssignableFrom((Class) getAdaptee())) {
-			if (this == OCLVOIDTYPE)
-				return JavaOclVoid.getInstance();
-			if (this == OCLTYPETYPE)
-				return new JavaOclType(o.getAdaptee().getClass());
-			if (this == OCLANYTYPE)
-				return new JavaOclAny(o.getAdaptee());
-			OclRoot ret = new JavaOclObject(o.getAdaptee());
-			ret.setAdapteeClass((Class) getAdaptee());
-			return ret;
+	public OclBoolean isOfKind(OclRoot anOclRoot) {
+
+		OclBoolean result;
+
+		if (this == OCLANYTYPE) {
+			/* OclAny has no direct instances. */
+			result = JavaOclBoolean.getInstance(false);
 		}
-		return JavaOclVoid.getInstance();
+
+		else if (this == OCLVOIDTYPE && anOclRoot.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(true);
+		}
+
+		else {
+			Class<?> thisAdaptee;
+
+			thisAdaptee = (Class<?>) this.getAdaptee();
+
+			return JavaOclBoolean.getInstance((thisAdaptee)
+					.isInstance(anOclRoot.getAdaptee()));
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#isOfType(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	public OclBoolean isOfType(OclRoot anOclRoot) {
+
+		OclBoolean result;
+
+		if (this == OCLANYTYPE) {
+			/* OclAny has no direct instances. */
+			result = JavaOclBoolean.getInstance(false);
+		}
+
+		else if (this == OCLVOIDTYPE && anOclRoot.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(true);
+		}
+
+		else {
+			result = JavaOclBoolean.getInstance(this.isEqualTo(
+					anOclRoot.getType()).isTrue());
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #getType()
+	 */
+	@Override
+	public OclType getType() {
+		return OCLTYPETYPE;
+	}
+
+	/**
+	 * <p>
+	 * Returns an {@link OclType} to a given name.
+	 * </p>
+	 * 
+	 * @param name
+	 *            The name of the {@link OclType} which shall be returned.
+	 * 
+	 * @return An {@link OclType} to a given name.
+	 */
+	public static OclType getType(String name) {
+		OclType result;
+
+		result = predefinedTypes.get(name);
+
+		return result;
 	}
 }

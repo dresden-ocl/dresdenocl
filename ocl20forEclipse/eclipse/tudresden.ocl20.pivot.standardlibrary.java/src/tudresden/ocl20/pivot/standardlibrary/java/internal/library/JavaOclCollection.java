@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,7 +53,7 @@ import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 
 /**
  * <p>
- * This class implements the OCL type Collection in Java.
+ * This class implements the OCL type {@link OclCollection} in Java.
  * </p>
  * 
  * @author Ronny Brandt
@@ -77,8 +76,85 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 		super(adaptee);
 	}
 
-	// FIXME Continue refactoring here.
-	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #asSet()
+	 */
+	@SuppressWarnings("unchecked")
+	public OclSet<T> asSet() {
+
+		OclSet<T> result;
+
+		/* Check if this Collection is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = new JavaOclSet<T>(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			Collection<T> adaptedCollection;
+			HashSet<T> adaptedSet;
+
+			/* Convert the adapted collection into an adapted set. */
+			adaptedCollection = (Collection<T>) getAdaptee();
+			adaptedSet = new HashSet<T>(adaptedCollection);
+
+			result = new JavaOclSet<T>(adaptedSet);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
+	 * #getType()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public OclType getType() {
+
+		/* Check if the type has not already been initialized. */
+		if (type == null) {
+			OclType elementType;
+
+			Collection<T> adaptedCollection;
+
+			adaptedCollection = (Collection<T>) getAdaptee();
+
+			/*
+			 * If this collection contains elements, use an element to evaluate
+			 * the generic type.
+			 */
+			if ((adaptedCollection.size() > 0)) {
+
+				List<T> adaptedList;
+
+				/* Convert the adapted collection into a list. */
+				adaptedList = new ArrayList<T>(adaptedCollection);
+
+				elementType = adaptedList.get(0).getType();
+			}
+
+			/* Else use OclVoid as generic type. */
+			else {
+				elementType = JavaOclType.getType("OclVoid");
+			}
+
+			this.type = JavaOclCollectionType.getType(
+					OclCollectionTypeKind.COLLECTION, elementType);
+		}
+		// no else.
+
+		return this.type;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -100,7 +176,222 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	@Override
 	public OclRoot invokeOperation(String operationName, OclRoot... parameters)
 			throws NoSuchMethodException {
-		return invokeLibraryOperation(operationName, parameters);
+		return this.invokeLibraryOperation(operationName, parameters);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asBag()
+	 */
+	@SuppressWarnings("unchecked")
+	public OclBag<T> asBag() {
+	
+		JavaOclBag<T> result;
+	
+		/* Check if this collection is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = new JavaOclBag<T>(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+	
+		/* Else compute the result. */
+		else {
+			ArrayList<T> resultList;
+	
+			/* Get this collection as list. */
+			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
+	
+			result = new JavaOclBag<T>(resultList);
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asOrderedSet
+	 * ()
+	 */
+	@SuppressWarnings("unchecked")
+	public OclOrderedSet<T> asOrderedSet() {
+	
+		OclOrderedSet<T> result;
+	
+		/* Check if this collection is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = new JavaOclOrderedSet<T>(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+	
+		/* Else compute the result. */
+		else {
+			ArrayList<T> resultList;
+	
+			/* Get this collection as list. */
+			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
+	
+			result = new JavaOclOrderedSet<T>(resultList);
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asSequence
+	 * ()
+	 */
+	@SuppressWarnings("unchecked")
+	public OclSequence<T> asSequence() {
+	
+		OclSequence<T> result;
+	
+		/* Check if this collection is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+	
+		/* Else compute the result. */
+		else {
+			ArrayList<T> resultList;
+	
+			/* Get this collection as list. */
+			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
+	
+			result = new JavaOclSequence<T>(resultList);
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#count
+	 * (java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	public OclInteger count(T anObject) {
+
+		OclInteger result;
+
+		/* Check if this collection is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = new JavaOclInteger(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			int intResult;
+
+			intResult = 0;
+
+			/* Iterate through this collection. */
+			for (T anElement : (Collection<T>) this.getAdaptee()) {
+
+				if (anObject.isEqualTo(anElement).isTrue()) {
+					intResult++;
+				}
+				// no else.
+			}
+
+			result = new JavaOclInteger(intResult);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#excludes
+	 * (java.lang.Object)
+	 */
+	public OclBoolean excludes(T o) {
+		return includes(o).not();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#excludesAll
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
+	 */
+	@SuppressWarnings("unchecked")
+	public OclBoolean excludesAll(OclCollection<T> aCollection) {
+
+		OclBoolean result;
+
+		/* Check if this collection is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+
+		/* Check if aCollection is undefined. */
+		else if (aCollection.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(aCollection.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			boolean booleanResult;
+			OclBoolean excludesElement;
+
+			booleanResult = true;
+
+			for (T anElement : (Collection<T>) aCollection.getAdaptee()) {
+
+				excludesElement = this.excludes(anElement);
+
+				if (excludesElement.isOclUndefined().isTrue()) {
+					result = excludesElement;
+					break;
+				}
+
+				else {
+					booleanResult = (booleanResult && excludesElement.isTrue());
+					if (!booleanResult) {
+						break;
+					}
+					// no else.
+				}
+			}
+			// end for.
+
+			result = JavaOclBoolean.getInstance(booleanResult);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#getIterator
+	 * ()
+	 */
+	@SuppressWarnings("unchecked")
+	public OclIterator<T> getIterator() {
+		
+		OclIterator<T> result;
+		
+		result = new JavaOclIterator<T>(((Collection<T>) this.getAdaptee()).iterator());
+		
+		return result;
 	}
 
 	/*
@@ -152,141 +443,50 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#size()
-	 */
-	public OclInteger size() {
-		if (isOclUndefined().isTrue()) {
-			OclInteger ret = new JavaOclInteger(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
-		}
-		return new JavaOclInteger(((Collection<T>) getAdaptee()).size());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#excludes
-	 * (java.lang.Object)
-	 */
-	public OclBoolean excludes(T o) {
-		return includes(o).not();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#excludesAll
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
-	 */
-	public OclBoolean excludesAll(OclCollection<T> col) {
-		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
-		}
-		if (col.isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(col.getUndefinedreason());
-			return ret;
-		}
-
-		Iterator<T> it = ((Collection<T>) col.getAdaptee()).iterator();
-		boolean result = true;
-		while (it.hasNext() && result) {
-			OclBoolean excl = excludes(it.next());
-			if (excl.isOclUndefined().isTrue())
-				return excl;
-			result = (result && excl.isTrue());
-		}
-		return JavaOclBoolean.getInstance(result);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#product
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
-	 */
-	public <T2 extends OclRoot> OclSet<OclTuple> product(OclCollection<T2> col) {
-		if (isOclUndefined().isTrue()) {
-			OclSet<OclTuple> ret = new JavaOclSet<OclTuple>(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
-		}
-		if (col.isOclUndefined().isTrue()) {
-			OclSet<OclTuple> ret = new JavaOclSet<OclTuple>(null);
-			ret.setUndefinedreason(col.getUndefinedreason());
-			return ret;
-		}
-		if (!size().isEqualTo(col.size()).isTrue()) {
-			OclSet<OclTuple> ret = new JavaOclSet<OclTuple>(null);
-			ret
-					.setUndefinedreason("product() for collections of different size not possible");
-			return ret;
-		}
-
-		OclIterator<T> selfIt = getIterator();
-		OclIterator<T2> colIt = col.getIterator();
-
-		Set<OclTuple> result = new HashSet<OclTuple>((Integer) size()
-				.getAdaptee());
-
-		while (selfIt.hasNext().isTrue()) {
-			Map<String, OclRoot> tuple = new HashMap<String, OclRoot>();
-			tuple.put("first", selfIt.next());
-			tuple.put("second", colIt.next());
-			result.add(new JavaOclTuple(tuple));
-		}
-
-		return new JavaOclSet(result);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#count
-	 * (java.lang.Object)
-	 */
-	public OclInteger count(T o) {
-		if (isOclUndefined().isTrue()) {
-			OclInteger ret = new JavaOclInteger(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
-		}
-		int count = 0;
-		Iterator<T> it = ((Collection<T>) getAdaptee()).iterator();
-		while (it.hasNext()) {
-			if (o.isEqualTo(it.next()).isTrue())
-				count++;
-		}
-		return new JavaOclInteger(count);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#includesAll
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
 	 */
-	public OclBoolean includesAll(OclCollection<T> col) {
+	@SuppressWarnings("unchecked")
+	public OclBoolean includesAll(OclCollection<T> aCollection) {
+
+		OclBoolean result;
+
+		/* Check if this collection or the given collection is undefined. */
 		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(this.getUndefinedreason());
 		}
-		if (col.isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(col.getUndefinedreason());
-			return ret;
+
+		else if (aCollection.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(aCollection.getUndefinedreason());
 		}
-		return JavaOclBoolean.getInstance(((Collection<T>) getAdaptee())
-				.containsAll((Collection<T>) col.getAdaptee()));
+
+		/* Else compute the result. */
+		else {
+			boolean adaptedResult;
+			Collection<T> anAdaptedCollection;
+
+			anAdaptedCollection = (Collection<T>) aCollection.getAdaptee();
+			adaptedResult = true;
+			/*
+			 * Check if all elements of anAdaptedCollection are contained in
+			 * this collection.
+			 */
+			for (T anElement : anAdaptedCollection) {
+
+				/* If an element is not contained, return false. */
+				if (!this.includes(anElement).isTrue()) {
+					adaptedResult = false;
+					break;
+				}
+				// no else.
+			}
+
+			result = JavaOclBoolean.getInstance(adaptedResult);
+		}
+
+		return result;
 	}
 
 	/*
@@ -340,133 +540,147 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#product
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
+	 */
+	@SuppressWarnings("unchecked")
+	public <T2 extends OclRoot> OclSet<OclTuple> product(
+			OclCollection<T2> aCollection) {
+
+		OclSet<OclTuple> result;
+
+		/* Check if this collection is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = new JavaOclSet<OclTuple>(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+
+		/* Else check if the given collection is undefined. */
+		if (aCollection.isOclUndefined().isTrue()) {
+			result = new JavaOclSet<OclTuple>(null);
+			result.setUndefinedreason(aCollection.getUndefinedreason());
+		}
+
+		/* Else check if both collection have the same size. */
+		if (!size().isEqualTo(aCollection.size()).isTrue()) {
+			result = new JavaOclSet<OclTuple>(null);
+			result
+					.setUndefinedreason("product() for collections of different size not possible");
+		}
+
+		/* Else compute the result. */
+		else {
+
+			Set<OclTuple> resultSet;
+
+			OclIterator<T> selfIt;
+			OclIterator<T2> colIt;
+
+			resultSet = new HashSet<OclTuple>((Integer) this.size()
+					.getAdaptee());
+
+			selfIt = getIterator();
+			colIt = aCollection.getIterator();
+
+			/* Iterate through both collections and fill the tuples. */
+			while (selfIt.hasNext().isTrue()) {
+				Map<String, OclRoot> anElement;
+
+				anElement = new HashMap<String, OclRoot>();
+
+				anElement.put("first", selfIt.next());
+				anElement.put("second", colIt.next());
+
+				resultSet.add(new JavaOclTuple(anElement));
+			}
+
+			result = new JavaOclSet<OclTuple>(resultSet);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#size()
+	 */
+	@SuppressWarnings("unchecked")
+	public OclInteger size() {
+
+		OclInteger result;
+
+		/* Check if this collection is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = new JavaOclInteger(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+
+		else {
+			int adaptedResult;
+			Collection<T> adaptedCollection;
+
+			adaptedCollection = (Collection<T>) getAdaptee();
+			adaptedResult = adaptedCollection.size();
+
+			result = new JavaOclInteger(adaptedResult);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#sum()
 	 */
+	@SuppressWarnings("unchecked")
 	public T sum() {
+
+		T result;
+
+		result = null;
+
+		/* Check if this collection is undefined. */
 		if (isOclUndefined().isTrue()) {
-			OclRoot ret = new JavaOclRoot(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return (T) ret;
+			result = (T) new JavaOclRoot(null);
+			result.setUndefinedreason(this.getUndefinedreason());
 		}
-		if (isEmpty().isTrue())
-			return (T) new JavaOclInteger(0);
-		Iterator<T> it = ((Collection<T>) getAdaptee()).iterator();
-		T sum = it.next();
-		try {
-			while (it.hasNext()) {
-				T nextsum = (T) sum.invokeOperation("add", new OclRoot[] { it
-						.next() });
-				sum = nextsum;
+
+		/* Else check if this collection is empty. */
+		if (isEmpty().isTrue()) {
+			result = (T) new JavaOclInteger(0);
+		}
+
+		/* Else iterate through the collection and compute the sum. */
+		else {
+			/* Try to add the elements of this collection to a sum. */
+			try {
+				for (T anElement : (Collection<T>) this.getAdaptee()) {
+
+					if (result == null) {
+						result = anElement;
+					}
+
+					else {
+						result = (T) result.invokeOperation("add", anElement);
+					}
+				}
 			}
-			return sum;
-		} catch (NoSuchMethodException e) {
-			OclRoot ret = new JavaOclRoot(null);
-			ret
-					.setUndefinedreason("sum() of collection with not addable element requested");
-			return (T) ret;
-		}
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
-	 * #asSet()
-	 */
-	public OclSet<T> asSet() {
-		if (isOclUndefined().isTrue()) {
-			OclSet<T> ret = new JavaOclSet<T>(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
-		}
-		ArrayList<T> l = new ArrayList<T>();
-		Iterator<T> it = ((Collection<T>) getAdaptee()).iterator();
-		while (it.hasNext()) {
-			T current = it.next();
-			if (!l.contains(current))
-				l.add(current);
-		}
-		return new JavaOclSet<T>(new HashSet<T>(l));
-	}
+			/* Else return undefined. */
+			catch (NoSuchMethodException e) {
+				String msg;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asOrderedSet
-	 * ()
-	 */
-	public OclOrderedSet<T> asOrderedSet() {
-		if (isOclUndefined().isTrue()) {
-			OclOrderedSet<T> ret = new JavaOclOrderedSet<T>(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
-		}
-		ArrayList<T> list = new ArrayList<T>((Collection<T>) getAdaptee());
-		return new JavaOclOrderedSet<T>(list);
-	}
+				msg = "sum() of collection with not addable element requested";
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asBag()
-	 */
-	public OclBag<T> asBag() {
-		if (isOclUndefined().isTrue()) {
-			OclBag<T> ret = new JavaOclBag<T>(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
+				result = (T) new JavaOclRoot(null);
+				result.setUndefinedreason(msg);
+			}
 		}
-		ArrayList<T> list = new ArrayList<T>((Collection<T>) getAdaptee());
-		return new JavaOclBag<T>(list);
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asSequence
-	 * ()
-	 */
-	public OclSequence<T> asSequence() {
-		if (isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(this.getUndefinedreason());
-			return ret;
-		}
-		ArrayList<T> list = new ArrayList<T>((Collection<T>) getAdaptee());
-		return new JavaOclSequence<T>(list);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#getIterator
-	 * ()
-	 */
-	public OclIterator<T> getIterator() {
-		return new JavaOclIterator<T>(((Collection<T>) getAdaptee()).iterator());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
-	 * #getType()
-	 */
-	@Override
-	public OclType getType() {
-		if (type == null) {
-			OclType elementType = JavaOclType.getType("OclVoid");
-			if (((List<OclRoot>) getAdaptee()).size() > 0)
-				elementType = ((List<OclRoot>) getAdaptee()).get(0).getType();
-			type = JavaOclCollectionType.getType(
-					OclCollectionTypeKind.COLLECTION, elementType);
-		}
-		return type;
+		return result;
 	}
 }

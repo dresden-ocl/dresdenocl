@@ -46,6 +46,7 @@ import org.eclipse.core.runtime.Platform;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
@@ -79,6 +80,48 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 */
 	public JavaOclRoot(Object adaptee) {
 		super(adaptee);
+	}
+
+	/**
+	 * <p>
+	 * Returns allInstances() of this type of {@link JavaOclRoot}.
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>Must be implemented by sub types or will return null!</strong>
+	 * </p>
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#allInstances()
+	 */
+	public <T extends OclRoot> OclSet<T> allInstances() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#asSet()
+	 */
+	@SuppressWarnings("unchecked")
+	public <T extends OclRoot> OclSet<T> asSet() {
+
+		OclSet<T> result;
+		Set<T> adaptedSet;
+
+		adaptedSet = new HashSet<T>(Arrays.asList((T) this));
+		result = new JavaOclSet<T>(adaptedSet);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#getType()
+	 */
+	public OclType getType() {
+		/* Must be implemented by concrete sub classes. */
+		return null;
 	}
 
 	/*
@@ -195,84 +238,6 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 			}
 
 			result = this.adaptProperty(property);
-		}
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Adapts a given model instance property (as {@link Object}) to an
-	 * {@link OclRoot}.
-	 * 
-	 * @param property
-	 *            The property which shall be adapted.
-	 * @return The adapted property.
-	 */
-	protected OclRoot adaptProperty(Object property) {
-
-		OclRoot result;
-
-		if (property == null) {
-			result = JavaOclVoid.getInstance();
-		}
-
-		else if (property instanceof Integer) {
-			result = (OclRoot) Platform.getAdapterManager().getAdapter(
-					property, OclInteger.class);
-		}
-
-		else if (property instanceof Float) {
-			result = (OclRoot) Platform.getAdapterManager().getAdapter(
-					property, OclReal.class);
-		}
-
-		else if (property instanceof Boolean) {
-			result = (OclRoot) Platform.getAdapterManager().getAdapter(
-					property, OclBoolean.class);
-		}
-
-		else if (property instanceof String) {
-			result = (OclRoot) Platform.getAdapterManager().getAdapter(
-					property, OclString.class);
-		}
-
-		else if (property.getClass().isEnum()) {
-			result = (OclRoot) Platform.getAdapterManager().getAdapter(
-					property, OclEnumLiteral.class);
-		}
-
-		/*
-		 * If the property is a collection, each element must be adapted for
-		 * itself.
-		 */
-		else if (property instanceof Collection) {
-
-			Collection<?> aCollection;
-			List<OclRoot> propertyList;
-
-			aCollection = (Collection<?>) property;
-			propertyList = new ArrayList<OclRoot>();
-
-			for (Object anElement : aCollection) {
-
-				OclRoot adaptedElement;
-
-				/* Adapt anElement to OclRoot. */
-				adaptedElement = this.adaptProperty(anElement);
-
-				propertyList.add(adaptedElement);
-			}
-
-			result = new JavaOclBag<OclRoot>(propertyList);
-		}
-
-		else if (property instanceof OclRoot) {
-			result = (OclRoot) property;
-		}
-
-		else {
-			result = new JavaOclRoot(property);
 		}
 
 		return result;
@@ -437,6 +402,17 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#getUndefinedreason
+	 * ()
+	 */
+	public String getUndefinedreason() {
+		return undefinedreason;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#invokeOperation
 	 * (java.lang.String,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
@@ -459,250 +435,233 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 		return result;
 	}
 
-	/**
-	 * <p>
-	 * Invokes an operation defined in the model.
-	 * </p>
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param operationName
-	 *            The name of the operation which shall be invoked.
-	 * @param parameters
-	 *            The parameters of the operation which shall be invoked.
-	 * @return The result of the operation call as an {@link OclRoot}.
-	 * 
-	 * @throws NoSuchMethodException
-	 *             Thrown if the given method can not be found.
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isEqualTo(
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	protected OclRoot invokeModelOperation(String operationName,
-			OclRoot... parameters) throws NoSuchMethodException {
+	public OclBoolean isEqualTo(OclRoot anOclRoot) {
 
-		OclRoot result;
-		Method method;
+		OclBoolean result;
 
-		Class<?> paramTypes[];
-		Object paramValues[];
-
-		Class<?> operationType;
-		Object operationInstance;
-
-		Object invokedMethod;
-
-		method = null;
-
-		/* Eventually initialize the parameter arrays. */
-		if (parameters.length == 0) {
-			paramTypes = null;
-			paramValues = null;
+		/* Check if this OclRoot is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(getUndefinedreason());
 		}
 
+		/* Else check if the given oclRoot is undefined. */
+		else if (anOclRoot.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(anOclRoot.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
 		else {
-			paramTypes = new Class[parameters.length];
-			paramValues = new Object[parameters.length];
-		}
-
-		result = null;
-
-		operationType = null;
-		operationInstance = null;
-
-		/* Try to find a method to invoke. */
-		try {
-
-			List<OclRoot> parameterList;
-
-			int index;
-
-			/* Handle static operations. */
-			if (getAdaptee() instanceof Class) {
-				operationType = (Class<?>) getAdaptee();
-				operationInstance = null;
-			}
-
-			else {
-				operationType = getAdapteeClass();
-				operationInstance = getAdaptee();
-			}
-
-			parameterList = Arrays.asList(parameters);
-			index = 0;
-
-			/* Iterate over the parameters and initialize the arrays. */
-			for (OclRoot aParameter : parameterList) {
-
-				paramTypes[index] = aParameter.getAdapteeClass();
-				paramValues[index] = aParameter.getAdaptee();
-				index++;
-			}
-
-			method = this.findMethod(operationName, paramTypes, true);
-		}
-
-		catch (SecurityException e) {
-			e.printStackTrace();
-		}
-
-		catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-
-		method.setAccessible(true);
-
-		invokedMethod = null;
-
-		/* Try to invoke the found method. */
-		try {
-			invokedMethod = method.invoke(
-					operationType.cast(operationInstance), paramValues);
-		}
-
-		catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-
-		catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-
-		catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		/* Eventually cast result to OclRoot. */
-		if (invokedMethod instanceof OclRoot) {
-			result = (OclRoot) invokedMethod;
-		}
-
-		/* Eventually return void. */
-		else if (invokedMethod == null) {
-			result = JavaOclVoid.getInstance();
-		}
-
-		/* Eventually adapt the result to OclRoot. */
-		else {
-			result = (OclRoot) Platform.getAdapterManager().getAdapter(
-					invokedMethod, OclRoot.class);
+			result = JavaOclBoolean.getInstance(this.getAdaptee().equals(
+					anOclRoot.getAdaptee()));
 		}
 
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isNotEqualTo
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	public OclBoolean isNotEqualTo(OclRoot object2) {
+		return isEqualTo(object2).not();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isOclUndefined
+	 * ()
+	 */
+	public OclBoolean isOclUndefined() {
+		return JavaOclBoolean.getInstance(this.undefinedreason != null);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclAsType(
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 */
+	@SuppressWarnings("unchecked")
+	public OclRoot oclAsType(OclType typespec) {
+		return typespec.createInstance(this);
+	}
+
+	// has to be overwritten in OclInvalid
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsInvalid()
+	 */
+	public OclBoolean oclIsInvalid() {
+		return JavaOclBoolean.getInstance(false);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsNew()
+	 */
+	public OclBoolean oclIsNew() {
+		/*
+		 * The interpretation is done via interpreter. Thus this method returns
+		 * null.
+		 */
+
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsKindOf
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 */
+	public OclBoolean oclIsKindOf(OclType typespec) {
+
+		OclBoolean result;
+
+		/* Check if this oclRoot is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(getUndefinedreason());
+
+		}
+
+		/* Else compute the result. */
+		else {
+			result = JavaOclBoolean.getInstance(typespec.isOfKind(this)
+					.isTrue());
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsTypeOf
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 */
+	public OclBoolean oclIsTypeOf(OclType typespec) {
+
+		OclBoolean result;
+
+		/* Check if this oclRoot is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(getUndefinedreason());
+		} else {
+			result = JavaOclBoolean.getInstance(typespec.isOfType(this)
+					.isTrue());
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#setUndefinedreason
+	 * (java.lang.String)
+	 */
+	public void setUndefinedreason(String undefinedreason) {
+		this.undefinedreason = undefinedreason;
+	}
+
 	/**
 	 * <p>
-	 * Tries to invoke a library operation of a given operationName and an array
-	 * of parameters.
+	 * Adapts a given model instance property (as {@link Object}) to an
+	 * {@link OclRoot}.
 	 * </p>
 	 * 
-	 * @param operationName
-	 *            The operation name which shall be invoked.
-	 * @param parameters
-	 *            The {@link OclRoot} parameters of the operation which shall be
-	 *            invoked.
-	 * 
-	 * @return The result of the invoked operations as an {@link OclRoot}.
-	 * 
-	 * @throws NoSuchMethodException
-	 *             Thrown if the method can not be found.
+	 * @param property
+	 *            The property which shall be adapted.
+	 * @return The adapted property.
 	 */
-	public OclRoot invokeLibraryOperation(String operationName,
-			OclRoot... parameters) throws NoSuchMethodException {
+	protected OclRoot adaptProperty(Object property) {
 
 		OclRoot result;
-		Method method = null;
 
-		Class<?> paramTypes[];
-		Object paramValues[];
-
-		Class<?> operationType;
-		Object operationInstance;
-
-		Object invokedOperation;
-
-		result = null;
-		method = null;
-
-		operationType = null;
-		operationInstance = null;
-
-		/* Eventually initialize the parameter arrays. */
-		if (parameters.length == 0) {
-			paramTypes = new Class[0];
-			paramValues = new Object[0];
-		}
-
-		else {
-			paramTypes = new Class[parameters.length];
-			paramValues = new Object[parameters.length];
-		}
-
-		/* Try to find the operation. */
-		try {
-
-			List<OclRoot> parameterList;
-
-			int index;
-
-			operationType = this.getClass();
-
-			parameterList = Arrays.asList(parameters);
-			index = 0;
-
-			/* Iterate over the parameters and initialize the arrays. */
-			for (OclRoot aParameter : parameterList) {
-				paramTypes[index] = aParameter.getClass();
-				paramValues[index] = aParameter;
-				index++;
-			}
-
-			method = this.findMethod(operationName, paramTypes, false);
-
-			operationInstance = this;
-		}
-
-		catch (SecurityException e) {
-			e.printStackTrace();
-		}
-
-		catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-
-		invokedOperation = null;
-
-		/* Enable access to the found method. */
-		method.setAccessible(true);
-
-		/* Try to invoke the operation. */
-		try {
-			invokedOperation = method.invoke(operationType
-					.cast(operationInstance), paramValues);
-		}
-
-		catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-
-		catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-
-		catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		/* Eventually cast result to OclRoot. */
-		if (invokedOperation instanceof OclRoot) {
-			result = (OclRoot) invokedOperation;
-		}
-
-		/* Eventually return void. */
-		else if (invokedOperation == null) {
+		if (property == null) {
 			result = JavaOclVoid.getInstance();
 		}
 
-		/* Eventually adapt the result to OclRoot. */
-		else {
+		else if (property instanceof Integer) {
 			result = (OclRoot) Platform.getAdapterManager().getAdapter(
-					invokedOperation, OclRoot.class);
+					property, OclInteger.class);
+		}
+
+		else if (property instanceof Float) {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					property, OclReal.class);
+		}
+
+		else if (property instanceof Boolean) {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					property, OclBoolean.class);
+		}
+
+		else if (property instanceof String) {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					property, OclString.class);
+		}
+
+		else if (property.getClass().isEnum()) {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					property, OclEnumLiteral.class);
+		}
+
+		/*
+		 * If the property is a collection, each element must be adapted for
+		 * itself.
+		 */
+		else if (property instanceof Collection) {
+
+			Collection<?> aCollection;
+			List<OclRoot> propertyList;
+
+			aCollection = (Collection<?>) property;
+			propertyList = new ArrayList<OclRoot>();
+
+			for (Object anElement : aCollection) {
+
+				OclRoot adaptedElement;
+
+				/* Adapt anElement to OclRoot. */
+				adaptedElement = this.adaptProperty(anElement);
+
+				propertyList.add(adaptedElement);
+			}
+
+			result = new JavaOclBag<OclRoot>(propertyList);
+		}
+
+		else if (property instanceof OclRoot) {
+			result = (OclRoot) property;
+		}
+
+		else {
+			result = new JavaOclRoot(property);
 		}
 
 		return result;
@@ -716,6 +675,7 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 * 
 	 * @param methodName
 	 *            The name of the method to search for.
+	 * @param sourceType The source type on which the operation shall be invoked.
 	 * @param parameterTypes
 	 *            An Array representing the number and types of parameters to
 	 *            look for in the method's signature. A null array is treated as
@@ -729,8 +689,9 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 *             call is ambiguous based on the parameter types, or if
 	 *             methodName is null.
 	 */
-	protected Method findMethod(String methodName, Class<?>[] parameterTypes,
-			boolean isModelMethod) throws NoSuchMethodException {
+	protected Method findMethod(String methodName, Class<?> sourceType,
+			Class<?>[] parameterTypes, boolean isModelMethod)
+			throws NoSuchMethodException {
 
 		Method result;
 		Method[] allMethods;
@@ -738,11 +699,11 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 		try {
 
 			if (isModelMethod) {
-				allMethods = this.getAdapteeClass().getMethods();
+				allMethods = sourceType.getMethods();
 			}
 
 			else {
-				allMethods = this.getClass().getMethods();
+				allMethods = sourceType.getMethods();
 			}
 		}
 
@@ -753,6 +714,11 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 		}
 
 		result = null;
+
+		if (parameterTypes == null) {
+			parameterTypes = new Class<?>[0];
+		}
+		// no else.
 
 		/* Iterate through all methods. */
 		for (int index = 0; index < allMethods.length; index++) {
@@ -814,162 +780,294 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 		return result;
 	}
 
-	// FIXME Continue refactoring here.
+	/**
+	 * <p>
+	 * Tries to invoke a library operation of a given operationName and an array
+	 * of parameters.
+	 * </p>
+	 * 
+	 * @param operationName
+	 *            The operation name which shall be invoked.
+	 * @param parameters
+	 *            The {@link OclRoot} parameters of the operation which shall be
+	 *            invoked.
+	 * 
+	 * @return The result of the invoked operations as an {@link OclRoot}.
+	 * 
+	 * @throws NoSuchMethodException
+	 *             Thrown if the method can not be found.
+	 */
+	public OclRoot invokeLibraryOperation(String operationName,
+			OclRoot... parameters) throws NoSuchMethodException {
+
+		OclRoot result;
+		Method method = null;
+
+		Class<?> paramTypes[];
+		Object paramValues[];
+
+		Class<?> sourceType;
+		Object operationInstance;
+
+		Object invokedOperation;
+
+		result = null;
+		method = null;
+
+		sourceType = null;
+		operationInstance = null;
+
+		/* Eventually initialize the parameter arrays. */
+		if (parameters.length == 0) {
+			paramTypes = new Class[0];
+			paramValues = new Object[0];
+		}
+
+		else {
+			paramTypes = new Class[parameters.length];
+			paramValues = new Object[parameters.length];
+		}
+
+		/* Try to find the operation. */
+		try {
+
+			List<OclRoot> parameterList;
+
+			int index;
+
+			sourceType = this.getClass();
+
+			parameterList = Arrays.asList(parameters);
+			index = 0;
+
+			/* Iterate over the parameters and initialize the arrays. */
+			for (OclRoot aParameter : parameterList) {
+				paramTypes[index] = aParameter.getClass();
+				paramValues[index] = aParameter;
+				index++;
+			}
+
+			method = this.findMethod(operationName, sourceType, paramTypes, false);
+
+			operationInstance = this;
+		}
+
+		catch (SecurityException e) {
+			e.printStackTrace();
+		}
+
+		catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+
+		invokedOperation = null;
+
+		/* Enable access to the found method. */
+		method.setAccessible(true);
+
+		/* Try to invoke the operation. */
+		try {
+			invokedOperation = method.invoke(sourceType
+					.cast(operationInstance), paramValues);
+		}
+
+		catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		/* Eventually cast result to OclRoot. */
+		if (invokedOperation instanceof OclRoot) {
+			result = (OclRoot) invokedOperation;
+		}
+
+		/* Eventually return void. */
+		else if (invokedOperation == null) {
+			result = JavaOclVoid.getInstance();
+		}
+
+		/* Eventually adapt the result to OclRoot. */
+		else {
+			result = (OclRoot) Platform.getAdapterManager().getAdapter(
+					invokedOperation, OclRoot.class);
+		}
+
+		return result;
+	}
 
 	/**
 	 * <p>
-	 * Returns allInstances() of this type of {@link JavaOclRoot}.
+	 * Invokes an operation defined in the model.
 	 * </p>
 	 * 
-	 * <p>
-	 * <strong>Must be implemented by sub types or will return null!</strong>
-	 * </p>
+	 * @param operationName
+	 *            The name of the operation which shall be invoked.
+	 * @param parameters
+	 *            The parameters of the operation which shall be invoked.
+	 * @return The result of the operation call as an {@link OclRoot}.
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#allInstances()
+	 * @throws NoSuchMethodException
+	 *             Thrown if the given method can not be found.
 	 */
-	public <T extends OclRoot> OclSet<T> allInstances() {
-		return null;
-	}
+	protected OclRoot invokeModelOperation(String operationName,
+			OclRoot... parameters) throws NoSuchMethodException {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isEqualTo(
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public OclBoolean isEqualTo(OclRoot object2) {
-		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
+		OclRoot result;
+		Method method;
+
+		Class<?> paramTypes[];
+		Object paramValues[];
+
+		Class<?> sourceType;
+		Object sourceInstance;
+
+		Object adaptedResult;
+
+		method = null;
+
+		/* Eventually initialize the parameter arrays. */
+		if (parameters.length == 0) {
+			paramTypes = null;
+			paramValues = null;
 		}
-		if (object2.isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(object2.getUndefinedreason());
-			return ret;
+
+		else {
+			paramTypes = new Class[parameters.length];
+			paramValues = new Object[parameters.length];
 		}
-		return JavaOclBoolean.getInstance(getAdaptee().equals(
-				object2.getAdaptee()));
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isNotEqualTo
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public OclBoolean isNotEqualTo(OclRoot object2) {
-		return isEqualTo(object2).not();
-	}
+		result = null;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isOclUndefined
-	 * ()
-	 */
-	public OclBoolean isOclUndefined() {
-		return JavaOclBoolean.getInstance(this.undefinedreason != null);
-	}
+		sourceType = null;
+		sourceInstance = null;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclAsType(
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
-	 */
-	public OclRoot oclAsType(OclType typespec) {
-		return typespec.createInstance(this);
-	}
+		/* Try to find a method to invoke. */
+		try {
 
-	// has to be overwritten in OclInvalid
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsInvalid()
-	 */
-	public OclBoolean oclIsInvalid() {
-		return JavaOclBoolean.getInstance(false);
-	}
+			List<OclRoot> parameterList;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsKindOf
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
-	 */
-	public OclBoolean oclIsKindOf(OclType typespec) {
-		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
-		} else
-			return JavaOclBoolean.getInstance(typespec.isOfKind(this).isTrue());
-	}
+			int index;
 
-	/**
-	 * Has to be done via interpreter
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsNew()
-	 */
-	public OclBoolean oclIsNew() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+			/* Handle static operations. */
+			if (getAdaptee() instanceof Class) {
+				sourceType = (Class<?>) getAdaptee();
+				sourceInstance = null;
+			}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsTypeOf
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
-	 */
-	public OclBoolean oclIsTypeOf(OclType typespec) {
-		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
-		} else
-			return JavaOclBoolean.getInstance(typespec.isOfType(this).isTrue());
-	}
+			else {
+				sourceType = getAdapteeClass();
+				sourceInstance = getAdaptee();
+			}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#setUndefinedreason
-	 * (java.lang.String)
-	 */
-	public void setUndefinedreason(String undefinedreason) {
-		this.undefinedreason = undefinedreason;
-	}
+			parameterList = Arrays.asList(parameters);
+			index = 0;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#getUndefinedreason
-	 * ()
-	 */
-	public String getUndefinedreason() {
-		return undefinedreason;
-	}
+			/* Iterate over the parameters and initialize the arrays. */
+			for (OclRoot aParameter : parameterList) {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#asSet()
-	 */
-	public <T extends OclRoot> OclSet<T> asSet() {
-		Set<T> col = new HashSet<T>(Arrays.asList((T) this));
-		OclSet<T> ret = new JavaOclSet<T>(col);
-		return ret;
+				paramTypes[index] = aParameter.getAdapteeClass();
+				paramValues[index] = aParameter.getAdaptee();
+				index++;
+			}
+
+			method = this.findMethod(operationName, sourceType, paramTypes,
+					true);
+		}
+
+		catch (SecurityException e) {
+			e.printStackTrace();
+		}
+
+		catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+
+		method.setAccessible(true);
+
+		adaptedResult = null;
+
+		/* Try to invoke the found method. */
+		try {
+			adaptedResult = method.invoke(sourceType.cast(sourceInstance),
+					paramValues);
+		}
+
+		catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		/* Eventually cast result to OclRoot. */
+		if (adaptedResult instanceof OclRoot) {
+			result = (OclRoot) adaptedResult;
+		}
+
+		/* Eventually return void. */
+		else if (adaptedResult == null) {
+			result = JavaOclVoid.getInstance();
+		}
+
+		/* Eventually adapt the result to OclRoot. */
+		else {
+
+			/* Eventually adapt the result to all possible OCL types. */
+
+			if (adaptedResult instanceof Boolean) {
+				result = (OclRoot) Platform.getAdapterManager().getAdapter(
+						adaptedResult, OclBoolean.class);
+			}
+
+			else if (adaptedResult instanceof Integer) {
+				result = (OclRoot) Platform.getAdapterManager().getAdapter(
+						adaptedResult, OclInteger.class);
+			}
+
+			else if (adaptedResult instanceof Float) {
+				result = (OclRoot) Platform.getAdapterManager().getAdapter(
+						adaptedResult, OclReal.class);
+			}
+
+			else if (adaptedResult instanceof String) {
+				result = (OclRoot) Platform.getAdapterManager().getAdapter(
+						adaptedResult, OclString.class);
+			}
+
+			else if (adaptedResult instanceof Enum) {
+				result = (OclRoot) Platform.getAdapterManager().getAdapter(
+						adaptedResult, OclEnumType.class);
+			}
+
+			else if (adaptedResult instanceof List) {
+				result = (OclRoot) Platform.getAdapterManager().getAdapter(
+						adaptedResult, OclBag.class);
+			}
+
+			else if (adaptedResult instanceof Set) {
+				result = (OclRoot) Platform.getAdapterManager().getAdapter(
+						adaptedResult, OclSet.class);
+			}
+
+			else {
+				result = (OclRoot) Platform.getAdapterManager().getAdapter(
+						adaptedResult, OclRoot.class);
+			}
+		}
+
+		return result;
 	}
 
 	/*
@@ -978,19 +1076,22 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return this.getClass().getSimpleName()
-				+ "("
-				+ (getAdaptee() != null ? getAdaptee().toString()
-						: (undefinedreason != null ? "undefined: "
-								+ undefinedreason : "")) + ")";
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#getType()
-	 */
-	public OclType getType() {
-		return null;
+		String result;
+
+		result = this.getClass().getSimpleName() + "(";
+
+		if (this.getAdaptee() != null) {
+			result += this.getAdaptee().toString();
+		}
+
+		else if (this.undefinedreason != null) {
+			result += "undefined: " + this.undefinedreason;
+		}
+		// no else.
+
+		result += ")";
+
+		return result;
 	}
 }

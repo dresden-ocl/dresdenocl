@@ -30,8 +30,6 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
@@ -40,18 +38,22 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 
 /**
- * 
+ * <p>
+ * Provides an implementation of {@link OclTuple} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclTuple extends JavaOclAny implements OclTuple {
 
 	/**
-	 * Instantiates a new java ocl tuple.
+	 * <p>
+	 * Instantiates a new {@link JavaOclTuple}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted model instance object of this {@link JavaOclTuple}
+	 *            .
 	 */
 	public JavaOclTuple(Map<String, OclRoot> adaptee) {
 		super(adaptee);
@@ -60,49 +62,78 @@ public class JavaOclTuple extends JavaOclAny implements OclTuple {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	@Override
-	public OclBoolean isEqualTo(OclRoot o) {
-		if (!(o instanceof OclTuple))
-			return JavaOclBoolean.getInstance(false);
-		OclTuple other = (OclTuple) o;
-		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
+	public OclBoolean isEqualTo(OclRoot anOclRoot) {
+
+		OclBoolean result;
+
+		/* Check if this tuple is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(getUndefinedreason());
 		}
-		if (other.isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(other.getUndefinedreason());
-			return ret;
+
+		/* Else check if the given oclRoot is undefined. */
+		else if (anOclRoot.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(anOclRoot.getUndefinedreason());
 		}
-		return JavaOclBoolean.getInstance(getAdaptee().equals(
-				other.getAdaptee()));
+
+		/* Else compute the result. */
+		else {
+			if (!(anOclRoot instanceof OclTuple)) {
+				result = JavaOclBoolean.getInstance(false);
+			}
+
+			else {
+				OclTuple aTuple;
+
+				aTuple = (OclTuple) anOclRoot;
+				
+				result = JavaOclBoolean.getInstance(getAdaptee().equals(
+						aTuple.getAdaptee()));
+			}
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#getPropertyValue(java.lang.String)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #getPropertyValue(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public OclRoot getPropertyValue(String pathname) {
-		Iterator<Map<String, OclRoot>> it = ((List<Map<String, OclRoot>>) getAdaptee())
-				.iterator();
-		OclRoot ret = null;
-		while (it.hasNext() && ret == null) {
-			ret = it.next().get(pathname);
+
+		OclRoot result;
+		Map<String, OclRoot> adaptedMap;
+
+		adaptedMap = (Map<String, OclRoot>) this.getAdaptee();
+
+		result = adaptedMap.get(pathname);
+
+		if (result == null) {
+			result = JavaOclVoid.getInstance();
 		}
-		if (ret == null)
-			ret = JavaOclVoid.getInstance();
-		return ret;
+		// no else.
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {

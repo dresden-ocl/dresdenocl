@@ -33,20 +33,23 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
 
 /**
- * 
+ * <p>
+ * This class implements the OCL type {@link OclEnumType} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclEnumType extends JavaOclType implements OclEnumType {
 
 	/**
-	 * Instantiates a new java ocl enum type.
+	 * <p>
+	 * Instantiates a new {@link JavaOclEnumType}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted element of this {@link JavaOclEnumType}.
 	 */
-	public JavaOclEnumType(Class adaptee) {
+	public JavaOclEnumType(Class<?> adaptee) {
 		super(adaptee);
 	}
 }

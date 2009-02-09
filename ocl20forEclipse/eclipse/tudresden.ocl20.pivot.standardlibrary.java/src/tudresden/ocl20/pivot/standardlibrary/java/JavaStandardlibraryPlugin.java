@@ -33,35 +33,55 @@ package tudresden.ocl20.pivot.standardlibrary.java;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
+import tudresden.ocl20.logging.LoggingPlugin;
+
 /**
- * The activator class controls the plug-in life cycle
+ * <p>
+ * The activator class controls the plug-in life cycle.
+ * </p>
+ * 
+ * <p>
+ * This plug-in provides the OCL standard library which implements the OCL types
+ * in Java.
+ * </p>
+ * 
+ * @author Ronny Brandt.
  */
 public class JavaStandardlibraryPlugin extends Plugin {
 
-	// The plug-in ID
+	/** The plug-in ID. */
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.standardlibrary.java";
 
-	// The shared instance
+	/** The shared instance. */
 	private static JavaStandardlibraryPlugin plugin;
-		
+
 	/**
-	 * The constructor
+	 * <p>
+	 * The constructor.
+	 * </p>
 	 */
 	public JavaStandardlibraryPlugin() {
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+
+		/* Starts the logger for this plug-in. */
+		LoggingPlugin.configureDefaultLogging(plugin);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
@@ -69,8 +89,10 @@ public class JavaStandardlibraryPlugin extends Plugin {
 	}
 
 	/**
-	 * Returns the shared instance
-	 *
+	 * <p>
+	 * Returns the shared instance.
+	 * </p>
+	 * 
 	 * @return the shared instance
 	 */
 	public static JavaStandardlibraryPlugin getDefault() {

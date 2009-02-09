@@ -45,133 +45,247 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 
 /**
- * 
+ * <p>
+ * This class implements the OCL type {@link OclCollectionType} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclCollectionType extends JavaOclType implements
 		OclCollectionType {
 
-	// The collection kind
+	/** The kind of this {@link OclCollectionType}. */
 	private OclCollectionTypeKind kind;
 
-	// The element type
+	/** The generic type of this {@link OclCollectionType}. */
 	private OclType elementType;
 
 	/**
-	 * Instantiates a new java ocl collection type.
+	 * <p>
+	 * Instantiates a new {@link JavaOclCollectionType}.
+	 * </p>
 	 * 
 	 * @param kind
-	 *            the kind
+	 *            The kind of this {@link OclCollectionType}.
 	 * @param elementType
-	 *            the element type
+	 *            The generic type of this {@link OclCollectionType}.
 	 */
 	public JavaOclCollectionType(OclCollectionTypeKind kind, OclType elementType) {
 		super(Collection.class, kind + "(" + elementType.getName() + ")");
+
 		this.kind = kind;
 		this.elementType = elementType;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType
+	 * #createInstance
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public OclRoot createInstance(OclRoot anOclRoot) {
+
+		OclRoot result;
+
+		/* Check which kind of OclCollectionType shall be returned. */
+		if (isOfKind(anOclRoot).isTrue()) {
+
+			if (this.kind == OclCollectionTypeKind.BAG) {
+
+				List<OclRoot> adaptedList;
+
+				adaptedList = new ArrayList<OclRoot>(
+						(Collection<OclRoot>) anOclRoot.getAdaptee());
+
+				result = new JavaOclBag(adaptedList);
+			}
+
+			else if (this.kind == OclCollectionTypeKind.ORDEREDSET) {
+
+				List<OclRoot> adaptedList;
+
+				adaptedList = new ArrayList<OclRoot>(
+						(Collection<OclRoot>) anOclRoot.getAdaptee());
+
+				result = new JavaOclOrderedSet(adaptedList);
+			}
+
+			else if (this.kind == OclCollectionTypeKind.SEQUENCE) {
+
+				List<OclRoot> adaptedList;
+
+				adaptedList = new ArrayList<OclRoot>(
+						(Collection<OclRoot>) anOclRoot.getAdaptee());
+
+				result = new JavaOclSequence(adaptedList);
+			}
+
+			else if (this.kind == OclCollectionTypeKind.SET) {
+				Set<OclRoot> adaptedSet;
+
+				adaptedSet = new HashSet<OclRoot>(
+						(Collection<OclRoot>) anOclRoot.getAdaptee());
+
+				result = new JavaOclSet(adaptedSet);
+			}
+
+			else {
+				result = JavaOclVoid.getInstance();
+			}
+		}
+
+		else {
+			result = JavaOclVoid.getInstance();
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType
+	 * #isOfKind(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public OclBoolean isOfKind(OclRoot anOclRoot) {
+
+		OclBoolean result;
+
+		result = JavaOclBoolean.getInstance(false);
+
+		/* Check if the given OclRoot is a Collection. */
+		if (anOclRoot instanceof OclCollection) {
+			OclCollection<OclRoot> aCollection;
+			OclCollectionTypeKind aKind;
+
+			aCollection = (OclCollection<OclRoot>) anOclRoot;
+			aKind = ((JavaOclCollectionType) aCollection.getType()).kind;
+
+			/* Check if the kinds are the same. */
+			if (this.kind.equals(aKind)
+					|| this.kind.equals(OclCollectionTypeKind.COLLECTION)) {
+
+				OclIterator<OclRoot> aCollectionIt;
+
+				aCollectionIt = aCollection.getIterator();
+
+				result = JavaOclBoolean.getInstance(true);
+
+				/*
+				 * Iterate over the collection and check if all elements have
+				 * the right type.
+				 */
+				while (aCollectionIt.hasNext().isTrue()) {
+					if (!elementType.isOfKind(aCollectionIt.next()).isTrue()) {
+						result = JavaOclBoolean.getInstance(false);
+						break;
+					}
+				}
+			}
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType
+	 * #isOfType(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public OclBoolean isOfType(OclRoot anOclRoot) {
+
+		OclBoolean result;
+		boolean booleanResult;
+
+		booleanResult = false;
+
+		/* Check if the given OclRoot is a Collection. */
+		if (anOclRoot instanceof OclCollection) {
+			OclCollection<OclRoot> aCollection;
+			OclCollectionTypeKind aKind;
+
+			aCollection = (OclCollection<OclRoot>) anOclRoot;
+			aKind = ((JavaOclCollectionType) aCollection.getType()).kind;
+
+			/* Check if the kinds are the same. */
+			if (this.kind.equals(aKind)
+					|| this.kind.equals(OclCollectionTypeKind.COLLECTION)) {
+
+				OclIterator<OclRoot> aCollectionIt = aCollection.getIterator();
+
+				booleanResult = true;
+
+				/*
+				 * Iterate over the collection and check if all elements have
+				 * the right kind.
+				 */
+				while (aCollectionIt.hasNext().isTrue()) {
+					if (!elementType.isOfKind(aCollectionIt.next()).isTrue()) {
+						booleanResult = false;
+						break;
+					}
+				}
+
+				/* Also check, if all elements have the right type. */
+				if (booleanResult) {
+
+					aCollectionIt = aCollection.getIterator();
+
+					while (aCollectionIt.hasNext().isTrue()) {
+						if (!elementType.isOfType(aCollectionIt.next())
+								.isTrue()) {
+							booleanResult = false;
+						}
+						// break;
+					}
+				}
+				// no else.
+			}
+			// no else.
+		}
+		// no else.
+
+		result = JavaOclBoolean.getInstance(booleanResult);
+
+		return result;
+	}
+
 	/**
-	 * Gets the type.
+	 * <p>
+	 * Gets the {@link OclType} of this {@link OclCollectionType}.
+	 * </p>
 	 * 
 	 * @param kind
-	 *            the kind
+	 *            The kind of this {@link OclCollectionType}.
 	 * @param elementType
-	 *            the element type
+	 *            The generic type of this {@link OclCollectionType}.
 	 * 
-	 * @return the type
+	 * @return The {@link OclType} of this {@link OclCollectionType}.</p>
 	 */
 	public static OclType getType(OclCollectionTypeKind kind,
 			OclType elementType) {
-		OclType type = getType(kind + "(" + elementType.getName() + ")");
-		if (type == null)
-			type = new JavaOclCollectionType(kind, elementType);
-		return type;
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType#isOfType(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	@Override
-	public OclBoolean isOfType(OclRoot o) {
-		if (o instanceof OclCollection) {
-			OclCollection<OclRoot> col = (OclCollection<OclRoot>) o;
-			OclCollectionTypeKind oKind = ((JavaOclCollectionType) col
-					.getType()).kind;
-			if (kind.equals(oKind)
-					|| kind.equals(OclCollectionTypeKind.COLLECTION)) {
-				OclIterator<OclRoot> it = col.getIterator();
-				while (it.hasNext().isTrue()) {
-					if (!elementType.isOfKind(it.next()).isTrue())
-						return JavaOclBoolean.getInstance(false);
-				}
-				OclIterator<OclRoot> it2 = col.getIterator();
-				while (it2.hasNext().isTrue()) {
-					if (elementType.isOfType(it2.next()).isTrue())
-						return JavaOclBoolean.getInstance(true);
-				}
-			}
-		}
-		return JavaOclBoolean.getInstance(false);
-	}
+		OclType result;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType#isOfKind(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	@Override
-	public OclBoolean isOfKind(OclRoot o) {
-		if (o instanceof OclCollection) {
-			OclCollection<OclRoot> col = (OclCollection<OclRoot>) o;
-			OclCollectionTypeKind oKind = ((JavaOclCollectionType) col
-					.getType()).kind;
-			if (kind.equals(oKind)
-					|| kind.equals(OclCollectionTypeKind.COLLECTION)) {
-				OclIterator<OclRoot> it = col.getIterator();
-				while (it.hasNext().isTrue()) {
-					if (!elementType.isOfKind(it.next()).isTrue())
-						return JavaOclBoolean.getInstance(false);
-				}
-				return JavaOclBoolean.getInstance(true);
-			}
-		}
-		return JavaOclBoolean.getInstance(false);
-	}
+		result = getType(kind + "(" + elementType.getName() + ")");
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType#createInstance(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	@Override
-	public OclRoot createInstance(OclRoot o) {
-		if (isOfKind(o).isTrue()) {
-			if (this.kind == OclCollectionTypeKind.BAG) {
-				List<OclRoot> l = new ArrayList<OclRoot>(
-						(Collection<OclRoot>) o.getAdaptee());
-				return new JavaOclBag(l);
-			}
-			if (this.kind == OclCollectionTypeKind.ORDEREDSET) {
-				List<OclRoot> l = new ArrayList<OclRoot>(
-						(Collection<OclRoot>) o.getAdaptee());
-				return new JavaOclOrderedSet(l);
-			}
-			if (this.kind == OclCollectionTypeKind.SEQUENCE) {
-				List<OclRoot> l = new ArrayList<OclRoot>(
-						(Collection<OclRoot>) o.getAdaptee());
-				return new JavaOclSequence(l);
-			}
-			if (this.kind == OclCollectionTypeKind.SET) {
-				Set<OclRoot> s = new HashSet<OclRoot>((Collection<OclRoot>) o
-						.getAdaptee());
-				return new JavaOclSet(s);
-			}
+		if (result == null) {
+			result = new JavaOclCollectionType(kind, elementType);
 		}
-		return JavaOclVoid.getInstance();
+		// no else.
+
+		return result;
 	}
 }

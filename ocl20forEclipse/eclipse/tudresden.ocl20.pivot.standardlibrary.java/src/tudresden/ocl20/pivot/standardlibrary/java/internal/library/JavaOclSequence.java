@@ -38,7 +38,6 @@ import java.util.List;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
@@ -46,22 +45,27 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 
 /**
- * 
+ * <p>
+ * Provides an implementation of {@link OclSequence} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
+@SuppressWarnings("unchecked")
 public class JavaOclSequence<T extends OclRoot> extends
 		JavaOclSortedCollection<T> implements OclSequence<T> {
 
-	/** The type. */
+	/** The type of this {@link JavaOclSequence}. */
 	private OclType type;
 
 	/**
-	 * Instantiates a new java ocl sequence.
+	 * <p>
+	 * Instantiates a {@link JavaOclSequence}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted model instance object of this
+	 *            {@link JavaOclSequence}.
 	 */
 	public JavaOclSequence(List<T> adaptee) {
 		super(adaptee);
@@ -70,232 +74,150 @@ public class JavaOclSequence<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#insertAt(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
-	 *      java.lang.Object)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#append
+	 * (java.lang.Object)
 	 */
-	public OclSequence<T> insertAt(OclInteger index, T obj) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (obj.isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(obj.getUndefinedreason());
-			return ret;
-		}
-		if (index.isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(index.getUndefinedreason());
-			return ret;
-		}
-		if (!(getAdaptee() instanceof ArrayList)) {
-			ArrayList<T> list = new ArrayList<T>((Collection<T>) getAdaptee());
-			list.add(((Number) index.getAdaptee()).intValue() - 1, obj);
-			return new JavaOclSequence<T>(list);
-		} else {
-			((List<T>) getAdaptee()).add(((Number) index.getAdaptee())
-					.intValue() - 1, obj);
-			return this;
-		}
-	}
+	public OclSequence<T> append(T anElement) {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#append(java.lang.Object)
-	 */
-	public OclSequence<T> append(T obj) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (obj.isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(obj.getUndefinedreason());
-			return ret;
-		}
-		if (!(getAdaptee() instanceof ArrayList)) {
-			ArrayList<T> list = new ArrayList<T>((Collection<T>) getAdaptee());
-			list.add(obj);
-			return new JavaOclSequence<T>(list);
-		} else {
-			((List) getAdaptee()).add(obj);
-			return this;
-		}
-	}
+		OclSequence<T> result;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#prepend(java.lang.Object)
-	 */
-	public OclSequence<T> prepend(T obj) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (obj.isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(obj.getUndefinedreason());
-			return ret;
+		/* Check if this collection is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
 		}
-		List<T> list = null;
-		if (!(getAdaptee() instanceof ArrayList)) {
-			list = new ArrayList<T>(((Collection<T>) getAdaptee()).size() + 1);
-			list.add(obj);
-			list.addAll((Collection<T>) getAdaptee());
-			return new JavaOclSequence<T>(list);
-		} else {
-			((List<T>) getAdaptee()).add(0, obj);
-			return this;
-		}
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection#isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot object2) {
-		if (!(object2 instanceof OclSequence)) {
-			System.out
-					.println("OclSequence isEqualTo() is called with a non-OclSequence parameter");
-			return JavaOclBoolean.getInstance(false);
+		/* Else check if the given element is undefined. */
+		else if (anElement.isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(anElement.getUndefinedreason());
 		}
-		OclSequence other = (OclSequence) object2;
-		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
-		}
-		if (other.isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(other.getUndefinedreason());
-			return ret;
-		}
-		Iterator i1 = ((Collection) this.getAdaptee()).iterator();
-		Iterator i2 = ((Collection) other.getAdaptee()).iterator();
-		while (i1.hasNext() && i2.hasNext()) {
-			if (!i1.next().equals(i2.next())) {
-				return JavaOclBoolean.getInstance(false);
+
+		/* Else compute the result. */
+		else {
+			if (!(getAdaptee() instanceof ArrayList)) {
+				ArrayList<T> resultList;
+
+				resultList = new ArrayList<T>((Collection<T>) getAdaptee());
+				resultList.add(anElement);
+
+				result = new JavaOclSequence<T>(resultList);
+			}
+
+			else {
+				((List<T>) this.getAdaptee()).add(anElement);
+				result = this;
 			}
 		}
-		if (i1.hasNext() || i2.hasNext())
-			return JavaOclBoolean.getInstance(false);
-		else
-			return JavaOclBoolean.getInstance(true);
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#subSequence(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
-	 */
-	public OclSequence<T> subSequence(OclInteger lower, OclInteger upper) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (lower.isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(lower.getUndefinedreason());
-			return ret;
-		}
-		if (upper.isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(upper.getUndefinedreason());
-			return ret;
-		}
-		try {
-			List<T> oldList;
-			if (!(getAdaptee() instanceof List))
-				oldList = new ArrayList<T>((Collection<T>) getAdaptee());
-			else
-				oldList = (List<T>) getAdaptee();
-			List<T> newList = oldList.subList(((Number) lower.getAdaptee())
-					.intValue() - 1, ((Number) upper.getAdaptee()).intValue());
-			return new JavaOclSequence<T>(new ArrayList<T>(newList));
-		} catch (IndexOutOfBoundsException e) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason("illegal index in OclSequence sustring("
-					+ ((Number) lower.getAdaptee()).intValue() + ", "
-					+ ((Number) upper.getAdaptee()).intValue() + ")");
-			return ret;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#excluding(java.lang.Object)
-	 */
-	public OclSequence<T> excluding(T object) {
-		if (isOclUndefined().isTrue())
-			return this;
-		if (object.isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(object.getUndefinedreason());
-			return ret;
-		}
-		if (!(getAdaptee() instanceof ArrayList)) {
-			ArrayList<T> list = new ArrayList<T>((Collection<T>) getAdaptee());
-			while (list.remove(object))
-				;
-			return new JavaOclSequence<T>(list);
-		} else {
-			while (((List<T>) getAdaptee()).remove(object))
-				;
-			return this;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet)
-	 */
-	public OclSequence<T> union(OclOrderedSet<T> o) {
-		if (isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
-		}
-		if (o.isOclUndefined().isTrue()) {
-			OclSequence<T> ret = new JavaOclSequence<T>(null);
-			ret.setUndefinedreason(o.getUndefinedreason());
-			return ret;
-		}
-		ArrayList<T> list = new ArrayList<T>((List<T>) getAdaptee());
-		list.addAll((Collection<T>) o.getAdaptee());
-		return new JavaOclSequence<T>(list);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
-	 */
-	public <T2 extends OclRoot> OclSequence<T2> flatten() {
-		if (isOclUndefined().isTrue()) {
-			OclSequence<T2> ret = new JavaOclSequence<T2>(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
-		}
-		OclIterator<T> it = getIterator();
-		OclSequence<T2> result = new JavaOclSequence<T2>(new ArrayList<T2>());
-		while (it.hasNext().isTrue()) {
-			T temp = it.next();
-			if (!(temp instanceof OclCollection))
-				return new JavaOclSequence<T2>((List) getAdaptee());
-			if (temp instanceof OclSequence)
-				result = result.union((OclSequence<T2>) temp);
-			else if (temp instanceof OclOrderedSet)
-				result = result.union((OclOrderedSet<T2>) temp);
-			else
-				result = result.union(new JavaOclSequence<T2>(
-						new ArrayList<T2>((Collection<T2>) temp.getAdaptee())));
-		}
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#including(java.lang.Object)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#excluding
+	 * (java.lang.Object)
+	 */
+	public OclSequence<T> excluding(T anElement) {
+		OclSequence<T> result;
+
+		/* Check if this collection is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given element is undefined. */
+		else if (anElement.isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(anElement.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			List<T> resultList;
+
+			if (!(getAdaptee() instanceof ArrayList)) {
+				resultList = new ArrayList<T>((Collection<T>) getAdaptee());
+			}
+
+			else {
+				resultList = (List<T>) this.getAdaptee();
+			}
+
+			while (resultList.remove(anElement)) {
+				/* Remove all occurences of an element. */
+			}
+
+			result = new JavaOclSequence<T>(resultList);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten
+	 * ()
+	 */
+	public <T2 extends OclRoot> OclSequence<T2> flatten() {
+
+		OclSequence<T2> result;
+
+		/* Check if this sequence is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T2>(null);
+			result.setUndefinedreason(getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			result = new JavaOclSequence<T2>(new ArrayList<T2>());
+
+			/* Iterate over this sequence. */
+			for (T anElement : (Collection<T>) this.getAdaptee()) {
+
+				/* If the element is a collection create a new result. */
+				if (!(anElement instanceof OclCollection)) {
+					result = new JavaOclSequence<T2>((List<T2>) this
+							.getAdaptee());
+				}
+
+				/* Else If the element is a sequence, unite it with the result. */
+				else if (anElement instanceof OclSequence) {
+					result = result.union((OclSequence<T2>) anElement);
+				}
+
+				/* Else If the element is a set, unite it with the result. */
+				else if (anElement instanceof OclOrderedSet) {
+					result = result.union((OclOrderedSet<T2>) anElement);
+				}
+
+				/*
+				 * Else convert the element to a list and unite it with the
+				 * result.
+				 */
+				else {
+					result = result.union(new JavaOclSequence<T2>(
+							new ArrayList<T2>((Collection<T2>) anElement
+									.getAdaptee())));
+				}
+			}
+			return result;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#including
+	 * (java.lang.Object)
 	 */
 	public OclSequence<T> including(T object) {
 		return append(object);
@@ -304,17 +226,307 @@ public class JavaOclSequence<T extends OclRoot> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#insertAt
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
+	 * java.lang.Object)
+	 */
+	public OclSequence<T> insertAt(OclInteger index, T anElement) {
+
+		OclSequence<T> result;
+
+		/* Check if this collection is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given element is undefined. */
+		else if (anElement.isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(anElement.getUndefinedreason());
+		}
+
+		/* Else check if the given index is undefined. */
+		else if (index.isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(index.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			int intIndex;
+
+			intIndex = ((Number) index.getAdaptee()).intValue();
+
+			if (!(getAdaptee() instanceof ArrayList)) {
+				ArrayList<T> resultList;
+
+				resultList = new ArrayList<T>((Collection<T>) getAdaptee());
+				resultList.add(intIndex - 1, anElement);
+
+				result = new JavaOclSequence<T>(resultList);
+			}
+
+			else {
+				((List<T>) this.getAdaptee()).add(intIndex - 1, anElement);
+
+				result = this;
+			}
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	public OclBoolean isEqualTo(OclRoot anOclRoot) {
+
+		OclBoolean result;
+
+		/* Check if this collection is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+
+		/* Else check if the given oclRoot is undefined. */
+		else if (anOclRoot.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(anOclRoot.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+
+			/* Else check if the given oclRoot is not a sequence. */
+			if (!(anOclRoot instanceof OclSequence)) {
+				result = JavaOclBoolean.getInstance(false);
+			}
+
+			else {
+				OclSequence<OclRoot> aSequence;
+
+				Iterator<OclRoot> thisIt;
+				Iterator<OclRoot> sSequenceIt;
+
+				aSequence = (OclSequence<OclRoot>) anOclRoot;
+
+				/* Check if both sequences have the same size. */
+				if (this.size().isEqualTo(aSequence.size()).isTrue()) {
+
+					/* By default the result is true. */
+					result = JavaOclBoolean.getInstance(true);
+
+					thisIt = ((Collection<OclRoot>) this.getAdaptee())
+							.iterator();
+					sSequenceIt = ((Collection<OclRoot>) aSequence.getAdaptee())
+							.iterator();
+
+					/* Iterate through both sequences. */
+					while (thisIt.hasNext() && sSequenceIt.hasNext()) {
+
+						/* If two elements aren't equal, return false. */
+						if (!thisIt.next().equals(sSequenceIt.next())) {
+							result = JavaOclBoolean.getInstance(false);
+							break;
+						}
+						// no else.
+					}
+					// end while.
+				}
+
+				else {
+					result = JavaOclBoolean.getInstance(false);
+				}
+			}
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#prepend
+	 * (java.lang.Object)
+	 */
+	public OclSequence<T> prepend(T anElement) {
+		OclSequence<T> result;
+
+		/* Check if this collection is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the given element is undefined. */
+		else if (anElement.isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(anElement.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			if (!(getAdaptee() instanceof ArrayList)) {
+				ArrayList<T> resultList;
+
+				resultList = new ArrayList<T>((Collection<T>) getAdaptee());
+				resultList.add(0, anElement);
+
+				result = new JavaOclSequence<T>(resultList);
+			}
+
+			else {
+				((List<T>) this.getAdaptee()).add(0, anElement);
+				result = this;
+			}
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#subSequence
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 */
+	public OclSequence<T> subSequence(OclInteger lowerIndex,
+			OclInteger upperIndex) {
+
+		OclSequence<T> result;
+
+		/* Check if this collection is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		/* Else check if the lower index is undefined. */
+		else if (lowerIndex.isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(lowerIndex.getUndefinedreason());
+		}
+
+		/* Else check if the upper index is undefined. */
+		if (upperIndex.isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(upperIndex.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+
+			int lowerInt;
+			int upperInt;
+
+			lowerInt = ((Number) lowerIndex.getAdaptee()).intValue();
+			upperInt = ((Number) upperIndex.getAdaptee()).intValue();
+
+			try {
+				List<T> adaptedList;
+				List<T> resultList;
+
+				if (!(getAdaptee() instanceof List)) {
+					adaptedList = new ArrayList<T>((Collection<T>) this
+							.getAdaptee());
+				}
+
+				else {
+					adaptedList = (List<T>) this.getAdaptee();
+				}
+
+				resultList = adaptedList.subList(lowerInt - 1, upperInt);
+
+				result = new JavaOclSequence<T>(new ArrayList<T>(resultList));
+			}
+
+			catch (IndexOutOfBoundsException e) {
+
+				String msg;
+
+				msg = "illegal index in OclSequence sustring(";
+				msg += lowerInt + ", " + upperInt + ")";
+
+				result = new JavaOclSequence<T>(null);
+				result.setUndefinedreason(msg);
+			}
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#union(
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet)
+	 */
+	public OclSequence<T> union(OclOrderedSet<T> aSet) {
+
+		OclSequence<T> result;
+
+		/* Check if this collection is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(this.getUndefinedreason());
+		}
+
+		/* Else check if the given set is undefined. */
+		else if (aSet.isOclUndefined().isTrue()) {
+			result = new JavaOclSequence<T>(null);
+			result.setUndefinedreason(aSet.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			ArrayList<T> resultList;
+
+			resultList = new ArrayList<T>((List<T>) getAdaptee());
+			resultList.addAll((Collection<T>) aSet.getAdaptee());
+
+			result = new JavaOclSequence<T>(resultList);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
-		if (type == null) {
-			OclType elementType = JavaOclType.getType("OclVoid");
-			if (((List<OclRoot>) getAdaptee()).size() > 0)
-				elementType = ((List<OclRoot>) getAdaptee()).get(0).getType();
-			type = JavaOclCollectionType.getType(
+
+		/* Eventually compute the type. */
+		if (this.type == null) {
+
+			OclType elementType;
+
+			/* Compute the generic type. */
+			if (((List<OclRoot>) this.getAdaptee()).size() > 0) {
+				elementType = ((List<OclRoot>) this.getAdaptee()).get(0)
+						.getType();
+			}
+
+			else {
+				elementType = JavaOclType.getType("OclVoid");
+			}
+
+			this.type = JavaOclCollectionType.getType(
 					OclCollectionTypeKind.SEQUENCE, elementType);
 		}
+
 		return type;
 	}
 }

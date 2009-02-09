@@ -35,18 +35,20 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 
 /**
- * 
+ * <p>
+ * This class implements the OCL type {@link OclAny} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclAny extends JavaOclObject implements OclAny {
 
 	/**
-	 * Instantiates a new java ocl any.
+	 * <p>
+	 * Instantiates a new {@link JavaOclAny}.
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted element of this {@link JavaOclAny}.
 	 */
 	public JavaOclAny(Object adaptee) {
 		super(adaptee);
@@ -55,22 +57,62 @@ public class JavaOclAny extends JavaOclObject implements OclAny {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#invokeOperation(java.lang.String,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
-	public OclRoot invokeOperation(String operationName, OclRoot... parameters)
-			throws NoSuchMethodException {
-		return invokeLibraryOperation(operationName, parameters);
+	public boolean equals(Object anObject) {
+
+		boolean result;
+
+		if (anObject instanceof JavaOclAny) {
+			JavaOclAny anAny;
+
+			anAny = (JavaOclAny) anObject;
+
+			result = this.isEqualTo(anAny).isTrue();
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #invokeOperation(java.lang.String,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
+	 */
+	@Override
+	public OclRoot invokeOperation(String operationName, OclRoot... parameters)
+			throws NoSuchMethodException {
+		OclRoot result;
+
+		/*
+		 * On this type, onyl library operation can be invoked, because the type
+		 * is a library type itself.
+		 */
+		result = invokeLibraryOperation(operationName, parameters);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
-		return JavaOclType.getType("OclAny");
+		OclType result;
+
+		result = JavaOclType.getType("OclAny");
+
+		return result;
 	}
 }

@@ -34,18 +34,21 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 
 /**
- * 
+ * <p>
+ * This class implements the OCL type {@link OclEnumLiteral} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclEnumLiteral extends JavaOclAny implements OclEnumLiteral {
 
 	/**
-	 * Instantiates a new java ocl enum literal.
+	 * <p>
+	 * Instantiates a new {@link JavaOclEnumLiteral}.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted element of this {@link JavaOclEnumLiteral}.
 	 */
 	public JavaOclEnumLiteral(Object adaptee) {
 		super(adaptee);
@@ -54,7 +57,9 @@ public class JavaOclEnumLiteral extends JavaOclAny implements OclEnumLiteral {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * #getType()
 	 */
 	@Override
 	public OclType getType() {

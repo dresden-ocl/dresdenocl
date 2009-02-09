@@ -36,44 +36,78 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
 
 /**
- * 
+ * <p>
+ * Provides an implementation of {@link OclVoid} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclVoid extends JavaOclObject implements OclVoid {
 
-	// The INSTANCE
+	/** The only instance of {@link JavaOclVoid}. */
 	private static JavaOclVoid INSTANCE;
 
 	/**
-	 * Instantiates a new java ocl void.
+	 * <p>
+	 * Instantiates a new {@link JavaOclVoid}.
+	 * </p>
 	 * 
-	 * @param adaptee
-	 *            the adaptee
+	 * @param adaptable
+	 *            The adaptable {@link Class} of this {@link JavaOclVoid}.
 	 */
 	private JavaOclVoid(Object adaptee) {
 		super(adaptee);
 	}
 
 	/**
-	 * Gets the single instance of JavaOclVoid.
+	 * <p>
+	 * Gets the single instance of {@link JavaOclVoid}.
+	 * </p>
 	 * 
-	 * @return single instance of JavaOclVoid
+	 * @return single instance of {@link JavaOclVoid}.
 	 */
 	public static JavaOclVoid getInstance() {
+
 		if (INSTANCE == null) {
 			INSTANCE = new JavaOclVoid(null);
 			INSTANCE.setUndefinedreason("JavaOclVoid");
 		}
+		// no else.
+
 		return INSTANCE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#invokeOperation(java.lang.String,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #getPropertyValue(java.lang.String)
+	 */
+	@Override
+	public OclRoot getPropertyValue(String name) {
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
+	 * #getType()
+	 */
+	@Override
+	public OclType getType() {
+		return JavaOclType.getType("OclVoid");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #invokeOperation(java.lang.String,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
 	 */
 	@Override
 	public OclRoot invokeOperation(String operationName, OclRoot... parameters)
@@ -84,40 +118,9 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#getPropertyValue(java.lang.String)
-	 */
-	@Override
-	public OclRoot getPropertyValue(String name) {
-		return this;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot object2) {
-		if (isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(getUndefinedreason());
-			return ret;
-		}
-		if (object2.isOclUndefined().isTrue()) {
-			OclBoolean ret = JavaOclBoolean.getInstance(null);
-			ret.setUndefinedreason(object2.getUndefinedreason());
-			return ret;
-		}
-		if (object2 instanceof OclVoid)
-			return JavaOclBoolean.getInstance(true);
-		else
-			return JavaOclBoolean.getInstance(false);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot#isOclUndefined()
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #isOclUndefined()
 	 */
 	@Override
 	public OclBoolean isOclUndefined() {
@@ -127,10 +130,38 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject#getType()
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	@Override
-	public OclType getType() {
-		return JavaOclType.getType("OclVoid");
+	public OclBoolean isEqualTo(OclRoot anObject) {
+
+		OclBoolean result;
+
+		/* Check if this OclVoid is undefined. */
+		if (isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(getUndefinedreason());
+		}
+
+		/* Else check if the given object is undefined. */
+		else if (anObject.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(anObject.getUndefinedreason());
+		}
+
+		/* Else compute the result. */
+		else {
+			if (anObject instanceof OclVoid) {
+				result = JavaOclBoolean.getInstance(true);
+			}
+
+			else {
+				return JavaOclBoolean.getInstance(false);
+			}
+		}
+
+		return result;
 	}
 }

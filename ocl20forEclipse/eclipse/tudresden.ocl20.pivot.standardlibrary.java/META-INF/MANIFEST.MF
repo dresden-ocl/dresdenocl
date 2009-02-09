@@ -5,13 +5,16 @@ Bundle-SymbolicName: tudresden.ocl20.pivot.standardlibrary.java;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin
 Require-Bundle: tudresden.ocl20.pivot.essentialocl.standardlibrary,
+ tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.modelbus,
  org.eclipse.core.runtime,
  org.apache.commons.lang,
  org.eclipse.emf.common,
  org.eclipse.emf.ecore,
  tudresden.ocl20.logging
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.standardlibrary.java,
  tudresden.ocl20.pivot.standardlibrary.java.internal.factory,
  tudresden.ocl20.pivot.standardlibrary.java.internal.library
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
+ J2SE-1.5

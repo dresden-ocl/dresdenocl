@@ -37,42 +37,47 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 
 /**
- * 
+ * <p>
+ * This class implements the OCL type {@link OclIterator} in Java.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclIterator<T extends OclRoot> implements OclIterator<T> {
 
-	// The iterator
-	private Iterator<T> it;
+	/** The adapted iterator of this {@link JavaOclIterator}. */
+	private Iterator<T> adaptedIterator;
 
 	/**
-	 * Instantiates a new java ocl iterator.
+	 * <p>
+	 * Instantiates a {@link JavaOclIterator}.
+	 * </p>
 	 * 
-	 * @param it
-	 *            the it
+	 * @param adaptee
+	 *            The adapted element of this {@link JavaOclIterator}.
 	 */
 	public JavaOclIterator(Iterator<T> it) {
-		this.it = it;
+		this.adaptedIterator = it;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator#hasNext()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator#hasNext()
 	 */
 	public OclBoolean hasNext() {
-		return JavaOclBoolean.getInstance(it.hasNext());
+		return JavaOclBoolean.getInstance(adaptedIterator.hasNext());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator#next()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator#next()
 	 */
 	public T next() {
-		return it.next();
+		return adaptedIterator.next();
 	}
 
 }

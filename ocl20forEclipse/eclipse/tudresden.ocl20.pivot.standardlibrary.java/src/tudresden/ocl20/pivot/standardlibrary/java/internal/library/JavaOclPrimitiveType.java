@@ -30,54 +30,63 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.Collection;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclPrimitiveType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 
 /**
- * 
+ * <p>
+ * This class represents instances of {@link OclPrimitiveType}.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaOclPrimitiveType extends JavaOclType implements
 		OclPrimitiveType {
 
-	// The BOOLEAN type
+	/** The BOOLEAN type. */
 	private static OclPrimitiveType BOOLEAN = new JavaOclPrimitiveType(
 			Boolean.class, "Boolean");
 
-	// The STRING type
+	/** The STRING type. */
 	private static OclPrimitiveType STRING = new JavaOclPrimitiveType(
 			String.class, "String");
 
-	// The INTEGER type
+	/** The INTEGER type. */
 	private static OclPrimitiveType INTEGER = new JavaOclPrimitiveType(
 			Integer.class, "Integer");
 
-	// The REAL type
+	/** The REAL type. */
 	private static OclPrimitiveType REAL = new JavaOclPrimitiveType(
 			Float.class, "Real");
 
 	/**
-	 * Instantiates a new java ocl primitive type.
+	 * <p>
+	 * Instantiates a new {@link JavaOclPrimitiveType} set.
+	 * </p>
 	 * 
 	 * @param adaptee
-	 *            the adaptee
+	 *            The adapted {@link Collection}.
 	 * @param name
-	 *            the name
+	 *            The name of the {@link JavaOclPrimitiveType} which shall be
+	 *            created.
 	 */
-	private JavaOclPrimitiveType(Class adaptee, String name) {
+	private JavaOclPrimitiveType(Class<?> adaptee, String name) {
 		super(adaptee, name);
 	}
 
 	/**
-	 * Gets the primitive type.
+	 * <p>
+	 * Gets the primitive type to a given name.
+	 * </p>
 	 * 
 	 * @param name
-	 *            the name
+	 *            The name of the {@link JavaOclPrimitiveType} which shall be
+	 *            returned.
 	 * 
-	 * @return the primitive type
+	 * @return The primitive type to a given name.
 	 */
 	public static OclPrimitiveType getPrimitiveType(String name) {
 		return (OclPrimitiveType) predefinedTypes.get(name);
@@ -86,39 +95,83 @@ public class JavaOclPrimitiveType extends JavaOclType implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType#isOfKind(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType
+	 * #isOfKind(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	public OclBoolean isOfKind(OclRoot o) {
-		if (isOfType(o).isTrue())
+	public OclBoolean isOfKind(OclRoot anObject) {
+
+		OclBoolean result;
+
+		if (isOfType(anObject).isTrue()) {
+			result = JavaOclBoolean.getInstance(true);
+		}
+
+		else if (this == getType("OclAny")) {
+			/* oclAny has no direct instances. */
+			result = JavaOclBoolean.getInstance(false);
+		}
+
+		else if (this == getType("OclVoid")
+				&& anObject.isOclUndefined().isTrue()) {
+			result = JavaOclBoolean.getInstance(true);
+		}
+
+		else if (this == anObject.getType()) {
+			result = JavaOclBoolean.getInstance(true);
+		}
+
+		else if (this == REAL && anObject.getType() == INTEGER) {
 			return JavaOclBoolean.getInstance(true);
-		if (this == getType("OclAny"))
-			return JavaOclBoolean.getInstance(false); // oclAny has no direct
-														// instances
-		if (this == getType("OclVoid") && o.isOclUndefined().isTrue())
-			return JavaOclBoolean.getInstance(true);
-		if (this == o.getType())
-			return JavaOclBoolean.getInstance(true);
-		if (this == REAL && o.getType() == INTEGER)
-			return JavaOclBoolean.getInstance(true);
-		return JavaOclBoolean.getInstance(false);
+		}
+
+		else {
+			result = JavaOclBoolean.getInstance(false);
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType#createInstance(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType
+	 * #createInstance
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	public OclRoot createInstance(OclRoot o) {
-		if (isOfKind(o).isTrue()) {
-			if (this == BOOLEAN)
-				return JavaOclBoolean.getInstance((Boolean) o.getAdaptee());
-			if (this == STRING)
-				return new JavaOclString((String) o.getAdaptee());
-			if (this == INTEGER)
-				return new JavaOclInteger((Integer) o.getAdaptee());
-			if (this == REAL)
-				return new JavaOclReal((Number) o.getAdaptee());
+	public OclRoot createInstance(OclRoot anOclRoot) {
+
+		OclRoot result;
+
+		if (isOfKind(anOclRoot).isTrue()) {
+
+			if (this == BOOLEAN) {
+				result = JavaOclBoolean.getInstance((Boolean) anOclRoot
+						.getAdaptee());
+			}
+
+			if (this == STRING) {
+				result = new JavaOclString((String) anOclRoot.getAdaptee());
+			}
+
+			if (this == INTEGER) {
+				result = new JavaOclInteger((Integer) anOclRoot.getAdaptee());
+			}
+
+			if (this == REAL) {
+				result = new JavaOclReal((Number) anOclRoot.getAdaptee());
+			}
+
+			else {
+				result = JavaOclVoid.getInstance();
+			}
 		}
-		return JavaOclVoid.getInstance();
+
+		else {
+			result = JavaOclVoid.getInstance();
+		}
+
+		return result;
 	}
 }

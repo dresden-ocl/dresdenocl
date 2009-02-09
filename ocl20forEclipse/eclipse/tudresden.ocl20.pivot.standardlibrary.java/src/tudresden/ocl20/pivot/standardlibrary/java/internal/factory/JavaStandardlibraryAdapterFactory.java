@@ -30,22 +30,23 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.factory;
 
-import org.apache.log4j.Logger;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory;
+import tudresden.ocl20.pivot.pivotmodel.Enumeration;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBag;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclEnumLiteral;
@@ -64,183 +65,762 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclVoid;
 
 /**
+ * <p>
+ * This class is a factory which provides methods to create instances of the
+ * types of the OCL standard library.
+ * </p>
  * 
+ * <p>
+ * This class implements the design pattern Singleton.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class JavaStandardlibraryAdapterFactory extends
 		AbstractStandardlibraryAdapterFactory implements
 		StandardlibraryAdapterFactory {
-	/**
-	 * Logger for this class
-	 */
+
+	/** The Logger for this class. */
 	private static final Logger logger = Logger
 			.getLogger(JavaStandardlibraryAdapterFactory.class);
 
-	// The INSTANCE
-	private static JavaStandardlibraryAdapterFactory INSTANCE = null;
+	/** The single instance of this class. */
+	private static JavaStandardlibraryAdapterFactory MY_INSTANCE = null;
+
+	/** The names of the integer types in Java. */
+	private static String[] INTEGER_TYPES = new String[] { "java.lang.Integer",
+			"java.lang.Short", "java.lang.Long", "int", "short", "long" };
+
+	/** The names of the real types in Java. */
+	private static String[] REAL_TYPES = new String[] { "java.lang.Double",
+			"java.lang.Float", "float", "double" };
 
 	/**
-	 * Instantiates a new java standardlibrary adapter factory.
+	 * <p>
+	 * Instantiates a new {@link JavaStandardlibraryAdapterFactory}.
+	 * </p>
 	 */
 	private JavaStandardlibraryAdapterFactory() {
 	}
 
 	/**
-	 * Gets the single instance of JavaStandardlibraryAdapterFactory.
-	 * 
-	 * @return single instance of JavaStandardlibraryAdapterFactory
+	 * @return The single instance of {@link JavaStandardlibraryAdapterFactory}.
 	 */
 	public static JavaStandardlibraryAdapterFactory getInstance() {
+
+		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
 			logger.debug("getInstance() - start");
 		}
+		// no else.
 
-		if (INSTANCE == null)
-			INSTANCE = new JavaStandardlibraryAdapterFactory();
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getInstance() - end - return value=" + INSTANCE);
+		/* Eventually create the singleton instance. */
+		if (MY_INSTANCE == null) {
+			MY_INSTANCE = new JavaStandardlibraryAdapterFactory();
 		}
-		return INSTANCE;
+		// no else.
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getInstance() - end - return value=" + MY_INSTANCE);
+		}
+		// no else.
+
+		return MY_INSTANCE;
 	}
-
-	// The names of the integer types in Java
-	private static String[] INTEGER_TYPES = new String[] { "java.lang.Integer",
-			"java.lang.Short", "java.lang.Long", "int", "short", "long" };
-
-	// The names of the real types in Java
-	private static String[] REAL_TYPES = new String[] { "java.lang.Double",
-			"java.lang.Float", "float", "double" };
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#adapterNotFound(java.lang.Object)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#adapterNotFound(java.lang.Object)
 	 */
 	@Override
 	protected Object adapterNotFound(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
 			logger.debug("adapterNotFound(Object) - start");
 		}
+		// no else.
 
-		Object returnObject = getOclObject(adaptableObject);
+		Object result;
+
+		result = getOclObject(adaptableObject);
+
+		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
 			logger.debug("adapterNotFound(Object) - end - return value="
-					+ returnObject);
+					+ result);
 		}
-		return returnObject;
+		// no else.
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclTuple(java.lang.Object)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclBag(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Object getOclBag(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclBag(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adaptableObject is a List. */
+		if (adaptableObject instanceof List) {
+			result = new JavaOclBag<OclRoot>((List<OclRoot>) adaptableObject);
+		}
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclBag(Object) - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclBoolean(java.lang.Object)
 	 */
 	@Override
-	protected Object getOclTuple(Object adaptableObject) {
+	protected Object getOclBoolean(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getOclTuple(Object) - start");
+			logger.debug("getOclBoolean(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adaptableObject is a boolean. */
+		if (adaptableObject instanceof Boolean) {
+			result = JavaOclBoolean.getInstance((Boolean) adaptableObject);
+		}
+		/* Else return null. */
+		else {
+			result = null;
 		}
 
-		if (adaptableObject instanceof Map) {
-			Object returnObject = new JavaOclTuple(
-					(Map<String, OclRoot>) adaptableObject);
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclTuple(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
+		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getOclTuple(Object) - end - return value=" + null);
+			logger
+					.debug("getOclBoolean(Object) - end - return value="
+							+ result);
 		}
-		return null;
+		// no else.
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclPrimitiveType(java.lang.Object)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclEnumLiteral(java.lang.Object)
+	 */
+	@Override
+	protected Object getOclEnumLiteral(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclEnumLiteral(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		result = new JavaOclEnumLiteral(adaptableObject);
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclEnumLiteral(Object) - end - return value="
+					+ result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclEnumType(java.lang.Object)
+	 */
+	@Override
+	protected Object getOclEnumType(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclEnumType(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adaptableObject is a class. */
+		if (adaptableObject instanceof Class) {
+			result = new JavaOclEnumType((Class<?>) adaptableObject);
+		}
+
+		/* Else check if the adaptableObject is a meta model element. */
+		else if (adaptableObject instanceof Enumeration) {
+			result = JavaOclEnumType.getType(((Enumeration) adaptableObject)
+							.getName());
+		}
+
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclEnumType(Object) - end - return value="
+					+ result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclInteger(java.lang.Object)
+	 */
+	@Override
+	protected Object getOclInteger(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclInteger(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adaptableObject is an integer. */
+		if (adaptableObject instanceof Integer) {
+			result = new JavaOclInteger((Integer) adaptableObject);
+		}
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("getOclInteger(Object) - end - return value="
+							+ result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclInvalid(java.lang.Object)
+	 */
+	@Override
+	protected Object getOclInvalid(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclInvalid(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		result = JavaOclInvalid.getInstance();
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger
+					.debug("getOclInvalid(Object) - end - return value="
+							+ result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclObject(java.lang.Object)
+	 */
+	@Override
+	protected Object getOclObject(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclObject(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		result = new JavaOclObject(adaptableObject);
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclObject(Object) - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclOrderedSet(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Object getOclOrderedSet(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclOrderedSet(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if adaptableObject is a List. */
+		if (adaptableObject instanceof List) {
+			result = new JavaOclOrderedSet<OclRoot>(
+					(List<OclRoot>) adaptableObject);
+		}
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclOrderedSet(Object) - end - return value="
+					+ result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory
+	 * #getOclPrimitiveType(java.lang.Object)
 	 */
 	@Override
 	protected Object getOclPrimitiveType(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
 			logger.debug("getOclPrimitiveType(Object) - start");
 		}
+		// no else.
 
+		Object result;
+
+		/* Check if the adaptableObject is a String. */
 		if (adaptableObject instanceof String) {
-			Object returnObject = JavaOclPrimitiveType
+			result = JavaOclPrimitiveType
 					.getPrimitiveType((String) adaptableObject);
-
-			if (logger.isDebugEnabled()) {
-				logger
-						.debug("getOclPrimitiveType(Object) - end - return value="
-								+ returnObject);
-			}
-			return returnObject;
 		}
 
+		/* Else check if the adaptableObject is a meta model element. */
+		else if (adaptableObject instanceof PrimitiveType) {
+			result = JavaOclPrimitiveType
+					.getPrimitiveType(((PrimitiveType) adaptableObject)
+							.getName());
+		}
+
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
 			logger.debug("getOclPrimitiveType(Object) - end - return value="
-					+ null);
+					+ result);
 		}
-		return null;
+		// no else.
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclType(java.lang.Object)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclReal(java.lang.Object)
+	 */
+	@Override
+	protected Object getOclReal(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclReal(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adaptableObject is a float. */
+		if (adaptableObject instanceof Float) {
+			result = new JavaOclReal((Float) adaptableObject);
+		}
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclReal(Object) - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclRoot(java.lang.Object)
+	 */
+	@Override
+	protected Object getOclRoot(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclRoot(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adaptableObject is an integer. */
+		if (adaptableObject instanceof Integer) {
+			result = new JavaOclInteger((Integer) adaptableObject);
+		}
+
+		/* Else check if the adaptableObject is a float. */
+		else if (adaptableObject instanceof Float) {
+			result = new JavaOclReal((Float) adaptableObject);
+		}
+
+		/* Else check if the adaptableObject is a string. */
+		else if (adaptableObject instanceof String) {
+			result = new JavaOclString((String) adaptableObject);
+		}
+
+		/* Else check if the adaptableObject is a boolean. */
+		if (adaptableObject instanceof Boolean) {
+			result = JavaOclBoolean.getInstance((Boolean) adaptableObject);
+		}
+
+		/* Else check if the adaptableObject is a list. */
+		if (adaptableObject instanceof EList) {
+
+			List<?> adaptableList;
+			Set<OclRoot> adaptedSet;
+
+			adaptableList = (List<?>) adaptableObject;
+
+			adaptedSet = new HashSet<OclRoot>();
+
+			/* Iterate through the adaptable objects. */
+			for (Object anElement : adaptableList) {
+
+				/* Add anElement or an adaption of anElement. */
+				if (anElement instanceof OclRoot) {
+					adaptedSet.add((OclRoot) anElement);
+				} else {
+					adaptedSet.add((OclRoot) getAdapter(anElement,
+							OclRoot.class));
+				}
+			}
+
+			/* Adapt result to OclSet. */
+			result = getAdapter(adaptedSet, OclSet.class);
+		}
+
+		/* Else check if the adaptableObject is a collection. */
+		else if (adaptableObject instanceof Collection) {
+
+			Collection<?> adaptableCollection;
+			Set<OclRoot> adaptedSet;
+
+			adaptableCollection = (Collection<?>) adaptableObject;
+
+			adaptedSet = new HashSet<OclRoot>();
+
+			/* Iterate through the adaptable objects. */
+			for (Object anElement : adaptableCollection) {
+
+				/* Add anElement or an adaption of anElement. */
+				if (anElement instanceof OclRoot) {
+					adaptedSet.add((OclRoot) anElement);
+				} else {
+					adaptedSet.add((OclRoot) getAdapter(anElement,
+							OclRoot.class));
+				}
+			}
+
+			/* Adapt result to OclSet. */
+			result = getAdapter(adaptedSet, OclSet.class);
+		}
+
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclRoot(Object) - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclSet(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Object getOclSet(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclSet(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adaptableObject is a Set. */
+		if (adaptableObject instanceof Set) {
+			result = new JavaOclSet<OclRoot>((Set<OclRoot>) adaptableObject);
+		}
+
+		/* Else check if the adaptableObject is a List. */
+		else if (adaptableObject instanceof List) {
+			Set<OclRoot> set;
+
+			/* Convert the List into a Set. */
+			set = new HashSet<OclRoot>((List<OclRoot>) adaptableObject);
+			result = new JavaOclSet<OclRoot>(set);
+		}
+
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclSet(Object) - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclSequence(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Object getOclSequence(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclSequence(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adaptableObject is a List. */
+		if (adaptableObject instanceof List) {
+			result = new JavaOclSequence<OclRoot>(
+					(List<OclRoot>) adaptableObject);
+		}
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclSequence(Object) - end - return value="
+					+ result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclString(java.lang.Object)
+	 */
+	@Override
+	protected Object getOclString(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclString(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adaptableObject is a string. */
+		if (adaptableObject instanceof String) {
+			result = new JavaOclString((String) adaptableObject);
+		}
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclString(Object) - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclTuple(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Object getOclTuple(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclTuple(Object) - start");
+		}
+		// no else.
+
+		Object result;
+
+		/* Check if the adatableObject is a Map. */
+		if (adaptableObject instanceof Map) {
+			result = new JavaOclTuple((Map<String, OclRoot>) adaptableObject);
+		}
+		
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclTuple(Object) - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclType(java.lang.Object)
 	 */
 	@Override
 	protected Object getOclType(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
 			logger.debug("getOclType(Object) - start");
 		}
+		// no else.
 
+		Object result;
+
+		/* Check if the adaptableObject is a Class. */
 		if (adaptableObject instanceof Class) {
-			if (((Class) adaptableObject).getName().equals("java.lang.String")) {
-				Object returnObject2 = JavaOclPrimitiveType
-						.getPrimitiveType("String");
-				if (logger.isDebugEnabled()) {
-					logger.debug("getOclType(Object) - end - return value="
-							+ returnObject2);
-				}
-				return returnObject2;
-			}
-			if (Arrays.asList(INTEGER_TYPES).contains(
-					((Class) adaptableObject).getName())) {
-				Object returnObject2 = JavaOclPrimitiveType
-						.getPrimitiveType("Integer");
-				if (logger.isDebugEnabled()) {
-					logger.debug("getOclType(Object) - end - return value="
-							+ returnObject2);
-				}
-				return returnObject2;
-			}
-			if (Arrays.asList(REAL_TYPES).contains(
-					((Class) adaptableObject).getName())) {
-				Object returnObject2 = JavaOclPrimitiveType
-						.getPrimitiveType("Real");
-				if (logger.isDebugEnabled()) {
-					logger.debug("getOclType(Object) - end - return value="
-							+ returnObject2);
-				}
-				return returnObject2;
-			}
-			Object returnObject = new JavaOclType((Class) adaptableObject);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclType(Object) - end - return value="
-						+ returnObject);
+			/* Eventually adapt to String. */
+			if (((Class<?>) adaptableObject).getName().equals(
+					"java.lang.String")) {
+				result = JavaOclPrimitiveType.getPrimitiveType("String");
 			}
-			return returnObject;
+
+			/* Eventually adapt to Integer. */
+			else if (Arrays.asList(INTEGER_TYPES).contains(
+					((Class<?>) adaptableObject).getName())) {
+				result = JavaOclPrimitiveType.getPrimitiveType("Integer");
+			}
+
+			/* Eventually adapt to Real. */
+			if (Arrays.asList(REAL_TYPES).contains(
+					((Class<?>) adaptableObject).getName())) {
+				result = JavaOclPrimitiveType.getPrimitiveType("Real");
+			}
+
+			/* Else adapt to OclType. */
+			else {
+				result = new JavaOclType((Class<?>) adaptableObject);
+			}
 		}
-		if (adaptableObject instanceof String) {
+
+		/* Else check if the adaptableObject is a String. */
+		else if (adaptableObject instanceof String) {
 			Object returnObject = JavaOclType.getType((String) adaptableObject);
 
 			if (logger.isDebugEnabled()) {
@@ -249,416 +829,53 @@ public class JavaStandardlibraryAdapterFactory extends
 			}
 			return returnObject;
 		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclType(Object) - end - return value=" + null);
+		
+		/* Else check if the adaptableObject is a meta model element. */
+		else if (adaptableObject instanceof Type) {
+			result = JavaOclType.getType(((Type) adaptableObject)
+							.getName());
 		}
-		return null;
+
+
+		/* Else return null. */
+		else {
+			result = null;
+		}
+
+		/* Eventually log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("getOclType(Object) - end - return value=" + result);
+		}
+		// no else.
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclObject(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclObject(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclObject(Object) - start");
-		}
-
-		Object returnObject = new JavaOclObject(adaptableObject);
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclObject(Object) - end - return value="
-					+ returnObject);
-		}
-		return returnObject;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclOrderedSet(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclOrderedSet(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclOrderedSet(Object) - start");
-		}
-
-		if (adaptableObject instanceof List) {
-			Object returnObject = new JavaOclOrderedSet((List) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclOrderedSet(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclOrderedSet(Object) - end - return value="
-					+ null);
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclSequence(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclSequence(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclSequence(Object) - start");
-		}
-
-		if (adaptableObject instanceof List) {
-			Object returnObject = new JavaOclSequence((List) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclSequence(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclSequence(Object) - end - return value=" + null);
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclBag(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclBag(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclBag(Object) - start");
-		}
-
-		if (adaptableObject instanceof List) {
-			Object returnObject = new JavaOclBag((List) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclBag(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclBag(Object) - end - return value=" + null);
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclSet(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclSet(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclSet(Object) - start");
-		}
-
-		if (adaptableObject instanceof Set) {
-			Object returnObject = new JavaOclSet((Set) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclSet(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-		if (adaptableObject instanceof List) {
-			Set<OclRoot> set = new HashSet<OclRoot>((List) adaptableObject);
-			Object returnObject = new JavaOclSet(set);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclSet(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclSet(Object) - end - return value=" + null);
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclBoolean(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclBoolean(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclBoolean(Object) - start");
-		}
-
-		if (adaptableObject instanceof Boolean) {
-			Object returnObject = JavaOclBoolean
-					.getInstance((Boolean) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclBoolean(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclBoolean(Object) - end - return value=" + null);
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclString(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclString(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclString(Object) - start");
-		}
-
-		if (adaptableObject instanceof String) {
-			Object returnObject = new JavaOclString((String) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclString(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclString(Object) - end - return value=" + null);
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclInteger(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclInteger(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclInteger(Object) - start");
-		}
-
-		if (adaptableObject instanceof Integer) {
-			Object returnObject = new JavaOclInteger((Integer) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclInteger(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclInteger(Object) - end - return value=" + null);
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclInvalid(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclInvalid(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclInvalid(Object) - start");
-		}
-
-		Object returnObject = JavaOclInvalid.getInstance();
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclInvalid(Object) - end - return value="
-					+ returnObject);
-		}
-		return returnObject;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclVoid(java.lang.Object)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
+	 * AbstractStandardlibraryAdapterFactory#getOclVoid(java.lang.Object)
 	 */
 	@Override
 	protected Object getOclVoid(Object adaptableObject) {
+
+		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
 			logger.debug("getOclVoid(Object) - start");
 		}
+		// no else.
 
-		Object returnObject = JavaOclVoid.getInstance();
+		Object result;
+
+		result = JavaOclVoid.getInstance();
+
+		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getOclVoid(Object) - end - return value="
-					+ returnObject);
+			logger.debug("getOclVoid(Object) - end - return value=" + result);
 		}
-		return returnObject;
-	}
+		// no else.
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclRoot(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclRoot(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclRoot(Object) - start");
-		}
-
-		if (adaptableObject instanceof Integer) {
-			Object returnObject = new JavaOclInteger((Integer) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclRoot(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-		if (adaptableObject instanceof Float) {
-			Object returnObject = new JavaOclReal((Float) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclRoot(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-		if (adaptableObject instanceof String) {
-			Object returnObject = new JavaOclString((String) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclRoot(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-		if (adaptableObject instanceof Boolean) {
-			Object returnObject = JavaOclBoolean
-					.getInstance((Boolean) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclRoot(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-		if (adaptableObject instanceof EList) {
-			Iterator<Object> it = ((EList) adaptableObject).iterator();
-			Set<OclRoot> set = new HashSet<OclRoot>();
-			while (it.hasNext()) {
-				Object current = it.next();
-				if (current instanceof OclRoot)
-					set.add((OclRoot) current);
-				else
-					set.add((OclRoot) getAdapter(current, OclRoot.class));
-			}
-			Object returnObject = getAdapter(set, OclSet.class);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclRoot(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-		if (adaptableObject instanceof Collection) {
-			Iterator<Object> it = ((Collection) adaptableObject).iterator();
-			Set<OclRoot> set = new HashSet<OclRoot>();
-			while (it.hasNext()) {
-				Object current = it.next();
-				if (current instanceof OclRoot)
-					set.add((OclRoot) current);
-				else
-					set.add((OclRoot) getAdapter(current, OclRoot.class));
-			}
-			Object returnObject = getAdapter(set, OclSet.class);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclRoot(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclRoot(Object) - end - return value=" + null);
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclReal(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclReal(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclReal(Object) - start");
-		}
-
-		if (adaptableObject instanceof Float) {
-			Object returnObject = new JavaOclReal((Float) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclReal(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclReal(Object) - end - return value=" + null);
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclEnumLiteral(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclEnumLiteral(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclEnumLiteral(Object) - start");
-		}
-
-		Object returnObject = new JavaOclEnumLiteral(adaptableObject);
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclEnumLiteral(Object) - end - return value="
-					+ returnObject);
-		}
-		return returnObject;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractStandardlibraryAdapterFactory#getOclEnumType(java.lang.Object)
-	 */
-	@Override
-	protected Object getOclEnumType(Object adaptableObject) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclEnumType(Object) - start");
-		}
-
-		if (adaptableObject instanceof Class) {
-			Object returnObject = new JavaOclEnumType((Class) adaptableObject);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getOclEnumType(Object) - end - return value="
-						+ returnObject);
-			}
-			return returnObject;
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("getOclEnumType(Object) - end - return value=" + null);
-		}
-		return null;
+		return result;
 	}
 }
