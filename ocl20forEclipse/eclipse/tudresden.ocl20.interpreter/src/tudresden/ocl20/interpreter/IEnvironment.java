@@ -37,106 +37,150 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 
 /**
+ * <p>
+ * This interface represents environments used to store values and object during
+ * the interpretation of constraints.
+ * </p>
  * 
- *
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public interface IEnvironment extends Cloneable {
 
 	/**
-	 * Gets saved variables with given name.
+	 * <p>
+	 * Saves the {@link Constraint} for the given path. Used for OCL-constraint
+	 * types body, def, initial and derive.
+	 * </p>
 	 * 
-	 * @param path the path of the variable or simply the name (e.g. "self")
-	 * 
-	 * @return the saved variable
+	 * @param path
+	 *            The path of the attribute/operation described by the
+	 *            {@link Constraint}.
+	 * @param aConstraint
+	 *            The {@link Constraint} describing the attribute/operation.
 	 */
-	OclRoot getVar(String path);
-	
-	/**
-	 * Saves variable to environment.
-	 * 
-	 * @param path the path of the variable or simply the name (e.g. "self")
-	 * @param o the variable to be saved
-	 */
-	void addVar(String path, OclRoot o);
-	
-	/**
-	 * Gets the model instance for current interpretation.
-	 * 
-	 * @return the actual model instance
-	 */
-	IModelInstance getModelInstance();
-	
-	/**
-	 * Sets the model instance to be used during interpretation.
-	 * 
-	 * @param mi the new model instance
-	 */
-	void setModelInstance(IModelInstance mi);
-	
-	/**
-	 * Saves the constraint for the given path. Used for OCL-constraint types
-	 * body, def, initial and derive.
-	 * 
-	 * @param path the path of the attribute/operation described by the constraint
-	 * @param constraint the constraint describing the attribute/operation
-	 */
-	void addConstraint(String path, Constraint constraint);
+	public void addConstraint(String path, Constraint aConstraint);
 
 	/**
-	 * Gets saved constraint describing attribute/operation with given path.
+	 * <p>
+	 * Saves a variable in the environment.
+	 * </p>
 	 * 
-	 * @param path the path of the attribute/operation described by the constraint
-	 * 
-	 * @return the constraint describing the attribute/operation
+	 * @param path
+	 *            The path of the variable or simply the name (e.g. "self")
+	 * @param anOclRoot
+	 *            The variable to be saved.
 	 */
-	Constraint getConstraint(String path);
-	
+	public void addVar(String path, OclRoot anOclRoot);
+
 	/**
-	 * Clone an environment. Used for creating local environment.
-	 * 
-	 * @return a copy of the environment
-	 */
-	IEnvironment clone();
-	
-	/**
-	 * Caches results for a NamedElement (e.g. an expression). Used for 
+	 * <p>
+	 * Caches results for a {@link NamedElement} (e.g. an expression). Used for
 	 * performance enhancement.
+	 * </p>
 	 * 
-	 * @param elem the NamedElement the result belongs to 
-	 * @param result the result for the NamedElement
+	 * @param anElement
+	 *            The {@link NamedElement} the result belongs to.
+	 * @param result
+	 *            The result for the {@link NamedElement}.
 	 */
-	void cacheResult(NamedElement elem, OclRoot result);
-	
-	/**
-	 * Gets the cached result for a NamedElement.
-	 * 
-	 * @param elem the NamedElement the result is asked for.
-	 * 
-	 * @return the cached result
-	 */
-	OclRoot getCachedResult(NamedElement elem);
-	
-	/**
-	 * Remove all results from cache.
-	 */
-	void clearCache();
+	public void cacheResult(NamedElement anElement, OclRoot result);
 
 	/**
-	 * Saves result of atPre() and oclIsNew() for preparation of postconditions.
-	 * 
-	 * @param object the OperationCallExp containing operation atPre() or oclIsNew()
-	 * @param source the result for that operation
+	 * <p>
+	 * Removes all results from cache.
+	 * </p>
 	 */
-	void savePostconditionValue(OperationCallExp object, OclRoot source);
+	public void clearCache();
 
 	/**
+	 * <p>
+	 * Clones an {@link IEnvironment}. Used for creating local environments.
+	 * 
+	 * @return A copy of the {@link IEnvironment}.
+	 */
+	public IEnvironment clone();
+
+	/**
+	 * <p>
+	 * Gets the cached result for a {@link NamedElement}.
+	 * </p>
+	 * 
+	 * @param anElement
+	 *            The {@link NamedElement} the result is asked for.
+	 * 
+	 * @return The cached result.
+	 */
+	public OclRoot getCachedResult(NamedElement anElement);
+
+	/**
+	 * <p>
+	 * Gets saved {@link Constraint} describing attribute/operation with given
+	 * path.
+	 * </p>
+	 * 
+	 * @param path
+	 *            The path of the attribute/operation described by the
+	 *            {@link Constraint}.
+	 * 
+	 * @return The {@link Constraint} describing the attribute/operation.
+	 */
+	public Constraint getConstraint(String path);
+
+	/**
+	 * <p>
+	 * Gets the {@link IModelInstance} for the current interpretation.
+	 * </p>
+	 * 
+	 * @return The actual {@link IModelInstance}.
+	 */
+	public IModelInstance getModelInstance();
+
+	/**
+	 * <p>
 	 * Returns result for operations atPre() and oclIsNew().
+	 * </p>
 	 * 
-	 * @param object the OperationCallExp containing operation atPre() or oclIsNew()
+	 * @param anOperationCallExp
+	 *            The {@link OperationCallExp} containing operation atPre() or
+	 *            oclIsNew().
 	 * 
-	 * @return the postcondition result for that operation
+	 * @return The postcondition result for that operation.
 	 */
-	OclRoot getPostconditionValue(OperationCallExp object);
+	public OclRoot getPostconditionValue(OperationCallExp anOperationCallExp);
+
+	/**
+	 * <p>
+	 * Gets saved variables with given name.
+	 * </p>
+	 * 
+	 * @param path
+	 *            The path of the variable or simply the name (e.g. "self").
+	 * 
+	 * @return Saved variables with given name.
+	 */
+	public OclRoot getVar(String path);
+
+	/**
+	 * <p>
+	 * Saves result of atPre() and oclIsNew() for preparation of postconditions.
+	 * </p>
+	 * 
+	 * @param anOperationCallExp
+	 *            The {@link OperationCallExp} containing operation atPre() or
+	 *            oclIsNew().
+	 * @param source
+	 *            The result for that operation.
+	 */
+	public void savePostconditionValue(OperationCallExp anOperationCallExp,
+			OclRoot source);
+
+	/**
+	 * <p>
+	 * Sets the {@link IModelInstance} to be used during interpretation.
+	 * </p>
+	 * 
+	 * @param aModelInstance
+	 *            The new {@link IModelInstance}.
+	 */
+	public void setModelInstance(IModelInstance aModelInstance);
 }

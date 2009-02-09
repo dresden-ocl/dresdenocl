@@ -40,127 +40,57 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 
 /**
- * The Environment is used to save data needed for interpretation.
- *
- * @author Ronny Brandt
- * @version 1.0 31.08.2007
+ * <p>
+ * This Environment is used to save data needed for interpretation.
+ * </p>
+ * 
+ * @author Ronny Brandt.
  */
 public class Environment implements IEnvironment {
 
-	// the global instance of the environment
+	/** The global instance of the {@link Environment}. */
 	private static IEnvironment GLOBAL;
 
-	// the actual model instance
-	protected IModelInstance mi;
-
-	// saved constraints for body, def, initial und derive
-	protected HashMap<String, Constraint> constraints;
-
-	// saved variables
-	protected HashMap<String, OclRoot> vars;
-
-	// cached results
+	/** Cached results. */
 	private HashMap<NamedElement, OclRoot> cachedResults;
 
-	// special values for postcondition constraints
+	/** the actual model instance. */
+	protected IModelInstance modelInstance;
+
+	/** Special values for postcondition constraints. */
 	protected HashMap<OclRoot, HashMap<OperationCallExp, OclRoot>> postconditionValues;
 
+	/** Saved constraints for body, def, initial and derive. */
+	protected HashMap<String, Constraint> savedConstraints;
+
+	/** Saved variables. */
+	protected HashMap<String, OclRoot> savedVariables;
+
 	/**
+	 * <p>
 	 * Gets the global environment.
+	 * </p>
 	 * 
 	 * @return the global instance of the environment
 	 */
 	public static IEnvironment getGlobalEnvironment() {
-		if (GLOBAL == null)
+
+		if (GLOBAL == null) {
 			GLOBAL = new Environment();
+		}
+		// no else.
+
 		return GLOBAL;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#getModelInstance()
-	 */
-	public IModelInstance getModelInstance() {
-		return mi;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#getVar(java.lang.String)
-	 */
-	public OclRoot getVar(String path) {
-		if (vars != null)
-			return vars.get(path);
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#setModelInstance(tudresden.ocl20.pivot.modelbus.IModelInstance)
-	 */
-	public void setModelInstance(IModelInstance mi) {
-		this.mi = mi;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#addVar(java.lang.String,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public void addVar(String path, OclRoot oclRoot) {
-		if (vars == null)
-			vars = new HashMap<String, OclRoot>();
-
-		vars.put(path, oclRoot);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#addConstraint(java.lang.String,
-	 *      tudresden.ocl20.pivot.pivotmodel.Constraint)
-	 */
-	public void addConstraint(String path, Constraint constraint) {
-		if (constraints == null)
-			constraints = new HashMap<String, Constraint>();
-		constraints.put(path, constraint);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#getConstraint(java.lang.String)
-	 */
-	public Constraint getConstraint(String path) {
-		if (constraints != null)
-			return constraints.get(path);
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#clone()
-	 */
-	public IEnvironment clone() {
-		Environment result = new Environment();
-
-		result.constraints = this.constraints;
-		result.mi = this.mi;
-		result.vars = this.vars;
-		result.cachedResults = this.cachedResults;
-
-		return result;
-	}
-
 	/**
-	 * Gets the new local environment which is a copy of the global environment.
+	 * <p>
+	 * Gets a new local {@link Environment} which is a copy of the global
+	 * {@link Environment}.
+	 * </p>
 	 * 
-	 * @return the new local environment
+	 * @return A new local {@link Environment} which is a copy of the global
+	 *         {@link Environment}.
 	 */
 	public static IEnvironment getNewLocalEnvironment() {
 		return GLOBAL.clone();
@@ -169,24 +99,51 @@ public class Environment implements IEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#cacheResult(tudresden.ocl20.pivot.pivotmodel.NamedElement,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.interpreter.IEnvironment#addConstraint(java.lang.String,
+	 * tudresden.ocl20.pivot.pivotmodel.Constraint)
 	 */
-	public void cacheResult(NamedElement elem, OclRoot result) {
-		if (cachedResults == null)
-			cachedResults = new HashMap<NamedElement, OclRoot>();
-		cachedResults.put(elem, result);
+	public void addConstraint(String path, Constraint aConstraint) {
+
+		if (this.savedConstraints == null) {
+			this.savedConstraints = new HashMap<String, Constraint>();
+		}
+
+		this.savedConstraints.put(path, aConstraint);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#getCachedResult(tudresden.ocl20.pivot.pivotmodel.NamedElement)
+	 * @see tudresden.ocl20.interpreter.IEnvironment#addVar(java.lang.String,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	public OclRoot getCachedResult(NamedElement elem) {
-		if (cachedResults != null)
-			return cachedResults.get(elem);
-		return null;
+	public void addVar(String path, OclRoot oclRoot) {
+
+		if (this.savedVariables == null) {
+			this.savedVariables = new HashMap<String, OclRoot>();
+		}
+		// no else.
+
+		this.savedVariables.put(path, oclRoot);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.interpreter.IEnvironment#cacheResult(tudresden.ocl20.
+	 * pivot.pivotmodel.NamedElement,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	public void cacheResult(NamedElement aNamedElement, OclRoot aResult) {
+
+		if (this.cachedResults == null) {
+			this.cachedResults = new HashMap<NamedElement, OclRoot>();
+		}
+		// no else.
+
+		this.cachedResults.put(aNamedElement, aResult);
 	}
 
 	/*
@@ -195,41 +152,172 @@ public class Environment implements IEnvironment {
 	 * @see tudresden.ocl20.interpreter.IEnvironment#clearCache()
 	 */
 	public void clearCache() {
-		if (cachedResults != null) {
-			cachedResults.clear();
-			cachedResults = null;
+
+		if (this.cachedResults != null) {
+
+			this.cachedResults.clear();
+			this.cachedResults = null;
 		}
+		// no else.
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#savePostconditionValue(tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see
+	 * tudresden.ocl20.interpreter.IEnvironment#getCachedResult(tudresden.ocl20
+	 * .pivot.pivotmodel.NamedElement)
 	 */
-	public void savePostconditionValue(OperationCallExp object, OclRoot source) {
-		if (postconditionValues == null)
-			postconditionValues = new HashMap<OclRoot, HashMap<OperationCallExp, OclRoot>>();
-		HashMap<OperationCallExp, OclRoot> specificValues = postconditionValues
-				.get(getVar("self"));
-		if (specificValues == null)
-			specificValues = new HashMap<OperationCallExp, OclRoot>();
-		specificValues.put(object, source);
-		postconditionValues.put(getVar("self"), specificValues);
+	public OclRoot getCachedResult(NamedElement aNamedElement) {
+
+		OclRoot result;
+
+		if (this.cachedResults != null) {
+			result = cachedResults.get(aNamedElement);
+		}
+
+		else {
+			result = null;
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IEnvironment#getPostconditionValue(tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp)
+	 * @see
+	 * tudresden.ocl20.interpreter.IEnvironment#getConstraint(java.lang.String)
+	 */
+	public Constraint getConstraint(String path) {
+
+		Constraint result;
+
+		if (this.savedConstraints != null) {
+			result = this.savedConstraints.get(path);
+		}
+
+		else {
+			result = null;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.interpreter.IEnvironment#getModelInstance()
+	 */
+	public IModelInstance getModelInstance() {
+		return this.modelInstance;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.interpreter.IEnvironment#getPostconditionValue(tudresden
+	 * .ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
 	public OclRoot getPostconditionValue(OperationCallExp object) {
-		if (postconditionValues != null) {
-			HashMap<OperationCallExp, OclRoot> specificValues = postconditionValues
-					.get(getVar("self"));
-			if (specificValues != null)
-				return specificValues.get(object);
+		
+		OclRoot result;
+		
+		result = modelInstance.getUndefined();
+		
+		if (this.postconditionValues != null) {
+			HashMap<OperationCallExp, OclRoot> specificValues;
+			
+			specificValues = postconditionValues.get(getVar("self"));
+			
+			if (specificValues != null) {
+				result = specificValues.get(object);
+			}
+			// no else.
 		}
-		return mi.getUndefined();
+		// no else.
+		
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.interpreter.IEnvironment#getVar(java.lang.String)
+	 */
+	public OclRoot getVar(String path) {
+
+		OclRoot result;
+
+		if (this.savedVariables != null) {
+			result = savedVariables.get(path);
+		}
+
+		else {
+			result = null;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.interpreter.IEnvironment#savePostconditionValue(tudresden
+	 * .ocl20.pivot.essentialocl.expressions.OperationCallExp,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 */
+	public void savePostconditionValue(OperationCallExp anOperationCallExp,
+			OclRoot aSource) {
+	
+		HashMap<OperationCallExp, OclRoot> specificValues;
+	
+		if (this.postconditionValues == null) {
+			this.postconditionValues = new HashMap<OclRoot, HashMap<OperationCallExp, OclRoot>>();
+		}
+		// no else.
+	
+		specificValues = this.postconditionValues.get(getVar("self"));
+	
+		if (specificValues == null) {
+			specificValues = new HashMap<OperationCallExp, OclRoot>();
+		}
+		// no else.
+	
+		specificValues.put(anOperationCallExp, aSource);
+	
+		this.postconditionValues.put(getVar("self"), specificValues);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.interpreter.IEnvironment#setModelInstance(tudresden.ocl20
+	 * .pivot.modelbus.IModelInstance)
+	 */
+	public void setModelInstance(IModelInstance aModelInstance) {
+		this.modelInstance = aModelInstance;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#clone()
+	 */
+	public IEnvironment clone() {
+
+		Environment result;
+
+		result = new Environment();
+
+		result.savedConstraints = this.savedConstraints;
+		result.modelInstance = this.modelInstance;
+		result.savedVariables = this.savedVariables;
+		result.cachedResults = this.cachedResults;
+
+		return result;
 	}
 }

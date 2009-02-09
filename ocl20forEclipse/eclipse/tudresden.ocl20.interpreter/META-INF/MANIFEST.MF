@@ -12,7 +12,9 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.standardlibrary.java,
  tudresden.ocl20.pivot.modelbus,
  org.apache.commons.lang
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.interpreter,
  tudresden.ocl20.interpreter.event,
  tudresden.ocl20.interpreter.internal
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
+ J2SE-1.5

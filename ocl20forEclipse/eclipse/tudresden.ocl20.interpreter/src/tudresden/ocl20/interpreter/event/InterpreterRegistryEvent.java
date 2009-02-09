@@ -37,57 +37,71 @@ import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
+ * {@link InterpreterRegistryEvent} are fired during interpretation for
+ * listeners registered in the {@link IInterpreterRegistry}.</p>
  * 
- *
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class InterpreterRegistryEvent extends EventObject {
 
-	// The Constant serialVersionUID
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3333654204524166122L;
-	
-	// The affected constraint
+
+	/** The affected constraint. */
 	private Constraint affectedConstraint;
-	
-	// The affected model object
+
+	/** The affected model object. */
 	private IModelObject affectedModelObject;
 
 	/**
-	 * Instantiates a new interpreter registry event.
+	 * <p>
+	 * Instantiates a new {@link InterpreterRegistryEvent}.
+	 * </p>
 	 * 
-	 * @param source the source
-	 * @param affectedConstraint the affected {@link Constraint}
-	 * @param affectedModelObject the affected {@link IModelObject}
+	 * @param source
+	 *            The {@link IInterpreterRegistry} source of the event.
+	 * @param affectedConstraint
+	 *            The affected {@link Constraint}.
+	 * @param affectedModelObject
+	 *            The affected {@link IModelObject}.
 	 */
-	public InterpreterRegistryEvent(IInterpreterRegistry source, Constraint affectedConstraint, IModelObject affectedModelObject) {
+	public InterpreterRegistryEvent(IInterpreterRegistry source,
+			Constraint affectedConstraint, IModelObject affectedModelObject) {
+
 		super(source);
+
 		this.affectedConstraint = affectedConstraint;
 		this.affectedModelObject = affectedModelObject;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.util.EventObject#getSource()
 	 */
 	public IInterpreterRegistry getSource() {
-		return (IInterpreterRegistry) source;
-	}
-	
-	/**
-	 * Gets the affected {@link Constraint}.
-	 * 
-	 * @return the affected {@link Constraint}
-	 */
-	public Constraint getAffectedConstraint() {
-		return affectedConstraint;
+		return (IInterpreterRegistry) this.source;
 	}
 
 	/**
-	 * Gets the affected {@link IModelObject}.
+	 * <p>
+	 * Gets the affected {@link Constraint}.
+	 * </p>
 	 * 
-	 * @return the affected {@link IModelObject}
+	 * @return The affected {@link Constraint}.
+	 */
+	public Constraint getAffectedConstraint() {
+		return this.affectedConstraint;
+	}
+
+	/**
+	 * <p>
+	 * Gets the affected {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @return The affected {@link IModelObject}.
 	 */
 	public IModelObject getAffectedModelObject() {
-		return affectedModelObject;
+		return this.affectedModelObject;
 	}
 }

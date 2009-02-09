@@ -30,23 +30,32 @@
  */
 package tudresden.ocl20.interpreter.event;
 
+import tudresden.ocl20.interpreter.IInterpreterRegistry;
+
 /**
- * The listener interface for receiving IInterpreterRegistry events.
- * The class that is interested in processing a IInterpreterRegistry
- * event implements this interface, and the object created
- * with that class is registered with a component using the
- * component's <code>addIInterpreterRegistryListener<code> method. When
- * the IInterpreterRegistry event occurs, that object's appropriate
+ * <p>
+ * The listener interface for receiving {@link IInterpreterRegistry} events. The
+ * class that is interested in processing a {@link IInterpreterRegistry} event
+ * implements this interface, and the object created with that class is
+ * registered with a component using the component's
+ * <code>addIInterpreterRegistryListener<code> method. When
+ * the {@link IInterpreterRegistry} event occurs, that object's appropriate
  * method is invoked.
+ * </p>
  * 
  * @see IInterpreterRegistryEvent
+ * 
+ * @author Ronny Brandt
  */
 public interface IInterpreterRegistryListener {
 
 	/**
-	 * Interpretation finished.
+	 * <p>
+	 * Invoked when the interpretation finished.
+	 * </p>
 	 * 
-	 * @param e the {@link InterpreterRegistryEvent} that is fired
+	 * @param event
+	 *            The {@link InterpreterRegistryEvent} that is fired.
 	 */
-	void interpretationFinished(InterpreterRegistryEvent e);
+	void interpretationFinished(InterpreterRegistryEvent event);
 }

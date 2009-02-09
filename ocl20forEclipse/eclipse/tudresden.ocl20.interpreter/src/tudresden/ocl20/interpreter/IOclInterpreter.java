@@ -37,78 +37,95 @@ import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
- * 
+ * <p>
+ * Provides an interface for interpreter which interpret {@link Constraint}s for
+ * given {@link IModelObject}s.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public interface IOclInterpreter {
 
 	/**
-	 * Interpret the given constraint for the given object.
+	 * <p>
+	 * Removes all saved results for given objects.
+	 * </p>
 	 * 
-	 * @param c
-	 *            the {@link Constraint} to be interpreted
-	 * @param mo
-	 *            the {@link IModelObject} representing the current object
+	 * @param modelObjects
+	 *            The {@link IModelObject}s for which the results shall be
+	 *            removed.
+	 */
+	public void clearResults(List<IModelObject> modelObjects);
+
+	/**
+	 * <p>
+	 * Interpret the given {@link Constraint} for the given {@link IModelObject}
+	 * .
+	 * </p>
+	 * 
+	 * @param aConstraint
+	 *            The {@link Constraint} to be interpreted.
+	 * @param aModelObject
+	 *            The {@link IModelObject} representing the current object.
 	 * 
 	 * @return the result of the interpretation as {@link OclRoot}
 	 */
-	public OclRoot interpret(Constraint c, IModelObject mo);
+	public OclRoot interpret(Constraint aConstraint, IModelObject aModelObject);
 
 	/**
-	 * Remove saved results for given constraints from given objects.
+	 * <p>
+	 * Checks if interpreter needed model access. Used for caching mechanism.
+	 * </p>
+	 * 
+	 * @return True, if model access was needed.
+	 */
+	public boolean isModelAccessNeeded();
+
+	/**
+	 * <p>
+	 * Checks if interpreter shall use cache.
+	 * </p>
+	 * 
+	 * @return True, if the cache is used.
+	 */
+	public boolean isUseCache();
+
+	/**
+	 * <p>
+	 * Prepare the given {@link Constraint} for the given {@link IModelObject}.
+	 * Used for postconditions.
+	 * </p>
+	 * 
+	 * @param aConstraint
+	 *            The {@link Constraint} to be prepared.
+	 * @param aModelObject
+	 *            The {@link IModelObject}, needed for self reference in
+	 *            postconditions.
+	 */
+	public void prepare(Constraint aConstraint, IModelObject aModelObject);
+
+	/**
+	 * <p>
+	 * Removes saved results for given constraints from given objects.
+	 * </p>
 	 * 
 	 * @param modelObjects
-	 *            the {@link IModelObject}s for which the results shall be
-	 *            removed
+	 *            The {@link IModelObject}s for which the results shall be
+	 *            removed.
 	 * @param constraints
-	 *            the {@link Constraint}s for which the results shall be
-	 *            removed
+	 *            The {@link Constraint}s for which the results shall be
+	 *            removed.
 	 */
 	public void removeResults(List<IModelObject> modelObjects,
 			List<Constraint> constraints);
 
 	/**
-	 * Remove all saved results for given objects.
-	 * 
-	 * @param modelObjects
-	 *            the {@link IModelObject}s for which the results shall be
-	 *            removed
-	 */
-	public void clearResults(List<IModelObject> modelObjects);
-
-	/**
-	 * Checks if interpreter needed model access. Used for caching mechanism.
-	 * 
-	 * @return true, if model access was needed
-	 */
-	public boolean isModelAccessNeeded();
-
-	/**
-	 * Checks if interpreter shall use cache.
-	 * 
-	 * @return true, if is use cache
-	 */
-	public boolean isUseCache();
-
-	/**
-	 * Sets the interpreter to use cache.
+	 * <p>
+	 * Sets the {@link IOclInterpreter} to use cache.
+	 * </p>
 	 * 
 	 * @param useCache
-	 *            true, if interpreter shall use cache
+	 *            True, if the {@link IOclInterpreter} shall use cache.
 	 */
 	public void setUseCache(boolean useCache);
-
-	/**
-	 * Prepare the given {@link Constraint} for the given {@link IModelObject}.
-	 * Used for postconditions.
-	 * 
-	 * @param c
-	 *            the {@link Constraint} to be prepared.
-	 * @param mo
-	 *            the {@link IModelObject}, needed for self reference in
-	 *            postconditions
-	 */
-	public void prepare(Constraint c, IModelObject mo);
 }

@@ -33,70 +33,90 @@ package tudresden.ocl20.interpreter;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
+import tudresden.ocl20.interpreter.event.IInterpreterRegistryListener;
 import tudresden.ocl20.interpreter.internal.InterpreterRegistry;
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.modelbus.internal.ModelRegistry;
 
 /**
- * The activator class controls the plug-in life cycle
+ * <p>
+ * The activator class controls the plug-in life cycle.
+ * </p>
+ * 
+ * @author Ronny Brandt
  */
 public class InterpreterPlugin extends Plugin {
 
-	// The plug-in ID
+	/** The plug-in ID. */
 	public static final String PLUGIN_ID = "tudresden.ocl20.interpreter";
 
-	// The shared instance
+	/** The shared instance. */
 	private static InterpreterPlugin plugin;
-	
-	private IInterpreterRegistry interpreterRegistry;
-	
+
 	/**
-	 * The constructor
+	 * The {@link IInterpreterRegistry} for {@link IInterpreterRegistryListener}
+	 * s of the {@link IOclInterpreter}.
+	 */
+	private IInterpreterRegistry interpreterRegistry;
+
+	/**
+	 * <p>
+	 * Creates a new {@link InterpreterPlugin}.
+	 * </p>
 	 */
 	public InterpreterPlugin() {
-	}
-	
-	public static IInterpreterRegistry getInterpreterRegistry() {
-	    // check that the plugin has been activated
-	    if (plugin == null) {
-	      throw new IllegalStateException("The Interpreter plugin has not been activated."); //$NON-NLS-1$
-	    }
-
-	    // lazily create the registry
-	    if (plugin.interpreterRegistry == null) {
-	      plugin.interpreterRegistry = new InterpreterRegistry();
-	    }
-
-	    return plugin.interpreterRegistry;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		
+
 		LoggingPlugin.configureDefaultLogging(plugin);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
+
 		super.stop(context);
 	}
 
 	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
+	 * @return The {@link IInterpreterRegistry} of this
+	 *         {@link InterpreterPlugin}.
+	 */
+	public static IInterpreterRegistry getInterpreterRegistry() {
+
+		/* Check if the plug-in has been activated. */
+		if (plugin == null) {
+			throw new IllegalStateException(
+					"The Interpreter plugin has not been activated.");
+		}
+		// no else.
+
+		/* Lazily create the registry. */
+		if (plugin.interpreterRegistry == null) {
+			plugin.interpreterRegistry = new InterpreterRegistry();
+		}
+		// no else.
+
+		return plugin.interpreterRegistry;
+	}
+
+	/**
+	 * @return The shared instance.
 	 */
 	public static InterpreterPlugin getDefault() {
 		return plugin;
 	}
-
 }

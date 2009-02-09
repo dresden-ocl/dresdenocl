@@ -39,20 +39,24 @@ import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
+ * <p>
+ * This class implements the interface {@link IInterpreterRegistry} which
+ * provides the possble to add or get Listeners.
+ * </p>
  * 
- *
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class InterpreterRegistry implements IInterpreterRegistry {
 
-	// The listeners
+	/** The listeners of this {@link InterpreterRegistry}. */
 	private ListenerList listeners;
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IInterpreterRegistry#addInterpreterRegistryListener(tudresden.ocl20.interpreter.event.IInterpreterRegistryListener)
+	 * @seetudresden.ocl20.interpreter.IInterpreterRegistry#
+	 * addInterpreterRegistryListener
+	 * (tudresden.ocl20.interpreter.event.IInterpreterRegistryListener)
 	 */
 	public void addInterpreterRegistryListener(
 			IInterpreterRegistryListener listener) {
@@ -62,7 +66,46 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.interpreter.IInterpreterRegistry#removeInterpreterRegistryListener(tudresden.ocl20.interpreter.event.IInterpreterRegistryListener)
+	 * @see
+	 * tudresden.ocl20.interpreter.IInterpreterRegistry#fireInterpretationFinished
+	 * (tudresden.ocl20.pivot.pivotmodel.Constraint,
+	 * tudresden.ocl20.pivot.modelbus.IModelObject)
+	 */
+	public void fireInterpretationFinished(Constraint aConstraint,
+			IModelObject aModelObject) {
+	
+		InterpreterRegistryEvent event;
+	
+		event = null;
+	
+		if (this.listeners != null) {
+			Object[] listeners;
+	
+			listeners = this.listeners.getListeners();
+	
+			for (int i = 0; i < listeners.length; i++) {
+	
+				/* Lazily create the event. */
+				if (event == null) {
+					event = new InterpreterRegistryEvent(this, aConstraint,
+							aModelObject);
+				}
+				// no else.
+	
+				/* Inform the listeners that the interpretation did finish. */
+				((IInterpreterRegistryListener) listeners[i])
+						.interpretationFinished(event);
+			}
+		}
+		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.interpreter.IInterpreterRegistry#
+	 * removeInterpreterRegistryListener
+	 * (tudresden.ocl20.interpreter.event.IInterpreterRegistryListener)
 	 */
 	public void removeInterpreterRegistryListener(
 			IInterpreterRegistryListener listener) {
@@ -70,38 +113,19 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 	}
 
 	/**
-	 * Gets the listeners.
+	 * <p>
+	 * Gets the listeners of this {@link InterpreterRegistry}.
+	 * </p>
 	 * 
-	 * @return the listeners
+	 * @return The listeners of this {@link InterpreterRegistry}.
 	 */
-	protected ListenerList getListeners() {
+	private ListenerList getListeners() {
 
-		if (listeners == null) {
-			listeners = new ListenerList(ListenerList.IDENTITY);
+		if (this.listeners == null) {
+			this.listeners = new ListenerList(ListenerList.IDENTITY);
 		}
+		// no else.
 
-		return listeners;
-	}
-
-	/* (non-Javadoc)
-	 * @see tudresden.ocl20.interpreter.IInterpreterRegistry#fireInterpretationFinished(tudresden.ocl20.pivot.pivotmodel.Constraint, tudresden.ocl20.pivot.modelbus.IModelObject)
-	 */
-	public void fireInterpretationFinished(Constraint c, IModelObject mo) {
-		InterpreterRegistryEvent event = null;
-
-		if (listeners != null) {
-			Object[] listeners = this.listeners.getListeners();
-
-			for (int i = 0; i < listeners.length; i++) {
-
-				// lazily create the event
-				if (event == null) {
-					event = new InterpreterRegistryEvent(this, c, mo);
-				}
-
-				((IInterpreterRegistryListener) listeners[i])
-						.interpretationFinished(event);
-			}
-		}
+		return this.listeners;
 	}
 }

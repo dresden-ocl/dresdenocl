@@ -35,32 +35,47 @@ import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
+ * <p>
+ * Provides the interface for an registry which contains listeners which observe
+ * an {@link IOclInterpreter}.
+ * </p>
  * 
- *
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public interface IInterpreterRegistry {
 
 	/**
-	 * Adds the interpreter registry listener.
+	 * <p>
+	 * Adds an {@link IInterpreterRegistryListener}.
+	 * </p>
 	 * 
-	 * @param listener the listener
+	 * @param listener
+	 *            The {@link IInterpreterRegistryListener} which shall be added.
 	 */
-	void addInterpreterRegistryListener(IInterpreterRegistryListener listener);
-	
+	public void addInterpreterRegistryListener(
+			IInterpreterRegistryListener listener);
+
 	/**
-	 * Removes the interpreter registry listener.
+	 * <p>
+	 * Fires an interpretation finished event.
+	 * </p>
 	 * 
-	 * @param listener the listener
+	 * @param aConstraint
+	 *            The {@link Constraint} that was interpreted.
+	 * @param modelObject
+	 *            The {@link IModelObject} that was interpreted.
 	 */
-	void removeInterpreterRegistryListener(IInterpreterRegistryListener listener);
-	
+	public void fireInterpretationFinished(Constraint aConstraint,
+			IModelObject modelObject);
+
 	/**
-	 * Fire interpretation finished.
+	 * <p>
+	 * Removes an {@link IInterpreterRegistryListener}.
 	 * 
-	 * @param c the {@link Constraint} that was interpreted
-	 * @param mo the {@link IModelObject} that was intepreted
+	 * @param listener
+	 *            The {@link IInterpreterRegistryListener} which shall be
+	 *            removed.
 	 */
-	void fireInterpretationFinished(Constraint c, IModelObject mo);
+	public void removeInterpreterRegistryListener(
+			IInterpreterRegistryListener listener);
 }
