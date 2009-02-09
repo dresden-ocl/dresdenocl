@@ -1,0 +1,63 @@
+% At least, use document class book
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{graphicx}
+
+\usepackage{color}
+\definecolor{blue}{rgb}{0,0,1}
+
+\newcommand{\url}[1]{{\begin{ttfamily}#1\end{ttfamily}}}
+
+\begin{document}
+
+\title{Examples provided with Dresden OCL2 for Eclipse}
+\author{Claas Wilke}
+
+\maketitle
+
+
+
+
+This document provides an overview over examples which are provided with \textit{Dresden OCL2 for Eclipse}. How to load models and model instances and how to parse and interpret constraints is explained in a general \textit{Dresden OCL2 for Eclipse Tutorial} which can be found at \textcolor{blue}{http://dresden-ocl.svn.sourceforge.net/\linebreak[0]viewvc/dresden-ocl/trunk/ocl20forEclipse/doc/pdf/tutorial.pdf}.
+
+
+\begin{figure}[!htbp]
+\begin{tabular}[h]{|p{3.2cm}|p{8cm}|}
+  \hline
+  \textbf{Simple example} & \\
+  Plug-in package & \url{tudresden.ocl20.pivot.examples.\linebreak[0]simple}\\
+  Meta model & UML 1.5 or UML 2.0\\
+  Model & \url{model/simple.xmi} (with UML 1.5) \newline \url{model/simple.uml} (with UML 2.0)\\
+  OCL expressions & \url{constraints/invariants.ocl}\\
+  Model instance & \url{src/tudresden.ocl20.pivot.examples.simple/\linebreak[0]ModelProviderClass.java}\\
+  \hline
+  \hline
+  \textbf{Living example} & \\
+  Plug-in package & \url{tudresden.ocl20.pivot.examples.\linebreak[0]living}\\
+  Meta model & UML 1.5\\
+  Model & \url{model/UmlExample.xmi}\\
+  OCL expressions & \url{expressions/living.ocl}\\
+  Model instance & \url{src/tudresden.ocl20.pivot.examples.living/\linebreak[0]ModelProviderClass.java}\\
+  \hline
+  \hline
+  \textbf{PML example} & \\
+  Plug-in package & \url{tudresden.ocl20.pivot.examples.\linebreak[0]pml}\\
+  Meta model & Ecore\\
+  Model & \url{model/pml.ecore}\\
+  OCL expressions & \url{expressions/testpml.ocl}\\
+  Model instance & \url{model instance/Testmodell.pml}\\
+  \hline
+\end{tabular}
+\end{figure}
+
+
+
+
+\end{document}
