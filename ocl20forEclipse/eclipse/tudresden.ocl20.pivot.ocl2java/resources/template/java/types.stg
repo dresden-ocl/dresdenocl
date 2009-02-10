@@ -1,0 +1,98 @@
+group javaTypes;
+
+// ---- TEMPLATES FOR JAVA TYPES ----
+// ----------------------------------
+
+
+// --- Any Type ---
+anyType() ::= <<
+Object
+>>
+
+
+// --- Bag Type ---
+bagType() ::= <<
+tudresden.ocl20.pivot.ocl2java.types.OclBag
+>>
+
+
+// --- Boolean Type ---
+booleanType() ::= <<
+Boolean
+>>
+
+
+// --- Collection Type ---
+collectionType() ::= <<
+tudresden.ocl20.pivot.ocl2java.types.IOclCollection
+>>
+
+
+// --- Enumeration Type ---
+enumerationType() ::= <<
+Enum
+>>
+
+
+// --- Integer Type ---
+integerType() ::= <<
+Integer
+>>
+
+
+// --- OrderedSet Type ---
+orderedSetType() ::= <<
+tudresden.ocl20.pivot.ocl2java.types.OclOrderedSet
+>>
+
+
+// --- Real Type ---
+realType() ::= <<
+Float
+>>
+
+
+// --- Sequence Type ---
+sequenceType() ::= <<
+tudresden.ocl20.pivot.ocl2java.types.OclSequence
+>>
+
+
+// --- Set Type ---
+setType() ::= <<
+tudresden.ocl20.pivot.ocl2java.types.OclSet
+>>
+
+
+// --- String Type ---
+stringType() ::= <<
+String
+>>
+
+
+// --- Type Type ---
+typeType() ::= <<
+Class
+>>
+
+
+// --- Tuple Type ---
+tupleType() ::= <<
+java.util.HashMap<String, Object>
+>>
+
+
+// --- Undefined Type ---
+undefinedType() ::= <<
+>>
+
+
+// --- UnlimitedNatural Type ---
+unlimitedNaturalType() ::= <<
+Long
+>>
+
+
+// --- Void Type ---
+voidType() ::= <<
+>>

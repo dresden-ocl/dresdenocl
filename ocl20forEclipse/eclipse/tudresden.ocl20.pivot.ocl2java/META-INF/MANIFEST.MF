@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ocl2java Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2java
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.pivot.ocl2java.Ocl2JavaPlugin
+Require-Bundle: org.apache.commons.lang,
+ org.eclipse.core.runtime,
+ org.eclipse.emf,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.essentialocl,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary,
+ tudresden.ocl20.pivot.modelbus
+Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.pivot.ocl2java,
+ tudresden.ocl20.pivot.ocl2java.code,
+ tudresden.ocl20.pivot.ocl2java.exception
+Bundle-ClassPath: antlr.jar,
+ stringtemplate.jar,
+ .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
+ J2SE-1.5

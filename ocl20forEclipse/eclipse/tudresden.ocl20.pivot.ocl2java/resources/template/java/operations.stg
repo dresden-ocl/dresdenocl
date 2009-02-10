@@ -1,0 +1,451 @@
+group javaOperations;
+
+// ---- TEMPLATES FOR JAVA OPERATIONS ----
+// ---------------------------------------
+
+
+// --- Abs Operation ---
+absOperation(sourceExp, resultType) ::= <<
+java.lang.Math.abs($sourceExp$)
+>>
+
+
+// --- AllInstances Operation ---
+allInstancesOperation(sourceExp, typeName) ::= <<
+(new $setType()$<$typeName$>((java.util.Set<$typeName$>) this.allInstances.get($sourceExp$.class.getCanonicalName()).keySet()))
+>>
+
+
+// --- And Operation ---
+andOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ && $argsExp$)
+>>
+
+
+// --- Append Operation ---
+appendOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.append($argsExp$)
+>>
+
+
+// --- AsBag Operation ---
+asBagOperation(sourceExp) ::= <<
+$sourceExp$.asBag()
+>>
+
+
+// --- AsOrderedSet Operation ---
+asOrderedSetOperation(sourceExp) ::= <<
+$sourceExp$.asOrderedSet()
+>>
+
+
+// --- AsSequence Operation ---
+asSequenceOperation(sourceExp) ::= <<
+$sourceExp$.asSequence()
+>>
+
+
+// --- AsSet Operation ---
+asSetOperation(sourceExp) ::= <<
+$sourceExp$.asSet()
+>>
+
+
+// --- At Operation ---
+atOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.get($argsExp$)
+>>
+
+
+// --- Concat Operation ---
+concatOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.concat($argsExp$)
+>>
+
+
+// --- Count Operation ---
+countOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.count($argsExp$)
+>>
+
+
+// --- Div Operation ---
+divOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ / $argsExp$)
+>>
+
+
+// --- Division Operation ---
+divisionOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ / $argsExp$)
+>>
+
+
+// --- Division Operation On Integer ---
+divisionOnIntegerOperation(sourceExp, argsExp) ::= <<
+(($realType()$) $sourceExp$ / ($realType()$) $argsExp$))
+>>
+
+
+// --- Equals Operation ---
+equalsOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.equals($argsExp$)
+>>
+
+
+// --- Equals Operation on Primitive Types ---
+equalsOnPrimitiveOperation(sourceExp, argsExp) ::= <<
+(($anyType()$) $sourceExp$).equals($argsExp$)
+>>
+
+
+// --- Excludes Operation ---
+excludesOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.excludes($argsExp$)
+>>
+
+
+// --- ExcludesAll Operation ---
+excludesAllOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.excludesAll($argsExp$)
+>>
+
+
+// --- Excluding Operation ---
+excludingOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.excluding($argsExp$)
+>>
+
+
+// --- First Operation ---
+firstOperation(sourceExp) ::= <<
+$sourceExp$.first()
+>>
+
+
+// --- Flatten Operation ---
+flattenOperation(sourceExp) ::= <<
+$sourceExp$.flatten()
+>>
+
+
+// --- Floor Operation ---
+floorOperation(sourceExp) ::= <<
+(($integerType()$) java.lang.Math.floor($sourceExp$))
+>>
+
+
+// --- Greater Operation ---
+greaterOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ > $argsExp$)
+>>
+
+
+// --- GreaterEquals Operation ---
+greaterEqualsOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ >= $argsExp$)
+>>
+
+
+// --- Implies Operation ---
+impliesOperation(sourceExp, argsExp) ::= <<
+(!$sourceExp$ || $argsExp$)
+>>
+
+
+// --- Includes Operation ---
+includesOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.contains($argsExp$)
+>>
+
+
+// --- IncludesAll Operation ---
+includesAllOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.containsAll($argsExp$)
+>>
+
+
+// --- Including Operation ---
+includingOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.including($argsExp$)
+>>
+
+
+// --- IndexOf Operation ---
+indexOfOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.indexOf($argsExp$)
+>>
+
+
+// --- InsertAt Operation ---
+insertAtOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.insertAt($argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+
+// --- Intersection Operation ---
+intersectionOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.intersection($argsExp$)
+>>
+
+
+// --- IsEmpty Operation ---
+isEmptyOperation(sourceExp) ::= <<
+$sourceExp$.isEmpty()
+>>
+
+
+// --- Last Operation ---
+lastOperation(sourceExp) ::= <<
+$sourceExp$.last()
+>>
+
+
+// --- Lesser Operation ---
+lesserOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ < $argsExp$)
+>>
+
+
+// --- LesserEquals Operation ---
+lesserEqualsOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ <= $argsExp$)
+>>
+
+
+// --- Max Operation ---
+maxOperation(sourceExp, argsExp) ::= <<
+java.lang.Math.max($sourceExp$, $argsExp$)
+>>
+
+
+// --- Min Operation ---
+minOperation(sourceExp, argsExp) ::= <<
+java.lang.Math.min($sourceExp$, $argsExp$)
+>>
+
+
+// --- Minus Operation ---
+minusOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ - $argsExp$)
+>>
+
+
+// --- MinusOnCollection Operation ---
+minusOnCollectionOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.minus($argsExp$)
+>>
+
+
+// --- Multiply Operation ---
+multiplyOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ * $argsExp$)
+>>
+
+
+// --- Modulo Operation ---
+modOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ & $argsExp$)
+>>
+
+
+// --- Negative Operation ---
+negativeOperation(sourceExp) ::= <<
+-($sourceExp$)
+>>
+
+
+// --- Not Operation ---
+notOperation(sourceExp) ::= <<
+!$sourceExp$
+>>
+
+
+// --- NotEmpty Operation ---
+notEmptyOperation(sourceExp) ::= <<
+$sourceExp$.notEmpty()
+>>
+
+
+// --- NotEquals Operation ---
+notEqualsOperation(sourceExp, argsExp) ::= <<
+!$sourceExp$.equals($argsExp$)
+>>
+
+
+// --- NotEquals Operation on Primitive Types ---
+notEqualsOnPrimitiveOperation(sourceExp, argsExp) ::= <<
+!(($anyType()$) $sourceExp$).equals($argsExp$)
+>>
+
+
+// --- OclAsType Operation ---
+oclAsTypeOperation(sourceExp, argsExp) ::= <<
+(($argsExp$) $sourceExp$)
+>>
+
+
+// --- OclIsInvalid Operation ---
+oclIsInvalidOperation(sourceExp) ::= <<
+($sourceExp$ == null)
+>>
+
+
+// --- OclIsNew Operation ---
+oclIsNewOperation(sourceExp) ::= <<
+this.newInstances.containsKey($sourceExp$)
+>>
+
+
+// --- OclIsKindOf Operation ---
+oclIsKindOfOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ instanceof $argsExp$)
+>>
+
+
+// --- OclIsTypeOf Operation ---
+oclIsTypeOfOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.getClass().getCanonicalName().equals("$argsExp$")
+>>
+
+
+// --- OclIsUndefined Operation ---
+oclIsUndefinedOperation(sourceExp) ::= <<
+($sourceExp$ == null)
+>>
+
+
+// --- Or Operation ---
+orOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ || $argsExp$)
+>>
+
+
+// --- Plus Operation ---
+plusOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ + $argsExp$)
+>>
+
+
+// --- Prepend Operation ---
+prependOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.prepend($argsExp$)
+>>
+
+
+// --- Product Operation ---
+productOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.product($argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+
+// --- Round Operation ---
+roundOperation(sourceExp) ::= <<
+java.lang.Math.round($sourceExp$)
+>>
+
+
+// --- Size Operation ---
+sizeOperation(sourceExp) ::= <<
+$sourceExp$.size()
+>>
+
+
+// --- Size on String Operation ---
+sizeOnStringOperation(sourceExp) ::= <<
+$sourceExp$.length()
+>>
+
+
+// --- SubOrderedSet Operation ---
+subOrderedSetOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.subOrderedSet($argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+
+// --- SubSequence Operation ---
+subSequenceOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.subSequence($argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+
+// --- Substring Operation ---
+substringOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.substring($argsExp:{arg | $arg$}; separator = " - 1, "$)
+>>
+
+
+// --- Sum Operation ---
+sumOperation(sourceExp, genericType, resultVar, elementName) ::= <<
+$genericType$ $resultVar$;
+$resultVar$ = new $genericType$(0);
+
+/* Compute the result of a sum operation. */
+for ($genericType$ $elementName$ : $sourceExp$) {
+    $resultVar$ += $elementName$;
+}
+
+>>
+
+
+// --- SymmetricDifference Operation ---
+symmetricDifferenceOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.symmetricDifference($argsExp$)
+>>
+
+
+// --- ToInteger Operation ---
+toIntegerOperation(sourceExp) ::= <<
+Integer.parseInt($sourceExp$)
+>>
+
+
+// --- ToReal Operation ---
+toRealOperation(sourceExp) ::= <<
+Float.parseFloat($sourceExp$)
+>>
+
+
+// --- UML Operation ---
+umlOperation(operationName, sourceExp, argsExp) ::= <<
+$sourceExp$.$operationName$($argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+
+// --- Union Operation ---
+unionOperation(sourceExp, argsExp) ::= <<
+$sourceExp$.union($argsExp$)
+>>
+
+
+// --- Xor Operation ---
+xorOperation(sourceExp, argsExp) ::= <<
+($sourceExp$ ^ $argsExp$)
+>>
+
+
+// ---- SOME OPERATION NAMES USED IN OTHER TEMPLATES ----
+// ------------------------------------------------------
+
+// --- Add Operation Name ---
+addOperationName() ::= <<
+add
+>>
+
+
+// --- AddAll Operation Name ---
+addAllOperationName() ::= <<
+addAll
+>>
+
+
+// --- Name for the method to manually check Invariants ---
+checkInvariantsOperationName() ::= <<
+checkInvariants
+>>
+
+// --- Name for the method to deeply clone Objects ---
+deepCopyOperationName() ::= <<
+createCopy
+>>
