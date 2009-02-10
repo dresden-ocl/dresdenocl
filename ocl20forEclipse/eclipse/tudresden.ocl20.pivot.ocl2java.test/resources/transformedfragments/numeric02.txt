@@ -1,0 +1,1 @@
+((Object) ((Float) ((Integer) java.lang.Math.floor(new Float(3.2))) / (Float) new Integer(3)))).equals(new Integer(1))

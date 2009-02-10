@@ -1,0 +1,1 @@
+aClass.program.levels.contains(aClass.currentLevel)

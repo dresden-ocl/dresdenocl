@@ -1,0 +1,19 @@
+tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner> result2;
+result2 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner>();
+
+/* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
+for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram anElement2 : aClass.programs) {
+    result2.addAll(anElement2.partners);
+}
+tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner> result1;
+result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner>();
+
+/* Iterator Select: Select all elements which fulfill the condition. */
+for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : result2) {
+    if (!anElement1.equals(aClass)) {
+        result1.add(anElement1);
+    } 
+    // no else
+}
+
+(result1.size() >= new Integer(0))

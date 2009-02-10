@@ -1,0 +1,1 @@
+((Object) (new Integer(13) & new Integer(2))).equals(new Integer(1))

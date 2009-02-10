@@ -1,0 +1,1 @@
+"Anneke and Jos".substring(new Integer(12) - 1, new Integer(14)).equals("Jos")

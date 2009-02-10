@@ -1,0 +1,23 @@
+tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>> collection1;
+collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>>();
+
+tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection2;
+collection2 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+
+collection2.add(new Integer(1));
+collection2.add(new Integer(2));
+collection1.add(collection2);
+tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection3;
+collection3 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+
+collection3.add(new Integer(3));
+collection3.add(new Integer(4));
+collection1.add(collection3);
+tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection4;
+collection4 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+
+collection4.add(new Integer(5));
+collection4.add(new Integer(6));
+collection1.add(collection4);
+
+((Object) collection1.size()).equals(new Integer(3))

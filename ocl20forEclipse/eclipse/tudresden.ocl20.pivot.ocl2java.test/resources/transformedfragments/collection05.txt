@@ -1,0 +1,7 @@
+tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> collection1;
+collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<String>();
+
+collection1.add("Affe");
+collection1.add("Nuss");
+
+((Object) collection1.size()).equals(new Integer(2))

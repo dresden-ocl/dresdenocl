@@ -1,0 +1,13 @@
+tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection1;
+collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(2));
+
+tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection2;
+collection2 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+
+collection2.add(new Integer(1));
+collection2.add(new Integer(3));
+
+((Object) collection1.intersection(collection2).size()).equals(new Integer(1))

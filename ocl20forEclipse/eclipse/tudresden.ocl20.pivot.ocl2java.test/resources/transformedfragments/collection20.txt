@@ -1,0 +1,9 @@
+tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner> result1;
+result1 = new tudresden.ocl20.pivot.ocl2java.types.OclBag<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner>();
+
+/* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
+for (tudresden.ocl20.pivot.examples.royalsandloyals.Service anElement1 : aClass.availableServices) {
+    result1.add(anElement1.partner);
+}
+
+aClass.program.partners.containsAll(result1)

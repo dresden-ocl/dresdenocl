@@ -1,0 +1,11 @@
+tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> collection1;
+collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<String>();
+
+collection1.add("a");
+collection1.add("b");
+collection1.add("c");
+collection1.add("c");
+collection1.add("d");
+collection1.add("e");
+
+collection1.first().equals("a")

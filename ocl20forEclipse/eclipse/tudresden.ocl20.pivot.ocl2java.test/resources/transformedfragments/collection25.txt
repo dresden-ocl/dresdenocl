@@ -1,0 +1,23 @@
+tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection1;
+collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(4));
+collection1.add(new Integer(7));
+collection1.add(new Integer(10));
+
+tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection2;
+collection2 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+
+collection2.add(new Integer(4));
+collection2.add(new Integer(5));
+collection2.add(new Integer(7));
+
+tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection3;
+collection3 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+
+collection3.add(new Integer(1));
+collection3.add(new Integer(5));
+collection3.add(new Integer(10));
+
+collection1.symmetricDifference(collection2).equals(collection3)

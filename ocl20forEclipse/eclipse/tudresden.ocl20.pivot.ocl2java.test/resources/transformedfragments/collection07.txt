@@ -1,0 +1,9 @@
+tudresden.ocl20.pivot.ocl2java.types.OclSequence<Integer> collection1;
+collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<Integer>();
+
+/* TODO: Auto-generated initialization does only work for numeric values. */
+for (Integer index1 = new Integer(1); index1 <= (new Integer(6) + new Integer(4)); index1++) {
+    collection1.add(index1);
+}
+
+((Object) collection1.size()).equals(new Integer(10))

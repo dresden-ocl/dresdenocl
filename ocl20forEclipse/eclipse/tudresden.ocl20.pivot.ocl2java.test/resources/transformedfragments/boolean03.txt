@@ -1,0 +1,1 @@
+((aClass.getAge() > new Integer(21)) && (aClass.getAge() < new Integer(65)))

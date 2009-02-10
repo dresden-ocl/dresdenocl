@@ -1,0 +1,19 @@
+Boolean result1;
+result1 = false;
+
+/* Iterator One: Iterate and check, if exactly one element fulfills the condition. */
+for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement1 : aClass.membership.accounts) {
+    if ((anElement1.number < new Integer(10000))) {
+        if (result1) {
+            // Found a second element.
+            result1 = false;
+            break;
+        } else
+            // Found a first element.
+            result1 = true;
+	    }
+    } 
+    // no else
+}
+
+result1

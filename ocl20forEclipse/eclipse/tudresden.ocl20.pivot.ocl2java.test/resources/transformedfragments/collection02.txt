@@ -1,0 +1,8 @@
+tudresden.ocl20.pivot.ocl2java.types.OclSet<String> collection1;
+collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<String>();
+
+collection1.add("Apfel");
+collection1.add("Orange");
+collection1.add("Erdbeere");
+
+((Object) collection1.size()).equals(new Integer(3))

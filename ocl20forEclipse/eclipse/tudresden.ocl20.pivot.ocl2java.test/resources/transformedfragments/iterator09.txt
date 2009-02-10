@@ -1,0 +1,13 @@
+tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount result1;
+result1 = null;
+
+/* Iterator Any: Iterate through the elements and return one element that fulfills the condition. */
+for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement1 : aClass.membership.accounts) {
+    if ((anElement1.number < new Integer(10000))) {
+        result1 = anElement1;
+        break;
+    }
+    // no else
+}
+
+result1.isEmpty()

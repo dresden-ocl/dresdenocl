@@ -1,0 +1,1 @@
+((Object) aClass.program.levels.excludes(aClass.currentLevel)).equals(new Boolean(false))

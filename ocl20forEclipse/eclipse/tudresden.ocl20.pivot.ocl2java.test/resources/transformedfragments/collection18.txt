@@ -1,0 +1,6 @@
+tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer> collection1;
+collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSet<Integer>();
+
+collection1.add(new Integer(1));
+
+((Object) collection1.isEmpty()).equals(new Boolean(false))

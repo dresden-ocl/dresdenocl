@@ -1,0 +1,22 @@
+tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> collection1;
+collection1 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<String>();
+
+collection1.add("a");
+collection1.add("b");
+collection1.add("c");
+collection1.add("c");
+collection1.add("d");
+collection1.add("e");
+
+tudresden.ocl20.pivot.ocl2java.types.OclSequence<String> collection2;
+collection2 = new tudresden.ocl20.pivot.ocl2java.types.OclSequence<String>();
+
+collection2.add("X");
+collection2.add("a");
+collection2.add("b");
+collection2.add("c");
+collection2.add("c");
+collection2.add("d");
+collection2.add("e");
+
+collection1.prepend("X").equals(collection2)

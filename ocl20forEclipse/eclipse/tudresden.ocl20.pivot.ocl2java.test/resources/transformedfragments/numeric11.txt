@@ -1,0 +1,1 @@
+((Object) ((Integer) java.lang.Math.floor(-(new Float(2.4))))).equals(-(new Integer(3)))
