@@ -10,7 +10,28 @@
 \usepackage{listings}
 \usepackage{graphicx}
 
-\newcommand{\url}[1]{{\begin{ttfamily}#1\end{ttfamily}}}
+% Für Metadaten im PDF.
+\usepackage[
+  bookmarksnumbered=true,
+  pdftitle={An Introduction into Dresden OCL2 for Eclipse},
+  pdfauthor={Claas Wilke, Ronny Brandt},
+  pdfcreator={TeXnicCenter},
+  pdfkeywords={OCL, Dresden OCL, constraints},
+  pdfsubject={A Tutorial which introduces into Dresden OCL2 for Eclipse.}
+]{hyperref}
+\definecolor{LinkColor}{rgb}{0,0,1}
+	
+\hypersetup{
+  colorlinks=true,
+  linkcolor=LinkColor,
+  citecolor=LinkColor,
+  filecolor=LinkColor,
+  menucolor=LinkColor,
+  urlcolor=LinkColor
+} 
+
+\newcommand{\reference}[1]{{\begin{ttfamily}#1\end{ttfamily}}}
+
 
 \begin{document}
 
@@ -57,14 +78,14 @@ To use \textit{Dresden OCL2 for Eclipse} you need to install the toolkit as \tex
 	
 \subsection{Installing Dresden OCL2 for Eclipse as jar files}
 	
-To install \textit{Dresden OCL2 for Eclipse} as \textit{Eclipse} plug-in, you need to have the jar archives of the toolkit. The jar archives are available at \url{http://dresden-ocl.\linebreak[0]sourceforge.net/}. You need to copy the jar archives into the ``plugins'' directory of your \textit{Eclipse SDK} distribution. Then you can start the \textit{Eclipse SDK} and you can work with \textit{Dresden OCL2 for Eclipse}.
+To install \textit{Dresden OCL2 for Eclipse} as \textit{Eclipse} plug-in, you need to have the jar archives of the toolkit. The jar archives are available at \reference{http://dresden-ocl.\linebreak[0]sourceforge.net/}. You need to copy the jar archives into the ``plugins'' directory of your \textit{Eclipse SDK} distribution. Then you can start the \textit{Eclipse SDK} and you can work with \textit{Dresden OCL2 for Eclipse}.
 	
 	
 \subsection{Importing Dresden OCL2 for Eclipse into an Eclipse Workspace}
 
 Alternatively you can import \textit{Dresden OCL2 for Eclipse} as plug-in projects into an \textit{Eclipse} workspace. There are two different options to do that.
 
-On the one hand you can import the plug-ins from your file system, if you have already downloaded them (e.g. from \url{http://sourceforge.net/\linebreak[0]projects/\linebreak[0]dresden-ocl/} as a source code distribution). One the other hand you can import the plug-ins directly from the \textit{SVN} (\textit{Subversion}) of \textit{Dresden OCL2 for Eclipse}. Both possibilities are described below.
+On the one hand you can import the plug-ins from your file system, if you have already downloaded them (e.g. from \reference{http://sourceforge.net/\linebreak[0]projects/\linebreak[0]dresden-ocl/} as a source code distribution). One the other hand you can import the plug-ins directly from the \textit{SVN} (\textit{Subversion}) of \textit{Dresden OCL2 for Eclipse}. Both possibilities are described below.
 
 	
 \subsubsection{Import the plug-ins from the local file system}
@@ -92,9 +113,9 @@ To import the plug-ins directly from the \textit{SVN} repository, you need to in
 	
 \textbf{Attention: The \textit{Subclipse} plug-in does not work with some distributions of \textit{Eclipse 3.4}}. To access the \textit{SVN} Repository with \textit{Eclipse 3.4} use another \textit{SVN} plug-in for \textit{Eclipse} or use an external tool to access the \textit{SVN} repository.
 	
-After installing \textit{Subclipse}, a new \textit{Eclispe perspective} for access to \textit{SVN} should exist. The perspective can be opened via the menu ``Window > Open Perpective > Other... > SVN Repository Exploring''. In the view \textit{SVN Repository} you can add a new repository (see figure \ref{pic:SVN}) using the URL \url{https://dresden-ocl.\linebreak[0]svn.sourceforge.net/svnroot/dresden-ocl/}. After pressing the button\linebreak[0] ``Finish'' the SVN repository root should the visible in the \textit{repository view}.
+After installing \textit{Subclipse}, a new \textit{Eclispe perspective} for access to \textit{SVN} should exist. The perspective can be opened via the menu ``Window > Open Perpective > Other... > SVN Repository Exploring''. In the view \textit{SVN Repository} you can add a new repository (see figure \ref{pic:SVN}) using the URL \reference{https://dresden-ocl.\linebreak[0]svn.sourceforge.net/svnroot/dresden-ocl/}. After pressing the button\linebreak[0] ``Finish'' the SVN repository root should the visible in the \textit{repository view}.
 	
-To checkout the plug-ins, you now select them in the repository directory \url{trunk/ocl20forEclipse/eclipse} and use the ``Checkout...'' function in the context menu (see figure \ref{pic:Checkout}). The given settings could be used and after a click on the ''Finish'' button the plug-ins should be imported.
+To checkout the plug-ins, you now select them in the repository directory \reference{trunk/ocl20forEclipse/eclipse} and use the ``Checkout...'' function in the context menu (see figure \ref{pic:Checkout}). The given settings could be used and after a click on the ''Finish'' button the plug-ins should be imported.
 	
 \begin{figure}[!htbp]
 	\centering
@@ -134,7 +155,7 @@ If an error like ``Problem: failed to create task or type eclipse.refresh\-Local
 	\label{pic:AntConfig}
 \end{figure}
 	
-After executing the build script successfully you need to update the projects in your workspace. Update the project \url{tudresden.ocl20.pivot.oclparser} via context menu (``Refresh'', see figure \ref{pic:Refresh}).
+After executing the build script successfully you need to update the projects in your workspace. Update the project \reference{tudresden.ocl20.pivot.oclparser} via context menu (``Refresh'', see figure \ref{pic:Refresh}).
 
 \begin{figure}[!htbp]
 	\centering
@@ -151,7 +172,7 @@ Additionally you need to recompile all depending projects. Select the function `
 
 If you installed the \textit{Dresden OCL2 for Eclipse} using jar archives, you can execute the toolkit by starting your \textit{Eclipse SDK}. If you imported the Toolkit as plug-in projects into an \textit{Eclipse} workspace, you have to start a new \textit{Eclipse SDK} instance. You can start a new instance via the menu ``Run > Run As > Eclipse Application''. If the menu ``Eclipse Application'' is not available or disabled you need to select one of the plug-ins of the toolkit first.
 
-This tutorial explains \textit{Dresden OCL2 for Eclipse} using the \textit{Simple example} which is located in the plug-in package \url{tudresden.ocl20.pivot.examples.\linebreak[0]simple}. Figure \ref{pic:Simple} shows the class diagram which is described by the \textit{Simple example}.
+This tutorial explains \textit{Dresden OCL2 for Eclipse} using the \textit{Simple example} which is located in the plug-in package \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple}. Figure \ref{pic:Simple} shows the class diagram which is described by the \textit{Simple example}.
 
 Table \ref{tab:examples} shows all examples which are provided with \textit{Dresden OCL2 for Eclipse} by now. The different examples use different meta models which is possible with the \textit{pivot-model} architecture of the toolkit. The \textit{Simple example} can be used with two different meta models. These are \textit{UML 1.5} (based on \textit{Netbeans MDR}) and \textit{UML 2.0} (based on \textit{Eclipse MDT UML2}).
 
@@ -166,27 +187,35 @@ Table \ref{tab:examples} shows all examples which are provided with \textit{Dres
 \begin{tabular}[h]{|p{5.2cm}|p{6cm}|}
   \hline
   \textbf{Simple example} & \\
-  Plug-in package & \url{tudresden.ocl20.pivot.examples.\linebreak[0]simple}\\
+  Plug-in package & \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple}\\
   Meta model & UML 1.5 or UML 2.0\\
-  Model & \url{model/simple.xmi} (with UML 1.5) \newline \url{model/simple.uml} (with UML 2.0)\\
-  OCL expressions & \url{constraints/invariants.ocl}\\
-  Model instance & \url{src/tudresden.ocl20.pivot.\linebreak[0]examples.simple/\linebreak[0]ModelProviderClass.java}\\
+  Model & \reference{model/simple.xmi} (with UML 1.5)\newline \reference{model/simple.uml} (with UML 2.0)\\
+  OCL expressions & \reference{constraints/invariants.ocl}\\
+  Model instance & \reference{src/tudresden.ocl20.pivot.\linebreak[0]examples.simple/\linebreak[0]ModelProviderClass.java}\\
+  \hline
+  \hline
+  \textbf{Royal and Loyal example} & \\
+  Plug-in package & \reference{tudresden.ocl20.pivot.examples.\linebreak[0]royalandloyal}\\
+  Meta model & UML 1.5 or UML 2.0\\
+  Model & \reference{model/royalsandloyals.xmi}\newline (with UML 1.5) \newline \reference{model/royalsandloyals.uml}\newline (with UML 2.0)\\
+  OCL expressions & \reference{expressions/*.ocl}\\
+  Model instance & \reference{src/tudresden.ocl20.pivot.\linebreak[0]examples.royalsandloyals/\linebreak[0]ModelProviderClass.java}\\
   \hline
   \hline
   \textbf{Living example} & \\
-  Plug-in package & \url{tudresden.ocl20.pivot.examples.\linebreak[0]living}\\
+  Plug-in package & \reference{tudresden.ocl20.pivot.examples.\linebreak[0]living}\\
   Meta model & UML 1.5\\
-  Model & \url{model/UmlExample.xmi}\\
-  OCL expressions & \url{expressions/living.ocl}\\
-  Model instance & \url{src/tudresden.ocl20.pivot.\linebreak[0]examples.living/\linebreak[0]ModelProviderClass.java}\\
+  Model & \reference{model/UmlExample.xmi}\\
+  OCL expressions & \reference{expressions/living.ocl}\\
+  Model instance & \reference{src/tudresden.ocl20.pivot.\linebreak[0]examples.living/\linebreak[0]ModelProviderClass.java}\\
   \hline
   \hline
   \textbf{PML example} & \\
-  Plug-in package & \url{tudresden.ocl20.pivot.examples.\linebreak[0]pml}\\
+  Plug-in package & \reference{tudresden.ocl20.pivot.examples.\linebreak[0]pml}\\
   Meta model & Ecore\\
-  Model & \url{model/pml.ecore}\\
-  OCL expressions & \url{expressions/testpml.ocl}\\
-  Model instance & \url{model instance/Testmodell.pml}\\
+  Model & \reference{model/pml.ecore}\\
+  OCL expressions & \reference{expressions/testpml.ocl}\\
+  Model instance & \reference{model instance/Testmodell.pml}\\
   \hline
 \end{tabular}
 \caption{Examples provided with \textit{Dresden OCL2 for Eclipse}.}
@@ -198,9 +227,9 @@ Table \ref{tab:examples} shows all examples which are provided with \textit{Dres
 	
 After starting \textit{Eclipse} you have to load a model into the toolkit. 
 
-If the plug-ins of \textit{Dresden OCL2 for Eclipse} were installed as jar archives, the \textit{Simple example} plug-in has to be imported into the \textit{Workspace} first. Create a new Java project into your \textit{Workspace} and select the \textit{import wizard} ``General -> Archive File''; in the following window select the ``plugins'' directory into your \textit{Eclipse} root folder, select the archive \url{tudresden.ocl20.pivot.examples.\linebreak[0]simple\_1.0.0.jar} and click the ``Finish'' button.
+If the plug-ins of \textit{Dresden OCL2 for Eclipse} were installed as jar archives, the \textit{Simple example} plug-in has to be imported into the \textit{Workspace} first. Create a new Java project into your \textit{Workspace} and select the \textit{import wizard} ``General -> Archive File''; in the following window select the ``plugins'' directory into your \textit{Eclipse} root folder, select the archive \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple\_1.0.0.jar} and click the ``Finish'' button.
 
-Now you can load a model by using the \textit{import wizard} (File~>~Import...). Select the wizard ``Dresden OCL2 Toolkit > Domain-Specific~Model''. In a new opened window you have to select a model file and a meta model for the model (see figure \ref{pic:LoadModel}). Click the button ``Browse Workspace...'' and select the file \url{model/simple.uml} inside the \textit{Simple example project}. Then select the meta model \textit{UML2} and press the button ``Finish''.
+Now you can load a model by using the \textit{import wizard} (File~>~Import...). Select the wizard ``Dresden OCL2 Toolkit > Domain-Specific~Model''. In a new opened window you have to select a model file and a meta model for the model (see figure \ref{pic:LoadModel}). Click the button ``Browse Workspace...'' and select the file \reference{model/simple.uml} inside the \textit{Simple example project}. Then select the meta model \textit{UML2} and press the button ``Finish''.
 
 \begin{figure}[!htbp]
 	\centering
@@ -228,7 +257,7 @@ Figure \ref{pic:MoBrOE} shows the loaded \textit{simple} model, which uses \text
 	
 \subsection{Loading a model instance}
 	
-After loading the model, you can load a \textit{model instance} using another \textit{import wizard}. Use the wizard ``Dresden OCL2 Toolkit > Model Instance''. You have to select a model instance (in this tutorial we used the file \url{bin/tudresden/ocl20/\linebreak[0]pivot/examples/ModelProviderClass.class} of the \textit{simple example} and the domain specific model loaded before (see figure \ref{pic:LoadInstance}).
+After loading the model, you can load a \textit{model instance} using another \textit{import wizard}. Use the wizard ``Dresden OCL2 Toolkit > Model Instance''. You have to select a model instance (in this tutorial we used the file \reference{bin/tudresden/ocl20/\linebreak[0]pivot/examples/ModelProviderClass.class} of the \textit{simple example} and the domain specific model loaded before (see figure \ref{pic:LoadInstance}).
 
 \begin{figure}[!htbp]
 	\centering
@@ -250,7 +279,7 @@ Figure \ref{pic:MoInBr} shows the loaded model instance of the \textit{simple ex
 \subsection{Loading OCL expressions}
 \indent
 	
-Before you can interprete OCL constraints you have to load them like the domain specific model and the model instance before. Use the import wizard ``Dresden OCL2 Toolkit > OCL Expressions'' and select an OCL file (in this tutorial we used the OCL file \url{constraints/invariants.ocl} of the \textit{simple example}, see figure \ref{pic:LoadExpressions}). The constraints of the file \url{constraints/invariants.ocl} are shown in listing \ref{list:invariants}.
+Before you can interprete OCL constraints you have to load them like the domain specific model and the model instance before. Use the import wizard ``Dresden OCL2 Toolkit > OCL Expressions'' and select an OCL file (in this tutorial we used the OCL file \reference{constraints/invariants.ocl} of the \textit{simple example}, see figure \ref{pic:LoadExpressions}). The constraints of the file \reference{constraints/invariants.ocl} are shown in listing \ref{list:invariants}.
 
 \begin{figure}[!htbp]
 	\centering
