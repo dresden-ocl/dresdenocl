@@ -1,0 +1,9 @@
+-- Constraint taken from [1] page 45.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context LoyaltyProgram
+def: getServicesByLevel(levelName: String): Set(Service)
+     = levels->select(name = levelName).availableServices->asSet()
+
+endpackage

@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 153.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Service
+inv: 13.div(2) = 6
+
+endpackage

@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 139.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context CustomerCard
+def: getTotalPoints(d: Date) : Integer = transactions->select(date.isAfter(d)).points->sum()
+
+endpackage

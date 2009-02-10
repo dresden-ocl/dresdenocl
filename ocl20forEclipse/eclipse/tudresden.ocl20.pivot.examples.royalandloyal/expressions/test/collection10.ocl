@@ -1,0 +1,8 @@
+-- Constraints taken from [1] page 167f.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context LoyaltyProgram
+inv: self.participants->size() < 10000
+
+endpackage

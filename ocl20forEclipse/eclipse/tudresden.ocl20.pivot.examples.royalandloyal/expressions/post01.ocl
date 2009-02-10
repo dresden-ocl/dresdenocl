@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 62.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context LoyaltyProgram::enroll(c : Customer)
+post: participants = participants@pre->including(c)
+
+endpackage

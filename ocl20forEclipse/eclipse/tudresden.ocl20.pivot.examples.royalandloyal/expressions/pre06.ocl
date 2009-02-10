@@ -1,0 +1,7 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Check static operation calls.
+context Date::now(): Date
+pre: true
+
+endpackage

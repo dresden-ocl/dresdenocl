@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 62 and adapted to test @pre values for user-defined types.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context LoyaltyProgram::enroll(c : Customer)
+post: membership = membership@pre
+
+endpackage

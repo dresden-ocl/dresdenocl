@@ -1,0 +1,232 @@
+-- All constraints were taken and adapted from [1].
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Body Expression 1:
+-- The expression type must match the operation return type in the context. Error occured at line 7 and column 1. The error occured at the token body.
+--context LoyaltyProgram::getServices(): Set
+--body: partners.deliveredServices
+
+-- Body Expression 2:
+context LoyaltyAccount::getCustomerName() : String
+body: membership.card.owner.name
+
+-- Definition 1:
+context LoyaltyAccount
+def: turnover : Real = transactions.amount->sum()
+
+-- Definition 2:
+context LoyaltyProgram
+def: getServicesByLevel(levelName: String): Set(Service)
+     = levels->select(name = levelName).availableServices->asSet()
+
+-- Definition 3:
+context Membership
+def: getCurrentLevelName() : String = currentLevel.name
+
+-- Definition 4:
+context LoyaltyAccount
+def: usedServices: Set(Service) = transactions.service->asSet()
+
+-- Definition 5:
+context Customer
+def: initial: String = name.substring(1, 1)
+
+-- Definition 6:
+context CustomerCard
+def: getTotalPoints(d: Date) : Integer = transactions->select(date.isAfter(d)).points->sum()
+
+-- Definition 7:
+context CustomerCard
+def: getAllInstances() : Set(CustomerCard) = self.allInstances()
+
+-- Definition 8:
+context ProgramPartner
+def: getBurningTransactions(): Set(Transaction) =
+  self.deliveredServices.transaction->iterate(
+    t         : Transaction;
+    resultSet : Set(Transaction) = Set{} |
+    
+    if (t.oclIsTypeOf( Burning )) then
+      resultSet->including( t )
+    else
+      resultSet
+    endif
+  )
+
+-- Derived Value 1:
+context CustomerCard::printedName
+derive: owner.title.concat(' ').concat(owner.name)
+
+-- Derived Value 2:
+context LoyaltyAccount::totalPointsEarned
+derive: transactions->select(oclIsTypeOf(Earning)).points->sum()
+
+-- Initial Expression 1:
+context LoyaltyAccount::points
+init: 0
+
+-- Initial Expression 2:
+context CustomerCard::valid
+init: true
+
+-- Initial Expression 3:
+context LoyaltyAccount::transactions : Set(Transaction)
+init: Set{}
+
+-- Invariant 1:
+context Customer
+inv ofAge: age >= 18
+
+-- Invariant 2:
+context CustomerCard
+inv checkDates: validFrom.isBefore(validThru)
+
+-- Invariant 3:
+context LoyaltyProgram
+inv knownServiceLevel: levels->includes(membership.currentLevel)
+
+-- Invariant 4:
+-- Exception during parsing of given OCL constraints. Unable to find operation 'includes' with argument types [UML2Class[name=CustomerCard,namespace=UML2Package[name=royalsandloyals]]] in type 'root::tudresden::ocl20::pivot::examples::royalsandloyals::CustomerCard'.
+--context Membership
+--inv correctCard: program.participants.cards->includes(self.card)
+
+-- Invariant 5:
+context Membership
+inv levelAnColor:
+  currentLevel.name = 'Silver' implies card.color = Color::silver
+  and
+  currentLevel.name = 'Gold' implies card.color = Color::gold
+
+-- Invariant 6:
+context LoyaltyProgram
+inv minServices: partners->forAll(deliveredServices->size() >= 1)
+
+-- Invariant 7:
+context Customer
+inv sizesAgree:
+    programs->size() = cards->select( valid = true )->size()
+
+-- Invariant 8:
+context LoyaltyProgram
+inv noAccounts: 
+  partners.deliveredServices
+    ->forAll(pointsEarned = 0 and pointsBurned = 0)
+    implies membership.accounts->isEmpty()
+
+-- Invariant 9:
+context ProgramPartner
+inv nrOfParticipants: numberOfCustomers = programs.participants->size()
+
+-- Invariant 10:
+context LoyaltyProgram
+inv firstLevel: levels->first().name = 'Silver'
+
+-- Invariant 11:
+context ProgramPartner
+inv totalPoints: deliveredServices.transaction.points->sum() < 10000
+
+-- Invariant 12:
+context ProgramPartner
+inv totalPointsEarning: 
+  deliveredServices.transaction->select(oclIsTypeOf(Earning)).points->sum() < 10000
+
+-- Invariant 13:
+context CustomerCard
+inv: 
+let correctDate : Boolean =
+  self.validFrom.isBefore(Date::now()) and
+  self.validThru.isAfter(Date::now())
+in
+  if valid then
+    correctDate = false
+  else
+    correctDate = true
+  endif
+
+-- Invariant 14:
+context LoyaltyAccount
+inv oneOwner: transactions.card.owner->asSet()->size() = 1
+
+-- Invariant 15:
+context LoyaltyAccount
+inv: points > 0 implies transactions->exists(t | t.points > 0)
+
+-- Invariant 16:
+context Service
+inv: self.oclIsUndefined() = false
+
+-- Invariant 17:
+context Service
+inv: self.oclIsInvalid() = false
+
+-- Invariant 18:
+context Burning
+inv: self.points = self.oclAsType(Transaction).points
+
+-- Postcondition 1:
+context LoyaltyProgram::enroll(c : Customer)
+post: participants = participants@pre->including(c)
+
+-- Postcondition 2:
+context LoyaltyProgram::addService(aPartner: ProgramPartner, aLevel: ServiceLevel, aService: Service)
+post: partners.deliveredServices->includes(aService)
+
+-- Postcondition 3:
+context LoyaltyProgram::addService(aPartner: ProgramPartner, aLevel: ServiceLevel, aService: Service)
+post: levels.availableServices->includes(aService)
+
+-- Postcondition 4:
+context LoyaltyProgram::addService(aPartner: ProgramPartner, aLevel: ServiceLevel, aService: Service)
+post: partners.deliveredServices->includes(aService) and levels.availableServices->includes(aService)
+
+-- Postcondition 5:
+context LoyaltyAccount::isEmpty():Boolean
+post: result = (points = 0)
+
+-- Postcondition 6:
+context Customer::birthdayHappens()
+post: age = age@pre + 1
+
+-- Postcondition 7:
+context Service::upgradePointsEarned(amount: Integer)
+post: calcPoints() = calcPoints@pre() + amount
+
+-- Postcondition 8:
+context Transaction::getProgram(): LoyaltyProgram
+post: not result.oclIsNew()
+
+-- Postcondition 9:
+-- Unable to find property 'membership' in type 'root::tudresden::ocl20::pivot::examples::royalsandloyals::CustomerCard' An error occured while building an property call expression. Error occured at line 6 and column 26. The error occured at the token membership.
+--context Transaction::getProgram(): LoyaltyProgram
+--post: result = self.card.membership.program
+
+-- Postcondition 10:
+context Transaction::getProgram(): LoyaltyProgram
+post: self.oclIsTypeOf(Transaction)
+
+-- Postcondition 11:
+context LoyaltyProgram::enroll(c : Customer)
+post: membership = membership@pre
+
+-- Precondition 1:
+context LoyaltyProgram::enroll(c : Customer)
+pre: c.name <> ''
+ 
+-- Precondition 2:
+context LoyaltyProgram::addService(aPartner: ProgramPartner, aLevel: ServiceLevel, aService: Service)
+pre: partners->includes(aPartner)
+
+-- Precondition 3:
+context LoyaltyProgram::addService(aPartner: ProgramPartner, aLevel: ServiceLevel, aService: Service)
+pre: levels->includes(aLevel)
+ 
+-- Precondition 4:
+context LoyaltyProgram::addService(aPartner: ProgramPartner, aLevel: ServiceLevel, aService: Service)
+pre:  partners->includes(aPartner) and levels -> includes(aLevel)
+   
+-- Precondition 5:
+context Transaction::getProgram(): LoyaltyProgram
+pre: self.oclIsTypeOf(Transaction)
+
+endpackage
