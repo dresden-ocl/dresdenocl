@@ -17,10 +17,16 @@
 
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
@@ -41,13 +47,24 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Nils
  *
  */
-public class OclFilesTest extends TestCase {
-	public void testOclFile1() {
+public class OclFilesTest {
+	static private TestPerformer testPerformer = null;
+	
+	@BeforeClass static public void setUp() {
+		try {
+			if (testPerformer == null) {
+				testPerformer = TestPerformer.getDefault();
+				testPerformer.setModel("LoyalRoyalOCL2Parser_4.xmi");
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	@Test public void testOclFile1() {
 		String fileName = "oclTestFiles/oclFile01.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("LoyalRoyalOCL2Parser_4.xmi");
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
@@ -60,11 +77,10 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testOclFile2() {
+	@Test public void testOclFile2() {
 		String fileName = "oclTestFiles/oclFile02.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
@@ -77,11 +93,10 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testOclFile3() {
+	@Test public void testOclFile3() {
 		String fileName = "oclTestFiles/oclFile03.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
@@ -94,11 +109,10 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testOclFile4() {
+	@Test public void testOclFile4() {
 		String fileName = "oclTestFiles/oclFile04.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
@@ -111,11 +125,10 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testOclFile5() {
+	@Test public void testOclFile5() {
 		String fileName = "oclTestFiles/oclFile05.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
@@ -145,11 +158,10 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}*/
 	
-	public void testOclFile7() {
+	@Test public void testOclFile7() {
 		String fileName = "oclTestFiles/oclFile07.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
@@ -162,11 +174,10 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testOclFile8() {
+	@Test public void testOclFile8() {
 		String fileName = "oclTestFiles/oclFile08.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
@@ -179,11 +190,10 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testOclFile9() {
+	@Test public void testOclFile9() {
 		String fileName = "oclTestFiles/oclFile09.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
@@ -196,11 +206,10 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testOclFile10() {
+	@Test public void testOclFile10() {
 		String fileName = "oclTestFiles/oclFile10.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
@@ -213,11 +222,10 @@ public class OclFilesTest extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testOclFile11() {
+	@Test public void testOclFile11() {
 		String fileName = "oclTestFiles/oclFile11.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.parseFile(fileName);
+			testPerformer.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);

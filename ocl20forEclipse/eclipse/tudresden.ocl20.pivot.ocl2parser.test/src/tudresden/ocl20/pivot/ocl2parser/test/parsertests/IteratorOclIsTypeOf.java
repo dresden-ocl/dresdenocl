@@ -19,10 +19,14 @@
 */
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
-public class IteratorOclIsTypeOf extends TestCase {
-	public void testOclIsTypeOfInIterator() {
+public class IteratorOclIsTypeOf {
+	@Test public void testOclIsTypeOfInIterator() {
 		String fileName = "oclTestFiles/Iterator_oclIsTypeOf.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();

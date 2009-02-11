@@ -19,10 +19,14 @@
 */
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
-public class IncludesAllTest extends TestCase {
-	public void testIncludesAll() {
+public class IncludesAllTest {
+	@Test public void testIncludesAll() {
 		String fileName = "oclTestFiles/includesAll.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();

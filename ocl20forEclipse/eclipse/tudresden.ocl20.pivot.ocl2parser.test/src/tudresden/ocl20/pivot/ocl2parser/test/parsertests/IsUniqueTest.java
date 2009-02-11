@@ -19,10 +19,14 @@
 */
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
-public class IsUniqueTest extends TestCase {
-	public void testBag() {
+public class IsUniqueTest {
+	@Test public void testBag() {
 		String fileName = "oclTestFiles/isUniqueTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();

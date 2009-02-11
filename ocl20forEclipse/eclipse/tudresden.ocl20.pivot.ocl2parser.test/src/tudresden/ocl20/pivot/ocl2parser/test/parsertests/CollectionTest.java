@@ -19,10 +19,14 @@
 */
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
-public class CollectionTest extends TestCase {
-	public void testCollectionTest() {
+public class CollectionTest {
+	@Test public void testCollectionTest() {
 		String fileName = "oclTestFiles/collectionTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
@@ -40,7 +44,7 @@ public class CollectionTest extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testIteratorCollectionTest() {
+	@Test public void testIteratorCollectionTest() {
 		String fileName = "oclTestFiles/iteratorCollectionTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();

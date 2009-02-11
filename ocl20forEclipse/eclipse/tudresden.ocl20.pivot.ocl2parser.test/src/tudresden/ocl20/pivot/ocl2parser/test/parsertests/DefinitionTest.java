@@ -19,10 +19,14 @@
 */
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
-public class DefinitionTest extends TestCase {
-	public void testDefinitionTest() {
+public class DefinitionTest {
+	@Test public void testDefinitionTest() {
 		String fileName = "oclTestFiles/definitionTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();

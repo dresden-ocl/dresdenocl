@@ -85,21 +85,21 @@ public class TestPerformer {
 	/**
 	 * With this method a model (in uml) can be set. This method must be
 	 * invoked before the <i>parseFile</i> method.
-	 * @param umlModelName the filename of the uml model that is located in the <i>./src/testdata</i> directory
+	 * @param modelName the filename of the uml model that is located in the <i>./src/testdata</i> directory
 	 * @throws Exception is thrown if the model cannot be initialized or the model file is not found
 	 */
-	public void setModel(String umlModelName) throws Exception {
+	public void setModel(String modelName) throws Exception {
 		/*if (model != null) {
 			if (model.getDisplayName().equals(umlModelName)) return;
 		}*/
 		
-		initializeMetamodel(metaModel.getId());
+		//initializeMetamodel(metaModel.getId());
 		modelProvider = metaModel.getModelProvider();
 		File currentDir = new File(".");
 		//System.out.println("Current directory: " + currentDir.getAbsolutePath());
 		fileDirectory = "./src/testData/";
-		File modelFile = new File(fileDirectory+ umlModelName);
-		if (!modelFile.exists()) throw new Exception("The model file doesn't exists.");
+		File modelFile = new File(fileDirectory + modelName);
+		if (!modelFile.exists()) throw new Exception("The model file doesn't exists. The file name was: " + fileDirectory + modelName);
 		
 		model = modelProvider.getModel(modelFile);
 	}
