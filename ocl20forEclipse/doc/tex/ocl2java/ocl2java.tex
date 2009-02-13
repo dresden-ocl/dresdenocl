@@ -65,9 +65,9 @@
 
 \maketitle
 
-This tutorial describes how the Java Code Generator \textit{Ocl2Java} provided with \textit{Dresden OCL2 for Eclipse} can be used. A general introduction into \textit{Dresden OCL2 for Eclipse} can be found in \cite{tut:general}. A detailed documentation of the development of the Java Code Generator \textit{Ocl2Java} can be found in \cite{GB:Wilke}.
+This tutorial describes how the Java Code Generator \textit{Ocl2Java} provided with \textit{Dresden OCL2 for Eclipse} can be used. A general introduction into \textit{Dresden OCL2 for Eclipse} can be found in \cite{tut:general}. A detailed documentation of the development of \textit{Ocl2Java} can be found in \cite{GB:Wilke}.
 
-The procedure described in this tutorial is realized and tested with \textit{Eclipse 3.4.1} \cite{Ecl}. The tutorial should also run with \textit{Eclipse 3.3.x}. Besides \textit{Eclipse} you also need to install some required plug-ins. Table \ref{tab:software} shows all required software to run \textit{Dresden OCL2 for Eclipse} and \textit{Ocl2Java}.
+The procedure described in this tutorial was realized and tested with \textit{Eclipse 3.4.1} \cite{Ecl}. In addition to that this tutorial should also run with \textit{Eclipse 3.3.x}. Besides \textit{Eclipse} you also need to install some required plug-ins. Table \ref{tab:software} shows all required software to run \textit{Dresden OCL2 for Eclipse} and \textit{Ocl2Java}.
   
 \begin{figure}[!htbp]
 \begin{tabular}[h]{|p{5.2cm}|p{6cm}|}
@@ -100,7 +100,7 @@ How to run the toolkit \textit{Dresden OCL2 for Eclipse} and how to load models 
 
 \section{The example used during this tutorial}
 
-This tutorial uses the \textit{Simple Example} which is provided with \textit{Dresden OCL2 for Eclipse} located in the plug-in package \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple}. Figure \ref{pic:Simple} shows the class structure which is described by the \textit{Simple Example}. An overview over all examples provided with \textit{Dresden OCL2 for Eclipse} can be found in \cite{tut:examples}.
+This tutorial uses the \textit{Simple Example} which is provided with \textit{Dresden OCL2 for Eclipse} located in the plug-in package \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple}. An overview over all examples provided with \textit{Dresden OCL2 for Eclipse} can be found in \cite{tut:examples}. Figure \ref{pic:Simple} shows the class structure which is described by the \textit{Simple Example}. 
 
 \begin{figure}[!htbp]
 	\centering
@@ -113,7 +113,7 @@ The model of the example defines three classes: The class \model{Person} has two
 
 To import the \textit{Simple Example} into our Eclipse workspace we create a new Java project into our Workspace called \model{tudresden.ocl20.pivot.examples.\linebreak[0]simple} and use the import wizard \eclipse{General -> Archive File} to import the example provided as jar archive. In the following window we select the directory were the jar file is located (eventually the \model{plugins} directory into the Eclipse root folder) and we select the archive \model{tudresden.ocl20.pivot.examples.simple.\linebreak[0]jar} and click the \eclipse{Finish} button (if you use a source code distribution of \textit{Dresden OCL2 for Eclipse} instead, you can simple import the project \model{tudresden.ocl20.\linebreak[0]pivot.examples.simple} using the import wizard \eclipse{General -> Existing Projects into Workspace}).
 
-Next, we have to import a second project called \model{tudresden.ocl20.pivot.\linebreak[0]examples.simple.constraints}. We can use the same mechanism explained before, but instead of a Java project we now create an AspectJ project before we import the archive file (if the wizard to create an AspectJ project is not available you have to install the \textit{AspectJ Development Tools} first). Figure \ref{pic:packageExplorer} shows the package Explorer containing both imported projects.
+Next, we have to import a second project called \model{tudresden.ocl20.pivot.\linebreak[0]examples.simple.constraints}. We can use the same mechanism explained above, but instead of a Java project we now create an AspectJ project before we import the archive file (if the wizard to create an AspectJ project is not available you have to install the \textit{AspectJ Development Tools} first). Figure \ref{pic:packageExplorer} shows the package Explorer containing both imported projects.
 
 \begin{figure}[!htbp]
 	\centering
@@ -122,7 +122,7 @@ Next, we have to import a second project called \model{tudresden.ocl20.pivot.\li
 	\label{pic:packageExplorer}
 \end{figure}
 
-Now we have imported all files we need to run this tutorial. The first project provides a model file which contains the simple class diagram which has been explained before (the model file is located at \model{model/simple.uml}) and the constraint file we want to generate code for (the constraint file is located at \model{constraints/invariants.ocl}). Listing \ref{simpleInvariant} shows one invariant which is contained in the constraint file. For this invariant which denotes, that the \model{age} of any \model{Person} must be greater or equal to zero at any time during the life cycle of the \model{Person} we want to generate code in the following.
+Now we have imported all files we need to run this tutorial. The first project provides a model file which contains the simple class diagram which has been explained above (the model file is located at \model{model/simple.uml}) and the constraint file we want to generate code for (the constraint file is located at \model{constraints/invariants.ocl}). Listing \ref{simpleInvariant} shows one invariant which is contained in the constraint file for which we want to generate code. For this invariant which denotes, that the \model{age} of any \model{Person} must be greater or equal to zero at any time during the life cycle of the \model{Person}.
 
 \lstset{
   language=OCL
@@ -133,9 +133,9 @@ context Person
 inv: age >= 0
 \end{lstlisting}
 
-The second project provides a class \model{src/tudresden.ocl20.pivot.examp\-les.simple.constraints.InvTest.java}\linebreak[0] which contains a jUnit test case which checks, whether or not the mentioned constrained is enforced by generated code. The test case creates two \model{Persons} and tries to set their \model{age}. The \model{age} of the second \model{Person} is set to \model{-3} and thus the constraint is violated. The test case expects that a runtime exception is thrown, when the constraint is violated.
+The second project provides a class \model{src/tudresden.ocl20.pivot.examp\-les.simple.constraints.InvTest.java}\linebreak[0] which contains a jUnit test case which checks, whether or not the mentioned constraint is enforced by generated code. The test case creates two \model{Persons} and tries to set their \model{age}. The \model{age} of the second \model{Person} is set to \model{-3} and thus the constraint is violated. The test case expects that a runtime exception is thrown, when the constraint is violated.
 
-By now the code for the mentioned constraint has not been generated yet and thus the exception will not be thrown. We run the test case by right clicking on the Java class in the \eclipse{Package Explorer} and selecting the menu item \eclipse{Run as -> JUnit Test}. The test case fails because the exception is not thrown (see figure \ref{pic:junit1}). To fulfill the test case we have to generate the ApsectJ code for the constraint which enforces the constraint's condition. How to create such code will be explained in the following.
+The code for the mentioned constraint has not been generated yet and thus the exception will not be thrown. We run the test case by right clicking on the Java class in the \eclipse{Package Explorer} and selecting the menu item \eclipse{Run as -> JUnit Test}. The test case fails because the exception is not thrown (see figure \ref{pic:junit1}). To fulfill the test case we have to generate the ApsectJ code for the constraint which enforces the constraint's condition. How to create such code will be explained in the following.
 
 \begin{figure}[!htbp]
 	\centering
@@ -149,7 +149,7 @@ By now the code for the mentioned constraint has not been generated yet and thus
 
 \section{Prepare the Code Generation}
 
-To prepare the code generation we have to import the model \model{model/simple.uml} into the \eclipse{Model Browser}. We use the import wizard for domain specific models of the toolkit to import the model. This is explained in the already mentioned general tutorial (\cite{tut:general}). Then we have to import the constraint file \model{constraints/invariant.ocl} which is done by an import wizard again. Afterwords the model explorer should look like illustrated in figure \ref{pic:modelBrowser}. Now we can start the code generation.
+To prepare the code generation we have to import the model \model{model/simple.uml} into the \eclipse{Model Browser}. We use the import wizard for domain specific models of the toolkit to import the model. This procedure is explained in the already mentioned general tutorial (\cite{tut:general}). Then we have to import the constraint file \model{constraints/invariant.ocl} which is done by an import wizard again. Afterwards, the model explorer should look like illustrated in figure \ref{pic:modelBrowser}. Now we can start the code generation.
 
 \begin{figure}[!htbp]
 	\centering
@@ -180,7 +180,7 @@ A wizard opens and we have to select a model for code generation (see figure \re
 
 \subsection{Selecting Constraints}
 
-As a second step we now have to select the constraints for which we want to generate code. We only select the constraint which enforce that the \model{age} of any \model{Person} bust be equal to or greater than zero and click the \eclipse{Next} button (see figure \ref{pic:wizard2}).
+As a second step we now have to select the constraints for which we want to generate code. We only select the constraint which enforce that the \model{age} of any \model{Person} must be equal to or greater than zero and click the \eclipse{Next} button (see figure \ref{pic:wizard2}).
 
 \begin{figure}[!htbp]
 	\centering
@@ -220,19 +220,19 @@ On the following page of the wizard we can specify general settings for the code
 	\label{pic:wizard5}
 \end{figure}
 
-We can disable the inheritance of constraints (which would not be useful in our example because we want to enforce the constraint for \model{Persons}, but for \model{Students} and \model{Professors} as well). We can also enable that the code generator shall generate getter methods for new defined attributes of \model{def} constraints.
+We can disable the inheritance of constraints (which would not be useful in our example because we want to enforce the constraint for \model{Persons}, but for \model{Students} and \model{Professors} as well). We can also enable that the code generator will generate getter methods for new defined attributes of \model{def} constraints.
 
-More interesting is the possibility to select one of three strategies, when enforced invariants shall be checked during runtime:
+More interesting is the possibility to select one of three provided strategies, when invariants shall be checked during runtime:
 
 \begin{enumerate}
 	\item Invariants can be checked after construction of an object and after any change of an attribute or association which is in scope of the invariant condition (\textit{Strong Verification}).
 	\item Invariants can be checked after construction of an object and before or after the execution of any public method of the constrained class (\textit{Weak Verification}).
-	\item And last but not least invariants can only be checked if the user calls a special method at runtime (\textit{Transactional Verification}).
+	\item And finally, invariants can only be checked if the user calls a special method at runtime (\textit{Transactional Verification}).
 \end{enumerate}
 
-This three scenarios can be useful for users in different situations. If a user wants to verify strongly, that his constraints are verified after any change of any dependent attribute he should use \textit{strong verification}. If he wants to use attributes to temporary store values and constraints shall only be verified if any external class instance wants to access values of the constrained class, he should use \textit{weak verification}. If the user wants to work with database or remote communication and the state of his constraint classes should be only valid before data transmission, he should use the scenario \textit{transactional verification}.
+This three scenarios can be useful for users in different situations. If a user wants to verify strongly, that his constraints are verified after any change of any dependent attribute he should use \textit{strong verification}. If he wants to use attributes to temporary store values and constraints shall only be verified if any external class instance wants to access values of the constrained class, he should use \textit{weak verification}. If the user wants to work with databases or other remote communication and the state of his constraint classes should be only valid before data transmission, he should use the scenario \textit{transactional verification}.
 
-Last but not least we can specify a \textit{violation macro} which specifies the code, which shall be executed when a constraint is violated during runtime. By default, the \textit{violation macro} throws a runtime exception. We want to have a runtime exception thrown when our constraint is violated, thus we don't change the \textit{violation macro} and continue with the \eclipse{Next} button.
+Finally, we can specify a \textit{violation macro} which specifies the code, which will be executed when a constraint is violated during runtime. By default, the \textit{violation macro} throws a runtime exception. We also want to have a runtime exception thrown when our constraint is violated. Thus, we don't change the \textit{violation macro} and continue with the \eclipse{Next} button.
 
 
 \subsection{Constraint Specific Settings}
@@ -244,7 +244,7 @@ The last page of the code generation wizard provides the possibility to configur
 
 \section{The Generated Code}
 
-After finishing the wizard, the code for the selected constraint will be generated. To see the result, we have to refresh our project in the workspace. We select the project \model{tudresden.ocl20.pivot.examples.simple.constraint} in the \eclipse{Package Explorer} open the context menu with a right mouse click and select the menu item \eclipse{Refresh}. Afterwords our project contains a new generated ApsectJ file called \model{tudresden.ocl20.pivot.examples.simple.constraints.InvAspect\-01.aj} (see figure \ref{pic:packageExplorer2}).
+After finishing the wizard, the code for the selected constraint will be generated. To see the result, we have to refresh our project in the workspace. We select the project \model{tudresden.ocl20.pivot.examples.simple.constraint} in the \eclipse{Package Explorer} open the context menu with a right mouse click and select the menu item \eclipse{Refresh}. Afterwards, our project contains a new generated AspectJ file called \model{tudresden.ocl20.pivot.examples.simple.constraints.InvAspect\-01.aj} (see figure \ref{pic:packageExplorer2}).
 	
 \begin{figure}[!htbp]
 	\centering
@@ -253,7 +253,7 @@ After finishing the wizard, the code for the selected constraint will be generat
 	\label{pic:packageExplorer2}
 \end{figure}
 
-Now we can rerun our jUnit test case. The test case finishes successfully because we expected runtime exception is thrown (see figure \ref{pic:junit2}).	
+Now we can rerun our jUnit test case. The test case finishes successfully because the expected runtime exception is thrown (see figure \ref{pic:junit2}).	
 
 \begin{figure}[!htbp]
 	\centering
