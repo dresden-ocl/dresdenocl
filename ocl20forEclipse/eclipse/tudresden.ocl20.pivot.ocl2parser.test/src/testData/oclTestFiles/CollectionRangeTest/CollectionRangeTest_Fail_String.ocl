@@ -1,0 +1,6 @@
+package RoyalLoyal
+
+	context Customer
+		inv: Sequence{'a','b','c'}->size()=3
+		inv: Sequence{'a' ..'c'}->size()=3
+endpackage
