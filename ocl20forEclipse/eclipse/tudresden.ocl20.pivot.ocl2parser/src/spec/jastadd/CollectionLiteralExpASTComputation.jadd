@@ -106,6 +106,24 @@ public aspect CollectionLiteralExpASMComputation {
 		// Transform the last expression abstract syntax element into corresponding essential ocl element
 		OclExpression rightExpression = getLast().computeASM(env);
 		
+		//Examine types of range bounds (must be int)
+		if(leftExpression.getType() instanceof PrimitiveType) {
+			PrimitiveType leftType = (PrimitiveType) leftExpression.getType();
+			if (!leftType.getKind().equals(PrimitiveTypeKind.get(PrimitiveTypeKind.INTEGER_VALUE))) {
+				throw new BuildingASMException("The left side of the collection range is not of type integer. The type was: " + leftType.getKind().getName(), null);
+			}
+		} else {
+			throw new BuildingASMException("The left side of the collection range is not of type integer. The type was: " + leftExpression.getType().getName(), null);
+		}
+		if(rightExpression.getType() instanceof PrimitiveType) {
+			PrimitiveType rightType = (PrimitiveType) rightExpression.getType();
+			if (!rightType.getKind().equals(PrimitiveTypeKind.get(PrimitiveTypeKind.INTEGER_VALUE))) {
+				throw new BuildingASMException("The right side of the collection range is not of type integer. The type was: " + rightType.getKind().getName(), null);
+			}
+		} else {
+			throw new BuildingASMException("The right side of the collection range is not of type integer. The type was: " + rightExpression.getType().getName(), null);
+		}
+		
 		// Create a new collection range element of the essential ocl.
 		CollectionRange collectionRange = null;
 		try {
