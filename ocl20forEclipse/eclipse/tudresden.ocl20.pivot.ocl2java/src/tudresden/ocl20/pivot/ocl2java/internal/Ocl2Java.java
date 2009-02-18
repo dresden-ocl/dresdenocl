@@ -111,7 +111,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 	private static final Logger logger = Logger.getLogger(Ocl2Java.class);
 
 	/** The paths of the String templates for the code transformation. */
-	private final static String TEMPLATE_PATH = "resources/template/java/";
+	private final static String TEMPLATE_PATH = "/resources/template/java/";
 	private final static String EXPRESSION_TEMPLATE_FILE = "expressions.stg";
 	private final static String JAVA_TEMPLATE_FILE = "java.stg";
 	private final static String INSTRUMENTATION_TEMPLATE_FILE = "instrumentations.stg";

@@ -25,8 +25,8 @@
 
 package tudresden.ocl20.pivot.ocl2java.template.impl;
 
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.util.LinkedList;
@@ -78,17 +78,22 @@ public class StringTemplateEngine implements ITemplateEngine {
 		Reader groupReader;
 		StringTemplateGroup lastGroup;
 
-		groupReader = new FileReader(getFullTemplateFileName(groupFiles
-				.getLast()));
+		groupReader = new InputStreamReader(this.getClass()
+				.getResourceAsStream(groupFiles.getLast()));
+
 		templateGroup = new StringTemplateGroup(groupReader);
 
 		lastGroup = templateGroup;
 
 		for (int i = 1; i < groupFiles.size(); i++) {
-			StringTemplateGroup superGroup;
 
-			groupReader = new FileReader(getFullTemplateFileName(groupFiles
-					.get(groupFiles.size() - i - 1)));
+			StringTemplateGroup superGroup;
+			String templatePath;
+
+			templatePath = groupFiles.get(groupFiles.size() - i - 1);
+
+			groupReader = new InputStreamReader(this.getClass()
+					.getResourceAsStream(templatePath));
 			superGroup = new StringTemplateGroup(groupReader);
 
 			lastGroup.setSuperGroup(superGroup);
