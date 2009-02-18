@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Constraints
+Bundle-SymbolicName: tudresden.ocl20.pivot.examples.simple.constraints
+Bundle-Version: 1.0.0
+Export-Package: tudresden.ocl20.pivot.examples.simple.constraints.test
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
+ J2SE-1.5
