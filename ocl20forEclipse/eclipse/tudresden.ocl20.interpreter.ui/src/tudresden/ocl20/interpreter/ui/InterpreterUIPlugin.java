@@ -34,44 +34,54 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
- * The activator class controls the plug-in life cycle
+ * <p>
+ * The activator class controls the plug-in life cycle.
+ * </p>
  */
 public class InterpreterUIPlugin extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/** The plug-in ID. */
 	public static final String PLUGIN_ID = "tudresden.ocl20.interpreter.ui";
 
-	// The shared instance
+	/** The shared instance of this plug-in. */
 	private static InterpreterUIPlugin plugin;
-	
+
 	/**
-	 * The constructor
+	 * <p>
+	 * Creates a new {@link InterpreterUIPlugin}.
+	 * </p>
 	 */
 	public InterpreterUIPlugin() {
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+
 		plugin = this;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
+
 		super.stop(context);
 	}
 
 	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
+	 * @return The shared instance of this plug-in.
 	 */
 	public static InterpreterUIPlugin getDefault() {
 		return plugin;
