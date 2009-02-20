@@ -93,9 +93,12 @@ import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -308,7 +311,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	 * tudresden.ocl20.interpreter.IOclInterpreter#prepare(tudresden.ocl20.pivot
 	 * .pivotmodel.Constraint)
 	 */
-	public void prepare(Constraint constraint, IModelObject modelObject) {
+	public void prepare(Constraint aConstraint, IModelObject modelObject) {
 
 		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
@@ -316,29 +319,74 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 		}
 		// no else.
 
-		OclRoot oclModelObject;
-		EObject constraintSpecification;
+		ConstraintKind aKind;
 
-		this.modelAccessNeeded = false;
+		String constrainedElemName;
+
 		this.preparation = true;
 
-		this.constrainedModelObject = modelObject;
+		aKind = aConstraint.getKind();
 
-		/* Try to get the modelObject as Ocl object. */
-		if (modelObject != null) {
-			oclModelObject = modelObject.getOclObject();
+		constrainedElemName = ((NamedElement) aConstraint
+				.getConstrainedElement().get(0)).getQualifiedName();
+
+		/* Check if a body expressions shall be prepared */
+		if (aKind.equals(ConstraintKind.BODY)) {
+			/* Add the constraint to the environment. */
+			this.env.addConstraint(constrainedElemName, aConstraint);
+		}
+
+		/* Else check if a definition shall be prepared. */
+		else if (aKind.equals(ConstraintKind.DEFINITION)) {
+
+			String featureName;
+
+			featureName = aConstraint.getDefinedFeature().getQualifiedName();
+
+			/*
+			 * Add the defined feature to the global environment.
+			 */
+			this.env.addConstraint(featureName, aConstraint);
+		}
+
+		/* Else check if a derived value shall be prepared */
+		else if (aKind.equals(ConstraintKind.DERIVED)) {
+			/* Add the constraint to the environment. */
+			this.env
+					.addConstraint(constrainedElemName + "-derive", aConstraint);
+		}
+
+		/* Else check if a initial value shall be prepared */
+		else if (aKind.equals(ConstraintKind.INITIAL)) {
+			/* Add the constraint to the environment. */
+			this.env.addConstraint(constrainedElemName + "-initial",
+					aConstraint);
 		}
 
 		else {
-			oclModelObject = null;
+			OclRoot oclModelObject;
+			EObject constraintSpecification;
+
+			this.modelAccessNeeded = false;
+
+			this.constrainedModelObject = modelObject;
+
+			/* Try to get the modelObject as OCL object. */
+			if (modelObject != null) {
+				oclModelObject = modelObject.getOclObject();
+			}
+
+			else {
+				oclModelObject = null;
+			}
+
+			/* Add self variable to environment. */
+			this.env.addVar("self", oclModelObject);
+
+			/* Prepare the constraintSpecification. */
+			constraintSpecification = (EObject) aConstraint.getSpecification();
+			doSwitch((EObject) constraintSpecification);
 		}
-
-		/* Add self variable to environment. */
-		this.env.addVar("self", oclModelObject);
-
-		/* Prepare the constraintSpecification. */
-		constraintSpecification = (EObject) constraint.getSpecification();
-		doSwitch((EObject) constraintSpecification);
 
 		this.preparation = false;
 
@@ -1252,6 +1300,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 			String opName;
 
 			ListIterator<OclExpression> argIterator;
+			List<Parameter> opParams;
 
 			parameters = new OclRoot[object.getArgument().size()];
 
@@ -1321,10 +1370,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 				source = doSwitch((EObject) object.getSource());
 			}
 
-			body = env.getConstraint(object.getReferredOperation()
-					.getQualifiedName());
 			localEnv = null;
 
+			/*
+			 * Operations can be implemented by a body expression or a
+			 * definition. Try to get such an expression if it has been defined.
+			 */
+			body = env.getConstraint(object.getReferredOperation()
+					.getQualifiedName());
+
+			/*
+			 * If a body expression or definition has been defined, create a new
+			 * local environment.
+			 */
 			if (body != null) {
 				localEnv = Environment.getNewLocalEnvironment();
 			}
@@ -1332,18 +1390,28 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 
 			argIterator = object.getArgument().listIterator();
 
+			opParams = referredOperation.getInputParameter();
+
 			/* Iterate through the arguments and compute the parameter values. */
 			while (argIterator.hasNext()) {
+				
 				OclExpression exp;
 				OclRoot param;
+				String parameterName;
 
 				exp = argIterator.next();
 				param = doSwitch((EObject) exp);
 				parameters[argIterator.previousIndex()] = param;
 
-				/* Eventually add the variables to the local environment. */
+				parameterName = opParams
+						.get(argIterator.previousIndex()).getName();
+
+				/*
+				 * Eventually add the variables to the local environment if a
+				 * body expression or definition has been defined.
+				 */
 				if (localEnv != null) {
-					localEnv.addVar(exp.getName(), param);
+					localEnv.addVar(parameterName, param);
 				}
 				// no else.
 			}
@@ -1588,12 +1656,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 			}
 
 			/* Else check if the property has a body expression. */
-			else if (env.getConstraint(propertyName) != null) {
+			else if (env.getConstraint(qualifiedPropertyName) != null) {
 
 				Constraint body;
 				IOclInterpreter interp;
 
-				body = env.getConstraint(propertyName);
+				body = env.getConstraint(qualifiedPropertyName);
 
 				localEnv = Environment.getNewLocalEnvironment();
 
@@ -2004,7 +2072,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 			}
 			// no else.
 
-			/* Eventually get the value of the Variable from the environment. */
+			/*
+			 * Eventually get the value of the Variable from the environment.
+			 * For example if the variable was prepared like the variables
+			 * 'self' or 'result'.
+			 */
 			result = env.getVar(aVariable.getName());
 
 			/*
@@ -2020,6 +2092,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 
 				else if (aVariable.getName().equals("self")) {
 					result = this.constrainedModelObject.getOclObject();
+				}
+
+				/* FIXME Handle the special variable result. */
+				else if (aVariable.getName().equals("result")) {
+					System.out
+							.println("Problem for 'result' variables not solved yet.");
 				}
 
 				else {
