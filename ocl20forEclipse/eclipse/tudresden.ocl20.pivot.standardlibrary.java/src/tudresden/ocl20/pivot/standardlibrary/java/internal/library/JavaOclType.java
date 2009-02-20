@@ -99,39 +99,39 @@ public class JavaOclType extends JavaOclRoot implements OclType {
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	public OclRoot createInstance(OclRoot anOclRoot) {
-	
+
 		OclRoot result;
-	
+
 		Class<?> thisAdaptee;
 		Class<?> anAdaptee;
-	
+
 		thisAdaptee = (Class<?>) this.getAdaptee();
 		anAdaptee = anOclRoot.getAdapteeClass();
-	
+
 		if (anAdaptee.isAssignableFrom(thisAdaptee)) {
-	
+
 			if (this == OCLVOIDTYPE) {
 				result = JavaOclVoid.getInstance();
 			}
-	
+
 			else if (this == OCLTYPETYPE) {
 				result = new JavaOclType(anAdaptee);
 			}
-	
+
 			else if (this == OCLANYTYPE) {
 				return new JavaOclAny(anAdaptee);
 			}
-	
+
 			else {
 				result = new JavaOclObject(anAdaptee);
 				result.setAdapteeClass(thisAdaptee);
 			}
 		}
-	
+
 		else {
 			result = JavaOclVoid.getInstance();
 		}
-	
+
 		return result;
 	}
 
@@ -197,8 +197,11 @@ public class JavaOclType extends JavaOclRoot implements OclType {
 		}
 
 		else {
-			result = JavaOclBoolean.getInstance(this.isEqualTo(
-					anOclRoot.getType()).isTrue());
+			OclType aType;
+			
+			aType = anOclRoot.getType();
+			
+			result = this.isEqualTo(aType);
 		}
 
 		return result;

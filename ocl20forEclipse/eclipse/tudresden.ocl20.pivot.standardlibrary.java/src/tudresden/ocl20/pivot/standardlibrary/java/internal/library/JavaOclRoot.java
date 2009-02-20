@@ -460,8 +460,13 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 
 		/* Else compute the result. */
 		else {
-			result = JavaOclBoolean.getInstance(this.getAdaptee().equals(
-					anOclRoot.getAdaptee()));
+			Object thisAdaptee;
+			Object anAdaptee;
+
+			thisAdaptee = this.getAdaptee();
+			anAdaptee = anOclRoot.getAdaptee();
+
+			result = JavaOclBoolean.getInstance(thisAdaptee.equals(anAdaptee));
 		}
 
 		return result;
@@ -561,7 +566,7 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsTypeOf
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
 	 */
-	public OclBoolean oclIsTypeOf(OclType typespec) {
+	public OclBoolean oclIsTypeOf(OclType aType) {
 
 		OclBoolean result;
 
@@ -569,9 +574,11 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 		if (this.isOclUndefined().isTrue()) {
 			result = JavaOclBoolean.getInstance(null);
 			result.setUndefinedreason(getUndefinedreason());
-		} else {
-			result = JavaOclBoolean.getInstance(typespec.isOfType(this)
-					.isTrue());
+		}
+
+		/* Else check if the given type is the expected type. */
+		else {
+			result = aType.isOfType(this);
 		}
 
 		return result;
@@ -661,7 +668,7 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 		}
 
 		else {
-			result = new JavaOclRoot(property);
+			result = new JavaOclObject(property);
 		}
 
 		return result;
@@ -675,7 +682,8 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	 * 
 	 * @param methodName
 	 *            The name of the method to search for.
-	 * @param sourceType The source type on which the operation shall be invoked.
+	 * @param sourceType
+	 *            The source type on which the operation shall be invoked.
 	 * @param parameterTypes
 	 *            An Array representing the number and types of parameters to
 	 *            look for in the method's signature. A null array is treated as
@@ -847,7 +855,8 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 				index++;
 			}
 
-			method = this.findMethod(operationName, sourceType, paramTypes, false);
+			method = this.findMethod(operationName, sourceType, paramTypes,
+					false);
 
 			operationInstance = this;
 		}
@@ -867,8 +876,11 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 
 		/* Try to invoke the operation. */
 		try {
-			invokedOperation = method.invoke(sourceType
-					.cast(operationInstance), paramValues);
+			Object castedSource;
+
+			castedSource = sourceType.cast(operationInstance);
+
+			invokedOperation = method.invoke(castedSource, paramValues);
 		}
 
 		catch (IllegalArgumentException e) {
