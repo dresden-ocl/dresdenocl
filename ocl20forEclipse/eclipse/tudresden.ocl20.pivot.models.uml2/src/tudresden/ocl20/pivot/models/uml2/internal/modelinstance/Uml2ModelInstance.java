@@ -24,6 +24,7 @@ import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardlibraryAdapterFactory;
@@ -32,7 +33,7 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 		IModelInstance {
 
 	/** The {@link IModel} of this {@link IModelInstance}. */
-	private IModel umlModel;
+	private IModel myUmlModel;
 
 	/** The root name space of the meta model. */
 	private Namespace rootNamespace;
@@ -48,7 +49,7 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 	private IModelInstanceFactory factory;
 
 	private static Map<Integer, Map<String, String>> operationNames = new HashMap<Integer, Map<String, String>>();
-	
+
 	private ClassLoader myClassLoader;
 
 	static {
@@ -81,15 +82,16 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 	 * @param providerClass
 	 *            The provider class used to get all type instances of this
 	 *            model instance.
-	 * @param model
+	 * @param anUML2Model
 	 *            The {@link IModel} of this {@link IModelInstance}.s
 	 * @throws ModelAccessException
 	 */
 	@SuppressWarnings("unchecked")
-	public Uml2ModelInstance(Class<?> providerClass, IModel model)
+	public Uml2ModelInstance(Class<?> providerClass, IModel anUML2Model)
 			throws ModelAccessException {
 
-		this.rootNamespace = model.getRootNamespace();
+		this.myUmlModel = anUML2Model;
+		this.rootNamespace = anUML2Model.getRootNamespace();
 
 		this.objects = new HashMap<String, List<IModelObject>>();
 		this.allObjects = new ArrayList<IModelObject>();
@@ -148,8 +150,123 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 	 * .List)
 	 */
 	public OclEnumLiteral findEnumLiteral(List<String> pathName) {
-		// TODO Auto-generated method stub - Shall this method be implemented?
-		return null;
+		// FIXME This method must be implemented!
+
+		OclEnumLiteral result;
+		Type aModelsEnum;
+
+		List<String> anEnumsPath;
+		String anEnumLiteralsName;
+
+		result = null;
+
+		/* Split the path into the enum's type path and the name of the literal. */
+		anEnumsPath = new ArrayList<String>(pathName);
+		anEnumLiteralsName = anEnumsPath.remove(anEnumsPath.size() - 1);
+
+		/* Try to find the enum's type from the model. */
+		if (this.rootNamespace.getName().equals(anEnumsPath.get(0))) {
+
+			List<String> aTypesPath;
+
+			/* Clone the path list because it will be modified. */
+			aTypesPath = new ArrayList<String>(anEnumsPath);
+			aTypesPath.remove(0);
+
+			aModelsEnum = this.findTypeInNamespace(aTypesPath,
+					this.rootNamespace);
+		}
+
+		else {
+			aModelsEnum = null;
+		}
+
+		/*
+		 * Check if the enum's type has been found and if the found type is an
+		 * enumeration.
+		 */
+		if (aModelsEnum != null && aModelsEnum instanceof Enumeration) {
+
+			Class<?> theEnumerationsClass;
+
+			IModelObject aModelObject;
+			Uml2ModelObject anUml2ModelObject;
+
+			ClassLoader modelClassLoader;
+
+			String anEnumsCanonicalName;
+
+			/* Convert the enum's package list into a canonical name. */
+			anEnumsCanonicalName = null;
+
+			for (String aPackageName : anEnumsPath) {
+
+				if (aPackageName.equals("root") && anEnumsCanonicalName == null) {
+					/* Do nothing, ignore the root package. */
+				}
+
+				else if (anEnumsCanonicalName == null) {
+					anEnumsCanonicalName = aPackageName;
+				}
+
+				else {
+					anEnumsCanonicalName += "." + aPackageName;
+				}
+			}
+
+			/* Get the model instances' class loader. */
+			aModelObject = this.allObjects.get(0);
+			anUml2ModelObject = (Uml2ModelObject) aModelObject;
+
+			modelClassLoader = anUml2ModelObject.object.getClass()
+					.getClassLoader();
+
+			/* Try to load the enumeration's class. */
+			try {
+				theEnumerationsClass = modelClassLoader
+						.loadClass(anEnumsCanonicalName);
+			}
+
+			catch (ClassNotFoundException e) {
+				theEnumerationsClass = null;
+			}
+
+			/*
+			 * If the found type is an enumeration, try to get the needed
+			 * literal.
+			 */
+			if (theEnumerationsClass.isEnum()) {
+
+				Object[] aClassEnums;
+				Object aEnumLiteralObject;
+
+				/* Get all enumeration literals of the found class. */
+				aClassEnums = theEnumerationsClass.getEnumConstants();
+				aEnumLiteralObject = null;
+
+				/* Search for the needed literal. */
+				for (Object anEnumerationObject : Arrays.asList(aClassEnums)) {
+
+					String anEnumObjectsName;
+
+					anEnumObjectsName = anEnumerationObject.toString();
+
+					if (anEnumObjectsName.equals(anEnumLiteralsName)) {
+
+						aEnumLiteralObject = anEnumerationObject;
+						break;
+					}
+					// no else.
+				}
+
+				result = (OclEnumLiteral) Platform.getAdapterManager()
+						.getAdapter(aEnumLiteralObject, OclEnumLiteral.class);
+			}
+			// no else.
+		}
+		// no else.
+
+		return result;
 	}
 
 	/**
@@ -207,8 +324,6 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 
 			catch (ClassNotFoundException e) {
 				/* Do nothing; return null. */
-				// FIXME remove printStackTrace.
-				e.printStackTrace();
 			}
 
 		}
@@ -384,7 +499,7 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 
 			msg = "ModelInstance doesn't match to model. ";
 			msg += "Type for " + anObject.getClass();
-			msg += " not found in model " + umlModel.getDisplayName();
+			msg += " not found in model " + myUmlModel.getDisplayName();
 
 			throw new ModelAccessException(msg);
 		}
@@ -439,6 +554,80 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 		while (objectIterator.hasNext()) {
 			this.addObject(objectIterator.next());
 		}
+	}
+
+	/**
+	 * <p>
+	 * A helper methods used to find the {@link Type} to a given path in a given
+	 * {@link Namespace} of this {@link Uml2ModelInstance}.
+	 * </p>
+	 * 
+	 * @param aPackagePath
+	 *            The path of the {@link Type} which shall be searched for.
+	 * @param aNamespace
+	 *            The {@link Namespace} in which shall be searched for the
+	 *            {@link Type}.
+	 * @return the found {@link Type} or null.
+	 * 
+	 */
+	private Type findTypeInNamespace(List<String> aPackagePath,
+			Namespace aNamespace) {
+	
+		Type result;
+	
+		result = null;
+	
+		/* Check if the searched type is located in a nested name space. */
+		if (aPackagePath.size() > 1) {
+	
+			List<Namespace> nestedNamespaces;
+			String currentPackage;
+	
+			nestedNamespaces = aNamespace.getNestedNamespace();
+			currentPackage = aPackagePath.remove(0);
+	
+			/* Check if any nested name space matches the actual package's name. */
+			for (Namespace aNestedNamespace : nestedNamespaces) {
+	
+				String aNestedNamespacesName;
+	
+				aNestedNamespacesName = aNestedNamespace.getName();
+	
+				if (aNestedNamespacesName.equals(currentPackage)) {
+	
+					result = this.findTypeInNamespace(aPackagePath,
+							aNestedNamespace);
+					break;
+				}
+				// no else.
+			}
+		}
+	
+		/* Else search for the type in this name space. */
+		else {
+	
+			List<Type> ownedTypes;
+	
+			ownedTypes = aNamespace.getOwnedType();
+	
+			/* Check if any type matches the type's name. */
+			for (Type aType : ownedTypes) {
+	
+				String aTypesName;
+	
+				aTypesName = aType.getName();
+	
+				if (aTypesName.equals(aPackagePath.get(0))) {
+					result = aType;
+					break;
+				}
+				// no else.
+			}
+			// end for.
+		}
+		// end else.
+	
+		return result;
 	}
 
 	/**

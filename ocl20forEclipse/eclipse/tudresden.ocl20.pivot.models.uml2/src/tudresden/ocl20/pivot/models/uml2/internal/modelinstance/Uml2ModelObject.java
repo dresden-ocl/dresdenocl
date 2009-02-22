@@ -19,7 +19,7 @@ import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
 public class Uml2ModelObject extends AbstractModelObject implements
 		IModelObject {
 
-	private Object object;
+	protected Object object;
 
 	/**
 	 * <p>
