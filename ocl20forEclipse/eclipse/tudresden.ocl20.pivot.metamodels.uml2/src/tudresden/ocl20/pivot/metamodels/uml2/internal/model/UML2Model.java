@@ -45,13 +45,13 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * {@link org.eclipse.uml2.uml.Package}.
 	 * 
 	 * @param resource
-	 *          the resource containing the model
+	 *            the resource containing the model
 	 * 
 	 * @generated NOT
 	 */
 	public UML2Model(Resource resource) {
-		super(resource.getURI().toString(), ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel(UML2MetamodelPlugin.ID));
+		super(resource.getURI().toString(), ModelBusPlugin
+				.getMetamodelRegistry().getMetamodel(UML2MetamodelPlugin.ID));
 
 		// initialize
 		this.resource = resource;
@@ -67,13 +67,14 @@ public class UML2Model extends AbstractModel implements IModel {
 	}
 
 	/**
-	 * This method lazily creates a {@link Namespace} adapter for the virtual root
-	 * package in the associated UML2 model. Thus, any possible resource loading
-	 * errors will not happen until this method is called for the first time.
+	 * This method lazily creates a {@link Namespace} adapter for the virtual
+	 * root package in the associated UML2 model. Thus, any possible resource
+	 * loading errors will not happen until this method is called for the first
+	 * time.
 	 * 
 	 * @throws ModelAccessException
-	 *           if an error occurs when creating the adapter for the top
-	 *           namespace
+	 *             if an error occurs when creating the adapter for the top
+	 *             namespace
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
 	 * 
@@ -89,15 +90,15 @@ public class UML2Model extends AbstractModel implements IModel {
 	}
 
 	/**
-	 * Helper method that creates the adapter for the root namespace. If there is
-	 * only one top-level namespace possible, then this method should just return
-	 * the adapter for the top-level namespace, else it should create a new
-	 * "virtual" root namespace.
+	 * Helper method that creates the adapter for the root namespace. If there
+	 * is only one top-level namespace possible, then this method should just
+	 * return the adapter for the top-level namespace, else it should create a
+	 * new "virtual" root namespace.
 	 * 
 	 * @return a <code>Namespace</code> instance
 	 * 
 	 * @throws ModelAccessException
-	 *           if an error occurs while loading the adapted UML2 model
+	 *             if an error occurs while loading the adapted UML2 model
 	 * 
 	 * @generated NOT
 	 */
@@ -107,8 +108,9 @@ public class UML2Model extends AbstractModel implements IModel {
 		if (!resource.isLoaded()) {
 
 			if (logger.isInfoEnabled()) {
-				logger.info(NLS.bind(UML2ModelMessages.UML2Model_LoadingUML2Model,
-						resource.getURI()));
+				logger.info(NLS.bind(
+						UML2ModelMessages.UML2Model_LoadingUML2Model, resource
+								.getURI()));
 			}
 
 			try {
@@ -143,13 +145,13 @@ public class UML2Model extends AbstractModel implements IModel {
 	}
 
 	/**
-	 * Processes all UML Associations: since they are treated as Types in the UML
-	 * meta model, they have to be mapped to Properties in the Pivot Model.
+	 * Processes all UML Associations: since they are treated as Types in the
+	 * UML meta model, they have to be mapped to Properties in the Pivot Model.
 	 * 
 	 * Precondition: binary associations
 	 * 
 	 * @param rootPackage
-	 *          the containing package (namespace)
+	 *            the containing package (namespace)
 	 */
 	protected void convertAssociations(Package rootPackage) {
 
@@ -167,22 +169,26 @@ public class UML2Model extends AbstractModel implements IModel {
 				if (property1.isNavigable()) {
 					UML2AdapterFactory.INSTANCE.createType(property2.getType())
 							.addProperty(
-									UML2AdapterFactory.INSTANCE.createProperty(property1));
+									UML2AdapterFactory.INSTANCE
+											.createProperty(property1));
 				}
 				if (property2.isNavigable()) {
 					UML2AdapterFactory.INSTANCE.createType(property1.getType())
 							.addProperty(
-									UML2AdapterFactory.INSTANCE.createProperty(property2));
+									UML2AdapterFactory.INSTANCE
+											.createProperty(property2));
 				}
 				// all other associations are not specified for navigation ->
 				// bidirectional
 				if (!(property1.isNavigable()) && !(property2.isNavigable())) {
 					UML2AdapterFactory.INSTANCE.createType(property2.getType())
 							.addProperty(
-									UML2AdapterFactory.INSTANCE.createProperty(property1));
+									UML2AdapterFactory.INSTANCE
+											.createProperty(property1));
 					UML2AdapterFactory.INSTANCE.createType(property1.getType())
 							.addProperty(
-									UML2AdapterFactory.INSTANCE.createProperty(property2));
+									UML2AdapterFactory.INSTANCE
+											.createProperty(property2));
 				}
 			}
 		}
@@ -199,7 +205,8 @@ public class UML2Model extends AbstractModel implements IModel {
 	public boolean equals(Object obj) {
 
 		if (obj instanceof UML2Model) {
-			return resource.getURI().equals(((UML2Model) obj).resource.getURI());
+			return resource.getURI()
+					.equals(((UML2Model) obj).resource.getURI());
 		}
 
 		return false;
