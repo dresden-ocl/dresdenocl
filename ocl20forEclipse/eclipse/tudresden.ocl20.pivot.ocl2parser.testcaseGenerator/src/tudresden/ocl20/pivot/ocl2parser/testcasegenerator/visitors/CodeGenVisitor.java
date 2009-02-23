@@ -68,8 +68,6 @@ import tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util.BuildingCodeUtilC
  *
  */
 public class CodeGenVisitor implements IVisitorCodeGen {
-	// This variable holds the generated code.
-	private StringBuffer code = null;
 	private List<IVariable> iteratedVariables = null;
 	
 	/* 
@@ -77,9 +75,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 	 * during this code generation to make the elements unique.
 	 */
 	private int elementNumber = 0;
-	private List<HashMap> maps = null;
-	private HashMap actualMap = null;
-	//private boolean arrayList = false;
+	
 	private StringBuffer variableDeclaration = null;
 	
 	// The code builder that is used for writing the code out to a plugin.
@@ -90,11 +86,8 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 	 * @param codeBuilder the code builder that is used to generate the test plugin
 	 */
 	public CodeGenVisitor(ICodeBuilder codeBuilder) {
-		code = new StringBuffer();
 		iteratedVariables = new ArrayList<IVariable>();
-		maps = new ArrayList<HashMap>();
-		actualMap = new HashMap();
-		maps.add(actualMap);
+		
 		variableDeclaration = new StringBuffer();
 		this.codeBuilder = codeBuilder;
 	}
@@ -105,7 +98,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		
 		modelVariable.accept(this, localBuf);
 		
-		code.append("model = " + localBuf + ";\n");
+		codeBuilder.addCodeSnippet("model = " + localBuf + ";\n");
 
 	}
 
@@ -151,17 +144,16 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		// We create a new name for the constraint variable.
 		String constraintVarName = "constraint$" + localElementNumber;
 		
-		// We generate code that creates the new constraint and set its properties.
-		code.append("Constraint " + constraintVarName + " = pivotFactory.createConstraint();\n");
-		code.append(constraintVarName + ".setName("+localBuffers.get(0) + ");\n");
-		code.append(constraintVarName + ".setKind(" + localBuffers.get(1) + ");\n");
-		code.append(constraintVarName + ".setSpecification(" + localBuffers.get(2) + ");\n");
-		code.append("for(ConstrainableElement constraint$new : " + localBuffers.get(3) + ") {\n");
-		code.append(constraintVarName + ".addConstrainedElement(constraint$new);\n");
-		code.append("}\n");
-		code.append(constraintVarName + ".setDefinedFeature(" + localBuffers.get(4) + ");\n");
+		codeBuilder.addCodeSnippet("Constraint " + constraintVarName + " = pivotFactory.createConstraint();\n");
+		codeBuilder.addCodeSnippet(constraintVarName + ".setName("+localBuffers.get(0) + ");\n");
+		codeBuilder.addCodeSnippet(constraintVarName + ".setKind(" + localBuffers.get(1) + ");\n");
+		codeBuilder.addCodeSnippet(constraintVarName + ".setSpecification(" + localBuffers.get(2) + ");\n");
+		codeBuilder.addCodeSnippet("for(ConstrainableElement constraint$new : " + localBuffers.get(3) + ") {\n");
+		codeBuilder.addCodeSnippet(constraintVarName + ".addConstrainedElement(constraint$new);\n");
+		codeBuilder.addCodeSnippet("}\n");
+		codeBuilder.addCodeSnippet(constraintVarName + ".setDefinedFeature(" + localBuffers.get(4) + ");\n");
 		
-		code.append("\n");
+		codeBuilder.addCodeSnippet("\n");
 		
 		buffer.append(constraintVarName);
 		
@@ -199,22 +191,22 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		List<String> pathName = BuildingCodeUtilClass.transformPathName2List(literalString);
 		
 		// Generate the code that builds the name of the enumeration path name.
-		code.append("List<String> enumName$" + elementNumber + " = new ArrayList<String>();\n");
+		codeBuilder.addCodeSnippet("List<String> enumName$" + elementNumber + " = new ArrayList<String>();\n");
 		for(int i = 0; i < pathName.size()-1; i++) {
-			code.append("enumName$" + elementNumber + ".add(\"" + pathName.get(i) + "\");\n");
+			codeBuilder.addCodeSnippet("enumName$" + elementNumber + ".add(\"" + pathName.get(i) + "\");\n");
 		}
 		
 		// Generate the code that try to find the enumeration in the model.
-		code.append("Enumeration enum$" + elementNumber + " = (Enumeration) referencedModel.findType(enumName$" + elementNumber + ");\n");
+		codeBuilder.addCodeSnippet("Enumeration enum$" + elementNumber + " = (Enumeration) referencedModel.findType(enumName$" + elementNumber + ");\n");
 		
 		// Generate the error code for the case that the enumeration wasn't found.
-		code.append("if (enum$" + elementNumber + " == null) throw new BuildModelException(\"The enumeration was not found while building the compare model. EnumerationName: " + literalString +"\");\n");
+		codeBuilder.addCodeSnippet("if (enum$" + elementNumber + " == null) throw new BuildModelException(\"The enumeration was not found while building the compare model. EnumerationName: " + literalString +"\");\n");
 		
 		// Generate the code that looks up in the enumeration for the enumeration literal.
-		code.append("EnumerationLiteral enumLiteral$" + elementNumber + " = enum$" + elementNumber + ".lookup(\"" + pathName.get(pathName.size()-1) + "\");\n");
+		codeBuilder.addCodeSnippet("EnumerationLiteral enumLiteral$" + elementNumber + " = enum$" + elementNumber + ".lookup(\"" + pathName.get(pathName.size()-1) + "\");\n");
 		
 		// Generate the error code for the case that the enumeration literal doesn't exist.
-		code.append("if(enumLiteral$" + elementNumber + " == null) throw BuildingModelException(\"The literal was not found. Literalname: "+ literalString + ");\n");
+		codeBuilder.addCodeSnippet("if(enumLiteral$" + elementNumber + " == null) throw BuildingModelException(\"The literal was not found. Literalname: "+ literalString + ");\n");
 		
 		// Give the variable that denotes the enumeration literal to the caller.		
 		buffer.append("enumLiteral$" + elementNumber);
@@ -225,11 +217,10 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 	}
 
 	public void visitErrorElement(IErrorElement node, StringBuffer buffer) throws BuildingASMException {
-		/* 
-		 * We put the key 'errorelement' with the value 'true' into the actual map. This notifies the code builder
-		 * that it must generate code that creates no ocl model but a parser error is expected.
+		/*
+		 * The code builder is instructed to generate code from which is expected that will fail.
 		 */
-		actualMap.put("errorelement", true);
+		codeBuilder.setErrorElement(true);
 
 	}
 
@@ -272,10 +263,10 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		if (arrayList == false) {
 			// If the list has no elements, it has no type.
 			if (node.getParameter().size() == 0) {
-				code.append("List list$" + elementNumber + " = new ArrayList();\n");
+				codeBuilder.addCodeSnippet("List list$" + elementNumber + " = new ArrayList();\n");
 			} else {
 				// Generate the code for the creation of the list. Take the list type of the list element as generic parameter.
-				code.append("List<" + node.getFullQualifiedListTypeName() + "> list$" + elementNumber + " = new ArrayList<" + node.getFullQualifiedListTypeName() + ">();\n");
+				codeBuilder.addCodeSnippet("List<" + node.getFullQualifiedListTypeName() + "> list$" + elementNumber + " = new ArrayList<" + node.getFullQualifiedListTypeName() + ">();\n");
 			}
 			
 			// Iterate over all parameters and generate the code for it for the list.
@@ -283,12 +274,12 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 				IModelExpression param = node.getParameter().get(i);
 				
 				// Generate code to add the element to the list.
-				code.append("list$" + elementNumber + ".add(" + localBuffers.get(i).toString() + ");\n");
+				codeBuilder.addCodeSnippet("list$" + elementNumber + ".add(" + localBuffers.get(i).toString() + ");\n");
 			}
 		} else { // We should generate an array.
 			
 			// Generate the code for the creation of the array.
-			code.append(node.getFullQualifiedListTypeName() + "[] list$" + elementNumber + " = new " + node.getFullQualifiedListTypeName() + "[" + node.getParameter().size() + "];\n");
+			codeBuilder.addCodeSnippet(node.getFullQualifiedListTypeName() + "[] list$" + elementNumber + " = new " + node.getFullQualifiedListTypeName() + "[" + node.getParameter().size() + "];\n");
 			
 			/*
 			 * Iterate over all parameters and generate the code for it.
@@ -297,7 +288,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 				IModelExpression param = node.getParameter().get(i);
 				
 				// Generate the code to add the element the array.
-				code.append("list$" + elementNumber + "[" + i + "] = " + localBuffers.get(i).toString() + ";\n");
+				codeBuilder.addCodeSnippet("list$" + elementNumber + "[" + i + "] = " + localBuffers.get(i).toString() + ";\n");
 			}
 		}
 		
@@ -310,12 +301,12 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 	}
 
 	public void visitMetamodelReference(IMetamodelReference node, StringBuffer buffer) throws BuildingASMException {
-		actualMap.put("metamodel", node.getToken().getValue());
+		codeBuilder.setMetamodel(node.getToken().getValue());
 
 	}
 
 	public void visitModelReference(IModelReference node, StringBuffer buffer) throws BuildingASMException {
-		actualMap.put("modelfile", node.getToken().getValue());
+		codeBuilder.setModelFile(node.getToken().getValue());
 
 	}
 
@@ -350,14 +341,14 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		 * of the namespace. At the end we must increment the localNumber variable.
 		 */
 		for(String st : pathName) {
-			code.append("Namespace namespace$" + localNumber + " = null;");
-			code.append("namespace$" + localNumber + " = pivotFactory.createNamespace();\n");
-			code.append("namespace$" + localNumber + ".setName(\"" + st + "\");\n");
+			codeBuilder.addCodeSnippet("Namespace namespace$" + localNumber + " = null;");
+			codeBuilder.addCodeSnippet("namespace$" + localNumber + " = pivotFactory.createNamespace();\n");
+			codeBuilder.addCodeSnippet("namespace$" + localNumber + ".setName(\"" + st + "\");\n");
 			localNumber++;
 		}
 		
 		// Add a new line two the code for better readability.
-		code.append("\n");
+		codeBuilder.addCodeSnippet("\n");
 		
 		/*
 		 * Now we must build a tree of the even created namespaces. The schema is the following:
@@ -372,7 +363,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		 * to increment this variable (the next caller need a new fresh variable).
 		 */
 		for(int i = 0; i < pathName.size()-1; i++) {
-			code.append("namespace$" + elementNumber + ".addNestedNamespace(namespace$" + (elementNumber+1) + ");\n");
+			codeBuilder.addCodeSnippet("namespace$" + elementNumber + ".addNestedNamespace(namespace$" + (elementNumber+1) + ");\n");
 			elementNumber++;
 		}
 		
@@ -389,9 +380,9 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		 * is localBuf. The (localNumber-1) variable is the last used number and so
 		 * the last namespace is so named. To the last namespace we will add the constraints.
 		 */
-		code.append("for(Constraint constraint$toBeAdded : " + localBuf.toString() + ") {\n");
-		code.append("namespace$" + (localNumber-1) + ".addRule(constraint$toBeAdded);\n");
-		code.append("}\n");
+		codeBuilder.addCodeSnippet("for(Constraint constraint$toBeAdded : " + localBuf.toString() + ") {\n");
+		codeBuilder.addCodeSnippet("namespace$" + (localNumber-1) + ".addRule(constraint$toBeAdded);\n");
+		codeBuilder.addCodeSnippet("}\n");
 	}
 
 	public void visitNullElement(INullElement node, StringBuffer buffer) throws BuildingASMException {
@@ -428,34 +419,33 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		String operationTypenameString = BuildingCodeUtilClass.concatElementsWithDblColon(operationTypename);
 		
 		// Generate code that creates a string list that will contain the elements of the operation type path name.
-		code.append("List<String> operationTypename$" + localElementNumber + " = new ArrayList<String>();\n");
+		codeBuilder.addCodeSnippet("List<String> operationTypename$" + localElementNumber + " = new ArrayList<String>();\n");
 		
 		// Generate the code for adding the element of the type path name to the newly created list.
 		for(int i = 0; i < operationTypename.size(); i++) {
-			code.append("operationTypename$" + localElementNumber + ".add(\"" + operationTypename.get(i) + "\");\n");
+			codeBuilder.addCodeSnippet("operationTypename$" + localElementNumber + ".add(\"" + operationTypename.get(i) + "\");\n");
 		}
 		
 		// Create a new string buffer that will save the result of the second parameter computation.
 		StringBuffer localBuf = new StringBuffer();
 		
 		// Generate the code for the second parameter. It should be a java.util.List of types.
-		//arrayList = false;
 		node.getParameter().get(1).accept(this, localBuf);
 		
 		// Generate the code that save the parameters of the operation.
-		code.append("List<Type> parameters$" + localElementNumber + " = " + localBuf.toString() +";\n");
+		codeBuilder.addCodeSnippet("List<Type> parameters$" + localElementNumber + " = " + localBuf.toString() +";\n");
 		
 		// Generate code that finds the type of the operation.
-		code.append("Type operationType$" + localElementNumber + " = referencedModel.findType(operationTypename$" + localElementNumber + ");\n");
+		codeBuilder.addCodeSnippet("Type operationType$" + localElementNumber + " = referencedModel.findType(operationTypename$" + localElementNumber + ");\n");
 		
 		// Generate code for the case that the operation type isn't found. Here we use the string with the double colons.
-		code.append("if (operationType$" + localElementNumber + " == null) throw new BuildModelException(\"The type of the operation was not found: " + operationTypenameString + ".\");\n");
+		codeBuilder.addCodeSnippet("if (operationType$" + localElementNumber + " == null) throw new BuildModelException(\"The type of the operation was not found: " + operationTypenameString + ".\");\n");
 		
 		// Generate the code for finding the operation in the type. Here we use the parameter list.
-		code.append("Operation operation$" + localElementNumber + " = operationType$" + localElementNumber + ".lookupOperation(\"" + operationName + "\", parameters$" + localElementNumber + ");\n");
+		codeBuilder.addCodeSnippet("Operation operation$" + localElementNumber + " = operationType$" + localElementNumber + ".lookupOperation(\"" + operationName + "\", parameters$" + localElementNumber + ");\n");
 		
 		// Generate code for the case that the operation isn't found for the type.
-		code.append("if (operation$" + localElementNumber + " == null) throw new BuildModelException(\"The operation " + operationName + " was not found in the type " + operationTypenameString + ".\");\n" );
+		codeBuilder.addCodeSnippet("if (operation$" + localElementNumber + " == null) throw new BuildModelException(\"The operation " + operationName + " was not found in the type " + operationTypenameString + ".\");\n" );
 		
 		// The caller gets the operation variable.
 		buffer.append("operation$" + localElementNumber);
@@ -498,24 +488,24 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		String operationName = operationPathname.get(operationPathname.size()-1);
 		
 		// Generate code that creates a list of strings that will hold the type name.
-		code.append("List<String> operationTypename$" + localElementNumber + " = new ArrayList<String>();\n");
+		codeBuilder.addCodeSnippet("List<String> operationTypename$" + localElementNumber + " = new ArrayList<String>();\n");
 		
 		// Iterate over all parts of the operation type name to generate code that add each part of it to the list.
 		for(int i = 0; i < operationTypename.size(); i++) {
-			code.append("operationTypename$" + localElementNumber + ".add(\"" + operationTypename.get(i) + "\");\n");
+			codeBuilder.addCodeSnippet("operationTypename$" + localElementNumber + ".add(\"" + operationTypename.get(i) + "\");\n");
 		}
 		
 		// Generate code that search for the type in the model.
-		code.append("Type operationType$" + localElementNumber + " = referencedModel.findType(operationTypename$" + localElementNumber + ");\n");
+		codeBuilder.addCodeSnippet("Type operationType$" + localElementNumber + " = referencedModel.findType(operationTypename$" + localElementNumber + ");\n");
 		
 		// Generate code for the case that the type isn't found in the corresponding model.
-		code.append("if (operationType$" + localElementNumber + " == null) throw new BuildModelException(\"The type of the operation was not found: " + operationTypenameString + ".\");\n");
+		codeBuilder.addCodeSnippet("if (operationType$" + localElementNumber + " == null) throw new BuildModelException(\"The type of the operation was not found: " + operationTypenameString + ".\");\n");
 		
 		// Generate code that creates the new operation by the pivotmodel factory.
-		code.append("Operation newOperation$" + localElementNumber + " = pivotFactory.createOperation();\n");
+		codeBuilder.addCodeSnippet("Operation newOperation$" + localElementNumber + " = pivotFactory.createOperation();\n");
 		
 		// Generate code that sets the operation name of the new operation.
-		code.append("newOperation$" + localElementNumber + ".setName(\"" + operationName + "\");\n");
+		codeBuilder.addCodeSnippet("newOperation$" + localElementNumber + ".setName(\"" + operationName + "\");\n");
 		
 		// Create a local buffer to store the result of the second parameter computation.
 		StringBuffer localBuf = new StringBuffer();
@@ -524,15 +514,15 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		node.getParameter().get(1).accept(this, localBuf);
 		
 		// Generate code that transfer the parameter list to a new variable.
-		code.append("List<Parameter> parameters$" + localElementNumber + " = " + localBuf.toString() +";\n");
+		codeBuilder.addCodeSnippet("List<Parameter> parameters$" + localElementNumber + " = " + localBuf.toString() +";\n");
 		
 		// Generate a for-loop that iterates over all parameters and add each to the new operation.
-		code.append("for(Parameter param$new : parameters$" + localElementNumber + ") {\n");
-		code.append("newOperation$" + localElementNumber + ".addParameter(param$new);\n");
-		code.append("}\n");
+		codeBuilder.addCodeSnippet("for(Parameter param$new : parameters$" + localElementNumber + ") {\n");
+		codeBuilder.addCodeSnippet("newOperation$" + localElementNumber + ".addParameter(param$new);\n");
+		codeBuilder.addCodeSnippet("}\n");
 		
 		// Generate code that add the new operation to the operation type.
-		code.append("operationType$" + localElementNumber + ".addOperation(newOperation$" + localElementNumber + ");\n");
+		codeBuilder.addCodeSnippet("operationType$" + localElementNumber + ".addOperation(newOperation$" + localElementNumber + ");\n");
 		
 		// The caller gets the operation name of the new operation.
 		buffer.append("newOperation$" + localElementNumber);
@@ -550,14 +540,14 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		 * We generate code that examines whether the operation is static. If not, it is an error.
 		 * In the buffer variable the name of the operation variable is stored.
 		 */
-		code.append("if (!" + buffer.toString() + ".isStatic()) throw new" +
+		codeBuilder.addCodeSnippet("if (!" + buffer.toString() + ".isStatic()) throw new" +
 				" BuildModelException(\"The operation was found, but it is not static. Operation name: \" + " + buffer.toString() + ".getName() + \".\");\n");
 
 	}
 
 	public void visitPackageDeclaration(IPackageDeclaration node, StringBuffer buffer) throws BuildingASMException {
-		// Here we add a key 'packagename' to the actual map.
-		actualMap.put("packagename", node.getToken().getValue());
+		// The code builder get the name of the package.
+		codeBuilder.setPackagename(node.getToken().getValue());
 
 	}
 
@@ -581,11 +571,11 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		String parameterName = "parameter$" + elementNumber;
 		
 		// Generate code that creates the parameter and sets its properties.
-		code.append("Parameter " + parameterName + " = pivotFactory.createParameter();\n");
-		code.append(parameterName + ".setName(" + localBuffers.get(0) + ");\n");
-		code.append(parameterName + ".setKind(" + localBuffers.get(1) + ");\n");
-		code.append(parameterName + ".setType(" + localBuffers.get(2) + ");\n");
-		code.append("\n");
+		codeBuilder.addCodeSnippet("Parameter " + parameterName + " = pivotFactory.createParameter();\n");
+		codeBuilder.addCodeSnippet(parameterName + ".setName(" + localBuffers.get(0) + ");\n");
+		codeBuilder.addCodeSnippet(parameterName + ".setKind(" + localBuffers.get(1) + ");\n");
+		codeBuilder.addCodeSnippet(parameterName + ".setType(" + localBuffers.get(2) + ");\n");
+		codeBuilder.addCodeSnippet("\n");
 		
 		// The caller gets the parameter variable.
 		buffer.append(parameterName);
@@ -623,18 +613,18 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		List<String> pathNameProperty = BuildingCodeUtilClass.transformPathName2List(param1.getToken().getValue());
 		
 		// Generate the code that creates a string list that should represent the path name to the type of the property.
-		code.append("List<String> propertyTypename$" + elementNumber + " = new ArrayList<String>();\n");
+		codeBuilder.addCodeSnippet("List<String> propertyTypename$" + elementNumber + " = new ArrayList<String>();\n");
 		
 		/* 
 		 * Generate the code for the adding the type elements to the generated list. Note: the last element of
 		 * property path name denotes the property itself. So it will not be added.
 		 */
 		for(int i = 0; i < pathNameProperty.size() -1; i++) {
-			code.append("propertyTypename$" + elementNumber + ".add(\"" + pathNameProperty.get(i) + "\");\n");
+			codeBuilder.addCodeSnippet("propertyTypename$" + elementNumber + ".add(\"" + pathNameProperty.get(i) + "\");\n");
 		}
 		
 		// Generate the code that searches for the type of the property in the corresponding model.
-		code.append("Type propertyType$" + elementNumber + " = referencedModel.findType(propertyTypename$" + elementNumber + ");\n");
+		codeBuilder.addCodeSnippet("Type propertyType$" + elementNumber + " = referencedModel.findType(propertyTypename$" + elementNumber + ");\n");
 		
 		// Reconstruct the type name of the property from the property path name. It will be used for the error message to be generated.
 		String typeName = BuildingCodeUtilClass.concatElementsWithDblColon(pathNameProperty.subList(0, pathNameProperty.size()-1));
@@ -643,13 +633,13 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		String propertyName = pathNameProperty.get(pathNameProperty.size()-1);
 		
 		// Generate the code for the error message for the case that the type wasn't found. Here we use the typename and the property name.
-		code.append("if (propertyType$" + elementNumber + " == null) throw new BuildModelException(\"The type " + typeName + " for the property " + propertyName +" was not found.\");\n");
+		codeBuilder.addCodeSnippet("if (propertyType$" + elementNumber + " == null) throw new BuildModelException(\"The type " + typeName + " for the property " + propertyName +" was not found.\");\n");
 		
 		// Generate the code for searching the property in the found type.
-		code.append("Property property$" + elementNumber + " = propertyType$" + elementNumber + ".lookupProperty(\"" + propertyName + "\");\n");
+		codeBuilder.addCodeSnippet("Property property$" + elementNumber + " = propertyType$" + elementNumber + ".lookupProperty(\"" + propertyName + "\");\n");
 		
 		// Generate the code for the case that the property was not found in the type.
-		code.append("if (property$" + elementNumber + " == null) throw new BuildModelException(\"The property " + propertyName + " doesn't exist for the type " + typeName + ".\");\n");
+		codeBuilder.addCodeSnippet("if (property$" + elementNumber + " == null) throw new BuildModelException(\"The property " + propertyName + " doesn't exist for the type " + typeName + ".\");\n");
 		
 		// The caller gets the name of the property variable.
 		buffer.append("property$" + elementNumber);
@@ -682,7 +672,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		List<String> propertyPathname = BuildingCodeUtilClass.transformPathName2List(param1.getToken().getValue());
 		
 		// Generate the code that creates the list of the property typename.
-		code.append("List<String> propertyTypename$" + localElementNumber + " = new ArrayList<String>();\n");
+		codeBuilder.addCodeSnippet("List<String> propertyTypename$" + localElementNumber + " = new ArrayList<String>();\n");
 		
 		/* 
 		 * Generate the code that adds the parts of the type path name to the list.
@@ -690,7 +680,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		 * element is the name of the property and doesn't belong to the type.
 		 */
 		for(int i = 0; i < propertyPathname.size()-1; i++) {
-			code.append("propertyTypename$" + localElementNumber + ".add(\"" + propertyPathname.get(i) + "\");\n");
+			codeBuilder.addCodeSnippet("propertyTypename$" + localElementNumber + ".add(\"" + propertyPathname.get(i) + "\");\n");
 		}
 		
 		// Reconstruct the typename from the property path name. It will be used for error messages.
@@ -700,10 +690,10 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		String propertyName = propertyPathname.get(propertyPathname.size()-1);
 		
 		// Generate code search for the type to what the property should be added.
-		code.append("Type propertyType$" + localElementNumber + " = referencedModel.findType(propertyTypename$" + localElementNumber + ");\n");
+		codeBuilder.addCodeSnippet("Type propertyType$" + localElementNumber + " = referencedModel.findType(propertyTypename$" + localElementNumber + ");\n");
 		
 		// Generate the code for the case that the type doesn't exist.
-		code.append("if (propertyType$" + localElementNumber + " == null) throw new BuildModelException(\"The type " + typeName + " was not found.\");\n");
+		codeBuilder.addCodeSnippet("if (propertyType$" + localElementNumber + " == null) throw new BuildModelException(\"The type " + typeName + " was not found.\");\n");
 		
 		// Get the second parameter of the property element.
 		IModelExpression param2 = node.getParameter(1);
@@ -715,16 +705,16 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		param2.accept(this, localBuf);
 		
 		// Generate the code to create a property through the pivotmodel factory.
-		code.append("Property property$" + localElementNumber + " = pivotFactory.createProperty();\n");
+		codeBuilder.addCodeSnippet("Property property$" + localElementNumber + " = pivotFactory.createProperty();\n");
 		
 		// Generate the code that set the name of the property (it is the last element of the path name).
-		code.append("property$" + localElementNumber + ".setName(\"" + propertyName + "\");\n");
+		codeBuilder.addCodeSnippet("property$" + localElementNumber + ".setName(\"" + propertyName + "\");\n");
 		
 		// Generate the code that sets the type of the property (it is the second parameter).
-		code.append("property$" + localElementNumber + ".setType(" + localBuf.toString() + ");\n");
+		codeBuilder.addCodeSnippet("property$" + localElementNumber + ".setType(" + localBuf.toString() + ");\n");
 		
 		// Generate the code that add the newly created property to the type.
-		code.append("propertyType$" + localElementNumber + ".addProperty(property$" + localElementNumber + ");\n");
+		codeBuilder.addCodeSnippet("propertyType$" + localElementNumber + ".addProperty(property$" + localElementNumber + ");\n");
 		
 		// The caller gets the property variable.
 		buffer.append("property$" + localElementNumber);
@@ -744,7 +734,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		 * The local buffer now contains the name of the new property variable.
 		 * Now we must generate code that examines whether the found property is static.
 		 */
-		code.append("if (!(" + localBuf + ".isStatic)) throw new BuildModelException(\"The property isn't static.\");\n");
+		codeBuilder.addCodeSnippet("if (!(" + localBuf + ".isStatic)) throw new BuildModelException(\"The property isn't static.\");\n");
 		
 		// The caller gets the same variable name.
 		buffer.append(localBuf.toString());
@@ -762,8 +752,25 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 	}
 
 	public void visitTestSuite(ITestSuite node, StringBuffer buffer) throws BuildingASMException {
-		// First we get the package name out of the actual map.
-		String currentPackageName = (String) actualMap.get("packagename");
+		// We initialize the code builder for a new test suite.
+		codeBuilder.newTestSuite();
+		
+		/* 
+		 * First we save the package name that is stored in the code builder.
+		 * This set us in a situation in where we can restore the old package name. This is useful
+		 * because the testsuites/ testcase should inherit the package name from the parent.
+		 * If the parent has one package name and the child has also one, we must use the child ones name
+		 * and must restore the old.
+		 */
+		String oldPackageName = (String) codeBuilder.getPackagename();
+		
+		// We set the old package name to the current.
+		String currentPackageName = oldPackageName;
+		
+		// If the test suite has a package declaration then will we use this.
+		if (node.getPackageDeclaration() != null) {
+			currentPackageName = node.getPackageDeclaration().getToken().getValue();
+		}
 		
 		/* 
 		 * The key musn't be set. So in this case, we set the current package name
@@ -773,22 +780,14 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 			currentPackageName = new String("");
 		}
 		
-		// First we create a map that will store the information about the testsuite for code generation.
-		HashMap testsuiteMap = new HashMap();
-		
-		// We put the test suite name into the map.
-		testsuiteMap.put("testsuitename", node.getToken().getValue());
-		
-		// If the test suite has a package declaration then will we use this.
-		if (node.getPackageDeclaration() != null) {
-			currentPackageName = node.getPackageDeclaration().getToken().getValue();
-		}
-		
 		/* 
-		 * The packagename is set to the package declaration of this testsuite or
-		 * the package name of the actual map or the empty string.
+		 * The package name is set in the code builder.
 		 */
-		testsuiteMap.put("packagename", currentPackageName);
+		codeBuilder.setPackagename(currentPackageName);
+		
+		// We set the name of the test suite in the code builder.
+		codeBuilder.setTestsuiteName(node.getToken().getValue());
+		
 		
 		// This list will contain all names of the test classes (testcase or testsuite).
 		List<String> testClassNames = new ArrayList<String>();
@@ -801,28 +800,27 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 			 * the current package name and set this before the class name of
 			 * the sub test.
 			 */
+			
+			String className = null;
 			if (testPackageDecl == null) {
 				if (currentPackageName.equals("")) {
-					testClassNames.add(test.getToken().getValue() + ".class");
+					className = test.getToken().getValue() + ".class";
 				} else {
-					testClassNames.add(currentPackageName + "." + test.getToken().getValue() + ".class");
+					className = currentPackageName + "." + test.getToken().getValue() + ".class";
 				}
 				
 			} else { // If the sub test has its own package declaration then we take this as prefix for the class name.
-				testClassNames.add(testPackageDecl.getToken().getValue() + "." + test.getToken().getValue() + ".class");
+				className = testPackageDecl.getToken().getValue() + "." + test.getToken().getValue() + ".class";
 			}
+			
+			// We add the class name to the code builder.
+			codeBuilder.addTestClassName(className);
 			
 		}
 		
-		// We concatenate the class names to a string.
-		String testclassString = BuildingCodeUtilClass.concatElements(testClassNames);
-
-		// Add the class names to the map.
-		testsuiteMap.put("testclassnames", testclassString);
-		
 		// Generate the code for the testsuite.
 		try {
-			codeBuilder.generateTestsuite(testsuiteMap);
+			codeBuilder.generateTestsuite();
 		}catch(Exception ex) {
 			throw new BuildingASMException("An error occurred while building a test suite. The testsuite was: " + node.getToken().getValue(), ex);
 		}
@@ -831,44 +829,39 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		
 		// Process the tests that are associated with this testsuite.
 		for(ITest test: node.getTestElements()) {
-			// Create a new actual map for the processing of the other tests.
-			actualMap = new HashMap();
-			
 			/*
 			 *  This actual map is a container for the next test element to transfer the package name
 			 *  for the case that the sub test has no package declaration.
 			 */
-			actualMap.put("packagename", currentPackageName);
+			//actualMap.put("packagename", currentPackageName);
 			test.accept(this, new StringBuffer());
 		}
 		
-
+		// We set in the code builder the old package name to revert the old state.
+		codeBuilder.setPackagename(oldPackageName);
 	}
 
 	public void visitTestcase(ITestcase node, StringBuffer buffer) throws BuildingASMException {
-		// We save the package name of the actual map if any exists.
-		String currentPackageName = (String) actualMap.get("packagename");
+		// We must tell the code builder that a new test case is build.
+		codeBuilder.newTestCase();
 		
-		/* 
-		 * If no package name was found, this testcase has no predecessor test suite. So
-		 * we initially set the package name to the empty string.
-		 */
-		if (currentPackageName == null) currentPackageName = new String("");
-		
-		// We create a new hash map that collects the information for the actual testcase.
-		HashMap testcaseMap = new HashMap();
-		
-		// We put the testname into the new created map.
-		testcaseMap.put("testname", node.getToken().getValue());
-		
+		String currentPackageName;
 		/*
-		 * The model reference, metamodel reference and the package declaration
-		 * are part of the testcase information, but these computations are done
-		 * in the other visit methods. In this methods new elements are added
-		 * to the hash map denoted by 'actualMap'. So we set the testcaseMap to
-		 * the actualMap.
+		 * The testcase can have a package declaration. If it has one, we take it and save it in the code builder.
+		 *
 		 */
-		actualMap = testcaseMap;
+		if (node.getPackageDeclaration() != null) {
+			currentPackageName = node.getPackageDeclaration().getToken().getValue();
+		} else { // No package name exists. In this case we look up in the code builder for one. A parent test suite have set one.
+			currentPackageName = codeBuilder.getPackagename();
+			if (currentPackageName == null) {
+				currentPackageName = new String("");
+			}
+		}
+		codeBuilder.setPackagename(currentPackageName);
+		
+		// Set the name of the test in the code builder.
+		codeBuilder.setTestName(node.getToken().getValue());
 		
 		// Here we compute the information that is necessary for the metamodel reference.
 		node.getMetamodelReference().accept(this, null);
@@ -876,20 +869,7 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		// Here we compute the information that is necessary for the model reference.
 		node.getModelReference().accept(this, null);
 		
-		// The testcase can have a package declaration. If it has one, we take it and save it the current package name.
-		if (node.getPackageDeclaration() != null) {
-			currentPackageName = node.getPackageDeclaration().getToken().getValue();
-		}
 		
-		/* 
-		 * The package name of this testcase is either an empty string, the predecessor of the test case
-		 * (if any exists) or the package declaration of its own. These alternatives have a
-		 * precedence in the following order (the highest first):
-		 * - its own package declaration
-		 * - the package declaration of its predecessor
-		 * - the empty string
-		 */
-		actualMap.put("packagename",currentPackageName);
 		
 		/*
 		 * Now we have compute all information that are important for the whole
@@ -907,23 +887,9 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		
 		// Here we iterate over all ITestcaseElements (test-methods).		
 		for(ITestcaseElement element : node.getTestcaseElements()) {
-			/*
-			 * Each testcase element need a code attribute to store the generated
-			 * code, except for the test-methods that should examine whether the parser
-			 * make the right errors. But this doesn't matter here. We alwyas
-			 * creates a new code variable.
-			 */
-			code = new StringBuffer();
-			
-			/*
-			 * Here we create the map for saving the elements for the actual
-			 * testcase (for exmaple the ocl-expression).
-			 */
-			actualMap = new HashMap();
-			
-			// This map is add to our list.
-			testcaseElementsMap.add(actualMap);
-			
+			// Each testcase element is transformed to a testcase method. So we create one testcase method.
+			codeBuilder.newTestMethod();
+					
 			/*
 			 * We must clear the iterated variables. Each test method has its own
 			 * variables and these variables can have the same name. With the
@@ -932,43 +898,18 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 			 */
 			iteratedVariables.clear();
 			
-			// We put the key errorelement into the map for the case that no such element exist.
-			actualMap.put("errorelement", false);
-			
-			
-			/*
-			 * We must create a new variable declaration container
-			 * that holds the code for the new variable declarations.
-			 */
-			variableDeclaration = new StringBuffer();
-			
 			/* 
 			 * Here we compute the new test-method. This adds code to the
 			 * 'code' variable.
 			 */
 			element.accept(this, null);
-			
-			// Here we take the code variable and put it into the actual map.
-			actualMap.put("code", code);
 		}
-		
-		/*
-		 * After iterating over all testcase elements, we must put the
-		 * list into the map for the testcase. Finally we have mapped
-		 * the tree structure of the testcase into the map structure:
-		 * A testcase has several testcase elements (from which the test-
-		 * methods will be created). The testcase element has a ocl expression
-		 * and a model that represents the ocl model to be built.
-		 * The 'testcaseMap' has a list of a map. This list corresponds
-		 * to the testcases.
-		 */
-		testcaseMap.put("testcaseelementsmap", testcaseElementsMap);
 		
 		/*
 		 * Here we try to generate the code for the testcase.
 		 */
 		try {
-			codeBuilder.generateTestcase(testcaseMap);
+			codeBuilder.generateTestcase();
 		}catch(Exception ex) {
 			throw new BuildingASMException("An error occurred while generating code for a testcase. The testcase name is: " + node.getToken().getValue() + ".", ex);
 			
@@ -977,19 +918,11 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 	}
 
 	public void visitTestcaseElement(ITestcaseElement node, StringBuffer buffer) throws BuildingASMException {
-		actualMap.put("testcasename", node.getToken().getValue());
-		
+		codeBuilder.setTestcaseName(node.getToken().getValue());
+				
 		String transformedOclExpression = BuildingCodeUtilClass.transformStringToExplicitNewLines(node.getOclExpression().getValue());
-		actualMap.put("oclexpression", transformedOclExpression);
+		codeBuilder.setOclExpression(transformedOclExpression);
 		node.getResult().accept(this, null);
-		
-		/*
-		 * The variable 'variableDeclaration' holds all code for the
-		 * declaration of the variables. The result was visited so the
-		 * code is there. So we can set it in the actual map.
-		 */
-		actualMap.put("variabledeclaration", variableDeclaration);
-
 	}
 
 	public void visitTypeElement(ITypeElement node, StringBuffer buffer) throws BuildingASMException {
@@ -1012,27 +945,27 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 		int localNumber = elementNumber;
 		
 		// Add the code to create a string list for the name.
-		code.append("List<String> typeName$" + localNumber + " = new ArrayList<String>();\n");
+		codeBuilder.addCodeSnippet("List<String> typeName$" + localNumber + " = new ArrayList<String>();\n");
 		
 		// Add all parts of the path name to the generated list.
 		for(String pathElement : pathName) {
-			code.append("typeName$" + localNumber +".add(\"" + pathElement + "\");\n");
+			codeBuilder.addCodeSnippet("typeName$" + localNumber +".add(\"" + pathElement + "\");\n");
 		}
 		
-		code.append("\n");
+		codeBuilder.addCodeSnippet("\n");
 		
 		// Generate the code, to find the type in the corresponding model.
-		code.append("Type type$" + localNumber + " = null;\n");
-		code.append("try {\n");
-		code.append("type$" + localNumber + " = referencedModel.getTypeResolver().findType(typeName$" + localNumber + ");\n");
-		code.append("} catch(TypeNotFoundException ex) {\n");
-		code.append("throw new BuildModelException(\"The type was not found while building the compare model. TypeName: \" + typeName$" + localNumber +");\n");
-		code.append("}\n");
+		codeBuilder.addCodeSnippet("Type type$" + localNumber + " = null;\n");
+		codeBuilder.addCodeSnippet("try {\n");
+		codeBuilder.addCodeSnippet("type$" + localNumber + " = referencedModel.getTypeResolver().findType(typeName$" + localNumber + ");\n");
+		codeBuilder.addCodeSnippet("} catch(TypeNotFoundException ex) {\n");
+		codeBuilder.addCodeSnippet("throw new BuildModelException(\"The type was not found while building the compare model. TypeName: \" + typeName$" + localNumber +");\n");
+		codeBuilder.addCodeSnippet("}\n");
 		
 		// Generate the exception for the case that the type isn't found.
-		code.append("if (type$" + localNumber + " == null) throw new BuildModelException(\"The type was not found while building the compare model. TypeName: \" + typeName$" + localNumber +");\n");
+		codeBuilder.addCodeSnippet("if (type$" + localNumber + " == null) throw new BuildModelException(\"The type was not found while building the compare model. TypeName: \" + typeName$" + localNumber +");\n");
 		
-		code.append("\n");
+		codeBuilder.addCodeSnippet("\n");
 		
 		// The caller gets the type name of the new generated type variables.
 		buffer.append("type$" + localNumber);
@@ -1063,15 +996,15 @@ public class CodeGenVisitor implements IVisitorCodeGen {
 				
 				// If the list is an array, it must handled be different.
 				if (listElement.isArray()) {
-					variableDeclaration.append(listElement.getFullQualifiedListTypeName() + "[]" + node.getToken().getValue() + " = null;\n");
+					codeBuilder.addVarDeclSnippet(listElement.getFullQualifiedListTypeName() + "[]" + node.getToken().getValue() + " = null;\n");
 				} else {
-					variableDeclaration.append(node.getFullQualifiedTypename() + "<" + listElement.getFullQualifiedListTypeName() + "> " + node.getToken().getValue() + " = null;\n");
+					codeBuilder.addVarDeclSnippet(node.getFullQualifiedTypename() + "<" + listElement.getFullQualifiedListTypeName() + "> " + node.getToken().getValue() + " = null;\n");
 				}
 				
 			} else {
-				variableDeclaration.append(node.getFullQualifiedTypename() + " " + node.getToken().getValue() + " = null;\n");
+				codeBuilder.addVarDeclSnippet(node.getFullQualifiedTypename() + " " + node.getToken().getValue() + " = null;\n");
 			}
-			code.append(node.getToken().getValue() + " = " + localBuf + ";\n");
+			codeBuilder.addCodeSnippet(node.getToken().getValue() + " = " + localBuf + ";\n");
 		}
 
 	}

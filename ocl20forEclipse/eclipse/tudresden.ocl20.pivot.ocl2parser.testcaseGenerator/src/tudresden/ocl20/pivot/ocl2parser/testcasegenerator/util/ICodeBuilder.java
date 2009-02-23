@@ -20,6 +20,7 @@
 package tudresden.ocl20.pivot.ocl2parser.testcasegenerator.util;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This interface declares four methods that should be used to generate
@@ -51,7 +52,7 @@ public interface ICodeBuilder {
 	 * to generate the code.
 	 * @param map
 	 */
-	public void generateTestcase(HashMap map) throws Exception;
+	public void generateTestcase() throws Exception;
 	
 	/**
 	 * Generate code for the testsuite and store it into the
@@ -59,5 +60,49 @@ public interface ICodeBuilder {
 	 * to generate the code.
 	 * @param map
 	 */
-	public void generateTestsuite(HashMap map) throws Exception;
+	public void generateTestsuite() throws Exception;
+	
+	
+	public void addCodeSnippet(String codeSnippet);
+	
+	public void setTestcaseName(String name);
+	
+	public void setOclExpression(String oclExp);
+	
+	//public void setVariableDecl(String varDecl);
+	public void addVarDeclSnippet(String varDecl);
+	
+	public void setErrorElement(boolean elementValue);
+	
+	public void newTestCase();
+	
+	public void newTestMethod();
+	
+	public void newTestSuite();
+	
+	public void addTestClassName(String className);
+	
+	
+	
+	public String getTestName();
+
+	public void setTestName(String testName);
+
+	public String getMetamodel();
+
+	public void setMetamodel(String metamodel);
+
+	public String getModelFile();
+
+	public void setModelFile(String modelFile);
+
+	public String getTestsuiteName();
+
+	public void setTestsuiteName(String testsuiteName);
+
+	public List<String> getTestClassNames();
+
+	public String getPackagename();
+
+	public void setPackagename(String packagename);
 }

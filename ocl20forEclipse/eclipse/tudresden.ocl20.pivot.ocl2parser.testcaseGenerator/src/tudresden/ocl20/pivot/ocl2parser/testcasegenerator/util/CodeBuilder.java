@@ -66,6 +66,19 @@ import de.hunsicker.jalopy.Jalopy;
  *
  */
 public class CodeBuilder implements ICodeBuilder {
+	
+	// ************* Attributes that are used to generate the testcase and testsuite
+	private String testName;
+	private String metamodel;
+	private String modelFile;
+	private List<TestcaseStringElement> testcaseStringElements;
+	
+	private TestcaseStringElement actualTestcaseStringElement;
+	
+	private String testsuiteName;
+	private List<String> testClassNames;
+	// ****************** End of Attributes
+	
 	private String projectname;
 	private IProject project;
 	
@@ -282,34 +295,38 @@ public class CodeBuilder implements ICodeBuilder {
 		projectBuildProperties.create(inputStream, true, null);
 	}
 
-	public void generateTestcase(HashMap map) throws Exception {
-		// Get the package name of the testcase.
-		String localPackagename = (String) map.get("packagename");
+	public void generateTestcase() throws Exception {
+		// Create a new hash map to store the values for the template.
+		HashMap templateMap = new HashMap();
 		
 		/*
 		 * If the package name exists we take this and make it to the
 		 * local package name from which the directory structure will be built.
 		 */ 
-		if ((localPackagename != null) && (!(localPackagename.equals("")))) {
-			localPackagename = new String(packagename);
-			
+		if ((packagename != null) && (!(packagename.equals("")))) {
 			// We set the package name in the java file.
-			map.put("packagename", localPackagename);
+			templateMap.put("packagename", packagename);
 			
 		} else {// The testcase has no own packagename. We take the project name as default.
-			localPackagename = new String(projectname);
-			map.put("packagename", localPackagename);
+			templateMap.put("packagename", packagename);
 		}
 		
 		/* 
 		 * The packagename consists of points between the package parts
 		 * but we need a path name. So we replace all points through the slash.
 		 */
-		String packagePathName = localPackagename.replace('.', '/');
+		String packagePathName = packagename.replace('.', '/');
 		
-		// Get the name of the testcase. That will be the name of the file and the class that we generate.
-		String testcasename = (String) map.get("testname");
+		// Add the test name, the metamodel and the model file name to the template map.
+		templateMap.put("testname", testName);
+		templateMap.put("metamodel", metamodel);
+		templateMap.put("modelfile", modelFile);
 		
+		// We put a new key into the map that denotes the default package name.
+		templateMap.put("defaultpackage", projectname + ".internal");
+		
+		// We put the informations of the test method into the map.
+		templateMap.put("testcaseelementsmap", testcaseStringElements);
 		
 		/*
 		 * First we must create the directory that map to the package structure.
@@ -323,18 +340,15 @@ public class CodeBuilder implements ICodeBuilder {
 		/*
 		 * Now we can create the java file in the directory.
 		 */
-		File newJavaFile = new File(packageDirectory, testcasename + ".java");
+		File newJavaFile = new File(packageDirectory, testName + ".java");
 		if (newJavaFile.exists()) {
 			newJavaFile.delete();
 		}
 		
 		newJavaFile.createNewFile();
 		
-		// We put a new key into the map that denotes the default package name.
-		map.put("defaultpackage", projectname + ".internal");
-		
 		// We build a velocity context with our hashmap.
-		VelocityContext ctx = new VelocityContext(map);
+		VelocityContext ctx = new VelocityContext(templateMap);
 		
 		// Find the 'template' directory.				
 		URL fileLocatorURL = FileLocator.find(Activator.getDefault().getBundle(), new Path("template"), null);
@@ -371,35 +385,46 @@ public class CodeBuilder implements ICodeBuilder {
 		//beautifyCode(newJavaFile);
 		
 		// Here we copy the test model file into the new eclipse plugin.
-		String modelFile = (String) map.get("modelfile");
+		//String modelFile = (String) map.get("modelfile");
 		createTestdata(modelFile);
 		
 		
 	}
 
-	public void generateTestsuite(HashMap map) throws Exception {
+	public void generateTestsuite() throws Exception {
+		// Create a map to store all informations that are need to process the template file.
+		HashMap templateMap = new HashMap();
+		
+		// We set the package name (if any exists), the suite name and the class names of the contained classes in the map.
+		templateMap.put("packagename", packagename);
+		templateMap.put("testsuitename", testsuiteName);
+		
+		String testclassString = BuildingCodeUtilClass.concatElements(testClassNames);
+		templateMap.put("testclassnames", testclassString);
+		
+		
 		String localProjectName = projectname.replace('.', '/');
 		
 		File testsuitePath = null;
-		String packageName = (String) map.get("packagename");
-		if (packageName.equals("")) {
+				
+		// If no package name exists, we take the project name as package name and set the path.
+		if (packagename.equals("")) {
 			testsuitePath = new File(sourceContainer.getLocation().toString() + "/" + localProjectName);
-			map.put("packagename", projectname);
+			templateMap.put("packagename", projectname);
 		} else {
-			String packagePath = packageName.replace('.', '/');
+			String packagePath = packagename.replace('.', '/');
 			testsuitePath = new File(sourceContainer.getLocation().toString() + "/" + packagePath);
 		}
 		
 		if (!(testsuitePath.exists())) testsuitePath.mkdirs();
 		
-		String fileName = (String) map.get("testsuitename");
-		File testsuiteFile = new File(testsuitePath.getAbsolutePath() + "/" + fileName + ".java");
+		File testsuiteFile = new File(testsuitePath.getAbsolutePath() + "/" + testsuiteName + ".java");
 		testsuiteFile.createNewFile();
 		
 		FileWriter fileWriter = new FileWriter(testsuiteFile);
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 		
-		VelocityContext ctx = new VelocityContext(map);
+		VelocityContext ctx = new VelocityContext(templateMap);
 		
 		// Find the 'template' directory.				
 		URL fileLocatorURL = FileLocator.find(Activator.getDefault().getBundle(), new Path("template"), null);
@@ -482,7 +507,6 @@ public class CodeBuilder implements ICodeBuilder {
 			ctx.put("projectpackage", projectname);
 			
 			// Get the template file and merge it with the values of the context.
-			//Template templ = Velocity.getTemplate("./template/Activator.java");
 			Template templ = velo.getTemplate("Activator.java");
 			templ.merge(ctx, bufWriter);
 			
@@ -537,7 +561,6 @@ public class CodeBuilder implements ICodeBuilder {
 		ctx.put("bundlename", projectname);
 		
 		// Get the template and merge them with the variables of the context.
-		//Template templ = Velocity.getTemplate("./template/MANIFEST.MF");
 		Template templ = velo.getTemplate("MANIFEST.MF");
 		templ.merge(ctx, bufWriter);
 		
@@ -601,10 +624,7 @@ public class CodeBuilder implements ICodeBuilder {
 			Writer destWriter = new FileWriter(destinationFile.getLocation().toFile());
 			Writer bufWriter = new BufferedWriter(destWriter);
 			
-			//Template templ = Velocity.getTemplate("./" + sourceFile.getName());
-			//Template templ = Velocity.getTemplate(sourceFile.getName());
 			Template templ = velo.getTemplate(sourceFile.getName());
-			//Template templ = Velocity.getTemplate(sourceFile.getAbsolutePath());
 			templ.merge(ctx, bufWriter);
 			
 			bufWriter.flush();
@@ -628,9 +648,7 @@ public class CodeBuilder implements ICodeBuilder {
 			Writer destWriter = new FileWriter(destinationFile.getLocation().toFile());
 			Writer bufWriter = new BufferedWriter(destWriter);
 			
-			//Template templ = Velocity.getTemplate("./stringTree/"  + sourceFile.getName());
 			Template templ = velo.getTemplate("./stringTree/"  + sourceFile.getName());
-			//Template templ = Velocity.getTemplate("stringTree/"  + sourceFile.getName());
 			templ.merge(ctx, bufWriter);
 			
 			bufWriter.flush();
@@ -716,5 +734,185 @@ public class CodeBuilder implements ICodeBuilder {
 		}
 			
 	}
+	
+	/**
+	 * Adds a class name to the code builder.
+	 * @param className class name to be added
+	 */
+	public void addTestClassName(String className) {
+		if (testClassNames == null) testClassNames = new ArrayList<String>();
+		this.testClassNames.add(className);
+	}
+	
+	public void addCodeSnippet(String codeSnippet) {
+		
+		initActualTestcaseStringElement();
+		actualTestcaseStringElement.addCode(codeSnippet);
+	}
+	
+	public void setTestcaseName(String name) {
+		initActualTestcaseStringElement();
+		actualTestcaseStringElement.setTestcaseName(name);
+	}
+	
+	public void setOclExpression(String oclExp) {
+		initActualTestcaseStringElement();
+		actualTestcaseStringElement.setOclExpression(oclExp);
+	}
+	
+	public void addVarDeclSnippet(String varDecl) {
+		initActualTestcaseStringElement();
+		actualTestcaseStringElement.addVarDeclSnippet(varDecl);
+	}
+	
+	public void setErrorElement(boolean elementValue) {
+		initActualTestcaseStringElement();
+		actualTestcaseStringElement.setErrorElement(elementValue);
+	}
+	
+	public void newTestMethod() {
+		actualTestcaseStringElement = new TestcaseStringElement();
+		testcaseStringElements.add(actualTestcaseStringElement);
+	}
+	
+	public void newTestCase() {
+		testcaseStringElements =  new ArrayList<TestcaseStringElement>();
+		testName = "";
+		metamodel = "";
+		modelFile = "";
+	}
+	
+	/**
+	 * Initializes the code builder for the next test suite to be built.
+	 */
+	public void newTestSuite() {
+		testClassNames = new ArrayList<String>();
+	}
+	
+	/**
+	 * Initializes the actual testcase string element if necessary. That means:
+	 * if the actualTestcaseStringElement variable is null, then an element will
+	 * be created, the actualTestcaseStringElement variable is set to it and
+	 * the new element is added to the list of testcase string elements. If
+	 * an actual testcase string element exists the method will do nothing.
+	 */
+	private void initActualTestcaseStringElement() {
+		if (actualTestcaseStringElement == null) {
+			actualTestcaseStringElement = new TestcaseStringElement();
+			testcaseStringElements.add(actualTestcaseStringElement);
+		}
+	}
+	
+	
+	
+	/*
+	 * These are the getter- and setter-methods for the attributes that
+	 * are used to building the code.
+	 */
+	public String getTestName() {
+		return testName;
+	}
+
+	public void setTestName(String testName) {
+		this.testName = testName;
+	}
+
+	public String getMetamodel() {
+		return metamodel;
+	}
+
+	public void setMetamodel(String metamodel) {
+		this.metamodel = metamodel;
+	}
+
+	public String getModelFile() {
+		return modelFile;
+	}
+
+	public void setModelFile(String modelFile) {
+		this.modelFile = modelFile;
+	}
+
+	public String getTestsuiteName() {
+		return testsuiteName;
+	}
+
+	public void setTestsuiteName(String testsuiteName) {
+		this.testsuiteName = testsuiteName;
+	}
+
+	public List<String> getTestClassNames() {
+		return testClassNames;
+	}
+
+	public void setTestClassNames(List<String> testClassNames) {
+		this.testClassNames = testClassNames;
+	}
+
+	public String getPackagename() {
+		return packagename;
+	}
+
+	public void setPackagename(String packagename) {
+		this.packagename = packagename;
+	}
+	
+	/**
+	 * This class holds all elements that are used to generate
+	 * a testcase-method.
+	 * @author Nils
+	 *
+	 */
+	public class TestcaseStringElement {
+		private String testcaseName;
+		private String oclExpression;
+		private StringBuffer code;
+		private StringBuffer variableDeclaration;
+		private boolean errorElement;
+		
+		public TestcaseStringElement() {
+			code = new StringBuffer();
+			variableDeclaration = new StringBuffer();
+		}
+		
+		public String getTestcaseName() {
+			return testcaseName;
+		}
+		public void setTestcaseName(String testcaseName) {
+			this.testcaseName = testcaseName;
+		}
+		public String getOclExpression() {
+			return oclExpression;
+		}
+		public void setOclExpression(String oclExpression) {
+			this.oclExpression = oclExpression;
+		}
+		
+		public String getCode() {
+			return code.toString();
+		}
+		
+		public void addCode(String codeSnippet) {
+			code.append(codeSnippet);
+		}
+		
+		public String getVariableDeclaration() {
+			return variableDeclaration.toString();
+		}
+		
+		public void addVarDeclSnippet(String variableDeclaration) {
+			this.variableDeclaration.append(variableDeclaration);
+		}
+		
+		public boolean containsErrorElement() {
+			return errorElement;
+		}
+		
+		public void setErrorElement(boolean element) {
+			errorElement = element;
+		}
+	}
+
+	
 
 }
