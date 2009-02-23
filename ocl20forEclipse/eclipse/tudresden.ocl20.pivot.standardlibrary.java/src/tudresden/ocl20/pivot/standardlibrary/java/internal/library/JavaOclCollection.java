@@ -187,25 +187,25 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	 */
 	@SuppressWarnings("unchecked")
 	public OclBag<T> asBag() {
-	
+
 		JavaOclBag<T> result;
-	
+
 		/* Check if this collection is undefined. */
 		if (isOclUndefined().isTrue()) {
 			result = new JavaOclBag<T>(null);
 			result.setUndefinedreason(this.getUndefinedreason());
 		}
-	
+
 		/* Else compute the result. */
 		else {
 			ArrayList<T> resultList;
-	
+
 			/* Get this collection as list. */
 			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
-	
+
 			result = new JavaOclBag<T>(resultList);
 		}
-	
+
 		return result;
 	}
 
@@ -218,25 +218,25 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	 */
 	@SuppressWarnings("unchecked")
 	public OclOrderedSet<T> asOrderedSet() {
-	
+
 		OclOrderedSet<T> result;
-	
+
 		/* Check if this collection is undefined. */
 		if (isOclUndefined().isTrue()) {
 			result = new JavaOclOrderedSet<T>(null);
 			result.setUndefinedreason(this.getUndefinedreason());
 		}
-	
+
 		/* Else compute the result. */
 		else {
 			ArrayList<T> resultList;
-	
+
 			/* Get this collection as list. */
 			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
-	
+
 			result = new JavaOclOrderedSet<T>(resultList);
 		}
-	
+
 		return result;
 	}
 
@@ -249,25 +249,25 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	 */
 	@SuppressWarnings("unchecked")
 	public OclSequence<T> asSequence() {
-	
+
 		OclSequence<T> result;
-	
+
 		/* Check if this collection is undefined. */
 		if (isOclUndefined().isTrue()) {
 			result = new JavaOclSequence<T>(null);
 			result.setUndefinedreason(this.getUndefinedreason());
 		}
-	
+
 		/* Else compute the result. */
 		else {
 			ArrayList<T> resultList;
-	
+
 			/* Get this collection as list. */
 			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
-	
+
 			result = new JavaOclSequence<T>(resultList);
 		}
-	
+
 		return result;
 	}
 
@@ -386,11 +386,12 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	 */
 	@SuppressWarnings("unchecked")
 	public OclIterator<T> getIterator() {
-		
+
 		OclIterator<T> result;
-		
-		result = new JavaOclIterator<T>(((Collection<T>) this.getAdaptee()).iterator());
-		
+
+		result = new JavaOclIterator<T>(((Collection<T>) this.getAdaptee())
+				.iterator());
+
 		return result;
 	}
 

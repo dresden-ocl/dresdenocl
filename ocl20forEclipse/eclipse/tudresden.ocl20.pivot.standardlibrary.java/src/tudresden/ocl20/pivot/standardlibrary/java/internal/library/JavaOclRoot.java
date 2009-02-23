@@ -1106,4 +1106,30 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 
 		return result;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object anObject) {
+
+		boolean result;
+
+		/* Check if the given Object is an OclRoot. */
+		if (anObject instanceof OclRoot) {
+
+			OclRoot anOclRoot;
+
+			anOclRoot = (OclRoot) anObject;
+
+			result = this.isEqualTo(anOclRoot).isTrue();
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
+	}
 }

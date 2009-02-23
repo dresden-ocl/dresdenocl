@@ -67,7 +67,43 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 *            The adapted model instance object of this {@link JavaOclSet}.
 	 */
 	public JavaOclSet(Set<T> adaptee) {
+
 		super(adaptee);
+
+		Set<T> adaptedSet;
+		Set<T> newAdaptedSet;
+
+		/*
+		 * Don't trust the given set. The given set could contain duplicates
+		 * because of object schizophrenia.
+		 */
+		adaptedSet = (Set<T>) this.adaptee;
+
+		newAdaptedSet = new HashSet<T>();
+
+		for (T aNewElement : adaptedSet) {
+
+			boolean isAlreadyContained;
+
+			isAlreadyContained = false;
+
+			for (T anElement : (Set<T>) newAdaptedSet) {
+
+				if (aNewElement.equals(anElement)) {
+
+					isAlreadyContained = true;
+					break;
+				}
+				// no else.
+			}
+
+			if (!isAlreadyContained) {
+				newAdaptedSet.add(aNewElement);
+			}
+			// no else.
+		}
+
+		this.adaptee = newAdaptedSet;
 	}
 
 	/*
@@ -457,26 +493,26 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 */
 	@Override
 	public OclType getType() {
-	
+
 		/* Eventually compute the type. */
 		if (this.type == null) {
 			OclType elementType;
-	
+
 			/* Compute the generic type. */
 			if (((List<T>) getAdaptee()).size() > 0) {
 				elementType = ((Set<T>) getAdaptee()).iterator().next()
 						.getType();
 			}
-	
+
 			else {
 				elementType = JavaOclType.getType("OclVoid");
 			}
-	
+
 			this.type = JavaOclCollectionType.getType(
 					OclCollectionTypeKind.SET, elementType);
 		}
 		// no else.
-	
+
 		return type;
 	}
 
