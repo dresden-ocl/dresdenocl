@@ -1228,7 +1228,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	 * #caseLetExp(tudresden.ocl20.pivot.essentialocl.expressions.LetExp)
 	 */
 	@Override
-	public OclRoot caseLetExp(LetExp object) {
+	public OclRoot caseLetExp(LetExp aLetExp) {
 
 		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
@@ -1239,17 +1239,23 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 		OclRoot result = null;
 
 		/* Eventually use a cached result. */
-		if (useCache && env.getCachedResult(object) != null) {
-			result = env.getCachedResult(object);
+		if (this.useCache && this.env.getCachedResult(aLetExp) != null) {
+			result = this.env.getCachedResult(aLetExp);
 		}
 
 		/* Else compute the result. */
 		else {
-			result = doSwitch((EObject) object.getIn());
+			result = doSwitch((EObject) aLetExp.getIn());
+
+			/*
+			 * Remove the variable from the environment because it is invalid
+			 * outside the scope of the let expression.
+			 */
+			this.env.addVar(aLetExp.getVariable().getQualifiedName(), null);
 
 			/* Eventually cache the result. */
-			if (useCache && !modelAccessNeeded) {
-				env.cacheResult(object, result);
+			if (this.useCache && !this.modelAccessNeeded) {
+				this.env.cacheResult(aLetExp, result);
 			}
 		}
 
@@ -1394,7 +1400,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 
 			/* Iterate through the arguments and compute the parameter values. */
 			while (argIterator.hasNext()) {
-				
+
 				OclExpression exp;
 				OclRoot param;
 				String parameterName;
@@ -1403,8 +1409,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 				param = doSwitch((EObject) exp);
 				parameters[argIterator.previousIndex()] = param;
 
-				parameterName = opParams
-						.get(argIterator.previousIndex()).getName();
+				parameterName = opParams.get(argIterator.previousIndex())
+						.getName();
 
 				/*
 				 * Eventually add the variables to the local environment if a
@@ -2070,7 +2076,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 			if (initExp != null) {
 				initValue = doSwitch((EObject) aVariable.getInitExpression());
 			}
-			// no else.
 
 			/*
 			 * Eventually get the value of the Variable from the environment.
