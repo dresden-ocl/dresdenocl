@@ -78,12 +78,21 @@ public class $testname {
 		oclLibrary = referencedModel.getOclLibraryProvider().getOclLibrary();
 	}
 	
+	#*
 	#foreach($testcase in $testcaseelementsmap)
 		#set( $testcasename = $testcase.get("testcasename"))
 		#set( $oclexpression = $testcase.get("oclexpression"))
 		#set( $code = $testcase.get("code"))
 		#set( $variabledeclaration = $testcase.get("variabledeclaration"))
 		#set( $errorelement = $testcase.get("errorelement"))
+	*#
+
+	#foreach($testcase in $testcaseelementsmap)
+		#set( $testcasename = $testcase.getTestcaseName())
+		#set( $oclexpression = $testcase.getOclExpression())
+		#set( $code = $testcase.getCode())
+		#set( $variabledeclaration = $testcase.getVariableDeclaration())
+		#set( $errorelement = $testcase.containsErrorElement())
 		
 	/**
 	 * This test case stands for the following ocl-expression:
