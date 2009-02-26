@@ -19,27 +19,97 @@ public class ModelProviderClass {
 
 		List<Object> allObjects;
 
+		int countOfCustomers;
+		int countOfCustomerCards;
+		int countOfDates;
+		int countOfLoyaltyAccounts;
+		int countOfLoyaltyPrograms;
+		int countOfMemberships;
+		int countOfProgramPartners;
 		int countOfTransactions;
+		int countOfBurnings;
 
 		allObjects = ModelProviderClass.getModelObjects();
 
+		countOfCustomers = 0;
+		countOfCustomerCards = 0;
+		countOfDates = 0;
+		countOfLoyaltyAccounts = 0;
+		countOfLoyaltyPrograms = 0;
+		countOfMemberships = 0;
+		countOfProgramPartners = 0;
 		countOfTransactions = 0;
+		countOfBurnings = 0;
 
 		for (Object anElement : allObjects) {
 
-			if (anElement instanceof Transaction) {
+			if (anElement instanceof Customer) {
+				countOfCustomers++;
+			}
+
+			else if (anElement instanceof CustomerCard) {
+				countOfCustomerCards++;
+			}
+
+			else if (anElement instanceof Date) {
+				countOfDates++;
+			}
+
+			else if (anElement instanceof LoyaltyAccount) {
+				countOfLoyaltyAccounts++;
+			}
+
+			else if (anElement instanceof LoyaltyProgram) {
+				countOfLoyaltyPrograms++;
+			}
+
+			else if (anElement instanceof Membership) {
+				countOfMemberships++;
+			}
+
+			else if (anElement instanceof ProgramPartner) {
+				countOfProgramPartners++;
+			}
+
+			else if (anElement instanceof Transaction) {
 				countOfTransactions++;
 			}
+
+			if (anElement instanceof Burning) {
+				countOfBurnings++;
+			}
+			// no else.
 		}
 
+		System.out.println("Example contains " + countOfCustomers
+				+ " Customers.");
+		System.out.println("Example contains " + countOfCustomerCards
+				+ " CustomerCards.");
+		System.out.println("Example contains " + countOfDates + " Dates.");
+		System.out.println("Example contains " + countOfLoyaltyAccounts
+				+ " LoyaltyAccounts.");
+		System.out.println("Example contains " + countOfLoyaltyPrograms
+				+ " LoyaltyPrograms.");
+		System.out.println("Example contains " + countOfMemberships
+				+ " Memberships.");
+		System.out.println("Example contains " + countOfProgramPartners
+				+ " ProgramPartners.");
 		System.out.println("Example contains " + countOfTransactions
 				+ " Transactions.");
+		System.out
+				.println("Example contains " + countOfBurnings + " Burnings.");
 	}
 
 	/**
 	 * @return A model instance of the royal and loyal UML model.
 	 */
 	public static List<Object> getModelObjects() {
+
+		/*
+		 * PLEASE DO NOT CHANGE THE ORDERING IN WHICH THE OBJECTS ARE ADDED TO
+		 * THE RESULT. OTHERWHISE THE INTERPRETER TEST SUITE WON'T WORK
+		 * ANYMORE!!!
+		 */
 		List<Object> result;
 
 		Customer customer1;
@@ -158,6 +228,1082 @@ public class ModelProviderClass {
 
 		/* Add Objects for some static object or operation test cases. */
 		result.addAll(getModelObjectsForStatic01());
+
+		/* Add Objects for some body expression test cases. */
+		result.addAll(getModelObjectsForBody02());
+
+		/* Add Objects for some definition test cases. */
+		result.addAll(getModelObjectsForDef01());
+		result.addAll(getModelObjectsForDef02());
+		result.addAll(getModelObjectsForDef03());
+		result.addAll(getModelObjectsForDef04());
+		result.addAll(getModelObjectsForDef05());
+		result.addAll(getModelObjectsForDef06());
+		result.addAll(getModelObjectsForDef07());
+		result.addAll(getModelObjectsForDef08());
+
+		/* Add Objects for some derived value test cases. */
+		result.addAll(getModelObjectsForDerive01());
+		result.addAll(getModelObjectsForDerive02());
+
+		/* Add Objects for some initial value test cases. */
+		result.addAll(getModelObjectsForInit01());
+		result.addAll(getModelObjectsForInit02());
+		result.addAll(getModelObjectsForInit03());
+
+		/* Add Objects for some invariant test cases. */
+		result.addAll(getModelObjectsForInv04());
+		result.addAll(getModelObjectsForInv05());
+		result.addAll(getModelObjectsForInv06());
+		result.addAll(getModelObjectsForInv07());
+		result.addAll(getModelObjectsForInv08());
+		result.addAll(getModelObjectsForInv09());
+		result.addAll(getModelObjectsForInv10());
+		result.addAll(getModelObjectsForInv11());
+		result.addAll(getModelObjectsForInv12());
+		result.addAll(getModelObjectsForInv13());
+		result.addAll(getModelObjectsForInv14());
+		result.addAll(getModelObjectsForInv15());
+		result.addAll(getModelObjectsForInv18());
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'boody02.ocl'.
+	 */
+	private static List<Object> getModelObjectsForBody02() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyAccount account1;
+		Membership membership1;
+		CustomerCard card1;
+		Customer customer1;
+
+		customer1 = new Customer(25);
+		customer1.setName("Testman");
+
+		card1 = new CustomerCard();
+		card1.setOwner(customer1);
+
+		membership1 = new Membership();
+		membership1.setCard(card1);
+
+		account1 = new LoyaltyAccount();
+		account1.setMembership(membership1);
+
+		result.add(account1);
+		result.add(membership1);
+		result.add(card1);
+		result.add(customer1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'define01.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDef01() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyAccount account1;
+
+		Transaction ta1;
+		Transaction ta2;
+
+		ta1 = new Transaction();
+		ta1.setAmount(new Float(25.5));
+
+		ta2 = new Transaction();
+		ta2.setAmount(new Float(74.5));
+
+		account1 = new LoyaltyAccount();
+		account1.addTransaction(ta1);
+		account1.addTransaction(ta2);
+
+		result.add(account1);
+		result.add(ta1);
+		result.add(ta2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'define02.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDef02() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyProgram aProgram;
+
+		ServiceLevel level1;
+		ServiceLevel level2;
+
+		Service service1;
+		Service service2;
+		Service service3;
+
+		service1 = new Service();
+		service2 = new Service();
+		service3 = new Service();
+
+		level1 = new ServiceLevel();
+		level1.setName("level1");
+		level1.addAvailableService(service1);
+		level1.addAvailableService(service2);
+
+		level2 = new ServiceLevel();
+		level2.setName("level2");
+		level2.addAvailableService(service3);
+
+		aProgram = new LoyaltyProgram();
+		aProgram.addLevel(level1);
+		aProgram.addLevel(level2);
+
+		result.add(aProgram);
+		result.add(level1);
+		result.add(level2);
+		result.add(service1);
+		result.add(service2);
+		result.add(service3);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'define03.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDef03() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Membership membership1;
+
+		ServiceLevel level1;
+
+		level1 = new ServiceLevel();
+		level1.setName("level1");
+
+		membership1 = new Membership();
+		membership1.setCurrentLevel(level1);
+
+		result.add(membership1);
+		result.add(level1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'define04.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDef04() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyAccount account1;
+
+		Transaction ta1;
+		Transaction ta2;
+
+		Service service1;
+		Service service2;
+
+		service1 = new Service();
+		service2 = new Service();
+
+		ta1 = new Transaction();
+		ta1.setService(service1);
+
+		ta2 = new Transaction();
+		ta2.setService(service2);
+
+		account1 = new LoyaltyAccount();
+		account1.addTransaction(ta1);
+		account1.addTransaction(ta2);
+
+		result.add(account1);
+		result.add(ta1);
+		result.add(ta2);
+		result.add(service1);
+		result.add(service2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'define05.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDef05() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Customer customer1;
+
+		customer1 = new Customer(25);
+		customer1.setName("Tesman");
+
+		result.add(customer1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'define06.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDef06() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		CustomerCard card1;
+
+		Transaction ta1;
+		Transaction ta2;
+
+		ta1 = new Transaction();
+		ta1.setDate(Date.now());
+		ta1.setPoints(100);
+
+		ta2 = new Transaction();
+		ta2.setDate(Date.now());
+		ta2.setPoints(50);
+
+		card1 = new CustomerCard();
+		card1.addTransaction(ta1);
+		card1.addTransaction(ta2);
+
+		result.add(card1);
+		result.add(ta1);
+		result.add(ta2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'define07.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDef07() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		CustomerCard card1;
+
+		card1 = new CustomerCard();
+
+		result.add(card1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'define08.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDef08() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		ProgramPartner partner1;
+
+		Service service1;
+		Service service2;
+		Service service3;
+
+		Transaction ta1;
+		Transaction ta2;
+		Transaction ta3;
+
+		ta1 = new Burning();
+		ta2 = new Earning();
+		ta3 = new Burning();
+
+		service1 = new Service();
+		service1.setTransaction(ta1);
+
+		service2 = new Service();
+		service2.setTransaction(ta2);
+
+		service3 = new Service();
+		service3.setTransaction(ta3);
+
+		partner1 = new ProgramPartner();
+		partner1.addDeliveredService(service1);
+		partner1.addDeliveredService(service2);
+		partner1.addDeliveredService(service3);
+
+		result.add(partner1);
+		result.add(service1);
+		result.add(service2);
+		result.add(service3);
+		result.add(ta1);
+		result.add(ta2);
+		result.add(ta3);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'derive01.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDerive01() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		CustomerCard card1;
+
+		Customer customer1;
+
+		customer1 = new Customer(25);
+		customer1.setName("Testman");
+		customer1.setTitle("Mr.");
+
+		card1 = new CustomerCard();
+		card1.setOwner(customer1);
+
+		result.add(card1);
+		result.add(customer1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'derive02.ocl'.
+	 */
+	private static List<Object> getModelObjectsForDerive02() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyAccount account1;
+
+		Transaction ta1;
+		Transaction ta2;
+		Transaction ta3;
+
+		ta1 = new Earning();
+		ta1.setPoints(25);
+
+		ta2 = new Burning();
+		ta2.setPoints(50);
+
+		ta3 = new Earning();
+		ta3.setPoints(25);
+
+		account1 = new LoyaltyAccount();
+		account1.addTransaction(ta1);
+		account1.addTransaction(ta2);
+		account1.addTransaction(ta3);
+
+		result.add(account1);
+		result.add(ta1);
+		result.add(ta2);
+		result.add(ta3);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'init01.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInit01() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyAccount account1;
+
+		account1 = new LoyaltyAccount();
+
+		result.add(account1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'init02.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInit02() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		CustomerCard card1;
+
+		card1 = new CustomerCard();
+
+		result.add(card1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'init03.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInit03() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyAccount account1;
+
+		account1 = new LoyaltyAccount();
+
+		result.add(account1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant04.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv04() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Membership membership1;
+		Membership membership2;
+
+		LoyaltyProgram program1;
+		LoyaltyProgram program2;
+
+		Customer customer1;
+		Customer customer2;
+
+		CustomerCard card1;
+		CustomerCard card2;
+		CustomerCard card3;
+
+		card1 = new CustomerCard();
+		card2 = new CustomerCard();
+		card3 = new CustomerCard();
+
+		customer1 = new Customer(25);
+		customer1.addCard(card1);
+
+		customer2 = new Customer(25);
+		customer2.addCard(card2);
+
+		program1 = new LoyaltyProgram();
+		program1.enroll(customer1);
+
+		program2 = new LoyaltyProgram();
+		program2.enroll(customer2);
+
+		membership1 = new Membership();
+		membership1.setProgram(program1);
+		membership1.setCard(card1);
+
+		membership2 = new Membership();
+		membership2.setProgram(program2);
+		membership2.setCard(card3);
+
+		result.add(membership1);
+		result.add(membership2);
+		result.add(program1);
+		result.add(program2);
+		result.add(customer1);
+		result.add(customer2);
+		result.add(card1);
+		result.add(card2);
+		result.add(card3);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant05.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv05() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Membership membership1;
+		Membership membership2;
+
+		ServiceLevel level1;
+		ServiceLevel level2;
+
+		CustomerCard card1;
+		CustomerCard card2;
+
+		card1 = new CustomerCard();
+		card2 = new CustomerCard();
+
+		card1.setColor(Color.silver);
+		card2.setColor(Color.silver);
+
+		level1 = new ServiceLevel();
+		level2 = new ServiceLevel();
+
+		level1.setName("Silver");
+		level2.setName("Gold");
+
+		membership1 = new Membership();
+		membership2 = new Membership();
+
+		membership1.setCurrentLevel(level1);
+		membership2.setCurrentLevel(level2);
+
+		membership1.setCard(card1);
+		membership2.setCard(card2);
+
+		result.add(membership1);
+		result.add(membership2);
+		result.add(level1);
+		result.add(level2);
+		result.add(card1);
+		result.add(card2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant06.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv06() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyProgram program1;
+		LoyaltyProgram program2;
+
+		ProgramPartner partner1;
+		ProgramPartner partner2;
+
+		Service service1;
+
+		service1 = new Service();
+
+		partner1 = new ProgramPartner();
+		partner2 = new ProgramPartner();
+
+		partner1.addDeliveredService(service1);
+
+		program1 = new LoyaltyProgram();
+		program2 = new LoyaltyProgram();
+
+		program1.addPartner(partner1);
+		program2.addPartner(partner1);
+		program2.addPartner(partner2);
+
+		result.add(program1);
+		result.add(program2);
+		result.add(partner1);
+		result.add(partner2);
+		result.add(service1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant07.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv07() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Customer customer1;
+		Customer customer2;
+
+		LoyaltyProgram program1;
+		LoyaltyProgram program2;
+
+		CustomerCard card1;
+		CustomerCard card2;
+		CustomerCard card3;
+		CustomerCard card4;
+
+		card1 = new CustomerCard();
+		card2 = new CustomerCard();
+		card3 = new CustomerCard();
+		card4 = new CustomerCard();
+
+		card1.setValid(true);
+		card2.setValid(true);
+		card3.setValid(true);
+		card4.setValid(false);
+
+		program1 = new LoyaltyProgram();
+		program2 = new LoyaltyProgram();
+
+		customer1 = new Customer(25);
+		customer2 = new Customer(25);
+
+		customer1.addProgram(program1);
+		customer1.addProgram(program2);
+		customer2.addProgram(program1);
+		customer2.addProgram(program2);
+
+		customer1.addCard(card1);
+		customer1.addCard(card2);
+		customer2.addCard(card3);
+		customer2.addCard(card4);
+
+		result.add(customer1);
+		result.add(customer2);
+		result.add(program1);
+		result.add(program2);
+		result.add(card1);
+		result.add(card2);
+		result.add(card3);
+		result.add(card4);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant08.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv08() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyProgram program1;
+		LoyaltyProgram program2;
+
+		Service service1;
+		Service service2;
+
+		ProgramPartner partner1;
+		ProgramPartner partner2;
+
+		Membership membership1;
+		Membership membership2;
+
+		LoyaltyAccount account1;
+
+		account1 = new LoyaltyAccount();
+
+		membership1 = new Membership();
+		membership2 = new Membership();
+
+		membership2.addAccount(account1);
+
+		service1 = new Service();
+		service2 = new Service();
+
+		partner1 = new ProgramPartner();
+		partner2 = new ProgramPartner();
+
+		partner1.addDeliveredService(service1);
+		partner2.addDeliveredService(service2);
+
+		service1.setPointsBurned(0);
+		service2.setPointsBurned(0);
+
+		service1.setPointsEarned(0);
+		service2.setPointsEarned(0);
+
+		program1 = new LoyaltyProgram();
+		program2 = new LoyaltyProgram();
+
+		program1.addPartner(partner1);
+		program2.addPartner(partner2);
+
+		program1.setMembership(membership1);
+		program2.setMembership(membership2);
+
+		result.add(program1);
+		result.add(program2);
+		result.add(service1);
+		result.add(service2);
+		result.add(partner1);
+		result.add(partner2);
+		result.add(membership1);
+		result.add(membership2);
+		result.add(account1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant09.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv09() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		/*
+		 * context ProgramPartner inv nrOfParticipants: numberOfCustomers =
+		 * programs.participants->size()
+		 */
+		ProgramPartner partner1;
+		ProgramPartner partner2;
+
+		LoyaltyProgram program1;
+		LoyaltyProgram program2;
+
+		Customer customer1;
+
+		customer1 = new Customer(25);
+
+		program1 = new LoyaltyProgram();
+		program2 = new LoyaltyProgram();
+
+		program1.enroll(customer1);
+
+		partner1 = new ProgramPartner();
+		partner2 = new ProgramPartner();
+
+		partner1.setNumberOfCustomers(1);
+		partner2.setNumberOfCustomers(1);
+
+		partner1.addProgram(program1);
+		partner2.addProgram(program2);
+
+		result.add(partner1);
+		result.add(partner2);
+		result.add(program1);
+		result.add(program2);
+		result.add(customer1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant10.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv10() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyProgram program1;
+		LoyaltyProgram program2;
+
+		ServiceLevel level1;
+		ServiceLevel level2;
+
+		level1 = new ServiceLevel();
+		level2 = new ServiceLevel();
+
+		level1.setName("Silver");
+		level2.setName("Gold");
+
+		program1 = new LoyaltyProgram();
+		program2 = new LoyaltyProgram();
+
+		program1.addLevel(level1);
+		program1.addLevel(level2);
+		program2.addLevel(level2);
+		program2.addLevel(level1);
+
+		result.add(program1);
+		result.add(program2);
+		result.add(level1);
+		result.add(level2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant11.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv11() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		ProgramPartner partner1;
+		ProgramPartner partner2;
+
+		Service service1;
+		Service service2;
+
+		Transaction ta1;
+		Transaction ta2;
+
+		ta1 = new Transaction();
+		ta2 = new Transaction();
+
+		ta1.setPoints(2000);
+		ta2.setPoints(10000);
+
+		service1 = new Service();
+		service2 = new Service();
+
+		service1.setTransaction(ta1);
+		service2.setTransaction(ta2);
+
+		partner1 = new ProgramPartner();
+		partner2 = new ProgramPartner();
+
+		partner1.addDeliveredService(service1);
+		partner2.addDeliveredService(service2);
+
+		result.add(partner1);
+		result.add(partner2);
+		result.add(service1);
+		result.add(service2);
+		result.add(ta1);
+		result.add(ta2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant12.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv12() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		ProgramPartner partner1;
+		ProgramPartner partner2;
+
+		Service service1;
+		Service service2;
+
+		Transaction ta1;
+		Transaction ta2;
+
+		ta1 = new Burning();
+		ta2 = new Earning();
+
+		ta1.setPoints(10000);
+		ta2.setPoints(10000);
+
+		service1 = new Service();
+		service2 = new Service();
+
+		service1.setTransaction(ta1);
+		service2.setTransaction(ta2);
+
+		partner1 = new ProgramPartner();
+		partner2 = new ProgramPartner();
+
+		partner1.addDeliveredService(service1);
+		partner2.addDeliveredService(service2);
+
+		result.add(partner1);
+		result.add(partner2);
+		result.add(service1);
+		result.add(service2);
+		result.add(ta1);
+		result.add(ta2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant13.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv13() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		CustomerCard card1;
+		CustomerCard card2;
+
+		card1 = new CustomerCard();
+		card2 = new CustomerCard();
+
+		card1.setValidFrom(new Date(2008, 1, 1));
+		card2.setValidFrom(new Date(2008, 1, 1));
+
+		card1.setValidThru(new Date(3008, 1, 1));
+		card2.setValidThru(new Date(2009, 1, 1));
+
+		card1.setValid(true);
+		card2.setValid(true);
+
+		result.add(card1);
+		result.add(card2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant14.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv14() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyAccount account1;
+		LoyaltyAccount account2;
+
+		Transaction ta1;
+		Transaction ta2;
+		Transaction ta3;
+		Transaction ta4;
+
+		CustomerCard card1;
+		CustomerCard card2;
+		CustomerCard card3;
+		CustomerCard card4;
+
+		Customer customer1;
+		Customer customer2;
+
+		customer1 = new Customer(25);
+		customer2 = new Customer(25);
+
+		card1 = new CustomerCard();
+		card2 = new CustomerCard();
+		card3 = new CustomerCard();
+		card4 = new CustomerCard();
+
+		card1.setOwner(customer1);
+		card2.setOwner(customer1);
+		card3.setOwner(customer1);
+		card4.setOwner(customer2);
+
+		ta1 = new Transaction();
+		ta2 = new Transaction();
+		ta3 = new Transaction();
+		ta4 = new Transaction();
+
+		ta1.setCard(card1);
+		ta2.setCard(card2);
+		ta3.setCard(card3);
+		ta4.setCard(card4);
+
+		account1 = new LoyaltyAccount();
+		account2 = new LoyaltyAccount();
+
+		account1.addTransaction(ta1);
+		account1.addTransaction(ta2);
+		account2.addTransaction(ta3);
+		account2.addTransaction(ta4);
+
+		result.add(account1);
+		result.add(account2);
+		result.add(ta1);
+		result.add(ta2);
+		result.add(ta3);
+		result.add(ta4);
+		result.add(card1);
+		result.add(card2);
+		result.add(card3);
+		result.add(card4);
+		result.add(customer1);
+		result.add(customer2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant15.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv15() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyAccount account1;
+		LoyaltyAccount account2;
+
+		Transaction ta1;
+
+		ta1 = new Transaction();
+
+		ta1.setPoints(100);
+
+		account1 = new LoyaltyAccount();
+		account2 = new LoyaltyAccount();
+
+		account1.setPoints(100);
+		account2.setPoints(100);
+
+		account1.addTransaction(ta1);
+
+		result.add(account1);
+		result.add(account2);
+		result.add(ta1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant18.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv18() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Transaction ta1;
+
+		ta1 = new Burning();
+
+		ta1.setPoints(100);
+
+		result.add(ta1);
 
 		return result;
 	}
@@ -495,7 +1641,7 @@ public class ModelProviderClass {
 
 		program3 = new LoyaltyProgram();
 		program4 = new LoyaltyProgram();
-		
+
 		customer3 = new Customer(27);
 		customer3.setName("Testman");
 
@@ -513,7 +1659,7 @@ public class ModelProviderClass {
 
 		return result;
 	}
-	
+
 	/**
 	 * @return A {@link List} containing all Objects used to test the
 	 *         {@link Constraints} contained in the file 'iterator12.ocl'.
@@ -665,9 +1811,10 @@ public class ModelProviderClass {
 		result.add(partner2);
 		result.add(partner3);
 		result.add(service2);
-		
+
 		return result;
 	}
+
 	/**
 	 * @return A {@link List} containing all Objects used to test the
 	 *         {@link Constraints} contained in the file 'iterator01.ocl'.
