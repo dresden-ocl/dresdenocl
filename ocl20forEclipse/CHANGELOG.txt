@@ -1,27 +1,33 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 1.1 (Decembre 9th 2008)
+Release 1.2 (February 26th 2009)
+-------------------------------
+- The new tool Ocl2Java (ApsectJ code generation for OCL 
+  constraints) was added to the release.
+- The royal and loyal example was added to the release.
+- Some Bugs of the OCL-Parser were fixed:
+  - Enumerations are now parsed correctly
+- Some Bugs of the OCL-Interpreter were fixed.
+  - Operation names are now interpreted correctly
+  - Collection operations should now be interpreted correctly.
+  - The Variable defined by a LetExpression is now valid in the 
+    scope of the LetExpression only.
+- Some Bugs of the Java Standard Library were fixed.
+  - Collections from model instances are now adapted correctly.
+  - Sets will no longer contain the same model object multiple 
+    types.
+- Some Bugs for Ecore instances were fixed.
+  - Enumerations are now adapted correctly.
+- Some Bugs for UML2 instances were fixed. 
+  - UML2 Model instance adaption does now work correctly.
+  - UML2 Model instances now support tuple types.
+  
+  
+Release 1.1 (December 9th 2008)
 -------------------------------
 - The UML1.5 meta model works now in the binary release.
 - New meta model added: UML2.0.
 - New example added: Simple-Example.
 - Some Bugs of the OCL-Parser were fixed.
 - Some Bugs of the OCL-Interpreter were fixed.
-
-Release 1.X (x xth 2009)
--------------------------------
-- Some Bugs of the OCL-Parser were fixed:
- - Enumerations are now parsed correctly
-
-- Some Bugs of the OCL-Interpreter were fixed.
- - Operation names are now interpreted correctly
-
-- Some Bugs of the Java Standard Library were fixed.
- - Collections from model instances are now adapted correctly.
-
-- Some Bugs for Ecore instances were fixed.
- - Enumerations are now adapted correctly.
-
-- Some Bugs for UML2 instances were fixed. 
- - Model instance adaption does now work correctly.
