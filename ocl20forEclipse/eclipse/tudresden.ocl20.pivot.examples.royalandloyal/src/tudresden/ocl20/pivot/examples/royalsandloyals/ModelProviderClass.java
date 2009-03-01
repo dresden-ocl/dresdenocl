@@ -15,6 +15,8 @@ import javax.swing.SpringLayout.Constraints;
  */
 public class ModelProviderClass {
 
+	private static List<Object> myModelObjects = null;
+
 	public static void main(String[] args) {
 
 		List<Object> allObjects;
@@ -26,6 +28,8 @@ public class ModelProviderClass {
 		int countOfLoyaltyPrograms;
 		int countOfMemberships;
 		int countOfProgramPartners;
+		int countOfServices;
+		int countOfServiceLevels;
 		int countOfTransactions;
 		int countOfBurnings;
 
@@ -38,6 +42,8 @@ public class ModelProviderClass {
 		countOfLoyaltyPrograms = 0;
 		countOfMemberships = 0;
 		countOfProgramPartners = 0;
+		countOfServices = 0;
+		countOfServiceLevels = 0;
 		countOfTransactions = 0;
 		countOfBurnings = 0;
 
@@ -71,7 +77,18 @@ public class ModelProviderClass {
 				countOfProgramPartners++;
 			}
 
-			else if (anElement instanceof Transaction) {
+			else if (anElement instanceof Service) {
+				countOfServices++;
+			}
+
+			else if (anElement instanceof ServiceLevel) {
+				countOfServiceLevels++;
+			}
+
+			else if (anElement instanceof Transaction
+					&& !(anElement instanceof Burning)
+					&& !(anElement instanceof Earning)) {
+
 				countOfTransactions++;
 			}
 
@@ -94,6 +111,10 @@ public class ModelProviderClass {
 				+ " Memberships.");
 		System.out.println("Example contains " + countOfProgramPartners
 				+ " ProgramPartners.");
+		System.out
+				.println("Example contains " + countOfServices + " Services.");
+		System.out.println("Example contains " + countOfServiceLevels
+				+ " ServiceLevels.");
 		System.out.println("Example contains " + countOfTransactions
 				+ " Transactions.");
 		System.out
@@ -110,8 +131,6 @@ public class ModelProviderClass {
 		 * THE RESULT. OTHERWHISE THE INTERPRETER TEST SUITE WON'T WORK
 		 * ANYMORE!!!
 		 */
-		List<Object> result;
-
 		Customer customer1;
 		Customer customer2;
 
@@ -136,137 +155,154 @@ public class ModelProviderClass {
 
 		ProgramPartner partner1;
 
-		result = new ArrayList<Object>();
+		if (myModelObjects == null) {
 
-		customer1 = new Customer(18);
-		result.add(customer1);
+			myModelObjects = new ArrayList<Object>();
 
-		customer2 = new Customer(11);
-		result.add(customer2);
+			customer1 = new Customer(18);
+			myModelObjects.add(customer1);
 
-		card1 = new CustomerCard();
-		card1.setValidFrom(new Date(2008, 1, 1));
-		card1.setValidThru(new Date(2009, 1, 1));
-		result.add(card1);
+			customer2 = new Customer(11);
+			myModelObjects.add(customer2);
 
-		card2 = new CustomerCard();
-		card2.setValidFrom(new Date(2009, 1, 1));
-		card2.setValidThru(new Date(2008, 1, 1));
-		result.add(card2);
+			card1 = new CustomerCard();
+			card1.setValidFrom(new Date(2008, 1, 1));
+			card1.setValidThru(new Date(2009, 1, 1));
+			myModelObjects.add(card1);
 
-		level1 = new ServiceLevel();
-		result.add(level1);
+			card2 = new CustomerCard();
+			card2.setValidFrom(new Date(2009, 1, 1));
+			card2.setValidThru(new Date(2008, 1, 1));
+			myModelObjects.add(card2);
 
-		level2 = new ServiceLevel();
-		result.add(level2);
+			level1 = new ServiceLevel();
+			myModelObjects.add(level1);
 
-		level3 = new ServiceLevel();
-		result.add(level3);
+			level2 = new ServiceLevel();
+			myModelObjects.add(level2);
 
-		membership1 = new Membership();
-		membership1.setCurrentLevel(level1);
-		result.add(membership1);
+			level3 = new ServiceLevel();
+			myModelObjects.add(level3);
 
-		account1 = new LoyaltyAccount();
-		account1.setMembership(membership1);
-		membership1.addAccount(account1);
-		result.add(account1);
+			membership1 = new Membership();
+			membership1.setCurrentLevel(level1);
+			myModelObjects.add(membership1);
 
-		membership2 = new Membership();
-		membership2.setCurrentLevel(level2);
-		result.add(membership2);
+			account1 = new LoyaltyAccount();
+			account1.setMembership(membership1);
+			membership1.addAccount(account1);
+			myModelObjects.add(account1);
 
-		program1 = new LoyaltyProgram();
-		program1.setMembership(membership1);
-		program1.addLevel(level1);
-		program1.addLevel(level2);
-		result.add(program1);
+			membership2 = new Membership();
+			membership2.setCurrentLevel(level2);
+			myModelObjects.add(membership2);
 
-		program2 = new LoyaltyProgram();
-		program2.setMembership(membership2);
-		program2.addLevel(level1);
-		program2.addLevel(level3);
-		result.add(program2);
+			program1 = new LoyaltyProgram();
+			program1.setMembership(membership1);
+			program1.addLevel(level1);
+			program1.addLevel(level2);
+			myModelObjects.add(program1);
 
-		service1 = new Service();
-		result.add(service1);
+			program2 = new LoyaltyProgram();
+			program2.setMembership(membership2);
+			program2.addLevel(level1);
+			program2.addLevel(level3);
+			myModelObjects.add(program2);
 
-		partner1 = new ProgramPartner();
-		result.add(partner1);
+			service1 = new Service();
+			myModelObjects.add(service1);
 
-		level1.setProgram(program1);
-		program1.addPartner(partner1);
-		partner1.addProgram(program1);
-		level1.addAvailableService(service1);
-		service1.setLevel(level1);
-		service1.setPartner(partner1);
-		partner1.addDeliveredService(service1);
+			partner1 = new ProgramPartner();
+			myModelObjects.add(partner1);
 
-		transaction1 = new Transaction();
-		result.add(transaction1);
+			level1.setProgram(program1);
+			program1.addPartner(partner1);
+			partner1.addProgram(program1);
+			level1.addAvailableService(service1);
+			service1.setLevel(level1);
+			service1.setPartner(partner1);
+			partner1.addDeliveredService(service1);
 
-		/* Add Objects for some iterator expression test cases. */
-		result.addAll(getModelObjectsForIterator10());
-		result.addAll(getModelObjectsForIterator12());
-		result.addAll(getModelObjectsForIterator14());
-		result.addAll(getModelObjectsForIterator15());
+			transaction1 = new Transaction();
+			myModelObjects.add(transaction1);
 
-		/* Add Objects for some boolean expression test cases. */
-		result.addAll(getModelObjectsForBoolean01());
-		result.addAll(getModelObjectsForBoolean03());
-		result.addAll(getModelObjectsForBoolean04());
-		result.addAll(getModelObjectsForBoolean05());
-		result.addAll(getModelObjectsForBoolean06());
+			/* Add Objects for some iterator expression test cases. */
+			myModelObjects.addAll(getModelObjectsForIterator10());
+			myModelObjects.addAll(getModelObjectsForIterator12());
+			myModelObjects.addAll(getModelObjectsForIterator14());
+			myModelObjects.addAll(getModelObjectsForIterator15());
 
-		/* Add Objects for some iterator expression test cases. */
-		result.addAll(getModelObjectsForIterator07());
-		result.addAll(getModelObjectsForIterator08());
-		result.addAll(getModelObjectsForIterator09());
+			/* Add Objects for some boolean expression test cases. */
+			myModelObjects.addAll(getModelObjectsForBoolean01());
+			myModelObjects.addAll(getModelObjectsForBoolean03());
+			myModelObjects.addAll(getModelObjectsForBoolean04());
+			myModelObjects.addAll(getModelObjectsForBoolean05());
+			myModelObjects.addAll(getModelObjectsForBoolean06());
 
-		/* Add Objects for some invariant expression test cases. */
-		result.addAll(getModelObjectsForInvariant01());
+			/* Add Objects for some iterator expression test cases. */
+			myModelObjects.addAll(getModelObjectsForIterator07());
+			myModelObjects.addAll(getModelObjectsForIterator08());
+			myModelObjects.addAll(getModelObjectsForIterator09());
 
-		/* Add Objects for some static object or operation test cases. */
-		result.addAll(getModelObjectsForStatic01());
+			/* Add Objects for some invariant expression test cases. */
+			myModelObjects.addAll(getModelObjectsForInv01());
 
-		/* Add Objects for some body expression test cases. */
-		result.addAll(getModelObjectsForBody02());
+			/* Add Objects for some static object or operation test cases. */
+			myModelObjects.addAll(getModelObjectsForStatic01());
 
-		/* Add Objects for some definition test cases. */
-		result.addAll(getModelObjectsForDef01());
-		result.addAll(getModelObjectsForDef02());
-		result.addAll(getModelObjectsForDef03());
-		result.addAll(getModelObjectsForDef04());
-		result.addAll(getModelObjectsForDef05());
-		result.addAll(getModelObjectsForDef06());
-		result.addAll(getModelObjectsForDef07());
-		result.addAll(getModelObjectsForDef08());
+			/* Add Objects for some body expression test cases. */
+			myModelObjects.addAll(getModelObjectsForBody02());
 
-		/* Add Objects for some derived value test cases. */
-		result.addAll(getModelObjectsForDerive01());
-		result.addAll(getModelObjectsForDerive02());
+			/* Add Objects for some definition test cases. */
+			myModelObjects.addAll(getModelObjectsForDef01());
+			myModelObjects.addAll(getModelObjectsForDef02());
+			myModelObjects.addAll(getModelObjectsForDef03());
+			myModelObjects.addAll(getModelObjectsForDef04());
+			myModelObjects.addAll(getModelObjectsForDef05());
+			myModelObjects.addAll(getModelObjectsForDef06());
+			myModelObjects.addAll(getModelObjectsForDef07());
+			myModelObjects.addAll(getModelObjectsForDef08());
 
-		/* Add Objects for some initial value test cases. */
-		result.addAll(getModelObjectsForInit01());
-		result.addAll(getModelObjectsForInit02());
-		result.addAll(getModelObjectsForInit03());
+			/* Add Objects for some derived value test cases. */
+			myModelObjects.addAll(getModelObjectsForDerive01());
+			myModelObjects.addAll(getModelObjectsForDerive02());
 
-		/* Add Objects for some invariant test cases. */
-		result.addAll(getModelObjectsForInv04());
-		result.addAll(getModelObjectsForInv05());
-		result.addAll(getModelObjectsForInv06());
-		result.addAll(getModelObjectsForInv07());
-		result.addAll(getModelObjectsForInv08());
-		result.addAll(getModelObjectsForInv09());
-		result.addAll(getModelObjectsForInv10());
-		result.addAll(getModelObjectsForInv11());
-		result.addAll(getModelObjectsForInv12());
-		result.addAll(getModelObjectsForInv13());
-		result.addAll(getModelObjectsForInv14());
-		result.addAll(getModelObjectsForInv15());
-		result.addAll(getModelObjectsForInv18());
+			/* Add Objects for some initial value test cases. */
+			myModelObjects.addAll(getModelObjectsForInit01());
+			myModelObjects.addAll(getModelObjectsForInit02());
+			myModelObjects.addAll(getModelObjectsForInit03());
 
-		return result;
+			/* Add Objects for some invariant test cases. */
+			myModelObjects.addAll(getModelObjectsForInv04());
+			myModelObjects.addAll(getModelObjectsForInv05());
+			myModelObjects.addAll(getModelObjectsForInv06());
+			myModelObjects.addAll(getModelObjectsForInv07());
+			myModelObjects.addAll(getModelObjectsForInv08());
+			myModelObjects.addAll(getModelObjectsForInv09());
+			myModelObjects.addAll(getModelObjectsForInv10());
+			myModelObjects.addAll(getModelObjectsForInv11());
+			myModelObjects.addAll(getModelObjectsForInv12());
+			myModelObjects.addAll(getModelObjectsForInv13());
+			myModelObjects.addAll(getModelObjectsForInv14());
+			myModelObjects.addAll(getModelObjectsForInv15());
+			myModelObjects.addAll(getModelObjectsForInv18());
+
+			/* Add Objects for some precondition test cases. */
+			myModelObjects.addAll(getModelObjectsForPre02());
+
+			/* Add Objects for some postcondition test cases. */
+			myModelObjects.addAll(getModelObjectsForPost01());
+			myModelObjects.addAll(getModelObjectsForPost02());
+			myModelObjects.addAll(getModelObjectsForPost05());
+			myModelObjects.addAll(getModelObjectsForPost06());
+			myModelObjects.addAll(getModelObjectsForPost07());
+			myModelObjects.addAll(getModelObjectsForPost08());
+			myModelObjects.addAll(getModelObjectsForPost11());
+			myModelObjects.addAll(getModelObjectsForPost12());
+		}
+		// no else.
+
+		return myModelObjects;
 	}
 
 	/**
@@ -688,6 +724,31 @@ public class ModelProviderClass {
 		account1 = new LoyaltyAccount();
 
 		result.add(account1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'invariant01.ocl'.
+	 */
+	private static List<Object> getModelObjectsForInv01() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Customer customer19;
+		Customer customer20;
+		Customer customer21;
+
+		customer19 = new Customer(17);
+		customer20 = new Customer(18);
+		customer21 = new Customer(19);
+
+		result.add(customer19);
+		result.add(customer20);
+		result.add(customer21);
 
 		return result;
 	}
@@ -1310,6 +1371,263 @@ public class ModelProviderClass {
 
 	/**
 	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'post01.ocl'.
+	 */
+	private static List<Object> getModelObjectsForPost01() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyProgram program1;
+
+		Customer customer1;
+		Customer customer2;
+
+		program1 = new LoyaltyProgram();
+
+		customer1 = new Customer(25);
+		customer2 = new Customer(25);
+
+		result.add(program1);
+		result.add(customer1);
+		result.add(customer2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'post02.ocl'.
+	 */
+	private static List<Object> getModelObjectsForPost02() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyProgram program1;
+
+		ProgramPartner partner1;
+
+		ServiceLevel level1;
+
+		Service service1;
+
+		service1 = new Service();
+
+		level1 = new ServiceLevel();
+
+		partner1 = new ProgramPartner();
+
+		program1 = new LoyaltyProgram();
+
+		program1.addPartner(partner1);
+
+		program1.addLevel(level1);
+
+		result.add(program1);
+		result.add(partner1);
+		result.add(level1);
+		result.add(service1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'post05.ocl'.
+	 */
+	private static List<Object> getModelObjectsForPost05() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyAccount account1;
+		LoyaltyAccount account2;
+
+		account1 = new LoyaltyAccount();
+		account2 = new LoyaltyAccount();
+
+		account1.setPoints(0);
+		account2.setPoints(100);
+
+		result.add(account1);
+		result.add(account2);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'post06.ocl'.
+	 */
+	private static List<Object> getModelObjectsForPost06() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Customer customer1;
+
+		customer1 = new Customer(25);
+
+		result.add(customer1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'post07.ocl'.
+	 */
+	private static List<Object> getModelObjectsForPost07() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Service service1;
+
+		service1 = new Service();
+		service1.setPointsEarned(100);
+		service1.setPointsBurned(0);
+
+		result.add(service1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'post08.ocl'.
+	 */
+	private static List<Object> getModelObjectsForPost08() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		Transaction ta1;
+
+		Service service1;
+
+		ServiceLevel level1;
+
+		LoyaltyProgram program1;
+
+		program1 = new LoyaltyProgram();
+
+		level1 = new ServiceLevel();
+		level1.setProgram(program1);
+
+		service1 = new Service();
+		service1.setLevel(level1);
+
+		ta1 = new Transaction();
+		ta1.setService(service1);
+
+		result.add(ta1);
+		result.add(service1);
+		result.add(level1);
+		result.add(program1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'post11.ocl'.
+	 */
+	private static List<Object> getModelObjectsForPost11() {
+	
+		List<Object> result;
+	
+		result = new ArrayList<Object>();
+	
+		LoyaltyProgram program1;
+		
+		Membership membership1;
+		
+		Customer customer1;
+		
+		customer1 = new Customer(25);
+		
+		membership1 = new Membership();
+		
+		program1 = new LoyaltyProgram();
+		program1.setMembership(membership1);
+	
+		result.add(program1);
+		result.add(customer1);
+		result.add(membership1);
+		
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'post11.ocl'.
+	 */
+	private static List<Object> getModelObjectsForPost12() {
+	
+		List<Object> result;
+	
+		result = new ArrayList<Object>();
+	
+		Date date1;
+		
+		date1 = Date.now();
+		
+		result.add(date1);
+		
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
+	 *         {@link Constraints} contained in the file 'pre02.ocl'.
+	 */
+	private static List<Object> getModelObjectsForPre02() {
+
+		List<Object> result;
+
+		result = new ArrayList<Object>();
+
+		LoyaltyProgram program1;
+		LoyaltyProgram program2;
+		LoyaltyProgram program3;
+
+		ProgramPartner partner1;
+
+		ServiceLevel level1;
+
+		level1 = new ServiceLevel();
+
+		partner1 = new ProgramPartner();
+
+		program1 = new LoyaltyProgram();
+		program2 = new LoyaltyProgram();
+		program3 = new LoyaltyProgram();
+
+		program1.addPartner(partner1);
+		program2.addPartner(partner1);
+
+		program1.addLevel(level1);
+		program3.addLevel(level1);
+
+		result.add(program1);
+		result.add(program2);
+		result.add(program3);
+		result.add(partner1);
+		result.add(level1);
+
+		return result;
+	}
+
+	/**
+	 * @return A {@link List} containing all Objects used to test the
 	 *         {@link Constraints} contained in the file 'boolean01.ocl'.
 	 */
 	private static List<Object> getModelObjectsForBoolean01() {
@@ -1450,31 +1768,6 @@ public class ModelProviderClass {
 
 		result.add(customer15);
 		result.add(customer16);
-
-		return result;
-	}
-
-	/**
-	 * @return A {@link List} containing all Objects used to test the
-	 *         {@link Constraints} contained in the file 'invariant01.ocl'.
-	 */
-	private static List<Object> getModelObjectsForInvariant01() {
-
-		List<Object> result;
-
-		result = new ArrayList<Object>();
-
-		Customer customer19;
-		Customer customer20;
-		Customer customer21;
-
-		customer19 = new Customer(17);
-		customer20 = new Customer(18);
-		customer21 = new Customer(19);
-
-		result.add(customer19);
-		result.add(customer20);
-		result.add(customer21);
 
 		return result;
 	}
