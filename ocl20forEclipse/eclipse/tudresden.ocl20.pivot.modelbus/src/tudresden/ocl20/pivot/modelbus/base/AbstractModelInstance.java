@@ -59,14 +59,45 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	// The instance name.
 	protected String instanceName;
 
-	/** The mapped operation names. Names map is mapped to operator count */
+	/**
+	 * Contains the operation names which are different in the standard library
+	 * than in the OCL specification. The names are separated in sub maps
+	 * depending on their number of arguments.
+	 */
 	protected static Map<Integer, Map<String, String>> operationNames = new HashMap<Integer, Map<String, String>>();
+
+	/* Initializes the map. */
+	static {
+		Map<String, String> unaryOperations;
+		Map<String, String> binaryOperations;
+
+		unaryOperations = new HashMap<String, String>();
+		unaryOperations.put("-", "negative");
+		unaryOperations.put("oclIsUndefined", "isOclUndefined");
+		operationNames.put(1, unaryOperations);
+
+		binaryOperations = new HashMap<String, String>();
+		binaryOperations.put("<=", "isLessEqual");
+		binaryOperations.put("<", "isLessThan");
+		binaryOperations.put("=", "isEqualTo");
+		binaryOperations.put("<>", "isNotEqualTo");
+		binaryOperations.put(">=", "isGreaterEqual");
+		binaryOperations.put(">", "isGreaterThan");
+		binaryOperations.put("-", "subtract");
+		binaryOperations.put("+", "add");
+		binaryOperations.put("*", "multiply");
+		binaryOperations.put("/", "divide");
+		binaryOperations.put(".", "getPropertyValue");
+		binaryOperations.put("->", "asSet");
+		operationNames.put(2, binaryOperations);
+	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang.String,
-	 *      int)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang
+	 * .String, int)
 	 */
 	public String getOperationName(String name, int operatorCount) {
 		Map<String, String> opMap = operationNames.get(operatorCount);
@@ -111,7 +142,9 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getPrimitiveType(java.lang.String)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getPrimitiveType(java.lang
+	 * .String)
 	 */
 	public OclPrimitiveType getPrimitiveType(String name) {
 		return (OclPrimitiveType) Platform.getAdapterManager().getAdapter(name,
@@ -160,7 +193,9 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#setCurrentSlAF(tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#setCurrentSlAF(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory)
 	 */
 	public void setCurrentSlAF(StandardlibraryAdapterFactory slAF) {
 		this.currentSlAF = slAF;
