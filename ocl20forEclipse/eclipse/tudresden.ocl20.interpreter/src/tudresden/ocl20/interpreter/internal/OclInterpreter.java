@@ -1276,22 +1276,24 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	 * #caseOperationCallExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
-	public OclRoot caseOperationCallExp(OperationCallExp object) {
+	public OclRoot caseOperationCallExp(OperationCallExp anOperationCallExp) {
 
 		OclRoot result;
 
+		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
 			String log;
 
 			log = "caseOperationCallExp(OperationCallExp) - start";
 			logger.debug(log);
 		}
+		// no else.
 
 		result = null;
 
 		/* Eventually use a cached result. */
-		if (useCache && env.getCachedResult(object) != null) {
-			result = env.getCachedResult(object);
+		if (useCache && env.getCachedResult(anOperationCallExp) != null) {
+			result = env.getCachedResult(anOperationCallExp);
 		}
 
 		/* Else compute the result. */
@@ -1308,54 +1310,38 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 			ListIterator<OclExpression> argIterator;
 			List<Parameter> opParams;
 
-			parameters = new OclRoot[object.getArgument().size()];
+			parameters = new OclRoot[anOperationCallExp.getArgument().size()];
 
-			referredOperation = object.getReferredOperation();
-			opName = env.getModelInstance().getOperationName(
-					referredOperation.getName(), parameters.length + 1);
+			referredOperation = anOperationCallExp.getReferredOperation();
 
 			/*
-			 * Transform the operation name for all operations which are
-			 * implemented with a different name than in OCL.
+			 * If the special operation atPre is invoked, the referred operation
+			 * can be null.
 			 */
-			if (opName.equals("=")) {
-				opName = "isEqualTo";
-			} else if (opName.equals("<>")) {
-				opName = "isNotEqualTo";
-			} else if (opName.equals(">=")) {
-				opName = "isGreaterEqual";
-			} else if (opName.equals(">")) {
-				opName = "isGreaterThan";
-			} else if (opName.equals("<=")) {
-				opName = "isLessEqual";
-			} else if (opName.equals("<")) {
-				opName = "isLessThan";
-			} else if (opName.equals("+")) {
-				opName = "add";
-			} else if (opName.equals("-")) {
-				/* Decide between unary and binary operation. */
-				if (parameters.length > 0) {
-					opName = "subtract";
-				} else {
-					opName = "negative";
-				}
-			} else if (opName.equals("*")) {
-				opName = "multiply";
-			} else if (opName.equals("/")) {
-				opName = "divide";
-			} else if (opName.equals("oclIsUndefined")) {
-				opName = "isOclUndefined";
+			if (referredOperation == null) {
+				opName = anOperationCallExp.getName();
 			}
-			// no else.
+
+			/* Else get the referred operation's name. */
+			else {
+				opName = referredOperation.getName();
+				/*
+				 * Eventually map the operation name from the name of essential
+				 * OCL to the name of the standard library.
+				 */
+				opName = env.getModelInstance().getOperationName(opName,
+						parameters.length + 1);
+			}
 
 			source = null;
 
 			/* Get the source type for static operations. */
-			if (object.getReferredOperation().isStatic()) {
+			if (referredOperation != null && referredOperation.isStatic()) {
 				List<String> pathName;
 				String typeName;
 
-				typeName = object.getSourceType().getQualifiedName();
+				typeName = anOperationCallExp.getSourceType()
+						.getQualifiedName();
 
 				/*
 				 * Convert the type name into a list containing the package
@@ -1373,17 +1359,20 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 
 			/* Compute the source type for non-static operations. */
 			else {
-				source = doSwitch((EObject) object.getSource());
+				source = doSwitch((EObject) anOperationCallExp.getSource());
 			}
 
 			localEnv = null;
+			body = null;
 
 			/*
 			 * Operations can be implemented by a body expression or a
 			 * definition. Try to get such an expression if it has been defined.
 			 */
-			body = env.getConstraint(object.getReferredOperation()
-					.getQualifiedName());
+			if (referredOperation != null) {
+				body = env.getConstraint(referredOperation.getQualifiedName());
+			}
+			// no else.
 
 			/*
 			 * If a body expression or definition has been defined, create a new
@@ -1394,9 +1383,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 			}
 			// no else.
 
-			argIterator = object.getArgument().listIterator();
+			argIterator = anOperationCallExp.getArgument().listIterator();
 
-			opParams = referredOperation.getInputParameter();
+			if (referredOperation != null) {
+				opParams = referredOperation.getInputParameter();
+			}
+
+			else {
+				opParams = null;
+			}
 
 			/* Iterate through the arguments and compute the parameter values. */
 			while (argIterator.hasNext()) {
@@ -1428,12 +1423,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 			if (opName.equals("atPre")) {
 
 				if (preparation) {
-					env.savePostconditionValue(object, source);
+					env.savePostconditionValue(anOperationCallExp, source);
 					result = env.getModelInstance().getUndefined();
 				}
 
 				else {
-					result = env.getPostconditionValue(object);
+					result = env.getPostconditionValue(anOperationCallExp);
 				}
 			}
 
@@ -1444,14 +1439,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 			else if (opName.equals("oclIsNew")) {
 
 				if (preparation) {
-					env.savePostconditionValue(object, env.getModelInstance()
-							.getFactory().createOclBoolean(
+					env.savePostconditionValue(anOperationCallExp, env
+							.getModelInstance().getFactory().createOclBoolean(
 									source instanceof OclVoid));
 					result = env.getModelInstance().getUndefined();
 				}
 
 				else {
-					result = env.getPostconditionValue(object);
+					result = env.getPostconditionValue(anOperationCallExp);
 				}
 			}
 
@@ -1469,7 +1464,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 
 				List<OclRoot> instances;
 
-				typeName = object.getSourceType().getQualifiedName();
+				typeName = anOperationCallExp.getSourceType()
+						.getQualifiedName();
 
 				/*
 				 * Split the canonical name of the source type into its
@@ -1547,7 +1543,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 
 		/* Eventually cache the result. */
 		if (useCache && !modelAccessNeeded) {
-			env.cacheResult(object, result);
+			env.cacheResult(anOperationCallExp, result);
 		}
 		// no else.
 
@@ -2097,12 +2093,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 
 				else if (aVariable.getName().equals("self")) {
 					result = this.constrainedModelObject.getOclObject();
-				}
-
-				/* FIXME Handle the special variable result. */
-				else if (aVariable.getName().equals("result")) {
-					System.out
-							.println("Problem for 'result' variables not solved yet.");
 				}
 
 				else {
