@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.provider;
 
 import java.net.URL;
@@ -15,18 +33,22 @@ import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelProvider;
 
 /**
+ * <p>
  * Implementation of the {@link IModelProvider} interface for UML2 models. This
  * implementation will create an {@link UML2Model} instance.
+ * </p>
  * 
+ * @author Michael Thiele
  * @generated NOT
  */
 public class UML2ModelProvider extends AbstractModelProvider implements
 		IModelProvider {
 
-	// Logger for this class
+	/** The {@link Logger} for this class. */
 	private static final Logger logger = Logger
 			.getLogger(UML2ModelProvider.class);
 
+	/** The resourceSet. */
 	private ResourceSet resourceSet;
 
 	/**
@@ -35,50 +57,66 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 	 * @generated NOT
 	 */
 	public IModel getModel(URL modelURL) throws ModelAccessException {
+
+		/* Eventually debug the entry of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getModel(modelURL=" + modelURL + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.debug("getModel(modelURL=" + modelURL + ") - enter");
 		}
+		// no else.
+
+		IModel result;
 
 		URI modelURI;
-		IModel model = null;
 		Resource resource;
 
-		// try to create a URI
+		result = null;
+
+		/* Try to create a URI from the given URL. */
 		try {
 			modelURI = URI.createURI(modelURL.toString());
-		} catch (IllegalArgumentException e) {
-			throw new ModelAccessException("Invalid URL: " + modelURL, e); //$NON-NLS-1$
 		}
 
-		// get the resource
+		catch (IllegalArgumentException e) {
+			throw new ModelAccessException("Invalid URL: " + modelURL, e);
+		}
+
+		/* Get the resource of the given URI. */
 		resource = getResourceSet().getResource(modelURI, false);
 
+		/* Check if the resource exists. */
 		if (resource == null) {
-			// we only want to create the resource, not load it
+			/* We only want to create the resource, not load it. */
 			resource = getResourceSet().createResource(modelURI);
 		}
+		// no else.
 
-		model = new UML2Model(getResourceSet().getResource(modelURI, false));
+		result = new UML2Model(getResourceSet().getResource(modelURI, false));
 
+		/* Eventually debug the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
+			logger.debug("getModel() - exit - return value=" + result); //$NON-NLS-1$
 		}
+		// no else.
 
-		return model;
+		return result;
 	}
 
-  /**
-   * Helper method that lazily creates a resource set.
-   * 
-   * @return
-   */
-  protected ResourceSet getResourceSet() {
+	/**
+	 * <p>
+	 * A helper method that lazily creates a resource set.
+	 * </p>
+	 * 
+	 * @return The created {@link ResourceSet}.
+	 */
+	protected ResourceSet getResourceSet() {
 
-    if (resourceSet == null) {
-      resourceSet = new ResourceSetImpl();
-    }
+		/* Eventually initialize the resource set. */
+		if (this.resourceSet == null) {
+			this.resourceSet = new ResourceSetImpl();
+		}
+		// no else.
 
-    return resourceSet;
-  }
+		return this.resourceSet;
+	}
 
 }

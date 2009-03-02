@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import org.apache.log4j.Logger;
@@ -9,28 +27,38 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter;
 
 /**
+ * <p>
  * An implementation of the Pivot Model {@link Parameter} concept for UML2.
+ * </p>
+ * 
+ * @author Michael Thiele
  * 
  * @generated
  */
 public class UML2Parameter extends AbstractParameter implements Parameter {
 
 	/**
+	 * <p>
 	 * Logger for this class
+	 * </p>
 	 * 
 	 * @generated
 	 */
 	private static final Logger logger = Logger.getLogger(UML2Parameter.class);
 
 	/**
-	 * the adapted UML2 org.eclipse.uml2.uml.Parameter
+	 * <p>
+	 * The adapted UML2 {@link org.eclipse.uml2.uml.Parameter}.
+	 * </p>
 	 * 
 	 * @generated
 	 */
 	private org.eclipse.uml2.uml.Parameter dslParameter;
 
 	/**
+	 * <p>
 	 * Creates a new <code>UML2Parameter</code> instance.
+	 * </p>
 	 * 
 	 * @param dslParameter
 	 *            the {@link org.eclipse.uml2.uml.Parameter} that is adopted by
@@ -60,7 +88,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 */
 	@Override
 	public String getName() {
-		return dslParameter.getName();
+		return this.dslParameter.getName();
 	}
 
 	/*
@@ -73,7 +101,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	public ParameterDirectionKind getKind() {
 
 		org.eclipse.uml2.uml.ParameterDirectionKind dslKind;
-		dslKind = dslParameter.getDirection();
+		dslKind = this.dslParameter.getDirection();
 
 		if (dslKind.getValue() == org.eclipse.uml2.uml.ParameterDirectionKind.IN) {
 			this.kind = ParameterDirectionKind.IN;
@@ -101,7 +129,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 */
 	@Override
 	public Operation getOperation() {
-		return UML2AdapterFactory.INSTANCE.createOperation(dslParameter
+		return UML2AdapterFactory.INSTANCE.createOperation(this.dslParameter
 				.getOperation());
 	}
 
@@ -112,7 +140,8 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 */
 	@Override
 	public Type getType() {
-		return UML2AdapterFactory.INSTANCE.createType(dslParameter.getType());
+		return UML2AdapterFactory.INSTANCE.createType(this.dslParameter
+				.getType());
 	}
 
 	/**
@@ -122,7 +151,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 */
 	@Override
 	public boolean isMultiple() {
-		return dslParameter.isMultivalued();
+		return this.dslParameter.isMultivalued();
 	}
 
 	/**
@@ -132,7 +161,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 */
 	@Override
 	public boolean isOrdered() {
-		return dslParameter.isOrdered();
+		return this.dslParameter.isOrdered();
 	}
 
 	/**
@@ -142,7 +171,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 */
 	@Override
 	public boolean isUnique() {
-		return dslParameter.isUnique();
+		return this.dslParameter.isUnique();
 	}
 
 }

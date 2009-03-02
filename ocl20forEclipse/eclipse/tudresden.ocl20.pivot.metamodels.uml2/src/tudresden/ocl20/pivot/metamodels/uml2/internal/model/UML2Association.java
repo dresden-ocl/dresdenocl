@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import org.apache.log4j.Logger;
@@ -10,39 +28,51 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
 
 /**
+ * <p>
  * An implementation of the Pivot Model {@link Property} concept for UML2.
+ * </p>
+ * 
+ * @author Michael Thiele
  * 
  * @generated NOT
  */
 public class UML2Association extends AbstractProperty implements Property {
 
 	/**
-	 * Logger for this class
+	 * <p>
+	 * The Logger for this class.
+	 * </p>
 	 * 
 	 * @generated
 	 */
-	private static final Logger logger = Logger.getLogger(UML2Association.class);
+	private static final Logger logger = Logger
+			.getLogger(UML2Association.class);
 
 	/**
-	 * the adapted org.eclipse.uml2.uml.Property data type
+	 * <p>
+	 * The adapted org.eclipse.uml2.uml.Property data type.
+	 * </p>
 	 * 
 	 * @generated
 	 */
 	private org.eclipse.uml2.uml.Association dslProperty;
 
 	/**
+	 * <p>
 	 * Creates a new <code>UML2Association</code> instance.
+	 * </p>
 	 * 
 	 * @param dslProperty
-	 *          the {@link org.eclipse.uml2.uml.Association} that is adopted by
-	 *          this class
+	 *            the {@link org.eclipse.uml2.uml.Association} that is adopted
+	 *            by this class
 	 * 
 	 * @generated
 	 */
 	public UML2Association(org.eclipse.uml2.uml.Association dslProperty) {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("UML2Association(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			logger
+					.debug("UML2Association(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
@@ -60,7 +90,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public String getName() {
-		return dslProperty.getName();
+		return this.dslProperty.getName();
 	}
 
 	/**
@@ -72,9 +102,11 @@ public class UML2Association extends AbstractProperty implements Property {
 	public Type getOwningType() {
 
 		Type result;
+
 		Element owner;
 
 		result = null;
+
 		owner = this.dslProperty.getOwner();
 
 		if (owner instanceof TypedElement) {
@@ -84,16 +116,16 @@ public class UML2Association extends AbstractProperty implements Property {
 
 			result = UML2AdapterFactory.INSTANCE.createType(aTypedElement
 					.getType());
-		} 
-		
+		}
+
 		else if (owner instanceof org.eclipse.uml2.uml.Class) {
 			org.eclipse.uml2.uml.Class aClass;
-			
+
 			aClass = (org.eclipse.uml2.uml.Class) owner;
-			
+
 			result = UML2AdapterFactory.INSTANCE.createType(aClass);
-		}		
-		
+		}
+
 		else {
 			if (logger.isInfoEnabled()) {
 				logger.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
@@ -101,7 +133,7 @@ public class UML2Association extends AbstractProperty implements Property {
 			}
 			// no else.
 		}
-		
+
 		return result;
 	}
 
@@ -112,8 +144,8 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public Type getType() {
-		// TODO: not tested yet!
-		return UML2AdapterFactory.INSTANCE.createType(dslProperty.getEndTypes().get(0));
+		return UML2AdapterFactory.INSTANCE.createType(dslProperty.getEndTypes()
+				.get(0));
 	}
 
 	/**
@@ -123,8 +155,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isMultiple() {
-		// TODO: not tested yet!
-		return dslProperty.getMemberEnds().get(0).isMultivalued();
+		return this.dslProperty.getMemberEnds().get(0).isMultivalued();
 	}
 
 	/**
@@ -134,8 +165,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isOrdered() {
-		// TODO: not tested yet!
-		return dslProperty.getMemberEnds().get(0).isOrdered();
+		return this.dslProperty.getMemberEnds().get(0).isOrdered();
 	}
 
 	/**
@@ -145,8 +175,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isUnique() {
-		// TODO: not tested yet!
-		return dslProperty.getMemberEnds().get(0).isUnique();
+		return this.dslProperty.getMemberEnds().get(0).isUnique();
 	}
 
 }

@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.metamodels.uml2;
 
 import org.eclipse.core.runtime.Plugin;
@@ -6,18 +24,24 @@ import org.osgi.framework.BundleContext;
 import tudresden.ocl20.logging.LoggingPlugin;
 
 /**
- * The activator class controls the plug-in life cycle
+ * <p>
+ * The activator class controls the plug-in life cycle.
+ * </p>
+ * 
+ * @author Michael Thiele
  */
 public class UML2MetamodelPlugin extends Plugin {
 
-	// The plug-in ID
+	/** The plug-in ID. */
 	public static final String ID = "tudresden.ocl20.pivot.metamodels.uml2"; //$NON-NLS-1$
 
-	// The shared instance
+	/** The shared instance. */
 	private static UML2MetamodelPlugin plugin;
 
 	/**
-	 * The constructor
+	 * <p>
+	 * The constructor of the {@link UML2MetamodelPlugin}.
+	 * </p>
 	 */
 	public UML2MetamodelPlugin() {
 		plugin = this;
@@ -26,20 +50,24 @@ public class UML2MetamodelPlugin extends Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 
-		// configure custom logging properties
+		/* Configure custom logging properties. */
 		LoggingPlugin.configureDefaultLogging(plugin);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
@@ -48,9 +76,7 @@ public class UML2MetamodelPlugin extends Plugin {
 	}
 
 	/**
-	 * Returns the shared instance
-	 * 
-	 * @return the shared instance
+	 * @return The shared instance of the {@link UML2MetamodelPlugin}.
 	 */
 	public static UML2MetamodelPlugin getDefault() {
 		return plugin;

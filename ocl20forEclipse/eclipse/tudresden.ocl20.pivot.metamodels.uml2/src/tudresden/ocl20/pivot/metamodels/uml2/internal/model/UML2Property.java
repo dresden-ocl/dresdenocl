@@ -11,28 +11,38 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
 
 /**
+ * <p>
  * An implementation of the Pivot Model {@link Property} concept for UML2.
+ * </p>
+ * 
+ * @author Michael Thiele
  * 
  * @generated
  */
 public class UML2Property extends AbstractProperty implements Property {
 
 	/**
+	 * <p>
 	 * Logger for this class
+	 * </p>
 	 * 
 	 * @generated
 	 */
 	private static final Logger logger = Logger.getLogger(UML2Property.class);
 
 	/**
+	 * <p>
 	 * the adapted org.eclipse.uml2.uml.Property data type
+	 * </p>
 	 * 
 	 * @generated
 	 */
 	private org.eclipse.uml2.uml.Property dslProperty;
 
 	/**
+	 * <p>
 	 * Creates a new <code>UML2Property</code> instance.
+	 * </p>
 	 * 
 	 * @param dslProperty
 	 *            the {@link org.eclipse.uml2.uml.Property} that is adopted by
@@ -62,7 +72,7 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public String getName() {
-		return dslProperty.getName();
+		return this.dslProperty.getName();
 	}
 
 	/**
@@ -140,7 +150,8 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public Type getType() {
-		return UML2AdapterFactory.INSTANCE.createType(dslProperty.getType());
+		return UML2AdapterFactory.INSTANCE.createType(this.dslProperty
+				.getType());
 	}
 
 	/**
@@ -150,7 +161,7 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isMultiple() {
-		return dslProperty.isMultivalued();
+		return this.dslProperty.isMultivalued();
 	}
 
 	/**
@@ -160,17 +171,17 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isOrdered() {
-		return dslProperty.isOrdered();
+		return this.dslProperty.isOrdered();
 	}
 
-	/** 
+	/**
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
 	 * 
 	 * @generated NOT
 	 */
 	@Override
 	public boolean isStatic() {
-		return dslProperty.isStatic();
+		return this.dslProperty.isStatic();
 	}
 
 	/**
@@ -180,7 +191,6 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isUnique() {
-		return dslProperty.isUnique();
+		return this.dslProperty.isUnique();
 	}
-
 }

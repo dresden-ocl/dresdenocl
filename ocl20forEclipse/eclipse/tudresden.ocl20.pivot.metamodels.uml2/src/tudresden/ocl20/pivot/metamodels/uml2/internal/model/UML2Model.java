@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import java.io.IOException;
@@ -23,37 +41,43 @@ import tudresden.ocl20.pivot.models.uml2.internal.provider.Uml2ModelInstanceProv
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
+ * <p>
  * If the root of the model is a single {@link org.eclipse.uml2.uml.Package}, a
  * corresponding {@link UML2Namespace} adapter will be created. If there are
  * several root packages, a new "virtual" root namespace will be created.
+ * </p>
+ * 
+ * @author Michael Thiele
  * 
  * @generated NOT
  */
 public class UML2Model extends AbstractModel implements IModel {
 
-	// a logger for this class
+	/** A {@link Logger} for this class. */
 	private static final Logger logger = Logger.getLogger(UML2Model.class);
 
-	// the resource containing the corresponding UML2 model
+	/** The resource containing the corresponding UML2 model. */
 	private Resource resource;
 
-	// the adapter for the top package of the associated UML2 model
+	/** The adapter for the top package of the associated UML2 model. */
 	private Namespace rootNamespace;
 
 	/**
-	 * Creates a new <code>UML2Model</code> adapting the given
+	 * <p>
+	 * Creates a new {@link UML2Model} adapting the given
 	 * {@link org.eclipse.uml2.uml.Package}.
 	 * 
 	 * @param resource
-	 *            the resource containing the model
+	 *            The {@link Resource} containing the model.
 	 * 
 	 * @generated NOT
 	 */
 	public UML2Model(Resource resource) {
+
 		super(resource.getURI().toString(), ModelBusPlugin
 				.getMetamodelRegistry().getMetamodel(UML2MetamodelPlugin.ID));
 
-		// initialize
+		/* Initialize. */
 		this.resource = resource;
 	}
 
@@ -67,10 +91,12 @@ public class UML2Model extends AbstractModel implements IModel {
 	}
 
 	/**
+	 * <p>
 	 * This method lazily creates a {@link Namespace} adapter for the virtual
 	 * root package in the associated UML2 model. Thus, any possible resource
 	 * loading errors will not happen until this method is called for the first
 	 * time.
+	 * </p>
 	 * 
 	 * @throws ModelAccessException
 	 *             if an error occurs when creating the adapter for the top
@@ -90,21 +116,26 @@ public class UML2Model extends AbstractModel implements IModel {
 	}
 
 	/**
+	 * <p>
 	 * Helper method that creates the adapter for the root namespace. If there
 	 * is only one top-level namespace possible, then this method should just
 	 * return the adapter for the top-level namespace, else it should create a
 	 * new "virtual" root namespace.
+	 * </p>
 	 * 
-	 * @return a <code>Namespace</code> instance
+	 * @return A {@link Namespace} instance
 	 * 
 	 * @throws ModelAccessException
-	 *             if an error occurs while loading the adapted UML2 model
+	 *             If an error occurs while loading the adapted UML2 model.
 	 * 
 	 * @generated NOT
 	 */
 	protected Namespace createRootNamespace() throws ModelAccessException {
 
-		// load the resource
+		List<EObject> rootPackages;
+		org.eclipse.uml2.uml.Package rootPackage;
+
+		/** load the resource. */
 		if (!resource.isLoaded()) {
 
 			if (logger.isInfoEnabled()) {
@@ -113,42 +144,54 @@ public class UML2Model extends AbstractModel implements IModel {
 								.getURI()));
 			}
 
+			/* Try to load the resource. */
 			try {
 				resource.load(null);
-			} catch (IOException e) {
+			}
+
+			catch (IOException e) {
 				throw new ModelAccessException(
 						"Error while loading resource from " + resource.getURI(), e); //$NON-NLS-1$
 			}
 
 		}
+		// no else.
 
-		// get the root packages
-		List<EObject> roots = resource.getContents();
+		/* Get the root packages. */
+		rootPackages = resource.getContents();
 
-		// create a new package to serve as the root package
-		org.eclipse.uml2.uml.Package rootPackage = UMLFactory.eINSTANCE
-				.createPackage();
-		rootPackage.setName("root"); //$NON-NLS-1$
+		/* Create a new package to serve as the root package. */
+		rootPackage = UMLFactory.eINSTANCE.createPackage();
+		rootPackage.setName("root");
 
-		// add all sub-packages and subtypes to the new root package
-		for (EObject eObject : roots) {
-			if (eObject instanceof Package)
+		/** Add all sub-packages and subtypes to the new root package. */
+		for (EObject eObject : rootPackages) {
+
+			if (eObject instanceof Package) {
 				rootPackage.getNestedPackages().add((Package) eObject);
-			if (eObject instanceof Type)
-				rootPackage.getOwnedMembers().add((Type) eObject);
-		}
+			}
 
-		convertAssociations(rootPackage);
+			else if (eObject instanceof Type) {
+				rootPackage.getOwnedMembers().add((Type) eObject);
+			}
+			// no else.
+		}
+		// end for.
+
+		this.convertAssociations(rootPackage);
 
 		return UML2AdapterFactory.INSTANCE.createNamespace(rootPackage);
-
 	}
 
 	/**
+	 * <p>
 	 * Processes all UML Associations: since they are treated as Types in the
 	 * UML meta model, they have to be mapped to Properties in the Pivot Model.
+	 * </p>
 	 * 
+	 * <p>
 	 * Precondition: binary associations
+	 * </p>
 	 * 
 	 * @param rootPackage
 	 *            the containing package (namespace)
@@ -195,25 +238,36 @@ public class UML2Model extends AbstractModel implements IModel {
 	}
 
 	/**
+	 * <p>
 	 * Overridden to base equality check on the URI of the associated resource.
+	 * </p>
 	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 * 
 	 * @generated NOT
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object anObject) {
 
-		if (obj instanceof UML2Model) {
-			return resource.getURI()
-					.equals(((UML2Model) obj).resource.getURI());
+		boolean result;
+
+		/* Check if the given Object is a UML2Model. */
+		if (anObject instanceof UML2Model) {
+			result = resource.getURI().equals(
+					((UML2Model) anObject).resource.getURI());
 		}
 
-		return false;
+		else {
+			result = false;
+		}
+
+		return result;
 	}
 
 	/**
+	 * <p>
 	 * Overridden to base the hash code on the URI of the associated resource.
+	 * </p>
 	 * 
 	 * @see java.lang.Object#hashCode()
 	 * 
@@ -221,11 +275,13 @@ public class UML2Model extends AbstractModel implements IModel {
 	 */
 	@Override
 	public int hashCode() {
-		return resource.getURI().hashCode();
+		return this.resource.getURI().hashCode();
 	}
 
 	/**
-	 * Returns a String representation of this <code>UML2Model</code>.
+	 * <p>
+	 * Returns a String representation of this {@link UML2Model}.
+	 * </p>
 	 * 
 	 * @see java.lang.Object#toString()
 	 * 
@@ -233,6 +289,6 @@ public class UML2Model extends AbstractModel implements IModel {
 	 */
 	@Override
 	public String toString() {
-		return resource.getURI().toString();
+		return this.resource.getURI().toString();
 	}
 }

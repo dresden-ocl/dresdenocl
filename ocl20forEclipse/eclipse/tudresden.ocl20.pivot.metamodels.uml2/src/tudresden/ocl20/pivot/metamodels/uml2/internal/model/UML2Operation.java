@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import java.util.ArrayList;
@@ -13,28 +31,36 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation;
 
 /**
+ * <p>
  * An implementation of the Pivot Model {@link Operation} concept for UML2.
+ * </p>
  * 
  * @generated
  */
 public class UML2Operation extends AbstractOperation implements Operation {
 
 	/**
+	 * <p>
 	 * Logger for this class
+	 * </p>
 	 * 
 	 * @generated
 	 */
 	private static final Logger logger = Logger.getLogger(UML2Operation.class);
 
 	/**
+	 * <p>
 	 * the adapted UML2 org.eclipse.uml2.uml.Operation
+	 * </p>
 	 * 
 	 * @generated
 	 */
 	private org.eclipse.uml2.uml.Operation dslOperation;
 
 	/**
+	 * <p>
 	 * Creates a new <code>UML2Operation</code> instance.
+	 * </p>
 	 * 
 	 * @param dslOperation
 	 *            the {@link org.eclipse.uml2.uml.Operation} that is adopted by
@@ -64,7 +90,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 */
 	@Override
 	public String getName() {
-		return dslOperation.getName();
+		return this.dslOperation.getName();
 	}
 
 	/**
@@ -83,11 +109,12 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 * @generated NOT
 	 */
 	public Parameter getReturnParameter() {
+
 		Parameter result;
 
 		result = UML2AdapterFactory.INSTANCE.createParameter(this.dslOperation
 				.getReturnResult());
-		
+
 		return result;
 	}
 
@@ -98,15 +125,18 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 */
 	@Override
 	public List<Parameter> getOwnedParameter() {
-		List<Parameter> ownedParameter = new ArrayList<Parameter>();
+
+		List<Parameter> result;
+
+		result = new ArrayList<Parameter>();
 
 		for (org.eclipse.uml2.uml.Parameter dslOwnedParameter : dslOperation
 				.getOwnedParameters()) {
-			ownedParameter.add(UML2AdapterFactory.INSTANCE
+			result.add(UML2AdapterFactory.INSTANCE
 					.createParameter(dslOwnedParameter));
 		}
 
-		return ownedParameter;
+		return result;
 	}
 
 	/**
@@ -116,17 +146,26 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 */
 	@Override
 	public Type getOwningType() {
-		if (dslOperation.getOwner() instanceof org.eclipse.uml2.uml.Type)
-			return UML2AdapterFactory.INSTANCE
-					.createType(((org.eclipse.uml2.uml.Type) dslOperation
+
+		Type result;
+
+		if (this.dslOperation.getOwner() instanceof org.eclipse.uml2.uml.Type) {
+			result = UML2AdapterFactory.INSTANCE
+					.createType(((org.eclipse.uml2.uml.Type) this.dslOperation
 							.getOwner()));
+		}
+
 		else {
+
 			if (logger.isInfoEnabled()) {
 				logger.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
 						.toString()));
 			}
-			return null;
+			// no else.
+			result = null;
 		}
+
+		return result;
 	}
 
 	/**
@@ -136,11 +175,13 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 */
 	@Override
 	public boolean isMultiple() {
-		// see: UML Infrastructure (07-11-04), p. 97
-		// there is no operation isMultiple(), since Operation does not directly
-		// inherit from MultiplicityElement
-		return dslOperation.getUpper() > 1
-				|| dslOperation.getUpper() == LiteralUnlimitedNatural.UNLIMITED;
+		/*
+		 * see: UML Infrastructure (07-11-04), p. 97: There is no operation
+		 * isMultiple(), since Operation does not directly inherit from
+		 * MultiplicityElement.
+		 */
+		return this.dslOperation.getUpper() > 1
+				|| this.dslOperation.getUpper() == LiteralUnlimitedNatural.UNLIMITED;
 	}
 
 	/**
@@ -150,7 +191,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 */
 	@Override
 	public boolean isOrdered() {
-		return dslOperation.isOrdered();
+		return this.dslOperation.isOrdered();
 	}
 
 	/**
@@ -159,8 +200,9 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 * @generated NOT
 	 */
 	public boolean isStatic() {
-		return dslOperation.isStatic();
+		return this.dslOperation.isStatic();
 	}
+
 	/**
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique()
 	 * 
@@ -168,7 +210,6 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	 */
 	@Override
 	public boolean isUnique() {
-		return dslOperation.isUnique();
+		return this.dslOperation.isUnique();
 	}
-
 }
