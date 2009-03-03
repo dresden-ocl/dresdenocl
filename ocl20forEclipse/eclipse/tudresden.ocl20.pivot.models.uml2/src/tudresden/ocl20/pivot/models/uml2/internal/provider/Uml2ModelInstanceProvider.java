@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2008-2009 by Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.models.uml2.internal.provider;
 
 import java.net.URL;
@@ -21,7 +39,7 @@ public class Uml2ModelInstanceProvider extends AbstractModelInstanceProvider
 		implements IModelInstanceProvider {
 
 	/** The UML2 {@link IModel}. */
-	private IModel model;
+	private IModel myModel;
 
 	/**
 	 * <p>
@@ -29,11 +47,12 @@ public class Uml2ModelInstanceProvider extends AbstractModelInstanceProvider
 	 * </p>
 	 * 
 	 * @param model
-	 *            The UML2 {@link IModel}.
+	 *            The UML2 {@link IModel} of the {@link Uml2ModelInstance} which
+	 *            shall be provided.
 	 */
 	public Uml2ModelInstanceProvider(IModel model) {
 
-		this.model = model;
+		this.myModel = model;
 	}
 
 	/**
@@ -100,11 +119,12 @@ public class Uml2ModelInstanceProvider extends AbstractModelInstanceProvider
 				instanceProviderClass = classLoader.findClass(className);
 			}
 
-			/*
-			 * Ignored because the canonical name may not be fully decoded.
-			 */
 			catch (ClassNotFoundException e) {
-			} catch (NoClassDefFoundError e) {
+				/* Ignored because the canonical name may not be fully decoded. */
+			}
+
+			catch (NoClassDefFoundError e) {
+				/* Ignored because the canonical name may not be fully decoded. */
 			}
 
 			/* Jump to the next upper directory. */
@@ -125,7 +145,7 @@ public class Uml2ModelInstanceProvider extends AbstractModelInstanceProvider
 
 		/* Try to execute method which provides all model objects. */
 		try {
-			instanceProviderClass.getDeclaredMethod("getModelObjects", null);
+			instanceProviderClass.getDeclaredMethod("getModelObjects", new Class[0]);
 		}
 
 		catch (Exception e) {
@@ -137,7 +157,7 @@ public class Uml2ModelInstanceProvider extends AbstractModelInstanceProvider
 			throw new ModelAccessException(msg);
 		}
 
-		result = new Uml2ModelInstance(instanceProviderClass, this.model);
+		result = new Uml2ModelInstance(instanceProviderClass, this.myModel);
 
 		return result;
 	}
