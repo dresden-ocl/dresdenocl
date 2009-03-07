@@ -18,14 +18,13 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.models.uml2.internal.modelinstance;
 
-import java.util.List;
-
 import org.eclipse.core.runtime.Platform;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -45,20 +44,16 @@ public class Uml2ModelObject extends AbstractModelObject implements
 	 * Creates a new {@link Uml2ModelObject}.
 	 * </p>
 	 * 
-	 * @param object
+	 * @param anObject
 	 *            The {@link Object} for which an {@link Uml2ModelObject} shall
 	 *            be created.
-	 * @param name
-	 *            The name of the created {@link Uml2ModelObject}.
-	 * @param qualifiedName
-	 *            The canonical name of the created {@link Uml2ModelObject}.
+	 * @param aType
+	 *            The {@link Type} this {@link IModelObject} belongs to.
 	 */
-	public Uml2ModelObject(Object object, String name,
-			List<String> qualifiedName) {
+	public Uml2ModelObject(Object anObject, Type aType) {
 
-		this.name = name;
-		this.myAdaptedObject = object;
-		this.qualifiedName = qualifiedName;
+		this.myAdaptedObject = anObject;
+		this.myType = aType;
 	}
 
 	/*
@@ -69,13 +64,13 @@ public class Uml2ModelObject extends AbstractModelObject implements
 	public OclRoot getOclObject() {
 
 		/* Eventually initialize the OCL Object. */
-		if (this.oclObject == null) {
-			this.oclObject = (OclObject) Platform.getAdapterManager()
+		if (this.myOclObject == null) {
+			this.myOclObject = (OclObject) Platform.getAdapterManager()
 					.getAdapter((Object) myAdaptedObject, OclObject.class);
 		}
 		// no else.
 
-		return this.oclObject;
+		return this.myOclObject;
 	}
 
 	/*

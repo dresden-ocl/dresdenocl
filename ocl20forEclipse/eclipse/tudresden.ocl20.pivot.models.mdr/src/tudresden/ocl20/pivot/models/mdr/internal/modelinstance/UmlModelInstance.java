@@ -1,6 +1,23 @@
+/*
+Copyright (C) 2008-2009 by Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the UML Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.models.mdr.internal.modelinstance;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.notify.AdapterFactory;
 
 import tudresden.ocl20.core.jmi.uml15.impl.modelmanagement.ModelHelper;
 import tudresden.ocl20.core.jmi.uml15.modelmanagement.Model;
@@ -20,113 +38,237 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTupleType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardlibraryAdapterFactory;
 
-public class UmlModelInstance extends AbstractModelInstance implements IModelInstance {
+/**
+ * <p>
+ * Represents instance of {@link IModel}s defined using the UML meta model.
+ * </p>
+ * 
+ * @author Claas Wilke
+ */
+public class UmlModelInstance extends AbstractModelInstance implements
+		IModelInstance {
 
-	private Uml15Package umlPackage;
-	
-	private Model toppackage;
-	
-	private Map<String, List<IModelObject>> objects;
-	private List<IModelObject> allObjects;
-	private List<List<String>> objectKinds;
-	
-	private IModelInstanceFactory factory;
-	
-	private Map<Class, OclType> knownTypes;
-		
-	private static Map<Integer, Map<String, String>> operationNames = new HashMap<Integer, Map<String,String>>();
-	
-	static {
-		Map<String, String> binaryOperations = new HashMap<String, String>();
-		Map<String, String> unaryOperations = new HashMap<String, String>();
-		binaryOperations.put("<=", "isLessEqual");
-		binaryOperations.put("<", "isLessThan");
-		binaryOperations.put("=", "isEqualTo");
-		binaryOperations.put(">=", "isGreaterEqual");
-		binaryOperations.put(">", "isGreaterThan");
-		binaryOperations.put("-", "subtract");
-		binaryOperations.put("+", "add");
-		binaryOperations.put("*", "multiply");
-		binaryOperations.put("/", "divide");
-		binaryOperations.put(".", "getPropertyValue");
-		binaryOperations.put("->", "asSet");
-		operationNames.put(2, binaryOperations);
-		unaryOperations.put("-", "negative");
-		operationNames.put(1, unaryOperations);
-	}
-	
-	protected static StandardlibraryAdapterFactory DEFAULTSLAF = 
-		JavaStandardlibraryAdapterFactory.getInstance();
-	
-	public UmlModelInstance(Class providerClass, Uml15Package umlPackage) throws ModelAccessException {
-		objects = new HashMap<String, List<IModelObject>>();
-		allObjects = new ArrayList<IModelObject>();
-		objectKinds = new ArrayList<List<String>>();
-		knownTypes = new HashMap<Class, OclType>();
-		instanceName = providerClass.getCanonicalName();
-		this.umlPackage = umlPackage;
-		this.toppackage = ModelHelper.getInstance(umlPackage).getTopPackage();
+	/**
+	 * The {@link AdapterFactory} used to adapt the model instance to the
+	 * standard library.
+	 */
+	protected static StandardlibraryAdapterFactory DEFAULTSLAF = JavaStandardlibraryAdapterFactory
+			.getInstance();
+
+	/**
+	 * Contains the canonical names of all types contained in this model
+	 * instance.
+	 */
+	private List<List<String>> allMyObjectKinds;
+
+	/** Contains all {@link Object}s of this model instance. */
+	private List<IModelObject> allMyObjects;
+
+	/**
+	 * Contains all {@link Object}s of this model instance ordered by their
+	 * type's name.
+	 */
+	private Map<String, List<IModelObject>> allMyObjectsByName;
+
+	/** Contains all OclTypes which have already been loaded. */
+	private Map<Class<?>, OclType> myKnownTypes;
+
+	/** The {@link IModel} of which this {@link IModelInstance} is an instance. */
+	private IModel myModel;
+
+	/**
+	 * The {@link Uml15Package} representing the model of this
+	 * {@link IModelInstance}.
+	 */
+	private Uml15Package myUMLPackage;
+
+	/** The UML {@link Model} of this {@link IModelInstance}. */
+	private Model myUMLModel;
+
+	/** The {@link IModelInstanceFactory} of this {@link IModelInstance}. */
+	private IModelInstanceFactory myModelInstanceFactory;
+
+	/**
+	 * <p>
+	 * Creates a new {@link UmlModelInstance}.
+	 * </p>
+	 * 
+	 * @param providerClass
+	 *            The provider class providing the Model Objects of this
+	 *            {@link IModelInstance}.
+	 * @param umlPackage
+	 *            The {@link Uml15Package} representing the model of this
+	 *            {@link IModelInstance}.
+	 * @param aModel
+	 *            The {@link IModel} of this {@link IModelInstance}.
+	 * @throws ModelAccessException
+	 *             Thrown, if an error during initialization of this
+	 *             {@link IModelInstance} occurs.
+	 */
+	@SuppressWarnings("unchecked")
+	public UmlModelInstance(Class<?> providerClass, Uml15Package umlPackage,
+			IModel aModel) throws ModelAccessException {
+
+		/* Initialize the lists used to optimize the initialization. */
+		this.allMyObjectsByName = new HashMap<String, List<IModelObject>>();
+		this.allMyObjects = new ArrayList<IModelObject>();
+		this.allMyObjectKinds = new ArrayList<List<String>>();
+		this.myKnownTypes = new HashMap<Class<?>, OclType>();
+
+		this.instanceName = providerClass.getCanonicalName();
+		this.myUMLPackage = umlPackage;
+		this.myUMLModel = ModelHelper.getInstance(umlPackage).getTopPackage();
 
 		this.currentSlAF = DEFAULTSLAF;
+
+		this.myModel = aModel;
+
+		/* Try to load the model objects. */
 		try {
-			Method m = providerClass.getDeclaredMethod("getModelObjects", new Class[0]);
-			List<Object> objects = (List<Object>)m.invoke(null, new Object[0]);
-			addObjects(objects);
-		} catch (ModelAccessException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			throw new ModelAccessException("Problem retrieving ModelObjects", e);
-		} catch (NoSuchMethodException e) {
-			throw new ModelAccessException("Problem retrieving ModelObjects", e);
-		} catch (IllegalArgumentException e) {
-			throw new ModelAccessException("Problem retrieving ModelObjects", e);
-		} catch (IllegalAccessException e) {
-			throw new ModelAccessException("Problem retrieving ModelObjects", e);
-		} catch (InvocationTargetException e) {
-			throw new ModelAccessException("Problem retrieving ModelObjects", e);
-		}		
+			Method providerMethod;
+			List<Object> adaptedObjects;
+
+			/* Get the provider method. */
+			providerMethod = providerClass.getDeclaredMethod("getModelObjects",
+					new Class[0]);
+
+			/* Get the Objects which shall be adapted. */
+			adaptedObjects = (List<Object>) providerMethod.invoke(null,
+					new Object[0]);
+
+			/* Adapt the objects and add them to this IModelInstance. */
+			this.addObjects(adaptedObjects);
+		}
+
+		catch (Exception e) {
+			String msg;
+
+			msg = "Problem retrieving Model Objects.";
+
+			throw new ModelAccessException(msg, e);
+		}
+	}
+
+	/**
+	 * <p>
+	 * A helper method to adapt and add a given {@link Object} as
+	 * {@link IModelObject} to this {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @param anObject
+	 * @throws ModelAccessException
+	 *             Thrown, if an error occurs.
+	 */
+	private void addObject(Object anObject) throws ModelAccessException {
+
+		UmlModelObject newObject;
+		Type anObjectsType;
+
+		List<String> anObjectsTypeName;
+		String anObjectsCanonicalName;
+
+		List<IModelObject> allObjectsOfSameType;
+		List<String> anObjectsQualifiedName;
+
+		/* Get the name of the object (and its type) as a list. */
+		anObjectsTypeName = Arrays.asList(anObject.getClass()
+				.getCanonicalName().split("[.]"));
+
+		/* Check if the object's type can be found in the model. */
+		if (!this.isObjectOfModel(anObjectsTypeName)) {
+			String msg;
+
+			msg = "ModelInstance doesn't match to model. ";
+			msg += "Type for " + anObject.getClass();
+			msg += " was not found in model " + this.myUMLPackage.toString();
+
+			throw new ModelAccessException(msg);
+		}
+		// no else.
+
+		anObjectsCanonicalName = anObject.getClass().getCanonicalName();
+
+		/*
+		 * Get the list with all objects of the same type and eventually
+		 * initialize it.
+		 */
+		allObjectsOfSameType = this.allMyObjectsByName
+				.get(anObjectsCanonicalName);
+
+		if (allObjectsOfSameType == null) {
+			allObjectsOfSameType = new ArrayList<IModelObject>();
+		}
+		// no else.
+
+		anObjectsQualifiedName = Arrays
+				.asList((myUMLModel.getName() + "." + anObjectsCanonicalName)
+						.split("[.]"));
+
+		/* Get the type of the object. */
+		anObjectsType = this.myModel.findType(anObjectsTypeName);
+		
+		/* Create the new object. */
+		newObject = new UmlModelObject(anObject, anObjectsType);
+
+		/* Add the object to the lists of this model instance. */
+		allObjectsOfSameType.add(newObject);
+
+		this.allMyObjectsByName.put(anObjectsCanonicalName,
+				allObjectsOfSameType);
+		this.allMyObjects.add(newObject);
+
+		/*
+		 * Eventually add the type's name of the object to the list of object
+		 * kinds.
+		 */
+		if (!this.allMyObjectKinds.contains(anObjectsQualifiedName)) {
+			this.allMyObjectKinds.add(anObjectsQualifiedName);
+		}
+		// no else.
 	}
 
 	public OclType findType(List<String> pathName) {
 		Class typeClass = null;
 		OclType type = null;
 		ArrayList<String> list = new ArrayList<String>(pathName);
-		
-		if (isObjectOfModel(pathName))
-		{
-			if (toppackage.getName().equals(list.get(0)))
+
+		if (isObjectOfModel(pathName)) {
+			if (myUMLModel.getName().equals(list.get(0)))
 				list.remove(0);
 
 			String path = list.remove(0);
-			
+
 			Iterator<String> it = list.iterator();
-			
+
 			while (it.hasNext())
 				path = path + "." + it.next();
-			
+
 			try {
 				typeClass = Class.forName(path);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			type = knownTypes.get(typeClass);
-			
+
+			type = myKnownTypes.get(typeClass);
+
 			if (type == null) {
-				type = (OclType)Platform.getAdapterManager().getAdapter(typeClass, OclType.class);
-				knownTypes.put(typeClass, type);
+				type = (OclType) Platform.getAdapterManager().getAdapter(
+						typeClass, OclType.class);
+				myKnownTypes.put(typeClass, type);
 			}
 		}
-		
+
 		return type;
 	}
 
@@ -137,23 +279,22 @@ public class UmlModelInstance extends AbstractModelInstance implements IModelIns
 	}
 
 	public IModelInstanceFactory getFactory() {
-		if (factory == null)
-			factory = new UmlModelInstanceFactory();
-		return factory;
+		if (myModelInstanceFactory == null)
+			myModelInstanceFactory = new UmlModelInstanceFactory();
+		return myModelInstanceFactory;
 	}
 
 	public OclTupleType getTupleType(String[] partNames, OclType[] partTypes) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public List<IModelObject> getObjects() {
-		return allObjects;
+		return allMyObjects;
 	}
 
 	public List<IModelObject> getObjectsOfKind(List<String> typePath) {
-		if (typePath != null)
-		{	
+		if (typePath != null) {
 			List<String> path = null;
 			path = new ArrayList<String>();
 			Iterator<String> tpIt = typePath.iterator();
@@ -164,50 +305,33 @@ public class UmlModelInstance extends AbstractModelInstance implements IModelIns
 				else
 					break;
 			}
-			if (!isObjectOfModel(path))
-			{
-				while (path.size() > 0 && !path.get(0).equals(toppackage.getName()))
+			if (!isObjectOfModel(path)) {
+				while (path.size() > 0
+						&& !path.get(0).equals(myUMLModel.getName()))
 					path.remove(0);
 			}
-			if (path.get(0).equals(toppackage.getName()))
+			if (path.get(0).equals(myUMLModel.getName()))
 				path.remove(0);
 			String type = path.remove(0);
 			Iterator<String> it = path.iterator();
 			while (it.hasNext())
 				type = type + "." + it.next();
-			List<IModelObject> temp = objects.get(type);
+			List<IModelObject> temp = allMyObjectsByName.get(type);
 			if (temp == null)
 				temp = new ArrayList<IModelObject>();
 			return temp;
 		}
 		throw new IllegalArgumentException("TypePath must not be null");
 	}
-	
-	private void addObject(Object o) throws ModelAccessException {
-		String[] path = o.getClass().getCanonicalName().split("[.]");
-		if (!isObjectOfModel(new ArrayList<String>(Arrays.asList(path))))
-			throw new ModelAccessException("ModelInstance doesn't match to model. " +
-					"Type for " + o.getClass() + " not found in model " + umlPackage.toString());
-		String key = o.getClass().getCanonicalName();
-		List<IModelObject> temp = objects.get(key);
-		if (temp == null)
-			temp = new ArrayList<IModelObject>();
-		List<String> qualifiedName = Arrays.asList((toppackage.getName() + "." + key).split("[.]"));
-		UmlModelObject newObject = new UmlModelObject(o, key, qualifiedName);
-		temp.add(newObject);
-		objects.put(key, temp);
-		allObjects.add(newObject);
-		if (!objectKinds.contains(qualifiedName))
-			objectKinds.add(qualifiedName);
-	}
-	
+
 	private boolean isObjectOfModel(List<String> pathName) {
 		List<String> modifiedPathname = new ArrayList<String>(pathName);
-		if (toppackage.getName().equals(modifiedPathname.get(0)))
+		if (myUMLModel.getName().equals(modifiedPathname.get(0)))
 			modifiedPathname.remove(0);
-		modifiedPathname.add(0,modifiedPathname.remove(modifiedPathname.size()-1));
-		if (toppackage != null)
-			if (toppackage.findClassifier(modifiedPathname) != null)
+		modifiedPathname.add(0, modifiedPathname
+				.remove(modifiedPathname.size() - 1));
+		if (myUMLModel != null)
+			if (myUMLModel.findClassifier(modifiedPathname) != null)
 				return true;
 		return false;
 	}
@@ -222,13 +346,13 @@ public class UmlModelInstance extends AbstractModelInstance implements IModelIns
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public OclEnumLiteral findEnumLiteral(List<String> pathName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public List<List<String>> getObjectKinds() {
-		return objectKinds;
+		return allMyObjectKinds;
 	}
 }

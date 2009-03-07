@@ -93,7 +93,7 @@ public class EcoreModel extends AbstractModel implements IModel {
    * @see tudresden.ocl20.pivot.modelbus.IModel#getModelInstanceProvider()
    */
   public IModelInstanceProvider getModelInstanceProvider() {
-	  return new EcoreModelInstanceProvider(resource);
+	  return new EcoreModelInstanceProvider(resource, this);
   }
 
   /**

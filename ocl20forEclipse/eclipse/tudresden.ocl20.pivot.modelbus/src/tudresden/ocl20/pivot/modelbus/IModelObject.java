@@ -35,71 +35,117 @@ import java.util.Map;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * A wrapper for domain specific object
- *
+ * <p>
+ * Represents an instance of a domain specific type in an {@link IModel}.
+ * </p>
+ * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public interface IModelObject {
 
 	/**
-	 * Gets the OCL representation of the object.
+	 * <p>
+	 * Adds a given result to this {@link IModelObject} for a given
+	 * {@link Constraint}.
+	 * </p>
 	 * 
-	 * @return an {@link OclRoot} representing the user object
-	 */
-	OclRoot getOclObject();
-	
-	/**
-	 * Gets the name.
-	 * 
-	 * @return the name
-	 */
-	String getName();
-	
-	/**
-	 * Gets the qualified name.
-	 * 
-	 * @return the qualified name
-	 */
-	List<String> getQualifiedName();
-	
-	/**
-	 * Gets the qualified name as string. Needed for more efficiently use in InterpreterView.
-	 * 
-	 * @return the qualified name as string
-	 */
-	String getQualifiedNameString();
-	
-	/**
-	 * Adds the result for given {@link Constraint}.
-	 * 
-	 * @param cs the {@link Constraint} the result belongs to
-	 * @param result the result for the given {@link Constraint}
+	 * @param cs
+	 *            The {@link Constraint} the result belongs to.
+	 * @param result
+	 *            The result for the given {@link Constraint}.
 	 */
 	void addResult(Constraint cs, OclRoot result);
-	
+
 	/**
-	 * Gets the results for the {@link Constraint}.
+	 * <p>
+	 * Clears the results for this {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @return True, if successful cleared the results.
+	 */
+	boolean clearResults();
+
+	/**
+	 * <p>
+	 * Returns the name of the {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @return The name of the {@link IModelObject}.
+	 */
+	String getName();
+
+	/**
+	 * <p>
+	 * Returns the {@link OclRoot} representation of the {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @return An {@link OclRoot} representing the {@link IModelObject}.
+	 */
+	OclRoot getOclObject();
+
+	/**
+	 * <p>
+	 * Returns the qualified name of the {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @return The qualified name the {@link IModelObject}.
+	 */
+	List<String> getQualifiedName();
+
+	/**
+	 * <p>
+	 * Returns the qualified name as of the {@link IModelObject} as
+	 * {@link String}. Needed for more efficiently use in InterpreterView.
+	 * </p>
+	 * 
+	 * @return The qualified name of the {@link IModelObject} as {@link String}.
+	 */
+	String getQualifiedNameString();
+
+	/**
+	 * <p>
+	 * Returns a {@link Map} containing {@link Constraint}s and their
+	 * interpreted {@link OclRoot} results.
 	 * 
 	 * @return the results
 	 */
 	Map<Constraint, OclRoot> getResults();
-	
+
 	/**
-	 * Clear results.
+	 * <p>
+	 * Returns the {@link Type} of which this IModelObject is an instance.
+	 * </p>
 	 * 
-	 * @return true, if successful
+	 * @return The {@link Type} of which this IModelObject is an instance.</p>
 	 */
-	boolean clearResults();
-	
+	Type getType();
+
 	/**
-	 * Removes result for given {@link Constraint}.
+	 * <p>
+	 * Returns true if this {@link IModelObject} is an instance of the given
+	 * {@link Type} in the {@link IModel}.
+	 * </p>
 	 * 
-	 * @param cs the {@link Constraint} the result shall be removed for
-	 * 
-	 * @return true, if successful
+	 * @param aType
+	 *            The {@link Type} which shall be checked.
+	 * @return True, if this {@link IModelObject} is an instance of the given
+	 *         {@link Type}.
 	 */
-	boolean removeResult(Constraint cs);
+	boolean isInstanceOf(Type aType);
+
+	/**
+	 * <p>
+	 * Removes the result for a given {@link Constraint} from this
+	 * {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @param aConstraint
+	 *            The {@link Constraint} whose result shall be removed.
+	 * 
+	 * @return True, if the result was removed successful
+	 */
+	boolean removeResult(Constraint aConstraint);
 }

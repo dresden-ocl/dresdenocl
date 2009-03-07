@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2007-2009 by Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the Ecore Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.models.ecore.internal.modelinstance;
 
 import java.io.IOException;
@@ -10,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -25,11 +44,14 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTupleType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardlibraryAdapterFactory;
 
 /**
@@ -42,62 +64,217 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardl
 public class EcoreModelInstance extends AbstractModelInstance implements
 		IModelInstance {
 
-	private Resource resource;
-	private Resource modelResource;
-
-	private IModelInstanceFactory modelInstanceFactory;
-
+	/**
+	 * The {@link AdapterFactory} used to adapt the model instance to the
+	 * standard library.
+	 */
 	protected static StandardlibraryAdapterFactory DEFAULTSLAF = JavaStandardlibraryAdapterFactory
 			.getInstance();
+	/**
+	 * The {@link Resource} representing the {@link IMetaModel} of this
+	 * {@link IModelInstance}.
+	 */
+	private Resource myMetaModelResource;
 
-	static {
-		Map<String, String> binaryOperations = new HashMap<String, String>();
-		Map<String, String> unaryOperations = new HashMap<String, String>();
-		binaryOperations.put("<=", "isLessEqual");
-		binaryOperations.put("<", "isLessThan");
-		binaryOperations.put("=", "isEqualTo");
-		binaryOperations.put(">=", "isGreaterEqual");
-		binaryOperations.put(">", "isGreaterThan");
-		binaryOperations.put("-", "subtract");
-		binaryOperations.put("+", "add");
-		binaryOperations.put("*", "multiply");
-		binaryOperations.put("/", "divide");
-		binaryOperations.put(".", "getPropertyValue");
-		binaryOperations.put("->", "asSet");
-		operationNames.put(2, binaryOperations);
-		unaryOperations.put("-", "negative");
-		operationNames.put(1, unaryOperations);
-	}
+	/** The {@link IModel} of this {@link IModelInstance}. */
+	private IModel myModel;
 
-	private Map<Class, OclType> knownTypes;
+	/**
+	 * The {@link Resource} representing the {@link IModel} of this
+	 * {@link IModelInstance}.
+	 */
+	private Resource myModelResource;
 
-	public EcoreModelInstance(Resource resource, Resource mmResource) {
-		this.resource = resource;
-		instanceName = resource.toString();
-		if (!resource.isLoaded()) {
-			try {
-				resource.load(null);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+	/**
+	 * Contains the qualified names of all {@link Type} to which
+	 * {@link IModelObject}s belong in this {@link IModelInstance}.
+	 */
+	private List<List<String>> myObjectKinds;
+
+	/** Contains all {@link IModelObject}s of this {@link EcoreModelInstance}. */
+	private List<IModelObject> myObjects;
+
+	/**
+	 * Contains the {@link IModelObject}s of this {@link EcoreModelInstance}
+	 * stored by their qualified name.
+	 */
+	private Map<String, List<IModelObject>> myObjectsByName;
+
+	/**
+	 * @param pathName
+	 *            A given canonical name as a {@link List} of packages.
+	 * @return The {@link OclEnumLiteral} to a given canonical name as a
+	 *         {@link List} of packages.
+	 */
+	public OclEnumLiteral findEnumLiteral(List<String> pathName) {
+
+		OclEnumLiteral result;
+
+		EList<EObject> modelPackageElements;
+		EObject modelElement;
+
+		Iterator<String> pathIt;
+		boolean isRootPackage;
+
+		/* Clone the path name. */
+		pathName = new ArrayList<String>(pathName);
+
+		modelPackageElements = myMetaModelResource.getContents();
+		modelElement = null;
+
+		pathIt = pathName.iterator();
+		isRootPackage = true;
+
+		result = null;
+
+		/*
+		 * Iterate through the canonical name and try to find the same packages
+		 * in the model.
+		 */
+		while (pathIt.hasNext()) {
+
+			String aPackageName;
+			Iterator<EObject> modelElemsIt;
+
+			aPackageName = pathIt.next();
+			modelElement = null;
+
+			modelElemsIt = modelPackageElements.iterator();
+
+			/* Iterate through the model elements of the current package. */
+			while (modelElemsIt.hasNext() && modelElement == null) {
+				ENamedElement aModelObject;
+
+				aModelObject = (ENamedElement) modelElemsIt.next();
+
+				if (aModelObject.getName().equals(aPackageName)) {
+					modelElement = aModelObject;
+				}
+
+				/* Eventually remove the root package from the path. */
+				else if (isRootPackage) {
+					if (aPackageName.equals("root")) {
+						if (aModelObject.getName().equals(pathIt.next())) {
+							modelElement = aModelObject;
+							pathName.remove(0);
+							pathIt = pathName.iterator();
+							pathIt.next();
+						}
+						// no else.
+					}
+					// no else.
+				}
+				// no else.
 			}
-		}
-		this.modelResource = mmResource;
-		if (!mmResource.isLoaded()) {
-			try {
-				mmResource.load(null);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		this.knownTypes = new HashMap<Class, OclType>();
+			// end while.
 
-		this.currentSlAF = DEFAULTSLAF;
-		objects = new HashMap<String, List<IModelObject>>();
-		allObjects = new ArrayList<IModelObject>();
-		objectKinds = new ArrayList<List<String>>();
-		createObjects(resource.getContents());
+			if (modelElement == null) {
+				System.out.println("Type not found");
+				result = null;
+			}
+			// no else.
+
+			isRootPackage = false;
+
+			/* Get the model elements of the next package in the path. */
+			modelPackageElements = modelElement.eContents();
+		}
+
+		/* Try to find the class of the found enumeration literal. */
+		if (modelElement != null) {
+
+			List<String> classPath;
+
+			classPath = new ArrayList<String>(pathName);
+
+			if (modelElement instanceof EEnumLiteral) {
+
+				EList<EObject> modelInstanceElems;
+				EObject aModelInstanceElem;
+				String aModelInstanceClassName;
+
+				int rootPackageIndex;
+				String path;
+
+				Class<?> clazz;
+				String enumLiteral;
+
+				Class<?> typeClass;
+
+				/*
+				 * Use an element of the model instance to get the path of the
+				 * source directory.
+				 */
+				modelInstanceElems = myModelResource.getContents();
+
+				aModelInstanceElem = modelInstanceElems.get(0);
+				aModelInstanceClassName = aModelInstanceElem.getClass()
+						.getName();
+
+				rootPackageIndex = aModelInstanceClassName.indexOf(pathName
+						.get(0));
+
+				if (rootPackageIndex > 1) {
+					path = aModelInstanceClassName.substring(0,
+							rootPackageIndex - 1);
+				} else {
+					path = "";
+				}
+
+				/* The last element of the path is the enumeration literal. */
+				enumLiteral = classPath.remove(classPath.size() - 1);
+
+				/* Decode the path into an canonical name. */
+				while (classPath.size() > 0) {
+
+					if (path.length() > 0) {
+						path += ".";
+					}
+					// no else.
+
+					path += classPath.remove(0);
+				}
+
+				/* Try to load the class. */
+				clazz = null;
+
+				try {
+					clazz = aModelInstanceElem.getClass().getClassLoader()
+							.loadClass(path);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+
+				typeClass = clazz;
+
+				/* If the found type is an enum, try to get the literal. */
+				if (typeClass.isEnum()) {
+
+					Object[] enums;
+					Object enumLiteralObj;
+
+					enums = typeClass.getEnumConstants();
+					enumLiteralObj = null;
+
+					for (Object enumObj : Arrays.asList(enums)) {
+
+						if (enumObj.toString().equals(enumLiteral)) {
+
+							enumLiteralObj = enumObj;
+							break;
+						}
+					}
+
+					result = (OclEnumLiteral) Platform.getAdapterManager()
+							.getAdapter(enumLiteralObj, OclEnumLiteral.class);
+				}
+				// no else.
+			}
+			// no else.
+		}
+		// no else.
+
+		return result;
 	}
 
 	/**
@@ -132,7 +309,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 			pathName = new ArrayList<String>(pathName);
 
 			/* Get the model elements of the root package. */
-			modelPackageElements = modelResource.getContents();
+			modelPackageElements = myMetaModelResource.getContents();
 			modelElement = null;
 
 			pathIt = pathName.iterator();
@@ -254,7 +431,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				 * Get one element of the model instance to detect the model
 				 * instance source directory.
 				 */
-				modelInstanceElems = resource.getContents();
+				modelInstanceElems = myModelResource.getContents();
 
 				anInstanceElement = modelInstanceElems.get(0);
 				anInstanceElemName = anInstanceElement.getClass().getName();
@@ -348,180 +525,125 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	}
 
 	/**
-	 * @param pathName
-	 *            A given canonical name as a {@link List} of packages.
-	 * @return The {@link OclEnumLiteral} to a given canonical name as a
-	 *         {@link List} of packages.
+	 * <p>
+	 * A helper method which creates the {@link EcoreModelObject}s for a given
+	 * {@link List} of {@link EObject}s.
+	 * </p>
+	 * 
+	 * @param eObjects
+	 *            The {@link EObject}s {@link EcoreModelObject}s shall be
+	 *            created for.
 	 */
-	public OclEnumLiteral findEnumLiteral(List<String> pathName) {
+	private void createObjects(List<EObject> eObjects) {
 
-		OclEnumLiteral result;
+		/* Iterate through the given list of EObjects. */
+		for (EObject currentObject : eObjects) {
 
-		EList<EObject> modelPackageElements;
-		EObject modelElement;
+			EcoreModelObject aModelObject;
 
-		Iterator<String> pathIt;
-		boolean isRootPackage;
+			String anEClassName;
 
-		/* Clone the path name. */
-		pathName = new ArrayList<String>(pathName);
+			String aTypesQualifiedName;
+			String aQualifiedName;
 
-		modelPackageElements = modelResource.getContents();
-		modelElement = null;
+			List<String> aTypesQualifiedNameList;
+			List<String> aQualifiedNameList;
 
-		pathIt = pathName.iterator();
-		isRootPackage = true;
+			List<IModelObject> allObjectsOfSameType;
 
-		result = null;
+			Type aType;
 
-		/*
-		 * Iterate through the canonical name and try to find the same packages
-		 * in the model.
-		 */
-		while (pathIt.hasNext()) {
+			/*
+			 * Eventually create model objects for all child objects of this
+			 * EObject.
+			 */
+			this.createObjects(currentObject.eContents());
 
-			String aPackageName;
-			Iterator<EObject> modelElemsIt;
+			/* Get the EClass of this EObject and its qualified name. */
+			anEClassName = currentObject.eClass().getName();
 
-			aPackageName = pathIt.next();
-			modelElement = null;
+			aTypesQualifiedName = findQualifiedPath(this.myMetaModelResource
+					.getContents(), anEClassName);
+			aQualifiedName = "root::" + aTypesQualifiedName;
 
-			modelElemsIt = modelPackageElements.iterator();
+			aTypesQualifiedNameList = Arrays.asList(aTypesQualifiedName
+					.split("::"));
+			aQualifiedNameList = Arrays.asList(aQualifiedName.split("::"));
 
-			/* Iterate through the model elements of the current package. */
-			while (modelElemsIt.hasNext() && modelElement == null) {
-				ENamedElement aModelObject;
+			/*
+			 * Get all objects of the same type in this instance and eventually
+			 * initialize this list.
+			 */
+			allObjectsOfSameType = this.myObjectsByName.get(aQualifiedName);
 
-				aModelObject = (ENamedElement) modelElemsIt.next();
-
-				if (aModelObject.getName().equals(aPackageName)) {
-					modelElement = aModelObject;
-				}
-
-				/* Eventually remove the root package from the path. */
-				else if (isRootPackage) {
-					if (aPackageName.equals("root")) {
-						if (aModelObject.getName().equals(pathIt.next())) {
-							modelElement = aModelObject;
-							pathName.remove(0);
-							pathIt = pathName.iterator();
-							pathIt.next();
-						}
-						// no else.
-					}
-					// no else.
-				}
-				// no else.
-			}
-			// end while.
-
-			if (modelElement == null) {
-				System.out.println("Type not found");
-				result = null;
+			if (allObjectsOfSameType == null) {
+				allObjectsOfSameType = new ArrayList<IModelObject>();
 			}
 			// no else.
 
-			isRootPackage = false;
+			/* Try to get the type of the new IModelObject. */
+			try {
+				aType = this.myModel.findType(aTypesQualifiedNameList);
+			}
 
-			/* Get the model elements of the next package in the path. */
-			modelPackageElements = modelElement.eContents();
-		}
+			catch (ModelAccessException e) {
+				aType = null;
+			}
 
-		/* Try to find the class of the found enumeration literal. */
-		if (modelElement != null) {
+			aModelObject = new EcoreModelObject(currentObject, aType);
 
-			List<String> classPath;
+			allObjectsOfSameType.add(aModelObject);
 
-			classPath = new ArrayList<String>(pathName);
+			/* Add the created model object to the lists of this model instance. */
+			this.myObjects.add(aModelObject);
+			this.myObjectsByName.put(aQualifiedName, allObjectsOfSameType);
 
-			if (modelElement instanceof EEnumLiteral) {
-
-				EList<EObject> modelInstanceElems;
-				EObject aModelInstanceElem;
-				String aModelInstanceClassName;
-
-				int rootPackageIndex;
-				String path;
-
-				Class<?> clazz;
-				String enumLiteral;
-
-				Class<?> typeClass;
-
-				/*
-				 * Use an element of the model instance to get the path of the
-				 * source directory.
-				 */
-				modelInstanceElems = resource.getContents();
-
-				aModelInstanceElem = modelInstanceElems.get(0);
-				aModelInstanceClassName = aModelInstanceElem.getClass()
-						.getName();
-
-				rootPackageIndex = aModelInstanceClassName.indexOf(pathName
-						.get(0));
-
-				if (rootPackageIndex > 1) {
-					path = aModelInstanceClassName.substring(0,
-							rootPackageIndex - 1);
-				} else {
-					path = "";
-				}
-
-				/* The last element of the path is the enumeration literal. */
-				enumLiteral = classPath.remove(classPath.size() - 1);
-
-				/* Decode the path into an canonical name. */
-				while (classPath.size() > 0) {
-
-					if (path.length() > 0) {
-						path += ".";
-					}
-					// no else.
-
-					path += classPath.remove(0);
-				}
-
-				/* Try to load the class. */
-				clazz = null;
-
-				try {
-					clazz = aModelInstanceElem.getClass().getClassLoader()
-							.loadClass(path);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-
-				typeClass = clazz;
-
-				/* If the found type is an enum, try to get the literal. */
-				if (typeClass.isEnum()) {
-
-					Object[] enums;
-					Object enumLiteralObj;
-
-					enums = typeClass.getEnumConstants();
-					enumLiteralObj = null;
-
-					for (Object enumObj : Arrays.asList(enums)) {
-
-						if (enumObj.toString().equals(enumLiteral)) {
-
-							enumLiteralObj = enumObj;
-							break;
-						}
-					}
-
-					result = (OclEnumLiteral) Platform.getAdapterManager()
-							.getAdapter(enumLiteralObj, OclEnumLiteral.class);
-				}
-				// no else.
+			/* Eventually add the types name to the list of the object kinds. */
+			if (!this.myObjectKinds.contains(aQualifiedNameList)) {
+				this.myObjectKinds.add(aQualifiedNameList);
 			}
 			// no else.
 		}
-		// no else.
+		// end for.
+	}
+	
+	// FIXME Continue refactoring here.
 
-		return result;
+	private IModelInstanceFactory modelInstanceFactory;
+
+	private Map<Class<?>, OclType> knownTypes;
+
+	public EcoreModelInstance(Resource resource, Resource mmResource,
+			IModel aModel) {
+		this.myModelResource = resource;
+		instanceName = resource.toString();
+		if (!resource.isLoaded()) {
+			try {
+				resource.load(null);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		this.myMetaModelResource = mmResource;
+		if (!mmResource.isLoaded()) {
+			try {
+				mmResource.load(null);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		this.knownTypes = new HashMap<Class<?>, OclType>();
+
+		this.currentSlAF = DEFAULTSLAF;
+		myObjectsByName = new HashMap<String, List<IModelObject>>();
+		myObjects = new ArrayList<IModelObject>();
+		myObjectKinds = new ArrayList<List<String>>();
+
+		this.myModel = aModel;
+
+		this.createObjects(resource.getContents());
 	}
 
 	public OclCollectionType getCollectionType(OclCollectionTypeKind kind,
@@ -541,14 +663,8 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 		return modelInstanceFactory;
 	}
 
-	// List<IModelObject> objects;
-
-	private Map<String, List<IModelObject>> objects;
-	private List<IModelObject> allObjects;
-	private List<List<String>> objectKinds;
-
 	public List<IModelObject> getObjects() {
-		return allObjects;
+		return myObjects;
 	}
 
 	private String findQualifiedPath(List<EObject> mmResource, String object) {
@@ -565,26 +681,6 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 		}
 
 		return null;
-	}
-
-	private void createObjects(List<EObject> contents) {
-		for (EObject currentObject : contents) {
-			createObjects(currentObject.eContents());
-			String key = currentObject.eClass().getName();
-			// String key = name.substring(0, name.lastIndexOf("Impl"));
-			String qualifiedName = "root::"
-					+ findQualifiedPath(modelResource.getContents(), key);
-			List<IModelObject> temp = objects.get(qualifiedName);
-			if (temp == null)
-				temp = new ArrayList<IModelObject>();
-			EcoreModelObject o = new EcoreModelObject(currentObject, Arrays
-					.asList(qualifiedName.split("::")));
-			temp.add(o);
-			allObjects.add(o);
-			objects.put(qualifiedName, temp);
-			if (!objectKinds.contains(Arrays.asList(qualifiedName.split("::"))))
-				objectKinds.add(Arrays.asList(qualifiedName.split("::")));
-		}
 	}
 
 	public List<IModelObject> getObjectsOfKind(List<String> typePath) {
@@ -605,12 +701,12 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 			else
 				type = type + "::" + append;
 		}
-		return objects.get(type);
+		return myObjectsByName.get(type);
 	}
 
 	public OclEnumType findEnumType(List<String> pathName) {
 		pathName = new ArrayList<String>(pathName);
-		EList<EObject> listMM = modelResource.getContents();
+		EList<EObject> listMM = myMetaModelResource.getContents();
 		EObject temp = null;
 		Iterator<String> it = pathName.iterator();
 		boolean root = true;
@@ -651,7 +747,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 			inner = temp;
 		}
 
-		EList<EObject> list = resource.getContents();
+		EList<EObject> list = myModelResource.getContents();
 		String path = list.get(0).getClass().getName().substring(0,
 				list.get(0).getClass().getName().indexOf(pathName.get(0)) - 1);
 
@@ -685,6 +781,6 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	}
 
 	public List<List<String>> getObjectKinds() {
-		return objectKinds;
+		return myObjectKinds;
 	}
 }

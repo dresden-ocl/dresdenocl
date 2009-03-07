@@ -101,7 +101,7 @@ public class UmlModel extends AbstractModel implements IModel {
 			logger.debug("getModelInstanceProvider() - enter");
 		}
 
-		IModelInstanceProvider imip = new MdrModelInstanceProvider(getDisplayName());
+		IModelInstanceProvider imip = new MdrModelInstanceProvider(getDisplayName(), this);
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getModelInstanceProvider() - exit - return value=" + null);

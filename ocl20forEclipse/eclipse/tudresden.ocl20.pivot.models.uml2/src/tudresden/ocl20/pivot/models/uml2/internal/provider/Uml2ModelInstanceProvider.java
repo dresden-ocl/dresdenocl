@@ -96,7 +96,7 @@ public class Uml2ModelInstanceProvider extends AbstractModelInstanceProvider
 		/* Split the path into class name and directory path. */
 		index = instancePath.lastIndexOf('/');
 		packagePath = instancePath;
-
+		
 		/*
 		 * Try to load the class directory for directory, decoding the canonical
 		 * class name.

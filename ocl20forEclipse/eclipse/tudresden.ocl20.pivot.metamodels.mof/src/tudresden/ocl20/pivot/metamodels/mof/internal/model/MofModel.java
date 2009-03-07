@@ -111,7 +111,7 @@ public class MofModel extends AbstractModel implements IModel {
 			logger.debug("getModelInstanceProvider() - enter");
 		}
 
-		IModelInstanceProvider mip = new MdrModelInstanceProvider(metamodelname);
+		IModelInstanceProvider mip = new MdrModelInstanceProvider(metamodelname, this);
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getModelInstanceProvider() - exit - return value="

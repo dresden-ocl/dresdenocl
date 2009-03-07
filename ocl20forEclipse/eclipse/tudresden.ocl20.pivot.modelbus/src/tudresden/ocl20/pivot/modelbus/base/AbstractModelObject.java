@@ -30,90 +30,51 @@
  */
 package tudresden.ocl20.pivot.modelbus.base;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * Abstract implementation of {@link IModelObject}
+ * <p>
+ * An abstract implementation of {@link IModelObject}.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public abstract class AbstractModelObject implements IModelObject {
 
-	// The name
-	protected String name;
+	/** The name of this {@link IModelObject}. */
+	protected String myName;
 
-	// The qualified name
-	protected List<String> qualifiedName;
+	/** The {@link OclRoot} object of this {@link IModelObject}. */
+	protected OclRoot myOclObject;
 
-	// The qualified name as string
-	protected String qualifiedNameString;
+	/** The results are mapped to constraints. */
+	protected Map<Constraint, OclRoot> myResults = new HashMap<Constraint, OclRoot>();
 
-	// The results are mapped to constraints
-	protected Map<Constraint, OclRoot> results = new HashMap<Constraint, OclRoot>();
-
-	// The OCL object
-	protected OclRoot oclObject;
+	/**
+	 * The {@link Type} of the {@link IModel} of which this IModelObject is an
+	 * instance.
+	 */
+	protected Type myType;
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getName()
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelObject#addResult(tudresden.ocl20
+	 * .pivot.pivotmodel.Constraint,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedName()
-	 */
-	public List<String> getQualifiedName() {
-		return qualifiedName;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedNameString()
-	 */
-	public String getQualifiedNameString() {
-		if (qualifiedNameString == null)
-			if (qualifiedName != null) {
-				for (String part : qualifiedName) {
-					if (qualifiedNameString == null)
-						qualifiedNameString = part;
-					else
-						qualifiedNameString = qualifiedNameString + "::" + part;
-				}
-			}
-		return qualifiedNameString;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#addResult(tudresden.ocl20.pivot.pivotmodel.Constraint,
-	 *      tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public void addResult(Constraint cs, OclRoot result) {
-		results.put(cs, result);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getResults()
-	 */
-	public Map<Constraint, OclRoot> getResults() {
-		return results;
+	public void addResult(Constraint aConstraint, OclRoot aResult) {
+		this.myResults.put(aConstraint, aResult);
 	}
 
 	/*
@@ -122,21 +83,113 @@ public abstract class AbstractModelObject implements IModelObject {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#clearResults()
 	 */
 	public boolean clearResults() {
-		if (results != null) {
-			results.clear();
-			return true;
+
+		boolean result;
+
+		/* Eventually clear the results map. */
+		if (this.myResults != null) {
+
+			this.myResults.clear();
+
+			result = true;
 		}
-		return false;
+
+		else {
+			result = false;
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#removeResult(tudresden.ocl20.pivot.pivotmodel.Constraint)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getName()
+	 */
+	public String getName() {
+		return this.myType.getName();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedName()
+	 */
+	public List<String> getQualifiedName() {
+
+		List<String> result;
+		String qualifiedNamePackages[];
+
+		qualifiedNamePackages = this.myType.getQualifiedName().split("::");
+
+		result = new ArrayList<String>();
+
+		for (int index = 0; index < qualifiedNamePackages.length; index++) {
+			result.add(qualifiedNamePackages[index]);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedNameString()
+	 */
+	public String getQualifiedNameString() {
+		return this.myType.getQualifiedName();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getResults()
+	 */
+	public Map<Constraint, OclRoot> getResults() {
+		return this.myResults;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getType()
+	 */
+	public Type getType() {
+		return this.myType;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelObject#isInstanceOf(tudresden.ocl20
+	 * .pivot.pivotmodel.Type)
+	 */
+	public boolean isInstanceOf(Type aType) {
+
+		boolean result;
+
+		if (this.myType != null) {
+			result = this.myType.conformsTo(aType);
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelObject#removeResult(tudresden.ocl20
+	 * .pivot.pivotmodel.Constraint)
 	 */
 	public boolean removeResult(Constraint cs) {
-		if (results != null) {
-			results.remove(cs);
+		if (myResults != null) {
+			myResults.remove(cs);
 			return true;
 		}
 		return false;

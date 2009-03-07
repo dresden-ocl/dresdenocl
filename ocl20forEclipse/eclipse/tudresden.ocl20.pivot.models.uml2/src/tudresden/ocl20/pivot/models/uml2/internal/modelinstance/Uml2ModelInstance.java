@@ -47,6 +47,13 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardlibraryAdapterFactory;
 
+/**
+ * <p>
+ * Represents instance of {@link IModel}s defined using the UML2 meta model.
+ * </p>
+ * 
+ * @author Claas Wilke
+ */
 public class Uml2ModelInstance extends AbstractModelInstance implements
 		IModelInstance {
 
@@ -64,7 +71,6 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 	private List<List<String>> allMyObjectKinds;
 
 	/** Contains all {@link Object}s of this model instance. */
-
 	private List<IModelObject> allMyObjects;
 
 	/**
@@ -148,133 +154,6 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 			throw new ModelAccessException(msg, e);
 		}
 	}
-
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see
-	// * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumLiteral(java.util
-	// * .List)
-	// */
-	// public OclEnumLiteral findEnumLiteral(List<String> pathName) {
-	//
-	// OclEnumLiteral result;
-	// Type aModelsEnum;
-	//
-	// List<String> anEnumsPath;
-	// String anEnumLiteralsName;
-	//
-	// result = null;
-	//
-	// /* Split the path into the enum's type path and the name of the literal.
-	// */
-	// anEnumsPath = new ArrayList<String>(pathName);
-	// anEnumLiteralsName = anEnumsPath.remove(anEnumsPath.size() - 1);
-	//
-	// /* Try to find the enum's type from the model. */
-	// if (this.myRootNamespace.getName().equals(anEnumsPath.get(0))) {
-	//
-	// List<String> aTypesPath;
-	//
-	// /* Clone the path list because it will be modified. */
-	// aTypesPath = new ArrayList<String>(anEnumsPath);
-	// aTypesPath.remove(0);
-	//
-	// aModelsEnum = this.findTypeInNamespace(aTypesPath,
-	// this.myRootNamespace);
-	// }
-	//
-	// else {
-	// aModelsEnum = null;
-	// }
-	//
-	// /*
-	// * Check if the enum's type has been found and if the found type is an
-	// * enumeration.
-	// */
-	// if (aModelsEnum != null && aModelsEnum instanceof Enumeration) {
-	//
-	// Class<?> theEnumerationsClass;
-	//
-	// IModelObject aModelObject;
-	// Uml2ModelObject anUml2ModelObject;
-	//
-	// ClassLoader modelClassLoader;
-	//
-	// String anEnumsCanonicalName;
-	//
-	// /* Convert the enum's package list into a canonical name. */
-	// anEnumsCanonicalName = null;
-	//
-	// for (String aPackageName : anEnumsPath) {
-	//
-	// if (aPackageName.equals("root") && anEnumsCanonicalName == null) {
-	// /* Do nothing, ignore the root package. */
-	// }
-	//
-	// else if (anEnumsCanonicalName == null) {
-	// anEnumsCanonicalName = aPackageName;
-	// }
-	//
-	// else {
-	// anEnumsCanonicalName += "." + aPackageName;
-	// }
-	// }
-	//
-	// /* Get the model instances' class loader. */
-	// aModelObject = this.allMyObjects.get(0);
-	// anUml2ModelObject = (Uml2ModelObject) aModelObject;
-	//
-	// modelClassLoader = anUml2ModelObject.myAdaptedObject.getClass()
-	// .getClassLoader();
-	//
-	// /* Try to load the enumeration's class. */
-	// try {
-	// theEnumerationsClass = modelClassLoader
-	// .loadClass(anEnumsCanonicalName);
-	// }
-	//
-	// catch (ClassNotFoundException e) {
-	// theEnumerationsClass = null;
-	// }
-	//
-	// /*
-	// * If the found type is an enumeration, try to get the needed
-	// * literal.
-	// */
-	// if (theEnumerationsClass.isEnum()) {
-	//
-	// Object[] aClassEnums;
-	// Object aEnumLiteralObject;
-	//
-	// /* Get all enumeration literals of the found class. */
-	// aClassEnums = theEnumerationsClass.getEnumConstants();
-	// aEnumLiteralObject = null;
-	//
-	// /* Search for the needed literal. */
-	// for (Object anEnumerationObject : Arrays.asList(aClassEnums)) {
-	//
-	// String anEnumObjectsName;
-	//
-	// anEnumObjectsName = anEnumerationObject.toString();
-	//
-	// if (anEnumObjectsName.equals(anEnumLiteralsName)) {
-	//
-	// aEnumLiteralObject = anEnumerationObject;
-	// break;
-	// }
-	// // no else.
-	// }
-	//
-	// result = (OclEnumLiteral) Platform.getAdapterManager()
-	// .getAdapter(aEnumLiteralObject, OclEnumLiteral.class);
-	// }
-	// // no else.
-	// }
-	// // no else.
-	//
-	// return result;
-	// }
 
 	/*
 	 * (non-Javadoc)
@@ -644,12 +523,15 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 		Uml2ModelObject newObject;
 		List<String> qualifiedName;
 
+		Type aType;
+		List<String> aTypesQualifiedName;
+
 		/* Get the path of the given Object. */
 		path = anObject.getClass().getCanonicalName().split("[.]");
 		pathList = new ArrayList<String>(Arrays.asList(path));
 
 		/* Check if the given Object belongs to the model. */
-		if (!isObjectOfModel(pathList)) {
+		if (!this.isObjectOfModel(pathList)) {
 			String msg;
 
 			msg = "ModelInstance doesn't match to model. ";
@@ -675,7 +557,14 @@ public class Uml2ModelInstance extends AbstractModelInstance implements
 				.asList((this.myRootNamespace.getName() + "." + key)
 						.split("[.]"));
 
-		newObject = new Uml2ModelObject(anObject, key, qualifiedName);
+		/* Find the type which belongs to this model object. */
+		aTypesQualifiedName = new ArrayList<String>(qualifiedName);
+		aTypesQualifiedName.remove(0);
+
+		aType = this.findTypeInNamespace(aTypesQualifiedName,
+				this.myRootNamespace);
+
+		newObject = new Uml2ModelObject(anObject, aType);
 		objectList.add(newObject);
 
 		/* Add the new created Object to the object list. */

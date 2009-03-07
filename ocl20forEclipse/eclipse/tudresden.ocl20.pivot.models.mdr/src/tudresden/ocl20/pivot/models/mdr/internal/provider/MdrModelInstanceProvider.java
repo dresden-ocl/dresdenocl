@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2008-2009 by Claas Wilke (claaswilke@gmx.net)
+
+This file is part of the UML Meta Model of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.models.mdr.internal.provider;
 
 import java.io.File;
@@ -14,6 +32,7 @@ import tudresden.ocl20.core.NetBeansRepository;
 import tudresden.ocl20.core.Repository;
 import tudresden.ocl20.core.RepositoryManager;
 import tudresden.ocl20.core.jmi.uml15.uml15.Uml15Package;
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
@@ -23,6 +42,9 @@ import tudresden.ocl20.pivot.models.mdr.internal.modelinstance.UmlModelInstance;
 
 public class MdrModelInstanceProvider extends AbstractModelInstanceProvider
 		implements IModelInstanceProvider {
+
+	/** The {@link IModel} of this {@link MdrModelInstanceProvider}. */
+	protected IModel myModel;
 
 	protected static String REPOSITORY_PATH = "/.metadata/.tudresden/repository";
 
@@ -34,16 +56,19 @@ public class MdrModelInstanceProvider extends AbstractModelInstanceProvider
 
 	/**
 	 * <p>
-	 * Creates a new MdrModelInstanceProvider.
+	 * Creates a new {@link MdrModelInstanceProvider}.
 	 * </p>
 	 * 
 	 * @param modelName
 	 *            The name of the model for which model instances shall be
 	 *            loaded.
+	 * @param aModel
+	 *            The {@link IModel} of this {@link MdrModelInstanceProvider}.
 	 */
-	public MdrModelInstanceProvider(String modelName) {
+	public MdrModelInstanceProvider(String modelName, IModel aModel) {
 
 		this.modelName = modelName;
+		this.myModel = aModel;
 	}
 
 	/**
@@ -66,7 +91,7 @@ public class MdrModelInstanceProvider extends AbstractModelInstanceProvider
 
 			msg = "The given class is no class file. ";
 			msg += "Only files with the suffix '.class' are allowed.";
-			
+
 			throw new ModelAccessException(msg);
 		}
 		// no else.
@@ -178,7 +203,7 @@ public class MdrModelInstanceProvider extends AbstractModelInstanceProvider
 				}
 
 				result = new UmlModelInstance(instanceProviderClass,
-						uml15Package);
+						uml15Package, this.myModel);
 			}
 		} catch (ModelManagerException e) {
 
