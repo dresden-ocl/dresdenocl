@@ -5,23 +5,15 @@
    <extension
          point="org.eclipse.ui.actionSets">
       <actionSet
-            label="Dresden OCL Action Set"
+            label="Codegen Action Set"
             visible="true"
             id="tudresden.ocl20.pivot.ocl2java.ui.actionSet">
-         <menu
-               label="DresdenOCL"
-               id="dresdenOclMenu">
-            <separator
-                  name="codegenGroup">
-            </separator>
-         </menu>
          <action
                label="Generate AspectJ Constraint Code"
                icon="icons/codegen.gif"
                class="tudresden.ocl20.pivot.ocl2java.ui.actions.JavaCodeGenAction"
                tooltip="Creates AspectJ code to instrument constraints for a given model and given OCL constraints."
-               menubarPath="dresdenOclMenu/codegenGroup"
-               toolbarPath="codegenGroup"
+               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.tools"
                id="tudresden.ocl20.pivot.ocl2java.ui.actions.JavaCodeGenAction">
          </action>
       </actionSet>
@@ -29,13 +21,10 @@
 
    <extension
          point="org.eclipse.ui.newWizards">
-      <category
-            id="tudresden.ocl20.pivot.ocl2java.ui.newWizards.category"
-            name="DresdenOCL4Eclipse">
-      </category>
       <wizard
-            category="tudresden.ocl20.pivot.ocl2java.ui.newWizards.category"
+            category="tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
             class="tudresden.ocl20.pivot.ocl2java.ui.internal.wizards.TransformCodeWizard"
+            hasPages="true"
             icon="icons/codegen.gif"
             id="tudresden.ocl20.pivot.ocl2java.ui.importWizards.loadModelWizard"
             name="Generate AspectJ Constraint Code">

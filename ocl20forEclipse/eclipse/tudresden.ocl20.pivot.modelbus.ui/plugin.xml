@@ -3,6 +3,40 @@
 <plugin>
 
    <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="tudresden.ocl20.pivot.modelbus.ui.actionSet"
+            label="Dresden OCL2 Action Set"
+            visible="true">
+         <menu
+               label="Dresden OCL2"
+               id="tudresden.ocl20.pivot.modelbus.ui.menu">
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
+            </separator>
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+            </separator>
+         </menu>
+         <action
+               class="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelInstanceWizardAction"
+               icon="icons/models.gif"
+               id="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelInstanceWizardAction"
+               label="Load Model Instance"
+               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.import"
+               tooltip="Load a Model Instance into Dresden OCL2 for Eclipse.">
+         </action>
+         <action
+               label="Load Model"
+               icon="icons/models.gif"
+               class="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelWizardAction"
+               tooltip="Load a domain-specific model into Dresden OCL2 for Eclipse"
+               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.import"
+               id="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelWizardAction">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
          point="org.eclipse.ui.views">
       <category
             name="Dresden OCL2 Toolkit"
@@ -27,7 +61,7 @@
          point="org.eclipse.ui.importWizards">
       <category
             id="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
-            name="Dresden OCL2 Toolkit">
+            name="Dresden OCL2 for Eclipse">
       </category>
       <wizard
             category="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
@@ -49,6 +83,13 @@
             Load a model instance for specific model.
          </description>
       </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
+            name="Dresden OCL2 for Eclipse">
+      </category>
    </extension>
    
 </plugin>
