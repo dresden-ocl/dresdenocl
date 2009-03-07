@@ -40,6 +40,8 @@ public class OclInterpreterUIMessages extends NLS {
 	public static String InterpreterView_ResultSelection;
 
 	public static String InterpreterView_InterpreterResults;
+	
+	public static String InterpreterView_UseCache;
 
 	public static String InterpreterView_Menu_Body;
 
@@ -90,6 +92,28 @@ public class OclInterpreterUIMessages extends NLS {
 	public static String InterpreterView_AddVariable_Error_NoResult;
 
 	public static String InterpreterView_AddVariable_Error_NoPathName;
+
+	public static String InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects;
+
+	public static String InterpretAction_InterpretSelectedConstraintsForAllModelObjects;
+
+	public static String InterpretAction_InterpretAllConstraintsForSelectedModelObjects;
+
+	public static String InterpretAction_InterpretAllConstraintsForAllModelObjects;
+
+	public static String InterpretAction_ClearSelectedConstraintsForSelectedModelObjects;
+
+	public static String InterpretAction_ClearSelectedConstraintsForAllModelObjects;
+
+	public static String InterpretAction_ClearAllConstraintsForSelectedModelObjects;
+
+	public static String InterpretAction_ClearAllConstraintsForAllModelObjects;
+
+	public static String InterpretAction_PrepareSelectedConstraints;
+
+	public static String InterpretAction_PrepareAllConstraints;
+
+	public static String InterpretAction_RemoveSelectedResults;
 
 	static {
 		/* Initialize resource bundle. */

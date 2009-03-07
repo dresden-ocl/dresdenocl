@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="tudresden.ocl20.interpreter.ui.actionSet"
+            label="Interpreter Action Set"
+            visible="true">
+         <action
+               label="Open OCL2 Interpreter"
+               icon="icons/interpreterview.gif"
+               class="tudresden.ocl20.interpreter.ui.actions.InterpreterViewAction"
+               tooltip="Open the OCL2 Interpreter View to prepare and interpret constraints."
+               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.tools"
+               id="tudresden.ocl20.interpreter.ui.actions.InterpreterViewAction">
+         </action>
+      </actionSet>
+   </extension>
 
    <extension
          point="org.eclipse.ui.views">
       <category
             id="tudresden.ocl20.views.category"
-            name="Dresden OCL2 Toolkit">
+            name="Dresden OCL2 for Eclipse">
       </category>
       <view
             category="tudresden.ocl20.views.category"
             class="tudresden.ocl20.interpreter.ui.internal.views.InterpreterView"
-            icon="icons/sample.gif"
+            icon="icons/interpreterview.gif"
             id="tudresden.ocl20.interpreter.ui.internal.views.InterpreterView"
-            name="Interpreter">
+            name="OCL2 Interpreter">
       </view>
    </extension>
 

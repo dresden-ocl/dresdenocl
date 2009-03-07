@@ -61,6 +61,7 @@ import tudresden.ocl20.interpreter.InterpreterPlugin;
 import tudresden.ocl20.interpreter.event.IInterpreterRegistryListener;
 import tudresden.ocl20.interpreter.event.InterpreterRegistryEvent;
 import tudresden.ocl20.interpreter.internal.OclInterpreter;
+import tudresden.ocl20.interpreter.ui.InterpreterUIPlugin;
 import tudresden.ocl20.interpreter.ui.internal.OclInterpreterUIMessages;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
@@ -72,7 +73,6 @@ import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 
 /**
  * <p>
@@ -81,11 +81,22 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
  * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class InterpreterView extends ViewPart implements ISelectionListener,
 		IModelInstanceRegistryListener, IModelRegistryListener,
 		IInterpreterRegistryListener {
+
+	/** Icon to add variables to the environment. */
+	public static String ADD_IMAGE = "icons/add.gif";
+
+	/** Icon to add variables to the environment. */
+	public static String INTERPRET_IMAGE = "icons/interpret.gif";
+
+	/** Icon to add variables to the environment. */
+	public static String PREPARE_IMAGE = "icons/prepare.gif";
+
+	/** Icon to remove the interpretation results. */
+	public static String REMOVE_IMAGE = "icons/remove.gif";
 
 	/**
 	 * The {@link TableViewer} used to present the results of the
@@ -112,7 +123,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	private ResultsFilter actualFilter = new ResultsFilter();
 
 	/** The {@link InterpretAction} which removes results. */
-	private InterpretAction remResultAction = null;
+	private InterpretAction removeSelectedResults = null;
 
 	/** The double click {@link Action}. */
 	private Action doubleClickAction;
@@ -344,8 +355,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 				selectionIt = ((StructuredSelection) selection).iterator();
 
-				this.remResultAction.clearSelectedConstraints();
-				this.remResultAction.clearSelectedModelObjects();
+				this.removeSelectedResults.clearSelectedConstraints();
+				this.removeSelectedResults.clearSelectedModelObjects();
 
 				while (selectionIt.hasNext()) {
 
@@ -354,11 +365,11 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 					anObject = selectionIt.next();
 
 					if (anObject instanceof List) {
-						this.remResultAction
+						this.removeSelectedResults
 								.addSelectedModelObjects(Arrays
 										.asList((IModelObject) ((List<?>) anObject)
 												.get(ResultsContentProvider.MODELOBJECT)));
-						this.remResultAction
+						this.removeSelectedResults
 								.addSelectedConstraints((Constraint) ((List<?>) anObject)
 										.get(ResultsContentProvider.CONSTRAINT));
 					}
@@ -397,421 +408,223 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * supported {@link InterpretAction}s.
 	 */
 	protected void initMenu() {
-	
-		Action prepaerBody;
-		Action prepareDef;
-		Action prepareDerive;
-		Action prepareInit;
-		Action preparePost;
-	
-		InterpretAction prepareSelectedConstraints;
-		InterpretAction prepareAllConstraints;
-	
+
+		InterpretAction prepareSelected;
+		InterpretAction prepareAll;
+
 		Action setUseCache;
-	
-		Action interpretInv;
-		Action interpretPre;
-		Action interpretPost;
-	
-		InterpretAction interpretSelConstraintsSelMOs;
-		InterpretAction interpretSelectedConstraintsAllMOs;
-		InterpretAction interpretAllConstraintsSelMOs;
-		InterpretAction interpretAllConstraintsAllMOs;
-	
-		InterpretAction clearSelConstraintsSelMOs;
-		InterpretAction clearSelConstraintsAllMOs;
-		InterpretAction clearAllConstraintsSelMOs;
-		InterpretAction clearAllConstraintsAllMOs;
-	
 		Action addVariable;
-	
+
+		InterpretAction interpretSelected;
+		InterpretAction interpretAll;
+
+		InterpretAction clearResultsForSelected;
+		InterpretAction clearAllResults;
+
 		/* Eventually initialize some lists. */
 		if (this.csSelectionNeeded == null) {
 			this.csSelectionNeeded = new ArrayList<InterpretAction>();
 		}
 		// no else.
-	
+
 		if (this.moSelectionNeeded == null) {
 			this.moSelectionNeeded = new ArrayList<InterpretAction>();
 		}
 		// no else.
-	
+
 		if (this.interpretationActions == null) {
 			this.interpretationActions = new ArrayList<InterpretAction>();
 		}
 		// no else.
-	
+
 		if (this.preparationActions == null) {
 			this.preparationActions = new ArrayList<InterpretAction>();
 		}
-	
-		/* Create action to prepare body expressions. */
-		prepaerBody = new Action(null, IAction.AS_CHECK_BOX) {
-	
-			boolean checked = true;
-	
-			public void run() {
-				if (checked) {
-					removeKind(ConstraintKind.BODY, preparationActions);
-				}
-	
-				else {
-					addKind(ConstraintKind.BODY, preparationActions);
-				}
-	
-				checked = !checked;
-				this.setChecked(checked);
-			}
-		};
-	
-		prepaerBody.setChecked(true);
-		prepaerBody.setText(OclInterpreterUIMessages.InterpreterView_Menu_Body);
-		this.getMenu().add(prepaerBody);
-	
-		/* Create action to prepare definitions. */
-		prepareDef = new Action(null, IAction.AS_CHECK_BOX) {
-	
-			boolean checked = true;
-	
-			public void run() {
-	
-				if (checked) {
-					removeKind(ConstraintKind.DEFINITION, preparationActions);
-				}
-	
-				else {
-					addKind(ConstraintKind.DEFINITION, preparationActions);
-				}
-	
-				checked = !checked;
-				this.setChecked(checked);
-			}
-		};
-	
-		prepareDef.setChecked(true);
-		prepareDef.setText(OclInterpreterUIMessages.InterpreterView_Menu_Def);
-		this.getMenu().add(prepareDef);
-	
-		/* Create action to prepare derived values. */
-		prepareDerive = new Action(null, IAction.AS_CHECK_BOX) {
-	
-			boolean checked = true;
-	
-			public void run() {
-	
-				if (checked) {
-					removeKind(ConstraintKind.DERIVED, preparationActions);
-				}
-	
-				else {
-					addKind(ConstraintKind.DERIVED, preparationActions);
-				}
-	
-				checked = !checked;
-				this.setChecked(checked);
-			}
-		};
-	
-		prepareDerive.setChecked(true);
-		prepareDerive
-				.setText(OclInterpreterUIMessages.InterpreterView_Menu_Derive);
-		this.getMenu().add(prepareDerive);
-	
-		/* Create action to prepare initial values. */
-		prepareInit = new Action(null, IAction.AS_CHECK_BOX) {
-	
-			boolean checked = true;
-	
-			public void run() {
-	
-				if (checked) {
-					removeKind(ConstraintKind.INITIAL, preparationActions);
-				}
-	
-				else {
-					addKind(ConstraintKind.INITIAL, preparationActions);
-				}
-	
-				checked = !checked;
-				this.setChecked(checked);
-			}
-		};
-	
-		prepareInit.setChecked(true);
-		prepareInit.setText(OclInterpreterUIMessages.InterpreterView_Menu_Init);
-		this.getMenu().add(prepareInit);
-	
-		/* Create action to prepare initial values. */
-		preparePost = new Action(null, IAction.AS_CHECK_BOX) {
-	
-			boolean checked = true;
-	
-			public void run() {
-	
-				if (checked) {
-					removeKind(ConstraintKind.POSTCONDITION, preparationActions);
-				}
-	
-				else {
-					addKind(ConstraintKind.POSTCONDITION, preparationActions);
-				}
-	
-				checked = !checked;
-				this.setChecked(checked);
-			}
-		};
-	
-		preparePost.setChecked(true);
-		preparePost.setText(OclInterpreterUIMessages.InterpreterView_Menu_Post);
-		this.getMenu().add(preparePost);
-	
-		/* Create action to prepare the selected constraints. */
-		prepareSelectedConstraints = new InterpretAction(
-				InterpretAction.PREPARE_SELECTED_CONSTRAINTS, this.tableViewer
-						.getControl().getShell());
-	
-		this.csSelectionNeeded.add(prepareSelectedConstraints);
-		this.preparationActions.add(prepareSelectedConstraints);
-		this.getMenu().add(prepareSelectedConstraints);
-	
+
+		/* Create the different actions for the preparation menu. */
+
 		/* Create action to prepare the all constraints. */
-		prepareAllConstraints = new InterpretAction(
-				InterpretAction.PREPARE_ALL_CONSTRAINTS, this.tableViewer
-						.getControl().getShell());
-	
-		this.preparationActions.add(prepareAllConstraints);
-		this.getMenu().add(prepareAllConstraints);
-	
+		{
+			prepareAll = new InterpretAction(
+					InterpretAction.PREPARE_ALL_CONSTRAINTS, this.tableViewer
+							.getControl().getShell());
+			/* Set an Icon for this action. */
+			prepareAll.setImageDescriptor(InterpreterUIPlugin
+					.getImageDescriptor(PREPARE_IMAGE));
+
+			this.preparationActions.add(prepareAll);
+
+			/* Add the action to the menu. */
+			this.getMenu().add(prepareAll);
+
+			/* Add the action to the tool bar. */
+			this.getViewSite().getActionBars().getToolBarManager().add(
+					prepareAll);
+		}
+
+		/* Create action to prepare the selected constraints. */
+		{
+			prepareSelected = new InterpretAction(
+					InterpretAction.PREPARE_SELECTED_CONSTRAINTS,
+					this.tableViewer.getControl().getShell());
+
+			this.preparationActions.add(prepareSelected);
+
+			/* This action needs constraint selection. */
+			this.csSelectionNeeded.add(prepareSelected);
+			/* Add the action to the menu. */
+			this.getMenu().add(prepareSelected);
+		}
+
 		/* Add a separator line to the menu. */
 		this.getMenu().add(new Separator());
-	
+
+		/* Create an action to add new variables to the environment. */
+		{
+			addVariable = new Action() {
+
+				public void run() {
+					Dialog vsd;
+
+					vsd = new AddVariableDialog(tableViewer.getControl()
+							.getShell());
+					vsd.open();
+				}
+			};
+
+			addVariable
+					.setText(OclInterpreterUIMessages.InterpreterView_AddVariable_Title);
+
+			/* Set an Icon for this action. */
+			addVariable.setImageDescriptor(InterpreterUIPlugin
+					.getImageDescriptor(ADD_IMAGE));
+
+			/* Add the action to the menu. */
+			this.getMenu().add(addVariable);
+
+			/* Add the action to the tool bar. */
+			this.getViewSite().getActionBars().getToolBarManager().add(
+					addVariable);
+		}
+
 		/* Create action to enable or disable the cache. */
-		setUseCache = new Action(null, IAction.AS_CHECK_BOX) {
-	
-			boolean checked = false;
-	
-			public void run() {
-				setUseCache(!checked);
-				checked = !checked;
-				this.setChecked(checked);
-			}
-		};
-	
-		setUseCache.setChecked(false);
-		setUseCache.setText("Use cache");
-		this.getMenu().add(setUseCache);
-	
+		{
+			setUseCache = new Action(null, IAction.AS_CHECK_BOX) {
+
+				boolean checked = false;
+
+				public void run() {
+					setUseCache(!checked);
+					checked = !checked;
+					this.setChecked(checked);
+				}
+			};
+
+			setUseCache.setChecked(false);
+			setUseCache
+					.setText(OclInterpreterUIMessages.InterpreterView_UseCache);
+
+			/* Add the action to the menu. */
+			this.getMenu().add(setUseCache);
+		}
+
 		/* Add a separator line to the menu. */
 		this.getMenu().add(new Separator());
-	
-		/* Create action to interpret invariants. */
-		interpretInv = new Action(null, IAction.AS_CHECK_BOX) {
-	
-			boolean checked = true;
-	
-			public void run() {
-	
-				if (checked) {
-					removeKind(ConstraintKind.INVARIANT, interpretationActions);
-				}
-	
-				else {
-					addKind(ConstraintKind.INVARIANT, interpretationActions);
-				}
-	
-				checked = !checked;
-				this.setChecked(checked);
-			}
-		};
-	
-		interpretInv.setChecked(true);
-		interpretInv.setText(OclInterpreterUIMessages.InterpreterView_Menu_Inv);
-		this.getMenu().add(interpretInv);
-	
-		/* Create action to interpret preconditions. */
-		interpretPre = new Action(null, IAction.AS_CHECK_BOX) {
-	
-			boolean checked = true;
-	
-			public void run() {
-	
-				if (checked) {
-					removeKind(ConstraintKind.PRECONDITION,
-							interpretationActions);
-				}
-	
-				else {
-					addKind(ConstraintKind.PRECONDITION, interpretationActions);
-				}
-	
-				checked = !checked;
-				this.setChecked(checked);
-			}
-		};
-	
-		interpretPre.setChecked(true);
-		interpretPre.setText(OclInterpreterUIMessages.InterpreterView_Menu_Pre);
-		this.getMenu().add(interpretPre);
-	
-		/* Create action to interpret postconditions. */
-		interpretPost = new Action(null, IAction.AS_CHECK_BOX) {
-	
-			boolean checked = true;
-	
-			public void run() {
-	
-				if (checked) {
-					removeKind(ConstraintKind.POSTCONDITION,
-							interpretationActions);
-				}
-	
-				else {
-					addKind(ConstraintKind.POSTCONDITION, interpretationActions);
-				}
-	
-				checked = !checked;
-				this.setChecked(checked);
-			}
-		};
-	
-		interpretPost.setChecked(true);
-		interpretPost
-				.setText(OclInterpreterUIMessages.InterpreterView_Menu_Post);
-		this.getMenu().add(interpretPost);
-	
-		/*
-		 * Create action to interpret selected constraints for selected model
-		 * objects.
-		 */
-		interpretSelConstraintsSelMOs = new InterpretAction(
-				InterpretAction.INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-				this.tableViewer.getControl().getShell());
-	
-		this.moSelectionNeeded.add(interpretSelConstraintsSelMOs);
-		this.csSelectionNeeded.add(interpretSelConstraintsSelMOs);
-		this.interpretationActions.add(interpretSelConstraintsSelMOs);
-	
-		this.getMenu().add(interpretSelConstraintsSelMOs);
-	
-		/*
-		 * Create action to interpret selected constraints for all model
-		 * objects.
-		 */
-		interpretSelectedConstraintsAllMOs = new InterpretAction(
-				InterpretAction.INTERPRET_SELECTED_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-				this.tableViewer.getControl().getShell());
-	
-		this.csSelectionNeeded.add(interpretSelectedConstraintsAllMOs);
-		this.interpretationActions.add(interpretSelectedConstraintsAllMOs);
-	
-		this.getMenu().add(interpretSelectedConstraintsAllMOs);
-	
-		/*
-		 * Create action to interpret all constraints for selected model
-		 * objects.
-		 */
-		interpretAllConstraintsSelMOs = new InterpretAction(
-				InterpretAction.INTERPRET_ALL_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-				this.tableViewer.getControl().getShell());
-	
-		this.moSelectionNeeded.add(interpretAllConstraintsSelMOs);
-		this.interpretationActions.add(interpretAllConstraintsSelMOs);
-	
-		this.getMenu().add(interpretAllConstraintsSelMOs);
-	
-		/* Create action to interpret all constraints for all model objects. */
-		interpretAllConstraintsAllMOs = new InterpretAction(
-				InterpretAction.INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-				this.tableViewer.getControl().getShell());
-	
-		this.interpretationActions.add(interpretAllConstraintsAllMOs);
-	
-		this.getMenu().add(interpretAllConstraintsAllMOs);
-	
+
+		/* ---- INTERPRETER MENU ---- */
+		/* Create action to interpret all constraints and model objects. */
+		{
+			interpretAll = new InterpretAction(
+					InterpretAction.INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
+					this.tableViewer.getControl().getShell());
+			this.interpretationActions.add(interpretAll);
+
+			/* Set an Icon for this action. */
+			interpretAll.setImageDescriptor(InterpreterUIPlugin
+					.getImageDescriptor(INTERPRET_IMAGE));
+
+			/* Add the action to the menu. */
+			this.getMenu().add(interpretAll);
+
+			/* Add the action to the tool bar. */
+			this.getViewSite().getActionBars().getToolBarManager().add(
+					interpretAll);
+		}
+
+		/* Create action to interpret selected constraints and model objects. */
+		{
+			interpretSelected = new InterpretAction(
+					InterpretAction.INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
+					this.tableViewer.getControl().getShell());
+
+			/* This action needs model object and constraint selection. */
+			this.moSelectionNeeded.add(interpretSelected);
+			this.csSelectionNeeded.add(interpretSelected);
+
+			this.interpretationActions.add(interpretSelected);
+
+			/* Add the action to the menu. */
+			this.getMenu().add(interpretSelected);
+		}
+
 		/* Add a separator line to the menu. */
 		this.getMenu().add(new Separator());
-	
-		/*
-		 * Create action to clear the results for the selected constraints and
-		 * selected model objects.
-		 */
-		clearSelConstraintsSelMOs = new InterpretAction(
-				InterpretAction.CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-				this.tableViewer.getControl().getShell());
-		this.moSelectionNeeded.add(clearSelConstraintsSelMOs);
-		this.csSelectionNeeded.add(clearSelConstraintsSelMOs);
-	
-		this.getMenu().add(clearSelConstraintsSelMOs);
-	
-		/*
-		 * Create action to clear the results for the selected constraints and
-		 * all model objects.
-		 */
-		clearSelConstraintsAllMOs = new InterpretAction(
-				InterpretAction.CLEAR_SELECTED_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-				this.tableViewer.getControl().getShell());
-	
-		this.csSelectionNeeded.add(clearSelConstraintsAllMOs);
-	
-		this.getMenu().add(clearSelConstraintsAllMOs);
-	
+
 		/*
 		 * Create action to clear the results for the all constraints and
-		 * selected model objects.
+		 * objects.
 		 */
-		clearAllConstraintsSelMOs = new InterpretAction(
-				InterpretAction.CLEAR_ALL_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-				this.tableViewer.getControl().getShell());
-	
-		this.moSelectionNeeded.add(clearAllConstraintsSelMOs);
-	
-		this.getMenu().add(clearAllConstraintsSelMOs);
-	
+		{
+			clearAllResults = new InterpretAction(
+					InterpretAction.CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
+					this.tableViewer.getControl().getShell());
+
+			/* Set an Icon for this action. */
+			clearAllResults.setImageDescriptor(InterpreterUIPlugin
+					.getImageDescriptor(REMOVE_IMAGE));
+
+			/* Add the action to the menu. */
+			this.getMenu().add(clearAllResults);
+
+			/* Add the action to the tool bar. */
+			this.getViewSite().getActionBars().getToolBarManager().add(
+					clearAllResults);
+		}
+
 		/*
-		 * Create action to clear the results for the all constraints and
-		 * selected all objects.
+		 * Create action to clear the results for the selected constraints model
+		 * objects.
 		 */
-	
-		clearAllConstraintsAllMOs = new InterpretAction(
-				InterpretAction.CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-				this.tableViewer.getControl().getShell());
-	
-		this.getMenu().add(clearAllConstraintsAllMOs);
-	
-		/* Add a separator line to the menu. */
-		this.getMenu().add(new Separator());
-	
+		{
+			clearResultsForSelected = new InterpretAction(
+					InterpretAction.CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
+					this.tableViewer.getControl().getShell());
+
+			/* This actions needs model object and constraint selection. */
+			this.moSelectionNeeded.add(clearResultsForSelected);
+			this.csSelectionNeeded.add(clearResultsForSelected);
+
+			/* Add the action to the menu. */
+			this.getMenu().add(clearResultsForSelected);
+		}
+
 		/*
 		 * Eventually initialize an action to remove the results for all
 		 * selected constraints.
 		 */
-		if (this.remResultAction == null) {
-			this.remResultAction = new InterpretAction(
-					InterpretAction.REMOVE_SELECTED_CONSTRAINTS,
-					this.tableViewer.getControl().getShell());
-		}
-		// no else.
-	
-		this.getMenu().add(remResultAction);
-	
-		/* Add a separator line to the menu. */
-		this.getMenu().add(new Separator());
-	
-		/* Create an action to add new variables to the environment. */
-		addVariable = new Action() {
-	
-			public void run() {
-				Dialog vsd;
-	
-				vsd = new AddVariableDialog(tableViewer.getControl().getShell());
-				vsd.open();
+		{
+			if (this.removeSelectedResults == null) {
+				this.removeSelectedResults = new InterpretAction(
+						InterpretAction.REMOVE_SELECTED_RESULTS,
+						this.tableViewer.getControl().getShell());
 			}
-		};
-	
-		addVariable
-				.setText(OclInterpreterUIMessages.InterpreterView_AddVariable_Title);
-		this.getMenu().add(addVariable);
-	
+			// no else.
+
+			/* Add the action to the menu. */
+			this.getMenu().add(removeSelectedResults);
+		}
+
+		/* Update the menu and tool bar after initialization. */
 		this.getViewSite().getActionBars().updateActionBars();
 	}
 
@@ -827,23 +640,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	private void addConstraintSelection(Constraint aConstraint) {
 		for (InterpretAction action : this.csSelectionNeeded) {
 			action.addSelectedConstraints(aConstraint);
-		}
-	}
-
-	/**
-	 * <p>
-	 * Adds a {@link ConstraintKind} to all {@link InterpretAction}s of a given
-	 * {@link List}.
-	 * 
-	 * @param aKind
-	 *            The {@link ConstraintKind} which shall be added.
-	 * @param actions
-	 *            The {@link List} of {@link InterpretAction}s to which the
-	 *            {@link ConstraintKind} shall be added.
-	 */
-	private void addKind(ConstraintKind aKind, List<InterpretAction> actions) {
-		for (InterpretAction action : actions) {
-			action.addKind(aKind);
 		}
 	}
 
@@ -938,22 +734,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		}
 
 		this.tableViewer.refresh();
-	}
-
-	/**
-	 * Removes the given {@link ConstraintKind} from all {@link InterpretAction}
-	 * s of a given {@link List}.
-	 * 
-	 * @param kind
-	 *            The {@link ConstraintKind} which shall be removed.
-	 * @param actions
-	 *            The {@link List} of {@link InterpretAction}s from which the
-	 *            {@link ConstraintKind} shall be removed.
-	 */
-	private void removeKind(ConstraintKind kind, List<InterpretAction> actions) {
-		for (InterpretAction action : actions) {
-			action.removeKind(kind);
-		}
 	}
 
 	/**

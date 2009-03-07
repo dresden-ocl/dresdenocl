@@ -45,6 +45,7 @@ import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -110,7 +111,7 @@ class InterpretAction extends Action implements IAction {
 	/**
 	 * Removes selected results.
 	 */
-	public static final int REMOVE_SELECTED_CONSTRAINTS = 8;
+	public static final int REMOVE_SELECTED_RESULTS = 8;
 
 	/** The action type of this {@link InterpretAction}. */
 	private int actionType;
@@ -509,31 +510,44 @@ class InterpretAction extends Action implements IAction {
 
 							NamedElement constrainedElem;
 
-							String aConstrainedElemName;
-							String aModelObjectName;
-
+							/* Get the constrained element. */
 							constrainedElem = (NamedElement) aConstraint
 									.getConstrainedElement().get(0);
 
-							aConstrainedElemName = constrainedElem
-									.getQualifiedName();
+							/* Check if the constrained element is a type. */
+							if (constrainedElem instanceof Type) {
 
-							aModelObjectName = aModelObject
-									.getQualifiedNameString();
+								Type constrainedType;
 
-							if (aConstrainedElemName.equals(aModelObjectName)) {
-								interpreter
-										.interpret(aConstraint, aModelObject);
+								constrainedType = (Type) constrainedElem;
+
+								/*
+								 * Check if the model object is an instance of
+								 * the constrained type.
+								 */
+								if (aModelObject.isInstanceOf(constrainedType)) {
+									interpreter.interpret(aConstraint,
+											aModelObject);
+								}
+								// no else.
 							}
 
+							/*
+							 * Else check if the constrained element is a
+							 * operation.
+							 */
 							else if (constrainedElem instanceof Operation) {
 
-								String operationTypeName;
+								Type operationsType;
 
-								operationTypeName = ((Operation) constrainedElem)
-										.getOwningType().getQualifiedName();
+								operationsType = ((Operation) constrainedElem)
+										.getOwningType();
 
-								if (operationTypeName.equals(aModelObjectName)) {
+								/*
+								 * Check if the model object is an instance of
+								 * the constrained operation's type.
+								 */
+								if (aModelObject.isInstanceOf(operationsType)) {
 									interpreter.interpret(aConstraint,
 											aModelObject);
 								}
@@ -819,7 +833,7 @@ class InterpretAction extends Action implements IAction {
 		}
 
 		case CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-		case REMOVE_SELECTED_CONSTRAINTS: {
+		case REMOVE_SELECTED_RESULTS: {
 
 			if (this.modelObjects == null) {
 				this
@@ -901,49 +915,49 @@ class InterpretAction extends Action implements IAction {
 		String result;
 
 		switch (this.actionType) {
-		
+
 		case INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result = "Interpret selected constraints for selected model objects";
+			result = OclInterpreterUIMessages.InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects;
 			break;
 
 		case INTERPRET_SELECTED_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result = "Interpret selected constraints for all model objects";
+			result = OclInterpreterUIMessages.InterpretAction_InterpretSelectedConstraintsForAllModelObjects;
 			break;
 
 		case INTERPRET_ALL_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result = "Interpret all constraints for selected model objects";
+			result = OclInterpreterUIMessages.InterpretAction_InterpretAllConstraintsForSelectedModelObjects;
 			break;
 
 		case INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result = "Interpret all constraints for all model objects";
+			result = OclInterpreterUIMessages.InterpretAction_InterpretAllConstraintsForAllModelObjects;
 			break;
 
 		case CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result = "Clear results for selected constraints for selected model objects";
+			result = OclInterpreterUIMessages.InterpretAction_ClearSelectedConstraintsForSelectedModelObjects;
 			break;
 
 		case CLEAR_SELECTED_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result = "Clear results for selected constraints for all model objects";
+			result = OclInterpreterUIMessages.InterpretAction_ClearSelectedConstraintsForAllModelObjects;
 			break;
 
 		case CLEAR_ALL_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result = "Clear results for all constraints for selected model objects";
+			result = OclInterpreterUIMessages.InterpretAction_ClearAllConstraintsForSelectedModelObjects;
 			break;
 
 		case CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result = "Clear results for all constraints for all model objects";
+			result = OclInterpreterUIMessages.InterpretAction_ClearAllConstraintsForAllModelObjects;
 			break;
 
-		case REMOVE_SELECTED_CONSTRAINTS:
-			result = "Remove selected results";
+		case REMOVE_SELECTED_RESULTS:
+			result = OclInterpreterUIMessages.InterpretAction_RemoveSelectedResults;
 			break;
 
 		case PREPARE_SELECTED_CONSTRAINTS:
-			result = "Prepare selected constraints";
+			result = OclInterpreterUIMessages.InterpretAction_PrepareSelectedConstraints;
 			break;
 
 		case PREPARE_ALL_CONSTRAINTS:
-			result = "Prepare all constraints";
+			result = OclInterpreterUIMessages.InterpretAction_PrepareAllConstraints;
 			break;
 
 		default:
