@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2008-2009 by Matthias Bräuer
+
+This file is part of the Model Bus GUI of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.pivot.modelbus.ui.internal.views;
 
 import java.util.ArrayList;
@@ -17,6 +35,7 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
@@ -42,16 +61,12 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelItemProviderAdapterFactory;
 
 /**
- * 
- * 
- * @author Matthias Braeuer
- * @version 1.0 13.04.2007
- */
-/**
- * 
+ * <p>
+ * The {@link ModelsView} provides a {@link TableViewer} to show the active
+ * {@link IModel}.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 13.04.2007
  */
 public class ModelsView extends ViewPart implements IModelRegistryListener {
 
@@ -243,10 +258,9 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 	}
 
 	/**
-	 * Creates a new {@link ModelSelectionAction} for the given
-	 * {@link IModel model} and adds it to the menu. Duplicate actions are
-	 * prevented by checking whether an action for the given model already
-	 * exists.
+	 * Creates a new {@link ModelSelectionAction} for the given {@link IModel
+	 * model} and adds it to the menu. Duplicate actions are prevented by
+	 * checking whether an action for the given model already exists.
 	 */
 	protected ModelSelectionAction addModelSelectionAction(IModel model) {
 		ModelSelectionAction action;
@@ -415,7 +429,5 @@ public class ModelsView extends ViewPart implements IModelRegistryListener {
 					.append("model", model) //$NON-NLS-1$
 					.toString();
 		}
-
 	}
-
 }

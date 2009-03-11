@@ -50,113 +50,128 @@ import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
 
+/**
+ * <p>
+ * The {@link LoadModelWizard} can be used to import domain-specific models into
+ * Dresden OCL2 for Eclipse.
+ * </p>
+ * 
+ * @author Matthias Braeuer
+ */
 public class LoadModelWizard extends Wizard implements IImportWizard {
 
-  // a logger for this class
-  private static final Logger logger = ModelBusUIPlugin.getLogger(LoadModelWizard.class);
+	/** A logger for this class. */
+	private static final Logger logger = ModelBusUIPlugin
+			.getLogger(LoadModelWizard.class);
 
-  // the icon in the top right corner
-  private static final String wizardImage = "icons/models_wizard.png"; //$NON-NLS-1$
+	/** The icon in the top right corner. */
+	private static final String wizardImage = "icons/models_wizard.png";
 
-  // the single page of this wizard
-  LoadModelPage mainPage;
+	/** The single page of this wizard. */
+	LoadModelPage mainPage;
 
-  // a chached reference to the workbench
-  private IWorkbench workbench;
+	/** A cached reference to the workbench. */
+	private IWorkbench workbench;
 
-  /**
-   * Creates a new <code>LoadModelWizard</code>
-   */
-  public LoadModelWizard() {
-    super();
+	/**
+	 * <p>
+	 * Creates a new {@link LoadModelWizard}.
+	 * </p>
+	 */
+	public LoadModelWizard() {
+		super();
 
-    // set the logo in the top right corner
-    setDefaultPageImageDescriptor(ModelBusUIPlugin.getImageDescriptor(wizardImage));
-  }
+		/** Set the logo in the top right corner. */
+		setDefaultPageImageDescriptor(ModelBusUIPlugin
+				.getImageDescriptor(wizardImage));
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.eclipse.jface.wizard.Wizard#performFinish()
-   */
-  @Override
-  public boolean performFinish() {
-    boolean finished;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	 */
+	@Override
+	public boolean performFinish() {
+		boolean finished;
 
-    // by default we assume something went wrong
-    finished = false;
+		// by default we assume something went wrong
+		finished = false;
 
-    // get the selected metamodel
-    IMetamodel metamodel = mainPage.getSelectedMetamodel();
+		// get the selected metamodel
+		IMetamodel metamodel = mainPage.getSelectedMetamodel();
 
-    if (metamodel != null) {
-      IModelProvider modelProvider;
-      IModel model = null;
+		if (metamodel != null) {
+			IModelProvider modelProvider;
+			IModel model = null;
 
-      // load the model
-      modelProvider = metamodel.getModelProvider();
+			// load the model
+			modelProvider = metamodel.getModelProvider();
 
-      try {
-        model = modelProvider.getModel(mainPage.getModelFile());
-      }
+			try {
+				model = modelProvider.getModel(mainPage.getModelFile());
+			}
 
-      catch (ModelAccessException e) {
-        MessageDialog.openError(getShell(),
-            ModelBusUIMessages.LoadModelWizard_ErrorMessageDialogTitle,
-            ModelBusUIMessages.LoadModelWizard_ErrorOccured
-                + (e.getMessage() != null ? e.getMessage()
-                    : ModelBusUIMessages.LoadModelWizard_CheckLog));
+			catch (ModelAccessException e) {
+				MessageDialog
+						.openError(
+								getShell(),
+								ModelBusUIMessages.LoadModelWizard_ErrorMessageDialogTitle,
+								ModelBusUIMessages.LoadModelWizard_ErrorOccured
+										+ (e.getMessage() != null ? e
+												.getMessage()
+												: ModelBusUIMessages.LoadModelWizard_CheckLog));
 
-        String errorMsg = "An error occured when loading model '" + model + "'"; //$NON-NLS-1$//$NON-NLS-2$
-        logger.error(errorMsg,e);
+				String errorMsg = "An error occured when loading model '" + model + "'"; //$NON-NLS-1$//$NON-NLS-2$
+				logger.error(errorMsg, e);
 
-        // we need to rethrow a runtime exception or the wizard will close afterwards
-        throw new IllegalStateException(errorMsg,e);
-      }
+				// we need to rethrow a runtime exception or the wizard will
+				// close afterwards
+				throw new IllegalStateException(errorMsg, e);
+			}
 
-      // add the successfully loaded model to the model registry
-      IModelRegistry modelRegistry = ModelBusPlugin.getModelRegistry();
+			// add the successfully loaded model to the model registry
+			IModelRegistry modelRegistry = ModelBusPlugin.getModelRegistry();
 
-      modelRegistry.addModel(model);
-      modelRegistry.setActiveModel(model);
+			modelRegistry.addModel(model);
+			modelRegistry.setActiveModel(model);
 
-      // activate the Model Browser View
-      try {
-        workbench.getActiveWorkbenchWindow().getActivePage().showView(ModelsView.ID);
-      }
-      catch (PartInitException e) {
-        logger.error("Failed to activate the Model Btowser view.",e); //$NON-NLS-1$
-        finished = false;
-      }
+			// activate the Model Browser View
+			try {
+				workbench.getActiveWorkbenchWindow().getActivePage().showView(
+						ModelsView.ID);
+			} catch (PartInitException e) {
+				logger.error("Failed to activate the Model Btowser view.", e); //$NON-NLS-1$
+				finished = false;
+			}
 
-      finished = true;
-    }
+			finished = true;
+		}
 
-    return finished;
-  }
+		return finished;
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
-   *      org.eclipse.jface.viewers.IStructuredSelection)
-   */
-  public void init(IWorkbench workbench, IStructuredSelection selection) {
-    this.workbench = workbench;
-    
-    setWindowTitle(ModelBusUIMessages.LoadModelWizard_Title);
-    mainPage = new LoadModelPage(selection);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
+	 * org.eclipse.jface.viewers.IStructuredSelection)
+	 */
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		this.workbench = workbench;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.eclipse.jface.wizard.IWizard#addPages()
-   */
-  @Override
-  public void addPages() {
-    super.addPages();
-    addPage(mainPage);
-  }
+		setWindowTitle(ModelBusUIMessages.LoadModelWizard_Title);
+		mainPage = new LoadModelPage(selection);
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.wizard.IWizard#addPages()
+	 */
+	@Override
+	public void addPages() {
+		super.addPages();
+		addPage(mainPage);
+	}
 }

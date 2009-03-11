@@ -30,28 +30,16 @@
  */
 package tudresden.ocl20.pivot.modelbus.ui.internal.views;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
@@ -67,554 +55,457 @@ import tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelInstanceSelectionAction;
+import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelObjectContentProvider;
+import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelObjectFilter;
+import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelObjectLabelProvider;
 
 /**
- * A view for the active model instance
+ * <p>
+ * A {@link ModelInstancesView} displaying the active model instance.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public class ModelInstancesView extends ViewPart implements
 		IModelInstanceRegistryListener, IModelRegistryListener,
 		ISelectionListener {
 
-	// The Constant ID of this class
+	/** The Constant ID of this class. */
 	public static final String ID = IModelBusConstants.MODEL_INSTANCES_VIEW_ID;
 
-	// The viewer
-	private TreeViewer viewer;
+	/** The last {@link IModelInstance} which has been selected. */
+	private IModelInstance myLastModelInstance = null;
 
-	// The menu
-	private IMenuManager menu;
-
-	// The model instance selection actions according to the model
-	private Map<IModel, Map<IModelInstance, ModelInstanceSelectionAction>> modelInstanceSelectionActions;
-
-	// The selected action
-	private Map<IModel, ModelInstanceSelectionAction> selectedAction;
-
-	// The last model instance
-	private IModelInstance lastModelInstance = null;
+	/** The menu of the {@link ModelInstancesView}. */
+	private IMenuManager myMenu;
 
 	/**
-	 * The Class ModelObjectContentProvider.
+	 * The {@link ModelInstanceSelectionAction}s according to the {@link IModel}
+	 * .
 	 */
-	class ModelObjectContentProvider implements IStructuredContentProvider,
-			ITreeContentProvider {
+	private Map<IModel, Map<IModelInstance, ModelInstanceSelectionAction>> myModelInstanceSelectionActions;
 
-		// The model instance
-		private IModelInstance modelInstance;
+	/** The actual filter to show {@link IModelObject}s. */
+	private ModelObjectFilter myModelObjectFilter = new ModelObjectFilter();
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
-		 */
-		public Object[] getElements(Object inputElement) {
-			return getChildren(inputElement);
-		}
+	/** The selected {@link ModelInstanceSelectionAction}. */
+	private Map<IModel, ModelInstanceSelectionAction> mySelectedAction;
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
-		 */
-		public void dispose() {
-			if (modelInstance != null)
-				modelInstance = null;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
-		 *      java.lang.Object, java.lang.Object)
-		 */
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			if (newInput instanceof IModelInstance)
-				this.modelInstance = (IModelInstance) newInput;
-		}
-
-		/**
-		 * Children of an {@link IModelInstance} are the names of the types of
-		 * the model instance objects. Children of the names of the types of the
-		 * model instance objects (given as List) are the {@link IModelObject}s.
-		 * 
-		 * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
-		 */
-		public Object[] getChildren(Object parentElement) {
-			if (parentElement instanceof IModelInstance) {
-
-				return ((IModelInstance) parentElement).getObjectKinds()
-						.toArray(
-								new List[((IModelInstance) parentElement)
-										.getObjectKinds().size()]);
-			}
-			if (parentElement instanceof List) {
-				List<IModelObject> objects = modelInstance
-						.getObjectsOfKind((List<String>) parentElement);
-				return objects.toArray(new IModelObject[objects.size()]);
-			}
-			return new Object[0];
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.viewers.ITreeContentProvider#getParent(java.lang.Object)
-		 */
-		public Object getParent(Object element) {
-			if (element instanceof List)
-				if (modelInstance.getObjectsOfKind((List<String>) element)
-						.size() > 0)
-					return modelInstance;
-			if (element instanceof IModelObject)
-				return ((IModelObject) element).getName();
-			return null;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java.lang.Object)
-		 */
-		public boolean hasChildren(Object element) {
-			if (element instanceof IModelInstance)
-				return (((IModelInstance) element).getObjectKinds().size() > 0);
-			if (element instanceof List)
-				if (modelInstance != null)
-					return (modelInstance.getObjectsOfKind(
-							(List<String>) element).size() > 0);
-			return false;
-		}
-
-	}
+	/** The {@link TreeViewer} to show the {@link IModelInstance}. */
+	private TreeViewer myViewer;
 
 	/**
-	 * The Class ModelObjectLabelProvider.
-	 */
-	class ModelObjectLabelProvider extends LabelProvider {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
-		 */
-		public String getText(Object obj) {
-			if (obj instanceof IModelInstance)
-				return ((IModelInstance) obj).getDisplayName();
-			if (obj instanceof IModelObject)
-				return ((IModelObject) obj).toString();
-			if (obj instanceof List) {
-				String label = null;
-				for (String append : (List<String>) obj) {
-					if (label == null)
-						label = append;
-					else
-						label = label + "::" + append;
-				}
-				return label;
-			}
-			return null;
-		}
-	}
-
-	/**
-	 * The Class ModelObjectFilter.
-	 */
-	class ModelObjectFilter extends ViewerFilter {
-
-		/** The filter text. */
-		private List<List<String>> filterText;
-
-		/**
-		 * Adds an model instance object type that shall be shown.
-		 * 
-		 * @param text
-		 *            the path of the model instance object type that shall be
-		 *            shown.
-		 */
-		public void addFilter(List<String> text) {
-			if (filterText == null)
-				filterText = new ArrayList<List<String>>();
-			List<String> filter = new ArrayList<String>();
-			for (String part : text) {
-				if (!part.contains("("))
-					filter.add(part);
-				else
-					break;
-			}
-			filterText.add(filter);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.viewers.ViewerFilter#select(org.eclipse.jface.viewers.Viewer,
-		 *      java.lang.Object, java.lang.Object)
-		 */
-		@Override
-		public boolean select(Viewer viewer, Object parentElement,
-				Object element) {
-			if (filterText.size() == 0)
-				return true;
-			if (parentElement instanceof IModelInstance) {
-				if (filterText.contains(((IModelInstance) parentElement)
-						.getObjectsOfKind((List<String>) element).get(0)
-						.getQualifiedName()))
-					return true;
-			} else if (element instanceof IModelObject)
-				return filterText.contains(((IModelObject) element)
-						.getQualifiedName());
-			return false;
-		}
-
-		/**
-		 * Clear filter.
-		 */
-		public void clearFilter() {
-			filterText = new ArrayList<List<String>>();
-		}
-	}
-
-	/**
-	 * The constructor.
+	 * <p>
+	 * Creates a new {@link ModelInstancesView}.
+	 * </p>
 	 */
 	public ModelInstancesView() {
 		super();
 
-		modelInstanceSelectionActions = new HashMap<IModel, Map<IModelInstance, ModelInstanceSelectionAction>>();
+		this.myModelInstanceSelectionActions = new HashMap<IModel, Map<IModelInstance, ModelInstanceSelectionAction>>();
 
+		/* Register the view as model and model instance listener. */
 		ModelBusPlugin.getModelRegistry().addModelRegistryListener(this);
 		ModelBusPlugin.getModelInstanceRegistry()
 				.addModelInstanceRegistryListener(this);
 	}
 
-	/**
-	 * This is a callback that will allow us to create the viewer and initialize
-	 * it.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param parent
-	 *            the parent
+	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
+	 * activeModelChanged
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
-	public void createPartControl(Composite parent) {
-		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-		viewer.setContentProvider(new ModelObjectContentProvider());
-		viewer.setLabelProvider(new ModelObjectLabelProvider());
-		viewer.setInput(getViewSite());
-		initMenu();
-		getViewSite().setSelectionProvider(viewer);
-		getViewSite().getPage().addSelectionListener(this);
+	public void activeModelChanged(ModelRegistryEvent e) {
+
+		this.rebuildMenu(e.getAffectedModel());
+
+		this.setActiveModelInstance(e.getAffectedModel(), ModelBusPlugin
+				.getModelInstanceRegistry().getActiveModelInstance(
+						e.getAffectedModel()));
 	}
 
-	/**
-	 * Initializes the drop-down menu of the view with all
-	 * {@link IModelInstance}s currently registered for the active
-	 * {@link IModel}.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
+	 * activeModelInstanceChanged
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
-	protected void initMenu() {
-		IModel[] models = ModelBusPlugin.getModelRegistry().getModels();
-		Iterator<IModel> modelIt = Arrays.asList(models).iterator();
-		while (modelIt.hasNext()) {
-			IModel model = modelIt.next();
-			if (model != null) {
-				IModelInstance[] modelInstances = ModelBusPlugin
-						.getModelInstanceRegistry().getModelInstances(model);
+	public void activeModelInstanceChanged(ModelInstanceRegistryEvent event) {
+		this.setActiveModelInstance(event.getAffectedModel(), event
+				.getAffectedModelInstance());
+	}
 
-				for (int i = 0; i < modelInstances.length; i++) {
-					addModelInstanceSelectionAction(model, modelInstances[i]);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets
+	 * .Composite)
+	 */
+	public void createPartControl(Composite aParent) {
+
+		this.myViewer = new TreeViewer(aParent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL);
+
+		this.myViewer.setContentProvider(new ModelObjectContentProvider());
+		this.myViewer.setLabelProvider(new ModelObjectLabelProvider());
+
+		this.myViewer.setInput(this.getViewSite());
+
+		this.initMenu();
+
+		this.getViewSite().setSelectionProvider(this.myViewer);
+		this.getViewSite().getPage().addSelectionListener(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 */
+	public void modelAdded(ModelRegistryEvent e) {
+	
+		this.rebuildMenu(e.getAffectedModel());
+	
+		this.setActiveModelInstance(e.getAffectedModel(), ModelBusPlugin
+				.getModelInstanceRegistry().getActiveModelInstance(
+						e.getAffectedModel()));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
+	 * modelInstanceAdded
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
+	 */
+	public void modelInstanceAdded(ModelInstanceRegistryEvent event) {
+		this.addModelInstanceSelectionAction(event.getAffectedModel(), event
+				.getAffectedModelInstance());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.
+	 * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
+	 */
+	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+
+		/* Check if the given part is a ModelsView. */
+		if (part != null && part instanceof ModelsView) {
+
+			/* Check if the given selection is a TreeSelection. */
+			if (selection != null && selection instanceof TreeSelection) {
+
+				TreeSelection aTreeSelection;
+				Iterator<?> aSelectionIt;
+
+				/* Remove the old and create a new ModelObjectFilter. */
+				this.myViewer.removeFilter(this.myModelObjectFilter);
+				this.myModelObjectFilter.clearFilter();
+
+				aTreeSelection = (TreeSelection) selection;
+				aSelectionIt = aTreeSelection.iterator();
+
+				/* Iterate over the elements of the selection. */
+				while (aSelectionIt.hasNext()) {
+
+					Object anObject;
+
+					anObject = aSelectionIt.next();
+					
+					this.myModelObjectFilter.addFilter(anObject);
 				}
+				// end while.
+
+				this.myViewer.addFilter(this.myModelObjectFilter);
+				this.myViewer.refresh();
 			}
+			// no else.
 		}
+		// no else.
 	}
 
-	/**
-	 * Gets the menu.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the menu
+	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
 	 */
-	protected IMenuManager getMenu() {
-		if (menu == null) {
-			menu = getViewSite().getActionBars().getMenuManager();
-		}
-
-		return menu;
+	public void setFocus() {
+		this.myViewer.getControl().setFocus();
 	}
 
 	/**
-	 * Adds the model instance selection action.
+	 * <p>
+	 * Adds an {@link ModelInstanceSelectionAction} for a given {@link IModel}
+	 * {@link IModelInstance}. The {@link ModelInstanceSelectionAction} is used
+	 * to select the IModelInstance to be shown in this view.
+	 * </p>
 	 * 
 	 * @param model
-	 *            the model
+	 *            The {@link IModel} of the {@link ModelInstanceSelectionAction}
+	 *            .
 	 * @param modelInstance
-	 *            the model instance
+	 *            The {@link IModelInstance} of the
+	 *            {@link ModelInstanceSelectionAction}.
 	 * 
 	 * @return the model instance selection action
 	 */
 	protected ModelInstanceSelectionAction addModelInstanceSelectionAction(
 			IModel model, IModelInstance modelInstance) {
-		ModelInstanceSelectionAction action = null;
 
-		Map<IModelInstance, ModelInstanceSelectionAction> actions = modelInstanceSelectionActions
-				.get(model);
+		ModelInstanceSelectionAction result;
+		Map<IModelInstance, ModelInstanceSelectionAction> aModelsActions;
 
-		if (actions != null)
-			action = actions.get(model);
-		else
-			actions = new HashMap<IModelInstance, ModelInstanceSelectionAction>();
+		result = null;
 
-		if (action == null) {
-			action = new ModelInstanceSelectionAction(model, modelInstance);
-			actions.put(modelInstance, action);
-			modelInstanceSelectionActions.put(model, actions);
-			if (ModelBusPlugin.getModelRegistry().getActiveModel() == model)
-				getMenu().add(action);
-			getViewSite().getActionBars().updateActionBars();
+		aModelsActions = this.myModelInstanceSelectionActions.get(model);
+
+		/* Get the action or initialize it. */
+		if (aModelsActions != null) {
+			result = aModelsActions.get(model);
+		}
+		// no else.
+
+		else {
+			aModelsActions = new HashMap<IModelInstance, ModelInstanceSelectionAction>();
 		}
 
-		return action;
+		if (result == null) {
+
+			result = new ModelInstanceSelectionAction(model, modelInstance);
+
+			aModelsActions.put(modelInstance, result);
+			this.myModelInstanceSelectionActions.put(model, aModelsActions);
+
+			if (ModelBusPlugin.getModelRegistry().getActiveModel() == model) {
+				getMenu().add(result);
+			}
+			// no else.
+
+			this.getViewSite().getActionBars().updateActionBars();
+		}
+		// no else.
+
+		return result;
 	}
 
 	/**
-	 * Show message.
+	 * <p>
+	 * Initializes the drop-down menu of the view with all
+	 * {@link IModelInstance}s currently registered for the active
+	 * {@link IModel}.
+	 * </p>
+	 */
+	protected void initMenu() {
+		IModel[] allModels;
+		Iterator<IModel> modelIt;
+
+		allModels = ModelBusPlugin.getModelRegistry().getModels();
+		modelIt = Arrays.asList(allModels).iterator();
+
+		/* Iterate through the models and collect all model instances. */
+		while (modelIt.hasNext()) {
+
+			IModel aModel;
+
+			aModel = modelIt.next();
+
+			if (aModel != null) {
+				IModelInstance[] aModelsInstances;
+
+				aModelsInstances = ModelBusPlugin.getModelInstanceRegistry()
+						.getModelInstances(aModel);
+
+				for (int i = 0; i < aModelsInstances.length; i++) {
+					this.addModelInstanceSelectionAction(aModel,
+							aModelsInstances[i]);
+				}
+			}
+			// no else.
+		}
+	}
+
+	/**
+	 * <p>
+	 * Returns the {@link IMenuManager} of this {@link ModelInstancesView}.
+	 * </p>
 	 * 
-	 * @param message
-	 *            the message
+	 * @return The {@link IMenuManager} of this {@link ModelInstancesView}.
 	 */
-	private void showMessage(String message) {
-		MessageDialog.openInformation(viewer.getControl().getShell(),
-				"Model Instance Browser", message);
+	protected IMenuManager getMenu() {
+
+		/* Eventually initialize the menu manager. */
+		if (this.myMenu == null) {
+			this.myMenu = getViewSite().getActionBars().getMenuManager();
+		}
+		// no else.
+
+		return this.myMenu;
 	}
 
 	/**
-	 * Passing the focus request to the viewer's control.
-	 */
-	public void setFocus() {
-		viewer.getControl().setFocus();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#activeModelInstanceChanged(tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
-	 */
-	public void activeModelInstanceChanged(ModelInstanceRegistryEvent event) {
-		setActiveModelInstance(event.getAffectedModel(), event
-				.getAffectedModelInstance());
-	}
-
-	/**
-	 * Sets the active model instance.
+	 * <p>
+	 * Rebuilds the menu of this {@link ModelInstancesView}.
+	 * </p>
 	 * 
 	 * @param affectedModel
-	 *            the affected {@link IModel}
+	 *            The affected {@link IModel} for which the menu shall be
+	 *            rebuilt.
+	 */
+	private void rebuildMenu(IModel affectedModel) {
+
+		Map<IModelInstance, ModelInstanceSelectionAction> aModelsSelectionActions;
+
+		this.getMenu().removeAll();
+
+		aModelsSelectionActions = this.myModelInstanceSelectionActions
+				.get(affectedModel);
+
+		/*
+		 * If the given model has any model instances to select, add them to the
+		 * menu as options.
+		 */
+		if (aModelsSelectionActions != null) {
+
+			Collection<ModelInstanceSelectionAction> allActions;
+
+			allActions = aModelsSelectionActions.values();
+
+			if (allActions != null) {
+
+				for (ModelInstanceSelectionAction anAction : allActions) {
+					this.getMenu().add(anAction);
+				}
+				// end for.
+			}
+			// no else.
+
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * Sets the active {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @param affectedModel
+	 *            The affected {@link IModel}.
 	 * @param affectedModelInstance
-	 *            the affected {@link IModelInstance}
+	 *            The affected {@link IModelInstance}.
 	 */
 	private void setActiveModelInstance(IModel affectedModel,
 			IModelInstance affectedModelInstance) {
 
+		/* Check if the model instance is not null. */
 		if (affectedModelInstance != null) {
-			if (lastModelInstance != null)
-				lastModelInstance.getCurrentSlAF().unregisterAdapters();
 
+			ModelInstanceSelectionAction aSelectionAction;
+			Map<IModelInstance, ModelInstanceSelectionAction> aModelsSelectionActions;
+
+			/* Eventually unregister adapters of the last active model instance. */
+			if (this.myLastModelInstance != null) {
+				this.myLastModelInstance.getCurrentSlAF().unregisterAdapters();
+			}
+			// no else.
+
+			/*
+			 * Register the adapters and store the model instance as new last
+			 * one.
+			 */
 			affectedModelInstance.getCurrentSlAF().registerAdapters();
-			lastModelInstance = affectedModelInstance;
+			this.myLastModelInstance = affectedModelInstance;
 
-			ModelInstanceSelectionAction action = null;
-
-			Map<IModelInstance, ModelInstanceSelectionAction> actions = modelInstanceSelectionActions
+			/* Get the selection actions of the affected model. */
+			aSelectionAction = null;
+			aModelsSelectionActions = this.myModelInstanceSelectionActions
 					.get(affectedModel);
 
-			if (actions != null)
-				action = actions.get(affectedModelInstance);
+			if (aModelsSelectionActions != null) {
+				aSelectionAction = aModelsSelectionActions
+						.get(affectedModelInstance);
+			}
+			// no else.
 
+			/* Check if the affected model is the active model. */
 			if (affectedModel == ModelBusPlugin.getModelRegistry()
 					.getActiveModel()) {
-				ModelInstanceSelectionAction modelInstanceSelectedAction = null;
-				if (selectedAction != null)
-					modelInstanceSelectedAction = selectedAction
+
+				ModelInstanceSelectionAction theLastSelectionAction;
+
+				/* Get the last selection action. */
+				if (this.mySelectedAction != null) {
+					theLastSelectionAction = this.mySelectedAction
 							.get(affectedModel);
-
-				if (action != null) {
-
-					if (modelInstanceSelectedAction != null) {
-						modelInstanceSelectedAction.setChecked(false);
-					}
-
-					action.setChecked(true);
-					if (selectedAction == null)
-						selectedAction = new HashMap<IModel, ModelInstanceSelectionAction>();
-					selectedAction.put(affectedModel, action);
-				} else {
-					// this should not happen
-					throw new IllegalStateException(
-							"No model instance selection action has been created for model instance '" //$NON-NLS-1$
-									+ affectedModelInstance.getDisplayName()
-									+ "'"); //$NON-NLS-1$
 				}
 
-				if (viewer.getInput() == null && affectedModelInstance != null
-						|| viewer.getInput() != null
-						&& viewer.getInput() != affectedModelInstance) {
+				else {
+					theLastSelectionAction = null;
+				}
+
+				/* Eventually store the new selection action as new last one. */
+				if (aSelectionAction != null) {
+
+					if (theLastSelectionAction != null) {
+						theLastSelectionAction.setChecked(false);
+					}
+
+					aSelectionAction.setChecked(true);
+
+					if (this.mySelectedAction == null) {
+						this.mySelectedAction = new HashMap<IModel, ModelInstanceSelectionAction>();
+					}
+					// no else.
+
+					this.mySelectedAction.put(affectedModel, aSelectionAction);
+				}
+
+				else {
+					String msg;
+
+					msg = "No model instance selection action has been created ";
+					msg += "for model instance '";
+					msg += affectedModelInstance.getDisplayName() + "'";
+
+					throw new IllegalStateException(msg);
+				}
+
+				if (myViewer.getInput() == null
+						&& affectedModelInstance != null
+						|| myViewer.getInput() != null
+						&& myViewer.getInput() != affectedModelInstance) {
 					setInput(affectedModelInstance);
 				}
 
 			}
-		} else {
-			viewer.setInput(null);
+			// no else.
+		}
+
+		/* Else the tree viewer gets a null input. */
+		else {
+			this.myViewer.setInput(null);
 		}
 	}
 
 	/**
-	 * Sets the input.
+	 * <p>
+	 * Sets a given {@link IModelInstance} as new input.
+	 * </p>
 	 * 
 	 * @param affectedModelInstance
-	 *            the new input
+	 *            The new input which shall be set.
 	 */
 	private void setInput(IModelInstance affectedModelInstance) {
 
-		viewer.setInput(affectedModelInstance);
-		viewer.refresh();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#modelInstanceAdded(tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
-	 */
-	public void modelInstanceAdded(ModelInstanceRegistryEvent event) {
-		addModelInstanceSelectionAction(event.getAffectedModel(), event
-				.getAffectedModelInstance());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#activeModelChanged(tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
-	 */
-	public void activeModelChanged(ModelRegistryEvent e) {
-		rebuildMenu(e.getAffectedModel());
-		setActiveModelInstance(e.getAffectedModel(), ModelBusPlugin
-				.getModelInstanceRegistry().getActiveModelInstance(
-						e.getAffectedModel()));
-	}
-
-	/**
-	 * Rebuild menu.
-	 * 
-	 * @param affectedModel
-	 *            the affected model
-	 */
-	private void rebuildMenu(IModel affectedModel) {
-		getMenu().removeAll();
-		Map<IModelInstance, ModelInstanceSelectionAction> actionsmap = modelInstanceSelectionActions
-				.get(affectedModel);
-		if (actionsmap != null) {
-			Collection<ModelInstanceSelectionAction> actions = actionsmap
-					.values();
-			if (actions != null) {
-				Iterator<ModelInstanceSelectionAction> actionsIt = actions
-						.iterator();
-				while (actionsIt.hasNext())
-					getMenu().add(actionsIt.next());
-			}
-
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded(tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
-	 */
-	public void modelAdded(ModelRegistryEvent e) {
-		rebuildMenu(e.getAffectedModel());
-		setActiveModelInstance(e.getAffectedModel(), ModelBusPlugin
-				.getModelInstanceRegistry().getActiveModelInstance(
-						e.getAffectedModel()));
-	}
-
-	/**
-	 * The Class ModelInstanceSelectionAction.
-	 */
-	protected class ModelInstanceSelectionAction extends Action implements
-			IAction {
-
-		// The model instance
-		private IModelInstance modelInstance;
-
-		// The model
-		private IModel model;
-
-		/**
-		 * Instantiates a new model instance selection action.
-		 * 
-		 * @param model
-		 *            the model
-		 * @param modelInstance
-		 *            the model instance
-		 */
-		protected ModelInstanceSelectionAction(IModel model,
-				IModelInstance modelInstance) {
-			super(modelInstance.getDisplayName(), IAction.AS_RADIO_BUTTON);
-
-			this.model = model;
-			this.modelInstance = modelInstance;
-
-			setId(modelInstance.toString());
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.action.Action#run()
-		 */
-		public void run() {
-			ModelBusPlugin.getModelInstanceRegistry().setActiveModelInstance(
-					model, modelInstance);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Object#toString()
-		 */
-		public String toString() {
-			return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-					.append("modelInstance", modelInstance).toString();
-		}
-	}
-
-	// The actual filter
-	private ModelObjectFilter actualFilter = new ModelObjectFilter();
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart,
-	 *      org.eclipse.jface.viewers.ISelection)
-	 */
-	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (part instanceof ModelsView) {
-			if (selection instanceof TreeSelection) {
-				viewer.removeFilter(actualFilter);
-				actualFilter.clearFilter();
-				Iterator selIt = ((TreeSelection) selection).iterator();
-				while (selIt.hasNext()) {
-					Object o = selIt.next();
-					if (o instanceof Constraint) {
-						actualFilter.addFilter(Arrays
-								.asList(((NamedElement) ((Constraint) o)
-										.getConstrainedElement().get(0))
-										.getQualifiedName().split("::")));
-					}
-				}
-				viewer.addFilter(actualFilter);
-				viewer.refresh();
-			}
-		}
+		this.myViewer.setInput(affectedModelInstance);
+		this.myViewer.refresh();
 	}
 }

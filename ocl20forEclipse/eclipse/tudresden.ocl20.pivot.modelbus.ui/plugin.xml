@@ -39,7 +39,7 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="Dresden OCL2 Toolkit"
+            name="Dresden OCL2 for Eclipse"
             id="tudresden.ocl20.views.category">
       </category>
       <view
@@ -52,7 +52,7 @@
       <view
             category="tudresden.ocl20.views.category"
             class="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView"
-            icon="icons/sample.gif"
+            icon="icons/models.gif"
             id="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView"
             name="Model Instance Browser">
       </view>
