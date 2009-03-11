@@ -1,0 +1,23 @@
+\subsection{Interpretation of constraints}
+	
+The interpretation of constraints is possible via the \textit{Interpreter View}. Eventually you have to open the \textit{View} via the menu option ``Window > Show View > Other...'' and select ``TU Dresden OCL2 Toolkit > Interpreter''.
+	
+The \textit{Interpeter View} provides a context menu containing all needed functionality. The context menu is shown in figure \ref{pic:IntViewMen} (You can open the context menu via the little triangle in the right top corner of the \textit{Interpreter View}).
+	
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/IntViewMen}
+	\caption{The context menu of the \textit{Interpreter View}.}
+	\label{pic:IntViewMen}
+\end{figure}
+	
+For the interpretation of constraints you can use the functions ``Interpret~...'' in the context menu. First you can select constraints you want to interpret in the \textit{Model Browser} and the model objects for which the constraints should be interpreted in the \textit{Model Instance Browser}. The \textit{Model Instance Browser} shows only the model objects, for which you can interpret the constraints selected before.
+	
+In the \textit{interpreter menu} you can select the types you want to interpret (invariants, pre and post conditions). After interpretation the table in the \textit{Interpreter View} shows all results. These are filtered by the selection of constraints and model objects. Figure \ref{pic:IntView} shows a table with some results. If the column ``Result'' does not contain enough space for a result, you can open a result via a double mouse click in a new window.
+	
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/IntView}
+	\caption{Some results in the \textit{Interpreter View}.}
+	\label{pic:IntView}
+\end{figure}

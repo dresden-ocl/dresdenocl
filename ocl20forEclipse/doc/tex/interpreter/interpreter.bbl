@@ -7,12 +7,12 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[DOT09]{ToolkitHP}
+\bibitem[DOT09]{WWW:toolkit}
 \emph{Website of the Dresden OCL2 Toolkit}.
 \newblock Website hosted by Sourceforge.net, 2009. --
 \newblock Available at http://dresden-ocl.sourceforge.net/
 
-\bibitem[Ecl09]{Ecl}
+\bibitem[Ecl09]{WWW:Eclipse}
 \emph{Eclipse Website}.
 \newblock Eclipse Website hosted by the the Eclipse Foundation., 2009. --
 \newblock Available at http://www.eclipse.org/
@@ -23,17 +23,10 @@
 \newblock Published at the Dresden OCL Toolkit Website., March 2009. --
 \newblock Available at http://dresden-ocl.sourceforge.net/4eclipse\_usage.html
 
-\bibitem[Wil09a]{tut:examples}
+\bibitem[Wil09]{tut:examples}
 \textsc{Wilke}, Claas:
 \newblock \emph{Examples provided with Dresden OCL2 for Eclipse}.
 \newblock Published at the Dresden OCL Toolkit Website., February 2009. --
 \newblock Available at http://dresden-ocl.sourceforge.net/4eclipse\_usage.html
-
-\bibitem[Wil09b]{GB:Wilke}
-\textsc{Wilke}, Claas:
-\newblock \emph{Java Code Generation for Dresden OCL2 for Eclipse}.
-\newblock Groﬂer Beleg, February 2009. --
-\newblock Available at
-  http://dresden-ocl.sourceforge.net/publications.html\#theses
 
 \end{thebibliography}
