@@ -20,6 +20,7 @@ public class ModelProviderClass {
 
 		Person person1;
 		Person person2;
+		Person person3;
 
 		result = new ArrayList<Object>();
 
@@ -32,6 +33,11 @@ public class ModelProviderClass {
 		person2.setName("Prof. Invalid");
 		person2.setAge(-42);
 		result.add(person2);
+
+		person3 = new Person();
+		person3.setName("Person Unspecific");
+		person3.setAge(25);
+		result.add(person3);
 
 		return result;
 	}

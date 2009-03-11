@@ -1,0 +1,30 @@
+package tudresden::ocl20::pivot::examples::simple
+
+-- The age of Person can not be negative.
+context Person
+inv: age >= 0
+
+-- Students should be 16 or older.
+context Student
+inv: age > 16
+
+-- Proffesors should be at least 30.
+context Professor
+inv: not (age < 30)
+
+
+-- Returns the age of a Person.
+context Person
+def: getAge(): Integer = age
+
+
+-- Before returning the age, the age must be defined.
+context Person::getAge()
+pre: not age.oclIsUndefined()
+
+
+-- The result of getAge must equal to the age of a Person.
+context Person::getAge()
+post: result = age
+
+endpackage

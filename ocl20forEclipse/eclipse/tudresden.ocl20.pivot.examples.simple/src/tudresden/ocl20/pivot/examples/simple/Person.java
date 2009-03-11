@@ -1,6 +1,6 @@
 package tudresden.ocl20.pivot.examples.simple;
 
-public abstract class Person {
+public class Person {
 	
 	protected int age;
 	
@@ -20,6 +20,20 @@ public abstract class Person {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		
+		String result;
+		
+		result = "Person[Name='" + this.name;
+		result += "', age=" + this.age + "]";
+		
+		return result;
 	}
 
 }
