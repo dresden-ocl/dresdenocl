@@ -43,6 +43,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
@@ -114,6 +115,22 @@ public class ModelInstancesView extends ViewPart implements
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
+	 */
+	public void dispose() {
+
+		/* Remove this view as listener of related plug-ins. */
+		ModelBusPlugin.getModelRegistry().removeModelRegistryListener(this);
+		ModelBusPlugin.getModelInstanceRegistry()
+				.removeModelInstanceRegistryListener(this);
+
+		((ISelectionService) getSite().getService(ISelectionService.class))
+				.removeSelectionListener(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
@@ -170,9 +187,9 @@ public class ModelInstancesView extends ViewPart implements
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent e) {
-	
+
 		this.rebuildMenu(e.getAffectedModel());
-	
+
 		this.setActiveModelInstance(e.getAffectedModel(), ModelBusPlugin
 				.getModelInstanceRegistry().getActiveModelInstance(
 						e.getAffectedModel()));
@@ -220,7 +237,7 @@ public class ModelInstancesView extends ViewPart implements
 					Object anObject;
 
 					anObject = aSelectionIt.next();
-					
+
 					this.myModelObjectFilter.addFilter(anObject);
 				}
 				// end while.

@@ -54,6 +54,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
@@ -139,6 +140,26 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 				.addModelInstanceRegistryListener(this);
 		InterpreterPlugin.getInterpreterRegistry()
 				.addInterpreterRegistryListener(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
+	 */
+	public void dispose() {
+
+		/* Remove this view as listener of related plug-ins. */
+		ModelBusPlugin.getModelRegistry().removeModelRegistryListener(this);
+		ModelBusPlugin.getModelInstanceRegistry()
+				.removeModelInstanceRegistryListener(this);
+		InterpreterPlugin.getInterpreterRegistry()
+				.removeInterpreterRegistryListener(this);
+
+		((ISelectionService) getSite().getService(ISelectionService.class))
+				.removeSelectionListener(this);
+
+		super.dispose();
 	}
 
 	/*
