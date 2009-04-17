@@ -5,3 +5,4 @@ Bundle-SymbolicName: tudresden.ocl20.pivot.examples.simple.constraints
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
  J2SE-1.5
+Require-Bundle: org.junit4

@@ -10,6 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.ui.ide,
  tudresden.ocl20.logging,
- tudresden.ocl20.pivot.parser,
- tudresden.ocl20.pivot.modelbus
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.modelbus.ui,
+ tudresden.ocl20.pivot.parser
 Eclipse-LazyStart: true

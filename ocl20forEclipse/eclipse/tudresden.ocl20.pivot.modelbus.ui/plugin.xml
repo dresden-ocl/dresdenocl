@@ -50,11 +50,11 @@
             id="tudresden.ocl20.pivot.modelbus.ui.views.models">
       </view>
       <view
+            name="Model Instance Browser"
+            icon="icons/instance.gif"
             category="tudresden.ocl20.views.category"
             class="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView"
-            icon="icons/models.gif"
-            id="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView"
-            name="Model Instance Browser">
+            id="tudresden.ocl20.pivot.modelbus.ui.views.modelinstances">
       </view>
    </extension>
    <extension

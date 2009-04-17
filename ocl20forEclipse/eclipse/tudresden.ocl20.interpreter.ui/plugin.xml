@@ -7,6 +7,16 @@
             id="tudresden.ocl20.interpreter.ui.actionSet"
             label="Interpreter Action Set"
             visible="true">
+         <menu
+               label="Dresden OCL2"
+               id="tudresden.ocl20.pivot.modelbus.ui.menu">
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
+            </separator>
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+            </separator>
+         </menu>
          <action
                label="Open OCL2 Interpreter"
                icon="icons/interpreterview.gif"

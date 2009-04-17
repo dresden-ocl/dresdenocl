@@ -8,8 +8,8 @@
             label="Parser Action Set"
             visible="true">
          <menu
-               id="tudresden.ocl20.pivot.modelbus.ui.menu"
-               label="Dresden OCL2">
+               label="Dresden OCL2"
+               id="tudresden.ocl20.pivot.modelbus.ui.menu">
             <separator
                   name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
             </separator>

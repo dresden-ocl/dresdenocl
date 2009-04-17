@@ -8,6 +8,16 @@
             label="Codegen Action Set"
             visible="true"
             id="tudresden.ocl20.pivot.ocl2java.ui.actionSet">
+         <menu
+               label="Dresden OCL2"
+               id="tudresden.ocl20.pivot.modelbus.ui.menu">
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
+            </separator>
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+            </separator>
+         </menu>
          <action
                label="Generate AspectJ Constraint Code"
                icon="icons/codegen.gif"
