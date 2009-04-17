@@ -4,8 +4,17 @@ tudresden.ocl20.pivot.examples.simple.
 
 This is an AspectJ project!
 ===========================
-Please not that this project uses AspectJ to be executed successfully. 
+Please note that this project uses AspectJ to be executed successfully. 
 To run AspectJ with Eclipse, the AspectJ Development Tools (AJDT) must
 be installed.
 
 The AJDT can be found at http://www.eclipse.org/aspectj/
+
+Eventually you have to convert the project into an AspectJ project by opening
+the context menu with a right mouse click in the package explorer selecting
+the menu function "AspectJ Tools -> Convert into AspectJ Project".
+
+
+This project requires JUnit!
+============================
+Eventually you have to add the jUnit library via the project settings.
