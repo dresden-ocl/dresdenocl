@@ -113,7 +113,9 @@ The model of the example defines three classes: The class \model{Person} has two
 
 To import the \textit{Simple Example} into our Eclipse workspace we create a new Java project into our Workspace called \model{tudresden.ocl20.pivot.examples.\linebreak[0]simple} and use the import wizard \eclipse{General -> Archive File} to import the example provided as jar archive. In the following window we select the directory were the jar file is located (eventually the \model{plugins} directory into the Eclipse root folder) and we select the archive \model{tudresden.ocl20.pivot.examples.simple.\linebreak[0]jar} and click the \eclipse{Finish} button (if you use a source code distribution of \textit{Dresden OCL2 for Eclipse} instead, you can simple import the project \model{tudresden.ocl20.\linebreak[0]pivot.examples.simple} using the import wizard \eclipse{General -> Existing Projects into Workspace}).
 
-Next, we have to import a second project called \model{tudresden.ocl20.pivot.\linebreak[0]examples.simple.constraints}. We can use the same mechanism explained above, but instead of a Java project we now create an AspectJ project before we import the archive file (if the wizard to create an AspectJ project is not available you have to install the \textit{AspectJ Development Tools} first). Figure \ref{pic:packageExplorer} shows the package Explorer containing both imported projects.
+Next, we have to import a second project called \model{tudresden.ocl20.pivot.\linebreak[0]examples.simple.constraints}. We can use the same mechanism explained above, but instead of a Java project we now create an AspectJ project before we import the archive file (if the wizard to create an AspectJ project is not available you have to install the \textit{AspectJ Development Tools} first). \textbf{Eventually you have also to add the JUnit4 library to the project classpath to run the JUnit test case mentioned later on.}
+
+Figure \ref{pic:packageExplorer} shows the package Explorer containing both imported projects.
 
 \begin{figure}[!htbp]
 	\centering
