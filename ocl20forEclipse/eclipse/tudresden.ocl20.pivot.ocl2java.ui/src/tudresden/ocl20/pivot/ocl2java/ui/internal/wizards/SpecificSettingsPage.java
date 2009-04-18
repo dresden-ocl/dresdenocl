@@ -89,12 +89,8 @@ public class SpecificSettingsPage extends WizardPage {
 	 * </p>
 	 * 
 	 * @param selection
-	 * @param settings
-	 *            The settings of the code generator associated with this wizard
-	 *            page.
 	 */
-	public SpecificSettingsPage(IStructuredSelection selection,
-			IOcl2CodeSettings settings) {
+	public SpecificSettingsPage(IOcl2CodeSettings settings) {
 		super("SpecificSettingsPage");
 
 		setTitle(Ocl2JavaUIMessages.SpecificSettingsPage_Title);

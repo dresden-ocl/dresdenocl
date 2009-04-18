@@ -319,16 +319,21 @@ public class SelectDirectoryPage extends WizardPage {
 
 		Object selectedObject;
 
-		selectedObject = selection.getFirstElement();
+		if (selection != null) {
+			selectedObject = selection.getFirstElement();
 
-		if (selectedObject instanceof IResource) {
-			IResource selectedResource = (IResource) selectedObject;
+			if (selectedObject instanceof IResource) {
+				IResource selectedResource = (IResource) selectedObject;
 
-			if (selectedResource.getType() == IResource.FILE) {
-				directoryTextBox.setText(selectedResource.getRawLocation()
-						.toString());
+				if (selectedResource.getType() == IResource.FILE) {
+					directoryTextBox.setText(selectedResource.getRawLocation()
+							.toString());
+				}
+				// no else.
 			}
+			// no else.
 		}
+		// no else.
 	}
 
 	/**

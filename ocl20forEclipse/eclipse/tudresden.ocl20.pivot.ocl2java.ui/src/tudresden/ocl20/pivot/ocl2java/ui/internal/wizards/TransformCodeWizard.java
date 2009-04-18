@@ -133,16 +133,15 @@ public class TransformCodeWizard extends Wizard implements INewWizard {
 		}
 
 		/* Initialize the pages of this Wizard. */
-		this.selectModelPage = new SelectModelPage(selection);
+		this.selectModelPage = new SelectModelPage();
 
-		this.selectConstraintsPage = new SelectConstraintsPage(selection);
+		this.selectConstraintsPage = new SelectConstraintsPage();
 
 		this.selectDirectoryPage = new SelectDirectoryPage(selection);
 
-		this.settingsPage = new SettingsPage(selection, this.myCodeGenerator
-				.getSettings());
+		this.settingsPage = new SettingsPage(this.myCodeGenerator.getSettings());
 
-		this.specificSettingsPage = new SpecificSettingsPage(selection,
+		this.specificSettingsPage = new SpecificSettingsPage(
 				this.myCodeGenerator.getSettings());
 
 		/* This page must observe the Constraint selection. */

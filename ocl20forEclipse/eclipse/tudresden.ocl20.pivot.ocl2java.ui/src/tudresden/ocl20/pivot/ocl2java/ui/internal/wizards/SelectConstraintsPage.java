@@ -106,10 +106,8 @@ public class SelectConstraintsPage extends WizardPage {
 	 * Creates a new SelectModelPage which provides a {@link Constraint}
 	 * selection for an already loaded {@link IModel}.
 	 * </p>
-	 * 
-	 * @param selection
 	 */
-	public SelectConstraintsPage(IStructuredSelection selection) {
+	public SelectConstraintsPage() {
 		super("SelectConstraintsPage");
 
 		setTitle(Ocl2JavaUIMessages.SelectConstraintsPage_Title);

@@ -69,10 +69,8 @@ public class SelectModelPage extends WizardPage {
 	 * Creates a new SelectModelPage which provides a selection of an already
 	 * loaded {@link IModel}.
 	 * </p>
-	 * 
-	 * @param selection
 	 */
-	public SelectModelPage(IStructuredSelection selection) {
+	public SelectModelPage() {
 		super("SelectModelPage");
 
 		setTitle(Ocl2JavaUIMessages.SelectModelPage_Title);

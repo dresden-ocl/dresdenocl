@@ -20,7 +20,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.ocl2java.ui.internal.wizards;
 
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -73,13 +72,11 @@ public class SettingsPage extends WizardPage {
 	 * code generation.
 	 * </p>
 	 * 
-	 * @param selection
 	 * @param settings
 	 *            The settings of the code generator associated with this wizard
 	 *            page.
 	 */
-	public SettingsPage(IStructuredSelection selection,
-			IOcl2CodeSettings settings) {
+	public SettingsPage(IOcl2CodeSettings settings) {
 		super("SettingsPage");
 
 		setTitle(Ocl2JavaUIMessages.SettingsPage_Title);
