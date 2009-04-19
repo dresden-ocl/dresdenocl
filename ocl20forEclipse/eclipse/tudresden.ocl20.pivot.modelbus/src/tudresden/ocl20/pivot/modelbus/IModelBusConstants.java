@@ -43,6 +43,6 @@ public interface IModelBusConstants {
   /**
    * The ID of the class tudresden.ocl20.pivot.modelbus.ui.views.ModelInstancesView.
    */
-  public static final String MODEL_INSTANCES_VIEW_ID = "tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView"; //$NON-NLS-1$
+  public static final String MODEL_INSTANCES_VIEW_ID = "tudresden.ocl20.pivot.modelbus.ui.views.modelinstances"; //$NON-NLS-1$
 
 }

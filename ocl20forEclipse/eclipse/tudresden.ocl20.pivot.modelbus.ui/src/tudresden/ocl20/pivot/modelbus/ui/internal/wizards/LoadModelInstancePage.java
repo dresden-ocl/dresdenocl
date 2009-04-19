@@ -523,7 +523,7 @@ public class LoadModelInstancePage extends WizardPage {
 
 	/**
 	 * <p>
-	 * Initializes the file selection area from the Selecton in the workspace.
+	 * Initializes the file selection area from the Selection in the workspace.
 	 * </p>
 	 * 
 	 * <p>
@@ -536,22 +536,27 @@ public class LoadModelInstancePage extends WizardPage {
 		IResource selectedResource;
 		String fileTextBoxContent;
 
-		selectedObject = selection.getFirstElement();
+		if (this.selection != null) {
+			selectedObject = selection.getFirstElement();
 
-		// Use the name of the first Object in the selection as default text of
-		// the fileNameTextBox.
-		if (selectedObject instanceof IResource) {
+			/*
+			 * Use the name of the first Object in the selection as default text
+			 * of the fileNameTextBox.
+			 */
+			if (selectedObject instanceof IResource) {
 
-			selectedResource = (IResource) selectedObject;
+				selectedResource = (IResource) selectedObject;
 
-			if (selectedResource.getType() == IResource.FILE) {
-				fileTextBoxContent = selectedResource.getRawLocation()
-						.toString();
-				modelInstanceFileTextBox.setText(fileTextBoxContent);
+				if (selectedResource.getType() == IResource.FILE) {
+					fileTextBoxContent = selectedResource.getRawLocation()
+							.toString();
+					modelInstanceFileTextBox.setText(fileTextBoxContent);
+				}
+				// no else
 			}
 			// no else
 		}
-		// no else
+		// no else.
 	}
 
 	/**

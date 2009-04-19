@@ -61,11 +61,23 @@ public class LoadModelWizardAction implements IWorkbenchWindowActionDelegate {
 		LoadModelWizard wizard;
 		WizardDialog dialog;
 
+		ISelection currentSelection;
+		IStructuredSelection currentStructuredSelection;
+
+		/* Get the current selection. */
+		currentSelection = this.window.getSelectionService().getSelection();
+
+		if (currentSelection instanceof IStructuredSelection) {
+			currentStructuredSelection = (IStructuredSelection) currentSelection;
+		}
+
+		else {
+			currentStructuredSelection = null;
+		}
+
 		/* Initialize and start the depending code gen wizard. */
 		wizard = new LoadModelWizard();
-		wizard.init(this.window.getWorkbench(),
-				(IStructuredSelection) this.window.getSelectionService()
-						.getSelection());
+		wizard.init(this.window.getWorkbench(), currentStructuredSelection);
 
 		/* Instantiates the wizard container with the wizard and opens it. */
 		dialog = new WizardDialog(this.window.getShell(), wizard);

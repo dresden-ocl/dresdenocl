@@ -303,18 +303,32 @@ public class LoadModelPage extends WizardPage {
 				});
 	}
 
-	// initializes the file selection area from the selection in the workspace
+	/**
+	 * <p>
+	 * A helper method which initializes the file selection area from the
+	 * selection in the workspace.
+	 * </p>
+	 */
 	private void initializeFromSelection() {
-		Object selectedObject = selection.getFirstElement();
 
-		if (selectedObject instanceof IResource) {
-			IResource selectedResource = (IResource) selectedObject;
+		if (this.selection != null) {
+			Object selectedObject = this.selection.getFirstElement();
 
-			if (selectedResource.getType() == IResource.FILE) {
-				modelFileTextBox.setText(selectedResource.getRawLocation()
-						.toString());
+			if (selectedObject instanceof IResource) {
+
+				IResource selectedResource;
+
+				selectedResource = (IResource) selectedObject;
+
+				if (selectedResource.getType() == IResource.FILE) {
+					modelFileTextBox.setText(selectedResource.getRawLocation()
+							.toString());
+				}
+				// no else.
 			}
+			// no else.
 		}
+		// no else.
 	}
 
 	/**

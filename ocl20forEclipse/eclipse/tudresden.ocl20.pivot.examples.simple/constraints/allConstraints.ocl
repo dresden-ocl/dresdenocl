@@ -8,7 +8,7 @@ inv: age >= 0
 context Student
 inv: age > 16
 
--- Proffesors should be at least 30.
+-- Professors should be at least 30.
 context Professor
 inv: not (age < 30)
 

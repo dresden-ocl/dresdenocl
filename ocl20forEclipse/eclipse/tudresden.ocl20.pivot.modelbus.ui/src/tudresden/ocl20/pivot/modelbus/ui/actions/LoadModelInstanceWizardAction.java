@@ -30,12 +30,14 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelInstanceWizar
 
 /**
  * <p>
- * This class implements an action which starts the {@link LoadModelInstanceWizard}.
+ * This class implements an action which starts the
+ * {@link LoadModelInstanceWizard}.
  * </p>
  * 
  * @see IWorkbenchWindowActionDelegate
  */
-public class LoadModelInstanceWizardAction implements IWorkbenchWindowActionDelegate {
+public class LoadModelInstanceWizardAction implements
+		IWorkbenchWindowActionDelegate {
 
 	/** The window belonging to this Action. */
 	private IWorkbenchWindow window;
@@ -61,11 +63,23 @@ public class LoadModelInstanceWizardAction implements IWorkbenchWindowActionDele
 		LoadModelInstanceWizard wizard;
 		WizardDialog dialog;
 
+		ISelection currentSelection;
+		IStructuredSelection currentStructuredSelection;
+
+		/* Get the current selection. */
+		currentSelection = this.window.getSelectionService().getSelection();
+
+		if (currentSelection instanceof IStructuredSelection) {
+			currentStructuredSelection = (IStructuredSelection) currentSelection;
+		}
+
+		else {
+			currentStructuredSelection = null;
+		}
+
 		/* Initialize and start the depending code gen wizard. */
 		wizard = new LoadModelInstanceWizard();
-		wizard.init(this.window.getWorkbench(),
-				(IStructuredSelection) this.window.getSelectionService()
-						.getSelection());
+		wizard.init(this.window.getWorkbench(), currentStructuredSelection);
 
 		/* Instantiates the wizard container with the wizard and opens it. */
 		dialog = new WizardDialog(this.window.getShell(), wizard);

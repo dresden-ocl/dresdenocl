@@ -61,11 +61,23 @@ public class ParseOCLWizardAction implements IWorkbenchWindowActionDelegate {
 		ParseOCLWizard wizard;
 		WizardDialog dialog;
 
-		/* Initialize and start the depending code gen wizard. */
+		ISelection currentSelection;
+		IStructuredSelection currentStructuredSelection;
+
+		/* Get the current selection. */
+		currentSelection = this.window.getSelectionService().getSelection();
+
+		if (currentSelection instanceof IStructuredSelection) {
+			currentStructuredSelection = (IStructuredSelection) currentSelection;
+		}
+
+		else {
+			currentStructuredSelection = null;
+		}
+
+		/* Initialize and start the depending parser wizard. */
 		wizard = new ParseOCLWizard();
-		wizard.init(this.window.getWorkbench(),
-				(IStructuredSelection) this.window.getSelectionService()
-						.getSelection());
+		wizard.init(this.window.getWorkbench(), currentStructuredSelection);
 
 		/* Instantiates the wizard container with the wizard and opens it. */
 		dialog = new WizardDialog(this.window.getShell(), wizard);

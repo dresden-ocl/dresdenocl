@@ -81,11 +81,11 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		
+
 		this.workbench = workbench;
-	
+
 		setWindowTitle(ModelBusUIMessages.LoadModelInstanceWizard_Title);
-		
+
 		// Initialize the wizard with a LoadModelInstancePage.
 		mainPage = new LoadModelInstancePage(selection);
 	}
@@ -97,9 +97,9 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 	 */
 	@Override
 	public void addPages() {
-	
+
 		super.addPages();
-		
+
 		addPage(mainPage);
 	}
 
@@ -114,10 +114,10 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 		boolean result;
 		IModel model;
 
-		// By default we assume something went wrong.
+		/* By default we assume something went wrong. */
 		result = false;
 
-		// Get the selected model from the mainPage.
+		/* Get the selected model from the mainPage. */
 		model = mainPage.getSelectedModel();
 
 		if (model != null) {
@@ -129,7 +129,7 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 			modelInstanceProvider = model.getModelInstanceProvider();
 			modelInstance = null;
 
-			// load the model instance
+			/* Try to load the model instance. */
 			try {
 				modelInstanceFile = mainPage.getModelInstanceFile();
 				modelInstance = modelInstanceProvider
@@ -147,48 +147,50 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 						+ (e.getMessage() != null ? e.getMessage()
 								: ModelBusUIMessages.LoadModelInstanceWizard_CheckLog);
 
-				// Show an Error Dialog.
+				/* Show an Error Dialog. */
 				MessageDialog.openError(getShell(), dialogTitle, dialogMsg);
 
-				// We need to throw a runtime exception or the wizard will
-				// close afterwards
+				/*
+				 * We need to throw a runtime exception or the wizard will close
+				 * afterwards.
+				 */
 				errorMsg = "An error occured when loading model '" + model + "'"; //$NON-NLS-1$//$NON-NLS-2$
-				
+
 				e.printStackTrace();
-				
+
 				throw new IllegalStateException(errorMsg, e);
 			}
 
-			// Add the successfully loaded model instance to the model instance
-			// registry
+			/*
+			 * Add the successfully loaded model instance to the model instance
+			 * registry.
+			 */
 			IModelInstanceRegistry modelInstanceRegistry;
 			modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
 
 			modelInstanceRegistry.addModelInstance(model, modelInstance);
 
-			// Activate the ModelInstanceView.
+			/* Activate the ModelInstanceView. */
 			try {
 				IWorkbenchWindow workbenchWindow;
 				IWorkbenchPage workbenchPage;
-				
+
 				workbenchWindow = workbench.getActiveWorkbenchWindow();
 				workbenchPage = workbenchWindow.getActivePage();
-				
-				workbenchPage.showView(ModelInstancesView.ID);
-				
-				modelInstanceRegistry.setActiveModelInstance(model, modelInstance);
 
-				// FIXME also select the loaded model instance in the view.
+				workbenchPage.showView(ModelInstancesView.ID);
+
+				modelInstanceRegistry.setActiveModelInstance(model,
+						modelInstance);
+
 				result = true;
 			}
 
 			catch (PartInitException e) {
 				result = false;
 			}
-
 		}
 
 		return result;
 	}
-
 }

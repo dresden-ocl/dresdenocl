@@ -58,132 +58,150 @@ import tudresden.ocl20.pivot.parser.ui.internal.ParserUIMessages;
  */
 public class SelectOCLFilePage extends WizardPage {
 
-  // the editor to select the OCL file
-  private FileFieldEditor fileSelectionEditor;
+	// the editor to select the OCL file
+	private FileFieldEditor fileSelectionEditor;
 
-  // the selection in the workspace before the wizard was started
-  private IStructuredSelection selection;
-  
-  /**
-   * 
-   * @param selection
-   */
-  public SelectOCLFilePage(IStructuredSelection selection) {
-    super("ParseOclPage"); //$NON-NLS-1$
+	// the selection in the workspace before the wizard was started
+	private IStructuredSelection selection;
 
-    this.selection = selection;
+	/**
+	 * 
+	 * @param selection
+	 */
+	public SelectOCLFilePage(IStructuredSelection selection) {
+		super("ParseOclPage"); //$NON-NLS-1$
 
-    setTitle(ParserUIMessages.ParseOCLPage_Title); // NON-NLS-1
-    setDescription(ParserUIMessages.ParseOCLPage_Description);
-  }
+		this.selection = selection;
 
-  /**
-   * Returns the selected file or <code>null</code> if no file has been selected. 
-   * 
-   * @return a <code>File</code> instance or <code>null</code>
-   */
-  public File getSelectedOCLFile() {
-    String fileName = fileSelectionEditor.getStringValue(); 
-    
-    if (fileName.length() != 0) {
-      return new Path(fileName).toFile();
-    }
-    
-    return null;
-  }
-  
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
-   */
-  public void createControl(Composite parent) {
-    Composite panel;
-    GridLayout layout;
+		setTitle(ParserUIMessages.ParseOCLPage_Title); // NON-NLS-1
+		setDescription(ParserUIMessages.ParseOCLPage_Description);
+	}
 
-    // create panel
-    panel = new Composite(parent,SWT.NONE);
+	/**
+	 * Returns the selected file or <code>null</code> if no file has been
+	 * selected.
+	 * 
+	 * @return a <code>File</code> instance or <code>null</code>
+	 */
+	public File getSelectedOCLFile() {
+		String fileName = fileSelectionEditor.getStringValue();
 
-    // set panel attributes
-    layout = new GridLayout(1,true);
-    layout.verticalSpacing = 20;
-    panel.setLayout(layout);
-    panel.setFont(parent.getFont());
+		if (fileName.length() != 0) {
+			return new Path(fileName).toFile();
+		}
 
-    // create UI elements
-    createFileSelectionGroup(panel);
+		return null;
+	}
 
-    // set font
-    Dialog.applyDialogFont(parent);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
+	 * .Composite)
+	 */
+	public void createControl(Composite parent) {
+		Composite panel;
+		GridLayout layout;
 
-    // connect the wizard page with the wizard
-    setControl(panel);
-    
-    // set initial selection
-    initializeFromSelection();
-    updatePageComplete();
-  }
+		// create panel
+		panel = new Composite(parent, SWT.NONE);
 
-  /**
-   * Creates the file selection area in the top part of the wizard.
-   */
-  private void createFileSelectionGroup(Composite parent) {
-    Composite fileSelectionArea;
-    GridLayout fileSelectionLayout;
+		// set panel attributes
+		layout = new GridLayout(1, true);
+		layout.verticalSpacing = 20;
+		panel.setLayout(layout);
+		panel.setFont(parent.getFont());
 
-    fileSelectionArea = new Composite(parent,SWT.NONE);
-    fileSelectionArea.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		// create UI elements
+		createFileSelectionGroup(panel);
 
-    // configure layout of file selection area
-    fileSelectionLayout = new GridLayout();
-    fileSelectionLayout.numColumns = 3;
-    fileSelectionLayout.makeColumnsEqualWidth = false;
-    fileSelectionLayout.marginWidth = 0;
-    fileSelectionLayout.marginHeight = 0;
-    fileSelectionArea.setLayout(fileSelectionLayout);
+		// set font
+		Dialog.applyDialogFont(parent);
 
-    fileSelectionEditor = new FileFieldEditor("oclFile",ParserUIMessages.ParseOCLPage_SelectOCLFileLabel,fileSelectionArea); //$NON-NLS-1$
-    fileSelectionEditor.setFileExtensions(getFileExtensions());
+		// connect the wizard page with the wizard
+		setControl(panel);
 
-    fileSelectionEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+		// set initial selection
+		initializeFromSelection();
+		updatePageComplete();
+	}
 
-      public void propertyChange(PropertyChangeEvent event) {
-        
-        if (event.getProperty().equals(FieldEditor.VALUE)) {
-          updatePageComplete();
-        }
-        
-      }
-      
-    });
+	/**
+	 * Creates the file selection area in the top part of the wizard.
+	 */
+	private void createFileSelectionGroup(Composite parent) {
+		Composite fileSelectionArea;
+		GridLayout fileSelectionLayout;
 
-  }
+		fileSelectionArea = new Composite(parent, SWT.NONE);
+		fileSelectionArea.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-  // initializes the file selection area from the selecton in the workspace
-  private void initializeFromSelection() {
-    Object selectedObject = selection.getFirstElement();
+		// configure layout of file selection area
+		fileSelectionLayout = new GridLayout();
+		fileSelectionLayout.numColumns = 3;
+		fileSelectionLayout.makeColumnsEqualWidth = false;
+		fileSelectionLayout.marginWidth = 0;
+		fileSelectionLayout.marginHeight = 0;
+		fileSelectionArea.setLayout(fileSelectionLayout);
 
-    if (selectedObject instanceof IResource) {
-      IResource selectedResource = (IResource) selectedObject;
+		fileSelectionEditor = new FileFieldEditor(
+				"oclFile", ParserUIMessages.ParseOCLPage_SelectOCLFileLabel, fileSelectionArea); //$NON-NLS-1$
+		fileSelectionEditor.setFileExtensions(getFileExtensions());
 
-      if (selectedResource.getType() == IResource.FILE) {
-        fileSelectionEditor.setStringValue(selectedResource.getRawLocation().toString());
-      }
-    }
-  }
+		fileSelectionEditor
+				.setPropertyChangeListener(new IPropertyChangeListener() {
 
-  /**
-   * Returns the file extensions accepted by the file editor of this page.
-   */
-  protected String[] getFileExtensions() {
-    return new String[] { "*.ocl" }; //$NON-NLS-1$
-  }
+					public void propertyChange(PropertyChangeEvent event) {
 
-  /**
-   * Helper method to update the completion status of this page.
-   */
-  protected void updatePageComplete() {
-    setPageComplete(fileSelectionEditor.isValid());
-  }
+						if (event.getProperty().equals(FieldEditor.VALUE)) {
+							updatePageComplete();
+						}
+
+					}
+
+				});
+
+	}
+
+	/**
+	 * <p>
+	 * A helper method which initializes the file selection area from the
+	 * selection in the workspace.
+	 * </p>
+	 */
+	private void initializeFromSelection() {
+
+		if (this.selection != null) {
+
+			Object selectedObject = this.selection.getFirstElement();
+
+			if (selectedObject instanceof IResource) {
+				IResource selectedResource = (IResource) selectedObject;
+
+				if (selectedResource.getType() == IResource.FILE) {
+					this.fileSelectionEditor.setStringValue(selectedResource
+							.getRawLocation().toString());
+				}
+				// no else.
+			}
+			// no else.
+		}
+		// no else.
+	}
+
+	/**
+	 * Returns the file extensions accepted by the file editor of this page.
+	 */
+	protected String[] getFileExtensions() {
+		return new String[] { "*.ocl" }; //$NON-NLS-1$
+	}
+
+	/**
+	 * Helper method to update the completion status of this page.
+	 */
+	protected void updatePageComplete() {
+		setPageComplete(fileSelectionEditor.isValid());
+	}
 
 }
