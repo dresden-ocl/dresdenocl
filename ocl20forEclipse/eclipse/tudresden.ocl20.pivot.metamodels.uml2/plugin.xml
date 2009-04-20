@@ -7,7 +7,7 @@
             icon="icons/UML2.gif"
             id="tudresden.ocl20.pivot.metamodels.uml2"
             modelProvider="tudresden.ocl20.pivot.metamodels.uml2.internal.provider.UML2ModelProvider"
-            name="UML2">
+            name="UML2 (Eclipse MDT)">
       </metamodel>
    </extension>
 </plugin>
