@@ -5,7 +5,7 @@
          point="tudresden.ocl20.pivot.modelbus.modelinstancetypes">
       <modelinstancetype
             icon="icons/ecorexml.gif"
-            id="tudresden.ocl20.pivot.modelinstancetype.ecore.modelinstancetype3"
+            id="tudresden.ocl20.pivot.modelinstancetype.ecore"
             modelInstanceProvider="tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider.EcoreModelInstanceProvider"
             name="EMF Ecore Instance (XML file)">
       </modelinstancetype>
