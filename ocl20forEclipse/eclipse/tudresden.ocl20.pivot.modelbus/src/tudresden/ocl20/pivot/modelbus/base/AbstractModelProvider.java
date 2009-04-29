@@ -129,5 +129,4 @@ public abstract class AbstractModelProvider implements IModelProvider {
 
     return model;
   }
-
 }

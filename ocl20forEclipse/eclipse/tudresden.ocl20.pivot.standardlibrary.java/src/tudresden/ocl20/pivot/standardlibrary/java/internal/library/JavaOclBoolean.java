@@ -138,7 +138,7 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 			result = JavaOclInvalid.getInstance();
 		}
 	
-		if (this.isTrue()) {
+		else if (this.isTrue()) {
 			result = thenStatement;
 		}
 	
@@ -160,7 +160,14 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
+		/* Check if this boolean is undefined. */
+		if (this.isOclUndefined().isTrue()) {
+			result = this;
+		}
+
+		else {
 		result = this.not().or(this.and(aBoolean));
+		}
 
 		return result;
 	}

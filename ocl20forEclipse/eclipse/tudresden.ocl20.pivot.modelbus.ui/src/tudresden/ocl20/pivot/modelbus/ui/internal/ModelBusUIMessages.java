@@ -84,14 +84,20 @@ public class ModelBusUIMessages extends NLS {
 	public static String LoadModelInstancePage_ErrorMsgModelFileNotExisting;
 
 	public static String LoadModelInstancePage_LocationLabelText;
+	
+	public static String LoadModelInstancePage_MessagePleaseLoadModelFirst;
 
 	public static String LoadModelInstancePage_MessagePleaseChooseModel;
 
 	public static String LoadModelInstancePage_ModelFileGroupText;
 
-	public static String LoadModelInstancePage_SelectMetamodelErrorMessage;
+	public static String LoadModelInstancePage_SelectModelErrorMessage;
 
 	public static String LoadModelInstancePage_SelectMetamodelLabel;
+
+	public static String LoadModelInstancePage_SelectModelInstanceTypeLabel;
+	
+	public static String LoadModelInstancePage_SelectModelInstanceTypeErrorMessage;
 
 	public static String LoadModelInstancePage_Title;
 

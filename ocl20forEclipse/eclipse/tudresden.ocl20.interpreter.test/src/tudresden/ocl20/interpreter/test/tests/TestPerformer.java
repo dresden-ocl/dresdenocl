@@ -49,17 +49,20 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclString
  */
 public class TestPerformer {
 
-	/** The package of the UML2 meta model. */
-	protected final static String META_MODEL_BUNDLE = "tudresden.ocl20.pivot.metamodels.uml2";
+	/** The package of the meta model. */
+	private String metaModel;
 
 	/** The name of the bundle of the model file. */
-	protected final static String MODEL_BUNDLE = "tudresden.ocl20.pivot.examples.royalandloyal";
+	private String modelInstanceType;
+
+	/** The name of the bundle of the model file. */
+	private String modelBundle;
 
 	/** The path of the UML model file. */
-	protected final static String MODEL_FILE_NAME = "model/royalsandloyals.uml";
+	private String modelFile;
 
 	/** The path of the UML model instance file. */
-	protected final static String MODEL_INSTANCE_FILE_NAME = "bin/tudresden/ocl20/pivot/examples/royalsandloyals/ModelProviderClass.class";
+	private String modelInstanceFile;
 
 	/**
 	 * Contains the directory where the OCL files are stored which shall be
@@ -96,55 +99,10 @@ public class TestPerformer {
 	 * This constructor loads the UML2 meta model, the UML2 model and the model
 	 * instance.
 	 * </p>
-	 * 
-	 * @throws RuntimeException
-	 *             Is thrown if any error occurred while loading the model or
-	 *             the meta model.
 	 */
-	public TestPerformer() throws RuntimeException {
+	public TestPerformer() {
 
 		super();
-
-		/* Try to load model and meta model. */
-		try {
-
-			this.myUML2MetaModel = ModelBusPlugin.getMetamodelRegistry()
-					.getMetamodel(META_MODEL_BUNDLE);
-
-			if (myUML2MetaModel == null) {
-				throw new RuntimeException(
-						"Unable to load UML2 meta model during test.");
-			}
-			// no else.
-
-			/* Get the bundle location for the model files. */
-			fileDirectory = Platform.getBundle(MODEL_BUNDLE).getLocation();
-
-			/* Remove the 'reference:file:' from the beginning. */
-			fileDirectory = fileDirectory.substring(15);
-
-			/* Load the model. */
-			this.loadUML2Model(MODEL_FILE_NAME);
-
-			/* Load the model instance. */
-			this.loadModelInstance(MODEL_INSTANCE_FILE_NAME);
-
-			/* Initialize the set containing already interpreted constraints. */
-			this.interpretedConstraints = new HashSet<Constraint>();
-
-			/* Initialize the global environment. */
-			this.myGlobalEnvironment = Environment.getGlobalEnvironment();
-			this.myGlobalEnvironment.setModelInstance(this.myModelInstance);
-
-			/* Initialize the interpreter. */
-			this.myInterpreter = new OclInterpreter(this.myGlobalEnvironment);
-			this.myInterpreter.setUseCache(false);
-		}
-
-		catch (Exception e) {
-			throw new RuntimeException(
-					"Unable to initialize the test. Reason: " + e.getMessage());
-		}
 	}
 
 	/**
@@ -204,6 +162,60 @@ public class TestPerformer {
 
 		return result;
 
+	}
+
+	/**
+	 * <p>
+	 * Initializes the {@link TestPerformer} after all required parameters are
+	 * set.
+	 * </p>
+	 * 
+	 * @throws RuntimeException
+	 *             Is thrown if any error occurred while loading the model or
+	 *             the meta model.
+	 */
+	public void init() throws RuntimeException {
+
+		/* Try to load model and meta model. */
+		try {
+
+			this.myUML2MetaModel = ModelBusPlugin.getMetamodelRegistry()
+					.getMetamodel(metaModel);
+
+			if (myUML2MetaModel == null) {
+				throw new RuntimeException(
+						"Unable to load UML2 meta model during test.");
+			}
+			// no else.
+
+			/* Get the bundle location for the model files. */
+			fileDirectory = Platform.getBundle(modelBundle).getLocation();
+
+			/* Remove the 'reference:file:' from the beginning. */
+			fileDirectory = fileDirectory.substring(15);
+
+			/* Load the model. */
+			this.loadUML2Model(modelFile);
+
+			/* Load the model instance. */
+			this.loadModelInstance(modelInstanceFile);
+
+			/* Initialize the set containing already interpreted constraints. */
+			this.interpretedConstraints = new HashSet<Constraint>();
+
+			/* Initialize the global environment. */
+			this.myGlobalEnvironment = Environment.getGlobalEnvironment();
+			this.myGlobalEnvironment.setModelInstance(this.myModelInstance);
+
+			/* Initialize the interpreter. */
+			this.myInterpreter = new OclInterpreter(this.myGlobalEnvironment);
+			this.myInterpreter.setUseCache(false);
+		}
+
+		catch (Exception e) {
+			throw new RuntimeException(
+					"Unable to initialize the test. Reason: " + e.getMessage());
+		}
 	}
 
 	/**
@@ -473,7 +485,7 @@ public class TestPerformer {
 		ModelBusPlugin.getModelRegistry().dispose();
 
 		/* Reload the model. */
-		this.loadUML2Model(MODEL_FILE_NAME);
+		this.loadUML2Model(modelFile);
 		this.myModel = ModelBusPlugin.getModelRegistry().getActiveModel();
 
 		/* Try to reset the prepared constraints of the global environment. */
@@ -529,6 +541,66 @@ public class TestPerformer {
 
 		/* Add the variable to the environment. */
 		this.myGlobalEnvironment.addVar(path, null);
+	}
+
+	/**
+	 * <p>
+	 * Sets the meta model of this {@link TestPerformer}.
+	 * </p>
+	 * 
+	 * @param metaModel
+	 *            The meta model for which the test shall be performed.
+	 */
+	public void setMetaModel(String metaModel) {
+		this.metaModel = metaModel;
+	}
+
+	/**
+	 * <p>
+	 * Sets the model bundle of this {@link TestPerformer}.
+	 * </p>
+	 * 
+	 * @param modelBundle
+	 *            The model bundle for which the test shall be performed.
+	 */
+	public void setModelBundle(String modelBundle) {
+		this.modelBundle = modelBundle;
+	}
+
+	/**
+	 * <p>
+	 * Sets the model file of this {@link TestPerformer}.
+	 * </p>
+	 * 
+	 * @param modelFile
+	 *            The model file for which the test shall be performed.
+	 */
+	public void setModelFile(String modelFile) {
+		this.modelFile = modelFile;
+	}
+
+	/**
+	 * <p>
+	 * Sets the model instance of this {@link TestPerformer}.
+	 * </p>
+	 * 
+	 * @param modelInstance
+	 *            The model instance for which the test shall be performed.
+	 */
+	public void setModelInstanceType(String modelInstance) {
+		this.modelInstanceType = modelInstance;
+	}
+
+	/**
+	 * <p>
+	 * Sets the model instance file of this {@link TestPerformer}.
+	 * </p>
+	 * 
+	 * @param modelInstanceFile
+	 *            The model instance file for which the test shall be performed.
+	 */
+	public void setModelInstanceFile(String modelInstanceFile) {
+		this.modelInstanceFile = modelInstanceFile;
 	}
 
 	/**
@@ -618,10 +690,13 @@ public class TestPerformer {
 			IModelInstanceProvider modelInstanceProvider;
 			File modelInstanceFile;
 
-			modelInstanceProvider = myModel.getModelInstanceProvider();
+			modelInstanceProvider = ModelBusPlugin
+					.getModelInstanceTypeRegistry().getModelInstanceType(
+							modelInstanceType).getModelInstanceProvider();
+
 			this.myModelInstance = null;
 
-			// load the model instance
+			/* Load the model instance. */
 			try {
 				modelInstanceFile = new File(fileDirectory
 						+ modelInstanceProviderFileName);
@@ -636,8 +711,8 @@ public class TestPerformer {
 					throw new RuntimeException(msg);
 				}
 
-				this.myModelInstance = modelInstanceProvider
-						.getModelInstance(modelInstanceFile);
+				this.myModelInstance = modelInstanceProvider.getModelInstance(
+						modelInstanceFile, this.myModel);
 			}
 
 			catch (ModelAccessException e) {
@@ -765,5 +840,4 @@ public class TestPerformer {
 
 		return result;
 	}
-
 }

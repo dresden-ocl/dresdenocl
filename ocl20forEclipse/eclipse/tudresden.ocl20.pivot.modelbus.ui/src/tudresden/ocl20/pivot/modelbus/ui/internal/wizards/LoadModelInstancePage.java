@@ -33,88 +33,80 @@ package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
 import java.io.File;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.variables.IStringVariableManager;
-import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.resource.LocalResourceManager;
-import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
-import org.eclipse.ui.model.WorkbenchContentProvider;
-import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.eclipse.ui.views.navigator.ResourceComparator;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseFileListener;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseWorkspaceListener;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.FileBoxListener;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelInstanceTypeLabelProvider;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelLabelProvider;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelViewerListener;
 
 /**
  * <p>
- * A WizardPage used by the LoadModelInstanceWizard to load a new ModelInstance.
+ * A {@link WizardPage} used by the {@link LoadModelInstanceWizard} to load a
+ * new {@link IModelInstance}.
  * </p>
  * 
  * @author Ronny Brandt
  */
-public class LoadModelInstancePage extends WizardPage {
+public class LoadModelInstancePage extends AbstractModelBusPage {
 
-	// The selection
-	protected IStructuredSelection selection;
+	/** The related {@link IStructuredSelection} in the GUI, if any is selected. */
+	private IStructuredSelection selection;
 
-	// The Viewer to show the Models which can be selected.
-	protected StructuredViewer modelViewer;
+	/**
+	 * The {@link StructuredViewer} to show the {@link IModel}s which can be
+	 * selected.
+	 */
+	private StructuredViewer modelViewer;
 
-	// The model instance file text box
-	protected Text modelInstanceFileTextBox;
+	/**
+	 * The {@link StructuredViewer} to show the {@link IModelInstanceType}s
+	 * which can be selected.
+	 */
+	private StructuredViewer miTypeViewer;
+
+	/** The model instance file text box. */
+	private Text modelInstanceFileTextBox;
 
 	/**
 	 * <p>
-	 * Creates a new LoadModelInstancePage.
+	 * Creates a new {@link LoadModelInstancePage}.
 	 * </p>
 	 * 
 	 * @param selection
-	 *            The current object selection.
+	 *            The current {@link IStructuredSelection} or <code>null</code>.
 	 */
 	public LoadModelInstancePage(IStructuredSelection selection) {
 
-		super("LoadModelInstancePage"); //$NON-NLS-1$
+		super("LoadModelInstancePage");
 
 		this.selection = selection;
 
-		setTitle(ModelBusUIMessages.LoadModelInstancePage_Title); // NON-NLS-1
-		setDescription(ModelBusUIMessages.LoadModelInstancePage_Description); // NON
-		// -
-		// NLS
-		// -
-		// 1
+		setTitle(ModelBusUIMessages.LoadModelInstancePage_Title);
+		setDescription(ModelBusUIMessages.LoadModelInstancePage_Description);
 	}
 
 	/*
@@ -129,28 +121,284 @@ public class LoadModelInstancePage extends WizardPage {
 		Composite panel;
 		GridLayout layout;
 
-		// Create panel.
+		/* Create the panel. */
 		panel = new Composite(parent, SWT.NONE);
 
-		// Set Layout and Font.
+		/* Set Layout and Font. */
 		layout = new GridLayout(1, true);
 		layout.verticalSpacing = 20;
 		panel.setLayout(layout);
 		panel.setFont(parent.getFont());
 
-		// Create UI elements
-		createModelInstanceFileGroup(panel);
-		createModelSelectionGroup(panel);
+		/* Create UI elements. */
+		this.createModelInstanceFileGroup(panel);
 
-		// Set the initial selection.
-		initializeFromSelection();
-		updatePageComplete();
+		this.createModelSelectionGroup(panel);
+		this.createModelInstanceTypeSelectionGroup(panel);
 
-		// Apply parent's Font to all Dialogs.
+		/* Set the initial selection. */
+		this.initializeFromSelection();
+		this.updatePageComplete();
+
+		/* Apply parent's Font to all Dialogs. */
 		Dialog.applyDialogFont(parent);
 
-		// Connect the wizard page with the wizard.
+		/* Connect the wizard page with the wizard. */
 		this.setControl(panel);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * #setFileTextBoxText(java.lang.String)
+	 */
+	public void setFileTextBoxText(String aText) {
+		this.modelInstanceFileTextBox.setText(aText);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * #updatePageComplete()
+	 */
+	public void updatePageComplete() {
+	
+		String modelInstanceFileName;
+		IPath modelInstanceFilePath;
+		File modelInstanceFile;
+		boolean complete;
+	
+		/* Reset messages. */
+		setErrorMessage(null);
+		setMessage(null);
+	
+		/* By default the WizardPage is complete. */
+		complete = true;
+	
+		/* Check if a model has been loaded. */
+		if (ModelBusPlugin.getModelRegistry().getModels().length == 0) {
+	
+			this
+					.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_MessagePleaseLoadModelFirst);
+	
+			complete = false;
+		}
+		// no else.
+	
+		/* Eventually continue the check. */
+		if (complete) {
+	
+			/* Read out modelInstanceFileName. */
+			modelInstanceFileName = this.getModelInstanceFileName();
+	
+			/* Check if modelInstanceFileName is empty. */
+			if (modelInstanceFileName.length() == 0) {
+	
+				this
+						.setMessage(ModelBusUIMessages.LoadModelInstancePage_MessagePleaseChooseModel);
+	
+				complete = false;
+			}
+	
+			/* Else try to get the model instance file. */
+			else {
+	
+				/* Substitute variables in String. */
+				modelInstanceFileName = this.decodePath(modelInstanceFileName);
+	
+				if (modelInstanceFileName == null) {
+	
+					this
+							.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_ErrorMsgInvalidVariables);
+	
+					complete = false;
+				}
+	
+				else {
+	
+					/* Create a path for the model instance file file. */
+					modelInstanceFilePath = new Path(modelInstanceFileName);
+	
+					/* Check if model instance file exists. */
+					modelInstanceFile = modelInstanceFilePath.toFile();
+	
+					if (modelInstanceFile == null
+							|| !modelInstanceFile.exists()) {
+						setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_ErrorMsgModelFileNotExisting);
+	
+						complete = false;
+					}
+					// no else.
+				}
+				// end else.
+			}
+			// end else.
+		}
+		// no else.
+	
+		/* Check if a model has been selected. */
+		if (complete && !this.isModelSelected()) {
+	
+			this
+					.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_SelectModelErrorMessage);
+	
+			complete = false;
+		}
+		// no else.
+	
+		/* Check if a model instance type has been selected. */
+		if (complete && !this.isModelInstanceTypeSeleceted()) {
+			this
+					.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_SelectModelInstanceTypeErrorMessage);
+	
+			complete = false;
+		}
+		// no else.
+	
+		this.setPageComplete(complete);
+	}
+
+	/**
+	 * <p>
+	 * Returns the selected {@link IModel} for the {@link IModelInstance} which
+	 * shall be loaded.
+	 * </p>
+	 * 
+	 * @return The selected {@link IModel}.
+	 */
+	public IModel getSelectedModel() {
+
+		IModel result;
+		IStructuredSelection modelViewerSelection;
+
+		modelViewerSelection = (IStructuredSelection) this.modelViewer
+				.getSelection();
+		result = (IModel) modelViewerSelection.getFirstElement();
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Returns the selected {@link IModelInstanceType} for the
+	 * {@link IModelInstance} which shall be loaded.
+	 * </p>
+	 * 
+	 * @return The selected {@link IModelInstanceType}.
+	 */
+	public IModelInstanceType getSelectedModelInstanceType() {
+
+		IModelInstanceType result;
+		IStructuredSelection miTypeViewerSelection;
+
+		miTypeViewerSelection = (IStructuredSelection) this.miTypeViewer
+				.getSelection();
+		result = (IModelInstanceType) miTypeViewerSelection.getFirstElement();
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Returns a {@link File} representing the currently selected
+	 * {@link IModelInstance} file.
+	 * </p>
+	 * 
+	 * @return The selected {@link IModelInstance} file or <code>null</code> if
+	 *         no model instance is selected.
+	 */
+	public File getModelInstanceFile() {
+
+		File result;
+		String modelInstanceFileName;
+
+		/* By default the model instance file is null. */
+		result = null;
+
+		/* Determine the selected model instance file name. */
+		modelInstanceFileName = decodePath(getModelInstanceFileName());
+
+		if (modelInstanceFileName != null) {
+			result = new Path(modelInstanceFileName).toFile();
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates the SWT group that allows selecting the {@link IModelInstance}
+	 * File.
+	 * </p>
+	 * 
+	 * @param parent
+	 *            The parent of the created SWT Group.
+	 */
+	private void createModelInstanceFileGroup(Composite parent) {
+
+		Composite modelFileGroupComposite;
+		Group modelInstanceFileGroup;
+		Label locationLabel, spacer;
+		Button browseWorkspaceButton, browseFileButton;
+		GridLayout layout;
+
+		modelFileGroupComposite = new Composite(parent, SWT.None);
+		modelFileGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
+				true, false));
+
+		/* We need a GridLayout to properly set additional margins. */
+		layout = new GridLayout();
+		modelFileGroupComposite.setLayout(layout);
+
+		/* Create model instance file group and specify properties. */
+		modelInstanceFileGroup = new Group(modelFileGroupComposite, SWT.NONE);
+		modelInstanceFileGroup
+				.setText(ModelBusUIMessages.LoadModelInstancePage_ModelFileGroupText);
+		modelInstanceFileGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE,
+				true, false));
+
+		/* Create another GridLayout for the modelInstanceFileGroup. */
+		layout = new GridLayout(4, false);
+		layout.horizontalSpacing = 10;
+		modelInstanceFileGroup.setLayout(layout);
+		modelInstanceFileGroup.setFont(parent.getFont());
+
+		/* Create locationLabel. */
+		locationLabel = new Label(modelInstanceFileGroup, SWT.None);
+		locationLabel
+				.setText(ModelBusUIMessages.LoadModelInstancePage_LocationLabelText);
+
+		/* Create modelInstanceFileTextBox. */
+		modelInstanceFileTextBox = new Text(modelInstanceFileGroup, SWT.SINGLE
+				| SWT.BORDER);
+		modelInstanceFileTextBox.setLayoutData(new GridData(SWT.FILL,
+				SWT.NORMAL, true, false, 3, 1));
+
+		/* Add ModifyListener to modelInstanceFileTextBox. */
+		modelInstanceFileTextBox.addModifyListener(new FileBoxListener(this));
+
+		/* The spacing label. */
+		spacer = new Label(modelInstanceFileGroup, SWT.NONE);
+		spacer.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true, false, 2,
+				1));
+
+		/* Create the buttons to select files. */
+		browseWorkspaceButton = createButton(
+				modelInstanceFileGroup,
+				ModelBusUIMessages.LoadModelInstancePage_BrowseWorkspaceButtonText);
+		browseFileButton = createButton(
+				modelInstanceFileGroup,
+				ModelBusUIMessages.LoadModelInstancePage_BrowseFileSystemButtonText);
+
+		/* Add listeners to the Buttons */
+		browseWorkspaceButton.addSelectionListener(new BrowseWorkspaceListener(
+				this));
+		browseFileButton.addSelectionListener(new BrowseFileListener(this));
 	}
 
 	/**
@@ -163,362 +411,107 @@ public class LoadModelInstancePage extends WizardPage {
 	 */
 	private void createModelSelectionGroup(Composite parent) {
 
-		Composite metamodelSelectionGroup;
+		Composite modelSelectionGroup;
 		Label explanationText;
 		GridLayout layout;
 		GridData layoutData;
 		GridData modelViewerData;
 
-		// Create metamodelSelectionGroup and specify properties
-		metamodelSelectionGroup = new Composite(parent, SWT.NONE);
-		metamodelSelectionGroup.setFont(parent.getFont());
+		/* Create metamodelSelectionGroup and specify properties. */
+		modelSelectionGroup = new Composite(parent, SWT.NONE);
+		modelSelectionGroup.setFont(parent.getFont());
 
-		// Set layout and its Data.
+		/* Set layout and its Data. */
 		layoutData = new GridData(SWT.FILL, SWT.FILL, true, true);
-		metamodelSelectionGroup.setLayoutData(layoutData);
+		modelSelectionGroup.setLayoutData(layoutData);
 		layout = new GridLayout(1, false);
 		layout.verticalSpacing = 10;
-		metamodelSelectionGroup.setLayout(layout);
+		modelSelectionGroup.setLayout(layout);
 
-		// Create the explanation label
-		explanationText = new Label(metamodelSelectionGroup, SWT.WRAP);
+		/* Create the explanation label. */
+		explanationText = new Label(modelSelectionGroup, SWT.WRAP);
 		explanationText
 				.setText(ModelBusUIMessages.LoadModelInstancePage_SelectMetamodelLabel);
 
-		// Create the modelViewer to display the meta models.
-		modelViewer = new TableViewer(metamodelSelectionGroup, SWT.SINGLE
+		/* Create the modelViewer to display the meta models. */
+		modelViewer = new TableViewer(modelSelectionGroup, SWT.SINGLE
 				| SWT.V_SCROLL | SWT.BORDER);
 		modelViewer.setContentProvider(new ArrayContentProvider());
 		modelViewer.setLabelProvider(new ModelLabelProvider());
 		modelViewer.setInput(ModelBusPlugin.getModelRegistry().getModels());
 
-		// Set modelViewer's LayoutData.
+		/* Set modelViewer's LayoutData. */
 		modelViewerData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		modelViewer.getControl().setLayoutData(modelViewerData);
 
-		// Add a Change Listener to the modelViewer.
-		modelViewer
-				.addSelectionChangedListener(new ISelectionChangedListener() {
-
-					public void selectionChanged(SelectionChangedEvent event) {
-						updatePageComplete();
-					}
-				});
+		/* Add a Change Listener to the modelViewer. */
+		modelViewer.addSelectionChangedListener(new ModelViewerListener(this));
 	}
 
 	/**
 	 * <p>
-	 * The Class ModelLabelProvider.
-	 * </p>
-	 * 
-	 * <p>
-	 * Used by the method <code>createModelSelectionGroup</code>.
-	 * </p>
-	 */
-	protected class ModelLabelProvider extends LabelProvider implements
-			ILabelProvider {
-
-		// helper object to manage associated Icons
-		private ResourceManager resources;
-
-		/**
-		 * Instantiates a new model label provider.
-		 */
-		public ModelLabelProvider() {
-			resources = new LocalResourceManager(JFaceResources.getResources());
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
-		 */
-		@Override
-		public Image getImage(Object element) {
-
-			return null;
-		}
-
-		/**
-		 * <p>
-		 * Simply returns the name of the given {@link IModel}.
-		 * </p>
-		 * 
-		 * @param element
-		 *            The element which name should be returned. <strong>Should
-		 *            be an instance of {@link IModel}!</strong>
-		 * 
-		 * @return the text
-		 */
-		@Override
-		public String getText(Object element) {
-
-			String result;
-			IModel model;
-
-			result = null;
-
-			if (element instanceof IModel) {
-				model = (IModel) element;
-				result = model.getDisplayName();
-			}
-			// no else
-
-			return result;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
-		 */
-		@Override
-		public void dispose() {
-			resources.dispose();
-		}
-
-	}
-
-	/**
-	 * <p>
-	 * Creates the SWT group that allows selecting the modelInstanceFile.
+	 * Creates the {@link IModelInstanceType} selection part of this
+	 * {@link WizardPage}.
 	 * </p>
 	 * 
 	 * @param parent
-	 *            The parent of the created SWT Group.
+	 *            The parent of the model selection part.
 	 */
-	private void createModelInstanceFileGroup(Composite parent) {
-		Composite modelFileGroupComposite;
-		Group modelInstanceFileGroup;
-		Label locationLabel, spacer;
-		Button browseWorkspaceButton, browseFileButton;
+	private void createModelInstanceTypeSelectionGroup(Composite parent) {
+
+		Composite miTypeSelectionGroup;
+		Label explanationText;
 		GridLayout layout;
+		GridData layoutData;
+		GridData miTypeViewerData;
 
-		modelFileGroupComposite = new Composite(parent, SWT.None);
-		modelFileGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
-				true, false));
+		/* Create miTypeSelectionGroup and specify properties. */
+		miTypeSelectionGroup = new Composite(parent, SWT.NONE);
+		miTypeSelectionGroup.setFont(parent.getFont());
 
-		// We need a GridLayout to properly set additional margins.
-		layout = new GridLayout();
-		modelFileGroupComposite.setLayout(layout);
+		/* Set layout and its Data. */
+		layoutData = new GridData(SWT.FILL, SWT.FILL, true, true);
+		miTypeSelectionGroup.setLayoutData(layoutData);
+		layout = new GridLayout(1, false);
+		layout.verticalSpacing = 10;
+		miTypeSelectionGroup.setLayout(layout);
 
-		// create model instance file group and specify properties
-		modelInstanceFileGroup = new Group(modelFileGroupComposite, SWT.NONE);
-		modelInstanceFileGroup
-				.setText(ModelBusUIMessages.LoadModelInstancePage_ModelFileGroupText);
-		modelInstanceFileGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE,
-				true, false));
+		/* Create the explanation label. */
+		explanationText = new Label(miTypeSelectionGroup, SWT.WRAP);
+		explanationText
+				.setText(ModelBusUIMessages.LoadModelInstancePage_SelectModelInstanceTypeLabel);
 
-		// Create another GridLayout for the modelInstanceFileGroup.
-		layout = new GridLayout(4, false);
-		layout.horizontalSpacing = 10;
-		modelInstanceFileGroup.setLayout(layout);
-		modelInstanceFileGroup.setFont(parent.getFont());
+		/* Create the miTypeViewer to display the IModelInstanceTypes. */
+		this.miTypeViewer = new TableViewer(miTypeSelectionGroup, SWT.SINGLE
+				| SWT.V_SCROLL | SWT.BORDER);
+		this.miTypeViewer.setContentProvider(new ArrayContentProvider());
+		this.miTypeViewer
+				.setLabelProvider(new ModelInstanceTypeLabelProvider());
+		this.miTypeViewer.setInput(ModelBusPlugin
+				.getModelInstanceTypeRegistry().getModelInstanceTypes());
 
-		// Create locationLabel
-		locationLabel = new Label(modelInstanceFileGroup, SWT.None);
-		locationLabel
-				.setText(ModelBusUIMessages.LoadModelInstancePage_LocationLabelText);
+		/* Set miTypeViewer's LayoutData. */
+		miTypeViewerData = new GridData(SWT.FILL, SWT.FILL, true, true);
+		this.miTypeViewer.getControl().setLayoutData(miTypeViewerData);
 
-		// Create modelInstanceFileTextBox
-		modelInstanceFileTextBox = new Text(modelInstanceFileGroup, SWT.SINGLE
-				| SWT.BORDER);
-		modelInstanceFileTextBox.setLayoutData(new GridData(SWT.FILL,
-				SWT.NORMAL, true, false, 3, 1));
-
-		// Add ModifyListener to modelInstanceFileTextBox.
-		modelInstanceFileTextBox.addModifyListener(new ModifyListener() {
-
-			public void modifyText(ModifyEvent e) {
-				updatePageComplete();
-			}
-		});
-
-		// Spacing label
-		spacer = new Label(modelInstanceFileGroup, SWT.NONE);
-		spacer.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true, false, 2,
-				1));
-
-		// Create buttons
-		browseWorkspaceButton = createButton(
-				modelInstanceFileGroup,
-				ModelBusUIMessages.LoadModelInstancePage_BrowseWorkspaceButtonText);
-		browseFileButton = createButton(
-				modelInstanceFileGroup,
-				ModelBusUIMessages.LoadModelInstancePage_BrowseFileSystemButtonText);
-
-		// Add listeners to the Buttons
-		browseWorkspaceButton
-				.addSelectionListener(new BrowseWorkspaceListener());
-		browseFileButton.addSelectionListener(new BrowseFileListener());
+		/* Add a Change Listener to the miTypeViewer. */
+		this.miTypeViewer.addSelectionChangedListener(new ModelViewerListener(
+				this));
 	}
 
 	/**
 	 * <p>
-	 * A helper method to create a push button.
+	 * A helper method to return the name of the {@link IModelInstance} file.
 	 * </p>
 	 * 
-	 * @param parent
-	 *            The parent of the Button
-	 * @param label
-	 *            The label to describe the Button.
-	 * 
-	 * @return A created push Button with a given Label and parent.
+	 * @return The {@link IModelInstance} file name.
 	 */
-	protected Button createButton(Composite parent, String label) {
-
-		Button result;
-
-		result = new Button(parent, SWT.PUSH);
-		result.setFont(parent.getFont());
-		result.setText(label);
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * The listener interface for receiving browseWorkspace events. The class
-	 * that is interested in processing a browseWorkspace event implements this
-	 * interface, and the object created with that class is registered with a
-	 * component using the component's <code>addBrowseWorkspaceListener<code>
-	 * method. When the browseWorkspace event occurs, that object's appropriate
-	 * method is invoked.
-	 * </p>
-	 * 
-	 * <p>
-	 * Used by the <code>browseFileButton</code> of this WizardPage.
-	 * </p>
-	 * 
-	 * @see BrowseWorkspaceEvent
-	 */
-	protected class BrowseWorkspaceListener extends SelectionAdapter implements
-			SelectionListener {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse
-		 * .swt.events.SelectionEvent)
-		 */
-		@Override
-		public void widgetSelected(SelectionEvent e) {
-
-			// Dialog to select a File.
-			ElementTreeSelectionDialog dialog;
-			WorkbenchLabelProvider aWorkbenchLabelProvider;
-			WorkbenchContentProvider aWorkbenchContentProvider;
-
-			int pressedButton;
-			IResource resource;
-
-			aWorkbenchLabelProvider = new WorkbenchLabelProvider();
-			aWorkbenchContentProvider = new WorkbenchContentProvider();
-
-			dialog = new ElementTreeSelectionDialog(getShell(),
-					aWorkbenchLabelProvider, aWorkbenchContentProvider);
-
-			// Configure the Dialog properties
-			dialog
-					.setTitle(ModelBusUIMessages.LoadModelInstancePage_BrowseWorkspaceDialogTitle);
-			dialog
-					.setMessage(ModelBusUIMessages.LoadModelInstancePage_BrowseWorkspaceDialogDescription);
-			dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
-			dialog
-					.setComparator(new ResourceComparator(
-							ResourceComparator.NAME));
-			dialog.setAllowMultiple(false);
-
-			// Open the dialog
-			do {
-				pressedButton = dialog.open();
-				resource = (IResource) dialog.getFirstResult();
-			}
-
-			while (pressedButton != IDialogConstants.CANCEL_ID
-					&& resource.getType() != IResource.FILE);
-
-			// If OK was pressed set the File path.
-			if (pressedButton == IDialogConstants.OK_ID) {
-				String fileLoc = encodePath(resource);
-				modelInstanceFileTextBox.setText(fileLoc);
-			}
-		}
-	}
-
-	/**
-	 * <p>
-	 * Helper method to encode a workspace path.
-	 * </p>
-	 * 
-	 * <p>
-	 * Used by the <code>BrowserWorkspaceListener</code>.
-	 * </p>
-	 * 
-	 * @param resource
-	 *            the resource
-	 * 
-	 * @return A String representing a workspace path.
-	 */
-	protected String encodePath(IResource resource) {
-
+	private String getModelInstanceFileName() {
 		String result;
-		VariablesPlugin defaultPlugin;
-		IStringVariableManager stringVariableManager;
-		IPath resourcePath;
 
-		defaultPlugin = VariablesPlugin.getDefault();
-		stringVariableManager = defaultPlugin.getStringVariableManager();
-		resourcePath = resource.getFullPath();
-
-		result = stringVariableManager.generateVariableExpression(
-				"workspace_loc", resourcePath.toString()); //$NON-NLS-1$
+		result = this.modelInstanceFileTextBox.getText().trim();
 
 		return result;
-	}
-
-	/**
-	 * <p>
-	 * The listener interface for receiving browseFile events. The class that is
-	 * interested in processing a browseFile event implements this interface,
-	 * and the object created with that class is registered with a component
-	 * using the component's <code>addBrowseFileListener<code> method. When
-	 * the browseFile event occurs, that object's appropriate
-	 * method is invoked.
-	 * </p>
-	 * 
-	 * <p>
-	 * Used by the <code>browseFileButton</code> of this WizardPage.
-	 * </p>
-	 * 
-	 * @see BrowseFileEvent
-	 */
-	protected class BrowseFileListener extends SelectionAdapter implements
-			SelectionListener {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse
-		 * .swt.events.SelectionEvent)
-		 */
-		@Override
-		public void widgetSelected(SelectionEvent e) {
-			FileDialog dialog;
-			String filePath;
-
-			// Open dialog to select a File.
-			dialog = new FileDialog(getShell(), SWT.OPEN);
-			filePath = dialog.open();
-
-			// If a File was selected, set it's path.
-			if (filePath != null) {
-				modelInstanceFileTextBox.setText(filePath);
-			}
-		}
 	}
 
 	/**
@@ -536,6 +529,10 @@ public class LoadModelInstancePage extends WizardPage {
 		IResource selectedResource;
 		String fileTextBoxContent;
 
+		IModel activeModel;
+		IModelInstanceType[] miTypes;
+
+		/* Eventually use a selected file as default resource for import. */
 		if (this.selection != null) {
 			selectedObject = selection.getFirstElement();
 
@@ -557,89 +554,39 @@ public class LoadModelInstancePage extends WizardPage {
 			// no else
 		}
 		// no else.
+
+		/* By default select the active model instance. */
+		activeModel = ModelBusPlugin.getModelRegistry().getActiveModel();
+
+		if (activeModel != null) {
+			this.modelViewer.setSelection(new StructuredSelection(activeModel));
+		}
+		// no else.
+
+		/* By default select the first model instance type. */
+		miTypes = ModelBusPlugin.getModelInstanceTypeRegistry()
+				.getModelInstanceTypes();
+
+		if (miTypes.length > 0) {
+			this.miTypeViewer.setSelection(new StructuredSelection(miTypes[0]));
+		}
+		// no else.
 	}
 
 	/**
 	 * <p>
-	 * Updates the <code>pageComplete</code> status of the wizard page by
-	 * checking if all required Data is selected and entered.
+	 * A helper method to check whether an {@link IModelInstanceType} has been
+	 * selected.
 	 * </p>
 	 * 
-	 * <p>
-	 * Called if the selection in the <code>metaModelViewer</code> changed or
-	 * the entry in the <code>modelFileTextBox</code> changed.
-	 * </p>
+	 * @return True, if an {@link IModelInstanceType} is selected.
 	 */
-	protected void updatePageComplete() {
-
-		String modelInstanceFileName;
-		IPath modelInstanceFilePath;
-		File modelInstanceFile;
-		boolean complete;
-
-		// Reset messages
-		setErrorMessage(null);
-		setMessage(null);
-
-		// By default the WizardPage is not complete.
-		complete = false;
-
-		// Read out modelInstanceFileName.
-		modelInstanceFileName = getModelInstanceFileName();
-
-		// Check if modelInstanceFileName is empty.
-		if (modelInstanceFileName.length() == 0) {
-			setMessage(ModelBusUIMessages.LoadModelInstancePage_MessagePleaseChooseModel);
-		}
-
-		else {
-
-			// Substitute variables in String.
-			modelInstanceFileName = decodePath(modelInstanceFileName);
-
-			if (modelInstanceFileName == null) {
-				setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_ErrorMsgInvalidVariables);
-			}
-
-			else {
-
-				// Create a path for the project file.
-				modelInstanceFilePath = new Path(modelInstanceFileName);
-
-				// Check if project file exists.
-				modelInstanceFile = modelInstanceFilePath.toFile();
-
-				if (modelInstanceFile == null || !modelInstanceFile.exists()) {
-					setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_ErrorMsgModelFileNotExisting);
-				}
-
-				// Check if a meta model has been selected.
-				else if (isModelSelected()) {
-					complete = true;
-				}
-
-				else {
-					setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_SelectMetamodelErrorMessage);
-				}
-			}
-		}
-
-		setPageComplete(complete);
-	}
-
-	/**
-	 * <p>
-	 * Helper method to check whether a model has been selected.
-	 * </p>
-	 * 
-	 * @return True, if a model is selected.
-	 */
-	private boolean isModelSelected() {
+	private boolean isModelInstanceTypeSeleceted() {
 
 		boolean result;
 		IStructuredSelection modelViewerSelection;
 
-		modelViewerSelection = (IStructuredSelection) modelViewer
+		modelViewerSelection = (IStructuredSelection) this.miTypeViewer
 				.getSelection();
 		result = !modelViewerSelection.isEmpty();
 
@@ -647,97 +594,20 @@ public class LoadModelInstancePage extends WizardPage {
 	}
 
 	/**
-	 * @return The selected model.
+	 * <p>
+	 * A helper method to check whether an {@link IModel} has been selected.
+	 * </p>
+	 * 
+	 * @return True, if an {@link IModel} is selected.
 	 */
-	public IModel getSelectedModel() {
+	private boolean isModelSelected() {
 
-		IModel result;
+		boolean result;
 		IStructuredSelection modelViewerSelection;
 
-		modelViewerSelection = (IStructuredSelection) modelViewer
+		modelViewerSelection = (IStructuredSelection) this.modelViewer
 				.getSelection();
-		result = (IModel) modelViewerSelection.getFirstElement();
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Returns a {@link File} representing the currently selected model instance
-	 * file.
-	 * </p>
-	 * 
-	 * @return the selected model instance file or <code>null</code> if no model
-	 *         instance is selected.
-	 */
-	public File getModelInstanceFile() {
-
-		File result;
-		String modelInstanceFileName;
-
-		// By default the model instance file is null.
-		result = null;
-
-		// Determine the selected model instance file name.
-		modelInstanceFileName = decodePath(getModelInstanceFileName());
-
-		if (modelInstanceFileName != null) {
-			result = new Path(modelInstanceFileName).toFile();
-		}
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Helper method to return the name of the model instance file.
-	 * </p>
-	 * 
-	 * <p>
-	 * Called by the method <code>getModelInstanceFile</code>.
-	 * </p>
-	 * 
-	 * @return The model instance file name.
-	 */
-	private String getModelInstanceFileName() {
-		String result;
-
-		result = modelInstanceFileTextBox.getText().trim();
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Helper method to decode a path.
-	 * </p>
-	 * 
-	 * <p>
-	 * Called by the methods <code>getModelInstanceFile</code> and
-	 * <code>updatePageComplete</code>.
-	 * </p>
-	 * 
-	 * @param path
-	 *            The Path which shall be decoded as a String.
-	 * 
-	 * @return A String representing a decodedPath.
-	 */
-	protected String decodePath(String path) {
-
-		String result;
-		VariablesPlugin defaultPlugin;
-		IStringVariableManager stringVariableManager;
-
-		defaultPlugin = VariablesPlugin.getDefault();
-		stringVariableManager = defaultPlugin.getStringVariableManager();
-
-		try {
-			result = stringVariableManager.performStringSubstitution(path);
-		}
-
-		catch (CoreException e) {
-			result = null;
-		}
+		result = !modelViewerSelection.isEmpty();
 
 		return result;
 	}

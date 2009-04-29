@@ -6,6 +6,7 @@ import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.modelbus.internal.MetamodelRegistry;
+import tudresden.ocl20.pivot.modelbus.internal.ModelInstanceTypeRegistry;
 import tudresden.ocl20.pivot.modelbus.internal.ModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.internal.ModelRegistry;
 
@@ -28,6 +29,9 @@ public class ModelBusPlugin extends Plugin {
 
 	private IModelInstanceRegistry modelInstanceRegistry;
 
+	/* The registry of registered model instance file formats. */
+	private IModelInstanceTypeRegistry miffRegistry;
+
 	/**
 	 * The constructor
 	 */
@@ -38,7 +42,9 @@ public class ModelBusPlugin extends Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	@Override
 	public void start(BundleContext context) throws Exception {
@@ -49,7 +55,9 @@ public class ModelBusPlugin extends Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
@@ -133,6 +141,31 @@ public class ModelBusPlugin extends Plugin {
 		}
 
 		return plugin.modelInstanceRegistry;
+	}
+
+	/**
+	 * <p>
+	 * Returns the {@link IModelInstanceTypeRegistry} managed by the
+	 * {@link ModelBusPlugin}.
+	 * </p>
+	 * 
+	 * @return An {@link IModelInstanceTypeRegistry} instance.
+	 */
+	public static IModelInstanceTypeRegistry getModelInstanceTypeRegistry() {
+		
+		/* Check that the plug-in has been activated. */
+		if (plugin == null) {
+			throw new IllegalStateException(
+					"The Model Bus plug-in has not been activated.");
+		}
+		
+		/* Else lazily create the registry. */
+		else if (plugin.miffRegistry == null) {
+			plugin.miffRegistry = new ModelInstanceTypeRegistry();
+		}
+		// no else.
+
+		return plugin.miffRegistry;
 	}
 
 	/**

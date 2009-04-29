@@ -34,15 +34,17 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 
 /**
- * Abstract implementation of {@link IModelInstanceProvider}
+ * <p>
+ * An abstract implementation of {@link IModelInstanceProvider}.
+ * </p>
  * 
  * @author Ronny Brandt
- * @version 1.0 31.08.2007
  */
 public abstract class AbstractModelInstanceProvider implements
 		IModelInstanceProvider {
@@ -50,23 +52,27 @@ public abstract class AbstractModelInstanceProvider implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance(java.lang.String)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
+	 * (java.lang.String, tudresden.ocl20.pivot.modelbus.IModel)
 	 */
-	public IModelInstance getModelInstance(String modelName)
-			throws ModelAccessException {
+	public IModelInstance getModelInstance(String modelInstanceName,
+			IModel model) throws ModelAccessException {
 
-		URL modelUrl;
+		URL modelInstanceUrl;
 		IModelInstance modelInstance;
 
-		modelUrl = AbstractModelProvider.class.getResource(modelName);
+		modelInstanceUrl = AbstractModelProvider.class
+				.getResource(modelInstanceName);
 
-		if (modelUrl == null) {
+		if (modelInstanceUrl == null) {
 			throw new ModelAccessException(
-					"Failed to create a URL for model " + modelName); //$NON-NLS-1$
+					"Failed to create a URL for model " + modelInstanceName); //$NON-NLS-1$
 		}
+		// no else.
 
-		// delegate to user implementation
-		modelInstance = getModelInstance(modelUrl);
+		/* Delegate to user implementation. */
+		modelInstance = this.getModelInstance(modelInstanceUrl, model);
 
 		return modelInstance;
 	}
@@ -74,29 +80,33 @@ public abstract class AbstractModelInstanceProvider implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance(java.io.File)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
+	 * (java.io.File, tudresden.ocl20.pivot.modelbus.IModel)
 	 */
-	public IModelInstance getModelInstance(File modelFile)
+	public IModelInstance getModelInstance(File modelInstanceFile, IModel model)
 			throws ModelAccessException {
-		if (modelFile == null) {
-			throw new IllegalArgumentException(
-					"The argument 'modelFile' was null."); //$NON-NLS-1$
-		}
 
 		IModelInstance modelInstance;
-		URL modelFileUrl;
+		URL modelInstanceFileUrl;
+
+		if (modelInstanceFile == null) {
+			throw new IllegalArgumentException(
+					"The argument 'modelInstanceFile' was null."); //$NON-NLS-1$
+		}
+		// no else.
 
 		try {
-			modelFileUrl = modelFile.toURL();
+			modelInstanceFileUrl = modelInstanceFile.toURL();
 		}
 
 		catch (MalformedURLException e) {
 			throw new ModelAccessException("Failed to create a URL for file " //$NON-NLS-1$
-					+ modelFile.getAbsolutePath(), e);
+					+ modelInstanceFile.getAbsolutePath(), e);
 		}
 
-		// delegate to user implementation
-		modelInstance = getModelInstance(modelFileUrl);
+		/* Delegate to user implementation. */
+		modelInstance = this.getModelInstance(modelInstanceFileUrl, model);
 
 		return modelInstance;
 	}

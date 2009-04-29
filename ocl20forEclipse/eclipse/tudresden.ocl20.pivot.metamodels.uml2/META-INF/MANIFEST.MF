@@ -14,6 +14,5 @@ Require-Bundle: org.apache.commons.lang,
  org.eclipse.uml2.uml,
  tudresden.ocl20.logging,
  tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.models.uml2,
  tudresden.ocl20.pivot.pivotmodel
 Bundle-ActivationPolicy: lazy

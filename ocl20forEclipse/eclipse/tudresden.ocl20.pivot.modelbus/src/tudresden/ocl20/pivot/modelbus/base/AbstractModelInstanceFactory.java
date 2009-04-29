@@ -37,7 +37,6 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceFactory;
 
 /**

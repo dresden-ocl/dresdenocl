@@ -35,32 +35,50 @@ package tudresden.ocl20.pivot.modelbus;
 import java.io.File;
 import java.net.URL;
 
-
 /**
+ * <p>
+ * An {@link IModelInstanceProvider} provides the possibility to load a model
+ * instance for a given {@link IModel} and a given resource or name representing
+ * the {@link IModelInstance}.
+ * </p>
  * 
- *
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public interface IModelInstanceProvider {
 
-  /**
-   * @param modelName
-   * @return
-   */
-  IModelInstance getModelInstance(String modelName) throws ModelAccessException;
-  
-  /**
-   * @param modelFile
-   * @return
-   */
-  IModelInstance getModelInstance(File modelFile) throws ModelAccessException;
-  
-  /**
-   * @param modelUrl
-   * @return
-   */
-  IModelInstance getModelInstance(URL modelUrl) throws ModelAccessException;
-  
-  
+	/**
+	 * <p>
+	 * Loads an IModelInstance for a given name and a given {@link IModel}.
+	 * 
+	 * @param modelInstanceName
+	 *            The name of the {@link IModelInstance} which shall be
+	 *            returned.
+	 * @return An {@link IModelInstance}.
+	 */
+	IModelInstance getModelInstance(String modelInstanceName, IModel model)
+			throws ModelAccessException;
+
+	/**
+	 * <p>
+	 * Loads an IModelInstance for a given name and a given {@link IModel}.
+	 * 
+	 * @param modelInstanceFile
+	 *            The {@link File} of the {@link IModelInstance} which shall be
+	 *            returned.
+	 * @return An {@link IModelInstance}.
+	 */
+	IModelInstance getModelInstance(File modelInstanceFile, IModel model)
+			throws ModelAccessException;
+
+	/**
+	 * <p>
+	 * Loads an IModelInstance for a given name and a given {@link IModel}.
+	 * 
+	 * @param modelInstanceUrl
+	 *            The {@link URL} of the {@link IModelInstance} which shall be
+	 *            returned.
+	 * @return An {@link IModelInstance}.
+	 */
+	IModelInstance getModelInstance(URL modelInstanceUrl, IModel model)
+			throws ModelAccessException;
 }

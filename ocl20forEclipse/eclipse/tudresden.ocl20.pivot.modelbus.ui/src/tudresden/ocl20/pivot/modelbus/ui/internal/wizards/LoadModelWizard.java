@@ -60,15 +60,15 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
  */
 public class LoadModelWizard extends Wizard implements IImportWizard {
 
+	/** The icon in the top right corner. */
+	private static final String WIZARD_IMAGE = "icons/models_wizard.png";
+
 	/** A logger for this class. */
-	private static final Logger logger = ModelBusUIPlugin
+	private static final Logger LOGGER = ModelBusUIPlugin
 			.getLogger(LoadModelWizard.class);
 
-	/** The icon in the top right corner. */
-	private static final String wizardImage = "icons/models_wizard.png";
-
 	/** The single page of this wizard. */
-	LoadModelPage mainPage;
+	private LoadModelPage mainPage;
 
 	/** A cached reference to the workbench. */
 	private IWorkbench workbench;
@@ -83,85 +83,7 @@ public class LoadModelWizard extends Wizard implements IImportWizard {
 
 		/** Set the logo in the top right corner. */
 		setDefaultPageImageDescriptor(ModelBusUIPlugin
-				.getImageDescriptor(wizardImage));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
-	 */
-	@Override
-	public boolean performFinish() {
-		boolean finished;
-
-		// by default we assume something went wrong
-		finished = false;
-
-		// get the selected metamodel
-		IMetamodel metamodel = mainPage.getSelectedMetamodel();
-
-		if (metamodel != null) {
-			IModelProvider modelProvider;
-			IModel model = null;
-
-			// load the model
-			modelProvider = metamodel.getModelProvider();
-
-			try {
-				model = modelProvider.getModel(mainPage.getModelFile());
-			}
-
-			catch (ModelAccessException e) {
-				MessageDialog
-						.openError(
-								getShell(),
-								ModelBusUIMessages.LoadModelWizard_ErrorMessageDialogTitle,
-								ModelBusUIMessages.LoadModelWizard_ErrorOccured
-										+ (e.getMessage() != null ? e
-												.getMessage()
-												: ModelBusUIMessages.LoadModelWizard_CheckLog));
-
-				String errorMsg = "An error occured when loading model '" + model + "'"; //$NON-NLS-1$//$NON-NLS-2$
-				logger.error(errorMsg, e);
-
-				// we need to rethrow a runtime exception or the wizard will
-				// close afterwards
-				throw new IllegalStateException(errorMsg, e);
-			}
-
-			// add the successfully loaded model to the model registry
-			IModelRegistry modelRegistry = ModelBusPlugin.getModelRegistry();
-
-			modelRegistry.addModel(model);
-			modelRegistry.setActiveModel(model);
-
-			// activate the Model Browser View
-			try {
-				workbench.getActiveWorkbenchWindow().getActivePage().showView(
-						ModelsView.ID);
-			} catch (PartInitException e) {
-				logger.error("Failed to activate the Model Btowser view.", e); //$NON-NLS-1$
-				finished = false;
-			}
-
-			finished = true;
-		}
-
-		return finished;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
-	 * org.eclipse.jface.viewers.IStructuredSelection)
-	 */
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		this.workbench = workbench;
-
-		setWindowTitle(ModelBusUIMessages.LoadModelWizard_Title);
-		mainPage = new LoadModelPage(selection);
+				.getImageDescriptor(WIZARD_IMAGE));
 	}
 
 	/*
@@ -171,7 +93,106 @@ public class LoadModelWizard extends Wizard implements IImportWizard {
 	 */
 	@Override
 	public void addPages() {
+		
 		super.addPages();
-		addPage(mainPage);
+		
+		this.addPage(this.mainPage);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
+	 * org.eclipse.jface.viewers.IStructuredSelection)
+	 */
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		
+		this.workbench = workbench;
+	
+		this.setWindowTitle(ModelBusUIMessages.LoadModelWizard_Title);
+		this.mainPage = new LoadModelPage(selection);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	 */
+	@Override
+	public boolean performFinish() {
+
+		boolean result;
+
+		/* By default we assume something went wrong. */
+		result = false;
+
+		/* Get the selected meta model. */
+		IMetamodel metamodel = mainPage.getSelectedMetamodel();
+
+		if (metamodel != null) {
+
+			IModelProvider modelProvider;
+			IModel model = null;
+
+			/* Load the model. */
+			modelProvider = metamodel.getModelProvider();
+
+			try {
+				model = modelProvider.getModel(this.mainPage.getModelFile());
+			}
+
+			catch (ModelAccessException e) {
+
+				String dialogTitle;
+				String dialogMsg;
+
+				dialogTitle = ModelBusUIMessages.LoadModelWizard_ErrorMessageDialogTitle;
+
+				dialogMsg = ModelBusUIMessages.LoadModelWizard_ErrorOccured;
+
+				if (e.getMessage() != null) {
+					dialogMsg += e.getMessage();
+				}
+
+				else {
+					dialogMsg += ModelBusUIMessages.LoadModelWizard_CheckLog;
+				}
+
+				MessageDialog
+						.openError(this.getShell(), dialogTitle, dialogMsg);
+
+				LOGGER.error(dialogMsg, e);
+
+				/*
+				 * We need to re-throw a runtime exception or the wizard will
+				 * close afterwards.
+				 */
+				throw new IllegalStateException(dialogMsg, e);
+			}
+
+			/* Add the successfully loaded model to the model registry. */
+			IModelRegistry modelRegistry;
+			
+			modelRegistry = ModelBusPlugin.getModelRegistry();
+
+			modelRegistry.addModel(model);
+			modelRegistry.setActiveModel(model);
+
+			/* Activate the Model Browser View. */
+			try {
+				this.workbench.getActiveWorkbenchWindow().getActivePage().showView(
+						ModelsView.ID);
+			} 
+			
+			catch (PartInitException e) {
+				
+				LOGGER.error("Failed to activate the Model Btowser view.", e); //$NON-NLS-1$
+				result = false;
+			}
+
+			result = true;
+		}
+
+		return result;
 	}
 }

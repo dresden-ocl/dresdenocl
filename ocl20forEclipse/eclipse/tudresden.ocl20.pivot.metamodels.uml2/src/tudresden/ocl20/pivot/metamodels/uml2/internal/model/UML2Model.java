@@ -33,11 +33,9 @@ import org.eclipse.uml2.uml.UMLFactory;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
-import tudresden.ocl20.pivot.models.uml2.internal.provider.Uml2ModelInstanceProvider;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -79,15 +77,6 @@ public class UML2Model extends AbstractModel implements IModel {
 
 		/* Initialize. */
 		this.resource = resource;
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getModelInstanceProvider()
-	 * 
-	 * @generated NOT
-	 */
-	public IModelInstanceProvider getModelInstanceProvider() {
-		return new Uml2ModelInstanceProvider(this);
 	}
 
 	/**

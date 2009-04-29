@@ -45,8 +45,10 @@ import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelbus.IModelInstanceType;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
 
@@ -59,19 +61,42 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
  */
 public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 
-	// The main page to select a Model for the ModelInstance.
+	/** The icon in the top right corner. */
+	private static final String WIZARD_IMAGE = "icons/modelInstances_wizard.png";
+
+	/**
+	 * The main page to select an {@link IModel} and an {@link IModelInstance}
+	 * file.
+	 */
 	private LoadModelInstancePage mainPage;
 
-	// The workbench
+	/** The {@link IWorkbench}. */
 	private IWorkbench workbench;
 
 	/**
 	 * <p>
-	 * Instantiates a new <code>LoadModelInstanceWizard</code>.
+	 * Instantiates a new {@link LoadModelInstanceWizard}.
 	 * </p>
 	 */
 	public LoadModelInstanceWizard() {
 		super();
+
+		/** Set the logo in the top right corner. */
+		setDefaultPageImageDescriptor(ModelBusUIPlugin
+				.getImageDescriptor(WIZARD_IMAGE));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.wizard.IWizard#addPages()
+	 */
+	@Override
+	public void addPages() {
+
+		super.addPages();
+
+		addPage(this.mainPage);
 	}
 
 	/*
@@ -86,21 +111,8 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 
 		setWindowTitle(ModelBusUIMessages.LoadModelInstanceWizard_Title);
 
-		// Initialize the wizard with a LoadModelInstancePage.
-		mainPage = new LoadModelInstancePage(selection);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.wizard.IWizard#addPages()
-	 */
-	@Override
-	public void addPages() {
-
-		super.addPages();
-
-		addPage(mainPage);
+		/* Initialize the wizard with a LoadModelInstancePage. */
+		this.mainPage = new LoadModelInstancePage(selection);
 	}
 
 	/*
@@ -108,88 +120,92 @@ public class LoadModelInstanceWizard extends Wizard implements IImportWizard {
 	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
-	@Override
 	public boolean performFinish() {
 
 		boolean result;
+
 		IModel model;
+		IModelInstanceType miType;
 
 		/* By default we assume something went wrong. */
 		result = false;
 
-		/* Get the selected model from the mainPage. */
-		model = mainPage.getSelectedModel();
+		/*
+		 * Get the selected model and the selected model instance type from the
+		 * mainPage.
+		 */
+		model = this.mainPage.getSelectedModel();
+		miType = this.mainPage.getSelectedModelInstanceType();
 
-		if (model != null) {
+		if (model != null && miType != null) {
 
-			IModelInstanceProvider modelInstanceProvider;
 			IModelInstance modelInstance;
+			IModelInstanceProvider modelInstanceProvider;
+
 			File modelInstanceFile;
 
-			modelInstanceProvider = model.getModelInstanceProvider();
-			modelInstance = null;
+			modelInstanceProvider = miType.getModelInstanceProvider();
 
 			/* Try to load the model instance. */
 			try {
+				IModelInstanceRegistry modelInstanceRegistry;
+
 				modelInstanceFile = mainPage.getModelInstanceFile();
-				modelInstance = modelInstanceProvider
-						.getModelInstance(modelInstanceFile);
+				modelInstance = modelInstanceProvider.getModelInstance(
+						modelInstanceFile, model);
+
+				/*
+				 * Add the successfully loaded model instance to the model
+				 * instance registry.
+				 */
+				modelInstanceRegistry = ModelBusPlugin
+						.getModelInstanceRegistry();
+				modelInstanceRegistry.addModelInstance(model, modelInstance);
+
+				/* Try to activate the ModelInstanceView. */
+				try {
+					IWorkbenchWindow workbenchWindow;
+					IWorkbenchPage workbenchPage;
+
+					workbenchWindow = this.workbench.getActiveWorkbenchWindow();
+					workbenchPage = workbenchWindow.getActivePage();
+
+					workbenchPage.showView(ModelInstancesView.ID);
+
+					/* Set the active model instance. */
+					modelInstanceRegistry.setActiveModelInstance(model,
+							modelInstance);
+
+					result = true;
+				}
+
+				catch (PartInitException e) {
+					result = false;
+				}
 			}
 
 			catch (ModelAccessException e) {
 
 				String dialogTitle;
 				String dialogMsg;
-				String errorMsg;
 
 				dialogTitle = ModelBusUIMessages.LoadModelInstanceWizard_ErrorMessageDialogTitle;
 				dialogMsg = ModelBusUIMessages.LoadModelInstanceWizard_ErrorOccured
-						+ (e.getMessage() != null ? e.getMessage()
-								: ModelBusUIMessages.LoadModelInstanceWizard_CheckLog);
+						+ e.getMessage();
 
 				/* Show an Error Dialog. */
-				MessageDialog.openError(getShell(), dialogTitle, dialogMsg);
+				MessageDialog
+						.openError(this.getShell(), dialogTitle, dialogMsg);
 
 				/*
 				 * We need to throw a runtime exception or the wizard will close
 				 * afterwards.
 				 */
-				errorMsg = "An error occured when loading model '" + model + "'"; //$NON-NLS-1$//$NON-NLS-2$
-
-				e.printStackTrace();
-
-				throw new IllegalStateException(errorMsg, e);
+				throw new IllegalStateException(dialogMsg);
 			}
-
-			/*
-			 * Add the successfully loaded model instance to the model instance
-			 * registry.
-			 */
-			IModelInstanceRegistry modelInstanceRegistry;
-			modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
-
-			modelInstanceRegistry.addModelInstance(model, modelInstance);
-
-			/* Activate the ModelInstanceView. */
-			try {
-				IWorkbenchWindow workbenchWindow;
-				IWorkbenchPage workbenchPage;
-
-				workbenchWindow = workbench.getActiveWorkbenchWindow();
-				workbenchPage = workbenchWindow.getActivePage();
-
-				workbenchPage.showView(ModelInstancesView.ID);
-
-				modelInstanceRegistry.setActiveModelInstance(model,
-						modelInstance);
-
-				result = true;
-			}
-
-			catch (PartInitException e) {
-				result = false;
-			}
+			// end catch.
 		}
+		// no else.
 
 		return result;
 	}

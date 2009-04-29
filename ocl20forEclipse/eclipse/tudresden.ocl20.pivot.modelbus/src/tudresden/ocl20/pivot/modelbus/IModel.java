@@ -122,10 +122,4 @@ public interface IModel {
    * @return a <code>ITypeResolver</code> instance
    */
   ITypeResolver getTypeResolver();
-
-  /**
-   * @return
-   */
-  IModelInstanceProvider getModelInstanceProvider();
-
 }

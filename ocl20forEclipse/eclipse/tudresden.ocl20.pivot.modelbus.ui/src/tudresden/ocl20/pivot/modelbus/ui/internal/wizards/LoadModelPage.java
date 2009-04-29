@@ -35,49 +35,32 @@ package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
 import java.io.File;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.resource.LocalResourceManager;
-import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
-import org.eclipse.ui.model.WorkbenchContentProvider;
-import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.eclipse.ui.views.navigator.ResourceComparator;
 
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.IMetamodelDescriptor;
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseFileListener;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseWorkspaceListener;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.FileBoxListener;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.MetaModelLabelProvider;
+import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelViewerListener;
 
 /**
  * <p>
@@ -87,7 +70,7 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
  * 
  * @author Matthias Braeuer
  */
-public class LoadModelPage extends WizardPage {
+public class LoadModelPage extends AbstractModelBusPage {
 
 	/**
 	 * The selection in the workspace, cached to automatically suggest the
@@ -96,10 +79,10 @@ public class LoadModelPage extends WizardPage {
 	private IStructuredSelection selection;
 
 	/** The text field that contains the project file name. */
-	protected Text modelFileTextBox;
+	private Text modelFileTextBox;
 
 	/** The viewer displaying the registered meta models. */
-	protected StructuredViewer metamodelViewer;
+	private StructuredViewer metamodelViewer;
 
 	/**
 	 * <p>
@@ -116,8 +99,127 @@ public class LoadModelPage extends WizardPage {
 
 		this.selection = selection;
 
-		setTitle(ModelBusUIMessages.LoadModelPage_Title);
-		setDescription(ModelBusUIMessages.LoadModelPage_Description);
+		this.setTitle(ModelBusUIMessages.LoadModelPage_Title);
+		this.setDescription(ModelBusUIMessages.LoadModelPage_Description);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
+	 * .Composite)
+	 */
+	public void createControl(Composite parent) {
+
+		Composite panel;
+		GridLayout layout;
+
+		/* Create panel. */
+		panel = new Composite(parent, SWT.NONE);
+
+		/* Set panel attributes. */
+		layout = new GridLayout(1, true);
+		layout.verticalSpacing = 20;
+		panel.setLayout(layout);
+		panel.setFont(parent.getFont());
+
+		/* Create UI elements. */
+		this.createModelFileGroup(panel);
+		this.createMetamodelSelectionGroup(panel);
+
+		/* Set the initial selection. */
+		this.initializeFromSelection();
+		this.updatePageComplete();
+
+		/* Set font. */
+		Dialog.applyDialogFont(parent);
+
+		/* Connect the wizard page with the wizard. */
+		this.setControl(panel);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * #setFileTextBoxText(java.lang.String)
+	 */
+	public void setFileTextBoxText(String text) {
+		this.modelFileTextBox.setText(text);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * #updatePageComplete()
+	 */
+	public void updatePageComplete() {
+
+		String modelFileName;
+		IPath modelFilePath;
+		File modelFile;
+
+		boolean complete;
+
+		/* Reset the messages. */
+		this.setErrorMessage(null);
+		this.setMessage(null);
+
+		/* By default the page is complete. */
+		complete = true;
+
+		/* Read out model file name. */
+		modelFileName = this.getModelFileName();
+
+		/* Check if model file name is empty. */
+		if (modelFileName.length() == 0) {
+			this
+					.setMessage(ModelBusUIMessages.LoadModelPage_MessagePleaseChooseModel);
+			complete = false;
+		}
+
+		else {
+			/* Substitute variables in string. */
+			modelFileName = this.decodePath(modelFileName);
+
+			if (modelFileName == null) {
+				this
+						.setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgInvalidVariables);
+				complete = false;
+			}
+
+			else {
+
+				/* Create a path for the project file. */
+				modelFilePath = new Path(modelFileName);
+
+				/* Check if project file exists. */
+				modelFile = modelFilePath.toFile();
+
+				if (modelFile == null || !modelFile.exists()) {
+					this
+							.setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgModelFileNotExisting);
+					complete = false;
+				}
+				// no else.
+			}
+			// end else.
+		}
+		// end else.
+
+		/* Check that a meta model has been selected. */
+		if (complete && !this.isMetamodelSelected()) {
+			this
+					.setErrorMessage(ModelBusUIMessages.LoadModelPage_SelectMetamodelErrorMessage);
+			complete = false;
+		}
+		// no else.
+
+		setPageComplete(complete);
 	}
 
 	/**
@@ -158,66 +260,86 @@ public class LoadModelPage extends WizardPage {
 
 		IMetamodel result;
 
-		result = (IMetamodel) ((IStructuredSelection) metamodelViewer
+		result = (IMetamodel) ((IStructuredSelection) this.metamodelViewer
 				.getSelection()).getFirstElement();
 
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * <p>
+	 * A helper method that creates the {@link IMetamodel} selection part.
+	 * </p>
 	 * 
-	 * @see
-	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
-	 * .Composite)
+	 * @param parent
+	 *            The parent {@link Composite} of this part.
 	 */
-	public void createControl(Composite parent) {
-		Composite panel;
+	private void createMetamodelSelectionGroup(Composite parent) {
+
+		Composite metamodelSelectionGroup;
+		Label explanationText;
+
 		GridLayout layout;
 
-		// create panel
-		panel = new Composite(parent, SWT.NONE);
+		/* Create meta model selection group and specify properties. */
+		metamodelSelectionGroup = new Composite(parent, SWT.NONE);
+		metamodelSelectionGroup.setFont(parent.getFont());
+		metamodelSelectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
+				true, true));
 
-		// set panel attributes
-		layout = new GridLayout(1, true);
-		layout.verticalSpacing = 20;
-		panel.setLayout(layout);
-		panel.setFont(parent.getFont());
+		layout = new GridLayout(1, false);
+		layout.verticalSpacing = 10;
+		metamodelSelectionGroup.setLayout(layout);
 
-		// create UI elements
-		createModelFileGroup(panel);
-		createMetamodelSelectionGroup(panel);
+		/* Create the explanation label. */
+		explanationText = new Label(metamodelSelectionGroup, SWT.WRAP);
+		explanationText
+				.setText(ModelBusUIMessages.LoadModelPage_SelectMetamodelLabel);
 
-		// set initial selection
-		initializeFromSelection();
-		updatePageComplete();
+		/* Create the list viewer to display the meta models. */
+		this.metamodelViewer = new TableViewer(metamodelSelectionGroup,
+				SWT.SINGLE | SWT.V_SCROLL | SWT.BORDER);
+		this.metamodelViewer.setContentProvider(new ArrayContentProvider());
+		this.metamodelViewer.setLabelProvider(new MetaModelLabelProvider());
+		this.metamodelViewer.setInput(ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodels());
+		this.metamodelViewer.getControl().setLayoutData(
+				new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		// set font
-		Dialog.applyDialogFont(parent);
-
-		// connect the wizard page with the wizard
-		setControl(panel);
+		this.metamodelViewer
+				.addSelectionChangedListener(new ModelViewerListener(this));
 	}
 
-	// creates the SWT group that allows selecting the model file
+	/**
+	 * <p>
+	 * A helper method that creates the SWT group that allows selecting the
+	 * {@link IModel} file.
+	 * </p>
+	 * 
+	 * @param parent
+	 *            The {@link Composite} parent of this {@link Group}.
+	 */
 	private void createModelFileGroup(Composite parent) {
+
 		Composite modelFileGroupComposite;
 		Group modelFileGroup;
 		Label locationLabel, spacer;
 		Button fBrowseWorkspaceButton, fBrowseFileButton;
 		GridLayout layout;
 
-		// create a composite around the group so the margins are equal to the
-		// metamodel selection
+		/*
+		 * Create a composite around the group so the margins are equal to the
+		 * metamodel selection.
+		 */
 		modelFileGroupComposite = new Composite(parent, SWT.None);
 		modelFileGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
 				true, false));
 
-		// we need another gridlayout to properly set additional margins
+		/* We need another GridLayout to properly set additional margins. */
 		layout = new GridLayout();
 		modelFileGroupComposite.setLayout(layout);
 
-		// create model file group and specify properties
+		/* Create model file group and specify properties. */
 		modelFileGroup = new Group(modelFileGroupComposite, SWT.NONE);
 		modelFileGroup
 				.setText(ModelBusUIMessages.LoadModelPage_ModelFileGroupText);
@@ -229,78 +351,57 @@ public class LoadModelPage extends WizardPage {
 		modelFileGroup.setLayout(layout);
 		modelFileGroup.setFont(parent.getFont());
 
-		// create text label
+		/* Create the text label. */
 		locationLabel = new Label(modelFileGroup, SWT.None);
 		locationLabel
 				.setText(ModelBusUIMessages.LoadModelPage_LocationLabelText);
 
-		// create text box
+		/* Create the text box. */
 		modelFileTextBox = new Text(modelFileGroup, SWT.SINGLE | SWT.BORDER);
 		modelFileTextBox.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true,
 				false, 3, 1));
 
-		// track modifications
-		modelFileTextBox.addModifyListener(new ModifyListener() {
+		/* Track modifications. */
+		modelFileTextBox.addModifyListener(new FileBoxListener(this));
 
-			public void modifyText(ModifyEvent e) {
-				updatePageComplete();
-			}
-		});
-
-		// spacing label
+		/* The spacing label. */
 		spacer = new Label(modelFileGroup, SWT.NONE);
 		spacer.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true, false, 2,
 				1));
 
-		// create buttons
+		/* Create buttons. */
 		fBrowseWorkspaceButton = createButton(modelFileGroup,
 				ModelBusUIMessages.LoadModelPage_BrowseWorkspaceButtonText);
 		fBrowseFileButton = createButton(modelFileGroup,
 				ModelBusUIMessages.LoadModelPage_BrowseFileSystemButtonText);
 
-		// add listeners
+		/* Add the listeners. */
 		fBrowseWorkspaceButton
-				.addSelectionListener(new BrowseWorkspaceListener());
-		fBrowseFileButton.addSelectionListener(new BrowseFileListener());
+				.addSelectionListener(new BrowseWorkspaceListener(this));
+		fBrowseFileButton.addSelectionListener(new BrowseFileListener(this));
 	}
 
-	// creates the metamodel selection part
-	private void createMetamodelSelectionGroup(Composite parent) {
-		Composite metamodelSelectionGroup;
-		Label explanationText;
+	/**
+	 * <p>
+	 * A helper method to return the name of the {@link IModel} file.
+	 * </p>
+	 * 
+	 * @return The name of the {@link IModel} file.
+	 */
+	private String getModelFileName() {
+		return modelFileTextBox.getText().trim();
+	}
 
-		// create metamodel selection group and specify properties
-		metamodelSelectionGroup = new Composite(parent, SWT.NONE);
-		metamodelSelectionGroup.setFont(parent.getFont());
-		metamodelSelectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
-				true, true));
-
-		GridLayout layout = new GridLayout(1, false);
-		layout.verticalSpacing = 10;
-		metamodelSelectionGroup.setLayout(layout);
-
-		// create the explanation label
-		explanationText = new Label(metamodelSelectionGroup, SWT.WRAP);
-		explanationText
-				.setText(ModelBusUIMessages.LoadModelPage_SelectMetamodelLabel);
-
-		// create the list viewer to display the metamodels
-		metamodelViewer = new TableViewer(metamodelSelectionGroup, SWT.SINGLE
-				| SWT.V_SCROLL | SWT.BORDER);
-		metamodelViewer.setContentProvider(new ArrayContentProvider());
-		metamodelViewer.setLabelProvider(new MetamodelLabelProvider());
-		metamodelViewer.setInput(ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodels());
-		metamodelViewer.getControl().setLayoutData(
-				new GridData(SWT.FILL, SWT.FILL, true, true));
-
-		metamodelViewer
-				.addSelectionChangedListener(new ISelectionChangedListener() {
-
-					public void selectionChanged(SelectionChangedEvent event) {
-						updatePageComplete();
-					}
-				});
+	/**
+	 * <p>
+	 * A helper method to check whether a {@link IMetamodel} has been selected.
+	 * </p>
+	 * 
+	 * @return True if a {@link IMetamodel} has been selected.
+	 */
+	private boolean isMetamodelSelected() {
+		return !((IStructuredSelection) this.metamodelViewer.getSelection())
+				.isEmpty();
 	}
 
 	/**
@@ -310,6 +411,8 @@ public class LoadModelPage extends WizardPage {
 	 * </p>
 	 */
 	private void initializeFromSelection() {
+
+		IMetamodel[] metaModels;
 
 		if (this.selection != null) {
 			Object selectedObject = this.selection.getFirstElement();
@@ -329,229 +432,14 @@ public class LoadModelPage extends WizardPage {
 			// no else.
 		}
 		// no else.
-	}
 
-	/**
-	 * Updates the <code>pageComplete</code> status of the wizard page.
-	 */
-	protected void updatePageComplete() {
-		String modelFileName;
-		IPath modelFilePath;
-		File modelFile;
-		boolean complete;
+		/* By default select the first meta model. */
+		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
 
-		// reset messages
-		setErrorMessage(null);
-		setMessage(null);
-
-		// by default the page is not complete
-		complete = false;
-
-		// read out model file name
-		modelFileName = getModelFileName();
-
-		// check if model file name is empty
-		if (modelFileName.length() == 0) {
-			setMessage(ModelBusUIMessages.LoadModelPage_MessagePleaseChooseModel);
+		if (metaModels.length > 0) {
+			this.metamodelViewer.setSelection(new StructuredSelection(
+					metaModels[0]));
 		}
-
-		else {
-			// substitute variables in string
-			modelFileName = decodePath(modelFileName);
-
-			if (modelFileName == null) {
-				setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgInvalidVariables);
-			}
-
-			else {
-				// create a path for the project file
-				modelFilePath = new Path(modelFileName);
-
-				// check if project file exists
-				modelFile = modelFilePath.toFile();
-
-				if (modelFile == null || !modelFile.exists()) {
-					setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgModelFileNotExisting);
-				}
-
-				// check that a metamodel has been selected
-				else if (isMetamodelSelected()) {
-					complete = true;
-				}
-
-				else {
-					setErrorMessage(ModelBusUIMessages.LoadModelPage_SelectMetamodelErrorMessage);
-				}
-			}
-		}
-
-		setPageComplete(complete);
-	}
-
-	/**
-	 * Helper method to return the name of the model file.
-	 */
-	private String getModelFileName() {
-		return modelFileTextBox.getText().trim();
-	}
-
-	/**
-	 * Helper method to check whether a metamodel has been selected
-	 */
-	private boolean isMetamodelSelected() {
-		return !((IStructuredSelection) metamodelViewer.getSelection())
-				.isEmpty();
-	}
-
-	/**
-	 * Helper method to create a push button.
-	 */
-	protected Button createButton(Composite parent, String label) {
-		Button button = new Button(parent, SWT.PUSH);
-		button.setFont(parent.getFont());
-		button.setText(label);
-		return button;
-	}
-
-	/**
-	 * Helper method to encode a workspace path.
-	 */
-	protected String encodePath(IResource resource) {
-		return VariablesPlugin.getDefault().getStringVariableManager()
-				.generateVariableExpression(
-						"workspace_loc", resource.getFullPath().toString()); //$NON-NLS-1$
-	}
-
-	/**
-	 * Helper method to decode a path.
-	 */
-	protected String decodePath(String path) {
-
-		try {
-			path = VariablesPlugin.getDefault().getStringVariableManager()
-					.performStringSubstitution(path);
-		} catch (CoreException e) {
-			path = null;
-		}
-
-		return path;
-	}
-
-	/**
-   * 
-   */
-	protected class MetamodelLabelProvider extends LabelProvider implements
-			ILabelProvider {
-
-		// helper object to manage associated icons
-		private ResourceManager resources;
-
-		public MetamodelLabelProvider() {
-			resources = new LocalResourceManager(JFaceResources.getResources());
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
-		 */
-		@Override
-		public Image getImage(Object element) {
-
-			// check if the metamodel has been added and configured via the
-			// metamodels extension point
-			if (element instanceof IMetamodelDescriptor) {
-				IMetamodelDescriptor metamodel = (IMetamodelDescriptor) element;
-				return resources.createImage(metamodel.getIcon());
-			}
-
-			return null;
-		}
-
-		/**
-		 * Simply returns the name of the {@link IMetamodel metamodel}.
-		 */
-		@Override
-		public String getText(Object element) {
-			IMetamodel metamodel = (IMetamodel) element;
-			return metamodel.getName();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
-		 */
-		@Override
-		public void dispose() {
-			resources.dispose();
-		}
-
-	}
-
-	/**
-   * 
-   */
-	protected class BrowseWorkspaceListener extends SelectionAdapter implements
-			SelectionListener {
-
-		@Override
-		public void widgetSelected(SelectionEvent e) {
-			ElementTreeSelectionDialog dialog;
-
-			dialog = new ElementTreeSelectionDialog(getShell(),
-					new WorkbenchLabelProvider(),
-					new WorkbenchContentProvider());
-
-			// configure dialog properties
-			dialog
-					.setTitle(ModelBusUIMessages.LoadModelPage_BrowseWorkspaceDialogTitle);
-			dialog
-					.setMessage(ModelBusUIMessages.LoadModelPage_BrowseWorkspaceDialogDescription);
-			dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
-			dialog
-					.setComparator(new ResourceComparator(
-							ResourceComparator.NAME));
-			dialog.setAllowMultiple(false);
-
-			// open the dialog
-			int pressedButton;
-			IResource resource;
-
-			do {
-				pressedButton = dialog.open();
-				resource = (IResource) dialog.getFirstResult();
-			} while (pressedButton != IDialogConstants.CANCEL_ID
-					&& resource.getType() != IResource.FILE);
-
-			// if OK was pressed set path
-			if (pressedButton == IDialogConstants.OK_ID) {
-				String fileLoc = encodePath(resource);
-				modelFileTextBox.setText(fileLoc);
-			}
-		}
-	}
-
-	/**
-   * 
-   */
-	protected class BrowseFileListener extends SelectionAdapter implements
-			SelectionListener {
-
-		@Override
-		public void widgetSelected(SelectionEvent e) {
-			FileDialog dialog;
-			String filePath;
-
-			// open dialog
-			dialog = new FileDialog(getShell(), SWT.OPEN);
-			filePath = dialog.open();
-
-			// if file was selected set path
-			if (filePath != null) {
-				modelFileTextBox.setText(filePath);
-			}
-		}
+		// no else.
 	}
 }

@@ -47,11 +47,9 @@ import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
-import tudresden.ocl20.pivot.models.ecore.internal.provider.EcoreModelInstanceProvider;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -85,15 +83,6 @@ public class EcoreModel extends AbstractModel implements IModel {
 
     // initialize
     this.resource = resource;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModel#getModelInstanceProvider()
-   */
-  public IModelInstanceProvider getModelInstanceProvider() {
-	  return new EcoreModelInstanceProvider(resource, this);
   }
 
   /**

@@ -3,5 +3,6 @@
 <plugin>
    <extension-point id="metamodels" name="Metamodels" schema="schema/metamodels.exsd"/>
    <extension-point id="models" name="Models" schema="schema/models.exsd"/>
+   <extension-point id="modelinstancetypes" name="Model Instance File Formats" schema="schema/modelinstancetypes.exsd"/>
 
 </plugin>

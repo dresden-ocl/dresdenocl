@@ -836,7 +836,6 @@ public class JavaStandardlibraryAdapterFactory extends
 							.getName());
 		}
 
-
 		/* Else return null. */
 		else {
 			result = null;
