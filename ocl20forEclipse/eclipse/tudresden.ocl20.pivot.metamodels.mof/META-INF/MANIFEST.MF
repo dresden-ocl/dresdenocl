@@ -8,8 +8,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.logging,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.pivotmodel,
- org.apache.commons.lang,
- tudresden.ocl20.mdrepository,
- tudresden.ocl20.pivot.models.mdr
+ tudresden.ocl20.mdrepository
 Eclipse-LazyStart: true
 Bundle-Vendor: TU Dresden, Software Technology Group
