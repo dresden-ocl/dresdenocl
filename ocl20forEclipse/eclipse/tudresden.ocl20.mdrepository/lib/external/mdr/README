@@ -1,9 +1,0 @@
-The OCL2.0 Toolkit depends on NetBeans MDR (http://mdr.netbeans.org/).
-
-The JAR files in this directory contain a pre-build version of NetBeans
-MDR, compiled from CVS sources of 2004-12-21. This version is known to
-work with our toolkit. Other versions may also work, but are completely
-untested.
-
-ak/20050221
-

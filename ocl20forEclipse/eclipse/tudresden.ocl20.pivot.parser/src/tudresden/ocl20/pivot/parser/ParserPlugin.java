@@ -42,7 +42,6 @@ import org.osgi.framework.BundleContext;
 import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.parser.internal.ocl2parser.OCLParser;
-import tudresden.ocl20.pivot.parser.internal.xocl.XOCLParser;
 
 /**
  * The activator class controls the plug-in life cycle
