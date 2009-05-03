@@ -26,20 +26,20 @@ import org.osgi.framework.BundleContext;
  * The activator class controls the plug-in life cycle.
  * </p>
  */
-public class EcoreModelPlugin extends Plugin {
+public class EcoreModelInstanceTypePlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.modelinstancetype.ecore";
 
 	/** The shared instance. */
-	private static EcoreModelPlugin plugin;
+	private static EcoreModelInstanceTypePlugin plugin;
 
 	/**
 	 * <p>
-	 * Creates a new {@link EcoreModelPlugin}.
+	 * Creates a new {@link EcoreModelInstanceTypePlugin}.
 	 * </p>
 	 */
-	public EcoreModelPlugin() {
+	public EcoreModelInstanceTypePlugin() {
 	}
 
 	/*
@@ -66,12 +66,12 @@ public class EcoreModelPlugin extends Plugin {
 
 	/**
 	 * <p>
-	 * Returns the shared instance
+	 * Returns the shared instance.
 	 * </p>
 	 * 
 	 * @return The shared instance.
 	 */
-	public static EcoreModelPlugin getDefault() {
+	public static EcoreModelInstanceTypePlugin getDefault() {
 		return plugin;
 	}
 }
