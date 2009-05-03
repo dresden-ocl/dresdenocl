@@ -1,6 +1,39 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
+Release 1.2X (Unknown)
+-------------------------------
+- The ModelBus Architecture was refactored.
+ - IModelInstances are now meta model independent.
+
+- The IModel interface was refactored.
+ - A new method getType() was introduced.
+ - A new method isInstanceOf(Type) was introduced.
+
+- A Bug in the Wizards were fixed.
+ - The Model Import Wizard can now be started when the current focus is on a 
+   non tree-like view.
+ - The Model Instance Import Wizard can now be started when the current focus
+   is on a non tree-like view.
+ - The OCL Constraint Import Wizard can now be started when the current focus
+   is on a non tree-like view.
+ - The Java Code Generator can now be started when the current focus is on a 
+   non tree-like view.
+
+- The Model Instance Wizard was redesigned.
+
+- The Model Instance Browser was redesigned.
+ - ModeObjects are now also displayed for Sub-Types of selected 
+   Types in the Model Browser.
+
+- The Interpreter View was redesigned.
+
+- Some problems with icons and menu entries in the binary release were fixed.
+
+- Some Bugs of the OCL-Interpreter were fixed.
+ - Constraints are now interpreted for constrained 
+   sub-classes as well.
+
 Release 1.2 (February 26th 2009)
 -------------------------------
 - The new tool Ocl2Java (ApsectJ code generation for OCL 
