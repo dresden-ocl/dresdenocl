@@ -303,7 +303,7 @@ public class SpecificSettingsPage extends WizardPage {
 		/* Add a change listener to react on updates. */
 		violationMacroText.addModifyListener(new ModifyListener() {
 
-			@Override
+			// @Override   mt: commented out to be compatible with Java 1.5
 			public void modifyText(ModifyEvent e) {
 				updateSettings();
 			}

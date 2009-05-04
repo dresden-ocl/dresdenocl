@@ -16,5 +16,4 @@ Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.standardlibrary.java,
  tudresden.ocl20.pivot.standardlibrary.java.internal.factory,
  tudresden.ocl20.pivot.standardlibrary.java.internal.library
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
- J2SE-1.5
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -16,3 +16,4 @@ Export-Package: tudresden.ocl20.pivot.parser;
    tudresden.ocl20.pivot.modelbus,
    org.osgi.framework,
    org.eclipse.core.runtime"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

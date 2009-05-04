@@ -7,3 +7,4 @@ Export-Package: tudresden.ocl20.pivot.examples.living
 Require-Bundle: tudresden.ocl20.pivot.modelbus
 Bundle-ClassPath: src/,
  .
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
