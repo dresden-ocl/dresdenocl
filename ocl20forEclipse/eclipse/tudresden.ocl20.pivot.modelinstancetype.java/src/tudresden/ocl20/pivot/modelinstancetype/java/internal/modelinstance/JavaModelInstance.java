@@ -22,8 +22,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -59,7 +61,9 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	protected static StandardlibraryAdapterFactory DEFAULTSLAF = JavaStandardlibraryAdapterFactory
 			.getInstance();
 
-	/** The {@link ClassLoader} used to load types of the {@link IModelInstance}. */
+	/**
+	 * The {@link ClassLoader} used to load types of the {@link IModelInstance}.
+	 */
 	protected ClassLoader myClassLoader;
 
 	/**
@@ -288,41 +292,41 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 *         package to class name).
 	 */
 	public OclType findType(List<String> pathName) {
-	
+
 		Class<?> typeClass;
 		OclType result;
 		ArrayList<String> packagelist;
-	
+
 		typeClass = null;
 		result = null;
 		packagelist = new ArrayList<String>(pathName);
-	
+
 		/* Check if the given pathName leads to a type in the model. */
 		if (this.isObjectOfModel(pathName)) {
-	
+
 			String path;
 			Iterator<String> pathIterator;
-	
+
 			/* Eventually remove the rootPackage's name from the pathName. */
 			if (this.myRootNamespace.getName().equals(packagelist.get(0))) {
 				packagelist.remove(0);
 			}
 			// no else.
-	
+
 			path = packagelist.remove(0);
 			pathIterator = packagelist.iterator();
-	
+
 			while (pathIterator.hasNext()) {
 				path = path + "." + pathIterator.next();
 			}
-	
+
 			/* Try to load the class for the given path. */
 			try {
 				typeClass = this.myClassLoader.loadClass(path);
-	
+
 				/* Check if the loaded types is already known. */
 				result = this.myKnownTypes.get(typeClass);
-	
+
 				/* Check if the loaded type is already known; else load him. */
 				if (result == null) {
 					result = (OclType) Platform.getAdapterManager().getAdapter(
@@ -331,13 +335,13 @@ public class JavaModelInstance extends AbstractModelInstance implements
 				}
 				// no else.
 			}
-	
+
 			catch (ClassNotFoundException e) {
 				/* Do nothing; return null. */
 			}
-	
+
 		}
-	
+
 		return result;
 	}
 
@@ -355,9 +359,6 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 */
 	private void addObject(Object anObject) throws ModelAccessException {
 
-		String[] path;
-		List<String> pathList;
-
 		String key;
 		List<IModelObject> objectList;
 
@@ -367,12 +368,10 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		Type aType;
 		List<String> aTypesQualifiedName;
 
-		/* Get the path of the given Object. */
-		path = anObject.getClass().getCanonicalName().split("[.]");
-		pathList = new ArrayList<String>(Arrays.asList(path));
+		/* Try to get the canonical name of the related type in the model. */
+		key = this.getTypeNameInModel(anObject.getClass());
 
-		/* Check if the given Object belongs to the model. */
-		if (!this.isObjectOfModel(pathList)) {
+		if (key == null) {
 			String msg;
 
 			msg = "ModelInstance doesn't match to model. ";
@@ -382,8 +381,6 @@ public class JavaModelInstance extends AbstractModelInstance implements
 			throw new ModelAccessException(msg);
 		}
 		// no else.
-
-		key = anObject.getClass().getCanonicalName();
 
 		/* Get objects to the given key. */
 		objectList = this.allMyObjectsByType.get(key);
@@ -440,5 +437,138 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		while (objectIterator.hasNext()) {
 			this.addObject(objectIterator.next());
 		}
+	}
+
+	/**
+	 * <p>
+	 * A helper method returning a {@link Set} containing all interface
+	 * {@link Class}es a given {@link Class} or one of its super {@link Class}es
+	 * implements.
+	 * </p>
+	 * 
+	 * @param aClass
+	 *            The Class whose interface {@link Class}es shall be returned.
+	 * @return A {@link Set} of interface {@link Class}es.
+	 */
+	private Set<Class<?>> collectInterfaces(Class<?> aClass) {
+
+		Set<Class<?>> result;
+		Class<?> superClass;
+
+		Class<?>[] aClassInterfaces;
+		Class<?> anInterface;
+
+		superClass = aClass.getSuperclass();
+
+		/* Eventually get the interfaces of the super class. */
+		if (superClass != null) {
+			result = this.collectInterfaces(superClass);
+		}
+
+		/* Else create a new set. */
+		else {
+			result = new HashSet<Class<?>>();
+		}
+
+		aClassInterfaces = aClass.getInterfaces();
+
+		/* Add all interfaces of the class to the result. */
+		for (int index = 0; index < aClassInterfaces.length; index++) {
+
+			anInterface = aClassInterfaces[index];
+
+			/* Add the interface. */
+			result.add(anInterface);
+			/* Add all extended interfaces. */
+			result.addAll(this.collectInterfaces(anInterface));
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method checking whether or not a given {@link Class} is part of
+	 * the active {@link IModel} or is a sub {@link Type} of a {@link Type} in
+	 * the active {@link IModel}. Returns the canonical name of the {@link Type}
+	 * in the {@link IModel} or <code>null</code>.
+	 * </p>
+	 * 
+	 * @param objectClass
+	 *            The {@link Class} which shall be checked.
+	 * @return The canonical name of the {@link Type} in the {@link IModel} or
+	 *         <code>null</code>.
+	 */
+	private String getTypeNameInModel(Class<?> objectClass) {
+
+		String result;
+
+		Class<?> aClass;
+
+		String[] canonicalName;
+		List<String> packageList;
+
+		result = null;
+		aClass = objectClass;
+
+		/*
+		 * Check the class itself and eventually the class inheritance path
+		 * until java.lang.Object.
+		 */
+		while (aClass != null) {
+
+			/* Get the canonicalName of the given Class. */
+			canonicalName = aClass.getCanonicalName().split("[.]");
+			packageList = new ArrayList<String>(Arrays.asList(canonicalName));
+
+			/* Check if the packageList belongs to the model. */
+			if (this.isObjectOfModel(packageList)) {
+				result = aClass.getCanonicalName();
+				break;
+			}
+
+			/* Else get the super class. */
+			else {
+				aClass = aClass.getSuperclass();
+			}
+		}
+
+		/*
+		 * If no related model type has been found yet, try to check the class'
+		 * interfaces.
+		 */
+		if (result == null) {
+
+			Set<Class<?>> interfaces;
+
+			/*
+			 * Get the interface classes of the object class and its super
+			 * classes.
+			 */
+			interfaces = this.collectInterfaces(objectClass);
+
+			/*
+			 * Iterate through the interfaces and check if they are part of the
+			 * model.
+			 */
+			for (Class<?> anInterface : interfaces) {
+
+				/* Get the canonicalName of the given Class. */
+				canonicalName = anInterface.getCanonicalName().split("[.]");
+				packageList = new ArrayList<String>(Arrays
+						.asList(canonicalName));
+
+				/* Check if the packageList belongs to the model. */
+				if (this.isObjectOfModel(packageList)) {
+					result = anInterface.getCanonicalName();
+					break;
+				}
+				// no else.
+			}
+			// end for.
+		}
+		// no else.
+
+		return result;
 	}
 }
