@@ -270,35 +270,26 @@ public class ModelObjectFilter extends ViewerFilter {
 		 */
 		else if (aParentElement instanceof List) {
 
-			List<String> aParentsCanonicalName;
-
-			aParentsCanonicalName = (List<String>) aParentElement;
-
 			if (anElement instanceof IModelObject) {
 
 				IModelObject aModelObject;
 
-				String anElementsQualifiedName;
-				String aParentsQualifiedName;
-
+				result = false;
 				aModelObject = (IModelObject) anElement;
 
-				anElementsQualifiedName = aModelObject.getQualifiedNameString();
+				/*
+				 * Iterate through the filtered types and check if the model
+				 * object is an instance of one of these types.
+				 */
+				for (Type aType : this.myFilteredTypes) {
 
-				aParentsQualifiedName = null;
-
-				/* Convert the name of the parent elements type into a string. */
-				for (String aPackage : aParentsCanonicalName) {
-					if (aParentsQualifiedName == null) {
-						aParentsQualifiedName = aPackage;
+					if (aModelObject.isInstanceOf(aType)) {
+						result = true;
+						break;
 					}
-
-					else {
-						aParentsQualifiedName += "::" + aPackage;
-					}
+					// no else.
 				}
-
-				result = aParentsQualifiedName.equals(anElementsQualifiedName);
+				// end for.
 			}
 
 			else {

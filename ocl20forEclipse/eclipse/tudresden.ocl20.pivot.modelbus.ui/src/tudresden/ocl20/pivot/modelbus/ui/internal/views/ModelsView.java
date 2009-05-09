@@ -23,15 +23,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -47,8 +44,6 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.provider.ExpressionsItemProviderAdapterFactory;
 import tudresden.ocl20.pivot.essentialocl.types.provider.TypesItemProviderAdapterFactory;
-import tudresden.ocl20.pivot.modelbus.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.IMetamodelDescriptor;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
@@ -57,6 +52,7 @@ import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
+import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelSelectionAction;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelItemProviderAdapterFactory;
 
@@ -70,364 +66,386 @@ import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelItemProviderAdapterFa
  */
 public class ModelsView extends ViewPart implements IModelRegistryListener {
 
-	// The Constant ID of this class
+	/** The Constant ID of this {@link Class}. */
 	public static final String ID = IModelBusConstants.MODELS_VIEW_ID;
 
-	// Logger for this class
-	private static final Logger logger = ModelBusUIPlugin
+	/** The {@link Logger} for this {@link Class}. */
+	private static final Logger LOGGER = ModelBusUIPlugin
 			.getLogger(ModelsView.class);
 
-	// the tree viewer displaying the model
-	private TreeViewer viewer;
+	/** The adapter factory that provides the view of the {@link IModel}. */
+	private ComposedAdapterFactory myAdapterFactory;
 
-	// a helper class for back-forward navigation
-	private DrillDownAdapter drillDownAdapter;
+	/** A helper class for back-forward navigation. */
+	private DrillDownAdapter myDrillDownAdapter;
 
-	// maps registered models to the activating actions
-	private Map<IModel, ModelSelectionAction> modelSelectionActions;
+	/** A cached reference to the drop down menu. */
+	private IMenuManager myMenu;
 
-	// the currently selected action representing the active model
-	private ModelSelectionAction selectedAction;
+	/** Maps registered {@link IModel}s to the activating {@link Action}s. */
+	private Map<IModel, ModelSelectionAction> myModelSelectionActions;
 
-	// a cached reference to the drop down menu
-	private IMenuManager menu;
+	/** The {@link TreeViewer} displaying the {@link IModel}. */
+	private TreeViewer myModelViewer;
 
-	// the adapter factory that provides the view of the model
-	private ComposedAdapterFactory adapterFactory;
-
-	// the property sheet page that displays model properties
-	private PropertySheetPage propertySheet;
+	/** The property sheet page that displays {@link IModel} properties. */
+	private PropertySheetPage myPropertySheet;
 
 	/**
-	 * The constructor.
+	 * The currently selected {@link Action} representing the active
+	 * {@link IModel}.
+	 */
+	private ModelSelectionAction selectedAction;
+
+	/**
+	 * <p>
+	 * Creates a new {@link ModelsView}.
+	 * </p>
 	 */
 	public ModelsView() {
 		super();
 
-		modelSelectionActions = new HashMap<IModel, ModelSelectionAction>();
+		List<AdapterFactory> factories;
 
-		// add as a listener to the model registry
+		this.myModelSelectionActions = new HashMap<IModel, ModelSelectionAction>();
+
+		/* Add as a listener to the model registry. */
 		ModelBusPlugin.getModelRegistry().addModelRegistryListener(this);
 
-		// create the adapter factory that renders the model
-		List<AdapterFactory> factories = new ArrayList<AdapterFactory>();
+		/* Create the adapter factory that renders the model. */
+		factories = new ArrayList<AdapterFactory>();
+
 		factories.add(new TypesItemProviderAdapterFactory());
 		factories.add(new ExpressionsItemProviderAdapterFactory());
 		factories.add(new PivotModelItemProviderAdapterFactory());
-		adapterFactory = new ComposedAdapterFactory(factories);
+
+		this.myAdapterFactory = new ComposedAdapterFactory(factories);
 	}
 
-	/**
-	 * This is a callback that will allow us to create the viewer and initialize
-	 * it.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
 	 */
 	@Override
-	public void createPartControl(Composite parent) {
-
-		// create a new tree viewer
-		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-
-		// enable drill down behavior
-		drillDownAdapter = new DrillDownAdapter(viewer);
-		drillDownAdapter.addNavigationActions(getViewSite().getActionBars()
-				.getToolBarManager());
-
-		// set content and label provider
-		viewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory));
-		viewer
-				.setLabelProvider(new AdapterFactoryLabelProvider(
-						adapterFactory));
-
-		// automatically expand top-level packages
-		viewer.setAutoExpandLevel(2);
-
-		// initialize the drop down menu
-		initMenu();
-
-		// activate selection support
-		getViewSite().setSelectionProvider(viewer);
-	}
-
-	/**
-	 * Lazily creates a cached version of the property sheet.
-	 */
-	public IPropertySheetPage getPropertySheetPage() {
-
-		if (propertySheet == null) {
-			propertySheet = new PropertySheetPage();
-			propertySheet
-					.setPropertySourceProvider(new AdapterFactoryContentProvider(
-							adapterFactory));
+	public void dispose() {
+	
+		/* Clear the cache for model selection actions. */
+		this.myModelSelectionActions.clear();
+		this.selectedAction = null;
+	
+		/* Remove as listener from the model registry. */
+		ModelBusPlugin.getModelRegistry().removeModelRegistryListener(this);
+	
+		/* Eventually dispose the property sheet page. */
+		if (this.myPropertySheet != null) {
+			this.myPropertySheet.dispose();
 		}
-
-		return propertySheet;
+		// no else.
+	
+		super.dispose();
 	}
 
 	/**
-	 * Passing the focus request to the viewer's control.
-	 */
-	@Override
-	public void setFocus() {
-		viewer.getControl().setFocus();
-	}
-
-	/**
+	 * <p>
 	 * Overridden to return the property sheet page if requested.
+	 * </p>
 	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#getAdapter(java.lang.Class)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class adapter) {
-
+	
+		Object result;
+	
 		if (adapter.equals(IPropertySheetPage.class)) {
-			return getPropertySheetPage();
+			result = this.getPropertySheetPage();
 		}
-
-		return super.getAdapter(adapter);
+	
+		else {
+			result = super.getAdapter(adapter);
+		}
+	
+		return result;
 	}
 
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * 
-	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
-	 */
-	@Override
-	public void dispose() {
-
-		// clear the cache for model selection actions
-		modelSelectionActions.clear();
-		selectedAction = null;
-
-		// remove as listener from the model registry
-		ModelBusPlugin.getModelRegistry().removeModelRegistryListener(this);
-
-		// dispose the property sheet page
-		if (propertySheet != null) {
-			propertySheet.dispose();
-		}
-
-		super.dispose();
-	}
-
-	/**
-	 * Implemented to realize the {@link IModelRegistryListener} interface.
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#activeModelChanged(tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
+	 * activeModelChanged
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent e) {
-		setActiveModel(e.getAffectedModel());
+		this.setActiveModel(e.getAffectedModel());
 	}
 
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * Implemented to realize the {@link IModelRegistryListener} interface.
+	 * @see
+	 * org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets
+	 * .Composite)
+	 */
+	@Override
+	public void createPartControl(Composite parent) {
+
+		/* Create a new tree viewer. */
+		this.myModelViewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL);
+
+		/* Enable drill down behavior. */
+		this.myDrillDownAdapter = new DrillDownAdapter(this.myModelViewer);
+		this.myDrillDownAdapter.addNavigationActions(getViewSite()
+				.getActionBars().getToolBarManager());
+
+		/* Set content and label provider. */
+		this.myModelViewer
+				.setContentProvider(new AdapterFactoryContentProvider(
+						this.myAdapterFactory));
+		this.myModelViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+				this.myAdapterFactory));
+
+		/* Automatically expand top-level packages. */
+		this.myModelViewer.setAutoExpandLevel(2);
+
+		/* Initialize the drop down menu. */
+		this.initMenu();
+
+		/* Activate selection support. */
+		this.getViewSite().setSelectionProvider(this.myModelViewer);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded(tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
+	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent e) {
-		addModelSelectionAction(e.getAffectedModel());
+		this.addModelSelectionAction(e.getAffectedModel());
 	}
 
-	/**
-	 * Helper method which lazily initializes the reference to the drop down
-	 * menu.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
 	 */
-	protected IMenuManager getMenu() {
-		if (menu == null) {
-			menu = getViewSite().getActionBars().getMenuManager();
-		}
-
-		return menu;
+	@Override
+	public void setFocus() {
+		this.myModelViewer.getControl().setFocus();
 	}
 
 	/**
-	 * Initializes the drop-down menu of the view with all models currently
-	 * registered.
-	 */
-	protected void initMenu() {
-		IModel[] models = ModelBusPlugin.getModelRegistry().getModels();
-
-		for (int i = 0; i < models.length; i++) {
-			addModelSelectionAction(models[i]);
-		}
-
-		// update the currently active model
-		updateActiveModel();
-	}
-
-	/**
+	 * <p>
 	 * Creates a new {@link ModelSelectionAction} for the given {@link IModel
 	 * model} and adds it to the menu. Duplicate actions are prevented by
 	 * checking whether an action for the given model already exists.
+	 * </p>
 	 */
-	protected ModelSelectionAction addModelSelectionAction(IModel model) {
+	private ModelSelectionAction addModelSelectionAction(IModel model) {
+
 		ModelSelectionAction action;
 
-		if (modelSelectionActions.containsKey(model)) {
-			action = modelSelectionActions.get(model);
+		/* Check if the action has already been created. */
+		if (this.myModelSelectionActions.containsKey(model)) {
+			action = this.myModelSelectionActions.get(model);
 		}
 
+		/* Else create the action. */
 		else {
 			action = new ModelSelectionAction(model);
-			modelSelectionActions.put(model, action);
-			getMenu().add(action);
-			getViewSite().getActionBars().updateActionBars();
+
+			this.myModelSelectionActions.put(model, action);
+			this.getMenu().add(action);
+			this.getViewSite().getActionBars().updateActionBars();
 		}
 
 		return action;
 	}
 
 	/**
-	 * Activates the action corresponding to the given model and updates the
-	 * input for the viewer.
+	 * <p>
+	 * A helper method which lazily initializes the reference to the drop down
+	 * menu.
+	 * </p>
 	 */
-	protected void updateActiveModel() {
-		IModel model = ModelBusPlugin.getModelRegistry().getActiveModel();
+	private IMenuManager getMenu() {
 
-		if (model == null) {
-			resetActiveModel();
+		/* Eventually create the menu. */
+		if (this.myMenu == null) {
+			this.myMenu = getViewSite().getActionBars().getMenuManager();
 		}
+		// no else.
 
-		else {
-			setActiveModel(model);
-		}
+		return this.myMenu;
 	}
 
 	/**
-	 * Resets the currently active model and the associated action.
+	 * <p>
+	 * A helper method that lazily creates a cached version of the property
+	 * sheet.
+	 * </p>
 	 */
-	protected void resetActiveModel() {
-
-		if (selectedAction != null) {
-			selectedAction.setChecked(false);
-			selectedAction = null;
+	private IPropertySheetPage getPropertySheetPage() {
+	
+		if (this.myPropertySheet == null) {
+			this.myPropertySheet = new PropertySheetPage();
+			this.myPropertySheet
+					.setPropertySourceProvider(new AdapterFactoryContentProvider(
+							this.myAdapterFactory));
 		}
-
-		if (viewer.getInput() != null) {
-			setInput(null);
-		}
+		// no else.
+	
+		return this.myPropertySheet;
 	}
 
 	/**
+	 * <p>
+	 * Initializes the drop-down menu of the view with all models currently
+	 * registered.
+	 * </p>
+	 */
+	private void initMenu() {
+
+		IModel[] models;
+
+		models = ModelBusPlugin.getModelRegistry().getModels();
+
+		/* Add an action for every model available. */
+		for (int i = 0; i < models.length; i++) {
+			this.addModelSelectionAction(models[i]);
+		}
+
+		/* Update the currently active model. */
+		this.updateActiveModel();
+	}
+
+	/**
+	 * <p>
+	 * Resets the currently active {@link IModel} and the associated action.
+	 * </p>
+	 */
+	private void resetActiveModel() {
+
+		if (this.selectedAction != null) {
+			this.selectedAction.setChecked(false);
+			this.selectedAction = null;
+		}
+		// no else.
+
+		if (this.myModelViewer.getInput() != null) {
+			this.setInput(null);
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
 	 * Checks the corresponding action and sets the input of the viewer.
+	 * </p>
 	 */
-	protected void setActiveModel(IModel model) {
-		ModelSelectionAction action = modelSelectionActions.get(model);
+	private void setActiveModel(IModel model) {
 
-		if (action != null && action != selectedAction) {
+		ModelSelectionAction action;
+		Namespace rootNamespace;
 
-			if (selectedAction != null) {
-				selectedAction.setChecked(false);
+		action = this.myModelSelectionActions.get(model);
+
+		if (action != null && action != this.selectedAction) {
+
+			if (this.selectedAction != null) {
+				this.selectedAction.setChecked(false);
 			}
+			// no else.
 
 			action.setChecked(true);
-			selectedAction = action;
+			this.selectedAction = action;
 		}
 
+		/* This should not happen. */
 		else {
-			// this should not happen
-			throw new IllegalStateException(
-					"No model selection action has been created for model '" //$NON-NLS-1$
-							+ model.getDisplayName() + "'"); //$NON-NLS-1$
+			String msg;
+
+			msg = "No model selection action has been created for model '";
+			msg += model.getDisplayName() + "'";
+
+			throw new IllegalStateException(msg);
 		}
 
-		// get the root namespace from the new active model
-		Namespace rootNamespace = null;
-
+		/* Get the root name space from the new active model. */
 		try {
 			rootNamespace = model.getRootNamespace();
 		}
 
 		catch (ModelAccessException e) {
-			logger.error("Error when accessing model " + model, e); //$NON-NLS-1$
+
+			String msg;
+
+			msg = "Error when accessing model " + model;
+			LOGGER.error(msg, e);
 
 			MessageDialog.openError(getSite().getShell(),
 					ModelBusUIMessages.ModelsView_Error, NLS.bind(
 							ModelBusUIMessages.ModelsView_AccessRootNamespace,
 							model.getDisplayName()));
 
-			// do not exit here to reset the input to null below
+			/* Do not exit here to reset the input to null below. */
+			rootNamespace = null;
 		}
-
-		// update the input; we do not use equals for comparison of current
-		// input with new root
-		// namespace because the root namespace may be a transient one with an
-		// empty name
-		if (viewer.getInput() == null && rootNamespace != null
-				|| viewer.getInput() != null
-				&& viewer.getInput() != rootNamespace) {
-			setInput(rootNamespace);
-		}
-	}
-
-	/**
-	 * Helper method to set the input of the tree viewer.
-	 */
-	protected void setInput(Namespace rootNamespace) {
-		viewer.setInput(rootNamespace);
-		viewer.refresh();
-		viewer.setSelection(new StructuredSelection(rootNamespace
-				.getNestedNamespace().isEmpty() ? StructuredSelection.EMPTY
-				: rootNamespace.getNestedNamespace().get(0)));
-		drillDownAdapter.reset();
-	}
-
-	/**
-	 * An action representing a registered {@link IModel} which will set the
-	 * input of the Models view to this model.
-	 */
-	protected class ModelSelectionAction extends Action implements IAction {
-
-		// the model represented by this action
-		private IModel model;
-
-		/**
-		 * Creates a new <code>ModelSelectionAction</code> instance
-		 * 
-		 * @param model
-		 *            the represented model
-		 */
-		protected ModelSelectionAction(IModel model) {
-			super(model.getDisplayName(), IAction.AS_RADIO_BUTTON);
-
-			// initialize
-			this.model = model;
-
-			// set the icon if the metamodel is realized by an Eclipse
-			// descriptor
-			IMetamodel metamodel = model.getMetamodel();
-
-			if (metamodel instanceof IMetamodelDescriptor) {
-				setImageDescriptor(((IMetamodelDescriptor) metamodel).getIcon());
-			}
-
-			// set the string representation of the model as the action's id, in
-			// the hope that it uniquely
-			// identifies the model
-			setId(model.toString());
-		}
+		// end catch.
 
 		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jface.action.Action#run()
+		 * Update the input; we do not use equals for comparison of current
+		 * input with new root name space because the root name space may be a
+		 * transient one with an empty name.
 		 */
-		@Override
-		public void run() {
-			// set the new active model
-			ModelBusPlugin.getModelRegistry().setActiveModel(model);
+		if (this.myModelViewer.getInput() == null && rootNamespace != null
+				|| this.myModelViewer.getInput() != null
+				&& this.myModelViewer.getInput() != rootNamespace) {
+
+			this.setInput(rootNamespace);
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A helper method to set the input of the tree viewer.
+	 * </p>
+	 */
+	private void setInput(Namespace rootNamespace) {
+	
+		this.myModelViewer.setInput(rootNamespace);
+		this.myModelViewer.refresh();
+	
+		this.myModelViewer.setSelection(new StructuredSelection(rootNamespace
+				.getNestedNamespace().isEmpty() ? StructuredSelection.EMPTY
+				: rootNamespace.getNestedNamespace().get(0)));
+	
+		this.myDrillDownAdapter.reset();
+	}
+
+	/**
+	 * <p>
+	 * Activates the action corresponding to the given {@link IModel} and
+	 * updates the input for the viewer.
+	 * </p>
+	 */
+	private void updateActiveModel() {
+
+		IModel model;
+
+		model = ModelBusPlugin.getModelRegistry().getActiveModel();
+
+		if (model == null) {
+			this.resetActiveModel();
 		}
 
-		/**
-		 * Returns a string representation of this action.
-		 */
-		@Override
-		public String toString() {
-			return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-					.append("model", model) //$NON-NLS-1$
-					.toString();
+		else {
+			this.setActiveModel(model);
 		}
 	}
 }
