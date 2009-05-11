@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.ecore.util.BasicInternalEList;
 
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -64,7 +65,7 @@ public abstract class AbstractType extends TypeImpl implements Type {
    */
   @Override
   public final List<Property> getOwnedProperty() {
-    List<Property> ownedProperty = new ArrayList<Property>();
+    List<Property> ownedProperty = new BasicInternalEList<Property>(Property.class);
     ownedProperty.addAll(getOwnedPropertyGen());
     ownedProperty.addAll(getOwnedPropertyImpl());
     return ownedProperty;

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.Association;
+import org.eclipse.uml2.uml.AssociationClass;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
@@ -106,128 +107,6 @@ public class UML2Model extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
-	 * Helper method that creates the adapter for the root namespace. If there
-	 * is only one top-level namespace possible, then this method should just
-	 * return the adapter for the top-level namespace, else it should create a
-	 * new "virtual" root namespace.
-	 * </p>
-	 * 
-	 * @return A {@link Namespace} instance
-	 * 
-	 * @throws ModelAccessException
-	 *             If an error occurs while loading the adapted UML2 model.
-	 * 
-	 * @generated NOT
-	 */
-	protected Namespace createRootNamespace() throws ModelAccessException {
-
-		List<EObject> rootPackages;
-		org.eclipse.uml2.uml.Package rootPackage;
-
-		/** load the resource. */
-		if (!resource.isLoaded()) {
-
-			if (logger.isInfoEnabled()) {
-				logger.info(NLS.bind(
-						UML2ModelMessages.UML2Model_LoadingUML2Model, resource
-								.getURI()));
-			}
-
-			/* Try to load the resource. */
-			try {
-				resource.load(null);
-			}
-
-			catch (IOException e) {
-				throw new ModelAccessException(
-						"Error while loading resource from " + resource.getURI(), e); //$NON-NLS-1$
-			}
-
-		}
-		// no else.
-
-		/* Get the root packages. */
-		rootPackages = resource.getContents();
-
-		/* Create a new package to serve as the root package. */
-		rootPackage = UMLFactory.eINSTANCE.createPackage();
-		rootPackage.setName("root");
-
-		/** Add all sub-packages and subtypes to the new root package. */
-		for (EObject eObject : rootPackages) {
-
-			if (eObject instanceof Package) {
-				rootPackage.getNestedPackages().add((Package) eObject);
-			}
-
-			else if (eObject instanceof Type) {
-				rootPackage.getOwnedMembers().add((Type) eObject);
-			}
-			// no else.
-		}
-		// end for.
-
-		this.convertAssociations(rootPackage);
-
-		return UML2AdapterFactory.INSTANCE.createNamespace(rootPackage);
-	}
-
-	/**
-	 * <p>
-	 * Processes all UML Associations: since they are treated as Types in the
-	 * UML meta model, they have to be mapped to Properties in the Pivot Model.
-	 * </p>
-	 * 
-	 * <p>
-	 * Precondition: binary associations
-	 * </p>
-	 * 
-	 * @param rootPackage
-	 *            the containing package (namespace)
-	 */
-	protected void convertAssociations(Package rootPackage) {
-
-		// associations in all nested packages have to converted
-		for (Package aPackage : rootPackage.getNestedPackages()) {
-			convertAssociations(aPackage);
-		}
-		for (Type type : rootPackage.getOwnedTypes()) {
-			if (type instanceof Association) {
-				Association association = (Association) type;
-
-				Property property1 = association.getOwnedEnds().get(0);
-				Property property2 = association.getOwnedEnds().get(1);
-				// search for navigable elements -> opposite is owner
-				if (property1.isNavigable()) {
-					UML2AdapterFactory.INSTANCE.createType(property2.getType())
-							.addProperty(
-									UML2AdapterFactory.INSTANCE
-											.createProperty(property1));
-				}
-				if (property2.isNavigable()) {
-					UML2AdapterFactory.INSTANCE.createType(property1.getType())
-							.addProperty(
-									UML2AdapterFactory.INSTANCE
-											.createProperty(property2));
-				}
-				// all other associations are not specified for navigation ->
-				// bidirectional
-				if (!(property1.isNavigable()) && !(property2.isNavigable())) {
-					UML2AdapterFactory.INSTANCE.createType(property2.getType())
-							.addProperty(
-									UML2AdapterFactory.INSTANCE
-											.createProperty(property1));
-					UML2AdapterFactory.INSTANCE.createType(property1.getType())
-							.addProperty(
-									UML2AdapterFactory.INSTANCE
-											.createProperty(property2));
-				}
-			}
-		}
-	}
-
-	/**
-	 * <p>
 	 * Overridden to base equality check on the URI of the associated resource.
 	 * </p>
 	 * 
@@ -279,5 +158,227 @@ public class UML2Model extends AbstractModel implements IModel {
 	@Override
 	public String toString() {
 		return this.resource.getURI().toString();
+	}
+
+	/**
+	 * <p>
+	 * A helper method which adds all {@link Property}s of a given {@link List}
+	 * to a given {@link Property} as fields.
+	 * </p>
+	 * 
+	 * @param anOwner
+	 *            The {@link Property} which shall know all given
+	 *            {@link Property}s.
+	 * @param allProperties
+	 *            The {@link List} of {@link Property}s which shall be added.
+	 */
+	private void addAllOtherAssciationEnds(Property anOwner,
+			List<Property> allProperties) {
+
+		for (Property aProperty : allProperties) {
+
+			/* Do not add the property to itself, but to all other properties. */
+			if (anOwner != aProperty) {
+				tudresden.ocl20.pivot.pivotmodel.Type ownerType;
+				tudresden.ocl20.pivot.pivotmodel.Property property;
+
+				/* Create or get the owner's Type. */
+				ownerType = UML2AdapterFactory.INSTANCE.createType(anOwner
+						.getType());
+
+				/* Create or get the property. */
+				property = UML2AdapterFactory.INSTANCE
+						.createProperty(aProperty);
+
+				/*
+				 * Check if the property has already been added (could happen
+				 * for bidirectional associations between the same type).
+				 */
+				if (!ownerType.getOwnedProperty().contains(property)) {
+					/* Else add the property. */
+					ownerType.addProperty(property);
+				}
+				// no else.
+			}
+			// no else.
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * A helper method that iterates through a {@link List} of {@link Property}s
+	 * and adds all other {@link Property}s to each {@link Property}, if it is
+	 * navigable.
+	 * </p>
+	 * 
+	 * @param properties
+	 *            The {@link List} of {@link Property}s.
+	 */
+	private void addNavigableAssociationEnds(List<Property> properties) {
+
+		boolean allArentNavigable;
+
+		/* Check if all properties aren't navigable. */
+		allArentNavigable = true;
+
+		for (Property aProperty : properties) {
+			allArentNavigable &= !aProperty.isNavigable();
+		}
+
+		/*
+		 * If all properties aren't navigable, the association is n-directional.
+		 * All properties know all others.
+		 */
+		if (allArentNavigable) {
+			for (Property aProperty : properties) {
+				this.addAllOtherAssciationEnds(aProperty, properties);
+			}
+		}
+
+		/*
+		 * Else check for each property if it is navigable and eventually add
+		 * the other properties to their fields.
+		 */
+		else {
+			for (Property aProperty : properties) {
+				if (aProperty.isNavigable()) {
+					this.addAllOtherAssciationEnds(aProperty, properties);
+				}
+				// no else.
+			}
+			// end for.
+		}
+		// end else.
+	}
+
+	/**
+	 * <p>
+	 * Processes all UML Associations: since they are treated as Types in the
+	 * UML meta model, they have to be mapped to Properties in the Pivot Model.
+	 * </p>
+	 * 
+	 * <p>
+	 * Precondition: binary associations
+	 * </p>
+	 * 
+	 * @param rootPackage
+	 *            The containing {@link Package} (or name space).
+	 */
+	private void convertAssociations(Package rootPackage) {
+
+		/* Iterate through nested packages and convert their associations. */
+		for (Package aPackage : rootPackage.getNestedPackages()) {
+			this.convertAssociations(aPackage);
+		}
+
+		/*
+		 * Iterate through all types of the package and convert associations.
+		 */
+		for (Type aType : rootPackage.getOwnedTypes()) {
+
+			/* Check if aType is an association class. */
+			if (aType instanceof AssociationClass) {
+
+				AssociationClass anAssociationClass;
+				List<Property> allEnds;
+
+				/* Cast to AssociationClass. */
+				anAssociationClass = (AssociationClass) aType;
+
+				/* Get all association ends. */
+				allEnds = anAssociationClass.allConnections();
+
+				/* Add all other ends to each navigable end. */
+				this.addNavigableAssociationEnds(allEnds);
+			}
+
+			/* Else check if aType is another kind of association. */
+			else if (aType instanceof Association) {
+
+				Association anAssociation;
+
+				List<Property> allEnds;
+
+				/* Cast to association. */
+				anAssociation = (Association) aType;
+
+				/* Get all association ends. */
+				allEnds = anAssociation.getOwnedEnds();
+
+				/* Add all other ends to each navigable end. */
+				this.addNavigableAssociationEnds(allEnds);
+			}
+			// no else.
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * Helper method that creates the adapter for the root namespace. If there
+	 * is only one top-level namespace possible, then this method should just
+	 * return the adapter for the top-level namespace, else it should create a
+	 * new "virtual" root namespace.
+	 * </p>
+	 * 
+	 * @return A {@link Namespace} instance
+	 * 
+	 * @throws ModelAccessException
+	 *             If an error occurs while loading the adapted UML2 model.
+	 * 
+	 * @generated NOT
+	 */
+	private Namespace createRootNamespace() throws ModelAccessException {
+
+		List<EObject> rootPackages;
+		org.eclipse.uml2.uml.Package rootPackage;
+
+		/** load the resource. */
+		if (!resource.isLoaded()) {
+
+			if (logger.isInfoEnabled()) {
+				logger.info(NLS.bind(
+						UML2ModelMessages.UML2Model_LoadingUML2Model, resource
+								.getURI()));
+			}
+
+			/* Try to load the resource. */
+			try {
+				resource.load(null);
+			}
+
+			catch (IOException e) {
+				throw new ModelAccessException(
+						"Error while loading resource from " + resource.getURI(), e); //$NON-NLS-1$
+			}
+
+		}
+		// no else.
+
+		/* Get the root packages. */
+		rootPackages = resource.getContents();
+
+		/* Create a new package to serve as the root package. */
+		rootPackage = UMLFactory.eINSTANCE.createPackage();
+		rootPackage.setName("root");
+
+		/** Add all sub-packages and subtypes to the new root package. */
+		for (EObject eObject : rootPackages) {
+
+			if (eObject instanceof Package) {
+				rootPackage.getNestedPackages().add((Package) eObject);
+			}
+
+			else if (eObject instanceof Type) {
+				rootPackage.getOwnedMembers().add((Type) eObject);
+			}
+			// no else.
+		}
+		// end for.
+
+		this.convertAssociations(rootPackage);
+
+		return UML2AdapterFactory.INSTANCE.createNamespace(rootPackage);
 	}
 }

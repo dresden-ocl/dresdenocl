@@ -10,15 +10,18 @@ Release 1.2X (Unknown)
  - A new method getType() was introduced.
  - A new method isInstanceOf(Type) was introduced.
 
-- A Bug in the Java Model Instance Type was fixed.
+- A bug in the UML2 Meta Model was fixed.
+ - UML2 models can now contain n-ary associations.
+
+- A bug in the Java Model Instance Type was fixed.
  - Java instances can now also be imported, if they implement or extend Java
    Classes or Interfaces defined in the model.
 
-- Some Bugs of the OCL-Interpreter were fixed.
+- Some bugs of the OCL-Interpreter were fixed.
  - Constraints are now interpreted for constrained 
    sub-classes as well.
 
-- A Bug in the Wizards were fixed.
+- A bug in the Wizards were fixed.
  - The Model Import Wizard can now be started when the current focus is on a 
    non tree-like view.
  - The Model Instance Import Wizard can now be started when the current focus

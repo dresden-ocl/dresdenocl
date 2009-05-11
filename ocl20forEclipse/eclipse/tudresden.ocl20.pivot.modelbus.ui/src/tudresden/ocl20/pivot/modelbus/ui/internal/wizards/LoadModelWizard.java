@@ -93,9 +93,9 @@ public class LoadModelWizard extends Wizard implements IImportWizard {
 	 */
 	@Override
 	public void addPages() {
-		
+
 		super.addPages();
-		
+
 		this.addPage(this.mainPage);
 	}
 
@@ -106,9 +106,9 @@ public class LoadModelWizard extends Wizard implements IImportWizard {
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		
+
 		this.workbench = workbench;
-	
+
 		this.setWindowTitle(ModelBusUIMessages.LoadModelWizard_Title);
 		this.mainPage = new LoadModelPage(selection);
 	}
@@ -142,51 +142,35 @@ public class LoadModelWizard extends Wizard implements IImportWizard {
 			}
 
 			catch (ModelAccessException e) {
-
-				String dialogTitle;
-				String dialogMsg;
-
-				dialogTitle = ModelBusUIMessages.LoadModelWizard_ErrorMessageDialogTitle;
-
-				dialogMsg = ModelBusUIMessages.LoadModelWizard_ErrorOccured;
-
-				if (e.getMessage() != null) {
-					dialogMsg += e.getMessage();
-				}
-
-				else {
-					dialogMsg += ModelBusUIMessages.LoadModelWizard_CheckLog;
-				}
-
-				MessageDialog
-						.openError(this.getShell(), dialogTitle, dialogMsg);
-
-				LOGGER.error(dialogMsg, e);
-
-				/*
-				 * We need to re-throw a runtime exception or the wizard will
-				 * close afterwards.
-				 */
-				throw new IllegalStateException(dialogMsg, e);
+				/* Log and display the exception. */
+				this.openErrorDialog(e);
 			}
 
 			/* Add the successfully loaded model to the model registry. */
 			IModelRegistry modelRegistry;
-			
+
 			modelRegistry = ModelBusPlugin.getModelRegistry();
 
-			modelRegistry.addModel(model);
-			modelRegistry.setActiveModel(model);
+			/* Try to add the model to the registry. */
+			try {
+				modelRegistry.addModel(model);
+				modelRegistry.setActiveModel(model);
+			}
+
+			catch (Exception e) {
+				/* Log and display the exception. */
+				this.openErrorDialog(e);
+			}
 
 			/* Activate the Model Browser View. */
 			try {
-				this.workbench.getActiveWorkbenchWindow().getActivePage().showView(
-						ModelsView.ID);
-			} 
-			
+				this.workbench.getActiveWorkbenchWindow().getActivePage()
+						.showView(ModelsView.ID);
+			}
+
 			catch (PartInitException e) {
-				
-				LOGGER.error("Failed to activate the Model Btowser view.", e); //$NON-NLS-1$
+
+				LOGGER.error("Failed to activate the Model Browser view.", e); //$NON-NLS-1$
 				result = false;
 			}
 
@@ -194,5 +178,38 @@ public class LoadModelWizard extends Wizard implements IImportWizard {
 		}
 
 		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method which opens an error dialog for a given {@link Exception}
+	 * and logs the {@link Exception} as well.
+	 * </p>
+	 */
+	private void openErrorDialog(Exception e) {
+
+		String dialogTitle;
+		String dialogMsg;
+
+		dialogTitle = ModelBusUIMessages.LoadModelWizard_ErrorMessageDialogTitle;
+		dialogMsg = ModelBusUIMessages.LoadModelWizard_ErrorOccured;
+
+		if (e.getMessage() != null) {
+			dialogMsg += ": \n" + e.getMessage();
+		}
+
+		else {
+			dialogMsg += ModelBusUIMessages.LoadModelWizard_CheckLog;
+		}
+
+		MessageDialog.openError(this.getShell(), dialogTitle, dialogMsg);
+
+		LOGGER.error(dialogMsg, e);
+
+		/*
+		 * We need to re-throw a runtime exception or the wizard will close
+		 * afterwards.
+		 */
+		throw new IllegalStateException(dialogMsg, e);
 	}
 }
