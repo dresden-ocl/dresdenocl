@@ -1,0 +1,14 @@
+--
+----------------------------------------------------------------------
+-- Special expressions
+----------------------------------------------------------------------
+package RoyalLoyal
+
+
+
+  context CustomerCard 
+    inv: color = Color::silver
+    
+  
+
+endpackage

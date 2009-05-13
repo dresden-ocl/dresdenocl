@@ -1,0 +1,65 @@
+--
+----------------------------------------------------------------------
+-- Customer 
+----------------------------------------------------------------------
+package RoyalLoyal
+
+  context Customer
+    inv:  not programs->isEmpty()
+
+  context Customer
+    inv:   self.age() > 21 and self.age() < 65 
+
+ context Customer
+    inv:   self.age() <= 12 xor cards->size() > 3 
+
+ context Customer
+   inv:   title = 'Mr.' or title = 'Ms.' 
+
+  context Customer 
+    inv ofAge: age >= 18
+
+  context Customer 
+    inv:  programs->size() = cards->select(c:CustomerCard|c.valid = true )
+                             ->size()
+
+
+ /*context Customer::birthdayHappens() : void
+   post: age = age@pre + 1*/
+
+context Customer 
+   def: wellUsedCards : Set( CustomerCard ) 
+  	    = cards->select( transactions.points->sum() > 10000 ) 
+   def: loyalToCompanies : Bag( ProgramPartner ) 
+   	    = programs.partners 
+   
+    
+  context Customer 
+    inv: cards->select( c: CustomerCard| c.valid = true )->size() > 1
+
+  context Customer 
+    inv: name = 'Mona'
+
+ context Customer 
+   inv: self.name = 'Mona'
+
+ context Customer 
+   inv: self.name = 'Mona' 
+    inv: self.title = 'Ms.'
+
+ context Customer 
+    inv: self.name = 'Mona' and self.title = 'Ms.'
+
+ context Customer 
+    inv myInvariant: self.name = 'Mona'
+
+context Customer 
+  def: initial : String = name.substring(1,1)
+
+ context Customer
+ inv:  Set{1,2,3}->iterate( i: Integer; sum: Integer = 0 | sum + i ) = 0
+  
+  context Customer 
+    inv: programs->size() = cards->select( c: CustomerCard| c.valid = true )
+     	 		     ->size()
+endpackage
