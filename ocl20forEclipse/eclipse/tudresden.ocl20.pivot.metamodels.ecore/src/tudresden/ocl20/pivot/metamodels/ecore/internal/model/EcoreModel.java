@@ -47,141 +47,190 @@ import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
- * If the root of the model is a single {@link EPackage}, a corresponding {@link EcoreNamespace}
- * adapter will be created. If there are several root packages, a new "virtual" root namespace will
- * be created.
+ * <p>
+ * Represents EMF Ecore Models which are adapted to the Pivot Model.
+ * </p>
+ * 
+ * <p>
+ * If the root of the model is a single {@link EPackage}, a corresponding
+ * {@link EcoreNamespace} adapter will be created. If there are several root
+ * packages, a new "virtual" root namespace will be created.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 12.04.2007
  */
 public class EcoreModel extends AbstractModel implements IModel {
 
-  // a logger for this class
-  private static final Logger logger = Logger.getLogger(EcoreModel.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger.getLogger(EcoreModel.class);
 
-  // the resource containing the corresponding Ecore model
-  private Resource resource;
+	/** The {@link Resource} containing the corresponding Ecore model. */
+	private Resource resource;
 
-  // the adapter for the top package of the associated Ecore model
-  private Namespace rootNamespace;
+	/** The adapter for the top package of the associated Ecore model. */
+	private Namespace rootNamespace;
 
-  /**
-   * Creates a new <code>EcoreModel</code> adapting the given {@link EPackage}.
-   * 
-   * @param resource the recource containing the model
-   * 
-   */
-  public EcoreModel(Resource resource) {
-    super(resource.getURI().toString(),ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-        EcoreMetamodelPlugin.ID));
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreModel} adapting the given {@link EPackage}.
+	 * </p>
+	 * 
+	 * @param resource
+	 *            The {@link Resource} containing the model.
+	 */
+	public EcoreModel(Resource resource) {
 
-    // initialize
-    this.resource = resource;
-  }
+		super(resource.getURI().toString(), ModelBusPlugin
+				.getMetamodelRegistry().getMetamodel(EcoreMetamodelPlugin.ID));
 
-  /**
-   * This method lazily creates a {@link Namespace} adapter for the virtual root package in the
-   * associated Ecore model. Thus, any possible resource loading errors will not happen until this
-   * method is called for the first time.
-   * 
-   * @throws ModelAccessException if an error occurs when creating the adapter for the top namespace
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
-   */
-  public Namespace getRootNamespace() throws ModelAccessException {
+		/* Initialize. */
+		this.resource = resource;
+	}
 
-    if (rootNamespace == null) {
-      rootNamespace = createRootNamespace();
-    }
+	/**
+	 * <p>
+	 * This method lazily creates a {@link Namespace} adapter for the virtual
+	 * root package in the associated Ecore model. Thus, any possible resource
+	 * loading errors will not happen until this method is called for the first
+	 * time.
+	 * </p>
+	 * 
+	 * @throws ModelAccessException
+	 *             If an error occurs when creating the adapter for the top name
+	 *             space.
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
+	 */
+	public Namespace getRootNamespace() throws ModelAccessException {
 
-    return rootNamespace;
-  }
+		if (this.rootNamespace == null) {
+			this.rootNamespace = this.createRootNamespace();
+		}
+		// no else.
 
-  /**
-   * Helper method that creates the adapter for the root namespace.
-   * 
-   * @return a <code>Namespace</code> instance
-   * 
-   * @throws ModelAccessException if an error occurs while loading the adapted Ecore model
-   */
-  protected Namespace createRootNamespace() throws ModelAccessException {
+		return this.rootNamespace;
+	}
 
-    // load the resource
-    if (!resource.isLoaded()) {
+	/**
+	 * <p>
+	 * Overridden to base equality check on the URI of the associated resource.
+	 * </p>
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
 
-      if (logger.isInfoEnabled()) {
-        logger.info(NLS.bind(EcoreModelMessages.EcoreModel_LoadingEcoreModel,resource.getURI()));
-      }
+		boolean result;
 
-      try {
-        resource.load(null);
-      }
-      catch (IOException e) {
-        throw new ModelAccessException("Error while loading resource from " + resource.getURI(),e); //$NON-NLS-1$
-      }
+		if (obj instanceof EcoreModel) {
+			result = this.resource.getURI().equals(
+					((EcoreModel) obj).resource.getURI());
+		}
 
-    }
+		else {
+			result = false;
+		}
 
-    // get the root packages
-    List<EObject> roots = resource.getContents();
+		return result;
+	}
 
-    // create a new package to serve as the root package
-    EPackage rootPackage = EcoreFactory.eINSTANCE.createEPackage();
-    rootPackage.setName("root"); //$NON-NLS-1$
+	/**
+	 * <p>
+	 * Overridden to base the hash code on the URI of the associated resource.
+	 * </p>
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return this.resource.getURI().hashCode();
+	}
 
-    // add all sub-packages and subtypes to the new root package
-    for (EObject eObject : roots) {
-      if (eObject instanceof EPackage) {
-        rootPackage.getESubpackages().add((EPackage) eObject);
-      }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+	
+		String result;
+	
+		result = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.append("resource", this.resource.getURI()).toString();
+	
+		return result;
+	}
 
-      if (eObject instanceof EClassifier) {
-        rootPackage.getEClassifiers().add((EClassifier) eObject);
-      }
-    }
+	/**
+	 * <p>
+	 * A helper method that creates the adapter for the root {@link Namespace}.
+	 * </p>
+	 * 
+	 * @return A {@link Namespace} instance.
+	 * 
+	 * @throws ModelAccessException
+	 *             If an error occurs while loading the adapted Ecore model.
+	 */
+	private Namespace createRootNamespace() throws ModelAccessException {
 
-    return EcoreAdapterFactory.INSTANCE.createNamespace(rootPackage);
-  }
+		EPackage rootPackage;
+		List<EObject> rootPackages;
 
-  /**
-   * Overridden to base equality check on the URI of the associated resource.
-   * 
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object obj) {
+		/* Eventually try to load the resource. */
+		if (!resource.isLoaded()) {
 
-    if (obj instanceof EcoreModel) {
-      return resource.getURI().equals(((EcoreModel) obj).resource.getURI());
-    }
+			/* Eventually inform the logger. */
+			if (LOGGER.isInfoEnabled()) {
+				LOGGER.info(NLS.bind(
+						EcoreModelMessages.EcoreModel_LoadingEcoreModel,
+						this.resource.getURI()));
+			}
+			// no else.
 
-    return false;
-  }
+			try {
+				this.resource.load(null);
+			}
 
-  /**
-   * Overridden to base the hash code on the URI of the associated resource.
-   * 
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode() {
-    return resource.getURI().hashCode();
-  }
+			catch (IOException e) {
+				String msg;
 
-  /**
-   * Returns a String representation of this <code>EcoreModel</code>.
-   * 
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).append("resource", //$NON-NLS-1$
-        resource.getURI()).toString();
-  }
+				msg = "Error while loading resource from " + resource.getURI();
+
+				throw new ModelAccessException(msg, e); //$NON-NLS-1$
+			}
+		}
+		// no else.
+
+		/* Get the root packages. */
+		rootPackages = this.resource.getContents();
+
+		/* Create a new package to serve as the root package. */
+		rootPackage = EcoreFactory.eINSTANCE.createEPackage();
+		rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
+
+		/* Add all sub-packages and sub-types to the new root package. */
+		for (EObject eObject : rootPackages) {
+
+			if (eObject instanceof EPackage) {
+				rootPackage.getESubpackages().add((EPackage) eObject);
+			}
+
+			else if (eObject instanceof EClassifier) {
+				rootPackage.getEClassifiers().add((EClassifier) eObject);
+			}
+			// no else.
+		}
+		// end for.
+
+		return EcoreAdapterFactory.INSTANCE.createNamespace(rootPackage);
+	}
 }

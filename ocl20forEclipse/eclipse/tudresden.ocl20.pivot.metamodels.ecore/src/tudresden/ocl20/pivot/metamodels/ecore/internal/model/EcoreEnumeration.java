@@ -46,71 +46,98 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration;
 
 /**
- * 
+ * <p>
+ * Adapts {@link EEnum}s as {@link Enumeration}s to the pivot model.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 12.04.2007
  */
-public class EcoreEnumeration extends AbstractEnumeration implements Enumeration {
+public class EcoreEnumeration extends AbstractEnumeration implements
+		Enumeration {
 
-  // Logger for this class
-  private static final Logger logger = Logger.getLogger(EcoreEnumeration.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger
+			.getLogger(EcoreEnumeration.class);
 
-  // the adapted Ecore enum
-  private EEnum eEnum;
+	/** The adapted {@link EEnum}. */
+	private EEnum eEnum;
 
-  /**
-   * Creates a new <code>EcoreEnumeration</code> instance.
-   * 
-   * @param eEnum the Ecore <code>EEnum</code> adapted by this object
-   */
-  public EcoreEnumeration(EEnum eEnum) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreEnumeration(eEnum=" + eEnum + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreEnumeration} instance.
+	 * </p>
+	 * 
+	 * @param eEnum
+	 *            The {@link EEnum} adapted by this object.
+	 */
+	public EcoreEnumeration(EEnum eEnum) {
+		
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    // initialize adapted enum
-    this.eEnum = eEnum;
+			msg = "EcoreEnumeration(";
+			msg += "eEnum = " + eEnum;
+			msg += ") - enter";
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreEnumeration() - exit"); //$NON-NLS-1$
-    }
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getName()
-   */
-  @Override
-  public String getName() {
-    return eEnum.getName();
-  }
+		/* Initialize adapted enumeration. */
+		this.eEnum = eEnum;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getNamespace()
-   */
-  @Override
-  public Namespace getNamespace() {
-    return EcoreAdapterFactory.INSTANCE.createNamespace(eEnum.getEPackage());
-  }
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getOwnedLiteral()
-   */
-  @Override
-  public List<EnumerationLiteral> getOwnedLiteral() {
-    List<EnumerationLiteral> literals = new ArrayList<EnumerationLiteral>();
+			msg = "EcoreEnumeration() - exit";
 
-    for (EEnumLiteral literal : eEnum.getELiterals()) {
-      literals.add(EcoreAdapterFactory.INSTANCE.createEnumerationLiteral(literal));
-    }
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+	}
 
-    return literals;
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getName()
+	 */
+	public String getName() {
+		return this.eEnum.getName();
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getNamespace()
+	 */
+	@Override
+	public Namespace getNamespace() {
+		return EcoreAdapterFactory.INSTANCE
+				.createNamespace(this.eEnum.getEPackage());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getOwnedLiteral
+	 * ()
+	 */
+	@Override
+	public List<EnumerationLiteral> getOwnedLiteral() {
+
+		List<EnumerationLiteral> result;
+		
+		result = new ArrayList<EnumerationLiteral>();
+
+		for (EEnumLiteral literal : eEnum.getELiterals()) {
+			result.add(EcoreAdapterFactory.INSTANCE
+					.createEnumerationLiteral(literal));
+		}
+
+		return result;
+	}
 }

@@ -10,5 +10,5 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.modelbus,
  org.apache.commons.lang
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

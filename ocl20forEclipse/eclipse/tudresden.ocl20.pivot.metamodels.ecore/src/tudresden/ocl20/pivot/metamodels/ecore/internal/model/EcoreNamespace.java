@@ -44,89 +44,133 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace;
 
 /**
+ * <p>
  * An implementation of the Pivot Model {@link Namespace} concept for Ecore.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public class EcoreNamespace extends AbstractNamespace implements Namespace {
 
-  // a logger for this class
-  private static final Logger logger = Logger.getLogger(EcoreNamespace.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger.getLogger(EcoreNamespace.class);
 
-  // the adapted Ecore package
-  private EPackage ePackage;
+	/** The adapted {@link EPackage}. */
+	private EPackage ePackage;
 
-  /**
-   * Creates a new <code>EcoreNamespace</code> instance.
-   * 
-   * @param ePackage the {@link EPackage} that is adapted by this class
-   */
-  public EcoreNamespace(EPackage ePackage) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreNamespace(ePackage=" + ePackage + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreNamespace} instance.
+	 * </p>
+	 * 
+	 * @param ePackage
+	 *            The {@link EPackage} that is adapted by this class.
+	 */
+	public EcoreNamespace(EPackage ePackage) {
 
-    // initialize adapted EPackage
-    this.ePackage = ePackage;
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreNamespace() - exit"); //$NON-NLS-1$
-    }
-  }
+			msg = "EcoreNamespace(";
+			msg += "ePackage = " + ePackage;
+			msg += ") - enter";
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getName()
-   */
-  @Override
-  public String getName() {
-    return ePackage.getName();
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getNestedNamespaceImpl()
-   */
-  @Override
-  protected List<Namespace> getNestedNamespaceImpl() {
-    List<Namespace> nestedNamespace = new ArrayList<Namespace>();
+		/* Initialize adapted EPackage. */
+		this.ePackage = ePackage;
 
-    for (EPackage subPackage : ePackage.getESubpackages()) {
-      nestedNamespace.add(EcoreAdapterFactory.INSTANCE.createNamespace(subPackage));
-    }
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    return nestedNamespace;
-  }
+			msg = "EcoreNamespace() - exit";
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getNestingNamespace()
-   */
-  @Override
-  public Namespace getNestingNamespace() {
-    EPackage eSuperPackage = ePackage.getESuperPackage();
-    return eSuperPackage != null ? EcoreAdapterFactory.INSTANCE.createNamespace(eSuperPackage)
-        : null;
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getOwnedTypeImpl()
-   */
-  @Override
-  public List<Type> getOwnedType() {
-    List<Type> ownedType = new ArrayList<Type>();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getName()
+	 */
+	@Override
+	public String getName() {
+		return this.ePackage.getName();
+	}
 
-    for (EClassifier eClassifier : ePackage.getEClassifiers()) {
-      ownedType.add(EcoreAdapterFactory.INSTANCE.createType(eClassifier));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getNestingNamespace
+	 * ()
+	 */
+	@Override
+	public Namespace getNestingNamespace() {
 
-    return ownedType;
-  }
+		Namespace result;
+		EPackage eSuperPackage;
 
+		eSuperPackage = this.ePackage.getESuperPackage();
+
+		if (eSuperPackage != null) {
+			result = EcoreAdapterFactory.INSTANCE
+					.createNamespace(eSuperPackage);
+		}
+
+		else {
+			result = null;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getOwnedTypeImpl
+	 * ()
+	 */
+	@Override
+	public List<Type> getOwnedType() {
+	
+		List<Type> result;
+	
+		result = new ArrayList<Type>();
+	
+		for (EClassifier eClassifier : this.ePackage.getEClassifiers()) {
+			result.add(EcoreAdapterFactory.INSTANCE.createType(eClassifier));
+		}
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#
+	 * getNestedNamespaceImpl()
+	 */
+	@Override
+	protected List<Namespace> getNestedNamespaceImpl() {
+
+		List<Namespace> result;
+
+		result = new ArrayList<Namespace>();
+
+		for (EPackage subPackage : this.ePackage.getESubpackages()) {
+			result
+					.add(EcoreAdapterFactory.INSTANCE
+							.createNamespace(subPackage));
+		}
+
+		return result;
+	}
 }

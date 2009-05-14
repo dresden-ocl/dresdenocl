@@ -46,106 +46,137 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation;
 
 /**
+ * <p>
  * An implementation of the Pivot Model {@link Operation} concept for Ecore.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 12.04.2007
  */
 public class EcoreOperation extends AbstractOperation implements Operation {
 
-  // Logger for this class
-  private static final Logger logger = Logger.getLogger(EcoreOperation.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger.getLogger(EcoreOperation.class);
 
-  // the adapted EOperation
-  private EOperation eOperation;
+	/** The adapted {@link EOperation}. */
+	private EOperation eOperation;
 
-  public EcoreOperation(EOperation eOperation) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreOperation(eOperation=" + eOperation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreOperation}.
+	 * </p>
+	 * 
+	 * @param eOperation
+	 *            The adapted {@link EOperation}.
+	 */
+	public EcoreOperation(EOperation eOperation) {
 
-    // initialize
-    this.eOperation = eOperation;
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreOperation() - exit"); //$NON-NLS-1$
-    }
-  }
+			msg = "EcoreOperation(";
+			msg += "eOperation = " + eOperation;
+			msg += ") - enter";
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getName()
-   */
-  @Override
-  public String getName() {
-    return eOperation.getName();
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getType()
-   */
-  @Override
-  public Type getType() {
-    return EcoreAdapterFactory.INSTANCE.createType(eOperation.getEType());
-  }
+		/* Initialize adapted EOperation. */
+		this.eOperation = eOperation;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwnedParameter()
-   */
-  @Override
-  public List<Parameter> getOwnedParameter() {
-    List<Parameter> ownedParameter = new ArrayList<Parameter>();
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    for (EParameter parameter : eOperation.getEParameters()) {
-      ownedParameter.add(EcoreAdapterFactory.INSTANCE.createParameter(parameter));
-    }
+			msg = "EcoreOperation() - exit";
 
-    return ownedParameter;
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwningType()
-   */
-  @Override
-  public Type getOwningType() {
-    return EcoreAdapterFactory.INSTANCE.createType(eOperation.getEContainingClass());
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getType()
+	 */
+	@Override
+	public Type getType() {
+		return EcoreAdapterFactory.INSTANCE.createType(eOperation.getEType());
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isMultiple()
-   */
-  @Override
-  public boolean isMultiple() {
-    return eOperation.isMany();
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isMultiple()
+	 */
+	@Override
+	public boolean isMultiple() {
+		return this.eOperation.isMany();
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isOrdered()
-   */
-  @Override
-  public boolean isOrdered() {
-    return eOperation.isOrdered();
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isOrdered()
+	 */
+	@Override
+	public boolean isOrdered() {
+		return this.eOperation.isOrdered();
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique()
-   */
-  @Override
-  public boolean isUnique() {
-    return eOperation.isUnique();
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#isUnique()
+	 */
+	@Override
+	public boolean isUnique() {
+		return this.eOperation.isUnique();
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getName()
+	 */
+	@Override
+	public String getName() {
+		return this.eOperation.getName();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwnedParameter
+	 * ()
+	 */
+	@Override
+	public List<Parameter> getOwnedParameter() {
+		
+		List<Parameter> result;
+		
+		result = new ArrayList<Parameter>();
+
+		for (EParameter parameter : this.eOperation.getEParameters()) {
+			result.add(EcoreAdapterFactory.INSTANCE
+					.createParameter(parameter));
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwningType()
+	 */
+	@Override
+	public Type getOwningType() {
+		return EcoreAdapterFactory.INSTANCE.createType(this.eOperation
+				.getEContainingClass());
+	}
 }

@@ -1,3 +1,35 @@
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
+ * All rights reserved.                                                      *
+ *                                                                           *
+ * This work was done as a project at the Chair for Software Technology,     *
+ * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
+ * It is understood that any modification not identified as such is not      *
+ * covered by the preceding statement.                                       *
+ *                                                                           *
+ * This work is free software; you can redistribute it and/or modify it      *
+ * under the terms of the GNU Library General Public License as published    *
+ * by the Free Software Foundation; either version 2 of the License, or      *
+ * (at your option) any later version.                                       *
+ *                                                                           *
+ * This work is distributed in the hope that it will be useful, but WITHOUT  *
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
+ * License for more details.                                                 *
+ *                                                                           *
+ * You should have received a copy of the GNU Library General Public License *
+ * along with this library; if not, you can view it online at                *
+ * http://www.fsf.org/licensing/licenses/gpl.html.                           *
+ *                                                                           *
+ * To submit a bug report, send a comment, or get the latest news on this    *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
+ * For more information on OCL and related projects visit the OCL Portal:    *
+ * http://st.inf.tu-dresden.de/ocl                                           *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * $Id$
+ */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.provider;
 
 import java.net.URL;
@@ -15,71 +47,85 @@ import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelProvider;
 
 /**
- * Implementation of the {@link IModelProvider} interface for Ecore models. This implementation will
- * create an {@link EcoreModel} instance.
+ * <p>
+ * Implementation of the {@link IModelProvider} interface for EMF Ecore models.
+ * This implementation will create an {@link EcoreModel} instance.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 03.04.2007
  */
-public class EcoreModelProvider extends AbstractModelProvider implements IModelProvider {
+public class EcoreModelProvider extends AbstractModelProvider implements
+		IModelProvider {
 
-  // Logger for this class
-  private static final Logger logger = Logger.getLogger(EcoreModelProvider.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger
+			.getLogger(EcoreModelProvider.class);
 
-  // cached copy of the resource set used for loading models
-  private ResourceSet resourceSet;
+	/** A cached copy of the resource set used for loading models. */
+	private ResourceSet resourceSet;
 
-  /**
-   * 
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.net.URL)
-   */
-  public IModel getModel(URL modelURL) throws ModelAccessException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("getModel(modelURL=" + modelURL + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.net.URL)
+	 */
+	public IModel getModel(URL modelURL) throws ModelAccessException {
 
-    URI modelURI;
-    Resource resource;
-    IModel model;
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel(modelURL=" + modelURL + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-    // try to create a URI
-    try {
-      modelURI = URI.createURI(modelURL.toString());
-    }
-    catch (IllegalArgumentException e) {
-      throw new ModelAccessException("Invalid URL: " + modelURL,e); //$NON-NLS-1$
-    }
+		URI modelURI;
+		Resource resource;
+		IModel model;
 
-    // get the resource
-    resource = getResourceSet().getResource(modelURI,false);
-    
-    if (resource == null) {
-      // we only want to create the resource, not load it
-      resource = getResourceSet().createResource(modelURI);
-    }
-    
-    model = new EcoreModel(getResourceSet().getResource(modelURI,false));
+		/* Try to create an URI. */
+		try {
+			modelURI = URI.createURI(modelURL.toString());
+		}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
-    }
+		catch (IllegalArgumentException e) {
+			throw new ModelAccessException("Invalid URL: " + modelURL, e); //$NON-NLS-1$
+		}
 
-    return model;
-  }
+		/* Get the resource. */
+		resource = getResourceSet().getResource(modelURI, false);
 
-  /**
-   * Helper method that lazily creates a resource set.
-   * 
-   * @return
-   */
-  protected ResourceSet getResourceSet() {
+		/* Check if the resource has already been created. */
+		if (resource == null) {
+			/* We only want to create the resource, not load it. */
+			resource = getResourceSet().createResource(modelURI);
+		}
+		// no else.
 
-    if (resourceSet == null) {
-      resourceSet = new ResourceSetImpl();
-    }
+		/* Create the model from the resource. */
+		model = new EcoreModel(getResourceSet().getResource(modelURI, false));
 
-    return resourceSet;
-  }
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$
+		}
+		// no else.
 
+		return model;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that lazily creates a resource set.
+	 * </p>
+	 * 
+	 * @return The created {@link ResourceSet}.
+	 */
+	private ResourceSet getResourceSet() {
+
+		if (this.resourceSet == null) {
+			this.resourceSet = new ResourceSetImpl();
+		}
+		// no else.
+
+		return this.resourceSet;
+	}
 }

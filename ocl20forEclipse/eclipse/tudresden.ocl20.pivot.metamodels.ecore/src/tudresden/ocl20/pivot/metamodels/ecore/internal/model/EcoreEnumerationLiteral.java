@@ -41,56 +41,78 @@ import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral;
 
 /**
- * 
+ * <p>
+ * Adapts {@link EEnumLiteral}s as {@link EnumerationLiteral}s to the pivot
+ * model.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 12.04.2007
  */
-public class EcoreEnumerationLiteral extends AbstractEnumerationLiteral implements
-    EnumerationLiteral {
+public class EcoreEnumerationLiteral extends AbstractEnumerationLiteral
+		implements EnumerationLiteral {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(EcoreEnumerationLiteral.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger
+			.getLogger(EcoreEnumerationLiteral.class);
 
-  // the adapted Ecore enum literal
-  private EEnumLiteral eEnumLiteral;
+	/** The adapted {@link EEnumLiteral}. */
+	private EEnumLiteral eEnumLiteral;
 
-  /**
-   * @param enumLiteral
-   */
-  public EcoreEnumerationLiteral(EEnumLiteral eEnumLiteral) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreEnumerationLiteral(eEnumLiteral=" + eEnumLiteral + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreEnumerationLiteral}.
+	 * </p>
+	 * 
+	 * @param enumLiteral
+	 *            The adapted {@link EEnumLiteral}.
+	 */
+	public EcoreEnumerationLiteral(EEnumLiteral eEnumLiteral) {
 
-    // initialize adapted literal
-    this.eEnumLiteral = eEnumLiteral;
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreEnumerationLiteral() - exit"); //$NON-NLS-1$
-    }
-  }
+			msg = "EcoreEnumerationLiteral(";
+			msg += "eEnumLiteral = " + eEnumLiteral;
+			msg += ") - enter";
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#getName()
-   */
-  @Override
-  public String getName() {
-    return eEnumLiteral.getName();
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#getEnumeration()
-   */
-  @Override
-  public Enumeration getEnumeration() {
-    return EcoreAdapterFactory.INSTANCE.createEnumeration(eEnumLiteral.getEEnum());
-  }
+		/* Initialize adapted enumeration literal. */
+		this.eEnumLiteral = eEnumLiteral;
 
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "EcoreEnumerationLiteral() - exit";
+
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seetudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#
+	 * getEnumeration()
+	 */
+	public Enumeration getEnumeration() {
+		return EcoreAdapterFactory.INSTANCE.createEnumeration(this.eEnumLiteral
+				.getEEnum());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#getName
+	 * ()
+	 */
+	public String getName() {
+		return this.eEnumLiteral.getName();
+	}
 }

@@ -1,3 +1,35 @@
+/**
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
+ * All rights reserved.                                                      *
+ *                                                                           *
+ * This work was done as a project at the Chair for Software Technology,     *
+ * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
+ * It is understood that any modification not identified as such is not      *
+ * covered by the preceding statement.                                       *
+ *                                                                           *
+ * This work is free software; you can redistribute it and/or modify it      *
+ * under the terms of the GNU Library General Public License as published    *
+ * by the Free Software Foundation; either version 2 of the License, or      *
+ * (at your option) any later version.                                       *
+ *                                                                           *
+ * This work is distributed in the hope that it will be useful, but WITHOUT  *
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
+ * License for more details.                                                 *
+ *                                                                           *
+ * You should have received a copy of the GNU Library General Public License *
+ * along with this library; if not, you can view it online at                *
+ * http://www.fsf.org/licensing/licenses/gpl.html.                           *
+ *                                                                           *
+ * To submit a bug report, send a comment, or get the latest news on this    *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
+ * For more information on OCL and related projects visit the OCL Portal:    *
+ * http://st.inf.tu-dresden.de/ocl                                           *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * $Id$
+ */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
 import org.apache.log4j.Logger;
@@ -15,95 +47,140 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractType;
 
-
 /**
- * An implementation of the Pivot Model {@link Type} concept for Ecore. 
- *
+ * <p>
+ * An implementation of the Pivot Model {@link Type} concept for Ecore.
+ * </p>
+ * 
  * @author Matthias Braeuer
- * @version 1.0 12.04.2007
  */
 public class EcoreType extends AbstractType implements Type {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(EcoreType.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger.getLogger(EcoreType.class);
 
-  // the adapted Ecore EClass 
-  private EClass eClass;
-  
-  /**
-   * Creates a new <code>EcoreType</code> instance.
-   */
-  public EcoreType(EClass eClass) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreType(eClass=" + eClass + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/** The adapted {@link EClass}. */
+	private EClass eClass;
 
-    // initialize
-    this.eClass = eClass;
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreType} instance.
+	 * </p>
+	 * 
+	 * @param eClass
+	 *            The adapted {@link EClass}.
+	 */
+	public EcoreType(EClass eClass) {
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreType() - exit"); //$NON-NLS-1$
-    }
-  }
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getName()
-   */
-  @Override
-  public String getName() {
-    return eClass.getName();
-  }
+			msg = "EcoreType(";
+			msg += "eClass = " + eClass;
+			msg += ") - enter";
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getNamespace()
-   */
-  @Override
-  public Namespace getNamespace() {
-    return EcoreAdapterFactory.INSTANCE.createNamespace(eClass.getEPackage());
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
-   */
-  @Override
-  protected List<Property> getOwnedPropertyImpl() {
-    List<Property> ownedProperty = new ArrayList<Property>();
-    
-    for (EStructuralFeature eStructuralFeature : eClass.getEStructuralFeatures()) {
-      ownedProperty.add(EcoreAdapterFactory.INSTANCE.createProperty(eStructuralFeature));
-    }
-    
-    return ownedProperty;
-  }
+		/* Initialize adapted EClass. */
+		this.eClass = eClass;
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedOperationImpl()
-   */
-  @Override
-  protected List<Operation> getOwnedOperationImpl() {
-    List<Operation> ownedOperation = new ArrayList<Operation>();
-    
-    for (EOperation eOperation : eClass.getEOperations()) {
-      ownedOperation.add(EcoreAdapterFactory.INSTANCE.createOperation(eOperation));
-    }
-    
-    return ownedOperation;
-  }
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getSuperTypeImpl()
-   */
-  @Override
-  protected List<Type> getSuperTypeImpl() {
-    List<Type> superType = new ArrayList<Type>();
-    
-    for (EClass eSuperType : eClass.getESuperTypes()) {
-      superType.add(EcoreAdapterFactory.INSTANCE.createType(eSuperType));
-    }
-    
-    return superType;
-  }
+			msg = "EcoreType() - exit";
 
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getName()
+	 */
+	@Override
+	public String getName() {
+		return this.eClass.getName();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getNamespace()
+	 */
+	@Override
+	public Namespace getNamespace() {
+		return EcoreAdapterFactory.INSTANCE.createNamespace(this.eClass
+				.getEPackage());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedOperationImpl
+	 * ()
+	 */
+	@Override
+	protected List<Operation> getOwnedOperationImpl() {
+
+		List<Operation> result;
+
+		result = new ArrayList<Operation>();
+
+		for (EOperation eOperation : this.eClass.getEOperations()) {
+			result
+					.add(EcoreAdapterFactory.INSTANCE
+							.createOperation(eOperation));
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
+	 */
+	@Override
+	protected List<Property> getOwnedPropertyImpl() {
+
+		List<Property> result;
+
+		result = new ArrayList<Property>();
+
+		for (EStructuralFeature eStructuralFeature : this.eClass
+				.getEStructuralFeatures()) {
+			result.add(EcoreAdapterFactory.INSTANCE
+					.createProperty(eStructuralFeature));
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getSuperTypeImpl()
+	 */
+	@Override
+	protected List<Type> getSuperTypeImpl() {
+
+		List<Type> result;
+
+		result = new ArrayList<Type>();
+
+		for (EClass eSuperType : this.eClass.getESuperTypes()) {
+			result.add(EcoreAdapterFactory.INSTANCE.createType(eSuperType));
+		}
+
+		return result;
+	}
 }

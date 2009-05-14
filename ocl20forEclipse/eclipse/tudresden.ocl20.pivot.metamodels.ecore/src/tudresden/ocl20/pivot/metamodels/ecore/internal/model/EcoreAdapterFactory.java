@@ -54,255 +54,507 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * 
+ * <p>
+ * The {@link EcoreAdapterFactory} is responsible for the adaptation of ecore
+ * meta model objects to the pivot model.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public class EcoreAdapterFactory {
 
-  // logger for this class
-  private static final Logger logger = Logger.getLogger(EcoreAdapterFactory.class);
+	/** The Singleton instance of the {@link EcoreAdapterFactory}. */
+	public static EcoreAdapterFactory INSTANCE = new EcoreAdapterFactory();
 
-  /**
-   * The Singleton instance of the factory.
-   */
-  public static EcoreAdapterFactory INSTANCE = new EcoreAdapterFactory();
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger
+			.getLogger(EcoreAdapterFactory.class);
 
-  // a cache for previously created adapters
-  private Map<EModelElement, NamedElement> adapters;
+	/** A cache for previously created adapters. */
+	private Map<EModelElement, NamedElement> myCachedAdapters;
 
-  /**
-   * Clients are not supposed to instantiate this class.
-   */
-  private EcoreAdapterFactory() {
-    adapters = new HashMap<EModelElement, NamedElement>();
-  }
+	/**
+	 * <p>
+	 * Clients are not supposed to instantiate an {@link EcoreAdapterFactory}.
+	 * </p>
+	 */
+	private EcoreAdapterFactory() {
+		this.myCachedAdapters = new HashMap<EModelElement, NamedElement>();
+	}
 
-  /**
-   * Creates a {@link Namespace} adapter for an {@link EPackage}.
-   */
-  public Namespace createNamespace(EPackage ePackage) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createNamespace(ePackage=" + ePackage + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/**
+	 * <p>
+	 * Creates an {@link Enumeration} for a given {@link EEnum}.
+	 * </p>
+	 * 
+	 * @param eEnum
+	 *            The {@link EEnum} which shall be adapted.
+	 * @return The created {@link Enumeration}.
+	 */
+	public Enumeration createEnumeration(EEnum eEnum) {
 
-    Namespace namespace = (Namespace) adapters.get(ePackage);
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    if (namespace == null) {
+			msg = "createEnumeration(";
+			msg += "eEnum = " + eEnum;
+			msg += ") - enter";
 
-      if (logger.isInfoEnabled()) {
-        logger.info(NLS.bind(EcoreModelMessages.EcoreAdapterFactory_CreatingPivotModelAdapter,
-            "EPackage",ePackage.getName())); //$NON-NLS-1$
-      }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-      namespace = new EcoreNamespace(ePackage);
-      adapters.put(ePackage,namespace);
-    }
+		Enumeration result;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("createNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
-    }
+		/* Eventually use a cached result. */
+		if (this.myCachedAdapters.containsKey(eEnum)) {
+			result = (Enumeration) this.myCachedAdapters.get(eEnum);
+		}
 
-    return namespace;
-  }
+		/* Else create the Enumeration. */
+		else {
+			result = new EcoreEnumeration(eEnum);
 
-  /**
-   * @param eClassifier
-   * @return
-   */
-  public Type createType(EClassifier eClassifier) {
-    Type type;
-    
-    if (eClassifier == null) {
-      return null;
-    }
+			/* Cache the result. */
+			myCachedAdapters.put(eEnum, result);
+		}
 
-    if (eClassifier instanceof EClass) {
-      type = createType((EClass) eClassifier);
-    }
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    else if (eClassifier instanceof EEnum) {
-      type = createEnumeration((EEnum) eClassifier);
-    }
+			msg = "createEnumeration() - exit";
+			msg += " - return value = " + result;
 
-    else if (eClassifier instanceof EDataType) {
-      type = createPrimitiveType((EDataType) eClassifier);
-    }
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
 
-    else {
-      // should not happen
-      throw new IllegalArgumentException("Unknown Ecore EClassifier type: " + eClassifier); //$NON-NLS-1$
-    }
+		return result;
+	}
 
-    return type;
-  }
+	/**
+	 * <p>
+	 * Creates an {@link EnumerationLiteral} for a given {@link EEnumLiteral}.
+	 * </p>
+	 * 
+	 * @param eEnumLiteral
+	 *            The {@link EEnumLiteral} which shall be adapted.
+	 * 
+	 * @return The created {@link EnumerationLiteral}.
+	 */
+	public EnumerationLiteral createEnumerationLiteral(EEnumLiteral eEnumLiteral) {
 
-  /**
-   * @param eClass
-   * @return
-   */
-  public Type createType(EClass eClass) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createType(eClass=" + eClass + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    Type type = (Type) adapters.get(eClass);
+			msg = "createEnumerationLiteral(";
+			msg += "eEnumLiteral = " + eEnumLiteral;
+			msg += ") - enter";
 
-    if (type == null) {
-      type = new EcoreType(eClass);
-      adapters.put(eClass,type);
-    }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
-    }
+		EnumerationLiteral result;
 
-    return type;
-  }
+		/* Eventually use a cached result. */
+		if (this.myCachedAdapters.containsKey(eEnumLiteral)) {
+			result = (EnumerationLiteral) this.myCachedAdapters
+					.get(eEnumLiteral);
+		}
 
-  /**
-   * @param eEnum
-   * @return
-   */
-  public Enumeration createEnumeration(EEnum eEnum) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createEnumeration(eEnum=" + eEnum + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		/* Else create the Type. */
+		else {
+			result = new EcoreEnumerationLiteral(eEnumLiteral);
 
-    Enumeration enumeration = (Enumeration) adapters.get(eEnum);
+			/* Cache the result. */
+			this.myCachedAdapters.put(eEnumLiteral, result);
+		}
 
-    if (enumeration == null) {
-      enumeration = new EcoreEnumeration(eEnum);
-      adapters.put(eEnum,enumeration);
-    }
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("createEnumeration() - exit - return value=" + enumeration); //$NON-NLS-1$
-    }
+			msg = "createEnumerationLiteral() - exit";
+			msg += " - return value = " + result;
 
-    return enumeration;
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
 
-  /**
-   * @param eEnumLiteral
-   * 
-   * @return
-   */
-  public EnumerationLiteral createEnumerationLiteral(EEnumLiteral eEnumLiteral) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createEnumerationLiteral(eEnumLiteral=" + eEnumLiteral + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		return result;
+	}
 
-    EnumerationLiteral literal = (EnumerationLiteral) adapters.get(eEnumLiteral);
+	/**
+	 * <p>
+	 * Creates a {@link Namespace} adapter for an {@link EPackage}.
+	 * </p>
+	 * 
+	 * @param ePackage
+	 *            The {@link EPackage} that shall be adapted.
+	 */
+	public Namespace createNamespace(EPackage ePackage) {
 
-    if (literal == null) {
-      literal = new EcoreEnumerationLiteral(eEnumLiteral);
-      adapters.put(eEnumLiteral,literal);
-    }
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("createEnumerationLiteral() - exit - return value=" + literal); //$NON-NLS-1$
-    }
+			msg = "createNamespace(";
+			msg += "ePackage = " + ePackage;
+			msg += ") - enter";
 
-    return literal;
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /**
-   * @param eDataType
-   * @return
-   */
-  public Type createPrimitiveType(EDataType eDataType) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createPrimitiveType(eDataType=" + eDataType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		Namespace result;
 
-    PrimitiveType primitiveType = (PrimitiveType) adapters.get(eDataType);
+		/* Eventually use a cached result. */
+		if (this.myCachedAdapters.containsKey(ePackage)) {
+			result = (Namespace) this.myCachedAdapters.get(ePackage);
+		}
 
-    if (primitiveType == null) {
-      primitiveType = new EcorePrimitiveType(eDataType);
-      adapters.put(eDataType,primitiveType);
-    }
+		/* Else create the name space. */
+		else {
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("createPrimitiveType() - exit - return value=" + primitiveType); //$NON-NLS-1$
-    }
+			/* Eventually inform the logger. */
+			if (LOGGER.isInfoEnabled()) {
+				LOGGER
+						.info(NLS
+								.bind(
+										EcoreModelMessages.EcoreAdapterFactory_CreatingPivotModelAdapter,
+										"EPackage", ePackage.getName())); //$NON-NLS-1$
+			}
+			// no else.
 
-    return primitiveType;
-  }
+			result = new EcoreNamespace(ePackage);
 
-  /**
-   * @param eStructuralFeature
-   * @return
-   */
-  public Property createProperty(EStructuralFeature eStructuralFeature) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createProperty(eStructuralFeature=" + eStructuralFeature + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+			/* Cache the result. */
+			this.myCachedAdapters.put(ePackage, result);
+		}
 
-    Property property = (Property) adapters.get(eStructuralFeature);
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    if (property == null) {
-      property = new EcoreProperty(eStructuralFeature);
-      adapters.put(eStructuralFeature,property);
-    }
+			msg = "createNamespace() - exit";
+			msg += " - return value = " + result;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
-    }
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
 
-    return property;
-  }
+		return result;
+	}
 
-  /**
-   * @param eOperation
-   * @return
-   */
-  public Operation createOperation(EOperation eOperation) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createOperation(eOperation=" + eOperation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/**
+	 * <p>
+	 * Creates an {@link Operation} for a given {@link EOperation}.
+	 * </p>
+	 * 
+	 * @param eOperation
+	 *            The {@link EOperation} which shall be adapted.
+	 * @return The created {@link Operation}.
+	 */
+	public Operation createOperation(EOperation eOperation) {
 
-    Operation operation = (Operation) adapters.get(eOperation);
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    if (operation == null) {
-      operation = new EcoreOperation(eOperation);
-      adapters.put(eOperation,operation);
-    }
+			msg = "createOperation(";
+			msg += "eOperation = " + eOperation;
+			msg += ") - enter";
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("createOperation() - exit - return value=" + operation); //$NON-NLS-1$
-    }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-    return operation;
-  }
+		Operation result;
 
-  /**
-   * @param parameter
-   * @return
-   */
-  public Parameter createParameter(EParameter eParameter) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("createParameter(eParameter=" + eParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		/* Eventually use a cached result. */
+		if (this.myCachedAdapters.containsKey(eOperation)) {
+			result = (Operation) this.myCachedAdapters.get(eOperation);
+		}
 
-    Parameter parameter = (Parameter) adapters.get(eParameter);
+		/* Else create the Type. */
+		else {
+			result = new EcoreOperation(eOperation);
 
-    if (parameter == null) {
-      parameter = new EcoreParameter(eParameter);
-      adapters.put(eParameter,parameter);
-    }
+			/* Cache the result. */
+			this.myCachedAdapters.put(eOperation, result);
+		}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("createParameter() - exit - return value=" + parameter); //$NON-NLS-1$
-    }
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    return parameter;
-  }
+			msg = "createOperation() - exit";
+			msg += " - return value = " + result;
 
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link Parameter} for a given {@link EParameter}.
+	 * </p>
+	 * 
+	 * @param parameter
+	 *            The {@link EParameter} which shall be adapted.
+	 * @return The created {@link Parameter}.
+	 */
+	public Parameter createParameter(EParameter eParameter) {
+	
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+	
+			msg = "createParameter(";
+			msg += "eParameter = " + eParameter;
+			msg += ") - enter";
+	
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
+	
+		Parameter result;
+	
+		/* Eventually use a cached result. */
+		if (this.myCachedAdapters.containsKey(eParameter)) {
+			result = (Parameter) this.myCachedAdapters.get(eParameter);
+		}
+	
+		/* Else create the Type. */
+		else {
+			result = new EcoreParameter(eParameter);
+	
+			/* Cache the result. */
+			this.myCachedAdapters.put(eParameter, result);
+		}
+	
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+	
+			msg = "createParameter() - exit";
+			msg += " - return value = " + result;
+	
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+	
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates a Type for a given {@link EDataType}.
+	 * </p>
+	 * 
+	 * @param eDataType
+	 *            The {@link EDataType} which shall be adapted.
+	 * @return The created {@link Type}.
+	 */
+	public Type createPrimitiveType(EDataType eDataType) {
+
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createPrimitiveType(";
+			msg += "eDataType = " + eDataType;
+			msg += ") - enter";
+
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
+
+		Type result;
+
+		/* Eventually use a cached result. */
+		if (this.myCachedAdapters.containsKey(eDataType)) {
+			result = (Type) this.myCachedAdapters.get(eDataType);
+		}
+
+		/* Else create the Type. */
+		else {
+			result = new EcorePrimitiveType(eDataType);
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(eDataType, result);
+		}
+
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createPrimitiveType() - exit";
+			msg += " - return value = " + result;
+
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link Property} for a given {@link EStructuralFeature}.
+	 * </p>
+	 * 
+	 * @param eStructuralFeature
+	 * @return
+	 */
+	public Property createProperty(EStructuralFeature eStructuralFeature) {
+
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createProperty(";
+			msg += "eStructuralFeature = " + eStructuralFeature;
+			msg += ") - enter";
+
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
+
+		Property result;
+
+		/* Eventually use a cached result. */
+		if (this.myCachedAdapters.containsKey(eStructuralFeature)) {
+			result = (Property) this.myCachedAdapters.get(eStructuralFeature);
+		}
+
+		/* Else create the Type. */
+		else {
+			result = new EcoreProperty(eStructuralFeature);
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(eStructuralFeature, result);
+		}
+
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createProperty() - exit";
+			msg += " - return value = " + result;
+
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link Type} for a given {@link EClass}.
+	 * </p>
+	 * 
+	 * @param eClass
+	 *            The {@link EClass} which shall be adapted.
+	 * @return The created {@link Type}.
+	 */
+	public Type createType(EClass eClass) {
+
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createType(";
+			msg += "eClass = " + eClass;
+			msg += ") - enter";
+
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
+
+		Type result;
+
+		/* Eventually use a cached result. */
+		if (this.myCachedAdapters.containsKey(eClass)) {
+			result = (Type) this.myCachedAdapters.get(eClass);
+		}
+
+		/* Else create the Type. */
+		else {
+			result = new EcoreType(eClass);
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(eClass, result);
+		}
+
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createType() - exit";
+			msg += " - return value = " + result;
+
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates an {@link Type} for a given {@link EClassifier}.
+	 * </p>
+	 * 
+	 * @param eClassifier
+	 *            The {@link EClassifier} which shall be adapted.
+	 * @return The created {@link Type}.
+	 */
+	public Type createType(EClassifier eClassifier) {
+
+		Type result;
+
+		/* Check if the classifier is null. */
+		if (eClassifier == null) {
+			result = null;
+		}
+
+		/* Else check if the classifier is an EClass. */
+		else if (eClassifier instanceof EClass) {
+			result = this.createType((EClass) eClassifier);
+		}
+
+		/* Else check if the classifier is an EEnum. */
+		else if (eClassifier instanceof EEnum) {
+			result = createEnumeration((EEnum) eClassifier);
+		}
+
+		/* Else check if the classifier is an EDataType. */
+		else if (eClassifier instanceof EDataType) {
+			result = createPrimitiveType((EDataType) eClassifier);
+		}
+
+		/* Else throw an exception. */
+		else {
+			String msg;
+
+			msg = "Unknown Ecore EClassifier type: " + eClassifier;
+
+			throw new IllegalArgumentException(msg); //$NON-NLS-1$
+		}
+
+		return result;
+	}
 }

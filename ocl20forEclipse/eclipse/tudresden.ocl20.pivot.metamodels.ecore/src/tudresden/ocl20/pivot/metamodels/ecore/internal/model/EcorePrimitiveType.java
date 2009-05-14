@@ -42,101 +42,134 @@ import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType;
 
 /**
- * An implementation of the Pivot Model {@link PrimitiveType} concept for Ecore. 
+ * <p>
+ * An implementation of the Pivot Model {@link PrimitiveType} concept for Ecore.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
-public class EcorePrimitiveType extends AbstractPrimitiveType implements PrimitiveType {
+public class EcorePrimitiveType extends AbstractPrimitiveType implements
+		PrimitiveType {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(EcorePrimitiveType.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger
+			.getLogger(EcorePrimitiveType.class);
 
-  // the adapted Ecore datatype
-  private EDataType eDataType;
+	/** The adapted {@link EDataType}. */
+	private EDataType eDataType;
 
-  /**
-   * Creates a new <code>EcorePrimitiveType</code> instance.
-   * 
-   * @param eDataType the {@link EDataType} that is adapted by this class
-   */
-  public EcorePrimitiveType(EDataType eDataType) {
-    super();
+	/**
+	 * <p>
+	 * Creates a new {@link EcorePrimitiveType} instance.
+	 * </p>
+	 * 
+	 * @param eDataType
+	 *            The {@link EDataType} that is adapted by this class.
+	 */
+	public EcorePrimitiveType(EDataType eDataType) {
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcorePrimitiveType(eDataType=" + eDataType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		super();
 
-    // initialize adapted datatype
-    this.eDataType = eDataType;
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcorePrimitiveType() - exit"); //$NON-NLS-1$
-    }
-  }
+			msg = "EcorePrimitiveType(";
+			msg += "eDataType = " + eDataType;
+			msg += ") - enter";
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
-   */
-  @Override
-  public String getName() {
-    return eDataType.getName();
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace()
-   */
-  @Override
-  public Namespace getNamespace() {
-    return EcoreAdapterFactory.INSTANCE.createNamespace(eDataType.getEPackage());
-  }
+		/* Initialize adapted EDataType. */
+		this.eDataType = eDataType;
 
-  /**
-   * This method implements a type mapping from Ecore types to the predefined primitive tyoes of the
-   * Pivot Model.
-   */
-  @Override
-  public PrimitiveTypeKind getKind() {
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-    switch (eDataType.getClassifierID()) {
+			msg = "EcorePrimitiveType() - exit";
 
-      case EcorePackage.EBYTE:
-      case EcorePackage.EBYTE_OBJECT:
-      case EcorePackage.ESHORT:
-      case EcorePackage.ESHORT_OBJECT:
-      case EcorePackage.EINT:
-      case EcorePackage.EINTEGER_OBJECT:
-      case EcorePackage.ELONG:
-      case EcorePackage.ELONG_OBJECT:
-      case EcorePackage.EBIG_INTEGER:
-      case EcorePackage.EBIG_DECIMAL:
-        return PrimitiveTypeKind.INTEGER;
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+	}
 
-      case EcorePackage.EFLOAT:
-      case EcorePackage.EFLOAT_OBJECT:
-      case EcorePackage.EDOUBLE:
-      case EcorePackage.EDOUBLE_OBJECT:
-        return PrimitiveTypeKind.REAL;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getKind()
+	 */
+	@Override
+	public PrimitiveTypeKind getKind() {
+	
+		PrimitiveTypeKind result;
+	
+		switch (this.eDataType.getClassifierID()) {
+	
+		case EcorePackage.EBYTE:
+		case EcorePackage.EBYTE_OBJECT:
+		case EcorePackage.ESHORT:
+		case EcorePackage.ESHORT_OBJECT:
+		case EcorePackage.EINT:
+		case EcorePackage.EINTEGER_OBJECT:
+		case EcorePackage.ELONG:
+		case EcorePackage.ELONG_OBJECT:
+		case EcorePackage.EBIG_INTEGER:
+		case EcorePackage.EBIG_DECIMAL: {
+			result = PrimitiveTypeKind.INTEGER;
+		}
+	
+		case EcorePackage.EFLOAT:
+		case EcorePackage.EFLOAT_OBJECT:
+		case EcorePackage.EDOUBLE:
+		case EcorePackage.EDOUBLE_OBJECT: {
+			result = PrimitiveTypeKind.REAL;
+		}
+	
+		case EcorePackage.EBOOLEAN:
+		case EcorePackage.EBOOLEAN_OBJECT: {
+			result = PrimitiveTypeKind.BOOLEAN;
+		}
+	
+		case EcorePackage.ECHAR:
+		case EcorePackage.ECHARACTER_OBJECT:
+		case EcorePackage.ESTRING: {
+			result = PrimitiveTypeKind.STRING;
+		}
+	
+		default: {
+			result = PrimitiveTypeKind.UNKNOWN;
+		}
+		}
+		// end switch.
+	
+		return result;
+	}
 
-      case EcorePackage.EBOOLEAN:
-      case EcorePackage.EBOOLEAN_OBJECT:
-        return PrimitiveTypeKind.BOOLEAN;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
+	 */
+	@Override
+	public String getName() {
+		return this.eDataType.getName();
+	}
 
-      case EcorePackage.ECHAR:
-      case EcorePackage.ECHARACTER_OBJECT:
-      case EcorePackage.ESTRING:
-        return PrimitiveTypeKind.STRING;
-
-      default:
-        return PrimitiveTypeKind.UNKNOWN;
-    }
-
-  }
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace
+	 * ()
+	 */
+	@Override
+	public Namespace getNamespace() {
+		return EcoreAdapterFactory.INSTANCE.createNamespace(this.eDataType
+				.getEPackage());
+	}
 }

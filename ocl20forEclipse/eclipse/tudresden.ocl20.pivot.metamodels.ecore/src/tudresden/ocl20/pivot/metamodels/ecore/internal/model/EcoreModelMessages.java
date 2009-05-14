@@ -32,28 +32,35 @@
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * Localized String constants for the <code>EcorePlugin</code>.
- *
+ * <p>
+ * Localized {@link String} constants for the {@link EcorePlugin}.
+ * 
  * @author Matthias Braeuer
- * @version 1.0 12.04.2007
  */
 public class EcoreModelMessages extends NLS {
 
-  private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.metamodels.ecore.internal.model.messages"; //$NON-NLS-1$
+	/** The name of the message resource bundle. */
+	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.metamodels.ecore.internal.model.messages"; //$NON-NLS-1$
 
-  public static String EcoreAdapterFactory_CreatingPivotModelAdapter;
+	public static String EcoreAdapterFactory_CreatingPivotModelAdapter;
 
-  public static String EcoreModel_LoadingEcoreModel;
-  
-  static {
-    // initialize resource bundle
-    NLS.initializeMessages(BUNDLE_NAME,EcoreModelMessages.class);
-  }
+	public static String EcoreModel_LoadingEcoreModel;
 
-  private EcoreModelMessages() {
-    // no implementation necessary
-  }
+	static {
+		/* Initialize resource bundle. */
+		NLS.initializeMessages(BUNDLE_NAME, EcoreModelMessages.class);
+	}
+
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreModelMessages} instance.
+	 * </p>
+	 */
+	private EcoreModelMessages() {
+		/* No implementation necessary. */
+	}
 }

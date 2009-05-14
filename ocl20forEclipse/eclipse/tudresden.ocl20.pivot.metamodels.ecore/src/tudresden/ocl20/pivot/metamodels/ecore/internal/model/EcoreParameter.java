@@ -9,85 +9,116 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter;
 
-
 /**
- * An implementation of the Pivot Model {@link Parameter} concept for Ecore. 
- *
+ * <p>
+ * An implementation of the Pivot Model {@link Parameter} concept for Ecore.
+ * </p>
+ * 
  * @author Matthias Braeuer
- * @version 1.0 12.04.2007
  */
 public class EcoreParameter extends AbstractParameter implements Parameter {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(EcoreParameter.class);
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER = Logger.getLogger(EcoreParameter.class);
 
-  // the adapted Ecore EParameter
-  private EParameter eParameter;
-  
-  /**
-   * 
-   */
-  public EcoreParameter(EParameter eParameter) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreParameter(eParameter=" + eParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-    
-    // initialize adapted parameter
-    this.eParameter = eParameter;
-    
-    if (logger.isDebugEnabled()) {
-      logger.debug("EcoreParameter() - exit"); //$NON-NLS-1$
-    }
-  }
+	/** The adapted {@link EParameter}. */
+	private EParameter eParameter;
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
-   */
-  @Override
-  public String getName() {
-    return eParameter.getName();
-  }
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreParameter}.
+	 * </p>
+	 * 
+	 * @param eParameter
+	 *            The adapted {@link EParameter}.
+	 */
+	public EcoreParameter(EParameter eParameter) {
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
-   */
-  @Override
-  public Operation getOperation() {
-    return EcoreAdapterFactory.INSTANCE.createOperation(eParameter.getEOperation());
-  }
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
-   */
-  @Override
-  public Type getType() {
-    return EcoreAdapterFactory.INSTANCE.createType(eParameter.getEType());
-  }
+			msg = "EcoreParameter(";
+			msg += "eParameter = " + eParameter;
+			msg += ") - enter";
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple()
-   */
-  @Override
-  public boolean isMultiple() {
-    return eParameter.isMany();
-  }
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isOrdered()
-   */
-  @Override
-  public boolean isOrdered() {
-    return eParameter.isOrdered();
-  }
+		/* Initialize adapted EParameter. */
+		this.eParameter = eParameter;
 
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isUnique()
-   */
-  @Override
-  public boolean isUnique() {
-    return eParameter.isUnique();
-  }  
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
+			msg = "EcoreParameter() - exit";
+
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
+	 */
+	@Override
+	public String getName() {
+		return this.eParameter.getName();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
+	 */
+	@Override
+	public Operation getOperation() {
+		return EcoreAdapterFactory.INSTANCE.createOperation(this.eParameter
+				.getEOperation());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
+	 */
+	@Override
+	public Type getType() {
+		return EcoreAdapterFactory.INSTANCE.createType(this.eParameter.getEType());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple()
+	 */
+	@Override
+	public boolean isMultiple() {
+		return this.eParameter.isMany();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isOrdered()
+	 */
+	@Override
+	public boolean isOrdered() {
+		return this.eParameter.isOrdered();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isUnique()
+	 */
+	@Override
+	public boolean isUnique() {
+		return this.eParameter.isUnique();
+	}
 }
