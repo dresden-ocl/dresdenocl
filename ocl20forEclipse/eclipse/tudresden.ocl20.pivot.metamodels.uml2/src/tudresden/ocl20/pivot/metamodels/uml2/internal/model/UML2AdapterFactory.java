@@ -280,7 +280,7 @@ public class UML2AdapterFactory {
 		}
 
 		else if (dslType instanceof Interface) {
-			result = createType(dslType);
+			result = createType((Interface) dslType);
 		}
 
 		else {
