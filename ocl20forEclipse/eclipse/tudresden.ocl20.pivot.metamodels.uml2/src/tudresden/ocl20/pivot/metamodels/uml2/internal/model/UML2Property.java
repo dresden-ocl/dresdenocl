@@ -106,6 +106,14 @@ public class UML2Property extends AbstractProperty implements Property {
 			result = UML2AdapterFactory.INSTANCE.createType(aClass);
 		}
 
+		else if (owner instanceof org.eclipse.uml2.uml.Interface) {
+			org.eclipse.uml2.uml.Interface anInterface;
+
+			anInterface = (org.eclipse.uml2.uml.Interface) owner;
+
+			result = UML2AdapterFactory.INSTANCE.createType(anInterface);
+		}
+
 		else if (owner instanceof org.eclipse.uml2.uml.Association) {
 			org.eclipse.uml2.uml.Association anAssociation;
 
