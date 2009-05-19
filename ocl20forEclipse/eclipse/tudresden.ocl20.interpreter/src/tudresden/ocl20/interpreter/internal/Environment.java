@@ -221,23 +221,23 @@ public class Environment implements IEnvironment {
 	 * .ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
 	public OclRoot getPostconditionValue(OperationCallExp object) {
-		
+
 		OclRoot result;
-		
+
 		result = modelInstance.getUndefined();
-		
+
 		if (this.postconditionValues != null) {
 			HashMap<OperationCallExp, OclRoot> specificValues;
-			
+
 			specificValues = postconditionValues.get(getVar("self"));
-			
+
 			if (specificValues != null) {
 				result = specificValues.get(object);
 			}
 			// no else.
 		}
 		// no else.
-		
+
 		return result;
 	}
 
@@ -271,23 +271,23 @@ public class Environment implements IEnvironment {
 	 */
 	public void savePostconditionValue(OperationCallExp anOperationCallExp,
 			OclRoot aSource) {
-	
+
 		HashMap<OperationCallExp, OclRoot> specificValues;
-	
+
 		if (this.postconditionValues == null) {
 			this.postconditionValues = new HashMap<OclRoot, HashMap<OperationCallExp, OclRoot>>();
 		}
 		// no else.
-	
+
 		specificValues = this.postconditionValues.get(getVar("self"));
-	
+
 		if (specificValues == null) {
 			specificValues = new HashMap<OperationCallExp, OclRoot>();
 		}
 		// no else.
-	
+
 		specificValues.put(anOperationCallExp, aSource);
-	
+
 		this.postconditionValues.put(getVar("self"), specificValues);
 	}
 
@@ -315,7 +315,13 @@ public class Environment implements IEnvironment {
 
 		result.savedConstraints = this.savedConstraints;
 		result.modelInstance = this.modelInstance;
-		result.savedVariables = this.savedVariables;
+
+		/*
+		 * The Map of variables must be cloned. Otherwise new declared variables
+		 * are visible global.
+		 */
+		result.savedVariables = (HashMap<String, OclRoot>) this.savedVariables
+				.clone();
 		result.cachedResults = this.cachedResults;
 
 		return result;

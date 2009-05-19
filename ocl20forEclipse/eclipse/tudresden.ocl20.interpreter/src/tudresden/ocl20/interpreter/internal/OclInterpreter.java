@@ -1709,17 +1709,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 				catch (NoSuchFieldException e) {
 					logger.error("casePropertyCallExp(PropertyCallExp)", e);
 
-					e.printStackTrace();
-
 					result = env.getModelInstance().getInvalid();
+					result.setUndefinedreason(e.getMessage());
 				}
 
 				catch (IllegalAccessException e) {
 					logger.error("casePropertyCallExp(PropertyCallExp)", e);
 
-					e.printStackTrace();
-
 					result = env.getModelInstance().getInvalid();
+					result.setUndefinedreason(e.getMessage());
 				}
 			}
 

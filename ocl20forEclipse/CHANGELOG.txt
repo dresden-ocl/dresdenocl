@@ -21,6 +21,7 @@ Release 1.2X (Unknown)
 - Some bugs of the OCL-Interpreter were fixed.
  - Constraints are now interpreted for constrained 
    sub-classes as well.
+ - Local Variables are now only declared locally.
 
 - A bug in the Wizards were fixed.
  - The Model Import Wizard can now be started when the current focus is on a 
