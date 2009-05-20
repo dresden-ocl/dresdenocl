@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.metamodels"
       label="Dresden OCL2 for Eclipse Metamodels"
-      version="1.0.0"
+      version="1.2.0"
       provider-name="TU Dresden">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_intro.html">

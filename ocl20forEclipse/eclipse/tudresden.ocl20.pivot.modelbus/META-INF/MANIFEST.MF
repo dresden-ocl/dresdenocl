@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Model Bus
 Bundle-SymbolicName: tudresden.ocl20.pivot.modelbus;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.2.0
 Bundle-Activator: tudresden.ocl20.pivot.modelbus.ModelBusPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,

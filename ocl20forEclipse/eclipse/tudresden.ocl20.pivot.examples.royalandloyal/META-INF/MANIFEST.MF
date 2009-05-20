@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Royalsandloyals2 Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.examples.royalandloyal
-Bundle-Version: 1.0.0
+Bundle-Version: 1.2.0
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.ocl2java.types
 Bundle-ActivationPolicy: lazy

@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.examples"
       label="Dresden OCL2 for Eclipse Examples"
-      version="1.0.0"
+      version="1.2.0"
       provider-name="TU Dresden">
    <install-handler library="" handler=""/>
 
@@ -186,27 +186,42 @@ Library.
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="tudresden.ocl20.pivot.ocl2java.types"/>
       <import plugin="org.junit4"/>
+      <import plugin="org.eclipse.emf.ecore"/>
    </requires>
 
    <plugin
          id="tudresden.ocl20.pivot.examples.royalandloyal"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="tudresden.ocl20.pivot.examples.simple"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="tudresden.ocl20.pivot.examples.simple.constraints"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.examples.pml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.examples.living"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

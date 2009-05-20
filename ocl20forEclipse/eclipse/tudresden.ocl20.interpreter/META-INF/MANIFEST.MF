@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Interpreter Plug-in
 Bundle-SymbolicName: tudresden.ocl20.interpreter
-Bundle-Version: 1.0.0
+Bundle-Version: 1.2.0
 Bundle-Activator: tudresden.ocl20.interpreter.InterpreterPlugin
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.logging,

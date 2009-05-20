@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ocl2java Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2java
-Bundle-Version: 1.0.0
+Bundle-Version: 1.2.0
 Bundle-Activator: tudresden.ocl20.pivot.ocl2java.Ocl2JavaPlugin
 Require-Bundle: org.apache.commons.lang,
  org.eclipse.core.runtime,

@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.interpreter"
       label="Dresden OCL2 for Eclipse Interpreter"
-      version="1.0.0"
+      version="1.2.0"
       provider-name="TU Dresden">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
