@@ -120,6 +120,9 @@ public aspect ContextASMComputation {
 		
 		// Get the path name as list.
 		java.util.List pathNameList = computePathNameList();
+		
+		//The parameter list
+		java.util.List parameterList = new ArrayList();
 				
 		// Compute an operation signature container with the parameter and the result type.
 		OperationSignatureContainer signature = getOperationSignatureAS().computeASM(env);
@@ -130,6 +133,7 @@ public aspect ContextASMComputation {
 		while(it.hasNext()) {
 			Variable var = (Variable) it.next();
 			parameterTypeList.add(var.getType());
+			parameterList.add(var);
 		}
 		
 		// Lookup for the type and the operation.
@@ -213,6 +217,10 @@ public aspect ContextASMComputation {
 		java.util.List constraintList = new ArrayList();
 		for(int i = 0; i < numberConstraint; i++) {
 			Constraint constraint = getOperationConstraintAS(i).computeASM(nestedEnv);
+			Iterator itParam = parameterList.iterator();
+			while(itParam.hasNext()) {
+				((ExpressionInOcl)(constraint.getSpecification())).getParameter().add((Variable)itParam.next());
+			}
 			constraintList.add(constraint);
 		}
 		
