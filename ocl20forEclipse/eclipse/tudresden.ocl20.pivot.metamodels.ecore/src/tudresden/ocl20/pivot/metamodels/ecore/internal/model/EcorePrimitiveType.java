@@ -120,6 +120,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 		case EcorePackage.EBIG_INTEGER:
 		case EcorePackage.EBIG_DECIMAL: {
 			result = PrimitiveTypeKind.INTEGER;
+			break;
 		}
 	
 		case EcorePackage.EFLOAT:
@@ -127,17 +128,20 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 		case EcorePackage.EDOUBLE:
 		case EcorePackage.EDOUBLE_OBJECT: {
 			result = PrimitiveTypeKind.REAL;
+			break;
 		}
 	
 		case EcorePackage.EBOOLEAN:
 		case EcorePackage.EBOOLEAN_OBJECT: {
 			result = PrimitiveTypeKind.BOOLEAN;
+			break;
 		}
 	
 		case EcorePackage.ECHAR:
 		case EcorePackage.ECHARACTER_OBJECT:
 		case EcorePackage.ESTRING: {
 			result = PrimitiveTypeKind.STRING;
+			break;
 		}
 	
 		default: {
