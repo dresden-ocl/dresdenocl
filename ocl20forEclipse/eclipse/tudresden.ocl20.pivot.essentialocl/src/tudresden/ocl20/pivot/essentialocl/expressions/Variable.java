@@ -165,5 +165,15 @@ public interface Variable extends TypedElement, NamedElement {
    * @generated
    */
   Property asProperty();
+  
+  /**
+   * Ths method was added manually to support adding parameters
+   * to the ExpressionInOcl instance by the parser. If the parser trys
+   * to added the same parameter or variable to an ExpressionInOcl the
+   * first ExpressionInOcl instance will lost this parameter. So,
+   * a parameter instance can only be set only once.
+   * @return a clone of a variable
+   */
+  public Variable clone();
 
 } // Variable

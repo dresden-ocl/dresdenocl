@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
@@ -439,6 +440,23 @@ public class VariableImpl extends TypedElementImpl implements Variable {
   @Override
   protected EClass eStaticClass() {
     return ExpressionsPackageImpl.Literals.VARIABLE;
+  }
+  
+  /**
+   * This method clones a variable, but not it references.
+   * This was added by Nils to support adding parameters to
+   * the ExpressionInOcl instance.
+   * @return a cloned version of the variable
+   */
+  public Variable clone() {
+	  Variable result = ExpressionsFactory.INSTANCE.createVariable();
+	  result.setGenericType(this.genericType);
+	  result.setInitExpression(this.initExpression);
+	  result.setName(this.name);
+	  result.setRepresentedParameter(this.representedParameter);
+	  result.setType(this.type);
+	  
+	  return result;
   }
 
 } // VariableImpl
