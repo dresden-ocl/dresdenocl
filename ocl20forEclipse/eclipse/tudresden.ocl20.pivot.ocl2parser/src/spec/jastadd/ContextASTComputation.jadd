@@ -219,7 +219,8 @@ public aspect ContextASMComputation {
 			Constraint constraint = getOperationConstraintAS(i).computeASM(nestedEnv);
 			Iterator itParam = parameterList.iterator();
 			while(itParam.hasNext()) {
-				((ExpressionInOcl)(constraint.getSpecification())).getParameter().add((Variable)itParam.next());
+				Variable var = ((Variable) itParam.next()).clone();
+				((ExpressionInOcl)(constraint.getSpecification())).getParameter().add(var);
 			}
 			constraintList.add(constraint);
 		}
