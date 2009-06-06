@@ -54,57 +54,57 @@ package tudresden.ocl20.pivot.pivotmodel;
  * @generated
  */
 public interface Property extends Feature, TypedElement, NamedElement,
-    MultiplicityElement, ConstrainableElement {
+		MultiplicityElement, ConstrainableElement {
 
-  /**
-   * Returns the value of the '<em><b>Owning Type</b></em>' container reference. It is
-   * bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty <em>Owned Property</em>}'.
-   * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
-   * <p>
-   * Specifies the owner of this <code>Property</code>.
-   * </p>
-   * <!-- end-model-doc -->
-   * 
-   * @return the value of the '<em>Owning Type</em>' container reference.
-   * @see #setOwningType(Type)
-   * @see tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty
-   * @generated
-   */
-  Type getOwningType();
+	/**
+	 * Returns the value of the '<em><b>Owning Type</b></em>' container reference. It is
+	 * bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty <em>Owned Property</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * <p>
+	 * Specifies the owner of this <code>Property</code>.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * 
+	 * @return the value of the '<em>Owning Type</em>' container reference.
+	 * @see #setOwningType(Type)
+	 * @see tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty
+	 * @generated
+	 */
+	Type getOwningType();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Property#getOwningType <em>Owning Type</em>}' container reference.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @param value the new value of the '<em>Owning Type</em>' container reference.
-   * @see #getOwningType()
-   * @generated
-   */
-  void setOwningType(Type value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Property#getOwningType <em>Owning Type</em>}' container reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Type</em>' container reference.
+	 * @see #getOwningType()
+	 * @generated
+	 */
+	void setOwningType(Type value);
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
-   * <p>
-   * The operation cmpSlots returns true if the compared property has identical name and type.
-   * 
-   * It is specified as follows:
-   * 
-   * <pre>
-   * context Parameter::cmpSlots(p : Property): Boolean =
-   *    p.name = self.name and p.type = self.type
-   * </pre>
-   * 
-   * </p>
-   * <!-- end-model-doc -->
-   * 
-   * @generated
-   */
-  boolean cmpSlots(Property p);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * <p>
+	 * The operation cmpSlots returns true if the compared property has identical name and type.
+	 * 
+	 * It is specified as follows:
+	 * 
+	 * <pre>
+	 * context Parameter::cmpSlots(p : Property): Boolean =
+	 *    p.name = self.name and p.type = self.type
+	 * </pre>
+	 * 
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * 
+	 * @generated
+	 */
+	boolean cmpSlots(Property p);
 
-  /**
-   * Redefines {@link NamedElement#clone()} with a covariant return type.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
-   */
-  Property clone();
+	/**
+	 * Redefines {@link NamedElement#clone()} with a covariant return type.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 */
+	Property clone();
 
 } // Property

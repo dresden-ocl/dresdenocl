@@ -52,232 +52,227 @@ import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl#getTypeParameter <em>Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl#getTypeParameter <em>Type Parameter</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ParameterGenericTypeImpl extends GenericTypeImpl implements
-    ParameterGenericType {
+		ParameterGenericType {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger
-      .getLogger(ParameterGenericTypeImpl.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger
+			.getLogger(ParameterGenericTypeImpl.class);
 
-  /**
-   * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}'
-   * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getTypeParameter()
-   * @generated
-   * @ordered
-   */
-  protected TypeParameter typeParameter;
+	/**
+	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getTypeParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypeParameter typeParameter;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected ParameterGenericTypeImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterGenericTypeImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return PivotModelPackageImpl.Literals.PARAMETER_GENERIC_TYPE;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return PivotModelPackageImpl.Literals.PARAMETER_GENERIC_TYPE;
+	}
 
-  /**
-   * Overridden to return the name of the associated type parameter.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
-   */
-  @Override
-  public String getName() {
-    return getTypeParameter() != null ? getTypeParameter().getName() : ""; //$NON-NLS-1$
-  }
+	/**
+	 * Overridden to return the name of the associated type parameter.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
+	 */
+	@Override
+	public String getName() {
+		return getTypeParameter() != null ? getTypeParameter().getName() : ""; //$NON-NLS-1$
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public TypeParameter getTypeParameter() {
-    return typeParameter;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeParameter getTypeParameter() {
+		return typeParameter;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setTypeParameter(TypeParameter newTypeParameter) {
-    TypeParameter oldTypeParameter = typeParameter;
-    typeParameter = newTypeParameter;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER,
-          oldTypeParameter, typeParameter));
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeParameter(TypeParameter newTypeParameter) {
+		TypeParameter oldTypeParameter = typeParameter;
+		typeParameter = newTypeParameter;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
+					PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER,
+					oldTypeParameter, typeParameter));
+	}
 
-  /**
-   * This method will bind the type of the <code>typedElement</code> if the
-   * {@link #getTypeParameter() type parameter} of this
-   * <code>ParameterGenericType</code> is in the given list of type parameters
-   * that shall be bound.
-   */
-  @Override
-  protected boolean doBindGenericType(List<TypeParameter> parameters,
-      List<? extends Type> types, TypedElement typedElement) {
+	/**
+	 * This method will bind the type of the <code>typedElement</code> if the
+	 * {@link #getTypeParameter() type parameter} of this
+	 * <code>ParameterGenericType</code> is in the given list of type parameters
+	 * that shall be bound.
+	 */
+	@Override
+	protected boolean doBindGenericType(List<TypeParameter> parameters,
+			List<? extends Type> types, TypedElement typedElement) {
 
-    int index;
+		int index;
 
-    // search the type parameter of this generic type in the list of parameters
-    index = ListUtil.indexOf(parameters, getTypeParameter());
+		// search the type parameter of this generic type in the list of parameters
+		index = ListUtil.indexOf(parameters, getTypeParameter());
 
-    // bind the generic type if type parameter was found
-    if (index != -1) {
-      Type type = types.get(index);
+		// bind the generic type if type parameter was found
+		if (index != -1) {
+			Type type = types.get(index);
 
-      if (logger.isInfoEnabled()) {
-        logger.info("Binding type of '" + typedElement.getQualifiedName() //$NON-NLS-1$
-            + "' with '" + type.getName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
-      }
+			if (logger.isInfoEnabled()) {
+				logger
+						.info("Binding type of '" + typedElement.getQualifiedName() //$NON-NLS-1$
+								+ "' with '" + type.getName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
+			}
 
-      // reset the generic type, then set the type (the order is important)
-      typedElement.setGenericType(null);
-      typedElement.setType(type);
+			// reset the generic type, then set the type (the order is important)
+			typedElement.setGenericType(null);
+			typedElement.setType(type);
 
-      // break ans signal success
-      return true;
-    }
+			// break ans signal success
+			return true;
+		}
 
-    return false;
-  }
+		return false;
+	}
 
-  /**
-   * This method currently does nothing since we do not support type parameters
-   * as generic super types. This can be implemented later if necessary.
-   * 
-   * @return always <code>false</code>
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List,
-   *      java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
-   */
-  @Override
-  @SuppressWarnings("unused")
-  protected boolean doBindGenericSuperType(List<TypeParameter> parameters,
-      List<? extends Type> types, Type subType) {
-    return false;
-  }
+	/**
+	 * This method currently does nothing since we do not support type parameters
+	 * as generic super types. This can be implemented later if necessary.
+	 * 
+	 * @return always <code>false</code>
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List,
+	 *      java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	@Override
+	@SuppressWarnings("unused")
+	protected boolean doBindGenericSuperType(List<TypeParameter> parameters,
+			List<? extends Type> types, Type subType) {
+		return false;
+	}
 
-  /**
-   * This method returns <code>true</code> because any type is conformant to
-   * an unbound {@link TypeParameter}. The non-generic type of an element
-   * referring to a type parameter simply is the root of the object hierarchy
-   * (e.g. java.lang.Object or OclAny).
-   * 
-   * <p>
-   * To see why, consider the following example: a generic operation
-   * {@code <T> op(param:T) : T} can be called with any argument, no matter what
-   * type. The type parameter <code>T</code> will consecutively be bound to
-   * the type of the argument, determining the correct return type.
-   * </p>
-   * 
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#isConformantType(tudresden.ocl20.pivot.pivotmodel.Type)
-   */
-  @Override
-  @SuppressWarnings("unused")
-  public boolean isConformant(Type type) {
-    return true;
-  }
+	/**
+	 * This method returns <code>true</code> because any type is conformant to
+	 * an unbound {@link TypeParameter}. The non-generic type of an element
+	 * referring to a type parameter simply is the root of the object hierarchy
+	 * (e.g. java.lang.Object or OclAny).
+	 * 
+	 * <p>
+	 * To see why, consider the following example: a generic operation
+	 * {@code <T> op(param:T) : T} can be called with any argument, no matter what
+	 * type. The type parameter <code>T</code> will consecutively be bound to
+	 * the type of the argument, determining the correct return type.
+	 * </p>
+	 * 
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#isConformantType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	@Override
+	@SuppressWarnings("unused")
+	public boolean isConformant(Type type) {
+		return true;
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#clone()
-   */
-  @Override
-  public ParameterGenericType clone() {
-    return initialize(PivotModelFactory.INSTANCE.createParameterGenericType());
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#clone()
+	 */
+	@Override
+	public ParameterGenericType clone() {
+		return initialize(PivotModelFactory.INSTANCE
+				.createParameterGenericType());
+	}
 
-  /**
-   * Helper method that initializes a cloned <code>ParameterGenericType</code>.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#initialize(tudresden.ocl20.pivot.pivotmodel.NamedElement)
-   */
-  protected ParameterGenericType initialize(ParameterGenericType clone) {
-    clone.setTypeParameter(getTypeParameter());
-    return clone;
-  }
+	/**
+	 * Helper method that initializes a cloned <code>ParameterGenericType</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#initialize(tudresden.ocl20.pivot.pivotmodel.NamedElement)
+	 */
+	protected ParameterGenericType initialize(ParameterGenericType clone) {
+		clone.setTypeParameter(getTypeParameter());
+		return clone;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
-        return getTypeParameter();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
+			return getTypeParameter();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
-        setTypeParameter((TypeParameter) newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
+			setTypeParameter((TypeParameter) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
-        setTypeParameter((TypeParameter) null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
+			setTypeParameter((TypeParameter) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
-        return typeParameter != null;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
+			return typeParameter != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } // ParameterGenericTypeImpl

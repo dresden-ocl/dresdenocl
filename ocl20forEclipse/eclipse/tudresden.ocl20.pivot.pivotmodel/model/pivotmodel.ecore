@@ -135,6 +135,11 @@
       </eAnnotations>
       <eParameters name="namespace" eType="#//Namespace"/>
     </eOperations>
+    <eOperations name="getOwnedAndNestedRules" upperBound="-1" eType="#//Constraint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Returns all {@link Constraint}s that are owned by this or any nested {@link Namespace}.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="lookupType" eType="#//Type">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;p>&#xD;&#xA;Returns a {@link Type} in this &lt;code>Namespace&lt;/code> with the&#xD;&#xA;given name.&#xD;&#xA;&#xD;&#xA;It is specified as follows:&#xD;&#xA;&lt;pre>&#xD;&#xA;context Namespace&#xD;&#xA;def: lookupType(name : String) : Type =&#xD;&#xA;   self.ownedType->any(t | t.name = name)&#xD;&#xA;&lt;/pre>&#xD;&#xA;&lt;/p>"/>

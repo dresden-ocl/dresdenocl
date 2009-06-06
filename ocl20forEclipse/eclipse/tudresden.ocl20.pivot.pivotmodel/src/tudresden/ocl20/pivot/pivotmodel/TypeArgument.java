@@ -48,37 +48,37 @@ package tudresden.ocl20.pivot.pivotmodel;
  */
 public interface TypeArgument extends TypedElement {
 
-  /**
-   * Returns the value of the '<em><b>Owning Generic Type</b></em>' container reference.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument <em>Type Argument</em>}'.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Owning Generic Type</em>' container reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Owning Generic Type</em>' container reference.
-   * @see #setOwningGenericType(ComplexGenericType)
-   * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument
-   * @generated
-   */
-  ComplexGenericType getOwningGenericType();
+	/**
+	 * Returns the value of the '<em><b>Owning Generic Type</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument <em>Type Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Generic Type</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Generic Type</em>' container reference.
+	 * @see #setOwningGenericType(ComplexGenericType)
+	 * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument
+	 * @generated
+	 */
+	ComplexGenericType getOwningGenericType();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType <em>Owning Generic Type</em>}' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Owning Generic Type</em>' container reference.
-   * @see #getOwningGenericType()
-   * @generated
-   */
-  void setOwningGenericType(ComplexGenericType value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType <em>Owning Generic Type</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Generic Type</em>' container reference.
+	 * @see #getOwningGenericType()
+	 * @generated
+	 */
+	void setOwningGenericType(ComplexGenericType value);
 
-  /**
-   * Redefines {@link NamedElement#clone()} with a covariant return type.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
-   */
-  TypeArgument clone();
+	/**
+	 * Redefines {@link NamedElement#clone()} with a covariant return type.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 */
+	TypeArgument clone();
 
 } // TypeArgument

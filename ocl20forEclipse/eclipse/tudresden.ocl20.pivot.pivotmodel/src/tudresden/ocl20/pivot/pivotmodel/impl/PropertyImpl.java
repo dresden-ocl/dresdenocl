@@ -62,240 +62,243 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class PropertyImpl extends FeatureImpl implements Property {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(PropertyImpl.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger.getLogger(PropertyImpl.class);
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  protected PropertyImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertyImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return PivotModelPackageImpl.Literals.PROPERTY;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return PivotModelPackageImpl.Literals.PROPERTY;
+	}
 
-  /**
-   * Overridden to return the {@link #getOwningType() owning type} of this <code>Property</code>.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
-   */
-  @Override
-  public NamedElement getOwner() {
-    return getOwningType();
-  }
+	/**
+	 * Overridden to return the {@link #getOwningType() owning type} of this <code>Property</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 */
+	@Override
+	public NamedElement getOwner() {
+		return getOwningType();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public Type getOwningType() {
-    if (eContainerFeatureID != PivotModelPackageImpl.PROPERTY__OWNING_TYPE)
-      return null;
-    return (Type) eContainer();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getOwningType() {
+		if (eContainerFeatureID != PivotModelPackageImpl.PROPERTY__OWNING_TYPE)
+			return null;
+		return (Type) eContainer();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetOwningType(Type newOwningType,
-      NotificationChain msgs) {
-    msgs = eBasicSetContainer((InternalEObject) newOwningType,
-        PivotModelPackageImpl.PROPERTY__OWNING_TYPE, msgs);
-    return msgs;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningType(Type newOwningType,
+			NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newOwningType,
+				PivotModelPackageImpl.PROPERTY__OWNING_TYPE, msgs);
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOwningType(Type newOwningType) {
-    if (newOwningType != eInternalContainer()
-        || (eContainerFeatureID != PivotModelPackageImpl.PROPERTY__OWNING_TYPE && newOwningType != null)) {
-      if (EcoreUtil.isAncestor(this, (EObject) newOwningType))
-        throw new IllegalArgumentException(
-            "Recursive containment not allowed for " + toString()); //$NON-NLS-1$
-      NotificationChain msgs = null;
-      if (eInternalContainer() != null) msgs = eBasicRemoveFromContainer(msgs);
-      if (newOwningType != null)
-        msgs = ((InternalEObject) newOwningType).eInverseAdd(this,
-            PivotModelPackageImpl.TYPE__OWNED_PROPERTY, Type.class, msgs);
-      msgs = basicSetOwningType(newOwningType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          PivotModelPackageImpl.PROPERTY__OWNING_TYPE, newOwningType,
-          newOwningType));
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwningType(Type newOwningType) {
+		if (newOwningType != eInternalContainer()
+				|| (eContainerFeatureID != PivotModelPackageImpl.PROPERTY__OWNING_TYPE && newOwningType != null)) {
+			if (EcoreUtil.isAncestor(this, (EObject) newOwningType))
+				throw new IllegalArgumentException(
+						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningType != null)
+				msgs = ((InternalEObject) newOwningType).eInverseAdd(this,
+						PivotModelPackageImpl.TYPE__OWNED_PROPERTY, Type.class,
+						msgs);
+			msgs = basicSetOwningType(newOwningType, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PivotModelPackageImpl.PROPERTY__OWNING_TYPE, newOwningType,
+					newOwningType));
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-  public boolean cmpSlots(Property p) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("cmpSlots(p=" + p + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean cmpSlots(Property p) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("cmpSlots(p=" + p + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 
-    boolean result;
+		boolean result;
 
-    // compare name and type (note that we require the type of the property to be non-null)
-    result = getName().equals(p.getName()) && getType() != null
-        && getType().equals(p.getType());
+		// compare name and type (note that we require the type of the property to be non-null)
+		result = getName().equals(p.getName()) && getType() != null
+				&& getType().equals(p.getType());
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("cmpSlots() - exit - return value=" + result); //$NON-NLS-1$
-    }
+		if (logger.isDebugEnabled()) {
+			logger.debug("cmpSlots() - exit - return value=" + result); //$NON-NLS-1$
+		}
 
-    return result;
-  }
+		return result;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-  @Override
-  public Property clone() {
-    return initialize(PivotModelFactory.INSTANCE.createProperty());
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Property clone() {
+		return initialize(PivotModelFactory.INSTANCE.createProperty());
+	}
 
-  /**
-   * Helper method that initializes this <code>Property</code>.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Feature)
-   */
-  protected Property initialize(Property clone) {
-    super.initialize(clone);
+	/**
+	 * Helper method that initializes this <code>Property</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Feature)
+	 */
+	protected Property initialize(Property clone) {
+		super.initialize(clone);
 
-    clone.setMultiple(isMultiple());
-    clone.setOrdered(isOrdered());
-    clone.setUnique(isUnique());
+		clone.setMultiple(isMultiple());
+		clone.setOrdered(isOrdered());
+		clone.setUnique(isUnique());
 
-    return clone;
-  }
+		return clone;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-      NotificationChain msgs) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
-        if (eInternalContainer() != null)
-          msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetOwningType((Type) otherEnd, msgs);
-    }
-    return super.eInverseAdd(otherEnd, featureID, msgs);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetOwningType((Type) otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd,
-      int featureID, NotificationChain msgs) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
-        return basicSetOwningType(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
+			return basicSetOwningType(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eBasicRemoveFromContainerFeature(
-      NotificationChain msgs) {
-    switch (eContainerFeatureID) {
-      case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
-        return eInternalContainer().eInverseRemove(this,
-            PivotModelPackageImpl.TYPE__OWNED_PROPERTY, Type.class, msgs);
-    }
-    return super.eBasicRemoveFromContainerFeature(msgs);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(
+			NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+		case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
+			return eInternalContainer().eInverseRemove(this,
+					PivotModelPackageImpl.TYPE__OWNED_PROPERTY, Type.class,
+					msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
-        return getOwningType();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
+			return getOwningType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
-        setOwningType((Type) newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
+			setOwningType((Type) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
-        setOwningType((Type) null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
+			setOwningType((Type) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
-        return getOwningType() != null;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PROPERTY__OWNING_TYPE:
+			return getOwningType() != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
-  /**
-   * Adapted for a consistent appearance.
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-        .appendToString(super.toString())
-        .append("ordered", ordered).append("unique", unique).append("multiple", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            multiple).toString();
-  }
+	/**
+	 * Adapted for a consistent appearance.
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.appendToString(super.toString())
+				.append("ordered", ordered).append("unique", unique).append("multiple", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						multiple).toString();
+	}
 } // PropertyImpl

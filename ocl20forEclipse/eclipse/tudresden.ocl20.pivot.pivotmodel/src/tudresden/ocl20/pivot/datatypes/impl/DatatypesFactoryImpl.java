@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import tudresden.ocl20.pivot.datatypes.*;
 import tudresden.ocl20.pivot.datatypes.DatatypesFactory;
 
 /**
@@ -47,226 +48,234 @@ import tudresden.ocl20.pivot.datatypes.DatatypesFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFactory {
+public class DatatypesFactoryImpl extends EFactoryImpl implements
+		DatatypesFactory {
 
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static final DatatypesFactoryImpl eINSTANCE = init();
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final DatatypesFactoryImpl eINSTANCE = init();
 
-  /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static DatatypesFactoryImpl init() {
-    try {
-      DatatypesFactoryImpl theDatatypesFactory = (DatatypesFactoryImpl) EPackage.Registry.INSTANCE
-          .getEFactory("http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"); //$NON-NLS-1$ 
-      if (theDatatypesFactory != null) {
-        return theDatatypesFactory;
-      }
-    }
-    catch (Exception exception) {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new DatatypesFactoryImpl();
-  }
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static DatatypesFactoryImpl init() {
+		try {
+			DatatypesFactoryImpl theDatatypesFactory = (DatatypesFactoryImpl) EPackage.Registry.INSTANCE
+					.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"); //$NON-NLS-1$ 
+			if (theDatatypesFactory != null) {
+				return theDatatypesFactory;
+			}
+		} catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new DatatypesFactoryImpl();
+	}
 
-  /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DatatypesFactoryImpl() {
-    super();
-  }
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DatatypesFactoryImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EObject create(EClass eClass) {
-    switch (eClass.getClassifierID()) {
-      default:
-        throw new IllegalArgumentException(
-            "The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+		default:
+			throw new IllegalArgumentException(
+					"The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object createFromString(EDataType eDataType, String initialValue) {
-    switch (eDataType.getClassifierID()) {
-      case DatatypesPackageImpl.BOOLEAN:
-        return createBooleanFromString(eDataType,initialValue);
-      case DatatypesPackageImpl.INTEGER:
-        return createIntegerFromString(eDataType,initialValue);
-      case DatatypesPackageImpl.REAL:
-        return createRealFromString(eDataType,initialValue);
-      case DatatypesPackageImpl.STRING:
-        return createStringFromString(eDataType,initialValue);
-      case DatatypesPackageImpl.UNLIMITED_NATURAL:
-        return createUnlimitedNaturalFromString(eDataType,initialValue);
-      default:
-        throw new IllegalArgumentException(
-            "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+		case DatatypesPackageImpl.BOOLEAN:
+			return createBooleanFromString(eDataType, initialValue);
+		case DatatypesPackageImpl.INTEGER:
+			return createIntegerFromString(eDataType, initialValue);
+		case DatatypesPackageImpl.REAL:
+			return createRealFromString(eDataType, initialValue);
+		case DatatypesPackageImpl.STRING:
+			return createStringFromString(eDataType, initialValue);
+		case DatatypesPackageImpl.UNLIMITED_NATURAL:
+			return createUnlimitedNaturalFromString(eDataType, initialValue);
+		default:
+			throw new IllegalArgumentException(
+					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String convertToString(EDataType eDataType, Object instanceValue) {
-    switch (eDataType.getClassifierID()) {
-      case DatatypesPackageImpl.BOOLEAN:
-        return convertBooleanToString(eDataType,instanceValue);
-      case DatatypesPackageImpl.INTEGER:
-        return convertIntegerToString(eDataType,instanceValue);
-      case DatatypesPackageImpl.REAL:
-        return convertRealToString(eDataType,instanceValue);
-      case DatatypesPackageImpl.STRING:
-        return convertStringToString(eDataType,instanceValue);
-      case DatatypesPackageImpl.UNLIMITED_NATURAL:
-        return convertUnlimitedNaturalToString(eDataType,instanceValue);
-      default:
-        throw new IllegalArgumentException(
-            "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+		case DatatypesPackageImpl.BOOLEAN:
+			return convertBooleanToString(eDataType, instanceValue);
+		case DatatypesPackageImpl.INTEGER:
+			return convertIntegerToString(eDataType, instanceValue);
+		case DatatypesPackageImpl.REAL:
+			return convertRealToString(eDataType, instanceValue);
+		case DatatypesPackageImpl.STRING:
+			return convertStringToString(eDataType, instanceValue);
+		case DatatypesPackageImpl.UNLIMITED_NATURAL:
+			return convertUnlimitedNaturalToString(eDataType, instanceValue);
+		default:
+			throw new IllegalArgumentException(
+					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public String createUnlimitedNaturalFromString(EDataType eDataType, String initialValue) {
-    return initialValue;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public String createUnlimitedNaturalFromString(EDataType eDataType,
+			String initialValue) {
+		return initialValue;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public String convertUnlimitedNaturalToString(EDataType eDataType, Object instanceValue) {
-    return (String) instanceValue;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public String convertUnlimitedNaturalToString(EDataType eDataType,
+			Object instanceValue) {
+		return (String) instanceValue;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public Integer createIntegerFromString(EDataType eDataType, String initialValue) {
-    return initialValue == null ? null : Integer.valueOf(initialValue);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public Integer createIntegerFromString(EDataType eDataType,
+			String initialValue) {
+		return initialValue == null ? null : Integer.valueOf(initialValue);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public String convertIntegerToString(EDataType eDataType, Object instanceValue) {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public String convertIntegerToString(EDataType eDataType,
+			Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public Boolean createBooleanFromString(EDataType eDataType, String initialValue) {
-    return initialValue == null ? null : Boolean.valueOf(initialValue);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public Boolean createBooleanFromString(EDataType eDataType,
+			String initialValue) {
+		return initialValue == null ? null : Boolean.valueOf(initialValue);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public String convertBooleanToString(EDataType eDataType, Object instanceValue) {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public String convertBooleanToString(EDataType eDataType,
+			Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public String createStringFromString(EDataType eDataType, String initialValue) {
-    return initialValue;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public String createStringFromString(EDataType eDataType,
+			String initialValue) {
+		return initialValue;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public String convertStringToString(EDataType eDataType, Object instanceValue) {
-    return (String) instanceValue;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public String convertStringToString(EDataType eDataType,
+			Object instanceValue) {
+		return (String) instanceValue;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public Float createRealFromString(EDataType eDataType, String initialValue) {
-    return initialValue == null ? null : Float.valueOf(initialValue);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public Float createRealFromString(EDataType eDataType, String initialValue) {
+		return initialValue == null ? null : Float.valueOf(initialValue);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated NOT
-   */
-  @SuppressWarnings("unused")
-  public String convertRealToString(EDataType eDataType, Object instanceValue) {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public String convertRealToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DatatypesPackageImpl getDatatypesPackageImpl() {
-    return (DatatypesPackageImpl) getEPackage();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DatatypesPackageImpl getDatatypesPackageImpl() {
+		return (DatatypesPackageImpl) getEPackage();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
-  @Deprecated
-  public static DatatypesPackageImpl getPackage() {
-    return DatatypesPackageImpl.eINSTANCE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static DatatypesPackageImpl getPackage() {
+		return DatatypesPackageImpl.eINSTANCE;
+	}
 
 } //DatatypesFactoryImpl

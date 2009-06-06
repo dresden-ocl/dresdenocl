@@ -57,34 +57,34 @@ package tudresden.ocl20.pivot.pivotmodel;
  */
 public interface Feature extends TypedElement, MultiplicityElement {
 
-  /**
-   * Returns the value of the '<em><b>Static</b></em>' attribute.
-   * The default value is <code>"false"</code>.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <code>
-   * Specifies whether this feature characterizes individual 
-   * instances classified by a {@link Type} 
-   * (<code>false</code>) or the type itself 
-   * (<code>true</code>). Default value is 
-   * <code>false</code>.
-   * </code>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Static</em>' attribute.
-   * @see #setStatic(boolean)
-   * @generated
-   */
-  boolean isStatic();
+	/**
+	 * Returns the value of the '<em><b>Static</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <code>
+	 * Specifies whether this feature characterizes individual 
+	 * instances classified by a {@link Type} 
+	 * (<code>false</code>) or the type itself 
+	 * (<code>true</code>). Default value is 
+	 * <code>false</code>.
+	 * </code>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Static</em>' attribute.
+	 * @see #setStatic(boolean)
+	 * @generated
+	 */
+	boolean isStatic();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Feature#isStatic <em>Static</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Static</em>' attribute.
-   * @see #isStatic()
-   * @generated
-   */
-  void setStatic(boolean value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Feature#isStatic <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Static</em>' attribute.
+	 * @see #isStatic()
+	 * @generated
+	 */
+	void setStatic(boolean value);
 
 } // Feature

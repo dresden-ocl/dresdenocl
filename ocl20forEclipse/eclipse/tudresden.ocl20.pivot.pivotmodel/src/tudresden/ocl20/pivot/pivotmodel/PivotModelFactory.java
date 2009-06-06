@@ -41,138 +41,138 @@ package tudresden.ocl20.pivot.pivotmodel;
  */
 public interface PivotModelFactory {
 
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  PivotModelFactory INSTANCE = tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl.eINSTANCE;
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	PivotModelFactory INSTANCE = tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl.eINSTANCE;
 
-  /**
-   * Returns a new object of class '<em>Enumeration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Enumeration</em>'.
-   * @generated
-   */
-  Enumeration createEnumeration();
+	/**
+	 * Returns a new object of class '<em>Enumeration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumeration</em>'.
+	 * @generated
+	 */
+	Enumeration createEnumeration();
 
-  /**
-   * Returns a new object of class '<em>Operation</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Operation</em>'.
-   * @generated
-   */
-  Operation createOperation();
+	/**
+	 * Returns a new object of class '<em>Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation</em>'.
+	 * @generated
+	 */
+	Operation createOperation();
 
-  /**
-   * Returns a new object of class '<em>Namespace</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Namespace</em>'.
-   * @generated
-   */
-  Namespace createNamespace();
+	/**
+	 * Returns a new object of class '<em>Namespace</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Namespace</em>'.
+	 * @generated
+	 */
+	Namespace createNamespace();
 
-  /**
-   * Returns a new object of class '<em>Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type</em>'.
-   * @generated
-   */
-  Type createType();
+	/**
+	 * Returns a new object of class '<em>Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type</em>'.
+	 * @generated
+	 */
+	Type createType();
 
-  /**
-   * Returns a new object of class '<em>Parameter</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Parameter</em>'.
-   * @generated
-   */
-  Parameter createParameter();
+	/**
+	 * Returns a new object of class '<em>Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter</em>'.
+	 * @generated
+	 */
+	Parameter createParameter();
 
-  /**
-   * Returns a new object of class '<em>Enumeration Literal</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Enumeration Literal</em>'.
-   * @generated
-   */
-  EnumerationLiteral createEnumerationLiteral();
+	/**
+	 * Returns a new object of class '<em>Enumeration Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumeration Literal</em>'.
+	 * @generated
+	 */
+	EnumerationLiteral createEnumerationLiteral();
 
-  /**
-   * Returns a new object of class '<em>Property</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Property</em>'.
-   * @generated
-   */
-  Property createProperty();
+	/**
+	 * Returns a new object of class '<em>Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property</em>'.
+	 * @generated
+	 */
+	Property createProperty();
 
-  /**
-   * Returns a new object of class '<em>Primitive Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Primitive Type</em>'.
-   * @generated
-   */
-  PrimitiveType createPrimitiveType();
+	/**
+	 * Returns a new object of class '<em>Primitive Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Primitive Type</em>'.
+	 * @generated
+	 */
+	PrimitiveType createPrimitiveType();
 
-  /**
-   * Returns a new object of class '<em>Constraint</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Constraint</em>'.
-   * @generated
-   */
-  Constraint createConstraint();
+	/**
+	 * Returns a new object of class '<em>Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constraint</em>'.
+	 * @generated
+	 */
+	Constraint createConstraint();
 
-  /**
-   * Returns a new object of class '<em>Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Expression</em>'.
-   * @generated
-   */
-  Expression createExpression();
+	/**
+	 * Returns a new object of class '<em>Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expression</em>'.
+	 * @generated
+	 */
+	Expression createExpression();
 
-  /**
-   * Returns a new object of class '<em>Type Parameter</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Parameter</em>'.
-   * @generated
-   */
-  TypeParameter createTypeParameter();
+	/**
+	 * Returns a new object of class '<em>Type Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Parameter</em>'.
+	 * @generated
+	 */
+	TypeParameter createTypeParameter();
 
-  /**
-   * Returns a new object of class '<em>Type Argument</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Argument</em>'.
-   * @generated
-   */
-  TypeArgument createTypeArgument();
+	/**
+	 * Returns a new object of class '<em>Type Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Argument</em>'.
+	 * @generated
+	 */
+	TypeArgument createTypeArgument();
 
-  /**
-   * Returns a new object of class '<em>Parameter Generic Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Parameter Generic Type</em>'.
-   * @generated
-   */
-  ParameterGenericType createParameterGenericType();
+	/**
+	 * Returns a new object of class '<em>Parameter Generic Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter Generic Type</em>'.
+	 * @generated
+	 */
+	ParameterGenericType createParameterGenericType();
 
-  /**
-   * Returns a new object of class '<em>Complex Generic Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Complex Generic Type</em>'.
-   * @generated
-   */
-  ComplexGenericType createComplexGenericType();
+	/**
+	 * Returns a new object of class '<em>Complex Generic Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Complex Generic Type</em>'.
+	 * @generated
+	 */
+	ComplexGenericType createComplexGenericType();
 
 } //PivotModelFactory

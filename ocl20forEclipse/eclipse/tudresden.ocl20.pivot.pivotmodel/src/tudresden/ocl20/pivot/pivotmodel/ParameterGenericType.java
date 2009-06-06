@@ -48,35 +48,35 @@ package tudresden.ocl20.pivot.pivotmodel;
  */
 public interface ParameterGenericType extends GenericType {
 
-  /**
-   * Returns the value of the '<em><b>Type Parameter</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type Parameter</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type Parameter</em>' reference.
-   * @see #setTypeParameter(TypeParameter)
-   * @generated
-   */
-  TypeParameter getTypeParameter();
+	/**
+	 * Returns the value of the '<em><b>Type Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Parameter</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Parameter</em>' reference.
+	 * @see #setTypeParameter(TypeParameter)
+	 * @generated
+	 */
+	TypeParameter getTypeParameter();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType#getTypeParameter <em>Type Parameter</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type Parameter</em>' reference.
-   * @see #getTypeParameter()
-   * @generated
-   */
-  void setTypeParameter(TypeParameter value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType#getTypeParameter <em>Type Parameter</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Parameter</em>' reference.
+	 * @see #getTypeParameter()
+	 * @generated
+	 */
+	void setTypeParameter(TypeParameter value);
 
-  /**
-   * Redefines {@link NamedElement#clone()} with a covariant return type.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
-   */
-  ParameterGenericType clone();
+	/**
+	 * Redefines {@link NamedElement#clone()} with a covariant return type.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 */
+	ParameterGenericType clone();
 
 } // ParameterGenericType

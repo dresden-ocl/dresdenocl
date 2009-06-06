@@ -47,241 +47,230 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName <em>Name</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName <em>Qualified Name</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner <em>Owner</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName <em>Qualified Name</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner <em>Owner</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class NamedElementImpl extends EObjectImpl implements
-    NamedElement {
+		NamedElement {
 
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc --> This is set to the empty string in order to prevent
-   * <code>NullPointerExceptions</code> where the name attribute is checked.
-   * <!-- end-user-doc -->
-   * 
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = ""; //$NON-NLS-1$
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> This is set to the empty string in order to prevent
+	 * <code>NullPointerExceptions</code> where the name attribute is checked.
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = ""; //$NON-NLS-1$
 
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
-  /**
-   * The default value of the '{@link #getQualifiedName() <em>Qualified Name</em>}'
-   * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getQualifiedName()
-   * @generated
-   * @ordered
-   */
-  protected static final String QUALIFIED_NAME_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getQualifiedName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String QUALIFIED_NAME_EDEFAULT = null;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected NamedElementImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NamedElementImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return PivotModelPackageImpl.Literals.NAMED_ELEMENT;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return PivotModelPackageImpl.Literals.NAMED_ELEMENT;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public String getName() {
-    return name;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setName(String newName) {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          PivotModelPackageImpl.NAMED_ELEMENT__NAME, oldName, name));
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PivotModelPackageImpl.NAMED_ELEMENT__NAME, oldName, name));
+	}
 
-  /**
-   * The current implementation simply recursively goes up the owner hierarchy,
-   * adding each owner's name, separated by <code>::</code>.
-   * 
-   * TODO: Consider using a StringBuilder and collecting the name parts
-   * iteratively TODO: Consider caching the name for large models
-   * 
-   * @generated NOT
-   */
-  public String getQualifiedName() {
-    return getOwner() != null ? getOwner().getQualifiedName()
-        + "::" + getName() : getName(); //$NON-NLS-1$
-  }
+	/**
+	 * The current implementation simply recursively goes up the owner hierarchy,
+	 * adding each owner's name, separated by <code>::</code>.
+	 * 
+	 * TODO: Consider using a StringBuilder and collecting the name parts
+	 * iteratively TODO: Consider caching the name for large models
+	 * 
+	 * @generated NOT
+	 */
+	public String getQualifiedName() {
+		return getOwner() != null ? getOwner().getQualifiedName()
+				+ "::" + getName() : getName(); //$NON-NLS-1$
+	}
 
-  /**
-   * Subclasses should override this method if they have an owner that
-   * contributes to their qualified name. This is important because the equality
-   * of two named elements is, by default, solely determined based on their
-   * qualified name. The default implementation simply returns <code>null</code>.
-   * 
-   * @generated NOT
-   */
-  public NamedElement getOwner() {
-    return null;
-  }
+	/**
+	 * Subclasses should override this method if they have an owner that
+	 * contributes to their qualified name. This is important because the equality
+	 * of two named elements is, by default, solely determined based on their
+	 * qualified name. The default implementation simply returns <code>null</code>.
+	 * 
+	 * @generated NOT
+	 */
+	public NamedElement getOwner() {
+		return null;
+	}
 
-  /**
-   * The default implementation in this class throws a
-   * {@link CloneNotSupportedException}. Subclasses may override to implement
-   * cloning behaviour. Because <code>NamedElement</code> is at the root of
-   * the inheritance tree, we do not make this method abstract. This avoids
-   * having to change all subclasses.
-   * 
-   * @throws CloneNotSupportedException if this element does not support cloning
-   * 
-   * @generated NOT
-   */
-  @Override
-  public NamedElement clone() throws CloneNotSupportedException {
-    throw new CloneNotSupportedException(
-        "Element " + this + " does not support cloning."); //$NON-NLS-1$ //$NON-NLS-2$
-  }
+	/**
+	 * The default implementation in this class throws a
+	 * {@link CloneNotSupportedException}. Subclasses may override to implement
+	 * cloning behaviour. Because <code>NamedElement</code> is at the root of
+	 * the inheritance tree, we do not make this method abstract. This avoids
+	 * having to change all subclasses.
+	 * 
+	 * @throws CloneNotSupportedException if this element does not support cloning
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public NamedElement clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException(
+				"Element " + this + " does not support cloning."); //$NON-NLS-1$ //$NON-NLS-2$
+	}
 
-  /**
-   * Convenience method for subclasses that initializes a cloned
-   * <code>NamedElement</code> with the properties of this
-   * <code>NamedElement</code>.
-   */
-  protected NamedElement initialize(NamedElement clone) {
+	/**
+	 * Convenience method for subclasses that initializes a cloned
+	 * <code>NamedElement</code> with the properties of this
+	 * <code>NamedElement</code>.
+	 */
+	protected NamedElement initialize(NamedElement clone) {
 
-    if (!hasVolatileName()) {
-      clone.setName(getName());
-    }
+		if (!hasVolatileName()) {
+			clone.setName(getName());
+		}
 
-    return clone;
-  }
+		return clone;
+	}
 
-  /**
-   * Helper method that can be overridden in subclasses to signal that a name is
-   * volatile, i.e., its value is automatically calculated (and, hence, the
-   * {@link #setName(String)} method might throw an exception). This is used by
-   * {@link #initialize(NamedElement)} to decide whether to set the name in a
-   * cloned element. The default implementation returns <code>false</code>
-   * indicating that the name should be set.
-   * 
-   * @return <code>false</code> by default, subclasses may override
-   */
-  protected boolean hasVolatileName() {
-    return false;
-  }
+	/**
+	 * Helper method that can be overridden in subclasses to signal that a name is
+	 * volatile, i.e., its value is automatically calculated (and, hence, the
+	 * {@link #setName(String)} method might throw an exception). This is used by
+	 * {@link #initialize(NamedElement)} to decide whether to set the name in a
+	 * cloned element. The default implementation returns <code>false</code>
+	 * indicating that the name should be set.
+	 * 
+	 * @return <code>false</code> by default, subclasses may override
+	 */
+	protected boolean hasVolatileName() {
+		return false;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
-        return getName();
-      case PivotModelPackageImpl.NAMED_ELEMENT__QUALIFIED_NAME:
-        return getQualifiedName();
-      case PivotModelPackageImpl.NAMED_ELEMENT__OWNER:
-        return getOwner();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
+			return getName();
+		case PivotModelPackageImpl.NAMED_ELEMENT__QUALIFIED_NAME:
+			return getQualifiedName();
+		case PivotModelPackageImpl.NAMED_ELEMENT__OWNER:
+			return getOwner();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
-        setName((String) newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
+			setName((String) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-            .equals(name);
-      case PivotModelPackageImpl.NAMED_ELEMENT__QUALIFIED_NAME:
-        return QUALIFIED_NAME_EDEFAULT == null ? getQualifiedName() != null
-            : !QUALIFIED_NAME_EDEFAULT.equals(getQualifiedName());
-      case PivotModelPackageImpl.NAMED_ELEMENT__OWNER:
-        return getOwner() != null;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
+		case PivotModelPackageImpl.NAMED_ELEMENT__QUALIFIED_NAME:
+			return QUALIFIED_NAME_EDEFAULT == null ? getQualifiedName() != null
+					: !QUALIFIED_NAME_EDEFAULT.equals(getQualifiedName());
+		case PivotModelPackageImpl.NAMED_ELEMENT__OWNER:
+			return getOwner() != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
-  /**
-   * Changed EMF implementation to avoid call to super class that includes the
-   * hash code of the object. In addition, the getter methods are used to get
-   * attribute values. This is important if repository-specific subclasses have
-   * alternative ways of obtaining their attribute values.
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
-        "name", getName()).toString(); //$NON-NLS-1$
-  }
+	/**
+	 * Changed EMF implementation to avoid call to super class that includes the
+	 * hash code of the object. In addition, the getter methods are used to get
+	 * attribute values. This is important if repository-specific subclasses have
+	 * alternative ways of obtaining their attribute values.
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.append("name", getName()).toString(); //$NON-NLS-1$
+	}
 
 } // NamedElementImpl

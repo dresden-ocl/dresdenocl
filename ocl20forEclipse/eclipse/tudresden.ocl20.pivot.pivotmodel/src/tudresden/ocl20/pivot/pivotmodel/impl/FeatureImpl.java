@@ -58,338 +58,340 @@ import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
  */
 public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
-  /**
-   * The default value of the '{@link #isOrdered() <em>Ordered</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isOrdered()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean ORDERED_EDEFAULT = false;
+	/**
+	 * The default value of the '{@link #isOrdered() <em>Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ORDERED_EDEFAULT = false;
 
-  /**
-   * The cached value of the '{@link #isOrdered() <em>Ordered</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isOrdered()
-   * @generated
-   * @ordered
-   */
-  protected boolean ordered = ORDERED_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #isOrdered() <em>Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean ordered = ORDERED_EDEFAULT;
 
-  /**
-   * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isUnique()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean UNIQUE_EDEFAULT = true;
+	/**
+	 * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean UNIQUE_EDEFAULT = true;
 
-  /**
-   * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isUnique()
-   * @generated
-   * @ordered
-   */
-  protected boolean unique = UNIQUE_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean unique = UNIQUE_EDEFAULT;
 
-  /**
-   * The default value of the '{@link #isMultiple() <em>Multiple</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isMultiple()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean MULTIPLE_EDEFAULT = false;
+	/**
+	 * The default value of the '{@link #isMultiple() <em>Multiple</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMultiple()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean MULTIPLE_EDEFAULT = false;
 
-  /**
-   * The cached value of the '{@link #isMultiple() <em>Multiple</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isMultiple()
-   * @generated
-   * @ordered
-   */
-  protected boolean multiple = MULTIPLE_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #isMultiple() <em>Multiple</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMultiple()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean multiple = MULTIPLE_EDEFAULT;
 
-  /**
-   * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
-   * <!-- begin-user-doc
-   * --> <!-- end-user-doc -->
-   * @see #isStatic()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean STATIC_EDEFAULT = false;
+	/**
+	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATIC_EDEFAULT = false;
 
-  /**
-   * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
-   * <!-- begin-user-doc
-   * --> <!-- end-user-doc -->
-   * @see #isStatic()
-   * @generated
-   * @ordered
-   */
-  protected boolean static_ = STATIC_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean static_ = STATIC_EDEFAULT;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  protected FeatureImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FeatureImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return PivotModelPackageImpl.Literals.FEATURE;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return PivotModelPackageImpl.Literals.FEATURE;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isOrdered() {
-    return ordered;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isOrdered() {
+		return ordered;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOrdered(boolean newOrdered) {
-    boolean oldOrdered = ordered;
-    ordered = newOrdered;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,PivotModelPackageImpl.FEATURE__ORDERED,
-          oldOrdered,ordered));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOrdered(boolean newOrdered) {
+		boolean oldOrdered = ordered;
+		ordered = newOrdered;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PivotModelPackageImpl.FEATURE__ORDERED, oldOrdered, ordered));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isUnique() {
-    return unique;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isUnique() {
+		return unique;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUnique(boolean newUnique) {
-    boolean oldUnique = unique;
-    unique = newUnique;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,PivotModelPackageImpl.FEATURE__UNIQUE,
-          oldUnique,unique));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUnique(boolean newUnique) {
+		boolean oldUnique = unique;
+		unique = newUnique;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PivotModelPackageImpl.FEATURE__UNIQUE, oldUnique, unique));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isMultiple() {
-    return multiple;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isMultiple() {
+		return multiple;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setMultiple(boolean newMultiple) {
-    boolean oldMultiple = multiple;
-    multiple = newMultiple;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,PivotModelPackageImpl.FEATURE__MULTIPLE,
-          oldMultiple,multiple));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMultiple(boolean newMultiple) {
+		boolean oldMultiple = multiple;
+		multiple = newMultiple;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PivotModelPackageImpl.FEATURE__MULTIPLE, oldMultiple,
+					multiple));
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isStatic() {
-    return static_;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isStatic() {
+		return static_;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public void setStatic(boolean newStatic) {
-    boolean oldStatic = static_;
-    static_ = newStatic;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this,Notification.SET,PivotModelPackageImpl.FEATURE__STATIC,
-          oldStatic,static_));
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatic(boolean newStatic) {
+		boolean oldStatic = static_;
+		static_ = newStatic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PivotModelPackageImpl.FEATURE__STATIC, oldStatic, static_));
+	}
 
-  /**
-   * Convenience method for subclasses that initializes the properties and references of a cloned
-   * <code>Feature</code>.
-   */
-  protected Feature initialize(Feature clone) {
-    super.initialize(clone);
-    clone.setStatic(isStatic());
-    return clone;
-  }
+	/**
+	 * Convenience method for subclasses that initializes the properties and references of a cloned
+	 * <code>Feature</code>.
+	 */
+	protected Feature initialize(Feature clone) {
+		super.initialize(clone);
+		clone.setStatic(isStatic());
+		return clone;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case PivotModelPackageImpl.FEATURE__ORDERED:
-        return isOrdered() ? Boolean.TRUE : Boolean.FALSE;
-      case PivotModelPackageImpl.FEATURE__UNIQUE:
-        return isUnique() ? Boolean.TRUE : Boolean.FALSE;
-      case PivotModelPackageImpl.FEATURE__MULTIPLE:
-        return isMultiple() ? Boolean.TRUE : Boolean.FALSE;
-      case PivotModelPackageImpl.FEATURE__STATIC:
-        return isStatic() ? Boolean.TRUE : Boolean.FALSE;
-    }
-    return super.eGet(featureID,resolve,coreType);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case PivotModelPackageImpl.FEATURE__ORDERED:
+			return isOrdered() ? Boolean.TRUE : Boolean.FALSE;
+		case PivotModelPackageImpl.FEATURE__UNIQUE:
+			return isUnique() ? Boolean.TRUE : Boolean.FALSE;
+		case PivotModelPackageImpl.FEATURE__MULTIPLE:
+			return isMultiple() ? Boolean.TRUE : Boolean.FALSE;
+		case PivotModelPackageImpl.FEATURE__STATIC:
+			return isStatic() ? Boolean.TRUE : Boolean.FALSE;
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case PivotModelPackageImpl.FEATURE__ORDERED:
-        setOrdered(((Boolean) newValue).booleanValue());
-        return;
-      case PivotModelPackageImpl.FEATURE__UNIQUE:
-        setUnique(((Boolean) newValue).booleanValue());
-        return;
-      case PivotModelPackageImpl.FEATURE__MULTIPLE:
-        setMultiple(((Boolean) newValue).booleanValue());
-        return;
-      case PivotModelPackageImpl.FEATURE__STATIC:
-        setStatic(((Boolean) newValue).booleanValue());
-        return;
-    }
-    super.eSet(featureID,newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case PivotModelPackageImpl.FEATURE__ORDERED:
+			setOrdered(((Boolean) newValue).booleanValue());
+			return;
+		case PivotModelPackageImpl.FEATURE__UNIQUE:
+			setUnique(((Boolean) newValue).booleanValue());
+			return;
+		case PivotModelPackageImpl.FEATURE__MULTIPLE:
+			setMultiple(((Boolean) newValue).booleanValue());
+			return;
+		case PivotModelPackageImpl.FEATURE__STATIC:
+			setStatic(((Boolean) newValue).booleanValue());
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.FEATURE__ORDERED:
-        setOrdered(ORDERED_EDEFAULT);
-        return;
-      case PivotModelPackageImpl.FEATURE__UNIQUE:
-        setUnique(UNIQUE_EDEFAULT);
-        return;
-      case PivotModelPackageImpl.FEATURE__MULTIPLE:
-        setMultiple(MULTIPLE_EDEFAULT);
-        return;
-      case PivotModelPackageImpl.FEATURE__STATIC:
-        setStatic(STATIC_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.FEATURE__ORDERED:
+			setOrdered(ORDERED_EDEFAULT);
+			return;
+		case PivotModelPackageImpl.FEATURE__UNIQUE:
+			setUnique(UNIQUE_EDEFAULT);
+			return;
+		case PivotModelPackageImpl.FEATURE__MULTIPLE:
+			setMultiple(MULTIPLE_EDEFAULT);
+			return;
+		case PivotModelPackageImpl.FEATURE__STATIC:
+			setStatic(STATIC_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.FEATURE__ORDERED:
-        return ordered != ORDERED_EDEFAULT;
-      case PivotModelPackageImpl.FEATURE__UNIQUE:
-        return unique != UNIQUE_EDEFAULT;
-      case PivotModelPackageImpl.FEATURE__MULTIPLE:
-        return multiple != MULTIPLE_EDEFAULT;
-      case PivotModelPackageImpl.FEATURE__STATIC:
-        return static_ != STATIC_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.FEATURE__ORDERED:
+			return ordered != ORDERED_EDEFAULT;
+		case PivotModelPackageImpl.FEATURE__UNIQUE:
+			return unique != UNIQUE_EDEFAULT;
+		case PivotModelPackageImpl.FEATURE__MULTIPLE:
+			return multiple != MULTIPLE_EDEFAULT;
+		case PivotModelPackageImpl.FEATURE__STATIC:
+			return static_ != STATIC_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-    if (baseClass == MultiplicityElement.class) {
-      switch (derivedFeatureID) {
-        case PivotModelPackageImpl.FEATURE__ORDERED:
-          return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED;
-        case PivotModelPackageImpl.FEATURE__UNIQUE:
-          return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE;
-        case PivotModelPackageImpl.FEATURE__MULTIPLE:
-          return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE;
-        default:
-          return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID,baseClass);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == MultiplicityElement.class) {
+			switch (derivedFeatureID) {
+			case PivotModelPackageImpl.FEATURE__ORDERED:
+				return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED;
+			case PivotModelPackageImpl.FEATURE__UNIQUE:
+				return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE;
+			case PivotModelPackageImpl.FEATURE__MULTIPLE:
+				return PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE;
+			default:
+				return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-    if (baseClass == MultiplicityElement.class) {
-      switch (baseFeatureID) {
-        case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED:
-          return PivotModelPackageImpl.FEATURE__ORDERED;
-        case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE:
-          return PivotModelPackageImpl.FEATURE__UNIQUE;
-        case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE:
-          return PivotModelPackageImpl.FEATURE__MULTIPLE;
-        default:
-          return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID,baseClass);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == MultiplicityElement.class) {
+			switch (baseFeatureID) {
+			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED:
+				return PivotModelPackageImpl.FEATURE__ORDERED;
+			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__UNIQUE:
+				return PivotModelPackageImpl.FEATURE__UNIQUE;
+			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__MULTIPLE:
+				return PivotModelPackageImpl.FEATURE__MULTIPLE;
+			default:
+				return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
 
-  /**
-   * Changed EMF implementation in order to use a consistent style. In addition, the getter methods 
-   * are used to get attribute values. This is important if repository-specific subclasses
-   * have alternative ways of obtaining their attribute values. 
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this,ToStringStyle.SHORT_PREFIX_STYLE).appendToString(
-        super.toString()).append("static",isStatic()).toString(); //$NON-NLS-1$
-  }
+	/**
+	 * Changed EMF implementation in order to use a consistent style. In addition, the getter methods 
+	 * are used to get attribute values. This is important if repository-specific subclasses
+	 * have alternative ways of obtaining their attribute values. 
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.appendToString(super.toString())
+				.append("static", isStatic()).toString(); //$NON-NLS-1$
+	}
 
 } // FeatureImpl

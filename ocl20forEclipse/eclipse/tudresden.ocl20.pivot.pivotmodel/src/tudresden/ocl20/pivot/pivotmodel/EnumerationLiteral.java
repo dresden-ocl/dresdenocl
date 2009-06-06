@@ -55,38 +55,38 @@ package tudresden.ocl20.pivot.pivotmodel;
  */
 public interface EnumerationLiteral extends NamedElement {
 
-  /**
-   * Returns the value of the '<em><b>Enumeration</b></em>' container reference.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral <em>Owned Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * The enumeration that this literal belongs to.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Enumeration</em>' container reference.
-   * @see #setEnumeration(Enumeration)
-   * @see tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral
-   * @generated
-   */
-  Enumeration getEnumeration();
+	/**
+	 * Returns the value of the '<em><b>Enumeration</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral <em>Owned Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The enumeration that this literal belongs to.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Enumeration</em>' container reference.
+	 * @see #setEnumeration(Enumeration)
+	 * @see tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral
+	 * @generated
+	 */
+	Enumeration getEnumeration();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration <em>Enumeration</em>}' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Enumeration</em>' container reference.
-   * @see #getEnumeration()
-   * @generated
-   */
-  void setEnumeration(Enumeration value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration <em>Enumeration</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Enumeration</em>' container reference.
+	 * @see #getEnumeration()
+	 * @generated
+	 */
+	void setEnumeration(Enumeration value);
 
-  /**
-   * Redefines {@link NamedElement#clone()} with a covariant return type.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
-   */
-  EnumerationLiteral clone();
+	/**
+	 * Redefines {@link NamedElement#clone()} with a covariant return type.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 */
+	EnumerationLiteral clone();
 
 } // EnumerationLiteral

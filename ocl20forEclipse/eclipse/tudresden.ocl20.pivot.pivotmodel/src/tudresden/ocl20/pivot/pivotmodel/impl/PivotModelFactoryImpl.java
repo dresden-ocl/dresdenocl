@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import tudresden.ocl20.pivot.pivotmodel.*;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
@@ -63,333 +64,335 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * @generated
  */
 public class PivotModelFactoryImpl extends EFactoryImpl implements
-    PivotModelFactory {
+		PivotModelFactory {
 
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public static final PivotModelFactoryImpl eINSTANCE = init();
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final PivotModelFactoryImpl eINSTANCE = init();
 
-  /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public static PivotModelFactoryImpl init() {
-    try {
-      PivotModelFactoryImpl thePivotModelFactory = (PivotModelFactoryImpl) EPackage.Registry.INSTANCE
-          .getEFactory("http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel"); //$NON-NLS-1$ 
-      if (thePivotModelFactory != null) {
-        return thePivotModelFactory;
-      }
-    }
-    catch (Exception exception) {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new PivotModelFactoryImpl();
-  }
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static PivotModelFactoryImpl init() {
+		try {
+			PivotModelFactoryImpl thePivotModelFactory = (PivotModelFactoryImpl) EPackage.Registry.INSTANCE
+					.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel"); //$NON-NLS-1$ 
+			if (thePivotModelFactory != null) {
+				return thePivotModelFactory;
+			}
+		} catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new PivotModelFactoryImpl();
+	}
 
-  /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public PivotModelFactoryImpl() {
-    super();
-  }
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PivotModelFactoryImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EObject create(EClass eClass) {
-    switch (eClass.getClassifierID()) {
-      case PivotModelPackageImpl.NAMESPACE:
-        return (EObject) createNamespace();
-      case PivotModelPackageImpl.TYPE:
-        return (EObject) createType();
-      case PivotModelPackageImpl.PRIMITIVE_TYPE:
-        return (EObject) createPrimitiveType();
-      case PivotModelPackageImpl.ENUMERATION:
-        return (EObject) createEnumeration();
-      case PivotModelPackageImpl.ENUMERATION_LITERAL:
-        return (EObject) createEnumerationLiteral();
-      case PivotModelPackageImpl.PROPERTY:
-        return (EObject) createProperty();
-      case PivotModelPackageImpl.OPERATION:
-        return (EObject) createOperation();
-      case PivotModelPackageImpl.PARAMETER:
-        return (EObject) createParameter();
-      case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE:
-        return (EObject) createParameterGenericType();
-      case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE:
-        return (EObject) createComplexGenericType();
-      case PivotModelPackageImpl.TYPE_PARAMETER:
-        return (EObject) createTypeParameter();
-      case PivotModelPackageImpl.TYPE_ARGUMENT:
-        return (EObject) createTypeArgument();
-      case PivotModelPackageImpl.CONSTRAINT:
-        return (EObject) createConstraint();
-      case PivotModelPackageImpl.EXPRESSION:
-        return (EObject) createExpression();
-      default:
-        throw new IllegalArgumentException(
-            "The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+		case PivotModelPackageImpl.NAMESPACE:
+			return (EObject) createNamespace();
+		case PivotModelPackageImpl.TYPE:
+			return (EObject) createType();
+		case PivotModelPackageImpl.PRIMITIVE_TYPE:
+			return (EObject) createPrimitiveType();
+		case PivotModelPackageImpl.ENUMERATION:
+			return (EObject) createEnumeration();
+		case PivotModelPackageImpl.ENUMERATION_LITERAL:
+			return (EObject) createEnumerationLiteral();
+		case PivotModelPackageImpl.PROPERTY:
+			return (EObject) createProperty();
+		case PivotModelPackageImpl.OPERATION:
+			return (EObject) createOperation();
+		case PivotModelPackageImpl.PARAMETER:
+			return (EObject) createParameter();
+		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE:
+			return (EObject) createParameterGenericType();
+		case PivotModelPackageImpl.COMPLEX_GENERIC_TYPE:
+			return (EObject) createComplexGenericType();
+		case PivotModelPackageImpl.TYPE_PARAMETER:
+			return (EObject) createTypeParameter();
+		case PivotModelPackageImpl.TYPE_ARGUMENT:
+			return (EObject) createTypeArgument();
+		case PivotModelPackageImpl.CONSTRAINT:
+			return (EObject) createConstraint();
+		case PivotModelPackageImpl.EXPRESSION:
+			return (EObject) createExpression();
+		default:
+			throw new IllegalArgumentException(
+					"The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object createFromString(EDataType eDataType, String initialValue) {
-    switch (eDataType.getClassifierID()) {
-      case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
-        return createPrimitiveTypeKindFromString(eDataType, initialValue);
-      case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
-        return createParameterDirectionKindFromString(eDataType, initialValue);
-      case PivotModelPackageImpl.CONSTRAINT_KIND:
-        return createConstraintKindFromString(eDataType, initialValue);
-      default:
-        throw new IllegalArgumentException(
-            "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+		case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
+			return createPrimitiveTypeKindFromString(eDataType, initialValue);
+		case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
+			return createParameterDirectionKindFromString(eDataType,
+					initialValue);
+		case PivotModelPackageImpl.CONSTRAINT_KIND:
+			return createConstraintKindFromString(eDataType, initialValue);
+		default:
+			throw new IllegalArgumentException(
+					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String convertToString(EDataType eDataType, Object instanceValue) {
-    switch (eDataType.getClassifierID()) {
-      case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
-        return convertPrimitiveTypeKindToString(eDataType, instanceValue);
-      case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
-        return convertParameterDirectionKindToString(eDataType, instanceValue);
-      case PivotModelPackageImpl.CONSTRAINT_KIND:
-        return convertConstraintKindToString(eDataType, instanceValue);
-      default:
-        throw new IllegalArgumentException(
-            "The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+		case PivotModelPackageImpl.PRIMITIVE_TYPE_KIND:
+			return convertPrimitiveTypeKindToString(eDataType, instanceValue);
+		case PivotModelPackageImpl.PARAMETER_DIRECTION_KIND:
+			return convertParameterDirectionKindToString(eDataType,
+					instanceValue);
+		case PivotModelPackageImpl.CONSTRAINT_KIND:
+			return convertConstraintKindToString(eDataType, instanceValue);
+		default:
+			throw new IllegalArgumentException(
+					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public Enumeration createEnumeration() {
-    EnumerationImpl enumeration = new EnumerationImpl();
-    return enumeration;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumeration createEnumeration() {
+		EnumerationImpl enumeration = new EnumerationImpl();
+		return enumeration;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public Operation createOperation() {
-    OperationImpl operation = new OperationImpl();
-    return operation;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation createOperation() {
+		OperationImpl operation = new OperationImpl();
+		return operation;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public Namespace createNamespace() {
-    NamespaceImpl namespace = new NamespaceImpl();
-    return namespace;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Namespace createNamespace() {
+		NamespaceImpl namespace = new NamespaceImpl();
+		return namespace;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public Type createType() {
-    TypeImpl type = new TypeImpl();
-    return type;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type createType() {
+		TypeImpl type = new TypeImpl();
+		return type;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public Parameter createParameter() {
-    ParameterImpl parameter = new ParameterImpl();
-    return parameter;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public EnumerationLiteral createEnumerationLiteral() {
-    EnumerationLiteralImpl enumerationLiteral = new EnumerationLiteralImpl();
-    return enumerationLiteral;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnumerationLiteral createEnumerationLiteral() {
+		EnumerationLiteralImpl enumerationLiteral = new EnumerationLiteralImpl();
+		return enumerationLiteral;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public Property createProperty() {
-    PropertyImpl property = new PropertyImpl();
-    return property;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property createProperty() {
+		PropertyImpl property = new PropertyImpl();
+		return property;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public PrimitiveType createPrimitiveType() {
-    PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
-    return primitiveType;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PrimitiveType createPrimitiveType() {
+		PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
+		return primitiveType;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public Constraint createConstraint() {
-    ConstraintImpl constraint = new ConstraintImpl();
-    return constraint;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint createConstraint() {
+		ConstraintImpl constraint = new ConstraintImpl();
+		return constraint;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public Expression createExpression() {
-    ExpressionImpl expression = new ExpressionImpl();
-    return expression;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression createExpression() {
+		ExpressionImpl expression = new ExpressionImpl();
+		return expression;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeParameter createTypeParameter() {
-    TypeParameterImpl typeParameter = new TypeParameterImpl();
-    return typeParameter;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeParameter createTypeParameter() {
+		TypeParameterImpl typeParameter = new TypeParameterImpl();
+		return typeParameter;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeArgument createTypeArgument() {
-    TypeArgumentImpl typeArgument = new TypeArgumentImpl();
-    return typeArgument;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeArgument createTypeArgument() {
+		TypeArgumentImpl typeArgument = new TypeArgumentImpl();
+		return typeArgument;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public ParameterGenericType createParameterGenericType() {
-    ParameterGenericTypeImpl parameterGenericType = new ParameterGenericTypeImpl();
-    return parameterGenericType;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterGenericType createParameterGenericType() {
+		ParameterGenericTypeImpl parameterGenericType = new ParameterGenericTypeImpl();
+		return parameterGenericType;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public ComplexGenericType createComplexGenericType() {
-    ComplexGenericTypeImpl complexGenericType = new ComplexGenericTypeImpl();
-    return complexGenericType;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexGenericType createComplexGenericType() {
+		ComplexGenericTypeImpl complexGenericType = new ComplexGenericTypeImpl();
+		return complexGenericType;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public ParameterDirectionKind createParameterDirectionKindFromString(
-      EDataType eDataType, String initialValue) {
-    ParameterDirectionKind result = ParameterDirectionKind.get(initialValue);
-    if (result == null)
-      throw new IllegalArgumentException(
-          "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-    return result;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterDirectionKind createParameterDirectionKindFromString(
+			EDataType eDataType, String initialValue) {
+		ParameterDirectionKind result = ParameterDirectionKind
+				.get(initialValue);
+		if (result == null)
+			throw new IllegalArgumentException(
+					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return result;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unused")
-  public String convertParameterDirectionKindToString(EDataType eDataType,
-      Object instanceValue) {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unused")
+	public String convertParameterDirectionKindToString(EDataType eDataType,
+			Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public ConstraintKind createConstraintKindFromString(EDataType eDataType,
-      String initialValue) {
-    ConstraintKind result = ConstraintKind.get(initialValue);
-    if (result == null)
-      throw new IllegalArgumentException(
-          "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-    return result;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintKind createConstraintKindFromString(EDataType eDataType,
+			String initialValue) {
+		ConstraintKind result = ConstraintKind.get(initialValue);
+		if (result == null)
+			throw new IllegalArgumentException(
+					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return result;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unused")
-  public String convertConstraintKindToString(EDataType eDataType,
-      Object instanceValue) {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unused")
+	public String convertConstraintKindToString(EDataType eDataType,
+			Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public PrimitiveTypeKind createPrimitiveTypeKindFromString(
-      EDataType eDataType, String initialValue) {
-    PrimitiveTypeKind result = PrimitiveTypeKind.get(initialValue);
-    if (result == null)
-      throw new IllegalArgumentException(
-          "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-    return result;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PrimitiveTypeKind createPrimitiveTypeKindFromString(
+			EDataType eDataType, String initialValue) {
+		PrimitiveTypeKind result = PrimitiveTypeKind.get(initialValue);
+		if (result == null)
+			throw new IllegalArgumentException(
+					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return result;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unused")
-  public String convertPrimitiveTypeKindToString(EDataType eDataType,
-      Object instanceValue) {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unused")
+	public String convertPrimitiveTypeKindToString(EDataType eDataType,
+			Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  public PivotModelPackageImpl getPivotModelPackageImpl() {
-    return (PivotModelPackageImpl) getEPackage();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PivotModelPackageImpl getPivotModelPackageImpl() {
+		return (PivotModelPackageImpl) getEPackage();
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
-  @Deprecated
-  public static PivotModelPackageImpl getPackage() {
-    return PivotModelPackageImpl.eINSTANCE;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static PivotModelPackageImpl getPackage() {
+		return PivotModelPackageImpl.eINSTANCE;
+	}
 
 } // PivotModelFactoryImpl

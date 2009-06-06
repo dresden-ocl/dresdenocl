@@ -41,12 +41,12 @@ package tudresden.ocl20.pivot.datatypes;
  */
 public interface DatatypesFactory {
 
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  DatatypesFactory INSTANCE = tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl.eINSTANCE;
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	DatatypesFactory INSTANCE = tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl.eINSTANCE;
 
 } //DatatypesFactory

@@ -65,80 +65,80 @@ package tudresden.ocl20.pivot.pivotmodel;
  */
 public interface Expression {
 
-  /**
-   * Returns the value of the '<em><b>Body</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * This is the uninterpreted text of the expression.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Body</em>' attribute.
-   * @see #setBody(String)
-   * @generated
-   */
-  String getBody();
+	/**
+	 * Returns the value of the '<em><b>Body</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * This is the uninterpreted text of the expression.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Body</em>' attribute.
+	 * @see #setBody(String)
+	 * @generated
+	 */
+	String getBody();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Expression#getBody <em>Body</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Body</em>' attribute.
-   * @see #getBody()
-   * @generated
-   */
-  void setBody(String value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Expression#getBody <em>Body</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Body</em>' attribute.
+	 * @see #getBody()
+	 * @generated
+	 */
+	void setBody(String value);
 
-  /**
-   * Returns the value of the '<em><b>Language</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * The language the expression is written in. 
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Language</em>' attribute.
-   * @see #setLanguage(String)
-   * @generated
-   */
-  String getLanguage();
+	/**
+	 * Returns the value of the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * The language the expression is written in. 
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Language</em>' attribute.
+	 * @see #setLanguage(String)
+	 * @generated
+	 */
+	String getLanguage();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Expression#getLanguage <em>Language</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Language</em>' attribute.
-   * @see #getLanguage()
-   * @generated
-   */
-  void setLanguage(String value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Expression#getLanguage <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Language</em>' attribute.
+	 * @see #getLanguage()
+	 * @generated
+	 */
+	void setLanguage(String value);
 
-  /**
-   * Returns the value of the '<em><b>Constraint</b></em>' container reference.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification <em>Specification</em>}'.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Constraint</em>' container reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Constraint</em>' container reference.
-   * @see #setConstraint(Constraint)
-   * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification
-   * @generated
-   */
-  Constraint getConstraint();
+	/**
+	 * Returns the value of the '<em><b>Constraint</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification <em>Specification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Constraint</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constraint</em>' container reference.
+	 * @see #setConstraint(Constraint)
+	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification
+	 * @generated
+	 */
+	Constraint getConstraint();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Expression#getConstraint <em>Constraint</em>}' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Constraint</em>' container reference.
-   * @see #getConstraint()
-   * @generated
-   */
-  void setConstraint(Constraint value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Expression#getConstraint <em>Constraint</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Constraint</em>' container reference.
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	void setConstraint(Constraint value);
 
 } // Expression

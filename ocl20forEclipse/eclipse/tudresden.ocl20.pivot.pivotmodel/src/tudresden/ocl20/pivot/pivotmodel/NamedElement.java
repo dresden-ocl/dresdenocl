@@ -62,93 +62,93 @@ package tudresden.ocl20.pivot.pivotmodel;
  */
 public interface NamedElement {
 
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * The default value is <code>""</code>.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * Represents the name of the <code>NamedElement</code>.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @generated
-   */
-  String getName();
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Represents the name of the <code>NamedElement</code>.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @generated
+	 */
+	String getName();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
-  /**
-   * Returns the value of the '<em><b>Qualified Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * A qualified name allows the <code>NamedElement to be 
-   * identified within a hierarchy of nested elements. It is 
-   * constructed from the names of the owners starting at the 
-   * root of the hierarchy and ending with the name of the 
-   * <code>NamedElement</code>  itself. This is a derived 
-   * attribute.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Qualified Name</em>' attribute.
-   * @generated
-   */
-  String getQualifiedName();
+	/**
+	 * Returns the value of the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * A qualified name allows the <code>NamedElement to be 
+	 * identified within a hierarchy of nested elements. It is 
+	 * constructed from the names of the owners starting at the 
+	 * root of the hierarchy and ending with the name of the 
+	 * <code>NamedElement</code>  itself. This is a derived 
+	 * attribute.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Qualified Name</em>' attribute.
+	 * @generated
+	 */
+	String getQualifiedName();
 
-  /**
-   * Returns the value of the '<em><b>Owner</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * A <code>NamedElement</code> may have an owner 
-   * whose name is used for constructing the qualified name of 
-   * the <code>NamedElement</code>. This is a derived 
-   * attribute.
-   * 
-   * The concept of an owner was introduced in the Pivot 
-   * Model to facilitate the computation of qualified names 
-   * which are not available in UML::Core::Basic. However, the 
-   * Pivot Model does not extend the concept of a {@link 
-   * Namespace} to {@link Type types} and {@link Operation 
-   * operations} as in the complete UML 2.0 specification. 
-   * That's why arbitrary named elements are not necessarily 
-   * located in a namespace.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Owner</em>' reference.
-   * @generated
-   */
-  NamedElement getOwner();
+	/**
+	 * Returns the value of the '<em><b>Owner</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * A <code>NamedElement</code> may have an owner 
+	 * whose name is used for constructing the qualified name of 
+	 * the <code>NamedElement</code>. This is a derived 
+	 * attribute.
+	 * 
+	 * The concept of an owner was introduced in the Pivot 
+	 * Model to facilitate the computation of qualified names 
+	 * which are not available in UML::Core::Basic. However, the 
+	 * Pivot Model does not extend the concept of a {@link 
+	 * Namespace} to {@link Type types} and {@link Operation 
+	 * operations} as in the complete UML 2.0 specification. 
+	 * That's why arbitrary named elements are not necessarily 
+	 * located in a namespace.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owner</em>' reference.
+	 * @generated
+	 */
+	NamedElement getOwner();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * Creates a copy of this <code>NamedElement</code>. In the Pivot Model,
-   * all clone operations are intended to perform deep cloning (as opposed
-   * to a shallow clone). That means, that all contained elements (i.e., all elements
-   * for which this <code>NamedElement</code> is the owner) have to be
-   * cloned as well. Cloning support is necessary for binding {@link GenericElement}s
-   * because such an element needs to be cloned first before its {@link TypeParameter}s
-   * can be bound.
-   * </p>
-   * <!-- end-model-doc -->
-   * @generated
-   */
-  NamedElement clone() throws CloneNotSupportedException;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Creates a copy of this <code>NamedElement</code>. In the Pivot Model,
+	 * all clone operations are intended to perform deep cloning (as opposed
+	 * to a shallow clone). That means, that all contained elements (i.e., all elements
+	 * for which this <code>NamedElement</code> is the owner) have to be
+	 * cloned as well. Cloning support is necessary for binding {@link GenericElement}s
+	 * because such an element needs to be cloned first before its {@link TypeParameter}s
+	 * can be bound.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	NamedElement clone() throws CloneNotSupportedException;
 
 } // NamedElement

@@ -58,35 +58,35 @@ package tudresden.ocl20.pivot.pivotmodel;
  */
 public interface PrimitiveType extends Type {
 
-  /**
-   * Returns the value of the '<em><b>Kind</b></em>' attribute.
-   * The default value is <code>"Unknown"</code>.
-   * The literals are from the enumeration {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * Specifies the {@link PrimitiveTypeKind kind} of this <code>PrimitiveType</code>.
-   * Different DSLs may have different predefined primitive types, but it should be
-   * possible to classify them according to the literals defined in the Pivot Model.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Kind</em>' attribute.
-   * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
-   * @see #setKind(PrimitiveTypeKind)
-   * @generated
-   */
-  PrimitiveTypeKind getKind();
+	/**
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
+	 * The default value is <code>"Unknown"</code>.
+	 * The literals are from the enumeration {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Specifies the {@link PrimitiveTypeKind kind} of this <code>PrimitiveType</code>.
+	 * Different DSLs may have different predefined primitive types, but it should be
+	 * possible to classify them according to the literals defined in the Pivot Model.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Kind</em>' attribute.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
+	 * @see #setKind(PrimitiveTypeKind)
+	 * @generated
+	 */
+	PrimitiveTypeKind getKind();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind <em>Kind</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Kind</em>' attribute.
-   * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
-   * @see #getKind()
-   * @generated
-   */
-  void setKind(PrimitiveTypeKind value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
+	 * @see #getKind()
+	 * @generated
+	 */
+	void setKind(PrimitiveTypeKind value);
 
 } // PrimitiveType

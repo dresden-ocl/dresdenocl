@@ -58,62 +58,62 @@ import java.util.List;
  */
 public interface Enumeration extends Type {
 
-  /**
-   * Returns the value of the '<em><b>Owned Literal</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral}.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration <em>Enumeration</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * This is the ordered collection of literals for the enumeration.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Owned Literal</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
-   * @generated
-   */
-  List<EnumerationLiteral> getOwnedLiteral();
+	/**
+	 * Returns the value of the '<em><b>Owned Literal</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral}.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration <em>Enumeration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * This is the ordered collection of literals for the enumeration.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Literal</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
+	 * @generated
+	 */
+	List<EnumerationLiteral> getOwnedLiteral();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * Adds an {@link EnumerationLiteral} to this <code>Enumeration</code>.
-   * This operation is required to properly support cloning enumerations.
-   * The operation returns a reference to this <code>Enumeration</code>.
-   * </p>
-   * <!-- end-model-doc -->
-   * @generated
-   */
-  Enumeration addLiteral(EnumerationLiteral literal);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Adds an {@link EnumerationLiteral} to this <code>Enumeration</code>.
+	 * This operation is required to properly support cloning enumerations.
+	 * The operation returns a reference to this <code>Enumeration</code>.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	Enumeration addLiteral(EnumerationLiteral literal);
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * Returns an {@link EnumerationLiteral} of this <code>Enumeration</code>
-   * with the given name.
-   * 
-   * It is specified as follows:
-   * <pre>
-   * context Enumeration
-   * def: lookupLiteral(name : String) : EnumerationLiteral =
-   *    self.ownedLiteral->any(l | l.name = name)
-   * </pre>
-   * </p>
-   * <!-- end-model-doc -->
-   * @generated
-   */
-  EnumerationLiteral lookupLiteral(String name);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Returns an {@link EnumerationLiteral} of this <code>Enumeration</code>
+	 * with the given name.
+	 * 
+	 * It is specified as follows:
+	 * <pre>
+	 * context Enumeration
+	 * def: lookupLiteral(name : String) : EnumerationLiteral =
+	 *    self.ownedLiteral->any(l | l.name = name)
+	 * </pre>
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	EnumerationLiteral lookupLiteral(String name);
 
-  /**
-   * Redefines {@link NamedElement#clone()} with a covariant return type.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.Type#clone()
-   */
-  Enumeration clone();
+	/**
+	 * Redefines {@link NamedElement#clone()} with a covariant return type.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.Type#clone()
+	 */
+	Enumeration clone();
 
 } // Enumeration

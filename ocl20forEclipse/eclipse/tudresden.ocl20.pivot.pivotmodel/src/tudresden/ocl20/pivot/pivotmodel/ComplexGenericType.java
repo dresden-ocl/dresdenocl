@@ -51,65 +51,65 @@ import java.util.List;
  */
 public interface ComplexGenericType extends GenericType {
 
-  /**
-   * Returns the value of the '<em><b>Unbound Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Unbound Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Unbound Type</em>' reference.
-   * @see #setUnboundType(Type)
-   * @generated
-   */
-  Type getUnboundType();
+	/**
+	 * Returns the value of the '<em><b>Unbound Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Unbound Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Unbound Type</em>' reference.
+	 * @see #setUnboundType(Type)
+	 * @generated
+	 */
+	Type getUnboundType();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getUnboundType <em>Unbound Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Unbound Type</em>' reference.
-   * @see #getUnboundType()
-   * @generated
-   */
-  void setUnboundType(Type value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getUnboundType <em>Unbound Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unbound Type</em>' reference.
+	 * @see #getUnboundType()
+	 * @generated
+	 */
+	void setUnboundType(Type value);
 
-  /**
-   * Returns the value of the '<em><b>Type Argument</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument}.
-   * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType <em>Owning Generic Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type Argument</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type Argument</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType
-   * @generated
-   */
-  List<TypeArgument> getTypeArgument();
+	/**
+	 * Returns the value of the '<em><b>Type Argument</b></em>' containment reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument}.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType <em>Owning Generic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Argument</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Argument</em>' containment reference list.
+	 * @see tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType
+	 * @generated
+	 */
+	List<TypeArgument> getTypeArgument();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * Adds a {@link TypeArgument} to this <code>ComplexGenericType</code>.
-   * This operation is required to properly support cloning complex generic types.
-   * The operation returns a reference to this <code>ComplexGenericType</code>.
-   * </p>
-   * <!-- end-model-doc -->
-   * @generated
-   */
-  ComplexGenericType addTypeArgument(TypeArgument typeArgument);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Adds a {@link TypeArgument} to this <code>ComplexGenericType</code>.
+	 * This operation is required to properly support cloning complex generic types.
+	 * The operation returns a reference to this <code>ComplexGenericType</code>.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	ComplexGenericType addTypeArgument(TypeArgument typeArgument);
 
-  /**
-   * Redefines {@link NamedElement#clone()} with a covariant return type.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
-   */
-  ComplexGenericType clone();
+	/**
+	 * Redefines {@link NamedElement#clone()} with a covariant return type.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 */
+	ComplexGenericType clone();
 
 } // ComplexGenericType

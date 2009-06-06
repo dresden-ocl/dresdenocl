@@ -59,91 +59,91 @@ package tudresden.ocl20.pivot.pivotmodel;
  */
 public interface MultiplicityElement {
 
-  /**
-   * Returns the value of the '<em><b>Ordered</b></em>' attribute.
-   * The default value is <code>"false"</code>.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * For a multivalued multiplicity, this attribute specifies whether 
-   * the values in an instantiation of this element are
-   * sequentially ordered. Default is <code>false</code>.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Ordered</em>' attribute.
-   * @see #setOrdered(boolean)
-   * @generated
-   */
-  boolean isOrdered();
+	/**
+	 * Returns the value of the '<em><b>Ordered</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * For a multivalued multiplicity, this attribute specifies whether 
+	 * the values in an instantiation of this element are
+	 * sequentially ordered. Default is <code>false</code>.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ordered</em>' attribute.
+	 * @see #setOrdered(boolean)
+	 * @generated
+	 */
+	boolean isOrdered();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.MultiplicityElement#isOrdered <em>Ordered</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ordered</em>' attribute.
-   * @see #isOrdered()
-   * @generated
-   */
-  void setOrdered(boolean value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.MultiplicityElement#isOrdered <em>Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ordered</em>' attribute.
+	 * @see #isOrdered()
+	 * @generated
+	 */
+	void setOrdered(boolean value);
 
-  /**
-   * Returns the value of the '<em><b>Unique</b></em>' attribute.
-   * The default value is <code>"true"</code>.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * For a multivalued multiplicity, this attributes specifies 
-   * whether the values in an instantiation of this element are 
-   * unique. Default is <code>true</code>.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Unique</em>' attribute.
-   * @see #setUnique(boolean)
-   * @generated
-   */
-  boolean isUnique();
+	/**
+	 * Returns the value of the '<em><b>Unique</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * For a multivalued multiplicity, this attributes specifies 
+	 * whether the values in an instantiation of this element are 
+	 * unique. Default is <code>true</code>.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Unique</em>' attribute.
+	 * @see #setUnique(boolean)
+	 * @generated
+	 */
+	boolean isUnique();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.MultiplicityElement#isUnique <em>Unique</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Unique</em>' attribute.
-   * @see #isUnique()
-   * @generated
-   */
-  void setUnique(boolean value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.MultiplicityElement#isUnique <em>Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unique</em>' attribute.
+	 * @see #isUnique()
+	 * @generated
+	 */
+	void setUnique(boolean value);
 
-  /**
-   * Returns the value of the '<em><b>Multiple</b></em>' attribute.
-   * The default value is <code>"false"</code>.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <p>
-   * Specifies whether this multiplity element has an upper bound larger than 1. Default is <code>false</code>.
-   * 
-   * The reason for not including concrete lower and upper 
-   * bounds in the Pivot Model is that for an evaluation with 
-   * OCL this information is not needed. The distinction between 
-   * single-valued and multi-valued multiplicities suffices.
-   * </p>
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Multiple</em>' attribute.
-   * @see #setMultiple(boolean)
-   * @generated
-   */
-  boolean isMultiple();
+	/**
+	 * Returns the value of the '<em><b>Multiple</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Specifies whether this multiplity element has an upper bound larger than 1. Default is <code>false</code>.
+	 * 
+	 * The reason for not including concrete lower and upper 
+	 * bounds in the Pivot Model is that for an evaluation with 
+	 * OCL this information is not needed. The distinction between 
+	 * single-valued and multi-valued multiplicities suffices.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Multiple</em>' attribute.
+	 * @see #setMultiple(boolean)
+	 * @generated
+	 */
+	boolean isMultiple();
 
-  /**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.MultiplicityElement#isMultiple <em>Multiple</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Multiple</em>' attribute.
-   * @see #isMultiple()
-   * @generated
-   */
-  void setMultiple(boolean value);
+	/**
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.MultiplicityElement#isMultiple <em>Multiple</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Multiple</em>' attribute.
+	 * @see #isMultiple()
+	 * @generated
+	 */
+	void setMultiple(boolean value);
 
 } // MultiplicityElement

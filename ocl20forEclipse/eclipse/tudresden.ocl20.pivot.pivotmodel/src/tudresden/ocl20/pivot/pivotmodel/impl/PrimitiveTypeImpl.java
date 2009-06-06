@@ -49,206 +49,197 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl#getKind <em>Kind</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
-  /**
-   * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getKind()
-   * @generated
-   * @ordered
-   */
-  protected static final PrimitiveTypeKind KIND_EDEFAULT = PrimitiveTypeKind.UNKNOWN;
-  /**
-   * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @see #getKind()
-   * @generated
-   * @ordered
-   */
-  protected PrimitiveTypeKind kind = KIND_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final PrimitiveTypeKind KIND_EDEFAULT = PrimitiveTypeKind.UNKNOWN;
+	/**
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected PrimitiveTypeKind kind = KIND_EDEFAULT;
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected PrimitiveTypeImpl() {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PrimitiveTypeImpl() {
+		super();
+	}
 
-  /**
-   * Overridden to implement special type conformance rules. Since there is an
-   * endless number of primitive types in various metamodels (with differing
-   * names), we cannot solely check for conformance based on the qualified name
-   * of the primitive type. Instead, the {@link #getKind() kind} of the
-   * primitive type has to be considered as well.
-   * 
-   * <p>
-   * More precisely, two primitive types conform to each other if their
-   * <code>kind</code> is equal. Furthermore, we implement the special rule
-   * that a primitive type with kind {@link PrimitiveTypeKind#INTEGER INTEGER}
-   * conforms to one with kind {@link PrimitiveTypeKind#REAL REAL}.
-   * </p>
-   * 
-   * @param other the other type
-   * 
-   * @return <code>true</code> if this type conforms to the other,
-   *         <code>false</code> otherwise
-   */
-  @Override
-  public boolean conformsTo(Type other) {
-    boolean conformant = super.conformsTo(other);
+	/**
+	 * Overridden to implement special type conformance rules. Since there is an
+	 * endless number of primitive types in various metamodels (with differing
+	 * names), we cannot solely check for conformance based on the qualified name
+	 * of the primitive type. Instead, the {@link #getKind() kind} of the
+	 * primitive type has to be considered as well.
+	 * 
+	 * <p>
+	 * More precisely, two primitive types conform to each other if their
+	 * <code>kind</code> is equal. Furthermore, we implement the special rule
+	 * that a primitive type with kind {@link PrimitiveTypeKind#INTEGER INTEGER}
+	 * conforms to one with kind {@link PrimitiveTypeKind#REAL REAL}.
+	 * </p>
+	 * 
+	 * @param other the other type
+	 * 
+	 * @return <code>true</code> if this type conforms to the other,
+	 *         <code>false</code> otherwise
+	 */
+	@Override
+	public boolean conformsTo(Type other) {
+		boolean conformant = super.conformsTo(other);
 
-    if (!conformant && other instanceof PrimitiveType) {
-      PrimitiveTypeKind thisKind, otherKind;
+		if (!conformant && other instanceof PrimitiveType) {
+			PrimitiveTypeKind thisKind, otherKind;
 
-      // get this and the other type's kind
-      otherKind = ((PrimitiveType) other).getKind();
-      thisKind = getKind();
+			// get this and the other type's kind
+			otherKind = ((PrimitiveType) other).getKind();
+			thisKind = getKind();
 
-      if (thisKind == PrimitiveTypeKind.INTEGER) {
-        conformant = otherKind == PrimitiveTypeKind.INTEGER
-            || otherKind == PrimitiveTypeKind.REAL;
-      }
+			if (thisKind == PrimitiveTypeKind.INTEGER) {
+				conformant = otherKind == PrimitiveTypeKind.INTEGER
+						|| otherKind == PrimitiveTypeKind.REAL;
+			}
 
-      else {
-        conformant = thisKind == otherKind;
-      }
-    }
+			else {
+				conformant = thisKind == otherKind;
+			}
+		}
 
-    return conformant;
-  }
+		return conformant;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public PrimitiveTypeKind getKind() {
-    return kind;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PrimitiveTypeKind getKind() {
+		return kind;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public void setKind(PrimitiveTypeKind newKind) {
-    PrimitiveTypeKind oldKind = kind;
-    kind = newKind == null ? KIND_EDEFAULT : newKind;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET,
-          PivotModelPackageImpl.PRIMITIVE_TYPE__KIND, oldKind, kind));
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKind(PrimitiveTypeKind newKind) {
+		PrimitiveTypeKind oldKind = kind;
+		kind = newKind == null ? KIND_EDEFAULT : newKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PivotModelPackageImpl.PRIMITIVE_TYPE__KIND, oldKind, kind));
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#clone()
-   */
-  @Override
-  public PrimitiveType clone() {
-    return initialize(PivotModelFactory.INSTANCE.createPrimitiveType());
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#clone()
+	 */
+	@Override
+	public PrimitiveType clone() {
+		return initialize(PivotModelFactory.INSTANCE.createPrimitiveType());
+	}
 
-  /**
-   * Helper method to initialize a cloned <code>PrimitiveType</code>.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Type)
-   */
-  protected PrimitiveType initialize(PrimitiveType clone) {
-    super.initialize(clone);
-    clone.setKind(getKind());
-    return clone;
-  }
+	/**
+	 * Helper method to initialize a cloned <code>PrimitiveType</code>.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	protected PrimitiveType initialize(PrimitiveType clone) {
+		super.initialize(clone);
+		clone.setKind(getKind());
+		return clone;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
-        return getKind();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
+			return getKind();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
-        setKind((PrimitiveTypeKind) newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
+			setKind((PrimitiveTypeKind) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
-        setKind(KIND_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
+			setKind(KIND_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID) {
-    switch (featureID) {
-      case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
-        return kind != KIND_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case PivotModelPackageImpl.PRIMITIVE_TYPE__KIND:
+			return kind != KIND_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass() {
-    return PivotModelPackageImpl.Literals.PRIMITIVE_TYPE;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return PivotModelPackageImpl.Literals.PRIMITIVE_TYPE;
+	}
 
-  /**
-   * The EMF implementation is changed to use the Jakarta Commons Lang
-   * ToStringBuilder instead.
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-        .appendToString(super.toString()).append("kind", getKind()).toString(); //$NON-NLS-1$
-  }
+	/**
+	 * The EMF implementation is changed to use the Jakarta Commons Lang
+	 * ToStringBuilder instead.
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.appendToString(super.toString())
+				.append("kind", getKind()).toString(); //$NON-NLS-1$
+	}
 
 } // PrimitiveTypeImpl
