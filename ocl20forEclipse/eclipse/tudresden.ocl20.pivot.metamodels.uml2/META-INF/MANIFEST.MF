@@ -15,3 +15,4 @@ Require-Bundle: org.apache.commons.lang,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.pivotmodel
 Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.pivot.metamodels.uml2

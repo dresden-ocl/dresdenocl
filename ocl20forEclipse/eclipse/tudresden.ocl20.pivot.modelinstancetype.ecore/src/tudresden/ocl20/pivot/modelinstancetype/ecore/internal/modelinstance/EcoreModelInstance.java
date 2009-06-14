@@ -94,7 +94,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				resource.load(null);
 			}
 
-			catch (IOException e) {
+			catch (Exception e) {
 				String msg;
 
 				msg = "Problem during retrieving of ModelObjects. Reason: ";
