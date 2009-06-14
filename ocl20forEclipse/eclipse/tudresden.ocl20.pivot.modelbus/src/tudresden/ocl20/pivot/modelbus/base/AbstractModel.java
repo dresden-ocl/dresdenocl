@@ -40,6 +40,7 @@ import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.IModelFactory;
 import tudresden.ocl20.pivot.modelbus.IOclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.ITypeResolver;
@@ -58,237 +59,295 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public abstract class AbstractModel implements IModel {
 
-  /**
-   * Logger for this class
-   */
-  private static final Logger logger = Logger.getLogger(AbstractModel.class);
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger LOGGER = Logger.getLogger(AbstractModel.class);
 
-  // this model's name as displayed to clients
-  private String displayName;
+	// this model's name as displayed to clients
+	private String displayName;
 
-  // the metamodel of this model
-  private IMetamodel metamodel;
+	// the metamodel of this model
+	private IMetamodel metamodel;
 
-  // a cached instance of the OCL Library provider
-  private IOclLibraryProvider oclLibraryProvider;
+	// a cached instance of the OCL Library provider
+	private IOclLibraryProvider oclLibraryProvider;
 
-  // cached instance of the model factory
-  private IModelFactory modelFactory;
-  
-  // the type resolver of this model
-  private ITypeResolver typeResolver;
+	// cached instance of the model factory
+	private IModelFactory modelFactory;
 
+	// the type resolver of this model
+	private ITypeResolver typeResolver;
 
-  /**
-   * Constructor to be called by subclasses. The <code>displayName</code> is a name that should be
-   * used to identify this model in a graphical user interface. This may be the file name or another
-   * identifier.
-   * 
-   * @param displayName a name for this model
-   * @param metamodel the metamodel for this model
-   */
-  protected AbstractModel(String displayName, IMetamodel metamodel) {
+	/**
+	 * Constructor to be called by subclasses. The <code>displayName</code> is a
+	 * name that should be used to identify this model in a graphical user
+	 * interface. This may be the file name or another identifier.
+	 * 
+	 * @param displayName
+	 *            a name for this model
+	 * @param metamodel
+	 *            the metamodel for this model
+	 */
+	protected AbstractModel(String displayName, IMetamodel metamodel) {
 
-    // use an empty string if display name is null
-    this.displayName = StringUtils.defaultString(displayName);
+		// use an empty string if display name is null
+		this.displayName = StringUtils.defaultString(displayName);
 
-    if (metamodel == null) {
-      throw new IllegalArgumentException("The metamodel reference must not be null."); //$NON-NLS-1$
-    }
+		if (metamodel == null) {
+			throw new IllegalArgumentException(
+					"The metamodel reference must not be null."); //$NON-NLS-1$
+		}
 
-    this.metamodel = metamodel;
-  }
+		this.metamodel = metamodel;
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModel#getDisplayName()
-   */
-  public String getDisplayName() {
-    return displayName;
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#findType(java.util.List)
+	 */
+	public Type findType(List<String> pathName) throws ModelAccessException {
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModel#getMetamodel()
-   */
-  public IMetamodel getMetamodel() {
-    return metamodel;
-  }
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("findType(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModel#getFactory()
-   */
-  public IModelFactory getFactory() {
+		/* Avoid illegal parameters. */
+		if (pathName == null || pathName.size() == 0) {
+			throw new IllegalArgumentException(
+					"The path name must not be null or empty."); //$NON-NLS-1$
+		}
+		// no else.
 
-    // lazily create the model factory
-    if (modelFactory == null) {
-      modelFactory = new ModelFactory(this);
-    }
+		Type result;
+		List<Type> foundTypes;
 
-    return modelFactory;
-  }
+		/* Eventually remove the root package from the pathName. */
+		if (pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
+			pathName.remove(0);
+		}
+		// no else.
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModel#getOclLibraryProvider()
-   */
-  public IOclLibraryProvider getOclLibraryProvider() {
+		/* Search for Types that match this path name. */
+		foundTypes = findTypeHere(this.getRootNamespace(), pathName, true);
 
-    // lazily create an OCL Library provider
-    if (oclLibraryProvider == null) {
-      oclLibraryProvider = new OclLibraryProvider();
-    }
+		/* Check if more than one Type was found. */
+		if (foundTypes.size() > 1) {
+			String msg;
 
-    return oclLibraryProvider;
-  }
+			msg = "More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+			LOGGER.warn(msg);
 
-  
-  
-  /* (non-Javadoc)
-   * @see tudresden.ocl20.pivot.modelbus.IModel#getTypeResolver()
-   */
-  public ITypeResolver getTypeResolver() {
-    
-    if (typeResolver == null) {
-      typeResolver = new TypeResolver(this);
-    }
+			result = null;
+		}
 
-    return typeResolver;
-    
-  }
+		/* Else check if at least one type has been found. */
+		else if (foundTypes.size() == 0) {
+			String msg;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModel#findNamespace(java.util.List)
-   */
-  public Namespace findNamespace(List<String> pathName) throws ModelAccessException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("findNamespace(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+			msg = "Type with path name " + pathName + " was not found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+			LOGGER.warn(msg);
 
-    // path name must not be null
-    if (pathName == null) {
-      throw new IllegalArgumentException("The path name must not be null."); //$NON-NLS-1$
-    }
+			result = null;
+		}
 
-    // by default use the root namespace
-    Namespace namespace = getRootNamespace();
+		/* Else return the found type. */
+		else {
+			result = foundTypes.get(0);
+		}
 
-    // iterate through the namespace hierarchy
-    for (String namespaceName : pathName) {
-      namespace = namespace.lookupNamespace(namespaceName);
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("findType() - exit - return value=" + result); //$NON-NLS-1$
+		}
+		// no else.
 
-      if (namespace == null) {
-        break;
-      }
-    }
+		return result;
+	}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("findNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
-    }
+	/**
+	 * <p>
+	 * A helper method that recursively looks for a {@link Type} with the given
+	 * path name in the given {@link Namespace}.
+	 * </p>
+	 * 
+	 * @param namespace
+	 *            The {@link Namespace} to start the search in.
+	 * @param pathName
+	 *            The path name to look for.
+	 * @param searchAllNestedNamespaces
+	 *            Indicates whether a recursive search in all nested
+	 *            {@link Namespace}s with the full path name is required (for
+	 *            non-fully-qualified path names).
+	 * 
+	 * @return A {@link List} containing all {@link Type}s found matching to the
+	 *         given pathName.
+	 */
+	private List<Type> findTypeHere(Namespace namespace, List<String> pathName,
+			boolean searchAllNestedNamespaces) {
 
-    return namespace;
-  }
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see tudresden.ocl20.pivot.modelbus.IModel#findType(java.util.List)
-   */
-  public Type findType(List<String> pathName) throws ModelAccessException {
-    if (logger.isDebugEnabled()) {
-      logger.debug("findType(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+			msg = "findTypeHere(";
+			msg += "namespace = " + namespace; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += ", pathName = " + pathName; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += ", searchAllNestedNamespaces = " + searchAllNestedNamespaces; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += ") - enter";
 
-    if (pathName == null || pathName.size() == 0) {
-      throw new IllegalArgumentException("The path name must not be null or empty."); //$NON-NLS-1$
-    }
+			LOGGER.debug(msg);
+		}
+		// no else.
 
-    Type type;
+		List<Type> result;
 
-    // find all types that match this path name
-    List<Type> types = findTypeHere(getRootNamespace(),pathName,true);
+		result = new LinkedList<Type>();
 
-    // check if several types were found
-    if (types.size() > 1) {
-      logger.warn("More than one type with path name " + pathName + " were found: " + types); //$NON-NLS-1$//$NON-NLS-2$
-      type = null;
-    }
+		/*
+		 * Search in all nested name spaces with the given path name (in case it
+		 * was not fully qualified).
+		 */
+		if (searchAllNestedNamespaces) {
+			for (Namespace nestedNamespace : namespace.getNestedNamespace()) {
+				result.addAll(findTypeHere(nestedNamespace, pathName, true));
+			}
+		}
+		// no else.
 
-    else if (types.size() == 0) {
-      type = null;
-    }
+		/* Get the first path segment. */
+		String firstPathSegment = pathName.get(0);
 
-    else {
-      type = types.get(0);
-    }
+		/* Look for a type in this name space if no more name segments left. */
+		if (pathName.size() == 1) {
+			Type aType;
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("findType() - exit - return value=" + type); //$NON-NLS-1$
-    }
+			aType = namespace.lookupType(firstPathSegment);
 
-    return type;
-  }
+			if (aType != null) {
+				result.add(aType);
+			}
+			// no else.
+		}
 
-  /**
-   * Helper method that recursively looks for a type with the given path name in the given
-   * namespace.
-   * 
-   * @param namespace the <code>Namespace</code> to start the search in
-   * @param pathName the path name to look for
-   * @param searchAllNestedNamespaces indicates whether a recursive search in all nested namespaces
-   *          with the full path name is required (for non-fully-qualified path names)
-   * 
-   * @return
-   */
-  protected List<Type> findTypeHere(Namespace namespace, List<String> pathName,
-      boolean searchAllNestedNamespaces) {
-    if (logger.isDebugEnabled()) {
-      logger.debug("findTypeHere(namespace=" + namespace + ", pathName=" + pathName //$NON-NLS-1$ //$NON-NLS-2$
-          + ", searchAllNestedNamespaces=" + searchAllNestedNamespaces + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		/* Else recursively look in nested name spaces. */
+		else {
+			namespace = namespace.lookupNamespace(firstPathSegment);
 
-    List<Type> types = new LinkedList<Type>();
+			if (namespace != null) {
+				result.addAll(findTypeHere(namespace, pathName.subList(1,
+						pathName.size()), false));
+			}
+		}
 
-    // try all nested namespaces with the given path name (in case it was not fully qualified)
-    if (searchAllNestedNamespaces) {
-      for (Namespace nestedNamespace : namespace.getNestedNamespace()) {
-        types.addAll(findTypeHere(nestedNamespace,pathName,true));
-      }
-    }
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("findTypeHere() - exit - return value=" + result); //$NON-NLS-1$
+		}
+		// no else.
 
-    // get the first path segment
-    String firstPathSegment = pathName.get(0);
+		return result;
+	}
 
-    // look for a type in this namespace if no more name segments left
-    if (pathName.size() == 1) {
-      Type type = namespace.lookupType(firstPathSegment);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getDisplayName()
+	 */
+	public String getDisplayName() {
+		return displayName;
+	}
 
-      if (type != null) {
-        types.add(type);
-      }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getMetamodel()
+	 */
+	public IMetamodel getMetamodel() {
+		return metamodel;
+	}
 
-    // else recursively look in nested namespace
-    else {
-      namespace = namespace.lookupNamespace(firstPathSegment);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getFactory()
+	 */
+	public IModelFactory getFactory() {
 
-      if (namespace != null) {
-        types.addAll(findTypeHere(namespace,pathName.subList(1,pathName.size()),false));
-      }
-    }
+		// lazily create the model factory
+		if (modelFactory == null) {
+			modelFactory = new ModelFactory(this);
+		}
 
-    if (logger.isDebugEnabled()) {
-      logger.debug("findTypeHere() - exit - return value=" + types); //$NON-NLS-1$
-    }
+		return modelFactory;
+	}
 
-    return types;
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getOclLibraryProvider()
+	 */
+	public IOclLibraryProvider getOclLibraryProvider() {
 
+		// lazily create an OCL Library provider
+		if (oclLibraryProvider == null) {
+			oclLibraryProvider = new OclLibraryProvider();
+		}
+
+		return oclLibraryProvider;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getTypeResolver()
+	 */
+	public ITypeResolver getTypeResolver() {
+
+		if (typeResolver == null) {
+			typeResolver = new TypeResolver(this);
+		}
+
+		return typeResolver;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#findNamespace(java.util.List)
+	 */
+	public Namespace findNamespace(List<String> pathName)
+			throws ModelAccessException {
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("findNamespace(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		// path name must not be null
+		if (pathName == null) {
+			throw new IllegalArgumentException(
+					"The path name must not be null."); //$NON-NLS-1$
+		}
+
+		// by default use the root namespace
+		Namespace namespace = getRootNamespace();
+
+		// iterate through the namespace hierarchy
+		for (String namespaceName : pathName) {
+			namespace = namespace.lookupNamespace(namespaceName);
+
+			if (namespace == null) {
+				break;
+			}
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("findNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
+		}
+
+		return namespace;
+	}
 }
