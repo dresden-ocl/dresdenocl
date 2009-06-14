@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.modelbus.base;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -100,6 +101,72 @@ public abstract class AbstractModel implements IModel {
 		}
 
 		this.metamodel = metamodel;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#findNamespace(java.util.List)
+	 */
+	public Namespace findNamespace(List<String> pathName)
+			throws ModelAccessException {
+	
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+	
+			msg = "findNamespace(";
+			msg += "pathName = " + pathName;
+			msg += ") - enter";
+	
+			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		// no else.
+	
+		/* Clone the path name to avoid side effects. */
+		pathName = new ArrayList<String>(pathName);
+	
+		/* The path name must not be null. */
+		if (pathName == null) {
+			throw new IllegalArgumentException(
+					"The path name must not be null."); //$NON-NLS-1$
+		}
+		// no else.
+	
+		/* By default search in the root name space. */
+		Namespace namespace = getRootNamespace();
+	
+		/* Eventually remove the root package from the path name. */
+		if (pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
+			pathName.remove(0);
+		}
+		// no else.
+	
+		/* Iterate through the namespace hierarchy. */
+		for (String namespaceName : pathName) {
+	
+			/* Search for the next nested name space. */
+			namespace = namespace.lookupNamespace(namespaceName);
+	
+			/* Eventually cancel the search. */
+			if (namespace == null) {
+				break;
+			}
+			// no else.
+		}
+	
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+	
+			msg = "findNamespace() - exit - ";
+			msg += "return value = " + namespace;
+	
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+	
+		return namespace;
 	}
 
 	/*
@@ -313,41 +380,5 @@ public abstract class AbstractModel implements IModel {
 
 		return typeResolver;
 
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#findNamespace(java.util.List)
-	 */
-	public Namespace findNamespace(List<String> pathName)
-			throws ModelAccessException {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("findNamespace(pathName=" + pathName + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		// path name must not be null
-		if (pathName == null) {
-			throw new IllegalArgumentException(
-					"The path name must not be null."); //$NON-NLS-1$
-		}
-
-		// by default use the root namespace
-		Namespace namespace = getRootNamespace();
-
-		// iterate through the namespace hierarchy
-		for (String namespaceName : pathName) {
-			namespace = namespace.lookupNamespace(namespaceName);
-
-			if (namespace == null) {
-				break;
-			}
-		}
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("findNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
-		}
-
-		return namespace;
 	}
 }
