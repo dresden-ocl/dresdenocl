@@ -15,7 +15,7 @@ genModel.addImport("java.util.ArrayList");
 genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Namespace");
 genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Type");
 genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace");
-genModel.addImport(PivotAdapterGeneratorUtil.getPackageNameFor(genClass) + adapteeClass);
+genModel.addImport(PivotAdapterGeneratorUtil.getAdapteeClassImport(genModel, genClass));
 genModel.markImportLocation(stringBuffer);%>
 
 /**

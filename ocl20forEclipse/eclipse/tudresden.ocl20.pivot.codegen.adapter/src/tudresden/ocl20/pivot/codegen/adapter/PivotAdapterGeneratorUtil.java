@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * Helper Class, mainly for naming conventions of the generated Pivot Model
@@ -32,9 +33,10 @@ public class PivotAdapterGeneratorUtil {
 	private static Map<String, List<String>> pivotModel2DSL;
 	private static Map<String, String> packageNames;
 	private static List<EClass> allDSLTypes;
+	private static String resourceName;
 
-	private static String reservedKeywords[] = new String[] { "package", "class",
-			"interface" };
+	private static String reservedKeywords[] = new String[] { "package",
+			"class", "interface" };
 	private static String pivotModelTypes[] = new String[] { "Enumeration",
 			"EnumerationLiteral", "Namespace", "Operation", "Parameter",
 			"PrimitiveType", "Property", "Type" };
@@ -52,6 +54,7 @@ public class PivotAdapterGeneratorUtil {
 		pivotModel2DSL = null;
 		packageNames = null;
 		allDSLTypes = null;
+		resourceName = null;
 	}
 
 	public final static String TEMPLATE_LOCATION = PivotAdapterGeneratorPlugin.INSTANCE
@@ -64,11 +67,11 @@ public class PivotAdapterGeneratorUtil {
 	 * Returns the common super type of 2 <code>EClass</code>es.
 	 * 
 	 * @param commonSuperType
-	 *          the old common super type
+	 *            the old common super type
 	 * @param dslType
-	 *          the second type
-	 * @return the new common super type of the old common super type and the DSL
-	 *         type
+	 *            the second type
+	 * @return the new common super type of the old common super type and the
+	 *         DSL type
 	 */
 	protected static EClass getCommonSuperType(EClass commonSuperType,
 			EClass dslType) {
@@ -97,8 +100,8 @@ public class PivotAdapterGeneratorUtil {
 	}
 
 	/**
-	 * Determines the common superclass of all DSL types that are mapped to Pivot
-	 * Model types.
+	 * Determines the common superclass of all DSL types that are mapped to
+	 * Pivot Model types.
 	 * 
 	 * @param genModel
 	 * @return the common superclass of the all DSL types
@@ -119,8 +122,8 @@ public class PivotAdapterGeneratorUtil {
 			return "Object";
 
 		while (dslTypeIter.hasNext()) {
-			commonSuperType = getCommonSuperType(commonSuperType, dslTypeIter.next()
-					.getEcoreClass());
+			commonSuperType = getCommonSuperType(commonSuperType, dslTypeIter
+					.next().getEcoreClass());
 			if (commonSuperType.getName().equals("EObject")) {
 				return "Object";
 			}
@@ -147,7 +150,8 @@ public class PivotAdapterGeneratorUtil {
 			Iterator<EClass> typesIter = allDSLTypes.iterator();
 			commonSuperType = typesIter.next();
 			while (typesIter.hasNext()) {
-				commonSuperType = getCommonSuperType(commonSuperType, typesIter.next());
+				commonSuperType = getCommonSuperType(commonSuperType, typesIter
+						.next());
 			}
 			return genModel.findGenPackage(commonSuperType.getEPackage())
 					.getInterfacePackageName()
@@ -193,12 +197,19 @@ public class PivotAdapterGeneratorUtil {
 	protected static void createPackageNames(GenModel genModel) {
 		packageNames = new HashMap<String, String>();
 		for (GenPackage genPackage : genModel.getGenPackages()) {
-			for (GenClass genClass : genPackage.getGenClasses()) {
-				packageNames.put(genClass.getName(), (genPackage
-						.getInterfacePackageName() == null ? "" : genPackage
-						.getInterfacePackageName()
-						+ "." + genClass.getName()));
-			}
+			getGenPackages(genPackage);
+		}
+	}
+
+	private static void getGenPackages(GenPackage genPackage) {
+		for (GenPackage subPackage : genPackage.getNestedGenPackages()) {
+			getGenPackages(subPackage);
+		}
+		for (GenClass genClass : genPackage.getGenClasses()) {
+			packageNames.put(genClass.getName(), (genPackage
+					.getInterfacePackageName() == null ? "" : genPackage
+					.getInterfacePackageName()
+					+ "." + genClass.getName()));
 		}
 	}
 
@@ -208,7 +219,8 @@ public class PivotAdapterGeneratorUtil {
 	 * @param genClassName
 	 * @return the genClass's package name + the genClass's name
 	 */
-	public static String getGenClassPackage(GenModel genModel, String genClassName) {
+	public static String getGenClassPackage(GenModel genModel,
+			String genClassName) {
 		// all package names are cached.
 		if (packageNames == null)
 			createPackageNames(genModel);
@@ -223,34 +235,43 @@ public class PivotAdapterGeneratorUtil {
 		pivotModel2DSL = new HashMap<String, List<String>>();
 		allDSLTypes = new LinkedList<EClass>();
 		for (GenPackage genPackage : genModel.getGenPackages()) {
-			for (GenClass genClass : genPackage.getGenClasses()) {
-				for (EAnnotation annotation : genClass.getEcoreClass()
-						.getEAnnotations()) {
-					String pivotModelTypeName = getAnnotationDetails(annotation);
-					if (pivotModelTypeName != null) {
-						// fill maps for both mapping directions
-						dSL2PivotModel.put(genClass, pivotModelTypeName);
-						if (pivotModel2DSL.containsKey(pivotModelTypeName))
-							pivotModel2DSL.get(pivotModelTypeName).add(genClass.getName());
-						else
-							pivotModel2DSL.put(pivotModelTypeName, new LinkedList<String>(
-									Arrays.asList(genClass.getName())));
-						if (pivotModelTypeName.equalsIgnoreCase("Type"))
-							allDSLTypes.add(genClass.getEcoreClass());
-					}
+			getGenClasses(genPackage);
+		}
+	}
+
+	private static void getGenClasses(GenPackage genPackage) {
+		for (GenPackage subPackage : genPackage.getNestedGenPackages()) {
+			getGenClasses(subPackage);
+		}
+		for (GenClass genClass : genPackage.getGenClasses()) {
+			for (EAnnotation annotation : genClass.getEcoreClass()
+					.getEAnnotations()) {
+				String pivotModelTypeName = getAnnotationDetails(annotation);
+				if (pivotModelTypeName != null) {
+					// fill maps for both mapping directions
+					dSL2PivotModel.put(genClass, pivotModelTypeName);
+					if (pivotModel2DSL.containsKey(pivotModelTypeName))
+						pivotModel2DSL.get(pivotModelTypeName).add(
+								genClass.getName());
+					else
+						pivotModel2DSL.put(pivotModelTypeName,
+								new LinkedList<String>(Arrays.asList(genClass
+										.getName())));
+					if (pivotModelTypeName.equalsIgnoreCase("Type"))
+						allDSLTypes.add(genClass.getEcoreClass());
 				}
 			}
 		}
 	}
 
 	/**
-	 * Method tests if the DSL type name is unique. If not it generates an unique
-	 * name.
+	 * Method tests if the DSL type name is unique. If not it generates an
+	 * unique name.
 	 * 
 	 * @param genModel
-	 *          the genModel of the DSL
+	 *            the genModel of the DSL
 	 * @param genClass
-	 *          the DSL type
+	 *            the DSL type
 	 * @return a unique name of the DSL type that is mapped to a Pivot Model
 	 *         element
 	 */
@@ -267,7 +288,8 @@ public class PivotAdapterGeneratorUtil {
 			if (Arrays.asList(pivotModelTypes).contains(dslModelTypeName))
 				return getGenClassPackage(genModel, dslModelTypeName);
 			else {
-				// check whether the DSLs type name equals one of Java's reserved
+				// check whether the DSLs type name equals one of Java's
+				// reserved
 				// keywords -> full package name
 				for (String keyword : reservedKeywords) {
 					if (dslModelTypeName.equalsIgnoreCase(keyword))
@@ -281,13 +303,13 @@ public class PivotAdapterGeneratorUtil {
 
 	/**
 	 * Returns a <code>List</code> of (not necessarily unique) DSL type names
-	 * for a Pivot Model type (more than 1 DSL type can be mapped to a Pivot Model
-	 * type).
+	 * for a Pivot Model type (more than 1 DSL type can be mapped to a Pivot
+	 * Model type).
 	 * 
 	 * @param genModel
-	 *          the genModel of the DSL
+	 *            the genModel of the DSL
 	 * @param pivotModelType
-	 *          the Pivot Model type the DSL types are looked up for
+	 *            the Pivot Model type the DSL types are looked up for
 	 * @return a <code>List</code> of (not necessarily unique) DSL type names
 	 *         that are mapped to the <code>pivotModelType</code>
 	 */
@@ -305,9 +327,9 @@ public class PivotAdapterGeneratorUtil {
 	 * type (more than 1 DSL type can be mapped to a Pivot Model type).
 	 * 
 	 * @param genModel
-	 *          the genModel of the DSL
+	 *            the genModel of the DSL
 	 * @param pivotModelType
-	 *          the Pivot Model type the DSL types are looked up for
+	 *            the Pivot Model type the DSL types are looked up for
 	 * @return a <code>List</code> of unique DSL type names that are mapped to
 	 *         the <code>pivotModelType</code>
 	 */
@@ -327,12 +349,13 @@ public class PivotAdapterGeneratorUtil {
 							dslModelTypeName));
 					withPackage = true;
 				} else {
-					// check whether the DSLs type name equals one of Java's reserved
+					// check whether the DSLs type name equals one of Java's
+					// reserved
 					// keywords -> full package name
 					for (String keyword : reservedKeywords) {
 						if (dslModelTypeName.equalsIgnoreCase(keyword)) {
-							dslModelUniqueTypeNames.add(getGenClassPackage(genModel,
-									dslModelTypeName));
+							dslModelUniqueTypeNames.add(getGenClassPackage(
+									genModel, dslModelTypeName));
 							withPackage = true;
 							break;
 						}
@@ -349,7 +372,7 @@ public class PivotAdapterGeneratorUtil {
 	/**
 	 * 
 	 * @param dslElement
-	 *          the name of the DSL element
+	 *            the name of the DSL element
 	 * @return a name for this element that can be used without any naming
 	 *         conflicts
 	 */
@@ -362,12 +385,13 @@ public class PivotAdapterGeneratorUtil {
 				dslElement = "a" + startWithCapitalLetter(dslElement);
 		}
 		// if the DSL Type is used with package name in front of the class name,
-		// skip the package name and put "dsl" in front of the name to distinguish
+		// skip the package name and put "dsl" in front of the name to
+		// distinguish
 		// from the Pivot Model namespace name
 		if (dslElement.contains("."))
 			return "dsl"
-					+ dslElement.substring(dslElement.lastIndexOf(".") + 1, dslElement
-							.length());
+					+ dslElement.substring(dslElement.lastIndexOf(".") + 1,
+							dslElement.length());
 		return PivotAdapterGeneratorUtil.startWithLowerCaseLetter(dslElement);
 	}
 
@@ -387,22 +411,44 @@ public class PivotAdapterGeneratorUtil {
 	 * 
 	 * @param genModel
 	 * @param genClass
-	 *          the DSL type
+	 *            the DSL type
 	 * @return the name for the adapter class
 	 */
-	public static String getAdapterClassName(GenModel genModel, GenClass genClass) {
-		return genModel.getModelName() + startWithCapitalLetter(genClass.getName());
+	public static String getAdapterClassName(GenModel genModel,
+			GenClass genClass) {
+		return genModel.getModelName()
+				+ startWithCapitalLetter(genClass.getName());
 	}
 
 	/**
 	 * 
 	 * @param genModel
 	 * @param mappedType
-	 *          the type name of the Pivot Model
+	 *            the type name of the Pivot Model
 	 * @return
 	 */
-	public static String getAdapterClassName(GenModel genModel, String mappedType) {
+	public static String getAdapterClassName(GenModel genModel,
+			String mappedType) {
 		return genModel.getModelName() + startWithCapitalLetter(mappedType);
+	}
+
+	/**
+	 * Imports the adaptee's type declaration.
+	 * 
+	 * @param genModel
+	 * @param genClass
+	 * @return the fully qualified location of the adaptee
+	 */
+	public static String getAdapteeClassImport(GenModel genModel,
+			GenClass genClass) {
+		String uniqueTypeName = getDSLModelUniqueTypeName(genModel, genClass);
+		String packageName = getPackageNameFor(genClass);
+		if (packageName.contains(".") && uniqueTypeName.contains("."))
+			return packageName
+					+ uniqueTypeName
+							.substring(uniqueTypeName.lastIndexOf(".") + 1);
+		else
+			return packageName + uniqueTypeName;
 	}
 
 	/**
@@ -455,4 +501,42 @@ public class PivotAdapterGeneratorUtil {
 		return getProjectName(genModel) + ".internal.provider";
 	}
 
+	/**
+	 * The user can define a mapping for the resource type. This is done via an
+	 * {@link EAnnotation} with the source set to
+	 * "http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel" and the
+	 * {@link EAnnotation#getDetails() details} set to "Resource" -> the fully
+	 * qualified name of the resource (e.g., {@link Resource
+	 * org.eclipse.emf.ecore.resource.Resource})
+	 * 
+	 * @param genModel
+	 * @return the fully qualified name of the resource or <code>null</code> if
+	 *         not declared
+	 */
+	public static String getResourceType(GenModel genModel) {
+		// search for the annotation, if not already determined
+		if (resourceName != null)
+			return resourceName;
+
+		// only look in top-level packages
+		for (GenPackage genPackage : genModel.getGenPackages()) {
+			for (EAnnotation annotation : genPackage.getEcorePackage()
+					.getEAnnotations()) {
+				if (annotation.getSource().equalsIgnoreCase(
+						"http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel")) {
+					EMap<String, String> annotationDetails = annotation
+							.getDetails();
+					if (annotationDetails != null) {
+						if (annotationDetails.containsKey("Resource")) {
+							final String resourceType = annotationDetails
+									.get("Resource");
+							resourceName = resourceType;
+							return resourceType;
+						} // no else
+					} // no else
+				} // no else
+			} // end iterate annotations
+		} // end iterate genPackages
+		return null;
+	}
 }

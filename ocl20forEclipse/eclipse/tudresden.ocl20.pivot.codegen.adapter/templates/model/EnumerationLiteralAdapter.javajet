@@ -13,7 +13,7 @@ package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
 genModel.addImport("tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral");
 genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Enumeration");
 genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral");
-genModel.addImport(PivotAdapterGeneratorUtil.getPackageNameFor(genClass) + adapteeClass);
+genModel.addImport(PivotAdapterGeneratorUtil.getAdapteeClassImport(genModel, genClass));
 genModel.markImportLocation(stringBuffer);%>
 
 /**

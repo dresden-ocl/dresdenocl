@@ -17,7 +17,7 @@ package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
 <%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Property");%>
 <%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Type");%>
 <%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractType");%>
-<%genModel.addImport(PivotAdapterGeneratorUtil.getPackageNameFor(genClass) + adapteeClass);%>
+<%genModel.addImport(PivotAdapterGeneratorUtil.getAdapteeClassImport(genModel, genClass));%>
 <%genModel.markImportLocation(stringBuffer);%>
 
 /**

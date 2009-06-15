@@ -7,7 +7,9 @@ List<String> namespaceClasses = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeN
 String namespaceClass = namespaceClasses.isEmpty() ? null : namespaceClasses.get(0);
 List<String> typeClasses = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeNames(genModel, "Type");
 String typeClass = typeClasses.isEmpty() ? null : typeClasses.get(0);
-String implementThis = PivotAdapterGeneratorUtil.getImplementThis();%>
+String implementThis = PivotAdapterGeneratorUtil.getImplementThis();
+String resourceType = PivotAdapterGeneratorUtil.getResourceType(genModel);
+%>
 package <%=packageName%>;
 
 <%genModel.addImport("org.apache.log4j.Logger");
@@ -18,11 +20,7 @@ genModel.addImport("tudresden.ocl20.pivot.modelbus.ModelAccessException");
 genModel.addImport("tudresden.ocl20.pivot.modelbus.ModelBusPlugin");
 genModel.addImport("tudresden.ocl20.pivot.modelbus.base.AbstractModel");
 genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Namespace");
-genModel.addImport("org.eclipse.emf.ecore.resource.Resource");
 genModel.addImport("java.util.List");
-genModel.addImport("tudresden.ocl20.pivot.models.ecore.internal.provider.EcoreModelInstanceProvider");
-genModel.addImport("java.io.IOException");
-genModel.addImport("org.eclipse.emf.ecore.EObject");
 if (namespaceClass != null)
 	genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, namespaceClass));
 if (typeClass != null)
@@ -48,7 +46,7 @@ public class <%=className%> extends AbstractModel implements IModel {
 	private static final Logger logger = Logger.getLogger(<%=className%>.class);
 
 	// the resource containing the corresponding <%=modelName%> model
-	private Resource resource;
+	private <%=resourceType%> resource;
 
 	// the adapter for the top package of the associated <%=modelName%> model
 	private Namespace rootNamespace;
@@ -56,13 +54,15 @@ public class <%=className%> extends AbstractModel implements IModel {
 	/**
 	 * Creates a new <code><%=className%></code> adapting the given {@link <%=namespaceClass%>}.
 	 * 
-	 * @param resource the resource containing the model
+	 * @param resource the {@link <%=resourceType%>} containing the model
 	 *
 	 * @generated
 	 */
-	public <%=className%>(Resource resource) {
-		super(resource.getURI().toString(), ModelBusPlugin.getMetamodelRegistry().
-			getMetamodel(<%=modelName%>MetamodelPlugin.ID));
+	public <%=className%>(<%=resourceType%> resource) {
+		// TODO: initialize super class, for Ecore Resources use:
+		//super(resource.getURI().toString(), ModelBusPlugin.getMetamodelRegistry().
+		//	getMetamodel(<%=modelName%>MetamodelPlugin.ID));
+		super("", ModelBusPlugin.getMetamodelRegistry().getMetamodel(<%=modelName%>MetamodelPlugin.ID));
 
 		// initialize
 		this.resource = resource;
@@ -74,7 +74,10 @@ public class <%=className%> extends AbstractModel implements IModel {
 	 * @generated
 	 */
 	public IModelInstanceProvider getModelInstanceProvider() {
-		return new EcoreModelInstanceProvider(resource);
+		// TODO: implement this method; for Ecore models use:
+		// return new tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceProvider(resource);
+		
+		return null;
 	}
 
 
@@ -111,7 +114,8 @@ public class <%=className%> extends AbstractModel implements IModel {
 	 */
 	protected Namespace createRootNamespace() throws ModelAccessException {
 
-			// load the resource
+		// TODO: load the resource; for Ecore use:
+		/*
 		if (!resource.isLoaded()) {
 
 			if (logger.isInfoEnabled()) {
@@ -126,23 +130,26 @@ public class <%=className%> extends AbstractModel implements IModel {
 						"Error while loading resource from " + resource.getURI(), e); //$NON-NLS-1$
 			}
 
-		}		
+		}
+		*/		
 
-		// get the root packages
-		List<EObject> roots = resource.getContents();
+		// TODO: get the root packages; for Ecore use:
+		// List<EObject> roots = resource.getContents();
+		
+		List<Object> roots = null;
 
 		// TODO: create a new package to serve as the root package
 		<%if (namespaceClass != null) {%><%=namespaceClass%> rootPackage = null;<%} else {%>DSLNamespace rootPackage = null;<%}%>
 		// TODO: rootPackage.setName("root"); //$NON-NLS-1$
 
 		// add all sub-packages and subtypes to the new root package
-		for (EObject eObject : roots) {
+		for (Object object : roots) {
 			<%for (String aNamespaceClass : namespaceClasses) {%>
-			if (eObject instanceof <%=aNamespaceClass%>)
+			if (object instanceof <%=aNamespaceClass%>)
 				; // TODO: add namespace to root package
 			<%}%>
 			<%for (String aTypeClass : typeClasses) {%>
-			if (eObject instanceof <%=aTypeClass%>)
+			if (object instanceof <%=aTypeClass%>)
 				; // TODO: add types to root package
 			<%}%>
 		}
@@ -161,7 +168,7 @@ public class <%=className%> extends AbstractModel implements IModel {
 	public boolean equals(Object obj) {
 
 		if (obj instanceof <%=className%>) {
-			return resource.getURI().equals(((<%=className%>) obj).resource.getURI());
+			return resource.equals(((<%=className%>) obj).resource);
 		}
 
 		return false;
@@ -176,7 +183,7 @@ public class <%=className%> extends AbstractModel implements IModel {
 	 */
 	@Override
 	public int hashCode() {
-		return resource.getURI().hashCode();
+		return resource.hashCode();
 	}
 
 	/**
@@ -188,7 +195,7 @@ public class <%=className%> extends AbstractModel implements IModel {
 	 */
 	@Override
 	public String toString() {
-		return resource.getURI().toString();
+		return resource.toString();
 	}
 }
 <%genModel.emitSortedImports();%>
