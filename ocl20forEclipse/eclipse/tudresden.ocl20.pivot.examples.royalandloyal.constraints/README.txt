@@ -10,8 +10,9 @@ generated code.
 
 This is an AspectJ project!
 ===========================
-Please not that this project uses AspectJ to be executed successfully. 
+Please note that this project uses AspectJ to be executed successfully. 
 To run AspectJ with Eclipse, the AspectJ Development Tools (AJDT) must
-be installed.
+be installed and the project must be converted into an AJDT project
+(e.g. via context menu in the package explorer)
 
 The AJDT can be found at http://www.eclipse.org/aspectj/
