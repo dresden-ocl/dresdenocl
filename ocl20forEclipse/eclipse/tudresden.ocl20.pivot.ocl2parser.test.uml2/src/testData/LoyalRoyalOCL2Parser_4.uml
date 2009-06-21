@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_VcxJoV5bEd6pbKj3dlY6dg" name="RoyalLoyal">
+  <packagedElement xmi:type="uml:DataType" xmi:id="_wN4w0F5dEd6pbKj3dlY6dg" name="boolean"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_zIeSoF5dEd6pbKj3dlY6dg" name="double"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_05AcIF5dEd6pbKj3dlY6dg" name="int"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_3jTfMF5dEd6pbKj3dlY6dg" name="String"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_5rGSIF5dEd6pbKj3dlY6dg" name="void"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_vsxuMF5lEd6pbKj3dlY6dg" name="java">
+    <packagedElement xmi:type="uml:Package" xmi:id="_w4c3IF5lEd6pbKj3dlY6dg" name="util">
+      <packagedElement xmi:type="uml:Interface" xmi:id="_0pSrgF5lEd6pbKj3dlY6dg" name="Set"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_KmUJMF52Ed6pbKj3dlY6dg" name="Color">
+    <ownedLiteral xmi:id="_KmUJMV52Ed6pbKj3dlY6dg" name="gold"/>
+    <ownedLiteral xmi:id="_KmUJMl52Ed6pbKj3dlY6dg" name="silver"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmUwQF52Ed6pbKj3dlY6dg" name="Transaction">
+    <ownedAttribute xmi:id="_KmUwQV52Ed6pbKj3dlY6dg" name="points" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwQl52Ed6pbKj3dlY6dg" name="amount" type="_KmWlg152Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwQ152Ed6pbKj3dlY6dg" name="date" type="_KmVXXl52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwRF52Ed6pbKj3dlY6dg" name="card" type="_KmUwVF52Ed6pbKj3dlY6dg" association="_KmVXUF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwRV52Ed6pbKj3dlY6dg" name="generatedBy" type="_KmV-c152Ed6pbKj3dlY6dg" association="_KmWle152Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwRl52Ed6pbKj3dlY6dg" name="account" type="_KmVXa152Ed6pbKj3dlY6dg"/>
+    <ownedOperation xmi:id="_KmUwR152Ed6pbKj3dlY6dg" name="program">
+      <ownedParameter xmi:id="_KmUwSF52Ed6pbKj3dlY6dg" type="_KmUwSV52Ed6pbKj3dlY6dg" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmUwSV52Ed6pbKj3dlY6dg" name="LoyaltyProgram">
+    <ownedAttribute xmi:id="_KmUwSl52Ed6pbKj3dlY6dg" name="name" type="_KmWlhV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwS152Ed6pbKj3dlY6dg" name="partners" type="_KmV-bl52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWldV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwTF52Ed6pbKj3dlY6dg" name="levels" type="_KmWlcF52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWld152Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwTV52Ed6pbKj3dlY6dg" name="participants" type="_KmVXUV52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWlfV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwTl52Ed6pbKj3dlY6dg" type="_KmV-aF52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWlgF52Ed6pbKj3dlY6dg"/>
+    <ownedOperation xmi:id="_KmUwT152Ed6pbKj3dlY6dg" name="enroll">
+      <ownedParameter xmi:id="_KmUwUF52Ed6pbKj3dlY6dg" type="_KmWlgl52Ed6pbKj3dlY6dg" direction="return"/>
+      <ownedParameter xmi:id="_KmUwUV52Ed6pbKj3dlY6dg" name="c" type="_KmVXUV52Ed6pbKj3dlY6dg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_KmUwUl52Ed6pbKj3dlY6dg" name="getServices">
+      <ownedParameter xmi:id="_KmUwU152Ed6pbKj3dlY6dg" type="_0pSrgF5lEd6pbKj3dlY6dg" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmUwVF52Ed6pbKj3dlY6dg" name="CustomerCard">
+    <ownedAttribute xmi:id="_KmUwVV52Ed6pbKj3dlY6dg" name="transactions" type="_KmUwQF52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmVXUF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwVl52Ed6pbKj3dlY6dg" name="valid" type="_KmWlgl52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwV152Ed6pbKj3dlY6dg" name="validFrom" type="_KmVXXl52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwWF52Ed6pbKj3dlY6dg" name="validThru" type="_KmVXXl52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwWV52Ed6pbKj3dlY6dg" name="color" type="_KmUJMF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwWl52Ed6pbKj3dlY6dg" name="printedName" type="_KmWlhV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwW152Ed6pbKj3dlY6dg" name="owner" type="_KmVXUV52Ed6pbKj3dlY6dg" association="_KmWlfF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmUwXF52Ed6pbKj3dlY6dg" type="_KmV-aF52Ed6pbKj3dlY6dg" association="_KmWlgV52Ed6pbKj3dlY6dg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmUwXV52Ed6pbKj3dlY6dg" name="Burning">
+    <generalization xmi:id="_KmUwXl52Ed6pbKj3dlY6dg" general="_KmUwQF52Ed6pbKj3dlY6dg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmVXUF52Ed6pbKj3dlY6dg" memberEnd="_KmUwRF52Ed6pbKj3dlY6dg _KmUwVV52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmVXUV52Ed6pbKj3dlY6dg" name="Customer">
+    <ownedAttribute xmi:id="_KmVXUl52Ed6pbKj3dlY6dg" name="name" type="_KmWlhV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXU152Ed6pbKj3dlY6dg" name="title" type="_KmWlhV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXVF52Ed6pbKj3dlY6dg" name="isMale" type="_KmWlgl52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXVV52Ed6pbKj3dlY6dg" name="dateOfBirth" type="_KmVXXl52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXVl52Ed6pbKj3dlY6dg" name="age" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXV152Ed6pbKj3dlY6dg" name="cards" type="_KmUwVF52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWlfF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXWF52Ed6pbKj3dlY6dg" name="programs" type="_KmUwSV52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWlfV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXWV52Ed6pbKj3dlY6dg" type="_KmV-aF52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWlf152Ed6pbKj3dlY6dg"/>
+    <ownedOperation xmi:id="_KmVXWl52Ed6pbKj3dlY6dg" name="age">
+      <ownedParameter xmi:id="_KmVXW152Ed6pbKj3dlY6dg" type="_KmWlhF52Ed6pbKj3dlY6dg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_KmVXXF52Ed6pbKj3dlY6dg" name="birthdayHappens">
+      <ownedParameter xmi:id="_KmVXXV52Ed6pbKj3dlY6dg" type="_KmWlhl52Ed6pbKj3dlY6dg" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_KmVXXl52Ed6pbKj3dlY6dg" name="Date">
+    <ownedAttribute xmi:id="_KmVXX152Ed6pbKj3dlY6dg" name="now" type="_KmVXXl52Ed6pbKj3dlY6dg"/>
+    <ownedOperation xmi:id="_KmVXYF52Ed6pbKj3dlY6dg" name="isBefore">
+      <ownedParameter xmi:id="_KmVXYV52Ed6pbKj3dlY6dg" type="_KmWlgl52Ed6pbKj3dlY6dg" direction="return"/>
+      <ownedParameter xmi:id="_KmVXYl52Ed6pbKj3dlY6dg" name="t" type="_KmVXXl52Ed6pbKj3dlY6dg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_KmVXY152Ed6pbKj3dlY6dg" name="isAfter">
+      <ownedParameter xmi:id="_KmVXZF52Ed6pbKj3dlY6dg" type="_KmWlgl52Ed6pbKj3dlY6dg" direction="return"/>
+      <ownedParameter xmi:id="_KmVXZV52Ed6pbKj3dlY6dg" name="t" type="_KmVXXl52Ed6pbKj3dlY6dg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_KmVXZl52Ed6pbKj3dlY6dg" name="=">
+      <ownedParameter xmi:id="_KmVXZ152Ed6pbKj3dlY6dg" type="_KmWlgl52Ed6pbKj3dlY6dg" direction="return"/>
+      <ownedParameter xmi:id="_KmVXaF52Ed6pbKj3dlY6dg" name="t" type="_KmVXXl52Ed6pbKj3dlY6dg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmVXaV52Ed6pbKj3dlY6dg" name="Earning">
+    <generalization xmi:id="_KmVXal52Ed6pbKj3dlY6dg" general="_KmUwQF52Ed6pbKj3dlY6dg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmVXa152Ed6pbKj3dlY6dg" name="LoyaltyAccount">
+    <ownedAttribute xmi:id="_KmVXbF52Ed6pbKj3dlY6dg" name="points" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXbV52Ed6pbKj3dlY6dg" name="number" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXbl52Ed6pbKj3dlY6dg" name="totalPointsEarned" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXb152Ed6pbKj3dlY6dg" name="transactions" type="_KmUwQF52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWle152Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmVXcF52Ed6pbKj3dlY6dg" type="_KmV-aF52Ed6pbKj3dlY6dg" association="_KmWleV52Ed6pbKj3dlY6dg"/>
+    <ownedOperation xmi:id="_KmVXcV52Ed6pbKj3dlY6dg" name="earn">
+      <ownedParameter xmi:id="_KmVXcl52Ed6pbKj3dlY6dg" type="_KmWlhF52Ed6pbKj3dlY6dg" direction="return"/>
+      <ownedParameter xmi:id="_KmV-YF52Ed6pbKj3dlY6dg" name="i" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_KmV-YV52Ed6pbKj3dlY6dg" name="isEmpty">
+      <ownedParameter xmi:id="_KmV-Yl52Ed6pbKj3dlY6dg" type="_KmWlgl52Ed6pbKj3dlY6dg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_KmV-Y152Ed6pbKj3dlY6dg" name="burn">
+      <ownedParameter xmi:id="_KmV-ZF52Ed6pbKj3dlY6dg" type="_KmWlhF52Ed6pbKj3dlY6dg" direction="return"/>
+      <ownedParameter xmi:id="_KmV-ZV52Ed6pbKj3dlY6dg" name="i" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_KmV-Zl52Ed6pbKj3dlY6dg" name="getCustomerName">
+      <ownedParameter xmi:id="_KmV-Z152Ed6pbKj3dlY6dg" type="_KmWlhV52Ed6pbKj3dlY6dg" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmV-aF52Ed6pbKj3dlY6dg" name="Membership">
+    <ownedAttribute xmi:id="_KmV-aV52Ed6pbKj3dlY6dg" name="participants" type="_KmVXUV52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWlf152Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-al52Ed6pbKj3dlY6dg" name="programs" type="_KmUwSV52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWlgF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-a152Ed6pbKj3dlY6dg" name="currentLevel" type="_KmWlcF52Ed6pbKj3dlY6dg" association="_KmWlfl52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-bF52Ed6pbKj3dlY6dg" name="card" type="_KmUwVF52Ed6pbKj3dlY6dg" association="_KmWlgV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-bV52Ed6pbKj3dlY6dg" name="account" type="_KmVXa152Ed6pbKj3dlY6dg" association="_KmWleV52Ed6pbKj3dlY6dg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmV-bl52Ed6pbKj3dlY6dg" name="ProgramPartner">
+    <ownedAttribute xmi:id="_KmV-b152Ed6pbKj3dlY6dg" name="numberOfCustomers" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-cF52Ed6pbKj3dlY6dg" name="name" type="_KmWlhV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-cV52Ed6pbKj3dlY6dg" name="programs" type="_KmUwSV52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWldV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-cl52Ed6pbKj3dlY6dg" name="deliveredServices" type="_KmV-c152Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWldl52Ed6pbKj3dlY6dg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmV-c152Ed6pbKj3dlY6dg" name="Service">
+    <ownedAttribute xmi:id="_KmV-dF52Ed6pbKj3dlY6dg" name="condition" type="_KmWlgl52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-dV52Ed6pbKj3dlY6dg" name="pointsEarned" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-dl52Ed6pbKj3dlY6dg" name="pointsBurned" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-d152Ed6pbKj3dlY6dg" name="description" type="_KmWlhV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-eF52Ed6pbKj3dlY6dg" name="serviceNr" type="_KmWlhF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-eV52Ed6pbKj3dlY6dg" name="partner" type="_KmV-bl52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWldl52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-el52Ed6pbKj3dlY6dg" name="level" type="_KmWlcF52Ed6pbKj3dlY6dg" association="_KmWleF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmV-e152Ed6pbKj3dlY6dg" name="transactions" type="_KmUwQF52Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWlel52Ed6pbKj3dlY6dg"/>
+    <ownedOperation xmi:id="_KmV-fF52Ed6pbKj3dlY6dg" name="calcPoints">
+      <ownedParameter xmi:id="_KmV-fV52Ed6pbKj3dlY6dg" type="_KmWlhF52Ed6pbKj3dlY6dg" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KmWlcF52Ed6pbKj3dlY6dg" name="ServiceLevel">
+    <ownedAttribute xmi:id="_KmWlcV52Ed6pbKj3dlY6dg" name="name" type="_KmWlhV52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmWlcl52Ed6pbKj3dlY6dg" name="program" type="_KmUwSV52Ed6pbKj3dlY6dg" association="_KmWld152Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmWlc152Ed6pbKj3dlY6dg" name="availableServices" type="_KmV-c152Ed6pbKj3dlY6dg" aggregation="shared" association="_KmWleF52Ed6pbKj3dlY6dg"/>
+    <ownedAttribute xmi:id="_KmWldF52Ed6pbKj3dlY6dg" type="_KmV-aF52Ed6pbKj3dlY6dg" association="_KmWlfl52Ed6pbKj3dlY6dg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWldV52Ed6pbKj3dlY6dg" memberEnd="_KmV-cV52Ed6pbKj3dlY6dg _KmUwS152Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWldl52Ed6pbKj3dlY6dg" memberEnd="_KmV-cl52Ed6pbKj3dlY6dg _KmV-eV52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWld152Ed6pbKj3dlY6dg" memberEnd="_KmUwTF52Ed6pbKj3dlY6dg _KmWlcl52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWleF52Ed6pbKj3dlY6dg" memberEnd="_KmV-el52Ed6pbKj3dlY6dg _KmWlc152Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWleV52Ed6pbKj3dlY6dg" memberEnd="_KmV-bV52Ed6pbKj3dlY6dg _KmVXcF52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWlel52Ed6pbKj3dlY6dg" memberEnd="_KmV-e152Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWle152Ed6pbKj3dlY6dg" memberEnd="_KmVXb152Ed6pbKj3dlY6dg _KmUwRV52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWlfF52Ed6pbKj3dlY6dg" memberEnd="_KmUwW152Ed6pbKj3dlY6dg _KmVXV152Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWlfV52Ed6pbKj3dlY6dg" memberEnd="_KmVXWF52Ed6pbKj3dlY6dg _KmUwTV52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWlfl52Ed6pbKj3dlY6dg" memberEnd="_KmV-a152Ed6pbKj3dlY6dg _KmWldF52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWlf152Ed6pbKj3dlY6dg" memberEnd="_KmVXWV52Ed6pbKj3dlY6dg _KmV-aV52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWlgF52Ed6pbKj3dlY6dg" memberEnd="_KmV-al52Ed6pbKj3dlY6dg _KmUwTl52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmWlgV52Ed6pbKj3dlY6dg" memberEnd="_KmUwXF52Ed6pbKj3dlY6dg _KmV-bF52Ed6pbKj3dlY6dg"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_KmWlgl52Ed6pbKj3dlY6dg" name="boolean"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_KmWlg152Ed6pbKj3dlY6dg" name="double"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_KmWlhF52Ed6pbKj3dlY6dg" name="int"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_KmWlhV52Ed6pbKj3dlY6dg" name="String"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_KmWlhl52Ed6pbKj3dlY6dg" name="void"/>
+</uml:Package>

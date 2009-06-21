@@ -28,7 +28,7 @@ public class CollectionRangeTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		testPerformer=TestPerformer.getDefault();
-		testPerformer.setModel("LoyalRoyalOCL2Parser_4.xmi");
+		testPerformer.setModel("royalsandloyals.uml");
 	}
 
 	@Test

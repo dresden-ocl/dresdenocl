@@ -54,7 +54,7 @@ public class OclFilesTest {
 		try {
 			if (testPerformer == null) {
 				testPerformer = TestPerformer.getDefault();
-				testPerformer.setModel("LoyalRoyalOCL2Parser_4.xmi");
+				testPerformer.setModel("royalsandloyals.uml");
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();

@@ -31,7 +31,7 @@ public class AllTests {
 //		suite.addTestSuite(IncludesAllTest.class);
 //		suite.addTestSuite(IsUniqueTest.class);
 //		suite.addTestSuite(IncludesTest.class);
-//		//suite.addTestSuite(AllInstanceTest.class);
+//		suite.addTestSuite(AllInstanceTest.class);
 //		suite.addTestSuite(CollectionTest.class);
 //		suite.addTestSuite(OclFilesTest.class);
 //		suite.addTestSuite(DefinitionTest.class);

@@ -30,7 +30,7 @@ public class BodySetTest {
 		String fileName = "oclTestFiles/bodySetTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("LoyalRoyalOCL2Parser_4.xmi");
+			test.setModel("royalsandloyals.uml");
 			test.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";

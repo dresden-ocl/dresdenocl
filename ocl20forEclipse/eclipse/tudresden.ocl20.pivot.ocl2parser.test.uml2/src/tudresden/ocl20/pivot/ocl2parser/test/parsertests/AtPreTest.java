@@ -23,14 +23,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
 public class AtPreTest {
 	@Test public void testAtPre() {
 		String fileName = "oclTestFiles/atPreTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("LoyalRoyalOCL2Parser_4.xmi");
+			test.setModel("LoyalRoyalOCL2Parser_4.uml");
 			test.parseFile(fileName);
 		} catch(Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
