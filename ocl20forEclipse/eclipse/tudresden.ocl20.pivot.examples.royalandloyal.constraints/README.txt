@@ -3,9 +3,17 @@ Royal and Loyal Constraint Extension
 This project extends the "royal and loyal" example provided in the plug-in 
 tudresden.ocl20.pivot.examples.royalsandloyals.
 
-It contains the generated code for the OCL expressions provided with the
-"royal and loyal" example and some jUnit test cases which check the
-generated code.
+It contains JUnit test suite to test the generated code for the OCL expressions 
+provided with the "royal and loyal" example. 
+
+If you want to execute these JUnit
+tests successfully, you have to generate the AspectJ code for the constraints 
+first!
+
+If you import this project from a jar file, please note that this project has
+a dependency to the plug-in tudresden.ocl20.pivot.examples.royalandloyal.
+You have to import this plug-in as a library or you have reference its content
+to execute the test suite successfully.
 
 
 This is an AspectJ project!
