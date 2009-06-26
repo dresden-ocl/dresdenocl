@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.plugin;
+package tudresden.ocl20.pivot.ocl2java.test.tests;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,7 +32,7 @@ import tudresden.ocl20.pivot.ocl2java.exception.Ocl2CodeException;
  * 
  * @author Claas Wilke
  */
-public class FragmentTest extends AbstractCompareTest {
+public class FragmentTest {
 
 	/** The path of the file containing the OCL constraints. */
 	private String constraintFileName;
@@ -52,7 +52,8 @@ public class FragmentTest extends AbstractCompareTest {
 	 */
 	@BeforeClass
 	public static void setUp() throws Ocl2CodeException {
-		testPerformer = new CodegenTestPerformer();
+		testPerformer = CodegenTestPerformer.getInstance();
+		testPerformer.reset();
 	}
 
 	/**

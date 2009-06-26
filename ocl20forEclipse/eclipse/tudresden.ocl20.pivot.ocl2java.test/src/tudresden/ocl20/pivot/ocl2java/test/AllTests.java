@@ -17,10 +17,13 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.plugin;
+package tudresden.ocl20.pivot.ocl2java.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+
+import tudresden.ocl20.pivot.ocl2java.test.tests.FragmentTest;
+import tudresden.ocl20.pivot.ocl2java.test.tests.InstrumentationTest;
 
 /**
  * <p>

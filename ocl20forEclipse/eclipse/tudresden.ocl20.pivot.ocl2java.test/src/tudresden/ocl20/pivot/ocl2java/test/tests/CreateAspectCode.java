@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2java.test.plugin;
+package tudresden.ocl20.pivot.ocl2java.test.tests;
 
 import static org.junit.Assert.fail;
 
@@ -48,7 +48,8 @@ public class CreateAspectCode {
 	public void transformCodeTest() {
 
 		try {
-			this.testPerformer = new CodegenTestPerformer();
+			this.testPerformer = CodegenTestPerformer.getInstance();
+			this.testPerformer.reset();
 
 			this.loadBodyConstraints();
 			this.loadDefConstraints();
