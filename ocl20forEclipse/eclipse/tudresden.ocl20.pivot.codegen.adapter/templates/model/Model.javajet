@@ -68,18 +68,6 @@ public class <%=className%> extends AbstractModel implements IModel {
 		this.resource = resource;
 	}
 
-	/**
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getModelInstanceProvider()
-	 *
-	 * @generated
-	 */
-	public IModelInstanceProvider getModelInstanceProvider() {
-		// TODO: implement this method; for Ecore models use:
-		// return new tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceProvider(resource);
-		
-		return null;
-	}
-
 
 	/**
 	 * This method lazily creates a {@link Namespace} adapter for the virtual root package in the

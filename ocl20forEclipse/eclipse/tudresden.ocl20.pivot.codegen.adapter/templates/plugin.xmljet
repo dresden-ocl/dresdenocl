@@ -10,7 +10,7 @@ String projectName = PivotAdapterGeneratorUtil.getProjectName(genModel);%>
       <metamodel
             id = "<%=projectName%>"
             modelProvider = "<%=projectName%>.internal.provider.<%=modelName%>ModelProvider"
-            name = "<%=modelName%>">
+            name = "<%=modelName%> Meta-Model">
       </metamodel>
    </extension>
 

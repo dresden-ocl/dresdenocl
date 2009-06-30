@@ -158,11 +158,11 @@ for (String typeClass : typeClasses) {
 public class <%=className%> {
 
 	/**
-	 * logger for this class
+	 * A {@link Logger} for this class.
 	 *
 	 * @generated
 	 */
-	private static final Logger logger = Logger
+	private static final Logger LOGGER = Logger
 			.getLogger(<%=className%>.class);
 
 	/**
@@ -198,31 +198,31 @@ public class <%=className%> {
 	 * @generated
 	 */
 	public Namespace createNamespace(<%=namespaceClass%> <%=namespaceName%>) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createNamespace(<%=namespaceName%>=" + <%=namespaceName%> +
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createNamespace(<%=namespaceName%>=" + <%=namespaceName%> +
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		if (<%=namespaceName%> == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createNamespace() - exit: <%=namespaceName%> is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createNamespace() - exit: <%=namespaceName%> is null");
 			return null;
 		}
 
 		Namespace namespace = (Namespace) adapters.get(<%=namespaceName%>);
 
 		if (namespace == null) {
-			if (logger.isInfoEnabled()) {
+			if (LOGGER.isInfoEnabled()) {
 					// TODO: replace "<%=namespaceName%>.getName()"
-					logger.info(NLS.bind(<%=modelName%>ModelMessages.<%=className%>_CreatingPivotModelAdapter,
-							"<%=namespaceClass%>", "<%=namespaceName%>.getName()")); //$NON-NLS-1$
+					LOGGER.info(NLS.bind(<%=modelName%>ModelMessages.<%=className%>_CreatingPivotModelAdapter,
+							<%=namespaceClass%>.class.getCanonicalName(), "<%=namespaceName%>.getName()")); //$NON-NLS-1$
 			}
 			namespace = new <%=namespaceAdapterName%>(<%=namespaceName%>);
 			adapters.put(<%=namespaceName%>, namespace);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createNamespace() - exit - return value=" + namespace); //$NON-NLS-1$
 		}
 
 		return namespace;
@@ -239,14 +239,14 @@ public class <%=className%> {
 	 * @generated
 	 */
 	public Type createType(<%=typeClass%> <%=typeName%>) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createType(<%=typeName%>=" + <%=typeName%> +
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createType(<%=typeName%>=" + <%=typeName%> +
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		if (<%=typeName%> == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createType() - exit: <%=typeName%> is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createType() - exit: <%=typeName%> is null");
 			return null;
 		}
 
@@ -257,8 +257,8 @@ public class <%=className%> {
 			adapters.put(<%=typeName%>, type);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
 		}
 
 		return type;
@@ -303,14 +303,14 @@ public class <%=className%> {
 	 * @generated
 	 */
 	public Enumeration createEnumeration(<%=enumClass%> <%=enumName%>) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createEnumeration(<%=enumName%>=" + <%=enumName%> +
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createEnumeration(<%=enumName%>=" + <%=enumName%> +
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		if (<%=enumName%> == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createEnumeration() - exit: <%=enumName%> is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createEnumeration() - exit: <%=enumName%> is null");
 			return null;
 		}
 		
@@ -321,8 +321,8 @@ public class <%=className%> {
 			adapters.put(<%=enumName%>, enumeration);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createEnumeration() - exit - return value=" + enumeration); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createEnumeration() - exit - return value=" + enumeration); //$NON-NLS-1$
 		}
 
 		return enumeration;
@@ -339,14 +339,14 @@ public class <%=className%> {
 	 * @generated
 	 */
 	public EnumerationLiteral createEnumerationLiteral(<%=enumLiteralClass%> <%=enumLiteralName%>) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createEnumerationLiteral(<%=enumLiteralName%>=" + <%=enumLiteralName%> + 
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createEnumerationLiteral(<%=enumLiteralName%>=" + <%=enumLiteralName%> + 
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		if (<%=enumLiteralName%> == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createEnumerationLiteral() - exit: <%=enumLiteralName%> is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createEnumerationLiteral() - exit: <%=enumLiteralName%> is null");
 			return null;
 		}
 		
@@ -358,8 +358,8 @@ public class <%=className%> {
 			adapters.put(<%=enumLiteralName%>, literal);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createEnumerationLiteral() - exit - return value=" + literal); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createEnumerationLiteral() - exit - return value=" + literal); //$NON-NLS-1$
 		}
 
 		return literal;
@@ -376,14 +376,14 @@ public class <%=className%> {
 	 * @generated
 	 */
 	public PrimitiveType createPrimitiveType(<%=primitiveTypeClass%> <%=primitiveTypeName%>) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createPrimitiveType(<%=primitiveTypeName%>=" + <%=primitiveTypeName%> + 
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createPrimitiveType(<%=primitiveTypeName%>=" + <%=primitiveTypeName%> + 
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 				
 		if (<%=primitiveTypeName%> == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createPrimitiveType() - exit: <%=primitiveTypeName%> is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createPrimitiveType() - exit: <%=primitiveTypeName%> is null");
 			return null;
 		}
 
@@ -394,8 +394,8 @@ public class <%=className%> {
 			adapters.put(<%=primitiveTypeName%>, primitiveType);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createPrimitiveType() - exit - return value=" + primitiveType); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createPrimitiveType() - exit - return value=" + primitiveType); //$NON-NLS-1$
 		}
 
 		return primitiveType;
@@ -412,14 +412,14 @@ public class <%=className%> {
 	 * @generated
 	 */
 	public Property createProperty(<%=propertyClass%> <%=propertyName%>) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createProperty(<%=propertyName%>=" + <%=propertyName%> +
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createProperty(<%=propertyName%>=" + <%=propertyName%> +
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 				
 		if (<%=propertyName%> == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createProperty() - exit: <%=propertyName%> is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createProperty() - exit: <%=propertyName%> is null");
 			return null;
 		}
 
@@ -430,8 +430,8 @@ public class <%=className%> {
 			adapters.put(<%=propertyName%>, property);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
 		}
 
 		return property;
@@ -448,14 +448,14 @@ public class <%=className%> {
 	 * @generated
 	 */
 	public Operation createOperation(<%=operationClass%> <%=operationName%>) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOperation(<%=operationName%>=" + <%=operationName%> +
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOperation(<%=operationName%>=" + <%=operationName%> +
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 				
 		if (<%=operationName%> == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createOperation() - exit: <%=operationName%> is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createOperation() - exit: <%=operationName%> is null");
 			return null;
 		}
 
@@ -466,8 +466,8 @@ public class <%=className%> {
 			adapters.put(<%=operationName%>, operation);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOperation() - exit - return value=" + operation); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOperation() - exit - return value=" + operation); //$NON-NLS-1$
 		}
 
 		return operation;
@@ -484,14 +484,14 @@ public class <%=className%> {
 	 * @generated
 	 */
 	public Parameter createParameter(<%=parameterClass%> <%=parameterName%>) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createParameter(<%=parameterName%>=" + <%=parameterName%> +
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createParameter(<%=parameterName%>=" + <%=parameterName%> +
 				") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 				
 		if (<%=parameterName%> == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createParameter() - exit: <%=parameterName%> is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createParameter() - exit: <%=parameterName%> is null");
 			return null;
 		}
 
@@ -502,8 +502,8 @@ public class <%=className%> {
 			adapters.put(<%=parameterName%>, parameter);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createParameter() - exit - return value=" + parameter); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createParameter() - exit - return value=" + parameter); //$NON-NLS-1$
 		}
 
 		return parameter;

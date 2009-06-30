@@ -5,7 +5,7 @@ String activator = PivotAdapterGeneratorUtil.getProjectName(genModel) + "." + Pi
 %>
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: <%=modelName%> Adapter
+Bundle-Name: <%=modelName%> Meta-Model Plug-in
 Bundle-SymbolicName: <%=PivotAdapterGeneratorUtil.getProjectName(genModel)%>; singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: <%=activator%>
@@ -30,4 +30,4 @@ Require-Bundle: <%=pluginID%><%while(requiredPluginIterator.hasNext()) {
  <%=pluginID%><%}%>,
  <%=additionallyRequiredPlugins%>
 <%}%>
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
