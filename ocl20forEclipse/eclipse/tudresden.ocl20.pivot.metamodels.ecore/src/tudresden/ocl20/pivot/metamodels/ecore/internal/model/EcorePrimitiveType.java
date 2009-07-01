@@ -32,9 +32,11 @@
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
@@ -54,6 +56,35 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER = Logger
 			.getLogger(EcorePrimitiveType.class);
+
+	/**
+	 * An array of all Java {@link Class}es representing the
+	 * {@link PrimitiveTypeKind#BOOLEAN}.
+	 */
+	private static Class<?> javaBooleanClasses[] = new Class<?>[] {
+			boolean.class, Boolean.class };
+
+	/**
+	 * An array of all Java {@link Class}es representing the
+	 * {@link PrimitiveTypeKind#INTEGER}.
+	 */
+	private static Class<?> javaIntegerClasses[] = new Class<?>[] { byte.class,
+			Byte.class, short.class, Short.class, int.class, Integer.class,
+			long.class, Long.class, BigInteger.class, BigDecimal.class };
+
+	/**
+	 * An array of all Java {@link Class}es representing the
+	 * {@link PrimitiveTypeKind#REAL}.
+	 */
+	private static Class<?> javaRealClasses[] = new Class<?>[] { float.class,
+			Float.class, double.class, Double.class };
+
+	/**
+	 * An array of all Java {@link Class}es representing the
+	 * {@link PrimitiveTypeKind#STRING}.
+	 */
+	private static Class<?> javaStringClasses[] = new Class<?>[] { char.class,
+			Character.class, String.class };
 
 	/** The adapted {@link EDataType}. */
 	private EDataType eDataType;
@@ -96,6 +127,86 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 		// no else.
 	}
 
+	/**
+	 * <p>
+	 * Returns the {@link PrimitiveTypeKind} of a given {@link EDataType}. If
+	 * the given {@link EDataType} shall not be mapped to a
+	 * {@link PrimitiveType}, the {@link PrimitiveTypeKind#UNKNOWN} is returned.
+	 * </p>
+	 * 
+	 * @param aDataType
+	 *            The {@link EDataType} those {@link PrimitiveTypeKind} shall be
+	 *            returned.
+	 * @return The {@link PrimitiveTypeKind} of the given {@link EDataType}.
+	 */
+	public static PrimitiveTypeKind getKind(EDataType aDataType) {
+
+		PrimitiveTypeKind result;
+
+		result = null;
+		
+		/* Check if the adapted class is a boolean. */
+		for (Class<?> aClass : javaBooleanClasses) {
+
+			if (aClass.getCanonicalName().equals(
+					aDataType.getInstanceTypeName())) {
+				result = PrimitiveTypeKind.BOOLEAN;
+				break;
+			}
+			// no else.
+		}
+
+		/* Else check if the adapted class is an integer. */
+		if (result == null) {
+
+			for (Class<?> aClass : javaIntegerClasses) {
+
+				if (aClass.getCanonicalName().equals(
+						aDataType.getInstanceTypeName())) {
+					result = PrimitiveTypeKind.INTEGER;
+					break;
+				}
+				// no else.
+			}
+		}
+
+		/* Else check if the adapted class is a real. */
+		if (result == null) {
+
+			for (Class<?> aClass : javaRealClasses) {
+
+				if (aClass.getCanonicalName().equals(
+						aDataType.getInstanceTypeName())) {
+					result = PrimitiveTypeKind.REAL;
+					break;
+				}
+				// no else.
+			}
+		}
+
+		/* Else check if the adapted class is a string. */
+		if (result == null) {
+
+			for (Class<?> aClass : javaStringClasses) {
+
+				if (aClass.getCanonicalName().equals(
+						aDataType.getInstanceTypeName())) {
+					result = PrimitiveTypeKind.STRING;
+					break;
+				}
+				// no else.
+			}
+		}
+
+		/* Else the EDataType is not a primitive type. */
+		if (result == null) {
+			result = PrimitiveTypeKind.UNKNOWN;
+		}
+		// no else.
+
+		return result;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -104,52 +215,11 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 	 */
 	@Override
 	public PrimitiveTypeKind getKind() {
-	
+
 		PrimitiveTypeKind result;
-	
-		switch (this.eDataType.getClassifierID()) {
-	
-		case EcorePackage.EBYTE:
-		case EcorePackage.EBYTE_OBJECT:
-		case EcorePackage.ESHORT:
-		case EcorePackage.ESHORT_OBJECT:
-		case EcorePackage.EINT:
-		case EcorePackage.EINTEGER_OBJECT:
-		case EcorePackage.ELONG:
-		case EcorePackage.ELONG_OBJECT:
-		case EcorePackage.EBIG_INTEGER:
-		case EcorePackage.EBIG_DECIMAL: {
-			result = PrimitiveTypeKind.INTEGER;
-			break;
-		}
-	
-		case EcorePackage.EFLOAT:
-		case EcorePackage.EFLOAT_OBJECT:
-		case EcorePackage.EDOUBLE:
-		case EcorePackage.EDOUBLE_OBJECT: {
-			result = PrimitiveTypeKind.REAL;
-			break;
-		}
-	
-		case EcorePackage.EBOOLEAN:
-		case EcorePackage.EBOOLEAN_OBJECT: {
-			result = PrimitiveTypeKind.BOOLEAN;
-			break;
-		}
-	
-		case EcorePackage.ECHAR:
-		case EcorePackage.ECHARACTER_OBJECT:
-		case EcorePackage.ESTRING: {
-			result = PrimitiveTypeKind.STRING;
-			break;
-		}
-	
-		default: {
-			result = PrimitiveTypeKind.UNKNOWN;
-		}
-		}
-		// end switch.
-	
+
+		result = getKind(this.eDataType);
+
 		return result;
 	}
 
@@ -161,7 +231,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 	 */
 	@Override
 	public String getName() {
-		return this.eDataType.getName();
+		return this.getKind().getName();
 	}
 
 	/*
@@ -173,7 +243,6 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 	 */
 	@Override
 	public Namespace getNamespace() {
-		return EcoreAdapterFactory.INSTANCE.createNamespace(this.eDataType
-				.getEPackage());
+		return null;
 	}
 }

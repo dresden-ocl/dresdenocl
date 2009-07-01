@@ -32,11 +32,10 @@
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 
@@ -155,15 +154,21 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 	 */
 	@Override
 	public List<Parameter> getOwnedParameter() {
-		
+
 		List<Parameter> result;
-		
+
 		result = new ArrayList<Parameter>();
 
 		for (EParameter parameter : this.eOperation.getEParameters()) {
-			result.add(EcoreAdapterFactory.INSTANCE
-					.createParameter(parameter));
+			result.add(EcoreAdapterFactory.INSTANCE.createParameter(parameter));
 		}
+
+		/* Eventually add the return parameter as well. */
+		if (this.getType() != null) {
+			result.add(EcoreAdapterFactory.INSTANCE
+					.createReturnParameter(this.eOperation));
+		}
+		// no else.
 
 		return result;
 	}

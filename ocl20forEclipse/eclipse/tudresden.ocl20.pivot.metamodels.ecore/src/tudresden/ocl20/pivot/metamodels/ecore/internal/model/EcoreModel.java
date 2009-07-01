@@ -109,12 +109,12 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
 	 */
 	public Namespace getRootNamespace() throws ModelAccessException {
-
+	
 		if (this.rootNamespace == null) {
 			this.rootNamespace = this.createRootNamespace();
 		}
 		// no else.
-
+	
 		return this.rootNamespace;
 	}
 
@@ -126,19 +126,24 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
-
+	public boolean equals(Object anObject) {
+	
 		boolean result;
-
-		if (obj instanceof EcoreModel) {
+	
+		if (anObject instanceof EcoreModel) {
+			
+			EcoreModel anEcoreModel;
+	
+			anEcoreModel = (EcoreModel) anObject;
+	
 			result = this.resource.getURI().equals(
-					((EcoreModel) obj).resource.getURI());
+					anEcoreModel.resource.getURI());
 		}
-
+	
 		else {
 			result = false;
 		}
-
+	
 		return result;
 	}
 
@@ -181,13 +186,13 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 *             If an error occurs while loading the adapted Ecore model.
 	 */
 	private Namespace createRootNamespace() throws ModelAccessException {
-
+	
 		EPackage rootPackage;
 		List<EObject> rootPackages;
-
+	
 		/* Eventually try to load the resource. */
 		if (!resource.isLoaded()) {
-
+	
 			/* Eventually inform the logger. */
 			if (LOGGER.isInfoEnabled()) {
 				LOGGER.info(NLS.bind(
@@ -195,42 +200,42 @@ public class EcoreModel extends AbstractModel implements IModel {
 						this.resource.getURI()));
 			}
 			// no else.
-
+	
 			try {
 				this.resource.load(null);
 			}
-
+	
 			catch (IOException e) {
 				String msg;
-
+	
 				msg = "Error while loading resource from " + resource.getURI();
-
+	
 				throw new ModelAccessException(msg, e); //$NON-NLS-1$
 			}
 		}
 		// no else.
-
+	
 		/* Get the root packages. */
 		rootPackages = this.resource.getContents();
-
+	
 		/* Create a new package to serve as the root package. */
 		rootPackage = EcoreFactory.eINSTANCE.createEPackage();
 		rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
-
+	
 		/* Add all sub-packages and sub-types to the new root package. */
 		for (EObject eObject : rootPackages) {
-
+	
 			if (eObject instanceof EPackage) {
 				rootPackage.getESubpackages().add((EPackage) eObject);
 			}
-
+	
 			else if (eObject instanceof EClassifier) {
 				rootPackage.getEClassifiers().add((EClassifier) eObject);
 			}
 			// no else.
 		}
 		// end for.
-
+	
 		return EcoreAdapterFactory.INSTANCE.createNamespace(rootPackage);
 	}
 }
