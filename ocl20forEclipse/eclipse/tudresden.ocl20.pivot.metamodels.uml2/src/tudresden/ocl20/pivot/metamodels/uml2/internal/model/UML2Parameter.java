@@ -1,25 +1,21 @@
 /*
-Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
-
-This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
-
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by the 
-Free Software Foundation, either version 3 of the License, or (at your option)
-any later version.
-
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-for more details.
-
-You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+ * This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse. Dresden
+ * OCL2 for Eclipse is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version. Dresden OCL2 for Eclipse is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU Lesser General Public License for more details. You should have
+ * received a copy of the GNU Lesser General Public License along with Dresden
+ * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
 import org.apache.log4j.Logger;
 
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
@@ -42,9 +38,10 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 * Logger for this class
 	 * </p>
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	private static final Logger logger = Logger.getLogger(UML2Parameter.class);
+	private static final Logger LOGGER =
+			UML2MetamodelPlugin.getLogger(UML2Parameter.class);
 
 	/**
 	 * <p>
@@ -61,23 +58,22 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 * </p>
 	 * 
 	 * @param dslParameter
-	 *            the {@link org.eclipse.uml2.uml.Parameter} that is adopted by
-	 *            this class
+	 *          the {@link org.eclipse.uml2.uml.Parameter} that is adopted by this
+	 *          class
 	 * 
 	 * @generated
 	 */
 	public UML2Parameter(org.eclipse.uml2.uml.Parameter dslParameter) {
 
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("UML2Parameter(dslParameter=" + dslParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("UML2Parameter(dslParameter=" + dslParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize adapted parameter
 		this.dslParameter = dslParameter;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("UML2Parameter() - exit"); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("UML2Parameter() - exit"); //$NON-NLS-1$
 		}
 	}
 
@@ -88,14 +84,36 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 */
 	@Override
 	public String getName() {
+
 		return this.dslParameter.getName();
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Operation getOperation() {
+
+		return UML2AdapterFactory.INSTANCE.createOperation(this.dslParameter
+				.getOperation());
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Type getType() {
+
+		return UML2AdapterFactory.INSTANCE.createType(this.dslParameter.getType());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind()
-	 * 
 	 * @generated NOT
 	 */
 	public ParameterDirectionKind getKind() {
@@ -123,34 +141,13 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public Operation getOperation() {
-		return UML2AdapterFactory.INSTANCE.createOperation(this.dslParameter
-				.getOperation());
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public Type getType() {
-		return UML2AdapterFactory.INSTANCE.createType(this.dslParameter
-				.getType());
-	}
-
-	/**
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple()
 	 * 
 	 * @generated NOT
 	 */
 	@Override
 	public boolean isMultiple() {
+
 		return this.dslParameter.isMultivalued();
 	}
 
@@ -161,6 +158,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 */
 	@Override
 	public boolean isOrdered() {
+
 		return this.dslParameter.isOrdered();
 	}
 
@@ -171,7 +169,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	 */
 	@Override
 	public boolean isUnique() {
+
 		return this.dslParameter.isUnique();
 	}
-
 }

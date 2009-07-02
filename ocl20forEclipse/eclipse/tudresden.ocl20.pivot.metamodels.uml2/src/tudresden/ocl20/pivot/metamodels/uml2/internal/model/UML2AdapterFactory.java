@@ -1,20 +1,15 @@
 /*
-Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
-
-This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
-
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by the 
-Free Software Foundation, either version 3 of the License, or (at your option)
-any later version.
-
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-for more details.
-
-You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+ * This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse. Dresden
+ * OCL2 for Eclipse is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version. Dresden OCL2 for Eclipse is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU Lesser General Public License for more details. You should have
+ * received a copy of the GNU Lesser General Public License along with Dresden
+ * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
@@ -22,11 +17,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Interface;
 
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -50,10 +44,10 @@ public class UML2AdapterFactory {
 	/**
 	 * logger for this class
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	private static final Logger logger = Logger
-			.getLogger(UML2AdapterFactory.class);
+	private static final Logger LOGGER =
+			UML2MetamodelPlugin.getLogger(UML2AdapterFactory.class);
 
 	/**
 	 * <p>
@@ -81,6 +75,7 @@ public class UML2AdapterFactory {
 	 * @generated
 	 */
 	private UML2AdapterFactory() {
+
 		adapters = new HashMap<org.eclipse.uml2.uml.NamedElement, NamedElement>();
 	}
 
@@ -95,9 +90,8 @@ public class UML2AdapterFactory {
 	public Namespace createNamespace(org.eclipse.uml2.uml.Package dslPackage) {
 
 		/* Eventually log the entry of this method. */
-		if (logger.isDebugEnabled()) {
-			logger.debug("createNamespace(dslPackage=" + dslPackage
-					+ ") - enter");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createNamespace(dslPackage=" + dslPackage + ") - enter");
 		}
 		// no else.
 
@@ -116,18 +110,9 @@ public class UML2AdapterFactory {
 			/* Check if the result is null. */
 			if (result == null) {
 
-				/* Eventually log this information. */
-				if (logger.isInfoEnabled()) {
-					logger
-							.info(NLS
-									.bind(
-											UML2ModelMessages.UML2AdapterFactory_CreatingPivotModelAdapter,
-											"org.eclipse.uml2.uml.Package",
-											dslPackage.getName()));
-				}
-				// no else.
-
 				result = new UML2Package(dslPackage);
+
+				/* Cache the create name space. */
 				this.adapters.put(dslPackage, result);
 			}
 			// no else.
@@ -135,8 +120,8 @@ public class UML2AdapterFactory {
 		// end else.
 
 		/* Eventually log the exit of this method. */
-		if (logger.isDebugEnabled()) {
-			logger.debug("createNamespace() - exit - return value=" + result);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createNamespace() - exit - return value=" + result);
 		}
 		// no else.
 
@@ -145,109 +130,11 @@ public class UML2AdapterFactory {
 
 	/**
 	 * <p>
-	 * Creates a {@link Type} adapter for a {@link org.eclipse.uml2.uml.Class}.
-	 * </p>
-	 * 
-	 * @generated
-	 */
-	public Type createType(org.eclipse.uml2.uml.Class dslClass) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createType(dslClass=" + dslClass + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		if (dslClass == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createType() - exit: dslClass is null");
-			return null;
-		}
-
-		Type type = (Type) adapters.get(dslClass);
-
-		if (type == null) {
-			type = new UML2Class(dslClass);
-			adapters.put(dslClass, type);
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
-		}
-
-		return type;
-	}
-
-	/**
-	 * <p>
-	 * Creates a {@link Type} adapter for a
-	 * {@link org.eclipse.uml2.uml.Interface}.
-	 * </p>
-	 * 
-	 * @generated
-	 */
-	public Type createType(org.eclipse.uml2.uml.Interface dslInterface) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createType(dslInterface=" + dslInterface
-					+ ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		if (dslInterface == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createType() - exit: dslInterface is null");
-			return null;
-		}
-
-		Type type = (Type) adapters.get(dslInterface);
-
-		if (type == null) {
-			type = new UML2Interface(dslInterface);
-			adapters.put(dslInterface, type);
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
-		}
-
-		return type;
-	}
-
-	/**
-	 * <p>
-	 * Creates a {@link Type} adapter for a {@link DataType}.
-	 * </p>
-	 * 
-	 * @generated
-	 */
-	public Type createType(DataType dataType) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createType(dataType=" + dataType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		if (dataType == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createType() - exit: dataType is null");
-			return null;
-		}
-
-		Type type = (Type) adapters.get(dataType);
-
-		if (type == null) {
-			type = new UML2DataType(dataType);
-			adapters.put(dataType, type);
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
-		}
-
-		return type;
-	}
-
-	/**
-	 * <p>
 	 * Creates a specific Type.
 	 * </p>
 	 * 
 	 * @param dslType
-	 *            The type which shall be created.
+	 *          The type which shall be created.
 	 * 
 	 * @return A specific created Type
 	 * 
@@ -268,15 +155,12 @@ public class UML2AdapterFactory {
 		}
 
 		else if (dslType instanceof org.eclipse.uml2.uml.PrimitiveType) {
-			result = createPrimitiveType((org.eclipse.uml2.uml.PrimitiveType) dslType);
+			result =
+					createPrimitiveType((org.eclipse.uml2.uml.PrimitiveType) dslType);
 		}
 
 		else if (dslType instanceof org.eclipse.uml2.uml.Enumeration) {
 			result = createEnumeration((org.eclipse.uml2.uml.Enumeration) dslType);
-		}
-
-		else if (dslType instanceof DataType) {
-			result = createType((DataType) dslType);
 		}
 
 		else if (dslType instanceof Interface) {
@@ -301,15 +185,15 @@ public class UML2AdapterFactory {
 	 */
 	public Enumeration createEnumeration(
 			org.eclipse.uml2.uml.Enumeration dslEnumeration) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createEnumeration(dslEnumeration=" + dslEnumeration
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createEnumeration(dslEnumeration=" + dslEnumeration
 					+ ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (dslEnumeration == null) {
-			if (logger.isDebugEnabled())
-				logger
-						.debug("createEnumeration() - exit: dslEnumeration is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createEnumeration() - exit: dslEnumeration is null");
 			return null;
 		}
 
@@ -320,9 +204,8 @@ public class UML2AdapterFactory {
 			adapters.put(dslEnumeration, enumeration);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("createEnumeration() - exit - return value=" + enumeration); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createEnumeration() - exit - return value=" + enumeration); //$NON-NLS-1$
 		}
 
 		return enumeration;
@@ -338,70 +221,33 @@ public class UML2AdapterFactory {
 	 */
 	public EnumerationLiteral createEnumerationLiteral(
 			org.eclipse.uml2.uml.EnumerationLiteral dslEnumerationLiteral) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createEnumerationLiteral(dslEnumerationLiteral="
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createEnumerationLiteral(dslEnumerationLiteral="
 					+ dslEnumerationLiteral + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (dslEnumerationLiteral == null) {
-			if (logger.isDebugEnabled())
-				logger
+			if (LOGGER.isDebugEnabled())
+				LOGGER
 						.debug("createEnumerationLiteral() - exit: dslEnumerationLiteral is null");
 			return null;
 		}
 
-		EnumerationLiteral literal = (EnumerationLiteral) adapters
-				.get(dslEnumerationLiteral);
+		EnumerationLiteral literal =
+				(EnumerationLiteral) adapters.get(dslEnumerationLiteral);
 
 		if (literal == null) {
 			literal = new UML2EnumerationLiteral(dslEnumerationLiteral);
 			adapters.put(dslEnumerationLiteral, literal);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
 					.debug("createEnumerationLiteral() - exit - return value=" + literal); //$NON-NLS-1$
 		}
 
 		return literal;
-	}
-
-	/**
-	 * <p>
-	 * Creates a {@link PrimitiveType} adapter for a
-	 * {@link org.eclipse.uml2.uml.PrimitiveType}.
-	 * </p>
-	 * 
-	 * @generated
-	 */
-	public PrimitiveType createPrimitiveType(
-			org.eclipse.uml2.uml.PrimitiveType dslPrimitiveType) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createPrimitiveType(dslPrimitiveType="
-					+ dslPrimitiveType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		if (dslPrimitiveType == null) {
-			if (logger.isDebugEnabled())
-				logger
-						.debug("createPrimitiveType() - exit: dslPrimitiveType is null");
-			return null;
-		}
-
-		PrimitiveType primitiveType = (PrimitiveType) adapters
-				.get(dslPrimitiveType);
-
-		if (primitiveType == null) {
-			primitiveType = new UML2PrimitiveType(dslPrimitiveType);
-			adapters.put(dslPrimitiveType, primitiveType);
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("createPrimitiveType() - exit - return value=" + primitiveType); //$NON-NLS-1$
-		}
-
-		return primitiveType;
 	}
 
 	/**
@@ -413,14 +259,14 @@ public class UML2AdapterFactory {
 	 * @generated
 	 */
 	public Property createProperty(org.eclipse.uml2.uml.Property dslProperty) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createProperty(dslProperty=" + dslProperty
-					+ ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createProperty(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (dslProperty == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createProperty() - exit: dslProperty is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createProperty() - exit: dslProperty is null");
 			return null;
 		}
 
@@ -431,8 +277,8 @@ public class UML2AdapterFactory {
 			adapters.put(dslProperty, property);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
 		}
 
 		return property;
@@ -447,14 +293,14 @@ public class UML2AdapterFactory {
 	 * @generated
 	 */
 	public Property createProperty(org.eclipse.uml2.uml.Association dslProperty) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createProperty(dslProperty=" + dslProperty
-					+ ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createProperty(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (dslProperty == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createProperty() - exit: dslProperty is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createProperty() - exit: dslProperty is null");
 			return null;
 		}
 
@@ -465,8 +311,8 @@ public class UML2AdapterFactory {
 			adapters.put(dslProperty, property);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createProperty() - exit - return value=" + property); //$NON-NLS-1$
 		}
 
 		return property;
@@ -481,14 +327,15 @@ public class UML2AdapterFactory {
 	 * @generated
 	 */
 	public Operation createOperation(org.eclipse.uml2.uml.Operation dslOperation) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOperation(dslOperation=" + dslOperation
-					+ ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("createOperation(dslOperation=" + dslOperation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (dslOperation == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createOperation() - exit: dslOperation is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createOperation() - exit: dslOperation is null");
 			return null;
 		}
 
@@ -499,9 +346,8 @@ public class UML2AdapterFactory {
 			adapters.put(dslOperation, operation);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("createOperation() - exit - return value=" + operation); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOperation() - exit - return value=" + operation); //$NON-NLS-1$
 		}
 
 		return operation;
@@ -516,14 +362,15 @@ public class UML2AdapterFactory {
 	 * @generated
 	 */
 	public Parameter createParameter(org.eclipse.uml2.uml.Parameter dslParameter) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("createParameter(dslParameter=" + dslParameter
-					+ ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("createParameter(dslParameter=" + dslParameter + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (dslParameter == null) {
-			if (logger.isDebugEnabled())
-				logger.debug("createParameter() - exit: dslParameter is null");
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createParameter() - exit: dslParameter is null");
 			return null;
 		}
 
@@ -534,11 +381,115 @@ public class UML2AdapterFactory {
 			adapters.put(dslParameter, parameter);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("createParameter() - exit - return value=" + parameter); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createParameter() - exit - return value=" + parameter); //$NON-NLS-1$
 		}
 
 		return parameter;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link PrimitiveType} adapter for a
+	 * {@link org.eclipse.uml2.uml.PrimitiveType}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private PrimitiveType createPrimitiveType(
+			org.eclipse.uml2.uml.PrimitiveType dslPrimitiveType) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createPrimitiveType(dslPrimitiveType=" + dslPrimitiveType
+					+ ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		if (dslPrimitiveType == null) {
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createPrimitiveType() - exit: dslPrimitiveType is null");
+			return null;
+		}
+
+		PrimitiveType primitiveType =
+				(PrimitiveType) adapters.get(dslPrimitiveType);
+
+		if (primitiveType == null) {
+			primitiveType = new UML2PrimitiveType(dslPrimitiveType);
+			adapters.put(dslPrimitiveType, primitiveType);
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
+					.debug("createPrimitiveType() - exit - return value=" + primitiveType); //$NON-NLS-1$
+		}
+
+		return primitiveType;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link Type} adapter for a {@link org.eclipse.uml2.uml.Class}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private Type createType(org.eclipse.uml2.uml.Class dslClass) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createType(dslClass=" + dslClass + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		if (dslClass == null) {
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createType() - exit: dslClass is null");
+			return null;
+		}
+
+		Type type = (Type) adapters.get(dslClass);
+
+		if (type == null) {
+			type = new UML2Class(dslClass);
+			adapters.put(dslClass, type);
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
+		}
+
+		return type;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link Type} adapter for a {@link org.eclipse.uml2.uml.Interface}
+	 * .
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private Type createType(org.eclipse.uml2.uml.Interface dslInterface) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createType(dslInterface=" + dslInterface + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		if (dslInterface == null) {
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createType() - exit: dslInterface is null");
+			return null;
+		}
+
+		Type type = (Type) adapters.get(dslInterface);
+
+		if (type == null) {
+			type = new UML2Interface(dslInterface);
+			adapters.put(dslInterface, type);
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
+		}
+
+		return type;
 	}
 }

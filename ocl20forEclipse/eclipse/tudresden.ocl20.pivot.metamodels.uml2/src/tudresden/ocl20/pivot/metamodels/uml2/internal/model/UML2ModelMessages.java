@@ -36,6 +36,8 @@ public class UML2ModelMessages extends NLS {
 	public static String UML2Model_LoadingUML2Model;
 
 	public static String UML2_GetOwningType;
+	
+	public static String UML2_UnknownPrimitiveTypeKind;
 
 	static {
 		/* Initialize resource bundle. */

@@ -1,20 +1,15 @@
 /*
-Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
-
-This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
-
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by the 
-Free Software Foundation, either version 3 of the License, or (at your option)
-any later version.
-
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-for more details.
-
-You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+ * This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse. Dresden
+ * OCL2 for Eclipse is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version. Dresden OCL2 for Eclipse is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU Lesser General Public License for more details. You should have
+ * received a copy of the GNU Lesser General Public License along with Dresden
+ * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
@@ -24,6 +19,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.uml2.uml.Classifier;
 
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
@@ -46,9 +42,10 @@ public class UML2Interface extends AbstractType implements Type {
 	 * Logger for this class
 	 * </p>
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	private static final Logger logger = Logger.getLogger(UML2Interface.class);
+	private static final Logger LOGGER =
+			UML2MetamodelPlugin.getLogger(UML2Interface.class);
 
 	/**
 	 * <p>
@@ -65,23 +62,22 @@ public class UML2Interface extends AbstractType implements Type {
 	 * </p>
 	 * 
 	 * @param dslInterface
-	 *            the {@link org.eclipse.uml2.uml.Interface} that is adopted by
-	 *            this class
+	 *          the {@link org.eclipse.uml2.uml.Interface} that is adopted by this
+	 *          class
 	 * 
 	 * @generated
 	 */
 	public UML2Interface(org.eclipse.uml2.uml.Interface dslInterface) {
 
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("UML2Interface(dslInterface=" + dslInterface + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("UML2Interface(dslInterface=" + dslInterface + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslInterface = dslInterface;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("UML2Interface() - exit"); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("UML2Interface() - exit"); //$NON-NLS-1$
 		}
 	}
 
@@ -92,6 +88,7 @@ public class UML2Interface extends AbstractType implements Type {
 	 */
 	@Override
 	public String getName() {
+
 		return this.dslInterface.getName();
 	}
 
@@ -102,6 +99,7 @@ public class UML2Interface extends AbstractType implements Type {
 	 */
 	@Override
 	public Namespace getNamespace() {
+
 		return UML2AdapterFactory.INSTANCE.createNamespace(dslInterface
 				.getPackage());
 	}

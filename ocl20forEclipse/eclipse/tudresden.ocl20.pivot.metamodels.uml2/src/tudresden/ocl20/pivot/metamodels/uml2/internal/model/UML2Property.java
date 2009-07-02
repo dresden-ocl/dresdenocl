@@ -6,6 +6,7 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.TypedElement;
 
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
@@ -26,9 +27,10 @@ public class UML2Property extends AbstractProperty implements Property {
 	 * Logger for this class
 	 * </p>
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	private static final Logger logger = Logger.getLogger(UML2Property.class);
+	private static final Logger LOGGER =
+			UML2MetamodelPlugin.getLogger(UML2Property.class);
 
 	/**
 	 * <p>
@@ -45,23 +47,22 @@ public class UML2Property extends AbstractProperty implements Property {
 	 * </p>
 	 * 
 	 * @param dslProperty
-	 *            the {@link org.eclipse.uml2.uml.Property} that is adopted by
-	 *            this class
+	 *          the {@link org.eclipse.uml2.uml.Property} that is adopted by this
+	 *          class
 	 * 
 	 * @generated
 	 */
 	public UML2Property(org.eclipse.uml2.uml.Property dslProperty) {
 
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("UML2Property(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("UML2Property(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslProperty = dslProperty;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("UML2Property() - exit"); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("UML2Property() - exit"); //$NON-NLS-1$
 		}
 	}
 
@@ -72,6 +73,7 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public String getName() {
+
 		return this.dslProperty.getName();
 	}
 
@@ -94,8 +96,7 @@ public class UML2Property extends AbstractProperty implements Property {
 
 			aTypedElement = (TypedElement) owner;
 
-			result = UML2AdapterFactory.INSTANCE.createType(aTypedElement
-					.getType());
+			result = UML2AdapterFactory.INSTANCE.createType(aTypedElement.getType());
 		}
 
 		else if (owner instanceof org.eclipse.uml2.uml.Class) {
@@ -119,30 +120,28 @@ public class UML2Property extends AbstractProperty implements Property {
 
 			anAssociation = (org.eclipse.uml2.uml.Association) owner;
 
-			EList<org.eclipse.uml2.uml.Property> associationEnds = anAssociation
-					.getOwnedEnds();
+			EList<org.eclipse.uml2.uml.Property> associationEnds =
+					anAssociation.getOwnedEnds();
 
 			/* Does only work for binary associations! */
 			for (org.eclipse.uml2.uml.Property anEnd : associationEnds) {
 
 				/*
-				 * Return the type of the end which does not represent this
-				 * property.
+				 * Return the type of the end which does not represent this property.
 				 */
 				if (!anEnd.equals(this.dslProperty)) {
 
-					result = UML2AdapterFactory.INSTANCE.createType(anEnd
-							.getType());
+					result = UML2AdapterFactory.INSTANCE.createType(anEnd.getType());
 					break;
 				}
 				// no else.
-
 			}
+			// end for.
 		}
 
 		else {
-			if (logger.isInfoEnabled()) {
-				logger.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
+			if (LOGGER.isInfoEnabled()) {
+				LOGGER.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
 						.toString()));
 			}
 			// no else.
@@ -158,8 +157,8 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public Type getType() {
-		return UML2AdapterFactory.INSTANCE.createType(this.dslProperty
-				.getType());
+
+		return UML2AdapterFactory.INSTANCE.createType(this.dslProperty.getType());
 	}
 
 	/**
@@ -169,6 +168,7 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isMultiple() {
+
 		return this.dslProperty.isMultivalued();
 	}
 
@@ -179,6 +179,7 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isOrdered() {
+
 		return this.dslProperty.isOrdered();
 	}
 
@@ -189,6 +190,7 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isStatic() {
+
 		return this.dslProperty.isStatic();
 	}
 
@@ -199,6 +201,7 @@ public class UML2Property extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isUnique() {
+
 		return this.dslProperty.isUnique();
 	}
 }

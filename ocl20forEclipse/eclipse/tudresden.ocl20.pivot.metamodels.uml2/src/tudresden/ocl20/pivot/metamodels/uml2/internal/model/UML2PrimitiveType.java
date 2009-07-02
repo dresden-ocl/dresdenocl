@@ -1,28 +1,29 @@
 /*
-Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
-
-This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
-
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by the 
-Free Software Foundation, either version 3 of the License, or (at your option)
-any later version.
-
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-for more details.
-
-You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+ * This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse. Dresden
+ * OCL2 for Eclipse is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version. Dresden OCL2 for Eclipse is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU Lesser General Public License for more details. You should have
+ * received a copy of the GNU Lesser General Public License along with Dresden
+ * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
-import org.apache.log4j.Logger;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
+import org.apache.log4j.Logger;
+import org.eclipse.osgi.util.NLS;
+
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType;
 
 /**
@@ -42,10 +43,52 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	 * Logger for this class
 	 * </p>
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	private static final Logger logger = Logger
-			.getLogger(UML2PrimitiveType.class);
+	private static final Logger LOGGER =
+			UML2MetamodelPlugin.getLogger(UML2PrimitiveType.class);
+
+	/**
+	 * An array of all Names of {@link Type}s representing the
+	 * {@link PrimitiveTypeKind#BOOLEAN}.
+	 */
+	private static String booleanKindNames[] =
+			new String[] { "Boolean", boolean.class.getCanonicalName(),
+					Boolean.class.getCanonicalName(), "EBoolean", "EBooleanObject" };
+
+	/**
+	 * An array of all Names of {@link Type}s representing the
+	 * {@link PrimitiveTypeKind#INTEGER}.
+	 */
+	private static String integerKindNames[] =
+			new String[] { "Integer", "UnlimitedNatural",
+					byte.class.getCanonicalName(), Byte.class.getCanonicalName(),
+					short.class.getCanonicalName(), Short.class.getCanonicalName(),
+					int.class.getCanonicalName(), Integer.class.getCanonicalName(),
+					long.class.getCanonicalName(), Long.class.getCanonicalName(),
+					BigInteger.class.getCanonicalName(),
+					BigDecimal.class.getCanonicalName(), "EByte", "EByteObject",
+					"EShort", "EShortObject", "EInt", "EIntegerObject", "ELong",
+					"ELongObject", "EBigInteger", "EBigDecimal" };
+
+	/**
+	 * An array of all Names of {@link Type}s representing the
+	 * {@link PrimitiveTypeKind#REAL}.
+	 */
+	private static String realKindNames[] =
+			new String[] { float.class.getCanonicalName(),
+					Float.class.getCanonicalName(), double.class.getCanonicalName(),
+					Double.class.getCanonicalName(), "EFloat", "EFloatObject", "EDouble",
+					"EDoubleObject" };
+
+	/**
+	 * An array of all Names of {@link Type}s representing the
+	 * {@link PrimitiveTypeKind#STRING}.
+	 */
+	private static String stringKindNames[] =
+			new String[] { "String", char.class.getCanonicalName(),
+					Character.class.getCanonicalName(), String.class.getCanonicalName(),
+					"EChar", "ECharacter", "EString" };
 
 	/**
 	 * <p>
@@ -62,23 +105,23 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	 * </p>
 	 * 
 	 * @param dslPrimitiveType
-	 *            the {@link org.eclipse.uml2.uml.PrimitiveType} that is adopted
-	 *            by this class
+	 *          the {@link org.eclipse.uml2.uml.PrimitiveType} that is adopted by
+	 *          this class
 	 * 
 	 * @generated
 	 */
 	public UML2PrimitiveType(org.eclipse.uml2.uml.PrimitiveType dslPrimitiveType) {
 
-		if (logger.isDebugEnabled()) {
-			logger
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER
 					.debug("UML2PrimitiveType(dslPrimitiveType=" + dslPrimitiveType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslPrimitiveType = dslPrimitiveType;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("org.eclipse.uml2.uml.PrimitiveType() - exit"); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("org.eclipse.uml2.uml.PrimitiveType() - exit"); //$NON-NLS-1$
 		}
 	}
 
@@ -89,7 +132,8 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	 */
 	@Override
 	public String getName() {
-		return this.dslPrimitiveType.getName();
+
+		return this.getKind().getName();
 	}
 
 	/**
@@ -99,8 +143,8 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	 */
 	@Override
 	public Namespace getNamespace() {
-		return UML2AdapterFactory.INSTANCE
-				.createNamespace(this.dslPrimitiveType.getPackage());
+
+		return null;
 	}
 
 	/**
@@ -117,49 +161,72 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 
 		PrimitiveTypeKind result;
 
-		String integerNames[];
-		String realNames[];
-		String primitiveTypeName;
-
-		integerNames = new String[] { "byte", "int", "integer", "long", "short" };
-		realNames = new String[] { "double", "float", "real" };
-		primitiveTypeName = dslPrimitiveType.getName();
-
 		result = null;
 
-		if (primitiveTypeName.equalsIgnoreCase("boolean")) {
-			result = PrimitiveTypeKind.BOOLEAN;
-		}
+		/* Check if the adapted type is a boolean. */
+		for (String aName : booleanKindNames) {
 
-		else if (primitiveTypeName.equalsIgnoreCase("string")) {
-			result = PrimitiveTypeKind.STRING;
-		}
-
-		else {
-
-			for (String integerName : integerNames) {
-
-				if (primitiveTypeName.equalsIgnoreCase(integerName)) {
-					result = PrimitiveTypeKind.INTEGER;
-				}
-				// no else.
+			if (aName.equals(dslPrimitiveType.getName())) {
+				result = PrimitiveTypeKind.BOOLEAN;
+				break;
 			}
+			// no else.
 		}
 
+		/* Else check if the adapted type is an integer. */
 		if (result == null) {
 
-			for (String realName : realNames) {
+			for (String aName : integerKindNames) {
 
-				if (primitiveTypeName.equalsIgnoreCase(realName)) {
-					result = PrimitiveTypeKind.REAL;
+				if (aName.equals(dslPrimitiveType.getName())) {
+					result = PrimitiveTypeKind.INTEGER;
+					break;
 				}
 				// no else.
 			}
 		}
-		// no else.
 
+		/* Else check if the adapted type is a real. */
+		if (result == null) {
+
+			for (String aName : realKindNames) {
+
+				if (aName.equals(dslPrimitiveType.getName())) {
+					result = PrimitiveTypeKind.REAL;
+					break;
+				}
+				// no else.
+			}
+		}
+
+		/* Else check if the adapted type is a string. */
+		if (result == null) {
+
+			for (String aName : stringKindNames) {
+
+				if (aName.equals(dslPrimitiveType.getName())) {
+					result = PrimitiveTypeKind.STRING;
+					break;
+				}
+				// no else.
+			}
+		}
+
+		/* Else the kind is unknown. */
 		if (result == null) {
 			result = PrimitiveTypeKind.UNKNOWN;
+
+			/* Eventually log a warning. */
+			if (LOGGER.isInfoEnabled()) {
+				String msg;
+
+				msg =
+						NLS.bind(UML2ModelMessages.UML2_UnknownPrimitiveTypeKind,
+								this.dslPrimitiveType.getName());
+
+				LOGGER.warn(msg);
+			}
+			// no else.
 		}
 		// no else.
 

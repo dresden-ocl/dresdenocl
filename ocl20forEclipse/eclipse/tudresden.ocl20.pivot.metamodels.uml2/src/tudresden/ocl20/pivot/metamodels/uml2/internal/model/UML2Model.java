@@ -1,20 +1,15 @@
 /*
-Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
-
-This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
-
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by the 
-Free Software Foundation, either version 3 of the License, or (at your option)
-any later version.
-
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-for more details.
-
-You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+ * This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse. Dresden
+ * OCL2 for Eclipse is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version. Dresden OCL2 for Eclipse is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU Lesser General Public License for more details. You should have
+ * received a copy of the GNU Lesser General Public License along with Dresden
+ * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
@@ -34,6 +29,7 @@ import org.eclipse.uml2.uml.UMLFactory;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModel;
@@ -52,8 +48,14 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  */
 public class UML2Model extends AbstractModel implements IModel {
 
-	/** A {@link Logger} for this class. */
-	private static final Logger logger = Logger.getLogger(UML2Model.class);
+	/**
+	 * <p>
+	 * A {@link Logger} for this class.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private static final Logger LOGGER = UML2MetamodelPlugin.getLogger(UML2Model.class);
 
 	/** The resource containing the corresponding UML2 model. */
 	private Resource resource;
@@ -67,14 +69,14 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * {@link org.eclipse.uml2.uml.Package}.
 	 * 
 	 * @param resource
-	 *            The {@link Resource} containing the model.
+	 *          The {@link Resource} containing the model.
 	 * 
 	 * @generated NOT
 	 */
 	public UML2Model(Resource resource) {
 
-		super(resource.getURI().toString(), ModelBusPlugin
-				.getMetamodelRegistry().getMetamodel(UML2MetamodelPlugin.ID));
+		super(resource.getURI().toString(), ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodel(UML2MetamodelPlugin.ID));
 
 		/* Initialize. */
 		this.resource = resource;
@@ -82,15 +84,14 @@ public class UML2Model extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
-	 * This method lazily creates a {@link Namespace} adapter for the virtual
-	 * root package in the associated UML2 model. Thus, any possible resource
-	 * loading errors will not happen until this method is called for the first
-	 * time.
+	 * This method lazily creates a {@link Namespace} adapter for the virtual root
+	 * package in the associated UML2 model. Thus, any possible resource loading
+	 * errors will not happen until this method is called for the first time.
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 *             if an error occurs when creating the adapter for the top
-	 *             namespace
+	 *           if an error occurs when creating the adapter for the top
+	 *           namespace
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
 	 * 
@@ -121,8 +122,8 @@ public class UML2Model extends AbstractModel implements IModel {
 
 		/* Check if the given Object is a UML2Model. */
 		if (anObject instanceof UML2Model) {
-			result = resource.getURI().equals(
-					((UML2Model) anObject).resource.getURI());
+			result =
+					resource.getURI().equals(((UML2Model) anObject).resource.getURI());
 		}
 
 		else {
@@ -143,6 +144,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	 */
 	@Override
 	public int hashCode() {
+
 		return this.resource.getURI().hashCode();
 	}
 
@@ -157,20 +159,20 @@ public class UML2Model extends AbstractModel implements IModel {
 	 */
 	@Override
 	public String toString() {
+
 		return this.resource.getURI().toString();
 	}
 
 	/**
 	 * <p>
-	 * A helper method which adds all {@link Property}s of a given {@link List}
-	 * to a given {@link Property} as fields.
+	 * A helper method which adds all {@link Property}s of a given {@link List} to
+	 * a given {@link Property} as fields.
 	 * </p>
 	 * 
 	 * @param anOwner
-	 *            The {@link Property} which shall know all given
-	 *            {@link Property}s.
+	 *          The {@link Property} which shall know all given {@link Property}s.
 	 * @param allProperties
-	 *            The {@link List} of {@link Property}s which shall be added.
+	 *          The {@link List} of {@link Property}s which shall be added.
 	 */
 	private void addAllOtherAssciationEnds(Property anOwner,
 			List<Property> allProperties) {
@@ -183,16 +185,14 @@ public class UML2Model extends AbstractModel implements IModel {
 				tudresden.ocl20.pivot.pivotmodel.Property property;
 
 				/* Create or get the owner's Type. */
-				ownerType = UML2AdapterFactory.INSTANCE.createType(anOwner
-						.getType());
+				ownerType = UML2AdapterFactory.INSTANCE.createType(anOwner.getType());
 
 				/* Create or get the property. */
-				property = UML2AdapterFactory.INSTANCE
-						.createProperty(aProperty);
+				property = UML2AdapterFactory.INSTANCE.createProperty(aProperty);
 
 				/*
-				 * Check if the property has already been added (could happen
-				 * for bidirectional associations between the same type).
+				 * Check if the property has already been added (could happen for
+				 * bidirectional associations between the same type).
 				 */
 				if (!ownerType.getOwnedProperty().contains(property)) {
 					/* Else add the property. */
@@ -213,7 +213,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @param properties
-	 *            The {@link List} of {@link Property}s.
+	 *          The {@link List} of {@link Property}s.
 	 */
 	private void addNavigableAssociationEnds(List<Property> properties) {
 
@@ -227,8 +227,8 @@ public class UML2Model extends AbstractModel implements IModel {
 		}
 
 		/*
-		 * If all properties aren't navigable, the association is n-directional.
-		 * All properties know all others.
+		 * If all properties aren't navigable, the association is n-directional. All
+		 * properties know all others.
 		 */
 		if (allArentNavigable) {
 			for (Property aProperty : properties) {
@@ -237,8 +237,8 @@ public class UML2Model extends AbstractModel implements IModel {
 		}
 
 		/*
-		 * Else check for each property if it is navigable and eventually add
-		 * the other properties to their fields.
+		 * Else check for each property if it is navigable and eventually add the
+		 * other properties to their fields.
 		 */
 		else {
 			for (Property aProperty : properties) {
@@ -254,8 +254,8 @@ public class UML2Model extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
-	 * Processes all UML Associations: since they are treated as Types in the
-	 * UML meta model, they have to be mapped to Properties in the Pivot Model.
+	 * Processes all UML Associations: since they are treated as Types in the UML
+	 * meta model, they have to be mapped to Properties in the Pivot Model.
 	 * </p>
 	 * 
 	 * <p>
@@ -263,7 +263,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @param rootPackage
-	 *            The containing {@link Package} (or name space).
+	 *          The containing {@link Package} (or name space).
 	 */
 	private void convertAssociations(Package rootPackage) {
 
@@ -316,31 +316,30 @@ public class UML2Model extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
-	 * Helper method that creates the adapter for the root namespace. If there
-	 * is only one top-level namespace possible, then this method should just
-	 * return the adapter for the top-level namespace, else it should create a
-	 * new "virtual" root namespace.
+	 * Helper method that creates the adapter for the root namespace. If there is
+	 * only one top-level namespace possible, then this method should just return
+	 * the adapter for the top-level namespace, else it should create a new
+	 * "virtual" root namespace.
 	 * </p>
 	 * 
 	 * @return A {@link Namespace} instance
 	 * 
 	 * @throws ModelAccessException
-	 *             If an error occurs while loading the adapted UML2 model.
+	 *           If an error occurs while loading the adapted UML2 model.
 	 * 
 	 * @generated NOT
 	 */
 	private Namespace createRootNamespace() throws ModelAccessException {
 
 		List<EObject> rootPackages;
-		org.eclipse.uml2.uml.Package rootPackage;
+		Package rootPackage;
 
 		/** load the resource. */
 		if (!resource.isLoaded()) {
 
-			if (logger.isInfoEnabled()) {
-				logger.info(NLS.bind(
-						UML2ModelMessages.UML2Model_LoadingUML2Model, resource
-								.getURI()));
+			if (LOGGER.isInfoEnabled()) {
+				LOGGER.info(NLS.bind(UML2ModelMessages.UML2Model_LoadingUML2Model,
+						resource.getURI()));
 			}
 
 			/* Try to load the resource. */
@@ -361,9 +360,9 @@ public class UML2Model extends AbstractModel implements IModel {
 
 		/* Create a new package to serve as the root package. */
 		rootPackage = UMLFactory.eINSTANCE.createPackage();
-		rootPackage.setName("root");
+		rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
 
-		/** Add all sub-packages and subtypes to the new root package. */
+		/** Add all sub-packages and sub-types to the new root package. */
 		for (EObject eObject : rootPackages) {
 
 			if (eObject instanceof Package) {

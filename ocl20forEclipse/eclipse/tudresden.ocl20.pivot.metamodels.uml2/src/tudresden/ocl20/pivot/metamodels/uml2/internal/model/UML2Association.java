@@ -1,20 +1,15 @@
 /*
-Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
-
-This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse.
-
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by the 
-Free Software Foundation, either version 3 of the License, or (at your option)
-any later version.
-
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-for more details.
-
-You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2008-2009 by Michael Thiele & Claas Wilke (claaswilke@gmx.net)
+ * This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse. Dresden
+ * OCL2 for Eclipse is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version. Dresden OCL2 for Eclipse is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU Lesser General Public License for more details. You should have
+ * received a copy of the GNU Lesser General Public License along with Dresden
+ * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
@@ -23,6 +18,7 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.TypedElement;
 
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
@@ -43,10 +39,10 @@ public class UML2Association extends AbstractProperty implements Property {
 	 * The Logger for this class.
 	 * </p>
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	private static final Logger logger = Logger
-			.getLogger(UML2Association.class);
+	private static final Logger LOGGER =
+			UML2MetamodelPlugin.getLogger(UML2Association.class);
 
 	/**
 	 * <p>
@@ -63,23 +59,22 @@ public class UML2Association extends AbstractProperty implements Property {
 	 * </p>
 	 * 
 	 * @param dslProperty
-	 *            the {@link org.eclipse.uml2.uml.Association} that is adopted
-	 *            by this class
+	 *          the {@link org.eclipse.uml2.uml.Association} that is adopted by
+	 *          this class
 	 * 
 	 * @generated
 	 */
 	public UML2Association(org.eclipse.uml2.uml.Association dslProperty) {
 
-		if (logger.isDebugEnabled()) {
-			logger
-					.debug("UML2Association(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("UML2Association(dslProperty=" + dslProperty + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
 		this.dslProperty = dslProperty;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("UML2Association() - exit"); //$NON-NLS-1$
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("UML2Association() - exit"); //$NON-NLS-1$
 		}
 	}
 
@@ -90,7 +85,20 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public String getName() {
+
 		return this.dslProperty.getName();
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getType()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Type getType() {
+
+		return UML2AdapterFactory.INSTANCE.createType(dslProperty.getEndTypes()
+				.get(0));
 	}
 
 	/**
@@ -105,17 +113,15 @@ public class UML2Association extends AbstractProperty implements Property {
 
 		Element owner;
 
-		result = null;
-
 		owner = this.dslProperty.getOwner();
 
+		/* Adapt the owner depending on its type. */
 		if (owner instanceof TypedElement) {
 			TypedElement aTypedElement;
 
 			aTypedElement = (TypedElement) owner;
 
-			result = UML2AdapterFactory.INSTANCE.createType(aTypedElement
-					.getType());
+			result = UML2AdapterFactory.INSTANCE.createType(aTypedElement.getType());
 		}
 
 		else if (owner instanceof org.eclipse.uml2.uml.Class) {
@@ -127,25 +133,16 @@ public class UML2Association extends AbstractProperty implements Property {
 		}
 
 		else {
-			if (logger.isInfoEnabled()) {
-				logger.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
+			if (LOGGER.isInfoEnabled()) {
+				LOGGER.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
 						.toString()));
 			}
 			// no else.
+
+			result = null;
 		}
 
 		return result;
-	}
-
-	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getType()
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public Type getType() {
-		return UML2AdapterFactory.INSTANCE.createType(dslProperty.getEndTypes()
-				.get(0));
 	}
 
 	/**
@@ -155,6 +152,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isMultiple() {
+
 		return this.dslProperty.getMemberEnds().get(0).isMultivalued();
 	}
 
@@ -165,6 +163,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isOrdered() {
+
 		return this.dslProperty.getMemberEnds().get(0).isOrdered();
 	}
 
@@ -175,7 +174,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	 */
 	@Override
 	public boolean isUnique() {
+
 		return this.dslProperty.getMemberEnds().get(0).isUnique();
 	}
-
 }
