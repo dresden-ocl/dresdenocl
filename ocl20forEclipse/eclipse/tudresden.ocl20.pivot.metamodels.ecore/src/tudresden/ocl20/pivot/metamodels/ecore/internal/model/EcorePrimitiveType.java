@@ -1,33 +1,25 @@
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
- * All rights reserved.                                                      *
- *                                                                           *
- * This work was done as a project at the Chair for Software Technology,     *
- * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
- * It is understood that any modification not identified as such is not      *
- * covered by the preceding statement.                                       *
- *                                                                           *
- * This work is free software; you can redistribute it and/or modify it      *
- * under the terms of the GNU Library General Public License as published    *
- * by the Free Software Foundation; either version 2 of the License, or      *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This work is distributed in the hope that it will be useful, but WITHOUT  *
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
- * License for more details.                                                 *
- *                                                                           *
- * You should have received a copy of the GNU Library General Public License *
- * along with this library; if not, you can view it online at                *
- * http://www.fsf.org/licensing/licenses/gpl.html.                           *
- *                                                                           *
- * To submit a bug report, send a comment, or get the latest news on this    *
- * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
- * For more information on OCL and related projects visit the OCL Portal:    *
- * http://st.inf.tu-dresden.de/ocl                                           *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de). * All rights
+ * reserved. * * This work was done as a project at the Chair for Software
+ * Technology, * Dresden University Of Technology, Germany
+ * (http://st.inf.tu-dresden.de). * It is understood that any modification not
+ * identified as such is not * covered by the preceding statement. * * This work
+ * is free software; you can redistribute it and/or modify it * under the terms
+ * of the GNU Library General Public License as published * by the Free Software
+ * Foundation; either version 2 of the License, or * (at your option) any later
+ * version. * * This work is distributed in the hope that it will be useful, but
+ * WITHOUT * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public *
+ * License for more details. * * You should have received a copy of the GNU
+ * Library General Public License * along with this library; if not, you can
+ * view it online at * http://www.fsf.org/licensing/licenses/gpl.html. * * To
+ * submit a bug report, send a comment, or get the latest news on this *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net. * For
+ * more information on OCL and related projects visit the OCL Portal: *
+ * http://st.inf.tu-dresden.de/ocl * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * *
+ * 
  * $Id$
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
@@ -38,6 +30,7 @@ import java.math.BigInteger;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EDataType;
 
+import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
@@ -54,37 +47,38 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 		PrimitiveType {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER = Logger
-			.getLogger(EcorePrimitiveType.class);
+	private static final Logger LOGGER =
+			EcoreMetamodelPlugin.getLogger(EcorePrimitiveType.class);
 
 	/**
 	 * An array of all Java {@link Class}es representing the
 	 * {@link PrimitiveTypeKind#BOOLEAN}.
 	 */
-	private static Class<?> javaBooleanClasses[] = new Class<?>[] {
-			boolean.class, Boolean.class };
+	private static Class<?> javaBooleanClasses[] =
+			new Class<?>[] { boolean.class, Boolean.class };
 
 	/**
 	 * An array of all Java {@link Class}es representing the
 	 * {@link PrimitiveTypeKind#INTEGER}.
 	 */
-	private static Class<?> javaIntegerClasses[] = new Class<?>[] { byte.class,
-			Byte.class, short.class, Short.class, int.class, Integer.class,
-			long.class, Long.class, BigInteger.class, BigDecimal.class };
+	private static Class<?> javaIntegerClasses[] =
+			new Class<?>[] { byte.class, Byte.class, short.class, Short.class,
+					int.class, Integer.class, long.class, Long.class, BigInteger.class,
+					BigDecimal.class };
 
 	/**
 	 * An array of all Java {@link Class}es representing the
 	 * {@link PrimitiveTypeKind#REAL}.
 	 */
-	private static Class<?> javaRealClasses[] = new Class<?>[] { float.class,
-			Float.class, double.class, Double.class };
+	private static Class<?> javaRealClasses[] =
+			new Class<?>[] { float.class, Float.class, double.class, Double.class };
 
 	/**
 	 * An array of all Java {@link Class}es representing the
 	 * {@link PrimitiveTypeKind#STRING}.
 	 */
-	private static Class<?> javaStringClasses[] = new Class<?>[] { char.class,
-			Character.class, String.class };
+	private static Class<?> javaStringClasses[] =
+			new Class<?>[] { char.class, Character.class, String.class };
 
 	/** The adapted {@link EDataType}. */
 	private EDataType eDataType;
@@ -95,7 +89,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 	 * </p>
 	 * 
 	 * @param eDataType
-	 *            The {@link EDataType} that is adapted by this class.
+	 *          The {@link EDataType} that is adapted by this class.
 	 */
 	public EcorePrimitiveType(EDataType eDataType) {
 
@@ -129,14 +123,14 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 	/**
 	 * <p>
-	 * Returns the {@link PrimitiveTypeKind} of a given {@link EDataType}. If
-	 * the given {@link EDataType} shall not be mapped to a
-	 * {@link PrimitiveType}, the {@link PrimitiveTypeKind#UNKNOWN} is returned.
+	 * Returns the {@link PrimitiveTypeKind} of a given {@link EDataType}. If the
+	 * given {@link EDataType} shall not be mapped to a {@link PrimitiveType}, the
+	 * {@link PrimitiveTypeKind#UNKNOWN} is returned.
 	 * </p>
 	 * 
 	 * @param aDataType
-	 *            The {@link EDataType} those {@link PrimitiveTypeKind} shall be
-	 *            returned.
+	 *          The {@link EDataType} those {@link PrimitiveTypeKind} shall be
+	 *          returned.
 	 * @return The {@link PrimitiveTypeKind} of the given {@link EDataType}.
 	 */
 	public static PrimitiveTypeKind getKind(EDataType aDataType) {
@@ -144,12 +138,11 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 		PrimitiveTypeKind result;
 
 		result = null;
-		
+
 		/* Check if the adapted class is a boolean. */
 		for (Class<?> aClass : javaBooleanClasses) {
 
-			if (aClass.getCanonicalName().equals(
-					aDataType.getInstanceTypeName())) {
+			if (aClass.getCanonicalName().equals(aDataType.getInstanceTypeName())) {
 				result = PrimitiveTypeKind.BOOLEAN;
 				break;
 			}
@@ -161,8 +154,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 			for (Class<?> aClass : javaIntegerClasses) {
 
-				if (aClass.getCanonicalName().equals(
-						aDataType.getInstanceTypeName())) {
+				if (aClass.getCanonicalName().equals(aDataType.getInstanceTypeName())) {
 					result = PrimitiveTypeKind.INTEGER;
 					break;
 				}
@@ -175,8 +167,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 			for (Class<?> aClass : javaRealClasses) {
 
-				if (aClass.getCanonicalName().equals(
-						aDataType.getInstanceTypeName())) {
+				if (aClass.getCanonicalName().equals(aDataType.getInstanceTypeName())) {
 					result = PrimitiveTypeKind.REAL;
 					break;
 				}
@@ -189,8 +180,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 			for (Class<?> aClass : javaStringClasses) {
 
-				if (aClass.getCanonicalName().equals(
-						aDataType.getInstanceTypeName())) {
+				if (aClass.getCanonicalName().equals(aDataType.getInstanceTypeName())) {
 					result = PrimitiveTypeKind.STRING;
 					break;
 				}
@@ -209,9 +199,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getKind()
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getKind()
 	 */
 	@Override
 	public PrimitiveTypeKind getKind() {
@@ -225,24 +213,22 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
 	 */
 	@Override
 	public String getName() {
+
 		return this.getKind().getName();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace
-	 * ()
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace ()
 	 */
 	@Override
 	public Namespace getNamespace() {
+
 		return null;
 	}
 }

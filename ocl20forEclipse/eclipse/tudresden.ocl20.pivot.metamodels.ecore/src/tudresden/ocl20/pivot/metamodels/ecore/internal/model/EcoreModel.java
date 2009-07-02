@@ -1,33 +1,25 @@
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
- * All rights reserved.                                                      *
- *                                                                           *
- * This work was done as a project at the Chair for Software Technology,     *
- * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
- * It is understood that any modification not identified as such is not      *
- * covered by the preceding statement.                                       *
- *                                                                           *
- * This work is free software; you can redistribute it and/or modify it      *
- * under the terms of the GNU Library General Public License as published    *
- * by the Free Software Foundation; either version 2 of the License, or      *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This work is distributed in the hope that it will be useful, but WITHOUT  *
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
- * License for more details.                                                 *
- *                                                                           *
- * You should have received a copy of the GNU Library General Public License *
- * along with this library; if not, you can view it online at                *
- * http://www.fsf.org/licensing/licenses/gpl.html.                           *
- *                                                                           *
- * To submit a bug report, send a comment, or get the latest news on this    *
- * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
- * For more information on OCL and related projects visit the OCL Portal:    *
- * http://st.inf.tu-dresden.de/ocl                                           *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de). * All rights
+ * reserved. * * This work was done as a project at the Chair for Software
+ * Technology, * Dresden University Of Technology, Germany
+ * (http://st.inf.tu-dresden.de). * It is understood that any modification not
+ * identified as such is not * covered by the preceding statement. * * This work
+ * is free software; you can redistribute it and/or modify it * under the terms
+ * of the GNU Library General Public License as published * by the Free Software
+ * Foundation; either version 2 of the License, or * (at your option) any later
+ * version. * * This work is distributed in the hope that it will be useful, but
+ * WITHOUT * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public *
+ * License for more details. * * You should have received a copy of the GNU
+ * Library General Public License * along with this library; if not, you can
+ * view it online at * http://www.fsf.org/licensing/licenses/gpl.html. * * To
+ * submit a bug report, send a comment, or get the latest news on this *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net. * For
+ * more information on OCL and related projects visit the OCL Portal: *
+ * http://st.inf.tu-dresden.de/ocl * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * *
+ * 
  * $Id$
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
@@ -69,7 +61,8 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 public class EcoreModel extends AbstractModel implements IModel {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER = Logger.getLogger(EcoreModel.class);
+	private static final Logger LOGGER =
+			EcoreMetamodelPlugin.getLogger(EcoreModel.class);
 
 	/** The {@link Resource} containing the corresponding Ecore model. */
 	private Resource resource;
@@ -83,12 +76,12 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @param resource
-	 *            The {@link Resource} containing the model.
+	 *          The {@link Resource} containing the model.
 	 */
 	public EcoreModel(Resource resource) {
 
-		super(resource.getURI().toString(), ModelBusPlugin
-				.getMetamodelRegistry().getMetamodel(EcoreMetamodelPlugin.ID));
+		super(resource.getURI().toString(), ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodel(EcoreMetamodelPlugin.ID));
 
 		/* Initialize. */
 		this.resource = resource;
@@ -96,25 +89,24 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
-	 * This method lazily creates a {@link Namespace} adapter for the virtual
-	 * root package in the associated Ecore model. Thus, any possible resource
-	 * loading errors will not happen until this method is called for the first
-	 * time.
+	 * This method lazily creates a {@link Namespace} adapter for the virtual root
+	 * package in the associated Ecore model. Thus, any possible resource loading
+	 * errors will not happen until this method is called for the first time.
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 *             If an error occurs when creating the adapter for the top name
-	 *             space.
+	 *           If an error occurs when creating the adapter for the top name
+	 *           space.
 	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
 	 */
 	public Namespace getRootNamespace() throws ModelAccessException {
-	
+
 		if (this.rootNamespace == null) {
 			this.rootNamespace = this.createRootNamespace();
 		}
 		// no else.
-	
+
 		return this.rootNamespace;
 	}
 
@@ -127,23 +119,22 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 */
 	@Override
 	public boolean equals(Object anObject) {
-	
+
 		boolean result;
-	
+
 		if (anObject instanceof EcoreModel) {
-			
+
 			EcoreModel anEcoreModel;
-	
+
 			anEcoreModel = (EcoreModel) anObject;
-	
-			result = this.resource.getURI().equals(
-					anEcoreModel.resource.getURI());
+
+			result = this.resource.getURI().equals(anEcoreModel.resource.getURI());
 		}
-	
+
 		else {
 			result = false;
 		}
-	
+
 		return result;
 	}
 
@@ -156,22 +147,23 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 */
 	@Override
 	public int hashCode() {
+
 		return this.resource.getURI().hashCode();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-	
+
 		String result;
-	
-		result = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.append("resource", this.resource.getURI()).toString();
-	
+
+		result =
+				new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
+						"resource", this.resource.getURI()).toString();
+
 		return result;
 	}
 
@@ -183,59 +175,58 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * @return A {@link Namespace} instance.
 	 * 
 	 * @throws ModelAccessException
-	 *             If an error occurs while loading the adapted Ecore model.
+	 *           If an error occurs while loading the adapted Ecore model.
 	 */
 	private Namespace createRootNamespace() throws ModelAccessException {
-	
+
 		EPackage rootPackage;
 		List<EObject> rootPackages;
-	
+
 		/* Eventually try to load the resource. */
 		if (!resource.isLoaded()) {
-	
+
 			/* Eventually inform the logger. */
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info(NLS.bind(
-						EcoreModelMessages.EcoreModel_LoadingEcoreModel,
+				LOGGER.info(NLS.bind(EcoreModelMessages.EcoreModel_LoadingEcoreModel,
 						this.resource.getURI()));
 			}
 			// no else.
-	
+
 			try {
 				this.resource.load(null);
 			}
-	
+
 			catch (IOException e) {
 				String msg;
-	
+
 				msg = "Error while loading resource from " + resource.getURI();
-	
+
 				throw new ModelAccessException(msg, e); //$NON-NLS-1$
 			}
 		}
 		// no else.
-	
+
 		/* Get the root packages. */
 		rootPackages = this.resource.getContents();
-	
+
 		/* Create a new package to serve as the root package. */
 		rootPackage = EcoreFactory.eINSTANCE.createEPackage();
 		rootPackage.setName(IModelBusConstants.ROOT_PACKAGE_NAME);
-	
+
 		/* Add all sub-packages and sub-types to the new root package. */
 		for (EObject eObject : rootPackages) {
-	
+
 			if (eObject instanceof EPackage) {
 				rootPackage.getESubpackages().add((EPackage) eObject);
 			}
-	
+
 			else if (eObject instanceof EClassifier) {
 				rootPackage.getEClassifiers().add((EClassifier) eObject);
 			}
 			// no else.
 		}
 		// end for.
-	
+
 		return EcoreAdapterFactory.INSTANCE.createNamespace(rootPackage);
 	}
 }
