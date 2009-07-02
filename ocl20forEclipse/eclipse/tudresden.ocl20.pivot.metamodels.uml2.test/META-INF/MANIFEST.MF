@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UML2 Meta Model Test Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.uml2.test
+Bundle-Version: 1.2.0
+Bundle-Activator: tudresden.ocl20.pivot.metamodels.uml2.test.UML2MetaModelTestPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit4,
+ tudresden.ocl20.pivot.metamodels.test,
+ tudresden.ocl20.pivot.metamodels.uml2
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
