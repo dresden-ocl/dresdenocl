@@ -623,6 +623,109 @@ public class TestOperation {
 
 	/**
 	 * <p>
+	 * A test case testing the operation {@link Operation#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType3() {
+
+		/*
+		 * Only execute this test case if the current model under test supports
+		 * static operations.
+		 */
+		if (staticOperation != null) {
+			String msg;
+
+			msg = "The adaptation of Operation.getType() seems to be wrong.";
+
+			/* The operation must have the same type as in the model. */
+			assertEquals(msg, class1, staticOperation.getType());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Operation#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType4() {
+
+		String msg;
+
+		msg = "The adaptation of Operation.getType() seems to be wrong.";
+
+		/* The operation must have the same type as in the model. */
+		assertEquals(msg, class1, multipleOperation.getType());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Operation#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType5() {
+
+		String msg;
+
+		msg = "The adaptation of Operation.getType() seems to be wrong.";
+
+		/* The operation must have the same type as in the model. */
+		assertEquals(msg, class1, orderedMultipleOperation.getType());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Operation#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType6() {
+
+		String msg;
+
+		msg = "The adaptation of Operation.getType() seems to be wrong.";
+
+		/* The operation must have the same type as in the model. */
+		assertEquals(msg, class1, unorderedMultipleOperation.getType());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Operation#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType7() {
+
+		String msg;
+
+		msg = "The adaptation of Operation.getType() seems to be wrong.";
+
+		/* The operation must have the same type as in the model. */
+		assertEquals(msg, class1, uniqueMultipleOperation.getType());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Operation#getType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetType8() {
+
+		String msg;
+
+		msg = "The adaptation of Operation.getType() seems to be wrong.";
+
+		/* The operation must have the same type as in the model. */
+		assertEquals(msg, class1, nonuniqueMultipleOperation.getType());
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation {@link Operation#isMultiple()}.
 	 * </p>
 	 */

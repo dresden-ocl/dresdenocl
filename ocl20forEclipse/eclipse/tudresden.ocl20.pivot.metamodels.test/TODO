@@ -1,33 +1,12 @@
 < GENERAL >
 - WFRs for the PivotModel?
 
-< LOGGING>
-- Java: PENDING
-
 < UML MM >
 - UML Associations?
-
-< Java Test-Model>
-- Primitive Type:
- - PrimitiveTypeClass
- - Java: PENDING
-- Model: intelligent names
- - Java: PENDING
-- No Generics
- - Java: PENDING
+- PrimitiveType.Unknown auf Type mappen.
 
 < Java MM >
-- No Generics
- - Operation.getGenericType()
- - Property.getGenericType()
- - Type.getGenericSuperType()
- - getOwnedTypeParameter in
-  - Type
-  - Operation -> What is the sense?
-  - Namespace
 - No Adaptation Logic in Factory.
-- Boxed types are primitive
- -> Ecore Primitive Types
 
 < DOKU >
 - Diagram für Doku
@@ -36,3 +15,8 @@
 < OTHER PROBLEMS >
 - Ocl2Java-Tests from Central Test Suite?
 - royalandloyal.constraints -> aspectJ code muss rein, testfälle schlagen fehl.
+
+< MICHA >
+- Eventually declare methods for primitive types and enumeration 
+  types in AbstractImpl as final?
+- VoidType?
