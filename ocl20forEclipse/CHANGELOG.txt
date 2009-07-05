@@ -19,6 +19,8 @@ Release 1.2X (Unknown)
 - Some bugs in the EMF Ecore Meta Model were fixed.
  - Logging now works properly.
 
+- A new generic Test Suite for Meta-Models was introduced.
+
 - A bug in the Java Model Instance Type was fixed.
  - Java instances can now also be imported, if they implement or extend Java
    Classes or Interfaces defined in the model.

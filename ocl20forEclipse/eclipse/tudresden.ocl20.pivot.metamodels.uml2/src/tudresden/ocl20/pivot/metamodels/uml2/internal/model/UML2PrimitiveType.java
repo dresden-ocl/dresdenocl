@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
@@ -126,6 +127,117 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	}
 
 	/**
+	 * <p>
+	 * This method can be used to check whether or not a given
+	 * {@link org.eclipse.uml2.uml.Type} shall be mapped to a
+	 * {@link PrimitiveType} in the {@link IModel}. If not, the
+	 * {@link PrimitiveTypeKind#UNKNOWN} is returned.
+	 * </p>
+	 * 
+	 * @param aUmlType
+	 *          The {@link org.eclipse.uml2.uml.Type} that shall be checked.
+	 * 
+	 * @return The {@link PrimitiveTypeKind} of the given
+	 *         {@link org.eclipse.uml2.uml.Type} or
+	 *         {@link PrimitiveTypeKind#UNKNOWN}.
+	 * @generated NOT
+	 */
+	public static PrimitiveTypeKind getKind(org.eclipse.uml2.uml.Type aUmlType) {
+
+		PrimitiveTypeKind result;
+
+		result = null;
+
+		/* Check if the adapted type is a boolean. */
+		for (String aName : booleanKindNames) {
+
+			if (aName.equals(aUmlType.getName())) {
+				result = PrimitiveTypeKind.BOOLEAN;
+				break;
+			}
+			// no else.
+		}
+
+		/* Else check if the adapted type is an integer. */
+		if (result == null) {
+
+			for (String aName : integerKindNames) {
+
+				if (aName.equals(aUmlType.getName())) {
+					result = PrimitiveTypeKind.INTEGER;
+					break;
+				}
+				// no else.
+			}
+		}
+
+		/* Else check if the adapted type is a real. */
+		if (result == null) {
+
+			for (String aName : realKindNames) {
+
+				if (aName.equals(aUmlType.getName())) {
+					result = PrimitiveTypeKind.REAL;
+					break;
+				}
+				// no else.
+			}
+		}
+
+		/* Else check if the adapted type is a string. */
+		if (result == null) {
+
+			for (String aName : stringKindNames) {
+
+				if (aName.equals(aUmlType.getName())) {
+					result = PrimitiveTypeKind.STRING;
+					break;
+				}
+				// no else.
+			}
+		}
+
+		/* Else the kind is unknown. */
+		if (result == null) {
+			result = PrimitiveTypeKind.UNKNOWN;
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * This method implements a type mapping from
+	 * {@link org.eclipse.uml2.uml.PrimitiveType} types to the predefined
+	 * primitive types of the Pivot Model.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public PrimitiveTypeKind getKind() {
+
+		PrimitiveTypeKind result;
+
+		result = getKind(this.dslPrimitiveType);
+
+		/* Eventually log a warning. */
+		if (result == PrimitiveTypeKind.UNKNOWN && LOGGER.isInfoEnabled()) {
+			String msg;
+
+			msg =
+					NLS.bind(UML2ModelMessages.UML2_UnknownPrimitiveTypeKind,
+							this.dslPrimitiveType.getName());
+
+			LOGGER.warn(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
 	 * 
 	 * @generated NOT
@@ -145,91 +257,5 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	public Namespace getNamespace() {
 
 		return null;
-	}
-
-	/**
-	 * <p>
-	 * This method implements a type mapping from
-	 * {@link org.eclipse.uml2.uml.PrimitiveType} types to the predefined
-	 * primitive types of the Pivot Model.
-	 * </p>
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public PrimitiveTypeKind getKind() {
-
-		PrimitiveTypeKind result;
-
-		result = null;
-
-		/* Check if the adapted type is a boolean. */
-		for (String aName : booleanKindNames) {
-
-			if (aName.equals(dslPrimitiveType.getName())) {
-				result = PrimitiveTypeKind.BOOLEAN;
-				break;
-			}
-			// no else.
-		}
-
-		/* Else check if the adapted type is an integer. */
-		if (result == null) {
-
-			for (String aName : integerKindNames) {
-
-				if (aName.equals(dslPrimitiveType.getName())) {
-					result = PrimitiveTypeKind.INTEGER;
-					break;
-				}
-				// no else.
-			}
-		}
-
-		/* Else check if the adapted type is a real. */
-		if (result == null) {
-
-			for (String aName : realKindNames) {
-
-				if (aName.equals(dslPrimitiveType.getName())) {
-					result = PrimitiveTypeKind.REAL;
-					break;
-				}
-				// no else.
-			}
-		}
-
-		/* Else check if the adapted type is a string. */
-		if (result == null) {
-
-			for (String aName : stringKindNames) {
-
-				if (aName.equals(dslPrimitiveType.getName())) {
-					result = PrimitiveTypeKind.STRING;
-					break;
-				}
-				// no else.
-			}
-		}
-
-		/* Else the kind is unknown. */
-		if (result == null) {
-			result = PrimitiveTypeKind.UNKNOWN;
-
-			/* Eventually log a warning. */
-			if (LOGGER.isInfoEnabled()) {
-				String msg;
-
-				msg =
-						NLS.bind(UML2ModelMessages.UML2_UnknownPrimitiveTypeKind,
-								this.dslPrimitiveType.getName());
-
-				LOGGER.warn(msg);
-			}
-			// no else.
-		}
-		// no else.
-
-		return result;
 	}
 }

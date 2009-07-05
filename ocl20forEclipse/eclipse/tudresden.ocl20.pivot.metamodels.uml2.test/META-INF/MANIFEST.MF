@@ -7,6 +7,7 @@ Bundle-Activator: tudresden.ocl20.pivot.metamodels.uml2.test.UML2MetaModelTestPl
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.junit4,
+ tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.metamodels.test,
  tudresden.ocl20.pivot.metamodels.uml2
 Bundle-ActivationPolicy: lazy

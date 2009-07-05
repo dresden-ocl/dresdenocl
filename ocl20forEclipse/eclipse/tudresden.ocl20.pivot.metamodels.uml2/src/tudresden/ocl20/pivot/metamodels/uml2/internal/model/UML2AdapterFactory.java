@@ -28,6 +28,7 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -150,13 +151,25 @@ public class UML2AdapterFactory {
 			result = null;
 		}
 
+		/* If the given type is a class, adapt to Type. */
 		else if (dslType instanceof Class) {
 			result = createType((Class) dslType);
 		}
 
+		/* If the given type is a primitive Type. */
 		else if (dslType instanceof org.eclipse.uml2.uml.PrimitiveType) {
-			result =
-					createPrimitiveType((org.eclipse.uml2.uml.PrimitiveType) dslType);
+
+			/* Check if the type can be adapted to a primitive type. */
+			if (!UML2PrimitiveType.getKind(dslType).equals(PrimitiveTypeKind.UNKNOWN)) {
+				result =
+						createPrimitiveType((org.eclipse.uml2.uml.PrimitiveType) dslType);
+			}
+
+			/* Else adapt to Type. */
+			else {
+				result =
+						createTypePrimitiveType((org.eclipse.uml2.uml.PrimitiveType) dslType);
+			}
 		}
 
 		else if (dslType instanceof org.eclipse.uml2.uml.Enumeration) {
@@ -491,5 +504,57 @@ public class UML2AdapterFactory {
 		}
 
 		return type;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link Type} adapter for a
+	 * {@link org.eclipse.uml2.uml.PrimitiveType} that cannot be mapped to a
+	 * {@link PrimitiveType}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private Type createTypePrimitiveType(
+			org.eclipse.uml2.uml.PrimitiveType dslPrimitiveType) {
+
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createTypePrimitiveType("; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += "dslPrimitiveType = " + dslPrimitiveType; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += ") - enter"; //$NON-NLS-1$ //$NON-NLS-2$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		Type result;
+
+		/* Eventually get a cached result. */
+		result = (Type) adapters.get(dslPrimitiveType);
+
+		/* If the type has not been adapted before, create a new adaptation. */
+		if (result == null) {
+			result = new UML2TypePrimitiveType(dslPrimitiveType);
+
+			/* Cache the result. */
+			adapters.put(dslPrimitiveType, result);
+		}
+		// no else.
+
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createPrimitiveType() - exit";
+			msg += " - return value=" + result;
+
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
 	}
 }

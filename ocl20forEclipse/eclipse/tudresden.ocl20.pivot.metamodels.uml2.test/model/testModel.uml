@@ -54,6 +54,10 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#EFloat"/>
       </ownedAttribute>
     </packagedElement>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_vzoxYGlsEd6APpWKZtFL4w" name="NonPrimitivePrimitiveType">
+      <ownedAttribute xmi:id="_8mn-4GlwEd6APpWKZtFL4w" name="property1" type="_HtPiAFjeEd6lGdDGCz3Giw"/>
+      <ownedOperation xmi:id="_8MBGgGlwEd6APpWKZtFL4w" name="operation1"/>
+    </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_i76iQFvdEd6Mt7KuQSFQ9Q" name="TestOperationAndParameterClass">
       <ownedOperation xmi:id="_nAfSIGCXEd6dPvgh_DkPIw" name="operationWithoutParameters">
         <ownedParameter xmi:id="_oeM7YGCZEd6dPvgh_DkPIw" type="_HtPiAFjeEd6lGdDGCz3Giw" isOrdered="true" direction="return"/>
@@ -67,30 +71,32 @@
       <ownedOperation xmi:id="_BPrUUGDDEd6dPvgh_DkPIw" name="inputOutputParameterOperation">
         <ownedParameter xmi:id="_BPrUUWDDEd6dPvgh_DkPIw" name="inOut1" type="_HtPiAFjeEd6lGdDGCz3Giw" direction="inout"/>
       </ownedOperation>
-      <ownedOperation xmi:id="_-qsywGCZEd6dPvgh_DkPIw" name="staticOperation" isStatic="true"/>
+      <ownedOperation xmi:id="_-qsywGCZEd6dPvgh_DkPIw" name="staticOperation" isStatic="true">
+        <ownedParameter xmi:id="_ddbrkGlrEd6APpWKZtFL4w" type="_HtPiAFjeEd6lGdDGCz3Giw" direction="return"/>
+      </ownedOperation>
       <ownedOperation xmi:id="_Iz_YIGC0Ed6dPvgh_DkPIw" name="multipleOperation">
-        <ownedParameter xmi:id="_MDsOUGC0Ed6dPvgh_DkPIw" direction="return">
+        <ownedParameter xmi:id="_MDsOUGC0Ed6dPvgh_DkPIw" type="_HtPiAFjeEd6lGdDGCz3Giw" direction="return">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDs1YGC0Ed6dPvgh_DkPIw" value="*"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_bY6PYGC1Ed6dPvgh_DkPIw" name="orderedMultipleOperation">
-        <ownedParameter xmi:id="_bY6PYWC1Ed6dPvgh_DkPIw" isOrdered="true" direction="return">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bY6PYmC1Ed6dPvgh_DkPIw" value="*"/>
+        <ownedParameter xmi:id="_ibgIEGlrEd6APpWKZtFL4w" type="_HtPiAFjeEd6lGdDGCz3Giw" isOrdered="true" direction="return">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ibgIEWlrEd6APpWKZtFL4w" value="*"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_bheVgGC1Ed6dPvgh_DkPIw" name="unorderedMultipleOperation">
-        <ownedParameter xmi:id="_bheVgWC1Ed6dPvgh_DkPIw" direction="return">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bheVgmC1Ed6dPvgh_DkPIw" value="*"/>
+        <ownedParameter xmi:id="_jDq7UGlrEd6APpWKZtFL4w" type="_HtPiAFjeEd6lGdDGCz3Giw" direction="return">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jDq7UWlrEd6APpWKZtFL4w" value="*"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_cF2N4GC1Ed6dPvgh_DkPIw" name="uniqueMultipleOperation">
-        <ownedParameter xmi:id="_cF2N4WC1Ed6dPvgh_DkPIw" direction="return">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cF2N4mC1Ed6dPvgh_DkPIw" value="*"/>
+        <ownedParameter xmi:id="_jnFKYGlrEd6APpWKZtFL4w" type="_HtPiAFjeEd6lGdDGCz3Giw" direction="return">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jnFKYWlrEd6APpWKZtFL4w" value="*"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_cOVbgGC1Ed6dPvgh_DkPIw" name="nonuniqueMultipleOperation">
-        <ownedParameter xmi:id="_cOVbgWC1Ed6dPvgh_DkPIw" isUnique="false" direction="return">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cOVbgmC1Ed6dPvgh_DkPIw" value="*"/>
+        <ownedParameter xmi:id="_kUKS0GlrEd6APpWKZtFL4w" type="_HtPiAFjeEd6lGdDGCz3Giw" isUnique="false" direction="return">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kUKS0WlrEd6APpWKZtFL4w" value="*"/>
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
