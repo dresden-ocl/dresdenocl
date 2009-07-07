@@ -110,9 +110,11 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 				className = className.substring(0, className.length() - 6);
 
 				/* Try to load the class. */
-				classLoader = new FileClassLoader(packagePath.substring(1)
-						+ "/");
+				// FIXME (Michael): removed .substring(1); with *nix systems the
+				// FileClassLoader needs the root
+				classLoader = new FileClassLoader(packagePath + "/");
 				instanceProviderClass = classLoader.findClass(className);
+				;
 			}
 
 			catch (ClassNotFoundException e) {

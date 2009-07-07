@@ -139,10 +139,10 @@ public class TestPerformer {
 			//umlMetaModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel("tudresden.ocl20.pivot.metamodels.uml");
 			metaModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel(metamodelName);
 			if (metaModel == null) {
-				throw new Exception("Unable to load uml metmodel.   ");
+				throw new Exception("Unable to load uml metamodel " + metamodelName);
 			}
 		} catch(Exception ex) {
-			throw new Exception("Unable to load uml metmodel.   " + ex.getMessage());
+			throw new Exception("Unable to load uml metamodel " + metamodelName);
 		}
 	}
 }

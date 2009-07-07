@@ -18,7 +18,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.ecore.internal.modelinstance;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,11 +57,11 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 		IModelInstance {
 
 	/**
-	 * The {@link AdapterFactory} used to adapt the model instance to the
-	 * standard library.
+	 * The {@link AdapterFactory} used to adapt the model instance to the standard
+	 * library.
 	 */
-	protected static StandardlibraryAdapterFactory DEFAULTSLAF = JavaStandardlibraryAdapterFactory
-			.getInstance();
+	protected static StandardlibraryAdapterFactory DEFAULTSLAF =
+			JavaStandardlibraryAdapterFactory.getInstance();
 
 	/**
 	 * The {@link Resource} representing the {@link IModel} of this
@@ -76,9 +75,9 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	 * </p>
 	 * 
 	 * @param resource
-	 *            The XML resource used to load the {@link IModelInstance}.
+	 *          The XML resource used to load the {@link IModelInstance}.
 	 * @param model
-	 *            The {@link IModel} belonging to the {@link IModelInstance}.
+	 *          The {@link IModel} belonging to the {@link IModelInstance}.
 	 * @throws ModelAccessException
 	 */
 	public EcoreModelInstance(Resource resource, IModel model)
@@ -119,7 +118,6 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumLiteral(java.util
 	 * .List)
@@ -158,29 +156,26 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				Class<?> typeClass;
 
 				/*
-				 * Use an element of the model instance to get the path of the
-				 * source directory.
+				 * Use an element of the model instance to get the path of the source
+				 * directory.
 				 */
 				modelInstanceElems = myModelInstanceResource.getContents();
 
 				aModelInstanceElem = modelInstanceElems.get(0);
-				aModelInstanceClassName = aModelInstanceElem.getClass()
-						.getName();
+				aModelInstanceClassName = aModelInstanceElem.getClass().getName();
 
-				rootPackageIndex = aModelInstanceClassName.indexOf(pathName
-						.get(0));
+				rootPackageIndex = aModelInstanceClassName.indexOf(pathName.get(0));
 
 				if (rootPackageIndex > 1) {
-					path = aModelInstanceClassName.substring(0,
-							rootPackageIndex - 1);
-				} else {
+					path = aModelInstanceClassName.substring(0, rootPackageIndex - 1);
+				}
+				else {
 					path = "";
 				}
 
 				/* Eventually remove the root package from the path. */
 				if (pathName.size() > 0
-						&& pathName.get(0).equals(
-								IModelBusConstants.ROOT_PACKAGE_NAME)) {
+						&& pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
 					pathName.remove(0);
 				}
 				// no else.
@@ -200,8 +195,8 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				clazz = null;
 
 				try {
-					clazz = aModelInstanceElem.getClass().getClassLoader()
-							.loadClass(path);
+					clazz =
+							aModelInstanceElem.getClass().getClassLoader().loadClass(path);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -226,8 +221,9 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 						}
 					}
 
-					result = (OclEnumLiteral) Platform.getAdapterManager()
-							.getAdapter(enumLiteralObj, OclEnumLiteral.class);
+					result =
+							(OclEnumLiteral) Platform.getAdapterManager().getAdapter(
+									enumLiteralObj, OclEnumLiteral.class);
 				}
 				// no else.
 			}
@@ -240,9 +236,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumType(java.util.
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumType(java.util.
 	 * List)
 	 */
 	public OclEnumType findEnumType(List<String> pathName) {
@@ -275,29 +269,26 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				Class<?> typeClass;
 
 				/*
-				 * Use an element of the model instance to get the path of the
-				 * source directory.
+				 * Use an element of the model instance to get the path of the source
+				 * directory.
 				 */
 				modelInstanceElems = myModelInstanceResource.getContents();
 
 				aModelInstanceElem = modelInstanceElems.get(0);
-				aModelInstanceClassName = aModelInstanceElem.getClass()
-						.getName();
+				aModelInstanceClassName = aModelInstanceElem.getClass().getName();
 
-				rootPackageIndex = aModelInstanceClassName.indexOf(pathName
-						.get(0));
+				rootPackageIndex = aModelInstanceClassName.indexOf(pathName.get(0));
 
 				if (rootPackageIndex > 1) {
-					path = aModelInstanceClassName.substring(0,
-							rootPackageIndex - 1);
-				} else {
+					path = aModelInstanceClassName.substring(0, rootPackageIndex - 1);
+				}
+				else {
 					path = "";
 				}
 
 				/* Eventually remove the root package from the path. */
 				if (pathName.size() > 0
-						&& pathName.get(0).equals(
-								IModelBusConstants.ROOT_PACKAGE_NAME)) {
+						&& pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
 					pathName.remove(0);
 				}
 				// no else.
@@ -317,8 +308,8 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				clazz = null;
 
 				try {
-					clazz = aModelInstanceElem.getClass().getClassLoader()
-							.loadClass(path);
+					clazz =
+							aModelInstanceElem.getClass().getClassLoader().loadClass(path);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -328,8 +319,9 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				/* If the found type is an enum, adapt it. */
 				if (typeClass.isEnum()) {
 
-					result = (OclEnumType) Platform.getAdapterManager()
-							.getAdapter(clazz, OclEnumType.class);
+					result =
+							(OclEnumType) Platform.getAdapterManager().getAdapter(clazz,
+									OclEnumType.class);
 				}
 				// no else.
 			}
@@ -346,9 +338,9 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	 * </p>
 	 * 
 	 * @param pathName
-	 *            A given canonical name as a {@link List} of packages.
-	 * @return The {@link OclType} to a given canonical name as a {@link List}
-	 *         of packages.
+	 *          A given canonical name as a {@link List} of packages.
+	 * @return The {@link OclType} to a given canonical name as a {@link List} of
+	 *         packages.
 	 */
 	public OclType findType(List<String> pathName) {
 
@@ -391,8 +383,8 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				classPath = new ArrayList<String>(pathName);
 
 				/*
-				 * Get one element of the model instance to detect the model
-				 * instance source directory.
+				 * Get one element of the model instance to detect the model instance
+				 * source directory.
 				 */
 				modelInstanceElems = myModelInstanceResource.getContents();
 
@@ -400,15 +392,13 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				anInstanceElemName = anInstanceElement.getClass().getName();
 
 				/*
-				 * Eventually remove a part from the path before the root
-				 * package.
+				 * Eventually remove a part from the path before the root package.
 				 */
 				rootPackageName = pathName.get(0);
 				rootPackageIndex = anInstanceElemName.indexOf(rootPackageName);
 
 				if (rootPackageIndex > 1) {
-					path = anInstanceElemName
-							.substring(0, rootPackageIndex - 1);
+					path = anInstanceElemName.substring(0, rootPackageIndex - 1);
 				}
 
 				else {
@@ -417,15 +407,13 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 
 				/* Eventually remove the root package from the path. */
 				if (classPath.size() > 0
-						&& classPath.get(0).equals(
-								IModelBusConstants.ROOT_PACKAGE_NAME)) {
+						&& classPath.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
 					classPath.remove(0);
 				}
 				// no else.
 
 				/*
-				 * Convert the class path into a canonicalName of the instance
-				 * class.
+				 * Convert the class path into a canonicalName of the instance class.
 				 */
 				while (classPath.size() > 0) {
 
@@ -448,8 +436,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				Class<?> clazz = null;
 
 				try {
-					clazz = anInstanceElement.getClass().getClassLoader()
-							.loadClass(path);
+					clazz = anInstanceElement.getClass().getClassLoader().loadClass(path);
 				}
 
 				catch (ClassNotFoundException e) {
@@ -485,8 +472,9 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 				OclType type = myKnownTypes.get(typeClass);
 
 				if (type == null) {
-					type = (OclType) Platform.getAdapterManager().getAdapter(
-							typeClass, OclType.class);
+					type =
+							(OclType) Platform.getAdapterManager().getAdapter(typeClass,
+									OclType.class);
 					myKnownTypes.put(typeClass, type);
 				}
 				// no else.
@@ -502,7 +490,6 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getFactory()
 	 */
 	public IModelInstanceFactory getFactory() {
@@ -522,8 +509,8 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	 * </p>
 	 * 
 	 * @param eObjects
-	 *            The {@link EObject}s {@link EcoreModelObject}s shall be
-	 *            created for.
+	 *          The {@link EObject}s {@link EcoreModelObject}s shall be created
+	 *          for.
 	 */
 	private void createObjects(List<EObject> eObjects) {
 
@@ -553,8 +540,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 
 			aQualifiedName = this.findQualifiedPath(anEClassName);
 
-			aTypesQualifiedNameList = Arrays
-					.asList(aQualifiedName.split("\\."));
+			aTypesQualifiedNameList = Arrays.asList(aQualifiedName.split("\\."));
 			aQualifiedNameList = Arrays.asList(aQualifiedName.split("\\."));
 
 			/*
@@ -595,33 +581,34 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	 * </p>
 	 * 
 	 * @param aPackagePath
-	 *            The path of the {@link Type} which shall be searched for.
+	 *          The path of the {@link Type} which shall be searched for.
 	 * @return the found {@link Type} or null.
 	 * 
 	 */
 	private Type findTypeInModel(List<String> aPackagePath) {
-	
+
 		Type result;
 		List<String> packagePath;
-	
+
 		/* Clone the packagePath; */
 		packagePath = new ArrayList<String>(aPackagePath);
-	
+
 		/* Remove the 'root' package. */
 		if (packagePath.get(0).equals("root")) {
 			packagePath.remove(0);
 		}
 		// no else.
-	
+
 		try {
-			result = this.findTypeInNamespace(packagePath, this.myModel
-					.getRootNamespace());
+			result =
+					this
+							.findTypeInNamespace(packagePath, this.myModel.getRootNamespace());
 		}
-	
+
 		catch (ModelAccessException e) {
 			result = null;
 		}
-	
+
 		return result;
 	}
 
@@ -633,7 +620,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	 * </p>
 	 * 
 	 * @param aTypesName
-	 *            Whose name shall be found.
+	 *          Whose name shall be found.
 	 * @return The fully qualified name.
 	 */
 	private String findQualifiedPath(String aTypesName) {
