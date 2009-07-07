@@ -42,6 +42,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclVoid;
 public class TestUML2withJava {
 
 	/** The package of the UML2 meta model. */
+	// TODO: use constant from UML2 plug-in
 	protected final static String META_MODEL = "tudresden.ocl20.pivot.metamodels.uml2";
 
 	/** The name of the bundle of the model file. */

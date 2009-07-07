@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ecore Meta Model Test Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.ecore.test
+Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.ecore.test;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.ecore.test.EcoreMetaModelTestPlugin
 Require-Bundle: org.eclipse.ui,
@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.ui,
  org.junit4,
  tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.metamodels.test,
- tudresden.ocl20.pivot.metamodels.ecore
+ tudresden.ocl20.pivot.metamodels.ecore,
+ tudresden.ocl20.pivot.testsuite;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

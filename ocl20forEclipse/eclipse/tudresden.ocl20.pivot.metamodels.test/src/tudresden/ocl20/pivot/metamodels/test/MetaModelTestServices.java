@@ -17,8 +17,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.lang.model.type.PrimitiveType;
-
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
@@ -31,6 +29,7 @@ import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
