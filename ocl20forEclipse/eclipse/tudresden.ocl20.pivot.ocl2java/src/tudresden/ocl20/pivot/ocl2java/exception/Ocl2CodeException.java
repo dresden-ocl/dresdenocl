@@ -36,10 +36,28 @@ public class Ocl2CodeException extends Exception {
 	 * </p>
 	 * 
 	 * @param msg
-	 *            The message of the created {@link Ocl2CodeException}.
+	 *          The message of the created {@link Ocl2CodeException}.
 	 */
-	public Ocl2CodeException(final String msg) {
+	public Ocl2CodeException(String msg) {
+
 		super(msg);
 	}
 
+	/**
+	 * <p>
+	 * Creates a new {@link Ocl2CodeException}.
+	 * </p>
+	 * 
+	 * @param msg
+	 *          The message of the created {@link Ocl2CodeException}.
+	 * @param cause
+	 *          The cause (which is saved for later retrieval by the
+	 *          {@link Throwable#getCause()} method). (A <code>null</code> value
+	 *          is permitted, and indicates that the cause is nonexistent or
+	 *          unknown.)
+	 */
+	public Ocl2CodeException(final String msg, Throwable cause) {
+
+		super(msg, cause);
+	}
 }

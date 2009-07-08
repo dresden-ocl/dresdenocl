@@ -93,6 +93,12 @@ Long
 >>
 
 
+// --- Unknown Primitive Type ---
+unknownType() ::= <<
+/* TODO: Unknown primitive Type. Adapt type manually */
+>>
+
+
 // --- Void Type ---
 voidType() ::= <<
 >>

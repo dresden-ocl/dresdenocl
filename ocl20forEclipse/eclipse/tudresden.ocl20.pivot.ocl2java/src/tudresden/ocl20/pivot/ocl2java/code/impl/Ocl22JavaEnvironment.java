@@ -118,6 +118,7 @@ public class Ocl22JavaEnvironment implements IOcl22CodeEnvironment {
 	public void resetEnvironmentForNextConstraint() {
 
 		this.atPreVarNameCounter = 0;
+		this.comparatorVarCounter = 0;
 		this.collectionVarCounter = 0;
 		this.ifExpResultVarCounter = 0;
 		this.indexVarCounter = 0;
