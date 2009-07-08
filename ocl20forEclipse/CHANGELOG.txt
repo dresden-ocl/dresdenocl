@@ -3,6 +3,9 @@ Changes and Bugs fixed during the different Releases
 
 Release 1.2X (Unknown)
 -------------------------------
+- The Pivot Model do now contain the PrimitiveTypeKind Void for the adaptation
+  of a void Type for Operations without return Parameter.
+
 - The ModelBus Architecture was refactored.
  - IModelInstances are now meta model independent.
 
@@ -29,6 +32,9 @@ Release 1.2X (Unknown)
  - Constraints are now interpreted for constrained 
    sub-classes as well.
  - Local Variables are now only declared locally.
+
+- A bug in the Ocl22Java Code Generator was fixed.
+ - The variables for Comparators are now right numbered.
 
 - A bug in the Wizards were fixed.
  - The Model Import Wizard can now be started when the current focus is on a 
