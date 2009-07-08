@@ -381,7 +381,7 @@ public class TestOperation {
 					"The adaptation of Operation.getOwnedParameter() seems to be wrong.";
 
 			/* The operation must have one owned parameters. */
-			assertEquals(msg, 1, outputParameterOperation.getOwnedParameter().size());
+			assertEquals(msg, 2, outputParameterOperation.getOwnedParameter().size());
 		}
 	}
 

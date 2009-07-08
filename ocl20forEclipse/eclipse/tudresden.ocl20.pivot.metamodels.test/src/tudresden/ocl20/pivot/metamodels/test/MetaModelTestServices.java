@@ -15,7 +15,9 @@ package tudresden.ocl20.pivot.metamodels.test;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
@@ -332,6 +334,12 @@ public final class MetaModelTestServices {
 	/** The only instance of {@link MetaModelTestServices}. */
 	private static MetaModelTestServices myInstance;
 
+	/**
+	 * Contains the already loaded {@link IModel}s identified by their
+	 * {@link File} represented as a {@link String}.
+	 */
+	private Map<String, IModel> myCachedModels;
+
 	/** The ID of the {@link IMetamodel} which shall be tested. */
 	private String myMetaModelId;
 
@@ -351,6 +359,7 @@ public final class MetaModelTestServices {
 	 */
 	private MetaModelTestServices() {
 
+		this.myCachedModels = new HashMap<String, IModel>();
 	}
 
 	public static MetaModelTestServices getInstance() {
@@ -412,10 +421,16 @@ public final class MetaModelTestServices {
 
 		modelFile = new File(bundleDirectory + myTestModelPath);
 
-		/* Check if the given file exists. */
-		if (!modelFile.exists()) {
+		/* Check if the model has already been loaded. */
+		if (this.myCachedModels.containsKey(modelFile.toString())) {
+			result = this.myCachedModels.get(modelFile.toString());
+		}
+
+		/* Else check if the given file does not exist. */
+		else if (!modelFile.exists()) {
 			String msg;
 
+			// FIXME Class: Extract message.
 			msg = "Model file " + bundleDirectory;
 			msg += myTestModelPath + " cannot be found.";
 
@@ -434,11 +449,15 @@ public final class MetaModelTestServices {
 
 				if (metaModel != null) {
 					result = metaModel.getModelProvider().getModel(modelFile);
+
+					/* Cache the result. */
+					this.myCachedModels.put(modelFile.toString(), result);
 				}
 
 				else {
 					String msg;
 
+					// FIXME Class: Extract message.
 					msg = "Meta-Model " + myMetaModelId;
 					msg += " cannot be found.";
 
