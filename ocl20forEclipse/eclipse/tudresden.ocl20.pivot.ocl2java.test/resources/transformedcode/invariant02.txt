@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 
 @Generated
-public privileged aspect InvAspect2 {
+public privileged aspect InvAspect1 {
 
     /**
      * <p>Describes all Constructors of the class {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard}.</p>

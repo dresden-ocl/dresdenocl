@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2java.test.tests;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -51,13 +52,28 @@ public class InstrumentationTest {
 	 * @throws Ocl2CodeException
 	 */
 	@BeforeClass
-	public static void setUp() throws Ocl2CodeException {
+	public static void setUpAll() throws Ocl2CodeException {
+
 		testPerformer = CodegenTestPerformer.getInstance();
 		testPerformer.reset();
 	}
 
-	// FIXME The parser does not work with operation returning a collection with
-	// a generic type. /**
+	/**
+	 * <p>
+	 * Prepares the next test case of this test suite. Reinitializes the code
+	 * generator to avoid side effects between test cases.
+	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 */
+	@Before
+	public void setUp() throws Ocl2CodeException {
+
+		testPerformer.resetCodeGenerator();
+	}
+
+	// FIXME The parser does not work with operations returning a multiple type
+	// that should be parsed as a Collection. /**
 	// * <p>
 	// * A test case testing the code generation of some body expression
 	// contained
@@ -78,9 +94,14 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some body expression contained
 	 * in body02.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testBody2() {
+	public void testBody2() throws Ocl2CodeException {
+
+		testPerformer.resetCodeGenerator();
 
 		this.constraintFileName = "expressions/body02.ocl";
 		this.expectedFileName = "resources/transformedcode/body02.txt";
@@ -93,9 +114,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some body expression contained
 	 * in body03.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testBody3() {
+	public void testBody3() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/body03.ocl";
 		this.expectedFileName = "resources/transformedcode/body03.txt";
@@ -108,9 +132,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some defined attributes and
 	 * methods contained in define01.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDefinition1() {
+	public void testDefinition1() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/define01.ocl";
 		this.expectedFileName = "resources/transformedcode/define01.txt";
@@ -123,9 +150,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some defined attributes and
 	 * methods contained in define02.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDefinition2() {
+	public void testDefinition2() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/define02.ocl";
 		this.expectedFileName = "resources/transformedcode/define02.txt";
@@ -138,9 +168,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some defined attributes and
 	 * methods contained in define03.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDefinition3() {
+	public void testDefinition3() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/define03.ocl";
 		this.expectedFileName = "resources/transformedcode/define03.txt";
@@ -153,9 +186,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some defined attributes and
 	 * methods contained in define04.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDefinition4() {
+	public void testDefinition4() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/define04.ocl";
 		this.expectedFileName = "resources/transformedcode/define04.txt";
@@ -168,9 +204,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some defined attributes and
 	 * methods contained in define05.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDefinition5() {
+	public void testDefinition5() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/define05.ocl";
 		this.expectedFileName = "resources/transformedcode/define05.txt";
@@ -183,9 +222,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some defined attributes and
 	 * methods contained in define06.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDefinition6() {
+	public void testDefinition6() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/define06.ocl";
 		this.expectedFileName = "resources/transformedcode/define06.txt";
@@ -198,9 +240,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some defined attributes and
 	 * methods contained in define07.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDefinition7() {
+	public void testDefinition7() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/define07.ocl";
 		this.expectedFileName = "resources/transformedcode/define07.txt";
@@ -213,9 +258,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some defined attributes and
 	 * methods contained in define08.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDefinition8() {
+	public void testDefinition8() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/define08.ocl";
 		this.expectedFileName = "resources/transformedcode/define08.txt";
@@ -228,9 +276,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some a derived value contained
 	 * in derive01.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDerive1() {
+	public void testDerive1() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/derive01.ocl";
 		this.expectedFileName = "resources/transformedcode/derive01.txt";
@@ -243,9 +294,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some a derived value contained
 	 * in derive02.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDerive2() {
+	public void testDerive2() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/derive02.ocl";
 		this.expectedFileName = "resources/transformedcode/derive02.txt";
@@ -258,9 +312,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of some a derived value contained
 	 * in derive03.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testDerive3() {
+	public void testDerive3() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/derive03.ocl";
 		this.expectedFileName = "resources/transformedcode/derive03.txt";
@@ -270,12 +327,15 @@ public class InstrumentationTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation of some initial values contained
-	 * in init01.ocl.
+	 * A test case testing the code generation of some initial values contained in
+	 * init01.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInitialValue1() {
+	public void testInitialValue1() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/init01.ocl";
 		this.expectedFileName = "resources/transformedcode/init01.txt";
@@ -285,12 +345,15 @@ public class InstrumentationTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation of some initial values contained
-	 * in init02.ocl.
+	 * A test case testing the code generation of some initial values contained in
+	 * init02.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInitialValue2() {
+	public void testInitialValue2() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/init02.ocl";
 		this.expectedFileName = "resources/transformedcode/init02.txt";
@@ -300,12 +363,15 @@ public class InstrumentationTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation of some initial values contained
-	 * in init03.ocl.
+	 * A test case testing the code generation of some initial values contained in
+	 * init03.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInitialValue3() {
+	public void testInitialValue3() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/init03.ocl";
 		this.expectedFileName = "resources/transformedcode/init03.txt";
@@ -315,12 +381,15 @@ public class InstrumentationTest {
 
 	/**
 	 * <p>
-	 * A test case testing the code generation of some initial values contained
-	 * in init03.ocl.
+	 * A test case testing the code generation of some initial values contained in
+	 * init03.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInitialValue4() {
+	public void testInitialValue4() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/init04.ocl";
 		this.expectedFileName = "resources/transformedcode/init04.txt";
@@ -333,9 +402,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant01.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant1() {
+	public void testInvariant1() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant01.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant01.txt";
@@ -353,19 +425,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant02.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant2() {
+	public void testInvariant2() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant02.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant02.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 	}
 
 	/**
@@ -373,19 +444,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant03.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant3() {
+	public void testInvariant3() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant03.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant03.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -393,19 +463,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant04.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant4() {
+	public void testInvariant4() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant04.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant04.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -413,19 +482,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant05.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant5() {
+	public void testInvariant5() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant05.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant05.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -433,19 +501,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant06.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant6() {
+	public void testInvariant6() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant06.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant06.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -453,19 +520,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant07.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant7() {
+	public void testInvariant7() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant07.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant07.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -473,19 +539,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant06.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant8() {
+	public void testInvariant8() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant08.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant08.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -493,19 +558,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant09.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant9() {
+	public void testInvariant9() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant09.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant09.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -513,19 +577,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant10.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant10() {
+	public void testInvariant10() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant10.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant10.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -533,19 +596,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant11.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant11() {
+	public void testInvariant11() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant11.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant11.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -553,19 +615,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant12.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant12() {
+	public void testInvariant12() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant12.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant12.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -573,19 +634,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant13.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant13() {
+	public void testInvariant13() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant13.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant13.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -593,19 +653,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant14.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant14() {
+	public void testInvariant14() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant14.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant14.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 	}
 
 	/**
@@ -613,19 +672,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant15.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant15() {
+	public void testInvariant15() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant15.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant15.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -633,19 +691,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant16.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant16() {
+	public void testInvariant16() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant16.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant16.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -653,19 +710,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant17.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant17() {
+	public void testInvariant17() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant17.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant17.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -673,19 +729,18 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of an invariant contained in
 	 * invariant18.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testInvariant18() {
+	public void testInvariant18() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/invariant18.ocl";
 		this.expectedFileName = "resources/transformedcode/invariant18.txt";
 
-		testPerformer
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						false,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
+		testPerformer.doDiffTest(constraintFileName, expectedFileName, false,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 	}
 
 	/**
@@ -693,9 +748,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post01.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition1() {
+	public void testPostcondition1() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post01.ocl";
 		this.expectedFileName = "resources/transformedcode/post01.txt";
@@ -708,9 +766,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post02.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition2() {
+	public void testPostcondition2() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post02.ocl";
 		this.expectedFileName = "resources/transformedcode/post02.txt";
@@ -723,9 +784,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post03.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition3() {
+	public void testPostcondition3() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post03.ocl";
 		this.expectedFileName = "resources/transformedcode/post03.txt";
@@ -738,9 +802,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post04.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition4() {
+	public void testPostcondition4() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post04.ocl";
 		this.expectedFileName = "resources/transformedcode/post04.txt";
@@ -753,9 +820,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post05.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition5() {
+	public void testPostcondition5() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post05.ocl";
 		this.expectedFileName = "resources/transformedcode/post05.txt";
@@ -768,9 +838,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post06.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition6() {
+	public void testPostcondition6() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post06.ocl";
 		this.expectedFileName = "resources/transformedcode/post06.txt";
@@ -783,9 +856,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post07.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition7() {
+	public void testPostcondition7() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post07.ocl";
 		this.expectedFileName = "resources/transformedcode/post07.txt";
@@ -798,9 +874,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post08.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition8() {
+	public void testPostcondition8() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post08.ocl";
 		this.expectedFileName = "resources/transformedcode/post08.txt";
@@ -813,9 +892,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post09.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition9() {
+	public void testPostcondition9() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post09.ocl";
 		this.expectedFileName = "resources/transformedcode/post09.txt";
@@ -828,9 +910,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post10.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition10() {
+	public void testPostcondition10() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post10.ocl";
 		this.expectedFileName = "resources/transformedcode/post10.txt";
@@ -843,9 +928,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post11.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition11() {
+	public void testPostcondition11() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post11.ocl";
 		this.expectedFileName = "resources/transformedcode/post11.txt";
@@ -858,9 +946,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a postcondition contained in
 	 * post12.ocl over a static operation.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPostcondition12() {
+	public void testPostcondition12() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/post12.ocl";
 		this.expectedFileName = "resources/transformedcode/post12.txt";
@@ -873,9 +964,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a precondition contained in
 	 * pre01.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPrecondition1() {
+	public void testPrecondition1() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/pre01.ocl";
 		this.expectedFileName = "resources/transformedcode/pre01.txt";
@@ -888,9 +982,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a precondition contained in
 	 * pre02.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPrecondition2() {
+	public void testPrecondition2() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/pre02.ocl";
 		this.expectedFileName = "resources/transformedcode/pre02.txt";
@@ -903,9 +1000,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a precondition contained in
 	 * pre03.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPrecondition3() {
+	public void testPrecondition3() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/pre03.ocl";
 		this.expectedFileName = "resources/transformedcode/pre03.txt";
@@ -918,9 +1018,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a precondition contained in
 	 * pre04.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPrecondition4() {
+	public void testPrecondition4() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/pre04.ocl";
 		this.expectedFileName = "resources/transformedcode/pre04.txt";
@@ -933,9 +1036,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a precondition contained in
 	 * pre05.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPrecondition5() {
+	public void testPrecondition5() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/pre05.ocl";
 		this.expectedFileName = "resources/transformedcode/pre05.txt";
@@ -948,9 +1054,12 @@ public class InstrumentationTest {
 	 * A test case testing the code generation of a precondition contained in
 	 * pre06.ocl.
 	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	@Test
-	public void testPrecondition6() {
+	public void testPrecondition6() throws Ocl2CodeException {
 
 		this.constraintFileName = "expressions/pre06.ocl";
 		this.expectedFileName = "resources/transformedcode/pre06.txt";

@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 
 @Generated
-public privileged aspect InitAspect4 {
+public privileged aspect InitAspect1 {
 
     /**
      * <p>The initialization of the class {@link tudresden.ocl20.pivot.examples.royalsandloyals.Date}.</p>

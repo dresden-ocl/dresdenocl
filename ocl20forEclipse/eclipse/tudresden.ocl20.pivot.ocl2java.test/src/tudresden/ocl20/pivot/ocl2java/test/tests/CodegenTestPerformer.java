@@ -20,7 +20,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.ocl2java.test.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -57,10 +56,12 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
 public final class CodegenTestPerformer {
 
 	/** The ID of the {@link IMetamodel} of the {@link IModel} used for testing. */
-	private static final String META_MODEL_ID = "tudresden.ocl20.pivot.metamodels.uml2";
+	private static final String META_MODEL_ID =
+			"tudresden.ocl20.pivot.metamodels.uml2";
 
 	/** The name of the bundle of the model file. */
-	private static final String MODEL_BUNDLE = "tudresden.ocl20.pivot.examples.royalandloyal";
+	private static final String MODEL_BUNDLE =
+			"tudresden.ocl20.pivot.examples.royalandloyal";
 
 	/** The path of the UML model file. */
 	private static final String MODEL_FILE_NAME = "model/royalsandloyals.uml";
@@ -70,13 +71,11 @@ public final class CodegenTestPerformer {
 	 * 
 	 * The name of the folder for the transformed code.
 	 */
-	private static final String OUTPUT_FOLDER = "F:/TU Dresden/GB/Workspace/tudresden.ocl20.pivot.examples.royalandloyal.constraints/src/";
+	private static final String OUTPUT_FOLDER =
+			"F:/TU Dresden/GB/Workspace/tudresden.ocl20.pivot.examples.royalandloyal.constraints/src/";
 
 	/** The only instance of {@link CodegenTestPerformer}. */
 	private static CodegenTestPerformer myInstance;
-
-	/** A List containing already tested constraints. */
-	private List<Constraint> alreadyTestedConstraints;
 
 	/** The file directory of the model. */
 	private String fileDirectory = "";
@@ -105,8 +104,8 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *             Thrown if any error occurred while loading the model or the
-	 *             meta model.
+	 *           Thrown if any error occurred while loading the model or the meta
+	 *           model.
 	 */
 	private CodegenTestPerformer() throws Ocl2CodeException {
 
@@ -122,8 +121,8 @@ public final class CodegenTestPerformer {
 	 * 
 	 * @return The only instance of {@link CodegenTestPerformer}.
 	 * @throws Ocl2CodeException
-	 *             Thrown if {@link OCL2Parser} of {@link IModel} initialization
-	 *             required for testing fails.
+	 *           Thrown if {@link OCL2Parser} of {@link IModel} initialization
+	 *           required for testing fails.
 	 */
 	public static CodegenTestPerformer getInstance() throws Ocl2CodeException {
 
@@ -138,14 +137,14 @@ public final class CodegenTestPerformer {
 
 	/**
 	 * <p>
-	 * Parses the file <code>oclFileName</code> against the loaded UML model
-	 * file. If an error occurred an CodeGenerationException will be thrown.
+	 * Parses the file <code>oclFileName</code> against the loaded UML model file.
+	 * If an error occurred an CodeGenerationException will be thrown.
 	 * </p>
 	 * 
 	 * @param oclFileName
-	 *            The OCL file to be parsed.
+	 *          The OCL file to be parsed.
 	 * @throws Ocl2CodeException
-	 *             Is thrown if any error occurs
+	 *           Is thrown if any error occurs
 	 */
 	public void addOCLFile(String oclFileName) throws Ocl2CodeException {
 
@@ -188,7 +187,7 @@ public final class CodegenTestPerformer {
 
 			e.printStackTrace();
 
-			throw new Ocl2CodeException(msg);
+			throw new Ocl2CodeException(msg, e);
 		}
 	}
 
@@ -198,12 +197,12 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *            The {@link Constraint} for which inheritance shall be
-	 *            disabled.
+	 *          The {@link Constraint} for which inheritance shall be disabled.
 	 */
 	public void disableInheritance(Constraint aConstraint) {
-		this.myCodeGenerator.getSettings().setInheritanceDisabled(aConstraint,
-				true);
+
+		this.myCodeGenerator.getSettings()
+				.setInheritanceDisabled(aConstraint, true);
 	}
 
 	/**
@@ -218,8 +217,7 @@ public final class CodegenTestPerformer {
 
 			allConstraints = this.getAllConstraints();
 
-			this.myCodeGenerator.getSettings()
-					.setSourceDirectory(OUTPUT_FOLDER);
+			this.myCodeGenerator.getSettings().setSourceDirectory(OUTPUT_FOLDER);
 			this.myCodeGenerator.getSettings().setSaveCode(true);
 
 			this.myCodeGenerator.transformInstrumentationCode(allConstraints);
@@ -244,11 +242,15 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @param constraintFileName
-	 *            The {@link Constraint} file used for the diff test.
+	 *          The {@link Constraint} file used for the diff test.
 	 * @param expectedFileName
-	 *            The file which contains the expected code.
+	 *          The file which contains the expected code.
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
-	public void doDiffTest(String constraintFileName, String expectedFileName) {
+	public void doDiffTest(String constraintFileName, String expectedFileName)
+			throws Ocl2CodeException {
+
 		this.doDiffTest(constraintFileName, expectedFileName, false);
 	}
 
@@ -259,22 +261,20 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @param constraintFileName
-	 *            The {@link Constraint} file used for the diff test.
+	 *          The {@link Constraint} file used for the diff test.
 	 * @param expectedFileName
-	 *            The file which contains the expected code.
+	 *          The file which contains the expected code.
 	 * @param disableInheritance
-	 *            Set this value true if the inheritance of the
-	 *            {@link Constraint} shall be disabled.
+	 *          Set this value true if the inheritance of the {@link Constraint}
+	 *          shall be disabled.
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	public void doDiffTest(String constraintFileName, String expectedFileName,
-			boolean disableInheritance) {
+			boolean disableInheritance) throws Ocl2CodeException {
 
-		this
-				.doDiffTest(
-						constraintFileName,
-						expectedFileName,
-						disableInheritance,
-						IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
+		this.doDiffTest(constraintFileName, expectedFileName, disableInheritance,
+				IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE);
 	}
 
 	/**
@@ -284,72 +284,54 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @param constraintFileName
-	 *            The {@link Constraint} file used for the diff test.
+	 *          The {@link Constraint} file used for the diff test.
 	 * @param expectedFileName
-	 *            The file which contains the expected code.
+	 *          The file which contains the expected code.
 	 * @param disableInheritance
-	 *            Set this value true if the inheritance of the
-	 *            {@link Constraint} shall be disabled.
+	 *          Set this value true if the inheritance of the {@link Constraint}
+	 *          shall be disabled.
 	 * @param checkMode
-	 *            The mode with which invariants shall be checked after
-	 *            instrumentation.
+	 *          The mode with which invariants shall be checked after
+	 *          instrumentation.
+	 * @throws Ocl2CodeException
+	 *           Thrown if an Exception during the difference test occurs.
 	 */
 	public void doDiffTest(String constraintFileName, String expectedFileName,
-			boolean disableInheritance, int checkMode) {
+			boolean disableInheritance, int checkMode) throws Ocl2CodeException {
 
-		try {
-			List<String> codeResults;
-			List<Constraint> testedConstraints;
-			Constraint lastConstraint;
+		Constraint lastConstraint;
+		List<Constraint> constraints;
 
-			/* Load the OCL file. */
-			this.addOCLFile(constraintFileName);
+		/* Load the OCL file. */
+		this.addOCLFile(constraintFileName);
 
-			/*
-			 * Get the parsed constraint (files are only allowed to contain one
-			 * expression).
-			 */
-			lastConstraint = this.getLastLoadedConstraint();
+		/*
+		 * Get the parsed constraint (files are only allowed to contain one
+		 * expression).
+		 */
+		lastConstraint = this.getLastLoadedConstraint();
 
-			/* Eventually disable the inheritance. */
-			if (disableInheritance) {
-				this.disableInheritance(lastConstraint);
-			}
-			// no else.
+		/* Eventually disable the inheritance. */
+		if (disableInheritance) {
+			this.disableInheritance(lastConstraint);
+		}
+		// no else.
 
-			/* Eventually set the invariant check mode. */
-			if (checkMode != IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE) {
-				this.myCodeGenerator.getSettings().setInvariantCheckMode(
-						lastConstraint, checkMode);
-			}
-
-			/* Get the not yet tested constraints. */
-			testedConstraints = this.getNotYetTestedConstraints();
-
-			/* Transform the instrumentation code. */
-			codeResults = this.myCodeGenerator
-					.transformInstrumentationCode(testedConstraints);
-
-			/* Get the transformed code of the last parsed constraint. */
-			this.transformedCode = codeResults.get(codeResults.size() - 1);
-
-			this.alreadyTestedConstraints.addAll(testedConstraints);
-
-			/* To the real difference test. */
-			this.testDifferenceBetweenStringAndFile(expectedFileName,
-					transformedCode);
+		/* Eventually set the invariant check mode. */
+		if (checkMode != IOcl2CodeSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_ATTRIBUTE_CHANGE) {
+			this.myCodeGenerator.getSettings().setInvariantCheckMode(lastConstraint,
+					checkMode);
 		}
 
-		catch (Ocl2CodeException e) {
-			String msg;
+		constraints = new ArrayList<Constraint>();
+		constraints.add(lastConstraint);
 
-			msg = "An error occured during preparing tests. ";
-			msg += e.getMessage();
+		/* Transform the instrumentation code. */
+		this.transformedCode =
+				this.myCodeGenerator.transformInstrumentationCode(constraints).get(0);
 
-			e.printStackTrace();
-
-			throw new RuntimeException(msg);
-		}
+		/* To the real difference test. */
+		this.compareStringAndFile(expectedFileName, transformedCode);
 	}
 
 	/**
@@ -359,35 +341,32 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @param constraintFileName
-	 *            The {@link Constraint} file used for the diff test.
+	 *          The {@link Constraint} file used for the diff test.
 	 * @param expectedFileName
-	 *            The file which contains the expected code.
+	 *          The file which contains the expected code.
 	 */
 	public void doFragmentDiffTest(String constraintFileName,
 			String expectedFileName) {
 
 		try {
-			List<String> codeResults;
-			List<Constraint> testedConstraints;
+			Constraint lastConstraint;
+			List<Constraint> constraints;
 
 			/* Parse the constraint. */
 			this.addOCLFile(constraintFileName);
 
-			/* Get the not yet tested constraints. */
-			testedConstraints = this.getNotYetTestedConstraints();
+			/* Get the not last parsed constraints. */
+			lastConstraint = this.getLastLoadedConstraint();
+
+			constraints = new ArrayList<Constraint>();
+			constraints.add(lastConstraint);
 
 			/* Transform the fragment code. */
-			codeResults = this.myCodeGenerator
-					.transformFragmentCode(testedConstraints);
-
-			/* Get the code of the last parsed constraint. */
-			this.transformedCode = codeResults.get(codeResults.size() - 1);
-
-			this.alreadyTestedConstraints.addAll(testedConstraints);
+			this.transformedCode =
+					this.myCodeGenerator.transformFragmentCode(constraints).get(0);
 
 			/* Do the real difference test. */
-			this.testDifferenceBetweenStringAndFile(expectedFileName,
-					transformedCode);
+			this.compareStringAndFile(expectedFileName, transformedCode);
 		}
 
 		catch (Ocl2CodeException e) {
@@ -427,16 +406,30 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *             Thrown if {@link OCL2Parser} of {@link IModel} initialization
-	 *             required for testing fails.
+	 *           Thrown if {@link OCL2Parser} of {@link IModel} initialization
+	 *           required for testing fails.
 	 */
 	public void reset() throws Ocl2CodeException {
-
-		this.alreadyTestedConstraints = null;
 
 		ModelBusPlugin.getModelRegistry().dispose();
 
 		this.init();
+	}
+
+	/**
+	 * <p>
+	 * Resets and re-initializes the {@link IOcl2Code} code generator of this
+	 * {@link CodegenTestPerformer}.
+	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *           Thrown if {@link OCL2Parser} of {@link IModel} initialization
+	 *           required for testing fails.
+	 */
+	public void resetCodeGenerator() throws Ocl2CodeException {
+
+		this.myCodeGenerator =
+				Ocl2CodeFactory.getInstance().createJavaCodeGenerator();
 	}
 
 	/**
@@ -446,14 +439,114 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *            The {@link Constraint} for which inheritance shall be
-	 *            disabled.
+	 *          The {@link Constraint} for which inheritance shall be disabled.
 	 * @param mode
-	 *            A value between 1 and 3.
+	 *          A value between 1 and 3.
 	 */
 	public void setInvariantCheckMode(Constraint aConstraint, int mode) {
-		this.myCodeGenerator.getSettings().setInvariantCheckMode(aConstraint,
-				mode);
+
+		this.myCodeGenerator.getSettings().setInvariantCheckMode(aConstraint, mode);
+	}
+
+	/**
+	 * <p>
+	 * Compares a given <code>String</code> with a given expected
+	 * <code>String</code> (as a path to a file) and lets the test fail if both
+	 * codes don't match. <strong>Leading and tailing white spaces in each line of
+	 * the <code>String</code>s will be ignored!</strong>.
+	 * </p>
+	 * 
+	 * @param expectedFilePath
+	 *          The path of the String file used for the difference test. The path
+	 *          should be relative to the resource folder to avoid errors.
+	 * @param givenString
+	 *          The String which shall be checked.
+	 * @throws Ocl2CodeException
+	 *           Thrown, if a difference test fails.
+	 */
+	private void compareStringAndFile(String expectedFilePath, String givenString)
+			throws Ocl2CodeException {
+
+		File expectedCodeFile;
+		String expectedCodeBundleDirectory;
+
+		/* Get the bundle location for the difference file. */
+		expectedCodeBundleDirectory =
+				Platform.getBundle(Ocl2CodeTestPlugin.PLUGIN_ID).getLocation();
+
+		/* Remove the 'reference:file:' from the beginning. */
+		expectedCodeBundleDirectory = expectedCodeBundleDirectory.substring(15);
+
+		/* Open the file. */
+		expectedCodeFile = new File(expectedCodeBundleDirectory + expectedFilePath);
+
+		/* Compare String lines with expected lines from text file. */
+		try {
+			BufferedReader diffReader;
+			String expectedString;
+
+			/* Open expected String file. */
+			diffReader = new BufferedReader(new FileReader(expectedCodeFile));
+
+			expectedString = "";
+
+			/* Read the expected code from file. */
+			while (diffReader.ready()) {
+
+				expectedString += diffReader.readLine();
+
+				if (diffReader.ready()) {
+					expectedString += "\n";
+				}
+				// no else.
+			}
+			// end while.
+
+			String[] expectedLines;
+			String[] givenLines;
+
+			/* Split both strings into lines. */
+			expectedLines = expectedString.split("\n");
+			givenLines = givenString.split("\n");
+
+			/* Both arrays must have the same length. */
+			if (expectedLines.length != givenLines.length) {
+				/*
+				 * If two lines are not equal compare the whole file again to show the
+				 * right error message with comparison failure.
+				 */
+				assertEquals(expectedString, givenString);
+			}
+
+			/* Else compare them line by line by trimming the lines.. */
+			else {
+
+				for (int index = 0; index < expectedLines.length; index++) {
+
+					if (!expectedLines[index].trim().equals(givenLines[index].trim())) {
+						/*
+						 * If two lines are not equal compare the whole file again to show
+						 * the right error message with comparison failure.
+						 */
+						assertEquals(expectedString, givenString);
+					}
+					// no else.
+				}
+				// end for.
+			}
+			// end else.
+		}
+		// end try.
+
+		catch (FileNotFoundException e) {
+			throw new Ocl2CodeException(
+					"An already found file was not found. Test failed.");
+		}
+
+		catch (IOException e) {
+			throw new Ocl2CodeException(
+					"The difference file could not be read. Test failed");
+		}
 	}
 
 	/**
@@ -462,16 +555,16 @@ public final class CodegenTestPerformer {
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *             Thrown if any error occurred while loading the model or the
-	 *             meta model.
+	 *           Thrown if any error occurred while loading the model or the meta
+	 *           model.
 	 */
 	private void init() throws Ocl2CodeException {
 
 		try {
 			IMetamodel metamodel;
 
-			metamodel = ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-					META_MODEL_ID);
+			metamodel =
+					ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL_ID);
 
 			if (metamodel == null) {
 				throw new Ocl2CodeException("Unable to load the IMetamodel "
@@ -484,8 +577,6 @@ public final class CodegenTestPerformer {
 					+ META_MODEL_ID + ": " + e.getMessage());
 		}
 
-		this.alreadyTestedConstraints = new ArrayList<Constraint>();
-
 		this.transformedCode = null;
 
 		/* Get the bundle location for the model files. */
@@ -496,11 +587,11 @@ public final class CodegenTestPerformer {
 
 		this.loadModel();
 
-		this.myCodeGenerator = Ocl2CodeFactory.getInstance()
-				.createJavaCodeGenerator();
+		this.myCodeGenerator =
+				Ocl2CodeFactory.getInstance().createJavaCodeGenerator();
 
-		this.myCodeGenerator.getSettings()
-				.setGettersForDefinedAttributesEnabled(true);
+		this.myCodeGenerator.getSettings().setGettersForDefinedAttributesEnabled(
+				true);
 	}
 
 	/**
@@ -529,27 +620,13 @@ public final class CodegenTestPerformer {
 	}
 
 	/**
-	 * @return A {@link List} containing all {@link Constraint}s which have not
-	 *         been tested yet.
-	 */
-	private List<Constraint> getNotYetTestedConstraints() {
-
-		List<Constraint> result;
-
-		result = new ArrayList<Constraint>(this.getAllConstraints());
-		result.removeAll(this.alreadyTestedConstraints);
-
-		return result;
-	}
-
-	/**
 	 * <p>
 	 * Loads the {@link IModel} for testing.
 	 * </p>
 	 * 
 	 * @throws Ocl2CodeException
-	 *             Is thrown if the model cannot be initialized or the model
-	 *             file is not found.
+	 *           Is thrown if the model cannot be initialized or the model file is
+	 *           not found.
 	 */
 	private void loadModel() throws Ocl2CodeException {
 
@@ -562,8 +639,8 @@ public final class CodegenTestPerformer {
 
 		IMetamodel metaModel;
 
-		metaModel = ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-				META_MODEL_ID);
+		metaModel =
+				ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL_ID);
 
 		this.myModelProvider = metaModel.getModelProvider();
 		this.myModelFile = new File(this.fileDirectory + MODEL_FILE_NAME);
@@ -586,115 +663,6 @@ public final class CodegenTestPerformer {
 		catch (ModelAccessException e) {
 			throw new Ocl2CodeException("The model could not be loaded. "
 					+ e.getMessage());
-		}
-	}
-
-	/**
-	 * <p>
-	 * Compares a given <code>String</code> with a given expected
-	 * <code>String</code> (as a path to a file) and lets the test fail if both
-	 * codes don't match. <strong>Leading and tailing white spaces in each line
-	 * of the <code>String</code>s will be ignored!</strong>.
-	 * </p>
-	 * 
-	 * @param expectedFilePath
-	 *            The path of the String file used for the difference test. The
-	 *            path should be relative to the resource folder to avoid
-	 *            errors.
-	 * @param aString
-	 *            The String which shall be checked.
-	 * @throws Ocl2CodeException
-	 *             Thrown, if a difference test fails.
-	 */
-	private void testDifferenceBetweenStringAndFile(String expectedFilePath,
-			String aString) throws Ocl2CodeException {
-
-		File expectedCodeFile;
-		String expectedCodeBundleDirectory;
-
-		String aStringsLines[];
-		BufferedReader diffReader;
-		String diffLine;
-		int index;
-
-		/* Get the bundle location for the difference file. */
-		expectedCodeBundleDirectory = Platform.getBundle(
-				Ocl2CodeTestPlugin.PLUGIN_ID).getLocation();
-
-		/* Remove the 'reference:file:' from the beginning. */
-		expectedCodeBundleDirectory = expectedCodeBundleDirectory.substring(15);
-
-		/* Open the file. */
-		expectedCodeFile = new File(expectedCodeBundleDirectory
-				+ expectedFilePath);
-
-		/* Split the given String into lines */
-		aStringsLines = aString.split("\n");
-
-		/* Compare String lines with expected lines from text file. */
-		try {
-			/* Open expected String file. */
-			diffReader = new BufferedReader(new FileReader(expectedCodeFile));
-
-			/*
-			 * Read the difference file per line and compare with the given
-			 * String.
-			 */
-			diffLine = diffReader.readLine();
-
-			/* Index for given String lines. */
-			index = 0;
-
-			while (diffLine != null) {
-
-				/* Check array index. */
-				if (index >= aStringsLines.length) {
-
-					if (diffLine.trim().length() > 0) {
-						fail("Given String was longer than the diff file. Test failed");
-					}
-					// no else.
-
-				}
-
-				/*
-				 * Check if both lines match (without leading and tailing white
-				 * spaces!).
-				 */
-				else {
-
-					/*
-					 * If a line does not equal, print out the compared file and
-					 * fail.
-					 */
-					if (!diffLine.trim().equals(aStringsLines[index].trim())) {
-
-						System.out.println(">>" + aString + "<<");
-
-						assertEquals(diffLine.trim(), aStringsLines[index]
-								.trim());
-					}
-				}
-
-				/*
-				 * Get next line from the difference file and increment array
-				 * index.
-				 */
-				diffLine = diffReader.readLine();
-				index++;
-			}
-			// end while.
-		}
-		// end try.
-
-		catch (FileNotFoundException e) {
-			throw new Ocl2CodeException(
-					"An already found file was not found. Test failed.");
-		}
-
-		catch (IOException e) {
-			throw new Ocl2CodeException(
-					"A line from difference file could not be read. Test failed");
 		}
 	}
 }

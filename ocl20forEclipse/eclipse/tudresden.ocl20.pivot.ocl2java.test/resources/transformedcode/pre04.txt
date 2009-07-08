@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 
 @Generated
-public privileged aspect PreAspect4 {
+public privileged aspect PreAspect1 {
 
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram#addService(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aPartner, tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel aLevel, tudresden.ocl20.pivot.examples.royalsandloyals.Service aService)}.</p>

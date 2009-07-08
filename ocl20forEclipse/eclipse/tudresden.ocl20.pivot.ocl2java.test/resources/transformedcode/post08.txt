@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 
 @Generated
-public privileged aspect PostAspect8 {
+public privileged aspect PostAspect1 {
 
     protected java.util.Map<Object, Object> newInstances = new java.util.WeakHashMap<Object, Object>();
 

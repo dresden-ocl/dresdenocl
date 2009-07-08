@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 
 @Generated
-public privileged aspect InvAspect8 {
+public privileged aspect InvAspect1 {
 
     /* Declares a new super class containing the new attribute or method. */
     declare parents : tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram extends tudresden.ocl20.pivot.examples.royalsandloyals.constraints.ExtendedLoyaltyProgram;

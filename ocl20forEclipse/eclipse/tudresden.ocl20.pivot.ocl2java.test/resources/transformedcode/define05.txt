@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 
 @Generated
-public privileged aspect DefAspect5 {
+public privileged aspect DefAspect1 {
 
     /* Declares a new super class containing the new attribute or method. */
     declare parents : tudresden.ocl20.pivot.examples.royalsandloyals.Customer extends tudresden.ocl20.pivot.examples.royalsandloyals.constraints.ExtendedCustomer;
