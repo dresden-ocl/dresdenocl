@@ -63,334 +63,291 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * @generated
  */
 public class OperationItemProvider extends FeatureItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
-  /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  public OperationItemProvider(AdapterFactory adapterFactory) {
-    super(adapterFactory);
-  }
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	public OperationItemProvider(AdapterFactory adapterFactory) {
 
-  /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-    if (itemPropertyDescriptors == null) {
-      super.getPropertyDescriptors(object);
+		super(adapterFactory);
+	}
 
-      addOrderedPropertyDescriptor(object);
-      addUniquePropertyDescriptor(object);
-      addMultiplePropertyDescriptor(object);
-      addInputParameterPropertyDescriptor(object);
-      addOutputParameterPropertyDescriptor(object);
-      addReturnParameterPropertyDescriptor(object);
-      addSignatureParameterPropertyDescriptor(object);
-    }
-    return itemPropertyDescriptors;
-  }
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 
-  /**
-   * This adds a property descriptor for the Ordered feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addOrderedPropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_MultiplicityElement_ordered_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_MultiplicityElement_ordered_feature","_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__ORDERED,true,false,false,
-            ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,null,null));
-  }
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-  /**
-   * This adds a property descriptor for the Unique feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addUniquePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_MultiplicityElement_unique_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_MultiplicityElement_unique_feature","_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__UNIQUE,true,false,false,
-            ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,null,null));
-  }
+			addInputParameterPropertyDescriptor(object);
+			addOutputParameterPropertyDescriptor(object);
+			addReturnParameterPropertyDescriptor(object);
+			addSignatureParameterPropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
-  /**
-   * This adds a property descriptor for the Multiple feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addMultiplePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_MultiplicityElement_multiple_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_MultiplicityElement_multiple_feature","_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__MULTIPLE,true,false,false,
-            ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,null,null));
-  }
+	/**
+	 * This adds a property descriptor for the Input Parameter feature.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected void addInputParameterPropertyDescriptor(Object object) {
 
-  /**
-   * This adds a property descriptor for the Input Parameter feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addInputParameterPropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_Operation_inputParameter_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_Operation_inputParameter_feature","_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.OPERATION__INPUT_PARAMETER,false,false,false,null,null,
-            null));
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_Operation_inputParameter_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_Operation_inputParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.OPERATION__INPUT_PARAMETER, false,
+						false, false, null, null, null));
+	}
 
-  /**
-   * This adds a property descriptor for the Output Parameter feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addOutputParameterPropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_Operation_outputParameter_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_Operation_outputParameter_feature","_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.OPERATION__OUTPUT_PARAMETER,false,false,false,null,null,
-            null));
-  }
+	/**
+	 * This adds a property descriptor for the Output Parameter feature.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected void addOutputParameterPropertyDescriptor(Object object) {
 
-  /**
-   * This adds a property descriptor for the Return Parameter feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addReturnParameterPropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_Operation_returnParameter_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_Operation_returnParameter_feature","_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.OPERATION__RETURN_PARAMETER,false,false,false,null,null,
-            null));
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_Operation_outputParameter_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_Operation_outputParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.OPERATION__OUTPUT_PARAMETER, false,
+						false, false, null, null, null));
+	}
 
-  /**
-   * This adds a property descriptor for the Signature Parameter feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void addSignatureParameterPropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_Operation_signatureParameter_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_Operation_signatureParameter_feature","_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.OPERATION__SIGNATURE_PARAMETER,false,false,false,null,
-            null,null));
-  }
+	/**
+	 * This adds a property descriptor for the Return Parameter feature.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected void addReturnParameterPropertyDescriptor(Object object) {
 
-  /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
-   * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
-   * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-    if (childrenFeatures == null) {
-      super.getChildrenFeatures(object);
-      childrenFeatures.add(PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
-      childrenFeatures.add(PivotModelPackageImpl.Literals.OPERATION__OWNED_PARAMETER);
-    }
-    return childrenFeatures;
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_Operation_returnParameter_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_Operation_returnParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.OPERATION__RETURN_PARAMETER, false,
+						false, false, null, null, null));
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EStructuralFeature getChildFeature(Object object, Object child) {
-    // Check the type of the specified child object and return the proper feature to use for
-    // adding (see {@link AddCommand}) it as a child.
+	/**
+	 * This adds a property descriptor for the Signature Parameter feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSignatureParameterPropertyDescriptor(Object object) {
 
-    return super.getChildFeature(object,child);
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_Operation_signatureParameter_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_Operation_signatureParameter_feature", "_UI_Operation_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.OPERATION__SIGNATURE_PARAMETER,
+						false, false, false, null, null, null));
+	}
 
-  /**
-   * This returns Operation.gif.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/Operation")); //$NON-NLS-1$
-  }
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
+	 * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 
-  /**
-   * This returns the label text for the adapted class.
-   * 
-   * <p>
-   * The EMF-generated code is extended to simply call
-   * {@link super#getText(Object) the super implementation}.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String getText(Object object) {
-    return super.getText(object);
-  }
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures
+					.add(PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
+			childrenFeatures
+					.add(PivotModelPackageImpl.Literals.OPERATION__OWNED_PARAMETER);
+		}
+		return childrenFeatures;
+	}
 
-  /**
-   * Overridden to return the name of the operation and a list of parameters. If the operation is
-   * generic, it will also prepend any type parameters in analogy to Java generics.
-   * 
-   * @see tudresden.ocl20.pivot.pivotmodel.provider.TypedElementItemProvider#getTypedElementName(tudresden.ocl20.pivot.pivotmodel.TypedElement)
-   */
-  @Override
-  protected CharSequence getTypedElementName(TypedElement typedElement) {
-    StringBuilder name;
-    Operation operation;
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
 
-    // create a casted version of the typed element
-    operation = (Operation) typedElement;
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
 
-    // initialize with empty string
-    name = new StringBuilder();
+		return super.getChildFeature(object, child);
+	}
 
-    // append type parameters if there are any
-    if (!operation.getOwnedTypeParameter().isEmpty()) {
-      name.append(getTypeParameterListOpeningDelimiter());
+	/**
+	 * This returns Operation.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
 
-      for (Iterator<TypeParameter> it = operation.getOwnedTypeParameter().iterator(); it.hasNext();) {
-        name.append(it.next().getName());
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/Operation")); //$NON-NLS-1$
+	}
 
-        if (it.hasNext()) {
-          name.append(", "); //$NON-NLS-1$
-        }
-      }
+	/**
+	 * This returns the label text for the adapted class.
+	 * 
+	 * <p>
+	 * The EMF-generated code is extended to simply call
+	 * {@link super#getText(Object) the super implementation}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
 
-      name.append(getTypeParameterListClosingDelimiter()).append(' ');
-    }
+		return super.getText(object);
+	}
 
-    // append the name of the operation
-    name.append(operation.getName());
+	/**
+	 * Overridden to return the name of the operation and a list of parameters. If the operation is
+	 * generic, it will also prepend any type parameters in analogy to Java generics.
+	 * 
+	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypedElementItemProvider#getTypedElementName(tudresden.ocl20.pivot.pivotmodel.TypedElement)
+	 */
+	@Override
+	protected CharSequence getTypedElementName(TypedElement typedElement) {
 
-    // append parameters
-    name.append('(');
+		StringBuilder name;
+		Operation operation;
 
-    for (Iterator<Parameter> it = operation.getSignatureParameter().iterator(); it.hasNext();) {
-      Parameter parameter = it.next();
+		// create a casted version of the typed element
+		operation = (Operation) typedElement;
 
-      // use the parameter-specific label provider for rendering the text
-      name.append(getLabel(parameter));
+		// initialize with empty string
+		name = new StringBuilder();
 
-      if (it.hasNext()) {
-        name.append(", "); //$NON-NLS-1$
-      }
-    }
+		// append type parameters if there are any
+		if (!operation.getOwnedTypeParameter().isEmpty()) {
+			name.append(getTypeParameterListOpeningDelimiter());
 
-    name.append(')');
+			for (Iterator<TypeParameter> it =
+					operation.getOwnedTypeParameter().iterator(); it.hasNext();) {
+				name.append(it.next().getName());
 
-    return name;
-  }
+				if (it.hasNext()) {
+					name.append(", "); //$NON-NLS-1$
+				}
+			}
 
-  /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * 
-   * <p>
-   * The EMF implementation is altered here to send content refresh and label refresh notifications
-   * if the owned parameters or the (generic) type of the operation changes (an update to a
-   * contained return parameter might be necessary). In addition, changes to the owned type
-   * parameters should trigger a label update.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public void notifyChanged(Notification notification) {
-    updateChildren(notification);
+			name.append(getTypeParameterListClosingDelimiter()).append(' ');
+		}
 
-    switch (notification.getFeatureID(Operation.class)) {
-      case PivotModelPackageImpl.OPERATION__TYPE:
-      case PivotModelPackageImpl.OPERATION__GENERIC_TYPE:
-      case PivotModelPackageImpl.OPERATION__OWNED_PARAMETER:
-      case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,true));
-        return;
-    }
-    super.notifyChanged(notification);
-  }
+		// append the name of the operation
+		name.append(operation.getName());
 
-  /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+		// append parameters
+		name.append('(');
 
-    newChildDescriptors.add(createChildParameter(
-        PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-        PivotModelFactory.INSTANCE.createTypeParameter()));
+		for (Iterator<Parameter> it = operation.getSignatureParameter().iterator(); it
+				.hasNext();) {
+			Parameter parameter = it.next();
 
-    newChildDescriptors.add(createChildParameter(
-        PivotModelPackageImpl.Literals.OPERATION__OWNED_PARAMETER,PivotModelFactory.INSTANCE
-            .createParameter()));
-  }
+			// use the parameter-specific label provider for rendering the text
+			name.append(getLabel(parameter));
 
-  /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ResourceLocator getResourceLocator() {
-    return PivotModelEditPlugin.INSTANCE;
-  }
+			if (it.hasNext()) {
+				name.append(", "); //$NON-NLS-1$
+			}
+		}
+
+		name.append(')');
+
+		return name;
+	}
+
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * 
+	 * <p>
+	 * The EMF implementation is altered here to send content refresh and label refresh notifications
+	 * if the owned parameters or the (generic) type of the operation changes (an update to a
+	 * contained return parameter might be necessary). In addition, changes to the owned type
+	 * parameters should trigger a label update.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void notifyChanged(Notification notification) {
+
+		updateChildren(notification);
+
+		switch (notification.getFeatureID(Operation.class)) {
+		case PivotModelPackageImpl.OPERATION__TYPE:
+		case PivotModelPackageImpl.OPERATION__GENERIC_TYPE:
+		case PivotModelPackageImpl.OPERATION__OWNED_PARAMETER:
+		case PivotModelPackageImpl.OPERATION__OWNED_TYPE_PARAMETER:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, true));
+			return;
+		}
+		super.notifyChanged(notification);
+	}
+
+	/**
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
+
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+				PivotModelFactory.INSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackageImpl.Literals.OPERATION__OWNED_PARAMETER,
+				PivotModelFactory.INSTANCE.createParameter()));
+	}
 
 }

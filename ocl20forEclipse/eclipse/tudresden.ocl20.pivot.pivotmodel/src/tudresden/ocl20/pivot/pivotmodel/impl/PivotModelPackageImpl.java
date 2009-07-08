@@ -102,7 +102,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String eNS_URI = "http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel"; //$NON-NLS-1$
+	public static final String eNS_URI =
+			"http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
@@ -118,8 +119,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final PivotModelPackageImpl eINSTANCE = tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl
-			.init();
+	public static final PivotModelPackageImpl eINSTANCE =
+			tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -213,7 +214,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPED_ELEMENT__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+	public static final int TYPED_ELEMENT__QUALIFIED_NAME =
+			NAMED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -240,7 +242,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPED_ELEMENT__GENERIC_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	public static final int TYPED_ELEMENT__GENERIC_TYPE =
+			NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Typed Element</em>' class.
@@ -249,7 +252,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPED_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	public static final int TYPED_ELEMENT_FEATURE_COUNT =
+			NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl <em>Feature</em>}' class.
@@ -277,7 +281,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FEATURE__QUALIFIED_NAME = TYPED_ELEMENT__QUALIFIED_NAME;
+	public static final int FEATURE__QUALIFIED_NAME =
+			TYPED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -349,7 +354,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FEATURE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	public static final int FEATURE_FEATURE_COUNT =
+			TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl <em>Operation</em>}' class.
@@ -513,7 +519,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GENERIC_ELEMENT__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+	public static final int GENERIC_ELEMENT__QUALIFIED_NAME =
+			NAMED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -531,7 +538,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GENERIC_ELEMENT__OWNED_TYPE_PARAMETER = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	public static final int GENERIC_ELEMENT__OWNED_TYPE_PARAMETER =
+			NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Generic Element</em>' class.
@@ -540,7 +548,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GENERIC_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	public static final int GENERIC_ELEMENT_FEATURE_COUNT =
+			NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Constrainable Element</em>' class.
@@ -567,7 +576,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NAMESPACE__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+	public static final int NAMESPACE__QUALIFIED_NAME =
+			NAMED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -585,7 +595,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NAMESPACE__OWNED_TYPE_PARAMETER = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	public static final int NAMESPACE__OWNED_TYPE_PARAMETER =
+			NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
@@ -594,7 +605,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NAMESPACE__OWNED_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	public static final int NAMESPACE__OWNED_TYPE =
+			NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -603,7 +615,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NAMESPACE__OWNED_RULE = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	public static final int NAMESPACE__OWNED_RULE =
+			NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Nested Namespace</b></em>' containment reference list.
@@ -612,7 +625,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NAMESPACE__NESTED_NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	public static final int NAMESPACE__NESTED_NAMESPACE =
+			NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Nesting Namespace</b></em>' container reference.
@@ -621,7 +635,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NAMESPACE__NESTING_NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	public static final int NAMESPACE__NESTING_NAMESPACE =
+			NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Namespace</em>' class.
@@ -630,7 +645,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NAMESPACE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	public static final int NAMESPACE_FEATURE_COUNT =
+			NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -666,7 +682,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE__OWNED_TYPE_PARAMETER = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	public static final int TYPE__OWNED_TYPE_PARAMETER =
+			NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' container reference.
@@ -684,7 +701,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE__OWNED_OPERATION = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	public static final int TYPE__OWNED_OPERATION =
+			NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Property</b></em>' containment reference list.
@@ -693,7 +711,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE__OWNED_PROPERTY = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	public static final int TYPE__OWNED_PROPERTY =
+			NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
@@ -711,7 +730,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE__GENERIC_SUPER_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	public static final int TYPE__GENERIC_SUPER_TYPE =
+			NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Type</em>' class.
@@ -756,7 +776,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRIMITIVE_TYPE__OWNED_TYPE_PARAMETER = TYPE__OWNED_TYPE_PARAMETER;
+	public static final int PRIMITIVE_TYPE__OWNED_TYPE_PARAMETER =
+			TYPE__OWNED_TYPE_PARAMETER;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' container reference.
@@ -774,7 +795,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRIMITIVE_TYPE__OWNED_OPERATION = TYPE__OWNED_OPERATION;
+	public static final int PRIMITIVE_TYPE__OWNED_OPERATION =
+			TYPE__OWNED_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Property</b></em>' containment reference list.
@@ -801,7 +823,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRIMITIVE_TYPE__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
+	public static final int PRIMITIVE_TYPE__GENERIC_SUPER_TYPE =
+			TYPE__GENERIC_SUPER_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -855,7 +878,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ENUMERATION__OWNED_TYPE_PARAMETER = TYPE__OWNED_TYPE_PARAMETER;
+	public static final int ENUMERATION__OWNED_TYPE_PARAMETER =
+			TYPE__OWNED_TYPE_PARAMETER;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' container reference.
@@ -900,7 +924,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ENUMERATION__GENERIC_SUPER_TYPE = TYPE__GENERIC_SUPER_TYPE;
+	public static final int ENUMERATION__GENERIC_SUPER_TYPE =
+			TYPE__GENERIC_SUPER_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Literal</b></em>' containment reference list.
@@ -936,7 +961,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ENUMERATION_LITERAL__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+	public static final int ENUMERATION_LITERAL__QUALIFIED_NAME =
+			NAMED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -954,7 +980,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ENUMERATION_LITERAL__ENUMERATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	public static final int ENUMERATION_LITERAL__ENUMERATION =
+			NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Enumeration Literal</em>' class.
@@ -963,7 +990,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ENUMERATION_LITERAL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	public static final int ENUMERATION_LITERAL_FEATURE_COUNT =
+			NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1152,7 +1180,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OPERATION__OWNED_TYPE_PARAMETER = FEATURE_FEATURE_COUNT + 0;
+	public static final int OPERATION__OWNED_TYPE_PARAMETER =
+			FEATURE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
@@ -1170,7 +1199,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OPERATION__OWNED_PARAMETER = FEATURE_FEATURE_COUNT + 2;
+	public static final int OPERATION__OWNED_PARAMETER =
+			FEATURE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Input Parameter</b></em>' reference list.
@@ -1179,7 +1209,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OPERATION__INPUT_PARAMETER = FEATURE_FEATURE_COUNT + 3;
+	public static final int OPERATION__INPUT_PARAMETER =
+			FEATURE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Output Parameter</b></em>' reference list.
@@ -1188,7 +1219,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OPERATION__OUTPUT_PARAMETER = FEATURE_FEATURE_COUNT + 4;
+	public static final int OPERATION__OUTPUT_PARAMETER =
+			FEATURE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Return Parameter</b></em>' reference.
@@ -1197,7 +1229,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OPERATION__RETURN_PARAMETER = FEATURE_FEATURE_COUNT + 5;
+	public static final int OPERATION__RETURN_PARAMETER =
+			FEATURE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Signature Parameter</b></em>' reference list.
@@ -1206,7 +1239,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OPERATION__SIGNATURE_PARAMETER = FEATURE_FEATURE_COUNT + 6;
+	public static final int OPERATION__SIGNATURE_PARAMETER =
+			FEATURE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
@@ -1233,7 +1267,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PARAMETER__QUALIFIED_NAME = TYPED_ELEMENT__QUALIFIED_NAME;
+	public static final int PARAMETER__QUALIFIED_NAME =
+			TYPED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -1305,7 +1340,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PARAMETER__OPERATION = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	public static final int PARAMETER__OPERATION =
+			TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
@@ -1314,7 +1350,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 5;
+	public static final int PARAMETER_FEATURE_COUNT =
+			TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl <em>Generic Type</em>}' class.
@@ -1342,7 +1379,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GENERIC_TYPE__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+	public static final int GENERIC_TYPE__QUALIFIED_NAME =
+			NAMED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -1360,7 +1398,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GENERIC_TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	public static final int GENERIC_TYPE_FEATURE_COUNT =
+			NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
@@ -1408,7 +1447,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PARAMETER_GENERIC_TYPE__QUALIFIED_NAME = GENERIC_TYPE__QUALIFIED_NAME;
+	public static final int PARAMETER_GENERIC_TYPE__QUALIFIED_NAME =
+			GENERIC_TYPE__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -1426,7 +1466,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PARAMETER_GENERIC_TYPE__TYPE_PARAMETER = GENERIC_TYPE_FEATURE_COUNT + 0;
+	public static final int PARAMETER_GENERIC_TYPE__TYPE_PARAMETER =
+			GENERIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Parameter Generic Type</em>' class.
@@ -1435,7 +1476,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PARAMETER_GENERIC_TYPE_FEATURE_COUNT = GENERIC_TYPE_FEATURE_COUNT + 1;
+	public static final int PARAMETER_GENERIC_TYPE_FEATURE_COUNT =
+			GENERIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl <em>Complex Generic Type</em>}' class.
@@ -1463,7 +1505,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COMPLEX_GENERIC_TYPE__QUALIFIED_NAME = GENERIC_TYPE__QUALIFIED_NAME;
+	public static final int COMPLEX_GENERIC_TYPE__QUALIFIED_NAME =
+			GENERIC_TYPE__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -1481,7 +1524,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COMPLEX_GENERIC_TYPE__UNBOUND_TYPE = GENERIC_TYPE_FEATURE_COUNT + 0;
+	public static final int COMPLEX_GENERIC_TYPE__UNBOUND_TYPE =
+			GENERIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type Argument</b></em>' containment reference list.
@@ -1490,7 +1534,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT = GENERIC_TYPE_FEATURE_COUNT + 1;
+	public static final int COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT =
+			GENERIC_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Complex Generic Type</em>' class.
@@ -1499,7 +1544,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COMPLEX_GENERIC_TYPE_FEATURE_COUNT = GENERIC_TYPE_FEATURE_COUNT + 2;
+	public static final int COMPLEX_GENERIC_TYPE_FEATURE_COUNT =
+			GENERIC_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1517,7 +1563,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE_PARAMETER__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+	public static final int TYPE_PARAMETER__QUALIFIED_NAME =
+			NAMED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -1535,7 +1582,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE_PARAMETER__GENERIC_ELEMENT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	public static final int TYPE_PARAMETER__GENERIC_ELEMENT =
+			NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Type Parameter</em>' class.
@@ -1544,7 +1592,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE_PARAMETER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	public static final int TYPE_PARAMETER_FEATURE_COUNT =
+			NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1562,7 +1611,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE_ARGUMENT__QUALIFIED_NAME = TYPED_ELEMENT__QUALIFIED_NAME;
+	public static final int TYPE_ARGUMENT__QUALIFIED_NAME =
+			TYPED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -1589,7 +1639,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE_ARGUMENT__GENERIC_TYPE = TYPED_ELEMENT__GENERIC_TYPE;
+	public static final int TYPE_ARGUMENT__GENERIC_TYPE =
+			TYPED_ELEMENT__GENERIC_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owning Generic Type</b></em>' container reference.
@@ -1598,7 +1649,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE_ARGUMENT__OWNING_GENERIC_TYPE = TYPED_ELEMENT_FEATURE_COUNT + 0;
+	public static final int TYPE_ARGUMENT__OWNING_GENERIC_TYPE =
+			TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Type Argument</em>' class.
@@ -1607,7 +1659,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TYPE_ARGUMENT_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
+	public static final int TYPE_ARGUMENT_FEATURE_COUNT =
+			TYPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1625,7 +1678,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CONSTRAINT__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
+	public static final int CONSTRAINT__QUALIFIED_NAME =
+			NAMED_ELEMENT__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -1652,7 +1706,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CONSTRAINT__NAMESPACE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	public static final int CONSTRAINT__NAMESPACE =
+			NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
@@ -1661,7 +1716,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CONSTRAINT__SPECIFICATION = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	public static final int CONSTRAINT__SPECIFICATION =
+			NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Constrained Element</b></em>' reference list.
@@ -1670,7 +1726,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CONSTRAINT__CONSTRAINED_ELEMENT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	public static final int CONSTRAINT__CONSTRAINED_ELEMENT =
+			NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Defined Feature</b></em>' reference.
@@ -1679,7 +1736,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CONSTRAINT__DEFINED_FEATURE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	public static final int CONSTRAINT__DEFINED_FEATURE =
+			NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Constraint</em>' class.
@@ -1688,7 +1746,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CONSTRAINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	public static final int CONSTRAINT_FEATURE_COUNT =
+			NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' attribute.
@@ -1957,6 +2016,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	private PivotModelPackageImpl() {
+
 		super(eNS_URI, ((EFactory) PivotModelFactory.INSTANCE));
 	}
 
@@ -1990,23 +2050,26 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public static PivotModelPackageImpl init() {
+
 		if (isInited)
 			return (PivotModelPackageImpl) EPackage.Registry.INSTANCE
 					.getEPackage(PivotModelPackageImpl.eNS_URI);
 
 		// Obtain or create and register package
-		PivotModelPackageImpl thePivotModelPackageImpl = (PivotModelPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI)
-				: new PivotModelPackageImpl());
+		PivotModelPackageImpl thePivotModelPackageImpl =
+				(PivotModelPackageImpl) (EPackage.Registry.INSTANCE
+						.getEPackage(eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
+						.getEPackage(eNS_URI)
+						: new PivotModelPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DatatypesPackageImpl theDatatypesPackageImpl = (DatatypesPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(DatatypesPackageImpl.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(DatatypesPackageImpl.eNS_URI)
-				: DatatypesPackageImpl.eINSTANCE);
+		DatatypesPackageImpl theDatatypesPackageImpl =
+				(DatatypesPackageImpl) (EPackage.Registry.INSTANCE
+						.getEPackage(DatatypesPackageImpl.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
+						.getEPackage(DatatypesPackageImpl.eNS_URI)
+						: DatatypesPackageImpl.eINSTANCE);
 
 		// Create package meta-data objects
 		thePivotModelPackageImpl.createPackageContents();
@@ -2031,6 +2094,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getEnumeration() {
+
 		return enumerationEClass;
 	}
 
@@ -2044,6 +2108,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getEnumeration_OwnedLiteral() {
+
 		return (EReference) enumerationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2056,6 +2121,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getNamedElement() {
+
 		return namedElementEClass;
 	}
 
@@ -2069,6 +2135,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getNamedElement_Name() {
+
 		return (EAttribute) namedElementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2082,6 +2149,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getNamedElement_QualifiedName() {
+
 		return (EAttribute) namedElementEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2095,6 +2163,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getNamedElement_Owner() {
+
 		return (EReference) namedElementEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2107,6 +2176,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getOperation() {
+
 		return operationEClass;
 	}
 
@@ -2120,6 +2190,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getOperation_OwningType() {
+
 		return (EReference) operationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2133,6 +2204,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getOperation_OwnedParameter() {
+
 		return (EReference) operationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2146,6 +2218,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getOperation_InputParameter() {
+
 		return (EReference) operationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2159,6 +2232,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getOperation_OutputParameter() {
+
 		return (EReference) operationEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -2172,6 +2246,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getOperation_ReturnParameter() {
+
 		return (EReference) operationEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -2185,6 +2260,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getOperation_SignatureParameter() {
+
 		return (EReference) operationEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -2197,6 +2273,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getMultiplicityElement() {
+
 		return multiplicityElementEClass;
 	}
 
@@ -2210,8 +2287,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getMultiplicityElement_Ordered() {
-		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures()
-				.get(0);
+
+		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures().get(
+				0);
 	}
 
 	/**
@@ -2224,8 +2302,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getMultiplicityElement_Unique() {
-		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures()
-				.get(1);
+
+		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures().get(
+				1);
 	}
 
 	/**
@@ -2238,8 +2317,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getMultiplicityElement_Multiple() {
-		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures()
-				.get(2);
+
+		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures().get(
+				2);
 	}
 
 	/**
@@ -2251,6 +2331,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getNamespace() {
+
 		return namespaceEClass;
 	}
 
@@ -2264,6 +2345,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getNamespace_OwnedType() {
+
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2277,6 +2359,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getNamespace_OwnedRule() {
+
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2290,6 +2373,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getNamespace_NestedNamespace() {
+
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2303,6 +2387,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getNamespace_NestingNamespace() {
+
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -2315,6 +2400,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getType() {
+
 		return typeEClass;
 	}
 
@@ -2328,6 +2414,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getType_SuperType() {
+
 		return (EReference) typeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -2341,6 +2428,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getType_GenericSuperType() {
+
 		return (EReference) typeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -2354,6 +2442,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getType_OwnedOperation() {
+
 		return (EReference) typeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2367,6 +2456,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getType_OwnedProperty() {
+
 		return (EReference) typeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2380,6 +2470,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getType_Namespace() {
+
 		return (EReference) typeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2392,6 +2483,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getParameter() {
+
 		return parameterEClass;
 	}
 
@@ -2405,6 +2497,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getParameter_Kind() {
+
 		return (EAttribute) parameterEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2418,6 +2511,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getParameter_Operation() {
+
 		return (EReference) parameterEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2430,6 +2524,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getEnumerationLiteral() {
+
 		return enumerationLiteralEClass;
 	}
 
@@ -2443,6 +2538,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getEnumerationLiteral_Enumeration() {
+
 		return (EReference) enumerationLiteralEClass.getEStructuralFeatures()
 				.get(0);
 	}
@@ -2456,6 +2552,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getProperty() {
+
 		return propertyEClass;
 	}
 
@@ -2469,6 +2566,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getProperty_OwningType() {
+
 		return (EReference) propertyEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2481,6 +2579,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getTypedElement() {
+
 		return typedElementEClass;
 	}
 
@@ -2494,6 +2593,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getTypedElement_Type() {
+
 		return (EReference) typedElementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2507,6 +2607,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getTypedElement_GenericType() {
+
 		return (EReference) typedElementEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2519,6 +2620,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getPrimitiveType() {
+
 		return primitiveTypeEClass;
 	}
 
@@ -2532,6 +2634,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getPrimitiveType_Kind() {
+
 		return (EAttribute) primitiveTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2544,6 +2647,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getFeature() {
+
 		return featureEClass;
 	}
 
@@ -2557,6 +2661,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getFeature_Static() {
+
 		return (EAttribute) featureEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2569,6 +2674,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getConstraint() {
+
 		return constraintEClass;
 	}
 
@@ -2582,6 +2688,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getConstraint_Kind() {
+
 		return (EAttribute) constraintEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2595,6 +2702,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getConstraint_Namespace() {
+
 		return (EReference) constraintEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2608,6 +2716,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getConstraint_Specification() {
+
 		return (EReference) constraintEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2621,6 +2730,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getConstraint_ConstrainedElement() {
+
 		return (EReference) constraintEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -2634,6 +2744,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getConstraint_DefinedFeature() {
+
 		return (EReference) constraintEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -2646,6 +2757,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getExpression() {
+
 		return expressionEClass;
 	}
 
@@ -2659,6 +2771,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getExpression_Body() {
+
 		return (EAttribute) expressionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2672,6 +2785,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EAttribute getExpression_Language() {
+
 		return (EAttribute) expressionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2685,6 +2799,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getExpression_Constraint() {
+
 		return (EReference) expressionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2697,6 +2812,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getConstrainableElement() {
+
 		return constrainableElementEClass;
 	}
 
@@ -2709,6 +2825,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getGenericElement() {
+
 		return genericElementEClass;
 	}
 
@@ -2722,8 +2839,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getGenericElement_OwnedTypeParameter() {
-		return (EReference) genericElementEClass.getEStructuralFeatures()
-				.get(0);
+
+		return (EReference) genericElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2735,6 +2852,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getGenericType() {
+
 		return genericTypeEClass;
 	}
 
@@ -2747,6 +2865,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getTypeParameter() {
+
 		return typeParameterEClass;
 	}
 
@@ -2760,6 +2879,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getTypeParameter_GenericElement() {
+
 		return (EReference) typeParameterEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2772,6 +2892,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getTypeArgument() {
+
 		return typeArgumentEClass;
 	}
 
@@ -2785,6 +2906,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getTypeArgument_OwningGenericType() {
+
 		return (EReference) typeArgumentEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2797,6 +2919,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getParameterGenericType() {
+
 		return parameterGenericTypeEClass;
 	}
 
@@ -2810,6 +2933,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getParameterGenericType_TypeParameter() {
+
 		return (EReference) parameterGenericTypeEClass.getEStructuralFeatures()
 				.get(0);
 	}
@@ -2823,6 +2947,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EClass getComplexGenericType() {
+
 		return complexGenericTypeEClass;
 	}
 
@@ -2836,6 +2961,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getComplexGenericType_UnboundType() {
+
 		return (EReference) complexGenericTypeEClass.getEStructuralFeatures()
 				.get(0);
 	}
@@ -2850,6 +2976,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getComplexGenericType_TypeArgument() {
+
 		return (EReference) complexGenericTypeEClass.getEStructuralFeatures()
 				.get(1);
 	}
@@ -2863,6 +2990,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EEnum getParameterDirectionKind() {
+
 		return parameterDirectionKindEEnum;
 	}
 
@@ -2875,6 +3003,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EEnum getConstraintKind() {
+
 		return constraintKindEEnum;
 	}
 
@@ -2887,6 +3016,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EEnum getPrimitiveTypeKind() {
+
 		return primitiveTypeKindEEnum;
 	}
 
@@ -2899,6 +3029,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getCloneNotSupportedException() {
+
 		return cloneNotSupportedExceptionEDataType;
 	}
 
@@ -2910,6 +3041,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public PivotModelFactory getPivotModelFactory() {
+
 		return (PivotModelFactory) getEFactoryInstance();
 	}
 
@@ -2928,6 +3060,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public void createPackageContents() {
+
 		if (isCreated)
 			return;
 		isCreated = true;
@@ -2946,12 +3079,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		createEAttribute(featureEClass, FEATURE__STATIC);
 
 		multiplicityElementEClass = createEClass(MULTIPLICITY_ELEMENT);
-		createEAttribute(multiplicityElementEClass,
-				MULTIPLICITY_ELEMENT__ORDERED);
-		createEAttribute(multiplicityElementEClass,
-				MULTIPLICITY_ELEMENT__UNIQUE);
-		createEAttribute(multiplicityElementEClass,
-				MULTIPLICITY_ELEMENT__MULTIPLE);
+		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__ORDERED);
+		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__UNIQUE);
+		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__MULTIPLE);
 
 		genericElementEClass = createEClass(GENERIC_ELEMENT);
 		createEReference(genericElementEClass,
@@ -2979,8 +3109,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		createEReference(enumerationEClass, ENUMERATION__OWNED_LITERAL);
 
 		enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
-		createEReference(enumerationLiteralEClass,
-				ENUMERATION_LITERAL__ENUMERATION);
+		createEReference(enumerationLiteralEClass, ENUMERATION_LITERAL__ENUMERATION);
 
 		propertyEClass = createEClass(PROPERTY);
 		createEReference(propertyEClass, PROPERTY__OWNING_TYPE);
@@ -3033,7 +3162,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		constraintKindEEnum = createEEnum(CONSTRAINT_KIND);
 
 		// Create data types
-		cloneNotSupportedExceptionEDataType = createEDataType(CLONE_NOT_SUPPORTED_EXCEPTION);
+		cloneNotSupportedExceptionEDataType =
+				createEDataType(CLONE_NOT_SUPPORTED_EXCEPTION);
 	}
 
 	/**
@@ -3051,6 +3181,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public void initializePackageContents() {
+
 		if (isInitialized)
 			return;
 		isInitialized = true;
@@ -3061,8 +3192,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		DatatypesPackageImpl theDatatypesPackageImpl = (DatatypesPackageImpl) EPackage.Registry.INSTANCE
-				.getEPackage(DatatypesPackageImpl.eNS_URI);
+		DatatypesPackageImpl theDatatypesPackageImpl =
+				(DatatypesPackageImpl) EPackage.Registry.INSTANCE
+						.getEPackage(DatatypesPackageImpl.eNS_URI);
 
 		// Create type parameters
 
@@ -3103,9 +3235,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(
-				namedElementEClass,
-				NamedElement.class,
+		initEClass(namedElementEClass, NamedElement.class,
 				"NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getNamedElement_Name(),
@@ -3121,13 +3251,12 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				null,
 				"owner", null, 0, 1, NamedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		EOperation op = addEOperation(namedElementEClass, this
-				.getNamedElement(), "clone", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		EOperation op =
+				addEOperation(namedElementEClass, this.getNamedElement(),
+						"clone", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEException(op, this.getCloneNotSupportedException());
 
-		initEClass(
-				typedElementEClass,
-				TypedElement.class,
+		initEClass(typedElementEClass, TypedElement.class,
 				"TypedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getTypedElement_Type(),
@@ -3140,9 +3269,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				null,
 				"genericType", null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				featureEClass,
-				Feature.class,
+		initEClass(featureEClass, Feature.class,
 				"Feature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getFeature_Static(),
@@ -3176,10 +3303,10 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				this.getTypeParameter_GenericElement(),
 				"ownedTypeParameter", null, 0, -1, GenericElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(genericElementEClass, this.getNamedElement(),
-				"bindTypeParameter", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		EGenericType g1 = createEGenericType(theDatatypesPackageImpl
-				.getSequence());
+		op =
+				addEOperation(genericElementEClass, this.getNamedElement(),
+						"bindTypeParameter", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		EGenericType g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
 		EGenericType g2 = createEGenericType(this.getTypeParameter());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "parameters", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
@@ -3190,8 +3317,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		g2.setEUpperBound(g3);
 		addEParameter(op, g1, "types", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(genericElementEClass, this.getGenericElement(),
-				"addTypeParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(genericElementEClass, this.getGenericElement(),
+						"addTypeParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getTypeParameter(),
 				"typeParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
@@ -3200,9 +3328,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				ConstrainableElement.class,
 				"ConstrainableElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(
-				namespaceEClass,
-				Namespace.class,
+		initEClass(namespaceEClass, Namespace.class,
 				"Namespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getNamespace_OwnedType(),
@@ -3225,36 +3351,38 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				this.getNamespace_NestedNamespace(),
 				"nestingNamespace", null, 0, 1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(namespaceEClass, this.getNamespace(),
-				"addType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(namespaceEClass, this.getNamespace(),
+						"addType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(namespaceEClass, this.getNamespace(),
-				"addRule", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getConstraint(),
-				"rule", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(namespaceEClass, this.getNamespace(),
+						"addRule", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getConstraint(), "rule", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(namespaceEClass, this.getNamespace(),
-				"addNestedNamespace", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(namespaceEClass, this.getNamespace(),
+						"addNestedNamespace", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getNamespace(),
 				"namespace", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		addEOperation(namespaceEClass, this.getConstraint(),
 				"getOwnedAndNestedRules", 0, -1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(namespaceEClass, this.getType(),
-				"lookupType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(namespaceEClass, this.getType(),
+						"lookupType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackageImpl.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(namespaceEClass, this.getNamespace(),
-				"lookupNamespace", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(namespaceEClass, this.getNamespace(),
+						"lookupNamespace", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackageImpl.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				typeEClass,
-				Type.class,
+		initEClass(typeEClass, Type.class,
 				"Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getType_Namespace(),
@@ -3282,35 +3410,41 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				null,
 				"genericSuperType", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(typeEClass, theDatatypesPackageImpl.getBoolean(),
-				"conformsTo", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(typeEClass, theDatatypesPackageImpl.getBoolean(),
+						"conformsTo", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "other", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(typeEClass, this.getType(),
-				"commonSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(typeEClass, this.getType(),
+						"commonSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "other", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(typeEClass, null,
-				"allProperties", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(typeEClass, null,
+						"allProperties", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
 		g2 = createEGenericType(this.getProperty());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = addEOperation(typeEClass, null,
-				"allOperations", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(typeEClass, null,
+						"allOperations", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
 		g2 = createEGenericType(this.getOperation());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = addEOperation(typeEClass, this.getProperty(),
-				"lookupProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(typeEClass, this.getProperty(),
+						"lookupProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackageImpl.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(typeEClass, this.getOperation(),
-				"lookupOperation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(typeEClass, this.getOperation(),
+						"lookupOperation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackageImpl.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
@@ -3318,18 +3452,21 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "paramTypes", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(typeEClass, this.getType(),
-				"addProperty", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(typeEClass, this.getType(),
+						"addProperty", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getProperty(),
 				"property", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(typeEClass, this.getType(),
-				"addOperation", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(typeEClass, this.getType(),
+						"addOperation", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getOperation(),
 				"operation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(typeEClass, this.getType(),
-				"addSuperType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(typeEClass, this.getType(),
+						"addSuperType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(
@@ -3341,9 +3478,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				this.getPrimitiveTypeKind(),
 				"kind", "Unknown", 1, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-		initEClass(
-				enumerationEClass,
-				Enumeration.class,
+		initEClass(enumerationEClass, Enumeration.class,
 				"Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getEnumeration_OwnedLiteral(),
@@ -3351,13 +3486,15 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				this.getEnumerationLiteral_Enumeration(),
 				"ownedLiteral", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(enumerationEClass, this.getEnumeration(),
-				"addLiteral", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(enumerationEClass, this.getEnumeration(),
+						"addLiteral", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getEnumerationLiteral(),
 				"literal", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(enumerationEClass, this.getEnumerationLiteral(),
-				"lookupLiteral", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(enumerationEClass, this.getEnumerationLiteral(),
+						"lookupLiteral", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackageImpl.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
@@ -3371,9 +3508,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				this.getEnumeration_OwnedLiteral(),
 				"enumeration", null, 0, 1, EnumerationLiteral.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				propertyEClass,
-				Property.class,
+		initEClass(propertyEClass, Property.class,
 				"Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getProperty_OwningType(),
@@ -3381,14 +3516,12 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				this.getType_OwnedProperty(),
 				"owningType", null, 0, 1, Property.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(propertyEClass,
-				theDatatypesPackageImpl.getBoolean(),
-				"cmpSlots", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(propertyEClass, theDatatypesPackageImpl.getBoolean(),
+						"cmpSlots", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getProperty(), "p", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				operationEClass,
-				Operation.class,
+		initEClass(operationEClass, Operation.class,
 				"Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getOperation_OwningType(),
@@ -3421,22 +3554,20 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				null,
 				"signatureParameter", null, 0, -1, Operation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(operationEClass, theDatatypesPackageImpl
-				.getBoolean(),
-				"hasMatchingSignature", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(operationEClass, theDatatypesPackageImpl.getBoolean(),
+						"hasMatchingSignature", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
 		g2 = createEGenericType(this.getType());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "paramTypes", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(operationEClass, this.getOperation(),
-				"addParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getParameter(),
-				"param", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(operationEClass, this.getOperation(),
+						"addParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getParameter(), "param", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				parameterEClass,
-				Parameter.class,
+		initEClass(parameterEClass, Parameter.class,
 				"Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getParameter_Kind(),
@@ -3451,13 +3582,12 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		addEOperation(parameterEClass, this.getProperty(),
 				"asProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				genericTypeEClass,
-				GenericType.class,
+		initEClass(genericTypeEClass, GenericType.class,
 				"GenericType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		op = addEOperation(genericTypeEClass, theDatatypesPackageImpl
-				.getBoolean(), "bindGenericType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(genericTypeEClass, theDatatypesPackageImpl.getBoolean(),
+						"bindGenericType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
 		g2 = createEGenericType(this.getTypeParameter());
 		g1.getETypeArguments().add(g2);
@@ -3471,9 +3601,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		addEParameter(op, this.getTypedElement(),
 				"typedElement", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(genericTypeEClass, theDatatypesPackageImpl
-				.getBoolean(),
-				"bindGenericSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(genericTypeEClass, theDatatypesPackageImpl.getBoolean(),
+						"bindGenericSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackageImpl.getSequence());
 		g2 = createEGenericType(this.getTypeParameter());
 		g1.getETypeArguments().add(g2);
@@ -3484,11 +3614,11 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		g3 = createEGenericType(this.getType());
 		g2.setEUpperBound(g3);
 		addEParameter(op, g1, "types", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getType(),
-				"subType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getType(), "subType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(genericTypeEClass, theDatatypesPackageImpl
-				.getBoolean(), "isConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(genericTypeEClass, theDatatypesPackageImpl.getBoolean(),
+						"isConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(
@@ -3516,9 +3646,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				this.getTypeArgument_OwningGenericType(),
 				"typeArgument", null, 0, -1, ComplexGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(complexGenericTypeEClass, this
-				.getComplexGenericType(),
-				"addTypeArgument", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(complexGenericTypeEClass, this.getComplexGenericType(),
+						"addTypeArgument", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getTypeArgument(),
 				"typeArgument", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
@@ -3542,9 +3672,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				this.getComplexGenericType_TypeArgument(),
 				"owningGenericType", null, 0, 1, TypeArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				constraintEClass,
-				Constraint.class,
+		initEClass(constraintEClass, Constraint.class,
 				"Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getConstraint_Kind(),
@@ -3571,14 +3699,13 @@ public class PivotModelPackageImpl extends EPackageImpl {
 				null,
 				"definedFeature", null, 0, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(constraintEClass, this.getConstraint(),
-				"addConstrainedElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op =
+				addEOperation(constraintEClass, this.getConstraint(),
+						"addConstrainedElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getConstrainableElement(),
 				"constrainedElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(
-				expressionEClass,
-				Expression.class,
+		initEClass(expressionEClass, Expression.class,
 				"Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getExpression_Body(),
@@ -3602,15 +3729,14 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		addEEnumLiteral(primitiveTypeKindEEnum, PrimitiveTypeKind.REAL);
 		addEEnumLiteral(primitiveTypeKindEEnum, PrimitiveTypeKind.BOOLEAN);
 		addEEnumLiteral(primitiveTypeKindEEnum, PrimitiveTypeKind.STRING);
+		addEEnumLiteral(primitiveTypeKindEEnum, PrimitiveTypeKind.VOID);
 
 		initEEnum(parameterDirectionKindEEnum, ParameterDirectionKind.class,
 				"ParameterDirectionKind"); //$NON-NLS-1$
 		addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.IN);
 		addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.OUT);
-		addEEnumLiteral(parameterDirectionKindEEnum,
-				ParameterDirectionKind.INOUT);
-		addEEnumLiteral(parameterDirectionKindEEnum,
-				ParameterDirectionKind.RETURN);
+		addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.INOUT);
+		addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.RETURN);
 
 		initEEnum(constraintKindEEnum, ConstraintKind.class, "ConstraintKind"); //$NON-NLS-1$
 		addEEnumLiteral(constraintKindEEnum, ConstraintKind.INVARIANT);
@@ -3661,8 +3787,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference ENUMERATION__OWNED_LITERAL = eINSTANCE
-				.getEnumeration_OwnedLiteral();
+		public static final EReference ENUMERATION__OWNED_LITERAL =
+				eINSTANCE.getEnumeration_OwnedLiteral();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -3680,8 +3806,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute NAMED_ELEMENT__NAME = eINSTANCE
-				.getNamedElement_Name();
+		public static final EAttribute NAMED_ELEMENT__NAME =
+				eINSTANCE.getNamedElement_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
@@ -3689,8 +3815,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute NAMED_ELEMENT__QUALIFIED_NAME = eINSTANCE
-				.getNamedElement_QualifiedName();
+		public static final EAttribute NAMED_ELEMENT__QUALIFIED_NAME =
+				eINSTANCE.getNamedElement_QualifiedName();
 
 		/**
 		 * The meta object literal for the '<em><b>Owner</b></em>' reference feature.
@@ -3698,8 +3824,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference NAMED_ELEMENT__OWNER = eINSTANCE
-				.getNamedElement_Owner();
+		public static final EReference NAMED_ELEMENT__OWNER =
+				eINSTANCE.getNamedElement_Owner();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl <em>Operation</em>}' class.
@@ -3717,8 +3843,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference OPERATION__OWNING_TYPE = eINSTANCE
-				.getOperation_OwningType();
+		public static final EReference OPERATION__OWNING_TYPE =
+				eINSTANCE.getOperation_OwningType();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Parameter</b></em>' containment reference list feature.
@@ -3726,8 +3852,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference OPERATION__OWNED_PARAMETER = eINSTANCE
-				.getOperation_OwnedParameter();
+		public static final EReference OPERATION__OWNED_PARAMETER =
+				eINSTANCE.getOperation_OwnedParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Parameter</b></em>' reference list feature.
@@ -3735,8 +3861,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference OPERATION__INPUT_PARAMETER = eINSTANCE
-				.getOperation_InputParameter();
+		public static final EReference OPERATION__INPUT_PARAMETER =
+				eINSTANCE.getOperation_InputParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Output Parameter</b></em>' reference list feature.
@@ -3744,8 +3870,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference OPERATION__OUTPUT_PARAMETER = eINSTANCE
-				.getOperation_OutputParameter();
+		public static final EReference OPERATION__OUTPUT_PARAMETER =
+				eINSTANCE.getOperation_OutputParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Return Parameter</b></em>' reference feature.
@@ -3753,8 +3879,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference OPERATION__RETURN_PARAMETER = eINSTANCE
-				.getOperation_ReturnParameter();
+		public static final EReference OPERATION__RETURN_PARAMETER =
+				eINSTANCE.getOperation_ReturnParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Signature Parameter</b></em>' reference list feature.
@@ -3762,8 +3888,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference OPERATION__SIGNATURE_PARAMETER = eINSTANCE
-				.getOperation_SignatureParameter();
+		public static final EReference OPERATION__SIGNATURE_PARAMETER =
+				eINSTANCE.getOperation_SignatureParameter();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.MultiplicityElement <em>Multiplicity Element</em>}' class.
@@ -3773,8 +3899,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getMultiplicityElement()
 		 * @generated
 		 */
-		public static final EClass MULTIPLICITY_ELEMENT = eINSTANCE
-				.getMultiplicityElement();
+		public static final EClass MULTIPLICITY_ELEMENT =
+				eINSTANCE.getMultiplicityElement();
 
 		/**
 		 * The meta object literal for the '<em><b>Ordered</b></em>' attribute feature.
@@ -3782,8 +3908,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute MULTIPLICITY_ELEMENT__ORDERED = eINSTANCE
-				.getMultiplicityElement_Ordered();
+		public static final EAttribute MULTIPLICITY_ELEMENT__ORDERED =
+				eINSTANCE.getMultiplicityElement_Ordered();
 
 		/**
 		 * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
@@ -3791,8 +3917,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute MULTIPLICITY_ELEMENT__UNIQUE = eINSTANCE
-				.getMultiplicityElement_Unique();
+		public static final EAttribute MULTIPLICITY_ELEMENT__UNIQUE =
+				eINSTANCE.getMultiplicityElement_Unique();
 
 		/**
 		 * The meta object literal for the '<em><b>Multiple</b></em>' attribute feature.
@@ -3800,8 +3926,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute MULTIPLICITY_ELEMENT__MULTIPLE = eINSTANCE
-				.getMultiplicityElement_Multiple();
+		public static final EAttribute MULTIPLICITY_ELEMENT__MULTIPLE =
+				eINSTANCE.getMultiplicityElement_Multiple();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl <em>Namespace</em>}' class.
@@ -3819,8 +3945,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference NAMESPACE__OWNED_TYPE = eINSTANCE
-				.getNamespace_OwnedType();
+		public static final EReference NAMESPACE__OWNED_TYPE =
+				eINSTANCE.getNamespace_OwnedType();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Rule</b></em>' containment reference list feature.
@@ -3828,8 +3954,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference NAMESPACE__OWNED_RULE = eINSTANCE
-				.getNamespace_OwnedRule();
+		public static final EReference NAMESPACE__OWNED_RULE =
+				eINSTANCE.getNamespace_OwnedRule();
 
 		/**
 		 * The meta object literal for the '<em><b>Nested Namespace</b></em>' containment reference list feature.
@@ -3837,8 +3963,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference NAMESPACE__NESTED_NAMESPACE = eINSTANCE
-				.getNamespace_NestedNamespace();
+		public static final EReference NAMESPACE__NESTED_NAMESPACE =
+				eINSTANCE.getNamespace_NestedNamespace();
 
 		/**
 		 * The meta object literal for the '<em><b>Nesting Namespace</b></em>' container reference feature.
@@ -3846,8 +3972,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference NAMESPACE__NESTING_NAMESPACE = eINSTANCE
-				.getNamespace_NestingNamespace();
+		public static final EReference NAMESPACE__NESTING_NAMESPACE =
+				eINSTANCE.getNamespace_NestingNamespace();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl <em>Type</em>}' class.
@@ -3865,8 +3991,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference TYPE__SUPER_TYPE = eINSTANCE
-				.getType_SuperType();
+		public static final EReference TYPE__SUPER_TYPE =
+				eINSTANCE.getType_SuperType();
 
 		/**
 		 * The meta object literal for the '<em><b>Generic Super Type</b></em>' containment reference list feature.
@@ -3874,8 +4000,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE
-				.getType_GenericSuperType();
+		public static final EReference TYPE__GENERIC_SUPER_TYPE =
+				eINSTANCE.getType_GenericSuperType();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Operation</b></em>' containment reference list feature.
@@ -3883,8 +4009,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference TYPE__OWNED_OPERATION = eINSTANCE
-				.getType_OwnedOperation();
+		public static final EReference TYPE__OWNED_OPERATION =
+				eINSTANCE.getType_OwnedOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Property</b></em>' containment reference list feature.
@@ -3892,8 +4018,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference TYPE__OWNED_PROPERTY = eINSTANCE
-				.getType_OwnedProperty();
+		public static final EReference TYPE__OWNED_PROPERTY =
+				eINSTANCE.getType_OwnedProperty();
 
 		/**
 		 * The meta object literal for the '<em><b>Namespace</b></em>' container reference feature.
@@ -3901,8 +4027,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference TYPE__NAMESPACE = eINSTANCE
-				.getType_Namespace();
+		public static final EReference TYPE__NAMESPACE =
+				eINSTANCE.getType_Namespace();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -3920,8 +4046,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute PARAMETER__KIND = eINSTANCE
-				.getParameter_Kind();
+		public static final EAttribute PARAMETER__KIND =
+				eINSTANCE.getParameter_Kind();
 
 		/**
 		 * The meta object literal for the '<em><b>Operation</b></em>' container reference feature.
@@ -3929,8 +4055,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference PARAMETER__OPERATION = eINSTANCE
-				.getParameter_Operation();
+		public static final EReference PARAMETER__OPERATION =
+				eINSTANCE.getParameter_Operation();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
@@ -3940,8 +4066,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumerationLiteral()
 		 * @generated
 		 */
-		public static final EClass ENUMERATION_LITERAL = eINSTANCE
-				.getEnumerationLiteral();
+		public static final EClass ENUMERATION_LITERAL =
+				eINSTANCE.getEnumerationLiteral();
 
 		/**
 		 * The meta object literal for the '<em><b>Enumeration</b></em>' container reference feature.
@@ -3949,8 +4075,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference ENUMERATION_LITERAL__ENUMERATION = eINSTANCE
-				.getEnumerationLiteral_Enumeration();
+		public static final EReference ENUMERATION_LITERAL__ENUMERATION =
+				eINSTANCE.getEnumerationLiteral_Enumeration();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl <em>Property</em>}' class.
@@ -3968,8 +4094,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference PROPERTY__OWNING_TYPE = eINSTANCE
-				.getProperty_OwningType();
+		public static final EReference PROPERTY__OWNING_TYPE =
+				eINSTANCE.getProperty_OwningType();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl <em>Typed Element</em>}' class.
@@ -3987,8 +4113,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference TYPED_ELEMENT__TYPE = eINSTANCE
-				.getTypedElement_Type();
+		public static final EReference TYPED_ELEMENT__TYPE =
+				eINSTANCE.getTypedElement_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>Generic Type</b></em>' containment reference feature.
@@ -3996,8 +4122,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference TYPED_ELEMENT__GENERIC_TYPE = eINSTANCE
-				.getTypedElement_GenericType();
+		public static final EReference TYPED_ELEMENT__GENERIC_TYPE =
+				eINSTANCE.getTypedElement_GenericType();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
@@ -4007,8 +4133,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveType()
 		 * @generated
 		 */
-		public static final EClass PRIMITIVE_TYPE = eINSTANCE
-				.getPrimitiveType();
+		public static final EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
 
 		/**
 		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
@@ -4016,8 +4141,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute PRIMITIVE_TYPE__KIND = eINSTANCE
-				.getPrimitiveType_Kind();
+		public static final EAttribute PRIMITIVE_TYPE__KIND =
+				eINSTANCE.getPrimitiveType_Kind();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl <em>Feature</em>}' class.
@@ -4035,8 +4160,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute FEATURE__STATIC = eINSTANCE
-				.getFeature_Static();
+		public static final EAttribute FEATURE__STATIC =
+				eINSTANCE.getFeature_Static();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl <em>Constraint</em>}' class.
@@ -4054,8 +4179,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute CONSTRAINT__KIND = eINSTANCE
-				.getConstraint_Kind();
+		public static final EAttribute CONSTRAINT__KIND =
+				eINSTANCE.getConstraint_Kind();
 
 		/**
 		 * The meta object literal for the '<em><b>Namespace</b></em>' container reference feature.
@@ -4063,8 +4188,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference CONSTRAINT__NAMESPACE = eINSTANCE
-				.getConstraint_Namespace();
+		public static final EReference CONSTRAINT__NAMESPACE =
+				eINSTANCE.getConstraint_Namespace();
 
 		/**
 		 * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
@@ -4072,8 +4197,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference CONSTRAINT__SPECIFICATION = eINSTANCE
-				.getConstraint_Specification();
+		public static final EReference CONSTRAINT__SPECIFICATION =
+				eINSTANCE.getConstraint_Specification();
 
 		/**
 		 * The meta object literal for the '<em><b>Constrained Element</b></em>' reference list feature.
@@ -4081,8 +4206,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference CONSTRAINT__CONSTRAINED_ELEMENT = eINSTANCE
-				.getConstraint_ConstrainedElement();
+		public static final EReference CONSTRAINT__CONSTRAINED_ELEMENT =
+				eINSTANCE.getConstraint_ConstrainedElement();
 
 		/**
 		 * The meta object literal for the '<em><b>Defined Feature</b></em>' reference feature.
@@ -4090,8 +4215,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference CONSTRAINT__DEFINED_FEATURE = eINSTANCE
-				.getConstraint_DefinedFeature();
+		public static final EReference CONSTRAINT__DEFINED_FEATURE =
+				eINSTANCE.getConstraint_DefinedFeature();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -4109,8 +4234,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute EXPRESSION__BODY = eINSTANCE
-				.getExpression_Body();
+		public static final EAttribute EXPRESSION__BODY =
+				eINSTANCE.getExpression_Body();
 
 		/**
 		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
@@ -4118,8 +4243,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EAttribute EXPRESSION__LANGUAGE = eINSTANCE
-				.getExpression_Language();
+		public static final EAttribute EXPRESSION__LANGUAGE =
+				eINSTANCE.getExpression_Language();
 
 		/**
 		 * The meta object literal for the '<em><b>Constraint</b></em>' container reference feature.
@@ -4127,8 +4252,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference EXPRESSION__CONSTRAINT = eINSTANCE
-				.getExpression_Constraint();
+		public static final EReference EXPRESSION__CONSTRAINT =
+				eINSTANCE.getExpression_Constraint();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement <em>Constrainable Element</em>}' class.
@@ -4138,8 +4263,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstrainableElement()
 		 * @generated
 		 */
-		public static final EClass CONSTRAINABLE_ELEMENT = eINSTANCE
-				.getConstrainableElement();
+		public static final EClass CONSTRAINABLE_ELEMENT =
+				eINSTANCE.getConstrainableElement();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}' class.
@@ -4149,8 +4274,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getGenericElement()
 		 * @generated
 		 */
-		public static final EClass GENERIC_ELEMENT = eINSTANCE
-				.getGenericElement();
+		public static final EClass GENERIC_ELEMENT = eINSTANCE.getGenericElement();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Type Parameter</b></em>' containment reference list feature.
@@ -4158,8 +4282,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference GENERIC_ELEMENT__OWNED_TYPE_PARAMETER = eINSTANCE
-				.getGenericElement_OwnedTypeParameter();
+		public static final EReference GENERIC_ELEMENT__OWNED_TYPE_PARAMETER =
+				eINSTANCE.getGenericElement_OwnedTypeParameter();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl <em>Generic Type</em>}' class.
@@ -4179,8 +4303,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypeParameter()
 		 * @generated
 		 */
-		public static final EClass TYPE_PARAMETER = eINSTANCE
-				.getTypeParameter();
+		public static final EClass TYPE_PARAMETER = eINSTANCE.getTypeParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Generic Element</b></em>' container reference feature.
@@ -4188,8 +4311,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference TYPE_PARAMETER__GENERIC_ELEMENT = eINSTANCE
-				.getTypeParameter_GenericElement();
+		public static final EReference TYPE_PARAMETER__GENERIC_ELEMENT =
+				eINSTANCE.getTypeParameter_GenericElement();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl <em>Type Argument</em>}' class.
@@ -4207,8 +4330,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference TYPE_ARGUMENT__OWNING_GENERIC_TYPE = eINSTANCE
-				.getTypeArgument_OwningGenericType();
+		public static final EReference TYPE_ARGUMENT__OWNING_GENERIC_TYPE =
+				eINSTANCE.getTypeArgument_OwningGenericType();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl <em>Parameter Generic Type</em>}' class.
@@ -4218,8 +4341,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterGenericType()
 		 * @generated
 		 */
-		public static final EClass PARAMETER_GENERIC_TYPE = eINSTANCE
-				.getParameterGenericType();
+		public static final EClass PARAMETER_GENERIC_TYPE =
+				eINSTANCE.getParameterGenericType();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Parameter</b></em>' reference feature.
@@ -4227,8 +4350,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference PARAMETER_GENERIC_TYPE__TYPE_PARAMETER = eINSTANCE
-				.getParameterGenericType_TypeParameter();
+		public static final EReference PARAMETER_GENERIC_TYPE__TYPE_PARAMETER =
+				eINSTANCE.getParameterGenericType_TypeParameter();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl <em>Complex Generic Type</em>}' class.
@@ -4238,8 +4361,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getComplexGenericType()
 		 * @generated
 		 */
-		public static final EClass COMPLEX_GENERIC_TYPE = eINSTANCE
-				.getComplexGenericType();
+		public static final EClass COMPLEX_GENERIC_TYPE =
+				eINSTANCE.getComplexGenericType();
 
 		/**
 		 * The meta object literal for the '<em><b>Unbound Type</b></em>' reference feature.
@@ -4247,8 +4370,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference COMPLEX_GENERIC_TYPE__UNBOUND_TYPE = eINSTANCE
-				.getComplexGenericType_UnboundType();
+		public static final EReference COMPLEX_GENERIC_TYPE__UNBOUND_TYPE =
+				eINSTANCE.getComplexGenericType_UnboundType();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Argument</b></em>' containment reference list feature.
@@ -4256,8 +4379,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT = eINSTANCE
-				.getComplexGenericType_TypeArgument();
+		public static final EReference COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT =
+				eINSTANCE.getComplexGenericType_TypeArgument();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind <em>Parameter Direction Kind</em>}' enum.
@@ -4267,8 +4390,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterDirectionKind()
 		 * @generated
 		 */
-		public static final EEnum PARAMETER_DIRECTION_KIND = eINSTANCE
-				.getParameterDirectionKind();
+		public static final EEnum PARAMETER_DIRECTION_KIND =
+				eINSTANCE.getParameterDirectionKind();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.ConstraintKind <em>Constraint Kind</em>}' enum.
@@ -4278,8 +4401,7 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstraintKind()
 		 * @generated
 		 */
-		public static final EEnum CONSTRAINT_KIND = eINSTANCE
-				.getConstraintKind();
+		public static final EEnum CONSTRAINT_KIND = eINSTANCE.getConstraintKind();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind <em>Primitive Type Kind</em>}' enum.
@@ -4289,8 +4411,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
 		 * @generated
 		 */
-		public static final EEnum PRIMITIVE_TYPE_KIND = eINSTANCE
-				.getPrimitiveTypeKind();
+		public static final EEnum PRIMITIVE_TYPE_KIND =
+				eINSTANCE.getPrimitiveTypeKind();
 
 		/**
 		 * The meta object literal for the '<em>Clone Not Supported Exception</em>' data type.
@@ -4300,8 +4422,8 @@ public class PivotModelPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getCloneNotSupportedException()
 		 * @generated
 		 */
-		public static final EDataType CLONE_NOT_SUPPORTED_EXCEPTION = eINSTANCE
-				.getCloneNotSupportedException();
+		public static final EDataType CLONE_NOT_SUPPORTED_EXCEPTION =
+				eINSTANCE.getCloneNotSupportedException();
 
 	}
 

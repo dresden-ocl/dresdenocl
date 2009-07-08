@@ -55,106 +55,104 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class TypeParameterItemProvider extends NamedElementItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+public class TypeParameterItemProvider extends NamedElementItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
-  /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  public TypeParameterItemProvider(AdapterFactory adapterFactory) {
-    super(adapterFactory);
-  }
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	public TypeParameterItemProvider(AdapterFactory adapterFactory) {
 
-  /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-    if (itemPropertyDescriptors == null) {
-      super.getPropertyDescriptors(object);
+		super(adapterFactory);
+	}
 
-    }
-    return itemPropertyDescriptors;
-  }
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 
-  /**
-   * This returns TypeParameter.gif.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/TypeParameter")); //$NON-NLS-1$
-  }
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-  /**
-   * This returns the label text for the adapted class.
-   * 
-   * <p>
-   * The EMF implementation is changed to simply return the name of the <code>TypeParameter</code>.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String getText(Object object) {
-    return ((TypeParameter) object).getName();
-  }
+		}
+		return itemPropertyDescriptors;
+	}
 
-  /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * 
-   * <p>
-   * The EMF implementation is extended to update the {@link GenericElement} that is the owner of
-   * this <code>TypeParameter</code> if the name of the type parameter changes.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public void notifyChanged(Notification notification) {
-    updateChildren(notification);
+	/**
+	 * This returns TypeParameter.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
 
-    switch (notification.getFeatureID(TypeParameter.class)) {
-      case PivotModelPackageImpl.TYPE_PARAMETER__NAME: {
-        fireNotifyChanged(new ViewerNotification(notification,((TypeParameter) notification
-            .getNotifier()).getGenericElement(),true,true));
-        return;
-      }
-    }
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/TypeParameter")); //$NON-NLS-1$
+	}
 
-    super.notifyChanged(notification);
-  }
+	/**
+	 * This returns the label text for the adapted class.
+	 * 
+	 * <p>
+	 * The EMF implementation is changed to simply return the name of the <code>TypeParameter</code>.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
 
-  /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
-  }
+		return ((TypeParameter) object).getName();
+	}
 
-  /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ResourceLocator getResourceLocator() {
-    return PivotModelEditPlugin.INSTANCE;
-  }
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * 
+	 * <p>
+	 * The EMF implementation is extended to update the {@link GenericElement} that is the owner of
+	 * this <code>TypeParameter</code> if the name of the type parameter changes.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void notifyChanged(Notification notification) {
+
+		updateChildren(notification);
+
+		switch (notification.getFeatureID(TypeParameter.class)) {
+		case PivotModelPackageImpl.TYPE_PARAMETER__NAME: {
+			fireNotifyChanged(new ViewerNotification(notification,
+					((TypeParameter) notification.getNotifier()).getGenericElement(),
+					true, true));
+			return;
+		}
+		}
+
+		super.notifyChanged(notification);
+	}
+
+	/**
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
+
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
 }

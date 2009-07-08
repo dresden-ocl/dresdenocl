@@ -143,6 +143,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	protected FeatureImpl() {
+
 		super();
 	}
 
@@ -152,6 +153,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackageImpl.Literals.FEATURE;
 	}
 
@@ -161,6 +163,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public boolean isOrdered() {
+
 		return ordered;
 	}
 
@@ -170,6 +173,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public void setOrdered(boolean newOrdered) {
+
 		boolean oldOrdered = ordered;
 		ordered = newOrdered;
 		if (eNotificationRequired())
@@ -183,6 +187,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public boolean isUnique() {
+
 		return unique;
 	}
 
@@ -192,6 +197,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public void setUnique(boolean newUnique) {
+
 		boolean oldUnique = unique;
 		unique = newUnique;
 		if (eNotificationRequired())
@@ -205,6 +211,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public boolean isMultiple() {
+
 		return multiple;
 	}
 
@@ -214,12 +221,12 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public void setMultiple(boolean newMultiple) {
+
 		boolean oldMultiple = multiple;
 		multiple = newMultiple;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackageImpl.FEATURE__MULTIPLE, oldMultiple,
-					multiple));
+					PivotModelPackageImpl.FEATURE__MULTIPLE, oldMultiple, multiple));
 	}
 
 	/**
@@ -227,6 +234,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public boolean isStatic() {
+
 		return static_;
 	}
 
@@ -235,6 +243,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public void setStatic(boolean newStatic) {
+
 		boolean oldStatic = static_;
 		static_ = newStatic;
 		if (eNotificationRequired())
@@ -247,6 +256,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * <code>Feature</code>.
 	 */
 	protected Feature initialize(Feature clone) {
+
 		super.initialize(clone);
 		clone.setStatic(isStatic());
 		return clone;
@@ -258,6 +268,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.FEATURE__ORDERED:
 			return isOrdered() ? Boolean.TRUE : Boolean.FALSE;
@@ -277,6 +288,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.FEATURE__ORDERED:
 			setOrdered(((Boolean) newValue).booleanValue());
@@ -300,6 +312,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.FEATURE__ORDERED:
 			setOrdered(ORDERED_EDEFAULT);
@@ -323,6 +336,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.FEATURE__ORDERED:
 			return ordered != ORDERED_EDEFAULT;
@@ -343,6 +357,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+
 		if (baseClass == MultiplicityElement.class) {
 			switch (derivedFeatureID) {
 			case PivotModelPackageImpl.FEATURE__ORDERED:
@@ -365,6 +380,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+
 		if (baseClass == MultiplicityElement.class) {
 			switch (baseFeatureID) {
 			case PivotModelPackageImpl.MULTIPLICITY_ELEMENT__ORDERED:
@@ -389,6 +405,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public String toString() {
+
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
 				.appendToString(super.toString())
 				.append("static", isStatic()).toString(); //$NON-NLS-1$

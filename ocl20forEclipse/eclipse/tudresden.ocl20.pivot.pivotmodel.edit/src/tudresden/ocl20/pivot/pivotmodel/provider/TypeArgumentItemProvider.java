@@ -57,117 +57,115 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class TypeArgumentItemProvider extends TypedElementItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+public class TypeArgumentItemProvider extends TypedElementItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
-  /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  public TypeArgumentItemProvider(AdapterFactory adapterFactory) {
-    super(adapterFactory);
-  }
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	public TypeArgumentItemProvider(AdapterFactory adapterFactory) {
 
-  /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-    if (itemPropertyDescriptors == null) {
-      super.getPropertyDescriptors(object);
+		super(adapterFactory);
+	}
 
-    }
-    return itemPropertyDescriptors;
-  }
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 
-  /**
-   * This returns TypeArgument.gif.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/TypeArgument")); //$NON-NLS-1$
-  }
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-  /**
-   * This returns the label text for the adapted class.
-   * 
-   * <p>
-   * Changed the EMF-generated code to return the name of the type of the adapted
-   * {@link TypeArgument}.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String getText(Object object) {
-    return getTypedElementTypeName((TypeArgument) object).toString();
-  }
+		}
+		return itemPropertyDescriptors;
+	}
 
-  /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * 
-   * <p>
-   * Extended the EMF implementation to update the label of the owner if the type of the
-   * {@link TypeArgument} is changed.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public void notifyChanged(Notification notification) {
-    updateChildren(notification);
+	/**
+	 * This returns TypeArgument.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
 
-    switch (notification.getFeatureID(TypedElement.class)) {
-      case PivotModelPackageImpl.TYPE_ARGUMENT__TYPE:
-      case PivotModelPackageImpl.TYPE_ARGUMENT__GENERIC_TYPE: {
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/TypeArgument")); //$NON-NLS-1$
+	}
 
-        // update all element labels until we arrive at the Type that contains the type argument
-        for (NamedElement element = (NamedElement) notification.getNotifier(); // start at notifier 
-        element != null; element = element.getOwner()) {
-          fireNotifyChanged(new ViewerNotification(notification,element,false,true));
+	/**
+	 * This returns the label text for the adapted class.
+	 * 
+	 * <p>
+	 * Changed the EMF-generated code to return the name of the type of the adapted
+	 * {@link TypeArgument}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
 
-          // stop iteration when we have reached the type
-          if (element instanceof Type) {
-            break;
-          }
-        }
+		return getTypedElementTypeName((TypeArgument) object).toString();
+	}
 
-        return;
-      }
-    }
-    super.notifyChanged(notification);
-  }
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * 
+	 * <p>
+	 * Extended the EMF implementation to update the label of the owner if the type of the
+	 * {@link TypeArgument} is changed.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void notifyChanged(Notification notification) {
 
-  /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
-  }
+		updateChildren(notification);
 
-  /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ResourceLocator getResourceLocator() {
-    return PivotModelEditPlugin.INSTANCE;
-  }
+		switch (notification.getFeatureID(TypedElement.class)) {
+		case PivotModelPackageImpl.TYPE_ARGUMENT__TYPE:
+		case PivotModelPackageImpl.TYPE_ARGUMENT__GENERIC_TYPE: {
+
+			// update all element labels until we arrive at the Type that contains the type argument
+			for (NamedElement element = (NamedElement) notification.getNotifier(); // start at notifier 
+			element != null; element = element.getOwner()) {
+				fireNotifyChanged(new ViewerNotification(notification, element, false,
+						true));
+
+				// stop iteration when we have reached the type
+				if (element instanceof Type) {
+					break;
+				}
+			}
+
+			return;
+		}
+		}
+		super.notifyChanged(notification);
+	}
+
+	/**
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
+
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
 }

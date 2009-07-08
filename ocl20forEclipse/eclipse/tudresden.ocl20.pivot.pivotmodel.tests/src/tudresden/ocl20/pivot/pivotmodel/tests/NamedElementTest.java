@@ -57,81 +57,87 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
  */
 public abstract class NamedElementTest extends TestCase {
 
-  /**
-   * The fixture for this Named Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected NamedElement fixture = null;
+	/**
+	 * The fixture for this Named Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NamedElement fixture = null;
 
-  /**
-   * Constructs a new Named Element test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NamedElementTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Named Element test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamedElementTest(String name) {
 
-  /**
-   * Sets the fixture for this Named Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void setFixture(NamedElement fixture) {
-    this.fixture = fixture;
-  }
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Named Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected NamedElement getFixture() {
-    return fixture;
-  }
+	/**
+	 * Sets the fixture for this Named Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(NamedElement fixture) {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedName() <em>Qualified Name</em>}' feature getter.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedName()
-   * @generated
-   */
-  public void testGetQualifiedName() {
-    // TODO: implement this feature getter test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		this.fixture = fixture;
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getOwner() <em>Owner</em>}' feature getter.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#getOwner()
-   * @generated
-   */
-  public void testGetOwner() {
-    // TODO: implement this feature getter test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * Returns the fixture for this Named Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NamedElement getFixture() {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#clone() <em>Clone</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
-   * @generated
-   */
-  public void testClone() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		return fixture;
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedName() <em>Qualified Name</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedName()
+	 * @generated
+	 */
+	public void testGetQualifiedName() {
+
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getOwner() <em>Owner</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#getOwner()
+	 * @generated
+	 */
+	public void testGetOwner() {
+
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#clone() <em>Clone</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @generated
+	 */
+	public void testClone() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //NamedElementTest

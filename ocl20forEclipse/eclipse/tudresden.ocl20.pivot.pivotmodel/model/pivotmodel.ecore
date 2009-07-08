@@ -291,6 +291,7 @@
     <eLiterals name="Real" value="2"/>
     <eLiterals name="Boolean" value="3"/>
     <eLiterals name="String" value="4"/>
+    <eLiterals name="Void" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//Type">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

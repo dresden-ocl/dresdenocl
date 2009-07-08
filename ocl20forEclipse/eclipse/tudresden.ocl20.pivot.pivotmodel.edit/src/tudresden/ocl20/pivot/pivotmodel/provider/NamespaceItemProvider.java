@@ -63,214 +63,224 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * @generated
  */
 public class NamespaceItemProvider extends NamedElementItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
-  /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NamespaceItemProvider(AdapterFactory adapterFactory) {
-    super(adapterFactory);
-  }
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamespaceItemProvider(AdapterFactory adapterFactory) {
 
-  /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-    if (itemPropertyDescriptors == null) {
-      super.getPropertyDescriptors(object);
+		super(adapterFactory);
+	}
 
-      addNestingNamespacePropertyDescriptor(object);
-    }
-    return itemPropertyDescriptors;
-  }
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 
-  /**
-   * This adds a property descriptor for the Nesting Namespace feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void addNestingNamespacePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_Namespace_nestingNamespace_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_Namespace_nestingNamespace_feature","_UI_Namespace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.NAMESPACE__NESTING_NAMESPACE,false,false,false,null,
-            null,null));
-  }
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-  /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-    if (childrenFeatures == null) {
-      super.getChildrenFeatures(object);
-      childrenFeatures.add(PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
-      childrenFeatures.add(PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE);
-      childrenFeatures.add(PivotModelPackageImpl.Literals.NAMESPACE__OWNED_RULE);
-      childrenFeatures.add(PivotModelPackageImpl.Literals.NAMESPACE__NESTED_NAMESPACE);
-    }
-    return childrenFeatures;
-  }
+			addNestingNamespacePropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EStructuralFeature getChildFeature(Object object, Object child) {
-    // Check the type of the specified child object and return the proper feature to use for
-    // adding (see {@link AddCommand}) it as a child.
+	/**
+	 * This adds a property descriptor for the Nesting Namespace feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNestingNamespacePropertyDescriptor(Object object) {
 
-    return super.getChildFeature(object,child);
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_Namespace_nestingNamespace_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_Namespace_nestingNamespace_feature", "_UI_Namespace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.NAMESPACE__NESTING_NAMESPACE, false,
+						false, false, null, null, null));
+	}
 
-  /**
-   * This returns Namespace.gif.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object getImage(Object object) {
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/Namespace")); //$NON-NLS-1$
-  }
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 
-  /**
-   * This returns the label text for the adapted class.
-   *
-   * <p>
-   * The EMF implementation is changed to return the name of the adapted {@link Namespace} or 
-   * <code>null</code> if no name is set. Existing type parameters are appended as well.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String getText(Object object) {
-    StringBuilder label;
-    Namespace namespace;
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures
+					.add(PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
+			childrenFeatures
+					.add(PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE);
+			childrenFeatures
+					.add(PivotModelPackageImpl.Literals.NAMESPACE__OWNED_RULE);
+			childrenFeatures
+					.add(PivotModelPackageImpl.Literals.NAMESPACE__NESTED_NAMESPACE);
+		}
+		return childrenFeatures;
+	}
 
-    // cast namespace
-    namespace = (Namespace) object;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
 
-    // initialize with name
-    label = new StringBuilder(StringUtils.defaultIfEmpty(namespace.getName(),"null")); //$NON-NLS-1$
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
 
-    // append type parameters if there are any
-    if (!namespace.getOwnedTypeParameter().isEmpty()) {
-      label.append('<');
+		return super.getChildFeature(object, child);
+	}
 
-      for (Iterator<TypeParameter> it = namespace.getOwnedTypeParameter().iterator(); it.hasNext();) {
-        label.append(it.next().getName());
+	/**
+	 * This returns Namespace.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
 
-        if (it.hasNext()) {
-          label.append(", "); //$NON-NLS-1$
-        }
-      }
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/Namespace")); //$NON-NLS-1$
+	}
 
-      label.append('>');
-    }
+	/**
+	 * This returns the label text for the adapted class.
+	 *
+	 * <p>
+	 * The EMF implementation is changed to return the name of the adapted {@link Namespace} or 
+	 * <code>null</code> if no name is set. Existing type parameters are appended as well.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
 
-    return label.toString();
-  }
+		StringBuilder label;
+		Namespace namespace;
 
-  /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * 
-   * <p>
-   * The EMF implementation is adapted to send label notifications if the owned type parameters
-   * change.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public void notifyChanged(Notification notification) {
-    updateChildren(notification);
+		// cast namespace
+		namespace = (Namespace) object;
 
-    switch (notification.getFeatureID(Namespace.class)) {
-      case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,true));
-        return;
-      case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
-      case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
-      case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),true,false));
-        return;
-    }
-    super.notifyChanged(notification);
-  }
+		// initialize with name
+		label =
+				new StringBuilder(StringUtils.defaultIfEmpty(namespace.getName(),
+						"null")); //$NON-NLS-1$
 
-  /**
-   * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-   * describing all of the children that can be created under this object.
-   * 
-   * <p>
-   * The EMF implementation is adapted in order not to include the {@link GenericType}.
-   * Generic types are created automatically so we do not want the editor to show them.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors,
-      Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
+		// append type parameters if there are any
+		if (!namespace.getOwnedTypeParameter().isEmpty()) {
+			label.append('<');
 
-    newChildDescriptors.add(createChildParameter(
-        PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-        PivotModelFactory.INSTANCE.createTypeParameter()));
+			for (Iterator<TypeParameter> it =
+					namespace.getOwnedTypeParameter().iterator(); it.hasNext();) {
+				label.append(it.next().getName());
 
-    newChildDescriptors.add(createChildParameter(
-        PivotModelPackageImpl.Literals.NAMESPACE__NESTED_NAMESPACE,PivotModelFactory.INSTANCE
-            .createNamespace()));
+				if (it.hasNext()) {
+					label.append(", "); //$NON-NLS-1$
+				}
+			}
 
-    newChildDescriptors.add(createChildParameter(
-        PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE,PivotModelFactory.INSTANCE
-            .createType()));
+			label.append('>');
+		}
 
-    newChildDescriptors.add(createChildParameter(
-        PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE,PivotModelFactory.INSTANCE
-            .createPrimitiveType()));
+		return label.toString();
+	}
 
-    newChildDescriptors.add(createChildParameter(
-        PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE,PivotModelFactory.INSTANCE
-            .createEnumeration()));
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * 
+	 * <p>
+	 * The EMF implementation is adapted to send label notifications if the owned type parameters
+	 * change.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void notifyChanged(Notification notification) {
 
-    newChildDescriptors.add(createChildParameter(
-        PivotModelPackageImpl.Literals.NAMESPACE__OWNED_RULE,PivotModelFactory.INSTANCE
-            .createConstraint()));
-  }
+		updateChildren(notification);
 
-  /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ResourceLocator getResourceLocator() {
-    return PivotModelEditPlugin.INSTANCE;
-  }
+		switch (notification.getFeatureID(Namespace.class)) {
+		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE_PARAMETER:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, true));
+			return;
+		case PivotModelPackageImpl.NAMESPACE__OWNED_TYPE:
+		case PivotModelPackageImpl.NAMESPACE__OWNED_RULE:
+		case PivotModelPackageImpl.NAMESPACE__NESTED_NAMESPACE:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), true, false));
+			return;
+		}
+		super.notifyChanged(notification);
+	}
+
+	/**
+	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing all of the children that can be created under this object.
+	 * 
+	 * <p>
+	 * The EMF implementation is adapted in order not to include the {@link GenericType}.
+	 * Generic types are created automatically so we do not want the editor to show them.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
+
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+				PivotModelFactory.INSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackageImpl.Literals.NAMESPACE__NESTED_NAMESPACE,
+				PivotModelFactory.INSTANCE.createNamespace()));
+
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE,
+				PivotModelFactory.INSTANCE.createType()));
+
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE,
+				PivotModelFactory.INSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackageImpl.Literals.NAMESPACE__OWNED_TYPE,
+				PivotModelFactory.INSTANCE.createEnumeration()));
+
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackageImpl.Literals.NAMESPACE__OWNED_RULE,
+				PivotModelFactory.INSTANCE.createConstraint()));
+	}
 
 }

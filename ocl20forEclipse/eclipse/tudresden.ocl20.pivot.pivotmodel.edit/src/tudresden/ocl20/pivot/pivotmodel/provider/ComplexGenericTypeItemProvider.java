@@ -59,173 +59,179 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * end-user-doc -->
  * @generated
  */
-public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
-  /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  public ComplexGenericTypeItemProvider(AdapterFactory adapterFactory) {
-    super(adapterFactory);
-  }
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	public ComplexGenericTypeItemProvider(AdapterFactory adapterFactory) {
 
-  /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-    if (itemPropertyDescriptors == null) {
-      super.getPropertyDescriptors(object);
+		super(adapterFactory);
+	}
 
-      addUnboundTypePropertyDescriptor(object);
-    }
-    return itemPropertyDescriptors;
-  }
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 
-  /**
-   * This adds a property descriptor for the Unbound Type feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addUnboundTypePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_ComplexGenericType_unboundType_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_ComplexGenericType_unboundType_feature","_UI_ComplexGenericType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.COMPLEX_GENERIC_TYPE__UNBOUND_TYPE,false,false,true,
-            null,null,null));
-  }
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-  /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
-   * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
-   * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-    if (childrenFeatures == null) {
-      super.getChildrenFeatures(object);
-      childrenFeatures.add(PivotModelPackageImpl.Literals.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT);
-    }
-    return childrenFeatures;
-  }
+			addUnboundTypePropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EStructuralFeature getChildFeature(Object object, Object child) {
-    // Check the type of the specified child object and return the proper feature to use for
-    // adding (see {@link AddCommand}) it as a child.
+	/**
+	 * This adds a property descriptor for the Unbound Type feature.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected void addUnboundTypePropertyDescriptor(Object object) {
 
-    return super.getChildFeature(object,child);
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_ComplexGenericType_unboundType_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_ComplexGenericType_unboundType_feature", "_UI_ComplexGenericType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.COMPLEX_GENERIC_TYPE__UNBOUND_TYPE,
+						false, false, true, null, null, null));
+	}
 
-  /**
-   * Adapted to simply default to the super{@link #getImage(Object) super implementation}.
-   * 
-   * @generated NOT
-   */
-  @Override
-  public Object getImage(Object object) {
-    return super.getImage(object);
-  }
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
+	 * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 
-  /**
-   * This returns the label text for the adapted class.
-   * 
-   * <p>
-   * The EMF implementation is altered to return the formatted name of the {@link Type} wrapped by
-   * the {@link ComplexGenericType} as well as a list of the {@link TypeArgument}s.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String getText(Object object) {
-    StringBuilder label;
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures
+					.add(PivotModelPackageImpl.Literals.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT);
+		}
+		return childrenFeatures;
+	}
 
-    // do some casting
-    ComplexGenericType genericType = (ComplexGenericType) object;
-    Type unboundType = genericType.getUnboundType();
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
 
-    // the label provider should be a TypeItemProvider, maybe we should check, though
-    TypeItemProvider typeItemProvider = (TypeItemProvider) getLabelProvider(unboundType);
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
 
-    // get the type name
-    label = new StringBuilder(typeItemProvider.getTypeName(unboundType));
+		return super.getChildFeature(object, child);
+	}
 
-    // add a type-specific delimiter for the type arguments
-    label.append(typeItemProvider.getTypeParameterListOpeningDelimiter());
+	/**
+	 * Adapted to simply default to the super{@link #getImage(Object) super implementation}.
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Object getImage(Object object) {
 
-    // append the type arguments
-    for (Iterator<TypeArgument> it = genericType.getTypeArgument().iterator(); it.hasNext();) {
-      TypeArgument typeArg = it.next();
+		return super.getImage(object);
+	}
 
-      // append the type or generic type name, or a '?' if nothing bound
-      label.append(typeArg.getType() != null ? typeArg.getType().getName() : (typeArg
-          .getGenericType() != null ? getLabelProvider(typeArg.getGenericType()).getText(
-          typeArg.getGenericType()) : '?'));
+	/**
+	 * This returns the label text for the adapted class.
+	 * 
+	 * <p>
+	 * The EMF implementation is altered to return the formatted name of the {@link Type} wrapped by
+	 * the {@link ComplexGenericType} as well as a list of the {@link TypeArgument}s.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
 
-      if (it.hasNext()) {
-        label.append(", "); //$NON-NLS-1$
-      }
-    }
+		StringBuilder label;
 
-    label.append(typeItemProvider.getTypeParameterListClosingDelimiter());
+		// do some casting
+		ComplexGenericType genericType = (ComplexGenericType) object;
+		Type unboundType = genericType.getUnboundType();
 
-    return label.toString();
-  }
+		// the label provider should be a TypeItemProvider, maybe we should check, though
+		TypeItemProvider typeItemProvider =
+				(TypeItemProvider) getLabelProvider(unboundType);
 
-  /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void notifyChanged(Notification notification) {
-    updateChildren(notification);
-    super.notifyChanged(notification);
-  }
+		// get the type name
+		label = new StringBuilder(typeItemProvider.getTypeName(unboundType));
 
-  /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
-  }
+		// add a type-specific delimiter for the type arguments
+		label.append(typeItemProvider.getTypeParameterListOpeningDelimiter());
 
-  /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ResourceLocator getResourceLocator() {
-    return PivotModelEditPlugin.INSTANCE;
-  }
+		// append the type arguments
+		for (Iterator<TypeArgument> it = genericType.getTypeArgument().iterator(); it
+				.hasNext();) {
+			TypeArgument typeArg = it.next();
+
+			// append the type or generic type name, or a '?' if nothing bound
+			label
+					.append(typeArg.getType() != null ? typeArg.getType().getName()
+							: (typeArg.getGenericType() != null ? getLabelProvider(
+									typeArg.getGenericType()).getText(typeArg.getGenericType())
+									: '?'));
+
+			if (it.hasNext()) {
+				label.append(", "); //$NON-NLS-1$
+			}
+		}
+
+		label.append(typeItemProvider.getTypeParameterListClosingDelimiter());
+
+		return label.toString();
+	}
+
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void notifyChanged(Notification notification) {
+
+		updateChildren(notification);
+		super.notifyChanged(notification);
+	}
+
+	/**
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
+
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
 }

@@ -44,42 +44,45 @@ import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
  */
 public abstract class ConstrainableElementTest extends TestCase {
 
-  /**
-   * The fixture for this Constrainable Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ConstrainableElement fixture = null;
+	/**
+	 * The fixture for this Constrainable Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConstrainableElement fixture = null;
 
-  /**
-   * Constructs a new Constrainable Element test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ConstrainableElementTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Constrainable Element test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstrainableElementTest(String name) {
 
-  /**
-   * Sets the fixture for this Constrainable Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void setFixture(ConstrainableElement fixture) {
-    this.fixture = fixture;
-  }
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Constrainable Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ConstrainableElement getFixture() {
-    return fixture;
-  }
+	/**
+	 * Sets the fixture for this Constrainable Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(ConstrainableElement fixture) {
+
+		this.fixture = fixture;
+	}
+
+	/**
+	 * Returns the fixture for this Constrainable Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConstrainableElement getFixture() {
+
+		return fixture;
+	}
 
 } //ConstrainableElementTest

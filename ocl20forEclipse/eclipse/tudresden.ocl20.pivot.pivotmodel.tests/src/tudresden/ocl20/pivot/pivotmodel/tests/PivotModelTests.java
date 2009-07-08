@@ -45,45 +45,48 @@ import junit.textui.TestRunner;
  */
 public class PivotModelTests extends TestSuite {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(suite());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static Test suite() {
-    TestSuite suite = new PivotModelTests("pivotmodel Tests"); //$NON-NLS-1$
-    suite.addTestSuite(EnumerationTest.class);
-    suite.addTestSuite(OperationTest.class);
-    suite.addTestSuite(NamespaceTest.class);
-    suite.addTestSuite(TypeTest.class);
-    suite.addTestSuite(ParameterTest.class);
-    suite.addTestSuite(EnumerationLiteralTest.class);
-    suite.addTestSuite(PropertyTest.class);
-    suite.addTestSuite(PrimitiveTypeTest.class);
-    suite.addTestSuite(ConstraintTest.class);
-    suite.addTestSuite(TypeParameterTest.class);
-    suite.addTestSuite(TypeArgumentTest.class);
-    suite.addTestSuite(ParameterGenericTypeTest.class);
-    suite.addTestSuite(ComplexGenericTypeTest.class);
-    return suite;
-  }
+		TestRunner.run(suite());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PivotModelTests(String name) {
-    super(name);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static Test suite() {
+
+		TestSuite suite = new PivotModelTests("pivotmodel Tests"); //$NON-NLS-1$
+		suite.addTestSuite(NamespaceTest.class);
+		suite.addTestSuite(TypeTest.class);
+		suite.addTestSuite(PrimitiveTypeTest.class);
+		suite.addTestSuite(EnumerationTest.class);
+		suite.addTestSuite(EnumerationLiteralTest.class);
+		suite.addTestSuite(PropertyTest.class);
+		suite.addTestSuite(OperationTest.class);
+		suite.addTestSuite(ParameterTest.class);
+		suite.addTestSuite(ParameterGenericTypeTest.class);
+		suite.addTestSuite(ComplexGenericTypeTest.class);
+		suite.addTestSuite(TypeParameterTest.class);
+		suite.addTestSuite(TypeArgumentTest.class);
+		suite.addTestSuite(ConstraintTest.class);
+		return suite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PivotModelTests(String name) {
+
+		super(name);
+	}
 
 } //PivotModelTests

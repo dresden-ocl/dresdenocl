@@ -41,59 +41,63 @@ import tudresden.ocl20.pivot.pivotmodel.GenericElement;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public abstract class GenericElementTest extends NamedElementTest {
 
-  /**
-   * Constructs a new Generic Element test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public GenericElementTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Generic Element test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GenericElementTest(String name) {
 
-  /**
-   * Returns the fixture for this Generic Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected GenericElement getFixture() {
-    return (GenericElement) fixture;
-  }
+		super(name);
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter)
-   * @generated
-   */
-  public void testAddTypeParameter__TypeParameter() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * Returns the fixture for this Generic Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected GenericElement getFixture() {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
-   * @generated
-   */
-  public void testBindTypeParameter__List_List() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		return (GenericElement) fixture;
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter)
+	 * @generated
+	 */
+	public void testAddTypeParameter__TypeParameter() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
+	 * @generated
+	 */
+	public void testBindTypeParameter__List_List() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //GenericElementTest

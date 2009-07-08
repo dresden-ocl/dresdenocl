@@ -252,9 +252,9 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final ConstraintKind[] VALUES_ARRAY = new ConstraintKind[] {
-			INVARIANT, DEFINITION, PRECONDITION, POSTCONDITION, INITIAL,
-			DERIVED, BODY, };
+	private static final ConstraintKind[] VALUES_ARRAY =
+			new ConstraintKind[] { INVARIANT, DEFINITION, PRECONDITION,
+					POSTCONDITION, INITIAL, DERIVED, BODY, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Constraint Kind</b></em>' enumerators.
@@ -262,8 +262,8 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<ConstraintKind> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ConstraintKind> VALUES =
+			Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified literal value.
@@ -272,6 +272,7 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 * @generated
 	 */
 	public static ConstraintKind get(String literal) {
+
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			ConstraintKind result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
@@ -288,6 +289,7 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 * @generated
 	 */
 	public static ConstraintKind getByName(String name) {
+
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			ConstraintKind result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
@@ -304,6 +306,7 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 * @generated
 	 */
 	public static ConstraintKind get(int value) {
+
 		switch (value) {
 		case INVARIANT_VALUE:
 			return INVARIANT;
@@ -351,6 +354,7 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 * @generated
 	 */
 	private ConstraintKind(int value, String name, String literal) {
+
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -362,6 +366,7 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 * @generated
 	 */
 	public int getValue() {
+
 		return value;
 	}
 
@@ -371,6 +376,7 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 * @generated
 	 */
 	public String getName() {
+
 		return name;
 	}
 
@@ -380,6 +386,7 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 * @generated
 	 */
 	public String getLiteral() {
+
 		return literal;
 	}
 
@@ -391,6 +398,7 @@ public enum ConstraintKind implements InternalConstraintKind {
 	 */
 	@Override
 	public String toString() {
+
 		return literal;
 	}
 

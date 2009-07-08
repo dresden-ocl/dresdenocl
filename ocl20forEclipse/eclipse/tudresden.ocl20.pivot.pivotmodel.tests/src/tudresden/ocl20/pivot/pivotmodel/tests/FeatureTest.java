@@ -42,25 +42,27 @@ import tudresden.ocl20.pivot.pivotmodel.Feature;
  */
 public abstract class FeatureTest extends TypedElementTest {
 
-  /**
-   * Constructs a new Feature test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FeatureTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Feature test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FeatureTest(String name) {
 
-  /**
-   * Returns the fixture for this Feature test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected Feature getFixture() {
-    return (Feature) fixture;
-  }
+		super(name);
+	}
+
+	/**
+	 * Returns the fixture for this Feature test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected Feature getFixture() {
+
+		return (Feature) fixture;
+	}
 
 } //FeatureTest

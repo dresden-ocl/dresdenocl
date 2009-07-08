@@ -58,206 +58,216 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * @generated
  */
 public class ParameterItemProvider extends TypedElementItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
-  /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  public ParameterItemProvider(AdapterFactory adapterFactory) {
-    super(adapterFactory);
-  }
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	public ParameterItemProvider(AdapterFactory adapterFactory) {
 
-  /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-    if (itemPropertyDescriptors == null) {
-      super.getPropertyDescriptors(object);
+		super(adapterFactory);
+	}
 
-      addOrderedPropertyDescriptor(object);
-      addUniquePropertyDescriptor(object);
-      addMultiplePropertyDescriptor(object);
-      addKindPropertyDescriptor(object);
-    }
-    return itemPropertyDescriptors;
-  }
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 
-  /**
-   * This adds a property descriptor for the Ordered feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addOrderedPropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_MultiplicityElement_ordered_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_MultiplicityElement_ordered_feature","_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__ORDERED,true,false,false,
-            ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,null,null));
-  }
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-  /**
-   * This adds a property descriptor for the Unique feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addUniquePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_MultiplicityElement_unique_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_MultiplicityElement_unique_feature","_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__UNIQUE,true,false,false,
-            ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,null,null));
-  }
+			addOrderedPropertyDescriptor(object);
+			addUniquePropertyDescriptor(object);
+			addMultiplePropertyDescriptor(object);
+			addKindPropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
-  /**
-   * This adds a property descriptor for the Multiple feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addMultiplePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_MultiplicityElement_multiple_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_MultiplicityElement_multiple_feature","_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__MULTIPLE,true,false,false,
-            ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,null,null));
-  }
+	/**
+	 * This adds a property descriptor for the Ordered feature.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected void addOrderedPropertyDescriptor(Object object) {
 
-  /**
-   * This adds a property descriptor for the Kind feature. <!-- begin-user-doc --> <!-- end-user-doc
-   * -->
-   * 
-   * @generated
-   */
-  protected void addKindPropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_Parameter_kind_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_Parameter_kind_feature","_UI_Parameter_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.PARAMETER__KIND,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_MultiplicityElement_ordered_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_ordered_feature", "_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__ORDERED, true,
+						false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null,
+						null));
+	}
 
-  /**
-   * This returns the image for a {@link Parameter}.
-   * 
-   * <p>
-   * The EMF implementation is extended to return different images, depending on the
-   * {@link ParameterDirectionKind kind} of the parameter.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public Object getImage(Object object) {
+	/**
+	 * This adds a property descriptor for the Unique feature.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected void addUniquePropertyDescriptor(Object object) {
 
-    switch (((Parameter) object).getKind()) {
-      case RETURN:
-        return overlayImage(object,getResourceLocator().getImage("full/obj16/ReturnParameter")); //$NON-NLS-1$
-      default:
-        return overlayImage(object,getResourceLocator().getImage("full/obj16/Parameter")); //$NON-NLS-1$
-    }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_MultiplicityElement_unique_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_unique_feature", "_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__UNIQUE, true,
+						false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null,
+						null));
+	}
 
-  }
+	/**
+	 * This adds a property descriptor for the Multiple feature.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected void addMultiplePropertyDescriptor(Object object) {
 
-  /**
-   * Changed the EMF implementation to simply call the super implementation in
-   * {@link TypedElementItemProvider}.
-   * 
-   * @see TypedElementItemProvider#getText(Object)
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String getText(Object object) {
-    return super.getText(object);
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_MultiplicityElement_multiple_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_multiple_feature", "_UI_MultiplicityElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.MULTIPLICITY_ELEMENT__MULTIPLE,
+						true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+						null, null));
+	}
 
-  /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * 
-   * <p>
-   * Extended the EMF implementation to update the operation signature label when changing parameter
-   * attributes or changing the return parameter.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public void notifyChanged(Notification notification) {
-    updateChildren(notification);
+	/**
+	 * This adds a property descriptor for the Kind feature. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @generated
+	 */
+	protected void addKindPropertyDescriptor(Object object) {
 
-    // get a casted version of the parameter
-    Parameter parameter = (Parameter) notification.getNotifier();
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_Parameter_kind_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_Parameter_kind_feature", "_UI_Parameter_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.PARAMETER__KIND, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
 
-    switch (notification.getFeatureID(Parameter.class)) {
-      case PivotModelPackageImpl.PARAMETER__KIND: {
-        // the return parameter was changed, the operation signature must be updated
-        if (notification.getOldValue() == ParameterDirectionKind.RETURN
-            || notification.getNewValue() == ParameterDirectionKind.RETURN) {
-          fireNotifyChanged(new ViewerNotification(notification,parameter.getOperation(),false,true));
-        }
+	/**
+	 * This returns the image for a {@link Parameter}.
+	 * 
+	 * <p>
+	 * The EMF implementation is extended to return different images, depending on the
+	 * {@link ParameterDirectionKind kind} of the parameter.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Object getImage(Object object) {
 
-        return;
-      }
+		switch (((Parameter) object).getKind()) {
+		case RETURN:
+			return overlayImage(object, getResourceLocator().getImage(
+					"full/obj16/ReturnParameter")); //$NON-NLS-1$
+		default:
+			return overlayImage(object, getResourceLocator().getImage(
+					"full/obj16/Parameter")); //$NON-NLS-1$
+		}
 
-        // any other change to the parameter's name, type or generic type needs to be propagated
-      case PivotModelPackageImpl.PARAMETER__NAME:
-      case PivotModelPackageImpl.PARAMETER__TYPE:
-      case PivotModelPackageImpl.PARAMETER__GENERIC_TYPE:
-        fireNotifyChanged(new ViewerNotification(notification,parameter.getOperation(),false,true));
-        return;
-    }
+	}
 
-    super.notifyChanged(notification);
-  }
+	/**
+	 * Changed the EMF implementation to simply call the super implementation in
+	 * {@link TypedElementItemProvider}.
+	 * 
+	 * @see TypedElementItemProvider#getText(Object)
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
 
-  /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
-  }
+		return super.getText(object);
+	}
 
-  /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ResourceLocator getResourceLocator() {
-    return PivotModelEditPlugin.INSTANCE;
-  }
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * 
+	 * <p>
+	 * Extended the EMF implementation to update the operation signature label when changing parameter
+	 * attributes or changing the return parameter.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void notifyChanged(Notification notification) {
+
+		updateChildren(notification);
+
+		// get a casted version of the parameter
+		Parameter parameter = (Parameter) notification.getNotifier();
+
+		switch (notification.getFeatureID(Parameter.class)) {
+		case PivotModelPackageImpl.PARAMETER__KIND: {
+			// the return parameter was changed, the operation signature must be updated
+			if (notification.getOldValue() == ParameterDirectionKind.RETURN
+					|| notification.getNewValue() == ParameterDirectionKind.RETURN) {
+				fireNotifyChanged(new ViewerNotification(notification, parameter
+						.getOperation(), false, true));
+			}
+
+			return;
+		}
+
+			// any other change to the parameter's name, type or generic type needs to be propagated
+		case PivotModelPackageImpl.PARAMETER__NAME:
+		case PivotModelPackageImpl.PARAMETER__TYPE:
+		case PivotModelPackageImpl.PARAMETER__GENERIC_TYPE:
+			fireNotifyChanged(new ViewerNotification(notification, parameter
+					.getOperation(), false, true));
+			return;
+		}
+
+		super.notifyChanged(notification);
+	}
+
+	/**
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
+
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
 }

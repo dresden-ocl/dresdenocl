@@ -61,482 +61,524 @@ import tudresden.ocl20.pivot.pivotmodel.util.PivotModelAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class PivotModelItemProviderAdapterFactory extends PivotModelAdapterFactory implements
-    ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class PivotModelItemProviderAdapterFactory extends
+		PivotModelAdapterFactory implements ComposeableAdapterFactory,
+		IChangeNotifier, IDisposable {
 
-  /**
-   * This keeps track of the root adapter factory that delegates to this adapter factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ComposedAdapterFactory parentAdapterFactory;
+	/**
+	 * This keeps track of the root adapter factory that delegates to this adapter factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ComposedAdapterFactory parentAdapterFactory;
 
-  /**
-   * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected IChangeNotifier changeNotifier = new ChangeNotifier();
+	/**
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
-  /**
-   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	/**
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
-  /**
-   * This constructs an instance.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PivotModelItemProviderAdapterFactory() {
-    supportedTypes.add(IEditingDomainItemProvider.class);
-    supportedTypes.add(IStructuredItemContentProvider.class);
-    supportedTypes.add(ITreeItemContentProvider.class);
-    supportedTypes.add(IItemLabelProvider.class);
-    supportedTypes.add(IItemPropertySource.class);
-  }
+	/**
+	 * This constructs an instance.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PivotModelItemProviderAdapterFactory() {
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Enumeration} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected EnumerationItemProvider enumerationItemProvider;
+		supportedTypes.add(IEditingDomainItemProvider.class);
+		supportedTypes.add(IStructuredItemContentProvider.class);
+		supportedTypes.add(ITreeItemContentProvider.class);
+		supportedTypes.add(IItemLabelProvider.class);
+		supportedTypes.add(IItemPropertySource.class);
+	}
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Enumeration}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createEnumerationAdapter() {
-    if (enumerationItemProvider == null) {
-      enumerationItemProvider = new EnumerationItemProvider(this);
-    }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Enumeration} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnumerationItemProvider enumerationItemProvider;
 
-    return enumerationItemProvider;
-  }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Enumeration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEnumerationAdapter() {
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Operation} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected OperationItemProvider operationItemProvider;
+		if (enumerationItemProvider == null) {
+			enumerationItemProvider = new EnumerationItemProvider(this);
+		}
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Operation}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createOperationAdapter() {
-    if (operationItemProvider == null) {
-      operationItemProvider = new OperationItemProvider(this);
-    }
+		return enumerationItemProvider;
+	}
 
-    return operationItemProvider;
-  }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Operation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OperationItemProvider operationItemProvider;
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Namespace} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected NamespaceItemProvider namespaceItemProvider;
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Operation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOperationAdapter() {
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Namespace}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createNamespaceAdapter() {
-    if (namespaceItemProvider == null) {
-      namespaceItemProvider = new NamespaceItemProvider(this);
-    }
+		if (operationItemProvider == null) {
+			operationItemProvider = new OperationItemProvider(this);
+		}
 
-    return namespaceItemProvider;
-  }
+		return operationItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Type} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected TypeItemProvider typeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Namespace} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NamespaceItemProvider namespaceItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Type}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createTypeAdapter() {
-    if (typeItemProvider == null) {
-      typeItemProvider = new TypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Namespace}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNamespaceAdapter() {
 
-    return typeItemProvider;
-  }
+		if (namespaceItemProvider == null) {
+			namespaceItemProvider = new NamespaceItemProvider(this);
+		}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Parameter} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ParameterItemProvider parameterItemProvider;
+		return namespaceItemProvider;
+	}
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Parameter}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createParameterAdapter() {
-    if (parameterItemProvider == null) {
-      parameterItemProvider = new ParameterItemProvider(this);
-    }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Type} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeItemProvider typeItemProvider;
 
-    return parameterItemProvider;
-  }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Type}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeAdapter() {
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected EnumerationLiteralItemProvider enumerationLiteralItemProvider;
+		if (typeItemProvider == null) {
+			typeItemProvider = new TypeItemProvider(this);
+		}
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createEnumerationLiteralAdapter() {
-    if (enumerationLiteralItemProvider == null) {
-      enumerationLiteralItemProvider = new EnumerationLiteralItemProvider(this);
-    }
+		return typeItemProvider;
+	}
 
-    return enumerationLiteralItemProvider;
-  }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Parameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterItemProvider parameterItemProvider;
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Property} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected PropertyItemProvider propertyItemProvider;
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Parameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createParameterAdapter() {
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Property}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createPropertyAdapter() {
-    if (propertyItemProvider == null) {
-      propertyItemProvider = new PropertyItemProvider(this);
-    }
+		if (parameterItemProvider == null) {
+			parameterItemProvider = new ParameterItemProvider(this);
+		}
 
-    return propertyItemProvider;
-  }
+		return parameterItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected PrimitiveTypeItemProvider primitiveTypeItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnumerationLiteralItemProvider enumerationLiteralItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createPrimitiveTypeAdapter() {
-    if (primitiveTypeItemProvider == null) {
-      primitiveTypeItemProvider = new PrimitiveTypeItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEnumerationLiteralAdapter() {
 
-    return primitiveTypeItemProvider;
-  }
+		if (enumerationLiteralItemProvider == null) {
+			enumerationLiteralItemProvider = new EnumerationLiteralItemProvider(this);
+		}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Constraint} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ConstraintItemProvider constraintItemProvider;
+		return enumerationLiteralItemProvider;
+	}
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Constraint}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createConstraintAdapter() {
-    if (constraintItemProvider == null) {
-      constraintItemProvider = new ConstraintItemProvider(this);
-    }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Property} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertyItemProvider propertyItemProvider;
 
-    return constraintItemProvider;
-  }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Property}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertyAdapter() {
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Expression} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ExpressionItemProvider expressionItemProvider;
+		if (propertyItemProvider == null) {
+			propertyItemProvider = new PropertyItemProvider(this);
+		}
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Expression}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createExpressionAdapter() {
-    if (expressionItemProvider == null) {
-      expressionItemProvider = new ExpressionItemProvider(this);
-    }
+		return propertyItemProvider;
+	}
 
-    return expressionItemProvider;
-  }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PrimitiveTypeItemProvider primitiveTypeItemProvider;
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected TypeParameterItemProvider typeParameterItemProvider;
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPrimitiveTypeAdapter() {
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createTypeParameterAdapter() {
-    if (typeParameterItemProvider == null) {
-      typeParameterItemProvider = new TypeParameterItemProvider(this);
-    }
+		if (primitiveTypeItemProvider == null) {
+			primitiveTypeItemProvider = new PrimitiveTypeItemProvider(this);
+		}
 
-    return typeParameterItemProvider;
-  }
+		return primitiveTypeItemProvider;
+	}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected TypeArgumentItemProvider typeArgumentItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Constraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConstraintItemProvider constraintItemProvider;
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createTypeArgumentAdapter() {
-    if (typeArgumentItemProvider == null) {
-      typeArgumentItemProvider = new TypeArgumentItemProvider(this);
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Constraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConstraintAdapter() {
 
-    return typeArgumentItemProvider;
-  }
+		if (constraintItemProvider == null) {
+			constraintItemProvider = new ConstraintItemProvider(this);
+		}
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ParameterGenericTypeItemProvider parameterGenericTypeItemProvider;
+		return constraintItemProvider;
+	}
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createParameterGenericTypeAdapter() {
-    if (parameterGenericTypeItemProvider == null) {
-      parameterGenericTypeItemProvider = new ParameterGenericTypeItemProvider(this);
-    }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.Expression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpressionItemProvider expressionItemProvider;
 
-    return parameterGenericTypeItemProvider;
-  }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Expression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpressionAdapter() {
 
-  /**
-   * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ComplexGenericTypeItemProvider complexGenericTypeItemProvider;
+		if (expressionItemProvider == null) {
+			expressionItemProvider = new ExpressionItemProvider(this);
+		}
 
-  /**
-   * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createComplexGenericTypeAdapter() {
-    if (complexGenericTypeItemProvider == null) {
-      complexGenericTypeItemProvider = new ComplexGenericTypeItemProvider(this);
-    }
+		return expressionItemProvider;
+	}
 
-    return complexGenericTypeItemProvider;
-  }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeParameterItemProvider typeParameterItemProvider;
 
-  /**
-   * This returns the root adapter factory that contains this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ComposeableAdapterFactory getRootAdapterFactory() {
-    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-  }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeParameterAdapter() {
 
-  /**
-   * This sets the composed adapter factory that contains this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-    this.parentAdapterFactory = parentAdapterFactory;
-  }
+		if (typeParameterItemProvider == null) {
+			typeParameterItemProvider = new TypeParameterItemProvider(this);
+		}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean isFactoryForType(Object type) {
-    return supportedTypes.contains(type) || super.isFactoryForType(type);
-  }
+		return typeParameterItemProvider;
+	}
 
-  /**
-   * This implementation substitutes the factory itself as the key for the adapter.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter adapt(Notifier notifier, Object type) {
-    return super.adapt(notifier,this);
-  }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeArgumentItemProvider typeArgumentItemProvider;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object adapt(Object object, Object type) {
-    if (isFactoryForType(type)) {
-      Object adapter = super.adapt(object,type);
-      if (!(type instanceof Class) || (((Class<?>) type).isInstance(adapter))) {
-        return adapter;
-      }
-    }
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeArgumentAdapter() {
 
-    return null;
-  }
+		if (typeArgumentItemProvider == null) {
+			typeArgumentItemProvider = new TypeArgumentItemProvider(this);
+		}
 
-  /**
-   * This adds a listener.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void addListener(INotifyChangedListener notifyChangedListener) {
-    changeNotifier.addListener(notifyChangedListener);
-  }
+		return typeArgumentItemProvider;
+	}
 
-  /**
-   * This removes a listener.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void removeListener(INotifyChangedListener notifyChangedListener) {
-    changeNotifier.removeListener(notifyChangedListener);
-  }
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterGenericTypeItemProvider parameterGenericTypeItemProvider;
 
-  /**
-   * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void fireNotifyChanged(Notification notification) {
-    changeNotifier.fireNotifyChanged(notification);
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createParameterGenericTypeAdapter() {
 
-    if (parentAdapterFactory != null) {
-      parentAdapterFactory.fireNotifyChanged(notification);
-    }
-  }
+		if (parameterGenericTypeItemProvider == null) {
+			parameterGenericTypeItemProvider =
+					new ParameterGenericTypeItemProvider(this);
+		}
 
-  /**
-   * This disposes all of the item providers created by this factory. 
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void dispose() {
-    if (enumerationItemProvider != null) enumerationItemProvider.dispose();
-    if (operationItemProvider != null) operationItemProvider.dispose();
-    if (namespaceItemProvider != null) namespaceItemProvider.dispose();
-    if (typeItemProvider != null) typeItemProvider.dispose();
-    if (parameterItemProvider != null) parameterItemProvider.dispose();
-    if (enumerationLiteralItemProvider != null) enumerationLiteralItemProvider.dispose();
-    if (propertyItemProvider != null) propertyItemProvider.dispose();
-    if (primitiveTypeItemProvider != null) primitiveTypeItemProvider.dispose();
-    if (constraintItemProvider != null) constraintItemProvider.dispose();
-    if (expressionItemProvider != null) expressionItemProvider.dispose();
-    if (typeParameterItemProvider != null) typeParameterItemProvider.dispose();
-    if (typeArgumentItemProvider != null) typeArgumentItemProvider.dispose();
-    if (parameterGenericTypeItemProvider != null) parameterGenericTypeItemProvider.dispose();
-    if (complexGenericTypeItemProvider != null) complexGenericTypeItemProvider.dispose();
-  }
+		return parameterGenericTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ComplexGenericTypeItemProvider complexGenericTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createComplexGenericTypeAdapter() {
+
+		if (complexGenericTypeItemProvider == null) {
+			complexGenericTypeItemProvider = new ComplexGenericTypeItemProvider(this);
+		}
+
+		return complexGenericTypeItemProvider;
+	}
+
+	/**
+	 * This returns the root adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComposeableAdapterFactory getRootAdapterFactory() {
+
+		return parentAdapterFactory == null ? this : parentAdapterFactory
+				.getRootAdapterFactory();
+	}
+
+	/**
+	 * This sets the composed adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParentAdapterFactory(
+			ComposedAdapterFactory parentAdapterFactory) {
+
+		this.parentAdapterFactory = parentAdapterFactory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isFactoryForType(Object type) {
+
+		return supportedTypes.contains(type) || super.isFactoryForType(type);
+	}
+
+	/**
+	 * This implementation substitutes the factory itself as the key for the adapter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter adapt(Notifier notifier, Object type) {
+
+		return super.adapt(notifier, this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object adapt(Object object, Object type) {
+
+		if (isFactoryForType(type)) {
+			Object adapter = super.adapt(object, type);
+			if (!(type instanceof Class) || (((Class<?>) type).isInstance(adapter))) {
+				return adapter;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * This adds a listener.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void addListener(INotifyChangedListener notifyChangedListener) {
+
+		changeNotifier.addListener(notifyChangedListener);
+	}
+
+	/**
+	 * This removes a listener.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void removeListener(INotifyChangedListener notifyChangedListener) {
+
+		changeNotifier.removeListener(notifyChangedListener);
+	}
+
+	/**
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void fireNotifyChanged(Notification notification) {
+
+		changeNotifier.fireNotifyChanged(notification);
+
+		if (parentAdapterFactory != null) {
+			parentAdapterFactory.fireNotifyChanged(notification);
+		}
+	}
+
+	/**
+	 * This disposes all of the item providers created by this factory. 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void dispose() {
+
+		if (namespaceItemProvider != null)
+			namespaceItemProvider.dispose();
+		if (typeItemProvider != null)
+			typeItemProvider.dispose();
+		if (primitiveTypeItemProvider != null)
+			primitiveTypeItemProvider.dispose();
+		if (enumerationItemProvider != null)
+			enumerationItemProvider.dispose();
+		if (enumerationLiteralItemProvider != null)
+			enumerationLiteralItemProvider.dispose();
+		if (propertyItemProvider != null)
+			propertyItemProvider.dispose();
+		if (operationItemProvider != null)
+			operationItemProvider.dispose();
+		if (parameterItemProvider != null)
+			parameterItemProvider.dispose();
+		if (parameterGenericTypeItemProvider != null)
+			parameterGenericTypeItemProvider.dispose();
+		if (complexGenericTypeItemProvider != null)
+			complexGenericTypeItemProvider.dispose();
+		if (typeParameterItemProvider != null)
+			typeParameterItemProvider.dispose();
+		if (typeArgumentItemProvider != null)
+			typeArgumentItemProvider.dispose();
+		if (constraintItemProvider != null)
+			constraintItemProvider.dispose();
+		if (expressionItemProvider != null)
+			expressionItemProvider.dispose();
+	}
 
 }

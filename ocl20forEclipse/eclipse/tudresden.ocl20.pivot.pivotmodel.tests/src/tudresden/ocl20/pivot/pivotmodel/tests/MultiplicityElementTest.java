@@ -44,42 +44,45 @@ import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
  */
 public abstract class MultiplicityElementTest extends TestCase {
 
-  /**
-   * The fixture for this Multiplicity Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected MultiplicityElement fixture = null;
+	/**
+	 * The fixture for this Multiplicity Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MultiplicityElement fixture = null;
 
-  /**
-   * Constructs a new Multiplicity Element test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MultiplicityElementTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Multiplicity Element test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MultiplicityElementTest(String name) {
 
-  /**
-   * Sets the fixture for this Multiplicity Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void setFixture(MultiplicityElement fixture) {
-    this.fixture = fixture;
-  }
+		super(name);
+	}
 
-  /**
-   * Returns the fixture for this Multiplicity Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected MultiplicityElement getFixture() {
-    return fixture;
-  }
+	/**
+	 * Sets the fixture for this Multiplicity Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(MultiplicityElement fixture) {
+
+		this.fixture = fixture;
+	}
+
+	/**
+	 * Returns the fixture for this Multiplicity Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MultiplicityElement getFixture() {
+
+		return fixture;
+	}
 
 } //MultiplicityElementTest

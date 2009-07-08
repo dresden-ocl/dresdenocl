@@ -64,8 +64,8 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger
-			.getLogger(ParameterGenericTypeImpl.class);
+	private static final Logger logger =
+			Logger.getLogger(ParameterGenericTypeImpl.class);
 
 	/**
 	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' reference.
@@ -81,6 +81,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 * @generated
 	 */
 	protected ParameterGenericTypeImpl() {
+
 		super();
 	}
 
@@ -90,6 +91,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackageImpl.Literals.PARAMETER_GENERIC_TYPE;
 	}
 
@@ -100,6 +102,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public String getName() {
+
 		return getTypeParameter() != null ? getTypeParameter().getName() : ""; //$NON-NLS-1$
 	}
 
@@ -108,6 +111,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 * @generated
 	 */
 	public TypeParameter getTypeParameter() {
+
 		return typeParameter;
 	}
 
@@ -116,12 +120,11 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 * @generated
 	 */
 	public void setTypeParameter(TypeParameter newTypeParameter) {
+
 		TypeParameter oldTypeParameter = typeParameter;
 		typeParameter = newTypeParameter;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(
-					this,
-					Notification.SET,
+			eNotify(new ENotificationImpl(this, Notification.SET,
 					PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER,
 					oldTypeParameter, typeParameter));
 	}
@@ -146,9 +149,8 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 			Type type = types.get(index);
 
 			if (logger.isInfoEnabled()) {
-				logger
-						.info("Binding type of '" + typedElement.getQualifiedName() //$NON-NLS-1$
-								+ "' with '" + type.getName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
+				logger.info("Binding type of '" + typedElement.getQualifiedName() //$NON-NLS-1$
+						+ "' with '" + type.getName() + "'."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 			// reset the generic type, then set the type (the order is important)
@@ -175,6 +177,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	@SuppressWarnings("unused")
 	protected boolean doBindGenericSuperType(List<TypeParameter> parameters,
 			List<? extends Type> types, Type subType) {
+
 		return false;
 	}
 
@@ -197,6 +200,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	@Override
 	@SuppressWarnings("unused")
 	public boolean isConformant(Type type) {
+
 		return true;
 	}
 
@@ -207,8 +211,8 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public ParameterGenericType clone() {
-		return initialize(PivotModelFactory.INSTANCE
-				.createParameterGenericType());
+
+		return initialize(PivotModelFactory.INSTANCE.createParameterGenericType());
 	}
 
 	/**
@@ -217,6 +221,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#initialize(tudresden.ocl20.pivot.pivotmodel.NamedElement)
 	 */
 	protected ParameterGenericType initialize(ParameterGenericType clone) {
+
 		clone.setTypeParameter(getTypeParameter());
 		return clone;
 	}
@@ -227,6 +232,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			return getTypeParameter();
@@ -240,6 +246,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			setTypeParameter((TypeParameter) newValue);
@@ -254,6 +261,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			setTypeParameter((TypeParameter) null);
@@ -268,6 +276,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			return typeParameter != null;

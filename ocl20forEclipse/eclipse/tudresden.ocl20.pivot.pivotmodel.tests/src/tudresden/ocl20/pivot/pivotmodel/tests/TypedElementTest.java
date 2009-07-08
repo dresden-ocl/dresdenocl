@@ -42,25 +42,27 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  */
 public abstract class TypedElementTest extends NamedElementTest {
 
-  /**
-   * Constructs a new Typed Element test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypedElementTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Typed Element test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypedElementTest(String name) {
 
-  /**
-   * Returns the fixture for this Typed Element test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected TypedElement getFixture() {
-    return (TypedElement) fixture;
-  }
+		super(name);
+	}
+
+	/**
+	 * Returns the fixture for this Typed Element test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected TypedElement getFixture() {
+
+		return (TypedElement) fixture;
+	}
 
 } //TypedElementTest

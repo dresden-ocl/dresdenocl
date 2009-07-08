@@ -57,14 +57,14 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger
-			.getLogger(GenericTypeImpl.class);
+	private static final Logger logger = Logger.getLogger(GenericTypeImpl.class);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected GenericTypeImpl() {
+
 		super();
 	}
 
@@ -77,6 +77,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public NamedElement getOwner() {
+
 		return eContainer instanceof NamedElement ? (NamedElement) eContainer
 				: null;
 	}
@@ -90,6 +91,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	@Override
 	@SuppressWarnings("unused")
 	public void setName(String newName) {
+
 		throw new UnsupportedOperationException(
 				"The name of a generic type cannot be changed."); //$NON-NLS-1$
 	}
@@ -109,6 +111,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 */
 	public final boolean bindGenericType(List<TypeParameter> parameters,
 			List<? extends Type> types, TypedElement typedElement) {
+
 		if (logger.isDebugEnabled()) {
 			logger
 					.debug("bindGenericType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
@@ -141,6 +144,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 */
 	public boolean bindGenericSuperType(List<TypeParameter> parameters,
 			List<? extends Type> types, Type subType) {
+
 		if (logger.isDebugEnabled()) {
 			logger
 					.debug("bindGenericSuperType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
@@ -151,8 +155,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 		boolean success = doBindGenericSuperType(parameters, types, subType);
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("bindGenericSuperType() - exit - return value=" + success); //$NON-NLS-1$
+			logger.debug("bindGenericSuperType() - exit - return value=" + success); //$NON-NLS-1$
 		}
 
 		return success;
@@ -161,16 +164,14 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	/**
 	 * Subclasses need to implement the actual binding.
 	 */
-	protected abstract boolean doBindGenericType(
-			List<TypeParameter> parameters, List<? extends Type> types,
-			TypedElement typedElement);
+	protected abstract boolean doBindGenericType(List<TypeParameter> parameters,
+			List<? extends Type> types, TypedElement typedElement);
 
 	/**
 	 * Subclasses need to implement the actual binding.
 	 */
 	protected abstract boolean doBindGenericSuperType(
-			List<TypeParameter> parameters, List<? extends Type> types,
-			Type subType);
+			List<TypeParameter> parameters, List<? extends Type> types, Type subType);
 
 	/**
 	 * Made abstract in order to leave implementation to subclasses.
@@ -198,6 +199,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.GENERIC_TYPE__NAME:
 			return false;
@@ -211,6 +213,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackageImpl.Literals.GENERIC_TYPE;
 	}
 

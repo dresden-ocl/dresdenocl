@@ -91,6 +91,7 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	public PivotModelSwitch() {
+
 		if (modelPackage == null) {
 			modelPackage = PivotModelPackageImpl.eINSTANCE;
 		}
@@ -104,6 +105,7 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	public T doSwitch(EObject theEObject) {
+
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -115,9 +117,11 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
+
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
-		} else {
+		}
+		else {
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
 					eSuperTypes.get(0), theEObject);
@@ -132,6 +136,7 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
+
 		switch (classifierID) {
 		case PivotModelPackageImpl.NAMED_ELEMENT: {
 			NamedElement namedElement = (NamedElement) theEObject;
@@ -163,7 +168,8 @@ public class PivotModelSwitch<T> {
 			return result;
 		}
 		case PivotModelPackageImpl.MULTIPLICITY_ELEMENT: {
-			MultiplicityElement multiplicityElement = (MultiplicityElement) theEObject;
+			MultiplicityElement multiplicityElement =
+					(MultiplicityElement) theEObject;
 			T result = caseMultiplicityElement(multiplicityElement);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -179,7 +185,8 @@ public class PivotModelSwitch<T> {
 			return result;
 		}
 		case PivotModelPackageImpl.CONSTRAINABLE_ELEMENT: {
-			ConstrainableElement constrainableElement = (ConstrainableElement) theEObject;
+			ConstrainableElement constrainableElement =
+					(ConstrainableElement) theEObject;
 			T result = caseConstrainableElement(constrainableElement);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -307,7 +314,8 @@ public class PivotModelSwitch<T> {
 			return result;
 		}
 		case PivotModelPackageImpl.PARAMETER_GENERIC_TYPE: {
-			ParameterGenericType parameterGenericType = (ParameterGenericType) theEObject;
+			ParameterGenericType parameterGenericType =
+					(ParameterGenericType) theEObject;
 			T result = caseParameterGenericType(parameterGenericType);
 			if (result == null)
 				result = caseGenericType(parameterGenericType);
@@ -382,6 +390,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseEnumeration(Enumeration object) {
+
 		return null;
 	}
 
@@ -398,6 +407,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseNamedElement(NamedElement object) {
+
 		return null;
 	}
 
@@ -414,6 +424,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseOperation(Operation object) {
+
 		return null;
 	}
 
@@ -430,6 +441,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseMultiplicityElement(MultiplicityElement object) {
+
 		return null;
 	}
 
@@ -446,6 +458,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseNamespace(Namespace object) {
+
 		return null;
 	}
 
@@ -462,6 +475,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseType(Type object) {
+
 		return null;
 	}
 
@@ -478,6 +492,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseParameter(Parameter object) {
+
 		return null;
 	}
 
@@ -494,6 +509,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseEnumerationLiteral(EnumerationLiteral object) {
+
 		return null;
 	}
 
@@ -510,6 +526,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseProperty(Property object) {
+
 		return null;
 	}
 
@@ -526,6 +543,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseTypedElement(TypedElement object) {
+
 		return null;
 	}
 
@@ -542,6 +560,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T casePrimitiveType(PrimitiveType object) {
+
 		return null;
 	}
 
@@ -558,6 +577,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseFeature(Feature object) {
+
 		return null;
 	}
 
@@ -574,6 +594,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseConstraint(Constraint object) {
+
 		return null;
 	}
 
@@ -590,6 +611,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseExpression(Expression object) {
+
 		return null;
 	}
 
@@ -606,6 +628,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T caseConstrainableElement(ConstrainableElement object) {
+
 		return null;
 	}
 
@@ -621,6 +644,7 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseGenericElement(GenericElement object) {
+
 		return null;
 	}
 
@@ -636,6 +660,7 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeParameter(TypeParameter object) {
+
 		return null;
 	}
 
@@ -651,6 +676,7 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeArgument(TypeArgument object) {
+
 		return null;
 	}
 
@@ -666,6 +692,7 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameterGenericType(ParameterGenericType object) {
+
 		return null;
 	}
 
@@ -681,6 +708,7 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseComplexGenericType(ComplexGenericType object) {
+
 		return null;
 	}
 
@@ -696,6 +724,7 @@ public class PivotModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseGenericType(GenericType object) {
+
 		return null;
 	}
 
@@ -712,6 +741,7 @@ public class PivotModelSwitch<T> {
 	 */
 	@SuppressWarnings("unused")
 	public T defaultCase(EObject object) {
+
 		return null;
 	}
 

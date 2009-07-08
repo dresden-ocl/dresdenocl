@@ -52,69 +52,75 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  */
 public class ComplexGenericTypeTest extends GenericTypeTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(ComplexGenericTypeTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
 
-  /**
-   * Constructs a new Complex Generic Type test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ComplexGenericTypeTest(String name) {
-    super(name);
-  }
+		TestRunner.run(ComplexGenericTypeTest.class);
+	}
 
-  /**
-   * Returns the fixture for this Complex Generic Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected ComplexGenericType getFixture() {
-    return (ComplexGenericType) fixture;
-  }
+	/**
+	 * Constructs a new Complex Generic Type test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexGenericTypeTest(String name) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(PivotModelFactoryImpl.eINSTANCE.createComplexGenericType());
-  }
+		super(name);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * Returns the fixture for this Complex Generic Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected ComplexGenericType getFixture() {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#addTypeArgument(tudresden.ocl20.pivot.pivotmodel.TypeArgument) <em>Add Type Argument</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#addTypeArgument(tudresden.ocl20.pivot.pivotmodel.TypeArgument)
-   * @generated
-   */
-  public void testAddTypeArgument__TypeArgument() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		return (ComplexGenericType) fixture;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+
+		setFixture(PivotModelFactoryImpl.eINSTANCE.createComplexGenericType());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+
+		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#addTypeArgument(tudresden.ocl20.pivot.pivotmodel.TypeArgument) <em>Add Type Argument</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#addTypeArgument(tudresden.ocl20.pivot.pivotmodel.TypeArgument)
+	 * @generated
+	 */
+	public void testAddTypeArgument__TypeArgument() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //ComplexGenericTypeTest

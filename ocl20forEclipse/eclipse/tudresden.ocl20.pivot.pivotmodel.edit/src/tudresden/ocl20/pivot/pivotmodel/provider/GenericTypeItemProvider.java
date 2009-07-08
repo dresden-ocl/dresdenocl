@@ -47,6 +47,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import tudresden.ocl20.pivot.pivotmodel.GenericType;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
@@ -55,104 +56,101 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * @generated
  */
 public class GenericTypeItemProvider extends NamedElementItemProvider implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
-  /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  public GenericTypeItemProvider(AdapterFactory adapterFactory) {
-    super(adapterFactory);
-  }
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	public GenericTypeItemProvider(AdapterFactory adapterFactory) {
 
-  /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-    if (itemPropertyDescriptors == null) {
-      super.getPropertyDescriptors(object);
+		super(adapterFactory);
+	}
 
-    }
-    return itemPropertyDescriptors;
-  }
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 
-  /**
-   * This returns GenericType.gif.
-   * 
-   * <p>
-   * Overridden to return <em>GenericSuperType.gif</em> if the generic type is the generic super
-   * type of a type.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public Object getImage(Object object) {
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-    EReference eContainmentFeature = ((EObject) object).eContainmentFeature();
+		}
+		return itemPropertyDescriptors;
+	}
 
-    if (eContainmentFeature == PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE) {
-      return overlayImage(object,getResourceLocator().getImage("full/obj16/GenericSuperType")); //$NON-NLS-1$
-    }
+	/**
+	 * This returns GenericType.gif.
+	 * 
+	 * <p>
+	 * Overridden to return <em>GenericSuperType.gif</em> if the generic type is the generic super
+	 * type of a type.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Object getImage(Object object) {
 
-    return overlayImage(object,getResourceLocator().getImage("full/obj16/GenericType")); //$NON-NLS-1$
-  }
+		EReference eContainmentFeature = ((EObject) object).eContainmentFeature();
 
-  /**
-   * This returns the label text for the adapted class.
-   * 
-   * <p>
-   * The EMF implementation is changed to simply use the
-   * {@link super#getText(Object) super implementation}.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String getText(Object object) {
-    return super.getText(object);
-  }
+		if (eContainmentFeature == PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE) {
+			return overlayImage(object, getResourceLocator().getImage(
+					"full/obj16/GenericSuperType")); //$NON-NLS-1$
+		}
 
-  /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * 
-   * @generated
-   */
-  @Override
-  public void notifyChanged(Notification notification) {
-    updateChildren(notification);
-    super.notifyChanged(notification);
-  }
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/GenericType")); //$NON-NLS-1$
+	}
 
-  /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
-  }
+	/**
+	 * This returns the label text for the adapted class.
+	 * 
+	 * <p>
+	 * The EMF implementation is changed to simply use the
+	 * {@link super#getText(Object) super implementation}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
 
-  /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ResourceLocator getResourceLocator() {
-    return PivotModelEditPlugin.INSTANCE;
-  }
+		return super.getText(object);
+	}
+
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void notifyChanged(Notification notification) {
+
+		updateChildren(notification);
+		super.notifyChanged(notification);
+	}
+
+	/**
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
+
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
 }

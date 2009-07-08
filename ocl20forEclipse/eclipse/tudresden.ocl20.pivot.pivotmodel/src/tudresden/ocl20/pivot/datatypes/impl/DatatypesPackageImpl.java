@@ -76,7 +76,8 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String eNS_URI = "http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"; //$NON-NLS-1$
+	public static final String eNS_URI =
+			"http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
@@ -92,8 +93,8 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final DatatypesPackageImpl eINSTANCE = tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl
-			.init();
+	public static final DatatypesPackageImpl eINSTANCE =
+			tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl.init();
 
 	/**
 	 * The meta object id for the '<em>Sequence</em>' data type.
@@ -277,6 +278,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	private DatatypesPackageImpl() {
+
 		super(eNS_URI, ((EFactory) DatatypesFactory.INSTANCE));
 	}
 
@@ -310,23 +312,25 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public static DatatypesPackageImpl init() {
+
 		if (isInited)
 			return (DatatypesPackageImpl) EPackage.Registry.INSTANCE
 					.getEPackage(DatatypesPackageImpl.eNS_URI);
 
 		// Obtain or create and register package
-		DatatypesPackageImpl theDatatypesPackageImpl = (DatatypesPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI)
-				: new DatatypesPackageImpl());
+		DatatypesPackageImpl theDatatypesPackageImpl =
+				(DatatypesPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
+						.getEPackage(eNS_URI)
+						: new DatatypesPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		PivotModelPackageImpl thePivotModelPackageImpl = (PivotModelPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PivotModelPackageImpl.eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PivotModelPackageImpl.eNS_URI)
-				: PivotModelPackageImpl.eINSTANCE);
+		PivotModelPackageImpl thePivotModelPackageImpl =
+				(PivotModelPackageImpl) (EPackage.Registry.INSTANCE
+						.getEPackage(PivotModelPackageImpl.eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
+						.getEPackage(PivotModelPackageImpl.eNS_URI)
+						: PivotModelPackageImpl.eINSTANCE);
 
 		// Create package meta-data objects
 		theDatatypesPackageImpl.createPackageContents();
@@ -351,6 +355,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getSequence() {
+
 		return sequenceEDataType;
 	}
 
@@ -363,6 +368,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getSet() {
+
 		return setEDataType;
 	}
 
@@ -374,6 +380,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getUnlimitedNatural() {
+
 		return unlimitedNaturalEDataType;
 	}
 
@@ -385,6 +392,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getInteger() {
+
 		return integerEDataType;
 	}
 
@@ -396,6 +404,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getBoolean() {
+
 		return booleanEDataType;
 	}
 
@@ -408,6 +417,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getString() {
+
 		return stringEDataType;
 	}
 
@@ -419,6 +429,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getReal() {
+
 		return realEDataType;
 	}
 
@@ -431,6 +442,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getBag() {
+
 		return bagEDataType;
 	}
 
@@ -443,6 +455,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getOrderedSet() {
+
 		return orderedSetEDataType;
 	}
 
@@ -455,6 +468,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public EDataType getCollection() {
+
 		return collectionEDataType;
 	}
 
@@ -466,6 +480,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public DatatypesFactory getDatatypesFactory() {
+
 		return (DatatypesFactory) getEFactoryInstance();
 	}
 
@@ -484,6 +499,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public void createPackageContents() {
+
 		if (isCreated)
 			return;
 		isCreated = true;
@@ -516,6 +532,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public void initializePackageContents() {
+
 		if (isInitialized)
 			return;
 		isInitialized = true;
@@ -534,9 +551,7 @@ public class DatatypesPackageImpl extends EPackageImpl {
 				"Real", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEDataType(stringEDataType, String.class,
 				"String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEDataType(
-				unlimitedNaturalEDataType,
-				long.class,
+		initEDataType(unlimitedNaturalEDataType, long.class,
 				"UnlimitedNatural", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEDataType(collectionEDataType, Collection.class,
 				"Collection", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -594,8 +609,8 @@ public class DatatypesPackageImpl extends EPackageImpl {
 		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
 		 * @generated
 		 */
-		public static final EDataType UNLIMITED_NATURAL = eINSTANCE
-				.getUnlimitedNatural();
+		public static final EDataType UNLIMITED_NATURAL =
+				eINSTANCE.getUnlimitedNatural();
 
 		/**
 		 * The meta object literal for the '<em>Integer</em>' data type.

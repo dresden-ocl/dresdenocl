@@ -41,45 +41,78 @@ import tudresden.ocl20.pivot.pivotmodel.GenericType;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericType#bindTypedElement(java.util.List, java.util.List) <em>Bind Typed Element</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericType#bindGenericType(java.util.List, java.util.List, tudresden.ocl20.pivot.pivotmodel.TypedElement) <em>Bind Generic Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericType#bindGenericSuperType(java.util.List, java.util.List, tudresden.ocl20.pivot.pivotmodel.Type) <em>Bind Generic Super Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericType#isConformant(tudresden.ocl20.pivot.pivotmodel.Type) <em>Is Conformant</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public abstract class GenericTypeTest extends NamedElementTest {
 
-  /**
-   * Constructs a new Generic Type test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public GenericTypeTest(String name) {
-    super(name);
-  }
+	/**
+	 * Constructs a new Generic Type test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GenericTypeTest(String name) {
 
-  /**
-   * Returns the fixture for this Generic Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected GenericType getFixture() {
-    return (GenericType) fixture;
-  }
+		super(name);
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericType#bindTypedElement(java.util.List, java.util.List) <em>Bind Typed Element</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericType#bindTypedElement(java.util.List, java.util.List)
-   * @generated
-   */
-  public void testBindTypedElement__List_List() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * Returns the fixture for this Generic Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected GenericType getFixture() {
+
+		return (GenericType) fixture;
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericType#bindGenericType(java.util.List, java.util.List, tudresden.ocl20.pivot.pivotmodel.TypedElement) <em>Bind Generic Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericType#bindGenericType(java.util.List, java.util.List, tudresden.ocl20.pivot.pivotmodel.TypedElement)
+	 * @generated
+	 */
+	public void testBindGenericType__List_List_TypedElement() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericType#bindGenericSuperType(java.util.List, java.util.List, tudresden.ocl20.pivot.pivotmodel.Type) <em>Bind Generic Super Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericType#bindGenericSuperType(java.util.List, java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @generated
+	 */
+	public void testBindGenericSuperType__List_List_Type() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericType#isConformant(tudresden.ocl20.pivot.pivotmodel.Type) <em>Is Conformant</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericType#isConformant(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @generated
+	 */
+	public void testIsConformant__Type() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //GenericTypeTest

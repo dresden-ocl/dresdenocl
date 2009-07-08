@@ -47,6 +47,7 @@ public interface DatatypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	DatatypesFactory INSTANCE = tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl.eINSTANCE;
+	DatatypesFactory INSTANCE =
+			tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl.eINSTANCE;
 
 } //DatatypesFactory

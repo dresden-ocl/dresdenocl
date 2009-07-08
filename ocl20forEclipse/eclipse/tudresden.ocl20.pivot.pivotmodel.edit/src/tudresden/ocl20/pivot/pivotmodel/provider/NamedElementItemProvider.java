@@ -59,184 +59,201 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
  * @generated
  */
 public class NamedElementItemProvider extends ItemProviderAdapter implements
-    IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-    IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
-  /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  public NamedElementItemProvider(AdapterFactory adapterFactory) {
-    super(adapterFactory);
-  }
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	public NamedElementItemProvider(AdapterFactory adapterFactory) {
 
-  /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-    if (itemPropertyDescriptors == null) {
-      super.getPropertyDescriptors(object);
+		super(adapterFactory);
+	}
 
-      addNamePropertyDescriptor(object);
-      addQualifiedNamePropertyDescriptor(object);
-    }
-    return itemPropertyDescriptors;
-  }
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 
-  /**
-   * This adds a property descriptor for the Name feature. <!-- begin-user-doc --> <!-- end-user-doc
-   * -->
-   * 
-   * @generated
-   */
-  protected void addNamePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_NamedElement_name_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_NamedElement_name_feature","_UI_NamedElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.NAMED_ELEMENT__NAME,true,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
-  }
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-  /**
-   * This adds a property descriptor for the Qualified Name feature.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  protected void addQualifiedNamePropertyDescriptor(Object object) {
-    itemPropertyDescriptors
-        .add(createItemPropertyDescriptor(
-            ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-            getResourceLocator(),
-            getString("_UI_NamedElement_qualifiedName_feature"), //$NON-NLS-1$
-            getString(
-                "_UI_PropertyDescriptor_description","_UI_NamedElement_qualifiedName_feature","_UI_NamedElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            PivotModelPackageImpl.Literals.NAMED_ELEMENT__QUALIFIED_NAME,false,false,false,
-            ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,null,null));
-  }
+			addNamePropertyDescriptor(object);
+			addQualifiedNamePropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
-  /**
-   * This returns the label text for the adapted class.
-   * 
-   * <p>
-   * The EMF implementation is adapted in order to only return the name of the {@link NamedElement}.
-   * </p>
-   * 
-   * @generated NOT
-   */
-  @Override
-  public String getText(Object object) {
-    return (((NamedElement) object).getName());
-  }
+	/**
+	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
 
-  /**
-   * Helper method that returns the character used as the opening delimiter for type parameters.
-   * This can be overridden by subclasses to alter the way their type parameters are displayed. The
-   * default implementation returns <code>'<'</code>.
-   * 
-   * <p>
-   * Due to multiple inheritance, there is no concrete item provider class for
-   * {@link GenericElement}s. That's why shared methods have been moved up the inheritance
-   * hierarchy to <code>NamedElementItemProvider</code>.
-   * </p>
-   * 
-   * @return the type parameter list opening character
-   */
-  protected char getTypeParameterListOpeningDelimiter() {
-    return '<';
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_NamedElement_name_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.NAMED_ELEMENT__NAME, true, false,
+						false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
 
-  /**
-   * Helper method that returns the character used as the closing delimiter for type parameters.
-   * This can be overridden by subclasses to alter the way their type parameters are displayed. The
-   * default implementation returns <code>'>'</code>.
-   * 
-   * <p>
-   * Due to multiple inheritance, there is no concrete item provider class for
-   * {@link GenericElement}s. That's why shared methods have been moved up the inheritance
-   * hierarchy to <code>NamedElementItemProvider</code>.
-   * </p>
-   * 
-   * @return the type parameter list opening character
-   */
-  protected char getTypeParameterListClosingDelimiter() {
-    return '>';
-  }
+	/**
+	 * This adds a property descriptor for the Qualified Name feature.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	protected void addQualifiedNamePropertyDescriptor(Object object) {
 
-  /**
-   * Helper method for subclasses that adapts the given {@link NamedElement} to an
-   * {@link IItemLabelProvider}.
-   * 
-   * @param namedElement the named element
-   * 
-   * @return an {@link IItemLabelProvider} for the named element
-   */
-  protected IItemLabelProvider getLabelProvider(NamedElement namedElement) {
-    return (IItemLabelProvider) ((ComposeableAdapterFactory) getAdapterFactory())
-        .getRootAdapterFactory().adapt(namedElement,IItemLabelProvider.class);
-  }
-  
-  /**
-   * Helper method for subclasses that returns the label for a given {@link NamedElement}.
-   * 
-   * @param namedElement the named element
-   * 
-   * @return a <code>String</code> representing the named element
-   */
-  protected String getLabel(NamedElement namedElement) {
-    return getLabelProvider(namedElement).getText(namedElement);
-  }
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_NamedElement_qualifiedName_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_NamedElement_qualifiedName_feature", "_UI_NamedElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						PivotModelPackageImpl.Literals.NAMED_ELEMENT__QUALIFIED_NAME,
+						false, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+						null, null));
+	}
 
-  /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void notifyChanged(Notification notification) {
-    updateChildren(notification);
+	/**
+	 * This returns the label text for the adapted class.
+	 * 
+	 * <p>
+	 * The EMF implementation is adapted in order to only return the name of the {@link NamedElement}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
 
-    switch (notification.getFeatureID(NamedElement.class)) {
-      case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
-      case PivotModelPackageImpl.NAMED_ELEMENT__QUALIFIED_NAME:
-        fireNotifyChanged(new ViewerNotification(notification,notification.getNotifier(),false,true));
-        return;
-    }
-    super.notifyChanged(notification);
-  }
+		return (((NamedElement) object).getName());
+	}
 
-  /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-    super.collectNewChildDescriptors(newChildDescriptors,object);
-  }
+	/**
+	 * Helper method that returns the character used as the opening delimiter for type parameters.
+	 * This can be overridden by subclasses to alter the way their type parameters are displayed. The
+	 * default implementation returns <code>'<'</code>.
+	 * 
+	 * <p>
+	 * Due to multiple inheritance, there is no concrete item provider class for
+	 * {@link GenericElement}s. That's why shared methods have been moved up the inheritance
+	 * hierarchy to <code>NamedElementItemProvider</code>.
+	 * </p>
+	 * 
+	 * @return the type parameter list opening character
+	 */
+	protected char getTypeParameterListOpeningDelimiter() {
 
-  /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ResourceLocator getResourceLocator() {
-    return PivotModelEditPlugin.INSTANCE;
-  }
+		return '<';
+	}
+
+	/**
+	 * Helper method that returns the character used as the closing delimiter for type parameters.
+	 * This can be overridden by subclasses to alter the way their type parameters are displayed. The
+	 * default implementation returns <code>'>'</code>.
+	 * 
+	 * <p>
+	 * Due to multiple inheritance, there is no concrete item provider class for
+	 * {@link GenericElement}s. That's why shared methods have been moved up the inheritance
+	 * hierarchy to <code>NamedElementItemProvider</code>.
+	 * </p>
+	 * 
+	 * @return the type parameter list opening character
+	 */
+	protected char getTypeParameterListClosingDelimiter() {
+
+		return '>';
+	}
+
+	/**
+	 * Helper method for subclasses that adapts the given {@link NamedElement} to an
+	 * {@link IItemLabelProvider}.
+	 * 
+	 * @param namedElement the named element
+	 * 
+	 * @return an {@link IItemLabelProvider} for the named element
+	 */
+	protected IItemLabelProvider getLabelProvider(NamedElement namedElement) {
+
+		return (IItemLabelProvider) ((ComposeableAdapterFactory) getAdapterFactory())
+				.getRootAdapterFactory().adapt(namedElement, IItemLabelProvider.class);
+	}
+
+	/**
+	 * Helper method for subclasses that returns the label for a given {@link NamedElement}.
+	 * 
+	 * @param namedElement the named element
+	 * 
+	 * @return a <code>String</code> representing the named element
+	 */
+	protected String getLabel(NamedElement namedElement) {
+
+		return getLabelProvider(namedElement).getText(namedElement);
+	}
+
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void notifyChanged(Notification notification) {
+
+		updateChildren(notification);
+
+		switch (notification.getFeatureID(NamedElement.class)) {
+		case PivotModelPackageImpl.NAMED_ELEMENT__NAME:
+		case PivotModelPackageImpl.NAMED_ELEMENT__QUALIFIED_NAME:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), false, true));
+			return;
+		}
+		super.notifyChanged(notification);
+	}
+
+	/**
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
+
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+
+		return PivotModelEditPlugin.INSTANCE;
+	}
 
 }

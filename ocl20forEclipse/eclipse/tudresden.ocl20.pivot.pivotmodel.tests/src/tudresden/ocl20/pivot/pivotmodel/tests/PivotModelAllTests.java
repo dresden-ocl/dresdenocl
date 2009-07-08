@@ -45,33 +45,36 @@ import junit.textui.TestRunner;
  */
 public class PivotModelAllTests extends TestSuite {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(suite());
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static Test suite() {
-    TestSuite suite = new PivotModelAllTests("Pivot Model Tests"); //$NON-NLS-1$
-    suite.addTest(PivotModelTests.suite());
-    return suite;
-  }
+		TestRunner.run(suite());
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PivotModelAllTests(String name) {
-    super(name);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static Test suite() {
+
+		TestSuite suite = new PivotModelAllTests("Pivot Model Tests"); //$NON-NLS-1$
+		suite.addTest(PivotModelTests.suite());
+		return suite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PivotModelAllTests(String name) {
+
+		super(name);
+	}
 
 } //PivotModelAllTests

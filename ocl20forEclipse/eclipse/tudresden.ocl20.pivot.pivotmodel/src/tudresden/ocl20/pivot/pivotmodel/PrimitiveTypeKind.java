@@ -94,7 +94,15 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 * @ordered
 	 */
-	STRING(4, "String", "String"); //$NON-NLS-1$ //$NON-NLS-2$
+	STRING(4, "String", "String"), /**
+	 * The '<em><b>Void</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #VOID_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	VOID(5, "Void", "Void"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The '<em><b>Unknown</b></em>' literal value.
@@ -167,13 +175,27 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	public static final int STRING_VALUE = 4;
 
 	/**
+	 * The '<em><b>Void</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Void</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #VOID
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VOID_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>Primitive Type Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final PrimitiveTypeKind[] VALUES_ARRAY = new PrimitiveTypeKind[] {
-			UNKNOWN, INTEGER, REAL, BOOLEAN, STRING, };
+	private static final PrimitiveTypeKind[] VALUES_ARRAY =
+			new PrimitiveTypeKind[] { UNKNOWN, INTEGER, REAL, BOOLEAN, STRING, VOID, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Primitive Type Kind</b></em>' enumerators. <!--
@@ -181,8 +203,8 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * 
 	 * @generated
 	 */
-	public static final List<PrimitiveTypeKind> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<PrimitiveTypeKind> VALUES =
+			Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Primitive Type Kind</b></em>' literal with the specified literal value.
@@ -190,6 +212,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public static PrimitiveTypeKind get(String literal) {
+
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			PrimitiveTypeKind result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
@@ -206,6 +229,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public static PrimitiveTypeKind getByName(String name) {
+
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			PrimitiveTypeKind result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
@@ -221,6 +245,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public static PrimitiveTypeKind get(int value) {
+
 		switch (value) {
 		case UNKNOWN_VALUE:
 			return UNKNOWN;
@@ -232,6 +257,8 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 			return BOOLEAN;
 		case STRING_VALUE:
 			return STRING;
+		case VOID_VALUE:
+			return VOID;
 		}
 		return null;
 	}
@@ -260,6 +287,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	private PrimitiveTypeKind(int value, String name, String literal) {
+
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -270,6 +298,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public int getValue() {
+
 		return value;
 	}
 
@@ -278,6 +307,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public String getName() {
+
 		return name;
 	}
 
@@ -286,6 +316,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 * @generated
 	 */
 	public String getLiteral() {
+
 		return literal;
 	}
 
@@ -297,6 +328,7 @@ public enum PrimitiveTypeKind implements InternalPrimitiveTypeKind {
 	 */
 	@Override
 	public String toString() {
+
 		return literal;
 	}
 

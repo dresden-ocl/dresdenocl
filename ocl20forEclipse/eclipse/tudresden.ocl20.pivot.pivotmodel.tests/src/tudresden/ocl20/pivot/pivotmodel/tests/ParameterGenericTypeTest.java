@@ -46,56 +46,61 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  */
 public class ParameterGenericTypeTest extends GenericTypeTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(ParameterGenericTypeTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
 
-  /**
-   * Constructs a new Parameter Generic Type test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ParameterGenericTypeTest(String name) {
-    super(name);
-  }
+		TestRunner.run(ParameterGenericTypeTest.class);
+	}
 
-  /**
-   * Returns the fixture for this Parameter Generic Type test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected ParameterGenericType getFixture() {
-    return (ParameterGenericType) fixture;
-  }
+	/**
+	 * Constructs a new Parameter Generic Type test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterGenericTypeTest(String name) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(PivotModelFactoryImpl.eINSTANCE.createParameterGenericType());
-  }
+		super(name);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * Returns the fixture for this Parameter Generic Type test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected ParameterGenericType getFixture() {
+
+		return (ParameterGenericType) fixture;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+
+		setFixture(PivotModelFactoryImpl.eINSTANCE.createParameterGenericType());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+
+		setFixture(null);
+	}
 
 } //ParameterGenericTypeTest

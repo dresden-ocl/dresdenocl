@@ -52,69 +52,75 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  */
 public class PropertyTest extends FeatureTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(PropertyTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
 
-  /**
-   * Constructs a new Property test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PropertyTest(String name) {
-    super(name);
-  }
+		TestRunner.run(PropertyTest.class);
+	}
 
-  /**
-   * Returns the fixture for this Property test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected Property getFixture() {
-    return (Property) fixture;
-  }
+	/**
+	 * Constructs a new Property test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyTest(String name) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(PivotModelFactoryImpl.eINSTANCE.createProperty());
-  }
+		super(name);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * Returns the fixture for this Property test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected Property getFixture() {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Property#cmpSlots(tudresden.ocl20.pivot.pivotmodel.Property) <em>Cmp Slots</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Property#cmpSlots(tudresden.ocl20.pivot.pivotmodel.Property)
-   * @generated
-   */
-  public void testCmpSlots__Property() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		return (Property) fixture;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+
+		setFixture(PivotModelFactoryImpl.eINSTANCE.createProperty());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+
+		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Property#cmpSlots(tudresden.ocl20.pivot.pivotmodel.Property) <em>Cmp Slots</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Property#cmpSlots(tudresden.ocl20.pivot.pivotmodel.Property)
+	 * @generated
+	 */
+	public void testCmpSlots__Property() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //PropertyTest

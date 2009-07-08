@@ -64,8 +64,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger
-			.getLogger(EnumerationImpl.class);
+	private static final Logger logger = Logger.getLogger(EnumerationImpl.class);
 
 	/**
 	 * The cached value of the '{@link #getOwnedLiteral() <em>Owned Literal</em>}' containment reference list.
@@ -81,6 +80,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * @generated
 	 */
 	protected EnumerationImpl() {
+
 		super();
 	}
 
@@ -90,6 +90,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackageImpl.Literals.ENUMERATION;
 	}
 
@@ -101,6 +102,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * @generated NOT
 	 */
 	public List<EnumerationLiteral> getOwnedLiteral() {
+
 		return getOwnedLiteralGen();
 	}
 
@@ -110,11 +112,13 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * @generated
 	 */
 	protected final List<EnumerationLiteral> getOwnedLiteralGen() {
+
 		if (ownedLiteral == null) {
-			ownedLiteral = new EObjectContainmentWithInverseEList<EnumerationLiteral>(
-					EnumerationLiteral.class, this,
-					PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL,
-					PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION);
+			ownedLiteral =
+					new EObjectContainmentWithInverseEList<EnumerationLiteral>(
+							EnumerationLiteral.class, this,
+							PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL,
+							PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION);
 		}
 		return ownedLiteral;
 	}
@@ -125,6 +129,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * @generated NOT
 	 */
 	public Enumeration addLiteral(EnumerationLiteral literal) {
+
 		if (logger.isDebugEnabled()) {
 			logger.debug("addLiteral(literal=" + literal + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -145,6 +150,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * @generated NOT
 	 */
 	public EnumerationLiteral lookupLiteral(String name) {
+
 		if (logger.isDebugEnabled()) {
 			logger.debug("lookupLiteral(name=" + name + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -173,6 +179,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 */
 	@Override
 	public Enumeration clone() {
+
 		return initialize(PivotModelFactory.INSTANCE.createEnumeration());
 	}
 
@@ -182,6 +189,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	protected Enumeration initialize(Enumeration clone) {
+
 		super.initialize(clone);
 
 		// additionally clone the enumeration literals
@@ -198,8 +206,9 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedLiteral())
@@ -215,10 +224,10 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL:
-			return ((InternalEList<?>) getOwnedLiteral()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getOwnedLiteral()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -229,6 +238,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL:
 			return getOwnedLiteral();
@@ -243,6 +253,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL:
 			getOwnedLiteral().clear();
@@ -259,6 +270,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL:
 			getOwnedLiteral().clear();
@@ -273,6 +285,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL:
 			return ownedLiteral != null && !ownedLiteral.isEmpty();

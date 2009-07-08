@@ -47,7 +47,8 @@ public interface PivotModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PivotModelFactory INSTANCE = tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl.eINSTANCE;
+	PivotModelFactory INSTANCE =
+			tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl.eINSTANCE;
 
 	/**
 	 * Returns a new object of class '<em>Enumeration</em>'.

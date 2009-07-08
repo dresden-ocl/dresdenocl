@@ -46,75 +46,96 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  * The following operations are tested:
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#addLiteral(tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral) <em>Add Literal</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#lookupLiteral(java.lang.String) <em>Lookup Literal</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public class EnumerationTest extends TypeTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(EnumerationTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
 
-  /**
-   * Constructs a new Enumeration test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EnumerationTest(String name) {
-    super(name);
-  }
+		TestRunner.run(EnumerationTest.class);
+	}
 
-  /**
-   * Returns the fixture for this Enumeration test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected Enumeration getFixture() {
-    return (Enumeration) fixture;
-  }
+	/**
+	 * Constructs a new Enumeration test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnumerationTest(String name) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(PivotModelFactoryImpl.eINSTANCE.createEnumeration());
-  }
+		super(name);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * Returns the fixture for this Enumeration test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected Enumeration getFixture() {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#addLiteral(tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral) <em>Add Literal</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Enumeration#addLiteral(tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral)
-   * @generated
-   */
-  public void testAddLiteral__EnumerationLiteral() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		return (Enumeration) fixture;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+
+		setFixture(PivotModelFactoryImpl.eINSTANCE.createEnumeration());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+
+		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#addLiteral(tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral) <em>Add Literal</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Enumeration#addLiteral(tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral)
+	 * @generated
+	 */
+	public void testAddLiteral__EnumerationLiteral() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#lookupLiteral(java.lang.String) <em>Lookup Literal</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Enumeration#lookupLiteral(java.lang.String)
+	 * @generated
+	 */
+	public void testLookupLiteral__String() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //EnumerationTest

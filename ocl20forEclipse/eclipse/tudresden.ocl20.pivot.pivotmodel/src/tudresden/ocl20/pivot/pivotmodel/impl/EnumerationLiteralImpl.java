@@ -65,6 +65,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	protected EnumerationLiteralImpl() {
+
 		super();
 	}
 
@@ -74,6 +75,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackageImpl.Literals.ENUMERATION_LITERAL;
 	}
 
@@ -85,6 +87,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public NamedElement getOwner() {
+
 		return getEnumeration();
 	}
 
@@ -93,6 +96,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	public Enumeration getEnumeration() {
+
 		if (eContainerFeatureID != PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION)
 			return null;
 		return (Enumeration) eContainer();
@@ -105,6 +109,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public EnumerationLiteral clone() {
+
 		return (EnumerationLiteral) initialize(PivotModelFactory.INSTANCE
 				.createEnumerationLiteral());
 	}
@@ -115,8 +120,10 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	public NotificationChain basicSetEnumeration(Enumeration newEnumeration,
 			NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newEnumeration,
-				PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION, msgs);
+
+		msgs =
+				eBasicSetContainer((InternalEObject) newEnumeration,
+						PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION, msgs);
 		return msgs;
 	}
 
@@ -125,6 +132,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	public void setEnumeration(Enumeration newEnumeration) {
+
 		if (newEnumeration != eInternalContainer()
 				|| (eContainerFeatureID != PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION && newEnumeration != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject) newEnumeration))
@@ -134,13 +142,15 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newEnumeration != null)
-				msgs = ((InternalEObject) newEnumeration).eInverseAdd(this,
-						PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL,
-						Enumeration.class, msgs);
+				msgs =
+						((InternalEObject) newEnumeration).eInverseAdd(this,
+								PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL,
+								Enumeration.class, msgs);
 			msgs = basicSetEnumeration(newEnumeration, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION,
 					newEnumeration, newEnumeration));
@@ -151,8 +161,9 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION:
 			if (eInternalContainer() != null)
@@ -169,6 +180,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION:
 			return basicSetEnumeration(null, msgs);
@@ -183,11 +195,12 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
+
 		switch (eContainerFeatureID) {
 		case PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION:
 			return eInternalContainer().eInverseRemove(this,
-					PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL,
-					Enumeration.class, msgs);
+					PivotModelPackageImpl.ENUMERATION__OWNED_LITERAL, Enumeration.class,
+					msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -198,6 +211,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION:
 			return getEnumeration();
@@ -211,6 +225,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION:
 			setEnumeration((Enumeration) newValue);
@@ -225,6 +240,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION:
 			setEnumeration((Enumeration) null);
@@ -239,6 +255,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackageImpl.ENUMERATION_LITERAL__ENUMERATION:
 			return getEnumeration() != null;

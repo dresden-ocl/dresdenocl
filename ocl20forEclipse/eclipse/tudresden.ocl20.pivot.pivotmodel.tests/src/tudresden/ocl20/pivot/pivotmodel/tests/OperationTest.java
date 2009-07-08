@@ -56,168 +56,181 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Operation#hasMatchingSignature(java.util.List) <em>Has Matching Signature</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Operation#addParameter(tudresden.ocl20.pivot.pivotmodel.Parameter) <em>Add Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public class OperationTest extends FeatureTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(OperationTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
 
-  /**
-   * Constructs a new Operation test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public OperationTest(String name) {
-    super(name);
-  }
+		TestRunner.run(OperationTest.class);
+	}
 
-  /**
-   * Returns the fixture for this Operation test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected Operation getFixture() {
-    return (Operation) fixture;
-  }
+	/**
+	 * Constructs a new Operation test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationTest(String name) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(PivotModelFactoryImpl.eINSTANCE.createOperation());
-  }
+		super(name);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * Returns the fixture for this Operation test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected Operation getFixture() {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#getInputParameter() <em>Input Parameter</em>}' feature getter.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Operation#getInputParameter()
-   * @generated
-   */
-  public void testGetInputParameter() {
-    // TODO: implement this feature getter test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		return (Operation) fixture;
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#getOutputParameter() <em>Output Parameter</em>}' feature getter.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Operation#getOutputParameter()
-   * @generated
-   */
-  public void testGetOutputParameter() {
-    // TODO: implement this feature getter test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#getReturnParameter() <em>Return Parameter</em>}' feature getter.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Operation#getReturnParameter()
-   * @generated
-   */
-  public void testGetReturnParameter() {
-    // TODO: implement this feature getter test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		setFixture(PivotModelFactoryImpl.eINSTANCE.createOperation());
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#getSignatureParameter() <em>Signature Parameter</em>}' feature getter.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Operation#getSignatureParameter()
-   * @generated
-   */
-  public void testGetSignatureParameter() {
-    // TODO: implement this feature getter test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#hasMatchingSignature(java.util.List) <em>Has Matching Signature</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Operation#hasMatchingSignature(java.util.List)
-   * @generated
-   */
-  public void testHasMatchingSignature__List() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		setFixture(null);
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#addParameter(tudresden.ocl20.pivot.pivotmodel.Parameter) <em>Add Parameter</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Operation#addParameter(tudresden.ocl20.pivot.pivotmodel.Parameter)
-   * @generated
-   */
-  public void testAddParameter__Parameter() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#getInputParameter() <em>Input Parameter</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getInputParameter()
+	 * @generated
+	 */
+	public void testGetInputParameter() {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter)
-   * @generated
-   */
-  public void testAddTypeParameter__TypeParameter() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
-   * @generated
-   */
-  public void testBindTypeParameter__List_List() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#getOutputParameter() <em>Output Parameter</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getOutputParameter()
+	 * @generated
+	 */
+	public void testGetOutputParameter() {
+
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#getReturnParameter() <em>Return Parameter</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getReturnParameter()
+	 * @generated
+	 */
+	public void testGetReturnParameter() {
+
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#getSignatureParameter() <em>Signature Parameter</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getSignatureParameter()
+	 * @generated
+	 */
+	public void testGetSignatureParameter() {
+
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#hasMatchingSignature(java.util.List) <em>Has Matching Signature</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#hasMatchingSignature(java.util.List)
+	 * @generated
+	 */
+	public void testHasMatchingSignature__List() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Operation#addParameter(tudresden.ocl20.pivot.pivotmodel.Parameter) <em>Add Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#addParameter(tudresden.ocl20.pivot.pivotmodel.Parameter)
+	 * @generated
+	 */
+	public void testAddParameter__Parameter() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter)
+	 * @generated
+	 */
+	public void testAddTypeParameter__TypeParameter() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
+	 * @generated
+	 */
+	public void testBindTypeParameter__List_List() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //OperationTest

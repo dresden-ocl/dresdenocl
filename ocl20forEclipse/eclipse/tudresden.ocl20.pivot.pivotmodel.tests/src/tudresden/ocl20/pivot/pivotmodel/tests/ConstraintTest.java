@@ -52,69 +52,75 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  */
 public class ConstraintTest extends NamedElementTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(ConstraintTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
 
-  /**
-   * Constructs a new Constraint test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ConstraintTest(String name) {
-    super(name);
-  }
+		TestRunner.run(ConstraintTest.class);
+	}
 
-  /**
-   * Returns the fixture for this Constraint test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected Constraint getFixture() {
-    return (Constraint) fixture;
-  }
+	/**
+	 * Constructs a new Constraint test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintTest(String name) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(PivotModelFactoryImpl.eINSTANCE.createConstraint());
-  }
+		super(name);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * Returns the fixture for this Constraint test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected Constraint getFixture() {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Constraint#addConstrainedElement(tudresden.ocl20.pivot.pivotmodel.ConstrainableElement) <em>Add Constrained Element</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Constraint#addConstrainedElement(tudresden.ocl20.pivot.pivotmodel.ConstrainableElement)
-   * @generated
-   */
-  public void testAddConstrainedElement__ConstrainableElement() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		return (Constraint) fixture;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+
+		setFixture(PivotModelFactoryImpl.eINSTANCE.createConstraint());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+
+		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Constraint#addConstrainedElement(tudresden.ocl20.pivot.pivotmodel.ConstrainableElement) <em>Add Constrained Element</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#addConstrainedElement(tudresden.ocl20.pivot.pivotmodel.ConstrainableElement)
+	 * @generated
+	 */
+	public void testAddConstrainedElement__ConstrainableElement() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //ConstraintTest

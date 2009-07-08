@@ -48,129 +48,184 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#addType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Add Type</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#addRule(tudresden.ocl20.pivot.pivotmodel.Constraint) <em>Add Rule</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#addNestedNamespace(tudresden.ocl20.pivot.pivotmodel.Namespace) <em>Add Nested Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedAndNestedRules() <em>Get Owned And Nested Rules</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#lookupType(java.lang.String) <em>Lookup Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#lookupNamespace(java.lang.String) <em>Lookup Namespace</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public class NamespaceTest extends NamedElementTest {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static void main(String[] args) {
-    TestRunner.run(NamespaceTest.class);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
 
-  /**
-   * Constructs a new Namespace test case with the given name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NamespaceTest(String name) {
-    super(name);
-  }
+		TestRunner.run(NamespaceTest.class);
+	}
 
-  /**
-   * Returns the fixture for this Namespace test case.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected Namespace getFixture() {
-    return (Namespace) fixture;
-  }
+	/**
+	 * Constructs a new Namespace test case with the given name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamespaceTest(String name) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#setUp()
-   * @generated
-   */
-  @Override
-  protected void setUp() throws Exception {
-    setFixture(PivotModelFactoryImpl.eINSTANCE.createNamespace());
-  }
+		super(name);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see junit.framework.TestCase#tearDown()
-   * @generated
-   */
-  @Override
-  protected void tearDown() throws Exception {
-    setFixture(null);
-  }
+	/**
+	 * Returns the fixture for this Namespace test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected Namespace getFixture() {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#addType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Add Type</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Namespace#addType(tudresden.ocl20.pivot.pivotmodel.Type)
-   * @generated
-   */
-  public void testAddType__Type() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		return (Namespace) fixture;
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#addRule(tudresden.ocl20.pivot.pivotmodel.Constraint) <em>Add Rule</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Namespace#addRule(tudresden.ocl20.pivot.pivotmodel.Constraint)
-   * @generated
-   */
-  public void testAddRule__Constraint() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#addNestedNamespace(tudresden.ocl20.pivot.pivotmodel.Namespace) <em>Add Nested Namespace</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.Namespace#addNestedNamespace(tudresden.ocl20.pivot.pivotmodel.Namespace)
-   * @generated
-   */
-  public void testAddNestedNamespace__Namespace() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		setFixture(PivotModelFactoryImpl.eINSTANCE.createNamespace());
+	}
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter)
-   * @generated
-   */
-  public void testAddTypeParameter__TypeParameter() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
 
-  /**
-   * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
-   * @generated
-   */
-  public void testBindTypeParameter__List_List() {
-    // TODO: implement this operation test method
-    // Ensure that you remove @generated or mark it @generated NOT
-    fail();
-  }
+		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#addType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Add Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#addType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @generated
+	 */
+	public void testAddType__Type() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#addRule(tudresden.ocl20.pivot.pivotmodel.Constraint) <em>Add Rule</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#addRule(tudresden.ocl20.pivot.pivotmodel.Constraint)
+	 * @generated
+	 */
+	public void testAddRule__Constraint() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#addNestedNamespace(tudresden.ocl20.pivot.pivotmodel.Namespace) <em>Add Nested Namespace</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#addNestedNamespace(tudresden.ocl20.pivot.pivotmodel.Namespace)
+	 * @generated
+	 */
+	public void testAddNestedNamespace__Namespace() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedAndNestedRules() <em>Get Owned And Nested Rules</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedAndNestedRules()
+	 * @generated
+	 */
+	public void testGetOwnedAndNestedRules() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#lookupType(java.lang.String) <em>Lookup Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#lookupType(java.lang.String)
+	 * @generated
+	 */
+	public void testLookupType__String() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#lookupNamespace(java.lang.String) <em>Lookup Namespace</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#lookupNamespace(java.lang.String)
+	 * @generated
+	 */
+	public void testLookupNamespace__String() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter) <em>Add Type Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#addTypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter)
+	 * @generated
+	 */
+	public void testAddTypeParameter__TypeParameter() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List) <em>Bind Type Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
+	 * @generated
+	 */
+	public void testBindTypeParameter__List_List() {
+
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //NamespaceTest
