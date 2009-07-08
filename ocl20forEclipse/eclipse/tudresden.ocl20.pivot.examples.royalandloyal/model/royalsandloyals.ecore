@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tudresden">
+  <eClassifiers xsi:type="ecore:EDataType" name="void" instanceTypeName="void"/>
+  <eSubpackages name="ocl20">
+    <eSubpackages name="pivot">
+      <eSubpackages name="examples">
+        <eSubpackages name="royalsandloyals">
+          <eClassifiers xsi:type="ecore:EClass" name="Burning" eSuperTypes="#//ocl20/pivot/examples/royalsandloyals/Transaction"/>
+          <eClassifiers xsi:type="ecore:EClass" name="Customer">
+            <eOperations name="birthdayHappens" eType="#//void"/>
+            <eOperations name="getAge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="Earning" eSuperTypes="#//ocl20/pivot/examples/royalsandloyals/Transaction"/>
+          <eClassifiers xsi:type="ecore:EClass" name="Transaction"/>
+        </eSubpackages>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
