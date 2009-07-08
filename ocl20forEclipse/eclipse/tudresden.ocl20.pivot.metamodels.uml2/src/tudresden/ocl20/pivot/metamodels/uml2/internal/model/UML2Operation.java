@@ -108,6 +108,12 @@ public class UML2Operation extends AbstractOperation implements Operation {
 					.add(UML2AdapterFactory.INSTANCE.createParameter(dslOwnedParameter));
 		}
 
+		/* Eventually add the void return parameter manually. */
+		if (this.dslOperation.getType() == null) {
+			result.add(this.getReturnParameter());
+		}
+		// no else.
+
 		return result;
 	}
 
@@ -162,9 +168,19 @@ public class UML2Operation extends AbstractOperation implements Operation {
 
 		Parameter result;
 
-		result =
-				UML2AdapterFactory.INSTANCE.createParameter(this.dslOperation
-						.getReturnResult());
+		/* Check if the return parameter is null. */
+		if (this.dslOperation.getReturnResult() == null) {
+			result =
+					UML2AdapterFactory.INSTANCE
+							.createVoidReturnParameter(this.dslOperation);
+		}
+
+		/* Else adapt the return parameter. */
+		else {
+			result =
+					UML2AdapterFactory.INSTANCE.createParameter(this.dslOperation
+							.getReturnResult());
+		}
 
 		return result;
 	}

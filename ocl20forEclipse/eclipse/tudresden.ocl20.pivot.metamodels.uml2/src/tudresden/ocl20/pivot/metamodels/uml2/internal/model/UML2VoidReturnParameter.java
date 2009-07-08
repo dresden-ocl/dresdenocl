@@ -1,0 +1,167 @@
+/*
+ * Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net)
+ * This file is part of the UML2 Meta Model of Dresden OCL2 for Eclipse. Dresden
+ * OCL2 for Eclipse is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version. Dresden OCL2 for Eclipse is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU Lesser General Public License for more details. You should have
+ * received a copy of the GNU Lesser General Public License along with Dresden
+ * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
+package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+
+import org.apache.log4j.Logger;
+
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter;
+
+/**
+ * <p>
+ * An implementation of the Pivot Model {@link Parameter} concept for UML2
+ * return {@link Parameter}s of the {@link Type} <code>void</code>.
+ * </p>
+ * 
+ * @author Claas Wilke
+ * 
+ * @generated NOT
+ */
+public class UML2VoidReturnParameter extends AbstractParameter implements
+		Parameter {
+
+	/**
+	 * <p>
+	 * Logger for this class.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private static final Logger LOGGER =
+			UML2MetamodelPlugin.getLogger(UML2VoidReturnParameter.class);
+
+	/**
+	 * <p>
+	 * The adapted UML2 {@link org.eclipse.uml2.uml.Operation}.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private org.eclipse.uml2.uml.Operation dslOperation;
+
+	/**
+	 * <p>
+	 * Creates a new {@link UML2VoidReturnParameter} instance.
+	 * </p>
+	 * 
+	 * @param dslOperation
+	 *          the {@link org.eclipse.uml2.uml.Operation} that is adopted by this
+	 *          class.
+	 * 
+	 * @generated NOT
+	 */
+	public UML2VoidReturnParameter(org.eclipse.uml2.uml.Operation dslOperation) {
+
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "UML2VoidReturnParameter("; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += "dslOperation=" + dslOperation; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += ") - enter"; //$NON-NLS-1$ //$NON-NLS-2$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		/* Initialize adapted operation. */
+		this.dslOperation = dslOperation;
+
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("UML2Parameter() - exit"); //$NON-NLS-1$
+		}
+		// no else.
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getName() {
+
+		return this.getKind().getName();
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Operation getOperation() {
+
+		return UML2AdapterFactory.INSTANCE.createOperation(this.dslOperation);
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Type getType() {
+
+		return UML2AdapterFactory.INSTANCE.createType(null);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind()
+	 * @generated NOT
+	 */
+	public ParameterDirectionKind getKind() {
+
+		return ParameterDirectionKind.RETURN;
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public boolean isMultiple() {
+
+		return false;
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isOrdered()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public boolean isOrdered() {
+
+		return true;
+	}
+
+	/**
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isUnique()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public boolean isUnique() {
+
+		return true;
+	}
+}

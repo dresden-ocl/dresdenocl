@@ -70,14 +70,27 @@ public class UML2AdapterFactory {
 
 	/**
 	 * <p>
+	 * A cache for previously created void return parameters.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private Map<org.eclipse.uml2.uml.Operation, Parameter> adaptedVoidReturnParameters;
+
+	/**
+	 * <p>
 	 * Clients are not supposed to instantiate this class.
 	 * </p>
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	private UML2AdapterFactory() {
 
-		adapters = new HashMap<org.eclipse.uml2.uml.NamedElement, NamedElement>();
+		this.adapters =
+				new HashMap<org.eclipse.uml2.uml.NamedElement, NamedElement>();
+
+		this.adaptedVoidReturnParameters =
+				new HashMap<org.eclipse.uml2.uml.Operation, Parameter>();
 	}
 
 	/**
@@ -147,11 +160,12 @@ public class UML2AdapterFactory {
 
 		result = null;
 
+		/* Check if the given type is null. */
 		if (dslType == null) {
-			result = null;
+			result = this.createVoidType();
 		}
 
-		/* If the given type is a class, adapt to Type. */
+		/* Else if the given type is a class, adapt to Type. */
 		else if (dslType instanceof Class) {
 			result = createType((Class) dslType);
 		}
@@ -403,6 +417,76 @@ public class UML2AdapterFactory {
 
 	/**
 	 * <p>
+	 * Creates a return parameter with the <code>void</code> {@link Type} for a
+	 * given {@link org.eclipse.uml2.uml.Operation} that has no return parameter.
+	 * </p>
+	 * 
+	 * @param dslOperation
+	 *          The {@link org.eclipse.uml2.uml.Operation} whose void return
+	 *          {@link Parameter} shall be created.
+	 * @return The created {@link Parameter}.
+	 * 
+	 * @generated NOT
+	 */
+	public Parameter createVoidReturnParameter(
+			org.eclipse.uml2.uml.Operation dslOperation) {
+
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createVoidReturnParameter("; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += "dslOperation = " + dslOperation; //$NON-NLS-1$ //$NON-NLS-2$
+			msg += ") - enter"; //$NON-NLS-1$ //$NON-NLS-2$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		Parameter result;
+
+		/* Check if the given operation is null. */
+		if (dslOperation == null) {
+
+			String msg;
+
+			msg = "createVoidReturnParameter(): dslOperation is null.";
+
+			LOGGER.error(msg);
+
+			result = null;
+		}
+
+		else {
+			/* Eventually get a cached result. */
+			result = this.adaptedVoidReturnParameters.get(dslOperation);
+
+			/* Else create the result. */
+			if (result == null) {
+
+				result = new UML2VoidReturnParameter(dslOperation);
+
+				/* Cache the result. */
+				this.adaptedVoidReturnParameters.put(dslOperation, result);
+			}
+		}
+
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createVoidReturnParameter() - exit "; //$NON-NLS-1$
+			msg += " - return value = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
 	 * Creates a {@link PrimitiveType} adapter for a
 	 * {@link org.eclipse.uml2.uml.PrimitiveType}.
 	 * </p>
@@ -550,6 +634,43 @@ public class UML2AdapterFactory {
 
 			msg = "createPrimitiveType() - exit";
 			msg += " - return value=" + result;
+
+			LOGGER.debug(msg); //$NON-NLS-1$
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates the <code>void</code> {@link Type} adapter.
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private Type createVoidType() {
+
+		/* Eventually log the entry into this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createVoideType() - enter"; //$NON-NLS-1$ //$NON-NLS-2$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		Type result;
+
+		result = UML2VoidType.getInstance();
+
+		/* Eventually log the exit from this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createVoideType() - exit";
+			msg += " - return value = " + result;
 
 			LOGGER.debug(msg); //$NON-NLS-1$
 		}
