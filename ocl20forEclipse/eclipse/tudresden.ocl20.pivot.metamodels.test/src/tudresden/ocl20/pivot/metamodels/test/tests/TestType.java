@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -102,8 +103,19 @@ public class TestType {
 
 			/* Eventually send a warning to the logger. */
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER
-						.warn(MetaModelTestSuiteMessages.MetaModelTestSuite_InterfaceNotFoundInModel);
+				String msg;
+
+				msg =
+						MetaModelTestSuiteMessages.MetaModelTestSuite_InterfaceNotFoundInModel;
+				msg +=
+						" "
+								+ NLS
+										.bind(
+												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+												MetaModelTestServices.getInstance()
+														.getMetaModelUnderTestID());
+
+				LOGGER.warn(msg);
 			}
 			// no else.
 		}

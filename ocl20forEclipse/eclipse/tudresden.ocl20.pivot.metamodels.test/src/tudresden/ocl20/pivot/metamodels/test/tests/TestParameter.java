@@ -198,6 +198,13 @@ public class TestParameter {
 										MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
 										MetaModelTestServices.OPERATION_NAME_INPUTOUTPUTPARAMETEROPERATION,
 										"Parameter.getKind()");
+				msg +=
+						" "
+								+ NLS
+										.bind(
+												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+												MetaModelTestServices.getInstance()
+														.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -222,6 +229,13 @@ public class TestParameter {
 										MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
 										MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION,
 										"Parameter.getKind()");
+				msg +=
+						" "
+								+ NLS
+										.bind(
+												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+												MetaModelTestServices.getInstance()
+														.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}

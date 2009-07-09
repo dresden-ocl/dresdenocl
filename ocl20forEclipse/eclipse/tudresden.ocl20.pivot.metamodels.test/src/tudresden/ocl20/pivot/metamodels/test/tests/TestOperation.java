@@ -18,7 +18,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
@@ -31,7 +30,9 @@ import tudresden.ocl20.pivot.metamodels.test.msg.MetaModelTestSuiteMessages;
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -172,6 +173,13 @@ public class TestOperation {
 										MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
 										MetaModelTestServices.OPERATION_NAME_OUTPUTPARAMETEROPERATION,
 										"Operation.getOutputParameter()");
+				msg +=
+						" "
+								+ NLS
+										.bind(
+												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+												MetaModelTestServices.getInstance()
+														.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -190,6 +198,13 @@ public class TestOperation {
 										MetaModelTestSuiteMessages.MetaModelTestSuite_OperationNotFoundInModel,
 										MetaModelTestServices.OPERATION_NAME_STATICOPERATION,
 										"Operation.isStatic()");
+				msg +=
+						" "
+								+ NLS
+										.bind(
+												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+												MetaModelTestServices.getInstance()
+														.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -433,25 +448,28 @@ public class TestOperation {
 
 		String msg;
 
+		Parameter returnParameter;
+		Type returnType;
+		PrimitiveType primtiveReturnType;
+
 		msg =
 				"The adaptation of Operation.getReturnParameter() seems to be wrong. ";
-		msg += "The return type must be either null or void.";
+		msg += "The return type must be of the PrimitiveTypeKind.VOID.";
 
-		/*
-		 * The operation must not have a return parameter or a return parameter of
-		 * void type.
-		 */
-		if (operation2.getReturnParameter() != null) {
-			Type returnType;
+		returnParameter = operation2.getReturnParameter();
 
-			returnType = operation2.getReturnParameter().getType();
+		/* The operation must have a return parameter. */
+		assertNotNull(msg, returnParameter);
 
-			/* If the type is set it must be void. */
-			if (!returnType.getName().toLowerCase().equals("void")) {
-				fail(msg);
-			}
-		}
-		// no else.
+		returnType = returnParameter.getType();
+
+		/* The return Type must be primitive. */
+		assertTrue(msg, returnType instanceof PrimitiveType);
+
+		primtiveReturnType = (PrimitiveType) returnType;
+
+		/* The PrimitiveTypeKind must be void. */
+		assertEquals(msg, PrimitiveTypeKind.VOID, primtiveReturnType.getKind());
 	}
 
 	/**
@@ -612,13 +630,24 @@ public class TestOperation {
 
 		String msg;
 
-		msg = "The adaptation of Operation.getType() seems to be wrong.";
+		Type type;
+		PrimitiveType primitiveType;
 
-		/* The type of the operation must be null or void. */
-		if (operation2.getType() != null) {
-			assertEquals(msg, "void", operation2.getType().getName().toLowerCase());
-		}
-		// no else.
+		msg = "The adaptation of Operation.getType() seems to be wrong.";
+		msg += " Type must be of the PrimitiveTypeKind.VOID.";
+
+		type = operation2.getType();
+
+		/* The type must not be null. */
+		assertNotNull(msg, type);
+
+		/* The type must be primitive. */
+		assertTrue(msg, type instanceof PrimitiveType);
+
+		primitiveType = (PrimitiveType) type;
+
+		/* The PrimitiveTypeKind must be void. */
+		assertEquals(msg, PrimitiveTypeKind.VOID, primitiveType.getKind());
 	}
 
 	/**

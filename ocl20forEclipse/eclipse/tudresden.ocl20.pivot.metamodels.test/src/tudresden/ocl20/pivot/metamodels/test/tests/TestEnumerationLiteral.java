@@ -16,6 +16,7 @@ package tudresden.ocl20.pivot.metamodels.test.tests;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.log4j.Logger;
+import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -68,8 +69,19 @@ public class TestEnumerationLiteral {
 
 			/* Eventually send a warning to the logger. */
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER
-						.warn(MetaModelTestSuiteMessages.MetaModelTestSuite_EnumerationNotFoundInModel);
+				String msg;
+
+				msg =
+						MetaModelTestSuiteMessages.MetaModelTestSuite_EnumerationNotFoundInModel;
+				msg +=
+						" "
+								+ NLS
+										.bind(
+												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+												MetaModelTestServices.getInstance()
+														.getMetaModelUnderTestID());
+
+				LOGGER.warn(msg);
 			}
 			// no else.
 		}

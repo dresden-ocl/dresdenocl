@@ -189,8 +189,19 @@ public class TestProperty {
 
 			/* Eventually send a warning to the logger. */
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER
-						.warn(MetaModelTestSuiteMessages.MetaModelTestSuite_AssociationEndNotFound);
+				String msg;
+
+				msg =
+						MetaModelTestSuiteMessages.MetaModelTestSuite_AssociationEndNotFound;
+				msg +=
+						" "
+								+ NLS
+										.bind(
+												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+												MetaModelTestServices.getInstance()
+														.getMetaModelUnderTestID());
+
+				LOGGER.warn(msg);
 			}
 			// no else.
 		}
@@ -208,6 +219,13 @@ public class TestProperty {
 										MetaModelTestSuiteMessages.MetaModelTestSuite_PropertyNotFoundInModel,
 										MetaModelTestServices.PROPERTY_NAME_STATICPROPERTY,
 										"Property.isStatic()");
+				msg +=
+						" "
+								+ NLS
+										.bind(
+												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+												MetaModelTestServices.getInstance()
+														.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}

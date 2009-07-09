@@ -28,6 +28,8 @@ public class MetaModelTestSuiteMessages extends NLS {
 	private static final String BUNDLE_NAME =
 			"tudresden.ocl20.pivot.metamodels.test.msg.messages"; //$NON-NLS-1$
 
+	public static String MetaModelTestSuite_CurrentlyTestedMetaModel;
+	
 	public static String MetaModelTestSuite_EnumerationNotFoundInModel;
 
 	public static String MetaModelTestSuite_OperationNotFoundInModel;

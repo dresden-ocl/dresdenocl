@@ -398,6 +398,18 @@ public final class MetaModelTestServices {
 
 	/**
 	 * <p>
+	 * Returns the ID of the {@link IMetamodel} that is currently tested.
+	 * </p>
+	 * 
+	 * @return The ID of the {@link IMetamodel} that is currently tested.
+	 */
+	public String getMetaModelUnderTestID() {
+	
+		return this.myMetaModelId;
+	}
+
+	/**
+	 * <p>
 	 * Returns the {@link IModel} which can be loaded by the current settings of
 	 * <code>MetaModelID</code>, <code>ModelBundleID</code>, and
 	 * <code>TestModelPath</code>.
