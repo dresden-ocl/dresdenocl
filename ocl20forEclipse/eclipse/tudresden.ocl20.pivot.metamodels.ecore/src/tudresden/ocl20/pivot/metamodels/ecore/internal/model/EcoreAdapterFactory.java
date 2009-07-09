@@ -477,6 +477,8 @@ public class EcoreAdapterFactory {
 	 * @param eClassifier
 	 *          The {@link EClassifier} which shall be adapted.
 	 * @return The created {@link Type}.
+	 * 
+	 * @generated NOT
 	 */
 	public Type createType(EClassifier eClassifier) {
 
@@ -484,7 +486,7 @@ public class EcoreAdapterFactory {
 
 		/* Check if the classifier is null. */
 		if (eClassifier == null) {
-			result = null;
+			result = EcoreVoidType.getInstance();
 		}
 
 		/* Else check if the classifier is an EClass. */
@@ -494,12 +496,12 @@ public class EcoreAdapterFactory {
 
 		/* Else check if the classifier is an EEnum. */
 		else if (eClassifier instanceof EEnum) {
-			result = createEnumeration((EEnum) eClassifier);
+			result = this.createEnumeration((EEnum) eClassifier);
 		}
 
 		/* Else check if the classifier is an EDataType. */
 		else if (eClassifier instanceof EDataType) {
-			result = createType((EDataType) eClassifier);
+			result = this.createType((EDataType) eClassifier);
 		}
 
 		/* Else throw an exception. */

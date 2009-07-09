@@ -164,12 +164,9 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 			result.add(EcoreAdapterFactory.INSTANCE.createParameter(parameter));
 		}
 
-		/* Eventually add the return parameter as well. */
-		if (this.getType() != null) {
-			result.add(EcoreAdapterFactory.INSTANCE
-					.createReturnParameter(this.eOperation));
-		}
-		// no else.
+		/* Add the return parameter. */
+		result.add(EcoreAdapterFactory.INSTANCE
+				.createReturnParameter(this.eOperation));
 
 		return result;
 	}
