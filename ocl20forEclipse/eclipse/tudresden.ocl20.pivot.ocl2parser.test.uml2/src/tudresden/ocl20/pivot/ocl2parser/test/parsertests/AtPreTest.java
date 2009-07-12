@@ -16,29 +16,73 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
+ */
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
+import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
+import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
+import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
+
 public class AtPreTest {
-	@Test public void testAtPre() {
+
+	@Test
+	public void testAtPre() {
+
 		String fileName = "oclTestFiles/atPreTest.ocl";
+
+		TestPerformer test;
 		try {
-			TestPerformer test = TestPerformer.getDefault();
+			test = TestPerformer.getDefault();
 			test.setModel("LoyalRoyalOCL2Parser_4.uml");
-			test.parseFile(fileName);
-		} catch(Throwable ex) {
-			String message = " This error occured for file " + fileName + ".";
-			System.err.println(message);
-			ex.printStackTrace();
-			
-			fail();
-			return;
+
+			try {
+				test.parseFile(fileName);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				fail("Failes to parse File");
+			} catch (ParsingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				fail("Failes to parse File");
+			} catch (LexException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				fail("Failes to parse File");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				fail("Failes to parse File");
+			} catch (BuildingASTException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				fail("Failes to parse File");
+			} catch (SemanticException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				fail("Failes to parse File");
+			}
+
+		} catch (MetaModelNotFoundException e) {
+			e.printStackTrace();
+			fail("Unable to get TestPerformer");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			fail("Lacking file resources");
+		} catch (ModelAccessException e) {
+			e.printStackTrace();
+			fail("Couldn't set Model");
 		}
-		
+
 		assertTrue(true);
 	}
 }
