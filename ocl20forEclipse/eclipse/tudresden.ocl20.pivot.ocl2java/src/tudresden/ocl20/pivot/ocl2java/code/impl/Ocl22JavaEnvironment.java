@@ -18,11 +18,11 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.ocl2java.code.impl;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import tudresden.ocl20.pivot.ocl2java.code.IOcl22CodeEnvironment;
 import tudresden.ocl20.pivot.ocl2java.code.ITransformedCode;
@@ -81,19 +81,19 @@ public class Ocl22JavaEnvironment implements IOcl22CodeEnvironment {
 	 * Contains {@link ITemplate}s of transformed Java classes which are used to
 	 * extend constrained classes.
 	 */
-	protected Map<String, ITemplate> classTemplates = new HashMap<String, ITemplate>();
+	protected Map<String, ITemplate> classTemplates = new TreeMap<String, ITemplate>();
 
 	/**
 	 * The canonical names of all classes which use the special OCL operation
 	 * allInstances().
 	 */
-	protected Set<String> allInstancesClasses = new HashSet<String>();
+	protected Set<String> allInstancesClasses = new TreeSet<String>();
 
 	/**
 	 * The canonical names of all classes which use the special OCL operation
 	 * oclIsNew().
 	 */
-	protected Set<String> oclIsNewClasses = new HashSet<String>();
+	protected Set<String> oclIsNewClasses = new TreeSet<String>();
 
 	/**
 	 * The {@link ITransformedCode} of Expressions whose atPre value shall be
@@ -106,7 +106,7 @@ public class Ocl22JavaEnvironment implements IOcl22CodeEnvironment {
 	 * The call paths of all properties which are called for Constraint
 	 * evaluation.
 	 */
-	protected Set<String> calledProperties = new HashSet<String>();
+	protected Set<String> calledProperties = new TreeSet<String>();
 
 	/*
 	 * (non-Javadoc)
