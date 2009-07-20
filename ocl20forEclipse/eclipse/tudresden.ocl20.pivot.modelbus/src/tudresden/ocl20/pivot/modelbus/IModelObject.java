@@ -30,7 +30,6 @@
  */
 package tudresden.ocl20.pivot.modelbus;
 
-import java.util.List;
 import java.util.Map;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
@@ -42,20 +41,43 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * Represents an instance of a domain specific type in an {@link IModel}.
  * </p>
  * 
- * @author Ronny Brandt
+ * @author Ronny Brandt: Developed the first version.
+ * @author Claas Wilke: Did refactoring and added Javadoc.
  */
 public interface IModelObject {
 
 	/**
+	 * <p>
+	 * Returns the {@link Type}s of which this IModelObject is an instance.
+	 * </p>
+	 * 
+	 * @return The {@link Type}s of which this IModelObject is an instance.</p>
+	 */
+	Type[] getTypes();
+
+	/**
+	 * <p>
+	 * Checks whether or not this {@link IModelObject} contains multiple
+	 * {@link Object}s of the adapted language. Multiple objects could be
+	 * contained in collection or array like objects.
+	 * </p>
+	 * 
+	 * @return
+	 */
+	boolean isMultiple();
+
+	/**
+	 * FIXME Claas: Refactored until here.
+	 * 
 	 * <p>
 	 * Adds a given result to this {@link IModelObject} for a given
 	 * {@link Constraint}.
 	 * </p>
 	 * 
 	 * @param cs
-	 *            The {@link Constraint} the result belongs to.
+	 *          The {@link Constraint} the result belongs to.
 	 * @param result
-	 *            The result for the given {@link Constraint}.
+	 *          The result for the given {@link Constraint}.
 	 */
 	void addResult(Constraint cs, OclRoot result);
 
@@ -88,40 +110,22 @@ public interface IModelObject {
 
 	/**
 	 * <p>
-	 * Returns the qualified name of the {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return The qualified name the {@link IModelObject}.
-	 */
-	List<String> getQualifiedName();
-
-	/**
-	 * <p>
-	 * Returns the qualified name as of the {@link IModelObject} as
-	 * {@link String}. Needed for more efficiently use in InterpreterView.
+	 * Returns the qualified name as of the {@link IModelObject} as {@link String}
+	 * . Needed for more efficiently use in InterpreterView.
 	 * </p>
 	 * 
 	 * @return The qualified name of the {@link IModelObject} as {@link String}.
 	 */
-	String getQualifiedNameString();
+	String getQualifiedName();
 
 	/**
 	 * <p>
-	 * Returns a {@link Map} containing {@link Constraint}s and their
-	 * interpreted {@link OclRoot} results.
+	 * Returns a {@link Map} containing {@link Constraint}s and their interpreted
+	 * {@link OclRoot} results.
 	 * 
 	 * @return the results
 	 */
 	Map<Constraint, OclRoot> getResults();
-
-	/**
-	 * <p>
-	 * Returns the {@link Type} of which this IModelObject is an instance.
-	 * </p>
-	 * 
-	 * @return The {@link Type} of which this IModelObject is an instance.</p>
-	 */
-	Type getType();
 
 	/**
 	 * <p>
@@ -130,7 +134,7 @@ public interface IModelObject {
 	 * </p>
 	 * 
 	 * @param aType
-	 *            The {@link Type} which shall be checked.
+	 *          The {@link Type} which shall be checked.
 	 * @return True, if this {@link IModelObject} is an instance of the given
 	 *         {@link Type}.
 	 */
@@ -143,7 +147,7 @@ public interface IModelObject {
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *            The {@link Constraint} whose result shall be removed.
+	 *          The {@link Constraint} whose result shall be removed.
 	 * 
 	 * @return True, if the result was removed successful
 	 */

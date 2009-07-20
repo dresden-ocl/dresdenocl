@@ -59,7 +59,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * An abstract implementation of {@link IModelInstance}.
  * </p>
  * 
- * @author Ronny Brandt
+ * @author Ronny Brandt: Implemented first version
+ * @author Claas Wilke: Refactored and added Java-Doc.
  */
 public abstract class AbstractModelInstance implements IModelInstance {
 
@@ -67,18 +68,17 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	protected static StandardlibraryAdapterFactory DEFAULTSLAF = null;
 
 	/**
-	 * Contains the canonical names of all types contained in this model
-	 * instance.
+	 * Contains the qualified names of all types contained in this model instance.
 	 */
-	protected List<List<String>> allMyObjectKinds;
+	protected List<List<String>> allMyObjectKinds = new ArrayList<List<String>>();
 
 	/** Contains all {@link Object}s of this model instance. */
 	protected List<IModelObject> allMyObjects;
 
 	/**
 	 * <p>
-	 * Contains all {@link Object}s of this model instance ordered by their
-	 * type's name.
+	 * Contains all {@link Object}s of this model instance ordered by their type's
+	 * name.
 	 * </p>
 	 * 
 	 * <strong>The name follows the naming scheme of Java canonical names! E.g.
@@ -116,7 +116,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * than in the OCL specification. The names are separated in sub maps
 	 * depending on their number of arguments.
 	 */
-	protected static Map<Integer, Map<String, String>> operationNames = new HashMap<Integer, Map<String, String>>();
+	protected static Map<Integer, Map<String, String>> operationNames =
+			new HashMap<Integer, Map<String, String>>();
 
 	/* Initializes the map. */
 	static {
@@ -146,7 +147,6 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getCollectionType(tudresden
 	 * .ocl20.pivot.modelbus.util.OclCollectionTypeKind,
@@ -163,37 +163,46 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getCurrentSlAF()
 	 */
 	public StandardlibraryAdapterFactory getCurrentSlAF() {
+
 		return myCurrentSlAF;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDefaultSlAF()
 	 */
 	public StandardlibraryAdapterFactory getDefaultSlAF() {
+
 		return DEFAULTSLAF;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDisplayName()
 	 */
 	public String getDisplayName() {
+
 		return this.myInstanceName;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getModel()
+	 */
+	public IModel getModel() {
+
+		return this.myModel;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getObjects()
 	 */
 	public List<IModelObject> getObjects() {
+
 		return this.allMyObjects;
 	}
 
@@ -203,12 +212,12 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 *         instances in this model instance.
 	 */
 	public List<List<String>> getObjectKinds() {
+
 		return this.allMyObjectKinds;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getObjectsOfKind(java.util
 	 * .List)
@@ -236,14 +245,15 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 				if (!current.contains("(")) {
 					path.add(current);
-				} else {
+				}
+				else {
 					break;
 				}
 			}
 
 			/*
-			 * Check if the path is an object of the model and eventually remove
-			 * the top package from the path.
+			 * Check if the path is an object of the model and eventually remove the
+			 * top package from the path.
 			 */
 			if (!this.isObjectOfModel(path)) {
 				while (path.size() > 0
@@ -284,12 +294,12 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang
 	 * .String, int)
 	 */
 	public String getOperationName(String name, int operatorCount) {
+
 		Map<String, String> opMap = operationNames.get(operatorCount);
 		if (opMap != null) {
 			String ret = opMap.get(name);
@@ -301,51 +311,49 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getAnyType()
 	 */
 	public OclType getAnyType() {
+
 		return (OclType) Platform.getAdapterManager().getAdapter("OclAny",
 				OclType.class);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getInvalid()
 	 */
 	public OclInvalid getInvalid() {
+
 		return (OclInvalid) Platform.getAdapterManager().getAdapter("Invalid",
 				OclInvalid.class);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getInvalidType()
 	 */
 	public OclType getInvalidType() {
+
 		return (OclType) Platform.getAdapterManager().getAdapter("OclInvalid",
 				OclType.class);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getPrimitiveType(java.lang
 	 * .String)
 	 */
 	public OclPrimitiveType getPrimitiveType(String name) {
+
 		return (OclPrimitiveType) Platform.getAdapterManager().getAdapter(name,
 				OclPrimitiveType.class);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getTupleType(java.lang.
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getTupleType(java.lang.
 	 * String[], tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType[])
 	 */
 	public OclTupleType getTupleType(String[] partNames, OclType[] partTypes) {
@@ -358,42 +366,52 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getTypeType()
 	 */
 	public OclType getTypeType() {
+
 		return (OclType) Platform.getAdapterManager().getAdapter("OclType",
 				OclType.class);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getUndefined()
 	 */
 	public OclVoid getUndefined() {
+
 		return (OclVoid) Platform.getAdapterManager().getAdapter("Undefined",
 				OclVoid.class);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getVoidType()
 	 */
 	public OclType getVoidType() {
+
 		return (OclType) Platform.getAdapterManager().getAdapter("OclVoid",
 				OclType.class);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#setCurrentSlAF(tudresden
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#isInstanceOf(tudresden.ocl20
+	 * .pivot.modelbus.IModel)
+	 */
+	public boolean isInstanceOf(IModel aModel) {
+
+		return this.myModel.equals(aModel);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#setCurrentSlAF(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory)
 	 */
 	public void setCurrentSlAF(StandardlibraryAdapterFactory slAF) {
+
 		this.myCurrentSlAF = slAF;
 	}
 
@@ -404,10 +422,10 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * </p>
 	 * 
 	 * @param aPackagePath
-	 *            The path of the {@link Type} which shall be searched for.
+	 *          The path of the {@link Type} which shall be searched for.
 	 * @param aNamespace
-	 *            The {@link Namespace} in which shall be searched for the
-	 *            {@link Type}.
+	 *          The {@link Namespace} in which shall be searched for the
+	 *          {@link Type}.
 	 * @return the found {@link Type} or null.
 	 * 
 	 */
@@ -436,8 +454,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 				if (aNestedNamespacesName.equals(currentPackage)) {
 
-					result = this.findTypeInNamespace(aPackagePath,
-							aNestedNamespace);
+					result = this.findTypeInNamespace(aPackagePath, aNestedNamespace);
 					break;
 				}
 				// no else.
@@ -478,8 +495,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * </p>
 	 * 
 	 * @param pathName
-	 *            The canonical name of the model object as a {@link List} of
-	 *            {@link String}s.
+	 *          The canonical name of the model object as a {@link List} of
+	 *          {@link String}s.
 	 * @return True if the given object is an object of the given model.
 	 */
 	protected boolean isObjectOfModel(List<String> pathName) {
@@ -563,7 +580,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * </p>
 	 * 
 	 * @param path
-	 *            The path which shall be converted.
+	 *          The path which shall be converted.
 	 * @return A canonical name.
 	 */
 	protected String toCanonicalName(List<String> path) {

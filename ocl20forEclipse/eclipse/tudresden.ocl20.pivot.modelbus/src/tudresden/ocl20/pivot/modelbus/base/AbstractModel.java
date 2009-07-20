@@ -1,32 +1,24 @@
 /**
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
- * All rights reserved.                                                      *
- *                                                                           *
- * This work was done as a project at the Chair for Software Technology      *
- * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
- * It is understood that any modification not identified as such is not      *
- * covered by the preceding statement.                                       *
- *                                                                           *
- * This work is free software; you can redistribute it and/or modify it      *
- * under the terms of the GNU Library General Public License as published    *
- * by the Free Software Foundation; either version 2 of the License, or      *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This work is distributed in the hope that it will be useful, but WITHOUT  *
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
- * License for more details.                                                 *
- *                                                                           *
- * You should have received a copy of the GNU Library General Public License *
- * along with this library; if not, you can view it online at                *
- * http://www.fsf.org/licensing/licenses/gpl.html.                           *
- *                                                                           *
- * To submit a bug report, send a comment, or get the latest news on this    *
- * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
- * For more information on OCL and related projects visit the OCL Portal:    *
- * http://st.inf.tu-dresden.de/ocl                                           *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de). * All rights
+ * reserved. * * This work was done as a project at the Chair for Software
+ * Technology, * Dresden University Of Technology, Germany
+ * (http://st.inf.tu-dresden.de). * It is understood that any modification not
+ * identified as such is not * covered by the preceding statement. * * This work
+ * is free software; you can redistribute it and/or modify it * under the terms
+ * of the GNU Library General Public License as published * by the Free Software
+ * Foundation; either version 2 of the License, or * (at your option) any later
+ * version. * * This work is distributed in the hope that it will be useful, but
+ * WITHOUT * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public *
+ * License for more details. * * You should have received a copy of the GNU
+ * Library General Public License * along with this library; if not, you can
+ * view it online at * http://www.fsf.org/licensing/licenses/gpl.html. * * To
+ * submit a bug report, send a comment, or get the latest news on this *
+ * project, please visit the website: http://dresden-ocl.sourceforge.net. * For
+ * more information on OCL and related projects visit the OCL Portal: *
+ * http://st.inf.tu-dresden.de/ocl * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * *
  * 
  * $Id$
  */
@@ -51,6 +43,9 @@ import tudresden.ocl20.pivot.modelbus.internal.ModelFactory;
 import tudresden.ocl20.pivot.modelbus.internal.OclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.internal.TypeResolver;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -187,8 +182,7 @@ public abstract class AbstractModel implements IModel {
 		}
 		// no else.
 
-		Type result;
-		List<Type> foundTypes;
+		Type result = null;
 
 		/* Eventually remove the root package from the pathName. */
 		if (pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
@@ -196,33 +190,56 @@ public abstract class AbstractModel implements IModel {
 		}
 		// no else.
 
-		/* Search for Types that match this path name. */
-		foundTypes = findTypeHere(this.getRootNamespace(), pathName, true);
+		/* If the path has only one element check for a primitive type. */
+		if (pathName.size() == 1) {
+			String primitiveName;
+			PrimitiveType primitiveType;
 
-		/* Check if more than one Type was found. */
-		if (foundTypes.size() > 1) {
-			String msg;
+			primitiveName = pathName.get(0);
 
-			msg =
-					"More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
-			LOGGER.warn(msg);
-
-			result = null;
+			for (PrimitiveTypeKind aKind : PrimitiveTypeKind.VALUES) {
+				if (primitiveName.equals(aKind.getName())) {
+					primitiveType = PivotModelFactory.INSTANCE.createPrimitiveType();
+					primitiveType.setKind(aKind);
+					result = primitiveType;
+					break;
+				}
+				// no else.
+			}
 		}
 
-		/* Else check if at least one type has been found. */
-		else if (foundTypes.size() == 0) {
-			String msg;
+		if (result == null) {
+			List<Type> foundTypes;
 
-			msg = "Type with path name " + pathName + " was not found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
-			LOGGER.warn(msg);
+			/* Search for Types that match this path name. */
+			foundTypes = findTypeHere(this.getRootNamespace(), pathName, true);
 
-			result = null;
-		}
+			/* Check if more than one Type was found. */
+			if (foundTypes.size() > 1) {
+				String msg;
 
-		/* Else return the found type. */
-		else {
-			result = foundTypes.get(0);
+				msg =
+						"More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+				LOGGER.warn(msg);
+
+				result = null;
+			}
+
+			/* Else check if at least one type has been found. */
+			else if (foundTypes.size() == 0) {
+				String msg;
+
+				msg =
+						"Type with path name " + pathName + " was not found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+				LOGGER.warn(msg);
+
+				result = null;
+			}
+
+			/* Else return the found type. */
+			else {
+				result = foundTypes.get(0);
+			}
 		}
 
 		/* Eventually log the exit from this method. */
