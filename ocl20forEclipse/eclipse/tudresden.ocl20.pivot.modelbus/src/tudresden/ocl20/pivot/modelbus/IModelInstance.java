@@ -46,17 +46,45 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapter
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 
 /**
- * 
+ * <p>
+ * Represents an instance of an {@link IModel}.
+ * </p>
  * 
  * @author Matthias Braeuer
- * @version 1.0 30.03.2007
  */
 public interface IModelInstance {
 
 	/**
-	 * @return
+	 * <p>
+	 * Returns the {@link IModelInstanceFactory} of this {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @return The {@link IModelInstanceFactory} of this {@link IModelInstance}.
 	 */
 	IModelInstanceFactory getFactory();
+
+	/**
+	 * <p>
+	 * Returns the {@link IModel} of this {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @return The {@link IModel} of this {@link IModelInstance}.
+	 */
+	IModel getModel();
+
+	/**
+	 * <p>
+	 * Checks whether or not this {@link IModelInstance} is an instance of a given
+	 * {@link IModel}.
+	 * </p>
+	 * 
+	 * @param aModel
+	 *          The {@link IModel} to which the instance of relationship shall be
+	 *          checked.
+	 * @return <code>True</code>, if this {@link IModelInstance} is an instance of
+	 *         the given {@link IModel}. Else <code>false</code>.
+	 */
+	boolean isInstanceOf(IModel aModel);
 
 	/**
 	 * @param pathName
@@ -142,9 +170,9 @@ public interface IModelInstance {
 	 * Maps OCL operation names to standardlibrary operation names.
 	 * 
 	 * @param name
-	 *            the name of the operation
+	 *          the name of the operation
 	 * @param operatorCount
-	 *            the operator count
+	 *          the operator count
 	 * 
 	 * @return the standardlibrary operation name
 	 */
@@ -161,7 +189,7 @@ public interface IModelInstance {
 	 * Gets all objects of an specific kind of the model instance.
 	 * 
 	 * @param typePath
-	 *            the type path for the object kind
+	 *          the type path for the object kind
 	 * 
 	 * @return the {@link IModelObject}s for this model instance
 	 */
@@ -187,7 +215,7 @@ public interface IModelInstance {
 	 * Changes the current {@link StandardlibraryAdapterFactory}.
 	 * 
 	 * @param the
-	 *            new {@link StandardlibraryAdapterFactory}
+	 *          new {@link StandardlibraryAdapterFactory}
 	 */
 	void setCurrentSlAF(StandardlibraryAdapterFactory slAF);
 

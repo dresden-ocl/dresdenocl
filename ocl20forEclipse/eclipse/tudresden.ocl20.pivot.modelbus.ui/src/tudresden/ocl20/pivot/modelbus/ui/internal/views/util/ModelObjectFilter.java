@@ -60,8 +60,8 @@ public class ModelObjectFilter extends ViewerFilter {
 	 * </p>
 	 * 
 	 * @param aNamespace
-	 *            The {@link Namespace} which {@link IModelObject} that shall be
-	 *            filtered.
+	 *          The {@link Namespace} which {@link IModelObject} that shall be
+	 *          filtered.
 	 */
 	public void addFilter(Namespace aNamespace) {
 
@@ -81,8 +81,8 @@ public class ModelObjectFilter extends ViewerFilter {
 	 * </p>
 	 * 
 	 * @param aType
-	 *            The {@link Type} of thie {@link IModelObject} that shall be
-	 *            filtered.
+	 *          The {@link Type} of thie {@link IModelObject} that shall be
+	 *          filtered.
 	 */
 	public void addFilter(Type aType) {
 
@@ -102,8 +102,8 @@ public class ModelObjectFilter extends ViewerFilter {
 	 * </p>
 	 * 
 	 * @param anObject
-	 *            The {@link Object} of the {@link IModelInstances} that shall
-	 *            be filtered.
+	 *          The {@link Object} of the {@link IModelInstances} that shall be
+	 *          filtered.
 	 */
 	public void addFilter(Object anObject) {
 
@@ -205,20 +205,19 @@ public class ModelObjectFilter extends ViewerFilter {
 	 * </p>
 	 */
 	public void clearFilter() {
+
 		this.myFilteredTypes = new HashSet<Type>();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.jface.viewers.ViewerFilter#select(org.eclipse.jface.viewers
 	 * .Viewer, java.lang.Object, java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean select(Viewer aViewer, Object aParentElement,
-			Object anElement) {
+	public boolean select(Viewer aViewer, Object aParentElement, Object anElement) {
 
 		boolean result;
 
@@ -234,7 +233,7 @@ public class ModelObjectFilter extends ViewerFilter {
 			List<IModelObject> objectsOfAKinds;
 
 			List<String> aCanoncialName;
-			Type aType;
+			Set<Type> instanceTypes;
 
 			aModelInstance = (IModelInstance) aParentElement;
 
@@ -245,28 +244,30 @@ public class ModelObjectFilter extends ViewerFilter {
 			objectsOfAKinds = aModelInstance.getObjectsOfKind(aCanoncialName);
 
 			/* Use one ModelObject to get the Type. */
-			aType = objectsOfAKinds.get(0).getType();
+			instanceTypes = objectsOfAKinds.get(0).getTypes();
 
 			result = false;
 
 			/*
-			 * Check, if the given model objects type conforms to one type which
-			 * shall be filtered.
+			 * Check, if the given model objects type conforms to one type which shall
+			 * be filtered.
 			 */
 			for (Type aFilteredType : this.myFilteredTypes) {
 
-				if (aType.conformsTo(aFilteredType)) {
-					result = true;
-					break;
+				for (Type anInstancesType : instanceTypes) {
+					if (anInstancesType.conformsTo(aFilteredType)) {
+						result = true;
+						break;
+					}
+					// no else.
 				}
-				// no else.
 			}
 
 		}
 
 		/*
-		 * Else check if the parent element is List representing the canonical
-		 * name of a model objects type.
+		 * Else check if the parent element is List representing the canonical name
+		 * of a model objects type.
 		 */
 		else if (aParentElement instanceof List) {
 
@@ -278,8 +279,8 @@ public class ModelObjectFilter extends ViewerFilter {
 				aModelObject = (IModelObject) anElement;
 
 				/*
-				 * Iterate through the filtered types and check if the model
-				 * object is an instance of one of these types.
+				 * Iterate through the filtered types and check if the model object is
+				 * an instance of one of these types.
 				 */
 				for (Type aType : this.myFilteredTypes) {
 

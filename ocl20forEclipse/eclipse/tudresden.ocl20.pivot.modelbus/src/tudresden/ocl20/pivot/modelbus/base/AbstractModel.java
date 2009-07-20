@@ -51,6 +51,9 @@ import tudresden.ocl20.pivot.modelbus.internal.ModelFactory;
 import tudresden.ocl20.pivot.modelbus.internal.OclLibraryProvider;
 import tudresden.ocl20.pivot.modelbus.internal.TypeResolver;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -187,8 +190,7 @@ public abstract class AbstractModel implements IModel {
 		}
 		// no else.
 
-		Type result;
-		List<Type> foundTypes;
+		Type result = null;
 
 		/* Eventually remove the root package from the pathName. */
 		if (pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
@@ -196,33 +198,56 @@ public abstract class AbstractModel implements IModel {
 		}
 		// no else.
 
-		/* Search for Types that match this path name. */
-		foundTypes = findTypeHere(this.getRootNamespace(), pathName, true);
+		/* If the path has only one element check for a primitive type. */
+		if (pathName.size() == 1) {
+			String primitiveName;
+			PrimitiveType primitiveType;
 
-		/* Check if more than one Type was found. */
-		if (foundTypes.size() > 1) {
-			String msg;
+			primitiveName = pathName.get(0);
 
-			msg =
-					"More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
-			LOGGER.warn(msg);
-
-			result = null;
+			for (PrimitiveTypeKind aKind : PrimitiveTypeKind.VALUES) {
+				if (primitiveName.equals(aKind.getName())) {
+					primitiveType = PivotModelFactory.INSTANCE.createPrimitiveType();
+					primitiveType.setKind(aKind);
+					result = primitiveType;
+					break;
+				}
+				// no else.
+			}
 		}
 
-		/* Else check if at least one type has been found. */
-		else if (foundTypes.size() == 0) {
-			String msg;
+		if (result == null) {
+			List<Type> foundTypes;
 
-			msg = "Type with path name " + pathName + " was not found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
-			LOGGER.warn(msg);
+			/* Search for Types that match this path name. */
+			foundTypes = findTypeHere(this.getRootNamespace(), pathName, true);
 
-			result = null;
-		}
+			/* Check if more than one Type was found. */
+			if (foundTypes.size() > 1) {
+				String msg;
 
-		/* Else return the found type. */
-		else {
-			result = foundTypes.get(0);
+				msg =
+						"More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+				LOGGER.warn(msg);
+
+				result = null;
+			}
+
+			/* Else check if at least one type has been found. */
+			else if (foundTypes.size() == 0) {
+				String msg;
+
+				msg =
+						"Type with path name " + pathName + " was not found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+				LOGGER.warn(msg);
+
+				result = null;
+			}
+
+			/* Else return the found type. */
+			else {
+				result = foundTypes.get(0);
+			}
 		}
 
 		/* Eventually log the exit from this method. */

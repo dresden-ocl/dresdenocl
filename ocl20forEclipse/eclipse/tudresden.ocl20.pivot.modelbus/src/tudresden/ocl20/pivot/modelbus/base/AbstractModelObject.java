@@ -31,9 +31,14 @@
 package tudresden.ocl20.pivot.modelbus.base;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModel;
@@ -46,7 +51,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * An abstract implementation of {@link IModelObject}.
  * </p>
  * 
- * @author Ronny Brandt
+ * @author Ronny Brandt: Built the first version.
+ * @author Claas Wilke: Did refactoring and added Javadoc.
  */
 public abstract class AbstractModelObject implements IModelObject {
 
@@ -57,29 +63,28 @@ public abstract class AbstractModelObject implements IModelObject {
 	protected OclRoot myOclObject;
 
 	/** The results are mapped to constraints. */
-	protected Map<Constraint, OclRoot> myResults = new HashMap<Constraint, OclRoot>();
+	protected Map<Constraint, OclRoot> myResults =
+			new HashMap<Constraint, OclRoot>();
 
 	/**
-	 * The {@link Type} of the {@link IModel} of which this IModelObject is an
+	 * The {@link Type}s of the {@link IModel} of which this IModelObject is an
 	 * instance.
 	 */
-	protected Type myType;
+	protected Type[] myTypes;
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelObject#addResult(tudresden.ocl20
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#addResult(tudresden.ocl20
 	 * .pivot.pivotmodel.Constraint,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	public void addResult(Constraint aConstraint, OclRoot aResult) {
+
 		this.myResults.put(aConstraint, aResult);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#clearResults()
 	 */
 	public boolean clearResults() {
@@ -103,78 +108,108 @@ public abstract class AbstractModelObject implements IModelObject {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getName()
 	 */
 	public String getName() {
-		return this.myType.getName();
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedName()
-	 */
-	public List<String> getQualifiedName() {
+		StringBuffer result;
 
-		List<String> result;
-		String qualifiedNamePackages[];
+		/* Construct a name of all implemented types. */
+		result = new StringBuffer();
+		result.append("[");
 
-		qualifiedNamePackages = this.myType.getQualifiedName().split("::");
+		for (Type aType : this.getTypes()) {
 
-		result = new ArrayList<String>();
+			if (result.length() == 1) {
+				result.append(",");
+			}
+			// no else.
 
-		for (int index = 0; index < qualifiedNamePackages.length; index++) {
-			result.add(qualifiedNamePackages[index]);
+			result.append(aType.getName());
 		}
 
-		return result;
+		result.append("]");
+
+		return result.toString();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedNameString()
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedName()
 	 */
-	public String getQualifiedNameString() {
-		return this.myType.getQualifiedName();
+	public String getQualifiedName() {
+
+		StringBuffer result;
+
+		/* Construct a name of all implemented types. */
+		result = new StringBuffer();
+		result.append("[");
+
+		for (Type aType : this.getTypes()) {
+
+			if (result.length() == 1) {
+				result.append(",");
+			}
+			// no else.
+
+			result.append(aType.getName());
+		}
+
+		result.append("]");
+
+		return result.toString();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getResults()
 	 */
 	public Map<Constraint, OclRoot> getResults() {
+
 		return this.myResults;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getType()
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getTypes()
 	 */
-	public Type getType() {
-		return this.myType;
+	public Set<Type> getTypes() {
+
+		List<Type> types;
+
+		/* Get all types. */
+		types = new ArrayList<Type>(Arrays.asList(this.myTypes));
+
+		/* Sort the types. */
+		Collections.sort(types, new Comparator<Type>() {
+
+			public int compare(Type type1, Type type2) {
+
+				return type1.getQualifiedName().compareTo(type2.getQualifiedName());
+			}
+		});
+
+		return new HashSet<Type>(types);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelObject#isInstanceOf(tudresden.ocl20
 	 * .pivot.pivotmodel.Type)
 	 */
-	public boolean isInstanceOf(Type aType) {
+	public boolean isInstanceOf(Type type) {
 
 		boolean result;
 
-		if (this.myType != null) {
-			result = this.myType.conformsTo(aType);
-		}
+		result = false;
 
-		else {
-			result = false;
+		for (Type aType : this.myTypes) {
+
+			if (aType.conformsTo(type)) {
+				result = true;
+				break;
+			}
 		}
 
 		return result;
@@ -182,16 +217,23 @@ public abstract class AbstractModelObject implements IModelObject {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelObject#removeResult(tudresden.ocl20
 	 * .pivot.pivotmodel.Constraint)
 	 */
 	public boolean removeResult(Constraint cs) {
+
 		if (myResults != null) {
 			myResults.remove(cs);
 			return true;
 		}
 		return false;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public abstract String toString();
 }
