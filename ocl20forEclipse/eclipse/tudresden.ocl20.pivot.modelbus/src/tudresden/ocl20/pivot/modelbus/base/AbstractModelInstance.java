@@ -31,10 +31,13 @@
 package tudresden.ocl20.pivot.modelbus.base;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 
@@ -67,37 +70,23 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/** The default StandardlibraryAdapterFactory for model instances. */
 	protected static StandardlibraryAdapterFactory DEFAULTSLAF = null;
 
-	/**
-	 * Contains the qualified names of all types contained in this model instance.
-	 */
-	protected List<List<String>> allMyObjectKinds = new ArrayList<List<String>>();
-
 	/** Contains all {@link Object}s of this model instance. */
-	protected List<IModelObject> allMyObjects;
+	protected List<IModelObject> allMyObjects = new ArrayList<IModelObject>();
 
 	/**
 	 * <p>
-	 * Contains all {@link Object}s of this model instance ordered by their type's
-	 * name.
+	 * Contains all {@link IModelObject}s of this model instance ordered by their
+	 * type's name.
 	 * </p>
-	 * 
-	 * <strong>The name follows the naming scheme of Java canonical names! E.g.
-	 * 'root::aPackage::anObject' must be stored as 'aPackage.anObject'</strong>
 	 */
-	protected Map<String, List<IModelObject>> allMyObjectsByType;
+	protected Map<List<String>, List<IModelObject>> allMyObjectsByType =
+			new HashMap<List<String>, List<IModelObject>>();
 
 	/** The current StandardlibraryAdapterFactory for this instance */
 	protected StandardlibraryAdapterFactory myCurrentSlAF = null;
 
 	/** The name of the model instance. */
 	protected String myInstanceName;
-
-	/**
-	 * Contains all OclTypes which have already been loaded associated to an
-	 * indentifier like their corresponding model object or a {@link Class}
-	 * object.
-	 */
-	protected Map<Class<?>, OclType> myKnownTypes;
 
 	/** The {@link IModel} of this {@link IModelInstance}. */
 	protected IModel myModel;
@@ -143,6 +132,31 @@ public abstract class AbstractModelInstance implements IModelInstance {
 		binaryOperations.put(".", "getPropertyValue");
 		binaryOperations.put("->", "asSet");
 		operationNames.put(2, binaryOperations);
+	}
+
+	/**
+	 * <strong>Has to be called after the initialization of a subclass.
+	 * Initializes cache {@link #allMyObjectsByType}.</strong>
+	 */
+	protected void initializeCache() {
+
+		for (IModelObject modelObject : allMyObjects) {
+			for (Type type : modelObject.getTypes()) {
+
+				final List<String> qualifiedNameList = type.getQualifiedNameList();
+
+				if (allMyObjectsByType.containsKey(qualifiedNameList)) {
+					allMyObjectsByType.get(qualifiedNameList).add(modelObject);
+				}
+				else {
+					List<IModelObject> modelObjects = new ArrayList<IModelObject>();
+					modelObjects.add(modelObject);
+					allMyObjectsByType.put(qualifiedNameList, modelObjects);
+				}
+
+			}
+		}
+
 	}
 
 	/*
@@ -207,22 +221,27 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	}
 
 	/**
-	 * @return A {@link List} containing {@link List}s of {@link String}s
-	 *         representing the canonical names of all Object kinds which have
-	 *         instances in this model instance.
+	 * @return A {@link Set} containing {@link Type}s in this model instance.
 	 */
-	public List<List<String>> getObjectKinds() {
+	public Set<Type> getObjectTypes() {
 
-		return this.allMyObjectKinds;
+		Set<Type> retSet = new HashSet<Type>();
+
+		for (IModelObject modelObject : allMyObjects) {
+			retSet.addAll(Arrays.asList(modelObject.getTypes()));
+		}
+
+		return retSet;
+
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getObjectsOfKind(java.util
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getObjectsOfType(java.util
 	 * .List)
 	 */
-	public List<IModelObject> getObjectsOfKind(List<String> typePath) {
+	public List<IModelObject> getObjectsOfType(List<String> typePath) {
 
 		List<IModelObject> result;
 		Iterator<String> typePathIterator;

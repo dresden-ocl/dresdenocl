@@ -33,6 +33,7 @@
 package tudresden.ocl20.pivot.modelbus;
 
 import java.util.List;
+import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollectionType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
@@ -44,6 +45,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -186,22 +188,22 @@ public interface IModelInstance {
 	List<IModelObject> getObjects();
 
 	/**
-	 * Gets all objects of an specific kind of the model instance.
+	 * Gets all objects of an specific type of the model instance.
 	 * 
 	 * @param typePath
-	 *          the type path for the object kind
+	 *          the type path for the object type
 	 * 
 	 * @return the {@link IModelObject}s for this model instance
 	 */
-	List<IModelObject> getObjectsOfKind(List<String> typePath);
+	List<IModelObject> getObjectsOfType(List<String> typePath);
 
 	/**
 	 * Gets the object kinds.
 	 * 
-	 * @return the available kinds of {@link IModelObject}s for this model
+	 * @return the available types of {@link IModelObject}s for this model
 	 *         instance.
 	 */
-	List<List<String>> getObjectKinds();
+	Set<Type> getObjectTypes();
 
 	/**
 	 * Gets the default {@link StandardlibraryAdapterFactory} for this model
