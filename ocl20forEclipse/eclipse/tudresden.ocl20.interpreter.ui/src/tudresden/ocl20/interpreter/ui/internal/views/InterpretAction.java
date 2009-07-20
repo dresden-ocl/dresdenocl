@@ -75,7 +75,8 @@ class InterpretAction extends Action implements IAction {
 	/**
 	 * Clears selected {@link Constraint}s for selected {@link IModelObject}s.
 	 */
-	public static final int CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS = 4;
+	public static final int CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS =
+			4;
 
 	/**
 	 * Interprets all {@link Constraint}s for all {@link IModelObject}s.
@@ -85,18 +86,21 @@ class InterpretAction extends Action implements IAction {
 	/**
 	 * Interprets all {@link Constraint}s for selected {@link IModelObject}s.
 	 */
-	public static final int INTERPRET_ALL_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS = 1;
+	public static final int INTERPRET_ALL_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS =
+			1;
 
 	/**
 	 * Interprets selected {@link Constraint}s for all {@link IModelObject}s
 	 */
-	public static final int INTERPRET_SELECTED_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS = 2;
+	public static final int INTERPRET_SELECTED_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS =
+			2;
 
 	/**
 	 * Interprets selected {@link Constraint}s for selected {@link IModelObject}
 	 * s.
 	 */
-	public static final int INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS = 0;
+	public static final int INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS =
+			0;
 
 	/**
 	 * Prepares all {@link Constraint}s.
@@ -117,8 +121,8 @@ class InterpretAction extends Action implements IAction {
 	private int actionType;
 
 	/**
-	 * The {@link Constraint}s which shall be used by this
-	 * {@link InterpretAction}.
+	 * The {@link Constraint}s which shall be used by this {@link InterpretAction}
+	 * .
 	 */
 	private Set<Constraint> constraints;
 
@@ -147,9 +151,10 @@ class InterpretAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param message
-	 *            The message which shall be shown.
+	 *          The message which shall be shown.
 	 */
 	private void showMessage(String message) {
+
 		MessageDialog.openInformation(this.parentShell, "Interpreter Results",
 				message);
 	}
@@ -160,10 +165,11 @@ class InterpretAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param actionType
-	 *            The action type which shall be performed by this
-	 *            {@link InterpretAction}.
+	 *          The action type which shall be performed by this
+	 *          {@link InterpretAction}.
 	 */
 	public InterpretAction(int actionType, Shell parentShell) {
+
 		super(null, IAction.AS_PUSH_BUTTON);
 
 		this.actionType = actionType;
@@ -175,8 +181,8 @@ class InterpretAction extends Action implements IAction {
 		this.kinds = new ArrayList<ConstraintKind>();
 
 		/*
-		 * Initialize the constraint kinds used by this InterpretAction
-		 * depending on its given action type.
+		 * Initialize the constraint kinds used by this InterpretAction depending on
+		 * its given action type.
 		 */
 		switch (actionType) {
 		case INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
@@ -205,14 +211,15 @@ class InterpretAction extends Action implements IAction {
 
 	/**
 	 * <p>
-	 * Adds a {@link ConstraintKind} which shall be used to compute the results
-	 * of this {@link InterpretAction}.
+	 * Adds a {@link ConstraintKind} which shall be used to compute the results of
+	 * this {@link InterpretAction}.
 	 * </p>
 	 * 
 	 * @param kind
-	 *            The {@link ConstraintKind} which shall be added.
+	 *          The {@link ConstraintKind} which shall be added.
 	 */
 	public void addKind(ConstraintKind kind) {
+
 		if (!this.kinds.contains(kind)) {
 			this.kinds.add(kind);
 		}
@@ -226,7 +233,7 @@ class InterpretAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param kind
-	 *            The {@link Constraint} which shall be added.
+	 *          The {@link Constraint} which shall be added.
 	 */
 	public void addSelectedConstraints(Constraint c) {
 
@@ -245,7 +252,7 @@ class InterpretAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param kind
-	 *            The {@link IModelObject} which shall be added.
+	 *          The {@link IModelObject} which shall be added.
 	 */
 	public void addSelectedModelObjects(List<IModelObject> mo) {
 
@@ -264,16 +271,18 @@ class InterpretAction extends Action implements IAction {
 	 * </p>
 	 */
 	public void clearSelectedConstraints() {
+
 		this.constraints = null;
 	}
 
 	/**
 	 * <p>
-	 * Clears the {@link List} of used {@link IModelObject}s to compute the
-	 * result of this {@link InterpretAction}.
+	 * Clears the {@link List} of used {@link IModelObject}s to compute the result
+	 * of this {@link InterpretAction}.
 	 * </p>
 	 */
 	public void clearSelectedModelObjects() {
+
 		this.modelObjects = null;
 	}
 
@@ -282,9 +291,10 @@ class InterpretAction extends Action implements IAction {
 	 * results of this {@link InterpretAction}.</p>
 	 * 
 	 * @param kind
-	 *            The {@link ConstraintKind} which shall be removed.
+	 *          The {@link ConstraintKind} which shall be removed.
 	 */
 	public void removeKind(ConstraintKind kind) {
+
 		this.kinds.remove(kind);
 	}
 
@@ -295,9 +305,10 @@ class InterpretAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param enabled
-	 *            If true, a cache will be used.
+	 *          If true, a cache will be used.
 	 */
 	public void setUseCache(boolean enabled) {
+
 		this.useCache = enabled;
 	}
 
@@ -308,15 +319,15 @@ class InterpretAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param modelObjects
-	 *            The {@link IModelObject}s for which results shall be removed
-	 *            or <code>null</code> if all {@link IModelObject}s shall be
-	 *            used.
+	 *          The {@link IModelObject}s for which results shall be removed or
+	 *          <code>null</code> if all {@link IModelObject}s shall be used.
 	 * @param constraints
-	 *            The {@link Constraint}s for which results shall be removed or
-	 *            <code>null</code> if all {@link Constraint}s shall be used.
+	 *          The {@link Constraint}s for which results shall be removed or
+	 *          <code>null</code> if all {@link Constraint}s shall be used.
 	 */
 	private void clearSelection(Set<IModelObject> modelObjects,
 			Set<Constraint> constraints) {
+
 		IModel activeModel;
 		IModelInstance activeModelInstance;
 
@@ -326,8 +337,9 @@ class InterpretAction extends Action implements IAction {
 		/* Check if a model has been set. */
 		if (activeModel != null) {
 
-			activeModelInstance = ModelBusPlugin.getModelInstanceRegistry()
-					.getActiveModelInstance(activeModel);
+			activeModelInstance =
+					ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
+							activeModel);
 
 			if (activeModelInstance != null) {
 
@@ -340,8 +352,7 @@ class InterpretAction extends Action implements IAction {
 				globalEnv = Environment.getGlobalEnvironment();
 				globalEnv.setModelInstance(activeModelInstance);
 
-				interpreter = new OclInterpreter(Environment
-						.getGlobalEnvironment());
+				interpreter = new OclInterpreter(Environment.getGlobalEnvironment());
 
 				usedModelObjects = null;
 
@@ -350,21 +361,20 @@ class InterpretAction extends Action implements IAction {
 				}
 
 				else {
-					usedModelObjects = new HashSet<IModelObject>(
-							activeModelInstance.getObjects());
+					usedModelObjects =
+							new HashSet<IModelObject>(activeModelInstance.getObjects());
 				}
 
 				usedConstraints = constraints;
 
 				if (usedConstraints == null) {
-					interpreter.clearResults(new ArrayList<IModelObject>(
-							usedModelObjects));
+					interpreter
+							.clearResults(new ArrayList<IModelObject>(usedModelObjects));
 				}
 
 				else {
 					interpreter.removeResults(new ArrayList<IModelObject>(
-							usedModelObjects), new ArrayList<Constraint>(
-							usedConstraints));
+							usedModelObjects), new ArrayList<Constraint>(usedConstraints));
 				}
 			}
 
@@ -384,8 +394,7 @@ class InterpretAction extends Action implements IAction {
 	 * Returns all {@link Constraint}s contained in a given {@link IModel}.
 	 * 
 	 * @param aModel
-	 *            The {@link IModel} which {@link Constraint}s shall be
-	 *            returned.
+	 *          The {@link IModel} which {@link Constraint}s shall be returned.
 	 * @return A {@link Set} of {@link Constraint}s.
 	 */
 	private Set<Constraint> getAllConstraintsForModel(IModel aModel) {
@@ -412,8 +421,7 @@ class InterpretAction extends Action implements IAction {
 	 * Returns all {@link Constraint}s contained in a given {@link Namespace}.
 	 * 
 	 * @param aNamespace
-	 *            The {@link Namespace} which {@link Constraint}s shall be
-	 *            returned.
+	 *          The {@link Namespace} which {@link Constraint}s shall be returned.
 	 * @return A {@link Set} of {@link Constraint}s.
 	 */
 	private Set<Constraint> getAllConstraintsForNamespace(Namespace aNamespace) {
@@ -440,16 +448,15 @@ class InterpretAction extends Action implements IAction {
 
 	/**
 	 * <p>
-	 * Interpret selected {@link IModelObject}s and selected {@link Constraint}
-	 * s.
+	 * Interpret selected {@link IModelObject}s and selected {@link Constraint} s.
 	 * </p>
 	 * 
 	 * @param modelObjects
-	 *            The {@link IModelObject}s that shall be interpreted or
-	 *            <code>null</code> if all {@link IModelObject}s shall be used.
+	 *          The {@link IModelObject}s that shall be interpreted or
+	 *          <code>null</code> if all {@link IModelObject}s shall be used.
 	 * @param constraints
-	 *            The {@link Constraint}s that shall be interpreted or
-	 *            <code>null</code> if all {@link Constraint}s shall be used.
+	 *          The {@link Constraint}s that shall be interpreted or
+	 *          <code>null</code> if all {@link Constraint}s shall be used.
 	 */
 	private void interpretSelection(Set<IModelObject> modelObjects,
 			Set<Constraint> constraints) {
@@ -461,8 +468,9 @@ class InterpretAction extends Action implements IAction {
 		activeModelInstance = null;
 
 		if (activeModel != null) {
-			activeModelInstance = ModelBusPlugin.getModelInstanceRegistry()
-					.getActiveModelInstance(activeModel);
+			activeModelInstance =
+					ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
+							activeModel);
 
 			if (activeModelInstance != null) {
 
@@ -475,8 +483,7 @@ class InterpretAction extends Action implements IAction {
 				gloabelEnv = Environment.getGlobalEnvironment();
 				gloabelEnv.setModelInstance(activeModelInstance);
 
-				interpreter = new OclInterpreter(Environment
-						.getGlobalEnvironment());
+				interpreter = new OclInterpreter(Environment.getGlobalEnvironment());
 				interpreter.setUseCache(this.useCache);
 
 				usedModelObjects = null;
@@ -486,22 +493,22 @@ class InterpretAction extends Action implements IAction {
 				}
 
 				else {
-					usedModelObjects = new HashSet<IModelObject>(
-							activeModelInstance.getObjects());
+					usedModelObjects =
+							new HashSet<IModelObject>(activeModelInstance.getObjects());
 				}
 
 				usedConstraints = null;
 
 				if (constraints != null) {
 					usedConstraints = constraints;
-				} else {
-					usedConstraints = this
-							.getAllConstraintsForModel(activeModel);
+				}
+				else {
+					usedConstraints = this.getAllConstraintsForModel(activeModel);
 				}
 
 				/*
-				 * Iterate through the model objects and constraints and compute
-				 * their results.
+				 * Iterate through the model objects and constraints and compute their
+				 * results.
 				 */
 				for (IModelObject aModelObject : usedModelObjects) {
 					for (Constraint aConstraint : usedConstraints) {
@@ -511,8 +518,8 @@ class InterpretAction extends Action implements IAction {
 							NamedElement constrainedElem;
 
 							/* Get the constrained element. */
-							constrainedElem = (NamedElement) aConstraint
-									.getConstrainedElement().get(0);
+							constrainedElem =
+									(NamedElement) aConstraint.getConstrainedElement().get(0);
 
 							/* Check if the constrained element is a type. */
 							if (constrainedElem instanceof Type) {
@@ -522,34 +529,30 @@ class InterpretAction extends Action implements IAction {
 								constrainedType = (Type) constrainedElem;
 
 								/*
-								 * Check if the model object is an instance of
-								 * the constrained type.
+								 * Check if the model object is an instance of the constrained
+								 * type.
 								 */
 								if (aModelObject.isInstanceOf(constrainedType)) {
-									interpreter.interpret(aConstraint,
-											aModelObject);
+									interpreter.interpret(aConstraint, aModelObject);
 								}
 								// no else.
 							}
 
 							/*
-							 * Else check if the constrained element is a
-							 * operation.
+							 * Else check if the constrained element is a operation.
 							 */
 							else if (constrainedElem instanceof Operation) {
 
 								Type operationsType;
 
-								operationsType = ((Operation) constrainedElem)
-										.getOwningType();
+								operationsType = ((Operation) constrainedElem).getOwningType();
 
 								/*
-								 * Check if the model object is an instance of
-								 * the constrained operation's type.
+								 * Check if the model object is an instance of the constrained
+								 * operation's type.
 								 */
 								if (aModelObject.isInstanceOf(operationsType)) {
-									interpreter.interpret(aConstraint,
-											aModelObject);
+									interpreter.interpret(aConstraint, aModelObject);
 								}
 								// no else.
 							}
@@ -580,8 +583,8 @@ class InterpretAction extends Action implements IAction {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *            The {@link Constraint}s that shall be prepared or
-	 *            <code>null</code> if all {@link Constraint}s shall be used.
+	 *          The {@link Constraint}s that shall be prepared or
+	 *          <code>null</code> if all {@link Constraint}s shall be used.
 	 */
 	private void prepareSelection(Set<Constraint> constraints) {
 
@@ -592,17 +595,16 @@ class InterpretAction extends Action implements IAction {
 		activeModelInstance = null;
 
 		/*
-		 * If the active model has been set, try to get the active model
-		 * instance.
+		 * If the active model has been set, try to get the active model instance.
 		 */
 		if (activeModel != null) {
 
-			activeModelInstance = ModelBusPlugin.getModelInstanceRegistry()
-					.getActiveModelInstance(activeModel);
+			activeModelInstance =
+					ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
+							activeModel);
 
 			/*
-			 * If the active model instance has been set, continue with
-			 * preparation.
+			 * If the active model instance has been set, continue with preparation.
 			 */
 			if (activeModelInstance != null) {
 
@@ -615,8 +617,7 @@ class InterpretAction extends Action implements IAction {
 				globalEnv = Environment.getGlobalEnvironment();
 				globalEnv.setModelInstance(activeModelInstance);
 
-				interpreter = new OclInterpreter(Environment
-						.getGlobalEnvironment());
+				interpreter = new OclInterpreter(Environment.getGlobalEnvironment());
 
 				usedConstraints = null;
 
@@ -630,8 +631,8 @@ class InterpretAction extends Action implements IAction {
 					usedConstraints = getAllConstraintsForModel(activeModel);
 				}
 
-				usedModelObjects = new HashSet<IModelObject>(
-						activeModelInstance.getObjects());
+				usedModelObjects =
+						new HashSet<IModelObject>(activeModelInstance.getObjects());
 
 				/* Iterate through the constraints and prepare them. */
 				for (Constraint aConstraint : usedConstraints) {
@@ -651,20 +652,17 @@ class InterpretAction extends Action implements IAction {
 							String featureName;
 							String definedFeature;
 
-							featureName = aConstraint.getDefinedFeature()
-									.getName();
+							featureName = aConstraint.getDefinedFeature().getName();
 
-							definedFeature = ((NamedElement) aConstraint
-									.getConstrainedElement().get(0))
-									.getQualifiedName()
-									+ "::" + featureName;
+							definedFeature =
+									((NamedElement) aConstraint.getConstrainedElement().get(0))
+											.getQualifiedName()
+											+ "::" + featureName;
 
 							/*
-							 * Add the defined feature to the global
-							 * environment.
+							 * Add the defined feature to the global environment.
 							 */
-							globalEnv
-									.addConstraint(definedFeature, aConstraint);
+							globalEnv.addConstraint(definedFeature, aConstraint);
 						}
 						// no else.
 					}
@@ -678,63 +676,23 @@ class InterpretAction extends Action implements IAction {
 							/* Iterate through all model objects. */
 							for (IModelObject aModelObject : usedModelObjects) {
 
-								List<String> aQualifiedName;
-
-								String qualifiedNameWithoutOperation;
 								Iterator<String> qualidiedNameIt;
+								Type constrainedElement;
 
-								/*
-								 * Get the qualified name and split it into
-								 * packages.
-								 */
-								aQualifiedName = new ArrayList<String>(
-										Arrays
-												.asList(((NamedElement) aConstraint
-														.getConstrainedElement()
-														.get(0))
-														.getQualifiedName()
-														.split("::")));
+								constrainedElement =
+										(Type) aConstraint.getConstrainedElement().get(0);
 
-								qualifiedNameWithoutOperation = "";
-
-								/*
-								 * Check if the first element is not an
-								 * operation.
-								 */
-								if (!aQualifiedName.get(0).contains("(")) {
-									qualifiedNameWithoutOperation = aQualifiedName
-											.remove(0);
+								/* Get the owner of the operation. */
+								if (constrainedElement instanceof Operation) {
+									constrainedElement = (Type) constrainedElement.getOwner();
 								}
 								// no else.
 
 								/*
-								 * Iterate through the qualified name until the
-								 * first operation.
+								 * If the modelobject is an instanceof the constrained element.
 								 */
-								qualidiedNameIt = aQualifiedName.iterator();
-
-								while (qualidiedNameIt.hasNext()) {
-
-									String anElement = qualidiedNameIt.next();
-
-									if (!anElement.contains("(")) {
-										qualifiedNameWithoutOperation = qualifiedNameWithoutOperation
-												+ "::" + anElement;
-									} else {
-										break;
-									}
-								}
-								// end while.
-
-								/*
-								 * If the constructed name equals the qualified
-								 * name of the object, prepare the object.
-								 */
-								if (qualifiedNameWithoutOperation
-										.equals(aModelObject
-												.getQualifiedNameString())) {
-									interpreter.prepare(aConstraint,
-											aModelObject);
+								if (aModelObject.isInstanceOf(constrainedElement)) {
+									interpreter.prepare(aConstraint, aModelObject);
 								}
 								// no else.
 							}
@@ -744,8 +702,8 @@ class InterpretAction extends Action implements IAction {
 					}
 
 					/*
-					 * Else check if the constraint is a body definition, an
-					 * initial or a derived value.
+					 * Else check if the constraint is a body definition, an initial or a
+					 * derived value.
 					 */
 					else if (aKind.equals(ConstraintKind.BODY)
 							|| aKind.equals(ConstraintKind.INITIAL)
@@ -773,7 +731,6 @@ class InterpretAction extends Action implements IAction {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
 	public void run() {
@@ -907,7 +864,6 @@ class InterpretAction extends Action implements IAction {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
@@ -917,35 +873,43 @@ class InterpretAction extends Action implements IAction {
 		switch (this.actionType) {
 
 		case INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result = OclInterpreterUIMessages.InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects;
+			result =
+					OclInterpreterUIMessages.InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects;
 			break;
 
 		case INTERPRET_SELECTED_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result = OclInterpreterUIMessages.InterpretAction_InterpretSelectedConstraintsForAllModelObjects;
+			result =
+					OclInterpreterUIMessages.InterpretAction_InterpretSelectedConstraintsForAllModelObjects;
 			break;
 
 		case INTERPRET_ALL_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result = OclInterpreterUIMessages.InterpretAction_InterpretAllConstraintsForSelectedModelObjects;
+			result =
+					OclInterpreterUIMessages.InterpretAction_InterpretAllConstraintsForSelectedModelObjects;
 			break;
 
 		case INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result = OclInterpreterUIMessages.InterpretAction_InterpretAllConstraintsForAllModelObjects;
+			result =
+					OclInterpreterUIMessages.InterpretAction_InterpretAllConstraintsForAllModelObjects;
 			break;
 
 		case CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result = OclInterpreterUIMessages.InterpretAction_ClearSelectedConstraintsForSelectedModelObjects;
+			result =
+					OclInterpreterUIMessages.InterpretAction_ClearSelectedConstraintsForSelectedModelObjects;
 			break;
 
 		case CLEAR_SELECTED_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result = OclInterpreterUIMessages.InterpretAction_ClearSelectedConstraintsForAllModelObjects;
+			result =
+					OclInterpreterUIMessages.InterpretAction_ClearSelectedConstraintsForAllModelObjects;
 			break;
 
 		case CLEAR_ALL_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS:
-			result = OclInterpreterUIMessages.InterpretAction_ClearAllConstraintsForSelectedModelObjects;
+			result =
+					OclInterpreterUIMessages.InterpretAction_ClearAllConstraintsForSelectedModelObjects;
 			break;
 
 		case CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS:
-			result = OclInterpreterUIMessages.InterpretAction_ClearAllConstraintsForAllModelObjects;
+			result =
+					OclInterpreterUIMessages.InterpretAction_ClearAllConstraintsForAllModelObjects;
 			break;
 
 		case REMOVE_SELECTED_RESULTS:
@@ -953,7 +917,8 @@ class InterpretAction extends Action implements IAction {
 			break;
 
 		case PREPARE_SELECTED_CONSTRAINTS:
-			result = OclInterpreterUIMessages.InterpretAction_PrepareSelectedConstraints;
+			result =
+					OclInterpreterUIMessages.InterpretAction_PrepareSelectedConstraints;
 			break;
 
 		case PREPARE_ALL_CONSTRAINTS:
