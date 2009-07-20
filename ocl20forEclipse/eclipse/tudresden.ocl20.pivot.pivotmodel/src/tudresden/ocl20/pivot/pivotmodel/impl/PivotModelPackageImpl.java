@@ -3256,6 +3256,9 @@ public class PivotModelPackageImpl extends EPackageImpl {
 						"clone", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEException(op, this.getCloneNotSupportedException());
 
+		addEOperation(namedElementEClass, theDatatypesPackageImpl.getString(),
+				"getQualifiedNameList", 0, -1, !IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(typedElementEClass, TypedElement.class,
 				"TypedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(

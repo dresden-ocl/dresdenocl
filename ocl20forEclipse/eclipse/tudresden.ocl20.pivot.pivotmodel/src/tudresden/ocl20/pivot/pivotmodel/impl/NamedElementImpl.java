@@ -32,6 +32,9 @@
  */
 package tudresden.ocl20.pivot.pivotmodel.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.eclipse.emf.common.notify.Notification;
@@ -42,27 +45,32 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Named Element</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Named Element</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName <em>Qualified Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner <em>Owner</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName
+ * <em>Name</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName
+ * <em>Qualified Name</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner
+ * <em>Owner</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class NamedElementImpl extends EObjectImpl implements
 		NamedElement {
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> This is set to the empty string in order to prevent
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!--
+	 * begin-user-doc --> This is set to the empty string in order to prevent
 	 * <code>NullPointerExceptions</code> where the name attribute is checked.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -70,8 +78,9 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	protected static final String NAME_EDEFAULT = ""; //$NON-NLS-1$
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -79,8 +88,10 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getQualifiedName()
+	 * <em>Qualified Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getQualifiedName()
 	 * @generated
 	 * @ordered
@@ -89,6 +100,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected NamedElementImpl() {
@@ -98,6 +110,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -108,6 +121,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -117,6 +131,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -147,7 +162,8 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * Subclasses should override this method if they have an owner that
 	 * contributes to their qualified name. This is important because the equality
 	 * of two named elements is, by default, solely determined based on their
-	 * qualified name. The default implementation simply returns <code>null</code>.
+	 * qualified name. The default implementation simply returns <code>null</code>
+	 * .
 	 * 
 	 * @generated NOT
 	 */
@@ -159,11 +175,12 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	/**
 	 * The default implementation in this class throws a
 	 * {@link CloneNotSupportedException}. Subclasses may override to implement
-	 * cloning behaviour. Because <code>NamedElement</code> is at the root of
-	 * the inheritance tree, we do not make this method abstract. This avoids
-	 * having to change all subclasses.
+	 * cloning behaviour. Because <code>NamedElement</code> is at the root of the
+	 * inheritance tree, we do not make this method abstract. This avoids having
+	 * to change all subclasses.
 	 * 
-	 * @throws CloneNotSupportedException if this element does not support cloning
+	 * @throws CloneNotSupportedException
+	 *           if this element does not support cloning
 	 * 
 	 * @generated NOT
 	 */
@@ -172,6 +189,37 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 		throw new CloneNotSupportedException(
 				"Element " + this + " does not support cloning."); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	/**
+	 * <p>
+	 * Returns the name of this {@link NamedElement} as a {@link List} of
+	 * {@link String}s containing the name of the name spaces and of this
+	 * {@link NamedElement}.
+	 * </p>
+	 * 
+	 * @return A {@link List} containing the qualified name as {@link String}s.
+	 * @generated NOT
+	 */
+	public List<String> getQualifiedNameList() {
+
+		List<String> result;
+
+		result = new ArrayList<String>();
+
+		/* Add the name of this element. */
+		result.add(this.getName());
+
+		/* Add the names of the owners until the owner is null. */
+		NamedElement owner;
+		owner = this.getOwner();
+
+		while (owner != null) {
+			result.add(0, owner.getName());
+			owner = owner.getOwner();
+		}
+
+		return result;
 	}
 
 	/**
@@ -205,6 +253,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -223,6 +272,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -238,6 +288,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -253,6 +304,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

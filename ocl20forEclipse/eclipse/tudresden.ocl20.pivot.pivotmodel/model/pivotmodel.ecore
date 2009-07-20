@@ -12,6 +12,11 @@
         <details key="documentation" value="&lt;p>&#xD;&#xA;Creates a copy of this &lt;code>NamedElement&lt;/code>. In the Pivot Model,&#xD;&#xA;all clone operations are intended to perform deep cloning (as opposed&#xD;&#xA;to a shallow clone). That means, that all contained elements (i.e., all elements&#xD;&#xA;for which this &lt;code>NamedElement&lt;/code> is the owner) have to be&#xD;&#xA;cloned as well. Cloning support is necessary for binding {@link GenericElement}s&#xD;&#xA;because such an element needs to be cloned first before its {@link TypeParameter}s&#xD;&#xA;can be bound.&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getQualifiedNameList" unique="false" upperBound="-1" eType="ecore:EDataType datatypes.ecore#//String">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Returns the name of this {@link NamedElement} as a {@link java.util.List} of {@link java.lang.String}s containing the name of the name spaces and of this {@link NamedElement}.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
         eType="ecore:EDataType datatypes.ecore#//String" defaultValueLiteral="">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

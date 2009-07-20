@@ -32,6 +32,8 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
+import java.util.List;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Named Element</b></em>'.
@@ -150,5 +152,17 @@ public interface NamedElement {
 	 * @generated
 	 */
 	NamedElement clone() throws CloneNotSupportedException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Returns the name of this {@link NamedElement} as a {@link java.util.List} of {@link java.lang.String}s containing the name of the name spaces and of this {@link NamedElement}.
+	 * </p>
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	List<String> getQualifiedNameList();
 
 } // NamedElement
