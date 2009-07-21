@@ -57,30 +57,6 @@ public interface IModelObject {
 	Set<Type> getTypes();
 
 	/**
-	 * FIXME Claas: Refactored until here.
-	 * 
-	 * <p>
-	 * Adds a given result to this {@link IModelObject} for a given
-	 * {@link Constraint}.
-	 * </p>
-	 * 
-	 * @param cs
-	 *          The {@link Constraint} the result belongs to.
-	 * @param result
-	 *          The result for the given {@link Constraint}.
-	 */
-	void addResult(Constraint cs, OclRoot result);
-
-	/**
-	 * <p>
-	 * Clears the results for this {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return True, if successful cleared the results.
-	 */
-	boolean clearResults();
-
-	/**
 	 * <p>
 	 * Returns the name of the {@link IModelObject}.
 	 * </p>
@@ -91,15 +67,6 @@ public interface IModelObject {
 
 	/**
 	 * <p>
-	 * Returns the {@link OclRoot} representation of the {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return An {@link OclRoot} representing the {@link IModelObject}.
-	 */
-	OclRoot getOclObject();
-
-	/**
-	 * <p>
 	 * Returns the qualified name as of the {@link IModelObject} as {@link String}
 	 * . Needed for more efficiently use in InterpreterView.
 	 * </p>
@@ -107,15 +74,6 @@ public interface IModelObject {
 	 * @return The qualified name of the {@link IModelObject} as {@link String}.
 	 */
 	String getQualifiedName();
-
-	/**
-	 * <p>
-	 * Returns a {@link Map} containing {@link Constraint}s and their interpreted
-	 * {@link OclRoot} results.
-	 * 
-	 * @return the results
-	 */
-	Map<Constraint, OclRoot> getResults();
 
 	/**
 	 * <p>
@@ -131,6 +89,52 @@ public interface IModelObject {
 	boolean isInstanceOf(Type aType);
 
 	/**
+	 * FIXME Claas: Refactored until here.
+	 * 
+	 * <p>
+	 * Adds a given result to this {@link IModelObject} for a given
+	 * {@link Constraint}.
+	 * </p>
+	 * 
+	 * @param cs
+	 *          The {@link Constraint} the result belongs to.
+	 * @param result
+	 *          The result for the given {@link Constraint}.
+	 */
+	@Deprecated
+	void addResult(Constraint cs, OclRoot result);
+
+	/**
+	 * <p>
+	 * Clears the results for this {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @return True, if successful cleared the results.
+	 */
+	@Deprecated
+	boolean clearResults();
+
+	/**
+	 * <p>
+	 * Returns the {@link OclRoot} representation of the {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @return An {@link OclRoot} representing the {@link IModelObject}.
+	 */
+	@Deprecated
+	OclRoot getOclObject();
+
+	/**
+	 * <p>
+	 * Returns a {@link Map} containing {@link Constraint}s and their interpreted
+	 * {@link OclRoot} results.
+	 * 
+	 * @return the results
+	 */
+	@Deprecated
+	Map<Constraint, OclRoot> getResults();
+
+	/**
 	 * <p>
 	 * Removes the result for a given {@link Constraint} from this
 	 * {@link IModelObject}.
@@ -141,5 +145,6 @@ public interface IModelObject {
 	 * 
 	 * @return True, if the result was removed successful
 	 */
+	@Deprecated
 	boolean removeResult(Constraint aConstraint);
 }

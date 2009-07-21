@@ -55,52 +55,20 @@ public abstract class AbstractModelObject implements IModelObject {
 	/** The name of this {@link IModelObject}. */
 	protected String myName;
 
-	/** The {@link OclRoot} object of this {@link IModelObject}. */
-	protected OclRoot myOclObject;
-
-	/** The results are mapped to constraints. */
-	protected Map<Constraint, OclRoot> myResults =
-			new HashMap<Constraint, OclRoot>();
-
 	/**
 	 * The {@link Type}s of the {@link IModel} of which this IModelObject is an
 	 * instance.
 	 */
 	protected Type[] myTypes;
 
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#addResult(tudresden.ocl20
-	 * .pivot.pivotmodel.Constraint,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public void addResult(Constraint aConstraint, OclRoot aResult) {
+	/** The {@link OclRoot} object of this {@link IModelObject}. */
+	@Deprecated
+	protected OclRoot myOclObject;
 
-		this.myResults.put(aConstraint, aResult);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#clearResults()
-	 */
-	public boolean clearResults() {
-
-		boolean result;
-
-		/* Eventually clear the results map. */
-		if (this.myResults != null) {
-
-			this.myResults.clear();
-
-			result = true;
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
-	}
+	/** The results are mapped to constraints. */
+	@Deprecated
+	protected Map<Constraint, OclRoot> myResults =
+			new HashMap<Constraint, OclRoot>();
 
 	/*
 	 * (non-Javadoc)
@@ -158,15 +126,6 @@ public abstract class AbstractModelObject implements IModelObject {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getResults()
-	 */
-	public Map<Constraint, OclRoot> getResults() {
-
-		return this.myResults;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getTypes()
 	 */
 	public Set<Type> getTypes() {
@@ -204,23 +163,51 @@ public abstract class AbstractModelObject implements IModelObject {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelObject#removeResult(tudresden.ocl20
-	 * .pivot.pivotmodel.Constraint)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#addResult(tudresden.ocl20
+	 * .pivot.pivotmodel.Constraint,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	public boolean removeResult(Constraint cs) {
+	@Deprecated
+	public void addResult(Constraint aConstraint, OclRoot aResult) {
 
-		if (myResults != null) {
-			myResults.remove(cs);
-			return true;
-		}
-		return false;
+		// FIXME Claas: Remove this method.
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#clearResults()
 	 */
-	@Override
-	public abstract String toString();
+	@Deprecated
+	public boolean clearResults() {
+
+		// FIXME Claas: Remove this method.
+
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getResults()
+	 */
+	@Deprecated
+	public Map<Constraint, OclRoot> getResults() {
+
+		// FIXME Claas: Remove this method.
+
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelObject#removeResult(tudresden.ocl20
+	 * .pivot.pivotmodel.Constraint)
+	 */
+	@Deprecated
+	public boolean removeResult(Constraint cs) {
+
+		// FIXME Claas: Remove this method.
+
+		return true;
+	}
 }
