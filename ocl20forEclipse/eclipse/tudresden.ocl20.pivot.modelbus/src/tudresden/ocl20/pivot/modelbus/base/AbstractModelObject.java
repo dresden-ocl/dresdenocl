@@ -31,15 +31,11 @@
 package tudresden.ocl20.pivot.modelbus.base;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -60,15 +56,6 @@ public abstract class AbstractModelObject implements IModelObject {
 	 * instance.
 	 */
 	protected Set<Type> myTypes;
-
-	/** The {@link OclRoot} object of this {@link IModelObject}. */
-	@Deprecated
-	protected OclRoot myOclObject;
-
-	/** The results are mapped to constraints. */
-	@Deprecated
-	protected Map<Constraint, OclRoot> myResults =
-			new HashMap<Constraint, OclRoot>();
 
 	/*
 	 * (non-Javadoc)
@@ -154,55 +141,5 @@ public abstract class AbstractModelObject implements IModelObject {
 		}
 
 		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#addResult(tudresden.ocl20
-	 * .pivot.pivotmodel.Constraint,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	@Deprecated
-	public void addResult(Constraint aConstraint, OclRoot aResult) {
-
-		// FIXME Claas: Remove this method.
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#clearResults()
-	 */
-	@Deprecated
-	public boolean clearResults() {
-
-		// FIXME Claas: Remove this method.
-
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getResults()
-	 */
-	@Deprecated
-	public Map<Constraint, OclRoot> getResults() {
-
-		// FIXME Claas: Remove this method.
-
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelObject#removeResult(tudresden.ocl20
-	 * .pivot.pivotmodel.Constraint)
-	 */
-	@Deprecated
-	public boolean removeResult(Constraint cs) {
-
-		// FIXME Claas: Remove this method.
-
-		return true;
 	}
 }
