@@ -52,6 +52,15 @@ public interface IModelObject {
 
 	/**
 	 * <p>
+	 * Returns the run-time {@link Object} adapted by this {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @return The run-time {@link Object} adapted by this {@link IModelObject}.
+	 */
+	public Object getAdaptedObject();
+	
+	/**
+	 * <p>
 	 * Returns the {@link Type}s of that this IModelObject is an instance.
 	 * </p>
 	 * 
