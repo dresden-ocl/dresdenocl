@@ -59,7 +59,7 @@ public abstract class AbstractModelObject implements IModelObject {
 	 * The {@link Type}s of the {@link IModel} of which this IModelObject is an
 	 * instance.
 	 */
-	protected Type[] myTypes;
+	protected Set<Type> myTypes;
 
 	/** The {@link OclRoot} object of this {@link IModelObject}. */
 	@Deprecated
@@ -130,12 +130,7 @@ public abstract class AbstractModelObject implements IModelObject {
 	 */
 	public Set<Type> getTypes() {
 
-		Set<Type> types;
-
-		/* Get all types. */
-		types = new HashSet<Type>(Arrays.asList(this.myTypes));
-
-		return types;
+		return this.myTypes;
 	}
 
 	/*

@@ -62,10 +62,9 @@ public interface IModelObject {
 	 * <strong>Please be aware, that the {@link Type}s of an {@link IModelObject}
 	 * are only set, if the {@link IModelObject} represents at least one Type in
 	 * the {@link IModel}. The {@link IModelObject}s of the kinds
-	 * {@link IModelInstanceCollection}, {@link IModelInstanceEnumerationLiteral},
-	 * {@link IModelInstanceBoolean}, {@link IModelInstanceInteger},
-	 * {@link IModelInstanceReal}, and {@link IModelInstanceString} do not have a
-	 * {@link Type}.</strong>
+	 * {@link IModelInstanceCollection}, {@link IModelInstanceBoolean},
+	 * {@link IModelInstanceInteger}, {@link IModelInstanceReal}, and
+	 * {@link IModelInstanceString} do not have a {@link Type}.</strong>
 	 * </p>
 	 * 
 	 * @return The {@link Type}s of which this IModelObject is an instance. </p>
@@ -103,6 +102,15 @@ public interface IModelObject {
 	 *         {@link Type}.
 	 */
 	boolean isInstanceOf(Type aType);
+
+	/**
+	 * <p>
+	 * Returns the run-time {@link Object} adapted by this {@link IModelObject}.
+	 * </p>
+	 * 
+	 * @return The run-time {@link Object} adapted by this {@link IModelObject}.
+	 */
+	public Object getAdaptedObject();
 
 	/**
 	 * FIXME Claas: Refactored until here.
