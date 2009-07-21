@@ -31,10 +31,8 @@
 package tudresden.ocl20.pivot.modelbus.base;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -70,36 +68,6 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/** The default StandardlibraryAdapterFactory for model instances. */
 	protected static StandardlibraryAdapterFactory DEFAULTSLAF = null;
 
-	/** Contains all {@link Object}s of this model instance. */
-	protected List<IModelObject> allMyObjects = new ArrayList<IModelObject>();
-
-	/**
-	 * <p>
-	 * Contains all {@link IModelObject}s of this model instance ordered by their
-	 * type's name.
-	 * </p>
-	 */
-	protected Map<List<String>, List<IModelObject>> allMyObjectsByType =
-			new HashMap<List<String>, List<IModelObject>>();
-
-	/** The current StandardlibraryAdapterFactory for this instance */
-	protected StandardlibraryAdapterFactory myCurrentSlAF = null;
-
-	/** The name of the model instance. */
-	protected String myInstanceName;
-
-	/** The {@link IModel} of this {@link IModelInstance}. */
-	protected IModel myModel;
-
-	/**
-	 * The {@link IModelInstanceFactory} used to create the model instance
-	 * objects.
-	 */
-	protected IModelInstanceFactory myModelInstanceFactory;
-
-	/** The root {@link Namespace} of the meta model. */
-	protected Namespace myRootNamespace;
-
 	/**
 	 * Contains the operation names which are different in the standard library
 	 * than in the OCL specification. The names are separated in sub maps
@@ -134,9 +102,52 @@ public abstract class AbstractModelInstance implements IModelInstance {
 		operationNames.put(2, binaryOperations);
 	}
 
+	/** Contains all {@link Object}s of this model instance. */
+	protected List<IModelObject> allMyObjects = new ArrayList<IModelObject>();
+
 	/**
+	 * <p>
+	 * Contains all {@link IModelObject}s of this model instance ordered by their
+	 * type's name.
+	 * </p>
+	 */
+	protected Map<List<String>, List<IModelObject>> allMyObjectsByType =
+			new HashMap<List<String>, List<IModelObject>>();
+
+	/** The current StandardlibraryAdapterFactory for this instance */
+	protected StandardlibraryAdapterFactory myCurrentSLAF = null;
+
+	/** The name of the model instance. */
+	protected String myInstanceName;
+
+	/** The {@link IModel} of this {@link IModelInstance}. */
+	protected IModel myModel;
+
+	/**
+	 * The {@link IModelInstanceFactory} used to create the model instance
+	 * objects.
+	 */
+	protected IModelInstanceFactory myModelInstanceFactory;
+
+	/** The root {@link Namespace} of the meta model. */
+	protected Namespace myRootNamespace;
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getObjectsOfType(java.util
+	 * .List)
+	 */
+	public List<IModelObject> getObjectsOfType(List<String> typePath) {
+
+		return this.allMyObjectsByType.get(typePath);
+	}
+
+	/**
+	 * <p>
 	 * <strong>Has to be called after the initialization of a subclass.
 	 * Initializes cache {@link #allMyObjectsByType}.</strong>
+	 * </p>
 	 */
 	protected void initializeCache() {
 
@@ -155,9 +166,13 @@ public abstract class AbstractModelInstance implements IModelInstance {
 				}
 
 			}
+			// end for.
 		}
-
+		// end for.
 	}
+
+	/** FIXME Claas: REFACTORED_TILL_HERE */
+	private static final int REFACTORED_TILL_HERE = 0;
 
 	/*
 	 * (non-Javadoc)
@@ -181,7 +196,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 */
 	public StandardlibraryAdapterFactory getCurrentSlAF() {
 
-		return myCurrentSlAF;
+		return myCurrentSLAF;
 	}
 
 	/*
@@ -228,87 +243,11 @@ public abstract class AbstractModelInstance implements IModelInstance {
 		Set<Type> retSet = new HashSet<Type>();
 
 		for (IModelObject modelObject : allMyObjects) {
-			retSet.addAll(Arrays.asList(modelObject.getTypes()));
+			retSet.addAll(modelObject.getTypes());
 		}
 
 		return retSet;
 
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getObjectsOfType(java.util
-	 * .List)
-	 */
-	public List<IModelObject> getObjectsOfType(List<String> typePath) {
-
-		List<IModelObject> result;
-		Iterator<String> typePathIterator;
-
-		if (typePath != null) {
-
-			List<String> path;
-			Iterator<String> pathIterator;
-
-			String current;
-			String type;
-
-			path = new ArrayList<String>();
-			typePathIterator = typePath.iterator();
-
-			/* Convert the type path and remove elements containing '('. */
-			while (typePathIterator.hasNext()) {
-
-				current = typePathIterator.next();
-
-				if (!current.contains("(")) {
-					path.add(current);
-				}
-				else {
-					break;
-				}
-			}
-
-			/*
-			 * Check if the path is an object of the model and eventually remove the
-			 * top package from the path.
-			 */
-			if (!this.isObjectOfModel(path)) {
-				while (path.size() > 0
-						&& !path.get(0).equals(this.myRootNamespace.getName())) {
-					path.remove(0);
-				}
-			}
-			// no else.
-
-			if (path.get(0).equals(this.myRootNamespace.getName())) {
-				path.remove(0);
-			}
-			// no else.
-
-			type = path.remove(0);
-			pathIterator = path.iterator();
-
-			/* Transform the path into a canonical name. */
-			while (pathIterator.hasNext()) {
-				type = type + "." + pathIterator.next();
-			}
-
-			/* Get all objects of the transformed type. */
-			result = this.allMyObjectsByType.get(type);
-
-			if (result == null) {
-				result = new ArrayList<IModelObject>();
-			}
-			// no else.
-		}
-
-		else {
-			throw new IllegalArgumentException("TypePath must not be null");
-		}
-
-		return result;
 	}
 
 	/*
@@ -431,7 +370,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 */
 	public void setCurrentSlAF(StandardlibraryAdapterFactory slAF) {
 
-		this.myCurrentSlAF = slAF;
+		this.myCurrentSLAF = slAF;
 	}
 
 	/**

@@ -30,13 +30,11 @@
  */
 package tudresden.ocl20.pivot.modelbus.base;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModel;
@@ -171,23 +169,14 @@ public abstract class AbstractModelObject implements IModelObject {
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getTypes()
 	 */
-	public Type[] getTypes() {
+	public Set<Type> getTypes() {
 
-		List<Type> types;
+		Set<Type> types;
 
 		/* Get all types. */
-		types = new ArrayList<Type>(Arrays.asList(this.myTypes));
+		types = new HashSet<Type>(Arrays.asList(this.myTypes));
 
-		/* Sort the types. */
-		Collections.sort(types, new Comparator<Type>() {
-
-			public int compare(Type type1, Type type2) {
-
-				return type1.getQualifiedName().compareTo(type2.getQualifiedName());
-			}
-		});
-
-		return types.toArray(new Type[0]);
+		return types;
 	}
 
 	/*

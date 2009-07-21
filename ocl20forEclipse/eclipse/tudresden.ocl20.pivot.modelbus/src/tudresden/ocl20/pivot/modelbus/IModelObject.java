@@ -31,6 +31,7 @@
 package tudresden.ocl20.pivot.modelbus;
 
 import java.util.Map;
+import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -53,18 +54,7 @@ public interface IModelObject {
 	 * 
 	 * @return The {@link Type}s of which this IModelObject is an instance.</p>
 	 */
-	Type[] getTypes();
-
-	/**
-	 * <p>
-	 * Checks whether or not this {@link IModelObject} contains multiple
-	 * {@link Object}s of the adapted language. Multiple objects could be
-	 * contained in collection or array like objects.
-	 * </p>
-	 * 
-	 * @return
-	 */
-	boolean isMultiple();
+	Set<Type> getTypes();
 
 	/**
 	 * FIXME Claas: Refactored until here.
