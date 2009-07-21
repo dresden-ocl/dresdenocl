@@ -30,17 +30,14 @@
  */
 package tudresden.ocl20.pivot.modelbus;
 
-import java.util.Map;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceString;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -102,73 +99,4 @@ public interface IModelObject {
 	 *         {@link Type}.
 	 */
 	boolean isInstanceOf(Type aType);
-
-	/**
-	 * <p>
-	 * Returns the run-time {@link Object} adapted by this {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return The run-time {@link Object} adapted by this {@link IModelObject}.
-	 */
-	public Object getAdaptedObject();
-
-	/**
-	 * FIXME Claas: Refactored until here.
-	 * 
-	 * <p>
-	 * Adds a given result to this {@link IModelObject} for a given
-	 * {@link Constraint}.
-	 * </p>
-	 * 
-	 * @param cs
-	 *          The {@link Constraint} the result belongs to.
-	 * @param result
-	 *          The result for the given {@link Constraint}.
-	 */
-	@Deprecated
-	void addResult(Constraint cs, OclRoot result);
-
-	/**
-	 * <p>
-	 * Clears the results for this {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return True, if successful cleared the results.
-	 */
-	@Deprecated
-	boolean clearResults();
-
-	/**
-	 * <p>
-	 * Returns the {@link OclRoot} representation of the {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return An {@link OclRoot} representing the {@link IModelObject}.
-	 */
-	@Deprecated
-	OclRoot getOclObject();
-
-	/**
-	 * <p>
-	 * Returns a {@link Map} containing {@link Constraint}s and their interpreted
-	 * {@link OclRoot} results.
-	 * 
-	 * @return the results
-	 */
-	@Deprecated
-	Map<Constraint, OclRoot> getResults();
-
-	/**
-	 * <p>
-	 * Removes the result for a given {@link Constraint} from this
-	 * {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @param aConstraint
-	 *          The {@link Constraint} whose result shall be removed.
-	 * 
-	 * @return True, if the result was removed successful
-	 */
-	@Deprecated
-	boolean removeResult(Constraint aConstraint);
 }
