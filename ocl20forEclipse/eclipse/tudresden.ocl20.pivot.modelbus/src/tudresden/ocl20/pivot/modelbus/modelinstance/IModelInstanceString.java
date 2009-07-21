@@ -18,27 +18,25 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance;
 
-import java.math.BigInteger;
-
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 
 /**
  * <p>
- * Represents an {@link IModelObject} that adapts a {@link BigInteger} value
- * from the {@link IModelInstance}.
+ * Represents an {@link IModelObject} that adapts a {@link String} value from
+ * the {@link IModelInstance}.
  * </p>
  * 
  * @author Claas Wilke
  */
-public interface ModelInstanceInteger extends IModelObject {
+public interface IModelInstanceString extends IModelObject {
 
 	/**
 	 * <p>
-	 * Returns the {@link BigInteger} value of this {@link ModelInstanceInteger}.
+	 * Returns the {@link String} value of this {@link IModelInstanceString}.
 	 * </p>
 	 * 
-	 * @return The {@link BigInteger} value of this {@link ModelInstanceInteger}.
+	 * @return The {@link String} value of this {@link IModelInstanceString}.
 	 */
-	BigInteger getInteger();
+	String getString();
 }

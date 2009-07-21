@@ -18,25 +18,27 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance;
 
+import java.math.BigDecimal;
+
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 
 /**
  * <p>
- * Represents an {@link IModelObject} that adapts a {@link String} value from
- * the {@link IModelInstance}.
+ * Represents an {@link IModelObject} that adapts a real (or BigDecimal) value
+ * from the {@link IModelInstance}.
  * </p>
  * 
  * @author Claas Wilke
  */
-public interface ModelInstanceString extends IModelObject {
+public interface IModelInstanceReal extends IModelObject {
 
 	/**
 	 * <p>
-	 * Returns the {@link String} value of this {@link ModelInstanceString}.
+	 * Returns the {@link BigDecimal} value of this {@link IModelInstanceReal}.
 	 * </p>
 	 * 
-	 * @return The {@link String} value of this {@link ModelInstanceString}.
+	 * @return The {@link BigDecimal} value of this {@link IModelInstanceReal}.
 	 */
-	String getString();
+	BigDecimal getReal();
 }

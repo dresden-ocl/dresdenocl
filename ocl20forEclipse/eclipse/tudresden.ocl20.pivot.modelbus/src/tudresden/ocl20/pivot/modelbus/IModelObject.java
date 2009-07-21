@@ -34,6 +34,12 @@ import java.util.Map;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceString;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -49,10 +55,20 @@ public interface IModelObject {
 
 	/**
 	 * <p>
-	 * Returns the {@link Type}s of which this IModelObject is an instance.
+	 * Returns the {@link Type}s of that this IModelObject is an instance.
 	 * </p>
 	 * 
-	 * @return The {@link Type}s of which this IModelObject is an instance.</p>
+	 * <p>
+	 * <strong>Please be aware, that the {@link Type}s of an {@link IModelObject}
+	 * are only set, if the {@link IModelObject} represents at least one Type in
+	 * the {@link IModel}. The {@link IModelObject}s of the kinds
+	 * {@link IModelInstanceCollection}, {@link IModelInstanceEnumerationLiteral},
+	 * {@link IModelInstanceBoolean}, {@link IModelInstanceInteger},
+	 * {@link IModelInstanceReal}, and {@link IModelInstanceString} do not have a
+	 * {@link Type}.</strong>
+	 * </p>
+	 * 
+	 * @return The {@link Type}s of which this IModelObject is an instance. </p>
 	 */
 	Set<Type> getTypes();
 
