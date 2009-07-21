@@ -35,7 +35,7 @@ public interface IModelInstanceCollection extends IModelObject {
 
 	/**
 	 * <p>
-	 * Checks whether or not this {@link IModelObject} is contains sorted
+	 * Checks whether or not this {@link IModelObject} is contains ordered
 	 * {@link Object}s.
 	 * </p>
 	 * 
@@ -45,7 +45,7 @@ public interface IModelInstanceCollection extends IModelObject {
 	 * 
 	 * @return Whether or not this {@link IModelObject} is ordered.
 	 */
-	boolean isSorted();
+	boolean isOrdered();
 
 	/**
 	 * <p>
