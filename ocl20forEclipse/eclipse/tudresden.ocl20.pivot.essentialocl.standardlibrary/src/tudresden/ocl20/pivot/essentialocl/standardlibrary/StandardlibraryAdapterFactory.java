@@ -38,6 +38,7 @@ import org.eclipse.core.runtime.IAdapterFactory;
  * @author Ronny Brandt
  * @version 1.0 31.08.2007
  */
+@Deprecated
 public interface StandardlibraryAdapterFactory extends IAdapterFactory {
 
 	/**
