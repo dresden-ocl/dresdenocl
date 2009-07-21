@@ -35,16 +35,6 @@ package tudresden.ocl20.pivot.modelbus;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollectionType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclPrimitiveType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTupleType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -55,15 +45,6 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Matthias Braeuer
  */
 public interface IModelInstance {
-
-	/**
-	 * <p>
-	 * Returns the {@link IModelInstanceFactory} of this {@link IModelInstance}.
-	 * </p>
-	 * 
-	 * @return The {@link IModelInstanceFactory} of this {@link IModelInstance}.
-	 */
-	IModelInstanceFactory getFactory();
 
 	/**
 	 * <p>
@@ -87,86 +68,6 @@ public interface IModelInstance {
 	 *         the given {@link IModel}. Else <code>false</code>.
 	 */
 	boolean isInstanceOf(IModel aModel);
-
-	/**
-	 * @param pathName
-	 * @return
-	 */
-	OclType findType(List<String> pathName);
-
-	/**
-	 * @param pathName
-	 * @return
-	 */
-	OclEnumType findEnumType(List<String> pathName);
-
-	/**
-	 * Find enum literal for given path name.
-	 * 
-	 * @param pathName
-	 * 
-	 * @return
-	 */
-	OclEnumLiteral findEnumLiteral(List<String> pathName);
-
-	/**
-	 * @param name
-	 * @return
-	 */
-	OclPrimitiveType getPrimitiveType(String name);
-
-	/**
-	 * @return
-	 */
-	OclType getAnyType();
-
-	/**
-	 * @return
-	 */
-	OclType getVoidType();
-
-	/**
-	 * @return
-	 */
-	OclType getInvalidType();
-
-	/**
-	 * @return
-	 */
-	OclType getTypeType();
-
-	/**
-	 * @param partNames
-	 * @param partTypes
-	 * 
-	 * @return
-	 */
-	OclTupleType getTupleType(String[] partNames, OclType[] partTypes);
-
-	/**
-	 * @param kind
-	 * @param elementType
-	 * @return
-	 */
-	OclCollectionType getCollectionType(OclCollectionTypeKind kind,
-			OclType elementType);
-
-	/**
-	 * Returns the single instance of {@link OclVoid} called
-	 * <code>undefined</code>. For most domain-specific languages, this will
-	 * correspond to the <code>null</code> literal.
-	 * 
-	 * @return the single <code>OclVoid</code> instance
-	 */
-	OclVoid getUndefined();
-
-	/**
-	 * Returns the single instance of {@link OclInvalid} called
-	 * <code>invalid</code>.
-	 * 
-	 * @return the single <code>OclInvalid</code> instance
-	 */
-	OclInvalid getInvalid();
 
 	/**
 	 * Maps OCL operation names to standardlibrary operation names.
@@ -204,30 +105,6 @@ public interface IModelInstance {
 	 *         instance.
 	 */
 	Set<Type> getObjectTypes();
-
-	/**
-	 * Gets the default {@link StandardlibraryAdapterFactory} for this model
-	 * instance.
-	 * 
-	 * @return the default {@link StandardlibraryAdapterFactory}
-	 */
-	StandardlibraryAdapterFactory getDefaultSlAF();
-
-	/**
-	 * Changes the current {@link StandardlibraryAdapterFactory}.
-	 * 
-	 * @param the
-	 *          new {@link StandardlibraryAdapterFactory}
-	 */
-	void setCurrentSlAF(StandardlibraryAdapterFactory slAF);
-
-	/**
-	 * Gets the current {@link StandardlibraryAdapterFactory} for this model
-	 * instance.
-	 * 
-	 * @return the current {@link StandardlibraryAdapterFactory}
-	 */
-	StandardlibraryAdapterFactory getCurrentSlAF();
 
 	/**
 	 * Gets the display name.

@@ -37,21 +37,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.runtime.Platform;
-
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollectionType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclPrimitiveType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTupleType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -64,9 +53,6 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke: Refactored and added Java-Doc.
  */
 public abstract class AbstractModelInstance implements IModelInstance {
-
-	/** The default StandardlibraryAdapterFactory for model instances. */
-	protected static StandardlibraryAdapterFactory DEFAULTSLAF = null;
 
 	/**
 	 * Contains the operation names which are different in the standard library
@@ -114,20 +100,11 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	protected Map<List<String>, List<IModelObject>> allMyObjectsByType =
 			new HashMap<List<String>, List<IModelObject>>();
 
-	/** The current StandardlibraryAdapterFactory for this instance */
-	protected StandardlibraryAdapterFactory myCurrentSLAF = null;
-
 	/** The name of the model instance. */
 	protected String myInstanceName;
 
 	/** The {@link IModel} of this {@link IModelInstance}. */
 	protected IModel myModel;
-
-	/**
-	 * The {@link IModelInstanceFactory} used to create the model instance
-	 * objects.
-	 */
-	protected IModelInstanceFactory myModelInstanceFactory;
 
 	/** The root {@link Namespace} of the meta model. */
 	protected Namespace myRootNamespace;
@@ -173,40 +150,6 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/** FIXME Claas: REFACTORED_TILL_HERE */
 	private static final int REFACTORED_TILL_HERE = 0;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getCollectionType(tudresden
-	 * .ocl20.pivot.modelbus.util.OclCollectionTypeKind,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
-	 */
-	public OclCollectionType getCollectionType(OclCollectionTypeKind kind,
-			OclType elementType) {
-
-		// TODO This method is not used by the standard library and thus not
-		// implemented yet.
-
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getCurrentSlAF()
-	 */
-	public StandardlibraryAdapterFactory getCurrentSlAF() {
-
-		return myCurrentSLAF;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDefaultSlAF()
-	 */
-	public StandardlibraryAdapterFactory getDefaultSlAF() {
-
-		return DEFAULTSLAF;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -269,91 +212,6 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getAnyType()
-	 */
-	public OclType getAnyType() {
-
-		return (OclType) Platform.getAdapterManager().getAdapter("OclAny",
-				OclType.class);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getInvalid()
-	 */
-	public OclInvalid getInvalid() {
-
-		return (OclInvalid) Platform.getAdapterManager().getAdapter("Invalid",
-				OclInvalid.class);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getInvalidType()
-	 */
-	public OclType getInvalidType() {
-
-		return (OclType) Platform.getAdapterManager().getAdapter("OclInvalid",
-				OclType.class);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getPrimitiveType(java.lang
-	 * .String)
-	 */
-	public OclPrimitiveType getPrimitiveType(String name) {
-
-		return (OclPrimitiveType) Platform.getAdapterManager().getAdapter(name,
-				OclPrimitiveType.class);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getTupleType(java.lang.
-	 * String[], tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType[])
-	 */
-	public OclTupleType getTupleType(String[] partNames, OclType[] partTypes) {
-
-		// TODO This method is not used by the standard library and thus not
-		// implemented yet.
-
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getTypeType()
-	 */
-	public OclType getTypeType() {
-
-		return (OclType) Platform.getAdapterManager().getAdapter("OclType",
-				OclType.class);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getUndefined()
-	 */
-	public OclVoid getUndefined() {
-
-		return (OclVoid) Platform.getAdapterManager().getAdapter("Undefined",
-				OclVoid.class);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getVoidType()
-	 */
-	public OclType getVoidType() {
-
-		return (OclType) Platform.getAdapterManager().getAdapter("OclVoid",
-				OclType.class);
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#isInstanceOf(tudresden.ocl20
 	 * .pivot.modelbus.IModel)
@@ -361,16 +219,6 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	public boolean isInstanceOf(IModel aModel) {
 
 		return this.myModel.equals(aModel);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#setCurrentSlAF(tudresden
-	 * .ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory)
-	 */
-	public void setCurrentSlAF(StandardlibraryAdapterFactory slAF) {
-
-		this.myCurrentSLAF = slAF;
 	}
 
 	/**
