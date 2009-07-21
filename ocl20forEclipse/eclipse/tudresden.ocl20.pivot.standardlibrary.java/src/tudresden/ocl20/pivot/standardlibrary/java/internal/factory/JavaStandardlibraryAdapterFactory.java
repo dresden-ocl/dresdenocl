@@ -57,6 +57,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclOrderedSet;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclPrimitiveType;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSequence;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSet;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclString;
@@ -81,19 +82,20 @@ public class JavaStandardlibraryAdapterFactory extends
 		StandardlibraryAdapterFactory {
 
 	/** The Logger for this class. */
-	private static final Logger logger = Logger
-			.getLogger(JavaStandardlibraryAdapterFactory.class);
+	private static final Logger logger =
+			Logger.getLogger(JavaStandardlibraryAdapterFactory.class);
 
 	/** The single instance of this class. */
 	private static JavaStandardlibraryAdapterFactory MY_INSTANCE = null;
 
 	/** The names of the integer types in Java. */
-	private static String[] INTEGER_TYPES = new String[] { "java.lang.Integer",
-			"java.lang.Short", "java.lang.Long", "int", "short", "long" };
+	private static String[] INTEGER_TYPES =
+			new String[] { "java.lang.Integer", "java.lang.Short", "java.lang.Long",
+					"int", "short", "long" };
 
 	/** The names of the real types in Java. */
-	private static String[] REAL_TYPES = new String[] { "java.lang.Double",
-			"java.lang.Float", "float", "double" };
+	private static String[] REAL_TYPES =
+			new String[] { "java.lang.Double", "java.lang.Float", "float", "double" };
 
 	/**
 	 * <p>
@@ -101,6 +103,7 @@ public class JavaStandardlibraryAdapterFactory extends
 	 * </p>
 	 */
 	private JavaStandardlibraryAdapterFactory() {
+
 	}
 
 	/**
@@ -131,7 +134,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#adapterNotFound(java.lang.Object)
 	 */
@@ -150,8 +152,7 @@ public class JavaStandardlibraryAdapterFactory extends
 
 		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("adapterNotFound(Object) - end - return value="
-					+ result);
+			logger.debug("adapterNotFound(Object) - end - return value=" + result);
 		}
 		// no else.
 		return result;
@@ -159,7 +160,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclBag(java.lang.Object)
 	 */
@@ -173,10 +173,20 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclBag<OclRoot>(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is a List. */
-		if (adaptableObject instanceof List) {
+		else if (adaptableObject instanceof List) {
 			result = new JavaOclBag<OclRoot>((List<OclRoot>) adaptableObject);
 		}
 		/* Else return null. */
@@ -195,7 +205,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclBoolean(java.lang.Object)
 	 */
@@ -208,10 +217,20 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = JavaOclBoolean.getInstance(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is a boolean. */
-		if (adaptableObject instanceof Boolean) {
+		else if (adaptableObject instanceof Boolean) {
 			result = JavaOclBoolean.getInstance((Boolean) adaptableObject);
 		}
 		/* Else return null. */
@@ -221,9 +240,7 @@ public class JavaStandardlibraryAdapterFactory extends
 
 		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("getOclBoolean(Object) - end - return value="
-							+ result);
+			logger.debug("getOclBoolean(Object) - end - return value=" + result);
 		}
 		// no else.
 
@@ -232,7 +249,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclEnumLiteral(java.lang.Object)
 	 */
@@ -245,14 +261,23 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
 
-		result = new JavaOclEnumLiteral(adaptableObject);
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclEnumLiteral(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
+		else
+			result = new JavaOclEnumLiteral(adaptableObject);
 
 		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getOclEnumLiteral(Object) - end - return value="
-					+ result);
+			logger.debug("getOclEnumLiteral(Object) - end - return value=" + result);
 		}
 		// no else.
 
@@ -261,7 +286,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclEnumType(java.lang.Object)
 	 */
@@ -274,17 +298,27 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclEnumType(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is a class. */
-		if (adaptableObject instanceof Class) {
+		else if (adaptableObject instanceof Class) {
 			result = new JavaOclEnumType((Class<?>) adaptableObject);
 		}
 
 		/* Else check if the adaptableObject is a meta model element. */
 		else if (adaptableObject instanceof Enumeration) {
-			result = JavaOclEnumType.getType(((Enumeration) adaptableObject)
-							.getName());
+			result =
+					JavaOclEnumType.getType(((Enumeration) adaptableObject).getName());
 		}
 
 		/* Else return null. */
@@ -294,8 +328,7 @@ public class JavaStandardlibraryAdapterFactory extends
 
 		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getOclEnumType(Object) - end - return value="
-					+ result);
+			logger.debug("getOclEnumType(Object) - end - return value=" + result);
 		}
 		// no else.
 
@@ -304,7 +337,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclInteger(java.lang.Object)
 	 */
@@ -317,10 +349,20 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclInteger(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is an integer. */
-		if (adaptableObject instanceof Integer) {
+		else if (adaptableObject instanceof Integer) {
 			result = new JavaOclInteger((Integer) adaptableObject);
 		}
 		/* Else return null. */
@@ -330,9 +372,7 @@ public class JavaStandardlibraryAdapterFactory extends
 
 		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("getOclInteger(Object) - end - return value="
-							+ result);
+			logger.debug("getOclInteger(Object) - end - return value=" + result);
 		}
 		// no else.
 
@@ -341,7 +381,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclInvalid(java.lang.Object)
 	 */
@@ -360,9 +399,7 @@ public class JavaStandardlibraryAdapterFactory extends
 
 		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("getOclInvalid(Object) - end - return value="
-							+ result);
+			logger.debug("getOclInvalid(Object) - end - return value=" + result);
 		}
 		// no else.
 
@@ -371,7 +408,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclObject(java.lang.Object)
 	 */
@@ -384,9 +420,19 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
 
-		result = new JavaOclObject(adaptableObject);
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclObject(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
+		else
+			result = new JavaOclObject(adaptableObject);
 
 		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
@@ -399,7 +445,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclOrderedSet(java.lang.Object)
 	 */
@@ -413,12 +458,21 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclOrderedSet<OclRoot>(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if adaptableObject is a List. */
-		if (adaptableObject instanceof List) {
-			result = new JavaOclOrderedSet<OclRoot>(
-					(List<OclRoot>) adaptableObject);
+		else if (adaptableObject instanceof List) {
+			result = new JavaOclOrderedSet<OclRoot>((List<OclRoot>) adaptableObject);
 		}
 		/* Else return null. */
 		else {
@@ -427,8 +481,7 @@ public class JavaStandardlibraryAdapterFactory extends
 
 		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getOclOrderedSet(Object) - end - return value="
-					+ result);
+			logger.debug("getOclOrderedSet(Object) - end - return value=" + result);
 		}
 		// no else.
 
@@ -437,7 +490,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory
 	 * #getOclPrimitiveType(java.lang.Object)
@@ -451,19 +503,26 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = JavaOclVoid.getInstance();
+		}
 
 		/* Check if the adaptableObject is a String. */
-		if (adaptableObject instanceof String) {
-			result = JavaOclPrimitiveType
-					.getPrimitiveType((String) adaptableObject);
+		else if (adaptableObject instanceof String) {
+			result = JavaOclPrimitiveType.getPrimitiveType((String) adaptableObject);
 		}
 
 		/* Else check if the adaptableObject is a meta model element. */
 		else if (adaptableObject instanceof PrimitiveType) {
-			result = JavaOclPrimitiveType
-					.getPrimitiveType(((PrimitiveType) adaptableObject)
-							.getName());
+			result =
+					JavaOclPrimitiveType
+							.getPrimitiveType(((PrimitiveType) adaptableObject).getName());
 		}
 
 		/* Else return null. */
@@ -473,8 +532,8 @@ public class JavaStandardlibraryAdapterFactory extends
 
 		/* Eventually log the exit of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getOclPrimitiveType(Object) - end - return value="
-					+ result);
+			logger
+					.debug("getOclPrimitiveType(Object) - end - return value=" + result);
 		}
 		// no else.
 
@@ -483,7 +542,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclReal(java.lang.Object)
 	 */
@@ -496,10 +554,20 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclReal(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is a float. */
-		if (adaptableObject instanceof Float) {
+		else if (adaptableObject instanceof Float) {
 			result = new JavaOclReal((Float) adaptableObject);
 		}
 		/* Else return null. */
@@ -518,7 +586,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclRoot(java.lang.Object)
 	 */
@@ -531,10 +598,20 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclRoot(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is an integer. */
-		if (adaptableObject instanceof Integer) {
+		else if (adaptableObject instanceof Integer) {
 			result = new JavaOclInteger((Integer) adaptableObject);
 		}
 
@@ -569,14 +646,14 @@ public class JavaStandardlibraryAdapterFactory extends
 				/* Add anElement or an adaption of anElement. */
 				if (anElement instanceof OclRoot) {
 					adaptedSet.add((OclRoot) anElement);
-				} else {
-					adaptedSet.add((OclRoot) getAdapter(anElement,
-							OclRoot.class));
+				}
+				else {
+					adaptedSet.add((OclRoot) getAdapter(anElement, OclRoot.class));
 				}
 			}
 
 			/* Adapt result to OclSet. */
-			result = getAdapter(adaptedSet, OclSet.class);
+			result = (OclRoot) getAdapter(adaptedSet, OclSet.class);
 		}
 
 		/* Else check if the adaptableObject is a collection. */
@@ -595,14 +672,14 @@ public class JavaStandardlibraryAdapterFactory extends
 				/* Add anElement or an adaption of anElement. */
 				if (anElement instanceof OclRoot) {
 					adaptedSet.add((OclRoot) anElement);
-				} else {
-					adaptedSet.add((OclRoot) getAdapter(anElement,
-							OclRoot.class));
+				}
+				else {
+					adaptedSet.add((OclRoot) getAdapter(anElement, OclRoot.class));
 				}
 			}
 
 			/* Adapt result to OclSet. */
-			result = getAdapter(adaptedSet, OclSet.class);
+			result = (OclRoot) getAdapter(adaptedSet, OclSet.class);
 		}
 
 		/* Else return null. */
@@ -621,7 +698,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclSet(java.lang.Object)
 	 */
@@ -635,10 +711,20 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclSet<OclRoot>(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is a Set. */
-		if (adaptableObject instanceof Set) {
+		else if (adaptableObject instanceof Set) {
 			result = new JavaOclSet<OclRoot>((Set<OclRoot>) adaptableObject);
 		}
 
@@ -667,7 +753,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclSequence(java.lang.Object)
 	 */
@@ -681,12 +766,21 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclSequence<OclRoot>(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is a List. */
-		if (adaptableObject instanceof List) {
-			result = new JavaOclSequence<OclRoot>(
-					(List<OclRoot>) adaptableObject);
+		else if (adaptableObject instanceof List) {
+			result = new JavaOclSequence<OclRoot>((List<OclRoot>) adaptableObject);
 		}
 		/* Else return null. */
 		else {
@@ -695,8 +789,7 @@ public class JavaStandardlibraryAdapterFactory extends
 
 		/* Eventually log the entry of this method. */
 		if (logger.isDebugEnabled()) {
-			logger.debug("getOclSequence(Object) - end - return value="
-					+ result);
+			logger.debug("getOclSequence(Object) - end - return value=" + result);
 		}
 		// no else.
 
@@ -705,7 +798,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclString(java.lang.Object)
 	 */
@@ -718,10 +810,20 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclString(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is a string. */
-		if (adaptableObject instanceof String) {
+		else if (adaptableObject instanceof String) {
 			result = new JavaOclString((String) adaptableObject);
 		}
 		/* Else return null. */
@@ -740,7 +842,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclTuple(java.lang.Object)
 	 */
@@ -754,13 +855,23 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
 
-		/* Check if the adatableObject is a Map. */
-		if (adaptableObject instanceof Map) {
-			result = new JavaOclTuple((Map<String, OclRoot>) adaptableObject);
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclTuple(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
 		}
 		
+		/* Check if the adatableObject is a Map. */
+		else if (adaptableObject instanceof Map) {
+			result = new JavaOclTuple((Map<String, OclRoot>) adaptableObject);
+		}
+
 		/* Else return null. */
 		else {
 			result = null;
@@ -777,7 +888,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclType(java.lang.Object)
 	 */
@@ -790,14 +900,23 @@ public class JavaStandardlibraryAdapterFactory extends
 		}
 		// no else.
 
-		Object result;
+		OclRoot result;
+
+		/*
+		 * we do not want to adapt an object; instead create an instance that is
+		 * undefined
+		 */
+		if (adaptableObject == null) {
+			result = new JavaOclType(null);
+			result.setUndefinedreason(result.getClass().getCanonicalName()
+					+ " is undefined");
+		}
 
 		/* Check if the adaptableObject is a Class. */
-		if (adaptableObject instanceof Class) {
+		else if (adaptableObject instanceof Class) {
 
 			/* Eventually adapt to String. */
-			if (((Class<?>) adaptableObject).getName().equals(
-					"java.lang.String")) {
+			if (((Class<?>) adaptableObject).getName().equals("java.lang.String")) {
 				result = JavaOclPrimitiveType.getPrimitiveType("String");
 			}
 
@@ -824,16 +943,14 @@ public class JavaStandardlibraryAdapterFactory extends
 			Object returnObject = JavaOclType.getType((String) adaptableObject);
 
 			if (logger.isDebugEnabled()) {
-				logger.debug("getOclType(Object) - end - return value="
-						+ returnObject);
+				logger.debug("getOclType(Object) - end - return value=" + returnObject);
 			}
 			return returnObject;
 		}
-		
+
 		/* Else check if the adaptableObject is a meta model element. */
 		else if (adaptableObject instanceof Type) {
-			result = JavaOclType.getType(((Type) adaptableObject)
-							.getName());
+			result = JavaOclType.getType(((Type) adaptableObject).getName());
 		}
 
 		/* Else return null. */
@@ -852,7 +969,6 @@ public class JavaStandardlibraryAdapterFactory extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.base.
 	 * AbstractStandardlibraryAdapterFactory#getOclVoid(java.lang.Object)
 	 */

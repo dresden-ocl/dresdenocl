@@ -30,6 +30,8 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.math.BigInteger;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
@@ -49,9 +51,10 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *            The adapted element of this {@link JavaOclInteger}.
+	 *          The adapted element of this {@link JavaOclInteger}.
 	 */
-	public JavaOclInteger(Integer adaptee) {
+	public JavaOclInteger(BigInteger adaptee) {
+
 		super(adaptee);
 	}
 
@@ -61,15 +64,15 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 * </p>
 	 * 
 	 * @param literal
-	 *            The literal of this {@link JavaOclInteger}.
+	 *          The literal of this {@link JavaOclInteger}.
 	 */
 	public JavaOclInteger(int literal) {
-		this(new Integer(literal));
+
+		this(BigInteger.valueOf(literal));
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#add(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
@@ -90,8 +93,9 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 		/* Else compute the result. */
 		else {
-			result = new JavaOclInteger(((Number) getAdaptee()).intValue()
-					+ ((Number) anInteger.getAdaptee()).intValue());
+			result =
+					new JavaOclInteger(((Number) getAdaptee()).intValue()
+							+ ((Number) anInteger.getAdaptee()).intValue());
 		}
 
 		return result;
@@ -99,7 +103,6 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#div(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
@@ -134,18 +137,16 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#divide(
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#divide(
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclReal divide(OclInteger anInteger) {
+
 		return super.divide(anInteger);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#max(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
@@ -166,8 +167,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 		/* Else compute the result. */
 		else {
-			return new JavaOclInteger(Math.max(((Number) getAdaptee())
-					.intValue(), ((Number) anInteger.getAdaptee()).intValue()));
+			return new JavaOclInteger(Math.max(((Number) getAdaptee()).intValue(),
+					((Number) anInteger.getAdaptee()).intValue()));
 		}
 
 		return result;
@@ -175,7 +176,6 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#min(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
@@ -196,8 +196,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 		/* Else compute the result. */
 		else {
-			return new JavaOclInteger(Math.min(((Number) getAdaptee())
-					.intValue(), ((Number) anInteger.getAdaptee()).intValue()));
+			return new JavaOclInteger(Math.min(((Number) getAdaptee()).intValue(),
+					((Number) anInteger.getAdaptee()).intValue()));
 		}
 
 		return result;
@@ -205,7 +205,6 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#mod(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
@@ -232,8 +231,9 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 		/* Else compute the result. */
 		else {
-			result = new JavaOclInteger(((Number) getAdaptee()).intValue()
-					% ((Number) anInteger.getAdaptee()).intValue());
+			result =
+					new JavaOclInteger(((Number) getAdaptee()).intValue()
+							% ((Number) anInteger.getAdaptee()).intValue());
 		}
 
 		return result;
@@ -241,9 +241,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#multiply
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#multiply
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger multiply(OclInteger anInteger) {
@@ -262,8 +260,9 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 		/* Else compute the result. */
 		else {
-			result = new JavaOclInteger(((Number) getAdaptee()).intValue()
-					* ((Number) anInteger.getAdaptee()).intValue());
+			result =
+					new JavaOclInteger(((Number) getAdaptee()).intValue()
+							* ((Number) anInteger.getAdaptee()).intValue());
 		}
 
 		return result;
@@ -271,9 +270,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#subtract
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#subtract
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger subtract(OclInteger anInteger) {
@@ -292,8 +289,9 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 		/* Else compute the result. */
 		else {
-			result = new JavaOclInteger(((Number) getAdaptee()).intValue()
-					- ((Number) anInteger.getAdaptee()).intValue());
+			result =
+					new JavaOclInteger(((Number) getAdaptee()).intValue()
+							- ((Number) anInteger.getAdaptee()).intValue());
 		}
 
 		return result;
@@ -301,7 +299,6 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
 	 * #abs()
@@ -318,8 +315,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 		/* Else compute the result. */
 		else {
-			result = new JavaOclInteger(Math.abs(((Number) getAdaptee())
-					.intValue()));
+			result = new JavaOclInteger(Math.abs(((Number) getAdaptee()).intValue()));
 		}
 
 		return result;
@@ -327,48 +323,45 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object anObject) {
-	
+
 		boolean result;
-	
+
 		/* Check if the given object is an integer. */
 		if (anObject instanceof OclInteger) {
 			Number adaptedDouble;
 			Number aDouble;
-	
+
 			adaptedDouble = ((Number) this.getAdaptee()).doubleValue();
-			aDouble = ((Number) ((OclInteger) anObject).getAdaptee())
-					.doubleValue();
-	
+			aDouble = ((Number) ((OclInteger) anObject).getAdaptee()).doubleValue();
+
 			result = (adaptedDouble.equals(aDouble));
 		}
-	
+
 		else {
 			result = false;
 		}
-	
+
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
 	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
+
 		return JavaOclPrimitiveType.getType("Integer");
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
 	 * #negative()
@@ -397,6 +390,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 * @return the ocl integer
 	 */
 	public OclInteger increment() {
+
 		return this.add(new JavaOclInteger(1));
 	}
 }

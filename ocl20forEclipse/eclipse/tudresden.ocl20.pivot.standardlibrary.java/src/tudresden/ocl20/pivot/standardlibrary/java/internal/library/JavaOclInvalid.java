@@ -34,6 +34,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 /**
  * <p>
@@ -53,9 +54,10 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *            The adapted element of this {@link JavaOclInvalid}.
+	 *          The adapted element of this {@link JavaOclInvalid}.
 	 */
 	private JavaOclInvalid(Object adaptee) {
+
 		super(adaptee);
 	}
 
@@ -63,6 +65,7 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 	 * @return the singletion instance of {@link JavaOclInvalid}.
 	 */
 	public static JavaOclInvalid getInstance() {
+
 		if (INSTANCE == null)
 			INSTANCE = new JavaOclInvalid(null);
 		return INSTANCE;
@@ -70,45 +73,44 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
 	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
+
 		return JavaOclType.getType("OclInvalid");
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #invokeOperation(java.lang.String,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
 	 */
 	@Override
-	public OclRoot invokeOperation(String operationName, OclRoot... parameters)
-			throws NoSuchMethodException {
-		return invokeLibraryOperation(operationName, parameters);
+	public OclRoot invokeOperation(String operationName,
+			Operation referredOperation, OclRoot... parameters) {
+
+		return invokeLibraryOperation(operationName, referredOperation, parameters);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #oclIsInvalid()
 	 */
 	@Override
 	public OclBoolean oclIsInvalid() {
+
 		return JavaOclBoolean.getInstance(true);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
