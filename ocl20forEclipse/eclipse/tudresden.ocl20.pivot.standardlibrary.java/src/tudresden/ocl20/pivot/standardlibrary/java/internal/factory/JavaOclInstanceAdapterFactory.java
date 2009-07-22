@@ -1,7 +1,23 @@
-/**
- * 
+/*
+Copyright (C) 2009 by Michael Thiele and Claas Wilke (info@claaswilke.de)
+
+This file is part of the Java Standard Library of Dresden 
+OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package tudresden.ocl20.pivot.standardlibrary.java.internal.factory;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -29,19 +45,43 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLit
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceString;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBag;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclEnumLiteral;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInteger;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclOrderedSet;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSequence;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSet;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclString;
 
 /**
  * Java implementation for the {@link IOclInstanceAdapterFactory}.
  * 
  * @author Michael Thiele
- * 
+ * @author Claas Wilke
  */
 public class JavaOclInstanceAdapterFactory implements
 		IOclInstanceAdapterFactory {
 
+	/** The singleton instance of the {@link JavaOclInstanceAdapterFactory}. */
+	public static JavaOclInstanceAdapterFactory INSTANCE =
+			new JavaOclInstanceAdapterFactory();
+
 	/** The Logger for this class. */
-	private static final Logger logger =
+	private static final Logger LOGGER =
 			Logger.getLogger(JavaOclInstanceAdapterFactory.class);
+
+	/**
+	 * <p>
+	 * Private constructor for singleton pattern.
+	 * </p>
+	 */
+	private JavaOclInstanceAdapterFactory() {
+
+		/* Do nothing. */
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -52,15 +92,15 @@ public class JavaOclInstanceAdapterFactory implements
 	 */
 	public OclBoolean createOclBoolean(IModelInstanceBoolean modelInstanceBoolean) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclBoolean(" + modelInstanceBoolean + ") - start");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclBoolean(" + modelInstanceBoolean + ") - start");
 		}
 
 		Boolean adaptedBoolean = modelInstanceBoolean.getBoolean();
 		OclBoolean oclBoolean = JavaOclBoolean.getInstance(adaptedBoolean);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclBoolean(" + modelInstanceBoolean
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclBoolean(" + modelInstanceBoolean
 					+ ") - end - result = " + oclBoolean);
 		}
 
@@ -78,8 +118,8 @@ public class JavaOclInstanceAdapterFactory implements
 	public OclCollection<OclRoot> createOclCollection(
 			IModelInstanceCollection modelInstanceCollection) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclCollection(" + modelInstanceCollection
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclCollection(" + modelInstanceCollection
 					+ ") - start");
 		}
 
@@ -116,8 +156,8 @@ public class JavaOclInstanceAdapterFactory implements
 					new JavaOclBag<OclRoot>((List<OclRoot>) containedElements);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclCollection(" + modelInstanceCollection
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclCollection(" + modelInstanceCollection
 					+ ") - end - result = " + oclCollection);
 		}
 
@@ -134,16 +174,16 @@ public class JavaOclInstanceAdapterFactory implements
 	public OclEnumLiteral createOclEnumLiteral(
 			IModelInstanceEnumerationLiteral modelInstanceEnumerationLiteral) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclEnumLiteral(" + modelInstanceEnumerationLiteral
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclEnumLiteral(" + modelInstanceEnumerationLiteral
 					+ ") - start");
 		}
 
 		Enum<?> adaptedEnumLiteral = modelInstanceEnumerationLiteral.getLiteral();
 		OclEnumLiteral oclEnumLiteral = new JavaOclEnumLiteral(adaptedEnumLiteral);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclEnumLiteral(" + modelInstanceEnumerationLiteral
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclEnumLiteral(" + modelInstanceEnumerationLiteral
 					+ ") - end - result = " + oclEnumLiteral);
 		}
 
@@ -160,15 +200,15 @@ public class JavaOclInstanceAdapterFactory implements
 	 */
 	public OclInteger createOclInteger(IModelInstanceInteger modelInstanceInteger) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclInteger(" + modelInstanceInteger + ") - start");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclInteger(" + modelInstanceInteger + ") - start");
 		}
 
 		BigInteger adaptedInteger = modelInstanceInteger.getInteger();
 		OclInteger oclInteger = new JavaOclInteger(adaptedInteger);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclInteger(" + modelInstanceInteger
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclInteger(" + modelInstanceInteger
 					+ ") - end - result = " + oclInteger);
 		}
 
@@ -183,16 +223,16 @@ public class JavaOclInstanceAdapterFactory implements
 	 */
 	public OclObject createOclObject(IModelObject modelInstanceObject) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclObject(" + modelInstanceObject + ") - start");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclObject(" + modelInstanceObject + ") - start");
 		}
 
 		// FIXME[Michael]: modelInstanceObject.getAdaptedObject()
 		Object adaptedObject = modelInstanceObject;
 		OclObject oclObject = new JavaOclObject(adaptedObject);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclObject(" + modelInstanceObject
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclObject(" + modelInstanceObject
 					+ ") - end - result = " + oclObject);
 		}
 
@@ -209,15 +249,15 @@ public class JavaOclInstanceAdapterFactory implements
 	 */
 	public OclReal createOclReal(IModelInstanceReal modelInstanceReal) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclReal(" + modelInstanceReal + ") - start");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclReal(" + modelInstanceReal + ") - start");
 		}
 
 		BigDecimal adaptedReal = modelInstanceReal.getReal();
 		OclReal oclReal = new JavaOclReal(adaptedReal);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclReal(" + modelInstanceReal + ") - end - result = "
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclReal(" + modelInstanceReal + ") - end - result = "
 					+ oclReal);
 		}
 
@@ -233,15 +273,15 @@ public class JavaOclInstanceAdapterFactory implements
 	 */
 	public OclString createOclString(IModelInstanceString modelInstanceString) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclString(" + modelInstanceString + ") - start");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclString(" + modelInstanceString + ") - start");
 		}
 
 		String adaptedString = modelInstanceString.getString();
 		OclString oclString = new JavaOclString(adaptedString);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclString(" + modelInstanceString
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclString(" + modelInstanceString
 					+ ") - end - result = " + oclString);
 		}
 
@@ -256,8 +296,8 @@ public class JavaOclInstanceAdapterFactory implements
 	 */
 	public OclRoot createOclRoot(IModelObject modelInstanceObject) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOclRoot(" + modelInstanceObject + ") - start");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclRoot(" + modelInstanceObject + ") - start");
 		}
 
 		if (modelInstanceObject instanceof IModelInstanceBoolean) {
@@ -265,8 +305,8 @@ public class JavaOclInstanceAdapterFactory implements
 			OclRoot result =
 					createOclBoolean((IModelInstanceBoolean) modelInstanceObject);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("createOclRoot(" + modelInstanceObject
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("createOclRoot(" + modelInstanceObject
 						+ ") - end - result: " + result);
 			}
 			return result;
@@ -275,8 +315,8 @@ public class JavaOclInstanceAdapterFactory implements
 			OclRoot result =
 					createOclCollection((IModelInstanceCollection) modelInstanceObject);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("createOclRoot(" + modelInstanceObject
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("createOclRoot(" + modelInstanceObject
 						+ ") - end - result: " + result);
 			}
 			return result;
@@ -285,8 +325,8 @@ public class JavaOclInstanceAdapterFactory implements
 			OclRoot result =
 					createOclEnumLiteral((IModelInstanceEnumerationLiteral) modelInstanceObject);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("createOclRoot(" + modelInstanceObject
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("createOclRoot(" + modelInstanceObject
 						+ ") - end - result: " + result);
 			}
 			return result;
@@ -295,8 +335,8 @@ public class JavaOclInstanceAdapterFactory implements
 			OclRoot result =
 					createOclInteger((IModelInstanceInteger) modelInstanceObject);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("createOclRoot(" + modelInstanceObject
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("createOclRoot(" + modelInstanceObject
 						+ ") - end - result: " + result);
 			}
 			return result;
@@ -304,8 +344,8 @@ public class JavaOclInstanceAdapterFactory implements
 		else if (modelInstanceObject instanceof IModelInstanceReal) {
 			OclRoot result = createOclReal((IModelInstanceReal) modelInstanceObject);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("createOclRoot(" + modelInstanceObject
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("createOclRoot(" + modelInstanceObject
 						+ ") - end - result: " + result);
 			}
 			return result;
@@ -314,8 +354,8 @@ public class JavaOclInstanceAdapterFactory implements
 			OclRoot result =
 					createOclString((IModelInstanceString) modelInstanceObject);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("createOclRoot(" + modelInstanceObject
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("createOclRoot(" + modelInstanceObject
 						+ ") - end - result: " + result);
 			}
 			return result;
@@ -323,8 +363,8 @@ public class JavaOclInstanceAdapterFactory implements
 		else {
 			OclRoot result = createOclObject(modelInstanceObject);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("createOclRoot(" + modelInstanceObject
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("createOclRoot(" + modelInstanceObject
 						+ ") - end - result: " + result);
 			}
 			return result;
