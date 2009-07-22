@@ -34,7 +34,6 @@ import java.util.Set;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceString;
@@ -50,15 +49,6 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public interface IModelObject {
 
-	/**
-	 * <p>
-	 * Returns the run-time {@link Object} adapted by this {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return The run-time {@link Object} adapted by this {@link IModelObject}.
-	 */
-	public Object getAdaptedObject();
-	
 	/**
 	 * <p>
 	 * Returns the {@link Type}s of that this IModelObject is an instance.

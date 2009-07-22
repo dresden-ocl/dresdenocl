@@ -30,8 +30,6 @@
  */
 package tudresden.ocl20.pivot.modelbus.base;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
