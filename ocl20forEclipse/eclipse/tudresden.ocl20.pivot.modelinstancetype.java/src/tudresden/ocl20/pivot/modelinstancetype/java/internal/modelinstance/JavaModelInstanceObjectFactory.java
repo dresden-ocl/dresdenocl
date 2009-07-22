@@ -18,12 +18,16 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
@@ -32,6 +36,7 @@ import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -43,6 +48,27 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  */
 public class JavaModelInstanceObjectFactory {
+
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			JavaModelInstanceTypePlugin
+					.getLogger(JavaModelInstanceObjectFactory.class);
+
+	/**
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#INTEGER}.
+	 */
+	private static final Class<?> INTEGER_CLASSES[] =
+			new Class<?>[] { BigDecimal.class, BigInteger.class, byte.class,
+					Byte.class, int.class, Integer.class, long.class, Long.class,
+					short.class, Short.class };
+
+	/**
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#STRING}.
+	 */
+	private static final Class<?> STRING_CLASSES[] =
+			new Class<?>[] { char.class, Character.class, String.class };
 
 	/** The IModel for which {@link IModelObject} shall be created. */
 	private IModel myModel;
@@ -70,11 +96,33 @@ public class JavaModelInstanceObjectFactory {
 	 */
 	public IModelObject createModelInstanceObject(Object object) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceObject("; //$NON-NLS-1$
+			msg += "object = " + object; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		IModelObject result;
 
 		/* Check if the object is an array. */
 		if (object.getClass().isArray()) {
-			result = this.createJavaModelInstanceArray((Object[]) object);
+
+			/* Primitive arrays cannot be cast to Object directly. */
+			if (object.getClass().getComponentType() != null
+					&& object.getClass().getComponentType().isPrimitive()) {
+
+				result = createJavaModelInstanceArrayFromPrimitiveArray(object);
+			}
+
+			else {
+				result = this.createJavaModelInstanceArray((Object[]) object);
+			}
 		}
 
 		/* Else check if the object is a collection. */
@@ -98,6 +146,17 @@ public class JavaModelInstanceObjectFactory {
 		}
 		// no else.
 
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceObject(Object) - exit"; //$NON-NLS-1$
+			msg += " - reult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		return result;
 	}
 
@@ -113,9 +172,143 @@ public class JavaModelInstanceObjectFactory {
 	 */
 	private IModelInstanceCollection createJavaModelInstanceArray(Object[] array) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelInstanceArray("; //$NON-NLS-1$
+			msg += "array = " + array; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		IModelInstanceCollection result;
 
 		result = new JavaModelInstanceArray(array, this);
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelInstanceArray(Object[]) - exit"; //$NON-NLS-1$
+			msg += " - reult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link JavaModelInstanceArray} for a given array of primitive
+	 * types as an {@link Object}.
+	 * </p>
+	 * 
+	 * @param object
+	 *          An array of primitive types as an {@link Object}.
+	 * @return The created {@link JavaModelInstanceArray} or <code>null</code>.
+	 */
+	private IModelObject createJavaModelInstanceArrayFromPrimitiveArray(
+			Object object) {
+
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelInstanceArrayFromPrimitiveArray("; //$NON-NLS-1$
+			msg += "object = " + object; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		IModelObject result;
+		List<Object> primitiveList;
+		primitiveList = new ArrayList<Object>();
+
+		if (object instanceof boolean[]) {
+			for (boolean aBoolean : (boolean[]) object) {
+				primitiveList.add(aBoolean);
+			}
+
+			result = this.createJavaModelInstanceArray(primitiveList.toArray());
+		}
+
+		else if (object instanceof byte[]) {
+			for (byte aByte : (byte[]) object) {
+				primitiveList.add(aByte);
+			}
+
+			result = this.createJavaModelInstanceArray(primitiveList.toArray());
+		}
+
+		else if (object instanceof int[]) {
+			for (int anInt : (int[]) object) {
+				primitiveList.add(anInt);
+			}
+
+			result = this.createJavaModelInstanceArray(primitiveList.toArray());
+		}
+
+		else if (object instanceof long[]) {
+			for (long aLong : (long[]) object) {
+				primitiveList.add(aLong);
+			}
+
+			result = this.createJavaModelInstanceArray(primitiveList.toArray());
+		}
+
+		else if (object instanceof short[]) {
+			for (short aShort : (short[]) object) {
+				primitiveList.add(aShort);
+			}
+
+			result = this.createJavaModelInstanceArray(primitiveList.toArray());
+		}
+
+		else if (object instanceof double[]) {
+			for (double aDouble : (double[]) object) {
+				primitiveList.add(aDouble);
+			}
+
+			result = this.createJavaModelInstanceArray(primitiveList.toArray());
+		}
+
+		else if (object instanceof float[]) {
+			for (float aFloat : (float[]) object) {
+				primitiveList.add(aFloat);
+			}
+
+			result = this.createJavaModelInstanceArray(primitiveList.toArray());
+		}
+
+		else if (object instanceof char[]) {
+			for (char aChar : (char[]) object) {
+				primitiveList.add(aChar);
+			}
+
+			result = this.createJavaModelInstanceArray(primitiveList.toArray());
+		}
+
+		else {
+			result = null;
+		}
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelInstanceArrayFromPrimitiveArray(Object) - exit"; //$NON-NLS-1$
+			msg += " - reult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 
 		return result;
 	}
@@ -133,9 +326,32 @@ public class JavaModelInstanceObjectFactory {
 	private IModelInstanceCollection createJavaModelInstanceCollection(
 			Collection<?> collection) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelInstanceCollection("; //$NON-NLS-1$
+			msg += "collection = " + collection; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		IModelInstanceCollection result;
 
 		result = new JavaModelInstanceCollection(collection, this);
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelInstanceCollection(Collection<?>) - exit"; //$NON-NLS-1$
+			msg += " - reult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 
 		return result;
 	}
@@ -152,6 +368,18 @@ public class JavaModelInstanceObjectFactory {
 	 */
 	private IModelObject createJavaModelInstanceEnumerationLiteral(Enum<?> literal) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelInstanceEnumerationLiteral("; //$NON-NLS-1$
+			msg += "literal = " + literal; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		IModelInstanceEnumerationLiteral result;
 		Set<Type> modelTypes;
 
@@ -159,6 +387,17 @@ public class JavaModelInstanceObjectFactory {
 		modelTypes.add(this.findTypeOfClassInModel(literal.getClass()));
 
 		result = new JavaModelInstanceEnumerationLiteral(literal, modelTypes);
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelInstanceEnumerationLiteral(Enum<?>) - exit"; //$NON-NLS-1$
+			msg += " - reult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 
 		return result;
 	}
@@ -176,85 +415,86 @@ public class JavaModelInstanceObjectFactory {
 	 */
 	private IModelObject createJavaModelPrimitiveObject(Object object) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelPrimitiveObject("; //$NON-NLS-1$
+			msg += "object = " + object; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		IModelObject result;
 
 		result = null;
 
-		/* FIXME Search for a boolean type. */
-		// for (Class<?> aClass : JavaModelInstanceTypePlugin.BOOLEAN_CLASSES) {
-		// if (aClass.isAssignableFrom(clazz)) {
-		// qualifiedNameList.add(PrimitiveTypeKind.BOOLEAN.getName());
-		// try {
-		// result = model.findType(qualifiedNameList);
-		// break;
-		// }
-		//
-		// catch (ModelAccessException e) {
-		// /* Do nothing, continue search. */
-		// }
-		// }
-		// // no else.
-		// }
-		/*
-		 * If no IModelObject has been created yet try to creatr an
-		 * IModelInstanceInteger.
-		 */
-		if (result == null) {
-
-			/* Check if the given object is a Number. */
-			if (object instanceof Number) {
-
-				/* Try to find a class representing an integer. */
-				for (Class<?> aClass : JavaModelInstanceTypePlugin.INTEGER_CLASSES) {
-
-					if (aClass.isAssignableFrom(object.getClass())) {
-
-						result = new JavaModelInstanceInteger((Number) object);
-						break;
-					}
-					// no else.
-				}
-			}
-			// no else.
+		/* Check if the given object can be adapted as an IModelInstanceBoolean. */
+		if (object instanceof Boolean) {
+			result = new JavaModelInstanceBoolean((Boolean) object);
 		}
 		// no else.
 
-		/* If no Type has been found, search for an Real type. */
-		// if (result == null) {
-		// for (Class<?> aClass : JavaModelInstanceTypePlugin.REAL_CLASSES) {
-		// if (aClass.isAssignableFrom(clazz)) {
-		// qualifiedNameList.add(PrimitiveTypeKind.REAL.getName());
-		// try {
-		// result = model.findType(qualifiedNameList);
-		// break;
-		// }
-		//
-		// catch (ModelAccessException e) {
-		// /* Do nothing, continue search. */
-		// }
-		// }
-		// // no else.
-		// }
-		// }
-		// // no else.
-		/* If no Type has been found, search for an String type. */
-		// if (result == null) {
-		// for (Class<?> aClass : JavaModelInstanceTypePlugin.STRING_CLASSES) {
-		// if (aClass.isAssignableFrom(clazz)) {
-		// qualifiedNameList.add(PrimitiveTypeKind.STRING.getName());
-		// try {
-		// result = model.findType(qualifiedNameList);
-		// break;
-		// }
-		//
-		// catch (ModelAccessException e) {
-		// /* Do nothing, continue search. */
-		// }
-		// }
-		// // no else.
-		// }
-		// }
-		// // no else.
+		/*
+		 * If no IModelObject has been created yet check if the given object can be
+		 * adapted as an IModelInstanceInteger.
+		 */
+		if (result == null && object instanceof Number) {
+
+			/* Try to find a class representing an integer. */
+			for (Class<?> aClass : INTEGER_CLASSES) {
+
+				if (aClass.isAssignableFrom(object.getClass())) {
+
+					result = new JavaModelInstanceInteger((Number) object);
+					break;
+				}
+				// no else.
+			}
+		}
+		// no else.
+
+		/*
+		 * If no IModelObject has been created yet check if the given object can be
+		 * adapted as an IModelInstanceReal.
+		 */
+		if (result == null && object instanceof Number) {
+			result = new JavaModelInstanceReal((Number) object);
+		}
+		// no else.
+
+		/*
+		 * If no IModelObject has been created yet check if the given object can be
+		 * adapted as an IModelInstanceString.
+		 */
+		if (result == null) {
+
+			/* Try to find a class representing an integer. */
+			for (Class<?> aClass : STRING_CLASSES) {
+
+				if (aClass.isAssignableFrom(object.getClass())) {
+
+					result = new JavaModelInstanceString(object);
+					break;
+				}
+				// no else.
+			}
+		}
+		// no else.
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createJavaModelPrimitiveObject(Object) - exit"; //$NON-NLS-1$
+			msg += " - reult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		return result;
 	}
 
@@ -270,12 +510,35 @@ public class JavaModelInstanceObjectFactory {
 	 */
 	private IModelObject createNormalObject(Object object) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createNormalObject("; //$NON-NLS-1$
+			msg += "object = " + object; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		IModelObject result;
 		Set<Type> modelTypes;
 
 		modelTypes = this.findTypesInModel(object);
 
 		result = new JavaModelInstanceObject(object, modelTypes);
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createNormalObject(Object) - exit"; //$NON-NLS-1$
+			msg += " - reult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 
 		return result;
 	}

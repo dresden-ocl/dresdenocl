@@ -26,10 +26,12 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import org.apache.log4j.Logger;
+
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -42,6 +44,10 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class JavaModelInstanceCollection extends AbstractModelObject implements
 		IModelInstanceCollection {
+
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceCollection.class);
 
 	/**
 	 * The {@link JavaModelInstanceObjectFactory} of this
@@ -71,10 +77,34 @@ public class JavaModelInstanceCollection extends AbstractModelObject implements
 	public JavaModelInstanceCollection(Collection<?> containedObjects,
 			JavaModelInstanceObjectFactory factory) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstanceCollection("; //$NON-NLS-1$
+			msg += "containedObjects = " + containedObjects; //$NON-NLS-1$
+			msg += ", factory = " + factory; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		this.myContainedObjects = containedObjects;
 		this.myTypes = new HashSet<Type>();
 
 		this.myFactory = factory;
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstanceCollection(Collection<?>, "; //$NON-NLS-1$
+			msg += "JavaModelInstanceObjectFactory) - exit"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 	}
 
 	/*
@@ -160,17 +190,5 @@ public class JavaModelInstanceCollection extends AbstractModelObject implements
 		result += "]";
 
 		return result;
-	}
-
-	/**
-	 * @deprecated This method is deprecated. Use
-	 *             {@link JavaModelInstanceCollection#getContainedElements()} instead.
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getAdaptedObject()
-	 */
-	@Deprecated
-	public Object getAdaptedObject() {
-
-		return this.myContainedObjects;
 	}
 }

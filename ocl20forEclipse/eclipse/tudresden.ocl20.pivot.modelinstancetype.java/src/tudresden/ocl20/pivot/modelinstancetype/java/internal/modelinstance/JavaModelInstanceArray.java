@@ -21,12 +21,13 @@ package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import org.apache.log4j.Logger;
+
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -39,6 +40,10 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class JavaModelInstanceArray extends AbstractModelObject implements
 		IModelInstanceCollection {
+
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceArray.class);
 
 	/**
 	 * The {@link JavaModelInstanceObjectFactory} of this
@@ -68,10 +73,34 @@ public class JavaModelInstanceArray extends AbstractModelObject implements
 	public JavaModelInstanceArray(Object[] containedObjects,
 			JavaModelInstanceObjectFactory factory) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstanceArray("; //$NON-NLS-1$
+			msg += "containedObjects = " + containedObjects; //$NON-NLS-1$
+			msg += ", factory = " + factory; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		this.myContainedObjects = containedObjects;
 		this.myTypes = new HashSet<Type>();
 
 		this.myFactory = factory;
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstanceArray(Object[], "; //$NON-NLS-1$
+			msg += "JavaModelInstanceObjectFactory) - exit"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 	}
 
 	/*
@@ -96,21 +125,21 @@ public class JavaModelInstanceArray extends AbstractModelObject implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection#isUnique
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection#isSorted
 	 * ()
 	 */
-	public boolean isUnique() {
-
+	public boolean isOrdered() {
+	
 		return false;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection#isSorted
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection#isUnique
 	 * ()
 	 */
-	public boolean isOrdered() {
+	public boolean isUnique() {
 
 		return false;
 	}
@@ -129,17 +158,5 @@ public class JavaModelInstanceArray extends AbstractModelObject implements
 		result += "]";
 
 		return result;
-	}
-
-	/**
-	 * @deprecated This method is deprecated. Use
-	 *             {@link JavaModelInstanceArray#getContainedElements()} instead.
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getAdaptedObject()
-	 */
-	@Deprecated
-	public Object getAdaptedObject() {
-	
-		return this.myContainedObjects;
 	}
 }

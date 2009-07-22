@@ -18,77 +18,64 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.HashSet;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
- * An adapter {@link Class} for {@link JavaModelInstanceEnumerationLiteral}s of
- * {@link JavaModelInstance}s.
+ * Represents an adaptation for {@link Float}s of a {@link JavaModelInstance}.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
-		implements IModelInstanceEnumerationLiteral {
+public class JavaModelInstanceReal extends AbstractModelObject implements
+		IModelInstanceReal {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
-			JavaModelInstanceTypePlugin
-					.getLogger(JavaModelInstanceEnumerationLiteral.class);
+			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceReal.class);
+
+	/** The adapted {@link Number} of this {@link JavaModelInstanceReal}. */
+	private Number myNumber;
 
 	/**
 	 * <p>
-	 * The adapted EnumerationLiteral.
-	 */
-	private Enum<?> myLiteral;
-
-	/**
-	 * <p>
-	 * Creates a new {@link JavaModelInstanceEnumerationLiteral} for a given
-	 * {@link Enum}.
+	 * Creates a new {@link JavaModelInstanceReal}.
 	 * </p>
 	 * 
-	 * @param literal
-	 *          The {@link Enum} that shall be adapted.
-	 * @param types
-	 *          The {@link Type}s that represent the {@link Enumeration} in the
-	 *          {@link IModel}. <strong>An
-	 *          {@link JavaModelInstanceEnumerationLiteral} can only have one
-	 *          {@link Type}.</strong>
+	 * @param number
+	 *          The {@link Number} that shall be adapted by this
+	 *          {@link JavaModelInstanceReal}.
 	 */
-	public JavaModelInstanceEnumerationLiteral(Enum<?> literal, Set<Type> types) {
+	public JavaModelInstanceReal(Number number) {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaModelInstanceEnumerationLiteral("; //$NON-NLS-1$
-			msg += "literal = " + literal; //$NON-NLS-1$
-			msg += ", types = " + types; //$NON-NLS-1$
+			msg = "JavaModelInstanceReal("; //$NON-NLS-1$
+			msg += "number = " + number; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
 		// no else.
 
-		this.myLiteral = literal;
-		this.myTypes = types;
+		this.myNumber = number;
+		this.myTypes = new HashSet<Type>();
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaModelInstanceEnumerationLiteral(Enum<?>, "; //$NON-NLS-1$
-			msg += "Set<Type>) - exit"; //$NON-NLS-1$
+			msg = "JavaModelInstanceReal(Number) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -98,12 +85,15 @@ public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral
-	 * #getLiteral()
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal#getReal()
 	 */
-	public Enum<?> getLiteral() {
+	public BigDecimal getReal() {
 
-		return this.myLiteral;
+		BigDecimal result;
+
+		result = BigDecimal.valueOf(this.myNumber.doubleValue());
+
+		return result;
 	}
 
 	/*
@@ -114,9 +104,9 @@ public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
 
 		String result;
 
-		result = JavaModelInstanceEnumerationLiteral.class.getSimpleName();
+		result = JavaModelInstanceReal.class.getSimpleName();
 		result += "[";
-		result += this.myLiteral;
+		result += this.myNumber;
 		result += "]";
 
 		return result;

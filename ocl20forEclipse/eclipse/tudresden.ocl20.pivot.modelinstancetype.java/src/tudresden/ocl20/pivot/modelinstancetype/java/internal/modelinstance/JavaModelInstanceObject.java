@@ -20,12 +20,12 @@ package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
 import java.util.Set;
 
-import org.eclipse.core.runtime.Platform;
+import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclObject;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -36,7 +36,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  */
 public class JavaModelInstanceObject extends AbstractModelObject implements
-		IModelObject {
+		IModelInstanceObject {
+
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceObject.class);
 
 	/** The Java {@link Object} adapted by this {@link JavaModelInstanceObject}. */
 	protected Object myAdaptedObject;
@@ -54,16 +58,41 @@ public class JavaModelInstanceObject extends AbstractModelObject implements
 	 */
 	public JavaModelInstanceObject(Object anObject, Set<Type> types) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstanceObject("; //$NON-NLS-1$
+			msg += "anObject = " + anObject; //$NON-NLS-1$
+			msg += ", types = " + types; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		this.myAdaptedObject = anObject;
 		this.myTypes = types;
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstanceObject(Object, "; //$NON-NLS-1$
+			msg += "Set<Type>) - exit"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getAdaptedObject()
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject#
+	 * getAdaptedObject()
 	 */
 	public Object getAdaptedObject() {
-	
+
 		return this.myAdaptedObject;
 	}
 

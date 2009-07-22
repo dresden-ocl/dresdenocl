@@ -21,9 +21,11 @@ package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 import java.math.BigInteger;
 import java.util.HashSet;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import org.apache.log4j.Logger;
+
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -35,6 +37,10 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class JavaModelInstanceInteger extends AbstractModelObject implements
 		IModelInstanceInteger {
+
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceInteger.class);
 
 	/** The adapted {@link Number} of this {@link JavaModelInstanceInteger}. */
 	private Number myNumber;
@@ -50,10 +56,38 @@ public class JavaModelInstanceInteger extends AbstractModelObject implements
 	 */
 	public JavaModelInstanceInteger(Number number) {
 
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstanceInteger("; //$NON-NLS-1$
+			msg += "number = " + number; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		this.myNumber = number;
 		this.myTypes = new HashSet<Type>();
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstanceInteger(Number) - exit"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger#getInteger
+	 * ()
+	 */
 	public BigInteger getInteger() {
 
 		BigInteger result;
@@ -61,12 +95,6 @@ public class JavaModelInstanceInteger extends AbstractModelObject implements
 		result = BigInteger.valueOf(this.myNumber.longValue());
 
 		return result;
-	}
-
-	public Object getAdaptedObject() {
-
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/*

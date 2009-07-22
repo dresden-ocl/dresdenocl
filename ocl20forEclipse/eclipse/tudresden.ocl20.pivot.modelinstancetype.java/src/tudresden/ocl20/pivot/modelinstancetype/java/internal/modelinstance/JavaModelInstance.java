@@ -25,13 +25,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
@@ -42,7 +40,6 @@ import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardlibraryAdapterFactory;
 
 /**
  * <p>
@@ -59,13 +56,6 @@ public class JavaModelInstance extends AbstractModelInstance implements
 			JavaModelInstanceTypePlugin.getLogger(JavaModelInstance.class);
 
 	/**
-	 * The default {@link AdapterFactory} used to adapt the {@link IModelInstance}
-	 * to the standard library.
-	 */
-	protected static StandardlibraryAdapterFactory DEFAULTSLAF =
-			JavaStandardlibraryAdapterFactory.getInstance();
-
-	/**
 	 * <p>
 	 * Creates and initializes a new {@link JavaModelInstance}.
 	 * </p>
@@ -80,6 +70,19 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	@SuppressWarnings("unchecked")
 	public JavaModelInstance(Class<?> providerClass, IModel model)
 			throws ModelAccessException {
+
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstance("; //$NON-NLS-1$
+			msg += "providerClass = " + providerClass; //$NON-NLS-1$
+			msg += ", model = " + model; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 
 		/* Initialize the instance. */
 		this.myModel = model;
@@ -115,6 +118,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 					JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodNotFound;
 			msg = NLS.bind(msg, providerClass);
 
+			LOGGER.error(msg);
 			throw new ModelAccessException(msg, e);
 		}
 
@@ -125,6 +129,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 					JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodInvocationError;
 			msg = NLS.bind(msg, providerClass);
 
+			LOGGER.error(msg);
 			throw new ModelAccessException(msg, e);
 		}
 
@@ -135,6 +140,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 					JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodInvocationError;
 			msg = NLS.bind(msg, providerClass);
 
+			LOGGER.error(msg);
 			throw new ModelAccessException(msg, e);
 		}
 
@@ -145,9 +151,19 @@ public class JavaModelInstance extends AbstractModelInstance implements
 					JavaModelInstanceTypeMessages.JavaModelInstance_ProviderMethodInvocationError;
 			msg = NLS.bind(msg, providerClass);
 
+			LOGGER.error(msg);
 			throw new ModelAccessException(msg, e);
 		}
 
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "JavaModelInstance(Class<?>, IModel) - exit"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 	}
 
 	/**
@@ -216,6 +232,8 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 */
 	private void addObject(IModelObject modelObject) {
 
+		// FIXME Claas: Reconsider the caching mechanism.
+		
 		if (modelObject != null) {
 			this.allMyObjects.add(modelObject);
 
@@ -399,15 +417,15 @@ public class JavaModelInstance extends AbstractModelInstance implements
 
 		OclType result;
 
-//		if (this.allMyObjectsByType.get(pathName) != null
-//				&& this.allMyObjectsByType.get(pathName).size() > 0) {
-//			result =
-//					this.allMyObjectsByType.get(pathName).get(0).getOclObject().getType();
-//		}
-//
-//		else {
-			result = null;
-//		}
+		// if (this.allMyObjectsByType.get(pathName) != null
+		// && this.allMyObjectsByType.get(pathName).size() > 0) {
+		// result =
+		// this.allMyObjectsByType.get(pathName).get(0).getOclObject().getType();
+		// }
+		//
+		// else {
+		result = null;
+		// }
 
 		return result;
 	}
