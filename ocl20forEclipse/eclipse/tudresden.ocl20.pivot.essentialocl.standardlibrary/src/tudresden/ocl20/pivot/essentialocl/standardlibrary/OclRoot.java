@@ -32,7 +32,6 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 /**
  * <code>OclRoot</code> is the base interface for the OCL Standard Library
@@ -112,7 +111,7 @@ public interface OclRoot extends OclAdapter {
 	 * @param parameters
 	 * @return
 	 */
-	OclRoot invokeOperation(String operationName, Operation referredOperation, OclRoot... parameters)
+	OclRoot invokeOperation(String operationName, OclRoot... parameters)
 			throws NoSuchMethodException;
 
 	/**
