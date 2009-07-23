@@ -279,16 +279,26 @@ public class JavaModelInstance extends AbstractModelInstance implements
 			EnumerationLiteral literal) {
 
 		IModelInstanceEnumerationLiteral result;
-		List<IModelObject> allLiteralInstances;
+		List<IModelObject> allLiteralsOfEnumeration;
 
-		allLiteralInstances = this.myModelObjectsByType.get(literal);
+		result = null;
 
-		if (allLiteralInstances.size() > 0) {
-			result = (IModelInstanceEnumerationLiteral) allLiteralInstances.get(0);
-		}
+		Type enumeration = (Type) literal.getOwner();
+		allLiteralsOfEnumeration =
+				this.myModelObjectsByType.get(enumeration.getQualifiedNameList());
 
-		else {
-			result = null;
+		for (IModelObject anObject : allLiteralsOfEnumeration) {
+			if (anObject instanceof IModelInstanceEnumerationLiteral) {
+				IModelInstanceEnumerationLiteral aLiteral;
+				aLiteral = (IModelInstanceEnumerationLiteral) anObject;
+
+				if (aLiteral.getLiteral().name().equals(literal.getName())) {
+					result = aLiteral;
+					break;
+				}
+				// no else.
+			}
+			// no else.
 		}
 
 		return result;
