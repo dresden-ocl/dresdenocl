@@ -176,7 +176,7 @@ public class JavaOclInstanceAdapterFactory implements
 			// convert contained elements to OCL instances
 			for (IModelObject modelObject : modelInstanceCollection
 					.getContainedElements()) {
-				containedElements.add(createOclRoot(modelObject));
+				containedElements.add(this.createOclRoot(modelObject));
 			}
 
 			if (isOrdered && isUnique) {
