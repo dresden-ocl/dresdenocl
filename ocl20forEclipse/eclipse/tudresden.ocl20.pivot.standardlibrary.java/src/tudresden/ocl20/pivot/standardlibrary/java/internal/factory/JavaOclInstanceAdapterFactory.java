@@ -20,10 +20,13 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.standardlibrary.java.internal.factory;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 
@@ -76,6 +79,22 @@ public class JavaOclInstanceAdapterFactory implements
 			Logger.getLogger(JavaOclInstanceAdapterFactory.class);
 
 	/**
+	 * Contains the already adapted {@link IModelObject}s. <strong>This is a
+	 * {@link WeakHashMap}! Adapted objects whose adaptee does not exist anymore
+	 * can be disposed</strong></p> .
+	 */
+	private Map<IModelObject, OclRoot> myCachedAdapters =
+			new WeakHashMap<IModelObject, OclRoot>();
+
+	/**
+	 * Contains the already adapted {@link IModelInstanceTypeObject}s.
+	 * <strong>This is a {@link WeakHashMap}! Adapted objects whose adaptee does
+	 * not exist anymore can be disposed</strong></p> .
+	 */
+	private Map<IModelInstanceTypeObject, OclRoot> myCachedAdaptedTypes =
+			new WeakHashMap<IModelInstanceTypeObject, OclRoot>();
+
+	/**
 	 * <p>
 	 * Private constructor for singleton pattern.
 	 * </p>
@@ -98,15 +117,27 @@ public class JavaOclInstanceAdapterFactory implements
 			LOGGER.debug("createOclBoolean(" + modelInstanceBoolean + ") - start");
 		}
 
-		Boolean adaptedBoolean = modelInstanceBoolean.getBoolean();
-		OclBoolean oclBoolean = JavaOclBoolean.getInstance(adaptedBoolean);
+		OclBoolean result;
+
+		/* Check if the object has already been adapted. */
+		result = (OclBoolean) this.myCachedAdapters.get(modelInstanceBoolean);
+
+		/* Else create the adapter. */
+		if (result == null) {
+			Boolean adaptedBoolean = modelInstanceBoolean.getBoolean();
+			result = JavaOclBoolean.getInstance(adaptedBoolean);
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(modelInstanceBoolean, result);
+		}
+		// no else.
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createOclBoolean(" + modelInstanceBoolean
-					+ ") - end - result = " + oclBoolean);
+					+ ") - end - result = " + result);
 		}
 
-		return oclBoolean;
+		return result;
 
 	}
 
@@ -125,45 +156,57 @@ public class JavaOclInstanceAdapterFactory implements
 					+ ") - start");
 		}
 
-		boolean isOrdered = modelInstanceCollection.isOrdered();
-		boolean isUnique = modelInstanceCollection.isUnique();
+		OclCollection<OclRoot> result;
 
-		OclCollection<OclRoot> oclCollection = null;
+		/* Check if the object has already been adapted. */
+		result =
+				(OclCollection<OclRoot>) this.myCachedAdapters
+						.get(modelInstanceCollection);
 
-		Collection<OclRoot> containedElements;
-		if (!isOrdered && isUnique)
-			containedElements = new HashSet<OclRoot>();
-		else
-			containedElements = new LinkedList<OclRoot>();
+		/* Else create the adapter. */
+		if (result == null) {
 
-		// convert contained elements to OCL instances
-		for (IModelObject modelObject : modelInstanceCollection
-				.getContainedElements()) {
-			containedElements.add(createOclRoot(modelObject));
-		}
+			boolean isOrdered = modelInstanceCollection.isOrdered();
+			boolean isUnique = modelInstanceCollection.isUnique();
 
-		if (isOrdered && isUnique) {
-			oclCollection =
-					new JavaOclOrderedSet<OclRoot>((List<OclRoot>) containedElements);
+			Collection<OclRoot> containedElements;
+			if (!isOrdered && isUnique)
+				containedElements = new HashSet<OclRoot>();
+			else
+				containedElements = new LinkedList<OclRoot>();
+
+			// convert contained elements to OCL instances
+			for (IModelObject modelObject : modelInstanceCollection
+					.getContainedElements()) {
+				containedElements.add(createOclRoot(modelObject));
+			}
+
+			if (isOrdered && isUnique) {
+				result =
+						new JavaOclOrderedSet<OclRoot>((List<OclRoot>) containedElements);
+			}
+			else if (isOrdered && !isUnique) {
+				result =
+						new JavaOclSequence<OclRoot>((List<OclRoot>) containedElements);
+			}
+			else if (!isOrdered && isUnique) {
+				result = new JavaOclSet<OclRoot>((Set<OclRoot>) containedElements);
+			}
+			else { // (!isOrdered && !isUnique)
+				result = new JavaOclBag<OclRoot>((List<OclRoot>) containedElements);
+			}
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(modelInstanceCollection, result);
 		}
-		else if (isOrdered && !isUnique) {
-			oclCollection =
-					new JavaOclSequence<OclRoot>((List<OclRoot>) containedElements);
-		}
-		else if (!isOrdered && isUnique) {
-			oclCollection = new JavaOclSet<OclRoot>((Set<OclRoot>) containedElements);
-		}
-		else { // (!isOrdered && !isUnique)
-			oclCollection =
-					new JavaOclBag<OclRoot>((List<OclRoot>) containedElements);
-		}
+		// no else.
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createOclCollection(" + modelInstanceCollection
-					+ ") - end - result = " + oclCollection);
+					+ ") - end - result = " + result);
 		}
 
-		return oclCollection;
+		return result;
 	}
 
 	/*
@@ -181,16 +224,29 @@ public class JavaOclInstanceAdapterFactory implements
 					+ ") - start");
 		}
 
-		Enum<?> adaptedEnumLiteral = modelInstanceEnumerationLiteral.getLiteral();
-		OclEnumLiteral oclEnumLiteral = new JavaOclEnumLiteral(adaptedEnumLiteral);
+		OclEnumLiteral result;
+
+		/* Check if the object has already been adapted. */
+		result =
+				(OclEnumLiteral) this.myCachedAdapters
+						.get(modelInstanceEnumerationLiteral);
+
+		/* Else create the adapter. */
+		if (result == null) {
+			Enum<?> adaptedEnumLiteral = modelInstanceEnumerationLiteral.getLiteral();
+			result = new JavaOclEnumLiteral(adaptedEnumLiteral);
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(modelInstanceEnumerationLiteral, result);
+		}
+		// no else.
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createOclEnumLiteral(" + modelInstanceEnumerationLiteral
-					+ ") - end - result = " + oclEnumLiteral);
+					+ ") - end - result = " + result);
 		}
 
-		return oclEnumLiteral;
-
+		return result;
 	}
 
 	/*
@@ -206,15 +262,27 @@ public class JavaOclInstanceAdapterFactory implements
 			LOGGER.debug("createOclInteger(" + modelInstanceInteger + ") - start");
 		}
 
-		Long adaptedInteger = modelInstanceInteger.getInteger();
-		OclInteger oclInteger = new JavaOclInteger(adaptedInteger.intValue());
+		OclInteger result;
+
+		/* Check if the object has already been adapted. */
+		result = (OclInteger) this.myCachedAdapters.get(modelInstanceInteger);
+
+		/* Else create the adapter. */
+		if (result == null) {
+			Long adaptedInteger = modelInstanceInteger.getInteger();
+			result = new JavaOclInteger(adaptedInteger.intValue());
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(modelInstanceInteger, result);
+		}
+		// no else.
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createOclInteger(" + modelInstanceInteger
-					+ ") - end - result = " + oclInteger);
+					+ ") - end - result = " + result);
 		}
 
-		return oclInteger;
+		return result;
 	}
 
 	/*
@@ -229,15 +297,27 @@ public class JavaOclInstanceAdapterFactory implements
 			LOGGER.debug("createOclObject(" + modelInstanceObject + ") - start");
 		}
 
-		Object adaptedObject = modelInstanceObject.getAdaptedObject();
-		OclObject oclObject = new JavaOclObject(adaptedObject);
+		OclObject result;
+
+		/* Check if the object has already been adapted. */
+		result = (OclObject) this.myCachedAdapters.get(modelInstanceObject);
+
+		/* Else create the adapter. */
+		if (result == null) {
+			Object adaptedObject = modelInstanceObject.getAdaptedObject();
+			result = new JavaOclObject(adaptedObject);
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(modelInstanceObject, result);
+		}
+		// no else.
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createOclObject(" + modelInstanceObject
-					+ ") - end - result = " + oclObject);
+					+ ") - end - result = " + result);
 		}
 
-		return oclObject;
+		return result;
 	}
 
 	/*
@@ -254,15 +334,27 @@ public class JavaOclInstanceAdapterFactory implements
 			LOGGER.debug("createOclReal(" + modelInstanceReal + ") - start");
 		}
 
-		Double adaptedReal = modelInstanceReal.getReal();
-		OclReal oclReal = new JavaOclReal(adaptedReal);
+		OclReal result;
+
+		/* Check if the object has already been adapted. */
+		result = (OclReal) this.myCachedAdapters.get(modelInstanceReal);
+
+		/* Else create the adapter. */
+		if (result == null) {
+			Double adaptedReal = modelInstanceReal.getReal();
+			result = new JavaOclReal(adaptedReal);
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(modelInstanceReal, result);
+		}
+		// no else.
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createOclReal(" + modelInstanceReal + ") - end - result = "
-					+ oclReal);
+					+ result);
 		}
 
-		return oclReal;
+		return result;
 	}
 
 	/*
@@ -278,15 +370,27 @@ public class JavaOclInstanceAdapterFactory implements
 			LOGGER.debug("createOclString(" + modelInstanceString + ") - start");
 		}
 
-		String adaptedString = modelInstanceString.getString();
-		OclString oclString = new JavaOclString(adaptedString);
+		OclString result;
+
+		/* Check if the object has already been adapted. */
+		result = (OclString) this.myCachedAdapters.get(modelInstanceString);
+
+		/* Else create the adapter. */
+		if (result == null) {
+			String adaptedString = modelInstanceString.getString();
+			result = new JavaOclString(adaptedString);
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(modelInstanceString, result);
+		}
+		// no else.
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createOclString(" + modelInstanceString
-					+ ") - end - result = " + oclString);
+					+ ") - end - result = " + result);
 		}
 
-		return oclString;
+		return result;
 	}
 
 	/*
@@ -298,12 +402,31 @@ public class JavaOclInstanceAdapterFactory implements
 	 */
 	public OclType createOclType(IModelInstanceTypeObject modelInstanceTypeObject) {
 
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclType(" + modelInstanceTypeObject + ") - start");
+		}
+
 		OclType result;
-		Class<?> adaptedClass;
 
-		adaptedClass = modelInstanceTypeObject.getAdaptedType();
+		/* Check if the object has already been adapted. */
+		result = (OclType) this.myCachedAdaptedTypes.get(modelInstanceTypeObject);
 
-		result = new JavaOclType(adaptedClass);
+		/* Else create the adapter. */
+		if (result == null) {
+			Class<?> adaptedClass;
+			adaptedClass = modelInstanceTypeObject.getAdaptedType();
+
+			result = new JavaOclType(adaptedClass);
+
+			/* Cache the result. */
+			this.myCachedAdaptedTypes.put(modelInstanceTypeObject, result);
+		}
+		// no else.
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclType(" + modelInstanceTypeObject
+					+ ") - end - result = " + result);
+		}
 
 		return result;
 	}
@@ -320,78 +443,49 @@ public class JavaOclInstanceAdapterFactory implements
 			LOGGER.debug("createOclRoot(" + modelInstanceObject + ") - start");
 		}
 
-		if (modelInstanceObject instanceof IModelInstanceBoolean) {
+		OclRoot result;
 
-			OclRoot result =
-					createOclBoolean((IModelInstanceBoolean) modelInstanceObject);
+		/* Check if the object has already been adapted. */
+		result = (OclRoot) this.myCachedAdapters.get(modelInstanceObject);
 
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("createOclRoot(" + modelInstanceObject
-						+ ") - end - result: " + result);
+		/* Else create the adapter. */
+		if (result == null) {
+
+			if (modelInstanceObject instanceof IModelInstanceBoolean) {
+				result = createOclBoolean((IModelInstanceBoolean) modelInstanceObject);
 			}
-			return result;
+			else if (modelInstanceObject instanceof IModelInstanceCollection) {
+				result =
+						createOclCollection((IModelInstanceCollection) modelInstanceObject);
+			}
+			else if (modelInstanceObject instanceof IModelInstanceEnumerationLiteral) {
+				result =
+						createOclEnumLiteral((IModelInstanceEnumerationLiteral) modelInstanceObject);
+			}
+			else if (modelInstanceObject instanceof IModelInstanceInteger) {
+				result = createOclInteger((IModelInstanceInteger) modelInstanceObject);
+			}
+			else if (modelInstanceObject instanceof IModelInstanceReal) {
+				result = createOclReal((IModelInstanceReal) modelInstanceObject);
+			}
+			else if (modelInstanceObject instanceof IModelInstanceString) {
+				result = createOclString((IModelInstanceString) modelInstanceObject);
+			}
+			else if (modelInstanceObject instanceof IModelInstanceObject) {
+				result = createOclObject((IModelInstanceObject) modelInstanceObject);
+			}
+
+			/* Cache the result. */
+			this.myCachedAdapters.put(modelInstanceObject, result);
 		}
-		else if (modelInstanceObject instanceof IModelInstanceCollection) {
-			OclRoot result =
-					createOclCollection((IModelInstanceCollection) modelInstanceObject);
+		// no else.
 
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("createOclRoot(" + modelInstanceObject
-						+ ") - end - result: " + result);
-			}
-			return result;
-		}
-		else if (modelInstanceObject instanceof IModelInstanceEnumerationLiteral) {
-			OclRoot result =
-					createOclEnumLiteral((IModelInstanceEnumerationLiteral) modelInstanceObject);
-
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("createOclRoot(" + modelInstanceObject
-						+ ") - end - result: " + result);
-			}
-			return result;
-		}
-		else if (modelInstanceObject instanceof IModelInstanceInteger) {
-			OclRoot result =
-					createOclInteger((IModelInstanceInteger) modelInstanceObject);
-
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("createOclRoot(" + modelInstanceObject
-						+ ") - end - result: " + result);
-			}
-			return result;
-		}
-		else if (modelInstanceObject instanceof IModelInstanceReal) {
-			OclRoot result = createOclReal((IModelInstanceReal) modelInstanceObject);
-
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("createOclRoot(" + modelInstanceObject
-						+ ") - end - result: " + result);
-			}
-			return result;
-		}
-		else if (modelInstanceObject instanceof IModelInstanceString) {
-			OclRoot result =
-					createOclString((IModelInstanceString) modelInstanceObject);
-
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("createOclRoot(" + modelInstanceObject
-						+ ") - end - result: " + result);
-			}
-			return result;
-		}
-		else if (modelInstanceObject instanceof IModelInstanceObject) {
-			OclRoot result =
-					createOclObject((IModelInstanceObject) modelInstanceObject);
-
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("createOclRoot(" + modelInstanceObject
-						+ ") - end - result: " + result);
-			}
-			return result;
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createOclRoot(" + modelInstanceObject
+					+ ") - end - result: " + result);
 		}
 
-		return null;
+		return result;
 	}
 
 }
