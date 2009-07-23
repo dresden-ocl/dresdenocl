@@ -36,11 +36,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -88,8 +90,14 @@ public abstract class AbstractModelInstance implements IModelInstance {
 		operationNames.put(2, binaryOperations);
 	}
 
+	/** The name of the model instance. */
+	protected String myInstanceName;
+
+	/** The {@link IModel} of this {@link IModelInstance}. */
+	protected IModel myModel;
+
 	/** Contains all {@link Object}s of this model instance. */
-	protected List<IModelObject> allMyObjects = new ArrayList<IModelObject>();
+	protected List<IModelObject> myModelObjects = new ArrayList<IModelObject>();
 
 	/**
 	 * <p>
@@ -97,17 +105,39 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * type's name.
 	 * </p>
 	 */
-	protected Map<List<String>, List<IModelObject>> allMyObjectsByType =
+	protected Map<List<String>, List<IModelObject>> myModelObjectsByType =
 			new HashMap<List<String>, List<IModelObject>>();
 
-	/** The name of the model instance. */
-	protected String myInstanceName;
-
-	/** The {@link IModel} of this {@link IModelInstance}. */
-	protected IModel myModel;
+	/**
+	 * <p>
+	 * Contains all {@link IModelInstanceTypeObject} of this
+	 * {@link IModelInstance} identified by their adapted {@link Type}.
+	 * </p>
+	 * <p>
+	 * <strong>This map is a {@link WeakHashMap}. If the adapted {@link Type} does
+	 * not exist any more, the adapter is also disposed.</strong>
+	 * </p>
+	 */
+	protected Map<Type, IModelInstanceTypeObject> myModelTypeObjects =
+			new WeakHashMap<Type, IModelInstanceTypeObject>();
 
 	/** The root {@link Namespace} of the meta model. */
 	protected Namespace myRootNamespace;
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findModelTypeObject(tudresden
+	 * .ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceTypeObject findModelTypeObject(Type type) {
+
+		IModelInstanceTypeObject result;
+
+		result = this.myModelTypeObjects.get(type);
+
+		return result;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -117,29 +147,29 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 */
 	public List<IModelObject> getObjectsOfType(List<String> typePath) {
 
-		return this.allMyObjectsByType.get(typePath);
+		return this.myModelObjectsByType.get(typePath);
 	}
 
 	/**
 	 * <p>
 	 * <strong>Has to be called after the initialization of a subclass.
-	 * Initializes cache {@link #allMyObjectsByType}.</strong>
+	 * Initializes cache {@link #myModelObjectsByType}.</strong>
 	 * </p>
 	 */
 	protected void initializeCache() {
 
-		for (IModelObject modelObject : allMyObjects) {
+		for (IModelObject modelObject : myModelObjects) {
 			for (Type type : modelObject.getTypes()) {
 
 				final List<String> qualifiedNameList = type.getQualifiedNameList();
 
-				if (allMyObjectsByType.containsKey(qualifiedNameList)) {
-					allMyObjectsByType.get(qualifiedNameList).add(modelObject);
+				if (myModelObjectsByType.containsKey(qualifiedNameList)) {
+					myModelObjectsByType.get(qualifiedNameList).add(modelObject);
 				}
 				else {
 					List<IModelObject> modelObjects = new ArrayList<IModelObject>();
 					modelObjects.add(modelObject);
-					allMyObjectsByType.put(qualifiedNameList, modelObjects);
+					myModelObjectsByType.put(qualifiedNameList, modelObjects);
 				}
 
 			}
@@ -175,7 +205,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 */
 	public List<IModelObject> getObjects() {
 
-		return this.allMyObjects;
+		return this.myModelObjects;
 	}
 
 	/**
@@ -185,7 +215,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 		Set<Type> retSet = new HashSet<Type>();
 
-		for (IModelObject modelObject : allMyObjects) {
+		for (IModelObject modelObject : myModelObjects) {
 			retSet.addAll(modelObject.getTypes());
 		}
 

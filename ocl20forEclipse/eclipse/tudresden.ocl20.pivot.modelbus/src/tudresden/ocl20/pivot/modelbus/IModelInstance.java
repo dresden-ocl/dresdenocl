@@ -35,6 +35,9 @@ package tudresden.ocl20.pivot.modelbus;
 import java.util.List;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -68,6 +71,33 @@ public interface IModelInstance {
 	 *         the given {@link IModel}. Else <code>false</code>.
 	 */
 	boolean isInstanceOf(IModel aModel);
+
+	/**
+	 * <p>
+	 * Searches in this {@link IModelInstance} for a implementation of the given
+	 * {@link EnumerationLiteral}.
+	 * 
+	 * @param literal
+	 *          The {@link EnumerationLiteral} whose implementation shall be
+	 *          found.
+	 * @return The found {@link IModelInstanceEnumerationLiteral} or
+	 *         <code>null</code>.
+	 */
+	IModelInstanceEnumerationLiteral findEnumerationLiteral(
+			EnumerationLiteral literal);
+
+	/**
+	 * <p>
+	 * Searches for and probably returns the {@link IModelInstanceTypeObject} of a
+	 * given {@link Type} if the given {@link Type} is implemented by an
+	 * {@link IModelInstanceTypeObject} in this {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @param type
+	 *          The {@link Type} that shall be found.
+	 * @return The found {@link IModelInstanceTypeObject} or <code>null</code>.
+	 */
+	public IModelInstanceTypeObject findModelTypeObject(Type type);
 
 	/**
 	 * Maps OCL operation names to standardlibrary operation names.

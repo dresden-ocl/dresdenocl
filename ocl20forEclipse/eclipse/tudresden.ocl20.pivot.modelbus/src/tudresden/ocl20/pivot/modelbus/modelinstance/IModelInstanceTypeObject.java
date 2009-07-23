@@ -18,27 +18,41 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance;
 
-import java.math.BigDecimal;
-
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
- * Represents an {@link IModelObject} that adapts a real (or BigDecimal) value
- * from the {@link IModelInstance}.
+ * Represents an Type in the {@link IModelInstance} on that static operations
+ * can be invoked.
  * </p>
  * 
  * @author Claas Wilke
  */
-public interface IModelInstanceReal extends IModelObject {
+public interface IModelInstanceTypeObject {
+
+	/**
+	 * FIXME Claas: Refactor this part and introduce a method invoke operation.
+	 * <p>
+	 * Returns the {@link Class} that is adapted by this
+	 * {@link IModelInstanceTypeObject}
+	 * </p>
+	 * 
+	 * @return The {@link Class} that is adapted by this
+	 *         {@link IModelInstanceTypeObject}
+	 */
+	Class<?> getAdaptedType();
 
 	/**
 	 * <p>
-	 * Returns the {@link Double} value of this {@link IModelInstanceReal}.
+	 * Returns the {@link Type} of the {@link IModel} that is represented by this
+	 * {@link IModelInstanceTypeObject}.
 	 * </p>
 	 * 
-	 * @return The {@link Double} value of this {@link IModelInstanceReal}.
+	 * @return The {@link Type} of the {@link IModel} that is represented by this
+	 *         {@link IModelInstanceTypeObject}.
 	 */
-	Double getReal();
+	Type getModelType();
 }
