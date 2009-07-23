@@ -20,7 +20,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.standardlibrary.java.internal.factory;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,7 +52,6 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBag;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclEnumLiteral;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInteger;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclOrderedSet;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSequence;
@@ -305,7 +303,10 @@ public class JavaOclInstanceAdapterFactory implements
 		/* Else create the adapter. */
 		if (result == null) {
 			Object adaptedObject = modelInstanceObject.getAdaptedObject();
-			result = new JavaOclObject(adaptedObject);
+
+			result =
+					(OclObject) JavaStandardLibraryFactory.INSTANCE
+							.createOclObject(adaptedObject);
 
 			/* Cache the result. */
 			this.myCachedAdapters.put(modelInstanceObject, result);

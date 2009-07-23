@@ -24,12 +24,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
@@ -76,6 +78,14 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/** The singleton instance of the {@link JavaStandardLibraryFactory}. */
 	public static JavaStandardLibraryFactory INSTANCE =
 			new JavaStandardLibraryFactory();
+
+	/**
+	 * Contains the already adapted {@link OclRoot} identified by their adapted
+	 * {@link Object}. <strong>This is a {@link WeakHashMap}! If an {@link Object}
+	 * is disposed, its adapter can also be disposed.</strong>
+	 */
+	private Map<Object, OclRoot> myCachedAdaptedObjects =
+			new WeakHashMap<Object, OclRoot>();
 
 	/**
 	 * <p>
@@ -138,6 +148,30 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 		result = JavaOclInvalid.getInstance();
 		result.setUndefinedreason(reason);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IStandardLibraryFactory#createOclObject(java.lang.Object)
+	 */
+	public OclObject createOclObject(Object object) {
+
+		OclObject result;
+
+		/* Eventually use a cached result. */
+		result = (OclObject) this.myCachedAdaptedObjects.get(object);
+
+		/* Else create a new object. */
+		if (result == null) {
+			result = new JavaOclObject(object);
+
+			/* Cache the created object. */
+			this.myCachedAdaptedObjects.put(object, result);
+		}
+		// no else.
 
 		return result;
 	}
@@ -223,7 +257,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		}
 
 		else {
-			result = new JavaOclObject(object);
+			result = this.createOclObject(object);
 		}
 
 		return result;
