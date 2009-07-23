@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
+package tudresden.ocl20.pivot.modelinstancetype.java.factory;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -25,7 +25,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 
@@ -35,7 +37,17 @@ import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstanceArray;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstanceCollection;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstanceInteger;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstanceObject;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstanceReal;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstanceString;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstanceTypeObject;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -74,6 +86,24 @@ public class JavaModelInstanceObjectFactory {
 	private IModel myModel;
 
 	/**
+	 * The already adapted {@link IModelObject}s of this
+	 * {@link JavaModelInstanceObjectFactory}. <strong>This is a
+	 * {@link WeakHashMap}! If an {@link Object} is disposed, its adapted
+	 * {@link IModelObject} will be disposed as well.</p>
+	 */
+	private Map<Object, IModelObject> myCachedAdaptedObjects =
+			new WeakHashMap<Object, IModelObject>();
+
+	/**
+	 * The already adapted {@link IModelInstanceTypeObject}s of this
+	 * {@link JavaModelInstanceObjectFactory}. <strong>This is a
+	 * {@link WeakHashMap}! If an {@link Class} is disposed, its adapted
+	 * {@link IModelInstanceTypeObject} will be disposed as well.</p>
+	 */
+	private Map<Class<?>, IModelInstanceTypeObject> myCachedAdaptedTypeObjects =
+			new WeakHashMap<Class<?>, IModelInstanceTypeObject>();
+
+	/**
 	 * <p>
 	 * Creates a new {@link JavaModelInstanceObjectFactory} for a given
 	 * {@link IModel}.
@@ -110,47 +140,118 @@ public class JavaModelInstanceObjectFactory {
 
 		IModelObject result;
 
-		/* Check if the object is an array. */
-		if (object.getClass().isArray()) {
+		/* Check if the object has already been adapted. */
+		result = this.myCachedAdaptedObjects.get(object);
 
-			/* Primitive arrays cannot be cast to Object directly. */
-			if (object.getClass().getComponentType() != null
-					&& object.getClass().getComponentType().isPrimitive()) {
-
-				result = createJavaModelInstanceArrayFromPrimitiveArray(object);
-			}
-
-			else {
-				result = this.createJavaModelInstanceArray((Object[]) object);
-			}
-		}
-
-		/* Else check if the object is a collection. */
-		else if (object instanceof Collection) {
-			result = this.createJavaModelInstanceCollection((Collection<?>) object);
-		}
-
-		/* Check if the object is an EnumerationLiteral. */
-		else if (object.getClass().isEnum()) {
-			result = this.createJavaModelInstanceEnumerationLiteral((Enum<?>) object);
-		}
-
-		/* Check if the object is a primitive type. */
-		else {
-			result = this.createJavaModelPrimitiveObject(object);
-		}
-
-		/* Else create a normal type. */
+		/* Else create a new adapter. */
 		if (result == null) {
-			result = createNormalObject(object);
+			/* Check if the object is an array. */
+			if (object.getClass().isArray()) {
+
+				/* Primitive arrays cannot be cast to Object directly. */
+				if (object.getClass().getComponentType() != null
+						&& object.getClass().getComponentType().isPrimitive()) {
+
+					result = createJavaModelInstanceArrayFromPrimitiveArray(object);
+				}
+
+				else {
+					result = this.createJavaModelInstanceArray((Object[]) object);
+				}
+			}
+
+			/* Else check if the object is a collection. */
+			else if (object instanceof Collection) {
+				result = this.createJavaModelInstanceCollection((Collection<?>) object);
+			}
+
+			/* Check if the object is an EnumerationLiteral. */
+			else if (object.getClass().isEnum()) {
+				result =
+						this.createJavaModelInstanceEnumerationLiteral((Enum<?>) object);
+			}
+
+			/* Check if the object is a primitive type. */
+			else {
+				result = this.createJavaModelPrimitiveObject(object);
+			}
+
+			/* Else create a normal type. */
+			if (result == null) {
+				result = createNormalObject(object);
+			}
+			// no else.
+
+			/* Cache the created object. */
+			this.myCachedAdaptedObjects.put(object, result);
 		}
-		// no else.
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
 			msg = "createModelInstanceObject(Object) - exit"; //$NON-NLS-1$
+			msg += " - reult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Probably creates an {@link IModelInstanceTypeObject} for a given
+	 * {@link Class} (If the {@link Class} is directly represented by a
+	 * {@link Type} in the {@link IModel}).
+	 * 
+	 * @param aClass
+	 *          The {@link Class} for that an {@link IModelInstanceTypeObject}
+	 *          shall be created.
+	 */
+	public IModelInstanceTypeObject createModelInstanceTypeObject(Class<?> aClass) {
+
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceTypeObject("; //$NON-NLS-1$
+			msg += "aClass = " + aClass; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		IModelInstanceTypeObject result;
+
+		/* Check if the object has already been adapted. */
+		result = this.myCachedAdaptedTypeObjects.get(aClass);
+
+		/* Else create a new adapter. */
+		if (result == null) {
+			Type modelType;
+
+			modelType = this.findTypeOfClassInModel(aClass);
+
+			if (modelType != null) {
+				result = new JavaModelInstanceTypeObject(aClass, modelType);
+			}
+
+			else {
+				result = null;
+			}
+
+			/* Cache the created object. */
+			this.myCachedAdaptedTypeObjects.put(aClass, result);
+		}
+
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceTypeObject(Class<?>) - exit"; //$NON-NLS-1$
 			msg += " - reult = " + result; //$NON-NLS-1$
 
 			LOGGER.debug(msg);

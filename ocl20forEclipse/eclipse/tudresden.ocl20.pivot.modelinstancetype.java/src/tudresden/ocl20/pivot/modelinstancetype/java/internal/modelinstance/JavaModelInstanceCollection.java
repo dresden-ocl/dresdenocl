@@ -32,6 +32,7 @@ import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.modelinstancetype.java.factory.JavaModelInstanceObjectFactory;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**

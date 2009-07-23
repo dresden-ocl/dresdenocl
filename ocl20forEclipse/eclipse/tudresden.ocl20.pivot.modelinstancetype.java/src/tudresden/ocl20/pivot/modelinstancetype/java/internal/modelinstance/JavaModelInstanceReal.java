@@ -18,7 +18,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 
 import org.apache.log4j.Logger;
@@ -87,11 +86,11 @@ public class JavaModelInstanceReal extends AbstractModelObject implements
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal#getReal()
 	 */
-	public BigDecimal getReal() {
+	public Double getReal() {
 
-		BigDecimal result;
+		Double result;
 
-		result = BigDecimal.valueOf(this.myNumber.doubleValue());
+		result = this.myNumber.doubleValue();
 
 		return result;
 	}

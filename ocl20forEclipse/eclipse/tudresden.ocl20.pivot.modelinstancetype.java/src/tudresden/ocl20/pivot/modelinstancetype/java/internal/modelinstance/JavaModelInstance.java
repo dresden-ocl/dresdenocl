@@ -27,7 +27,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.IModel;
@@ -36,9 +35,13 @@ import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.modelinstancetype.java.factory.JavaModelInstanceObjectFactory;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -218,6 +221,21 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		// no else.
 
 		this.addObject(newObject);
+
+		/*
+		 * Eventually add the type of the object for static operations and
+		 * properties as well.
+		 */
+		IModelInstanceTypeObject typeObject;
+
+		typeObject =
+				this.myModelInstanceObjectFactory
+						.createModelInstanceTypeObject(anObject.getClass());
+
+		if (typeObject != null) {
+			this.myModelTypeObjects.put(typeObject.getModelType(), typeObject);
+		}
+		// no else.
 	}
 
 	/**
@@ -233,9 +251,9 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	private void addObject(IModelObject modelObject) {
 
 		// FIXME Claas: Reconsider the caching mechanism.
-		
+
 		if (modelObject != null) {
-			this.allMyObjects.add(modelObject);
+			this.myModelObjects.add(modelObject);
 
 			/* Probably add contained elements as well. */
 			if (modelObject instanceof IModelInstanceCollection) {
@@ -251,6 +269,31 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		// no else.
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumerationLiteral(tudresden
+	 * .ocl20.pivot.pivotmodel.EnumerationLiteral)
+	 */
+	public IModelInstanceEnumerationLiteral findEnumerationLiteral(
+			EnumerationLiteral literal) {
+
+		IModelInstanceEnumerationLiteral result;
+		List<IModelObject> allLiteralInstances;
+
+		allLiteralInstances = this.myModelObjectsByType.get(literal);
+
+		if (allLiteralInstances.size() > 0) {
+			result = (IModelInstanceEnumerationLiteral) allLiteralInstances.get(0);
+		}
+
+		else {
+			result = null;
+		}
+
+		return result;
+	}
+
 	/**
 	 * FIXME Claas: REFACTORED_TILL_HERE
 	 */
@@ -262,52 +305,6 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	protected ClassLoader myClassLoader;
 
 	private JavaModelInstanceObjectFactory myModelInstanceObjectFactory;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumLiteral(java.util
-	 * .List)
-	 */
-	public OclEnumLiteral findEnumLiteral(List<String> pathName) {
-
-		OclEnumLiteral result;
-		OclEnumType anEnumerationType;
-
-		List<String> anEnumsPath;
-		String anEnumLiteralsName;
-
-		result = null;
-
-		/* Split the path into the enum's type path and the name of the literal. */
-		anEnumsPath = new ArrayList<String>(pathName);
-		anEnumLiteralsName = anEnumsPath.remove(anEnumsPath.size() - 1);
-
-		/* Try to find the enum's type from the model. */
-		anEnumerationType = this.findEnumType(anEnumsPath);
-
-		/* Check if the enum's type has been found. */
-		if (anEnumerationType != null) {
-
-			/* Try to get the enumeration literal. */
-			try {
-				result =
-						(OclEnumLiteral) anEnumerationType
-								.getPropertyValue(anEnumLiteralsName);
-			}
-
-			catch (NoSuchFieldException e) {
-				/* Do nothing, return null. */
-			}
-
-			catch (IllegalAccessException e) {
-				/* Do nothing, return null. */
-			}
-		}
-		// no else.
-
-		return result;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -371,7 +368,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 			}
 
 			/* Get the model instances' class loader. */
-			aModelObject = this.allMyObjects.get(0);
+			aModelObject = this.myModelObjects.get(0);
 			anUml2ModelObject = (JavaModelInstanceObject) aModelObject;
 
 			modelClassLoader =

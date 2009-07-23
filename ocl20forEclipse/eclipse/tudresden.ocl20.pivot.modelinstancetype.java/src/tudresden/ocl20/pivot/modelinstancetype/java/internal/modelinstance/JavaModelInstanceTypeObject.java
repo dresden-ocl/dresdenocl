@@ -18,63 +18,67 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
-import java.util.HashSet;
-
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
- * Represents an adaptation for {@link Integer}s of a {@link JavaModelInstance}.
+ * Represents an adaptation for {@link Class}es of a {@link JavaModelInstance}.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstanceInteger extends AbstractModelObject implements
-		IModelInstanceInteger {
+public class JavaModelInstanceTypeObject implements IModelInstanceTypeObject {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
-			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceInteger.class);
+			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceTypeObject.class);
 
-	/** The adapted {@link Number} of this {@link JavaModelInstanceInteger}. */
-	private Number myNumber;
+	/** The adapted {@link Class} of this {@link JavaModelInstanceTypeObject}. */
+	private Class<?> myClass;
+
+	/** The adapted {@link Type} of this {@link JavaModelInstanceTypeObject}. */
+	private Type myType;
 
 	/**
 	 * <p>
-	 * Creates a new {@link JavaModelInstanceInteger}.
+	 * Creates a new {@link JavaModelInstanceTypeObject}.
 	 * </p>
 	 * 
-	 * @param number
-	 *          The {@link Number} that shall be adapted by this
-	 *          {@link JavaModelInstanceInteger}.
+	 * @param aClass
+	 *          The adapted {@link Class} of this
+	 *          {@link JavaModelInstanceTypeObject}.
+	 * @param type
+	 *          The {@link Type} of the {@link IModel} that is represented by this
+	 *          {@link JavaModelInstanceTypeObject}.
 	 */
-	public JavaModelInstanceInteger(Number number) {
+	public JavaModelInstanceTypeObject(Class<?> aClass, Type type) {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaModelInstanceInteger("; //$NON-NLS-1$
-			msg += "number = " + number; //$NON-NLS-1$
+			msg = "JavaModelInstanceTypeObject("; //$NON-NLS-1$
+			msg += "aClass = " + aClass; //$NON-NLS-1$
+			msg += ", type = " + type; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
 		// no else.
 
-		this.myNumber = number;
-		this.myTypes = new HashSet<Type>();
+		this.myClass = aClass;
+		this.myType = type;
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaModelInstanceInteger(Number) - exit"; //$NON-NLS-1$
+			msg = "JavaModelInstanceTypeObject(Class, Type) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -83,17 +87,22 @@ public class JavaModelInstanceInteger extends AbstractModelObject implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger#getInteger
-	 * ()
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject#
+	 * getAdaptedType()
 	 */
-	public Long getInteger() {
+	public Class<?> getAdaptedType() {
 
-		Long result;
+		return this.myClass;
+	}
 
-		result = this.myNumber.longValue();
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject#
+	 * getModelType()
+	 */
+	public Type getModelType() {
 
-		return result;
+		return this.myType;
 	}
 
 	/*
@@ -104,9 +113,9 @@ public class JavaModelInstanceInteger extends AbstractModelObject implements
 
 		String result;
 
-		result = JavaModelInstanceInteger.class.getSimpleName();
+		result = JavaModelInstanceTypeObject.class.getSimpleName();
 		result += "[";
-		result += this.myNumber;
+		result += this.myClass;
 		result += "]";
 
 		return result;
