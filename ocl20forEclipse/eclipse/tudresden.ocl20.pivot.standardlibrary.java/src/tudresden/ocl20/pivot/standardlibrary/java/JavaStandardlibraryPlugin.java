@@ -34,6 +34,10 @@ import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IOclInstanceAdapterFactory;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaOclInstanceAdapterFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -50,43 +54,11 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class JavaStandardlibraryPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.standardlibrary.java";
+	public static final String PLUGIN_ID =
+			"tudresden.ocl20.pivot.standardlibrary.java";
 
 	/** The shared instance. */
 	private static JavaStandardlibraryPlugin plugin;
-
-	/**
-	 * <p>
-	 * The constructor.
-	 * </p>
-	 */
-	public JavaStandardlibraryPlugin() {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-
-		/* Starts the logger for this plug-in. */
-		LoggingPlugin.configureDefaultLogging(plugin);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
-	}
 
 	/**
 	 * <p>
@@ -96,7 +68,69 @@ public class JavaStandardlibraryPlugin extends Plugin {
 	 * @return the shared instance
 	 */
 	public static JavaStandardlibraryPlugin getDefault() {
+
 		return plugin;
+	}
+
+	/**
+	 * <p>
+	 * Returns the {@link IOclInstanceAdapterFactory} of the
+	 * {@link JavaStandardlibraryPlugin}.
+	 * </p>
+	 * 
+	 * @return The {@link IOclInstanceAdapterFactory} of the
+	 *         {@link JavaStandardlibraryPlugin}.
+	 */
+	public static IOclInstanceAdapterFactory getOclInstanceAdapterFactory() {
+
+		return JavaOclInstanceAdapterFactory.INSTANCE;
+	}
+
+	/**
+	 * <p>
+	 * Returns the {@link IStandardLibraryFactory} of the
+	 * {@link JavaStandardlibraryPlugin}.
+	 * </p>
+	 * 
+	 * @return The {@link IStandardLibraryFactory} of the
+	 *         {@link JavaStandardlibraryPlugin}.
+	 */
+	public static IStandardLibraryFactory getStandardLibraryFactory() {
+
+		return JavaStandardLibraryFactory.INSTANCE;
+	}
+
+	/**
+	 * <p>
+	 * The constructor.
+	 * </p>
+	 */
+	public JavaStandardlibraryPlugin() {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
+	 */
+	public void start(BundleContext context) throws Exception {
+
+		super.start(context);
+		plugin = this;
+
+		/* Starts the logger for this plug-in. */
+		LoggingPlugin.configureDefaultLogging(plugin);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 */
+	public void stop(BundleContext context) throws Exception {
+
+		plugin = null;
+		super.stop(context);
 	}
 
 }

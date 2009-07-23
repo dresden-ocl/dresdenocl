@@ -30,8 +30,6 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.math.BigInteger;
-
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
@@ -50,25 +48,12 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	 * Instantiates a new {@link JavaOclInteger}.
 	 * </p>
 	 * 
-	 * @param adaptee
-	 *          The adapted element of this {@link JavaOclInteger}.
-	 */
-	public JavaOclInteger(BigInteger adaptee) {
-
-		super(adaptee);
-	}
-
-	/**
-	 * <p>
-	 * Instantiates a new {@link JavaOclInteger}.
-	 * </p>
-	 * 
 	 * @param literal
 	 *          The literal of this {@link JavaOclInteger}.
 	 */
-	public JavaOclInteger(int literal) {
+	public JavaOclInteger(Number literal) {
 
-		this(BigInteger.valueOf(literal));
+		super(literal);
 	}
 
 	/*

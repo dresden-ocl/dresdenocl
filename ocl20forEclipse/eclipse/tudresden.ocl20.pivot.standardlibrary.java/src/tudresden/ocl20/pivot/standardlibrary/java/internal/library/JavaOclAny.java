@@ -87,8 +87,7 @@ public class JavaOclAny extends JavaOclObject implements OclAny {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
 	 */
 	@Override
-	public OclRoot invokeOperation(String operationName,
-			Operation referredOperation, OclRoot... parameters) {
+	public OclRoot invokeOperation(String operationName, OclRoot... parameters) {
 
 		OclRoot result;
 
@@ -96,8 +95,11 @@ public class JavaOclAny extends JavaOclObject implements OclAny {
 		 * On this type, onyl library operation can be invoked, because the type is
 		 * a library type itself.
 		 */
-		result =
-				invokeLibraryOperation(operationName, referredOperation, parameters);
+		try {
+			result = invokeLibraryOperation(operationName, parameters);
+		} catch (NoSuchMethodException e) {
+			return null;
+		}
 
 		return result;
 	}

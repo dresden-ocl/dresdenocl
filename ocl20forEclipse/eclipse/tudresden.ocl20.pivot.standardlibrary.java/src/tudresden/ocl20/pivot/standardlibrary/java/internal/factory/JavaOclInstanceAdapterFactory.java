@@ -19,8 +19,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.factory;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -29,7 +27,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.IOclInstanceAdapterFactory;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
@@ -38,13 +35,17 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IOclInstanceAdapterFactory;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceString;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBag;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclEnumLiteral;
@@ -55,6 +56,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSequence;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSet;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclString;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType;
 
 /**
  * Java implementation for the {@link IOclInstanceAdapterFactory}.
@@ -204,8 +206,8 @@ public class JavaOclInstanceAdapterFactory implements
 			LOGGER.debug("createOclInteger(" + modelInstanceInteger + ") - start");
 		}
 
-		BigInteger adaptedInteger = modelInstanceInteger.getInteger();
-		OclInteger oclInteger = new JavaOclInteger(adaptedInteger);
+		Long adaptedInteger = modelInstanceInteger.getInteger();
+		OclInteger oclInteger = new JavaOclInteger(adaptedInteger.intValue());
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createOclInteger(" + modelInstanceInteger
@@ -221,14 +223,13 @@ public class JavaOclInstanceAdapterFactory implements
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.IOclInstanceAdapterFactory
 	 * #createOclObject(tudresden.ocl20.pivot.modelbus.IModelObject)
 	 */
-	public OclObject createOclObject(IModelObject modelInstanceObject) {
+	public OclObject createOclObject(IModelInstanceObject modelInstanceObject) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createOclObject(" + modelInstanceObject + ") - start");
 		}
 
-		// FIXME[Michael]: modelInstanceObject.getAdaptedObject()
-		Object adaptedObject = modelInstanceObject;
+		Object adaptedObject = modelInstanceObject.getAdaptedObject();
 		OclObject oclObject = new JavaOclObject(adaptedObject);
 
 		if (LOGGER.isDebugEnabled()) {
@@ -253,7 +254,7 @@ public class JavaOclInstanceAdapterFactory implements
 			LOGGER.debug("createOclReal(" + modelInstanceReal + ") - start");
 		}
 
-		BigDecimal adaptedReal = modelInstanceReal.getReal();
+		Double adaptedReal = modelInstanceReal.getReal();
 		OclReal oclReal = new JavaOclReal(adaptedReal);
 
 		if (LOGGER.isDebugEnabled()) {
@@ -286,6 +287,25 @@ public class JavaOclInstanceAdapterFactory implements
 		}
 
 		return oclString;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IOclInstanceAdapterFactory
+	 * #createOclType(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * .IModelInstanceTypeObject)
+	 */
+	public OclType createOclType(IModelInstanceTypeObject modelInstanceTypeObject) {
+
+		OclType result;
+		Class<?> adaptedClass;
+
+		adaptedClass = modelInstanceTypeObject.getAdaptedType();
+
+		result = new JavaOclType(adaptedClass);
+
+		return result;
 	}
 
 	/*
@@ -360,8 +380,9 @@ public class JavaOclInstanceAdapterFactory implements
 			}
 			return result;
 		}
-		else {
-			OclRoot result = createOclObject(modelInstanceObject);
+		else if (modelInstanceObject instanceof IModelInstanceObject) {
+			OclRoot result =
+					createOclObject((IModelInstanceObject) modelInstanceObject);
 
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("createOclRoot(" + modelInstanceObject
@@ -370,6 +391,7 @@ public class JavaOclInstanceAdapterFactory implements
 			return result;
 		}
 
+		return null;
 	}
 
 }

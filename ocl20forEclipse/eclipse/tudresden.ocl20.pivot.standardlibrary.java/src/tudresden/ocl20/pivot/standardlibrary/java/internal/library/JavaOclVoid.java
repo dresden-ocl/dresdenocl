@@ -34,13 +34,12 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 /**
  * <p>
  * Provides an implementation of {@link OclVoid} in Java.
  * </p>
- * 
+ *
  * @author Ronny Brandt
  */
 public class JavaOclVoid extends JavaOclObject implements OclVoid {
@@ -52,12 +51,11 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	 * <p>
 	 * Instantiates a new {@link JavaOclVoid}.
 	 * </p>
-	 * 
+	 *
 	 * @param adaptable
-	 *          The adaptable {@link Class} of this {@link JavaOclVoid}.
+	 *            The adaptable {@link Class} of this {@link JavaOclVoid}.
 	 */
 	private JavaOclVoid(Object adaptee) {
-
 		super(adaptee);
 	}
 
@@ -65,7 +63,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	 * <p>
 	 * Gets the single instance of {@link JavaOclVoid}.
 	 * </p>
-	 * 
+	 *
 	 * @return single instance of {@link JavaOclVoid}.
 	 */
 	public static JavaOclVoid getInstance() {
@@ -81,55 +79,57 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #getPropertyValue(java.lang.String)
 	 */
 	@Override
 	public OclRoot getPropertyValue(String name) {
-
 		return this;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
 	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
-
 		return JavaOclType.getType("OclVoid");
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #invokeOperation(java.lang.String,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
 	 */
 	@Override
-	public OclRoot invokeOperation(String operationName, Operation referredOperation, OclRoot... parameters) {
-
-		return invokeLibraryOperation(operationName, referredOperation, parameters);
+	public OclRoot invokeOperation(String operationName, OclRoot... parameters)
+			throws NoSuchMethodException {
+		return invokeLibraryOperation(operationName, parameters);
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #isOclUndefined()
 	 */
 	@Override
 	public OclBoolean isOclUndefined() {
-
 		return JavaOclBoolean.getInstance(true);
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
