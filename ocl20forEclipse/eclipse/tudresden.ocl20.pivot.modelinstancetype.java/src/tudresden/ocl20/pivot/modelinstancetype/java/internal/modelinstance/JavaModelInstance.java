@@ -20,15 +20,12 @@ package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
@@ -40,7 +37,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.factory.JavaModelInstanceObjectFactory;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -57,6 +53,8 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			JavaModelInstanceTypePlugin.getLogger(JavaModelInstance.class);
+
+	private JavaModelInstanceObjectFactory myModelInstanceObjectFactory;
 
 	/**
 	 * <p>
@@ -91,7 +89,6 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		this.myModel = model;
 		this.myRootNamespace = model.getRootNamespace();
 		this.myInstanceName = providerClass.getCanonicalName();
-		this.myClassLoader = providerClass.getClassLoader();
 
 		this.myModelInstanceObjectFactory =
 				new JavaModelInstanceObjectFactory(this.myModel);
@@ -171,6 +168,110 @@ public class JavaModelInstance extends AbstractModelInstance implements
 
 	/**
 	 * <p>
+	 * Creates and initializes a new {@link JavaModelInstance}.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} of this {@link IModelInstance}.s
+	 * @throws ModelAccessException
+	 */
+	public JavaModelInstance(IModel model)
+			throws ModelAccessException {
+	
+		/* Eventually debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+	
+			msg = "JavaModelInstance("; //$NON-NLS-1$
+			msg += "model = " + model; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+	
+			LOGGER.debug(msg);
+		}
+		// no else.
+	
+		/* Initialize the instance. */
+		this.myModel = model;
+		this.myRootNamespace = model.getRootNamespace();
+	
+		this.myModelInstanceObjectFactory =
+				new JavaModelInstanceObjectFactory(this.myModel);
+		
+		/* Eventually debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+	
+			msg = "JavaModelInstance(IModel) - exit"; //$NON-NLS-1$
+	
+			LOGGER.debug(msg);
+		}
+		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumerationLiteral(tudresden
+	 * .ocl20.pivot.pivotmodel.EnumerationLiteral)
+	 */
+	public IModelInstanceEnumerationLiteral findEnumerationLiteral(
+			EnumerationLiteral literal) {
+	
+		IModelInstanceEnumerationLiteral result;
+		Set<IModelObject> allLiteralsOfEnumeration;
+	
+		result = null;
+	
+		Type enumeration = (Type) literal.getOwner();
+		allLiteralsOfEnumeration =
+				this.myModelObjectsByType.get(enumeration.getQualifiedNameList());
+	
+		for (IModelObject anObject : allLiteralsOfEnumeration) {
+			if (anObject instanceof IModelInstanceEnumerationLiteral) {
+				IModelInstanceEnumerationLiteral aLiteral;
+				aLiteral = (IModelInstanceEnumerationLiteral) anObject;
+	
+				if (aLiteral.getLiteral().name().equals(literal.getName())) {
+					result = aLiteral;
+					break;
+				}
+				// no else.
+			}
+			// no else.
+		}
+	
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Adds a new given {@link Object} as {@link IModelObject} to this
+	 * {@link JavaModelInstance} and returns the adapted {@link IModelObject}. If
+	 * the given {@link Object} has added before, the already added
+	 * {@link IModelObject} will be returned.
+	 * </p>
+	 * 
+	 * @param object
+	 *          The {@link Object} that shall be adapted and added as
+	 *          {@link IModelObject}.
+	 * @return The adapted and added {@link IModelObject}.
+	 * @throws ModelAccessException
+	 *           Thrown, if the given {@link Object} cannot be adapted and added.
+	 */
+	public IModelObject addModelObject(Object object) throws ModelAccessException {
+	
+		IModelObject result;
+		
+		result = this.addObject(object);
+	
+		/* Re-initialize the caching maps for the operations getObjectsOfType etc. */
+		this.initializeCache();
+	
+		return result;
+	}
+
+	/**
+	 * <p>
 	 * Adds a {@link List} of given {@link Object}s to the objects {@link List}.
 	 * </p>
 	 * 
@@ -196,19 +297,20 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 * @param anObject
 	 *          The {@link Object} which shall be added to the {@link List} of
 	 *          {@link IModelObject}s.
+	 * @return The added {@link IModelObject}.
 	 * @throws ModelAccessException
 	 *           Thrown, if the given {@link Object} does not math to the
 	 *           {@link IModel} of this {@link IModelInstance}.
 	 */
-	private void addObject(Object anObject) throws ModelAccessException {
+	private IModelObject addObject(Object anObject) throws ModelAccessException {
 
-		IModelObject newObject;
+		IModelObject result;
 
-		newObject =
+		result =
 				this.myModelInstanceObjectFactory.createModelInstanceObject(anObject);
 
 		/* If no type of the object has been found, throw an exception. */
-		if (newObject == null) {
+		if (result == null) {
 			String msg;
 
 			msg =
@@ -220,7 +322,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		}
 		// no else.
 
-		this.addObject(newObject);
+		this.addObject(result);
 
 		/*
 		 * Eventually add the type of the object for static operations and
@@ -236,6 +338,8 @@ public class JavaModelInstance extends AbstractModelInstance implements
 			this.myModelTypeObjects.put(typeObject.getModelType(), typeObject);
 		}
 		// no else.
+
+		return result;
 	}
 
 	/**
@@ -249,8 +353,6 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 *          of {@link IModelObject}s.
 	 */
 	private void addObject(IModelObject modelObject) {
-
-		// FIXME Claas: Reconsider the caching mechanism.
 
 		if (modelObject != null) {
 			this.myModelObjects.add(modelObject);
@@ -267,237 +369,5 @@ public class JavaModelInstance extends AbstractModelInstance implements
 			// no else.
 		}
 		// no else.
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumerationLiteral(tudresden
-	 * .ocl20.pivot.pivotmodel.EnumerationLiteral)
-	 */
-	public IModelInstanceEnumerationLiteral findEnumerationLiteral(
-			EnumerationLiteral literal) {
-
-		IModelInstanceEnumerationLiteral result;
-		List<IModelObject> allLiteralsOfEnumeration;
-
-		result = null;
-
-		Type enumeration = (Type) literal.getOwner();
-		allLiteralsOfEnumeration =
-				this.myModelObjectsByType.get(enumeration.getQualifiedNameList());
-
-		for (IModelObject anObject : allLiteralsOfEnumeration) {
-			if (anObject instanceof IModelInstanceEnumerationLiteral) {
-				IModelInstanceEnumerationLiteral aLiteral;
-				aLiteral = (IModelInstanceEnumerationLiteral) anObject;
-
-				if (aLiteral.getLiteral().name().equals(literal.getName())) {
-					result = aLiteral;
-					break;
-				}
-				// no else.
-			}
-			// no else.
-		}
-
-		return result;
-	}
-
-	/**
-	 * FIXME Claas: REFACTORED_TILL_HERE
-	 */
-	private static final int REFACTORED_TILL_HERE = 0;
-
-	/**
-	 * The {@link ClassLoader} used to load types of the {@link IModelInstance}.
-	 */
-	protected ClassLoader myClassLoader;
-
-	private JavaModelInstanceObjectFactory myModelInstanceObjectFactory;
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumType(java.util.
-	 * List)
-	 */
-	public OclEnumType findEnumType(List<String> anEnumsPath) {
-
-		OclEnumType result;
-		Type aModelsEnum;
-
-		result = null;
-
-		/* Try to find the enum's type from the model. */
-		if (this.myRootNamespace.getName().equals(anEnumsPath.get(0))) {
-
-			List<String> aTypesPath;
-
-			/* Clone the path list because it will be modified. */
-			aTypesPath = new ArrayList<String>(anEnumsPath);
-			aTypesPath.remove(0);
-
-			aModelsEnum = this.findTypeInNamespace(aTypesPath, this.myRootNamespace);
-		}
-
-		else {
-			aModelsEnum = null;
-		}
-
-		/*
-		 * Check if the enum's type has been found and if the found type is an
-		 * enumeration.
-		 */
-		if (aModelsEnum != null && aModelsEnum instanceof Enumeration) {
-
-			Class<?> anEnumerationsClass;
-
-			IModelObject aModelObject;
-			JavaModelInstanceObject anUml2ModelObject;
-
-			ClassLoader modelClassLoader;
-
-			String anEnumsCanonicalName;
-
-			/* Convert the enum's package list into a canonical name. */
-			anEnumsCanonicalName = null;
-
-			for (String aPackageName : anEnumsPath) {
-
-				if (aPackageName.equals("root") && anEnumsCanonicalName == null) {
-					/* Do nothing, ignore the root package. */
-				}
-
-				else if (anEnumsCanonicalName == null) {
-					anEnumsCanonicalName = aPackageName;
-				}
-
-				else {
-					anEnumsCanonicalName += "." + aPackageName;
-				}
-			}
-
-			/* Get the model instances' class loader. */
-			aModelObject = this.myModelObjects.get(0);
-			anUml2ModelObject = (JavaModelInstanceObject) aModelObject;
-
-			modelClassLoader =
-					anUml2ModelObject.myAdaptedObject.getClass().getClassLoader();
-
-			/* Try to load the enumeration's class. */
-			try {
-				anEnumerationsClass = modelClassLoader.loadClass(anEnumsCanonicalName);
-			}
-
-			catch (ClassNotFoundException e) {
-				anEnumerationsClass = null;
-			}
-
-			/*
-			 * If the found type is an enumeration, try to get the needed literal.
-			 */
-			if (anEnumerationsClass.isEnum()) {
-
-				result =
-						(OclEnumType) Platform.getAdapterManager().getAdapter(
-								anEnumerationsClass, OclEnumType.class);
-			}
-			// no else.
-		}
-		// no else.
-
-		return result;
-	}
-
-	/**
-	 * FIXME Claas: Propably this method could be moved to
-	 * {@link AbstractModelInstance}.
-	 * 
-	 * @param pathName
-	 *          A {@link List} of {@link String}s describing the canonical name of
-	 *          an {@link OclType} from the root package to class name).
-	 * @return The {@link OclType} of a given Type (as a {@link List} of
-	 *         {@link String}s describing its canonical name from the root package
-	 *         to class name).
-	 */
-	public OclType findType(List<String> pathName) {
-
-		OclType result;
-
-		// if (this.allMyObjectsByType.get(pathName) != null
-		// && this.allMyObjectsByType.get(pathName).size() > 0) {
-		// result =
-		// this.allMyObjectsByType.get(pathName).get(0).getOclObject().getType();
-		// }
-		//
-		// else {
-		result = null;
-		// }
-
-		return result;
-	}
-
-	/**
-	 * @param pathName
-	 *          A {@link List} of {@link String}s describing the canonical name of
-	 *          an {@link OclType} from the root package to class name).
-	 * @return The {@link OclType} of a given Type (as a {@link List} of
-	 *         {@link String}s describing its canonical name from the root package
-	 *         to class name).
-	 */
-	public OclType findType_old(List<String> pathName) {
-
-		// Class<?> typeClass;
-		// OclType result;
-		// ArrayList<String> packagelist;
-		//	
-		// typeClass = null;
-		// result = null;
-		// packagelist = new ArrayList<String>(pathName);
-		//	
-		// /* Check if the given pathName leads to a type in the model. */
-		// if (this.isObjectOfModel(pathName)) {
-		//	
-		// String path;
-		// Iterator<String> pathIterator;
-		//	
-		// /* Eventually remove the rootPackage's name from the pathName. */
-		// if (this.myRootNamespace.getName().equals(packagelist.get(0))) {
-		// packagelist.remove(0);
-		// }
-		// // no else.
-		//	
-		// path = packagelist.remove(0);
-		// pathIterator = packagelist.iterator();
-		//	
-		// while (pathIterator.hasNext()) {
-		// path = path + "." + pathIterator.next();
-		// }
-		//	
-		// /* Try to load the class for the given path. */
-		// try {
-		// typeClass = this.myClassLoader.loadClass(path);
-		//	
-		// /* Check if the loaded types is already known. */
-		// result = this.myKnownTypes.get(typeClass);
-		//	
-		// /* Check if the loaded type is already known; else load him. */
-		// if (result == null) {
-		// result =
-		// (OclType) Platform.getAdapterManager().getAdapter(typeClass,
-		// OclType.class);
-		// this.myKnownTypes.put(typeClass, result);
-		// }
-		// // no else.
-		// }
-		//	
-		// catch (ClassNotFoundException e) {
-		// /* Do nothing; return null. */
-		// }
-		//	
-		// }
-		//	
-		// return result;
-		return null;
 	}
 }
