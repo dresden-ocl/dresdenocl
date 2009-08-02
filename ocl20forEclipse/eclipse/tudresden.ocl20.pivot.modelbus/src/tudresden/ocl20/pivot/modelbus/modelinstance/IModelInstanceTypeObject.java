@@ -20,7 +20,6 @@ package tudresden.ocl20.pivot.modelbus.modelinstance;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**

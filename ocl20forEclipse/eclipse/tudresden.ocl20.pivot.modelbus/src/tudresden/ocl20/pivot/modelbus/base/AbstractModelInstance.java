@@ -39,7 +39,6 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
@@ -97,7 +96,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	protected IModel myModel;
 
 	/** Contains all {@link Object}s of this model instance. */
-	protected List<IModelObject> myModelObjects = new ArrayList<IModelObject>();
+	protected Set<IModelObject> myModelObjects = new HashSet<IModelObject>();
 
 	/**
 	 * <p>
@@ -105,8 +104,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * type's name.
 	 * </p>
 	 */
-	protected Map<List<String>, List<IModelObject>> myModelObjectsByType =
-			new HashMap<List<String>, List<IModelObject>>();
+	protected Map<List<String>, Set<IModelObject>> myModelObjectsByType =
+			new WeakHashMap<List<String>, Set<IModelObject>>();
 
 	/**
 	 * <p>
@@ -141,13 +140,94 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 	/*
 	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDisplayName()
+	 */
+	public String getDisplayName() {
+	
+		return this.myInstanceName;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getObjects()
+	 */
+	public List<IModelObject> getObjects() {
+	
+		return new ArrayList<IModelObject>(this.myModelObjects);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getObjectsOfType(java.util
 	 * .List)
 	 */
 	public List<IModelObject> getObjectsOfType(List<String> typePath) {
 
-		return this.myModelObjectsByType.get(typePath);
+		return new ArrayList<IModelObject>(this.myModelObjectsByType.get(typePath));
+	}
+
+	/**
+	 * @return A {@link Set} containing {@link Type}s in this model instance.
+	 */
+	public Set<Type> getObjectTypes() {
+	
+		Set<Type> retSet = new HashSet<Type>();
+	
+		for (IModelObject modelObject : myModelObjects) {
+			retSet.addAll(modelObject.getTypes());
+		}
+	
+		return retSet;
+	
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang
+	 * .String, int)
+	 */
+	public String getOperationName(String name, int operatorCount) {
+	
+		String result;
+		Map<String, String> operationMap;		
+		
+		result = null;
+		operationMap = operationNames.get(operatorCount);
+	
+		if (operationMap != null) {
+			
+			result = operationMap.get(name);
+		}
+		// no else.
+		
+		if (result == null) {
+			result = name;
+		}
+		// no else.
+		
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getModel()
+	 */
+	public IModel getModel() {
+	
+		return this.myModel;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.IModelInstance#isInstanceOf(tudresden.ocl20
+	 * .pivot.modelbus.IModel)
+	 */
+	public boolean isInstanceOf(IModel aModel) {
+	
+		return this.myModel.equals(aModel);
 	}
 
 	/**
@@ -166,9 +246,11 @@ public abstract class AbstractModelInstance implements IModelInstance {
 				if (myModelObjectsByType.containsKey(qualifiedNameList)) {
 					myModelObjectsByType.get(qualifiedNameList).add(modelObject);
 				}
+
 				else {
-					List<IModelObject> modelObjects = new ArrayList<IModelObject>();
+					Set<IModelObject> modelObjects = new HashSet<IModelObject>();
 					modelObjects.add(modelObject);
+
 					myModelObjectsByType.put(qualifiedNameList, modelObjects);
 				}
 
@@ -176,275 +258,5 @@ public abstract class AbstractModelInstance implements IModelInstance {
 			// end for.
 		}
 		// end for.
-	}
-
-	/** FIXME Claas: REFACTORED_TILL_HERE */
-	private static final int REFACTORED_TILL_HERE = 0;
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDisplayName()
-	 */
-	public String getDisplayName() {
-
-		return this.myInstanceName;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getModel()
-	 */
-	public IModel getModel() {
-
-		return this.myModel;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getObjects()
-	 */
-	public List<IModelObject> getObjects() {
-
-		return this.myModelObjects;
-	}
-
-	/**
-	 * @return A {@link Set} containing {@link Type}s in this model instance.
-	 */
-	public Set<Type> getObjectTypes() {
-
-		Set<Type> retSet = new HashSet<Type>();
-
-		for (IModelObject modelObject : myModelObjects) {
-			retSet.addAll(modelObject.getTypes());
-		}
-
-		return retSet;
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang
-	 * .String, int)
-	 */
-	public String getOperationName(String name, int operatorCount) {
-
-		Map<String, String> opMap = operationNames.get(operatorCount);
-		if (opMap != null) {
-			String ret = opMap.get(name);
-			if (ret != null)
-				return ret;
-		}
-		return name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#isInstanceOf(tudresden.ocl20
-	 * .pivot.modelbus.IModel)
-	 */
-	public boolean isInstanceOf(IModel aModel) {
-
-		return this.myModel.equals(aModel);
-	}
-
-	/**
-	 * <p>
-	 * A helper methods used to find the {@link Type} to a given path in a given
-	 * {@link Namespace} of this {@link JavaModelInstance}.
-	 * </p>
-	 * 
-	 * @param aPackagePath
-	 *          The path of the {@link Type} which shall be searched for.
-	 * @param aNamespace
-	 *          The {@link Namespace} in which shall be searched for the
-	 *          {@link Type}.
-	 * @return the found {@link Type} or null.
-	 * 
-	 */
-	protected Type findTypeInNamespace(List<String> aPackagePath,
-			Namespace aNamespace) {
-
-		Type result;
-
-		result = null;
-
-		/* Check if the searched type is located in a nested name space. */
-		if (aPackagePath.size() > 1) {
-
-			List<Namespace> nestedNamespaces;
-			String currentPackage;
-
-			nestedNamespaces = aNamespace.getNestedNamespace();
-			currentPackage = aPackagePath.remove(0);
-
-			/* Check if any nested name space matches the actual package's name. */
-			for (Namespace aNestedNamespace : nestedNamespaces) {
-
-				String aNestedNamespacesName;
-
-				aNestedNamespacesName = aNestedNamespace.getName();
-
-				if (aNestedNamespacesName.equals(currentPackage)) {
-
-					result = this.findTypeInNamespace(aPackagePath, aNestedNamespace);
-					break;
-				}
-				// no else.
-			}
-		}
-
-		/* Else search for the type in this name space. */
-		else {
-
-			List<Type> ownedTypes;
-
-			ownedTypes = aNamespace.getOwnedType();
-
-			/* Check if any type matches the type's name. */
-			for (Type aType : ownedTypes) {
-
-				String aTypesName;
-
-				aTypesName = aType.getName();
-
-				if (aTypesName.equals(aPackagePath.get(0))) {
-					result = aType;
-					break;
-				}
-				// no else.
-			}
-			// end for.
-		}
-		// end else.
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Checks if a given model object (as a {@link List} of {@link String}s
-	 * representing its canonical name) is object of the given model.
-	 * </p>
-	 * 
-	 * @param pathName
-	 *          The canonical name of the model object as a {@link List} of
-	 *          {@link String}s.
-	 * @return True if the given object is an object of the given model.
-	 */
-	protected boolean isObjectOfModel(List<String> pathName) {
-
-		boolean result;
-		List<String> modifiedPathname;
-
-		result = true;
-
-		modifiedPathname = new ArrayList<String>(pathName);
-
-		/* If the rootNamespace is contained in the pathName, remove him. */
-		if (this.myRootNamespace.getName().equals(modifiedPathname.get(0))) {
-			modifiedPathname.remove(0);
-		}
-		// no else.
-
-		if (this.myRootNamespace != null) {
-
-			Namespace aPackage;
-			int index;
-
-			index = 0;
-			aPackage = this.myRootNamespace;
-
-			while (result && index < modifiedPathname.size()) {
-
-				String packageName;
-
-				result = false;
-
-				packageName = modifiedPathname.get(index);
-
-				if (index < modifiedPathname.size() - 1) {
-
-					List<Namespace> nestedNamespaces;
-
-					nestedNamespaces = aPackage.getNestedNamespace();
-
-					/* Search the next sub package. */
-					for (Namespace aNamespace : nestedNamespaces) {
-
-						if (aNamespace.getName().equals(packageName)) {
-							aPackage = aNamespace;
-							result = true;
-							break;
-						}
-					}
-				}
-
-				else {
-					List<Type> ownedTypes;
-
-					ownedTypes = aPackage.getOwnedType();
-
-					/* Search the next sub package. */
-					for (Type aType : ownedTypes) {
-
-						if (aType.getName().equals(packageName)) {
-							result = true;
-							break;
-						}
-					}
-				}
-
-				index++;
-			}
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
-	}
-
-	/**
-	 * <p>
-	 * Convert a given path (as a {@link List} of {@link String}s) into a Java
-	 * canonical class name.
-	 * </p>
-	 * 
-	 * @param path
-	 *          The path which shall be converted.
-	 * @return A canonical name.
-	 */
-	protected String toCanonicalName(List<String> path) {
-
-		String result;
-
-		result = "";
-
-		/* Clone the given path. */
-		path = new ArrayList<String>(path);
-
-		/* Eventually remove the root package. */
-		if (path.size() > 0
-				&& path.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
-			path.remove(0);
-		}
-		// no else.
-
-		/* Iterate through the packages and generate the path. */
-		for (int index = 0; index < path.size() - 1; index++) {
-			result += path.get(index) + ".";
-		}
-
-		if (path.size() > 0) {
-			result += path.get(path.size());
-		}
-		// no else.
-
-		return result;
 	}
 }
