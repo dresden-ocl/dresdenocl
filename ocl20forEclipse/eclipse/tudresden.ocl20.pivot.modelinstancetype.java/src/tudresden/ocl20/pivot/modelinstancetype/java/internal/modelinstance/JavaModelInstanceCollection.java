@@ -118,11 +118,11 @@ public class JavaModelInstanceCollection extends AbstractModelObject implements
 		Collection<IModelObject> result;
 
 		/* Initializes the result collection. */
-		if (this.myContainedObjects instanceof SortedSet) {
+		if (this.myContainedObjects instanceof SortedSet<?>) {
 			result = new TreeSet<IModelObject>();
 		}
 
-		else if (this.myContainedObjects instanceof Set) {
+		else if (this.myContainedObjects instanceof Set<?>) {
 			result = new HashSet<IModelObject>();
 		}
 
@@ -150,7 +150,7 @@ public class JavaModelInstanceCollection extends AbstractModelObject implements
 
 		result = true;
 
-		if (!(this.myContainedObjects instanceof Set)) {
+		if (!(this.myContainedObjects instanceof Set<?>)) {
 			result = false;
 		}
 
@@ -169,7 +169,7 @@ public class JavaModelInstanceCollection extends AbstractModelObject implements
 
 		result = false;
 
-		if (this.myContainedObjects instanceof List) {
+		if (this.myContainedObjects instanceof List<?>) {
 			result = true;
 		}
 		// no else.
