@@ -55,9 +55,10 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *            The adapted element of this {@link OclBoolean}.
+	 *          The adapted element of this {@link OclBoolean}.
 	 */
 	private JavaOclBoolean(Boolean adaptee) {
+
 		super(adaptee);
 	}
 
@@ -68,7 +69,7 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 	 * </p>
 	 * 
 	 * @param value
-	 *            Specifies whether true or false shall be returned.
+	 *          Specifies whether true or false shall be returned.
 	 * 
 	 * @return single instance of JavaOclBoolean
 	 */
@@ -93,7 +94,6 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#and(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
@@ -102,16 +102,16 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
-		if (!this.isTrue() || !aBoolean.isTrue()) {
-			result = FALSE;
-		}
-
-		else if (this.isOclUndefined().isTrue()) {
+		if (this.isOclUndefined().isTrue()) {
 			result = this;
 		}
 
 		else if (aBoolean.isOclUndefined().isTrue()) {
 			result = aBoolean;
+		}
+
+		else if (!this.isTrue() || !aBoolean.isTrue()) {
+			result = FALSE;
 		}
 
 		else {
@@ -123,37 +123,34 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#ifThenElse
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	public OclRoot ifThenElse(OclRoot thenStatement, OclRoot elseStatement) {
-	
+
 		OclRoot result;
-	
+
 		/* Check if this boolean is undefined. */
 		if (isOclUndefined().isTrue()) {
 			result = JavaOclInvalid.getInstance();
 		}
-	
+
 		else if (this.isTrue()) {
 			result = thenStatement;
 		}
-	
+
 		else {
 			result = elseStatement;
 		}
-	
+
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#implies
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#implies
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
 	 */
 	public OclBoolean implies(OclBoolean aBoolean) {
@@ -166,7 +163,7 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 		}
 
 		else {
-		result = this.not().or(this.and(aBoolean));
+			result = this.not().or(this.and(aBoolean));
 		}
 
 		return result;
@@ -174,17 +171,15 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#isTrue()
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#isTrue()
 	 */
 	public boolean isTrue() {
+
 		return ((Boolean) this.getAdaptee()).booleanValue();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#not()
 	 */
 	public OclBoolean not() {
@@ -194,7 +189,7 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 		if (isOclUndefined().isTrue()) {
 			result = this;
 		}
-		
+
 		else if (this.isTrue()) {
 			result = FALSE;
 		}
@@ -216,7 +211,6 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#or(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
@@ -250,18 +244,17 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#xor(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
 	 */
 	public OclBoolean xor(OclBoolean aBoolean) {
+
 		return this.isNotEqualTo(aBoolean);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
@@ -303,13 +296,12 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
+
 		return JavaOclPrimitiveType.getType("Boolean");
 	}
 }

@@ -146,6 +146,7 @@ public class JavaOclInstanceAdapterFactory implements
 	 * #createOclCollection(tudresden.ocl20.pivot.modelbus.modelinstance.
 	 * IModelInstanceCollection)
 	 */
+	@SuppressWarnings("unchecked")
 	public OclCollection<OclRoot> createOclCollection(
 			IModelInstanceCollection modelInstanceCollection) {
 

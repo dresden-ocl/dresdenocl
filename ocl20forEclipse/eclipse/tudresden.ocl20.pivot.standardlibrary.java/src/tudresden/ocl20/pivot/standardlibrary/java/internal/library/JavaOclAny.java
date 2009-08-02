@@ -33,7 +33,6 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 /**
  * <p>
