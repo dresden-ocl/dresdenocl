@@ -65,6 +65,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSet;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclString;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclTuple;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclTupleType;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclVoid;
 
 /**
@@ -361,7 +362,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			modelInstanceTypeObject = modelInstance.findModelTypeObject(type);
 
 			if (modelInstanceTypeObject != null) {
-				result = new JavaOclTupleType(modelInstanceTypeObject.getAdaptedType());
+				result = new JavaOclType(modelInstanceTypeObject.getAdaptedType());
 			}
 
 			else {

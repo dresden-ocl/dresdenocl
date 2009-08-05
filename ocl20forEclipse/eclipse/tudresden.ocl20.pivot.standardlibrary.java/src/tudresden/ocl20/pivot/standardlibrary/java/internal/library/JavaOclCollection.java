@@ -55,7 +55,7 @@ import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
  * <p>
  * This class implements the OCL type {@link OclCollection} in Java.
  * </p>
- *
+ * 
  * @author Ronny Brandt
  */
 public abstract class JavaOclCollection<T extends OclRoot> extends
@@ -68,17 +68,17 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	 * <p>
 	 * Instantiates a new {@link JavaOclCollection}.
 	 * </p>
-	 *
+	 * 
 	 * @param adaptee
-	 *            The adapted element of this {@link JavaOclCollection}.
+	 *          The adapted element of this {@link JavaOclCollection}.
 	 */
 	public JavaOclCollection(Collection<T> adaptee) {
+
 		super(adaptee);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #asSet()
@@ -111,7 +111,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
 	 * #getType()
@@ -129,8 +128,8 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 			adaptedCollection = (Collection<T>) getAdaptee();
 
 			/*
-			 * If this collection contains elements, use an element to evaluate
-			 * the generic type.
+			 * If this collection contains elements, use an element to evaluate the
+			 * generic type.
 			 */
 			if ((adaptedCollection.size() > 0)) {
 
@@ -147,8 +146,9 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 				elementType = JavaOclType.getType("OclVoid");
 			}
 
-			this.type = JavaOclCollectionType.getType(
-					OclCollectionTypeKind.COLLECTION, elementType);
+			this.type =
+					JavaOclCollectionType.getType(OclCollectionTypeKind.COLLECTION,
+							elementType);
 		}
 		// no else.
 
@@ -157,7 +157,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
@@ -167,7 +166,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #invokeOperation(java.lang.String,
@@ -176,12 +174,12 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 	@Override
 	public OclRoot invokeOperation(String operationName, OclRoot... parameters)
 			throws NoSuchMethodException {
+
 		return this.invokeLibraryOperation(operationName, parameters);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asBag()
 	 */
@@ -211,7 +209,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asOrderedSet
 	 * ()
@@ -242,7 +239,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asSequence
 	 * ()
@@ -273,9 +269,7 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#count
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#count
 	 * (java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
@@ -298,7 +292,8 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 			/* Iterate through this collection. */
 			for (T anElement : (Collection<T>) this.getAdaptee()) {
 
-				if (anObject.isEqualTo(anElement).isTrue()) {
+				if (!anObject.isOclUndefined().isTrue()
+						|| anObject.isEqualTo(anElement).isTrue()) {
 					intResult++;
 				}
 				// no else.
@@ -312,18 +307,17 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#excludes
 	 * (java.lang.Object)
 	 */
 	public OclBoolean excludes(T o) {
+
 		return includes(o).not();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#excludesAll
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
@@ -379,7 +373,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#getIterator
 	 * ()
@@ -389,15 +382,14 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 		OclIterator<T> result;
 
-		result = new JavaOclIterator<T>(((Collection<T>) this.getAdaptee())
-				.iterator());
+		result =
+				new JavaOclIterator<T>(((Collection<T>) this.getAdaptee()).iterator());
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#includes
 	 * (java.lang.Object)
@@ -427,7 +419,8 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 			adaptedCollection = (Collection<T>) this.getAdaptee();
 
 			for (T anElement : adaptedCollection) {
-				if (anObject.isEqualTo(anElement).isTrue()) {
+				if (!anElement.isOclUndefined().isTrue()
+						&& anElement.isEqualTo(anObject).isTrue()) {
 					boolResult = true;
 					break;
 				}
@@ -442,7 +435,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#includesAll
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
@@ -471,13 +463,18 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 			anAdaptedCollection = (Collection<T>) aCollection.getAdaptee();
 			adaptedResult = true;
 			/*
-			 * Check if all elements of anAdaptedCollection are contained in
-			 * this collection.
+			 * Check if all elements of anAdaptedCollection are contained in this
+			 * collection.
 			 */
 			for (T anElement : anAdaptedCollection) {
 
+				OclBoolean isElementContained;
+				isElementContained = this.includes(anElement);
+
 				/* If an element is not contained, return false. */
-				if (!this.includes(anElement).isTrue()) {
+
+				if (isElementContained.isOclUndefined().isTrue()
+						|| !isElementContained.isTrue()) {
 					adaptedResult = false;
 					break;
 				}
@@ -492,10 +489,8 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#isEmpty
-	 * ()
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#isEmpty ()
 	 */
 	@SuppressWarnings("unchecked")
 	public OclBoolean isEmpty() {
@@ -523,7 +518,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#notEmpty
 	 * ()
@@ -539,7 +533,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#product
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
@@ -577,8 +570,7 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 			OclIterator<T> selfIt;
 			OclIterator<T2> colIt;
 
-			resultSet = new HashSet<OclTuple>((Integer) this.size()
-					.getAdaptee());
+			resultSet = new HashSet<OclTuple>((Integer) this.size().getAdaptee());
 
 			selfIt = getIterator();
 			colIt = aCollection.getIterator();
@@ -603,7 +595,6 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#size()
 	 */
@@ -633,9 +624,7 @@ public abstract class JavaOclCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 *
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#sum()
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#sum()
 	 */
 	@SuppressWarnings("unchecked")
 	public T sum() {
