@@ -405,14 +405,14 @@ FUNCTION {format.names}
       t  v  *  fkt  *  't :=
       nameptr #1 >
          { namesleft #1 >
-             { " ; " * t * }
+             { "; " * t * }
              { numnames #2 >
                   { " " * }
                   'skip$
                if$
-               t "\textsc{others}" = t "\textsc{others} (Hrsg.)" = or
+               t "\textsc{others}" = t "\textsc{others} (ed.)" = or
                   { ua.etal * }
-                  { " ; " * t * }
+                  { "; " * t * }
                if$
                }
             if$  %% Ende der namesleft-Pruefung
@@ -442,11 +442,11 @@ FUNCTION {format.editors}
      if$
    }
    { author empty$
-        { " (Hrsg.)" 'fkt :=
+        { " (ed.)" 'fkt :=
           editor format.names
         }
-        { " (Hrsg.)" 'fkt :=
-          " ; " * editor format.names *
+        { " (ed.)" 'fkt :=
+          "; " * editor format.names *
         }
       if$
    }
@@ -479,9 +479,9 @@ FUNCTION { format.authors.organization }
                  if$
                }
                { author empty$
-                   { organization capitalize " (Hrsg.)" * }
-                   { author format.names " ; " *
-                     organization capitalize * " (Hrsg.)" *
+                   { organization capitalize " (ed.)" * }
+                   { author format.names "; " *
+                     organization capitalize * " (ed.)" *
                    }
                  if$
                }
@@ -499,7 +499,7 @@ FUNCTION { format.editors.organization }
     'skip$
     { type$ "misc" =
         { organization }
-        { * " ; " * organization " (Veranst.)" *}
+        { * "; " * organization " (Veranst.)" *}
       if$
     }
   if$
@@ -515,7 +515,7 @@ FUNCTION { format.tr.institution }
 FUNCTION {format.ed.incoll}
 { editor empty$
      { "" }
-     { " (Hrsg.)" 'fkt :=
+     { " (ed.)" 'fkt :=
        editor format.names
        format.editors.organization
      }
@@ -926,14 +926,14 @@ FUNCTION {format.btitle.vol}
    { series empty$
      { volume empty$
         { title emphasize }
-        { title emphasize ". Bd." * volume tie.or.space.connect }
+        { title emphasize ". Vol." * volume tie.or.space.connect }
        if$
      }
      { volume empty$
         { title emphasize }%% ein Buch, das zusaetzl. SERIES=Reihentitel besitzt
     %% jetzt kommt d. Fall des mehrbaendigen Werkes mit Gesamttitel=SERIES
     %% Zaehlung=VOLUME und Bandtitel=TITLE;
-        { series emphasize ". Bd." * volume tie.or.space.connect
+        { series emphasize ". Vol." * volume tie.or.space.connect
                                  ": " * "{\emph{" * title * "}}" * }
        if$
      }
@@ -1027,7 +1027,7 @@ FUNCTION {format.pages}
 { pages empty$
     { "" }
     { url empty$
-        { "S." pages n.dashify  tie.or.space.connect }
+        { "pages" pages n.dashify  tie.or.space.connect }
         { pages }
       if$
     }
@@ -1063,7 +1063,7 @@ FUNCTION {format.bkpages.collat.check}
       collation 'collrest :=
        { collrest #0 > }
        { s ptr #2 substring$ 't :=
-         t "S." =
+         t "page" =
            { format.pages.bkcollation
              #0 'collrest := }
            { ptr #1 + 'ptr :=
@@ -1092,7 +1092,7 @@ FUNCTION {format.vol.year.num.pages}
     if$
     number empty$
       'skip$
-      { ", Nr. " number * * }
+      { ", No. " number * * }
     if$
     pages empty$
         'skip$
@@ -1147,14 +1147,14 @@ FUNCTION {format.in.ed.booktitle.din}
         { volume empty$
             { "{In: }" booktitle emphasize * }
             { "{In: }" booktitle emphasize *
-              " Bd." volume tie.or.space.connect *
+              " Vol." volume tie.or.space.connect *
             }
           if$
         }
         { volume empty$
             { "{In: }" format.ed.incoll * ": " * booktitle emphasize * }
             { "{In: }" format.ed.incoll * ": " * booktitle emphasize *
-              " Bd." volume tie.or.space.connect *
+              " Vol." volume tie.or.space.connect *
             }
           if$
         }
@@ -1188,7 +1188,7 @@ FUNCTION {format.article.crossref}
 }
 
 FUNCTION {format.crossref.editor}
- { editor #1 "{ll}" format.name$ " (Hrsg.)" *
+ { editor #1 "{ll}" format.name$ " (ed.)" *
    editor num.names$ duplicate$
    #2 >
     { pop$ ua.etal * }%% --->u. a.
@@ -1196,7 +1196,7 @@ FUNCTION {format.crossref.editor}
         'skip$
         { editor #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
             { ua.etal }
-            { " ; " * editor #2 "{vv~}{ll}" format.name$ * " (Hrsg.)" * }
+            { "; " * editor #2 "{vv~}{ll}" format.name$ * " (ed.)" * }
           if$
         }
       if$
@@ -1208,10 +1208,10 @@ FUNCTION {format.inbk.vol.title}
 { volume empty$
      { " In: " }
      { title empty$
-        { " In: Bd." volume tie.or.space.connect
+        { " In: Vol." volume tie.or.space.connect
                 " von " *
         }
-        { "In: Bd." volume tie.or.space.connect ": " * title emphasize *
+        { "In: Vol." volume tie.or.space.connect ": " * title emphasize *
                      " (" * year * ") in " *
         }
       if$
@@ -1227,7 +1227,7 @@ FUNCTION {format.book.crossref}
        { "empty volume in " cite$ * "'s crossref of " * crossref * warning$
          " "
        }
-       { ". -- Bd." volume tie.or.space.connect
+       { ". -- Vol." volume tie.or.space.connect
           " von " *
        }
      if$
@@ -1293,7 +1293,7 @@ FUNCTION {article}
   format.doi.urn output
   issn set.period.dash.check
   format.isbn.issn output
-  note set.period.dash.check
+%  note set.period.dash.check
   note output
   fin.entry
 }
@@ -1325,9 +1325,9 @@ FUNCTION {book}
   format.doi output
   format.url output
   new.block
-  isbn set.period.dash.check
+%  isbn set.period.dash.check
   format.isbn.issn output
-  note set.period.dash.check
+%  note set.period.dash.check
   note output
   fin.entry
 }
@@ -1462,7 +1462,7 @@ FUNCTION {inproceedings}
   if$
   part.of.sentence
   format.pages "pages" output.check
-  note set.period.dash.check
+ % note set.period.dash.check
   note output
   fin.entry
 }
@@ -1548,7 +1548,7 @@ FUNCTION {mastersthesis}
       pages format.bkpages.collat.check output
     }
   if$
-  note set.period.dash.check
+  %note set.period.dash.check
   note output
   fin.entry
 }
@@ -1736,7 +1736,7 @@ FUNCTION {proceedings}
   format.btitle "title" output.check
   volume empty$
     { skip$ }
-    { "{\textnormal{Bd.}}" volume tie.or.space.connect emphasize "volume" output.check }
+    { "{\textnormal{Vol.}}" volume tie.or.space.connect emphasize "volume" output.check }
   if$
   format.address.publisher.year "publisher" output.check
   new.sentence
@@ -1777,10 +1777,10 @@ FUNCTION {techreport}
   format.version.url output
   format.online.lastcheck
   format.address.publisher.year output
+%  "Forschungsbericht" format.thesis.tr.type set.period.dash.check
+  "Forschungsbericht" format.thesis.tr.type output
   number new.sentence.checka
   format.tr.series.or.number "number" output.check
-  "Forschungsbericht" format.thesis.tr.type set.period.dash.check
-  "Forschungsbericht" format.thesis.tr.type output
 %%  format.digital.resource.type
   pages empty$
     { skip$ }

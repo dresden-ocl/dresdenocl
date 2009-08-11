@@ -1,0 +1,119 @@
+\documentclass[color]{tudbook}
+\usepackage{tudthesis}
+
+\usepackage[ngerman,english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{graphicx}
+
+% Used for a list of abbreveations. %
+\usepackage[printonlyused]{acronym}
+	
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+
+
+% Für listings
+\usepackage{listings}
+\lstset{
+  frame=single,
+  frameround=tttt,
+  xleftmargin=0.7cm,
+  xrightmargin=0.3cm,
+  numbers=left,
+  basicstyle=\fontfamily{pcr} \small \color{black},
+  keywordstyle=\bfseries \color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{darkgreen},
+	breaklines=true,
+	showstringspaces=false
+}
+
+\newcommand{\model}[1]{{\begin{ttfamily}#1\end{ttfamily}}}
+\newcommand{\reference}[1]{{\begin{ttfamily}#1\end{ttfamily}}}
+\newcommand{\keyword}[1]{{\begin{itshape}#1\end{itshape}}}
+\newcommand{\eclipse}[1]{{\begin{itshape}#1\end{itshape}}}
+
+% Define Faculty and Institute
+\einrichtung{Faculty of Computer Science}
+\institut{Institute of Software- and Multimedia-Technology}
+\professur{Software Technology Group}
+
+% Define the title of the thesis
+\title{Dresden OCL2 for Eclipse}
+\subtitle{Manual for Installation, Use and Development}
+% Specify the author of the thesis
+\author{Claas Wilke}
+% Specify the date on which the thesis is handed in
+\date{Last update: \today}
+
+% Für Metadaten im PDF.
+\usepackage[
+  bookmarksnumbered=true,
+  pdftitle={Dresden OCL2 for Eclipse - Manual},
+  pdfauthor={Claas Wilke},
+  pdfcreator={TeXnicCenter},
+  pdfkeywords={OCL, Dresden OCL, constraints},
+  pdfsubject={The Dresden OCL2 for Eclipse manual.}
+]{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=HKS41-100,
+  citecolor=HKS41-100,
+  filecolor=HKS41-100,
+  menucolor=HKS41-100,
+  urlcolor=HKS41-100
+} 
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\include{chapters/abstract}
+
+
+\tableofcontents
+
+
+\part{Using Dresden OCL2 for Eclipse}
+
+\include{chapters/introduction}
+\include{chapters/interpretation}
+\include{chapters/codegeneration}
+
+
+\part{Development with Dresden OCL2 for Eclipse}
+
+\include{chapters/architecture}
+
+\chapter{Adapting a Meta-Model to the Pivot Model}
+\label{chapter:pivotModelAdaptation}
+TODO: This chapter has not been written yet.
+
+\include{chapters/logging}
+
+\chapter{The General Test Suite of Dresden OCL2 for Eclipse}
+\label{chapter:generalTestSuite}
+TODO: This chapter has not been written yet.
+
+\chapter{The Meta-Model Test Suite of Dresden OCL2 for Eclipse}
+\label{chapter:metaModelTestSuite}
+TODO: This chapter has not been written yet.
+
+
+\part{Appendix}
+\appendix
+
+\include{chapters/appendix}
+
+
+\end{document}

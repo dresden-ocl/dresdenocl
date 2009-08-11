@@ -186,6 +186,35 @@
 \fi%
 \pagestyle{headings}
 
+
+
+\renewcommand*{\part}[1]{
+    \addtocounter{part}{1}
+ 
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{part}{#1}
+
+    \pagecolor{HKS41-010}\color{HKS41-100}
+    \vspace*{55mm}%
+    {\parindent\z@\raggedright\normalfont%
+    \interlinepenalty\@M%
+    \dinBold\Huge\bfseries{%
+        \ifnum \c@secnumdepth >\m@ne\if@mainmatter%
+            \begin{list}{}{\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}%
+                           \settowidth{\labelwidth}{\thepart}\setlength{\leftmargin}{2em}%
+                           \setlength{\labelsep}{2em}\addtolength{\labelsep}{-\labelwidth}}
+                \item[\thepart]\MakeUppercase{#1}%
+            \end{list}%
+        \fi\fi%
+    }\par\nobreak%
+    \vskip 2ex}%
+    \vfill\pagebreak%
+    \pagecolor{white}\color{black}
+}
+
+
+
 \newif\if@chapterpage
 \newcommand*{\chapterpage}{\@chapterpagetrue}
 
