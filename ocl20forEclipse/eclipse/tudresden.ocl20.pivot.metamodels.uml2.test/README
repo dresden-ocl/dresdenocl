@@ -1,0 +1,10 @@
+GENERIC META-MODEL TEST SUITE
+=============================
+
+This plug-in contains implements the Generic Meta-Model Test Suite 
+to test the adaptation of the UML2 meta-model to the Pivot Model of
+Dresden OCL2 for Eclipse.
+
+For further details please read the chapter 'The Generic Meta-Model
+Test Suite' of the toolkit's manual that is located in the 'doc' 
+folder of the SVN's trunk or your toolkit distribution.
