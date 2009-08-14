@@ -105,7 +105,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * </p>
 	 */
 	protected Map<List<String>, Set<IModelObject>> myModelObjectsByType =
-			new WeakHashMap<List<String>, Set<IModelObject>>();
+			new HashMap<List<String>, Set<IModelObject>>();
 
 	/**
 	 * <p>
@@ -143,7 +143,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDisplayName()
 	 */
 	public String getDisplayName() {
-	
+
 		return this.myInstanceName;
 	}
 
@@ -152,7 +152,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getObjects()
 	 */
 	public List<IModelObject> getObjects() {
-	
+
 		return new ArrayList<IModelObject>(this.myModelObjects);
 	}
 
@@ -164,22 +164,34 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 */
 	public List<IModelObject> getObjectsOfType(List<String> typePath) {
 
-		return new ArrayList<IModelObject>(this.myModelObjectsByType.get(typePath));
+		List<IModelObject> result;
+		Set<IModelObject> resultSet;
+
+		resultSet = this.myModelObjectsByType.get(typePath);
+
+		if (resultSet != null) {
+			result = new ArrayList<IModelObject>(resultSet);
+		}
+
+		else {
+			result = new ArrayList<IModelObject>();
+		}
+
+		return result;
 	}
 
 	/**
 	 * @return A {@link Set} containing {@link Type}s in this model instance.
 	 */
 	public Set<Type> getObjectTypes() {
-	
-		Set<Type> retSet = new HashSet<Type>();
-	
+
+		Set<Type> result = new HashSet<Type>();
+
 		for (IModelObject modelObject : myModelObjects) {
-			retSet.addAll(modelObject.getTypes());
+			result.addAll(modelObject.getTypes());
 		}
-	
-		return retSet;
-	
+
+		return result;
 	}
 
 	/*
@@ -189,24 +201,24 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * .String, int)
 	 */
 	public String getOperationName(String name, int operatorCount) {
-	
+
 		String result;
-		Map<String, String> operationMap;		
-		
+		Map<String, String> operationMap;
+
 		result = null;
 		operationMap = operationNames.get(operatorCount);
-	
+
 		if (operationMap != null) {
-			
+
 			result = operationMap.get(name);
 		}
 		// no else.
-		
+
 		if (result == null) {
 			result = name;
 		}
 		// no else.
-		
+
 		return result;
 	}
 
@@ -215,7 +227,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getModel()
 	 */
 	public IModel getModel() {
-	
+
 		return this.myModel;
 	}
 
@@ -226,7 +238,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * .pivot.modelbus.IModel)
 	 */
 	public boolean isInstanceOf(IModel aModel) {
-	
+
 		return this.myModel.equals(aModel);
 	}
 
@@ -239,6 +251,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	protected void initializeCache() {
 
 		for (IModelObject modelObject : myModelObjects) {
+
 			for (Type type : modelObject.getTypes()) {
 
 				final List<String> qualifiedNameList = type.getQualifiedNameList();
