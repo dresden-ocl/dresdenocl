@@ -161,7 +161,7 @@ public class JavaModelInstanceObjectFactory {
 			}
 
 			/* Else check if the object is a collection. */
-			else if (object instanceof Collection) {
+			else if (object instanceof Collection<?>) {
 				result = this.createJavaModelInstanceCollection((Collection<?>) object);
 			}
 
