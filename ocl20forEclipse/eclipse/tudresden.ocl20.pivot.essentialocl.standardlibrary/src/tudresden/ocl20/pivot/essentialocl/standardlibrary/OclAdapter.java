@@ -52,13 +52,13 @@ public interface OclAdapter {
 	 * 
 	 * @return the class of the adaptee object
 	 */
-	Class getAdapteeClass();
+	Class<?> getAdapteeClass();
 
 	/**
 	 * Sets the adaptee class. Used for oclAsType()
 	 * 
 	 * @param clazz
-	 *            the new adaptee class
+	 *          the new adaptee class
 	 */
-	void setAdapteeClass(Class clazz);
+	void setAdapteeClass(Class<?> clazz);
 }
