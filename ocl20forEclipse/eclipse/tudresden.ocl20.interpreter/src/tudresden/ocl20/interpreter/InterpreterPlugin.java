@@ -30,6 +30,7 @@
  */
 package tudresden.ocl20.interpreter;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
@@ -53,8 +54,8 @@ public class InterpreterPlugin extends Plugin {
 	private static InterpreterPlugin plugin;
 
 	/**
-	 * The {@link IInterpreterRegistry} for {@link IInterpreterRegistryListener}
-	 * s of the {@link IOclInterpreter}.
+	 * The {@link IInterpreterRegistry} for {@link IInterpreterRegistryListener} s
+	 * of the {@link IOclInterpreter}.
 	 */
 	private IInterpreterRegistry interpreterRegistry;
 
@@ -64,15 +65,16 @@ public class InterpreterPlugin extends Plugin {
 	 * </p>
 	 */
 	public InterpreterPlugin() {
+
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
+
 		super.start(context);
 		plugin = this;
 
@@ -81,19 +83,43 @@ public class InterpreterPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+
 		plugin = null;
 
 		super.stop(context);
 	}
 
 	/**
-	 * @return The {@link IInterpreterRegistry} of this
-	 *         {@link InterpreterPlugin}.
+	 * @return The shared instance.
+	 */
+	public static InterpreterPlugin getDefault() {
+
+		return plugin;
+	}
+
+	/**
+	 * <p>
+	 * Facade method for the classes in this plug-in that hides the dependency
+	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * </p>
+	 * 
+	 * @param clazz
+	 *          The {@link Class} to return the {@link Logger} for.
+	 * 
+	 * @return A log4j {@link Logger}> instance.
+	 * 
+	 * @generated NOT
+	 */
+	public static Logger getLogger(Class<?> clazz) {
+
+		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
+	}
+
+	/**
+	 * @return The {@link IInterpreterRegistry} of this {@link InterpreterPlugin}.
 	 */
 	public static IInterpreterRegistry getInterpreterRegistry() {
 
@@ -111,12 +137,5 @@ public class InterpreterPlugin extends Plugin {
 		// no else.
 
 		return plugin.interpreterRegistry;
-	}
-
-	/**
-	 * @return The shared instance.
-	 */
-	public static InterpreterPlugin getDefault() {
-		return plugin;
 	}
 }

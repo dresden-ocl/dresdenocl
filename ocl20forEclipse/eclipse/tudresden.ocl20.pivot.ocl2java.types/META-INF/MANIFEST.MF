@@ -9,7 +9,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.ocl2parser,
- org.junit4,
- tudresden.ocl20.pivot.ocl2java
+ org.junit4
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -31,20 +31,16 @@
 package tudresden.ocl20.interpreter.ui.internal.views;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -55,16 +51,20 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
-import tudresden.ocl20.interpreter.InterpreterPlugin;
-import tudresden.ocl20.interpreter.event.IInterpreterRegistryListener;
-import tudresden.ocl20.interpreter.event.InterpreterRegistryEvent;
+import tudresden.ocl20.interpreter.IInterpretationResult;
+import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.interpreter.internal.OclInterpreter;
 import tudresden.ocl20.interpreter.ui.InterpreterUIPlugin;
-import tudresden.ocl20.interpreter.ui.internal.OclInterpreterUIMessages;
-import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.interpreter.ui.actions.InterpreterViewMenuAction;
+import tudresden.ocl20.interpreter.ui.actions.InterpreterViewMenuActionType;
+import tudresden.ocl20.interpreter.ui.internal.msg.OclInterpreterUIMessages;
+import tudresden.ocl20.interpreter.ui.internal.views.util.ResultsContentProvider;
+import tudresden.ocl20.interpreter.ui.internal.views.util.ResultsFilter;
+import tudresden.ocl20.interpreter.ui.internal.views.util.ResultsLabelProvider;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
@@ -74,6 +74,7 @@ import tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -84,8 +85,7 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * @author Ronny Brandt
  */
 public class InterpreterView extends ViewPart implements ISelectionListener,
-		IModelInstanceRegistryListener, IModelRegistryListener,
-		IInterpreterRegistryListener {
+		IModelInstanceRegistryListener, IModelRegistryListener {
 
 	/** Icon to add variables to the environment. */
 	public static String ADD_IMAGE = "icons/add.gif";
@@ -99,35 +99,48 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	/** Icon to remove the interpretation results. */
 	public static String REMOVE_IMAGE = "icons/remove.gif";
 
+	/** The currently selected {@link Constraint}s that shall be interpreted. */
+	private Set<Constraint> currentlySelectedConstraints =
+			new HashSet<Constraint>();
+
+	/** The currently selected {@link IModelInstance}. */
+	private IModelInstance currentlySelectedModelInstance;
+
+	/** The currently selected {@link IModelObject}s that shall be interpreted. */
+	private Set<IModelObject> currentlySelectedModelInstanceElements =
+			new HashSet<IModelObject>();
+
+	/** The currently selected rows of this {@link IViewActionDelegate}. */
+	private Set<Object[]> currentlySelectedRows = new HashSet<Object[]>();
+
+	/** Specifies, whether or not caching is enabled. */
+	private boolean isCachingEnabled;
+
+	/** The {@link InterpreterViewMenuAction} which removes results. */
+	private InterpreterViewMenuAction myActionToremoveSelectedResults = null;
+
 	/**
-	 * The {@link TableViewer} used to present the results of the
-	 * interpretation.
+	 * A {@link Map} containing the {@link IOclInterpreter}s for all
+	 * {@link IModelInstance}s. <b>This is a {@link WeakHashMap}!</b> The
+	 * {@link IOclInterpreter}s for {@link IModelInstance}s that are not
+	 * referenced anymore will be collected by the garbage collector!
 	 */
-	private TableViewer tableViewer;
+	private Map<IModelInstance, IOclInterpreter> myCachedInterpreters =
+			new WeakHashMap<IModelInstance, IOclInterpreter>();
+
+	/** The currently selected {@link ResultFilter}. */
+	private ResultsFilter myCurrentFilter = new ResultsFilter(this);
 
 	/** The {@link IMenuManager} used to provide the menu for the interpreter. */
-	private IMenuManager menu;
+	private IMenuManager myMenuManager;
 
-	/** Contains the actions which need selected {@link Constraint}s. */
-	private List<InterpretAction> csSelectionNeeded;
+	/** The {@link InterpretationResultCache} of this {@link InterpreterView}. */
+	private InterpretationResultCache myResults = new InterpretationResultCache();
 
-	/** Contains the actions which need selected {@link IModelObject}s. */
-	private List<InterpretAction> moSelectionNeeded;
-
-	/** Contains the actions which perform interpretations. */
-	private List<InterpretAction> interpretationActions;
-
-	/** Contains the actions which perform preparations. */
-	private List<InterpretAction> preparationActions;
-
-	/** The actual selected {@link ResultFilter}. */
-	private ResultsFilter actualFilter = new ResultsFilter();
-
-	/** The {@link InterpretAction} which removes results. */
-	private InterpretAction removeSelectedResults = null;
-
-	/** The double click {@link Action}. */
-	private Action doubleClickAction;
+	/**
+	 * The {@link TableViewer} used to present the results of the interpretation.
+	 */
+	private TableViewer myTableViewer;
 
 	/**
 	 * <p>
@@ -135,26 +148,30 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 */
 	public InterpreterView() {
+
+		/* Register this view as a model listener. */
 		ModelBusPlugin.getModelRegistry().addModelRegistryListener(this);
-		ModelBusPlugin.getModelInstanceRegistry()
-				.addModelInstanceRegistryListener(this);
-		InterpreterPlugin.getInterpreterRegistry()
-				.addInterpreterRegistryListener(this);
+
+		/* Register this view as a model instance listener. */
+		ModelBusPlugin.getModelInstanceRegistry().addModelInstanceRegistryListener(
+				this);
+
+		this.currentlySelectedModelInstance =
+				ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
+						ModelBusPlugin.getModelRegistry().getActiveModel());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
 	 */
 	public void dispose() {
 
 		/* Remove this view as listener of related plug-ins. */
 		ModelBusPlugin.getModelRegistry().removeModelRegistryListener(this);
+
 		ModelBusPlugin.getModelInstanceRegistry()
 				.removeModelInstanceRegistryListener(this);
-		InterpreterPlugin.getInterpreterRegistry()
-				.removeInterpreterRegistryListener(this);
 
 		((ISelectionService) getSite().getService(ISelectionService.class))
 				.removeSelectionListener(this);
@@ -164,27 +181,28 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent event) {
-		this.setActiveModelInstance(event.getAffectedModel(), ModelBusPlugin
-				.getModelInstanceRegistry().getActiveModelInstance(
-						event.getAffectedModel()));
+
+		this.myResults.clear();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
 	 * activeModelInstanceChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void activeModelInstanceChanged(ModelInstanceRegistryEvent event) {
-		this.setActiveModelInstance(event.getAffectedModel(), event
-				.getAffectedModelInstance());
+
+		this.currentlySelectedModelInstance =
+				ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
+						ModelBusPlugin.getModelRegistry().getActiveModel());
+
+		this.myResults.clear();
 	}
 
 	/**
@@ -193,21 +211,21 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param parent
-	 *            The parent composite of the created {@link TableViewer}.
+	 *          The parent composite of the created {@link TableViewer}.
 	 */
 	public void createPartControl(Composite parent) {
 
 		final Table table;
 		TableColumn column;
 
-		IModel activeModel;
+		this.myTableViewer =
+				new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 
-		this.tableViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL);
-		this.tableViewer.setContentProvider(new ResultsContentProvider());
-		this.tableViewer.setLabelProvider(new ResultsLabelProvider());
+		/* Set the content and label provider. */
+		this.myTableViewer.setContentProvider(new ResultsContentProvider());
+		this.myTableViewer.setLabelProvider(new ResultsLabelProvider());
 
-		table = tableViewer.getTable();
+		table = myTableViewer.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		/* Initialize the columns of the table. */
@@ -215,8 +233,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		column.setText(OclInterpreterUIMessages.InterpreterView_ObjectColumn);
 
 		column = new TableColumn(table, SWT.LEFT);
-		column
-				.setText(OclInterpreterUIMessages.InterpreterView_ConstraintColumn);
+		column.setText(OclInterpreterUIMessages.InterpreterView_ConstraintColumn);
 
 		column = new TableColumn(table, SWT.LEFT);
 		column.setText(OclInterpreterUIMessages.InterpreterView_ResultColumn);
@@ -224,183 +241,161 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
-		activeModel = ModelBusPlugin.getModelRegistry().getActiveModel();
+		this.myTableViewer.setInput(this.myResults);
 
-		if (activeModel != null) {
-			this.tableViewer.setInput(ModelBusPlugin.getModelInstanceRegistry()
-					.getActiveModelInstance(activeModel));
-		}
-
-		for (int i = 0, n = table.getColumnCount(); i < n; i++) {
-			table.getColumn(i).pack();
+		for (int index = 0; index < table.getColumnCount(); index++) {
+			table.getColumn(index).pack();
 		}
 
 		this.getViewSite().getPage().addSelectionListener(this);
-		this.getViewSite().setSelectionProvider(this.tableViewer);
+		this.getViewSite().setSelectionProvider(this.myTableViewer);
 
-		this.hookDoubleClickAction();
 		this.initMenu();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seetudresden.ocl20.interpreter.event.IInterpreterRegistryListener#
-	 * interpretationFinished
-	 * (tudresden.ocl20.interpreter.event.InterpreterRegistryEvent)
-	 */
-	public void interpretationFinished(InterpreterRegistryEvent e) {
-		this.refreshView();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
+	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent event) {
+
 		/* Do nothing until a new active IModel has been set. */
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
 	 * modelInstanceAdded
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void modelInstanceAdded(ModelInstanceRegistryEvent event) {
+
 		/* Do nothing until a new ModelInstance has been activated. */
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.
 	 * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
 	 */
-	@SuppressWarnings("unchecked")
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 
+		/* Check if the selection of the models view changed. */
 		if (part.getSite() != null
-				&& part.getSite().getId().equals(
-						IModelBusConstants.MODELS_VIEW_ID)) {
+				&& part.getSite().getId().equals(IModelBusConstants.MODELS_VIEW_ID)) {
 
+			/* Check if the selection is a tree selection. */
 			if (selection instanceof TreeSelection) {
 
+				/* Get an iterator to iterate over the selection. */
 				Iterator<?> selectionIt;
-
-				this.tableViewer.removeFilter(this.actualFilter);
 				selectionIt = ((TreeSelection) selection).iterator();
 
-				this.actualFilter.clearModelObjectFilter();
-				this.actualFilter.clearConstraintFilter();
+				/* Remove the current filter from the table viewer. */
+				this.myTableViewer.removeFilter(this.myCurrentFilter);
 
-				clearConstraintSelection();
+				/* Clear the currently selected constraints and model objects. */
+				this.clearConstraintSelection();
+				this.clearModelObjectSelection();
 
-				/* Add all selected constraints to the selection. */
+				/* Add all selected constraints and types to the constraint selection. */
 				while (selectionIt.hasNext()) {
 					Object anObject;
-
 					anObject = selectionIt.next();
 
 					if (anObject instanceof Constraint) {
-						this.actualFilter
-								.addConstraintFilter((Constraint) anObject);
 						this.addConstraintSelection((Constraint) anObject);
+					}
+
+					else if (anObject instanceof Type) {
+						this.addModelObjectSelection((Type) anObject);
 					}
 					// no else.
 				}
+				// end while.
 
-				this.tableViewer.addFilter(this.actualFilter);
+				/* Readd the filter to the table viewer. */
+				this.myTableViewer.addFilter(this.myCurrentFilter);
 				this.refreshView();
 			}
+			// no else (no tree selection, could not happen).
 		}
 
+		/* Else check if the selection of the model instance view changed. */
 		else if (part.getSite() != null
 				&& part.getSite().getId().equals(
 						IModelBusConstants.MODEL_INSTANCES_VIEW_ID)) {
 
+			/* Check if the selection is a tree selection. */
 			if (selection instanceof TreeSelection) {
 
+				/* Get an iterator to iterate over the selection. */
 				Iterator<?> selectionIt;
-
-				this.tableViewer.removeFilter(this.actualFilter);
 				selectionIt = ((TreeSelection) selection).iterator();
 
-				this.actualFilter.clearModelObjectFilter();
+				/* Remove the current filter from the table viewer. */
+				this.myTableViewer.removeFilter(this.myCurrentFilter);
+
+				/* Clear the currently selected model objects. */
 				this.clearModelObjectSelection();
 
-				/* Add all IModelObjects to the selection. */
+				/* Add all selected IModelObjects to the current selection. */
 				while (selectionIt.hasNext()) {
 
 					Object anObject;
-
 					anObject = selectionIt.next();
 
-					/* Decide between given Lists and IModelObjects. */
+					/* Decide between given Types and IModelObjects. */
 					if (anObject instanceof IModelObject) {
-						this.actualFilter.addModelObjectFilter(Arrays
-								.asList((IModelObject) anObject));
-						this.addModelObjectSelection(Arrays
-								.asList((IModelObject) anObject));
+						this.addModelObjectSelection((IModelObject) anObject);
 					}
 
-					else if (anObject instanceof List) {
-						List<IModelObject> objects;
-
-						objects = ModelBusPlugin.getModelInstanceRegistry()
-								.getActiveModelInstance(
-										ModelBusPlugin.getModelRegistry()
-												.getActiveModel())
-								.getObjectsOfKind((List<String>) anObject);
-
-						this.actualFilter.addModelObjectFilter(objects);
-						this.addModelObjectSelection(objects);
+					else if (anObject instanceof Type) {
+						this.addModelObjectSelection((Type) anObject);
 					}
 				}
 				// end while.
 
-				this.tableViewer.addFilter(actualFilter);
+				/* Readd the filter to the table viewer. */
+				this.myTableViewer.addFilter(myCurrentFilter);
 				this.refreshView();
 			}
+			// no else (no tree selection, could not happen).
 		}
 
+		/* Else check if the selection of the interpreter view changed. */
 		else if (part instanceof InterpreterView) {
 
+			/* Check if the selection is a structured selection. */
 			if (selection instanceof StructuredSelection) {
 
+				/* Get an iterator to iterate over the selection. */
 				Iterator<?> selectionIt;
-
 				selectionIt = ((StructuredSelection) selection).iterator();
 
-				this.removeSelectedResults.clearSelectedConstraints();
-				this.removeSelectedResults.clearSelectedModelObjects();
+				/* Clear the currently selected model results. */
+				this.currentlySelectedRows.clear();
 
 				while (selectionIt.hasNext()) {
 
 					Object anObject;
-
 					anObject = selectionIt.next();
 
-					if (anObject instanceof List) {
-						this.removeSelectedResults
-								.addSelectedModelObjects(Arrays
-										.asList((IModelObject) ((List<?>) anObject)
-												.get(ResultsContentProvider.MODELOBJECT)));
-						this.removeSelectedResults
-								.addSelectedConstraints((Constraint) ((List<?>) anObject)
-										.get(ResultsContentProvider.CONSTRAINT));
+					/* Check if the selected entry is an array. */
+					if (anObject.getClass().isArray()) {
+						Object[] aRow;
+						aRow = (Object[]) anObject;
+
+						this.currentlySelectedRows.add(aRow);
 					}
 					// no else.
 				}
 				// end while
 			}
-			// no else.
+			// no else (no structured selection, could not happen).
 		}
-		// no else.
+		// no else (nothing has to be updated).
 	}
 
 	/**
@@ -409,338 +404,156 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 */
 	public void setFocus() {
-		this.tableViewer.getControl().setFocus();
-	}
 
-	/**
-	 * @return The menu of the {@link InterpreterView}.
-	 */
-	protected IMenuManager getMenu() {
-		if (menu == null) {
-			menu = getViewSite().getActionBars().getMenuManager();
-		}
-
-		return menu;
+		this.myTableViewer.getControl().setFocus();
 	}
 
 	/**
 	 * <p>
-	 * Initializes the drop-down menu of the {@link InterpreterView} with all
-	 * supported {@link InterpretAction}s.
-	 */
-	protected void initMenu() {
-
-		InterpretAction prepareSelected;
-		InterpretAction prepareAll;
-
-		Action setUseCache;
-		Action addVariable;
-
-		InterpretAction interpretSelected;
-		InterpretAction interpretAll;
-
-		InterpretAction clearResultsForSelected;
-		InterpretAction clearAllResults;
-
-		/* Eventually initialize some lists. */
-		if (this.csSelectionNeeded == null) {
-			this.csSelectionNeeded = new ArrayList<InterpretAction>();
-		}
-		// no else.
-
-		if (this.moSelectionNeeded == null) {
-			this.moSelectionNeeded = new ArrayList<InterpretAction>();
-		}
-		// no else.
-
-		if (this.interpretationActions == null) {
-			this.interpretationActions = new ArrayList<InterpretAction>();
-		}
-		// no else.
-
-		if (this.preparationActions == null) {
-			this.preparationActions = new ArrayList<InterpretAction>();
-		}
-
-		/* Create the different actions for the preparation menu. */
-
-		/* Create action to prepare the all constraints. */
-		{
-			prepareAll = new InterpretAction(
-					InterpretAction.PREPARE_ALL_CONSTRAINTS, this.tableViewer
-							.getControl().getShell());
-			/* Set an Icon for this action. */
-			prepareAll.setImageDescriptor(InterpreterUIPlugin
-					.getImageDescriptor(PREPARE_IMAGE));
-
-			this.preparationActions.add(prepareAll);
-
-			/* Add the action to the menu. */
-			this.getMenu().add(prepareAll);
-
-			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(
-					prepareAll);
-		}
-
-		/* Create action to prepare the selected constraints. */
-		{
-			prepareSelected = new InterpretAction(
-					InterpretAction.PREPARE_SELECTED_CONSTRAINTS,
-					this.tableViewer.getControl().getShell());
-
-			this.preparationActions.add(prepareSelected);
-
-			/* This action needs constraint selection. */
-			this.csSelectionNeeded.add(prepareSelected);
-			/* Add the action to the menu. */
-			this.getMenu().add(prepareSelected);
-		}
-
-		/* Add a separator line to the menu. */
-		this.getMenu().add(new Separator());
-
-		/* Create an action to add new variables to the environment. */
-		{
-			addVariable = new Action() {
-
-				public void run() {
-					Dialog vsd;
-
-					vsd = new AddVariableDialog(tableViewer.getControl()
-							.getShell());
-					vsd.open();
-				}
-			};
-
-			addVariable
-					.setText(OclInterpreterUIMessages.InterpreterView_AddVariable_Title);
-
-			/* Set an Icon for this action. */
-			addVariable.setImageDescriptor(InterpreterUIPlugin
-					.getImageDescriptor(ADD_IMAGE));
-
-			/* Add the action to the menu. */
-			this.getMenu().add(addVariable);
-
-			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(
-					addVariable);
-		}
-
-		/* Create action to enable or disable the cache. */
-		{
-			setUseCache = new Action(null, IAction.AS_CHECK_BOX) {
-
-				boolean checked = false;
-
-				public void run() {
-					setUseCache(!checked);
-					checked = !checked;
-					this.setChecked(checked);
-				}
-			};
-
-			setUseCache.setChecked(false);
-			setUseCache
-					.setText(OclInterpreterUIMessages.InterpreterView_UseCache);
-
-			/* Add the action to the menu. */
-			this.getMenu().add(setUseCache);
-		}
-
-		/* Add a separator line to the menu. */
-		this.getMenu().add(new Separator());
-
-		/* ---- INTERPRETER MENU ---- */
-		/* Create action to interpret all constraints and model objects. */
-		{
-			interpretAll = new InterpretAction(
-					InterpretAction.INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-					this.tableViewer.getControl().getShell());
-			this.interpretationActions.add(interpretAll);
-
-			/* Set an Icon for this action. */
-			interpretAll.setImageDescriptor(InterpreterUIPlugin
-					.getImageDescriptor(INTERPRET_IMAGE));
-
-			/* Add the action to the menu. */
-			this.getMenu().add(interpretAll);
-
-			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(
-					interpretAll);
-		}
-
-		/* Create action to interpret selected constraints and model objects. */
-		{
-			interpretSelected = new InterpretAction(
-					InterpretAction.INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-					this.tableViewer.getControl().getShell());
-
-			/* This action needs model object and constraint selection. */
-			this.moSelectionNeeded.add(interpretSelected);
-			this.csSelectionNeeded.add(interpretSelected);
-
-			this.interpretationActions.add(interpretSelected);
-
-			/* Add the action to the menu. */
-			this.getMenu().add(interpretSelected);
-		}
-
-		/* Add a separator line to the menu. */
-		this.getMenu().add(new Separator());
-
-		/*
-		 * Create action to clear the results for the all constraints and
-		 * objects.
-		 */
-		{
-			clearAllResults = new InterpretAction(
-					InterpretAction.CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-					this.tableViewer.getControl().getShell());
-
-			/* Set an Icon for this action. */
-			clearAllResults.setImageDescriptor(InterpreterUIPlugin
-					.getImageDescriptor(REMOVE_IMAGE));
-
-			/* Add the action to the menu. */
-			this.getMenu().add(clearAllResults);
-
-			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(
-					clearAllResults);
-		}
-
-		/*
-		 * Create action to clear the results for the selected constraints model
-		 * objects.
-		 */
-		{
-			clearResultsForSelected = new InterpretAction(
-					InterpretAction.CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-					this.tableViewer.getControl().getShell());
-
-			/* This actions needs model object and constraint selection. */
-			this.moSelectionNeeded.add(clearResultsForSelected);
-			this.csSelectionNeeded.add(clearResultsForSelected);
-
-			/* Add the action to the menu. */
-			this.getMenu().add(clearResultsForSelected);
-		}
-
-		/*
-		 * Eventually initialize an action to remove the results for all
-		 * selected constraints.
-		 */
-		{
-			if (this.removeSelectedResults == null) {
-				this.removeSelectedResults = new InterpretAction(
-						InterpretAction.REMOVE_SELECTED_RESULTS,
-						this.tableViewer.getControl().getShell());
-			}
-			// no else.
-
-			/* Add the action to the menu. */
-			this.getMenu().add(removeSelectedResults);
-		}
-
-		/* Update the menu and tool bar after initialization. */
-		this.getViewSite().getActionBars().updateActionBars();
-	}
-
-	/**
-	 * <p>
-	 * Adds a {@link Constraint} to actions which needs {@link Constraint}
-	 * selection.
+	 * Adds a given {@link IInterpretationResult} to the results of this
+	 * {@link InterpreterView}.
 	 * </p>
 	 * 
-	 * @param aConstraint
-	 *            The {@link Constraint} which shall be added.
+	 * @param interpretationResult
+	 *          The {@link IInterpretationResult} that shall be added.
 	 */
-	private void addConstraintSelection(Constraint aConstraint) {
-		for (InterpretAction action : this.csSelectionNeeded) {
-			action.addSelectedConstraints(aConstraint);
-		}
+	public void addInterpretationResult(IInterpretationResult interpretationResult) {
+
+		this.myResults.addResult(interpretationResult);
 	}
 
 	/**
 	 * <p>
-	 * Adds a {@link IModelObject} to the actions which need
-	 * {@link IModelObject} selection.
+	 * Clears the {@link IInterpretationResult} of this {@link InterpreterView}.
+	 * </p>
+	 */
+	public void clearResults() {
+
+		this.myResults.clear();
+	}
+
+	/**
+	 * <p>
+	 * Clears the {@link IInterpretationResult} of this {@link InterpreterView}
+	 * for the currently selected {@link IModelObject}s and {@link Constraint}s.
+	 * </p>
+	 */
+	public void clearResultsForSelection() {
+
+		this.myResults.removeResults(new ArrayList<IModelObject>(
+				this.currentlySelectedModelInstanceElements),
+				new ArrayList<Constraint>(this.currentlySelectedConstraints));
+
+		this.myResults.removeResults(this.currentlySelectedRows);
+	}
+
+	/**
+	 * <p>
+	 * Returns the currently selected {@link Constraint}s that shall be
+	 * interpreted.
 	 * </p>
 	 * 
-	 * @param aModelObject
-	 *            The {@link IModelObject} which shall be added.
+	 * @return The currently selected {@link Constraint}s that shall be
+	 *         interpreted.
 	 */
-	private void addModelObjectSelection(List<IModelObject> aModelObject) {
-		for (InterpretAction action : this.moSelectionNeeded) {
-			action.addSelectedModelObjects(aModelObject);
-		}
+	public Set<Constraint> getCurrentlySelectedConstraints() {
+
+		return this.currentlySelectedConstraints;
 	}
 
 	/**
 	 * <p>
-	 * Clears the {@link Constraint} selection for all actions which need
-	 * {@link Constraint} selection.
+	 * Returns the currently selected {@link IModelInstance}.
 	 * </p>
+	 * 
+	 * @return The currently selected {@link IModelInstance}.
 	 */
-	private void clearConstraintSelection() {
-		for (InterpretAction action : this.csSelectionNeeded) {
-			action.clearSelectedConstraints();
-		}
+	public IModelInstance getCurrentlySelectedModelInstance() {
+
+		return this.currentlySelectedModelInstance;
 	}
 
 	/**
 	 * <p>
-	 * Clears the {@link IModelObject} selection for all actions which need
-	 * {@link IModelObject} selection.
+	 * Returns the currently selected {@link IModelObject}s that shall be
+	 * interpreted.
 	 * </p>
+	 * 
+	 * @return The currently selected {@link IModelObject}s that shall be
+	 *         interpreted.
 	 */
-	private void clearModelObjectSelection() {
-		for (InterpretAction action : this.moSelectionNeeded) {
-			action.clearSelectedModelObjects();
-		}
+	public Set<IModelObject> getCurrentlySelectedModelInstanceElements() {
+
+		return this.currentlySelectedModelInstanceElements;
 	}
 
 	/**
 	 * <p>
-	 * Adds an {@link Action} to open a result window if the user clicks on a
-	 * result in the table.
+	 * Returns the {@link IOclInterpreter} for a given {@link IModelInstance}.
 	 * </p>
+	 * 
+	 * @param modelInstance
+	 *          The {@link IModelInstance} for that the {@link IOclInterpreter}
+	 *          shall be returned.
+	 * @return The {@link IOclInterpreter} for a given {@link IModelInstance}
 	 */
-	private void hookDoubleClickAction() {
+	public IOclInterpreter getInterpreterForInstance(IModelInstance modelInstance) {
 
-		this.doubleClickAction = new Action() {
+		IOclInterpreter result;
 
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.eclipse.jface.action.Action#run()
-			 */
-			public void run() {
+		result = this.myCachedInterpreters.get(modelInstance);
 
-				ISelection selection;
-				Object object;
+		if (result == null) {
+			result = new OclInterpreter(modelInstance);
+			this.myCachedInterpreters.put(modelInstance, result);
+		}
+		// no else.
 
-				selection = tableViewer.getSelection();
-				object = ((IStructuredSelection) selection).getFirstElement();
+		result.setCachingEnabled(this.isCachingEnabled);
 
-				if (object instanceof List) {
-					showMessage(OclInterpreterUIMessages.InterpreterView_ResultSelection
-							+ ((List<?>) object)
-									.get(ResultsContentProvider.RESULT));
-				}
-				// no else.
-			}
-		};
+		return result;
+	}
 
-		tableViewer.addDoubleClickListener(new IDoubleClickListener() {
+	/**
+	 * <p>
+	 * Returns the {@link TableViewer} used to present the results of the
+	 * interpretation.
+	 * </p>
+	 * 
+	 * @return The {@link TableViewer} used to present the results of the
+	 *         interpretation.
+	 */
+	public TableViewer getTableViewer() {
 
-			public void doubleClick(DoubleClickEvent event) {
-				doubleClickAction.run();
-			}
-		});
+		return this.myTableViewer;
+	}
+
+	/**
+	 * <p>
+	 * Returs the {@link InterpretationResultCache} of this
+	 * {@link InterpreterView}.
+	 * </p>
+	 * 
+	 * @return The {@link InterpretationResultCache} of this
+	 *         {@link InterpreterView}.
+	 */
+	public InterpretationResultCache getResults() {
+
+		return this.myResults;
+	}
+
+	/**
+	 * <p>
+	 * Returns whether or not this {@link InterpreterView} will use a cache to
+	 * interpret results.
+	 * </p>
+	 * 
+	 * @return Whether or not this {@link InterpreterView} will use a cache to
+	 *         interpret results.
+	 */
+	public boolean isCachingEnabled() {
+
+		return this.isCachingEnabled;
 	}
 
 	/**
@@ -748,29 +561,13 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * Refreshes this {@link InterpreterView}.
 	 * </p>
 	 */
-	private void refreshView() {
+	public void refreshView() {
 
-		for (int i = 0, n = this.tableViewer.getTable().getColumnCount(); i < n; i++) {
-			this.tableViewer.getTable().getColumn(i).pack();
+		for (int index = 0; index < this.myTableViewer.getTable().getColumnCount(); index++) {
+			this.myTableViewer.getTable().getColumn(index).pack();
 		}
 
-		this.tableViewer.refresh();
-	}
-
-	/**
-	 * <p>
-	 * Refresh the {@link InterpreterView} after the {@link IModelInstance}
-	 * changed.
-	 * 
-	 * @param affectedModel
-	 *            The affected {@link IModel}.
-	 * @param activeModelInstance
-	 *            The new active {@link IModelInstance}.
-	 */
-	private void setActiveModelInstance(IModel affectedModel,
-			IModelInstance activeModelInstance) {
-		this.tableViewer.setInput(activeModelInstance);
-		this.refreshView();
+		this.myTableViewer.refresh();
 	}
 
 	/**
@@ -780,12 +577,11 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param enabled
-	 *            If true, a cache will be used.
+	 *          If true, a cache will be used.
 	 */
-	private void setUseCache(boolean enabled) {
-		for (InterpretAction action : this.interpretationActions) {
-			action.setUseCache(enabled);
-		}
+	public void setCachingEnabled(boolean enabled) {
+
+		this.isCachingEnabled = enabled;
 	}
 
 	/**
@@ -794,12 +590,262 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param message
-	 *            The message which shall be shown.
+	 *          The message which shall be shown.
 	 */
-	private void showMessage(String message) {
+	public void showMessage(String message) {
 
-		MessageDialog.openInformation(this.tableViewer.getControl().getShell(),
-				OclInterpreterUIMessages.InterpreterView_InterpreterResults,
-				message);
+		MessageDialog.openInformation(this.myTableViewer.getControl().getShell(),
+				OclInterpreterUIMessages.InterpreterView_InterpreterResults, message);
+	}
+
+	/**
+	 * <p>
+	 * Adds a {@link Constraint} to the current {@link Constraint} selection.
+	 * </p>
+	 * 
+	 * @param aConstraint
+	 *          The {@link Constraint} which shall be added.
+	 */
+	private void addConstraintSelection(Constraint aConstraint) {
+
+		this.currentlySelectedConstraints.add(aConstraint);
+	}
+
+	/**
+	 * <p>
+	 * Adds a {@link IModelObject} to the current {@link IModelObject} selection.
+	 * </p>
+	 * 
+	 * @param modelObject
+	 *          The {@link IModelObject}s that shall be added.
+	 */
+	private void addModelObjectSelection(IModelObject modelObject) {
+
+		this.currentlySelectedModelInstanceElements.add(modelObject);
+	}
+
+	/**
+	 * <p>
+	 * Adds all {@link IModelObject} of a given {@link Type} to the actions that
+	 * need {@link IModelObject} selection.
+	 * </p>
+	 * 
+	 * @param type
+	 *          The {@link Type} whose {@link IModelObject}s shall be added.
+	 */
+	private void addModelObjectSelection(Type type) {
+
+		this.currentlySelectedModelInstanceElements
+				.addAll(this.currentlySelectedModelInstance.getObjectsOfType(type
+						.getQualifiedNameList()));
+	}
+
+	/**
+	 * <p>
+	 * Clears the {@link Constraint} selection for all actions which need
+	 * {@link Constraint} selection.
+	 * </p>
+	 */
+	private void clearConstraintSelection() {
+
+		this.currentlySelectedConstraints.clear();
+	}
+
+	/**
+	 * <p>
+	 * Clears the {@link IModelObject} selection for all actions which need
+	 * {@link IModelObject} selection.
+	 * </p>
+	 */
+	private void clearModelObjectSelection() {
+
+		this.currentlySelectedModelInstanceElements.clear();
+	}
+
+	/**
+	 * @return The menu of the {@link InterpreterView}.
+	 */
+	private IMenuManager getMenuManager() {
+
+		if (this.myMenuManager == null) {
+			this.myMenuManager = getViewSite().getActionBars().getMenuManager();
+		}
+
+		return this.myMenuManager;
+	}
+
+	/**
+	 * <p>
+	 * Initializes the drop-down menu of the {@link InterpreterView} with all
+	 * supported {@link InterpreterViewMenuAction}s.
+	 */
+	private void initMenu() {
+	
+		InterpreterViewMenuAction prepareSelected;
+		InterpreterViewMenuAction prepareAll;
+	
+		InterpreterViewMenuAction setUseCache;
+		InterpreterViewMenuAction addVariable;
+	
+		InterpreterViewMenuAction interpretSelected;
+		InterpreterViewMenuAction interpretAll;
+	
+		InterpreterViewMenuAction clearResultsForSelected;
+		InterpreterViewMenuAction clearAllResults;
+	
+		/* Create the different actions for the preparation menu. */
+	
+		/* Create action to prepare all constraints. */
+		{
+			prepareAll =
+					new InterpreterViewMenuAction(
+							InterpreterViewMenuActionType.PREPARE_ALL_CONSTRAINTS, this);
+	
+			/* Set an Icon for this action. */
+			prepareAll.setImageDescriptor(InterpreterUIPlugin
+					.getImageDescriptor(PREPARE_IMAGE));
+	
+			/* Add the action to the menu. */
+			this.getMenuManager().add(prepareAll);
+	
+			/* Add the action to the tool bar. */
+			this.getViewSite().getActionBars().getToolBarManager().add(prepareAll);
+		}
+	
+		/* Create action to prepare the selected constraints. */
+		{
+			prepareSelected =
+					new InterpreterViewMenuAction(
+							InterpreterViewMenuActionType.PREPARE_SELECTED_CONSTRAINTS, this);
+	
+			/* Add the action to the menu. */
+			this.getMenuManager().add(prepareSelected);
+		}
+	
+		/* Add a separator line to the menu. */
+		this.getMenuManager().add(new Separator());
+	
+		/* Create an action to add new variables to the environment. */
+		{
+			addVariable =
+					new InterpreterViewMenuAction(
+							InterpreterViewMenuActionType.ADD_VARIABLE_TO_ENVIRONMENT, this);
+	
+			addVariable
+					.setText(OclInterpreterUIMessages.InterpreterView_AddVariable_Title);
+	
+			/* Set an Icon for this action. */
+			addVariable.setImageDescriptor(InterpreterUIPlugin
+					.getImageDescriptor(ADD_IMAGE));
+	
+			/* Add the action to the menu. */
+			this.getMenuManager().add(addVariable);
+	
+			/* Add the action to the tool bar. */
+			this.getViewSite().getActionBars().getToolBarManager().add(addVariable);
+		}
+	
+		/* Create action to enable or disable the cache. */
+		{
+			setUseCache =
+					new InterpreterViewMenuAction(
+							InterpreterViewMenuActionType.ENABLE_DISABLE_CACHING, this);
+	
+			setUseCache.setChecked(false);
+			setUseCache.setText(OclInterpreterUIMessages.InterpreterView_UseCache);
+	
+			/* Add the action to the menu. */
+			this.getMenuManager().add(setUseCache);
+		}
+	
+		/* Add a separator line to the menu. */
+		this.getMenuManager().add(new Separator());
+	
+		/* ---- INTERPRETER MENU ---- */
+		/* Create action to interpret all constraints and model objects. */
+		{
+			interpretAll =
+					new InterpreterViewMenuAction(
+							InterpreterViewMenuActionType.INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
+							this);
+	
+			/* Set an Icon for this action. */
+			interpretAll.setImageDescriptor(InterpreterUIPlugin
+					.getImageDescriptor(INTERPRET_IMAGE));
+	
+			/* Add the action to the menu. */
+			this.getMenuManager().add(interpretAll);
+	
+			/* Add the action to the tool bar. */
+			this.getViewSite().getActionBars().getToolBarManager().add(interpretAll);
+		}
+	
+		/* Create action to interpret selected constraints and model objects. */
+		{
+			interpretSelected =
+					new InterpreterViewMenuAction(
+							InterpreterViewMenuActionType.INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
+							this);
+	
+			/* Add the action to the menu. */
+			this.getMenuManager().add(interpretSelected);
+		}
+	
+		/* Add a separator line to the menu. */
+		this.getMenuManager().add(new Separator());
+	
+		/*
+		 * Create action to clear the results for the all constraints and objects.
+		 */
+		{
+			clearAllResults =
+					new InterpreterViewMenuAction(
+							InterpreterViewMenuActionType.CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
+							this);
+	
+			/* Set an Icon for this action. */
+			clearAllResults.setImageDescriptor(InterpreterUIPlugin
+					.getImageDescriptor(REMOVE_IMAGE));
+	
+			/* Add the action to the menu. */
+			this.getMenuManager().add(clearAllResults);
+	
+			/* Add the action to the tool bar. */
+			this.getViewSite().getActionBars().getToolBarManager().add(
+					clearAllResults);
+		}
+	
+		/*
+		 * Create action to clear the results for the selected constraints model
+		 * objects.
+		 */
+		{
+			clearResultsForSelected =
+					new InterpreterViewMenuAction(
+							InterpreterViewMenuActionType.CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
+							this);
+	
+			/* Add the action to the menu. */
+			this.getMenuManager().add(clearResultsForSelected);
+		}
+	
+		/*
+		 * Eventually initialize an action to remove the results for all selected
+		 * constraints.
+		 */
+		{
+			if (this.myActionToremoveSelectedResults == null) {
+				this.myActionToremoveSelectedResults =
+						new InterpreterViewMenuAction(
+								InterpreterViewMenuActionType.REMOVE_SELECTED_RESULTS, this);
+			}
+			// no else.
+	
+			/* Add the action to the menu. */
+			this.getMenuManager().add(myActionToremoveSelectedResults);
+		}
+	
+		/* Update the menu and tool bar after initialization. */
+		this.getViewSite().getActionBars().updateActionBars();
 	}
 }

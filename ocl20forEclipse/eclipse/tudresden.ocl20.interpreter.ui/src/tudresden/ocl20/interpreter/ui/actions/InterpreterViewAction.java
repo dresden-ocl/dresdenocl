@@ -62,7 +62,6 @@ public class InterpreterViewAction implements IWorkbenchWindowActionDelegate {
 		}
 
 		catch (PartInitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

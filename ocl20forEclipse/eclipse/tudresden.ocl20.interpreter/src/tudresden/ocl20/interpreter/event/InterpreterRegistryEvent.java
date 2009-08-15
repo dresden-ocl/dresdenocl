@@ -32,26 +32,26 @@ package tudresden.ocl20.interpreter.event;
 
 import java.util.EventObject;
 
+import tudresden.ocl20.interpreter.IInterpretationResult;
 import tudresden.ocl20.interpreter.IInterpreterRegistry;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * {@link InterpreterRegistryEvent} are fired during interpretation for
  * listeners registered in the {@link IInterpreterRegistry}.</p>
  * 
- * @author Ronny Brandt
+ * @author Ronny Brandt: First implementation.
+ * @author Claas Wilke: Documentation and refactoring.
  */
 public class InterpreterRegistryEvent extends EventObject {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3333654204524166122L;
 
-	/** The affected constraint. */
-	private Constraint affectedConstraint;
-
-	/** The affected model object. */
-	private IModelObject affectedModelObject;
+	/**
+	 * The {@link IInterpretationResult} that belongs to this
+	 * {@link InterpreterRegistryEvent}.
+	 */
+	private IInterpretationResult interpretationResult;
 
 	/**
 	 * <p>
@@ -59,49 +59,38 @@ public class InterpreterRegistryEvent extends EventObject {
 	 * </p>
 	 * 
 	 * @param source
-	 *            The {@link IInterpreterRegistry} source of the event.
-	 * @param affectedConstraint
-	 *            The affected {@link Constraint}.
-	 * @param affectedModelObject
-	 *            The affected {@link IModelObject}.
+	 *          The {@link IInterpreterRegistry} source of the event.
+	 * @param interpretationResult
+	 *          The {@link IInterpretationResult} of this
+	 *          {@link InterpreterRegistryEvent}.
 	 */
 	public InterpreterRegistryEvent(IInterpreterRegistry source,
-			Constraint affectedConstraint, IModelObject affectedModelObject) {
+			IInterpretationResult interpretationResult) {
 
 		super(source);
 
-		this.affectedConstraint = affectedConstraint;
-		this.affectedModelObject = affectedModelObject;
+		this.interpretationResult = interpretationResult;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.util.EventObject#getSource()
 	 */
 	public IInterpreterRegistry getSource() {
+
 		return (IInterpreterRegistry) this.source;
 	}
 
 	/**
 	 * <p>
-	 * Gets the affected {@link Constraint}.
+	 * The {@link IInterpretationResult} of this {@link InterpreterRegistryEvent}.
 	 * </p>
 	 * 
-	 * @return The affected {@link Constraint}.
+	 * @return The {@link IInterpretationResult} of this
+	 *         {@link InterpreterRegistryEvent}.
 	 */
-	public Constraint getAffectedConstraint() {
-		return this.affectedConstraint;
-	}
+	public IInterpretationResult getInterpreationResult() {
 
-	/**
-	 * <p>
-	 * Gets the affected {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return The affected {@link IModelObject}.
-	 */
-	public IModelObject getAffectedModelObject() {
-		return this.affectedModelObject;
+		return this.interpretationResult;
 	}
 }

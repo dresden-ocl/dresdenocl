@@ -16,21 +16,19 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.interpreter.ui.internal.views;
+package tudresden.ocl20.interpreter.ui.internal.views.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 
+import tudresden.ocl20.interpreter.IInterpretationResult;
+import tudresden.ocl20.interpreter.ui.internal.views.InterpretationResultCache;
+import tudresden.ocl20.interpreter.ui.internal.views.InterpreterView;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
@@ -45,33 +43,33 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * 
  * @author Claas Wilke
  */
-class ResultsContentProvider implements IStructuredContentProvider {
-
-	/** The list index containing the {@link IModelObject}. */
-	public static final int MODELOBJECT = 0;
+public class ResultsContentProvider implements IStructuredContentProvider {
 
 	/** The list index containing the {@link Constraint}. */
 	public static final int CONSTRAINT = 1;
+
+	/** The list index containing the {@link IModelObject}. */
+	public static final int MODELOBJECT = 0;
 
 	/** The list index containing the result. */
 	public static final int RESULT = 2;
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse
-	 * .jface.viewers.Viewer, java.lang.Object, java.lang.Object)
+	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 	 */
-	public void inputChanged(Viewer v, Object oldInput, Object newInput) {
+	public void dispose() {
+
 		/* Do nothing. */
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
+	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse
+	 * .jface.viewers.Viewer, java.lang.Object, java.lang.Object)
 	 */
-	public void dispose() {
+	public void inputChanged(Viewer v, Object oldInput, Object newInput) {
+
 		/* Do nothing. */
 	}
 
@@ -81,69 +79,48 @@ class ResultsContentProvider implements IStructuredContentProvider {
 	 * {@link IModelObject} and {@link OclRoot} result.
 	 * </p>
 	 * 
-	 * @param aModelInstance
-	 *            The {@link IModelInstance} whose Elements will be provided.
+	 * @param interpretationResultCache
+	 *          The {@link InterpretationResultCache} whose Elements will be
+	 *          provided.
 	 * @return An Array of {@link List}s containing {@link Constraint},
 	 *         {@link IModelObject} and {@link OclRoot} results.
 	 * 
 	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
 	 */
-	public Object[] getElements(Object aModelInstance) {
+	public Object[] getElements(Object interpretationResultCache) {
 
 		Object[] result;
+		List<Object> resultList;
 
-		/* Check if the given object is a model instance. */
-		if (aModelInstance instanceof IModelInstance) {
+		resultList = new ArrayList<Object>();
 
-			List<Object> resultList;
+		/* Check if the given object is a InterpretationResultCache. */
+		if (interpretationResultCache instanceof InterpretationResultCache) {
 
-			Iterator<IModelObject> objectsIt;
+			InterpretationResultCache resultCache;
 
-			resultList = new ArrayList<Object>();
+			resultCache = (InterpretationResultCache) interpretationResultCache;
 
-			objectsIt = ((IModelInstance) aModelInstance).getObjects()
-					.iterator();
+			/* Iterate through all results. */
+			for (IInterpretationResult aResult : resultCache.getAllResults()) {
 
-			/* Iterate through the Objects of the given model instance. */
-			while (objectsIt.hasNext()) {
+				Object[] aResultValue;
 
-				IModelObject anObject;
+				aResultValue = new Object[3];
 
-				Map<Constraint, OclRoot> anObjectsResultMap;
-				Set<Constraint> anObjectsResultMapKeySet;
-				Iterator<Constraint> keySetIt;
+				aResultValue[ResultsContentProvider.CONSTRAINT] =
+						aResult.getConstraint();
+				aResultValue[ResultsContentProvider.MODELOBJECT] =
+						aResult.getModelObject();
+				aResultValue[ResultsContentProvider.RESULT] = aResult.getResult();
 
-				anObject = objectsIt.next();
-
-				anObjectsResultMap = new HashMap<Constraint, OclRoot>(anObject
-						.getResults());
-
-				anObjectsResultMapKeySet = anObjectsResultMap.keySet();
-				keySetIt = anObjectsResultMapKeySet.iterator();
-
-				/* Iterate through the key set and add collect the results. */
-				while (keySetIt.hasNext()) {
-
-					Constraint aKey;
-					List<Object> resultOfAKey;
-
-					aKey = keySetIt.next();
-					resultOfAKey = new ArrayList<Object>();
-
-					resultOfAKey.add(anObject);
-					resultOfAKey.add(aKey);
-					resultOfAKey.add(anObjectsResultMap.get(aKey));
-
-					resultList.add(resultOfAKey);
-				}
+				resultList.add(aResultValue);
 			}
 
-			result = resultList.toArray(new Object[resultList.size()]);
 		}
+		// no else.
 
-		else {
-			result = new Object[0];
-		}
+		result = resultList.toArray(new Object[0]);
 
 		return result;
 	}

@@ -75,9 +75,6 @@ public class ModelInstancesView extends ViewPart implements
 	/** The Constant ID of this class. */
 	public static final String ID = IModelBusConstants.MODEL_INSTANCES_VIEW_ID;
 
-	/** The last {@link IModelInstance} which has been selected. */
-	private IModelInstance myLastModelInstance = null;
-
 	/** The menu of the {@link ModelInstancesView}. */
 	private IMenuManager myMenu;
 
@@ -427,19 +424,6 @@ public class ModelInstancesView extends ViewPart implements
 
 			ModelInstanceSelectionAction aSelectionAction;
 			Map<IModelInstance, ModelInstanceSelectionAction> aModelsSelectionActions;
-
-			/* Eventually unregister adapters of the last active model instance. */
-			if (this.myLastModelInstance != null) {
-				this.myLastModelInstance.getCurrentSlAF().unregisterAdapters();
-			}
-			// no else.
-
-			/*
-			 * Register the adapters and store the model instance as new last
-			 * one.
-			 */
-			affectedModelInstance.getCurrentSlAF().registerAdapters();
-			this.myLastModelInstance = affectedModelInstance;
 
 			/* Get the selection actions of the affected model. */
 			aSelectionAction = null;

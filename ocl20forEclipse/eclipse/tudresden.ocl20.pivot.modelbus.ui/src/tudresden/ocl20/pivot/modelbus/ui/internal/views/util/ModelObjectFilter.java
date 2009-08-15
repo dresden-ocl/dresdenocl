@@ -19,7 +19,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jface.viewers.Viewer;
@@ -215,7 +214,6 @@ public class ModelObjectFilter extends ViewerFilter {
 	 * org.eclipse.jface.viewers.ViewerFilter#select(org.eclipse.jface.viewers
 	 * .Viewer, java.lang.Object, java.lang.Object)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean select(Viewer aViewer, Object aParentElement, Object anElement) {
 
@@ -229,38 +227,21 @@ public class ModelObjectFilter extends ViewerFilter {
 		/* Else check if the parent element is an IModelInstance. */
 		else if (aParentElement instanceof IModelInstance) {
 
-			IModelInstance aModelInstance;
-			List<IModelObject> objectsOfAKinds;
-
-			List<String> aCanoncialName;
-			Set<Type> instanceTypes;
-
-			aModelInstance = (IModelInstance) aParentElement;
-
-			/* Convert the given element into an canonical name. */
-			aCanoncialName = (List<String>) anElement;
-
-			/* Get all IModelObjects of this Type. */
-			objectsOfAKinds = aModelInstance.getObjectsOfKind(aCanoncialName);
-
-			/* Use one ModelObject to get the Type. */
-			instanceTypes = objectsOfAKinds.get(0).getTypes();
+			Type type;
+			type = (Type) anElement;
 
 			result = false;
 
 			/*
-			 * Check, if the given model objects type conforms to one type which shall
-			 * be filtered.
+			 * Check, if the given type conforms to one type which shall be filtered.
 			 */
 			for (Type aFilteredType : this.myFilteredTypes) {
 
-				for (Type anInstancesType : instanceTypes) {
-					if (anInstancesType.conformsTo(aFilteredType)) {
-						result = true;
-						break;
-					}
-					// no else.
+				if (type.conformsTo(aFilteredType)) {
+					result = true;
+					break;
 				}
+				// no else.
 			}
 
 		}
@@ -269,7 +250,7 @@ public class ModelObjectFilter extends ViewerFilter {
 		 * Else check if the parent element is List representing the canonical name
 		 * of a model objects type.
 		 */
-		else if (aParentElement instanceof List) {
+		else if (aParentElement instanceof Type) {
 
 			if (anElement instanceof IModelObject) {
 

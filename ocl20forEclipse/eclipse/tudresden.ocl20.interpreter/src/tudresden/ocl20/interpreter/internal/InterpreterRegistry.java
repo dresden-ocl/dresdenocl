@@ -32,11 +32,10 @@ package tudresden.ocl20.interpreter.internal;
 
 import org.eclipse.core.runtime.ListenerList;
 
+import tudresden.ocl20.interpreter.IInterpretationResult;
 import tudresden.ocl20.interpreter.IInterpreterRegistry;
 import tudresden.ocl20.interpreter.event.IInterpreterRegistryListener;
 import tudresden.ocl20.interpreter.event.InterpreterRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
@@ -44,7 +43,8 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * provides the possble to add or get Listeners.
  * </p>
  * 
- * @author Ronny Brandt
+ * @author Ronny Brandt: First implementation.
+ * @author Claas Wilke: Refactored and Documented.
  */
 public class InterpreterRegistry implements IInterpreterRegistry {
 
@@ -65,17 +65,13 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.interpreter.IInterpreterRegistry#fireInterpretationFinished
-	 * (tudresden.ocl20.pivot.pivotmodel.Constraint,
-	 * tudresden.ocl20.pivot.modelbus.IModelObject)
+	 * @see tudresden.ocl20.interpreter.IInterpreterRegistry#fireInterpretationFinished(tudresden.ocl20.interpreter.IInterpretationResult)
 	 */
-	public void fireInterpretationFinished(Constraint aConstraint,
-			IModelObject aModelObject) {
+	public void fireInterpretationFinished(
+			IInterpretationResult interpretationResult) {
 	
 		InterpreterRegistryEvent event;
-	
+		
 		event = null;
 	
 		if (this.listeners != null) {
@@ -87,8 +83,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 	
 				/* Lazily create the event. */
 				if (event == null) {
-					event = new InterpreterRegistryEvent(this, aConstraint,
-							aModelObject);
+					event = new InterpreterRegistryEvent(this, interpretationResult);
 				}
 				// no else.
 	

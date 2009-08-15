@@ -31,8 +31,6 @@
 package tudresden.ocl20.interpreter;
 
 import tudresden.ocl20.interpreter.event.IInterpreterRegistryListener;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
@@ -50,7 +48,7 @@ public interface IInterpreterRegistry {
 	 * </p>
 	 * 
 	 * @param listener
-	 *            The {@link IInterpreterRegistryListener} which shall be added.
+	 *          The {@link IInterpreterRegistryListener} which shall be added.
 	 */
 	public void addInterpreterRegistryListener(
 			IInterpreterRegistryListener listener);
@@ -60,21 +58,18 @@ public interface IInterpreterRegistry {
 	 * Fires an interpretation finished event.
 	 * </p>
 	 * 
-	 * @param aConstraint
-	 *            The {@link Constraint} that was interpreted.
-	 * @param modelObject
-	 *            The {@link IModelObject} that was interpreted.
+	 * @param interpretationResult
+	 *          The {@link IInterpretationResult} that shall be sent.
 	 */
-	public void fireInterpretationFinished(Constraint aConstraint,
-			IModelObject modelObject);
+	public void fireInterpretationFinished(
+			IInterpretationResult interpretationResult);
 
 	/**
 	 * <p>
 	 * Removes an {@link IInterpreterRegistryListener}.
 	 * 
 	 * @param listener
-	 *            The {@link IInterpreterRegistryListener} which shall be
-	 *            removed.
+	 *          The {@link IInterpreterRegistryListener} which shall be removed.
 	 */
 	public void removeInterpreterRegistryListener(
 			IInterpreterRegistryListener listener);

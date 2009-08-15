@@ -33,6 +33,7 @@ package tudresden.ocl20.interpreter.internal;
 import java.util.HashMap;
 
 import tudresden.ocl20.interpreter.IEnvironment;
+import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
@@ -58,30 +59,14 @@ public class Environment implements IEnvironment {
 	protected IModelInstance modelInstance;
 
 	/** Special values for postcondition constraints. */
-	protected HashMap<OclRoot, HashMap<OperationCallExp, OclRoot>> postconditionValues;
+	protected HashMap<Object, HashMap<OperationCallExp, OclRoot>> postconditionValues;
 
 	/** Saved constraints for body, def, initial and derive. */
 	protected HashMap<String, Constraint> savedConstraints;
 
 	/** Saved variables. */
-	protected HashMap<String, OclRoot> savedVariables;
-
-	/**
-	 * <p>
-	 * Gets the global environment.
-	 * </p>
-	 * 
-	 * @return the global instance of the environment
-	 */
-	public static IEnvironment getGlobalEnvironment() {
-
-		if (GLOBAL == null) {
-			GLOBAL = new Environment();
-		}
-		// no else.
-
-		return GLOBAL;
-	}
+	protected HashMap<String, OclRoot> savedVariables =
+			new HashMap<String, OclRoot>();
 
 	/**
 	 * <p>
@@ -93,12 +78,12 @@ public class Environment implements IEnvironment {
 	 *         {@link Environment}.
 	 */
 	public static IEnvironment getNewLocalEnvironment() {
+
 		return GLOBAL.clone();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.interpreter.IEnvironment#addConstraint(java.lang.String,
 	 * tudresden.ocl20.pivot.pivotmodel.Constraint)
@@ -114,25 +99,17 @@ public class Environment implements IEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.interpreter.IEnvironment#addVar(java.lang.String,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	public void addVar(String path, OclRoot oclRoot) {
-
-		if (this.savedVariables == null) {
-			this.savedVariables = new HashMap<String, OclRoot>();
-		}
-		// no else.
 
 		this.savedVariables.put(path, oclRoot);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.interpreter.IEnvironment#cacheResult(tudresden.ocl20.
+	 * @see tudresden.ocl20.interpreter.IEnvironment#cacheResult(tudresden.ocl20.
 	 * pivot.pivotmodel.NamedElement,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
@@ -148,7 +125,6 @@ public class Environment implements IEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.interpreter.IEnvironment#clearCache()
 	 */
 	public void clearCache() {
@@ -163,7 +139,6 @@ public class Environment implements IEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.interpreter.IEnvironment#getCachedResult(tudresden.ocl20
 	 * .pivot.pivotmodel.NamedElement)
@@ -185,7 +160,6 @@ public class Environment implements IEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.interpreter.IEnvironment#getConstraint(java.lang.String)
 	 */
@@ -206,33 +180,44 @@ public class Environment implements IEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.interpreter.IEnvironment#getModelInstance()
 	 */
 	public IModelInstance getModelInstance() {
+
 		return this.modelInstance;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.interpreter.IEnvironment#getPostconditionValue(tudresden
 	 * .ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
-	public OclRoot getPostconditionValue(OperationCallExp object) {
+	public OclRoot getPostconditionValue(OperationCallExp operationCallExp) {
 
 		OclRoot result;
+		Object selfObject;
 
-		result = modelInstance.getUndefined();
-
+		result = null;
+		
+		/* Try to get the postcondition values for the current 'self' object. */
 		if (this.postconditionValues != null) {
-			HashMap<OperationCallExp, OclRoot> specificValues;
+			HashMap<OperationCallExp, OclRoot> objectSpecificValues;
 
-			specificValues = postconditionValues.get(getVar("self"));
+			/* Get the object for which the value is stored. */
+			selfObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME).getAdaptee();
 
-			if (specificValues != null) {
-				result = specificValues.get(object);
+			/* If the adapted object is null, use the adaptation IModelObject instead. */
+			if (selfObject == null) {
+				this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
+			}
+			// no else.
+
+			objectSpecificValues = this.postconditionValues.get(selfObject);
+
+			if (objectSpecificValues != null) {
+				/* Try to get the value for the given expression. */
+				result = objectSpecificValues.get(operationCallExp);
 			}
 			// no else.
 		}
@@ -243,27 +228,19 @@ public class Environment implements IEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.interpreter.IEnvironment#getVar(java.lang.String)
 	 */
 	public OclRoot getVar(String path) {
 
 		OclRoot result;
 
-		if (this.savedVariables != null) {
-			result = savedVariables.get(path);
-		}
-
-		else {
-			result = null;
-		}
+		result = savedVariables.get(path);
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.interpreter.IEnvironment#savePostconditionValue(tudresden
 	 * .ocl20.pivot.essentialocl.expressions.OperationCallExp,
@@ -272,56 +249,73 @@ public class Environment implements IEnvironment {
 	public void savePostconditionValue(OperationCallExp anOperationCallExp,
 			OclRoot aSource) {
 
-		HashMap<OperationCallExp, OclRoot> specificValues;
+		HashMap<OperationCallExp, OclRoot> objectSpecificValues;
+		Object selfObject;
 
+		/* Check if the postcondition values have been initialized at all. */
 		if (this.postconditionValues == null) {
-			this.postconditionValues = new HashMap<OclRoot, HashMap<OperationCallExp, OclRoot>>();
+			this.postconditionValues =
+					new HashMap<Object, HashMap<OperationCallExp, OclRoot>>();
 		}
 		// no else.
 
-		specificValues = this.postconditionValues.get(getVar("self"));
+		/* Get the object for which the value is stored. */
+		selfObject = this.getVar(IOclInterpreter.SELF_VARIABLE_NAME).getAdaptee();
 
-		if (specificValues == null) {
-			specificValues = new HashMap<OperationCallExp, OclRoot>();
+		/* If the adapted object is null, use the adaptation IModelObject instead. */
+		if (selfObject == null) {
+			this.getVar(IOclInterpreter.SELF_VARIABLE_NAME);
 		}
 		// no else.
 
-		specificValues.put(anOperationCallExp, aSource);
+		objectSpecificValues = this.postconditionValues.get(selfObject);
 
-		this.postconditionValues.put(getVar("self"), specificValues);
+		/* Eventually initialize the specific values. */
+		if (objectSpecificValues == null) {
+			objectSpecificValues = new HashMap<OperationCallExp, OclRoot>();
+		}
+		// no else.
+
+		/* Store the postcondition value. */
+		objectSpecificValues.put(anOperationCallExp, aSource);
+
+		/* Store the specific values. */
+		this.postconditionValues.put(selfObject, objectSpecificValues);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.interpreter.IEnvironment#setModelInstance(tudresden.ocl20
 	 * .pivot.modelbus.IModelInstance)
 	 */
 	public void setModelInstance(IModelInstance aModelInstance) {
+
 		this.modelInstance = aModelInstance;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#clone()
 	 */
+	@SuppressWarnings("unchecked")
 	public IEnvironment clone() {
 
 		Environment result;
 
 		result = new Environment();
 
-		result.savedConstraints = this.savedConstraints;
 		result.modelInstance = this.modelInstance;
+		result.postconditionValues = this.postconditionValues;
+		result.savedConstraints = this.savedConstraints;
 
 		/*
-		 * The Map of variables must be cloned. Otherwise new declared variables
-		 * are visible global.
+		 * The Map of variables must be cloned. Otherwise new declared variables are
+		 * visible global.
 		 */
-		result.savedVariables = (HashMap<String, OclRoot>) this.savedVariables
-				.clone();
+		result.savedVariables =
+				(HashMap<String, OclRoot>) this.savedVariables.clone();
+
 		result.cachedResults = this.cachedResults;
 
 		return result;
