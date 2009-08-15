@@ -22,19 +22,16 @@ package tudresden.ocl20.interpreter.test.tests;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.interpreter.IEnvironment;
+import tudresden.ocl20.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.interpreter.IOclInterpreter;
-import tudresden.ocl20.interpreter.internal.Environment;
-import tudresden.ocl20.interpreter.internal.OclInterpreter;
+import tudresden.ocl20.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
 import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
@@ -130,9 +127,10 @@ public class TestPerformer {
 	protected Set<Constraint> interpretedConstraints;
 
 	/**
-	 * The global {@link IEnvironment} used during interpretation and preparation.
+	 * The global {@link IInterpretationEnvironment} used during interpretation
+	 * and preparation.
 	 */
-	protected IEnvironment myGlobalEnvironment;
+	protected IInterpretationEnvironment myGlobalEnvironment;
 
 	/** The {@link IOclInterpreter} used by this {@link TestPerformer}. */
 	protected IOclInterpreter myInterpreter = null;
@@ -223,7 +221,8 @@ public class TestPerformer {
 			this.interpretedConstraints = new HashSet<Constraint>();
 
 			/* Initialize the interpreter. */
-			this.myInterpreter = new OclInterpreter(this.myModelInstance);
+			this.myInterpreter =
+					OclInterpreterPlugin.createInterpreter(this.myModelInstance);
 			this.myInterpreter.setCachingEnabled(false);
 
 			this.myGlobalEnvironment = this.myInterpreter.getEnvironment();
@@ -436,10 +435,11 @@ public class TestPerformer {
 	 * @param modelObject
 	 *          The {@link IModelObject} for that the not yet interpreted
 	 *          {@link Constraint}s shall be prepared.
-	 * @return The {@link IEnvironment} of the {@link OclInterpreter} containing
-	 *         the done preparation.
+	 * @return The {@link IInterpretationEnvironment} of the
+	 *         {@link OclInterpreter} containing the done preparation.
 	 */
-	public IEnvironment prepareRemainingConstraints(IModelObject modelObject) {
+	public IInterpretationEnvironment prepareRemainingConstraints(
+			IModelObject modelObject) {
 
 		return this.prepareRemainingConstraints(modelObject, true);
 	}
@@ -456,11 +456,11 @@ public class TestPerformer {
 	 *          If true, the prepared {@link Constraint}s will be added to the set
 	 *          of interpreted {@link Constraint}s and thus will not be prepared
 	 *          or interpreted again.
-	 * @return The {@link IEnvironment} of the {@link OclInterpreter} containing
-	 *         the done preparation.
+	 * @return The {@link IInterpretationEnvironment} of the
+	 *         {@link OclInterpreter} containing the done preparation.
 	 */
-	public IEnvironment prepareRemainingConstraints(IModelObject modelObject,
-			boolean setInterpreted) {
+	public IInterpretationEnvironment prepareRemainingConstraints(
+			IModelObject modelObject, boolean setInterpreted) {
 
 		List<Constraint> unInterpretedConstraints;
 
@@ -532,7 +532,6 @@ public class TestPerformer {
 	 * {@link IModelObject}s from the {@link IModel}.
 	 * </p>
 	 */
-	@SuppressWarnings("unchecked")
 	public void resetModel() {
 
 		/* Remove all loaded models. */
@@ -543,49 +542,13 @@ public class TestPerformer {
 		this.myModel = ModelBusPlugin.getModelRegistry().getActiveModel();
 
 		/* Try to reset the prepared constraints of the global environment. */
-		try {
-			Field savedConstraintsField;
-			Object savedConstraintsObject;
-			Map<String, Constraint> savedConstraints;
-
-			/* Get the field by reflection which contains the constraints. */
-			savedConstraintsField =
-					Environment.class.getDeclaredField("savedConstraints");
-			savedConstraintsField.setAccessible(true);
-
-			/* Get the field's object and cast it to a Map. */
-			savedConstraintsObject =
-					savedConstraintsField.get(this.myGlobalEnvironment);
-			savedConstraints = (Map<String, Constraint>) savedConstraintsObject;
-
-			/* Clear the Map. */
-			if (savedConstraints != null) {
-				savedConstraints.clear();
-			}
-			// no else.
-		}
-
-		catch (SecurityException e) {
-			/* Ignore this exception. */
-		}
-
-		catch (NoSuchFieldException e) {
-			/* Ignore this exception. */
-		}
-
-		catch (IllegalArgumentException e) {
-			/* Ignore this exception. */
-		}
-
-		catch (IllegalAccessException e) {
-			/* Ignore this exception. */
-		}
+		this.myGlobalEnvironment.clearPreparedConstraints();
 	}
 
 	/**
 	 * <p>
-	 * Removes a variable to the {@link IEnvironment} used for preparation and
-	 * interpretation.
+	 * Removes a variable to the {@link IInterpretationEnvironment} used for
+	 * preparation and interpretation.
 	 * </p>
 	 * 
 	 * @param path
@@ -599,8 +562,8 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Add a given {@link Object} as a variable to the {@link IEnvironment} used
-	 * for preparation and interpretation.
+	 * Add a given {@link Object} as a variable to the
+	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
 	 * </p>
 	 * 
 	 * @param path
@@ -621,8 +584,8 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Add a given {@link OclRoot} as a variable to the {@link IEnvironment} used
-	 * for preparation and interpretation.
+	 * Add a given {@link OclRoot} as a variable to the
+	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
 	 * </p>
 	 * 
 	 * @param path

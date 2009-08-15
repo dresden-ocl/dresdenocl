@@ -44,7 +44,7 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
  * 
  * @author Ronny Brandt
  */
-public interface IEnvironment extends Cloneable {
+public interface IInterpretationEnvironment extends Cloneable {
 
 	/**
 	 * <p>
@@ -53,10 +53,10 @@ public interface IEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param path
-	 *            The path of the attribute/operation described by the
-	 *            {@link Constraint}.
+	 *          The path of the attribute/operation described by the
+	 *          {@link Constraint}.
 	 * @param aConstraint
-	 *            The {@link Constraint} describing the attribute/operation.
+	 *          The {@link Constraint} describing the attribute/operation.
 	 */
 	public void addConstraint(String path, Constraint aConstraint);
 
@@ -66,9 +66,9 @@ public interface IEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param path
-	 *            The path of the variable or simply the name (e.g. "self")
+	 *          The path of the variable or simply the name (e.g. "self")
 	 * @param anOclRoot
-	 *            The variable to be saved.
+	 *          The variable to be saved.
 	 */
 	public void addVar(String path, OclRoot anOclRoot);
 
@@ -79,9 +79,9 @@ public interface IEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param anElement
-	 *            The {@link NamedElement} the result belongs to.
+	 *          The {@link NamedElement} the result belongs to.
 	 * @param result
-	 *            The result for the {@link NamedElement}.
+	 *          The result for the {@link NamedElement}.
 	 */
 	public void cacheResult(NamedElement anElement, OclRoot result);
 
@@ -94,11 +94,20 @@ public interface IEnvironment extends Cloneable {
 
 	/**
 	 * <p>
-	 * Clones an {@link IEnvironment}. Used for creating local environments.
-	 * 
-	 * @return A copy of the {@link IEnvironment}.
+	 * Removes all prepared {@link Constraint}s from the
+	 * {@link IInterpretationEnvironment}.
+	 * </p>
 	 */
-	public IEnvironment clone();
+	public void clearPreparedConstraints();
+
+	/**
+	 * <p>
+	 * Clones an {@link IInterpretationEnvironment}. Used for creating local
+	 * environments.
+	 * 
+	 * @return A copy of the {@link IInterpretationEnvironment}.
+	 */
+	public IInterpretationEnvironment clone();
 
 	/**
 	 * <p>
@@ -106,7 +115,7 @@ public interface IEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param anElement
-	 *            The {@link NamedElement} the result is asked for.
+	 *          The {@link NamedElement} the result is asked for.
 	 * 
 	 * @return The cached result.
 	 */
@@ -119,8 +128,8 @@ public interface IEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param path
-	 *            The path of the attribute/operation described by the
-	 *            {@link Constraint}.
+	 *          The path of the attribute/operation described by the
+	 *          {@link Constraint}.
 	 * 
 	 * @return The {@link Constraint} describing the attribute/operation.
 	 */
@@ -141,8 +150,8 @@ public interface IEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param anOperationCallExp
-	 *            The {@link OperationCallExp} containing operation atPre() or
-	 *            oclIsNew().
+	 *          The {@link OperationCallExp} containing operation atPre() or
+	 *          oclIsNew().
 	 * 
 	 * @return The postcondition result for that operation.
 	 */
@@ -154,7 +163,7 @@ public interface IEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param path
-	 *            The path of the variable or simply the name (e.g. "self").
+	 *          The path of the variable or simply the name (e.g. "self").
 	 * 
 	 * @return Saved variables with given name.
 	 */
@@ -166,10 +175,10 @@ public interface IEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param anOperationCallExp
-	 *            The {@link OperationCallExp} containing operation atPre() or
-	 *            oclIsNew().
+	 *          The {@link OperationCallExp} containing operation atPre() or
+	 *          oclIsNew().
 	 * @param source
-	 *            The result for that operation.
+	 *          The result for that operation.
 	 */
 	public void savePostconditionValue(OperationCallExp anOperationCallExp,
 			OclRoot source);
@@ -180,7 +189,7 @@ public interface IEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param aModelInstance
-	 *            The new {@link IModelInstance}.
+	 *          The new {@link IModelInstance}.
 	 */
 	public void setModelInstance(IModelInstance aModelInstance);
 }

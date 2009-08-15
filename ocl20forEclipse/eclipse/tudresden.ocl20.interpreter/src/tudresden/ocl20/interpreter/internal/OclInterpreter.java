@@ -46,10 +46,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.interpreter.IEnvironment;
+import tudresden.ocl20.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.interpreter.IInterpretationResult;
 import tudresden.ocl20.interpreter.IOclInterpreter;
-import tudresden.ocl20.interpreter.InterpreterPlugin;
+import tudresden.ocl20.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
@@ -123,7 +123,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	 * Logger for this class
 	 */
 	private static final Logger LOGGER =
-			InterpreterPlugin.getLogger(OclInterpreter.class);
+			OclInterpreterPlugin.getLogger(OclInterpreter.class);
 
 	/** The {@link IOclInstanceAdapterFactory} of this {@link IOclInterpreter}. */
 	private IOclInstanceAdapterFactory myOclInstanceAdapterFactory =
@@ -148,15 +148,15 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/** The current {@link IModelObject} to be interpreted or prepared. */
 	private IModelObject myCurrentModelObject;
 
-	/** The {@link Environment} to be used to store {@link Variable}s etc. */
-	private IEnvironment myEnvironment = new Environment();;
+	/** The {@link InterpretationEnvironment} to be used to store {@link Variable}s etc. */
+	private IInterpretationEnvironment myEnvironment = new InterpretationEnvironment();;
 
 	/**
-	 * The Stack is used to store local {@link IEnvironment} used during method or
-	 * property call interpretation. The local {@link IEnvironment}s can contain
+	 * The Stack is used to store local {@link IInterpretationEnvironment} used during method or
+	 * property call interpretation. The local {@link IInterpretationEnvironment}s can contain
 	 * {@link Variable}s that are not visible globaly.
 	 */
-	private Stack<IEnvironment> myEnvironmentStack = new Stack<IEnvironment>();
+	private Stack<IInterpretationEnvironment> myEnvironmentStack = new Stack<IInterpretationEnvironment>();
 
 	/**
 	 * <p>
@@ -175,7 +175,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.interpreter.IOclInterpreter#getEnvironment()
 	 */
-	public IEnvironment getEnvironment() {
+	public IInterpretationEnvironment getEnvironment() {
 
 		return this.myEnvironment;
 	}
@@ -258,7 +258,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 		result =
 				new InterpretationResultImpl(aModelObject, aConstraint, oclRootResult);
 
-		InterpreterPlugin.getInterpreterRegistry().fireInterpretationFinished(
+		OclInterpreterPlugin.getInterpreterRegistry().fireInterpretationFinished(
 				result);
 
 		/* Eventually log the exit of this method. */
@@ -2966,7 +2966,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	 * <p>
 	 * A helper method which adds the parameters of an {@link Operation} as
 	 * context of a {@link Constraint} that shall be interpreted to the current
-	 * {@link IEnvironment}.
+	 * {@link IInterpretationEnvironment}.
 	 * </p>
 	 * 
 	 * @param aConstraint
@@ -4071,7 +4071,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclRoot> implements
 	/**
 	 * <p>
 	 * A helper method which removes the parameters of an {@link Operation} which
-	 * is the context of a {@link Constraint} from the {@link IEnvironment} after
+	 * is the context of a {@link Constraint} from the {@link IInterpretationEnvironment} after
 	 * its execution and interpretation.
 	 * </p>
 	 * 

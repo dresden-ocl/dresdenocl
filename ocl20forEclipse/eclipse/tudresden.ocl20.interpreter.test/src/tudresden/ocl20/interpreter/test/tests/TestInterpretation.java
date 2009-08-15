@@ -30,8 +30,7 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.interpreter.IEnvironment;
-import tudresden.ocl20.interpreter.internal.OclInterpreter;
+import tudresden.ocl20.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.examples.royalsandloyals.Burning;
@@ -78,9 +77,9 @@ public class TestInterpretation {
 	private List<OclRoot> results;
 
 	/**
-	 * The global {@link IEnvironment} of the used {@link OclInterpreter}.
+	 * The global {@link IInterpretationEnvironment} of the used {@link OclInterpreter}.
 	 */
-	private IEnvironment globalEnvironment;
+	private IInterpretationEnvironment globalEnvironment;
 
 	/**
 	 * The current {@link IModelObject} for that a {@link Constraint} shall be

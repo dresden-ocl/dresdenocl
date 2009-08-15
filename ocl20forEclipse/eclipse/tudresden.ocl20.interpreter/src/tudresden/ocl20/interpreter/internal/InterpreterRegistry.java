@@ -35,7 +35,7 @@ import org.eclipse.core.runtime.ListenerList;
 import tudresden.ocl20.interpreter.IInterpretationResult;
 import tudresden.ocl20.interpreter.IInterpreterRegistry;
 import tudresden.ocl20.interpreter.event.IInterpreterRegistryListener;
-import tudresden.ocl20.interpreter.event.InterpreterRegistryEvent;
+import tudresden.ocl20.interpreter.event.internal.InterpreterRegistryEvent;
 
 /**
  * <p>

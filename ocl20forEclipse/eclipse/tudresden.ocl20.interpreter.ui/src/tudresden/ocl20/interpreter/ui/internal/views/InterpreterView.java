@@ -57,7 +57,7 @@ import org.eclipse.ui.part.ViewPart;
 
 import tudresden.ocl20.interpreter.IInterpretationResult;
 import tudresden.ocl20.interpreter.IOclInterpreter;
-import tudresden.ocl20.interpreter.internal.OclInterpreter;
+import tudresden.ocl20.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.interpreter.ui.InterpreterUIPlugin;
 import tudresden.ocl20.interpreter.ui.actions.InterpreterViewMenuAction;
 import tudresden.ocl20.interpreter.ui.actions.InterpreterViewMenuActionType;
@@ -504,7 +504,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		result = this.myCachedInterpreters.get(modelInstance);
 
 		if (result == null) {
-			result = new OclInterpreter(modelInstance);
+			result = OclInterpreterPlugin.createInterpreter(modelInstance);
 			this.myCachedInterpreters.put(modelInstance, result);
 		}
 		// no else.
@@ -680,87 +680,87 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * supported {@link InterpreterViewMenuAction}s.
 	 */
 	private void initMenu() {
-	
+
 		InterpreterViewMenuAction prepareSelected;
 		InterpreterViewMenuAction prepareAll;
-	
+
 		InterpreterViewMenuAction setUseCache;
 		InterpreterViewMenuAction addVariable;
-	
+
 		InterpreterViewMenuAction interpretSelected;
 		InterpreterViewMenuAction interpretAll;
-	
+
 		InterpreterViewMenuAction clearResultsForSelected;
 		InterpreterViewMenuAction clearAllResults;
-	
+
 		/* Create the different actions for the preparation menu. */
-	
+
 		/* Create action to prepare all constraints. */
 		{
 			prepareAll =
 					new InterpreterViewMenuAction(
 							InterpreterViewMenuActionType.PREPARE_ALL_CONSTRAINTS, this);
-	
+
 			/* Set an Icon for this action. */
 			prepareAll.setImageDescriptor(InterpreterUIPlugin
 					.getImageDescriptor(PREPARE_IMAGE));
-	
+
 			/* Add the action to the menu. */
 			this.getMenuManager().add(prepareAll);
-	
+
 			/* Add the action to the tool bar. */
 			this.getViewSite().getActionBars().getToolBarManager().add(prepareAll);
 		}
-	
+
 		/* Create action to prepare the selected constraints. */
 		{
 			prepareSelected =
 					new InterpreterViewMenuAction(
 							InterpreterViewMenuActionType.PREPARE_SELECTED_CONSTRAINTS, this);
-	
+
 			/* Add the action to the menu. */
 			this.getMenuManager().add(prepareSelected);
 		}
-	
+
 		/* Add a separator line to the menu. */
 		this.getMenuManager().add(new Separator());
-	
+
 		/* Create an action to add new variables to the environment. */
 		{
 			addVariable =
 					new InterpreterViewMenuAction(
 							InterpreterViewMenuActionType.ADD_VARIABLE_TO_ENVIRONMENT, this);
-	
+
 			addVariable
 					.setText(OclInterpreterUIMessages.InterpreterView_AddVariable_Title);
-	
+
 			/* Set an Icon for this action. */
 			addVariable.setImageDescriptor(InterpreterUIPlugin
 					.getImageDescriptor(ADD_IMAGE));
-	
+
 			/* Add the action to the menu. */
 			this.getMenuManager().add(addVariable);
-	
+
 			/* Add the action to the tool bar. */
 			this.getViewSite().getActionBars().getToolBarManager().add(addVariable);
 		}
-	
+
 		/* Create action to enable or disable the cache. */
 		{
 			setUseCache =
 					new InterpreterViewMenuAction(
 							InterpreterViewMenuActionType.ENABLE_DISABLE_CACHING, this);
-	
+
 			setUseCache.setChecked(false);
 			setUseCache.setText(OclInterpreterUIMessages.InterpreterView_UseCache);
-	
+
 			/* Add the action to the menu. */
 			this.getMenuManager().add(setUseCache);
 		}
-	
+
 		/* Add a separator line to the menu. */
 		this.getMenuManager().add(new Separator());
-	
+
 		/* ---- INTERPRETER MENU ---- */
 		/* Create action to interpret all constraints and model objects. */
 		{
@@ -768,32 +768,32 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 					new InterpreterViewMenuAction(
 							InterpreterViewMenuActionType.INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
 							this);
-	
+
 			/* Set an Icon for this action. */
 			interpretAll.setImageDescriptor(InterpreterUIPlugin
 					.getImageDescriptor(INTERPRET_IMAGE));
-	
+
 			/* Add the action to the menu. */
 			this.getMenuManager().add(interpretAll);
-	
+
 			/* Add the action to the tool bar. */
 			this.getViewSite().getActionBars().getToolBarManager().add(interpretAll);
 		}
-	
+
 		/* Create action to interpret selected constraints and model objects. */
 		{
 			interpretSelected =
 					new InterpreterViewMenuAction(
 							InterpreterViewMenuActionType.INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
 							this);
-	
+
 			/* Add the action to the menu. */
 			this.getMenuManager().add(interpretSelected);
 		}
-	
+
 		/* Add a separator line to the menu. */
 		this.getMenuManager().add(new Separator());
-	
+
 		/*
 		 * Create action to clear the results for the all constraints and objects.
 		 */
@@ -802,19 +802,19 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 					new InterpreterViewMenuAction(
 							InterpreterViewMenuActionType.CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
 							this);
-	
+
 			/* Set an Icon for this action. */
 			clearAllResults.setImageDescriptor(InterpreterUIPlugin
 					.getImageDescriptor(REMOVE_IMAGE));
-	
+
 			/* Add the action to the menu. */
 			this.getMenuManager().add(clearAllResults);
-	
+
 			/* Add the action to the tool bar. */
 			this.getViewSite().getActionBars().getToolBarManager().add(
 					clearAllResults);
 		}
-	
+
 		/*
 		 * Create action to clear the results for the selected constraints model
 		 * objects.
@@ -824,11 +824,11 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 					new InterpreterViewMenuAction(
 							InterpreterViewMenuActionType.CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
 							this);
-	
+
 			/* Add the action to the menu. */
 			this.getMenuManager().add(clearResultsForSelected);
 		}
-	
+
 		/*
 		 * Eventually initialize an action to remove the results for all selected
 		 * constraints.
@@ -840,11 +840,11 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 								InterpreterViewMenuActionType.REMOVE_SELECTED_RESULTS, this);
 			}
 			// no else.
-	
+
 			/* Add the action to the menu. */
 			this.getMenuManager().add(myActionToremoveSelectedResults);
 		}
-	
+
 		/* Update the menu and tool bar after initialization. */
 		this.getViewSite().getActionBars().updateActionBars();
 	}

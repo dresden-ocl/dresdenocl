@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import tudresden.ocl20.interpreter.IEnvironment;
+import tudresden.ocl20.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.interpreter.IInterpretationResult;
 import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.interpreter.ui.internal.msg.OclInterpreterUIMessages;
@@ -60,7 +60,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/**
 	 * The {@link Combo} to select a {@link OclRoot} value that shall be added to
-	 * the {@link IEnvironment} as the result {@link Variable}.
+	 * the {@link IInterpretationEnvironment} as the result {@link Variable}.
 	 */
 	private Combo myResultCombo;
 
@@ -77,7 +77,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/**
 	 * The {@link Combo} to select a {@link PrimitiveType} of that an instance
-	 * shall be added as a {@link Variable} to the {@link IEnvironment}.
+	 * shall be added as a {@link Variable} to the {@link IInterpretationEnvironment}.
 	 */
 	private Combo myTypeCombo;
 
@@ -93,7 +93,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/**
 	 * The {@link Text} that contains the value that shall be added as a
-	 * {@link Variable} to the {@link IEnvironment}.
+	 * {@link Variable} to the {@link IInterpretationEnvironment}.
 	 */
 	private Text myValueText;
 
@@ -104,7 +104,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 
 	/**
 	 * The name of the {@link Variable} that shall be added to the
-	 * {@link IEnvironment}.
+	 * {@link IInterpretationEnvironment}.
 	 */
 	private Text myVariableText;
 

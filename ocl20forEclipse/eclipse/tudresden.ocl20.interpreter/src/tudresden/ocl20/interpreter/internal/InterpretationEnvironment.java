@@ -32,7 +32,7 @@ package tudresden.ocl20.interpreter.internal;
 
 import java.util.HashMap;
 
-import tudresden.ocl20.interpreter.IEnvironment;
+import tudresden.ocl20.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
@@ -47,10 +47,10 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
  * 
  * @author Ronny Brandt.
  */
-public class Environment implements IEnvironment {
+public class InterpretationEnvironment implements IInterpretationEnvironment {
 
-	/** The global instance of the {@link Environment}. */
-	private static IEnvironment GLOBAL;
+	/** The global instance of the {@link InterpretationEnvironment}. */
+	private static IInterpretationEnvironment GLOBAL;
 
 	/** Cached results. */
 	private HashMap<NamedElement, OclRoot> cachedResults;
@@ -70,14 +70,14 @@ public class Environment implements IEnvironment {
 
 	/**
 	 * <p>
-	 * Gets a new local {@link Environment} which is a copy of the global
-	 * {@link Environment}.
+	 * Gets a new local {@link InterpretationEnvironment} which is a copy of the
+	 * global {@link InterpretationEnvironment}.
 	 * </p>
 	 * 
-	 * @return A new local {@link Environment} which is a copy of the global
-	 *         {@link Environment}.
+	 * @return A new local {@link InterpretationEnvironment} which is a copy of
+	 *         the global {@link InterpretationEnvironment}.
 	 */
-	public static IEnvironment getNewLocalEnvironment() {
+	public static IInterpretationEnvironment getNewLocalEnvironment() {
 
 		return GLOBAL.clone();
 	}
@@ -135,6 +135,17 @@ public class Environment implements IEnvironment {
 			this.cachedResults = null;
 		}
 		// no else.
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.interpreter.IInterpretationEnvironment#clearPreparedConstraints
+	 * ()
+	 */
+	public void clearPreparedConstraints() {
+
+		this.savedConstraints.clear();
 	}
 
 	/*
@@ -199,7 +210,7 @@ public class Environment implements IEnvironment {
 		Object selfObject;
 
 		result = null;
-		
+
 		/* Try to get the postcondition values for the current 'self' object. */
 		if (this.postconditionValues != null) {
 			HashMap<OperationCallExp, OclRoot> objectSpecificValues;
@@ -299,11 +310,11 @@ public class Environment implements IEnvironment {
 	 * @see java.lang.Object#clone()
 	 */
 	@SuppressWarnings("unchecked")
-	public IEnvironment clone() {
+	public IInterpretationEnvironment clone() {
 
-		Environment result;
+		InterpretationEnvironment result;
 
-		result = new Environment();
+		result = new InterpretationEnvironment();
 
 		result.modelInstance = this.modelInstance;
 		result.postconditionValues = this.postconditionValues;

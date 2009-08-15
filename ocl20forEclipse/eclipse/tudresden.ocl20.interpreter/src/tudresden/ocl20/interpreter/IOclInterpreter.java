@@ -33,7 +33,7 @@ package tudresden.ocl20.interpreter;
 import java.util.Collection;
 import java.util.List;
 
-import tudresden.ocl20.interpreter.internal.Environment;
+import tudresden.ocl20.interpreter.internal.InterpretationEnvironment;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
@@ -55,24 +55,24 @@ public interface IOclInterpreter {
 
 	/**
 	 * The name used to store the OCL <code>self</code> {@link Variable} in the
-	 * {@link Environment}.
+	 * {@link InterpretationEnvironment}.
 	 */
 	public static final String SELF_VARIABLE_NAME = "self";
 
 	/**
 	 * The name used to store the OCL <code>result</code> {@link Variable} in the
-	 * {@link Environment}.
+	 * {@link InterpretationEnvironment}.
 	 */
 	public static final String RESULT_VARIABLE_NAME = "result";
 
 	/**
 	 * <p>
-	 * Returns the {@link IEnvironment} of this {@link IOclInterpreter}.
+	 * Returns the {@link IInterpretationEnvironment} of this {@link IOclInterpreter}.
 	 * </p>
 	 * 
-	 * @return The {@link IEnvironment} of this {@link IOclInterpreter}.
+	 * @return The {@link IInterpretationEnvironment} of this {@link IOclInterpreter}.
 	 */
-	public IEnvironment getEnvironment();
+	public IInterpretationEnvironment getEnvironment();
 
 	/**
 	 * <p>
@@ -298,8 +298,8 @@ public interface IOclInterpreter {
 
 	/**
 	 * <p>
-	 * A helper method that replaces the current {@link IEnvironment} by a clone
-	 * of it and placing the old {@link IEnvironment} of the {@link IEnvironment}
+	 * A helper method that replaces the current {@link IInterpretationEnvironment} by a clone
+	 * of it and placing the old {@link IInterpretationEnvironment} of the {@link IInterpretationEnvironment}
 	 * stack.
 	 * </p>
 	 */
@@ -307,8 +307,8 @@ public interface IOclInterpreter {
 
 	/**
 	 * <p>
-	 * A helper method that replaces the current {@link IEnvironment} by the next
-	 * more global {@link IEnvironment}.
+	 * A helper method that replaces the current {@link IInterpretationEnvironment} by the next
+	 * more global {@link IInterpretationEnvironment}.
 	 * </p>
 	 */
 	public void pushLocalEnvironment();
@@ -316,12 +316,12 @@ public interface IOclInterpreter {
 	/**
 	 * <p>
 	 * Sets a given {@link IModelObject} as value of a {@link Variable} (given as
-	 * its name as a {@link String}) in the {@link IEnvironment} of this
+	 * its name as a {@link String}) in the {@link IInterpretationEnvironment} of this
 	 * {@link IOclInterpreter}.
 	 * </p>
 	 * 
 	 * <p>
-	 * If a {@link Variable} shall be removed from the {@link IEnvironment}, use
+	 * If a {@link Variable} shall be removed from the {@link IInterpretationEnvironment}, use
 	 * <code>null</code> instead of a given value.
 	 * </p>
 	 * 
@@ -335,7 +335,7 @@ public interface IOclInterpreter {
 	/**
 	 * <p>
 	 * Sets a given {@link OclRoot} as value of a {@link Variable} (given as its
-	 * name as a {@link String}) in the {@link IEnvironment} of this
+	 * name as a {@link String}) in the {@link IInterpretationEnvironment} of this
 	 * {@link IOclInterpreter}.
 	 * </p>
 	 * 
@@ -360,7 +360,7 @@ public interface IOclInterpreter {
 
 	/**
 	 * <p>
-	 * Resets a given {@link Variable} in the {@link IEnvironment} of this
+	 * Resets a given {@link Variable} in the {@link IInterpretationEnvironment} of this
 	 * {@link IOclInterpreter}.
 	 * </p>
 	 * 

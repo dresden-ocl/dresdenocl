@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.interpreter.event;
+package tudresden.ocl20.interpreter.event.internal;
 
 import java.util.EventObject;
 

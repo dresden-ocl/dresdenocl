@@ -36,7 +36,9 @@ import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.interpreter.event.IInterpreterRegistryListener;
 import tudresden.ocl20.interpreter.internal.InterpreterRegistry;
+import tudresden.ocl20.interpreter.internal.OclInterpreter;
 import tudresden.ocl20.logging.LoggingPlugin;
+import tudresden.ocl20.pivot.modelbus.IModelInstance;
 
 /**
  * <p>
@@ -45,13 +47,13 @@ import tudresden.ocl20.logging.LoggingPlugin;
  * 
  * @author Ronny Brandt
  */
-public class InterpreterPlugin extends Plugin {
+public class OclInterpreterPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID = "tudresden.ocl20.interpreter";
 
 	/** The shared instance. */
-	private static InterpreterPlugin plugin;
+	private static OclInterpreterPlugin plugin;
 
 	/**
 	 * The {@link IInterpreterRegistry} for {@link IInterpreterRegistryListener} s
@@ -61,11 +63,71 @@ public class InterpreterPlugin extends Plugin {
 
 	/**
 	 * <p>
-	 * Creates a new {@link InterpreterPlugin}.
+	 * Creates a new {@link OclInterpreterPlugin}.
 	 * </p>
 	 */
-	public InterpreterPlugin() {
+	public OclInterpreterPlugin() {
 
+	}
+
+	/**
+	 * <p>
+	 * Creates a new {@link IOclInterpreter}.
+	 * </p>
+	 * 
+	 * @param aModelInstance
+	 *          The {@link IModelInstance} used during interpretation.
+	 */
+	public static IOclInterpreter createInterpreter(IModelInstance aModelInstance) {
+	
+		return new OclInterpreter(aModelInstance);
+	}
+
+	/**
+	 * @return The shared instance.
+	 */
+	public static OclInterpreterPlugin getDefault() {
+
+		return plugin;
+	}
+
+	/**
+	 * <p>
+	 * Facade method for the classes in this plug-in that hides the dependency
+	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * </p>
+	 * 
+	 * @param clazz
+	 *          The {@link Class} to return the {@link Logger} for.
+	 * 
+	 * @return A log4j {@link Logger}> instance.
+	 * 
+	 * @generated NOT
+	 */
+	public static Logger getLogger(Class<?> clazz) {
+
+		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
+	}
+
+	/**
+	 * @return The {@link IInterpreterRegistry} of this {@link OclInterpreterPlugin}.
+	 */
+	public static IInterpreterRegistry getInterpreterRegistry() {
+
+		/* Check if the plug-in has been activated. */
+		if (plugin == null) {
+			throw new IllegalStateException(
+					"The Interpreter plugin has not been activated.");
+		}
+		// no else.
+
+		/* Lazily create the registry. */
+		if (plugin.interpreterRegistry == null) {
+			plugin.interpreterRegistry = new InterpreterRegistry();
+		}
+		// no else.
+
+		return plugin.interpreterRegistry;
 	}
 
 	/*
@@ -90,52 +152,5 @@ public class InterpreterPlugin extends Plugin {
 		plugin = null;
 
 		super.stop(context);
-	}
-
-	/**
-	 * @return The shared instance.
-	 */
-	public static InterpreterPlugin getDefault() {
-
-		return plugin;
-	}
-
-	/**
-	 * <p>
-	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
-	 * </p>
-	 * 
-	 * @param clazz
-	 *          The {@link Class} to return the {@link Logger} for.
-	 * 
-	 * @return A log4j {@link Logger}> instance.
-	 * 
-	 * @generated NOT
-	 */
-	public static Logger getLogger(Class<?> clazz) {
-
-		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
-	}
-
-	/**
-	 * @return The {@link IInterpreterRegistry} of this {@link InterpreterPlugin}.
-	 */
-	public static IInterpreterRegistry getInterpreterRegistry() {
-
-		/* Check if the plug-in has been activated. */
-		if (plugin == null) {
-			throw new IllegalStateException(
-					"The Interpreter plugin has not been activated.");
-		}
-		// no else.
-
-		/* Lazily create the registry. */
-		if (plugin.interpreterRegistry == null) {
-			plugin.interpreterRegistry = new InterpreterRegistry();
-		}
-		// no else.
-
-		return plugin.interpreterRegistry;
 	}
 }
