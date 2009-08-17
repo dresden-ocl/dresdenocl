@@ -1,0 +1,9 @@
+OCL2 INTERPRETER GUI PLUG-IN OF DRESEN OCL2 FOR ECLIPSE
+=======================================================
+
+This plug-in contains the GUI of the OCL2 Interpreter of Dresden 
+OCL2 for Eclipse.
+
+How to get started and how to use the interpreter is explained in the
+manual, located in the 'doc' directory in the SVN trunk or your
+toolkit's release (see chapter 'OCL Constraint Interpretation').
