@@ -54,6 +54,10 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	private static final Logger LOGGER =
 			JavaModelInstanceTypePlugin.getLogger(JavaModelInstance.class);
 
+	/**
+	 * The {@link JavaModelInstanceObjectFactory} used to created adapters for the
+	 * {@link IModelObject}s.
+	 */
 	private JavaModelInstanceObjectFactory myModelInstanceObjectFactory;
 
 	/**
@@ -175,34 +179,33 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 *          The {@link IModel} of this {@link IModelInstance}.s
 	 * @throws ModelAccessException
 	 */
-	public JavaModelInstance(IModel model)
-			throws ModelAccessException {
-	
+	public JavaModelInstance(IModel model) throws ModelAccessException {
+
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
-	
+
 			msg = "JavaModelInstance("; //$NON-NLS-1$
 			msg += "model = " + model; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
-	
+
 			LOGGER.debug(msg);
 		}
 		// no else.
-	
+
 		/* Initialize the instance. */
 		this.myModel = model;
 		this.myRootNamespace = model.getRootNamespace();
-	
+
 		this.myModelInstanceObjectFactory =
 				new JavaModelInstanceObjectFactory(this.myModel);
-		
+
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
-	
+
 			msg = "JavaModelInstance(IModel) - exit"; //$NON-NLS-1$
-	
+
 			LOGGER.debug(msg);
 		}
 		// no else.
@@ -216,21 +219,21 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 */
 	public IModelInstanceEnumerationLiteral findEnumerationLiteral(
 			EnumerationLiteral literal) {
-	
+
 		IModelInstanceEnumerationLiteral result;
 		Set<IModelObject> allLiteralsOfEnumeration;
-	
+
 		result = null;
-	
+
 		Type enumeration = (Type) literal.getOwner();
 		allLiteralsOfEnumeration =
 				this.myModelObjectsByType.get(enumeration.getQualifiedNameList());
-	
+
 		for (IModelObject anObject : allLiteralsOfEnumeration) {
 			if (anObject instanceof IModelInstanceEnumerationLiteral) {
 				IModelInstanceEnumerationLiteral aLiteral;
 				aLiteral = (IModelInstanceEnumerationLiteral) anObject;
-	
+
 				if (aLiteral.getLiteral().name().equals(literal.getName())) {
 					result = aLiteral;
 					break;
@@ -239,7 +242,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 			}
 			// no else.
 		}
-	
+
 		return result;
 	}
 
@@ -259,14 +262,14 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 *           Thrown, if the given {@link Object} cannot be adapted and added.
 	 */
 	public IModelObject addModelObject(Object object) throws ModelAccessException {
-	
+
 		IModelObject result;
-		
+
 		result = this.addObject(object);
-	
+
 		/* Re-initialize the caching maps for the operations getObjectsOfType etc. */
 		this.initializeCache();
-	
+
 		return result;
 	}
 
