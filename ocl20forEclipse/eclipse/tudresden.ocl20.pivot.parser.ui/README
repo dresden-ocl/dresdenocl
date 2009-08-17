@@ -1,0 +1,9 @@
+OCL2 PARSER GUI PLUG-IN OF DRESEN OCL2 FOR ECLIPSE
+==================================================
+
+This plug-in contains the OCL2 Parser GUI of Dresden OCL2 for Eclipse.
+
+How to get started and how to use the parser is explained in the
+manual, located in the 'doc' directory in the SVN trunk or your
+toolkit's release (see chapter 'Getting started with Dresden OCL2
+for Eclipse').

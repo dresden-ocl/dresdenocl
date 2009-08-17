@@ -1,4 +1,16 @@
+OCL2 PARSER PLUG-IN OF DRESEN OCL2 FOR ECLIPSE
+==============================================
+
+This plug-in contains the OCL2 Parser of Dresden OCL2 for Eclipse.
+
+How to get started and how to use the parser is explained in the
+manual, located in the 'doc' directory in the SVN trunk or your
+toolkit's release (see chapter 'Getting started with Dresden OCL2
+for Eclipse').
+
+
 Directory structure:
+====================
 
 ./src/spec
 Contains all specification files, here the ocl grammar is located.
