@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Java Reflective Meta Model
+Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.java;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.apache.commons.lang,
+ org.eclipse.core.runtime,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.pivotmodel
+Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.pivot.metamodels.java
