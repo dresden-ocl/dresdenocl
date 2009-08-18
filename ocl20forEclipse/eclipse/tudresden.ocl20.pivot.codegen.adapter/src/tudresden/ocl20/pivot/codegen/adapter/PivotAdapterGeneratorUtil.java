@@ -319,7 +319,7 @@ public class PivotAdapterGeneratorUtil {
 			createAnnotatedElements(genModel);
 		if (pivotModel2DSL.containsKey(pivotModelType))
 			return pivotModel2DSL.get(pivotModelType);
-		return null;
+		return new LinkedList<String>();
 	}
 
 	/**
@@ -366,7 +366,7 @@ public class PivotAdapterGeneratorUtil {
 			}
 			return dslModelUniqueTypeNames;
 		}
-		return null;
+		return new LinkedList<String>();
 	}
 
 	/**
