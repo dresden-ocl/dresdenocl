@@ -23,6 +23,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerformer;
+
 import junit.framework.TestCase;
 
 public class IncludesAllTest {

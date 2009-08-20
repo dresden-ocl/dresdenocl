@@ -35,6 +35,7 @@ import tudresden.ocl20.pivot.modelbus.IModelProvider;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
+import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerformer;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Type;

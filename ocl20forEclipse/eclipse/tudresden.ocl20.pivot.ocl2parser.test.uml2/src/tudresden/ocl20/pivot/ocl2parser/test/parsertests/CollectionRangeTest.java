@@ -12,6 +12,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerformer;
+
 /**
  * @author uni
  *

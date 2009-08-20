@@ -17,7 +17,7 @@
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
  */
-package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer;
 
 import static org.junit.Assert.*;
 
@@ -31,6 +31,7 @@ import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
+import tudresden.ocl20.pivot.ocl2parser.test.parsertests.MetaModelNotFoundException;
 
 public class AtPreTest {
 
@@ -42,7 +43,7 @@ public class AtPreTest {
 		TestPerformer test;
 		try {
 			test = TestPerformer.getDefault();
-			test.setModel("LoyalRoyalOCL2Parser_4.uml");
+			test.setModel("royalsandloyals.uml");
 
 			try {
 				test.parseFile(fileName);
