@@ -22,7 +22,7 @@ import org.eclipse.osgi.util.NLS;
 
 /**
  * <p>
- * Provides localized String constants for the Java Meta-Model.
+ * Provides localized String constants for the Java Model Instance Type.
  * </p>
  * 
  * @author Claas Wilke

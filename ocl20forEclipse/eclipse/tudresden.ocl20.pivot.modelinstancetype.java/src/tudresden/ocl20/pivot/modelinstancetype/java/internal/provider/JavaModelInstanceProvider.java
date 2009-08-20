@@ -39,6 +39,7 @@ import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstan
 /**
  * <p>
  * Provides methods to load or get {@link JavaModelInstance}s of a model.
+ * </p>
  * 
  * @author Claas Wilke
  */
