@@ -23,7 +23,18 @@ public class Transaction {
 	protected Service service;
 		
 	public LoyaltyProgram getProgram() {
-		return this.service.getLevel().getProgram();
+		
+		LoyaltyProgram result;
+		
+		if (this.service != null && this.service.getLevel() != null) {
+			result = this.service.getLevel().getProgram();
+		}
+		
+		else {
+			result = null;
+		}
+		
+		return result;
 	}
 
 	public float getAmount() {
