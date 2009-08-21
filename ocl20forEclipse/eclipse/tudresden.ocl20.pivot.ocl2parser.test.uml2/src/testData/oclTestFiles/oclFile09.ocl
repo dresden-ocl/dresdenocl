@@ -2,7 +2,7 @@
 ----------------------------------------------------------------------
 -- Service 
 ----------------------------------------------------------------------
-package RoyalLoyal
+package tudresden::ocl20::pivot::examples::royalsandloyals
   /*context Service::upgradePointsEarned(amount: Integer): void 
   post: self.calcPoints() = self@pre.calcPoints() + amount*/
   

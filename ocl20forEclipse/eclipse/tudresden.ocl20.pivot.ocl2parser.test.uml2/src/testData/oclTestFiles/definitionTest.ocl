@@ -1,4 +1,4 @@
-package Test
+package tudresden::ocl20::pivot::examples::persontest
 	context Person
 		def: initial : String = name.substring(1,1)
 	

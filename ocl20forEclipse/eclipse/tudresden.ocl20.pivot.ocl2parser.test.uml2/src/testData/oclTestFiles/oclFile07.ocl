@@ -2,7 +2,7 @@
 ----------------------------------------------------------------------
 -- ProgramPartner
 ----------------------------------------------------------------------
-package RoyalLoyal
+package tudresden::ocl20::pivot::examples::royalsandloyals
 
  context ProgramPartner 
  inv nrOfParticipants: numberOfCustomers = programs.participants->size()

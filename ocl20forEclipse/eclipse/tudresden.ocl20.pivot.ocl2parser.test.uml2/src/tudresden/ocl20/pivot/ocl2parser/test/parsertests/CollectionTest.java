@@ -16,7 +16,7 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
+ */
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
 import static org.junit.Assert.*;
@@ -28,88 +28,75 @@ import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerfo
 import junit.framework.TestCase;
 
 public class CollectionTest {
-	@Test public void testCollectionTest() {
+
+	@Test
+	public void testCollectionTest() {
+
 		String fileName = "oclTestFiles/collectionTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("PersonTest.xmi");
+			test.setModel("Person.uml");
 			test.parseFile(fileName);
-		} catch(Throwable ex) {
+		} catch (Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
 			ex.printStackTrace();
-			
+
 			fail();
 			return;
 		}
-		
+
 		assertTrue(true);
 	}
-	
-	@Test public void testIteratorCollectionTest() {
+
+	@Test
+	public void testIteratorCollectionTest() {
+
 		String fileName = "oclTestFiles/iteratorCollectionTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("PersonTest.xmi");
+			test.setModel("Person.uml");
 			test.parseFile(fileName);
-		} catch(Throwable ex) {
+		} catch (Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
 			ex.printStackTrace();
-			
+
 			fail();
 			return;
 		}
-		
+
 		assertTrue(true);
 	}
-	
-	/* 
+
+	/*
 	 * This test was used to determine the type of the collectNested operation.
-	 * The ocl string is incorrect because an invariant is defined that's
-	 * type is not boolean.
+	 * The ocl string is incorrect because an invariant is defined that's type is
+	 * not boolean.
 	 */
-	
-	/*public void testCollectNested() {
-		String fileName = "oclTestFiles/collectNestedTest.ocl";
-		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.setUMLModel("BagTest.xmi");
-			test.parseFile(fileName);
-		} catch(Throwable ex) {
-			String message = " This error occured for file " + fileName + ".";
-			System.err.println(message);
-			ex.printStackTrace();
-			
-			fail();
-			return;
-		}
-		
-		assertTrue(true);
-	}*/
-	
+
+	/*
+	 * public void testCollectNested() { String fileName =
+	 * "oclTestFiles/collectNestedTest.ocl"; try { TestPerformer test =
+	 * TestPerformer.getDefault(); test.setUMLModel("BagTest.xmi");
+	 * test.parseFile(fileName); } catch(Throwable ex) { String message =
+	 * " This error occured for file " + fileName + ".";
+	 * System.err.println(message); ex.printStackTrace(); fail(); return; }
+	 * assertTrue(true); }
+	 */
+
 	/*
 	 * This test was used to determine the type of the collect operation. To do
-	 * this a breakpoint was set and the type was manually determined. The constraint
-	 * is an invariant that type isn't a boolean, so it fails.
-	 *  
+	 * this a breakpoint was set and the type was manually determined. The
+	 * constraint is an invariant that type isn't a boolean, so it fails.
 	 */
-	
-	/*public void testBag() {
-		String fileName = "oclTestFiles/bagTest.ocl";
-		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.setUMLModel("BagTest.xmi");
-			test.parseFile(fileName);
-		} catch(Throwable ex) {
-			String message = " This error occured for file " + fileName + ".";
-			System.err.println(message);
-			ex.printStackTrace();
-			
-			fail();
-			return;
-		}
-		
-		assertTrue(true);
-	}*/
+
+	/*
+	 * public void testBag() { String fileName = "oclTestFiles/bagTest.ocl"; try {
+	 * TestPerformer test = TestPerformer.getDefault();
+	 * test.setUMLModel("BagTest.xmi"); test.parseFile(fileName); }
+	 * catch(Throwable ex) { String message = " This error occured for file " +
+	 * fileName + "."; System.err.println(message); ex.printStackTrace(); fail();
+	 * return; } assertTrue(true); }
+	 */
 }

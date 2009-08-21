@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
 -- Burning
 ----------------------------------------------------------------------
-package RoyalLoyal 
+package tudresden::ocl20::pivot::examples::royalsandloyals
   context Burning 
     inv: self.oclIsKindOf(Transaction) = true
     inv: self.oclIsTypeOf(Transaction) = false 

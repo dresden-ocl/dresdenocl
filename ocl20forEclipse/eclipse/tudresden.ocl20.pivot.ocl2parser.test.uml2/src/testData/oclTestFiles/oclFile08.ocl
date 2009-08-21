@@ -2,7 +2,7 @@
 ----------------------------------------------------------------------
 -- ServiceLevel
 ----------------------------------------------------------------------
-package RoyalLoyal
+package tudresden::ocl20::pivot::examples::royalsandloyals
 
 context ServiceLevel 
  inv: program.partners ->isEmpty()

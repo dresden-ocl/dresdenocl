@@ -2,16 +2,16 @@
 ----------------------------------------------------------------------
 -- Customer 
 ----------------------------------------------------------------------
-package RoyalLoyal
+package tudresden::ocl20::pivot::examples::royalsandloyals
 
   context Customer
     inv:  not programs->isEmpty()
 
   context Customer
-    inv:   self.age() > 21 and self.age() < 65 
+    inv:   self.getAge() > 21 and self.getAge() < 65 
 
  context Customer
-    inv:   self.age() <= 12 xor cards->size() > 3 
+    inv:   self.getAge() <= 12 xor cards->size() > 3 
 
  context Customer
    inv:   title = 'Mr.' or title = 'Ms.' 

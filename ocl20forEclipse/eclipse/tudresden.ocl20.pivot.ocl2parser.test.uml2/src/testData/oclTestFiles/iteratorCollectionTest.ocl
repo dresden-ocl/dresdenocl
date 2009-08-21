@@ -1,4 +1,4 @@
-package Test
+package tudresden::ocl20::pivot::examples::persontest
 	context Person
 		inv: getName() -> forAll(name:String| name='Test')
 		inv: getFlat() -> forAll(f:Flat | f.address = 'FlatTestStreet')

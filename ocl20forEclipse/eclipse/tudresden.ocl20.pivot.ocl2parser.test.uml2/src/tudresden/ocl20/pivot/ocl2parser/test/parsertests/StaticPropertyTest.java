@@ -16,34 +16,34 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
+ */
 
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerformer;
 
-import junit.framework.TestCase;
-
 public class StaticPropertyTest {
-	@Test public void testStaticPropertyWithUML2() {
+
+	@Test
+	public void testStaticPropertyWithUML2() {
+
 		String fileName = "oclTestFiles/StaticPropertyTest_UML2.ocl";
 		try {
-			TestPerformer test = TestPerformer.getDefault("tudresden.ocl20.pivot.metamodels.uml2");
+			TestPerformer test =
+					TestPerformer.getDefault("tudresden.ocl20.pivot.metamodels.uml2");
 			test.setModel("royalsandloyals.uml");
 			test.parseFile(fileName);
-		} catch(Throwable ex) {
+		} catch (Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
 			ex.printStackTrace();
-			
+
 			fail();
 			return;
 		}
-		
+
 		assertTrue(true);
 	}
 }

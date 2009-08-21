@@ -2,7 +2,7 @@
 ----------------------------------------------------------------------
 -- CustomerCard
 ----------------------------------------------------------------------
-package RoyalLoyal
+package tudresden::ocl20::pivot::examples::royalsandloyals
 
 context CustomerCard::valid : Boolean
  init: true                             

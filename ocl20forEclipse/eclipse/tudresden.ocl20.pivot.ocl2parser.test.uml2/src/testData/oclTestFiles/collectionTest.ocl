@@ -1,4 +1,4 @@
-package Test
+package tudresden::ocl20::pivot::examples::persontest
 	context Person
 		inv: self.getCars()->size() < 10
 		

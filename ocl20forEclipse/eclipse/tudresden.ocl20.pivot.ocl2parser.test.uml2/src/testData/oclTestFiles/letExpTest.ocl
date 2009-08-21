@@ -1,4 +1,4 @@
-package RoyalLoyal
+package tudresden::ocl20::pivot::examples::royalsandloyals
    
 context CustomerCard
 inv: let correctDate : Boolean = 

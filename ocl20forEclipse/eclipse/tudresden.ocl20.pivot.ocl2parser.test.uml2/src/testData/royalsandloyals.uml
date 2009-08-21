@@ -118,7 +118,9 @@
               </ownedParameter>
             </ownedOperation>
           </packagedElement>
-          <packagedElement xmi:type="uml:Class" xmi:id="_ktNNcMkkEd2S2cuzoMKaDg" name="Membership"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_ktNNcMkkEd2S2cuzoMKaDg" name="Membership">
+            <ownedAttribute xmi:id="_QOrWMI5VEd6qu66OCtErAw" name="account" type="_MG7VMMVIEd2gxo2Yyu8isA"/>
+          </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_ODIWQMn1Ed2R-LEScdZDXg" name="ProgramPartner">
             <ownedAttribute xmi:id="__tTjkModEd2R-LEScdZDXg" name="name">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
@@ -208,12 +210,6 @@
               <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Bvn64MnBEd23VbTmZ6CCEw"/>
             </ownedEnd>
           </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="_yIQdUMkkEd2S2cuzoMKaDg" name="LoyaltyAccount Transactions" memberEnd="_C1aXIMklEd2S2cuzoMKaDg _HkgjgMklEd2S2cuzoMKaDg">
-            <ownedEnd xmi:id="_C1aXIMklEd2S2cuzoMKaDg" name="transactions" type="_qdRHkMkkEd2S2cuzoMKaDg" association="_yIQdUMkkEd2S2cuzoMKaDg">
-              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TM90YMklEd2S2cuzoMKaDg" value="*"/>
-            </ownedEnd>
-            <ownedEnd xmi:id="_HkgjgMklEd2S2cuzoMKaDg" name="account" type="_MG7VMMVIEd2gxo2Yyu8isA" association="_yIQdUMkkEd2S2cuzoMKaDg"/>
-          </packagedElement>
           <packagedElement xmi:type="uml:Association" xmi:id="_WSNl0MocEd2R-LEScdZDXg" name="LoyaltyPrograms ProgramPartners" memberEnd="_dNOQIMocEd2R-LEScdZDXg _eENigMocEd2R-LEScdZDXg">
             <ownedEnd xmi:id="_dNOQIMocEd2R-LEScdZDXg" name="programs" type="_AVjVsMVEEd2gxo2Yyu8isA" association="_WSNl0MocEd2R-LEScdZDXg">
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fN9_4MocEd2R-LEScdZDXg" value="*"/>
@@ -290,6 +286,13 @@
           <packagedElement xmi:type="uml:Enumeration" xmi:id="_2Cn4gMnREd23VbTmZ6CCEw" name="Color">
             <ownedLiteral xmi:id="_Blk-UMnSEd23VbTmZ6CCEw" name="silver"/>
             <ownedLiteral xmi:id="_C_ILMMnSEd23VbTmZ6CCEw" name="gold"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_6yDKoI5WEd6qu66OCtErAw" name="LoyaltyAccount Transaction" memberEnd="_6yDKoY5WEd6qu66OCtErAw _6yDKoo5WEd6qu66OCtErAw">
+            <ownedEnd xmi:id="_6yDKoY5WEd6qu66OCtErAw" name="owner" type="_VW-hEMVEEd2gxo2Yyu8isA" association="_6yDKoI5WEd6qu66OCtErAw"/>
+            <ownedEnd xmi:id="_6yDKoo5WEd6qu66OCtErAw" name="cards" type="_fBpSwMVIEd2gxo2Yyu8isA" association="_6yDKoI5WEd6qu66OCtErAw">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6yDKo45WEd6qu66OCtErAw" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6yDKpI5WEd6qu66OCtErAw"/>
+            </ownedEnd>
           </packagedElement>
         </packagedElement>
       </packagedElement>

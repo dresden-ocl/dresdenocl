@@ -1,4 +1,4 @@
-package RoyalLoyal
+package tudresden::ocl20::pivot::examples::royalsandloyals
 
 context LoyaltyProgram
 inv: self.membership.account->isUnique(number)

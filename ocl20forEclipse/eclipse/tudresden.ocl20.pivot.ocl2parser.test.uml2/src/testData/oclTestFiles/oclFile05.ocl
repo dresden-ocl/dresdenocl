@@ -2,7 +2,7 @@
 ----------------------------------------------------------------------
 -- LoyaltyProgram
 ----------------------------------------------------------------------
-package RoyalLoyal
+package tudresden::ocl20::pivot::examples::royalsandloyals
 context LoyaltyProgram 
   def: getServicesByLevel(levelName: String): Set(Service) 
        = levels->select( name = levelName ).availableServices->asSet()
@@ -37,7 +37,7 @@ context LoyaltyProgram
   context LoyaltyProgram 
     inv: partners.deliveredServices->forAll(s: Service| 
                                    s.pointsEarned = 0) 
-     inv: participants->forAll(p:Customer | p.age() > 55)
+     inv: participants->forAll(p:Customer | p.getAge() > 55)
 
 
  context LoyaltyProgram::enroll(c : Customer):Boolean 
@@ -69,7 +69,7 @@ context LoyaltyProgram
 -- [Def]        self.Membership.account->sortedBy( number )
 
 context LoyaltyProgram 
-  inv: participants->forAll( c:Customer | c.age() <= 70 )
+  inv: participants->forAll( c:Customer | c.getAge() <= 70 )
 
 context LoyaltyProgram 
   inv: self.participants->forAll(c1 : Customer, c2:Customer | 

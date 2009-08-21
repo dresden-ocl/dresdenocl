@@ -16,33 +16,32 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
+ */
 package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerformer;
 
-import junit.framework.TestCase;
-
 public class DefinitionTest {
-	@Test public void testDefinitionTest() {
+
+	@Test
+	public void testDefinitionTest() {
+
 		String fileName = "oclTestFiles/definitionTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("PersonTest.xmi");
+			test.setModel("Person.uml");
 			test.parseFile(fileName);
-		} catch(Throwable ex) {
+		} catch (Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
 			System.err.println(message);
 			ex.printStackTrace();
-			
+
 			fail();
 			return;
 		}
-		
+
 		assertTrue(true);
 	}
 }
