@@ -33,31 +33,31 @@ package tudresden.ocl20.pivot.modelbus.base;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
- * An abstract implementation of {@link IModelObject}.
+ * An abstract implementation of {@link IModelInstanceElement}.
  * </p>
  * 
  * @author Ronny Brandt: Built the first version.
  * @author Claas Wilke: Did refactoring and added Javadoc.
  */
-public abstract class AbstractModelObject implements IModelObject {
+public abstract class AbstractModelObject implements IModelInstanceElement {
 
-	/** The name of this {@link IModelObject}. */
+	/** The name of this {@link IModelInstanceElement}. */
 	protected String myName;
 
 	/**
-	 * The {@link Type}s of the {@link IModel} of which this IModelObject is an
+	 * The {@link Type}s of the {@link IModel} of which this IModelInstanceElement is an
 	 * instance.
 	 */
 	protected Set<Type> myTypes;
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getName()
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceElement#getName()
 	 */
 	public String getName() {
 
@@ -84,7 +84,7 @@ public abstract class AbstractModelObject implements IModelObject {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getQualifiedName()
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceElement#getQualifiedName()
 	 */
 	public String getQualifiedName() {
 
@@ -111,7 +111,7 @@ public abstract class AbstractModelObject implements IModelObject {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getTypes()
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceElement#getTypes()
 	 */
 	public Set<Type> getTypes() {
 
@@ -121,7 +121,7 @@ public abstract class AbstractModelObject implements IModelObject {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelObject#isInstanceOf(tudresden.ocl20
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement#isInstanceOf(tudresden.ocl20
 	 * .pivot.pivotmodel.Type)
 	 */
 	public boolean isInstanceOf(Type type) {

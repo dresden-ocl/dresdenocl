@@ -39,9 +39,9 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -96,16 +96,16 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	protected IModel myModel;
 
 	/** Contains all {@link Object}s of this model instance. */
-	protected Set<IModelObject> myModelObjects = new HashSet<IModelObject>();
+	protected Set<IModelInstanceElement> myModelObjects = new HashSet<IModelInstanceElement>();
 
 	/**
 	 * <p>
-	 * Contains all {@link IModelObject}s of this model instance ordered by their
+	 * Contains all {@link IModelInstanceElement}s of this model instance ordered by their
 	 * type's name.
 	 * </p>
 	 */
-	protected Map<List<String>, Set<IModelObject>> myModelObjectsByType =
-			new HashMap<List<String>, Set<IModelObject>>();
+	protected Map<List<String>, Set<IModelInstanceElement>> myModelObjectsByType =
+			new HashMap<List<String>, Set<IModelInstanceElement>>();
 
 	/**
 	 * <p>
@@ -151,9 +151,9 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getObjects()
 	 */
-	public List<IModelObject> getObjects() {
+	public List<IModelInstanceElement> getObjects() {
 
-		return new ArrayList<IModelObject>(this.myModelObjects);
+		return new ArrayList<IModelInstanceElement>(this.myModelObjects);
 	}
 
 	/*
@@ -162,19 +162,19 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getObjectsOfType(java.util
 	 * .List)
 	 */
-	public List<IModelObject> getObjectsOfType(List<String> typePath) {
+	public List<IModelInstanceElement> getObjectsOfType(List<String> typePath) {
 
-		List<IModelObject> result;
-		Set<IModelObject> resultSet;
+		List<IModelInstanceElement> result;
+		Set<IModelInstanceElement> resultSet;
 
 		resultSet = this.myModelObjectsByType.get(typePath);
 
 		if (resultSet != null) {
-			result = new ArrayList<IModelObject>(resultSet);
+			result = new ArrayList<IModelInstanceElement>(resultSet);
 		}
 
 		else {
-			result = new ArrayList<IModelObject>();
+			result = new ArrayList<IModelInstanceElement>();
 		}
 
 		return result;
@@ -187,7 +187,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 
 		Set<Type> result = new HashSet<Type>();
 
-		for (IModelObject modelObject : myModelObjects) {
+		for (IModelInstanceElement modelObject : myModelObjects) {
 			result.addAll(modelObject.getTypes());
 		}
 
@@ -250,7 +250,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 */
 	protected void initializeCache() {
 
-		for (IModelObject modelObject : myModelObjects) {
+		for (IModelInstanceElement modelObject : myModelObjects) {
 
 			for (Type type : modelObject.getTypes()) {
 
@@ -261,7 +261,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 				}
 
 				else {
-					Set<IModelObject> modelObjects = new HashSet<IModelObject>();
+					Set<IModelInstanceElement> modelObjects = new HashSet<IModelInstanceElement>();
 					modelObjects.add(modelObject);
 
 					myModelObjectsByType.put(qualifiedNameList, modelObjects);

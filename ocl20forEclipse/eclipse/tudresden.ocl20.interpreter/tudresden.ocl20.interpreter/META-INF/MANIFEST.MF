@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Interpreter Plug-in
+Bundle-SymbolicName: tudresden.ocl20.interpreter
+Bundle-Version: 1.2.0
+Bundle-Activator: tudresden.ocl20.interpreter.OclInterpreterPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.essentialocl,
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary,
+ tudresden.ocl20.pivot.standardlibrary.java,
+ tudresden.ocl20.pivot.modelbus,
+ org.apache.commons.lang
+Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.interpreter,
+ tudresden.ocl20.interpreter.event
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

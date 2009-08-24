@@ -32,11 +32,11 @@ package tudresden.ocl20.pivot.modelbus;
 
 import java.util.Set;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceString;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**

@@ -9,6 +9,8 @@ import tudresden.ocl20.pivot.modelbus.internal.MetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.internal.ModelInstanceTypeRegistry;
 import tudresden.ocl20.pivot.modelbus.internal.ModelInstanceRegistry;
 import tudresden.ocl20.pivot.modelbus.internal.ModelRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeRegistry;
 
 /**
  * The activator class controls the plug-in life cycle

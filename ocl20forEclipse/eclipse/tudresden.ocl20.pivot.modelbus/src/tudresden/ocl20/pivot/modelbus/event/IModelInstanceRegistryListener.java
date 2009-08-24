@@ -30,7 +30,7 @@
  */
 package tudresden.ocl20.pivot.modelbus.event;
 
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 
 /**
  * The listener interface for receiving IModelInstanceRegistry events.
