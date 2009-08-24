@@ -1,11 +1,7 @@
-package tudresden.ocl20.pivot.modelbus.modelinstance;
+package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 
 import java.util.WeakHashMap;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstancePrimitiveType;
 
 /**
  * <p>
@@ -29,6 +25,6 @@ public interface IModelInstanceFactory {
 	 *          the object to adapt
 	 * @return the adapter for the given object
 	 */
-	IModelInstanceElement createIModelInstanceElement(Object adapted);
+	IModelInstanceElement createModelInstanceElement(Object adapted);
 
 }

@@ -3,12 +3,11 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 import java.util.Set;
 
 /**
- * A wrapper for an unordered set.
+ * <p>A wrapper for an unordered set.</p>
  * 
  * @author Michael Thiele
- * 
  */
-public interface IModelInstanceSet extends IModelInstanceCollection {
+public interface IModelInstanceSet<T> extends IModelInstanceCollection<T> {
 
 	/**
 	 * <p>
@@ -18,5 +17,4 @@ public interface IModelInstanceSet extends IModelInstanceCollection {
 	 * @return the underlying {@link Set Java set}.
 	 */
 	Set<Object> getSet();
-
 }

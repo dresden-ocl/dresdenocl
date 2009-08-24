@@ -29,7 +29,7 @@ import java.util.Iterator;
  * </p>
  * 
  * @param <T>
- *          the type of the elements of the adapted collection
+ *          The type of the elements of the adapted collection.
  * 
  * @author Claas Wilke
  */
@@ -57,7 +57,7 @@ public interface IModelInstanceCollection<T> extends IModelInstanceElement {
 	 *          an object contained in the adapted collection
 	 * @return the adapter for the given object
 	 */
-	IModelInstanceObject getAdapter(T object);
+	IModelInstanceElement getAdapter(T object);
 
 	/**
 	 * Returns an {@link Iterator} for the underlying collection.

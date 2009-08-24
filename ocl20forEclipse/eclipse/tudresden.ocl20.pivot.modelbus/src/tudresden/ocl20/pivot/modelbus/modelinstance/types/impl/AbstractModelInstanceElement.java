@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelbus.base;
+package tudresden.ocl20.pivot.modelbus.modelinstance.types.impl;
 
 import java.util.Set;
 
@@ -42,15 +42,12 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * </p>
  * 
  * @author Ronny Brandt: Built the first version.
- * @author Claas Wilke: Did refactoring and added Javadoc.
+ * @author Claas Wilke: Did re-factoring and added Java-doc.
  */
-public abstract class AbstractModelObject implements IModelInstanceElement {
-
-	/** The name of this {@link IModelInstanceElement}. */
-	protected String myName;
+public abstract class AbstractModelInstanceElement implements IModelInstanceElement {
 
 	/**
-	 * The {@link Type}s of the {@link IModel} of which this IModelInstanceElement is an
+	 * The {@link Type}s of the {@link IModel} of which this {@link IModelInstanceElement} is an
 	 * instance.
 	 */
 	protected Set<Type> myTypes;
@@ -60,33 +57,6 @@ public abstract class AbstractModelObject implements IModelInstanceElement {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceElement#getName()
 	 */
 	public String getName() {
-
-		StringBuffer result;
-
-		/* Construct a name of all implemented types. */
-		result = new StringBuffer();
-		result.append("[");
-
-		for (Type aType : this.getTypes()) {
-
-			if (result.length() == 1) {
-				result.append(",");
-			}
-			// no else.
-
-			result.append(aType.getName());
-		}
-
-		result.append("]");
-
-		return result.toString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceElement#getQualifiedName()
-	 */
-	public String getQualifiedName() {
 
 		StringBuffer result;
 

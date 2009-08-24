@@ -47,12 +47,36 @@ public interface IModelInstanceElement {
 
 	/**
 	 * <p>
+	 * Copies this wrapper and sets the {@link #getTypes() type} to the given type
+	 * if an upcast is possible. Downcasts are not necessary, since the execution
+	 * of standard library methods always returns the most specific type.
+	 * </p>
+	 * 
+	 * @param type
+	 *          the {@link Type} to cast this {@link IModelInstanceElement} to
+	 * @return the new {@link IModelInstanceElement} that has the given type
+	 */
+	IModelInstanceElement asType(Type type);
+
+	/**
+	 * <p>
+	 * Performs a deep copy of the adapted element and returns it. The adapted
+	 * element is determined by the specific implementations of this interface.
+	 * </p>
+	 * 
+	 * @return a deep copy of the adapted element
+	 */
+	Object deepCopy();
+
+	/**
+	 * <p>
 	 * Returns the {@link Type}s of that this IModelInstanceElement is an
 	 * instance.
 	 * </p>
+	 * 
 	 * <p>
 	 * <strong>Note:</strong> Only directly implemented types are returned; not
-	 * their supertypes!
+	 * their super types!
 	 * </p>
 	 * 
 	 * <p>
@@ -72,7 +96,8 @@ public interface IModelInstanceElement {
 
 	/**
 	 * <p>
-	 * Returns the name of the {@link IModelInstanceElement}.
+	 * Returns the name or ID of this {@link IModelInstanceElement}. Otherwhise it
+	 * returns the {@link Type}s' names.
 	 * </p>
 	 * 
 	 * @return The name of the {@link IModelInstanceElement}.
@@ -91,29 +116,4 @@ public interface IModelInstanceElement {
 	 *         given {@link Type}.
 	 */
 	boolean isInstanceOf(Type aType);
-
-	/**
-	 * <p>
-	 * Performs a deep copy of the adapted element and returns it. The adapted
-	 * element is determined by the specific implementations of this interface.
-	 * </p>
-	 * 
-	 * @return a deep copy of the adapted element
-	 */
-	Object deepCopy();
-
-	/**
-	 * <p>
-	 * Copies this wrapper and sets the {@link #getTypes() type} to the
-	 * given type if an upcast is possible. Downcasts are not necessary, since the
-	 * execution of standard library methods always returns the most specific
-	 * type.
-	 * </p>
-	 * 
-	 * @param type
-	 *          the {@link Type} to cast this {@link IModelInstanceElement} to
-	 * @return the new {@link IModelInstanceElement} that has the given type
-	 */
-	IModelInstanceElement asType(Type type);
-
 }

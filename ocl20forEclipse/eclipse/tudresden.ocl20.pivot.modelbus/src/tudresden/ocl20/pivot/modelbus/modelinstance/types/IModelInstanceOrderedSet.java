@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.UniqueEList;
  * @author Michael Thiele
  * 
  */
-public interface IModelInstanceOrderedSet extends IModelInstanceCollection {
+public interface IModelInstanceOrderedSet<T> extends IModelInstanceCollection<T> {
 
 	/**
 	 * <p>
@@ -20,5 +20,4 @@ public interface IModelInstanceOrderedSet extends IModelInstanceCollection {
 	 * @return the underlying {@link UniqueEList Ecore UniqueEList}.
 	 */
 	UniqueEList<Object> getUniqueEList();
-
 }

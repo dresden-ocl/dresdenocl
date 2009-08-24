@@ -10,7 +10,7 @@ import java.util.List;
  * @author Michael Thiele
  * 
  */
-public interface IModelInstanceBag extends IModelInstanceCollection {
+public interface IModelInstanceBag<T> extends IModelInstanceCollection<T> {
 
 	/**
 	 * <p>

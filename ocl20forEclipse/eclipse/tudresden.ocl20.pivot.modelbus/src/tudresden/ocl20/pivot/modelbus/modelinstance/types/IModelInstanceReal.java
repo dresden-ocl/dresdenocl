@@ -38,5 +38,5 @@ public interface IModelInstanceReal extends IModelInstancePrimitiveType {
 	 * 
 	 * @return The {@link Double} value of this {@link IModelInstanceReal}.
 	 */
-	Double getReal();
+	Double getDouble();
 }

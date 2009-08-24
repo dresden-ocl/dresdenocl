@@ -38,5 +38,5 @@ public interface IModelInstanceInteger extends IModelInstancePrimitiveType {
 	 * 
 	 * @return The {@link Long} value of this {@link IModelInstanceInteger}.
 	 */
-	Long getInteger();
+	Long getLong();
 }

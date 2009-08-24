@@ -151,7 +151,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getObjects()
 	 */
-	public List<IModelInstanceElement> getObjects() {
+	public List<IModelInstanceElement> getAllElements() {
 
 		return new ArrayList<IModelInstanceElement>(this.myModelObjects);
 	}
@@ -183,7 +183,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/**
 	 * @return A {@link Set} containing {@link Type}s in this model instance.
 	 */
-	public Set<Type> getObjectTypes() {
+	public Set<Type> getElementTypes() {
 
 		Set<Type> result = new HashSet<Type>();
 

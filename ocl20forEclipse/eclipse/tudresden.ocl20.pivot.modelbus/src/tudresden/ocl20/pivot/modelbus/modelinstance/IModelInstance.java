@@ -40,6 +40,7 @@ import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
@@ -59,41 +60,10 @@ public interface IModelInstance {
 
 	/**
 	 * <p>
-	 * Returns the {@link IModel} of this {@link IModelInstance}.
-	 * </p>
-	 * 
-	 * @return The {@link IModel} of this {@link IModelInstance}.
-	 */
-	IModel getModel();
-
-	/**
-	 * <p>
-	 * Checks whether or not this {@link IModelInstance} is an instance of a given
-	 * {@link IModel}.
-	 * </p>
-	 * 
-	 * @param aModel
-	 *          The {@link IModel} to which the instance of relationship shall be
-	 *          checked.
-	 * @return <code>True</code>, if this {@link IModelInstance} is an instance of
-	 *         the given {@link IModel}. Else <code>false</code>.
-	 */
-	boolean isInstanceOf(IModel aModel);
-
-	/**
-	 * Adds a not adapted object to the {@link IModelInstance}. Before it is
-	 * added, the given object is adapted.
-	 * 
-	 * @param object
-	 *          the object to add to the {@link IModelInstance}
-	 * @return the adapted object
-	 */
-	IModelInstanceElement addModelInstanceElement(Object object);
-
-	/**
 	 * Adds a not adapted {@link Collection} to the {@link IModelInstance}. Before
 	 * it is added, the given {@link Collection} is adapted (but not its
 	 * elements).
+	 * </p>
 	 * 
 	 * @param <T>
 	 *          the type of the elements that this {@link Collection} contains
@@ -109,62 +79,15 @@ public interface IModelInstance {
 
 	/**
 	 * <p>
-	 * Invokes a static operation on the given type with the given arguments.
+	 * Adds a not adapted object to the {@link IModelInstance}. Before it is
+	 * added, the given object is adapted.
 	 * </p>
 	 * 
-	 * TODO: Exceptions?
-	 * 
-	 * @param type
-	 *          the {@link Type} on which the static operation should be invoked
-	 * @param operation
-	 *          the {@link Operation} is used to determine the name of the static
-	 *          operation and the {@link Type return type} of the invoked
-	 *          operation; if {@link Operation#isMultiple()} is <code>true</code>
-	 *          create an {@link IModelInstanceCollection} based on
-	 *          {@link Operation#isOrdered()} and {@link Operation#isUnique()}.
-	 * @param args
-	 *          the arguments of the static operation
-	 * @return the adapted return value of the static operation invocation
+	 * @param object
+	 *          the object to add to the {@link IModelInstance}
+	 * @return the adapted object
 	 */
-	IModelInstanceElement invokeStaticOperation(Type type, Operation operation,
-			List<IModelInstanceElement> args);
-
-	/**
-	 * <p>
-	 * Tries to fetch a static property of the given type with the given name.
-	 * </p>
-	 * 
-	 * TODO: Exceptions?
-	 * 
-	 * @param type
-	 *          the {@link Type} of which the static property should be fetched
-	 * @param name
-	 * 
-	 * @param property
-	 *          the {@link Property} is used to determine the name of the property
-	 *          and the {@link Type} of the fetched property; if
-	 *          {@link Property#isMultiple()} is <code>true</code> create an
-	 *          {@link IModelInstanceCollection} based on
-	 *          {@link Property#isOrdered()} and {@link Property#isUnique()}.
-	 * @return the adapted property value
-	 */
-	IModelInstanceElement getStaticProperty(Type type, Property property);
-
-	/**
-	 * <p>
-	 * Returns all instances of the given type.
-	 * </p>
-	 * 
-	 * <p>
-	 * <strong>Note: This operation can be really expensive! Try avoiding it at
-	 * any rate.</strong>
-	 * </p>
-	 * 
-	 * @param type
-	 *          the {@link Type} of which all instances should be returned
-	 * @return all adapted instances of the given type
-	 */
-	List<IModelInstanceObject> getAllInstances(Type type);
+	IModelInstanceElement addModelInstanceElement(Object object);
 
 	/**
 	 * <p>
@@ -195,7 +118,134 @@ public interface IModelInstance {
 	public IModelInstanceTypeObject findModelTypeObject(Type type);
 
 	/**
-	 * Maps OCL operation names to standardlibrary operation names.
+	 * <p>
+	 * Gets all objects of the {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @return the {@link IModelInstanceElement}s for this model instance
+	 */
+	List<IModelInstanceElement> getAllElements();
+
+	/**
+	 * <p>
+	 * Returns all {@link IModelInstanceObject}s of the given {@link Type}.
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>Note: This operation can be really expensive! Try avoiding it at
+	 * any rate.</strong>
+	 * </p>
+	 * 
+	 * @param type
+	 *          the {@link Type} of which all instances should be returned
+	 * @return all adapted instances of the given type
+	 */
+	List<IModelInstanceObject> getAllInstances(Type type);
+
+	/**
+	 * <p>
+	 * Returns the display name of this {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @return The display name of this {@link IModelInstance}.
+	 */
+	String getDisplayName();
+
+	/**
+	 * <p>
+	 * Gets the object kinds.
+	 * </p>
+	 * 
+	 * @return the available types of {@link IModelInstanceElement}s for this
+	 *         model instance.
+	 */
+	Set<Type> getElementTypes();
+
+	/**
+	 * <p>
+	 * Returns the {@link IModel} of this {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @return The {@link IModel} of this {@link IModelInstance}.
+	 */
+	IModel getModel();
+
+	/**
+	 * <p>
+	 * Returns the {@link IModelInstanceFactory} that is is used to adapt
+	 * {@link IModelInstanceElement}s of this {@link IModelInstance}. This method
+	 * is required to adapt collection content lazily during the work of the
+	 * standard library.
+	 * </p>
+	 * 
+	 * @return The {@link IModelInstanceFactory} that is is used to adapt
+	 *         {@link IModelInstanceElement}s of this {@link IModelInstance}.
+	 */
+	IModelInstanceFactory getModelInstanceFactory();
+
+	/**
+	 * <p>
+	 * Tries to fetch a static property of the given type with the given name.
+	 * </p>
+	 * 
+	 * FIXME Claas: Exceptions?
+	 * 
+	 * @param type
+	 *          the {@link Type} of which the static property should be fetched
+	 * @param name
+	 * 
+	 * @param property
+	 *          the {@link Property} is used to determine the name of the property
+	 *          and the {@link Type} of the fetched property; if
+	 *          {@link Property#isMultiple()} is <code>true</code> create an
+	 *          {@link IModelInstanceCollection} based on
+	 *          {@link Property#isOrdered()} and {@link Property#isUnique()}.
+	 * @return the adapted property value
+	 */
+	IModelInstanceElement getStaticProperty(Type type, Property property);
+
+	/**
+	 * <p>
+	 * Invokes a static operation on the given type with the given arguments.
+	 * </p>
+	 * 
+	 * FIXME Claas: Exceptions?
+	 * 
+	 * @param type
+	 *          the {@link Type} on which the static operation should be invoked
+	 * @param operation
+	 *          the {@link Operation} is used to determine the name of the static
+	 *          operation and the {@link Type return type} of the invoked
+	 *          operation; if {@link Operation#isMultiple()} is <code>true</code>
+	 *          create an {@link IModelInstanceCollection} based on
+	 *          {@link Operation#isOrdered()} and {@link Operation#isUnique()}.
+	 * @param args
+	 *          the arguments of the static operation
+	 * @return the adapted return value of the static operation invocation
+	 */
+	IModelInstanceElement invokeStaticOperation(Type type, Operation operation,
+			List<IModelInstanceElement> args);
+
+	/**
+	 * <p>
+	 * Checks whether or not this {@link IModelInstance} is an instance of a given
+	 * {@link IModel}.
+	 * </p>
+	 * 
+	 * @param aModel
+	 *          The {@link IModel} to which the instance of relationship shall be
+	 *          checked.
+	 * @return <code>True</code>, if this {@link IModelInstance} is an instance of
+	 *         the given {@link IModel}. Else <code>false</code>.
+	 */
+	boolean isInstanceOf(IModel aModel);
+
+	/**
+	 * <p>
+	 * Maps OCL operation names to standard library operation names.
+	 * </p>
+	 * 
+	 * FIXME Claas: Ask Micha why this operation is required.
 	 * 
 	 * @param name
 	 *          the name of the operation
@@ -205,36 +255,4 @@ public interface IModelInstance {
 	 * @return the standardlibrary operation name
 	 */
 	String getOperationName(String name, int operatorCount);
-
-	/**
-	 * Gets all objects of the model instance.
-	 * 
-	 * @return the {@link IModelInstanceElement}s for this model instance
-	 */
-	List<IModelInstanceElement> getObjects();
-
-	/**
-	 * Gets all objects of an specific type of the model instance.
-	 * 
-	 * @param typePath
-	 *          the type path for the object type
-	 * 
-	 * @return the {@link IModelInstanceElement}s for this model instance
-	 */
-	List<IModelInstanceElement> getObjectsOfType(List<String> typePath);
-
-	/**
-	 * Gets the object kinds.
-	 * 
-	 * @return the available types of {@link IModelInstanceElement}s for this
-	 *         model instance.
-	 */
-	Set<Type> getObjectTypes();
-
-	/**
-	 * Gets the display name.
-	 * 
-	 * @return the display name
-	 */
-	String getDisplayName();
 }
