@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.EObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -37,7 +37,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Claas Wilke
  */
 public class EcoreModelObject extends AbstractModelObject implements
-		IModelObject {
+		IModelInstanceElement {
 
 	/** The adapted {@link EObject} of this {@link EcoreModelObject}. */
 	private EObject myObject;

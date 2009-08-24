@@ -31,6 +31,7 @@
 package tudresden.ocl20.interpreter.event;
 
 import tudresden.ocl20.interpreter.IInterpreterRegistry;
+import tudresden.ocl20.interpreter.event.internal.InterpreterRegistryEvent;
 
 /**
  * <p>

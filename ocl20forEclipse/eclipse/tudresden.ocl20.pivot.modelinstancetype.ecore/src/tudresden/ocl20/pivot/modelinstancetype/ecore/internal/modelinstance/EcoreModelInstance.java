@@ -37,11 +37,11 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceFactory;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardlibraryAdapterFactory;
@@ -106,8 +106,8 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 		this.myKnownTypes = new HashMap<Class<?>, OclType>();
 		this.myCurrentSlAF = DEFAULTSLAF;
 
-		this.allMyObjectsByType = new HashMap<String, List<IModelObject>>();
-		this.allMyObjects = new ArrayList<IModelObject>();
+		this.allMyObjectsByType = new HashMap<String, List<IModelInstanceElement>>();
+		this.allMyObjects = new ArrayList<IModelInstanceElement>();
 		this.allMyObjectKinds = new ArrayList<List<String>>();
 
 		this.myModel = model;
@@ -525,7 +525,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 			List<String> aTypesQualifiedNameList;
 			List<String> aQualifiedNameList;
 
-			List<IModelObject> allObjectsOfSameType;
+			List<IModelInstanceElement> allObjectsOfSameType;
 
 			Type aType;
 
@@ -550,11 +550,11 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 			allObjectsOfSameType = this.allMyObjectsByType.get(aQualifiedName);
 
 			if (allObjectsOfSameType == null) {
-				allObjectsOfSameType = new ArrayList<IModelObject>();
+				allObjectsOfSameType = new ArrayList<IModelInstanceElement>();
 			}
 			// no else.
 
-			/* Try to get the type of the new IModelObject. */
+			/* Try to get the type of the new IModelInstanceElement. */
 			aType = this.findTypeInModel(aTypesQualifiedNameList);
 
 			aModelObject = new EcoreModelObject(currentObject, aType);

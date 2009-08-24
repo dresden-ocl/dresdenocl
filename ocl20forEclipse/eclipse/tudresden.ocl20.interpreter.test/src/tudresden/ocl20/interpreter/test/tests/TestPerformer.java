@@ -1,43 +1,62 @@
+/*
+Copyright (C) 2009 by Claas Wilke (info@claaswilke.de)
+
+This file is part of the OCL Interpreter Test Suite of Dresden OCL2 for
+Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ */
 package tudresden.ocl20.interpreter.test.tests;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.interpreter.IEnvironment;
+import tudresden.ocl20.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.interpreter.IOclInterpreter;
-import tudresden.ocl20.interpreter.internal.Environment;
-import tudresden.ocl20.interpreter.internal.OclInterpreter;
+import tudresden.ocl20.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
+import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
+import tudresden.ocl20.pivot.examples.royalsandloyals.Date;
+import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
+import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
+import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
+import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.IModelRegistry;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInteger;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclString;
+import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
  * <p>
@@ -49,41 +68,75 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclString
  */
 public class TestPerformer {
 
-	/** The package of the meta model. */
-	private String metaModel;
+	/**
+	 * The qualified Name of the package that contains the {@link Class}es used
+	 * for testing.
+	 */
+
+	public static String QUALIFIED_NAME_MODEL_PACKAGE =
+			IModelBusConstants.ROOT_PACKAGE_NAME
+					+ "::tudresden::ocl20::pivot::examples::royalsandloyals";
+
+	/** The qualified Name of {@link Customer}. */
+	public static String QUALIFIED_NAME_CUSTOMER =
+			QUALIFIED_NAME_MODEL_PACKAGE + "::Customer";
+
+	/** The qualified Name of {@link CustomerCard}. */
+	public static String QUALIFIED_NAME_CUSTOMER_CARD =
+			QUALIFIED_NAME_MODEL_PACKAGE + "::CustomerCard";
+
+	/** The qualified Name of {@link Date}. */
+	public static String QUALIFIED_NAME_DATE =
+			QUALIFIED_NAME_MODEL_PACKAGE + "::Date";
+
+	/** The qualified Name of {@link LoyaltyAccount}. */
+	public static String QUALIFIED_NAME_LOYALTY_ACCOUNT =
+			QUALIFIED_NAME_MODEL_PACKAGE + "::LoyaltyAccount";
+
+	/** The qualified Name of {@link LoyaltyProgram}. */
+	public static String QUALIFIED_NAME_LOYALTY_PROGRAM =
+			QUALIFIED_NAME_MODEL_PACKAGE + "::LoyaltyProgram";
+
+	/** The qualified Name of {@link LoyaltyProgram}. */
+	public static String QUALIFIED_NAME_MEMBERSHIP =
+			QUALIFIED_NAME_MODEL_PACKAGE + "::Membership";
+
+	/** The qualified Name of {@link ProgramPartner}. */
+	public static String QUALIFIED_NAME_PROGRAM_PARTNER =
+			QUALIFIED_NAME_MODEL_PACKAGE + "::ProgramPartner";
+
+	/** The package of the UML2 meta model. */
+	private final static String META_MODEL = UML2MetamodelPlugin.ID;
 
 	/** The name of the bundle of the model file. */
-	private String modelInstanceType;
-
-	/** The name of the bundle of the model file. */
-	private String modelBundle;
+	private final static String MODEL_BUNDLE =
+			"tudresden.ocl20.pivot.examples.royalandloyal";
 
 	/** The path of the UML model file. */
-	private String modelFile;
-
-	/** The path of the UML model instance file. */
-	private String modelInstanceFile;
+	private final static String MODEL_FILE = "model/royalsandloyals.uml";
 
 	/**
-	 * Contains the directory where the OCL files are stored which shall be
-	 * parsed and imported.
+	 * Contains the directory where the OCL files are stored which shall be parsed
+	 * and imported.
 	 */
 	protected String fileDirectory = "";
 
 	/**
-	 * Used to select uninterpreted {@link Constraint}s for the actual test
-	 * case.
+	 * Used to select uninterpreted {@link Constraint}s for the actual test case.
 	 */
 	protected Set<Constraint> interpretedConstraints;
 
 	/**
-	 * The global {@link IEnvironment} used during interpretation and
-	 * preparation.
+	 * The global {@link IInterpretationEnvironment} used during interpretation
+	 * and preparation.
 	 */
-	protected IEnvironment myGlobalEnvironment;
+	protected IInterpretationEnvironment myGlobalEnvironment;
 
 	/** The {@link IOclInterpreter} used by this {@link TestPerformer}. */
 	protected IOclInterpreter myInterpreter = null;
+
+	/** Contains the UML2 meta model. */
+	protected IMetamodel myMetaModel = null;
 
 	/** Contains the loaded UML2 model. */
 	protected IModel myModel = null;
@@ -91,77 +144,42 @@ public class TestPerformer {
 	/** Contains the loaded UML2 model instance. */
 	protected IModelInstance myModelInstance = null;
 
-	/** Contains the UML2 meta model. */
-	protected IMetamodel myUML2MetaModel = null;
-
 	/**
 	 * <p>
-	 * This constructor loads the UML2 meta model, the UML2 model and the model
-	 * instance.
+	 * Creates a new TestPerformer.
 	 * </p>
 	 */
 	public TestPerformer() {
 
 		super();
+		this.init();
 	}
 
 	/**
 	 * <p>
-	 * Converts the canonical name of a given {@link Class} into a {@link List}
-	 * containing the name of the packages of the path.
+	 * Adapts a given {@link Object} as {@link IModelInstanceElement} and adds it to the
+	 * {@link IModelInstance} under test.
 	 * </p>
 	 * 
-	 * @param aClass
-	 *            The class which path shall be returned.
-	 * @return A {@link List} containing the name of the packages of the path of
-	 *         the given {@link Class}.
+	 * @param object
+	 *          The {@link Object} that shall be adapted and added.
+	 * @return The adapted {@link IModelInstanceElement}.
 	 */
-	public static List<String> getClassNameAsPathList(Class<?> aClass) {
+	public IModelInstanceElement addModelObject(Object object) {
 
-		List<String> result;
+		IModelInstanceElement result;
 
-		String aCanonicalName;
-		String[] pathArray;
+		try {
+			result =
+					JavaModelInstanceTypePlugin.addModelObjectToInstance(object,
+							myModelInstance);
+		}
 
-		aCanonicalName = aClass.getCanonicalName();
-
-		pathArray = aCanonicalName.split("\\.");
-
-		result = new ArrayList<String>();
-
-		for (int index = 0; index < pathArray.length; index++) {
-			result.add(pathArray[index]);
+		catch (ModelAccessException e) {
+			result = null;
 		}
 
 		return result;
-	}
-
-	/**
-	 * @return The global {@link IEnvironment} used by this
-	 *         {@link TestPerformer} for preparation and interpretation of
-	 *         {@link Constraint}s.
-	 */
-	public IEnvironment getGlobalEnvironment() {
-
-		return this.myGlobalEnvironment;
-	}
-
-	/**
-	 * @param pathList
-	 *            The {@link Type} which instances shall be returned.
-	 * @return All {@link IModelObject}s of the active {@link IModelInstance}
-	 *         which are of the {@link Type} described by the given pathList.
-	 */
-	public List<IModelObject> getObjectsOfKind(List<String> pathList) {
-
-		List<IModelObject> result;
-
-		result = ModelBusPlugin.getModelInstanceRegistry()
-				.getActiveModelInstance(this.myModel)
-				.getObjectsOfKind(pathList);
-
-		return result;
-
 	}
 
 	/**
@@ -171,65 +189,62 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @throws RuntimeException
-	 *             Is thrown if any error occurred while loading the model or
-	 *             the meta model.
+	 *           Is thrown if any error occurred while loading the model or the
+	 *           meta model.
 	 */
 	public void init() throws RuntimeException {
 
 		/* Try to load model and meta model. */
 		try {
 
-			this.myUML2MetaModel = ModelBusPlugin.getMetamodelRegistry()
-					.getMetamodel(metaModel);
+			this.myMetaModel =
+					ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL);
 
-			if (myUML2MetaModel == null) {
-				throw new RuntimeException(
-						"Unable to load UML2 meta model during test.");
+			if (myMetaModel == null) {
+				throw new RuntimeException("Unable to load meta model during test.");
 			}
 			// no else.
 
 			/* Get the bundle location for the model files. */
-			fileDirectory = Platform.getBundle(modelBundle).getLocation();
+			fileDirectory = Platform.getBundle(MODEL_BUNDLE).getLocation();
 
 			/* Remove the 'reference:file:' from the beginning. */
 			fileDirectory = fileDirectory.substring(15);
 
 			/* Load the model. */
-			this.loadUML2Model(modelFile);
+			this.loadModel();
 
 			/* Load the model instance. */
-			this.loadModelInstance(modelInstanceFile);
+			this.loadModelInstance();
 
 			/* Initialize the set containing already interpreted constraints. */
 			this.interpretedConstraints = new HashSet<Constraint>();
 
-			/* Initialize the global environment. */
-			this.myGlobalEnvironment = Environment.getGlobalEnvironment();
-			this.myGlobalEnvironment.setModelInstance(this.myModelInstance);
-
 			/* Initialize the interpreter. */
-			this.myInterpreter = new OclInterpreter(this.myGlobalEnvironment);
-			this.myInterpreter.setUseCache(false);
+			this.myInterpreter =
+					OclInterpreterPlugin.createInterpreter(this.myModelInstance);
+			this.myInterpreter.setCachingEnabled(false);
+
+			this.myGlobalEnvironment = this.myInterpreter.getEnvironment();
 		}
 
 		catch (Exception e) {
-			throw new RuntimeException(
-					"Unable to initialize the test. Reason: " + e.getMessage());
+			throw new RuntimeException("Unable to initialize the test. Reason: "
+					+ e.getMessage());
 		}
 	}
 
 	/**
 	 * <p>
 	 * Interprets all not yet interpreted {@link Constraint}s for a given
-	 * {@link List} of {@link IModelObject}s.
+	 * {@link IModelInstanceElement}.
 	 * 
-	 * @param modelObjects
-	 *            The {@link IModelObject}s that shall be interpreted.
+	 * @param modelObject
+	 *          The {@link IModelInstanceElement} that shall be interpreted.
 	 * @result A {@link List} containing {@link OclRoot} results for all
 	 *         interpreted combinations.
 	 */
-	public List<OclRoot> interpretRemainingConstraints(
-			List<IModelObject> modelObjects) {
+	public List<OclRoot> interpretRemainingConstraints(IModelInstanceElement modelObject) {
 
 		List<OclRoot> result;
 
@@ -246,19 +261,76 @@ public class TestPerformer {
 		 */
 		for (Constraint aConstraint : uninterpretedConstraints) {
 
-			for (IModelObject anModelObject : modelObjects) {
+			NamedElement aConstrainedElement;
+
+			/* Get the constrained element. */
+			aConstrainedElement =
+					(NamedElement) aConstraint.getConstrainedElement().get(0);
+
+			/* Check if the constrained element is an operation. */
+			if (aConstrainedElement instanceof Operation) {
+
+				Operation anOperation;
+
+				anOperation = (Operation) aConstrainedElement;
+
+				/* Use the constrained type instead. */
+				aConstrainedElement = anOperation.getOwningType();
+			}
+
+			/*
+			 * Check if the the constrained element matches to the current model
+			 * object and eventually do the interpretation.
+			 */
+			if (modelObject.getTypes().contains(aConstrainedElement)) {
+				result.add(this.myInterpreter.interpretConstraint(aConstraint,
+						modelObject).getResult());
+			}
+			// no else.
+
+			/* Add the constraint to the already interpreted constraints. */
+			this.interpretedConstraints.add(aConstraint);
+		}
+		// end for.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Interprets all not yet interpreted {@link Constraint}s for a given
+	 * {@link List} of {@link IModelInstanceElement}s.
+	 * 
+	 * @param modelObjects
+	 *          The {@link IModelInstanceElement}s that shall be interpreted.
+	 * @result A {@link List} containing {@link OclRoot} results for all
+	 *         interpreted combinations.
+	 */
+	public List<OclRoot> interpretRemainingConstraints(
+			List<IModelInstanceElement> modelObjects) {
+
+		List<OclRoot> result;
+
+		List<Constraint> uninterpretedConstraints;
+
+		result = new ArrayList<OclRoot>();
+
+		/* Collect all not yet interpreted constraints. */
+		uninterpretedConstraints = this.collectNotYetInterpretedConstraints();
+
+		/*
+		 * Iterate through the given model objects and not yet interpreted
+		 * constraints.
+		 */
+		for (Constraint aConstraint : uninterpretedConstraints) {
+
+			for (IModelInstanceElement anModelObject : modelObjects) {
 
 				NamedElement aConstrainedElement;
 
-				String aModelObjectsName;
-				String aConstrainedElemsName;
-
-				/* Get the names of the current model object. */
-				aModelObjectsName = anModelObject.getQualifiedNameString();
-
 				/* Get the constrained element. */
-				aConstrainedElement = (NamedElement) aConstraint
-						.getConstrainedElement().get(0);
+				aConstrainedElement =
+						(NamedElement) aConstraint.getConstrainedElement().get(0);
 
 				/* Check if the constrained element is an operation. */
 				if (aConstrainedElement instanceof Operation) {
@@ -271,16 +343,13 @@ public class TestPerformer {
 					aConstrainedElement = anOperation.getOwningType();
 				}
 
-				/* Get the constrained element's name. */
-				aConstrainedElemsName = aConstrainedElement.getQualifiedName();
-
 				/*
-				 * Check if the the constrained element matches to the current
-				 * model object and eventually do the interpretation.
+				 * Check if the the constrained element matches to the current model
+				 * object and eventually do the interpretation.
 				 */
-				if (aConstrainedElemsName.equals(aModelObjectsName)) {
-					result.add(this.myInterpreter.interpret(aConstraint,
-							anModelObject));
+				if (anModelObject.getTypes().contains(aConstrainedElement)) {
+					result.add(this.myInterpreter.interpretConstraint(aConstraint,
+							anModelObject).getResult());
 				}
 				// no else.
 			}
@@ -296,14 +365,14 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Parses the file <i>oclFileName</i> against the loaded UML model file. If
-	 * an error occurred an CodeGenerationException will be thrown.
+	 * Parses the file <i>oclFileName</i> against the loaded UML model file. If an
+	 * error occurred an CodeGenerationException will be thrown.
 	 * </p>
 	 * 
 	 * @param oclFileName
-	 *            The OCL file to be parsed.
+	 *          The OCL file to be parsed.
 	 * @throws Ocl22JavaException
-	 *             Is thrown if any error occurs
+	 *           Is thrown if any error occurs
 	 */
 	public void loadOCLFile(String oclFileName) throws RuntimeException {
 
@@ -361,37 +430,37 @@ public class TestPerformer {
 	/**
 	 * <p>
 	 * Prepares all not yet interpreted {@link Constraint}s for a given
-	 * {@link List} of {@link IModelObject}s.
+	 * {@link IModelInstanceElement}.
 	 * 
-	 * @param modelObjects
-	 *            The {@link IModelObject}s for which the not yet interpreted
-	 *            {@link Constraint}s shall be prepared.
-	 * @return The {@link IEnvironment} of the {@link OclInterpreter} containing
-	 *         the done preparation.
+	 * @param modelObject
+	 *          The {@link IModelInstanceElement} for that the not yet interpreted
+	 *          {@link Constraint}s shall be prepared.
+	 * @return The {@link IInterpretationEnvironment} of the
+	 *         {@link OclInterpreter} containing the done preparation.
 	 */
-	public IEnvironment prepareRemainingConstraints(
-			List<IModelObject> modelObjects) {
+	public IInterpretationEnvironment prepareRemainingConstraints(
+			IModelInstanceElement modelObject) {
 
-		return this.prepareRemainingConstraints(modelObjects, true);
+		return this.prepareRemainingConstraints(modelObject, true);
 	}
 
 	/**
 	 * <p>
 	 * Prepares all not yet interpreted {@link Constraint}s for a given
-	 * {@link List} of {@link IModelObject}s.
+	 * {@link IModelInstanceElement}.
 	 * 
-	 * @param modelObjects
-	 *            The {@link IModelObject}s for which the not yet interpreted
-	 *            {@link Constraint}s shall be prepared.
+	 * @param modelObject
+	 *          The {@link IModelInstanceElement} for that the not yet interpreted
+	 *          {@link Constraint}s shall be prepared.
 	 * @param setInterpreted
-	 *            If true, the prepared {@link Constraint}s will be added to the
-	 *            set of interpreted {@link Constraint}s and thus will not be
-	 *            prepared or interpreted again.
-	 * @return The {@link IEnvironment} of the {@link OclInterpreter} containing
-	 *         the done preparation.
+	 *          If true, the prepared {@link Constraint}s will be added to the set
+	 *          of interpreted {@link Constraint}s and thus will not be prepared
+	 *          or interpreted again.
+	 * @return The {@link IInterpretationEnvironment} of the
+	 *         {@link OclInterpreter} containing the done preparation.
 	 */
-	public IEnvironment prepareRemainingConstraints(
-			List<IModelObject> modelObjects, boolean setInterpreted) {
+	public IInterpretationEnvironment prepareRemainingConstraints(
+			IModelInstanceElement modelObject, boolean setInterpreted) {
 
 		List<Constraint> unInterpretedConstraints;
 
@@ -404,63 +473,48 @@ public class TestPerformer {
 		 */
 		for (Constraint aConstraint : unInterpretedConstraints) {
 
-			for (IModelObject aModelObject : modelObjects) {
+			NamedElement aConstrainedElement;
 
-				NamedElement aConstrainedElement;
-
-				String aModelObjectsName;
-				String aConstrainedElemsName;
-
-				/* Get the model objects name. */
-				aModelObjectsName = aModelObject.getQualifiedNameString();
-
-				/* Get the constrained element. */
-				aConstrainedElement = (NamedElement) aConstraint
-						.getConstrainedElement().get(0);
-
-				/*
-				 * If the constrained element is a property, get the constrained
-				 * type instead.
-				 */
-				if (aConstrainedElement instanceof Property) {
-
-					Property aProperty;
-
-					aProperty = (Property) aConstrainedElement;
-					aConstrainedElement = aProperty.getOwningType();
-				}
-
-				/*
-				 * Else if the constrained element is an operation, get the
-				 * constrained type instead.
-				 */
-				else if (aConstrainedElement instanceof Operation) {
-
-					Operation operation;
-
-					operation = (Operation) aConstrainedElement;
-					aConstrainedElement = operation.getOwningType();
-				}
-				// no else.
-
-				/* Get the constrained element's name. */
-				aConstrainedElemsName = aConstrainedElement.getQualifiedName();
-
-				/*
-				 * Check if the current model object matches to the constrained
-				 * element and eventually prepare the constrained element.
-				 */
-				if (aConstrainedElemsName.equals(aModelObjectsName)) {
-					this.myInterpreter.prepare(aConstraint, aModelObject);
-				}
-				// no else.
-
-			}
-			// end for.
+			/* Get the constrained element. */
+			aConstrainedElement =
+					(NamedElement) aConstraint.getConstrainedElement().get(0);
 
 			/*
-			 * Eventually add the constraint to the already interpreted
-			 * constraints.
+			 * If the constrained element is a property, get the constrained type
+			 * instead.
+			 */
+			if (aConstrainedElement instanceof Property) {
+
+				Property aProperty;
+
+				aProperty = (Property) aConstrainedElement;
+				aConstrainedElement = aProperty.getOwningType();
+			}
+
+			/*
+			 * Else if the constrained element is an operation, get the constrained
+			 * type instead.
+			 */
+			else if (aConstrainedElement instanceof Operation) {
+
+				Operation operation;
+
+				operation = (Operation) aConstrainedElement;
+				aConstrainedElement = operation.getOwningType();
+			}
+			// no else.
+
+			/*
+			 * Check if the current model object matches to the constrained element
+			 * and eventually prepare the constrained element.
+			 */
+			if (modelObject.getTypes().contains(aConstrainedElement)) {
+				this.myInterpreter.prepareConstraint(aConstraint, modelObject);
+			}
+			// no else.
+
+			/*
+			 * Eventually add the constraint to the already interpreted constraints.
 			 */
 			if (setInterpreted) {
 				this.interpretedConstraints.add(aConstraint);
@@ -475,177 +529,79 @@ public class TestPerformer {
 	 * <p>
 	 * Resets the {@link IModel} used by this {@link TestPerformer} and
 	 * reinitializes it. Used to remove new defined or initialized
-	 * {@link IModelObject}s from the {@link IModel}.
+	 * {@link IModelInstanceElement}s from the {@link IModel}.
 	 * </p>
 	 */
-	@SuppressWarnings("unchecked")
-	public void resetUML2Model() {
+	public void resetModel() {
 
 		/* Remove all loaded models. */
 		ModelBusPlugin.getModelRegistry().dispose();
 
 		/* Reload the model. */
-		this.loadUML2Model(modelFile);
+		this.loadModel();
 		this.myModel = ModelBusPlugin.getModelRegistry().getActiveModel();
 
 		/* Try to reset the prepared constraints of the global environment. */
-		try {
-			Field savedConstraintsField;
-			Object savedConstraintsObject;
-			Map<String, Constraint> savedConstraints;
-
-			/* Get the field by reflection which contains the constraints. */
-			savedConstraintsField = Environment.class
-					.getDeclaredField("savedConstraints");
-			savedConstraintsField.setAccessible(true);
-
-			/* Get the field's object and cast it to a Map. */
-			savedConstraintsObject = savedConstraintsField
-					.get(this.myGlobalEnvironment);
-			savedConstraints = (Map<String, Constraint>) savedConstraintsObject;
-
-			/* Clear the Map. */
-			if (savedConstraints != null) {
-				savedConstraints.clear();
-			}
-			// no else.
-		}
-
-		catch (SecurityException e) {
-			/* Ignore this exception. */
-		}
-
-		catch (NoSuchFieldException e) {
-			/* Ignore this exception. */
-		}
-
-		catch (IllegalArgumentException e) {
-			/* Ignore this exception. */
-		}
-
-		catch (IllegalAccessException e) {
-			/* Ignore this exception. */
-		}
+		this.myGlobalEnvironment.clearPreparedConstraints();
 	}
 
 	/**
 	 * <p>
-	 * Removes a given variable from the {@link IEnvironment} used for
+	 * Removes a variable to the {@link IInterpretationEnvironment} used for
 	 * preparation and interpretation.
 	 * </p>
 	 * 
 	 * @param path
-	 *            The path and name of the variable which shall be set.
+	 *          The path and name of the variable which shall be reset.
 	 */
-	public void resetVar(String path) {
+	public void resetEnvironmentVariable(String path) {
 
 		/* Add the variable to the environment. */
-		this.myGlobalEnvironment.addVar(path, null);
+		this.myInterpreter.resetEnviromentVariable(path);
 	}
 
 	/**
 	 * <p>
-	 * Sets the meta model of this {@link TestPerformer}.
-	 * </p>
-	 * 
-	 * @param metaModel
-	 *            The meta model for which the test shall be performed.
-	 */
-	public void setMetaModel(String metaModel) {
-		this.metaModel = metaModel;
-	}
-
-	/**
-	 * <p>
-	 * Sets the model bundle of this {@link TestPerformer}.
-	 * </p>
-	 * 
-	 * @param modelBundle
-	 *            The model bundle for which the test shall be performed.
-	 */
-	public void setModelBundle(String modelBundle) {
-		this.modelBundle = modelBundle;
-	}
-
-	/**
-	 * <p>
-	 * Sets the model file of this {@link TestPerformer}.
-	 * </p>
-	 * 
-	 * @param modelFile
-	 *            The model file for which the test shall be performed.
-	 */
-	public void setModelFile(String modelFile) {
-		this.modelFile = modelFile;
-	}
-
-	/**
-	 * <p>
-	 * Sets the model instance of this {@link TestPerformer}.
-	 * </p>
-	 * 
-	 * @param modelInstance
-	 *            The model instance for which the test shall be performed.
-	 */
-	public void setModelInstanceType(String modelInstance) {
-		this.modelInstanceType = modelInstance;
-	}
-
-	/**
-	 * <p>
-	 * Sets the model instance file of this {@link TestPerformer}.
-	 * </p>
-	 * 
-	 * @param modelInstanceFile
-	 *            The model instance file for which the test shall be performed.
-	 */
-	public void setModelInstanceFile(String modelInstanceFile) {
-		this.modelInstanceFile = modelInstanceFile;
-	}
-
-	/**
-	 * <p>
-	 * Add a given {@link Object} as a variable to the {@link IEnvironment} used
-	 * for preparation and interpretation.
+	 * Add a given {@link Object} as a variable to the
+	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
 	 * </p>
 	 * 
 	 * @param path
-	 *            The path and name of the variable which shall be set.
+	 *          The path and name of the variable which shall be set.
 	 * @param value
-	 *            The value of the set variable as an Object.
+	 *          The {@link IModelInstanceElement} value of the set variable as an Object.
 	 */
-	public void setVar(String path, Object value) {
+	public void setEnvironmentVariable(String path, Object value) {
 
-		OclRoot anOclRoot;
-
-		/* Convert the given variable into an OclRoot depending on its type. */
-		if (value instanceof Integer) {
-			anOclRoot = new JavaOclInteger((Integer) value);
-		}
-
-		else if (value instanceof Float) {
-			anOclRoot = new JavaOclReal((Float) value);
-		}
-
-		else if (value instanceof Boolean) {
-			anOclRoot = JavaOclBoolean.getInstance((Boolean) value);
-		}
-
-		else if (value instanceof String) {
-			anOclRoot = new JavaOclString((String) value);
-		}
-
-		else {
-			anOclRoot = new JavaOclObject(value);
-		}
-
+		/* Convert the object into an OclRoot. */
+		OclRoot adaptedObject;
+		adaptedObject =
+				JavaStandardlibraryPlugin.getStandardLibraryFactory().createOclRoot(
+						value);
 		/* Add the variable to the environment. */
-		this.myGlobalEnvironment.addVar(path, anOclRoot);
+		this.myInterpreter.setEnviromentVariable(path, adaptedObject);
 	}
 
 	/**
-	 * @return A {@link List} containing all loaded {@link Constraint}s which
-	 *         were not interpreted yet.
+	 * <p>
+	 * Add a given {@link OclRoot} as a variable to the
+	 * {@link IInterpretationEnvironment} used for preparation and interpretation.
+	 * </p>
+	 * 
+	 * @param path
+	 *          The path and name of the variable which shall be set.
+	 * @param value
+	 *          The {@link OclRoot} value of the set variable as an Object.
+	 */
+	public void setEnvironmentVariable(String path, OclRoot value) {
+
+		/* Add the variable to the environment. */
+		this.myInterpreter.setEnviromentVariable(path, value);
+	}
+
+	/**
+	 * @return A {@link List} containing all loaded {@link Constraint}s which were
+	 *         not interpreted yet.
 	 */
 	protected List<Constraint> collectNotYetInterpretedConstraints() {
 
@@ -656,8 +612,8 @@ public class TestPerformer {
 		try {
 			rootNamespace = this.myModel.getRootNamespace();
 
-			result = this
-					.collectNotYetInterpretedConstraintsOfNamespace(rootNamespace);
+			result =
+					this.collectNotYetInterpretedConstraintsOfNamespace(rootNamespace);
 		}
 
 		catch (ModelAccessException e) {
@@ -672,47 +628,76 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Loads a given fileName as an {@link IModelInstance} of the actual
-	 * selected {@link IModel}.
+	 * Loads the {@link IModel} used for testing.
 	 * </p>
 	 * 
-	 * @param modelInstanceProviderFileName
-	 *            The file of the provider class of the {@link IModelInstance}.
-	 * @throws RuntimeException
-	 *             Thrown, if the given file can not be found.
+	 * @throws Ocl22JavaException
+	 *           Is thrown if the {@link IModel} cannot be initialized or the
+	 *           model file is not found.
 	 */
-	protected void loadModelInstance(String modelInstanceProviderFileName)
-			throws RuntimeException {
+	protected void loadModel() throws RuntimeException {
+
+		/* Check if the model has not already been loaded yet. */
+		if (!(this.myModel != null && this.myModel.getDisplayName().equals(
+				MODEL_FILE))) {
+
+			File modelFile;
+
+			modelFile = new File(this.fileDirectory + MODEL_FILE);
+
+			/* Check if the given file exists. */
+			if (!modelFile.exists()) {
+				String msg;
+
+				msg = "The model file ";
+				msg += this.fileDirectory + MODEL_FILE;
+				msg += " doesn't exists.";
+
+				throw new RuntimeException(msg);
+			}
+			// no else;
+
+			/* Try to load the model. */
+			try {
+				IModelRegistry modelRegistry;
+
+				this.myModel = this.myMetaModel.getModelProvider().getModel(modelFile);
+
+				modelRegistry = ModelBusPlugin.getModelRegistry();
+
+				modelRegistry.addModel(myModel);
+				modelRegistry.setActiveModel(myModel);
+			}
+
+			catch (ModelAccessException e) {
+				throw new RuntimeException("The model could not be loaded. "
+						+ e.getMessage());
+			}
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * Loads a new empty {@link IModelInstance} of the actual selected
+	 * {@link IModel}.
+	 * </p>
+	 * 
+	 * @throws RuntimeException
+	 *           Thrown, if an error during {@link IModelInstance} initialization
+	 *           occurs.
+	 */
+	protected void loadModelInstance() throws RuntimeException {
 
 		/* Check if a model has been set yet. */
 		if (this.myModel != null) {
-
-			IModelInstanceProvider modelInstanceProvider;
-			File modelInstanceFile;
-
-			modelInstanceProvider = ModelBusPlugin
-					.getModelInstanceTypeRegistry().getModelInstanceType(
-							modelInstanceType).getModelInstanceProvider();
 
 			this.myModelInstance = null;
 
 			/* Load the model instance. */
 			try {
-				modelInstanceFile = new File(fileDirectory
-						+ modelInstanceProviderFileName);
-
-				if (!modelInstanceFile.exists()) {
-					String msg;
-
-					msg = "The given model instance provider class file ";
-					msg += "does not exist. File name: ";
-					msg += modelInstanceFile + ".";
-
-					throw new RuntimeException(msg);
-				}
-
-				this.myModelInstance = modelInstanceProvider.getModelInstance(
-						modelInstanceFile, this.myModel);
+				this.myModelInstance =
+						JavaModelInstanceTypePlugin.createEmptyModelInstance(this.myModel);
 			}
 
 			catch (ModelAccessException e) {
@@ -733,78 +718,22 @@ public class TestPerformer {
 			IModelInstanceRegistry modelInstanceRegistry;
 			modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
 
-			modelInstanceRegistry.addModelInstance(myModel,
-					this.myModelInstance);
+			modelInstanceRegistry.addModelInstance(myModel, this.myModelInstance);
 			modelInstanceRegistry.setActiveModelInstance(myModel,
 					this.myModelInstance);
 		}
 
 		else {
-			throw new RuntimeException(
-					"No model found to load a model instance.");
+			throw new RuntimeException("No model found to load a model instance.");
 		}
-	}
-
-	/**
-	 * <p>
-	 * Loads an {@link IModel} which uses the UML2 meta model.
-	 * </p>
-	 * 
-	 * @param uml2ModelName
-	 *            The filename of the UML2 model.
-	 * @throws Ocl22JavaException
-	 *             Is thrown if the {@link IModel} cannot be initialized or the
-	 *             model file is not found.
-	 */
-	protected void loadUML2Model(String uml2ModelName) throws RuntimeException {
-
-		/* Check if the model has not already been loaded yet. */
-		if (!(this.myModel != null && this.myModel.getDisplayName().equals(
-				uml2ModelName))) {
-
-			File modelFile;
-
-			modelFile = new File(this.fileDirectory + uml2ModelName);
-
-			/* Check if the given file exists. */
-			if (!modelFile.exists()) {
-				String msg;
-
-				msg = "The model file ";
-				msg += this.fileDirectory + uml2ModelName;
-				msg += " doesn't exists.";
-
-				throw new RuntimeException(msg);
-			}
-			// no else;
-
-			/* Try to load the model. */
-			try {
-				IModelRegistry modelRegistry;
-
-				this.myModel = this.myUML2MetaModel.getModelProvider()
-						.getModel(modelFile);
-
-				modelRegistry = ModelBusPlugin.getModelRegistry();
-
-				modelRegistry.addModel(myModel);
-				modelRegistry.setActiveModel(myModel);
-			}
-
-			catch (ModelAccessException e) {
-				throw new RuntimeException("The model could not be loaded. "
-						+ e.getMessage());
-			}
-		}
-		// no else.
 	}
 
 	/**
 	 * @param aNamespace
-	 *            The {@link Namespace} which {@link Constraint}s shall be
-	 *            collected.
-	 * @return All {@link Constraint}s of a given {@link Namespace} and its
-	 *         nested {@link Namespace}s which were not interpreted yet.
+	 *          The {@link Namespace} which {@link Constraint}s shall be
+	 *          collected.
+	 * @return All {@link Constraint}s of a given {@link Namespace} and its nested
+	 *         {@link Namespace}s which were not interpreted yet.
 	 */
 	private List<Constraint> collectNotYetInterpretedConstraintsOfNamespace(
 			Namespace aNamespace) {
@@ -823,9 +752,8 @@ public class TestPerformer {
 		nestedNamespaces = aNamespace.getNestedNamespace();
 
 		for (Namespace aNestedNamespace : nestedNamespaces) {
-			result
-					.addAll(this
-							.collectNotYetInterpretedConstraintsOfNamespace(aNestedNamespace));
+			result.addAll(this
+					.collectNotYetInterpretedConstraintsOfNamespace(aNestedNamespace));
 		}
 
 		/* Add all not yet interpreted constraints of this name space. */
