@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelbus.modelinstance.types.impl;
+package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
 import java.util.Set;
 

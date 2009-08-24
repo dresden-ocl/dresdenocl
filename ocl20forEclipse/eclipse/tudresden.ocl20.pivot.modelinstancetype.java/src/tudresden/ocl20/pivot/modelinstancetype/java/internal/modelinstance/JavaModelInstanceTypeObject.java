@@ -34,6 +34,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class JavaModelInstanceTypeObject implements IModelInstanceTypeObject {
 
+	private static final int REFACTORED_TILL_HERE = 0;
+
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			JavaModelInstanceTypePlugin.getLogger(JavaModelInstanceTypeObject.class);

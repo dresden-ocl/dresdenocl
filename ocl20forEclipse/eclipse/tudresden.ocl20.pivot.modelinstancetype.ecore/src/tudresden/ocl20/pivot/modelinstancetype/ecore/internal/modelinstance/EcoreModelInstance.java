@@ -38,9 +38,9 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapter
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -84,7 +84,7 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 			throws ModelAccessException {
 
 		this.myModelInstanceResource = resource;
-		this.myInstanceName = resource.toString();
+		this.myName = resource.toString();
 
 		/* Eventually load the resource. */
 		if (!resource.isLoaded()) {

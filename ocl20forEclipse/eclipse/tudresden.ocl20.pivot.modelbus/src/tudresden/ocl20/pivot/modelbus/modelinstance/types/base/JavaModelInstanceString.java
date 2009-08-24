@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.modelinstance.types.impl.java;
+package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
 import java.util.HashSet;
 
@@ -24,15 +24,14 @@ import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.impl.AbstractModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
- * Represents an adaptation for {@link Integer}s of a {@link JavaModelInstance}.
+ * Represents an adaptation for {@link String}s of a {@link JavaModelInstance}.
  * </p>
  * 
  * <p>
@@ -43,47 +42,47 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstanceInteger extends AbstractModelInstanceElement
-		implements IModelInstanceInteger {
+public class JavaModelInstanceString extends AbstractModelInstanceElement
+		implements IModelInstanceString {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
-			ModelBusPlugin.getLogger(JavaModelInstanceInteger.class);
+			ModelBusPlugin.getLogger(JavaModelInstanceString.class);
 
-	/** The adapted {@link Long} of this {@link JavaModelInstanceInteger}. */
-	private Long myLong;
+	/** The adapted {@link String} of this {@link JavaModelInstanceString}. */
+	private String myString;
 
 	/**
 	 * <p>
-	 * Creates a new {@link JavaModelInstanceInteger}.
+	 * Creates a new {@link JavaModelInstanceString}.
 	 * </p>
 	 * 
-	 * @param aLong
-	 *          The {@link Long} that shall be adapted by this
-	 *          {@link JavaModelInstanceInteger}.
+	 * @param string
+	 *          The {@link String} that shall be adapted by this
+	 *          {@link JavaModelInstanceString}.
 	 */
-	protected JavaModelInstanceInteger(Long aLong) {
+	protected JavaModelInstanceString(String string) {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaModelInstanceInteger("; //$NON-NLS-1$
-			msg += "aLong = " + aLong; //$NON-NLS-1$
+			msg = "JavaModelInstanceString("; //$NON-NLS-1$
+			msg += "string = " + string; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
 		// no else.
 
-		this.myLong = aLong;
+		this.myString = string;
 		this.myTypes = new HashSet<Type>();
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaModelInstanceInteger(Long) - exit"; //$NON-NLS-1$
+			msg = "JavaModelInstanceString(String) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -92,28 +91,23 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
-	 * AbstractModelInstanceElement#getName()
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceString#getString
+	 * ()
 	 */
 	public String getName() {
-	
+
 		StringBuffer resultBuffer;
 		resultBuffer = new StringBuffer();
-	
+
 		resultBuffer.append(this.getClass().getSimpleName());
 		resultBuffer.append("[");
-		resultBuffer.append(this.myLong.toString());
+		resultBuffer.append(this.myString);
 		resultBuffer.append("]");
-	
+
 		return resultBuffer.toString();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
-	 */
 	public IModelInstanceElement asType(Type type) {
 	
 		IModelInstanceElement result;
@@ -121,7 +115,7 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 		/* By default the result is undefined. */
 		result = null;
 	
-		/* Integers can only be casted to primitive types. */
+		/* Strings can only be casted to primitive types. */
 		if (type instanceof PrimitiveType) {
 			PrimitiveType primitiveType;
 			primitiveType = (PrimitiveType) type;
@@ -129,42 +123,42 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 			/* Check the given PrimitiveTypeKind. */
 			if (primitiveType.getKind().equals(PrimitiveTypeKind.BOOLEAN)) {
 	
-				if (this.myLong == null) {
-					result = new JavaModelInstanceInteger(null);
-				}
-	
-				/* FIXME Claas: Ask Micha if this is correct. */
-				else if (this.myLong.longValue() >= 0) {
-					result = new JavaModelInstanceBoolean(true);
+				if (this.myString == null) {
+					result = new JavaModelInstanceBoolean(null);
 				}
 	
 				else {
-					result = new JavaModelInstanceBoolean(false);
+					result =
+							new JavaModelInstanceBoolean(Boolean.parseBoolean(this.myString));
 				}
 			}
 	
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
 	
-				/* Create a new integer to avoid side effects. */
-				result = new JavaModelInstanceInteger(this.myLong);
-			}
-	
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
-	
-				/* Each integer is also a real. */
-				result = new JavaModelInstanceReal(this.myLong);
-			}
-	
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
-	
-				/* FIXME Claas: Ask Micha if this is correct. */
-				if (this.myLong == null) {
-					result = new JavaModelInstanceString(null);
+				if (this.myString == null) {
+					result = new JavaModelInstanceInteger(null);
 				}
 	
 				else {
-					result = new JavaModelInstanceString(this.myLong.toString());
+					result = new JavaModelInstanceInteger(Long.parseLong(this.myString));
 				}
+			}
+	
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
+	
+				if (this.myString == null) {
+					result = new JavaModelInstanceReal(null);
+				}
+	
+				else {
+					result = new JavaModelInstanceReal(Double.parseDouble(this.myString));
+				}
+			}
+	
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
+	
+				/* Create a new string to avoid side effects. */
+				result = new JavaModelInstanceString(this.myString);
 			}
 		}
 	
@@ -179,21 +173,17 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 	 */
 	public Object deepCopy() {
 
-		return new JavaModelInstanceInteger(this.myLong);
+		return new JavaModelInstanceString(this.myString);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger#getInteger
-	 * ()
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString
+	 * #getString()
 	 */
-	public Long getLong() {
+	public String getString() {
 
-		Long result;
-
-		result = this.myLong.longValue();
-
-		return result;
+		return this.myString;
 	}
 }

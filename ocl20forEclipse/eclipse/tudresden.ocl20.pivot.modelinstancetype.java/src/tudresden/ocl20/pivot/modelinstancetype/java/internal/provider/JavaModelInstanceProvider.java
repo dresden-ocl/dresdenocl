@@ -30,8 +30,8 @@ import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstanceProvider;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
@@ -55,6 +55,17 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 	 */
 	public JavaModelInstanceProvider() {
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider#
+	 * createEmptyModelInstance(tudresden.ocl20.pivot.modelbus.IModel)
+	 */
+	public IModelInstance createEmptyModelInstance(IModel model)
+			throws ModelAccessException {
+
+		return new JavaModelInstance(model);
 	}
 
 	/**

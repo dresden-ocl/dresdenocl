@@ -85,7 +85,8 @@ public interface IModelInstance {
 	 * 
 	 * @param object
 	 *          the object to add to the {@link IModelInstance}
-	 * @return the adapted object
+	 * @return The adapted object or <code>null</code> if the given {@link Object}
+	 *         could not be adapted.
 	 */
 	IModelInstanceElement addModelInstanceElement(Object object);
 
@@ -119,16 +120,39 @@ public interface IModelInstance {
 
 	/**
 	 * <p>
-	 * Gets all objects of the {@link IModelInstance}.
+	 * Gets all {@link IModelInstanceObject}s of the {@link IModelInstance}.
 	 * </p>
 	 * 
-	 * @return the {@link IModelInstanceElement}s for this model instance
+	 * <p>
+	 * <strong>Please note, that primitive types and collections are not returned
+	 * by this operation.</strong>
+	 * </p>
+	 * 
+	 * @return the {@link IModelInstanceElement}s for this model instance.
 	 */
 	List<IModelInstanceElement> getAllElements();
 
 	/**
 	 * <p>
-	 * Returns all {@link IModelInstanceObject}s of the given {@link Type}.
+	 * Returns a {@link Set} of all {@link Type}s that are at least implemented by
+	 * one {@link IModelInstanceElement} of this {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>Please note, that the result will not contain primitive types nor
+	 * collection types.</strong>
+	 * </p>
+	 * 
+	 * @return A {@link Set} of all {@link Type}s that are at least implemented by
+	 *         one {@link IModelInstanceElement} of this {@link IModelInstance}.
+	 */
+	Set<Type> getAllImplementedTypes();
+
+	/**
+	 * <p>
+	 * Returns all {@link IModelInstanceObject}s of the given {@link Type}. If the
+	 * given {@link Type} does not exist in the {@link IModel} of this
+	 * {@link IModelInstance}, <code>null</code> is returned.
 	 * </p>
 	 * 
 	 * <p>
@@ -138,7 +162,9 @@ public interface IModelInstance {
 	 * 
 	 * @param type
 	 *          the {@link Type} of which all instances should be returned
-	 * @return all adapted instances of the given type
+	 * @return All adapted instances of the given {@link Type} or
+	 *         <code>null</code> if the {@link Type} does not belong to the
+	 *         {@link IModelInstance}'s {@link IModel}.
 	 */
 	List<IModelInstanceObject> getAllInstances(Type type);
 
@@ -150,16 +176,6 @@ public interface IModelInstance {
 	 * @return The display name of this {@link IModelInstance}.
 	 */
 	String getDisplayName();
-
-	/**
-	 * <p>
-	 * Gets the object kinds.
-	 * </p>
-	 * 
-	 * @return the available types of {@link IModelInstanceElement}s for this
-	 *         model instance.
-	 */
-	Set<Type> getElementTypes();
 
 	/**
 	 * <p>

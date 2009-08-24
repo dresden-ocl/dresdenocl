@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.modelinstance.types.impl.java;
+package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -35,6 +35,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 
 /**
  * <p>
@@ -171,6 +172,61 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			Collection<T> adapted) {
 
 		return new JavaModelInstanceCollection<T>(adapted, this);
+	}
+
+	/**
+	 * <p>
+	 * Creates an {@link IModelInstanceCollection} for a given {@link Collection}
+	 * and a given {@link OclCollectionTypeKind}, the create
+	 * {@link IModelInstanceCollection} shall belong to.
+	 * </p>
+	 * 
+	 * @param collection
+	 *          The {@link Collection} for that a {@link IModelInstanceCollection}
+	 *          shall be created.
+	 * @param kind
+	 *          The {@link OclCollectionTypeKind}, the created
+	 *          {@link IModelInstanceCollection} shall belong to.
+	 * 
+	 * @return The created {@link IModelInstanceCollection}.
+	 */
+	protected <T> IModelInstanceCollection<T> createModelInstanceCollection(
+			Collection<T> collection, OclCollectionTypeKind kind) {
+
+		IModelInstanceCollection<T> result;
+
+		switch (kind) {
+
+		case BAG:
+
+			result =
+					new JavaModelInstanceCollection<T>(collection, this, false, false);
+			break;
+
+		case SEQUENCE:
+
+			result =
+					new JavaModelInstanceCollection<T>(collection, this, true, false);
+			break;
+
+		case SET:
+
+			result =
+					new JavaModelInstanceCollection<T>(collection, this, false, true);
+			break;
+
+		case ORDEREDSET:
+
+			result = new JavaModelInstanceCollection<T>(collection, this, true, true);
+			break;
+
+		default:
+
+			result = new JavaModelInstanceCollection<T>(collection, this);
+		}
+		// end switch.
+
+		return result;
 	}
 
 	/**

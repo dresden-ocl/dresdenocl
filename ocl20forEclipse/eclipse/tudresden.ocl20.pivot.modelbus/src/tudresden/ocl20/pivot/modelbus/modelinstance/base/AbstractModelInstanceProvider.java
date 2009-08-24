@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelbus.base;
+package tudresden.ocl20.pivot.modelbus.modelinstance.base;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -36,6 +36,7 @@ import java.net.URL;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
+import tudresden.ocl20.pivot.modelbus.base.AbstractModelProvider;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
 

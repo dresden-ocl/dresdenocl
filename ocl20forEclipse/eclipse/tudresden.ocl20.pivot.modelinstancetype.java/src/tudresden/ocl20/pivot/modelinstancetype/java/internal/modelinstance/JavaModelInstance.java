@@ -20,6 +20,7 @@ package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -28,16 +29,20 @@ import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
+import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.java.factory.JavaModelInstanceObjectFactory;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -55,10 +60,10 @@ public class JavaModelInstance extends AbstractModelInstance implements
 			JavaModelInstanceTypePlugin.getLogger(JavaModelInstance.class);
 
 	/**
-	 * The {@link JavaModelInstanceObjectFactory} used to created adapters for the
+	 * The {@link JavaModelInstanceFactory} used to created adapters for the
 	 * {@link IModelInstanceElement}s.
 	 */
-	private JavaModelInstanceObjectFactory myModelInstanceObjectFactory;
+	private JavaModelInstanceFactory myModelInstanceFactory;
 
 	/**
 	 * <p>
@@ -92,10 +97,9 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		/* Initialize the instance. */
 		this.myModel = model;
 		this.myRootNamespace = model.getRootNamespace();
-		this.myInstanceName = providerClass.getCanonicalName();
+		this.myName = providerClass.getCanonicalName();
 
-		this.myModelInstanceObjectFactory =
-				new JavaModelInstanceObjectFactory(this.myModel);
+		this.myModelInstanceFactory = new JavaModelInstanceFactory(this.myModel);
 
 		/* Try to load the model instance objects. */
 		try {
@@ -172,7 +176,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 
 	/**
 	 * <p>
-	 * Creates and initializes a new {@link JavaModelInstance}.
+	 * Creates and initializes a new, empty {@link JavaModelInstance}.
 	 * </p>
 	 * 
 	 * @param model
@@ -197,8 +201,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		this.myModel = model;
 		this.myRootNamespace = model.getRootNamespace();
 
-		this.myModelInstanceObjectFactory =
-				new JavaModelInstanceObjectFactory(this.myModel);
+		this.myModelInstanceFactory = new JavaModelInstanceFactory(this.myModel);
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -213,65 +216,44 @@ public class JavaModelInstance extends AbstractModelInstance implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumerationLiteral(tudresden
-	 * .ocl20.pivot.pivotmodel.EnumerationLiteral)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
+	 * addModelInstanceCollection(java.util.Collection,
+	 * tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind)
 	 */
-	public IModelInstanceEnumerationLiteral findEnumerationLiteral(
-			EnumerationLiteral literal) {
+	public <T> IModelInstanceCollection<T> addModelInstanceCollection(
+			Collection<T> collection, OclCollectionTypeKind collectionKind) {
+	
+		return this.myModelInstanceFactory.createModelInstanceCollection(
+				collection, collectionKind);
+	}
 
-		IModelInstanceEnumerationLiteral result;
-		Set<IModelInstanceElement> allLiteralsOfEnumeration;
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
+	 * addModelInstanceElement(java.lang.Object)
+	 */
+	public IModelInstanceElement addModelInstanceElement(Object object) {
 
-		result = null;
+		IModelInstanceElement result;
 
-		Type enumeration = (Type) literal.getOwner();
-		allLiteralsOfEnumeration =
-				this.myModelObjectsByType.get(enumeration.getQualifiedNameList());
+		/* Try to adapt and add the object. */
+		try {
+			result = this.addObject(object);
 
-		for (IModelInstanceElement anObject : allLiteralsOfEnumeration) {
-			if (anObject instanceof IModelInstanceEnumerationLiteral) {
-				IModelInstanceEnumerationLiteral aLiteral;
-				aLiteral = (IModelInstanceEnumerationLiteral) anObject;
+			/* FIXME Claas: Probably improve this solution. */
+			/* Re-initialize the caching maps for the operations getObjectsOfType etc. */
+			this.initializeCache();
+		}
 
-				if (aLiteral.getLiteral().name().equals(literal.getName())) {
-					result = aLiteral;
-					break;
-				}
-				// no else.
-			}
-			// no else.
+		/* If an error occurs, return null. */
+		catch (ModelAccessException e) {
+			result = null;
 		}
 
 		return result;
 	}
 
-	/**
-	 * <p>
-	 * Adds a new given {@link Object} as {@link IModelInstanceElement} to this
-	 * {@link JavaModelInstance} and returns the adapted {@link IModelInstanceElement}. If
-	 * the given {@link Object} has added before, the already added
-	 * {@link IModelInstanceElement} will be returned.
-	 * </p>
-	 * 
-	 * @param object
-	 *          The {@link Object} that shall be adapted and added as
-	 *          {@link IModelInstanceElement}.
-	 * @return The adapted and added {@link IModelInstanceElement}.
-	 * @throws ModelAccessException
-	 *           Thrown, if the given {@link Object} cannot be adapted and added.
-	 */
-	public IModelInstanceElement addModelObject(Object object) throws ModelAccessException {
-
-		IModelInstanceElement result;
-
-		result = this.addObject(object);
-
-		/* Re-initialize the caching maps for the operations getObjectsOfType etc. */
-		this.initializeCache();
-
-		return result;
-	}
+	private static final int REFACTORED_TILL_HERE = 0;
 
 	/**
 	 * <p>
@@ -294,7 +276,8 @@ public class JavaModelInstance extends AbstractModelInstance implements
 
 	/**
 	 * <p>
-	 * Adds a given {@link Object} to the {@link List} of {@link IModelInstanceElement}s.
+	 * Adds a given {@link Object} to the {@link List} of
+	 * {@link IModelInstanceElement}s.
 	 * </p>
 	 * 
 	 * @param anObject
@@ -305,12 +288,12 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 *           Thrown, if the given {@link Object} does not math to the
 	 *           {@link IModel} of this {@link IModelInstance}.
 	 */
-	private IModelInstanceElement addObject(Object anObject) throws ModelAccessException {
+	private IModelInstanceElement addObject(Object anObject)
+			throws ModelAccessException {
 
 		IModelInstanceElement result;
 
-		result =
-				this.myModelInstanceObjectFactory.createModelInstanceObject(anObject);
+		result = this.myModelInstanceFactory.createModelInstanceObject(anObject);
 
 		/* If no type of the object has been found, throw an exception. */
 		if (result == null) {
@@ -334,8 +317,8 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		IModelInstanceTypeObject typeObject;
 
 		typeObject =
-				this.myModelInstanceObjectFactory
-						.createModelInstanceTypeObject(anObject.getClass());
+				this.myModelInstanceFactory.createModelInstanceTypeObject(anObject
+						.getClass());
 
 		if (typeObject != null) {
 			this.myModelTypeObjects.put(typeObject.getModelType(), typeObject);
@@ -348,12 +331,13 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	/**
 	 * <p>
 	 * Adds a given {@link IModelInstanceElement} to the {@link List} of
-	 * {@link IModelInstanceElement}s. Eventually contained elements are added as well.
+	 * {@link IModelInstanceElement}s. Eventually contained elements are added as
+	 * well.
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelInstanceElement} which shall be added to the {@link List}
-	 *          of {@link IModelInstanceElement}s.
+	 *          The {@link IModelInstanceElement} which shall be added to the
+	 *          {@link List} of {@link IModelInstanceElement}s.
 	 */
 	private void addObject(IModelInstanceElement modelObject) {
 
@@ -365,12 +349,38 @@ public class JavaModelInstance extends AbstractModelInstance implements
 				IModelInstanceCollection aCollection;
 				aCollection = (IModelInstanceCollection) modelObject;
 
-				for (IModelInstanceElement anElement : aCollection.getContainedElements()) {
+				for (IModelInstanceElement anElement : aCollection
+						.getContainedElements()) {
 					this.addObject(anElement);
 				}
 			}
 			// no else.
 		}
 		// no else.
+	}
+
+	public List<IModelInstanceObject> getAllInstances(Type type) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IModelInstanceFactory getModelInstanceFactory() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IModelInstanceElement getStaticProperty(Type type, Property property) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IModelInstanceElement invokeStaticOperation(Type type,
+			Operation operation, List<IModelInstanceElement> args) {
+
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -18,14 +18,16 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -37,6 +39,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class JavaModelInstanceObject extends AbstractModelObject implements
 		IModelInstanceObject {
+
+	private static final int REFACTORED_TILL_HERE = 0;
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -110,5 +114,48 @@ public class JavaModelInstanceObject extends AbstractModelObject implements
 		result += "]";
 
 		return result;
+	}
+
+	public IModelInstanceElement getProperty(Property property) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IModelInstanceElement invokeOperation(Operation operation,
+			List<IModelInstanceElement> args) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IModelInstanceElement asType(Type type) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object deepCopy() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getName() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Set<Type> getTypes() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isInstanceOf(Type type) {
+
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

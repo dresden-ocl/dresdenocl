@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
@@ -39,6 +40,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
 		implements IModelInstanceEnumerationLiteral {
+
+	private static final int REFACTORED_TILL_HERE = 0;
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -120,5 +123,35 @@ public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
 		result += "]";
 
 		return result;
+	}
+
+	public IModelInstanceElement asType(Type type) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object deepCopy() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getName() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Set<Type> getTypes() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isInstanceOf(Type type) {
+
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

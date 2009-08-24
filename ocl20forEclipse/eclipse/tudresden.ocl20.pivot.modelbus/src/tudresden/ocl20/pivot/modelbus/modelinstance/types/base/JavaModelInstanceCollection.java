@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.modelinstance.types.impl.java;
+package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,7 +32,6 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.impl.AbstractModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
