@@ -131,7 +131,7 @@ public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
 		return null;
 	}
 
-	public Object deepCopy() {
+	public Object copyForAtPre() {
 
 		// TODO Auto-generated method stub
 		return null;

@@ -20,7 +20,9 @@ package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -52,18 +54,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstance extends AbstractModelInstance implements
-		IModelInstance {
+public class JavaModelInstance extends AbstractModelInstance {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			JavaModelInstanceTypePlugin.getLogger(JavaModelInstance.class);
-
-	/**
-	 * The {@link JavaModelInstanceFactory} used to created adapters for the
-	 * {@link IModelInstanceElement}s.
-	 */
-	private JavaModelInstanceFactory myModelInstanceFactory;
 
 	/**
 	 * <p>
@@ -96,7 +91,6 @@ public class JavaModelInstance extends AbstractModelInstance implements
 
 		/* Initialize the instance. */
 		this.myModel = model;
-		this.myRootNamespace = model.getRootNamespace();
 		this.myName = providerClass.getCanonicalName();
 
 		this.myModelInstanceFactory = new JavaModelInstanceFactory(this.myModel);
@@ -115,8 +109,8 @@ public class JavaModelInstance extends AbstractModelInstance implements
 			/* Adapt all provided objects. */
 			this.addObjects(providedObjects);
 
-			/* Initialize the caching maps for the operations getObjectsOfType etc. */
-			this.initializeCache();
+			/* Initialize the type Mapping of this model instance. */
+			this.initializeTypeMapping();
 		}
 
 		catch (NoSuchMethodException e) {
@@ -181,9 +175,8 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	 * 
 	 * @param model
 	 *          The {@link IModel} of this {@link IModelInstance}.s
-	 * @throws ModelAccessException
 	 */
-	public JavaModelInstance(IModel model) throws ModelAccessException {
+	public JavaModelInstance(IModel model) {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -199,7 +192,6 @@ public class JavaModelInstance extends AbstractModelInstance implements
 
 		/* Initialize the instance. */
 		this.myModel = model;
-		this.myRootNamespace = model.getRootNamespace();
 
 		this.myModelInstanceFactory = new JavaModelInstanceFactory(this.myModel);
 
@@ -217,19 +209,6 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
-	 * addModelInstanceCollection(java.util.Collection,
-	 * tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind)
-	 */
-	public <T> IModelInstanceCollection<T> addModelInstanceCollection(
-			Collection<T> collection, OclCollectionTypeKind collectionKind) {
-	
-		return this.myModelInstanceFactory.createModelInstanceCollection(
-				collection, collectionKind);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
 	 * addModelInstanceElement(java.lang.Object)
 	 */
 	public IModelInstanceElement addModelInstanceElement(Object object) {
@@ -240,9 +219,11 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		try {
 			result = this.addObject(object);
 
-			/* FIXME Claas: Probably improve this solution. */
-			/* Re-initialize the caching maps for the operations getObjectsOfType etc. */
-			this.initializeCache();
+			/* Probably add the adapted model instance element to the type mapping. */
+			if (result instanceof IModelInstanceObject) {
+				this.addModelInstanceObjectToCache((IModelInstanceObject) result);
+			}
+			// no else.
 		}
 
 		/* If an error occurs, return null. */
@@ -293,7 +274,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 
 		IModelInstanceElement result;
 
-		result = this.myModelInstanceFactory.createModelInstanceObject(anObject);
+		result = this.myModelInstanceFactory.createModelInstanceElement(anObject);
 
 		/* If no type of the object has been found, throw an exception. */
 		if (result == null) {
@@ -342,7 +323,7 @@ public class JavaModelInstance extends AbstractModelInstance implements
 	private void addObject(IModelInstanceElement modelObject) {
 
 		if (modelObject != null) {
-			this.myModelObjects.add(modelObject);
+			this.myModelInstanceObjects.add(modelObject);
 
 			/* Probably add contained elements as well. */
 			if (modelObject instanceof IModelInstanceCollection) {
@@ -359,26 +340,14 @@ public class JavaModelInstance extends AbstractModelInstance implements
 		// no else.
 	}
 
-	public List<IModelInstanceObject> getAllInstances(Type type) {
+	public IModelInstanceElement invokeStaticOperation(Operation operation,
+			List<IModelInstanceElement> args) {
 
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public IModelInstanceFactory getModelInstanceFactory() {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public IModelInstanceElement getStaticProperty(Type type, Property property) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public IModelInstanceElement invokeStaticOperation(Type type,
-			Operation operation, List<IModelInstanceElement> args) {
+	public IModelInstanceElement getStaticProperty(Property property) {
 
 		// TODO Auto-generated method stub
 		return null;

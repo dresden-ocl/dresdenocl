@@ -62,8 +62,7 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider#
 	 * createEmptyModelInstance(tudresden.ocl20.pivot.modelbus.IModel)
 	 */
-	public IModelInstance createEmptyModelInstance(IModel model)
-			throws ModelAccessException {
+	public IModelInstance createEmptyModelInstance(IModel model) {
 
 		return new JavaModelInstance(model);
 	}

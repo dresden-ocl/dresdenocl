@@ -135,7 +135,7 @@ public class JavaModelInstanceObject extends AbstractModelObject implements
 		return null;
 	}
 
-	public Object deepCopy() {
+	public Object copyForAtPre() {
 
 		// TODO Auto-generated method stub
 		return null;
