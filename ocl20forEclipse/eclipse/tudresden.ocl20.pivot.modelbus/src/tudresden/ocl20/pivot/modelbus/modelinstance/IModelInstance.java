@@ -32,10 +32,10 @@
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -43,9 +43,10 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerat
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -64,7 +65,8 @@ public interface IModelInstance {
 	 * added, the given object is adapted.
 	 * </p>
 	 * 
-	 * FIXME Claas: Other types than {@link IModelInstanceObject}s are not added.
+	 *FIXME Claas: Ask Micha: Shouldn't we add primitive types and collections to
+	 * the instance. Since they have a type now, that wouldn't be a problem.
 	 * 
 	 * @param object
 	 *          the object to add to the {@link IModelInstance}
@@ -107,8 +109,8 @@ public interface IModelInstance {
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>Please note, that primitive types, enumeration literals and
-	 * collections are not returned by this operation.</strong>
+	 * FIXME Probably: <strong>Please note, that primitive types, enumeration
+	 * literals and collections are not returned by this operation.</strong>
 	 * </p>
 	 * 
 	 * @return the {@link IModelInstanceElement}s for this model instance.
@@ -122,8 +124,8 @@ public interface IModelInstance {
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>Please note, that the result will not contain primitive types nor
-	 * collection types.</strong>
+	 * FIXME: Change this probably: <strong>Please note, that the result will not
+	 * contain primitive types nor collection types.</strong>
 	 * </p>
 	 * 
 	 * @return A {@link Set} of all {@link Type}s that are at least implemented by
@@ -139,8 +141,15 @@ public interface IModelInstance {
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>Note: This operation can be really expensive! Try avoiding it at
-	 * any rate.</strong>
+	 * <strong>Note: This operation can be really expensive!</strong> Try avoiding
+	 * it at any rate.
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>Note: This operation will only work for Types defined in the
+	 * {@link IModel}!</strong> For {@link PrimitiveType}s, {@link CollectionType}
+	 * s, or {@link Enumeration}s, the result will be <code>null</code>, whether
+	 * or not, they have instances in the {@link IModelInstanceElement}.
 	 * </p>
 	 * 
 	 * @param type
@@ -149,7 +158,7 @@ public interface IModelInstance {
 	 *         <code>null</code> if the {@link Type} does not belong to the
 	 *         {@link IModelInstance}'s {@link IModel}.
 	 */
-	List<IModelInstanceObject> getAllInstances(Type type);
+	Set<IModelInstanceObject> getAllInstances(Type type);
 
 	/**
 	 * <p>
@@ -189,19 +198,16 @@ public interface IModelInstance {
 	 * 
 	 * FIXME Claas: Exceptions?
 	 * 
-	 * @param type
-	 *          the {@link Type} of which the static property should be fetched
-	 * @param name
-	 * 
 	 * @param property
-	 *          the {@link Property} is used to determine the name of the property
-	 *          and the {@link Type} of the fetched property; if
+	 *          the {@link Property} is used to determine the name of the
+	 *          property, the {@link Type} providing the static property, and the
+	 *          {@link Type} of the fetched property. If
 	 *          {@link Property#isMultiple()} is <code>true</code> create an
 	 *          {@link IModelInstanceCollection} based on
 	 *          {@link Property#isOrdered()} and {@link Property#isUnique()}.
 	 * @return the adapted property value
 	 */
-	IModelInstanceElement getStaticProperty(Type type, Property property);
+	IModelInstanceElement getStaticProperty(Property property);
 
 	/**
 	 * <p>
@@ -210,19 +216,18 @@ public interface IModelInstance {
 	 * 
 	 * FIXME Claas: Exceptions?
 	 * 
-	 * @param type
-	 *          the {@link Type} on which the static operation should be invoked
 	 * @param operation
 	 *          the {@link Operation} is used to determine the name of the static
-	 *          operation and the {@link Type return type} of the invoked
-	 *          operation; if {@link Operation#isMultiple()} is <code>true</code>
+	 *          operation, the {@link Type} on which the operation shall be
+	 *          invoked, and the {@link Type return type} of the invoked
+	 *          operation. If {@link Operation#isMultiple()} is <code>true</code>
 	 *          create an {@link IModelInstanceCollection} based on
 	 *          {@link Operation#isOrdered()} and {@link Operation#isUnique()}.
 	 * @param args
 	 *          the arguments of the static operation
 	 * @return the adapted return value of the static operation invocation
 	 */
-	IModelInstanceElement invokeStaticOperation(Type type, Operation operation,
+	IModelInstanceElement invokeStaticOperation(Operation operation,
 			List<IModelInstanceElement> args);
 
 	/**
@@ -244,7 +249,8 @@ public interface IModelInstance {
 	 * Maps OCL operation names to standard library operation names.
 	 * </p>
 	 * 
-	 * FIXME Claas: Ask Micha why this operation is required.
+	 * FIXME Claas: Ask Micha why this operation is required. Shouldn't be this a
+	 * task of the standard library itself?
 	 * 
 	 * @param name
 	 *          the name of the operation

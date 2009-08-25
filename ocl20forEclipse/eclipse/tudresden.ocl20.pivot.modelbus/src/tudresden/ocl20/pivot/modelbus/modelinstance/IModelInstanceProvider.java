@@ -65,12 +65,8 @@ public interface IModelInstanceProvider {
 	 *          The {@link IModel} for that an empty {@link IModelInstance} shall
 	 *          be created.
 	 * @return The created, empty {@link IModelInstance}.
-	 * @throws ModelAccessException
-	 *           Thrown, if an error during {@link IModelInstance} initialization
-	 *           occurs.
 	 */
-	IModelInstance createEmptyModelInstance(IModel model)
-			throws ModelAccessException;
+	IModelInstance createEmptyModelInstance(IModel model);
 
 	/**
 	 * <p>
