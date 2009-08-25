@@ -33,6 +33,7 @@ Export-Package: tudresden.ocl20.pivot.modelbus;
  tudresden.ocl20.pivot.modelbus.internal;x-internal:=true,
  tudresden.ocl20.pivot.modelbus.internal.descriptor;x-internal:=true,
  tudresden.ocl20.pivot.modelbus.modelinstance,
+ tudresden.ocl20.pivot.modelbus.modelinstance.base,
  tudresden.ocl20.pivot.modelbus.modelinstance.types,
  tudresden.ocl20.pivot.modelbus.modelinstance.types.base,
  tudresden.ocl20.pivot.modelbus.test,
