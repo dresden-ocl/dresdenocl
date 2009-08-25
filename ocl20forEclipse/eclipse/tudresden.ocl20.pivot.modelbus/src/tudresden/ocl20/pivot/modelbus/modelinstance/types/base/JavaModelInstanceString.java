@@ -22,9 +22,11 @@ import java.util.HashSet;
 
 import org.apache.log4j.Logger;
 
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -48,6 +50,19 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(JavaModelInstanceString.class);
+
+	/**
+	 * The {@link Type} of this {@link Type} implementation. Because
+	 * {@link PrimitiveType}s are not part of the {@link IModel}, their
+	 * {@link Type} must be created externally. This field represents the
+	 * {@link PrimitiveType} instance that is the only {@link Type} of all
+	 * {@link JavaModelInstanceString}s.
+	 */
+	private static final PrimitiveType MODEL_TYPE =
+			PivotModelFactory.INSTANCE.createPrimitiveType();
+	{
+		MODEL_TYPE.setKind(PrimitiveTypeKind.STRING);
+	}
 
 	/** The adapted {@link String} of this {@link JavaModelInstanceString}. */
 	private String myString;
@@ -76,7 +91,10 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 		// no else.
 
 		this.myString = string;
+
+		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
+		this.myTypes.add(JavaModelInstanceString.MODEL_TYPE);
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -109,59 +127,70 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 	}
 
 	public IModelInstanceElement asType(Type type) {
-	
+
 		IModelInstanceElement result;
-	
-		/* By default the result is undefined. */
+
+		/*
+		 * FIXME Claas: Ask Micha how the undefined problem can be solved. By
+		 * default the result is null.
+		 */
 		result = null;
-	
+
 		/* Strings can only be casted to primitive types. */
 		if (type instanceof PrimitiveType) {
 			PrimitiveType primitiveType;
 			primitiveType = (PrimitiveType) type;
-	
+
 			/* Check the given PrimitiveTypeKind. */
 			if (primitiveType.getKind().equals(PrimitiveTypeKind.BOOLEAN)) {
-	
+
 				if (this.myString == null) {
 					result = new JavaModelInstanceBoolean(null);
 				}
-	
+
+				else if (this.myString.toLowerCase().equals("true")) {
+					result = new JavaModelInstanceBoolean(true);
+				}
+
+				else if (this.myString.toLowerCase().equals("false")) {
+					result = new JavaModelInstanceBoolean(false);
+				}
+
+				/* OCL has undefined booleans as well. Uncertain states are undefined. */
 				else {
-					result =
-							new JavaModelInstanceBoolean(Boolean.parseBoolean(this.myString));
+					result = new JavaModelInstanceBoolean(null);
 				}
 			}
-	
+
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
-	
+
 				if (this.myString == null) {
 					result = new JavaModelInstanceInteger(null);
 				}
-	
+
 				else {
 					result = new JavaModelInstanceInteger(Long.parseLong(this.myString));
 				}
 			}
-	
+
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
-	
+
 				if (this.myString == null) {
 					result = new JavaModelInstanceReal(null);
 				}
-	
+
 				else {
 					result = new JavaModelInstanceReal(Double.parseDouble(this.myString));
 				}
 			}
-	
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
-	
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
+
 				/* Create a new string to avoid side effects. */
 				result = new JavaModelInstanceString(this.myString);
 			}
 		}
-	
+
 		return result;
 	}
 
@@ -171,7 +200,7 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #deepCopy()
 	 */
-	public Object deepCopy() {
+	public Object copyForAtPre() {
 
 		return new JavaModelInstanceString(this.myString);
 	}
@@ -185,5 +214,16 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 	public String getString() {
 
 		return this.myString;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isUndefined()
+	 */
+	public boolean isUndefined() {
+
+		return (this.myString == null);
 	}
 }

@@ -22,9 +22,11 @@ import java.util.HashSet;
 
 import org.apache.log4j.Logger;
 
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -48,6 +50,19 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(JavaModelInstanceReal.class);
+
+	/**
+	 * The {@link Type} of this {@link Type} implementation. Because
+	 * {@link PrimitiveType}s are not part of the {@link IModel}, their
+	 * {@link Type} must be created externally. This field represents the
+	 * {@link PrimitiveType} instance that is the only {@link Type} of all
+	 * {@link JavaModelInstanceReal}s.
+	 */
+	private static final PrimitiveType MODEL_TYPE =
+			PivotModelFactory.INSTANCE.createPrimitiveType();
+	{
+		MODEL_TYPE.setKind(PrimitiveTypeKind.REAL);
+	}
 
 	/** The adapted {@link Number} of this {@link JavaModelInstanceReal}. */
 	private Number myNumber;
@@ -76,7 +91,10 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 		// no else.
 
 		this.myNumber = number;
+
+		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
+		this.myTypes.add(JavaModelInstanceReal.MODEL_TYPE);
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -117,7 +135,10 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 		IModelInstanceElement result;
 
-		/* By default the result is undefined. */
+		/*
+		 * FIXME Claas: Ask Micha how the undefined problem can be solved. By
+		 * default the result is null.
+		 */
 		result = null;
 
 		/* Reals can only be casted to primitive types. */
@@ -128,18 +149,8 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 			/* Check the given PrimitiveTypeKind. */
 			if (primitiveType.getKind().equals(PrimitiveTypeKind.BOOLEAN)) {
 
-				if (this.myNumber == null) {
-					result = new JavaModelInstanceInteger(null);
-				}
-
-				/* FIXME Claas: Ask Micha if this is correct. */
-				else if (this.myNumber.longValue() >= 0) {
-					result = new JavaModelInstanceBoolean(true);
-				}
-
-				else {
-					result = new JavaModelInstanceBoolean(false);
-				}
+				/* Reals cannot be casted to boolean. Thus, the result is undefined. */
+				result = new JavaModelInstanceInteger(null);
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
@@ -154,9 +165,8 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 				result = new JavaModelInstanceReal(this.myNumber);
 			}
 
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
 
-				/* FIXME Claas: Ask Micha if this is correct. */
 				if (this.myNumber == null) {
 					result = new JavaModelInstanceString(null);
 				}
@@ -176,7 +186,7 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #deepCopy()
 	 */
-	public Object deepCopy() {
+	public Object copyForAtPre() {
 
 		return new JavaModelInstanceReal(this.myNumber);
 	}
@@ -193,5 +203,14 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 		result = this.myNumber.doubleValue();
 
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement#isUndefined()
+	 */
+	public boolean isUndefined() {
+
+		return (this.myNumber == null);
 	}
 }

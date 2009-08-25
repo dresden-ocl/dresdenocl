@@ -60,28 +60,11 @@ public interface IModelInstance {
 
 	/**
 	 * <p>
-	 * Adds a not adapted {@link Collection} to the {@link IModelInstance}. Before
-	 * it is added, the given {@link Collection} is adapted (but not its
-	 * elements).
-	 * </p>
-	 * 
-	 * @param <T>
-	 *          the type of the elements that this {@link Collection} contains
-	 * @param collection
-	 *          the {@link Collection} to add to the {@link IModelInstance}
-	 * @param collectionKind
-	 *          the kind of OCL collection the given {@link Collection} should be
-	 *          adapted to
-	 * @return the adapted collection
-	 */
-	<T> IModelInstanceCollection<T> addModelInstanceCollection(
-			Collection<T> collection, OclCollectionTypeKind collectionKind);
-
-	/**
-	 * <p>
 	 * Adds a not adapted object to the {@link IModelInstance}. Before it is
 	 * added, the given object is adapted.
 	 * </p>
+	 * 
+	 * FIXME Claas: Other types than {@link IModelInstanceObject}s are not added.
 	 * 
 	 * @param object
 	 *          the object to add to the {@link IModelInstance}
@@ -124,8 +107,8 @@ public interface IModelInstance {
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>Please note, that primitive types and collections are not returned
-	 * by this operation.</strong>
+	 * <strong>Please note, that primitive types, enumeration literals and
+	 * collections are not returned by this operation.</strong>
 	 * </p>
 	 * 
 	 * @return the {@link IModelInstanceElement}s for this model instance.

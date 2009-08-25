@@ -20,7 +20,6 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 
-
 /**
  * <p>
  * Represents an {@link IModelInstanceElement} that adapts a {@link Double}

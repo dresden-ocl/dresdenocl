@@ -60,13 +60,31 @@ public interface IModelInstanceElement {
 
 	/**
 	 * <p>
-	 * Performs a deep copy of the adapted element and returns it. The adapted
-	 * element is determined by the specific implementations of this interface.
+	 * Performs a copy of the adapted element of this
+	 * {@link IModelInstanceElement} that can be used to store it as a @pre value
+	 * of a postcondition's expression. The method should copy the adapted object
+	 * and all its references that are expected to change during the methods
+	 * execution the postcondition is defined on.
+	 * </p>
+	 * 
+	 * <p>
+	 * For primitive types, the method should copy the object, for collection
+	 * types it should only copy the collection but not its content.
 	 * </p>
 	 * 
 	 * @return a deep copy of the adapted element
 	 */
-	Object deepCopy();
+	Object copyForAtPre();
+
+	/**
+	 * <p>
+	 * Returns the name or ID of this {@link IModelInstanceElement}. Otherwhise it
+	 * returns the {@link Type}s' names.
+	 * </p>
+	 * 
+	 * @return The name of the {@link IModelInstanceElement}.
+	 */
+	String getName();
 
 	/**
 	 * <p>
@@ -96,16 +114,6 @@ public interface IModelInstanceElement {
 
 	/**
 	 * <p>
-	 * Returns the name or ID of this {@link IModelInstanceElement}. Otherwhise it
-	 * returns the {@link Type}s' names.
-	 * </p>
-	 * 
-	 * @return The name of the {@link IModelInstanceElement}.
-	 */
-	String getName();
-
-	/**
-	 * <p>
 	 * Returns true if this {@link IModelInstanceElement} is an instance of the
 	 * given {@link Type} in the {@link IModel}.
 	 * </p>
@@ -116,4 +124,14 @@ public interface IModelInstanceElement {
 	 *         given {@link Type}.
 	 */
 	boolean isInstanceOf(Type aType);
+
+	/**
+	 * <p>
+	 * Returns true, if this {@link IModelInstanceElement} is undefined, meaning
+	 * its adapted {@link Object} is <code>null</code>.
+	 * </p>
+	 * 
+	 * @return True, if this {@link IModelInstanceElement} is undefined.
+	 */
+	boolean isUndefined();
 }

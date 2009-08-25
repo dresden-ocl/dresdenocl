@@ -36,13 +36,6 @@ import java.util.Iterator;
 public interface IModelInstanceCollection<T> extends IModelInstanceElement {
 
 	/**
-	 * Returns the underlying {@link Collection}.
-	 * 
-	 * @return the underlying {@link Collection}
-	 */
-	Collection<T> getCollection();
-
-	/**
 	 * <p>
 	 * Returns the adapter for the given object that is contained is the adapted
 	 * list.
@@ -58,6 +51,13 @@ public interface IModelInstanceCollection<T> extends IModelInstanceElement {
 	 * @return the adapter for the given object
 	 */
 	IModelInstanceElement getAdapter(T object);
+
+	/**
+	 * Returns the underlying {@link Collection}.
+	 * 
+	 * @return the underlying {@link Collection}
+	 */
+	Collection<T> getCollection();
 
 	/**
 	 * Returns an {@link Iterator} for the underlying collection.

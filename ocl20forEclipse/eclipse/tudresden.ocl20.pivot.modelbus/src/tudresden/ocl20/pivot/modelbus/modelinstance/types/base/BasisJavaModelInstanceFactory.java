@@ -200,24 +200,29 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		case BAG:
 
 			result =
-					new JavaModelInstanceCollection<T>(collection, this, false, false);
+					new JavaModelInstanceCollection<T>(collection, this,
+							JavaModelInstanceCollection.MODEL_TYPE_BAG);
 			break;
 
 		case SEQUENCE:
 
 			result =
-					new JavaModelInstanceCollection<T>(collection, this, true, false);
+					new JavaModelInstanceCollection<T>(collection, this,
+							JavaModelInstanceCollection.MODEL_TYPE_SEQUENCE);
 			break;
 
 		case SET:
 
 			result =
-					new JavaModelInstanceCollection<T>(collection, this, false, true);
+					new JavaModelInstanceCollection<T>(collection, this,
+							JavaModelInstanceCollection.MODEL_TYPE_SET);
 			break;
 
 		case ORDEREDSET:
 
-			result = new JavaModelInstanceCollection<T>(collection, this, true, true);
+			result =
+					new JavaModelInstanceCollection<T>(collection, this,
+							JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET);
 			break;
 
 		default:

@@ -23,9 +23,11 @@ import java.util.HashSet;
 
 import org.apache.log4j.Logger;
 
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -49,6 +51,19 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(JavaModelInstanceBoolean.class);
+
+	/**
+	 * The {@link Type} of this {@link Type} implementation. Because
+	 * {@link PrimitiveType}s are not part of the {@link IModel}, their
+	 * {@link Type} must be created externally. This field represents the
+	 * {@link PrimitiveType} instance that is the only {@link Type} of all
+	 * {@link JavaModelInstanceBoolean}s.
+	 */
+	private static final PrimitiveType MODEL_TYPE =
+			PivotModelFactory.INSTANCE.createPrimitiveType();
+	{
+		MODEL_TYPE.setKind(PrimitiveTypeKind.BOOLEAN);
+	}
 
 	/** The adapted {@link Boolean} of this {@link JavaModelInstanceBoolean}. */
 	private Boolean myBoolean;
@@ -77,7 +92,10 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 		// no else.
 
 		this.myBoolean = aBoolean;
+
+		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
+		this.myTypes.add(JavaModelInstanceBoolean.MODEL_TYPE);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -96,15 +114,15 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 	 * AbstractModelInstanceElement#getName()
 	 */
 	public String getName() {
-	
+
 		StringBuffer resultBuffer;
 		resultBuffer = new StringBuffer();
-	
+
 		resultBuffer.append(this.getClass().getSimpleName());
 		resultBuffer.append("[");
 		resultBuffer.append(this.myBoolean.toString());
 		resultBuffer.append("]");
-	
+
 		return resultBuffer.toString();
 	}
 
@@ -118,7 +136,10 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 
 		IModelInstanceElement result;
 
-		/* By default the result is undefined. */
+		/*
+		 * FIXME Claas: Ask Micha how the undefined problem can be solved. By
+		 * default the result is null.
+		 */
 		result = null;
 
 		/* Booleans can only be casted to primitive types. */
@@ -135,39 +156,18 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
 
-				/* FIXME Claas: Ask Micha if this is correct. */
-				if (this.myBoolean == null) {
-					result = new JavaModelInstanceInteger(null);
-				}
-
-				else if (this.myBoolean) {
-					result = new JavaModelInstanceInteger(new Long(1));
-				}
-
-				else {
-					result = new JavaModelInstanceInteger(new Long(-1));
-				}
+				/* A boolean cannot be casted to an integer. The result is undefined. */
+				result = new JavaModelInstanceInteger(null);
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
 
-				/* FIXME Claas: Ask Micha if this is correct. */
-				if (this.myBoolean == null) {
-					result = new JavaModelInstanceReal(null);
-				}
-
-				else if (this.myBoolean) {
-					result = new JavaModelInstanceReal(1);
-				}
-
-				else {
-					result = new JavaModelInstanceReal(-1);
-				}
+				/* A boolean cannot be casted to a real. The result is undefined. */
+				result = new JavaModelInstanceReal(null);
 			}
 
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
 
-				/* FIXME Claas: Ask Micha if this is correct. */
 				if (this.myBoolean == null) {
 					result = new JavaModelInstanceString(null);
 				}
@@ -176,6 +176,7 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 					result = new JavaModelInstanceString(this.myBoolean.toString());
 				}
 			}
+
 		}
 
 		return result;
@@ -187,7 +188,7 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #deepCopy()
 	 */
-	public Object deepCopy() {
+	public Object copyForAtPre() {
 
 		return new JavaModelInstanceBoolean(this.myBoolean);
 	}
@@ -201,5 +202,14 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 	public Boolean getBoolean() {
 
 		return this.myBoolean;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement#isUndefined()
+	 */
+	public boolean isUndefined() {
+
+		return (this.myBoolean == null);
 	}
 }

@@ -27,7 +27,10 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.UniqueEList;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
+import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -56,16 +59,64 @@ public class JavaModelInstanceCollection<T> extends
 			ModelBusPlugin.getLogger(JavaModelInstanceCollection.class);
 
 	/**
-	 * Specifies, whether or not the elements contained in this
-	 * {@link IModelInstanceCollection} are ordered.
+	 * The {@link Type} of collections implementations that are of the kind
+	 * {@link CollectionKind#BAG}. Because {@link CollectionType}s are not part of
+	 * the {@link IModel}, their {@link Type} must be created externally. This
+	 * field represents the {@link CollectionType} instance that is the only
+	 * {@link Type} of all {@link JavaModelInstanceCollection}s of the kind
+	 * {@link CollectionKind#BAG}.
 	 */
-	private boolean isOrdered;
+	protected static final CollectionType MODEL_TYPE_BAG =
+			TypesFactory.INSTANCE.createCollectionType();
+
+	{
+		MODEL_TYPE_BAG.setKind(CollectionKind.BAG);
+	}
 
 	/**
-	 * Specifies, whether or not this {@link IModelInstanceCollection} contains
-	 * unique elements.
+	 * The {@link Type} of collections implementations that are of the kind
+	 * {@link CollectionKind#SEQUENCE}. Because {@link CollectionType}s are not
+	 * part of the {@link IModel}, their {@link Type} must be created externally.
+	 * This field represents the {@link CollectionType} instance that is the only
+	 * {@link Type} of all {@link JavaModelInstanceCollection}s of the kind
+	 * {@link CollectionKind#SEQUENCE}.
 	 */
-	private boolean isUnique;
+	protected static final CollectionType MODEL_TYPE_SEQUENCE =
+			TypesFactory.INSTANCE.createCollectionType();
+
+	{
+		MODEL_TYPE_SEQUENCE.setKind(CollectionKind.SEQUENCE);
+	}
+
+	/**
+	 * The {@link Type} of collections implementations that are of the kind
+	 * {@link CollectionKind#SET}. Because {@link CollectionType}s are not part of
+	 * the {@link IModel}, their {@link Type} must be created externally. This
+	 * field represents the {@link CollectionType} instance that is the only
+	 * {@link Type} of all {@link JavaModelInstanceCollection}s of the kind
+	 * {@link CollectionKind#SET}.
+	 */
+	protected static final CollectionType MODEL_TYPE_SET =
+			TypesFactory.INSTANCE.createCollectionType();
+
+	{
+		MODEL_TYPE_SET.setKind(CollectionKind.SET);
+	}
+
+	/**
+	 * The {@link Type} of collections implementations that are of the kind
+	 * {@link CollectionKind#ORDERED_SET}. Because {@link CollectionType}s are not
+	 * part of the {@link IModel}, their {@link Type} must be created externally.
+	 * This field represents the {@link CollectionType} instance that is the only
+	 * {@link Type} of all {@link JavaModelInstanceCollection}s of the kind
+	 * {@link CollectionKind#ORDERED_SET}.
+	 */
+	protected static final CollectionType MODEL_TYPE_ORDERED_SET =
+			TypesFactory.INSTANCE.createCollectionType();
+
+	{
+		MODEL_TYPE_ORDERED_SET.setKind(CollectionKind.ORDERED_SET);
+	}
 
 	/**
 	 * The {@link Object}s contained in this {@link JavaModelInstanceCollection}.
@@ -108,26 +159,17 @@ public class JavaModelInstanceCollection<T> extends
 		}
 		// no else.
 
-		this.myTypes = new HashSet<Type>();
-		this.myFactory = factory;
+		this.init(containedObjects, factory);
 
 		/* Check if a List or set is given. */
 		if (containedObjects instanceof Set<?>) {
 
-			/* Set is not ordered. */
-			this.isOrdered = false;
-
-			/* Set is unique. */
-			this.isUnique = true;
+			this.myTypes.add(JavaModelInstanceCollection.MODEL_TYPE_SET);
 		}
 
 		else {
 
-			/* List is ordered. */
-			this.isOrdered = true;
-
-			/* List is unique. */
-			this.isUnique = false;
+			this.myTypes.add(JavaModelInstanceCollection.MODEL_TYPE_BAG);
 		}
 
 		/* Eventually debug the exit of this method. */
@@ -154,20 +196,36 @@ public class JavaModelInstanceCollection<T> extends
 	 *          The {@link JavaModelInstanceObjectFactory} of this
 	 *          {@link JavaModelInstanceCollection}. Required to adapt the
 	 *          contained {@link Object}s to {@link IModelInstanceElement}s.
-	 * @param isOrdered
-	 *          Whether or not this {@link JavaModelInstanceCollection} shall be
-	 *          ordered.
-	 * @param isUnique
-	 *          Whether or not this {@link JavaModelInstanceCollection} shall be
-	 *          unique.
+	 * @param type
+	 *          The {@link CollectionType} that the created
+	 *          {@link JavaModelInstanceCollection} should have.
 	 */
 	protected JavaModelInstanceCollection(Collection<T> containedObjects,
-			IModelInstanceFactory factory, boolean isOrdered, boolean isUnique) {
+			IModelInstanceFactory factory, CollectionType type) {
 
-		this(containedObjects, factory);
+		this.init(containedObjects, factory);
+		this.myTypes.add(type);
+	}
 
-		this.isOrdered = isOrdered;
-		this.isUnique = isUnique;
+	/**
+	 * <p>
+	 * A helper method that contains the common initialization of all constructors
+	 * of {@link JavaModelInstanceCollection}.
+	 * </p>
+	 * 
+	 * @param containedObjects
+	 *          The {@link Object}s contained in this
+	 *          {@link JavaModelInstanceCollection}.
+	 * @param factory
+	 *          The {@link IModelInstanceFactory} of the initialized collection.
+	 */
+	private void init(Collection<T> containedObjects,
+			IModelInstanceFactory factory) {
+
+		this.myContainedObjects = containedObjects;
+		this.myFactory = factory;
+
+		this.myTypes = new HashSet<Type>();
 	}
 
 	/*
@@ -182,9 +240,8 @@ public class JavaModelInstanceCollection<T> extends
 
 		resultBuffer.append(JavaModelInstanceCollection.class.getSimpleName());
 		resultBuffer.append("[");
-		resultBuffer.append("ordered = " + this.isOrdered() + ", ");
-		resultBuffer.append("unique = " + this.isUnique() + ", ");
-		resultBuffer.append(this.myContainedObjects.toString());
+		resultBuffer.append("types = " + this.getTypes() + ", ");
+		resultBuffer.append("content = " + this.myContainedObjects.toString());
 		resultBuffer.append("]");
 
 		return resultBuffer.toString();
@@ -219,17 +276,7 @@ public class JavaModelInstanceCollection<T> extends
 
 				result =
 						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory, false, false);
-				break;
-
-			case SET:
-
-				/* Create a new Set to avoid side effects. */
-				adaptedCollection = new HashSet<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory, false, true);
+								this.myFactory, JavaModelInstanceCollection.MODEL_TYPE_BAG);
 				break;
 
 			case SEQUENCE:
@@ -239,7 +286,17 @@ public class JavaModelInstanceCollection<T> extends
 
 				result =
 						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory, false, false);
+								this.myFactory, JavaModelInstanceCollection.MODEL_TYPE_SEQUENCE);
+				break;
+
+			case SET:
+
+				/* Create a new Set to avoid side effects. */
+				adaptedCollection = new HashSet<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
+								this.myFactory, JavaModelInstanceCollection.MODEL_TYPE_SET);
 				break;
 
 			case ORDERED_SET:
@@ -249,7 +306,8 @@ public class JavaModelInstanceCollection<T> extends
 
 				result =
 						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory, true, true);
+								this.myFactory,
+								JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET);
 				break;
 
 			default:
@@ -273,21 +331,16 @@ public class JavaModelInstanceCollection<T> extends
 		return result;
 	}
 
-	/**
-	 * <p>
-	 * <strong>For collections, this operation will only copy the collection, not
-	 * its content!</strong>
-	 * </p>
-	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 *      #deepCopy()
+	/*
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #copyForAtPre()
 	 */
-	public Object deepCopy() {
+	public Object copyForAtPre() {
 
-		/* FIXME Claas: Ask Micha, if this is okay. */
 		/* For a collection, normally only the collection will be copied. */
 		return new JavaModelInstanceCollection<T>(this.myContainedObjects,
-				this.myFactory, this.isOrdered, this.isUnique);
+				this.myFactory, this.getTypes().toArray(new CollectionType[0])[0]);
 	}
 
 	/*
@@ -339,22 +392,57 @@ public class JavaModelInstanceCollection<T> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection#isSorted
-	 * ()
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
+	 * #isOrdered()
 	 */
 	public boolean isOrdered() {
 
-		return this.isOrdered;
+		boolean result;
+
+		/* Only ordered sets and sequences are ordered. */
+		if (this.isInstanceOf(JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET)
+				|| this.isInstanceOf(JavaModelInstanceCollection.MODEL_TYPE_SEQUENCE)) {
+			result = true;
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection#isUnique
-	 * ()
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isUndefined()
+	 */
+	public boolean isUndefined() {
+
+		return (this.myContainedObjects == null);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
+	 * #isUnique()
 	 */
 	public boolean isUnique() {
 
-		return this.isUnique;
+		boolean result;
+
+		/* Only ordered sets and sets are unique. */
+		if (this.isInstanceOf(JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET)
+				|| this.isInstanceOf(JavaModelInstanceCollection.MODEL_TYPE_SET)) {
+			result = true;
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
 	}
 }
