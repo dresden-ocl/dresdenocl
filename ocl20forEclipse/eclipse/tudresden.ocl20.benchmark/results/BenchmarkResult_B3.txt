@@ -1,0 +1,334 @@
+
+
+==========================================
+Log for test B3
+==========================================
+
+Start Parsing File: bin/tudresden/ocl20/benchmark/testdata/b3/expressions/invariants.ocl
+------------------------------------------
+context Exam inv threeParticipants:
+		self.examinee<>self.examiner and
+		self.examinee<>self.recorder and
+		self.examiner<>self.recorder
+>> OK
+..........................................
+
+Statistics:
+------------------------------------------
+  successful	: 1 
+  failed	 	: 0 
+
+
+==========================================
+Checking current model instance against loaded invariants
+==========================================
+invariants  : 1
+test objects: 7
+total tests : 7
+
+test object: [,Exam]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+-->OK.
+..........................................
+
+test object: [,Person]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+--> Types don't match.
+..........................................
+
+test object: [,Exam]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+-->OK.
+..........................................
+
+test object: [,Person]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+--> Types don't match.
+..........................................
+
+test object: [,Person]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+--> Types don't match.
+..........................................
+
+test object: [,Exam]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+-->OK.
+..........................................
+
+test object: [,Person]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+--> Types don't match.
+..........................................
+
+Interpretation Statistics:
+------------------------------------------
+  successful	: 3 
+  failed	 	: 0 
+  skipped	 	: 4 
+  total	 	: 7 
+
+Start Parsing File: bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepost.ocl
+------------------------------------------
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::birth(aName:String, aGender:Gender)
+	pre  freshUnlinkedPerson: name.isUndefined and civstat.isUndefined and
+	gender.isUndefined and alive.isUndefined and
+	wife.isUndefined and husband.isUndefined
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::birth(aName:String, aGender:Gender)
+	post nameAssigned: name=aName -- equivalent to 'aName=self.name'
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::birth(aName:String, aGender:Gender)
+	post civstatAssigned: civstat=Gender::single
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::birth(aName:String, aGender:Gender)
+	post genderAssigned: gender=aGender
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::birth(aName:String, aGender:Gender)
+	post isAliveAssigned: alive=true -- equivalent to 'alive'
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::marry(aSpouse:Person)
+	pre  aSpouseDefined: aSpouse.isDefined
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::marry(aSpouse:Person)
+	pre  isAlive: alive
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::marry(aSpouse:Person)
+	pre  aSpouseAlive: aSpouse.alive
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::marry(aSpouse:Person)
+	pre  isUnmarried: civstat<>Civilstatus::married
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::marry(aSpouse:Person)
+	pre  aSpouseUnmarried: aSpouse.civstat<>Civilstatus::married
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::marry(aSpouse:Person)
+	pre  differentGenders: gender<>aSpouse.gender
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::marry(aSpouse:Person)
+	post isMarried: civstat=Civilstatus::married
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::marry(aSpouse:Person)
+	post femaleHasMarriedHusband: gender=Gender::female implies
+	husband=aSpouse and husband.civstat=Civilstatus::married
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::marry(aSpouse:Person)
+	post maleHasMarriedWife: gender=Gender::male implies
+	wife=aSpouse and wife.civstat=Civilstatus::married
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::divorce()
+	pre  isMarried: civstat=Civilstatus::married
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::divorce()
+	pre  isAlive: alive
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::divorce()
+	pre  husbandAlive: gender=Gender::female implies husband.alive
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::divorce()
+	pre  wifeAlive: gender=Gender::male implies wife.alive
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::divorce()
+	post isDivorced: civstat=Civilstatus::divorced
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::divorce()
+	post husbandDivorced: gender=Gender::female implies
+	husband.isUndefined and husband@pre.civstat=Civilstatus::divorced
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::divorce()
+	post wifeDivorced: gender=Gender::male implies
+	wife.isUndefined and wife@pre.civstat=Civilstatus::divorced
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::death()
+	pre  isAlive: alive
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::death()
+	post notAlive: not(alive)
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::death()
+	post husbandWidowed: gender=Gender::female and husband.isDefined implies
+	husband@pre.wife.isUndefined and husband@pre.civstat=Civilstatus::widowed
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The namespace doesn't exists. Error occured at line 1 and column 9. The error occured at the token tudresden.
+Code:
+context Person::death()
+	post wifeWidowed: gender=Gender::male and wife.isDefined implies
+	wife@pre.husband.isUndefined and wife@pre.civstat=Civilstatus::widowed
+	
+
+Statistics:
+------------------------------------------
+  successful	: 1 
+  failed	 	: 25 
+
+
+==========================================
+Checking current model instance against loaded invariants
+==========================================
+invariants  : 1
+test objects: 4
+total tests : 4
+
+test object: []
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+
+test object: []
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+
+test object: []
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+
+test object: []
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+
+Interpretation Statistics:
+------------------------------------------
+  successful	: 3 
+  failed	 	: 0 
+  skipped	 	: 4 
+  total	 	: 7 
