@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tudresden"
+    nsURI="http:///tudresden.ecore" nsPrefix="tudresden">
+  <eSubpackages name="ocl20" nsURI="http:///tudresden/ocl20.ecore" nsPrefix="tudresden.ocl20">
+    <eSubpackages name="benchmark" nsURI="http:///tudresden/ocl20/benchmark.ecore"
+        nsPrefix="tudresden.ocl20.benchmark">
+      <eSubpackages name="testdata">
+        <eSubpackages name="b2" nsURI="http:///tudresden/ocl20/benchmark/b1.ecore"
+            nsPrefix="tudresden.ocl20.benchmark.b2">
+          <eClassifiers xsi:type="ecore:EClass" name="Person">
+            <eOperations name="spouse" ordered="false" lowerBound="1" eType="#//ocl20/benchmark/testdata/b2/Person"/>
+            <eOperations name="birth">
+              <eParameters name="aGender" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eParameters name="aGender" eType="#//ocl20/benchmark/testdata/b2/Gender"/>
+            </eOperations>
+            <eOperations name="marry">
+              <eParameters name="aSpouse" eType="#//ocl20/benchmark/testdata/b2/Person"/>
+            </eOperations>
+            <eOperations name="divorce"/>
+            <eOperations name="death"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false"
+                lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+                defaultValueLiteral=""/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="civstat" ordered="false"
+                lowerBound="1" eType="#//ocl20/benchmark/testdata/b2/CivilStatus"
+                defaultValueLiteral=""/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" ordered="false"
+                lowerBound="1" eType="#//ocl20/benchmark/testdata/b2/Gender" defaultValueLiteral=""/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="alive" ordered="false"
+                lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+                defaultValueLiteral=""/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="husband" eType="#//ocl20/benchmark/testdata/b2/Person"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="wife" eType="#//ocl20/benchmark/testdata/b2/Person"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="CivilStatus">
+            <eLiterals name="single"/>
+            <eLiterals name="married" value="1"/>
+            <eLiterals name="divorced" value="2"/>
+            <eLiterals name="widowed" value="3"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="Gender">
+            <eLiterals name="female"/>
+            <eLiterals name="male" value="1"/>
+          </eClassifiers>
+        </eSubpackages>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

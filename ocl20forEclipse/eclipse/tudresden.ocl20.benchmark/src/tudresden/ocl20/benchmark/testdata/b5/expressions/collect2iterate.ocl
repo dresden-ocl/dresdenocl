@@ -1,0 +1,336 @@
+package tudresden::ocl20::benchmark::testdata::common
+
+-------------------------------------
+-- B5: collect2iterate
+-------------------------------------
+
+
+-- Collection Operations
+
+-- -- Iterate
+
+-- -- -- collect
+
+-- -- -- -- Empty
+
+-- -- -- -- -- Set ------------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- Sequence A
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{} in 
+   c->collect(i|i*i) = 
+     c->iterate(i;
+                    r:Sequence(Integer) = Sequence{} |
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- Sequence B
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; 
+                    r:Sequence(Integer) = Sequence{} | 
+           r->append(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- Singleton
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{ oclUndefined } in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{ oclUndefined } in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence A
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined } in 
+   c->collect(i|i*i) = 
+     c->iterate(i;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence B
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined } in 
+   c->collect(i|i*i) = 
+     c->iterate(i; 
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+     false : Boolean
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence A
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; 
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence B
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; 
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- Many Elements
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{ oclUndefined , 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{ oclUndefined , 0, 1, 2, 
+                   oclUndefined } in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{ oclUndefined , 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence A
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined , 0, 1, 2, 
+                        oclUndefined } in 
+   c->collect(i|i*i) = 
+     c->iterate(i;r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined , 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence B
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined , 0, 1, 2, 
+                        oclUndefined } in 
+   c->collect(i|i*i) = 
+     c->iterate(i;
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+     false : Boolean
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined , 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i;
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+     false : Boolean
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{-1, 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{-1, 0, 1, 2, 1} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{-1, 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence A
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2, 1} in 
+   c->collect(i|i*i) = 
+     c->iterate(i;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i; 
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence B
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2, 1} in 
+   c->collect(i|i*i) = 
+     c->iterate(i;
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i;
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+
+  -- Expected Result:
+  = true
+
+endpackage

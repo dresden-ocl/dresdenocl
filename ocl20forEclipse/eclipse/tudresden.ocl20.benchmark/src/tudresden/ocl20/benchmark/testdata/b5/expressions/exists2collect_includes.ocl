@@ -1,0 +1,293 @@
+package tudresden::ocl20::benchmark::testdata::common
+
+-------------------------------------
+-- B5: exists2collect_includes
+-------------------------------------
+
+
+-- Collection Operations
+
+-- -- Collect
+
+-- -- -- exists to collect and includes
+
+-- -- -- -- Empty
+
+-- -- -- -- -- Set ------------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- Sequence
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- Singleton
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{ oclUndefined } in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{ oclUndefined } in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined } in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Expression e fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{1} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{1} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- Sequence
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{1} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Expression e not fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- Bag
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- Sequence
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- Many Elements
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{ oclUndefined , 2, 3, 4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{ oclUndefined , 2, 3, 4, 
+                   oclUndefined } in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{ oclUndefined , 2, 3, 4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined , 2, 3, 4, 
+                        oclUndefined } in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{ oclUndefined , 2, 3, 4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Expression e fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{1, 2, 3, 4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{1, 2, 3, 4, 1} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{1, 2, 3, 4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- -- Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{1, 2, 3, 4, 1} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{1, 2, 3, 4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- Expression e not fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Dummy inv: 
+	let c:Set(Integer) = Set{4, 5, 6} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- -- Equal Values (both violating)
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{4, 5, 6, 4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Bag(Integer) = Bag{4, 5, 6} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- -- Equal Values (both violating)
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{4, 5, 6, 4} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv: 
+	let c:Sequence(Integer) = Sequence{4, 5, 6} in
+   c->exists(i|i<4) = c->collect(i|i<4)->includes(true)
+
+  -- Expected Result:
+  = true
+
+endpackage

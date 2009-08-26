@@ -1,0 +1,94 @@
+package tudresden::ocl20::benchmark::testdata::b2
+
+	
+context Person::birth(aName:String, aGender:Gender)
+pre  freshUnlinkedPerson: name.isUndefined and civstat.isUndefined and
+     gender.isUndefined and alive.isUndefined and
+     wife.isUndefined and husband.isUndefined
+     
+context Person::birth(aName:String, aGender:Gender)
+  post nameAssigned: name=aName -- equivalent to 'aName=self.name'
+
+context Person::birth(aName:String, aGender:Gender)
+  post civstatAssigned: civstat=Gender::single
+
+context Person::birth(aName:String, aGender:Gender)
+  post genderAssigned: gender=aGender
+
+context Person::birth(aName:String, aGender:Gender)
+  post isAliveAssigned: alive=true -- equivalent to 'alive'
+
+context Person::marry(aSpouse:Person)
+  pre  aSpouseDefined: aSpouse.isDefined
+ 
+context Person::marry(aSpouse:Person)
+  pre  isAlive: alive
+
+context Person::marry(aSpouse:Person)
+  pre  aSpouseAlive: aSpouse.alive
+
+context Person::marry(aSpouse:Person)
+  pre  isUnmarried: civstat<>Civilstatus::married
+
+context Person::marry(aSpouse:Person)
+  pre  aSpouseUnmarried: aSpouse.civstat<>Civilstatus::married
+
+context Person::marry(aSpouse:Person)
+  pre  differentGenders: gender<>aSpouse.gender
+
+context Person::marry(aSpouse:Person)
+  post isMarried: civstat=Civilstatus::married
+  
+context Person::marry(aSpouse:Person)
+  post femaleHasMarriedHusband: gender=Gender::female implies
+     husband=aSpouse and husband.civstat=Civilstatus::married
+     
+context Person::marry(aSpouse:Person)
+  post maleHasMarriedWife: gender=Gender::male implies
+     wife=aSpouse and wife.civstat=Civilstatus::married
+
+context Person::divorce()
+  pre  isMarried: civstat=Civilstatus::married
+
+context Person::divorce()
+  pre  isAlive: alive
+
+context Person::divorce()
+  pre  husbandAlive: gender=Gender::female implies husband.alive
+
+context Person::divorce()
+  pre  wifeAlive: gender=Gender::male implies wife.alive
+
+context Person::divorce()
+  post isDivorced: civstat=Civilstatus::divorced
+
+context Person::divorce()
+  post husbandDivorced: gender=Gender::female implies
+     husband.isUndefined and husband@pre.civstat=Civilstatus::divorced
+     
+context Person::divorce()
+  post wifeDivorced: gender=Gender::male implies
+     wife.isUndefined and wife@pre.civstat=Civilstatus::divorced
+
+context Person::death()
+  pre  isAlive: alive
+
+context Person::death()
+  post notAlive: not(alive)
+
+context Person::death()
+  post husbandWidowed: gender=Gender::female and husband.isDefined implies
+     husband@pre.wife.isUndefined and husband@pre.civstat=Civilstatus::widowed
+     
+context Person::death()
+  post wifeWidowed: gender=Gender::male and wife.isDefined implies
+     wife@pre.husband.isUndefined and wife@pre.civstat=Civilstatus::widowed
+
+context Person
+  def : spouse() : Person =if gender=Gender::female then husband else wife endif
+
+
+
+	
+------------------------------------------------------------------------
+endpackage

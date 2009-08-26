@@ -1,0 +1,333 @@
+package tudresden::ocl20::benchmark::testdata::b1
+
+------------------------------------------------------------------------
+-- Invariants from the domain ------------------------------------------
+------------------------------------------------------------------------
+
+context Person inv enumCivilStatus:
+  self.civstat='single' or self.civstat='married' or
+  self.civstat='divorced' or self.civstat='widowed'
+
+------------------------------------------------------------------------
+
+context Person inv enumGender:
+  self.gender='female' or self.gender='male'
+
+------------------------------------------------------------------------
+
+context Person inv aliveDefined:
+  self.alive=true or self.alive=false
+
+------------------------------------------------------------------------
+
+context Person inv nameCapitalThenSmallLetters_VT:
+  let small:Set(String)=
+    Set{'a','b','c','d','e','f','g','h','i','j','k','l','m',
+        'n','o','p','q','r','s','t','u','v','w','x','y','z'} in
+  let capital:Set(String)=
+    Set{'A','B','C','D','E','F','G','H','I','J','K','L','M',
+        'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'} in
+  capital->includes(self.name.substring(1,1)) and
+  Set{2..self.name.size()}->forAll(i:Integer|
+    small->includes(self.name.substring(i,i))) and
+  self.name.size()>=1
+
+context Person inv nameCapitalThenSmallLetters_VN:
+  let small:Set(String)=
+    Set{'a','b','c','d','e','f','g','h','i','j','k','l','m',
+        'n','o','p','q','r','s','t','u','v','w','x','y','z'} in
+  let capital:Set(String)=
+    Set{'A','B','C','D','E','F','G','H','I','J','K','L','M',
+        'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'} in
+  capital->includes(self.name.substring(1,1)) and
+  Set{2..self.name.size()}->forAll(i|
+    small->includes(self.name.substring(i,i))) and
+  self.name.size()>=1
+
+------------------------------------------------------------------------
+
+context Person inv uniqueNameForAll1_P0_VT:
+  Person.allInstances()->forAll(self2:Person|
+    self<>self2 implies self.name<>self2.name)
+
+context Person inv uniqueNameForAll1_P0_VN:
+  Person.allInstances()->forAll(self2|
+    self<>self2 implies self.name<>self2.name)
+
+
+
+------------------------------------------------------------------------
+
+context Person inv uniqueNameForAll2_P0_VT:
+  Person.allInstances()->forAll(p1,p2:Person|
+    p1<>p2 implies p1.name<>p2.name)
+
+context Person inv uniqueNameForAll2_P0_VN:
+  Person.allInstances()->forAll(p1,p2|
+    p1<>p2 implies p1.name<>p2.name)
+
+
+
+------------------------------------------------------------------------
+
+context Person inv uniqueNameIsUnique_P0_VT:
+  Person.allInstances()->isUnique(p:Person|p.name)
+
+context Person inv uniqueNameIsUnique_P0_VN:
+  Person.allInstances()->isUnique(p|p.name)
+
+context Person inv uniqueNameIsUnique_P0_VI:
+  Person.allInstances()->isUnique(name)
+
+
+------------------------------------------------------------------------
+
+context Person inv uniqueNameOne_P0_VT:
+  Person.allInstances()->one(p:Person|self.name=p.name)
+
+context Person inv uniqueNameOne_P0_VN:
+  Person.allInstances()->one(p|self.name=p.name)
+
+context Person inv uniqueNameOne_P0_VI:
+  Person.allInstances()->one(self.name=name)
+
+
+
+------------------------------------------------------------------------
+
+context Person inv uniqueNameOneNot_P0_VI:
+  not Person.allInstances()->one(name=name)
+
+
+
+------------------------------------------------------------------------
+
+context Person inv femaleHasNoWife:
+  self.gender='female' implies self.wife->isEmpty()
+
+------------------------------------------------------------------------
+
+context Person inv maleHasNoHusband:
+  self.gender='male' implies self.husband->isEmpty()
+
+------------------------------------------------------------------------
+-- Invariants encoding queries -----------------------------------------
+------------------------------------------------------------------------
+
+
+context Person inv abcName_P0_VT:
+  let ada:Person=Person.allInstances()->any(p:Person|p.name='Ada') in
+  let bob:Person=Person.allInstances()->any(p:Person|p.name='Bob') in
+  let cyd:Person=Person.allInstances()->any(p:Person|p.name='Cyd') in
+  Set{ada,bob,cyd}->collect(p:Person|p.name)=Bag{'Ada','Bob','Cyd'}
+
+
+context Person inv abcName_P0_VN:
+  let ada:Person=Person.allInstances()->any(p|p.name='Ada') in
+  let bob:Person=Person.allInstances()->any(p|p.name='Bob') in
+  let cyd:Person=Person.allInstances()->any(p|p.name='Cyd') in
+  Set{ada,bob,cyd}->collect(p|p.name)=Bag{'Ada','Bob','Cyd'}
+
+
+context Person inv abcName_P0_VI:
+  let ada:Person=Person.allInstances()->any(name='Ada') in
+  let bob:Person=Person.allInstances()->any(name='Bob') in
+  let cyd:Person=Person.allInstances()->any(name='Cyd') in
+  Set{ada,bob,cyd}->collect(name)=Bag{'Ada','Bob','Cyd'}
+
+
+
+------------------------------------------------------------------------
+
+
+context Person inv abcNameDotShortcutP0_VT:
+  let ada:Person=Person.allInstances()->any(p:Person|p.name='Ada') in
+  let bob:Person=Person.allInstances()->any(p:Person|p.name='Bob') in
+  let cyd:Person=Person.allInstances()->any(p:Person|p.name='Cyd') in
+  Set{ada,bob,cyd}.name=Bag{'Ada','Bob','Cyd'}
+
+
+context Person inv abcNameDotShortcutP0_VN:
+  let ada:Person=Person.allInstances()->any(p|p.name='Ada') in
+  let bob:Person=Person.allInstances()->any(p|p.name='Bob') in
+  let cyd:Person=Person.allInstances()->any(p|p.name='Cyd') in
+  Set{ada,bob,cyd}.name=Bag{'Ada','Bob','Cyd'}
+
+
+context Person inv abcNameDotShortcutP0_VI:
+  let ada:Person=Person.allInstances()->any(name='Ada') in
+  let bob:Person=Person.allInstances()->any(name='Bob') in
+  let cyd:Person=Person.allInstances()->any(name='Cyd') in
+  Set{ada,bob,cyd}.name=Bag{'Ada','Bob','Cyd'}
+
+
+
+------------------------------------------------------------------------
+
+
+context Person inv abcAttrs_P0_VT:
+  let ada:Person=Person.allInstances()->any(p:Person|p.name='Ada') in
+  let bob:Person=Person.allInstances()->any(p:Person|p.name='Bob') in
+  let cyd:Person=Person.allInstances()->any(p:Person|p.name='Cyd') in
+  Set{ada,bob,cyd}->
+    collectNested(p:Person|Sequence{p.name,p.civstat,p.gender,p.alive})=
+  Bag{Sequence{'Ada','widowed' ,'female',true },
+      Sequence{'Bob','divorced','male'  ,true },
+      Sequence{'Cyd','married' ,'male'  ,false}}
+
+
+context Person inv abcAttrs_P0_VN:
+  let ada:Person=Person.allInstances()->any(p|p.name='Ada') in
+  let bob:Person=Person.allInstances()->any(p|p.name='Bob') in
+  let cyd:Person=Person.allInstances()->any(p|p.name='Cyd') in
+  Set{ada,bob,cyd}->
+    collectNested(p|Sequence{p.name,p.civstat,p.gender,p.alive})=
+  Bag{Sequence{'Ada','widowed' ,'female',true },
+      Sequence{'Bob','divorced','male'  ,true },
+      Sequence{'Cyd','married' ,'male'  ,false}}
+
+
+context Person inv abcAttrs_P0_VI:
+  let ada:Person=Person.allInstances()->any(name='Ada') in
+  let bob:Person=Person.allInstances()->any(name='Bob') in
+  let cyd:Person=Person.allInstances()->any(name='Cyd') in
+  Set{ada,bob,cyd}->
+    collectNested(Sequence{name,civstat,gender,alive})=
+  Bag{Sequence{'Ada','widowed' ,'female',true },
+      Sequence{'Bob','divorced','male'  ,true },
+      Sequence{'Cyd','married' ,'male'  ,false}}
+
+
+
+------------------------------------------------------------------------
+
+context Person inv personsWithUndefinedHusband_P0_VT:
+  Person.allInstances()->
+    select(p:Person|
+      p.husband=
+      Person.allInstances()->any(p:Person|p.wife->isEmpty()).wife
+    )->collect(p:Person|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
+
+context Person inv personsWithUndefinedHusband_P0_VN:
+  Person.allInstances()->
+    select(p|
+      p.husband=
+      Person.allInstances()->any(p|p.wife->isEmpty()).wife
+    )->collect(p|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
+
+context Person inv personsWithUndefinedHusband_P0_VI:
+  Person.allInstances()->
+    select(
+      husband=
+      Person.allInstances()->any(wife->isEmpty()).wife
+    )->collect(name)=Bag{'Ada','Bob','Cyd','Dan'}
+
+
+
+------------------------------------------------------------------------
+
+context Person inv personsWithUndefinedHusbandAnyFalse_P0_VT:
+  Person.allInstances()->
+    select(p:Person|
+      p.husband=Person.allInstances()->any(p:Person|false)
+    )->collect(p:Person|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
+
+context Person inv personsWithUndefinedHusbandAnyFalse_P0_VN:
+  Person.allInstances()->
+    select(p|
+      p.husband=Person.allInstances()->any(p|false)
+    )->collect(p|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
+
+context Person inv personsWithUndefinedHusbandAnyFalse_P0_VI:
+  Person.allInstances()->
+    select(
+      husband=Person.allInstances()->any(false)
+    )->collect(name)=Bag{'Ada','Bob','Cyd','Dan'}
+
+
+
+------------------------------------------------------------------------
+
+-- collects a bag of sequences of two persons respectively, 
+-- which are alive and not married. (possible partners of marriage)
+-- In the Bag there should be one sequence with "Ada" and "Bob"
+context Person inv possiblePairs_P0_VT:
+  let ada:Person=Person.allInstances()->any(p:Person|p.name='Ada') in
+  let emptySeq=Sequence{ada}->excluding(ada) in
+  Person.allInstances()->iterate(w,h:Person;
+    res:Bag(Sequence(Person))=Bag{emptySeq}->excluding(emptySeq)|
+    if w.gender='female' and w.alive and w.civstat<>'married' and
+       h.gender='male' and h.alive and h.civstat<>'married'
+    then res->including(Sequence{w,h})
+    else res endif)->
+  collectNested(pair:Sequence(Person)|pair->collect(p:Person|p.name))=
+  Bag{Sequence{'Ada','Bob'}}
+
+
+context Person inv possiblePairs_P0_VN:
+  let ada:Person=Person.allInstances()->any(p|p.name='Ada') in
+  let emptySeq=Sequence{ada}->excluding(ada) in
+  Person.allInstances()->iterate(w,h;
+    res:Bag(Sequence(Person))=Bag{emptySeq}->excluding(emptySeq)|
+    if w.gender='female' and w.alive and w.civstat<>'married' and
+       h.gender='male' and h.alive and h.civstat<>'married'
+    then res->including(Sequence{w,h})
+    else res endif)->
+  collectNested(pair|pair->collect(p|p.name))=
+  Bag{Sequence{'Ada','Bob'}}
+
+
+context Person inv possiblePairs_P0_VI:
+  let ada:Person=Person.allInstances()->any(name='Ada') in
+  let emptySeq=Sequence{ada}->excluding(ada) in
+  Person.allInstances()->iterate(w,h;
+    res:Bag(Sequence(Person))=Bag{emptySeq}->excluding(emptySeq)|
+    if w.gender='female' and w.alive and w.civstat<>'married' and
+       h.gender='male' and h.alive and h.civstat<>'married'
+    then res->including(Sequence{w,h})
+    else res endif)->
+  collectNested(pair|pair->collect(name))=
+  Bag{Sequence{'Ada','Bob'}}
+
+
+
+------------------------------------------------------------------------
+
+context Person inv flatten_P0_VT:
+  let dan:Person=Person.allInstances()->any(p:Person|p.name='Dan') in
+  let eve:Person=Person.allInstances()->any(p:Person|p.name='Eve') in
+  Set{Bag{eve},
+      Bag{eve.spouse()},
+      Bag{eve.spouse().spouse()},
+      Bag{eve.spouse().spouse().spouse()},
+      Bag{eve.spouse().spouse().spouse().spouse()},
+      Bag{eve.spouse().spouse().spouse().spouse().spouse()}}->
+  flatten()=Set{dan,eve}
+
+
+context Person inv flatten_P0_VN:
+  let dan:Person=Person.allInstances()->any(p|p.name='Dan') in
+  let eve:Person=Person.allInstances()->any(p|p.name='Eve') in
+  Set{Bag{eve},
+      Bag{eve.spouse()},
+      Bag{eve.spouse().spouse()},
+      Bag{eve.spouse().spouse().spouse()},
+      Bag{eve.spouse().spouse().spouse().spouse()},
+      Bag{eve.spouse().spouse().spouse().spouse().spouse()}}->
+  flatten()=Set{dan,eve}
+
+
+context Person inv flatten_P0_VI:
+  let dan:Person=Person.allInstances()->any(name='Dan') in
+  let eve:Person=Person.allInstances()->any(name='Eve') in
+  Set{Bag{eve},
+      Bag{eve.spouse()},
+      Bag{eve.spouse().spouse()},
+      Bag{eve.spouse().spouse().spouse()},
+      Bag{eve.spouse().spouse().spouse().spouse()},
+      Bag{eve.spouse().spouse().spouse().spouse().spouse()}}->
+  flatten()=Set{dan,eve}
+	
+	
+endpackage
+  
