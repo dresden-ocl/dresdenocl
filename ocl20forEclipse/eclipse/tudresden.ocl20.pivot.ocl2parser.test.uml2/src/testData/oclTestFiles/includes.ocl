@@ -1,6 +1,9 @@
 package tudresden::ocl20::pivot::examples::royalsandloyals
 
-context Membership
+/*context Membership
 inv correctCard:participants.cards->includes(self.card)
+*/
+context LoyaltyProgram
+inv knownServiceLevel: levels->includes(membership.currentLevel)
 
 endpackage
