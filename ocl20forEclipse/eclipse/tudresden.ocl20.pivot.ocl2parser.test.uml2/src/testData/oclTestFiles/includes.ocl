@@ -1,6 +1,6 @@
 package tudresden::ocl20::pivot::examples::royalsandloyals
 
 context Membership
-inv correctCard: participants.cards->includes(self.card)
+inv correctCard:participants.cards->includes(self.card)
 
 endpackage
