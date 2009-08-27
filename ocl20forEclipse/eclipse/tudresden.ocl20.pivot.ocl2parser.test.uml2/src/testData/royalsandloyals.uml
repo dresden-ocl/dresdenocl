@@ -250,7 +250,9 @@
           </packagedElement>
           <packagedElement xmi:type="uml:Association" xmi:id="_tMXmkMkuEd2S2cuzoMKaDg" name="Service Transaction" memberEnd="_0DzYcMkuEd2S2cuzoMKaDg _3mJd0MkuEd2S2cuzoMKaDg">
             <ownedEnd xmi:id="_0DzYcMkuEd2S2cuzoMKaDg" name="service" type="_bFF6cMVEEd2gxo2Yyu8isA" association="_tMXmkMkuEd2S2cuzoMKaDg"/>
-            <ownedEnd xmi:id="_3mJd0MkuEd2S2cuzoMKaDg" name="transaction" type="_qdRHkMkkEd2S2cuzoMKaDg" association="_tMXmkMkuEd2S2cuzoMKaDg"/>
+            <ownedEnd xmi:id="_3mJd0MkuEd2S2cuzoMKaDg" name="transaction" type="_qdRHkMkkEd2S2cuzoMKaDg" association="_tMXmkMkuEd2S2cuzoMKaDg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BCgkQJMGEd635Kvt0ydpKQ" value="*"/>
+            </ownedEnd>
           </packagedElement>
           <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_W--kwWu4Ed6ofs5w8Takvg" name="Date">
             <ownedAttribute xmi:id="_EPbawfQqEd2SMeEUZ5YgYQ" name="now" isStatic="true" type="_W--kwWu4Ed6ofs5w8Takvg"/>

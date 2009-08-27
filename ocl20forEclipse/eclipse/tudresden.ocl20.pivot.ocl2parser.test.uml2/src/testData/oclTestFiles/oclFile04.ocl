@@ -15,28 +15,28 @@ context LoyaltyAccount::points : Integer
 context LoyaltyAccount
 	def: getCostumerName():String = 'Test'
 
--- [AstGen] context LoyaltyAccount::transactions : Set(Transaction) 
+-- [AstGen] context LoyaltyAccount::transaction : Set(Transaction) 
 -- [AstGen]  init: Set{}
 
  context LoyaltyAccount 
   inv oneOwner: transactions.card.owner->asSet()->size() = 1
 
  context LoyaltyAccount 
-   inv: transactions->size() = 1
+   inv: transaction->size() = 1
 
 
 
 /*context LoyaltyAccount::totalPointsEarned : Integer 
-  derive: transactions->select( oclIsTypeOf( Earning ) ) 
+  derive: transaction->select( oclIsTypeOf( Earning ) ) 
           .points->sum()*/
 
 context LoyaltyAccount 
    inv points: points > 0 
                implies 
-               transactions->exists(t:Transaction | t.points > 0)
+               transaction->exists(t:Transaction | t.points > 0)
 
   context LoyaltyAccount 
-   inv transactions: transactions.points->exists(p : Integer | 
+   inv transaction: transaction.points->exists(p : Integer | 
                                                 p = 500 )
 
 endpackage

@@ -15,10 +15,10 @@ package tudresden::ocl20::pivot::examples::royalsandloyals
 
  context ProgramPartner 
    inv totalPoints: 
-   deliveredServices.transactions.points->sum() < 10000
+   deliveredServices.transaction.points->sum() < 10000
 
 context ProgramPartner 
-  inv:  deliveredServices->collect(s:Service| s.transactions)
+  inv:  deliveredServices->collect(s:Service| s.transaction)
                ->select(t:Transaction|t.oclIsTypeOf(Earning))
       		       ->collect(t:Transaction|t.points)->size()>0
 
@@ -29,7 +29,7 @@ context ProgramPartner
   */
   context ProgramPartner 
     inv totalPointsEarning2: 
-    deliveredServices.transactions -- all transactions 
+    deliveredServices.transaction -- all transaction 
     ->select(t:Transaction|t.oclIsTypeOf(Earning) ) -- select earning ones 
     .points->sum() -- sum all points 
     < 10000 -- sum smaller than 10,000
@@ -40,7 +40,7 @@ context ProgramPartner
 
 context ProgramPartner 
 	def: getBurningTransactions(): Set(Transaction) = 
-			self.deliveredServices.transactions->iterate( 
+			self.deliveredServices.transaction->iterate( 
  				  t : Transaction; 
  				  resultSet : Set(Transaction) = Set{} | 
  				  if t.oclIsTypeOf( Burning ) then 
