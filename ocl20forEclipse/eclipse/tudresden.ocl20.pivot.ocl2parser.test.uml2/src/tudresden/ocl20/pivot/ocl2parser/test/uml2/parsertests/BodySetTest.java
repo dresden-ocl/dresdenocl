@@ -17,22 +17,20 @@
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
  */
-
-package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerformer;
 
-public class StaticPropertyTest {
+
+public class BodySetTest {
 
 	@Test
-	public void testStaticPropertyWithUML2() {
+	public void testBodySetTest() {
 
-		String fileName = "oclTestFiles/StaticPropertyTest_UML2.ocl";
+		String fileName = "oclTestFiles/bodySetTest.ocl";
 		try {
-			TestPerformer test =
-					TestPerformer.getDefault("tudresden.ocl20.pivot.metamodels.uml2");
+			TestPerformer test = TestPerformer.getDefault();
 			test.setModel("royalsandloyals.uml");
 			test.parseFile(fileName);
 		} catch (Throwable ex) {

@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package tudresden.ocl20.pivot.ocl2parser.test;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -26,7 +26,8 @@ import org.osgi.framework.BundleContext;
 public class OCL2ParserTestPlugIn extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.ocl2parser.test";
+	//TODO
+	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests";
 
 	// The shared instance
 	private static OCL2ParserTestPlugIn plugin;

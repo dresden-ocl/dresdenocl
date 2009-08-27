@@ -17,21 +17,20 @@
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
  */
-package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerformer;
 
-public class LetExpTest {
+
+public class IsUniqueTest {
 
 	@Test
-	public void testLetExp() {
+	public void testBag() {
 
-		String fileName = "oclTestFiles/letExpTest.ocl";
+		String fileName = "oclTestFiles/isUniqueTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			// test.setModel("royalsandloyals_includes.xmi");
 			test.setModel("royalsandloyals.uml");
 			test.parseFile(fileName);
 		} catch (Throwable ex) {

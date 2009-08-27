@@ -1,7 +1,7 @@
 /**
  * 
  */
-package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerformer;
 
 /**
  * @author uni

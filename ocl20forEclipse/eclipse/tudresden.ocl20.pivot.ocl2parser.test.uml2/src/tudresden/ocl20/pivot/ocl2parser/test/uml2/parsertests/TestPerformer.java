@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,7 +32,6 @@ import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.BuildingASTException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.LexException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException;
 import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
-import tudresden.ocl20.pivot.ocl2parser.test.parsertests.MetaModelNotFoundException;
 
 /**
  * This class is a singleton. It loads the metamodel repository with the uml

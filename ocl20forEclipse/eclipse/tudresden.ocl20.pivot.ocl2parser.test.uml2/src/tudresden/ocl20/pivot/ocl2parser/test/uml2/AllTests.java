@@ -17,29 +17,29 @@
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
 */
-package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
-import tudresden.ocl20.pivot.ocl2parser.test.parsertests.testperformer.TestPerformer;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
+public class AllTests {
 
-public class IteratorOclIsTypeOf {
-	@Test public void testOclIsTypeOfInIterator() {
-		String fileName = "oclTestFiles/Iterator_oclIsTypeOf.ocl";
-		try {
-			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("royalsandloyals.uml");
-			test.parseFile(fileName);
-		} catch(Throwable ex) {
-			String message = " This error occured for file " + fileName + ".";
-			System.err.println(message);
-			ex.printStackTrace();
-			
-			fail();
-			return;
-		}
-		
-		assertTrue(true);
+	public static Test suite() {
+		TestSuite suite = new TestSuite(
+				"Test for tudresden.ocl20.pivot.ocl2parser.test.parsertests");
+		//TODO but hardly important
+		//$JUnit-BEGIN$
+//		suite.addTestSuite(IncludesAllTest.class);
+//		suite.addTestSuite(IsUniqueTest.class);
+//		suite.addTestSuite(IncludesTest.class);
+//		suite.addTestSuite(AllInstanceTest.class);
+//		suite.addTestSuite(CollectionTest.class);
+//		suite.addTestSuite(OclFilesTest.class);
+//		suite.addTestSuite(DefinitionTest.class);
+//		suite.addTestSuite(LetExpTest.class);
+//		suite.addTestSuite(BodySetTest.class);
+		//$JUnit-END$
+		return suite;
 	}
+
 }

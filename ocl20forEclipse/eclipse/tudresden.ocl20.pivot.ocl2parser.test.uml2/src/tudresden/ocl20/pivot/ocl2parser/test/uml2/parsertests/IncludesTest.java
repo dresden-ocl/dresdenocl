@@ -16,29 +16,33 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
 .
-*/
-package tudresden.ocl20.pivot.ocl2parser.test;
+ */
+package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
-public class AllTests {
 
-	public static Test suite() {
-		TestSuite suite = new TestSuite(
-				"Test for tudresden.ocl20.pivot.ocl2parser.test.parsertests");
-		//$JUnit-BEGIN$
-//		suite.addTestSuite(IncludesAllTest.class);
-//		suite.addTestSuite(IsUniqueTest.class);
-//		suite.addTestSuite(IncludesTest.class);
-//		suite.addTestSuite(AllInstanceTest.class);
-//		suite.addTestSuite(CollectionTest.class);
-//		suite.addTestSuite(OclFilesTest.class);
-//		suite.addTestSuite(DefinitionTest.class);
-//		suite.addTestSuite(LetExpTest.class);
-//		suite.addTestSuite(BodySetTest.class);
-		//$JUnit-END$
-		return suite;
+public class IncludesTest {
+
+	@Test
+	public void testIncludes() {
+
+		String fileName = "oclTestFiles/includes.ocl";
+		try {
+			TestPerformer test = TestPerformer.getDefault();
+			// royalsandloyals_includes.xmi
+			test.setModel("royalsandloyals_includes.uml");
+			test.parseFile(fileName);
+		} catch (Throwable ex) {
+			String message = " This error occured for file " + fileName + ".";
+			System.err.println(message);
+			ex.printStackTrace();
+
+			fail();
+			return;
+		}
+
+		assertTrue(true);
 	}
-
 }

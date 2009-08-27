@@ -1,7 +1,7 @@
 /**
  * 
  */
-package tudresden.ocl20.pivot.ocl2parser.test.parsertests;
+package tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests;
 
 /**
  * @author Christoph Dähne
