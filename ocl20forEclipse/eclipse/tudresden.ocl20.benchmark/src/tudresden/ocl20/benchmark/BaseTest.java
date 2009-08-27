@@ -84,7 +84,7 @@ public class BaseTest {
 	@Before
 	public void setUp()
 	{
-		perf.clearConstraintList();
+		perf.clean();
 	}
 
 }

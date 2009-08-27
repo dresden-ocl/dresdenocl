@@ -81,6 +81,15 @@ public class BenchmarkLogger {
 		this.outHead1("Log for test " + this.name);
 
 	}
+	
+	/**
+	 * Cleans up the Statistics.
+	 */
+	public void cleanStatistics()
+	{
+		Helper.setArrayElements(this.statInterpretation, 0);
+		Helper.setArrayElements(this.statParsing, 0);
+	}
 
 	/**
 	 * Close output file
@@ -264,7 +273,7 @@ public class BenchmarkLogger {
 	 * Skip interpretation.
 	 */
 	public void skipInterpretation() {
-		this.outLine("--> Types don't match.");
+		this.outLine("Types don't match. --> Skip");
 		this.statInterpretation[2] += 1;
 		this.outRuler3();
 	}

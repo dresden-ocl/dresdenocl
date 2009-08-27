@@ -480,6 +480,96 @@ java.lang.NullPointerException
 ..........................................
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAliveAssigned
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::aSpouseAlive
+-->failed:
+Constraint Specification: 
+context Person::marry(aSpouse:Person)
+	pre  aSpouseAlive: aSpouse.alive
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::differentGenders
+-->failed:
+Constraint Specification: 
+context Person::marry(aSpouse:Person)
+	pre  differentGenders: gender<>aSpouse.gender
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::husbandAlive
+-->failed:
+Constraint Specification: 
+context Person::divorce()
+	pre  husbandAlive: gender=Gender::female implies husband.alive
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::wifeAlive
+-->failed:
+Constraint Specification: 
+context Person::divorce()
+	pre  wifeAlive: gender=Gender::male implies wife.alive
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::notAlive
+-->failed:
+Constraint Specification: 
+context Person::death()
+	post notAlive: not(alive)
+	
+Result: JavaOclBoolean(false)
+..........................................
+
+test object: [,Person]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameAssigned
+-->failed:
+Constraint Specification: 
+context Person::birth(aName:String, aGender:Gender)
+	post nameAssigned: name=aName -- equivalent to 'aName=self.name'
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::genderAssigned
+-->failed:
+Constraint Specification: 
+context Person::birth(aName:String, aGender:Gender)
+	post genderAssigned: gender=aGender
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAliveAssigned
 -->failed:
 Constraint Specification: 
 context Person::birth(aName:String, aGender:Gender)
@@ -557,96 +647,6 @@ Result: JavaOclBoolean(false)
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::b2::notAlive
 -->OK.
-..........................................
-
-test object: [,Person]
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post nameAssigned: name=aName -- equivalent to 'aName=self.name'
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::genderAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post genderAssigned: gender=aGender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAliveAssigned
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::aSpouseAlive
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  aSpouseAlive: aSpouse.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::differentGenders
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  differentGenders: gender<>aSpouse.gender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::husbandAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  husbandAlive: gender=Gender::female implies husband.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::wifeAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  wifeAlive: gender=Gender::male implies wife.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::notAlive
--->failed:
-Constraint Specification: 
-context Person::death()
-	post notAlive: not(alive)
-	
-Result: JavaOclBoolean(false)
 ..........................................
 
 Interpretation Statistics:

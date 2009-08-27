@@ -18,5 +18,16 @@ public class Helper {
 			return path;
 		}
 	}
+	
+	/**
+	 * Sets the value to each element of the array
+	 * 
+	 */
+	public static void setArrayElements(int[] array, int value)
+	{
+		for(int i=0; i<array.length; ++i){
+			array[i] = value;
+		}
+	}
 
 }

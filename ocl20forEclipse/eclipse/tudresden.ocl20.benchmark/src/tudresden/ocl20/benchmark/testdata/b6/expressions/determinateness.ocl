@@ -1,0 +1,769 @@
+package tudresden::ocl20::benchmark::testdata::common
+
+-------------------------------------
+-- B6: determinateness
+-------------------------------------
+
+
+-- Technical Relationships
+
+-- -- Determinateness Constraints
+
+-- -- -- In Addition to the Ocl4All 2007 equivalences
+
+-- -- -- -- Empty
+
+-- -- -- -- -- Set -----------------------------------------------------
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asBag()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asBag()->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} |
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- Bag
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{} in
+   c->asSequence() = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{} in
+   c->any(true) = c->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- Sequence
+
+-- -- -- -- Singleton
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set --------------------------------------------------
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+   c->any(true) = c->asBag()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+   c->any(true) = c->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+   c->any(true) = c->asBag()->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} |
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- -- Bag
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined} in
+   c->asSequence() = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined} in
+   c->any(true) = c->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Set -----------------------------------------------
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asBag()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asBag()->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- -- Bag
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->asSequence() = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->any(true) = c->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- Many Elements
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set --------------------------------------------------
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->any(true)
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->first()
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+     -- Expected Result:
+	 = false
+
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv:
+	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
+                  oclUndefined} in
+   c->asSequence() = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem)
+)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
+                  oclUndefined} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
+                  oclUndefined} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
+                  oclUndefined} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
+                  oclUndefined} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c = Bag{oclUndefined, 1, -1, 3, 2, 0, 
+                  oclUndefined} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+   c->asSequence() = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- Equal Values
+
+-- -- -- -- -- -- -- No Equal Values
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Set -----------------------------------------------
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->any(true)
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->first()
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+     -- Expected Result:
+	 = false
+
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->asSequence() = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->asSequence() = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->any(true) = 
+     c->iterate(elem;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 -- Expected Result:
+	= true
+
+context Dummy inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 -- Expected Result:
+	= true
+
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- Equal Values
+
+-- -- -- -- -- -- -- No Equal Values
+
+
+endpackage

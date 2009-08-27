@@ -410,6 +410,312 @@ Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameOneNot_P0
 ..........................................
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::b1::femaleHasNoWife
+-->failed:
+Constraint Specification: 
+context Person inv femaleHasNoWife:
+	self.gender='female' implies self.wife->isEmpty()
+	
+Result: Result was not JavaOclBoolean, as expected
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::maleHasNoHusband
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcName_P0_VT
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcName_P0_VN
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcName_P0_VI
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcNameDotShortcutP0_VT
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcNameDotShortcutP0_VN
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcNameDotShortcutP0_VI
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcAttrs_P0_VT
+-->failed:
+Constraint Specification: 
+context Person inv abcAttrs_P0_VT:
+	let ada:Person=Person.allInstances()->any(p:Person|p.name='Ada') in
+	let bob:Person=Person.allInstances()->any(p:Person|p.name='Bob') in
+	let cyd:Person=Person.allInstances()->any(p:Person|p.name='Cyd') in
+	Set{ada,bob,cyd}->
+	collectNested(p:Person|Sequence{p.name,p.civstat,p.gender,p.alive})=
+	Bag{Sequence{'Ada','widowed' ,'female',true },
+	Sequence{'Bob','divorced','male'  ,true },
+	Sequence{'Cyd','married' ,'male'  ,false}}
+	
+Result: JavaOclBoolean(false)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcAttrs_P0_VN
+-->failed:
+Constraint Specification: 
+context Person inv abcAttrs_P0_VN:
+	let ada:Person=Person.allInstances()->any(p|p.name='Ada') in
+	let bob:Person=Person.allInstances()->any(p|p.name='Bob') in
+	let cyd:Person=Person.allInstances()->any(p|p.name='Cyd') in
+	Set{ada,bob,cyd}->
+	collectNested(p|Sequence{p.name,p.civstat,p.gender,p.alive})=
+	Bag{Sequence{'Ada','widowed' ,'female',true },
+	Sequence{'Bob','divorced','male'  ,true },
+	Sequence{'Cyd','married' ,'male'  ,false}}
+	
+Result: JavaOclBoolean(false)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcAttrs_P0_VI
+-->failed:
+Constraint Specification: 
+context Person inv abcAttrs_P0_VI:
+	let ada:Person=Person.allInstances()->any(name='Ada') in
+	let bob:Person=Person.allInstances()->any(name='Bob') in
+	let cyd:Person=Person.allInstances()->any(name='Cyd') in
+	Set{ada,bob,cyd}->
+	collectNested(Sequence{name,civstat,gender,alive})=
+	Bag{Sequence{'Ada','widowed' ,'female',true },
+	Sequence{'Bob','divorced','male'  ,true },
+	Sequence{'Cyd','married' ,'male'  ,false}}
+	
+Result: JavaOclBoolean(false)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusband_P0_VT
+-->failed:
+Constraint Specification: 
+context Person inv personsWithUndefinedHusband_P0_VT:
+	Person.allInstances()->
+	select(p:Person|
+	p.husband=
+	Person.allInstances()->any(p:Person|p.wife->isEmpty()).wife
+	)->collect(p:Person|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusband_P0_VN
+-->failed:
+Constraint Specification: 
+context Person inv personsWithUndefinedHusband_P0_VN:
+	Person.allInstances()->
+	select(p|
+	p.husband=
+	Person.allInstances()->any(p|p.wife->isEmpty()).wife
+	)->collect(p|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusband_P0_VI
+-->failed:
+Constraint Specification: 
+context Person inv personsWithUndefinedHusband_P0_VI:
+	Person.allInstances()->
+	select(
+	husband=
+	Person.allInstances()->any(wife->isEmpty()).wife
+	)->collect(name)=Bag{'Ada','Bob','Cyd','Dan'}
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusbandAnyFalse_P0_VT
+-->failed:
+Constraint Specification: 
+context Person inv personsWithUndefinedHusbandAnyFalse_P0_VT:
+	Person.allInstances()->
+	select(p:Person|
+	p.husband=Person.allInstances()->any(p:Person|false)
+	)->collect(p:Person|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
+	
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusbandAnyFalse_P0_VN
+-->failed:
+Constraint Specification: 
+context Person inv personsWithUndefinedHusbandAnyFalse_P0_VN:
+	Person.allInstances()->
+	select(p|
+	p.husband=Person.allInstances()->any(p|false)
+	)->collect(p|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
+	
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusbandAnyFalse_P0_VI
+-->failed:
+Constraint Specification: 
+context Person inv personsWithUndefinedHusbandAnyFalse_P0_VI:
+	Person.allInstances()->
+	select(
+	husband=Person.allInstances()->any(false)
+	)->collect(name)=Bag{'Ada','Bob','Cyd','Dan'}
+	
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::flatten_P0_VT
+-->failed:
+Constraint Specification: 
+context Person inv flatten_P0_VT:
+	let dan:Person=Person.allInstances()->any(p:Person|p.name='Dan') in
+	let eve:Person=Person.allInstances()->any(p:Person|p.name='Eve') in
+	Set{Bag{eve},
+	Bag{eve.spouse()},
+	Bag{eve.spouse().spouse()},
+	Bag{eve.spouse().spouse().spouse()},
+	Bag{eve.spouse().spouse().spouse().spouse()},
+	Bag{eve.spouse().spouse().spouse().spouse().spouse()}}->
+	flatten()=Set{dan,eve}
+	
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::flatten_P0_VN
+-->failed:
+Constraint Specification: 
+context Person inv flatten_P0_VN:
+	let dan:Person=Person.allInstances()->any(p|p.name='Dan') in
+	let eve:Person=Person.allInstances()->any(p|p.name='Eve') in
+	Set{Bag{eve},
+	Bag{eve.spouse()},
+	Bag{eve.spouse().spouse()},
+	Bag{eve.spouse().spouse().spouse()},
+	Bag{eve.spouse().spouse().spouse().spouse()},
+	Bag{eve.spouse().spouse().spouse().spouse().spouse()}}->
+	flatten()=Set{dan,eve}
+	
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+..........................................
+
+test object: [,Person]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::enumCivilStatus
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::enumGender
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::aliveDefined
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::nameCapitalThenSmallLetters_VT
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::nameCapitalThenSmallLetters_VN
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameForAll1_P0_VT
+-->failed:
+Constraint Specification: 
+context Person inv uniqueNameForAll1_P0_VT:
+	Person.allInstances()->forAll(self2:Person|
+	self<>self2 implies self.name<>self2.name)
+	
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameForAll1_P0_VN
+-->failed:
+Constraint Specification: 
+context Person inv uniqueNameForAll1_P0_VN:
+	Person.allInstances()->forAll(self2|
+	self<>self2 implies self.name<>self2.name)
+	
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameForAll2_P0_VT
+-->failed:
+Constraint Specification: 
+context Person inv uniqueNameForAll2_P0_VT:
+	Person.allInstances()->forAll(p1,p2:Person|
+	p1<>p2 implies p1.name<>p2.name)
+	
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameForAll2_P0_VN
+-->failed:
+Constraint Specification: 
+context Person inv uniqueNameForAll2_P0_VN:
+	Person.allInstances()->forAll(p1,p2|
+	p1<>p2 implies p1.name<>p2.name)
+	
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameIsUnique_P0_VT
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameIsUnique_P0_VN
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameIsUnique_P0_VI
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameOne_P0_VT
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameOne_P0_VN
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameOne_P0_VI
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameOneNot_P0_VI
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b1::femaleHasNoWife
 -->OK.
 ..........................................
 
@@ -1027,9 +1333,7 @@ Constraint Specification:
 context Person inv femaleHasNoWife:
 	self.gender='female' implies self.wife->isEmpty()
 	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+Result: Result was not JavaOclBoolean, as expected
 ..........................................
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::b1::maleHasNoHusband
@@ -1038,7 +1342,9 @@ Constraint Specification:
 context Person inv maleHasNoHusband:
 	self.gender='male' implies self.husband->isEmpty()
 	
-Result: Result was not JavaOclBoolean, as expected
+java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
+Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
 ..........................................
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcName_P0_VT
@@ -1340,313 +1646,9 @@ Constraint Specification:
 context Person inv femaleHasNoWife:
 	self.gender='female' implies self.wife->isEmpty()
 	
-Result: Result was not JavaOclBoolean, as expected
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::maleHasNoHusband
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcName_P0_VT
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcName_P0_VN
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcName_P0_VI
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcNameDotShortcutP0_VT
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcNameDotShortcutP0_VN
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcNameDotShortcutP0_VI
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcAttrs_P0_VT
--->failed:
-Constraint Specification: 
-context Person inv abcAttrs_P0_VT:
-	let ada:Person=Person.allInstances()->any(p:Person|p.name='Ada') in
-	let bob:Person=Person.allInstances()->any(p:Person|p.name='Bob') in
-	let cyd:Person=Person.allInstances()->any(p:Person|p.name='Cyd') in
-	Set{ada,bob,cyd}->
-	collectNested(p:Person|Sequence{p.name,p.civstat,p.gender,p.alive})=
-	Bag{Sequence{'Ada','widowed' ,'female',true },
-	Sequence{'Bob','divorced','male'  ,true },
-	Sequence{'Cyd','married' ,'male'  ,false}}
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcAttrs_P0_VN
--->failed:
-Constraint Specification: 
-context Person inv abcAttrs_P0_VN:
-	let ada:Person=Person.allInstances()->any(p|p.name='Ada') in
-	let bob:Person=Person.allInstances()->any(p|p.name='Bob') in
-	let cyd:Person=Person.allInstances()->any(p|p.name='Cyd') in
-	Set{ada,bob,cyd}->
-	collectNested(p|Sequence{p.name,p.civstat,p.gender,p.alive})=
-	Bag{Sequence{'Ada','widowed' ,'female',true },
-	Sequence{'Bob','divorced','male'  ,true },
-	Sequence{'Cyd','married' ,'male'  ,false}}
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcAttrs_P0_VI
--->failed:
-Constraint Specification: 
-context Person inv abcAttrs_P0_VI:
-	let ada:Person=Person.allInstances()->any(name='Ada') in
-	let bob:Person=Person.allInstances()->any(name='Bob') in
-	let cyd:Person=Person.allInstances()->any(name='Cyd') in
-	Set{ada,bob,cyd}->
-	collectNested(Sequence{name,civstat,gender,alive})=
-	Bag{Sequence{'Ada','widowed' ,'female',true },
-	Sequence{'Bob','divorced','male'  ,true },
-	Sequence{'Cyd','married' ,'male'  ,false}}
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusband_P0_VT
--->failed:
-Constraint Specification: 
-context Person inv personsWithUndefinedHusband_P0_VT:
-	Person.allInstances()->
-	select(p:Person|
-	p.husband=
-	Person.allInstances()->any(p:Person|p.wife->isEmpty()).wife
-	)->collect(p:Person|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusband_P0_VN
--->failed:
-Constraint Specification: 
-context Person inv personsWithUndefinedHusband_P0_VN:
-	Person.allInstances()->
-	select(p|
-	p.husband=
-	Person.allInstances()->any(p|p.wife->isEmpty()).wife
-	)->collect(p|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusband_P0_VI
--->failed:
-Constraint Specification: 
-context Person inv personsWithUndefinedHusband_P0_VI:
-	Person.allInstances()->
-	select(
-	husband=
-	Person.allInstances()->any(wife->isEmpty()).wife
-	)->collect(name)=Bag{'Ada','Bob','Cyd','Dan'}
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusbandAnyFalse_P0_VT
--->failed:
-Constraint Specification: 
-context Person inv personsWithUndefinedHusbandAnyFalse_P0_VT:
-	Person.allInstances()->
-	select(p:Person|
-	p.husband=Person.allInstances()->any(p:Person|false)
-	)->collect(p:Person|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
-	
 java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
 	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
 Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusbandAnyFalse_P0_VN
--->failed:
-Constraint Specification: 
-context Person inv personsWithUndefinedHusbandAnyFalse_P0_VN:
-	Person.allInstances()->
-	select(p|
-	p.husband=Person.allInstances()->any(p|false)
-	)->collect(p|p.name)=Bag{'Ada','Bob','Cyd','Dan'}
-	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::personsWithUndefinedHusbandAnyFalse_P0_VI
--->failed:
-Constraint Specification: 
-context Person inv personsWithUndefinedHusbandAnyFalse_P0_VI:
-	Person.allInstances()->
-	select(
-	husband=Person.allInstances()->any(false)
-	)->collect(name)=Bag{'Ada','Bob','Cyd','Dan'}
-	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::flatten_P0_VT
--->failed:
-Constraint Specification: 
-context Person inv flatten_P0_VT:
-	let dan:Person=Person.allInstances()->any(p:Person|p.name='Dan') in
-	let eve:Person=Person.allInstances()->any(p:Person|p.name='Eve') in
-	Set{Bag{eve},
-	Bag{eve.spouse()},
-	Bag{eve.spouse().spouse()},
-	Bag{eve.spouse().spouse().spouse()},
-	Bag{eve.spouse().spouse().spouse().spouse()},
-	Bag{eve.spouse().spouse().spouse().spouse().spouse()}}->
-	flatten()=Set{dan,eve}
-	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::flatten_P0_VN
--->failed:
-Constraint Specification: 
-context Person inv flatten_P0_VN:
-	let dan:Person=Person.allInstances()->any(p|p.name='Dan') in
-	let eve:Person=Person.allInstances()->any(p|p.name='Eve') in
-	Set{Bag{eve},
-	Bag{eve.spouse()},
-	Bag{eve.spouse().spouse()},
-	Bag{eve.spouse().spouse().spouse()},
-	Bag{eve.spouse().spouse().spouse().spouse()},
-	Bag{eve.spouse().spouse().spouse().spouse().spouse()}}->
-	flatten()=Set{dan,eve}
-	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-..........................................
-
-test object: [,Person]
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::enumCivilStatus
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::enumGender
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::aliveDefined
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::nameCapitalThenSmallLetters_VT
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::nameCapitalThenSmallLetters_VN
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameForAll1_P0_VT
--->failed:
-Constraint Specification: 
-context Person inv uniqueNameForAll1_P0_VT:
-	Person.allInstances()->forAll(self2:Person|
-	self<>self2 implies self.name<>self2.name)
-	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameForAll1_P0_VN
--->failed:
-Constraint Specification: 
-context Person inv uniqueNameForAll1_P0_VN:
-	Person.allInstances()->forAll(self2|
-	self<>self2 implies self.name<>self2.name)
-	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameForAll2_P0_VT
--->failed:
-Constraint Specification: 
-context Person inv uniqueNameForAll2_P0_VT:
-	Person.allInstances()->forAll(p1,p2:Person|
-	p1<>p2 implies p1.name<>p2.name)
-	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameForAll2_P0_VN
--->failed:
-Constraint Specification: 
-context Person inv uniqueNameForAll2_P0_VN:
-	Person.allInstances()->forAll(p1,p2|
-	p1<>p2 implies p1.name<>p2.name)
-	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameIsUnique_P0_VT
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameIsUnique_P0_VN
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameIsUnique_P0_VI
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameOne_P0_VT
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameOne_P0_VN
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameOne_P0_VI
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::uniqueNameOneNot_P0_VI
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b1::femaleHasNoWife
--->failed:
-Constraint Specification: 
-context Person inv femaleHasNoWife:
-	self.gender='female' implies self.wife->isEmpty()
-	
-Result: Result was not JavaOclBoolean, as expected
 ..........................................
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::b1::maleHasNoHusband
@@ -1655,9 +1657,7 @@ Constraint Specification:
 context Person inv maleHasNoHusband:
 	self.gender='male' implies self.husband->isEmpty()
 	
-java.lang.NoClassDefFoundError: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
-	thrown in: java.lang.Class.getDeclaredMethods0(Native Method)
-Message/Type: tudresden/ocl20/pivot/pivotmodel/impl/PrimitiveTypeImpl
+Result: Result was not JavaOclBoolean, as expected
 ..........................................
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::b1::abcName_P0_VT

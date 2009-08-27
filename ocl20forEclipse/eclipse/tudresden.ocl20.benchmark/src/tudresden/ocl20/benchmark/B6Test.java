@@ -19,51 +19,44 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.benchmark;
 
-import java.io.File;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class B4Test.
+ * The Class B6Test.
  */
-public class B5Test extends BaseTest {
+public class B6Test extends BaseTest {
 
 	/**
 	 * Test init.
 	 */
 	@BeforeClass
 	public static void testInit() {
-		initPerformer("b5", "DummyWorld.ecore", "common");
+		initPerformer("b6", "DummyWorld.ecore", "common");
 
 	}
 
-	/**
-	 * Load all invariant files within the testdata directory an check them
-	 * afterwards on the dummy model instance
-	 */
 	@Test
-	public void testAllInvariants() {
+	public void testDeterminateness() {
 
-		perf
-				.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/common/ModelInstance.class");
-		File expressionsDir = new File(
-				"src/tudresden/ocl20/benchmark/testdata/b5/expressions/");
-
-		File[] testFiles = expressionsDir.listFiles();
-
-		for (File testFile : testFiles) {
-			if(testFile.getName().indexOf(".ocl") == -1){
-				continue;
-			}
-			perf
-					.safeLoadStatementFile("src/tudresden/ocl20/benchmark/testdata/b5/expressions/"
-							+ testFile.getName());
-		}
+		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/common/ModelInstance.class");
+		
+		perf.safeLoadStatementFile("src/tudresden/ocl20/benchmark/testdata/b6/expressions/determinateness.ocl");
+		
 
 		perf.checkActiveInvariants();
 
+	}
+    
+	@Test
+	public void testConversion2Sequence()
+	{
+		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/common/ModelInstance.class");
+		
+		perf.safeLoadStatementFile("src/tudresden/ocl20/benchmark/testdata/b6/expressions/conversion2sequence.ocl");
+
+		perf.checkActiveInvariants();
+	
 	}
 
 }

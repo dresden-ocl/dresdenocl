@@ -61,18 +61,18 @@ Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
 --> Types don't match.
 ..........................................
 
-test object: [,Exam]
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
--->OK.
-..........................................
-
 test object: [,Person]
 ..........................................
 
 Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
 --> Types don't match.
+..........................................
+
+test object: [,Exam]
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b3::threeParticipants
+-->OK.
 ..........................................
 
 Interpretation Statistics:

@@ -538,13 +538,14 @@ public class TestPerformer {
 		for (IModelObject obj : testObjects) {
 			bLogger.outHead3("test object: " + obj.getName());
 			for (Constraint con : constraints) {
-				bLogger.outLine("\nConstraint: " + con.getQualifiedName());
 
 				// check if it was currently loaded
 				if (!this.testEnv.loadedConstraints.containsKey(con
 						.getQualifiedName())) {
 					continue;
 				}
+				
+				bLogger.outLine("\nConstraint: " + con.getQualifiedName());
 
 				conElement = (NamedElement) con.getConstrainedElement().get(0);
 				if (conElement instanceof Property
@@ -702,11 +703,14 @@ public class TestPerformer {
 	}
 
 	/**
-	 * clears the map "loadedConstraints" which effects those constraints to not
-	 * be interpreted again.
+	 * cleans up. This is mostly done when a new TestCase starts.
 	 */
-	public void clearConstraintList() {
+	public void clean() {
+		// empty constraint list in order to not interpret them again
 		this.testEnv.loadedConstraints.clear();
+		
+		// clear logger statistics
+		this.bLogger.cleanStatistics();
 	}
 
 	/**
