@@ -1,5 +1,8 @@
 package tudresden::ocl20::benchmark::testdata::b1
 
+
+-- TEST
+
 ------------------------------------------------------------------------
 -- Invariants from the domain ------------------------------------------
 ------------------------------------------------------------------------
@@ -250,7 +253,7 @@ context Person inv personsWithUndefinedHusbandAnyFalse_P0_VI:
 
 -- collects a bag of sequences of two persons respectively, 
 -- which are alive and not married. (possible partners of marriage)
--- In the Bag there should be one sequence with "Ada" and "Bob"
+-- The Bag is expected to contain one sequence with "Ada" and "Bob"
 context Person inv possiblePairs_P0_VT:
   let ada:Person=Person.allInstances()->any(p:Person|p.name='Ada') in
   let emptySeq=Sequence{ada}->excluding(ada) in

@@ -28,6 +28,8 @@ import org.eclipse.core.runtime.Platform;
 import tudresden.ocl20.interpreter.*;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.*;
+import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
+import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser;
 import tudresden.ocl20.pivot.pivotmodel.*;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.*;
@@ -53,12 +55,6 @@ public class TestPerformer {
 		PREPOST
 		// only pre/post, context will be attached
 	};
-
-	/**
-	 * Used to select uninterpreted {@link Constraint}s for the actual test
-	 * case.
-	 */
-	private Set<Constraint> interpretedConstraints;
 
 	/**
 	 * The global {@link IEnvironment} used during interpretation and
@@ -130,16 +126,6 @@ public class TestPerformer {
 	}
 
 	/**
-	 * Adds the interpreted constraint.
-	 * 
-	 * @param c
-	 */
-	public void addInterpretedConstraint(Constraint c) {
-
-		this.interpretedConstraints.add(c);
-	}
-
-	/**
 	 * <p>
 	 * Initializes the {@link TestPerformer} after all required parameters are
 	 * set.
@@ -173,9 +159,6 @@ public class TestPerformer {
 
 			// Load the model.
 			this.loadModel(modelFilePath);
-
-			// Initialize the set containing already interpreted constraints.
-			this.interpretedConstraints = new HashSet<Constraint>();
 
 			// Initialize the interpreter.
 			this.myInterpreter = OclInterpreterPlugin.createInterpreter(null);
@@ -234,9 +217,11 @@ public class TestPerformer {
 		try {
 			anOCLparser.parse();
 
-			// save parsed constraint under new name
-			this.testEnv.loadedConstraints.put("root::" + packageInformation
-					+ "::" + this.testEnv.curConstraintName, oclStatement);
+			// Save the constraint's definition under it's name to refer to it
+			// later
+			// when logging results
+			this.testEnv.storeConstraintDefinition(packageInformation,
+					oclStatement);
 
 			this.bLogger.oclParseSuccess(oclStatement);
 		} catch (Exception e) {
@@ -404,21 +389,29 @@ public class TestPerformer {
 		Matcher match = this.patternConstraintName.matcher(line);
 
 		if (match.matches()) {
-			// if constraint has a name already
-			if (match.group(3).length() > 0) {
-				this.testEnv.curConstraintName = match.group(3);
+			// if pre or post add it to the name
+			String prefix;
+			if (match.group(2).equals("pre") || match.group(2).equals("post")) {
+				prefix = "_" + match.group(2) + "_";
 			} else {
-				this.testEnv.curConstraintName = fileName + "_"
-						+ (this.testEnv.curConstraintId++);
-				return match.group(1) + " " + match.group(2) + " "
-						+ this.testEnv.curConstraintName + ":" + match.group(4);
+				prefix = "";
 			}
+			// create or modify the testname to get a unique name
+			// specially identify pre and posts to test them separately
+			if (match.group(3).length() > 0) {
+				this.testEnv.curConstraintName = this.testEnv.testName + prefix
+						+ fileName + "_" + match.group(3);
+			} else {
+				this.testEnv.curConstraintName = this.testEnv.testName + prefix
+						+ fileName + "_" + (this.testEnv.curConstraintId++);
+			}
+
+			return match.group(1) + " " + match.group(2) + " "
+					+ this.testEnv.curConstraintName + ":" + match.group(4);
+
 		} else {
 			return line;
 		}
-
-		return line;
-
 	}
 
 	/**
@@ -499,11 +492,6 @@ public class TestPerformer {
 							"Package information should be only once in an Ocl File");
 				}
 
-				// end of file reached
-				if (line.startsWith("endpackage")) {
-					return null;
-				}
-
 				return line;
 			}
 
@@ -511,7 +499,7 @@ public class TestPerformer {
 			throw new RuntimeException("Error Reading Source File.", e);
 		}
 
-		// file empty
+		// file empty or EOF
 		return null;
 	}
 
@@ -539,12 +527,6 @@ public class TestPerformer {
 			bLogger.outHead3("test object: " + obj.getName());
 			for (Constraint con : constraints) {
 
-				// check if it was currently loaded
-				if (!this.testEnv.loadedConstraints.containsKey(con
-						.getQualifiedName())) {
-					continue;
-				}
-				
 				bLogger.outLine("\nConstraint: " + con.getQualifiedName());
 
 				conElement = (NamedElement) con.getConstrainedElement().get(0);
@@ -569,6 +551,146 @@ public class TestPerformer {
 	}
 
 	/**
+	 * checks pre and post conditions one after another.
+	 * 
+	 * @param guineaPig
+	 *            model instance object where constraints are tested
+	 * @param method
+	 *            name of method to be executed
+	 * @param params
+	 *            list of parameter names that are expected to be stored in the
+	 *            interpretation environment. They're extracted and passed as
+	 *            method arguments
+	 */
+	public void checkPreAndPostConditions(IModelObject guineaPig,
+			String method, String... params) {
+
+		this.checkPreConditions(guineaPig, method);
+
+		// clean statistics between both
+		this.bLogger.cleanStatistics();
+
+		this.checkPostConditions(guineaPig, method, params);
+
+	}
+
+	/**
+	 * Check pre conditions.
+	 * 
+	 * @param guineaPig
+	 *            model instance object to test the constraints on
+	 * @param method
+	 *            Method name just for logging
+	 */
+	public void checkPreConditions(IModelObject guineaPig, String method) {
+		bLogger.outHead1("Checking Pre Conditions");
+
+		bLogger.outHead3("Test Object:");
+		bLogger.outLine(guineaPig.getQualifiedName());
+		bLogger.outLine("Method: " + method + "(...)");
+
+		// load all remaining constraints
+		List<Constraint> constraints = this.getAllActiveConstraints();
+
+		for (Constraint con : constraints) {
+
+			// doesnt check post conditions
+			if (con.getName().contains("_post_")) {
+				continue;
+			}
+
+			bLogger.outLine("\nConstraint: " + con.getQualifiedName());
+
+			// must be pre then
+			assert (con.getName().contains("_pre_"));
+
+			// interpret condition
+			this.interpretConstraint(guineaPig, con);
+
+		}
+
+		this.bLogger.printInterpretationStats();
+
+	}
+
+	/**
+	 * Check post conditions.
+	 * 
+	 * @param guineaPig
+	 *            model instance object to test the constraints on
+	 * @param method
+	 *            This is invoked when a condition is being tested.
+	 * @param params
+	 *            variable arguments to specify arguments for the method being
+	 *            invoked
+	 */
+	public void checkPostConditions(IModelObject guineaPig, String method,
+			String... params) {
+
+		bLogger.outHead1("Checking Post Conditions");
+
+		bLogger.outHead3("Test Object:");
+		bLogger.outLine(guineaPig.getQualifiedName());
+		bLogger.outLine("Method: " + method + "(...)");
+
+		// load all remaining constraints
+		List<Constraint> constraints = this.getAllActiveConstraints();
+
+		// collect method parameters
+		OclRoot[] oclParams = this.collectMethodParams(params);
+
+		// execute that method only once!
+		boolean methodExecuted = false;
+
+		for (Constraint con : constraints) {
+
+			// ignore pre-conditions
+			if (con.getName().contains("_pre_")) {
+				continue;
+			}
+
+			bLogger.outLine("\nConstraint: " + con.getQualifiedName());
+
+			// constraint must be post then
+			assert (con.getName().contains("_post_"));
+
+			// execute method only once
+			if (!methodExecuted) {
+				OclRoot gPigInOcl = this
+						.createOclRootAdapterByMIObject(guineaPig);
+				try {
+					gPigInOcl.invokeOperation(method, oclParams);
+				} catch (NoSuchMethodException e) {
+					throw new RuntimeException(e);
+				}
+			}
+
+			// interpret condition
+			this.interpretConstraint(guineaPig, con);
+		}
+
+		this.bLogger.printInterpretationStats();
+
+	}
+
+	/**
+	 * Collect an array of OclRoot-Objects registered in the environment.
+	 * 
+	 * @params params String-Array identifying all Variables that are being
+	 *         fetched
+	 */
+	private OclRoot[] collectMethodParams(String... params) {
+		OclRoot[] oclParams = new OclRoot[params.length];
+		int counter = 0;
+		for (String name : params) {
+			oclParams[counter++] = this.myGlobalEnvironment.getVar(name);
+		}
+
+		return oclParams;
+
+	}
+
+	/**
 	 * Interprets a model instance object with a constraint.
 	 * 
 	 * @param obj
@@ -580,7 +702,10 @@ public class TestPerformer {
 	private void interpretConstraint(IModelObject obj, Constraint con) {
 		OclRoot result = null;
 
+		assert (this.testEnv.loadedConstraints.containsKey(con
+				.getQualifiedName()));
 		try {
+
 			result = this.myInterpreter.interpretConstraint(con, obj)
 					.getResult();
 		} catch (Throwable e) { // catch EVERYTHING
@@ -590,6 +715,11 @@ public class TestPerformer {
 
 		if (result == null) {
 			bLogger.interpretationError(con, obj, null);
+			return;
+		}
+
+		if (result.isOclUndefined().isTrue()) {
+			bLogger.interpretationError(con, obj, result);
 			return;
 		}
 
@@ -604,6 +734,7 @@ public class TestPerformer {
 		} catch (ClassCastException e) {
 			bLogger.interpretationError(con, obj,
 					"Result was not JavaOclBoolean, as expected");
+
 			return;
 		} catch (Exception e) {
 			bLogger.interpretationError(con, obj, e);
@@ -636,7 +767,13 @@ public class TestPerformer {
 			this.getAllActiveConstraints(nested, constraints);
 		}
 
-		constraints.addAll(ns.getOwnedRule());
+		// test whether constraint has been loaded this time
+		for (Constraint con : ns.getOwnedRule()) {
+			if (this.testEnv.loadedConstraints.containsKey(con
+					.getQualifiedName())) {
+				constraints.add(con);
+			}
+		}
 
 		return constraints;
 	}
@@ -706,9 +843,10 @@ public class TestPerformer {
 	 * cleans up. This is mostly done when a new TestCase starts.
 	 */
 	public void clean() {
-		// empty constraint list in order to not interpret them again
+
+		// clean loaded constraints map
 		this.testEnv.loadedConstraints.clear();
-		
+
 		// clear logger statistics
 		this.bLogger.cleanStatistics();
 	}
@@ -822,24 +960,6 @@ public class TestPerformer {
 	// * Some Helper Functions
 	// ************************************
 
-	/**
-	 * Gets the namespace by package.
-	 * 
-	 * @param packageString
-	 * 
-	 * @return the namespace by package
-	 */
-	private Namespace getNamespaceByPackage(String packageString) {
-		String[] nsArray = packageString.split("::");
-
-		List<String> nsList = Arrays.asList(nsArray);
-		try {
-			return this.myModel.findNamespace(nsList);
-		} catch (ModelAccessException e) {
-			throw new RuntimeException(e);
-		}
-
-	}
 
 	/**
 	 * Safe open file.
@@ -889,5 +1009,57 @@ public class TestPerformer {
 			throw new RuntimeException("Error opening file " + fileName
 					+ " (it exists, though)");
 		}
+	}
+
+	/**
+	 * creates an object adapting the passed model instance object
+	 * 
+	 * @param object
+	 *            Object to be adapteds
+	 */
+	public IModelObject createModelInstanceAdapter(Object object) {
+
+		IModelObject result = null;
+		try {
+			result = JavaModelInstanceTypePlugin.addModelObjectToInstance(
+					object, this.getActiveModelInstance());
+		}
+
+		catch (ModelAccessException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Add a given {@link Object} as a variable to the
+	 * {@link IInterpretationEnvironment} used for preparation and
+	 * interpretation.
+	 * </p>
+	 * 
+	 * @param path
+	 *            The path and name of the variable which shall be set.
+	 * @param value
+	 *            The {@link IModelObject} value of the set variable as an
+	 *            Object.
+	 */
+	public void setEnvironmentVariable(String path, Object value) {
+
+		/* Convert the object into an OclRoot. */
+		OclRoot adaptedObject;
+		adaptedObject = JavaStandardlibraryPlugin.getStandardLibraryFactory()
+				.createOclRoot(value);
+		/* Add the variable to the environment. */
+		this.myInterpreter.setEnviromentVariable(path, adaptedObject);
+	}
+
+	/**
+	 * creates an ocl root adapter from a model instance adapter in order to
+	 * being able to execute a method on the model level
+	 */
+	public OclRoot createOclRootAdapterByMIObject(IModelObject obj) {
+		return JavaStandardlibraryPlugin.getOclInstanceAdapterFactory()
+				.createOclRoot(obj);
 	}
 }

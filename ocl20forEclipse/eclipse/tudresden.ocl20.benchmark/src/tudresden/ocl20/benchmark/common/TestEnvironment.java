@@ -7,49 +7,54 @@ import java.util.Map;
 
 import tudresden.ocl20.pivot.modelbus.IModelInstance;
 
-
 public class TestEnvironment {
-	
-
-
-
 
 	// @ directory where all files are stored
 	public String fileDirectory = "";
 
-	
 	public List<String> loadedOclFiles;
-	
-	
-	//@ current loaded Constraints, sorted by name
+
+	// @ current loaded Constraints, sorted by name
 	public Map<String, String> loadedConstraints;
 
-	
 	public String curConstraintName;
-	
-	//@ independent number to assign as a constraint name
+
+	// @ independent number to assign as a constraint name
 	public int curConstraintId;
 
 	// @ Name of the currently executed test
 	public String testName;
-	
+
 	// all loaded model instances
 	// since the testperformer is used by differend test cases the instances
 	// can be reused
 	public Map<String, IModelInstance> loadedInstances;
-	
-	
-	public TestEnvironment()
-	{
-		
+
+	public TestEnvironment() {
+
 		this.loadedOclFiles = new ArrayList<String>();
 
 		this.loadedInstances = new HashMap<String, IModelInstance>();
-		
+
 		this.loadedConstraints = new HashMap<String, String>();
-		
+
 		this.curConstraintId = 1;
+
+	}
+
+	/**
+	 * Stores a constriant definition under it's name
+	 * qualified name.
+	 * Assert that a name is not used twice!
+	 */
+	public void storeConstraintDefinition(String packageInfo,
+			String specification) {
 		
+		String key = "root::" + packageInfo + "::" + this.curConstraintName;
+		assert (!this.loadedConstraints.containsKey(key));
+		this.loadedConstraints.put("root::" + packageInfo + "::"
+				+ this.curConstraintName, specification);
+
 	}
 
 }

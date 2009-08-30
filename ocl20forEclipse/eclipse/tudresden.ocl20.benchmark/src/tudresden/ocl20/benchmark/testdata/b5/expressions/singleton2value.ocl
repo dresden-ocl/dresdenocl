@@ -17,24 +17,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else oclUndefined endif = 
          if c->size() = 1 then
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Set(Integer) = Set{} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem;
+     c->iterate(elem:Integer;
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- Bag
 
 context Dummy inv: 
@@ -42,24 +38,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem;
+     c->iterate(elem:Integer;
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -67,24 +59,20 @@ let c = (Sequence) in
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem;
+     c->iterate(elem:Integer;
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- Singleton
 
 -- -- -- -- Includes Undefined
@@ -96,24 +84,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Set(Integer) = Set{ oclUndefined} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem;
+     c->iterate(elem:Integer;
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -121,24 +105,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{ oclUndefined} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem;
+     c->iterate(elem:Integer;
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
              if r->at(2) = false then Sequence{elem,true} 
              else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -146,24 +126,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{ oclUndefined} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem; 
+     c->iterate(elem:Integer; 
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- Set ------------------------------------------------
@@ -173,24 +149,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Set(Integer) = Set{2} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem; 
+     c->iterate(elem:Integer; 
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -198,24 +170,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{2} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem; 
+     c->iterate(elem:Integer; 
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -223,24 +191,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{2} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem; 
+     c->iterate(elem:Integer; 
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- Many Elements
 
 -- -- -- -- Includes Undefined
@@ -252,24 +216,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Set(Integer) = Set{ oclUndefined, 2} in 
        if c->size() = 1 then c->any(true) else 
         oclUndefined endif = 
-     c->iterate(elem; 
+     c->iterate(elem:Integer; 
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -277,24 +237,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) else 
         oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{ oclUndefined, 2} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem;
+     c->iterate(elem:Integer;
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -302,24 +258,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Bag(Integer) = Sequence{ oclUndefined, 2} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem;
+     c->iterate(elem:Integer;
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- Set ------------------------------------------------
@@ -329,24 +281,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Set(Integer) = Set{1, 2} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem;
+     c->iterate(elem:Integer;
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -354,24 +302,20 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{1, 2} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem; 
+     c->iterate(elem:Integer; 
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -379,22 +323,18 @@ context Dummy inv:
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
          if c->size() = 1 then 
-       c->iterate(elem; r:Integer =  oclUndefined | elem) 
+       c->iterate(elem:Integer; r:Integer =  oclUndefined | elem) 
          else  oclUndefined endif
 
-  -- Expected Results:
-  = true
-
+  
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{1, 2} in 
        if c->size() = 1 then c->any(true) 
        else  oclUndefined endif = 
-     c->iterate(elem; 
+     c->iterate(elem:Integer; 
            r:Sequence(OclAny) = Sequence{ oclUndefined,false} |
            if r->at(2) = false then Sequence{elem,true} 
            else Sequence{ oclUndefined,true} endif)->at(1)
 
-  -- Expected Results:
-  = true
-
+  
 endpackage

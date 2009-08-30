@@ -42,6 +42,7 @@
             </eStructuralFeatures>
             <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
                 defaultValueLiteral=""/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
           </eClassifiers>
         </eSubpackages>
       </eSubpackages>

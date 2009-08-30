@@ -1,7 +1,8 @@
 package tudresden::ocl20::benchmark::testdata::b2
 
 context Person 
-  inv attributesDefined: name.isDefined and civstat.isDefined and
+  inv attributesDefined:
+	 name.isDefined and civstat.isDefined and
       gender.isDefined and alive.isDefined
       
 context Person 
@@ -17,14 +18,17 @@ context Person
         small->includes(name.substring(i,i)))
 
 context Person 
-  inv nameIsUnique: Person.allInstances()->forAll(self2|
+  inv nameIsUnique:
+	 Person.allInstances()->forAll(self2|
       self<>self2 implies self.name<>self2.name)
       
 context Person 
-  inv femaleHasNoWife: gender=Gender::female implies wife.isUndefined
+  inv femaleHasNoWife:
+	 gender=Gender::female implies wife.isUndefined
   
 context Person 
-  inv maleHasNoHusband: gender=Gender::male implies husband.isUndefined
+  inv maleHasNoHusband:
+	 gender=Gender::male implies husband.isUndefined
 	
 endpackage
   

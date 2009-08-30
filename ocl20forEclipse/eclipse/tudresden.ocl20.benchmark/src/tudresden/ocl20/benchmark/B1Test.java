@@ -62,20 +62,4 @@ public class B1Test extends BaseTest
 		perf.checkActiveInvariants();
 	}
 	
-	@Test
-	/**
-	 * Test some queries
-	 * <TODO> Fix Queries!
-	 */
-	public void testEvolutionQueries()
-	{
-		
-		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/b1/ModelEvolution.class");
-
-		perf.safeLoadQueryFile("bin/tudresden/ocl20/benchmark/testdata/b1/expressions/evolutionQueries.ocl");
-		
-		perf.checkActiveInvariants();
-		
-	}
-	
 }

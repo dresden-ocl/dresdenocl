@@ -38,7 +38,7 @@ public class Person {
 	
 	public Gender gender;
 	
-	public boolean alive;
+	public Boolean alive;
 	
 	public Person husband;
 	
@@ -132,10 +132,10 @@ public class Person {
 	public void setSpouse(Person p)
 	{
 		if(this.gender == Gender.female){
-			assert(p.gender == Gender.male);
+			assert(p==null || p.gender == Gender.male);
 			this.husband = p;
 		}else{
-			assert(p.gender == Gender.female);
+			assert(p==null || p.gender == Gender.female);
 			this.wife = p;
 		}
 	}
@@ -148,13 +148,30 @@ public class Person {
 		this.setSpouse(null);
 	}
 	
+	
+	/**
+	 * Birth-Method as defined in Test B2 of Benchmark
+	 * used for Pre and Post Tests
+	 */
+	public void birth(String aName, Gender aGender)
+	{
+		this.alive = true;
+		this.name = aName;
+		this.gender = aGender;
+		this.civstat = CivilStatus.single;
+		
+	}
+	
 	/**
 	 * Dying means: removing spouse and setting alive to false.
 	 */
-	public void die()
+	public void death()
 	{
-		this.spouse().removeSpouse();
-		this.removeSpouse();
+		if(this.spouse() != null){
+			this.spouse().removeSpouse();
+			this.removeSpouse();
+		}
+		
 		this.alive = false;
 	}
 }

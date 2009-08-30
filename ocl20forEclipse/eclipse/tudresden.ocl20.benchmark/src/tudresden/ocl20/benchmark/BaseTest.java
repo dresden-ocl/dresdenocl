@@ -28,6 +28,9 @@ import org.junit.Before;
 import java.io.IOException;
 
 import tudresden.ocl20.benchmark.common.TestPerformer;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -86,5 +89,6 @@ public class BaseTest {
 	{
 		perf.clean();
 	}
+
 
 }

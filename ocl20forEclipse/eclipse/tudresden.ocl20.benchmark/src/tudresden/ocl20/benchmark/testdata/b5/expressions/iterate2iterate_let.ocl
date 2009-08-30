@@ -15,41 +15,35 @@ package tudresden::ocl20::benchmark::testdata::common
 
 context Dummy inv: 
 	let c:Set(Integer) = Set{} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Bag
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Sequence
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- Singleton
 
 -- -- -- -- Includes Undefined
@@ -58,82 +52,70 @@ context Dummy inv:
 
 context Dummy inv: 
 	let c:Set(Integer) = Set{ oclUndefined } in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{ oclUndefined } in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{ oclUndefined } in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- Set ------------------------------------------------
 
 context Dummy inv: 
 	let c:Set(Integer) = Set{2} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{2} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{2} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- Many Elements
 
 -- -- -- -- Includes Undefined
@@ -142,15 +124,13 @@ context Dummy inv:
 
 context Dummy inv: 
 	let c:Set(Integer) = Set{ oclUndefined , 2, 3, -10} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 -- -- -- -- -- -- Equal Values
@@ -158,28 +138,24 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{ oclUndefined , 2, 3, -10, 
                    oclUndefined } in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{ oclUndefined , 2, 3, -10} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- Equal Values
@@ -187,96 +163,82 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{ oclUndefined , 2, 3, -10, 
                         oclUndefined } in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{ oclUndefined , 2, 3, -10} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- Set ------------------------------------------------
 
 context Dummy inv: 
 	let c:Set(Integer) = Set{1, 2, 3, -10} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 -- -- -- -- -- -- Equal Values
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{1, 2, 3, -10, 1} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{1, 2, 3, -10} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
-       = c->iterate(elem; r:Bag(Integer) = Bag{1} |
+       = c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- Equal Values
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 3, -10, 1} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 3, -10} in 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} | 
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} | 
          r->including(r->size()+elem)) 
        = 
-   c->iterate(elem; r:Bag(Integer) = Bag{1} |
+   c->iterate(elem:Integer; r:Bag(Integer) = Bag{1} |
          let res = r->including(r->size()+elem) in res)
 
-  -- Expected Result:
-  = true
-
+  
   endpackage

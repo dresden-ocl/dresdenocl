@@ -43,7 +43,6 @@ public class B6Test extends BaseTest {
 		
 		perf.safeLoadStatementFile("src/tudresden/ocl20/benchmark/testdata/b6/expressions/determinateness.ocl");
 		
-
 		perf.checkActiveInvariants();
 
 	}

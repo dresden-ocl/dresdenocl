@@ -64,9 +64,9 @@ public class ModelInstance {
 		
 		eve = new Person("Eve");
 		
-		Exam ex1 = new Exam(ada, bob, cyd, 20001023);
-		Exam ex2 = new Exam(dan, bob, ada, 20040817);
-		Exam ex3 = new Exam(eve, ada, dan, 20080331);
+		Exam ex1 = new Exam(ada, bob, cyd, 20001023, "ada_bob_cyd");
+		Exam ex2 = new Exam(dan, bob, ada, 20040817, "dad_bob_ada");
+		Exam ex3 = new Exam(eve, ada, dan, 20080331, "eve_ada_dan");
 		
 		List<Object> result = new ArrayList<Object>();
 		

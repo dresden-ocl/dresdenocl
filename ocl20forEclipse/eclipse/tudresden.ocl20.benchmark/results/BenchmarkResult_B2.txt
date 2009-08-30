@@ -7,12 +7,13 @@ Log for test B2
 Start Parsing File: bin/tudresden/ocl20/benchmark/testData/b2/expressions/invariants.ocl
 ------------------------------------------
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isDefined' in type 'String' An error occured while building an property call expression. Error occured at line 3 and column 30. The error occured at the token isDefined.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isDefined' in type 'String' An error occured while building an property call expression. Error occured at line 4 and column 7. The error occured at the token isDefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: Unable to find property 'isDefined' in type 'String' An error occured while building an property call expression. Error occured at line 3 and column 30. The error occured at the token isDefined.
+Message/Type: Unable to find property 'isDefined' in type 'String' An error occured while building an property call expression. Error occured at line 4 and column 7. The error occured at the token isDefined.
 Code:
 context Person
-	inv attributesDefined: name.isDefined and civstat.isDefined and
+	 inv B2invariants_attributesDefined:
+	name.isDefined and civstat.isDefined and
 	gender.isDefined and alive.isDefined
 	
 OCL Parse Error
@@ -21,7 +22,7 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to 
 Message/Type: Unable to find property 'size' in type 'String' An error occured while building an property call expression. Error occured at line 11 and column 14. The error occured at the token size.
 Code:
 context Person
-	inv nameCapitalThenSmallLetters:
+	 inv B2invariants_nameCapitalThenSmallLetters:
 	let small:Set(String)=
 	Set{'a','b','c','d','e','f','g','h','i','j','k','l','m',
 	'n','o','p','q','r','s','t','u','v','w','x','y','z'} in
@@ -33,23 +34,34 @@ context Person
 	small->includes(name.substring(i,i)))
 	
 context Person
-		inv nameIsUnique: Person.allInstances()->forAll(self2|
+		 inv B2invariants_nameIsUnique:
+		Person.allInstances()->forAll(self2|
 		self<>self2 implies self.name<>self2.name)
 >> OK
 ..........................................
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 3 and column 58. The error occured at the token isUndefined.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 37. The error occured at the token isUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 3 and column 58. The error occured at the token isUndefined.
+Message/Type: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 37. The error occured at the token isUndefined.
 Code:
 context Person
-	inv femaleHasNoWife: gender=Gender::female implies wife.isUndefined
+	 inv B2invariants_femaleHasNoWife:
+	gender=Gender::female implies wife.isUndefined
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 38. The error occured at the token isUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 38. The error occured at the token isUndefined.
+Code:
+context Person
+	 inv B2invariants_maleHasNoHusband:
+	gender=Gender::male implies husband.isUndefined
 	
 
 Statistics:
 ------------------------------------------
   successful	: 1 
-  failed	 	: 3 
+  failed	 	: 4 
 
 
 ==========================================
@@ -62,28 +74,28 @@ total tests : 4
 test object: [,Person]
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2invariants_nameIsUnique
 -->OK.
 ..........................................
 
 test object: [,Person]
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2invariants_nameIsUnique
 -->OK.
 ..........................................
 
 test object: [,Person]
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2invariants_nameIsUnique
 -->OK.
 ..........................................
 
 test object: [,Person]
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2invariants_nameIsUnique
 -->OK.
 ..........................................
 
@@ -94,564 +106,438 @@ Interpretation Statistics:
   skipped	 	: 0 
   total	 	: 4 
 
-Start Parsing File: bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepost.ocl
+Start Parsing File: bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostBirth.ocl
 ------------------------------------------
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isUndefined' in type 'String' An error occured while building an property call expression. Error occured at line 3 and column 33. The error occured at the token isUndefined.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isUndefined' in type 'String' An error occured while building an property call expression. Error occured at line 4 and column 7. The error occured at the token isUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: Unable to find property 'isUndefined' in type 'String' An error occured while building an property call expression. Error occured at line 3 and column 33. The error occured at the token isUndefined.
+Message/Type: Unable to find property 'isUndefined' in type 'String' An error occured while building an property call expression. Error occured at line 4 and column 7. The error occured at the token isUndefined.
 Code:
 context Person::birth(aName:String, aGender:Gender)
-	pre  freshUnlinkedPerson: name.isUndefined and civstat.isUndefined and
+	 pre B2_pre_prepostBirth_freshUnlinkedPerson:
+	name.isUndefined and civstat.isUndefined and
 	gender.isUndefined and alive.isUndefined and
 	wife.isUndefined and husband.isUndefined
 	
 context Person::birth(aName:String, aGender:Gender)
-		post nameAssigned: name=aName -- equivalent to 'aName=self.name'
->> OK
-..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The literal doesn't exists in the enumeration. Error occured at line 3 and column 32. The error occured at the token Gender.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: The literal doesn't exists in the enumeration. Error occured at line 3 and column 32. The error occured at the token Gender.
-Code:
-context Person::birth(aName:String, aGender:Gender)
-	post civstatAssigned: civstat=Gender::single
-	
-context Person::birth(aName:String, aGender:Gender)
-		post genderAssigned: gender=aGender
+		 pre B2_pre_prepostBirth_nameNotEmpty:
+		aName <> ''
 >> OK
 ..........................................
 context Person::birth(aName:String, aGender:Gender)
-		post isAliveAssigned: alive=true -- equivalent to 'alive'
+		 post B2_post_prepostBirth_nameAssigned:
+		name=aName -- equivalent to 'aName=self.name'
 >> OK
 ..........................................
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 3 and column 31. The error occured at the token isDefined.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The literal doesn't exists in the enumeration. Error occured at line 4 and column 10. The error occured at the token Gender.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 3 and column 31. The error occured at the token isDefined.
+Message/Type: The literal doesn't exists in the enumeration. Error occured at line 4 and column 10. The error occured at the token Gender.
 Code:
-context Person::marry(aSpouse:Person)
-	pre  aSpouseDefined: aSpouse.isDefined
+context Person::birth(aName:String, aGender:Gender)
+	 post B2_post_prepostBirth_civstatAssigned:
+	civstat=Gender::single
 	
-context Person::marry(aSpouse:Person)
-		pre  isAlive: alive
+context Person::birth(aName:String, aGender:Gender)
+		 post B2_post_prepostBirth_genderAssigned:
+		gender=aGender
 >> OK
 ..........................................
-context Person::marry(aSpouse:Person)
-		pre  aSpouseAlive: aSpouse.alive
+context Person::birth(aName:String, aGender:Gender)
+		 post B2_post_prepostBirth_isAliveAssigned:
+		alive=true -- equivalent to 'alive'
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 29. The error occured at the token Civilstatus.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 29. The error occured at the token Civilstatus.
-Code:
-context Person::marry(aSpouse:Person)
-	pre  isUnmarried: civstat<>Civilstatus::married
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 42. The error occured at the token Civilstatus.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 42. The error occured at the token Civilstatus.
-Code:
-context Person::marry(aSpouse:Person)
-	pre  aSpouseUnmarried: aSpouse.civstat<>Civilstatus::married
-	
-context Person::marry(aSpouse:Person)
-		pre  differentGenders: gender<>aSpouse.gender
->> OK
-..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 26. The error occured at the token Civilstatus.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 26. The error occured at the token Civilstatus.
-Code:
-context Person::marry(aSpouse:Person)
-	post isMarried: civstat=Civilstatus::married
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 38. The error occured at the token Civilstatus.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 38. The error occured at the token Civilstatus.
-Code:
-context Person::marry(aSpouse:Person)
-	post femaleHasMarriedHusband: gender=Gender::female implies
-	husband=aSpouse and husband.civstat=Civilstatus::married
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 32. The error occured at the token Civilstatus.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 32. The error occured at the token Civilstatus.
-Code:
-context Person::marry(aSpouse:Person)
-	post maleHasMarriedWife: gender=Gender::male implies
-	wife=aSpouse and wife.civstat=Civilstatus::married
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 26. The error occured at the token Civilstatus.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 26. The error occured at the token Civilstatus.
-Code:
-context Person::divorce()
-	pre  isMarried: civstat=Civilstatus::married
-	
-context Person::divorce()
-		pre  isAlive: alive
->> OK
-..........................................
-context Person::divorce()
-		pre  husbandAlive: gender=Gender::female implies husband.alive
->> OK
-..........................................
-context Person::divorce()
-		pre  wifeAlive: gender=Gender::male implies wife.alive
->> OK
-..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 27. The error occured at the token Civilstatus.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 3 and column 27. The error occured at the token Civilstatus.
-Code:
-context Person::divorce()
-	post isDivorced: civstat=Civilstatus::divorced
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 10. The error occured at the token isUndefined.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 10. The error occured at the token isUndefined.
-Code:
-context Person::divorce()
-	post husbandDivorced: gender=Gender::female implies
-	husband.isUndefined and husband@pre.civstat=Civilstatus::divorced
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 7. The error occured at the token isUndefined.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 7. The error occured at the token isUndefined.
-Code:
-context Person::divorce()
-	post wifeDivorced: gender=Gender::male implies
-	wife.isUndefined and wife@pre.civstat=Civilstatus::divorced
-	
-context Person::death()
-		pre  isAlive: alive
->> OK
-..........................................
-context Person::death()
-		post notAlive: not(alive)
->> OK
-..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 3 and column 57. The error occured at the token isDefined.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 3 and column 57. The error occured at the token isDefined.
-Code:
-context Person::death()
-	post husbandWidowed: gender=Gender::female and husband.isDefined implies
-	husband@pre.wife.isUndefined and husband@pre.civstat=Civilstatus::widowed
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 3 and column 49. The error occured at the token isDefined.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
-Message/Type: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 3 and column 49. The error occured at the token isDefined.
-Code:
-context Person::death()
-	post wifeWidowed: gender=Gender::male and wife.isDefined implies
-	wife@pre.husband.isUndefined and wife@pre.civstat=Civilstatus::widowed
-	
 
 Statistics:
 ------------------------------------------
-  successful	: 12 
-  failed	 	: 17 
+  successful	: 4 
+  failed	 	: 2 
 
 
 ==========================================
-Checking current model instance against loaded invariants
+Checking Pre Conditions
 ==========================================
-invariants  : 12
-test objects: 4
-total tests : 48
 
-test object: [,Person]
+Test Object:
 ..........................................
+[,Person]
+Method: birth(...)
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post nameAssigned: name=aName -- equivalent to 'aName=self.name'
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::genderAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post genderAssigned: gender=aGender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAliveAssigned
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::aSpouseAlive
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  aSpouseAlive: aSpouse.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::differentGenders
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  differentGenders: gender<>aSpouse.gender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::husbandAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  husbandAlive: gender=Gender::female implies husband.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::wifeAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  wifeAlive: gender=Gender::male implies wife.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::notAlive
--->failed:
-Constraint Specification: 
-context Person::death()
-	post notAlive: not(alive)
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-test object: [,Person]
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post nameAssigned: name=aName -- equivalent to 'aName=self.name'
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::genderAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post genderAssigned: gender=aGender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAliveAssigned
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::aSpouseAlive
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  aSpouseAlive: aSpouse.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::differentGenders
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  differentGenders: gender<>aSpouse.gender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::husbandAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  husbandAlive: gender=Gender::female implies husband.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::wifeAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  wifeAlive: gender=Gender::male implies wife.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::notAlive
--->failed:
-Constraint Specification: 
-context Person::death()
-	post notAlive: not(alive)
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-test object: [,Person]
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post nameAssigned: name=aName -- equivalent to 'aName=self.name'
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::genderAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post genderAssigned: gender=aGender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAliveAssigned
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::aSpouseAlive
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  aSpouseAlive: aSpouse.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::differentGenders
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  differentGenders: gender<>aSpouse.gender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::husbandAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  husbandAlive: gender=Gender::female implies husband.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::wifeAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  wifeAlive: gender=Gender::male implies wife.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::notAlive
--->failed:
-Constraint Specification: 
-context Person::death()
-	post notAlive: not(alive)
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-test object: [,Person]
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameIsUnique
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::nameAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post nameAssigned: name=aName -- equivalent to 'aName=self.name'
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::genderAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post genderAssigned: gender=aGender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAliveAssigned
--->failed:
-Constraint Specification: 
-context Person::birth(aName:String, aGender:Gender)
-	post isAliveAssigned: alive=true -- equivalent to 'alive'
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->failed:
-Constraint Specification: 
-context Person::death()
-	pre  isAlive: alive
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::aSpouseAlive
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  aSpouseAlive: aSpouse.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::differentGenders
--->failed:
-Constraint Specification: 
-context Person::marry(aSpouse:Person)
-	pre  differentGenders: gender<>aSpouse.gender
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.findMethod(JavaOclRoot.java:614)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->failed:
-Constraint Specification: 
-context Person::death()
-	pre  isAlive: alive
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::husbandAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  husbandAlive: gender=Gender::female implies husband.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::wifeAlive
--->failed:
-Constraint Specification: 
-context Person::divorce()
-	pre  wifeAlive: gender=Gender::male implies wife.alive
-	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::isAlive
--->failed:
-Constraint Specification: 
-context Person::death()
-	pre  isAlive: alive
-	
-Result: JavaOclBoolean(false)
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::b2::notAlive
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_pre_prepostBirth_nameNotEmpty
 -->OK.
 ..........................................
 
 Interpretation Statistics:
 ------------------------------------------
-  successful	: 17 
-  failed	 	: 31 
+  successful	: 1 
+  failed	 	: 0 
   skipped	 	: 0 
-  total	 	: 48 
+  total	 	: 1 
+
+
+==========================================
+Checking Post Conditions
+==========================================
+
+Test Object:
+..........................................
+[,Person]
+Method: birth(...)
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_post_prepostBirth_nameAssigned
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_post_prepostBirth_genderAssigned
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_post_prepostBirth_isAliveAssigned
+-->OK.
+..........................................
+
+Interpretation Statistics:
+------------------------------------------
+  successful	: 3 
+  failed	 	: 0 
+  skipped	 	: 0 
+  total	 	: 3 
+
+Start Parsing File: bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostMarry.ocl
+------------------------------------------
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 10. The error occured at the token isDefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 10. The error occured at the token isDefined.
+Code:
+context Person::marry(aSpouse:Person)
+	 pre B2_pre_prepostMarry_aSpouseDefined:
+	aSpouse.isDefined
+	
+context Person::marry(aSpouse:Person)
+		 pre B2_pre_prepostMarry_isAlive:
+		alive
+>> OK
+..........................................
+context Person::marry(aSpouse:Person)
+		 pre B2_pre_prepostMarry_aSpouseAlive:
+		aSpouse.alive
+>> OK
+..........................................
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 11. The error occured at the token Civilstatus.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 11. The error occured at the token Civilstatus.
+Code:
+context Person::marry(aSpouse:Person)
+	 pre B2_pre_prepostMarry_isUnmarried:
+	civstat<>Civilstatus::married
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 19. The error occured at the token Civilstatus.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 19. The error occured at the token Civilstatus.
+Code:
+context Person::marry(aSpouse:Person)
+	 pre B2_pre_prepostMarry_aSpouseUnmarried:
+	aSpouse.civstat<>Civilstatus::married
+	
+context Person::marry(aSpouse:Person)
+		 pre B2_pre_prepostMarry_differentGenders:
+		gender<>aSpouse.gender
+>> OK
+..........................................
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 10. The error occured at the token Civilstatus.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 10. The error occured at the token Civilstatus.
+Code:
+context Person::marry(aSpouse:Person)
+	 post B2_post_prepostMarry_isMarried:
+	civstat=Civilstatus::married
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 5 and column 38. The error occured at the token Civilstatus.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 5 and column 38. The error occured at the token Civilstatus.
+Code:
+context Person::marry(aSpouse:Person)
+	 post B2_post_prepostMarry_femaleHasMarriedHusband:
+	gender=Gender::female implies
+	husband=aSpouse and husband.civstat=Civilstatus::married
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 5 and column 32. The error occured at the token Civilstatus.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 5 and column 32. The error occured at the token Civilstatus.
+Code:
+context Person::marry(aSpouse:Person)
+	 post B2_post_prepostMarry_maleHasMarriedWife:
+	gender=Gender::male implies
+	wife=aSpouse and wife.civstat=Civilstatus::married
+	
+
+Statistics:
+------------------------------------------
+  successful	: 3 
+  failed	 	: 6 
+
+
+==========================================
+Checking Pre Conditions
+==========================================
+
+Test Object:
+..........................................
+[,Person]
+Method: marry(...)
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_pre_prepostMarry_isAlive
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_pre_prepostMarry_aSpouseAlive
+-->failed:
+Constraint Specification: 
+context Person::marry(aSpouse:Person)
+	 pre B2_pre_prepostMarry_aSpouseAlive:
+	aSpouse.alive
+	
+Result: JavaOclInvalid(undefined: Field not found during interpretation of propertyCallExp. The fields name was alive. The source object was JavaOclObject(JavaModelInstanceObject[tudresden.ocl20.benchmark.testdata.b2.Person@bdc6a3]). )
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_pre_prepostMarry_differentGenders
+-->failed:
+Constraint Specification: 
+context Person::marry(aSpouse:Person)
+	 pre B2_pre_prepostMarry_differentGenders:
+	gender<>aSpouse.gender
+	
+Result: JavaOclBoolean(undefined: Field not found during interpretation of propertyCallExp. The fields name was gender. The source object was JavaOclObject(JavaModelInstanceObject[tudresden.ocl20.benchmark.testdata.b2.Person@bdc6a3]). )
+..........................................
+
+Interpretation Statistics:
+------------------------------------------
+  successful	: 1 
+  failed	 	: 2 
+  skipped	 	: 0 
+  total	 	: 3 
+
+
+==========================================
+Checking Post Conditions
+==========================================
+
+Test Object:
+..........................................
+[,Person]
+Method: marry(...)
+
+Interpretation Statistics:
+------------------------------------------
+  successful	: 0 
+  failed	 	: 0 
+  skipped	 	: 0 
+  total	 	: 0 
+
+Start Parsing File: bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostDivorce.ocl
+------------------------------------------
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 10. The error occured at the token Civilstatus.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 10. The error occured at the token Civilstatus.
+Code:
+context Person::divorce()
+	 pre B2_pre_prepostDivorce_isMarried:
+	civstat=Civilstatus::married
+	
+context Person::divorce()
+		 pre B2_pre_prepostDivorce_isAlive:
+		alive
+>> OK
+..........................................
+context Person::divorce()
+		 pre B2_pre_prepostDivorce_husbandAlive:
+		gender=Gender::female implies husband.alive
+>> OK
+..........................................
+context Person::divorce()
+		 pre B2_pre_prepostDivorce_wifeAlive:
+		gender=Gender::male implies wife.alive
+>> OK
+..........................................
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 10. The error occured at the token Civilstatus.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The string denotes neither an enumeration, a type nor a property. Error occured at line 4 and column 10. The error occured at the token Civilstatus.
+Code:
+context Person::divorce()
+	 post B2_post_prepostDivorce_isDivorced:
+	civstat=Civilstatus::divorced
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 5 and column 10. The error occured at the token isUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 5 and column 10. The error occured at the token isUndefined.
+Code:
+context Person::divorce()
+	 post B2_post_prepostDivorce_husbandDivorced:
+	gender=Gender::female implies
+	husband.isUndefined and husband@pre.civstat=Civilstatus::divorced
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 5 and column 7. The error occured at the token isUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: Unable to find property 'isUndefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 5 and column 7. The error occured at the token isUndefined.
+Code:
+context Person::divorce()
+	 post B2_post_prepostDivorce_wifeDivorced:
+	gender=Gender::male implies
+	wife.isUndefined and wife@pre.civstat=Civilstatus::divorced
+	
+
+Statistics:
+------------------------------------------
+  successful	: 3 
+  failed	 	: 4 
+
+
+==========================================
+Checking Pre Conditions
+==========================================
+
+Test Object:
+..........................................
+[,Person]
+Method: divorce(...)
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_pre_prepostDivorce_isAlive
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_pre_prepostDivorce_husbandAlive
+-->failed:
+Constraint Specification: 
+context Person::divorce()
+	 pre B2_pre_prepostDivorce_husbandAlive:
+	gender=Gender::female implies husband.alive
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_pre_prepostDivorce_wifeAlive
+-->failed:
+Constraint Specification: 
+context Person::divorce()
+	 pre B2_pre_prepostDivorce_wifeAlive:
+	gender=Gender::male implies wife.alive
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance.findEnumerationLiteral(JavaModelInstance.java:232)
+..........................................
+
+Interpretation Statistics:
+------------------------------------------
+  successful	: 1 
+  failed	 	: 2 
+  skipped	 	: 0 
+  total	 	: 3 
+
+
+==========================================
+Checking Post Conditions
+==========================================
+
+Test Object:
+..........................................
+[,Person]
+Method: divorce(...)
+
+Interpretation Statistics:
+------------------------------------------
+  successful	: 0 
+  failed	 	: 0 
+  skipped	 	: 0 
+  total	 	: 0 
+
+Start Parsing File: bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepostDeath.ocl
+------------------------------------------
+context Person::death()
+		 pre B2_pre_prepostDeath_isAlive:
+		alive
+>> OK
+..........................................
+context Person::death()
+		 post B2_post_prepostDeath_notAlive:
+		not(alive)
+>> OK
+..........................................
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 36. The error occured at the token isDefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 36. The error occured at the token isDefined.
+Code:
+context Person::death()
+	 post B2_post_prepostDeath_husbandWidowed:
+	gender=Gender::female and husband.isDefined implies
+	husband@pre.wife.isUndefined and husband@pre.civstat=Civilstatus::widowed
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 31. The error occured at the token isDefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: Unable to find property 'isDefined' in type 'root::tudresden::ocl20::benchmark::testdata::b2::Person' An error occured while building an property call expression. Error occured at line 4 and column 31. The error occured at the token isDefined.
+Code:
+context Person::death()
+	 post B2_post_prepostDeath_wifeWidowed:
+	gender=Gender::male and wife.isDefined implies
+	wife@pre.husband.isUndefined and wife@pre.civstat=Civilstatus::widowed
+	
+
+Statistics:
+------------------------------------------
+  successful	: 2 
+  failed	 	: 2 
+
+
+==========================================
+Checking Pre Conditions
+==========================================
+
+Test Object:
+..........................................
+[,Person]
+Method: death(...)
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_pre_prepostDeath_isAlive
+-->OK.
+..........................................
+
+Interpretation Statistics:
+------------------------------------------
+  successful	: 1 
+  failed	 	: 0 
+  skipped	 	: 0 
+  total	 	: 1 
+
+
+==========================================
+Checking Post Conditions
+==========================================
+
+Test Object:
+..........................................
+[,Person]
+Method: death(...)
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::b2::B2_post_prepostDeath_notAlive
+-->OK.
+..........................................
+
+Interpretation Statistics:
+------------------------------------------
+  successful	: 1 
+  failed	 	: 0 
+  skipped	 	: 0 
+  total	 	: 1 

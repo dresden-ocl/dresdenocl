@@ -6,121 +6,93 @@ Log for test B6
 
 Start Parsing File: src/tudresden/ocl20/benchmark/testdata/b6/expressions/determinateness.ocl
 ------------------------------------------
-context Dummy  inv determinateness_1:
+context Dummy  inv B6determinateness_1:
 		let c:Set(Integer) = Set{} in
 		c->any(true) = c->asBag()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_2:
+context Dummy  inv B6determinateness_2:
 		let c:Set(Integer) = Set{} in
 		c->any(true) = c->asSequence()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_3:
+context Dummy  inv B6determinateness_3:
 		let c:Set(Integer) = Set{} in
 		c->any(true) = c->asBag()->asSequence()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_4:
+context Dummy  inv B6determinateness_4:
 		let c:Set(Integer) = Set{} in
 		c->any(true) = c->asSequence()->first()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_5:
+context Dummy  inv B6determinateness_5:
 		let c:Set(Integer) = Set{} in
 		c->any(true) = c->asSequence()->last()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_6:
+context Dummy  inv B6determinateness_6:
 		let c:Set(Integer) = Set{} in
 		c->any(true) = c->asBag()->asSequence()->first()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_7:
+context Dummy  inv B6determinateness_7:
 		let c:Set(Integer) = Set{} in
 		c->any(true) = c->asBag()->asSequence()->last()
-		= true
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_8:
-	let c:Set(Integer) = Set{} in
-	c->any(true) =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))->first()
-	= true
-	
-context Dummy  inv determinateness_9:
+context Dummy  inv B6determinateness_8:
+		let c:Set(Integer) = Set{} in
+		c->any(true) =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))->first()
+>> OK
+..........................................
+context Dummy  inv B6determinateness_9:
 		let c:Set(Integer) = Set{} in
 		Sequence{c}->flatten() = c->asSequence()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_10:
+context Dummy  inv B6determinateness_10:
 		let c:Set(Integer) = Set{} in
 		Sequence{c}->flatten() = c->asBag()->asSequence()
-		= true
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_11:
-	let c:Bag(Integer) = Bag{} in
-	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
-	
-context Dummy  inv determinateness_12:
+context Dummy  inv B6determinateness_11:
+		let c:Bag(Integer) = Bag{} in
+		c->asSequence() =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))
+>> OK
+..........................................
+context Dummy  inv B6determinateness_12:
 		let c:Bag(Integer) = Bag{} in
 		c->any(true) = c->asSequence()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_13:
+context Dummy  inv B6determinateness_13:
 		let c:Bag(Integer) = Bag{} in
 		c->any(true) = c->asSequence()->first()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_14:
+context Dummy  inv B6determinateness_14:
 		let c:Bag(Integer) = Bag{} in
 		c->any(true) = c->asSequence()->last()
-		= true
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_15:
-	let c:Bag(Integer) = Bag{} in
-	c->any(true) =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))->first()
-	= true
-	
-context Dummy  inv determinateness_16:
+context Dummy  inv B6determinateness_15:
+		let c:Bag(Integer) = Bag{} in
+		c->any(true) =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))->first()
+>> OK
+..........................................
+context Dummy  inv B6determinateness_16:
 		let c:Bag(Integer) = Bag{} in
 		Sequence{c}->flatten() = c->asSequence()
-		= true
 >> OK
 ..........................................
 OCL Parse Error
@@ -128,285 +100,241 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source f
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_17:
+context Dummy  inv B6determinateness_17:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->any(true) = c->asBag()->any(true)
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_18:
+context Dummy  inv B6determinateness_18:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->any(true) = c->asSequence()->any(true)
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_19:
+context Dummy  inv B6determinateness_19:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->any(true) = c->asBag()->asSequence()->any(true)
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_20:
+context Dummy  inv B6determinateness_20:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->any(true) = c->asSequence()->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_21:
+context Dummy  inv B6determinateness_21:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->any(true) = c->asSequence()->last()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_22:
+context Dummy  inv B6determinateness_22:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->any(true) = c->asBag()->asSequence()->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_23:
+context Dummy  inv B6determinateness_23:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->any(true) = c->asBag()->asSequence()->last()
-	= true
 	
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_24:
+context Dummy  inv B6determinateness_24:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->any(true) =
-	c->iterate(elem;
+	c->iterate(elem:Integer;
 	r:Sequence(Integer) = Sequence{} |
 	r->including(elem))->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_25:
+context Dummy  inv B6determinateness_25:
 	let c:Set(Integer) = Set{oclUndefined} in
 	Sequence{c}->flatten() = c->asSequence()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_26:
+context Dummy  inv B6determinateness_26:
 	let c:Set(Integer) = Set{oclUndefined} in
 	Sequence{c}->flatten() = c->asBag()->asSequence()
-	= true
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_27:
-	let c:Bag(Integer) = Bag{oclUndefined} in
-	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_28:
+context Dummy  inv B6determinateness_27:
+	let c:Bag(Integer) = Bag{oclUndefined} in
+	c->asSequence() =
+	c->iterate(elem:Integer;
+	r:Sequence(Integer) = Sequence{} |
+	r->including(elem))
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+Code:
+context Dummy  inv B6determinateness_28:
 	let c:Bag(Integer) = Bag{oclUndefined} in
 	c->any(true) = c->asSequence()->any(true)
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_29:
+context Dummy  inv B6determinateness_29:
 	let c:Bag(Integer) = Bag{oclUndefined} in
 	c->any(true) = c->asSequence()->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_30:
+context Dummy  inv B6determinateness_30:
 	let c:Bag(Integer) = Bag{oclUndefined} in
 	c->any(true) = c->asSequence()->last()
-	= true
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_31:
-	let c:Bag(Integer) = Bag{oclUndefined} in
-	c->any(true) =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_32:
+context Dummy  inv B6determinateness_31:
+	let c:Bag(Integer) = Bag{oclUndefined} in
+	c->any(true) =
+	c->iterate(elem:Integer;
+	r:Sequence(Integer) = Sequence{} |
+	r->including(elem))->first()
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+Code:
+context Dummy  inv B6determinateness_32:
 	let c:Bag(Integer) = Bag{oclUndefined} in
 	Sequence{c}->flatten() = c->asSequence()
-	= true
 	
-context Dummy  inv determinateness_33:
+context Dummy  inv B6determinateness_33:
 		let c:Set(Integer) = Set{1} in
 		c->any(true) = c->asBag()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_34:
+context Dummy  inv B6determinateness_34:
 		let c:Set(Integer) = Set{1} in
 		c->any(true) = c->asSequence()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_35:
+context Dummy  inv B6determinateness_35:
 		let c:Set(Integer) = Set{1} in
 		c->any(true) = c->asBag()->asSequence()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_36:
+context Dummy  inv B6determinateness_36:
 		let c:Set(Integer) = Set{1} in
 		c->any(true) = c->asSequence()->first()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_37:
+context Dummy  inv B6determinateness_37:
 		let c:Set(Integer) = Set{1} in
 		c->any(true) = c->asSequence()->last()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_38:
+context Dummy  inv B6determinateness_38:
 		let c:Set(Integer) = Set{1} in
 		c->any(true) = c->asBag()->asSequence()->first()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_39:
+context Dummy  inv B6determinateness_39:
 		let c:Set(Integer) = Set{1} in
 		c->any(true) = c->asBag()->asSequence()->last()
-		= true
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_40:
-	let c:Set(Integer) = Set{1} in
-	c->any(true) =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))->first()
-	= true
-	
-context Dummy  inv determinateness_41:
+context Dummy  inv B6determinateness_40:
+		let c:Set(Integer) = Set{1} in
+		c->any(true) =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))->first()
+>> OK
+..........................................
+context Dummy  inv B6determinateness_41:
 		let c:Set(Integer) = Set{1} in
 		Sequence{c}->flatten() = c->asSequence()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_42:
+context Dummy  inv B6determinateness_42:
 		let c:Set(Integer) = Set{1} in
 		Sequence{c}->flatten() = c->asBag()->asSequence()
-		= true
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_43:
-	let c:Bag(Integer) = Bag{1} in
-	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
-	
-context Dummy  inv determinateness_44:
+context Dummy  inv B6determinateness_43:
+		let c:Bag(Integer) = Bag{1} in
+		c->asSequence() =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))
+>> OK
+..........................................
+context Dummy  inv B6determinateness_44:
 		let c:Bag(Integer) = Bag{1} in
 		c->any(true) = c->asSequence()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_45:
+context Dummy  inv B6determinateness_45:
 		let c:Bag(Integer) = Bag{1} in
 		c->any(true) = c->asSequence()->first()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_46:
+context Dummy  inv B6determinateness_46:
 		let c:Bag(Integer) = Bag{1} in
 		c->any(true) = c->asSequence()->last()
-		= true
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_47:
-	let c:Bag(Integer) = Bag{1} in
-	c->any(true) =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))->first()
-	= true
-	
-context Dummy  inv determinateness_48:
+context Dummy  inv B6determinateness_47:
+		let c:Bag(Integer) = Bag{1} in
+		c->any(true) =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))->first()
+>> OK
+..........................................
+context Dummy  inv B6determinateness_48:
 		let c:Bag(Integer) = Bag{1} in
 		Sequence{c}->flatten() = c->asSequence()
-		= true
 >> OK
 ..........................................
 OCL Parse Error
@@ -414,7 +342,7 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source f
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_49:
+context Dummy  inv B6determinateness_49:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asBag()->any(true)
 	= false
@@ -424,17 +352,16 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source f
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_50:
+context Dummy  inv B6determinateness_50:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asSequence()->any(true)
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_51:
+context Dummy  inv B6determinateness_51:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asBag()->asSequence()->any(true)
 	= false
@@ -444,17 +371,16 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source f
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_52:
+context Dummy  inv B6determinateness_52:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asSequence()->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_53:
+context Dummy  inv B6determinateness_53:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asSequence()->last()
 	= false
@@ -464,7 +390,7 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source f
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_54:
+context Dummy  inv B6determinateness_54:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asBag()->asSequence()->first()
 	= false
@@ -474,549 +400,541 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source f
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_55:
+context Dummy  inv B6determinateness_55:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asBag()->asSequence()->last()
-	= true
 	
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_56:
+context Dummy  inv B6determinateness_56:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) =
-	c->iterate(elem;
+	c->iterate(elem:Integer;
 	r:Sequence(Integer) = Sequence{} |
 	r->including(elem))->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_57:
+context Dummy  inv B6determinateness_57:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	Sequence{c}->flatten() = c->asSequence()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_58:
+context Dummy  inv B6determinateness_58:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	Sequence{c}->flatten() = c->asBag()->asSequence()
 	= false
 	
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [6,17] expecting: '=' The error ocurred in line 6 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [6,17] expecting: '=' The error ocurred in line 6 and column 17 at the token ;.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 Code:
-context Dummy  inv determinateness_59:
+context Dummy  inv B6determinateness_59:
 	let c = Bag{oclUndefined, 1, -1, 3, 2, 0,
 	oclUndefined} in
 	c->asSequence() =
-	c->iterate(elem;
+	c->iterate(elem:Integer;
 	r:Sequence(Integer) = Sequence{} |
 	r->including(elem)
 	)
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 Code:
-context Dummy  inv determinateness_60:
+context Dummy  inv B6determinateness_60:
 	let c = Bag{oclUndefined, 1, -1, 3, 2, 0,
 	oclUndefined} in
 	c->any(true) = c->asSequence()->any(true)
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 Code:
-context Dummy  inv determinateness_61:
+context Dummy  inv B6determinateness_61:
 	let c = Bag{oclUndefined, 1, -1, 3, 2, 0,
 	oclUndefined} in
 	c->any(true) = c->asSequence()->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 Code:
-context Dummy  inv determinateness_62:
+context Dummy  inv B6determinateness_62:
 	let c = Bag{oclUndefined, 1, -1, 3, 2, 0,
 	oclUndefined} in
 	c->any(true) = c->asSequence()->last()
 	= false
 	
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [6,17] expecting: '=' The error ocurred in line 6 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [6,17] expecting: '=' The error ocurred in line 6 and column 17 at the token ;.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 Code:
-context Dummy  inv determinateness_63:
+context Dummy  inv B6determinateness_63:
 	let c = Bag{oclUndefined, 1, -1, 3, 2, 0,
 	oclUndefined} in
 	c->any(true) =
-	c->iterate(elem;
+	c->iterate(elem:Integer;
 	r:Sequence(Integer) = Sequence{} |
 	r->including(elem))->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: The variable has no type. Error occured at line 3 and column 6. The error occured at the token c.
 Code:
-context Dummy  inv determinateness_64:
+context Dummy  inv B6determinateness_64:
 	let c = Bag{oclUndefined, 1, -1, 3, 2, 0,
 	oclUndefined} in
 	Sequence{c}->flatten() = c->asSequence()
-	= true
 	
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_65:
+context Dummy  inv B6determinateness_65:
 	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
 	c->asSequence() =
-	c->iterate(elem;
+	c->iterate(elem:Integer;
 	r:Sequence(Integer) = Sequence{} |
 	r->including(elem))
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_66:
+context Dummy  inv B6determinateness_66:
 	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asSequence()->any(true)
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_67:
+context Dummy  inv B6determinateness_67:
 	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asSequence()->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_68:
+context Dummy  inv B6determinateness_68:
 	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) = c->asSequence()->last()
 	= false
 	
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_69:
+context Dummy  inv B6determinateness_69:
 	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
 	c->any(true) =
-	c->iterate(elem;
+	c->iterate(elem:Integer;
 	r:Sequence(Integer) = Sequence{} |
 	r->including(elem))->first()
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv determinateness_70:
+context Dummy  inv B6determinateness_70:
 	let c:Bag(Integer) = Bag{oclUndefined, 1, -1, 3, 2, 0} in
 	Sequence{c}->flatten() = c->asSequence()
-	= true
 	
-context Dummy  inv determinateness_71:
+context Dummy  inv B6determinateness_71:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		c->any(true) = c->asBag()->any(true)
 		= false
 >> OK
 ..........................................
-context Dummy  inv determinateness_72:
+context Dummy  inv B6determinateness_72:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		c->any(true) = c->asSequence()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_73:
+context Dummy  inv B6determinateness_73:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		c->any(true) = c->asBag()->asSequence()->any(true)
 		= false
 >> OK
 ..........................................
-context Dummy  inv determinateness_74:
+context Dummy  inv B6determinateness_74:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		c->any(true) = c->asSequence()->first()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_75:
+context Dummy  inv B6determinateness_75:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		c->any(true) = c->asSequence()->last()
 		= false
 >> OK
 ..........................................
-context Dummy  inv determinateness_76:
+context Dummy  inv B6determinateness_76:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		c->any(true) = c->asBag()->asSequence()->first()
 		= false
 >> OK
 ..........................................
-context Dummy  inv determinateness_77:
+context Dummy  inv B6determinateness_77:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		c->any(true) = c->asBag()->asSequence()->last()
-		= true
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_78:
-	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
-	c->any(true) =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))->first()
-	= true
-	
-context Dummy  inv determinateness_79:
+context Dummy  inv B6determinateness_78:
+		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+		c->any(true) =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))->first()
+>> OK
+..........................................
+context Dummy  inv B6determinateness_79:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		Sequence{c}->flatten() = c->asSequence()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_80:
+context Dummy  inv B6determinateness_80:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		Sequence{c}->flatten() = c->asBag()->asSequence()
 		= false
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_81:
-	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
-	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
-	
-context Dummy  inv determinateness_82:
+context Dummy  inv B6determinateness_81:
+		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+		c->asSequence() =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))
+>> OK
+..........................................
+context Dummy  inv B6determinateness_82:
 		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
 		c->any(true) = c->asSequence()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_83:
+context Dummy  inv B6determinateness_83:
 		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
 		c->any(true) = c->asSequence()->first()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_84:
+context Dummy  inv B6determinateness_84:
 		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
 		c->any(true) = c->asSequence()->last()
 		= false
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_85:
-	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
-	c->any(true) =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))->first()
-	= true
-	
-context Dummy  inv determinateness_86:
+context Dummy  inv B6determinateness_85:
+		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+		c->any(true) =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))->first()
+>> OK
+..........................................
+context Dummy  inv B6determinateness_86:
 		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
 		Sequence{c}->flatten() = c->asSequence()
-		= true
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_87:
-	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
-	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
-	
-context Dummy  inv determinateness_88:
+context Dummy  inv B6determinateness_87:
+		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+		c->asSequence() =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))
+>> OK
+..........................................
+context Dummy  inv B6determinateness_88:
 		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
 		c->any(true) = c->asSequence()->any(true)
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_89:
+context Dummy  inv B6determinateness_89:
 		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
 		c->any(true) = c->asSequence()->first()
-		= true
 >> OK
 ..........................................
-context Dummy  inv determinateness_90:
+context Dummy  inv B6determinateness_90:
 		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
 		c->any(true) = c->asSequence()->last()
 		= false
 >> OK
 ..........................................
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv determinateness_91:
-	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
-	c->any(true) =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))->first()
-	= true
-	
+context Dummy  inv B6determinateness_91:
+		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+		c->any(true) =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))->first()
+>> OK
+..........................................
+context Dummy  inv B6determinateness_92:
+		let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+		Sequence{c}->flatten() = c->asSequence()
+>> OK
+..........................................
 
 Statistics:
 ------------------------------------------
-  successful	: 42 
-  failed	 	: 49 
+  successful	: 54 
+  failed	 	: 38 
 
 
 ==========================================
 Checking current model instance against loaded invariants
 ==========================================
-invariants  : 42
+invariants  : 54
 test objects: 1
-total tests : 42
+total tests : 54
 
 test object: [,Dummy]
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_1
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_1
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_1:
+context Dummy  inv B6determinateness_1:
 	let c:Set(Integer) = Set{} in
 	c->any(true) = c->asBag()->any(true)
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_2
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_2
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_2:
+context Dummy  inv B6determinateness_2:
 	let c:Set(Integer) = Set{} in
 	c->any(true) = c->asSequence()->any(true)
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_3
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_3
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_3:
+context Dummy  inv B6determinateness_3:
 	let c:Set(Integer) = Set{} in
 	c->any(true) = c->asBag()->asSequence()->any(true)
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_4
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_4
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_4:
+context Dummy  inv B6determinateness_4:
 	let c:Set(Integer) = Set{} in
 	c->any(true) = c->asSequence()->first()
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_5
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_5
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_5:
+context Dummy  inv B6determinateness_5:
 	let c:Set(Integer) = Set{} in
 	c->any(true) = c->asSequence()->last()
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_6
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_6
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_6:
+context Dummy  inv B6determinateness_6:
 	let c:Set(Integer) = Set{} in
 	c->any(true) = c->asBag()->asSequence()->first()
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_7
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_7
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_7:
+context Dummy  inv B6determinateness_7:
 	let c:Set(Integer) = Set{} in
 	c->any(true) = c->asBag()->asSequence()->last()
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_9
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_10
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_12
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_8
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_12:
+context Dummy  inv B6determinateness_8:
+	let c:Set(Integer) = Set{} in
+	c->any(true) =
+	c->iterate(elem:Integer;
+	r:Sequence(Integer) = Sequence{} |
+	r->including(elem))->first()
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.interpreter.internal.OclInterpreter.caseOperationCallExp(OclInterpreter.java:2189)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_9
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_10
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_11
+-->failed:
+Constraint Specification: 
+context Dummy  inv B6determinateness_11:
+	let c:Bag(Integer) = Bag{} in
+	c->asSequence() =
+	c->iterate(elem:Integer;
+	r:Sequence(Integer) = Sequence{} |
+	r->including(elem))
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.invokeLibraryOperation(JavaOclRoot.java:757)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_12
+-->failed:
+Constraint Specification: 
+context Dummy  inv B6determinateness_12:
 	let c:Bag(Integer) = Bag{} in
 	c->any(true) = c->asSequence()->any(true)
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_13
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_13
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_13:
+context Dummy  inv B6determinateness_13:
 	let c:Bag(Integer) = Bag{} in
 	c->any(true) = c->asSequence()->first()
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_14
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_14
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_14:
+context Dummy  inv B6determinateness_14:
 	let c:Bag(Integer) = Bag{} in
 	c->any(true) = c->asSequence()->last()
-	= true
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Iterator any() resulted in undefined.)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_16
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_33
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_34
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_35
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_36
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_37
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_38
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_39
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_41
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_42
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_44
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_45
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_46
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_48
--->OK.
-..........................................
-
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_71
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_15
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_71:
+context Dummy  inv B6determinateness_15:
+	let c:Bag(Integer) = Bag{} in
+	c->any(true) =
+	c->iterate(elem:Integer;
+	r:Sequence(Integer) = Sequence{} |
+	r->including(elem))->first()
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.interpreter.internal.OclInterpreter.caseOperationCallExp(OclInterpreter.java:2189)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_16
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_33
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_34
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_35
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_36
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_37
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_38
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_39
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_40
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_41
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_42
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_43
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_44
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_45
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_46
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_47
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_48
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_71
+-->failed:
+Constraint Specification: 
+context Dummy  inv B6determinateness_71:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 	c->any(true) = c->asBag()->any(true)
 	= false
@@ -1024,14 +942,14 @@ context Dummy  inv determinateness_71:
 Result: JavaOclBoolean(false)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_72
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_72
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_73
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_73
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_73:
+context Dummy  inv B6determinateness_73:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 	c->any(true) = c->asBag()->asSequence()->any(true)
 	= false
@@ -1039,18 +957,18 @@ context Dummy  inv determinateness_73:
 Result: JavaOclBoolean(false)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_74
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_74
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_75
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_75
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_76
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_76
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_76:
+context Dummy  inv B6determinateness_76:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 	c->any(true) = c->asBag()->asSequence()->first()
 	= false
@@ -1058,25 +976,28 @@ context Dummy  inv determinateness_76:
 Result: JavaOclBoolean(false)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_77
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_77
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_77:
+context Dummy  inv B6determinateness_77:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 	c->any(true) = c->asBag()->asSequence()->last()
-	= true
 	
 Result: JavaOclBoolean(false)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_79
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_78
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_80
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_79
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_80
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_80:
+context Dummy  inv B6determinateness_80:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 	Sequence{c}->flatten() = c->asBag()->asSequence()
 	= false
@@ -1084,18 +1005,22 @@ context Dummy  inv determinateness_80:
 Result: JavaOclBoolean(false)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_82
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_81
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_83
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_82
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_84
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_83
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_84
 -->failed:
 Constraint Specification: 
-context Dummy  inv determinateness_84:
+context Dummy  inv B6determinateness_84:
 	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
 	c->any(true) = c->asSequence()->last()
 	= false
@@ -1103,70 +1028,78 @@ context Dummy  inv determinateness_84:
 Result: JavaOclBoolean(false)
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_86
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_85
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_88
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_86
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_89
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_87
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::determinateness_90
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_88
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_89
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_90
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_91
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6determinateness_92
 -->OK.
 ..........................................
 
 Interpretation Statistics:
 ------------------------------------------
-  successful	: 26 
-  failed	 	: 16 
+  successful	: 35 
+  failed	 	: 19 
   skipped	 	: 0 
-  total	 	: 42 
+  total	 	: 54 
 
 Start Parsing File: src/tudresden/ocl20/benchmark/testdata/b6/expressions/conversion2sequence.ocl
 ------------------------------------------
-context Dummy  inv conversion2sequence_1:
+context Dummy  inv B6conversion2sequence_1:
 		let c:Set(Integer) = Set{} in
 		c->asSequence() = c->asBag()->asSequence()
-		= true
+>> OK
+..........................................
+context Dummy  inv B6conversion2sequence_2:
+		let c:Set(Integer) = Set{} in
+		c->asSequence() =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))
 >> OK
 ..........................................
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+Message/Type: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
 Code:
-context Dummy  inv conversion2sequence_2:
+context Dummy  inv B6conversion2sequence_3:
 	let c:Set(Integer) = Set{} in
 	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-Code:
-context Dummy  inv conversion2sequence_3:
-	let c:Set(Integer) = Set{} in
-	c->asSequence() =
-	c->iterate(u;
+	c->iterate(u:Integer;
 	r:Tuple(theSet:Set(Integer), theSeq:Sequence(Integer)) =
 	Tuple{theSet:c,theSeq:Sequence{}} |
 	let e = r.theSet->any(true) in
 	Tuple{theSet:r.theSet->excluding(e),
 	theSeq:r.theSeq->including(e)}).theSeq
-	= true
 	
-context Dummy  inv conversion2sequence_4:
+context Dummy  inv B6conversion2sequence_4:
 		let c:Set(Integer) = Set{} in
 		c->asSequence() = Sequence{c}->flatten()
-		= true
 >> OK
 ..........................................
 OCL Parse Error
@@ -1174,87 +1107,75 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source f
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv conversion2sequence_5:
+context Dummy  inv B6conversion2sequence_5:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->asSequence() = c->asBag()->asSequence()
-	= true
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv conversion2sequence_6:
-	let c:Set(Integer) = Set{oclUndefined} in
-	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-Code:
-context Dummy  inv conversion2sequence_7:
-	let c:Set(Integer) = Set{oclUndefined} in
-	c->asSequence() =
-	c->iterate(u;
-	r:Tuple(theSet:Set(Integer),theSeq:Sequence(Integer)) =
-	Tuple{theSet:c,theSeq:Sequence{}} |
-	let e = r.theSet->any(true) in
-	Tuple{theSet:r.theSet->excluding(e),
-	theSeq:r.theSeq->including(e)}).theSeq
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv conversion2sequence_8:
+context Dummy  inv B6conversion2sequence_6:
+	let c:Set(Integer) = Set{oclUndefined} in
+	c->asSequence() =
+	c->iterate(elem:Integer;
+	r:Sequence(Integer) = Sequence{} |
+	r->including(elem))
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
+Message/Type: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
+Code:
+context Dummy  inv B6conversion2sequence_7:
+	let c:Set(Integer) = Set{oclUndefined} in
+	c->asSequence() =
+	c->iterate(u:Integer;
+	r:Tuple(theSet:Set(Integer),theSeq:Sequence(Integer)) =
+	Tuple{theSet:c,theSeq:Sequence{}} |
+	let e = r.theSet->any(true) in
+	Tuple{theSet:r.theSet->excluding(e),
+	theSeq:r.theSeq->including(e)}).theSeq
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+Code:
+context Dummy  inv B6conversion2sequence_8:
 	let c:Set(Integer) = Set{oclUndefined} in
 	c->asSequence() = Sequence{c}->flatten()
-	= true
 	
-context Dummy  inv conversion2sequence_9:
+context Dummy  inv B6conversion2sequence_9:
 		let c:Set(Integer) = Set{1} in c->asSequence() = c->asBag()->asSequence()
-		= true
+>> OK
+..........................................
+context Dummy  inv B6conversion2sequence_10:
+		let c:Set(Integer) = Set{1} in
+		c->asSequence() =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))
 >> OK
 ..........................................
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+Message/Type: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
 Code:
-context Dummy  inv conversion2sequence_10:
+context Dummy  inv B6conversion2sequence_11:
 	let c:Set(Integer) = Set{1} in
 	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-Code:
-context Dummy  inv conversion2sequence_11:
-	let c:Set(Integer) = Set{1} in
-	c->asSequence() =
-	c->iterate(u;
+	c->iterate(u:Integer;
 	r:Tuple(theSet:Set(Integer),theSeq:Sequence(Integer)) =
 	Tuple{theSet:c,theSeq:Sequence{}} |
 	let e = r.theSet->any(true) in
 	Tuple{theSet:r.theSet->excluding(e),
 	theSeq:r.theSeq->including(e)}).theSeq
-	= true
 	
-context Dummy  inv conversion2sequence_12:
+context Dummy  inv B6conversion2sequence_12:
 		let c:Set(Integer) = Set{1} in c->asSequence() = Sequence{c}->flatten()
-		= true
 >> OK
 ..........................................
 OCL Parse Error
@@ -1262,125 +1183,145 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source f
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv conversion2sequence_13:
+context Dummy  inv B6conversion2sequence_13:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->asSequence() = c->asBag()->asSequence()
-	= true
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
-Code:
-context Dummy  inv conversion2sequence_14:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
-	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-Code:
-context Dummy  inv conversion2sequence_15:
-	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
-	c->asSequence() =
-	c->iterate(u;
-	r:Tuple(theSet:Set(Integer),theSeq:Sequence(Integer)) =
-	Tuple{theSet:c,theSeq:Sequence{}} |
-	let e = r.theSet->any(true) in
-	Tuple{theSet:r.theSet->excluding(e),
-	theSeq:r.theSeq->including(e)}).theSeq
-	= true
 	
 OCL Parse Error
 tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
 Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
 Code:
-context Dummy  inv conversion2sequence_16:
+context Dummy  inv B6conversion2sequence_14:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+	c->asSequence() =
+	c->iterate(elem:Integer;
+	r:Sequence(Integer) = Sequence{} |
+	r->including(elem))
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
+Message/Type: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
+Code:
+context Dummy  inv B6conversion2sequence_15:
+	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
+	c->asSequence() =
+	c->iterate(u:Integer;
+	r:Tuple(theSet:Set(Integer),theSeq:Sequence(Integer)) =
+	Tuple{theSet:c,theSeq:Sequence{}} |
+	let e = r.theSet->any(true) in
+	Tuple{theSet:r.theSet->excluding(e),
+	theSeq:r.theSeq->including(e)}).theSeq
+	
+OCL Parse Error
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:95)
+Message/Type: A source for the property was not found. Error occured at line 3 and column 27. The error occured at the token oclUndefined.
+Code:
+context Dummy  inv B6conversion2sequence_16:
 	let c:Set(Integer) = Set{oclUndefined, 1, -1, 3, 2, 0} in
 	c->asSequence() = Sequence{c}->flatten()
-	= true
 	
-context Dummy  inv conversion2sequence_17:
+context Dummy  inv B6conversion2sequence_17:
 		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 		c->asSequence() = c->asBag()->asSequence()
-		= true
+>> OK
+..........................................
+context Dummy  inv B6conversion2sequence_18:
+		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+		c->asSequence() =
+		c->iterate(elem:Integer;
+		r:Sequence(Integer) = Sequence{} |
+		r->including(elem))
 >> OK
 ..........................................
 OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,17] expecting: '=' The error ocurred in line 5 and column 17 at the token ;.
+Message/Type: [6,4] expecting: 'Bag', 'Collection', 'OrderedSet', 'Sequence', 'Set', 'TupleType', 'oclIsTypeOf', 'oclIsKindOf', 'oclAsType', simple name The error ocurred in line 6 and column 4 at the token Tuple.
 Code:
-context Dummy  inv conversion2sequence_18:
+context Dummy  inv B6conversion2sequence_19:
 	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
 	c->asSequence() =
-	c->iterate(elem;
-	r:Sequence(Integer) = Sequence{} |
-	r->including(elem))
-	= true
-	
-OCL Parse Error
-tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
-Message/Type: [5,14] expecting: '=' The error ocurred in line 5 and column 14 at the token ;.
-Code:
-context Dummy  inv conversion2sequence_19:
-	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
-	c->asSequence() =
-	c->iterate(u;
+	c->iterate(u:Integer;
 	r:Tuple(theSet:Set(Integer),theSeq:Sequence(Integer)) =
 	Tuple{theSet:c,theSeq:Sequence{}} |
 	let e = r.theSet->any(true) in
 	Tuple{theSet:r.theSet->excluding(e),
 	theSeq:r.theSeq->including(e)}).theSeq
-	= true
 	
+context Dummy  inv B6conversion2sequence_20:
+		let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+		c->asSequence() = Sequence{c}->flatten()
+>> OK
+..........................................
 
 Statistics:
 ------------------------------------------
-  successful	: 5 
-  failed	 	: 14 
+  successful	: 9 
+  failed	 	: 11 
 
 
 ==========================================
 Checking current model instance against loaded invariants
 ==========================================
-invariants  : 47
+invariants  : 9
 test objects: 1
-total tests : 47
+total tests : 9
 
 test object: [,Dummy]
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::conversion2sequence_1
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6conversion2sequence_1
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::conversion2sequence_4
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6conversion2sequence_2
+-->failed:
+Constraint Specification: 
+context Dummy  inv B6conversion2sequence_2:
+	let c:Set(Integer) = Set{} in
+	c->asSequence() =
+	c->iterate(elem:Integer;
+	r:Sequence(Integer) = Sequence{} |
+	r->including(elem))
+	
+java.lang.NullPointerException
+	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot.invokeLibraryOperation(JavaOclRoot.java:757)
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6conversion2sequence_4
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::conversion2sequence_9
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6conversion2sequence_9
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::conversion2sequence_12
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6conversion2sequence_10
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::conversion2sequence_17
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6conversion2sequence_12
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6conversion2sequence_17
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6conversion2sequence_18
+-->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B6conversion2sequence_20
 -->OK.
 ..........................................
 
 Interpretation Statistics:
 ------------------------------------------
-  successful	: 5 
-  failed	 	: 0 
+  successful	: 8 
+  failed	 	: 1 
   skipped	 	: 0 
-  total	 	: 5 
+  total	 	: 9 

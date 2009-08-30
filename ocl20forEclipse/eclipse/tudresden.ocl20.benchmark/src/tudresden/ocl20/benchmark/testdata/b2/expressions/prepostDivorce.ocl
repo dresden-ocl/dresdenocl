@@ -1,0 +1,40 @@
+package tudresden::ocl20::benchmark::testdata::b2
+
+----------------------------------------
+-- Pre and Post Conditions
+-- for method divorce
+----------------------------------------
+
+	
+context Person::divorce()
+  pre  isMarried:
+	 civstat=Civilstatus::married
+
+context Person::divorce()
+  pre  isAlive:
+	 alive
+
+context Person::divorce()
+  pre  husbandAlive:
+	 gender=Gender::female implies husband.alive
+
+context Person::divorce()
+  pre  wifeAlive:
+	 gender=Gender::male implies wife.alive
+
+context Person::divorce()
+  post isDivorced:
+	 civstat=Civilstatus::divorced
+
+context Person::divorce()
+  post husbandDivorced:
+	 gender=Gender::female implies
+     husband.isUndefined and husband@pre.civstat=Civilstatus::divorced
+     
+context Person::divorce()
+  post wifeDivorced:
+	 gender=Gender::male implies
+     wife.isUndefined and wife@pre.civstat=Civilstatus::divorced
+
+------------------------------------------------------------------------
+endpackage

@@ -17,40 +17,34 @@ package tudresden::ocl20::benchmark::testdata::common
 context Dummy inv: 
 	let c:Set(Integer) = Set{} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
              (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
              (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
              (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Singleton
 
 -- -- -- -- -- Includes Undefined
@@ -60,40 +54,34 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Set(Integer) = Set{ oclUndefined } in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Bag
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{ oclUndefined } in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Sequence
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{ oclUndefined } in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- -- Expression e fulfilled
@@ -103,40 +91,34 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Set(Integer) = Set{1} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{1} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{1} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Expression e not fulfilled
 
 -- -- -- -- -- -- -- Set ------------------------------------------
@@ -144,40 +126,34 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Set(Integer) = Set{4} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{4} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{4} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Many Elements
 
 -- -- -- -- -- Includes Undefined
@@ -187,14 +163,12 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Set(Integer) = Set{ oclUndefined , 1, 4, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- Equal Values
@@ -203,27 +177,23 @@ context Dummy inv:
 	let c:Bag(Integer) = Bag{ oclUndefined , 1, 4, 5, 
                    oclUndefined } in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{ oclUndefined , 1, 4, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- Equal Values
@@ -232,27 +202,23 @@ context Dummy inv:
 	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 4, 5, 
                         oclUndefined } in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{ oclUndefined , 1, 4, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- -- Expression e fulfilled
@@ -262,14 +228,12 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Set(Integer) = Set{1, 4, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- -- Equal Values
@@ -277,27 +241,23 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{1, 4, 5, 4} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{1, 4, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- -- Equal Values
@@ -305,27 +265,23 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{1, 4, 5, 4} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{1, 4, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Expression e not fulfilled
 
 -- -- -- -- -- -- -- Set ------------------------------------------
@@ -333,14 +289,12 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Set(Integer) = Set{1, 2, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
@@ -348,40 +302,34 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{1, 2, 5, 1} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{1, 2, 5, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Bag(Integer) = Bag{1, 2, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
@@ -389,38 +337,32 @@ context Dummy inv:
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 5, 1} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 5, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
 	let c:Sequence(Integer) = Sequence{1, 2, 5} in 
    c->one(i|i<4) = 
-     c->iterate(i; r:Sequence(Boolean) = Sequence{false,false} | 
+     c->iterate(i:Integer; r:Sequence(Boolean) = Sequence{false,false} | 
            if r->first() then Sequence{true,false} 
            else Sequence{r->last() and i<4, 
            (r->last() and i<4) xor (r->last() or i<4)} endif)->last()
 
-  -- Expected Result:
-  = true
-
+  
 endpackage

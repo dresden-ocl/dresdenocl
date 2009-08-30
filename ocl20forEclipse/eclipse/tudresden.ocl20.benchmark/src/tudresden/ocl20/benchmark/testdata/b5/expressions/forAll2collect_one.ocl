@@ -21,9 +21,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in 
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -32,9 +30,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -43,9 +39,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Singleton
 
 -- -- -- -- -- Includes Undefined
@@ -58,9 +52,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -69,9 +61,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -80,9 +70,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- -- Expression e fulfilled
@@ -95,9 +83,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -106,9 +92,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -117,9 +101,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Expression e not fulfilled
 
 -- -- -- -- -- -- -- Set -------------------------------------------
@@ -130,9 +112,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -141,9 +121,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -152,9 +130,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Many Elements
 
 -- -- -- -- -- Includes Undefined
@@ -167,9 +143,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- Equal Values
@@ -181,9 +155,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -192,9 +164,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- Equal Values
@@ -206,9 +176,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -217,9 +185,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- -- Expression e fulfilled
@@ -232,9 +198,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- -- Equal Values
@@ -245,9 +209,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -256,9 +218,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- -- Equal Values
@@ -269,9 +229,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -280,9 +238,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Expression e not fulfilled
 
 -- -- -- -- -- -- -- Set ------------------------------------------
@@ -293,9 +249,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
@@ -306,9 +260,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
 context Dummy inv: 
@@ -317,9 +269,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -328,9 +278,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
@@ -341,9 +289,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
 context Dummy inv: 
@@ -352,9 +298,7 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -363,7 +307,5 @@ context Dummy inv:
          (let s = c->collect(i|i<4)->asSet() in
        c->notEmpty() implies s->one(true) and s->one(e|e))
 
-  -- Expected Result:
-  = true
-
+  
 endpackage

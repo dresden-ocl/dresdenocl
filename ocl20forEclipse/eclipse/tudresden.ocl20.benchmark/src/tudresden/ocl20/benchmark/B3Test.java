@@ -50,22 +50,6 @@ public class B3Test extends BaseTest
 			
 		perf.checkActiveInvariants();
 		
-	}
-	
-	
-	/**
-	 * Test pre post of B3.
-	 */
-	@Test
-	public void testPrePost()
-	{
-		perf.loadModelInstance("bin/tudresden/ocl20/benchmark/testdata/b2/ModelInstance.class");
-		
-		perf.safeLoadStatementFile("bin/tudresden/ocl20/benchmark/testData/b2/expressions/prepost.ocl");
-		
-		perf.checkActiveInvariants();
-		
-	}
-	
+	}	
 	
 }

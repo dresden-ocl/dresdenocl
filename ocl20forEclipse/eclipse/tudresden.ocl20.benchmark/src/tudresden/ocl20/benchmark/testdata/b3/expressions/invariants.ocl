@@ -7,9 +7,5 @@ context Exam inv threeParticipants:
 
 context Exam inv threeParticipants2:
   Set{self.examinee,self.examiner,self.recorder}->size()=3
-  
--- context Exam inv exam01pro_1:
---  Exam.allInstances()->select(e|e.examinee.name='Ada').first().examinee.name = 'Ada'
 
-  
 endpackage

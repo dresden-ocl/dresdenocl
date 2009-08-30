@@ -19,9 +19,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -29,9 +27,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -39,9 +35,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Singleton
 
 -- -- -- -- -- Includes Undefined
@@ -53,9 +47,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -63,9 +55,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -73,9 +63,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- -- Expression e fulfilled
@@ -87,9 +75,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -97,9 +83,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -107,9 +91,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Expression e not fulfilled
 
 -- -- -- -- -- -- -- Set ------------------------------------------
@@ -119,9 +101,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 context Dummy inv: 
@@ -129,9 +109,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 context Dummy inv: 
@@ -139,9 +117,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- Many Elements
 
 -- -- -- -- -- Includes Undefined
@@ -153,9 +129,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- Equal Values
@@ -166,9 +140,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -176,9 +148,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- Equal Values
@@ -189,9 +159,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -199,9 +167,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- Excludes Undefined
 
 -- -- -- -- -- -- Expression e fulfilled
@@ -213,9 +179,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- -- Equal Values
@@ -225,9 +189,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -235,9 +197,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- -- Equal Values
@@ -247,9 +207,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -257,9 +215,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- Expression e not fulfilled
 
 -- -- -- -- -- -- -- Set ------------------------------------------
@@ -269,9 +225,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- -- Equal Values (violating)
@@ -281,9 +235,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- Equal Values (not violating)
 
 context Dummy inv: 
@@ -291,9 +243,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -301,9 +251,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- -- Equal Values (both violating)
@@ -313,9 +261,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
 context Dummy inv: 
@@ -323,9 +269,7 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv: 
@@ -333,8 +277,6 @@ context Dummy inv:
    c->one(i|i<4) =
          (c->exists(i|i<4) and c->forAll(x,y|x<4 and y<4 implies x = y))
 
-  -- Expected Result:
-  = true
-
+  
   
 endpackage

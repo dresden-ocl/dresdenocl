@@ -68,12 +68,11 @@ public class ModelInstance {
 
 		dan = new Person("Dan", CivilStatus.single, Gender.male, true);
 		
-		cyd.die();
+		cyd.death();
 		ada.civstat = CivilStatus.widowed;
 		
 		PersonMap result = new PersonMap(5);
 		
-		result.add(ada);
 		result.add(ada);
 		result.add(bob);
 		result.add(cyd);

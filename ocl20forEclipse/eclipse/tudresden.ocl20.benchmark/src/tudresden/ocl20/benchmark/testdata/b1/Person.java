@@ -129,10 +129,10 @@ public class Person {
 	public void setSpouse(Person p)
 	{
 		if(this.gender == "female"){
-			assert(p.gender == "male");
+			assert(p==null || p.gender == "male");
 			this.husband = p;
 		}else{
-			assert(p.gender == "female");
+			assert(p==null || p.gender == "female");
 			this.wife = p;
 		}
 	}

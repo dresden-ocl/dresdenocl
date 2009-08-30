@@ -21,8 +21,6 @@ context Dummy inv:
 let c:Set(Integer) = Set{} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- Bag
 
@@ -30,8 +28,6 @@ context Dummy inv:
 let c:Bag(Integer) = Bag{} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- Sequence
 
@@ -39,8 +35,6 @@ context Dummy inv:
 let c:Sequence(Integer) = Sequence{} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- Singleton
 
@@ -49,29 +43,23 @@ let c:Sequence(Integer) = Sequence{} in
 -- -- -- -- -- -- Set ---------------------------------------------
 
 context Dummy inv:
-let c:Set(Integer) = Set{oclUndefined(Integer)} in 
+let c:Set(Integer) = Set{oclUndefined} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- Bag
 
 context Dummy inv:
-let c:Bag(Integer) = Bag{oclUndefined(Integer)} in 
+let c:Bag(Integer) = Bag{oclUndefined} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- Sequence
 
 context Dummy inv:
-let c:Sequence(Integer) = Sequence{oclUndefined(Integer)} 
+let c:Sequence(Integer) = Sequence{oclUndefined} 
        in c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- Excludes Undefined
 
@@ -82,24 +70,18 @@ let c:Sequence(Integer) = Sequence{oclUndefined(Integer)}
 context Dummy inv:
 let c:Set(Integer) = Set{1} in c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- Bag
 
 context Dummy inv:
 let c:Bag(Integer) = Bag{1} in c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- Sequence
 
 context Dummy inv:
 let c:Sequence(Integer) = Sequence{1} in c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- Expression e not fulfilled
 
@@ -108,24 +90,18 @@ let c:Sequence(Integer) = Sequence{1} in c->select(i|i<4) = c->reject(i|not(i<4)
 context Dummy inv:
 let c:Set(Integer) = Set{4} in c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- Bag
 
 context Dummy inv:
 let c:Bag(Integer) = Bag{4} in c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- Sequence
 
 context Dummy inv:
 let c:Sequence(Integer) = Sequence{4} in c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- Many Elements
 
@@ -134,53 +110,43 @@ let c:Sequence(Integer) = Sequence{4} in c->select(i|i<4) = c->reject(i|not(i<4)
 -- -- -- -- -- -- Set ---------------------------------------------
 
 context Dummy inv:
-let c:Set(Integer) = Set{oclUndefined(Integer), 1, 2, 3} in 
+let c:Set(Integer) = Set{oclUndefined, 1, 2, 3} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- Equal Values
 
 context Dummy inv:
-let c:Bag(Integer) = Bag{oclUndefined(Integer), 1, 2, 3, 
-                  oclUndefined(Integer)} in 
+let c:Bag(Integer) = Bag{oclUndefined, 1, 2, 3, 
+                  oclUndefined} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv:
-let c:Bag(Integer) = Bag{oclUndefined(Integer), 1, 2, 3} in 
+let c:Bag(Integer) = Bag{oclUndefined, 1, 2, 3} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- Equal Values
 
 context Dummy inv:
-let c:Sequence(Integer) = Sequence{oclUndefined(Integer), 1, 2, 3, 
-                       oclUndefined(Integer)} in 
+let c:Sequence(Integer) = Sequence{oclUndefined, 1, 2, 3, 
+                       oclUndefined} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv:
-let c:Sequence(Integer) = Sequence{oclUndefined(Integer), 1, 2, 3} in 
+let c:Sequence(Integer) = Sequence{oclUndefined, 1, 2, 3} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- Excludes Undefined
 
@@ -191,8 +157,6 @@ let c:Sequence(Integer) = Sequence{oclUndefined(Integer), 1, 2, 3} in
 context Dummy inv:
 let c:Set(Integer) = Set{1, 2, 3} in c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- Bag
 
@@ -202,16 +166,12 @@ context Dummy inv:
 let c:Bag(Integer) = Bag{1, 2, 3, 1} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv:
 let c:Bag(Integer) = Bag{1, 2, 3} in c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- Sequence
 
@@ -221,8 +181,6 @@ context Dummy inv:
 let c:Sequence(Integer) = Sequence{1, 2, 3, 1} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- -- No Equal Values
 
@@ -230,8 +188,6 @@ context Dummy inv:
 let c:Sequence(Integer) = Sequence{1, 2, 3} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- Expression e not fulfilled
 
@@ -241,8 +197,6 @@ context Dummy inv:
 let c:Set(Integer) = Set{2, 3, 4, 5} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- Bag
 
@@ -252,8 +206,6 @@ context Dummy inv:
 let c:Bag(Integer) = Bag{2, 3, 4, 5, 4} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
@@ -261,8 +213,6 @@ context Dummy inv:
 let c:Bag(Integer) = Bag{2, 3, 4, 5, 2} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- -- No Equal Values
 
@@ -270,8 +220,6 @@ context Dummy inv:
 let c:Bag(Integer) = Bag{2, 3, 4, 5} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- Sequence
 
@@ -281,8 +229,6 @@ context Dummy inv:
 let c:Sequence(Integer) = Sequence{2, 3, 4, 5, 4} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- -- Equal Values (both not violating)
 
@@ -290,8 +236,6 @@ context Dummy inv:
 let c:Sequence(Integer) = Sequence{2, 3, 4, 5, 2} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
 
 -- -- -- -- -- -- -- -- No Equal Values
 
@@ -299,8 +243,6 @@ context Dummy inv:
 let c:Sequence(Integer) = Sequence{2, 3, 4, 5} in 
    c->select(i|i<4) = c->reject(i|not(i<4))
 
--- expected result:
-  = true
   
   
 endpackage

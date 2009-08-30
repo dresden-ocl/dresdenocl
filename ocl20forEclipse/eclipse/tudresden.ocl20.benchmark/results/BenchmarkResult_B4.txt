@@ -6,12 +6,12 @@ Log for test B4
 
 Start Parsing File: bin/tudresden/ocl20/benchmark/testdata/b4/expressions/invariants.ocl
 ------------------------------------------
-context Dummy  inv invariants_1:
+context Dummy  inv B4invariants_1:
 		true or Sequence{true}->excluding(true)->last()
 		= true -- expected result
 >> OK
 ..........................................
-context Dummy  inv invariants_2:
+context Dummy  inv B4invariants_2:
 		Sequence{true}->excluding(true)->last() or true
 		= true -- expected result
 >> OK
@@ -21,7 +21,7 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [4,15] expe
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
 Message/Type: [4,15] expecting: '=' The error ocurred in line 4 and column 15 at the token ,.
 Code:
-context Dummy  inv invariants_3:
+context Dummy  inv B4invariants_3:
 	let B=Set{Sequence{true}->excluding(true)->last(),false,true} in
 	B->iterate(b1,b2:Boolean;
 	r:Sequence(Boolean)=oclEmpty(Sequence(Boolean))|
@@ -29,12 +29,12 @@ context Dummy  inv invariants_3:
 	= Sequence{Undefined, Undefined, true, Undefined,
 	false, true, true, true, true} -- expected result
 	
-context Dummy  inv invariants_4:
+context Dummy  inv B4invariants_4:
 		false and Sequence{true}->excluding(true)->last()
 		= false -- expected result
 >> OK
 ..........................................
-context Dummy  inv invariants_5:
+context Dummy  inv B4invariants_5:
 		Sequence{true}->excluding(true)->last() and false
 		= false -- expected result
 >> OK
@@ -44,7 +44,7 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [4,15] expe
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
 Message/Type: [4,15] expecting: '=' The error ocurred in line 4 and column 15 at the token ,.
 Code:
-context Dummy  inv invariants_6:
+context Dummy  inv B4invariants_6:
 	let B=Set{Sequence{true}->excluding(true)->last(),false,true} in
 	B->iterate(b1,b2:Boolean;
 	r:Sequence(Boolean)=oclEmpty(Sequence(Boolean))|
@@ -52,12 +52,12 @@ context Dummy  inv invariants_6:
 	= Sequence{Undefined, false, Undefined, false, false, false,
 	Undefined, false, true} -- expected result
 	
-context Dummy inv query_IMPL1:
+context Dummy  inv B4invariants_query_IMPL1:
 		false implies Sequence{true}->excluding(true)->last()
 		= false -- expected result
 >> OK
 ..........................................
-context Dummy inv query_IMPL2:
+context Dummy  inv B4invariants_query_IMPL2:
 		Sequence{true}->excluding(true)->last() implies true
 		= true -- expected result
 >> OK
@@ -67,7 +67,7 @@ tudresden.ocl20.pivot.ocl2parser.parser.exceptions.ParsingException: [4,15] expe
 	thrown in: tudresden.ocl20.pivot.ocl2parser.parser.OCL2Parser.parse(OCL2Parser.java:71)
 Message/Type: [4,15] expecting: '=' The error ocurred in line 4 and column 15 at the token ,.
 Code:
-context Dummy inv query_IMPL3:
+context Dummy  inv B4invariants_query_IMPL3:
 	let B=Set{Sequence{true}->excluding(true)->last(),false,true} in
 	B->iterate(b1,b2:Boolean;
 	r:Sequence(Boolean)=oclEmpty(Sequence(Boolean))|
@@ -75,98 +75,109 @@ context Dummy inv query_IMPL3:
 	= Sequence{Undefined, Undefined, true, true, true, true,
 	Undefined, false, true}
 	
-context Dummy inv query_IFELSE1:
+context Dummy  inv B4invariants_query_IFELSE1:
 		if true then false
 		else Sequence{true}->excluding(true)->last() endif
 		= false -- expected result
 >> OK
 ..........................................
-context Dummy inv query_IFELSE2:
+context Dummy  inv B4invariants_query_IFELSE2:
 		if false then Sequence{true}->excluding(true)->last()
 		else true endif
+		= true -- expected result
+>> OK
+..........................................
+context Dummy  inv B4invariants_query_undef1:
+		Sequence{true}->excluding(true)->last().oclIsUndefined()
 		= true -- expected result
 >> OK
 ..........................................
 
 Statistics:
 ------------------------------------------
-  successful	: 8 
+  successful	: 9 
   failed	 	: 3 
 
 
 ==========================================
 Checking current model instance against loaded invariants
 ==========================================
-invariants  : 8
+invariants  : 9
 test objects: 1
-total tests : 8
+total tests : 9
 
 test object: [,Dummy]
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::invariants_1
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B4invariants_1
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::invariants_2
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B4invariants_2
 -->failed:
 Constraint Specification: 
-context Dummy  inv invariants_2:
+context Dummy  inv B4invariants_2:
 	Sequence{true}->excluding(true)->last() or true
 	= true -- expected result
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Index for at() out of bounds for Collection JavaOclSequence([]))
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::invariants_4
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B4invariants_4
 -->failed:
 Constraint Specification: 
-context Dummy  inv invariants_4:
+context Dummy  inv B4invariants_4:
 	false and Sequence{true}->excluding(true)->last()
 	= false -- expected result
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Index for at() out of bounds for Collection JavaOclSequence([]))
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::invariants_5
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B4invariants_5
 -->failed:
 Constraint Specification: 
-context Dummy  inv invariants_5:
+context Dummy  inv B4invariants_5:
 	Sequence{true}->excluding(true)->last() and false
 	= false -- expected result
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Index for at() out of bounds for Collection JavaOclSequence([]))
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::query_IMPL1
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B4invariants_query_IMPL1
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::query_IMPL2
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B4invariants_query_IMPL2
 -->failed:
 Constraint Specification: 
-context Dummy inv query_IMPL2:
+context Dummy  inv B4invariants_query_IMPL2:
 	Sequence{true}->excluding(true)->last() implies true
 	= true -- expected result
 	
-java.lang.NullPointerException
-	thrown in: tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean.isTrue(JavaOclBoolean.java:178)
+Result: JavaOclBoolean(undefined: Index for at() out of bounds for Collection JavaOclSequence([]))
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::query_IFELSE1
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B4invariants_query_IFELSE1
 -->OK.
 ..........................................
 
-Constraint: root::tudresden::ocl20::benchmark::testdata::common::query_IFELSE2
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B4invariants_query_IFELSE2
 -->OK.
+..........................................
+
+Constraint: root::tudresden::ocl20::benchmark::testdata::common::B4invariants_query_undef1
+-->failed:
+Constraint Specification: 
+context Dummy  inv B4invariants_query_undef1:
+	Sequence{true}->excluding(true)->last().oclIsUndefined()
+	= true -- expected result
+	
+Result: JavaOclBoolean(undefined: Index for at() out of bounds for Collection JavaOclSequence([]))
 ..........................................
 
 Interpretation Statistics:
 ------------------------------------------
   successful	: 4 
-  failed	 	: 4 
+  failed	 	: 5 
   skipped	 	: 0 
-  total	 	: 8 
+  total	 	: 9 

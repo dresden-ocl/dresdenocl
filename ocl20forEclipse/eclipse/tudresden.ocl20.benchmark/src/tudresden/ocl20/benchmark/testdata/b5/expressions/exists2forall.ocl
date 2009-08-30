@@ -19,8 +19,6 @@ context Dummy inv:
 	let c:Set(Integer) = Set{} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- Bag
 
@@ -28,8 +26,6 @@ context Dummy inv:
 	let c:Bag(Integer) = Bag{} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- Sequence
 
@@ -37,8 +33,6 @@ context Dummy inv:
 	let c:Sequence(Integer) = Sequence{} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- Singleton
 
@@ -47,29 +41,23 @@ context Dummy inv:
 -- -- -- -- -- -- Set ---------------------------------------------
 
 context Dummy inv:
-	let c:Set = Set{oclUndefined(Integer)} in
+	let c:Set = Set{oclUndefined} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- Bag
 
 context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined(Integer)} in
+	let c:Bag(Integer) = Bag{oclUndefined} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- Sequence
 
 context Dummy inv:
-	let c:Sequence(Integer) = Sequence(Integer){oclUndefined(Integer)} in
+	let c:Sequence(Integer) = Sequence(Integer){oclUndefined} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- Excludes Undefined
 
@@ -82,8 +70,6 @@ context Dummy inv:
 	let c:Set(Integer) = Set{1} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- Bag
 
@@ -91,8 +77,6 @@ context Dummy inv:
 	let c:Bag(Integer) = Bag{1} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- Sequence
 
@@ -100,8 +84,6 @@ context Dummy inv:
 	let c:Sequence(Integer) = Sequence{1} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- Expression e not fulfilled
 
@@ -111,8 +93,6 @@ context Dummy inv:
 	let c:Set(Integer) = Set{4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- Bag
 
@@ -120,8 +100,6 @@ context Dummy inv:
 	let c:Bag(Integer) = Bag{4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- Sequence
 
@@ -129,8 +107,6 @@ context Dummy inv:
 	let c:Sequence(Integer) = Sequence{4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- Many Elements
 
@@ -139,53 +115,43 @@ context Dummy inv:
 -- -- -- -- -- -- Set ---------------------------------------------
 
 context Dummy inv:
-	let c:Set(Integer) = Set{oclUndefined(Integer), 2, 3, 4} in
+	let c:Set(Integer) = Set{oclUndefined, 2, 3, 4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- Bag
 
 -- -- -- -- -- -- -- Equal Values
 
 context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined(Integer), 2, 3, 4, 
-                  oclUndefined(Integer)} in
+	let c:Bag(Integer) = Bag{oclUndefined, 2, 3, 4, 
+                  oclUndefined} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv:
-	let c:Bag(Integer) = Bag{oclUndefined(Integer), 2, 3, 4} in
+	let c:Bag(Integer) = Bag{oclUndefined, 2, 3, 4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- Sequence
 
 -- -- -- -- -- -- -- Equal Values
 
 context Dummy inv:
-	let c:Sequence(Integer) = Sequence{oclUndefined(Integer), 2, 3, 4, 
-                       oclUndefined(Integer)} in
+	let c:Sequence(Integer) = Sequence{oclUndefined, 2, 3, 4, 
+                       oclUndefined} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- No Equal Values
 
 context Dummy inv:
-	let c:Sequence(Integer) = Sequence{oclUndefined(Integer), 2, 3, 4} in
+	let c:Sequence(Integer) = Sequence{oclUndefined, 2, 3, 4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- Excludes Undefined
 
@@ -197,8 +163,6 @@ context Dummy inv:
 	let c:Set(Integer) = Set{1, 2, 3, 4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- Bag
 
@@ -208,8 +172,6 @@ context Dummy inv:
 	let c:Bag(Integer) = Bag{1, 2, 3, 4, 1} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- -- No Equal Values
 
@@ -217,8 +179,6 @@ context Dummy inv:
 	let c:Bag(Integer) = Bag{1, 2, 3, 4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- Sequence
 
@@ -228,8 +188,6 @@ context Dummy inv:
 	let c:Sequence(Integer) = Sequence{1, 2, 3, 4, 1} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- -- No Equal Values
 
@@ -237,8 +195,6 @@ context Dummy inv:
 	let c:Sequence(Integer) = Sequence{1, 2, 3, 4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- Expression e not fulfilled
 
@@ -248,8 +204,6 @@ context Dummy inv:
 	let c:Set(Integer) = Set{4, 5, 6} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- Bag
 
@@ -259,8 +213,6 @@ context Dummy inv:
 	let c:Bag(Integer) = Bag{4, 5, 6, 4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- -- No Equal Values
 
@@ -268,8 +220,6 @@ context Dummy inv:
 	let c:Bag(Integer) = Bag{4, 5, 6} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- Sequence
 
@@ -279,8 +229,6 @@ context Dummy inv:
 	let c:Sequence(Integer) = Sequence{4, 5, 6, 4} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
 -- -- -- -- -- -- -- -- No Equal Values
 
@@ -288,8 +236,6 @@ context Dummy inv:
 	let c:Sequence(Integer) = Sequence{4, 5, 6} in
    c->exists(i|i<4) = not c->forAll(i|not(i<4))
 
--- Expected Result:
-  = true
 
   
 endpackage

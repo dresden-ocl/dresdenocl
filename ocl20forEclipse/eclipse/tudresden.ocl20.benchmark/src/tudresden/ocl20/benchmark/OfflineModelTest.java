@@ -36,7 +36,7 @@ public class OfflineModelTest {
 	 * Test first state model.
 	 */
 	@Test
-	public void testFirstStateModel() {
+	public void testB1FirstStateModel() {
 		List<Object> pList = ModelFirstState.getModelObjects();
 
 		for (Object obj : pList) {
@@ -48,7 +48,7 @@ public class OfflineModelTest {
 	 * Test evolution model.
 	 */
 	@Test
-	public void testEvolutionModel() {
+	public void testB1EvolutionModel() {
 		List<Object> pList = ModelEvolution.getModelObjects();
 
 		for (Object obj : pList) {

@@ -16,31 +16,34 @@ for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package tudresden.ocl20.benchmark.testdata.b3;
 
 public class Exam {
 	public Person examiner;
 	public Person examinee;
 	public Person recorder;
-	
+
 	public int date;
 	
+	public String id;
+
 	/**
 	 * Instantiates a new exam.
 	 * 
-	 * @param examinee 
-	 * @param examiner 
-	 * @param recorder 
-	 * @param date 
+	 * @param examinee
+	 * @param examiner
+	 * @param recorder
+	 * @param date
+	 * @param id name to identify from the invariants
 	 */
-	public Exam(Person examinee, Person examiner, Person recorder, int date)
-	{
+	public Exam(Person examinee, Person examiner, Person recorder, int date,
+			String id) {
 		this.examiner = examiner;
 		this.examinee = examinee;
 		this.recorder = recorder;
 		this.date = date;
+		this.id = id;
 	}
-	
-	
+
 }
