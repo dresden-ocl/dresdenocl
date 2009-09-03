@@ -34,6 +34,7 @@ import java.util.Set;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.CopyForAtPreException;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -77,8 +78,10 @@ public interface IModelInstanceElement {
 	 * </p>
 	 * 
 	 * @return a deep copy of the adapted element
+	 * @throws CopyForAtPreException
+	 *           Thrown, if an error during the copy process occurs.
 	 */
-	Object copyForAtPre();
+	Object copyForAtPre() throws CopyForAtPreException;
 
 	/**
 	 * <p>
