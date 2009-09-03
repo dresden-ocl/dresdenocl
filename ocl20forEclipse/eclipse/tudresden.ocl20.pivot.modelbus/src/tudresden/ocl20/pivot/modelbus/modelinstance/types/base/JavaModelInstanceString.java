@@ -21,9 +21,12 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 import java.util.HashSet;
 
 import org.apache.log4j.Logger;
+import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
@@ -126,14 +129,17 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 		return resultBuffer.toString();
 	}
 
-	public IModelInstanceElement asType(Type type) {
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
 		IModelInstanceElement result;
 
-		/*
-		 * FIXME Claas: Ask Micha how the undefined problem can be solved. By
-		 * default the result is null.
-		 */
+		/* By default the result is null. */
 		result = null;
 
 		/* Strings can only be casted to primitive types. */
@@ -190,6 +196,17 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 				result = new JavaModelInstanceString(this.myString);
 			}
 		}
+
+		/* Probably throw an AsTypeCastException. */
+		if (result == null) {
+			String msg;
+
+			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type.getName());
+
+			throw new AsTypeCastException(msg);
+		}
+		// no else.
 
 		return result;
 	}

@@ -21,6 +21,10 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 import java.util.Collection;
 import java.util.Iterator;
 
+import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+
 /**
  * <p>
  * Represents an {@link IModelInstanceElement} that contains other
@@ -49,8 +53,13 @@ public interface IModelInstanceCollection<T> extends IModelInstanceElement {
 	 * @param object
 	 *          an object contained in the adapted collection
 	 * @return the adapter for the given object
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown, if a given {@link Object} cannot be adapted to any
+	 *           {@link TypeNotFoundInModelException} in the {@link IModel} of the
+	 *           {@link IModelInstance}.
 	 */
-	IModelInstanceElement getAdapter(T object);
+	IModelInstanceElement getAdapter(T object)
+			throws TypeNotFoundInModelException;
 
 	/**
 	 * Returns the underlying {@link Collection}.

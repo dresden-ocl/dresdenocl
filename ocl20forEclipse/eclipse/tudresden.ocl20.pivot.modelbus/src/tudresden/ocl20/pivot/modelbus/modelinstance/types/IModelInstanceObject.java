@@ -21,6 +21,8 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 import java.util.List;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -45,7 +47,31 @@ public interface IModelInstanceObject extends IModelInstanceElement {
 	 *         {@link IModelInstanceElement}.
 	 */
 	Object getObject();
-	
+
+	/**
+	 * <p>
+	 * Tries to fetch a property with the given name of the adapted object.
+	 * </p>
+	 * 
+	 * TODO: Exceptions?
+	 * 
+	 * @param property
+	 *          the {@link Property} is used to determine the name of the property
+	 *          and the {@link Type} of the fetched property; if
+	 *          {@link Property#isMultiple()} is <code>true</code> create an
+	 *          {@link IModelInstanceCollection} based on
+	 *          {@link Property#isOrdered()} and {@link Property#isUnique()}.
+	 * @return the adapted property value
+	 * @throws PropertyAccessException
+	 *           Thrown, if an exception occurs during the access to the
+	 *           {@link Property} of the adapted {@link Object}.
+	 * @throws PropertyNotFoundException
+	 *           Thrown, if the given {@link Property} cannot be found in the
+	 *           adapted {@link Object}.
+	 */
+	IModelInstanceElement getProperty(Property property)
+			throws PropertyAccessException, PropertyNotFoundException;
+
 	/**
 	 * <p>
 	 * Invokes a non-standard library operation on the
@@ -63,33 +89,16 @@ public interface IModelInstanceObject extends IModelInstanceElement {
 	 * TODO: Exceptions?
 	 * 
 	 * @param operation
-	 *          the {@link Operation} is used to determine the name of the
+	 *          The {@link Operation} is used to determine the name of the
 	 *          operation and the {@link Type return type} of the invoked
 	 *          operation; if {@link Operation#isMultiple()} is <code>true</code>
 	 *          create an {@link IModelInstanceCollection} based on
 	 *          {@link Operation#isOrdered()} and {@link Operation#isUnique()}.
 	 * @param args
-	 *          the arguments of the function to call
-	 * @return the adapted return value of the executed funtion
+	 *          The arguments of the function to call
+	 * @return The adapted return value of the invoked operation.
 	 */
 	IModelInstanceElement invokeOperation(Operation operation,
 			List<IModelInstanceElement> args);
-
-	/**
-	 * <p>
-	 * Tries to fetch a property with the given name of the adapted object.
-	 * </p>
-	 * 
-	 * TODO: Exceptions?
-	 * 
-	 * @param property
-	 *          the {@link Property} is used to determine the name of the property
-	 *          and the {@link Type} of the fetched property; if
-	 *          {@link Property#isMultiple()} is <code>true</code> create an
-	 *          {@link IModelInstanceCollection} based on
-	 *          {@link Property#isOrdered()} and {@link Property#isUnique()}.
-	 * @return the adapted property value
-	 */
-	IModelInstanceElement getProperty(Property property);
 
 }

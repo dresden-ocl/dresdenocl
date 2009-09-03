@@ -33,6 +33,7 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -55,8 +56,11 @@ public interface IModelInstanceElement {
 	 * @param type
 	 *          the {@link Type} to cast this {@link IModelInstanceElement} to
 	 * @return the new {@link IModelInstanceElement} that has the given type
+	 * @throws AsTypeCastException
+	 *           Thrown if this operation is invoked with a {@link Type} to that
+	 *           this {@link IModelInstanceElement} cannot be casted.
 	 */
-	IModelInstanceElement asType(Type type);
+	IModelInstanceElement asType(Type type) throws AsTypeCastException;
 
 	/**
 	 * <p>

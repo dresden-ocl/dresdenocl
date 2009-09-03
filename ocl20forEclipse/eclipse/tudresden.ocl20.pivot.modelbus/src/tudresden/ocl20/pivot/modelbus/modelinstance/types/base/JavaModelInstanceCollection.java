@@ -26,12 +26,16 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.UniqueEList;
+import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
@@ -253,7 +257,7 @@ public class JavaModelInstanceCollection<T> extends
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
-	public IModelInstanceElement asType(Type type) {
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
 		IModelInstanceElement result;
 
@@ -328,6 +332,17 @@ public class JavaModelInstanceCollection<T> extends
 		}
 		// no else.
 
+		/* Probably throw an AsTypeCastException. */
+		if (result == null) {
+			String msg;
+
+			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type.getName());
+
+			throw new AsTypeCastException(msg);
+		}
+		// no else.
+
 		return result;
 	}
 
@@ -349,7 +364,7 @@ public class JavaModelInstanceCollection<T> extends
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
 	 * #getAdapter(java.lang.Object)
 	 */
-	public IModelInstanceElement getAdapter(T object) {
+	public IModelInstanceElement getAdapter(T object) throws TypeNotFoundInModelException {
 
 		IModelInstanceElement result;
 

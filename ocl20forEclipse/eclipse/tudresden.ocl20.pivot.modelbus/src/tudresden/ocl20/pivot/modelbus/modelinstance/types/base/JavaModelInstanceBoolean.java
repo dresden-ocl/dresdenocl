@@ -22,9 +22,12 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 import java.util.HashSet;
 
 import org.apache.log4j.Logger;
+import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
@@ -132,18 +135,16 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
-	public IModelInstanceElement asType(Type type) {
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
 		IModelInstanceElement result;
 
-		/*
-		 * FIXME Claas: Ask Micha how the undefined problem can be solved. By
-		 * default the result is null.
-		 */
+		/* By default the result is null. */
 		result = null;
 
 		/* Booleans can only be casted to primitive types. */
 		if (type instanceof PrimitiveType) {
+
 			PrimitiveType primitiveType;
 			primitiveType = (PrimitiveType) type;
 
@@ -152,18 +153,6 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 
 				/* Create a new boolean to avoid side effects. */
 				result = new JavaModelInstanceBoolean(this.myBoolean);
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
-
-				/* A boolean cannot be casted to an integer. The result is undefined. */
-				result = new JavaModelInstanceInteger(null);
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
-
-				/* A boolean cannot be casted to a real. The result is undefined. */
-				result = new JavaModelInstanceReal(null);
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
@@ -176,8 +165,20 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 					result = new JavaModelInstanceString(this.myBoolean.toString());
 				}
 			}
-
+			// no else.
 		}
+		// no else.
+
+		/* Probably throw an AsTypeCastException. */
+		if (result == null) {
+			String msg;
+
+			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type.getName());
+
+			throw new AsTypeCastException(msg);
+		}
+		// no else.
 
 		return result;
 	}
@@ -206,7 +207,9 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement#isUndefined()
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isUndefined()
 	 */
 	public boolean isUndefined() {
 

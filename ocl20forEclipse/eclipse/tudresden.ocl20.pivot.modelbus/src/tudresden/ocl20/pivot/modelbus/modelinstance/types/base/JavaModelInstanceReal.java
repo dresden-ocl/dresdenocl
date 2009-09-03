@@ -21,9 +21,12 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 import java.util.HashSet;
 
 import org.apache.log4j.Logger;
+import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
@@ -131,14 +134,11 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
-	public IModelInstanceElement asType(Type type) {
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
 		IModelInstanceElement result;
 
-		/*
-		 * FIXME Claas: Ask Micha how the undefined problem can be solved. By
-		 * default the result is null.
-		 */
+		/* By default the result is null. */
 		result = null;
 
 		/* Reals can only be casted to primitive types. */
@@ -147,13 +147,7 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 			primitiveType = (PrimitiveType) type;
 
 			/* Check the given PrimitiveTypeKind. */
-			if (primitiveType.getKind().equals(PrimitiveTypeKind.BOOLEAN)) {
-
-				/* Reals cannot be casted to boolean. Thus, the result is undefined. */
-				result = new JavaModelInstanceInteger(null);
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
+			if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
 
 				/* Create a new integer to avoid side effects. */
 				result = new JavaModelInstanceInteger(this.myNumber.longValue());
@@ -175,7 +169,20 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 					result = new JavaModelInstanceString(this.myNumber.toString());
 				}
 			}
+			// no else.
 		}
+		// no else.
+
+		/* Probably throw an AsTypeCastException. */
+		if (result == null) {
+			String msg;
+
+			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type.getName());
+
+			throw new AsTypeCastException(msg);
+		}
+		// no else.
 
 		return result;
 	}
@@ -207,7 +214,9 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement#isUndefined()
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isUndefined()
 	 */
 	public boolean isUndefined() {
 

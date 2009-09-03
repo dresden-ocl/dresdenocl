@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
 
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
@@ -64,7 +65,8 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createIModelInstanceElement(java.lang.Object)
 	 */
-	public IModelInstanceElement createModelInstanceElement(Object adapted) {
+	public IModelInstanceElement createModelInstanceElement(Object adapted)
+			throws TypeNotFoundInModelException {
 
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -174,23 +176,11 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		return new JavaModelInstanceCollection<T>(adapted, this);
 	}
 
-	/**
-	 * <p>
-	 * Creates an {@link IModelInstanceCollection} for a given {@link Collection}
-	 * and a given {@link OclCollectionTypeKind}, the create
-	 * {@link IModelInstanceCollection} shall belong to.
-	 * </p>
-	 * 
-	 * @param collection
-	 *          The {@link Collection} for that a {@link IModelInstanceCollection}
-	 *          shall be created.
-	 * @param kind
-	 *          The {@link OclCollectionTypeKind}, the created
-	 *          {@link IModelInstanceCollection} shall belong to.
-	 * 
-	 * @return The created {@link IModelInstanceCollection}.
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory#createModelInstanceCollection(java.util.Collection, tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind)
 	 */
-	protected <T> IModelInstanceCollection<T> createModelInstanceCollection(
+	public <T> IModelInstanceCollection<T> createModelInstanceCollection(
 			Collection<T> collection, OclCollectionTypeKind kind) {
 
 		IModelInstanceCollection<T> result;

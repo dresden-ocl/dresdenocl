@@ -47,6 +47,8 @@ public class ModelBusMessages extends NLS {
   public static String AbstractModelProvider_LoadingModel;
   public static String ModelRegistry_SettingActiveModel;
   public static String OclLibraryProvider_LoadOclLibrary;
+  
+  public static String IModelInstanceElement_CannotCast;
 
   static {
     // initialize resource bundle
