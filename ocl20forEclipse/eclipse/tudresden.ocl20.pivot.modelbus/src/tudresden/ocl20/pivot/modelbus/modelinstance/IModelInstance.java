@@ -37,6 +37,7 @@ import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
@@ -72,8 +73,12 @@ public interface IModelInstance {
 	 *          the object to add to the {@link IModelInstance}
 	 * @return The adapted object or <code>null</code> if the given {@link Object}
 	 *         could not be adapted.
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown if a given Object, cannot be adapted to a {@link Type} in
+	 *           the {@link IModel}.
 	 */
-	IModelInstanceElement addModelInstanceElement(Object object);
+	IModelInstanceElement addModelInstanceElement(Object object)
+			throws TypeNotFoundInModelException;
 
 	/**
 	 * <p>

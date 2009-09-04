@@ -63,6 +63,70 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
+	 * #createAdaptedElement
+	 * (tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement)
+	 */
+	public Object createAdaptedElement(IModelInstanceElement modelInstanceElement) {
+
+		// FIXME Claas: Implement this method.
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
+	 * #createModelInstanceCollection(java.util.Collection,
+	 * tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind)
+	 */
+	public <T> IModelInstanceCollection<T> createModelInstanceCollection(
+			Collection<T> collection, OclCollectionTypeKind kind) {
+
+		IModelInstanceCollection<T> result;
+
+		switch (kind) {
+
+		case BAG:
+
+			result =
+					new JavaModelInstanceCollection<T>(collection, this,
+							JavaModelInstanceCollection.MODEL_TYPE_BAG);
+			break;
+
+		case SEQUENCE:
+
+			result =
+					new JavaModelInstanceCollection<T>(collection, this,
+							JavaModelInstanceCollection.MODEL_TYPE_SEQUENCE);
+			break;
+
+		case SET:
+
+			result =
+					new JavaModelInstanceCollection<T>(collection, this,
+							JavaModelInstanceCollection.MODEL_TYPE_SET);
+			break;
+
+		case ORDEREDSET:
+
+			result =
+					new JavaModelInstanceCollection<T>(collection, this,
+							JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET);
+			break;
+
+		default:
+
+			result = new JavaModelInstanceCollection<T>(collection, this);
+		}
+		// end switch.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createIModelInstanceElement(java.lang.Object)
 	 */
 	public IModelInstanceElement createModelInstanceElement(Object adapted)
@@ -174,54 +238,6 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			Collection<T> adapted) {
 
 		return new JavaModelInstanceCollection<T>(adapted, this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory#createModelInstanceCollection(java.util.Collection, tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind)
-	 */
-	public <T> IModelInstanceCollection<T> createModelInstanceCollection(
-			Collection<T> collection, OclCollectionTypeKind kind) {
-
-		IModelInstanceCollection<T> result;
-
-		switch (kind) {
-
-		case BAG:
-
-			result =
-					new JavaModelInstanceCollection<T>(collection, this,
-							JavaModelInstanceCollection.MODEL_TYPE_BAG);
-			break;
-
-		case SEQUENCE:
-
-			result =
-					new JavaModelInstanceCollection<T>(collection, this,
-							JavaModelInstanceCollection.MODEL_TYPE_SEQUENCE);
-			break;
-
-		case SET:
-
-			result =
-					new JavaModelInstanceCollection<T>(collection, this,
-							JavaModelInstanceCollection.MODEL_TYPE_SET);
-			break;
-
-		case ORDEREDSET:
-
-			result =
-					new JavaModelInstanceCollection<T>(collection, this,
-							JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET);
-			break;
-
-		default:
-
-			result = new JavaModelInstanceCollection<T>(collection, this);
-		}
-		// end switch.
-
-		return result;
 	}
 
 	/**
