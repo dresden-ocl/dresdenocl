@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.modelinstancetype.java.interal.util;
+package tudresden.ocl20.pivot.modelinstancetype.java.internal.util;
 
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
