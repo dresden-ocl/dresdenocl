@@ -39,6 +39,15 @@ public class JavaModelInstanceTypeMessages extends NLS {
 	public static String JavaModelInstance_ProviderMethodNotFound;
 	public static String JavaModelInstance_ProviderMethodInvocationError;
 	public static String JavaModelInstance_ObjectDoesNoMatchToModel;
+	public static String JavaModelInstance_CannotCast;
+	public static String JavaModelInstance_CannotCastTypeClassNotFound;
+	public static String JavaModelInstance_TypeNotFoundInModel;
+	public static String JavaModelInstance_PropertyNotFoundInModelInstanceElement;
+	public static String JavaModelInstance_PropertyAccessFailed;
+	public static String JavaModelInstance_CannotCopyForAtPre;
+	public static String JavaModelInstance_AdapteeIsNotClonable;
+	public static String JavaModelInstance_OperationNotFoundInModelInstanceElement;
+	public static String JavaModelInstance_OperationAccessFailed;
 
 	static {
 		/* Initialize resource bundle. */

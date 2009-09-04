@@ -20,11 +20,7 @@ package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
@@ -33,16 +29,11 @@ import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -70,11 +61,13 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 *          instance.
 	 * @param model
 	 *          The {@link IModel} of this {@link IModelInstance}.s
-	 * @throws ModelAccessException
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown if a model instance Object, cannot be adapted to a
+	 *           {@link Type} in the {@link IModel}.
 	 */
 	@SuppressWarnings("unchecked")
 	public JavaModelInstance(Class<?> providerClass, IModel model)
-			throws ModelAccessException {
+			throws ModelAccessException, TypeNotFoundInModelException {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -211,30 +204,22 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
 	 * addModelInstanceElement(java.lang.Object)
 	 */
-	public IModelInstanceElement addModelInstanceElement(Object object) {
+	public IModelInstanceElement addModelInstanceElement(Object object)
+			throws TypeNotFoundInModelException {
 
 		IModelInstanceElement result;
 
 		/* Try to adapt and add the object. */
-		try {
-			result = this.addObject(object);
+		result = this.addObject(object);
 
-			/* Probably add the adapted model instance element to the type mapping. */
-			if (result instanceof IModelInstanceObject) {
-				this.addModelInstanceObjectToCache((IModelInstanceObject) result);
-			}
-			// no else.
+		/* Probably add the adapted model instance element to the type mapping. */
+		if (result instanceof IModelInstanceObject) {
+			this.addModelInstanceObjectToCache((IModelInstanceObject) result);
 		}
-
-		/* If an error occurs, return null. */
-		catch (ModelAccessException e) {
-			result = null;
-		}
+		// no else.
 
 		return result;
 	}
-
-	private static final int REFACTORED_TILL_HERE = 0;
 
 	/**
 	 * <p>
@@ -244,10 +229,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 * @param objects
 	 *          A {@link List} of {@link Object}s which shall be added to the
 	 *          objects {@link List}.
-	 * @throws ModelAccessException
-	 *           Thrown, if the given {@link Object} does not math to the model.
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown if a given Object, cannot be adapted to a {@link Type} in
+	 *           the {@link IModel}.
 	 */
-	private void addObjects(List<Object> objects) throws ModelAccessException {
+	private void addObjects(List<Object> objects)
+			throws TypeNotFoundInModelException {
 
 		/* Iterate through the given objects and add them as model instance objects. */
 		for (Object anObject : objects) {
@@ -265,12 +252,12 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 *          The {@link Object} which shall be added to the {@link List} of
 	 *          {@link IModelInstanceElement}s.
 	 * @return The added {@link IModelInstanceElement}.
-	 * @throws ModelAccessException
-	 *           Thrown, if the given {@link Object} does not math to the
-	 *           {@link IModel} of this {@link IModelInstance}.
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown if a given Object, cannot be adapted to a {@link Type} in
+	 *           the {@link IModel}.
 	 */
 	private IModelInstanceElement addObject(Object anObject)
-			throws ModelAccessException {
+			throws TypeNotFoundInModelException {
 
 		IModelInstanceElement result;
 
@@ -285,60 +272,20 @@ public class JavaModelInstance extends AbstractModelInstance {
 			msg = NLS.bind(msg, anObject.getClass(), this.myModel.getDisplayName());
 
 			LOGGER.error(msg);
-			throw new ModelAccessException(msg);
+			throw new TypeNotFoundInModelException(msg);
 		}
 		// no else.
 
-		this.addObject(result);
-
-		/*
-		 * Eventually add the type of the object for static operations and
-		 * properties as well.
-		 */
-		IModelInstanceTypeObject typeObject;
-
-		typeObject =
-				this.myModelInstanceFactory.createModelInstanceTypeObject(anObject
-						.getClass());
-
-		if (typeObject != null) {
-			this.myModelTypeObjects.put(typeObject.getModelType(), typeObject);
+		/* FIXME Claas: Only add IMIObjects or not? */
+		if (result instanceof IModelInstanceObject) {
+			this.myModelInstanceObjects.add((IModelInstanceObject) result);
 		}
 		// no else.
 
 		return result;
 	}
 
-	/**
-	 * <p>
-	 * Adds a given {@link IModelInstanceElement} to the {@link List} of
-	 * {@link IModelInstanceElement}s. Eventually contained elements are added as
-	 * well.
-	 * </p>
-	 * 
-	 * @param modelObject
-	 *          The {@link IModelInstanceElement} which shall be added to the
-	 *          {@link List} of {@link IModelInstanceElement}s.
-	 */
-	private void addObject(IModelInstanceElement modelObject) {
-
-		if (modelObject != null) {
-			this.myModelInstanceObjects.add(modelObject);
-
-			/* Probably add contained elements as well. */
-			if (modelObject instanceof IModelInstanceCollection) {
-				IModelInstanceCollection aCollection;
-				aCollection = (IModelInstanceCollection) modelObject;
-
-				for (IModelInstanceElement anElement : aCollection
-						.getContainedElements()) {
-					this.addObject(anElement);
-				}
-			}
-			// no else.
-		}
-		// no else.
-	}
+	private static final int REFACTORED_TILL_HERE = 0;
 
 	public IModelInstanceElement invokeStaticOperation(Operation operation,
 			List<IModelInstanceElement> args) {

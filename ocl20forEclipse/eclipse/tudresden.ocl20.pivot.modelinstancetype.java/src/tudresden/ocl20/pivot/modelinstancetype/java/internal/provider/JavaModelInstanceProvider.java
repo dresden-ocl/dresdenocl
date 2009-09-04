@@ -32,6 +32,7 @@ import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstanceProvider;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
@@ -172,6 +173,10 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 			catch (SecurityException e) {
 				/* Do nothing, continue iteration. */
 				/* Could happen if the root package is called 'java' or 'javax'. */
+			}
+
+			catch (TypeNotFoundInModelException e) {
+				throw new ModelAccessException(e.getMessage(), e);
 			}
 
 			index++;

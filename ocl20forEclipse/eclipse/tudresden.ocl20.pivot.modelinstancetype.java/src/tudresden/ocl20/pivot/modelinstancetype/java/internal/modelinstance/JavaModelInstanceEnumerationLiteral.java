@@ -18,15 +18,19 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.base.AbstractModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.AbstractModelInstanceElement;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -38,10 +42,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
-		implements IModelInstanceEnumerationLiteral {
-
-	private static final int REFACTORED_TILL_HERE = 0;
+public class JavaModelInstanceEnumerationLiteral extends
+		AbstractModelInstanceElement implements IModelInstanceEnumerationLiteral {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -50,7 +52,9 @@ public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
 
 	/**
 	 * <p>
-	 * The adapted EnumerationLiteral.
+	 * The adapted {@link Enum} of this
+	 * {@link JavaModelInstanceEnumerationLiteral}.
+	 * </p>
 	 */
 	private Enum<?> myLiteral;
 
@@ -101,6 +105,75 @@ public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #getName()
+	 */
+	public String getName() {
+
+		StringBuffer resultBuffer;
+		resultBuffer = new StringBuffer();
+
+		resultBuffer.append(this.getClass().getSimpleName());
+		resultBuffer.append("[");
+		resultBuffer.append(this.myLiteral.toString());
+		resultBuffer.append("]");
+
+		return resultBuffer.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
+
+		IModelInstanceElement result;
+
+		result = null;
+
+		/* Check if the given type is the type of this literal. */
+		if (this.myTypes.contains(type)) {
+
+			Set<Type> types;
+			types = new HashSet<Type>();
+			types.add(type);
+
+			result = new JavaModelInstanceEnumerationLiteral(this.myLiteral, types);
+		}
+		// no else.
+
+		/* Probably throw an AsTypeCastException. */
+		if (result == null) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type.getName());
+
+			throw new AsTypeCastException(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #copyForAtPre()
+	 */
+	public Object copyForAtPre() {
+
+		/* Return a copy of the literal. */
+		return new JavaModelInstanceEnumerationLiteral(this.myLiteral,
+				new HashSet<Type>(this.myTypes));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral
 	 * #getLiteral()
 	 */
@@ -111,47 +184,12 @@ public class JavaModelInstanceEnumerationLiteral extends AbstractModelObject
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isUndefined()
 	 */
-	public String toString() {
+	public boolean isUndefined() {
 
-		String result;
-
-		result = JavaModelInstanceEnumerationLiteral.class.getSimpleName();
-		result += "[";
-		result += this.myLiteral;
-		result += "]";
-
-		return result;
-	}
-
-	public IModelInstanceElement asType(Type type) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object copyForAtPre() {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getName() {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Set<Type> getTypes() {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean isInstanceOf(Type type) {
-
-		// TODO Auto-generated method stub
-		return false;
+		return this.myLiteral == null;
 	}
 }
