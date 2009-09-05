@@ -276,11 +276,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		}
 		// no else.
 
-		/* FIXME Claas: Only add IMIObjects or not? */
-		if (result instanceof IModelInstanceObject) {
-			this.myModelInstanceObjects.add((IModelInstanceObject) result);
-		}
-		// no else.
+		this.myModelInstanceElements.add(result);
 
 		return result;
 	}
