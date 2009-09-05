@@ -65,6 +65,7 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	{
 		MODEL_TYPE.setKind(PrimitiveTypeKind.STRING);
+		MODEL_TYPE.setName(PrimitiveTypeKind.STRING.toString());
 	}
 
 	/** The adapted {@link String} of this {@link JavaModelInstanceString}. */
@@ -175,7 +176,14 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 				}
 
 				else {
-					result = new JavaModelInstanceInteger(Long.parseLong(this.myString));
+					try {
+						result =
+								new JavaModelInstanceInteger(Long.parseLong(this.myString));
+					}
+
+					catch (NumberFormatException e) {
+						result = new JavaModelInstanceInteger(null);
+					}
 				}
 			}
 
@@ -186,7 +194,14 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 				}
 
 				else {
-					result = new JavaModelInstanceReal(Double.parseDouble(this.myString));
+					try {
+						result =
+								new JavaModelInstanceReal(Double.parseDouble(this.myString));
+					}
+
+					catch (NumberFormatException e) {
+						result = new JavaModelInstanceReal(null);
+					}
 				}
 			}
 

@@ -65,6 +65,7 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	{
 		MODEL_TYPE.setKind(PrimitiveTypeKind.REAL);
+		MODEL_TYPE.setName(PrimitiveTypeKind.REAL.toString());
 	}
 
 	/** The adapted {@link Number} of this {@link JavaModelInstanceReal}. */
@@ -207,7 +208,13 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 		Double result;
 
-		result = this.myNumber.doubleValue();
+		if (this.myNumber != null) {
+			result = this.myNumber.doubleValue();
+		}
+
+		else {
+			result = null;
+		}
 
 		return result;
 	}

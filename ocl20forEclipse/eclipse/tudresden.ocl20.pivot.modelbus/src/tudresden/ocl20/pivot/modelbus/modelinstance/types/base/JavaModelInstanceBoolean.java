@@ -66,6 +66,7 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	{
 		MODEL_TYPE.setKind(PrimitiveTypeKind.BOOLEAN);
+		MODEL_TYPE.setName(PrimitiveTypeKind.BOOLEAN.toString());
 	}
 
 	/** The adapted {@link Boolean} of this {@link JavaModelInstanceBoolean}. */

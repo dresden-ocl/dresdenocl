@@ -149,7 +149,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		/* Check if the object is an array. */
 		if (adapted.getClass().isArray()) {
 
-			result = this.createModelInstanceCollection(Arrays.asList(adapted));
+			result = this.createModelInstanceCollection(Arrays.asList((Object[]) adapted));
 		}
 
 		/* Else check if the object is a collection. */
@@ -159,7 +159,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		}
 
 		/* Else check if the object is a boolean. */
-		if (adapted instanceof Boolean) {
+		else if (adapted instanceof Boolean) {
 
 			result = this.createModelInstanceBoolean((Boolean) adapted);
 		}

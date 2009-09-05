@@ -65,6 +65,7 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	{
 		MODEL_TYPE.setKind(PrimitiveTypeKind.INTEGER);
+		MODEL_TYPE.setName(PrimitiveTypeKind.INTEGER.toString());
 	}
 
 	/** The adapted {@link Long} of this {@link JavaModelInstanceInteger}. */
@@ -208,7 +209,7 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 
 		Long result;
 
-		result = this.myLong.longValue();
+		result = this.myLong;
 
 		return result;
 	}

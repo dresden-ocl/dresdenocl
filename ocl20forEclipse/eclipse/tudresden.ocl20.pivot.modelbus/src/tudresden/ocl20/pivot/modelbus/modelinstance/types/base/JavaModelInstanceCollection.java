@@ -364,7 +364,8 @@ public class JavaModelInstanceCollection<T> extends
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
 	 * #getAdapter(java.lang.Object)
 	 */
-	public IModelInstanceElement getAdapter(T object) throws TypeNotFoundInModelException {
+	public IModelInstanceElement getAdapter(T object)
+			throws TypeNotFoundInModelException {
 
 		IModelInstanceElement result;
 

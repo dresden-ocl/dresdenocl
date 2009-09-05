@@ -35,7 +35,6 @@ package tudresden.ocl20.pivot.modelbus.modelinstance;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
@@ -44,10 +43,8 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerat
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -140,9 +137,7 @@ public interface IModelInstance {
 
 	/**
 	 * <p>
-	 * Returns all {@link IModelInstanceObject}s of the given {@link Type}. If the
-	 * given {@link Type} does not exist in the {@link IModel} of this
-	 * {@link IModelInstance}, <code>null</code> is returned.
+	 * Returns all {@link IModelInstanceObject}s of the given {@link Type}.
 	 * </p>
 	 * 
 	 * <p>
@@ -150,20 +145,11 @@ public interface IModelInstance {
 	 * it at any rate.
 	 * </p>
 	 * 
-	 * <p>
-	 * <strong>Note: This operation will only work for Types defined in the
-	 * {@link IModel}!</strong> For {@link PrimitiveType}s, {@link CollectionType}
-	 * s, or {@link Enumeration}s, the result will be <code>null</code>, whether
-	 * or not, they have instances in the {@link IModelInstanceElement}.
-	 * </p>
-	 * 
 	 * @param type
 	 *          the {@link Type} of which all instances should be returned
-	 * @return All adapted instances of the given {@link Type} or
-	 *         <code>null</code> if the {@link Type} does not belong to the
-	 *         {@link IModelInstance}'s {@link IModel}.
+	 * @return All adapted instances of the given {@link Type}.
 	 */
-	Set<IModelInstanceObject> getAllInstances(Type type);
+	Set<IModelInstanceElement> getAllInstances(Type type);
 
 	/**
 	 * <p>
