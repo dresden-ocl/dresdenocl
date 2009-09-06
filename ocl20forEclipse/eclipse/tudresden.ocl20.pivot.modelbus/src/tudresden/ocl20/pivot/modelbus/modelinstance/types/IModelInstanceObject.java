@@ -21,6 +21,7 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 import java.util.List;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
@@ -54,8 +55,6 @@ public interface IModelInstanceObject extends IModelInstanceElement {
 	 * Tries to fetch a property with the given name of the adapted object.
 	 * </p>
 	 * 
-	 * TODO: Exceptions?
-	 * 
 	 * @param property
 	 *          the {@link Property} is used to determine the name of the property
 	 *          and the {@link Type} of the fetched property; if
@@ -87,8 +86,6 @@ public interface IModelInstanceObject extends IModelInstanceElement {
 	 * {@link IModelInstanceObject#getObject() getObject()}, etc.
 	 * </p>
 	 * 
-	 * TODO: Exceptions?
-	 * 
 	 * @param operation
 	 *          The {@link Operation} is used to determine the name of the
 	 *          operation and the {@link Type return type} of the invoked
@@ -101,11 +98,11 @@ public interface IModelInstanceObject extends IModelInstanceElement {
 	 * @throws OperationNotFoundException
 	 *           Thrown, if an Operation that shall be invoked cannot be found in
 	 *           the adapted object.
-	 * @throws PropertyAccessException
+	 * @throws OperationAccessException
 	 *           Thrown, if an exception occurs during the access to the
 	 *           {@link Operation} of the adapted {@link Object}.
 	 */
 	IModelInstanceElement invokeOperation(Operation operation,
 			List<IModelInstanceElement> args) throws OperationNotFoundException,
-			PropertyAccessException;
+			OperationAccessException;
 }

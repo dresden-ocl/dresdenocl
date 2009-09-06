@@ -21,8 +21,10 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -149,7 +151,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 		/* Check if the object is an array. */
 		if (adapted.getClass().isArray()) {
 
-			result = this.createModelInstanceCollection(Arrays.asList((Object[]) adapted));
+			result = this.createModelInstanceCollection(this.convertArray(adapted));
 		}
 
 		/* Else check if the object is a collection. */
@@ -205,6 +207,92 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			LOGGER.debug(msg);
 		}
 		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Converts a given array (as {@link Object}) into a {@link List}.
+	 * </p>
+	 * 
+	 * @param object
+	 *          The array that shall be converted.
+	 * @return The converted {@link List}.
+	 */
+	private List<Object> convertArray(Object object) {
+
+		List<Object> result;
+
+		if (object.getClass().isArray()) {
+
+			Class<?> componentType;
+			componentType = object.getClass().getComponentType();
+
+			if (componentType.isPrimitive()) {
+
+				result = new ArrayList<Object>();
+
+				if (boolean.class.isAssignableFrom(componentType)) {
+					for (boolean anElement : (boolean[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				else if (byte.class.isAssignableFrom(componentType)) {
+					for (byte anElement : (byte[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				else if (char.class.isAssignableFrom(componentType)) {
+					for (char anElement : (char[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				else if (double.class.isAssignableFrom(componentType)) {
+					for (double anElement : (double[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				else if (float.class.isAssignableFrom(componentType)) {
+					for (float anElement : (float[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				else if (int.class.isAssignableFrom(componentType)) {
+					for (int anElement : (int[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				else if (long.class.isAssignableFrom(componentType)) {
+					for (long anElement : (long[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				else if (short.class.isAssignableFrom(componentType)) {
+					for (short anElement : (short[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				/* No other primitive types exist. */
+			}
+
+			else {
+				result = Arrays.asList((Object[]) object);
+			}
+		}
+
+		else {
+			result = new ArrayList<Object>();
+			result.add(object);
+		}
 
 		return result;
 	}

@@ -19,17 +19,18 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.modelinstance.exception;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 /**
  * <p>
- * A {@link PropertyAccessException} is thrown, if an {@link Exception} occurred
- * during the access of an {@link IModelInstanceElement}'s {@link Property}.
+ * A {@link OperationAccessException} is thrown, if an {@link Exception}
+ * occurred during the access of an {@link IModelInstanceElement}'s
+ * {@link Operation}.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class PropertyAccessException extends Exception {
+public class OperationAccessException extends Exception {
 
 	/**
 	 * <p>
@@ -40,20 +41,20 @@ public class PropertyAccessException extends Exception {
 
 	/**
 	 * <p>
-	 * Creates a new {@link PropertyAccessException}.
+	 * Creates a new {@link OperationAccessException}.
 	 * </p>
 	 * 
 	 * @param msg
 	 *          The message of the created {@link Exception}.
 	 */
-	public PropertyAccessException(String msg) {
+	public OperationAccessException(String msg) {
 
 		super(msg);
 	}
 
 	/**
 	 * <p>
-	 * Creates a new {@link PropertyAccessException}.
+	 * Creates a new {@link OperationAccessException}.
 	 * </p>
 	 * 
 	 * @param msg
@@ -62,7 +63,7 @@ public class PropertyAccessException extends Exception {
 	 *          A given {@link Exception} that is the cause of this
 	 *          {@link Exception}.
 	 */
-	public PropertyAccessException(String msg, Exception e) {
+	public OperationAccessException(String msg, Exception e) {
 
 		super(msg, e);
 	}

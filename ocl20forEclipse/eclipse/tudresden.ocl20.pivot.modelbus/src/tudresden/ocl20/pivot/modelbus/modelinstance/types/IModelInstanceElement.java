@@ -49,9 +49,33 @@ public interface IModelInstanceElement {
 
 	/**
 	 * <p>
-	 * Copies this wrapper and sets the {@link #getTypes() type} to the given type
-	 * if an upcast is possible. Downcasts are not necessary, since the execution
-	 * of standard library methods always returns the most specific type.
+	 * Copies this wrapper and sets the {@link #getTypes()}' {@link Type} to the
+	 * given {@link Type} if an cast to the given {@link Type} is possible.
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>Please note, that the cast is performed in way of the OCL
+	 * semantic.</strong>
+	 * </p>
+	 * <p>
+	 * E.g., having two {@link Type}s <code>A</code> and <code>B</code>.
+	 * <code>A</code> defines a method <code>A.a()</code>. <code>B</code> extends
+	 * <code>A</code> and overwrites the method <code>A.a()</code> with
+	 * <code>B.a()</code> and introduces a new method <code>B.b()</code>.
+	 * </p>
+	 * <p>
+	 * If an instance of <code>B</code> (called <code>aB</code>) is casted to
+	 * <code>A</code>, the operation <code>aB.a()</code> is still available but
+	 * all calls will be delegated to <code>A.a()</code> instead. The operation
+	 * <code>aB.b()</code> will not be available anymore.
+	 * </p>
+	 * 
+	 * <p>
+	 * {@link IModelInstancePrimitiveType}s can only be casted to other
+	 * {@link IModelInstancePrimitiveType}s and only in some states.
+	 * {@link IModelInstanceEnumerationLiteral} can only be casted to itself.
+	 * {@link IModelInstanceCollection}s can always be caste to other
+	 * {@link IModelInstanceCollection}s.
 	 * </p>
 	 * 
 	 * @param type
