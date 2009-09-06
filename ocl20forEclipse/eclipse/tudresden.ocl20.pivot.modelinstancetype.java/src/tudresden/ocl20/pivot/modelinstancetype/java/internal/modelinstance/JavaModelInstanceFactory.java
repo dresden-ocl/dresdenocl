@@ -18,7 +18,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
@@ -417,31 +419,40 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * @return The {@link Set} without redundant super {@link Type}s.
 	 */
 	private Set<Type> removeRedundantModelTypes(Set<Type> types) {
-	
+
+		List<Type> typeList;
 		Set<Type> result;
+
+		typeList = new ArrayList<Type>(types);
 		result = new HashSet<Type>();
-	
-		for (Type type1 : types) {
-	
+
+		for (int index1 = 0; index1 < typeList.size(); index1++) {
+
+			Type type1;
 			boolean isRedundant;
+
+			type1 = typeList.get(index1);
 			isRedundant = false;
-	
+
 			/* Check if any other type is a sub type of type 1. */
-			for (Type type2 : types) {
-	
-				if (type2.conformsTo(type1)) {
+			for (int index2 = 0; index2 < typeList.size(); index2++) {
+
+				Type type2;
+				type2 = typeList.get(index2);
+
+				if (index1 != index2 && type2.conformsTo(type1)) {
 					isRedundant = true;
 					break;
 				}
 				// no else.
 			}
-	
+
 			if (!isRedundant) {
 				result.add(type1);
 			}
 			// no else.
 		}
-	
+
 		return result;
 	}
 }

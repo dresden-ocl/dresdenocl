@@ -152,7 +152,7 @@ public class JavaModelInstanceTypeUtility {
 		result = toPrimitiveQualifiedName(canonicalName);
 
 		if (result == null) {
-			result = Arrays.asList(canonicalName.split("[.]"));
+			result = new ArrayList<String>(Arrays.asList(canonicalName.split("[.]")));
 			result.add(0, IModelBusConstants.ROOT_PACKAGE_NAME);
 		}
 		// no else.

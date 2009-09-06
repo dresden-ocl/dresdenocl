@@ -30,6 +30,7 @@ import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.CopyForAtPreException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
@@ -65,6 +66,13 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 	private Object myAdaptedObject;
 
 	/**
+	 * The Java {@link Class} this {@link JavaModelInstanceObject} is casted to.
+	 * This is required to access the right {@link Property}s and
+	 * {@link Operation}s.
+	 */
+	private Class<?> myAdaptedType;
+
+	/**
 	 * The {@link IModelInstanceFactory} of this
 	 * {@link JavaModelInstanceCollection}. Required to adapt the contained
 	 * {@link Object}s to {@link IModelInstanceElement}s.
@@ -76,7 +84,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 	 * Creates a new {@link JavaModelInstanceObject}.
 	 * </p>
 	 * 
-	 * @param anObject
+	 * @param object
 	 *          The {@link Object} for which an {@link JavaModelInstanceObject}
 	 *          shall be created.
 	 * @param types
@@ -87,15 +95,42 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 	 *          {@link Object}s of accesses {@link Property}s or results of
 	 *          invoked {@link Operation}s.
 	 */
-	public JavaModelInstanceObject(Object anObject, Set<Type> types,
+	public JavaModelInstanceObject(Object object, Set<Type> types,
 			IModelInstanceFactory factory) {
+
+		this(object, object.getClass(), types, factory);
+	}
+
+	/**
+	 * <p>
+	 * Creates a new {@link JavaModelInstanceObject}.
+	 * </p>
+	 * 
+	 * @param object
+	 *          The {@link Object} for which an {@link JavaModelInstanceObject}
+	 *          shall be created.
+	 * @param castedToClass
+	 *          The Java {@link Class} this {@link JavaModelInstanceObject} is
+	 *          casted to. This is required to access the right {@link Property}s
+	 *          and {@link Operation}s.
+	 * @param types
+	 *          The {@link Type}s this {@link IModelInstanceElement} belongs to.
+	 * @param factory
+	 *          The {@link JavaModelInstanceObjectFactory} of this
+	 *          {@link JavaModelInstanceObject}. Required to adapt the
+	 *          {@link Object}s of accesses {@link Property}s or results of
+	 *          invoked {@link Operation}s.
+	 */
+	public JavaModelInstanceObject(Object object, Class<?> castedToClass,
+			Set<Type> types, IModelInstanceFactory factory) {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
 			msg = "JavaModelInstanceObject("; //$NON-NLS-1$
-			msg += "anObject = " + anObject; //$NON-NLS-1$
+			msg += "object = " + object; //$NON-NLS-1$
+			msg += ", castedToClass = " + castedToClass; //$NON-NLS-1$
 			msg += ", types = " + types; //$NON-NLS-1$
 			msg += ", factory = " + factory; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
@@ -104,7 +139,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 		}
 		// no else.
 
-		this.myAdaptedObject = anObject;
+		this.myAdaptedObject = object;
+		this.myAdaptedType = castedToClass;
 		this.myTypes = types;
 		this.myFactory = factory;
 
@@ -127,18 +163,21 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 	 */
 	public String getName() {
 
-		String result;
+		StringBuffer resultBuffer;
+		resultBuffer = new StringBuffer();
 
-		result = JavaModelInstanceObject.class.getSimpleName();
-		result += "[";
-		result += this.myAdaptedObject;
-		result += "]";
+		resultBuffer.append(JavaModelInstanceObject.class.getSimpleName());
+		resultBuffer.append("[");
+		resultBuffer.append(this.getTypes().toString());
+		resultBuffer.append(", ");
+		resultBuffer.append(this.myAdaptedObject);
+		resultBuffer.append("]");
 
-		return result;
+		return resultBuffer.toString();
 	}
 
 	/*
-	 * FIXME Claas: Show micha this method. Is that correct? (non-Javadoc)
+	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
@@ -146,76 +185,183 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
 		IModelInstanceElement result;
+
 		String typeClassName;
+		Class<?> typeClass;
 
-		/* By default the result is null. */
-		result = null;
+		/* Get a canonical name for the given type. */
+		typeClassName =
+				JavaModelInstanceTypeUtility.toCanonicalName(type
+						.getQualifiedNameList());
 
-		/* Check if the given type is a super type of the type of this object. */
-		for (Type oneOfMyTypes : this.myTypes) {
-
-			if (oneOfMyTypes.conformsTo(type)) {
-				Set<Type> types;
-
-				types = new HashSet<Type>();
-				types.add(type);
-
-				result =
-						new JavaModelInstanceObject(this.myAdaptedObject, types,
-								this.myFactory);
-
-				break;
-			}
-			// no else.
+		/* Try to find a class that is represented by the given type. */
+		try {
+			typeClass =
+					this.myAdaptedObject.getClass().getClassLoader().loadClass(
+							typeClassName);
 		}
 
-		/* Else try to find an implementation of the given type. */
-		if (result == null) {
-			Class<?> typeClass;
+		catch (ClassNotFoundException e) {
+			String msg;
 
-			/* Get a canonical name for the given type. */
-			typeClassName =
-					JavaModelInstanceTypeUtility.toCanonicalName(type
-							.getQualifiedNameList());
+			msg =
+					JavaModelInstanceTypeMessages.JavaModelInstance_CannotCastTypeClassNotFound;
+			msg = NLS.bind(msg, this.getName(), type);
 
-			/* Try to find a class that is represented by the given type. */
-			try {
-				typeClass =
-						this.myAdaptedObject.getClass().getClassLoader().loadClass(
-								typeClassName);
-			}
-
-			catch (ClassNotFoundException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotCastTypeClassNotFound;
-				msg = NLS.bind(msg, this.getName(), type);
-
-				throw new AsTypeCastException(msg, e);
-			}
-
-			/* Check if this object can be casted to the found class. */
-			if (this.myAdaptedObject.getClass().isAssignableFrom(typeClass)
-					|| typeClass.isAssignableFrom(this.myAdaptedObject.getClass())) {
-
-			}
-
-			/* Else throw an exception. */
-			else {
-				String msg;
-
-				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCast;
-				msg = NLS.bind(msg, this.getName(), type);
-
-				throw new AsTypeCastException(msg);
-			}
-			// end else.
+			throw new AsTypeCastException(msg, e);
 		}
-		// no else.
+
+		/* Check if this object can be casted to the found class. */
+		if (typeClass.isAssignableFrom(this.myAdaptedObject.getClass())) {
+
+			Set<Type> types;
+			types = new HashSet<Type>();
+
+			/* Cast this object to the found type. */
+			types.add(type);
+			result =
+					new JavaModelInstanceObject(this.myAdaptedObject, typeClass, types,
+							this.myFactory);
+		}
+
+		/* Else throw an exception. */
+		else {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type);
+
+			throw new AsTypeCastException(msg);
+		}
+		// end else.
 
 		return result;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject#
+	 * getAdaptedObject()
+	 */
+	public Object getObject() {
+
+		return this.myAdaptedObject;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isUndefined()
+	 */
+	public boolean isUndefined() {
+	
+		return this.myAdaptedObject == null;
+	}
+
+	/**
+	 * <p>
+	 * A helper {@link Method} used to find a method of the adapted {@link Object}
+	 * of this {@link JavaModelInstanceObject} that conforms to a given
+	 * {@link Operation}.
+	 * </p>
+	 * 
+	 * @param operation
+	 *          The {@link Operation} for that a {@link Method} shall be found.
+	 * @return The found {@link Method}.
+	 * @throws OperationNotFoundException
+	 *           If no matching {@link Method} for the given {@link Operation} can
+	 *           be found.
+	 */
+	private Method findMethodOfAdaptedObject(Operation operation)
+			throws OperationNotFoundException {
+	
+		Method result;
+	
+		Class<?> methodSourceClass;
+	
+		result = null;
+		methodSourceClass = this.myAdaptedType;
+	
+		/*
+		 * Try to find an according method in the adapted objects class, or one of
+		 * its super classes.
+		 */
+		while (methodSourceClass != null && result == null) {
+	
+			for (Method aMethod : methodSourceClass.getMethods()) {
+	
+				boolean nameIsEqual;
+				boolean resultTypeIsConform;
+				boolean argumentSizeIsEqual;
+	
+				/* Check if the name matches to the given operation's name. */
+				nameIsEqual = aMethod.getName().equals(operation.getName());
+	
+				/* Check if the return type matches to the given operation's type. */
+				resultTypeIsConform =
+						JavaModelInstanceTypeUtility.conformsTypeToType(aMethod
+								.getGenericReturnType(), operation.getType());
+	
+				/*
+				 * Check if the method has the same size of arguments as the given
+				 * operation.
+				 */
+				argumentSizeIsEqual =
+						aMethod.getGenericParameterTypes().length == operation
+								.getSignatureParameter().size();
+	
+				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
+	
+					java.lang.reflect.Type[] javaTypes;
+					List<Parameter> pivotModelParamters;
+	
+					boolean matches;
+	
+					javaTypes = aMethod.getGenericParameterTypes();
+					pivotModelParamters = operation.getSignatureParameter();
+	
+					matches = true;
+	
+					/* Compare the types of all arguments. */
+					for (int index = 0; index < operation.getSignatureParameter().size(); index++) {
+	
+						if (!JavaModelInstanceTypeUtility.conformsTypeToType(
+								javaTypes[index], pivotModelParamters.get(index).getType())) {
+							matches = false;
+							break;
+						}
+						// no else.
+					}
+	
+					if (matches) {
+						result = aMethod;
+						break;
+					}
+					// no else.
+				}
+				// no else.
+			}
+			// end for.
+		}
+		// end while.
+	
+		/* Probably throw an exception. */
+		if (result == null) {
+			String msg;
+	
+			msg =
+					JavaModelInstanceTypeMessages.JavaModelInstance_OperationNotFoundInModelInstanceElement;
+			msg = NLS.bind(msg, operation, this.myAdaptedObject.getClass());
+	
+			throw new OperationNotFoundException(msg);
+		}
+		// no else.
+	
+		return result;
+	}
+
+	private static final int SOME_OPEN_QUESTIONS_IN_THE_FOLLOWING = 0;
 
 	/*
 	 * FIXME Claas: Show Micha this method. Is that okay? (non-Javadoc)
@@ -310,16 +456,6 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject#
-	 * getAdaptedObject()
-	 */
-	public Object getObject() {
-
-		return this.myAdaptedObject;
-	}
-
-	/*
-	 * FIXME Claas: Show Micha this method. Is that okay? (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
 	 * #getProperty(tudresden.ocl20.pivot.pivotmodel.Property)
@@ -329,7 +465,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 		IModelInstanceElement result;
 
-		Class<?> adapteeClass;
+		Class<?> propertySourceClass;
 		Field propertyField;
 
 		/* Check if this object is undefined. */
@@ -343,26 +479,27 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 		}
 
 		/*
-		 * Try to find a field with the property's name in the class of the adapted
-		 * object.
+		 * Try to find a field with the property's name in the class the adapted
+		 * object is currently casted to.
 		 */
 		else {
-			adapteeClass = this.myAdaptedObject.getClass();
 			propertyField = null;
 
 			/*
 			 * Search through all super classes as well. Until the field has been
 			 * found, or no more super classes exist.
 			 */
-			while (adapteeClass != null && propertyField == null) {
+			propertySourceClass = this.myAdaptedType;
+			
+			while (propertySourceClass != null && propertyField == null) {
 
 				try {
-					propertyField = adapteeClass.getDeclaredField(property.getName());
+					propertyField = propertySourceClass.getDeclaredField(property.getName());
 				}
 
 				catch (NoSuchFieldException e) {
 					/* Try to find the field again in super class. */
-					adapteeClass = adapteeClass.getSuperclass();
+					propertySourceClass = propertySourceClass.getSuperclass();
 				}
 			}
 			// end while.
@@ -384,6 +521,15 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 						 * factory the type of the adapted element?
 						 */
 						result = this.myFactory.createModelInstanceElement(propertyValue);
+						try {
+							result = result.asType(property.getType());
+						}
+
+						catch (AsTypeCastException e) {
+							/* Probably throw an exception. */
+							e.printStackTrace();
+							result = null;
+						}
 					}
 
 					catch (TypeNotFoundInModelException e) {
@@ -441,7 +587,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 	 */
 	public IModelInstanceElement invokeOperation(Operation operation,
 			List<IModelInstanceElement> args) throws OperationNotFoundException,
-			PropertyAccessException {
+			OperationAccessException {
 
 		IModelInstanceElement result;
 
@@ -482,7 +628,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 				operationMethod.setAccessible(true);
 
 				adapteeResult =
-						operationMethod.invoke(this.myAdaptedObject.getClass(),
+						operationMethod.invoke(this.myAdaptedType,
 								argumentValues);
 
 				/* Adapt the result. */
@@ -505,7 +651,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
 
-				throw new PropertyAccessException(msg, e);
+				throw new OperationAccessException(msg, e);
 			}
 
 			catch (IllegalAccessException e) {
@@ -515,7 +661,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
 
-				throw new PropertyAccessException(msg, e);
+				throw new OperationAccessException(msg, e);
 			}
 
 			catch (InvocationTargetException e) {
@@ -525,123 +671,10 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
 
-				throw new PropertyAccessException(msg, e);
+				throw new OperationAccessException(msg, e);
 			}
 		}
 		// end else.
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-
-		return this.myAdaptedObject == null;
-	}
-
-	/**
-	 * <p>
-	 * A helper {@link Method} used to find a method of the adapted {@link Object}
-	 * of this {@link JavaModelInstanceObject} that conforms to a given
-	 * {@link Operation}.
-	 * </p>
-	 * 
-	 * @param operation
-	 *          The {@link Operation} for that a {@link Method} shall be found.
-	 * @return The found {@link Method}.
-	 * @throws OperationNotFoundException
-	 *           If no matching {@link Method} for the given {@link Operation} can
-	 *           be found.
-	 */
-	private Method findMethodOfAdaptedObject(Operation operation)
-			throws OperationNotFoundException {
-
-		Method result;
-
-		Class<?> methodSourceClass;
-
-		result = null;
-		methodSourceClass = this.myAdaptedObject.getClass();
-
-		/*
-		 * Try to find an according method in the adapted objects class, or one of
-		 * its super classes.
-		 */
-		while (methodSourceClass != null && result == null) {
-
-			for (Method aMethod : methodSourceClass.getMethods()) {
-
-				boolean nameIsEqual;
-				boolean resultTypeIsConform;
-				boolean argumentSizeIsEqual;
-
-				/* Check if the name matches to the given operation's name. */
-				nameIsEqual = aMethod.getName().equals(operation.getName());
-
-				/* Check if the return type matches to the given operation's type. */
-				resultTypeIsConform =
-						JavaModelInstanceTypeUtility.conformsTypeToType(aMethod
-								.getGenericReturnType(), operation.getType());
-
-				/*
-				 * Check if the method has the same size of arguments as the given
-				 * operation.
-				 */
-				argumentSizeIsEqual =
-						aMethod.getGenericParameterTypes().length == operation
-								.getSignatureParameter().size();
-
-				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
-
-					java.lang.reflect.Type[] javaTypes;
-					List<Parameter> pivotModelParamters;
-
-					boolean matches;
-
-					javaTypes = aMethod.getGenericParameterTypes();
-					pivotModelParamters = operation.getSignatureParameter();
-
-					matches = true;
-
-					/* Compare the types of all arguments. */
-					for (int index = 0; index < operation.getSignatureParameter().size(); index++) {
-
-						if (!JavaModelInstanceTypeUtility.conformsTypeToType(
-								javaTypes[index], pivotModelParamters.get(index).getType())) {
-							matches = false;
-							break;
-						}
-						// no else.
-					}
-
-					if (matches) {
-						result = aMethod;
-						break;
-					}
-					// no else.
-				}
-				// no else.
-			}
-			// end for.
-		}
-		// end while.
-
-		/* Probably throw an exception. */
-		if (result == null) {
-			String msg;
-
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_OperationNotFoundInModelInstanceElement;
-			msg = NLS.bind(msg, operation, this.myAdaptedObject.getClass());
-
-			throw new OperationNotFoundException(msg);
-		}
-		// no else.
 
 		return result;
 	}
