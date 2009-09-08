@@ -249,6 +249,101 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
+
+		IModelInstanceElement result;
+
+		String typeClassName;
+		Class<?> typeClass;
+
+		Set<Type> types;
+
+		types = new HashSet<Type>();
+		types.add(type);
+
+		/* For undefined elements, only model types can be checked. */
+		if (this.myAdaptedObject == null) {
+
+			result = null;
+
+			/* If the type can be casted in the model, cast it. */
+			for (Type oneOfMyTypes : this.myTypes) {
+				if (type.conformsTo(oneOfMyTypes)) {
+					result = new JavaModelInstanceObject(null, types, this.myFactory);
+					break;
+				}
+				// no else.
+			}
+			// end for.
+
+			/* If no cast has been done, throw an exception. */
+			if (result == null) {
+				String msg;
+
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCast;
+				msg = NLS.bind(msg, this.getName(), type);
+
+				throw new AsTypeCastException(msg);
+			}
+			// no else.
+		}
+
+		/* Else handle the not undefined object. */
+		else {
+			/* Get a canonical name for the given type. */
+			typeClassName =
+					JavaModelInstanceTypeUtility.toCanonicalName(type
+							.getQualifiedNameList());
+
+			/* Try to find a class that is represented by the given type. */
+			try {
+				typeClass =
+						this.myAdaptedObject.getClass().getClassLoader().loadClass(
+								typeClassName);
+			}
+
+			/* If no class has been found, throw an exception. */
+			catch (ClassNotFoundException e) {
+				String msg;
+
+				msg =
+						JavaModelInstanceTypeMessages.JavaModelInstance_CannotCastTypeClassNotFound;
+				msg = NLS.bind(msg, this.getName(), type);
+
+				throw new AsTypeCastException(msg, e);
+			}
+
+			/* Check if this object can be casted to the found class. */
+			if (typeClass.isAssignableFrom(this.myAdaptedObject.getClass())) {
+
+				/* Cast this object to the found type. */
+				result =
+						new JavaModelInstanceObject(this.myAdaptedObject, typeClass, types,
+								this.myFactory);
+			}
+
+			/* Else throw an exception. */
+			else {
+				String msg;
+
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCast;
+				msg = NLS.bind(msg, this.getName(), type);
+
+				throw new AsTypeCastException(msg);
+			}
+			// end else.
+		}
+		// end else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject#
 	 * getAdaptedObject()
 	 */
@@ -566,110 +661,14 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
 
 	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
-	 */
-	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
-
-		IModelInstanceElement result;
-
-		String typeClassName;
-		Class<?> typeClass;
-
-		Set<Type> types;
-
-		types = new HashSet<Type>();
-		types.add(type);
-
-		/* For undefined elements, only model types can be checked. */
-		if (this.myAdaptedObject == null) {
-			/* FIXME Claas: Ask Micha: What about undefined values. */
-
-			result = null;
-
-			/* If the type can be casted in the model, cast it. */
-			for (Type oneOfMyTypes : this.myTypes) {
-				if (type.conformsTo(oneOfMyTypes)) {
-					result = new JavaModelInstanceObject(null, types, this.myFactory);
-					break;
-				}
-				// no else.
-			}
-			// end for.
-
-			/* If no cast has been done, throw an exception. */
-			if (result == null) {
-				String msg;
-
-				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCast;
-				msg = NLS.bind(msg, this.getName(), type);
-
-				throw new AsTypeCastException(msg);
-			}
-			// no else.
-		}
-
-		/* Else handle the not undefined object. */
-		else {
-			/* Get a canonical name for the given type. */
-			typeClassName =
-					JavaModelInstanceTypeUtility.toCanonicalName(type
-							.getQualifiedNameList());
-
-			/* Try to find a class that is represented by the given type. */
-			try {
-				typeClass =
-						this.myAdaptedObject.getClass().getClassLoader().loadClass(
-								typeClassName);
-			}
-
-			/* If no class has been found, throw an exception. */
-			catch (ClassNotFoundException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotCastTypeClassNotFound;
-				msg = NLS.bind(msg, this.getName(), type);
-
-				throw new AsTypeCastException(msg, e);
-			}
-
-			/* Check if this object can be casted to the found class. */
-			if (typeClass.isAssignableFrom(this.myAdaptedObject.getClass())) {
-
-				/* Cast this object to the found type. */
-				result =
-						new JavaModelInstanceObject(this.myAdaptedObject, typeClass, types,
-								this.myFactory);
-			}
-
-			/* Else throw an exception. */
-			else {
-				String msg;
-
-				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCast;
-				msg = NLS.bind(msg, this.getName(), type);
-
-				throw new AsTypeCastException(msg);
-			}
-			// end else.
-		}
-		// end else.
-
-		return result;
-	}
-
-	/*
-	 * FIXME Claas: Show Micha this method. Is that okay? (non-Javadoc)
+	 * FIXME Claas: Implement a reflection copy mechanism as well? (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #copyForAtPre()
 	 */
-	public Object copyForAtPre() throws CopyForAtPreException {
+	public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
 
-		Object result;
+		IModelInstanceElement result;
 
 		/* Check if the adapted object is clone-able. */
 		if (this.myAdaptedObject instanceof Cloneable) {
@@ -678,10 +677,15 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 			/* Try to find and invoke the clone method. */
 			try {
+				Object adaptedResult;
+
 				cloneMethod = this.myAdaptedObject.getClass().getMethod("clone");
 				cloneMethod.setAccessible(true);
 
-				result = cloneMethod.invoke(this.myAdaptedObject);
+				adaptedResult = cloneMethod.invoke(this.myAdaptedObject);
+				result =
+						new JavaModelInstanceObject(adaptedResult, this.myTypes,
+								this.myFactory);
 			}
 
 			catch (SecurityException e) {

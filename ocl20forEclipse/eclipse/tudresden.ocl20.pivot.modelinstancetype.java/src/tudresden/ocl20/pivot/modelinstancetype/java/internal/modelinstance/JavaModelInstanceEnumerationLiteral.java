@@ -109,20 +109,20 @@ public class JavaModelInstanceEnumerationLiteral extends
 	 * #getName()
 	 */
 	public String getName() {
-	
+
 		StringBuffer resultBuffer;
 		resultBuffer = new StringBuffer();
-	
+
 		/* Probably return the element's name. */
 		if (this.myName != null) {
 			resultBuffer.append(this.myName);
 		}
-	
+
 		/* Else probably return the element's id. */
 		else if (this.myId != null) {
 			resultBuffer.append(this.myId);
 		}
-	
+
 		/* Else construct a name of all implemented types. */
 		else {
 			resultBuffer.append(this.getClass().getSimpleName());
@@ -131,46 +131,9 @@ public class JavaModelInstanceEnumerationLiteral extends
 			resultBuffer.append("]");
 		}
 		// end else.
-	
+
 		return resultBuffer.toString();
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #copyForAtPre()
-	 */
-	public Object copyForAtPre() {
-	
-		/* Return a copy of the literal. */
-		return new JavaModelInstanceEnumerationLiteral(this.myLiteral,
-				new HashSet<Type>(this.myTypes));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral
-	 * #getLiteral()
-	 */
-	public Enum<?> getLiteral() {
-	
-		return this.myLiteral;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-	
-		return this.myLiteral == null;
-	}
-
-	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
 
 	/*
 	 * (non-Javadoc)
@@ -187,8 +150,6 @@ public class JavaModelInstanceEnumerationLiteral extends
 		/* Check if the given type is the type of this literal. */
 		if (this.myTypes.contains(type)) {
 
-			/* FIXME Claas: Ask Micha: What about undefined values. */
-			
 			Set<Type> types;
 			types = new HashSet<Type>();
 			types.add(type);
@@ -209,5 +170,40 @@ public class JavaModelInstanceEnumerationLiteral extends
 		// no else.
 
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #copyForAtPre()
+	 */
+	public IModelInstanceElement copyForAtPre() {
+
+		/* Return a copy of the literal. */
+		return new JavaModelInstanceEnumerationLiteral(this.myLiteral,
+				new HashSet<Type>(this.myTypes));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral
+	 * #getLiteral()
+	 */
+	public Enum<?> getLiteral() {
+
+		return this.myLiteral;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isUndefined()
+	 */
+	public boolean isUndefined() {
+
+		return this.myLiteral == null;
 	}
 }
