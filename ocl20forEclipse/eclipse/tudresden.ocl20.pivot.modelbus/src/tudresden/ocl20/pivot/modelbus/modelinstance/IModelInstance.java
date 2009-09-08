@@ -102,6 +102,9 @@ public interface IModelInstance {
 	 * @param type
 	 *          The {@link Type} that shall be found.
 	 * @return The found {@link IModelInstanceTypeObject} or <code>null</code>.
+	 * 
+	 * @deprecated This method should not be required anymore. Probably it could
+	 *             be removed.
 	 */
 	public IModelInstanceTypeObject findModelTypeObject(Type type);
 
@@ -234,21 +237,4 @@ public interface IModelInstance {
 	 *         the given {@link IModel}. Else <code>false</code>.
 	 */
 	boolean isInstanceOf(IModel aModel);
-
-	/**
-	 * <p>
-	 * Maps OCL operation names to standard library operation names.
-	 * </p>
-	 * 
-	 * FIXME Claas: Ask Micha why this operation is required. Shouldn't be this a
-	 * task of the standard library itself?
-	 * 
-	 * @param name
-	 *          the name of the operation
-	 * @param operatorCount
-	 *          the operator count
-	 * 
-	 * @return the standardlibrary operation name
-	 */
-	String getOperationName(String name, int operatorCount);
 }

@@ -101,11 +101,11 @@ public interface IModelInstanceElement {
 	 * types it should only copy the collection but not its content.
 	 * </p>
 	 * 
-	 * @return a deep copy of the adapted element
+	 * @return A copy of the adapted element.
 	 * @throws CopyForAtPreException
 	 *           Thrown, if an error during the copy process occurs.
 	 */
-	Object copyForAtPre() throws CopyForAtPreException;
+	IModelInstanceElement copyForAtPre() throws CopyForAtPreException;
 
 	/**
 	 * <p>

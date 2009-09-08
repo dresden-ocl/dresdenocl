@@ -28,11 +28,13 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollecti
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
+/* FIXME Claas: Refactor this class. Remove inits into constructor. */
 /**
  * <p>
  * This class provides some constants that can be used as model {@link Type}s
@@ -59,7 +61,7 @@ public final class PrimitiveAndCollectionTypeConstants {
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	{
 		MODEL_TYPE_BOOLEAN.setKind(PrimitiveTypeKind.BOOLEAN);
-		MODEL_TYPE_BOOLEAN.setName(PrimitiveTypeKind.BOOLEAN.toString());
+		MODEL_TYPE_BOOLEAN.setName(PrimitiveTypeKind.BOOLEAN.getName());
 	}
 
 	/**
@@ -73,7 +75,7 @@ public final class PrimitiveAndCollectionTypeConstants {
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	{
 		MODEL_TYPE_INTEGER.setKind(PrimitiveTypeKind.INTEGER);
-		MODEL_TYPE_INTEGER.setName(PrimitiveTypeKind.INTEGER.toString());
+		MODEL_TYPE_INTEGER.setName(PrimitiveTypeKind.INTEGER.getName());
 	}
 
 	/**
@@ -87,7 +89,7 @@ public final class PrimitiveAndCollectionTypeConstants {
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	{
 		MODEL_TYPE_REAL.setKind(PrimitiveTypeKind.REAL);
-		MODEL_TYPE_REAL.setName(PrimitiveTypeKind.REAL.toString());
+		MODEL_TYPE_REAL.setName(PrimitiveTypeKind.REAL.getName());
 	}
 
 	/**
@@ -101,7 +103,21 @@ public final class PrimitiveAndCollectionTypeConstants {
 			PivotModelFactory.INSTANCE.createPrimitiveType();
 	{
 		MODEL_TYPE_STRING.setKind(PrimitiveTypeKind.STRING);
-		MODEL_TYPE_STRING.setName(PrimitiveTypeKind.STRING.toString());
+		MODEL_TYPE_STRING.setName(PrimitiveTypeKind.STRING.getName());
+	}
+
+	/**
+	 * The {@link PrimitiveType} implementation of the
+	 * {@link PrimitiveTypeKind#VOID}. Because {@link PrimitiveType}s are not part
+	 * of the {@link IModel}, their {@link Type} must be created externally. This
+	 * field represents the {@link PrimitiveType} instance that is the only
+	 * {@link Type} of all {@link IModelInstanceVoid}s.
+	 */
+	public final PrimitiveType MODEL_TYPE_VOID =
+			PivotModelFactory.INSTANCE.createPrimitiveType();
+	{
+		MODEL_TYPE_VOID.setKind(PrimitiveTypeKind.VOID);
+		MODEL_TYPE_VOID.setName(PrimitiveTypeKind.VOID.getName());
 	}
 
 	/**

@@ -133,41 +133,6 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #deepCopy()
-	 */
-	public Object copyForAtPre() {
-
-		return new JavaModelInstanceBoolean(this.myBoolean);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean#getBoolean
-	 * ()
-	 */
-	public Boolean getBoolean() {
-
-		return this.myBoolean;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-
-		return (this.myBoolean == null);
-	}
-
-	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
@@ -186,15 +151,12 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 			/* Check the given PrimitiveTypeKind. */
 			if (primitiveType.getKind().equals(PrimitiveTypeKind.BOOLEAN)) {
 
-				/* FIXME Claas: Ask Micha: What about undefined values. */
-
 				/* Create a new boolean to avoid side effects. */
 				result = new JavaModelInstanceBoolean(this.myBoolean);
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
 
-				/* FIXME Claas: Ask Micha: What about undefined values. */
 				if (this.myBoolean == null) {
 					result = new JavaModelInstanceString(null);
 				}
@@ -219,5 +181,38 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 		// no else.
 
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #deepCopy()
+	 */
+	public IModelInstanceElement copyForAtPre() {
+
+		return new JavaModelInstanceBoolean(this.myBoolean);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean#getBoolean
+	 * ()
+	 */
+	public Boolean getBoolean() {
+
+		return this.myBoolean;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isUndefined()
+	 */
+	public boolean isUndefined() {
+
+		return (this.myBoolean == null);
 	}
 }

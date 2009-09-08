@@ -19,17 +19,13 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 
 import java.util.Collection;
-import java.util.Iterator;
-
-import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+import java.util.Collections;
 
 /**
  * <p>
  * Represents an {@link IModelInstanceElement} that contains other
- * {@link IModelInstanceElement}s. This interface can be used to adapt array or
- * collection like instances.
+ * {@link IModelInstanceElement}s. This interface can be used to adapt arrays or
+ * {@link Collections}.
  * </p>
  * 
  * @param <T>
@@ -37,47 +33,37 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInMode
  * 
  * @author Claas Wilke
  */
-public interface IModelInstanceCollection<T> extends IModelInstanceElement {
+public interface IModelInstanceCollection<T extends IModelInstanceElement>
+		extends IModelInstanceElement {
 
 	/**
 	 * <p>
-	 * Returns the adapter for the given object that is contained is the adapted
-	 * list.
-	 * </p>
+	 * Returns the underlying {@link Collection} of {@link IModelInstanceElement}
+	 * s.
 	 * <p>
-	 * This allows a <i>lazy adaptation</i>, since for some of the standard
-	 * library collection operations it is not necessary to adapt the whole
-	 * collection content.
-	 * </p>
 	 * 
-	 * @param object
-	 *          an object contained in the adapted collection
-	 * @return the adapter for the given object
-	 * @throws TypeNotFoundInModelException
-	 *           Thrown, if a given {@link Object} cannot be adapted to any
-	 *           {@link TypeNotFoundInModelException} in the {@link IModel} of the
-	 *           {@link IModelInstance}.
-	 */
-	IModelInstanceElement getAdapter(T object)
-			throws TypeNotFoundInModelException;
-
-	/**
-	 * Returns the underlying {@link Collection}.
-	 * 
-	 * @return the underlying {@link Collection}
+	 * @return The underlying {@link Collection} of {@link IModelInstanceElement}
+	 *         s.
 	 */
 	Collection<T> getCollection();
 
 	/**
-	 * Returns an {@link Iterator} for the underlying collection.
+	 * <p>
+	 * Checks whether or not this {@link IModelInstanceCollection} is contains
+	 * ordered elements.
+	 * </p>
 	 * 
-	 * @return an {@link Iterator} for the underlying collection.
+	 * <p>
+	 * Default value is <code>true</code>.
+	 * </p>
+	 * 
+	 * @return Whether or not this {@link IModelInstanceCollection} is ordered.
 	 */
-	Iterator<T> getIterator();
+	boolean isOrdered();
 
 	/**
 	 * <p>
-	 * Checks whether or not this {@link IModelObject} is contains ordered
+	 * Checks whether or not this {@link IModelInstanceCollection} contains unique
 	 * elements.
 	 * </p>
 	 * 
@@ -85,20 +71,7 @@ public interface IModelInstanceCollection<T> extends IModelInstanceElement {
 	 * Default value is <code>true</code>.
 	 * </p>
 	 * 
-	 * @return Whether or not this {@link IModelObject} is ordered.
-	 */
-	boolean isOrdered();
-
-	/**
-	 * <p>
-	 * Checks whether or not this {@link IModelObject} contains unique elements.
-	 * </p>
-	 * 
-	 * <p>
-	 * Default value is <code>true</code>.
-	 * </p>
-	 * 
-	 * @return Whether or not this {@link IModelObject} is unique.
+	 * @return Whether or not this {@link IModelInstanceCollection} is unique.
 	 */
 	boolean isUnique();
 }

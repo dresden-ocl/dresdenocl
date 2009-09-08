@@ -31,7 +31,6 @@
 package tudresden.ocl20.pivot.modelbus.modelinstance.base;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -279,70 +278,5 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	public boolean isInstanceOf(IModel aModel) {
 
 		return this.myModel.equals(aModel);
-	}
-
-	/**
-	 * FIXME Claas: This has to be moved into the standard library.
-	 * 
-	 * Contains the operation names which are different in the standard library
-	 * than in the OCL specification. The names are separated in sub maps
-	 * depending on their number of arguments.
-	 */
-	protected static Map<Integer, Map<String, String>> operationNames =
-			new HashMap<Integer, Map<String, String>>();
-
-	/* Initializes the map. */
-	static {
-		Map<String, String> unaryOperations;
-		Map<String, String> binaryOperations;
-
-		unaryOperations = new HashMap<String, String>();
-		unaryOperations.put("-", "negative");
-		unaryOperations.put("oclIsUndefined", "isOclUndefined");
-		operationNames.put(1, unaryOperations);
-
-		binaryOperations = new HashMap<String, String>();
-		binaryOperations.put("<=", "isLessEqual");
-		binaryOperations.put("<", "isLessThan");
-		binaryOperations.put("=", "isEqualTo");
-		binaryOperations.put("<>", "isNotEqualTo");
-		binaryOperations.put(">=", "isGreaterEqual");
-		binaryOperations.put(">", "isGreaterThan");
-		binaryOperations.put("-", "subtract");
-		binaryOperations.put("+", "add");
-		binaryOperations.put("*", "multiply");
-		binaryOperations.put("/", "divide");
-		binaryOperations.put(".", "getPropertyValue");
-		binaryOperations.put("->", "asSet");
-		operationNames.put(2, binaryOperations);
-	}
-
-	/*
-	 * FIXME Claas: This method should be located in the standard library.
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang
-	 * .String, int)
-	 */
-	public String getOperationName(String name, int operatorCount) {
-
-		String result;
-		Map<String, String> operationMap;
-
-		result = null;
-		operationMap = operationNames.get(operatorCount);
-
-		if (operationMap != null) {
-
-			result = operationMap.get(name);
-		}
-		// no else.
-
-		if (result == null) {
-			result = name;
-		}
-		// no else.
-
-		return result;
 	}
 }

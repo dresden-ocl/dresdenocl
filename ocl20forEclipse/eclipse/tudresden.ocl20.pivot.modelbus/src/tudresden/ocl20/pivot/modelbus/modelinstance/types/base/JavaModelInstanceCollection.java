@@ -21,7 +21,6 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -219,11 +218,111 @@ public class JavaModelInstanceCollection<T> extends
 	}
 
 	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
+
+		IModelInstanceElement result;
+
+		/* By default, the result is undefined. */
+		result = null;
+
+		/* Collections can only be casted to collections. */
+		if (type instanceof CollectionType) {
+
+			Collection<T> adaptedCollection;
+			CollectionType collectionType;
+			collectionType = (CollectionType) type;
+
+			switch (collectionType.getKind()) {
+
+			case BAG:
+
+				/* Create a new List to avoid side effects. */
+				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
+								this.myFactory,
+								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
+				break;
+
+			case SEQUENCE:
+
+				/* Create a new List to avoid side effects. */
+				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(
+								adaptedCollection,
+								this.myFactory,
+								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE);
+				break;
+
+			case SET:
+
+				/* Create a new Set to avoid side effects. */
+				adaptedCollection = new HashSet<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
+								this.myFactory,
+								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
+				break;
+
+			case ORDERED_SET:
+
+				/* Create a new List to avoid side effects. */
+				adaptedCollection = new UniqueEList<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(
+								adaptedCollection,
+								this.myFactory,
+								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
+				break;
+
+			default:
+
+				/*
+				 * Else create the most common type of collection that is possible
+				 * (Decide on the given java collection).
+				 */
+				/* Create a new List to avoid side effects. */
+				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
+								this.myFactory);
+				break;
+			}
+			// end switch.
+		}
+		// no else.
+
+		/* Probably throw an AsTypeCastException. */
+		if (result == null) {
+			String msg;
+
+			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type.getName());
+
+			throw new AsTypeCastException(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #copyForAtPre()
 	 */
-	public Object copyForAtPre() {
+	public IModelInstanceElement copyForAtPre() {
 
 		/* For a collection, normally only the collection will be copied. */
 		return new JavaModelInstanceCollection<T>(this.myContainedObjects,
@@ -239,17 +338,6 @@ public class JavaModelInstanceCollection<T> extends
 	public Collection<T> getCollection() {
 
 		return this.myContainedObjects;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
-	 * #getIterator()
-	 */
-	public Iterator<T> getIterator() {
-
-		return this.myContainedObjects.iterator();
 	}
 
 	/*
@@ -314,116 +402,6 @@ public class JavaModelInstanceCollection<T> extends
 	}
 
 	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
-	 */
-	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
-
-		IModelInstanceElement result;
-
-		/* By default, the result is undefined. */
-		result = null;
-
-		/* Collections can only be casted to collections. */
-		if (type instanceof CollectionType) {
-
-			Collection<T> adaptedCollection;
-			CollectionType collectionType;
-			collectionType = (CollectionType) type;
-
-			switch (collectionType.getKind()) {
-
-			case BAG:
-
-				/* FIXME Claas: Ask Micha: What about undefined values. */
-
-				/* Create a new List to avoid side effects. */
-				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory,
-								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
-				break;
-
-			case SEQUENCE:
-
-				/* FIXME Claas: Ask Micha: What about undefined values. */
-
-				/* Create a new List to avoid side effects. */
-				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(
-								adaptedCollection,
-								this.myFactory,
-								PrimitiveAndCollectionTypeConstants.INSTANCE.INSTANCE.MODEL_TYPE_SEQUENCE);
-				break;
-
-			case SET:
-
-				/* FIXME Claas: Ask Micha: What about undefined values. */
-
-				/* Create a new Set to avoid side effects. */
-				adaptedCollection = new HashSet<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory,
-								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
-				break;
-
-			case ORDERED_SET:
-
-				/* FIXME Claas: Ask Micha: What about undefined values. */
-
-				/* Create a new List to avoid side effects. */
-				adaptedCollection = new UniqueEList<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(
-								adaptedCollection,
-								this.myFactory,
-								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
-				break;
-
-			default:
-
-				/* FIXME Claas: Ask Micha: What about undefined values. */
-
-				/*
-				 * Else create the most common type of collection that is possible
-				 * (Decide on the given java collection).
-				 */
-				/* Create a new List to avoid side effects. */
-				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory);
-				break;
-			}
-			// end switch.
-		}
-		// no else.
-
-		/* Probably throw an AsTypeCastException. */
-		if (result == null) {
-			String msg;
-
-			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
-			msg = NLS.bind(msg, this.getName(), type.getName());
-
-			throw new AsTypeCastException(msg);
-		}
-		// no else.
-
-		return result;
-	}
 
 	/*
 	 * (non-Javadoc)

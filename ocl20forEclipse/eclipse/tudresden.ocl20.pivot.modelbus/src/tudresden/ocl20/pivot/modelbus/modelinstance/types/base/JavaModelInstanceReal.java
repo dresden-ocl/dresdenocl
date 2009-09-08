@@ -132,9 +132,68 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
+
+		IModelInstanceElement result;
+
+		/* By default the result is null. */
+		result = null;
+
+		/* Reals can only be casted to primitive types. */
+		if (type instanceof PrimitiveType) {
+			PrimitiveType primitiveType;
+			primitiveType = (PrimitiveType) type;
+
+			/* Check the given PrimitiveTypeKind. */
+			if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
+
+				/* Create a new integer to avoid side effects. */
+				result = new JavaModelInstanceInteger(this.myNumber.longValue());
+			}
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
+
+				/* Each integer is also a real. */
+				result = new JavaModelInstanceReal(this.myNumber);
+			}
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
+
+				if (this.myNumber == null) {
+					result = new JavaModelInstanceString(null);
+				}
+
+				else {
+					result = new JavaModelInstanceString(this.myNumber.toString());
+				}
+			}
+			// no else.
+		}
+		// no else.
+
+		/* Probably throw an AsTypeCastException. */
+		if (result == null) {
+			String msg;
+
+			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type.getName());
+
+			throw new AsTypeCastException(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #deepCopy()
 	 */
-	public Object copyForAtPre() {
+	public IModelInstanceElement copyForAtPre() {
 
 		return new JavaModelInstanceReal(this.myNumber);
 	}
@@ -169,72 +228,5 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 	public boolean isUndefined() {
 
 		return (this.myNumber == null);
-	}
-
-	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
-	 */
-	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
-
-		IModelInstanceElement result;
-
-		/* By default the result is null. */
-		result = null;
-
-		/* Reals can only be casted to primitive types. */
-		if (type instanceof PrimitiveType) {
-			PrimitiveType primitiveType;
-			primitiveType = (PrimitiveType) type;
-
-			/* Check the given PrimitiveTypeKind. */
-			if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
-
-				/* FIXME Claas: Ask Micha: What about undefined values. */
-
-				/* Create a new integer to avoid side effects. */
-				result = new JavaModelInstanceInteger(this.myNumber.longValue());
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
-
-				/* FIXME Claas: Ask Micha: What about undefined values. */
-
-				/* Each integer is also a real. */
-				result = new JavaModelInstanceReal(this.myNumber);
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
-
-				/* FIXME Claas: Ask Micha: What about undefined values. */
-
-				if (this.myNumber == null) {
-					result = new JavaModelInstanceString(null);
-				}
-
-				else {
-					result = new JavaModelInstanceString(this.myNumber.toString());
-				}
-			}
-			// no else.
-		}
-		// no else.
-
-		/* Probably throw an AsTypeCastException. */
-		if (result == null) {
-			String msg;
-
-			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
-			msg = NLS.bind(msg, this.getName(), type.getName());
-
-			throw new AsTypeCastException(msg);
-		}
-		// no else.
-
-		return result;
 	}
 }

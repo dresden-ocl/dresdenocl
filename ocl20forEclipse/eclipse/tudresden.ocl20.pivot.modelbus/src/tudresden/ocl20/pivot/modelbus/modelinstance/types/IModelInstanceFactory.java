@@ -104,6 +104,6 @@ public interface IModelInstanceFactory {
 	 * 
 	 * @return The created {@link IModelInstanceCollection}.
 	 */
-	<T> IModelInstanceCollection<T> createModelInstanceCollection(
+	<T extends IModelInstanceElement> IModelInstanceCollection<T> createModelInstanceCollection(
 			Collection<T> collection, OclCollectionTypeKind kind);
 }
