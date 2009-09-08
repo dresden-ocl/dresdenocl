@@ -18,6 +18,8 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,14 +33,21 @@ import org.eclipse.osgi.util.NLS;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstancePrimitiveType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.util.JavaModelInstanceTypeUtility;
+import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -124,6 +133,110 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 				/* Else create an IModelInstanceObject. */
 				else {
 					result = createJavaModelInstanceObject(adapted);
+				}
+				// no else.
+
+				/* Cache the created object. */
+				/* Only adapted arrays and normal objects are cached. */
+				this.myCachedAdaptedObjects.put(adapted, result);
+			}
+			// no else.
+		}
+		// no else.
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceElement(Object) - exit"; //$NON-NLS-1$
+			msg += " - rseult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * BasisJavaModelInstanceFactory#createModelInstanceElement(java.lang.Object,
+	 * tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement createModelInstanceElement(Object adapted,
+			Type type) {
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceElement("; //$NON-NLS-1$
+			msg += "adapted = " + adapted; //$NON-NLS-1$
+			msg += ", type = " + type; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		IModelInstanceElement result;
+
+		/* Check if the object has already been adapted. */
+		result = this.myCachedAdaptedObjects.get(adapted);
+
+		/* Else create a new adapter. */
+		if (result == null) {
+
+			/*
+			 * Try to use the BasisJavaModelInstanceFactory to probably create an
+			 * adapter for a primitive type or a collection.
+			 */
+			result = super.createModelInstanceElement(adapted, type);
+
+			/* Check if no primitive type or collection has been created. */
+			if (result == null) {
+
+				/* Check if the given type is an Enumeration. */
+				if (type instanceof Enumeration) {
+
+					/*
+					 * Check if the object is an EnumerationLiteral and has the same type
+					 * as the given type.
+					 */
+					if (adapted.getClass().isEnum()
+							&& JavaModelInstanceTypeUtility.toQualifiedNameList(
+									adapted.getClass().getCanonicalName()).equals(
+									type.getQualifiedNameList())) {
+						try {
+							result =
+									this
+											.createJavaModelInstanceEnumerationLiteral((Enum<?>) adapted);
+						}
+
+						catch (TypeNotFoundInModelException e) {
+							/*
+							 * Do nothing. Result remains null and is initialized in the
+							 * following.
+							 */
+						}
+					}
+
+					/* Else create an undefined enumeration literal. */
+					if (result == null) {
+						Set<Type> types;
+
+						types = new HashSet<Type>();
+						types.add(type);
+
+						result = new JavaModelInstanceEnumerationLiteral(null, types);
+					}
+					// no else.
+				}
+
+				/* Else create an IModelInstanceObject. */
+				else {
+					result = createJavaModelInstanceObject(adapted, type);
 				}
 				// no else.
 
@@ -265,6 +378,94 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 	/**
 	 * <p>
+	 * Creates an {@link IModelInstanceObject} for a given {@link Object} and a
+	 * given {@link Type}.
+	 * </p>
+	 * 
+	 * @param object
+	 *          The {@link Object} that shall be adapted.
+	 * @param The
+	 *          {@link Type} the created {@link IModelInstanceObject} shall have.
+	 * @return The create {@link IModelInstanceObject}.
+	 */
+	private IModelInstanceObject createJavaModelInstanceObject(Object object,
+			Type type) {
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createNormalObject("; //$NON-NLS-1$
+			msg += "object = " + object; //$NON-NLS-1$
+			msg += ", type = " + type; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		IModelInstanceObject result;
+
+		Set<Type> modelTypes;
+		Class<?> typeClass;
+
+		String canonicalName;
+
+		modelTypes = new HashSet<Type>();
+		modelTypes.add(type);
+
+		/* Convert the type's name into a canonical name. */
+		canonicalName =
+				JavaModelInstanceTypeUtility.toCanonicalName(type
+						.getQualifiedNameList());
+
+		/* Try to find the type's class. */
+		try {
+
+			/* Check if the object is undefined. */
+			if (object != null) {
+				typeClass = object.getClass().getClassLoader().loadClass(canonicalName);
+
+				/* Check if the given object conforms to the found class. */
+				if (typeClass.isAssignableFrom(object.getClass())) {
+					result =
+							new JavaModelInstanceObject(object, typeClass, modelTypes, this);
+				}
+
+				else {
+					/* Create an undefined instance object. */
+					result =
+							new JavaModelInstanceObject(null, typeClass, modelTypes, this);
+				}
+			}
+
+			/* Create an undefined instance object. */
+			else {
+				result = new JavaModelInstanceObject(null, modelTypes, this);
+			}
+		}
+
+		catch (ClassNotFoundException e) {
+			/* Create an undefined instance object. */
+			result = new JavaModelInstanceObject(null, modelTypes, this);
+		}
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createNormalObject(Object, Type) - exit"; //$NON-NLS-1$
+			msg += " - reult = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
 	 * A helper method that returns the {@link Type} in a given {@link IModel}
 	 * that correspond to a given {@link Class}.
 	 * </p>
@@ -360,7 +561,21 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 				}
 
 				/* Add recursively found types for the super class. */
-				result.addAll(findTypesOfClassInModel(clazz.getSuperclass()));
+				try {
+					result.addAll(findTypesOfClassInModel(clazz.getSuperclass()));
+				}
+
+				catch (TypeNotFoundInModelException e2) {
+					/*
+					 * Probably a matching interface has already been found. Only throw
+					 * the exception, if the result is null.
+					 */
+					if (result.size() == 0) {
+						/* Re-throw the old exception. */
+						throw new TypeNotFoundInModelException(e.getMessage(), e);
+					}
+					// no else.
+				}
 
 				/* Remove types, that are already represented by sub types in the model. */
 				result = this.removeRedundantModelTypes(result);
@@ -451,6 +666,255 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 				result.add(type1);
 			}
 			// no else.
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Returns or creates the element that is adapted by a given
+	 * {@link IModelInstanceElement}. E.g., if the given
+	 * {@link IModelInstanceElement} is an {@link IModelInstanceObject}, the
+	 * adapted {@link Object} is simply returned. For
+	 * {@link IModelInstancePrimitiveType}, a newly created primitive is returned.
+	 * </p>
+	 * 
+	 * @param modelInstanceElement
+	 *          The {@link IModelInstanceElement} those adapted {@link Object}
+	 *          shall be returned or created.
+	 * @param type
+	 *          The {@link Class} the recreated element should be an instance of.
+	 *          This could be required for {@link IModelInstancePrimitiveType}s or
+	 *          for {@link IModelInstanceCollection}s.
+	 * @return The created or adapted value ({@link Object}).
+	 */
+	public Object recreateAdaptedElement(
+			IModelInstanceElement modelInstanceElement, Class<?> type) {
+
+		Object result;
+
+		/* Check for null values. */
+		if (modelInstanceElement == null) {
+			result = null;
+		}
+
+		/* Else check if the given element is a primitive type. */
+		else if (modelInstanceElement instanceof IModelInstancePrimitiveType) {
+
+			/* Probably recreate a boolean value. */
+			if (modelInstanceElement instanceof IModelInstanceBoolean) {
+
+				result = ((IModelInstanceBoolean) modelInstanceElement).getBoolean();
+			}
+
+			/* Else probably recreate an integer value. */
+			else if (modelInstanceElement instanceof IModelInstanceInteger) {
+
+				result = this.recreateIntegerValue(modelInstanceElement, type);
+			}
+
+			/* Else probably recreate a real value. */
+			else if (modelInstanceElement instanceof IModelInstanceReal) {
+
+				result = this.recreateRealValue(modelInstanceElement, type);
+			}
+
+			/* Else probably recreate an String value. */
+			else if (modelInstanceElement instanceof IModelInstanceString) {
+
+				result = this.recreateStringValue(modelInstanceElement, type);
+			}
+
+			else {
+				/* Other primitive types are not supported. Return null. */
+				result = null;
+			}
+		}
+
+		/* Else check if the given element is an enumeration literal. */
+		else if (modelInstanceElement instanceof IModelInstanceEnumerationLiteral) {
+
+			result =
+					((IModelInstanceEnumerationLiteral) modelInstanceElement)
+							.getLiteral();
+		}
+
+		/* Else check if the given element is a collection. */
+		else if (modelInstanceElement instanceof IModelInstanceCollection) {
+
+			/* FIXME Claas: what about arrays? */
+			result =
+					((IModelInstanceCollection<?>) modelInstanceElement).getCollection();
+		}
+
+		/* Else check if the given element is an adapted object. */
+		else if (modelInstanceElement instanceof IModelInstanceObject) {
+
+			result = ((IModelInstanceObject) modelInstanceElement).getObject();
+		}
+
+		/* Other types are not known. */
+		else {
+			result = null;
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method the converts a given {@link IModelInstanceElement} into an
+	 * Integer value of a given {@link Class}. If the given {@link Class}
+	 * represents an unknown integer {@link Class}, a {@link Long} is returned.
+	 * </p>
+	 * 
+	 * @param modelInstanceElement
+	 *          The {@link IModelInstanceElement} that shall be converted.
+	 * @param type
+	 *          The {@link Class} to that the given {@link IModelInstanceElement}
+	 *          shall be converted.
+	 * @return The converted {@link Object}.
+	 */
+	private Object recreateIntegerValue(
+			IModelInstanceElement modelInstanceElement, Class<?> type) {
+
+		Object result;
+
+		/* Probably recreate a BigDecimal value. */
+		if (type.equals(BigDecimal.class)) {
+			result =
+					new BigDecimal(((IModelInstanceInteger) modelInstanceElement)
+							.getLong());
+		}
+
+		/* Else probably recreate a BigInteger value. */
+		else if (type.equals(BigInteger.class)) {
+			result =
+					BigInteger.valueOf(((IModelInstanceInteger) modelInstanceElement)
+							.getLong());
+		}
+
+		/* Else probably recreate a Byte value. */
+		else if (type.equals(byte.class) || type.equals(Byte.class)) {
+			result =
+					((IModelInstanceInteger) modelInstanceElement).getLong().byteValue();
+		}
+
+		/* Else probably recreate an Integer value. */
+		else if (type.equals(int.class) || type.equals(Integer.class)) {
+			result =
+					((IModelInstanceInteger) modelInstanceElement).getLong().intValue();
+		}
+
+		/* Else probably recreate a Long value. */
+		else if (type.equals(long.class) || type.equals(Long.class)) {
+			result = ((IModelInstanceInteger) modelInstanceElement).getLong();
+		}
+
+		/* Else probably recreate a Short value. */
+		else if (type.equals(short.class) || type.equals(Short.class)) {
+			result =
+					((IModelInstanceInteger) modelInstanceElement).getLong().shortValue();
+		}
+
+		else {
+			/* Other integer types are not supported. Return the Long value. */
+			result = ((IModelInstanceInteger) modelInstanceElement).getLong();
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method the converts a given {@link IModelInstanceElement} into a
+	 * Real value of a given {@link Class}. If the given {@link Class} represents
+	 * an unknown real {@link Class}, a {@link Number} is returned.
+	 * </p>
+	 * 
+	 * @param modelInstanceElement
+	 *          The {@link IModelInstanceElement} that shall be converted.
+	 * @param type
+	 *          The {@link Class} to that the given {@link IModelInstanceElement}
+	 *          shall be converted.
+	 * @return The converted {@link Object}.
+	 */
+	private Object recreateRealValue(IModelInstanceElement modelInstanceElement,
+			Class<?> type) {
+
+		Object result;
+
+		/* Probably recreate a Double value. */
+		if (type.equals(double.class) || type.equals(BigInteger.class)) {
+			result = ((IModelInstanceReal) modelInstanceElement).getDouble();
+		}
+
+		/* Else probably recreate a Float value. */
+		else if (type.equals(float.class) || type.equals(Float.class)) {
+			result =
+					((IModelInstanceReal) modelInstanceElement).getDouble().floatValue();
+		}
+
+		else {
+			/* Other integer types are not supported. Return the Double value. */
+			result = ((IModelInstanceReal) modelInstanceElement).getDouble();
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method the converts a given {@link IModelInstanceElement} into a
+	 * String value of a given {@link Class}. If the given {@link Class}
+	 * represents an unknown String {@link Class}, a {@link String} is returned.
+	 * </p>
+	 * 
+	 * @param modelInstanceElement
+	 *          The {@link IModelInstanceElement} that shall be converted.
+	 * @param type
+	 *          The {@link Class} to that the given {@link IModelInstanceElement}
+	 *          shall be converted.
+	 * @return The converted {@link Object}.
+	 */
+	private Object recreateStringValue(
+			IModelInstanceElement modelInstanceElement, Class<?> type) {
+
+		Object result;
+		String stringValue;
+
+		stringValue = ((IModelInstanceString) modelInstanceElement).getString();
+
+		/* Probably recreate a char value. */
+		if (type.equals(char.class) || type.equals(BigInteger.class)) {
+
+			if (stringValue.length() > 0) {
+				result = stringValue.toCharArray()[0];
+			}
+
+			else {
+				result = null;
+			}
+		}
+
+		/* Else probably recreate a Character value. */
+		else if (type.equals(float.class) || type.equals(Float.class)) {
+			if (stringValue.length() > 0) {
+				result = new Character(stringValue.toCharArray()[0]);
+			}
+
+			else {
+				result = null;
+			}
+		}
+
+		else {
+			/*
+			 * Other integer types are not supported (except of String). Return the
+			 * String value.
+			 */
+			result = stringValue;
 		}
 
 		return result;

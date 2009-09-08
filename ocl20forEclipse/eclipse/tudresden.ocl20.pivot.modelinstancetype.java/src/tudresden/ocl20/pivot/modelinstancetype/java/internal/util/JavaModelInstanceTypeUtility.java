@@ -49,8 +49,8 @@ public class JavaModelInstanceTypeUtility {
 			clazz = (Class<?>) reflectionType;
 
 			result =
-					toCanonicalName(type.getQualifiedNameList()).equals(
-							clazz.getCanonicalName());
+					toQualifiedNameList(clazz.getCanonicalName()).equals(
+							type.getQualifiedNameList());
 		}
 
 		/* If the type is an array, compare its component type with the type. */
@@ -62,31 +62,43 @@ public class JavaModelInstanceTypeUtility {
 					conformsTypeToType(genericArrayType.getGenericComponentType(), type);
 		}
 
-		/* If the type is a generic type, compare its raw type with the type. */
 		else if (reflectionType instanceof ParameterizedType) {
+
 			ParameterizedType parameterizedType;
 			parameterizedType = (ParameterizedType) reflectionType;
 
-			/* FIXME Claas: Ask Micha, if this is okay? Probably not. */
-			result =
-					conformsTypeToType(parameterizedType.getActualTypeArguments()[0],
-							type);
+			/* Check if exactly one generic parameter is set. */
+			if (parameterizedType.getActualTypeArguments().length == 1) {
+				result =
+						conformsTypeToType(parameterizedType.getActualTypeArguments()[0],
+								type);
+			}
+
+			/*
+			 * Else a ParameterizedType can contain more than one classes. Thus, the
+			 * result is not unambiguous.
+			 */
+			else {
+				result = false;
+			}
 		}
 
 		else if (reflectionType instanceof TypeVariable) {
-			TypeVariable<?> typeVariable;
-			typeVariable = (TypeVariable<?>) reflectionType;
 
-			/* FIXME Claas: Ask Micha, if this is okay? Probably not. */
-			result = conformsTypeToType(typeVariable.getBounds()[0], type);
+			/*
+			 * A TypeVariable can contain more than one classes. Thus, the result is
+			 * not unambiguous.
+			 */
+			result = false;
 		}
 
 		else if (reflectionType instanceof WildcardType) {
-			WildcardType wildcardType;
-			wildcardType = (WildcardType) reflectionType;
 
-			/* FIXME Claas: Ask Micha, if this is okay? Probably not. */
-			result = conformsTypeToType(wildcardType.getUpperBounds()[0], type);
+			/*
+			 * A WildcardType can contain more than one classes. Thus, the result is
+			 * not unambiguous.
+			 */
+			result = false;
 		}
 
 		/* No Type of the Java standard library. Cannot compare. */
@@ -177,7 +189,14 @@ public class JavaModelInstanceTypeUtility {
 		List<String> result;
 		result = null;
 
-		/* Check for a Boolean type. */
+		/* Check for the void type. */
+		if (canonicalName.equalsIgnoreCase(PrimitiveTypeKind.VOID.toString())) {
+			result = new ArrayList<String>();
+			result.add(PrimitiveTypeKind.VOID.toString());
+		}
+		
+		/* Probably check for a Boolean type. */
+		if (result == null) {
 		for (Class<?> clazz : JavaModelInstanceTypePlugin.BOOLEAN_CLASSES) {
 			if (canonicalName.equals(clazz.getCanonicalName())) {
 				result = new ArrayList<String>();
@@ -186,6 +205,8 @@ public class JavaModelInstanceTypeUtility {
 			}
 			// no else.
 		}
+		}
+		// no else.
 
 		/* Probably check for an Integer type. */
 		if (result == null) {
