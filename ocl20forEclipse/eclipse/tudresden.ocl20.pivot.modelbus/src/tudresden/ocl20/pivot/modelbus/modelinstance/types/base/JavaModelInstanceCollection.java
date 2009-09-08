@@ -32,10 +32,8 @@ import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -52,8 +50,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstanceCollection<T> extends
-		AbstractModelInstanceElement implements IModelInstanceCollection<T> {
+public class JavaModelInstanceCollection<T extends IModelInstanceElement>
+		extends AbstractModelInstanceElement implements IModelInstanceCollection<T> {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -65,13 +63,6 @@ public class JavaModelInstanceCollection<T> extends
 	private Collection<T> myContainedObjects;
 
 	/**
-	 * The {@link IModelInstanceFactory} of this
-	 * {@link JavaModelInstanceCollection}. Required to adapt the contained
-	 * {@link Object}s to {@link IModelInstanceElement}s.
-	 */
-	private IModelInstanceFactory myFactory;
-
-	/**
 	 * <p>
 	 * Creates a new {@link JavaModelInstanceCollection}.
 	 * </p>
@@ -79,13 +70,8 @@ public class JavaModelInstanceCollection<T> extends
 	 * @param containedObjects
 	 *          The {@link Object}s contained in this
 	 *          {@link JavaModelInstanceCollection}.
-	 * @param factory
-	 *          The {@link JavaModelInstanceObjectFactory} of this
-	 *          {@link JavaModelInstanceCollection}. Required to adapt the
-	 *          contained {@link Object}s to {@link IModelInstanceElement}s.
 	 */
-	protected JavaModelInstanceCollection(Collection<T> containedObjects,
-			IModelInstanceFactory factory) {
+	protected JavaModelInstanceCollection(Collection<T> containedObjects) {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -93,14 +79,13 @@ public class JavaModelInstanceCollection<T> extends
 
 			msg = "JavaModelInstanceCollection("; //$NON-NLS-1$
 			msg += "containedObjects = " + containedObjects; //$NON-NLS-1$
-			msg += ", factory = " + factory; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
 		// no else.
 
-		this.initialize(containedObjects, factory);
+		this.initialize(containedObjects);
 
 		/* Check if a List or set is given. */
 		if (containedObjects instanceof Set<?>) {
@@ -119,8 +104,7 @@ public class JavaModelInstanceCollection<T> extends
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaModelInstanceCollection(Collection<?>, "; //$NON-NLS-1$
-			msg += "JavaModelInstanceObjectFactory) - exit"; //$NON-NLS-1$
+			msg = "JavaModelInstanceCollection(Collection<?>) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -135,18 +119,14 @@ public class JavaModelInstanceCollection<T> extends
 	 * @param containedObjects
 	 *          The {@link Object}s contained in this
 	 *          {@link JavaModelInstanceCollection}.
-	 * @param factory
-	 *          The {@link JavaModelInstanceObjectFactory} of this
-	 *          {@link JavaModelInstanceCollection}. Required to adapt the
-	 *          contained {@link Object}s to {@link IModelInstanceElement}s.
 	 * @param type
 	 *          The {@link CollectionType} that the created
 	 *          {@link JavaModelInstanceCollection} should have.
 	 */
 	protected JavaModelInstanceCollection(Collection<T> containedObjects,
-			IModelInstanceFactory factory, CollectionType type) {
+			CollectionType type) {
 
-		this.initialize(containedObjects, factory);
+		this.initialize(containedObjects);
 
 		/* Check if sets have the right type of collection. */
 		if (type.getKind().equals(CollectionKind.SET)
@@ -172,15 +152,10 @@ public class JavaModelInstanceCollection<T> extends
 	 * @param containedObjects
 	 *          The {@link Object}s contained in this
 	 *          {@link JavaModelInstanceCollection}.
-	 * @param factory
-	 *          The {@link IModelInstanceFactory} of the initialized collection.
 	 */
-	private void initialize(Collection<T> containedObjects,
-			IModelInstanceFactory factory) {
+	private void initialize(Collection<T> containedObjects) {
 
 		this.myContainedObjects = containedObjects;
-		this.myFactory = factory;
-
 		this.myTypes = new HashSet<Type>();
 	}
 
@@ -244,10 +219,9 @@ public class JavaModelInstanceCollection<T> extends
 				/* Create a new List to avoid side effects. */
 				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
 
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory,
-								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
+				result = new JavaModelInstanceCollection<T>(adaptedCollection,
+
+				PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
 				break;
 
 			case SEQUENCE:
@@ -255,11 +229,9 @@ public class JavaModelInstanceCollection<T> extends
 				/* Create a new List to avoid side effects. */
 				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
 
-				result =
-						new JavaModelInstanceCollection<T>(
-								adaptedCollection,
-								this.myFactory,
-								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE);
+				result = new JavaModelInstanceCollection<T>(adaptedCollection,
+
+				PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE);
 				break;
 
 			case SET:
@@ -267,10 +239,9 @@ public class JavaModelInstanceCollection<T> extends
 				/* Create a new Set to avoid side effects. */
 				adaptedCollection = new HashSet<T>(this.myContainedObjects);
 
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory,
-								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
+				result = new JavaModelInstanceCollection<T>(adaptedCollection,
+
+				PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
 				break;
 
 			case ORDERED_SET:
@@ -278,11 +249,9 @@ public class JavaModelInstanceCollection<T> extends
 				/* Create a new List to avoid side effects. */
 				adaptedCollection = new UniqueEList<T>(this.myContainedObjects);
 
-				result =
-						new JavaModelInstanceCollection<T>(
-								adaptedCollection,
-								this.myFactory,
-								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
+				result = new JavaModelInstanceCollection<T>(adaptedCollection,
+
+				PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
 				break;
 
 			default:
@@ -294,9 +263,7 @@ public class JavaModelInstanceCollection<T> extends
 				/* Create a new List to avoid side effects. */
 				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
 
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory);
+				result = new JavaModelInstanceCollection<T>(adaptedCollection);
 				break;
 			}
 			// end switch.
@@ -325,8 +292,8 @@ public class JavaModelInstanceCollection<T> extends
 	public IModelInstanceElement copyForAtPre() {
 
 		/* For a collection, normally only the collection will be copied. */
-		return new JavaModelInstanceCollection<T>(this.myContainedObjects,
-				this.myFactory, this.getTypes().toArray(new CollectionType[0])[0]);
+		return new JavaModelInstanceCollection<T>(this.myContainedObjects, this
+				.getTypes().toArray(new CollectionType[0])[0]);
 	}
 
 	/*
@@ -396,35 +363,6 @@ public class JavaModelInstanceCollection<T> extends
 
 		else {
 			result = false;
-		}
-
-		return result;
-	}
-
-	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
-	 * #getAdapter(java.lang.Object)
-	 */
-	public IModelInstanceElement getAdapter(T object)
-			throws TypeNotFoundInModelException {
-
-		IModelInstanceElement result;
-
-		/* Try to find the given object in the collection. */
-		if (this.myContainedObjects.contains(object)) {
-
-			result = this.myFactory.createModelInstanceElement(object);
-		}
-
-		/* Else result in undefined. */
-		else {
-			/* FIXME Claas: Ask Micha: What about undefined values. */
-
-			result = null;
 		}
 
 		return result;

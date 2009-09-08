@@ -37,22 +37,6 @@ public interface IModelInstanceFactory {
 
 	/**
 	 * <p>
-	 * Returns or creates the element that is adapted by a given
-	 * {@link IModelInstanceElement}. E.g., if the given IMIE is an
-	 * {@link IModelInstanceObject}, the adapted {@link Object} is simply
-	 * returned. For {@link IModelInstancePrimitiveType}, a newly created
-	 * primitive is returned.
-	 * </p>
-	 * 
-	 * @param modelInstanceElement
-	 *          The IMIE those adapted {@link Object} shall be returned or
-	 *          created.
-	 * @return The created or adapted value ({@link Object}).
-	 */
-	Object createAdaptedElement(IModelInstanceElement modelInstanceElement);
-
-	/**
-	 * <p>
 	 * Creates a new adapter for the given object. Uses a {@link WeakHashMap} to
 	 * cache adaptations to {@link IModelInstanceObject}s, but not to
 	 * {@link IModelInstancePrimitiveType}s and {@link IModelInstanceCollection}s
