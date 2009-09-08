@@ -23,13 +23,11 @@ import java.util.HashSet;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -53,20 +51,6 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(JavaModelInstanceInteger.class);
-
-	/**
-	 * The {@link Type} of this {@link Type} implementation. Because
-	 * {@link PrimitiveType}s are not part of the {@link IModel}, their
-	 * {@link Type} must be created externally. This field represents the
-	 * {@link PrimitiveType} instance that is the only {@link Type} of all
-	 * {@link JavaModelInstanceInteger}s.
-	 */
-	private static final PrimitiveType MODEL_TYPE =
-			PivotModelFactory.INSTANCE.createPrimitiveType();
-	{
-		MODEL_TYPE.setKind(PrimitiveTypeKind.INTEGER);
-		MODEL_TYPE.setName(PrimitiveTypeKind.INTEGER.toString());
-	}
 
 	/** The adapted {@link Long} of this {@link JavaModelInstanceInteger}. */
 	private Long myLong;
@@ -98,7 +82,8 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 
 		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
-		this.myTypes.add(JavaModelInstanceInteger.MODEL_TYPE);
+		this.myTypes
+				.add(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_INTEGER);
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -121,13 +106,61 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 		StringBuffer resultBuffer;
 		resultBuffer = new StringBuffer();
 
-		resultBuffer.append(this.getClass().getSimpleName());
-		resultBuffer.append("[");
-		resultBuffer.append(this.myLong.toString());
-		resultBuffer.append("]");
+		/* Probably return the element's name. */
+		if (this.myName != null) {
+			resultBuffer.append(this.myName);
+		}
+
+		/* Else probably return the element's id. */
+		else if (this.myId != null) {
+			resultBuffer.append(this.myId);
+		}
+
+		/* Else construct a name of all implemented types. */
+		else {
+			resultBuffer.append(this.getClass().getSimpleName());
+			resultBuffer.append("[");
+			resultBuffer.append(this.myLong.toString());
+			resultBuffer.append("]");
+		}
 
 		return resultBuffer.toString();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #deepCopy()
+	 */
+	public Object copyForAtPre() {
+
+		return new JavaModelInstanceInteger(this.myLong);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger#getInteger
+	 * ()
+	 */
+	public Long getLong() {
+
+		return this.myLong;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isUndefined()
+	 */
+	public boolean isUndefined() {
+
+		return (this.myLong == null);
+	}
+
+	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
 
 	/*
 	 * (non-Javadoc)
@@ -150,17 +183,23 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 			/* Check the given PrimitiveTypeKind. */
 			if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
 
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
 				/* Create a new integer to avoid side effects. */
 				result = new JavaModelInstanceInteger(this.myLong);
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
 
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
 				/* Each integer is also a real. */
 				result = new JavaModelInstanceReal(this.myLong);
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
 
 				if (this.myLong == null) {
 					result = new JavaModelInstanceString(null);
@@ -186,42 +225,5 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 		// no else.
 
 		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #deepCopy()
-	 */
-	public Object copyForAtPre() {
-
-		return new JavaModelInstanceInteger(this.myLong);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger#getInteger
-	 * ()
-	 */
-	public Long getLong() {
-
-		Long result;
-
-		result = this.myLong;
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #isUndefined()
-	 */
-	public boolean isUndefined() {
-
-		return (this.myLong == null);
 	}
 }

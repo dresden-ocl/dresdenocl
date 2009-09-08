@@ -24,6 +24,7 @@ import java.util.WeakHashMap;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -53,7 +54,7 @@ public interface IModelInstanceFactory {
 	/**
 	 * <p>
 	 * Creates a new adapter for the given object. Uses a {@link WeakHashMap} to
-	 * cache adaptions to {@link IModelInstanceObject}s, but not to
+	 * cache adaptations to {@link IModelInstanceObject}s, but not to
 	 * {@link IModelInstancePrimitiveType}s and {@link IModelInstanceCollection}s
 	 * (since copies of those elements can be created with the same contents).
 	 * </p>
@@ -67,6 +68,25 @@ public interface IModelInstanceFactory {
 	 */
 	IModelInstanceElement createModelInstanceElement(Object adapted)
 			throws TypeNotFoundInModelException;
+
+	/**
+	 * <p>
+	 * Creates a new adapter for the given {@link Object} indentifed by the given
+	 * {@link Type} the created adapter shall have. Uses a {@link WeakHashMap} to
+	 * cache adaptations to {@link IModelInstanceObject}s, but not to
+	 * {@link IModelInstancePrimitiveType}s and {@link IModelInstanceCollection}s
+	 * (since copies of those elements can be created with the same contents).
+	 * </p>
+	 * 
+	 * @param adapted
+	 *          The {@link Object} to adapt.
+	 * @param type
+	 *          The {@link Type} the created {@link IModelInstanceElement} shall
+	 *          have.
+	 * @return The {@link IModelInstanceElement} adapter for the given
+	 *         {@link Object} and {@link Type}.
+	 */
+	IModelInstanceElement createModelInstanceElement(Object adapted, Type type);
 
 	/**
 	 * <p>

@@ -92,17 +92,17 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * (tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	public Set<IModelInstanceElement> getAllInstances(Type type) {
-	
+
 		Set<IModelInstanceElement> result;
-	
+
 		/* If the type has been found, return all implementations. */
 		result = this.myModelInstanceElementsByType.get(type);
-	
+
 		if (result == null) {
 			result = new HashSet<IModelInstanceElement>();
 		}
 		// no else.
-	
+
 		return result;
 	}
 
@@ -125,24 +125,25 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 *          The {@link IModelInstanceElement} that shall be added to the
 	 *          {@link Type} mapping.
 	 */
-	protected void addModelInstanceObjectToCache(IModelInstanceElement modelInstanceElement) {
-	
+	protected void addModelInstanceObjectToCache(
+			IModelInstanceElement modelInstanceElement) {
+
 		/* Iterate through all types of the object. */
 		for (Type type : modelInstanceElement.getTypes()) {
-	
+
 			if (this.myModelInstanceElementsByType.containsKey(type)) {
 				this.myModelInstanceElementsByType.get(type).add(modelInstanceElement);
 			}
-	
+
 			else {
 				Set<IModelInstanceElement> modelObjects;
-	
+
 				modelObjects = new HashSet<IModelInstanceElement>();
 				modelObjects.add(modelInstanceElement);
-	
+
 				myModelInstanceElementsByType.put(type, modelObjects);
 			}
-	
+
 		}
 		// end for.
 	}
@@ -156,12 +157,13 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * </p>
 	 */
 	protected void initializeTypeMapping() {
-	
+
 		for (IModelInstanceElement modelInstanceElement : this.myModelInstanceElements) {
 			this.addModelInstanceObjectToCache(modelInstanceElement);
 		}
 	}
 
+	/** FIXME Claas: REFACTORED_TILL_HERE. */
 	private static final int REFACTORED_TILL_HERE = 0;
 
 	/**

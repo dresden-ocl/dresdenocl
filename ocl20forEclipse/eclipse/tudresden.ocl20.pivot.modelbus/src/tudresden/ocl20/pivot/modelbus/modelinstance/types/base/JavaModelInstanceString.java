@@ -23,13 +23,11 @@ import java.util.HashSet;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -53,20 +51,6 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(JavaModelInstanceString.class);
-
-	/**
-	 * The {@link Type} of this {@link Type} implementation. Because
-	 * {@link PrimitiveType}s are not part of the {@link IModel}, their
-	 * {@link Type} must be created externally. This field represents the
-	 * {@link PrimitiveType} instance that is the only {@link Type} of all
-	 * {@link JavaModelInstanceString}s.
-	 */
-	private static final PrimitiveType MODEL_TYPE =
-			PivotModelFactory.INSTANCE.createPrimitiveType();
-	{
-		MODEL_TYPE.setKind(PrimitiveTypeKind.STRING);
-		MODEL_TYPE.setName(PrimitiveTypeKind.STRING.toString());
-	}
 
 	/** The adapted {@link String} of this {@link JavaModelInstanceString}. */
 	private String myString;
@@ -98,7 +82,8 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 
 		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
-		this.myTypes.add(JavaModelInstanceString.MODEL_TYPE);
+		this.myTypes
+				.add(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_STRING);
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -122,108 +107,26 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 		StringBuffer resultBuffer;
 		resultBuffer = new StringBuffer();
 
-		resultBuffer.append(this.getClass().getSimpleName());
-		resultBuffer.append("[");
-		resultBuffer.append(this.myString);
-		resultBuffer.append("]");
-
-		return resultBuffer.toString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
-	 */
-	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
-
-		IModelInstanceElement result;
-
-		/* By default the result is null. */
-		result = null;
-
-		/* Strings can only be casted to primitive types. */
-		if (type instanceof PrimitiveType) {
-			PrimitiveType primitiveType;
-			primitiveType = (PrimitiveType) type;
-
-			/* Check the given PrimitiveTypeKind. */
-			if (primitiveType.getKind().equals(PrimitiveTypeKind.BOOLEAN)) {
-
-				if (this.myString == null) {
-					result = new JavaModelInstanceBoolean(null);
-				}
-
-				else if (this.myString.toLowerCase().equals("true")) {
-					result = new JavaModelInstanceBoolean(true);
-				}
-
-				else if (this.myString.toLowerCase().equals("false")) {
-					result = new JavaModelInstanceBoolean(false);
-				}
-
-				/* OCL has undefined booleans as well. Uncertain states are undefined. */
-				else {
-					result = new JavaModelInstanceBoolean(null);
-				}
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
-
-				if (this.myString == null) {
-					result = new JavaModelInstanceInteger(null);
-				}
-
-				else {
-					try {
-						result =
-								new JavaModelInstanceInteger(Long.parseLong(this.myString));
-					}
-
-					catch (NumberFormatException e) {
-						result = new JavaModelInstanceInteger(null);
-					}
-				}
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
-
-				if (this.myString == null) {
-					result = new JavaModelInstanceReal(null);
-				}
-
-				else {
-					try {
-						result =
-								new JavaModelInstanceReal(Double.parseDouble(this.myString));
-					}
-
-					catch (NumberFormatException e) {
-						result = new JavaModelInstanceReal(null);
-					}
-				}
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
-
-				/* Create a new string to avoid side effects. */
-				result = new JavaModelInstanceString(this.myString);
-			}
+		/* Probably return the element's name. */
+		if (this.myName != null) {
+			resultBuffer.append(this.myName);
 		}
 
-		/* Probably throw an AsTypeCastException. */
-		if (result == null) {
-			String msg;
+		/* Else probably return the element's id. */
+		else if (this.myId != null) {
+			resultBuffer.append(this.myId);
+		}
 
-			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
-			msg = NLS.bind(msg, this.getName(), type.getName());
-
-			throw new AsTypeCastException(msg);
+		/* Else construct a name of all implemented types. */
+		else {
+			resultBuffer.append(this.getClass().getSimpleName());
+			resultBuffer.append("[");
+			resultBuffer.append(this.myString);
+			resultBuffer.append("]");
 		}
 		// no else.
 
-		return result;
+		return resultBuffer.toString();
 	}
 
 	/*
@@ -257,5 +160,120 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 	public boolean isUndefined() {
 
 		return (this.myString == null);
+	}
+
+	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
+
+		IModelInstanceElement result;
+
+		/* By default the result is null. */
+		result = null;
+
+		/* Strings can only be casted to primitive types. */
+		if (type instanceof PrimitiveType) {
+			PrimitiveType primitiveType;
+			primitiveType = (PrimitiveType) type;
+
+			/* Check the given PrimitiveTypeKind. */
+			if (primitiveType.getKind().equals(PrimitiveTypeKind.BOOLEAN)) {
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				if (this.myString == null) {
+					result = new JavaModelInstanceBoolean(null);
+				}
+
+				else if (this.myString.toLowerCase().equals("true")) {
+					result = new JavaModelInstanceBoolean(true);
+				}
+
+				else if (this.myString.toLowerCase().equals("false")) {
+					result = new JavaModelInstanceBoolean(false);
+				}
+
+				/* OCL has undefined booleans as well. Uncertain states are undefined. */
+				else {
+					/* FIXME Claas: Ask Micha: What about undefined values. */
+
+					result = new JavaModelInstanceBoolean(null);
+				}
+			}
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				if (this.myString == null) {
+					result = new JavaModelInstanceInteger(null);
+				}
+
+				else {
+					try {
+						result =
+								new JavaModelInstanceInteger(Long.parseLong(this.myString));
+					}
+
+					catch (NumberFormatException e) {
+						/* FIXME Claas: Ask Micha: What about undefined values. */
+
+						result = new JavaModelInstanceInteger(null);
+					}
+				}
+			}
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				if (this.myString == null) {
+					result = new JavaModelInstanceReal(null);
+				}
+
+				else {
+					try {
+						result =
+								new JavaModelInstanceReal(Double.parseDouble(this.myString));
+					}
+
+					catch (NumberFormatException e) {
+						/* FIXME Claas: Ask Micha: What about undefined values. */
+
+						result = new JavaModelInstanceReal(null);
+					}
+				}
+				// end else.
+			}
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				/* Create a new string to avoid side effects. */
+				result = new JavaModelInstanceString(this.myString);
+			}
+			// no else.
+		}
+		// no else.
+
+		/* Probably throw an AsTypeCastException. */
+		if (result == null) {
+			String msg;
+
+			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type.getName());
+
+			throw new AsTypeCastException(msg);
+		}
+		// no else.
+
+		return result;
 	}
 }

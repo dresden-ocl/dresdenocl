@@ -24,10 +24,14 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.UniqueEList;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
+import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
@@ -39,6 +43,9 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -65,24 +72,24 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
-	 * #createAdaptedElement
-	 * (tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement)
-	 */
-	public Object createAdaptedElement(IModelInstanceElement modelInstanceElement) {
-
-		// FIXME Claas: Implement this method.
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createModelInstanceCollection(java.util.Collection,
 	 * tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind)
 	 */
 	public <T> IModelInstanceCollection<T> createModelInstanceCollection(
 			Collection<T> collection, OclCollectionTypeKind kind) {
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceCollection("; //$NON-NLS-1$
+			msg += "adapted = " + collection; //$NON-NLS-1$
+			msg += "kind = " + kind; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 
 		IModelInstanceCollection<T> result;
 
@@ -92,28 +99,38 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 			result =
 					new JavaModelInstanceCollection<T>(collection, this,
-							JavaModelInstanceCollection.MODEL_TYPE_BAG);
+							PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
 			break;
 
 		case SEQUENCE:
 
 			result =
 					new JavaModelInstanceCollection<T>(collection, this,
-							JavaModelInstanceCollection.MODEL_TYPE_SEQUENCE);
+							PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE);
 			break;
 
 		case SET:
 
+			/*
+			 * Type safety of collection type is ensured inside the
+			 * JavaModelInstanceCollection constructor.
+			 */
 			result =
 					new JavaModelInstanceCollection<T>(collection, this,
-							JavaModelInstanceCollection.MODEL_TYPE_SET);
+							PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
 			break;
 
 		case ORDEREDSET:
 
+			/*
+			 * Type safety of collection type is ensured inside the
+			 * JavaModelInstanceCollection constructor.
+			 */
 			result =
-					new JavaModelInstanceCollection<T>(collection, this,
-							JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET);
+					new JavaModelInstanceCollection<T>(
+							collection,
+							this,
+							PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
 			break;
 
 		default:
@@ -121,6 +138,17 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			result = new JavaModelInstanceCollection<T>(collection, this);
 		}
 		// end switch.
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createIModelInstanceElement(Collection, CollectionKind) - exit"; //$NON-NLS-1$
+			msg += " - result = " + result;
+
+			LOGGER.debug(msg);
+		}
+		// no else.
 
 		return result;
 	}
@@ -213,92 +241,6 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 	/**
 	 * <p>
-	 * Converts a given array (as {@link Object}) into a {@link List}.
-	 * </p>
-	 * 
-	 * @param object
-	 *          The array that shall be converted.
-	 * @return The converted {@link List}.
-	 */
-	private List<Object> convertArray(Object object) {
-
-		List<Object> result;
-
-		if (object.getClass().isArray()) {
-
-			Class<?> componentType;
-			componentType = object.getClass().getComponentType();
-
-			if (componentType.isPrimitive()) {
-
-				result = new ArrayList<Object>();
-
-				if (boolean.class.isAssignableFrom(componentType)) {
-					for (boolean anElement : (boolean[]) object) {
-						result.add(anElement);
-					}
-				}
-
-				else if (byte.class.isAssignableFrom(componentType)) {
-					for (byte anElement : (byte[]) object) {
-						result.add(anElement);
-					}
-				}
-
-				else if (char.class.isAssignableFrom(componentType)) {
-					for (char anElement : (char[]) object) {
-						result.add(anElement);
-					}
-				}
-
-				else if (double.class.isAssignableFrom(componentType)) {
-					for (double anElement : (double[]) object) {
-						result.add(anElement);
-					}
-				}
-
-				else if (float.class.isAssignableFrom(componentType)) {
-					for (float anElement : (float[]) object) {
-						result.add(anElement);
-					}
-				}
-
-				else if (int.class.isAssignableFrom(componentType)) {
-					for (int anElement : (int[]) object) {
-						result.add(anElement);
-					}
-				}
-
-				else if (long.class.isAssignableFrom(componentType)) {
-					for (long anElement : (long[]) object) {
-						result.add(anElement);
-					}
-				}
-
-				else if (short.class.isAssignableFrom(componentType)) {
-					for (short anElement : (short[]) object) {
-						result.add(anElement);
-					}
-				}
-
-				/* No other primitive types exist. */
-			}
-
-			else {
-				result = Arrays.asList((Object[]) object);
-			}
-		}
-
-		else {
-			result = new ArrayList<Object>();
-			result.add(object);
-		}
-
-		return result;
-	}
-
-	/**
-	 * <p>
 	 * Creates a {@link IModelInstanceBoolean} for a given {@link Boolean}.
 	 * </p>
 	 * 
@@ -326,6 +268,25 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			Collection<T> adapted) {
 
 		return new JavaModelInstanceCollection<T>(adapted, this);
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link IModelInstanceCollection} for a given {@link Collection}.
+	 * </p>
+	 * 
+	 * @param adapted
+	 *          The {@link Collection} that shall be adapted.
+	 * @param type
+	 *          The {@link CollectionType} the created
+	 *          {@link IModelInstanceCollection} shall have.
+	 * 
+	 * @return The created {@link IModelInstanceCollection}.
+	 */
+	protected <T> IModelInstanceElement createModelInstanceCollection(
+			Collection<T> adapted, CollectionType type) {
+
+		return new JavaModelInstanceCollection<T>(adapted, this, type);
 	}
 
 	/**
@@ -371,5 +332,265 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 	protected IModelInstanceString createModelInstanceString(String adapted) {
 
 		return new JavaModelInstanceString(adapted);
+	}
+
+	/**
+	 * <p>
+	 * Converts a given array (as {@link Object}) into a {@link List}.
+	 * </p>
+	 * 
+	 * @param object
+	 *          The array that shall be converted.
+	 * @return The converted {@link List}.
+	 */
+	private List<Object> convertArray(Object object) {
+
+		List<Object> result;
+
+		/* Check if the given object is an array. */
+		if (object.getClass().isArray()) {
+
+			Class<?> componentType;
+			componentType = object.getClass().getComponentType();
+
+			if (componentType.isPrimitive()) {
+
+				result = new ArrayList<Object>();
+
+				/* Probably create a list of boolean. */
+				if (boolean.class.isAssignableFrom(componentType)) {
+					for (boolean anElement : (boolean[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				/* Probably create a list of bytes. */
+				else if (byte.class.isAssignableFrom(componentType)) {
+					for (byte anElement : (byte[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				/* Probably create a list of chars. */
+				else if (char.class.isAssignableFrom(componentType)) {
+					for (char anElement : (char[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				/* Probably create a list of dpoubles. */
+				else if (double.class.isAssignableFrom(componentType)) {
+					for (double anElement : (double[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				/* Probably create a list of floats. */
+				else if (float.class.isAssignableFrom(componentType)) {
+					for (float anElement : (float[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				/* Probably create a list of ints. */
+				else if (int.class.isAssignableFrom(componentType)) {
+					for (int anElement : (int[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				/* Probably create a list of longs. */
+				else if (long.class.isAssignableFrom(componentType)) {
+					for (long anElement : (long[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				/* Probably create a list of shorts. */
+				else if (short.class.isAssignableFrom(componentType)) {
+					for (short anElement : (short[]) object) {
+						result.add(anElement);
+					}
+				}
+
+				/* No other primitive types exist. */
+				else {
+					result = new ArrayList<Object>();
+				}
+			}
+
+			else {
+				result = new ArrayList<Object>(Arrays.asList((Object[]) object));
+			}
+		}
+
+		/* Else check if the given object is a collection. */
+		else if (object instanceof Collection) {
+			result = new ArrayList<Object>((Collection<?>) object);
+		}
+
+		/* Else create a new list. */
+		else {
+			result = new ArrayList<Object>();
+			result.add(object);
+		}
+
+		return result;
+	}
+
+	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
+	 * #createAdaptedElement
+	 * (tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement)
+	 */
+	public Object createAdaptedElement(IModelInstanceElement modelInstanceElement) {
+
+		/* FIXME Claas: Implement this method. */
+		/*
+		 * FIXME Claas: Ask Micha: Should this method be part of the common
+		 * interface?
+		 */
+		return null;
+	}
+
+	/*
+	 * FIXME Claas: Ask Micha: He has to accept this method! (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
+	 * #createModelInstanceElement(java.lang.Object,
+	 * tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement createModelInstanceElement(Object adapted,
+			Type type) {
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createIModelInstanceElement("; //$NON-NLS-1$
+			msg += "adapted = " + adapted; //$NON-NLS-1$
+			msg += "type = " + type; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		IModelInstanceElement result;
+
+		/* Check the type to which the given object shall be adapted. */
+		if (type instanceof PrimitiveType) {
+
+			PrimitiveType primitiveType;
+			primitiveType = (PrimitiveType) type;
+
+			if (primitiveType.getKind().equals(PrimitiveTypeKind.BOOLEAN)
+					&& adapted instanceof Boolean) {
+				result = this.createModelInstanceBoolean((Boolean) adapted);
+			}
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)
+					&& adapted instanceof Number) {
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				result =
+						this.createModelInstanceInteger(((Number) adapted).longValue());
+			}
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)
+					&& adapted instanceof Number) {
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				result = this.createModelInstanceReal((Number) adapted);
+			}
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)
+					&& adapted instanceof Character) {
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				result =
+						this.createModelInstanceString(((Character) adapted).toString());
+			}
+
+			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)
+					&& adapted instanceof String) {
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				result = this.createModelInstanceString((String) adapted);
+			}
+
+			else {
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				result = null;
+			}
+		}
+
+		else if (type instanceof CollectionType) {
+
+			CollectionType collectionType;
+			collectionType = (CollectionType) type;
+
+			/* Check if the object is an array. */
+			if (adapted.getClass().isArray()) {
+
+				result =
+						this.createModelInstanceCollection(this.convertArray(adapted),
+								collectionType);
+			}
+
+			/* Else check if the object is a collection. */
+			else if (adapted instanceof Collection<?>) {
+
+				result =
+						this.createModelInstanceCollection((Collection<?>) adapted,
+								collectionType);
+			}
+
+			/* Else create a collection that contains the adaptee. */
+			else {
+				Collection<Object> collection;
+
+				if (collectionType.getKind().equals(CollectionKind.SET)) {
+					collection = new HashSet<Object>();
+				}
+
+				else if (collectionType.getKind().equals(CollectionKind.ORDERED_SET)) {
+					collection = new UniqueEList<Object>();
+				}
+
+				else {
+					collection = new ArrayList<Object>();
+				}
+
+				collection.add(adapted);
+				result = this.createModelInstanceCollection(collection, collectionType);
+			}
+		}
+
+		else {
+			result = null;
+		}
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createIModelInstanceElement(Object, Type) - exit"; //$NON-NLS-1$
+			msg += " - result = " + result;
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
 	}
 }

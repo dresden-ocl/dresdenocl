@@ -44,13 +44,22 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Ronny Brandt: Built the first version.
  * @author Claas Wilke: Did re-factoring and added Java-doc.
  */
-public abstract class AbstractModelInstanceElement implements IModelInstanceElement {
+public abstract class AbstractModelInstanceElement implements
+		IModelInstanceElement {
 
 	/**
-	 * The {@link Type}s of the {@link IModel} of which this {@link IModelInstanceElement} is an
-	 * instance.
+	 * The {@link Type}s of the {@link IModel} of which this
+	 * {@link IModelInstanceElement} is an instance.
 	 */
 	protected Set<Type> myTypes;
+
+	/**
+	 * The name of this {@link IModelInstanceElement}. Could be <code>null</code>.
+	 */
+	protected String myName;
+
+	/** The id of this {@link IModelInstanceElement}. Could be <code>null</code>. */
+	protected String myId;
 
 	/*
 	 * (non-Javadoc)
@@ -58,25 +67,39 @@ public abstract class AbstractModelInstanceElement implements IModelInstanceElem
 	 */
 	public String getName() {
 
-		StringBuffer result;
+		StringBuffer resultBuffer;
 
-		/* Construct a name of all implemented types. */
-		result = new StringBuffer();
-		result.append("[");
+		resultBuffer = new StringBuffer();
 
-		for (Type aType : this.getTypes()) {
-
-			if (result.length() == 1) {
-				result.append(",");
-			}
-			// no else.
-
-			result.append(aType.getName());
+		/* Probably return the element's name. */
+		if (this.myName != null) {
+			resultBuffer.append(this.myName);
 		}
 
-		result.append("]");
+		/* Else probably return the element's id. */
+		else if (this.myId != null) {
+			resultBuffer.append(this.myId);
+		}
 
-		return result.toString();
+		/* Else construct a name of all implemented types. */
+		else {
+			resultBuffer.append("[");
+
+			for (Type aType : this.getTypes()) {
+
+				if (resultBuffer.length() == 1) {
+					resultBuffer.append(",");
+				}
+				// no else.
+
+				resultBuffer.append(aType.getName());
+			}
+
+			resultBuffer.append("]");
+		}
+		// end else.
+
+		return resultBuffer.toString();
 	}
 
 	/*
@@ -91,8 +114,8 @@ public abstract class AbstractModelInstanceElement implements IModelInstanceElem
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement#isInstanceOf(tudresden.ocl20
-	 * .pivot.pivotmodel.Type)
+	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement#isInstanceOf(tudresden
+	 * .ocl20 .pivot.pivotmodel.Type)
 	 */
 	public boolean isInstanceOf(Type type) {
 
@@ -106,7 +129,9 @@ public abstract class AbstractModelInstanceElement implements IModelInstanceElem
 				result = true;
 				break;
 			}
+			// no else.
 		}
+		// end for.
 
 		return result;
 	}

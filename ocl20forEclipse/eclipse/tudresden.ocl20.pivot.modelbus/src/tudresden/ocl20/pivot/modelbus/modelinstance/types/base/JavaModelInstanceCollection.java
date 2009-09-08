@@ -30,8 +30,6 @@ import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
@@ -61,66 +59,6 @@ public class JavaModelInstanceCollection<T> extends
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
 			ModelBusPlugin.getLogger(JavaModelInstanceCollection.class);
-
-	/**
-	 * The {@link Type} of collections implementations that are of the kind
-	 * {@link CollectionKind#BAG}. Because {@link CollectionType}s are not part of
-	 * the {@link IModel}, their {@link Type} must be created externally. This
-	 * field represents the {@link CollectionType} instance that is the only
-	 * {@link Type} of all {@link JavaModelInstanceCollection}s of the kind
-	 * {@link CollectionKind#BAG}.
-	 */
-	protected static final CollectionType MODEL_TYPE_BAG =
-			TypesFactory.INSTANCE.createCollectionType();
-
-	{
-		MODEL_TYPE_BAG.setKind(CollectionKind.BAG);
-	}
-
-	/**
-	 * The {@link Type} of collections implementations that are of the kind
-	 * {@link CollectionKind#SEQUENCE}. Because {@link CollectionType}s are not
-	 * part of the {@link IModel}, their {@link Type} must be created externally.
-	 * This field represents the {@link CollectionType} instance that is the only
-	 * {@link Type} of all {@link JavaModelInstanceCollection}s of the kind
-	 * {@link CollectionKind#SEQUENCE}.
-	 */
-	protected static final CollectionType MODEL_TYPE_SEQUENCE =
-			TypesFactory.INSTANCE.createCollectionType();
-
-	{
-		MODEL_TYPE_SEQUENCE.setKind(CollectionKind.SEQUENCE);
-	}
-
-	/**
-	 * The {@link Type} of collections implementations that are of the kind
-	 * {@link CollectionKind#SET}. Because {@link CollectionType}s are not part of
-	 * the {@link IModel}, their {@link Type} must be created externally. This
-	 * field represents the {@link CollectionType} instance that is the only
-	 * {@link Type} of all {@link JavaModelInstanceCollection}s of the kind
-	 * {@link CollectionKind#SET}.
-	 */
-	protected static final CollectionType MODEL_TYPE_SET =
-			TypesFactory.INSTANCE.createCollectionType();
-
-	{
-		MODEL_TYPE_SET.setKind(CollectionKind.SET);
-	}
-
-	/**
-	 * The {@link Type} of collections implementations that are of the kind
-	 * {@link CollectionKind#ORDERED_SET}. Because {@link CollectionType}s are not
-	 * part of the {@link IModel}, their {@link Type} must be created externally.
-	 * This field represents the {@link CollectionType} instance that is the only
-	 * {@link Type} of all {@link JavaModelInstanceCollection}s of the kind
-	 * {@link CollectionKind#ORDERED_SET}.
-	 */
-	protected static final CollectionType MODEL_TYPE_ORDERED_SET =
-			TypesFactory.INSTANCE.createCollectionType();
-
-	{
-		MODEL_TYPE_ORDERED_SET.setKind(CollectionKind.ORDERED_SET);
-	}
 
 	/**
 	 * The {@link Object}s contained in this {@link JavaModelInstanceCollection}.
@@ -163,17 +101,19 @@ public class JavaModelInstanceCollection<T> extends
 		}
 		// no else.
 
-		this.init(containedObjects, factory);
+		this.initialize(containedObjects, factory);
 
 		/* Check if a List or set is given. */
 		if (containedObjects instanceof Set<?>) {
 
-			this.myTypes.add(JavaModelInstanceCollection.MODEL_TYPE_SET);
+			this.myTypes
+					.add(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
 		}
 
 		else {
 
-			this.myTypes.add(JavaModelInstanceCollection.MODEL_TYPE_BAG);
+			this.myTypes
+					.add(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
 		}
 
 		/* Eventually debug the exit of this method. */
@@ -207,7 +147,20 @@ public class JavaModelInstanceCollection<T> extends
 	protected JavaModelInstanceCollection(Collection<T> containedObjects,
 			IModelInstanceFactory factory, CollectionType type) {
 
-		this.init(containedObjects, factory);
+		this.initialize(containedObjects, factory);
+
+		/* Check if sets have the right type of collection. */
+		if (type.getKind().equals(CollectionKind.SET)
+				&& !(this.myContainedObjects instanceof Set)) {
+			this.myContainedObjects = new HashSet<T>(this.myContainedObjects);
+		}
+
+		else if (type.getKind().equals(CollectionKind.ORDERED_SET)
+				&& !(this.myContainedObjects instanceof UniqueEList)) {
+			this.myContainedObjects = new UniqueEList<T>(this.myContainedObjects);
+		}
+		// no else.
+
 		this.myTypes.add(type);
 	}
 
@@ -223,7 +176,7 @@ public class JavaModelInstanceCollection<T> extends
 	 * @param factory
 	 *          The {@link IModelInstanceFactory} of the initialized collection.
 	 */
-	private void init(Collection<T> containedObjects,
+	private void initialize(Collection<T> containedObjects,
 			IModelInstanceFactory factory) {
 
 		this.myContainedObjects = containedObjects;
@@ -242,108 +195,27 @@ public class JavaModelInstanceCollection<T> extends
 		StringBuffer resultBuffer;
 		resultBuffer = new StringBuffer();
 
-		resultBuffer.append(JavaModelInstanceCollection.class.getSimpleName());
-		resultBuffer.append("[");
-		resultBuffer.append("types = " + this.getTypes() + ", ");
-		resultBuffer.append("content = " + this.myContainedObjects.toString());
-		resultBuffer.append("]");
+		/* Probably return the element's name. */
+		if (this.myName != null) {
+			resultBuffer.append(this.myName);
+		}
+
+		/* Else probably return the element's id. */
+		else if (this.myId != null) {
+			resultBuffer.append(this.myId);
+		}
+
+		/* Else construct a name of all implemented types. */
+		else {
+			resultBuffer.append(JavaModelInstanceCollection.class.getSimpleName());
+			resultBuffer.append("[");
+			resultBuffer.append("types = " + this.getTypes() + ", ");
+			resultBuffer.append("content = " + this.myContainedObjects.toString());
+			resultBuffer.append("]");
+		}
+		// end else.
 
 		return resultBuffer.toString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
-	 */
-	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
-
-		IModelInstanceElement result;
-
-		/* By default, the result is undefined. */
-		result = null;
-
-		/* Collections can only be casted to collections. */
-		if (type instanceof CollectionType) {
-
-			Collection<T> adaptedCollection;
-			CollectionType collectionType;
-			collectionType = (CollectionType) type;
-
-			switch (collectionType.getKind()) {
-
-			case BAG:
-
-				/* Create a new List to avoid side effects. */
-				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory, JavaModelInstanceCollection.MODEL_TYPE_BAG);
-				break;
-
-			case SEQUENCE:
-
-				/* Create a new List to avoid side effects. */
-				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory, JavaModelInstanceCollection.MODEL_TYPE_SEQUENCE);
-				break;
-
-			case SET:
-
-				/* Create a new Set to avoid side effects. */
-				adaptedCollection = new HashSet<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory, JavaModelInstanceCollection.MODEL_TYPE_SET);
-				break;
-
-			case ORDERED_SET:
-
-				/* Create a new List to avoid side effects. */
-				adaptedCollection = new UniqueEList<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory,
-								JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET);
-				break;
-
-			default:
-
-				/*
-				 * Else create the most common type of collection that is possible
-				 * (Decide on the given java collection).
-				 */
-				/* Create a new List to avoid side effects. */
-				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
-
-				result =
-						new JavaModelInstanceCollection<T>(adaptedCollection,
-								this.myFactory);
-				break;
-			}
-			// end switch.
-		}
-		// no else.
-
-		/* Probably throw an AsTypeCastException. */
-		if (result == null) {
-			String msg;
-
-			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
-			msg = NLS.bind(msg, this.getName(), type.getName());
-
-			throw new AsTypeCastException(msg);
-		}
-		// no else.
-
-		return result;
 	}
 
 	/*
@@ -356,31 +228,6 @@ public class JavaModelInstanceCollection<T> extends
 		/* For a collection, normally only the collection will be copied. */
 		return new JavaModelInstanceCollection<T>(this.myContainedObjects,
 				this.myFactory, this.getTypes().toArray(new CollectionType[0])[0]);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
-	 * #getAdapter(java.lang.Object)
-	 */
-	public IModelInstanceElement getAdapter(T object)
-			throws TypeNotFoundInModelException {
-
-		IModelInstanceElement result;
-
-		/* Try to find the given object in the collection. */
-		if (this.myContainedObjects.contains(object)) {
-
-			result = this.myFactory.createModelInstanceElement(object);
-		}
-
-		/* Else result in undefined. */
-		else {
-			result = null;
-		}
-
-		return result;
 	}
 
 	/*
@@ -416,8 +263,10 @@ public class JavaModelInstanceCollection<T> extends
 		boolean result;
 
 		/* Only ordered sets and sequences are ordered. */
-		if (this.isInstanceOf(JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET)
-				|| this.isInstanceOf(JavaModelInstanceCollection.MODEL_TYPE_SEQUENCE)) {
+		if (this
+				.isInstanceOf(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET)
+				|| this
+						.isInstanceOf(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE)) {
 			result = true;
 		}
 
@@ -450,13 +299,154 @@ public class JavaModelInstanceCollection<T> extends
 		boolean result;
 
 		/* Only ordered sets and sets are unique. */
-		if (this.isInstanceOf(JavaModelInstanceCollection.MODEL_TYPE_ORDERED_SET)
-				|| this.isInstanceOf(JavaModelInstanceCollection.MODEL_TYPE_SET)) {
+		if (this
+				.isInstanceOf(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET)
+				|| this
+						.isInstanceOf(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET)) {
 			result = true;
 		}
 
 		else {
 			result = false;
+		}
+
+		return result;
+	}
+
+	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
+
+		IModelInstanceElement result;
+
+		/* By default, the result is undefined. */
+		result = null;
+
+		/* Collections can only be casted to collections. */
+		if (type instanceof CollectionType) {
+
+			Collection<T> adaptedCollection;
+			CollectionType collectionType;
+			collectionType = (CollectionType) type;
+
+			switch (collectionType.getKind()) {
+
+			case BAG:
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				/* Create a new List to avoid side effects. */
+				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
+								this.myFactory,
+								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
+				break;
+
+			case SEQUENCE:
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				/* Create a new List to avoid side effects. */
+				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(
+								adaptedCollection,
+								this.myFactory,
+								PrimitiveAndCollectionTypeConstants.INSTANCE.INSTANCE.MODEL_TYPE_SEQUENCE);
+				break;
+
+			case SET:
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				/* Create a new Set to avoid side effects. */
+				adaptedCollection = new HashSet<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
+								this.myFactory,
+								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
+				break;
+
+			case ORDERED_SET:
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				/* Create a new List to avoid side effects. */
+				adaptedCollection = new UniqueEList<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(
+								adaptedCollection,
+								this.myFactory,
+								PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
+				break;
+
+			default:
+
+				/* FIXME Claas: Ask Micha: What about undefined values. */
+
+				/*
+				 * Else create the most common type of collection that is possible
+				 * (Decide on the given java collection).
+				 */
+				/* Create a new List to avoid side effects. */
+				adaptedCollection = new ArrayList<T>(this.myContainedObjects);
+
+				result =
+						new JavaModelInstanceCollection<T>(adaptedCollection,
+								this.myFactory);
+				break;
+			}
+			// end switch.
+		}
+		// no else.
+
+		/* Probably throw an AsTypeCastException. */
+		if (result == null) {
+			String msg;
+
+			msg = ModelBusMessages.IModelInstanceElement_CannotCast;
+			msg = NLS.bind(msg, this.getName(), type.getName());
+
+			throw new AsTypeCastException(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
+	 * #getAdapter(java.lang.Object)
+	 */
+	public IModelInstanceElement getAdapter(T object)
+			throws TypeNotFoundInModelException {
+
+		IModelInstanceElement result;
+
+		/* Try to find the given object in the collection. */
+		if (this.myContainedObjects.contains(object)) {
+
+			result = this.myFactory.createModelInstanceElement(object);
+		}
+
+		/* Else result in undefined. */
+		else {
+			/* FIXME Claas: Ask Micha: What about undefined values. */
+
+			result = null;
 		}
 
 		return result;
