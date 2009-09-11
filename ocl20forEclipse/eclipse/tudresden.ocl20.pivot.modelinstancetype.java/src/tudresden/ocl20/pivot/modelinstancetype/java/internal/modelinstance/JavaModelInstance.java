@@ -276,16 +276,14 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 				if (multiplicityElement.isOrdered()) {
 					result =
-							factory
-									.createModelInstanceElement(
-											adapteeResult,
-											PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
+							factory.createModelInstanceElement(adapteeResult,
+									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
 				}
 
 				else {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
+									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
 				}
 				// end. else
 			}
@@ -295,16 +293,14 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 				if (multiplicityElement.isOrdered()) {
 					result =
-							factory
-									.createModelInstanceElement(
-											adapteeResult,
-											PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE);
+							factory.createModelInstanceElement(adapteeResult,
+									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE);
 				}
 
 				else {
 					result =
 							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
+									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
 				}
 				// end else.
 			}
@@ -1158,40 +1154,40 @@ public class JavaModelInstance extends AbstractModelInstance {
 	 */
 	private Method findStaticMethod(Operation operation)
 			throws OperationNotFoundException {
-	
+
 		Method result;
-	
+
 		/* Check if the class loader is not null. */
 		if (this.myClassLoader != null) {
-	
+
 			String methodCanonicalName;
 			Class<?> methodSourceClass;
-	
+
 			/* Try to find the operation's source class. */
 			methodCanonicalName =
 					JavaModelInstanceTypeUtility.toCanonicalName(operation.getOwner()
 							.getQualifiedNameList());
-	
+
 			try {
 				methodSourceClass = this.myClassLoader.loadClass(methodCanonicalName);
-	
+
 				result = null;
-	
+
 				/* Try to find an according method in the source class. */
 				for (Method aMethod : methodSourceClass.getDeclaredMethods()) {
-	
+
 					boolean nameIsEqual;
 					boolean resultTypeIsConform;
 					boolean argumentSizeIsEqual;
-	
+
 					/* Check if the name matches to the given operation's name. */
 					nameIsEqual = aMethod.getName().equals(operation.getName());
-	
+
 					/* Check if the return type matches to the given operation's type. */
 					resultTypeIsConform =
 							JavaModelInstanceTypeUtility.conformsTypeToType(aMethod
 									.getGenericReturnType(), operation.getType());
-	
+
 					/*
 					 * Check if the method has the same size of arguments as the given
 					 * operation.
@@ -1199,23 +1195,23 @@ public class JavaModelInstance extends AbstractModelInstance {
 					argumentSizeIsEqual =
 							aMethod.getParameterTypes().length == operation
 									.getSignatureParameter().size();
-	
+
 					if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
-	
+
 						java.lang.reflect.Type[] javaTypes;
 						List<Parameter> pivotModelParamters;
-	
+
 						boolean matches;
-	
+
 						javaTypes = aMethod.getGenericParameterTypes();
 						pivotModelParamters = operation.getSignatureParameter();
-	
+
 						matches = true;
-	
+
 						/* Compare the types of all arguments. */
 						for (int index = 0; index < operation.getSignatureParameter()
 								.size(); index++) {
-	
+
 							if (!JavaModelInstanceTypeUtility.conformsTypeToType(
 									javaTypes[index], pivotModelParamters.get(index).getType())) {
 								matches = false;
@@ -1223,7 +1219,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 							}
 							// no else.
 						}
-	
+
 						if (matches) {
 							result = aMethod;
 							break;
@@ -1233,49 +1229,49 @@ public class JavaModelInstance extends AbstractModelInstance {
 					// no else.
 				}
 				// end for.
-	
+
 				/* Probably throw an exception. */
 				if (result == null) {
 					String msg;
-	
+
 					msg =
 							JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
 					msg =
 							NLS.bind(msg, operation,
 									"Given Operation does not exist in implementation.");
-	
+
 					throw new OperationNotFoundException(msg);
 				}
 				// no else.
 			}
 			// end try.
-	
+
 			catch (ClassNotFoundException e) {
 				String msg;
-	
+
 				msg =
 						JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
 				msg = NLS.bind(msg, operation, e.getMessage());
-	
+
 				throw new OperationNotFoundException(msg, e);
 			}
 			// end catch.
 		}
-	
+
 		/* Else throw an exception (class loader is null). */
 		else {
 			String msg;
-	
+
 			msg =
 					JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
 			msg =
 					NLS.bind(msg, operation,
 							"The class loader of the ModelInstance was null.");
-	
+
 			throw new OperationNotFoundException(msg);
 		}
 		// no else.
-	
+
 		return result;
 	}
 
