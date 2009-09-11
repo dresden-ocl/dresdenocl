@@ -103,14 +103,14 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 
 			result =
 					new JavaModelInstanceCollection<T>(collection,
-							PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
+							PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
 			break;
 
 		case SEQUENCE:
 
 			result =
 					new JavaModelInstanceCollection<T>(collection,
-							PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE);
+							PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE);
 			break;
 
 		case SET:
@@ -121,7 +121,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			 */
 			result =
 					new JavaModelInstanceCollection<T>(collection,
-							PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
+							PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
 			break;
 
 		case ORDEREDSET:
@@ -131,9 +131,8 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			 * JavaModelInstanceCollection constructor.
 			 */
 			result =
-					new JavaModelInstanceCollection<T>(
-							collection,
-							PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
+					new JavaModelInstanceCollection<T>(collection,
+							PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
 			break;
 
 		default:

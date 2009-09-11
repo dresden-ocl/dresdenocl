@@ -90,14 +90,12 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 		/* Check if a List or set is given. */
 		if (containedObjects instanceof Set<?>) {
 
-			this.myTypes
-					.add(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
+			this.myTypes.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
 		}
 
 		else {
 
-			this.myTypes
-					.add(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
+			this.myTypes.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
 		}
 
 		/* Eventually debug the exit of this method. */
@@ -221,7 +219,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 				result = new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
+				PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
 				break;
 
 			case SEQUENCE:
@@ -231,7 +229,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 				result = new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE);
+				PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE);
 				break;
 
 			case SET:
@@ -241,7 +239,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 				result = new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
+				PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
 				break;
 
 			case ORDERED_SET:
@@ -251,7 +249,7 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 				result = new JavaModelInstanceCollection<T>(adaptedCollection,
 
-				PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
+				PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
 				break;
 
 			default:
@@ -319,9 +317,9 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 		/* Only ordered sets and sequences are ordered. */
 		if (this
-				.isInstanceOf(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET)
+				.isInstanceOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
 				|| this
-						.isInstanceOf(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE)) {
+						.isInstanceOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE)) {
 			result = true;
 		}
 
@@ -355,9 +353,9 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 		/* Only ordered sets and sets are unique. */
 		if (this
-				.isInstanceOf(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET)
+				.isInstanceOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
 				|| this
-						.isInstanceOf(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET)) {
+						.isInstanceOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET)) {
 			result = true;
 		}
 

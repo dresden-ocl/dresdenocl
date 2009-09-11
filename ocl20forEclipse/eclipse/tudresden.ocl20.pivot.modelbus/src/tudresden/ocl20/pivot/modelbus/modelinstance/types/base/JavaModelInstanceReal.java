@@ -82,8 +82,7 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
-		this.myTypes
-				.add(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_REAL);
+		this.myTypes.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_REAL);
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {

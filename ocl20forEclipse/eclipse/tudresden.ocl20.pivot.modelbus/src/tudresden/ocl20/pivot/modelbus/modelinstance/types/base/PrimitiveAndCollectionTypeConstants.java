@@ -46,10 +46,6 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public final class PrimitiveAndCollectionTypeConstants {
 
-	/** The singleton instance of {@link PrimitiveAndCollectionTypeConstants}. */
-	public static final PrimitiveAndCollectionTypeConstants INSTANCE =
-			new PrimitiveAndCollectionTypeConstants();
-
 	/**
 	 * The {@link PrimitiveType} implementation of the
 	 * {@link PrimitiveTypeKind#BOOLEAN}. Because {@link PrimitiveType}s are not
@@ -57,9 +53,10 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * This field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceBoolean}s.
 	 */
-	public final PrimitiveType MODEL_TYPE_BOOLEAN =
+	public static final PrimitiveType MODEL_TYPE_BOOLEAN =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
-	{
+	
+	static{
 		MODEL_TYPE_BOOLEAN.setKind(PrimitiveTypeKind.BOOLEAN);
 		MODEL_TYPE_BOOLEAN.setName(PrimitiveTypeKind.BOOLEAN.getName());
 	}
@@ -71,9 +68,9 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * This field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceInteger}s.
 	 */
-	public final PrimitiveType MODEL_TYPE_INTEGER =
+	public static final PrimitiveType MODEL_TYPE_INTEGER =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
-	{
+	static {
 		MODEL_TYPE_INTEGER.setKind(PrimitiveTypeKind.INTEGER);
 		MODEL_TYPE_INTEGER.setName(PrimitiveTypeKind.INTEGER.getName());
 	}
@@ -85,9 +82,9 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceReal}s.
 	 */
-	public final PrimitiveType MODEL_TYPE_REAL =
+	public static final PrimitiveType MODEL_TYPE_REAL =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
-	{
+	static {
 		MODEL_TYPE_REAL.setKind(PrimitiveTypeKind.REAL);
 		MODEL_TYPE_REAL.setName(PrimitiveTypeKind.REAL.getName());
 	}
@@ -99,9 +96,9 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * This field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceString}s.
 	 */
-	public final PrimitiveType MODEL_TYPE_STRING =
+	public static final PrimitiveType MODEL_TYPE_STRING =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
-	{
+	static {
 		MODEL_TYPE_STRING.setKind(PrimitiveTypeKind.STRING);
 		MODEL_TYPE_STRING.setName(PrimitiveTypeKind.STRING.getName());
 	}
@@ -113,9 +110,9 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * field represents the {@link PrimitiveType} instance that is the only
 	 * {@link Type} of all {@link IModelInstanceVoid}s.
 	 */
-	public final PrimitiveType MODEL_TYPE_VOID =
+	public static final PrimitiveType MODEL_TYPE_VOID =
 			PivotModelFactory.INSTANCE.createPrimitiveType();
-	{
+	static {
 		MODEL_TYPE_VOID.setKind(PrimitiveTypeKind.VOID);
 		MODEL_TYPE_VOID.setName(PrimitiveTypeKind.VOID.getName());
 	}
@@ -128,10 +125,10 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * {@link Type} of all {@link IModelInstanceCollection}s of the kind
 	 * {@link CollectionKind#BAG}.
 	 */
-	public final CollectionType MODEL_TYPE_BAG =
+	public static final CollectionType MODEL_TYPE_BAG =
 			TypesFactory.INSTANCE.createCollectionType();
 
-	{
+	static {
 		MODEL_TYPE_BAG.setKind(CollectionKind.BAG);
 	}
 
@@ -143,10 +140,10 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * {@link Type} of all {@link IModelInstanceCollection}s of the kind
 	 * {@link CollectionKind#SEQUENCE}.
 	 */
-	public final CollectionType MODEL_TYPE_SEQUENCE =
+	public static final CollectionType MODEL_TYPE_SEQUENCE =
 			TypesFactory.INSTANCE.createCollectionType();
 
-	{
+	static {
 		MODEL_TYPE_SEQUENCE.setKind(CollectionKind.SEQUENCE);
 	}
 
@@ -158,10 +155,10 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * {@link Type} of all {@link IModelInstanceCollection}s of the kind
 	 * {@link CollectionKind#SET}.
 	 */
-	public final CollectionType MODEL_TYPE_SET =
+	public static final CollectionType MODEL_TYPE_SET =
 			TypesFactory.INSTANCE.createCollectionType();
 
-	{
+	static {
 		MODEL_TYPE_SET.setKind(CollectionKind.SET);
 	}
 
@@ -173,20 +170,10 @@ public final class PrimitiveAndCollectionTypeConstants {
 	 * {@link Type} of all {@link IModelInstanceCollection}s of the kind
 	 * {@link CollectionKind#ORDERED_SET}.
 	 */
-	public final CollectionType MODEL_TYPE_ORDERED_SET =
+	public static final CollectionType MODEL_TYPE_ORDERED_SET =
 			TypesFactory.INSTANCE.createCollectionType();
 
-	{
+	static {
 		MODEL_TYPE_ORDERED_SET.setKind(CollectionKind.ORDERED_SET);
-	}
-
-	/**
-	 * <p>
-	 * Constructor is required for singleton pattern.
-	 * </p>
-	 */
-	private PrimitiveAndCollectionTypeConstants() {
-
-		/* Remains empty. */
 	}
 }

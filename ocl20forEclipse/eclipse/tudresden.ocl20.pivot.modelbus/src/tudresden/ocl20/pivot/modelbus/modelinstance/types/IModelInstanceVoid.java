@@ -93,7 +93,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 			Set<Type> result;
 
 			result = new HashSet<Type>();
-			result.add(PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_VOID);
+			result.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_VOID);
 
 			return result;
 		}

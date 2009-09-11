@@ -18,7 +18,7 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * Scrapboard class to do some random testing. Should be replaced by proper unit testing asap.
+ * FIXME Scrapboard class to do some random testing. Should be replaced by proper unit testing asap.
  * 
  * @author Matthias Braeuer
  * @version 1.0 23.03.2007
