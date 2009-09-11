@@ -86,6 +86,14 @@ public interface IModelInstanceObject extends IModelInstanceElement {
 	 * {@link IModelInstanceObject#getObject() getObject()}, etc.
 	 * </p>
 	 * 
+	 * <p>
+	 * This operation will require the extraction or re-creation of adapted
+	 * {@link Object}s inside the {@link IModelInstanceElement}s given as
+	 * arguments. The {@link IModelInstanceObject} is responsible itself to
+	 * re-convert the arguments. E.g., see in the JavaModelInstanceType
+	 * implementation.
+	 * </p>
+	 * 
 	 * @param operation
 	 *          The {@link Operation} is used to determine the name of the
 	 *          operation and the {@link Type return type} of the invoked

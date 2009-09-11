@@ -40,11 +40,9 @@ import java.util.WeakHashMap;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -60,110 +58,26 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/** The {@link IModel} of this {@link IModelInstance}. */
 	protected IModel myModel;
 
-	/** Contains all {@link IModelInstanceElement}s of this model instance. */
-	protected Set<IModelInstanceElement> myModelInstanceElements =
-			new HashSet<IModelInstanceElement>();
+	/** Contains all {@link IModelInstanceObject}s of this model instance. */
+	protected Set<IModelInstanceObject> myModelInstanceObjects =
+			new HashSet<IModelInstanceObject>();
 
 	/**
 	 * <p>
-	 * Contains all {@link IModelInstanceElement}s of this model instance ordered
+	 * Contains all {@link IModelInstanceObject}s of this model instance ordered
 	 * by their type's name.
 	 * </p>
 	 * <strong>This map is a {@link WeakHashMap}. If the adapted {@link Type} does
 	 * not exist any more, the adapter is also disposed.</strong>
 	 */
-	protected Map<Type, Set<IModelInstanceElement>> myModelInstanceElementsByType =
-			new WeakHashMap<Type, Set<IModelInstanceElement>>();
+	protected Map<Type, Set<IModelInstanceObject>> myModelInstanceObjectsByType =
+			new WeakHashMap<Type, Set<IModelInstanceObject>>();
 
 	/**
 	 * The {@link IModelInstanceFactory} used to created adapters for the
 	 * {@link IModelInstanceElement}s.
 	 */
 	protected IModelInstanceFactory myModelInstanceFactory;
-
-	/** The name of the model instance. */
-	protected String myName;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getAllInstances
-	 * (tudresden.ocl20.pivot.pivotmodel.Type)
-	 */
-	public Set<IModelInstanceElement> getAllInstances(Type type) {
-
-		Set<IModelInstanceElement> result;
-
-		/* If the type has been found, return all implementations. */
-		result = this.myModelInstanceElementsByType.get(type);
-
-		if (result == null) {
-			result = new HashSet<IModelInstanceElement>();
-		}
-		// no else.
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDisplayName()
-	 */
-	public String getDisplayName() {
-
-		return this.myName;
-	}
-
-	/**
-	 * <p>
-	 * Adds a given {@link IModelInstanceElement} to the {@link Type} mapping of
-	 * this {@link AbstractModelInstance}.
-	 * </p>
-	 * 
-	 * @param modelInstanceElement
-	 *          The {@link IModelInstanceElement} that shall be added to the
-	 *          {@link Type} mapping.
-	 */
-	protected void addModelInstanceObjectToCache(
-			IModelInstanceElement modelInstanceElement) {
-
-		/* Iterate through all types of the object. */
-		for (Type type : modelInstanceElement.getTypes()) {
-
-			if (this.myModelInstanceElementsByType.containsKey(type)) {
-				this.myModelInstanceElementsByType.get(type).add(modelInstanceElement);
-			}
-
-			else {
-				Set<IModelInstanceElement> modelObjects;
-
-				modelObjects = new HashSet<IModelInstanceElement>();
-				modelObjects.add(modelInstanceElement);
-
-				myModelInstanceElementsByType.put(type, modelObjects);
-			}
-
-		}
-		// end for.
-	}
-
-	/**
-	 * <p>
-	 * A helper method that adds all adapted {@link IModelInstanceObject} of this
-	 * {@link AbstractModelInstance} contained in the filed
-	 * {@link AbstractModelInstance#myModelInstanceElements} to the {@link Type}
-	 * mapping of this {@link AbstractModelInstance}.
-	 * </p>
-	 */
-	protected void initializeTypeMapping() {
-
-		for (IModelInstanceElement modelInstanceElement : this.myModelInstanceElements) {
-			this.addModelInstanceObjectToCache(modelInstanceElement);
-		}
-	}
-
-	/** FIXME Claas: REFACTORED_TILL_HERE. */
-	private static final int REFACTORED_TILL_HERE = 0;
 
 	/**
 	 * <p>
@@ -178,59 +92,28 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	protected Map<Type, IModelInstanceTypeObject> myModelTypeObjects =
 			new WeakHashMap<Type, IModelInstanceTypeObject>();
 
+	/** The name of the model instance. */
+	protected String myName;
+
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumerationLiteral(tudresden
-	 * .ocl20.pivot.pivotmodel.EnumerationLiteral)
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getAllInstances
+	 * (tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
-	public IModelInstanceEnumerationLiteral findEnumerationLiteral(
-			EnumerationLiteral literal) {
+	public Set<IModelInstanceObject> getAllInstances(Type type) {
 
-		IModelInstanceEnumerationLiteral result;
-		Set<IModelInstanceElement> allLiteralsOfEnumeration;
+		Set<IModelInstanceObject> result;
 
-		result = null;
+		/* If the type has been found, return all implementations. */
+		result = this.myModelInstanceObjectsByType.get(type);
 
-		Type enumeration = (Type) literal.getOwner();
-		allLiteralsOfEnumeration =
-				this.myModelInstanceElementsByType.get(enumeration);
-
-		for (IModelInstanceElement anObject : allLiteralsOfEnumeration) {
-			if (anObject instanceof IModelInstanceEnumerationLiteral) {
-				IModelInstanceEnumerationLiteral aLiteral;
-				aLiteral = (IModelInstanceEnumerationLiteral) anObject;
-
-				if (aLiteral.getLiteral().name().equals(literal.getName())) {
-					result = aLiteral;
-					break;
-				}
-				// no else.
-			}
-			// no else.
+		if (result == null) {
+			result = new HashSet<IModelInstanceObject>();
 		}
+		// no else.
 
 		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findModelTypeObject(tudresden
-	 * .ocl20.pivot.pivotmodel.Type)
-	 */
-	public IModelInstanceTypeObject findModelTypeObject(Type type) {
-
-		return this.myModelTypeObjects.get(type);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getObjects()
-	 */
-	public List<IModelInstanceElement> getAllElements() {
-
-		return new ArrayList<IModelInstanceElement>(this.myModelInstanceElements);
 	}
 
 	/*
@@ -240,14 +123,32 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * ()
 	 */
 	public Set<Type> getAllImplementedTypes() {
-
+	
 		Set<Type> result = new HashSet<Type>();
-
-		for (IModelInstanceElement modelObject : this.myModelInstanceElements) {
+	
+		for (IModelInstanceElement modelObject : this.myModelInstanceObjects) {
 			result.addAll(modelObject.getTypes());
 		}
-
+	
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getAllModelInstanceObjects()
+	 */
+	public List<IModelInstanceObject> getAllModelInstanceObjects() {
+	
+		return new ArrayList<IModelInstanceObject>(this.myModelInstanceObjects);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDisplayName()
+	 */
+	public String getDisplayName() {
+
+		return this.myName;
 	}
 
 	/*
@@ -255,7 +156,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getModel()
 	 */
 	public IModel getModel() {
-
+	
 		return this.myModel;
 	}
 
@@ -265,7 +166,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * getModelInstanceFactory()
 	 */
 	public IModelInstanceFactory getModelInstanceFactory() {
-
+	
 		return this.myModelInstanceFactory;
 	}
 
@@ -276,7 +177,55 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * .pivot.modelbus.IModel)
 	 */
 	public boolean isInstanceOf(IModel aModel) {
-
+	
 		return this.myModel.equals(aModel);
+	}
+
+	/**
+	 * <p>
+	 * Adds a given {@link IModelInstanceObject} to the {@link Type} mapping of
+	 * this {@link AbstractModelInstance}.
+	 * </p>
+	 * 
+	 * @param modelInstanceObject
+	 *          The {@link IModelInstanceObject} that shall be added to the
+	 *          {@link Type} mapping.
+	 */
+	protected void addModelInstanceObjectToCache(
+			IModelInstanceObject modelInstanceObject) {
+
+		/* Iterate through all types of the object. */
+		for (Type type : modelInstanceObject.getTypes()) {
+
+			if (this.myModelInstanceObjectsByType.containsKey(type)) {
+				this.myModelInstanceObjectsByType.get(type).add(modelInstanceObject);
+			}
+
+			else {
+				Set<IModelInstanceObject> modelObjects;
+
+				modelObjects = new HashSet<IModelInstanceObject>();
+				modelObjects.add(modelInstanceObject);
+
+				myModelInstanceObjectsByType.put(type, modelObjects);
+			}
+
+		}
+		// end for.
+	}
+
+	/**
+	 * <p>
+	 * A helper method that adds all adapted {@link IModelInstanceObject} of this
+	 * {@link AbstractModelInstance} contained in the filed
+	 * {@link AbstractModelInstance#myModelInstanceObjects} to the {@link Type}
+	 * mapping of this {@link AbstractModelInstance}.
+	 * </p>
+	 */
+	protected void initializeTypeMapping() {
+
+		for (IModelInstanceObject modelInstanceObject : this.myModelInstanceObjects) {
+			this.addModelInstanceObjectToCache(modelInstanceObject);
+		}
 	}
 }

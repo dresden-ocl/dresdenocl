@@ -36,13 +36,18 @@ import java.util.List;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.EnumerationLiteralNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstancePrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
@@ -63,8 +68,13 @@ public interface IModelInstance {
 	 * added, the given object is adapted.
 	 * </p>
 	 * 
-	 *FIXME Claas: Ask Micha: Shouldn't we add primitive types and collections to
-	 * the instance. Since they have a type now, that wouldn't be a problem.
+	 * <p>
+	 * <strong>Please be aware, that only {@link Object}s that are adapted to
+	 * {@link IModelInstanceObject}s are added!</strong> Neither
+	 * {@link IModelInstancePrimitiveType}s nor {@link IModelInstanceCollection}s
+	 * nor {@link IModelInstanceEnumerationLiteral} are added to the
+	 * {@link IModelInstance}'s element list. Although they are adapted as well.
+	 * </p>
 	 * 
 	 * @param object
 	 *          the object to add to the {@link IModelInstance}
@@ -88,39 +98,12 @@ public interface IModelInstance {
 	 *          found.
 	 * @return The found {@link IModelInstanceEnumerationLiteral} or
 	 *         <code>null</code>.
+	 * @throws EnumerationLiteralNotFoundException
+	 *           Thrown, if the given {@link EnumerationLiteral} cannot be found
+	 *           in the {@link IModelInstance}.
 	 */
 	IModelInstanceEnumerationLiteral findEnumerationLiteral(
-			EnumerationLiteral literal);
-
-	/**
-	 * <p>
-	 * Searches for and probably returns the {@link IModelInstanceTypeObject} of a
-	 * given {@link Type} if the given {@link Type} is implemented by an
-	 * {@link IModelInstanceTypeObject} in this {@link IModelInstance}.
-	 * </p>
-	 * 
-	 * @param type
-	 *          The {@link Type} that shall be found.
-	 * @return The found {@link IModelInstanceTypeObject} or <code>null</code>.
-	 * 
-	 * @deprecated This method should not be required anymore. Probably it could
-	 *             be removed.
-	 */
-	public IModelInstanceTypeObject findModelTypeObject(Type type);
-
-	/**
-	 * <p>
-	 * Gets all {@link IModelInstanceObject}s of the {@link IModelInstance}.
-	 * </p>
-	 * 
-	 * <p>
-	 * FIXME Probably: <strong>Please note, that primitive types, enumeration
-	 * literals and collections are not returned by this operation.</strong>
-	 * </p>
-	 * 
-	 * @return the {@link IModelInstanceElement}s for this model instance.
-	 */
-	List<IModelInstanceElement> getAllElements();
+			EnumerationLiteral literal) throws EnumerationLiteralNotFoundException;
 
 	/**
 	 * <p>
@@ -129,8 +112,12 @@ public interface IModelInstance {
 	 * </p>
 	 * 
 	 * <p>
-	 * FIXME: Change this probably: <strong>Please note, that the result will not
-	 * contain primitive types nor collection types.</strong>
+	 * <strong>Please be aware, that only {@link Type}s that represent
+	 * {@link Object}s that are adapted to {@link IModelInstanceObject}s are
+	 * added!</strong> Neither {@link IModelInstancePrimitiveType}'s nor
+	 * {@link IModelInstanceCollection}'s nor
+	 * {@link IModelInstanceEnumerationLiteral}'s {@link Type}s will be part of
+	 * the result.
 	 * </p>
 	 * 
 	 * @return A {@link Set} of all {@link Type}s that are at least implemented by
@@ -140,7 +127,10 @@ public interface IModelInstance {
 
 	/**
 	 * <p>
-	 * Returns all {@link IModelInstanceObject}s of the given {@link Type}.
+	 * Returns all {@link IModelInstanceObject}s of the given {@link Type}. If the
+	 * given {@link Type} cannot be found in the {@link IModel} of this
+	 * {@link IModelInstance} or not {@link IModelInstanceObject} implementing the
+	 * {@link Type} can be found, an empty {@link Set} will be returned.
 	 * </p>
 	 * 
 	 * <p>
@@ -148,11 +138,34 @@ public interface IModelInstance {
 	 * it at any rate.
 	 * </p>
 	 * 
+	 * <p>
+	 * <strong>Please be aware, that only {@link IModelInstanceObject}s are
+	 * returned!</strong> Neither {@link IModelInstancePrimitiveType}s nor
+	 * {@link IModelInstanceCollection}s nor
+	 * {@link IModelInstanceEnumerationLiteral}s will be part of the result.
+	 * </p>
+	 * 
 	 * @param type
 	 *          the {@link Type} of which all instances should be returned
 	 * @return All adapted instances of the given {@link Type}.
 	 */
-	Set<IModelInstanceElement> getAllInstances(Type type);
+	Set<IModelInstanceObject> getAllInstances(Type type);
+
+	/**
+	 * <p>
+	 * Gets all {@link IModelInstanceObject}s of the {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>Please be aware, that only {@link Object}s that are adapted to
+	 * {@link IModelInstanceObject}s are returned!</strong> Neither
+	 * {@link IModelInstancePrimitiveType}s nor {@link IModelInstanceCollection}s
+	 * nor {@link IModelInstanceEnumerationLiteral} will be part of the result.
+	 * </p>
+	 * 
+	 * @return the {@link IModelInstanceElement}s for this model instance.
+	 */
+	List<IModelInstanceObject> getAllModelInstanceObjects();
 
 	/**
 	 * <p>
@@ -190,8 +203,6 @@ public interface IModelInstance {
 	 * Tries to fetch a static property of the given type with the given name.
 	 * </p>
 	 * 
-	 * FIXME Claas: Exceptions?
-	 * 
 	 * @param property
 	 *          the {@link Property} is used to determine the name of the
 	 *          property, the {@link Type} providing the static property, and the
@@ -200,15 +211,20 @@ public interface IModelInstance {
 	 *          {@link IModelInstanceCollection} based on
 	 *          {@link Property#isOrdered()} and {@link Property#isUnique()}.
 	 * @return the adapted property value
+	 * @throws PropertyAccessException
+	 *           Thrown, if an {@link Exception} occurs during the
+	 *           {@link Property} access in the adapted programming language.
+	 * @throws PropertyNotFoundException
+	 *           Thrown if the given {@link Property} cannot be found as a static
+	 *           {@link Property}.
 	 */
-	IModelInstanceElement getStaticProperty(Property property);
+	IModelInstanceElement getStaticProperty(Property property)
+			throws PropertyAccessException, PropertyNotFoundException;
 
 	/**
 	 * <p>
 	 * Invokes a static operation on the given type with the given arguments.
 	 * </p>
-	 * 
-	 * FIXME Claas: Exceptions?
 	 * 
 	 * @param operation
 	 *          the {@link Operation} is used to determine the name of the static
@@ -219,10 +235,17 @@ public interface IModelInstance {
 	 *          {@link Operation#isOrdered()} and {@link Operation#isUnique()}.
 	 * @param args
 	 *          the arguments of the static operation
-	 * @return the adapted return value of the static operation invocation
+	 * @return the adapted return value of the static operation invocation.
+	 * @throws OperationAccessException
+	 *           Thrown, if an {@link Exception} occurs during the
+	 *           {@link Operation} invocation in the adapted programming language.
+	 * @throws OperationNotFoundException
+	 *           Thrown if the given {@link Operation} cannot be found as a static
+	 *           {@link Operation}.
 	 */
 	IModelInstanceElement invokeStaticOperation(Operation operation,
-			List<IModelInstanceElement> args);
+			List<IModelInstanceElement> args) throws OperationAccessException,
+			OperationNotFoundException;
 
 	/**
 	 * <p>
