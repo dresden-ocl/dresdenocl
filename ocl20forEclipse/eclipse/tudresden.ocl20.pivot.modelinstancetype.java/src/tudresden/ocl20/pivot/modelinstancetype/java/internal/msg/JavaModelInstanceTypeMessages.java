@@ -48,6 +48,11 @@ public class JavaModelInstanceTypeMessages extends NLS {
 	public static String JavaModelInstance_AdapteeIsNotClonable;
 	public static String JavaModelInstance_OperationNotFoundInModelInstanceElement;
 	public static String JavaModelInstance_OperationAccessFailed;
+	public static String JavaModelInstance_CannotRecreateArray;
+	public static String JavaModelInstance_CannotAdaptToType;
+	public static String JavaModelInstance_EnumerationLiteralNotFound;
+	public static String JavaModelInstance_StaticPropertyNotFound;
+	public static String JavaModelInstance_StaticOperationNotFound;
 
 	static {
 		/* Initialize resource bundle. */

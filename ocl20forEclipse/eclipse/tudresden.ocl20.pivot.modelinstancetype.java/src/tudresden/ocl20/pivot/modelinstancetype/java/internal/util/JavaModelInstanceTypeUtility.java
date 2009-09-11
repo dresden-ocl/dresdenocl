@@ -48,9 +48,15 @@ public class JavaModelInstanceTypeUtility {
 			Class<?> clazz;
 			clazz = (Class<?>) reflectionType;
 
-			result =
-					toQualifiedNameList(clazz.getCanonicalName()).equals(
-							type.getQualifiedNameList());
+			if (clazz.isArray()) {
+				result = conformsTypeToType(clazz.getComponentType(), type);
+			}
+
+			else {
+				result =
+						toQualifiedNameList(clazz.getCanonicalName()).equals(
+								type.getQualifiedNameList());
+			}
 		}
 
 		/* If the type is an array, compare its component type with the type. */
@@ -194,17 +200,17 @@ public class JavaModelInstanceTypeUtility {
 			result = new ArrayList<String>();
 			result.add(PrimitiveTypeKind.VOID.toString());
 		}
-		
+
 		/* Probably check for a Boolean type. */
 		if (result == null) {
-		for (Class<?> clazz : JavaModelInstanceTypePlugin.BOOLEAN_CLASSES) {
-			if (canonicalName.equals(clazz.getCanonicalName())) {
-				result = new ArrayList<String>();
-				result.add(PrimitiveTypeKind.BOOLEAN.toString());
-				break;
+			for (Class<?> clazz : JavaModelInstanceTypePlugin.BOOLEAN_CLASSES) {
+				if (canonicalName.equals(clazz.getCanonicalName())) {
+					result = new ArrayList<String>();
+					result.add(PrimitiveTypeKind.BOOLEAN.toString());
+					break;
+				}
+				// no else.
 			}
-			// no else.
-		}
 		}
 		// no else.
 

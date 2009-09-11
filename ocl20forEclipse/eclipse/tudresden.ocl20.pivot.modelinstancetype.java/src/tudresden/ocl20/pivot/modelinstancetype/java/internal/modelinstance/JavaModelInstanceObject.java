@@ -18,6 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -38,7 +39,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.AbstractModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.JavaModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.util.JavaModelInstanceTypeUtility;
@@ -183,36 +183,6 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 		// no else.
 	}
 
-	/**
-	 * <p>
-	 * A helper method that initializes a {@link JavaModelInstanceObject} (Called
-	 * from all constructors).
-	 * </p>
-	 * 
-	 * @param object
-	 *          The {@link Object} for which an {@link JavaModelInstanceObject}
-	 *          shall be created.
-	 * @param castedToClass
-	 *          The Java {@link Class} this {@link JavaModelInstanceObject} is
-	 *          casted to. This is required to access the right {@link Property}s
-	 *          and {@link Operation}s.
-	 * @param types
-	 *          The {@link Type}s this {@link IModelInstanceElement} belongs to.
-	 * @param factory
-	 *          The {@link JavaModelInstanceFactory} of this
-	 *          {@link JavaModelInstanceObject}. Required to adapt the
-	 *          {@link Object}s of accesses {@link Property}s or results of
-	 *          invoked {@link Operation}s.
-	 */
-	private void initialize(Object object, Class<?> castedToClass,
-			Set<Type> types, JavaModelInstanceFactory factory) {
-
-		this.myAdaptedObject = object;
-		this.myAdaptedType = castedToClass;
-		this.myTypes = types;
-		this.myFactory = factory;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
@@ -342,6 +312,61 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 		return result;
 	}
 
+	/**
+	 * <p>
+	 * Performs a copy of the adapted element of this
+	 * {@link IModelInstanceElement} that can be used to store it as a @pre value
+	 * of a postcondition's expression. The method should copy the adapted object
+	 * and all its references that are expected to change during the methods
+	 * execution the postcondition is defined on.
+	 * </p>
+	 * 
+	 * <p>
+	 * For {@link JavaModelInstanceObject}s this method tries to clone the adapted
+	 * {@link Object} if the {@link Object} implements {@link Cloneable}. Else the
+	 * {@link Object} will be copied using an probably existing empty
+	 * {@link Constructor} and a flat copy will be created (means all attributes
+	 * and associations will lead to the same values and identities. <strong>If
+	 * neither the <code>clone()</code> method nor the emptry {@link Constructor}
+	 * are provided, this operation will fail with an
+	 * {@link CopyForAtPreException}.</strong>
+	 * </p>
+	 * 
+	 * @return A copy of the adapted element.
+	 * @throws CopyForAtPreException
+	 *           Thrown, if an error during the copy process occurs.
+	 */
+	public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
+
+		IModelInstanceElement result;
+		result = null;
+
+		/* Check if the adapted object is clone-able. */
+		if (this.myAdaptedObject instanceof Cloneable) {
+
+			try {
+				result = copyForAtPreWithClone();
+			}
+
+			catch (CopyForAtPreException e) {
+				/* Catch the exception and try to copy again with reflections. */
+			}
+		}
+		// no else.
+
+		/*
+		 * If not object has been created yet. Try to copy the object with
+		 * reflections.
+		 */
+		if (result == null) {
+
+			copyForAtPreWithReflections();
+		}
+		// no else.
+
+		return result;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject#
@@ -350,6 +375,103 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 	public Object getObject() {
 
 		return this.myAdaptedObject;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
+	 * #invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
+	 * java.util.List)
+	 */
+	public IModelInstanceElement invokeOperation(Operation operation,
+			List<IModelInstanceElement> args) throws OperationNotFoundException,
+			OperationAccessException {
+
+		IModelInstanceElement result;
+
+		/* Check if this object is undefined. */
+		if (this.myAdaptedObject == null) {
+			Set<Type> types;
+
+			types = new HashSet<Type>();
+			types.add(operation.getType());
+
+			result = new JavaModelInstanceObject(null, types, this.myFactory);
+		}
+
+		/* Else find and invoke the operation. */
+		else {
+			Method operationMethod;
+
+			int argSize;
+			Class<?>[] argumentTypes;
+			Object[] argumentValues;
+
+			/* Try to find the method to invoke. */
+			operationMethod = this.findMethodOfAdaptedObject(operation);
+
+			argumentTypes = operationMethod.getParameterTypes();
+			argumentValues = new Object[args.size()];
+
+			/* Avoid errors through to much arguments given by the invocation. */
+			argSize = Math.min(args.size(), operation.getSignatureParameter().size());
+
+			/* Adapt the argument values. */
+			for (int index = 0; index < argSize; index++) {
+
+				argumentValues[index] =
+						JavaModelInstance.createAdaptedElement(args.get(index), argumentTypes[index]);
+				index++;
+			}
+
+			/* Try to invoke the found method. */
+			try {
+				Object adapteeResult;
+				operationMethod.setAccessible(true);
+
+				adapteeResult =
+						operationMethod.invoke(this.myAdaptedObject, argumentValues);
+
+				/* Adapt the result to the expected result type. */
+				result =
+						JavaModelInstance.adaptInvocationResult(adapteeResult, operation
+								.getType(), operation, this.myFactory);
+			}
+
+			catch (IllegalArgumentException e) {
+				String msg;
+
+				msg =
+						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
+				msg = NLS.bind(msg, operation, e.getMessage());
+
+				throw new OperationAccessException(msg, e);
+			}
+
+			catch (IllegalAccessException e) {
+				String msg;
+
+				msg =
+						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
+				msg = NLS.bind(msg, operation, e.getMessage());
+
+				throw new OperationAccessException(msg, e);
+			}
+
+			catch (InvocationTargetException e) {
+				String msg;
+
+				msg =
+						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
+				msg = NLS.bind(msg, operation, e.getMessage());
+
+				throw new OperationAccessException(msg, e);
+			}
+		}
+		// end else.
+
+		return result;
 	}
 
 	/*
@@ -426,9 +548,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 					propertyValue = propertyField.get(this.myAdaptedObject);
 
 					result =
-							this.adaptInvocationResult(propertyValue, property.getType(),
-									property.isMultiple(), property.isOrdered(), property
-											.isUnique());
+							JavaModelInstance.adaptInvocationResult(propertyValue, property
+									.getType(), property, this.myFactory);
 				}
 
 				catch (IllegalArgumentException e) {
@@ -472,85 +593,191 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 	/**
 	 * <p>
-	 * A helper method that adapts the result of an {@link Operation} invocation
-	 * or a {@link Property} access to an {@link IModelInstanceElement} of the
-	 * excepted given {@link Type}.
+	 * A helper method that tries to copy the adapted object using the method
+	 * {@link Object#clone()}.
+	 * </p>
 	 * 
-	 * @param adapteeResult
-	 *          The {@link Object} result that shall be adapted.
-	 * @param type
-	 *          The {@link Type} the adapted result should have.
-	 * @param isMultiple
-	 *          Indicates whether or not the adapted result is multiple.
-	 * @param isOrdered
-	 *          Indicates whether or not the adapted result is ordered (only
-	 *          required for multiple results).
-	 * @param isUnique
-	 *          Indicates whether or not the adapted result is unique (only
-	 *          required for multiple results).
-	 * @return The adapted results as an {@link IModelInstanceElement}.
+	 * @return A copy of the adapted {@link Object} of this
+	 *         {@link JavaModelInstanceObject}.
+	 * @throws CopyForAtPreException
+	 *           Thrown, if we adapted {@link Object} cannot be copied via clone
+	 *           method.
 	 */
-	private IModelInstanceElement adaptInvocationResult(Object adapteeResult,
-			Type type, boolean isMultiple, boolean isOrdered, boolean isUnique) {
+	private IModelInstanceElement copyForAtPreWithClone()
+			throws CopyForAtPreException {
 
 		IModelInstanceElement result;
+		Method cloneMethod;
 
-		/*
-		 * FIXME Claas: Probably implement special treatment for void results. Null
-		 * is handled internally!
-		 */
+		/* Try to find and invoke the clone method. */
+		try {
+			Object adaptedResult;
 
-		/*
-		 * If the result is multiple, the result must be adapted to a collection.
-		 */
-		if (isMultiple) {
+			cloneMethod = this.myAdaptedObject.getClass().getMethod("clone");
+			cloneMethod.setAccessible(true);
 
-			/* Compute the type of collection that is required for the adaptation. */
-
-			/* If the operation is unique, adapt to a set. */
-			if (isUnique) {
-
-				if (isOrdered) {
-					result =
-							this.myFactory
-									.createModelInstanceElement(
-											adapteeResult,
-											PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_ORDERED_SET);
-				}
-
-				else {
-					result =
-							this.myFactory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SET);
-				}
-				// end. else
-			}
-
-			/* Else adapt to a list. */
-			else {
-
-				if (isOrdered) {
-					result =
-							this.myFactory
-									.createModelInstanceElement(
-											adapteeResult,
-											PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_SEQUENCE);
-				}
-
-				else {
-					result =
-							this.myFactory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.INSTANCE.MODEL_TYPE_BAG);
-				}
-				// end else.
-			}
-			// end else.
+			adaptedResult = cloneMethod.invoke(this.myAdaptedObject);
+			result =
+					new JavaModelInstanceObject(adaptedResult, this.myAdaptedType,
+							this.myTypes, this.myFactory);
 		}
 
-		/* Else adapt to the result type of the operation. */
-		else {
-			result = this.myFactory.createModelInstanceElement(adapteeResult, type);
+		catch (SecurityException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
 		}
+
+		catch (NoSuchMethodException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+
+		catch (IllegalArgumentException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+
+		catch (IllegalAccessException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+
+		catch (InvocationTargetException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that tries to copy the adapted {@link Object} of this
+	 * {@link JavaModelInstanceObject} with an empty {@link Constructor} based on
+	 * reflections. The copied {@link Object} will be a flat copy of this
+	 * {@link Object}. Thus, the fields will all have the same value and id.
+	 * </p>
+	 * 
+	 * @return A copy of the adapted {@link Object} of this
+	 *         {@link JavaModelInstanceObject}.
+	 * @throws CopyForAtPreException
+	 *           Thrown, if the adapted {@link Object} cannot be copied using an
+	 *           empty {@link Constructor}.
+	 */
+	private IModelInstanceObject copyForAtPreWithReflections()
+			throws CopyForAtPreException {
+
+		IModelInstanceObject result;
+		Class<?> adapteeClass;
+
+		adapteeClass = this.myAdaptedObject.getClass();
+
+		try {
+			Object copiedAdaptedObject;
+			Constructor<?> emptyConstructor;
+
+			/* Try to find an empty constructor. */
+			emptyConstructor = adapteeClass.getConstructor(new Class[0]);
+
+			/* Copy the adapted object. */
+			copiedAdaptedObject = emptyConstructor.newInstance(new Object[0]);
+
+			/* Iterate through the adapteeClass and all its super classes. */
+			while (adapteeClass != null) {
+
+				/* Initialize all fields with the same value. */
+				for (Field field : adapteeClass.getDeclaredFields()) {
+
+					field.setAccessible(true);
+					field.set(copiedAdaptedObject, field.get(this.myAdaptedObject));
+				}
+				// end for.
+
+				adapteeClass = adapteeClass.getSuperclass();
+			}
+			// end while.
+
+			/* Create the adapter. */
+			result =
+					new JavaModelInstanceObject(copiedAdaptedObject, this.myAdaptedType,
+							this.myTypes, this.myFactory);
+		}
+
+		catch (SecurityException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+
+		catch (NoSuchMethodException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+
+		catch (IllegalArgumentException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+
+		catch (InstantiationException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+
+		catch (IllegalAccessException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+
+		catch (InvocationTargetException e) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
+			msg = NLS.bind(msg, this.getName(), e.getMessage());
+
+			throw new CopyForAtPreException(msg, e);
+		}
+		// end try.
+
 		return result;
 	}
 
@@ -658,201 +885,33 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 		return result;
 	}
 
-	private static final int OPEN_QUESTIONS_REMAIN_IN_THE_FOLLOWING = 0;
-
-	/*
-	 * FIXME Claas: Implement a reflection copy mechanism as well? (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #copyForAtPre()
+	/**
+	 * <p>
+	 * A helper method that initializes a {@link JavaModelInstanceObject} (Called
+	 * from all constructors).
+	 * </p>
+	 * 
+	 * @param object
+	 *          The {@link Object} for which an {@link JavaModelInstanceObject}
+	 *          shall be created.
+	 * @param castedToClass
+	 *          The Java {@link Class} this {@link JavaModelInstanceObject} is
+	 *          casted to. This is required to access the right {@link Property}s
+	 *          and {@link Operation}s.
+	 * @param types
+	 *          The {@link Type}s this {@link IModelInstanceElement} belongs to.
+	 * @param factory
+	 *          The {@link JavaModelInstanceFactory} of this
+	 *          {@link JavaModelInstanceObject}. Required to adapt the
+	 *          {@link Object}s of accesses {@link Property}s or results of
+	 *          invoked {@link Operation}s.
 	 */
-	public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
+	private void initialize(Object object, Class<?> castedToClass,
+			Set<Type> types, JavaModelInstanceFactory factory) {
 
-		IModelInstanceElement result;
-
-		/* Check if the adapted object is clone-able. */
-		if (this.myAdaptedObject instanceof Cloneable) {
-
-			Method cloneMethod;
-
-			/* Try to find and invoke the clone method. */
-			try {
-				Object adaptedResult;
-
-				cloneMethod = this.myAdaptedObject.getClass().getMethod("clone");
-				cloneMethod.setAccessible(true);
-
-				adaptedResult = cloneMethod.invoke(this.myAdaptedObject);
-				result =
-						new JavaModelInstanceObject(adaptedResult, this.myTypes,
-								this.myFactory);
-			}
-
-			catch (SecurityException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
-				msg = NLS.bind(msg, this.getName(), e.getMessage());
-
-				throw new CopyForAtPreException(msg, e);
-			}
-
-			catch (NoSuchMethodException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
-				msg = NLS.bind(msg, this.getName(), e.getMessage());
-
-				throw new CopyForAtPreException(msg, e);
-			}
-
-			catch (IllegalArgumentException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
-				msg = NLS.bind(msg, this.getName(), e.getMessage());
-
-				throw new CopyForAtPreException(msg, e);
-			}
-
-			catch (IllegalAccessException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
-				msg = NLS.bind(msg, this.getName(), e.getMessage());
-
-				throw new CopyForAtPreException(msg, e);
-			}
-
-			catch (InvocationTargetException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
-				msg = NLS.bind(msg, this.getName(), e.getMessage());
-
-				throw new CopyForAtPreException(msg, e);
-			}
-		}
-
-		/* If the object is not clone-able, throw an exception. */
-		else {
-			String msg;
-
-			msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotCopyForAtPre;
-			msg =
-					NLS
-							.bind(
-									msg,
-									this.getName(),
-									JavaModelInstanceTypeMessages.JavaModelInstance_AdapteeIsNotClonable);
-
-			throw new CopyForAtPreException(msg);
-		}
-		// end else.
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
-	 * #invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
-	 * java.util.List)
-	 */
-	public IModelInstanceElement invokeOperation(Operation operation,
-			List<IModelInstanceElement> args) throws OperationNotFoundException,
-			OperationAccessException {
-
-		IModelInstanceElement result;
-
-		/* Check if this object is undefined. */
-		if (this.myAdaptedObject == null) {
-			Set<Type> types;
-
-			types = new HashSet<Type>();
-			types.add(operation.getType());
-
-			result = new JavaModelInstanceObject(null, types, this.myFactory);
-		}
-
-		/* Else find and invoke the operation. */
-		else {
-			Method operationMethod;
-
-			int argSize;
-			Class<?>[] argumentTypes;
-			Object[] argumentValues;
-
-			/* Try to find the method to invoke. */
-			operationMethod = this.findMethodOfAdaptedObject(operation);
-
-			argumentTypes = operationMethod.getParameterTypes();
-			argumentValues = new Object[args.size()];
-
-			/* Avoid errors through to much arguments given by the invocation. */
-			argSize = Math.min(args.size(), operation.getSignatureParameter().size());
-
-			/* Adapt the argument values. */
-			for (int index = 0; index < argSize; index++) {
-
-				argumentValues[index] =
-						this.myFactory.recreateAdaptedElement(args.get(index),
-								argumentTypes[index]);
-				index++;
-			}
-
-			/* Try to invoke the found method. */
-			try {
-				Object adapteeResult;
-				operationMethod.setAccessible(true);
-
-				adapteeResult =
-						operationMethod.invoke(this.myAdaptedObject, argumentValues);
-
-				/* Adapt the result to the expected result type. */
-				result =
-						adaptInvocationResult(adapteeResult, operation.getType(), operation
-								.isMultiple(), operation.isOrdered(), operation.isUnique());
-			}
-
-			catch (IllegalArgumentException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
-				msg = NLS.bind(msg, operation, e.getMessage());
-
-				throw new OperationAccessException(msg, e);
-			}
-
-			catch (IllegalAccessException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
-				msg = NLS.bind(msg, operation, e.getMessage());
-
-				throw new OperationAccessException(msg, e);
-			}
-
-			catch (InvocationTargetException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_OperationAccessFailed;
-				msg = NLS.bind(msg, operation, e.getMessage());
-
-				throw new OperationAccessException(msg, e);
-			}
-		}
-		// end else.
-
-		return result;
+		this.myAdaptedObject = object;
+		this.myAdaptedType = castedToClass;
+		this.myTypes = types;
+		this.myFactory = factory;
 	}
 }
