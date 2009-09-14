@@ -34,7 +34,6 @@ import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
-/* FIXME Claas: Refactor this class. Remove inits into constructor. */
 /**
  * <p>
  * This class provides some constants that can be used as model {@link Type}s
