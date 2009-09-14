@@ -18,33 +18,33 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.ecore.internal.modelinstance;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.EnumerationLiteralNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.EcoreModelInstanceTypeMessages;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider.EcoreModelInstanceProvider;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardlibraryAdapterFactory;
 
 /**
  * <p>
@@ -56,22 +56,56 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardl
 public class EcoreModelInstance extends AbstractModelInstance implements
 		IModelInstance {
 
-	/**
-	 * The {@link AdapterFactory} used to adapt the model instance to the standard
-	 * library.
-	 */
-	protected static StandardlibraryAdapterFactory DEFAULTSLAF =
-			JavaStandardlibraryAdapterFactory.getInstance();
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			EcoreModelInstanceTypePlugin.getLogger(EcoreModelInstanceProvider.class);
 
 	/**
-	 * The {@link Resource} representing the {@link IModel} of this
-	 * {@link IModelInstance}.
+	 * The {@link Resource} representing the adapted model instance elements of
+	 * this {@link IModelInstance}.
 	 */
 	private Resource myModelInstanceResource;
 
 	/**
 	 * <p>
-	 * Creates a new Ecore EMF instance.
+	 * Creates a new, empty EMF Ecore instance.
+	 * </p>
+	 * 
+	 * @param model
+	 *          The {@link IModel} belonging to the {@link IModelInstance}.
+	 * @throws ModelAccessException
+	 */
+	public EcoreModelInstance(IModel model) {
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "EcoreModelInstance("; //$NON-NLS-1$
+			msg += ", model = " + model; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		this.myModel = model;
+		this.myModelInstanceFactory = new EcoreModelInstanceFactory(this.myModel);
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "EcoreModelInstance(IModel) - exit"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * Creates a new EMF Ecore instance.
 	 * </p>
 	 * 
 	 * @param resource
@@ -83,249 +117,79 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 	public EcoreModelInstance(Resource resource, IModel model)
 			throws ModelAccessException {
 
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "EcoreModelInstance("; //$NON-NLS-1$
+			msg += "resource = " + resource; //$NON-NLS-1$
+			msg += ", model = " + model; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
 		this.myModelInstanceResource = resource;
 		this.myName = resource.toString();
+		this.myModel = model;
+		this.myModelInstanceFactory = new EcoreModelInstanceFactory(this.myModel);
 
-		/* Eventually load the resource. */
-		if (!resource.isLoaded()) {
+		/* Probably load the resource. */
+		if (!this.myModelInstanceResource.isLoaded()) {
 
 			try {
-				resource.load(null);
+				this.myModelInstanceResource.load(null);
 			}
 
 			catch (Exception e) {
 				String msg;
 
-				msg = "Problem during retrieving of ModelObjects. Reason: ";
-				msg += e.getMessage();
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstance_CannotRetrieveElements;
+				msg = NLS.bind(msg, e.getMessage());
 
 				throw new ModelAccessException(msg, e);
 			}
 		}
 
-		this.myKnownTypes = new HashMap<Class<?>, OclType>();
-		this.myCurrentSlAF = DEFAULTSLAF;
+		/* Try to adapt all loaded EObjects. */
+		try {
+			this.createAndAddObjects(this.myModelInstanceResource.getContents());
+		}
 
-		this.allMyObjectsByType = new HashMap<String, List<IModelInstanceElement>>();
-		this.allMyObjects = new ArrayList<IModelInstanceElement>();
-		this.allMyObjectKinds = new ArrayList<List<String>>();
+		/* Probably throw an exception, if not all EObjects can be adapted. */
+		catch (TypeNotFoundInModelException e) {
+			throw new ModelAccessException(e.getMessage(), e);
+		}
 
-		this.myModel = model;
-		this.myRootNamespace = model.getRootNamespace();
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
 
-		this.createObjects(resource.getContents());
-	}
+			msg = "EcoreModelInstance(Resource, IModel) - exit"; //$NON-NLS-1$
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumLiteral(java.util
-	 * .List)
-	 */
-	public OclEnumLiteral findEnumLiteral(List<String> pathName) {
-
-		OclEnumLiteral result;
-
-		Type modelType;
-		String literalName;
-
-		result = null;
-
-		/* Clone the path name. */
-		pathName = new ArrayList<String>(pathName);
-
-		/* Remove the last element. Its the literal's name. */
-		literalName = pathName.remove(pathName.size() - 1);
-
-		/* Try to find the related type in the model. */
-		modelType = this.findTypeInModel(pathName);
-
-		/* Try to find the class of the found enumeration type. */
-		if (modelType != null) {
-
-			if (modelType instanceof Enumeration) {
-
-				EList<EObject> modelInstanceElems;
-				EObject aModelInstanceElem;
-				String aModelInstanceClassName;
-
-				int rootPackageIndex;
-				String path;
-
-				Class<?> clazz;
-				Class<?> typeClass;
-
-				/*
-				 * Use an element of the model instance to get the path of the source
-				 * directory.
-				 */
-				modelInstanceElems = myModelInstanceResource.getContents();
-
-				aModelInstanceElem = modelInstanceElems.get(0);
-				aModelInstanceClassName = aModelInstanceElem.getClass().getName();
-
-				rootPackageIndex = aModelInstanceClassName.indexOf(pathName.get(0));
-
-				if (rootPackageIndex > 1) {
-					path = aModelInstanceClassName.substring(0, rootPackageIndex - 1);
-				}
-				else {
-					path = "";
-				}
-
-				/* Eventually remove the root package from the path. */
-				if (pathName.size() > 0
-						&& pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
-					pathName.remove(0);
-				}
-				// no else.
-
-				/* Decode the path into an canonical name. */
-				while (pathName.size() > 0) {
-
-					if (path.length() > 0) {
-						path += ".";
-					}
-					// no else.
-
-					path += pathName.remove(0);
-				}
-
-				/* Try to load the class. */
-				clazz = null;
-
-				try {
-					clazz =
-							aModelInstanceElem.getClass().getClassLoader().loadClass(path);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-
-				typeClass = clazz;
-
-				/* If the found type is an enum, try to get the literal. */
-				if (typeClass.isEnum()) {
-
-					Object[] enums;
-					Object enumLiteralObj;
-
-					enums = typeClass.getEnumConstants();
-					enumLiteralObj = null;
-
-					for (Object enumObj : Arrays.asList(enums)) {
-
-						if (enumObj.toString().equals(literalName)) {
-
-							enumLiteralObj = enumObj;
-							break;
-						}
-					}
-
-					result =
-							(OclEnumLiteral) Platform.getAdapterManager().getAdapter(
-									enumLiteralObj, OclEnumLiteral.class);
-				}
-				// no else.
-			}
-			// no else.
+			LOGGER.debug(msg);
 		}
 		// no else.
-
-		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumType(java.util.
-	 * List)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
+	 * addModelInstanceElement(java.lang.Object)
 	 */
-	public OclEnumType findEnumType(List<String> pathName) {
+	public IModelInstanceElement addModelInstanceElement(Object object)
+			throws TypeNotFoundInModelException {
 
-		OclEnumType result;
+		IModelInstanceElement result;
 
-		Type modelType;
+		/* Try to adapt and add the object. */
+		result = this.addObject(object);
 
-		result = null;
-
-		/* Clone the path name. */
-		pathName = new ArrayList<String>(pathName);
-
-		/* Try to find the related type in the model. */
-		modelType = this.findTypeInModel(pathName);
-
-		/* Try to find the class of the found enumeration type. */
-		if (modelType != null) {
-
-			if (modelType instanceof Enumeration) {
-
-				EList<EObject> modelInstanceElems;
-				EObject aModelInstanceElem;
-				String aModelInstanceClassName;
-
-				int rootPackageIndex;
-				String path;
-
-				Class<?> clazz;
-				Class<?> typeClass;
-
-				/*
-				 * Use an element of the model instance to get the path of the source
-				 * directory.
-				 */
-				modelInstanceElems = myModelInstanceResource.getContents();
-
-				aModelInstanceElem = modelInstanceElems.get(0);
-				aModelInstanceClassName = aModelInstanceElem.getClass().getName();
-
-				rootPackageIndex = aModelInstanceClassName.indexOf(pathName.get(0));
-
-				if (rootPackageIndex > 1) {
-					path = aModelInstanceClassName.substring(0, rootPackageIndex - 1);
-				}
-				else {
-					path = "";
-				}
-
-				/* Eventually remove the root package from the path. */
-				if (pathName.size() > 0
-						&& pathName.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
-					pathName.remove(0);
-				}
-				// no else.
-
-				/* Decode the path into an canonical name. */
-				while (pathName.size() > 0) {
-
-					if (path.length() > 0) {
-						path += ".";
-					}
-					// no else.
-
-					path += pathName.remove(0);
-				}
-
-				/* Try to load the class. */
-				clazz = null;
-
-				try {
-					clazz =
-							aModelInstanceElem.getClass().getClassLoader().loadClass(path);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-
-				typeClass = clazz;
-
-				/* If the found type is an enum, adapt it. */
-				if (typeClass.isEnum()) {
-
-					result =
-							(OclEnumType) Platform.getAdapterManager().getAdapter(clazz,
-									OclEnumType.class);
-				}
-				// no else.
-			}
-			// no else.
+		/* Probably add the adapted model instance element to the type mapping. */
+		if (result instanceof IModelInstanceObject) {
+			this.addModelInstanceObjectToCache((IModelInstanceObject) result);
 		}
 		// no else.
 
@@ -334,318 +198,94 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 
 	/**
 	 * <p>
-	 * Returns the {@link OclType} to a give path name.
+	 * Adds a given {@link Object} to the {@link List} of
+	 * {@link IModelInstanceElement}s.
 	 * </p>
 	 * 
-	 * @param pathName
-	 *          A given canonical name as a {@link List} of packages.
-	 * @return The {@link OclType} to a given canonical name as a {@link List} of
-	 *         packages.
+	 * @param anObject
+	 *          The {@link Object} which shall be added to the {@link List} of
+	 *          {@link IModelInstanceElement}s.
+	 * @return The added {@link IModelInstanceElement}.
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown if a given Object, cannot be adapted to a {@link Type} in
+	 *           the {@link IModel}.
 	 */
-	public OclType findType(List<String> pathName) {
+	private IModelInstanceElement addObject(Object anObject)
+			throws TypeNotFoundInModelException {
 
-		OclType result;
+		IModelInstanceElement result;
 
-		result = null;
+		result = this.myModelInstanceFactory.createModelInstanceElement(anObject);
 
-		/* Check if the pathName does not denote at least one package. */
-		if (pathName.size() == 1) {
-			/* If not, its a primitive type. */
-			result = getPrimitiveType(pathName.get(0));
-		}
-		// no else.
-
-		/* Else try to find the type in the model. */
+		/* If no type of the object has been found, throw an exception. */
 		if (result == null) {
+			String msg;
 
-			Type modelType;
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstance_ObjectDoesNoMatchToModel;
+			msg = NLS.bind(msg, anObject, this.myModel.getDisplayName());
 
-			modelType = this.findTypeInModel(pathName);
+			LOGGER.error(msg);
+			throw new TypeNotFoundInModelException(msg);
+		}
+		// no else.
 
-			/* Try to load the class of the found model element. */
-			if (modelType != null) {
-
-				List<String> classPath;
-
-				EList<EObject> modelInstanceElems;
-				EObject anInstanceElement;
-				String anInstanceElemName;
-
-				String path;
-				String rootPackageName;
-				int rootPackageIndex;
-
-				Class<?> typeClass;
-				EObject inner;
-				String remaining;
-
-				/* The class path must correspond to the given pathName. */
-				classPath = new ArrayList<String>(pathName);
-
-				/*
-				 * Get one element of the model instance to detect the model instance
-				 * source directory.
-				 */
-				modelInstanceElems = myModelInstanceResource.getContents();
-
-				anInstanceElement = modelInstanceElems.get(0);
-				anInstanceElemName = anInstanceElement.getClass().getName();
-
-				/*
-				 * Eventually remove a part from the path before the root package.
-				 */
-				rootPackageName = pathName.get(0);
-				rootPackageIndex = anInstanceElemName.indexOf(rootPackageName);
-
-				if (rootPackageIndex > 1) {
-					path = anInstanceElemName.substring(0, rootPackageIndex - 1);
-				}
-
-				else {
-					path = "";
-				}
-
-				/* Eventually remove the root package from the path. */
-				if (classPath.size() > 0
-						&& classPath.get(0).equals(IModelBusConstants.ROOT_PACKAGE_NAME)) {
-					classPath.remove(0);
-				}
-				// no else.
-
-				/*
-				 * Convert the class path into a canonicalName of the instance class.
-				 */
-				while (classPath.size() > 0) {
-
-					if (classPath.size() > 1) {
-
-						if (path.length() > 0) {
-							path += ".";
-						}
-						// no else.
-
-						path += classPath.remove(0);
-					}
-
-					else {
-						path += ".impl." + classPath.remove(0) + "Impl";
-					}
-				}
-
-				/* Try to find the class. */
-				Class<?> clazz = null;
-
-				try {
-					clazz = anInstanceElement.getClass().getClassLoader().loadClass(path);
-				}
-
-				catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-
-				typeClass = null;
-				inner = null;
-				remaining = null;
-
-				if (inner == null) {
-					typeClass = clazz;
-				}
-
-				else {
-					if (inner instanceof EAttribute) {
-						try {
-							Field field = clazz.getDeclaredField(remaining);
-							typeClass = field.getType();
-						}
-
-						catch (SecurityException e) {
-							e.printStackTrace();
-						}
-
-						catch (NoSuchFieldException e) {
-							e.printStackTrace();
-						}
-					}
-					// no else.
-				}
-
-				OclType type = myKnownTypes.get(typeClass);
-
-				if (type == null) {
-					type =
-							(OclType) Platform.getAdapterManager().getAdapter(typeClass,
-									OclType.class);
-					myKnownTypes.put(typeClass, type);
-				}
-				// no else.
-
-				result = type;
-			}
-			// no else.
+		/* Probably add the adapted element to the instance's objects. */
+		if (result instanceof IModelInstanceObject) {
+			this.myModelInstanceObjects.add((IModelInstanceObject) result);
 		}
 		// no else.
 
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getFactory()
-	 */
-	public IModelInstanceFactory getFactory() {
-
-		if (this.myModelInstanceFactory == null) {
-			this.myModelInstanceFactory = new EcoreModelInstanceFactory();
-		}
-		// no else.
-
-		return this.myModelInstanceFactory;
-	}
-
 	/**
 	 * <p>
-	 * A helper method which creates the {@link EcoreModelObject}s for a given
-	 * {@link List} of {@link EObject}s.
+	 * A helper method which creates the {@link IModelInstanceElement}s for a
+	 * given {@link List} of {@link EObject}s and adds them to the model.
 	 * </p>
 	 * 
-	 * @param eObjects
-	 *          The {@link EObject}s {@link EcoreModelObject}s shall be created
-	 *          for.
+	 * @param objects
+	 *          The {@link EObject}s {@link IModelInstanceElement}s shall be
+	 *          created for.
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown, if at least one of the given {@link EObject}s cannot be
+	 *           adapted to any {@link Type} of the {@link IModel} of this
+	 *           {@link IModelInstance}.
 	 */
-	private void createObjects(List<EObject> eObjects) {
+	private void createAndAddObjects(List<EObject> eObjects)
+			throws TypeNotFoundInModelException {
 
 		/* Iterate through the given list of EObjects. */
-		for (EObject currentObject : eObjects) {
+		for (Object anEObject : eObjects) {
 
-			EcoreModelObject aModelObject;
-
-			String anEClassName;
-			String aQualifiedName;
-
-			List<String> aTypesQualifiedNameList;
-			List<String> aQualifiedNameList;
-
-			List<IModelInstanceElement> allObjectsOfSameType;
-
-			Type aType;
-
-			/* Eventually create model objects for all children of this EObject. */
-			if (currentObject.eContents().size() > 0) {
-				this.createObjects(currentObject.eContents());
-			}
-			// no else.
-
-			/* Get the EClass of this EObject and its qualified name. */
-			anEClassName = currentObject.eClass().getName();
-
-			aQualifiedName = this.findQualifiedPath(anEClassName);
-
-			aTypesQualifiedNameList = Arrays.asList(aQualifiedName.split("\\."));
-			aQualifiedNameList = Arrays.asList(aQualifiedName.split("\\."));
-
-			/*
-			 * Get all objects of the same type in this instance and eventually
-			 * initialize this list.
-			 */
-			allObjectsOfSameType = this.allMyObjectsByType.get(aQualifiedName);
-
-			if (allObjectsOfSameType == null) {
-				allObjectsOfSameType = new ArrayList<IModelInstanceElement>();
-			}
-			// no else.
-
-			/* Try to get the type of the new IModelInstanceElement. */
-			aType = this.findTypeInModel(aTypesQualifiedNameList);
-
-			aModelObject = new EcoreModelObject(currentObject, aType);
-
-			allObjectsOfSameType.add(aModelObject);
-
-			/* Add the created model object to the lists of this model instance. */
-			this.allMyObjects.add(aModelObject);
-			this.allMyObjectsByType.put(aQualifiedName, allObjectsOfSameType);
-
-			/* Eventually add the types name to the list of the object kinds. */
-			if (!this.allMyObjectKinds.contains(aQualifiedNameList)) {
-				this.allMyObjectKinds.add(aQualifiedNameList);
-			}
-			// no else.
+			this.addObject(anEObject);
 		}
 		// end for.
 	}
 
-	/**
-	 * <p>
-	 * A helper methods used to find the {@link Type} to a given path in the
-	 * {@link IModel} of this {@link JavaModelInstance}.
-	 * </p>
-	 * 
-	 * @param aPackagePath
-	 *          The path of the {@link Type} which shall be searched for.
-	 * @return the found {@link Type} or null.
-	 * 
-	 */
-	private Type findTypeInModel(List<String> aPackagePath) {
+	/** FIXME Claas: REFACTORED_TILL_HERE. */
+	private static final int REFACTORED_TILL_HERE = 0;
 
-		Type result;
-		List<String> packagePath;
+	public IModelInstanceEnumerationLiteral findEnumerationLiteral(
+			EnumerationLiteral literal) throws EnumerationLiteralNotFoundException {
 
-		/* Clone the packagePath; */
-		packagePath = new ArrayList<String>(aPackagePath);
-
-		/* Remove the 'root' package. */
-		if (packagePath.get(0).equals("root")) {
-			packagePath.remove(0);
-		}
-		// no else.
-
-		try {
-			result =
-					this
-							.findTypeInNamespace(packagePath, this.myModel.getRootNamespace());
-		}
-
-		catch (ModelAccessException e) {
-			result = null;
-		}
-
-		return result;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/**
-	 * <p>
-	 * Searches for a given type's name in the {@link IModel} and returns its
-	 * fully qualified name if the type has been found. Else <code>null</code>
-	 * will be returned.
-	 * </p>
-	 * 
-	 * @param aTypesName
-	 *          Whose name shall be found.
-	 * @return The fully qualified name.
-	 */
-	private String findQualifiedPath(String aTypesName) {
+	public IModelInstanceElement getStaticProperty(Property property)
+			throws PropertyAccessException, PropertyNotFoundException {
 
-		String result;
-		List<String> pathList;
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-		pathList = new ArrayList<String>();
-		pathList.add(aTypesName);
+	public IModelInstanceElement invokeStaticOperation(Operation operation,
+			List<IModelInstanceElement> args) throws OperationAccessException,
+			OperationNotFoundException {
 
-		try {
-			result = this.myModel.findType(pathList).getQualifiedName();
-
-			if (result.startsWith("root::")) {
-				result = result.substring(6);
-			}
-			// no else
-
-			result = result.replaceAll("::", ".");
-		}
-
-		catch (ModelAccessException e1) {
-			result = null;
-		}
-
-		return result;
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

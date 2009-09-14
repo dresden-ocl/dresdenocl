@@ -5,11 +5,11 @@ Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.ecore;singleton:=tr
 Bundle-Version: 1.2.0
 Bundle-Activator: tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin
 Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.essentialocl.standardlibrary,
- tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.pivot.standardlibrary.java
+ tudresden.ocl20.pivot.modelbus
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.modelinstancetype.ecore;uses:="org.osgi.framework,org.eclipse.core.runtime",
  tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider;uses:="tudresden.ocl20.pivot.modelbus,tudresden.ocl20.pivot.modelbus.base,org.eclipse.emf.ecore.resource"

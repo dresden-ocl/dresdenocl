@@ -20,17 +20,21 @@ package tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider;
 
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstanceProvider;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.modelinstance.EcoreModelInstance;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.EcoreModelInstanceTypeMessages;
 
 /**
  * <p>
@@ -42,51 +46,95 @@ import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.modelinstance.Ecor
 public class EcoreModelInstanceProvider extends AbstractModelInstanceProvider
 		implements IModelInstanceProvider {
 
+	/** The {@link Logger} for this class. */
+	private static final Logger LOGGER =
+			EcoreModelInstanceTypePlugin.getLogger(EcoreModelInstanceProvider.class);
+
 	/**
 	 * <p>
 	 * Creates a new {@link EcoreModelInstanceProvider}.
 	 * </p>
 	 */
 	public EcoreModelInstanceProvider() {
+
+		/* Remains empty. */
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider#
+	 * createEmptyModelInstance(tudresden.ocl20.pivot.modelbus.IModel)
+	 */
+	public IModelInstance createEmptyModelInstance(IModel model) {
+
+		return new EcoreModelInstance(model);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
 	 * (java.net.URL, tudresden.ocl20.pivot.modelbus.IModel)
 	 */
 	public IModelInstance getModelInstance(URL modelInstanceUrl, IModel model)
 			throws ModelAccessException {
-
+	
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+	
+			msg = "getModelInstance("; //$NON-NLS-1$
+			msg += "modelInstanceUrl = " + modelInstanceUrl; //$NON-NLS-1$
+			msg += ", model = " + model; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+	
+			LOGGER.debug(msg);
+		}
+		// no else.
+	
+		IModelInstance result;
 		URI modelURI;
-		IModelInstance modelInstance;
-		
+	
 		Resource resource;
 		ResourceSet resourceSet;
-
+	
 		/* Try to create a URI. */
 		try {
 			modelURI = URI.createURI(modelInstanceUrl.toString());
 		}
-
+	
 		catch (IllegalArgumentException e) {
-			throw new ModelAccessException("Invalid URL: " + modelInstanceUrl,
-					e);
+			String msg;
+	
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceProvider_InvalidURL;
+			msg = NLS.bind(msg, modelInstanceUrl, e.getMessage());
+	
+			throw new ModelAccessException(msg, e);
 		}
-
+	
 		/* Get the resource. */
 		resourceSet = new ResourceSetImpl();
 		resource = resourceSet.getResource(modelURI, false);
-
+	
 		if (resource == null) {
-			// we only want to create the resource, not load it
+			/* Only create the resource do not load it. */
 			resource = resourceSet.createResource(modelURI);
 		}
-
-		modelInstance = new EcoreModelInstance(resource, model);
-
-		return modelInstance;
+	
+		/* Create the model instance. */
+		result = new EcoreModelInstance(resource, model);
+	
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+	
+			msg = "getModelInstance(URL, IModel) - exit"; //$NON-NLS-1$
+			msg += " return value = " + result; //$NON-NLS-1$
+	
+			LOGGER.debug(msg);
+		}
+		// no else.
+	
+		return result;
 	}
 }
