@@ -56,6 +56,7 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 	 */
 	public JavaModelInstanceProvider() {
 
+		/* Remains empty. */
 	}
 
 	/*
@@ -82,7 +83,7 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 	public IModelInstance getModelInstance(URL instanceURL, IModel model)
 			throws ModelAccessException {
 
-		/* Eventually debug the entry of this method. */
+		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
