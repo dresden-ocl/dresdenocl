@@ -19,7 +19,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jface.viewers.Viewer;
@@ -39,8 +38,9 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 /**
  * <p>
  * The {@link ModelObjectFilter} is used by the {@link ModelInstancesView} to
- * select the {@link IModelInstanceElement}s which shall be shown depending on the
- * selection of {@link Constraint}s or {@link Type}s in the {@link ModelsView}.
+ * select the {@link IModelInstanceElement}s which shall be shown depending on
+ * the selection of {@link Constraint}s or {@link Type}s in the
+ * {@link ModelsView}.
  * </p>
  * 
  * @autor Claas Wilke
@@ -60,8 +60,8 @@ public class ModelObjectFilter extends ViewerFilter {
 	 * </p>
 	 * 
 	 * @param aNamespace
-	 *          The {@link Namespace} which {@link IModelInstanceElement} that shall be
-	 *          filtered.
+	 *          The {@link Namespace} which {@link IModelInstanceElement} that
+	 *          shall be filtered.
 	 */
 	public void addFilter(Namespace aNamespace) {
 
@@ -76,13 +76,13 @@ public class ModelObjectFilter extends ViewerFilter {
 
 	/**
 	 * <p>
-	 * Adds an {@link IModelInstanceElement}'s {@link Type} that shall be shown to this
-	 * {@link ModelObjectFilter}.
+	 * Adds an {@link IModelInstanceElement}'s {@link Type} that shall be shown to
+	 * this {@link ModelObjectFilter}.
 	 * </p>
 	 * 
 	 * @param aType
-	 *          The {@link Type} of thie {@link IModelInstanceElement} that shall be
-	 *          filtered.
+	 *          The {@link Type} of thie {@link IModelInstanceElement} that shall
+	 *          be filtered.
 	 */
 	public void addFilter(Type aType) {
 
@@ -215,7 +215,6 @@ public class ModelObjectFilter extends ViewerFilter {
 	 * org.eclipse.jface.viewers.ViewerFilter#select(org.eclipse.jface.viewers
 	 * .Viewer, java.lang.Object, java.lang.Object)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean select(Viewer aViewer, Object aParentElement, Object anElement) {
 
@@ -229,68 +228,31 @@ public class ModelObjectFilter extends ViewerFilter {
 		/* Else check if the parent element is an IModelInstance. */
 		else if (aParentElement instanceof IModelInstance) {
 
-			IModelInstance aModelInstance;
-			List<IModelObject> objectsOfAKinds;
+			/* Convert the given element into a Type. */
+			if (anElement instanceof Type) {
 
-			List<String> aCanoncialName;
-			Set<Type> instanceTypes;
+				Type type;
+				type = (Type) anElement;
 
-			aModelInstance = (IModelInstance) aParentElement;
-
-			/* Convert the given element into an canonical name. */
-			aCanoncialName = (List<String>) anElement;
-
-			/* Get all IModelObjects of this Type. */
-			objectsOfAKinds = aModelInstance.getObjectsOfKind(aCanoncialName);
-
-			/* Use one ModelObject to get the Type. */
-			instanceTypes = objectsOfAKinds.get(0).getTypes();
-
-			result = false;
-
-			/*
-			 * Check, if the given model objects type conforms to one type which shall
-			 * be filtered.
-			 */
-			for (Type aFilteredType : this.myFilteredTypes) {
-
-				for (Type anInstancesType : instanceTypes) {
-					if (anInstancesType.conformsTo(aFilteredType)) {
-						result = true;
-						break;
-					}
-					// no else.
-				}
+				/* Check, if the type shall be filtered. */
+				result = this.myFilteredTypes.contains(type);
 			}
 
+			else {
+				result = false;
+			}
 		}
 
-		/*
-		 * Else check if the parent element is List representing the canonical name
-		 * of a model objects type.
-		 */
-		else if (aParentElement instanceof List) {
+		/* Else check if the parent element is a Type. */
+		else if (aParentElement instanceof Type) {
 
 			if (anElement instanceof IModelInstanceElement) {
 
-				IModelInstanceElement aModelObject;
+				Type type;				
+				type = (Type) aParentElement;
 
-				result = false;
-				aModelObject = (IModelInstanceElement) anElement;
-
-				/*
-				 * Iterate through the filtered types and check if the model object is
-				 * an instance of one of these types.
-				 */
-				for (Type aType : this.myFilteredTypes) {
-
-					if (aModelObject.isInstanceOf(aType)) {
-						result = true;
-						break;
-					}
-					// no else.
-				}
-				// end for.
+				/* Check if the type of this object shall be filtered. */
+				result = this.myFilteredTypes.contains(type);
 			}
 
 			else {

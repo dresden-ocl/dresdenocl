@@ -18,14 +18,16 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
 
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-import tudresden.ocl20.pivot.modelbus.IModelInstance;
-import tudresden.ocl20.pivot.modelbus.IModelObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -41,7 +43,6 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 	 */
 	public void dispose() {
@@ -64,7 +65,6 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 	 * 
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
 	 */
-	@SuppressWarnings("unchecked")
 	public Object[] getChildren(Object parentElement) {
 
 		Object[] result;
@@ -73,26 +73,25 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 		if (parentElement instanceof IModelInstance) {
 
 			IModelInstance anIModelInstance;
-			List<List<String>> objectKinds;
+			Set<Type> implementedTypes;
 
 			anIModelInstance = (IModelInstance) parentElement;
-			objectKinds = anIModelInstance.getObjectKinds();
+			implementedTypes = anIModelInstance.getAllImplementedTypes();
 
-			result = objectKinds.toArray(new List[objectKinds.size()]);
+			result = implementedTypes.toArray(new Type[0]);
 		}
 
-		/* Else check if the given element is a List. */
-		else if (parentElement instanceof List) {
+		/* Else check if the given element is a Type. */
+		else if (parentElement instanceof Type) {
 
-			List<String> aCanonicalTypeName;
-			List<IModelObject> objectsOfKind;
+			Type type;
+			Set<IModelInstanceObject> objectsOfType;
 
-			aCanonicalTypeName = (List<String>) parentElement;
+			type = (Type) parentElement;
+			objectsOfType = this.myModelInstance.getAllInstances(type);
 
-			objectsOfKind = myModelInstance.getObjectsOfKind(aCanonicalTypeName);
-
-			result = objectsOfKind.toArray(new IModelObject[objectsOfKind
-					.size()]);
+			result =
+					objectsOfType.toArray(new IModelInstanceObject[objectsOfType.size()]);
 		}
 
 		/* Else return an empty array. */
@@ -105,45 +104,46 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(
 	 * java.lang.Object)
 	 */
 	public Object[] getElements(Object inputElement) {
+
 		return this.getChildren(inputElement);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getParent(java.lang
 	 * .Object)
 	 */
-	@SuppressWarnings("unchecked")
 	public Object getParent(Object anElement) {
 
 		Object result;
 
-		/* Check if the given element is a List. */
-		if (anElement instanceof List) {
+		/* Check if the given element is a Type. */
+		if (anElement instanceof Type) {
 
-			List<String> aList;
+			Type type;
+			type = (Type) anElement;
 
-			aList = (List<String>) anElement;
-
-			if (this.myModelInstance.getObjectsOfKind(aList).size() > 0) {
+			/*
+			 * Check if the type is implemented by at least one element of the current
+			 * model instance.
+			 */
+			if (this.myModelInstance.getAllInstances(type).size() > 0) {
 				result = this.myModelInstance;
 			}
-
+			
 			else {
 				result = null;
 			}
 		}
 
-		/* Else check if the given element is an IModelObject. */
-		else if (anElement instanceof IModelObject) {
+		/* Else check if the given element is an IModelInstanceElement. */
+		else if (anElement instanceof IModelInstanceElement) {
 
-			result = ((IModelObject) anElement).getName();
+			result = ((IModelInstanceElement) anElement).getTypes();
 		}
 
 		/* Else return null. */
@@ -156,52 +156,48 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java.lang
 	 * .Object)
 	 */
-	@SuppressWarnings("unchecked")
 	public boolean hasChildren(Object anElement) {
-	
+
 		boolean result;
-	
+
 		/* Check if the given element is an IModelInstance. */
 		if (anElement instanceof IModelInstance) {
-	
+
 			IModelInstance anIModelInstance;
-	
+
 			anIModelInstance = (IModelInstance) anElement;
-	
-			result = (anIModelInstance.getObjectKinds().size() > 0);
+
+			result = (anIModelInstance.getAllImplementedTypes().size() > 0);
 		}
-	
-		/* Else check if the given element is a List. */
-		else if (anElement instanceof List) {
-	
+
+		/* Else check if the given element is a Type. */
+		else if (anElement instanceof Type) {
+
 			if (this.myModelInstance != null) {
-	
-				List<String> aList;
-	
-				aList = (List<String>) anElement;
-	
-				result = (this.myModelInstance.getObjectsOfKind(aList).size() > 0);
+
+				Type type;
+				type = (Type) anElement;
+
+				result = (this.myModelInstance.getAllInstances(type).size() > 0);
 			}
-	
+
 			else {
 				result = false;
 			}
 		}
-	
+
 		else {
 			result = false;
 		}
-	
+
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse
 	 * .jface.viewers.Viewer, java.lang.Object, java.lang.Object)
 	 */

@@ -18,8 +18,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
 
-import java.util.List;
-
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
@@ -27,6 +25,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -46,7 +45,6 @@ public class ModelObjectLabelProvider extends LabelProvider {
 	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
 	 */
-	@SuppressWarnings("unchecked")
 	public String getText(Object anObject) {
 
 		String result;
@@ -56,29 +54,15 @@ public class ModelObjectLabelProvider extends LabelProvider {
 		}
 
 		else if (anObject instanceof IModelInstanceElement) {
-			result = ((IModelInstanceElement) anObject).toString();
+			result = ((IModelInstanceElement) anObject).getName();
 		}
 
-		else if (anObject instanceof List) {
+		else if (anObject instanceof Type) {
 
-			List<String> aList;
-			String label;
-
-			aList = (List<String>) anObject;
-			label = null;
-
-			/* Compute the label from the given package path. */
-			for (String anElement : aList) {
-
-				if (label == null) {
-					label = anElement;
-				}
-
-				else {
-					label = label + "::" + anElement;
-				}
-			}
-			result = label;
+			Type type;
+			type = (Type) anObject;
+			
+			result = type.getQualifiedName();
 		}
 
 		else {
@@ -97,8 +81,7 @@ public class ModelObjectLabelProvider extends LabelProvider {
 
 		Image result;
 
-		/* Types are represented by a list of their name. */
-		if (anObject instanceof List) {
+		if (anObject instanceof Type) {
 			result = ModelBusUIPlugin.getImageDescriptor(ICON_TYPE)
 					.createImage();
 		}
