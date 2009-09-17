@@ -1,5 +1,8 @@
 package tudresden.ocl20.pivot.testsuite.runner;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -16,9 +19,14 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Preferences;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+
+import tudresden.ocl20.logging.appender.StringBufferAppender;
+import tudresden.ocl20.pivot.testsuite.TestSuitePlugin;
 
 /**
  * This is the heart of the <i>Extensible Test Suite</i> of Dresden OCL2 for
@@ -26,13 +34,15 @@ import org.eclipse.swt.widgets.Shell;
  * register their test cases have to do this by providing an extension to the
  * extension point "tudresden.ocl20.pivot.testsuite".<br>
  * When the {@link OCL2TestSuiteRunner} is started, it collects all registered
- * test suites and executes them. TODO: messages!
+ * test suites and executes them.
  * 
  * @author Michael Thiele
  * 
  */
 public class OCL2TestSuiteRunner {
 
+	protected static final String SHOW_WARNINGS =
+			"ExtensibleTestSuite_showWarnings";
 	private static final String EXECUTABLE_EXTENSION = "testSuite";
 	private static final String CONFIGURATION_ELEMENT = "testSuites";
 	private static final String TESTSUITE_EXTENSIONPOINT =
@@ -57,7 +67,7 @@ public class OCL2TestSuiteRunner {
 		if (display == null) {
 			display = Display.getDefault();
 		}
-		Shell parentShell = display.getActiveShell();
+		final Shell parentShell = display.getActiveShell();
 
 		SelectTestSuitesDialog selectTestSuitesDialog =
 				new SelectTestSuitesDialog(parentShell, registeredTestSuites);
@@ -87,7 +97,30 @@ public class OCL2TestSuiteRunner {
 				@Override
 				protected void tearDown() {
 
-					// TODO: display messages
+					String messages = StringBufferAppender.getMessages();
+
+					if (messages.length() == 0)
+						return;
+					else {
+						Preferences preferences =
+								TestSuitePlugin.getDefault().getPluginPreferences();
+						boolean showWarnings = preferences.getBoolean(SHOW_WARNINGS);
+						try {
+							preferences.store(new FileOutputStream(TestSuitePlugin
+									.getDefault().getStateLocation().append("showWarnings.pref")
+									.toFile()), null);
+						} catch (FileNotFoundException e) {
+							// ignore
+						} catch (IllegalStateException e) {
+							// ignore
+						} catch (IOException e) {
+							// ignore
+						}
+
+						if (showWarnings)
+							MessageDialog.openInformation(parentShell, "Warnings", messages);
+					}
+
 				}
 
 			};
