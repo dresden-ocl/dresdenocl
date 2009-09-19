@@ -74,6 +74,5 @@ public class ModelLoadTest {
 
     product = product.bindTypeParameter(product.getOwnedTypeParameter(),Arrays
         .asList(oclLibrary.getOclString()));
-
   }
 }

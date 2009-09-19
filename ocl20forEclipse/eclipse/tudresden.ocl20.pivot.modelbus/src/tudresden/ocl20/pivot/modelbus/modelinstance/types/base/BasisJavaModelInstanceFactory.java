@@ -281,14 +281,30 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 					result = createModelInstanceBoolean((Boolean) adapted);
 				}
 
-				/* Else throw an exception. */
+				/* Else try to parse a boolean. */
 				else {
-					String msg;
-					msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
-					msg = NLS.bind(msg, adapted, type);
+					String adaptedAsString;
 
-					throw new IllegalArgumentException(msg);
+					adaptedAsString = adapted.toString();
+
+					if (adaptedAsString.equalsIgnoreCase("true")) {
+						result = createModelInstanceBoolean(true);
+					}
+
+					else if (adaptedAsString.equalsIgnoreCase("false")) {
+						result = createModelInstanceBoolean(false);
+					}
+
+					else {
+						String msg;
+						msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
+						msg = NLS.bind(msg, adapted, type);
+
+						throw new IllegalArgumentException(msg);
+					}
+					// end else.
 				}
+				// end else.
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
@@ -298,14 +314,25 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 					result = createModelInstanceInteger(((Number) adapted).longValue());
 				}
 
-				/* Else throw an exception. */
+				/* Else try to parse a long. */
 				else {
-					String msg;
-					msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
-					msg = NLS.bind(msg, adapted, type);
+					try {
+						long longValue;
+						longValue = Long.parseLong(adapted.toString());
 
-					throw new IllegalArgumentException(msg);
+						result = createModelInstanceInteger(longValue);
+					}
+
+					catch (NumberFormatException e) {
+						String msg;
+						msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
+						msg = NLS.bind(msg, adapted, type);
+
+						throw new IllegalArgumentException(msg, e);
+					}
+					// end catch.
 				}
+				// end else.
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
@@ -315,14 +342,25 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 					result = createModelInstanceReal((Number) adapted);
 				}
 
-				/* Else throw an exception. */
+				/* Else try to parse a double. */
 				else {
-					String msg;
-					msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
-					msg = NLS.bind(msg, adapted, type);
+					try {
+						double doubleValue;
+						doubleValue = Double.parseDouble(adapted.toString());
 
-					throw new IllegalArgumentException(msg);
+						result = createModelInstanceReal(doubleValue);
+					}
+
+					catch (NumberFormatException e) {
+						String msg;
+						msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
+						msg = NLS.bind(msg, adapted, type);
+
+						throw new IllegalArgumentException(msg, e);
+					}
+					// end catch.
 				}
+				// end else.
 			}
 
 			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
@@ -333,16 +371,12 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 				}
 
 				else if (adapted instanceof String) {
-					result = createModelInstanceString(((String) adapted).toString());
+					result = createModelInstanceString((String) adapted);
 				}
 
-				/* Else throw an exception. */
+				/* Else use the toString method. */
 				else {
-					String msg;
-					msg = ModelBusMessages.IModelInstanceElement_CannotAdaptToType;
-					msg = NLS.bind(msg, adapted, type);
-
-					throw new IllegalArgumentException(msg);
+					result = createModelInstanceString(adapted.toString());
 				}
 			}
 

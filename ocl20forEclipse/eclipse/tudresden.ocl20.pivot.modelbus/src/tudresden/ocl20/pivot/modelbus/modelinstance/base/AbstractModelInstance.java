@@ -43,6 +43,13 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
+import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -95,6 +102,86 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/** The name of the model instance. */
 	protected String myName;
 
+	/**
+	 * <p>
+	 * A helper method that adapts the result of an {@link Operation} invocation
+	 * or a {@link Property} access of the excepted given {@link Type}.
+	 * 
+	 * @param adapteeResult
+	 *          The {@link Object} result that shall be adapted.
+	 * @param type
+	 *          The Type to which the result shall be adapted.
+	 * @param multiplicityElement
+	 *          The {@link MultiplicityElement} whose result shall be adapted
+	 *          (could be a {@link Property} or an {@link Operation}).
+	 * @param factory
+	 *          The {@link JavaModelInstanceFactory} used to adapt the result.
+	 * @return The adapted results as an {@link IModelInstanceElement}.
+	 */
+	public static IModelInstanceElement adaptInvocationResult(
+			Object adapteeResult, Type type, MultiplicityElement multiplicityElement,
+			IModelInstanceFactory factory) {
+
+		IModelInstanceElement result;
+
+		/* Check if the result is expected as void. */
+		if (type instanceof PrimitiveType
+				&& ((PrimitiveType) type).getKind().equals(PrimitiveTypeKind.VOID)) {
+			result = IModelInstanceVoid.INSTANCE;
+		}
+
+		/*
+		 * Else if the result is multiple, the result must be adapted to a
+		 * collection.
+		 */
+		else if (multiplicityElement.isMultiple()) {
+
+			/* Compute the type of collection that is required for the adaptation. */
+
+			/* If the operation is unique, adapt to a set. */
+			if (multiplicityElement.isUnique()) {
+
+				if (multiplicityElement.isOrdered()) {
+					result =
+							factory.createModelInstanceElement(adapteeResult,
+									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
+				}
+
+				else {
+					result =
+							factory.createModelInstanceElement(adapteeResult,
+									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
+				}
+				// end. else
+			}
+
+			/* Else adapt to a list. */
+			else {
+
+				if (multiplicityElement.isOrdered()) {
+					result =
+							factory.createModelInstanceElement(adapteeResult,
+									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE);
+				}
+
+				else {
+					result =
+							factory.createModelInstanceElement(adapteeResult,
+									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
+				}
+				// end else.
+			}
+			// end else.
+		}
+
+		/* Else adapt to the result type of the operation. */
+		else {
+			result = factory.createModelInstanceElement(adapteeResult, type);
+		}
+
+		return result;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -123,22 +210,23 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * ()
 	 */
 	public Set<Type> getAllImplementedTypes() {
-	
+
 		Set<Type> result = new HashSet<Type>();
-	
+
 		for (IModelInstanceElement modelObject : this.myModelInstanceObjects) {
 			result.addAll(modelObject.getTypes());
 		}
-	
+
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getAllModelInstanceObjects()
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
+	 * getAllModelInstanceObjects()
 	 */
 	public List<IModelInstanceObject> getAllModelInstanceObjects() {
-	
+
 		return new ArrayList<IModelInstanceObject>(this.myModelInstanceObjects);
 	}
 
@@ -156,7 +244,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getModel()
 	 */
 	public IModel getModel() {
-	
+
 		return this.myModel;
 	}
 
@@ -166,7 +254,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * getModelInstanceFactory()
 	 */
 	public IModelInstanceFactory getModelInstanceFactory() {
-	
+
 		return this.myModelInstanceFactory;
 	}
 
@@ -177,7 +265,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * .pivot.modelbus.IModel)
 	 */
 	public boolean isInstanceOf(IModel aModel) {
-	
+
 		return this.myModel.equals(aModel);
 	}
 
