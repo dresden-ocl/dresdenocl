@@ -19,7 +19,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelinstancetype.ecore.internal.modelinstance;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -34,13 +33,14 @@ import org.eclipse.osgi.util.NLS;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.EcoreModelInstanceTypeMessages;
-import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.util.EcoreModelInstanceTypeUtilitiy;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.util.EcoreModelInstanceTypeUtility;
+import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -51,7 +51,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class EcoreModelInstanceFactory implements IModelInstanceFactory {
+public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
+		implements IModelInstanceFactory {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
@@ -102,48 +103,50 @@ public class EcoreModelInstanceFactory implements IModelInstanceFactory {
 
 		IModelInstanceElement result;
 
-		/* Check if the given Object is an EObject. */
-		if (adapted instanceof EObject) {
+		/*
+		 * Try to delegate the basis factory to create a primitive or collection
+		 * instance.
+		 */
+		result = super.createModelInstanceElement(adapted);
 
-			EObject eObject;
-			eObject = (EObject) adapted;
+		if (result == null) {
 
-			/* Check if the given Object has been adapted already. */
-			if (this.myCachedAdaptedObjects.containsKey(eObject)) {
-				result = this.myCachedAdaptedObjects.get(eObject);
+			/* Check if the given Object is an EnumerationLiteral. */
+			if (adapted instanceof Enum) {
+
+				result =
+						this.createEcoreModelInstanceEnumerationLiteral((Enum<?>) adapted);
+			}
+
+			/* Else check if the given Object is an EObject. */
+			else if (adapted instanceof EObject) {
+
+				EObject eObject;
+				eObject = (EObject) adapted;
+
+				/* Check if the given Object has been adapted already. */
+				if (this.myCachedAdaptedObjects.containsKey(eObject)) {
+					result = this.myCachedAdaptedObjects.get(eObject);
+				}
+
+				else {
+					result = this.createEcoreModelInstanceObject(eObject);
+
+					this.myCachedAdaptedObjects.put(eObject, result);
+				}
 			}
 
 			else {
-				result = this.createEcoreModelInstanceObject(eObject);
+				String msg;
 
-				this.myCachedAdaptedObjects.put(eObject, result);
+				msg =
+						EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_AdapteeIsNoEObjectInstance;
+				msg = NLS.bind(msg, adapted);
+
+				throw new TypeNotFoundInModelException(msg);
 			}
 		}
-
-		/* FIXME Claas: Else Check if the EObject is a collection. */
-		// else if (this.isCollectionClass(eClass)) {
-		// result = this.createEcoreModelInstanceCollection(eObject);
-		// }
-		//
-		// /* Else check if the EObject is an EnumerationLiteral. */
-		// else if (this.isEnumerationClass(eClass)) {
-		// result = this.createEcoreModelInstanceEnumerationLiteral(eObject);
-		// }
-		//
-		// /* Else check if the EObject is a primitive type's implementation. */
-		// else if (eClass instanceof EDataType) {
-		// result = this.createEcoreModelInstancePrimitiveType(eObject);
-		// }
-		/* Else throw an exception (only EObjects can be adapted). */
-		else {
-			String msg;
-
-			msg =
-					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_AdapteeIsNoEObjectInstance;
-			msg = NLS.bind(msg, adapted);
-
-			throw new TypeNotFoundInModelException(msg);
-		}
+		// no else.
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -151,6 +154,133 @@ public class EcoreModelInstanceFactory implements IModelInstanceFactory {
 
 			msg = "createModelInstanceElement(Object) - exit"; //$NON-NLS-1$
 			msg += " return value = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
+	 * #createModelInstanceElement(java.lang.Object,
+	 * tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public IModelInstanceElement createModelInstanceElement(Object adapted,
+			Type type) {
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceElement("; //$NON-NLS-1$
+			msg += "adapted = " + adapted; //$NON-NLS-1$
+			msg += ", type = " + type; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		IModelInstanceElement result;
+
+		/* Check if the object has already been adapted. */
+		result = this.myCachedAdaptedObjects.get(adapted);
+
+		/* Else create a new adapter. */
+		if (result == null) {
+
+			/*
+			 * Try to use the BasisJavaModelInstanceFactory to probably create an
+			 * adapter for a primitive type or a collection.
+			 */
+			result = super.createModelInstanceElement(adapted, type);
+
+			/* Check if no primitive type or collection has been created. */
+			if (result == null) {
+
+				/* Check if the given type is an Enumeration. */
+				if (type instanceof Enumeration) {
+
+					/*
+					 * Check if the object is an EnumerationLiteral and has the same type
+					 * as the given type.
+					 */
+					if (adapted.getClass().isEnum()
+
+							&& EcoreModelInstanceTypeUtility.toQualifiedNameList(
+									adapted.getClass().getCanonicalName()).equals(
+									type.getQualifiedNameList())) {
+						try {
+							result =
+									this
+											.createEcoreModelInstanceEnumerationLiteral((Enum<?>) adapted);
+						}
+
+						catch (TypeNotFoundInModelException e) {
+							String msg;
+
+							msg =
+									EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+							msg = NLS.bind(msg, adapted, type);
+
+							throw new IllegalArgumentException();
+						}
+					}
+
+					/* Else create an undefined enumeration literal. */
+					if (result == null) {
+						Set<Type> types;
+
+						types = new HashSet<Type>();
+						types.add(type);
+
+						result = new EcoreModelInstanceEnumerationLiteral(null, types);
+					}
+					// no else.
+				}
+				// no else.
+
+				/* Else adapt to an IModelInstanceObject. */
+				else {
+
+					if (adapted instanceof EObject) {
+
+						EObject eObject;
+						eObject = (EObject) adapted;
+
+						result = this.createEcoreModelInstanceObject(eObject, type);
+
+						/* Cache the adapted object. */
+						this.myCachedAdaptedObjects.put(eObject, result);
+					}
+
+					/* Else the throw an exception. */
+					else {
+						String msg;
+
+						msg =
+								EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+						msg = NLS.bind(msg, adapted, type);
+
+						throw new IllegalArgumentException(msg);
+					}
+				}
+				// end else.
+			}
+			// no else.
+		}
+		// no else.
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createModelInstanceElement(Object) - exit"; //$NON-NLS-1$
+			msg += " - rseult = " + result; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -193,7 +323,7 @@ public class EcoreModelInstanceFactory implements IModelInstanceFactory {
 		Set<Type> types;
 		types = this.findTypesOfEObjectInModel(eObject);
 
-		result = new EcoreModelInstanceObject(eObject, types);
+		result = new EcoreModelInstanceObject(eObject, types, this);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -203,6 +333,167 @@ public class EcoreModelInstanceFactory implements IModelInstanceFactory {
 			msg += " return value = " + result; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that creates a new {@link EcoreModelInstanceObject} for a
+	 * given {@link EObject} and a given {@link Type}.
+	 * </p>
+	 * 
+	 * @param eObject
+	 *          The {@link EObject} that shall be adapted.
+	 * @param The
+	 *          {@link Type} to that the {@link EObject} shall be adapted.
+	 * @return The adapted {@link EcoreModelInstanceObject}.
+	 */
+	private IModelInstanceElement createEcoreModelInstanceObject(EObject eObject,
+			Type type) {
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createEcoreModelInstanceObject("; //$NON-NLS-1$
+			msg += "eObject = " + eObject; //$NON-NLS-1$
+			msg += ", type = " + type; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		IModelInstanceElement result;
+
+		Set<Type> types;
+		types = new HashSet<Type>();
+		types.add(type);
+
+		result = new EcoreModelInstanceObject(eObject, types, this);
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createEcoreModelInstanceObject(EObject) - exit"; //$NON-NLS-1$
+			msg += " return value = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * Creates a new {@link EcoreModelInstanceEnumerationLiteral} for a given
+	 * {@link Enum}.
+	 * </p>
+	 * 
+	 * @param anEnum
+	 *          The {@link Enum} that shall be adapted.
+	 * @return The created {@link EcoreModelInstanceEnumerationLiteral}.
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown, if the given {@link Enum} cannot be adapted to the
+	 *           {@link IModel} of this {@link EcoreModelInstanceFactory}.
+	 */
+	private IModelInstanceElement createEcoreModelInstanceEnumerationLiteral(
+			Enum<?> anEnum) throws TypeNotFoundInModelException {
+
+		/* Probably debug the entry of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createEcoreModelInstanceEnumerationLiteral("; //$NON-NLS-1$
+			msg += "anEnum = " + anEnum; //$NON-NLS-1$
+			msg += ")"; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		IModelInstanceEnumerationLiteral result;
+
+		/* Try to find the enums type in the IModel. */
+		Set<Type> types;
+		Type type;
+
+		types = new HashSet<Type>();
+		type = this.findTypeOfClassInModel(anEnum.getClass());
+
+		/* Check if the enumeration has been found in the model. */
+		if (type != null) {
+
+			types.add(type);
+			result = new EcoreModelInstanceEnumerationLiteral(anEnum, types);
+		}
+
+		else {
+			String msg;
+
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+			msg = NLS.bind(msg, anEnum);
+
+			throw new TypeNotFoundInModelException(msg);
+		}
+
+		/* Probably debug the exit of this method. */
+		if (LOGGER.isDebugEnabled()) {
+			String msg;
+
+			msg = "createEcoreModelInstanceEnumerationLiteral(Enum<?>) - exit"; //$NON-NLS-1$
+			msg += " return value = " + result; //$NON-NLS-1$
+
+			LOGGER.debug(msg);
+		}
+		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * A helper method that returns the {@link Type} in a given {@link IModel}
+	 * that correspond to a given {@link Class}.
+	 * </p>
+	 * 
+	 * @param aClass
+	 *          The {@link Class} for that the {@link Type} shall be returned.
+	 * @return The found {@link Type}.
+	 * @throws TypeNotFoundInModelException
+	 *           Thrown, if a given {@link Object} cannot be adapted to a
+	 *           {@link Type} in the {@link IModel}.
+	 */
+	private Type findTypeOfClassInModel(Class<?> aClass)
+			throws TypeNotFoundInModelException {
+
+		Type result;
+
+		try {
+			result =
+					this.myModel.findType(EcoreModelInstanceTypeUtility
+							.toQualifiedNameList(aClass.getCanonicalName()));
+		}
+
+		catch (ModelAccessException e) {
+			result = null;
+		}
+
+		/* Probably throw an exception. */
+		if (result == null) {
+			String msg;
+
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+			msg = NLS.bind(msg, aClass);
+
+			throw new TypeNotFoundInModelException(msg);
 		}
 		// no else.
 
@@ -226,23 +517,29 @@ public class EcoreModelInstanceFactory implements IModelInstanceFactory {
 			throws TypeNotFoundInModelException {
 
 		Type result;
+		List<String> qualifiedName;
 
-		List<String> qualifiedName =
-				EcoreModelInstanceTypeUtilitiy.toQualifiedNameList(eClass);
+		result = null;
+		qualifiedName = EcoreModelInstanceTypeUtility.toQualifiedNameList(eClass);
 
 		try {
 			result = this.myModel.findType(qualifiedName);
 		}
 
 		catch (ModelAccessException e) {
+			/* Do nothing. Exception is rethrown in the following. */
+		}
+
+		if (result == null) {
 			String msg;
 
 			msg =
 					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
 			msg = NLS.bind(msg, eClass);
 
-			throw new TypeNotFoundInModelException(msg, e);
+			throw new TypeNotFoundInModelException(msg);
 		}
+		// no else.
 
 		return result;
 	}
@@ -324,6 +621,17 @@ public class EcoreModelInstanceFactory implements IModelInstanceFactory {
 		}
 		// end catch.
 
+		if (result.size() == 0) {
+			String msg;
+
+			msg =
+					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+			msg = NLS.bind(msg, eClass);
+
+			throw new TypeNotFoundInModelException(msg);
+		}
+		// no else.
+
 		return result;
 	}
 
@@ -374,61 +682,5 @@ public class EcoreModelInstanceFactory implements IModelInstanceFactory {
 		}
 
 		return result;
-	}
-
-	/** FIXME Claas: REFACTORED_TILL_HERE. */
-	private static final int REFACTORED_TILL_HERE = 0;
-
-	private IModelInstanceElement createEcoreModelInstanceCollection(
-			EObject object) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private IModelInstanceElement createEcoreModelInstancePrimitiveType(
-			EObject object) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private IModelInstanceElement createEcoreModelInstanceEnumerationLiteral(
-			EObject object) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private boolean isEnumerationClass(EClass class1) {
-
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean isPrimitiveTypeClass(EClass class1) {
-
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean isCollectionClass(EClass class1) {
-
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public <T extends IModelInstanceElement> IModelInstanceCollection<T> createModelInstanceCollection(
-			Collection<T> collection, OclCollectionTypeKind kind) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public IModelInstanceElement createModelInstanceElement(Object adapted,
-			Type type) {
-
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
