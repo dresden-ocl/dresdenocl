@@ -345,5 +345,5 @@
     \setlength{\baselineskip}{2.4ex plus0.3ex minus0.2ex}%
     \setlength{\parskip}{\baselineskip}%
     \setlength{\parindent}{0mm}%
-    \raggedright%
+    %\raggedright%
 }

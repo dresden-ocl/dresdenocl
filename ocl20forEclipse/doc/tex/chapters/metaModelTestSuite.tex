@@ -11,7 +11,7 @@ To test the adaptation of a meta-model to the pivot model of \acl{DOT4Eclipse}, 
 
 \section{The Test Suite Plug-in}
 
-The generic meta-model test suite is located in the plug-in \code{tudresden.ocl20.pivot.metamodels.test}. The test suite provides a set of JUnit tests, that check the functionality of all operations that must be adapted by every meta-model that shall be adapted to the pivot model. The adaptation of a meta-model to the pivot model is explained in Chapter \ref{chapter:pivotModelAdaptation}. The test suite contains about 150 Junit tests.
+The generic meta-model test suite is located in the plug-in \code{tudresden.ocl20.pivot.meta\-mo\-dels.\linebreak[0]test}. The test suite provides a set of JUnit tests, that check the functionality of all operations that must be adapted by every meta-model that shall be adapted to the pivot model. The adaptation of a meta-model to the pivot model is explained in Chapter \ref{chapter:pivotModelAdaptation}. The test suite contains about 150 Junit tests.
 
 To instantiate the generic test suite for a new adapted meta-model, only two resources must be provided: (1) a model modeled in the newly adapted meta-model that contains instances of all pivot model types that shall be tested, and (2) a Java class that instantiates the test suite with the modeled model. During test execution, the generic test suite uses the provided model to test the meta-model (see Figure \ref{pic:metaModelTestsuite:genericTestSuite}). Both, the model and the Java class are shortly presented in the following sections.
 
@@ -19,7 +19,7 @@ To instantiate the generic test suite for a new adapted meta-model, only two res
 	\centering
 		\includegraphics[width=0.80\textwidth]{figures/metamodeltestsuite/genericTestSuite.pdf}
 	\label{pic:metaModelTestsuite:genericTestSuite}
-	\caption{The Generic Meta-Model Test Suite in respect to the Generic Three Layer Architeture}
+	\caption{The Generic Meta-Model Test Suite in respect to the Generic Three Layer Ar\-chi\-tec\-ture}
 \end{figure}
 
 
@@ -81,7 +81,7 @@ The class \code{TestPropertyClass} contains properties to test the right adaptat
 
 \subsection{TestOperationAndParameterClass}
 
-Similar to the class \code{TestPropertyClass} (presented above), the class \code{TestOperationAndParameterClass} contains operations to test the adaptation of all different kinds of \code{Operations}. Additionally, the class is also used to test the adaptation of \code{Parameters} of operations. Some of the operations are optional (like the static operation and the operation with an output value), others are required.
+Similar to the class \code{TestPropertyClass} (presented above), the class \code{TestOperationAnd\-Pa\-ra\-me\-ter\-Class} contains operations to test the adaptation of all different kinds of \code{Operations}. Additionally, the class is also used to test the adaptation of \code{Parameters} of operations. Some of the operations are optional (like the static operation and the operation with an output value), others are required.
 
 
 \section{Instantiating the Generic Test Suite}
@@ -121,9 +121,9 @@ public class TestUML2MetaModel extends MetaModelTestSuite {
 Important is that the class provides a JUnit test suite (according to JUnit 4 conventions), that contains the \code{MetaModelTestSuite} (line 4). Additionally, the class only has to provide a \code{setUp()} method that can be used to setup the test suite before execution (lines 13 to 23). Inside the \code{setUp()} method, the operation \code{MetaModelTestPlugin.prepareTest(String, String, String)} must be invoked. The method initializes the environment of the generic test suite by setting three arguments:
 
 \begin{enumerate}
-	\item The \code{ID} of the plug-in that contains the test model used for testing (e.g., \code{tudresden.ocl20.pivot.metamodels.uml2.test},
-	\item The location of the test model relative to the plug-in's root folder (e.g., \code{model/testmodel.uml}),
-	\item And the \code{ID} of the meta-model that shall be tested (e.g. \code{tudresden.ocl20.pivot.metamodels.uml2}.
+	\item The \code{ID} of the plug-in that contains the test model used for testing (e.g., \code{tudresden.ocl20.\linebreak[0]pivot.\linebreak[0]metamodels.uml2.test},
+	\item The location of the test model relative to the plug-in's root folder (e.g., \code{model/testmodel.\linebreak[0]uml}),
+	\item And the \code{ID} of the meta-model that shall be tested (e.g. \code{tudresden.ocl20.pivot.meta\-mo\-dels.\linebreak[0]uml2}.
 \end{enumerate}
 
 Afterwards, the implemented Java class can be executed as a \eclipse{JUnit Plug-in Test} in Eclipse. The test suite should then inform you (by failed test cases) which parts of your meta-model adaptation are wrong implemented or missing. As mentioned above, warnings caused by missing parts of the test model--that were not implemented intentionally--can be ignored.
@@ -131,4 +131,4 @@ Afterwards, the implemented Java class can be executed as a \eclipse{JUnit Plug-
 
 \section{Summary}
 
-This chapter shortly introduced into the generic meta-model test suite of \acl{DOT4Eclipse}. For further details of the test suite investigate the test suite plug-in \code{tudresden.ocl20.pivot.metamodels.test} or the existing test suite instantiations in the plug-ins \code{tudresden.ocl20.pivot.metamodels.uml2.test}, \code{tudresden.ocl20.pivot.metamodels.ecore.test}, or \code{tudresden.ocl20.pivot.metamodels.java.test}.
+This chapter shortly introduced into the generic meta-model test suite of \acl{DOT4Eclipse}. For further details of the test suite investigate the test suite plug-in \code{tudresden.ocl20.pivot.\linebreak[0]metamodels.test} or the existing test suite instantiations in the plug-ins \code{tudresden.ocl20.pivot.\linebreak[0]metamodels.uml2.test}, \code{tudresden.ocl20.pivot.metamodels.ecore.test}, or \code{tudresden.\linebreak[0]ocl\-20.pivot.metamodels.java.test}.

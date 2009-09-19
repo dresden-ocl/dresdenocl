@@ -18,7 +18,8 @@ Four different possibilities exist to install \acl{DOT4Eclipse}. (1) You may ins
 	
 To install \acl{DOT4Eclipse} via the \keyword{Eclipse Update Site}, you have to start an \keyword{Eclipse} instance and select the menu option \eclipse{Help -> Install New Software ...}. Enter the path
 
-\url{http://dresden-ocl.svn.sourceforge.net/svnroot/dresden-ocl/trunk/ocl20forEclipse/updatesite/tudresden.ocl20.updatesite\_1.2.0}
+\url{http://dresden-ocl.svn.sourceforge.net/svnroot/dresden-ocl/trunk/ocl20forEclipse/}\newline
+\url{updatesite/tudresden.ocl20.updatesite\_1.2.0}
 
 and press the \eclipse{Add...} button (see Figure \ref{pic:intro:updateSite01}). In the new opened window you can additionaly enter a name for the update site (see Figure \ref{pic:intro:updateSite02}).
 
@@ -60,7 +61,7 @@ After installing Eclipse Subversive, a new \keyword{Eclispe Perspective} for acc
 	\label{pic:intro:svn01}
 \end{figure}
 
-After pressing the \eclipse{Finish} button the \acs{SVN} repository root should the visible in the \eclipse{\acs{SVN} Repositories} view. To checkout the plug-ins, you now select them in the repository directory \reference{trunk/ocl20forEclipse/eclipse} and use the \eclipse{Checkout...} function in the context menu (see figure \ref{pic:intro:svn02}).
+After pressing the \eclipse{Finish} button the \acs{SVN} repository root should the visible in the \eclipse{\acs{SVN} Repositories} view. To checkout the plug-ins, you now select them in the repository directory \reference{trunk/ocl20\-for\-Eclipse/eclipse} and use the \eclipse{Checkout...} function in the context menu (see figure \ref{pic:intro:svn02}).
 	
 	
 \begin{figure}[!htbp]
@@ -81,9 +82,9 @@ That depends on the things you want to do with \acl{DOT4Eclipse}. Table \ref{tab
 
 \subsection{Building the OCL2 Parser}
 	
-If you decided to run \acl{DOT4Eclipse} as source code plug-ins from an Eclipse workspace, you need to build the \keyword{OCL2 Parser} via an \keyword{Ant} build script. If you installed the Toolkit using the update site, you can skip this Subsection of the tutorial.
+If you decided to run \acl{DOT4Eclipse} as source code plug-ins from an Eclipse work\-space, you need to build the \keyword{OCL2 Parser} via an \keyword{Ant} build script. If you installed the Toolkit using the update site, you can skip this Subsection of the tutorial.
   
-To build the \acs{OCL}2 Parser select the file \reference{build.xml} in the project \reference{tudresden.\linebreak[0]ocl20.pivot.ocl2parser} and open the context menu via a right mouse click. Select the function \eclipse{Run As ... > Ant Build ...} (see Figure \ref{pic:intro:parserbuild01}).
+To build the \acs{OCL}2 Parser select the file \reference{build.xml} in the project \reference{tudresden.\linebreak[0]ocl20.pivot.ocl2\-par\-ser} and open the context menu via a right mouse click. Select the function \eclipse{Run As ... > Ant Build ...} (see Figure \ref{pic:intro:parserbuild01}).
 
 \begin{figure}[b]
 	\centering
@@ -114,7 +115,7 @@ Additionally you need to recompile all depending projects. Select the function \
 
 
 
-\section{Loading Models, Model Instances and OCL Constraints}
+\section{Loading Models, Model Instances and Constraints}
 
 If you installed the \acl{DOT4Eclipse} using the update site, you can execute the toolkit by re-starting your Eclipse distribution. If you imported the Toolkit as source code plug-ins into an Eclipse workspace, you have to start a new Eclipse instance. You can start a new instance via the menu \eclipse{Run > Run As > Eclipse Application}. If the menu \eclipse{Eclipse Application} is not available or disabled you need to select one of the plug-ins of the toolkit first.
 
@@ -168,7 +169,7 @@ Figure \ref{pic:intro:loadmodel02} shows the loaded Simple Example model, which 
 \subsection{Loading a Model Instance}
 \label{intro:loadModel}
 	
-After loading a model, you can load a \keyword{model instance} using another wizard. Use the menu option \eclipse{Dresden OCL2 > Load Model Instance}. In the opened wizard you have to select a model instance (in this tutorial we used the file \reference{bin/tudresden/ocl20/\linebreak[0]pivot/examples/ModelProviderClass.class} of the Simple Example (see Figure \ref{pic:intro:loadInstance01}). Besides the model instance resource you have to select a model for which the model instance shall be loaded and the type of model instance you want to load (we want to load a \keyword{Java Instance}).
+After loading a model, you can load a \keyword{model instance} using another wizard. Use the menu option \eclipse{Dresden OCL2 > Load Model Instance}. In the opened wizard you have to select a model instance (in this tutorial we used the file \reference{bin/tudresden/ocl20/\linebreak[0]pivot/examples/ModelProviderClass\linebreak[0].class} of the Simple Example (see Figure \ref{pic:intro:loadInstance01}). Besides the model instance resource you have to select a model for which the model instance shall be loaded and the type of model instance you want to load (we want to load a \keyword{Java Instance}).
 
 \begin{figure}[!htbp]
 	\centering
@@ -219,12 +220,12 @@ endpackage
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=0.8\linewidth]{figures/introduction/loadconstraints01}
+	\includegraphics[width=0.7\linewidth]{figures/introduction/loadconstraints01}
 	\caption{The import of OCL expressions.}
 	\label{pic:intro:loadconstraints01}
 	
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/introduction/loadconstraints02}
+	\includegraphics[width=0.4\linewidth]{figures/introduction/loadconstraints02}
 	\caption{Parsed expressions and the model in the Model Browser.}
 	\label{pic:intro:loadconstraints02}
 \end{figure}
