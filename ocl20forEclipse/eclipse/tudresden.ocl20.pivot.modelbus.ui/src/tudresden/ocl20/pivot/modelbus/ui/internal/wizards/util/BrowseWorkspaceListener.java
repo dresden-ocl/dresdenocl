@@ -30,7 +30,6 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.views.navigator.ResourceComparator;
 
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage;
 
 /**
  * <p>
