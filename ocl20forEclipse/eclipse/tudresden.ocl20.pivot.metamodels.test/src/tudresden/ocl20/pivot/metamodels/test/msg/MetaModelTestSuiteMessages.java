@@ -29,24 +29,16 @@ public class MetaModelTestSuiteMessages extends NLS {
 			"tudresden.ocl20.pivot.metamodels.test.msg.messages"; //$NON-NLS-1$
 
 	public static String MetaModelTestSuite_CurrentlyTestedMetaModel;
-	
 	public static String MetaModelTestSuite_EnumerationNotFoundInModel;
-
 	public static String MetaModelTestSuite_OperationNotFoundInModel;
-
 	public static String MetaModelTestSuite_ClassNotFoundInModel;
-
 	public static String MetaModelTestSuite_UnknownPrimitiveTypeKind;
-
 	public static String MetaModelTestSuite_NoPrimitiveTypeFound;
-
 	public static String MetaModelTestSuite_NoPrimitiveTypeOfKindFound;
-
 	public static String MetaModelTestSuite_AssociationEndNotFound;
-
 	public static String MetaModelTestSuite_PropertyNotFoundInModel;
-
 	public static String MetaModelTestSuite_InterfaceNotFoundInModel;
+	public static String MetaModelTestSuite_MetaModelNotFound;
 
 	static {
 		/* Initialize resource bundle. */

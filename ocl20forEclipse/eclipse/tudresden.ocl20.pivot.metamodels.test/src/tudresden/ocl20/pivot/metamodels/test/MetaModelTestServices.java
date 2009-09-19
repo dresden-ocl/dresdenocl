@@ -20,8 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
 
+import tudresden.ocl20.pivot.metamodels.test.msg.MetaModelTestSuiteMessages;
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
@@ -404,7 +406,7 @@ public final class MetaModelTestServices {
 	 * @return The ID of the {@link IMetamodel} that is currently tested.
 	 */
 	public String getMetaModelUnderTestID() {
-	
+
 		return this.myMetaModelId;
 	}
 
@@ -442,9 +444,8 @@ public final class MetaModelTestServices {
 		else if (!modelFile.exists()) {
 			String msg;
 
-			// FIXME Class: Extract message.
-			msg = "Model file " + bundleDirectory;
-			msg += myTestModelPath + " cannot be found.";
+			msg = MetaModelTestSuiteMessages.MetaModelTestSuite_MetaModelNotFound;
+			msg = NLS.bind(msg, myMetaModelId);
 
 			throw new RuntimeException(msg);
 		}
@@ -469,9 +470,8 @@ public final class MetaModelTestServices {
 				else {
 					String msg;
 
-					// FIXME Class: Extract message.
-					msg = "Meta-Model " + myMetaModelId;
-					msg += " cannot be found.";
+					msg = MetaModelTestSuiteMessages.MetaModelTestSuite_MetaModelNotFound;
+					msg = NLS.bind(msg, myMetaModelId);
 
 					throw new RuntimeException(msg);
 				}
