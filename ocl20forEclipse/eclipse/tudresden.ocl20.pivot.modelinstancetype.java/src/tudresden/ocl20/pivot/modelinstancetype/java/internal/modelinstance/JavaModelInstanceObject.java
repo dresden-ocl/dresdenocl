@@ -22,6 +22,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +30,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.CopyForAtPreException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
@@ -435,7 +437,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 				/* Adapt the result to the expected result type. */
 				result =
-						JavaModelInstance.adaptInvocationResult(adapteeResult, operation
+						AbstractModelInstance.adaptInvocationResult(adapteeResult, operation
 								.getType(), operation, this.myFactory);
 			}
 
@@ -709,7 +711,13 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 				for (Field field : adapteeClass.getDeclaredFields()) {
 
 					field.setAccessible(true);
-					field.set(copiedAdaptedObject, field.get(this.myAdaptedObject));
+
+					/* Do not set static nor final fields. */
+					if (!(Modifier.isFinal(field.getModifiers()) || Modifier
+							.isStatic(field.getModifiers()))) {
+						field.set(copiedAdaptedObject, field.get(this.myAdaptedObject));
+					}
+					// no else.
 				}
 				// end for.
 

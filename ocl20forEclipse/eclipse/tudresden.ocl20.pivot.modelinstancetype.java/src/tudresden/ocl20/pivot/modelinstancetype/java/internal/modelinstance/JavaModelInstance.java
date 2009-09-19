@@ -51,18 +51,13 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstancePrimitiveType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.util.JavaModelInstanceTypeUtility;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -233,86 +228,6 @@ public class JavaModelInstance extends AbstractModelInstance {
 			LOGGER.debug(msg);
 		}
 		// no else.
-	}
-
-	/**
-	 * <p>
-	 * A helper method that adapts the result of an {@link Operation} invocation
-	 * or a {@link Property} access of the excepted given {@link Type}.
-	 * 
-	 * @param adapteeResult
-	 *          The {@link Object} result that shall be adapted.
-	 * @param type
-	 *          The Type to which the result shall be adapted.
-	 * @param multiplicityElement
-	 *          The {@link MultiplicityElement} whose result shall be adapted
-	 *          (could be a {@link Property} or an {@link Operation}).
-	 * @param factory
-	 *          The {@link JavaModelInstanceFactory} used to adapt the result.
-	 * @return The adapted results as an {@link IModelInstanceElement}.
-	 */
-	protected static IModelInstanceElement adaptInvocationResult(
-			Object adapteeResult, Type type, MultiplicityElement multiplicityElement,
-			JavaModelInstanceFactory factory) {
-
-		IModelInstanceElement result;
-
-		/* Check if the result is expected as void. */
-		if (type instanceof PrimitiveType
-				&& ((PrimitiveType) type).getKind().equals(PrimitiveTypeKind.VOID)) {
-			result = IModelInstanceVoid.INSTANCE;
-		}
-
-		/*
-		 * Else if the result is multiple, the result must be adapted to a
-		 * collection.
-		 */
-		else if (multiplicityElement.isMultiple()) {
-
-			/* Compute the type of collection that is required for the adaptation. */
-
-			/* If the operation is unique, adapt to a set. */
-			if (multiplicityElement.isUnique()) {
-
-				if (multiplicityElement.isOrdered()) {
-					result =
-							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
-				}
-
-				else {
-					result =
-							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
-				}
-				// end. else
-			}
-
-			/* Else adapt to a list. */
-			else {
-
-				if (multiplicityElement.isOrdered()) {
-					result =
-							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE);
-				}
-
-				else {
-					result =
-							factory.createModelInstanceElement(adapteeResult,
-									PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
-				}
-				// end else.
-			}
-			// end else.
-		}
-
-		/* Else adapt to the result type of the operation. */
-		else {
-			result = factory.createModelInstanceElement(adapteeResult, type);
-		}
-
-		return result;
 	}
 
 	/**
