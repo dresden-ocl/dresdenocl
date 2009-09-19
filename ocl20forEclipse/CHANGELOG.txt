@@ -1,88 +1,121 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 1.2X (Unknown)
--------------------------------
-- The Pivot Model do now contain the PrimitiveTypeKind Void for the adaptation
+
+Release 1.3 (Scheduled: October 2009)
+================================
+* The Pivot Model do now contain the PrimitiveTypeKind Void for the adaptation
   of a void Type for Operations without return Parameter.
 
-- The ModelBus Architecture was refactored.
- - IModelInstances are now meta model independent.
+* The ModelBus Architecture was refactored.
+  - IModelInstances are now meta model independent.
+  - The IModel interface was refactored.
+    > A new method getType() was introduced.
+    > A new method isInstanceOf(Type) was introduced.
+  - The IModelInstance interface and the IModelObject respectively 
+    IModelElement interface have been refactored and restructured completely.
 
-- The IModel interface was refactored.
- - A new method getType() was introduced.
- - A new method isInstanceOf(Type) was introduced.
+* Some bugs in the UML2 Meta Model were fixed.
+  - UML2 models can now contain n-ary associations.
+  - Interfaces are now mapped correctly.
+  - Abstract DataTypes are no longer adapted.
+  - Logging now works properly.
 
-- Some bugs in the UML2 Meta Model were fixed.
- - UML2 models can now contain n-ary associations.
- - Interfaces are now mapped correctly.
- - Abstract DataTypes are no longer adapted.
- - Logging now works properly.
+* Some bugs in the EMF Ecore Meta Model were fixed.
+  - Logging now works properly.
 
-- Some bugs in the EMF Ecore Meta Model were fixed.
- - Logging now works properly.
+* New Meta Model added: Java.
 
-- A new generic Test Suite for Meta-Models was introduced.
+* The Java Model Instance Type has been refactored completely.
+  - Java instances can now also be imported, if they implement or extend Java
+    Classes or Interfaces defined in the model.
 
-- A bug in the Java Model Instance Type was fixed.
- - Java instances can now also be imported, if they implement or extend Java
-   Classes or Interfaces defined in the model.
+* The EMF Ecore Model Instance Type has been refactored completely.
 
-- Some bugs of the OCL-Interpreter were fixed.
- - Constraints are now interpreted for constrained 
-   sub-classes as well.
- - Local Variables are now only declared locally.
+* Some bugs of the OCL-Interpreter were fixed.
+  - Constraints are now interpreted for constrained 
+    sub-classes as well.
+  - Local Variables are now only declared locally.
 
-- A bug in the Ocl22Java Code Generator was fixed.
- - The variables for Comparators are now right numbered.
+* A bug in the Ocl22Java Code Generator was fixed.
+  - The variables for Comparators are now right numbered.
 
-- A bug in the Wizards were fixed.
- - The Model Import Wizard can now be started when the current focus is on a 
-   non tree-like view.
- - The Model Instance Import Wizard can now be started when the current focus
-   is on a non tree-like view.
- - The OCL Constraint Import Wizard can now be started when the current focus
-   is on a non tree-like view.
- - The Java Code Generator can now be started when the current focus is on a 
-   non tree-like view.
 
-- The Model Instance Wizard was redesigned.
+GUI
+---
+* A bug in the Wizards were fixed.
+  - The Model Import Wizard can now be started when the current focus is on a 
+    non tree-like view.
+  - The Model Instance Import Wizard can now be started when the current focus
+    is on a non tree-like view.
+  - The OCL Constraint Import Wizard can now be started when the current focus
+    is on a non tree-like view.
+  - The Java Code Generator can now be started when the current focus is on a 
+    non tree-like view.
 
-- The Model Instance Browser was redesigned.
- - ModeObjects are now also displayed for Sub-Types of selected 
-   Types in the Model Browser.
+* The Model Instance Wizard has been redesigned.
 
-- The Interpreter View was redesigned.
+* The Model Instance Browser has been redesigned.
+  - ModeObjects are now also displayed for Sub-Types of selected 
+    Types in the Model Browser.
 
-- Some problems with icons and menu entries in the binary release were fixed.
+* The OCL Parser Wizard was redesigned.
+  - OCL Files can now also be selected using a 'Browse Workspace' button.
+  - The wizard will now switch into the Model Browser after parsing constraints.
+
+* The Interpreter View was redesigned.
+
+* Some problems with icons and menu entries in the binary release were fixed.
+
+
+Tests
+-----
+* A new central Test Suite Plug-in has been introduced.
+
+* A new generic Test Suite for Meta-Models was introduced.
+
+* A new generic Test Suite for Model Instance Types was introduced.
+
+
 
 Release 1.2 (February 26th 2009)
--------------------------------
-- The new tool Ocl2Java (ApsectJ code generation for OCL 
+================================
+* The new tool Ocl2Java (ApsectJ code generation for OCL 
   constraints) was added to the release.
-- The royal and loyal example was added to the release.
-- Some Bugs of the OCL-Parser were fixed:
+
+* The royal and loyal example was added to the release.
+
+* Some Bugs of the OCL-Parser were fixed:
   - Enumerations are now parsed correctly
-- Some Bugs of the OCL-Interpreter were fixed.
+
+* Some Bugs of the OCL-Interpreter were fixed.
   - Operation names are now interpreted correctly
   - Collection operations should now be interpreted correctly.
   - The Variable defined by a LetExpression is now valid in the 
     scope of the LetExpression only.
-- Some Bugs of the Java Standard Library were fixed.
+
+* Some Bugs of the Java Standard Library were fixed.
   - Collections from model instances are now adapted correctly.
   - Sets will no longer contain the same model object multiple 
     types.
-- Some Bugs for Ecore instances were fixed.
+
+* Some Bugs for Ecore instances were fixed.
   - Enumerations are now adapted correctly.
-- Some Bugs for UML2 instances were fixed. 
+
+* Some Bugs for UML2 instances were fixed. 
   - UML2 Model instance adaption does now work correctly.
   - UML2 Model instances now support tuple types.
   
   
+
 Release 1.1 (December 9th 2008)
--------------------------------
-- The UML1.5 meta model works now in the binary release.
-- New meta model added: UML2.0.
-- New example added: Simple-Example.
-- Some Bugs of the OCL-Parser were fixed.
-- Some Bugs of the OCL-Interpreter were fixed.
+================================
+* The UML1.5 meta model works now in the binary release.
+
+* New meta model added: UML2.0.
+
+* New example added: Simple-Example.
+
+* Some Bugs of the OCL-Parser were fixed.
+
+* Some Bugs of the OCL-Interpreter were fixed.
