@@ -1,0 +1,31 @@
+LIVING EXAMPLE PROVIDED WITH DRESDEN OCL2 FOR ECLIPSE
+=====================================================
+
+This plug-in contains the Living example that is provided with Dresden OCL2
+for Eclipse. The Living example provides a Java Model and a Java Model 
+Instance.
+
+Further details how to import models, model instances and constraints into
+Dresden OCL2 for Eclipse can be found in the manual, available in the 'doc'
+directory of your distribution or online at
+http://dresden-ocl.sourceforge.net/4eclipse_usage.html
+
+
+Provided Model
+==============
+The model provided by this example is a Java Model. To import the Java Model 
+use the file 
+/bin/tudresden/ocl20/pivot/examples/living/ModelProvider.class
+
+
+Provided Model Instance
+=======================
+The model instance provided by this is a Java Model Instance. To import the 
+Java Model Instance use the file 
+/bin/tudresden/ocl20/pivot/examples/living/instance/ModelInstanceProvider.class
+
+
+Provided OCL Constraints
+========================
+OCL Constraints that are provided by this example are located in the directory
+/constraints
