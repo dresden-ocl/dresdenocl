@@ -36,7 +36,6 @@ import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.EnumerationLiteralNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
@@ -54,7 +53,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.util.JavaModelInstanceTypeUtility;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Parameter;
@@ -75,11 +73,11 @@ public class JavaModelInstance extends AbstractModelInstance {
 			JavaModelInstanceTypePlugin.getLogger(JavaModelInstance.class);
 
 	/**
-	 * The {@link ClassLoader} of this {@link JavaModelInstance}. Required to find
-	 * {@link EnumerationLiteral}s, to get static {@link Property}s and to invoke
-	 * static {@link Operation}s.
+	 * The {@link ClassLoader}s of this {@link JavaModelInstance}. Required to
+	 * find {@link EnumerationLiteral}s, to get static {@link Property}s and to
+	 * invoke static {@link Operation}s.
 	 */
-	private ClassLoader myClassLoader;
+	private Set<ClassLoader> myClassLoaders = new HashSet<ClassLoader>();
 
 	/**
 	 * <p>
@@ -115,7 +113,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 		/* Initialize the instance. */
 		this.myModel = model;
 		this.myName = providerClass.getCanonicalName();
-		this.myClassLoader = providerClass.getClassLoader();
+		this.myClassLoaders.add(providerClass.getClassLoader());
 
 		this.myModelInstanceFactory = new JavaModelInstanceFactory(this.myModel);
 
@@ -195,6 +193,13 @@ public class JavaModelInstance extends AbstractModelInstance {
 	/**
 	 * <p>
 	 * Creates and initializes a new, empty {@link JavaModelInstance}.
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>Please note that an empty {@link JavaModelInstance} cannot be used
+	 * to find static {@link Property}s and static {@link Operation}s until at
+	 * least one {@link Object} has been added whose {@link ClassLoader} knows the
+	 * {@link Class} of the static {@link Property} or {@link Operation}!</strong>
 	 * </p>
 	 * 
 	 * @param model
@@ -688,107 +693,25 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#findEnumerationLiteral(tudresden
-	 * .ocl20.pivot.pivotmodel.EnumerationLiteral)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
+	 * addModelInstanceElement(java.lang.Object)
 	 */
-	public IModelInstanceEnumerationLiteral findEnumerationLiteral(
-			EnumerationLiteral literal) throws EnumerationLiteralNotFoundException {
+	public IModelInstanceElement addModelInstanceElement(Object object)
+			throws TypeNotFoundInModelException {
 
-		IModelInstanceEnumerationLiteral result;
+		IModelInstanceElement result;
 
-		Enumeration enumeration;
-		String enumerationCanonicalName;
-		Class<?> enumerationClass;
+		/* Try to adapt and add the object. */
+		result = this.addObject(object);
 
-		result = null;
-
-		/* Get the enumeration of the literal and find its class. */
-		enumeration = literal.getEnumeration();
-		enumerationCanonicalName =
-				JavaModelInstanceTypeUtility.toCanonicalName(enumeration
-						.getQualifiedNameList());
-
-		/* Try to find the class. */
-		if (this.myClassLoader != null) {
-			try {
-				enumerationClass =
-						this.myClassLoader.loadClass(enumerationCanonicalName);
-
-				/* Check if the found class is an enumeration. */
-				if (enumerationClass.isEnum()) {
-
-					for (Object javaEnumerationLiteral : enumerationClass
-							.getEnumConstants()) {
-
-						if (javaEnumerationLiteral.toString().equals(literal.getName())) {
-							Set<Type> types;
-
-							types = new HashSet<Type>();
-							types.add(enumeration);
-
-							result =
-									new JavaModelInstanceEnumerationLiteral(
-											(Enum<?>) javaEnumerationLiteral, types);
-							break;
-						}
-						// no else.
-					}
-					// end for.
-
-					/* If the literal has not been found, throw an exception. */
-					if (result == null) {
-						String msg;
-
-						msg =
-								JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
-						msg =
-								NLS
-										.bind(msg, literal,
-												"The EnumerationLiteral has not been found in the Enumeration.");
-
-						throw new EnumerationLiteralNotFoundException(msg);
-					}
-				}
-
-				/* Else throw an exception. */
-				else {
-					String msg;
-
-					msg =
-							JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
-					msg =
-							NLS.bind(msg, literal,
-									"Found Enumeration Class is not an Enumeration");
-
-					throw new EnumerationLiteralNotFoundException(msg);
-				}
-				// end else.
-			}
-			// end try.
-
-			catch (ClassNotFoundException e) {
-				String msg;
-
-				msg =
-						JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
-				msg = NLS.bind(msg, literal, e.getMessage());
-
-				throw new EnumerationLiteralNotFoundException(msg, e);
-			}
-			// end catch.
+		/* Probably add the adapted model instance element to the type mapping. */
+		if (result instanceof IModelInstanceObject) {
+			this.addModelInstanceObjectToCache((IModelInstanceObject) result);
 		}
+		// no else.
 
-		/* If the class loader is null, the class cannot be found. */
-		else {
-			String msg;
-
-			msg =
-					JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
-			msg = NLS.bind(msg, literal, "ClassLoader of ModelInstance was null.");
-
-			throw new EnumerationLiteralNotFoundException(msg);
-		}
+		/* Add the object's class loader to this JavaModelInstance. */
+		this.myClassLoaders.add(object.getClass().getClassLoader());
 
 		return result;
 	}
@@ -804,8 +727,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 		IModelInstanceElement result;
 
-		/* Check if the class loader is not null. */
-		if (this.myClassLoader != null) {
+		/* Check if the class loader set is not null. */
+		if (this.myClassLoaders.size() > 0) {
 
 			Class<?> propertyClass;
 			String propertyClassCanonicalName;
@@ -816,8 +739,7 @@ public class JavaModelInstance extends AbstractModelInstance {
 						JavaModelInstanceTypeUtility.toCanonicalName(property
 								.getOwningType().getQualifiedNameList());
 
-				propertyClass =
-						this.myClassLoader.loadClass(propertyClassCanonicalName);
+				propertyClass = loadJavaClass(propertyClassCanonicalName);
 
 				Field propertyField;
 
@@ -1072,151 +994,146 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 		Method result;
 
-		/* Check if the class loader is not null. */
-		if (this.myClassLoader != null) {
+		String methodCanonicalName;
+		Class<?> methodSourceClass;
 
-			String methodCanonicalName;
-			Class<?> methodSourceClass;
+		/* Try to find the operation's source class. */
+		methodCanonicalName =
+				JavaModelInstanceTypeUtility.toCanonicalName(operation.getOwner()
+						.getQualifiedNameList());
 
-			/* Try to find the operation's source class. */
-			methodCanonicalName =
-					JavaModelInstanceTypeUtility.toCanonicalName(operation.getOwner()
-							.getQualifiedNameList());
+		try {
+			methodSourceClass = this.loadJavaClass(methodCanonicalName);
 
-			try {
-				methodSourceClass = this.myClassLoader.loadClass(methodCanonicalName);
+			result = null;
 
-				result = null;
+			/* Try to find an according method in the source class. */
+			for (Method aMethod : methodSourceClass.getDeclaredMethods()) {
 
-				/* Try to find an according method in the source class. */
-				for (Method aMethod : methodSourceClass.getDeclaredMethods()) {
+				boolean nameIsEqual;
+				boolean resultTypeIsConform;
+				boolean argumentSizeIsEqual;
 
-					boolean nameIsEqual;
-					boolean resultTypeIsConform;
-					boolean argumentSizeIsEqual;
+				/* Check if the name matches to the given operation's name. */
+				nameIsEqual = aMethod.getName().equals(operation.getName());
 
-					/* Check if the name matches to the given operation's name. */
-					nameIsEqual = aMethod.getName().equals(operation.getName());
+				/* Check if the return type matches to the given operation's type. */
+				resultTypeIsConform =
+						JavaModelInstanceTypeUtility.conformsTypeToType(aMethod
+								.getGenericReturnType(), operation.getType());
 
-					/* Check if the return type matches to the given operation's type. */
-					resultTypeIsConform =
-							JavaModelInstanceTypeUtility.conformsTypeToType(aMethod
-									.getGenericReturnType(), operation.getType());
+				/*
+				 * Check if the method has the same size of arguments as the given
+				 * operation.
+				 */
+				argumentSizeIsEqual =
+						aMethod.getParameterTypes().length == operation
+								.getSignatureParameter().size();
 
-					/*
-					 * Check if the method has the same size of arguments as the given
-					 * operation.
-					 */
-					argumentSizeIsEqual =
-							aMethod.getParameterTypes().length == operation
-									.getSignatureParameter().size();
+				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
 
-					if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
+					java.lang.reflect.Type[] javaTypes;
+					List<Parameter> pivotModelParamters;
 
-						java.lang.reflect.Type[] javaTypes;
-						List<Parameter> pivotModelParamters;
+					boolean matches;
 
-						boolean matches;
+					javaTypes = aMethod.getGenericParameterTypes();
+					pivotModelParamters = operation.getSignatureParameter();
 
-						javaTypes = aMethod.getGenericParameterTypes();
-						pivotModelParamters = operation.getSignatureParameter();
+					matches = true;
 
-						matches = true;
+					/* Compare the types of all arguments. */
+					for (int index = 0; index < operation.getSignatureParameter().size(); index++) {
 
-						/* Compare the types of all arguments. */
-						for (int index = 0; index < operation.getSignatureParameter()
-								.size(); index++) {
-
-							if (!JavaModelInstanceTypeUtility.conformsTypeToType(
-									javaTypes[index], pivotModelParamters.get(index).getType())) {
-								matches = false;
-								break;
-							}
-							// no else.
-						}
-
-						if (matches) {
-							result = aMethod;
+						if (!JavaModelInstanceTypeUtility.conformsTypeToType(
+								javaTypes[index], pivotModelParamters.get(index).getType())) {
+							matches = false;
 							break;
 						}
 						// no else.
 					}
+
+					if (matches) {
+						result = aMethod;
+						break;
+					}
 					// no else.
-				}
-				// end for.
-
-				/* Probably throw an exception. */
-				if (result == null) {
-					String msg;
-
-					msg =
-							JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
-					msg =
-							NLS.bind(msg, operation,
-									"Given Operation does not exist in implementation.");
-
-					throw new OperationNotFoundException(msg);
 				}
 				// no else.
 			}
-			// end try.
+			// end for.
 
-			catch (ClassNotFoundException e) {
+			/* Probably throw an exception. */
+			if (result == null) {
 				String msg;
 
 				msg =
 						JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
-				msg = NLS.bind(msg, operation, e.getMessage());
+				msg =
+						NLS.bind(msg, operation,
+								"Given Operation does not exist in implementation.");
 
-				throw new OperationNotFoundException(msg, e);
+				throw new OperationNotFoundException(msg);
 			}
-			// end catch.
+			// no else.
 		}
+		// end try.
 
-		/* Else throw an exception (class loader is null). */
-		else {
+		catch (ClassNotFoundException e) {
 			String msg;
 
 			msg =
 					JavaModelInstanceTypeMessages.JavaModelInstance_StaticOperationNotFound;
-			msg =
-					NLS.bind(msg, operation,
-							"The class loader of the ModelInstance was null.");
+			msg = NLS.bind(msg, operation, e.getMessage());
 
-			throw new OperationNotFoundException(msg);
+			throw new OperationNotFoundException(msg, e);
 		}
-		// no else.
+		// end catch.
 
 		return result;
 	}
 
-	private static final int SOME_OPEN_QUESTIONS_IN_THE_FOLLOWING = 0;
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
-	 * addModelInstanceElement(java.lang.Object)
+	/**
+	 * <p>
+	 * A helper method that tries to load a {@link Class} for a given canonical
+	 * name using all {@link ClassLoader}s of this {@link JavaModelInstance}.
+	 * </p>
+	 * 
+	 * @param canonicalName
+	 *          The canonical name of the {@link Class} that shall be loaded.
+	 * @return
+	 * @throws ClassNotFoundException
+	 *           Thrown, if the {@link Class} cannot be found by any
+	 *           {@link ClassLoader} of this {@link JavaModelInstance}.
 	 */
-	public IModelInstanceElement addModelInstanceElement(Object object)
-			throws TypeNotFoundInModelException {
+	private Class<?> loadJavaClass(String canonicalName)
+			throws ClassNotFoundException {
 
-		IModelInstanceElement result;
+		Class<?> result;
+		result = null;
 
-		/* Try to adapt and add the object. */
-		result = this.addObject(object);
+		for (ClassLoader aClassLoader : this.myClassLoaders) {
 
-		/* Probably add the adapted model instance element to the type mapping. */
-		if (result instanceof IModelInstanceObject) {
-			this.addModelInstanceObjectToCache((IModelInstanceObject) result);
+			try {
+				result = aClassLoader.loadClass(canonicalName);
+				break;
+			}
+
+			catch (ClassNotFoundException e) {
+				/* Do nothing. Try the next class loader. */
+			}
 		}
-		// no else.
+		// end for.
 
-		/* FIXME Claas: Show this to Micha. Is that okay? */
-		/* Probably set the class loader of this JavaModelInstance. */
-		if (this.myClassLoader == null) {
-			this.myClassLoader = object.getClass().getClassLoader();
+		/* If no class has been found, throw an exception. */
+		if (result == null) {
+			String msg;
+
+			msg = JavaModelInstanceTypeMessages.JavaModelInstance_ClassNotFound;
+			msg = NLS.bind(msg, canonicalName);
+
+			throw new ClassNotFoundException(msg);
 		}
-		// no else.
 
 		return result;
 	}

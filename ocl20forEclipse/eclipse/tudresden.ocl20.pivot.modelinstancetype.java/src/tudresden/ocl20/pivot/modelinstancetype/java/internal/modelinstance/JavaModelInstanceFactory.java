@@ -40,6 +40,7 @@ import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.util.JavaModelInstanceTypeUtility;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -217,14 +218,15 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 						}
 					}
 
-					/* Else create an undefined enumeration literal. */
+					/* Else throw an exception. */
 					if (result == null) {
-						Set<Type> types;
+						String msg;
 
-						types = new HashSet<Type>();
-						types.add(type);
+						msg =
+								JavaModelInstanceTypeMessages.JavaModelInstance_CannotAdaptToType;
+						msg = NLS.bind(msg, adapted, type);
 
-						result = new JavaModelInstanceEnumerationLiteral(null, types);
+						throw new IllegalArgumentException();
 					}
 					// no else.
 				}
@@ -263,7 +265,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 * {@link Enum} object.
 	 * </p>
 	 * 
-	 * @param literal
+	 * @param anEnum
 	 *          The {@link Enum} that shall be adapted.
 	 * @return The adapted {@link IModelInstanceEnumerationLiteral}.
 	 * @throws TypeNotFoundInModelException
@@ -271,14 +273,14 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	 *           {@link Type} in the {@link IModel}.
 	 */
 	private IModelInstanceElement createJavaModelInstanceEnumerationLiteral(
-			Enum<?> literal) throws TypeNotFoundInModelException {
+			Enum<?> anEnum) throws TypeNotFoundInModelException {
 
 		/* Probably debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
 			msg = "createJavaModelInstanceEnumerationLiteral("; //$NON-NLS-1$
-			msg += "literal = " + literal; //$NON-NLS-1$
+			msg += "literal = " + anEnum; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
@@ -286,25 +288,46 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 		// no else.
 
 		IModelInstanceEnumerationLiteral result;
-
-		Set<Type> types;
 		Type type;
 
-		types = new HashSet<Type>();
-		type = this.findTypeOfClassInModel(literal.getClass());
+		result = null;
+		
+		/* Try to find the enumeration of the enum in the model. */
+		type = this.findTypeOfClassInModel(anEnum.getClass());
 
 		/* Check if the enumeration has been found in the model. */
-		if (type != null) {
+		if (type != null && type instanceof Enumeration) {
+			
+			Enumeration enumeration;
+			enumeration = (Enumeration) type;
+			
+			/* Try to find a literal with the right value. */
+			for (EnumerationLiteral aLiteral : enumeration.getOwnedLiteral()) {
+				
+				if (aLiteral.getName().equals(anEnum.toString())) {
+					
+					result = createModelInstanceEnumerationLiteral(aLiteral);
+					break;
+				}
+				// no else.
+			}
+			// end for.
 
-			types.add(type);
-			result = new JavaModelInstanceEnumerationLiteral(literal, types);
+			if (result == null) {
+				String msg;
+
+				msg = JavaModelInstanceTypeMessages.JavaModelInstance_TypeNotFoundInModel;
+				msg = NLS.bind(msg, anEnum);
+
+				throw new TypeNotFoundInModelException(msg);
+			}
 		}
 
 		else {
 			String msg;
 
 			msg = JavaModelInstanceTypeMessages.JavaModelInstance_TypeNotFoundInModel;
-			msg = NLS.bind(msg, literal);
+			msg = NLS.bind(msg, anEnum);
 
 			throw new TypeNotFoundInModelException(msg);
 		}

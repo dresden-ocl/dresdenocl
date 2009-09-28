@@ -53,6 +53,7 @@ public class JavaModelInstanceTypeMessages extends NLS {
 	public static String JavaModelInstance_EnumerationLiteralNotFound;
 	public static String JavaModelInstance_StaticPropertyNotFound;
 	public static String JavaModelInstance_StaticOperationNotFound;
+	public static String JavaModelInstance_ClassNotFound;
 
 	static {
 		/* Initialize resource bundle. */

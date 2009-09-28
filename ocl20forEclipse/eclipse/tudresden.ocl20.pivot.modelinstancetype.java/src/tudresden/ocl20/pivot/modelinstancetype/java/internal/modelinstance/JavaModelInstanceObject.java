@@ -371,6 +371,33 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object object) {
+
+		boolean result;
+
+		if (object instanceof JavaModelInstanceObject) {
+
+			JavaModelInstanceObject javaModelInstanceObject;
+			javaModelInstanceObject = (JavaModelInstanceObject) object;
+
+			result = this.myAdaptedObject == javaModelInstanceObject.myAdaptedObject;
+			result &= this.myTypes.size() == javaModelInstanceObject.myTypes.size();
+			result &= this.myTypes.containsAll(javaModelInstanceObject.myTypes);
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject#
 	 * getAdaptedObject()
 	 */
@@ -423,7 +450,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 			for (int index = 0; index < argSize; index++) {
 
 				argumentValues[index] =
-						JavaModelInstance.createAdaptedElement(args.get(index), argumentTypes[index]);
+						JavaModelInstance.createAdaptedElement(args.get(index),
+								argumentTypes[index]);
 				index++;
 			}
 
@@ -437,8 +465,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 				/* Adapt the result to the expected result type. */
 				result =
-						AbstractModelInstance.adaptInvocationResult(adapteeResult, operation
-								.getType(), operation, this.myFactory);
+						AbstractModelInstance.adaptInvocationResult(adapteeResult,
+								operation.getType(), operation, this.myFactory);
 			}
 
 			catch (IllegalArgumentException e) {
