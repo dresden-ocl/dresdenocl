@@ -44,6 +44,9 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class EcoreModelInstanceTypeUtility {
 
+	/** FIXME Claas: OPEN_QUESTIONS_IN_THE_FOLLOWING. */
+	private static final int OPEN_QUESTIONS_IN_THE_FOLLOWING = 0;
+
 	/**
 	 * <p>
 	 * A helper method that checks if a given {@link EClass} conforms to a given
@@ -270,9 +273,6 @@ public class EcoreModelInstanceTypeUtility {
 
 		return result;
 	}
-
-	/** FIXME Claas: OPEN_QUESTIONS_IN_THE_FOLLOWING. */
-	private static final int OPEN_QUESTIONS_IN_THE_FOLLOWING = 0;
 
 	/**
 	 * <p>

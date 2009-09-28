@@ -18,9 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.ecore.internal.modelinstance;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -31,21 +29,16 @@ import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.base.AbstractModelInstance;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.EnumerationLiteralNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.EcoreModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider.EcoreModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.util.EcoreModelInstanceTypeUtility;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -202,6 +195,39 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getStaticProperty
+	 * (tudresden.ocl20.pivot.pivotmodel.Property)
+	 */
+	public IModelInstanceElement getStaticProperty(Property property)
+			throws PropertyAccessException, PropertyNotFoundException {
+	
+		String msg;
+		msg =
+				EcoreModelInstanceTypeMessages.EcoreModelInstance_NoSupportOfStaticProperties;
+	
+		throw new PropertyAccessException(msg);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
+	 * invokeStaticOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
+	 * java.util.List)
+	 */
+	public IModelInstanceElement invokeStaticOperation(Operation operation,
+			List<IModelInstanceElement> args) throws OperationAccessException,
+			OperationNotFoundException {
+	
+		String msg;
+		msg =
+				EcoreModelInstanceTypeMessages.EcoreModelInstance_NoSupportOfStaticOperations;
+	
+		throw new OperationAccessException(msg);
+	}
+
 	/**
 	 * <p>
 	 * Adds a given {@link Object} to the {@link List} of
@@ -272,139 +298,6 @@ public class EcoreModelInstance extends AbstractModelInstance implements
 
 	/** FIXME Claas: OPEN_QUESTIONS_IN_THE_FOLLOWING. */
 	private static final int OPEN_QUESTIONS_IN_THE_FOLLOWING = 0;
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
-	 * findEnumerationLiteral(tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral)
-	 */
-	public IModelInstanceEnumerationLiteral findEnumerationLiteral(
-			EnumerationLiteral literal) throws EnumerationLiteralNotFoundException {
-
-		IModelInstanceEnumerationLiteral result;
-
-		Enumeration enumeration;
-		String enumerationCanonicalName;
-		Class<?> enumerationClass;
-
-		result = null;
-
-		/* Get the enumeration of the literal and find its class. */
-		enumeration = literal.getEnumeration();
-		enumerationCanonicalName =
-				EcoreModelInstanceTypeUtility.toCanonicalName(enumeration
-						.getQualifiedNameList());
-
-		/* Try to find the class. */
-		try {
-			/*
-			 * FIXME Claas: Ask Micha: Is this the appropriate way and is the right
-			 * class loader used?
-			 */
-			enumerationClass =
-					this.myModelInstanceResource.getAllContents().next().getClass()
-							.getClassLoader().loadClass(enumerationCanonicalName);
-
-			/* Check if the found class is an enumeration. */
-			if (enumerationClass.isEnum()) {
-
-				for (Object javaEnumerationLiteral : enumerationClass
-						.getEnumConstants()) {
-
-					if (javaEnumerationLiteral.toString().equals(literal.getName())) {
-						Set<Type> types;
-
-						types = new HashSet<Type>();
-						types.add(enumeration);
-
-						result =
-								new EcoreModelInstanceEnumerationLiteral(
-										(Enum<?>) javaEnumerationLiteral, types);
-						break;
-					}
-					// no else.
-				}
-				// end for.
-
-				/* If the literal has not been found, throw an exception. */
-				if (result == null) {
-					String msg;
-
-					msg =
-							EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
-					msg =
-							NLS
-									.bind(msg, literal,
-											"The EnumerationLiteral has not been found in the Enumeration.");
-
-					throw new EnumerationLiteralNotFoundException(msg);
-				}
-			}
-
-			/* Else throw an exception. */
-			else {
-				String msg;
-
-				msg =
-						EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
-				msg =
-						NLS.bind(msg, literal,
-								"Found Enumeration Class is not an Enumeration");
-
-				throw new EnumerationLiteralNotFoundException(msg);
-			}
-			// end else.
-		}
-		// end try.
-
-		catch (ClassNotFoundException e) {
-			String msg;
-
-			msg =
-					EcoreModelInstanceTypeMessages.EcoreModelInstance_EnumerationLiteralNotFound;
-			msg = NLS.bind(msg, literal, e.getMessage());
-
-			throw new EnumerationLiteralNotFoundException(msg, e);
-		}
-		// end catch.
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getStaticProperty
-	 * (tudresden.ocl20.pivot.pivotmodel.Property)
-	 */
-	public IModelInstanceElement getStaticProperty(Property property)
-			throws PropertyAccessException, PropertyNotFoundException {
-
-		/* FIXME Claas: Ask Micha if this is correct. */
-		String msg;
-		msg =
-				EcoreModelInstanceTypeMessages.EcoreModelInstance_NoSupportOfStaticProperties;
-
-		throw new PropertyAccessException(msg);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
-	 * invokeStaticOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
-	 * java.util.List)
-	 */
-	public IModelInstanceElement invokeStaticOperation(Operation operation,
-			List<IModelInstanceElement> args) throws OperationAccessException,
-			OperationNotFoundException {
-
-		/* FIXME Claas: Ask Micha if this is correct. */
-		String msg;
-		msg =
-				EcoreModelInstanceTypeMessages.EcoreModelInstance_NoSupportOfStaticOperations;
-
-		throw new OperationAccessException(msg);
-	}
 
 	/**
 	 * FIXME Claas: Implement this method, when the question which meta objects

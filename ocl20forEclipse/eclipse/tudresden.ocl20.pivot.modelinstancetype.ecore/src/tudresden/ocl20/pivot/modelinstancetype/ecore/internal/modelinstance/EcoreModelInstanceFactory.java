@@ -37,10 +37,12 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.ModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.EcoreModelInstanceTypeMessages;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.util.EcoreModelInstanceTypeUtility;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -231,14 +233,15 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 						}
 					}
 
-					/* Else create an undefined enumeration literal. */
+					/* Else throw an exception. */
 					if (result == null) {
-						Set<Type> types;
+						String msg;
 
-						types = new HashSet<Type>();
-						types.add(type);
+						msg =
+								EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_CannotAdaptToType;
+						msg = NLS.bind(msg, adapted, type);
 
-						result = new EcoreModelInstanceEnumerationLiteral(null, types);
+						throw new IllegalArgumentException();
 					}
 					// no else.
 				}
@@ -391,13 +394,13 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 	/**
 	 * <p>
-	 * Creates a new {@link EcoreModelInstanceEnumerationLiteral} for a given
+	 * Creates a new {@link ModelInstanceEnumerationLiteral} for a given
 	 * {@link Enum}.
 	 * </p>
 	 * 
 	 * @param anEnum
 	 *          The {@link Enum} that shall be adapted.
-	 * @return The created {@link EcoreModelInstanceEnumerationLiteral}.
+	 * @return The created {@link ModelInstanceEnumerationLiteral}.
 	 * @throws TypeNotFoundInModelException
 	 *           Thrown, if the given {@link Enum} cannot be adapted to the
 	 *           {@link IModel} of this {@link EcoreModelInstanceFactory}.
@@ -418,26 +421,45 @@ public class EcoreModelInstanceFactory extends BasisJavaModelInstanceFactory
 		// no else.
 
 		IModelInstanceEnumerationLiteral result;
-
-		/* Try to find the enums type in the IModel. */
-		Set<Type> types;
 		Type type;
 
-		types = new HashSet<Type>();
+		result = null;
+		
+		/* Try to find the enumeration of the enum in the model. */
 		type = this.findTypeOfClassInModel(anEnum.getClass());
 
 		/* Check if the enumeration has been found in the model. */
-		if (type != null) {
+		if (type != null && type instanceof Enumeration) {
+			
+			Enumeration enumeration;
+			enumeration = (Enumeration) type;
+			
+			/* Try to find a literal with the right value. */
+			for (EnumerationLiteral aLiteral : enumeration.getOwnedLiteral()) {
+				
+				if (aLiteral.getName().equals(anEnum.toString())) {
+					
+					result = createModelInstanceEnumerationLiteral(aLiteral);
+					break;
+				}
+				// no else.
+			}
+			// end for.
 
-			types.add(type);
-			result = new EcoreModelInstanceEnumerationLiteral(anEnum, types);
+			if (result == null) {
+				String msg;
+
+				msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+				msg = NLS.bind(msg, anEnum);
+
+				throw new TypeNotFoundInModelException(msg);
+			}
 		}
 
 		else {
 			String msg;
 
-			msg =
-					EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
+			msg = EcoreModelInstanceTypeMessages.EcoreModelInstanceFactory_TypeNotFoundInModel;
 			msg = NLS.bind(msg, anEnum);
 
 			throw new TypeNotFoundInModelException(msg);

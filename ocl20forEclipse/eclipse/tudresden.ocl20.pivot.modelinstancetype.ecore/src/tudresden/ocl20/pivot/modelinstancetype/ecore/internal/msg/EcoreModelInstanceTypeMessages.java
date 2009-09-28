@@ -50,6 +50,7 @@ public class EcoreModelInstanceTypeMessages extends NLS {
 	public static String EcoreModelInstanceObject_CannotCopyForAtPre;
 	public static String EcoreModelInstanceObject_OperationAccessFailed;
 	public static String EcoreModelInstanceObject_OperationNotFound;
+	public static String EcoreModelInstanceObject_PropertyAccessFailed;
 
 	static {
 		/* Initialize resource bundle. */
