@@ -240,6 +240,31 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object object) {
+
+		boolean result;
+
+		if (object instanceof JavaModelInstanceString) {
+
+			JavaModelInstanceString javaModelInstanceString;
+			javaModelInstanceString = (JavaModelInstanceString) object;
+
+			result = this.myString.equals(javaModelInstanceString.myString);
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString
 	 * #getString()

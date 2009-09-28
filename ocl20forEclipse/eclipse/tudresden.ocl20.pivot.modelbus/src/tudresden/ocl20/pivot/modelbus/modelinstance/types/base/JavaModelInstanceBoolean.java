@@ -195,6 +195,31 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object object) {
+
+		boolean result;
+		
+		if (object instanceof JavaModelInstanceBoolean) {
+
+			JavaModelInstanceBoolean javaModelInstanceBoolean;
+			javaModelInstanceBoolean = (JavaModelInstanceBoolean) object;
+
+			result = this.myBoolean.equals(javaModelInstanceBoolean.myBoolean);
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean#getBoolean
 	 * ()

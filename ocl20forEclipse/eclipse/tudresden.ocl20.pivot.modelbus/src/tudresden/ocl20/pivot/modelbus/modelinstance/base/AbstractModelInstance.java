@@ -42,7 +42,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceVoid;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
 import tudresden.ocl20.pivot.pivotmodel.MultiplicityElement;
@@ -85,19 +84,6 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * {@link IModelInstanceElement}s.
 	 */
 	protected IModelInstanceFactory myModelInstanceFactory;
-
-	/**
-	 * <p>
-	 * Contains all {@link IModelInstanceTypeObject} of this
-	 * {@link IModelInstance} identified by their adapted {@link Type}.
-	 * </p>
-	 * <p>
-	 * <strong>This map is a {@link WeakHashMap}. If the adapted {@link Type} does
-	 * not exist any more, the adapter is also disposed.</strong>
-	 * </p>
-	 */
-	protected Map<Type, IModelInstanceTypeObject> myModelTypeObjects =
-			new WeakHashMap<Type, IModelInstanceTypeObject>();
 
 	/** The name of the model instance. */
 	protected String myName;

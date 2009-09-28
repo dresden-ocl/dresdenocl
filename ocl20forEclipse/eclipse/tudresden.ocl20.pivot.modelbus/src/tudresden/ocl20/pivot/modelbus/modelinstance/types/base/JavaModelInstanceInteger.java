@@ -198,6 +198,31 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object object) {
+
+		boolean result;
+		
+		if (object instanceof JavaModelInstanceInteger) {
+
+			JavaModelInstanceInteger javaModelInstanceInteger;
+			javaModelInstanceInteger = (JavaModelInstanceInteger) object;
+
+			result = this.myLong.equals(javaModelInstanceInteger.myLong);
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger#getInteger
 	 * ()

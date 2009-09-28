@@ -1,7 +1,7 @@
 /*
 Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net)
 
-This file is part of the Model Bus Plug-in of Dresden OCL2 for Eclipse.
+This file is part of the Java Model Instance Plug-in of Dresden OCL2 for Eclipse.
 
 Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
 it under the terms of the GNU Lesser General Public License as published by the 
@@ -19,76 +19,77 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
- * Represents an adaptation for {@link Float}s of a {@link JavaModelInstance}.
- * </p>
- * 
- * <p>
- * This type is located in the ModelBus plug-in because the standard library and
- * the Java model instance type plug-in both require such an implementation but
- * are not allowed to know each other.
+ * An adapter {@link Class} for {@link ModelInstanceEnumerationLiteral}s of
+ * {@link IModelInstance}s.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class JavaModelInstanceReal extends AbstractModelInstanceElement
-		implements IModelInstanceReal {
+public class ModelInstanceEnumerationLiteral extends
+		AbstractModelInstanceElement implements IModelInstanceEnumerationLiteral {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER =
-			ModelBusPlugin.getLogger(JavaModelInstanceReal.class);
-
-	/** The adapted {@link Number} of this {@link JavaModelInstanceReal}. */
-	private Number myNumber;
+			ModelBusPlugin.getLogger(ModelInstanceEnumerationLiteral.class);
 
 	/**
 	 * <p>
-	 * Creates a new {@link JavaModelInstanceReal}.
+	 * The adapted {@link EnumerationLiteral} of this
+	 * {@link ModelInstanceEnumerationLiteral}.
+	 * </p>
+	 */
+	private EnumerationLiteral myLiteral;
+
+	/**
+	 * <p>
+	 * Creates a new {@link ModelInstanceEnumerationLiteral} for a given
+	 * {@link EnumerationLiteral}.
 	 * </p>
 	 * 
-	 * @param number
-	 *          The {@link Number} that shall be adapted by this
-	 *          {@link JavaModelInstanceReal}.
+	 * @param literal
+	 *          The {@link EnumerationLiteral} that shall be adapted.
 	 */
-	protected JavaModelInstanceReal(Number number) {
+	protected ModelInstanceEnumerationLiteral(EnumerationLiteral literal) {
 
 		/* Eventually debug the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaModelInstanceReal("; //$NON-NLS-1$
-			msg += "number = " + number; //$NON-NLS-1$
+			msg = "ModelInstanceEnumerationLiteral("; //$NON-NLS-1$
+			msg += "literal = " + literal; //$NON-NLS-1$
 			msg += ")"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
 		// no else.
 
-		this.myNumber = number;
+		this.myLiteral = literal;
 
-		/* Initialize the type. */
 		this.myTypes = new HashSet<Type>();
-		this.myTypes.add(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_REAL);
+		this.myTypes.add(this.myLiteral.getEnumeration());
 
 		/* Eventually debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "JavaModelInstanceReal(Number) - exit"; //$NON-NLS-1$
+			msg = "ModelInstanceEnumerationLiteral(Enum<?>, "; //$NON-NLS-1$
+			msg += "Set<Type>) - exit"; //$NON-NLS-1$
 
 			LOGGER.debug(msg);
 		}
@@ -97,8 +98,9 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
-	 * AbstractModelInstanceElement#getName()
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #getName()
 	 */
 	public String getName() {
 
@@ -117,12 +119,12 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 		/* Else construct a name of all implemented types. */
 		else {
-			resultBuffer.append(JavaModelInstanceReal.class.getSimpleName());
+			resultBuffer.append(this.getClass().getSimpleName());
 			resultBuffer.append("[");
-			resultBuffer.append(this.myNumber);
+			resultBuffer.append(this.myLiteral.toString());
 			resultBuffer.append("]");
 		}
-		// no else.
+		// end else.
 
 		return resultBuffer.toString();
 	}
@@ -137,38 +139,16 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 		IModelInstanceElement result;
 
-		/* By default the result is null. */
 		result = null;
 
-		/* Reals can only be casted to primitive types. */
-		if (type instanceof PrimitiveType) {
-			PrimitiveType primitiveType;
-			primitiveType = (PrimitiveType) type;
+		/* Check if the given type is the type of this literal. */
+		if (this.myTypes.contains(type)) {
 
-			/* Check the given PrimitiveTypeKind. */
-			if (primitiveType.getKind().equals(PrimitiveTypeKind.INTEGER)) {
+			Set<Type> types;
+			types = new HashSet<Type>();
+			types.add(type);
 
-				/* Create a new integer to avoid side effects. */
-				result = new JavaModelInstanceInteger(this.myNumber.longValue());
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.REAL)) {
-
-				/* Each integer is also a real. */
-				result = new JavaModelInstanceReal(this.myNumber);
-			}
-
-			else if (primitiveType.getKind().equals(PrimitiveTypeKind.STRING)) {
-
-				if (this.myNumber == null) {
-					result = new JavaModelInstanceString(null);
-				}
-
-				else {
-					result = new JavaModelInstanceString(this.myNumber.toString());
-				}
-			}
-			// no else.
+			result = new ModelInstanceEnumerationLiteral(this.myLiteral);
 		}
 		// no else.
 
@@ -190,11 +170,12 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #deepCopy()
+	 * #copyForAtPre()
 	 */
 	public IModelInstanceElement copyForAtPre() {
 
-		return new JavaModelInstanceReal(this.myNumber);
+		/* Return a copy of the literal. */
+		return new ModelInstanceEnumerationLiteral(this.myLiteral);
 	}
 
 	/*
@@ -207,12 +188,13 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 		boolean result;
 
-		if (object instanceof JavaModelInstanceReal) {
+		if (object instanceof ModelInstanceEnumerationLiteral) {
 
-			JavaModelInstanceReal javaModelInstanceReal;
-			javaModelInstanceReal = (JavaModelInstanceReal) object;
+			ModelInstanceEnumerationLiteral modelInstanceEnumerationLiteral;
+			modelInstanceEnumerationLiteral =
+					(ModelInstanceEnumerationLiteral) object;
 
-			result = this.myNumber.equals(javaModelInstanceReal.myNumber);
+			result = this.myLiteral.equals(modelInstanceEnumerationLiteral.myLiteral);
 		}
 
 		else {
@@ -225,22 +207,12 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal#getReal()
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral
+	 * #getLiteral()
 	 */
-	public Double getDouble() {
+	public EnumerationLiteral getLiteral() {
 
-		Double result;
-
-		/* Avoid null pointer exceptions. */
-		if (this.myNumber != null) {
-			result = this.myNumber.doubleValue();
-		}
-
-		else {
-			result = null;
-		}
-
-		return result;
+		return this.myLiteral;
 	}
 
 	/*
@@ -251,6 +223,6 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 	 */
 	public boolean isUndefined() {
 
-		return (this.myNumber == null);
+		return this.myLiteral == null;
 	}
 }

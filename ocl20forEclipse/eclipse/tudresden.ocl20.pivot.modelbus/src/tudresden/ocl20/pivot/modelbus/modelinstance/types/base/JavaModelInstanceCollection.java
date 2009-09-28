@@ -296,6 +296,40 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 	/*
 	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object object) {
+
+		boolean result;
+
+		if (object instanceof JavaModelInstanceCollection) {
+
+			JavaModelInstanceCollection<?> javaModelInstanceCollection;
+			javaModelInstanceCollection = (JavaModelInstanceCollection<?>) object;
+
+			result = this.isOrdered() == javaModelInstanceCollection.isOrdered();
+			result &= this.isUnique() == javaModelInstanceCollection.isUnique();
+			result &=
+					this.getTypes().size() == javaModelInstanceCollection.getTypes()
+							.size();
+			result &=
+					this.getTypes().containsAll(javaModelInstanceCollection.getTypes());
+			result &=
+					this.getCollection().equals(
+							javaModelInstanceCollection.getCollection());
+		}
+
+		else {
+			result = false;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection
 	 * #getCollection()

@@ -19,12 +19,12 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelbus.modelinstance.types;
 
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
-
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 
 /**
  * <p>
- * Represents an {@link IModelInstanceElement} that adapts a EnumerationLiteral value
- * from the {@link IModelInstance}.
+ * Represents an {@link IModelInstanceElement} that adapts a EnumerationLiteral
+ * value from the {@link IModelInstance}.
  * </p>
  * 
  * @author Claas Wilke
@@ -33,12 +33,12 @@ public interface IModelInstanceEnumerationLiteral extends IModelInstanceElement 
 
 	/**
 	 * <p>
-	 * Returns the {@link Enum} value of this
+	 * Returns the {@link EnumerationLiteral} value of this
 	 * {@link IModelInstanceEnumerationLiteral}.
 	 * </p>
 	 * 
-	 * @return The {@link Enum} value of this
+	 * @return The {@link EnumerationLiteral} value of this
 	 *         {@link IModelInstanceEnumerationLiteral}.
 	 */
-	Enum<?> getLiteral();
+	EnumerationLiteral getLiteral();
 }

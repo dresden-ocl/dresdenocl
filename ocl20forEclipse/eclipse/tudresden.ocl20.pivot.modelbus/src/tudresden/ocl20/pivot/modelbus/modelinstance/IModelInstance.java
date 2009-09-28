@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
-import tudresden.ocl20.pivot.modelbus.modelinstance.exception.EnumerationLiteralNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.OperationNotFoundException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.PropertyAccessException;
@@ -48,7 +47,6 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerat
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstancePrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -86,24 +84,6 @@ public interface IModelInstance {
 	 */
 	IModelInstanceElement addModelInstanceElement(Object object)
 			throws TypeNotFoundInModelException;
-
-	/**
-	 * <p>
-	 * Searches in this {@link IModelInstance} for a implementation of the given
-	 * {@link EnumerationLiteral}.
-	 * </p>
-	 * 
-	 * @param literal
-	 *          The {@link EnumerationLiteral} whose implementation shall be
-	 *          found.
-	 * @return The found {@link IModelInstanceEnumerationLiteral} or
-	 *         <code>null</code>.
-	 * @throws EnumerationLiteralNotFoundException
-	 *           Thrown, if the given {@link EnumerationLiteral} cannot be found
-	 *           in the {@link IModelInstance}.
-	 */
-	IModelInstanceEnumerationLiteral findEnumerationLiteral(
-			EnumerationLiteral literal) throws EnumerationLiteralNotFoundException;
 
 	/**
 	 * <p>

@@ -42,11 +42,13 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInMode
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -524,6 +526,23 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			Collection<T> adapted, CollectionType type) {
 
 		return new JavaModelInstanceCollection<T>(adapted, type);
+	}
+
+	/**
+	 * <p>
+	 * Creates a {@link IModelInstanceEnumerationLiteral} for a given
+	 * {@link EnumerationLiteral}.
+	 * </p>
+	 * 
+	 * @param adapted
+	 *          The {@link EnumerationLiteral} that shall be adapted.
+	 * 
+	 * @return The created {@link IModelInstanceEnumerationLiteral}.
+	 */
+	public static IModelInstanceEnumerationLiteral createModelInstanceEnumerationLiteral(
+			EnumerationLiteral adapted) {
+
+		return new ModelInstanceEnumerationLiteral(adapted);
 	}
 
 	/**

@@ -33,6 +33,7 @@ package tudresden.ocl20.pivot.modelbus.modelinstance.types.base;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
@@ -60,6 +61,19 @@ public abstract class AbstractModelInstanceElement implements
 
 	/** The id of this {@link IModelInstanceElement}. Could be <code>null</code>. */
 	protected String myId;
+
+	/**
+	 * <p>
+	 * Checks if the given {@link Object} is equal to this
+	 * {@link AbstractModelInstanceElement}. This method must be implemented in
+	 * respect to equivalence of two {@link IModelInstanceElement}s contained in
+	 * the same {@link IModelInstanceCollection}.
+	 * </p>
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public abstract boolean equals(Object object);
 
 	/*
 	 * (non-Javadoc)
