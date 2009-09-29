@@ -10,6 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.logging,
  org.eclipse.ui,
- org.junit4;bundle-version="4.3.1"
+ org.junit4;bundle-version="4.3.1",
+ tudresden.ocl20.pivot.examples.royalandloyal;bundle-version="1.2.0"
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

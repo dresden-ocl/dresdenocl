@@ -31,7 +31,7 @@ public class DefinitionTest {
 		String fileName = "oclTestFiles/definitionTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("Person.uml");
+			test.setModel("Person.uml", true);
 			test.parseFile(fileName);
 		} catch (Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";

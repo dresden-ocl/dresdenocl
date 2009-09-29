@@ -34,7 +34,7 @@ public class CollectionTest {
 		String fileName = "oclTestFiles/collectionTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("Person.uml");
+			test.setModel("Person.uml", true);
 			test.parseFile(fileName);
 		} catch (Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";
@@ -54,7 +54,7 @@ public class CollectionTest {
 		String fileName = "oclTestFiles/iteratorCollectionTest.ocl";
 		try {
 			TestPerformer test = TestPerformer.getDefault();
-			test.setModel("Person.uml");
+			test.setModel("Person.uml", true);
 			test.parseFile(fileName);
 		} catch (Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";

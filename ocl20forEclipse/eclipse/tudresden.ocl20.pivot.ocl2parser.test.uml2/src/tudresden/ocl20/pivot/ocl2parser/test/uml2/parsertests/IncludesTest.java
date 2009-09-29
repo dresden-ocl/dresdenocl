@@ -32,7 +32,7 @@ public class IncludesTest {
 		try {
 			TestPerformer test = TestPerformer.getDefault();
 			// royalsandloyals_includes.xmi
-			test.setModel("royalsandloyals_includes.uml");
+			test.setModel("royalsandloyals_includes.uml", true);
 			test.parseFile(fileName);
 		} catch (Throwable ex) {
 			String message = " This error occured for file " + fileName + ".";

@@ -22,6 +22,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.eclipse.core.runtime.Platform;
+
 import tudresden.ocl20.pivot.modelbus.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelProvider;
@@ -45,10 +47,25 @@ import tudresden.ocl20.pivot.ocl2parser.parser.exceptions.SemanticException;
  */
 public class TestPerformer {
 
+	protected static final String MODEL_BUNDLE =
+			"tudresden.ocl20.pivot.examples.royalandloyal";
+	protected static final String MODEL_BUNDLE_PATH = "model/";
 	protected IMetamodel metaModel = null;
 	protected IModelProvider modelProvider = null;
 	protected IModel model = null;
-	protected String fileDirectory = null;
+	/**
+	 * The path to the OCL files.
+	 */
+	protected String oclFileDirectory = "./src/testData/";
+	/**
+	 * The path to the Modelfiels in the
+	 * tudresden.ocl20.pivot.examples.royalandloyal project.
+	 */
+	protected String remoteModelFileDirectory = null;
+	/**
+	 * The path to the customized, locally (in this project) saved Model Files.
+	 */
+	protected String localModelFileDirectory = "./src/testData/";
 	static protected TestPerformer self = null;
 
 	/**
@@ -108,12 +125,15 @@ public class TestPerformer {
 	}
 
 	/**
-	 * With this method a model (in uml) can be set. This method must be invoked
-	 * before the <i>parseFile</i> method.
+	 * Wrapper for setModell(String modelName, booelan local) which sets the
+	 * second argument to false; thus using the remote location (
+	 * {@link TestPerformer#MODEL_BUNDLE}/{@link TestPerformer#MODEL_BUNDLE_PATH})
+	 * for loading the model.
 	 * 
 	 * @param modelName
-	 *          the filename of the uml model that is located in the
-	 *          <i>./src/testdata</i> directory
+	 *          The name of file containing the model.
+	 * @param pathToModel
+	 *          The path to the models file.
 	 * @throws ModelAccessException
 	 *           from tudresden.ocl20.pivot.modelbus.IModelProvider.getModel(File)
 	 * @throws FileNotFoundException
@@ -122,22 +142,63 @@ public class TestPerformer {
 	public void setModel(String modelName) throws ModelAccessException,
 			FileNotFoundException {
 
-		/*
-		 * if (model != null) { if (model.getDisplayName().equals(umlModelName))
-		 * return; }
-		 */
+		setModel(modelName, false);
+	}
 
-		// initializeMetamodel(metaModel.getId());
+	/**
+	 * This method loads a model from the specified file. The path to the file is
+	 * either {@link #MODEL_BUNDLE}/{@link #MODEL_BUNDLE_PATH}/ (loacl=false) or
+	 * {@link #localModelFileDirectory} (local=true).
+	 * 
+	 * @param modelName
+	 *          The name of file containing the model.
+	 * @param local
+	 *          Flag for the path to a model.
+	 * @throws ModelAccessException
+	 *           from tudresden.ocl20.pivot.modelbus.IModelProvider.getModel(File)
+	 * @throws FileNotFoundException
+	 *           the model file is not found
+	 */
+	public void setModel(String modelName, boolean local)
+			throws ModelAccessException, FileNotFoundException {
+
+		String pathToModel;
+		if (local)
+			pathToModel = localModelFileDirectory;
+		else {
+			/* Get the bundle location for the model files. */
+			pathToModel = Platform.getBundle(MODEL_BUNDLE).getLocation();
+
+			/* Remove the 'reference:file:' from the beginning and add path in remote location. */
+			pathToModel = pathToModel.substring(15) + MODEL_BUNDLE_PATH;
+		}
+
+		setModel(modelName, pathToModel);
+	}
+
+	/**
+	 * Loads the Model from a specified location.
+	 * 
+	 * @param modelName
+	 *          The name of file containing the model.
+	 * @param pathToModel
+	 *          The path to the models file.
+	 * @throws ModelAccessException
+	 *           from tudresden.ocl20.pivot.modelbus.IModelProvider.getModel(File)
+	 * @throws FileNotFoundException
+	 *           the model file is not found
+	 */
+	private void setModel(String modelName, String pathToModel)
+			throws ModelAccessException, FileNotFoundException {
+
 		modelProvider = metaModel.getModelProvider();
-		File currentDir = new File(".");
-		// System.out.println("Current directory: " + currentDir.getAbsolutePath());
-		fileDirectory = "./src/testData/";
-		File modelFile = new File(fileDirectory + modelName);
-		if (!modelFile.exists())
-			throw new FileNotFoundException(
-					"The model file doesn't exists. The file name was: " + fileDirectory
-							+ modelName);
 
+		File modelFile = new File(pathToModel + modelName);
+		if (!modelFile.exists()) {
+			throw new FileNotFoundException(
+					"The model file doesn't exists. The file name was: "
+							+ remoteModelFileDirectory + modelName);
+		}
 		model = modelProvider.getModel(modelFile);
 	}
 
@@ -157,10 +218,11 @@ public class TestPerformer {
 			ParsingException, LexException, IOException, BuildingASTException,
 			SemanticException {
 
-		File oclFile = new File(fileDirectory + filename);
+		File oclFile = new File(oclFileDirectory + filename);
 		if (!oclFile.exists())
 			throw new FileNotFoundException(
-					"The ocl test file doesn't exists. File name: " + filename);
+					"The ocl test file doesn't exists. File name: " + oclFileDirectory
+							+ filename);
 
 		FileReader oclFileReader = new FileReader(oclFile);
 
