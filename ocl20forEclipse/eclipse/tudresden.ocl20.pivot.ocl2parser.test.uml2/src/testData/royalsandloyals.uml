@@ -289,7 +289,7 @@
             <ownedLiteral xmi:id="_Blk-UMnSEd23VbTmZ6CCEw" name="silver"/>
             <ownedLiteral xmi:id="_C_ILMMnSEd23VbTmZ6CCEw" name="gold"/>
           </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="_6yDKoI5WEd6qu66OCtErAw" name="LoyaltyAccount Transaction" memberEnd="_6yDKoY5WEd6qu66OCtErAw _6yDKoo5WEd6qu66OCtErAw">
+          <packagedElement xmi:type="uml:Association" xmi:id="_6yDKoI5WEd6qu66OCtErAw" name="Customer CustomerCard" memberEnd="_6yDKoY5WEd6qu66OCtErAw _6yDKoo5WEd6qu66OCtErAw">
             <ownedEnd xmi:id="_6yDKoY5WEd6qu66OCtErAw" name="owner" type="_VW-hEMVEEd2gxo2Yyu8isA" association="_6yDKoI5WEd6qu66OCtErAw"/>
             <ownedEnd xmi:id="_6yDKoo5WEd6qu66OCtErAw" name="cards" type="_fBpSwMVIEd2gxo2Yyu8isA" association="_6yDKoI5WEd6qu66OCtErAw">
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6yDKo45WEd6qu66OCtErAw" value="*"/>

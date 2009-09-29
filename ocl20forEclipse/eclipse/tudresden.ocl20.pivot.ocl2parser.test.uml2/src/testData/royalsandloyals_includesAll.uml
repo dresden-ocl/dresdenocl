@@ -232,7 +232,9 @@
             <ownedEnd xmi:id="_lVke4MktEd2S2cuzoMKaDg" name="memberships" type="_ktNNcMkkEd2S2cuzoMKaDg" association="_fWAwMMktEd2S2cuzoMKaDg">
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uQ4NAMktEd2S2cuzoMKaDg" value="*"/>
             </ownedEnd>
-            <ownedEnd xmi:id="_yHf5QMktEd2S2cuzoMKaDg" name="currentLevel" type="_8fH4kMkmEd2S2cuzoMKaDg" association="_fWAwMMktEd2S2cuzoMKaDg"/>
+            <ownedEnd xmi:id="_yHf5QMktEd2S2cuzoMKaDg" name="currentLevel" type="_8fH4kMkmEd2S2cuzoMKaDg" association="_fWAwMMktEd2S2cuzoMKaDg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dg2g8KzgEd6NLPStmq80ag" value="*"/>
+            </ownedEnd>
           </packagedElement>
           <packagedElement xmi:type="uml:Association" xmi:id="_eiu8QMn1Ed2R-LEScdZDXg" name="ProgramPartner Services" memberEnd="_gcCAMMn1Ed2R-LEScdZDXg _g-5csMn1Ed2R-LEScdZDXg">
             <ownedEnd xmi:id="_gcCAMMn1Ed2R-LEScdZDXg" name="partner" type="_ODIWQMn1Ed2R-LEScdZDXg" association="_eiu8QMn1Ed2R-LEScdZDXg"/>
