@@ -38,6 +38,9 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaOclInstanceAdapterFactory;
 
 /**
  * <p>
@@ -56,59 +59,51 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *            The adapted model instance object of this
-	 *            {@link OclSortedCollection}.
+	 *          The adapted model instance object of this
+	 *          {@link OclSortedCollection}.
 	 */
-	public JavaOclSortedCollection(Collection<T> adaptee) {
-		super(adaptee);
+	public JavaOclSortedCollection(
+			IModelInstanceCollection<IModelInstanceElement> adaptedCollection) {
+
+		super(adaptedCollection);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
 	 * #at(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public T at(OclInteger index) {
 
 		T result;
 
+		// FIXME Michael: How to get an instance of T? -> checkMethod
 		/* Check if this collection is undefined. */
 		if (isOclUndefined().isTrue()) {
-			result = (T) new JavaOclRoot(null);
+			result = (T) new JavaOclAny(null);
 			result.setUndefinedreason(getUndefinedreason());
 		}
 
 		/* Else check if the given index is undefined. */
 		else if (index.isOclUndefined().isTrue()) {
-			result = (T) new JavaOclRoot(null);
+			result = (T) new JavaOclAny(null);
 			result.setUndefinedreason(index.getUndefinedreason());
 		}
 
 		/* Else compute the result. */
 		else {
 
-			List<T> adaptedCollection;
 			int intIndex;
-
-			/* Get the adapted collection. */
-			if (!(this.getAdaptee() instanceof List)) {
-				adaptedCollection = new ArrayList<T>((Collection<T>) this
-						.getAdaptee());
-			}
-
-			else {
-				adaptedCollection = (List<T>) this.getAdaptee();
-			}
-
-			intIndex = ((Number) index.getAdaptee()).intValue();
 
 			/* Try to get the element of the given index. */
 			try {
-				return (T) adaptedCollection.get(intIndex - 1);
+				IModelInstanceElement element =
+						((List<IModelInstanceElement>) imiCollection.getCollection())
+								.get(intIndex - 1);
+				result =
+						(T) JavaOclInstanceAdapterFactory.INSTANCE.createOclRoot(element);
 			}
-
+			// TODO Michael: is this OclInvalid? -> yes
 			catch (IndexOutOfBoundsException e) {
 
 				String msg;
@@ -116,7 +111,7 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 				msg = "Index for at() out of bounds for Collection ";
 				msg += this.toString();
 
-				result = (T) new JavaOclRoot(null);
+				result = (T) new JavaOclAny(null);
 				result.setUndefinedreason(msg);
 			}
 		}
@@ -126,31 +121,27 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
 	 * #first()
 	 */
 	public T first() {
+
 		return this.at(new JavaOclInteger(1));
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
 	 * #last()
 	 */
 	public T last() {
+
 		return this.at(this.size());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
 	 * #indexOf(java.lang.Object)
 	 */
 	public OclInteger indexOf(T anObject) {
@@ -172,19 +163,10 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 		/* Else compute the result. */
 		else {
 			int intResult;
-			List<T> adaptedList;
 
-			/* Copy the adaptee of this collection into a list. */
-			if (!(this.getAdaptee() instanceof ArrayList)) {
-				adaptedList = new ArrayList<T>((Collection<T>) this
-						.getAdaptee());
-			}
-
-			else {
-				adaptedList = (List<T>) this.getAdaptee();
-			}
-
-			intResult = adaptedList.indexOf(anObject) + 1;
+			intResult =
+					((List<IModelInstanceElement>) imiCollection.getCollection())
+							.indexOf(anObject) + 1;
 
 			if (intResult > 0) {
 				result = new JavaOclInteger(intResult);
@@ -202,9 +184,7 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
 	 * #union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence)
 	 */
 	public OclSequence<T> union(OclSequence<T> aCollection) {
@@ -224,12 +204,14 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 
 		/* Else compute the result. */
 		else {
-			ArrayList<T> resultList;
+			Collection<IModelInstanceElement> resultCollection;
 
-			resultList = new ArrayList<T>((List<T>) this.getAdaptee());
-			resultList.addAll((Collection<T>) aCollection.getAdaptee());
+			resultCollection = imiCollection.getCollection();
+			resultCollection
+					.addAll((Collection<? extends IModelInstanceElement>) aCollection
+							.getAdaptedCollection());
 
-			result = new JavaOclSequence<T>(resultList);
+			result = new JavaOclSequence<T>(resultCollection);
 		}
 
 		return result;

@@ -51,6 +51,7 @@ import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
  * 
  * @author Ronny Brandt
  */
+// FIXME Michael: needed?
 public class JavaOclCollectionType extends JavaOclType implements
 		OclCollectionType {
 

@@ -84,7 +84,7 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #invokeOperation(java.lang.String,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
 	 */
@@ -98,7 +98,7 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #oclIsInvalid()
 	 */
 	@Override
@@ -110,7 +110,7 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	@Override

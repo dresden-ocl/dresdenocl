@@ -30,9 +30,11 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 
 /**
  * <p>
@@ -41,25 +43,32 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
  * 
  * @author Ronny Brandt
  */
-public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
+public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
+	private IModelInstanceBoolean imiBoolean;
+	
 	/* The false instance. */
-	private static OclBoolean FALSE = new JavaOclBoolean(false);
+	private static OclBoolean FALSE =
+			new JavaOclBoolean(BasisJavaModelInstanceFactory
+					.createModelInstanceBoolean(false));
 
 	/* The true instance. */
-	private static OclBoolean TRUE = new JavaOclBoolean(true);
+	private static OclBoolean TRUE =
+			new JavaOclBoolean(BasisJavaModelInstanceFactory
+					.createModelInstanceBoolean(true));
 
 	/**
 	 * <p>
 	 * Instantiates a new {@link OclBoolean}.
 	 * </p>
 	 * 
-	 * @param adaptee
-	 *          The adapted element of this {@link OclBoolean}.
+	 * @param imiBoolean
+	 *          the {@link IModelInstanceBoolean} to be adapted
 	 */
-	private JavaOclBoolean(Boolean adaptee) {
-
-		super(adaptee);
+	private JavaOclBoolean(IModelInstanceBoolean imiBoolean) {
+		super(imiBoolean);
+		
+		this.imiBoolean = imiBoolean;
 	}
 
 	/**
@@ -102,15 +111,9 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		checkUndefinedAndInvalid(this, aBoolean);
 
-		else if (aBoolean.isOclUndefined().isTrue()) {
-			result = aBoolean;
-		}
-
-		else if (!this.isTrue() || !aBoolean.isTrue()) {
+		if (!this.isTrue() || !aBoolean.isTrue()) {
 			result = FALSE;
 		}
 
@@ -125,19 +128,16 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#ifThenElse
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny,
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	public OclRoot ifThenElse(OclRoot thenStatement, OclRoot elseStatement) {
+	public OclAny ifThenElse(OclAny thenStatement, OclAny elseStatement) {
 
-		OclRoot result;
+		OclAny result;
 
-		/* Check if this boolean is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = JavaOclInvalid.getInstance();
-		}
+		checkUndefinedAndInvalid(this);
 
-		else if (this.isTrue()) {
+		if (this.isTrue()) {
 			result = thenStatement;
 		}
 
@@ -157,14 +157,9 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
-		/* Check if this boolean is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		checkUndefinedAndInvalid(this);
 
-		else {
-			result = this.not().or(this.and(aBoolean));
-		}
+		result = this.not().or(this.and(aBoolean));
 
 		return result;
 	}
@@ -175,7 +170,7 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 	 */
 	public boolean isTrue() {
 
-		return ((Boolean) this.getAdaptee()).booleanValue();
+		return imiBoolean.getBoolean();
 	}
 
 	/*
@@ -186,11 +181,9 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
-		if (isOclUndefined().isTrue()) {
-			result = this;
-		}
+		checkUndefinedAndInvalid(this);
 
-		else if (this.isTrue()) {
+		if (this.isTrue()) {
 			result = FALSE;
 		}
 
@@ -219,20 +212,10 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 		OclBoolean result;
 
-		if (this.isTrue()) {
+		checkUndefinedAndInvalid(this, aBoolean);
+
+		if (this.isTrue() || aBoolean.isTrue()) {
 			result = TRUE;
-		}
-
-		else if (aBoolean.isTrue()) {
-			result = TRUE;
-		}
-
-		else if (isOclUndefined().isTrue()) {
-			result = this;
-		}
-
-		else if (aBoolean.isOclUndefined().isTrue()) {
-			result = aBoolean;
 		}
 
 		else {
@@ -256,14 +239,16 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot anObject) {
+	public OclBoolean isEqualTo(OclAny anObject) {
 
 		OclBoolean result;
 
+		// TODO Michael: Is an equality test on undefined objects undefined or false?
+		checkUndefinedAndInvalid(this, anObject);
+		
 		/* Check if the given Object is not a boolean. */
 		if (!(anObject instanceof OclBoolean)) {
 			result = FALSE;
@@ -274,15 +259,7 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 
 			aBoolean = (OclBoolean) anObject;
 
-			if (this.isOclUndefined().isTrue()) {
-				result = this;
-			}
-
-			else if (aBoolean.isOclUndefined().isTrue()) {
-				result = aBoolean;
-			}
-
-			if (this == anObject) {
+			if (this == aBoolean) {
 				result = TRUE;
 			}
 
@@ -294,14 +271,10 @@ public class JavaOclBoolean extends JavaOclAny implements OclBoolean {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #getType()
-	 */
-	@Override
-	public OclType getType() {
+	public <T extends OclAny> OclSet<T> asSet() {
 
-		return JavaOclPrimitiveType.getType("Boolean");
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }

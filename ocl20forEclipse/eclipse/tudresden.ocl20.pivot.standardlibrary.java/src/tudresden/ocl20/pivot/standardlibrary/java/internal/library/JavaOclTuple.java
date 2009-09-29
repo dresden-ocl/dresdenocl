@@ -63,7 +63,7 @@ public class JavaOclTuple extends JavaOclAny implements OclTuple {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	@Override
@@ -106,7 +106,7 @@ public class JavaOclTuple extends JavaOclAny implements OclTuple {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #getPropertyValue(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")

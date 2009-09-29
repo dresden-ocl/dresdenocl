@@ -18,60 +18,58 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.factory;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceTypeObject;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBag;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollectionType;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclEnumLiteral;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclEnumType;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInteger;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInvalid;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclOrderedSet;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclPrimitiveType;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSequence;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSet;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclString;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclTuple;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclTupleType;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclType;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclVoid;
 
 /**
  * <p>
  * The {@link JavaStandardLibraryFactory} provides methods to create
- * {@link OclRoot} required during OCL interpretation.
+ * {@link OclAny} required during OCL interpretation.
  * </p>
  */
 public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
@@ -80,13 +78,17 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	public static JavaStandardLibraryFactory INSTANCE =
 			new JavaStandardLibraryFactory();
 
+	private BasisJavaModelInstanceFactory modelInstanceFactory =
+			new BasisJavaModelInstanceFactory();
+
+	// TODO Michael: Caching!
 	/**
-	 * Contains the already adapted {@link OclRoot} identified by their adapted
+	 * Contains the already adapted {@link OclAny} identified by their adapted
 	 * {@link Object}. <strong>This is a {@link WeakHashMap}! If an {@link Object}
 	 * is disposed, its adapter can also be disposed.</strong>
 	 */
-	private Map<Object, OclRoot> myCachedAdaptedObjects =
-			new WeakHashMap<Object, OclRoot>();
+	private Map<Object, OclAny> myCachedAdaptedObjects =
+			new WeakHashMap<Object, OclAny>();
 
 	/**
 	 * <p>
@@ -103,17 +105,33 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclBag(java.util.List)
 	 */
-	public <T extends OclRoot> OclBag<T> createOclBag(List<T> elements) {
+	public <T extends OclAny, U> OclBag<T> createOclBag(final List<U> elements)
+			throws TypeNotFoundInModelException {
 
-		return new JavaOclBag<T>(elements);
+		OclBag<T> result;
+
+		List<IModelInstanceElement> imiElements =
+				new LinkedList<IModelInstanceElement>();
+
+		for (U element : elements) {
+			imiElements.add(modelInstanceFactory.createModelInstanceElement(element));
+		}
+
+		IModelInstanceCollection<IModelInstanceElement> imiCollection =
+				modelInstanceFactory.createModelInstanceCollection(imiElements,
+						OclCollectionTypeKind.BAG);
+
+		result = new JavaOclBag<T>(imiCollection);
+
+		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
-	 * IStandardLibraryFactory#createOclBoolean(boolean)
+	 * IStandardLibraryFactory#createOclBoolean(java.lang.Boolean)
 	 */
-	public OclBoolean createOclBoolean(boolean value) {
+	public OclBoolean createOclBoolean(final Boolean value) {
 
 		return JavaOclBoolean.getInstance(value);
 	}
@@ -121,9 +139,38 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IStandardLibraryFactory
+	 * #createOclBoolean(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * .types.IModelInstanceBoolean)
+	 */
+	public OclBoolean createOclBoolean(final IModelInstanceBoolean value) {
+
+		return JavaOclBoolean.getInstance(value.getBoolean());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclEnumLiteral(java.lang.Enum)
 	 */
-	public OclEnumLiteral createOclEnumLiteral(Enum<?> value) {
+	public OclEnumLiteral createOclEnumLiteral(final Enum<?> value) {
+
+		// FIXME Michael: create ModelInstanceEnumLiteral? -> Method superfluous?
+		IModelInstanceEnumerationLiteral imiEnumLiteral =
+				BasisJavaModelInstanceFactory.createModelInstanceInteger(value);
+
+		return new JavaOclEnumLiteral(imiEnumLiteral);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IStandardLibraryFactory
+	 * #createOclEnumLiteral(tudresden.ocl20.pivot.modelbus.
+	 * modelinstance.types.IModelInstanceEnumerationLiteral)
+	 */
+	public OclEnumLiteral createOclEnumLiteral(
+			final IModelInstanceEnumerationLiteral value) {
 
 		return new JavaOclEnumLiteral(value);
 	}
@@ -131,9 +178,24 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
-	 * IStandardLibraryFactory#createOclInteger(int)
+	 * IStandardLibraryFactory#createOclInteger(java.lang.Long)
 	 */
-	public OclInteger createOclInteger(int value) {
+	public OclInteger createOclInteger(final Long value) {
+
+		IModelInstanceInteger imiInteger =
+				BasisJavaModelInstanceFactory.createModelInstanceInteger(value);
+
+		return new JavaOclInteger(imiInteger);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IStandardLibraryFactory
+	 * #createOclInteger(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * .types.IModelInstanceInteger)
+	 */
+	public OclInteger createOclInteger(final IModelInstanceInteger value) {
 
 		return new JavaOclInteger(value);
 	}
@@ -141,125 +203,79 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
-	 * IStandardLibraryFactory#createOclInvalid(java.lang.String)
-	 */
-	public OclInvalid createOclInvalid(String reason) {
-
-		OclInvalid result;
-
-		result = JavaOclInvalid.getInstance();
-		result.setUndefinedreason(reason);
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
-	 * IStandardLibraryFactory#createOclObject(java.lang.Object)
-	 */
-	public OclObject createOclObject(Object object) {
-
-		OclObject result;
-
-		/* Eventually use a cached result. */
-		result = (OclObject) this.myCachedAdaptedObjects.get(object);
-
-		/* Else create a new object. */
-		if (result == null) {
-			result = new JavaOclObject(object);
-
-			/* Cache the created object. */
-			this.myCachedAdaptedObjects.put(object, result);
-		}
-		// no else.
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclOrderedSet(java.util.List)
 	 */
-	public <T extends OclRoot> OclOrderedSet<T> createOclOrderedSet(
-			List<T> elements) {
+	public <T extends OclAny, U> OclOrderedSet<T> createOclOrderedSet(
+			final List<U> elements) {
 
 		OclOrderedSet<T> result;
-		List<T> elementList;
 
-		elementList = new ArrayList<T>();
+		List<IModelInstanceElement> imiElements =
+				new LinkedList<IModelInstanceElement>();
 
-		for (T anElment : elements) {
-			if (!elementList.contains(anElment)) {
-				elementList.add(anElment);
-			}
+		for (U element : elements) {
+			imiElements.add(modelInstanceFactory.createModelInstanceElement(element));
 		}
 
-		result = new JavaOclOrderedSet<T>(elementList);
+		IModelInstanceCollection<IModelInstanceElement> imiCollection =
+				modelInstanceFactory.createModelInstanceCollection(imiElements,
+						OclCollectionTypeKind.BAG);
+
+		result = new JavaOrderedSet<T>(imiCollection);
 
 		return result;
 	}
 
-	public OclRoot createOclRoot(Object object) {
+	@SuppressWarnings("unchecked")
+	public OclAny createOclAny(final IModelInstanceElement modelInstanceElement) {
 
-		OclRoot result;
+		OclAny result;
 
-		if (object == null) {
+		// TODO Michael: OclVoid is handled internally -> what should one do here?
+		if (modelInstanceElement == null) {
 			result = JavaOclVoid.getInstance();
 		}
 
-		else if (object instanceof Integer) {
-			result = this.createOclInteger((Integer) object);
+		else if (modelInstanceElement instanceof IModelInstanceInteger) {
+			result =
+					this.createOclInteger((IModelInstanceInteger) modelInstanceElement);
 		}
 
-		else if (object instanceof Float) {
-			result = this.createOclReal((Float) object);
+		else if (modelInstanceElement instanceof IModelInstanceReal) {
+			result = this.createOclReal((IModelInstanceReal) modelInstanceElement);
 		}
 
-		else if (object instanceof Boolean) {
-			result = this.createOclBoolean((Boolean) object);
+		else if (modelInstanceElement instanceof IModelInstanceBoolean) {
+			result =
+					this.createOclBoolean((IModelInstanceBoolean) modelInstanceElement);
 		}
 
-		else if (object instanceof String) {
-			result = this.createOclString((String) object);
+		else if (modelInstanceElement instanceof IModelInstanceString) {
+			result =
+					this.createOclString((IModelInstanceString) modelInstanceElement);
 		}
 
-		else if (object.getClass().isEnum()) {
-			result = this.createOclEnumLiteral((Enum<?>) object);
+		else if (modelInstanceElement instanceof IModelInstanceEnumerationLiteral) {
+			result =
+					this
+							.createOclEnumLiteral((IModelInstanceEnumerationLiteral) modelInstanceElement);
 		}
 
 		/*
 		 * If the property is a collection, each element must be adapted for itself.
 		 */
-		else if (object instanceof Collection<?>) {
+		else if (modelInstanceElement instanceof IModelInstanceCollection<?>) {
 
-			Collection<?> aCollection;
-			List<OclRoot> elementList;
+			IModelInstanceCollection<IModelInstanceElement> collection =
+					(IModelInstanceCollection<IModelInstanceElement>) modelInstanceElement;
 
-			aCollection = (Collection<?>) object;
-			elementList = new ArrayList<OclRoot>();
-
-			for (Object anElement : aCollection) {
-
-				OclRoot adaptedElement;
-
-				/* Adapt anElement to OclRoot. */
-				adaptedElement = this.createOclRoot(anElement);
-
-				elementList.add(adaptedElement);
-			}
-
-			result = new JavaOclBag<OclRoot>(elementList);
+			result = new JavaOclBag<OclAny>(collection.getCollection());
 		}
 
-		else if (object instanceof OclRoot) {
-			result = (OclRoot) object;
-		}
-
-		else {
-			result = this.createOclObject(object);
-		}
+		// TODO Michael: Should model elements considered as well?
+		// else {
+		// result = this.createOclObject(modelInstanceElement);
+		// }
 
 		return result;
 	}
@@ -267,9 +283,24 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
-	 * IStandardLibraryFactory#createOclReal(java.lang.Float)
+	 * IStandardLibraryFactory#createOclReal(java.lang.Number)
 	 */
-	public OclReal createOclReal(Float value) {
+	public OclReal createOclReal(final Number value) {
+
+		IModelInstanceReal imiReal =
+				BasisJavaModelInstanceFactory.createModelInstanceReal(value);
+
+		return new JavaOclReal(imiReal);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IStandardLibraryFactory
+	 * #createOclReal(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * .types.IModelInstanceReal)
+	 */
+	public OclReal createOclReal(final IModelInstanceReal value) {
 
 		return new JavaOclReal(value);
 	}
@@ -279,9 +310,25 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclSequence(java.util.List)
 	 */
-	public <T extends OclRoot> OclSequence<T> createOclSequence(List<T> elements) {
+	public <T extends OclAny, U> OclSequence<T> createOclSequence(
+			final List<U> elements) {
 
-		return new JavaOclSequence<T>(elements);
+		OclSequence<T> result;
+
+		List<IModelInstanceElement> imiElements =
+				new LinkedList<IModelInstanceElement>();
+
+		for (U element : elements) {
+			imiElements.add(modelInstanceFactory.createModelInstanceElement(element));
+		}
+
+		IModelInstanceCollection<IModelInstanceElement> imiCollection =
+				modelInstanceFactory.createModelInstanceCollection(imiElements,
+						OclCollectionTypeKind.BAG);
+
+		result = new JavaOclSequence<T>(imiCollection);
+
+		return result;
 	}
 
 	/*
@@ -289,9 +336,24 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclSet(java.util.List)
 	 */
-	public <T extends OclRoot> OclSet<T> createOclSet(List<T> elements) {
+	public <T extends OclAny, U> OclSet<T> createOclSet(final List<U> elements) {
 
-		return new JavaOclSet<T>(new HashSet<T>(elements));
+		OclSet<T> result;
+
+		List<IModelInstanceElement> imiElements =
+				new LinkedList<IModelInstanceElement>();
+
+		for (U element : elements) {
+			imiElements.add(modelInstanceFactory.createModelInstanceElement(element));
+		}
+
+		IModelInstanceCollection<IModelInstanceElement> imiCollection =
+				modelInstanceFactory.createModelInstanceCollection(imiElements,
+						OclCollectionTypeKind.BAG);
+
+		result = new JavaOclSet<T>(imiCollection);
+
+		return result;
 	}
 
 	/*
@@ -299,7 +361,22 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclString(java.lang.String)
 	 */
-	public OclString createOclString(String value) {
+	public OclString createOclString(final String value) {
+
+		IModelInstanceString imiString =
+				BasisJavaModelInstanceFactory.createModelInstanceString(value);
+
+		return new JavaOclString(imiString);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IStandardLibraryFactory
+	 * #createOclString(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * .types.IModelInstanceString)
+	 */
+	public OclString createOclString(final IModelInstanceString value) {
 
 		return new JavaOclString(value);
 	}
@@ -309,12 +386,12 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclTuple(java.util.List, java.util.List)
 	 */
-	public OclTuple createOclTuple(List<String> names, List<OclRoot> values) {
+	public OclTuple createOclTuple(final List<IModelInstanceString> names,
+			final List<IModelInstanceElement> values) {
 
 		OclTuple result;
-		Map<String, OclRoot> elements;
-
-		elements = new HashMap<String, OclRoot>();
+		Map<IModelInstanceString, IModelInstanceElement> elements =
+				new HashMap<IModelInstanceString, IModelInstanceElement>();
 
 		for (int index = 0; index < Math.min(names.size(), values.size()); index++) {
 			elements.put(names.get(index), values.get(index));
@@ -328,47 +405,48 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
-	 * IStandardLibraryFactory
-	 * #createOclType(tudresden.ocl20.pivot.pivotmodel.Type,
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance)
+	 * IStandardLibraryFactory#createOclTupleObject(java.util.List,
+	 * java.util.List)
 	 */
-	public OclType createOclType(Type type, IModelInstance modelInstance) {
+	public OclTuple createOclTupleObject(final List<String> names,
+			final List<Object> values) {
 
-		OclType result;
+		OclTuple result;
+		Map<IModelInstanceString, IModelInstanceElement> elements =
+				new HashMap<IModelInstanceString, IModelInstanceElement>();
 
-		/*
-		 * Check if the referred type is a type of the OCL standard library and try
-		 * to adapt it.
-		 */
-		if (type instanceof CollectionType) {
-			result = JavaOclCollectionType.getType(type.getName());
+		for (int index = 0; index < Math.min(names.size(), values.size()); index++) {
+			IModelInstanceString imiString =
+					BasisJavaModelInstanceFactory.createModelInstanceString(names
+							.get(index));
+			IModelInstanceElement imiElement =
+					modelInstanceFactory.createModelInstanceElement(values.get(index));
+			elements.put(imiString, imiElement);
 		}
 
-		else if (type instanceof Enumeration) {
-			result = JavaOclEnumType.getType(type.getName());
-		}
+		result = new JavaOclTuple(elements);
 
-		else if (type instanceof PrimitiveType) {
-			result = JavaOclPrimitiveType.getPrimitiveType(type.getName());
-		}
+		return result;
+	}
 
-		else if (type instanceof TupleType) {
-			result = JavaOclTupleType.getType(type.getName());
-		}
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * IStandardLibraryFactory
+	 * #createOclType(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public <T extends OclAny> OclType<T> createOclType(final Type type,
+			final T oclAny) {
 
-		/* Else try to get a user defined type from the model. */
-		else {
-			IModelInstanceTypeObject modelInstanceTypeObject;
-			modelInstanceTypeObject = modelInstance.findModelTypeObject(type);
+		OclType<T> result;
 
-			if (modelInstanceTypeObject != null) {
-				result = new JavaOclType(modelInstanceTypeObject.getAdaptedType());
+		result = new BaseOclType<T>() {
+
+			public Type getType() {
+
+				return type;
 			}
-
-			else {
-				result = null;
-			}
-		}
+		};
 
 		return result;
 	}
@@ -379,9 +457,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * IStandardLibraryFactory
 	 * #createOclUndefined(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
-	public OclRoot createOclUndefined(Type type, String reason) {
+	public OclAny createOclUndefined(final Type type, final String reason) {
 
-		OclRoot result;
+		OclAny result;
 
 		result = null;
 
@@ -430,5 +508,96 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		result.setUndefinedreason(reason);
 
 		return result;
+	}
+
+	private abstract class BaseOclType<U extends OclAny> implements OclType<U> {
+
+		public <T extends OclAny> OclSet<T> asSet() {
+
+			throw new UnsupportedOperationException(
+					"asSet() is not supported on meta-type OclType");
+		}
+
+		public String getUndefinedreason() {
+
+			throw new UnsupportedOperationException(
+					"getUndefinedreason() is not supported on meta-type OclType");
+		}
+
+		public OclAny invokeOperation(Operation operation, OclAny... parameters) {
+
+			throw new UnsupportedOperationException(
+					"invokeOperation(Operation operation, OclAny... parameters) is not supported on meta-type OclType");
+		}
+
+		/**
+		 * Overridden to allow equality tests on OclTypes.
+		 */
+		public OclBoolean isEqualTo(OclType<OclAny> type2) {
+
+			return createOclBoolean(this.getType().equals(type2));
+		}
+
+		/**
+		 * Overridden to allow equality tests on OclTypes.
+		 */
+		public OclBoolean isNotEqualTo(OclType<OclAny> type2) {
+
+			return isEqualTo(type2).not();
+		}
+
+		public OclBoolean isOclUndefined() {
+
+			throw new UnsupportedOperationException(
+					"isOclUndefined() is not supported on meta-type OclType");
+		}
+
+		public <T extends OclAny> T oclAsType(OclType<T> type) {
+
+			throw new UnsupportedOperationException(
+					"oclAsType(OclType<T> type) is not supported on meta-type OclType");
+		}
+
+		public OclBoolean oclIsInvalid() {
+
+			throw new UnsupportedOperationException(
+					"oclIsInvalid() is not supported on meta-type OclType");
+		}
+
+		public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
+
+			throw new UnsupportedOperationException(
+					"oclIsKindOf(OclType<T> typespec) is not supported on meta-type OclType");
+		}
+
+		public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
+
+			throw new UnsupportedOperationException(
+					"oclIsTypeOf(OclType<T> typespec) is not supported on meta-type OclType");
+		}
+
+		public void setUndefinedreason(String undefinedreason) {
+
+			throw new UnsupportedOperationException(
+					"setUndefinedreason(String undefinedreason) is not supported on meta-type OclType");
+		}
+
+		public OclBoolean isEqualTo(OclAny object2) {
+
+			throw new UnsupportedOperationException(
+					"isEqualTo(OclAny object2) is not supported on meta-type OclType");
+		}
+
+		public OclBoolean isNotEqualTo(OclAny object2) {
+
+			throw new UnsupportedOperationException(
+					"isNotEqualTo(OclAny object2) is not supported on meta-type OclType");
+		}
+
+		public IModelInstanceElement getModelInstanceElement() {
+
+			throw new UnsupportedOperationException(
+					"getModelInstanceElement() is not supported on meta-type OclType");
+		}
 	}
 }

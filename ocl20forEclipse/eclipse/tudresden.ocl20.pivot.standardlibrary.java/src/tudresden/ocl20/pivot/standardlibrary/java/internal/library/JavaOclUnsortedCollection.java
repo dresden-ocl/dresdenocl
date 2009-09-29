@@ -39,6 +39,11 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
 
 /**
  * <p>
@@ -46,27 +51,20 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection;
  * </p>
  * 
  * @author Ronny Brandt
+ * @author Michael Thiele
  */
 @SuppressWarnings("unchecked")
 public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 		JavaOclCollection<T> implements OclUnsortedCollection<T> {
 
-	/**
-	 * <p>
-	 * Instantiates a new {@link JavaOclUnsortedCollection}.
-	 * </p>
-	 * 
-	 * @param adaptee
-	 *            The adaptable {@link Collection} of this
-	 *            {@link JavaOclUnsortedCollection}.
-	 */
-	public JavaOclUnsortedCollection(Collection<T> adaptee) {
-		super(adaptee);
+	public JavaOclUnsortedCollection(
+			IModelInstanceCollection<IModelInstanceElement> adaptedCollection) {
+
+		super(adaptedCollection);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection
 	 * #union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
@@ -88,12 +86,17 @@ public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 
 		/* Else compute the result. */
 		else {
-			ArrayList<T> resultList;
+			Collection<IModelInstanceElement> resultList =
+					new ArrayList<IModelInstanceElement>();
 
-			resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
-			resultList.addAll((Collection<T>) aBag.getAdaptee());
+			resultList.addAll(this.imiCollection.getCollection());
+			resultList.addAll(aBag.getAdaptedCollection().getCollection());
 
-			result = new JavaOclBag<T>(resultList);
+			IModelInstanceCollection<IModelInstanceElement> resultIMICollection =
+					BasisJavaModelInstanceFactory.createModelInstanceCollection(
+							resultList, PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
+
+			result = new JavaOclBag<T>(resultIMICollection);
 		}
 
 		return result;
@@ -101,7 +104,6 @@ public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection
 	 * #intersection(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
@@ -117,26 +119,34 @@ public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 		}
 
 		/* Else check if the given set is undefined. */
-		if (aSet.isOclUndefined().isTrue()) {
+		else if (aSet.isOclUndefined().isTrue()) {
 			result = aSet;
 		}
 
 		/* Else compute the result. */
 		else {
-			List<T> thisSetAsList;
-			List<T> resultList;
+			List<IModelInstanceElement> thisSetAsList;
+			List<IModelInstanceElement> resultList;
 
-			thisSetAsList = new ArrayList<T>((Collection<T>) this.getAdaptee());
-			resultList = new ArrayList<T>();
+			thisSetAsList =
+					new ArrayList<IModelInstanceElement>(this.imiCollection
+							.getCollection());
 
-			for (T anElement : (Collection<T>) aSet.getAdaptee()) {
+			resultList = new ArrayList<IModelInstanceElement>();
+
+			for (IModelInstanceElement anElement : aSet.getAdaptedCollection()
+					.getCollection()) {
 				if (thisSetAsList.contains(anElement)
 						&& !resultList.contains(anElement)) {
 					resultList.add(anElement);
 				}
 			}
 
-			return new JavaOclSet<T>(new HashSet<T>(resultList));
+			IModelInstanceCollection<IModelInstanceElement> resultIMICollection =
+					BasisJavaModelInstanceFactory.createModelInstanceCollection(
+							resultList, PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
+
+			result = new JavaOclSet<T>(resultIMICollection);
 		}
 
 		return result;

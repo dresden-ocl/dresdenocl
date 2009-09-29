@@ -81,7 +81,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #getPropertyValue(java.lang.String)
 	 */
 	@Override
@@ -105,7 +105,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #invokeOperation(java.lang.String,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
 	 */
@@ -119,7 +119,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #isOclUndefined()
 	 */
 	@Override
@@ -131,7 +131,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	@Override

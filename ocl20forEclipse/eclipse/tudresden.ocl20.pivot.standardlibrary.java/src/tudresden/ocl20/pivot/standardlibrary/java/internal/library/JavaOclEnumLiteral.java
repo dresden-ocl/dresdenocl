@@ -32,6 +32,7 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceEnumerationLiteral;
 
 /**
  * <p>
@@ -40,6 +41,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
  * 
  * @author Ronny Brandt
  */
+// FIXME Michael: Should inherit from OclAny/OclModelInstanceObject/OclLibraryObject?
 public class JavaOclEnumLiteral extends JavaOclAny implements OclEnumLiteral {
 
 	/**
@@ -50,19 +52,8 @@ public class JavaOclEnumLiteral extends JavaOclAny implements OclEnumLiteral {
 	 * @param adaptee
 	 *            The adapted element of this {@link JavaOclEnumLiteral}.
 	 */
-	public JavaOclEnumLiteral(Object adaptee) {
-		super(adaptee);
+	public JavaOclEnumLiteral(IModelInstanceEnumerationLiteral imiEnumerationLiteral) {
+		super(imiEnumerationLiteral);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #getType()
-	 */
-	@Override
-	public OclType getType() {
-		return new JavaOclEnumType(adaptee.getClass());
-	}
 }

@@ -32,16 +32,25 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
 import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -54,9 +63,6 @@ import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
 public class JavaOclOrderedSet<T extends OclRoot> extends
 		JavaOclSortedCollection<T> implements OclOrderedSet<T> {
 
-	/** The type of this JavaOclOrderedSet. */
-	private OclType type;
-
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclOrderedSet} set.
@@ -65,24 +71,12 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	 * @param adaptee
 	 *            The adapted {@link Collection}.
 	 */
-	public JavaOclOrderedSet(List<T> adaptee) {
-		super(adaptee);
-
-		if (adaptee != null) {
-			List<T> adaptedList;
-
-			adaptedList = new ArrayList<T>();
-
-			for (T anObject : (Collection<T>) this.adaptee) {
-
-				if (!adaptedList.contains(anObject)) {
-					adaptedList.add(anObject);
-				}
-				// no else.
-			}
-
-			this.adaptee = adaptedList;
-		}
+	public JavaOclOrderedSet(IModelInstanceCollection<IModelInstanceElement> adaptedCollection) {
+		super(adaptedCollection);
+		// TODO Michael: do this for all specific collections
+		if (!adaptedCollection.isUnique() || !adaptedCollection.isOrdered())
+			this.imiCollection = BasisJavaModelInstanceFactory.createModelInstanceCollection(adaptedCollection.getCollection(), PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
+		
 	}
 
 	/*
@@ -563,5 +557,77 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 		// no else.
 
 		return this.type;
+	}
+
+	public IModelInstanceCollection<IModelInstanceElement> getAdaptedCollection() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public OclRoot getPropertyValue(String propertyName)
+			throws NoSuchFieldException, IllegalAccessException {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public OclRoot getPropertyValue(String propertyName, OclRoot... qualifier)
+			throws NoSuchFieldException, IllegalAccessException {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public OclBag<OclRoot> getPropertyValueAsBag(String propertyName)
+			throws NoSuchFieldException, IllegalAccessException {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public OclOrderedSet<OclRoot> getPropertyValueAsOrderedSet(String propertyName)
+			throws NoSuchFieldException, IllegalAccessException {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public OclSequence<OclRoot> getPropertyValueAsSequence(String propertyName)
+			throws NoSuchFieldException, IllegalAccessException {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public OclSet<OclRoot> getPropertyValueAsSet(String propertyName)
+			throws NoSuchFieldException, IllegalAccessException {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public <T extends OclRoot> OclSet<T> asSet() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public <T extends OclRoot> T oclAsType(Type type) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public OclBoolean oclIsKindOf(OclType typespec) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public OclBoolean oclIsTypeOf(OclType typespec) {
+
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

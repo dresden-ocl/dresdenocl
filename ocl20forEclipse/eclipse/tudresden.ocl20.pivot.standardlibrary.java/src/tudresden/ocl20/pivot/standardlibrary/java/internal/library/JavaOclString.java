@@ -248,7 +248,7 @@ public class JavaOclString extends JavaOclAny implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	@Override

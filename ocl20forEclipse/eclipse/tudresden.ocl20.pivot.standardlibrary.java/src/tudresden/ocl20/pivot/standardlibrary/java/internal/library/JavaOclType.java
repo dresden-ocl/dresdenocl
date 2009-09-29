@@ -44,7 +44,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
  * 
  * @author Ronny Brandt
  */
-public class JavaOclType extends JavaOclRoot implements OclType {
+public class JavaOclType extends JavaOclAny implements OclType {
 
 	/** The predefined types. */
 	protected static Map<String, OclType> predefinedTypes = new HashMap<String, OclType>();
@@ -211,7 +211,7 @@ public class JavaOclType extends JavaOclRoot implements OclType {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #getType()
 	 */
 	@Override

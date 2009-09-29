@@ -40,7 +40,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
  * 
  * @author Ronny Brandt
  */
-public class JavaOclObject extends JavaOclRoot implements OclObject {
+public class JavaOclObject extends JavaOclAny implements OclObject {
 
 	/** The type of this JavaOclObject. */
 	protected OclType type = null;
@@ -61,7 +61,7 @@ public class JavaOclObject extends JavaOclRoot implements OclObject {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #getType()
 	 */
 	@Override
