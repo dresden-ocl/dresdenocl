@@ -38,7 +38,7 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclString extends OclAny {
+public interface OclString extends OclLibraryObject {
 
 	/**
 	 * 

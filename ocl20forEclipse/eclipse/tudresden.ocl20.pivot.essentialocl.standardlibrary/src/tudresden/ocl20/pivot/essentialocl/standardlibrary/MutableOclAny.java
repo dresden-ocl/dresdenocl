@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
 /**
- * The <code>MutableOclRoot</code> interface defines additional methods that may be mixed in by
+ * The <code>MutableOclAny</code> interface defines additional methods that may be mixed in by
  * implementing classes. These methods allow altering property values of an OCL object. This is
  * required if OCL is used in the context of model transformations, e.g, with the QVT language. The
  * operations cover the two cases
@@ -17,7 +17,7 @@ package tudresden.ocl20.pivot.essentialocl.standardlibrary;
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface MutableOclRoot {
+public interface MutableOclAny {
 
   /**
    * Sets the value of a property. In the case of a multivalued property, the whole list is
@@ -35,7 +35,7 @@ public interface MutableOclRoot {
    * @param propertyName the name of the property to set
    * @param propertyValue the new value
    */
-  void setPropertyValue(String propertyName, OclRoot propertyValue);
+  void setPropertyValue(String propertyName, OclAny propertyValue);
 
   /**
    * Adds new values to a multivalued property.
@@ -51,6 +51,6 @@ public interface MutableOclRoot {
    * @param propertyName the name of the property to set
    * @param propertyValue the value to append to the multivalued property
    */
-  void addPropertyValue(String propertyName, OclRoot propertyValue);
+  void addPropertyValue(String propertyName, OclAny propertyValue);
 
 }

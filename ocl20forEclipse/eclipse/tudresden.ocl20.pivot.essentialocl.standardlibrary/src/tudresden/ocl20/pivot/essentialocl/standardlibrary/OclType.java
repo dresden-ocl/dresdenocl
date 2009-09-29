@@ -32,47 +32,26 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.pivotmodel.Type;
+
 /**
  * 
  * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclType extends OclRoot {
+public interface OclType<T extends OclAny> extends OclAny {
 
 	/**
-	 * Gets the name.
+	 * The only method valid for OclType except "=" and "<>". Returns the wrapped
+	 * {@link Type} of the PivotModel.
 	 * 
-	 * @return the name
+	 * @return the wrapped {@link Type} of the PivotModel
 	 */
-	String getName();
+	Type getType();
+	
+	OclBoolean isEqualTo(OclType<OclAny> type2);
+	
+	OclBoolean isNotEqualTo(OclType<OclAny> type2);
 
-	/**
-	 * Determines whether <code>this</code> is either the direct type or one
-	 * of the supertypes of <code>o</code>.
-	 * 
-	 * @param o
-	 * 
-	 * @return true, if <code>this</code> is either the direct type or one of
-	 *         the supertypes of <code>o</code>.
-	 */
-	OclBoolean isOfKind(OclRoot o);
-
-	/**
-	 * 
-	 * @param o
-	 * 
-	 * @return true if <code>this</code> is the type of <code>o</code>
-	 */
-	OclBoolean isOfType(OclRoot o);
-
-	/**
-	 * Creates an instance of this type from object <code>o</code>. Used for
-	 * oclAsType()
-	 * 
-	 * @param o
-	 * 
-	 * @return an instance of this type
-	 */
-	OclRoot createInstance(OclRoot o);
 }

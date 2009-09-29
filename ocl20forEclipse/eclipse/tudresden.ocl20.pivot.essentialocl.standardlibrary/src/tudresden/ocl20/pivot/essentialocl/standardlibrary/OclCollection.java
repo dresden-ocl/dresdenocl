@@ -32,13 +32,16 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+
 /**
  * 
  * 
  * @author Matthias Braeuer
  * @version 1.0 30.03.2007
  */
-public interface OclCollection<T> extends OclObject {
+public interface OclCollection<T extends OclAny> extends OclLibraryObject {
 
 	/**
 	 * 
@@ -132,7 +135,7 @@ public interface OclCollection<T> extends OclObject {
 
 	/**
 	 * 
-	 * @return a {@link OclSequence} that contains all the elements from
+	 * @return a {@link OclSet} that contains all the elements from
 	 *         <code>this</code>, with duplbicates removed.
 	 */
 	OclSet<T> asSet();
@@ -144,14 +147,14 @@ public interface OclCollection<T> extends OclObject {
 	 * @return the cartesian product operation of <code>this</code> and
 	 *         <code>c2</code>.
 	 */
-	<T2 extends OclRoot> OclSet<OclTuple> product(OclCollection<T2> c2);
+	<T2 extends OclAny> OclSet<OclTuple> product(OclCollection<T2> c2);
 
 	/**
 	 * Gets OCL representation of iterator for adapted collection.
 	 * 
 	 * @return the iterator
 	 */
-	OclIterator getIterator();
+	OclIterator<T> getIterator();
 
 	/**
 	 * If the element type is not a collection type, this results in the same
@@ -160,5 +163,12 @@ public interface OclCollection<T> extends OclObject {
 	 * @return the bag containing all the elements of all the elements of
 	 *         <code>this</code>.
 	 */
-	<T2 extends OclRoot> OclCollection<T2> flatten();
+	<T2 extends OclAny> OclCollection<T2> flatten();
+
+	/**
+	 * Returns the adapted collection.
+	 * 
+	 * @return the adapted collection
+	 */
+	IModelInstanceCollection<IModelInstanceElement> getModelInstanceCollection();
 }

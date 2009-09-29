@@ -32,7 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-
+// TODO Michael: needed?
 /**
  * 
  *
