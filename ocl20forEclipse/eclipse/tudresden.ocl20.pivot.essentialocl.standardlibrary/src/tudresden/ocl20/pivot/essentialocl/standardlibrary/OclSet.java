@@ -43,16 +43,15 @@ public interface OclSet<T extends OclAny> extends OclUnsortedCollection<T> {
 	/**
 	 * 
 	 * @param s
-	 * @return the elements of <code>this</code>, which are not in
-	 *         <code>s</code>.
+	 * @return the elements of <code>this</code>, which are not in <code>s</code>.
 	 */
 	OclSet<T> complement(OclSet<T> s);
 
 	/**
 	 * 
 	 * @param s
-	 * @return the sets containing all the elements that are in
-	 *         <code>this</code> or <code>s</code>, but not in both.
+	 * @return the sets containing all the elements that are in <code>this</code>
+	 *         or <code>s</code>, but not in both.
 	 */
 	OclSet<T> symmetricDifference(OclSet<T> s);
 
@@ -92,8 +91,8 @@ public interface OclSet<T extends OclAny> extends OclUnsortedCollection<T> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
 	 */
 	<T2 extends OclAny> OclSet<T2> flatten();
 }

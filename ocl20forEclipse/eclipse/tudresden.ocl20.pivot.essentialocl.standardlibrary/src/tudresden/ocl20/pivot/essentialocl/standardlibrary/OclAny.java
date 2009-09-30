@@ -77,7 +77,7 @@ public interface OclAny {
 	 * 
 	 * @return true if <code>this</code> is equal to OclInvalid or equal to null.
 	 */
-	OclBoolean isOclUndefined();
+	OclBoolean oclIsUndefined();
 
 	/**
 	 * 
@@ -90,7 +90,7 @@ public interface OclAny {
 	 * @param typespec
 	 * @return <code>this</code>, where <code>this</code> is of the type
 	 *         identified by <code>typespec</code>.
-	 * @throws AsTypeCastException 
+	 * @throws AsTypeCastException
 	 */
 	<T extends OclAny> T oclAsType(OclType<T> type) throws AsTypeCastException;
 
@@ -111,6 +111,13 @@ public interface OclAny {
 	<T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec);
 
 	/**
+	 * Gets the reason for undefined object.
+	 * 
+	 * @return the undefinedreason
+	 */
+	String getUndefinedreason();
+
+	/**
 	 * Sets the reason for undefined object.
 	 * 
 	 * @param undefinedreason
@@ -119,11 +126,19 @@ public interface OclAny {
 	void setUndefinedreason(String undefinedreason);
 
 	/**
-	 * Gets the reason for undefined object.
+	 * Gets the reason for invalid object.
 	 * 
-	 * @return the undefinedreason
+	 * @return the {@link Throwable} that caused this element to be invalid.
 	 */
-	String getUndefinedreason();
+	public Throwable getInvalidReason();
+
+	/**
+	 * Make this element invalid.
+	 * 
+	 * @param invalidReason
+	 *          the {@link Throwable} that caused invalidity.
+	 */
+	public void setInvalidReason(Throwable invalidReason);
 
 	/**
 	 * OCL operation asSet()

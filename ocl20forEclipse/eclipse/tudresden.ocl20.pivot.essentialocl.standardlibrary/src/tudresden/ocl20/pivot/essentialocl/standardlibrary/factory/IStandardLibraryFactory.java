@@ -18,7 +18,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary.factory;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
@@ -87,27 +89,37 @@ public interface IStandardLibraryFactory {
 
 	/**
 	 * <p>
+	 * Convenience method to create subtypes of {@link OclAny}.
+	 * </p>
+	 * 
+	 * @param modelInstanceElement
+	 *          the {@link IModelInstanceElement} that shall be adapted to an
+	 *          subtype of {@link OclAny}.
+	 * @return the created specific {@link OclAny}.
+	 */
+	OclAny createOclAny(final IModelInstanceElement modelInstanceElement);
+
+	/**
+	 * <p>
 	 * Creates a new {@link OclBag} for a given {@link IModelInstanceCollection}.
 	 * 
 	 * @param <T>
 	 *          the generic Type of the created {@link OclBag}.
-	 * @param <U>
-	 *          the type of the adapted {@link IModelInstanceCollection}.
 	 * @param elements
 	 *          the {@link IModelInstanceCollection} to be wrapped
 	 * @return the created {@link OclBag}.
 	 */
-	<T extends OclAny, U extends IModelInstanceElement> OclBag<T> createOclBag(
-			final IModelInstanceCollection<U> elements);
+	<T extends OclAny> OclBag<T> createOclBag(
+			final IModelInstanceCollection<IModelInstanceElement> elements);
 
 	/**
 	 * <p>
-	 * Creates a new {@link OclBag} for a given {@link List}.
+	 * Creates a new {@link OclBag} for a given {@link Collection}.
 	 * 
 	 * @param <T>
 	 *          The generic Type of the created {@link OclBag}.
 	 * @param <U>
-	 *          The type of the adapted {@link List}.
+	 *          The type of the adapted {@link Collection}.
 	 * @param elements
 	 *          the {@link List} to be wrapped by the
 	 *          {@link JavaModelInstanceCollection} that is created by this method
@@ -116,7 +128,7 @@ public interface IStandardLibraryFactory {
 	 * @return the created {@link OclBag}.
 	 * @throws TypeNotFoundInModelException
 	 */
-	<T extends OclAny, U> OclBag<T> createOclBag(final List<U> elements)
+	<T extends OclAny, U> OclBag<T> createOclBag(final Collection<U> elements)
 			throws TypeNotFoundInModelException;
 
 	/**
@@ -155,7 +167,8 @@ public interface IStandardLibraryFactory {
 	 *          the {@link IModelInstanceEnumerationLiteral} to be wrapped
 	 * @return the created {@link OclEnumLiteral}.
 	 */
-	OclEnumLiteral createOclEnumLiteral(final IModelInstanceEnumerationLiteral value);
+	OclEnumLiteral createOclEnumLiteral(
+			final IModelInstanceEnumerationLiteral value);
 
 	/**
 	 * <p>
@@ -217,14 +230,12 @@ public interface IStandardLibraryFactory {
 	 * 
 	 * @param <T>
 	 *          the generic Type of the created {@link OclOrderedSet}.
-	 * @param <U>
-	 *          the type of the adapted {@link IModelInstanceCollection}.
 	 * @param elements
 	 *          the {@link IModelInstanceCollection} to be wrapped
 	 * @return the created {@link OclOrderedSet}.
 	 */
-	<T extends OclAny, U extends IModelInstanceElement> OclOrderedSet<T> createOclOrderedSet(
-			final IModelInstanceCollection<U> elements);
+	<T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
+			final IModelInstanceCollection<IModelInstanceElement> elements);
 
 	/**
 	 * <p>
@@ -240,20 +251,10 @@ public interface IStandardLibraryFactory {
 	 *          and is wrapped by the {@link OclOrderedSet} that is created as the
 	 *          return value.
 	 * @return the created {@link OclOrderedSet}.
+	 * @throws TypeNotFoundInModelException
 	 */
-	<T extends OclAny, U> OclOrderedSet<T> createOclOrderedSet(final List<U> elements);
-
-	/**
-	 * <p>
-	 * Convenience method to create subtypes of {@link OclAny}.
-	 * </p>
-	 * 
-	 * @param modelInstanceElement
-	 *          the {@link IModelInstanceElement} that shall be adapted to an
-	 *          subtype of {@link OclAny}.
-	 * @return the created specific {@link OclAny}.
-	 */
-	OclAny createOclAny(final IModelInstanceElement modelInstanceElement);
+	<T extends OclAny, U> OclOrderedSet<T> createOclOrderedSet(
+			final List<U> elements) throws TypeNotFoundInModelException;
 
 	/**
 	 * <p>
@@ -287,14 +288,12 @@ public interface IStandardLibraryFactory {
 	 * 
 	 * @param <T>
 	 *          the generic Type of the created {@link OclSequence}.
-	 * @param <U>
-	 *          the type of the adapted {@link IModelInstanceCollection}.
 	 * @param elements
 	 *          the {@link IModelInstanceCollection} to be wrapped
 	 * @return the created {@link OclSequence}.
 	 */
-	<T extends OclAny, U extends IModelInstanceElement> OclSequence<T> createOclSequence(
-			final IModelInstanceCollection<U> elements);
+	<T extends OclAny> OclSequence<T> createOclSequence(
+			final IModelInstanceCollection<IModelInstanceElement> elements);
 
 	/**
 	 * <p>
@@ -310,8 +309,10 @@ public interface IStandardLibraryFactory {
 	 *          and is wrapped by the {@link OclSequence} that is created as the
 	 *          return value.
 	 * @return the created {@link OclSequence}.
+	 * @throws TypeNotFoundInModelException
 	 */
-	<T extends OclAny, U> OclSequence<T> createOclSequence(final List<U> elements);
+	<T extends OclAny, U> OclSequence<T> createOclSequence(final List<U> elements)
+			throws TypeNotFoundInModelException;
 
 	/**
 	 * <p>
@@ -319,31 +320,31 @@ public interface IStandardLibraryFactory {
 	 * 
 	 * @param <T>
 	 *          the generic Type of the created {@link OclSet}.
-	 * @param <U>
-	 *          the type of the adapted {@link IModelInstanceCollection}.
 	 * @param elements
 	 *          the {@link IModelInstanceCollection} to be wrapped
 	 * @return the created {@link OclSet}.
 	 */
-	<T extends OclAny, U extends IModelInstanceElement> OclSet<T> createOclSet(
-			final IModelInstanceCollection<U> elements);
+	<T extends OclAny> OclSet<T> createOclSet(
+			final IModelInstanceCollection<IModelInstanceElement> elements);
 
 	/**
 	 * <p>
-	 * Creates a new {@link OclSet} for a given {@link List}.
+	 * Creates a new {@link OclSet} for a given {@link Set}.
 	 * 
 	 * @param <T>
 	 *          The generic Type of the created {@link OclSet}.
 	 * @param <U>
-	 *          The type of the adapted {@link List}.
+	 *          The type of the adapted {@link Set}.
 	 * @param elements
 	 *          the {@link List} to be wrapped by the
 	 *          {@link JavaModelInstanceCollection} that is created by this method
 	 *          and is wrapped by the {@link OclSet} that is created as the return
 	 *          value.
 	 * @return the created {@link OclSet}.
+	 * @throws TypeNotFoundInModelException
 	 */
-	<T extends OclAny, U> OclSet<T> createOclSet(final List<U> elements);
+	<T extends OclAny, U> OclSet<T> createOclSet(final Set<U> elements)
+			throws TypeNotFoundInModelException;
 
 	/**
 	 * <p>
@@ -411,19 +412,24 @@ public interface IStandardLibraryFactory {
 	 *          by appropriate {@link OclAny} objects
 	 * @return the created {@link OclTuple}.
 	 */
-	OclTuple createOclTupleObject(final List<String> names, final List<Object> values);
+	OclTuple createOclTupleObject(final List<String> names,
+			final List<Object> values);
 
 	/**
 	 * <p>
-	 * Creates or returns an {@link OclType} for a given {@link OclAny}.
+	 * Creates or returns an {@link OclType} for a given {@link Type} and
+	 * {@link OclAny}.
 	 * </p>
 	 * 
+	 * @param type
+	 *          The {@link Type} this {@link OclType} should wrap.
 	 * @param oclAny
 	 *          The {@link OclAny} for what the {@link OclType} should be
 	 *          returned.
 	 * @return The created {@link OclType}.
 	 */
-	<T extends OclAny> OclType<T> createOclType(final T oclAny);
+	public <T extends OclAny> OclType<T> createOclType(final Type type,
+			final T oclAny);
 
 	/**
 	 * <p>

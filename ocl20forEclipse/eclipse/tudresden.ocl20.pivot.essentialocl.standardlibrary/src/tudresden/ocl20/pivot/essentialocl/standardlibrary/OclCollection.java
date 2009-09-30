@@ -32,8 +32,6 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 
 /**
  * 
@@ -150,13 +148,6 @@ public interface OclCollection<T extends OclAny> extends OclLibraryObject {
 	<T2 extends OclAny> OclSet<OclTuple> product(OclCollection<T2> c2);
 
 	/**
-	 * Gets OCL representation of iterator for adapted collection.
-	 * 
-	 * @return the iterator
-	 */
-	OclIterator<T> getIterator();
-
-	/**
 	 * If the element type is not a collection type, this results in the same
 	 * bag. If the element type is a collection type.
 	 * 
@@ -165,10 +156,4 @@ public interface OclCollection<T extends OclAny> extends OclLibraryObject {
 	 */
 	<T2 extends OclAny> OclCollection<T2> flatten();
 
-	/**
-	 * Returns the adapted collection.
-	 * 
-	 * @return the adapted collection
-	 */
-	IModelInstanceCollection<IModelInstanceElement> getModelInstanceCollection();
 }
