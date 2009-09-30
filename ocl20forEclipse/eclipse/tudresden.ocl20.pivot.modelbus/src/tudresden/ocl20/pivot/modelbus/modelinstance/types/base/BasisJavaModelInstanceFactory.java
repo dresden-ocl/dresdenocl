@@ -503,7 +503,7 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 	 * 
 	 * @return The created {@link IModelInstanceCollection}.
 	 */
-	public static <T extends IModelInstanceElement> IModelInstanceElement createModelInstanceCollection(
+	public static <T extends IModelInstanceElement> IModelInstanceCollection<T> createModelInstanceCollection(
 			Collection<T> adapted) {
 
 		return new JavaModelInstanceCollection<T>(adapted);
