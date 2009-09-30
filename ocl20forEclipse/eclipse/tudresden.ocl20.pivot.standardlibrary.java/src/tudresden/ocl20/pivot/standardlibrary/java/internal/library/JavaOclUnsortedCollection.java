@@ -33,17 +33,17 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclUnsortedCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -54,13 +54,13 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndColle
  * @author Michael Thiele
  */
 @SuppressWarnings("unchecked")
-public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
+public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 		JavaOclCollection<T> implements OclUnsortedCollection<T> {
 
 	public JavaOclUnsortedCollection(
-			IModelInstanceCollection<IModelInstanceElement> adaptedCollection) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
 
-		super(adaptedCollection);
+		super(imiCollection);
 	}
 
 	/*
@@ -73,30 +73,20 @@ public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 
 		OclBag<T> result;
 
-		/* Check if this collection is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclBag<T>(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-
-		/* Else check if the given bag is undefined. */
-		else if (aBag.isOclUndefined().isTrue()) {
-			result = aBag;
-		}
+		checkUndefinedAndInvalid(this, aBag);
 
 		/* Else compute the result. */
-		else {
-			Collection<IModelInstanceElement> resultList =
-					new ArrayList<IModelInstanceElement>();
+		Collection<IModelInstanceElement> union =
+				new ArrayList<IModelInstanceElement>();
 
-			resultList.addAll(this.imiCollection.getCollection());
-			resultList.addAll(aBag.getAdaptedCollection().getCollection());
+		union.addAll(this.imiCollection.getCollection());
+		union.addAll(((IModelInstanceCollection) aBag
+				.getModelInstanceElement()).getCollection());
 
-			IModelInstanceCollection<IModelInstanceElement> resultIMICollection =
-					BasisJavaModelInstanceFactory.createModelInstanceCollection(
-							resultList, PrimitiveAndCollectionTypeConstants.MODEL_TYPE_BAG);
-
-			result = new JavaOclBag<T>(resultIMICollection);
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclBag(union);
+		} catch (TypeNotFoundInModelException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -112,41 +102,29 @@ public abstract class JavaOclUnsortedCollection<T extends OclRoot> extends
 
 		OclSet<T> result;
 
-		/* Check if this collection is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = new JavaOclSet<T>(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-
-		/* Else check if the given set is undefined. */
-		else if (aSet.isOclUndefined().isTrue()) {
-			result = aSet;
-		}
+		checkUndefinedAndInvalid(this, aSet);
 
 		/* Else compute the result. */
-		else {
-			List<IModelInstanceElement> thisSetAsList;
-			List<IModelInstanceElement> resultList;
+		Collection<IModelInstanceElement> otherSet;
+		Set<IModelInstanceElement> intersection;
 
-			thisSetAsList =
-					new ArrayList<IModelInstanceElement>(this.imiCollection
-							.getCollection());
+		otherSet =
+				((IModelInstanceCollection<IModelInstanceElement>) aSet
+						.getModelInstanceElement()).getCollection();
+		intersection = new HashSet<IModelInstanceElement>();
 
-			resultList = new ArrayList<IModelInstanceElement>();
-
-			for (IModelInstanceElement anElement : aSet.getAdaptedCollection()
-					.getCollection()) {
-				if (thisSetAsList.contains(anElement)
-						&& !resultList.contains(anElement)) {
-					resultList.add(anElement);
-				}
+		for (IModelInstanceElement anElement : otherSet) {
+			if (this.imiCollection.getCollection().contains(anElement)
+					&& !intersection.contains(anElement)) {
+				intersection.add(anElement);
 			}
+		}
 
-			IModelInstanceCollection<IModelInstanceElement> resultIMICollection =
-					BasisJavaModelInstanceFactory.createModelInstanceCollection(
-							resultList, PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET);
-
-			result = new JavaOclSet<T>(resultIMICollection);
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(intersection);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO Michael: OK?
+			throw new InvalidException(e);
 		}
 
 		return result;

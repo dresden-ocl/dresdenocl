@@ -33,16 +33,18 @@ package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -52,11 +54,8 @@ import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
  * @author Ronny Brandt
  */
 @SuppressWarnings("unchecked")
-public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
+public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 		implements OclSet<T> {
-
-	/** The type of this {@link JavaOclSet}. */
-	private OclType type;
 
 	/**
 	 * <p>
@@ -66,47 +65,11 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 * @param adaptee
 	 *          The adapted model instance object of this {@link JavaOclSet}.
 	 */
-	public JavaOclSet(Set<T> adaptee) {
+	public JavaOclSet(
+			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
 
-		super(adaptee);
-
-		Set<T> adaptedSet;
-		Set<T> newAdaptedSet;
-
-		adaptedSet = (Set<T>) this.adaptee;
-
-		if (this.adaptee != null) {
-			/*
-			 * Don't trust the given set. The given set could contain duplicates
-			 * because of object schizophrenia.
-			 */
-			newAdaptedSet = new HashSet<T>();
-
-			for (T aNewElement : adaptedSet) {
-
-				boolean isAlreadyContained;
-
-				isAlreadyContained = false;
-
-				for (T anElement : (Set<T>) newAdaptedSet) {
-
-					if (aNewElement.equals(anElement)) {
-
-						isAlreadyContained = true;
-						break;
-					}
-					// no else.
-				}
-
-				if (!isAlreadyContained) {
-					newAdaptedSet.add(aNewElement);
-				}
-				// no else.
-			}
-
-			this.adaptee = newAdaptedSet;
-		}
-		// no else.
+		super(imiCollection);
+		// FIXME Michael: test, if collection is Set already?
 	}
 
 	/*
@@ -114,42 +77,26 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#complement(
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
 	 */
-	public OclSet<T> complement(OclSet<T> aSet) {
+	public OclSet<T> complement(OclSet<T> that) {
 
 		OclSet<T> result;
 
-		/* Check if this collection is defined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		Set<IModelInstanceElement> complement =
+				new HashSet<IModelInstanceElement>();
 
-		/* Else check if the given collection is defined. */
-		if (aSet.isOclUndefined().isTrue()) {
-			result = new JavaOclSet<T>(null);
-			result.setUndefinedreason(aSet.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
-		/* Else compute the result. */
-		else {
-			List<T> resultList;
-			List<T> aSetAsList;
+		Collection<IModelInstanceElement> otherCollection =
+				(Collection<IModelInstanceElement>) that.getModelInstanceElement();
 
-			resultList = new ArrayList<T>();
-			aSetAsList = new ArrayList<T>((Set<T>) aSet.getAdaptee());
+		complement.addAll(imiCollection.getCollection());
+		complement.removeAll(otherCollection);
 
-			for (T anElement : (Collection<T>) this.getAdaptee()) {
-
-				/*
-				 * Check if the given set does not contain an element of this set, add
-				 * it to the result.
-				 */
-				if (!aSetAsList.contains(anElement)) {
-					resultList.add(anElement);
-				}
-				// no else.
-			}
-
-			result = new JavaOclSet<T>(new HashSet<T>(resultList));
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(complement);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK? -> can this happen here?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -161,33 +108,22 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#excluding(java
 	 * .lang.Object)
 	 */
-	public OclSet<T> excluding(T anElement) {
+	public OclSet<T> excluding(T that) {
 
 		OclSet<T> result;
 
-		/* Check if this collection is defined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		Set<IModelInstanceElement> exclude = new HashSet<IModelInstanceElement>();
 
-		/* Else check if the given collection is defined. */
-		if (anElement.isOclUndefined().isTrue()) {
-			result = new JavaOclSet<T>(null);
-			result.setUndefinedreason(anElement.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
-		/* Else compute the result. */
-		else {
-			List<T> resultList;
+		exclude.addAll(imiCollection.getCollection());
+		exclude.remove(that.getModelInstanceElement());
 
-			resultList = new ArrayList<T>((Set<T>) this.getAdaptee());
-
-			if (resultList.contains(anElement)) {
-				resultList.remove(anElement);
-			}
-			// no else.
-
-			result = new JavaOclSet<T>(new HashSet<T>(resultList));
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(exclude);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK? -> can this happen here?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -198,30 +134,40 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten ()
 	 */
-	public <T2 extends OclRoot> OclSet<T2> flatten() {
+	public <T2 extends OclAny> OclSet<T2> flatten() {
 
 		OclSet<T2> result;
 
-		/* Check if this set is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclSet<T2>(null);
-			result.setUndefinedreason(getUndefinedreason());
+		Set<IModelInstanceElement> flat = new HashSet<IModelInstanceElement>();
+
+		checkUndefinedAndInvalid(this);
+
+		/* Iterate over this set. */
+		for (IModelInstanceElement element : imiCollection.getCollection()) {
+
+			/*
+			 * nested collections are flattened, i.e. their elements are added to the
+			 * result
+			 */
+			if (element instanceof OclCollection<?>) {
+				OclCollection<OclAny> collection = ((OclCollection<OclAny>) element);
+				Collection<IModelInstanceElement> collectionElements =
+						((IModelInstanceCollection<IModelInstanceElement>) collection
+								.getModelInstanceElement()).getCollection();
+
+				flat.addAll(collectionElements);
+			}
+			/* other elements are simply added */
+			else {
+				flat.add(element);
+			}
 		}
 
-		/* Else compute the result. */
-		else {
-			result = new JavaOclSet<T2>(new HashSet<T2>());
-
-			for (T anElement : (Collection<T>) this.getAdaptee()) {
-
-				if (!(anElement instanceof OclCollection)) {
-					result = new JavaOclSet<T2>((Set) this.getAdaptee());
-				}
-
-				else {
-					result = result.union((OclSet<T2>) anElement);
-				}
-			}
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(flat);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -233,75 +179,22 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#including(java
 	 * .lang.Object)
 	 */
-	public OclSet<T> including(T anElement) {
+	public OclSet<T> including(T that) {
 
 		OclSet<T> result;
 
-		/* Check if this collection is defined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		Set<IModelInstanceElement> include = new HashSet<IModelInstanceElement>();
 
-		/* Else check if the given collection is defined. */
-		if (anElement.isOclUndefined().isTrue()) {
-			result = new JavaOclSet<T>(null);
-			result.setUndefinedreason(anElement.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
-		/* Else compute the result. */
-		else {
-			List<T> resultList;
+		include.addAll(imiCollection.getCollection());
+		include.add(that.getModelInstanceElement());
 
-			resultList = new ArrayList<T>((Set<T>) this.getAdaptee());
-
-			if (!resultList.contains(anElement)) {
-				resultList.add(anElement);
-			}
-			// no else.
-
-			result = new JavaOclSet<T>(new HashSet<T>(resultList));
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#intersection
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
-	 */
-	public OclSet<T> intersection(OclBag<T> aBag) {
-
-		OclSet<T> result;
-
-		/* Check if this collection is defined. */
-		if (isOclUndefined().isTrue()) {
-			result = this;
-		}
-
-		/* Else check if the given collection is defined. */
-		if (aBag.isOclUndefined().isTrue()) {
-			result = new JavaOclSet<T>(null);
-			result.setUndefinedreason(aBag.getUndefinedreason());
-		}
-
-		/* Else compute the result. */
-		else {
-			List<T> thisSetAsList;
-			List<T> resultList;
-
-			thisSetAsList = new ArrayList<T>((Collection<T>) getAdaptee());
-			resultList = new ArrayList<T>();
-
-			for (T anElement : (Collection<T>) aBag.getAdaptee()) {
-				if (thisSetAsList.contains(anElement)
-						&& !resultList.contains(anElement)) {
-					resultList.add(anElement);
-				}
-				// no else.
-			}
-
-			result = new JavaOclSet<T>(new HashSet<T>(resultList));
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(include);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK? -> can this happen here?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -310,65 +203,65 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#intersection(
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
 	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot anObject) {
+	public OclSet<T> intersection(OclBag<T> that) {
+
+		return intersection(that.asSet());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 */
+	public OclBoolean isEqualTo(OclAny that) {
 
 		OclBoolean result;
 
-		/* Check if this set is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(getUndefinedreason());
+		checkUndefinedAndInvalid(this, that);
+
+		/* Check if the given object is no OclSet. */
+		if (!(that instanceof OclSet)) {
+			result = JavaOclBoolean.getInstance(false);
 		}
 
-		/* Else check if the given object is undefined. */
-		else if (anObject.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(anObject.getUndefinedreason());
-		}
-
-		/* Else compute the result. */
+		/* Else compare the two OrderedSets. */
 		else {
 
-			/* Check if the given object is not an oclSet. */
-			if (!(anObject instanceof OclSet)) {
-				result = JavaOclBoolean.getInstance(false);
+			boolean booleanResult;
+
+			// copy, since elements are removed later
+			Set<IModelInstanceElement> set1 =
+					new HashSet<IModelInstanceElement>(
+							(Set<IModelInstanceElement>) this.imiCollection.getCollection());
+			Set<IModelInstanceElement> set2 =
+					(Set<IModelInstanceElement>) ((IModelInstanceCollection) that
+							.getModelInstanceElement()).getCollection();
+
+			if (set1.size() != set2.size()) {
+				booleanResult = false;
 			}
 
+			/* Else iterate over the elements and compare them. */
 			else {
-				OclSet aSet;
-				ArrayList<T> thisSetAsList;
 
-				aSet = (OclSet) anObject;
-
-				thisSetAsList = new ArrayList<T>((Set<T>) this.getAdaptee());
-
-				/* Check if both sets have the same length. */
-				if (thisSetAsList.size() != ((Set<T>) aSet.getAdaptee()).size()) {
-					result = JavaOclBoolean.getInstance(false);
-				}
-
-				else {
-					result = JavaOclBoolean.getInstance(true);
-
-					for (T anElement : (Collection<T>) aSet.getAdaptee()) {
-
-						if (!thisSetAsList.contains(anElement)) {
-							result = JavaOclBoolean.getInstance(false);
-							break;
-						}
-						// no else.
+				for (IModelInstanceElement element : set2) {
+					if (!set1.remove(element)) {
+						booleanResult = false;
+						break;
 					}
-					// end for.
 				}
-				// end else.
+
+				/* set1 should have no elements by now */
+				booleanResult = set1.isEmpty();
+
 			}
-			// end else.
+
+			result = JavaOclBoolean.getInstance(booleanResult);
 		}
-		// end else.
 
 		return result;
 	}
@@ -379,55 +272,39 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#symmetricDifference
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
 	 */
-	public OclSet<T> symmetricDifference(OclSet<T> aSet) {
+	public OclSet<T> symmetricDifference(OclSet<T> that) {
 
 		OclSet<T> result;
 
-		/* Check if this collection is defined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		Set<IModelInstanceElement> symmetricDifference =
+				new HashSet<IModelInstanceElement>();
 
-		/* Else check if the given collection is defined. */
-		if (aSet.isOclUndefined().isTrue()) {
-			result = new JavaOclSet<T>(null);
-			result.setUndefinedreason(aSet.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
-		/* Else compute the result. */
-		else {
-			List<T> resultList;
+		Collection<IModelInstanceElement> otherCollectionCopy =
+				new ArrayList<IModelInstanceElement>(((IModelInstanceCollection) that
+						.getModelInstanceElement()).getCollection());
 
-			List<T> thisSetAsList;
-			List<T> aSetAsList;
-
-			resultList = new ArrayList<T>();
-
-			/* Convert both sets into lists. */
-			thisSetAsList = new ArrayList<T>((Set<T>) this.getAdaptee());
-			aSetAsList = new ArrayList<T>((Set<T>) aSet.getAdaptee());
-
-			/* Iterate over this set. */
-			for (T anElement : thisSetAsList) {
-
-				/* Add all elements to the result which are not in aSet. */
-				if (!aSetAsList.contains(anElement)) {
-					resultList.add(anElement);
-				}
-				// no else.
+		/* Iterate over this bag. */
+		for (IModelInstanceElement element : imiCollection.getCollection()) {
+			/*
+			 * if other collection has not the same element, then it is in the
+			 * symmetric difference; remove it, so that it is not counted multiple
+			 * times
+			 */
+			if (!otherCollectionCopy.remove(element)) {
+				symmetricDifference.add(element);
 			}
+		}
+		/* add the other collection that is already without intersection elements */
+		symmetricDifference.addAll(otherCollectionCopy);
 
-			/* Iterate over aSet. */
-			for (T anElement : aSetAsList) {
-
-				/* Add all elements to the result which are not in this set. */
-				if (!thisSetAsList.contains(anElement)) {
-					resultList.add(anElement);
-				}
-				// no else.
-			}
-
-			result = new JavaOclSet<T>(new HashSet<T>(resultList));
+		try {
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclSet(symmetricDifference);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -439,71 +316,29 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#union(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclSet)
 	 */
-	public OclSet<T> union(OclSet<T> aSet) {
+	public OclSet<T> union(OclSet<T> that) {
 
 		OclSet<T> result;
 
-		/* Check if this collection is defined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		Set<IModelInstanceElement> union = new HashSet<IModelInstanceElement>();
 
-		/* Else check if the given collection is defined. */
-		if (aSet.isOclUndefined().isTrue()) {
-			result = new JavaOclSet<T>(null);
-			result.setUndefinedreason(aSet.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
-		/* Else compute the result. */
-		else {
-			List<T> resultList;
+		Collection<IModelInstanceElement> otherCollection =
+				((IModelInstanceCollection) that.getModelInstanceElement())
+						.getCollection();
 
-			resultList = new ArrayList<T>((Set<T>) getAdaptee());
+		union.addAll(imiCollection.getCollection());
+		union.addAll(otherCollection);
 
-			/* Iterate over the given set. */
-			for (T anElement : (Collection<T>) aSet.getAdaptee()) {
-
-				/* Eventually add an element to the result list. */
-				if (!resultList.contains(anElement)) {
-					resultList.add(anElement);
-				}
-				// no else.
-			}
-
-			result = new JavaOclSet<T>(new HashSet<T>(resultList));
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclSet(union);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK?
+			throw new InvalidException(e);
 		}
 
 		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
-	 * #getType()
-	 */
-	@Override
-	public OclType getType() {
-
-		/* Eventually compute the type. */
-		if (this.type == null) {
-			OclType elementType;
-
-			/* Compute the generic type. */
-			if (((List<T>) getAdaptee()).size() > 0) {
-				elementType = ((Set<T>) getAdaptee()).iterator().next().getType();
-			}
-
-			else {
-				elementType = JavaOclType.getType("OclVoid");
-			}
-
-			this.type =
-					JavaOclCollectionType.getType(OclCollectionTypeKind.SET, elementType);
-		}
-		// no else.
-
-		return type;
 	}
 
 	/**

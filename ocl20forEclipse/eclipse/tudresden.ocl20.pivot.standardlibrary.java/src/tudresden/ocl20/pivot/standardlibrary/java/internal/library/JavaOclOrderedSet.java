@@ -30,27 +30,22 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
+import org.eclipse.emf.common.util.UniqueEList;
+
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.PrimitiveAndCollectionTypeConstants;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -60,7 +55,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @author Ronny Brandt
  */
 @SuppressWarnings("unchecked")
-public class JavaOclOrderedSet<T extends OclRoot> extends
+public class JavaOclOrderedSet<T extends OclAny> extends
 		JavaOclSortedCollection<T> implements OclOrderedSet<T> {
 
 	/**
@@ -69,65 +64,47 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *            The adapted {@link Collection}.
+	 *          The adapted {@link Collection}.
 	 */
-	public JavaOclOrderedSet(IModelInstanceCollection<IModelInstanceElement> adaptedCollection) {
-		super(adaptedCollection);
-		// TODO Michael: do this for all specific collections
-		if (!adaptedCollection.isUnique() || !adaptedCollection.isOrdered())
-			this.imiCollection = BasisJavaModelInstanceFactory.createModelInstanceCollection(adaptedCollection.getCollection(), PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
-		
+	public JavaOclOrderedSet(
+			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
+
+		super(imiCollection);
+		// TODO Michael: do this for all specific collections; this is already been
+		// checked by the factory; how to prevent calls to this constructor?
+		// the method now includes a directly visible dependency to BJMIF
+
+		// if (!imiCollection.isUnique() || !imiCollection.isOrdered())
+		// this.imiCollection =
+		// BasisJavaModelInstanceFactory.createModelInstanceCollection(imiCollection.getCollection(),
+		// PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
+
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#append
 	 * (java.lang.Object)
 	 */
-	public OclOrderedSet<T> append(T anElement) {
+	public OclOrderedSet<T> append(T that) {
 
 		OclOrderedSet<T> result;
 
-		/* Check if this set is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		List<IModelInstanceElement> append =
+				new UniqueEList<IModelInstanceElement>();
 
-		/* Else check if the given element is undefined. */
-		else if (anElement.isOclUndefined().isTrue()) {
-			result = new JavaOclOrderedSet<T>(null);
-			result.setUndefinedreason(anElement.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
-		/* Else compute the result. */
-		else {
+		append.addAll(imiCollection.getCollection());
+		// FIXME Michael: the standard does not define this
+		append.add(that.getModelInstanceElement());
 
-			/* Check if the adaptee is not a list. */
-			if (!(this.getAdaptee() instanceof ArrayList)) {
-
-				ArrayList<T> adaptedList;
-
-				adaptedList = new ArrayList<T>((Collection<T>) getAdaptee());
-
-				/* Only add the element if it is not already in the list. */
-				if (!adaptedList.contains(anElement)) {
-					adaptedList.add(anElement);
-				}
-				// no else.
-
-				result = new JavaOclOrderedSet<T>(adaptedList);
-			}
-
-			else {
-				/* Only add the element if it is not already in the list. */
-				if (!((List<T>) getAdaptee()).contains(anElement)) {
-					((List<T>) getAdaptee()).add(anElement);
-				}
-
-				result = this;
-			}
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(append);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK? -> can this happen here?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -135,45 +112,27 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#excluding
 	 * (java.lang.Object)
 	 */
-	public OclOrderedSet<T> excluding(T anElement) {
+	public OclOrderedSet<T> excluding(T that) {
 
 		OclOrderedSet<T> result;
 
-		/* Check if this set is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		List<IModelInstanceElement> exclude =
+				new UniqueEList<IModelInstanceElement>();
 
-		/* Else check if the given element is undefined. */
-		else if (anElement.isOclUndefined().isTrue()) {
-			result = new JavaOclOrderedSet<T>(null);
-			result.setUndefinedreason(anElement.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
-		/* Else compute the result. */
-		else {
+		exclude.addAll(imiCollection.getCollection());
+		exclude.remove(that.getModelInstanceElement());
 
-			List<T> resultList;
-
-			/* Check if the adaptee is not a list. */
-			if (!(this.getAdaptee() instanceof ArrayList)) {
-				resultList = new ArrayList<T>((Collection<T>) this.getAdaptee());
-			}
-
-			else {
-				resultList = (List<T>) this.getAdaptee();
-			}
-
-			while (resultList.remove(anElement)) {
-				/* Remove any occurrence of the given element. */
-			}
-
-			result = new JavaOclOrderedSet<T>(resultList);
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(exclude);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK? -> can this happen here?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -181,43 +140,47 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten
-	 * ()
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten ()
 	 */
-	public <T2 extends OclRoot> OclOrderedSet<T2> flatten() {
+	// FIXME Michael: not mentioned in the Standard
+	public <T2 extends OclAny> OclOrderedSet<T2> flatten() {
 
 		OclOrderedSet<T2> result;
 
-		/* Check if this collection is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = new JavaOclOrderedSet<T2>(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
+		List<IModelInstanceElement> flat = new UniqueEList<IModelInstanceElement>();
 
-		/* Else compute the result. */
-		else {
-			OclIterator<T> it = getIterator();
+		checkUndefinedAndInvalid(this);
 
-			result = new JavaOclOrderedSet<T2>(new ArrayList<T2>());
+		/* Iterate over this ordered set. */
+		for (IModelInstanceElement element : imiCollection.getCollection()) {
 
 			/*
-			 * Iteratre over this collection and unite eventually included
-			 * collections.
+			 * nested collections are flattened, i.e. their elements are added to the
+			 * result
 			 */
-			while (it.hasNext().isTrue()) {
-				T anElement;
+			if (element instanceof OclCollection<?>) {
+				OclCollection<OclAny> collection = ((OclCollection<OclAny>) element);
 
-				anElement = it.next();
+				Collection<IModelInstanceElement> collectionElements =
+						((IModelInstanceCollection<IModelInstanceElement>) collection
+								.getModelInstanceElement()).getCollection();
 
-				if (!(anElement instanceof OclCollection)) {
-					result = new JavaOclOrderedSet<T2>((List) this.getAdaptee());
-					break;
+				for (IModelInstanceElement collectionElement : collectionElements) {
+					flat.add(collectionElement);
 				}
-
-				result = result.union((OclOrderedSet<T2>) anElement);
 			}
+			/* other elements are simply added */
+			else {
+				flat.add(element);
+			}
+		}
+
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(flat);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -225,18 +188,17 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#including
 	 * (java.lang.Object)
 	 */
 	public OclOrderedSet<T> including(T object) {
+
 		return append(object);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#insertAt
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
@@ -246,56 +208,25 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 
 		OclOrderedSet<T> result;
 
-		/* Check if this set is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = this;
-		}
+		List<IModelInstanceElement> insertAt =
+				new UniqueEList<IModelInstanceElement>();
 
-		/* Else check if the given element is undefined. */
-		else if (anElement.isOclUndefined().isTrue()) {
-			result = new JavaOclOrderedSet<T>(null);
-			result.setUndefinedreason(anElement.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, index, anElement);
 
-		/* Else check, if the given index is undefined. */
-		else if (index.isOclUndefined().isTrue()) {
-			result = new JavaOclOrderedSet<T>(null);
-			result.setUndefinedreason(index.getUndefinedreason());
-		}
+		int intIndex =
+				((IModelInstanceInteger) index.getModelInstanceElement()).getLong()
+						.intValue();
 
-		/* Else compute the result. */
-		else {
+		insertAt.addAll(imiCollection.getCollection());
 
-			int intIndex;
+		try {
+			// FIXME Michael: the standard does not define this part
+			insertAt.add(intIndex, anElement.getModelInstanceElement());
 
-			intIndex = ((Number) index.getAdaptee()).intValue() - 1;
-
-			/* Check if the adaptee is not a list. */
-			if (!(getAdaptee() instanceof ArrayList)) {
-
-				ArrayList<T> adaptedList;
-
-				adaptedList = new ArrayList<T>((Collection<T>) getAdaptee());
-
-				/* Only add the element if it is not already in the list. */
-				if (!adaptedList.contains(anElement)) {
-					adaptedList.add(intIndex, anElement);
-				}
-				// no else.
-
-				result = new JavaOclOrderedSet<T>(adaptedList);
-			}
-
-			else {
-
-				/* Only add the element if it is not already in the list. */
-				if (!((List<T>) getAdaptee()).contains(anElement)) {
-					((List<T>) getAdaptee()).add(intIndex, anElement);
-				}
-				// no else.
-
-				return this;
-			}
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(insertAt);
+		} catch (Exception e) {
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -303,114 +234,86 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	public OclBoolean isEqualTo(OclRoot anObject) {
-	
+	public OclBoolean isEqualTo(OclAny that) {
+
 		OclBoolean result;
-	
-		/* Check if this set is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-	
-		/* Else check if the given object is invalid. */
-		else if (anObject.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(anObject.getUndefinedreason());
-		}
-	
-		/* Else check if the given Object is not an ordered set. */
-		else if (!(anObject instanceof OclOrderedSet)) {
+
+		checkUndefinedAndInvalid(this, that);
+
+		/* Check if the given object is no OclBag. */
+		if (!(that instanceof OclOrderedSet)) {
 			result = JavaOclBoolean.getInstance(false);
 		}
-	
+
+		/* Else compare the two OrderedSets. */
 		else {
-			OclOrderedSet<T> aSet;
-	
-			aSet = (OclOrderedSet<T>) anObject;
-	
-			/* Check if both sets have the same length. */
-			if (this.size().isEqualTo(aSet.size()).isTrue()) {
-	
-				result = JavaOclBoolean.getInstance(true);
-	
-				/*
-				 * Iterate over aSet and check if this collections contains all
-				 * its elements.
-				 */
-				for (T anElement : (Collection<T>) aSet.getAdaptee()) {
-	
-					if (!this.includes(anElement).isTrue()) {
-						result = JavaOclBoolean.getInstance(false);
+
+			boolean booleanResult;
+
+			Collection<IModelInstanceElement> orderedSetList1 =
+					this.imiCollection.getCollection();
+			Collection<IModelInstanceElement> orderedSetList2 =
+					((IModelInstanceCollection) that.getModelInstanceElement())
+							.getCollection();
+
+			/* Check if orderedSetList1 and orderedSetList2 have the same size. */
+			if (orderedSetList1.size() != orderedSetList2.size()) {
+				booleanResult = false;
+			}
+			else if (orderedSetList1.isEmpty() && orderedSetList2.isEmpty()) {
+				booleanResult = true;
+			}
+
+			/* Else iterate over the elements and compare them. */
+			else {
+				booleanResult = true;
+
+				for (IModelInstanceElement anElement : orderedSetList2) {
+
+					/* check if anElement is in both lists. */
+					if (!orderedSetList1.contains(anElement)) {
+						booleanResult = false;
 						break;
 					}
 				}
+
 			}
-	
-			else {
-				result = JavaOclBoolean.getInstance(true);
-			}
+
+			result = JavaOclBoolean.getInstance(booleanResult);
 		}
-	
+
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#prepend
 	 * (java.lang.Object)
 	 */
-	public OclOrderedSet<T> prepend(T anElement) {
+	public OclOrderedSet<T> prepend(T that) {
 
 		OclOrderedSet<T> result;
 
-		/* Check if this set is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		List<IModelInstanceElement> prepend =
+				new UniqueEList<IModelInstanceElement>();
 
-		/* Else check if the given element is undefined. */
-		if (anElement.isOclUndefined().isTrue()) {
-			result = new JavaOclOrderedSet<T>(null);
-			result.setUndefinedreason(anElement.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
-		/* Else compute the result. */
-		else {
-			List<T> resultList;
+		// FIXME Michael: the standard does not define this part
+		if (!imiCollection.getCollection().contains(that.getModelInstanceElement()))
+			prepend.add(that.getModelInstanceElement());
+		prepend.addAll(imiCollection.getCollection());
 
-			resultList = null;
-
-			/* Check if the adaptee is not a list. */
-			if (!(getAdaptee() instanceof ArrayList)) {
-				resultList = new ArrayList<T>(((Collection<T>) getAdaptee()));
-
-				/* Only add the element if it is not already in the list. */
-				if (!resultList.contains(anElement)) {
-					resultList.add(0, anElement);
-				}
-				// no else.
-
-				result = new JavaOclOrderedSet<T>(resultList);
-			}
-
-			else {
-
-				/* Only add the element if it is not already in the list. */
-				if (!((List<T>) getAdaptee()).contains(anElement)) {
-					((List<T>) getAdaptee()).add(0, anElement);
-				}
-				// no else.
-
-				result = this;
-			}
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(prepend);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK? -> can this happen here?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -418,7 +321,6 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#
 	 * subOrderedSet
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
@@ -428,60 +330,34 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 
 		OclOrderedSet<T> result;
 
-		/* Check if this set is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = this;
-		}
+		List<IModelInstanceElement> subOrderedSet =
+				new UniqueEList<IModelInstanceElement>();
 
-		/* Else check if the lower index is undefined. */
-		else if (lower.isOclUndefined().isTrue()) {
-			result = new JavaOclOrderedSet<T>(null);
-			result.setUndefinedreason(lower.getUndefinedreason());
+		checkUndefinedAndInvalid(this, lower, upper);
 
-		}
+		int intLower =
+				((IModelInstanceInteger) lower.getModelInstanceElement()).getLong()
+						.intValue();
+		int intUpper =
+				((IModelInstanceInteger) upper.getModelInstanceElement()).getLong()
+						.intValue();
 
-		/* Else check if the upper index is undefined. */
-		else if (upper.isOclUndefined().isTrue()) {
-			OclOrderedSet<T> ret = new JavaOclOrderedSet<T>(null);
-			ret.setUndefinedreason(upper.getUndefinedreason());
-			return ret;
-		}
+		final List<IModelInstanceElement> thisCollection =
+				(List<IModelInstanceElement>) imiCollection.getCollection();
 
-		/* Else compute the result. */
-		else {
-			try {
-				List<T> adaptedList;
-				List<T> resultList;
+		try {
+			subOrderedSet.addAll(thisCollection.subList(intLower, intUpper));
 
-				/* Check if the adaptee is no list. */
-				if (!(this.getAdaptee() instanceof List)) {
-					adaptedList = new ArrayList<T>((Collection<T>) this
-							.getAdaptee());
-				}
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclOrderedSet(subOrderedSet);
+		} catch (IndexOutOfBoundsException e) {
 
-				else {
-					adaptedList = (List<T>) this.getAdaptee();
-				}
+			throw new InvalidException(e);
+		} catch (TypeNotFoundInModelException e) {
 
-				resultList = adaptedList.subList(((Number) lower.getAdaptee())
-						.intValue() - 1, ((Number) upper.getAdaptee())
-						.intValue());
-
-				result = new JavaOclOrderedSet<T>(new ArrayList<T>(resultList));
-			}
-
-			catch (IndexOutOfBoundsException e) {
-				int lowerIndex;
-				int upperIndex;
-
-				lowerIndex = ((Number) lower.getAdaptee()).intValue();
-				upperIndex = ((Number) upper.getAdaptee()).intValue();
-
-				result = new JavaOclOrderedSet<T>(null);
-				result
-						.setUndefinedreason("illegal index in OclSequence sustring("
-								+ lowerIndex + ", " + upperIndex + ")");
-			}
+			// TODO: OK? -> can this happen here?
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -489,145 +365,36 @@ public class JavaOclOrderedSet<T extends OclRoot> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#union
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet#union
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet)
 	 */
-	public OclOrderedSet<T> union(OclOrderedSet<T> aSet) {
+	// FIXME Michael: not in standard
+	public OclOrderedSet<T> union(OclOrderedSet<T> that) {
 
 		OclOrderedSet<T> result;
 
-		/* Check if this set is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			return this;
+		List<IModelInstanceElement> union =
+				new UniqueEList<IModelInstanceElement>();
+
+		checkUndefinedAndInvalid(this, that);
+
+		union.addAll(imiCollection.getCollection());
+		List<IModelInstanceElement> thatList =
+				(List<IModelInstanceElement>) ((IModelInstanceCollection) that
+						.getModelInstanceElement()).getCollection();
+
+		for (IModelInstanceElement element : thatList) {
+			union.add(element);
 		}
 
-		/* Else check if the given set is undefined. */
-		else if (aSet.isOclUndefined().isTrue()) {
-			result = aSet;
-		}
-
-		/* Else compute the result. */
-		else {
-			List<T> resultList;
-
-			/* Crate a new list containing all elements of this set. */
-			resultList = new ArrayList<T>((List<T>) this.getAdaptee());
-
-			for (T anElement : (Collection<T>) aSet.getAdaptee()) {
-
-				/* Add only elements which are not already in the result list. */
-				if (!resultList.contains(anElement)) {
-					resultList.add(anElement);
-				}
-				// no else.
-			}
-
-			return new JavaOclOrderedSet<T>(resultList);
+		try {
+			result = JavaStandardLibraryFactory.INSTANCE.createOclOrderedSet(union);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO: OK? -> can this happen here?
+			throw new InvalidException(e);
 		}
 
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
-	 * #getType()
-	 */
-	@Override
-	public OclType getType() {
-
-		/* Eventually compute the type. */
-		if (this.type == null) {
-			OclType elementType;
-
-			elementType = JavaOclType.getType("OclVoid");
-
-			if (((List<T>) getAdaptee()).size() > 0) {
-				elementType = ((List<T>) this.getAdaptee()).get(0).getType();
-			}
-			// no else.
-
-			this.type = JavaOclCollectionType.getType(
-					OclCollectionTypeKind.ORDEREDSET, elementType);
-		}
-		// no else.
-
-		return this.type;
-	}
-
-	public IModelInstanceCollection<IModelInstanceElement> getAdaptedCollection() {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public OclRoot getPropertyValue(String propertyName)
-			throws NoSuchFieldException, IllegalAccessException {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public OclRoot getPropertyValue(String propertyName, OclRoot... qualifier)
-			throws NoSuchFieldException, IllegalAccessException {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public OclBag<OclRoot> getPropertyValueAsBag(String propertyName)
-			throws NoSuchFieldException, IllegalAccessException {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public OclOrderedSet<OclRoot> getPropertyValueAsOrderedSet(String propertyName)
-			throws NoSuchFieldException, IllegalAccessException {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public OclSequence<OclRoot> getPropertyValueAsSequence(String propertyName)
-			throws NoSuchFieldException, IllegalAccessException {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public OclSet<OclRoot> getPropertyValueAsSet(String propertyName)
-			throws NoSuchFieldException, IllegalAccessException {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends OclRoot> OclSet<T> asSet() {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends OclRoot> T oclAsType(Type type) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public OclBoolean oclIsKindOf(OclType typespec) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public OclBoolean oclIsTypeOf(OclType typespec) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

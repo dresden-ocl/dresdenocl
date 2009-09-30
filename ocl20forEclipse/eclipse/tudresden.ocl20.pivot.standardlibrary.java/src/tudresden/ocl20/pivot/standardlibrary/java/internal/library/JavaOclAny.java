@@ -38,6 +38,9 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.UndefinedException;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.UndefinedOrInvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
@@ -50,6 +53,12 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardL
  * @author Michael Thiele
  */
 public abstract class JavaOclAny implements OclAny {
+
+	/** The reason why this element is undefined - if it is. */
+	protected String undefinedreason = null;
+
+	/** The reason why this element is invalid - if it is. */
+	protected Throwable invalidReason = null;
 
 	private IModelInstanceElement imiElement;
 
@@ -122,9 +131,6 @@ public abstract class JavaOclAny implements OclAny {
 		return result;
 	}
 
-	/** The reason why this Object is undefined - if it is. */
-	protected String undefinedreason = null;
-
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -134,6 +140,25 @@ public abstract class JavaOclAny implements OclAny {
 	public String getUndefinedreason() {
 
 		return undefinedreason;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#setUndefinedreason
+	 * (java.lang.String)
+	 */
+	public void setUndefinedreason(String undefinedreason) {
+	
+		this.undefinedreason = undefinedreason;
+	}
+	
+	public Throwable getInvalidReason() {
+		return invalidReason;
+	}
+	
+	public void setInvalidReason(Throwable invalidReason) {
+		this.invalidReason = invalidReason;
 	}
 
 	/*
@@ -153,12 +178,11 @@ public abstract class JavaOclAny implements OclAny {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isOclUndefined
 	 * ()
 	 */
-	public OclBoolean isOclUndefined() {
+	public OclBoolean oclIsUndefined() {
 
 		return JavaOclBoolean.getInstance(this.undefinedreason != null);
 	}
 
-	// has to be overwritten in OclInvalid
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -167,17 +191,6 @@ public abstract class JavaOclAny implements OclAny {
 	public OclBoolean oclIsInvalid() {
 
 		return JavaOclBoolean.getInstance(false);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#setUndefinedreason
-	 * (java.lang.String)
-	 */
-	public void setUndefinedreason(String undefinedreason) {
-
-		this.undefinedreason = undefinedreason;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -199,9 +212,9 @@ public abstract class JavaOclAny implements OclAny {
 		// FIXME Michael: How to determine this?
 		return null;
 	}
-	
 
 	public IModelInstanceElement getModelInstanceElement() {
+
 		return imiElement;
 	}
 
@@ -601,9 +614,12 @@ public abstract class JavaOclAny implements OclAny {
 	protected void checkUndefinedAndInvalid(OclAny... objects)
 			throws UndefinedOrInvalidException {
 
+		// TODO Michael: invalid checks?
 		for (OclAny object : objects) {
-			if (object.isOclUndefined().isTrue())
-				throw new UndefinedOrInvalidException(object);
+			if (object.oclIsUndefined().isTrue())
+				throw new UndefinedException(object.getUndefinedreason());
+			if (object.oclIsInvalid().isTrue())
+				throw new InvalidException(object.getInvalidReason());
 		}
 	}
 

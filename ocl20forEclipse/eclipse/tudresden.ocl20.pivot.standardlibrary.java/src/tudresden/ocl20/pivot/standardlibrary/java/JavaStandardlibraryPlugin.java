@@ -34,9 +34,7 @@ import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IOclInstanceAdapterFactory;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaOclInstanceAdapterFactory;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
@@ -70,20 +68,6 @@ public class JavaStandardlibraryPlugin extends Plugin {
 	public static JavaStandardlibraryPlugin getDefault() {
 
 		return plugin;
-	}
-
-	/**
-	 * <p>
-	 * Returns the {@link IOclInstanceAdapterFactory} of the
-	 * {@link JavaStandardlibraryPlugin}.
-	 * </p>
-	 * 
-	 * @return The {@link IOclInstanceAdapterFactory} of the
-	 *         {@link JavaStandardlibraryPlugin}.
-	 */
-	public static IOclInstanceAdapterFactory getOclInstanceAdapterFactory() {
-
-		return JavaOclInstanceAdapterFactory.INSTANCE;
 	}
 
 	/**

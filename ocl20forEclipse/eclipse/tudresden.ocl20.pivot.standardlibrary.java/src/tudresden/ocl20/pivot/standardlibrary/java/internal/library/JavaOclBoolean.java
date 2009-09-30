@@ -42,6 +42,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelIns
  * </p>
  * 
  * @author Ronny Brandt
+ * @author Michael Thiele
  */
 public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 
@@ -242,22 +243,22 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	public OclBoolean isEqualTo(OclAny anObject) {
+	public OclBoolean isEqualTo(OclAny that) {
 
 		OclBoolean result;
 
 		// TODO Michael: Is an equality test on undefined objects undefined or false?
-		checkUndefinedAndInvalid(this, anObject);
+		checkUndefinedAndInvalid(this, that);
 		
 		/* Check if the given Object is not a boolean. */
-		if (!(anObject instanceof OclBoolean)) {
+		if (!(that instanceof OclBoolean)) {
 			result = FALSE;
 		}
 
 		else {
 			OclBoolean aBoolean;
 
-			aBoolean = (OclBoolean) anObject;
+			aBoolean = (OclBoolean) that;
 
 			if (this == aBoolean) {
 				result = TRUE;

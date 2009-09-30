@@ -30,12 +30,17 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.util.Map;
+import java.util.List;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -46,57 +51,52 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
  */
 public class JavaOclTuple extends JavaOclAny implements OclTuple {
 
+	protected IModelInstanceCollection<IModelInstanceString> names;
+	protected IModelInstanceCollection<IModelInstanceElement> values;
+
 	/**
 	 * <p>
 	 * Instantiates a new {@link JavaOclTuple}.
 	 * </p>
 	 * 
-	 * @param adaptee
-	 *            The adapted model instance object of this {@link JavaOclTuple}
-	 *            .
+	 * @param names
+	 *          The adapted names for the {@link OclTuple}.
+	 * @param values
+	 *          The adaped values for the {@link OclTuple}.
 	 */
-	public JavaOclTuple(Map<String, OclRoot> adaptee) {
-		super(adaptee);
+	public JavaOclTuple(IModelInstanceCollection<IModelInstanceString> names,
+			IModelInstanceCollection<IModelInstanceElement> values) {
+
+		// FIXME Michael: is this a problem, if the names are not in the super
+		// class?
+		super(values);
+		//TODO Michael: check if collections are Lists and have same size
+
+		this.names = names;
+		this.values = values;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
-	@Override
-	public OclBoolean isEqualTo(OclRoot anOclRoot) {
+	// FIXME Michael: Does not work, since only values are known of "that".
+	public OclBoolean isEqualTo(OclAny that) {
 
 		OclBoolean result;
 
-		/* Check if this tuple is undefined. */
-		if (this.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-
-		/* Else check if the given oclRoot is undefined. */
-		else if (anOclRoot.isOclUndefined().isTrue()) {
-			result = JavaOclBoolean.getInstance(null);
-			result.setUndefinedreason(anOclRoot.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
+		if (!(that instanceof OclTuple)) {
+			result = JavaOclBoolean.getInstance(false);
+		}
+
 		else {
-			if (!(anOclRoot instanceof OclTuple)) {
-				result = JavaOclBoolean.getInstance(false);
-			}
+			IModelInstanceCollection<IModelInstanceString> m;
 
-			else {
-				OclTuple aTuple;
-
-				aTuple = (OclTuple) anOclRoot;
-				
-				result = JavaOclBoolean.getInstance(getAdaptee().equals(
-						aTuple.getAdaptee()));
-			}
+			result = JavaOclBoolean.getInstance(false);
 		}
 
 		return result;
@@ -104,39 +104,36 @@ public class JavaOclTuple extends JavaOclAny implements OclTuple {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #getPropertyValue(java.lang.String)
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple#getPropertyValue
+	 * (java.lang.String)
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public OclRoot getPropertyValue(String pathname) {
+	public OclAny getPropertyValue(String pathname) {
 
-		OclRoot result;
-		Map<String, OclRoot> adaptedMap;
+		OclAny result;
 
-		adaptedMap = (Map<String, OclRoot>) this.getAdaptee();
+		checkUndefinedAndInvalid(this);
 
-		result = adaptedMap.get(pathname);
-
-		if (result == null) {
-			result = JavaOclVoid.getInstance();
-		}
-		// no else.
+		int indexOf =
+				((List<IModelInstanceString>) names.getCollection()).indexOf(pathname);
+		IModelInstanceElement imiResult =
+				((List<IModelInstanceElement>) values.getCollection()).get(indexOf);
+		result = JavaStandardLibraryFactory.INSTANCE.createOclAny(imiResult);
 
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #getType()
-	 */
-	@Override
-	public OclType getType() {
-		return new JavaOclTupleType(adaptee.getClass());
+	public <T extends OclAny> OclSet<T> asSet() {
+
+		// TODO Michael: implement
+		return null;
 	}
+
+	public OclAny invokeOperation(Operation operation, OclAny... parameters)
+			throws NoSuchMethodException {
+
+		// TODO Michael: implement
+		return null;
+	}
+
 }

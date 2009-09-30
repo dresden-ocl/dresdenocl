@@ -30,17 +30,20 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaOclInstanceAdapterFactory;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -50,7 +53,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaOclInstan
  * @author Ronny Brandt
  */
 @SuppressWarnings("unchecked")
-public abstract class JavaOclSortedCollection<T extends OclRoot> extends
+public abstract class JavaOclSortedCollection<T extends OclAny> extends
 		JavaOclCollection<T> implements OclSortedCollection<T> {
 
 	/**
@@ -58,14 +61,15 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 	 * Instantiates a {@link JavaOclSet}.
 	 * </p>
 	 * 
-	 * @param adaptee
+	 * @param imiCollection
 	 *          The adapted model instance object of this
 	 *          {@link OclSortedCollection}.
 	 */
 	public JavaOclSortedCollection(
-			IModelInstanceCollection<IModelInstanceElement> adaptedCollection) {
+			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
 
-		super(adaptedCollection);
+		super(imiCollection);
+		// TODO Michael: conversions of the imiCollection to List?
 	}
 
 	/*
@@ -77,43 +81,31 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 
 		T result;
 
-		// FIXME Michael: How to get an instance of T? -> checkMethod
-		/* Check if this collection is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = (T) new JavaOclAny(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-
-		/* Else check if the given index is undefined. */
-		else if (index.isOclUndefined().isTrue()) {
-			result = (T) new JavaOclAny(null);
-			result.setUndefinedreason(index.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, index);
 
 		/* Else compute the result. */
-		else {
 
-			int intIndex;
+		int intIndex =
+				((IModelInstanceInteger) index.getModelInstanceElement()).getLong()
+						.intValue();
 
-			/* Try to get the element of the given index. */
-			try {
-				IModelInstanceElement element =
-						((List<IModelInstanceElement>) imiCollection.getCollection())
-								.get(intIndex - 1);
-				result =
-						(T) JavaOclInstanceAdapterFactory.INSTANCE.createOclRoot(element);
-			}
-			// TODO Michael: is this OclInvalid? -> yes
-			catch (IndexOutOfBoundsException e) {
+		/* Try to get the element of the given index. */
+		try {
+			IModelInstanceElement element =
+					((List<IModelInstanceElement>) imiCollection.getCollection())
+							.get(intIndex - 1);
+			result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(element);
+		}
+		// TODO Michael: is this OclInvalid? -> yes
+		catch (IndexOutOfBoundsException e) {
 
-				String msg;
+			String msg;
 
-				msg = "Index for at() out of bounds for Collection ";
-				msg += this.toString();
+			msg = "Index for at() out of bounds for Collection ";
+			msg += this.toString();
 
-				result = (T) new JavaOclAny(null);
-				result.setUndefinedreason(msg);
-			}
+			result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(null);
+			result.setUndefinedreason(msg);
 		}
 
 		return result;
@@ -126,7 +118,11 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 	 */
 	public T first() {
 
-		return this.at(new JavaOclInteger(1));
+		IModelInstanceInteger imiInteger =
+				BasisJavaModelInstanceFactory.createModelInstanceInteger(1L);
+
+		return this.at(JavaStandardLibraryFactory.INSTANCE
+				.createOclInteger(imiInteger));
 	}
 
 	/*
@@ -148,35 +144,28 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 
 		OclInteger result;
 
-		/* Check if this collection is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-
-		/* Check if the given object is undefined. */
-		else if (anObject.isOclUndefined().isTrue()) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(anObject.getUndefinedreason());
-		}
+		checkUndefinedAndInvalid(this, anObject);
 
 		/* Else compute the result. */
+		int intResult;
+
+		intResult =
+				((List<IModelInstanceElement>) imiCollection.getCollection())
+						.indexOf(anObject) + 1;
+
+		if (intResult > 0) {
+			IModelInstanceInteger imiResult =
+					BasisJavaModelInstanceFactory.createModelInstanceInteger(new Long(
+							intResult));
+			result = new JavaOclInteger(imiResult);
+		}
+
 		else {
-			int intResult;
-
-			intResult =
-					((List<IModelInstanceElement>) imiCollection.getCollection())
-							.indexOf(anObject) + 1;
-
-			if (intResult > 0) {
-				result = new JavaOclInteger(intResult);
-			}
-
-			else {
-				result = new JavaOclInteger(null);
-				result.setUndefinedreason("object " + anObject
-						+ " not found within indexOf()");
-			}
+			// TODO Michael: OclInvalid or OclUndefined?
+			result =
+					JavaStandardLibraryFactory.INSTANCE.createOclInteger((Long) null);
+			result.setUndefinedreason("object " + anObject
+					+ " not found within indexOf()");
 		}
 
 		return result;
@@ -191,27 +180,24 @@ public abstract class JavaOclSortedCollection<T extends OclRoot> extends
 
 		OclSequence<T> result;
 
-		/* Check if this collection is undefined. */
-		if (isOclUndefined().isTrue()) {
-			result = new JavaOclSequence<T>(null);
-			result.setUndefinedreason(getUndefinedreason());
-		}
-
-		/* Else check if the given collection is undefined. */
-		else if (aCollection.isOclUndefined().isTrue()) {
-			result = aCollection;
-		}
+		checkUndefinedAndInvalid(this, aCollection);
 
 		/* Else compute the result. */
-		else {
-			Collection<IModelInstanceElement> resultCollection;
+		List<IModelInstanceElement> resultCollection;
 
-			resultCollection = imiCollection.getCollection();
-			resultCollection
-					.addAll((Collection<? extends IModelInstanceElement>) aCollection
-							.getAdaptedCollection());
+		resultCollection =
+				(List<IModelInstanceElement>) imiCollection.getCollection();
+		resultCollection
+				.addAll((Collection<? extends IModelInstanceElement>) aCollection
+						.getModelInstanceElement());
 
-			result = new JavaOclSequence<T>(resultCollection);
+		try {
+			result =
+					JavaStandardLibraryFactory.INSTANCE
+							.createOclSequence(resultCollection);
+		} catch (TypeNotFoundInModelException e) {
+			// TODO Michael: can this happen?
+			throw new InvalidException(e);
 		}
 
 		return result;

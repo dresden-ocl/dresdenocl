@@ -48,6 +48,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
@@ -58,7 +59,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardL
  * @author Ronny Brandt
  * @author Michael Thiele
  */
-public abstract class JavaOclCollection<T extends OclAny> extends JavaOclAny
+public abstract class JavaOclCollection<T extends OclAny> extends JavaOclLibraryObject
 		implements OclCollection<T> {
 
 	protected IModelInstanceCollection<IModelInstanceElement> imiCollection;
@@ -161,9 +162,9 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclAny
 		checkUndefinedAndInvalid(this, that);
 
 		/* Else compute the result. */
-		int intResult;
+		Long intResult;
 
-		intResult = 0;
+		intResult = 0L;
 
 		for (IModelInstanceElement anElement : this.imiCollection.getCollection()) {
 			T oclElement =
@@ -173,7 +174,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclAny
 			}
 		}
 
-		result = new JavaOclInteger(intResult);
+		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(intResult);
 
 		return result;
 	}
@@ -214,7 +215,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclAny
 					(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
 			excludesElement = this.excludes(oclElement);
 
-			if (excludesElement.isOclUndefined().isTrue()) {
+			if (excludesElement.oclIsUndefined().isTrue()) {
 				result = excludesElement;
 				break;
 			}
@@ -255,7 +256,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclAny
 		for (IModelInstanceElement anElement : imiCollection.getCollection()) {
 			T oclElement =
 					(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
-			if (!oclElement.isOclUndefined().isTrue()
+			if (!oclElement.oclIsUndefined().isTrue()
 					&& oclElement.isEqualTo(that).isTrue()) {
 				boolResult = true;
 				break;
@@ -298,7 +299,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclAny
 
 			/* If an element is not contained, return false. */
 
-			if (isElementContained.isOclUndefined().isTrue()
+			if (isElementContained.oclIsUndefined().isTrue()
 					|| !isElementContained.isTrue()) {
 				adaptedResult = false;
 				break;
@@ -407,11 +408,11 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclAny
 
 		checkUndefinedAndInvalid(this);
 
-		int adaptedResult;
+		Long intResult;
 
-		adaptedResult = imiCollection.getCollection().size();
+		intResult = new Long(imiCollection.getCollection().size());
 
-		result = new JavaOclInteger(adaptedResult);
+		result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(intResult);
 
 		return result;
 	}
@@ -431,7 +432,9 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclAny
 
 		/* Else check if this collection is empty. */
 		if (this.isEmpty().isTrue()) {
-			result = (T) new JavaOclInteger(0);
+			// TODO Michael: what happens, if this this collection contains real
+			// values?
+			result = (T) JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
 		}
 
 		/* Else iterate through the collection and compute the sum. */
@@ -441,8 +444,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclAny
 				for (IModelInstanceElement anElement : imiCollection.getCollection()) {
 
 					T oclElement =
-							(T) JavaStandardLibraryFactory.INSTANCE
-									.createOclAny(anElement);
+							(T) JavaStandardLibraryFactory.INSTANCE.createOclAny(anElement);
 					if (result == null) {
 						result = oclElement;
 					}
