@@ -383,14 +383,27 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 
 		boolean result;
 
-		if (object instanceof EcoreModelInstanceObject) {
+		if (object == null) {
+			result = false;
+		}
 
-			EcoreModelInstanceObject ecoreModelInstanceObject;
-			ecoreModelInstanceObject = (EcoreModelInstanceObject) object;
+		else if (object instanceof EcoreModelInstanceObject) {
 
-			result = this.myEObject == ecoreModelInstanceObject.myEObject;
-			result &= this.myTypes.size() == ecoreModelInstanceObject.myTypes.size();
-			result &= this.myTypes.containsAll(ecoreModelInstanceObject.myTypes);
+			EcoreModelInstanceObject other;
+			other = (EcoreModelInstanceObject) object;
+
+			/* FIXME Claas: Ask Micha if this is right. */
+			if (this.isUndefined() || other.isUndefined()) {
+				result = false;
+			}
+
+			else {
+				/* Check if both objects adapt the same object. */
+				result = this.myEObject == other.myEObject;
+
+				/* Check if both objects have the same type(s). */
+				result &= this.myTypes.equals(other.myTypes);
+			}
 		}
 
 		else {
@@ -519,6 +532,29 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 
 	/*
 	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		int result;
+
+		if (this.isUndefined()) {
+			result = 0;
+		}
+
+		else {
+			result = 31 * this.myEObject.hashCode();
+
+			result = 31 * result + this.myTypes.hashCode();
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 	 * #isUndefined()
@@ -538,91 +574,91 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 	public IModelInstanceElement invokeOperation(Operation operation,
 			List<IModelInstanceElement> args) throws OperationNotFoundException,
 			OperationAccessException {
-	
+
 		IModelInstanceElement result;
-	
+
 		/* Check if this object is undefined. */
 		if (this.myEObject == null) {
 			Set<Type> types;
-	
+
 			types = new HashSet<Type>();
 			types.add(operation.getType());
-	
+
 			/* The result will be undefined as well. */
 			result = new EcoreModelInstanceObject(null, types, this.myFactory);
 		}
-	
+
 		/* Else find and invoke the operation. */
 		else {
 			Method operationMethod;
-	
+
 			int argSize;
 			Class<?>[] argumentTypes;
 			Object[] argumentValues;
-	
+
 			/* Try to find the method to invoke. */
 			operationMethod = this.findMethodOfAdaptedObject(operation);
-	
+
 			argumentTypes = operationMethod.getParameterTypes();
 			argumentValues = new Object[args.size()];
-	
+
 			/* Avoid errors through to much arguments given by the invocation. */
 			argSize = Math.min(args.size(), operation.getSignatureParameter().size());
-	
+
 			/* Adapt the argument values. */
 			for (int index = 0; index < argSize; index++) {
-	
+
 				argumentValues[index] =
 						EcoreModelInstance.createAdaptedElement(args.get(index),
 								argumentTypes[index]);
 				index++;
 			}
-	
+
 			/* Try to invoke the found method. */
 			try {
 				Object adapteeResult;
 				operationMethod.setAccessible(true);
-	
+
 				adapteeResult = operationMethod.invoke(this.myEObject, argumentValues);
-	
+
 				/* Adapt the result to the expected result type. */
 				result =
 						AbstractModelInstance.adaptInvocationResult(adapteeResult,
 								operation.getType(), operation, this.myFactory);
 			}
-	
+
 			catch (IllegalArgumentException e) {
 				String msg;
-	
+
 				msg =
 						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
-	
+
 				throw new OperationAccessException(msg, e);
 			}
-	
+
 			catch (IllegalAccessException e) {
 				String msg;
-	
+
 				msg =
 						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
-	
+
 				throw new OperationAccessException(msg, e);
 			}
-	
+
 			catch (InvocationTargetException e) {
 				String msg;
-	
+
 				msg =
 						EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationAccessFailed;
 				msg = NLS.bind(msg, operation, e.getMessage());
-	
+
 				throw new OperationAccessException(msg, e);
 			}
 		}
 		// end else.
-	
+
 		return result;
 	}
 
@@ -850,34 +886,34 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 	 */
 	private Method findMethodOfAdaptedObject(Operation operation)
 			throws OperationNotFoundException {
-	
+
 		Method result;
-	
+
 		Class<?> methodSourceClass;
-	
+
 		result = null;
 		methodSourceClass = this.myAdaptedType;
-	
+
 		/*
 		 * Try to find an according method in the adapted objects class, or one of
 		 * its super classes.
 		 */
 		while (methodSourceClass != null && result == null) {
-	
+
 			for (Method aMethod : methodSourceClass.getDeclaredMethods()) {
-	
+
 				boolean nameIsEqual;
 				boolean resultTypeIsConform;
 				boolean argumentSizeIsEqual;
-	
+
 				/* Check if the name matches to the given operation's name. */
 				nameIsEqual = aMethod.getName().equals(operation.getName());
-	
+
 				/* Check if the return type matches to the given operation's type. */
 				resultTypeIsConform =
 						EcoreModelInstanceTypeUtility.conformsTypeToType(aMethod
 								.getGenericReturnType(), operation.getType());
-	
+
 				/*
 				 * Check if the method has the same size of arguments as the given
 				 * operation.
@@ -885,22 +921,22 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 				argumentSizeIsEqual =
 						aMethod.getParameterTypes().length == operation
 								.getSignatureParameter().size();
-	
+
 				if (nameIsEqual && resultTypeIsConform && argumentSizeIsEqual) {
-	
+
 					java.lang.reflect.Type[] javaTypes;
 					List<Parameter> pivotModelParamters;
-	
+
 					boolean matches;
-	
+
 					javaTypes = aMethod.getGenericParameterTypes();
 					pivotModelParamters = operation.getSignatureParameter();
-	
+
 					matches = true;
-	
+
 					/* Compare the types of all arguments. */
 					for (int index = 0; index < operation.getSignatureParameter().size(); index++) {
-	
+
 						if (!EcoreModelInstanceTypeUtility.conformsTypeToType(
 								javaTypes[index], pivotModelParamters.get(index).getType())) {
 							matches = false;
@@ -908,7 +944,7 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 						}
 						// no else.
 					}
-	
+
 					if (matches) {
 						result = aMethod;
 						break;
@@ -918,23 +954,23 @@ public class EcoreModelInstanceObject extends AbstractModelInstanceElement
 				// no else.
 			}
 			// end for.
-	
+
 			methodSourceClass = methodSourceClass.getSuperclass();
 		}
 		// end while.
-	
+
 		/* Probably throw an exception. */
 		if (result == null) {
 			String msg;
-	
+
 			msg =
 					EcoreModelInstanceTypeMessages.EcoreModelInstanceObject_OperationNotFound;
 			msg = NLS.bind(msg, operation, this.myEObject.getClass());
-	
+
 			throw new OperationNotFoundException(msg);
 		}
 		// no else.
-	
+
 		return result;
 	}
 }
