@@ -32,6 +32,7 @@ public class EcoreModelInstanceTypeMessages extends NLS {
 	private static final String BUNDLE_NAME =
 			"tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.messages"; //$NON-NLS-1$
 
+
 	public static String EcoreModelInstanceProvider_InvalidURL;
 
 	public static String EcoreModelInstance_CannotRetrieveElements;
@@ -41,6 +42,8 @@ public class EcoreModelInstanceTypeMessages extends NLS {
 	public static String EcoreModelInstance_NoSupportOfStaticOperations;
 	public static String EcoreModelInstance_EnumerationLiteralNotFound;
 	public static String EcoreModelInstance_CannotCastTypeClassNotFound;
+	public static String EcoreModelInstance_CannotRecreateArray;
+	public static String EcoreModelInstance_CannotRecreateCollection;
 
 	public static String EcoreModelInstanceFactory_AdapteeIsNoEObjectInstance;
 	public static String EcoreModelInstanceFactory_TypeNotFoundInModel;

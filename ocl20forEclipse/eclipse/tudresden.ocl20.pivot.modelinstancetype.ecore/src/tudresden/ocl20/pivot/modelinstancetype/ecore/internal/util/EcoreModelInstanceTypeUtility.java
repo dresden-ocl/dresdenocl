@@ -22,15 +22,18 @@ import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
 
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -44,48 +47,35 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class EcoreModelInstanceTypeUtility {
 
-	/** FIXME Claas: OPEN_QUESTIONS_IN_THE_FOLLOWING. */
-	private static final int OPEN_QUESTIONS_IN_THE_FOLLOWING = 0;
+	/**
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#BOOLEAN}.
+	 */
+	private static final Class<?> BOOLEAN_CLASSES[] =
+			new Class<?>[] { boolean.class, Boolean.class };
 
 	/**
-	 * <p>
-	 * A helper method that checks if a given {@link EClass} conforms to a given
-	 * {@link Type} from the {@link IModel}.
-	 * </p>
-	 * 
-	 * @param eClass
-	 *          The {@link EClass} that shall be checked.
-	 * @param type
-	 *          The {@link Type} the {@link EClass} shall conform to.
-	 * @return True, if the given {@link EClass} conforms to the given
-	 *         {@link Type}.
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#INTEGER}.
 	 */
-	public static boolean conformsEClassToType(EClass eClass, Type type) {
-	
-		boolean result;
-	
-		List<String> qualifiedNameOfClass;
-		List<String> qualifiedNameOfType;
-	
-		qualifiedNameOfClass = toQualifiedNameList(eClass);
-		qualifiedNameOfType = type.getQualifiedNameList();
-	
-		result = true;
-	
-		/* Compare both lists. */
-		while (qualifiedNameOfClass.size() > 0 && qualifiedNameOfType.size() > 0
-				&& result) {
-			String element1;
-			String element2;
-	
-			element1 = qualifiedNameOfClass.remove(qualifiedNameOfClass.size() - 1);
-			element2 = qualifiedNameOfType.remove(qualifiedNameOfType.size() - 1);
-	
-			result &= element1.equals(element2);
-		}
-	
-		return result;
-	}
+	private static final Class<?> INTEGER_CLASSES[] =
+			new Class<?>[] { BigDecimal.class, BigInteger.class, byte.class,
+					Byte.class, int.class, Integer.class, long.class, Long.class,
+					short.class, Short.class };
+
+	/**
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#REAL}.
+	 */
+	private static final Class<?> REAL_CLASSES[] =
+			new Class<?>[] { double.class, Double.class, float.class, Float.class };
+
+	/**
+	 * An array containing all Java {@link Class}es that can be mapped to the
+	 * {@link PrimitiveTypeKind#STRING}.
+	 */
+	private static final Class<?> STRING_CLASSES[] =
+			new Class<?>[] { char.class, Character.class, String.class };
 
 	/**
 	 * <p>
@@ -101,46 +91,46 @@ public class EcoreModelInstanceTypeUtility {
 	 */
 	public static boolean conformsTypeToType(
 			java.lang.reflect.Type reflectionType, Type type) {
-	
+
 		boolean result;
-	
+
 		/* If the reflective type is a class, compare the qualified names. */
 		if (reflectionType instanceof Class) {
 			Class<?> clazz;
 			clazz = (Class<?>) reflectionType;
-	
+
 			if (clazz.isArray()) {
 				result = conformsTypeToType(clazz.getComponentType(), type);
 			}
-	
+
 			else {
 				result =
 						toQualifiedNameList(clazz.getCanonicalName()).equals(
 								type.getQualifiedNameList());
 			}
 		}
-	
+
 		/* If the type is an array, compare its component type with the type. */
 		else if (reflectionType instanceof GenericArrayType) {
 			GenericArrayType genericArrayType;
 			genericArrayType = (GenericArrayType) reflectionType;
-	
+
 			result =
 					conformsTypeToType(genericArrayType.getGenericComponentType(), type);
 		}
-	
+
 		else if (reflectionType instanceof ParameterizedType) {
-	
+
 			ParameterizedType parameterizedType;
 			parameterizedType = (ParameterizedType) reflectionType;
-	
+
 			/* Check if exactly one generic parameter is set. */
 			if (parameterizedType.getActualTypeArguments().length == 1) {
 				result =
 						conformsTypeToType(parameterizedType.getActualTypeArguments()[0],
 								type);
 			}
-	
+
 			/*
 			 * Else a ParameterizedType can contain more than one classes. Thus, the
 			 * result is not unambiguous.
@@ -149,71 +139,30 @@ public class EcoreModelInstanceTypeUtility {
 				result = false;
 			}
 		}
-	
+
 		else if (reflectionType instanceof TypeVariable) {
-	
+
 			/*
 			 * A TypeVariable can contain more than one classes. Thus, the result is
 			 * not unambiguous.
 			 */
 			result = false;
 		}
-	
+
 		else if (reflectionType instanceof WildcardType) {
-	
+
 			/*
 			 * A WildcardType can contain more than one classes. Thus, the result is
 			 * not unambiguous.
 			 */
 			result = false;
 		}
-	
+
 		/* No Type of the Java standard library. Cannot compare. */
 		else {
 			result = false;
 		}
-	
-		return result;
-	}
 
-	/**
-	 * <p>
-	 * A helper method that searches for an {@link EClass} that conforms to a
-	 * given {@link Type} starting with a given {@link EClass} and iterating
-	 * through all the {@link EClass}' super {@link EClass}es. If no matching
-	 * {@link EClass} can be found, <code>null</code> is returned.
-	 * </p>
-	 * 
-	 * @param eClass
-	 *          The {@link EClass} where the search shall be started.
-	 * @param type
-	 *          The {@link Type} the searched {@link EClass} shall conform to.
-	 * @return The found {@link EClass} or <code>null</code>.
-	 */
-	public static EClass findEClassOfType(EClass eClass, Type type) {
-	
-		EClass result;
-		result = null;
-	
-		/* Check if the given EClass itself matches to the given type. */
-		if (conformsEClassToType(eClass, type)) {
-			result = eClass;
-		}
-	
-		/* Else search through all its super types. */
-		else {
-			for (EClass aSuperType : eClass.getEAllSuperTypes()) {
-				result = findEClassOfType(aSuperType, type);
-	
-				if (result != null) {
-					break;
-				}
-				// no else.
-			}
-			// end for.
-		}
-		// end else.
-	
 		return result;
 	}
 
@@ -268,45 +217,92 @@ public class EcoreModelInstanceTypeUtility {
 
 		List<String> result;
 
-		result = new ArrayList<String>(Arrays.asList(canonicalName.split("[.]")));
-		result.add(0, IModelBusConstants.ROOT_PACKAGE_NAME);
+		/* Check for primitive types. */
+		result = toPrimitiveQualifiedName(canonicalName);
+
+		if (result == null) {
+			result = new ArrayList<String>(Arrays.asList(canonicalName.split("[.]")));
+			result.add(0, IModelBusConstants.ROOT_PACKAGE_NAME);
+		}
+		// no else.
 
 		return result;
 	}
 
 	/**
 	 * <p>
-	 * A helper method that returns the qualified name (as a {@link List} of
-	 * {@link String}s) of a given {@link EClass}.
+	 * A helper method that converts a given canonical name of a java
+	 * {@link Class} into the qualified name (as a {@link List} of {@link String}
+	 * s) if the given {@link Class} can be mapped to a {@link PrimitiveType} of
+	 * any {@link PrimitiveTypeKind}. Else <code>null</code> is returned.
 	 * </p>
 	 * 
-	 * @param eClass
-	 *          The {@link EClass} whose qualified name shall be returned.
-	 * @return The qualified name of the given {@link EClass}.
+	 * @param canonicalName
+	 *          The canonical name that shall be converted.
+	 * @return The qualified name of a {@link PrimitiveType} or <code>null</code>.
 	 */
-	public static List<String> toQualifiedNameList(EClass eClass) {
+	private static List<String> toPrimitiveQualifiedName(String canonicalName) {
 
 		List<String> result;
-		EPackage ePackage;
+		result = null;
 
-		result = new ArrayList<String>();
-
-		/* Add the name of the class. */
-		result.add(eClass.getName());
-
-		ePackage = eClass.getEPackage();
-
-		/* Iterate through the packages and add their names as well. */
-		while (ePackage != null) {
-			result.add(0, ePackage.getName());
-			ePackage = ePackage.getESuperPackage();
-
-			/*
-			 * FIXME Claas: Ask Micha if their is a better way to find the super
-			 * packages.
-			 */
+		/* Check for the void type. */
+		if (canonicalName.equalsIgnoreCase(PrimitiveTypeKind.VOID.toString())) {
+			result = new ArrayList<String>();
+			result.add(PrimitiveTypeKind.VOID.toString());
 		}
-		// end while.
+
+		/* Probably check for a Boolean type. */
+		if (result == null) {
+			for (Class<?> clazz : BOOLEAN_CLASSES) {
+				if (canonicalName.equals(clazz.getCanonicalName())) {
+					result = new ArrayList<String>();
+					result.add(PrimitiveTypeKind.BOOLEAN.toString());
+					break;
+				}
+				// no else.
+			}
+		}
+		// no else.
+
+		/* Probably check for an Integer type. */
+		if (result == null) {
+			for (Class<?> clazz : INTEGER_CLASSES) {
+				if (canonicalName.equals(clazz.getCanonicalName())) {
+					result = new ArrayList<String>();
+					result.add(PrimitiveTypeKind.INTEGER.toString());
+					break;
+				}
+				// no else.
+			}
+		}
+		// no else.
+
+		/* Probably check for a Real type. */
+		if (result == null) {
+			for (Class<?> clazz : REAL_CLASSES) {
+				if (canonicalName.equals(clazz.getCanonicalName())) {
+					result = new ArrayList<String>();
+					result.add(PrimitiveTypeKind.REAL.toString());
+					break;
+				}
+				// no else.
+			}
+		}
+		// no else.
+
+		/* Probably check for a String type. */
+		if (result == null) {
+			for (Class<?> clazz : STRING_CLASSES) {
+				if (canonicalName.equals(clazz.getCanonicalName())) {
+					result = new ArrayList<String>();
+					result.add(PrimitiveTypeKind.STRING.toString());
+					break;
+				}
+				// no else.
+			}
+		}
+		// no else.
 
 		return result;
 	}
