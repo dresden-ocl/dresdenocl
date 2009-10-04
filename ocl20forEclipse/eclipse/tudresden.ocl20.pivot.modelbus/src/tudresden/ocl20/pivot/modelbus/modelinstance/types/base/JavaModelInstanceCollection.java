@@ -301,30 +301,48 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 	 */
 	@Override
 	public boolean equals(Object object) {
-
+	
 		boolean result;
-
-		if (object instanceof JavaModelInstanceCollection) {
-
-			JavaModelInstanceCollection<?> javaModelInstanceCollection;
-			javaModelInstanceCollection = (JavaModelInstanceCollection<?>) object;
-
-			result = this.isOrdered() == javaModelInstanceCollection.isOrdered();
-			result &= this.isUnique() == javaModelInstanceCollection.isUnique();
-			result &=
-					this.getTypes().size() == javaModelInstanceCollection.getTypes()
-							.size();
-			result &=
-					this.getTypes().containsAll(javaModelInstanceCollection.getTypes());
-			result &=
-					this.getCollection().equals(
-							javaModelInstanceCollection.getCollection());
+	
+		if (object == null) {
+			result = false;
 		}
-
+	
+		else if (this == object) {
+			result = true;
+		}
+	
+		if (object instanceof JavaModelInstanceCollection) {
+	
+			JavaModelInstanceCollection<?> other;
+			other = (JavaModelInstanceCollection<?>) object;
+	
+			/* FIXME Claas: Ask Micha if this is right. */
+			if (this.isUndefined() || other.isUndefined()) {
+				result = false;
+			}
+	
+			else {
+				result = true;
+	
+				/* Check if both collections are ordered. */
+				result &= this.isOrdered() == other.isOrdered();
+	
+				/* Check if both collections are unique. */
+				result &= this.isUnique() == other.isUnique();
+	
+				/* Check if both collections have the same type(s). */
+				result &= this.getTypes().equals(other.getTypes());
+	
+				/* Check if both collections have the same elements. */
+				result &= this.getCollection().equals(other.getCollection());
+			}
+		}
+	
 		else {
 			result = false;
 		}
-
+	
 		return result;
 	}
 
@@ -339,6 +357,59 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 		return this.myContainedObjects;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		int result;
+		int prime = 31;
+
+		result = 0;
+
+		if (this.isOrdered()) {
+			result += 1231;
+		}
+
+		else {
+			result += 1237;
+		}
+
+		if (this.isUnique()) {
+			result = prime * result + 1231;
+		}
+
+		else {
+			result = prime * result + 1237;
+		}
+
+		if (this.myContainedObjects == null) {
+			result = prime * result;
+		}
+
+		else {
+			result = prime * result + this.myContainedObjects.hashCode();
+		}
+
+		if (this.myTypes == null) {
+			result = prime * result;
+		}
+
+		else {
+			result = prime * result + this.myTypes.hashCode();
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#hashCode()
+	 */
 	/*
 	 * (non-Javadoc)
 	 * @see

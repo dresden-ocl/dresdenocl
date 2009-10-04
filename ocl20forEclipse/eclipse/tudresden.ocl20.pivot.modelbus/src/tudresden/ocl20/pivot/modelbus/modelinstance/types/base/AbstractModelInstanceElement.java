@@ -75,6 +75,20 @@ public abstract class AbstractModelInstanceElement implements
 	@Override
 	public abstract boolean equals(Object object);
 
+	/**
+	 * <p>
+	 * This method must be overriden according to the required implementation of
+	 * {@link AbstractModelInstanceElement#equals(Object)}.
+	 * </p>
+	 * 
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 * @see tudresden.ocl20.pivot.modelbus.modelinstance.types.base.AbstractModelInstanceElement#equals(Object)
+	 */
+	@Override
+	public abstract int hashCode();
+
 	/*
 	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceElement#getName()

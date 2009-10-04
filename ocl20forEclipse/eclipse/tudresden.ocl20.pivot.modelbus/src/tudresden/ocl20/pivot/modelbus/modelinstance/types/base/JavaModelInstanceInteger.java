@@ -205,13 +205,24 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 	public boolean equals(Object object) {
 
 		boolean result;
-		
-		if (object instanceof JavaModelInstanceInteger) {
 
-			JavaModelInstanceInteger javaModelInstanceInteger;
-			javaModelInstanceInteger = (JavaModelInstanceInteger) object;
+		if (object == null) {
+			result = false;
+		}
 
-			result = this.myLong.equals(javaModelInstanceInteger.myLong);
+		else if (object instanceof JavaModelInstanceInteger) {
+
+			JavaModelInstanceInteger other;
+			other = (JavaModelInstanceInteger) object;
+
+			/* FIXME Claas: Ask Micha if this is right. */
+			if (this.isUndefined() || other.isUndefined()) {
+				result = false;
+			}
+
+			else {
+				result = this.getLong().equals(other.getLong());
+			}
 		}
 
 		else {
@@ -230,6 +241,27 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 	public Long getLong() {
 
 		return this.myLong;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		int result;
+
+		if (this.getLong() == null) {
+			result = 0;
+		}
+
+		else {
+			result = this.getLong().hashCode();
+		}
+
+		return result;
 	}
 
 	/*

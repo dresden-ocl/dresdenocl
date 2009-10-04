@@ -188,13 +188,25 @@ public class ModelInstanceEnumerationLiteral extends
 
 		boolean result;
 
-		if (object instanceof ModelInstanceEnumerationLiteral) {
+		if (object == null) {
+			result = false;
+		}
 
-			ModelInstanceEnumerationLiteral modelInstanceEnumerationLiteral;
-			modelInstanceEnumerationLiteral =
-					(ModelInstanceEnumerationLiteral) object;
+		else if (object instanceof ModelInstanceEnumerationLiteral) {
 
-			result = this.myLiteral.equals(modelInstanceEnumerationLiteral.myLiteral);
+			ModelInstanceEnumerationLiteral other;
+			other = (ModelInstanceEnumerationLiteral) object;
+
+			/* FIXME Claas: Ask Micha if this is right. */
+			if (this.isUndefined() || other.isUndefined()) {
+				result = false;
+			}
+
+			else {
+				result =
+						this.getLiteral().getQualifiedName().equals(
+								other.getLiteral().getQualifiedName());
+			}
 		}
 
 		else {
@@ -213,6 +225,27 @@ public class ModelInstanceEnumerationLiteral extends
 	public EnumerationLiteral getLiteral() {
 
 		return this.myLiteral;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		int result;
+
+		if (this.isUndefined()) {
+			result = 0;
+		}
+
+		else {
+			result = 31 * this.getLiteral().getQualifiedName().hashCode();
+		}
+
+		return result;
 	}
 
 	/*

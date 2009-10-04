@@ -207,12 +207,23 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 		boolean result;
 
-		if (object instanceof JavaModelInstanceReal) {
+		if (object == null) {
+			result = false;
+		}
 
-			JavaModelInstanceReal javaModelInstanceReal;
-			javaModelInstanceReal = (JavaModelInstanceReal) object;
+		else if (object instanceof JavaModelInstanceReal) {
 
-			result = this.myNumber.equals(javaModelInstanceReal.myNumber);
+			JavaModelInstanceReal other;
+			other = (JavaModelInstanceReal) object;
+
+			/* FIXME Claas: Ask Micha if this is right. */
+			if (this.isUndefined() || other.isUndefined()) {
+				result = false;
+			}
+
+			else {
+				result = this.getDouble().equals(other.getDouble());
+			}
 		}
 
 		else {
@@ -238,6 +249,27 @@ public class JavaModelInstanceReal extends AbstractModelInstanceElement
 
 		else {
 			result = null;
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		int result;
+
+		if (this.getDouble() == null) {
+			result = 0;
+		}
+
+		else {
+			result = this.getDouble().hashCode();
 		}
 
 		return result;

@@ -202,13 +202,24 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 	public boolean equals(Object object) {
 
 		boolean result;
-		
-		if (object instanceof JavaModelInstanceBoolean) {
 
-			JavaModelInstanceBoolean javaModelInstanceBoolean;
-			javaModelInstanceBoolean = (JavaModelInstanceBoolean) object;
+		if (object == null) {
+			result = false;
+		}
 
-			result = this.myBoolean.equals(javaModelInstanceBoolean.myBoolean);
+		else if (object instanceof JavaModelInstanceBoolean) {
+
+			JavaModelInstanceBoolean other;
+			other = (JavaModelInstanceBoolean) object;
+
+			/* FIXME Claas: Ask Micha if this is right. */
+			if (this.isUndefined() || other.isUndefined()) {
+				result = false;
+			}
+
+			else {
+				result = this.getBoolean().equals(other.getBoolean());
+			}
 		}
 
 		else {
@@ -227,6 +238,27 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceElement
 	public Boolean getBoolean() {
 
 		return this.myBoolean;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		int result;
+
+		if (this.getBoolean() == null) {
+			result = 0;
+		}
+
+		else {
+			result = this.getBoolean().hashCode();
+		}
+
+		return result;
 	}
 
 	/*

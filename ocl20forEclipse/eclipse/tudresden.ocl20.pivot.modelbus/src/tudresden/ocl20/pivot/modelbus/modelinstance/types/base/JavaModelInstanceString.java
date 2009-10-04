@@ -248,12 +248,28 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 
 		boolean result;
 
-		if (object instanceof JavaModelInstanceString) {
+		if (object == null) {
+			result = false;
+		}
 
-			JavaModelInstanceString javaModelInstanceString;
-			javaModelInstanceString = (JavaModelInstanceString) object;
+		/* FIXME Claas: Ask Micha what todo here. */
+		else if (this.isUndefined()) {
+			result = false;
+		}
 
-			result = this.myString.equals(javaModelInstanceString.myString);
+		else if (object instanceof JavaModelInstanceString) {
+
+			JavaModelInstanceString other;
+			other = (JavaModelInstanceString) object;
+
+			/* FIXME Claas: Ask Micha if this is right. */
+			if (this.isUndefined() || other.isUndefined()) {
+				result = false;
+			}
+
+			else {
+				result = this.getString().equals(other.getString());
+			}
 		}
 
 		else {
@@ -272,6 +288,27 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 	public String getString() {
 
 		return this.myString;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		int result;
+
+		if (this.getString() == null) {
+			result = 0;
+		}
+
+		else {
+			result = this.getString().hashCode();
+		}
+
+		return result;
 	}
 
 	/*
