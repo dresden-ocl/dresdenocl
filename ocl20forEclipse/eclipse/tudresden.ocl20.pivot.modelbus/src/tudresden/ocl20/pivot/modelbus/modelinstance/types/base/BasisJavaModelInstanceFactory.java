@@ -392,8 +392,15 @@ public class BasisJavaModelInstanceFactory implements IModelInstanceFactory {
 			CollectionType collectionType;
 			collectionType = (CollectionType) type;
 
-			/* Check if the object is an array. */
-			if (adapted.getClass().isArray()) {
+			/* Check if the object is null. */
+			if (adapted == null) {
+				result =
+						createModelInstanceCollection(
+								new ArrayList<IModelInstanceElement>(), collectionType);
+			}
+
+			/* Else check if the object is an array. */
+			else if (adapted.getClass().isArray()) {
 
 				try {
 					result =
