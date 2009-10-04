@@ -379,14 +379,27 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 
 		boolean result;
 
-		if (object instanceof JavaModelInstanceObject) {
+		if (object == null) {
+			result = false;
+		}
 
-			JavaModelInstanceObject javaModelInstanceObject;
-			javaModelInstanceObject = (JavaModelInstanceObject) object;
+		else if (object instanceof JavaModelInstanceObject) {
 
-			result = this.myAdaptedObject == javaModelInstanceObject.myAdaptedObject;
-			result &= this.myTypes.size() == javaModelInstanceObject.myTypes.size();
-			result &= this.myTypes.containsAll(javaModelInstanceObject.myTypes);
+			JavaModelInstanceObject other;
+			other = (JavaModelInstanceObject) object;
+
+			/* FIXME Claas: Ask Micha if this is right. */
+			if (this.isUndefined() || other.isUndefined()) {
+				result = false;
+			}
+
+			else {
+				/* Check if both objects adapt the same object. */
+				result = this.myAdaptedObject == other.myAdaptedObject;
+
+				/* Check if both objects have the same type(s). */
+				result &= this.myTypes.equals(other.myTypes);
+			}
 		}
 
 		else {
@@ -404,6 +417,29 @@ public class JavaModelInstanceObject extends AbstractModelInstanceElement
 	public Object getObject() {
 
 		return this.myAdaptedObject;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * AbstractModelInstanceElement#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		int result;
+
+		if (this.isUndefined()) {
+			result = 0;
+		}
+
+		else {
+			result = 31 * this.myAdaptedObject.hashCode();
+
+			result = 31 * result + this.myTypes.hashCode();
+		}
+
+		return result;
 	}
 
 	/*
