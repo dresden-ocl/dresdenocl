@@ -35,7 +35,7 @@ import java.util.List;
 
 import tudresden.ocl20.interpreter.internal.InterpretationEnvironment;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -344,7 +344,7 @@ public interface IOclInterpreter {
 	 * @param value
 	 *          The value of the {@link Variable} that shall.
 	 */
-	public void setEnviromentVariable(String name, OclRoot value);
+	public void setEnviromentVariable(String name, OclAny value);
 
 	/**
 	 * <p>

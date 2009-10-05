@@ -13,7 +13,8 @@
  */
 package tudresden.ocl20.interpreter;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.interpreter.internal.InterpretationResultImpl;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
@@ -46,7 +47,7 @@ public interface IInterpretationResult {
 	 * @return The result of this {@link InterpretationResultImpl} as
 	 *         {@link OclRoot} .
 	 */
-	public OclRoot getResult();
+	public OclAny getResult();
 
 	/**
 	 * <p>

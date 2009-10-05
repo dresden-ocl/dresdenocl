@@ -31,7 +31,7 @@
 package tudresden.ocl20.interpreter;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -70,7 +70,7 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * @param anOclRoot
 	 *          The variable to be saved.
 	 */
-	public void addVar(String path, OclRoot anOclRoot);
+	public void addVar(String path, OclAny anOclRoot);
 
 	/**
 	 * <p>
@@ -83,7 +83,7 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * @param result
 	 *          The result for the {@link NamedElement}.
 	 */
-	public void cacheResult(NamedElement anElement, OclRoot result);
+	public void cacheResult(NamedElement anElement, OclAny result);
 
 	/**
 	 * <p>
@@ -119,7 +119,7 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * 
 	 * @return The cached result.
 	 */
-	public OclRoot getCachedResult(NamedElement anElement);
+	public OclAny getCachedResult(NamedElement anElement);
 
 	/**
 	 * <p>
@@ -155,7 +155,7 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * 
 	 * @return The postcondition result for that operation.
 	 */
-	public OclRoot getPostconditionValue(OperationCallExp anOperationCallExp);
+	public OclAny getPostconditionValue(OperationCallExp anOperationCallExp);
 
 	/**
 	 * <p>
@@ -167,7 +167,7 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * 
 	 * @return Saved variables with given name.
 	 */
-	public OclRoot getVar(String path);
+	public OclAny getVar(String path);
 
 	/**
 	 * <p>
@@ -181,7 +181,7 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 *          The result for that operation.
 	 */
 	public void savePostconditionValue(OperationCallExp anOperationCallExp,
-			OclRoot source);
+			OclAny source);
 
 	/**
 	 * <p>

@@ -20,7 +20,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.interpreter.internal;
 
 import tudresden.ocl20.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
@@ -38,8 +38,8 @@ public class InterpretationResultImpl implements IInterpretationResult {
 	/** The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}. */
 	private IModelInstanceElement myModelObject;
 
-	/** The result of this {@link InterpretationResultImpl} as {@link OclRoot}. */
-	private OclRoot myResult;
+	/** The result of this {@link InterpretationResultImpl} as {@link OclAny}. */
+	private OclAny myResult;
 
 	/** The {@link Constraint} of this {@link InterpretationResultImpl}. */
 	private Constraint myConstraint;
@@ -55,10 +55,10 @@ public class InterpretationResultImpl implements IInterpretationResult {
 	 *          The {@link Constraint} of this {@link InterpretationResultImpl}.
 	 * @param result
 	 *          The result of this {@link InterpretationResultImpl} as
-	 *          {@link OclRoot}.
+	 *          {@link OclAny}.
 	 */
 	public InterpretationResultImpl(IModelInstanceElement modelObject,
-			Constraint constraint, OclRoot result) {
+			Constraint constraint, OclAny result) {
 
 		this.myConstraint = constraint;
 		this.myModelObject = modelObject;
@@ -80,13 +80,13 @@ public class InterpretationResultImpl implements IInterpretationResult {
 	/**
 	 * <p>
 	 * Returns the result of this {@link InterpretationResultImpl} as
-	 * {@link OclRoot} .
+	 * {@link OclAny} .
 	 * </p>
 	 * 
 	 * @return The result of this {@link InterpretationResultImpl} as
-	 *         {@link OclRoot} .
+	 *         {@link OclAny} .
 	 */
-	public OclRoot getResult() {
+	public OclAny getResult() {
 
 		return myResult;
 	}
