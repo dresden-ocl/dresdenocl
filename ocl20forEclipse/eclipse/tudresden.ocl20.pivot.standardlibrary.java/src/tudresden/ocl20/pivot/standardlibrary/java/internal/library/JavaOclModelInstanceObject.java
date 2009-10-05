@@ -49,7 +49,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -76,6 +76,14 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 
 		super(imiObject);
 		this.imiObject = imiObject;
+	}
+	
+	public JavaOclModelInstanceObject(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclModelInstanceObject(Throwable invalidReason) {
+		super(invalidReason);
 	}
 
 	public OclAny getProperty(Property property) {

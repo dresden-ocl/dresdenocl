@@ -55,5 +55,14 @@ public class JavaOclEnumLiteral extends JavaOclAny implements OclEnumLiteral {
 	public JavaOclEnumLiteral(IModelInstanceEnumerationLiteral imiEnumerationLiteral) {
 		super(imiEnumerationLiteral);
 	}
+	
+	
+	public JavaOclEnumLiteral(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclEnumLiteral(Throwable invalidReason) {
+		super(invalidReason);
+	}
 
 }

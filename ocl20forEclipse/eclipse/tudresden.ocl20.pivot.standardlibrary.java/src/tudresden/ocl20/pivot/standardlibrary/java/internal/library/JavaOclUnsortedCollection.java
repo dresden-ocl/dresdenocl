@@ -43,7 +43,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.exception.TypeNotFoundInMode
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -61,6 +61,14 @@ public abstract class JavaOclUnsortedCollection<T extends OclAny> extends
 			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
 
 		super(imiCollection);
+	}
+	
+	public JavaOclUnsortedCollection(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclUnsortedCollection(Throwable invalidReason) {
+		super(invalidReason);
 	}
 
 	/*

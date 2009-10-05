@@ -34,7 +34,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -61,6 +62,14 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		super(BasisJavaModelInstanceFactory.createModelInstanceReal(imiInteger
 				.getLong()));
 		this.imiInteger = imiInteger;
+	}
+	
+	public JavaOclInteger(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclInteger(Throwable invalidReason) {
+		super(invalidReason);
 	}
 
 	/*
@@ -103,14 +112,12 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		Long divisor =
 				((IModelInstanceInteger) that.getModelInstanceElement()).getLong();
 
-		if (divisor == 0) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason("Division by zero.");
-		}
-		else {
+		try {
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclInteger(dividend
 							/ divisor);
+		} catch (ArithmeticException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -193,14 +200,12 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 		Long divisor =
 				((IModelInstanceInteger) that.getModelInstanceElement()).getLong();
 
-		if (divisor == 0) {
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason("Division by zero.");
-		}
-		else {
+		try {
 			result =
 					JavaStandardLibraryFactory.INSTANCE.createOclInteger(dividend
 							% divisor);
+		} catch (ArithmeticException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;

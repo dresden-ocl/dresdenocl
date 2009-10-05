@@ -40,7 +40,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollecti
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -74,6 +74,14 @@ public class JavaOclTuple extends JavaOclAny implements OclTuple {
 
 		this.names = names;
 		this.values = values;
+	}
+	
+	public JavaOclTuple(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclTuple(Throwable invalidReason) {
+		super(invalidReason);
 	}
 
 	/*

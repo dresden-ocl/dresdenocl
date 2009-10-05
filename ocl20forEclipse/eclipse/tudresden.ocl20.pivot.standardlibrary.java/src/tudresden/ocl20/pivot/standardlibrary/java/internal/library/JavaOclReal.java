@@ -30,6 +30,9 @@
  */
 package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable;
@@ -37,7 +40,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceReal;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -62,6 +66,35 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal {
 
 		super(imiReal);
 		this.imiReal = imiReal;
+	}
+	
+	public JavaOclReal(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclReal(Throwable invalidReason) {
+		super(invalidReason);
+	}
+
+	/* operation names mapping for OclReal */
+	static {
+		Map<String, String> unaryOperations;
+		Map<String, String> binaryOperations;
+
+		unaryOperations = new HashMap<String, String>();
+		unaryOperations.put("-", "negative");
+		operationNames.put(1, unaryOperations);
+
+		binaryOperations = new HashMap<String, String>();
+		binaryOperations.put("<=", "isLessEqual");
+		binaryOperations.put("<", "isLessThan");
+		binaryOperations.put(">=", "isGreaterEqual");
+		binaryOperations.put(">", "isGreaterThan");
+		binaryOperations.put("-", "subtract");
+		binaryOperations.put("+", "add");
+		binaryOperations.put("*", "multiply");
+		binaryOperations.put("/", "divide");
+		operationNames.put(2, binaryOperations);
 	}
 
 	/*
@@ -113,8 +146,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal {
 
 		OclInteger result;
 
-		/* Check if the given object is an OclReal. */
-		if (that instanceof OclReal) {
+		try {
 
 			OclReal aReal;
 
@@ -134,17 +166,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal {
 			else {
 				result = JavaStandardLibraryFactory.INSTANCE.createOclInteger(0L);
 			}
-		}
-
-		else {
-			String msg;
-
-			msg = "An OclReal could not be compared with a ";
-			msg += that.getClass().getName() + ".";
-
-			result = new JavaOclInteger(null);
-			result.setUndefinedreason(msg);
-
+		} catch (ClassCastException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -167,14 +190,11 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal {
 		Double divisor =
 				((IModelInstanceReal) that.getModelInstanceElement()).getDouble();
 
-		if (divisor == 0) {
-			// FIXME Michael: this should be OclVoid!
-			result = new JavaOclReal(null);
-			result.setUndefinedreason("Division by 0 is not allowed.");
-		}
-		else {
+		try {
 			Double doubleResult = dividend / divisor;
 			result = JavaStandardLibraryFactory.INSTANCE.createOclReal(doubleResult);
+		} catch (ArithmeticException e) {
+			throw new InvalidException(e);
 		}
 
 		return result;

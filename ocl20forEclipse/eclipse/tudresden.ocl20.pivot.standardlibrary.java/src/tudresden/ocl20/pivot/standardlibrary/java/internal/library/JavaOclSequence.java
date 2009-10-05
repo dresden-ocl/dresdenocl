@@ -45,7 +45,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollecti
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -70,6 +70,14 @@ public class JavaOclSequence<T extends OclAny> extends
 			IModelInstanceCollection<IModelInstanceElement> imiCollection) {
 
 		super(imiCollection);
+	}
+	
+	public JavaOclSequence(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclSequence(Throwable invalidReason) {
+		super(invalidReason);
 	}
 
 	/*

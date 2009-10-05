@@ -45,7 +45,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollecti
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -79,6 +79,14 @@ public class JavaOclOrderedSet<T extends OclAny> extends
 		// BasisJavaModelInstanceFactory.createModelInstanceCollection(imiCollection.getCollection(),
 		// PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET);
 
+	}
+	
+	public JavaOclOrderedSet(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclOrderedSet(Throwable invalidReason) {
+		super(invalidReason);
 	}
 
 	/*

@@ -43,7 +43,7 @@ import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -70,6 +70,14 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 		super(imiCollection);
 		// TODO Michael: conversions of the imiCollection to List?
+	}
+	
+	public JavaOclSortedCollection(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclSortedCollection(Throwable invalidReason) {
+		super(invalidReason);
 	}
 
 	/*
@@ -99,13 +107,15 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 		// TODO Michael: is this OclInvalid? -> yes
 		catch (IndexOutOfBoundsException e) {
 
-			String msg;
-
-			msg = "Index for at() out of bounds for Collection ";
-			msg += this.toString();
-
-			result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(null);
-			result.setUndefinedreason(msg);
+//			String msg;
+//
+//			msg = "Index for at() out of bounds for Collection ";
+//			msg += this.toString();
+//
+//			result = (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(null);
+//			result.setUndefinedreason(msg);
+			
+			throw new InvalidException(e);
 		}
 
 		return result;
@@ -153,20 +163,10 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 				((List<IModelInstanceElement>) imiCollection.getCollection())
 						.indexOf(anObject) + 1;
 
-		if (intResult > 0) {
-			IModelInstanceInteger imiResult =
-					BasisJavaModelInstanceFactory.createModelInstanceInteger(new Long(
-							intResult));
-			result = new JavaOclInteger(imiResult);
-		}
-
-		else {
-			// TODO Michael: OclInvalid or OclUndefined?
-			result =
-					JavaStandardLibraryFactory.INSTANCE.createOclInteger((Long) null);
-			result.setUndefinedreason("object " + anObject
-					+ " not found within indexOf()");
-		}
+		IModelInstanceInteger imiResult =
+				BasisJavaModelInstanceFactory.createModelInstanceInteger(new Long(
+						intResult));
+		result = new JavaOclInteger(imiResult);
 
 		return result;
 	}

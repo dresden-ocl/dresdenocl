@@ -71,7 +71,15 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 		
 		this.imiBoolean = imiBoolean;
 	}
+	
+	public JavaOclBoolean(String undefinedReason) {
+		super(undefinedReason);
+	}
 
+	public JavaOclBoolean(Throwable invalidReason) {
+		super(invalidReason);
+	}
+	
 	/**
 	 * <p>
 	 * Gets the single instance of JavaOclBoolean which is true, or the other
@@ -88,7 +96,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 		OclBoolean result;
 
 		if (value == null) {
-			result = new JavaOclBoolean(null);
+			result = new JavaOclBoolean("The boolean value is undefined");
 		}
 
 		else if (value == true) {

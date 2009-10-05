@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.factory;
+package tudresden.ocl20.pivot.standardlibrary.java.factory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -155,10 +155,12 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			result = this.createOclCollection(collection);
 		}
 
-		else if (modelInstanceElement instanceof IModelInstanceObject){
-			result = this.createOclModelInstanceObject((IModelInstanceObject) modelInstanceElement);
+		else if (modelInstanceElement instanceof IModelInstanceObject) {
+			result =
+					this
+							.createOclModelInstanceObject((IModelInstanceObject) modelInstanceElement);
 		}
-		
+
 		else {
 			throw new UndefinedException(null);
 		}
@@ -555,8 +557,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	 * IStandardLibraryFactory
 	 * #createOclType(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
-	public <T extends OclAny> OclType<T> createOclType(final Type type,
-			final T oclAny) {
+	public <T extends OclAny> OclType<T> createOclType(final Type type) {
 
 		OclType<T> result;
 
@@ -592,19 +593,71 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			primitiveTypeKind = primitiveType.getKind();
 
 			if (primitiveTypeKind.equals(PrimitiveTypeKind.BOOLEAN)) {
-				result = JavaOclBoolean.getInstance(null);
+				result = new JavaOclBoolean(reason);
 			}
 
 			else if (primitiveTypeKind.equals(PrimitiveTypeKind.INTEGER)) {
-				result = new JavaOclInteger(null);
+				result = new JavaOclInteger(reason);
 			}
 
 			else if (primitiveTypeKind.equals(PrimitiveTypeKind.REAL)) {
-				result = new JavaOclReal(null);
+				result = new JavaOclReal(reason);
 			}
 
 			else if (primitiveTypeKind.equals(PrimitiveTypeKind.STRING)) {
-				result = new JavaOclString(null);
+				result = new JavaOclString(reason);
+			}
+
+			else if (primitiveTypeKind.equals(PrimitiveTypeKind.VOID)) {
+				// TODO Michael: what type does OclVoid have?
+				result = JavaOclVoid.getInstance();
+			}
+
+			else {
+				throw new IllegalArgumentException("Primitive type " + type + " is unknown.");
+			}
+		}
+
+		/* Check if the given Type is an enumeration. */
+		else if (type instanceof Enumeration) {
+			result = new JavaOclEnumLiteral(reason);
+		}
+
+		/* If no result has been created yet, create a JavaOclObject. */
+		if (result == null) {
+			result = new JavaOclModelInstanceObject(reason);
+		}
+
+		return result;
+	}
+
+	public OclAny createOclInvalid(final Type type, final Throwable invalidReason) {
+
+		OclAny result;
+
+		result = null;
+
+		/* Check if the given Type is a primitive type. */
+		if (type instanceof PrimitiveType) {
+			PrimitiveType primitiveType;
+			PrimitiveTypeKind primitiveTypeKind;
+			primitiveType = (PrimitiveType) type;
+			primitiveTypeKind = primitiveType.getKind();
+
+			if (primitiveTypeKind.equals(PrimitiveTypeKind.BOOLEAN)) {
+				result = new JavaOclBoolean(invalidReason);
+			}
+
+			else if (primitiveTypeKind.equals(PrimitiveTypeKind.INTEGER)) {
+				result = new JavaOclInteger(invalidReason);
+			}
+
+			else if (primitiveTypeKind.equals(PrimitiveTypeKind.REAL)) {
+				result = new JavaOclReal(invalidReason);
+			}
+
+			else if (primitiveTypeKind.equals(PrimitiveTypeKind.STRING)) {
+				result = new JavaOclString(invalidReason);
 			}
 
 			else if (primitiveTypeKind.equals(PrimitiveTypeKind.VOID)) {
@@ -612,21 +665,19 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			}
 
 			else {
-				result = null;
+				throw new IllegalArgumentException("Primitive type " + type + " is unknown.");
 			}
 		}
 
 		/* Check if the given Type is an enumeration. */
 		else if (type instanceof Enumeration) {
-			result = new JavaOclEnumLiteral(null);
+			result = new JavaOclEnumLiteral(invalidReason);
 		}
 
 		/* If no result has been created yet, create a JavaOclObject. */
 		if (result == null) {
-			result = new JavaOclObject(null);
+			result = new JavaOclModelInstanceObject(invalidReason);
 		}
-
-		result.setUndefinedreason(reason);
 
 		return result;
 	}

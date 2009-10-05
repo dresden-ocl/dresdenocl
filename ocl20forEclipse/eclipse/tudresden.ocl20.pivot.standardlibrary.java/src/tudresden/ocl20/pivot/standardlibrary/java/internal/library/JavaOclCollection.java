@@ -49,7 +49,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -78,6 +79,14 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclLibrary
 
 		super(imiCollection);
 		this.imiCollection = imiCollection;
+	}
+	
+	public JavaOclCollection(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclCollection(Throwable invalidReason) {
+		super(invalidReason);
 	}
 
 	/*
@@ -360,9 +369,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclLibrary
 
 		/* Else check if both collection have the same size. */
 		if (!size().isEqualTo(that.size()).isTrue()) {
-			result = new JavaOclSet<OclTuple>(null);
-			result
-					.setUndefinedreason("operation product() is not possible for collections of different size");
+			// TODO Michael: undefined or invalid?
+			result = new JavaOclSet<OclTuple>("operation product() is not possible for collections of different size");
 		}
 
 		/* Else compute the result. */
@@ -458,12 +466,13 @@ public abstract class JavaOclCollection<T extends OclAny> extends JavaOclLibrary
 
 			/* Else return undefined. */
 			catch (NoSuchMethodException e) {
-				String msg;
-
-				msg = "sum() of collection with not addable element requested";
-
-				result = (T) new JavaOclInteger(null);
-				result.setUndefinedreason(msg);
+//				String msg;
+//
+//				msg = "sum() of collection with not addable element requested";
+//
+//				result = (T) new JavaOclInteger(null);
+//				result.setUndefinedreason(msg);
+				throw new InvalidException(e);
 			}
 		}
 

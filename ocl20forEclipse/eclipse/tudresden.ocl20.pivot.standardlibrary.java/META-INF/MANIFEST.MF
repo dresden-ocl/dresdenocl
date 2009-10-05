@@ -15,6 +15,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.essentialocl.standardlibrary
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.standardlibrary.java,
- tudresden.ocl20.pivot.standardlibrary.java.internal.factory,
- tudresden.ocl20.pivot.standardlibrary.java.internal.library
+ tudresden.ocl20.pivot.standardlibrary.java.exceptions,
+ tudresden.ocl20.pivot.standardlibrary.java.factory
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

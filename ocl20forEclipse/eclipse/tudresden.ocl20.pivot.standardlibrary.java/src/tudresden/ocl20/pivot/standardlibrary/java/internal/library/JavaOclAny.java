@@ -35,13 +35,14 @@ import java.util.Map;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclLibraryObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.modelbus.modelinstance.exception.AsTypeCastException;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.UndefinedException;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.UndefinedOrInvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -62,13 +63,60 @@ public abstract class JavaOclAny implements OclAny {
 
 	private IModelInstanceElement imiElement;
 
+	// TODO Michael: how to enforce this constraint?
+	/**
+	 * <p>
+	 * Constructor for null elements. These elements can provide a reason for
+	 * being undefined.
+	 * </p>
+	 * <p>
+	 * <strong>Note:</strong> Since <code>OclUndefined</code> is typed, i.e.
+	 * according to the OCL standard it conforms to all other types except
+	 * <code>OclInvalid</code>, <strong>every subclass of {@link OclAny} needs to
+	 * implement this constructor</strong>.
+	 * </p>
+	 * 
+	 * @param undefinedReason
+	 *          the reason why this element is undefined
+	 */
+	public JavaOclAny(String undefinedReason) {
+
+		this.undefinedreason = undefinedReason;
+	}
+
+	/**
+	 * <p>
+	 * Constructor for invalid elements. These elements have to provide a reason
+	 * for being invalid.
+	 * </p>
+	 * <p>
+	 * <strong>Note:</strong> Since <code>OclInvalid</code> is typed, i.e.
+	 * according to the OCL standard it conforms to all other types except
+	 * <code>OclUndefined</code>, <strong>every subclass of {@link OclAny} needs
+	 * to implement this constructor</strong>.
+	 * </p>
+	 * 
+	 * @param invalidReason
+	 *          the reason why this element is invalid, given by a
+	 *          {@link Throwable}
+	 */
+	public JavaOclAny(Throwable invalidReason) {
+
+		this.invalidReason = invalidReason;
+	}
+
+	/**
+	 * Constructor for normal {@link IModelInstanceElement}s that are neither
+	 * <code>undefined</code> nor <code>invalid</code>.
+	 * 
+	 * @param imiElement
+	 *          the {@link IModelInstanceElement} to adapt.
+	 */
 	public JavaOclAny(IModelInstanceElement imiElement) {
 
-		// TODO Michael: null-checks?
 		this.imiElement = imiElement;
 	}
 
-	// FIXME Michael: move this to the right place (for every subclass)
 	/**
 	 * Contains the operation names which are different in the standard library
 	 * than in the OCL specification. The names are separated in sub maps
@@ -77,29 +125,16 @@ public abstract class JavaOclAny implements OclAny {
 	protected static Map<Integer, Map<String, String>> operationNames =
 			new HashMap<Integer, Map<String, String>>();
 
-	/* Initializes the map. */
+	/* Initializes the operation names map. */
 	static {
-		Map<String, String> unaryOperations;
 		Map<String, String> binaryOperations;
 
-		unaryOperations = new HashMap<String, String>();
-		unaryOperations.put("-", "negative");
-		unaryOperations.put("oclIsUndefined", "isOclUndefined");
-		operationNames.put(1, unaryOperations);
-
 		binaryOperations = new HashMap<String, String>();
-		binaryOperations.put("<=", "isLessEqual");
-		binaryOperations.put("<", "isLessThan");
 		binaryOperations.put("=", "isEqualTo");
 		binaryOperations.put("<>", "isNotEqualTo");
-		binaryOperations.put(">=", "isGreaterEqual");
-		binaryOperations.put(">", "isGreaterThan");
-		binaryOperations.put("-", "subtract");
-		binaryOperations.put("+", "add");
-		binaryOperations.put("*", "multiply");
-		binaryOperations.put("/", "divide");
-		binaryOperations.put(".", "getPropertyValue");
 		binaryOperations.put("->", "asSet");
+		// FIXME Michael: do we need this? Who should map this?
+		binaryOperations.put(".", "getPropertyValue");
 		operationNames.put(2, binaryOperations);
 	}
 
@@ -142,23 +177,9 @@ public abstract class JavaOclAny implements OclAny {
 		return undefinedreason;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#setUndefinedreason
-	 * (java.lang.String)
-	 */
-	public void setUndefinedreason(String undefinedreason) {
-	
-		this.undefinedreason = undefinedreason;
-	}
-	
 	public Throwable getInvalidReason() {
+
 		return invalidReason;
-	}
-	
-	public void setInvalidReason(Throwable invalidReason) {
-		this.invalidReason = invalidReason;
 	}
 
 	/*
@@ -168,6 +189,8 @@ public abstract class JavaOclAny implements OclAny {
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
 	 */
 	public OclBoolean isNotEqualTo(OclAny that) {
+
+		checkUndefinedAndInvalid(this, that);
 
 		return isEqualTo(that).not();
 	}
@@ -197,14 +220,18 @@ public abstract class JavaOclAny implements OclAny {
 	public <T extends OclAny> T oclAsType(OclType<T> type)
 			throws AsTypeCastException {
 
-		IModelInstanceElement castedTo = imiElement.asType(type.getType());
+		checkUndefinedAndInvalid(this, type);
+
+		final IModelInstanceElement castedTo = imiElement.asType(type.getType());
 		return (T) JavaStandardLibraryFactory.INSTANCE.createOclAny(castedTo);
 	}
 
 	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
 
-		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(imiElement
-				.getTypes().contains(typespec.getType()));
+		checkUndefinedAndInvalid(this, typespec);
+
+		final boolean contains = imiElement.getTypes().contains(typespec.getType());
+		return JavaStandardLibraryFactory.INSTANCE.createOclBoolean(contains);
 	}
 
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
@@ -218,408 +245,34 @@ public abstract class JavaOclAny implements OclAny {
 		return imiElement;
 	}
 
-	// FIXME Michael: move to appropriate subclasses -> relicts; remove!
-	// /**
-	// * <p>
-	// * Tries to find a method with a given name and a given array of
-	// * parameterTypes.
-	// * </p>
-	// *
-	// * @param methodName
-	// * The name of the method to search for.
-	// * @param sourceType
-	// * The source type on which the operation shall be invoked.
-	// * @param parameterTypes
-	// * An Array representing the number and types of parameters to look
-	// * for in the method's signature. A null array is treated as a
-	// * zero-length array.
-	// * @param isModelMethod
-	// * Specifies whether or not the method which shall be found is an OCL
-	// * defined method or a model defined method.
-	// * @return Method object satisfying the given conditions.
-	// * @throws NoSuchMethodException
-	// * Thrown if no methods match the criteria, or if the reflective
-	// * call is ambiguous based on the parameter types, or if methodName
-	// * is null.
-	// */
-	// protected Method findMethod(String methodName, Class<?> sourceType,
-	// Class<?>[] parameterTypes, boolean isModelMethod)
-	// throws NoSuchMethodException {
-	//
-	// Method result;
-	// Method[] allMethods;
-	//
-	// try {
-	//
-	// if (isModelMethod) {
-	// allMethods = sourceType.getMethods();
-	// }
-	//
-	// else {
-	// allMethods = sourceType.getMethods();
-	// }
-	// }
-	//
-	// catch (SecurityException e) {
-	// e.printStackTrace();
-	//
-	// throw new NoSuchMethodException(e.getMessage());
-	// }
-	//
-	// result = null;
-	//
-	// if (parameterTypes == null) {
-	// parameterTypes = new Class<?>[0];
-	// }
-	// // no else.
-	//
-	// /* Iterate through all methods. */
-	// for (int index = 0; index < allMethods.length; index++) {
-	//
-	// /* Check if the name match. */
-	// if (allMethods[index].getName().equals(methodName)) {
-	//
-	// /* Check if the parameters match. */
-	// Class<?>[] aMethodsParams;
-	// aMethodsParams = allMethods[index].getParameterTypes();
-	//
-	// /* Check the count of parameters. */
-	// if (aMethodsParams.length == parameterTypes.length) {
-	//
-	// boolean isConform;
-	//
-	// isConform = true;
-	//
-	// /* Check the conformance of all parameters. */
-	// for (int index2 = 0; index2 < aMethodsParams.length; index2++) {
-	//
-	// if (!aMethodsParams[index2]
-	// .isAssignableFrom(parameterTypes[index2])) {
-	// isConform = false;
-	// break;
-	// }
-	// // no else.
-	// }
-	//
-	// if (isConform) {
-	// result = allMethods[index];
-	// break;
-	// }
-	// }
-	// // no else.
-	// }
-	// // no else.
-	// }
-	//
-	// if (result == null) {
-	// String msg;
-	//
-	// msg = "No method " + methodName + "(";
-	//
-	// for (int index = 0; index < parameterTypes.length; index++) {
-	// msg += parameterTypes[index];
-	//
-	// if (index > 0) {
-	// msg += ", ";
-	// }
-	// // no else.
-	// }
-	//
-	// msg += ") found.";
-	//
-	// throw new NoSuchMethodException(msg);
-	// }
-	//
-	// return result;
-	// }
-	//
-	// /**
-	// * <p>
-	// * Tries to invoke a library operation of a given operationName and an array
-	// * of parameters.
-	// * </p>
-	// *
-	// * @param operationName
-	// * The operation name which shall be invoked.
-	// * @param parameters
-	// * The {@link OclRoot} parameters of the operation which shall be
-	// * invoked.
-	// *
-	// * @return The result of the invoked operations as an {@link OclRoot}.
-	// *
-	// * @throws NoSuchMethodException
-	// * Thrown if the method can not be found.
-	// */
-	// public OclRoot invokeLibraryOperation(String operationName,
-	// OclRoot... parameters) throws NoSuchMethodException {
-	//
-	// OclRoot result;
-	// Method method = null;
-	//
-	// Class<?> paramTypes[];
-	// Object paramValues[];
-	//
-	// Class<?> sourceType;
-	// Object operationInstance;
-	//
-	// Object invokedOperation;
-	//
-	// result = null;
-	// method = null;
-	//
-	// sourceType = null;
-	// operationInstance = null;
-	//
-	// /* Eventually initialize the parameter arrays. */
-	// if (parameters.length == 0) {
-	// paramTypes = new Class[0];
-	// paramValues = new Object[0];
-	// }
-	//
-	// else {
-	// paramTypes = new Class[parameters.length];
-	// paramValues = new Object[parameters.length];
-	// }
-	//
-	// /* Try to find the operation. */
-	// try {
-	//
-	// List<OclRoot> parameterList;
-	//
-	// int index;
-	//
-	// sourceType = this.getClass();
-	//
-	// parameterList = Arrays.asList(parameters);
-	// index = 0;
-	//
-	// /* Iterate over the parameters and initialize the arrays. */
-	// for (OclRoot aParameter : parameterList) {
-	// paramTypes[index] = aParameter.getClass();
-	// paramValues[index] = aParameter;
-	// index++;
-	// }
-	//
-	// method = this.findMethod(operationName, sourceType, paramTypes, false);
-	//
-	// operationInstance = this;
-	// }
-	//
-	// catch (SecurityException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// catch (IllegalArgumentException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// invokedOperation = null;
-	//
-	// /* Enable access to the found method. */
-	// method.setAccessible(true);
-	//
-	// /* Try to invoke the operation. */
-	// try {
-	// Object castedSource;
-	//
-	// castedSource = sourceType.cast(operationInstance);
-	//
-	// invokedOperation = method.invoke(castedSource, paramValues);
-	// }
-	//
-	// catch (IllegalArgumentException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// catch (IllegalAccessException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// catch (InvocationTargetException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// /* Eventually cast result to OclRoot. */
-	// if (invokedOperation instanceof OclRoot) {
-	// result = (OclRoot) invokedOperation;
-	// }
-	//
-	// /* Eventually return void. */
-	// else if (invokedOperation == null) {
-	// result = JavaOclVoid.getInstance();
-	// }
-	//
-	// /* Eventually adapt the result to OclRoot. */
-	// else {
-	// result =
-	// (OclRoot) Platform.getAdapterManager().getAdapter(invokedOperation,
-	// OclRoot.class);
-	// }
-	//
-	// return result;
-	// }
-	//
-	// /**
-	// * <p>
-	// * Invokes an operation defined in the model.
-	// * </p>
-	// *
-	// * @param operationName
-	// * The name of the operation which shall be invoked.
-	// * @param parameters
-	// * The parameters of the operation which shall be invoked.
-	// * @return The result of the operation call as an {@link OclRoot}.
-	// *
-	// * @throws NoSuchMethodException
-	// * Thrown if the given method can not be found.
-	// */
-	// protected OclRoot invokeModelOperation(String operationName,
-	// OclRoot... parameters) throws NoSuchMethodException {
-	//
-	// OclRoot result;
-	// Method method;
-	//
-	// Class<?> paramTypes[];
-	// Object paramValues[];
-	//
-	// Class<?> sourceType;
-	// Object sourceInstance;
-	//
-	// Object adaptedResult;
-	//
-	// method = null;
-	//
-	// /* Eventually initialize the parameter arrays. */
-	// if (parameters.length == 0) {
-	// paramTypes = null;
-	// paramValues = null;
-	// }
-	//
-	// else {
-	// paramTypes = new Class[parameters.length];
-	// paramValues = new Object[parameters.length];
-	// }
-	//
-	// result = null;
-	//
-	// sourceType = null;
-	// sourceInstance = null;
-	//
-	// /* Try to find a method to invoke. */
-	// try {
-	//
-	// List<OclRoot> parameterList;
-	//
-	// int index;
-	//
-	// /* Handle static operations. */
-	// if (getAdaptee() instanceof Class<?>) {
-	// sourceType = (Class<?>) getAdaptee();
-	// sourceInstance = null;
-	// }
-	//
-	// else {
-	// sourceType = getAdapteeClass();
-	// sourceInstance = getAdaptee();
-	// }
-	//
-	// parameterList = Arrays.asList(parameters);
-	// index = 0;
-	//
-	// /* Iterate over the parameters and initialize the arrays. */
-	// for (OclRoot aParameter : parameterList) {
-	//
-	// paramTypes[index] = aParameter.getAdapteeClass();
-	// paramValues[index] = aParameter.getAdaptee();
-	// index++;
-	// }
-	//
-	// method = this.findMethod(operationName, sourceType, paramTypes, true);
-	// }
-	//
-	// catch (SecurityException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// catch (IllegalArgumentException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// method.setAccessible(true);
-	//
-	// adaptedResult = null;
-	//
-	// /* Try to invoke the found method. */
-	// try {
-	// adaptedResult =
-	// method.invoke(sourceType.cast(sourceInstance), paramValues);
-	// }
-	//
-	// catch (IllegalArgumentException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// catch (IllegalAccessException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// catch (InvocationTargetException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// /* Eventually cast result to OclRoot. */
-	// if (adaptedResult instanceof OclRoot) {
-	// result = (OclRoot) adaptedResult;
-	// }
-	//
-	// /* Eventually return void. */
-	// else if (adaptedResult == null) {
-	// result = JavaOclVoid.getInstance();
-	// }
-	//
-	// /* Eventually adapt the result to OclRoot. */
-	// else {
-	// result = JavaStandardLibraryFactory.INSTANCE.createOclRoot(adaptedResult);
-	// }
-	//
-	// return result;
-	// }
-
-	// FIXME Michael: is this nonsense? -> remove
-	// /*
-	// * (non-Javadoc)
-	// * @see java.lang.Object#equals(java.lang.Object)
-	// */
-	// public boolean equals(Object anObject) {
-	//
-	// boolean result;
-	//
-	// /* Check if the given Object is an OclRoot. */
-	// if (anObject instanceof OclRoot) {
-	//
-	// OclRoot anOclRoot;
-	//
-	// anOclRoot = (OclRoot) anObject;
-	//
-	// result = this.isEqualTo(anOclRoot).isTrue();
-	// }
-	//
-	// else {
-	// result = false;
-	// }
-	//
-	// return result;
-	// }
-
+	/**
+	 * This methods checks for all given {@link OclAny}s if they are either
+	 * invalid or undefined. If one of them is, an {@link InvalidException} or
+	 * {@link UndefinedException} is thrown. The direct caller (a method of the
+	 * standard library) should not catch these exceptions. The
+	 * {@link OclLibraryObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, OclAny...)
+	 * invokeOperation} method of {@link OclLibraryObject} will do that and will
+	 * generate an appropriate return type (since OclUndefined and OclVoid conform
+	 * to every other type except each other).
+	 * 
+	 * @param objects
+	 *          the {@link OclAny}s to check whether they are invalid or undefined
+	 * @throws UndefinedOrInvalidException
+	 *           a concrete sub-class ({@link InvalidException} or
+	 *           {@link UndefinedException}) to indicate that one element was
+	 *           invalid or undefined
+	 */
 	protected void checkUndefinedAndInvalid(OclAny... objects)
 			throws UndefinedOrInvalidException {
 
-		// TODO Michael: invalid checks?
 		for (OclAny object : objects) {
-			if (object.oclIsUndefined().isTrue())
-				throw new UndefinedException(object.getUndefinedreason());
+
 			if (object.oclIsInvalid().isTrue())
 				throw new InvalidException(object.getInvalidReason());
+
+			if (object.oclIsUndefined().isTrue())
+				throw new UndefinedException(object.getUndefinedreason());
+
 		}
 	}
 

@@ -39,7 +39,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceInteger;
 import tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceString;
 import tudresden.ocl20.pivot.standardlibrary.java.exceptions.InvalidException;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
+import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -64,6 +64,14 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 
 		super(imiString);
 		this.imiString = imiString;
+	}
+	
+	public JavaOclString(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclString(Throwable invalidReason) {
+		super(invalidReason);
 	}
 
 	/*

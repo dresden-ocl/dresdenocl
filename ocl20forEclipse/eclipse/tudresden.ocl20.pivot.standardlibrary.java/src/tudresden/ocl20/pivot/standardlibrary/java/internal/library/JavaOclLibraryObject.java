@@ -18,6 +18,14 @@ public abstract class JavaOclLibraryObject extends JavaOclAny implements
 
 		super(imiElement);
 	}
+	
+	public JavaOclLibraryObject(String undefinedReason) {
+		super(undefinedReason);
+	}
+	
+	public JavaOclLibraryObject(Throwable invalidReason) {
+		super(invalidReason);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -28,7 +36,7 @@ public abstract class JavaOclLibraryObject extends JavaOclAny implements
 	 */
 	public OclAny invokeOperation(Operation operation, OclAny... args) {
 
-		// TODO Michael: !!! implement !!!
+		// TODO Michael: !!! implement 
 		return null;
 	}
 
