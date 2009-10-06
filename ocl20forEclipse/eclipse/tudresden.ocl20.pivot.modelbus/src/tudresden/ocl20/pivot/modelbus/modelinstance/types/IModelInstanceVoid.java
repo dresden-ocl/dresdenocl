@@ -104,7 +104,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 		 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 		 * #isInstanceOf(tudresden.ocl20.pivot.pivotmodel.Type)
 		 */
-		public boolean isInstanceOf(Type type) {
+		public boolean isKindOf(Type type) {
 
 			/*
 			 * According to OCL 2.0 specification p. 138:

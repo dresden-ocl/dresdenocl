@@ -145,7 +145,7 @@ public abstract class AbstractModelInstanceElement implements
 	 * tudresden.ocl20.pivot.modelbus.IModelInstanceElement#isInstanceOf(tudresden
 	 * .ocl20 .pivot.pivotmodel.Type)
 	 */
-	public boolean isInstanceOf(Type type) {
+	public boolean isKindOf(Type type) {
 
 		boolean result;
 

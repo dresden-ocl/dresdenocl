@@ -422,9 +422,9 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 		/* Only ordered sets and sequences are ordered. */
 		if (this
-				.isInstanceOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
+				.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
 				|| this
-						.isInstanceOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE)) {
+						.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SEQUENCE)) {
 			result = true;
 		}
 
@@ -458,9 +458,9 @@ public class JavaModelInstanceCollection<T extends IModelInstanceElement>
 
 		/* Only ordered sets and sets are unique. */
 		if (this
-				.isInstanceOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
+				.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_ORDERED_SET)
 				|| this
-						.isInstanceOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET)) {
+						.isKindOf(PrimitiveAndCollectionTypeConstants.MODEL_TYPE_SET)) {
 			result = true;
 		}
 

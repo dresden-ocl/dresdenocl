@@ -145,16 +145,29 @@ public interface IModelInstanceElement {
 
 	/**
 	 * <p>
-	 * Returns true if this {@link IModelInstanceElement} is an instance of the
-	 * given {@link Type} in the {@link IModel}.
+	 * Evaluates to <code>true</code> if the type of self conforms to the given
+	 * {@link Type aType}. That is, self is of type aType or a subtype of aType.
 	 * </p>
 	 * 
 	 * @param aType
 	 *          The {@link Type} which shall be checked.
-	 * @return True, if this {@link IModelInstanceElement} is an instance of the
-	 *         given {@link Type}.
+	 * @return <code>true</code>, if this {@link IModelInstanceElement} is kind of
+	 *         the given {@link Type}.
 	 */
-	boolean isInstanceOf(Type aType);
+	boolean isKindOf(Type aType);
+
+	/**
+	 * <p>
+	 * Evaluates to <code>true</code> if self is of the {@link Type aType} but not
+	 * a subtype of aType.
+	 * </p>
+	 * 
+	 * @param aType
+	 *          The {@link Type} which shall be checked.
+	 * @return <code>true</code>, if this {@link IModelInstanceElement} is type of
+	 *         the given {@link Type}.
+	 */
+	boolean isTypeOf(Type aType);
 
 	/**
 	 * <p>
