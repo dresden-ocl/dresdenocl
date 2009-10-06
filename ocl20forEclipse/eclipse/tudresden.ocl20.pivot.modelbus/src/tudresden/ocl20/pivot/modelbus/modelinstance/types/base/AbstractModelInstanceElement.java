@@ -163,4 +163,30 @@ public abstract class AbstractModelInstanceElement implements
 
 		return result;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * #isTypeOf(tudresden.ocl20.pivot.pivotmodel.Type)
+	 */
+	public boolean isTypeOf(Type type) {
+
+		boolean result;
+
+		/*
+		 * Check if this IModelInstanceElement has exactly one type. Otherwise it
+		 * cannot be of the given Type. Elements that have more than one type are a
+		 * sub type of these Types.
+		 */
+		if (this.myTypes.size() != 1) {
+			result = false;
+		}
+		
+		else {
+			result = type.equals(this.myTypes.iterator().next());
+		}
+
+		return result;
+	}
 }

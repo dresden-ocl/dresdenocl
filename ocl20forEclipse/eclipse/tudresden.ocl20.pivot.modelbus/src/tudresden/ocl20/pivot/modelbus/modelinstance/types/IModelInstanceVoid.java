@@ -117,6 +117,17 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 		 * (non-Javadoc)
 		 * @see
 		 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+		 * #isTypeOf(tudresden.ocl20.pivot.pivotmodel.Type)
+		 */
+		public boolean isTypeOf(Type type) {
+
+			return PrimitiveAndCollectionTypeConstants.MODEL_TYPE_VOID.equals(type);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
 		 * #isUndefined()
 		 */
 		public boolean isUndefined() {
