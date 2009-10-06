@@ -215,7 +215,7 @@ public class JavaModelInstanceInteger extends AbstractModelInstanceElement
 			JavaModelInstanceInteger other;
 			other = (JavaModelInstanceInteger) object;
 
-			/* FIXME Claas: Ask Micha if this is right. */
+			/* This should not happen. But anyway, null == null results in false. */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
 			}

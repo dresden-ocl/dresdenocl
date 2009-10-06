@@ -252,17 +252,12 @@ public class JavaModelInstanceString extends AbstractModelInstanceElement
 			result = false;
 		}
 
-		/* FIXME Claas: Ask Micha what todo here. */
-		else if (this.isUndefined()) {
-			result = false;
-		}
-
 		else if (object instanceof JavaModelInstanceString) {
 
 			JavaModelInstanceString other;
 			other = (JavaModelInstanceString) object;
 
-			/* FIXME Claas: Ask Micha if this is right. */
+			/* This should not happen. But anyway, null == null results in false. */
 			if (this.isUndefined() || other.isUndefined()) {
 				result = false;
 			}
